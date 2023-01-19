@@ -1,0 +1,11 @@
+{
+  "home": "Home",
+  "profile": "Profile",
+  "changePassword": "Change Password",
+  "login": "Login",
+  "logout": "Logout",
+  "users": "Users",
+  "constants": "Constants",
+  "onlineUsers": "Online Users",
+  "whoIsOnline": "Who's Online?"
+}

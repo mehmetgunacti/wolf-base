@@ -1,0 +1,16 @@
+<p-fieldset legend="New">
+
+	<div>
+
+		<div class="p-fieldset-legend fieldset-right">
+			<button pButton
+					label="Cancel"
+					icon="fas fa-times"
+					[routerLink]="['/bookmarks']"
+					class="p-button-text p-button-sm"></button>
+		</div>
+		<app-bookmark-form (save)="onSave($event)"></app-bookmark-form>
+
+	</div>
+
+</p-fieldset>

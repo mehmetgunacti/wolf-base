@@ -1,0 +1,95 @@
+<form [formGroup]="form">
+
+	<div class="p-fluid formgrid">
+
+    		<div class="field">
+
+			<label for="id">id</label>
+                    <input id="id"
+                                       type="text"
+                                       pInputText
+                                       formControlName="id">
+			<small *ngIf="form.controls['id'].invalid && form.controls['id'].dirty"
+				   class="p-error">Id is not available.</small>
+
+		</div>
+		<div class="field">
+
+			<label for="name">name</label>
+                    <input id="name"
+                                       type="text"
+                                       pInputText
+                                       formControlName="name">
+			<small *ngIf="form.controls['name'].invalid && form.controls['name'].dirty"
+				   class="p-error">Name is not available.</small>
+
+		</div>
+		<div class="field">
+
+			<label for="title">title</label>
+                    <input id="title"
+                                       type="text"
+                                       pInputText
+                                       formControlName="title">
+			<small *ngIf="form.controls['title'].invalid && form.controls['title'].dirty"
+				   class="p-error">Title is not available.</small>
+
+		</div>
+		<div class="field">
+
+			<label for="tags">tags</label>
+                    <input id="tags"
+                                       type="text"
+                                       pInputText
+                                       formControlName="tags">
+			<small *ngIf="form.controls['tags'].invalid && form.controls['tags'].dirty"
+				   class="p-error">Tags is not available.</small>
+
+		</div>
+		<div class="field">
+
+			<label for="image">image</label>
+                    <input id="image"
+                                       type="text"
+                                       pInputText
+                                       formControlName="image">
+			<small *ngIf="form.controls['image'].invalid && form.controls['image'].dirty"
+				   class="p-error">Image is not available.</small>
+
+		</div>
+		<div class="field">
+
+			<label for="url">url</label>
+                    <input id="url"
+                                       type="text"
+                                       pInputText
+                                       formControlName="url">
+			<small *ngIf="form.controls['url'].invalid && form.controls['url'].dirty"
+				   class="p-error">Url is not available.</small>
+
+		</div>
+		<div class="field">
+
+			<label for="clicks">clicks</label>
+                    <input id="clicks"
+                                       type="text"
+                                       pInputText
+                                       formControlName="clicks">
+			<small *ngIf="form.controls['clicks'].invalid && form.controls['clicks'].dirty"
+				   class="p-error">Clicks is not available.</small>
+
+		</div>
+	</div>
+
+	<div class="flex">
+
+		<button pButton
+				label="Save"
+				[disabled]="form.pristine || form.invalid"
+				icon="fas fa-save"
+				(click)="onSave()"
+				class="p-button-raised ml-auto"></button>
+
+	</div>
+
+</form>

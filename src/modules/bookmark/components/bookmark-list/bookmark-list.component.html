@@ -1,0 +1,38 @@
+<p-table [value]="bookmarks || []"
+		 styleClass="p-datatable-striped"
+		 [responsive]="true"
+		 selectionMode="single">
+	<ng-template pTemplate="header">
+		<tr>
+			<th>id</th>
+			<th>name</th>
+			<th>title</th>
+			<th>tags</th>
+			<th>image</th>
+			<th>url</th>
+			<th>clicks</th>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body"
+				 let-bookmark>
+		<tr routerLink="/bookmarks/{{ bookmark.id }}" [pSelectableRow]="bookmark">
+                <td><span class="p-column-title">Id</span>{{ bookmark.id }}</td>
+                <td><span class="p-column-title">Name</span>{{ bookmark.name }}</td>
+                <td><span class="p-column-title">Title</span>{{ bookmark.title }}</td>
+                <td><span class="p-column-title">Tags</span>{{ bookmark.tags }}</td>
+                <td><span class="p-column-title">Image</span>{{ bookmark.image }}</td>
+                <td><span class="p-column-title">Url</span>{{ bookmark.url }}</td>
+                <td><span class="p-column-title">Clicks</span>{{ bookmark.clicks }}</td>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="emptymessage"
+				 let-columns>
+		<tr>
+			<td [attr.colspan]="7">
+				<div class="flex align-items-center justify-content-center">
+					No content to display
+				</div>
+			</td>
+		</tr>
+	</ng-template>
+</p-table>

@@ -1,0 +1,6 @@
+<p-breadcrumb [model]="[
+	{ label: 'Home', routerLink: '/' },
+	{ label: 'Bookmarks', routerLink: '/bookmarks' },
+	{ label: 'Bookmark', routerLink: ['/bookmarks', (id$ | async)] }
+]"></p-breadcrumb>
+<app-bookmark-edit-container></app-bookmark-edit-container>
