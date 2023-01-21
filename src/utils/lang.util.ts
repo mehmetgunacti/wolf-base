@@ -1,4 +1,4 @@
-import { LANG } from 'blueprints';
+import { LANG } from 'lib';
 
 export function resolveLang(name: string): LANG {
 

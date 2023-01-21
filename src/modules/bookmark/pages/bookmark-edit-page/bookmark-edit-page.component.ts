@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ID } from 'blueprints';
+import { ID } from 'lib';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import * as actions from 'store';

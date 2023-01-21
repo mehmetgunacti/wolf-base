@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bookmark } from 'blueprints';
+import { Bookmark } from 'lib';
 import { Observable, of } from 'rxjs';
 import * as actions from 'store';
 import * as selectors from 'store';

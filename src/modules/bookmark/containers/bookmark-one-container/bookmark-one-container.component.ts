@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ID, Bookmark } from 'blueprints';
+import { ID, Bookmark } from 'lib';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, of } from 'rxjs';
 import * as actions from 'store';

@@ -1,4 +1,4 @@
-import { DARK_THEME, ThemeInfo, THEME_DARK, THEME_LIGHT } from 'blueprints';
+import { DARK_THEME, ThemeInfo, THEME_DARK, THEME_LIGHT } from 'lib';
 import { UIState } from 'store';
 
 export function resolveTheme(name: string): ThemeInfo {

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { LANG } from 'blueprints';
+import { LANG } from 'lib';
 
 @Component({
 	selector: 'app-lang-switcher',

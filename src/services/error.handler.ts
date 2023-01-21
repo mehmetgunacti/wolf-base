@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { errorDevNotification, errorNotification, ToastConfiguration } from 'blueprints';
+import { errorNotification, ToastConfiguration } from 'lib';
 import { navigate, showNotification } from 'store';
 
 @Injectable()
@@ -38,54 +38,54 @@ export class CustomErrorHandler implements ErrorHandler {
 				case 0: return {
 
 					...errorNotification,
-					title: 'Communication Error',
-					message: `Backend is unreachable`
+					summary: 'Communication Error',
+					detail: `Backend is unreachable`
 
 				};
 
 				case 500: return {
 
 					...errorNotification,
-					title: 'System Failure',
-					message: `Server-side error`
+					summary: 'System Failure',
+					detail: `Server-side error`
 
 				};
 
 				case 401: return {
 
 					...errorNotification,
-					title: 'Authorization Error',
-					message: `${error.error.message}`
+					summary: 'Authorization Error',
+					detail: `${error.error.message}`
 
 				};
 
 				case 400: return {
 
 					...errorNotification,
-					title: `${(error.error[0] || error.error).code}`,
-					message: `${(error.error[0] || error.error).message}`
+					summary: `${(error.error[0] || error.error).code}`,
+					detail: `${(error.error[0] || error.error).message}`
 
 				};
 
 			}
 
-		const title = `Client Error`;
-		let message = `
+		const summary = `Client Error`;
+		let detail = `
 			<div class="grid mt-3">
 				<div class="col-3 xl:col-1">Message</div>
 				<div class="col-9 xl:col-11"><i>${error?.message}</i></div>
 		`;
 
 		if (error instanceof HttpErrorResponse)
-			message += `
+			detail += `
 				<div class="col-3 xl:col-1">Status</div>
 				<div class="col-9 xl:col-11"><i>${error?.statusText} (${error?.status})</i></div>
 			`
 
-		message += `
+		detail += `
 			</div>
 		`;
-		return { ...errorDevNotification, title, message };
+		return { ...errorNotification, summary, detail };
 
 	}
 

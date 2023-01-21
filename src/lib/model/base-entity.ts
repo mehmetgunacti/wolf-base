@@ -1,4 +1,4 @@
-import { ID } from 'blueprints/constant';
+import { ID } from 'lib/constant';
 
 export interface BaseEntity {
 

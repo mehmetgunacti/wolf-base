@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ThemeInfo, LANG } from 'blueprints';
+import { ThemeInfo, LANG } from 'lib';
 
 export const themeSet = createAction('[UI] Set Theme', props<{ newTheme: ThemeInfo }>());
 

@@ -1,3 +1,3 @@
 export * from './constant';
-export * from './entity';
+export * from './model';
 export * from './util';

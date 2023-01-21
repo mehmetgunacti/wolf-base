@@ -1,4 +1,4 @@
-import { LANG, ThemeInfo, THEME_DARK, THEME_LIGHT } from 'blueprints';
+import { LANG, ThemeInfo, THEME_DARK, THEME_LIGHT } from 'lib';
 
 interface ThemeUI {
 

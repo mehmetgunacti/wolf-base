@@ -1,5 +1,5 @@
 import { BaseEntity } from './base-entity';
-import { ID } from 'blueprints/constant';
+import { ID } from 'lib/constant';
 
 export interface Task extends BaseEntity {
 

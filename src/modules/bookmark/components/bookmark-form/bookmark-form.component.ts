@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Bookmark } from 'blueprints';
+import { Bookmark } from 'lib';
 import { isInvalid } from 'modules/shared';
 
 @Component({

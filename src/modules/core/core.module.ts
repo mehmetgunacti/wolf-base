@@ -2,8 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrimeNgModule } from 'modules/primeng.module';
-import { NgProgressModule } from 'ngx-progressbar';
-import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CoreRoutingModule } from './core-routing.module';
@@ -28,9 +26,7 @@ import { LangSwitcherComponent } from './components/lang-switcher/lang-switcher.
 
 	],
 	exports: [
-		PrimeNgModule,
-		NgProgressModule,
-		NgProgressHttpModule
+		PrimeNgModule
 	],
 	providers: [
 		DialogService,

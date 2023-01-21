@@ -2,7 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { LANG, ThemeInfo } from 'blueprints';
+import { LANG, ThemeInfo } from 'lib';
 import { MenuItem } from 'primeng/api';
 import { Observable, of, Subscription } from 'rxjs';
 import * as actions from 'store/actions';

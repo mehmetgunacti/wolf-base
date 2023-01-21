@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Bookmark } from 'blueprints';
+import { Bookmark } from 'lib';
 
 @Component({
 	selector: 'app-bookmark-list',
