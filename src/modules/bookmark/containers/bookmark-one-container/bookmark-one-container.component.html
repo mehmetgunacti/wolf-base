@@ -6,17 +6,17 @@
 			<button pButton
 					#deleteBtn
 					label="Delete"
-					icon="fas fa-trash"
+					icon="pi pi-trash"
 					(click)="onDelete(bookmark.id, deleteBtn)"
 					class="p-button-text p-button-danger p-button-sm"></button>
 			<button pButton
 					label="Edit"
-					icon="fas fa-edit"
+					icon="pi pi-edit"
 					[routerLink]="['/bookmarks', bookmark.id, 'edit']"
 					class="p-button-text p-button-sm ml-2"></button>
 			<button pButton
 					label="Refresh"
-					icon="fas fa-sync-alt"
+					icon="pi pi-sync-alt"
 					(click)="onRefresh(bookmark.id)"
 					class="p-button-text p-button-sm ml-2"></button>
 		</div>
@@ -28,7 +28,7 @@
 		<div class="p-fieldset-legend fieldset-right">
 			<button pButton
 					label="Go back"
-					icon="fas fa-undo-alt"
+					icon="pi pi-undo-alt"
 					[routerLink]="['/bookmarks']"
 					class="p-button-text p-button-sm"></button>
 		</div>

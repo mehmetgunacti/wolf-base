@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 	selector: 'app-unauthorized',
 	template: `
 		<div style="font-size: xx-large;">
-			<i class="fas fa-user-lock"></i> 403 Unauthorized
+			<i class="pi pi-user-lock"></i> 403 Unauthorized
 		</div>
 	`
 })

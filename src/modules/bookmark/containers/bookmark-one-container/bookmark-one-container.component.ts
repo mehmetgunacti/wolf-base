@@ -41,7 +41,7 @@ export class BookmarkOneContainerComponent {
 		this.confirmationService.confirm({
 			target: btn,
 			message: 'Are you sure that you want to proceed?',
-			icon: 'fas fa-exclamation-triangle',
+			icon: 'pi pi-exclamation-triangle',
 			acceptButtonStyleClass: 'p-button-danger',
 			acceptLabel: 'Delete',
 			accept: () => console.log('this.store.dispatch(actions.deleteEntity({ entity: Entities.bookmarks, id }))')
