@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "dist/wolf-base",
     "ignore": [
       "firebase.json",
       "**/.*",
