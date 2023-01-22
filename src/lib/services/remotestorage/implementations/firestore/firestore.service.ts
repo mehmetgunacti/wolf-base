@@ -1,12 +1,12 @@
 import { IKnobaEntity, RemoteCollection } from 'lib/constants';
 import { FirestoreTool } from 'lib/utils';
 import { 
-	IBookmarksCollection,
+	BookmarksCollection,
 	// INotesCollection,
 	IRemoteStorageCollection,
 	// ITasksCollection,
 	// IWordsCollection,
-	IClicksCollection
+	ClicksCollection
 } from '../../remote-storage-collection.interface';
 import { RemoteStorageService } from '../../remote-storage-service.interface';
 
@@ -16,8 +16,8 @@ export class FirestoreRemoteStorageService extends RemoteStorageService {
 
 	constructor(
 		protected firestore: FirestoreTool,
-		public override bookmarks: IBookmarksCollection,
-		public override clicks: IClicksCollection
+		public override bookmarks: BookmarksCollection,
+		public override clicks: ClicksCollection
 	) {
 		super(
 			bookmarks,

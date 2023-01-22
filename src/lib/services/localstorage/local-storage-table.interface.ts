@@ -1,8 +1,8 @@
 import { ID } from 'lib/constants';
 import {
-	IClick,
+	Click,
 	ITrash,
-	IBookmark,
+	Bookmark,
 	IModel,
 	ISyncData,
 	ITag
@@ -40,11 +40,11 @@ export interface ILocalStorageTable<T extends IModel> {
 
 }
 
-export interface IBookmarksTable extends ILocalStorageTable<IBookmark> {
+export interface IBookmarksTable extends ILocalStorageTable<Bookmark> {
 
-	getClickedItems(): Promise<IClick[]>;
-	saveClick(item: IClick): Promise<void>;
-	saveClicks(items: IClick[]): Promise<void>;
+	getClickedItems(): Promise<Click[]>;
+	saveClick(item: Click): Promise<void>;
+	saveClicks(items: Click[]): Promise<void>;
 	click(id: string): Promise<void>;
 
 }

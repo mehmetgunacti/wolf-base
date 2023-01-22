@@ -1,13 +1,13 @@
-import { ID, RemoteCollection } from 'blueprints/constants';
-import { IClick } from 'blueprints/models';
-import { IClicksCollection } from 'blueprints/services/remotestorage/remote-storage-collection.interface';
-import { FirestoreTool, IFirestoreData } from 'blueprints/tools';
+import { ID, RemoteCollection } from 'lib/constants';
+import { Click } from 'lib/models';
+import { ClicksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
+import { FirestoreTool, IFirestoreData } from 'lib/utils';
 
-export class ClicksRemoteStorageCollection implements IClicksCollection {
+export class ClicksRemoteStorageCollection implements ClicksCollection {
 
 	constructor(private firestore: FirestoreTool) { }
 
-	async increase(id: ID, item: IClick): Promise<IClick> {
+	async increase(id: ID, item: Click): Promise<Click> {
 
 		const clicks: number = await this.firestore.increase(RemoteCollection.clicks, 'clicks', id, item.clicks);
 		return {
@@ -18,9 +18,9 @@ export class ClicksRemoteStorageCollection implements IClicksCollection {
 		};
 
 	}
-	async list(): Promise<IClick[]> {
+	async list(): Promise<Click[]> {
 
-		const list: IFirestoreData<IClick>[] = await this.firestore.list<IClick>(
+		const list: IFirestoreData<Click>[] = await this.firestore.list<Click>(
 
 			this.firestore.createURL({
 				collection: RemoteCollection.clicks,

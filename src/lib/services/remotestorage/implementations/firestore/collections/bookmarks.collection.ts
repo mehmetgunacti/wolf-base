@@ -1,17 +1,17 @@
-import { RemoteCollection, ID } from 'blueprints/constants';
-import { IBookmark, IClick } from 'blueprints/models';
-import { FirestoreTool, IFirestoreData, IFirestoreDocument, FIRESTORE_VALUE } from 'blueprints/tools';
+import { RemoteCollection, ID } from 'lib/constants';
+import { Bookmark, Click } from 'lib/models';
+import { FirestoreTool, IFirestoreData, IFirestoreDocument, FIRESTORE_VALUE } from 'lib/utils';
 import { AbstractFirestoreCollection } from '../firestore.collection';
-import { IBookmarksCollection } from 'blueprints/services/remotestorage/remote-storage-collection.interface';
-import { IRemoteData } from 'blueprints/services/remotestorage/remote-storage-models.interface';
+import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
+import { IRemoteData } from 'lib/services/remotestorage/remote-storage-models.interface';
 
-export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<IBookmark> implements IBookmarksCollection {
+export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bookmark> implements BookmarksCollection {
 
 	constructor(firestore: FirestoreTool) {
 		super(firestore, RemoteCollection.bookmarks);
 	}
 
-	async delete(id: string): Promise<void> {
+	override async delete(id: string): Promise<void> {
 
 		await super.delete(id);
 		await this.firestore.delete(
@@ -25,10 +25,10 @@ export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<IB
 
 	}
 
-	async list(): Promise<IRemoteData<IBookmark>[]> {
+	override async list(): Promise<IRemoteData<Bookmark>[]> {
 
-		const bookmarks: IRemoteData<IBookmark>[] = await super.list();
-		const clicks: IFirestoreData<IClick>[] = await this.firestore.list<IClick>(
+		const bookmarks: IRemoteData<Bookmark>[] = await super.list();
+		const clicks: IFirestoreData<Click>[] = await this.firestore.list<Click>(
 
 			this.firestore.createURL({
 				collection: RemoteCollection.clicks,
@@ -42,26 +42,26 @@ export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<IB
 
 	}
 
-	protected createRequestBody(bookmark: Partial<IBookmark>): IFirestoreDocument {
+	protected createRequestBody(bookmark: Partial<Bookmark>): IFirestoreDocument {
 
 		const fields: { [key: string]: FIRESTORE_VALUE } = {};
 
 		if (bookmark.name)
-			fields.name = { stringValue: bookmark.name };
+			fields['name'] = { stringValue: bookmark.name };
 
 		if (bookmark.title)
-			fields.title = { stringValue: bookmark.title };
+			fields['title'] = { stringValue: bookmark.title };
 
 		if (bookmark.tags)
-			fields.tags = {
+			fields['tags'] = {
 				arrayValue: { values: bookmark.tags.map(v => ({ stringValue: v })) }
 			};
 
 		if (bookmark.url)
-			fields.url = { stringValue: bookmark.url };
+			fields['url'] = { stringValue: bookmark.url };
 
 		if (bookmark.image)
-			fields.image = { stringValue: bookmark.image };
+			fields['image'] = { stringValue: bookmark.image };
 
 		// if (bookmark.clicks)
 		// 	fields.clicks = { integerValue: bookmark.clicks };
@@ -69,7 +69,7 @@ export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<IB
 		return { fields };
 	}
 
-	protected createUpdateMask(bookmark: IBookmark): string {
+	protected createUpdateMask(bookmark: Bookmark): string {
 
 		// exclude some fields like id, ... from update list
 		// also don't update image if no new image was selected

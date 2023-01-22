@@ -1,4 +1,4 @@
-import { IBookmark, IFast, INote, ITaskList, IWeight, IWord, IWorkout } from 'blueprints/models';
+import { Bookmark } from 'lib/models';
 
 export enum SYNC_STATES {
 
@@ -14,4 +14,4 @@ export enum SYNC_STATES {
 
 }
 
-export type IKnobaEntity = IBookmark | INote | ITaskList | IWord | IFast | IWeight | IWorkout;
+export type IKnobaEntity = Bookmark; // | INote | ITaskList | IWord | IFast | IWeight | IWorkout;

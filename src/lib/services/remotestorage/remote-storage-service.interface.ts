@@ -1,11 +1,11 @@
 import { IKnobaEntity } from 'lib/constants';
 import {
-	IBookmarksCollection,
+	BookmarksCollection,
 	// INotesCollection,
 	IRemoteStorageCollection,
 	// ITasksCollection,
 	// IWordsCollection,
-	IClicksCollection
+	ClicksCollection
 } from './remote-storage-collection.interface';
 
 interface IRemoteStorageService {
@@ -17,11 +17,11 @@ interface IRemoteStorageService {
 export abstract class RemoteStorageService implements IRemoteStorageService {
 
 	constructor(
-		public bookmarks: IBookmarksCollection,
+		public bookmarks: BookmarksCollection,
 		// public notes: INotesCollection,
 		// public tasks: ITasksCollection,
 		// public words: IWordsCollection,
-		public clicks: IClicksCollection
+		public clicks: ClicksCollection
 	) { }
 
 	abstract getCollection(name: string): IRemoteStorageCollection<IKnobaEntity>;

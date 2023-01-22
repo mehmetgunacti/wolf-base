@@ -3,7 +3,7 @@ import { APP_INITIALIZER, ErrorHandler, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LANG, ThemeInfo, THEME_LIGHT } from 'lib';
+import { LANG, LocalStorageService, localStorageServiceFactory, RemoteStorageService, remoteStorageServiceFactory, ThemeInfo, THEME_LIGHT } from 'lib';
 import { MessageService } from 'primeng/api';
 import { CustomErrorHandler } from 'services';
 import * as actions from 'store/actions';

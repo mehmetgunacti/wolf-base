@@ -1,20 +1,20 @@
-import { KnobaTable, ID } from 'blueprints/constants';
-import { IClick, IBookmark, ISyncData } from 'blueprints/models';
+import { WolfBaseTable, ID } from 'lib/constants';
+import { Click, Bookmark, ISyncData } from 'lib/models';
 import { AbstractDexieTable } from '../dexie.table';
-import { KnobaDB } from '../knoba.database';
-import { IBookmarksTable } from 'blueprints/services/localstorage/local-storage-table.interface';
+import { WolfBaseDB } from '../wolfbase.database';
+import { IBookmarksTable } from 'lib/services/localstorage/local-storage-table.interface';
 
-export class BookmarksTable extends AbstractDexieTable<IBookmark> implements IBookmarksTable {
+export class BookmarksTable extends AbstractDexieTable<Bookmark> implements IBookmarksTable {
 
 	constructor(
-		db: KnobaDB
+		db: WolfBaseDB
 	) {
-		super(db, KnobaTable.bookmarks);
+		super(db, WolfBaseTable.bookmarks);
 	}
 
-	protected newInstance(id: ID, item: Partial<IBookmark>): IBookmark {
+	protected newInstance(id: ID, item: Partial<Bookmark>): Bookmark {
 
-		const instance: IBookmark = {
+		const instance: Bookmark = {
 
 			id,
 			name: '',
@@ -30,12 +30,12 @@ export class BookmarksTable extends AbstractDexieTable<IBookmark> implements IBo
 			...instance,
 			...item
 
-		} as IBookmark;
+		} as Bookmark;
 
 	}
 
 
-	protected searchFilter(term: string, item: ISyncData<IBookmark>): boolean {
+	protected searchFilter(term: string, item: ISyncData<Bookmark>): boolean {
 
 		return new RegExp(term.toLocaleLowerCase()).test(
 			(`${item.data.name} ${item.data.title} ${item.data.tags}`).toLocaleLowerCase()
@@ -43,10 +43,10 @@ export class BookmarksTable extends AbstractDexieTable<IBookmark> implements IBo
 
 	}
 
-	async getClickedItems(): Promise<IClick[]> {
+	async getClickedItems(): Promise<Click[]> {
 
-		const items: ISyncData<IBookmark>[] = await this.db.bookmarks
-			.filter(item => !!item.updates.clicks)
+		const items: ISyncData<Bookmark>[] = await this.db.bookmarks
+			.filter((item: ISyncData<Bookmark>) => !!item.updates.clicks)
 			.toArray();
 
 		return items.map(item => ({
@@ -56,11 +56,11 @@ export class BookmarksTable extends AbstractDexieTable<IBookmark> implements IBo
 
 	}
 
-	async saveClick(item: IClick): Promise<void> {
+	async saveClick(item: Click): Promise<void> {
 
 		await this.db.bookmarks
 			.where({ id: item.id })
-			.modify((sd: ISyncData<IBookmark>): void => {
+			.modify((sd: ISyncData<Bookmark>): void => {
 
 				sd.data.clicks = item.clicks;
 				const { clicks, ...rest } = { ...sd.updates };
@@ -70,7 +70,7 @@ export class BookmarksTable extends AbstractDexieTable<IBookmark> implements IBo
 
 	}
 
-	async saveClicks(items: IClick[]): Promise<void> {
+	async saveClicks(items: Click[]): Promise<void> {
 
 		for (const item of items)
 			await this.saveClick(item);
@@ -81,7 +81,7 @@ export class BookmarksTable extends AbstractDexieTable<IBookmark> implements IBo
 
 		await this.db.bookmarks
 			.where({ id })
-			.modify((sd: ISyncData<IBookmark>): void => { // .modify((item: IBookmark, ref: { value: IBookmark, primKey: IndexableType }): void => {
+			.modify((sd: ISyncData<Bookmark>): void => { // .modify((item: IBookmark, ref: { value: IBookmark, primKey: IndexableType }): void => {
 
 				sd.data.clicks = (sd.data.clicks || 0) + 1;
 				sd.updates.clicks = (sd.updates.clicks || 0) + 1;

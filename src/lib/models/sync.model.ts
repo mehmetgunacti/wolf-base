@@ -1,9 +1,6 @@
-import { SYNC_STATES } from 'blueprints';
-import { IBookmark } from './bookmark.model';
+import { SYNC_STATES } from 'lib';
+import { Bookmark } from './bookmark.model';
 import { IModel } from './common.model';
-import { INote } from './note.model';
-import { ITaskList } from './task.model';
-import { IWord } from './word.model';
 
 export interface ISyncState {
 

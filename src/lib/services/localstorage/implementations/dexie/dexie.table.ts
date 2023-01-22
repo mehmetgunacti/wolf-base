@@ -1,18 +1,18 @@
 import { Collection, IndexableType, Table } from 'dexie';
 import { v4 as uuidv4 } from 'uuid';
 import { ILocalStorageTable } from '../../local-storage-table.interface';
-import { KnobaDB } from './knoba.database';
-import { ITrash, ITag, IModel, ISyncData } from 'blueprints/models';
-import { KnobaTable, ID } from 'blueprints/constants';
+import { WolfBaseDB } from './wolfbase.database';
+import { ITrash, ITag, IModel, ISyncData } from 'lib/models';
+import { WolfBaseTable, ID } from 'lib/constants';
 import * as _ from 'lodash-es';
-import { IRemoteData } from 'blueprints/services/remotestorage';
-import { removeOverlappingProperties } from 'blueprints/tools';
+import { IRemoteData } from 'lib/services/remotestorage';
+import { removeOverlappingProperties } from 'lib/utils';
 
 export abstract class AbstractDexieTable<T extends IModel> implements ILocalStorageTable<T> {
 
 	constructor(
-		protected db: KnobaDB,
-		protected tablename: KnobaTable
+		protected db: WolfBaseDB,
+		protected tablename: WolfBaseTable
 	) { }
 
 	async getNewItems(): Promise<ISyncData<T>[]> {
@@ -47,7 +47,7 @@ export abstract class AbstractDexieTable<T extends IModel> implements ILocalStor
 		this.db.transaction(
 			'rw',
 			this.tablename,
-			KnobaTable.trashcan,
+			WolfBaseTable.trashcan,
 			async () => {
 
 				const entity: ISyncData<T> = await this.db.table(this.tablename).get(id);
@@ -68,7 +68,7 @@ export abstract class AbstractDexieTable<T extends IModel> implements ILocalStor
 		this.db.transaction(
 			'rw',
 			this.tablename,
-			KnobaTable.conflicts,
+			WolfBaseTable.conflicts,
 			async () => {
 
 				await this.db.conflicts.add({

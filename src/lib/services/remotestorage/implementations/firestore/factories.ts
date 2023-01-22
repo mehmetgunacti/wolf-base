@@ -2,9 +2,9 @@ import { FirestoreTool } from 'lib/utils';
 import { environment } from 'environments/environment';
 import {
 	BookmarksFirestoreCollection,
-	NotesFirestoreCollection,
-	TasksFirestoreCollection,
-	WordsFirestoreCollection,
+	// NotesFirestoreCollection,
+	// TasksFirestoreCollection,
+	// WordsFirestoreCollection,
 	ClicksRemoteStorageCollection
 } from './collections';
 import { FirestoreRemoteStorageService } from './firestore.service';

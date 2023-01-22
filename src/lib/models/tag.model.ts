@@ -1,4 +1,4 @@
-import { IModel } from 'blueprints';
+import { IModel } from 'lib';
 
 export interface ITag extends IModel {
 
