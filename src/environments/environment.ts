@@ -1,13 +1,14 @@
 export const environment = {
 	production: true,
 	firebase: {
-		apiKey: 'AIzaSyBgDcMEv-ddeUeqs61xYsASJcqsyLNYqlc',
+		apiKey: 'AIzaSyBW_cPM4U3AcUtbMDx64KlWNfx703E_NcM',
 		baseURL: 'https://firestore.googleapis.com/v1/',
-		// authDomain: 'knoba-e5608.firebaseapp.com',
-		// databaseURL: 'https://knoba-e5608.firebaseio.com',
-		projectId: 'knoba-e5608',
-		// storageBucket: 'knoba-e5608.appspot.com',
-		// messagingSenderId: '992623957226'
+		// authDomain: "wolf-359-base.firebaseapp.com",
+		// databaseURL: "https://knobadev.firebaseio.com",
+		projectId: 'wolf-359-base',
+		// storageBucket: "wolf-359-base.appspot.com",
+		// messagingSenderId: "387675175641",
+		// appId: "1:387675175641:web:e8cb867caf5856a5059cc8"
 	},
 	dexie: {
 		dbName: 'KnobaDB',

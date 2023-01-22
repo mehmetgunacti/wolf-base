@@ -5,14 +5,14 @@
 export const environment = {
 	production: false,
 	firebase: {
-		apiKey: 'AIzaSyCGSsMz3yLA1Tx95_vEJbDphy9Vks8Svzs',
+		apiKey: 'AIzaSyBW_cPM4U3AcUtbMDx64KlWNfx703E_NcM',
 		baseURL: 'https://firestore.googleapis.com/v1/',
-		// authDomain: "knobadev.firebaseapp.com",
+		// authDomain: "wolf-359-base.firebaseapp.com",
 		// databaseURL: "https://knobadev.firebaseio.com",
-		projectId: 'knobadev',
-		// storageBucket: "knobadev.appspot.com",
-		// messagingSenderId: "568729951141",
-		// appId: "1:568729951141:web:2578fc2d4105a1f9c7a64c"
+		projectId: 'wolf-359-base',
+		// storageBucket: "wolf-359-base.appspot.com",
+		// messagingSenderId: "387675175641",
+		// appId: "1:387675175641:web:e8cb867caf5856a5059cc8"
 	},
 	dexie: {
 		dbName: 'KnobaDB',
