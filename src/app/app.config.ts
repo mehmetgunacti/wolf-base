@@ -67,6 +67,8 @@ export const providers: Provider[] = [
 		useClass: CustomErrorHandler
 
 	},
+	{ provide: LocalStorageService, useFactory: localStorageServiceFactory },
+	{ provide: RemoteStorageService, useFactory: remoteStorageServiceFactory },
 	MessageService
 
 ];

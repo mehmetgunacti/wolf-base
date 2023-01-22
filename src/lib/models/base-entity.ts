@@ -1,4 +1,4 @@
-import { ID } from 'lib/constant';
+import { ID } from 'lib/constants';
 
 export interface BaseEntity {
 

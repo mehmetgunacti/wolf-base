@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { THEME_DARK, THEME_LIGHT, ThemeInfo } from 'lib/constant';
+import { THEME_DARK, THEME_LIGHT, ThemeInfo } from 'lib/constants';
 
 @Component({
 	selector: 'app-theme-switcher',
