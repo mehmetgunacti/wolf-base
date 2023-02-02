@@ -15,7 +15,7 @@ export const uiReducer: ActionReducer<UIState, Action> = createReducer(
 
 		return produce(
 			state,
-			draft => new utils.ThemeHandler(state, draft).setNewTheme(params['newTheme'])
+			draft => {console.log('newTheme', params['newTheme'], state); new utils.ThemeHandler(state, draft).setNewTheme(params['newTheme']);}
 		);
 
 	}),

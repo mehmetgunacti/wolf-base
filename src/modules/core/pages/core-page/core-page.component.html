@@ -15,14 +15,12 @@
 	</section>
 
 </header>
-<section>
+<main>
 
-	<div id="main-overlay"
-		 (click)="toggleNav()"></div>
-	<aside>
+	<div *ngIf="!bigScreen" id="nav-overlay" (click)="toggleNav()"></div>
+	<nav>
 
 		<p-panelMenu [model]="(navMenuItems$ | async) || []"></p-panelMenu>
-
 		<div bottom-buttons>
 			<app-theme-switcher [theme]="theme$ | async"
 								(newTheme)="onThemeChange($event)"></app-theme-switcher>
@@ -31,11 +29,11 @@
 							   (newLang)="onLangChange($event)"></app-lang-switcher>
 		</div>
 
-	</aside>
-	<main>
+	</nav>
+	<article>
 
 		<router-outlet></router-outlet>
 
-	</main>
+	</article>
 
-</section>
+</main>

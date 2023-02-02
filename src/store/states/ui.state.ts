@@ -18,7 +18,7 @@ export interface UIState {
 export const initialUIState: UIState = {
 
 	theme: {
-		info: localStorage.getItem('theme') === THEME_LIGHT.name ? THEME_LIGHT : THEME_DARK
+		info: THEME_LIGHT // localStorage.getItem('theme') === THEME_LIGHT.name ? THEME_LIGHT : THEME_DARK
 	},
 	lang: 'en',
 	translations: {}

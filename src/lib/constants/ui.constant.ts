@@ -1,12 +1,12 @@
-const ARYA_BLUE = 'arya-blue'; // dark
-const SAGA_BLUE = 'saga-blue'; // light
-export const DARK_THEME = 'dark-theme';
+const PRIMENG_THEME_DARK = 'mdc-dark-indigo'; // dark
+const PRIMENG_THEME_LIGHT = 'mdc-light-indigo'; // light
+export const DARK_THEME = 'theme-dark'; // see '_extensions.scss' -> class '.logo'
 
 export type LANG = 'en' | 'tr';
 
 export interface ThemeInfo {
 
-	name: string;
+	name: 'theme-light' | 'theme-dark';
 	primeNg: string;
 	isDark: boolean;
 
@@ -15,7 +15,7 @@ export interface ThemeInfo {
 export const THEME_DARK: ThemeInfo = {
 
 	name: 'theme-dark',
-	primeNg: ARYA_BLUE,
+	primeNg: PRIMENG_THEME_DARK,
 	isDark: true
 
 };
@@ -23,7 +23,7 @@ export const THEME_DARK: ThemeInfo = {
 export const THEME_LIGHT: ThemeInfo = {
 
 	name: 'theme-light',
-	primeNg: SAGA_BLUE,
+	primeNg: PRIMENG_THEME_LIGHT,
 	isDark: false
 
 };

@@ -1,3 +1,6 @@
+// this is the only place primeflex is being used
+@import '../../node_modules/primeflex/src/variables';
+
 @mixin sm() {
 	@media screen and (min-width: $sm) {
 		@content;

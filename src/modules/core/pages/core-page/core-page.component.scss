@@ -15,39 +15,34 @@ $header-height					: 4rem;
 
 app-core-page {
 
-	display						: flex;
-	flex-direction				: column;
-	height						: 100vh;
+	@extend %flex-column;
+	height	: 100vh;
 
-	& > header {
+	header {
 
-		display					: flex;
-		justify-content			: space-between;
-		align-items				: center;
-		min-height				: #{$header-height};
-		padding					: 0 0.5rem;
-		background-color		: var(--surface-c);
+		display				: flex;
+		justify-content		: space-between;
+		align-items			: center;
+		min-height			: #{$header-height};
+		padding				: 0 0.5rem;
+		background-color	: var(--surface-c);
 
 	}
 
-	& > section {
+	main {
 
-		flex					: 1;
-		position				: relative;
-		display					: flex;
-		height					: calc(100vh - #{$header-height});
+		flex		: 1;
+		position	: relative;
+		display		: flex;
+		height		: calc(100vh - #{$header-height});
 
-		& > #main-overlay {
+		nav {
 
-			display				: none;
-
-		}
-
-		& > aside {
-
-			display				: flex;
-			flex-direction		: column;
+			@extend %flex-column;
+			position			: absolute;
+			z-index				: 10;
 			width				: $nav-width;
+			height				: 100%;
 			background-color	: var(--surface-b);
 			transition			: margin-left $animation-duration $animation-ease;
 			padding				: $default-padding;
@@ -66,65 +61,52 @@ app-core-page {
 
 		}
 
-		& > main {
+		article {
 
-			flex				: 1;
-			padding				: $default-padding;
-			overflow-y			: auto;
+			flex		: 1;
+			padding		: $default-padding;
+			overflow-y	: auto;
 
 		}
 
 	}
 
-	&.smallScreen {
+	#nav-overlay {
 
-		& > section {
-
-			& > #main-overlay {
-
-				display				: block;
-				position			: absolute;
-				z-index				: 5;
-				left				: 0;
-				top					: 0;
-				right				: 0;
-				bottom				: 0;
-				animation			: fadeIn $animation-duration $animation-ease;
-				background-color	: #0000005b;
-
-			}
-
-			& > aside {
-
-				position		: absolute;
-				z-index			: 10;
-				height			: 100%;
-
-			}
-
-		}
+		display				: block;
+		position			: absolute;
+		z-index				: 5;
+		left				: 0;
+		top					: 0;
+		right				: 0;
+		bottom				: 0;
+		animation			: fadeIn $animation-duration $animation-ease;
+		background-color	: var(--maskbg);
 
 	}
 
 	&.navCollapsed {
 
-		& > section {
+		#nav-overlay {
 
-			& > aside {
+			display	: none;
 
-				margin-left		: -$nav-width;
+		}
 
-			}
+		nav {
+
+			margin-left	: -$nav-width;
 
 		}
 
 	}
 
-	&.smallScreen.navCollapsed {
+	&.bigScreen {
 
-		& > section > #main-overlay {
+		nav {
 
-			display				: none;
+			position	: relative;
+			z-index		: initial;
 
 		}
 

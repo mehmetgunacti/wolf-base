@@ -40,8 +40,8 @@
 
 p-breadcrumb {
 
-	@include styleclass('mb-2');
-	display			: block;
+	// @include styleclass('mb-2');
+	display	: block;
 
 }
 
@@ -51,3 +51,15 @@ p-breadcrumb {
 // 	color			: var(--surface-900) !important;
 
 // }
+
+a {
+
+	text-decoration : none;
+
+}
+
+h1, h2, h3, h4, h5 {
+
+	margin	: 0.1rem;
+
+}

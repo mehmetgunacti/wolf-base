@@ -1,12 +1,13 @@
+// components
 @import './components/bookmark-form/bookmark-form.component.scss';
-@import './components/bookmark-list/bookmark-list.component.scss';
-@import './components/bookmark-one/bookmark-one.component.scss';
+@import './components/bookmark/bookmark.component.scss';
 
-@import './containers/bookmark-one-container/bookmark-one-container.component.scss';
+// containers
 @import './containers/bookmark-edit-container/bookmark-edit-container.component.scss';
 @import './containers/bookmark-new-container/bookmark-new-container.component.scss';
+@import './containers/bookmarks-container/bookmarks-container.component.scss';
 
+// pages
+@import './pages/bookmarks-page/bookmarks-page.component.scss';
 @import './pages/bookmark-edit-page/bookmark-edit-page.component.scss';
-@import './pages/bookmark-list-page/bookmark-list-page.component.scss';
 @import './pages/bookmark-new-page/bookmark-new-page.component.scss';
-@import './pages/bookmark-one-page/bookmark-one-page.component.scss';

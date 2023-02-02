@@ -11,8 +11,7 @@ import * as navItems from '../../navigation-menu-items';
 
 @Component({
 	selector: 'app-core-page',
-	templateUrl: './core-page.component.html',
-	styleUrls: ['./core-page.component.scss']
+	templateUrl: './core-page.component.html'
 })
 export class CorePageComponent implements OnDestroy {
 
@@ -22,11 +21,11 @@ export class CorePageComponent implements OnDestroy {
 
 	subscriptions = new Subscription();
 
-	@HostBinding('class.smallScreen')
-	smallScreen = false;
+	@HostBinding('class.bigScreen')
+	bigScreen = true;
 
 	@HostBinding('class.navCollapsed')
-	navCollapsed = false;
+	navCollapsed = true;
 
 	constructor(
 		breakpointObserver: BreakpointObserver,
@@ -38,8 +37,8 @@ export class CorePageComponent implements OnDestroy {
 		this.subscriptions.add(
 
 			breakpointObserver
-				.observe('(max-width: 767px)')
-				.subscribe(result => this.smallScreen = result.matches)
+				.observe('(min-width: 767px)')
+				.subscribe(result => this.bigScreen = result.matches)
 
 		);
 		this.subscriptions.add(

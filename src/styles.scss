@@ -4,22 +4,23 @@
 // PrimeNG Theme
 // Note: 'arya-blue' should be the same as in app.config.ts > DEFAULT_THEME
 // IMPORTANT: if you comment this line, themeing will still work but flickering will occur during transitions
-@import '../node_modules/primeng/resources/themes/arya-blue/theme.css';
+@import '../node_modules/primeng/resources/themes/mdc-dark-indigo/theme.css';
 
 // PrimeNG
 @import '../node_modules/primeng/resources/primeng.min.css';
 
 // Prime Flex
-@import '../node_modules/primeflex/primeflex.scss';
+// @import '../node_modules/primeflex/primeflex.scss';
 
 // Custom
 @import './scss/overrides';
 @import './scss/responsive';
 @import './scss/index';
 @import './scss/extensions';
-@import './modules/core/core.style.scss';
+@import './scss/helper';
 
-// Entities
+// core
+@import './modules/core/core.style.scss';
 
 // shared
 @import './modules/shared/shared.style.scss';

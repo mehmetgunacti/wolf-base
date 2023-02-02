@@ -1,0 +1,45 @@
+<ng-container *ngIf="item">
+
+	<div bookmark-image>
+
+		<img src="{{ item.image || PLACEHOLDER_QUESTIONMARK }}"
+			title="{{ item.id }} : {{ item.title + '\r\n' + item.url + '\r\n' }} #{{ item.clicks }}">
+
+	</div>
+	<div bookmark-right>
+
+		<div bookmark-top>
+
+			<a href="{{ item.url }}" target="_blank" (click)="onLinkClick()">
+
+				<span bookmark-name>{{ item.name }}
+					<sup>
+						<i class="pi pi-external-link"></i>
+					</sup>
+				</span><br>
+				<span bookmark-title>{{ item.title }}</span>
+
+			</a>
+
+		</div>
+		<div bookmark-bottom>
+
+			<div id="url"></div>
+			<div bookmark-tags>
+
+				<button
+					*ngFor="let tag of item.tags"
+					pButton
+					type="button"
+					[label]="tag"
+					(click)="onTagClick(tag)"
+					class="p-button-info p-button-sm"></button>
+
+			</div>
+
+		</div>
+
+	</div>
+	<a href="javascript:void(0)" id="editButton" title="Edit" (click)="onEdit()"><i class="pi pi-file-edit"></i></a>
+
+</ng-container>
