@@ -15,7 +15,7 @@ export class PortalComponent implements AfterViewInit, OnDestroy {
 	private disposeFn!: () => void;
 	private viewRef!: EmbeddedViewRef<{}>;
 
-	@Input() wOutletName!: string;
+	@Input() outletName!: string;
 
 	constructor(private viewContainerRef: ViewContainerRef) { }
 
@@ -28,7 +28,7 @@ export class PortalComponent implements AfterViewInit, OnDestroy {
 		this.viewRef.detectChanges();
 
 		// grab the DOM element
-		const outletElement = document.querySelector('#' + this.wOutletName); // #portal-outlet'
+		const outletElement = document.querySelector('#' + this.outletName); // #portal-outlet'
 
 		// attach the view to the DOM element that matches our selector
 		this.viewRef.rootNodes.forEach(rootNode =>
@@ -38,12 +38,16 @@ export class PortalComponent implements AfterViewInit, OnDestroy {
 		// register a dispose fn we can call later
 		// to remove the content from the DOM again
 		this.disposeFn = () => { };
+
 	}
 
 	ngOnDestroy(): void {
+
 		const index = this.viewContainerRef.indexOf(this.viewRef);
 		if (index !== -1) {
 			this.viewContainerRef.remove(index);
 		}
+
 	}
+
 }
