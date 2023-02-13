@@ -6,6 +6,8 @@ import { BookmarkNewContainerComponent } from './containers/bookmark-new-contain
 import { BookmarkEditPageComponent } from './pages/bookmark-edit-page/bookmark-edit-page.component';
 import { BookmarksPageComponent } from './pages/bookmarks-page/bookmarks-page.component';
 import { BookmarkNewPageComponent } from './pages/bookmark-new-page/bookmark-new-page.component';
+import { bookmarksReducer, BookmarksState, tagsReducer, TagsState } from './store';
+import { ActionReducerMap } from '@ngrx/store';
 
 export const components = [
 
@@ -24,3 +26,17 @@ export const components = [
 	BookmarksPageComponent
 
 ];
+
+export interface BookmarksModuleState {
+
+	bookmarks: BookmarksState;
+	tags: TagsState;
+
+}
+
+export const reducers: ActionReducerMap<BookmarksModuleState> = {
+
+	bookmarks: bookmarksReducer,
+	tags: tagsReducer
+
+};

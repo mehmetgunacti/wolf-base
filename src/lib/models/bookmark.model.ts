@@ -1,6 +1,6 @@
-import { IModel } from './common.model';
+import { Model } from './common.model';
 
-export interface Bookmark extends IModel {
+export interface Bookmark extends Model {
 
 	name: string;
 	title: string;
@@ -11,8 +11,20 @@ export interface Bookmark extends IModel {
 
 }
 
-export interface Click extends IModel {
+export interface Click extends Model {
 
 	clicks: number;
+
+}
+
+export interface BookmarksUIState {
+
+	tagsVisible: boolean
+
+}
+
+export const initialBookmarksUIState: BookmarksUIState = {
+
+	tagsVisible: false
 
 }

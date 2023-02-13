@@ -15,7 +15,7 @@ export const uiReducer: ActionReducer<UIState, Action> = createReducer(
 
 		return produce(
 			state,
-			draft => {console.log('newTheme', params['newTheme'], state); new utils.ThemeHandler(state, draft).setNewTheme(params['newTheme']);}
+			draft => new utils.ThemeHandler(state, draft).setNewTheme(params['newTheme'])
 		);
 
 	}),
@@ -25,6 +25,7 @@ export const uiReducer: ActionReducer<UIState, Action> = createReducer(
 			state,
 			draft => {
 
+				// move this to effects
 				localStorage.setItem('lang', newLang);
 				draft.lang = newLang;
 

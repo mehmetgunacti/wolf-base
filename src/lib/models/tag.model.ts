@@ -1,6 +1,6 @@
-import { IModel } from 'lib';
+import { Model } from 'lib';
 
-export interface ITag extends IModel {
+export interface Tag extends Model {
 
 	count: number;
 

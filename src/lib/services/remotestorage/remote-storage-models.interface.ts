@@ -1,6 +1,6 @@
-import { IModel } from 'lib/models';
+import { Model } from 'lib/models';
 
-export interface IRemoteData<T> extends IModel {
+export interface IRemoteData<T> extends Model {
 
 	data: T;
 	createTime: string;

@@ -1,6 +1,6 @@
 import { ID } from 'lib/constants';
 
-export interface IModel {
+export interface Model {
 
 	id: ID;
 

@@ -1,0 +1,43 @@
+app-tag-cloud {
+
+    @extend %flex-column;
+
+	div[tags] {
+		padding: 1rem;
+
+		&>a {
+			display			: inline-block;
+			margin			: 0.2rem;
+			font-size 		: 1.1rem;
+			line-height		: 0.8;
+			cursor			: pointer;
+
+			&.big_1 {
+				font-size 		: 0.8em;
+			}
+
+			&.big_2 {
+				font-size 		: 1.3em;
+			}
+
+			&.big_3 {
+				font-size 		: 1.5em;
+			}
+
+			&.big_4 {
+				font-size 		: 1.7em;
+			}
+
+			&.big_5 {
+				font-size 		: 1.9em;
+			}
+
+			&.marked {
+				color			: orange;
+			}
+
+        }
+
+    }
+
+}

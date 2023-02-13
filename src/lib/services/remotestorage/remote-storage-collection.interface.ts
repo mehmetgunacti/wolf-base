@@ -1,12 +1,12 @@
 import {
 	Bookmark,
-	IModel,
+	Model,
 	Click
 } from 'lib/models';
 import { IKnobaEntity, ID } from 'lib/constants';
 import { IRemoteData } from './remote-storage-models.interface';
 
-export interface IRemoteStorageCollection<T extends IModel> {
+export interface IRemoteStorageCollection<T extends Model> {
 
 	get(id: string): Promise<IRemoteData<T>>;
 

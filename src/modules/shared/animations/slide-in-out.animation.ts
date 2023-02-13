@@ -47,23 +47,23 @@ import { animate, keyframes, query, state, style, transition, trigger } from '@a
 //     ])
 // ]);
 
-export const slideInOutTrigger = trigger('slideInOut', [
+export const slideUpDownTrigger = trigger('slideUpDown', [
 	transition(':enter', [
 
 		// css styles at start of transition
-		style({ width: 0, opacity: 0 }),
+		style({ height: 0, opacity: 0 }),
 
 		// animation and styles at end of transition
-		animate('300ms', style({ width: '*', opacity: 1 }))
+		animate('300ms', style({ height: '*', opacity: 1 }))
 	]),
 
 	transition(':leave', [
 
 		// css styles at start of transition
-		style({ width: '*', opacity: 1 }),
+		style({ height: '*', opacity: 1 }),
 
 		// animation and styles at end of transition
-		animate('300ms', style({ width: 0, opacity: 0 }))
+		animate('300ms', style({ height: 0, opacity: 0 }))
 	])
 ]);
 

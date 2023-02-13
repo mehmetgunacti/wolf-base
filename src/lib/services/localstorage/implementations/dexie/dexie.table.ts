@@ -2,13 +2,13 @@ import { Collection, IndexableType, Table } from 'dexie';
 import { v4 as uuidv4 } from 'uuid';
 import { ILocalStorageTable } from '../../local-storage-table.interface';
 import { WolfBaseDB } from './wolfbase.database';
-import { ITrash, ITag, IModel, ISyncData } from 'lib/models';
+import { ITrash, Tag, Model, ISyncData } from 'lib/models';
 import { WolfBaseTable, ID } from 'lib/constants';
 import * as _ from 'lodash-es';
 import { IRemoteData } from 'lib/services/remotestorage';
 import { removeOverlappingProperties } from 'lib/utils';
 
-export abstract class AbstractDexieTable<T extends IModel> implements ILocalStorageTable<T> {
+export abstract class AbstractDexieTable<T extends Model> implements ILocalStorageTable<T> {
 
 	constructor(
 		protected db: WolfBaseDB,
@@ -247,7 +247,7 @@ export abstract class AbstractDexieTable<T extends IModel> implements ILocalStor
 
 	}
 
-	async tags(): Promise<ITag[]> {
+	async tags(): Promise<Tag[]> {
 
 		const setOfTags: { [key: string]: number } = {};
 		await this.db.table(this.tablename).orderBy('data.tags').eachKey(indexableType => {
@@ -257,7 +257,7 @@ export abstract class AbstractDexieTable<T extends IModel> implements ILocalStor
 
 		});
 
-		const tags: ITag[] = Object.keys(setOfTags).map(id => ({ id, count: setOfTags[id] } as ITag));
+		const tags: Tag[] = Object.keys(setOfTags).map(id => ({ id, count: setOfTags[id] } as Tag));
 		return tags;
 
 	}

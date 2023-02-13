@@ -1,0 +1,22 @@
+<div class="p-inputgroup">
+	<input
+		type="text"
+		pInputText
+		placeholder="Keyword"
+		[formControl]="searchControl">
+	<button
+		type="button"
+		pButton
+		pRipple
+		icon="pi pi-search"
+		styleClass="p-button-warn"
+		(click)="onReset()">
+	</button>
+</div>
+
+<div tags>
+	<a *ngFor="let tag of uiTags"
+		(click)="onTagClick(tag.id)"
+		[class]="tag.className"
+		[ngClass]="{'marked': selectedTags[tag.id]}">{{ tag.id }}</a>
+</div>

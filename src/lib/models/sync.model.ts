@@ -1,6 +1,6 @@
 import { SYNC_STATES } from 'lib';
 import { Bookmark } from './bookmark.model';
-import { IModel } from './common.model';
+import { Model } from './common.model';
 
 export interface ISyncState {
 
@@ -9,7 +9,7 @@ export interface ISyncState {
 
 }
 
-export interface ISyncData<T extends IModel> extends IModel {
+export interface ISyncData<T extends Model> extends Model {
 
 	data: T;
 	createTime: string;

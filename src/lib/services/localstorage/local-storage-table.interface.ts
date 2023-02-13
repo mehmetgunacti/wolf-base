@@ -3,13 +3,13 @@ import {
 	Click,
 	ITrash,
 	Bookmark,
-	IModel,
+	Model,
 	ISyncData,
-	ITag
+	Tag
 } from 'lib/models';
 import { IRemoteData } from '../remotestorage';
 
-export interface ILocalStorageTable<T extends IModel> {
+export interface ILocalStorageTable<T extends Model> {
 
 	getNewItems(): Promise<ISyncData<T>[]>;
 	getUpdatedItems(): Promise<ISyncData<T>[]>;
@@ -34,7 +34,7 @@ export interface ILocalStorageTable<T extends IModel> {
 
 	search(term: string): Promise<T[]>;
 	searchByTags(tags: string[]): Promise<T[]>;
-	tags(): Promise<ITag[]>;
+	tags(): Promise<Tag[]>;
 
 	clear(): Promise<void>;
 

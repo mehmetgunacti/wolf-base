@@ -5,7 +5,8 @@
         type="button"
         label="Search"
         icon="pi pi-search"
-        class="p-button-text p-button-sm">
+        class="p-button-text p-button-sm"
+        (click)="toggleTagCloud()">
     </button>
     <button
         pButton
@@ -16,4 +17,9 @@
         class="p-button-text p-button-sm">
     </button>
 </app-portal>
+
+<section tagCloud *ngIf="tagsVisible$ | async" @slideUpDown>
+    <app-tag-cloud [tags]="tags"></app-tag-cloud>
+</section>
+
 <app-bookmarks-container></app-bookmarks-container>
