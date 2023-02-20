@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark } from 'lib';
-import { Observable, of } from 'rxjs';
-import * as actions from 'store';
-import * as selectors from 'store';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import * as fromStore from '../../store';
 
 @Component({
 	selector: 'app-bookmark-edit-container',
@@ -12,26 +12,91 @@ import * as selectors from 'store';
 })
 export class BookmarkEditContainerComponent {
 
-	bookmark$: Observable<Bookmark>;
+	tagboxSuggestions$!: Observable<string[]>;
+	tagInput = new Subject<string>();
+	
+	@Input() bookmark: Bookmark | undefined;
 
 	constructor(
-		private store: Store
+		private store: Store<fromStore.BookmarksState>
 	) {
 
-		this.bookmark$ = of({} as Bookmark); // store.select(selectors.activeEntity);
+		console.log(this.bookmark);
 
 	}
 
-	onSave(bookmark: Bookmark): void {
+	ngOnInit(): void {
 
-		// this.store.dispatch(
-		// 	actions.modifyEntity({
-		// 		entity: Entities.bookmarks,
-		// 		id: bookmark.id,
-		// 		body: bookmark,
-		// 		after: { redirect: true, showSuccess: true }
-		// 	})
+
+	}
+
+	ngAfterContentInit(): void {
+
+		// this.tagboxSuggestions$ = combineLatest([
+		// 	this.store.select(fromStore.selectorTagsArray),
+		// 	this.tagInput
+		// ]).pipe(
+
+		// 	filter(([tags, tagInput]) => !!tagInput && tags.length > 0),
+		// 	map(
+
+		// 		([tags, tagInput]) =>
+		// 			tags
+		// 				.filter(t => t.id.startsWith(tagInput))
+		// 				.map(t => t.id)
+
+		// 	)
+
 		// );
+
+	}
+
+
+
+	onSave(f: Bookmark): void {
+
+		// if (this.formGroup.invalid)
+		// 	markFieldsAsDirty(this.formGroup);
+
+		// else if (
+
+		// 	this.formGroup.dirty &&
+		// 	this.formGroup.valid
+
+		// ) {
+
+		// 	const payload: any = {
+		// 		...getDirtyValues<Bookmark>(this.formGroup),
+		// 		id: this.bookmark?.id
+		// 	};
+		// 	this.store.dispatch(fromStore.bookmarksUpsert({ payload }));
+		// 	this.close();
+
+		// }
+
+	}
+
+	delete(): void {
+
+		const id = this.bookmark?.id;
+		if (!!id)
+			if (
+				confirm(`
+					${this.bookmark?.title}
+					${this.bookmark?.url}
+
+					will be deleted. Continue?
+				`)
+			)
+				this.store.dispatch(fromStore.bookmarksDelete({ id }));
+
+	}
+
+	close(): void {}
+
+	onTagInput(val: string): void {
+
+		this.tagInput.next(val);
 
 	}
 

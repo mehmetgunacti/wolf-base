@@ -2,6 +2,13 @@ import { FormArray, FormControl, FormGroup, AbstractControl } from '@angular/for
 
 export type IForm = Record<string, FormControl | FormArray | FormGroup>;
 
+export interface IFormClass<T> {
+
+	// getFormGroup(): FormGroup;
+	setProperties(item: T): void;
+
+}
+
 export const isValid = (fg: FormGroup): boolean => {
 
 	if (fg.valid)
@@ -73,7 +80,6 @@ export const traverseAbstractControl = (c: AbstractControl, fn: (c: AbstractCont
 
 export const getDirtyValues = <T>(form: FormGroup): Partial<T> => {
 
-	// tslint:disable-next-line: no-any
 	const dirtyValues: Record<string, any> = {};
 	Object.keys(form.controls).forEach(key => {
 

@@ -1,25 +1,39 @@
 <app-portal outletName="portal-outlet">
-    <button
-        pButton
-        pRipple
-        type="button"
-        label="Search"
-        icon="pi pi-search"
-        class="p-button-text p-button-sm"
-        (click)="toggleTagCloud()">
-    </button>
-    <button
-        pButton
-        pRipple
-        type="button"
-        label="Add"
-        icon="pi pi-plus"
-        class="p-button-text p-button-sm">
-    </button>
+	<button
+		pButton
+		pRipple
+		type="button"
+		label="Search"
+		icon="pi pi-search"
+		class="p-button-text p-button-sm"
+		(click)="toggleTagCloud()">
+	</button>
+	<button
+		pButton
+		pRipple
+		type="button"
+		label="Add"
+		icon="pi pi-plus"
+		class="p-button-text p-button-sm"
+		(click)="toggleEditDialog()">
+	</button>
 </app-portal>
 
 <section tagCloud *ngIf="tagsVisible$ | async" @slideUpDown>
-    <app-tag-cloud [tags]="tags"></app-tag-cloud>
+	<app-tag-cloud [tags]="tags"></app-tag-cloud>
 </section>
+
+<p-dialog
+	header="Add Bookmark"
+	[visible]="editDialogVisible$ | async"
+	(visibleChange)="toggleEditDialog()"
+	[breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+	[closeOnEscape]="true"
+	[closable]="true"
+	[modal]="true"
+	[dismissableMask]="true"
+	styleClass="bookmarkEditContainerComponent">
+    <app-bookmark-edit-container></app-bookmark-edit-container>
+</p-dialog>
 
 <app-bookmarks-container></app-bookmarks-container>

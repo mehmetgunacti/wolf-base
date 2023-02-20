@@ -22,3 +22,4 @@ export const bookmarksSyncReady = createAction('[Bookmarks] readying bookmarks')
 export const bookmarksSyncToggleForceOverride = createAction('[Bookmarks] toggle force override bookmarks');
 export const bookmarksSyncSetState = createAction('[Bookmarks] set sync state bookmarks', props<{ syncState: ISyncState }>());
 
+export const bookmarksToggleEditDialog = createAction('[Bookmarks] toggle edit dialog');

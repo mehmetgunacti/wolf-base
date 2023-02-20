@@ -1,1 +1,13 @@
 // app-bookmark-edit-container {}
+.bookmarkEditContainerComponent {
+
+	border	: 1px solid red;
+	width	: 100vw;
+
+	@include md() {
+
+		width : 70vw;
+
+	}
+
+}

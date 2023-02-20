@@ -43,3 +43,7 @@ export const selectorSyncBookmarksMessages = createSelector(
 	state => state.syncMessages
 );
 
+export const selectorEditDialogVisible = createSelector(
+	selectorBookmarksState,
+	state => state.editDialogVisible
+);

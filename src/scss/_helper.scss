@@ -14,6 +14,12 @@
 	align-items	: center;
 }
 
+%flex-center-start {
+	display			: flex;
+	justify-content	: center;
+	align-items		: start;
+}
+
 %flex-column {
 	display			: flex;
 	flex-direction	: column;

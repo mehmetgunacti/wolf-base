@@ -3,6 +3,7 @@ import { Bookmark, SYNC_STATES } from 'lib';
 
 export interface BookmarksState extends EntityState<Bookmark> {
 
+	editDialogVisible: boolean;
 	syncRequired: number;
 	syncStatus: SYNC_STATES;
 	syncMessages: string[];
@@ -16,9 +17,10 @@ export const bookmarksInitialState: BookmarksState = bookmarksAdapter.getInitial
 
 	ids: [],
 	entities: {},
+	editDialogVisible: false,
 	syncRequired: 0,
 	syncStatus: SYNC_STATES.READY,
 	syncMessages: [],
-	syncForceOverride: false,
+	syncForceOverride: false
 
 });

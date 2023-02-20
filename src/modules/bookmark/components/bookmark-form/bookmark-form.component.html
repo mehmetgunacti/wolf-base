@@ -1,25 +1,75 @@
+<div bookmark-wrapper *ngIf="(bookmark$ | async) as bookmark">
+
+	<app-bookmark [item]="bookmark"></app-bookmark>
+	<div bookmark-overlay></div>
+
+</div>
+
 <form [formGroup]="form">
 
-	<div class="p-fluid formgrid">
-
-    		<div class="field">
-
-			<label for="id">id</label>
-                    <input id="id"
-                                       type="text"
-                                       pInputText
-                                       formControlName="id">
-			<small *ngIf="form.controls['id'].invalid && form.controls['id'].dirty"
-				   class="p-error">Id is not available.</small>
-
+		<div form-element-image>
+			<img src="{{ PLACEHOLDER_QUESTIONMARK }}">
 		</div>
+
+		<div form-element-name>
+			<span class="p-float-label">
+				<input
+					type="text"
+					pInputText
+					[ngClass]="{ 'ng-invalid ng-dirty': form.controls['name'].invalid && form.controls['name'].dirty }"
+					formControlName="name">
+				<label>Name</label>
+			</span>
+		</div>
+
+		<div form-element-url>
+			<span class="p-float-label">
+				<input
+					type="text"
+					pInputText
+					[ngClass]="{ 'ng-invalid ng-dirty': form.controls['url'].invalid && form.controls['url'].dirty }"
+					formControlName="url">
+				<label>Url</label>
+			</span>
+		</div>
+
+		<div form-element-title>
+			<span class="p-float-label">
+				<input
+					type="text"
+					pInputText
+					[ngClass]="{ 'ng-invalid ng-dirty': form.controls['title'].invalid && form.controls['title'].dirty }"
+					formControlName="title">
+				<label>Title</label>
+			</span>
+		</div>
+
+		<div form-element-tags>
+			<span class="p-float-label">
+				<input
+					type="text"
+					pInputText
+					[ngClass]="{ 'ng-invalid ng-dirty': form.controls['tags'].invalid && form.controls['tags'].dirty }"
+					formControlName="tags">
+				<label>Tags</label>
+			</span>
+		</div>
+
+		<div form-element-buttons>
+			<button pButton type="button" label="Cancel" icon="pi pi-times" iconPos="left" class="p-button-secondary"></button>
+			<button pButton type="button" label="Save" icon="pi pi-save" iconPos="left"></button>
+		</div>
+
+</form>
+<!-- 
+
 		<div class="field">
 
 			<label for="name">name</label>
                     <input id="name"
-                                       type="text"
-                                       pInputText
-                                       formControlName="name">
+						type="text"
+						pInputText
+						formControlName="name">
 			<small *ngIf="form.controls['name'].invalid && form.controls['name'].dirty"
 				   class="p-error">Name is not available.</small>
 
@@ -28,9 +78,9 @@
 
 			<label for="title">title</label>
                     <input id="title"
-                                       type="text"
-                                       pInputText
-                                       formControlName="title">
+						type="text"
+						pInputText
+						formControlName="title">
 			<small *ngIf="form.controls['title'].invalid && form.controls['title'].dirty"
 				   class="p-error">Title is not available.</small>
 
@@ -39,9 +89,9 @@
 
 			<label for="tags">tags</label>
                     <input id="tags"
-                                       type="text"
-                                       pInputText
-                                       formControlName="tags">
+						type="text"
+						pInputText
+						formControlName="tags">
 			<small *ngIf="form.controls['tags'].invalid && form.controls['tags'].dirty"
 				   class="p-error">Tags is not available.</small>
 
@@ -61,9 +111,9 @@
 
 			<label for="url">url</label>
                     <input id="url"
-                                       type="text"
-                                       pInputText
-                                       formControlName="url">
+						type="text"
+						pInputText
+						formControlName="url">
 			<small *ngIf="form.controls['url'].invalid && form.controls['url'].dirty"
 				   class="p-error">Url is not available.</small>
 
@@ -72,9 +122,9 @@
 
 			<label for="clicks">clicks</label>
                     <input id="clicks"
-                                       type="text"
-                                       pInputText
-                                       formControlName="clicks">
+							type="text"
+							pInputText
+							formControlName="clicks">
 			<small *ngIf="form.controls['clicks'].invalid && form.controls['clicks'].dirty"
 				   class="p-error">Clicks is not available.</small>
 
@@ -92,4 +142,4 @@
 
 	</div>
 
-</form>
+</form> -->

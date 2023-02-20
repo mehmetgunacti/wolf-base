@@ -1,1 +1,99 @@
-// app-bookmark-form {}
+app-bookmark-form {
+
+	display                     : grid;
+	grid-template-columns		: 1fr;
+	// grid-template-rows			: auto 1fr;
+	grid-template-areas			: "b" // bookmark
+	 							  "f"; // form
+	grid-gap					: 1rem;
+
+	& > app-bookmark {
+
+		grid-area				: b;
+
+	}
+
+	& > form {
+
+		grid-area				: f;
+
+		display                     : grid;
+		grid-gap					: 1rem;
+		grid-template-areas			: "fe1"
+									  "fe2"
+									  "fe3"
+									  "fe4"
+									  "fe5"
+									  "fe6";
+		
+		@include md() {
+
+			grid-template-columns	: 100px 1fr;
+			grid-template-areas		: "fe1 fe2"
+									  "fe1 fe3"
+									  "fe1 fe4"
+									  "fe1 fe5"
+									  "fe6 fe6";
+
+		}
+
+		& input {
+			width: 100%;
+		}
+
+		& > div[form-element-image] {
+			grid-area: fe1;
+			@extend %flex-center-start;
+		}
+
+		& > div[form-element-name] {
+			grid-area: fe2;
+		}
+
+		& > div[form-element-url] {
+			grid-area: fe3;
+		}
+
+		& > div[form-element-title] {
+			grid-area: fe4;
+		}
+
+		& > div[form-element-tags] {
+			grid-area: fe5;
+		}
+
+		& > div[form-element-buttons] {
+			grid-area: fe6;
+			@extend %flex-space-between-center;
+		}
+		
+	}
+
+	& > div[bookmark-wrapper] {
+
+		position						: relative;
+		min-height						: 10rem;
+		// padding-bottom					: 1.5rem;
+		
+		& > div[bookmark-overlay] {
+
+			position					: absolute;
+			width						: 100%;
+			height						: 100%;
+			top							: 0;
+			left						: 0;
+			background-color			: transparent;
+			pointer-events				: auto;
+
+		}
+
+		// & > app-bookmark {
+
+		// 	position					: relative;
+		// 	& > #wrapper {
+		// 		min-height				: 13.2rem;
+		// 	}
+		// }
+	}
+
+}
