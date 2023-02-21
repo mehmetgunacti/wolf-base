@@ -5,10 +5,13 @@
 
 </div>
 
-<form [formGroup]="form">
+<form>
 
 		<div form-element-image>
-			<img src="{{ PLACEHOLDER_QUESTIONMARK }}">
+			<app-croppie
+				[wControl]="form.image"
+				wType="circle"
+				wClass="primary"></app-croppie>
 		</div>
 
 		<div form-element-name>
@@ -16,8 +19,8 @@
 				<input
 					type="text"
 					pInputText
-					[ngClass]="{ 'ng-invalid ng-dirty': form.controls['name'].invalid && form.controls['name'].dirty }"
-					formControlName="name">
+					[ngClass]="{ 'ng-invalid ng-dirty': form.name.invalid && form.name.dirty }"
+					[formControl]="form.name">
 				<label>Name</label>
 			</span>
 		</div>
@@ -27,8 +30,8 @@
 				<input
 					type="text"
 					pInputText
-					[ngClass]="{ 'ng-invalid ng-dirty': form.controls['url'].invalid && form.controls['url'].dirty }"
-					formControlName="url">
+					[ngClass]="{ 'ng-invalid ng-dirty': form.url.invalid && form.url.dirty }"
+					[formControl]="form.url">
 				<label>Url</label>
 			</span>
 		</div>
@@ -38,8 +41,8 @@
 				<input
 					type="text"
 					pInputText
-					[ngClass]="{ 'ng-invalid ng-dirty': form.controls['title'].invalid && form.controls['title'].dirty }"
-					formControlName="title">
+					[ngClass]="{ 'ng-invalid ng-dirty': form.title.invalid && form.title.dirty }"
+					[formControl]="form.title">
 				<label>Title</label>
 			</span>
 		</div>
@@ -49,8 +52,8 @@
 				<input
 					type="text"
 					pInputText
-					[ngClass]="{ 'ng-invalid ng-dirty': form.controls['tags'].invalid && form.controls['tags'].dirty }"
-					formControlName="tags">
+					[ngClass]="{ 'ng-invalid ng-dirty': form.tags.invalid && form.tags.dirty }"
+					[formControl]="form.tags">
 				<label>Tags</label>
 			</span>
 		</div>

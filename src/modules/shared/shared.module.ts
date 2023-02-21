@@ -4,12 +4,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { PrimeNgModule } from 'modules/primeng.module';
-import { PortalComponent, TagCloudComponent } from './components';
+import { CroppieComponent, PortalComponent, TagCloudComponent } from './components';
 
 @NgModule({
 	declarations: [
 		PortalComponent,
-		TagCloudComponent
+		TagCloudComponent,
+		CroppieComponent
 	],
 	imports: [
 		CommonModule,
@@ -22,7 +23,8 @@ import { PortalComponent, TagCloudComponent } from './components';
 		PortalComponent,
 		TagCloudComponent,
 		TranslateModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		CroppieComponent
 	],
 	providers: []
 })

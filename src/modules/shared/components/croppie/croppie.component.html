@@ -1,0 +1,23 @@
+<div class="img-thumbnail">
+
+	<span id="close"
+		  *ngIf="(bound$ | async) else placeholder"
+		  (click)="unbindCroppie()"><i class="pi pi-times-circle"></i></span>
+
+	<ng-template #placeholder>
+		<div id="croppie-placeholder"
+			 (click)="fileinput.click()">
+			<i class="pi pi-image"
+			   style="font-size: 24px; color: grey; margin: 5px;"></i>
+			<span>Pick Image</span>
+		</div>
+	</ng-template>
+	<div #croppieDiv
+		 [ngStyle]="{'visibility': (bound$ | async) ? 'visible': 'hidden'}"></div>
+
+</div>
+<input #fileinput
+	   type="file"
+	   (change)="onFileSelected($event)"
+	   accept="image/gif, image/jpeg, image/png"
+	   style="display: none;">

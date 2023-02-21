@@ -7,7 +7,7 @@ import * as PSL from 'psl';
 
 export class EditForm implements IFormClass<Bookmark> {
 
-	private formGroup: FormGroup;
+	private _formGroup: FormGroup;
 	private subscriptions: Subscription = new Subscription();
 
 	constructor(bookmark: Bookmark | null | undefined) {
@@ -15,7 +15,7 @@ export class EditForm implements IFormClass<Bookmark> {
 		if (bookmark)
 			this.setProperties(bookmark);
 
-		this.formGroup = new FormGroup({
+		this._formGroup = new FormGroup({
 			name: new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
 			title: new FormControl('', { validators: [Validators.required], nonNullable: true }),
 			tags: new FormControl([], { validators: [Validators.required], nonNullable: true }),
@@ -61,23 +61,23 @@ export class EditForm implements IFormClass<Bookmark> {
 	}
 
 	get name(): FormControl<string> {
-		return <FormControl<string>> this.formGroup.controls['name'];
+		return <FormControl<string>> this._formGroup.controls['name'];
 	}
 
 	get title(): FormControl<string> {
-		return <FormControl<string>> this.formGroup.controls['title'];
+		return <FormControl<string>> this._formGroup.controls['title'];
 	}
 	
 	get tags(): FormControl<string[]> {
-		return <FormControl<string[]>> this.formGroup.controls['tags'];
+		return <FormControl<string[]>> this._formGroup.controls['tags'];
 	}
 	
 	get image(): FormControl<string | null> {
-		return <FormControl<string | null>> this.formGroup.controls['image'];
+		return <FormControl<string | null>> this._formGroup.controls['image'];
 	}
 	
 	get url(): FormControl<string> {
-		return <FormControl<string>> this.formGroup.controls['url'];
+		return <FormControl<string>> this._formGroup.controls['url'];
 	}
 
 	setProperties(bookmark: Bookmark): void {
@@ -90,8 +90,8 @@ export class EditForm implements IFormClass<Bookmark> {
 
 	}
 
-	getFormGroup(): FormGroup {
-		return this.formGroup;
+	get formGroup(): FormGroup {
+		return this._formGroup;
 	}
 
 	destroy(): void {

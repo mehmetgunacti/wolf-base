@@ -2,33 +2,30 @@ app-bookmark-form {
 
 	display                     : grid;
 	grid-template-columns		: 1fr;
-	// grid-template-rows			: auto 1fr;
+	grid-gap					: 1rem;
 	grid-template-areas			: "b" // bookmark
 	 							  "f"; // form
-	grid-gap					: 1rem;
 
 	& > app-bookmark {
-
-		grid-area				: b;
-
+		grid-area 				: b;
 	}
 
 	& > form {
 
 		grid-area				: f;
 
-		display                     : grid;
-		grid-gap					: 1rem;
-		grid-template-areas			: "fe1"
-									  "fe2"
-									  "fe3"
-									  "fe4"
-									  "fe5"
-									  "fe6";
+		display                 : grid;
+		grid-gap				: 1rem;
+		grid-template-areas		: "fe1"
+								  "fe2"
+								  "fe3"
+								  "fe4"
+								  "fe5"
+								  "fe6";
 		
 		@include md() {
 
-			grid-template-columns	: 100px 1fr;
+			grid-template-columns	: 150px 1fr;
 			grid-template-areas		: "fe1 fe2"
 									  "fe1 fe3"
 									  "fe1 fe4"
@@ -73,7 +70,6 @@ app-bookmark-form {
 
 		position						: relative;
 		min-height						: 10rem;
-		// padding-bottom					: 1.5rem;
 		
 		& > div[bookmark-overlay] {
 
@@ -87,13 +83,6 @@ app-bookmark-form {
 
 		}
 
-		// & > app-bookmark {
-
-		// 	position					: relative;
-		// 	& > #wrapper {
-		// 		min-height				: 13.2rem;
-		// 	}
-		// }
 	}
 
 }

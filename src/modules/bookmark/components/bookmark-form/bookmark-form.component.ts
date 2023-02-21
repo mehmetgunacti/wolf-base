@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Bookmark, PLACEHOLDER_QUESTIONMARK } from 'lib';
 import { isInvalid } from 'modules/shared';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
@@ -18,14 +18,16 @@ export class BookmarkFormComponent implements OnChanges, OnDestroy {
 	@Output() save: EventEmitter<Bookmark> = new EventEmitter();
 
 	bookmark$: BehaviorSubject<Bookmark>;
-	private editForm: EditForm;
+	form: EditForm;
 	subscriptions: Subscription = new Subscription();
-	form: FormGroup;
+	formGroup: FormGroup;
+	formName: FormControl;
 
 	constructor() {
 
-		this.editForm = new EditForm(this.bookmark);
-		this.form = this.editForm.getFormGroup();
+		this.formName = new FormControl('');
+		this.form = new EditForm(this.bookmark);
+		this.formGroup = this.form.formGroup;
 		this.bookmark$ = new BehaviorSubject(this.bookmark || {} as Bookmark);
 
 	}
@@ -33,7 +35,7 @@ export class BookmarkFormComponent implements OnChanges, OnDestroy {
 	ngOnInit(): void {
 
 		this.subscriptions.add(
-			this.form.valueChanges.pipe(
+			this.form.formGroup.valueChanges.pipe(
 
 				debounceTime(200),
 				distinctUntilChanged()
@@ -47,14 +49,14 @@ export class BookmarkFormComponent implements OnChanges, OnDestroy {
 
 	ngOnDestroy(): void {
 		this.subscriptions.unsubscribe();
-		this.editForm.destroy();
+		this.form.destroy();
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
 
 		const bookmark: Bookmark = changes['bookmark']?.currentValue;
 		if (bookmark)
-			this.form.patchValue({
+			this.form.formGroup.patchValue({
 				...bookmark,
 			});
 
@@ -62,10 +64,10 @@ export class BookmarkFormComponent implements OnChanges, OnDestroy {
 
 	onSave(): void {
 
-		if (isInvalid(this.form))
+		if (isInvalid(this.form.formGroup))
 			return;
 
-		this.save.emit(this.form.value);
+		this.save.emit(this.form.formGroup.value);
 
 	}
 
