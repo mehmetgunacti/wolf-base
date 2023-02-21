@@ -45,12 +45,12 @@ export class EditForm implements IFormClass<Bookmark> {
 					// get the title of the web page
 					const { origin, pathname } = url;
 					const term = `${origin}${pathname}`;
-					fetch('https://textance.herokuapp.com/title/' + encodeURI(term)).then(
-						response => response.json().then(
-								json => {
-									this.title.setValue(json['title']);
-									this.title.markAsDirty();
-								}
+					fetch('https://title.mihir.ch/' + encodeURI(term)).then(
+						response => response.text().then(
+							title => {
+								this.title.setValue(title);
+								this.title.markAsDirty();
+							}
 						)
 					);
 
