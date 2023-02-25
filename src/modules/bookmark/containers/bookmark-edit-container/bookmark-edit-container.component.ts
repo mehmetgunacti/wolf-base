@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark } from 'lib';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, map, Observable, Subject } from 'rxjs';
 import * as fromStore from '../../store';
 
 @Component({
@@ -32,22 +32,22 @@ export class BookmarkEditContainerComponent {
 
 	ngAfterContentInit(): void {
 
-		// this.tagboxSuggestions$ = combineLatest([
-		// 	this.store.select(fromStore.selectorTagsArray),
-		// 	this.tagInput
-		// ]).pipe(
+		this.tagboxSuggestions$ = combineLatest([
+			this.store.select(fromStore.selectorTagsArray),
+			this.tagInput
+		]).pipe(
 
-		// 	filter(([tags, tagInput]) => !!tagInput && tags.length > 0),
-		// 	map(
+			filter(([tags, tagInput]) => !!tagInput && tags.length > 0),
+			map(
 
-		// 		([tags, tagInput]) =>
-		// 			tags
-		// 				.filter(t => t.id.startsWith(tagInput))
-		// 				.map(t => t.id)
+				([tags, tagInput]) =>
+					tags
+						.filter(t => t.id.startsWith(tagInput))
+						.map(t => t.id)
 
-		// 	)
+			)
 
-		// );
+		);
 
 	}
 

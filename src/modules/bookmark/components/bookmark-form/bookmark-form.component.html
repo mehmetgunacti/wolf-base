@@ -49,11 +49,17 @@
 
 		<div form-element-tags>
 			<span class="p-float-label">
-				<input
+				<!-- <input
 					type="text"
 					pInputText
 					[ngClass]="{ 'ng-invalid ng-dirty': form.tags.invalid && form.tags.dirty }"
-					[formControl]="form.tags">
+					[formControl]="form.tags"> -->
+				<p-autoComplete
+					[formControl]="form.tags"
+					[suggestions]="['a', 'b']"
+					(completeMethod)="onTagInput($event)"
+					[multiple]="true">
+				</p-autoComplete>
 				<label>Tags</label>
 			</span>
 		</div>

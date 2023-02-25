@@ -18,7 +18,7 @@ export class EditForm implements IFormClass<Bookmark> {
 		this._formGroup = new FormGroup({
 			name: new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
 			title: new FormControl('', { validators: [Validators.required], nonNullable: true }),
-			tags: new FormControl([], { validators: [Validators.required], nonNullable: true }),
+			tags: new FormControl(['abc', 'def', 'ghi'], { validators: [Validators.required], nonNullable: true }),
 			image: new FormControl(''),
 			url: new FormControl('', { validators: [Validators.required], nonNullable: true })
 		});

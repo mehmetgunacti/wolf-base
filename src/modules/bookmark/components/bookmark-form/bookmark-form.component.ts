@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Bookmark, PLACEHOLDER_QUESTIONMARK } from 'lib';
+import { Bookmark } from 'lib';
 import { isInvalid } from 'modules/shared';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, Observable, Subject, Subscription } from 'rxjs';
 import { EditForm } from './bookmark-form';
+import * as fromStore from '../../store';
 
 @Component({
 	selector: 'app-bookmark-form',
@@ -11,17 +12,19 @@ import { EditForm } from './bookmark-form';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarkFormComponent implements OnChanges, OnDestroy {
-	PLACEHOLDER_QUESTIONMARK = PLACEHOLDER_QUESTIONMARK;
 
 	@Input() bookmark: Bookmark | null | undefined;
 
 	@Output() save: EventEmitter<Bookmark> = new EventEmitter();
+	@Output() tagInput: EventEmitter<string> = new EventEmitter();
 
 	bookmark$: BehaviorSubject<Bookmark>;
 	form: EditForm;
 	subscriptions: Subscription = new Subscription();
+	tagboxSuggestions$!: Observable<string[]>;
 	formGroup: FormGroup;
 	formName: FormControl;
+	t1: string = '';
 
 	constructor() {
 
@@ -68,6 +71,13 @@ export class BookmarkFormComponent implements OnChanges, OnDestroy {
 			return;
 
 		this.save.emit(this.form.formGroup.value);
+
+	}
+
+	onTagInput(event: Event): void {
+
+		console.log(event);
+		// this.tagInput.next(val);
 
 	}
 

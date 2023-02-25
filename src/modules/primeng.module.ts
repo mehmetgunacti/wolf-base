@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AvatarModule } from 'primeng/avatar';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -30,6 +31,7 @@ import { TabViewModule } from 'primeng/tabview';
 
 export const modules = [
 	AvatarModule,
+	AutoCompleteModule,
 	BreadcrumbModule,
 	ButtonModule,
 	CalendarModule,
