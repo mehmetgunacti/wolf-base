@@ -63,6 +63,7 @@ app-core-page {
 
 		article {
 
+			@extend %w359-scrollbar;
 			flex		: 1;
 			padding		: $default-padding;
 			overflow-y	: auto;

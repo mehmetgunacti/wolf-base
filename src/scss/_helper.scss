@@ -65,3 +65,23 @@
 	justify-content	: flex-end;
 	align-items		: center;
 }
+
+%w359-scrollbar {
+
+	overflow-y						: scroll;
+
+	&::-webkit-scrollbar {
+		width						: var(--w359-scrollbar-width);
+		border-radius				: var(--w359-scrollbar-border-radius);
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color			: var(--w359-scrollbar-background-color);
+		border-radius				: var(--w359-scrollbar-border-radius);
+	}
+
+}
+
+.w359-scrollbar {
+	@extend %w359-scrollbar;
+}
