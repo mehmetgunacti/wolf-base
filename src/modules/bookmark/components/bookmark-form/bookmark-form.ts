@@ -3,7 +3,8 @@ import { isURL } from '@fireflysemantics/validatorts';
 import { Bookmark } from 'lib';
 import { IFormClass } from 'modules/shared';
 import { debounceTime, distinctUntilChanged, filter, map, Subscription } from 'rxjs';
-import * as PSL from 'psl';
+import { parse } from 'tldts';
+import { IResult } from 'tldts-core';
 
 export class EditForm implements IFormClass<Bookmark> {
 
@@ -36,7 +37,7 @@ export class EditForm implements IFormClass<Bookmark> {
 				url => {
 
 					// set name
-					const parsed = PSL.parse(url.hostname) as PSL.ParsedDomain;
+					const parsed = parse(url.hostname) as IResult;
 					if (parsed.domain) {
 						this.name.setValue(parsed.domain);
 						this.name.markAsDirty();
