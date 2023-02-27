@@ -50,8 +50,8 @@ export class BookmarksPageComponent implements OnInit {
 		{ "id": "brands", count: 4 },
 		{ "id": "colors", count: 6 },
 		{ "id": "css", count: 21 },
-		{ "id": "events", count: 12 },
-		{ "id": "falcon", count: 8 },
+		{ "id": "cvents", count: 12 },
+		{ "id": "calcon", count: 8 },
 		{ "id": "free", count: 21 },
 		{ "id": "git", count: 1 },
 		{ "id": "im-bored", count: 19 },
@@ -78,7 +78,7 @@ export class BookmarksPageComponent implements OnInit {
 			"name": "SpaceX",
 			"tags": [
 				"brands",
-				"space",
+				"cpace",
 				"falcon"
 			],
 			"title": "It's been a long road",
@@ -91,7 +91,7 @@ export class BookmarksPageComponent implements OnInit {
 			"name": "dealntech.com",
 			"tags": [
 				"im-bored",
-				"news"
+				"cnews"
 			],
 			"title": "Mobile Phones News, Specifications, Reviews",
 			"url": "https://www.dealntech.com"
@@ -103,7 +103,7 @@ export class BookmarksPageComponent implements OnInit {
 			"name": "drawkit.io",
 			"tags": [
 				"free",
-				"resource"
+				"cresource"
 			],
 			"title": "Beautiful free vector illustrations",
 			"url": "https://www.drawkit.io/"
@@ -115,7 +115,7 @@ export class BookmarksPageComponent implements OnInit {
 			"name": "Codementor",
 			"tags": [
 				"programming",
-				"git"
+				"cgit"
 			],
 			"title": "10 Common Git Problems and How to Fix Them",
 			"url": "https://www.codementor.io/@citizen428/git-tutorial-10-common-git-problems-and-how-to-fix-them-aajv0katd"

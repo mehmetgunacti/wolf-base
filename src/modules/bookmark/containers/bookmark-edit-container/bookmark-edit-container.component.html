@@ -1,33 +1,5 @@
 <app-bookmark-form
 		[bookmark]="bookmark"
-		(save)="onSave($event)"></app-bookmark-form>
-
-<!-- 
-<div *ngIf="bookmark$ | async as bookmark else nodata">
-
-	<div class="p-fieldset-legend fieldset-right">
-		<button pButton
-				label="Cancel"
-				icon="pi pi-times"
-				[routerLink]="['/bookmarks', bookmark.id]"
-				class="p-button-text p-button-sm"></button>
-	</div>
-	<app-bookmark-form
-		[bookmark]="bookmark"
-		(save)="onSave($event)"></app-bookmark-form>
-
-</div>
-<ng-template #nodata>
-
-	<div class="p-fieldset-legend fieldset-right">
-		<button pButton
-				label="Go back"
-				icon="pi pi-undo-alt"
-				[routerLink]="['/bookmarks']"
-				class="p-button-text p-button-sm"></button>
-	</div>
-	<div class="flex justify-content-between align-items-center">
-		No content to display
-	</div>
-
-</ng-template> -->
+		[tagSuggestions]="tagSuggestions$ | async"
+		(save)="onSave($event)"
+		(tagInput)="onTagInput($event)"></app-bookmark-form>

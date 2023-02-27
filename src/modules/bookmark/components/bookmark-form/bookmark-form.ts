@@ -13,9 +13,6 @@ export class EditForm implements IFormClass<Bookmark> {
 
 	constructor(bookmark: Bookmark | null | undefined) {
 
-		if (bookmark)
-			this.setProperties(bookmark);
-
 		this._formGroup = new FormGroup({
 			name: new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
 			title: new FormControl('', { validators: [Validators.required], nonNullable: true }),
@@ -23,6 +20,9 @@ export class EditForm implements IFormClass<Bookmark> {
 			image: new FormControl(''),
 			url: new FormControl('', { validators: [Validators.required], nonNullable: true })
 		});
+
+		if (bookmark)
+			this.setProperties(bookmark);
 
 		this.subscriptions.add(
 			this.url.valueChanges.pipe(
@@ -61,6 +61,16 @@ export class EditForm implements IFormClass<Bookmark> {
 
 	}
 
+	setProperties(bookmark: Bookmark): void {
+
+		this.name.setValue(bookmark.name);
+		this.title.setValue(bookmark.title);
+		this.tags.setValue(bookmark.tags);
+		this.image.setValue(bookmark.image);
+		this.url.setValue(bookmark.url);
+
+	}
+
 	get name(): FormControl<string> {
 		return <FormControl<string>> this._formGroup.controls['name'];
 	}
@@ -79,16 +89,6 @@ export class EditForm implements IFormClass<Bookmark> {
 	
 	get url(): FormControl<string> {
 		return <FormControl<string>> this._formGroup.controls['url'];
-	}
-
-	setProperties(bookmark: Bookmark): void {
-
-		this.name.setValue(bookmark.name);
-		this.title.setValue(bookmark.title);
-		this.tags.setValue(bookmark.tags);
-		this.image.setValue(bookmark.image);
-		this.url.setValue(bookmark.url);
-
 	}
 
 	get formGroup(): FormGroup {

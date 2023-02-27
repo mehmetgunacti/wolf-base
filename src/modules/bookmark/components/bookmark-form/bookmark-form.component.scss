@@ -34,10 +34,6 @@ app-bookmark-form {
 
 		}
 
-		& input {
-			width: 100%;
-		}
-
 		& > div[form-element-image] {
 			grid-area: fe1;
 			@extend %flex-center-start;

@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark } from 'lib';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { BehaviorSubject, combineLatest, filter, map, Observable, Subject } from 'rxjs';
+import { combineLatest, filter, map, Observable, Subject } from 'rxjs';
 import * as fromStore from '../../store';
 
 @Component({
@@ -12,27 +11,22 @@ import * as fromStore from '../../store';
 })
 export class BookmarkEditContainerComponent {
 
-	tagboxSuggestions$!: Observable<string[]>;
+	tagSuggestions$!: Observable<string[]>;
 	tagInput = new Subject<string>();
-	
+
 	@Input() bookmark: Bookmark | undefined;
 
 	constructor(
 		private store: Store<fromStore.BookmarksState>
 	) {
-
 		console.log(this.bookmark);
-
 	}
 
-	ngOnInit(): void {
-
-
-	}
+	ngOnInit(): void { }
 
 	ngAfterContentInit(): void {
 
-		this.tagboxSuggestions$ = combineLatest([
+		this.tagSuggestions$ = combineLatest([
 			this.store.select(fromStore.selectorTagsArray),
 			this.tagInput
 		]).pipe(
@@ -55,6 +49,7 @@ export class BookmarkEditContainerComponent {
 
 	onSave(f: Bookmark): void {
 
+		console.log(f);
 		// if (this.formGroup.invalid)
 		// 	markFieldsAsDirty(this.formGroup);
 
@@ -92,7 +87,7 @@ export class BookmarkEditContainerComponent {
 
 	}
 
-	close(): void {}
+	close(): void { }
 
 	onTagInput(val: string): void {
 

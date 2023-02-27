@@ -15,7 +15,7 @@
 		</div>
 
 		<div form-element-name>
-			<span class="p-float-label">
+			<span class="p-float-label p-fluid">
 				<input
 					type="text"
 					pInputText
@@ -26,7 +26,7 @@
 		</div>
 
 		<div form-element-url>
-			<span class="p-float-label">
+			<span class="p-float-label p-fluid">
 				<input
 					type="text"
 					pInputText
@@ -37,7 +37,7 @@
 		</div>
 
 		<div form-element-title>
-			<span class="p-float-label">
+			<span class="p-float-label p-fluid">
 				<input
 					type="text"
 					pInputText
@@ -48,17 +48,15 @@
 		</div>
 
 		<div form-element-tags>
-			<span class="p-float-label">
-				<!-- <input
-					type="text"
-					pInputText
-					[ngClass]="{ 'ng-invalid ng-dirty': form.tags.invalid && form.tags.dirty }"
-					[formControl]="form.tags"> -->
+			<span class="p-float-label p-fluid">
 				<p-autoComplete
+					#autocomplete
 					[formControl]="form.tags"
-					[suggestions]="['a', 'b']"
+					[suggestions]="(tagSuggestions$ | async) || []"
 					(completeMethod)="onTagInput($event)"
-					[multiple]="true">
+					[multiple]="true"
+					[baseZIndex]="10000"
+					appendTo="body">
 				</p-autoComplete>
 				<label>Tags</label>
 			</span>
@@ -66,89 +64,7 @@
 
 		<div form-element-buttons>
 			<button pButton type="button" label="Cancel" icon="pi pi-times" iconPos="left" class="p-button-secondary"></button>
-			<button pButton type="button" label="Save" icon="pi pi-save" iconPos="left"></button>
+			<button pButton type="button" label="Save" icon="pi pi-save" iconPos="left" (click)="onSave()"></button>
 		</div>
 
 </form>
-<!-- 
-
-		<div class="field">
-
-			<label for="name">name</label>
-                    <input id="name"
-						type="text"
-						pInputText
-						formControlName="name">
-			<small *ngIf="form.controls['name'].invalid && form.controls['name'].dirty"
-				   class="p-error">Name is not available.</small>
-
-		</div>
-		<div class="field">
-
-			<label for="title">title</label>
-                    <input id="title"
-						type="text"
-						pInputText
-						formControlName="title">
-			<small *ngIf="form.controls['title'].invalid && form.controls['title'].dirty"
-				   class="p-error">Title is not available.</small>
-
-		</div>
-		<div class="field">
-
-			<label for="tags">tags</label>
-                    <input id="tags"
-						type="text"
-						pInputText
-						formControlName="tags">
-			<small *ngIf="form.controls['tags'].invalid && form.controls['tags'].dirty"
-				   class="p-error">Tags is not available.</small>
-
-		</div>
-		<div class="field">
-
-			<label for="image">image</label>
-                    <input id="image"
-                                       type="text"
-                                       pInputText
-                                       formControlName="image">
-			<small *ngIf="form.controls['image'].invalid && form.controls['image'].dirty"
-				   class="p-error">Image is not available.</small>
-
-		</div>
-		<div class="field">
-
-			<label for="url">url</label>
-                    <input id="url"
-						type="text"
-						pInputText
-						formControlName="url">
-			<small *ngIf="form.controls['url'].invalid && form.controls['url'].dirty"
-				   class="p-error">Url is not available.</small>
-
-		</div>
-		<div class="field">
-
-			<label for="clicks">clicks</label>
-                    <input id="clicks"
-							type="text"
-							pInputText
-							formControlName="clicks">
-			<small *ngIf="form.controls['clicks'].invalid && form.controls['clicks'].dirty"
-				   class="p-error">Clicks is not available.</small>
-
-		</div>
-	</div>
-
-	<div class="flex">
-
-		<button pButton
-				label="Save"
-				[disabled]="form.pristine || form.invalid"
-				icon="pi pi-save"
-				(click)="onSave()"
-				class="p-button-raised ml-auto"></button>
-
-	</div>
-
-</form> -->
