@@ -3,8 +3,6 @@ import { isURL } from '@fireflysemantics/validatorts';
 import { Bookmark } from 'lib';
 import { IFormClass } from 'modules/shared';
 import { debounceTime, distinctUntilChanged, filter, map, Subscription } from 'rxjs';
-import { parse } from 'tldts';
-import { IResult } from 'tldts-core';
 
 export class EditForm implements IFormClass<Bookmark> {
 
@@ -36,12 +34,10 @@ export class EditForm implements IFormClass<Bookmark> {
 			).subscribe(
 				url => {
 
-					// set name
-					const parsed = parse(url.hostname) as IResult;
-					if (parsed.domain) {
-						this.name.setValue(parsed.domain);
-						this.name.markAsDirty();
-					}
+					// set hostname as bookmark name
+					const hostname = this.parseHostname(url.hostname);
+					this.name.setValue(hostname);
+					this.name.markAsDirty();
 
 					// get the title of the web page
 					const { origin, pathname } = url;
@@ -59,6 +55,15 @@ export class EditForm implements IFormClass<Bookmark> {
 			)
 		);
 
+	}
+
+	private parseHostname(url: string): string {
+		try {
+			const hostname = new URL(url).hostname;
+			return hostname.startsWith('www.') ? hostname.substring(4) : hostname;
+		} catch(err) {
+			return 'n/a';
+		}
 	}
 
 	setProperties(bookmark: Bookmark): void {
