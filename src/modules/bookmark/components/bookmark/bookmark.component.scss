@@ -81,11 +81,17 @@ app-bookmark {
 
 				button.p-button {
 
-					padding			: 1px 5px;
-					margin-top		: 3px;
-					margin-right	: 3px;
-					min-width		: initial;
-					font-size		: 0.75rem;
+					padding				: 1px 5px;
+					margin-top			: 3px;
+					margin-right		: 3px;
+					min-width			: initial;
+					font-size			: 0.75rem;
+					background-color	: transparent;
+    				color				: var(--primary-color);
+
+					&:hover, &:active, &:focus {
+						color			: var(--text-color);
+					}
 
 				}
 
