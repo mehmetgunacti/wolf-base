@@ -1,44 +1,69 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ScriptLoaderService {
 
-	private scripts: Map<string, HTMLScriptElement> = new Map();
+	private scripts: Map<string, BehaviorSubject<boolean>> = new Map();
+	private styles: Map<string, BehaviorSubject<boolean>> = new Map();
 
-	loadScript(url: string) {
+	constructor(
+		@Inject(DOCUMENT) private readonly document: Document
+	) {}
 
-		if (this.scripts.has(url))
-			return;
+	loadScript(url: string): Observable<boolean> {
+
+		const existing = this.scripts.get(url);
+		if (existing)
+			return existing.asObservable();
+
+		const subject = new BehaviorSubject<boolean>(false);
+		this.scripts.set(url, subject);
 
 		// create script element
-		const script = document.createElement('script');
+		const script = this.document.createElement('script');
 		script.type = 'text/javascript';
 		script.src = url;
 		script.async = true;
 		script.defer = true;
+		script.onload = () => {
+			subject.next(true);
+			subject.complete();
+		}
 
-		// add script element to head
-		document.head.appendChild(script);
+		// add script element to head (for 'body', add parameters to this method)
+		this.document.head.appendChild(script);
 
-		// store script element in script map
-		this.scripts.set(url, script);
+		return subject.asObservable();
 
 	}
 
-	removeScript(url: string) {
+	loadCSS(url: string): Observable<boolean> {
 
-		const script = this.scripts.get(url);
-		if (script) {
+		const existing = this.styles.get(url);
+		if (existing)
+			return existing.asObservable();
 
-			// remove script element from head
-			document.head.removeChild(script);
+		const subject = new BehaviorSubject<boolean>(false);
+		this.styles.set(url, subject);
 
-			// remove script element from script map
-			this.scripts.delete(url);
-
+		// create link element
+		const css: HTMLLinkElement = this.document.createElement('link');
+		css.rel = 'stylesheet';
+		css.type = 'text/css';
+		css.href = url;
+		css.onload = () => {
+			subject.next(true);
+			subject.complete();
 		}
+
+		// add style element to head
+		this.document.head.appendChild(css);
+
+		return subject.asObservable();
 
 	}
 

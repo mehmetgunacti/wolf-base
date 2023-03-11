@@ -1,47 +1,73 @@
-import * as Croppie from 'croppie';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
-export interface ICroppie {
+export interface CroppieWrapper {
 
 	result$: Observable<string>;
-	bound$: Observable<boolean>;
-	init(el: HTMLElement): void;
+	imageLoaded$: Observable<boolean>;
+	initialized$: Observable<boolean>;
+	init(croppie: Croppie, el: HTMLElement): void;
 	bind(url: string, sendResult?: boolean): void;
 	unbind(): void;
 	destroy(): void;
 
 }
 
-class CroppieImpl implements ICroppie {
-
-	private croppie!: Croppie | null;
-	private el!: HTMLElement;
+class CroppieWrapperImpl implements CroppieWrapper {
 
 	private result = new Subject<string>();
-	get result$(): Observable<string> {
-		return this.result.asObservable();
-	}
+	private imageLoaded = new BehaviorSubject<boolean>(false);
+	private initialized = new BehaviorSubject<boolean>(false);
 
-	private bound = new BehaviorSubject<boolean>(false);
-	get bound$(): Observable<boolean> {
-		return this.bound.asObservable();
-	}
+	result$: Observable<string> = this.result.asObservable();
+	imageLoaded$: Observable<boolean> = this.imageLoaded.asObservable();
+	initialized$: Observable<boolean> = this.initialized.asObservable();
 
 	private eventListenerAdded = false;
 
-	constructor(private options: Croppie.CroppieOptions) { }
+	private _croppie: Croppie | undefined | null;
+	private set croppie(croppie: Croppie | null) {
+		this._croppie = croppie;
+		this.initialized.next(true);
+	}
 
-	init(el: HTMLElement): void {
-		this.el = el;
+	constructor(
+		private options: Croppie.CroppieOptions
+	) { }
 
-		this.destroy();
-		this.createCroppie();
-		this.addEventListener();
+	init(croppie: Croppie, el: HTMLElement): void {
+
+		this.croppie = croppie;
+		this.addEventListener(el);
+
+	}
+
+	destroy(): void {
+
+		if (this._croppie) {
+
+			this._croppie.destroy();
+			this._croppie = null;
+			this.eventListenerAdded = false;
+			this.initialized.next(false);
+
+		}
+
+	}
+
+	private addEventListener(el: HTMLElement): void {
+
+		// only add listener once
+		if (this.eventListenerAdded)
+			return;
+
+		el.addEventListener('update', () => this.resultCroppie());
+		this.eventListenerAdded = true;
+
 	}
 
 	bind(url: string, sendResult: boolean = true): void {
 
-		if (!this.el)
+		if (!this._croppie)
 			throw Error('Croppie not initialized');
 
 		if (!url) {
@@ -49,11 +75,11 @@ class CroppieImpl implements ICroppie {
 			return;
 		}
 
-		this.croppie?.bind({ url })
+		this._croppie.bind({ url })
 			// in case the user doesn't drag the image (so no 'update' event occurs)
 			// we take the result right after bind
 			.then(() => {
-				this.bound.next(true);
+				this.imageLoaded.next(true);
 				if (sendResult)
 					this.resultCroppie();
 			});
@@ -62,45 +88,15 @@ class CroppieImpl implements ICroppie {
 
 	unbind(): void {
 
-		this.bound.next(false);
+		this.imageLoaded.next(false);
 		this.result.next('');
-
-	}
-
-	destroy(): void {
-
-		if (this.croppie) {
-
-			this.croppie.destroy();
-			this.croppie = null;
-			this.el = document.createElement('div');
-			this.eventListenerAdded = false;
-
-		}
-
-	}
-
-	private createCroppie(): void {
-
-		this.croppie = new Croppie(this.el, this.options);
-
-	}
-
-	private addEventListener(): void {
-
-		// only add listener once
-		if (this.eventListenerAdded)
-			return;
-
-		this.el.addEventListener('update', () => this.resultCroppie());
-		this.eventListenerAdded = true;
 
 	}
 
 	private resultCroppie(): void {
 
-		if (this.croppie)
-			this.croppie
+		if (this._croppie)
+			this._croppie
 				.result({
 					type: 'base64',
 					size: 'viewport',
@@ -115,6 +111,6 @@ class CroppieImpl implements ICroppie {
 
 }
 
-export const createCroppie = (options: Croppie.CroppieOptions) => new CroppieImpl(options);
+export const createCroppie = (options: Croppie.CroppieOptions): CroppieWrapper => new CroppieWrapperImpl(options);
 
 

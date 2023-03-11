@@ -1,6 +1,6 @@
-<div bookmark-wrapper *ngIf="(bookmark$ | async) as bookmark">
+<div bookmark-wrapper>
 
-	<app-bookmark [item]="bookmark"></app-bookmark>
+	<app-bookmark [item]="bookmark$ | async"></app-bookmark>
 	<div bookmark-overlay></div>
 
 </div>

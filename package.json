@@ -26,7 +26,6 @@
     "@ngrx/store": "^15.2.1",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
-    "croppie": "^2.6.5",
     "dexie": "^3.2.2",
     "file-saver": "^2.0.5",
     "immer": "^9.0.18",

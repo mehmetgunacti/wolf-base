@@ -24,6 +24,7 @@
 </section>
 
 <p-dialog
+	*ngIf="editDialogVisible$ | async"
 	header="Add Bookmark"
 	[visible]="editDialogVisible$ | async"
 	(visibleChange)="toggleEditDialog()"

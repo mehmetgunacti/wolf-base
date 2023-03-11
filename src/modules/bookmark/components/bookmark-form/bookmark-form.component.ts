@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Bookmark } from 'lib';
 import { isInvalid } from 'modules/shared';
 import { AutoComplete } from 'primeng/autocomplete';
-import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
 import { EditForm } from './bookmark-form';
 
 @Component({
@@ -31,11 +31,11 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	constructor() {
 
-		this.bookmark$ = new Subject<Bookmark>();
 		this.tagSuggestions$ = new Subject<string[]>();
 		this.formName = new FormControl('');
 		this.form = new EditForm(this.bookmark);
 		this.formGroup = this.form.formGroup;
+		this.bookmark$ = new BehaviorSubject<Bookmark>(this.formGroup.value);
 
 	}
 

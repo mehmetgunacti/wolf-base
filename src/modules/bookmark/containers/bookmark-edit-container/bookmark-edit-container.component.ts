@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark } from 'lib';
 import { combineLatest, filter, map, Observable, Subject } from 'rxjs';
+import { addHeadCSS, addHeadScript } from 'store';
 import * as fromStore from '../../store';
 
 @Component({
@@ -18,13 +19,14 @@ export class BookmarkEditContainerComponent {
 
 	constructor(
 		private store: Store<fromStore.BookmarksState>
-	) {
-		console.log(this.bookmark);
-	}
+	) {}
 
 	ngOnInit(): void { }
 
 	ngAfterContentInit(): void {
+
+		this.store.dispatch(addHeadScript({ url: 'https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js' }));
+		this.store.dispatch(addHeadCSS({ url: 'https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css' }));
 
 		this.tagSuggestions$ = combineLatest([
 			this.store.select(fromStore.selectorTagsArray),
@@ -49,7 +51,6 @@ export class BookmarkEditContainerComponent {
 
 	onSave(f: Bookmark): void {
 
-		console.log(f);
 		// if (this.formGroup.invalid)
 		// 	markFieldsAsDirty(this.formGroup);
 
