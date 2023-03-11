@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnDestroy, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CroppieOptions } from 'croppie';
+import { environment } from 'environments/environment';
 import { ScriptLoaderService } from 'modules/shared/services/script-loader.service';
 import { BehaviorSubject, forkJoin, Observable, Subscription } from 'rxjs';
 import { delay, distinctUntilChanged } from 'rxjs/operators';
@@ -55,8 +56,8 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 
 			forkJoin([
 
-				this.scriptLoader.loadScript('https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js'),
-				this.scriptLoader.loadCSS('https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css')
+				this.scriptLoader.loadScript(environment.croppie.scriptUrl),
+				this.scriptLoader.loadCSS(environment.croppie.styleUrl)
 
 			]).pipe(
 				delay(1000) // wait for window.Croppie function to be available
