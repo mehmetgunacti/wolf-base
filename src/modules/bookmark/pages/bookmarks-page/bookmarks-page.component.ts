@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 export class BookmarksPageComponent implements OnInit {
 
 	tagsVisible$!: Observable<boolean>;
-	editDialogVisible$!: Observable<boolean>;
+	editDialogVisible$: Observable<boolean>;
 
 	constructor(private store: Store) {
 
@@ -38,9 +38,15 @@ export class BookmarksPageComponent implements OnInit {
 
 	}
 
-	toggleEditDialog(): void {
+	openAddDialog(): void {
 
-		this.store.dispatch(fromStore.bookmarksToggleEditDialog());
+		this.store.dispatch(fromStore.bookmarksAddOpenDialog());
+
+	}
+
+	closeAddDialog(): void {
+
+		this.store.dispatch(fromStore.bookmarksEditCloseDialog());
 
 	}
 

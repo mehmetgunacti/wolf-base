@@ -15,7 +15,7 @@
 		label="Add"
 		icon="pi pi-plus"
 		class="p-button-text p-button-sm"
-		(click)="toggleEditDialog()">
+		(click)="openAddDialog()">
 	</button>
 </app-portal>
 
@@ -27,7 +27,7 @@
 	*ngIf="editDialogVisible$ | async"
 	header="Add Bookmark"
 	[visible]="editDialogVisible$ | async"
-	(visibleChange)="toggleEditDialog()"
+	(visibleChange)="closeAddDialog()"
 	[breakpoints]="{'960px': '75vw', '640px': '100vw'}"
 	[closeOnEscape]="true"
 	[closable]="true"

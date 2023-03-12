@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Bookmark, ISyncState } from 'lib';
+import { Bookmark, ID, ISyncState } from 'lib';
 
 export const bookmarksFetchAll = createAction('[Bookmarks] fetch all');
 
@@ -22,4 +22,7 @@ export const bookmarksSyncReady = createAction('[Bookmarks] readying bookmarks')
 export const bookmarksSyncToggleForceOverride = createAction('[Bookmarks] toggle force override bookmarks');
 export const bookmarksSyncSetState = createAction('[Bookmarks] set sync state bookmarks', props<{ syncState: ISyncState }>());
 
-export const bookmarksToggleEditDialog = createAction('[Bookmarks] toggle edit dialog');
+// export const bookmarksToggleEditDialog = createAction('[Bookmarks] toggle edit dialog');
+export const bookmarksAddOpenDialog = createAction('[Bookmarks] add: open dialog');
+export const bookmarksEditOpenDialog = createAction('[Bookmarks] edit: open dialog', props<{ id: ID }>());
+export const bookmarksEditCloseDialog = createAction('[Bookmarks] edit: close dialog');

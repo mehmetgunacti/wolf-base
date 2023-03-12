@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { environment } from 'environments/environment';
 import { Bookmark } from 'lib';
 import { isInvalid } from 'modules/shared';
 import { AutoComplete } from 'primeng/autocomplete';
@@ -27,7 +28,6 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	subscriptions: Subscription = new Subscription();
 	formGroup: FormGroup;
 	formName: FormControl;
-	t1: string = '';
 
 	constructor() {
 
@@ -71,7 +71,6 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	ngOnDestroy(): void {
 
 		this.subscriptions.unsubscribe();
-		this.form.destroy();
 
 	}
 
@@ -92,6 +91,59 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 			this.autocompleteCharge.multiInputEL.nativeElement.value = '';
 		} else
 			this.tagInput.emit(event.query);
+
+	}
+
+	lookupTitle(): void {
+
+		const url: string = this.form.url.getRawValue();
+
+		// get the title of the web page
+		const parsed: URL | null = this.parseURL(url);
+		if (parsed) {
+
+			const { origin, pathname } = parsed;
+			const term = `${origin}${pathname}`;
+			const remoteURL = environment.remoteURLLookup + encodeURI(term);
+			console.info('Looking up page title:', remoteURL);
+			fetch(remoteURL).then(
+				response => response.text().then(
+					title => {
+						console.info(remoteURL, ' returned: [', title, ']');
+						this.form.title.setValue(title);
+						this.form.title.markAsDirty();
+					}
+				)
+			);
+
+		}
+
+	}
+
+	nameFromURL(): void {
+
+		const url: string = this.form.url.getRawValue();
+
+		// set hostname as bookmark name
+		const parsed: URL | null = this.parseURL(url);
+		if (parsed) {
+
+			const hostname = parsed.hostname;
+			this.form.name.setValue(hostname.startsWith('www.') ? hostname.substring(4) : hostname);
+			this.form.name.markAsDirty();
+
+		}
+
+	}
+
+	private parseURL(url: string): URL | null {
+
+		try {
+			return new URL(url.toLowerCase());
+		} catch(err) {
+			console.error('err', err);
+			return null;
+		}
 
 	}
 

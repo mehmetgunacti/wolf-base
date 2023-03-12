@@ -47,3 +47,9 @@ export const selectorEditDialogVisible = createSelector(
 	selectorBookmarksState,
 	state => state.editDialogVisible
 );
+
+export const selectorSelectedBookmark = createSelector(
+	selectorBookmarksState,
+	selectorBookmarks,
+	(state, dictionary) => state.selected ? dictionary[state.selected] : null
+);

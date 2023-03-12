@@ -37,8 +37,9 @@ const reducer = createReducer(
 		return { ...state, syncStatus: status, syncMessages: messages };
 
 	}),
-	on(fromActions.bookmarksToggleEditDialog, (state): BookmarksState => ({ ...state, editDialogVisible: !state.editDialogVisible })),
-
+	on(fromActions.bookmarksAddOpenDialog, (state): BookmarksState => ({ ...state, editDialogVisible: true, selected: null })),
+	on(fromActions.bookmarksEditOpenDialog, (state, {id}): BookmarksState => ({ ...state, editDialogVisible: true, selected: id })),
+	on(fromActions.bookmarksEditCloseDialog, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null }))
 
 );
 

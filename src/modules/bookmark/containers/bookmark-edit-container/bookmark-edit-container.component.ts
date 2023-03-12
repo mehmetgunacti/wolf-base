@@ -11,14 +11,15 @@ import * as fromStore from '../../store';
 })
 export class BookmarkEditContainerComponent {
 
+	bookmark$: Observable<Bookmark | null | undefined>;
 	tagSuggestions$!: Observable<string[]>;
 	tagInput = new Subject<string>();
 
-	@Input() bookmark: Bookmark | undefined;
-
 	constructor(
 		private store: Store<fromStore.BookmarksState>
-	) {}
+	) {
+		this.bookmark$ = store.select(fromStore.selectorSelectedBookmark);
+	}
 
 	ngOnInit(): void { }
 
@@ -70,17 +71,17 @@ export class BookmarkEditContainerComponent {
 
 	delete(): void {
 
-		const id = this.bookmark?.id;
-		if (!!id)
-			if (
-				confirm(`
-					${this.bookmark?.title}
-					${this.bookmark?.url}
+		// const id = this.bookmark?.id;
+		// if (!!id)
+		// 	if (
+		// 		confirm(`
+		// 			${this.bookmark?.title}
+		// 			${this.bookmark?.url}
 
-					will be deleted. Continue?
-				`)
-			)
-				this.store.dispatch(fromStore.bookmarksDelete({ id }));
+		// 			will be deleted. Continue?
+		// 		`)
+		// 	)
+		// 		this.store.dispatch(fromStore.bookmarksDelete({ id }));
 
 	}
 

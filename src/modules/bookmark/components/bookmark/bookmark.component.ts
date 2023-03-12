@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Bookmark, PLACEHOLDER_QUESTIONMARK } from 'lib';
+import { Bookmark, ID, PLACEHOLDER_QUESTIONMARK } from 'lib';
 
 @Component({
 	selector: 'app-bookmark',
@@ -12,14 +12,14 @@ export class BookmarkComponent {
 
 	@Input() item: Bookmark | null | undefined;
 
-	@Output() edit: EventEmitter<Bookmark> = new EventEmitter();
+	@Output() edit: EventEmitter<ID> = new EventEmitter();
 	@Output() linkClick: EventEmitter<Bookmark> = new EventEmitter();
 	@Output() tagClick: EventEmitter<string> = new EventEmitter();
 
 	onEdit(): void {
 
 		if (this.item)
-			this.edit.emit(this.item);
+			this.edit.emit(this.item.id);
 
 	}
 

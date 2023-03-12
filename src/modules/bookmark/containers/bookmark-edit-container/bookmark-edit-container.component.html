@@ -1,5 +1,5 @@
 <app-bookmark-form
-		[bookmark]="bookmark"
+		[bookmark]="bookmark$ | async"
 		[tagSuggestions]="tagSuggestions$ | async"
 		(save)="onSave($event)"
 		(tagInput)="onTagInput($event)"></app-bookmark-form>

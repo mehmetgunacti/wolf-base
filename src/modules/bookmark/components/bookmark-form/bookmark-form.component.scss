@@ -39,16 +39,33 @@ app-bookmark-form {
 			@extend %flex-center-start;
 		}
 
-		& > div[form-element-name] {
+		& > div[form-element-url] {
 			grid-area: fe2;
 		}
 
-		& > div[form-element-url] {
+		& > div[form-element-name] {
+
 			grid-area: fe3;
+			@extend %flex-row;
+
+			&>span {
+				flex: 1;
+			}
+			&>button {
+				transform: rotate(180deg);
+			}
+
 		}
 
 		& > div[form-element-title] {
+
 			grid-area: fe4;
+			@extend %flex-row;
+
+			&>span {
+				flex: 1;
+			}
+
 		}
 
 		& > div[form-element-tags] {

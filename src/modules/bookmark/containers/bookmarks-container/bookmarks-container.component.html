@@ -1,3 +1,4 @@
 <app-bookmark
 	*ngFor="let bookmark of bookmarks$ | async"
-	[item]="bookmark"></app-bookmark>
+	[item]="bookmark"
+	(edit)="onEdit($event)"></app-bookmark>

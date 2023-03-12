@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bookmark } from 'lib';
-import { Observable, of } from 'rxjs';
-import * as actions from 'store';
-import * as selectors from 'modules/bookmark/store';
+import { Bookmark, ID } from 'lib';
+import * as actions from 'modules/bookmark/store/actions';
+import * as selectors from 'modules/bookmark/store/selectors';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-bookmarks-container',
@@ -36,6 +36,12 @@ export class BookmarksContainerComponent implements OnInit {
 		// 		skipCache: true
 		// 	})
 		// );
+
+	}
+
+	onEdit(id: ID): void {
+
+		this.store.dispatch(actions.bookmarksEditOpenDialog({ id }));
 
 	}
 
