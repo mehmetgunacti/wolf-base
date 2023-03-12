@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark } from 'lib';
 import { combineLatest, filter, map, Observable, Subject } from 'rxjs';
-import { addHeadCSS, addHeadScript } from 'store';
 import * as fromStore from '../../store';
 
 @Component({
@@ -24,9 +23,6 @@ export class BookmarkEditContainerComponent {
 	ngOnInit(): void { }
 
 	ngAfterContentInit(): void {
-
-		this.store.dispatch(addHeadScript({ url: 'https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js' }));
-		this.store.dispatch(addHeadCSS({ url: 'https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css' }));
 
 		this.tagSuggestions$ = combineLatest([
 			this.store.select(fromStore.selectorTagsArray),
