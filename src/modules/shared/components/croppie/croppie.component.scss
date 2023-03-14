@@ -22,11 +22,24 @@ app-croppie {
 
 		#close {
 
-			position	: absolute;
-			right		: -8px;
-			top			: -12px;
-			cursor		: pointer;
-			color		: var(--red-700);
+			position			: absolute;
+			right				: -8px;
+			top					: -12px;
+			display				: flex;
+			align-items			: center;
+			justify-content		: center;
+			z-index				: 1000;
+			cursor				: pointer;
+			color				: white;
+			background-color	: white;
+			border				: 6px solid var(--red-700);
+			border-radius		: 80px;
+			width				: 20px;
+			height				: 20px;
+
+			font-size			: 10px;
+			font-family			: sans-serif;
+			font-weight			: bold;
 
 		}
 

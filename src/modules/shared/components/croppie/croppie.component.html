@@ -2,7 +2,7 @@
 
 	<span id="close"
 		*ngIf="(imageLoaded$ | async) else placeholder"
-		(click)="unbindCroppie()"><i class="pi pi-times-circle"></i></span>
+		(click)="unbindCroppie()"></span>
 	<ng-template #placeholder>
 
 		<div *ngIf="(initialized$ | async); else notInitialized"
