@@ -23,30 +23,22 @@ class CroppieWrapperImpl implements CroppieWrapper {
 	initialized$: Observable<boolean> = this.initialized.asObservable();
 
 	private eventListenerAdded = false;
-
-	private _croppie: Croppie | undefined | null;
-	private set croppie(croppie: Croppie | null) {
-		this._croppie = croppie;
-		this.initialized.next(true);
-	}
-
-	constructor(
-		private options: Croppie.CroppieOptions
-	) { }
+	private croppie: Croppie | undefined | null;
 
 	init(croppie: Croppie, el: HTMLElement): void {
 
 		this.croppie = croppie;
 		this.addEventListener(el);
+		this.initialized.next(true);
 
 	}
 
 	destroy(): void {
 
-		if (this._croppie) {
+		if (this.croppie) {
 
-			this._croppie.destroy();
-			this._croppie = null;
+			this.croppie.destroy();
+			this.croppie = null;
 			this.eventListenerAdded = false;
 			this.initialized.next(false);
 
@@ -65,9 +57,9 @@ class CroppieWrapperImpl implements CroppieWrapper {
 
 	}
 
-	bind(url: string, sendResult: boolean = true): void {
+	bind(url: string): void {
 
-		if (!this._croppie)
+		if (!this.croppie)
 			throw Error('Croppie not initialized');
 
 		if (!url) {
@@ -75,13 +67,12 @@ class CroppieWrapperImpl implements CroppieWrapper {
 			return;
 		}
 
-		this._croppie.bind({ url })
+		this.croppie.bind({ url, zoom: 1, orientation: 1 })
 			// in case the user doesn't drag the image (so no 'update' event occurs)
 			// we take the result right after bind
 			.then(() => {
 				this.imageLoaded.next(true);
-				if (sendResult)
-					this.resultCroppie();
+				this.resultCroppie();
 			});
 
 	}
@@ -95,14 +86,14 @@ class CroppieWrapperImpl implements CroppieWrapper {
 
 	private resultCroppie(): void {
 
-		if (this._croppie)
-			this._croppie
+		if (this.croppie)
+			this.croppie
 				.result({
 					type: 'base64',
 					size: 'viewport',
 					format: 'png',
 					quality: 1,
-					circle: this.options?.viewport?.type === 'circle'
+					circle: true
 				}).then(
 					(result: string) => this.result.next(result)
 				);
@@ -111,6 +102,6 @@ class CroppieWrapperImpl implements CroppieWrapper {
 
 }
 
-export const createCroppie = (options: Croppie.CroppieOptions): CroppieWrapper => new CroppieWrapperImpl(options);
+export const createCroppieWrapper = (): CroppieWrapper => new CroppieWrapperImpl();
 
 

@@ -4,9 +4,9 @@ import { FormControl } from '@angular/forms';
 import { CroppieOptions } from 'croppie';
 import { environment } from 'environments/environment';
 import { ScriptLoaderService } from 'modules/shared/services/script-loader.service';
-import { BehaviorSubject, forkJoin, Observable, Subscription } from 'rxjs';
-import { delay, distinctUntilChanged } from 'rxjs/operators';
-import { createCroppie, CroppieWrapper } from './croppie.model';
+import { combineLatest, Observable, Subscription, timer } from 'rxjs';
+import { delay, distinctUntilChanged, filter, tap } from 'rxjs/operators';
+import { createCroppieWrapper, CroppieWrapper } from './croppie.model';
 
 const croppieOptions: CroppieOptions = {
 	viewport: {
@@ -32,8 +32,9 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 	@ViewChild('fileinput') fileInput!: ElementRef;
 
 	@Input() wControl = new FormControl();
+	@Input() toBind = '';
 
-	croppie: CroppieWrapper;
+	croppieWrapper: CroppieWrapper;
 	subscriptions = new Subscription();
 
 	imageLoaded$: Observable<boolean>;
@@ -44,9 +45,9 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 		private scriptLoader: ScriptLoaderService
 	) {
 
-		this.croppie = createCroppie(croppieOptions);
-		this.imageLoaded$ = this.croppie.imageLoaded$;
-		this.initialized$ = this.croppie.initialized$;
+		this.croppieWrapper = createCroppieWrapper();
+		this.imageLoaded$ = this.croppieWrapper.imageLoaded$;
+		this.initialized$ = this.croppieWrapper.initialized$;
 
 	}
 
@@ -54,26 +55,24 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 
 		this.subscriptions.add(
 
-			forkJoin([
+			combineLatest([
 
-				this.scriptLoader.loadScript(environment.croppie.scriptUrl),
-				this.scriptLoader.loadCSS(environment.croppie.styleUrl)
+				this.scriptLoader.loadScript(environment.croppie.scriptUrl), // Observable<void>
+				this.scriptLoader.loadCSS(environment.croppie.styleUrl), // Observable<void>
+				timer(600)
 
-			]).pipe(
-				delay(1000) // wait for window.Croppie function to be available
-			).subscribe({
+			]).subscribe({
 
 				complete: () => {
-
 					if (this.document.defaultView?.Croppie) {
 						const el: HTMLElement = this.croppieDiv.nativeElement;
 						const croppie: Croppie = new this.document.defaultView.Croppie(el, croppieOptions);
-						this.croppie.init(croppie, el);
-						this.croppie.bind(this.wControl.value);
+						this.croppieWrapper.init(croppie, el);
+						this.croppieWrapper.bind(this.wControl.value);
 					} else
 						throw new Error('Croppie not available in windows scope');
-
-				}
+				},
+				error: (err) => console.error(err)
 
 			})
 
@@ -81,10 +80,11 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 
 		this.subscriptions.add(
 
-			this.croppie.result$
+			this.croppieWrapper.result$
 				.pipe(
 					distinctUntilChanged()
-				).subscribe(base64 => {
+				)
+				.subscribe(base64 => {
 
 					this.wControl.setValue(base64);
 					this.wControl.markAsTouched();
@@ -98,7 +98,7 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 
 	unbindCroppie(): void {
 
-		this.croppie.unbind();
+		this.croppieWrapper.unbind();
 		// the change event doesn't fire when the user
 		// selects same image again
 		// this resets the readonly 'files' object (of type FilesList)
@@ -109,7 +109,7 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 	ngOnDestroy(): void {
 
 		this.subscriptions.unsubscribe();
-		this.croppie.destroy();
+		this.croppieWrapper.destroy();
 
 	}
 
@@ -134,14 +134,8 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 			// since we're in onload, an image has been selected
 			// so we can (have to) bind it to the newly created Croppie object
 			const fileData = (loadEvent.target as FileReader).result as string;
-			this.croppie.bind(fileData);
-
-			// we add an 'update' event listener to the native 'div'
-			// and call 'result' on croppie object data:image/png;base64.
-			// div gets updated when user drags loaded image
-			// this.addEventListener();
+			this.croppieWrapper.bind(fileData);
 		};
-		// this.wControl.setValue(r) // .substring(r.indexOf(',') + 1));
 
 		// The readAsDataURL method is used to read the contents of the
 		// specified Blob or File. When the read operation is finished,
