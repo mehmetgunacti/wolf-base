@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LocalStorageService, successNotification } from 'lib';
+import { Action } from '@ngrx/store';
+import { liveQuery } from 'dexie';
+import { Bookmark, LocalStorageService } from 'lib';
+import { fromEventPattern, Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { showNotification } from 'store';
 import * as fromActions from '../actions';
@@ -13,29 +16,40 @@ export class BookmarksEffects {
 		private localStorage: LocalStorageService
 	) { }
 
-	bookmarksLoadAll$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(fromActions.bookmarksLoadAll),
-			switchMap(async () => await this.localStorage.bookmarks.list({
-				orderBy: 'clicks',
-				reverse: true,
-				limit: 50
-			})),
-			map(items => items.map(item => item.data)),
-			map(bookmarks => fromActions.bookmarksLoadAllSuccess({ bookmarks }))
-
+	listFromIndexedDb$ = createEffect(
+		
+		() => this.localStorage.bookmarks.list$({
+			orderBy: 'clicks',
+			reverse: true,
+			limit: 50
+		}).pipe(
+			map((bookmarks) => fromActions.bookmarksLoadAllSuccess({bookmarks}))
 		)
-
+		
 	);
+
+	// bookmarksLoadAll$ = createEffect(
+
+	// 	() => this.actions$.pipe(
+
+	// 		ofType(fromActions.bookmarksLoadAll),
+	// 		switchMap(() => this.localStorage.bookmarks.list({
+	// 			orderBy: 'clicks',
+	// 			reverse: true,
+	// 			limit: 50
+	// 		})),
+	// 		map(bookmarks => fromActions.bookmarksLoadAllSuccess({ bookmarks }))
+
+	// 	)
+
+	// );
 
 	bookmarksRemoveAll$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(fromActions.bookmarksRemoveAll),
-			map(_ => fromActions.bookmarksLoadAllSuccess({ bookmarks: [] }))
+			map(() => fromActions.bookmarksLoadAllSuccess({ bookmarks: [] }))
 
 		)
 
@@ -54,25 +68,45 @@ export class BookmarksEffects {
 
 	);
 
-	bookmarksUpsert$ = createEffect(
+	bookmarksSave$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.bookmarksUpsert),
-			map(p => p.payload),
-			tap(item => this.localStorage.bookmarks.save(item)),
-			// tap(isUpdate => this.toastService.show({ type: W359ToastType.SUCCESS, message: `Bookmark ${isUpdate ? 'updated' : 'created'}` })),
-			switchMap(() => [
-				fromActions.bookmarksLoadAll(),
-				showNotification({
-					...successNotification,
-					summary: `Bookmark isUpdate ? 'updated' : 'created'`
-				})
-			]),
+			ofType(fromActions.bookmarksSave),
+			map(param => param.bookmark),
+			switchMap(bookmark => this.localStorage.bookmarks.save(bookmark)),
+			map((bookmark: Bookmark) => fromActions.bookmarksSaveSuccess({ bookmark }))
 
 		)
 
 	);
+
+	bookmarksShowSaveNotification$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(fromActions.bookmarksSaveSuccess),
+			map(param => param.bookmark),
+			map((bookmark: Bookmark) => showNotification({
+				severity: 'success',
+				detail: `Bookmark ${bookmark.created ? 'created' : 'updated'}`
+			}))
+
+		)
+
+	);
+
+	// bookmarksReloadAllBookmarks$ = createEffect(
+
+	// 	() => this.actions$.pipe(
+
+	// 		ofType(fromActions.bookmarksSaveSuccess),
+	// 		tap(() => console.log('reloading all')),
+	// 		map(() => fromActions.bookmarksLoadAll())
+
+	// 	)
+
+	// );
 
 	bookmarksDelete$ = createEffect(
 

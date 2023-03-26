@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark } from 'lib';
 import { combineLatest, filter, map, Observable, Subject } from 'rxjs';
@@ -9,7 +9,7 @@ import * as fromStore from '../../store';
 	templateUrl: './bookmark-edit-container.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookmarkEditContainerComponent {
+export class BookmarkEditContainerComponent implements OnInit, AfterContentInit {
 
 	bookmark$: Observable<Bookmark | null | undefined>;
 	tagSuggestions$!: Observable<string[]>;
@@ -48,24 +48,7 @@ export class BookmarkEditContainerComponent {
 
 	onSave(f: Bookmark): void {
 
-		// if (this.formGroup.invalid)
-		// 	markFieldsAsDirty(this.formGroup);
-
-		// else if (
-
-		// 	this.formGroup.dirty &&
-		// 	this.formGroup.valid
-
-		// ) {
-
-		// 	const payload: any = {
-		// 		...getDirtyValues<Bookmark>(this.formGroup),
-		// 		id: this.bookmark?.id
-		// 	};
-		// 	this.store.dispatch(fromStore.bookmarksUpsert({ payload }));
-		// 	this.close();
-
-		// }
+		this.store.dispatch(fromStore.bookmarksSave({ bookmark: f }));
 
 	}
 

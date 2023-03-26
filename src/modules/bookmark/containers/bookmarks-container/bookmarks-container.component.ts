@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Bookmark, ID } from 'lib';
 import * as actions from 'modules/bookmark/store/actions';
 import * as selectors from 'modules/bookmark/store/selectors';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-bookmarks-container',

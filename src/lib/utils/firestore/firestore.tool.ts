@@ -183,8 +183,8 @@ export class FirestoreTool {
 		return {
 			id,
 			data,
-			createTime,
-			updateTime
+			created: createTime,
+			updated: updateTime
 		};
 
 	}

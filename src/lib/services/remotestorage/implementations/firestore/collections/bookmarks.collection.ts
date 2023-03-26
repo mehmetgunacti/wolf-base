@@ -3,7 +3,6 @@ import { Bookmark, Click } from 'lib/models';
 import { FirestoreTool, IFirestoreData, IFirestoreDocument, FIRESTORE_VALUE } from 'lib/utils';
 import { AbstractFirestoreCollection } from '../firestore.collection';
 import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
-import { IRemoteData } from 'lib/services/remotestorage/remote-storage-models.interface';
 
 export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bookmark> implements BookmarksCollection {
 
@@ -25,9 +24,9 @@ export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bo
 
 	}
 
-	override async list(): Promise<IRemoteData<Bookmark>[]> {
+	override async list(): Promise<Bookmark[]> {
 
-		const bookmarks: IRemoteData<Bookmark>[] = await super.list();
+		const bookmarks: Bookmark[] = await super.list();
 		const clicks: IFirestoreData<Click>[] = await this.firestore.list<Click>(
 
 			this.firestore.createURL({
@@ -37,7 +36,7 @@ export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bo
 
 		);
 
-		const mapClicks: Map<ID, number> = new Map(clicks.map(click => [click.data.id, click.data.clicks]));
+		const mapClicks: Map<ID, number> = new Map(clicks.map(click => [click.id, click.data.clicks]));
 		return bookmarks.map(b => ({ ...b, clicks: mapClicks.get(b.id) || 0 }));
 
 	}

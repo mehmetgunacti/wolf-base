@@ -1,44 +1,44 @@
-import { Collection, IndexableType, Table } from 'dexie';
+import { Collection, IndexableType, liveQuery, Table } from 'dexie';
+import { ID, WolfBaseTable } from 'lib/constants';
+import { Base, ITrash, Tag } from 'lib/models';
+import { fromEventPattern, Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { ILocalStorageTable } from '../../local-storage-table.interface';
 import { WolfBaseDB } from './wolfbase.database';
-import { ITrash, Tag, Model, ISyncData } from 'lib/models';
-import { WolfBaseTable, ID } from 'lib/constants';
-import * as _ from 'lodash-es';
-import { IRemoteData } from 'lib/services/remotestorage';
-import { removeOverlappingProperties } from 'lib/utils';
 
-export abstract class AbstractDexieTable<T extends Model> implements ILocalStorageTable<T> {
+export abstract class AbstractDexieTable<T extends Base> implements ILocalStorageTable<T> {
 
 	constructor(
 		protected db: WolfBaseDB,
 		protected tablename: WolfBaseTable
 	) { }
 
-	async getNewItems(): Promise<ISyncData<T>[]> {
+	async listNewItems(): Promise<T[]> {
 
 		return await this.db
-			.table<ISyncData<T>>(this.tablename)
-			.filter(item => !!!item.createTime)
+			.table<T>(this.tablename)
+			.filter(item => !item.created)
 			.toArray();
 
 	}
 
-	async getUpdatedItems(): Promise<ISyncData<T>[]> {
+	async listUpdatedItems(): Promise<T[]> {
 
-		return await this.db
-			.table<ISyncData<T>>(this.tablename)
-			.filter(item => !!Object.keys(item.updates).length)
-			.toArray();
+		return [];
+
+		// await this.db
+		// 	.table<T>(this.tablename)
+		// 	.filter(item => !!Object.keys(item.updated || {}).length)
+		// 	.toArray();
 
 	}
 
-	async getDeletedItems(): Promise<ITrash<ISyncData<T>>[]> {
+	async listDeletedItems(): Promise<ITrash<T>[]> {
 
 		return await this.db
 			.trashcan
 			.filter(item => item.table === this.tablename)
-			.toArray() as ITrash<ISyncData<T>>[];
+			.toArray() as ITrash<T>[];
 
 	}
 
@@ -50,8 +50,8 @@ export abstract class AbstractDexieTable<T extends Model> implements ILocalStora
 			WolfBaseTable.trashcan,
 			async () => {
 
-				const entity: ISyncData<T> = await this.db.table(this.tablename).get(id);
-				await this.db.table<ISyncData<T>>(this.tablename).delete(id);
+				const entity: T = await this.db.table(this.tablename).get(id);
+				await this.db.table<T>(this.tablename).delete(id);
 				await this.db.trashcan.add({
 					id: entity.id,
 					entity,
@@ -63,7 +63,7 @@ export abstract class AbstractDexieTable<T extends Model> implements ILocalStora
 
 	}
 
-	async moveToConflicts(localData: ISyncData<T>, remoteData: IRemoteData<T>): Promise<void> {
+	async moveToConflicts(localData: T, remoteData: T): Promise<void> {
 
 		this.db.transaction(
 			'rw',
@@ -79,31 +79,33 @@ export abstract class AbstractDexieTable<T extends Model> implements ILocalStora
 					createTime: new Date().toString()
 
 				});
-				await this.db.table<ISyncData<T>>(this.tablename).delete(localData.id);
+				await this.db.table<T>(this.tablename).delete(localData.id);
 
 			}
 		);
 
 	}
 
-	async get(id: ID): Promise<ISyncData<T> | undefined> {
+	async get(id: ID): Promise<T | undefined> {
 
-		return await this.db.table<ISyncData<T>>(this.tablename).get(id);
+		return await this.db.table<T>(this.tablename).get(id);
 
 	}
 
-	async list(params?: {
-		orderBy?: string;
-		reverse?: boolean;
-		limit?: number
-	}): Promise<ISyncData<T>[]> {
+	async list(
+		params?: {
+			orderBy?: string;
+			reverse?: boolean;
+			limit?: number
+		}
+	): Promise<T[]> {
 
-		const table: Table<ISyncData<T>, IndexableType> = this.db.table<ISyncData<T>>(this.tablename);
-		let collection: Collection<ISyncData<T>, IndexableType>;
+		const table: Table<T, IndexableType> = this.db.table<T>(this.tablename);
+		let collection: Collection<T, IndexableType>;
 
 		if (params) {
 			if (params.orderBy)
-				collection = table.orderBy(`data.${params.orderBy}`);
+				collection = table.orderBy(params.orderBy);
 			else
 				collection = table.toCollection();
 
@@ -120,21 +122,43 @@ export abstract class AbstractDexieTable<T extends Model> implements ILocalStora
 
 	}
 
+	list$(
+		params?: {
+			orderBy?: string;
+			reverse?: boolean;
+			limit?: number
+		}
+	): Observable<T[]> {
+
+		return fromEventPattern(
+
+			// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
+			// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
+			// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
+			(handler) => liveQuery(() => this.list(params)).subscribe(handler),
+
+			// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
+			(handler, unsubscribe) => unsubscribe()
+
+		);
+
+	}
+
 	async listIds(): Promise<ID[]> {
 
 		return await this.db.table<T, ID>(this.tablename).toCollection().primaryKeys();
 
 	}
 
-	protected async create(item: T): Promise<ISyncData<T>> {
+	protected async create(item: T): Promise<T> {
 
-		const newItem: ISyncData<T> = this.newSyncDataFromPartial(item);
-		await this.db.table<ISyncData<T>>(this.tablename).add(newItem);
+		const newItem: T = this.newLocalDataFromPartial(item);
+		await this.db.table<T>(this.tablename).add(newItem);
 		return newItem;
 
 	}
 
-	async save(item: T): Promise<ISyncData<T>> {
+	async save(item: T): Promise<T> {
 
 		if (item.id)
 			return this.update(item.id, item);
@@ -146,77 +170,54 @@ export abstract class AbstractDexieTable<T extends Model> implements ILocalStora
 
 	async saveAll(items: Partial<T>[]): Promise<void> {
 
-		await this.db.table<ISyncData<T>>(this.tablename).bulkPut(
-			items.map(data => this.newSyncDataFromPartial(data))
+		await this.db.table<T>(this.tablename).bulkPut(
+			items.map(data => this.newLocalDataFromPartial(data))
 		);
 
 	}
 
-	async saveRemoteData(item: IRemoteData<T>): Promise<void> {
+	async saveRemoteData(item: T): Promise<void> {
 
-		const modified = await this.db.table<ISyncData<T>>(this.tablename)
-			.where({ id: item.id })
-			.modify((obj: ISyncData<T>, ref: { value: ISyncData<T>, primKey: IndexableType }): void => {
+		// const modified = await this.db.table<T>(this.tablename)
+		// 	.where({ id: item.id })
+		// 	.modify((obj: T, ref: { value: T, primKey: IndexableType }): void => {
 
-				obj.id = item.id;
-				obj.createTime = item.createTime;
-				obj.updateTime = item.updateTime;
-				obj.data = { ...obj.data, ...item.data };
-				obj.updates = removeOverlappingProperties(obj.updates, item.data);
-
-			});
-
-		if (modified === 0)
-			await this.db.table<ISyncData<T>>(this.tablename).add({
-
-				id: item.id,
-				createTime: item.createTime,
-				updateTime: item.updateTime,
-				data: item.data,
-				updates: {}
-
-			});
-
-	}
-
-	async saveAllRemoteData(items: IRemoteData<T>[]): Promise<void> {
-
-		await this.db.table<ISyncData<T>>(this.tablename).bulkPut(
-			items.map(item => this.newSyncDataFromRemote(item))
-		);
-
-	}
-
-	protected async update(id: ID, data: Partial<T>): Promise<ISyncData<T>> {
-
-		const currentValue = await this.get(id);
-		const newValue = _.merge(
-
-			_.cloneDeep(currentValue),
-			{
-				data,
-				updates: data
-			} as ISyncData<T>,
-
-		);
-		await this.db.table<ISyncData<T>>(this.tablename).put(newValue);
-		return newValue;
-
-		// await this.db.table<ISyncData<T>>(this.tablename)
-		// 	.where({ id })
-		// 	.modify((obj: ISyncData<T>, ref: { value: ISyncData<T>, primKey: IndexableType }): void => {
-
-		// 		ref.value = _.merge(
-
-		// 			_.cloneDeep(obj),
-		// 			{
-		// 				data,
-		// 				updates: data
-		// 			} as ISyncData<T>,
-
-		// 		);
+		// 		obj.id = item.id;
+		// 		obj.syncData = remote.syncData;
+		// 		obj.data = { ...obj.data, ...item.data };
+		// 		obj.updates = removeOverlappingProperties(obj.updates || {}, item.data);
 
 		// 	});
+
+		// if (modified === 0)
+		// 	await this.db.table<T>(this.tablename).add({
+
+		// 		createTime: item.createTime,
+		// 		updateTime: item.updateTime,
+		// 		data: item.data,
+		// 		updates: {}
+
+		// 	});
+
+	}
+
+	async saveAllRemoteData(items: T[]): Promise<void> {
+
+		await this.db.table<T>(this.tablename).bulkPut(
+			items.map(item => this.newLocalDataFromRemote(item))
+		);
+
+	}
+
+	protected async update(id: ID, data: Partial<T>): Promise<T> {
+
+		const localData: T | undefined = await this.get(id);
+		if (!localData)
+			throw new Error(`No data with id ${id} found.`);
+
+		await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...data });
+
+		return await this.get(id) ?? {} as T;
 
 	}
 
@@ -229,10 +230,10 @@ export abstract class AbstractDexieTable<T extends Model> implements ILocalStora
 	async search(term: string, orderBy: string = 'id'): Promise<T[]> {
 
 		return (
-			await this.db.table<ISyncData<T>>(this.tablename)
+			await this.db.table<T>(this.tablename)
 				.filter(item => this.searchFilter(term, item))
 				.sortBy(orderBy)
-		).map(item => item.data);
+		);
 
 	}
 
@@ -240,7 +241,7 @@ export abstract class AbstractDexieTable<T extends Model> implements ILocalStora
 
 		return (
 			await this.db.table(this.tablename)
-				.where('data.tags')
+				.where('tags')
 				.anyOf(tags)
 				.sortBy(orderBy)
 		).map(item => item.data);
@@ -250,7 +251,7 @@ export abstract class AbstractDexieTable<T extends Model> implements ILocalStora
 	async tags(): Promise<Tag[]> {
 
 		const setOfTags: { [key: string]: number } = {};
-		await this.db.table(this.tablename).orderBy('data.tags').eachKey(indexableType => {
+		await this.db.table(this.tablename).orderBy('tags').eachKey(indexableType => {
 
 			const tag = indexableType.toString();
 			setOfTags[tag] = (setOfTags[tag] || 0) + 1;
@@ -262,7 +263,7 @@ export abstract class AbstractDexieTable<T extends Model> implements ILocalStora
 
 	}
 
-	protected abstract searchFilter(term: string, item: ISyncData<T>): boolean;
+	protected abstract searchFilter(term: string, item: T): boolean;
 
 	async clear(): Promise<void> {
 
@@ -270,32 +271,22 @@ export abstract class AbstractDexieTable<T extends Model> implements ILocalStora
 
 	}
 
-	protected newSyncDataFromPartial(item: Partial<T>): ISyncData<T> {
+	protected newLocalDataFromPartial(item: Partial<T>): T {
 
 		const id: ID = uuidv4();
-		return {
-
-			id,
-			data: { ...this.newInstance(id, item), id },
-			updateTime: '',
-			createTime: '',
-			updates: {}
-
-		} as ISyncData<T>;
+		return this.newInstance(id, item);
 
 	}
 
-	protected newSyncDataFromRemote(item: IRemoteData<T>): ISyncData<T> {
+	protected newLocalDataFromRemote(item: T): T {
 
 		return {
 
-			id: item.id,
-			data: this.newInstance(item.id, item.data),
-			updateTime: item.updateTime,
-			createTime: item.createTime,
-			updates: {}
+			...this.newInstance(item.id, item),
+			updated: item.updated,
+			created: item.created
 
-		};
+		} as T;
 
 	}
 

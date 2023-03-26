@@ -1,21 +1,20 @@
 import {
 	Bookmark,
-	Model,
+	Base,
 	Click
 } from 'lib/models';
 import { IKnobaEntity, ID } from 'lib/constants';
-import { IRemoteData } from './remote-storage-models.interface';
 
-export interface IRemoteStorageCollection<T extends Model> {
+export interface IRemoteStorageCollection<T extends Base> {
 
-	get(id: string): Promise<IRemoteData<T>>;
+	get(id: string): Promise<T>;
 
-	create(item: T): Promise<IRemoteData<T>>;
-	update(id: ID, item: Partial<IKnobaEntity>): Promise<IRemoteData<T>>;
+	create(item: T): Promise<T>;
+	update(id: ID, item: Partial<IKnobaEntity>): Promise<T>;
 	delete(id: string): Promise<void>;
 
-	list(): Promise<IRemoteData<T>[]>;
-	listIds(): Promise<IRemoteData<ID>[]>;
+	list(): Promise<T[]>;
+	listIds(): Promise<ID[]>;
 
 }
 

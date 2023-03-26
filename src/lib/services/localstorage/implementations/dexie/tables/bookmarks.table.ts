@@ -1,5 +1,5 @@
 import { WolfBaseTable, ID } from 'lib/constants';
-import { Click, Bookmark, ISyncData } from 'lib/models';
+import { Click, Bookmark } from 'lib/models';
 import { AbstractDexieTable } from '../dexie.table';
 import { WolfBaseDB } from '../wolfbase.database';
 import { IBookmarksTable } from 'lib/services/localstorage/local-storage-table.interface';
@@ -25,46 +25,49 @@ export class BookmarksTable extends AbstractDexieTable<Bookmark> implements IBoo
 			clicks: 0
 
 		};
-		return {
-
-			...instance,
-			...item
-
-		} as Bookmark;
+		return { ...instance, ...item } as Bookmark;
 
 	}
 
 
-	protected searchFilter(term: string, item: ISyncData<Bookmark>): boolean {
+	protected searchFilter(term: string, item: Bookmark): boolean {
 
 		return new RegExp(term.toLocaleLowerCase()).test(
-			(`${item.data.name} ${item.data.title} ${item.data.tags}`).toLocaleLowerCase()
+			(`${item.name} ${item.title} ${item.tags}`).toLocaleLowerCase()
 		);
 
 	}
 
-	async getClickedItems(): Promise<Click[]> {
+	async listClickedItems(): Promise<Click[]> {
 
-		const items: ISyncData<Bookmark>[] = await this.db.bookmarks
-			.filter((item: ISyncData<Bookmark>) => !!item.updates.clicks)
+		// todo: does not check outgoing clicks
+		const items: Bookmark[] = await this.db.bookmarks
+			.filter((item: Bookmark) => !!item.clicks)
 			.toArray();
 
 		return items.map(item => ({
 			id: item.id,
-			clicks: item.updates?.clicks || 0
+			clicks: item.clicks || 0
 		}));
 
 	}
 
 	async saveClick(item: Click): Promise<void> {
 
+		// todo
 		await this.db.bookmarks
 			.where({ id: item.id })
-			.modify((sd: ISyncData<Bookmark>): void => {
+			.modify((bookmark: Bookmark): void => {
 
-				sd.data.clicks = item.clicks;
-				const { clicks, ...rest } = { ...sd.updates };
-				sd.updates = rest;
+				bookmark.clicks = item.clicks;
+
+				// remove 'clicks' from 'outgoing'
+				// if (!!bookmark.syncData?.outgoing?.clicks) {
+
+				// 	const { clicks, ...rest } = { ...bookmark.syncData.outgoing };
+				// 	bookmark.syncData.outgoing = rest;
+
+				// }
 
 			});
 
@@ -81,10 +84,15 @@ export class BookmarksTable extends AbstractDexieTable<Bookmark> implements IBoo
 
 		await this.db.bookmarks
 			.where({ id })
-			.modify((sd: ISyncData<Bookmark>): void => { // .modify((item: IBookmark, ref: { value: IBookmark, primKey: IndexableType }): void => {
+			.modify((bookmark: Bookmark): void => { // .modify((item: IBookmark, ref: { value: IBookmark, primKey: IndexableType }): void => {
 
-				sd.data.clicks = (sd.data.clicks || 0) + 1;
-				sd.updates.clicks = (sd.updates.clicks || 0) + 1;
+				bookmark.clicks = (bookmark.clicks ?? 0) + 1;
+
+				// todo
+				// add # of clicks to 'outgoing' / increase
+				// bookmark.syncData = bookmark.syncData ?? {};
+				// bookmark.syncData.outgoing = bookmark.syncData.outgoing ?? {};
+				// bookmark.syncData.outgoing.clicks = (bookmark.syncData.outgoing.clicks ?? 0) + 1;
 
 			});
 	}

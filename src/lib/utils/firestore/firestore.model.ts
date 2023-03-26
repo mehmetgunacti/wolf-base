@@ -4,8 +4,8 @@ export interface IFirestoreData<T> {
 
 	id: string;
 	data: T;
-	createTime: string;
-	updateTime: string;
+	created: string;
+	updated: string;
 
 }
 

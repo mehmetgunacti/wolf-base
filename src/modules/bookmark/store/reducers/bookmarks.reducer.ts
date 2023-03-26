@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
+import { SYNC_STATES } from 'lib';
 import * as fromActions from '../actions';
 import * as fromStates from '../states';
-import { SYNC_STATES } from 'lib';
 import { BookmarksState } from '../states';
 
 const reducer = createReducer(
@@ -38,8 +38,16 @@ const reducer = createReducer(
 
 	}),
 	on(fromActions.bookmarksAddOpenDialog, (state): BookmarksState => ({ ...state, editDialogVisible: true, selected: null })),
-	on(fromActions.bookmarksEditOpenDialog, (state, {id}): BookmarksState => ({ ...state, editDialogVisible: true, selected: id })),
-	on(fromActions.bookmarksEditCloseDialog, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null }))
+	on(fromActions.bookmarksEditOpenDialog, (state, { id }): BookmarksState => ({ ...state, editDialogVisible: true, selected: id })),
+	on(fromActions.bookmarksEditCloseDialog, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null })),
+	on(fromActions.bookmarksSaveSuccess, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null }))
+	// on(fromActions.bookmarksSaveSuccess, (state, { bookmark }): BookmarksState => {
+
+	// 	// todo
+	// 	const newbookmarkState = fromStates.bookmarksAdapter.upsertOne(bookmark, { ...state, editDialogVisible: false, selected: null })
+	// 	return newbookmarkState;
+	// }
+	// ),
 
 );
 

@@ -3,34 +3,38 @@ import {
 	Click,
 	ITrash,
 	Bookmark,
-	Model,
-	ISyncData,
+	Base,
 	Tag
 } from 'lib/models';
-import { IRemoteData } from '../remotestorage';
+import { Observable } from 'rxjs';
 
-export interface ILocalStorageTable<T extends Model> {
+export interface ILocalStorageTable<T extends Base> {
 
-	getNewItems(): Promise<ISyncData<T>[]>;
-	getUpdatedItems(): Promise<ISyncData<T>[]>;
-	getDeletedItems(): Promise<ITrash<ISyncData<T>>[]>;
+	listNewItems(): Promise<T[]>;
+	listUpdatedItems(): Promise<T[]>;
+	listDeletedItems(): Promise<ITrash<T>[]>;
 
-	moveToConflicts(localData: ISyncData<T>, remoteData: IRemoteData<T>): Promise<void>;
+	moveToConflicts(localData: T, remoteData: T): Promise<void>;
 	moveToTrash(id: string): Promise<void>;
 	delete(id: string): Promise<void>;
 
-	get(id: ID): Promise<ISyncData<T> | undefined>;
+	get(id: ID): Promise<T | undefined>;
 	list(params?: {
 		orderBy?: string;
 		reverse?: boolean;
 		limit?: number
-	}): Promise<ISyncData<T>[]>;
+	}): Promise<T[]>;
+	list$(params?: {
+		orderBy?: string;
+		reverse?: boolean;
+		limit?: number
+	}): Observable<T[]>;
 	listIds(): Promise<ID[]>;
 
-	save(item: T): Promise<ISyncData<T>>;
+	save(item: T): Promise<T>;
 	saveAll(items: Partial<T>[]): Promise<void>;
-	saveRemoteData(item: IRemoteData<T>): Promise<void>;
-	saveAllRemoteData(items: IRemoteData<T>[]): Promise<void>;
+	saveRemoteData(item: T): Promise<void>;
+	saveAllRemoteData(items: T[]): Promise<void>;
 
 	search(term: string): Promise<T[]>;
 	searchByTags(tags: string[]): Promise<T[]>;
@@ -42,7 +46,7 @@ export interface ILocalStorageTable<T extends Model> {
 
 export interface IBookmarksTable extends ILocalStorageTable<Bookmark> {
 
-	getClickedItems(): Promise<Click[]>;
+	listClickedItems(): Promise<Click[]>;
 	saveClick(item: Click): Promise<void>;
 	saveClicks(items: Click[]): Promise<void>;
 	click(id: string): Promise<void>;

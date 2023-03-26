@@ -1,11 +1,9 @@
-import { Model } from 'lib/models';
-import { ISyncData } from './sync.model';
-import { IRemoteData } from 'lib/services';
+import { Base } from 'lib/models';
 
-export interface IConflictData<T extends Model> extends Model {
+export interface IConflictData<T extends Base> extends Base {
 
-	localData: ISyncData<T>;
-	remoteData: IRemoteData<T>;
+	localData: T;
+	remoteData: T;
 	createTime: string;
 
 }

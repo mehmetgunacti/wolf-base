@@ -19,9 +19,9 @@ export const localStorageServiceFactory = (): DexieLocalStorageService => {
 
 };
 
-const bookmarksTableFactory = (knobaDB?: WolfBaseDB): BookmarksTable => {
+const bookmarksTableFactory = (wolfBaseDB?: WolfBaseDB): BookmarksTable => {
 
-	return new BookmarksTable(knobaDB || wolfBaseDBFactory());
+	return new BookmarksTable(wolfBaseDB || wolfBaseDBFactory());
 
 };
 

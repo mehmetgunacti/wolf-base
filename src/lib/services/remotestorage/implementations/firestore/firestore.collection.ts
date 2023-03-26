@@ -1,10 +1,9 @@
 import { IRemoteStorageCollection } from '../../remote-storage-collection.interface';
 import { RemoteCollection, IKnobaEntity, ID } from 'lib/constants';
 import { FirestoreTool, IFirestoreDocument, IFirestoreData } from 'lib/utils';
-import { Model } from 'lib/models';
-import { IRemoteData } from '../../remote-storage-models.interface';
+import { Base } from 'lib/models';
 
-export abstract class AbstractFirestoreCollection<T extends Model> implements IRemoteStorageCollection<T> {
+export abstract class AbstractFirestoreCollection<T extends Base> implements IRemoteStorageCollection<T> {
 
 	protected pageSize = '10000';
 
@@ -13,7 +12,7 @@ export abstract class AbstractFirestoreCollection<T extends Model> implements IR
 		protected remoteCollection: RemoteCollection
 	) { }
 
-	async create(item: T): Promise<IRemoteData<T>> {
+	async create(item: T): Promise<T> {
 
 		const url = this.firestore.createURL({
 			collection: this.remoteCollection,
@@ -26,7 +25,7 @@ export abstract class AbstractFirestoreCollection<T extends Model> implements IR
 
 	}
 
-	async update(id: ID, item: Partial<IKnobaEntity>): Promise<IRemoteData<T>> {
+	async update(id: ID, item: Partial<IKnobaEntity>): Promise<T> {
 
 		const url = this.firestore.createURL({
 			collection: this.remoteCollection,
@@ -53,7 +52,7 @@ export abstract class AbstractFirestoreCollection<T extends Model> implements IR
 
 	}
 
-	async get(id: string): Promise<IRemoteData<T>> {
+	async get(id: string): Promise<T> {
 
 		const response: IFirestoreData<T> = await this.firestore.get<T>(
 
@@ -67,7 +66,7 @@ export abstract class AbstractFirestoreCollection<T extends Model> implements IR
 
 	}
 
-	async list(): Promise<IRemoteData<T>[]> {
+	async list(): Promise<T[]> {
 
 		const list: IFirestoreData<T>[] = await this.firestore.list<T>(
 
@@ -81,7 +80,7 @@ export abstract class AbstractFirestoreCollection<T extends Model> implements IR
 
 	}
 
-	async listIds(): Promise<IRemoteData<ID>[]> {
+	async listIds(): Promise<ID[]> {
 
 		const ids: IFirestoreData<T>[] = await this.firestore.list(
 
@@ -92,28 +91,20 @@ export abstract class AbstractFirestoreCollection<T extends Model> implements IR
 
 		);
 
-		return ids.map(item => ({
-
-			id: item.id,
-			createTime: item.createTime,
-			updateTime: item.updateTime,
-			data: item.id
-
-		}));
+		return ids.map(item => item.id);
 
 	}
 
 	protected abstract createRequestBody(click: Partial<IKnobaEntity>): IFirestoreDocument;
 	protected abstract createUpdateMask(item: Partial<IKnobaEntity>): string;
 
-	private convert(item: IFirestoreData<T>): IRemoteData<T> {
+	private convert(item: IFirestoreData<T>): T {
 
 		return {
 
-			id: item.id,
-			data: item.data,
-			createTime: item.createTime,
-			updateTime: item.updateTime
+			...item.data,
+			createTime: item.created,
+			updateTime: item.updated
 
 		};
 

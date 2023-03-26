@@ -75,7 +75,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	onSave(): void {
-
+ 
 		if (isInvalid(this.form.formGroup))
 			return;
 

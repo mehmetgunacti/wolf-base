@@ -11,7 +11,8 @@ export const bookmarksRemoveAll = createAction('[Bookmarks] remove all');
 export const bookmarksSearch = createAction('[Bookmarks] search', props<{ term: string }>());
 export const bookmarksSearchSuccess = createAction('[Bookmarks] search success', props<{ bookmarks: Bookmark[] }>());
 
-export const bookmarksUpsert = createAction('[Bookmarks] create or update', props<{ payload: Bookmark }>());
+export const bookmarksSave = createAction('[Bookmarks] save bookmark', props<{ bookmark: Bookmark }>());
+export const bookmarksSaveSuccess = createAction('[Bookmarks] insert bookmark success', props<{ bookmark: Bookmark }>());
 
 export const bookmarksDelete = createAction('[Bookmarks] delete', props<{ id: string }>());
 export const bookmarksClick = createAction('[Bookmarks] clicked', props<{ payload: Bookmark }>());

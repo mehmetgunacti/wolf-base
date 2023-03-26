@@ -1,6 +1,6 @@
-import { Model } from './common.model';
+import { Base } from './common.model';
 
-export interface Bookmark extends Model {
+export interface Bookmark extends Base {
 
 	name: string;
 	title: string;
@@ -11,7 +11,7 @@ export interface Bookmark extends Model {
 
 }
 
-export interface Click extends Model {
+export interface Click extends Base {
 
 	clicks: number;
 
