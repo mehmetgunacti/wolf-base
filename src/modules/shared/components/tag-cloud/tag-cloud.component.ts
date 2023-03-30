@@ -33,7 +33,6 @@ export class TagCloudComponent implements OnInit, OnDestroy {
 			debounceTime(400),
 			distinctUntilChanged()
 		).subscribe(term => this.search.emit(term));
-
 		this.uiTags = this.createUITags();
 
 	}

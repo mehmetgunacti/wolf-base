@@ -25,7 +25,7 @@ export class BookmarksTable extends AbstractDexieTable<Bookmark> implements IBoo
 			clicks: 0
 
 		};
-		return { ...instance, ...item } as Bookmark;
+		return { ...instance, ...item, id } as Bookmark;
 
 	}
 

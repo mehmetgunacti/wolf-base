@@ -40,7 +40,8 @@ const reducer = createReducer(
 	on(fromActions.bookmarksAddOpenDialog, (state): BookmarksState => ({ ...state, editDialogVisible: true, selected: null })),
 	on(fromActions.bookmarksEditOpenDialog, (state, { id }): BookmarksState => ({ ...state, editDialogVisible: true, selected: id })),
 	on(fromActions.bookmarksEditCloseDialog, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null })),
-	on(fromActions.bookmarksSaveSuccess, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null }))
+	on(fromActions.bookmarksCreateSuccess, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null })),
+	on(fromActions.bookmarksUpdateSuccess, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null }))
 	// on(fromActions.bookmarksSaveSuccess, (state, { bookmark }): BookmarksState => {
 
 	// 	// todo

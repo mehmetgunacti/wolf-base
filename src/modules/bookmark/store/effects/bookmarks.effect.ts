@@ -68,29 +68,50 @@ export class BookmarksEffects {
 
 	);
 
-	bookmarksSave$ = createEffect(
+	bookmarksCreate$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.bookmarksSave),
+			ofType(fromActions.bookmarksCreate),
 			map(param => param.bookmark),
-			switchMap(bookmark => this.localStorage.bookmarks.save(bookmark)),
-			map((bookmark: Bookmark) => fromActions.bookmarksSaveSuccess({ bookmark }))
+			switchMap(bookmark => this.localStorage.bookmarks.create(bookmark)),
+			map((bookmark: Bookmark) => fromActions.bookmarksCreateSuccess({ bookmark }))
 
 		)
 
 	);
 
-	bookmarksShowSaveNotification$ = createEffect(
+	bookmarksShowCreateNotification$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.bookmarksSaveSuccess),
+			ofType(fromActions.bookmarksCreateSuccess),
 			map(param => param.bookmark),
-			map((bookmark: Bookmark) => showNotification({
-				severity: 'success',
-				detail: `Bookmark ${bookmark.created ? 'created' : 'updated'}`
-			}))
+			map(() => showNotification({ severity: 'success', detail: 'Bookmark created' }))
+
+		)
+
+	);
+
+	bookmarksUpdate$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(fromActions.bookmarksUpdate),
+			switchMap(({id, bookmark}) => this.localStorage.bookmarks.update(id, bookmark)),
+			map((bookmark: Bookmark) => fromActions.bookmarksUpdateSuccess({ bookmark }))
+
+		)
+
+	);
+
+	bookmarksShowUpdateNotification$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(fromActions.bookmarksUpdateSuccess),
+			map(param => param.bookmark),
+			map(() => showNotification({ severity: 'success', detail: 'Bookmark updated' }))
 
 		)
 

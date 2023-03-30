@@ -31,7 +31,9 @@ export interface ILocalStorageTable<T extends Base> {
 	}): Observable<T[]>;
 	listIds(): Promise<ID[]>;
 
-	save(item: T): Promise<T>;
+	create(item: Partial<T>): Promise<T>;
+	update(id: ID, item: Partial<T>): Promise<T>;
+
 	saveAll(items: Partial<T>[]): Promise<void>;
 	saveRemoteData(item: T): Promise<void>;
 	saveAllRemoteData(items: T[]): Promise<void>;

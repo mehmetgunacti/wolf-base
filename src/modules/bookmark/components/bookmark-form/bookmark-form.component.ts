@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { environment } from 'environments/environment';
-import { Bookmark } from 'lib';
+import { Bookmark, ID } from 'lib';
 import { isInvalid } from 'modules/shared';
 import { AutoComplete } from 'primeng/autocomplete';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
@@ -17,7 +17,8 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	@Input() bookmark: Bookmark | null | undefined;
 	@Input() tagSuggestions: string[] | null | undefined;
 
-	@Output() save: EventEmitter<Bookmark> = new EventEmitter();
+	@Output() create: EventEmitter<Partial<Bookmark>> = new EventEmitter();
+	@Output() update: EventEmitter<{ id: ID, bookmark: Partial<Bookmark> }> = new EventEmitter();
 	@Output() tagInput: EventEmitter<string> = new EventEmitter();
 
 	@ViewChild('autocomplete') autocompleteCharge!: AutoComplete;
@@ -75,11 +76,15 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	onSave(): void {
- 
+
 		if (isInvalid(this.form.formGroup))
 			return;
 
-		this.save.emit(this.form.formGroup.value);
+		const bookmark: Partial<Bookmark> = this.form.formGroup.value;
+		if (bookmark.id)
+			this.update.emit({ id: bookmark.id, bookmark });
+		else
+			this.create.emit(bookmark);
 
 	}
 
@@ -140,7 +145,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 		try {
 			return new URL(url.toLowerCase());
-		} catch(err) {
+		} catch (err) {
 			console.error('err', err);
 			return null;
 		}

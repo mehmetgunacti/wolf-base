@@ -150,28 +150,10 @@ export abstract class AbstractDexieTable<T extends Base> implements ILocalStorag
 
 	}
 
-	protected async create(item: T): Promise<T> {
-
-		const newItem: T = this.newLocalDataFromPartial(item);
-		await this.db.table<T>(this.tablename).add(newItem);
-		return newItem;
-
-	}
-
-	async save(item: T): Promise<T> {
-
-		if (item.id)
-			return this.update(item.id, item);
-
-		else
-			return this.create(item);
-
-	}
-
 	async saveAll(items: Partial<T>[]): Promise<void> {
 
 		await this.db.table<T>(this.tablename).bulkPut(
-			items.map(data => this.newLocalDataFromPartial(data))
+			items.map(data => this.newItemFromPartial(data))
 		);
 
 	}
@@ -209,7 +191,15 @@ export abstract class AbstractDexieTable<T extends Base> implements ILocalStorag
 
 	}
 
-	protected async update(id: ID, data: Partial<T>): Promise<T> {
+	async create(item: Partial<T>): Promise<T> {
+
+		const newItem: T = this.newItemFromPartial(item);
+		await this.db.table<T>(this.tablename).add(newItem);
+		return newItem;
+
+	}
+
+	async update(id: ID, data: Partial<T>): Promise<T> {
 
 		const localData: T | undefined = await this.get(id);
 		if (!localData)
@@ -271,7 +261,7 @@ export abstract class AbstractDexieTable<T extends Base> implements ILocalStorag
 
 	}
 
-	protected newLocalDataFromPartial(item: Partial<T>): T {
+	protected newItemFromPartial(item: Partial<T>): T {
 
 		const id: ID = uuidv4();
 		return this.newInstance(id, item);

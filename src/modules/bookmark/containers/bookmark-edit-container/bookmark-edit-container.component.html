@@ -1,5 +1,6 @@
 <app-bookmark-form
 		[bookmark]="bookmark$ | async"
 		[tagSuggestions]="tagSuggestions$ | async"
-		(save)="onSave($event)"
+		(create)="onCreate($event)"
+		(update)="onUpdate($event.id, $event.bookmark)"
 		(tagInput)="onTagInput($event)"></app-bookmark-form>

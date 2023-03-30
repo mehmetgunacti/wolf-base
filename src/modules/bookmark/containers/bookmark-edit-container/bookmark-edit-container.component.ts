@@ -1,6 +1,6 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bookmark } from 'lib';
+import { Bookmark, ID } from 'lib';
 import { combineLatest, filter, map, Observable, Subject } from 'rxjs';
 import * as fromStore from '../../store';
 
@@ -46,9 +46,15 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 
 
-	onSave(f: Bookmark): void {
+	onCreate(bookmark: Partial<Bookmark>): void {
 
-		this.store.dispatch(fromStore.bookmarksSave({ bookmark: f }));
+		this.store.dispatch(fromStore.bookmarksCreate({ bookmark: bookmark }));
+
+	}
+
+	onUpdate(id: ID, bookmark: Partial<Bookmark>) {
+
+		this.store.dispatch(fromStore.bookmarksUpdate({ id, bookmark }));
 
 	}
 
