@@ -15,7 +15,7 @@ interface ITagUI extends Tag {
 })
 export class TagCloudComponent implements OnInit, OnDestroy {
 
-	@Input() tags: Tag[] = [];
+	@Input() tags: Tag[] | undefined | null;
 	@Input() selectedTags: { [key: string]: boolean } = {};
 
 	@Output() tagClick: EventEmitter<string> = new EventEmitter();
@@ -58,9 +58,9 @@ export class TagCloudComponent implements OnInit, OnDestroy {
 
 	createUITags(): ITagUI[] {
 
-		const map: Map<number, string> = this.createLookupMap(this.tags.map(t => t.count));
+		const map: Map<number, string> = this.createLookupMap(this.tags?.map(t => t.count) ?? [0]);
 		const uiArr: ITagUI[] = [];
-		this.tags.forEach(tag => uiArr.push({ ...tag, className: 'big_' + map.get(tag.count) }));
+		this.tags?.forEach(tag => uiArr.push({ ...tag, className: 'big_' + map.get(tag.count) }));
 
 		return uiArr;
 

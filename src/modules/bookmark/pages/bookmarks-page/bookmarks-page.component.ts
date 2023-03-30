@@ -13,14 +13,16 @@ import { Observable } from 'rxjs';
 })
 export class BookmarksPageComponent {
 
-	tagsVisible$!: Observable<boolean>;
 	editDialogVisible$: Observable<boolean>;
+	tagsVisible$!: Observable<boolean>;
+	tags$: Observable<Tag[]>;
 
 	constructor(private store: Store, localStorage: LocalStorageService) {
 
-		this.tagsVisible$ = store.select(fromStore.selectorTagCloudVisibility);
 		this.editDialogVisible$ = store.select(fromStore.selectorEditDialogVisible);
-		
+		this.tagsVisible$ = store.select(fromStore.selectorTagCloudVisibility);
+		this.tags$ = store.select(fromStore.selectorTagsArray);
+
 		// todo : delete later
 		localStorage.bookmarks.clear();
 		localStorage.bookmarks.saveAll(this.bookmarks);
@@ -44,32 +46,6 @@ export class BookmarksPageComponent {
 		this.store.dispatch(fromStore.bookmarksEditCloseDialog());
 
 	}
-
-	public tags: Tag[] = [
-		{ "id": "2-be-read", count: 34 },
-		{ "id": "angular", count: 13 },
-		{ "id": "brands", count: 4 },
-		{ "id": "colors", count: 6 },
-		{ "id": "css", count: 21 },
-		{ "id": "cvents", count: 12 },
-		{ "id": "calcon", count: 8 },
-		{ "id": "free", count: 21 },
-		{ "id": "git", count: 1 },
-		{ "id": "im-bored", count: 19 },
-		{ "id": "javascript", count: 5 },
-		{ "id": "library", count: 1 },
-		{ "id": "lookup", count: 24 },
-		{ "id": "news", count: 22 },
-		{ "id": "nginx", count: 1 },
-		{ "id": "programming", count: 12 },
-		{ "id": "resource", count: 11 },
-		{ "id": "rxjs", count: 1 },
-		{ "id": "security", count: 56 },
-		{ "id": "space", count: 14 },
-		{ "id": "starter", count: 12 },
-		{ "id": "tricks", count: 25 }
-	];
-
 
 	bookmarks: Bookmark[] = [
 		{
