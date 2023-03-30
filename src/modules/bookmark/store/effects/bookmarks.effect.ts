@@ -17,15 +17,15 @@ export class BookmarksEffects {
 	) { }
 
 	listFromIndexedDb$ = createEffect(
-		
+
 		() => this.localStorage.bookmarks.list$({
 			orderBy: 'clicks',
 			reverse: true,
 			limit: 50
 		}).pipe(
-			map((bookmarks) => fromActions.bookmarksLoadAllSuccess({bookmarks}))
+			map((bookmarks) => fromActions.bookmarksLoadAllSuccess({ bookmarks }))
 		)
-		
+
 	);
 
 	// bookmarksLoadAll$ = createEffect(
@@ -86,7 +86,6 @@ export class BookmarksEffects {
 		() => this.actions$.pipe(
 
 			ofType(fromActions.bookmarksCreateSuccess),
-			map(param => param.bookmark),
 			map(() => showNotification({ severity: 'success', detail: 'Bookmark created' }))
 
 		)
@@ -98,7 +97,7 @@ export class BookmarksEffects {
 		() => this.actions$.pipe(
 
 			ofType(fromActions.bookmarksUpdate),
-			switchMap(({id, bookmark}) => this.localStorage.bookmarks.update(id, bookmark)),
+			switchMap(({ id, bookmark }) => this.localStorage.bookmarks.update(id, bookmark)),
 			map((bookmark: Bookmark) => fromActions.bookmarksUpdateSuccess({ bookmark }))
 
 		)
@@ -110,7 +109,6 @@ export class BookmarksEffects {
 		() => this.actions$.pipe(
 
 			ofType(fromActions.bookmarksUpdateSuccess),
-			map(param => param.bookmark),
 			map(() => showNotification({ severity: 'success', detail: 'Bookmark updated' }))
 
 		)
