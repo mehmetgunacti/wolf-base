@@ -1,5 +1,5 @@
 import { IRemoteStorageCollection } from '../../remote-storage-collection.interface';
-import { RemoteCollection, IKnobaEntity, ID } from 'lib/constants';
+import { RemoteCollection, IKnobaEntity, UUID } from 'lib/constants';
 import { FirestoreTool, IFirestoreDocument, IFirestoreData } from 'lib/utils';
 import { Base } from 'lib/models';
 
@@ -25,7 +25,7 @@ export abstract class AbstractFirestoreCollection<T extends Base> implements IRe
 
 	}
 
-	async update(id: ID, item: Partial<IKnobaEntity>): Promise<T> {
+	async update(id: UUID, item: Partial<IKnobaEntity>): Promise<T> {
 
 		const url = this.firestore.createURL({
 			collection: this.remoteCollection,
@@ -80,7 +80,7 @@ export abstract class AbstractFirestoreCollection<T extends Base> implements IRe
 
 	}
 
-	async listIds(): Promise<ID[]> {
+	async listIds(): Promise<UUID[]> {
 
 		const ids: IFirestoreData<T>[] = await this.firestore.list(
 

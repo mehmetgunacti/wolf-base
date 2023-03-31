@@ -1,8 +1,8 @@
-import { ID } from 'lib/constants';
+import { UUID } from 'lib/constants';
 
 export interface BaseEntity {
 
-	id: ID;
+	id: UUID;
 	created?: Date;
 	modified?: Date;
 

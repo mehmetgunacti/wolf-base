@@ -1,8 +1,8 @@
-import { ID } from 'lib/constants';
+import { UUID } from 'lib/constants';
 
 export interface Base {
 
-	id: ID;
+	id: UUID;
 	created?: string;
 	updated?: string;
 

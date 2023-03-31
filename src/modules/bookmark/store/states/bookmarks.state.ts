@@ -1,10 +1,10 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Bookmark, ID, SYNC_STATES } from 'lib';
+import { Bookmark, UUID, SYNC_STATES } from 'lib';
 
 export interface BookmarksState extends EntityState<Bookmark> {
 
 	editDialogVisible: boolean;
-	selected: ID | null,
+	selected: UUID | null,
 	syncRequired: number;
 	syncStatus: SYNC_STATES;
 	syncMessages: string[];

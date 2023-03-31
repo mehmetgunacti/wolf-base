@@ -154,17 +154,17 @@ export class BookmarksEffects {
 
 	);
 
-	tagsToggleSelected$ = createEffect(
+	// tagsToggleSelected$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(fromActions.tagsToggleSelected),
-			map(p => p.ids),
-			switchMap(ids => this.localStorage.bookmarks.searchByTags(ids)),
-			map(bookmarks => fromActions.bookmarksSearchSuccess({ bookmarks }))
+	// 		ofType(fromActions.tagsToggleSelected),
+	// 		map(p => p.id),
+	// 		switchMap(ids => this.localStorage.bookmarks.searchByTags(ids)),
+	// 		map(bookmarks => fromActions.bookmarksSearchSuccess({ bookmarks }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 }

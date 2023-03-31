@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Bookmark, ID, ISyncState } from 'lib';
+import { Bookmark, UUID, ISyncState } from 'lib';
 
 export const bookmarksFetchAll = createAction('[Bookmarks] fetch all');
 
@@ -14,7 +14,7 @@ export const bookmarksSearchSuccess = createAction('[Bookmarks] search success',
 export const bookmarksCreate = createAction('[Bookmarks] Create Bookmark', props<{ bookmark: Partial<Bookmark> }>());
 export const bookmarksCreateSuccess = createAction('[Bookmarks] Create Bookmark Success', props<{ bookmark: Bookmark }>());
 
-export const bookmarksUpdate = createAction('[Bookmarks] Update Bookmark', props<{ id: ID, bookmark: Partial<Bookmark> }>());
+export const bookmarksUpdate = createAction('[Bookmarks] Update Bookmark', props<{ id: UUID, bookmark: Partial<Bookmark> }>());
 export const bookmarksUpdateSuccess = createAction('[Bookmarks] Update Bookmark Success', props<{ bookmark: Bookmark }>());
 
 export const bookmarksDelete = createAction('[Bookmarks] delete', props<{ id: string }>());
@@ -28,5 +28,5 @@ export const bookmarksSyncSetState = createAction('[Bookmarks] set sync state bo
 
 // export const bookmarksToggleEditDialog = createAction('[Bookmarks] toggle edit dialog');
 export const bookmarksAddOpenDialog = createAction('[Bookmarks] add: open dialog');
-export const bookmarksEditOpenDialog = createAction('[Bookmarks] edit: open dialog', props<{ id: ID }>());
+export const bookmarksEditOpenDialog = createAction('[Bookmarks] edit: open dialog', props<{ id: UUID }>());
 export const bookmarksEditCloseDialog = createAction('[Bookmarks] edit: close dialog');

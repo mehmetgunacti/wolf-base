@@ -1,4 +1,4 @@
-import { RemoteCollection, ID } from 'lib/constants';
+import { RemoteCollection, UUID } from 'lib/constants';
 import { Bookmark, Click } from 'lib/models';
 import { FirestoreTool, IFirestoreData, IFirestoreDocument, FIRESTORE_VALUE } from 'lib/utils';
 import { AbstractFirestoreCollection } from '../firestore.collection';
@@ -36,7 +36,7 @@ export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bo
 
 		);
 
-		const mapClicks: Map<ID, number> = new Map(clicks.map(click => [click.id, click.data.clicks]));
+		const mapClicks: Map<UUID, number> = new Map(clicks.map(click => [click.id, click.data.clicks]));
 		return bookmarks.map(b => ({ ...b, clicks: mapClicks.get(b.id) || 0 }));
 
 	}

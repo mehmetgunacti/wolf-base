@@ -1,7 +1,7 @@
-import { Action, createReducer, on, ActionReducer } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
+import { Tag } from 'lib';
 import * as fromActions from '../actions';
 import * as fromStates from '../states';
-import { Tag } from 'lib';
 
 const reducer = createReducer(
 
@@ -19,66 +19,59 @@ const reducer = createReducer(
 
 	),
 
-	on(
+	// on(
 
-		fromActions.bookmarksSearchSuccess,
-		(state, { bookmarks }) => {
+	// 	fromActions.bookmarksSearchSuccess,
+	// 	(state, { bookmarks }) => {
 
-			const setOfTags: Set<string> = new Set<string>();
-			bookmarks.map(b => b.tags.forEach(t => setOfTags.add(t)));
+	// 		const setOfTags: Set<string> = new Set<string>();
+	// 		bookmarks.map(b => b.tags.forEach(t => setOfTags.add(t)));
 
-			const selectedTags: { [key: string]: boolean } = {};
-			setOfTags.forEach(id => selectedTags[id] = true);
-			return { ...state, selected: { ...selectedTags } };
+	// 		const selectedTags: { [key: string]: boolean } = {};
+	// 		setOfTags.forEach(id => selectedTags[id] = true);
+	// 		return { ...state, selected: { ...selectedTags } };
 
-		}
+	// 	}
 
-	),
+	// ),
 
-	on(
+	// on(
 
-		fromActions.tagsLoadAllSuccess,
-		(state, { tags }) => {
-			// create tag objects into a set
-			// calculate count of each tag
-			// const tmpTags: { [key: string]: number } = {};
-			// bookmarks.forEach(
-			// 	b => b.tags.forEach(
-			// 		tag => tmpTags[tag] = !!tmpTags[tag] ? (tmpTags[tag] + 1) : 1
-			// 	)
-			// );
+	// 	fromActions.tagsLoadAllSuccess,
+	// 	(state, { tags }) => {
+	// 		// create tag objects into a set
+	// 		// calculate count of each tag
+	// 		// const tmpTags: { [key: string]: number } = {};
+	// 		// bookmarks.forEach(
+	// 		// 	b => b.tags.forEach(
+	// 		// 		tag => tmpTags[tag] = !!tmpTags[tag] ? (tmpTags[tag] + 1) : 1
+	// 		// 	)
+	// 		// );
 
-			// // create ITag array and return to be put in store
-			// const tags: ITag[] = Object.keys(tmpTags).map(id => ({ id, count: tmpTags[id] } as ITag));
-			return fromStates.tagsAdapter.setAll(tags, { ...state, selected: {}, tagCloudVisible: false });
-		}
+	// 		// // create ITag array and return to be put in store
+	// 		// const tags: ITag[] = Object.keys(tmpTags).map(id => ({ id, count: tmpTags[id] } as ITag));
+	// 		return fromStates.tagsAdapter.setAll(tags, { ...state, selected: {}, tagCloudVisible: false });
+	// 	}
 
-	),
-
-	on(
-
-		fromActions.bookmarksLoadAll,
-		state => ({ ...state, tagCloudVisible: false })
-
-	),
+	// ),
 
 	on(
 
 		fromActions.bookmarksLoadAllSuccess,
 		(state, { bookmarks }) => {
 
-			// create tag objects into a set
-			// calculate count of each tag
-			const tmpTags: { [key: string]: number } = {};
-			bookmarks.forEach(
-				b => b.tags.forEach(
-					tag => tmpTags[tag] = !!tmpTags[tag] ? (tmpTags[tag] + 1) : 1
-				)
+			const mapTags = new Map<string, number>();
+			bookmarks
+				.flatMap(b => b.tags)
+				.forEach(tag => {
+					mapTags.set(tag, (mapTags.get(tag) ?? 0) + 1);
+				});
+
+			const tags: Tag[] = [];
+			mapTags.forEach(
+				(count, name) => { tags.push({ name, count }); }
 			);
-
-			// create ITag array and return to be put in store
-			const tags: Tag[] = Object.keys(tmpTags).map(id => ({ id, count: tmpTags[id] } as Tag));
-			return fromStates.tagsAdapter.setAll(tags, { ...state, selected: {}, tagCloudVisible: false });
+			return { ...state, tags };
 
 		}
 
@@ -86,29 +79,42 @@ const reducer = createReducer(
 
 	on(
 
-		fromActions.tagsToggleSelected,
-		(state, { ids }) => {
+		fromActions.tagsSelect,
+		(state, { name }) => {
 
-			const selectedTags: { [key: string]: boolean } = {};
-			ids.forEach(id => selectedTags[id] = true);
-			return { ...state, selected: { ...selectedTags } };
+			if (state.selected.indexOf(name) >= 0) // tag already selected
+				return state;
+			return { ...state, selected: [...state.selected, name] };
 
 		}
 
 	),
 
 	on(
-		
-		fromActions.tagsSetPopularTag,
-		state => ({
 
-			...state,
-			selected: {},
-			tagCloudVisible: false
+		fromActions.tagsDeselect,
+		(state, { name }) => {
 
-		})
-		
+			if (state.selected.indexOf(name) < 0) // tag not selected
+				return state;
+			return { ...state, selected: state.selected.filter(t => t !== name) };
+
+		}
+
 	)
+
+	// on(
+
+	// 	fromActions.tagsSetPopularTag,
+	// 	state => ({
+
+	// 		...state,
+	// 		selected: {},
+	// 		tagCloudVisible: false
+
+	// 	})
+
+	// )
 	// on(fromActions.tagsSearch, (state, { term }) => {
 
 	// 	const selectedTags: { [key: string]: boolean } = {};

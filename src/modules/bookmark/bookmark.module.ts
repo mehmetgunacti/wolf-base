@@ -17,7 +17,7 @@ import * as fromStore from './store';
 		BookmarkRoutingModule,
 		ReactiveFormsModule,
 		StoreModule.forFeature('bookmarksModule', fromConfig.reducers), //  , { metaReducers }),
-		EffectsModule.forFeature([...fromStore.effects]),
+		EffectsModule.forFeature([...fromConfig.effects]),
 		SharedModule
 	],
 	entryComponents: [

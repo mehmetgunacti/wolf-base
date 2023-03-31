@@ -1,4 +1,4 @@
-import { CONF_KEYS, ID, WolfBaseTable } from 'lib/constants';
+import { CONF_KEYS, UUID, WolfBaseTable } from 'lib/constants';
 import { IConflictData, IDexieConfiguration, Base, ITrash, Bookmark } from 'lib/models';
 import Dexie from 'dexie';
 import { environment } from 'environments/environment';
@@ -16,10 +16,10 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 export class WolfBaseDB extends Dexie {
 
 	configuration: Dexie.Table<string | number | boolean, string>;
-	conflicts: Dexie.Table<IConflictData<Base>, ID>;
-	trashcan: Dexie.Table<ITrash<Base>, ID>;
+	conflicts: Dexie.Table<IConflictData<Base>, UUID>;
+	trashcan: Dexie.Table<ITrash<Base>, UUID>;
 
-	bookmarks: Dexie.Table<Bookmark, ID>;
+	bookmarks: Dexie.Table<Bookmark, UUID>;
 	// notes: Dexie.Table<ILocalData<INote>, ID>;
 	// tasks: Dexie.Table<ILocalData<ITaskList>, ID>;
 	// words: Dexie.Table<ILocalData<IWord>, ID>;

@@ -5,6 +5,7 @@ import { BookmarksContainerComponent } from './containers/bookmarks-container/bo
 import { BookmarksPageComponent } from './pages/bookmarks-page/bookmarks-page.component';
 import { bookmarksReducer, BookmarksState, tagsReducer, TagsState } from './store';
 import { ActionReducerMap } from '@ngrx/store';
+import { BookmarksEffects } from './store/effects/bookmarks.effect';
 
 export const components = [
 
@@ -27,6 +28,11 @@ export interface BookmarksModuleState {
 	tags: TagsState;
 
 }
+
+export const effects = [
+    BookmarksEffects,
+    // TagsEffects
+];
 
 export const reducers: ActionReducerMap<BookmarksModuleState> = {
 

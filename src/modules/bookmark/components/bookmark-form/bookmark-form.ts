@@ -1,5 +1,5 @@
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Bookmark, ID } from 'lib';
+import { Bookmark, UUID } from 'lib';
 import { IFormClass } from 'modules/shared';
 
 export class EditForm implements IFormClass<Bookmark> {
@@ -33,8 +33,8 @@ export class EditForm implements IFormClass<Bookmark> {
 
 	}
 
-	get id(): FormControl<ID | null> {
-		return <FormControl<ID>> this._formGroup.controls['id'];
+	get id(): FormControl<UUID | null> {
+		return <FormControl<UUID>> this._formGroup.controls['id'];
 	}
 
 	get name(): FormControl<string> {

@@ -1,4 +1,4 @@
-import { ID } from 'lib/constants';
+import { UUID } from 'lib/constants';
 import {
 	Click,
 	ITrash,
@@ -18,7 +18,7 @@ export interface ILocalStorageTable<T extends Base> {
 	moveToTrash(id: string): Promise<void>;
 	delete(id: string): Promise<void>;
 
-	get(id: ID): Promise<T | undefined>;
+	get(id: UUID): Promise<T | undefined>;
 	list(params?: {
 		orderBy?: string;
 		reverse?: boolean;
@@ -29,10 +29,10 @@ export interface ILocalStorageTable<T extends Base> {
 		reverse?: boolean;
 		limit?: number
 	}): Observable<T[]>;
-	listIds(): Promise<ID[]>;
+	listIds(): Promise<UUID[]>;
 
 	create(item: Partial<T>): Promise<T>;
-	update(id: ID, item: Partial<T>): Promise<T>;
+	update(id: UUID, item: Partial<T>): Promise<T>;
 
 	saveAll(items: Partial<T>[]): Promise<void>;
 	saveRemoteData(item: T): Promise<void>;
@@ -40,7 +40,7 @@ export interface ILocalStorageTable<T extends Base> {
 
 	search(term: string): Promise<T[]>;
 	searchByTags(tags: string[]): Promise<T[]>;
-	tags(): Promise<Tag[]>;
+	// tags(): Promise<Tag[]>;
 
 	clear(): Promise<void>;
 

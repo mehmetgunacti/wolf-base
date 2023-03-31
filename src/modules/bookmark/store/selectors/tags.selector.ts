@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromStates from '../states';
 import { BookmarksModuleState } from 'modules/bookmark/bookmark.config';
 
 const selectorModuleState = createFeatureSelector<BookmarksModuleState>('bookmarksModule');
@@ -8,20 +7,10 @@ const selectorTagsState = createSelector(
 	state => state.tags
 )
 
-const {
-	selectIds,
-	selectEntities,
-	selectAll,
-	selectTotal,
-} = fromStates.tagsAdapter.getSelectors(selectorTagsState);
-
-export const selectorTagsIds = selectIds;
-
-export const selectorTags = selectEntities;
-
-export const selectorTagsArray = selectAll;
-
-export const selectorTagsCount = selectTotal;
+export const selectorTagsArray = createSelector(
+	selectorTagsState,
+	state => state.tags
+);
 
 export const selectorTagCloudVisibility = createSelector(
 	selectorTagsState,
@@ -30,5 +19,5 @@ export const selectorTagCloudVisibility = createSelector(
 
 export const selectorTagsSelected = createSelector(
 	selectorTagsState,
-	state => state.selected
+	state => state.selected // Object.entries(state.selected).filter(([key, value]) => value).map(([key, value]) => key)
 );

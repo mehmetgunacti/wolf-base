@@ -10,7 +10,7 @@ const reducer = createReducer(
 
 	on(fromActions.bookmarksLoadAll, (state): BookmarksState => fromStates.bookmarksAdapter.setAll([], { ...state })),
 	on(fromActions.bookmarksSearch, (state): BookmarksState => fromStates.bookmarksAdapter.setAll([], { ...state })),
-	on(fromActions.tagsToggleSelected, (state): BookmarksState => fromStates.bookmarksAdapter.setAll([], { ...state })),
+	// on(fromActions.tagsToggleSelected, (state): BookmarksState => fromStates.bookmarksAdapter.setAll([], { ...state })),
 
 	on(fromActions.bookmarksLoadAllSuccess, (state, { bookmarks }): BookmarksState =>
 		fromStates.bookmarksAdapter.setAll(bookmarks, { ...state, bookmarksSearchTerm: '' })

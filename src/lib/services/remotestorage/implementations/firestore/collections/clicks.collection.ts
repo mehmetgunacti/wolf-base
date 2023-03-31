@@ -1,4 +1,4 @@
-import { ID, RemoteCollection } from 'lib/constants';
+import { UUID, RemoteCollection } from 'lib/constants';
 import { Click } from 'lib/models';
 import { ClicksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { FirestoreTool, IFirestoreData } from 'lib/utils';
@@ -7,7 +7,7 @@ export class ClicksRemoteStorageCollection implements ClicksCollection {
 
 	constructor(private firestore: FirestoreTool) { }
 
-	async increase(id: ID, item: Click): Promise<Click> {
+	async increase(id: UUID, item: Click): Promise<Click> {
 
 		const clicks: number = await this.firestore.increase(RemoteCollection.clicks, 'clicks', id, item.clicks);
 		return {
@@ -32,7 +32,7 @@ export class ClicksRemoteStorageCollection implements ClicksCollection {
 
 	}
 
-	async delete(id: ID): Promise<void> {
+	async delete(id: UUID): Promise<void> {
 
 		await this.firestore.delete(
 

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bookmark, LocalStorageService, Tag } from 'lib';
+import { Bookmark, UUID, LocalStorageService, Tag } from 'lib';
 import * as fromStore from 'modules/bookmark/store';
 import { slideUpDownTrigger } from 'modules/shared';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-bookmarks-page',
@@ -16,12 +16,14 @@ export class BookmarksPageComponent {
 	editDialogVisible$: Observable<boolean>;
 	tagsVisible$!: Observable<boolean>;
 	tags$: Observable<Tag[]>;
+	selectedTags$: Observable<UUID[]>;
 
 	constructor(private store: Store, localStorage: LocalStorageService) {
 
 		this.editDialogVisible$ = store.select(fromStore.selectorEditDialogVisible);
 		this.tagsVisible$ = store.select(fromStore.selectorTagCloudVisibility);
 		this.tags$ = store.select(fromStore.selectorTagsArray);
+		this.selectedTags$ = store.select(fromStore.selectorTagsSelected);
 
 		// todo : delete later
 		localStorage.bookmarks.clear();
@@ -46,6 +48,22 @@ export class BookmarksPageComponent {
 		this.store.dispatch(fromStore.bookmarksEditCloseDialog());
 
 	}
+
+	onTagClicked(name: string): void {
+
+		this.store.dispatch(fromStore.tagsSelect({ name }));
+
+	}
+
+	onTagDeselected(name: string): void {
+
+		this.store.dispatch(fromStore.tagsDeselect({ name }));
+
+	}
+
+	onTagSearch(term: string): void { }
+
+	onTagReset(): void { }
 
 	bookmarks: Bookmark[] = [
 		{

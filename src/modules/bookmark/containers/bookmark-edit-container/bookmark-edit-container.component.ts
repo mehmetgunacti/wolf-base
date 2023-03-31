@@ -1,6 +1,6 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bookmark, ID } from 'lib';
+import { Bookmark, UUID } from 'lib';
 import { combineLatest, filter, map, Observable, Subject } from 'rxjs';
 import * as fromStore from '../../store';
 
@@ -35,8 +35,8 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 				([tags, tagInput]) =>
 					tags
-						.filter(t => t.id.startsWith(tagInput))
-						.map(t => t.id)
+						.filter(t => t.name.startsWith(tagInput))
+						.map(t => t.name)
 
 			)
 
@@ -52,7 +52,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	}
 
-	onUpdate(id: ID, bookmark: Partial<Bookmark>) {
+	onUpdate(id: UUID, bookmark: Partial<Bookmark>) {
 
 		this.store.dispatch(fromStore.bookmarksUpdate({ id, bookmark }));
 

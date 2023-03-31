@@ -1,7 +1,6 @@
-import { Base } from 'lib';
+export interface Tag {
 
-export interface Tag extends Base {
-
+	name: string;
 	count: number;
 
 }

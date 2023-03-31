@@ -20,7 +20,15 @@
 </app-portal>
 
 <section tagCloud *ngIf="tagsVisible$ | async" @slideUpDown>
-	<app-tag-cloud [tags]="tags$ | async"></app-tag-cloud>
+
+	<app-tag-cloud
+		[tags]="tags$ | async"
+		[selectedTags]="selectedTags$ | async"
+		(tagClick)="onTagClicked($event)"
+		(selectedClick)="onTagDeselected($event)"
+		(search)="onTagSearch($event)"
+		(resetClick)="onTagReset()"></app-tag-cloud>
+
 </section>
 
 <p-dialog

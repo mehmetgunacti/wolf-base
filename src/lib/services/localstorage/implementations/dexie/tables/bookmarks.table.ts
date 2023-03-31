@@ -1,4 +1,4 @@
-import { WolfBaseTable, ID } from 'lib/constants';
+import { WolfBaseTable, UUID } from 'lib/constants';
 import { Click, Bookmark } from 'lib/models';
 import { AbstractDexieTable } from '../dexie.table';
 import { WolfBaseDB } from '../wolfbase.database';
@@ -12,7 +12,7 @@ export class BookmarksTable extends AbstractDexieTable<Bookmark> implements IBoo
 		super(db, WolfBaseTable.bookmarks);
 	}
 
-	protected newInstance(id: ID, item: Partial<Bookmark>): Bookmark {
+	protected newInstance(id: UUID, item: Partial<Bookmark>): Bookmark {
 
 		const instance: Bookmark = {
 

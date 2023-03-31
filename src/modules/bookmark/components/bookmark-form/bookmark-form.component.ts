@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { environment } from 'environments/environment';
-import { Bookmark, ID } from 'lib';
+import { Bookmark, UUID } from 'lib';
 import { isInvalid } from 'modules/shared';
 import { AutoComplete } from 'primeng/autocomplete';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
@@ -18,7 +18,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	@Input() tagSuggestions: string[] | null | undefined;
 
 	@Output() create: EventEmitter<Partial<Bookmark>> = new EventEmitter();
-	@Output() update: EventEmitter<{ id: ID, bookmark: Partial<Bookmark> }> = new EventEmitter();
+	@Output() update: EventEmitter<{ id: UUID, bookmark: Partial<Bookmark> }> = new EventEmitter();
 	@Output() tagInput: EventEmitter<string> = new EventEmitter();
 
 	@ViewChild('autocomplete') autocompleteCharge!: AutoComplete;

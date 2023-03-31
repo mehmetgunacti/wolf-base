@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Tag } from 'lib';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Tag } from 'lib';
 
 interface ITagUI extends Tag {
-	className: string;
+
+	fontSize: string;
+
 }
 
 @Component({
@@ -16,9 +18,10 @@ interface ITagUI extends Tag {
 export class TagCloudComponent implements OnInit, OnDestroy {
 
 	@Input() tags: Tag[] | undefined | null;
-	@Input() selectedTags: { [key: string]: boolean } = {};
+	@Input() selectedTags: string[] | undefined | null;
 
 	@Output() tagClick: EventEmitter<string> = new EventEmitter();
+	@Output() selectedClick: EventEmitter<string> = new EventEmitter();
 	@Output() search: EventEmitter<string> = new EventEmitter();
 	@Output() resetClick: EventEmitter<string> = new EventEmitter();
 
@@ -33,111 +36,68 @@ export class TagCloudComponent implements OnInit, OnDestroy {
 			debounceTime(400),
 			distinctUntilChanged()
 		).subscribe(term => this.search.emit(term));
+
+		// add fontSize to tags array
 		this.uiTags = this.createUITags();
 
 	}
 
 	ngOnDestroy(): void {
-
 		this.subscription.unsubscribe();
-
 	}
 
 	onTagClick(id: string): void {
-
 		this.tagClick.emit(id);
+	}
 
+	onSelectedClick(id: string): void {
+		this.selectedClick.emit(id);
 	}
 
 	onReset(): void {
-
 		this.resetClick.emit();
-
 	}
 
-	createUITags(): ITagUI[] {
+	// calculated font size based on the count property of each tag.
+	private createUITags(): ITagUI[] {
 
-		const map: Map<number, string> = this.createLookupMap(this.tags?.map(t => t.count) ?? [0]);
+		// Initialize an empty array to hold the ITagUI objects.
 		const uiArr: ITagUI[] = [];
-		this.tags?.forEach(tag => uiArr.push({ ...tag, className: 'big_' + map.get(tag.count) }));
 
+		// If the tags array exists.
+		if (this.tags) {
+
+			// Create an array of the count property of each tag.
+			const arr: number[] = this.tags.map((t) => t.count);
+
+			// Initialize a map to hold the font size for each count value.
+			const fontSizeMap: Map<number, string> = new Map();
+
+			// Define an array of font sizes to use.
+			const fontSizeValues = ['0.8em', '1.3em', '1.5em', '1.7em', '1.9em'];
+
+			// Remove duplicate values and sort the array of counts in ascending order.
+			const uniqueArr = Array.from(new Set(arr));
+			const sortedArr = uniqueArr.sort((a, b) => a - b);
+
+			// Divide the array of counts into 5 buckets of roughly equal size.
+			const bucketSize = Math.ceil(sortedArr.length / 5);
+
+			// For each count value, determine which bucket it falls into and assign the appropriate font size.
+			for (let i = 0; i < sortedArr.length; i++) {
+				const fontSizeIndex = Math.floor(i / bucketSize);
+				const count = sortedArr[i];
+				const fontSize = fontSizeMap.get(count) || fontSizeValues[fontSizeIndex];
+				fontSizeMap.set(count, fontSize);
+			}
+
+			// For each tag, create a new ITagUI object with the font size based on the count value, and add it to the uiArr array.
+			uiArr.push(...this.tags.map((tag) => ({ ...tag, fontSize: fontSizeMap.get(tag.count) || '1em' })));
+		}
+
+		// Return the array of ITagUI objects.
 		return uiArr;
-
 	}
 
-	createLookupMap(arrTagCounts: number[]): Map<number, string> {
-
-		const BUCKETS = 5; // 5 CSS classes
-
-		// turn set into array
-		const arrUniqueAndSortedTagCounts: number[] =
-			Array
-				.from(new Set<number>(arrTagCounts))
-				.sort((a, b) => a < b ? -1 : 1);
-
-		// calculate divider and rest
-		const div = Math.floor(arrUniqueAndSortedTagCounts.length / BUCKETS);
-		let rest = arrUniqueAndSortedTagCounts.length % BUCKETS;
-
-		// initialize final map
-		const mapOutput = new Map<number, string>(); // : { [key: number]: string } = {};
-
-		// iterate whole array and put every item into the map with bucket name as value
-		// [270, 122, 270, 271, 272, 273, 270, 27, 98, 17, 2, 14, 3, 18, 19, 22, 121, 33, 24, 1, 4, 2, 1, 5, 7];
-		// this array will produce a map like this (= outcome) :
-		// "1": "1",
-		// "2": "1",
-		// "3": "1",
-		// "4": "1",
-		// "5": "1",
-		// "7": "2",
-		// "14": "2",
-		// "17": "2",
-		// "18": "2",
-		// "19": "3",
-		// "22": "3",
-		// "24": "3",
-		// "27": "3",
-		// "33": "4",
-		// "98": "4",
-		// "121": "4",
-		// "122": "4",
-		// "270": "5",
-		// "271": "5",
-		// "272": "5",
-		// "273": "5"
-
-		let idxStart = 0;
-		let idxEnd = idxStart + div + (rest > 0 ? 1 : 0);
-		for (let i = idxStart; i < idxEnd; ++i)
-			mapOutput.set(arrUniqueAndSortedTagCounts[i], '1');
-
-		idxStart = idxEnd;
-		--rest;
-		idxEnd = idxStart + div + (rest > 0 ? 1 : 0);
-		for (let i = idxStart; i < idxEnd; ++i)
-			mapOutput.set(arrUniqueAndSortedTagCounts[i], '2');
-
-		idxStart = idxEnd;
-		--rest;
-		idxEnd = idxStart + div + (rest > 0 ? 1 : 0);
-		for (let i = idxStart; i < idxEnd; ++i)
-			mapOutput.set(arrUniqueAndSortedTagCounts[i], '3');
-
-		idxStart = idxEnd;
-		--rest;
-		idxEnd = idxStart + div + (rest > 0 ? 1 : 0);
-		for (let i = idxStart; i < idxEnd; ++i)
-			mapOutput.set(arrUniqueAndSortedTagCounts[i], '4');
-
-		idxStart = idxEnd;
-		--rest;
-		idxEnd = idxStart + div + (rest > 0 ? 1 : 0);
-		for (let i = idxStart; i < idxEnd; ++i)
-			mapOutput.set(arrUniqueAndSortedTagCounts[i], '5');
-
-		return mapOutput;
-
-	}
 
 }

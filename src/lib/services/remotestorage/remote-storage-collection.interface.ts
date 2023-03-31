@@ -3,18 +3,18 @@ import {
 	Base,
 	Click
 } from 'lib/models';
-import { IKnobaEntity, ID } from 'lib/constants';
+import { IKnobaEntity, UUID } from 'lib/constants';
 
 export interface IRemoteStorageCollection<T extends Base> {
 
 	get(id: string): Promise<T>;
 
 	create(item: T): Promise<T>;
-	update(id: ID, item: Partial<IKnobaEntity>): Promise<T>;
+	update(id: UUID, item: Partial<IKnobaEntity>): Promise<T>;
 	delete(id: string): Promise<void>;
 
 	list(): Promise<T[]>;
-	listIds(): Promise<ID[]>;
+	listIds(): Promise<UUID[]>;
 
 }
 
@@ -24,7 +24,7 @@ export interface BookmarksCollection extends IRemoteStorageCollection<Bookmark> 
 // export interface IWordsCollection extends IRemoteStorageCollection<IWord> { }
 export interface ClicksCollection {
 
-	increase(id: ID, item: Click): Promise<Click>;
+	increase(id: UUID, item: Click): Promise<Click>;
 	list(): Promise<Click[]>;
 	delete(id: string): Promise<void>;
 

@@ -1,5 +1,5 @@
 import { Collection, IndexableType, liveQuery, Table } from 'dexie';
-import { ID, WolfBaseTable } from 'lib/constants';
+import { UUID, WolfBaseTable } from 'lib/constants';
 import { Base, ITrash, Tag } from 'lib/models';
 import { fromEventPattern, Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -86,7 +86,7 @@ export abstract class AbstractDexieTable<T extends Base> implements ILocalStorag
 
 	}
 
-	async get(id: ID): Promise<T | undefined> {
+	async get(id: UUID): Promise<T | undefined> {
 
 		return await this.db.table<T>(this.tablename).get(id);
 
@@ -144,9 +144,9 @@ export abstract class AbstractDexieTable<T extends Base> implements ILocalStorag
 
 	}
 
-	async listIds(): Promise<ID[]> {
+	async listIds(): Promise<UUID[]> {
 
-		return await this.db.table<T, ID>(this.tablename).toCollection().primaryKeys();
+		return await this.db.table<T, UUID>(this.tablename).toCollection().primaryKeys();
 
 	}
 
@@ -199,7 +199,7 @@ export abstract class AbstractDexieTable<T extends Base> implements ILocalStorag
 
 	}
 
-	async update(id: ID, data: Partial<T>): Promise<T> {
+	async update(id: UUID, data: Partial<T>): Promise<T> {
 
 		const localData: T | undefined = await this.get(id);
 		if (!localData)
@@ -238,20 +238,20 @@ export abstract class AbstractDexieTable<T extends Base> implements ILocalStorag
 
 	}
 
-	async tags(): Promise<Tag[]> {
+	// async tags(): Promise<Tag[]> {
 
-		const setOfTags: { [key: string]: number } = {};
-		await this.db.table(this.tablename).orderBy('tags').eachKey(indexableType => {
+	// 	const setOfTags: { [key: string]: number } = {};
+	// 	await this.db.table(this.tablename).orderBy('tags').eachKey(indexableType => {
 
-			const tag = indexableType.toString();
-			setOfTags[tag] = (setOfTags[tag] || 0) + 1;
+	// 		const tag = indexableType.toString();
+	// 		setOfTags[tag] = (setOfTags[tag] || 0) + 1;
 
-		});
+	// 	});
 
-		const tags: Tag[] = Object.keys(setOfTags).map(id => ({ id, count: setOfTags[id] } as Tag));
-		return tags;
+	// 	const tags: Tag[] = Object.keys(setOfTags).map(id => ({ name, count: setOfTags[id] } as Tag));
+	// 	return tags;
 
-	}
+	// }
 
 	protected abstract searchFilter(term: string, item: T): boolean;
 
@@ -263,7 +263,7 @@ export abstract class AbstractDexieTable<T extends Base> implements ILocalStorag
 
 	protected newItemFromPartial(item: Partial<T>): T {
 
-		const id: ID = uuidv4();
+		const id: UUID = uuidv4();
 		return this.newInstance(id, item);
 
 	}
@@ -280,6 +280,6 @@ export abstract class AbstractDexieTable<T extends Base> implements ILocalStorag
 
 	}
 
-	protected abstract newInstance(id: ID, item: Partial<T>): T;
+	protected abstract newInstance(id: UUID, item: Partial<T>): T;
 
 }

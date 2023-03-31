@@ -16,9 +16,17 @@
 	</button>
 </div>
 
+<div selected-tags>
+	<button
+		*ngFor="let name of selectedTags"
+		pButton
+		type="button"
+		[label]="name"
+		(click)="onSelectedClick(name)"></button>
+</div>
+
 <div tags>
 	<a *ngFor="let tag of uiTags"
-		(click)="onTagClick(tag.id)"
-		[class]="tag.className"
-		[ngClass]="{'marked': selectedTags[tag.id]}">{{ tag.id }}</a>
+		(click)="onTagClick(tag.name)"
+		[ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.name }}</a>
 </div>

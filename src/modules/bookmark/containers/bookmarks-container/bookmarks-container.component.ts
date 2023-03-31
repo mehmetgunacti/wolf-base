@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bookmark, ID } from 'lib';
+import { Bookmark, UUID } from 'lib';
 import * as actions from 'modules/bookmark/store/actions';
 import * as selectors from 'modules/bookmark/store/selectors';
 import { Observable, tap } from 'rxjs';
@@ -39,7 +39,7 @@ export class BookmarksContainerComponent implements OnInit {
 
 	}
 
-	onEdit(id: ID): void {
+	onEdit(id: UUID): void {
 
 		this.store.dispatch(actions.bookmarksEditOpenDialog({ id }));
 
