@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
 import * as actions from 'modules/bookmark/store/actions';
 import * as selectors from 'modules/bookmark/store/selectors';
-import { Observable, tap } from 'rxjs';
+import { Observable, combineLatest, map, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-bookmarks-container',
@@ -18,7 +18,17 @@ export class BookmarksContainerComponent implements OnInit {
 		private store: Store
 	) {
 
-		this.bookmarks$ = store.select(selectors.selectorBookmarksArray);
+		this.bookmarks$ = combineLatest([
+			store.select(selectors.selectorBookmarksArray),
+			store.select(selectors.selectorTagsSelected)
+		]).pipe(
+			map(
+				([bookmarks, selectedTags]) => selectedTags.reduce(
+					(acc, tag) => acc.filter((bookmark) => bookmark.tags.includes(tag)),
+					bookmarks // the initial value (array)
+				)
+			)
+		);
 
 	}
 
