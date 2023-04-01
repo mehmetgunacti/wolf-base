@@ -6,8 +6,7 @@ export const tagsSetPopularTag = createAction('[Tags] set popular tag');
 
 // export const tagsLoadAll = createAction('[Tags] load all');
 export const tagsLoadAllSuccess = createAction('[Tags] load all success', props<{ tags: Tag[] }>());
-export const tagsSelect = createAction('[Tags] Select Tag', props<{ name: string }>());
-export const tagsDeselect = createAction('[Tags] Deselect Tag', props<{ name: string }>());
+export const tagsClicked = createAction('[Tags] Tag Clicked', props<{ name: string }>());
 
 // export const tagsSearch = createAction('[Tags] search', props<{ 'term': string }>());
 

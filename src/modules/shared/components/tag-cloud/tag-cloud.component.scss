@@ -28,6 +28,7 @@ app-tag-cloud {
 
 		padding: 1rem;
 		&>a {
+
 			display			: inline-block;
 			margin			: 0.2rem;
 			font-size 		: 1.1rem;
@@ -36,6 +37,20 @@ app-tag-cloud {
 
 			&.marked {
 				color			: orange;
+			}
+
+			& sup {
+
+				display				: inline-block;
+				font-size			: 10px;
+				color				: white;
+				background-color	: orangered;
+				border-radius		: 40px;
+				padding				: 4px 0;
+				width				: 16px;
+				text-align			: center;
+				margin-left			: 2px;
+
 			}
 
         }

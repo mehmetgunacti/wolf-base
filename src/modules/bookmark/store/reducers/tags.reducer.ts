@@ -79,29 +79,19 @@ const reducer = createReducer(
 
 	on(
 
-		fromActions.tagsSelect,
+		fromActions.tagsClicked,
 		(state, { name }) => {
 
-			if (state.selected.indexOf(name) >= 0) // tag already selected
-				return state;
+			// toggle selected
+			const idx = state.selected.indexOf(name);
+			if (idx >= 0) // tag already selected => unselect
+				return { ...state, selected: state.selected.filter(t => t !== name) };
+
 			return { ...state, selected: [...state.selected, name] };
 
 		}
 
 	),
-
-	on(
-
-		fromActions.tagsDeselect,
-		(state, { name }) => {
-
-			if (state.selected.indexOf(name) < 0) // tag not selected
-				return state;
-			return { ...state, selected: state.selected.filter(t => t !== name) };
-
-		}
-
-	)
 
 	// on(
 

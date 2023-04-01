@@ -1,12 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Tag } from 'lib';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-interface ITagUI extends Tag {
+interface TagUI {
 
+	tag: Tag;
 	fontSize: string;
+	idx: number;
 
 }
 
@@ -15,17 +17,16 @@ interface ITagUI extends Tag {
 	templateUrl: './tag-cloud.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TagCloudComponent implements OnInit, OnDestroy {
+export class TagCloudComponent implements OnInit, OnChanges, OnDestroy {
 
 	@Input() tags: Tag[] | undefined | null;
 	@Input() selectedTags: string[] | undefined | null;
 
 	@Output() tagClick: EventEmitter<string> = new EventEmitter();
-	@Output() selectedClick: EventEmitter<string> = new EventEmitter();
 	@Output() search: EventEmitter<string> = new EventEmitter();
 	@Output() resetClick: EventEmitter<string> = new EventEmitter();
 
-	uiTags!: ITagUI[];
+	uiTags!: TagUI[];
 	searchControl!: FormControl;
 	subscription!: Subscription;
 
@@ -37,6 +38,10 @@ export class TagCloudComponent implements OnInit, OnDestroy {
 			distinctUntilChanged()
 		).subscribe(term => this.search.emit(term));
 
+	}
+
+	ngOnChanges(changes: SimpleChanges): void {
+		
 		// add fontSize to tags array
 		this.uiTags = this.createUITags();
 
@@ -50,19 +55,16 @@ export class TagCloudComponent implements OnInit, OnDestroy {
 		this.tagClick.emit(id);
 	}
 
-	onSelectedClick(id: string): void {
-		this.selectedClick.emit(id);
-	}
-
 	onReset(): void {
 		this.resetClick.emit();
 	}
 
 	// calculated font size based on the count property of each tag.
-	private createUITags(): ITagUI[] {
+	private createUITags(): TagUI[] {
+		console.log(this.selectedTags);
 
 		// Initialize an empty array to hold the ITagUI objects.
-		const uiArr: ITagUI[] = [];
+		const uiArr: TagUI[] = [];
 
 		// If the tags array exists.
 		if (this.tags) {
@@ -91,13 +93,21 @@ export class TagCloudComponent implements OnInit, OnDestroy {
 				fontSizeMap.set(count, fontSize);
 			}
 
-			// For each tag, create a new ITagUI object with the font size based on the count value, and add it to the uiArr array.
-			uiArr.push(...this.tags.map((tag) => ({ ...tag, fontSize: fontSizeMap.get(tag.count) || '1em' })));
+			// For each tag, create a new TagUI object with the font size based on the count value, and add it to the uiArr array.
+			uiArr.push(
+				...this.tags.map(
+					(tag) => ({
+						tag,
+						fontSize: fontSizeMap.get(tag.count) || '1em',
+						idx: this.selectedTags?.indexOf(tag.name) ?? -1
+					})
+				)
+			);
+			uiArr.sort((a, b) => a.tag.name < b.tag.name ? -1 : 1);
+
 		}
-
-		// Return the array of ITagUI objects.
 		return uiArr;
-	}
 
+	}
 
 }

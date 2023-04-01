@@ -51,13 +51,7 @@ export class BookmarksPageComponent {
 
 	onTagClicked(name: string): void {
 
-		this.store.dispatch(fromStore.tagsSelect({ name }));
-
-	}
-
-	onTagDeselected(name: string): void {
-
-		this.store.dispatch(fromStore.tagsDeselect({ name }));
+		this.store.dispatch(fromStore.tagsClicked({ name }));
 
 	}
 

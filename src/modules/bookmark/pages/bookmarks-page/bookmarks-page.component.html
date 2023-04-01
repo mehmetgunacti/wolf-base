@@ -25,7 +25,6 @@
 		[tags]="tags$ | async"
 		[selectedTags]="selectedTags$ | async"
 		(tagClick)="onTagClicked($event)"
-		(selectedClick)="onTagDeselected($event)"
 		(search)="onTagSearch($event)"
 		(resetClick)="onTagReset()"></app-tag-cloud>
 
