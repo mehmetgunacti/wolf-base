@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bookmark, UUID, LocalStorageService, Tag } from 'lib';
+import { Bookmark, LocalStorageService, Tag } from 'lib';
 import * as fromStore from 'modules/bookmark/store';
 import { slideUpDownTrigger } from 'modules/shared';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-bookmarks-page',
@@ -16,7 +16,7 @@ export class BookmarksPageComponent {
 	editDialogVisible$: Observable<boolean>;
 	tagsVisible$!: Observable<boolean>;
 	tags$: Observable<Tag[]>;
-	selectedTags$: Observable<UUID[]>;
+	selectedTags$: Observable<string[]>;
 
 	constructor(private store: Store, localStorage: LocalStorageService) {
 

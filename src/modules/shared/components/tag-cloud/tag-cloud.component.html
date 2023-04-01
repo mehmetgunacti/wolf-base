@@ -19,6 +19,7 @@
 <div tags>
 	<a *ngFor="let tag of uiTags"
 		(click)="onTagClick(tag.tag.name)"
-		[ngStyle]="{ 'font-size': tag.fontSize, 'color': selectedTags?.includes(tag.tag.name) ? 'orange': '' }">{{ tag.tag.name }}<sup *ngIf="(selectedTags?.length ?? 0) > 1 && tag.idx >= 0">{{ tag.idx + 1 }}</sup>
+		[ngStyle]="{ 'font-size': tag.fontSize, 'color': selectedTags?.includes(tag.tag.name) ? 'orange': '' }">{{ tag.tag.name }}
+		<sup *ngIf="(selectedTags?.length ?? 0) > 1 && tag.idx >= 0">{{ tag.idx + 1 }}</sup>
 	</a>
 </div>
