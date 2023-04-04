@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Tag } from 'lib';
 
-export const tagsToggleTagCloudVisibility = createAction('[Tags] tag cloud visibility');
 export const tagsSetPopularTag = createAction('[Tags] set popular tag');
 
 // export const tagsLoadAll = createAction('[Tags] load all');

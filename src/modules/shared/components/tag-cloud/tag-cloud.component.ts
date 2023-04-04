@@ -8,7 +8,8 @@ interface TagUI {
 
 	tag: Tag;
 	fontSize: string;
-	idx: number;
+	selectedIdx: number;
+	disabled: boolean;
 
 }
 
@@ -99,7 +100,8 @@ export class TagCloudComponent implements OnInit, OnChanges, OnDestroy {
 					(tag) => ({
 						tag,
 						fontSize: fontSizeMap.get(tag.count) || '1em',
-						idx: this.selectedTags?.indexOf(tag.name) ?? -1
+						selectedIdx: this.selectedTags?.indexOf(tag.name) ?? -1,
+						disabled: false
 					})
 				)
 			);

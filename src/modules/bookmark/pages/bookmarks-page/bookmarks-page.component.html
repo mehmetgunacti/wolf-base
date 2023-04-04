@@ -1,3 +1,4 @@
+<!-- top-right corner buttons -->
 <app-portal outletName="portal-outlet">
 	<button
 		pButton
@@ -19,6 +20,7 @@
 	</button>
 </app-portal>
 
+<!-- Tag-cloud -->
 <section tagCloud *ngIf="tagsVisible$ | async" @slideUpDown>
 
 	<app-tag-cloud
@@ -30,6 +32,7 @@
 
 </section>
 
+<!-- Edit Dialog -->
 <p-dialog
 	*ngIf="editDialogVisible$ | async"
 	header="Add Bookmark"
@@ -41,7 +44,13 @@
 	[modal]="true"
 	[dismissableMask]="true"
 	styleClass="bookmarkEditContainerComponent">
-    <app-bookmark-edit-container></app-bookmark-edit-container>
+
+	<app-bookmark-edit-container></app-bookmark-edit-container>
+
 </p-dialog>
 
+<p>
+	<span *ngFor="let t of selectableTags$ | async">[{{t}}] </span>
+</p>
+<!-- Bookmarks list -->
 <app-bookmarks-container></app-bookmarks-container>

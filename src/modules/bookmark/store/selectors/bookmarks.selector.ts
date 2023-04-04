@@ -23,26 +23,6 @@ export const selectorBookmarksArray = selectAll;
 
 export const selectorBookmarksCount = selectTotal;
 
-export const selectorBookmarksSyncRequired = createSelector(
-	selectorBookmarksState,
-	state => state.syncRequired
-);
-
-export const selectorBookmarksSyncStatus = createSelector(
-	selectorBookmarksState,
-	state => state.syncStatus
-);
-
-export const selectorSyncBookmarksForceOverride = createSelector(
-	selectorBookmarksState,
-	state => state.syncForceOverride
-);
-
-export const selectorSyncBookmarksMessages = createSelector(
-	selectorBookmarksState,
-	state => state.syncMessages
-);
-
 export const selectorEditDialogVisible = createSelector(
 	selectorBookmarksState,
 	state => state.editDialogVisible

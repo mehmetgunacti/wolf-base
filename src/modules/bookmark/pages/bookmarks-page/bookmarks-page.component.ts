@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Bookmark, LocalStorageService, Tag } from 'lib';
 import * as fromStore from 'modules/bookmark/store';
 import { slideUpDownTrigger } from 'modules/shared';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest, map } from 'rxjs';
 
 @Component({
 	selector: 'app-bookmarks-page',
@@ -17,13 +17,41 @@ export class BookmarksPageComponent {
 	tagsVisible$!: Observable<boolean>;
 	tags$: Observable<Tag[]>;
 	selectedTags$: Observable<string[]>;
+	selectableTags$: Observable<string[]>;
 
 	constructor(private store: Store, localStorage: LocalStorageService) {
 
 		this.editDialogVisible$ = store.select(fromStore.selectorEditDialogVisible);
 		this.tagsVisible$ = store.select(fromStore.selectorTagCloudVisibility);
-		this.tags$ = store.select(fromStore.selectorTagsArray);
+		this.tags$ = store.select(fromStore.selectorTagsDistinctTagsArray);
 		this.selectedTags$ = store.select(fromStore.selectorTagsSelected);
+		this.selectableTags$ = combineLatest([
+			store.select(fromStore.selectorBookmarksArray),
+			store.select(fromStore.selectorTagsSelected)
+		]).pipe(
+			map(
+				([bookmarks, selectedTags]) => {
+
+					let remainingBookmarks = bookmarks.filter(bookmark => {
+						return selectedTags.every(tag => bookmark.tags.includes(tag));
+					});
+
+					let resultTags = remainingBookmarks.reduce((acc, bookmark) => {
+						bookmark.tags.forEach(tag => {
+							if (!acc.includes(tag)) {
+								acc.push(tag);
+							}
+						});
+						return acc;
+					}, selectedTags.slice()); // add selected tags to result array
+
+					return resultTags;
+
+				}
+			)
+		);
+
+
 
 		// todo : delete later
 		localStorage.bookmarks.clear();
@@ -33,7 +61,7 @@ export class BookmarksPageComponent {
 
 	toggleTagCloud(): void {
 
-		this.store.dispatch(fromStore.tagsToggleTagCloudVisibility());
+		this.store.dispatch(fromStore.uiToggleTagCloudVisibility());
 
 	}
 
@@ -91,6 +119,7 @@ export class BookmarksPageComponent {
 			"image": "",
 			"name": "drawkit.io",
 			"tags": [
+				"im-bored",
 				"free",
 				"cresource"
 			],
@@ -115,6 +144,8 @@ export class BookmarksPageComponent {
 			"image": "",
 			"name": "medium.com",
 			"tags": [
+				"im-bored",
+				"free",
 				"nginx",
 				"angular",
 				"security"
@@ -140,6 +171,8 @@ export class BookmarksPageComponent {
 			"image": "",
 			"name": "cssscript.com",
 			"tags": [
+				"im-bored",
+				"free",
 				"css",
 				"library",
 				"colors"

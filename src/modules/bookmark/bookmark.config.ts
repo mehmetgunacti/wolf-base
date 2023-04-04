@@ -3,7 +3,7 @@ import { BookmarkComponent } from './components/bookmark/bookmark.component';
 import { BookmarkEditContainerComponent } from './containers/bookmark-edit-container/bookmark-edit-container.component';
 import { BookmarksContainerComponent } from './containers/bookmarks-container/bookmarks-container.component';
 import { BookmarksPageComponent } from './pages/bookmarks-page/bookmarks-page.component';
-import { bookmarksReducer, BookmarksState, tagsReducer, TagsState } from './store';
+import { bookmarksReducer, BookmarksState, tagsReducer, TagsState, UIState, uiReducer } from './store';
 import { ActionReducerMap } from '@ngrx/store';
 import { BookmarksEffects } from './store/effects/bookmarks.effect';
 
@@ -26,6 +26,7 @@ export interface BookmarksModuleState {
 
 	bookmarks: BookmarksState;
 	tags: TagsState;
+	ui: UIState
 
 }
 
@@ -37,6 +38,7 @@ export const effects = [
 export const reducers: ActionReducerMap<BookmarksModuleState> = {
 
 	bookmarks: bookmarksReducer,
-	tags: tagsReducer
+	tags: tagsReducer,
+	ui: uiReducer
 
 };

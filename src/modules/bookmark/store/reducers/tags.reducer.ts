@@ -7,18 +7,6 @@ const reducer = createReducer(
 
 	fromStates.tagsInitialState,
 
-	on(
-
-		fromActions.tagsToggleTagCloudVisibility,
-		state => ({
-
-			...state,
-			tagCloudVisible: !state.tagCloudVisible
-
-		})
-
-	),
-
 	// on(
 
 	// 	fromActions.bookmarksSearchSuccess,
@@ -55,39 +43,40 @@ const reducer = createReducer(
 
 	// ),
 
-	on(
+	// on(
 
-		fromActions.bookmarksLoadAllSuccess,
-		(state, { bookmarks }) => {
+	// 	fromActions.bookmarksLoadAllSuccess,
+	// 	(state, { bookmarks }) => {
 
-			const mapTags = new Map<string, number>();
-			bookmarks
-				.flatMap(b => b.tags)
-				.forEach(tag => {
-					mapTags.set(tag, (mapTags.get(tag) ?? 0) + 1);
-				});
+	// 		return { ...state, tags: bookmarks.map(b => b.tags ) };
+	// 		// const mapTags = new Map<string, number>();
+	// 		// bookmarks
+	// 		// 	.flatMap(b => b.tags)
+	// 		// 	.forEach(tagName => {
+	// 		// 		mapTags.set(tagName, (mapTags.get(tagName) ?? 0) + 1);
+	// 		// 	});
 
-			const tags: Tag[] = [];
-			mapTags.forEach(
-				(count, name) => { tags.push({ name, count }); }
-			);
-			return { ...state, tags };
+	// 		// const tags: Tag[] = [];
+	// 		// mapTags.forEach(
+	// 		// 	(count, name) => { tags.push({ name, count }); }
+	// 		// );
+	// 		// return { ...state, tags };
 
-		}
+	// 	}
 
-	),
+	// ),
 
 	on(
 
 		fromActions.tagsClicked,
-		(state, { name }) => {
+		(state, { name }): fromStates.TagsState => {
 
 			// toggle selected
-			const idx = state.selected.indexOf(name);
+			const idx = state.selectedTags.indexOf(name);
 			if (idx >= 0) // tag already selected => unselect
-				return { ...state, selected: state.selected.filter(t => t !== name) };
+				return { ...state, selectedTags: state.selectedTags.filter(t => t !== name) };
 
-			return { ...state, selected: [...state.selected, name] };
+			return { ...state, selectedTags: [...state.selectedTags, name] };
 
 		}
 
@@ -116,7 +105,6 @@ const reducer = createReducer(
 	// })
 );
 
-// The exported reducer function: This is because function calls are not supported by the AOT compiler.
 export function tagsReducer(state: fromStates.TagsState | undefined, action: Action): fromStates.TagsState {
 	return reducer(state, action);
 }
