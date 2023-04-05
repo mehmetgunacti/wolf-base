@@ -1,0 +1,24 @@
+<div class="p-inputgroup">
+	<input
+		type="text"
+		pInputText
+		placeholder="Keyword"
+		[formControl]="searchControl"
+		pAutoFocus
+		[autofocus]="true">
+	<button
+		type="button"
+		pButton
+		pRipple
+		icon="pi pi-search"
+		styleClass="p-button-warn"
+		(click)="onSearch()">
+	</button>
+</div>
+
+<app-tag-cloud
+    [tags]="tags$ | async"
+    [selectedTags]="selectedTags$ | async"
+    [disabledTags]="disabledTags$ | async"
+    (tagClick)="onTagClicked($event)"
+    (resetClick)="onTagReset()"></app-tag-cloud>

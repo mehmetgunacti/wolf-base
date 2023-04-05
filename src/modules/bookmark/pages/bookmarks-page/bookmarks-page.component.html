@@ -20,17 +20,8 @@
 	</button>
 </app-portal>
 
-<!-- Tag-cloud -->
-<section tagCloud *ngIf="tagsVisible$ | async" @slideUpDown>
-
-	<app-tag-cloud
-		[tags]="tags$ | async"
-		[selectedTags]="selectedTags$ | async"
-		(tagClick)="onTagClicked($event)"
-		(search)="onTagSearch($event)"
-		(resetClick)="onTagReset()"></app-tag-cloud>
-
-</section>
+<!-- Search and Tag-cloud -->
+<app-bookmarks-search-and-tag-cloud-container tagCloud *ngIf="tagsVisible$ | async" @slideUpDown/>
 
 <!-- Edit Dialog -->
 <p-dialog
@@ -49,8 +40,5 @@
 
 </p-dialog>
 
-<p>
-	<span *ngFor="let t of selectableTags$ | async">[{{t}}] </span>
-</p>
 <!-- Bookmarks list -->
 <app-bookmarks-container></app-bookmarks-container>

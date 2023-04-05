@@ -1,3 +1,3 @@
 import { createAction } from '@ngrx/store';
 
-export const uiToggleTagCloudVisibility = createAction('[Tags] tag cloud visibility');
+export const toggleSearchAndTagCloudVisibility = createAction('[Tags] Toggle Search Tag Cloud Visibility');

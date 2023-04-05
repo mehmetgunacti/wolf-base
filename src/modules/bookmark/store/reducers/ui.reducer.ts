@@ -8,7 +8,7 @@ const reducer = createReducer(
 
 	on(
 
-		fromActions.uiToggleTagCloudVisibility,
+		fromActions.toggleSearchAndTagCloudVisibility,
 		state => ({
 
 			...state,

@@ -7,29 +7,18 @@ const reducer = createReducer(
 
 	fromStates.bookmarksInitialState,
 
-	on(fromActions.bookmarksLoadAll, (state): BookmarksState => fromStates.bookmarksAdapter.setAll([], { ...state })),
-	on(fromActions.bookmarksSearch, (state): BookmarksState => fromStates.bookmarksAdapter.setAll([], { ...state })),
-	// on(fromActions.tagsToggleSelected, (state): BookmarksState => fromStates.bookmarksAdapter.setAll([], { ...state })),
-
-	on(fromActions.bookmarksLoadAllSuccess, (state, { bookmarks }): BookmarksState =>
+	on(fromActions.loadAllBookmarksSuccess, (state, { bookmarks }): BookmarksState =>
 		fromStates.bookmarksAdapter.setAll(bookmarks, { ...state, bookmarksSearchTerm: '' })
 	),
 
-	on(fromActions.bookmarksSearchSuccess, (state, { bookmarks }): BookmarksState =>
+	on(fromActions.searchBookmarksSuccess, (state, { bookmarks }): BookmarksState =>
 		fromStates.bookmarksAdapter.setAll(bookmarks, { ...state })
 	),
-	on(fromActions.bookmarksAddOpenDialog, (state): BookmarksState => ({ ...state, editDialogVisible: true, selected: null })),
-	on(fromActions.bookmarksEditOpenDialog, (state, { id }): BookmarksState => ({ ...state, editDialogVisible: true, selected: id })),
-	on(fromActions.bookmarksEditCloseDialog, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null })),
-	on(fromActions.bookmarksCreateSuccess, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null })),
-	on(fromActions.bookmarksUpdateSuccess, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null }))
-	// on(fromActions.bookmarksSaveSuccess, (state, { bookmark }): BookmarksState => {
-
-	// 	// todo
-	// 	const newbookmarkState = fromStates.bookmarksAdapter.upsertOne(bookmark, { ...state, editDialogVisible: false, selected: null })
-	// 	return newbookmarkState;
-	// }
-	// ),
+	on(fromActions.openAddBookmarkDialog, (state): BookmarksState => ({ ...state, editDialogVisible: true, selected: null })),
+	on(fromActions.openEditBookmarkDialog, (state, { id }): BookmarksState => ({ ...state, editDialogVisible: true, selected: id })),
+	on(fromActions.closeEditBookmarkDialog, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null })),
+	on(fromActions.createBookmarkSuccess, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null })),
+	on(fromActions.updateBookmarkSuccess, (state): BookmarksState => ({ ...state, editDialogVisible: false, selected: null }))
 
 );
 

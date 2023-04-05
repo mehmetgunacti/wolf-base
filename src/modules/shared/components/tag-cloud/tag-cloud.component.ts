@@ -1,8 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Tag } from 'lib';
-import { Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 interface TagUI {
 
@@ -18,28 +15,16 @@ interface TagUI {
 	templateUrl: './tag-cloud.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TagCloudComponent implements OnInit, OnChanges, OnDestroy {
+export class TagCloudComponent implements OnChanges {
 
 	@Input() tags: Tag[] | undefined | null;
 	@Input() selectedTags: string[] | undefined | null;
+	@Input() disabledTags: string[] | undefined | null;
 
 	@Output() tagClick: EventEmitter<string> = new EventEmitter();
-	@Output() search: EventEmitter<string> = new EventEmitter();
 	@Output() resetClick: EventEmitter<string> = new EventEmitter();
 
 	uiTags!: TagUI[];
-	searchControl!: FormControl;
-	subscription!: Subscription;
-
-	ngOnInit(): void {
-
-		this.searchControl = new FormControl();
-		this.subscription = this.searchControl.valueChanges.pipe(
-			debounceTime(400),
-			distinctUntilChanged()
-		).subscribe(term => this.search.emit(term));
-
-	}
 
 	ngOnChanges(changes: SimpleChanges): void {
 		
@@ -48,21 +33,21 @@ export class TagCloudComponent implements OnInit, OnChanges, OnDestroy {
 
 	}
 
-	ngOnDestroy(): void {
-		this.subscription.unsubscribe();
-	}
-
 	onTagClick(id: string): void {
-		this.tagClick.emit(id);
+
+		if (!this.disabledTags?.includes(id))
+			this.tagClick.emit(id);
+
 	}
 
 	onReset(): void {
+
 		this.resetClick.emit();
+
 	}
 
 	// calculated font size based on the count property of each tag.
 	private createUITags(): TagUI[] {
-		console.log(this.selectedTags);
 
 		// Initialize an empty array to hold the ITagUI objects.
 		const uiArr: TagUI[] = [];

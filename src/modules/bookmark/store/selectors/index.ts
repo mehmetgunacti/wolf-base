@@ -1,3 +1,3 @@
-export * from './bookmarks.selector';
-export * from './tags.selector';
-export * from './ui.selector';
+export * from './bookmarks.selectors';
+export * from './tags.selectors';
+export * from './ui.selectors';

@@ -20,7 +20,7 @@ export class BookmarksContainerComponent implements OnInit {
 
 		this.bookmarks$ = combineLatest([
 			store.select(selectors.selectorBookmarksArray),
-			store.select(selectors.selectorTagsSelected)
+			store.select(selectors.tagsSelectorSelectedTags)
 		]).pipe(
 			map(
 				([bookmarks, selectedTags]) => selectedTags.reduce(
@@ -51,7 +51,7 @@ export class BookmarksContainerComponent implements OnInit {
 
 	onEdit(id: UUID): void {
 
-		this.store.dispatch(actions.bookmarksEditOpenDialog({ id }));
+		this.store.dispatch(actions.openEditBookmarkDialog({ id }));
 
 	}
 

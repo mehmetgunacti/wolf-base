@@ -1,25 +1,5 @@
-<div class="p-inputgroup">
-	<input
-		type="text"
-		pInputText
-		placeholder="Keyword"
-		[formControl]="searchControl"
-		pAutoFocus
-		[autofocus]="true">
-	<button
-		type="button"
-		pButton
-		pRipple
-		icon="pi pi-search"
-		styleClass="p-button-warn"
-		(click)="onReset()">
-	</button>
-</div>
-
-<div tags>
-	<a *ngFor="let tag of uiTags"
-		(click)="onTagClick(tag.tag.name)"
-		[ngStyle]="{ 'font-size': tag.fontSize, 'color': selectedTags?.includes(tag.tag.name) ? 'orange': '' }">{{ tag.tag.name }}
-		<sup *ngIf="(selectedTags?.length ?? 0) > 1 && tag.selectedIdx >= 0">{{ tag.selectedIdx + 1 }}</sup>
-	</a>
-</div>
+<a *ngFor="let tag of uiTags"
+	(click)="onTagClick(tag.tag.name)"
+	[ngStyle]="{ 'font-size': tag.fontSize, 'color': selectedTags?.includes(tag.tag.name) ? 'orange': disabledTags?.includes(tag.tag.name) ? 'grey' : '' }">{{ tag.tag.name }}
+	<sup *ngIf="(selectedTags?.length ?? 0) > 1 && tag.selectedIdx >= 0">{{ tag.selectedIdx + 1 }}</sup>
+</a>

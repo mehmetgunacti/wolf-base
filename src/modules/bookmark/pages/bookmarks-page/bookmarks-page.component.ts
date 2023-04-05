@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bookmark, LocalStorageService, Tag } from 'lib';
+import { Bookmark, LocalStorageService } from 'lib';
 import * as fromStore from 'modules/bookmark/store';
 import { slideUpDownTrigger } from 'modules/shared';
-import { Observable, combineLatest, map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-bookmarks-page',
@@ -15,43 +15,11 @@ export class BookmarksPageComponent {
 
 	editDialogVisible$: Observable<boolean>;
 	tagsVisible$!: Observable<boolean>;
-	tags$: Observable<Tag[]>;
-	selectedTags$: Observable<string[]>;
-	selectableTags$: Observable<string[]>;
 
 	constructor(private store: Store, localStorage: LocalStorageService) {
 
 		this.editDialogVisible$ = store.select(fromStore.selectorEditDialogVisible);
 		this.tagsVisible$ = store.select(fromStore.selectorTagCloudVisibility);
-		this.tags$ = store.select(fromStore.selectorTagsDistinctTagsArray);
-		this.selectedTags$ = store.select(fromStore.selectorTagsSelected);
-		this.selectableTags$ = combineLatest([
-			store.select(fromStore.selectorBookmarksArray),
-			store.select(fromStore.selectorTagsSelected)
-		]).pipe(
-			map(
-				([bookmarks, selectedTags]) => {
-
-					let remainingBookmarks = bookmarks.filter(bookmark => {
-						return selectedTags.every(tag => bookmark.tags.includes(tag));
-					});
-
-					let resultTags = remainingBookmarks.reduce((acc, bookmark) => {
-						bookmark.tags.forEach(tag => {
-							if (!acc.includes(tag)) {
-								acc.push(tag);
-							}
-						});
-						return acc;
-					}, selectedTags.slice()); // add selected tags to result array
-
-					return resultTags;
-
-				}
-			)
-		);
-
-
 
 		// todo : delete later
 		localStorage.bookmarks.clear();
@@ -61,31 +29,21 @@ export class BookmarksPageComponent {
 
 	toggleTagCloud(): void {
 
-		this.store.dispatch(fromStore.uiToggleTagCloudVisibility());
+		this.store.dispatch(fromStore.toggleSearchAndTagCloudVisibility());
 
 	}
 
 	openAddDialog(): void {
 
-		this.store.dispatch(fromStore.bookmarksAddOpenDialog());
+		this.store.dispatch(fromStore.openAddBookmarkDialog());
 
 	}
 
 	closeAddDialog(): void {
 
-		this.store.dispatch(fromStore.bookmarksEditCloseDialog());
+		this.store.dispatch(fromStore.closeEditBookmarkDialog());
 
 	}
-
-	onTagClicked(name: string): void {
-
-		this.store.dispatch(fromStore.tagsClicked({ name }));
-
-	}
-
-	onTagSearch(term: string): void { }
-
-	onTagReset(): void { }
 
 	bookmarks: Bookmark[] = [
 		{
@@ -188,7 +146,8 @@ export class BookmarksPageComponent {
 			"tags": [
 				"rxjs",
 				"events",
-				"angular"
+				"angular",
+				"starter"
 			],
 			"title": "event emitters",
 			"url": "https://netbasal.com/event-emitters-in-angular-13e84ee8d28c"

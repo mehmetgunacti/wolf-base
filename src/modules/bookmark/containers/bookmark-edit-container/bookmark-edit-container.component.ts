@@ -26,7 +26,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 	ngAfterContentInit(): void {
 
 		this.tagSuggestions$ = combineLatest([
-			this.store.select(fromStore.selectorTagsDistinctTagsArray),
+			this.store.select(fromStore.tagsSelectorDistinctTagsArray),
 			this.tagInput
 		]).pipe(
 
@@ -44,17 +44,15 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	}
 
-
-
 	onCreate(bookmark: Partial<Bookmark>): void {
 
-		this.store.dispatch(fromStore.bookmarksCreate({ bookmark: bookmark }));
+		this.store.dispatch(fromStore.createBookmark({ bookmark: bookmark }));
 
 	}
 
 	onUpdate(id: UUID, bookmark: Partial<Bookmark>) {
 
-		this.store.dispatch(fromStore.bookmarksUpdate({ id, bookmark }));
+		this.store.dispatch(fromStore.updateBookmark({ id, bookmark }));
 
 	}
 

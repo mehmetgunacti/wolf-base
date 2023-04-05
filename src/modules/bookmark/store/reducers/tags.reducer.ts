@@ -68,7 +68,7 @@ const reducer = createReducer(
 
 	on(
 
-		fromActions.tagsClicked,
+		fromActions.clickTag,
 		(state, { name }): fromStates.TagsState => {
 
 			// toggle selected

@@ -23,7 +23,7 @@ export class BookmarksEffects {
 			reverse: true,
 			limit: 50
 		}).pipe(
-			map((bookmarks) => fromActions.bookmarksLoadAllSuccess({ bookmarks }))
+			map((bookmarks) => fromActions.loadAllBookmarksSuccess({ bookmarks }))
 		)
 
 	);
@@ -44,25 +44,25 @@ export class BookmarksEffects {
 
 	// );
 
-	bookmarksRemoveAll$ = createEffect(
+	// bookmarksRemoveAll$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(fromActions.bookmarksRemoveAll),
-			map(() => fromActions.bookmarksLoadAllSuccess({ bookmarks: [] }))
+	// 		ofType(fromActions.bookmarksActionRemoveAll),
+	// 		map(() => fromActions.bookmarksActionLoadAllSuccess({ bookmarks: [] }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 	bookmarksSearch$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.bookmarksSearch),
+			ofType(fromActions.searchBookmarks),
 			map(p => p.term),
 			switchMap(term => this.localStorage.bookmarks.search(term)),
-			map(bookmarks => fromActions.bookmarksSearchSuccess({ bookmarks }))
+			map(bookmarks => fromActions.searchBookmarksSuccess({ bookmarks }))
 
 		)
 
@@ -72,10 +72,10 @@ export class BookmarksEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.bookmarksCreate),
+			ofType(fromActions.createBookmark),
 			map(param => param.bookmark),
 			switchMap(bookmark => this.localStorage.bookmarks.create(bookmark)),
-			map((bookmark: Bookmark) => fromActions.bookmarksCreateSuccess({ bookmark }))
+			map((bookmark: Bookmark) => fromActions.createBookmarkSuccess({ bookmark }))
 
 		)
 
@@ -85,7 +85,7 @@ export class BookmarksEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.bookmarksCreateSuccess),
+			ofType(fromActions.createBookmarkSuccess),
 			map(() => showNotification({ severity: 'success', detail: 'Bookmark created' }))
 
 		)
@@ -96,9 +96,9 @@ export class BookmarksEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.bookmarksUpdate),
+			ofType(fromActions.updateBookmark),
 			switchMap(({ id, bookmark }) => this.localStorage.bookmarks.update(id, bookmark)),
-			map((bookmark: Bookmark) => fromActions.bookmarksUpdateSuccess({ bookmark }))
+			map((bookmark: Bookmark) => fromActions.updateBookmarkSuccess({ bookmark }))
 
 		)
 
@@ -108,7 +108,7 @@ export class BookmarksEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.bookmarksUpdateSuccess),
+			ofType(fromActions.updateBookmarkSuccess),
 			map(() => showNotification({ severity: 'success', detail: 'Bookmark updated' }))
 
 		)
@@ -131,13 +131,14 @@ export class BookmarksEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.bookmarksDelete),
+			ofType(fromActions.deleteBookmark),
 			map(p => p.id),
 			tap(id => this.localStorage.bookmarks.moveToTrash(id)),
 			// tap(() => this.toastService.show({ type: W359ToastType.SUCCESS, message: `Bookmark deleted` })),
-			map(() => fromActions.bookmarksLoadAll())
+			// map(() => fromActions.bookmarksActionLoadAll())
 
-		)
+		),
+		{ dispatch: false }
 
 	);
 
@@ -145,9 +146,9 @@ export class BookmarksEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.bookmarksClick),
+			ofType(fromActions.clickBookmark),
 			map(p => p.payload),
-			switchMap(bookmark => this.localStorage.bookmarks.click(bookmark.id)),
+			tap(bookmark => this.localStorage.bookmarks.click(bookmark.id))
 
 		),
 		{ dispatch: false }

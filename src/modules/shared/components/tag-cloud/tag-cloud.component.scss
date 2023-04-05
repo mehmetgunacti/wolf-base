@@ -1,60 +1,33 @@
 app-tag-cloud {
 
-    @extend %flex-column;
+	display: block;
+	padding: 1rem;
+	&>a {
 
-	div[selected-tags] {
+		display			: inline-block;
+		margin			: 0.2rem;
+		font-size 		: 1.1rem;
+		line-height		: 0.8;
+		cursor			: pointer;
 
-		padding-top: 0.5rem;
+		&.marked {
+			color			: orange;
+		}
 
-		button {
+		& sup {
 
-			padding				: 4px 5px;
-			// margin-top			: 3px;
-			margin-right		: 4px;
-			// min-width			: initial;
-			// font-size			: 0.75rem;
-			// background-color	: transparent;
-			// color				: var(--primary-color);
-
-			// &:hover, &:active, &:focus {
-			// 	color			: var(--text-color);
-			// }
+			display				: inline-block;
+			font-size			: 10px;
+			color				: white;
+			background-color	: orangered;
+			border-radius		: 40px;
+			padding				: 4px 0;
+			width				: 16px;
+			text-align			: center;
+			margin-left			: 2px;
 
 		}
 
 	}
-
-	div[tags] {
-
-		padding: 1rem;
-		&>a {
-
-			display			: inline-block;
-			margin			: 0.2rem;
-			font-size 		: 1.1rem;
-			line-height		: 0.8;
-			cursor			: pointer;
-
-			&.marked {
-				color			: orange;
-			}
-
-			& sup {
-
-				display				: inline-block;
-				font-size			: 10px;
-				color				: white;
-				background-color	: orangered;
-				border-radius		: 40px;
-				padding				: 4px 0;
-				width				: 16px;
-				text-align			: center;
-				margin-left			: 2px;
-
-			}
-
-        }
-
-    }
 
 }

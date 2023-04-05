@@ -5,7 +5,8 @@ import { BookmarksContainerComponent } from './containers/bookmarks-container/bo
 import { BookmarksPageComponent } from './pages/bookmarks-page/bookmarks-page.component';
 import { bookmarksReducer, BookmarksState, tagsReducer, TagsState, UIState, uiReducer } from './store';
 import { ActionReducerMap } from '@ngrx/store';
-import { BookmarksEffects } from './store/effects/bookmarks.effect';
+import { BookmarksEffects } from './store/effects/bookmarks.effects';
+import { BookmarksSearchAndTagCloudContainerComponent } from './containers/search-and-tag-cloud-container/bookmarks-search-and-tag-cloud-container.component';
 
 export const components = [
 
@@ -16,6 +17,7 @@ export const components = [
 	// containers
 	BookmarkEditContainerComponent,
 	BookmarksContainerComponent,
+	BookmarksSearchAndTagCloudContainerComponent,
 
 	// pages
 	BookmarksPageComponent

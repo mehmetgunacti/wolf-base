@@ -14,25 +14,11 @@ app-bookmarks-page {
 
 	}
 
-	[tagCloud] {
+	app-bookmarks-search-and-tag-cloud-container {
 
 		grid-area				: t;
 		padding					: 0.5rem;
 		margin					: 0 auto;
-
-		&>div[tags] {
-
-			margin				: 2rem;
-
-			&>w359-textbox {
-				margin-bottom	: 0.5rem;
-			}
-
-			&>button {
-				margin			: 0.1rem;
-			}
-
-		}
 
 	}
 
