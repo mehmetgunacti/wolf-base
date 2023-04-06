@@ -67,11 +67,11 @@
 				</p-autoComplete>
 				<label>Tags</label>
 			</span>
+			<button pButton pRipple type="button" [icon]="isPopular ? 'pi pi-heart-fill' : 'pi pi-heart'" class="p-button-text" title="Toggle 'popular'" (click)="onTogglePopular()"></button>
 		</div>
 
+	</form>
 		<div form-element-buttons>
 			<button pButton type="button" label="Cancel" icon="pi pi-times" iconPos="left" class="p-button-secondary"></button>
 			<button pButton type="button" label="Save" icon="pi pi-save" iconPos="left" (click)="onSave()"></button>
 		</div>
-
-</form>

@@ -4,7 +4,8 @@ app-bookmark-form {
 	grid-template-columns		: 1fr;
 	grid-gap					: 1rem;
 	grid-template-areas			: "b" // bookmark
-	 							  "f"; // form
+	 							  "f" // form
+								  "bt"; // form buttons
 
 	& > app-bookmark {
 		grid-area 				: b;
@@ -20,8 +21,7 @@ app-bookmark-form {
 								  "fe2"
 								  "fe3"
 								  "fe4"
-								  "fe5"
-								  "fe6";
+								  "fe5";
 		
 		@include md() {
 
@@ -29,8 +29,7 @@ app-bookmark-form {
 			grid-template-areas		: "fe1 fe2"
 									  "fe1 fe3"
 									  "fe1 fe4"
-									  "fe1 fe5"
-									  "fe6 fe6";
+									  "fe1 fe5";
 
 		}
 
@@ -69,14 +68,23 @@ app-bookmark-form {
 		}
 
 		& > div[form-element-tags] {
+
 			grid-area: fe5;
+			@extend %flex-row;
+
+			&>span {
+				flex: 1;
+			}
+
 		}
 
-		& > div[form-element-buttons] {
-			grid-area: fe6;
-			@extend %flex-space-between-center;
-		}
-		
+	}
+
+	& > div[form-element-buttons] {
+
+		grid-area: bt;
+		@extend %flex-space-between-center;
+
 	}
 
 	& > div[bookmark-wrapper] {

@@ -29,6 +29,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	subscriptions: Subscription = new Subscription();
 	formGroup: FormGroup;
 	formName: FormControl;
+	isPopular: boolean = false;
 
 	constructor() {
 
@@ -50,6 +51,12 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 			).subscribe(
 				bookmark => this.bookmark$.next(bookmark)
+			)
+		);
+
+		this.subscriptions.add(
+			this.form.tags.valueChanges.subscribe(
+				tags => this.isPopular = tags.includes('popular')
 			)
 		);
 
@@ -138,6 +145,16 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 			this.form.name.markAsDirty();
 
 		}
+
+	}
+
+	onTogglePopular(): void {
+
+		const POPULAR = 'popular';
+		const tags: string[] = this.form.tags.value;
+		this.form.tags.setValue(
+			tags.includes(POPULAR) ? tags.filter(v => v !== POPULAR) : [POPULAR, ...tags]
+		);
 
 	}
 
