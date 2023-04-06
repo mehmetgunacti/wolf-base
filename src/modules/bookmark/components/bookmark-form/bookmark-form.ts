@@ -14,7 +14,8 @@ export class EditForm implements IFormClass<Bookmark> {
 			title: new FormControl('', { validators: [Validators.required], nonNullable: true }),
 			tags: new FormControl(['abc', 'def', 'ghi'], { validators: [Validators.required], nonNullable: true }),
 			image: new FormControl(''),
-			url: new FormControl('https://www.imdb.com/title/tt2356777/?ref_=ttmi_tt', { validators: [Validators.required], nonNullable: true })
+			url: new FormControl('https://www.imdb.com/title/tt2356777/?ref_=ttmi_tt', { validators: [Validators.required], nonNullable: true }),
+			clicks: new FormControl(0)
 		});
 
 		if (bookmark)
@@ -30,6 +31,7 @@ export class EditForm implements IFormClass<Bookmark> {
 		this.tags.setValue(bookmark.tags);
 		this.image.setValue(bookmark.image);
 		this.url.setValue(bookmark.url);
+		this.clicks.setValue(bookmark.clicks);
 
 	}
 
@@ -55,6 +57,10 @@ export class EditForm implements IFormClass<Bookmark> {
 	
 	get url(): FormControl<string> {
 		return <FormControl<string>> this._formGroup.controls['url'];
+	}
+
+	get clicks(): FormControl<number> {
+		return <FormControl<number>> this._formGroup.controls['clicks'];
 	}
 
 	get formGroup(): FormGroup {

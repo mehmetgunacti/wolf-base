@@ -21,7 +21,8 @@ app-bookmark-form {
 								  "fe2"
 								  "fe3"
 								  "fe4"
-								  "fe5";
+								  "fe5"
+								  "fe6";
 		
 		@include md() {
 
@@ -29,7 +30,8 @@ app-bookmark-form {
 			grid-template-areas		: "fe1 fe2"
 									  "fe1 fe3"
 									  "fe1 fe4"
-									  "fe1 fe5";
+									  "fe1 fe5"
+									  "fe1 fe6";
 
 		}
 
