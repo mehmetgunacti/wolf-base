@@ -15,21 +15,25 @@ const {
 	selectTotal,
 } = fromStates.bookmarksAdapter.getSelectors(selectorBookmarksState);
 
-export const selectorBookmarksIds = selectIds;
+export const bookmarksIds = selectIds;
 
-export const selectorBookmarks = selectEntities;
+export const bookmarks = selectEntities;
 
-export const selectorBookmarksArray = selectAll;
+export const bookmarksArray = selectAll;
 
-export const selectorBookmarksCount = selectTotal;
+export const bookmarksCount = selectTotal;
 
-export const selectorEditDialogVisible = createSelector(
+export const isEditDialogVisible = createSelector(
+
 	selectorBookmarksState,
 	state => state.editDialogVisible
+
 );
 
-export const selectorSelectedBookmark = createSelector(
+export const selectedBookmark = createSelector(
+
 	selectorBookmarksState,
-	selectorBookmarks,
+	bookmarks,
 	(state, dictionary) => state.selected ? dictionary[state.selected] : null
+
 );

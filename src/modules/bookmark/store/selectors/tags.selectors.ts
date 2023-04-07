@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Tag } from 'lib';
 import { BookmarksModuleState } from 'modules/bookmark/bookmark.config';
-import { selectorBookmarksArray } from './bookmarks.selectors';
+import { bookmarksArray } from './bookmarks.selectors';
 
 const selectorModuleState = createFeatureSelector<BookmarksModuleState>('bookmarksModule');
 const selectorTagsState = createSelector(
@@ -9,9 +9,9 @@ const selectorTagsState = createSelector(
 	state => state.tags
 )
 
-export const arrayOfTagNameArray = createSelector(
+export const arrayOfTagNames = createSelector(
 
-	selectorBookmarksArray,
+	bookmarksArray,
 	(bookmarks): string[][] => bookmarks.map(b => b.tags)
 
 );
@@ -19,7 +19,7 @@ export const arrayOfTagNameArray = createSelector(
 // returns all tags of all bookmarks, distinct, for tag-cloud
 export const distinctTagsArray = createSelector(
 
-	arrayOfTagNameArray,
+	arrayOfTagNames,
 	(arrOfTagNames: string[][]): Tag[] =>
 
 		// [['tag1', 'tag2'], ['tag2', 'tag3']] => ['tag1', 'tag2', 'tag2', 'tag3'].reduce(...) => Tag['tag1', 'tag2', 'tag3']
@@ -50,8 +50,8 @@ export const distinctTagsArray = createSelector(
 
 const distinctTagNames = createSelector(
 
-	arrayOfTagNameArray,
-	(tags: string[][]) => [...new Set(tags.flat())]
+	arrayOfTagNames,
+	(tags: string[][]): string[] => [...new Set(tags.flat())]
 
 );
 
@@ -64,7 +64,7 @@ export const selectedTags = createSelector(
 
 export const relatedTags = createSelector(
 
-	arrayOfTagNameArray,
+	arrayOfTagNames,
 	distinctTagNames,
 	selectedTags,
 	(arrTagsArray: string[][], distinctTagNames: string[], selectedTags: string[]): string[] => {

@@ -19,7 +19,7 @@ export class BookmarksContainerComponent implements OnInit {
 	) {
 
 		this.bookmarks$ = combineLatest([
-			store.select(selectors.selectorBookmarksArray),
+			store.select(selectors.bookmarksArray),
 			store.select(selectors.selectedTags)
 		]).pipe(
 			map(

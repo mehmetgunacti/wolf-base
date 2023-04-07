@@ -18,7 +18,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 	constructor(
 		private store: Store<fromStore.BookmarksState>
 	) {
-		this.bookmark$ = store.select(fromStore.selectorSelectedBookmark);
+		this.bookmark$ = store.select(fromStore.selectedBookmark);
 	}
 
 	ngOnInit(): void { }

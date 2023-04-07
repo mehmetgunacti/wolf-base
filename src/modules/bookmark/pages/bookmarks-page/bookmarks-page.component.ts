@@ -18,7 +18,7 @@ export class BookmarksPageComponent {
 
 	constructor(private store: Store, localStorage: LocalStorageService) {
 
-		this.editDialogVisible$ = store.select(fromStore.selectorEditDialogVisible);
+		this.editDialogVisible$ = store.select(fromStore.isEditDialogVisible);
 		this.tagsVisible$ = store.select(fromStore.selectorTagCloudVisibility);
 
 		// todo : delete later
