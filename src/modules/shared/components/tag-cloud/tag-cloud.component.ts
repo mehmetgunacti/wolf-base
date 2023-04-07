@@ -19,7 +19,7 @@ export class TagCloudComponent implements OnChanges {
 
 	@Input() tags: Tag[] | undefined | null;
 	@Input() selectedTags: string[] | undefined | null;
-	@Input() disabledTags: string[] | undefined | null;
+	@Input() relatedTags: string[] | undefined | null;
 
 	@Output() tagClick: EventEmitter<string> = new EventEmitter();
 	@Output() resetClick: EventEmitter<string> = new EventEmitter();
@@ -35,7 +35,7 @@ export class TagCloudComponent implements OnChanges {
 
 	onTagClick(id: string): void {
 
-		if (!this.disabledTags?.includes(id))
+		if (this.relatedTags?.includes(id))
 			this.tagClick.emit(id);
 
 	}

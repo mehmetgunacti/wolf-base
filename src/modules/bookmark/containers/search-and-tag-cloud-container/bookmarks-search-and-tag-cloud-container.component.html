@@ -19,6 +19,6 @@
 <app-tag-cloud
     [tags]="tags$ | async"
     [selectedTags]="selectedTags$ | async"
-    [disabledTags]="disabledTags$ | async"
+    [relatedTags]="relatedTags$ | async"
     (tagClick)="onTagClicked($event)"
     (resetClick)="onTagReset()"></app-tag-cloud>

@@ -1,5 +1,5 @@
 <a *ngFor="let tag of uiTags"
 	(click)="onTagClick(tag.tag.name)"
-	[ngStyle]="{ 'font-size': tag.fontSize, 'color': selectedTags?.includes(tag.tag.name) ? 'orange': disabledTags?.includes(tag.tag.name) ? 'grey' : '' }">{{ tag.tag.name }}
+	[ngStyle]="{ 'font-size': tag.fontSize, 'color': selectedTags?.includes(tag.tag.name) ? 'orange': relatedTags?.includes(tag.tag.name) ? '' : 'grey' }">{{ tag.tag.name }}
 	<sup *ngIf="(selectedTags?.length ?? 0) > 1 && tag.selectedIdx >= 0">{{ tag.selectedIdx + 1 }}</sup>
 </a>

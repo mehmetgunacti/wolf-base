@@ -9,7 +9,7 @@ const selectorTagsState = createSelector(
 	state => state.tags
 )
 
-export const tagsSelectorArrayOfTagNameArray = createSelector(
+export const arrayOfTagNameArray = createSelector(
 
 	selectorBookmarksArray,
 	(bookmarks): string[][] => bookmarks.map(b => b.tags)
@@ -17,9 +17,9 @@ export const tagsSelectorArrayOfTagNameArray = createSelector(
 );
 
 // returns all tags of all bookmarks, distinct, for tag-cloud
-export const tagsSelectorDistinctTagsArray = createSelector(
+export const distinctTagsArray = createSelector(
 
-	tagsSelectorArrayOfTagNameArray,
+	arrayOfTagNameArray,
 	(arrOfTagNames: string[][]): Tag[] =>
 
 		// [['tag1', 'tag2'], ['tag2', 'tag3']] => ['tag1', 'tag2', 'tag2', 'tag3'].reduce(...) => Tag['tag1', 'tag2', 'tag3']
@@ -41,38 +41,53 @@ export const tagsSelectorDistinctTagsArray = createSelector(
 
 );
 
-const tagsSelectorAllDistinctTagNames = createSelector(
+// const tagsSelectorAllDistinctTagNames = createSelector(
 
-	tagsSelectorArrayOfTagNameArray,
-	(arrTagsArray: string[][]) => [...new Set(arrTagsArray.flat())]
+// 	tagsSelectorArrayOfTagNameArray,
+// 	(arrTagsArray: string[][]) => [...new Set(arrTagsArray.flat())]
+
+// );
+
+const distinctTagNames = createSelector(
+
+	arrayOfTagNameArray,
+	(tags: string[][]) => [...new Set(tags.flat())]
 
 );
 
-export const tagsSelectorSelectedTags = createSelector(
+export const selectedTags = createSelector(
 
 	selectorTagsState,
 	state => state.selectedTags
 
 );
 
-const tagsSelectorSelectableTags = createSelector(
+export const relatedTags = createSelector(
 
-	tagsSelectorArrayOfTagNameArray,
-	tagsSelectorSelectedTags,
-	(arrTagsArray: string[][], selectedTags: string[]): string[] => [
-		...new Set(
-			arrTagsArray
-				.filter(arrTags => selectedTags.every(tag => arrTags.includes(tag)))
-				.flat()
-		)
-	]
+	arrayOfTagNameArray,
+	distinctTagNames,
+	selectedTags,
+	(arrTagsArray: string[][], distinctTagNames: string[], selectedTags: string[]): string[] => {
+
+		if (selectedTags.length === 0)
+			return distinctTagNames;
+
+		return [
+			...new Set(
+				arrTagsArray
+					.filter(arrTags => selectedTags.every(tag => arrTags.includes(tag)))
+					.flat()
+			)
+		];
+
+	}
 
 );
 
-export const tagsSelectorDisabledTags = createSelector(
+// export const tagsSelectorDisabledTags = createSelector(
 
-	tagsSelectorAllDistinctTagNames,
-	tagsSelectorSelectableTags,
-	(allTagsNames: string[], selectables: string[]): string[] => allTagsNames.filter(name => !selectables.includes(name))
+// 	tagsSelectorAllDistinctTagNames,
+// 	tagsSelectorRelatedTags,
+// 	(allTagsNames: string[], selectables: string[]): string[] => allTagsNames.filter(name => !selectables.includes(name))
 
-);
+// );

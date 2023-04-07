@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Tag } from 'lib';
 import * as fromStore from 'modules/bookmark/store';
-import { Observable, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Observable, Subscription, combineLatest, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 
 @Component({
 	selector: 'app-bookmarks-search-and-tag-cloud-container',
@@ -16,16 +16,16 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 
 	tags$: Observable<Tag[]>;
 	selectedTags$: Observable<string[]>;
-	disabledTags$: Observable<string[]>;
+	relatedTags$: Observable<string[]>;
 
 	searchControl: FormControl;
 	subscription: Subscription;
 
 	constructor(private store: Store) {
 
-		this.tags$ = store.select(fromStore.tagsSelectorDistinctTagsArray);
-		this.selectedTags$ = store.select(fromStore.tagsSelectorSelectedTags);
-		this.disabledTags$ = store.select(fromStore.tagsSelectorDisabledTags);
+		this.tags$ = store.select(fromStore.distinctTagsArray);
+		this.selectedTags$ = store.select(fromStore.selectedTags);
+		this.relatedTags$ = store.select(fromStore.relatedTags);
 
 		this.searchControl = new FormControl();
 		this.subscription = this.searchControl.valueChanges.pipe(

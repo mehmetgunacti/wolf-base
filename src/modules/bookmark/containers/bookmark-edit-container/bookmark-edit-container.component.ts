@@ -26,7 +26,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 	ngAfterContentInit(): void {
 
 		this.tagSuggestions$ = combineLatest([
-			this.store.select(fromStore.tagsSelectorDistinctTagsArray),
+			this.store.select(fromStore.distinctTagsArray),
 			this.tagInput
 		]).pipe(
 
