@@ -7,6 +7,7 @@ interface TagUI {
 	fontSize: string;
 	selectedIdx: number;
 	disabled: boolean;
+	className: string;
 
 }
 
@@ -62,7 +63,7 @@ export class TagCloudComponent implements OnChanges {
 			const fontSizeMap: Map<number, string> = new Map();
 
 			// Define an array of font sizes to use.
-			const fontSizeValues = ['0.8em', '1.3em', '1.5em', '1.7em', '1.9em'];
+			const fontSizeValues = ['0.8em', '1.4em', '1.7em', '2em', '2.3em'];
 
 			// Remove duplicate values and sort the array of counts in ascending order.
 			const uniqueArr = Array.from(new Set(arr));
@@ -86,7 +87,8 @@ export class TagCloudComponent implements OnChanges {
 						tag,
 						fontSize: fontSizeMap.get(tag.count) || '1em',
 						selectedIdx: this.selectedTags?.indexOf(tag.name) ?? -1,
-						disabled: false
+						disabled: false,
+						className: this.setClassName(tag.name)
 					})
 				)
 			);
@@ -94,6 +96,24 @@ export class TagCloudComponent implements OnChanges {
 
 		}
 		return uiArr;
+
+	}
+
+	private setClassName(name: string): string {
+
+		const selectedTags = this.selectedTags ?? [];
+		if (selectedTags.length === 0)
+			return ''; // do not override css 'color'
+
+		const selected = selectedTags.includes(name);
+		if (selected)
+			return 'selected';
+		
+		const relatedTags = this.relatedTags ?? [];
+		if (relatedTags.includes(name))
+			return 'related';
+
+		return 'disabled';
 
 	}
 

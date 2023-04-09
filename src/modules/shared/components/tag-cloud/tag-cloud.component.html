@@ -1,5 +1,17 @@
+<div selected-tags>
+
+	<i class="pi pi-filter"></i>
+	<button
+		*ngFor="let tag of selectedTags"
+		pButton
+		type="button"
+		[label]="tag"
+		(click)="onTagClick(tag)"
+		class="p-button-info p-button-sm"></button>
+
+</div>
+
 <a *ngFor="let tag of uiTags"
 	(click)="onTagClick(tag.tag.name)"
-	[ngStyle]="{ 'font-size': tag.fontSize, 'color': selectedTags?.includes(tag.tag.name) ? 'orange': relatedTags?.includes(tag.tag.name) ? '' : 'grey' }">{{ tag.tag.name }}
-	<sup *ngIf="(selectedTags?.length ?? 0) > 1 && tag.selectedIdx >= 0">{{ tag.selectedIdx + 1 }}</sup>
-</a>
+	[ngClass]="tag.className"
+	[ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</a>
