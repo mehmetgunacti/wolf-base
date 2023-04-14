@@ -1,53 +1,51 @@
 import { Collection, IndexableType, liveQuery, Table } from 'dexie';
-import { UUID, WolfBaseTable } from 'lib/constants';
-import { Base, ITrash, Tag } from 'lib/models';
+import { UUID, WolfBaseTableName } from 'lib/constants';
+import { BaseEntity, ITrash, Tag } from 'lib/models';
 import { fromEventPattern, Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
-import { ILocalStorageTable } from '../../local-storage-table.interface';
 import { WolfBaseDB } from './wolfbase.database';
+import { BasicTableInterface } from '../../local-storage-table.interface';
 
-export abstract class AbstractDexieTable<T extends Base> implements ILocalStorageTable<T> {
+export abstract class AbstractDexieTable<T extends BaseEntity> implements BasicTableInterface {
 
 	constructor(
 		protected db: WolfBaseDB,
-		protected tablename: WolfBaseTable
+		protected tablename: WolfBaseTableName
 	) { }
 
-	async listNewItems(): Promise<T[]> {
+	// async listNewItems(): Promise<T[]> {
 
-		return await this.db
-			.table<T>(this.tablename)
-			.filter(item => !item.created)
-			.toArray();
+	// 	return await this.db
+	// 		.table<T>(this.tablename)
+	// 		.filter(item => !item.created)
+	// 		.toArray();
 
-	}
+	// }
 
-	async listUpdatedItems(): Promise<T[]> {
+	// async listUpdatedItems(): Promise<T[]> {
 
-		return [];
+	// 	await this.db
+	// 		.table<T>(this.tablename)
+	// 		.filter(item => !!Object.keys(item.updated || {}).length)
+	// 		.toArray();
 
-		// await this.db
-		// 	.table<T>(this.tablename)
-		// 	.filter(item => !!Object.keys(item.updated || {}).length)
-		// 	.toArray();
+	// }
 
-	}
+	// async listDeletedItems(): Promise<ITrash<T>[]> {
 
-	async listDeletedItems(): Promise<ITrash<T>[]> {
+	// 	return await this.db
+	// 		.trashcan
+	// 		.filter(item => item.table === this.tablename)
+	// 		.toArray() as ITrash<T>[];
 
-		return await this.db
-			.trashcan
-			.filter(item => item.table === this.tablename)
-			.toArray() as ITrash<T>[];
-
-	}
+	// }
 
 	async moveToTrash(id: string): Promise<void> {
 
 		this.db.transaction(
 			'rw',
 			this.tablename,
-			WolfBaseTable.trashcan,
+			WolfBaseTableName.trashcan,
 			async () => {
 
 				const entity: T = await this.db.table(this.tablename).get(id);
@@ -68,7 +66,7 @@ export abstract class AbstractDexieTable<T extends Base> implements ILocalStorag
 		this.db.transaction(
 			'rw',
 			this.tablename,
-			WolfBaseTable.conflicts,
+			WolfBaseTableName.conflicts,
 			async () => {
 
 				await this.db.conflicts.add({

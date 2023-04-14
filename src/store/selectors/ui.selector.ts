@@ -23,3 +23,10 @@ export const translations = createSelector(
 	(state: UIState) => state.translations
 
 );
+
+export const isBigScreen = createSelector(
+
+	uiState,
+	(state: UIState) => state.bigScreen
+
+);

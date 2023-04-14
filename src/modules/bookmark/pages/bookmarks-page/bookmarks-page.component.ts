@@ -23,7 +23,7 @@ export class BookmarksPageComponent {
 
 		// todo : delete later
 		localStorage.bookmarks.clear();
-		localStorage.bookmarks.saveAll(this.bookmarks);
+		localStorage.bookmarks.create(this.bookmarks);
 
 	}
 

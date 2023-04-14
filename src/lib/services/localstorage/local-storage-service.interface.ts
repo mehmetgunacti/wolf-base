@@ -1,20 +1,17 @@
-import {
-	IBookmarksTable,
-	ILocalStorageTable,
-} from './local-storage-table.interface';
-import { IKnobaEntity } from 'lib/constants';
+import { 	BookmarksTableInterface, ConfigurationTableInterface } from './local-storage-table.interface';
 
 interface ILocalStorageService {
 
 	drop(): Promise<void>;
-	getTable(tablename: string): ILocalStorageTable<IKnobaEntity>;
+	// getTable(tablename: string): LocalStorageTable;
 
 }
 
 export abstract class LocalStorageService implements ILocalStorageService {
 
 	constructor(
-		public bookmarks: IBookmarksTable,
+		public bookmarks: BookmarksTableInterface,
+		public configuration: ConfigurationTableInterface
 		// public notes: INotesTable,
 		// public tasks: ITasksTable,
 		// public words: IWordsTable,
@@ -24,6 +21,6 @@ export abstract class LocalStorageService implements ILocalStorageService {
 	) { }
 
 	abstract drop(): Promise<void>;
-	abstract getTable(tablename: string): ILocalStorageTable<IKnobaEntity>;
+	// abstract getTable(tablename: string): LocalStorageTable;
 
 }

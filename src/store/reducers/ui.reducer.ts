@@ -3,7 +3,8 @@ import produce from 'immer';
 import {
 	themeSet,
 	i18nSetLanguage,
-	i18nSaveTranslations
+	i18nSaveTranslations,
+	setBigScreen
 } from 'store/actions/ui.action';
 import { initialUIState, UIState } from 'store/states/ui.state';
 import * as utils from 'utils';
@@ -19,6 +20,7 @@ export const uiReducer: ActionReducer<UIState, Action> = createReducer(
 		);
 
 	}),
+
 	on(i18nSetLanguage, (state, { newLang }) => {
 
 		return produce(
@@ -33,11 +35,21 @@ export const uiReducer: ActionReducer<UIState, Action> = createReducer(
 		);
 
 	}),
+
 	on(i18nSaveTranslations, (state, { translations }) => {
 
 		return produce(
 			state,
 			draft => { draft.translations = translations }
+		);
+
+	}),
+
+	on(setBigScreen, (state, { isBigScreen }) => {
+
+		return produce(
+			state,
+			draft => { draft.bigScreen = isBigScreen }
 		);
 
 	})

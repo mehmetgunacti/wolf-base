@@ -1,6 +1,6 @@
 import { UUID } from 'lib/constants';
 
-export interface Base {
+export interface BaseEntity {
 
 	id: UUID;
 	created?: string;

@@ -1,4 +1,4 @@
-export enum WolfBaseTable {
+export enum WolfBaseTableName {
 
 	bookmarks = 'bookmarks',
 	// notes = 'notes',
@@ -15,6 +15,7 @@ export enum WolfBaseTable {
 
 export enum CONF_KEYS {
 
-	syncWorkerActive = 'syncWorkerActive'
+	syncWorkerActive = 'syncWorkerActive',
+	sidebarVisible = 'sidebarVisible'
 
 }

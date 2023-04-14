@@ -1,24 +1,23 @@
 import { UUID } from 'lib/constants';
-import {
-	Click,
-	ITrash,
-	Bookmark,
-	Base,
-	Tag
-} from 'lib/models';
+import { BaseEntity, Bookmark } from 'lib/models';
 import { Observable } from 'rxjs';
 
-export interface ILocalStorageTable<T extends Base> {
+export interface BasicTableInterface {
 
-	listNewItems(): Promise<T[]>;
-	listUpdatedItems(): Promise<T[]>;
-	listDeletedItems(): Promise<ITrash<T>[]>;
+	clear(): Promise<void>;
 
-	moveToConflicts(localData: T, remoteData: T): Promise<void>;
-	moveToTrash(id: string): Promise<void>;
-	delete(id: string): Promise<void>;
+}
+
+export interface EntityTableInterface<T extends BaseEntity> {
 
 	get(id: UUID): Promise<T | undefined>;
+
+	create(item: Partial<T>): Promise<T>;
+	create(items: Partial<T>[]): Promise<void>;
+	update(id: UUID, item: Partial<T>): Promise<T>;
+
+	delete(id: UUID): Promise<void>;
+
 	list(params?: {
 		orderBy?: string;
 		reverse?: boolean;
@@ -31,27 +30,38 @@ export interface ILocalStorageTable<T extends Base> {
 	}): Observable<T[]>;
 	listIds(): Promise<UUID[]>;
 
-	create(item: Partial<T>): Promise<T>;
-	update(id: UUID, item: Partial<T>): Promise<T>;
-
-	saveAll(items: Partial<T>[]): Promise<void>;
-	saveRemoteData(item: T): Promise<void>;
-	saveAllRemoteData(items: T[]): Promise<void>;
-
 	search(term: string): Promise<T[]>;
 	searchByTags(tags: string[]): Promise<T[]>;
-	// tags(): Promise<Tag[]>;
-
-	clear(): Promise<void>;
 
 }
 
-export interface IBookmarksTable extends ILocalStorageTable<Bookmark> {
+export interface KeyValueTableInterface {
 
-	listClickedItems(): Promise<Click[]>;
-	saveClick(item: Click): Promise<void>;
-	saveClicks(items: Click[]): Promise<void>;
-	click(id: string): Promise<void>;
+	set<T>(key: string, value: T): Promise<void>;
+	get<T>(key: string): Promise<T>;
+	remove(key: string): Promise<void>;
+
+}
+
+// export interface SyncableTable<T extends Base> {
+
+// 	listNewItems(): Promise<T[]>;
+// 	listUpdatedItems(): Promise<T[]>;
+// 	listDeletedItems(): Promise<ITrash<T>[]>;
+
+// 	moveToConflicts(localData: T, remoteData: T): Promise<void>;
+
+// }
+
+export interface BookmarksTableInterface extends EntityTableInterface<Bookmark>, BasicTableInterface {
+
+	click(id: UUID): Promise<void>;
+
+}
+
+export interface ConfigurationTableInterface extends BasicTableInterface, KeyValueTableInterface {
+
+
 
 }
 

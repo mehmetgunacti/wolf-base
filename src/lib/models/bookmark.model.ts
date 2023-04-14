@@ -1,6 +1,6 @@
-import { Base } from './common.model';
+import { BaseEntity } from './common.model';
 
-export interface Bookmark extends Base {
+export interface Bookmark extends BaseEntity {
 
 	name: string;
 	title: string;
@@ -11,20 +11,8 @@ export interface Bookmark extends Base {
 
 }
 
-export interface Click extends Base {
+export interface Click extends BaseEntity {
 
 	clicks: number;
-
-}
-
-export interface BookmarksUIState {
-
-	tagsVisible: boolean
-
-}
-
-export const initialBookmarksUIState: BookmarksUIState = {
-
-	tagsVisible: false
 
 }

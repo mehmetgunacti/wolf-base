@@ -133,7 +133,7 @@ export class BookmarksEffects {
 
 			ofType(fromActions.deleteBookmark),
 			map(p => p.id),
-			tap(id => this.localStorage.bookmarks.moveToTrash(id)),
+			tap(id => this.localStorage.bookmarks.delete(id)),
 			// tap(() => this.toastService.show({ type: W359ToastType.SUCCESS, message: `Bookmark deleted` })),
 			// map(() => fromActions.bookmarksActionLoadAll())
 

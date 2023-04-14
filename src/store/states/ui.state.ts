@@ -11,7 +11,9 @@ export interface UIState {
 
 	theme: ThemeUI,
 	lang: LANG,
-	translations: any
+	translations: any,
+	sidebarVisible: boolean,
+	bigScreen: boolean
 
 }
 
@@ -21,6 +23,8 @@ export const initialUIState: UIState = {
 		info: THEME_LIGHT // localStorage.getItem('theme') === THEME_LIGHT.name ? THEME_LIGHT : THEME_DARK
 	},
 	lang: 'en',
-	translations: {}
+	translations: {},
+	sidebarVisible: true,
+	bigScreen: true
 
 };

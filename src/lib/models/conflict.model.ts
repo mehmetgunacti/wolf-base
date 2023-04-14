@@ -1,6 +1,6 @@
-import { Base } from 'lib/models';
+import { BaseEntity } from 'lib/models';
 
-export interface IConflictData<T extends Base> extends Base {
+export interface IConflictData<T extends BaseEntity> extends BaseEntity {
 
 	localData: T;
 	remoteData: T;

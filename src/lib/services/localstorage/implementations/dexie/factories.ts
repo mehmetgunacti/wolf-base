@@ -1,6 +1,7 @@
 import { BookmarksTable } from './tables/bookmarks.table';
 import { DexieLocalStorageService } from './dexie.service';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
+import { ConfigurationTable } from './tables';
 
 export const localStorageServiceFactory = (): DexieLocalStorageService => {
 
@@ -8,7 +9,9 @@ export const localStorageServiceFactory = (): DexieLocalStorageService => {
 	return new DexieLocalStorageService(
 
 		db,
-		bookmarksTableFactory(db)
+		bookmarksTableFactory(db),
+		configurationTableFactory(db),
+
 		// notesTableFactory(db),
 		// tasksTableFactory(db),
 		// wordsTableFactory(db),
@@ -26,3 +29,8 @@ const bookmarksTableFactory = (wolfBaseDB?: WolfBaseDB): BookmarksTable => {
 };
 
 
+const configurationTableFactory = (wolfBaseDB?: WolfBaseDB): ConfigurationTable => {
+
+	return new ConfigurationTable(wolfBaseDB || wolfBaseDBFactory());
+
+};

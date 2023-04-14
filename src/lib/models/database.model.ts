@@ -1,4 +1,4 @@
-export interface IDexieConfiguration {
+export interface DexieConfiguration {
 
 	dbName: string;
 	version: number;

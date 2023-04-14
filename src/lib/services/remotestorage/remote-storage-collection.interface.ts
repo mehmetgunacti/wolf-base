@@ -1,11 +1,11 @@
 import {
 	Bookmark,
-	Base,
+	BaseEntity,
 	Click
 } from 'lib/models';
 import { IKnobaEntity, UUID } from 'lib/constants';
 
-export interface IRemoteStorageCollection<T extends Base> {
+export interface IRemoteStorageCollection<T extends BaseEntity> {
 
 	get(id: string): Promise<T>;
 
