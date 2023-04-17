@@ -53,6 +53,7 @@ export class CorePageComponent implements OnDestroy {
 
 		const items: Array<MenuItem> = new Array();
 		items.push(navItems.miBookmarks);
+		items.push(navItems.miSettings);
 		// items.push(navItems.miNotes);
 		// items.push(navItems.miWikis);
 		// items.push(navItems.miTasks);
