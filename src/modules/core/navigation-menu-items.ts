@@ -12,6 +12,13 @@ export const miBookmarks: MenuItem = {
 	icon: PrimeIcons.BOOKMARK_FILL,
 	routerLink: ['/bookmarks']
 };
+
+export const miSettings: MenuItem = {
+	label: 'Settings',
+	icon: PrimeIcons.COG,
+	routerLink: ['/settings']
+};
+
 // export const miNotes: MenuItem = {
 // 	label: 'Notes',
 // 	icon: 'pi pi-fw fa-bookmark',
