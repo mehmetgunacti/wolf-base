@@ -17,6 +17,10 @@ const routes: Routes = [
 				loadChildren: () => import('modules/bookmark/bookmark.module').then(m => m.BookmarkModule)
 			},
 			{
+				path: 'settings',
+				loadChildren: () => import('modules/settings/settings.module').then(m => m.SettingsModule)
+			},
+			{
 				path: '403',
 				component: UnauthorizedComponent
 			}
