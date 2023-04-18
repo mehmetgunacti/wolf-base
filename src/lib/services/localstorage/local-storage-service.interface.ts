@@ -1,13 +1,13 @@
 import { 	BookmarksTableInterface, ConfigurationTableInterface } from './local-storage-table.interface';
 
-interface ILocalStorageService {
+interface LocalStorageService {
 
 	drop(): Promise<void>;
 	// getTable(tablename: string): LocalStorageTable;
 
 }
 
-export abstract class LocalStorageService implements ILocalStorageService {
+export abstract class LocalStorageServiceImpl implements LocalStorageService {
 
 	constructor(
 		public bookmarks: BookmarksTableInterface,
