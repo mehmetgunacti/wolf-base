@@ -1,6 +1,6 @@
-import { BaseEntity } from './common.model';
+import { EntityBase } from './entity-base.model';
 
-export interface Bookmark extends BaseEntity {
+export interface Bookmark extends EntityBase {
 
 	name: string;
 	title: string;
@@ -11,7 +11,7 @@ export interface Bookmark extends BaseEntity {
 
 }
 
-export interface Click extends BaseEntity {
+export interface Click extends EntityBase {
 
 	clicks: number;
 

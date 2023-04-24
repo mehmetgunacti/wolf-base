@@ -1,5 +1,5 @@
 export * from './bookmark.model';
-export * from './common.model';
+export * from './entity-base.model';
 export * from './configuration.model';
 export * from './conflict.model';
 export * from './database.model';

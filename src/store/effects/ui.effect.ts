@@ -1,21 +1,18 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
-import { LocalStorageService } from 'lib';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { i18nSaveTranslations, i18nSetLanguage } from 'store';
 import * as fromActions from 'store/actions';
 
 @Injectable()
 export class UIEffects {
 
-	constructor(
-		private actions$: Actions,
-		private translate: TranslateService,
-		private breakpointObserver: BreakpointObserver,
-		private localStorage: LocalStorageService
-	) { }
+	private actions$: Actions = inject(Actions);
+	private translate: TranslateService = inject(TranslateService);
+	private breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
+	// private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 
 	setBigScreen$ = createEffect(
 

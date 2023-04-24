@@ -1,7 +1,7 @@
 import { WolfBaseTableName } from 'lib/constants';
-import { BaseEntity } from './common.model';
+import { EntityBase } from './entity-base.model';
 
-export interface ITrash<T> extends BaseEntity {
+export interface ITrash<T> extends EntityBase {
 
 	entity: T;
 	table: WolfBaseTableName;

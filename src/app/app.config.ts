@@ -1,11 +1,11 @@
-import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { APP_INITIALIZER, ErrorHandler, Provider } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { APP_INITIALIZER, ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LANG, LocalStorageService, localStorageServiceFactory, RemoteStorageService, remoteStorageServiceFactory, ThemeInfo, THEME_LIGHT } from 'lib';
+import { LANG, LocalStorageService, RemoteStorageService, THEME_LIGHT, ThemeInfo } from 'lib';
 import { MessageService } from 'primeng/api';
-import { CustomErrorHandler } from 'services';
+import { CustomErrorHandler, localStorageServiceFactory, remoteStorageServiceFactory } from 'services';
 import * as actions from 'store/actions';
 import * as states from 'store/states';
 import { resolveLang, resolveTheme } from 'utils';
@@ -48,6 +48,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 }
 
+export const LOCAL_STORAGE_SERVICE = new InjectionToken<LocalStorageService>('LocalStorageService');
+export const REMOTE_STORAGE_SERVICE = new InjectionToken<LocalStorageService>('RemoteStorageService');
+
 export const providers: Provider[] = [
 
 	{
@@ -66,8 +69,8 @@ export const providers: Provider[] = [
 		useClass: CustomErrorHandler
 
 	},
-	{ provide: LocalStorageService, useFactory: localStorageServiceFactory },
-	{ provide: RemoteStorageService, useFactory: remoteStorageServiceFactory },
+	{ provide: LOCAL_STORAGE_SERVICE, useFactory: localStorageServiceFactory },
+	{ provide: REMOTE_STORAGE_SERVICE, useFactory: remoteStorageServiceFactory },
 	MessageService
 
 ];

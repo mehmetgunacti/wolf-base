@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -9,10 +9,9 @@ export class ScriptLoaderService {
 
 	private scripts: Map<string, Subject<void>> = new Map();
 	private styles: Map<string, Subject<void>> = new Map();
+	private readonly document: Document = inject(DOCUMENT);
 
-	constructor(
-		@Inject(DOCUMENT) private readonly document: Document
-	) {}
+	constructor() {}
 
 	loadScript(url: string): Observable<void> {
 

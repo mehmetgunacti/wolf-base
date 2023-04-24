@@ -1,16 +1,25 @@
 import { Collection, IndexableType, Table, liveQuery } from 'dexie';
 import { UUID, WolfBaseTableName } from 'lib/constants';
 import { Bookmark } from 'lib/models';
-import { BookmarksTableInterface } from 'lib/services/localstorage/local-storage-table.interface';
+import { BookmarksTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { Observable, fromEventPattern } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { WolfBaseDB } from '../wolfbase.database';
+import { BasicTableImpl } from '../dexie.table';
 
-export class BookmarksTable implements BookmarksTableInterface {
+export class BookmarksTableImpl extends BasicTableImpl<Bookmark> implements BookmarksTable {
 
 	tablename = WolfBaseTableName.bookmarks;
 
-	constructor(protected db: WolfBaseDB) { }
+	constructor(db: WolfBaseDB) {
+		super(db, WolfBaseTableName.bookmarks);
+	}
+
+	async toArray(): Promise<any[]> {
+
+		return await this.db.table(this.tablename).toArray();
+	
+	}
 
 	async get(id: UUID): Promise<Bookmark | undefined> {
 
@@ -113,12 +122,6 @@ export class BookmarksTable implements BookmarksTableInterface {
 	searchByTags(tags: string[]): Promise<Bookmark[]> {
 
 		throw new Error('Method not implemented.');
-
-	}
-
-	async clear(): Promise<void> {
-
-		await this.db.table(this.tablename).clear();
 
 	}
 

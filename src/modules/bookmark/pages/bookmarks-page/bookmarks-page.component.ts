@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { Bookmark, LocalStorageService } from 'lib';
 import * as fromStore from 'modules/bookmark/store';
 import { slideUpDownTrigger } from 'modules/shared';
@@ -16,14 +17,18 @@ export class BookmarksPageComponent {
 	editDialogVisible$: Observable<boolean>;
 	tagsVisible$!: Observable<boolean>;
 
-	constructor(private store: Store, localStorage: LocalStorageService) {
+	private store: Store = inject(Store);
+	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 
-		this.editDialogVisible$ = store.select(fromStore.isEditDialogVisible);
-		this.tagsVisible$ = store.select(fromStore.selectorTagCloudVisibility);
+
+	constructor() {
+
+		this.editDialogVisible$ = this.store.select(fromStore.isEditDialogVisible);
+		this.tagsVisible$ = this.store.select(fromStore.selectorTagCloudVisibility);
 
 		// todo : delete later
-		localStorage.bookmarks.clear();
-		localStorage.bookmarks.create(this.bookmarks);
+		this.localStorage.bookmarks.clear();
+		this.localStorage.bookmarks.create(this.bookmarks);
 
 	}
 

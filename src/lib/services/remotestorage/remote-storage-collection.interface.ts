@@ -1,11 +1,11 @@
 import {
 	Bookmark,
-	BaseEntity,
+	EntityBase,
 	Click
 } from 'lib/models';
 import { IKnobaEntity, UUID } from 'lib/constants';
 
-export interface IRemoteStorageCollection<T extends BaseEntity> {
+export interface RemoteStorageCollection<T extends EntityBase> {
 
 	get(id: string): Promise<T>;
 
@@ -18,7 +18,7 @@ export interface IRemoteStorageCollection<T extends BaseEntity> {
 
 }
 
-export interface BookmarksCollection extends IRemoteStorageCollection<Bookmark> { }
+export interface BookmarksCollection extends RemoteStorageCollection<Bookmark> { }
 // export interface INotesCollection extends IRemoteStorageCollection<INote> { }
 // export interface ITasksCollection extends IRemoteStorageCollection<ITaskList> { }
 // export interface IWordsCollection extends IRemoteStorageCollection<IWord> { }

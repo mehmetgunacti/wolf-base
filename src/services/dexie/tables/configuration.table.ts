@@ -1,19 +1,24 @@
 import { WolfBaseTableName } from 'lib/constants';
-import { ConfigurationTableInterface } from 'lib/services/localstorage/local-storage-table.interface';
+import { ConfigurationTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { WolfBaseDB } from '../wolfbase.database';
+import { BasicTableImpl } from '../dexie.table';
 
-export class ConfigurationTable implements ConfigurationTableInterface {
+export class ConfigurationTableImpl extends BasicTableImpl<string> implements ConfigurationTable {
 
 	tablename = WolfBaseTableName.configuration;
 
-	constructor(protected db: WolfBaseDB) { }
-
-
-	async clear(): Promise<void> {
-
-		await this.db.table(this.tablename).clear();
-
+	constructor(db: WolfBaseDB) {
+		super(db, WolfBaseTableName.configuration);
 	}
+
+	list(): Promise<{ key: string; value: string; }[]> {
+		throw new Error('Method not implemented.');
+	}
+
+	toArray(): Promise<any[]> {
+		throw new Error('Method not implemented.');
+	}
+
 
 	async set<T>(key: string, value: T): Promise<void> {
 

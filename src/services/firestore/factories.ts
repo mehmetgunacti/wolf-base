@@ -8,13 +8,7 @@ import {
 	ClicksRemoteStorageCollection
 } from './collections';
 import { FirestoreRemoteStorageService } from './firestore.service';
-import {
-	BookmarksCollection,
-	// INotesCollection,
-	// ITasksCollection,
-	// IWordsCollection,
-	ClicksCollection
-} from '../../remote-storage-collection.interface';
+import { BookmarksCollection, ClicksCollection } from 'lib';
 
 export const firestoreFactory = (): FirestoreTool => {
 

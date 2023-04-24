@@ -1,9 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
-import { liveQuery } from 'dexie';
+import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { Bookmark, LocalStorageService } from 'lib';
-import { fromEventPattern, Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { showNotification } from 'store';
 import * as fromActions from '../actions';
@@ -11,10 +9,8 @@ import * as fromActions from '../actions';
 @Injectable()
 export class BookmarksEffects {
 
-	constructor(
-		private actions$: Actions,
-		private localStorage: LocalStorageService
-	) { }
+	private actions$: Actions = inject(Actions);
+	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 
 	listFromIndexedDb$ = createEffect(
 

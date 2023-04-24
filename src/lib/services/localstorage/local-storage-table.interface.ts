@@ -1,14 +1,15 @@
 import { UUID } from 'lib/constants';
-import { BaseEntity, Bookmark } from 'lib/models';
+import { Bookmark, EntityBase } from 'lib/models';
 import { Observable } from 'rxjs';
 
-export interface BasicTableInterface {
+export interface BasicTable<T> {
 
 	clear(): Promise<void>;
+	dump(): Promise<Record<string, T>>;
 
 }
 
-export interface EntityTableInterface<T extends BaseEntity> {
+export interface EntityTable<T extends EntityBase> extends BasicTable<T> {
 
 	get(id: UUID): Promise<T | undefined>;
 
@@ -18,16 +19,8 @@ export interface EntityTableInterface<T extends BaseEntity> {
 
 	delete(id: UUID): Promise<void>;
 
-	list(params?: {
-		orderBy?: string;
-		reverse?: boolean;
-		limit?: number
-	}): Promise<T[]>;
-	list$(params?: {
-		orderBy?: string;
-		reverse?: boolean;
-		limit?: number
-	}): Observable<T[]>;
+	list(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; }): Promise<T[]>;
+	list$(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; }): Observable<T[]>;
 	listIds(): Promise<UUID[]>;
 
 	search(term: string): Promise<T[]>;
@@ -35,11 +28,12 @@ export interface EntityTableInterface<T extends BaseEntity> {
 
 }
 
-export interface KeyValueTableInterface {
+export interface KeyValueTable extends BasicTable<string> {
 
-	set<T>(key: string, value: T): Promise<void>;
-	get<T>(key: string): Promise<T>;
+	set(key: string, value: string): Promise<void>;
+	get(key: string): Promise<string>;
 	remove(key: string): Promise<void>;
+	list(): Promise<{ key: string, value: string }[]>;
 
 }
 
@@ -53,17 +47,13 @@ export interface KeyValueTableInterface {
 
 // }
 
-export interface BookmarksTableInterface extends EntityTableInterface<Bookmark>, BasicTableInterface {
+export interface BookmarksTable extends EntityTable<Bookmark> {
 
 	click(id: UUID): Promise<void>;
 
 }
 
-export interface ConfigurationTableInterface extends BasicTableInterface, KeyValueTableInterface {
-
-
-
-}
+export interface ConfigurationTable extends KeyValueTable { }
 
 // export interface INotesTable extends ILocalStorageTable<INote> { }
 // export interface ITasksTable extends ILocalStorageTable<ITaskList> { }

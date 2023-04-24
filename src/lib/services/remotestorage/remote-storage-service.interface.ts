@@ -2,28 +2,31 @@ import { IKnobaEntity } from 'lib/constants';
 import {
 	BookmarksCollection,
 	// INotesCollection,
-	IRemoteStorageCollection,
+	RemoteStorageCollection,
 	// ITasksCollection,
 	// IWordsCollection,
 	ClicksCollection
 } from './remote-storage-collection.interface';
 
-interface IRemoteStorageService {
+export interface RemoteStorageService {
 
-	getCollection(name: string): IRemoteStorageCollection<IKnobaEntity>;
+	bookmarks: BookmarksCollection;
+	clicks: ClicksCollection;
 
-}
-
-export abstract class RemoteStorageService implements IRemoteStorageService {
-
-	constructor(
-		public bookmarks: BookmarksCollection,
-		// public notes: INotesCollection,
-		// public tasks: ITasksCollection,
-		// public words: IWordsCollection,
-		public clicks: ClicksCollection
-	) { }
-
-	abstract getCollection(name: string): IRemoteStorageCollection<IKnobaEntity>;
+	getCollection(name: string): RemoteStorageCollection<IKnobaEntity>;
 
 }
+
+// export abstract class RemoteStorageService implements IRemoteStorageService {
+
+// 	constructor(
+// 		public bookmarks: BookmarksCollection,
+// 		// public notes: INotesCollection,
+// 		// public tasks: ITasksCollection,
+// 		// public words: IWordsCollection,
+// 		public clicks: ClicksCollection
+// 	) { }
+
+// 	abstract getCollection(name: string): IRemoteStorageCollection<IKnobaEntity>;
+
+// }

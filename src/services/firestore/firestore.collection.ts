@@ -1,9 +1,9 @@
-import { IRemoteStorageCollection } from '../../remote-storage-collection.interface';
 import { RemoteCollection, IKnobaEntity, UUID } from 'lib/constants';
 import { FirestoreTool, IFirestoreDocument, IFirestoreData } from 'lib/utils';
-import { BaseEntity } from 'lib/models';
+import { EntityBase } from 'lib/models';
+import { RemoteStorageCollection } from 'lib';
 
-export abstract class AbstractFirestoreCollection<T extends BaseEntity> implements IRemoteStorageCollection<T> {
+export abstract class AbstractFirestoreCollection<T extends EntityBase> implements RemoteStorageCollection<T> {
 
 	protected pageSize = '10000';
 
