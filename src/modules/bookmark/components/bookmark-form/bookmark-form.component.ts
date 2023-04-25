@@ -108,10 +108,10 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	lookupTitle(): void {
 
-		const url: string = this.form.url.getRawValue();
+		const url: string[] = this.form.url.getRawValue();
 
 		// get the title of the web page
-		const parsed: URL | null = this.parseURL(url);
+		const parsed: URL | null = this.parseURL(url[0]);
 		if (parsed) {
 
 			const { origin, pathname } = parsed;
@@ -134,10 +134,10 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	nameFromURL(): void {
 
-		const url: string = this.form.url.getRawValue();
+		const url: string[] = this.form.url.getRawValue();
 
 		// set hostname as bookmark name
-		const parsed: URL | null = this.parseURL(url);
+		const parsed: URL | null = this.parseURL(url[0]);
 		if (parsed) {
 
 			const hostname = parsed.hostname;

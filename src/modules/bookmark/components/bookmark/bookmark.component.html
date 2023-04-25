@@ -24,7 +24,7 @@
 		</div>
 		<div bookmark-bottom *ngIf="showDetails">
 
-			<div id="url">{{ item.url }}</div>
+			<div bookmark-url *ngFor="let url of item.url">{{ url }}</div>
 			<div bookmark-tags>
 
 				<button

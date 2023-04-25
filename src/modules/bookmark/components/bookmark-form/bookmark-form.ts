@@ -55,8 +55,8 @@ export class EditForm implements IFormClass<Bookmark> {
 		return <FormControl<string | null>> this._formGroup.controls['image'];
 	}
 	
-	get url(): FormControl<string> {
-		return <FormControl<string>> this._formGroup.controls['url'];
+	get url(): FormControl<string[]> {
+		return <FormControl<string[]>> this._formGroup.controls['url'];
 	}
 
 	get clicks(): FormControl<number> {

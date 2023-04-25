@@ -68,7 +68,7 @@ app-bookmark {
 
 			@extend %flex-column;
 
-			#url {
+			div[bookmark-url] {
 				word-break		: break-all;
 				padding-right	: 1rem;
 				font-size		: x-small;

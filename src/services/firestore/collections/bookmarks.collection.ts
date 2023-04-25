@@ -57,7 +57,9 @@ export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bo
 			};
 
 		if (bookmark.url)
-			fields['url'] = { stringValue: bookmark.url };
+			fields['url'] = {
+				arrayValue: { values: bookmark.url.map(v => ({ stringValue: v })) }
+			};
 
 		if (bookmark.image)
 			fields['image'] = { stringValue: bookmark.image };

@@ -141,7 +141,7 @@ export class BookmarksTableImpl extends BasicTableImpl<Bookmark> implements Book
 			title: '',
 			tags: [],
 			image: '',
-			url: '',
+			url: [''],
 			clicks: 0
 
 		};

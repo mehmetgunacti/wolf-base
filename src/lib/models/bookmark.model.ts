@@ -6,7 +6,7 @@ export interface Bookmark extends EntityBase {
 	title: string;
 	tags: string[];
 	image: string;
-	url: string;
+	url: string[];
 	clicks: number;
 
 }
