@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Bookmark, UUID, PLACEHOLDER_QUESTIONMARK } from 'lib';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Bookmark, PLACEHOLDER_QUESTIONMARK, UUID } from 'lib';
 
 @Component({
 	selector: 'app-bookmark',
 	templateUrl: './bookmark.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookmarkComponent implements OnInit, OnChanges {
+export class BookmarkComponent {
 
 	PLACEHOLDER_QUESTIONMARK = PLACEHOLDER_QUESTIONMARK;
 
@@ -16,13 +16,6 @@ export class BookmarkComponent implements OnInit, OnChanges {
 	@Output() edit: EventEmitter<UUID> = new EventEmitter();
 	@Output() linkClick: EventEmitter<Bookmark> = new EventEmitter();
 
-
-	ngOnInit(): void {
-		console.log(this.item);
-	}
-	ngOnChanges(changes: SimpleChanges): void {
-		console.log(changes);
-	}
 
 	onEdit(): void {
 
