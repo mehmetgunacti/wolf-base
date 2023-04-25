@@ -7,12 +7,14 @@ import { bookmarksReducer, BookmarksState, tagsReducer, TagsState, UIState, uiRe
 import { ActionReducerMap } from '@ngrx/store';
 import { BookmarksEffects } from './store/effects/bookmarks.effects';
 import { BookmarksSearchAndTagCloudContainerComponent } from './containers/search-and-tag-cloud-container/bookmarks-search-and-tag-cloud-container.component';
+import { CroppieComponent } from './components/croppie/croppie.component';
 
 export const components = [
 
 	// components
 	BookmarkFormComponent,
 	BookmarkComponent,
+	CroppieComponent,
 
 	// containers
 	BookmarkEditContainerComponent,
