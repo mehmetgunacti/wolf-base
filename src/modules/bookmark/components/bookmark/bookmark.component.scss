@@ -80,7 +80,24 @@ app-bookmark {
 
 				margin-top	: 0.3rem;
 
-				button.p-button {
+				&>p-tag {
+
+					margin-right: 0.3rem;
+
+					& .p-tag {
+
+						padding: 1px 7px;
+
+						& .p-tag-value {
+
+							font-size	: x-small;
+	
+						}
+
+					}
+
+				}
+				&>span {
 
 					padding				: 1px 5px;
 					margin-top			: 3px;
@@ -88,11 +105,6 @@ app-bookmark {
 					min-width			: initial;
 					font-size			: 0.75rem;
 					background-color	: transparent;
-    				color				: var(--primary-color);
-
-					&:hover, &:active, &:focus {
-						color			: var(--text-color);
-					}
 
 				}
 

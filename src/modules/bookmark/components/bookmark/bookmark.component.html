@@ -25,16 +25,8 @@
 		<div bookmark-bottom *ngIf="showDetails">
 
 			<div bookmark-url *ngFor="let url of item.url">{{ url }}</div>
-			<div bookmark-tags>
-
-				<button
-					*ngFor="let tag of item.tags"
-					pButton
-					type="button"
-					[label]="tag"
-					(click)="onTagClick(tag)"
-					class="p-button-info p-button-sm"></button>
-
+			<div bookmark-tags *ngIf="item.tags">
+				<p-tag [value]="tag" *ngFor="let tag of item.tags" [rounded]="true"></p-tag>
 			</div>
 
 		</div>

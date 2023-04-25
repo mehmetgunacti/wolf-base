@@ -10,11 +10,11 @@ export class EditForm implements IFormClass<Bookmark> {
 
 		this._formGroup = new FormGroup({
 			id: new FormControl(),
-			name: new FormControl('abc', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
+			name: new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
 			title: new FormControl('', { validators: [Validators.required], nonNullable: true }),
-			tags: new FormControl(['abc', 'def', 'ghi'], { validators: [Validators.required], nonNullable: true }),
+			tags: new FormControl([], { validators: [Validators.required], nonNullable: true }),
 			image: new FormControl(''),
-			url: new FormControl('https://www.imdb.com/title/tt2356777/?ref_=ttmi_tt', { validators: [Validators.required], nonNullable: true }),
+			url: new FormControl([''], { validators: [Validators.required], nonNullable: true }),
 			clicks: new FormControl(0)
 		});
 
