@@ -27,6 +27,7 @@ app-bookmark {
 
 		div[bookmark-top] {
 			flex: 1;
+			@extend %flex-start-center;
 
 				span[bookmark-name] {
 

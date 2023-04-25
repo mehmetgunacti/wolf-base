@@ -22,9 +22,9 @@
 			</a>
 
 		</div>
-		<div bookmark-bottom>
+		<div bookmark-bottom *ngIf="showDetails">
 
-			<div id="url"></div>
+			<div id="url">{{ item.url }}</div>
 			<div bookmark-tags>
 
 				<button

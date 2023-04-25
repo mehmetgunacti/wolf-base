@@ -11,6 +11,7 @@ export class BookmarkComponent {
 	PLACEHOLDER_QUESTIONMARK = PLACEHOLDER_QUESTIONMARK;
 
 	@Input() item: Bookmark | null | undefined;
+	@Input() showDetails: boolean = false;
 
 	@Output() edit: EventEmitter<UUID> = new EventEmitter();
 	@Output() linkClick: EventEmitter<Bookmark> = new EventEmitter();
