@@ -19,9 +19,6 @@ import * as fromStore from './store';
 		StoreModule.forFeature('bookmarksModule', fromConfig.reducers), //  , { metaReducers }),
 		EffectsModule.forFeature([...fromConfig.effects]),
 		SharedModule
-	],
-	entryComponents: [
-        BookmarkEditContainerComponent
-    ]
+	]
 })
 export class BookmarkModule { }
