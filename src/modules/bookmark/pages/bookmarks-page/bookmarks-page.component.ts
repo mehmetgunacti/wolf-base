@@ -4,7 +4,8 @@ import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { Bookmark, LocalStorageService } from 'lib';
 import * as fromStore from 'modules/bookmark/store';
 import { slideUpDownTrigger } from 'modules/shared';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { isBigScreen } from 'store';
 
 @Component({
 	selector: 'app-bookmarks-page',
@@ -15,7 +16,8 @@ import { Observable } from 'rxjs';
 export class BookmarksPageComponent {
 
 	editDialogVisible$: Observable<boolean>;
-	tagsVisible$!: Observable<boolean>;
+	tagsVisible$: Observable<boolean>;
+	isBigScreen$: Observable<boolean>;
 
 	private store: Store = inject(Store);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
@@ -25,6 +27,7 @@ export class BookmarksPageComponent {
 
 		this.editDialogVisible$ = this.store.select(fromStore.isEditDialogVisible);
 		this.tagsVisible$ = this.store.select(fromStore.selectorTagCloudVisibility);
+		this.isBigScreen$ = this.store.select(isBigScreen).pipe(tap(a => console.log(a)));
 
 		// todo : delete later
 		this.localStorage.bookmarks.clear();
