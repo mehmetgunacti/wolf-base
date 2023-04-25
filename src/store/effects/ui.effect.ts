@@ -2,6 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
+import { Breakpoint } from 'lib';
 import { map, switchMap } from 'rxjs/operators';
 import { i18nSaveTranslations, i18nSetLanguage } from 'store';
 import * as fromActions from 'store/actions';
@@ -17,7 +18,7 @@ export class UIEffects {
 	setBigScreen$ = createEffect(
 
 		() => this.breakpointObserver
-			.observe('(min-width: 767px)')
+			.observe(`(min-width: ${ Breakpoint.lg })`)
 			.pipe(
 				map((result) => fromActions.setBigScreen({ isBigScreen: result.matches }))
 			)
