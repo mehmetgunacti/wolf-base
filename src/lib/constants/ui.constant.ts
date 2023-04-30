@@ -1,13 +1,13 @@
 export type LANG = 'en' | 'tr';
-export const DEFAULT_LANG: LANG = 'en';
+export type THEME = 'dark' | 'light';
 
 const PRIMENG_THEME_DARK = 'mdc-dark-indigo'; // dark
 const PRIMENG_THEME_LIGHT = 'mdc-light-indigo'; // light
-export const DARK_THEME = 'theme-dark'; // see '_extensions.scss' -> class '.logo'
+export const DARK_THEME = 'dark'; // see '_extensions.scss' -> class '.logo'
 
 export interface ThemeInfo {
 
-	name: 'theme-light' | 'theme-dark';
+	name: 'light' | 'dark';
 	primeNg: string;
 	isDark: boolean;
 
@@ -15,7 +15,7 @@ export interface ThemeInfo {
 
 export const THEME_DARK: ThemeInfo = {
 
-	name: 'theme-dark',
+	name: 'dark',
 	primeNg: PRIMENG_THEME_DARK,
 	isDark: true
 
@@ -23,7 +23,7 @@ export const THEME_DARK: ThemeInfo = {
 
 export const THEME_LIGHT: ThemeInfo = {
 
-	name: 'theme-light',
+	name: 'light',
 	primeNg: PRIMENG_THEME_LIGHT,
 	isDark: false
 
