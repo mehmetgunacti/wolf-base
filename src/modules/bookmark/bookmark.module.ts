@@ -6,9 +6,6 @@ import { StoreModule } from '@ngrx/store';
 import { SharedModule } from 'modules/shared/shared.module';
 import { BookmarkRoutingModule } from './bookmark-routing.module';
 import * as fromConfig from './bookmark.config';
-import { BookmarkFormComponent } from './components/bookmark-form/bookmark-form.component';
-import { BookmarkEditContainerComponent } from './containers/bookmark-edit-container/bookmark-edit-container.component';
-import * as fromStore from './store';
 
 @NgModule({
 	declarations: [...fromConfig.components],

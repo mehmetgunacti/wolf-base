@@ -3,15 +3,12 @@ import { APP_INITIALIZER, ErrorHandler, InjectionToken, Provider } from '@angula
 import { Routes } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LANG, LocalStorageService, RemoteStorageService, THEME_LIGHT, ThemeInfo } from 'lib';
+import { DEFAULT_THEME, LocalStorageService } from 'lib';
 import { MessageService } from 'primeng/api';
 import { CustomErrorHandler, localStorageServiceFactory, remoteStorageServiceFactory } from 'services';
 import * as actions from 'store/actions';
 import * as states from 'store/states';
-import { resolveLang, resolveTheme } from 'utils';
-
-const DEFAULT_THEME: ThemeInfo = THEME_LIGHT;
-const DEFAULT_LANG: LANG = 'en';
+import { resolveTheme } from 'utils';
 
 export const routes: Routes = [
 
@@ -34,9 +31,9 @@ const appInitializerFactory = (store: Store<states.AppState>) => {
 		store.dispatch(actions.themeSet({ newTheme }));
 
 		// set lang
-		const lsLang = localStorage.getItem('lang');
-		const newLang = !!lsLang ? resolveLang(lsLang) : DEFAULT_LANG;
-		store.dispatch(actions.i18nSetLanguage({ newLang }));
+		// const lsLang = localStorage.getItem('lang');
+		// const newLang = !!lsLang ? resolveLang(lsLang) : DEFAULT_LANG;
+		// store.dispatch(actions.i18nSetLanguage({ newLang }));
 
 	};
 

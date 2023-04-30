@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { BasicTable, LocalStorageService, WolfBaseTableName } from 'lib';
@@ -26,8 +26,8 @@ export class SettingsPageComponent {
 			switchMap(
 				async name => {
 
-					const table: BasicTable<IDBase | string> = this.localStorage.getTable(name);
-					const dump: Record<string, string | IDBase> = await table.dump();
+					const table: BasicTable = this.localStorage.getTable(name);
+					const dump: Record<string, IDBase | string> = await table.dump();
 					return dump;
 
 				}

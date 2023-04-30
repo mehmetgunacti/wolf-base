@@ -1,5 +1,4 @@
 import { WolfBaseTableName } from 'lib/constants';
-import { IDBase } from 'lib/models/id-base.model';
 import { LocalStorageService } from '../../lib/services/localstorage/local-storage-service.interface';
 import { BasicTable, BookmarksTable, ConfigurationTable } from '../../lib/services/localstorage/local-storage-table.interface';
 import { WolfBaseDB } from './wolfbase.database';
@@ -12,7 +11,7 @@ export class DexieLocalStorageService implements LocalStorageService {
 		public configuration: ConfigurationTable
 	) { }
 
-	getTable(tablename: WolfBaseTableName): BasicTable<IDBase | string> {
+	getTable(tablename: WolfBaseTableName): BasicTable {
 
 		switch (tablename) {
 			case WolfBaseTableName.bookmarks: return this.bookmarks;

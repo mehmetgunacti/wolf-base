@@ -16,6 +16,8 @@ export enum WolfBaseTableName {
 export enum CONF_KEYS {
 
 	syncWorkerActive = 'syncWorkerActive',
-	sidebarVisible = 'sidebarVisible'
+	sidebarVisible = 'sidebarVisible',
+	theme = 'theme',
+	lang = 'lang'
 
 }

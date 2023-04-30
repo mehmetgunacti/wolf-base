@@ -1,30 +1,76 @@
 import { WolfBaseTableName } from 'lib/constants';
-import { BasicTable } from '../../lib/services/localstorage/local-storage-table.interface';
+import { BasicTable, KeyValueTable } from '../../lib/services/localstorage/local-storage-table.interface';
 import { WolfBaseDB } from './wolfbase.database';
+import { Observable, fromEventPattern } from 'rxjs';
+import { liveQuery } from 'dexie';
 
-export class BasicTableImpl<T> implements BasicTable<T> {
+export class BasicTableImpl<T> implements BasicTable {
 
 	constructor(
 		protected db: WolfBaseDB,
-		protected tableName: WolfBaseTableName
-	) { }	
+		protected tablename: WolfBaseTableName
+	) { }
 
 	async clear(): Promise<void> {
 
-		await this.db.table(this.tableName).clear();
+		await this.db.table(this.tablename).clear();
 
 	}
 
-	async dump(): Promise<Record<string, T>> {
+	async dump<T>(): Promise<Record<string, T>> {
 
-		const table = this.db.table(this.tableName);
+		const table = this.db.table(this.tablename);
   		const data = table.toCollection();
 		const result: Record<string, T> = {};
-		await data.each((obj: T, cursor) => {
-			// console.log(cursor.key.toString(), obj);
-			result[cursor.key.toString()] = obj;
-		});
+		await data.each(
+			(obj: T, cursor) => result[cursor.key.toString()] = obj
+		);
   		return result;
+
+	}
+
+}
+
+export class KeyValueTableImpl extends BasicTableImpl<string | number | boolean> implements KeyValueTable {
+
+	constructor(
+		db: WolfBaseDB,
+		tablename: WolfBaseTableName
+	) {
+		super(db, tablename);
+	}
+
+	async set<T>(key: string, value: T): Promise<void> {
+
+		await this.db.table<T>(this.tablename).put(value, key);
+
+	}
+
+	async get<T>(key: string): Promise<T> {
+
+		return await this.db.table<T>(this.tablename).get(key) as T;
+
+	}
+
+	get$<T>(key: string): Observable<T> {
+
+		return fromEventPattern(
+
+			// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
+			// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
+			// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
+			(handler) => liveQuery(() => this.get(key)).subscribe(handler),
+
+			// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
+			(handler, unsubscribe) => unsubscribe()
+
+		);
+
+	}
+
+	async remove(key: string): Promise<void> {
+
+		return await this.db.table<string>(this.tablename).delete(key);
 
 	}
 

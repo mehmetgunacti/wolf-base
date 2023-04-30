@@ -36,6 +36,7 @@ export class CorePageComponent implements OnDestroy {
 		translate.addLangs(['en', 'tr']);
 		this.subscriptions.add(
 
+			// todo: move to ui.effects
 			breakpointObserver
 				.observe('(min-width: 767px)')
 				.subscribe(result => this.bigScreen = result.matches)
@@ -43,6 +44,7 @@ export class CorePageComponent implements OnDestroy {
 		);
 		this.subscriptions.add(
 
+			// todo: move to ui.effects
 			translate.onLangChange.subscribe(
 				(event: LangChangeEvent) => store.dispatch(
 					actions.i18nSaveTranslations({ translations: event.translations })

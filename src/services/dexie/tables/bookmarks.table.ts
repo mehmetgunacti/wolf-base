@@ -9,8 +9,6 @@ import { BasicTableImpl } from '../dexie.table';
 
 export class BookmarksTableImpl extends BasicTableImpl<Bookmark> implements BookmarksTable {
 
-	tablename = WolfBaseTableName.bookmarks;
-
 	constructor(db: WolfBaseDB) {
 		super(db, WolfBaseTableName.bookmarks);
 	}
