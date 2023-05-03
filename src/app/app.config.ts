@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DEFAULT_THEME, LocalStorageService } from 'lib';
 import { MessageService } from 'primeng/api';
 import { CustomErrorHandler, localStorageServiceFactory, remoteStorageServiceFactory } from 'services';
@@ -36,12 +34,6 @@ const appInitializerFactory = (store: Store<states.AppState>) => {
 		// store.dispatch(actions.i18nSetLanguage({ newLang }));
 
 	};
-
-}
-
-export function HttpLoaderFactory(http: HttpClient) {
-
-	return new TranslateHttpLoader(http);
 
 }
 

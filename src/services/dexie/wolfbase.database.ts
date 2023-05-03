@@ -1,12 +1,11 @@
 import Dexie from 'dexie';
 import { environment } from 'environments/environment';
-import { CONF_KEYS, LANG, THEME, UUID, WolfBaseTableName } from 'lib/constants';
+import { CONF_KEYS, THEME, UUID, WolfBaseTableName } from 'lib/constants';
 import { Bookmark, DexieConfiguration, EntityBase, IConflictData, ITrash } from 'lib/models';
 
 class DEFAULT_CONF_VALUES {
 
 	static theme: THEME = 'dark';
-	static lang: LANG = 'en';
 	static sidebarVisible = 'true';
 	static syncWorkerActive = 'true';
 
@@ -50,7 +49,6 @@ export class WolfBaseDB extends Dexie {
 
 		this.configuration.put(DEFAULT_CONF_VALUES.syncWorkerActive, CONF_KEYS.syncWorkerActive);
 		this.configuration.put(DEFAULT_CONF_VALUES.sidebarVisible, CONF_KEYS.sidebarVisible);
-		this.configuration.put(DEFAULT_CONF_VALUES.lang, CONF_KEYS.lang);
 		this.configuration.put(DEFAULT_CONF_VALUES.theme, CONF_KEYS.theme);
 
 	}

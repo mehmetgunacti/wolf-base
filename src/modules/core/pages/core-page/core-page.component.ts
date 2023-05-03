@@ -1,8 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { LANG, ThemeInfo } from 'lib';
+import { ThemeInfo } from 'lib';
 import { MenuItem } from 'primeng/api';
 import { Observable, of, Subscription } from 'rxjs';
 import * as actions from 'store/actions';
@@ -17,7 +16,6 @@ export class CorePageComponent implements OnDestroy {
 
 	navMenuItems$: Observable<MenuItem[]>;
 	theme$: Observable<ThemeInfo>;
-	lang$: Observable<LANG>
 
 	subscriptions = new Subscription();
 
@@ -29,27 +27,15 @@ export class CorePageComponent implements OnDestroy {
 
 	constructor(
 		breakpointObserver: BreakpointObserver,
-		translate: TranslateService,
 		private store: Store
 	) {
 
-		translate.addLangs(['en', 'tr']);
 		this.subscriptions.add(
 
 			// todo: move to ui.effects
 			breakpointObserver
 				.observe('(min-width: 767px)')
 				.subscribe(result => this.bigScreen = result.matches)
-
-		);
-		this.subscriptions.add(
-
-			// todo: move to ui.effects
-			translate.onLangChange.subscribe(
-				(event: LangChangeEvent) => store.dispatch(
-					actions.i18nSaveTranslations({ translations: event.translations })
-				)
-			)
 
 		);
 
@@ -64,7 +50,6 @@ export class CorePageComponent implements OnDestroy {
 		this.navMenuItems$ = of(items);
 
 		this.theme$ = store.select(selectors.themeInfo);
-		this.lang$ = store.select(selectors.lang);
 
 	}
 
@@ -83,12 +68,6 @@ export class CorePageComponent implements OnDestroy {
 	onThemeChange(newTheme: ThemeInfo): void {
 
 		this.store.dispatch(actions.themeSet({ newTheme }));
-
-	}
-
-	onLangChange(newLang: LANG): void {
-
-		this.store.dispatch(actions.i18nSetLanguage({ newLang }));
 
 	}
 

@@ -10,13 +10,6 @@ export const themeInfo = createSelector(
 
 );
 
-export const lang = createSelector(
-
-	uiState,
-	(state: UIState) => state.lang
-
-);
-
 export const translations = createSelector(
 
 	uiState,

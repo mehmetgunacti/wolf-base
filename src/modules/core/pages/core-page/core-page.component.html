@@ -24,9 +24,6 @@
 		<div bottom-buttons>
 			<app-theme-switcher [theme]="theme$ | async"
 								(newTheme)="onThemeChange($event)"></app-theme-switcher>
-
-			<app-lang-switcher [lang]="lang$ | async"
-							   (newLang)="onLangChange($event)"></app-lang-switcher>
 		</div>
 
 	</nav>

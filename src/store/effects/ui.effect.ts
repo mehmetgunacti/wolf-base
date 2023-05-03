@@ -1,31 +1,27 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Injectable, inject } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { TranslateService } from '@ngx-translate/core';
+import { Actions, createEffect } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { Breakpoint, CONF_KEYS, LocalStorageService } from 'lib';
-import { map, switchMap } from 'rxjs/operators';
-import { i18nSaveTranslations, i18nSetLanguage } from 'store';
+import { Breakpoint, LocalStorageService } from 'lib';
+import { map } from 'rxjs/operators';
 import * as fromActions from 'store/actions';
-import { resolveLang } from 'utils';
 
 @Injectable()
 export class UIEffects {
 
 	private actions$: Actions = inject(Actions);
-	private translate: TranslateService = inject(TranslateService);
 	private breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 
-	langConfValueFromIndexedDb$ = createEffect(
+	// langConfValueFromIndexedDb$ = createEffect(
 
-		() => this.localStorage.configuration.get$(CONF_KEYS.lang).pipe(
+	// 	() => this.localStorage.configuration.get$(CONF_KEYS.lang).pipe(
 
-			map((lang: string) => fromActions.i18nSetLanguage({ newLang: resolveLang(lang) }))
+	// 		map((lang: string) => fromActions.i18nSetLanguage({ newLang: resolveLang(lang) }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 	// const lsTheme = localStorage.getItem('theme');
 	// const newTheme = !!lsTheme ? resolveTheme(lsTheme) : DEFAULT_THEME;
@@ -59,22 +55,5 @@ export class UIEffects {
 	// 	)
 
 	// );
-
-	setLang$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(i18nSetLanguage),
-			switchMap(({ newLang }) =>
-
-				this.translate.use(newLang).pipe(
-					map(translations => i18nSaveTranslations({ translations }))
-				)
-
-			)
-
-		)
-
-	);
 
 }

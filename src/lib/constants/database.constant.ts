@@ -17,7 +17,6 @@ export enum CONF_KEYS {
 
 	syncWorkerActive = 'syncWorkerActive',
 	sidebarVisible = 'sidebarVisible',
-	theme = 'theme',
-	lang = 'lang'
+	theme = 'theme'
 
 }

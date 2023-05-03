@@ -1,4 +1,3 @@
-export type LANG = 'en' | 'tr';
 export type THEME = 'dark' | 'light';
 
 const PRIMENG_THEME_DARK = 'mdc-dark-indigo'; // dark
