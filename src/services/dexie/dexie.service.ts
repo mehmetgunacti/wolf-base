@@ -20,7 +20,7 @@ export class DexieLocalStorageService implements LocalStorageService {
 			// case KnobaTable.tasks: return this.tasks;
 			// case KnobaTable.words: return this.words;
 		}
-		throw new Error('name is not of type KnobaTable : [' + name + ']');
+		throw new Error(`name is not of type 'WolfBaseTableName' : [${tablename}]`);
 
 	}
 
