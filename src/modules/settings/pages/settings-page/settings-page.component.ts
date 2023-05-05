@@ -23,7 +23,7 @@ export class SettingsPageComponent {
 		this.tableNames = Object.entries(WolfBaseTableName).map(([value, label]) => ({ label, value }));
 		const dump$ = this.fcTableName.valueChanges.pipe(
 
-			switchMap(tablename => this.localStorage.getTable(tablename).dump())
+			switchMap(tablename => this.localStorage.getTable(tablename).dump<IDBase | string>())
 
 		);
 		this.content$ = dump$.pipe(
