@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { BasicTable, LocalStorageService, WolfBaseTableName } from 'lib';
+import { LocalStorageService, WolfBaseTableName } from 'lib';
 import { IDBase } from 'lib/models/id-base.model';
 import { Observable, map, switchMap } from 'rxjs';
 
@@ -23,7 +23,7 @@ export class SettingsPageComponent {
 		this.tableNames = Object.entries(WolfBaseTableName).map(([value, label]) => ({ label, value }));
 		const dump$ = this.fcTableName.valueChanges.pipe(
 
-			switchMap(tablename => this.localStorage.getTable(tablename).dump<IDBase | string>())
+			switchMap(tablename => this.localStorage.dump<IDBase | string>(tablename))
 
 		);
 		this.content$ = dump$.pipe(

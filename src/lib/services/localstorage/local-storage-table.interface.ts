@@ -2,14 +2,7 @@ import { UUID } from 'lib/constants';
 import { Bookmark, EntityBase } from 'lib/models';
 import { Observable } from 'rxjs';
 
-export interface BasicTable {
-
-	clear(): Promise<void>;
-	dump<T>(): Promise<Record<string, T>>;
-
-}
-
-export interface EntityTable<T extends EntityBase> extends BasicTable {
+export interface EntityTable<T extends EntityBase> {
 
 	get(id: UUID): Promise<T | undefined>;
 
@@ -28,7 +21,7 @@ export interface EntityTable<T extends EntityBase> extends BasicTable {
 
 }
 
-export interface KeyValueTable extends BasicTable {
+export interface KeyValueTable {
 
 	set(key: string, value: string): Promise<void>;
 	get(key: string): Promise<string>;

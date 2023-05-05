@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { Bookmark, LocalStorageService } from 'lib';
+import { Bookmark, LocalStorageService, WolfBaseTableName } from 'lib';
 import * as fromStore from 'modules/bookmark/store';
 import { slideUpDownTrigger } from 'modules/shared';
 import { Observable, tap } from 'rxjs';
@@ -30,7 +30,7 @@ export class BookmarksPageComponent {
 		this.isBigScreen$ = this.store.select(isBigScreen).pipe(tap(a => console.log(a)));
 
 		// todo : delete later
-		this.localStorage.bookmarks.clear();
+		this.localStorage.clear(WolfBaseTableName.bookmarks);
 		this.localStorage.bookmarks.create(this.bookmarks);
 
 	}

@@ -1,6 +1,6 @@
 import { WolfBaseTableName } from 'lib/constants';
 import { LocalStorageService } from '../../lib/services/localstorage/local-storage-service.interface';
-import { BasicTable, BookmarksTable, ConfigurationTable } from '../../lib/services/localstorage/local-storage-table.interface';
+import { BookmarksTable, ConfigurationTable } from '../../lib/services/localstorage/local-storage-table.interface';
 import { WolfBaseDB } from './wolfbase.database';
 
 export class DexieLocalStorageService implements LocalStorageService {
@@ -11,35 +11,28 @@ export class DexieLocalStorageService implements LocalStorageService {
 		public configuration: ConfigurationTable
 	) { }
 
-	getTable(tablename: WolfBaseTableName): BasicTable {
-
-		switch (tablename) {
-			case WolfBaseTableName.bookmarks: return this.bookmarks;
-			case WolfBaseTableName.configuration: return this.configuration;
-			// case KnobaTable.notes: return this.notes;
-			// case KnobaTable.tasks: return this.tasks;
-			// case KnobaTable.words: return this.words;
-		}
-		throw new Error(`name is not of type 'WolfBaseTableName' : [${tablename}]`);
-
-	}
-
 	async drop(): Promise<void> {
 
 		await this.db.delete();
 
 	}
 
-	// getTable(tablename: string): LocalStorageTable<IKnobaEntity> {
+	async clear(tablename: WolfBaseTableName): Promise<void> {
 
-	// 	switch (tablename) {
-	// 		case WolfBaseTableName.bookmarks: return this.bookmarks;
-	// 		// case KnobaTable.notes: return this.notes;
-	// 		// case KnobaTable.tasks: return this.tasks;
-	// 		// case KnobaTable.words: return this.words;
-	// 	}
-	// 	throw new Error('name is not of type KnobaTable : [' + name + ']');
+		await this.db.table(tablename).clear();
 
-	// }
+	}
+
+	async dump<T>(tablename: WolfBaseTableName): Promise<Record<string, T>> {
+
+		const table = this.db.table(tablename);
+		const data = table.toCollection();
+		const result: Record<string, T> = {};
+		await data.each(
+			(obj: T, cursor) => result[cursor.key.toString()] = obj
+		);
+		return result;
+
+	}
 
 }
