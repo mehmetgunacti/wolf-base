@@ -10,13 +10,6 @@ export const themeInfo = createSelector(
 
 );
 
-export const translations = createSelector(
-
-	uiState,
-	(state: UIState) => state.translations
-
-);
-
 export const isBigScreen = createSelector(
 
 	uiState,

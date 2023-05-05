@@ -10,7 +10,6 @@ interface ThemeUI {
 export interface UIState {
 
 	theme: ThemeUI,
-	translations: any,
 	sidebarVisible: boolean,
 	bigScreen: boolean
 
@@ -21,7 +20,6 @@ export const initialUIState: UIState = {
 	theme: {
 		info: THEME_LIGHT // localStorage.getItem('theme') === THEME_LIGHT.name ? THEME_LIGHT : THEME_DARK
 	},
-	translations: {},
 	sidebarVisible: true,
 	bigScreen: true
 
