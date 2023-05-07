@@ -2,8 +2,8 @@ import { Collection, IndexableType, Table, liveQuery } from 'dexie';
 import { EntityBase } from 'lib';
 import { UUID, WolfBaseTableName } from 'lib/constants';
 import { Observable, fromEventPattern } from 'rxjs';
-import { EntityTable } from '../../lib/services/localstorage/local-storage-table.interface';
-import { WolfBaseDB } from './wolfbase.database';
+import { EntityTable } from '../../../lib/services/localstorage/local-storage-table.interface';
+import { WolfBaseDB } from '../wolfbase.database';
 
 export abstract class EntityTableImpl<T extends EntityBase> implements EntityTable<T> {
 

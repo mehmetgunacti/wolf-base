@@ -2,7 +2,7 @@ import { UUID, WolfBaseTableName } from 'lib/constants';
 import { Bookmark } from 'lib/models';
 import { BookmarksTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { v4 as uuidv4 } from 'uuid';
-import { EntityTableImpl } from '../entity.table';
+import { EntityTableImpl } from './entity.table';
 import { WolfBaseDB } from '../wolfbase.database';
 
 export class BookmarksTableImpl extends EntityTableImpl<Bookmark> implements BookmarksTable {

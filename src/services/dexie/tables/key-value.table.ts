@@ -1,8 +1,8 @@
 import { liveQuery } from 'dexie';
+import { KeyValueTable } from 'lib';
 import { WolfBaseTableName } from 'lib/constants';
 import { Observable, fromEventPattern } from 'rxjs';
-import { KeyValueTable } from '../../lib/services/localstorage/local-storage-table.interface';
-import { WolfBaseDB } from './wolfbase.database';
+import { WolfBaseDB } from '../wolfbase.database';
 
 export class KeyValueTableImpl implements KeyValueTable {
 
