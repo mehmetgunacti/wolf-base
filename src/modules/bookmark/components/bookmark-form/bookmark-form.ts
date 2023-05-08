@@ -15,7 +15,12 @@ interface EditForm {
 
 }
 
-export type BookmarkForm = EditForm & FormClass<Bookmark>;
+export interface BookmarkForm extends EditForm, FormClass<Bookmark> {
+
+	addURL(): void;
+	removeURL(idx: number): void;
+
+}
 
 export const BOOKMARK_FORM = new InjectionToken<BookmarkForm>('BookmarkForm');
 
@@ -72,6 +77,18 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 			...bookmark
 
 		} as Bookmark;
+
+	}
+
+	addURL(): void {
+
+		this.urls.push(new FormControl(null, { validators: [Validators.required], nonNullable: true }));
+
+	}
+
+	removeURL(idx: number): void {
+		
+		this.urls.removeAt(idx);
 
 	}
 

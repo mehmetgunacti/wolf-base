@@ -24,7 +24,10 @@
 		</div>
 		<div bookmark-bottom *ngIf="showDetails">
 
-			<div bookmark-url *ngFor="let url of item.urls">{{ url }}</div>
+			<ng-container *ngFor="let url of item.urls">
+				<div bookmark-url *ngIf="!!url">{{ url }}</div>
+			</ng-container>
+
 			<div bookmark-tags *ngIf="item.tags">
 				<p-tag [value]="tag" *ngFor="let tag of item.tags" [rounded]="true"></p-tag>
 			</div>

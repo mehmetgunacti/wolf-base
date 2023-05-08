@@ -77,7 +77,7 @@ export class BookmarksPageComponent {
 				"cnews"
 			],
 			"title": "Mobile Phones News, Specifications, Reviews",
-			"urls": ["https://www.dealntech.com"]
+			"urls": ["https://www.dealntech.com", "https://www.google.com"]
 		},
 		{
 			"clicks": 0,

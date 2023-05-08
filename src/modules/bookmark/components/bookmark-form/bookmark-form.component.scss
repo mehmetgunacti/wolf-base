@@ -2,96 +2,11 @@ app-bookmark-form {
 
 	@extend %flex-column;
 
-	// & > app-bookmark {
-	// 	grid-area 				: b;
-	// }
-
-	& > div[bookmark-form] {
-
-		flex	: 1;
-
-		& > form {
-
-			display                 : grid;
-			grid-gap				: 1rem;
-			grid-template-areas		: "fe1"
-									"fe2"
-									"fe3"
-									"fe4"
-									"fe5"
-									"fe6";
-			margin-bottom			: 1rem;
-			
-			@include md() {
-
-				grid-template-columns	: 150px 1fr;
-				grid-template-areas		: "fe1 fe2"
-										"fe1 fe3"
-										"fe1 fe4"
-										"fe1 fe5"
-										"fe1 fe6";
-
-			}
-
-			& > div[form-element-image] {
-				grid-area: fe1;
-				@extend %flex-center-start;
-			}
-
-			& > div[form-element-url] {
-				grid-area: fe2;
-			}
-
-			& > div[form-element-name] {
-
-				grid-area: fe3;
-				@extend %flex-row;
-
-				&>span {
-					flex: 1;
-				}
-				&>button {
-					transform: rotate(180deg);
-				}
-
-			}
-
-			& > div[form-element-title] {
-
-				grid-area: fe4;
-				@extend %flex-row;
-
-				&>span {
-					flex: 1;
-				}
-
-			}
-
-			& > div[form-element-tags] {
-
-				grid-area: fe5;
-				@extend %flex-row;
-
-				&>span {
-					flex: 1;
-				}
-
-			}
-
-		}
-
-	}
-
-	& > div[form-element-buttons] {
-
-		@extend %flex-space-between-center;
-
-	}
-
 	& > div[bookmark-wrapper] {
 
 		position						: relative;
 		min-height						: 10rem;
+		margin-bottom					: 1rem;
 		
 		& > div[bookmark-overlay] {
 
@@ -104,6 +19,60 @@ app-bookmark-form {
 			pointer-events				: auto;
 
 		}
+
+	}
+
+	& > form {
+
+		@extend %flex-column;
+		flex			: 1;
+		margin-bottom	: 1rem;
+
+		& > div > div {
+			
+			@extend %flex-row;
+			padding: 0.5rem;
+			&>span {
+				flex: 1;
+			}
+
+		}
+
+		& > div[bookmark-form-left] {
+
+			@extend %flex-column;
+			& > app-croppie {
+
+				justify-content: center;
+				padding: 0.5rem;
+
+			}
+
+		}
+
+		@include md() {
+
+			flex-direction: row;
+
+			& > div[bookmark-form-left] {
+
+				flex: 1;
+
+			}
+
+			div[bookmark-form-right] {
+
+				flex: 4;
+
+			}
+
+		}
+
+	}
+
+	& > div[form-element-buttons] {
+
+		@extend %flex-space-between-center;
 
 	}
 

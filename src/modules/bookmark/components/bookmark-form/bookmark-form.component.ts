@@ -6,6 +6,7 @@ import { AutoComplete } from 'primeng/autocomplete';
 import { BehaviorSubject, Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
 import { formatCurrency } from '@angular/common';
+import { themeSet } from 'store';
 
 @Component({
 	selector: 'app-bookmark-form',
@@ -39,8 +40,11 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	ngOnInit(): void {
 
-		if (this.bookmark)
-			this.form.patchValue(this.bookmark);
+		if (this.bookmark) {
+			console.log(this.bookmark);
+			this.form.setValues(this.bookmark);
+			console.log(this.form);
+		}
 
 		this.subscriptions.add(
 
@@ -177,6 +181,18 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 			console.error('err', err, url);
 			return null;
 		}
+
+	}
+
+	addURL(): void {
+
+		this.form.addURL();
+
+	}
+
+	removeURL(idx: number): void {
+
+		this.form.removeURL(idx);
 
 	}
 
