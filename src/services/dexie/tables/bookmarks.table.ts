@@ -27,7 +27,7 @@ export class BookmarksTableImpl extends EntityTableImpl<Bookmark> implements Boo
 			title: '',
 			tags: [],
 			image: '',
-			url: [''],
+			urls: [''],
 			clicks: 0
 
 		};

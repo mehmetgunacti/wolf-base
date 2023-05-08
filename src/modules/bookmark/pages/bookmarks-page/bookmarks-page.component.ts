@@ -65,7 +65,7 @@ export class BookmarksPageComponent {
 				"falcon"
 			],
 			"title": "It's been a long road",
-			"url": ["https://www.spacex.com/"]
+			"urls": ["https://www.spacex.com/"]
 		},
 		{
 			"clicks": 6,
@@ -77,7 +77,7 @@ export class BookmarksPageComponent {
 				"cnews"
 			],
 			"title": "Mobile Phones News, Specifications, Reviews",
-			"url": ["https://www.dealntech.com"]
+			"urls": ["https://www.dealntech.com"]
 		},
 		{
 			"clicks": 0,
@@ -90,7 +90,7 @@ export class BookmarksPageComponent {
 				"cresource"
 			],
 			"title": "Beautiful free vector illustrations",
-			"url": ["https://www.drawkit.io/"]
+			"urls": ["https://www.drawkit.io/"]
 		},
 		{
 			"clicks": 1,
@@ -102,7 +102,7 @@ export class BookmarksPageComponent {
 				"cgit"
 			],
 			"title": "1011 Common Git Problems and How to Fix Them",
-			"url": ["https://www.codementor.io/@citizen428/git-tutorial-10-common-git-problems-and-how-to-fix-them-aajv0katd"]
+			"urls": ["https://www.codementor.io/@citizen428/git-tutorial-10-common-git-problems-and-how-to-fix-them-aajv0katd"]
 		},
 		{
 			"clicks": 0,
@@ -117,7 +117,7 @@ export class BookmarksPageComponent {
 				"security"
 			],
 			"title": "Nginx configuration for Angular",
-			"url": ["https://medium.com/faun/my-nginx-configuration-for-angular-6f748a4ff683"]
+			"urls": ["https://medium.com/faun/my-nginx-configuration-for-angular-6f748a4ff683"]
 		},
 		{
 			"clicks": 0,
@@ -129,7 +129,7 @@ export class BookmarksPageComponent {
 				"2-be-read"
 			],
 			"title": "ngModel and formControl Implementation ControlValueAccessor",
-			"url": ["https://unicorn-utterances.com/posts/angular-components-control-value-accessor/"]
+			"urls": ["https://unicorn-utterances.com/posts/angular-components-control-value-accessor/"]
 		},
 		{
 			"clicks": 0,
@@ -144,7 +144,7 @@ export class BookmarksPageComponent {
 				"colors"
 			],
 			"title": "TEXTColor : Reverse Text Color Based On Bg Color",
-			"url": ["https://www.cssscript.com/reverse-text-color-background/"]
+			"urls": ["https://www.cssscript.com/reverse-text-color-background/"]
 		},
 		{
 			"clicks": 1,
@@ -158,7 +158,7 @@ export class BookmarksPageComponent {
 				"starter"
 			],
 			"title": "event emitters",
-			"url": ["https://netbasal.com/event-emitters-in-angular-13e84ee8d28c"]
+			"urls": ["https://netbasal.com/event-emitters-in-angular-13e84ee8d28c"]
 		},
 		{
 			"clicks": 0,
@@ -169,7 +169,7 @@ export class BookmarksPageComponent {
 				"2-be-read"
 			],
 			"title": "structural directives",
-			"url": ["https://netbasal.com/leverage-structural-directives-to-create-powerful-components-in-angular-c95e3cfde789"]
+			"urls": ["https://netbasal.com/leverage-structural-directives-to-create-powerful-components-in-angular-c95e3cfde789"]
 		},
 		{
 			"clicks": 0,
@@ -181,7 +181,7 @@ export class BookmarksPageComponent {
 				"resource"
 			],
 			"title": "50+ free tools and resources to create awesome user interfaces",
-			"url": ["https://dev.to/davidepacilio/50-free-tools-and-resources-to-create-awesome-user-interfaces-1c1b"]
+			"urls": ["https://dev.to/davidepacilio/50-free-tools-and-resources-to-create-awesome-user-interfaces-1c1b"]
 		},
 		{
 			"clicks": 0,
@@ -195,7 +195,7 @@ export class BookmarksPageComponent {
 				"tricks"
 			],
 			"title": "5 JavaScript Tricks That Are Good To Know",
-			"url": ["https://levelup.gitconnected.com/5-javascript-tricks-that-are-good-to-know-78045dea6678"]
+			"urls": ["https://levelup.gitconnected.com/5-javascript-tricks-that-are-good-to-know-78045dea6678"]
 		},
 		{
 			"clicks": 0,
@@ -207,7 +207,7 @@ export class BookmarksPageComponent {
 				"starter"
 			],
 			"title": "Angular, NgRx, Angular CLI & Angular Material Starter Project",
-			"url": ["https://github.com/tomastrajan/angular-ngrx-material-starter"]
+			"urls": ["https://github.com/tomastrajan/angular-ngrx-material-starter"]
 		},
 		{
 			"clicks": 0,
@@ -218,7 +218,7 @@ export class BookmarksPageComponent {
 				"2-be-read"
 			],
 			"title": "when to unsubscribe",
-			"url": ["https://netbasal.com/when-to-unsubscribe-in-angular-d61c6b21bad3"]
+			"urls": ["https://netbasal.com/when-to-unsubscribe-in-angular-d61c6b21bad3"]
 		}
 	];
 

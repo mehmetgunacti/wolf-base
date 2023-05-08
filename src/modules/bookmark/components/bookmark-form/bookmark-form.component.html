@@ -15,12 +15,14 @@
 	</div>
 
 	<div form-element-url>
-		<span class="p-float-label p-fluid">
+		<span
+			class="p-float-label p-fluid"
+			*ngFor="let fcUrl of form.urls.controls">
 			<input
 				type="text"
 				pInputText
-				[ngClass]="{ 'ng-invalid ng-dirty': form.url.invalid && form.url.dirty }"
-				[formControl]="form.url">
+				[ngClass]="{ 'ng-invalid ng-dirty': fcUrl.invalid && fcUrl.dirty }"
+				[formControl]="fcUrl">
 			<label>URL</label>
 		</span>
 	</div>

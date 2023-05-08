@@ -1,15 +1,16 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { environment } from 'environments/environment';
 import { Bookmark, UUID } from 'lib';
-import { isInvalid } from 'modules/shared';
 import { AutoComplete } from 'primeng/autocomplete';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
-import { EditForm } from './bookmark-form';
+import { BehaviorSubject, Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
+import { formatCurrency } from '@angular/common';
 
 @Component({
 	selector: 'app-bookmark-form',
 	templateUrl: './bookmark-form.component.html',
+	providers: [{ provide: BOOKMARK_FORM, useClass: EditFormImpl }],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
@@ -23,28 +24,27 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	@ViewChild('autocomplete') autocompleteCharge!: AutoComplete;
 
+	form: BookmarkForm = inject(BOOKMARK_FORM);
 	bookmark$: Subject<Bookmark>;
 	tagSuggestions$: Subject<string[]>;
-	form: EditForm;
 	subscriptions: Subscription = new Subscription();
-	formGroup: FormGroup;
-	formName: FormControl;
 	isPopular: boolean = false;
 
 	constructor() {
 
 		this.tagSuggestions$ = new Subject<string[]>();
-		this.formName = new FormControl('');
-		this.form = new EditForm(this.bookmark);
-		this.formGroup = this.form.formGroup;
-		this.bookmark$ = new BehaviorSubject<Bookmark>(this.formGroup.value);
+		this.bookmark$ = new BehaviorSubject<Bookmark>(this.form.value);
 
 	}
 
 	ngOnInit(): void {
 
+		if (this.bookmark)
+			this.form.patchValue(this.bookmark);
+
 		this.subscriptions.add(
-			this.form.formGroup.valueChanges.pipe(
+
+			this.form.valueChanges.pipe(
 
 				debounceTime(200),
 				distinctUntilChanged()
@@ -52,12 +52,15 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 			).subscribe(
 				bookmark => this.bookmark$.next(bookmark)
 			)
+
 		);
 
 		this.subscriptions.add(
+
 			this.form.tags.valueChanges.subscribe(
 				tags => this.isPopular = tags.includes('popular')
 			)
+
 		);
 
 	}
@@ -66,7 +69,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 		const bookmark: Bookmark = changes['bookmark']?.currentValue;
 		if (bookmark)
-			this.form.formGroup.patchValue({
+			this.form.patchValue({
 				...bookmark,
 			});
 
@@ -84,10 +87,10 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	onSave(): void {
 
-		if (isInvalid(this.form.formGroup))
+		if (this.form.isInvalid())
 			return;
 
-		const bookmark: Partial<Bookmark> = this.form.formGroup.value;
+		const bookmark: Bookmark = this.form.value;
 		if (bookmark.id)
 			this.update.emit({ id: bookmark.id, bookmark });
 		else
@@ -98,9 +101,14 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	onTagInput(event: { e: InputEvent, query: string }): void {
 
 		if (event.query.endsWith(' ')) {
-			this.form.tags.patchValue([...this.form.tags.getRawValue(), event.query.substring(0, event.query.length - 1)]);
+
+			this.form.tags.patchValue([
+				...this.form.tags.getRawValue(),
+				event.query.substring(0, event.query.length - 1)
+			]);
 			this.tagSuggestions$.next([]);
 			this.autocompleteCharge.multiInputEL.nativeElement.value = '';
+
 		} else
 			this.tagInput.emit(event.query);
 
@@ -108,10 +116,11 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	lookupTitle(): void {
 
-		const url: string[] = this.form.url.getRawValue();
+		// there's always a FormControl at index 0
+		const url: string = this.form.urls.at(0).getRawValue();
 
 		// get the title of the web page
-		const parsed: URL | null = this.parseURL(url[0]);
+		const parsed: URL | null = this.parseURL(url);
 		if (parsed) {
 
 			const { origin, pathname } = parsed;
@@ -134,10 +143,11 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	nameFromURL(): void {
 
-		const url: string[] = this.form.url.getRawValue();
+		// there's always a FormControl at index 0
+		const url: string = this.form.urls.at(0).getRawValue();
 
 		// set hostname as bookmark name
-		const parsed: URL | null = this.parseURL(url[0]);
+		const parsed: URL | null = this.parseURL(url);
 		if (parsed) {
 
 			const hostname = parsed.hostname;
@@ -163,7 +173,8 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 		try {
 			return new URL(url.toLowerCase());
 		} catch (err) {
-			console.error('err', err);
+			console.error('url:', url);
+			console.error('err', err, url);
 			return null;
 		}
 

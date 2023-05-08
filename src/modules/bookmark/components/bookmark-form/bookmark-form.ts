@@ -1,70 +1,106 @@
-import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Injectable, InjectionToken } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Bookmark, UUID } from 'lib';
-import { IFormClass } from 'modules/shared';
+import { FormClass, FormClassImpl } from 'modules/shared';
 
-export class EditForm implements IFormClass<Bookmark> {
+interface EditForm {
 
-	private _formGroup: FormGroup;
+	id: FormControl<string | null>;
+	name: FormControl<string>;
+	title: FormControl<string>;
+	tags: FormControl<string[]>;
+	image: FormControl<string | null>;
+	urls: FormArray<FormControl<string>>;
+	clicks: FormControl<number>;
 
-	constructor(bookmark: Bookmark | null | undefined) {
+}
 
-		this._formGroup = new FormGroup({
+export type BookmarkForm = EditForm & FormClass<Bookmark>;
+
+export const BOOKMARK_FORM = new InjectionToken<BookmarkForm>('BookmarkForm');
+
+export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkForm {
+
+	protected override createFormGroup(): FormGroup<EditForm> {
+
+		return new FormGroup<EditForm>({
 			id: new FormControl(),
 			name: new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
 			title: new FormControl('', { validators: [Validators.required], nonNullable: true }),
 			tags: new FormControl([], { validators: [Validators.required], nonNullable: true }),
 			image: new FormControl(''),
-			url: new FormControl([''], { validators: [Validators.required], nonNullable: true }),
-			clicks: new FormControl(0)
+			urls: new FormArray([
+				new FormControl('', { validators: [Validators.required], nonNullable: true })
+			]),
+			clicks: new FormControl(0, { nonNullable: true })
 		});
-
-		if (bookmark)
-			this.setProperties(bookmark);
 
 	}
 
-	setProperties(bookmark: Bookmark): void {
+	setValues(bookmark: Bookmark): void {
 
-		this.id.setValue(bookmark.id);
-		this.name.setValue(bookmark.name);
-		this.title.setValue(bookmark.title);
-		this.tags.setValue(bookmark.tags);
-		this.image.setValue(bookmark.image);
-		this.url.setValue(bookmark.url);
-		this.clicks.setValue(bookmark.clicks);
+		this.id.setValue(bookmark.id, { emitEvent: false });
+		this.name.setValue(bookmark.name, { emitEvent: false });
+		this.title.setValue(bookmark.title, { emitEvent: false });
+		this.tags.setValue(bookmark.tags, { emitEvent: false });
+		this.image.setValue(bookmark.image, { emitEvent: false });
+		this.clicks.setValue(bookmark.clicks, { emitEvent: false });
+
+		// set urls
+		bookmark.urls.forEach((url, idx) => this.handleUrl(this.urls, idx, url))
+
+	}
+
+	private handleUrl(arr: FormArray, idx: number, value: string = ''): void {
+
+		let fc = arr.at(idx) as FormControl;
+		if (!fc) {
+
+			fc = new FormControl(value, { validators: [Validators.required], nonNullable: true });
+			arr.setControl(idx, fc);
+
+		} else if (fc.value !== value)
+			fc.setValue(value, { emitEvent: false });
+
+	}
+
+	override get value(): Bookmark {
+
+		const bookmark: Partial<Bookmark> = this._formGroup.value;
+		return {
+
+			...bookmark
+
+		} as Bookmark;
 
 	}
 
 	get id(): FormControl<UUID | null> {
-		return <FormControl<UUID>> this._formGroup.controls['id'];
+		return <FormControl<UUID>>this._formGroup.controls['id'];
 	}
 
 	get name(): FormControl<string> {
-		return <FormControl<string>> this._formGroup.controls['name'];
+		return <FormControl<string>>this._formGroup.controls['name'];
 	}
 
 	get title(): FormControl<string> {
-		return <FormControl<string>> this._formGroup.controls['title'];
+		return <FormControl<string>>this._formGroup.controls['title'];
 	}
-	
+
 	get tags(): FormControl<string[]> {
-		return <FormControl<string[]>> this._formGroup.controls['tags'];
+		return <FormControl<string[]>>this._formGroup.controls['tags'];
 	}
-	
+
 	get image(): FormControl<string | null> {
-		return <FormControl<string | null>> this._formGroup.controls['image'];
+		return <FormControl<string | null>>this._formGroup.controls['image'];
 	}
-	
-	get url(): FormControl<string[]> {
-		return <FormControl<string[]>> this._formGroup.controls['url'];
+
+	get urls(): FormArray {
+		return <FormArray>this._formGroup.controls['urls'];
 	}
 
 	get clicks(): FormControl<number> {
-		return <FormControl<number>> this._formGroup.controls['clicks'];
-	}
-
-	get formGroup(): FormGroup {
-		return this._formGroup;
+		return <FormControl<number>>this._formGroup.controls['clicks'];
 	}
 
 }

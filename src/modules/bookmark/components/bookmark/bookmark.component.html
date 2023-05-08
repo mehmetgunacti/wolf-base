@@ -3,14 +3,14 @@
 	<div bookmark-image>
 
 		<img src="{{ item.image || PLACEHOLDER_QUESTIONMARK }}"
-			title="{{ item.id }} : {{ item.title + '\r\n' + item.url + '\r\n' }} #{{ item.clicks }}">
+			title="{{ item.id }} : {{ item.title + '\r\n' + item.urls + '\r\n' }} #{{ item.clicks }}">
 
 	</div>
 	<div bookmark-right>
 
 		<div bookmark-top>
 
-			<a href="{{ item.url }}" target="_blank" (click)="onLinkClick()">
+			<a href="{{ item.urls }}" target="_blank" (click)="onLinkClick()">
 
 				<span bookmark-name>{{ item.name }}
 					<sup>
@@ -24,7 +24,7 @@
 		</div>
 		<div bookmark-bottom *ngIf="showDetails">
 
-			<div bookmark-url *ngFor="let url of item.url">{{ url }}</div>
+			<div bookmark-url *ngFor="let url of item.urls">{{ url }}</div>
 			<div bookmark-tags *ngIf="item.tags">
 				<p-tag [value]="tag" *ngFor="let tag of item.tags" [rounded]="true"></p-tag>
 			</div>
