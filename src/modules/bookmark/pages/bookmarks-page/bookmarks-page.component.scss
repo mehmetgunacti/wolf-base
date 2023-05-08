@@ -14,21 +14,6 @@ app-bookmarks-page {
 
 	}
 
-	& .bookmarkEditContainerComponent {
-
-		width		: 100vw;
-		height		: 100vh;
-		max-height	: initial !important;
-	
-		@include lg() {
-	
-			width	: 80vw;
-			height	: 95vh;
-	
-		}
-	
-	}
-
 	app-bookmarks-search-and-tag-cloud-container {
 
 		grid-area				: t;

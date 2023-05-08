@@ -5,79 +5,83 @@
 
 </div>
 
-<form>
+<div bookmark-form>
 
-	<div form-element-image>
-		<app-croppie
-			[wControl]="form.image"
-			wType="circle"
-			wClass="primary"></app-croppie>
-	</div>
+	<form>
 
-	<div form-element-url>
-		<span
-			class="p-float-label p-fluid"
-			*ngFor="let fcUrl of form.urls.controls">
-			<input
-				type="text"
-				pInputText
-				[ngClass]="{ 'ng-invalid ng-dirty': fcUrl.invalid && fcUrl.dirty }"
-				[formControl]="fcUrl">
-			<label>URL</label>
-		</span>
-	</div>
+		<div form-element-image>
+			<app-croppie
+				[wControl]="form.image"
+				wType="circle"
+				wClass="primary"></app-croppie>
+		</div>
 
-	<div form-element-name>
-		<span class="p-float-label p-fluid">
-			<input
-				type="text"
-				pInputText
-				[ngClass]="{ 'ng-invalid ng-dirty': form.name.invalid && form.name.dirty }"
-				[formControl]="form.name">
-			<label>Name</label>
-		</span>
-		<button pButton pRipple type="button" icon="pi pi-reply" class="p-button-text" title="Parse URL" (click)="nameFromURL()"></button>
-	</div>
+		<div form-element-url>
+			<span
+				class="p-float-label p-fluid"
+				*ngFor="let fcUrl of form.urls.controls">
+				<input
+					type="text"
+					pInputText
+					[ngClass]="{ 'ng-invalid ng-dirty': fcUrl.invalid && fcUrl.dirty }"
+					[formControl]="fcUrl">
+				<label>URL</label>
+			</span>
+		</div>
 
-	<div form-element-title>
-		<span class="p-float-label p-fluid">
-			<input
-				type="text"
-				pInputText
-				[ngClass]="{ 'ng-invalid ng-dirty': form.title.invalid && form.title.dirty }"
-				[formControl]="form.title">
-			<label>Title</label>
-		</span>
-		<button pButton pRipple type="button" icon="pi pi-search" class="p-button-text" title="Lookup" (click)="lookupTitle()"></button>
-	</div>
+		<div form-element-name>
+			<span class="p-float-label p-fluid">
+				<input
+					type="text"
+					pInputText
+					[ngClass]="{ 'ng-invalid ng-dirty': form.name.invalid && form.name.dirty }"
+					[formControl]="form.name">
+				<label>Name</label>
+			</span>
+			<button pButton pRipple type="button" icon="pi pi-reply" class="p-button-text" title="Parse URL" (click)="nameFromURL()"></button>
+		</div>
 
-	<div form-element-clicks>
-		<span class="p-float-label p-fluid">
-			<input
-				type="number"
-				pInputText
-				[formControl]="form.clicks">
-			<label>Clicks</label>
-		</span>
-	</div>
+		<div form-element-title>
+			<span class="p-float-label p-fluid">
+				<input
+					type="text"
+					pInputText
+					[ngClass]="{ 'ng-invalid ng-dirty': form.title.invalid && form.title.dirty }"
+					[formControl]="form.title">
+				<label>Title</label>
+			</span>
+			<button pButton pRipple type="button" icon="pi pi-search" class="p-button-text" title="Lookup" (click)="lookupTitle()"></button>
+		</div>
 
-	<div form-element-tags>
-		<span class="p-float-label p-fluid">
-			<p-autoComplete
-				#autocomplete
-				[formControl]="form.tags"
-				[suggestions]="(tagSuggestions$ | async) || []"
-				(completeMethod)="onTagInput($event)"
-				[multiple]="true"
-				[baseZIndex]="10000"
-				appendTo="body">
-			</p-autoComplete>
-			<label>Tags</label>
-		</span>
-		<button pButton pRipple type="button" [icon]="isPopular ? 'pi pi-heart-fill' : 'pi pi-heart'" class="p-button-text" title="Toggle 'popular'" (click)="onTogglePopular()"></button>
-	</div>
+		<div form-element-clicks>
+			<span class="p-float-label p-fluid">
+				<input
+					type="number"
+					pInputText
+					[formControl]="form.clicks">
+				<label>Clicks</label>
+			</span>
+		</div>
 
-</form>
+		<div form-element-tags>
+			<span class="p-float-label p-fluid">
+				<p-autoComplete
+					#autocomplete
+					[formControl]="form.tags"
+					[suggestions]="(tagSuggestions$ | async) || []"
+					(completeMethod)="onTagInput($event)"
+					[multiple]="true"
+					[baseZIndex]="10000"
+					appendTo="body">
+				</p-autoComplete>
+				<label>Tags</label>
+			</span>
+			<button pButton pRipple type="button" [icon]="isPopular ? 'pi pi-heart-fill' : 'pi pi-heart'" class="p-button-text" title="Toggle 'popular'" (click)="onTogglePopular()"></button>
+		</div>
+
+	</form>
+
+</div>
 
 <div form-element-buttons>
 	<button pButton type="button" label="Cancel" icon="pi pi-times" iconPos="left" class="p-button-secondary"></button>
