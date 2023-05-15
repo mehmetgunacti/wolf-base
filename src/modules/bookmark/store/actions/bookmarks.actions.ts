@@ -3,9 +3,6 @@ import { Bookmark, UUID } from 'lib';
 
 export const loadAllBookmarksSuccess = createAction('[Bookmarks] Load All Success', props<{ bookmarks: Bookmark[] }>());
 
-export const searchBookmarks = createAction('[Bookmarks] Search Bookmarks', props<{ term: string }>());
-export const searchBookmarksSuccess = createAction('[Bookmarks] Search Bookmarks Success', props<{ bookmarks: Bookmark[] }>());
-
 export const createBookmark = createAction('[Bookmarks] Create Bookmark', props<{ bookmark: Partial<Bookmark> }>());
 export const createBookmarkSuccess = createAction('[Bookmarks] Create Bookmark Success', props<{ bookmark: Bookmark }>());
 

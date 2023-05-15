@@ -36,6 +36,12 @@ export class BookmarksPageComponent {
 
 	}
 
+	onSearch(term: string): void {
+
+		this.store.dispatch(fromStore.search({ term }));
+
+	}
+
 	toggleTagCloud(): void {
 
 		this.store.dispatch(fromStore.toggleSearchAndTagCloudVisibility());

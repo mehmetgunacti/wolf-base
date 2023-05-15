@@ -21,7 +21,7 @@
 </app-portal>
 
 <!-- Search and Tag-cloud -->
-<app-bookmarks-search-and-tag-cloud-container tagCloud *ngIf="tagsVisible$ | async" @slideUpDown/>
+<app-bookmarks-search-and-tag-cloud-container tagCloud *ngIf="tagsVisible$ | async" @slideUpDown (search)="onSearch($event)"/>
 
 <!-- Edit Dialog -->
 <p-dialog

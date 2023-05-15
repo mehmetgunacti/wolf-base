@@ -7,6 +7,7 @@ const reducer = createReducer(
 
 	fromStates.tagsInitialState,
 
+	on(fromActions.search, (state, { term }): fromStates.TagsState => ({ ...state, searchTerm: term })),
 	// on(
 
 	// 	fromActions.bookmarksSearchSuccess,

@@ -50,18 +50,18 @@ export class BookmarksEffects {
 
 	// );
 
-	bookmarksSearch$ = createEffect(
+	// bookmarksSearch$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(fromActions.searchBookmarks),
-			map(p => p.term),
-			switchMap(term => this.localStorage.bookmarks.search(term)),
-			map(bookmarks => fromActions.searchBookmarksSuccess({ bookmarks }))
+	// 		ofType(fromActions.searchBookmarks),
+	// 		map(p => p.term),
+	// 		switchMap(term => this.localStorage.bookmarks.search(term)),
+	// 		map(bookmarks => fromActions.searchBookmarksSuccess({ bookmarks }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 	bookmarksCreate$ = createEffect(
 

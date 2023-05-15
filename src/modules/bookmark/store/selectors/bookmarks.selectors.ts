@@ -1,8 +1,9 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
+import { Bookmark } from 'lib';
 import * as fromStates from '../states';
-import { BookmarksModuleState } from 'modules/bookmark/bookmark.config';
+import { selectorModuleState } from './selectors';
+import { searchTerm, selectedTags } from './tags.selectors';
 
-const selectorModuleState = createFeatureSelector<BookmarksModuleState>('bookmarksModule');
 const selectorBookmarksState = createSelector(
 	selectorModuleState,
 	state => state.bookmarks

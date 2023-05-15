@@ -1,15 +1,14 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { Tag } from 'lib';
-import { BookmarksModuleState } from 'modules/bookmark/bookmark.config';
 import { bookmarksArray } from './bookmarks.selectors';
+import { selectorModuleState } from './selectors';
 
-const selectorModuleState = createFeatureSelector<BookmarksModuleState>('bookmarksModule');
 const selectorTagsState = createSelector(
 	selectorModuleState,
 	state => state.tags
 )
 
-export const arrayOfTagNames = createSelector(
+const arrayOfTagNames = createSelector(
 
 	bookmarksArray,
 	(bookmarks): string[][] => bookmarks.map(b => b.tags)
@@ -40,13 +39,6 @@ export const distinctTagsArray = createSelector(
 		)
 
 );
-
-// const tagsSelectorAllDistinctTagNames = createSelector(
-
-// 	tagsSelectorArrayOfTagNameArray,
-// 	(arrTagsArray: string[][]) => [...new Set(arrTagsArray.flat())]
-
-// );
 
 const distinctTagNames = createSelector(
 
@@ -84,10 +76,42 @@ export const relatedTags = createSelector(
 
 );
 
-// export const tagsSelectorDisabledTags = createSelector(
+export const searchTerm = createSelector(
 
-// 	tagsSelectorAllDistinctTagNames,
-// 	tagsSelectorRelatedTags,
-// 	(allTagsNames: string[], selectables: string[]): string[] => allTagsNames.filter(name => !selectables.includes(name))
+	selectorTagsState,
+	state => state.searchTerm
 
-// );
+);
+
+export const filteredBookmarks = createSelector(
+	bookmarksArray,
+	selectedTags,
+	searchTerm,
+	(bookmarks, tags, term) => {
+
+		// Filter bookmarks based on tags
+		const filteredBookmarks = tags.reduce((acc, tag) => {
+			return acc.filter(bookmark => bookmark.tags.includes(tag));
+		}, bookmarks);
+
+		if (!term)
+			return filteredBookmarks;
+
+		// Split the search term into an array of individual words
+		const searchWords = term.toLowerCase().split(' ');
+
+		// Filter bookmarks based on search term
+		const result = filteredBookmarks.filter(bookmark => {
+			const { name, title } = bookmark;
+			const lowerCaseName = name.toLowerCase();
+			const lowerCaseTitle = title.toLowerCase();
+
+			// Check if any of the search words is present in the bookmark's name or title
+			return searchWords.every(word => lowerCaseName.includes(word) || lowerCaseTitle.includes(word));
+		});
+
+		return result;
+
+	}
+
+);

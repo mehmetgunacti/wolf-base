@@ -18,17 +18,7 @@ export class BookmarksContainerComponent implements OnInit {
 		private store: Store
 	) {
 
-		this.bookmarks$ = combineLatest([
-			store.select(selectors.bookmarksArray),
-			store.select(selectors.selectedTags)
-		]).pipe(
-			map(
-				([bookmarks, selectedTags]) => selectedTags.reduce(
-					(acc, tag) => acc.filter((bookmark) => bookmark.tags.includes(tag)),
-					bookmarks // the initial value (array)
-				)
-			)
-		);
+		this.bookmarks$ = store.select(selectors.filteredBookmarks);
 
 	}
 

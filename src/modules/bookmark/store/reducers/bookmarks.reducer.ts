@@ -8,11 +8,7 @@ const reducer = createReducer(
 	fromStates.bookmarksInitialState,
 
 	on(fromActions.loadAllBookmarksSuccess, (state, { bookmarks }): BookmarksState =>
-		fromStates.bookmarksAdapter.setAll(bookmarks, { ...state, bookmarksSearchTerm: '' })
-	),
-
-	on(fromActions.searchBookmarksSuccess, (state, { bookmarks }): BookmarksState =>
-		fromStates.bookmarksAdapter.setAll(bookmarks, { ...state })
+		fromStates.bookmarksAdapter.setAll(bookmarks, { ...state, searchTerm: null })
 	),
 	on(fromActions.openAddBookmarkDialog, (state): BookmarksState => ({ ...state, editDialogVisible: true, selected: null })),
 	on(fromActions.openEditBookmarkDialog, (state, { id }): BookmarksState => ({ ...state, editDialogVisible: true, selected: id })),
