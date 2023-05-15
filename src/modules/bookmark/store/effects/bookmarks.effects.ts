@@ -16,8 +16,7 @@ export class BookmarksEffects {
 
 		() => this.localStorage.bookmarks.list$({
 			orderBy: 'clicks',
-			reverse: true,
-			limit: 50
+			reverse: true
 		}).pipe(
 			map((bookmarks) => fromActions.loadAllBookmarksSuccess({ bookmarks }))
 		)
