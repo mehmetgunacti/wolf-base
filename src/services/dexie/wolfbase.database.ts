@@ -6,8 +6,8 @@ import { Bookmark, DexieConfiguration, EntityBase, IConflictData, ITrash } from 
 class DEFAULT_CONF_VALUES {
 
 	static theme: THEME = 'dark';
-	static sidebarVisible = 'true';
-	static syncWorkerActive = 'true';
+	static sidebarVisible = true;
+	static syncWorkerActive = true;
 
 }
 
@@ -23,7 +23,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 
 export class WolfBaseDB extends Dexie {
 
-	configuration: Dexie.Table<string, string>;
+	configuration: Dexie.Table<string | boolean, string>;
 	conflicts: Dexie.Table<IConflictData<EntityBase>, UUID>;
 	trashcan: Dexie.Table<ITrash<EntityBase>, UUID>;
 
@@ -32,11 +32,11 @@ export class WolfBaseDB extends Dexie {
 	// tasks: Dexie.Table<ILocalData<ITaskList>, ID>;
 	// words: Dexie.Table<ILocalData<IWord>, ID>;
 
-	constructor(definition: DexieConfiguration) {
+	constructor(conf: DexieConfiguration) {
 
-		super(definition.dbName);
-		this.version(definition.version)
-			.stores(definition.tables);
+		super(conf.dbName);
+		this.version(conf.version)
+			.stores(conf.tables);
 
 		this.configuration = this.table(WolfBaseTableName.configuration);
 		this.conflicts = this.table(WolfBaseTableName.conflicts);
@@ -47,9 +47,13 @@ export class WolfBaseDB extends Dexie {
 		// this.tasks = this.table(KnobaTable.tasks);
 		// this.words = this.table(KnobaTable.words);
 
-		this.configuration.put(DEFAULT_CONF_VALUES.syncWorkerActive, CONF_KEYS.syncWorkerActive);
-		this.configuration.put(DEFAULT_CONF_VALUES.sidebarVisible, CONF_KEYS.sidebarVisible);
-		this.configuration.put(DEFAULT_CONF_VALUES.theme, CONF_KEYS.theme);
+		this.on('populate', () => {
+
+			this.configuration.put(DEFAULT_CONF_VALUES.syncWorkerActive, CONF_KEYS.syncWorkerActive);
+			this.configuration.put(DEFAULT_CONF_VALUES.sidebarVisible, CONF_KEYS.sidebarVisible);
+			this.configuration.put(DEFAULT_CONF_VALUES.theme, CONF_KEYS.theme);
+
+		});
 
 	}
 

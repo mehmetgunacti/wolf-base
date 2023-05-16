@@ -26,16 +26,23 @@ export class CorePageComponent implements OnDestroy {
 	navCollapsed = true;
 
 	constructor(
-		breakpointObserver: BreakpointObserver,
 		private store: Store
 	) {
 
 		this.subscriptions.add(
 
 			// todo: move to ui.effects
-			breakpointObserver
-				.observe('(min-width: 767px)')
-				.subscribe(result => this.bigScreen = result.matches)
+			// breakpointObserver
+			// 	.observe('(min-width: 767px)')
+			// 	.subscribe(result => this.bigScreen = result.matches)
+
+		);
+
+		this.subscriptions.add(
+
+			store.select(selectors.isSidebarVisible).subscribe(
+				visible => this.navCollapsed = !visible
+			)
 
 		);
 
@@ -61,7 +68,8 @@ export class CorePageComponent implements OnDestroy {
 
 	toggleNav(): void {
 
-		this.navCollapsed = !this.navCollapsed;
+		// navCollapsed is always the opposite of 'visible', no negation needed
+		this.store.dispatch(actions.setSidebarVisible({ visible: this.navCollapsed }));
 
 	}
 

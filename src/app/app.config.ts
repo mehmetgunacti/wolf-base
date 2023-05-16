@@ -28,11 +28,6 @@ const appInitializerFactory = (store: Store<states.AppState>) => {
 		const newTheme = !!lsTheme ? resolveTheme(lsTheme) : DEFAULT_THEME;
 		store.dispatch(actions.themeSet({ newTheme }));
 
-		// set lang
-		// const lsLang = localStorage.getItem('lang');
-		// const newLang = !!lsLang ? resolveLang(lsLang) : DEFAULT_LANG;
-		// store.dispatch(actions.i18nSetLanguage({ newLang }));
-
 	};
 
 }

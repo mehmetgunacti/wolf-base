@@ -4,3 +4,5 @@ import { Configuration, ThemeInfo } from 'lib';
 export const confSetAll = createAction('[CONF] Set All', props<{ newTheme: ThemeInfo }>());
 
 export const confChanged = createAction('[CONF] Configuration Changed', props<{ configuration: Configuration }>());
+
+export const setSidebarVisible = createAction('[CONF] Set Sidebar Visibility', props<{ visible: boolean }>());

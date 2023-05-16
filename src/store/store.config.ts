@@ -31,6 +31,7 @@ export const effects = [
 
 export const reducers: ActionReducerMap<fromStates.AppState> = {
 
-	ui: fromReducers.uiReducer
+	conf: fromReducers.confReducer,
+	ui: fromReducers.uiReducer,
 
 };
