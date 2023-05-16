@@ -2,7 +2,7 @@
 
 	<div bookmark-image>
 
-		<img src="{{ item.image || PLACEHOLDER_QUESTIONMARK }}"
+		<img src="{{ item.image || 'assets/placeholder.png' }}"
 			title="{{ item.id }} : {{ item.title + '\r\n' + item.urls + '\r\n' }} #{{ item.clicks }}">
 
 	</div>
