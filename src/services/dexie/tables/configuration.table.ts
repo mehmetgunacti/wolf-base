@@ -1,6 +1,6 @@
 import { ConfigurationTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { KeyValueTableImpl } from './key-value.table';
-import { CONF_KEYS, Configuration } from 'lib';
+import { CONF_KEYS, Configuration, THEME } from 'lib';
 import { Observable, fromEventPattern } from 'rxjs';
 import { liveQuery } from 'dexie';
 
@@ -20,9 +20,9 @@ export class ConfigurationTableImpl implements ConfigurationTable {
 
 	}
 
-	async getTheme(): Promise<string> {
+	async getTheme(): Promise<THEME> {
 
-		return await this.kvTable.get<string>(CONF_KEYS.theme);
+		return await this.kvTable.get<THEME>(CONF_KEYS.theme);
 
 	}
 
@@ -38,7 +38,7 @@ export class ConfigurationTableImpl implements ConfigurationTable {
 
 	}
 
-	async setTheme(theme: string): Promise<void> {
+	async setTheme(theme: THEME): Promise<void> {
 
 		return await this.kvTable.set(CONF_KEYS.theme, theme);
 

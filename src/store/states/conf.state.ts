@@ -1,12 +1,6 @@
-import { THEME } from 'lib';
+import { Configuration, THEME } from 'lib';
 
-export interface ConfState {
-
-	syncWorkerActive: boolean,
-	sidebarVisible: boolean,
-	theme: THEME
-
-}
+export interface ConfState extends Configuration { }
 
 export const initialConfState: ConfState = {
 

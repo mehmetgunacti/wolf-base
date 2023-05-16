@@ -22,6 +22,7 @@ export const metaReducers: MetaReducer<fromStates.AppState>[] = [
 
 export const effects = [
 
+	fromEffects.ConfEffects,
 	fromEffects.NotificationEffects,
 	fromEffects.NavigationEffects,
 	fromEffects.UIEffects

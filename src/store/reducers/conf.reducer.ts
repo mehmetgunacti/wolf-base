@@ -1,6 +1,6 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import produce from 'immer';
-import { confSetAll } from 'store/actions/conf.action';
+import { confChanged, confSetAll } from 'store/actions/conf.action';
 import { ConfState, initialConfState } from 'store/states';
 
 export const confReducer: ActionReducer<ConfState, Action> = createReducer(
@@ -13,6 +13,8 @@ export const confReducer: ActionReducer<ConfState, Action> = createReducer(
 			draft => draft
 		);
 
-	})
+	}),
+
+	on(confChanged, (state, { configuration }) => ({ ...configuration }))
 
 );
