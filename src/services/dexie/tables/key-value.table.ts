@@ -45,4 +45,16 @@ export class KeyValueTableImpl implements KeyValueTable {
 
 	}
 
+	async dump<T>(): Promise<T> {
+		
+		const table = this.db.table(this.tablename);
+		const data = table.toCollection();
+		const result: Record<string, T> = {};
+		await data.each(
+			(obj: T, cursor) => result[cursor.key.toString()] = obj
+		);
+		return result as T;
+
+	}
+
 }

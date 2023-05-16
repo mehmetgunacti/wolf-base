@@ -1,5 +1,5 @@
 import { UUID } from 'lib/constants';
-import { Bookmark, EntityBase } from 'lib/models';
+import { Bookmark, Configuration, EntityBase } from 'lib/models';
 import { Observable } from 'rxjs';
 
 export interface EntityTable<T extends EntityBase> {
@@ -28,17 +28,9 @@ export interface KeyValueTable {
 	get$(key: string): Observable<string>;
 	remove(key: string): Promise<void>;
 
+	dump<T>(): Promise<T>;
+
 }
-
-// export interface SyncableTable<T extends Base> {
-
-// 	listNewItems(): Promise<T[]>;
-// 	listUpdatedItems(): Promise<T[]>;
-// 	listDeletedItems(): Promise<ITrash<T>[]>;
-
-// 	moveToConflicts(localData: T, remoteData: T): Promise<void>;
-
-// }
 
 export interface BookmarksTable extends EntityTable<Bookmark> {
 
@@ -46,11 +38,17 @@ export interface BookmarksTable extends EntityTable<Bookmark> {
 
 }
 
-export interface ConfigurationTable extends KeyValueTable { }
+export interface ConfigurationTable {
 
-// export interface INotesTable extends ILocalStorageTable<INote> { }
-// export interface ITasksTable extends ILocalStorageTable<ITaskList> { }
-// export interface IWordsTable extends ILocalStorageTable<IWord> { }
-// export interface IFastsTable extends ILocalStorageTable<IFast> { }
-// export interface IWeightsTable extends ILocalStorageTable<IWeight> { }
-// export interface IWorkoutsTable extends ILocalStorageTable<IWorkout> { }
+	getSyncWorkerActive(): Promise<boolean>;
+	getSidebarVisible(): Promise<boolean>;
+	getTheme(): Promise<string>;
+
+	setSyncWorkerActive(active: boolean): Promise<void>;
+	setSidebarVisible(visible: boolean): Promise<void>;
+	setTheme(theme: string): Promise<void>;
+
+	dump(): Promise<Configuration>;
+	dump$(): Observable<Configuration>;
+
+}
