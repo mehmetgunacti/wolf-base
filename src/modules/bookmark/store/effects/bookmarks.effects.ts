@@ -1,15 +1,20 @@
 import { Injectable, inject } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { Bookmark, LocalStorageService } from 'lib';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store';
+import { commaSplit, toggleArrayItem } from 'utils';
 import * as fromActions from '../actions';
+import { of } from 'rxjs';
 
 @Injectable()
 export class BookmarksEffects {
 
 	private actions$: Actions = inject(Actions);
+	private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+	private router: Router = inject(Router);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 
 	listFromIndexedDb$ = createEffect(
@@ -23,21 +28,44 @@ export class BookmarksEffects {
 
 	);
 
-	// bookmarksLoadAll$ = createEffect(
+	onTagClickSetURLQueryParam$ = createEffect(
 
-	// 	() => this.actions$.pipe(
+		() => this.actions$.pipe(
 
-	// 		ofType(fromActions.bookmarksLoadAll),
-	// 		switchMap(() => this.localStorage.bookmarks.list({
-	// 			orderBy: 'clicks',
-	// 			reverse: true,
-	// 			limit: 50
-	// 		})),
-	// 		map(bookmarks => fromActions.bookmarksLoadAllSuccess({ bookmarks }))
+			ofType(fromActions.clickTag),
+			withLatestFrom(this.activatedRoute.queryParams),
+			tap(([{ name }, params]) => {
 
-	// 	)
+				// Toggle the clicked tag in the 'tags' query parameter array
+				const tagsArr: string[] = toggleArrayItem(commaSplit(params['tags']), name);
 
-	// );
+				// Destructure 'tags' from the query parameters, keeping the rest of the parameters in 'rest'
+				const { tags, ...rest } = params;
+
+				// Create a new set of query parameters based on the toggled 'tagsArr'
+				const queryParams: Params = tagsArr.length === 0 ? rest : { ...params, tags: tagsArr.join(',') };
+
+				// Navigate to the current route with the updated query parameters
+				this.router.navigate([], { queryParams });
+
+			})
+
+		),
+		{ dispatch: false }
+
+	);
+
+	onQueryParamsChangeSetSelectedTags$ = createEffect(
+
+		() => this.activatedRoute.queryParams.pipe(
+
+			map(params => params['tags']),
+			map((tags: string) => commaSplit(tags)),
+			switchMap(tags => of(fromActions.setSelectedTags({ tags })))
+
+		)
+
+	);
 
 	// bookmarksRemoveAll$ = createEffect(
 

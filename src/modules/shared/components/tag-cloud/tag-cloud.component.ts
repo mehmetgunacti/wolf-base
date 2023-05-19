@@ -36,8 +36,8 @@ export class TagCloudComponent implements OnChanges {
 
 	onTagClick(id: string): void {
 
-		if (this.relatedTags?.includes(id))
-			this.tagClick.emit(id);
+		//if (this.relatedTags?.includes(id))
+		this.tagClick.emit(id);
 
 	}
 
