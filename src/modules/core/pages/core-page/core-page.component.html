@@ -2,14 +2,18 @@
 <p-toast></p-toast>
 <header>
 
-	<button pButton
-			type="button"
-			icon="pi pi-bars"
-			class="p-button-text"
-			(click)="toggleNav()"></button>
-	<img src="/assets/logo.svg"
-		 class="logo mr-auto ml-2"
-		 style="width: 10rem; height: 2rem;">
+	<section id="section-logo">
+
+		<button pButton
+				type="button"
+				icon="pi pi-bars"
+				class="p-button-text"
+				(click)="toggleNav()"></button>
+		<img src="/assets/logo.svg"
+			class="logo mr-auto ml-2"
+			style="width: 10rem; height: 2rem;">
+
+	</section>
 	<section id="portal-outlet-left">
 		<!-- content will be placed dynamically via Cdk Portal -->
 	</section>

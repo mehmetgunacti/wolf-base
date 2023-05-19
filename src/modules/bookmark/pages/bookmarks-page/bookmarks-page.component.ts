@@ -28,7 +28,7 @@ export class BookmarksPageComponent {
 
 		this.editDialogVisible$ = this.store.select(fromStore.isEditDialogVisible);
 		this.tagsVisible$ = this.store.select(fromStore.selectorTagCloudVisibility);
-		this.isBigScreen$ = this.store.select(isBigScreen).pipe(tap(a => console.log(a)));
+		this.isBigScreen$ = this.store.select(isBigScreen);
 
 		// todo : delete later
 		this.localStorage.clear(WolfBaseTableName.bookmarks);

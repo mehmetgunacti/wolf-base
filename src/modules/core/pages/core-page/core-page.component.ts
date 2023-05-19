@@ -31,10 +31,9 @@ export class CorePageComponent implements OnDestroy {
 
 		this.subscriptions.add(
 
-			// todo: move to ui.effects
-			// breakpointObserver
-			// 	.observe('(min-width: 767px)')
-			// 	.subscribe(result => this.bigScreen = result.matches)
+			this.store.select(selectors.isBigScreen).subscribe(
+				result => this.bigScreen = result
+			)
 
 		);
 

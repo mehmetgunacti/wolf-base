@@ -16,16 +16,51 @@ $header-height					: 4rem;
 app-core-page {
 
 	@extend %flex-column;
-	height	: 100vh;
+	height	: 200vh;
 
 	header {
 
-		display				: flex;
-		justify-content		: space-between;
-		align-items			: center;
-		min-height			: #{$header-height};
-		padding				: 0 0.5rem;
-		background-color	: var(--surface-c);
+		display					: grid;
+		grid-template-columns	: 60px 1fr;
+		grid-template-rows		: 1fr 1fr;
+		grid-template-areas		: "logo right"
+								  "left left";
+		background-color		: var(--surface-c);
+
+		@include md() {
+
+			grid-template-columns	: 60px 1fr 1fr;
+			grid-template-rows		: 1fr;
+			grid-template-areas		: "logo left right";
+
+		}
+
+		& #section-logo {
+
+			grid-area	: logo;
+			@extend %flex-center-center;
+			& > img {
+
+				display: none;
+
+			}
+
+		}
+
+		& #portal-outlet-left {
+
+			grid-area		: left;
+			@extend %flex-start-center;
+			padding-left	: 0.5rem;
+
+		}
+
+		& #portal-outlet-right {
+
+			grid-area	: right;
+			@extend %flex-end-center;
+
+		}
 
 	}
 
@@ -110,6 +145,13 @@ app-core-page {
 			z-index		: initial;
 
 		}
+
+	}
+
+
+	@include md() {
+
+		height	: 100vh;
 
 	}
 
