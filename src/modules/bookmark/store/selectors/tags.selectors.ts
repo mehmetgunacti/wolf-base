@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { Tag } from 'lib';
+import { Bookmark, Tag } from 'lib';
 import { bookmarksArray } from './bookmarks.selectors';
 import { selectorModuleState } from './selectors';
 
@@ -87,7 +87,7 @@ export const filteredBookmarks = createSelector(
 	bookmarksArray,
 	selectedTags,
 	searchTerm,
-	(bookmarks, tags, term) => {
+	(bookmarks, tags, term): Bookmark[] => {
 
 		// Filter bookmarks based on tags
 		const filteredBookmarks = tags.reduce((acc, tag) => {
