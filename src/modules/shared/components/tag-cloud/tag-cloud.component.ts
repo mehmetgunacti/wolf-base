@@ -23,7 +23,6 @@ export class TagCloudComponent implements OnChanges {
 	@Input() relatedTags: string[] | undefined | null;
 
 	@Output() tagClick: EventEmitter<string> = new EventEmitter();
-	@Output() resetClick: EventEmitter<string> = new EventEmitter();
 
 	uiTags!: TagUI[];
 
@@ -38,12 +37,6 @@ export class TagCloudComponent implements OnChanges {
 
 		//if (this.relatedTags?.includes(id))
 		this.tagClick.emit(id);
-
-	}
-
-	onReset(): void {
-
-		this.resetClick.emit();
 
 	}
 
