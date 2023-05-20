@@ -39,18 +39,16 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 		this.subscription.unsubscribe();
 	}
 
-	onSearch(): void {
-
-	}
-
 	onTagClicked(name: string): void {
 
 		this.store.dispatch(fromStore.clickTag({ name }));
 
 	}
 
-	onTagSearch(term: string): void { }
+	onSearchReset(): void {
 
-	onTagReset(): void { }
+		this.searchControl.reset();
+
+	}
 
 }

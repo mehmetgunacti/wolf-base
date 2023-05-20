@@ -10,9 +10,9 @@
 		type="button"
 		pButton
 		pRipple
-		icon="pi pi-search"
+		icon="pi pi-times"
 		styleClass="p-button-warn"
-		(click)="onSearch()">
+		(click)="onSearchReset()">
 	</button>
 </div>
 
@@ -20,5 +20,4 @@
     [tags]="tags$ | async"
     [selectedTags]="selectedTags$ | async"
     [relatedTags]="relatedTags$ | async"
-    (tagClick)="onTagClicked($event)"
-    (resetClick)="onTagReset()"></app-tag-cloud>
+    (tagClick)="onTagClicked($event)"></app-tag-cloud>

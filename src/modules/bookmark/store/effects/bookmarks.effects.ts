@@ -88,6 +88,41 @@ export class BookmarksEffects {
 
 	);
 
+	onSearchSetURLQueryParam$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(fromActions.search),
+			withLatestFrom(this.activatedRoute.queryParams),
+			tap(([{ term }, params]) => {
+
+				// Destructure 'tags' from the query parameters, keeping the rest of the parameters in 'rest'
+				const { search, ...rest } = params;
+
+				// Create a new set of query parameters based on the toggled 'tagsArr'
+				const queryParams: Params = term ? { ...params, search: term } : rest;
+
+				// Navigate to the current route with the updated query parameters
+				this.router.navigate([], { queryParams });
+
+			})
+
+		),
+		{ dispatch: false }
+
+	);
+
+	onQueryParamsChangeSetSearch$ = createEffect(
+
+		() => this.activatedRoute.queryParams.pipe(
+
+			map(params => params['search']),
+			switchMap(term => of(fromActions.search({ term })))
+
+		)
+
+	);
+
 	// bookmarksRemoveAll$ = createEffect(
 
 	// 	() => this.actions$.pipe(
