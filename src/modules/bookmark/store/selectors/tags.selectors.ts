@@ -54,28 +54,6 @@ export const selectedTags = createSelector(
 
 );
 
-export const relatedTags = createSelector(
-
-	arrayOfTagNames,
-	distinctTagNames,
-	selectedTags,
-	(arrTagsArray: string[][], distinctTagNames: string[], selectedTags: string[]): string[] => {
-
-		if (selectedTags.length === 0)
-			return distinctTagNames;
-
-		return [
-			...new Set(
-				arrTagsArray
-					.filter(arrTags => selectedTags.every(tag => arrTags.includes(tag)))
-					.flat()
-			)
-		];
-
-	}
-
-);
-
 export const searchTerm = createSelector(
 
 	selectorTagsState,
@@ -111,6 +89,35 @@ export const filteredBookmarks = createSelector(
 		});
 
 		return result;
+
+	}
+
+);
+
+const arrOfFilteredTagNames = createSelector(
+
+	filteredBookmarks,
+	(bookmarks): string[][] => bookmarks.map(b => b.tags)
+
+);
+
+export const relatedTags = createSelector(
+
+	arrOfFilteredTagNames,
+	distinctTagNames,
+	selectedTags,
+	(arrTagsArray: string[][], distinctTagNames: string[], selectedTags: string[]): string[] => {
+
+		if (selectedTags.length === 0)
+			return distinctTagNames;
+
+		return [
+			...new Set(
+				arrTagsArray
+					.filter(arrTags => selectedTags.every(tag => arrTags.includes(tag)))
+					.flat()
+			)
+		];
 
 	}
 
