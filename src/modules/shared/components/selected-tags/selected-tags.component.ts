@@ -8,14 +8,22 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Out
 export class SelectedTagsComponent implements OnChanges {
 
 	@Input() tags: string[] | undefined | null;
+	@Input() selectedTags: string[] | undefined | null;
 
 	@Output() tagClick: EventEmitter<string> = new EventEmitter();
+	@Output() filterClick: EventEmitter<void> = new EventEmitter();
 
 	ngOnChanges(changes: SimpleChanges): void { }
 
 	onTagClick(name: string): void {
 
 		this.tagClick.emit(name);
+
+	}
+
+	emptyFilter(): void {
+
+		this.filterClick.emit();
 
 	}
 

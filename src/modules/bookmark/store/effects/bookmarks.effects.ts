@@ -3,11 +3,11 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { Bookmark, LocalStorageService } from 'lib';
-import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store';
 import { commaSplit, toggleArrayItem } from 'utils';
 import * as fromActions from '../actions';
-import { of } from 'rxjs';
 
 @Injectable()
 export class BookmarksEffects {
@@ -44,6 +44,27 @@ export class BookmarksEffects {
 
 				// Create a new set of query parameters based on the toggled 'tagsArr'
 				const queryParams: Params = tagsArr.length === 0 ? rest : { ...params, tags: tagsArr.join(',') };
+
+				// Navigate to the current route with the updated query parameters
+				this.router.navigate([], { queryParams });
+
+			})
+
+		),
+		{ dispatch: false }
+
+	);
+
+	emptyURLTagsQueryParams$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(fromActions.emptySelectedTags),
+			withLatestFrom(this.activatedRoute.queryParams),
+			tap(([_, params]) => {
+
+				// Destructure 'tags' from the query parameters, keeping the rest of the parameters in 'rest'
+				const { tags, ...queryParams } = params;
 
 				// Navigate to the current route with the updated query parameters
 				this.router.navigate([], { queryParams });

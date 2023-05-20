@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
+import { bookmarks } from 'bookmarks';
 import { LocalStorageService, WolfBaseTableName } from 'lib';
 import * as fromStore from 'modules/bookmark/store';
 import { slideUpDownTrigger } from 'modules/shared';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { isBigScreen } from 'store';
-import { bookmarks } from 'bookmarks';
 
 @Component({
 	selector: 'app-bookmarks-page',
@@ -19,6 +19,7 @@ export class BookmarksPageComponent {
 	editDialogVisible$: Observable<boolean>;
 	tagsVisible$: Observable<boolean>;
 	isBigScreen$: Observable<boolean>;
+	selectedTags$: Observable<string[]>;
 
 	private store: Store = inject(Store);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
@@ -29,6 +30,7 @@ export class BookmarksPageComponent {
 		this.editDialogVisible$ = this.store.select(fromStore.isEditDialogVisible);
 		this.tagsVisible$ = this.store.select(fromStore.selectorTagCloudVisibility);
 		this.isBigScreen$ = this.store.select(isBigScreen);
+		this.selectedTags$ = this.store.select(fromStore.selectedTags);
 
 		// todo : delete later
 		this.localStorage.clear(WolfBaseTableName.bookmarks);
@@ -57,6 +59,18 @@ export class BookmarksPageComponent {
 	closeAddDialog(): void {
 
 		this.store.dispatch(fromStore.closeEditBookmarkDialog());
+
+	}
+
+	onTagClicked(name: string): void {
+
+		this.store.dispatch(fromStore.clickTag({ name }));
+
+	}
+
+	emptyFilter(): void {
+
+		this.store.dispatch(fromStore.emptySelectedTags());
 
 	}
 
