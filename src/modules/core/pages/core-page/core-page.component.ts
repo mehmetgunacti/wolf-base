@@ -49,10 +49,10 @@ export class CorePageComponent implements OnDestroy {
 			store.select(selectors.totalBookmarksCount)
 		]).pipe(
 
-			map(([selectedBookmarksCount, totalBookmarksCount]) => {
+			map(([selected, total]) => {
 
 				const menuItems: Array<MenuItem> = new Array();
-				menuItems.push(navItems.miBookmarks(`${ selectedBookmarksCount }/${ totalBookmarksCount }`));
+				menuItems.push(navItems.miBookmarks(selected > 0 && selected < total ? `${ selected}/${ total }` : `${ total }`));
 				menuItems.push(navItems.miSettings);
 				return menuItems;
 

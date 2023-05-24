@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { Bookmark, LocalStorageService } from 'lib';
 import { of } from 'rxjs';
-import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store';
 import { commaSplit, toggleArrayItem } from 'utils';
 import * as fromActions from '../actions';
@@ -117,6 +117,7 @@ export class BookmarksEffects {
 		() => this.activatedRoute.queryParams.pipe(
 
 			map(params => params['search']),
+			filter(term => !!term),
 			switchMap(term => of(fromActions.search({ term })))
 
 		)

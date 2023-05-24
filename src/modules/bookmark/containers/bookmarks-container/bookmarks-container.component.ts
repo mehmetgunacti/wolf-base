@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
 import * as actions from 'modules/bookmark/store/actions';
 import * as selectors from 'modules/bookmark/store/selectors';
-import { Observable, combineLatest, map, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { setSelectedBookmarksCount } from 'store';
 
 @Component({
 	selector: 'app-bookmarks-container',
@@ -18,7 +19,9 @@ export class BookmarksContainerComponent implements OnInit {
 		private store: Store
 	) {
 
-		this.bookmarks$ = store.select(selectors.filteredBookmarks);
+		this.bookmarks$ = store.select(selectors.filteredBookmarks).pipe(
+			tap(bookmarks => store.dispatch(setSelectedBookmarksCount({ count: bookmarks.length })))
+		);
 
 	}
 
