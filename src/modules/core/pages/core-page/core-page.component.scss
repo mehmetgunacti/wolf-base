@@ -156,3 +156,13 @@ app-core-page {
 	}
 
 }
+
+.menuBadge {
+
+	& > a > span.p-menuitem-badge {
+
+		margin-left: auto;
+
+	}
+
+}

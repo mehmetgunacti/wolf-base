@@ -1,8 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { Bookmark } from 'lib';
 import * as fromStates from '../states';
 import { selectorModuleState } from './selectors';
-import { searchTerm, selectedTags } from './tags.selectors';
 
 const selectorBookmarksState = createSelector(
 	selectorModuleState,

@@ -3,10 +3,11 @@ import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ThemeInfo } from 'lib';
 import { MenuItem } from 'primeng/api';
-import { Observable, of, Subscription } from 'rxjs';
+import { combineLatest, map, Observable, of, Subscription, withLatestFrom } from 'rxjs';
 import * as actions from 'store/actions';
 import * as selectors from 'store/selectors';
 import * as navItems from '../../navigation-menu-items';
+import * as bookmarkSelectors from '../../../bookmark/store/selectors';
 
 @Component({
 	selector: 'app-core-page',
@@ -45,16 +46,21 @@ export class CorePageComponent implements OnDestroy {
 
 		);
 
-		const items: Array<MenuItem> = new Array();
-		items.push(navItems.miBookmarks);
-		items.push(navItems.miSettings);
-		// items.push(navItems.miNotes);
-		// items.push(navItems.miWikis);
-		// items.push(navItems.miTasks);
-		// items.push(navItems.miFasts);
-		// items.push(navItems.miWords);
-		this.navMenuItems$ = of(items);
+		this.navMenuItems$ = combineLatest([
+			store.select(bookmarkSelectors.filteredBookmarks),
+			store.select(bookmarkSelectors.bookmarksCount)
+		]).pipe(
 
+			map(([filteredCount, total]) => {
+
+				const menuItems: Array<MenuItem> = new Array();
+				menuItems.push(navItems.miBookmarks(`${ filteredCount }/${ total }`));
+				menuItems.push(navItems.miSettings);
+				return menuItems;
+
+			})
+
+		);
 		this.theme$ = store.select(selectors.themeInfo);
 
 	}

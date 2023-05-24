@@ -7,11 +7,13 @@ import { MenuItem, PrimeIcons } from 'primeng/api';
 // 	routerLinkActiveOptions: { exact: true }
 // });
 
-export const miBookmarks: MenuItem = {
+export const miBookmarks = (badge: string): MenuItem => ({
 	label: 'Bookmarks',
 	icon: PrimeIcons.BOOKMARK_FILL,
-	routerLink: ['/bookmarks']
-};
+	routerLink: ['/bookmarks'],
+	badge,
+	styleClass: 'menuBadge'
+});
 
 export const miSettings: MenuItem = {
 	label: 'Settings',
