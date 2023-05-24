@@ -23,6 +23,7 @@ export const metaReducers: MetaReducer<fromStates.AppState>[] = [
 export const effects = [
 
 	fromEffects.ConfEffects,
+	fromEffects.MenuEffects,
 	fromEffects.NotificationEffects,
 	fromEffects.NavigationEffects,
 	fromEffects.UIEffects
@@ -33,5 +34,6 @@ export const reducers: ActionReducerMap<fromStates.AppState> = {
 
 	conf: fromReducers.confReducer,
 	ui: fromReducers.uiReducer,
+	menu: fromReducers.menuReducer
 
 };

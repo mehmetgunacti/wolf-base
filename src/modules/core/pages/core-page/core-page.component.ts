@@ -1,13 +1,11 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ThemeInfo } from 'lib';
 import { MenuItem } from 'primeng/api';
-import { combineLatest, map, Observable, of, Subscription, withLatestFrom } from 'rxjs';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
 import * as actions from 'store/actions';
 import * as selectors from 'store/selectors';
 import * as navItems from '../../navigation-menu-items';
-import * as bookmarkSelectors from '../../../bookmark/store/selectors';
 
 @Component({
 	selector: 'app-core-page',
@@ -47,14 +45,14 @@ export class CorePageComponent implements OnDestroy {
 		);
 
 		this.navMenuItems$ = combineLatest([
-			store.select(bookmarkSelectors.filteredBookmarks),
-			store.select(bookmarkSelectors.bookmarksCount)
+			store.select(selectors.selectedBookmarksCount),
+			store.select(selectors.totalBookmarksCount)
 		]).pipe(
 
-			map(([filteredCount, total]) => {
+			map(([selectedBookmarksCount, totalBookmarksCount]) => {
 
 				const menuItems: Array<MenuItem> = new Array();
-				menuItems.push(navItems.miBookmarks(`${ filteredCount }/${ total }`));
+				menuItems.push(navItems.miBookmarks(`${ selectedBookmarksCount }/${ totalBookmarksCount }`));
 				menuItems.push(navItems.miSettings);
 				return menuItems;
 

@@ -6,4 +6,4 @@ export const clickTag = createAction('[Tags] Click Tag', props<{ name: string }>
 export const setSelectedTags = createAction('[Tags] Set Selected Tags', props<{ tags: string[] }>());
 export const emptySelectedTags = createAction('[Tags] Empty Selected Tags');
 
-export const search = createAction('[Tags] Search', props<{ term: string }>());
+export const search = createAction('[Bookmark Tags] Search', props<{ term: string }>());
