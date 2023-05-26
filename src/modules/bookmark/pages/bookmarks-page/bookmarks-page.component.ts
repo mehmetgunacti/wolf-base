@@ -3,10 +3,10 @@ import { Store } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { bookmarks } from 'bookmarks';
 import { LocalStorageService, WolfBaseTableName } from 'lib';
-import * as fromStore from 'modules/bookmark/store';
+import * as fromBookmark from 'store/bookmark';
+import * as fromCore from 'store/core';
 import { slideUpDownTrigger } from 'modules/shared';
 import { Observable } from 'rxjs';
-import { isBigScreen } from 'store';
 
 @Component({
 	selector: 'app-bookmarks-page',
@@ -27,10 +27,10 @@ export class BookmarksPageComponent {
 
 	constructor() {
 
-		this.editDialogVisible$ = this.store.select(fromStore.isEditDialogVisible);
-		this.tagsVisible$ = this.store.select(fromStore.selectorTagCloudVisibility);
-		this.isBigScreen$ = this.store.select(isBigScreen);
-		this.selectedTags$ = this.store.select(fromStore.selectedTags);
+		this.editDialogVisible$ = this.store.select(fromBookmark.isEditDialogVisible);
+		this.tagsVisible$ = this.store.select(fromBookmark.selectorTagCloudVisibility);
+		this.isBigScreen$ = this.store.select(fromCore.isBigScreen);
+		this.selectedTags$ = this.store.select(fromBookmark.selectedTags);
 
 		// todo : delete later
 		this.localStorage.clear(WolfBaseTableName.bookmarks);
@@ -40,37 +40,37 @@ export class BookmarksPageComponent {
 
 	onSearch(term: string): void {
 
-		this.store.dispatch(fromStore.search({ term }));
+		this.store.dispatch(fromBookmark.search({ term }));
 
 	}
 
 	toggleTagCloud(): void {
 
-		this.store.dispatch(fromStore.toggleSearchAndTagCloudVisibility());
+		this.store.dispatch(fromBookmark.toggleSearchAndTagCloudVisibility());
 
 	}
 
 	openAddDialog(): void {
 
-		this.store.dispatch(fromStore.openAddBookmarkDialog());
+		this.store.dispatch(fromBookmark.openAddBookmarkDialog());
 
 	}
 
 	closeAddDialog(): void {
 
-		this.store.dispatch(fromStore.closeEditBookmarkDialog());
+		this.store.dispatch(fromBookmark.closeEditBookmarkDialog());
 
 	}
 
 	onTagClicked(name: string): void {
 
-		this.store.dispatch(fromStore.clickTag({ name }));
+		this.store.dispatch(fromBookmark.clickTag({ name }));
 
 	}
 
 	emptyFilter(): void {
 
-		this.store.dispatch(fromStore.emptySelectedTags());
+		this.store.dispatch(fromBookmark.emptySelectedTags());
 
 	}
 

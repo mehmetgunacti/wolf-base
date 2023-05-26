@@ -1,5 +1,5 @@
 import { DARK_THEME, ThemeInfo, THEME_DARK, THEME_LIGHT } from 'lib';
-import { UIState } from 'store';
+import { UIState } from 'store/core';
 
 export function resolveTheme(name: string): ThemeInfo {
 

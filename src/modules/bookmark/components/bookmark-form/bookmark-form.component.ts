@@ -1,12 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { environment } from 'environments/environment';
 import { Bookmark, UUID } from 'lib';
 import { AutoComplete } from 'primeng/autocomplete';
 import { BehaviorSubject, Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
-import { formatCurrency } from '@angular/common';
-import { themeSet } from 'store';
 
 @Component({
 	selector: 'app-bookmark-form',

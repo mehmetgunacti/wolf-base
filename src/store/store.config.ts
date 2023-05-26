@@ -1,11 +1,11 @@
-import { Action, ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
-import * as fromEffects from 'store/effects';
-import * as fromReducers from 'store/reducers';
-import * as fromStates from 'store/states';
+import { Action, ActionReducer, ActionReducerMap, MetaReducer, combineReducers } from '@ngrx/store';
+import * as fromBookmark from './bookmark';
+import * as fromCore from './core';
+import { AppState } from './app.state';
 
-export function clearState(reducer: ActionReducer<fromStates.AppState>): ActionReducer<fromStates.AppState> {
+export function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
-	return function (state: fromStates.AppState | undefined, action: Action) {
+	return function (state: AppState | undefined, action: Action) {
 
 		// code here
 		return reducer(state, action);
@@ -14,7 +14,7 @@ export function clearState(reducer: ActionReducer<fromStates.AppState>): ActionR
 
 }
 
-export const metaReducers: MetaReducer<fromStates.AppState>[] = [
+export const metaReducers: MetaReducer<AppState>[] = [
 
 	clearState
 
@@ -22,18 +22,19 @@ export const metaReducers: MetaReducer<fromStates.AppState>[] = [
 
 export const effects = [
 
-	fromEffects.ConfEffects,
-	fromEffects.MenuEffects,
-	fromEffects.NotificationEffects,
-	fromEffects.NavigationEffects,
-	fromEffects.UIEffects
+	fromCore.ConfEffects,
+	fromCore.MenuEffects,
+	fromCore.NotificationEffects,
+	fromCore.NavigationEffects,
+	fromCore.UIEffects,
+
+	fromBookmark.EntitiesEffects
 
 ];
 
-export const reducers: ActionReducerMap<fromStates.AppState> = {
+export const reducers: ActionReducerMap<AppState> = {
 
-	conf: fromReducers.confReducer,
-	ui: fromReducers.uiReducer,
-	menu: fromReducers.menuReducer
+	core: combineReducers(fromCore.coreReducer),
+	bookmark: combineReducers(fromBookmark.bookmarkReducer)
 
 };

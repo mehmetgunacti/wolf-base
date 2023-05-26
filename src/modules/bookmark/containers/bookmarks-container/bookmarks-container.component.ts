@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
-import * as actions from 'modules/bookmark/store/actions';
-import * as selectors from 'modules/bookmark/store/selectors';
+import * as actions from 'store/bookmark/actions';
+import * as selectors from 'store/bookmark/selectors';
 import { Observable, tap } from 'rxjs';
-import { setSelectedBookmarksCount } from 'store';
+import { setSelectedBookmarksCount } from 'store/core';
 
 @Component({
 	selector: 'app-bookmarks-container',

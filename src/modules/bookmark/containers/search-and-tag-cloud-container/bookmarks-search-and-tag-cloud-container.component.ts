@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Tag } from 'lib';
-import * as fromStore from 'modules/bookmark/store';
-import { Observable, Subscription, combineLatest, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { Observable, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import * as fromStore from 'store/bookmark';
 
 @Component({
 	selector: 'app-bookmarks-search-and-tag-cloud-container',

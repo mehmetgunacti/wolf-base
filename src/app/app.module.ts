@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import * as store from 'store';
+import * as store from 'store/store.config';
 import { AppComponent } from './app.component';
 import * as config from './app.config';
 

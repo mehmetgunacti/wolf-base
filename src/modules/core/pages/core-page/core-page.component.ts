@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { ThemeInfo } from 'lib';
 import { MenuItem } from 'primeng/api';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
-import * as actions from 'store/actions';
-import * as selectors from 'store/selectors';
+import * as actions from 'store/core/actions';
+import * as selectors from 'store/core/selectors';
 import * as navItems from '../../navigation-menu-items';
 
 @Component({

@@ -2,7 +2,7 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, Input, OnInit } f
 import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
 import { combineLatest, filter, map, Observable, Subject } from 'rxjs';
-import * as fromStore from '../../store';
+import * as fromStore from 'store/bookmark';
 
 @Component({
 	selector: 'app-bookmark-edit-container',
@@ -16,7 +16,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 	tagInput = new Subject<string>();
 
 	constructor(
-		private store: Store<fromStore.BookmarksState>
+		private store: Store<fromStore.BookmarkModuleState>
 	) {
 		this.bookmark$ = store.select(fromStore.selectedBookmark);
 	}

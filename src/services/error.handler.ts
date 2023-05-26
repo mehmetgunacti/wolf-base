@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { errorNotification, ToastConfiguration } from 'lib';
-import { navigate, showNotification } from 'store';
+import { navigate, showNotification } from 'store/core';
 
 @Injectable()
 export class CustomErrorHandler implements ErrorHandler {
