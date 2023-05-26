@@ -125,4 +125,15 @@ app-bookmark {
 
 	}
 
+	#popularButton {
+
+		position				: absolute;
+		opacity					: var(--bookmark-edit-button-opacity);
+		transition				: var(--bookmark-hover-transition);
+		top						: 1rem;
+		right					: 1rem;
+		color 					: var(--text-color);
+
+	}
+
 }

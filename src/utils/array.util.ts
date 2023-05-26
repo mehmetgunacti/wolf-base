@@ -1,4 +1,4 @@
-export const toggleArrayItem = <T>(arr: T[], item: T): T[] => {
+export const toggleArrayItem = <T>(arr: T[] = [], item: T): T[] => {
 
 	if (arr.includes(item))
 		return arr.filter((element) => element !== item);
