@@ -10,6 +10,7 @@ export class BookmarkComponent {
 
 	@Input() item: Bookmark | null | undefined;
 	@Input() showDetails: boolean = false;
+	@Input() compact: boolean = false;
 
 	@Output() edit: EventEmitter<UUID> = new EventEmitter();
 	@Output() popular: EventEmitter<UUID> = new EventEmitter();

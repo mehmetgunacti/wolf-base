@@ -2,7 +2,9 @@
 
 	<div bookmark-image>
 
-		<img src="{{ item.image || 'assets/placeholder.png' }}"
+		<img
+			src="{{ item.image || 'assets/placeholder.png' }}"
+			[ngClass]="{ compact }"
 			title="{{ item.id }} : {{ item.title + '\r\n' + item.urls + '\r\n' }} #{{ item.clicks }}">
 
 	</div>

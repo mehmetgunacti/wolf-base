@@ -17,6 +17,14 @@ app-bookmark {
 
 	div[bookmark-image] {
 		@extend %flex-center-y;
+
+		& > img.compact {
+
+			width	: 55px;
+			height	: 55px;
+
+		}
+
 	}
 
 	div[bookmark-right] {
