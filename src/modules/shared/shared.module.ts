@@ -5,12 +5,14 @@ import { RouterModule } from '@angular/router';
 import { PrimeNgModule } from 'modules/primeng.module';
 import { PortalComponent, TagCloudComponent } from './components';
 import { SelectedTagsComponent } from './components/selected-tags/selected-tags.component';
+import { BookmarkComponent } from './components/bookmark/bookmark.component';
 
 @NgModule({
 	declarations: [
+		BookmarkComponent,
 		PortalComponent,
 		SelectedTagsComponent,
-		TagCloudComponent
+		TagCloudComponent,
 	],
 	imports: [
 		CommonModule,
@@ -19,6 +21,7 @@ import { SelectedTagsComponent } from './components/selected-tags/selected-tags.
 		ReactiveFormsModule
 	],
 	exports: [
+		BookmarkComponent,
 		PrimeNgModule,
 		PortalComponent,
 		SelectedTagsComponent,

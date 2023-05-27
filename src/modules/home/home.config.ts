@@ -1,7 +1,9 @@
+import { PopularBookmarksContainerComponent } from "./containers/popular-bookmarks-container/popular-bookmarks-container.component";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
 
 export const components = [
 
-	HomePageComponent
+	HomePageComponent,
+	PopularBookmarksContainerComponent
 
 ];
