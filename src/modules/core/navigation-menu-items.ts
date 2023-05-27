@@ -1,11 +1,11 @@
 import { MenuItem, PrimeIcons } from 'primeng/api';
 
-// export const miHome = (tx: any): MenuItem => ({
-// 	label: tx['home'],
-// 	icon: PrimeIcons.HOME,
-// 	routerLink: [''],
-// 	routerLinkActiveOptions: { exact: true }
-// });
+export const miHome: MenuItem = {
+	label: 'Home',
+	icon: PrimeIcons.HOME,
+	routerLink: [''],
+	routerLinkActiveOptions: { exact: true }
+};
 
 export const miBookmarks = (badge: string): MenuItem => ({
 	label: 'Bookmarks',

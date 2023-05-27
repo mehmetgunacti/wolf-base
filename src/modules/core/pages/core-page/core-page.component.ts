@@ -53,6 +53,7 @@ export class CorePageComponent implements OnDestroy {
 			map(([selected, total]) => {
 
 				const menuItems: Array<MenuItem> = new Array();
+				menuItems.push(navItems.miHome);
 				menuItems.push(navItems.miBookmarks(selected < total ? `${ selected}/${ total }` : `${ total }`));
 				menuItems.push(navItems.miSettings);
 				return menuItems;
