@@ -26,12 +26,14 @@ app-core-page {
 		grid-template-areas		: "logo right"
 								  "left left";
 		background-color		: var(--surface-c);
+		min-height				: 2 * $header-height;
 
 		@include md() {
 
 			grid-template-columns	: 60px 1fr 1fr;
 			grid-template-rows		: 1fr;
 			grid-template-areas		: "logo left right";
+			min-height				: $header-height;
 
 		}
 
