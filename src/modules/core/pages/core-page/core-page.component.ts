@@ -5,6 +5,7 @@ import { MenuItem } from 'primeng/api';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 import * as actions from 'store/core/actions';
 import * as selectors from 'store/core/selectors';
+import * as fromBookmark from 'store/bookmark/selectors';
 import * as navItems from '../../navigation-menu-items';
 
 @Component({
@@ -45,8 +46,8 @@ export class CorePageComponent implements OnDestroy {
 		);
 
 		this.navMenuItems$ = combineLatest([
-			store.select(selectors.selectedBookmarksCount),
-			store.select(selectors.totalBookmarksCount)
+			store.select(fromBookmark.filteredBookmarkCount),
+			store.select(fromBookmark.bookmarksCount)
 		]).pipe(
 
 			map(([selected, total]) => {

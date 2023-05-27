@@ -61,6 +61,7 @@ export const searchTerm = createSelector(
 
 );
 
+// move to entities.selector.ts
 export const filteredBookmarks = createSelector(
 	bookmarksArray,
 	selectedTags,
@@ -98,6 +99,13 @@ const arrOfFilteredTagNames = createSelector(
 
 	filteredBookmarks,
 	(bookmarks): string[][] => bookmarks.map(b => b.tags)
+
+);
+
+export const filteredBookmarkCount = createSelector(
+
+	filteredBookmarks,
+	(bookmarks: Bookmark[]) => bookmarks.length
 
 );
 

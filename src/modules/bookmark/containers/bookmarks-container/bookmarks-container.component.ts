@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
+import { Observable } from 'rxjs';
 import * as actions from 'store/bookmark/actions';
 import * as selectors from 'store/bookmark/selectors';
-import { Observable, tap } from 'rxjs';
-import { setSelectedBookmarksCount } from 'store/core';
 
 @Component({
 	selector: 'app-bookmarks-container',
@@ -19,9 +18,7 @@ export class BookmarksContainerComponent implements OnInit {
 		private store: Store
 	) {
 
-		this.bookmarks$ = store.select(selectors.filteredBookmarks).pipe(
-			tap(bookmarks => store.dispatch(setSelectedBookmarksCount({ count: bookmarks.length })))
-		);
+		this.bookmarks$ = store.select(selectors.filteredBookmarks);
 
 	}
 
