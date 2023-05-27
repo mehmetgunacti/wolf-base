@@ -41,11 +41,6 @@ app-core-page {
 
 			grid-area	: logo;
 			@extend %flex-center-center;
-			& > img {
-
-				display: none;
-
-			}
 
 		}
 
