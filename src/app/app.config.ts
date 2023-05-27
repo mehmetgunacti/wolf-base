@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { DEFAULT_THEME, LocalStorageService } from 'lib';
 import { MessageService } from 'primeng/api';
 import { CustomErrorHandler, localStorageServiceFactory, remoteStorageServiceFactory } from 'services';
-import { AppState } from 'store/app.state';
 import * as actions from 'store/core/actions';
 import { resolveTheme } from 'utils';
 
@@ -19,7 +18,7 @@ export const routes: Routes = [
 
 ];
 
-const appInitializerFactory = (store: Store<AppState>) => {
+const appInitializerFactory = (store: Store) => {
 
 	return () => {
 

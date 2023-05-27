@@ -15,6 +15,6 @@ export const confReducer: ActionReducer<fromStates.ConfState, Action> = createRe
 
 	}),
 
-	on(fromActions.confChanged, (state, { configuration }) => ({ ...configuration }))
+	on(fromActions.confChanged, (state, { configuration }) => ({ ...configuration, initialized: true }))
 
 );

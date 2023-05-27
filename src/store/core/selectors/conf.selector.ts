@@ -9,6 +9,13 @@ export const confState = createSelector(
 
 );
 
+export const isInitialized = createSelector(
+
+	confState,
+	(state: ConfState) => state.initialized
+
+);
+
 export const isSidebarVisible = createSelector(
 
 	confState,

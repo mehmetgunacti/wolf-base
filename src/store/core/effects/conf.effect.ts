@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { Configuration, LocalStorageService } from 'lib';
-import { map, tap } from 'rxjs/operators';
+import { map, skip, tap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 
 @Injectable()
