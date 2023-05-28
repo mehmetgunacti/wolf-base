@@ -38,6 +38,6 @@
 
 	</div>
 	<a href="javascript:void(0)" id="popularButton" title="Toggle 'popular'" (click)="onPopular()"><i [ngClass]="item.tags.includes('popular') ? 'pi pi-heart-fill' : 'pi pi-heart'"></i></a>
-	<a href="javascript:void(0)" id="editButton" title="Edit" (click)="onEdit()"><i class="pi pi-file-edit"></i></a>
+	<a *ngIf="editable" href="javascript:void(0)" id="editButton" title="Edit" (click)="onEdit()"><i class="pi pi-file-edit"></i></a>
 
 </ng-container>
