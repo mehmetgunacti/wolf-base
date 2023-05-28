@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { Bookmark, LocalStorageService } from 'lib';
+import { Bookmark, LocalStorageService, POPULAR } from 'lib';
 import { of } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/core';
@@ -195,17 +195,17 @@ export class EntitiesEffects {
 
 	);
 
-	// bookmarksReloadAllBookmarks$ = createEffect(
+	bookmarkTogglePopularTag$ = createEffect(
 
-	// 	() => this.actions$.pipe(
+		() => this.actions$.pipe(
 
-	// 		ofType(fromActions.bookmarksSaveSuccess),
-	// 		tap(() => console.log('reloading all')),
-	// 		map(() => fromActions.bookmarksLoadAll())
+			ofType(fromActions.togglePopular),
+			tap(({ id }) => this.localStorage.bookmarks.toggleTag(id, POPULAR))
 
-	// 	)
+		),
+		{ dispatch: false }
 
-	// );
+	);
 
 	bookmarksDelete$ = createEffect(
 

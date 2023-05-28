@@ -4,6 +4,7 @@ import { BookmarksTable } from 'lib/services/localstorage/local-storage-table.in
 import { v4 as uuidv4 } from 'uuid';
 import { EntityTableImpl } from './entity.table';
 import { WolfBaseDB } from '../wolfbase.database';
+import { toggleArrayItem } from 'utils';
 
 export class BookmarksTableImpl extends EntityTableImpl<Bookmark> implements BookmarksTable {
 
@@ -50,6 +51,19 @@ export class BookmarksTableImpl extends EntityTableImpl<Bookmark> implements Boo
 				// bookmark.syncData.outgoing.clicks = (bookmark.syncData.outgoing.clicks ?? 0) + 1;
 
 			});
+
+	}
+
+	async toggleTag(id: UUID, name: string): Promise<void> {
+
+		await this.db.bookmarks
+		.where({ id })
+		.modify((bookmark: Bookmark): void => {
+
+			bookmark.tags = toggleArrayItem(bookmark.tags, name);
+
+		});
+
 	}
 
 }
