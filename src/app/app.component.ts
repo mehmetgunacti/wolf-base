@@ -29,7 +29,7 @@ export class AppComponent {
 			switchMap((value: boolean) => {
 
 				if (value)
-					return of(true).pipe(delay(1500));
+					return of(true).pipe(delay(2500));
 				return of(false);
 
 			}),
