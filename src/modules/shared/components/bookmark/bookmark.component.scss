@@ -1,5 +1,6 @@
 app-bookmark {
 
+	@extend %component-shadow;
 	--bookmark-hover-transition		: all ease-in-out 250ms;
 	--bookmark-edit-button-opacity	: 0;
 
