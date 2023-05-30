@@ -1,16 +1,4 @@
-<div class="p-selectbutton p-buttonset">
-	<button type="button"
-			class="p-button p-button-icon-only"
-			[ngClass]="{'p-highlight': theme?.isDark }"
-			(click)="setDarkTheme()"
-			(keydown.enter)="setDarkTheme()">
-		<i class="pi pi-moon"></i>
-	</button>
-	<button type="button"
-			class="p-button p-button-icon-only"
-			[ngClass]="{'p-highlight': !theme?.isDark}"
-			(click)="setLightTheme()"
-			(keydown.enter)="setLightTheme()">
-		<i class="pi pi-sun"></i>
-	</button>
-</div>
+<p-button
+	[icon]="theme === 'dark' ? 'pi pi-sun': 'pi pi-moon'"
+	(click)="setTheme()"
+	[title]="'Switch to ' + (theme === 'dark' ? 'light': 'dark') + ' theme'"></p-button>

@@ -1,11 +1,8 @@
-import { APP_INITIALIZER, ErrorHandler, InjectionToken, Provider } from '@angular/core';
+import { ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { DEFAULT_THEME, LocalStorageService } from 'lib';
+import { LocalStorageService } from 'lib';
 import { MessageService } from 'primeng/api';
 import { CustomErrorHandler, localStorageServiceFactory, remoteStorageServiceFactory } from 'services';
-import * as actions from 'store/core/actions';
-import { resolveTheme } from 'utils';
 
 export const routes: Routes = [
 
@@ -18,33 +15,33 @@ export const routes: Routes = [
 
 ];
 
-const appInitializerFactory = (store: Store) => {
+// const appInitializerFactory = (store: Store) => {
 
-	return () => {
+// 	return () => {
 
 		// set theme
-		const lsTheme = localStorage.getItem('theme');
-		const newTheme = !!lsTheme ? resolveTheme(lsTheme) : DEFAULT_THEME;
-		store.dispatch(actions.themeSet({ newTheme }));
+		// const lsTheme = localStorage.getItem('theme');
+		// const newTheme = !!lsTheme ? resolveTheme(lsTheme) : DEFAULT_THEME;
+		// store.dispatch(actions.themeSet({ newTheme }));
 
-	};
+// 	};
 
-}
+// }
 
 export const LOCAL_STORAGE_SERVICE = new InjectionToken<LocalStorageService>('LocalStorageService');
 export const REMOTE_STORAGE_SERVICE = new InjectionToken<LocalStorageService>('RemoteStorageService');
 
 export const providers: Provider[] = [
 
-	{
+	// {
 
-		// when Angular initializes
-		provide: APP_INITIALIZER,
-		useFactory: appInitializerFactory,
-		multi: true,
-		deps: [Store]
+	// 	// when Angular initializes
+	// 	provide: APP_INITIALIZER,
+	// 	useFactory: appInitializerFactory,
+	// 	multi: true,
+	// 	deps: [Store]
 
-	},
+	// },
 	{
 
 		// catch errors globally

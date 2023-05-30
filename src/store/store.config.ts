@@ -26,6 +26,7 @@ export const effects = [
 	fromCore.NotificationEffects,
 	fromCore.NavigationEffects,
 	fromCore.UIEffects,
+	fromCore.ThemeEffects,
 
 	fromBookmark.EntitiesEffects
 

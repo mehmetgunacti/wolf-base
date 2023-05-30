@@ -6,14 +6,14 @@ import * as fromStates from '../states';
 export const confReducer: ActionReducer<fromStates.ConfState, Action> = createReducer(
 
 	fromStates.initialConfState,
-	on(fromActions.confSetAll, (state, params) => {
+	// on(fromActions.confSetAll, (state, params) => {
 
-		return produce(
-			state,
-			draft => draft
-		);
+	// 	return produce(
+	// 		state,
+	// 		draft => draft
+	// 	);
 
-	}),
+	// }),
 
 	on(fromActions.confChanged, (state, { configuration }) => ({ ...configuration, initialized: true }))
 

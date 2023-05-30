@@ -1,11 +1,11 @@
 import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ThemeInfo } from 'lib';
+import { THEME } from 'lib';
 import { MenuItem } from 'primeng/api';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
+import * as fromBookmark from 'store/bookmark/selectors';
 import * as actions from 'store/core/actions';
 import * as selectors from 'store/core/selectors';
-import * as fromBookmark from 'store/bookmark/selectors';
 import * as navItems from '../../navigation-menu-items';
 
 @Component({
@@ -15,7 +15,7 @@ import * as navItems from '../../navigation-menu-items';
 export class CorePageComponent implements OnDestroy {
 
 	navMenuItems$: Observable<MenuItem[]>;
-	theme$: Observable<ThemeInfo>;
+	theme$: Observable<THEME>;
 
 	subscriptions = new Subscription();
 
@@ -61,7 +61,7 @@ export class CorePageComponent implements OnDestroy {
 			})
 
 		);
-		this.theme$ = store.select(selectors.themeInfo);
+		this.theme$ = store.select(selectors.theme);
 
 	}
 
@@ -78,9 +78,9 @@ export class CorePageComponent implements OnDestroy {
 
 	}
 
-	onThemeChange(newTheme: ThemeInfo): void {
+	onThemeChange(theme: THEME): void {
 
-		this.store.dispatch(actions.themeSet({ newTheme }));
+		this.store.dispatch(actions.themeSet({ theme }));
 
 	}
 

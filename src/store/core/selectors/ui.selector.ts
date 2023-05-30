@@ -10,13 +10,6 @@ export const uiState = createSelector(
 
 );
 
-export const themeInfo = createSelector(
-
-	uiState,
-	(state: UIState) => state.theme.info
-
-);
-
 export const isBigScreen = createSelector(
 
 	uiState,

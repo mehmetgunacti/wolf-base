@@ -3,10 +3,10 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, 
 import { FormControl } from '@angular/forms';
 import { CroppieOptions } from 'croppie';
 import { environment } from 'environments/environment';
-import { ScriptLoaderService } from 'modules/shared/services/script-loader.service';
-import { combineLatest, Observable, Subscription, timer } from 'rxjs';
-import { delay, distinctUntilChanged, filter, tap } from 'rxjs/operators';
-import { createCroppieWrapper, CroppieWrapper } from './croppie.model';
+import { Observable, Subscription, combineLatest, timer } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { ScriptLoaderService } from 'services';
+import { CroppieWrapper, createCroppieWrapper } from './croppie.model';
 
 const croppieOptions: CroppieOptions = {
 	viewport: {
@@ -57,8 +57,8 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 
 			combineLatest([
 
-				this.scriptLoader.loadScript(environment.croppie.scriptUrl), // Observable<void>
-				this.scriptLoader.loadCSS(environment.croppie.styleUrl), // Observable<void>
+				this.scriptLoader.appendScript2Body(environment.croppie.scriptUrl), // Observable<void>
+				this.scriptLoader.appendLink2Head(environment.croppie.styleUrl), // Observable<void>
 				timer(600)
 
 			]).subscribe({

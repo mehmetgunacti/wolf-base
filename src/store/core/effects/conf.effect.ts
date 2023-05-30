@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { Configuration, LocalStorageService } from 'lib';
-import { map, skip, tap } from 'rxjs/operators';
+import { Configuration, LocalStorageService, THEME } from 'lib';
+import { map, tap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 
 @Injectable()
@@ -16,6 +16,18 @@ export class ConfEffects {
 		() => this.localStorage.configuration.dump$().pipe(
 			map((configuration: Configuration) => fromActions.confChanged({ configuration }))
 		)
+
+	);
+
+	setTheme$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(fromActions.themeSet),
+			tap(({ theme }) => this.localStorage.configuration.setTheme(theme))
+
+		),
+		{ dispatch: false }
 
 	);
 

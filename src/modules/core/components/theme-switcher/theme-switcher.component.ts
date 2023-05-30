@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { THEME_DARK, THEME_LIGHT, ThemeInfo } from 'lib/constants';
+import { THEME } from 'lib/constants';
 
 @Component({
 	selector: 'app-theme-switcher',
@@ -7,20 +7,16 @@ import { THEME_DARK, THEME_LIGHT, ThemeInfo } from 'lib/constants';
 })
 export class ThemeSwitcherComponent {
 
-	@Input() theme: ThemeInfo | null | undefined;
+	@Input() theme: THEME | null | undefined;
 
-	@Output() newTheme = new EventEmitter<ThemeInfo>();
+	@Output() themeChange = new EventEmitter<THEME>();
 
+	setTheme(): void {
 
-	setDarkTheme(): void {
-
-		this.newTheme.emit(THEME_DARK);
-
-	}
-
-	setLightTheme(): void {
-
-		this.newTheme.emit(THEME_LIGHT);
+		if (this.theme === 'dark')
+			this.themeChange.emit('light');
+		else
+			this.themeChange.emit('dark');
 
 	}
 

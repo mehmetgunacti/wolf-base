@@ -27,7 +27,7 @@
 		<p-panelMenu [model]="(navMenuItems$ | async) || []"></p-panelMenu>
 		<div bottom-buttons>
 			<app-theme-switcher [theme]="theme$ | async"
-								(newTheme)="onThemeChange($event)"></app-theme-switcher>
+								(themeChange)="onThemeChange($event)"></app-theme-switcher>
 		</div>
 
 	</nav>

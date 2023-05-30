@@ -22,3 +22,10 @@ export const isSidebarVisible = createSelector(
 	(state: ConfState) => state.sidebarVisible
 
 );
+
+export const theme = createSelector(
+
+	confState,
+	(state: ConfState) => state.theme
+
+);
