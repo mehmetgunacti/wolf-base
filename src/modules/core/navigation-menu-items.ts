@@ -9,7 +9,7 @@ export const miHome: MenuItem = {
 
 export const miBookmarks = (badge: string): MenuItem => ({
 	label: 'Bookmarks',
-	icon: PrimeIcons.BOOKMARK_FILL,
+	icon: PrimeIcons.BOOKMARK,
 	routerLink: ['/bookmarks'],
 	badge,
 	styleClass: 'menuBadge'
