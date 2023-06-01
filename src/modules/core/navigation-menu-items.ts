@@ -11,6 +11,7 @@ export const miBookmarks = (badge: string): MenuItem => ({
 	label: 'Bookmarks',
 	icon: PrimeIcons.BOOKMARK,
 	routerLink: ['/bookmarks'],
+	queryParams: { tags: 'popular' },
 	badge,
 	styleClass: 'menuBadge'
 });

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { fadeOutTrigger } from 'modules';
-import { Observable, defaultIfEmpty, delay, filter, finalize, of, switchMap, take, takeUntil, takeWhile, tap } from 'rxjs';
+import { Observable, delay, of, switchMap, takeWhile, tap } from 'rxjs';
 import { isInitialized } from 'store/core';
 
 @Component({
