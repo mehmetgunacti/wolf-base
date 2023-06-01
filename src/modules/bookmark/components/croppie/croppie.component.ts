@@ -5,8 +5,8 @@ import { CroppieOptions } from 'croppie';
 import { environment } from 'environments/environment';
 import { Observable, Subscription, combineLatest, timer } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { ScriptLoaderService } from 'services';
 import { CroppieWrapper, createCroppieWrapper } from './croppie.model';
+import { DOMService } from 'services/dom.service';
 
 const croppieOptions: CroppieOptions = {
 	viewport: {
@@ -42,7 +42,7 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 
 	constructor(
 		@Inject(DOCUMENT) private readonly document: Document,
-		private scriptLoader: ScriptLoaderService
+		private domService: DOMService
 	) {
 
 		this.croppieWrapper = createCroppieWrapper();
@@ -57,9 +57,9 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 
 			combineLatest([
 
-				this.scriptLoader.appendScript2Body(environment.croppie.scriptUrl), // Observable<void>
-				this.scriptLoader.appendLink2Head(environment.croppie.styleUrl), // Observable<void>
-				timer(600)
+				this.domService.appendScriptToBody(environment.croppie.scriptUrl), // Observable<number>
+				this.domService.appendLinkToHead(environment.croppie.styleUrl), // Observable<number>
+				timer(500)
 
 			]).subscribe({
 
@@ -70,7 +70,7 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 						this.croppieWrapper.init(croppie, el);
 						this.croppieWrapper.bind(this.wControl.value);
 					} else
-						throw new Error('Croppie not available in windows scope');
+						throw new Error('Croppie not available in Window scope');
 				},
 				error: (err) => console.error(err)
 

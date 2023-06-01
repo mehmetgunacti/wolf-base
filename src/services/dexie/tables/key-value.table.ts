@@ -23,6 +23,21 @@ export class KeyValueTableImpl implements KeyValueTable {
 
 	}
 
+	async toggle(key: string): Promise<void> {
+
+		await this.db.transaction(
+			"rw",
+			this.db.table(this.tablename),
+			async () => {
+
+				const currentValue = await this.get<boolean>(key);
+				await this.db.table(this.tablename).put(!currentValue, key);
+
+			}
+		);
+
+	}
+
 	get$<T>(key: string): Observable<T> {
 
 		return fromEventPattern(
@@ -46,7 +61,7 @@ export class KeyValueTableImpl implements KeyValueTable {
 	}
 
 	async dump<T>(): Promise<T> {
-		
+
 		const table = this.db.table(this.tablename);
 		const data = table.toCollection();
 		const result: Record<string, T> = {};

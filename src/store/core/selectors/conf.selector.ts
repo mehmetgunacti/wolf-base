@@ -23,9 +23,9 @@ export const isSidebarVisible = createSelector(
 
 );
 
-export const theme = createSelector(
+export const isThemeDark = createSelector(
 
 	confState,
-	(state: ConfState) => state.theme
+	(state: ConfState) => state.darkTheme
 
 );

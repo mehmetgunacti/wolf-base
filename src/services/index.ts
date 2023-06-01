@@ -1,5 +1,6 @@
 export * from './backend.service';
 export * from './dexie';
+export * from './dom.service';
 export * from './error.handler';
 export * from './firestore';
-export * from './script-loader.service';
+export * from './theme.service';

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { THEME } from 'lib/constants';
 
 @Component({
 	selector: 'app-theme-switcher',
@@ -7,16 +6,13 @@ import { THEME } from 'lib/constants';
 })
 export class ThemeSwitcherComponent {
 
-	@Input() theme: THEME | null | undefined;
+	@Input() isDark: boolean | null | undefined;
 
-	@Output() themeChange = new EventEmitter<THEME>();
+	@Output() switchTheme = new EventEmitter<void>();
 
-	setTheme(): void {
+	changeTheme(): void {
 
-		if (this.theme === 'dark')
-			this.themeChange.emit('light');
-		else
-			this.themeChange.emit('dark');
+		this.switchTheme.emit();
 
 	}
 

@@ -11,6 +11,6 @@ export const initialConfState: ConfState = {
 	initialized: false,
 	syncWorkerActive: false,
 	sidebarVisible: true,
-	theme: 'dark'
+	darkTheme: true
 
 };

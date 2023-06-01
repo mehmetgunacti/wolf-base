@@ -1,12 +1,12 @@
-import { ConfigurationTable } from 'lib/services/localstorage/local-storage-table.interface';
-import { KeyValueTableImpl } from './key-value.table';
-import { CONF_KEYS, Configuration, THEME } from 'lib';
-import { Observable, fromEventPattern } from 'rxjs';
 import { liveQuery } from 'dexie';
+import { CONF_KEYS, Configuration } from 'lib';
+import { ConfigurationTable } from 'lib/services/localstorage/local-storage-table.interface';
+import { Observable, fromEventPattern } from 'rxjs';
+import { KeyValueTableImpl } from './key-value.table';
 
 export class ConfigurationTableImpl implements ConfigurationTable {
 
-	constructor(private kvTable: KeyValueTableImpl) {}
+	constructor(private kvTable: KeyValueTableImpl) { }
 
 	async getSyncWorkerActive(): Promise<boolean> {
 
@@ -20,9 +20,9 @@ export class ConfigurationTableImpl implements ConfigurationTable {
 
 	}
 
-	async getTheme(): Promise<THEME> {
+	async isDarkTheme(): Promise<boolean> {
 
-		return await this.kvTable.get<THEME>(CONF_KEYS.theme);
+		return await this.kvTable.get<boolean>(CONF_KEYS.darkTheme);
 
 	}
 
@@ -38,14 +38,20 @@ export class ConfigurationTableImpl implements ConfigurationTable {
 
 	}
 
-	async setTheme(theme: THEME): Promise<void> {
+	async setDarkTheme(dark: boolean): Promise<void> {
 
-		return await this.kvTable.set(CONF_KEYS.theme, theme);
+		return await this.kvTable.set(CONF_KEYS.darkTheme, dark);
+
+	}
+
+	async toggleTheme(): Promise<void> {
+		
+		return await this.kvTable.toggle(CONF_KEYS.darkTheme);
 
 	}
 
 	async dump(): Promise<Configuration> {
-		
+
 		return await this.kvTable.dump<Configuration>();
 
 	}
@@ -63,7 +69,7 @@ export class ConfigurationTableImpl implements ConfigurationTable {
 			(handler, unsubscribe) => unsubscribe()
 
 		);
-		
+
 	}
 
 }

@@ -1,4 +1,4 @@
-import { THEME, UUID } from 'lib/constants';
+import { UUID } from 'lib/constants';
 import { Bookmark, Configuration, EntityBase } from 'lib/models';
 import { Observable } from 'rxjs';
 
@@ -43,11 +43,12 @@ export interface ConfigurationTable {
 
 	getSyncWorkerActive(): Promise<boolean>;
 	getSidebarVisible(): Promise<boolean>;
-	getTheme(): Promise<THEME>;
+	isDarkTheme(): Promise<boolean>;
 
 	setSyncWorkerActive(active: boolean): Promise<void>;
 	setSidebarVisible(visible: boolean): Promise<void>;
-	setTheme(theme: THEME): Promise<void>;
+	setDarkTheme(dark: boolean): Promise<void>;
+	toggleTheme(): Promise<void>;
 
 	dump(): Promise<Configuration>;
 	dump$(): Observable<Configuration>;
