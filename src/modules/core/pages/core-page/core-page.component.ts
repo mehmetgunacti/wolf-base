@@ -44,17 +44,15 @@ export class CorePageComponent implements OnDestroy {
 
 		);
 
-		this.navMenuItems$ = combineLatest([
-			store.select(fromBookmark.filteredBookmarkCount),
-			store.select(fromBookmark.bookmarksCount)
-		]).pipe(
+		this.navMenuItems$ = this.store.select(fromBookmark.menuBookmarkBadge).pipe(
 
-			map(([selected, total]) => {
+			map(badge => {
 
 				const menuItems: Array<MenuItem> = new Array();
 				menuItems.push(navItems.miHome);
-				menuItems.push(navItems.miBookmarks(selected < total ? `${selected}/${total}` : `${total}`));
+				menuItems.push(navItems.miBookmarks(badge));
 				menuItems.push(navItems.miSettings);
+				menuItems.push(navItems.miSync);
 				return menuItems;
 
 			})
