@@ -22,6 +22,12 @@ export const miSettings: MenuItem = {
 	routerLink: ['/settings']
 };
 
+export const miSync: MenuItem = {
+	label: 'Synchronize',
+	icon: PrimeIcons.SYNC,
+	routerLink: ['/sync']
+};
+
 // export const miNotes: MenuItem = {
 // 	label: 'Notes',
 // 	icon: 'pi pi-fw fa-bookmark',

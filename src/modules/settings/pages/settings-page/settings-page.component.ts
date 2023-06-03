@@ -1,9 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { LocalStorageService, WolfBaseTableName } from 'lib';
+import { environment } from 'environments/environment';
+import { Bookmark, FirestoreTool, LocalStorageService, RemoteCollection, UUID, WolfBaseTableName } from 'lib';
 import { IDBase } from 'lib/models/id-base.model';
 import { Observable, map, switchMap } from 'rxjs';
+import { BookmarksFirestoreCollection } from 'services';
+import { SyncService } from 'services/sync.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
 	selector: 'app-settings-page',
@@ -17,6 +21,18 @@ export class SettingsPageComponent {
 	numberOfItems$: Observable<number>;
 
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
+	private syncService: SyncService = inject(SyncService);
+
+	private firestore: FirestoreTool = new FirestoreTool(
+		{
+
+			apiKey: environment.firebase.apiKey,
+			baseURL: environment.firebase.baseURL,
+			projectId: environment.firebase.projectId
+		
+		}
+	);
+	
 
 	constructor() {
 
@@ -36,6 +52,40 @@ export class SettingsPageComponent {
 			map(dump => Object.keys(dump).length)
 
 		);
+
+	}
+
+	async increase(): Promise<void> {
+
+		const remote: BookmarksFirestoreCollection = new BookmarksFirestoreCollection(this.firestore);
+		// remote.create(this.getBookmark());
+		// const id: UUID = uuidv4();
+		console.log(new Date().toISOString());
+		const clicks: number = await this.firestore.increase(RemoteCollection.bookmarks, 'clicks', "24c2de96-21b3-42dc-9658-b3aa86081893", 5);
+
+		console.log(await remote.get("24c2de96-21b3-42dc-9658-b3aa86081893"));
+
+		this.syncService.trigger();
+
+	}
+
+	getBookmark(): Bookmark {
+
+		return {
+			"id": "24c2de96-21b3-42dc-9658-b3aa86081893",
+			"name": "medium.com",
+			"title": "Get rid of Firestore",
+			"created": new Date().toISOString(),
+			"tags": [
+				"angular",
+				"firebase"
+			],
+			"image": "",
+			"clicks": 0,
+			"urls": [
+				"https://medium.com/@ashu1461/how-to-get-rid-of-huge-firestore-bundle-size-ed52a9dcd64b"
+			]
+		};
 
 	}
 
