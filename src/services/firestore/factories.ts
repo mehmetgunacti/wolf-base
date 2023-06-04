@@ -1,14 +1,10 @@
 import { FirestoreTool } from 'lib/utils';
 import { environment } from 'environments/environment';
 import {
-	BookmarksFirestoreCollection,
-	// NotesFirestoreCollection,
-	// TasksFirestoreCollection,
-	// WordsFirestoreCollection,
-	ClicksRemoteStorageCollection
+	BookmarksFirestoreCollection
 } from './collections';
 import { FirestoreRemoteStorageService } from './firestore.service';
-import { BookmarksCollection, ClicksCollection } from 'lib';
+import { BookmarksCollection } from 'lib';
 
 export const firestoreFactory = (): FirestoreTool => {
 
@@ -25,11 +21,7 @@ export const remoteStorageServiceFactory = (): FirestoreRemoteStorageService => 
 	const firestore: FirestoreTool = firestoreFactory();
 	return new FirestoreRemoteStorageService(
 		firestore,
-		bookmarksCollectionFactory(),
-		// notesCollectionFactory(),
-		// tasksCollectionFactory(),
-		// wordsCollectionFactory(),
-		clicksCollectionFactory()
+		bookmarksCollectionFactory()
 	);
 
 };
@@ -38,33 +30,5 @@ export const bookmarksCollectionFactory = (): BookmarksCollection => {
 
 	const firestore = firestoreFactory();
 	return new BookmarksFirestoreCollection(firestore);
-
-};
-
-// export const notesCollectionFactory = (): INotesCollection => {
-
-// 	const firestore = firestoreFactory();
-// 	return new NotesFirestoreCollection(firestore);
-
-// };
-
-// export const tasksCollectionFactory = (): ITasksCollection => {
-
-// 	const firestore = firestoreFactory();
-// 	return new TasksFirestoreCollection(firestore);
-
-// };
-
-// export const wordsCollectionFactory = (): IWordsCollection => {
-
-// 	const firestore = firestoreFactory();
-// 	return new WordsFirestoreCollection(firestore);
-
-// };
-
-export const clicksCollectionFactory = (): ClicksCollection => {
-
-	const firestore = firestoreFactory();
-	return new ClicksRemoteStorageCollection(firestore);
 
 };

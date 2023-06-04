@@ -1,11 +1,11 @@
-import { RemoteCollection, IKnobaEntity, UUID } from 'lib/constants';
-import { FirestoreTool, IFirestoreDocument, IFirestoreData } from 'lib/utils';
-import { EntityBase } from 'lib/models';
 import { RemoteStorageCollection } from 'lib';
+import { RemoteCollection, UUID } from 'lib/constants';
+import { EntityBase } from 'lib/models';
+import { FirestoreTool, IFirestoreData, IFirestoreDocument } from 'lib/utils';
 
 export abstract class AbstractFirestoreCollection<T extends EntityBase> implements RemoteStorageCollection<T> {
 
-	protected pageSize = '10000';
+	protected pageSize = '10000'; // high number => download all
 
 	constructor(
 		protected firestore: FirestoreTool,
@@ -18,21 +18,20 @@ export abstract class AbstractFirestoreCollection<T extends EntityBase> implemen
 			collection: this.remoteCollection,
 			queryParameters: { documentId: item.id }
 		});
-		const requestBody: IFirestoreDocument = this.createRequestBody(item);
-
+		const requestBody: IFirestoreDocument<T> = this.createRequestBody(item);
 		const response: IFirestoreData<T> = await this.firestore.create(url, requestBody);
 		return this.convert(response);
 
 	}
 
-	async update(id: UUID, item: Partial<IKnobaEntity>): Promise<T> {
+	async update(id: UUID, item: Partial<T>): Promise<T> {
 
 		const url = this.firestore.createURL({
 			collection: this.remoteCollection,
 			document: id
 		});
 		const mask = this.createUpdateMask(item);
-		const requestBody: IFirestoreDocument = this.createRequestBody(item);
+		const requestBody: IFirestoreDocument<T> = this.createRequestBody(item);
 
 		const response: IFirestoreData<T> = await this.firestore.update(url, mask, requestBody);
 		return this.convert(response);
@@ -86,7 +85,7 @@ export abstract class AbstractFirestoreCollection<T extends EntityBase> implemen
 
 			this.firestore.createURL({
 				collection: this.remoteCollection,
-				queryParameters: { pageSize: this.pageSize, 'mask.fieldPaths': 'dummyFieldNameThatDoesntExist' }
+				queryParameters: { pageSize: this.pageSize, 'mask.fieldPaths': 'dummyField' }
 			})
 
 		);
@@ -95,8 +94,9 @@ export abstract class AbstractFirestoreCollection<T extends EntityBase> implemen
 
 	}
 
-	protected abstract createRequestBody(click: Partial<IKnobaEntity>): IFirestoreDocument;
-	protected abstract createUpdateMask(item: Partial<IKnobaEntity>): string;
+	protected abstract createRequestBody(item: T): IFirestoreDocument<T>;
+	protected abstract createRequestBody(item: Partial<T>): IFirestoreDocument<T>;
+	protected abstract createUpdateMask(item: Partial<T>): string;
 
 	private convert(item: IFirestoreData<T>): T {
 

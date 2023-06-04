@@ -48,7 +48,7 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 		this.name.setValue(bookmark.name, { emitEvent: false });
 		this.title.setValue(bookmark.title, { emitEvent: false });
 		this.tags.setValue(bookmark.tags, { emitEvent: false });
-		this.image.setValue(bookmark.image, { emitEvent: false });
+		this.image.setValue(bookmark.image ?? null, { emitEvent: false });
 		this.clicks.setValue(bookmark.clicks, { emitEvent: false });
 
 		// set urls

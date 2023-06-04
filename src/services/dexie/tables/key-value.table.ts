@@ -25,16 +25,7 @@ export class KeyValueTableImpl implements KeyValueTable {
 
 	async toggle(key: string): Promise<void> {
 
-		await this.db.transaction(
-			"rw",
-			this.db.table(this.tablename),
-			async () => {
-
-				const currentValue = await this.get<boolean>(key);
-				await this.db.table(this.tablename).put(!currentValue, key);
-
-			}
-		);
+		await this.db.table(this.tablename).where(':id').equals(key).modify((v, c) => { c.value = !v; });
 
 	}
 

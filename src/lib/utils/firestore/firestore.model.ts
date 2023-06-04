@@ -1,6 +1,7 @@
+import { EntityBase } from 'lib/models';
 import { FIRESTORE_VALUE } from './firestore.constant';
 
-export interface IFirestoreData<T> {
+export interface IFirestoreData<T extends EntityBase> {
 
 	id: string;
 	data: T;
@@ -9,7 +10,7 @@ export interface IFirestoreData<T> {
 
 }
 
-export interface IFirestoreURLConfig {
+export interface IFirestoreURLConfig<T extends EntityBase> {
 
 	baseUrl?: string;
 	projectId?: string;
@@ -17,21 +18,21 @@ export interface IFirestoreURLConfig {
 	document?: string;
 	command?: string;
 	apiKey?: string;
-	queryParameters?: { [key: string]: string };
+	queryParameters?: Partial<Record<keyof T | 'documentId' | 'key' | 'pageSize' | 'mask.fieldPaths', string>>;
 
 }
 
-export interface IFirestoreDocuments {
+export interface IFirestoreDocuments<T extends EntityBase> {
 
-	documents: IFirestoreDocument[];
+	documents: IFirestoreDocument<T>[];
 	nextPageToken: string;
 
 }
 
-export interface IFirestoreDocument {
+export interface IFirestoreDocument<T extends EntityBase> {
 
 	name?: string;
-	fields?: Record<string, FIRESTORE_VALUE>;
+	fields?: Record<keyof T, FIRESTORE_VALUE>;
 	createTime?: string;
 	updateTime?: string;
 

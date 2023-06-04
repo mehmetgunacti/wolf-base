@@ -9,10 +9,10 @@ export const createBookmarkSuccess = createAction('[Bookmarks] Create Bookmark S
 export const updateBookmark = createAction('[Bookmarks] Update Bookmark', props<{ id: UUID, bookmark: Partial<Bookmark> }>());
 export const updateBookmarkSuccess = createAction('[Bookmarks] Update Bookmark Success', props<{ bookmark: Bookmark }>());
 
-export const deleteBookmark = createAction('[Bookmarks] Delete Bookmark', props<{ id: string }>());
+export const deleteBookmark = createAction('[Bookmarks] Delete Bookmark', props<{ id: UUID }>());
 export const deleteBookmarkSuccess = createAction('[Bookmarks] Delete Bookmark Success', props<{ bookmark: Bookmark }>());
 
-export const clickBookmark = createAction('[Bookmarks] Click Bookmark', props<{ payload: Bookmark }>());
+export const clickBookmark = createAction('[Bookmarks] Click Bookmark', props<{ id: UUID }>());
 
 export const openAddBookmarkDialog = createAction('[Bookmarks] Open Add Bookmark Dialog');
 export const openEditBookmarkDialog = createAction('[Bookmarks] Open Edit Bookmark Dialog', props<{ id: UUID }>());

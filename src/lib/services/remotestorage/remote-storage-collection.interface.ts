@@ -1,7 +1,6 @@
 import {
 	Bookmark,
-	EntityBase,
-	Click
+	EntityBase
 } from 'lib/models';
 import { IKnobaEntity, UUID } from 'lib/constants';
 
@@ -18,15 +17,8 @@ export interface RemoteStorageCollection<T extends EntityBase> {
 
 }
 
-export interface BookmarksCollection extends RemoteStorageCollection<Bookmark> { }
-// export interface INotesCollection extends IRemoteStorageCollection<INote> { }
-// export interface ITasksCollection extends IRemoteStorageCollection<ITaskList> { }
-// export interface IWordsCollection extends IRemoteStorageCollection<IWord> { }
-export interface ClicksCollection {
+export interface BookmarksCollection extends RemoteStorageCollection<Bookmark> {
 
-	increase(id: UUID, item: Click): Promise<Click>;
-	list(): Promise<Click[]>;
-	delete(id: string): Promise<void>;
+	increaseClicks(id: UUID, count: number): Promise<Bookmark>;
 
 }
-

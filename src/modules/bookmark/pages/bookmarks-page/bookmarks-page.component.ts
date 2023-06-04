@@ -1,12 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { bookmarks } from 'bookmarks';
-import { LocalStorageService, WolfBaseTableName } from 'lib';
-import * as fromBookmark from 'store/bookmark';
-import * as fromCore from 'store/core';
 import { slideUpDownTrigger } from 'modules/shared';
 import { Observable } from 'rxjs';
+import * as fromBookmark from 'store/bookmark';
+import * as fromCore from 'store/core';
 
 @Component({
 	selector: 'app-bookmarks-page',
@@ -22,8 +19,6 @@ export class BookmarksPageComponent {
 	selectedTags$: Observable<string[]>;
 
 	private store: Store = inject(Store);
-	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
-
 
 	constructor() {
 
@@ -31,10 +26,6 @@ export class BookmarksPageComponent {
 		this.tagsVisible$ = this.store.select(fromBookmark.selectorTagCloudVisibility);
 		this.isBigScreen$ = this.store.select(fromCore.isBigScreen);
 		this.selectedTags$ = this.store.select(fromBookmark.selectedTags);
-
-		// todo : delete later
-		this.localStorage.clear(WolfBaseTableName.bookmarks);
-		this.localStorage.bookmarks.create(bookmarks);
 
 	}
 

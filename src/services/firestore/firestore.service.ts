@@ -1,9 +1,5 @@
 import {
 	BookmarksCollection,
-	// ITasksCollection,
-	// IWordsCollection,
-	ClicksCollection,
-	// INotesCollection,
 	RemoteStorageCollection,
 	RemoteStorageService
 } from 'lib';
@@ -16,8 +12,7 @@ export class FirestoreRemoteStorageService implements RemoteStorageService {
 
 	constructor(
 		protected firestore: FirestoreTool,
-		public bookmarks: BookmarksCollection,
-		public clicks: ClicksCollection
+		public bookmarks: BookmarksCollection
 	) { }
 
 	getCollection(name: string): RemoteStorageCollection<IKnobaEntity> {

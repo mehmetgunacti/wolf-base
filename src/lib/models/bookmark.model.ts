@@ -1,19 +1,19 @@
 import { EntityBase } from './entity-base.model';
-import { IDBase } from './id-base.model';
+import { SyncData, Syncable } from './sync.model';
 
-export interface Bookmark extends EntityBase {
+interface SyncBookmark extends SyncData<Bookmark> {
+
+	clicks?: number;
+
+}
+
+export interface Bookmark extends EntityBase, Syncable<Bookmark, SyncBookmark> {
 
 	name: string;
 	title: string;
 	tags: string[];
-	image: string;
 	urls: string[];
 	clicks: number;
-
-}
-
-export interface Click extends IDBase {
-
-	clicks: number;
+	image?: string;
 
 }

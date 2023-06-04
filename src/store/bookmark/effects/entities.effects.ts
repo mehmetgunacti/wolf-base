@@ -227,8 +227,7 @@ export class EntitiesEffects {
 		() => this.actions$.pipe(
 
 			ofType(fromActions.clickBookmark),
-			map(p => p.payload),
-			tap(bookmark => this.localStorage.bookmarks.click(bookmark.id))
+			tap(({ id }) => this.localStorage.bookmarks.click(id))
 
 		),
 		{ dispatch: false }

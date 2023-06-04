@@ -1,17 +1,12 @@
 import { IKnobaEntity } from 'lib/constants';
 import {
 	BookmarksCollection,
-	// INotesCollection,
 	RemoteStorageCollection,
-	// ITasksCollection,
-	// IWordsCollection,
-	ClicksCollection
 } from './remote-storage-collection.interface';
 
 export interface RemoteStorageService {
 
 	bookmarks: BookmarksCollection;
-	clicks: ClicksCollection;
 
 	getCollection(name: string): RemoteStorageCollection<IKnobaEntity>;
 

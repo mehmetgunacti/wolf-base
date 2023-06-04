@@ -1,7 +1,6 @@
 import Dexie from 'dexie';
-import { environment } from 'environments/environment';
 import { CONF_KEYS, UUID, WolfBaseTableName } from 'lib/constants';
-import { Bookmark, DexieConfiguration, EntityBase, IConflictData, ITrash } from 'lib/models';
+import { Bookmark, DexieConfiguration, EntityBase, ITrash } from 'lib/models';
 import { initialConfState } from 'store/core';
 
 class DEFAULT_CONF_VALUES {
@@ -13,25 +12,24 @@ class DEFAULT_CONF_VALUES {
 }
 
 export const wolfBaseDBFactory = (): WolfBaseDB => {
-
+	
 	return new WolfBaseDB({
-		dbName: environment.dexie.dbName,
-		tables: environment.dexie.tables,
-		version: environment.dexie.version
+		dbName: 'WolfBaseDB',
+		tables: {
+			bookmarks: 'id, *tags, clicks',
+			configuration: '',
+			trashcan: 'id'
+		},
+		version: 1
 	});
 
 };
 
 export class WolfBaseDB extends Dexie {
 
-	configuration: Dexie.Table<string | boolean, string>;
-	conflicts: Dexie.Table<IConflictData<EntityBase>, UUID>;
-	trashcan: Dexie.Table<ITrash<EntityBase>, UUID>;
-
 	bookmarks: Dexie.Table<Bookmark, UUID>;
-	// notes: Dexie.Table<ILocalData<INote>, ID>;
-	// tasks: Dexie.Table<ILocalData<ITaskList>, ID>;
-	// words: Dexie.Table<ILocalData<IWord>, ID>;
+	configuration: Dexie.Table<string | boolean, string>;
+	trashcan: Dexie.Table<ITrash<EntityBase>, UUID>;
 
 	constructor(conf: DexieConfiguration) {
 
@@ -39,14 +37,9 @@ export class WolfBaseDB extends Dexie {
 		this.version(conf.version)
 			.stores(conf.tables);
 
-		this.configuration = this.table(WolfBaseTableName.configuration);
-		this.conflicts = this.table(WolfBaseTableName.conflicts);
-		this.trashcan = this.table(WolfBaseTableName.trashcan);
-
 		this.bookmarks = this.table(WolfBaseTableName.bookmarks);
-		// this.notes = this.table(KnobaTable.notes);
-		// this.tasks = this.table(KnobaTable.tasks);
-		// this.words = this.table(KnobaTable.words);
+		this.configuration = this.table(WolfBaseTableName.configuration);
+		this.trashcan = this.table(WolfBaseTableName.trashcan);
 
 		this.on('populate', () => {
 

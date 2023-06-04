@@ -2,4 +2,5 @@
 	*ngFor="let bookmark of bookmarks$ | async"
 	[item]="bookmark"
 	(edit)="onEdit($event)"
-	(popular)="onPopular($event)"></app-bookmark>
+	(popular)="onPopular($event)"
+	(linkClick)="onClick($event)"></app-bookmark>

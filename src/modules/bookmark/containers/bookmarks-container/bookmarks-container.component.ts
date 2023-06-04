@@ -51,4 +51,10 @@ export class BookmarksContainerComponent implements OnInit {
 
 	}
 
+	onClick(id: UUID): void {
+
+		this.store.dispatch(actions.clickBookmark({ id }));
+
+	}
+
 }

@@ -1,8 +1,8 @@
 import { RemoteCollection, UUID } from 'lib/constants';
-import { Bookmark, Click } from 'lib/models';
-import { FirestoreTool, IFirestoreData, IFirestoreDocument, FIRESTORE_VALUE } from 'lib/utils';
-import { AbstractFirestoreCollection } from '../firestore.collection';
+import { Bookmark } from 'lib/models';
 import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
+import { FIRESTORE_VALUE, FirestoreTool, IFirestoreDocument } from 'lib/utils';
+import { AbstractFirestoreCollection } from '../firestore.collection';
 
 export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bookmark> implements BookmarksCollection {
 
@@ -10,71 +10,36 @@ export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bo
 		super(firestore, RemoteCollection.bookmarks);
 	}
 
-	override async delete(id: string): Promise<void> {
+	protected override createRequestBody(bookmark: Bookmark): IFirestoreDocument<Bookmark> {
 
-		await super.delete(id);
-		await this.firestore.delete(
-
-			this.firestore.createURL({
-				collection: RemoteCollection.clicks,
-				document: id
-			})
-
-		);
-
-	}
-
-	override async list(): Promise<Bookmark[]> {
-
-		const bookmarks: Bookmark[] = await super.list();
-		const clicks: IFirestoreData<Click>[] = await this.firestore.list<Click>(
-
-			this.firestore.createURL({
-				collection: RemoteCollection.clicks,
-				queryParameters: { pageSize: this.pageSize }
-			})
-
-		);
-
-		const mapClicks: Map<UUID, number> = new Map(clicks.map(click => [click.id, click.data.clicks]));
-		return bookmarks.map(b => ({ ...b, clicks: mapClicks.get(b.id) || 0 }));
-
-	}
-
-	protected createRequestBody(bookmark: Partial<Bookmark>): IFirestoreDocument {
-
-		const fields: { [key: string]: FIRESTORE_VALUE } = {};
-
-		if (bookmark.name)
-			fields['name'] = { stringValue: bookmark.name };
-
-		if (bookmark.title)
-			fields['title'] = { stringValue: bookmark.title };
-
-		if (bookmark.tags)
-			fields['tags'] = {
-				arrayValue: { values: bookmark.tags.map(v => ({ stringValue: v })) }
-			};
-
-		if (bookmark.urls)
-			fields['urls'] = {
-				arrayValue: { values: bookmark.urls.map(v => ({ stringValue: v })) }
-			};
+		const fields = {} as Record<keyof Bookmark, FIRESTORE_VALUE>;
+		fields['name'] = { stringValue: bookmark.name };
+		fields['title'] = { stringValue: bookmark.title };
+		fields['tags'] = {
+			arrayValue: { values: bookmark.tags.map(v => ({ stringValue: v })) }
+		};
+		fields['urls'] = {
+			arrayValue: { values: bookmark.urls.map(v => ({ stringValue: v })) }
+		};
+		fields['clicks'] = { integerValue: bookmark.clicks };
+		fields['created'] = { stringValue: bookmark.created };
 
 		if (bookmark.image)
 			fields['image'] = { stringValue: bookmark.image };
 
-		// if (bookmark.clicks)
-		// 	fields.clicks = { integerValue: bookmark.clicks };
-
 		return { fields };
+
 	}
 
-	protected createUpdateMask(bookmark: Bookmark): string {
+	protected override createUpdateMask(bookmark: Partial<Bookmark>): string {
 
 		// exclude some fields like id, ... from update list
 		// also don't update image if no new image was selected
 		// (empty image string would delete image on server)
+
+		// 'clicks', 'created' are not updated here
+		// 'clicks' has it's own 'click' function
+		// 'created' is never updated
 
 		const fields = new Set<string>();
 
@@ -94,6 +59,13 @@ export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bo
 			fields.add('image');
 
 		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
+
+	}
+
+	async increaseClicks(id: UUID, count: number): Promise<Bookmark> {
+
+		await this.firestore.increase(this.remoteCollection, 'clicks', id, count);
+		return await this.get(id);
 
 	}
 

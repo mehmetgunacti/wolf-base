@@ -15,7 +15,7 @@ export class BookmarkComponent {
 
 	@Output() edit: EventEmitter<UUID> = new EventEmitter();
 	@Output() popular: EventEmitter<UUID> = new EventEmitter();
-	@Output() linkClick: EventEmitter<Bookmark> = new EventEmitter();
+	@Output() linkClick: EventEmitter<UUID> = new EventEmitter();
 
 	onEdit(): void {
 
@@ -27,7 +27,7 @@ export class BookmarkComponent {
 	onLinkClick(): void {
 
 		if (this.item)
-			this.linkClick.emit(this.item);
+			this.linkClick.emit(this.item.id);
 
 	}
 
