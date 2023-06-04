@@ -39,15 +39,9 @@ export class PopularBookmarksContainerComponent implements OnInit {
 
 	}
 
-	onEdit(id: UUID): void {
+	onClick(id: UUID): void {
 
-		this.store.dispatch(actions.openEditBookmarkDialog({ id }));
-
-	}
-
-	onPopular(id: UUID): void {
-
-		this.store.dispatch(actions.togglePopular({ id }));
+		this.store.dispatch(actions.clickBookmark({ id }));
 
 	}
 

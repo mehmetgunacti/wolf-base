@@ -12,6 +12,7 @@ export class BookmarkComponent {
 	@Input() showDetails: boolean = false;
 	@Input() compact: boolean = false;
 	@Input() editable: boolean = true;
+	@Input() popularButton: boolean = true;
 
 	@Output() edit: EventEmitter<UUID> = new EventEmitter();
 	@Output() popular: EventEmitter<UUID> = new EventEmitter();
