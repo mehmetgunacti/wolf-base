@@ -15,6 +15,7 @@ export class CorePageComponent implements OnDestroy {
 
 	navMenuItems$: Observable<MenuItem[]>;
 	isThemeDark$: Observable<boolean>;
+	syncableItemsCount$: Observable<number>;
 
 	subscriptions = new Subscription();
 
@@ -44,15 +45,20 @@ export class CorePageComponent implements OnDestroy {
 
 		);
 
-		this.navMenuItems$ = this.store.select(fromBookmark.menuBookmarkBadge).pipe(
+		this.syncableItemsCount$ = this.store.select(fromBookmark.menuSyncableItemsCount);
 
-			map(badge => {
+		this.navMenuItems$ = combineLatest([
+			this.store.select(fromBookmark.menuBookmarkBadge),
+			this.syncableItemsCount$
+		]).pipe(
+
+			map(([bookmarkBadge, syncableCount]) => {
 
 				const menuItems: Array<MenuItem> = new Array();
 				menuItems.push(navItems.miHome);
-				menuItems.push(navItems.miBookmarks(badge));
+				menuItems.push(navItems.miBookmarks(bookmarkBadge));
 				menuItems.push(navItems.miSettings);
-				menuItems.push(navItems.miSync);
+				menuItems.push(navItems.miSync(`${syncableCount}`));
 				return menuItems;
 
 			})

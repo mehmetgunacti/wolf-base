@@ -162,4 +162,24 @@ app-core-page {
 
 	}
 
+	&.orange > a > span.p-menuitem-badge {
+
+		background-color: #E16F3B;
+
+	}
+
+}
+
+.dotBadge {
+
+	position			: absolute;
+	color				: #E16F3B !important;
+	background-color	: #E16F3B !important;
+	min-width			: 10px !important;
+	height				: 10px !important;
+	width				: 10px !important;
+	line-height			: 0 !important;
+	bottom				: 8px;
+	right				: 10px;
+
 }

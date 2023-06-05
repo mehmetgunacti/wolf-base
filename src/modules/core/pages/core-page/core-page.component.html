@@ -4,11 +4,12 @@
 
 	<section id="section-logo">
 
-		<button pButton
-				type="button"
-				icon="pi pi-bars"
-				class="p-button-text"
-				(click)="toggleNav()"></button>
+		<p-button
+			(click)="toggleNav()"
+			styleClass="p-button-text"
+			icon="pi pi-bars"
+			[badge]="((syncableItemsCount$ | async) ?? 0) > 0 ? '.' : ''"
+			badgeClass="dotBadge"></p-button>
 
 	</section>
 	<section id="portal-outlet-left">

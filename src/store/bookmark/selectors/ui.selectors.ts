@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { BookmarkModuleState } from '../states';
-import { bookmarksCount } from './entities.selector';
+import { bookmarksArray, bookmarksCount } from './entities.selector';
 import { filteredBookmarkCount } from './tags.selectors';
 
 const selectorModuleState = createFeatureSelector<BookmarkModuleState>('bookmark');
@@ -20,5 +20,12 @@ export const menuBookmarkBadge = createSelector(
 	bookmarksCount,
 	filteredBookmarkCount,
 	(total, selected) => selected < total ? `${selected}/${total}` : `${total}`
+
+);
+
+export const menuSyncableItemsCount = createSelector(
+
+	bookmarksArray,
+	bookmarks => bookmarks.filter(b => !b.sync || (b.sync.clicks ?? 0) > 0 || !b.sync.updated).length
 
 );

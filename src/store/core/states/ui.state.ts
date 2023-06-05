@@ -1,13 +1,15 @@
 export interface UIState {
 
 	sidebarVisible: boolean,
-	bigScreen: boolean
+	bigScreen: boolean,
+	syncableItems: number
 
 }
 
 export const initialUIState: UIState = {
 
 	sidebarVisible: true,
-	bigScreen: true
+	bigScreen: true,
+	syncableItems: 0
 
 };

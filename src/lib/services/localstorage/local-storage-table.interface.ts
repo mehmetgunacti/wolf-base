@@ -36,6 +36,7 @@ export interface BookmarksTable extends EntityTable<Bookmark> {
 
 	click(id: UUID): Promise<void>;
 	toggleTag(id: UUID, name: string): Promise<void>;
+	syncableItems(): Promise<Bookmark[]>;
 
 }
 

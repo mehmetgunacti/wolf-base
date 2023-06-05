@@ -65,4 +65,10 @@ export class BookmarksTableImpl extends EntityTableImpl<Bookmark> implements Boo
 
 	}
 
+	async syncableItems(): Promise<Bookmark[]> {
+
+		return await this.db.bookmarks.filter(b => !b.sync || (b.sync.clicks ?? 0) > 0 || !b.sync.data).toArray();
+
+	}
+
 }
