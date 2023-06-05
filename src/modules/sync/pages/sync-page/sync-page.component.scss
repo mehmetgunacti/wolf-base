@@ -1,8 +1,41 @@
 app-sync-page {
 
-	display				: flex;
-	justify-content		: center;
-	align-items			: center;
-	height				: 100%;
+	@extend %flex-row;
+
+	& > p-card {
+
+		@extend %flex-center-start;
+
+		& > div.p-card {
+
+			padding: 0 1rem;
+
+			div.table {
+				display			: flex;
+				flex-direction	: column;
+			}
+
+			div.row {
+				display					: grid;
+				grid-template-columns	: 2fr 1fr 1fr;
+			}
+
+			div.header {
+				font-weight				: bold;
+				color					: var(--text-color);
+				border-bottom			: 1px solid var(--text-color);
+				background-color		: var(--surface-50);
+				border-top-left-radius	: var(--border-radius);
+				border-top-right-radius	: var(--border-radius);
+			}
+
+			div.cell {
+				@extend %flex-start-center;
+				padding	: 15px;
+			}
+
+		}
+
+	}
 
 }

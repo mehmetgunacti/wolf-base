@@ -9,10 +9,11 @@ import { Bookmark, UUID } from 'lib';
 export class BookmarkComponent {
 
 	@Input() item: Bookmark | null | undefined;
-	@Input() showDetails: boolean = false;
-	@Input() compact: boolean = false;
-	@Input() editable: boolean = true;
-	@Input() popularButton: boolean = true;
+	@Input() showDetails= false;
+	@Input() compact = false;
+	@Input() editable = true;
+	@Input() popularButton = true;
+	@Input() disabled = false;
 
 	@Output() edit: EventEmitter<UUID> = new EventEmitter();
 	@Output() popular: EventEmitter<UUID> = new EventEmitter();

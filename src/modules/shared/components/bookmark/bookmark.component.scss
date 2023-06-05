@@ -12,6 +12,19 @@ app-bookmark {
 	border-radius		: var(--border-radius);
 	background-color	: var(--surface-a);
 
+	& > div[bookmark-overlay] {
+
+		position					: absolute;
+		width						: 100%;
+		height						: 100%;
+		top							: 0;
+		left						: 0;
+		background-color			: transparent;
+		pointer-events				: auto;
+		z-index						: 1000;
+
+	}
+
 	&:hover {
 		--bookmark-edit-button-opacity : 1;
 	}

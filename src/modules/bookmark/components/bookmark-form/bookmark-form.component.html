@@ -1,7 +1,11 @@
 <div bookmark-wrapper>
 
-	<app-bookmark [item]="bookmark$ | async" [showDetails]="true"></app-bookmark>
-	<div bookmark-overlay></div>
+	<app-bookmark
+		[item]="bookmark$ | async"
+		[showDetails]="true"
+		[disabled]="true"
+		[popularButton]="false"
+		[editable]="false"></app-bookmark>
 
 </div>
 

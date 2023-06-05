@@ -28,6 +28,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DividerModule } from 'primeng/divider';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { TabViewModule } from 'primeng/tabview';
+import { DataViewModule } from 'primeng/dataview';
 
 export const modules = [
 	AvatarModule,
@@ -38,6 +39,7 @@ export const modules = [
 	CardModule,
 	CheckboxModule,
 	ConfirmPopupModule,
+	DataViewModule,
 	DialogModule,
 	DividerModule,
 	DynamicDialogModule,
