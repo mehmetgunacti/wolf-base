@@ -15,7 +15,7 @@ export class PortalComponent implements AfterViewInit, OnDestroy {
 	private disposeFn!: () => void;
 	private viewRef!: EmbeddedViewRef<{}>;
 
-	@Input() outletName!: string;
+	@Input() outletName!: 'portal-outlet-left' | 'portal-outlet-right';
 
 	constructor(private viewContainerRef: ViewContainerRef) { }
 
