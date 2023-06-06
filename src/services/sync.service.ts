@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { interval, Subscription } from 'rxjs';
-import { syncSetState } from 'store/core';
+import { syncSetState } from 'store/sync/actions';
+import { SyncEvent } from 'lib';
 
-@Injectable()
+@Injectable({
+	providedIn: 'root'
+})
 export class SyncService {
 
 	private worker: Worker;
@@ -13,9 +16,10 @@ export class SyncService {
 	constructor(private store: Store) {
 
 		this.worker = new Worker('./worker/sync.worker', { type: 'module' });
-		this.worker.onmessage = ({ data }) => {
+		console.log(this.worker);
+		this.worker.onmessage = (event: MessageEvent<SyncEvent>) => {
 
-			this.store.dispatch(syncSetState({ syncState: data }));
+			this.store.dispatch(syncSetState({ message: event.data }));
 
 		};
 
@@ -30,11 +34,11 @@ export class SyncService {
 
 	schedule(): void {
 
-		this.subscription.add(
+		// this.subscription.add(
 
-			this.source.subscribe(() => this.trigger())
+		// 	this.source.subscribe(() => this.trigger())
 
-		);
+		// );
 
 	}
 

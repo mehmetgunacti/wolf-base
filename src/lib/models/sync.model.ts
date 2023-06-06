@@ -14,9 +14,9 @@ export interface Syncable<T extends EntityBase, S extends SyncData<T>> {
 
 }
 
-export interface SyncState {
+export interface SyncEvent {
 
-	status?: SYNC_STATES;
+	status: SYNC_STATES;
 	message?: string;
 
 }

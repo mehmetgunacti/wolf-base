@@ -1,4 +1,4 @@
-import { IKnobaEntity } from 'lib/constants';
+import { WolfBaseEntity } from 'lib/constants';
 import {
 	BookmarksCollection,
 	RemoteStorageCollection,
@@ -8,7 +8,7 @@ export interface RemoteStorageService {
 
 	bookmarks: BookmarksCollection;
 
-	getCollection(name: string): RemoteStorageCollection<IKnobaEntity>;
+	getCollection(name: string): RemoteStorageCollection<WolfBaseEntity>;
 
 }
 

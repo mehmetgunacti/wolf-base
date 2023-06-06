@@ -9,9 +9,8 @@ export enum SYNC_STATES {
 	DOWNLOADING = 5,
 	PROCESSING_NEW = 6,
 	PROCESSING_UPDATES = 7,
-	PROCESSING_CLICKS = 8,
-	SAVING = 9
+	SAVING = 8
 
 }
 
-export type IKnobaEntity = Bookmark; // | INote | ITaskList | IWord | IFast | IWeight | IWorkout;
+export type WolfBaseEntity = Bookmark; // | INote | ITaskList | IWord | IFast | IWeight | IWorkout;

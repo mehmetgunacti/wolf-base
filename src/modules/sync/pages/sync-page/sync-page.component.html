@@ -1,3 +1,16 @@
+<app-portal outletName="portal-outlet-right">
+
+	<button
+		pButton
+		pRipple
+		type="button"
+		label="Start"
+		icon="pi pi-play"
+		class="p-button-text p-button-sm"
+		(click)="onStart()">
+	</button>
+
+</app-portal>
 <p-card>
 
 	<div class="table">
@@ -9,22 +22,22 @@
 		<div class="row">
 			<div class="cell">Clicked</div>
 			<div class="cell">{{ bookmarksClicked$ | async }}</div>
-			<div class="cell"><button pButton [disabled]="(bookmarksClicked$ | async) === 0" icon="pi pi-cloud-upload" label="Sync" class="p-button-text"></button></div>
+			<div class="cell"><button pButton [disabled]="(bookmarksClicked$ | async) === 0" (click)="onStart()" icon="pi pi-cloud-upload" label="Sync" class="p-button-text"></button></div>
 		</div>
 		<div class="row">
 			<div class="cell">Created</div>
 			<div class="cell">{{ bookmarksCreated$ | async }}</div>
-			<div class="cell"><button pButton [disabled]="(bookmarksCreated$ | async) === 0" icon="pi pi-cloud-upload" label="Sync" class="p-button-text"></button></div>
+			<div class="cell"><button pButton [disabled]="(bookmarksCreated$ | async) === 0" (click)="onStart()" icon="pi pi-cloud-upload" label="Sync" class="p-button-text"></button></div>
 		</div>
 		<div class="row">
 			<div class="cell">Deleted</div>
 			<div class="cell">{{ bookmarksDeleted$ | async }}</div>
-			<div class="cell"><button pButton [disabled]="(bookmarksDeleted$ | async) === 0" icon="pi pi-cloud-upload" label="Sync" class="p-button-text"></button></div>
+			<div class="cell"><button pButton [disabled]="(bookmarksDeleted$ | async) === 0" (click)="onStart()" icon="pi pi-cloud-upload" label="Sync" class="p-button-text"></button></div>
 		</div>
 		<div class="row">
 			<div class="cell">Updated</div>
 			<div class="cell">{{ bookmarksUpdated$ | async }}</div>
-			<div class="cell"><button pButton [disabled]="(bookmarksUpdated$ | async) === 0" icon="pi pi-cloud-upload" label="Sync" class="p-button-text"></button></div>
+			<div class="cell"><button pButton [disabled]="(bookmarksUpdated$ | async) === 0" (click)="onStart()" icon="pi pi-cloud-upload" label="Sync" class="p-button-text"></button></div>
 		</div>
 	</div>
 

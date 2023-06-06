@@ -3,6 +3,7 @@ import { Bookmark } from 'lib/models';
 import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { FIRESTORE_VALUE, FirestoreTool, IFirestoreDocument } from 'lib/utils';
 import { AbstractFirestoreCollection } from '../firestore.collection';
+import { bookmarks } from 'store/bookmark';
 
 export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bookmark> implements BookmarksCollection {
 
@@ -37,8 +38,6 @@ export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bo
 		// also don't update image if no new image was selected
 		// (empty image string would delete image on server)
 
-		// 'clicks', 'created' are not updated here
-		// 'clicks' has it's own 'click' function
 		// 'created' is never updated
 
 		const fields = new Set<string>();
@@ -57,6 +56,9 @@ export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bo
 
 		if (bookmark.image?.startsWith('data'))
 			fields.add('image');
+		
+		if (bookmark.clicks)
+			fields.add('clicks');
 
 		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
 

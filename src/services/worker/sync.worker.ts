@@ -1,9 +1,9 @@
 /// <reference lib="webworker" />
 
 import {
-	SyncState,
 	LocalStorageService,
 	SYNC_STATES,
+	SyncEvent,
 	sleep
 } from 'lib';
 import {
@@ -13,8 +13,9 @@ import {
 import { BookmarksSyncAction } from './actions';
 
 let isRunning = false;
+console.log('worker  running.');
 
-addEventListener('message', async () => {
+addEventListener('message', async (a: MessageEvent) => {
 
 	if (isRunning) {
 
@@ -23,19 +24,19 @@ addEventListener('message', async () => {
 
 	}
 
-	console.log('running batch:');
+	console.log('running batch:', a);
 	isRunning = true;
-	const generators: AsyncGenerator<SyncState>[] = createActions();
+	// const generators: AsyncGenerator<SyncState>[] = createActions();
 
-	for (const gen of generators)
-		await process(gen);
+	// for (const gen of generators)
+	// 	await process(gen);
 
 	postMessage({ status: SYNC_STATES.DONE });
 	isRunning = false;
 
 });
 
-async function process(gen: AsyncGenerator<SyncState>): Promise<void> {
+async function process(gen: AsyncGenerator<SyncEvent>): Promise<void> {
 
 	try {
 
@@ -55,7 +56,7 @@ async function process(gen: AsyncGenerator<SyncState>): Promise<void> {
 
 }
 
-function createActions(): AsyncGenerator<SyncState>[] {
+function createActions(): AsyncGenerator<SyncEvent>[] {
 
 	const localStorage: LocalStorageService = localStorageServiceFactory();
 

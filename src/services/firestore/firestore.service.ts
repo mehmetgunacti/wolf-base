@@ -3,7 +3,7 @@ import {
 	RemoteStorageCollection,
 	RemoteStorageService
 } from 'lib';
-import { IKnobaEntity, RemoteCollection } from 'lib/constants';
+import { WolfBaseEntity, RemoteCollection } from 'lib/constants';
 import { FirestoreTool } from 'lib/utils';
 
 export class FirestoreRemoteStorageService implements RemoteStorageService {
@@ -15,7 +15,7 @@ export class FirestoreRemoteStorageService implements RemoteStorageService {
 		public bookmarks: BookmarksCollection
 	) { }
 
-	getCollection(name: string): RemoteStorageCollection<IKnobaEntity> {
+	getCollection(name: string): RemoteStorageCollection<WolfBaseEntity> {
 
 		switch (name) {
 			case RemoteCollection.bookmarks: return this.bookmarks;
