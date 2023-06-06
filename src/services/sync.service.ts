@@ -15,11 +15,13 @@ export class SyncService {
 
 	constructor(private store: Store) {
 
-		this.worker = new Worker('./worker/sync.worker', { type: 'module' });
+		// this.worker = new Worker('../worker/sync1.worker', { type: 'module' });
+		this.worker = new Worker(new URL('../worker/sync.worker', import.meta.url));
 		console.log(this.worker);
-		this.worker.onmessage = (event: MessageEvent<SyncEvent>) => {
+		this.worker.onmessage = event => { // (event: MessageEvent<SyncEvent>) => {
 
-			this.store.dispatch(syncSetState({ message: event.data }));
+			console.log(event);
+			// this.store.dispatch(syncSetState({ message: event.data }));
 
 		};
 
