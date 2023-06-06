@@ -2,8 +2,8 @@ import {
 	Bookmark,
 	BookmarksCollection,
 	BookmarksTable,
-	SyncState,
-	RemoteCollection
+	RemoteCollection,
+	SyncEvent
 } from 'lib';
 import { BaseSyncAction } from './base.action';
 
@@ -16,14 +16,14 @@ export class BookmarksSyncAction extends BaseSyncAction<Bookmark> {
 		super(RemoteCollection.bookmarks, table, remoteCollection);
 	}
 
-	override async *execute(): AsyncGenerator<SyncState> {
+	override async *execute(): AsyncGenerator<SyncEvent> {
 
 		yield* super.execute();
 		// yield* this.downloadClicks();
 
 	}
 
-	protected override async *handleUpdated(): AsyncGenerator<SyncState> {
+	protected override async *handleUpdated(): AsyncGenerator<SyncEvent> {
 
 		const table: BookmarksTable = this.table as BookmarksTable;
 		// const clicked: IClick[] = await table.getClickedItems();

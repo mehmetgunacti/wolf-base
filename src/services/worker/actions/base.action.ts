@@ -2,10 +2,11 @@ import {
 	EntityTable,
 	EntityBase,
 	RemoteStorageCollection,
-	SyncState,
+	SyncEvent,
 	RemoteCollection,
 	sleep,
-	syncState
+	syncState,
+	SYNC_STATES
 } from 'lib';
 
 export interface Action<PARAM, RETURN_TYPE> {
@@ -14,7 +15,7 @@ export interface Action<PARAM, RETURN_TYPE> {
 
 }
 
-export abstract class BaseSyncAction<T extends EntityBase> implements Action<void, AsyncGenerator<SyncState>> {
+export abstract class BaseSyncAction<T extends EntityBase> implements Action<void, AsyncGenerator<SyncEvent>> {
 
 	// protected mapRemoteData: Map<string, IRemoteData<ID>>;
 
@@ -26,7 +27,7 @@ export abstract class BaseSyncAction<T extends EntityBase> implements Action<voi
 		// this.mapRemoteData = new Map();
 	}
 
-	async *execute(): AsyncGenerator<SyncState> {
+	async *execute(): AsyncGenerator<SyncEvent> {
 
 		yield* this.handleLocallyDeleted();
 		yield* this.handleNew();
@@ -37,41 +38,41 @@ export abstract class BaseSyncAction<T extends EntityBase> implements Action<voi
 
 	}
 
-	protected async *handleLocallyDeleted(): AsyncGenerator<SyncState> {
+	protected async *handleLocallyDeleted(): AsyncGenerator<SyncEvent> {
 
 		await sleep(500);
 
 	}
 
-	protected async *handleRemotelyDeleted(): AsyncGenerator<SyncState> {
+	protected async *handleRemotelyDeleted(): AsyncGenerator<SyncEvent> {
 
 		await sleep(500);
 
 	}
 
-	protected async *handleNew(): AsyncGenerator<SyncState> {
+	protected async *handleNew(): AsyncGenerator<SyncEvent> {
 
 		await sleep(500);
 
 	}
 
-	protected async *download(): AsyncGenerator<SyncState> {
+	protected async *download(): AsyncGenerator<SyncEvent> {
 
 
 		await sleep(500);
 
 	}
 
-	protected async *handleUpdated(): AsyncGenerator<SyncState> {
+	protected async *handleUpdated(): AsyncGenerator<SyncEvent> {
 
 		await sleep(500);
 
 	}
 
-	protected async *saveAll(): AsyncGenerator<SyncState> {
+	protected async *saveAll(): AsyncGenerator<SyncEvent> {
 
 		await sleep(500);
-		yield syncState(this.collection, undefined, `${this.collection} ready.`);
+		yield syncState(this.collection, SYNC_STATES.DOWNLOADING, `${this.collection} ready.`);
 
 	}
 
