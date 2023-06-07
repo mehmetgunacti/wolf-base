@@ -1,10 +1,8 @@
-import { FirestoreTool } from 'lib/utils';
 import { environment } from 'environments/environment';
-import {
-	BookmarksFirestoreCollection
-} from './collections';
+import { FirestoreTool } from 'lib/utils/firestore/firestore.tool';
+import { BookmarksCollection } from '../remote-storage-collection.interface';
+import { BookmarksFirestoreCollection } from './collections/bookmarks.collection';
 import { FirestoreRemoteStorageService } from './firestore.service';
-import { BookmarksCollection } from 'lib';
 
 export const firestoreFactory = (): FirestoreTool => {
 

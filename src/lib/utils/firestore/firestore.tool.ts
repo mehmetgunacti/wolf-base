@@ -1,3 +1,4 @@
+import { EntityBase } from 'lib/models/entity-base.model';
 import { FIRESTORE_TYPE, FIRESTORE_VALUE } from './firestore.constant';
 import {
 	IFirestoreDocument,
@@ -7,7 +8,7 @@ import {
 	IFirestoreURLConfig,
 	IFirestoreData
 } from './firestore.model';
-import { EntityBase, HTTP } from 'lib';
+import { HTTP } from '../http.tool';
 
 export interface IFirestoreConfig {
 

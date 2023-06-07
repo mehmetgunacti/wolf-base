@@ -1,4 +1,4 @@
-import { WolfBaseTableName } from 'lib/constants';
+import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { BookmarksTable, ConfigurationTable } from './local-storage-table.interface';
 
 export interface LocalStorageService {

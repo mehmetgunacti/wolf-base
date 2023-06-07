@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 import { Bookmark, FirestoreTool, LocalStorageService, RemoteCollection, UUID, WolfBaseTableName } from 'lib';
 import { IDBase } from 'lib/models/id-base.model';
 import { Observable, map, switchMap } from 'rxjs';
-import { BookmarksFirestoreCollection } from 'services';
+import { BookmarksFirestoreCollection } from 'lib';
 import { SyncService } from 'services/sync.service';
 import { v4 as uuidv4 } from 'uuid';
 

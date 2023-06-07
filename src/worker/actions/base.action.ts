@@ -1,13 +1,11 @@
-import {
-	EntityTable,
-	EntityBase,
-	RemoteStorageCollection,
-	SyncEvent,
-	RemoteCollection,
-	sleep,
-	syncState,
-	SYNC_STATES
-} from 'lib';
+import { EntityTable } from 'lib/services/localstorage/local-storage-table.interface';
+import { EntityBase } from 'lib/models/entity-base.model';
+import { RemoteStorageCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
+import { RemoteCollection } from 'lib/constants/remote.constant';
+import { sleep } from 'lib/utils/helper.tool';
+import { syncState } from 'lib/utils/sync.tool';
+import { SYNC_STATES } from 'lib/constants/sync.constant';
+import { SyncEvent } from 'lib/models/sync.model';
 
 export interface Action<PARAM, RETURN_TYPE> {
 
@@ -15,7 +13,7 @@ export interface Action<PARAM, RETURN_TYPE> {
 
 }
 
-export abstract class BaseSyncAction<T extends EntityBase> implements Action<void, AsyncGenerator<SyncEvent>> {
+export abstract class BaseSyncAction <T extends EntityBase> implements Action<void, AsyncGenerator<SyncEvent>> {
 
 	// protected mapRemoteData: Map<string, IRemoteData<ID>>;
 

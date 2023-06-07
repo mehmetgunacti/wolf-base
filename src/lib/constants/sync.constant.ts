@@ -1,4 +1,4 @@
-import { Bookmark } from 'lib/models';
+import { Bookmark } from "lib/models/bookmark.model";
 
 export enum SYNC_STATES {
 

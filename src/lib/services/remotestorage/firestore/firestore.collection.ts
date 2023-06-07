@@ -1,7 +1,9 @@
-import { RemoteStorageCollection } from 'lib';
-import { RemoteCollection, UUID } from 'lib/constants';
-import { EntityBase } from 'lib/models';
-import { FirestoreTool, IFirestoreData, IFirestoreDocument } from 'lib/utils';
+import { UUID } from "lib/constants/common.constant";
+import { RemoteCollection } from "lib/constants/remote.constant";
+import { EntityBase } from "lib/models/entity-base.model";
+import { IFirestoreData, IFirestoreDocument } from "lib/utils/firestore/firestore.model";
+import { FirestoreTool } from "lib/utils/firestore/firestore.tool";
+import { RemoteStorageCollection } from "../remote-storage-collection.interface";
 
 export abstract class AbstractFirestoreCollection<T extends EntityBase> implements RemoteStorageCollection<T> {
 

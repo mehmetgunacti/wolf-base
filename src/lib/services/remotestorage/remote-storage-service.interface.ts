@@ -1,4 +1,4 @@
-import { WolfBaseEntity } from 'lib/constants';
+import { WolfBaseEntity } from 'lib/constants/sync.constant';
 import {
 	BookmarksCollection,
 	RemoteStorageCollection,

@@ -1,11 +1,14 @@
 import Dexie from 'dexie';
-import { CONF_KEYS, UUID, WolfBaseTableName } from 'lib/constants';
-import { Bookmark, DexieConfiguration, EntityBase, ITrash } from 'lib/models';
-import { initialConfState } from 'store/core';
+import { UUID } from 'lib/constants/common.constant';
+import { CONF_KEYS, WolfBaseTableName } from 'lib/constants/database.constant';
+import { Bookmark } from 'lib/models/bookmark.model';
+import { DexieConfiguration } from 'lib/models/database.model';
+import { EntityBase } from 'lib/models/entity-base.model';
+import { ITrash } from 'lib/models/trashcan.model';
 
 class DEFAULT_CONF_VALUES {
 
-	static darkTheme = initialConfState.darkTheme;
+	static darkTheme = true;
 	static sidebarVisible = true;
 	static syncWorkerActive = true;
 

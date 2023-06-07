@@ -1,10 +1,8 @@
-import {
-	BookmarksCollection,
-	RemoteStorageCollection,
-	RemoteStorageService
-} from 'lib';
-import { WolfBaseEntity, RemoteCollection } from 'lib/constants';
-import { FirestoreTool } from 'lib/utils';
+import { RemoteCollection } from "lib/constants/remote.constant";
+import { WolfBaseEntity } from "lib/constants/sync.constant";
+import { FirestoreTool } from "lib/utils/firestore/firestore.tool";
+import { BookmarksCollection, RemoteStorageCollection } from "../remote-storage-collection.interface";
+import { RemoteStorageService } from "../remote-storage-service.interface";
 
 export class FirestoreRemoteStorageService implements RemoteStorageService {
 

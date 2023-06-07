@@ -1,8 +1,7 @@
-import { liveQuery } from 'dexie';
-import { CONF_KEYS, Configuration } from 'lib';
 import { ConfigurationTable } from 'lib/services/localstorage/local-storage-table.interface';
-import { Observable, fromEventPattern } from 'rxjs';
 import { KeyValueTableImpl } from './key-value.table';
+import { CONF_KEYS } from 'lib/constants/database.constant';
+import { Configuration } from 'lib/models/configuration.model';
 
 export class ConfigurationTableImpl implements ConfigurationTable {
 
@@ -56,20 +55,20 @@ export class ConfigurationTableImpl implements ConfigurationTable {
 
 	}
 
-	dump$(): Observable<Configuration> {
+	// dump$(): Observable<Configuration> {
 
-		return fromEventPattern(
+	// 	return fromEventPattern(
 
-			// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
-			// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
-			// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
-			(handler) => liveQuery(() => this.dump()).subscribe(handler),
+	// 		// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
+	// 		// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
+	// 		// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
+	// 		(handler) => liveQuery(() => this.dump()).subscribe(handler),
 
-			// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
-			(handler, unsubscribe) => unsubscribe()
+	// 		// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
+	// 		(handler, unsubscribe) => unsubscribe()
 
-		);
+	// 	);
 
-	}
+	// }
 
 }

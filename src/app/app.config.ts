@@ -1,8 +1,8 @@
 import { ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
-import { LocalStorageService } from 'lib';
+import { LocalStorageService, localStorageServiceFactory, remoteStorageServiceFactory } from 'lib';
 import { MessageService } from 'primeng/api';
-import { CustomErrorHandler, localStorageServiceFactory, remoteStorageServiceFactory } from 'services';
+import { CustomErrorHandler } from 'services';
 
 export const routes: Routes = [
 

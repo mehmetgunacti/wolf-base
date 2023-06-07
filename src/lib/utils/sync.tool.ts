@@ -1,5 +1,6 @@
-import { SYNC_STATES, SyncEvent } from 'lib';
-import { RemoteCollection } from 'lib/constants';
+import { SYNC_STATES } from 'lib/constants/sync.constant';
+import { SyncEvent } from 'lib/models/sync.model';
+import { RemoteCollection } from 'lib/constants/remote.constant';
 
 export const syncState = (
 	collection: RemoteCollection,

@@ -1,9 +1,11 @@
-import { RemoteCollection, UUID } from 'lib/constants';
-import { Bookmark } from 'lib/models';
+import { UUID } from 'lib/constants/common.constant';
+import { RemoteCollection } from 'lib/constants/remote.constant';
+import { Bookmark } from 'lib/models/bookmark.model';
 import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
-import { FIRESTORE_VALUE, FirestoreTool, IFirestoreDocument } from 'lib/utils';
+import { FIRESTORE_VALUE } from 'lib/utils/firestore/firestore.constant';
+import { IFirestoreDocument } from 'lib/utils/firestore/firestore.model';
+import { FirestoreTool } from 'lib/utils/firestore/firestore.tool';
 import { AbstractFirestoreCollection } from '../firestore.collection';
-import { bookmarks } from 'store/bookmark';
 
 export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bookmark> implements BookmarksCollection {
 

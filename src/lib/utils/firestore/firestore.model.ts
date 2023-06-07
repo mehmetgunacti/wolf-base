@@ -1,4 +1,4 @@
-import { EntityBase } from 'lib/models';
+import { EntityBase } from 'lib/models/entity-base.model';
 import { FIRESTORE_VALUE } from './firestore.constant';
 
 export interface IFirestoreData<T extends EntityBase> {

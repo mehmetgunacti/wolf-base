@@ -1,4 +1,4 @@
-import { UUID } from "lib/constants";
+import { UUID } from "lib/constants/common.constant";
 
 export interface IDBase {
 

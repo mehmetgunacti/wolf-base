@@ -1,4 +1,5 @@
-import { EntityBase, SYNC_STATES } from 'lib';
+import { SYNC_STATES } from "lib/constants/sync.constant";
+import { EntityBase } from "./entity-base.model";
 
 export interface SyncData<T extends EntityBase> {
 

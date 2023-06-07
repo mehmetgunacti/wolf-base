@@ -1,7 +1,5 @@
-import { liveQuery } from 'dexie';
-import { KeyValueTable } from 'lib';
-import { WolfBaseTableName } from 'lib/constants';
-import { Observable, fromEventPattern } from 'rxjs';
+import { WolfBaseTableName } from 'lib/constants/database.constant';
+import { KeyValueTable } from '../../local-storage-table.interface';
 import { WolfBaseDB } from '../wolfbase.database';
 
 export class KeyValueTableImpl implements KeyValueTable {
@@ -29,21 +27,21 @@ export class KeyValueTableImpl implements KeyValueTable {
 
 	}
 
-	get$<T>(key: string): Observable<T> {
+	// get$<T>(key: string): Observable<T> {
 
-		return fromEventPattern(
+	// 	return fromEventPattern(
 
-			// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
-			// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
-			// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
-			(handler) => liveQuery(() => this.get(key)).subscribe(handler),
+	// 		// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
+	// 		// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
+	// 		// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
+	// 		(handler) => liveQuery(() => this.get(key)).subscribe(handler),
 
-			// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
-			(handler, unsubscribe) => unsubscribe()
+	// 		// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
+	// 		(handler, unsubscribe) => unsubscribe()
 
-		);
+	// 	);
 
-	}
+	// }
 
 	async remove(key: string): Promise<void> {
 

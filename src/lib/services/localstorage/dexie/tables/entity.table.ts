@@ -1,9 +1,9 @@
-import { Collection, IndexableType, Table, liveQuery } from 'dexie';
-import { EntityBase } from 'lib';
-import { UUID, WolfBaseTableName } from 'lib/constants';
-import { Observable, fromEventPattern } from 'rxjs';
-import { EntityTable } from '../../../lib/services/localstorage/local-storage-table.interface';
+import { Collection, IndexableType, Table } from 'dexie';
 import { WolfBaseDB } from '../wolfbase.database';
+import { EntityBase } from 'lib/models/entity-base.model';
+import { EntityTable } from '../../local-storage-table.interface';
+import { WolfBaseTableName } from 'lib/constants/database.constant';
+import { UUID } from 'lib/constants/common.constant';
 
 export abstract class EntityTableImpl<T extends EntityBase> implements EntityTable<T> {
 
@@ -88,21 +88,21 @@ export abstract class EntityTableImpl<T extends EntityBase> implements EntityTab
 
 	}
 
-	list$(params?: { orderBy?: string | undefined; reverse?: boolean | undefined; limit?: number | undefined; } | undefined): Observable<T[]> {
+	// list$(params?: { orderBy?: string | undefined; reverse?: boolean | undefined; limit?: number | undefined; } | undefined): Observable<T[]> {
 
-		return fromEventPattern(
+	// 	return fromEventPattern(
 
-			// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
-			// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
-			// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
-			(handler) => liveQuery(() => this.list(params)).subscribe(handler),
+	// 		// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
+	// 		// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
+	// 		// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
+	// 		(handler) => liveQuery(() => this.list(params)).subscribe(handler),
 
-			// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
-			(handler, unsubscribe) => unsubscribe()
+	// 		// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
+	// 		(handler, unsubscribe) => unsubscribe()
 
-		);
+	// 	);
 
-	}
+	// }
 
 	listIds(): Promise<string[]> {
 

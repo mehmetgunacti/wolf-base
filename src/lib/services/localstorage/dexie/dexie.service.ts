@@ -1,7 +1,7 @@
-import { WolfBaseTableName } from 'lib/constants';
-import { LocalStorageService } from '../../lib/services/localstorage/local-storage-service.interface';
-import { BookmarksTable, ConfigurationTable } from '../../lib/services/localstorage/local-storage-table.interface';
+import { WolfBaseTableName } from '../../../constants/database.constant';
 import { WolfBaseDB } from './wolfbase.database';
+import { LocalStorageService } from '../local-storage-service.interface';
+import { BookmarksTable, ConfigurationTable } from '../local-storage-table.interface';
 
 export class DexieLocalStorageService implements LocalStorageService {
 

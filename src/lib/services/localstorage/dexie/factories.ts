@@ -1,7 +1,8 @@
-import { WolfBaseTableName } from 'lib';
+import { WolfBaseTableName } from '../../../constants/database.constant';
 import { DexieLocalStorageService } from './dexie.service';
-import { ConfigurationTableImpl, KeyValueTableImpl } from './tables';
 import { BookmarksTableImpl } from './tables/bookmarks.table';
+import { ConfigurationTableImpl } from './tables/configuration.table';
+import { KeyValueTableImpl } from './tables/key-value.table';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
 
 export const localStorageServiceFactory = (): DexieLocalStorageService => {
