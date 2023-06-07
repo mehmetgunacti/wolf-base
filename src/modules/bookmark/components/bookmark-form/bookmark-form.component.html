@@ -22,6 +22,31 @@
 
 	<div bookmark-form-right>
 
+		<!-- ID -->
+		<div *ngIf="bookmark?.id">
+			<span class="p-float-label p-fluid">
+				<input
+					type="text"
+					pInputText
+					[value]="bookmark?.id"
+					readonly>
+				<label>ID</label>
+			</span>
+		</div>
+
+		<!-- CREATED -->
+		<div *ngIf="bookmark?.created">
+			<span class="p-float-label p-fluid">
+				<input
+					type="text"
+					pInputText
+					[value]="bookmark?.created"
+					readonly>
+				<label>Created</label>
+			</span>
+		</div>
+
+		<!-- URLs -->
 		<div *ngFor="let fcUrl of form.urls.controls; let idx = index">
 			<span
 				class="p-float-label p-fluid">
@@ -36,6 +61,7 @@
 			<button *ngIf="idx > 0" pButton pRipple type="button" icon="pi pi-minus" class="p-button-text" title="Remove URL" (click)="removeURL(idx)"></button>
 		</div>
 
+		<!-- NAME -->
 		<div>
 			<span class="p-float-label p-fluid">
 				<input
@@ -48,6 +74,7 @@
 			<button pButton pRipple type="button" icon="pi pi-reply" class="p-button-text" title="Parse URL" (click)="nameFromURL()"></button>
 		</div>
 
+		<!-- TITLE -->
 		<div>
 			<span class="p-float-label p-fluid">
 				<input
@@ -60,6 +87,7 @@
 			<button pButton pRipple type="button" icon="pi pi-search" class="p-button-text" title="Lookup" (click)="lookupTitle()"></button>
 		</div>
 
+		<!-- TAGS -->
 		<div>
 			<span class="p-float-label p-fluid">
 				<p-autoComplete
@@ -76,6 +104,7 @@
 			<button pButton pRipple type="button" [icon]="isPopular ? 'pi pi-heart-fill' : 'pi pi-heart'" class="p-button-text" title="Toggle 'popular'" (click)="onTogglePopular()"></button>
 		</div>
 
+		<!-- CLICKS -->
 		<div>
 			<span class="p-float-label p-fluid">
 				<input
