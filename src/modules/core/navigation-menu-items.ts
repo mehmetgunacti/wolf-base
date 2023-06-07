@@ -22,7 +22,7 @@ export const miSettings: MenuItem = {
 	routerLink: ['/settings']
 };
 
-export const miSync = (badge: string): MenuItem => ({
+export const miSync = (badge?: string): MenuItem => ({
 	label: 'Synchronize',
 	icon: PrimeIcons.SYNC,
 	routerLink: ['/sync'],
