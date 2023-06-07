@@ -1,12 +1,11 @@
-import { Bookmark } from 'lib/models/bookmark.model';
+import { Bookmark, SyncBookmark } from 'lib/models/bookmark.model';
 import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { BookmarksTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { SyncEvent } from 'lib/models/sync.model';
 import { BaseSyncAction } from './base.action';
 
-export class BookmarksSyncAction
-	extends BaseSyncAction<Bookmark> {
+export class BookmarksSyncAction extends BaseSyncAction<Bookmark> {
 
 	constructor(
 		table: BookmarksTable,

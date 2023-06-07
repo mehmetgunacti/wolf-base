@@ -1,7 +1,7 @@
 import { EntityBase } from './entity-base.model';
 import { SyncData, Syncable } from './sync.model';
 
-interface SyncBookmark extends SyncData<Bookmark> {
+export interface SyncBookmark extends SyncData<Bookmark> {
 
 	clicks?: number;
 

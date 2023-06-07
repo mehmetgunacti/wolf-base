@@ -4,8 +4,8 @@ import { RemoteStorageCollection } from 'lib/services/remotestorage/remote-stora
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { sleep } from 'lib/utils/helper.tool';
 import { syncState } from 'lib/utils/sync.tool';
-import { SYNC_STATES } from 'lib/constants/sync.constant';
-import { SyncEvent } from 'lib/models/sync.model';
+import { SYNC_STATES, WolfBaseEntity } from 'lib/constants/sync.constant';
+import { SyncEvent, Syncable, SyncData } from 'lib/models/sync.model';
 
 export interface Action<PARAM, RETURN_TYPE> {
 
@@ -13,7 +13,7 @@ export interface Action<PARAM, RETURN_TYPE> {
 
 }
 
-export abstract class BaseSyncAction <T extends EntityBase> implements Action<void, AsyncGenerator<SyncEvent>> {
+export abstract class BaseSyncAction<T extends EntityBase & Syncable<EntityBase, SyncData<EntityBase>>> implements Action<void, AsyncGenerator<SyncEvent>> {
 
 	// protected mapRemoteData: Map<string, IRemoteData<ID>>;
 
@@ -27,12 +27,12 @@ export abstract class BaseSyncAction <T extends EntityBase> implements Action<vo
 
 	async *execute(): AsyncGenerator<SyncEvent> {
 
-		yield* this.handleLocallyDeleted();
+		// yield* this.handleLocallyDeleted();
 		yield* this.handleNew();
-		yield* this.download();
-		yield* this.handleRemotelyDeleted();
-		yield* this.handleUpdated();
-		yield* this.saveAll();
+		// yield* this.download();
+		// yield* this.handleRemotelyDeleted();
+		// yield* this.handleUpdated();
+		// yield* this.saveAll();
 
 	}
 
@@ -50,12 +50,22 @@ export abstract class BaseSyncAction <T extends EntityBase> implements Action<vo
 
 	protected async *handleNew(): AsyncGenerator<SyncEvent> {
 
-		await sleep(500);
+		const toBeUploaded: T[] = await this.table.list({ filterFn: (b) => !b.sync});
+		yield syncState(this.collection, SYNC_STATES.PROCESSING_NEW, `${toBeUploaded.length} new items detected.`);
+
+		for (const [idx, item] of toBeUploaded.entries()) {
+
+			yield syncState(this.collection, SYNC_STATES.PROCESSING_NEW, `uploading ${item.id}: ${idx + 1} / ${toBeUploaded.length}`);
+			const uploaded: T = await this.remoteCollection.create(item);
+			console.log(uploaded);
+			await this.table.update(item.id, uploaded);
+			await sleep(500);
+
+		}
 
 	}
 
 	protected async *download(): AsyncGenerator<SyncEvent> {
-
 
 		await sleep(500);
 

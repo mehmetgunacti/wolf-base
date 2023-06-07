@@ -1,7 +1,7 @@
 import { UUID } from "lib/constants/common.constant";
 import { RemoteCollection } from "lib/constants/remote.constant";
 import { EntityBase } from "lib/models/entity-base.model";
-import { IFirestoreData, IFirestoreDocument } from "lib/utils/firestore/firestore.model";
+import { IFirestoreDocument } from "lib/utils/firestore/firestore.model";
 import { FirestoreTool } from "lib/utils/firestore/firestore.tool";
 import { RemoteStorageCollection } from "../remote-storage-collection.interface";
 
@@ -21,8 +21,8 @@ export abstract class AbstractFirestoreCollection<T extends EntityBase> implemen
 			queryParameters: { documentId: item.id }
 		});
 		const requestBody: IFirestoreDocument<T> = this.createRequestBody(item);
-		const response: IFirestoreData<T> = await this.firestore.create(url, requestBody);
-		return this.convert(response);
+		const response: T = await this.firestore.create(url, requestBody);
+		return response;
 
 	}
 
@@ -35,8 +35,8 @@ export abstract class AbstractFirestoreCollection<T extends EntityBase> implemen
 		const mask = this.createUpdateMask(item);
 		const requestBody: IFirestoreDocument<T> = this.createRequestBody(item);
 
-		const response: IFirestoreData<T> = await this.firestore.update(url, mask, requestBody);
-		return this.convert(response);
+		const response: T = await this.firestore.update(url, mask, requestBody);
+		return response;
 
 	}
 
@@ -55,7 +55,7 @@ export abstract class AbstractFirestoreCollection<T extends EntityBase> implemen
 
 	async get(id: string): Promise<T> {
 
-		const response: IFirestoreData<T> = await this.firestore.get<T>(
+		const response: T = await this.firestore.get<T>(
 
 			this.firestore.createURL({
 				document: id,
@@ -63,13 +63,13 @@ export abstract class AbstractFirestoreCollection<T extends EntityBase> implemen
 			})
 
 		);
-		return this.convert(response);
+		return response;
 
 	}
 
 	async list(): Promise<T[]> {
 
-		const list: IFirestoreData<T>[] = await this.firestore.list<T>(
+		const list: T[] = await this.firestore.list<T>(
 
 			this.firestore.createURL({
 				collection: this.remoteCollection,
@@ -77,13 +77,13 @@ export abstract class AbstractFirestoreCollection<T extends EntityBase> implemen
 			})
 
 		);
-		return list.map(item => this.convert(item));
+		return list;
 
 	}
 
 	async listIds(): Promise<UUID[]> {
 
-		const ids: IFirestoreData<T>[] = await this.firestore.list(
+		const ids: T[] = await this.firestore.list(
 
 			this.firestore.createURL({
 				collection: this.remoteCollection,
@@ -100,17 +100,20 @@ export abstract class AbstractFirestoreCollection<T extends EntityBase> implemen
 	protected abstract createRequestBody(item: Partial<T>): IFirestoreDocument<T>;
 	protected abstract createUpdateMask(item: Partial<T>): string;
 
-	private convert(item: IFirestoreData<T>): T {
+	// private convert(item: T): T {
 
-		return {
+	// 	const { createTime, updateTime, ...rest} = item;
+	// 	return {
 
-			...item.data,
-			createTime: item.created,
-			updateTime: item.updated
+	// 		...rest,
+	// 		sync: {
+	// 			createTime,
+	// 			updateTime
+	// 		}
 
-		};
+	// 	};
 
-	}
+	// }
 
 }
 

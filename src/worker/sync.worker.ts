@@ -5,7 +5,8 @@
 * Web workers run in a separate thread and don't have direct access to the Angular framework or the DOM.
 * This means that the web worker code has to be decoupled from any Angular-specific dependencies.
 * Imports with dependencies to DOM APIs (Angular CDK etc.) mess up the compilation of the project!
-* Only import pure JavaScript functions or libraries. Hence the separate "lib" folder.
+* Only import pure JavaScript functions or libraries.
+* Also, don't use index.ts files when writing import statments inside the lib folder.
 */
 import { localStorageServiceFactory } from "lib/services/localstorage/dexie/factories";
 import { bookmarksCollectionFactory } from "lib/services/remotestorage/firestore/factories";
@@ -29,10 +30,10 @@ addEventListener('message', async (a: MessageEvent) => {
 
 	console.log('running batch:', a);
 	isRunning = true;
-	// const generators: AsyncGenerator<SyncEvent>[] = createActions();
+	const generators: AsyncGenerator<SyncEvent>[] = createActions();
 
-	// for (const gen of generators)
-	//	await process(gen);
+	for (const gen of generators)
+		await process(gen);
 
 	postMessage({ status: SYNC_STATES.DONE });
 	isRunning = false;
