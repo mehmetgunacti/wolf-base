@@ -6,6 +6,7 @@ import * as fromBookmark from 'store/bookmark/selectors';
 import * as actions from 'store/core/actions';
 import * as selectors from 'store/core/selectors';
 import * as navItems from '../../navigation-menu-items';
+import { buildInfo } from 'version';
 
 @Component({
 	selector: 'app-core-page',
@@ -24,6 +25,10 @@ export class CorePageComponent implements OnDestroy {
 
 	@HostBinding('class.navCollapsed')
 	navCollapsed = true;
+
+	builtTime = buildInfo.builtTime;
+	builtVersion = buildInfo.version;
+	builtNumber = buildInfo.builtNumber;
 
 	constructor(
 		private store: Store
