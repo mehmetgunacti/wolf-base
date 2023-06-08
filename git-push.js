@@ -16,12 +16,12 @@ const GIT_STATUS_PORCELAIN			= 'git status --porcelain';
 const READ_BRANCH					= 'git rev-parse --abbrev-ref HEAD';
 const UPDATE_PACKAGE_JSON_VERSION	= `npm version ${version} --no-git-tag-version`;
 const OBTAIN_COMMIT_COUNT			= 'git rev-list --count main';
-const GIT_LOCAL_REMOTE_SAME			= `git merge-base --is-ancestor origin/main main`;
+const GIT_LOCAL_REMOTE_SAME			= `git log --oneline origin/main..main`; // `git merge-base --is-ancestor origin/main main`;
 const GIT_AMEND						= 'git commit -a --amend --no-edit';
 const GIT_COMMIT					= (m) => `git commit -a -m "${m}"`;
 const GIT_PUSH_ORIGIN_MAIN			= 'git push origin main';
-// const TAG							= (p) => `git tag -a v${p} -m "Version ${p}"`;
-// const GIT_PUSH_ORIGIN_TAG			= (p) => `git push origin v${p}`;
+const TAG							= (p) => `git tag -a v${p} -m "Version ${p}"`;
+const GIT_PUSH_ORIGIN_TAG			= (p) => `git push origin v${p}`;
 
 function argsInvalid() {
 
@@ -52,6 +52,10 @@ export const buildInfo = {
 
 function runVersionScript() {
 
+	/*
+	*  Do checks
+	*/
+
 	if (argsInvalid())
 		throw new Error('npm run gitpush "<commit message>" [major|minor|patch]');
 
@@ -70,6 +74,20 @@ function runVersionScript() {
 	if (notEmpty)
 		throw new Error('GIT working directory not clean!');
 	console.log(`GIT working directory is clean.`);
+
+	// check if local and remote are the same
+	console.log();
+	console.log('Checking if local and remote are same...');
+	const same = !exec(GIT_LOCAL_REMOTE_SAME);
+	console.log(`Local and remote branches are ${ same ? 'same' : 'not same '}.`);
+
+	if (same)
+		throw new Error('Local and remote branches are on same commit (create a new local commit)!');
+
+	/*
+	* Do version updates:
+	* This modifies package.json and src/version.ts files
+	*/
 
 	// update 'version' in package.json..
 	// this also aborts when git working directory is not clean
@@ -96,29 +114,15 @@ function runVersionScript() {
 	updateVersion(commitCount, package_json_version);
 	console.log(`File 'src/version.ts' updated.`);
 
-	// check if local and remote are the same
+	/*
+	* Do git changes
+	*/
+
+	// add modifications to latest commit (amend)
 	console.log();
-	console.log('Checking if local and remote are same...');
-	const same = !exec(GIT_LOCAL_REMOTE_SAME);
-	console.log(`Local and remote branches are ${ same ? 'same' : 'not same '}.`);
-
-	if (same) {
-
-		// create commit
-		console.log();
-		console.log('Creating commit...');
-		exec(GIT_COMMIT(`Version ${package_json_version}`));
-		console.log('Commit created.');
-
-	} else {
-
-		// add modifications to latest commit (amend)
-		console.log();
-		console.log('Amending commit...');
-		exec(GIT_AMEND);
-		console.log('Commit amended.');
-
-	}
+	console.log('Amending commit...');
+	exec(GIT_AMEND);
+	console.log('Commit amended.');
 
 	// push branch to remote repo
 	console.log();
@@ -126,17 +130,17 @@ function runVersionScript() {
 	exec(GIT_PUSH_ORIGIN_MAIN);
 	console.log(`Branch 'main' pushed to 'origin'.`);
 
-	// // tag the latest commit
-	// console.log();
-	// console.log('Tagging latest commit...');
-	// exec(TAG(package_json_version));
-	// console.log('Latest commit tagged.');
+	// tag the latest commit
+	console.log();
+	console.log('Tagging latest commit...');
+	exec(TAG(package_json_version));
+	console.log('Latest commit tagged.');
 
-	// // push tag to remote repo
-	// console.log();
-	// console.log(`Pushing tag v${package_json_version} to remote repository...`);
-	// exec(GIT_PUSH_ORIGIN_TAG(package_json_version));
-	// console.log(`Tag v${package_json_version} pushed to 'origin'.`);
+	// push tag to remote repo
+	console.log();
+	console.log(`Pushing tag v${package_json_version} to remote repository...`);
+	exec(GIT_PUSH_ORIGIN_TAG(package_json_version));
+	console.log(`Tag v${package_json_version} pushed to 'origin'.`);
 
 	console.log();
 	console.log('Done.');
