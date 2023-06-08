@@ -36,6 +36,12 @@
 	align-items		: center;
 }
 
+%flex-space-between-end {
+	display			: flex;
+	justify-content	: space-between;
+	align-items		: flex-end;
+}
+
 %flex-end-center {
 	display			: flex;
 	justify-content	: flex-end;

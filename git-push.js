@@ -12,13 +12,22 @@ const args = process.argv.slice(2);
 const version = args[0] || 'patch';
 console.log('Version:', version);
 
+const GIT_STATUS_PORCELAIN			= 'git status --porcelain';
 const READ_BRANCH					= 'git rev-parse --abbrev-ref HEAD';
-const UPDATE_PACKAGE_JSON_VERSION	= `npm version ${version}`;
+const UPDATE_PACKAGE_JSON_VERSION	= `npm version ${version} --no-git-tag-version`;
 const OBTAIN_COMMIT_COUNT			= 'git rev-list --count main';
+const GIT_LOCAL_REMOTE_SAME			= `git merge-base --is-ancestor origin/main main`;
 const GIT_AMEND						= 'git commit -a --amend --no-edit';
+const GIT_COMMIT					= (m) => `git commit -a -m "${m}"`;
 const GIT_PUSH_ORIGIN_MAIN			= 'git push origin main';
 // const TAG							= (p) => `git tag -a v${p} -m "Version ${p}"`;
 // const GIT_PUSH_ORIGIN_TAG			= (p) => `git push origin v${p}`;
+
+function argsInvalid() {
+
+	return !['major', 'minor', 'patch'].includes(version);
+
+}
 
 function exec(command) {
 
@@ -43,6 +52,9 @@ export const buildInfo = {
 
 function runVersionScript() {
 
+	if (argsInvalid())
+		throw new Error('npm run gitpush "<commit message>" [major|minor|patch]');
+
 	// check if current branch is 'main'
 	console.log();
 	console.log('Checking current branch...');
@@ -50,6 +62,14 @@ function runVersionScript() {
 	if (branch !== 'main')
 		throw new Error('Current branch is not main!');
 	console.log(`Currently on branch '${branch}'.`);
+
+	// check if git working directory is clean
+	console.log();
+	console.log('Checking git working directory...');
+	const notEmpty = exec(GIT_STATUS_PORCELAIN);
+	if (notEmpty)
+		throw new Error('GIT working directory not clean!');
+	console.log(`GIT working directory is clean.`);
 
 	// update 'version' in package.json..
 	// this also aborts when git working directory is not clean
@@ -76,11 +96,29 @@ function runVersionScript() {
 	updateVersion(commitCount, package_json_version);
 	console.log(`File 'src/version.ts' updated.`);
 
-	// add modifications to latest commit (amend)
+	// check if local and remote are the same
 	console.log();
-	console.log('Amending commit...');
-	exec(GIT_AMEND);
-	console.log('Commit amended.');
+	console.log('Checking if local and remote are same...');
+	const same = !exec(GIT_LOCAL_REMOTE_SAME);
+	console.log(`Local and remote branches are ${ same ? 'same' : 'not same '}.`);
+
+	if (same) {
+
+		// create commit
+		console.log();
+		console.log('Creating commit...');
+		exec(GIT_COMMIT(`Version ${package_json_version}`));
+		console.log('Commit created.');
+
+	} else {
+
+		// add modifications to latest commit (amend)
+		console.log();
+		console.log('Amending commit...');
+		exec(GIT_AMEND);
+		console.log('Commit amended.');
+
+	}
 
 	// push branch to remote repo
 	console.log();

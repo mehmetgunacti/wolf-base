@@ -27,10 +27,11 @@
 
 		<p-panelMenu [model]="(navMenuItems$ | async) || []"></p-panelMenu>
 		<div bottom-buttons>
-			<span>v{{ builtVersion }} (#{{ builtNumber }})<br>{{ builtTime | date:'medium' }}</span>
+
 			<app-theme-switcher [isDark]="isThemeDark$ | async"
 								(switchTheme)="onSwitchTheme()"></app-theme-switcher>
 		</div>
+		<div bottom-version>v{{ builtVersion }} (#{{ builtNumber }}) {{ builtTime | date:'medium' }}</div>
 
 	</nav>
 	<article>

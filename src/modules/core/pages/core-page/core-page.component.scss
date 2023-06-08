@@ -81,24 +81,20 @@ app-core-page {
 
 			& > div[bottom-buttons] {
 
-				display			: flex;
-				justify-content	: space-evenly;
+				@extend %flex-column;
 				margin-top		: auto;
-				align-self		: center;
+				align-items		: center;
 				width			: 100%;
 				padding-top		: 0.5rem;
 				padding-bottom	: 0.5rem;
 
-				& > span {
+			}
 
-					position		: absolute;
-					font-size		: xx-small;
-					font-style		: italic;
-					color			: var(--text-color-secondary);
-					bottom			: 0.8rem;
-					left			: 1rem;
+			& > div[bottom-version] {
 
-				}
+				font-size		: xx-small;
+				font-style		: italic;
+				color			: var(--text-color-secondary);
 
 			}
 
