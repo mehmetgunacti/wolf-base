@@ -12,13 +12,13 @@ const args = process.argv.slice(2);
 const version = args[0] || 'patch';
 console.log('Version:', version);
 
-const READ_BRANCH = 'git rev-parse --abbrev-ref HEAD';
-const UPDATE_PACKAGE_JSON_VERSION = `npm version ${version} --no-git-tag-version`;
-const OBTAIN_COMMIT_COUNT = 'git rev-list --count main';
-const GIT_AMEND = 'git add -A && git commit -a --amend --no-edit';
-const GIT_PUSH_ORIGIN_MAIN = 'git push origin main';
-const TAG = (package_json_version) => `git tag -a v${package_json_version} -m "Version ${package_json_version}"`;
-const GIT_PUSH_ORIGIN_TAG = (package_json_version) => `git push origin v${package_json_version}`;
+const READ_BRANCH					= 'git rev-parse --abbrev-ref HEAD';
+const UPDATE_PACKAGE_JSON_VERSION	= `npm version ${version}`;
+const OBTAIN_COMMIT_COUNT			= 'git rev-list --count main';
+const GIT_AMEND						= 'git commit -a --amend --no-edit';
+const GIT_PUSH_ORIGIN_MAIN			= 'git push origin main';
+// const TAG							= (p) => `git tag -a v${p} -m "Version ${p}"`;
+// const GIT_PUSH_ORIGIN_TAG			= (p) => `git push origin v${p}`;
 
 function exec(command) {
 
@@ -52,6 +52,7 @@ function runVersionScript() {
 	console.log(`Currently on branch '${branch}'.`);
 
 	// update 'version' in package.json..
+	// this also aborts when git working directory is not clean
 	console.log();
 	console.log(`Updating '${version}' version in package.json...`);
 	exec(UPDATE_PACKAGE_JSON_VERSION);
@@ -87,17 +88,17 @@ function runVersionScript() {
 	exec(GIT_PUSH_ORIGIN_MAIN);
 	console.log(`Branch 'main' pushed to 'origin'.`);
 
-	// tag the latest commit
-	console.log();
-	console.log('Tagging latest commit...');
-	exec(TAG(package_json_version));
-	console.log('Latest commit tagged.');
+	// // tag the latest commit
+	// console.log();
+	// console.log('Tagging latest commit...');
+	// exec(TAG(package_json_version));
+	// console.log('Latest commit tagged.');
 
-	// push tag to remote repo
-	console.log();
-	console.log(`Pushing tag v${package_json_version} to remote repository...`);
-	exec(GIT_PUSH_ORIGIN_TAG(package_json_version));
-	console.log(`Tag v${package_json_version} pushed to 'origin'.`);
+	// // push tag to remote repo
+	// console.log();
+	// console.log(`Pushing tag v${package_json_version} to remote repository...`);
+	// exec(GIT_PUSH_ORIGIN_TAG(package_json_version));
+	// console.log(`Tag v${package_json_version} pushed to 'origin'.`);
 
 	console.log();
 	console.log('Done.');
