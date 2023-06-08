@@ -1,6 +1,4 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { POPULAR } from 'lib';
-import { toggleArrayItem } from 'utils';
 import * as fromActions from '../actions';
 import * as fromStates from '../states';
 

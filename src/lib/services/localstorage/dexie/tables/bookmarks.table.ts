@@ -1,8 +1,8 @@
+import { toggleArrayItem } from 'lib';
 import { UUID } from 'lib/constants/common.constant';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { Bookmark } from 'lib/models/bookmark.model';
 import { BookmarksTable } from 'lib/services/localstorage/local-storage-table.interface';
-import { toggleArrayItem } from 'utils/array.util';
 import { v4 as uuidv4 } from 'uuid';
 import { WolfBaseDB } from '../wolfbase.database';
 import { EntityTableImpl } from './entity.table';

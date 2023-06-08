@@ -85,12 +85,10 @@ function runVersionScript() {
 		throw new Error('Local and remote branches are on same commit (create a new local commit)!');
 
 	/*
-	* Do version updates:
-	* This modifies package.json and src/version.ts files
+	* Version updates: "package.json", "src/version.ts"
 	*/
 
 	// update 'version' in package.json..
-	// this also aborts when git working directory is not clean
 	console.log();
 	console.log(`Updating '${version}' version in package.json...`);
 	exec(UPDATE_PACKAGE_JSON_VERSION);
@@ -115,7 +113,7 @@ function runVersionScript() {
 	console.log(`File 'src/version.ts' updated.`);
 
 	/*
-	* Do git changes
+	* Git commit
 	*/
 
 	// add modifications to latest commit (amend)

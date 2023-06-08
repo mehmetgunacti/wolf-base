@@ -2,13 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { Bookmark, LocalStorageService, POPULAR } from 'lib';
+import { liveQuery } from 'dexie';
+import { Bookmark, LocalStorageService, POPULAR, commaSplit, toggleArrayItem } from 'lib';
 import { fromEventPattern, of } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/core';
-import { commaSplit, toggleArrayItem } from 'utils';
 import * as fromActions from '../actions';
-import { liveQuery } from 'dexie';
 
 @Injectable()
 export class EntitiesEffects {
