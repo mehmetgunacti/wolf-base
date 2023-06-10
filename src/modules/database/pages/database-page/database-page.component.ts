@@ -2,18 +2,16 @@ import { Component, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { environment } from 'environments/environment';
-import { Bookmark, FirestoreTool, LocalStorageService, RemoteCollection, UUID, WolfBaseTableName } from 'lib';
+import { Bookmark, BookmarksFirestoreCollection, FirestoreTool, LocalStorageService, RemoteCollection, WolfBaseTableName } from 'lib';
 import { IDBase } from 'lib/models/id-base.model';
 import { Observable, map, switchMap } from 'rxjs';
-import { BookmarksFirestoreCollection } from 'lib';
 import { SyncService } from 'services/sync.service';
-import { v4 as uuidv4 } from 'uuid';
 
 @Component({
-	selector: 'app-settings-page',
-	templateUrl: './settings-page.component.html'
+	selector: 'app-database-page',
+	templateUrl: './database-page.component.html'
 })
-export class SettingsPageComponent {
+export class DatabasePageComponent {
 
 	tableNames: { label: string, value: string }[];
 	fcTableName = new FormControl();

@@ -2,17 +2,17 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'modules/shared/shared.module';
-import * as fromConfig from './settings.config';
-import { SettingsRoutingModule } from './settings-routing.module';
+import { DatabaseRoutingModule } from './database-routing.module';
+import { DatabasePageComponent } from './pages/database-page/database-page.component';
 
 @NgModule({
-	declarations: fromConfig.components,
+	declarations: [ DatabasePageComponent ],
 	imports: [
 		CommonModule,
-		SettingsRoutingModule,
+		DatabaseRoutingModule,
 		ReactiveFormsModule,
 		SharedModule
 	],
 	providers: []
 })
-export class SettingsModule { }
+export class DatabaseModule { }

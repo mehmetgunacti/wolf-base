@@ -16,10 +16,10 @@ export const miBookmarks = (badge: string): MenuItem => ({
 	styleClass: 'menuBadge'
 });
 
-export const miSettings: MenuItem = {
-	label: 'Settings',
-	icon: PrimeIcons.COG,
-	routerLink: ['/settings']
+export const miDatabase: MenuItem = {
+	label: 'Database',
+	icon: PrimeIcons.DATABASE,
+	routerLink: ['/database']
 };
 
 export const miSync = (badge?: string): MenuItem => ({

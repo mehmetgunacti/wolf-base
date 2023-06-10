@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
+import { DatabasePageComponent } from './pages/database-page/database-page.component';
 
 const routes: Route[] = [
 	{
 		path: '',
-		component: SettingsPageComponent
+		component: DatabasePageComponent
 	}
 ];
 
@@ -15,4 +15,4 @@ const routes: Route[] = [
 	],
 	exports: [RouterModule]
 })
-export class SettingsRoutingModule { }
+export class DatabaseRoutingModule { }

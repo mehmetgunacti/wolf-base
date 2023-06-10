@@ -17,8 +17,8 @@ const routes: Routes = [
 				loadChildren: () => import('modules/bookmark/bookmark.module').then(m => m.BookmarkModule)
 			},
 			{
-				path: 'settings',
-				loadChildren: () => import('modules/settings/settings.module').then(m => m.SettingsModule)
+				path: 'database',
+				loadChildren: () => import('modules/database/database.module').then(m => m.DatabaseModule)
 			},
 			{
 				path: 'sync',
