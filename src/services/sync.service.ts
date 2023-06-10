@@ -17,7 +17,6 @@ export class SyncService {
 
 		// this.worker = new Worker('../worker/sync1.worker', { type: 'module' });
 		this.worker = new Worker(new URL('../worker/sync.worker', import.meta.url));
-		console.log(this.worker);
 		this.worker.onmessage = event => { // (event: MessageEvent<SyncEvent>) => {
 
 			console.log(event);

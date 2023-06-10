@@ -6,6 +6,7 @@ import { sleep } from 'lib/utils/helper.tool';
 import { syncState } from 'lib/utils/sync.tool';
 import { SYNC_STATES, WolfBaseEntity } from 'lib/constants/sync.constant';
 import { SyncEvent, Syncable, SyncData } from 'lib/models/sync.model';
+import { UUID } from 'lib';
 
 export interface Action<PARAM, RETURN_TYPE> {
 
@@ -15,24 +16,33 @@ export interface Action<PARAM, RETURN_TYPE> {
 
 export abstract class BaseSyncAction<T extends Entity & Syncable<Entity, SyncData<Entity>>> implements Action<void, AsyncGenerator<SyncEvent>> {
 
-	// protected mapRemoteData: Map<string, IRemoteData<ID>>;
+	protected localData: Map<UUID, Entity> = new Map();
+	protected remoteData: Map<UUID, Entity> = new Map();
 
 	constructor(
 		protected collection: RemoteCollection,
 		protected table: EntityTable<T>,
 		protected remoteCollection: RemoteStorageCollection<T>
-	) {
-		// this.mapRemoteData = new Map();
-	}
+	) { }
 
 	async *execute(): AsyncGenerator<SyncEvent> {
 
+		yield* this.loadRemoteData();
 		// yield* this.handleLocallyDeleted();
-		yield* this.handleNew();
+		// yield* this.handleNew();
 		// yield* this.download();
 		// yield* this.handleRemotelyDeleted();
 		// yield* this.handleUpdated();
 		// yield* this.saveAll();
+
+	}
+
+	protected async *loadRemoteData(): AsyncGenerator<SyncEvent> {
+
+		const entities = await this.table.list();
+
+		console.log(await this.remoteCollection.listIds());
+		//yield syncState(this.collection, SYNC_STATES.PROCESSING_NEW, `uploading ${item.id}: ${idx + 1} / ${toBeUploaded.length}`);
 
 	}
 
@@ -50,7 +60,7 @@ export abstract class BaseSyncAction<T extends Entity & Syncable<Entity, SyncDat
 
 	protected async *handleNew(): AsyncGenerator<SyncEvent> {
 
-		const toBeUploaded: T[] = await this.table.list({ filterFn: (b) => !b.sync});
+		const toBeUploaded: T[] = await this.table.list({ filterFn: (b) => !b.sync });
 		yield syncState(this.collection, SYNC_STATES.PROCESSING_NEW, `${toBeUploaded.length} new items detected.`);
 
 		for (const [idx, item] of toBeUploaded.entries()) {
