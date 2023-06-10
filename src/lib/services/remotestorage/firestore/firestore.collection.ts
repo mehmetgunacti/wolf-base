@@ -5,7 +5,7 @@ import { FirestoreDocument } from "lib/utils/firestore/firestore.model";
 import { FirestoreTool } from "lib/utils/firestore/firestore.tool";
 import { RemoteStorageCollection } from "../remote-storage-collection.interface";
 
-export abstract class AbstractFirestoreCollection<T extends Entity> implements RemoteStorageCollection<T> {
+export abstract class FirestoreCollection<T extends Entity> implements RemoteStorageCollection<T> {
 
 	protected pageSize = '10000'; // high number => download all
 

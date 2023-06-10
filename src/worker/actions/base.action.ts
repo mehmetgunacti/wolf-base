@@ -1,5 +1,5 @@
 import { EntityTable } from 'lib/services/localstorage/local-storage-table.interface';
-import { Entity } from 'lib/models/entity-base.model';
+import { Entity } from 'lib/models/entity.model';
 import { RemoteStorageCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { sleep } from 'lib/utils/helper.tool';

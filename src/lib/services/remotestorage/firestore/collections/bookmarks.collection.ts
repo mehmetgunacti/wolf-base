@@ -5,9 +5,9 @@ import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-c
 import { FIRESTORE_VALUE } from 'lib/utils/firestore/firestore.constant';
 import { FirestoreDocument } from 'lib/utils/firestore/firestore.model';
 import { FirestoreTool } from 'lib/utils/firestore/firestore.tool';
-import { AbstractFirestoreCollection } from '../firestore.collection';
+import { FirestoreCollection } from '../firestore.collection';
 
-export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bookmark> implements BookmarksCollection {
+export class BookmarksFirestoreCollection extends FirestoreCollection<Bookmark> implements BookmarksCollection {
 
 	constructor(firestore: FirestoreTool) {
 		super(firestore, RemoteCollection.bookmarks);

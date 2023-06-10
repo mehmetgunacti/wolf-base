@@ -3,7 +3,7 @@ import { UUID } from 'lib/constants/common.constant';
 import { CONF_KEYS, WolfBaseTableName } from 'lib/constants/database.constant';
 import { Bookmark } from 'lib/models/bookmark.model';
 import { DexieConfiguration } from 'lib/models/database.model';
-import { Entity } from 'lib/models/entity-base.model';
+import { Entity } from 'lib/models/entity.model';
 import { ITrash } from 'lib/models/trashcan.model';
 
 class DEFAULT_CONF_VALUES {

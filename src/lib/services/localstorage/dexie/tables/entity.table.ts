@@ -1,6 +1,6 @@
 import { Collection, IndexableType, Table } from 'dexie';
 import { WolfBaseDB } from '../wolfbase.database';
-import { Entity } from 'lib/models/entity-base.model';
+import { Entity } from 'lib/models/entity.model';
 import { EntityTable } from '../../local-storage-table.interface';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { UUID } from 'lib/constants/common.constant';

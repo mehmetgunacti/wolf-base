@@ -1,7 +1,7 @@
 import { UUID } from "lib/constants/common.constant";
 import { Bookmark } from "lib/models/bookmark.model";
 import { Configuration } from "lib/models/configuration.model";
-import { Entity } from "lib/models/entity-base.model";
+import { Entity } from "lib/models/entity.model";
 
 
 export interface EntityTable<T extends Entity> {
