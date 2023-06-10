@@ -1,4 +1,5 @@
 export enum FIRESTORE_TYPE {
+
 	arrayValue = 'arrayValue',
 	bytesValue = 'bytesValue',
 	booleanValue = 'booleanValue',
@@ -10,6 +11,7 @@ export enum FIRESTORE_TYPE {
 	referenceValue = 'referenceValue',
 	stringValue = 'stringValue',
 	timestampValue = 'timestampValue'
+
 }
 
 // export type FIRESTORE_TYPE =

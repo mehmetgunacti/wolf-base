@@ -1,11 +1,11 @@
 import { UUID } from "lib/constants/common.constant";
 import { RemoteCollection } from "lib/constants/remote.constant";
-import { EntityBase } from "lib/models/entity-base.model";
-import { IFirestoreDocument } from "lib/utils/firestore/firestore.model";
+import { Entity } from "lib/models/entity.model";
+import { FirestoreDocument } from "lib/utils/firestore/firestore.model";
 import { FirestoreTool } from "lib/utils/firestore/firestore.tool";
 import { RemoteStorageCollection } from "../remote-storage-collection.interface";
 
-export abstract class AbstractFirestoreCollection<T extends EntityBase> implements RemoteStorageCollection<T> {
+export abstract class AbstractFirestoreCollection<T extends Entity> implements RemoteStorageCollection<T> {
 
 	protected pageSize = '10000'; // high number => download all
 
@@ -20,7 +20,7 @@ export abstract class AbstractFirestoreCollection<T extends EntityBase> implemen
 			collection: this.remoteCollection,
 			queryParameters: { documentId: item.id }
 		});
-		const requestBody: IFirestoreDocument<T> = this.createRequestBody(item);
+		const requestBody: FirestoreDocument<T> = this.createRequestBody(item);
 		const response: T = await this.firestore.create(url, requestBody);
 		return response;
 
@@ -33,7 +33,7 @@ export abstract class AbstractFirestoreCollection<T extends EntityBase> implemen
 			document: id
 		});
 		const mask = this.createUpdateMask(item);
-		const requestBody: IFirestoreDocument<T> = this.createRequestBody(item);
+		const requestBody: FirestoreDocument<T> = this.createRequestBody(item);
 
 		const response: T = await this.firestore.update(url, mask, requestBody);
 		return response;
@@ -96,8 +96,8 @@ export abstract class AbstractFirestoreCollection<T extends EntityBase> implemen
 
 	}
 
-	protected abstract createRequestBody(item: T): IFirestoreDocument<T>;
-	protected abstract createRequestBody(item: Partial<T>): IFirestoreDocument<T>;
+	protected abstract createRequestBody(item: T): FirestoreDocument<T>;
+	protected abstract createRequestBody(item: Partial<T>): FirestoreDocument<T>;
 	protected abstract createUpdateMask(item: Partial<T>): string;
 
 	// private convert(item: T): T {

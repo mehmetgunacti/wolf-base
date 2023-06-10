@@ -17,7 +17,6 @@ import { sleep } from "lib/utils/helper.tool";
 import { LocalStorageService } from "lib/services/localstorage/local-storage-service.interface";
 
 let isRunning = false;
-console.log('worker  running.');
 
 addEventListener('message', async (a: MessageEvent) => {
 

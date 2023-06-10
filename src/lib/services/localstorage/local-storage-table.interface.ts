@@ -1,10 +1,10 @@
 import { UUID } from "lib/constants/common.constant";
 import { Bookmark } from "lib/models/bookmark.model";
 import { Configuration } from "lib/models/configuration.model";
-import { EntityBase } from "lib/models/entity-base.model";
+import { Entity } from "lib/models/entity-base.model";
 
 
-export interface EntityTable<T extends EntityBase> {
+export interface EntityTable<T extends Entity> {
 
 	get(id: UUID): Promise<T | undefined>;
 

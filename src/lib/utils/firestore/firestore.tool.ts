@@ -1,11 +1,10 @@
-import { EntityBase } from 'lib/models/entity-base.model';
 import { FIRESTORE_TYPE, FIRESTORE_VALUE } from './firestore.constant';
 import {
-	IFirestoreDocument,
-	IFirestoreDocuments,
-	IFirestoreWrites,
-	IFirestoreWriteResult,
-	IFirestoreURLConfig
+	FirestoreDocument,
+	FirestoreDocuments,
+	FirestoreWrites,
+	FirestoreWriteResult,
+	FirestoreURLConfig
 } from './firestore.model';
 import { HTTP } from '../http.tool';
 
@@ -21,29 +20,22 @@ export class FirestoreTool {
 
 	constructor(private conf: IFirestoreConfig) { }
 
-	async create<T extends EntityBase>(
-		url: string,
-		requestBody: IFirestoreDocument<T>
-	): Promise<T> {
+	async create<T>(url: string, requestBody: FirestoreDocument<T>): Promise<T> {
 
-		return await HTTP.post<IFirestoreDocument<T>, IFirestoreDocument<T>, T>(
+		return await HTTP.post<FirestoreDocument<T>, FirestoreDocument<T>, T>(
 			url,
 			requestBody,
-			(response: IFirestoreDocument<T>): T => this.parseDocument(response)
+			(response: FirestoreDocument<T>): T => this.parseDocument(response)
 		);
 
 	}
 
-	async update<T extends EntityBase>(
-		url: string,
-		mask: string,
-		requestBody: IFirestoreDocument<T>
-	): Promise<T> {
+	async update<T>(url: string, mask: string, requestBody: FirestoreDocument<T>): Promise<T> {
 
-		return HTTP.patch<IFirestoreDocument<T>, IFirestoreDocument<T>, T>(
+		return HTTP.patch<FirestoreDocument<T>, FirestoreDocument<T>, T>(
 			`${url}&${mask}`,
 			requestBody,
-			(response: IFirestoreDocument<T>): T => this.parseDocument(response)
+			(response: FirestoreDocument<T>): T => this.parseDocument(response)
 		);
 
 	}
@@ -54,7 +46,7 @@ export class FirestoreTool {
 
 	}
 
-	async list<T extends EntityBase>(url: string): Promise<T[]> {
+	async list<T>(url: string): Promise<T[]> {
 
 		let nextPageToken: string | undefined = '';
 		let items: T[] = [];
@@ -66,9 +58,9 @@ export class FirestoreTool {
 
 			items = [
 				...items,
-				...await HTTP.get<IFirestoreDocuments<T>, T[]>(
+				...await HTTP.get<FirestoreDocuments<T>, T[]>(
 					url,
-					(response: IFirestoreDocuments<T>): T[] => {
+					(response: FirestoreDocuments<T>): T[] => {
 						nextPageToken = response.nextPageToken;
 						return this.parseDocuments(response);
 					}
@@ -81,11 +73,11 @@ export class FirestoreTool {
 
 	}
 
-	async get<T extends EntityBase>(url: string): Promise<T> {
+	async get<T>(url: string): Promise<T> {
 
-		return await HTTP.get<IFirestoreDocument<T>, T>(
+		return await HTTP.get<FirestoreDocument<T>, T>(
 			url,
-			(response: IFirestoreDocument<T>) => this.parseDocument(response)
+			(response: FirestoreDocument<T>) => this.parseDocument(response)
 		);
 
 	}
@@ -96,17 +88,17 @@ export class FirestoreTool {
 			collection: '', // no collectionId (bookmarks) this time
 			command: ':commit'
 		});
-		const requestBody: IFirestoreWrites = this.createFirestoreWrites(id, collection, fieldPath, amount);
+		const requestBody: FirestoreWrites = this.createFirestoreWrites(id, collection, fieldPath, amount);
 
-		return await HTTP.post<IFirestoreWriteResult, IFirestoreWrites, number>(
+		return await HTTP.post<FirestoreWriteResult, FirestoreWrites, number>(
 			url,
 			requestBody,
-			(firebaseResponse: IFirestoreWriteResult): number => Number(firebaseResponse?.writeResults[0]?.transformResults[0]?.integerValue)
+			(firebaseResponse: FirestoreWriteResult): number => Number(firebaseResponse?.writeResults[0]?.transformResults[0]?.integerValue)
 		);
 
 	}
 
-	createURL<T extends EntityBase>({
+	createURL<T>({
 
 		baseUrl = this.conf.baseURL,
 		projectId = this.conf.projectId,
@@ -116,7 +108,7 @@ export class FirestoreTool {
 		apiKey = this.conf.apiKey,
 		queryParameters = {}
 
-	}: IFirestoreURLConfig<T>): string {
+	}: FirestoreURLConfig<T>): string {
 
 		let url = `${baseUrl}projects/${projectId}/databases/(default)/documents`;
 
@@ -145,7 +137,7 @@ export class FirestoreTool {
 
 	}
 
-	createFirestoreWrites(id: string, collection: string, fieldPath: string, amount: number): IFirestoreWrites {
+	createFirestoreWrites(id: string, collection: string, fieldPath: string, amount: number): FirestoreWrites {
 
 		const requestBody = {
 			writes: [
@@ -169,13 +161,13 @@ export class FirestoreTool {
 
 	}
 
-	parseDocuments<T extends EntityBase>(firestoreResponse: IFirestoreDocuments<T>): T[] {
+	parseDocuments<T>(firestoreResponse: FirestoreDocuments<T>): T[] {
 
-		return firestoreResponse?.documents?.map((d: IFirestoreDocument<T>) => this.parseDocument(d)) || [];
+		return firestoreResponse?.documents?.map((d: FirestoreDocument<T>) => this.parseDocument(d)) || [];
 
 	}
 
-	parseDocument<T extends EntityBase>(item: IFirestoreDocument<T>): T {
+	parseDocument<T>(item: FirestoreDocument<T>): T {
 
 		const id: string | null = this.parseId(item);
 		if (id === null) {
@@ -198,7 +190,7 @@ export class FirestoreTool {
 
 	}
 
-	parseId<T extends EntityBase>(item: IFirestoreDocument<T>): string | null {
+	parseId<T>(item: FirestoreDocument<T>): string | null {
 
 		if (item.name)
 			return item.name?.substring(item.name.lastIndexOf('/') + 1);

@@ -1,4 +1,4 @@
-import { EntityBase } from './entity-base.model';
+import { Entity } from './entity.model';
 import { SyncData, Syncable } from './sync.model';
 
 export interface SyncBookmark extends SyncData<Bookmark> {
@@ -7,7 +7,7 @@ export interface SyncBookmark extends SyncData<Bookmark> {
 
 }
 
-export interface Bookmark extends EntityBase, Syncable<Bookmark, SyncBookmark> {
+export interface Bookmark extends Entity, Syncable<Bookmark, SyncBookmark> {
 
 	name: string;
 	title: string;

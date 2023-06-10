@@ -1,11 +1,11 @@
 import { Collection, IndexableType, Table } from 'dexie';
 import { WolfBaseDB } from '../wolfbase.database';
-import { EntityBase } from 'lib/models/entity-base.model';
+import { Entity } from 'lib/models/entity-base.model';
 import { EntityTable } from '../../local-storage-table.interface';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { UUID } from 'lib/constants/common.constant';
 
-export abstract class EntityTableImpl<T extends EntityBase> implements EntityTable<T> {
+export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T> {
 
 	constructor(
 		protected db: WolfBaseDB,

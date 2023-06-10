@@ -1,16 +1,6 @@
-import { EntityBase } from 'lib/models/entity-base.model';
 import { FIRESTORE_VALUE } from './firestore.constant';
 
-// export interface IFirestoreData<T extends EntityBase> {
-
-// 	id: string;
-// 	data: T;
-// 	created: string;
-// 	updated: string;
-
-// }
-
-export interface IFirestoreURLConfig<T extends EntityBase> {
+export interface FirestoreURLConfig<T> {
 
 	baseUrl?: string;
 	projectId?: string;
@@ -22,14 +12,14 @@ export interface IFirestoreURLConfig<T extends EntityBase> {
 
 }
 
-export interface IFirestoreDocuments<T extends EntityBase> {
+export interface FirestoreDocuments<T> {
 
-	documents: IFirestoreDocument<T>[];
+	documents: FirestoreDocument<T>[];
 	nextPageToken: string;
 
 }
 
-export interface IFirestoreDocument<T extends EntityBase> {
+export interface FirestoreDocument<T> {
 
 	name?: string;
 	fields?: Record<keyof T, FIRESTORE_VALUE>;
@@ -38,7 +28,7 @@ export interface IFirestoreDocument<T extends EntityBase> {
 
 }
 
-export interface IFirestoreWrites {
+export interface FirestoreWrites {
 
 	writes: {
 
@@ -59,7 +49,7 @@ export interface IFirestoreWrites {
 
 }
 
-export interface IFirestoreWriteResult {
+export interface FirestoreWriteResult {
 
 	writeResults: {
 		transformResults: { integerValue: number }[]

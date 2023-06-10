@@ -1,7 +1,7 @@
 import { SYNC_STATES } from "lib/constants/sync.constant";
-import { EntityBase } from "./entity-base.model";
+import { Entity } from "./entity.model";
 
-export interface SyncData<T extends EntityBase> {
+export interface SyncData<T extends Entity> {
 
 	created: string;
 	updated: string;
@@ -9,7 +9,7 @@ export interface SyncData<T extends EntityBase> {
 
 }
 
-export interface Syncable<T extends EntityBase, S extends SyncData<T>> {
+export interface Syncable<T extends Entity, S extends SyncData<T>> {
 
 	sync?: S
 

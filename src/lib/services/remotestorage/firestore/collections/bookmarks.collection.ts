@@ -3,7 +3,7 @@ import { RemoteCollection } from 'lib/constants/remote.constant';
 import { Bookmark } from 'lib/models/bookmark.model';
 import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { FIRESTORE_VALUE } from 'lib/utils/firestore/firestore.constant';
-import { IFirestoreDocument } from 'lib/utils/firestore/firestore.model';
+import { FirestoreDocument } from 'lib/utils/firestore/firestore.model';
 import { FirestoreTool } from 'lib/utils/firestore/firestore.tool';
 import { AbstractFirestoreCollection } from '../firestore.collection';
 
@@ -13,7 +13,7 @@ export class BookmarksFirestoreCollection extends AbstractFirestoreCollection<Bo
 		super(firestore, RemoteCollection.bookmarks);
 	}
 
-	protected override createRequestBody(bookmark: Bookmark): IFirestoreDocument<Bookmark> {
+	protected override createRequestBody(bookmark: Bookmark): FirestoreDocument<Bookmark> {
 
 		const fields = {} as Record<keyof Bookmark, FIRESTORE_VALUE>;
 		fields['name'] = { stringValue: bookmark.name };

@@ -1,9 +1,9 @@
 import { UUID } from "lib/constants/common.constant";
 import { WolfBaseEntity } from "lib/constants/sync.constant";
 import { Bookmark } from "lib/models/bookmark.model";
-import { EntityBase } from "lib/models/entity-base.model";
+import { Entity } from "lib/models/entity-base.model";
 
-export interface RemoteStorageCollection<T extends EntityBase> {
+export interface RemoteStorageCollection<T extends Entity> {
 
 	get(id: string): Promise<T>;
 
