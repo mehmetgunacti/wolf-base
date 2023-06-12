@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { environment } from 'environments/environment';
-import { Bookmark, BookmarksFirestoreCollection, FirestoreTool, LocalStorageService, RemoteCollection, WolfBaseTableName } from 'lib';
+import { Bookmark, BookmarksFirestoreCollection, Entity, FirestoreTool, LocalStorageService, RemoteCollection, UUID, WolfBaseTableName } from 'lib';
 import { IDBase } from 'lib/models/id-base.model';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, filter, map, switchMap } from 'rxjs';
 import { SyncService } from 'services/sync.service';
 
 @Component({
@@ -13,9 +13,9 @@ import { SyncService } from 'services/sync.service';
 })
 export class DatabasePageComponent {
 
-	tableNames: { label: string, value: string }[];
+	tableNames: { label: string, value?: string, disabled?: boolean }[];
 	fcTableName = new FormControl();
-	content$: Observable<string>;
+	content$: Observable<{ key: string, value: string }[]>;
 	numberOfItems$: Observable<number>;
 
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
@@ -27,25 +27,29 @@ export class DatabasePageComponent {
 			apiKey: environment.firebase.apiKey,
 			baseURL: environment.firebase.baseURL,
 			projectId: environment.firebase.projectId
-		
+
 		}
 	);
-	
+
 
 	constructor() {
 
-		this.tableNames = Object.entries(WolfBaseTableName).map(([value, label]) => ({ label, value }));
-		const dump$ = this.fcTableName.valueChanges.pipe(
+		this.tableNames = [
+			{ label: 'Select...', disabled: true },
+			...Object.entries(WolfBaseTableName).map(([value, label]) => ({ label, value }))
+		]
+		this.content$ = this.fcTableName.valueChanges.pipe(
 
-			switchMap(tablename => this.localStorage.dump<IDBase | string>(tablename))
+			switchMap((tablename: WolfBaseTableName) => this.localStorage.dump(tablename)),
+			map(dump => Array.from(dump, ([key, value]) => ({ key, value })))
 
 		);
-		this.content$ = dump$.pipe(
+		// this.content$ = dump$.pipe(
 
-			map(dump => JSON.stringify(dump, null, '\t'))
+		// 	map(dump => JSON.stringify(dump, null, '\t'))
 
-		);
-		this.numberOfItems$ = dump$.pipe(
+		// );
+		this.numberOfItems$ = this.content$.pipe(
 
 			map(dump => Object.keys(dump).length)
 
@@ -53,37 +57,7 @@ export class DatabasePageComponent {
 
 	}
 
-	async increase(): Promise<void> {
-
-		const remote: BookmarksFirestoreCollection = new BookmarksFirestoreCollection(this.firestore);
-		// remote.create(this.getBookmark());
-		// const id: UUID = uuidv4();
-		console.log(new Date().toISOString());
-		const clicks: number = await this.firestore.increase(RemoteCollection.bookmarks, 'clicks', "24c2de96-21b3-42dc-9658-b3aa86081893", 5);
-
-		console.log(await remote.get("24c2de96-21b3-42dc-9658-b3aa86081893"));
-
-		this.syncService.trigger();
-
-	}
-
-	getBookmark(): Bookmark {
-
-		return {
-			"id": "24c2de96-21b3-42dc-9658-b3aa86081893",
-			"name": "medium.com",
-			"title": "Get rid of Firestore",
-			"created": new Date().toISOString(),
-			"tags": [
-				"angular",
-				"firebase"
-			],
-			"image": "",
-			"clicks": 0,
-			"urls": [
-				"https://medium.com/@ashu1461/how-to-get-rid-of-huge-firestore-bundle-size-ed52a9dcd64b"
-			]
-		};
+	onSave(): void {
 
 	}
 

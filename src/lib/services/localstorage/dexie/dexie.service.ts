@@ -23,13 +23,13 @@ export class DexieLocalStorageService implements LocalStorageService {
 
 	}
 
-	async dump<T>(tablename: WolfBaseTableName): Promise<Record<string, T>> {
+	async dump(tablename: WolfBaseTableName): Promise<Map<string, string>> {
 
 		const table = this.db.table(tablename);
 		const data = table.toCollection();
-		const result: Record<string, T> = {};
+		const result: Map<string, string> = new Map();
 		await data.each(
-			(obj: T, cursor) => result[cursor.key.toString()] = obj
+			(obj: any, cursor) => result.set(cursor.key.toString(), JSON.stringify(obj, null, '\t'))
 		);
 		return result;
 

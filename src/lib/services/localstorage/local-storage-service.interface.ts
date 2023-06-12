@@ -8,6 +8,6 @@ export interface LocalStorageService {
 
 	drop(): Promise<void>;
 	clear(tablename: WolfBaseTableName): Promise<void>;
-	dump<T>(tablename: WolfBaseTableName): Promise<Record<string, T>>;
+	dump(tablename: WolfBaseTableName): Promise<Map<string, string>>;
 
 }

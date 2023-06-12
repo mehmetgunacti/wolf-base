@@ -1,8 +1,43 @@
 app-database-page {
 
-	display				: flex;
-	justify-content		: center;
-	align-items			: center;
-	height				: 100%;
+	@extend %flex-column;
+
+	& .p-datatable-table {
+
+		min-width		: 40rem;
+		table-layout	: fixed;
+		width			: 100%;
+
+	}
+
+	& .p-datatable-header {
+
+		@extend %flex-space-between-center;
+		& span[controls] {
+
+			@extend %flex-row;
+			& .p-dropdown, & input[pInputText] {
+
+				margin-right	: 0.2rem;
+				min-width		: 15rem !important;
+	
+			}
+
+		}
+
+	}
+
+	& pre {
+
+		overflow-x: auto;
+		width: 100%;
+
+	}
+
+	.p-paginator {
+
+		justify-content	: center;
+
+	}
 
 }
