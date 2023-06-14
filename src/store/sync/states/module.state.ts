@@ -1,15 +1,13 @@
-import { SYNC_STATES } from 'lib';
-
 export interface SyncState {
 
-	status: SYNC_STATES;
+	inProgress: boolean;
 	messages: string[];
 
 }
 
 export const initialSyncState: SyncState = {
 
-	status: SYNC_STATES.READY,
+	inProgress: false,
 	messages: []
 
 };

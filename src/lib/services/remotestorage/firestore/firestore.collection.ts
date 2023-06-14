@@ -5,7 +5,7 @@ import { FirestoreDocument } from "lib/utils/firestore/firestore.model";
 import { FirestoreTool } from "lib/utils/firestore/firestore.tool";
 import { RemoteStorageCollection } from "../remote-storage-collection.interface";
 
-export abstract class FirestoreCollection<T extends Entity> implements RemoteStorageCollection<T> {
+export abstract class FirestoreCollection<T extends Entity<T>> implements RemoteStorageCollection<T> {
 
 	protected pageSize = '10000'; // high number => download all
 
@@ -67,32 +67,17 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 
 	}
 
-	async list(): Promise<T[]> {
+	async list(onlyIds: boolean = false): Promise<T[]> {
 
 		const list: T[] = await this.firestore.list<T>(
 
 			this.firestore.createURL({
 				collection: this.remoteCollection,
-				queryParameters: { pageSize: this.pageSize }
+				queryParameters: { pageSize: this.pageSize, ...(onlyIds ? { 'mask.fieldPaths': 'dummyField' } : {}) }
 			})
 
 		);
 		return list;
-
-	}
-
-	async listIds(): Promise<UUID[]> {
-
-		const ids: T[] = await this.firestore.list(
-
-			this.firestore.createURL({
-				collection: this.remoteCollection,
-				queryParameters: { pageSize: this.pageSize, 'mask.fieldPaths': 'dummyField' }
-			})
-
-		);
-
-		return ids.map(item => item.id);
 
 	}
 

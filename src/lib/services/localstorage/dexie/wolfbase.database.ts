@@ -32,7 +32,7 @@ export class WolfBaseDB extends Dexie {
 
 	bookmarks: Dexie.Table<Bookmark, UUID>;
 	configuration: Dexie.Table<string | boolean, string>;
-	trashcan: Dexie.Table<ITrash<Entity>, UUID>;
+	trashcan: Dexie.Table<ITrash<Entity<any>>, UUID>;
 
 	constructor(conf: DexieConfiguration) {
 

@@ -4,6 +4,7 @@ import { BookmarksTable } from 'lib/services/localstorage/local-storage-table.in
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { SyncEvent } from 'lib/models/sync.model';
 import { BaseSyncAction } from './base.action';
+import { sleep } from 'lib';
 
 export class BookmarksSyncAction extends BaseSyncAction<Bookmark> {
 
@@ -21,25 +22,27 @@ export class BookmarksSyncAction extends BaseSyncAction<Bookmark> {
 
 	}
 
-	protected override async *handleUpdated(): AsyncGenerator<SyncEvent> {
+	// protected override async *handleUpdated(): AsyncGenerator<SyncEvent> {
 
-		const table: BookmarksTable = this.table as BookmarksTable;
-		// const clicked: IClick[] = await table.getClickedItems();
-		// yield syncState(RemoteCollection.clicks, SYNC_STATES.PROCESSING_CLICKS, `${clicked.length} bookmarks clicked.`);
+	// 	const clicked: Bookmark[] = await this.table.list({filterFn: b => (b.sync?.clicks ?? 0) > 0 });
+	// 	const table: BookmarksTable = this.table as BookmarksTable;
+	// 	// const clicked: IClick[] = await table.getClickedItems();
+	// 	// yield syncState(RemoteCollection.clicks, SYNC_STATES.PROCESSING_CLICKS, `${clicked.length} bookmarks clicked.`);
 
-		// for (const [idx, item] of clicked.entries()) {
+	// 	const remote: BookmarksCollection = this.remoteCollection as BookmarksCollection;
+	// 	for (const [idx, item] of clicked.entries()) {
 
-		// 	yield syncState(RemoteCollection.clicks, undefined, `uploading ${item.id}: ${idx + 1} / ${clicked.length}`);
-		// 	await sleep(100);
-		// 	const clicks = await this.remoteCollectionClicks.increase(item.id, item);
-		// 	await table.saveClick(clicks);
+	// 	// yield syncState(RemoteCollection.clicks, undefined, `uploading ${item.id}: ${idx + 1} / ${clicked.length}`);
+	// 	await sleep(100);
+	// 	await remote.increaseClicks(item.id, item.sync?.clicks ?? 0);
+	// 	// 	await table.saveClick(clicks);
 
-		// }
-		// await sleep(500);
+	// 	}
+	// 	// await sleep(500);
 
-		yield* super.handleUpdated();
+	// 	yield* super.handleUpdated();
 
-	}
+	// }
 
 	// private async *downloadClicks(): AsyncGenerator<ISyncState> {
 

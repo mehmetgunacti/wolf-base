@@ -1,12 +1,11 @@
-import { EntityTable } from 'lib/services/localstorage/local-storage-table.interface';
-import { Entity } from 'lib/models/entity.model';
-import { RemoteStorageCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
+import { UUID } from 'lib';
 import { RemoteCollection } from 'lib/constants/remote.constant';
+import { Entity } from 'lib/models/entity.model';
+import { SyncEvent } from 'lib/models/sync.model';
+import { EntityTable } from 'lib/services/localstorage/local-storage-table.interface';
+import { RemoteStorageCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { sleep } from 'lib/utils/helper.tool';
 import { syncState } from 'lib/utils/sync.tool';
-import { SYNC_STATES, WolfBaseEntity } from 'lib/constants/sync.constant';
-import { SyncEvent, Syncable, SyncData } from 'lib/models/sync.model';
-import { UUID } from 'lib';
 
 export interface Action<PARAM, RETURN_TYPE> {
 
@@ -14,10 +13,12 @@ export interface Action<PARAM, RETURN_TYPE> {
 
 }
 
-export abstract class BaseSyncAction<T extends Entity & Syncable<Entity, SyncData<Entity>>> implements Action<void, AsyncGenerator<SyncEvent>> {
+export abstract class BaseSyncAction<T extends Entity<T>> implements Action<void, AsyncGenerator<SyncEvent>> {
 
-	protected localData: Map<UUID, Entity> = new Map();
-	protected remoteData: Map<UUID, Entity> = new Map();
+	protected localData: Map<UUID, Entity<T>> = new Map();
+	protected remoteData: T[] = [];
+
+	protected ids: T[] = [];
 
 	constructor(
 		protected collection: RemoteCollection,
@@ -27,22 +28,23 @@ export abstract class BaseSyncAction<T extends Entity & Syncable<Entity, SyncDat
 
 	async *execute(): AsyncGenerator<SyncEvent> {
 
-		yield* this.loadRemoteData();
+		console.log('execute()...');
+		yield* this.loadIds();
+		console.log('execute()...');
 		// yield* this.handleLocallyDeleted();
 		// yield* this.handleNew();
-		// yield* this.download();
+		yield* this.download();
 		// yield* this.handleRemotelyDeleted();
 		// yield* this.handleUpdated();
-		// yield* this.saveAll();
+		yield* this.saveAll();
 
 	}
 
-	protected async *loadRemoteData(): AsyncGenerator<SyncEvent> {
+	protected async *loadIds(): AsyncGenerator<SyncEvent> {
 
-		const entities = await this.table.list();
-
-		console.log(await this.remoteCollection.listIds());
-		//yield syncState(this.collection, SYNC_STATES.PROCESSING_NEW, `uploading ${item.id}: ${idx + 1} / ${toBeUploaded.length}`);
+		yield syncState(this.collection, `downloading Ids...`);
+		this.ids = await this.remoteCollection.list(true);
+		yield syncState(this.collection, `${this.ids.length} Ids downloaded.`);
 
 	}
 
@@ -60,23 +62,25 @@ export abstract class BaseSyncAction<T extends Entity & Syncable<Entity, SyncDat
 
 	protected async *handleNew(): AsyncGenerator<SyncEvent> {
 
-		const toBeUploaded: T[] = await this.table.list({ filterFn: (b) => !b.sync });
-		yield syncState(this.collection, SYNC_STATES.PROCESSING_NEW, `${toBeUploaded.length} new items detected.`);
+		// const toBeUploaded: T[] = await this.table.list({ filterFn: (b) => !b.sync });
+		// yield syncState(this.collection, `${toBeUploaded.length} new items detected.`);
 
-		for (const [idx, item] of toBeUploaded.entries()) {
+		// for (const [idx, item] of toBeUploaded.entries()) {
 
-			yield syncState(this.collection, SYNC_STATES.PROCESSING_NEW, `uploading ${item.id}: ${idx + 1} / ${toBeUploaded.length}`);
-			const uploaded: T = await this.remoteCollection.create(item);
-			console.log(uploaded);
-			await this.table.update(item.id, uploaded);
-			await sleep(500);
+		// 	yield syncState(this.collection, `uploading ${item.id}: ${idx + 1} / ${toBeUploaded.length}`);
+		// 	const uploaded: T = await this.remoteCollection.create(item);
+		// 	console.log(uploaded);
+		// 	await this.table.update(item.id, uploaded);
+		// 	await sleep(500);
 
-		}
+		// }
 
 	}
 
 	protected async *download(): AsyncGenerator<SyncEvent> {
 
+		// remoteData: Map<UUID, Entity<T>> = new Map();
+		this.remoteData = await this.remoteCollection.list();
 		await sleep(500);
 
 	}
@@ -90,7 +94,10 @@ export abstract class BaseSyncAction<T extends Entity & Syncable<Entity, SyncDat
 	protected async *saveAll(): AsyncGenerator<SyncEvent> {
 
 		await sleep(500);
-		yield syncState(this.collection, SYNC_STATES.DOWNLOADING, `${this.collection} ready.`);
+
+		for (const item of this.remoteData)
+			await this.table.put(item);
+		yield syncState(this.collection, `${this.collection} ready.`);
 
 	}
 

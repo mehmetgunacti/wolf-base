@@ -37,11 +37,8 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	ngOnInit(): void {
 
-		if (this.bookmark) {
-			console.log(this.bookmark);
+		if (this.bookmark)
 			this.form.setValues(this.bookmark);
-			console.log(this.form);
-		}
 
 		this.subscriptions.add(
 

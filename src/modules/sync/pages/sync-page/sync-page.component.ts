@@ -28,7 +28,7 @@ export class SyncPageComponent {
 
 	onStart(): void {
 
-		this.store.dispatch(actions.syncStart());
+		this.store.dispatch(actions.syncMessage({ message: 'Start.', inProgress: true }));
 
 	}
 

@@ -46,7 +46,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	onCreate(bookmark: Partial<Bookmark>): void {
 
-		this.store.dispatch(fromStore.createBookmark({ bookmark: bookmark }));
+		this.store.dispatch(fromStore.createBookmark({ bookmark }));
 
 	}
 

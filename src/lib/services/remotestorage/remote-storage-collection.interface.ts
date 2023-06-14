@@ -3,7 +3,7 @@ import { WolfBaseEntity } from "lib/constants/sync.constant";
 import { Bookmark } from "lib/models/bookmark.model";
 import { Entity } from "lib/models/entity.model";
 
-export interface RemoteStorageCollection<T extends Entity> {
+export interface RemoteStorageCollection<T extends Entity<T>> {
 
 	get(id: string): Promise<T>;
 
@@ -11,8 +11,7 @@ export interface RemoteStorageCollection<T extends Entity> {
 	update(id: UUID, item: Partial<WolfBaseEntity>): Promise<T>;
 	delete(id: string): Promise<void>;
 
-	list(): Promise<T[]>;
-	listIds(): Promise<UUID[]>;
+	list(onlyIds?: boolean): Promise<T[]>;
 
 }
 

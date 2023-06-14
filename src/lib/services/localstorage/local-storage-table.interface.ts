@@ -4,13 +4,14 @@ import { Configuration } from "lib/models/configuration.model";
 import { Entity } from "lib/models/entity.model";
 
 
-export interface EntityTable<T extends Entity> {
+export interface EntityTable<T extends Entity<T>> {
 
 	get(id: UUID): Promise<T | undefined>;
 
 	create(item: Partial<T>): Promise<T>;
 	create(items: Partial<T>[]): Promise<void>;
 	update(id: UUID, item: Partial<T>): Promise<T>;
+	put(item: T): Promise<T>;
 
 	delete(id: UUID): Promise<void>;
 

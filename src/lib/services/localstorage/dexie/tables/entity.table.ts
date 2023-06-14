@@ -5,7 +5,7 @@ import { EntityTable } from '../../local-storage-table.interface';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { UUID } from 'lib/constants/common.constant';
 
-export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T> {
+export abstract class EntityTableImpl<T extends Entity<T>> implements EntityTable<T> {
 
 	constructor(
 		protected db: WolfBaseDB,
@@ -54,6 +54,13 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 		await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item });
 
 		return await this.get(id) ?? {} as T;
+
+	}
+
+	async put(item: T): Promise<T> {
+
+		await this.db.table<T>(this.tablename).put(item);
+		return item;
 
 	}
 

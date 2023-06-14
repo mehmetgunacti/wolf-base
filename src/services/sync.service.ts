@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { interval, Subscription } from 'rxjs';
-import { syncSetState } from 'store/sync/actions';
-import { SyncEvent } from 'lib';
 
 @Injectable({
 	providedIn: 'root'
@@ -19,7 +17,7 @@ export class SyncService {
 		this.worker = new Worker(new URL('../worker/sync.worker', import.meta.url));
 		this.worker.onmessage = event => { // (event: MessageEvent<SyncEvent>) => {
 
-			console.log(event);
+			console.log('Incoming from worker: ', event);
 			// this.store.dispatch(syncSetState({ message: event.data }));
 
 		};
@@ -28,7 +26,7 @@ export class SyncService {
 
 	trigger(): void {
 
-		console.log('triggering from inside SyncService.trigger():');
+		// console.log('triggering from inside SyncService.trigger():');
 		this.worker.postMessage({});
 
 	}

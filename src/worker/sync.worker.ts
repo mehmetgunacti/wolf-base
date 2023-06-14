@@ -12,13 +12,29 @@ import { localStorageServiceFactory } from "lib/services/localstorage/dexie/fact
 import { bookmarksCollectionFactory } from "lib/services/remotestorage/firestore/factories";
 import { SyncEvent } from "lib/models/sync.model";
 import { BookmarksSyncAction } from "./actions/bookmarks.action";
-import { SYNC_STATES } from "lib/constants/sync.constant";
 import { sleep } from "lib/utils/helper.tool";
 import { LocalStorageService } from "lib/services/localstorage/local-storage-service.interface";
 
 let isRunning = false;
 
 addEventListener('message', async (a: MessageEvent) => {
+
+	/*
+		1) send newly created
+		2) download id-createTime list
+		3) start comparing:
+				local	|	remote
+			---------------------------
+				upload					<- remote collection has to be separate from bookmarks
+				clicks						only upload click count, ignore return value
+							download	<- remote collection to local, but only update 'clicks', not updateTime
+							clicks			
+							new			<- add to local
+							deleted		<- remove ids that are in local list but not in remote list
+				deleted					<- date compare, delete remotely or move to conflicts
+				updated					<- date compare, update remotely or move to conflicts
+							updated		<- date compare all other local items with remote ones, update local or move to conflicts
+	*/
 
 	if (isRunning) {
 
@@ -27,15 +43,14 @@ addEventListener('message', async (a: MessageEvent) => {
 
 	}
 
-	console.log('running batch:', a);
 	isRunning = true;
 	const generators: AsyncGenerator<SyncEvent>[] = createActions();
 
 	for (const gen of generators)
 		await process(gen);
 
-	postMessage({ status: SYNC_STATES.DONE });
 	isRunning = false;
+	postMessage({ message: 'Done.', inProgress: false } as SyncEvent);
 
 });
 
@@ -53,7 +68,7 @@ async function process(gen: AsyncGenerator<SyncEvent>): Promise<void> {
 	} catch (err) {
 
 		console.error(err);
-		postMessage({ status: SYNC_STATES.ERROR, message: err });
+		postMessage({ message: err });
 
 	}
 

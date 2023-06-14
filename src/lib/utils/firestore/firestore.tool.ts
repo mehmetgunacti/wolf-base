@@ -1,12 +1,12 @@
+import { HTTP } from '../http.tool';
 import { FIRESTORE_TYPE, FIRESTORE_VALUE } from './firestore.constant';
 import {
 	FirestoreDocument,
 	FirestoreDocuments,
-	FirestoreWrites,
+	FirestoreURLConfig,
 	FirestoreWriteResult,
-	FirestoreURLConfig
+	FirestoreWrites
 } from './firestore.model';
-import { HTTP } from '../http.tool';
 
 export interface IFirestoreConfig {
 
@@ -163,29 +163,29 @@ export class FirestoreTool {
 
 	parseDocuments<T>(firestoreResponse: FirestoreDocuments<T>): T[] {
 
+		console.log(firestoreResponse);
 		return firestoreResponse?.documents?.map((d: FirestoreDocument<T>) => this.parseDocument(d)) || [];
 
 	}
 
 	parseDocument<T>(item: FirestoreDocument<T>): T {
 
+		// parse 'id'
 		const id: string | null = this.parseId(item);
-		if (id === null) {
-			console.error('Firestore Object Id error : [' + JSON.stringify(item) + ']');
+		if (id === null)
 			throw new Error('Firestore Object Id error : [' + JSON.stringify(item) + ']');
-		}
 
-		const data = { id, ...this.parseFields(item.fields || {}) };
-		const createTime = item.createTime || '';
-		const updateTime = item.updateTime || '';
-
+		// construct Entity
+		const { fields, createTime, updateTime } = item;
 		return {
-			...this.parseFields(item.fields || {}),
+
+			...(fields ? this.parseFields(fields) : {}),
 			id,
 			sync: {
-				created: createTime,
-				updated: updateTime
+				created: createTime ?? '',
+				updated: updateTime ?? ''
 			}
+
 		} as T;
 
 	}
@@ -199,42 +199,94 @@ export class FirestoreTool {
 
 	}
 
-	// tslint:disable-next-line: no-any
-	parseFields(fields: Record<string, FIRESTORE_VALUE>): any {
+	parseFields<E>(fields: Record<keyof E, FIRESTORE_VALUE>): E {
 
-		// tslint:disable-next-line: no-any
-		const parsedObject: Record<string, any> = {};
-		Object.keys(fields).forEach(key => parsedObject[key] = this.parseField(fields[key]));
-		return parsedObject;
+		const result: E = {} as E;
+		for (const key in fields) {
+			const field = fields[key];
 
-	}
-
-	// tslint:disable-next-line: no-any
-	parseField(field: Record<string, any>): any {
-
-		const key: string = Object.keys(field)[0];
-
-		switch (key) {
-
-			case FIRESTORE_TYPE.doubleValue:
-			case FIRESTORE_TYPE.integerValue:
-				return Number(field[key]);
-
-			case FIRESTORE_TYPE.arrayValue:
-				// tslint:disable-next-line: no-any
-				return (field[key] && field[key].values || []).map((v: Record<string, any>) => this.parseField(v));
-
-			case FIRESTORE_TYPE.mapValue:
-				return this.parseFields(field[key] && field[key].fields || {});
-
-			case FIRESTORE_TYPE.geoPointValue:
-				return { latitude: 0, longitude: 0, ...field[key] };
-
-			default:
-				return field[key];
+			result[key as keyof E] = this.parseField(field) as E[keyof E];
 		}
+		return result;
 
 	}
+
+	parseField<T extends string | number | boolean | null>(
+		field: FIRESTORE_VALUE
+	): T {
+
+		if (FIRESTORE_TYPE.stringValue in field)
+			return field.stringValue as T;
+
+		if (FIRESTORE_TYPE.integerValue in field)
+			return field.integerValue as T;
+
+		if (FIRESTORE_TYPE.doubleValue in field)
+			return field.doubleValue as T;
+
+		if (FIRESTORE_TYPE.booleanValue in field)
+			return field.booleanValue as T;
+
+		if (FIRESTORE_TYPE.arrayValue in field)
+			return field.arrayValue.values.map(v => this.parseField(v)) as unknown as T;
+
+		if (FIRESTORE_TYPE.bytesValue in field)
+			return field.bytesValue as T;
+
+		if (FIRESTORE_TYPE.geoPointValue in field)
+			return { latitude: 0, longitude: 0, ...field.geoPointValue } as unknown as T;
+
+		if (FIRESTORE_TYPE.mapValue in field)
+			return this.parseFields(field.mapValue.fields) as unknown as T;
+
+		if (FIRESTORE_TYPE.nullValue in field)
+			return field.nullValue as T;
+
+		if (FIRESTORE_TYPE.referenceValue in field)
+			return field.referenceValue as T;
+
+		if (FIRESTORE_TYPE.timestampValue in field)
+			return field.timestampValue as T;
+
+		return null as T;
+
+	}
+
+	// parseFields<E>(fields: Record<keyof E, FIRESTORE_VALUE>): E {
+
+	// 	const parsedObject: E = {} as E;
+	// 	Object
+	// 		.keys(fields)
+	// 		.forEach(
+	// 			key => parsedObject[key as keyof E] = this.parseField(fields[key as keyof E])
+	// 		);
+	// 	return parsedObject;
+
+	// }
+
+	// parseField(field: FIRESTORE_VALUE): any {
+
+	// 	const key: string = Object.keys(field)[0];
+	// 	switch (key) {
+
+	// 		// case FIRESTORE_TYPE.doubleValue:
+	// 		case FIRESTORE_TYPE.integerValue:
+	// 			return field. [key] as number;
+
+	// 		case FIRESTORE_TYPE.arrayValue:
+	// 			return (field[key] && field[key].values || []).map((v: Record<string, any>) => this.parseField(v));
+
+	// 		case FIRESTORE_TYPE.mapValue:
+	// 			return this.parseFields(field[key] && field[key].fields || {});
+
+	// 		// case FIRESTORE_TYPE.geoPointValue:
+	// 		// 	return { latitude: 0, longitude: 0, ...field[key] };
+
+	// 		default:
+	// 			return field[key];
+	// 	}
+
+	// }
 
 }
 
