@@ -1,16 +1,11 @@
+import { Bookmark } from './bookmark.model';
 import { IDBase } from './id-base.model';
 
-export interface SyncData<T extends Entity<T>> {
+export type WolfEntity = Bookmark;
+export type PartialEntity<T extends Entity> = Omit<Partial<T>, keyof Entity>;
 
-	created: string;
-	updated: string;
-	data?: Partial<T>;
-
-}
-
-export interface Entity<T extends Entity<T>> extends IDBase {
+export interface Entity extends IDBase {
 
 	readonly created: string;
-	sync?: SyncData<T>;
 
 }

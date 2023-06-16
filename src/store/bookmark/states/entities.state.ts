@@ -1,6 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Bookmark, UUID } from 'lib';
 
+// todo move some properties to ui state
 export interface EntitiesState extends EntityState<Bookmark> {
 
 	editDialogVisible: boolean;

@@ -38,22 +38,6 @@ export class BookmarksTableImpl extends EntityTableImpl<Bookmark> implements Boo
 
 	}
 
-	async click(id: string): Promise<void> {
-
-		await this.db.bookmarks
-			.where({ id })
-			.modify((bookmark: Bookmark): void => {
-
-				bookmark.clicks = (bookmark.clicks ?? 0) + 1;
-
-				// add # of clicks to 'sync' / increase
-				if (bookmark.sync) // newly created bookmarks don't have a 'sync' object, only downloaded ones do
-					bookmark.sync.clicks = (bookmark.sync.clicks ?? 0) + 1;
-
-			});
-
-	}
-
 	async toggleTag(id: UUID, name: string): Promise<void> {
 
 		await this.db.bookmarks
@@ -63,12 +47,6 @@ export class BookmarksTableImpl extends EntityTableImpl<Bookmark> implements Boo
 				bookmark.tags = toggleArrayItem(bookmark.tags, name);
 
 			});
-
-	}
-
-	async syncableItems(): Promise<Bookmark[]> {
-
-		return await this.db.bookmarks.filter(b => !b.sync || (b.sync.clicks ?? 0) > 0 || !b.sync.data).toArray();
 
 	}
 

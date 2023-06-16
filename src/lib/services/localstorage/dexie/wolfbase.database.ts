@@ -1,10 +1,9 @@
 import Dexie from 'dexie';
 import { UUID } from 'lib/constants/common.constant';
 import { CONF_KEYS, WolfBaseTableName } from 'lib/constants/database.constant';
-import { Bookmark } from 'lib/models/bookmark.model';
+import { Trash } from 'lib/models';
+import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { DexieConfiguration } from 'lib/models/database.model';
-import { Entity } from 'lib/models/entity.model';
-import { ITrash } from 'lib/models/trashcan.model';
 
 class DEFAULT_CONF_VALUES {
 
@@ -20,6 +19,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 		dbName: 'WolfBaseDB',
 		tables: {
 			bookmarks: 'id, *tags, clicks',
+			clicks: 'id',
 			configuration: '',
 			trashcan: 'id'
 		},
@@ -31,8 +31,9 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 export class WolfBaseDB extends Dexie {
 
 	bookmarks: Dexie.Table<Bookmark, UUID>;
+	clicks: Dexie.Table<Click, UUID>;
 	configuration: Dexie.Table<string | boolean, string>;
-	trashcan: Dexie.Table<ITrash<Entity<any>>, UUID>;
+	trashcan: Dexie.Table<Trash, UUID>;
 
 	constructor(conf: DexieConfiguration) {
 
@@ -41,6 +42,7 @@ export class WolfBaseDB extends Dexie {
 			.stores(conf.tables);
 
 		this.bookmarks = this.table(WolfBaseTableName.bookmarks);
+		this.clicks = this.table(WolfBaseTableName.clicks);
 		this.configuration = this.table(WolfBaseTableName.configuration);
 		this.trashcan = this.table(WolfBaseTableName.trashcan);
 

@@ -1,12 +1,7 @@
-import { Entity, SyncData } from './entity.model';
+import { Entity } from './entity.model';
+import { IDBase } from './id-base.model';
 
-export interface SyncBookmark extends SyncData<Bookmark> {
-
-	clicks?: number;
-
-}
-
-export interface Bookmark extends Entity<Bookmark> {
+export interface Bookmark extends Entity {
 
 	name: string;
 	title: string;
@@ -14,6 +9,12 @@ export interface Bookmark extends Entity<Bookmark> {
 	urls: string[];
 	clicks: number;
 	image?: string;
-	sync?: SyncBookmark;
+
+}
+
+export interface Click extends IDBase {
+
+	total: number;
+	current: number;
 
 }

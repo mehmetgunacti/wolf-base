@@ -1,9 +1,10 @@
 import { UUID } from "lib/constants/common.constant";
 import { WolfBaseEntity } from "lib/constants/sync.constant";
+import { Trash } from "lib/models";
 import { Bookmark } from "lib/models/bookmark.model";
 import { Entity } from "lib/models/entity.model";
 
-export interface RemoteStorageCollection<T extends Entity<T>> {
+export interface RemoteStorageCollection<T extends Entity> {
 
 	get(id: string): Promise<T>;
 
@@ -18,5 +19,11 @@ export interface RemoteStorageCollection<T extends Entity<T>> {
 export interface BookmarksCollection extends RemoteStorageCollection<Bookmark> {
 
 	increaseClicks(id: UUID, count: number): Promise<Bookmark>;
+
+}
+
+export interface TrashcanCollection {
+
+	put(item: Trash): Promise<void>;
 
 }

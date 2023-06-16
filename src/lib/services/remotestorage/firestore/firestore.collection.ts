@@ -1,17 +1,19 @@
 import { UUID } from "lib/constants/common.constant";
 import { RemoteCollection } from "lib/constants/remote.constant";
 import { Entity } from "lib/models/entity.model";
-import { FirestoreDocument } from "lib/utils/firestore/firestore.model";
+import { FirestoreConverter, FirestoreDocument } from "lib/utils/firestore/firestore.model";
 import { FirestoreTool } from "lib/utils/firestore/firestore.tool";
 import { RemoteStorageCollection } from "../remote-storage-collection.interface";
+import { FIRESTORE_VALUE } from "lib/utils";
 
-export abstract class FirestoreCollection<T extends Entity<T>> implements RemoteStorageCollection<T> {
+export abstract class FirestoreCollection<T extends Entity> implements RemoteStorageCollection<T> {
 
 	protected pageSize = '10000'; // high number => download all
 
 	constructor(
 		protected firestore: FirestoreTool,
-		protected remoteCollection: RemoteCollection
+		protected remoteCollection: RemoteCollection,
+		protected converter: FirestoreConverter<T>
 	) { }
 
 	async create(item: T): Promise<T> {
@@ -20,8 +22,8 @@ export abstract class FirestoreCollection<T extends Entity<T>> implements Remote
 			collection: this.remoteCollection,
 			queryParameters: { documentId: item.id }
 		});
-		const requestBody: FirestoreDocument<T> = this.createRequestBody(item);
-		const response: T = await this.firestore.create(url, requestBody);
+		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
+		const response: T = await this.firestore.create(url, { fields: requestBody });
 		return response;
 
 	}
@@ -32,10 +34,10 @@ export abstract class FirestoreCollection<T extends Entity<T>> implements Remote
 			collection: this.remoteCollection,
 			document: id
 		});
-		const mask = this.createUpdateMask(item);
-		const requestBody: FirestoreDocument<T> = this.createRequestBody(item);
+		const mask = this.converter.toUpdateMask(item);
+		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
 
-		const response: T = await this.firestore.update(url, mask, requestBody);
+		const response: T = await this.firestore.update(url, mask, { fields: requestBody });
 		return response;
 
 	}
@@ -80,25 +82,6 @@ export abstract class FirestoreCollection<T extends Entity<T>> implements Remote
 		return list;
 
 	}
-
-	protected abstract createRequestBody(item: T): FirestoreDocument<T>;
-	protected abstract createRequestBody(item: Partial<T>): FirestoreDocument<T>;
-	protected abstract createUpdateMask(item: Partial<T>): string;
-
-	// private convert(item: T): T {
-
-	// 	const { createTime, updateTime, ...rest} = item;
-	// 	return {
-
-	// 		...rest,
-	// 		sync: {
-	// 			createTime,
-	// 			updateTime
-	// 		}
-
-	// 	};
-
-	// }
 
 }
 

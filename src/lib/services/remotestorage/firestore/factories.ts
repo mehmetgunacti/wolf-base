@@ -1,8 +1,9 @@
 import { environment } from 'environments/environment';
 import { FirestoreTool } from 'lib/utils/firestore/firestore.tool';
-import { BookmarksCollection } from '../remote-storage-collection.interface';
+import { BookmarksCollection, TrashcanCollection } from '../remote-storage-collection.interface';
 import { BookmarksFirestoreCollection } from './collections/bookmarks.collection';
 import { FirestoreRemoteStorageService } from './firestore.service';
+import { TrashcanFirestoreCollection } from './collections';
 
 export const firestoreFactory = (): FirestoreTool => {
 
@@ -19,7 +20,8 @@ export const remoteStorageServiceFactory = (): FirestoreRemoteStorageService => 
 	const firestore: FirestoreTool = firestoreFactory();
 	return new FirestoreRemoteStorageService(
 		firestore,
-		bookmarksCollectionFactory()
+		bookmarksCollectionFactory(),
+		trashcanCollectionFactory()
 	);
 
 };
@@ -30,3 +32,10 @@ export const bookmarksCollectionFactory = (): BookmarksCollection => {
 	return new BookmarksFirestoreCollection(firestore);
 
 };
+
+export const trashcanCollectionFactory = (): TrashcanCollection => {
+
+	const firestore = firestoreFactory();
+	return new TrashcanFirestoreCollection(firestore);
+
+}

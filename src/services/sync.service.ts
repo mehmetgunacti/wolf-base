@@ -17,7 +17,7 @@ export class SyncService {
 		this.worker = new Worker(new URL('../worker/sync.worker', import.meta.url));
 		this.worker.onmessage = event => { // (event: MessageEvent<SyncEvent>) => {
 
-			console.log('Incoming from worker: ', event);
+			console.log('Incoming from worker: ', event.data);
 			// this.store.dispatch(syncSetState({ message: event.data }));
 
 		};

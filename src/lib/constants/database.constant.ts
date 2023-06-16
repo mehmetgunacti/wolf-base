@@ -1,6 +1,7 @@
 export enum WolfBaseTableName {
 
 	bookmarks = 'bookmarks',
+	clicks = 'clicks',
 	// notes = 'notes',
 	// tasks = 'tasks',
 	// words = 'words',

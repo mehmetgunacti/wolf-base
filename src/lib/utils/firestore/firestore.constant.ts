@@ -27,8 +27,6 @@ export enum FIRESTORE_TYPE {
 // 	| 'stringValue'
 // 	| 'timestampValue';
 
-export type FIRESTORE_VALUE_OBJECT<T> = Record<string, T>;
-
 export type FIRESTORE_BYTE = { bytesValue: string };
 export type FIRESTORE_ARRAY = { arrayValue: { values: FIRESTORE_VALUE[] } };
 export type FIRESTORE_BOOLEAN = { booleanValue: boolean };

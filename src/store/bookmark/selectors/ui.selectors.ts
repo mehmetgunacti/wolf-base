@@ -26,6 +26,6 @@ export const menuBookmarkBadge = createSelector(
 export const menuSyncableItemsCount = createSelector(
 
 	bookmarksArray,
-	bookmarks => bookmarks.filter(b => !b.sync || (b.sync.clicks ?? 0) > 0 || !b.sync.updated).length
+	bookmarks => -1
 
 );

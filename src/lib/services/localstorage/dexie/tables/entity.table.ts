@@ -1,11 +1,11 @@
 import { Collection, IndexableType, Table } from 'dexie';
 import { WolfBaseDB } from '../wolfbase.database';
-import { Entity } from 'lib/models/entity.model';
+import { Entity, PartialEntity } from 'lib/models/entity.model';
 import { EntityTable } from '../../local-storage-table.interface';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { UUID } from 'lib/constants/common.constant';
 
-export abstract class EntityTableImpl<T extends Entity<T>> implements EntityTable<T> {
+export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T> {
 
 	constructor(
 		protected db: WolfBaseDB,
@@ -24,9 +24,9 @@ export abstract class EntityTableImpl<T extends Entity<T>> implements EntityTabl
 
 	}
 
-	create(item: Partial<T>): Promise<T>;
-	create(items: Partial<T>[]): Promise<void>;
-	async create(items: Partial<T> | Partial<T>[]): Promise<T | void> {
+	create(item: PartialEntity<T>): Promise<T>;
+	create(items: PartialEntity<T>[]): Promise<void>;
+	async create(items: PartialEntity<T> | PartialEntity<T>[]): Promise<T | void> {
 
 		if (Array.isArray(items)) {
 
@@ -45,14 +45,13 @@ export abstract class EntityTableImpl<T extends Entity<T>> implements EntityTabl
 
 	}
 
-	async update(id: string, item: Partial<T>): Promise<T> {
+	async update(id: string, item: PartialEntity<T>): Promise<T> {
 
 		const localData: T | undefined = await this.get(id);
 		if (!localData)
 			throw new Error(`No data with id ${id} found.`);
 
 		await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item });
-
 		return await this.get(id) ?? {} as T;
 
 	}
@@ -70,7 +69,7 @@ export abstract class EntityTableImpl<T extends Entity<T>> implements EntityTabl
 
 	}
 
-	async list(params?: { orderBy?: string | undefined; reverse?: boolean | undefined; limit?: number | undefined; } | undefined): Promise<T[]> {
+	async list( params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; } | undefined): Promise<T[]> {
 
 		const table: Table<T, IndexableType> = this.db.table<T>(this.tablename);
 		let collection: Collection<T, IndexableType>;
@@ -87,6 +86,9 @@ export abstract class EntityTableImpl<T extends Entity<T>> implements EntityTabl
 
 			if (params.limit)
 				collection = collection.limit(params.limit);
+			
+			if (params.filterFn)
+				collection = collection.filter(params.filterFn);
 
 			return await collection.toArray();
 
@@ -129,8 +131,8 @@ export abstract class EntityTableImpl<T extends Entity<T>> implements EntityTabl
 
 	}
 
-	protected abstract newItemFromPartial(item: Partial<T>): T;
+	protected abstract newItemFromPartial(item: PartialEntity<T>): T;
 
-	protected abstract newInstance(id: UUID, item: Partial<T>): T;
+	protected abstract newInstance(id: UUID, item: PartialEntity<T>): T;
 
 }

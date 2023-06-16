@@ -56,3 +56,10 @@ export interface FirestoreWriteResult {
 	}[];
 
 }
+
+export interface FirestoreConverter<T> {
+
+	toFirestore(item: T | Partial<T>): Record<keyof T, FIRESTORE_VALUE>;
+	toUpdateMask(item: Partial<T>): string;
+
+}

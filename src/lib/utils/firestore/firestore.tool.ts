@@ -163,7 +163,6 @@ export class FirestoreTool {
 
 	parseDocuments<T>(firestoreResponse: FirestoreDocuments<T>): T[] {
 
-		console.log(firestoreResponse);
 		return firestoreResponse?.documents?.map((d: FirestoreDocument<T>) => this.parseDocument(d)) || [];
 
 	}
@@ -199,21 +198,19 @@ export class FirestoreTool {
 
 	}
 
-	parseFields<E>(fields: Record<keyof E, FIRESTORE_VALUE>): E {
+	parseFields<T>(fields: Record<keyof T, FIRESTORE_VALUE>): T {
 
-		const result: E = {} as E;
+		const result: T = {} as T;
 		for (const key in fields) {
 			const field = fields[key];
 
-			result[key as keyof E] = this.parseField(field) as E[keyof E];
+			result[key as keyof T] = this.parseField(field) as T[keyof T];
 		}
 		return result;
 
 	}
 
-	parseField<T extends string | number | boolean | null>(
-		field: FIRESTORE_VALUE
-	): T {
+	parseField<T extends string | number | boolean | null>(field: FIRESTORE_VALUE): T {
 
 		if (FIRESTORE_TYPE.stringValue in field)
 			return field.stringValue as T;

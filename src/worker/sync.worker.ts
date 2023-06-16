@@ -9,7 +9,7 @@
 * Also, don't use index.ts files when writing import statments inside the lib folder.
 */
 import { localStorageServiceFactory } from "lib/services/localstorage/dexie/factories";
-import { bookmarksCollectionFactory } from "lib/services/remotestorage/firestore/factories";
+import { bookmarksCollectionFactory, remoteStorageServiceFactory } from "lib/services/remotestorage/firestore/factories";
 import { SyncEvent } from "lib/models/sync.model";
 import { BookmarksSyncAction } from "./actions/bookmarks.action";
 import { sleep } from "lib/utils/helper.tool";
@@ -81,8 +81,8 @@ function createActions(): AsyncGenerator<SyncEvent>[] {
 	// bookmarks
 	const bookmarks = new BookmarksSyncAction(
 
-		localStorage.bookmarks,
-		bookmarksCollectionFactory()
+		localStorageServiceFactory(),
+		remoteStorageServiceFactory()
 
 	);
 

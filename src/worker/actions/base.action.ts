@@ -1,4 +1,4 @@
-import { UUID } from 'lib';
+import { UUID, WolfBaseDB, WolfBaseTableName } from 'lib';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { Entity } from 'lib/models/entity.model';
 import { SyncEvent } from 'lib/models/sync.model';
@@ -13,91 +13,136 @@ export interface Action<PARAM, RETURN_TYPE> {
 
 }
 
-export abstract class BaseSyncAction<T extends Entity<T>> implements Action<void, AsyncGenerator<SyncEvent>> {
+export abstract class BaseSyncAction<T extends Entity> implements Action<void, AsyncGenerator<SyncEvent>> {
 
-	protected localData: Map<UUID, Entity<T>> = new Map();
-	protected remoteData: T[] = [];
+	// protected table: EntityTable<T>;
 
-	protected ids: T[] = [];
+	protected localData: T[] = []; // Map<UUID, Entity<T>> = new Map();
+	protected remoteIds: T[] = [];
 
 	constructor(
-		protected collection: RemoteCollection,
 		protected table: EntityTable<T>,
+		protected collection: RemoteCollection,
+		protected db: WolfBaseDB,
+		protected tablename: WolfBaseTableName,
 		protected remoteCollection: RemoteStorageCollection<T>
 	) { }
 
 	async *execute(): AsyncGenerator<SyncEvent> {
 
-		console.log('execute()...');
-		yield* this.loadIds();
-		console.log('execute()...');
-		// yield* this.handleLocallyDeleted();
-		// yield* this.handleNew();
-		yield* this.download();
-		// yield* this.handleRemotelyDeleted();
-		// yield* this.handleUpdated();
-		yield* this.saveAll();
+		yield* this.uploadNew();
+
+		yield* this.downloadIds();
+
+		yield* this.downloadNew();
+		yield* this.downloadDeleted();
+
+		yield* this.uploadDeleted();
+
+		yield* this.uploadUpdated();
+		yield* this.downloadUpdated();
 
 	}
 
-	protected async *loadIds(): AsyncGenerator<SyncEvent> {
+	protected async *uploadNew(): AsyncGenerator<SyncEvent> {
 
-		yield syncState(this.collection, `downloading Ids...`);
-		this.ids = await this.remoteCollection.list(true);
-		yield syncState(this.collection, `${this.ids.length} Ids downloaded.`);
+		// await sleep(500);
+		// const newItems: T[] = await this.table.list({ filterFn: (b) => !b.sync });
+		// if (newItems.length === 0) {
 
-	}
+		// 	yield syncState(this.collection, `no new items to upload.`);
+		// 	return;
 
-	protected async *handleLocallyDeleted(): AsyncGenerator<SyncEvent> {
+		// }
 
-		await sleep(500);
+		// yield syncState(this.collection, `${newItems.length} new items to be uploaded.`);
+		// for (const [idx, item] of newItems.entries()) {
 
-	}
-
-	protected async *handleRemotelyDeleted(): AsyncGenerator<SyncEvent> {
-
-		await sleep(500);
-
-	}
-
-	protected async *handleNew(): AsyncGenerator<SyncEvent> {
-
-		// const toBeUploaded: T[] = await this.table.list({ filterFn: (b) => !b.sync });
-		// yield syncState(this.collection, `${toBeUploaded.length} new items detected.`);
-
-		// for (const [idx, item] of toBeUploaded.entries()) {
-
-		// 	yield syncState(this.collection, `uploading ${item.id}: ${idx + 1} / ${toBeUploaded.length}`);
-		// 	const uploaded: T = await this.remoteCollection.create(item);
-		// 	console.log(uploaded);
-		// 	await this.table.update(item.id, uploaded);
 		// 	await sleep(500);
+		// 	yield syncState(this.collection, `uploading ${item.id}: ${idx + 1} / ${newItems.length}`);
+		// 	const uploaded: T = await this.remoteCollection.create(item);
+		// 	await this.table.put(uploaded);
 
 		// }
 
 	}
 
-	protected async *download(): AsyncGenerator<SyncEvent> {
+	protected async *downloadNew(): AsyncGenerator<SyncEvent> {
 
-		// remoteData: Map<UUID, Entity<T>> = new Map();
-		this.remoteData = await this.remoteCollection.list();
-		await sleep(500);
+		// await sleep(500);
+		// yield syncState(this.collection, `finding new items to be downloaded`);
+		// const localIds: Set<UUID> = new Set(this.localData.map(item => item.id));
+		// const remoteIds: Set<UUID> = new Set();
+		// for (const remoteItem of this.remoteIds) {
+
+		// 	if (localIds.has(remoteItem.id))
+		// 		continue;
+
+		// 	await sleep(500);
+		// 	yield syncState(this.collection, `downloading item with id ${remoteItem.id}.`);
+		// 	const item: T = await this.remoteCollection.get(remoteItem.id);
+		// 	remoteIds.add(item.id);
+
+		// 	await sleep(500);
+		// 	yield syncState(this.collection, `saving item with id ${remoteItem.id}.`);
+		// 	await this.table.put(item);
+
+		// }
+		// yield syncState(this.collection, `downloaded ${remoteIds.size} new items.`);
 
 	}
 
-	protected async *handleUpdated(): AsyncGenerator<SyncEvent> {
+	protected async *downloadDeleted(): AsyncGenerator<SyncEvent> {
 
-		await sleep(500);
+		// await sleep(500);
+		// yield syncState(this.collection, `finding deleted items..`);
+		// const deletedIds: Set<UUID> = new Set();
+		// const remoteIds: Set<UUID> = new Set(this.remoteIds.map(item => item.id));
+		// for (const item of this.localData) {
+
+		// 	if (!item.sync) // item is new
+		// 		continue;
+			
+		// 	if (remoteIds.has(item.id)) // not deleted
+		// 		continue;
+			
+		// 	await sleep(500);
+		// 	yield syncState(this.collection, `deleting item with id ${item.id}.`);
+		// 	await this.table.delete(item.id);
+		// 	deletedIds.add(item.id);
+
+		// }
+		// yield syncState(this.collection, `locally deleted ${deletedIds.size} items.`);
 
 	}
 
-	protected async *saveAll(): AsyncGenerator<SyncEvent> {
+	protected async *uploadDeleted(): AsyncGenerator<SyncEvent> {
+
+	}
+
+	protected async *downloadUpdated(): AsyncGenerator<SyncEvent> {
+
+
+
+	}
+
+	protected async *uploadUpdated(): AsyncGenerator<SyncEvent> {
+
+
+
+	}
+
+	protected async *downloadIds(): AsyncGenerator<SyncEvent> {
 
 		await sleep(500);
+		yield syncState(this.collection, `downloading Ids...`);
+		this.remoteIds = await this.remoteCollection.list(true);
+		yield syncState(this.collection, `${this.remoteIds.length} Ids downloaded.`);
 
-		for (const item of this.remoteData)
-			await this.table.put(item);
-		yield syncState(this.collection, `${this.collection} ready.`);
+		await sleep(500);
+		yield syncState(this.collection, `preparing local data...`);
+		this.localData = await this.table.list();
+		yield syncState(this.collection, `${this.localData.length} items ready.`);
 
 	}
 

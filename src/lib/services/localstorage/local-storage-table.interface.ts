@@ -1,22 +1,18 @@
 import { UUID } from "lib/constants/common.constant";
-import { Bookmark } from "lib/models/bookmark.model";
+import { Trash } from "lib/models";
+import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Configuration } from "lib/models/configuration.model";
-import { Entity } from "lib/models/entity.model";
+import { Entity, PartialEntity } from "lib/models/entity.model";
 
-
-export interface EntityTable<T extends Entity<T>> {
+export interface EntityTable<T extends Entity> {
 
 	get(id: UUID): Promise<T | undefined>;
 
-	create(item: Partial<T>): Promise<T>;
-	create(items: Partial<T>[]): Promise<void>;
-	update(id: UUID, item: Partial<T>): Promise<T>;
-	put(item: T): Promise<T>;
-
+	create(item: PartialEntity<T>): Promise<T>;
+	update(id: UUID, item: PartialEntity<T>): Promise<T>;
 	delete(id: UUID): Promise<void>;
 
 	list(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; }): Promise<T[]>;
-	// list$(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; }): Observable<T[]>;
 	listIds(): Promise<UUID[]>;
 
 	search(term: string): Promise<T[]>;
@@ -36,9 +32,14 @@ export interface KeyValueTable {
 
 export interface BookmarksTable extends EntityTable<Bookmark> {
 
-	click(id: UUID): Promise<void>;
 	toggleTag(id: UUID, name: string): Promise<void>;
-	syncableItems(): Promise<Bookmark[]>;
+
+}
+
+export interface ClicksTable {
+
+	click(id: UUID): Promise<void>;
+	put(item: Click): Promise<void>;
 
 }
 
@@ -54,5 +55,14 @@ export interface ConfigurationTable {
 	toggleTheme(): Promise<void>;
 
 	dump(): Promise<Configuration>;
+
+}
+
+export interface TrashcanTable {
+
+	get(id: UUID): Promise<Trash | undefined>;
+	put(item: Trash): Promise<void>;
+	delete(id: UUID): Promise<void>;
+	list(filterFn?: (t: Trash) => boolean): Promise<Trash[]>;
 
 }
