@@ -4,6 +4,7 @@ import { Entity, PartialEntity } from 'lib/models/entity.model';
 import { EntityTable } from '../../local-storage-table.interface';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { UUID } from 'lib/constants/common.constant';
+import { SyncData } from 'lib/models';
 
 export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T> {
 
@@ -56,10 +57,9 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async put(item: T): Promise<T> {
+	async put(item: T): Promise<void> {
 
 		await this.db.table<T>(this.tablename).put(item);
-		return item;
 
 	}
 
@@ -113,9 +113,9 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	// }
 
-	listIds(): Promise<string[]> {
+	async listIds(): Promise<UUID[]> {
 
-		throw new Error('Method not implemented.');
+		return await this.db.table<T>(this.tablename).toCollection().primaryKeys() as UUID[];
 
 	}
 

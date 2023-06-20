@@ -21,15 +21,7 @@ export class DatabasePageComponent {
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 	private syncService: SyncService = inject(SyncService);
 
-	private firestore: FirestoreTool = new FirestoreTool(
-		{
-
-			apiKey: environment.firebase.apiKey,
-			baseURL: environment.firebase.baseURL,
-			projectId: environment.firebase.projectId
-
-		}
-	);
+	private firestore: FirestoreTool = new FirestoreTool();
 
 
 	constructor() {

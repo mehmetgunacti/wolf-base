@@ -1,7 +1,7 @@
 import { WolfBaseTableName } from '../../../constants/database.constant';
 import { WolfBaseDB } from './wolfbase.database';
 import { LocalStorageService } from '../local-storage-service.interface';
-import { BookmarksTable, ClicksTable, ConfigurationTable, TrashcanTable } from '../local-storage-table.interface';
+import { BookmarksTable, ClicksTable, ConfigurationTable, SyncDataTable, TrashcanTable } from '../local-storage-table.interface';
 
 export class DexieLocalStorageService implements LocalStorageService {
 
@@ -10,7 +10,8 @@ export class DexieLocalStorageService implements LocalStorageService {
 		public bookmarks: BookmarksTable,
 		public configuration: ConfigurationTable,
 		public trashcan: TrashcanTable,
-		public clicks: ClicksTable
+		public clicks: ClicksTable,
+		public syncData: SyncDataTable
 	) { }
 
 	async drop(): Promise<void> {

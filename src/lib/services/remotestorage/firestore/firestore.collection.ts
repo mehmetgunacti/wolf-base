@@ -1,14 +1,19 @@
+import { environment } from "environments/environment";
 import { UUID } from "lib/constants/common.constant";
 import { RemoteCollection } from "lib/constants/remote.constant";
+import { SyncDTO, SyncData } from "lib/models";
 import { Entity } from "lib/models/entity.model";
-import { FirestoreConverter, FirestoreDocument } from "lib/utils/firestore/firestore.model";
+import { FIRESTORE_VALUE, isEnumValue } from "lib/utils";
+import { FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "lib/utils/firestore/firestore.model";
 import { FirestoreTool } from "lib/utils/firestore/firestore.tool";
 import { RemoteStorageCollection } from "../remote-storage-collection.interface";
-import { FIRESTORE_VALUE } from "lib/utils";
 
 export abstract class FirestoreCollection<T extends Entity> implements RemoteStorageCollection<T> {
 
 	protected pageSize = '10000'; // high number => download all
+	protected apiKey = environment.firebase.apiKey;
+	protected baseURL = environment.firebase.baseURL;
+	protected projectId = environment.firebase.projectId;
 
 	constructor(
 		protected firestore: FirestoreTool,
@@ -16,70 +21,115 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 		protected converter: FirestoreConverter<T>
 	) { }
 
-	async create(item: T): Promise<T> {
+	// async create(item: T): Promise<SyncDTO<T>> {
 
-		const url = this.firestore.createURL({
-			collection: this.remoteCollection,
-			queryParameters: { documentId: item.id }
-		});
+	// 	const url = new FirestoreCreateURL(
+	// 		this.baseURL,
+	// 		this.projectId,
+	// 		this.apiKey,
+	// 		this.remoteCollection,
+	// 		item.id
+	// 	);
+	// 	const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
+	// 	return await this.firestore.create(url, { fields: requestBody });
+
+	// }
+
+	async upload(item: T): Promise<SyncData> {
+
+		const url = new FirestorePatchURL(
+			this.baseURL,
+			this.projectId,
+			this.apiKey,
+			this.remoteCollection,
+			item.id,
+			this.converter.toUpdateMask(item)
+		);
 		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
-		const response: T = await this.firestore.create(url, { fields: requestBody });
-		return response;
-
-	}
-
-	async update(id: UUID, item: Partial<T>): Promise<T> {
-
-		const url = this.firestore.createURL({
-			collection: this.remoteCollection,
-			document: id
-		});
-		const mask = this.converter.toUpdateMask(item);
-		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
-
-		const response: T = await this.firestore.update(url, mask, { fields: requestBody });
-		return response;
+		return this.toSyncData(
+			await this.firestore.update(url, { fields: requestBody })
+		);
 
 	}
 
 	async delete(id: string): Promise<void> {
 
-		await this.firestore.delete(
-
-			this.firestore.createURL({
-				collection: this.remoteCollection,
-				document: id
-			})
-
+		const url = new FirestoreDocumentURL(
+			this.baseURL,
+			this.projectId,
+			this.apiKey,
+			this.remoteCollection,
+			id
 		);
+		await this.firestore.delete(url);
 
 	}
 
-	async get(id: string): Promise<T> {
+	async downloadOne(id: string): Promise<SyncDTO<T>> {
 
-		const response: T = await this.firestore.get<T>(
-
-			this.firestore.createURL({
-				document: id,
-				collection: this.remoteCollection
-			})
-
+		const url = new FirestoreDocumentURL(
+			this.baseURL,
+			this.projectId,
+			this.apiKey,
+			this.remoteCollection,
+			id
 		);
-		return response;
+		return this.toSyncDTO(await this.firestore.get(url));
 
 	}
 
-	async list(onlyIds: boolean = false): Promise<T[]> {
+	async downloadMany(): Promise<SyncDTO<T>[]> {
 
-		const list: T[] = await this.firestore.list<T>(
-
-			this.firestore.createURL({
-				collection: this.remoteCollection,
-				queryParameters: { pageSize: this.pageSize, ...(onlyIds ? { 'mask.fieldPaths': 'dummyField' } : {}) }
-			})
-
+		const url = new FirestoreListURL(
+			this.baseURL,
+			this.projectId,
+			this.apiKey,
+			this.remoteCollection,
+			this.pageSize
 		);
-		return list;
+		return (await this.firestore.list<T>(url)).map(dto => this.toSyncDTO(dto));
+
+	}
+
+	async downloadIds(): Promise<SyncData[]> {
+
+		const url = new FirestoreListURL(
+			this.baseURL,
+			this.projectId,
+			this.apiKey,
+			this.remoteCollection,
+			this.pageSize,
+			true
+		);
+		return (await this.firestore.listIds<T>(url)).map(dto => this.toSyncData(dto));
+
+	}
+
+	private toSyncData(dto: FirestoreDTO<T>): SyncData {
+
+		const { collection, document, createTime, updateTime } = dto;
+		const syncData: SyncData = {
+
+			collection: isEnumValue(collection, RemoteCollection),
+			id: document,
+			createTime,
+			updateTime
+
+		}
+
+		return syncData;
+
+	}
+
+	private toSyncDTO(dto: FirestoreDTO<T>): SyncDTO<T> {
+
+		const syncData = this.toSyncData(dto);
+		return {
+
+			syncData,
+			entity: { ...dto.entity, id: syncData.id }
+
+		} as SyncDTO<T>;
 
 	}
 

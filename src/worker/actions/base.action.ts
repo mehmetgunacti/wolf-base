@@ -134,15 +134,15 @@ export abstract class BaseSyncAction<T extends Entity> implements Action<void, A
 
 	protected async *downloadIds(): AsyncGenerator<SyncEvent> {
 
-		await sleep(500);
-		yield syncState(this.collection, `downloading Ids...`);
-		this.remoteIds = await this.remoteCollection.list(true);
-		yield syncState(this.collection, `${this.remoteIds.length} Ids downloaded.`);
+		// await sleep(500);
+		// yield syncState(this.collection, `downloading Ids...`);
+		// this.remoteIds = await this.remoteCollection.list(true);
+		// yield syncState(this.collection, `${this.remoteIds.length} Ids downloaded.`);
 
-		await sleep(500);
-		yield syncState(this.collection, `preparing local data...`);
-		this.localData = await this.table.list();
-		yield syncState(this.collection, `${this.localData.length} items ready.`);
+		// await sleep(500);
+		// yield syncState(this.collection, `preparing local data...`);
+		// this.localData = await this.table.list();
+		// yield syncState(this.collection, `${this.localData.length} items ready.`);
 
 	}
 

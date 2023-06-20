@@ -1,6 +1,6 @@
 import { WolfBaseTableName } from '../../../constants/database.constant';
 import { DexieLocalStorageService } from './dexie.service';
-import { ClicksTableImpl } from './tables';
+import { ClicksTableImpl, SyncDataTableImpl } from './tables';
 import { BookmarksTableImpl } from './tables/bookmarks.table';
 import { ConfigurationTableImpl } from './tables/configuration.table';
 import { KeyValueTableImpl } from './tables/key-value.table';
@@ -16,7 +16,8 @@ export const localStorageServiceFactory = (): DexieLocalStorageService => {
 		bookmarksTableFactory(db),
 		configurationTableFactory(db),
 		trashcanTableFactory(db),
-		clicksTableFactory(db)
+		clicksTableFactory(db),
+		syncDataTableFactory(db)
 
 	);
 
@@ -51,6 +52,14 @@ const trashcanTableFactory = (wolfBaseDB?: WolfBaseDB): TrashcanTableImpl => {
 const clicksTableFactory = (wolfBaseDB?: WolfBaseDB): ClicksTableImpl => {
 
 	return new ClicksTableImpl(
+		wolfBaseDB || wolfBaseDBFactory()
+	);
+
+}
+
+const syncDataTableFactory = (wolfBaseDB?: WolfBaseDB): SyncDataTableImpl => {
+
+	return new SyncDataTableImpl(
 		wolfBaseDB || wolfBaseDBFactory()
 	);
 

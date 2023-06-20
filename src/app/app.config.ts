@@ -1,6 +1,6 @@
 import { ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
-import { LocalStorageService, localStorageServiceFactory, remoteStorageServiceFactory } from 'lib';
+import { LocalStorageService, RemoteStorageService, localStorageServiceFactory, remoteStorageServiceFactory } from 'lib';
 import { MessageService } from 'primeng/api';
 import { CustomErrorHandler } from 'services';
 
@@ -29,7 +29,7 @@ export const routes: Routes = [
 // }
 
 export const LOCAL_STORAGE_SERVICE = new InjectionToken<LocalStorageService>('LocalStorageService');
-export const REMOTE_STORAGE_SERVICE = new InjectionToken<LocalStorageService>('RemoteStorageService');
+export const REMOTE_STORAGE_SERVICE = new InjectionToken<RemoteStorageService>('RemoteStorageService');
 
 export const providers: Provider[] = [
 

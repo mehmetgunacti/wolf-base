@@ -1,14 +1,151 @@
-import { FIRESTORE_VALUE } from './firestore.constant';
+import { RemoteCollection, UUID, WolfBaseEntity } from 'lib/constants';
+import { PartialEntity } from 'lib/models';
+import { FIRESTORE_INTEGER, FIRESTORE_VALUE } from './firestore.constant';
 
-export interface FirestoreURLConfig<T> {
+// todo needs refactoring -> generic type
+export type QueryParameters = Partial<Record<keyof PartialEntity<WolfBaseEntity> | 'documentId' | 'key' | 'pageSize' | 'mask.fieldPaths', string>>;
 
-	baseUrl?: string;
-	projectId?: string;
-	collection?: string;
-	document?: string;
-	command?: string;
-	apiKey?: string;
-	queryParameters?: Partial<Record<keyof T | 'documentId' | 'key' | 'pageSize' | 'mask.fieldPaths', string>>;
+export class FirestoreCreateURL {
+
+	constructor(
+		public baseURL: string,
+		public projectId: string,
+		public apiKey: string,
+		public collection: RemoteCollection,
+		public id: UUID
+	) { }
+
+	toURL(): string {
+
+		return `${this.baseURL}projects/${this.projectId}/databases/(default)/documents/${this.collection}?key=${this.apiKey}&documentId=${this.id}`;
+
+	}
+
+}
+
+export class FirestorePatchURL {
+
+	constructor(
+		public baseURL: string,
+		public projectId: string,
+		public apiKey: string,
+		public collection: RemoteCollection,
+		public id: UUID,
+		public mask: string
+	) { }
+
+	toURL(): string {
+
+		return `${this.baseURL}projects/${this.projectId}/databases/(default)/documents/${this.collection}/${this.id}?key=${this.apiKey}&${this.mask}`;
+
+	}
+
+}
+
+export class FirestoreDocumentURL {
+
+	constructor(
+		public baseURL: string,
+		public projectId: string,
+		public apiKey: string,
+		public collection: RemoteCollection,
+		public document: UUID
+	) { }
+
+	toURL(): string {
+
+		return `${this.baseURL}projects/${this.projectId}/databases/(default)/documents/${this.collection}/${this.document}?key=${this.apiKey}`;
+
+	}
+
+}
+
+export class FirestoreListURL {
+
+	constructor(
+		public baseURL: string,
+		public projectId: string,
+		public apiKey: string,
+		public collection: RemoteCollection,
+		public pageSize: string,
+		public onlyIds = false
+	) { }
+
+	toURL(): string {
+
+		let queryParameters = `pageSize=${this.pageSize}`;
+		if (this.onlyIds)
+			queryParameters += `&mask.fieldPaths=dummyField`;
+		return `${this.baseURL}projects/${this.projectId}/databases/(default)/documents/${this.collection}?key=${this.apiKey}&${queryParameters}`;
+
+	}
+
+}
+
+export class FirestoreIncreaseURL {
+
+	constructor(
+		public baseURL: string,
+		public projectId: string,
+		public apiKey: string,
+		public collection: RemoteCollection,
+		public document: string,
+		public fieldPath: string,
+		public command: string, // e.g. ':commit'
+		public amount: number // e.g. 1
+	) { }
+
+	toURL(): string {
+
+		return `${this.baseURL}projects/${this.projectId}/databases/(default)/documents${this.command}?key=${this.apiKey}`
+
+	}
+
+	toFirestoreWrites(): FirestoreWrites {
+
+		const requestBody = {
+			writes: [
+				{
+					transform: {
+						document: `projects/${this.projectId}/databases/(default)/documents/${this.collection}/${this.document}`,
+						fieldTransforms: [
+							{
+								fieldPath: this.fieldPath,
+								increment: {
+									integerValue: this.amount
+								}
+							}
+						]
+					}
+				}
+			]
+		};
+
+		return requestBody;
+
+	}
+
+}
+
+export interface FirestoreDTO<T> {
+
+	collection: string;
+	document: string;
+	createTime: string;
+	updateTime: string;
+	entity?: T;
+
+}
+
+export interface FirestoreConfig {
+
+	baseURL: string;
+	projectId: string;
+	apiKey: string;
+	collection: RemoteCollection;
+	document: string;
+	command: string;
+	queryParameters: QueryParameters;
 
 }
 
@@ -38,7 +175,7 @@ export interface FirestoreWrites {
 			fieldTransforms: {
 
 				fieldPath: string;
-				increment: { integerValue: number }
+				increment: FIRESTORE_INTEGER;
 
 			}[];
 
@@ -52,7 +189,7 @@ export interface FirestoreWrites {
 export interface FirestoreWriteResult {
 
 	writeResults: {
-		transformResults: { integerValue: number }[]
+		transformResults: FIRESTORE_INTEGER[]
 	}[];
 
 }

@@ -1,55 +1,55 @@
 import { HTTP } from '../http.tool';
 import { FIRESTORE_TYPE, FIRESTORE_VALUE } from './firestore.constant';
 import {
+	FirestoreCreateURL,
+	FirestoreDTO,
 	FirestoreDocument,
+	FirestoreDocumentURL,
 	FirestoreDocuments,
-	FirestoreURLConfig,
+	FirestoreIncreaseURL,
+	FirestoreListURL,
+	FirestorePatchURL,
 	FirestoreWriteResult,
 	FirestoreWrites
 } from './firestore.model';
 
-export interface IFirestoreConfig {
-
-	apiKey: string;
-	baseURL: string;
-	projectId: string;
-
-}
-
 export class FirestoreTool {
 
-	constructor(private conf: IFirestoreConfig) { }
+	async create<T>(url: FirestoreCreateURL, requestBody: FirestoreDocument<T>): Promise<FirestoreDTO<T>> {
 
-	async create<T>(url: string, requestBody: FirestoreDocument<T>): Promise<T> {
+		return await HTTP.post<FirestoreDocument<T>, FirestoreDocument<T>, FirestoreDTO<T>>(
 
-		return await HTTP.post<FirestoreDocument<T>, FirestoreDocument<T>, T>(
-			url,
+			url.toURL(),
 			requestBody,
-			(response: FirestoreDocument<T>): T => this.parseDocument(response)
+			(response: FirestoreDocument<T>): FirestoreDTO<T> => this.parseDocument(response)
+
 		);
 
 	}
 
-	async update<T>(url: string, mask: string, requestBody: FirestoreDocument<T>): Promise<T> {
+	async update<T>(url: FirestorePatchURL, requestBody: FirestoreDocument<T>): Promise<FirestoreDTO<T>> {
 
-		return HTTP.patch<FirestoreDocument<T>, FirestoreDocument<T>, T>(
-			`${url}&${mask}`,
+		return HTTP.patch<FirestoreDocument<T>, FirestoreDocument<T>, FirestoreDTO<T>>(
+
+			url.toURL(),
 			requestBody,
-			(response: FirestoreDocument<T>): T => this.parseDocument(response)
+			(response: FirestoreDocument<T>): FirestoreDTO<T> => this.parseDocument(response)
+
 		);
 
 	}
 
-	async delete(url: string): Promise<void> {
+	async delete(url: FirestoreDocumentURL): Promise<void> {
 
-		await HTTP.delete<void, void>(url);
+		await HTTP.delete<void, void>(url.toURL());
 
 	}
 
-	async list<T>(url: string): Promise<T[]> {
+	async list<T>(listUrl: FirestoreListURL): Promise<FirestoreDTO<T>[]> {
 
+		let url = listUrl.toURL();
 		let nextPageToken: string | undefined = '';
-		let items: T[] = [];
+		let items: FirestoreDTO<T>[] = [];
 
 		do {
 
@@ -58,9 +58,9 @@ export class FirestoreTool {
 
 			items = [
 				...items,
-				...await HTTP.get<FirestoreDocuments<T>, T[]>(
+				...await HTTP.get<FirestoreDocuments<T>, FirestoreDTO<T>[]>(
 					url,
-					(response: FirestoreDocuments<T>): T[] => {
+					(response: FirestoreDocuments<T>): FirestoreDTO<T>[] => {
 						nextPageToken = response.nextPageToken;
 						return this.parseDocuments(response);
 					}
@@ -73,132 +73,106 @@ export class FirestoreTool {
 
 	}
 
-	async get<T>(url: string): Promise<T> {
+	async listIds<T>(listUrl: FirestoreListURL): Promise<FirestoreDTO<T>[]> {
 
-		return await HTTP.get<FirestoreDocument<T>, T>(
-			url,
+		// create url
+		listUrl.onlyIds = true;
+		let url = listUrl.toURL();
+
+		let nextPageToken: string | undefined = '';
+		let items: FirestoreDTO<T>[] = [];
+
+		do {
+
+			if (nextPageToken)
+				url = `${url}&pageToken=${nextPageToken}`;
+
+			items = [
+				...items,
+				...await HTTP.get<FirestoreDocuments<T>, FirestoreDTO<T>[]>(
+					url,
+					(response: FirestoreDocuments<T>): FirestoreDTO<T>[] => {
+						nextPageToken = response.nextPageToken;
+						return this.parseDocuments(response);
+					}
+				)
+			];
+
+		} while (!!nextPageToken);
+
+		return items;
+
+	}
+
+	async get<T>(url: FirestoreDocumentURL): Promise<FirestoreDTO<T>> {
+
+		return await HTTP.get<FirestoreDocument<T>, FirestoreDTO<T>>(
+			url.toURL(),
 			(response: FirestoreDocument<T>) => this.parseDocument(response)
 		);
 
 	}
 
-	async increase(collection: string, fieldPath: string, id: string, amount: number = 1): Promise<number> {
-
-		const url = this.createURL({
-			collection: '', // no collectionId (bookmarks) this time
-			command: ':commit'
-		});
-		const requestBody: FirestoreWrites = this.createFirestoreWrites(id, collection, fieldPath, amount);
+	async increase(url: FirestoreIncreaseURL): Promise<number> {
 
 		return await HTTP.post<FirestoreWriteResult, FirestoreWrites, number>(
-			url,
-			requestBody,
-			(firebaseResponse: FirestoreWriteResult): number => Number(firebaseResponse?.writeResults[0]?.transformResults[0]?.integerValue)
-		);
-
-	}
-
-	createURL<T>({
-
-		baseUrl = this.conf.baseURL,
-		projectId = this.conf.projectId,
-		collection = '',
-		document = '',
-		command = '',
-		apiKey = this.conf.apiKey,
-		queryParameters = {}
-
-	}: FirestoreURLConfig<T>): string {
-
-		let url = `${baseUrl}projects/${projectId}/databases/(default)/documents`;
-
-		if (collection)
-			url += `/${collection}`;
-
-		if (document)
-			url += `/${document}`;
-
-		if (command)
-			url += `${command}`;
-
-		if (apiKey)
-			queryParameters['key'] = apiKey;
-
-		Object.keys(queryParameters).forEach(
-			(param, idx) => {
-
-				const key = param as keyof typeof queryParameters;
-				url += (idx === 0 ? '?' : '&') + `${param}=${queryParameters[key]}`;
-
+			url.toURL(),
+			url.toFirestoreWrites(),
+			(firebaseResponse: FirestoreWriteResult): number => {
+				console.log(firebaseResponse);
+				return Number(firebaseResponse?.writeResults[0]?.transformResults[0]?.integerValue);
 			}
 		);
 
-		return url;
-
 	}
 
-	createFirestoreWrites(id: string, collection: string, fieldPath: string, amount: number): FirestoreWrites {
-
-		const requestBody = {
-			writes: [
-				{
-					transform: {
-						document: this.createURL({ collection, document: id, apiKey: '', baseUrl: '' }),
-						fieldTransforms: [
-							{
-								fieldPath,
-								increment: {
-									integerValue: amount
-								}
-							}
-						]
-					}
-				}
-			]
-		};
-
-		return requestBody;
-
-	}
-
-	parseDocuments<T>(firestoreResponse: FirestoreDocuments<T>): T[] {
+	private parseDocuments<T>(firestoreResponse: FirestoreDocuments<T>): FirestoreDTO<T>[] {
 
 		return firestoreResponse?.documents?.map((d: FirestoreDocument<T>) => this.parseDocument(d)) || [];
 
 	}
 
-	parseDocument<T>(item: FirestoreDocument<T>): T {
+	private parseDocument<T>(item: FirestoreDocument<T>): FirestoreDTO<T> {
 
-		// parse 'id'
-		const id: string | null = this.parseId(item);
-		if (id === null)
-			throw new Error('Firestore Object Id error : [' + JSON.stringify(item) + ']');
+		// parse 'document'
+		const { collection, document } = this.parseFirestoreURL(item.name ?? '');
 
-		// construct Entity
+		// deconstruct firestore document
 		const { fields, createTime, updateTime } = item;
-		return {
 
-			...(fields ? this.parseFields(fields) : {}),
-			id,
-			sync: {
-				created: createTime ?? '',
-				updated: updateTime ?? ''
-			}
+		if (!createTime || !updateTime)
+			throw new Error('Firestore data error : [' + JSON.stringify(item) + ']');
 
-		} as T;
+		// parse syncData
+		const dto: FirestoreDTO<T> = {
+			collection,
+			document,
+			createTime,
+			updateTime
+		};
+		if (fields)
+			dto['entity'] = this.parseFields(fields);
 
-	}
-
-	parseId<T>(item: FirestoreDocument<T>): string | null {
-
-		if (item.name)
-			return item.name?.substring(item.name.lastIndexOf('/') + 1);
-
-		return null;
+		return dto;
 
 	}
 
-	parseFields<T>(fields: Record<keyof T, FIRESTORE_VALUE>): T {
+	private parseFirestoreURL(url: string): { collection: string, document: string } {
+
+		const regex = /\/documents\/([^/]+)\/([^/]+)$/;
+		const matches = url.match(regex);
+		if (matches && matches.length === 3) {
+
+			const collection = matches[1];
+			const document = matches[2];
+			return { collection, document };
+
+		}
+		throw new Error('Invalid Firestore URL: [' + url + ']');
+
+	}
+
+	private parseFields<T>(fields: Record<keyof T, FIRESTORE_VALUE>): T {
 
 		const result: T = {} as T;
 		for (const key in fields) {
@@ -210,7 +184,7 @@ export class FirestoreTool {
 
 	}
 
-	parseField<T extends string | number | boolean | null>(field: FIRESTORE_VALUE): T {
+	private parseField<T extends string | number | boolean | null>(field: FIRESTORE_VALUE): T {
 
 		if (FIRESTORE_TYPE.stringValue in field)
 			return field.stringValue as T;
@@ -249,41 +223,4 @@ export class FirestoreTool {
 
 	}
 
-	// parseFields<E>(fields: Record<keyof E, FIRESTORE_VALUE>): E {
-
-	// 	const parsedObject: E = {} as E;
-	// 	Object
-	// 		.keys(fields)
-	// 		.forEach(
-	// 			key => parsedObject[key as keyof E] = this.parseField(fields[key as keyof E])
-	// 		);
-	// 	return parsedObject;
-
-	// }
-
-	// parseField(field: FIRESTORE_VALUE): any {
-
-	// 	const key: string = Object.keys(field)[0];
-	// 	switch (key) {
-
-	// 		// case FIRESTORE_TYPE.doubleValue:
-	// 		case FIRESTORE_TYPE.integerValue:
-	// 			return field. [key] as number;
-
-	// 		case FIRESTORE_TYPE.arrayValue:
-	// 			return (field[key] && field[key].values || []).map((v: Record<string, any>) => this.parseField(v));
-
-	// 		case FIRESTORE_TYPE.mapValue:
-	// 			return this.parseFields(field[key] && field[key].fields || {});
-
-	// 		// case FIRESTORE_TYPE.geoPointValue:
-	// 		// 	return { latitude: 0, longitude: 0, ...field[key] };
-
-	// 		default:
-	// 			return field[key];
-	// 	}
-
-	// }
-
 }
-

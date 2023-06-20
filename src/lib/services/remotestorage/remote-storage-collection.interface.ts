@@ -1,24 +1,22 @@
 import { UUID } from "lib/constants/common.constant";
-import { WolfBaseEntity } from "lib/constants/sync.constant";
-import { Trash } from "lib/models";
+import { SyncDTO, SyncData, Trash } from "lib/models";
 import { Bookmark } from "lib/models/bookmark.model";
 import { Entity } from "lib/models/entity.model";
 
 export interface RemoteStorageCollection<T extends Entity> {
 
-	get(id: string): Promise<T>;
+	downloadOne(id: string): Promise<SyncDTO<T>>;
+	downloadMany(): Promise<SyncDTO<T>[]>;
+	downloadIds(): Promise<SyncData[]>;
 
-	create(item: T): Promise<T>;
-	update(id: UUID, item: Partial<WolfBaseEntity>): Promise<T>;
+	upload(item: T): Promise<SyncData>;
 	delete(id: string): Promise<void>;
-
-	list(onlyIds?: boolean): Promise<T[]>;
 
 }
 
 export interface BookmarksCollection extends RemoteStorageCollection<Bookmark> {
 
-	increaseClicks(id: UUID, count: number): Promise<Bookmark>;
+	click(id: UUID, amount: number): Promise<number>
 
 }
 

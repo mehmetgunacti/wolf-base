@@ -1,7 +1,7 @@
 import Dexie from 'dexie';
 import { UUID } from 'lib/constants/common.constant';
 import { CONF_KEYS, WolfBaseTableName } from 'lib/constants/database.constant';
-import { Trash } from 'lib/models';
+import { SyncData, Trash } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { DexieConfiguration } from 'lib/models/database.model';
 
@@ -21,7 +21,8 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			bookmarks: 'id, *tags, clicks',
 			clicks: 'id',
 			configuration: '',
-			trashcan: 'id'
+			trashcan: 'id',
+			syncData: 'id, table'
 		},
 		version: 1
 	});
@@ -34,6 +35,7 @@ export class WolfBaseDB extends Dexie {
 	clicks: Dexie.Table<Click, UUID>;
 	configuration: Dexie.Table<string | boolean, string>;
 	trashcan: Dexie.Table<Trash, UUID>;
+	syncData: Dexie.Table<SyncData, UUID>;
 
 	constructor(conf: DexieConfiguration) {
 
@@ -45,6 +47,7 @@ export class WolfBaseDB extends Dexie {
 		this.clicks = this.table(WolfBaseTableName.clicks);
 		this.configuration = this.table(WolfBaseTableName.configuration);
 		this.trashcan = this.table(WolfBaseTableName.trashcan);
+		this.syncData = this.table(WolfBaseTableName.syncData);
 
 		this.on('populate', () => {
 

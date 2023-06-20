@@ -1,5 +1,14 @@
 export const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, 10)); // ms));
 
+export const isEnumValue = <T>(value: string, enumType: any): T[keyof T] => {
+
+	if (Object.values(enumType).includes(value))
+		return enumType[value];
+
+	throw new Error(`${value} not a member of ${enumType}`);
+
+}
+
 export const removeOverlappingProperties = <T>(obj: Partial<T>, properties: Partial<T>) => {
 
 	const newObj = { ...obj };

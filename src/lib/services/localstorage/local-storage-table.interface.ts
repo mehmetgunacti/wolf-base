@@ -1,5 +1,6 @@
+import { RemoteCollection, WolfBaseEntity } from "lib/constants";
 import { UUID } from "lib/constants/common.constant";
-import { Trash } from "lib/models";
+import { SyncData, Trash } from "lib/models";
 import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Configuration } from "lib/models/configuration.model";
 import { Entity, PartialEntity } from "lib/models/entity.model";
@@ -9,6 +10,7 @@ export interface EntityTable<T extends Entity> {
 	get(id: UUID): Promise<T | undefined>;
 
 	create(item: PartialEntity<T>): Promise<T>;
+	put(item: T): Promise<void>;
 	update(id: UUID, item: PartialEntity<T>): Promise<T>;
 	delete(id: UUID): Promise<void>;
 
@@ -64,5 +66,14 @@ export interface TrashcanTable {
 	put(item: Trash): Promise<void>;
 	delete(id: UUID): Promise<void>;
 	list(filterFn?: (t: Trash) => boolean): Promise<Trash[]>;
+
+}
+
+export interface SyncDataTable {
+
+	get(id: UUID): Promise<SyncData | undefined>;
+	put(item: SyncData): Promise<void>;
+	delete(id: UUID): Promise<void>;
+	list(collection?: RemoteCollection): Promise<SyncData[]>;
 
 }

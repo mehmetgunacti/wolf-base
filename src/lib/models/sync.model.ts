@@ -1,4 +1,6 @@
-import { Entity, WolfEntity } from "./entity.model";
+import { RemoteCollection } from "lib/constants";
+import { IDBase } from "./id-base.model";
+import { Entity } from "./entity.model";
 
 export interface SyncEvent {
 
@@ -7,10 +9,18 @@ export interface SyncEvent {
 
 }
 
-export interface SyncData {
+export interface SyncData extends IDBase {
 
-	created: string;
-	updated: string;
-	data?: Omit<Partial<WolfEntity>, keyof Entity>;
+	collection: RemoteCollection;
+	createTime: string;
+	updateTime: string;
+	updated?: boolean;
+
+}
+
+export interface SyncDTO<T extends Entity> {
+
+	syncData: SyncData,
+	entity?: T
 
 }

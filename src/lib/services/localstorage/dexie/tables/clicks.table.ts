@@ -10,7 +10,7 @@ export class ClicksTableImpl implements ClicksTable {
 
 	async click(id: UUID): Promise<void> {
 
-		// try to update
+		// try to increment value (update)
 		const affected = await this.db.clicks
 			.where({ id })
 			.modify((click: Click): void => {

@@ -1,6 +1,6 @@
 import { WolfBaseTableName } from "lib/constants";
 import { Trash } from "lib/models";
-import { FIRESTORE_VALUE, FirestoreConverter, FirestoreDocument } from "lib/utils";
+import { FIRESTORE_VALUE, FirestoreConverter } from "lib/utils";
 import { BookmarkFirestoreConverter } from "./bookmark.converter";
 
 export class TrashFirestoreConverter implements FirestoreConverter<Trash> {

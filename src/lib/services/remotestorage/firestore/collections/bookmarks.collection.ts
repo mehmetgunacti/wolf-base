@@ -2,6 +2,7 @@ import { UUID } from 'lib/constants/common.constant';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { Bookmark } from 'lib/models/bookmark.model';
 import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
+import { FirestoreIncreaseURL } from 'lib/utils';
 import { FirestoreTool } from 'lib/utils/firestore/firestore.tool';
 import { BookmarkFirestoreConverter } from '../converter';
 import { FirestoreCollection } from '../firestore.collection';
@@ -12,10 +13,19 @@ export class BookmarksFirestoreCollection extends FirestoreCollection<Bookmark> 
 		super(firestore, RemoteCollection.bookmarks, new BookmarkFirestoreConverter());
 	}
 
-	async increaseClicks(id: UUID, count: number): Promise<Bookmark> {
+	async click(id: UUID, amount: number = 1): Promise<number> {
 
-		await this.firestore.increase(this.remoteCollection, 'clicks', id, count);
-		return await this.get(id);
+		const url = new FirestoreIncreaseURL(
+			this.baseURL,
+			this.projectId,
+			this.apiKey,
+			RemoteCollection.clicks,
+			id,
+			'clicks',
+			':commit',
+			amount
+		);
+		return await this.firestore.increase(url);
 
 	}
 

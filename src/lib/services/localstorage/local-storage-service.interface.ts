@@ -1,5 +1,5 @@
 import { WolfBaseTableName } from 'lib/constants/database.constant';
-import { BookmarksTable, ClicksTable, ConfigurationTable, TrashcanTable } from './local-storage-table.interface';
+import { BookmarksTable, ClicksTable, ConfigurationTable, SyncDataTable, TrashcanTable } from './local-storage-table.interface';
 
 export interface LocalStorageService {
 
@@ -7,6 +7,7 @@ export interface LocalStorageService {
 	clicks: ClicksTable;
 	configuration: ConfigurationTable;
 	trashcan: TrashcanTable;
+	syncData: SyncDataTable;
 
 	drop(): Promise<void>;
 	clear(tablename: WolfBaseTableName): Promise<void>;

@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
+import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
-import { Bookmark, LocalStorageService, POPULAR, commaSplit, toggleArrayItem } from 'lib';
+import { Bookmark, LocalStorageService, POPULAR, RemoteStorageService, commaSplit, toggleArrayItem } from 'lib';
 import { fromEventPattern, of } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/core';
@@ -16,6 +16,7 @@ export class EntitiesEffects {
 	private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 	private router: Router = inject(Router);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
+	private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
 
 	listFromIndexedDb$ = createEffect(
 
@@ -234,7 +235,8 @@ export class EntitiesEffects {
 		() => this.actions$.pipe(
 
 			ofType(fromActions.clickBookmark),
-			tap(({ id }) => this.localStorage.clicks.click(id))
+			tap(({ id }) => this.localStorage.clicks.click(id)),
+			tap(({ id }) => this.remoteStorage.bookmarks.click(id, 1))
 
 		),
 		{ dispatch: false }

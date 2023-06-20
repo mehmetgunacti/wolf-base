@@ -2,15 +2,10 @@ export enum WolfBaseTableName {
 
 	bookmarks = 'bookmarks',
 	clicks = 'clicks',
-	// notes = 'notes',
-	// tasks = 'tasks',
-	// words = 'words',
-	// fasts = 'fasts',
-	// weights = 'weights',
-	// workouts = 'workouts',
 	configuration = 'configuration',
-	trashcan = 'trashcan',
-	conflicts = 'conflicts'
+	conflicts = 'conflicts',
+	syncData = 'syncData',
+	trashcan = 'trashcan'
 
 }
 
