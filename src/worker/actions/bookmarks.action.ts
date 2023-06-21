@@ -19,12 +19,10 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 		yield* this.downloadIds();
 
 		yield* this.uploadNew();
-
+		yield* this.uploadDeleted();
 
 		yield* this.downloadNew();
 		yield* this.downloadDeleted();
-
-		yield* this.uploadDeleted();
 
 		yield* this.uploadUpdated();
 		yield* this.downloadUpdated();
@@ -36,15 +34,7 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 		yield syncState(this.collection, `finding new items to be uploaded`);
 		await sleep(500);
 
-		// all IDs (already synced and new)
-		const allIds: UUID[] = await this.localStorage.bookmarks.listIds();
-
-		// already synced IDs
-		const localSyncData: SyncData[] = await this.localStorage.syncData.list();
-		const remoteIds: Set<UUID> = new Set(localSyncData.map(s => s.id));
-
-		// find newly created item IDs
-		const newIds = allIds.filter(id => !remoteIds.has(id));
+		const newIds = await this.findIdsToBeUploaded();
 
 		// return if none
 		if (newIds.length === 0) {
@@ -56,6 +46,13 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 
 		// upload new items
 		yield syncState(this.collection, `${newIds.length} new items to be uploaded.`);
+		this.uploadNewItems(newIds);
+		yield syncState(this.collection, `uploaded ${newIds.length} new items.`);
+
+	}
+
+	private async *uploadNewItems(newIds: UUID[]): AsyncGenerator<SyncEvent> {
+
 		for (const [idx, itemId] of newIds.entries()) {
 
 			await sleep(500);
@@ -68,7 +65,23 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 			}
 
 		}
-		yield syncState(this.collection, `downloaded ${newIds.length} new items.`);
+
+	}
+
+	private async findIdsToBeUploaded(): Promise<UUID[]> {
+
+		// locally created new id -> ids of items in the local table which are not in the 'syncData' table (which were never uploaded before)
+		// all IDs (already synced and new) from local table
+		const allIds: UUID[] = await this.localStorage.bookmarks.listIds();
+
+		// already synced IDs (all ids from local 'syncData' table)
+		const localSyncData: SyncData[] = await this.localStorage.syncData.list();
+
+		// create a Set for easy comparison
+		const remoteIds: Set<UUID> = new Set(localSyncData.map(s => s.id));
+
+		// find newly created item IDs
+		return allIds.filter(id => !remoteIds.has(id));
 
 	}
 
@@ -77,13 +90,7 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 		yield syncState(this.collection, `finding new items to be downloaded`);
 		await sleep(500);
 
-		// all local synced Ids
-		const localSyncedIds: Set<UUID> = new Set(
-			(await this.localStorage.syncData.list(RemoteCollection.bookmarks)).map(s => s.id)
-		);
-
-		// find remote-new item IDs
-		const newIds = this.remoteIds.filter(s => !localSyncedIds.has(s.id));
+		const newIds: SyncData[] = await this.findIdsToBeDownloaded();
 
 		// return if none
 		if (newIds.length === 0) {
@@ -95,6 +102,13 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 
 		// download all new
 		yield syncState(this.collection, `${newIds.length} new items to be downloaded.`);
+		this.downloadNewItems(newIds);
+		yield syncState(this.collection, `downloaded ${newIds.length} new items.`);
+
+	}
+
+	private async *downloadNewItems(newIds: SyncData[]): AsyncGenerator<SyncEvent> {
+
 		for (const remoteSyncData of newIds) {
 
 			await sleep(500);
@@ -109,7 +123,19 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 			}
 
 		}
-		yield syncState(this.collection, `downloaded ${newIds.length} new items.`);
+
+	}
+
+	private async findIdsToBeDownloaded(): Promise<SyncData[]> {
+
+		// if an id is not in the local 'syncData' table -> it wasn't downloaded before -> it was created on another client
+		// new id: id that is in remote collection but not in local 'syncData' table
+		const localSyncedIds: Set<UUID> = new Set(
+			(await this.localStorage.syncData.list(RemoteCollection.bookmarks)).map(s => s.id)
+		);
+
+		// find remote-new item IDs
+		return this.remoteIds.filter(s => !localSyncedIds.has(s.id));
 
 	}
 
@@ -139,8 +165,8 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 
 	protected async *uploadDeleted(): AsyncGenerator<SyncEvent> {
 
-		// await sleep(500);
-		// yield syncState(this.collection, `deleting items remotely..`);
+		await sleep(500);
+		yield syncState(this.collection, `deleting items remotely..`);
 		// let count = 0;
 		// const deletedItems: Trash[] = await this.localStorage.trashcan.list(item => item.table === WolfBaseTableName.bookmarks);
 		// const remoteIds: Set<UUID> = new Set(this.remoteIds.map(item => item.id));
