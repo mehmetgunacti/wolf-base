@@ -6,6 +6,10 @@ export type PartialEntity<T extends Entity> = Omit<Partial<T>, keyof Entity>;
 
 export interface Entity extends IDBase {
 
-	readonly created: string;
+	readonly createTime?: string;
+	readonly updateTime?: string;
+	_updated?: boolean;
+	_deleted?: boolean;
+	_conflict?: boolean;
 
 }

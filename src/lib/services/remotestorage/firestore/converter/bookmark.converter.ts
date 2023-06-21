@@ -1,36 +1,32 @@
 import { Bookmark } from "lib/models";
-import { FIRESTORE_VALUE, FirestoreConverter, FirestoreDocument } from "lib/utils";
+import { FIRESTORE_VALUE, FirestoreConverter } from "lib/utils";
 
 export class BookmarkFirestoreConverter implements FirestoreConverter<Bookmark> {
 
-    toFirestore(bookmark: Bookmark): Record<keyof Bookmark, FIRESTORE_VALUE> {
+	toFirestore(bookmark: Bookmark): Record<keyof Bookmark, FIRESTORE_VALUE> {
 
-        const fields = {} as Record<keyof Bookmark, FIRESTORE_VALUE>;
-        fields['name'] = { stringValue: bookmark.name };
-        fields['title'] = { stringValue: bookmark.title };
-        fields['tags'] = {
-            arrayValue: { values: bookmark.tags.map(v => ({ stringValue: v })) }
-        };
-        fields['urls'] = {
-            arrayValue: { values: bookmark.urls.map(v => ({ stringValue: v })) }
-        };
-        fields['clicks'] = { integerValue: bookmark.clicks };
-        fields['created'] = { stringValue: bookmark.created };
-    
-        if (bookmark.image)
-            fields['image'] = { stringValue: bookmark.image };
-    
-        return fields;
+		const fields = {} as Record<keyof Bookmark, FIRESTORE_VALUE>;
+		fields['name'] = { stringValue: bookmark.name };
+		fields['title'] = { stringValue: bookmark.title };
+		fields['tags'] = {
+			arrayValue: { values: bookmark.tags.map(v => ({ stringValue: v })) }
+		};
+		fields['urls'] = {
+			arrayValue: { values: bookmark.urls.map(v => ({ stringValue: v })) }
+		};
 
-    }
+		if (bookmark.image)
+			fields['image'] = { stringValue: bookmark.image };
 
-    toUpdateMask(bookmark: Partial<Bookmark>): string {
-        
-        		// exclude some fields like id, ... from update list
+		return fields;
+
+	}
+
+	toUpdateMask(bookmark: Partial<Bookmark>): string {
+
+		// exclude some fields like id, ... from update list
 		// also don't update image if no new image was selected
 		// (empty image string would delete image on server)
-
-		// 'created' is never updated
 
 		const fields = new Set<string>();
 
@@ -48,12 +44,9 @@ export class BookmarkFirestoreConverter implements FirestoreConverter<Bookmark> 
 
 		if (bookmark.image?.startsWith('data'))
 			fields.add('image');
-		
-		if (bookmark.clicks)
-			fields.add('clicks');
 
 		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
 
-    }
+	}
 
 }

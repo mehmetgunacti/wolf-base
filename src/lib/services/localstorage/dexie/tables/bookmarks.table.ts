@@ -30,8 +30,7 @@ export class BookmarksTableImpl extends EntityTableImpl<Bookmark> implements Boo
 			tags: [],
 			image: '',
 			urls: [''],
-			clicks: 0,
-			created: new Date().toISOString()
+			clicks: 0
 
 		};
 		return { ...instance, ...item, id } as Bookmark;

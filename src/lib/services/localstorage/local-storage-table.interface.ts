@@ -1,6 +1,4 @@
-import { RemoteCollection, WolfBaseEntity } from "lib/constants";
 import { UUID } from "lib/constants/common.constant";
-import { SyncData, Trash } from "lib/models";
 import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Configuration } from "lib/models/configuration.model";
 import { Entity, PartialEntity } from "lib/models/entity.model";
@@ -57,23 +55,5 @@ export interface ConfigurationTable {
 	toggleTheme(): Promise<void>;
 
 	dump(): Promise<Configuration>;
-
-}
-
-export interface TrashcanTable {
-
-	get(id: UUID): Promise<Trash | undefined>;
-	put(item: Trash): Promise<void>;
-	delete(id: UUID): Promise<void>;
-	list(filterFn?: (t: Trash) => boolean): Promise<Trash[]>;
-
-}
-
-export interface SyncDataTable {
-
-	get(id: UUID): Promise<SyncData | undefined>;
-	put(item: SyncData): Promise<void>;
-	delete(id: UUID): Promise<void>;
-	list(collection?: RemoteCollection): Promise<SyncData[]>;
 
 }

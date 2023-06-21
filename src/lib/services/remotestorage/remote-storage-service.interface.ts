@@ -1,14 +1,12 @@
 import { WolfBaseEntity } from 'lib/constants/sync.constant';
 import {
 	BookmarksCollection,
-	RemoteStorageCollection,
-	TrashcanCollection
+	RemoteStorageCollection
 } from './remote-storage-collection.interface';
 
 export interface RemoteStorageService {
 
 	bookmarks: BookmarksCollection;
-	trashcan: TrashcanCollection;
 
 	getCollection(name: string): RemoteStorageCollection<WolfBaseEntity>;
 

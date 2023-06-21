@@ -1,15 +1,14 @@
 import { UUID } from "lib/constants/common.constant";
-import { SyncDTO, SyncData, Trash } from "lib/models";
 import { Bookmark } from "lib/models/bookmark.model";
 import { Entity } from "lib/models/entity.model";
 
 export interface RemoteStorageCollection<T extends Entity> {
 
-	downloadOne(id: string): Promise<SyncDTO<T>>;
-	downloadMany(): Promise<SyncDTO<T>[]>;
-	downloadIds(): Promise<SyncData[]>;
+	downloadOne(id: string): Promise<T>;
+	downloadMany(): Promise<T[]>;
+	downloadIds(): Promise<Entity[]>;
 
-	upload(item: T): Promise<SyncData>;
+	upload(item: T): Promise<Entity>;
 	delete(id: string): Promise<void>;
 
 }
@@ -20,8 +19,8 @@ export interface BookmarksCollection extends RemoteStorageCollection<Bookmark> {
 
 }
 
-export interface TrashcanCollection {
+export interface TrashcanCollection<T extends Entity> {
 
-	put(item: Trash): Promise<void>;
+	put(item: T): Promise<void>;
 
 }

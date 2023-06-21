@@ -1,13 +1,13 @@
-import { LocalStorageService, RemoteStorageService, UUID, sleep, syncState } from 'lib';
+import { Entity, LocalStorageService, RemoteStorageService, UUID, sleep, syncState } from 'lib';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { Bookmark } from 'lib/models/bookmark.model';
-import { SyncDTO, SyncData, SyncEvent } from 'lib/models/sync.model';
+import { SyncEvent } from 'lib/models/sync.model';
 import { Action } from './base.action';
 
 export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEvent>> {
 
 	private collection = RemoteCollection.bookmarks;
-	protected remoteIds: SyncData[] = [];
+	protected remoteIds: Entity[] = [];
 
 	constructor(
 		protected localStorage: LocalStorageService,
@@ -60,7 +60,7 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 			const newItem = await this.localStorage.bookmarks.get(itemId);
 			if (newItem) {
 				const syncData = await this.remoteStorage.bookmarks.upload(newItem);
-				await this.localStorage.syncData.put(syncData);
+				// await this.localStorage.syncData.put(syncData);
 				yield syncState(this.collection, `uploaded ${itemId}.`);
 			}
 
@@ -75,7 +75,7 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 		const allIds: UUID[] = await this.localStorage.bookmarks.listIds();
 
 		// already synced IDs (all ids from local 'syncData' table)
-		const localSyncData: SyncData[] = await this.localStorage.syncData.list();
+		const localSyncData: Entity[] = await this.localStorage.bookmarks.list();
 
 		// create a Set for easy comparison
 		const remoteIds: Set<UUID> = new Set(localSyncData.map(s => s.id));
@@ -90,7 +90,7 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 		yield syncState(this.collection, `finding new items to be downloaded`);
 		await sleep(500);
 
-		const newIds: SyncData[] = await this.findIdsToBeDownloaded();
+		const newIds: Entity[] = await this.findIdsToBeDownloaded();
 
 		// return if none
 		if (newIds.length === 0) {
@@ -107,31 +107,31 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 
 	}
 
-	private async *downloadNewItems(newIds: SyncData[]): AsyncGenerator<SyncEvent> {
+	private async *downloadNewItems(newIds: Entity[]): AsyncGenerator<SyncEvent> {
 
 		for (const remoteSyncData of newIds) {
 
 			await sleep(500);
 			yield syncState(this.collection, `downloading item with id ${remoteSyncData.id}.`);
-			const item: SyncDTO<Bookmark> = await this.remoteStorage.bookmarks.downloadOne(remoteSyncData.id);
+			const item: Entity = await this.remoteStorage.bookmarks.downloadOne(remoteSyncData.id);
 
 			// save
-			if (item.entity) {
-				yield syncState(this.collection, `saving item with id ${remoteSyncData.id}.`);
-				await this.localStorage.bookmarks.put(item.entity);
-				await this.localStorage.syncData.put(item.syncData);
-			}
+			// if (item.entity) {
+			// 	yield syncState(this.collection, `saving item with id ${remoteSyncData.id}.`);
+			// 	await this.localStorage.bookmarks.put(item.entity);
+			// 	await this.localStorage.syncData.put(item.syncData);
+			// }
 
 		}
 
 	}
 
-	private async findIdsToBeDownloaded(): Promise<SyncData[]> {
+	private async findIdsToBeDownloaded(): Promise<Entity[]> {
 
 		// if an id is not in the local 'syncData' table -> it wasn't downloaded before -> it was created on another client
 		// new id: id that is in remote collection but not in local 'syncData' table
 		const localSyncedIds: Set<UUID> = new Set(
-			(await this.localStorage.syncData.list(RemoteCollection.bookmarks)).map(s => s.id)
+			// (await this.localStorage.syncData.list(RemoteCollection.bookmarks)).map(s => s.id)
 		);
 
 		// find remote-new item IDs

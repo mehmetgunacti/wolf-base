@@ -1,7 +1,7 @@
 import { RemoteCollection } from "lib/constants/remote.constant";
 import { WolfBaseEntity } from "lib/constants/sync.constant";
 import { FirestoreTool } from "lib/utils/firestore/firestore.tool";
-import { BookmarksCollection, RemoteStorageCollection, TrashcanCollection } from "../remote-storage-collection.interface";
+import { BookmarksCollection, RemoteStorageCollection } from "../remote-storage-collection.interface";
 import { RemoteStorageService } from "../remote-storage-service.interface";
 
 export class FirestoreRemoteStorageService implements RemoteStorageService {
@@ -10,8 +10,7 @@ export class FirestoreRemoteStorageService implements RemoteStorageService {
 
 	constructor(
 		protected firestore: FirestoreTool,
-		public bookmarks: BookmarksCollection,
-		public trashcan: TrashcanCollection
+		public bookmarks: BookmarksCollection
 	) { }
 
 	getCollection(name: string): RemoteStorageCollection<WolfBaseEntity> {

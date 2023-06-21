@@ -1,11 +1,9 @@
 import { Collection, IndexableType, Table } from 'dexie';
-import { WolfBaseDB } from '../wolfbase.database';
+import { UUID } from 'lib/constants/common.constant';
+import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { Entity, PartialEntity } from 'lib/models/entity.model';
 import { EntityTable } from '../../local-storage-table.interface';
-import { WolfBaseTableName } from 'lib/constants/database.constant';
-import { UUID } from 'lib/constants/common.constant';
-import { SyncData, Trash } from 'lib/models';
-import { WolfBaseEntity } from 'lib/constants';
+import { WolfBaseDB } from '../wolfbase.database';
 
 export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T> {
 
@@ -66,21 +64,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async delete(id: string): Promise<void> {
 
-		await this.db.transaction("rw", [this.db.bookmarks, this.db.trashcan], async () => {
-
-			const entity = (await this.db.table(this.tablename).get(id)) as unknown as WolfBaseEntity;
-			const table = this.tablename;
-			console.log(table);
-			console.log(entity);
-			if (entity) {
-
-				// move item to trash
-				const trash: Trash = { id, entity, table };
-				await this.db.trashcan.add(trash);
-				await this.db.table(this.tablename).delete(id);
-			}
-
-		});
+		await this.db.table<T>(this.tablename).where({ id }).modify({ _deleted: true });
 
 	}
 

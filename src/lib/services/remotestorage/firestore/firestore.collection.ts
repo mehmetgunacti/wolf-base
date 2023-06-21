@@ -1,10 +1,8 @@
 import { environment } from "environments/environment";
-import { UUID } from "lib/constants/common.constant";
 import { RemoteCollection } from "lib/constants/remote.constant";
-import { SyncDTO, SyncData } from "lib/models";
 import { Entity } from "lib/models/entity.model";
-import { FIRESTORE_VALUE, isEnumValue } from "lib/utils";
-import { FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "lib/utils/firestore/firestore.model";
+import { FIRESTORE_VALUE } from "lib/utils";
+import { FirestoreConverter, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "lib/utils/firestore/firestore.model";
 import { FirestoreTool } from "lib/utils/firestore/firestore.tool";
 import { RemoteStorageCollection } from "../remote-storage-collection.interface";
 
@@ -35,7 +33,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 
 	// }
 
-	async upload(item: T): Promise<SyncData> {
+	async upload(item: T): Promise<Entity> {
 
 		const url = new FirestorePatchURL(
 			this.baseURL,
@@ -46,7 +44,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 			this.converter.toUpdateMask(item)
 		);
 		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
-		return this.toSyncData(
+		return this.toEntity(
 			await this.firestore.update(url, { fields: requestBody })
 		);
 
@@ -65,7 +63,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 
 	}
 
-	async downloadOne(id: string): Promise<SyncDTO<T>> {
+	async downloadOne(id: string): Promise<T> {
 
 		const url = new FirestoreDocumentURL(
 			this.baseURL,
@@ -74,11 +72,11 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 			this.remoteCollection,
 			id
 		);
-		return this.toSyncDTO(await this.firestore.get(url));
+		return this.toEntity(await this.firestore.get(url));
 
 	}
 
-	async downloadMany(): Promise<SyncDTO<T>[]> {
+	async downloadMany(): Promise<T[]> {
 
 		const url = new FirestoreListURL(
 			this.baseURL,
@@ -87,11 +85,12 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 			this.remoteCollection,
 			this.pageSize
 		);
-		return (await this.firestore.list<T>(url)).map(dto => this.toSyncDTO(dto));
+		const list = await this.firestore.list<T>(url);
+		return list.map(dto => this.toEntity(dto));
 
 	}
 
-	async downloadIds(): Promise<SyncData[]> {
+	async downloadIds(): Promise<Entity[]> {
 
 		const url = new FirestoreListURL(
 			this.baseURL,
@@ -101,35 +100,24 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 			this.pageSize,
 			true
 		);
-		return (await this.firestore.listIds<T>(url)).map(dto => this.toSyncData(dto));
+		const list = await this.firestore.listIds<T>(url);
+		return list.map(dto => this.toEntity(dto));
 
 	}
 
-	private toSyncData(dto: FirestoreDTO<T>): SyncData {
+	private toEntity(dto: FirestoreDTO<T>): T {
 
-		const { collection, document, createTime, updateTime } = dto;
-		const syncData: SyncData = {
+		const { document, createTime, updateTime } = dto;
+		const entity: T = {
 
-			collection: isEnumValue(collection, RemoteCollection),
 			id: document,
 			createTime,
-			updateTime
+			updateTime,
+			...dto.entity
 
-		}
+		} as T;
 
-		return syncData;
-
-	}
-
-	private toSyncDTO(dto: FirestoreDTO<T>): SyncDTO<T> {
-
-		const syncData = this.toSyncData(dto);
-		return {
-
-			syncData,
-			entity: { ...dto.entity, id: syncData.id }
-
-		} as SyncDTO<T>;
+		return entity;
 
 	}
 

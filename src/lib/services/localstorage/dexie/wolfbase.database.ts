@@ -1,7 +1,6 @@
 import Dexie from 'dexie';
 import { UUID } from 'lib/constants/common.constant';
 import { CONF_KEYS, WolfBaseTableName } from 'lib/constants/database.constant';
-import { SyncData, Trash } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { DexieConfiguration } from 'lib/models/database.model';
 
@@ -34,8 +33,6 @@ export class WolfBaseDB extends Dexie {
 	bookmarks: Dexie.Table<Bookmark, UUID>;
 	clicks: Dexie.Table<Click, UUID>;
 	configuration: Dexie.Table<string | boolean, string>;
-	trashcan: Dexie.Table<Trash, UUID>;
-	syncData: Dexie.Table<SyncData, UUID>;
 
 	constructor(conf: DexieConfiguration) {
 
@@ -46,8 +43,6 @@ export class WolfBaseDB extends Dexie {
 		this.bookmarks = this.table(WolfBaseTableName.bookmarks);
 		this.clicks = this.table(WolfBaseTableName.clicks);
 		this.configuration = this.table(WolfBaseTableName.configuration);
-		this.trashcan = this.table(WolfBaseTableName.trashcan);
-		this.syncData = this.table(WolfBaseTableName.syncData);
 
 		this.on('populate', () => {
 
