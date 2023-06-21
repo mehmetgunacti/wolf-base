@@ -33,7 +33,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 
 	// }
 
-	async upload(item: T): Promise<Entity> {
+	async upload(item: T): Promise<T> {
 
 		const url = new FirestorePatchURL(
 			this.baseURL,

@@ -8,7 +8,7 @@ export interface RemoteStorageCollection<T extends Entity> {
 	downloadMany(): Promise<T[]>;
 	downloadIds(): Promise<Entity[]>;
 
-	upload(item: T): Promise<Entity>;
+	upload(item: T): Promise<T>;
 	delete(id: string): Promise<void>;
 
 }
