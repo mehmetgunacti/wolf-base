@@ -4,7 +4,8 @@ import { Entity, PartialEntity } from 'lib/models/entity.model';
 import { EntityTable } from '../../local-storage-table.interface';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { UUID } from 'lib/constants/common.constant';
-import { SyncData } from 'lib/models';
+import { SyncData, Trash } from 'lib/models';
+import { WolfBaseEntity } from 'lib/constants';
 
 export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T> {
 
@@ -63,13 +64,27 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	delete(id: string): Promise<void> {
+	async delete(id: string): Promise<void> {
 
-		throw new Error('Method not implemented.');
+		await this.db.transaction("rw", [this.db.bookmarks, this.db.trashcan], async () => {
+
+			const entity = (await this.db.table(this.tablename).get(id)) as unknown as WolfBaseEntity;
+			const table = this.tablename;
+			console.log(table);
+			console.log(entity);
+			if (entity) {
+
+				// move item to trash
+				const trash: Trash = { id, entity, table };
+				await this.db.trashcan.add(trash);
+				await this.db.table(this.tablename).delete(id);
+			}
+
+		});
 
 	}
 
-	async list( params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; } | undefined): Promise<T[]> {
+	async list(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; } | undefined): Promise<T[]> {
 
 		const table: Table<T, IndexableType> = this.db.table<T>(this.tablename);
 		let collection: Collection<T, IndexableType>;
@@ -86,7 +101,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 			if (params.limit)
 				collection = collection.limit(params.limit);
-			
+
 			if (params.filterFn)
 				collection = collection.filter(params.filterFn);
 

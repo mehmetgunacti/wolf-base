@@ -18,6 +18,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	@Output() create: EventEmitter<Partial<Bookmark>> = new EventEmitter();
 	@Output() update: EventEmitter<{ id: UUID, bookmark: Partial<Bookmark> }> = new EventEmitter();
+	@Output() delete: EventEmitter<UUID> = new EventEmitter();
 	@Output() tagInput: EventEmitter<string> = new EventEmitter();
 
 	@ViewChild('autocomplete') autocompleteCharge!: AutoComplete;
@@ -93,6 +94,22 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 			this.update.emit({ id: bookmark.id, bookmark });
 		else
 			this.create.emit(bookmark);
+
+	}
+
+	onDelete(): void {
+
+		if (!this.bookmark)
+			return;
+
+		if (
+			confirm(`
+${this.bookmark.name}
+${this.bookmark.title}
+
+will be deleted. Continue?`)
+		)
+			this.delete.emit(this.bookmark.id);
 
 	}
 

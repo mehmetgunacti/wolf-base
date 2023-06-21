@@ -1,5 +1,5 @@
 import { UUID } from 'lib/constants';
-import { Trash } from 'lib/models';
+import { Entity, Trash } from 'lib/models';
 import { TrashcanTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { WolfBaseDB } from '../wolfbase.database';
 

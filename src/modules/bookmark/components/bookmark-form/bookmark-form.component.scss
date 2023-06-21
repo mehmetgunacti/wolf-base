@@ -74,6 +74,10 @@ app-bookmark-form {
 
 		@extend %flex-space-between-center;
 
+		& button:last-child {
+			margin-left: auto;
+		}
+
 	}
 
 }

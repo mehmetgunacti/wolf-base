@@ -56,19 +56,9 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	}
 
-	delete(): void {
+	onDelete(id: UUID): void {
 
-		// const id = this.bookmark?.id;
-		// if (!!id)
-		// 	if (
-		// 		confirm(`
-		// 			${this.bookmark?.title}
-		// 			${this.bookmark?.url}
-
-		// 			will be deleted. Continue?
-		// 		`)
-		// 	)
-		// 		this.store.dispatch(fromStore.bookmarksDelete({ id }));
+		this.store.dispatch(fromStore.deleteBookmark({ id }));
 
 	}
 

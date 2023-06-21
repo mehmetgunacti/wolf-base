@@ -3,4 +3,5 @@
 		[tagSuggestions]="tagSuggestions$ | async"
 		(create)="onCreate($event)"
 		(update)="onUpdate($event.id, $event.bookmark)"
+		(delete)="onDelete($event)"
 		(tagInput)="onTagInput($event)"></app-bookmark-form>

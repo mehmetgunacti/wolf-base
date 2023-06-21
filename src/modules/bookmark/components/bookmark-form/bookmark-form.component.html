@@ -120,6 +120,6 @@
 </form>
 
 <div form-element-buttons>
-	<button pButton type="button" label="Cancel" icon="pi pi-times" iconPos="left" class="p-button-secondary"></button>
+	<button *ngIf="this.bookmark" pButton type="button" label="Delete" icon="pi pi-trash" iconPos="left" class="p-button-danger" (click)="onDelete()"></button>
 	<button pButton type="button" label="Save" icon="pi pi-save" iconPos="left" (click)="onSave()"></button>
 </div>

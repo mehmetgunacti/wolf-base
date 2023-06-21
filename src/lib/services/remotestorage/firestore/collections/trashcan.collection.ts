@@ -1,10 +1,10 @@
+import { environment } from 'environments/environment';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { Trash } from 'lib/models';
 import { TrashcanCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { FirestoreCreateURL, FirestoreDocument } from 'lib/utils/firestore/firestore.model';
 import { FirestoreTool } from 'lib/utils/firestore/firestore.tool';
 import { TrashFirestoreConverter } from '../converter/trash.converter';
-import { environment } from 'environments/environment';
 
 export class TrashcanFirestoreCollection implements TrashcanCollection {
 
