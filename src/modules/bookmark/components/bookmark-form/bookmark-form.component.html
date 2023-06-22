@@ -35,12 +35,12 @@
 		</div>
 
 		<!-- CREATED -->
-		<div *ngIf="bookmark?.created">
+		<div *ngIf="bookmark?.createTime">
 			<span class="p-float-label p-fluid">
 				<input
 					type="text"
 					pInputText
-					[value]="bookmark?.created"
+					[value]="bookmark?.createTime"
 					readonly>
 				<label>Created</label>
 			</span>
