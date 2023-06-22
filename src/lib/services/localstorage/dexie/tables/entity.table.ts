@@ -51,7 +51,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 		if (!localData)
 			throw new Error(`No data with id ${id} found.`);
 
-		await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item });
+		await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item, _updated: true });
 		return await this.get(id) ?? {} as T;
 
 	}
@@ -62,8 +62,18 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async delete(id: string): Promise<void> {
+	async delete(id: string, permanently: boolean = false): Promise<void> {
 
+		// permanently?
+		if (permanently) {
+
+			// delete permanently
+			await this.db.table<T>(this.tablename).delete(id);
+			return;
+
+		}
+
+		// else only mark as deleted
 		await this.db.table<T>(this.tablename).where({ id }).modify({ _deleted: true });
 
 	}

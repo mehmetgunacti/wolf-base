@@ -2,9 +2,11 @@ import { environment } from "environments/environment";
 import { RemoteCollection } from "lib/constants/remote.constant";
 import { Entity } from "lib/models/entity.model";
 import { FIRESTORE_VALUE } from "lib/utils";
-import { FirestoreConverter, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "lib/utils/firestore/firestore.model";
+import { FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "lib/utils/firestore/firestore.model";
 import { FirestoreTool } from "lib/utils/firestore/firestore.tool";
 import { RemoteStorageCollection } from "../remote-storage-collection.interface";
+import { UUID } from "lib/constants";
+import { v4 as uuidv4 } from 'uuid';
 
 export abstract class FirestoreCollection<T extends Entity> implements RemoteStorageCollection<T> {
 
@@ -60,6 +62,21 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 			id
 		);
 		await this.firestore.delete(url);
+
+	}
+
+	async trash(item: T): Promise<void> {
+
+		const newId: UUID = `${this.remoteCollection}_${item.id}_${new Date().toISOString()}`;
+		const url = new FirestoreCreateURL(
+			this.baseURL,
+			this.projectId,
+			this.apiKey,
+			RemoteCollection.trashcan,
+			newId
+		);
+		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
+		await this.firestore.create(url, { fields: requestBody });
 
 	}
 

@@ -10,7 +10,7 @@ export interface EntityTable<T extends Entity> {
 	create(item: PartialEntity<T>): Promise<T>;
 	put(item: T): Promise<void>;
 	update(id: UUID, item: PartialEntity<T>): Promise<T>;
-	delete(id: UUID): Promise<void>;
+	delete(id: UUID, permanently?: boolean): Promise<void>;
 
 	list(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; }): Promise<T[]>;
 	listIds(): Promise<UUID[]>;

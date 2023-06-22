@@ -1,9 +1,5 @@
-import { RemoteCollection, UUID, WolfBaseEntity } from 'lib/constants';
-import { PartialEntity } from 'lib/models';
+import { RemoteCollection, UUID } from 'lib/constants';
 import { FIRESTORE_INTEGER, FIRESTORE_VALUE } from './firestore.constant';
-
-// todo needs refactoring -> generic type
-export type QueryParameters = Partial<Record<keyof PartialEntity<WolfBaseEntity> | 'documentId' | 'key' | 'pageSize' | 'mask.fieldPaths', string>>;
 
 export class FirestoreCreateURL {
 
@@ -134,18 +130,6 @@ export interface FirestoreDTO<T> {
 	createTime: string;
 	updateTime: string;
 	entity?: T;
-
-}
-
-export interface FirestoreConfig {
-
-	baseURL: string;
-	projectId: string;
-	apiKey: string;
-	collection: RemoteCollection;
-	document: string;
-	command: string;
-	queryParameters: QueryParameters;
 
 }
 

@@ -16,16 +16,25 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 
 	async *execute(): AsyncGenerator<SyncEvent> {
 
-		yield* this.downloadIds();
 
 		yield* this.uploadNew();
-		yield* this.uploadDeleted();
-
+		yield* this.downloadIds();
 		yield* this.downloadNew();
+
+		yield* this.uploadDeleted();
 		yield* this.downloadDeleted();
 
 		yield* this.uploadUpdated();
 		yield* this.downloadUpdated();
+
+	}
+
+	protected async *downloadIds(): AsyncGenerator<SyncEvent> {
+
+		await sleep(500);
+		yield syncState(this.collection, `downloading Ids...`);
+		this.remoteIds = await this.remoteStorage.bookmarks.downloadIds();
+		yield syncState(this.collection, `${this.remoteIds.length} Ids downloaded.`);
 
 	}
 
@@ -34,10 +43,11 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 		yield syncState(this.collection, `finding new items to be uploaded`);
 		await sleep(500);
 
-		const newIds = await this.findIdsToBeUploaded();
+		// read all new items
+		const items: Bookmark[] = await this.localStorage.bookmarks.list({ filterFn: b => !b.createTime });
 
 		// return if none
-		if (newIds.length === 0) {
+		if (items.length === 0) {
 
 			yield syncState(this.collection, `no new items to upload.`);
 			return;
@@ -45,43 +55,25 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 		}
 
 		// upload new items
-		yield syncState(this.collection, `${newIds.length} new items to be uploaded.`);
-		this.uploadNewItems(newIds);
-		yield syncState(this.collection, `uploaded ${newIds.length} new items.`);
+		yield syncState(this.collection, `${items.length} new items to be uploaded.`);
+		yield* this.uploadNewItems(items);
+		yield syncState(this.collection, `uploaded ${items.length} new items.`);
 
 	}
 
-	private async *uploadNewItems(newIds: UUID[]): AsyncGenerator<SyncEvent> {
+	private async *uploadNewItems(items: Bookmark[]): AsyncGenerator<SyncEvent> {
 
-		for (const [idx, itemId] of newIds.entries()) {
+		for (const [idx, item] of items.entries()) {
 
 			await sleep(500);
-			yield syncState(this.collection, `uploading ${itemId}: ${idx + 1} / ${newIds.length}`);
-			const newItem = await this.localStorage.bookmarks.get(itemId);
-			if (newItem) {
-				const syncData = await this.remoteStorage.bookmarks.upload(newItem);
-				// await this.localStorage.syncData.put(syncData);
-				yield syncState(this.collection, `uploaded ${itemId}.`);
-			}
+			yield syncState(this.collection, `uploading ${item.id}: ${idx + 1} / ${items.length}`);
+			// upload
+			const returnedItem: Bookmark = await this.remoteStorage.bookmarks.upload(item);
+			// save to local
+			await this.localStorage.bookmarks.put(returnedItem);
+			yield syncState(this.collection, `uploaded ${item.id}.`);
 
 		}
-
-	}
-
-	private async findIdsToBeUploaded(): Promise<UUID[]> {
-
-		// locally created new id -> ids of items in the local table which are not in the 'syncData' table (which were never uploaded before)
-		// all IDs (already synced and new) from local table
-		const allIds: UUID[] = await this.localStorage.bookmarks.listIds();
-
-		// already synced IDs (all ids from local 'syncData' table)
-		const localSyncData: Entity[] = await this.localStorage.bookmarks.list();
-
-		// create a Set for easy comparison
-		const remoteIds: Set<UUID> = new Set(localSyncData.map(s => s.id));
-
-		// find newly created item IDs
-		return allIds.filter(id => !remoteIds.has(id));
 
 	}
 
@@ -102,90 +94,121 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 
 		// download all new
 		yield syncState(this.collection, `${newIds.length} new items to be downloaded.`);
-		this.downloadNewItems(newIds);
+		yield* this.downloadNewItems(newIds);
 		yield syncState(this.collection, `downloaded ${newIds.length} new items.`);
-
-	}
-
-	private async *downloadNewItems(newIds: Entity[]): AsyncGenerator<SyncEvent> {
-
-		for (const remoteSyncData of newIds) {
-
-			await sleep(500);
-			yield syncState(this.collection, `downloading item with id ${remoteSyncData.id}.`);
-			const item: Entity = await this.remoteStorage.bookmarks.downloadOne(remoteSyncData.id);
-
-			// save
-			// if (item.entity) {
-			// 	yield syncState(this.collection, `saving item with id ${remoteSyncData.id}.`);
-			// 	await this.localStorage.bookmarks.put(item.entity);
-			// 	await this.localStorage.syncData.put(item.syncData);
-			// }
-
-		}
 
 	}
 
 	private async findIdsToBeDownloaded(): Promise<Entity[]> {
 
-		// if an id is not in the local 'syncData' table -> it wasn't downloaded before -> it was created on another client
-		// new id: id that is in remote collection but not in local 'syncData' table
-		const localSyncedIds: Set<UUID> = new Set(
-			// (await this.localStorage.syncData.list(RemoteCollection.bookmarks)).map(s => s.id)
-		);
+		const localSyncedIds: Set<UUID> = new Set(await this.localStorage.bookmarks.listIds());
 
 		// find remote-new item IDs
 		return this.remoteIds.filter(s => !localSyncedIds.has(s.id));
 
 	}
 
+	private async *downloadNewItems(newIds: Entity[]): AsyncGenerator<SyncEvent> {
+
+		for (const entity of newIds) {
+
+			await sleep(500);
+			yield syncState(this.collection, `downloading item ${entity.id}.`);
+			const item: Bookmark = await this.remoteStorage.bookmarks.downloadOne(entity.id);
+			await this.localStorage.bookmarks.put(item);
+			yield syncState(this.collection, `item ${entity.id} downloaded and saved.`);
+
+		}
+
+	}
+
 	protected async *downloadDeleted(): AsyncGenerator<SyncEvent> {
 
-		// await sleep(500);
-		// yield syncState(this.collection, `deleting items locally..`);
-		// const deletedIds: Set<UUID> = new Set();
-		// const remoteIds: Set<UUID> = new Set(this.remoteIds.map(item => item.id));
-		// for (const item of this.localData) {
+		yield syncState(this.collection, `downloading deleted items info`);
+		await sleep(500);
 
-		// 	if (!item.sync) // item is new
-		// 		continue;
+		// read all new items
+		const ids: UUID[] = await this.findIdsToBeDeleted();
 
-		// 	if (remoteIds.has(item.id)) // not deleted
-		// 		continue;
+		// return if none
+		if (ids.length === 0) {
 
-		// 	await sleep(500);
-		// 	yield syncState(this.collection, `deleting item with id ${item.id}.`);
-		// 	await this.localStorage.bookmarks.delete(item.id);
-		// 	deletedIds.add(item.id);
+			yield syncState(this.collection, `no items to be deleted locally.`);
+			return;
 
-		// }
-		// yield syncState(this.collection, `locally deleted ${deletedIds.size} items.`);
+		}
+
+		// upload new items
+		yield syncState(this.collection, `${ids.length} items to be deleted.`);
+		yield* this.deleteLocalItems(ids);
+		yield syncState(this.collection, `deleted ${ids.length} items.`);
+
+	}
+
+	private async findIdsToBeDeleted(): Promise<UUID[]> {
+
+		// set of remote ids
+		const set: Set<UUID> = new Set(this.remoteIds.map(e => e.id));
+		
+		// list of local ids
+		const localIds: UUID[] = await this.localStorage.bookmarks.listIds();
+
+		// find the difference
+		return localIds.filter(id => !set.has(id));
+
+	}
+
+	private async *deleteLocalItems(ids: UUID[]): AsyncGenerator<SyncEvent> {
+
+		for (const id of ids) {
+
+			await sleep(500);
+			yield syncState(this.collection, `deleting item ${id}.`);
+			await this.localStorage.bookmarks.delete(id);
+			yield syncState(this.collection, `item ${id} deleted locally.`);
+
+		}
 
 	}
 
 	protected async *uploadDeleted(): AsyncGenerator<SyncEvent> {
 
+		yield syncState(this.collection, `finding deleted items to be uploaded`);
 		await sleep(500);
-		yield syncState(this.collection, `deleting items remotely..`);
-		// let count = 0;
-		// const deletedItems: Trash[] = await this.localStorage.trashcan.list(item => item.table === WolfBaseTableName.bookmarks);
-		// const remoteIds: Set<UUID> = new Set(this.remoteIds.map(item => item.id));
-		// for (const item of deletedItems) {
 
-		// 	if (remoteIds.has(item.id)) { // not deleted
+		// read all new items
+		const items: Bookmark[] = await this.localStorage.bookmarks.list({ filterFn: b => !!b._deleted });
 
-		// 		await this.remoteStorage.bookmarks.delete(item.id);
-		// 		await this.remoteStorage.trashcan.put(item);
+		// return if none
+		if (items.length === 0) {
 
-		// 	}
-		// 	await this.localStorage.trashcan.delete(item.id);
-		// 	await sleep(500);
-		// 	count++;
+			yield syncState(this.collection, `no items deleted locally.`);
+			return;
 
-		// }
-		// yield syncState(this.collection, `locally deleted ${count} items.`);
+		}
+
+		// upload new items
+		yield syncState(this.collection, `${items.length} deleted items to be uploaded.`);
+		yield* this.uploadDeletedItems(items);
+		yield syncState(this.collection, `uploaded ${items.length} deleted items.`);
 
 	}
+
+	private async *uploadDeletedItems(items: Bookmark[]): AsyncGenerator<SyncEvent> {
+
+		for (const [idx, item] of items.entries()) {
+
+			await sleep(500);
+			yield syncState(this.collection, `trashing ${item.id}: ${idx + 1} / ${items.length}`);
+			// upload / trash
+			await this.remoteStorage.bookmarks.trash(item);
+			await this.localStorage.bookmarks.delete(item.id, true);
+			yield syncState(this.collection, `trashed ${item.id}.`);
+
+		}
+
+	}
+
 
 	protected async *downloadUpdated(): AsyncGenerator<SyncEvent> {
 
@@ -199,56 +222,4 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 
 	}
 
-	protected async *downloadIds(): AsyncGenerator<SyncEvent> {
-
-		await sleep(500);
-		yield syncState(this.collection, `downloading Ids...`);
-		this.remoteIds = await this.remoteStorage.bookmarks.downloadIds();
-		yield syncState(this.collection, `${this.remoteIds.length} Ids downloaded.`);
-
-		// await sleep(500);
-		// yield syncState(this.collection, `preparing local data...`);
-		// this.localIds = await this.localStorage.syncData.list();
-		// yield syncState(this.collection, `${this.localIds.length} items ready.`);
-
-	}
-
 }
-
-// export const bookmarkActionFactory: Action = () => new BookmarksSyncAction();
-
-
-
-	// protected override async *handleUpdated(): AsyncGenerator<SyncEvent> {
-
-	// 	const clicked: Bookmark[] = await this.table.list({filterFn: b => (b.sync?.clicks ?? 0) > 0 });
-	// 	const table: BookmarksTable = this.table as BookmarksTable;
-	// 	// const clicked: IClick[] = await table.getClickedItems();
-	// 	// yield syncState(RemoteCollection.clicks, SYNC_STATES.PROCESSING_CLICKS, `${clicked.length} bookmarks clicked.`);
-
-	// 	const remote: BookmarksCollection = this.remoteCollection as BookmarksCollection;
-	// 	for (const [idx, item] of clicked.entries()) {
-
-	// 	// yield syncState(RemoteCollection.clicks, undefined, `uploading ${item.id}: ${idx + 1} / ${clicked.length}`);
-	// 	await sleep(100);
-	// 	await remote.increaseClicks(item.id, item.sync?.clicks ?? 0);
-	// 	// 	await table.saveClick(clicks);
-
-	// 	}
-	// 	// await sleep(500);
-
-	// 	yield* super.handleUpdated();
-
-	// }
-
-	// private async *downloadClicks(): AsyncGenerator<ISyncState> {
-
-	// 	const table: BookmarksTable = this.table as BookmarksTable;
-	// 	yield syncState(RemoteCollection.clicks, SYNC_STATES.PROCESSING_NEW, `downloading clicks...`);
-
-	// 	const remoteData: IClick[] = await this.remoteCollectionClicks.list();
-	// 	await table.saveClicks(remoteData);
-
-	// 	yield syncState(RemoteCollection.clicks, undefined, `${remoteData.length} downloaded.`);
-
-	// }

@@ -1,5 +1,5 @@
 import { FirestoreTool } from 'lib/utils/firestore/firestore.tool';
-import { BookmarksCollection, TrashcanCollection } from '../remote-storage-collection.interface';
+import { BookmarksCollection } from '../remote-storage-collection.interface';
 import { BookmarksFirestoreCollection } from './collections/bookmarks.collection';
 import { FirestoreRemoteStorageService } from './firestore.service';
 import { Entity } from 'lib/models';
