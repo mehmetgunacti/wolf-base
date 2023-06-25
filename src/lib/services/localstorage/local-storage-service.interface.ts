@@ -3,7 +3,10 @@ import { BookmarksTable, ClicksTable, ConfigurationTable } from './local-storage
 
 export interface LocalStorageService {
 
+	// entity tables
 	bookmarks: BookmarksTable;
+
+	// non-entity tables
 	clicks: ClicksTable;
 	configuration: ConfigurationTable;
 

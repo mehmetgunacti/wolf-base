@@ -62,19 +62,21 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async delete(id: string, permanently: boolean = false): Promise<void> {
+	async markConflict(id: string): Promise<void> {
 
-		// permanently?
-		if (permanently) {
+		await this.db.table<T>(this.tablename).where({ id }).modify({ _conflict: true } as Partial<Entity>);
 
-			// delete permanently
-			await this.db.table<T>(this.tablename).delete(id);
-			return;
+	}
 
-		}
+	async markDeleted(id: string): Promise<void> {
 
-		// else only mark as deleted
-		await this.db.table<T>(this.tablename).where({ id }).modify({ _deleted: true });
+		await this.db.table<T>(this.tablename).where({ id }).modify({ _deleted: true } as Partial<Entity>);
+
+	}
+
+	async delete(id: string): Promise<void> {
+
+		await this.db.table<T>(this.tablename).delete(id);
 
 	}
 
@@ -121,6 +123,27 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 	// 	);
 
 	// }
+
+	async listEntities(): Promise<Entity[]> {
+
+		const allEntities = await this.list();
+		return allEntities.map(e => {
+
+			const { id, updateTime, createTime, name, _updated, _deleted, _conflict } = e;
+			const entity = {
+				id,
+				name,
+				createTime,
+				updateTime,
+				_conflict,
+				_deleted,
+				_updated
+			} as Entity;
+			return entity;
+
+		});
+
+	}
 
 	async listIds(): Promise<UUID[]> {
 

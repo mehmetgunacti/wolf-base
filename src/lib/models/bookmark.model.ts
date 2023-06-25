@@ -3,7 +3,6 @@ import { IDBase } from './id-base.model';
 
 export interface Bookmark extends Entity {
 
-	name: string;
 	title: string;
 	tags: string[];
 	urls: string[];

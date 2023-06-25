@@ -12,4 +12,6 @@ export interface Entity extends IDBase {
 	_deleted?: boolean;
 	_conflict?: boolean;
 
+	name: string;
+
 }

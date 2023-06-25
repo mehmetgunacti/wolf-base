@@ -132,6 +132,7 @@ export class FirestoreTool {
 
 	}
 
+	// todo make parameter 'item' optional (if case no data returns..)
 	private parseDocument<T>(item: FirestoreDocument<T>): FirestoreDTO<T> {
 
 		// parse 'document'
