@@ -1,5 +1,5 @@
-import { UUID } from "lib/constants/common.constant";
-import { Bookmark } from "lib/models/bookmark.model";
+import { UUID } from "lib/constants";
+import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Entity } from "lib/models/entity.model";
 
 export interface RemoteStorageCollection<T extends Entity> {
@@ -14,8 +14,11 @@ export interface RemoteStorageCollection<T extends Entity> {
 
 }
 
-export interface BookmarksCollection extends RemoteStorageCollection<Bookmark> {
+export interface BookmarksCollection extends RemoteStorageCollection<Bookmark> {}
 
-	click(id: UUID, amount: number): Promise<number>
+export interface ClicksCollection {
+
+	increase(id: UUID, amount: number): Promise<number>;
+	downloadMany(): Promise<Click[]>;
 
 }

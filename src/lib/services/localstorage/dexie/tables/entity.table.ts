@@ -4,6 +4,7 @@ import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { Entity, PartialEntity } from 'lib/models/entity.model';
 import { EntityTable } from '../../local-storage-table.interface';
 import { WolfBaseDB } from '../wolfbase.database';
+import { isNewer } from 'lib/utils';
 
 export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T> {
 
@@ -105,6 +106,55 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 		}
 		return await table.toArray();
+
+	}
+
+	async listNew(): Promise<T[]> {
+
+		return await this.list({ filterFn: e => !e.createTime });
+
+	}
+
+	async listConflicts(): Promise<T[]> {
+
+		return await this.list({ filterFn: e => !!e._conflict });
+
+	}
+
+	async listUpdated(): Promise<T[]> {
+
+		return await this.list({ filterFn: e => !!e._updated });
+
+	}
+
+	async listDeleted(): Promise<T[]> {
+
+		return await this.list({ filterFn: e => !!e._deleted });
+
+	}
+
+	async removeExistingFrom(remoteEntities: Entity[]): Promise<Entity[]> {
+
+		const localIds: Set<UUID> = new Set(await this.listIds());
+
+		// find remote-new item IDs
+		return remoteEntities.filter(e => !localIds.has(e.id));
+
+	}
+
+
+	async removeSynchronousFrom(remoteEntities: Entity[]): Promise<Entity[]> {
+
+		// find remote entities with a newer 'updateTime'
+		const localEntities = await this.listEntities();
+		const mapLocalEntites = new Map(localEntities.map(e => [e.id, e]));
+
+		return remoteEntities.filter(r => {
+
+			const localEntity = mapLocalEntites.get(r.id);
+			return r.updateTime && localEntity?.updateTime && isNewer(r.updateTime, localEntity.updateTime)
+
+		});
 
 	}
 

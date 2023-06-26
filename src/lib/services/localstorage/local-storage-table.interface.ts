@@ -18,6 +18,13 @@ export interface EntityTable<T extends Entity> {
 	listIds(): Promise<UUID[]>;
 	listEntities(): Promise<Entity[]>;
 
+	listNew(): Promise<T[]>;
+	listConflicts(): Promise<T[]>;
+	listUpdated(): Promise<T[]>;
+	listDeleted(): Promise<T[]>;
+	removeExistingFrom(entities: Entity[]): Promise<Entity[]>;
+	removeSynchronousFrom(entities: Entity[]): Promise<Entity[]>;
+
 	search(term: string): Promise<T[]>;
 	searchByTags(tags: string[]): Promise<T[]>;
 
@@ -42,7 +49,9 @@ export interface BookmarksTable extends EntityTable<Bookmark> {
 export interface ClicksTable {
 
 	click(id: UUID): Promise<void>;
+	clicked(): Promise<Click[]>;
 	put(item: Click): Promise<void>;
+	putAll(items: Click[]): Promise<void>;
 
 }
 

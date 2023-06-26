@@ -236,7 +236,7 @@ export class EntitiesEffects {
 
 			ofType(fromActions.clickBookmark),
 			tap(({ id }) => this.localStorage.clicks.click(id)),
-			tap(({ id }) => this.remoteStorage.bookmarks.click(id, 1))
+			tap(({ id }) => this.remoteStorage.clicks.increase(id, 1))
 
 		),
 		{ dispatch: false }

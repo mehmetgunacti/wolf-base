@@ -6,6 +6,20 @@ export const syncState = (
 	message?: string,
 	inProgress: boolean = true
 ): SyncEvent => ({
-	message: `${new Date()}\t[${collection}]\t${message ?? ''}`,
+	when: new Date(),
+	collection,
+	message,
 	inProgress
 });
+
+export const syncHeader = async function* (
+	collection: RemoteCollection,
+	message?: string
+  ): AsyncGenerator<SyncEvent> {
+
+	yield syncState(collection, ' ');
+	yield syncState(collection, '*************************');
+	yield syncState(collection, message);
+	yield syncState(collection, '*************************');
+
+};

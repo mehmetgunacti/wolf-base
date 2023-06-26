@@ -129,7 +129,7 @@ export interface FirestoreDTO<T> {
 	document: string;
 	createTime: string;
 	updateTime: string;
-	entity?: T;
+	entity: any;
 
 }
 

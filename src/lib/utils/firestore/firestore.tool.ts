@@ -144,15 +144,17 @@ export class FirestoreTool {
 		if (!createTime || !updateTime)
 			throw new Error('Firestore data error : [' + JSON.stringify(item) + ']');
 
+		const entity = fields ? this.parseFields(fields) : {} as T;
+
 		// parse syncData
 		const dto: FirestoreDTO<T> = {
 			collection,
 			document,
 			createTime,
-			updateTime
+			updateTime,
+			entity
 		};
-		if (fields)
-			dto['entity'] = this.parseFields(fields);
+
 
 		return dto;
 
