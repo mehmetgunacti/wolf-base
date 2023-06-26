@@ -3,13 +3,13 @@ import { RemoteCollection } from 'lib/constants/remote.constant';
 import { Bookmark } from 'lib/models/bookmark.model';
 import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { FirestoreIncreaseURL } from 'lib/utils';
-import { FirestoreTool } from 'lib/utils/firestore/firestore.tool';
+import { Firestore } from 'lib/utils/firestore/firestore.tool';
 import { BookmarkFirestoreConverter } from '../converter';
 import { FirestoreCollection } from '../firestore.collection';
 
 export class BookmarksFirestoreCollection extends FirestoreCollection<Bookmark> implements BookmarksCollection {
 
-	constructor(firestore: FirestoreTool) {
+	constructor(firestore: Firestore) {
 		super(firestore, RemoteCollection.bookmarks, new BookmarkFirestoreConverter());
 	}
 

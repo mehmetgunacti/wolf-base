@@ -1,4 +1,4 @@
-import { FirestoreTool } from 'lib/utils/firestore/firestore.tool';
+import { Firestore, firestoreFactory } from 'lib/utils/firestore/firestore.tool';
 import { BookmarksCollection, ClicksCollection } from '../remote-storage-collection.interface';
 import { ClicksFirestoreCollection } from './collections';
 import { BookmarksFirestoreCollection } from './collections/bookmarks.collection';
@@ -6,22 +6,22 @@ import { FirestoreRemoteStorageService } from './firestore.service';
 
 export const remoteStorageServiceFactory = (): FirestoreRemoteStorageService => {
 
+	const firestore: Firestore = firestoreFactory();
 	return new FirestoreRemoteStorageService(
-		new FirestoreTool(),
-		bookmarksCollectionFactory(),
-		clicksCollectionFactory()
+		bookmarksCollectionFactory(firestore),
+		clicksCollectionFactory(firestore)
 	);
 
 };
 
-export const bookmarksCollectionFactory = (): BookmarksCollection => {
+export const bookmarksCollectionFactory = (firestore: Firestore): BookmarksCollection => {
 
-	return new BookmarksFirestoreCollection(new FirestoreTool());
+	return new BookmarksFirestoreCollection(firestore);
 
 };
 
-export const clicksCollectionFactory = (): ClicksCollection => {
+export const clicksCollectionFactory = (firestore: Firestore): ClicksCollection => {
 
-	return new ClicksFirestoreCollection(new FirestoreTool());
+	return new ClicksFirestoreCollection(firestore);
 
 };

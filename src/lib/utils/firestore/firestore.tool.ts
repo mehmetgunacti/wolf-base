@@ -13,7 +13,21 @@ import {
 	FirestoreWrites
 } from './firestore.model';
 
-export class FirestoreTool {
+export interface Firestore {
+
+	create<T>(url: FirestoreCreateURL, requestBody: FirestoreDocument<T>): Promise<FirestoreDTO<T>>;
+	update<T>(url: FirestorePatchURL, requestBody: FirestoreDocument<T>): Promise<FirestoreDTO<T>>;
+	delete(url: FirestoreDocumentURL): Promise<void>;
+	list<T>(listUrl: FirestoreListURL): Promise<FirestoreDTO<T>[]>;
+	listIds<T>(listUrl: FirestoreListURL): Promise<FirestoreDTO<T>[]>;
+	get<T>(url: FirestoreDocumentURL): Promise<FirestoreDTO<T> | null>;
+	increase(url: FirestoreIncreaseURL): Promise<number>;
+
+}
+
+export const firestoreFactory = (): Firestore => new FirestoreTool();
+
+class FirestoreTool implements Firestore {
 
 	async create<T>(url: FirestoreCreateURL, requestBody: FirestoreDocument<T>): Promise<FirestoreDTO<T>> {
 

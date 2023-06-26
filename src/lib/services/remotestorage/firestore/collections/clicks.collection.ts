@@ -1,12 +1,10 @@
+import { environment } from 'environments/environment';
 import { UUID } from 'lib/constants/common.constant';
 import { RemoteCollection } from 'lib/constants/remote.constant';
-import { Bookmark, Click } from 'lib/models/bookmark.model';
-import { BookmarksCollection, ClicksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
+import { Click } from 'lib/models/bookmark.model';
+import { ClicksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { FirestoreIncreaseURL, FirestoreListURL } from 'lib/utils';
-import { FirestoreTool } from 'lib/utils/firestore/firestore.tool';
-import { BookmarkFirestoreConverter } from '../converter';
-import { FirestoreCollection } from '../firestore.collection';
-import { environment } from 'environments/environment';
+import { Firestore } from 'lib/utils/firestore/firestore.tool';
 
 export class ClicksFirestoreCollection implements ClicksCollection {
 
@@ -16,7 +14,7 @@ export class ClicksFirestoreCollection implements ClicksCollection {
 	protected remoteCollection = RemoteCollection.clicks;
 	protected pageSize = '10000';
 
-	constructor(private firestore: FirestoreTool) { }
+	constructor(private firestore: Firestore) { }
 
 	async increase(id: UUID, amount: number): Promise<number> {
 

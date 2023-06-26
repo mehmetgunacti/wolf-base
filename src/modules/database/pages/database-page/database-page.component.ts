@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { environment } from 'environments/environment';
-import { Bookmark, BookmarksFirestoreCollection, Entity, FirestoreTool, LocalStorageService, RemoteCollection, UUID, WolfBaseTableName } from 'lib';
+import { Bookmark, BookmarksFirestoreCollection, Entity, Firestore, LocalStorageService, RemoteCollection, UUID, WolfBaseTableName, firestoreFactory } from 'lib';
 import { IDBase } from 'lib/models/id-base.model';
 import { Observable, filter, map, switchMap } from 'rxjs';
 import { SyncService } from 'services/sync.service';
@@ -21,7 +21,7 @@ export class DatabasePageComponent {
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 	private syncService: SyncService = inject(SyncService);
 
-	private firestore: FirestoreTool = new FirestoreTool();
+	private firestore: Firestore = firestoreFactory();
 
 
 	constructor() {

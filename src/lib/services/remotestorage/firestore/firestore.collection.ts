@@ -3,7 +3,7 @@ import { RemoteCollection } from "lib/constants/remote.constant";
 import { Entity } from "lib/models/entity.model";
 import { FIRESTORE_VALUE } from "lib/utils";
 import { FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "lib/utils/firestore/firestore.model";
-import { FirestoreTool } from "lib/utils/firestore/firestore.tool";
+import { Firestore } from "lib/utils/firestore/firestore.tool";
 import { RemoteStorageCollection } from "../remote-storage-collection.interface";
 import { UUID } from "lib/constants";
 import { v4 as uuidv4 } from 'uuid';
@@ -16,7 +16,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 	protected projectId = environment.firebase.projectId;
 
 	constructor(
-		protected firestore: FirestoreTool,
+		protected firestore: Firestore,
 		protected remoteCollection: RemoteCollection,
 		protected converter: FirestoreConverter<T>
 	) { }
@@ -122,7 +122,10 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 
 	}
 
-	private toEntity(dto: FirestoreDTO<T>): T {
+	private toEntity(dto: FirestoreDTO<T> | null): T {
+
+		if (dto === null)
+			return {} as T;
 
 		const { document, createTime, updateTime } = dto;
 		const entity: T = {
