@@ -1,4 +1,4 @@
-export const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, 10)); // ms));
+export const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const isNewer = (date1: string, date2: string): boolean => {
 
