@@ -1,11 +1,11 @@
-export interface SyncState {
+export interface SyncModuleState {
 
 	inProgress: boolean;
 	messages: string[];
 
 }
 
-export const initialSyncState: SyncState = {
+export const initialSyncState: SyncModuleState = {
 
 	inProgress: false,
 	messages: []

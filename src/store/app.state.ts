@@ -6,7 +6,7 @@ export interface AppState {
 
 	core: fromCore.CoreModuleState,
 	bookmark: fromBookmark.BookmarkModuleState,
-	sync: fromSync.SyncState
+	sync: fromSync.SyncModuleState
 
 }
 

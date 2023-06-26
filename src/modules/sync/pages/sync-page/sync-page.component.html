@@ -41,4 +41,8 @@
 		</div>
 	</div>
 
+	<div>
+		<div *ngFor="let message of messages$ | async">{{message}}</div>
+	</div>
+
 </p-card>

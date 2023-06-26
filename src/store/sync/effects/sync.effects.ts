@@ -14,7 +14,7 @@ export class SyncEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.syncMessage),
+			ofType(fromActions.syncTrigger),
 			tap(() => this.syncService.trigger())
 
 		),

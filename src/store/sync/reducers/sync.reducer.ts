@@ -1,20 +1,23 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import produce from 'immer';
-import { syncMessage } from '../actions';
-import { SyncState, initialSyncState } from '../states';
+import { syncEvent } from '../actions';
+import { SyncModuleState, initialSyncState } from '../states';
 
-export const syncReducer: ActionReducer<SyncState, Action> = createReducer(
+export const syncReducer: ActionReducer<SyncModuleState, Action> = createReducer(
 
 	initialSyncState,
-	on(syncMessage, (state, { message, inProgress }) => {
+	on(syncEvent, (state, { when, collection, message, inProgress }) => {
 
 		return produce(
 			state,
 			draft => {
+
+				const newMessage = `${collection} ${when}: ${message}`;
 				if (inProgress)
 					draft.inProgress = inProgress;
 				if (message)
-					draft.messages = [...draft.messages, message];
+					draft.messages = [...draft.messages, newMessage];
+
 			}
 		);
 

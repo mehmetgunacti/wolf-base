@@ -26,12 +26,12 @@
 			<ng-template pTemplate="caption">
 				<span controls>
 					<span class="p-float-label">
-						<p-dropdown [options]="tableNames" [formControl]="fcTableName"></p-dropdown>
-						<label for="float-label">Table</label>
+						<p-dropdown inputId="tablenames" [options]="tableNames" [formControl]="fcTableName"></p-dropdown>
+						<label for="tablenames">Table</label>
 					</span>
 					<span class="p-float-label">
-						<input type="text" #searchbox pInputText (input)="dt1.filterGlobal(searchbox.value, 'contains')">
-						<label>Search</label>
+						<input id="searchbox" type="text" #searchbox pInputText (input)="dt1.filterGlobal(searchbox.value, 'contains')">
+						<label for="searchbox">Search</label>
 					</span>
 				</span>
 				<span>Items: {{ content.length }}</span>

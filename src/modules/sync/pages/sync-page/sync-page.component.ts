@@ -1,7 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as selectors from 'store/bookmark/selectors';
+import * as bookmarkSelectors from 'store/bookmark/selectors';
+import * as syncSelectors from 'store/sync/selectors';
+
 import * as actions from 'store/sync/actions';
 
 @Component({
@@ -17,18 +19,22 @@ export class SyncPageComponent {
 	bookmarksDeleted$: Observable<number>;
 	bookmarksUpdated$: Observable<number>;
 
+	messages$: Observable<string[]>;
+
 	constructor() {
 
-		this.bookmarksCreated$ = this.store.select(selectors.bookmarksCreated);
-		this.bookmarksClicked$ = this.store.select(selectors.bookmarksClicked);
-		this.bookmarksDeleted$ = this.store.select(selectors.bookmarksCreated);
-		this.bookmarksUpdated$ = this.store.select(selectors.bookmarksUpdated);
+		this.bookmarksCreated$ = this.store.select(bookmarkSelectors.bookmarksCreated);
+		this.bookmarksClicked$ = this.store.select(bookmarkSelectors.bookmarksClicked);
+		this.bookmarksDeleted$ = this.store.select(bookmarkSelectors.bookmarksCreated);
+		this.bookmarksUpdated$ = this.store.select(bookmarkSelectors.bookmarksUpdated);
+
+		this.messages$ = this.store.select(syncSelectors.messages);
 
 	}
 
 	onStart(): void {
 
-		this.store.dispatch(actions.syncMessage({ message: 'Start.', inProgress: true }));
+		this.store.dispatch(actions.syncTrigger());
 
 	}
 
