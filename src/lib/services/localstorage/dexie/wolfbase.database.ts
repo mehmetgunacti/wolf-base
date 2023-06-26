@@ -18,7 +18,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 		dbName: 'WolfBaseDB',
 		tables: {
 			bookmarks: 'id, *tags, clicks',
-			clicks: 'id',
+			clicks: 'id, current',
 			configuration: '',
 			trashcan: 'id',
 			syncData: 'id, table'

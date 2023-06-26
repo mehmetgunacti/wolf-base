@@ -1,4 +1,4 @@
-import { UUID } from "lib/constants";
+import { UUID, WolfBaseTableName } from "lib/constants";
 import { Click } from "lib/models";
 import { v4 as uuidv4 } from 'uuid';
 import { ClicksTable } from "../../local-storage-table.interface";
@@ -30,9 +30,26 @@ export class ClicksTableImpl implements ClicksTable {
 
 	}
 
+	async clicked(): Promise<Click[]> {
+		
+		return await this.db.clicks.where('current').above(0).toArray();
+
+	}
+
 	async put(item: Click): Promise<void> {
 
 		await this.db.clicks.put(item);
+
+	}
+
+	async putAll(items: Click[]): Promise<void> {
+
+		await this.db.transaction('rw', WolfBaseTableName.clicks, async () => {
+
+			await this.db.clicks.clear();
+			await this.db.clicks.bulkAdd(items);
+
+		})
 
 	}
 
