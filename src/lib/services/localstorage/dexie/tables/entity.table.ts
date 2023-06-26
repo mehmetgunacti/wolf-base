@@ -1,7 +1,7 @@
 import { Collection, IndexableType, Table } from 'dexie';
 import { UUID } from 'lib/constants/common.constant';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
-import { Entity, PartialEntity } from 'lib/models/entity.model';
+import { Entity } from 'lib/models/entity.model';
 import { EntityTable } from '../../local-storage-table.interface';
 import { WolfBaseDB } from '../wolfbase.database';
 import { isNewer } from 'lib/utils';
@@ -25,28 +25,15 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	create(item: PartialEntity<T>): Promise<T>;
-	create(items: PartialEntity<T>[]): Promise<void>;
-	async create(items: PartialEntity<T> | PartialEntity<T>[]): Promise<T | void> {
+	async create(item: Partial<T>): Promise<T> {
 
-		if (Array.isArray(items)) {
-
-			await this.db.table<T>(this.tablename).bulkPut(
-				items.map(data => this.newItemFromPartial(data))
-			);
-			return;
-
-		} else {
-
-			const newItem: T = this.newItemFromPartial(items);
-			await this.db.table<T>(this.tablename).add(newItem);
-			return newItem;
-
-		}
+		const newItem: T = this.newItemFromPartial(item);
+		await this.db.table<T>(this.tablename).add(newItem);
+		return newItem;
 
 	}
 
-	async update(id: string, item: PartialEntity<T>): Promise<T> {
+	async update(id: string, item: Partial<T>): Promise<T> {
 
 		const localData: T | undefined = await this.get(id);
 		if (!localData)
@@ -213,8 +200,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	protected abstract newItemFromPartial(item: PartialEntity<T>): T;
-
-	protected abstract newInstance(id: UUID, item: PartialEntity<T>): T;
+	protected abstract newItemFromPartial(item: Partial<T>): T;
+	protected abstract newInstance(id: UUID, item: Partial<T>): T;
 
 }

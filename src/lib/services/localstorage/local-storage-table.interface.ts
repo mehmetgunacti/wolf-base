@@ -1,15 +1,15 @@
 import { UUID } from "lib/constants/common.constant";
 import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Configuration } from "lib/models/configuration.model";
-import { Entity, PartialEntity } from "lib/models/entity.model";
+import { Entity } from "lib/models/entity.model";
 
 export interface EntityTable<T extends Entity> {
 
 	get(id: UUID): Promise<T | undefined>;
 
-	create(item: PartialEntity<T>): Promise<T>;
+	create(item: Partial<T>): Promise<T>;
 	put(item: T): Promise<void>;
-	update(id: UUID, item: PartialEntity<T>): Promise<T>;
+	update(id: UUID, item: Partial<T>): Promise<T>;
 	markDeleted(id: UUID): Promise<void>;
 	markConflict(id: UUID): Promise<void>;
 	delete(id: UUID): Promise<void>;
