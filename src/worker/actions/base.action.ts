@@ -5,7 +5,7 @@ import { SyncEvent } from 'lib/models/sync.model';
 import { EntityTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { RemoteStorageCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { sleep } from 'lib/utils/helper.tool';
-import { syncState } from 'lib/utils/sync.tool';
+import { logState } from 'lib/utils/sync.tool';
 
 export interface Action<PARAM, RETURN_TYPE> {
 

@@ -1,7 +1,7 @@
 import { SyncEvent } from 'lib/models/sync.model';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 
-export const syncState = (
+export const logState = (
 	collection: RemoteCollection,
 	message?: string,
 	inProgress: boolean = true
@@ -12,17 +12,17 @@ export const syncState = (
 	inProgress
 });
 
-export const syncHeader = async function* (
+export const logHeader = async function* (
 	collection: RemoteCollection,
 	message: string,
 	stars: boolean = true
   ): AsyncGenerator<SyncEvent> {
 
-	yield syncState(collection, ' ');
+	yield logState(collection, ' ');
 	if (stars)
-		yield syncState(collection, '**************************************************');
-	yield syncState(collection, message);
+		yield logState(collection, '**************************************************');
+	yield logState(collection, message);
 	if (stars)
-		yield syncState(collection, '**************************************************');
+		yield logState(collection, '**************************************************');
 
 };
