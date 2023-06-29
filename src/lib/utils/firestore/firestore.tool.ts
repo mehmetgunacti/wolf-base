@@ -175,9 +175,11 @@ class FirestoreTool implements Firestore {
 	}
 
 	private parseFirestoreURL(url: string): { collection: string, document: string } {
-
-		const regex = /\/documents\/([^/]+)\/([^/]+)$/;
+		
+		// starts parsing with /documents/[collection]/[id] until / or ? or till end of string
+		const regex = /\/documents\/([^/]+)\/([^/]+)(?:\/|\?|$)/;
 		const matches = url.match(regex);
+		console.log('matches: ', matches);
 		if (matches && matches.length === 3) {
 
 			const collection = matches[1];
@@ -185,6 +187,7 @@ class FirestoreTool implements Firestore {
 			return { collection, document };
 
 		}
+		console.error('Invalid Firestore URL: [' + url + ']', matches);
 		throw new Error('Invalid Firestore URL: [' + url + ']');
 
 	}
