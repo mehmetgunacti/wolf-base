@@ -7,7 +7,7 @@ export class FirestoreCreateURL {
 		public baseURL: string,
 		public projectId: string,
 		public apiKey: string,
-		public collection: RemoteCollection,
+		public collection: string,
 		public id: UUID
 	) { }
 
@@ -129,7 +129,7 @@ export interface FirestoreDTO<T> {
 	document: string;
 	createTime: string;
 	updateTime: string;
-	entity: any;
+	entity: T;
 
 }
 

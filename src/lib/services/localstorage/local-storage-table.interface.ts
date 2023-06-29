@@ -1,29 +1,37 @@
 import { UUID } from "lib/constants/common.constant";
+import { SyncData } from "lib/models";
 import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Configuration } from "lib/models/configuration.model";
-import { Entity } from "lib/models/entity.model";
+import { Entity, MetaData } from "lib/models/entity.model";
+import { RemoteData } from "lib/models/remote.model";
 
 export interface EntityTable<T extends Entity> {
 
 	get(id: UUID): Promise<T | undefined>;
 
 	create(item: Partial<T>): Promise<T>;
-	put(item: T): Promise<void>;
+	put(item: RemoteData<T>): Promise<void>;
 	update(id: UUID, item: Partial<T>): Promise<T>;
-	markDeleted(id: UUID): Promise<void>;
 	markConflict(id: UUID): Promise<void>;
-	delete(id: UUID): Promise<void>;
 
 	list(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; }): Promise<T[]>;
 	listIds(): Promise<UUID[]>;
-	listEntities(): Promise<Entity[]>;
 
-	listNew(): Promise<T[]>;
-	listConflicts(): Promise<T[]>;
-	listUpdated(): Promise<T[]>;
-	listDeleted(): Promise<T[]>;
-	removeExistingFrom(entities: Entity[]): Promise<Entity[]>;
-	removeSynchronousFrom(entities: Entity[]): Promise<Entity[]>;
+	getSyncData(id: UUID): Promise<SyncData | null>;
+	listSyncData(): Promise<SyncData[]>;
+
+	listNewIds(): Promise<UUID[]>;
+	listConflicts(): Promise<SyncData[]>;
+	listUpdated(): Promise<SyncData[]>;
+
+	moveToTrash(id: UUID): Promise<void>;
+	listDeletedItems(): Promise<T[]>;
+	deletePermanently(id: UUID): Promise<void>;
+
+	// todo eliminate these methods
+	filterNew(entities: MetaData[]): Promise<SyncData[]>;
+	filterUpdated(entities: MetaData[]): Promise<SyncData[]>;
+	filterDeleted(entities: MetaData[]): Promise<SyncData[]>;
 
 	search(term: string): Promise<T[]>;
 	searchByTags(tags: string[]): Promise<T[]>;

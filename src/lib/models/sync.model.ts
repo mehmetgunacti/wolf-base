@@ -1,4 +1,5 @@
 import { RemoteCollection } from "lib/constants";
+import { MetaData } from "./entity.model";
 
 export interface SyncEvent {
 
@@ -6,5 +7,13 @@ export interface SyncEvent {
 	collection: RemoteCollection;
 	message?: string;
 	inProgress?: boolean;
+
+}
+
+export interface SyncData extends MetaData {
+
+	updated: boolean;
+	deleted: boolean;
+	conflict: boolean;
 
 }

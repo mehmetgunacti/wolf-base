@@ -10,7 +10,11 @@ import { FirestoreCollection } from '../firestore.collection';
 export class BookmarksFirestoreCollection extends FirestoreCollection<Bookmark> implements BookmarksCollection {
 
 	constructor(firestore: Firestore) {
-		super(firestore, RemoteCollection.bookmarks, new BookmarkFirestoreConverter());
+		super(
+			firestore,
+			RemoteCollection.bookmarks,
+			new BookmarkFirestoreConverter()
+		);
 	}
 
 	async click(id: UUID, amount: number = 1): Promise<number> {

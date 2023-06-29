@@ -6,12 +6,13 @@ export type WolfEntity = Bookmark;
 
 export interface Entity extends IDBase {
 
-	readonly createTime?: string;
-	readonly updateTime?: string;
-	_updated?: boolean;
-	_deleted?: boolean;
-	_conflict?: boolean;
-
 	name: string;
+
+}
+
+export interface MetaData extends IDBase {
+
+	createTime: string;
+	updateTime: string;
 
 }

@@ -49,8 +49,8 @@ addEventListener('message', async (a: MessageEvent) => {
 	for (const gen of generators)
 		await process(gen);
 
+	postMessage({ when: new Date(), message: 'Done.', inProgress: false } as SyncEvent);
 	isRunning = false;
-	postMessage({ message: 'Done.', inProgress: false } as SyncEvent);
 
 });
 

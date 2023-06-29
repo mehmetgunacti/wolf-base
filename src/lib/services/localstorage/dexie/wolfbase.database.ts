@@ -1,6 +1,7 @@
 import Dexie from 'dexie';
 import { UUID } from 'lib/constants/common.constant';
 import { CONF_KEYS, WolfBaseTableName } from 'lib/constants/database.constant';
+import { SyncData } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { DexieConfiguration } from 'lib/models/database.model';
 
@@ -13,15 +14,15 @@ class DEFAULT_CONF_VALUES {
 }
 
 export const wolfBaseDBFactory = (): WolfBaseDB => {
-	
+
 	return new WolfBaseDB({
 		dbName: 'WolfBaseDB',
 		tables: {
 			bookmarks: 'id, *tags, clicks',
+			bookmarks_sync: 'id',
+			bookmarks_trash: 'id',
 			clicks: 'id, current',
-			configuration: '',
-			trashcan: 'id',
-			syncData: 'id, table'
+			configuration: ''
 		},
 		version: 1
 	});
@@ -31,6 +32,8 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 export class WolfBaseDB extends Dexie {
 
 	bookmarks: Dexie.Table<Bookmark, UUID>;
+	bookmarks_sync: Dexie.Table<SyncData, UUID>;
+	bookmarks_trash: Dexie.Table<Bookmark, UUID>;
 	clicks: Dexie.Table<Click, UUID>;
 	configuration: Dexie.Table<string | boolean, string>;
 
@@ -41,6 +44,8 @@ export class WolfBaseDB extends Dexie {
 			.stores(conf.tables);
 
 		this.bookmarks = this.table(WolfBaseTableName.bookmarks);
+		this.bookmarks_sync = this.table(WolfBaseTableName.bookmarks_sync);
+		this.bookmarks_trash = this.table(WolfBaseTableName.bookmarks_trash);
 		this.clicks = this.table(WolfBaseTableName.clicks);
 		this.configuration = this.table(WolfBaseTableName.configuration);
 

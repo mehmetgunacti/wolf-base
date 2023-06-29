@@ -1,11 +1,9 @@
-export const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+export const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, 100)); // ms));
 
 export const isNewer = (date1: string, date2: string): boolean => {
 
 	const d1 = new Date(date1).getTime();
 	const d2 = new Date(date2).getTime();
-
-	console.log('dates: ', d1, d2);
 	return d1 > d2;
 
 }

@@ -14,12 +14,15 @@ export const syncState = (
 
 export const syncHeader = async function* (
 	collection: RemoteCollection,
-	message?: string
+	message: string,
+	stars: boolean = true
   ): AsyncGenerator<SyncEvent> {
 
 	yield syncState(collection, ' ');
-	yield syncState(collection, '*************************');
+	if (stars)
+		yield syncState(collection, '**************************************************');
 	yield syncState(collection, message);
-	yield syncState(collection, '*************************');
+	if (stars)
+		yield syncState(collection, '**************************************************');
 
 };

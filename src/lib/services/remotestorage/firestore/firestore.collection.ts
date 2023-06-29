@@ -1,12 +1,12 @@
 import { environment } from "environments/environment";
+import { UUID } from "lib/constants";
 import { RemoteCollection } from "lib/constants/remote.constant";
+import { RemoteData, RemoteMetaData } from "lib/models";
 import { Entity } from "lib/models/entity.model";
 import { FIRESTORE_VALUE } from "lib/utils";
 import { FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "lib/utils/firestore/firestore.model";
 import { Firestore } from "lib/utils/firestore/firestore.tool";
 import { RemoteStorageCollection } from "../remote-storage-collection.interface";
-import { UUID } from "lib/constants";
-import { v4 as uuidv4 } from 'uuid';
 
 export abstract class FirestoreCollection<T extends Entity> implements RemoteStorageCollection<T> {
 
@@ -35,7 +35,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 
 	// }
 
-	async upload(item: T): Promise<T> {
+	async upload(item: T): Promise<RemoteData<T>> {
 
 		const url = new FirestorePatchURL(
 			this.baseURL,
@@ -46,13 +46,13 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 			this.converter.toUpdateMask(item)
 		);
 		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
-		return this.toEntity(
+		return this.toRemoteData(
 			await this.firestore.update(url, { fields: requestBody })
 		);
 
 	}
 
-	async delete(id: string): Promise<void> {
+	async delete(id: UUID): Promise<void> {
 
 		const url = new FirestoreDocumentURL(
 			this.baseURL,
@@ -65,22 +65,33 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 
 	}
 
+	async moveToTrash(id: UUID): Promise<void> {
+
+		const remoteData = await this.downloadOne(id);
+		if (remoteData) {
+
+			await this.delete(id);
+			await this.trash(remoteData.entity);
+
+		}
+
+	}
+
 	async trash(item: T): Promise<void> {
 
-		const newId: UUID = `${this.remoteCollection}_${item.id}_${new Date().toISOString()}`;
 		const url = new FirestoreCreateURL(
 			this.baseURL,
 			this.projectId,
 			this.apiKey,
-			RemoteCollection.trashcan,
-			newId
+			`${this.remoteCollection}_trash/${item.id}/items`,
+			new Date().toISOString()
 		);
 		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
 		await this.firestore.create(url, { fields: requestBody });
 
 	}
 
-	async downloadOne(id: string): Promise<T> {
+	async downloadOne(id: UUID): Promise<RemoteData<T> | null> {
 
 		const url = new FirestoreDocumentURL(
 			this.baseURL,
@@ -89,11 +100,14 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 			this.remoteCollection,
 			id
 		);
-		return this.toEntity(await this.firestore.get(url));
+		const dto = await this.firestore.get<T>(url);
+		if (dto)
+			return this.toRemoteData(dto);
+		return null;
 
 	}
 
-	async downloadMany(): Promise<T[]> {
+	async downloadMany(): Promise<RemoteData<T>[]> {
 
 		const url = new FirestoreListURL(
 			this.baseURL,
@@ -103,11 +117,11 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 			this.pageSize
 		);
 		const list = await this.firestore.list<T>(url);
-		return list.map(dto => this.toEntity(dto));
+		return list.map(dto => this.toRemoteData(dto));
 
 	}
 
-	async downloadIds(): Promise<Entity[]> {
+	async downloadIds(): Promise<RemoteMetaData[]> {
 
 		const url = new FirestoreListURL(
 			this.baseURL,
@@ -118,26 +132,44 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 			true
 		);
 		const list = await this.firestore.listIds<T>(url);
-		return list.map(dto => this.toEntity(dto));
+		return list.map(dto => this.toRemoteMetaData(dto));
 
 	}
 
-	private toEntity(dto: FirestoreDTO<T> | null): T {
-
-		if (dto === null)
-			return {} as T;
+	private toRemoteData(dto: FirestoreDTO<T>): RemoteData<T> {
 
 		const { document, createTime, updateTime } = dto;
-		const entity: T = {
+		const metaData: RemoteMetaData = {
+
+			id: dto.document,
+			createTime,
+			updateTime
+
+		};
+		const remoteData: RemoteData<T> = {
+
+			metaData,
+			entity: {
+				...dto.entity,
+				id: document
+			}
+
+		};
+		return remoteData;
+
+	}
+
+	private toRemoteMetaData(dto: FirestoreDTO<T>): RemoteMetaData {
+
+		const { document, createTime, updateTime } = dto;
+		const metaData: RemoteMetaData = {
 
 			id: document,
 			createTime,
-			updateTime,
-			...dto.entity
+			updateTime
 
-		} as T;
-
-		return entity;
+		};
+		return metaData;
 
 	}
 

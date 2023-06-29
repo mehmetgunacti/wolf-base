@@ -1,10 +1,11 @@
 import { Collection, IndexableType, Table } from 'dexie';
 import { UUID } from 'lib/constants/common.constant';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
+import { RemoteData, SyncData } from 'lib/models';
 import { Entity } from 'lib/models/entity.model';
+import { isNewer } from 'lib/utils';
 import { EntityTable } from '../../local-storage-table.interface';
 import { WolfBaseDB } from '../wolfbase.database';
-import { isNewer } from 'lib/utils';
 
 export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T> {
 
@@ -44,9 +45,27 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async put(item: T): Promise<void> {
+	async put(item: RemoteData<T>): Promise<void> {
 
-		await this.db.table<T>(this.tablename).put(item);
+		await this.db.transaction('rw', this.db.bookmarks, this.db.bookmarks_sync, async () => {
+
+			// add to data table
+			await this.db.table<T>(this.tablename).put(item.entity);
+
+			// add to sync table
+			const { id, createTime, updateTime } = item.metaData;
+			await this.db.table<SyncData>(this.tablename + '_sync').put({
+
+				id,
+				createTime,
+				updateTime,
+				updated: false,
+				deleted: false,
+				conflict: false
+
+			});
+
+		});
 
 	}
 
@@ -56,15 +75,30 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async markDeleted(id: string): Promise<void> {
+	async moveToTrash(id: string): Promise<void> {
 
-		await this.db.table<T>(this.tablename).where({ id }).modify({ _deleted: true } as Partial<Entity>);
+		await this.db.transaction('rw', this.db.bookmarks, this.db.bookmarks_trash, async () => {
+
+			const item = await this.db.table<T>(this.tablename).get(id);
+			if (item) {
+
+				await this.db.table<T>(this.tablename + '_trash').put(item);
+				await this.db.table(this.tablename).delete(id);
+
+			}
+
+		});
 
 	}
 
-	async delete(id: string): Promise<void> {
+	async deletePermanently(id: string): Promise<void> {
 
-		await this.db.table<T>(this.tablename).delete(id);
+		await this.db.transaction('rw', [this.tablename + '_sync', this.tablename + '_trash'], async () => {
+
+			await this.db.table(this.tablename + '_sync').delete(id);
+			await this.db.table(this.tablename + '_trash').delete(id);
+
+		});
 
 	}
 
@@ -96,52 +130,80 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async listNew(): Promise<T[]> {
+	async listNewIds(): Promise<UUID[]> {
 
-		return await this.list({ filterFn: e => !e.createTime });
+		const syncData = await this.db.table<SyncData>(this.tablename + '_sync').toArray();
+		const setSyncIds = new Set(syncData.map(s => s.id));
 
-	}
-
-	async listConflicts(): Promise<T[]> {
-
-		return await this.list({ filterFn: e => !!e._conflict });
+		const ids = await this.listIds();
+		return ids.filter(id => !setSyncIds.has(id));
 
 	}
 
-	async listUpdated(): Promise<T[]> {
+	async listConflicts(): Promise<SyncData[]> {
 
-		return await this.list({ filterFn: e => !!e._updated });
-
-	}
-
-	async listDeleted(): Promise<T[]> {
-
-		return await this.list({ filterFn: e => !!e._deleted });
+		return await this.db.table<SyncData>(this.tablename + '_sync').filter(s => s.conflict).toArray();
 
 	}
 
-	async removeExistingFrom(remoteEntities: Entity[]): Promise<Entity[]> {
+	async listUpdated(): Promise<SyncData[]> {
 
-		const localIds: Set<UUID> = new Set(await this.listIds());
-
-		// find remote-new item IDs
-		return remoteEntities.filter(e => !localIds.has(e.id));
+		return await this.db.table<SyncData>(this.tablename + '_sync').filter(s => s.updated).toArray();
 
 	}
 
+	async listDeletedItems(): Promise<T[]> {
 
-	async removeSynchronousFrom(remoteEntities: Entity[]): Promise<Entity[]> {
+		return await this.db.table<T>(this.tablename + '_trash').toArray();
+
+	}
+
+	async getSyncData(id: UUID): Promise<SyncData | null> {
+
+		return await this.db.table<SyncData>(this.tablename + '_sync').get(id) ?? null;
+
+	}
+
+	async filterNew(entities: SyncData[]): Promise<SyncData[]> {
+
+		// create a Map of all ids from ..._sync table
+		const local: SyncData[] = await this.db.table<SyncData>(this.tablename + '_sync').toArray();
+		const localIds: Set<UUID> = new Set(local.map(s => s.id));
+
+		// filter
+		return entities.filter(e => !localIds.has(e.id));
+
+	}
+
+	async filterUpdated(remoteEntities: SyncData[]): Promise<SyncData[]> {
 
 		// find remote entities with a newer 'updateTime'
-		const localEntities = await this.listEntities();
-		const mapLocalEntites = new Map(localEntities.map(e => [e.id, e]));
+		const localMetaData = await this.listSyncData();
+		if (localMetaData.length === 0)
+			return [];
 
+		const mapLocalMetaData = new Map(localMetaData.map(e => [e.id, e]));
 		return remoteEntities.filter(r => {
 
-			const localEntity = mapLocalEntites.get(r.id);
-			return r.updateTime && localEntity?.updateTime && isNewer(r.updateTime, localEntity.updateTime)
+			const localEntity = mapLocalMetaData.get(r.id);
+			if (!localEntity) // if remote item not in local sync table -> skip
+				return false;
+			return isNewer(r.updateTime, localEntity.updateTime)
 
 		});
+
+	}
+
+	async filterDeleted(entities: SyncData[]): Promise<SyncData[]> {
+
+		// set of remote ids
+		const set: Set<UUID> = new Set(entities.map(e => e.id));
+
+		// list of local ids
+		const localIds: SyncData[] = await this.listSyncData();
+
+		// find the difference
+		return localIds.filter(entity => !set.has(entity.id));
 
 	}
 
@@ -161,24 +223,9 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	// }
 
-	async listEntities(): Promise<Entity[]> {
+	async listSyncData(): Promise<SyncData[]> {
 
-		const allEntities = await this.list();
-		return allEntities.map(e => {
-
-			const { id, updateTime, createTime, name, _updated, _deleted, _conflict } = e;
-			const entity = {
-				id,
-				name,
-				createTime,
-				updateTime,
-				_conflict,
-				_deleted,
-				_updated
-			} as Entity;
-			return entity;
-
-		});
+		return await this.db.table<SyncData>(this.tablename + '_sync').toArray();
 
 	}
 
