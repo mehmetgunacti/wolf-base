@@ -37,6 +37,9 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 			else if (error instanceof FatalError)
 				yield syncState(this.collection, `Fatal error!`);
 
+			else
+				throw error;
+
 		}
 
 	}
