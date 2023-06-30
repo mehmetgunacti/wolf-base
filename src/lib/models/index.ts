@@ -1,3 +1,4 @@
+export * from './action.model';
 export * from './bookmark.model';
 export * from './configuration.model';
 export * from './conflict.model';

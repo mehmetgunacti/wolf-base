@@ -1,17 +1,9 @@
-import { UUID, WolfBaseDB, WolfBaseTableName } from 'lib';
+import { Action, WolfBaseDB, WolfBaseTableName } from 'lib';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { Entity } from 'lib/models/entity.model';
 import { SyncEvent } from 'lib/models/sync.model';
 import { EntityTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { RemoteStorageCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
-import { sleep } from 'lib/utils/helper.tool';
-import { logState } from 'lib/utils/sync.tool';
-
-export interface Action<PARAM, RETURN_TYPE> {
-
-	execute(vo?: PARAM): RETURN_TYPE;
-
-}
 
 export abstract class BaseSyncAction<T extends Entity> implements Action<void, AsyncGenerator<SyncEvent>> {
 

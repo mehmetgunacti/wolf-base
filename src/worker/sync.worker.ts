@@ -8,33 +8,16 @@
 * Only import pure JavaScript functions or libraries.
 * Also, don't use index.ts files when writing import statments inside the lib folder.
 */
-import { localStorageServiceFactory } from "lib/services/localstorage/dexie/factories";
-import { bookmarksCollectionFactory, remoteStorageServiceFactory } from "lib/services/remotestorage/firestore/factories";
 import { SyncEvent } from "lib/models/sync.model";
-import { BookmarksSyncAction } from "./actions/bookmarks.action";
-import { sleep } from "lib/utils/helper.tool";
+import { localStorageServiceFactory } from "lib/services/localstorage/dexie/factories";
 import { LocalStorageService } from "lib/services/localstorage/local-storage-service.interface";
+import { remoteStorageServiceFactory } from "lib/services/remotestorage/firestore/factories";
+import { sleep } from "lib/utils/helper.tool";
+import { BookmarksSyncAction } from "./actions/bookmarks.action";
 
 let isRunning = false;
 
 addEventListener('message', async (a: MessageEvent) => {
-
-	/*
-		1) send newly created
-		2) download id-createTime list
-		3) start comparing:
-				local	|	remote
-			---------------------------
-				upload					<- remote collection has to be separate from bookmarks
-				clicks						only upload click count, ignore return value
-							download	<- remote collection to local, but only update 'clicks', not updateTime
-							clicks			
-							new			<- add to local
-							deleted		<- remove ids that are in local list but not in remote list
-				deleted					<- date compare, delete remotely or move to conflicts
-				updated					<- date compare, update remotely or move to conflicts
-							updated		<- date compare all other local items with remote ones, update local or move to conflicts
-	*/
 
 	if (isRunning) {
 

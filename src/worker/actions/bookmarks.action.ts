@@ -1,7 +1,6 @@
-import { LocalStorageService, RemoteData, RemoteMetaData, RemoteStorageService, SyncData, SyncEvent, UUID, isNewer, sleep, logHeader, logState } from 'lib';
+import { Action, LocalStorageService, RemoteData, RemoteMetaData, RemoteStorageService, SyncData, SyncEvent, UUID, logHeader, logState, sleep } from 'lib';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { Bookmark } from 'lib/models/bookmark.model';
-import { Action } from './base.action';
 
 export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEvent>> {
 
@@ -367,7 +366,7 @@ export class BookmarksSyncAction implements Action<void, AsyncGenerator<SyncEven
 	private async *downloadUpdatedItems(items: SyncData[]): AsyncGenerator<SyncEvent> {
 
 		for (const [idx, item] of items.entries()) {
-			
+
 			await sleep(500);
 			const localItem = await this.localStorage.bookmarks.getSyncData(item.id);
 			if (!localItem)
