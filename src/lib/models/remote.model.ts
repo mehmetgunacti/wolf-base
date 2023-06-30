@@ -1,10 +1,10 @@
-import { MetaData } from "./entity.model";
+import { Metadata } from "./entity.model";
 
-export interface RemoteMetaData extends MetaData { }
+export interface RemoteMetadata extends Metadata { }
 
 export interface RemoteData<T> {
 
-	metaData: RemoteMetaData;
+	metaData: RemoteMetadata;
 	entity: T;
 
 }

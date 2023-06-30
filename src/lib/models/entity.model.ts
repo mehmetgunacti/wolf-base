@@ -10,7 +10,7 @@ export interface Entity extends IDBase {
 
 }
 
-export interface MetaData extends IDBase {
+export interface Metadata extends IDBase {
 
 	createTime: string;
 	updateTime: string;

@@ -2,7 +2,7 @@ import { UUID } from "lib/constants/common.constant";
 import { SyncData } from "lib/models";
 import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Configuration } from "lib/models/configuration.model";
-import { Entity, MetaData } from "lib/models/entity.model";
+import { Entity, Metadata } from "lib/models/entity.model";
 import { RemoteData } from "lib/models/remote.model";
 
 export interface EntityTable<T extends Entity> {
@@ -29,9 +29,9 @@ export interface EntityTable<T extends Entity> {
 	deletePermanently(id: UUID): Promise<void>;
 
 	// todo eliminate these methods
-	filterNew(entities: MetaData[]): Promise<SyncData[]>;
-	filterUpdated(entities: MetaData[]): Promise<SyncData[]>;
-	filterDeleted(entities: MetaData[]): Promise<SyncData[]>;
+	filterNew(entities: Metadata[]): Promise<SyncData[]>;
+	filterUpdated(entities: Metadata[]): Promise<SyncData[]>;
+	filterDeleted(entities: Metadata[]): Promise<SyncData[]>;
 
 	search(term: string): Promise<T[]>;
 	searchByTags(tags: string[]): Promise<T[]>;

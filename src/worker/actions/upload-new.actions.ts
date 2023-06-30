@@ -1,0 +1,57 @@
+import { Action, Bookmark, LocalStorageService, RemoteCollection, RemoteData, RemoteStorageService, UUID } from "lib";
+import { FatalError, PostService } from "worker/utils";
+
+export class UploadNewAction implements Action<void, Promise<void>> {
+
+	constructor(
+		private localStorage: LocalStorageService,
+		private remoteStorage: RemoteStorageService,
+		private postService: PostService,
+		private collection: RemoteCollection
+	) { }
+
+	async execute(): Promise<void> {
+
+		this.postService.message(this.collection, `Uploading new items`);
+
+		// read all new items
+		const ids: UUID[] = await this.localStorage.bookmarks.listNewIds();
+
+		// return if none
+		if (ids.length === 0) {
+
+			this.postService.message(this.collection, `no new items to upload`);
+			return;
+
+		}
+
+		// upload new items
+		this.postService.message(this.collection, `${ids.length} new items to be uploaded`);
+		await this.uploadNewItems(ids);
+		this.postService.message(this.collection, `uploaded ${ids.length} new items`);
+
+	}
+
+	private async uploadNewItems(ids: UUID[]): Promise<void> {
+
+		for (const [idx, id] of ids.entries()) {
+
+			const item = await this.localStorage.bookmarks.get(id);
+			if (!item)
+				throw new FatalError(`${id} not found in local table`);
+
+			this.postService.message(this.collection, `${idx + 1} / ${ids.length}: uploading ['${item.id}', '${item.name}']`);
+
+			// upload
+			const remoteData: RemoteData<Bookmark> = await this.remoteStorage.bookmarks.upload(item);
+
+			// save to local
+			await this.localStorage.bookmarks.put(remoteData);
+
+			this.postService.message(this.collection, `['${item.id}', '${item.name}'} done`);
+
+		}
+
+	}
+
+}

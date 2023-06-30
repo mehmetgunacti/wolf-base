@@ -14,6 +14,8 @@ import { LocalStorageService } from "lib/services/localstorage/local-storage-ser
 import { remoteStorageServiceFactory } from "lib/services/remotestorage/firestore/factories";
 import { sleep } from "lib/utils/helper.tool";
 import { BookmarksSyncAction } from "./actions/bookmarks.action";
+import { PostService } from "./utils";
+import { Action, RemoteStorageService } from "lib";
 
 let isRunning = false;
 
@@ -27,10 +29,10 @@ addEventListener('message', async (a: MessageEvent) => {
 	}
 
 	isRunning = true;
-	const generators: AsyncGenerator<SyncEvent>[] = createActions();
+	const actions: Action<void, Promise<void>>[] = createActions();
 
-	for (const gen of generators)
-		await process(gen);
+	for (const action of actions)
+		await action.execute();
 
 	postMessage({ when: new Date(), message: 'Done.', inProgress: false } as SyncEvent);
 	isRunning = false;
@@ -57,21 +59,18 @@ async function process(gen: AsyncGenerator<SyncEvent>): Promise<void> {
 
 }
 
-function createActions(): AsyncGenerator<SyncEvent>[] {
+function createActions(): Action<void, Promise<void>>[] {
 
 	const localStorage: LocalStorageService = localStorageServiceFactory();
+	const remoteStorage: RemoteStorageService = remoteStorageServiceFactory();
+	const postService: PostService = new PostService();
 
 	// bookmarks
-	const bookmarks = new BookmarksSyncAction(
-
-		localStorageServiceFactory(),
-		remoteStorageServiceFactory()
-
-	);
+	const bookmarks = new BookmarksSyncAction(localStorage, remoteStorage, postService);
 
 	// order importante
 	return [
-		bookmarks.execute()
+		bookmarks
 	];
 
 }

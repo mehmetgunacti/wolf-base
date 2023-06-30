@@ -1,7 +1,7 @@
 import { environment } from "environments/environment";
 import { UUID } from "lib/constants";
 import { RemoteCollection } from "lib/constants/remote.constant";
-import { RemoteData, RemoteMetaData } from "lib/models";
+import { RemoteData, RemoteMetadata } from "lib/models";
 import { Entity } from "lib/models/entity.model";
 import { FIRESTORE_VALUE } from "lib/utils";
 import { FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "lib/utils/firestore/firestore.model";
@@ -121,7 +121,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 
 	}
 
-	async downloadIds(): Promise<RemoteMetaData[]> {
+	async downloadIds(): Promise<RemoteMetadata[]> {
 
 		const url = new FirestoreListURL(
 			this.baseURL,
@@ -139,7 +139,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 	private toRemoteData(dto: FirestoreDTO<T>): RemoteData<T> {
 
 		const { document, createTime, updateTime } = dto;
-		const metaData: RemoteMetaData = {
+		const metaData: RemoteMetadata = {
 
 			id: dto.document,
 			createTime,
@@ -159,10 +159,10 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 
 	}
 
-	private toRemoteMetaData(dto: FirestoreDTO<T>): RemoteMetaData {
+	private toRemoteMetaData(dto: FirestoreDTO<T>): RemoteMetadata {
 
 		const { document, createTime, updateTime } = dto;
-		const metaData: RemoteMetaData = {
+		const metaData: RemoteMetadata = {
 
 			id: document,
 			createTime,
