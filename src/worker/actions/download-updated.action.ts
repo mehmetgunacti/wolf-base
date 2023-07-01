@@ -7,21 +7,21 @@ export class DownloadUpdatedAction extends BaseAction {
 	async execute(): Promise<void> {
 
 		// todo recheck this logic
-		this.postService.header(this.collection, `Finding remotely updated items`);
+		await this.postService.header(this.collection, `Finding remotely updated items`);
 
 		const items: SyncData[] = await this.localStorage.bookmarks.filterUpdated(this.remoteMetadata.getList());
 
 		// return if none
 		if (items.length === 0) {
 
-			this.postService.message(this.collection, `no updated items on server`);
+			await this.postService.message(this.collection, `no updated items on server`);
 			return;
 
 		}
 
-		this.postService.header(this.collection, `${items.length} updated items to be downloaded`, false);
+		await this.postService.header(this.collection, `${items.length} updated items to be downloaded`, false);
 		await this.downloadUpdatedItems(items);
-		this.postService.header(this.collection, `downloaded ${items.length} updated items`, false);
+		await this.postService.header(this.collection, `downloaded ${items.length} updated items`, false);
 
 	}
 
@@ -33,7 +33,7 @@ export class DownloadUpdatedAction extends BaseAction {
 			if (!localItem)
 				throw new FatalError(`${item.id} not found in local sync table`);
 
-			this.postService.header(this.collection, `${idx + 1} / ${items.length}: ['${localItem.id}']`, false);
+			await this.postService.header(this.collection, `${idx + 1} / ${items.length}: ['${localItem.id}']`, false);
 
 			const localEntity = await this.localStorage.bookmarks.get(localItem.id);
 			if (!localEntity)
@@ -42,13 +42,13 @@ export class DownloadUpdatedAction extends BaseAction {
 			// mark as conflict if local item is updated or deleted
 			if (localItem.updated || localItem.deleted) {
 
-				this.postService.message(this.collection, `Conflict: ['${localEntity.id}', '${localEntity.name}']`);
+				await this.postService.message(this.collection, `Conflict: ['${localEntity.id}', '${localEntity.name}']`);
 				await this.localStorage.bookmarks.markConflict(localEntity.id);
 				continue;
 
 			}
 
-			this.postService.message(this.collection, `downloading remotely updated item ['${localEntity.id}', '${localEntity.name}']`);
+			await this.postService.message(this.collection, `downloading remotely updated item ['${localEntity.id}', '${localEntity.name}']`);
 			const remotelyUpdated = await this.remoteStorage.bookmarks.downloadOne(item.id);
 			if (!remotelyUpdated)
 				throw new FatalError(`${item.id} not found in remote collection`);

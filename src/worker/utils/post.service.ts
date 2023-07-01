@@ -1,9 +1,10 @@
-import { RemoteCollection, SyncEvent } from "lib";
+import { RemoteCollection, SyncEvent, sleep } from "lib";
 
 export class PostService {
 
-	message(collection: RemoteCollection, message?: string, inProgress: boolean = true): void {
+	async message(collection: RemoteCollection, message?: string, inProgress: boolean = true): Promise<void> {
 
+		await sleep(200);
 		postMessage({
 			when: new Date(),
 			collection,
@@ -13,14 +14,14 @@ export class PostService {
 
 	}
 
-	header(collection: RemoteCollection, message: string, decorate: boolean = true): void {
+	async header(collection: RemoteCollection, message: string, decorate: boolean = true): Promise<void> {
 
-		this.message(collection, ' ');
+		await this.message(collection, ' ');
 		if (decorate)
-			this.message(collection, '**************************************************');
-		this.message(collection, message);
+			await this.message(collection, '**************************************************');
+		await this.message(collection, message);
 		if (decorate)
-			this.message(collection, '**************************************************');
+			await this.message(collection, '**************************************************');
 
 	}
 

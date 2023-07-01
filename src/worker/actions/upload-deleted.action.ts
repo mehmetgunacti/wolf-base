@@ -5,7 +5,7 @@ export class UploadDeletedAction extends BaseAction {
 
 	async execute(): Promise<void> {
 
-		this.postService.header(this.collection, `Finding deleted items to be uploaded`);
+		await this.postService.header(this.collection, `Finding deleted items to be uploaded`);
 
 		// find all deleted items
 		const items: Bookmark[] = await this.localStorage.bookmarks.listDeletedItems();
@@ -13,15 +13,15 @@ export class UploadDeletedAction extends BaseAction {
 		// return if none
 		if (items.length === 0) {
 
-			this.postService.message(this.collection, `no items deleted locally`);
+			await this.postService.message(this.collection, `no items deleted locally`);
 			return;
 
 		}
 
 		// upload deleted items
-		this.postService.header(this.collection, `${items.length} deleted items to be uploaded`, false);
+		await this.postService.header(this.collection, `${items.length} deleted items to be uploaded`, false);
 		await this.uploadDeletedItems(this.remoteMetadata.getList(), items);
-		this.postService.header(this.collection, `${items.length} deleted items done`, false);
+		await this.postService.header(this.collection, `${items.length} deleted items done`, false);
 
 	}
 
@@ -29,7 +29,7 @@ export class UploadDeletedAction extends BaseAction {
 
 		for (const [idx, item] of items.entries()) {
 
-			this.postService.header(this.collection, `${idx + 1} / ${items.length}: handling ['${item.id}', '${item.name}']`, false);
+			await this.postService.header(this.collection, `${idx + 1} / ${items.length}: handling ['${item.id}', '${item.name}']`, false);
 
 			// if item has syncdata it was synchronized before
 			const localSyncData = await this.localStorage.bookmarks.getSyncData(item.id);
@@ -65,7 +65,7 @@ export class UploadDeletedAction extends BaseAction {
 
 			// ... else mark conflict
 			await this.localStorage.bookmarks.markConflict(item.id);
-			this.postService.message(this.collection, `Conflict: ['${item.id}', '${item.name}']`);
+			await this.postService.message(this.collection, `Conflict: ['${item.id}', '${item.name}']`);
 
 		}
 
@@ -79,7 +79,7 @@ export class UploadDeletedAction extends BaseAction {
 		// delete local item from trash and from sync
 		await this.localStorage.bookmarks.deletePermanently(item.id);
 
-		this.postService.message(this.collection, `['${item.id}', '${item.name}'] done`);
+		await this.postService.message(this.collection, `['${item.id}', '${item.name}'] done`);
 
 	}
 

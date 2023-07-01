@@ -53,10 +53,10 @@ export class BookmarksSyncAction implements Action<void, Promise<void>> {
 		} catch (error) {
 
 			if (error instanceof ConflictDetectedError)
-				this.postService.message(this.collection, `${error.count} conflicts detected!`);
+				await this.postService.message(this.collection, `${error.count} conflicts detected!`);
 
 			else if (error instanceof FatalError)
-				this.postService.message(this.collection, `Fatal error!`);
+				await this.postService.message(this.collection, `Fatal error!`);
 
 			else
 				throw error;

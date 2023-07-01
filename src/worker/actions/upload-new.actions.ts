@@ -6,7 +6,7 @@ export class UploadNewAction extends BaseAction {
 
 	async execute(): Promise<void> {
 
-		this.postService.message(this.collection, `Uploading new items`);
+		await this.postService.message(this.collection, `Uploading new items`);
 
 		// read all new items
 		const ids: UUID[] = await this.localStorage.bookmarks.listNewIds();
@@ -14,15 +14,15 @@ export class UploadNewAction extends BaseAction {
 		// return if none
 		if (ids.length === 0) {
 
-			this.postService.message(this.collection, `no new items to upload`);
+			await this.postService.message(this.collection, `no new items to upload`);
 			return;
 
 		}
 
 		// upload new items
-		this.postService.message(this.collection, `${ids.length} new items to be uploaded`);
+		await this.postService.message(this.collection, `${ids.length} new items to be uploaded`);
 		await this.uploadNewItems(ids);
-		this.postService.message(this.collection, `uploaded ${ids.length} new items`);
+		await this.postService.message(this.collection, `uploaded ${ids.length} new items`);
 
 	}
 
@@ -34,7 +34,7 @@ export class UploadNewAction extends BaseAction {
 			if (!item)
 				throw new FatalError(`${id} not found in local table`);
 
-			this.postService.message(this.collection, `${idx + 1} / ${ids.length}: uploading ['${item.id}', '${item.name}']`);
+			await this.postService.message(this.collection, `${idx + 1} / ${ids.length}: uploading ['${item.id}', '${item.name}']`);
 
 			// upload
 			const remoteData: RemoteData<Bookmark> = await this.remoteStorage.bookmarks.upload(item);
@@ -42,7 +42,7 @@ export class UploadNewAction extends BaseAction {
 			// save to local
 			await this.localStorage.bookmarks.put(remoteData);
 
-			this.postService.message(this.collection, `['${item.id}', '${item.name}'} done`);
+			await this.postService.message(this.collection, `['${item.id}', '${item.name}'} done`);
 
 		}
 
