@@ -6,7 +6,7 @@ export class UploadNewAction extends BaseAction {
 
 	async execute(): Promise<void> {
 
-		await this.postService.message(this.collection, `Uploading new items`);
+		await this.postService.header(this.collection, `Uploading new items`);
 
 		// read all new items
 		const ids: UUID[] = await this.localStorage.bookmarks.listNewIds();
