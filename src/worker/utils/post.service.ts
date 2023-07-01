@@ -4,7 +4,7 @@ export class PostService {
 
 	async message(collection: RemoteCollection, message?: string, inProgress: boolean = true): Promise<void> {
 
-		await sleep(200);
+		await sleep(100);
 		postMessage({
 			when: new Date(),
 			collection,
