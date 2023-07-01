@@ -2,7 +2,7 @@ import { RemoteMetadata } from "lib";
 
 export class MetadataList {
 
-    constructor(private list: RemoteMetadata[]) {}
+    constructor(private list: RemoteMetadata[] = []) {}
 
     getList(): RemoteMetadata[] {
 

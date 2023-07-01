@@ -1,16 +1,10 @@
-import { Action, LocalStorageService, RemoteCollection, RemoteStorageService, SyncData } from "lib";
-import { MetadataList, PostService } from "worker/utils";
+import { SyncData } from "lib";
+import { MetadataList } from "worker/utils";
+import { BaseAction } from "./base.action";
 
-export class UploadUpdatedAction implements Action<MetadataList, Promise<void>> {
+export class UploadUpdatedAction extends BaseAction {
 
-	constructor(
-		private localStorage: LocalStorageService,
-		private remoteStorage: RemoteStorageService,
-		private postService: PostService,
-		private collection: RemoteCollection
-	) { }
-
-	async execute(remoteMetadata: MetadataList): Promise<void> {
+	async execute(): Promise<void> {
 
 		this.postService.header(this.collection, `Finding locally updated items`);
 
@@ -27,7 +21,7 @@ export class UploadUpdatedAction implements Action<MetadataList, Promise<void>> 
 
 		// upload new items
 		this.postService.header(this.collection, `${items.length} updated items to be uploaded`, false);
-		await this.uploadUpdatedItems(remoteMetadata ,items);
+		await this.uploadUpdatedItems(this.remoteMetadata ,items);
 		this.postService.header(this.collection, `uploaded ${items.length} updated items`, false);
 
 	}

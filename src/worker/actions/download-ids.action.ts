@@ -1,13 +1,7 @@
-import { Action, RemoteCollection, RemoteMetadata, RemoteStorageService } from "lib";
-import { MetadataList, PostService } from "worker/utils";
+import { MetadataList } from "worker/utils";
+import { BaseAction } from "./base.action";
 
-export class DownloadIdsAction implements Action<void, Promise<MetadataList>> {
-
-	constructor(
-		private remoteStorage: RemoteStorageService,
-		private postService: PostService,
-		private collection: RemoteCollection
-	) { }
+export class DownloadIdsAction extends BaseAction {
 
 	async execute(): Promise<MetadataList> {
 

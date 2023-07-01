@@ -1,20 +1,15 @@
-import { Action, LocalStorageService, RemoteCollection, RemoteStorageService, SyncData } from "lib";
-import { FatalError, MetadataList, PostService } from "worker/utils";
+import { SyncData } from "lib";
+import { FatalError } from "worker/utils";
+import { BaseAction } from "./base.action";
 
-export class DownloadDeletedAction implements Action<MetadataList, Promise<void>> {
+export class DownloadDeletedAction extends BaseAction {
 
-	constructor(
-		private localStorage: LocalStorageService,
-		private postService: PostService,
-		private collection: RemoteCollection
-	) { }
-
-	async execute(remoteMetadata: MetadataList): Promise<void> {
+	async execute(): Promise<void> {
 
 		this.postService.header(this.collection, `Downloading deleted items info`);
 
 		// read all new items
-		const syncData: SyncData[] = await this.localStorage.bookmarks.filterDeleted(remoteMetadata.getList());
+		const syncData: SyncData[] = await this.localStorage.bookmarks.filterDeleted(this.remoteMetadata.getList());
 
 		// return if none
 		if (syncData.length === 0) {

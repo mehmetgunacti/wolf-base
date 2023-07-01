@@ -1,9 +1,8 @@
-import { Action, LocalStorageService, SyncData } from "lib";
+import { SyncData } from "lib";
 import { ConflictDetectedError } from "worker/utils";
+import { BaseAction } from "./base.action";
 
-export class CheckConflictsAction implements Action<void, Promise<void>> {
-
-	constructor(private localStorage: LocalStorageService) { }
+export class CheckConflictsAction extends BaseAction {
 
 	async execute(): Promise<void> {
 

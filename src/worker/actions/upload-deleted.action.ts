@@ -1,16 +1,9 @@
-import { Action, Bookmark, LocalStorageService, RemoteCollection, RemoteMetadata, RemoteStorageService } from "lib";
-import { MetadataList, PostService } from "worker/utils";
+import { Bookmark, RemoteMetadata } from "lib";
+import { BaseAction } from "./base.action";
 
-export class UploadDeletedAction implements Action<MetadataList, Promise<void>> {
+export class UploadDeletedAction extends BaseAction {
 
-	constructor(
-		private localStorage: LocalStorageService,
-		private remoteStorage: RemoteStorageService,
-		private postService: PostService,
-		private collection: RemoteCollection
-	) { }
-
-	async execute(remoteMetadata: MetadataList): Promise<void> {
+	async execute(): Promise<void> {
 
 		this.postService.header(this.collection, `Finding deleted items to be uploaded`);
 
@@ -27,7 +20,7 @@ export class UploadDeletedAction implements Action<MetadataList, Promise<void>> 
 
 		// upload deleted items
 		this.postService.header(this.collection, `${items.length} deleted items to be uploaded`, false);
-		await this.uploadDeletedItems(remoteMetadata.getList(), items);
+		await this.uploadDeletedItems(this.remoteMetadata.getList(), items);
 		this.postService.header(this.collection, `${items.length} deleted items done`, false);
 
 	}

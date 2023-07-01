@@ -1,6 +1,6 @@
-import { Action, LocalStorageService, RemoteMetadata, RemoteStorageService, SyncEvent } from 'lib';
+import { Action, LocalStorageService, RemoteStorageService } from 'lib';
 import { RemoteCollection } from 'lib/constants/remote.constant';
-import { ConflictDetectedError, FatalError, PostService } from 'worker/utils';
+import { ConflictDetectedError, FatalError, MetadataList, PostService } from 'worker/utils';
 import { CheckConflictsAction } from './check-conflict.action';
 import { DownloadClicksAction } from './download-clicks.actions';
 import { DownloadDeletedAction } from './download-deleted.action';
@@ -14,30 +14,41 @@ import { UploadUpdatedAction } from './upload-updated.action';
 
 export class BookmarksSyncAction implements Action<void, Promise<void>> {
 
+	private actions: Action<any, any>[];
 	private collection = RemoteCollection.bookmarks;
-	protected remoteMetaData: RemoteMetadata[] = [];
 
 	constructor(
 		protected localStorage: LocalStorageService,
 		protected remoteStorage: RemoteStorageService,
 		protected postService: PostService
-	) { }
+	) {
+
+		const remoteMetadata: MetadataList = new MetadataList();
+		this.actions = [
+
+			new CheckConflictsAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
+			new UploadNewAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
+			new DownloadIdsAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
+			new DownloadNewAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
+			new UploadDeletedAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
+			new DownloadDeletedAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
+			new UploadUpdatedAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
+			new DownloadUpdatedAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
+
+			// bookmarks related
+			new UploadClicksAction(this.localStorage, this.remoteStorage, this.postService, this.collection),
+			new DownloadClicksAction(this.localStorage, this.remoteStorage, this.postService, this.collection)
+
+		]
+
+	}
 
 	async execute(): Promise<void> {
 
 		try {
 
-			// order is important
-			await new CheckConflictsAction(this.localStorage).execute();
-			await new UploadNewAction(this.localStorage, this.remoteStorage, this.postService, this.collection).execute();
-			const remoteMetadata = await new DownloadIdsAction(this.remoteStorage, this.postService, this.collection).execute();
-			await new DownloadNewAction(this.localStorage, this.remoteStorage, this.postService, this.collection).execute(remoteMetadata);
-			await new UploadDeletedAction(this.localStorage, this.remoteStorage, this.postService, this.collection).execute(remoteMetadata);
-			await new DownloadDeletedAction(this.localStorage, this.postService, this.collection).execute(remoteMetadata);
-			await new UploadUpdatedAction(this.localStorage, this.remoteStorage, this.postService, this.collection).execute(remoteMetadata);
-			await new DownloadUpdatedAction(this.localStorage, this.remoteStorage, this.postService, this.collection).execute(remoteMetadata);
-			await new UploadClicksAction(this.localStorage, this.remoteStorage, this.postService, this.collection).execute();
-			await new DownloadClicksAction(this.localStorage, this.remoteStorage, this.postService, this.collection).execute();
+			for (const action of this.actions)
+				await action.execute();
 
 		} catch (error) {
 

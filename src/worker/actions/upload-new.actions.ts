@@ -1,14 +1,8 @@
-import { Action, Bookmark, LocalStorageService, RemoteCollection, RemoteData, RemoteStorageService, UUID } from "lib";
-import { FatalError, PostService } from "worker/utils";
+import { Bookmark, RemoteData, UUID } from "lib";
+import { FatalError } from "worker/utils";
+import { BaseAction } from "./base.action";
 
-export class UploadNewAction implements Action<void, Promise<void>> {
-
-	constructor(
-		private localStorage: LocalStorageService,
-		private remoteStorage: RemoteStorageService,
-		private postService: PostService,
-		private collection: RemoteCollection
-	) { }
+export class UploadNewAction extends BaseAction {
 
 	async execute(): Promise<void> {
 

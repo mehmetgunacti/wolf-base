@@ -1,21 +1,15 @@
-import { Action, LocalStorageService, RemoteCollection, RemoteStorageService, SyncData } from "lib";
-import { FatalError, MetadataList, PostService } from "worker/utils";
+import { SyncData } from "lib";
+import { FatalError } from "worker/utils";
+import { BaseAction } from "./base.action";
 
-export class DownloadUpdatedAction implements Action<MetadataList, Promise<void>> {
+export class DownloadUpdatedAction extends BaseAction {
 
-	constructor(
-		private localStorage: LocalStorageService,
-		private remoteStorage: RemoteStorageService,
-		private postService: PostService,
-		private collection: RemoteCollection
-	) { }
-
-	async execute(remoteMetadata: MetadataList): Promise<void> {
+	async execute(): Promise<void> {
 
 		// todo recheck this logic
 		this.postService.header(this.collection, `Finding remotely updated items`);
 
-		const items: SyncData[] = await this.localStorage.bookmarks.filterUpdated(remoteMetadata.getList());
+		const items: SyncData[] = await this.localStorage.bookmarks.filterUpdated(this.remoteMetadata.getList());
 
 		// return if none
 		if (items.length === 0) {

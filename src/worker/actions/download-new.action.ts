@@ -1,20 +1,14 @@
-import { Action, LocalStorageService, RemoteCollection, RemoteMetadata, RemoteStorageService, SyncData } from "lib";
-import { FatalError, MetadataList, PostService } from "worker/utils";
+import { SyncData } from "lib";
+import { FatalError } from "worker/utils";
+import { BaseAction } from "./base.action";
 
-export class DownloadNewAction implements Action<MetadataList, Promise<void>> {
+export class DownloadNewAction extends BaseAction {
 
-	constructor(
-		private localStorage: LocalStorageService,
-		private remoteStorage: RemoteStorageService,
-		private postService: PostService,
-		private collection: RemoteCollection
-	) { }
-
-	async execute(remoteMetaData: MetadataList): Promise<void> {
+	async execute(): Promise<void> {
 
 		this.postService.header(this.collection, `Finding new items to be downloaded`);
 
-		const newIds: SyncData[] = await this.localStorage.bookmarks.filterNew(remoteMetaData.getList());
+		const newIds: SyncData[] = await this.localStorage.bookmarks.filterNew(this.remoteMetadata.getList());
 
 		// return if none
 		if (newIds.length === 0) {
