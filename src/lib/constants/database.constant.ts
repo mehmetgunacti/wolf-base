@@ -3,7 +3,7 @@ export enum WolfBaseTableName {
 	bookmarks = 'bookmarks',
 	bookmarks_sync = 'bookmarks_sync',
 	bookmarks_trash = 'bookmarks_trash',
-	clicks = 'clicks',
+	bookmarks_clicks = 'bookmarks_clicks',
 	configuration = 'configuration',
 
 }

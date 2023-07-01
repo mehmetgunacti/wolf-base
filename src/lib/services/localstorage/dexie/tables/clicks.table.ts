@@ -44,7 +44,7 @@ export class ClicksTableImpl implements ClicksTable {
 
 	async putAll(items: Click[]): Promise<void> {
 
-		await this.db.transaction('rw', WolfBaseTableName.clicks, async () => {
+		await this.db.transaction('rw', WolfBaseTableName.bookmarks_clicks, async () => {
 
 			await this.db.clicks.clear();
 			await this.db.clicks.bulkAdd(items);

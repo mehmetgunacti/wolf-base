@@ -18,11 +18,16 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 	return new WolfBaseDB({
 		dbName: 'WolfBaseDB',
 		tables: {
+
+			// bookmarks
 			bookmarks: 'id, *tags, clicks',
 			bookmarks_sync: 'id',
 			bookmarks_trash: 'id',
-			clicks: 'id, current',
+			bookmarks_clicks: 'id, current',
+
+			// configuration
 			configuration: ''
+
 		},
 		version: 1
 	});
@@ -46,7 +51,7 @@ export class WolfBaseDB extends Dexie {
 		this.bookmarks = this.table(WolfBaseTableName.bookmarks);
 		this.bookmarks_sync = this.table(WolfBaseTableName.bookmarks_sync);
 		this.bookmarks_trash = this.table(WolfBaseTableName.bookmarks_trash);
-		this.clicks = this.table(WolfBaseTableName.clicks);
+		this.clicks = this.table(WolfBaseTableName.bookmarks_clicks);
 		this.configuration = this.table(WolfBaseTableName.configuration);
 
 		this.on('populate', () => {

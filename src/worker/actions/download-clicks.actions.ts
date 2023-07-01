@@ -1,4 +1,4 @@
-import { Action, LocalStorageService, RemoteCollection, RemoteStorageService } from "lib";
+import { Action, Click, LocalStorageService, RemoteCollection, RemoteStorageService } from "lib";
 import { PostService } from "worker/utils";
 
 export class DownloadClicksAction implements Action<void, Promise<void>> {
@@ -13,21 +13,21 @@ export class DownloadClicksAction implements Action<void, Promise<void>> {
 	async execute(): Promise<void> {
 
 		// todo recheck this logic
-		await this.postService.header(this.collection, `Downloading bookmark click numbers`);
+		await this.postService.header(this.collection, `Downloading all bookmark click numbers`);
 
-		const items = await this.remoteStorage.clicks.downloadMany();
+		const clicks: Click[] = await this.remoteStorage.clicks.downloadMany();
 
 		// return if none
-		if (items.length === 0) {
+		if (clicks.length === 0) {
 
-			await this.postService.message(this.collection, `no clicked bookmarks`);
+			await this.postService.message(this.collection, `no bookmark click data on server`);
 			return;
 
 		}
 
-		await this.postService.header(this.collection, `${items.length} clicked bookmarks`, false);
-		await this.localStorage.clicks.putAll(items);
-		await this.postService.header(this.collection, `${items.length} clicked bookmark numbers downloaded`, false);
+		await this.postService.header(this.collection, `saving ${clicks.length} bookmark click data`, false);
+		await this.localStorage.clicks.putAll(clicks);
+		await this.postService.header(this.collection, `${clicks.length} bookmark click data saved`, false);
 
 	}
 
