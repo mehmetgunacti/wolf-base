@@ -1,14 +1,13 @@
-import { MetadataList } from "worker/utils";
 import { BaseAction } from "./base.action";
 
 export class DownloadIdsAction extends BaseAction {
 
-	async execute(): Promise<MetadataList> {
+	async execute(): Promise<void> {
 
 		this.postService.message(this.collection, `downloading Ids..`);
-		const remoteMetaData = await this.remoteStorage.bookmarks.downloadIds();
-		this.postService.message(this.collection, `${remoteMetaData.length} Ids downloaded`);
-		return new MetadataList(remoteMetaData);
+		const remoteIds = await this.remoteStorage.bookmarks.downloadIds();
+		this.remoteMetadata.replace(remoteIds);
+		this.postService.message(this.collection, `${remoteIds.length} Ids downloaded`);
 
 	}
 

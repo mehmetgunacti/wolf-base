@@ -2,7 +2,7 @@ import { Action, LocalStorageService, RemoteStorageService } from 'lib';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { MetadataList, PostService } from 'worker/utils';
 
-export abstract class BaseAction implements Action<any, Promise<any>> {
+export abstract class BaseAction implements Action<any, Promise<void>> {
 
 	constructor(
 		protected localStorage: LocalStorageService,
@@ -12,7 +12,7 @@ export abstract class BaseAction implements Action<any, Promise<any>> {
 		protected remoteMetadata: MetadataList
 	) { }
 
-	abstract execute(): Promise<any>;
+	abstract execute(): Promise<void>;
 
 }
 
