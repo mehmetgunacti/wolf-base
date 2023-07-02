@@ -58,8 +58,12 @@ export class BookmarksSyncAction implements Action<void, Promise<void>> {
 			else if (error instanceof FatalError)
 				await this.postService.message(this.collection, `Fatal error!`);
 
-			else
+			else {
+				const e = error as Error;
+				console.error(error);
+				await this.postService.message(this.collection, `${e.message}`);
 				throw error;
+			}
 
 		}
 

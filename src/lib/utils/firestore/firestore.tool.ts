@@ -194,11 +194,13 @@ class FirestoreTool implements Firestore {
 
 	private parseFields<T>(fields: Record<keyof T, FIRESTORE_VALUE>): T {
 
+		console.log(fields);
 		const result: T = {} as T;
 		for (const key in fields) {
-			const field = fields[key];
 
+			const field = fields[key];
 			result[key as keyof T] = this.parseField(field) as T[keyof T];
+
 		}
 		return result;
 
@@ -206,14 +208,15 @@ class FirestoreTool implements Firestore {
 
 	private parseField<T extends string | number | boolean | null>(field: FIRESTORE_VALUE): T {
 
+		// Note: some return values might have to be adjusted according to type, e.g. return Number(field. ..) etc
 		if (FIRESTORE_TYPE.stringValue in field)
 			return field.stringValue as T;
 
 		if (FIRESTORE_TYPE.integerValue in field)
-			return field.integerValue as T;
+			return Number(field.integerValue) as T;
 
 		if (FIRESTORE_TYPE.doubleValue in field)
-			return field.doubleValue as T;
+			return Number(field.doubleValue) as T;
 
 		if (FIRESTORE_TYPE.booleanValue in field)
 			return field.booleanValue as T;
