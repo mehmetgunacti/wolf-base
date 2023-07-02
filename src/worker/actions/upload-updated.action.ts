@@ -36,8 +36,8 @@ export class UploadUpdatedAction extends BaseAction {
 			const remoteItem = remoteMetadata.find(s => s.id === item.id);
 			if (!remoteItem) {
 
-				await this.postService.message(this.collection, `Conflict: ['${item.id}']`);
-				await this.localStorage.bookmarks.markConflict(item.id);
+				await this.postService.message(this.collection, `Error: ['${item.id}']`);
+				await this.localStorage.bookmarks.markError(item.id);
 				continue;
 
 			}
@@ -45,8 +45,8 @@ export class UploadUpdatedAction extends BaseAction {
 			const localItem = await this.localStorage.bookmarks.get(item.id);
 			if (!localItem) {
 
-				await this.postService.message(this.collection, `Conflict: ['${item.id}']`);
-				await this.localStorage.bookmarks.markConflict(item.id);
+				await this.postService.message(this.collection, `Error: ['${item.id}']`);
+				await this.localStorage.bookmarks.markError(item.id);
 				continue;
 
 			}
@@ -60,9 +60,9 @@ export class UploadUpdatedAction extends BaseAction {
 
 			}
 
-			// else mark conflict
-			await this.postService.message(this.collection, `Conflict: ['${localItem.id}', '${localItem.name}']`);
-			await this.localStorage.bookmarks.markConflict(item.id);
+			// else mark error
+			await this.postService.message(this.collection, `Error: ['${localItem.id}', '${localItem.name}']`);
+			await this.localStorage.bookmarks.markError(item.id);
 
 		}
 

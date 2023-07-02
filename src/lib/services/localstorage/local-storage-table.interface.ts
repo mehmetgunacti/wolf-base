@@ -12,7 +12,7 @@ export interface EntityTable<T extends Entity> {
 	create(item: Partial<T>): Promise<T>;
 	put(item: RemoteData<T>): Promise<void>;
 	update(id: UUID, item: Partial<T>): Promise<T>;
-	markConflict(id: UUID): Promise<void>;
+	markError(id: UUID): Promise<void>;
 
 	list(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; }): Promise<T[]>;
 	listIds(): Promise<UUID[]>;
@@ -21,7 +21,7 @@ export interface EntityTable<T extends Entity> {
 	listSyncData(): Promise<SyncData[]>;
 
 	listNewIds(): Promise<UUID[]>;
-	listConflicts(): Promise<SyncData[]>;
+	listErrors(): Promise<SyncData[]>;
 	listUpdated(): Promise<SyncData[]>;
 
 	moveToTrash(id: UUID): Promise<void>;

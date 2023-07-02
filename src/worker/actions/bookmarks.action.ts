@@ -1,7 +1,7 @@
 import { Action, LocalStorageService, RemoteStorageService } from 'lib';
 import { RemoteCollection } from 'lib/constants/remote.constant';
-import { ConflictDetectedError, FatalError, MetadataList, PostService } from 'worker/utils';
-import { CheckConflictsAction } from './check-conflict.action';
+import { ErrorDetected, FatalError, MetadataList, PostService } from 'worker/utils';
+import { CheckErrorsAction } from './check-errors.action';
 import { DownloadClicksAction } from './download-clicks.actions';
 import { DownloadDeletedAction } from './download-deleted.action';
 import { DownloadIdsAction } from './download-ids.action';
@@ -26,7 +26,7 @@ export class BookmarksSyncAction implements Action<void, Promise<void>> {
 		const remoteMetadata: MetadataList = new MetadataList();
 		this.actions = [
 
-			new CheckConflictsAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
+			new CheckErrorsAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
 			new UploadNewAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
 			new DownloadIdsAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
 			new DownloadNewAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
@@ -52,8 +52,8 @@ export class BookmarksSyncAction implements Action<void, Promise<void>> {
 
 		} catch (error) {
 
-			if (error instanceof ConflictDetectedError)
-				await this.postService.message(this.collection, `${error.count} conflicts detected!`);
+			if (error instanceof ErrorDetected)
+				await this.postService.message(this.collection, `${error.count} errors!`);
 
 			else if (error instanceof FatalError)
 				await this.postService.message(this.collection, `Fatal error!`);

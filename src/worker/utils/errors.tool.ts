@@ -1,8 +1,8 @@
-export class ConflictDetectedError extends Error {
+export class ErrorDetected extends Error {
 
 	constructor(public count: number) {
-		super('Conflicts detected');
-		this.name = 'ConflictDetectedError';
+		super('Errors detected');
+		this.name = 'ErrorDetected';
 	}
 
 }

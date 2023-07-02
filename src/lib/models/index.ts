@@ -1,7 +1,6 @@
 export * from './action.model';
 export * from './bookmark.model';
 export * from './configuration.model';
-export * from './conflict.model';
 export * from './database.model';
 export * from './entity.model';
 export * from './id-base.model';

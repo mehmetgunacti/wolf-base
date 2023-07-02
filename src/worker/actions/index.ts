@@ -1,6 +1,6 @@
 export * from './base.action';
 export * from './bookmarks.action';
-export * from './check-conflict.action';
+export * from './check-errors.action';
 export * from './download-clicks.actions';
 export * from './download-deleted.action';
 export * from './download-ids.action';

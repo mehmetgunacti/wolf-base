@@ -14,6 +14,6 @@ export interface SyncData extends Metadata {
 
 	updated: boolean;
 	deleted: boolean;
-	conflict: boolean;
+	error: boolean;
 
 }

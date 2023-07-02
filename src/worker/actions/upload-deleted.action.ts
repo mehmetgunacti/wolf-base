@@ -63,9 +63,9 @@ export class UploadDeletedAction extends BaseAction {
 
 			}
 
-			// ... else mark conflict
-			await this.localStorage.bookmarks.markConflict(item.id);
-			await this.postService.message(this.collection, `Conflict: ['${item.id}', '${item.name}']`);
+			// ... else mark error
+			await this.localStorage.bookmarks.markError(item.id);
+			await this.postService.message(this.collection, `Error: ['${item.id}', '${item.name}']`);
 
 		}
 

@@ -39,11 +39,11 @@ export class DownloadUpdatedAction extends BaseAction {
 			if (!localEntity)
 				throw new FatalError(`${localItem.id} not found in local table`);
 
-			// mark as conflict if local item is updated or deleted
+			// mark as error if local item is updated or deleted
 			if (localItem.updated || localItem.deleted) {
 
-				await this.postService.message(this.collection, `Conflict: ['${localEntity.id}', '${localEntity.name}']`);
-				await this.localStorage.bookmarks.markConflict(localEntity.id);
+				await this.postService.message(this.collection, `Error: ['${localEntity.id}', '${localEntity.name}']`);
+				await this.localStorage.bookmarks.markError(localEntity.id);
 				continue;
 
 			}

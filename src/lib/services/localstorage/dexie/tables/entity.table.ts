@@ -61,7 +61,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 				updateTime,
 				updated: false,
 				deleted: false,
-				conflict: false
+				error: false
 
 			});
 
@@ -69,9 +69,9 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async markConflict(id: string): Promise<void> {
+	async markError(id: string): Promise<void> {
 
-		await this.db.table<T>(this.tablename).where({ id }).modify({ _conflict: true } as Partial<Entity>);
+		await this.db.table<T>(this.tablename + '_sync').where({ id }).modify({ error: true } as Partial<Entity>);
 
 	}
 
@@ -140,9 +140,9 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async listConflicts(): Promise<SyncData[]> {
+	async listErrors(): Promise<SyncData[]> {
 
-		return await this.db.table<SyncData>(this.tablename + '_sync').filter(s => s.conflict).toArray();
+		return await this.db.table<SyncData>(this.tablename + '_sync').filter(s => s.error).toArray();
 
 	}
 

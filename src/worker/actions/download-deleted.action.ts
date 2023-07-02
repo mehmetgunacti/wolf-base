@@ -34,8 +34,8 @@ export class DownloadDeletedAction extends BaseAction {
 
 			if (syncData.updated || syncData.deleted) {
 
-				await this.localStorage.bookmarks.markConflict(syncData.id);
-				await this.postService.message(this.collection, `Conflict: ['${syncData.id}']`);
+				await this.localStorage.bookmarks.markError(syncData.id);
+				await this.postService.message(this.collection, `Error: ['${syncData.id}']`);
 				continue;
 
 			}
