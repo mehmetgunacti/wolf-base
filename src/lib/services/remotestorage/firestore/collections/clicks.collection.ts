@@ -11,7 +11,7 @@ export class ClicksFirestoreCollection implements ClicksCollection {
 	protected apiKey = environment.firebase.apiKey;
 	protected baseURL = environment.firebase.baseURL;
 	protected projectId = environment.firebase.projectId;
-	protected remoteCollection = RemoteCollection.clicks;
+	protected remoteCollection = RemoteCollection.bookmarks_clicks;
 	protected pageSize = '10000';
 
 	constructor(private firestore: Firestore) { }
@@ -22,7 +22,7 @@ export class ClicksFirestoreCollection implements ClicksCollection {
 			this.baseURL,
 			this.projectId,
 			this.apiKey,
-			RemoteCollection.clicks,
+			RemoteCollection.bookmarks_clicks,
 			id,
 			'clicks',
 			':commit',

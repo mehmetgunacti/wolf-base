@@ -23,7 +23,7 @@ export class BookmarksFirestoreCollection extends FirestoreCollection<Bookmark> 
 			this.baseURL,
 			this.projectId,
 			this.apiKey,
-			RemoteCollection.clicks,
+			RemoteCollection.bookmarks_clicks,
 			id,
 			'clicks',
 			':commit',

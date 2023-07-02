@@ -1,6 +1,6 @@
 export enum RemoteCollection {
 
 	bookmarks = 'bookmarks',
-	clicks = 'clicks'
+	bookmarks_clicks = 'bookmarks_clicks'
 
 }
