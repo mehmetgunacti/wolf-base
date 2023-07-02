@@ -3,11 +3,12 @@ import { PostService } from "worker/utils";
 
 export class UploadClicksAction implements Action<void, Promise<void>> {
 
+	private collection: RemoteCollection = RemoteCollection.bookmarks_clicks;
+
 	constructor(
 		private localStorage: LocalStorageService,
 		private remoteStorage: RemoteStorageService,
-		private postService: PostService,
-		private collection: RemoteCollection
+		private postService: PostService
 	) { }
 
 	async execute(): Promise<void> {

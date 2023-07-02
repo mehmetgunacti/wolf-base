@@ -36,8 +36,8 @@ export class BookmarksSyncAction implements Action<void, Promise<void>> {
 			new DownloadUpdatedAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
 
 			// bookmarks related
-			new UploadClicksAction(this.localStorage, this.remoteStorage, this.postService, this.collection),
-			new DownloadClicksAction(this.localStorage, this.remoteStorage, this.postService, this.collection)
+			new UploadClicksAction(this.localStorage, this.remoteStorage, this.postService),
+			new DownloadClicksAction(this.localStorage, this.remoteStorage, this.postService)
 
 		]
 
