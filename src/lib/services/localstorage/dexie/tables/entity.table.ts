@@ -38,9 +38,12 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 		const localData: T | undefined = await this.get(id);
 		if (!localData)
-			throw new Error(`No data with id ${id} found.`);
+		throw new Error(`No data with id ${id} found.`);
 
-		await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item, _updated: true });
+		const count = await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item, _updated: true });
+		if (count !== 1)
+			throw new Error(`Could not update syncData with id ${id} (update count: ${count})`);
+
 		return await this.get(id) ?? {} as T;
 
 	}
