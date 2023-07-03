@@ -1,4 +1,4 @@
-import { SyncData } from "lib";
+import { Metadata } from "lib";
 import { FatalError } from "worker/utils";
 import { BaseAction } from "./base.action";
 
@@ -8,7 +8,7 @@ export class DownloadNewAction extends BaseAction {
 
 		await this.postService.header(this.collection, `Finding new items to be downloaded`);
 
-		const newIds: SyncData[] = await this.localStorage.bookmarks.filterNew(this.remoteMetadata.getList());
+		const newIds: Metadata[] = await this.localStorage.bookmarks.filterNew(this.remoteMetadata.getList());
 
 		// return if none
 		if (newIds.length === 0) {
@@ -25,7 +25,7 @@ export class DownloadNewAction extends BaseAction {
 
 	}
 
-	private async downloadNewItems(newIds: SyncData[]): Promise<void> {
+	private async downloadNewItems(newIds: Metadata[]): Promise<void> {
 
 		for (const [idx, entity] of newIds.entries()) {
 

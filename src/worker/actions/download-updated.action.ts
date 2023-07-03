@@ -1,4 +1,4 @@
-import { SyncData } from "lib";
+import { Metadata } from "lib";
 import { FatalError } from "worker/utils";
 import { BaseAction } from "./base.action";
 
@@ -9,7 +9,7 @@ export class DownloadUpdatedAction extends BaseAction {
 		// todo recheck this logic
 		await this.postService.header(this.collection, `Finding remotely updated items`);
 
-		const items: SyncData[] = await this.localStorage.bookmarks.filterUpdated(this.remoteMetadata.getList());
+		const items: Metadata[] = await this.localStorage.bookmarks.filterUpdated(this.remoteMetadata.getList());
 
 		// return if none
 		if (items.length === 0) {
@@ -25,7 +25,7 @@ export class DownloadUpdatedAction extends BaseAction {
 
 	}
 
-	private async downloadUpdatedItems(items: SyncData[]): Promise<void> {
+	private async downloadUpdatedItems(items: Metadata[]): Promise<void> {
 
 		for (const [idx, item] of items.entries()) {
 

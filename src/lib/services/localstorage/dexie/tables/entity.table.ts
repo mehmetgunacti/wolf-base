@@ -2,7 +2,7 @@ import { Collection, IndexableType, Table } from 'dexie';
 import { UUID } from 'lib/constants/common.constant';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { RemoteData, SyncData } from 'lib/models';
-import { Entity } from 'lib/models/entity.model';
+import { Entity, Metadata } from 'lib/models/entity.model';
 import { isNewer } from 'lib/utils';
 import { EntityTable } from '../../local-storage-table.interface';
 import { WolfBaseDB } from '../wolfbase.database';
@@ -168,7 +168,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async filterNew(entities: SyncData[]): Promise<SyncData[]> {
+	async filterNew(entities: Metadata[]): Promise<Metadata[]> {
 
 		// create a Map of all ids from ..._sync table
 		const local: SyncData[] = await this.db.table<SyncData>(this.tablename + '_sync').toArray();
@@ -179,7 +179,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async filterUpdated(remoteEntities: SyncData[]): Promise<SyncData[]> {
+	async filterUpdated(remoteEntities: Metadata[]): Promise<Metadata[]> {
 
 		// find remote entities with a newer 'updateTime'
 		const localMetaData = await this.listSyncData();
@@ -198,7 +198,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async filterDeleted(entities: SyncData[]): Promise<SyncData[]> {
+	async filterDeleted(entities: Metadata[]): Promise<SyncData[]> {
 
 		// set of remote ids
 		const set: Set<UUID> = new Set(entities.map(e => e.id));

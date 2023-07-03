@@ -51,5 +51,4 @@ export class DownloadDeletedAction extends BaseAction {
 
 	}
 
-
 }

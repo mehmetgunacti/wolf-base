@@ -29,8 +29,8 @@ export interface EntityTable<T extends Entity> {
 	deletePermanently(id: UUID): Promise<void>;
 
 	// todo eliminate these methods
-	filterNew(entities: Metadata[]): Promise<SyncData[]>;
-	filterUpdated(entities: Metadata[]): Promise<SyncData[]>;
+	filterNew(entities: Metadata[]): Promise<Metadata[]>;
+	filterUpdated(entities: Metadata[]): Promise<Metadata[]>;
 	filterDeleted(entities: Metadata[]): Promise<SyncData[]>;
 
 	search(term: string): Promise<T[]>;
