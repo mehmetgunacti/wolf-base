@@ -38,7 +38,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 		const localData: T | undefined = await this.get(id);
 		if (!localData)
-		throw new Error(`No data with id ${id} found.`);
+			throw new Error(`No data with id ${id} found.`);
 
 		const count = await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item, _updated: true });
 		if (count !== 1)
@@ -86,6 +86,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 			if (item) {
 
 				await this.db.table<T>(this.tablename + '_trash').put(item);
+				await this.db.table<T>(this.tablename + '_sync').where({ id }).modify({ deleted: true } as SyncData);
 				await this.db.table(this.tablename).delete(id);
 
 			}
