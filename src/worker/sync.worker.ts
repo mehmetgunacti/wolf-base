@@ -14,7 +14,7 @@ import { localStorageServiceFactory } from "lib/services/localstorage/dexie/fact
 import { LocalStorageService } from "lib/services/localstorage/local-storage-service.interface";
 import { remoteStorageServiceFactory } from "lib/services/remotestorage/firestore/factories";
 import { BookmarksSyncAction } from "./actions/bookmarks.action";
-import { PostService } from "./utils";
+import { PostService, PostServiceImpl } from "./utils";
 
 let isRunning = false;
 
@@ -42,7 +42,7 @@ function createActions(): Action<void, Promise<void>>[] {
 
 	const localStorage: LocalStorageService = localStorageServiceFactory();
 	const remoteStorage: RemoteStorageService = remoteStorageServiceFactory();
-	const postService: PostService = new PostService();
+	const postService: PostService = new PostServiceImpl();
 
 	// bookmarks
 	const bookmarks = new BookmarksSyncAction(localStorage, remoteStorage, postService);

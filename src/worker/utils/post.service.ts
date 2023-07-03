@@ -1,6 +1,13 @@
 import { RemoteCollection, SyncEvent, sleep } from "lib";
 
-export class PostService {
+export interface PostService {
+
+	message(collection: RemoteCollection, message: string, inProgress?: boolean): Promise<void>;
+	header(collection: RemoteCollection, message: string, decorate?: boolean): Promise<void>;
+
+}
+
+export class PostServiceImpl implements PostService {
 
 	async message(collection: RemoteCollection, message?: string, inProgress: boolean = true): Promise<void> {
 
@@ -22,6 +29,22 @@ export class PostService {
 		await this.message(collection, message);
 		if (decorate)
 			await this.message(collection, '**************************************************');
+
+	}
+
+}
+
+export class MockPostServiceImpl implements PostService {
+
+	message(collection: RemoteCollection, message: string, inProgress?: boolean | undefined): Promise<void> {
+		
+		return Promise.resolve();
+
+	}
+
+	header(collection: RemoteCollection, message: string, decorate: boolean): Promise<void> {
+		
+		return Promise.resolve();
 
 	}
 
