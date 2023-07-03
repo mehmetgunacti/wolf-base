@@ -38,12 +38,14 @@ export class MockPostServiceImpl implements PostService {
 
 	message(collection: RemoteCollection, message: string, inProgress?: boolean | undefined): Promise<void> {
 		
+		console.log(message);
 		return Promise.resolve();
 
 	}
 
 	header(collection: RemoteCollection, message: string, decorate: boolean): Promise<void> {
 		
+		console.log(message);
 		return Promise.resolve();
 
 	}

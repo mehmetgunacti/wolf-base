@@ -66,10 +66,12 @@ export class MockBookmarksFirestoreCollection implements BookmarksCollection {
 
 	upload(item: Bookmark): Promise<RemoteData<Bookmark>> {
 
+		const current = this.bookmarks.get(item.id);
+		const createTime = current ? current.metaData.createTime : new Date().toISOString();
 		const metadata: RemoteMetadata = {
 
 			id: item.id,
-			createTime: new Date().toISOString(),
+			createTime,
 			updateTime: new Date().toISOString(),
 
 		};

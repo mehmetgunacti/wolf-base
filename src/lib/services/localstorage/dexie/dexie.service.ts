@@ -1,6 +1,7 @@
 import { WolfBaseTableName } from '../../../constants/database.constant';
 import { LocalStorageService } from '../local-storage-service.interface';
 import { BookmarksTable, ClicksTable, ConfigurationTable } from '../local-storage-table.interface';
+import { MockBookmarksTableImpl, MockClicksTableImpl, MockConfigurationTableImpl } from './tables';
 import { WolfBaseDB } from './wolfbase.database';
 
 export class DexieLocalStorageService implements LocalStorageService {
@@ -35,5 +36,26 @@ export class DexieLocalStorageService implements LocalStorageService {
 		return result;
 
 	}
+
+}
+
+export class MockLocalStorageService implements LocalStorageService {
+
+	bookmarks: BookmarksTable = new MockBookmarksTableImpl();
+	clicks: ClicksTable = new MockClicksTableImpl();
+	configuration: ConfigurationTable = new MockConfigurationTableImpl();
+
+	drop(): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
+
+	clear(tablename: WolfBaseTableName): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
+
+	dump(tablename: WolfBaseTableName): Promise<Map<string, string>> {
+		throw new Error('Method not implemented.');
+	}
+	
 
 }

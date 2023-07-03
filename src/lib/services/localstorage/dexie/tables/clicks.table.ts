@@ -54,3 +54,45 @@ export class ClicksTableImpl implements ClicksTable {
 	}
 
 }
+
+export class MockClicksTableImpl implements ClicksTable {
+
+	private bookmarks_clicks: Map<string, Click> = new Map();
+
+	click(id: string): Promise<void> {
+
+		const click = this.bookmarks_clicks.get(id);
+		if (click) {
+
+			click.current += 1;
+			click.total += 1;
+
+		}
+		return Promise.resolve();
+
+	}
+
+	clicked(): Promise<Click[]> {
+
+		return Promise.resolve(
+			Array.from(this.bookmarks_clicks.values())
+		);
+
+	}
+
+	put(item: Click): Promise<void> {
+
+		this.bookmarks_clicks.set(item.id, item);
+		return Promise.resolve();
+
+	}
+
+	putAll(items: Click[]): Promise<void> {
+
+		for (const item of items)
+			this.bookmarks_clicks.set(item.id, item);
+		return Promise.resolve();
+
+	}
+
+}

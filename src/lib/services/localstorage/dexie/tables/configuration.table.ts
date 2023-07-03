@@ -72,3 +72,67 @@ export class ConfigurationTableImpl implements ConfigurationTable {
 	// }
 
 }
+
+export class MockConfigurationTableImpl implements ConfigurationTable {
+
+	private conf: Configuration = {
+
+		darkTheme: false,
+		sidebarVisible: false,
+		syncWorkerActive: false
+
+	}
+
+	getSyncWorkerActive(): Promise<boolean> {
+
+		return Promise.resolve(this.conf.syncWorkerActive);
+
+	}
+
+	getSidebarVisible(): Promise<boolean> {
+
+		return Promise.resolve(this.conf.sidebarVisible);
+
+	}
+
+	isDarkTheme(): Promise<boolean> {
+
+		return Promise.resolve(this.conf.darkTheme);
+
+	}
+
+	setSyncWorkerActive(active: boolean): Promise<void> {
+
+		this.conf.syncWorkerActive = active;
+		return Promise.resolve();
+
+	}
+
+	setSidebarVisible(visible: boolean): Promise<void> {
+
+		this.conf.sidebarVisible = visible;
+		return Promise.resolve();
+
+	}
+
+	setDarkTheme(dark: boolean): Promise<void> {
+
+		this.conf.darkTheme = dark;
+		return Promise.resolve();
+
+	}
+
+	toggleTheme(): Promise<void> {
+
+		this.conf.darkTheme = !this.conf.darkTheme;
+		return Promise.resolve();
+
+	}
+
+	dump(): Promise<Configuration> {
+		
+		return Promise.resolve(this.conf);
+
+	}
+
+}

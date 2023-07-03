@@ -63,3 +63,32 @@ export class ClicksFirestoreCollection implements ClicksCollection {
 
 
 }
+
+export class MockClicksFirestoreCollection implements ClicksCollection {
+
+	private clicks: Map<string, number> = new Map();
+
+	increase(id: string, amount: number): Promise<number> {
+
+		let current = this.clicks.get(id) ?? 0;
+		current += amount;
+		this.clicks.set(id, current);
+		return Promise.resolve(current);
+
+	}
+
+	downloadMany(): Promise<Click[]> {
+
+		return Promise.resolve(
+			Array.from(this.clicks.entries()).map(current => ({
+
+				id: current[0],
+				current: current[1],
+				total: 0
+
+			} as Click))
+		);
+
+	}
+
+}
