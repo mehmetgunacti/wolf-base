@@ -43,7 +43,7 @@ export class DownloadUpdatedAction extends BaseAction {
 			if (localItem.updated || localItem.deleted) {
 
 				await this.postService.message(this.collection, `Error: ['${localEntity.id}', '${localEntity.name}']`);
-				await this.localStorage.bookmarks.markError(localEntity.id);
+				await this.localStorage.bookmarks.markError(localEntity.id, `${localItem.id} is marked 'updated' or 'deleted'`);
 				continue;
 
 			}

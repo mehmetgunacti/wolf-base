@@ -64,7 +64,7 @@ export class UploadDeletedAction extends BaseAction {
 			}
 
 			// ... else mark error
-			await this.localStorage.bookmarks.markError(item.id);
+			await this.localStorage.bookmarks.markError(item.id, `${item.id}: timestamps do not match [${remoteSyncData.updateTime} and ${localSyncData.updateTime}]`);
 			await this.postService.message(this.collection, `Error: ['${item.id}', '${item.name}']`);
 
 		}

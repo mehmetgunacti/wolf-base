@@ -21,7 +21,7 @@ export class UploadUpdatedAction extends BaseAction {
 
 		// upload new items
 		await this.postService.header(this.collection, `${items.length} updated items to be uploaded`, false);
-		await this.uploadUpdatedItems(this.remoteMetadata ,items);
+		await this.uploadUpdatedItems(this.remoteMetadata, items);
 		await this.postService.header(this.collection, `uploaded ${items.length} updated items`, false);
 
 	}
@@ -37,7 +37,7 @@ export class UploadUpdatedAction extends BaseAction {
 			if (!remoteItem) {
 
 				await this.postService.message(this.collection, `Error: ['${item.id}']`);
-				await this.localStorage.bookmarks.markError(item.id);
+				await this.localStorage.bookmarks.markError(item.id, `id ${item.id} is not in previously downloaded remote items list`);
 				continue;
 
 			}
@@ -46,7 +46,7 @@ export class UploadUpdatedAction extends BaseAction {
 			if (!localItem) {
 
 				await this.postService.message(this.collection, `Error: ['${item.id}']`);
-				await this.localStorage.bookmarks.markError(item.id);
+				await this.localStorage.bookmarks.markError(item.id, `${item.id} is not in local storage table items list`);
 				continue;
 
 			}
@@ -62,7 +62,7 @@ export class UploadUpdatedAction extends BaseAction {
 
 			// else mark error
 			await this.postService.message(this.collection, `Error: ['${localItem.id}', '${localItem.name}']`);
-			await this.localStorage.bookmarks.markError(item.id);
+			await this.localStorage.bookmarks.markError(item.id, `${item.id}: timestamps do not match [${remoteItem.updateTime} and ${item.updateTime}]`);
 
 		}
 

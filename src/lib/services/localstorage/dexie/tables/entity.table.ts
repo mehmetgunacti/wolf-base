@@ -61,7 +61,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 				updateTime,
 				updated: false,
 				deleted: false,
-				error: false
+				error: null
 
 			});
 
@@ -69,13 +69,13 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async markError(id: string): Promise<void> {
+	async markError(id: UUID, error: string): Promise<void> {
 
-		await this.db.table<T>(this.tablename + '_sync').where({ id }).modify({ error: true } as Partial<Entity>);
+		await this.db.table<T>(this.tablename + '_sync').where({ id }).modify({ error } as Partial<Entity>);
 
 	}
 
-	async moveToTrash(id: string): Promise<void> {
+	async moveToTrash(id: UUID): Promise<void> {
 
 		await this.db.transaction('rw', this.db.bookmarks, this.db.bookmarks_trash, async () => {
 
@@ -142,7 +142,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async listErrors(): Promise<SyncData[]> {
 
-		return await this.db.table<SyncData>(this.tablename + '_sync').filter(s => s.error).toArray();
+		return await this.db.table<SyncData>(this.tablename + '_sync').filter(s => !!s.error).toArray();
 
 	}
 
