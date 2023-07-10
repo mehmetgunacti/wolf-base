@@ -46,7 +46,7 @@ export class UploadUpdatedAction extends BaseAction {
 			if (!localItem) {
 
 				await this.postService.message(this.collection, `Error: ['${item.id}']`);
-				await this.localStorage.bookmarks.markError(item.id, `${item.id} is not in local storage table items list`);
+				await this.localStorage.bookmarks.markError(item.id, `${item.id} is not in local storage table`);
 				continue;
 
 			}
