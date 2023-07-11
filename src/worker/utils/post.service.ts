@@ -43,9 +43,14 @@ export class MockPostServiceImpl implements PostService {
 
 	}
 
-	header(collection: RemoteCollection, message: string, decorate: boolean): Promise<void> {
+	header(collection: RemoteCollection, message: string, decorate: boolean = true): Promise<void> {
 		
-		console.log(message);
+		this.message(collection, ' ');
+		if (decorate)
+			this.message(collection, '**************************************************');
+		this.message(collection, message);
+		if (decorate)
+			this.message(collection, '**************************************************');
 		return Promise.resolve();
 
 	}
