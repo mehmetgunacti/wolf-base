@@ -1,5 +1,4 @@
 import { SyncData } from "lib";
-import { MetadataList } from "worker/utils";
 import { BaseAction } from "./base.action";
 
 export class UploadUpdatedAction extends BaseAction {
@@ -21,23 +20,24 @@ export class UploadUpdatedAction extends BaseAction {
 
 		// upload new items
 		await this.postService.header(this.collection, `${items.length} updated items to be uploaded`, false);
-		await this.uploadUpdatedItems(this.remoteMetadata, items);
+		await this.uploadUpdatedItems(items);
 		await this.postService.header(this.collection, `uploaded ${items.length} updated items`, false);
 
 	}
 
-	private async uploadUpdatedItems(remoteMetadata: MetadataList, items: SyncData[]): Promise<void> {
+	private async uploadUpdatedItems(items: SyncData[]): Promise<void> {
 
 		for (const [idx, item] of items.entries()) {
 
 			await this.postService.header(this.collection, `${idx + 1} / ${items.length}: checking updated item ['${item.id}']`, false);
 
 			// item.id should be in previously downloaded remote items list
-			const remoteItem = remoteMetadata.find(s => s.id === item.id);
+			const remoteItem = this.remoteMetadata.get(item.id);
 			if (!remoteItem) {
 
-				await this.postService.message(this.collection, `Error: ['${item.id}']`);
-				await this.localStorage.bookmarks.markError(item.id, `id ${item.id} is not in previously downloaded remote items list`);
+				const error = `Updated item [${item.id}] cannot be uploaded: id ${item.id} is not in previously downloaded remote items list`;
+				await this.postService.message(this.collection, error);
+				await this.localStorage.bookmarks.markError(item.id, error);
 				continue;
 
 			}
@@ -45,8 +45,9 @@ export class UploadUpdatedAction extends BaseAction {
 			const localItem = await this.localStorage.bookmarks.get(item.id);
 			if (!localItem) {
 
-				await this.postService.message(this.collection, `Error: ['${item.id}']`);
-				await this.localStorage.bookmarks.markError(item.id, `${item.id} is not in local storage table`);
+				const error = `Updated item [${item.id}] cannot be uploaded: ${item.id} is not in local storage table`;
+				await this.postService.message(this.collection, error);
+				await this.localStorage.bookmarks.markError(item.id, error);
 				continue;
 
 			}
@@ -57,12 +58,15 @@ export class UploadUpdatedAction extends BaseAction {
 				await this.postService.message(this.collection, `uploading ['${localItem.id}', '${localItem.name}']`);
 				const uploaded = await this.remoteStorage.bookmarks.upload(localItem);
 				await this.localStorage.bookmarks.put(uploaded);
+				this.remoteMetadata.set(uploaded.metaData);
+				continue;
 
 			}
 
 			// else mark error
-			await this.postService.message(this.collection, `Error: ['${localItem.id}', '${localItem.name}']`);
-			await this.localStorage.bookmarks.markError(item.id, `${item.id}: timestamps do not match [${remoteItem.updateTime} and ${item.updateTime}]`);
+			const error = `Updated item [${item.id}] cannot be uploaded: timestamps do not match [${remoteItem.updateTime} and ${item.updateTime}]`;
+			await this.postService.message(this.collection, error);
+			await this.localStorage.bookmarks.markError(item.id, error);
 
 		}
 

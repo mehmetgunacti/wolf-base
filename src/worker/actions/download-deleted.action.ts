@@ -9,7 +9,7 @@ export class DownloadDeletedAction extends BaseAction {
 		await this.postService.header(this.collection, `Downloading deleted items info`);
 
 		// read all new items
-		const syncData: SyncData[] = await this.localStorage.bookmarks.filterDeleted(this.remoteMetadata.getList());
+		const syncData: SyncData[] = await this.localStorage.bookmarks.filterDeleted(this.remoteMetadata.getItems());
 
 		// return if none
 		if (syncData.length === 0) {
@@ -34,8 +34,9 @@ export class DownloadDeletedAction extends BaseAction {
 
 			if (syncData.updated || syncData.deleted) {
 
-				await this.localStorage.bookmarks.markError(syncData.id, `${syncData.id} is marked 'updated' or 'deleted'`);
-				await this.postService.message(this.collection, `Error: ['${syncData.id}']`);
+				const error = `Remotely deleted item [${syncData.id}] cannot be downloaded. Local item is marked 'updated' or 'deleted'`;
+				await this.localStorage.bookmarks.markError(syncData.id, error);
+				await this.postService.message(this.collection, error);
 				continue;
 
 			}

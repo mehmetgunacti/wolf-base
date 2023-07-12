@@ -67,7 +67,16 @@ export class MockClicksTableImpl implements ClicksTable {
 			click.current += 1;
 			click.total += 1;
 
-		}
+		} else
+
+			this.bookmarks_clicks.set(id, {
+
+				id,
+				current: 1,
+				total: 1
+
+			});
+
 		return Promise.resolve();
 
 	}

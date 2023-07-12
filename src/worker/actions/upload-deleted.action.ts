@@ -1,4 +1,4 @@
-import { Bookmark, RemoteMetadata } from "lib";
+import { Bookmark } from "lib";
 import { BaseAction } from "./base.action";
 
 export class UploadDeletedAction extends BaseAction {
@@ -20,12 +20,12 @@ export class UploadDeletedAction extends BaseAction {
 
 		// upload deleted items
 		await this.postService.header(this.collection, `${items.length} deleted items to be uploaded`, false);
-		await this.uploadDeletedItems(this.remoteMetadata.getList(), items);
+		await this.uploadDeletedItems(items);
 		await this.postService.header(this.collection, `${items.length} deleted items done`, false);
 
 	}
 
-	private async uploadDeletedItems(remoteMetaData: RemoteMetadata[], items: Bookmark[]): Promise<void> {
+	private async uploadDeletedItems(items: Bookmark[]): Promise<void> {
 
 		for (const [idx, item] of items.entries()) {
 
@@ -35,15 +35,17 @@ export class UploadDeletedAction extends BaseAction {
 			const localSyncData = await this.localStorage.bookmarks.getSyncData(item.id);
 			if (!localSyncData) { // item is new (exists only on local)
 
+				await this.postService.message(this.collection, `'${item.id}' was newly created / never synchronized`);
 				await this.handleDeletedItem(item);
 				continue;
 
 			}
 
 			// lookup remoteData in previously downloaded list
-			const remoteSyncData = remoteMetaData.find(s => s.id = item.id);
-			if (!remoteSyncData) { // item was deleted on another client
+			const remoteSyncData = this.remoteMetadata.get(item.id);
+			if (!remoteSyncData) { // item was deleted on another client, too
 
+				await this.postService.message(this.collection, `'${item.id}' was deleted on another client, too`);
 				await this.handleDeletedItem(item);
 				continue;
 
@@ -55,17 +57,15 @@ export class UploadDeletedAction extends BaseAction {
 				// delete remote item
 				await this.remoteStorage.bookmarks.delete(remoteSyncData.id);
 
-				// remove from entities list
-				remoteMetaData = remoteMetaData.filter(entity => entity.id !== remoteSyncData.id);
-
 				await this.handleDeletedItem(item);
 				continue;
 
 			}
 
 			// ... else mark error
-			await this.localStorage.bookmarks.markError(item.id, `${item.id}: timestamps do not match [${remoteSyncData.updateTime} and ${localSyncData.updateTime}]`);
-			await this.postService.message(this.collection, `Error: ['${item.id}', '${item.name}']`);
+			const error = `Deleted item [${item.id}] cannot be uploaded: updateTime values do not match [r: ${remoteSyncData.updateTime}, l: ${localSyncData.updateTime}]`;
+			await this.localStorage.bookmarks.markError(item.id, error);
+			await this.postService.message(this.collection, `Deleted item [${item.id}] cannot be uploaded: updateTime values do not match [r: ${remoteSyncData.updateTime}, l: ${localSyncData.updateTime}]`);
 
 		}
 
@@ -78,6 +78,9 @@ export class UploadDeletedAction extends BaseAction {
 
 		// delete local item from trash and from sync
 		await this.localStorage.bookmarks.deletePermanently(item.id);
+
+		// remove from downloaded list
+		this.remoteMetadata.remove(item.id);
 
 		await this.postService.message(this.collection, `['${item.id}', '${item.name}'] done`);
 

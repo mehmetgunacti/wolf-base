@@ -8,7 +8,7 @@ export class DownloadNewAction extends BaseAction {
 
 		await this.postService.header(this.collection, `Finding new items to be downloaded`);
 
-		const newIds: Metadata[] = await this.localStorage.bookmarks.filterNew(this.remoteMetadata.getList());
+		const newIds: Metadata[] = await this.localStorage.bookmarks.filterNew(this.remoteMetadata.getItems());
 
 		// return if none
 		if (newIds.length === 0) {
@@ -20,7 +20,7 @@ export class DownloadNewAction extends BaseAction {
 
 		// download all new
 		await this.postService.header(this.collection, `${newIds.length} new items to be downloaded`, false);
-		this.downloadNewItems(newIds);
+		await this.downloadNewItems(newIds);
 		await this.postService.header(this.collection, `${newIds.length} items downloaded`, false);
 
 	}

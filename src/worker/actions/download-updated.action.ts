@@ -9,7 +9,7 @@ export class DownloadUpdatedAction extends BaseAction {
 		// todo recheck this logic
 		await this.postService.header(this.collection, `Finding remotely updated items`);
 
-		const items: Metadata[] = await this.localStorage.bookmarks.filterUpdated(this.remoteMetadata.getList());
+		const items: Metadata[] = await this.localStorage.bookmarks.filterUpdated(this.remoteMetadata.getItems());
 
 		// return if none
 		if (items.length === 0) {
@@ -42,7 +42,7 @@ export class DownloadUpdatedAction extends BaseAction {
 			// mark as error if local item is updated or deleted
 			if (localItem.updated || localItem.deleted) {
 
-				const error = `${localItem.id} is marked 'updated' or 'deleted'`;
+				const error = `Remotely updated item [${localItem.id}] cannot be downloaded. Local item is marked 'updated' or 'deleted'`;
 				await this.postService.message(this.collection, error);
 				await this.localStorage.bookmarks.markError(localEntity.id, error);
 				continue;

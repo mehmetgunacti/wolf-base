@@ -20,9 +20,9 @@ export class UploadNewAction extends BaseAction {
 		}
 
 		// upload new items
-		await this.postService.message(this.collection, `${ids.length} new items to be uploaded`);
+		await this.postService.header(this.collection, `${ids.length} new items to be uploaded`, false);
 		await this.uploadNewItems(ids);
-		await this.postService.message(this.collection, `uploaded ${ids.length} new items`);
+		await this.postService.header(this.collection, `uploaded ${ids.length} new items`, false);
 
 	}
 
@@ -30,6 +30,7 @@ export class UploadNewAction extends BaseAction {
 
 		for (const [idx, id] of ids.entries()) {
 
+			// get local item
 			const item = await this.localStorage.bookmarks.get(id);
 			if (!item)
 				throw new FatalError(`${id} not found in local table`);

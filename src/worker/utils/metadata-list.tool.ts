@@ -1,24 +1,42 @@
-import { RemoteMetadata } from "lib";
+import { RemoteMetadata, UUID } from "lib";
 
 export class MetadataList {
 
-    constructor(private list: RemoteMetadata[] = []) {}
+    private map: Map<UUID, RemoteMetadata> = new Map();
 
-    getList(): RemoteMetadata[] {
+    constructor(list: RemoteMetadata[] = []) {
 
-        return this.list;
-
-    }
-
-    replace(newList: RemoteMetadata[]) {
-
-        this.list = newList;
+        this.setItems(list);
 
     }
 
-    find(filterFn: (value: RemoteMetadata, index: number, array: RemoteMetadata[]) => boolean): RemoteMetadata | undefined {
+    getItems(): RemoteMetadata[] {
 
-        return this.list.find(filterFn);
+        return Array.from(this.map.values());
+
+    }
+
+    setItems(newList: RemoteMetadata[]) {
+
+        newList.forEach(item => this.map.set(item.id, item));
+
+    }
+
+    get(id: UUID): RemoteMetadata | undefined {
+
+        return this.map.get(id);
+
+    }
+
+    set(item: RemoteMetadata): void {
+
+        this.map.set(item.id, item);
+
+    }
+
+    remove(id: UUID): void {
+
+        this.map.delete(id);
 
     }
 

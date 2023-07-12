@@ -34,17 +34,17 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async update(id: string, item: Partial<T>): Promise<T> {
+	async update(id: string, item: Partial<T>): Promise<number> {
 
-		const localData: T | undefined = await this.get(id);
-		if (!localData)
-			throw new Error(`No data with id ${id} found.`);
+		let count = 0;
+		await this.db.transaction('rw', this.db.bookmarks, this.db.bookmarks_sync, async () => {
 
-		const count = await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item, _updated: true });
-		if (count !== 1)
-			throw new Error(`Could not update syncData with id ${id} (update count: ${count})`);
+			count = await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item });
+			if (count > 0)
+				await this.db.table<SyncData>(this.tablename + '_sync').where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
 
-		return await this.get(id) ?? {} as T;
+		});
+		return count;
 
 	}
 
@@ -80,7 +80,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async moveToTrash(id: UUID): Promise<void> {
 
-		await this.db.transaction('rw', this.db.bookmarks, this.db.bookmarks_trash, async () => {
+		await this.db.transaction('rw', this.db.bookmarks, this.db.bookmarks_sync, this.db.bookmarks_trash, async () => {
 
 			const item = await this.db.table<T>(this.tablename).get(id);
 			if (item) {
@@ -99,6 +99,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 		await this.db.transaction('rw', [this.tablename + '_sync', this.tablename + '_trash'], async () => {
 
+			await this.db.table(this.tablename).delete(id);
 			await this.db.table(this.tablename + '_sync').delete(id);
 			await this.db.table(this.tablename + '_trash').delete(id);
 

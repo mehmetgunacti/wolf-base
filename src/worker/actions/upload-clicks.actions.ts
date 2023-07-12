@@ -31,7 +31,7 @@ export class UploadClicksAction implements Action<void, Promise<void>> {
 		for (const [idx, item] of items.entries()) {
 
 			await this.postService.header(this.collection, `${idx + 1} / ${items.length}: uploading ${item.id} (${item.current} times clicked)`, false);
-			this.remoteStorage.clicks.increase(item.id, item.current);
+			await this.remoteStorage.clicks.increase(item.id, item.current);
 
 		}
 

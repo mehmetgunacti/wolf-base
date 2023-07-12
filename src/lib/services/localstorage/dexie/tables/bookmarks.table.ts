@@ -1,4 +1,4 @@
-import { Metadata, RemoteData, SyncData, isNewer, toggleArrayItem } from 'lib';
+import { Metadata, RemoteData, SyncData, isNewer, sleep, toggleArrayItem } from 'lib';
 import { UUID } from 'lib/constants/common.constant';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { Bookmark } from 'lib/models/bookmark.model';
@@ -51,20 +51,24 @@ export class BookmarksTableImpl extends EntityTableImpl<Bookmark> implements Boo
 
 }
 
+const SLEEP = 20;
+
 export class MockBookmarksTableImpl implements BookmarksTable {
 
 	private bookmarks: Map<string, Bookmark> = new Map();
 	private bookmarks_sync: Map<string, SyncData> = new Map();
 	private bookmarks_trash: Map<string, Bookmark> = new Map();
 
-	get(id: string): Promise<Bookmark | undefined> {
+	async get(id: string): Promise<Bookmark | undefined> {
 
-		return Promise.resolve(this.bookmarks.get(id));
+		await sleep(SLEEP);
+		return this.bookmarks.get(id);
 
 	}
 
-	create(item: Partial<Bookmark>): Promise<Bookmark> {
+	async create(item: Partial<Bookmark>): Promise<Bookmark> {
 
+		await sleep(SLEEP);
 		const bookmark: Bookmark = {
 
 			name: '',
@@ -78,12 +82,13 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 		};
 		this.bookmarks.set(bookmark.id, bookmark);
-		return Promise.resolve(bookmark);
+		return bookmark;
 
 	}
 
-	put(item: RemoteData<Bookmark>): Promise<void> {
+	async put(item: RemoteData<Bookmark>): Promise<void> {
 
+		await sleep(SLEEP);
 		const syncData: SyncData = {
 
 			id: item.metaData.id,
@@ -97,105 +102,91 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 		this.bookmarks.set(item.metaData.id, item.entity);
 		this.bookmarks_sync.set(item.metaData.id, syncData);
-		return Promise.resolve();
 
 	}
 
-	update(id: string, item: Partial<Bookmark>): Promise<Bookmark> {
+	async update(id: string, item: Partial<Bookmark>): Promise<number> {
 
+		await sleep(SLEEP);
 		const bookmark: Bookmark | undefined = this.bookmarks.get(id);
+		if (!bookmark)
+			return 0;
+
+		this.bookmarks.set(id, { ...bookmark, ...item });
+
 		const sync: SyncData | undefined = this.bookmarks_sync.get(id);
-		if (!bookmark || !sync)
-			throw new Error(`Bookmark or syncData with ID '${id}' not found.`);
+		if (sync)
+			this.bookmarks_sync.set(id, { ...sync, updated: true });
 
-		const updated: Bookmark = {
-
-			...bookmark,
-			...item
-
-		};
-		const updatedSync: SyncData = {
-
-			...sync,
-			updated: true
-
-		}
-		this.bookmarks.set(id, updated);
-		this.bookmarks_sync.set(id, updatedSync);
-		return Promise.resolve(bookmark);
+		return 1;
 
 	}
 
-	markError(id: string, error: string): Promise<void> {
+	async markError(id: string, error: string): Promise<void> {
 
+		await sleep(SLEEP);
 		const syncData: SyncData | undefined = this.bookmarks_sync.get(id);
 		if (!syncData)
 			throw new Error(`Bookmark syncData with ID '${id}' not found.`);
 
 		syncData.error = error;
-		return Promise.resolve();
 
 	}
 
-	list(): Promise<Bookmark[]> {
+	async list(): Promise<Bookmark[]> {
 
-		return Promise.resolve(
-			Array.from(this.bookmarks.values())
-		);
-
-	}
-
-	listIds(): Promise<string[]> {
-
-		return Promise.resolve(
-			Array.from(this.bookmarks.keys())
-		);
+		await sleep(SLEEP);
+		return Array.from(this.bookmarks.values());
 
 	}
 
-	getSyncData(id: string): Promise<SyncData | null> {
+	async listIds(): Promise<string[]> {
 
-		const syncData: SyncData | undefined = this.bookmarks_sync.get(id);
-		return Promise.resolve(syncData || null);
-
-	}
-
-	listSyncData(): Promise<SyncData[]> {
-
-		return Promise.resolve(
-			Array.from(this.bookmarks_sync.values())
-		);
+		await sleep(SLEEP);
+		return Array.from(this.bookmarks.keys());
 
 	}
 
-	listNewIds(): Promise<string[]> {
+	async getSyncData(id: string): Promise<SyncData | null> {
 
+		await sleep(SLEEP);
+		return this.bookmarks_sync.get(id) ?? null;
+
+	}
+
+	async listSyncData(): Promise<SyncData[]> {
+
+		await sleep(SLEEP);
+		return Array.from(this.bookmarks_sync.values());
+
+	}
+
+	async listNewIds(): Promise<string[]> {
+
+		await sleep(SLEEP);
 		const bookmarkIds = Array.from(this.bookmarks.keys());
 		const syncIds = Array.from(this.bookmarks_sync.keys());
-		return Promise.resolve(
-			bookmarkIds.filter((key) => !syncIds.includes(key))
-		);
+		return bookmarkIds.filter((key) => !syncIds.includes(key));
 
 	}
 
-	listErrors(): Promise<SyncData[]> {
+	async listErrors(): Promise<SyncData[]> {
 
-		return Promise.resolve(
-			Array.from(this.bookmarks_sync.values()).filter(s => !!s.error)
-		);
-
-	}
-
-	listUpdated(): Promise<SyncData[]> {
-
-		return Promise.resolve(
-			Array.from(this.bookmarks_sync.values()).filter(s => s.updated)
-		);
+		await sleep(SLEEP);
+		return Array.from(this.bookmarks_sync.values()).filter(s => !!s.error);
 
 	}
 
-	moveToTrash(id: string): Promise<void> {
+	async listUpdated(): Promise<SyncData[]> {
 
+		await sleep(SLEEP);
+		return Array.from(this.bookmarks_sync.values()).filter(s => s.updated);
+
+	}
+
+	async moveToTrash(id: string): Promise<void> {
+
+		await sleep(SLEEP);
 		const bookmark: Bookmark | undefined = this.bookmarks.get(id);
 		if (bookmark) {
 
@@ -206,40 +197,40 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 				sync.deleted = true;
 
 		}
-		return Promise.resolve();
 
 	}
 
-	listDeletedItems(): Promise<Bookmark[]> {
+	async listDeletedItems(): Promise<Bookmark[]> {
 
-		return Promise.resolve(
-			Array.from(this.bookmarks_trash.values())
-		);
+		await sleep(300);
+		return Array.from(this.bookmarks_trash.values());
 
 	}
 
-	deletePermanently(id: string): Promise<void> {
+	async deletePermanently(id: string): Promise<void> {
 
+		await sleep(SLEEP);
+		this.bookmarks.delete(id);
+		this.bookmarks_sync.delete(id);
 		this.bookmarks_trash.delete(id);
-		return Promise.resolve();
 
 	}
 
-	filterNew(entities: Metadata[]): Promise<Metadata[]> {
+	async filterNew(entities: Metadata[]): Promise<Metadata[]> {
 
+		await sleep(SLEEP);
 		const local: SyncData[] = Array.from(this.bookmarks_sync.values());
 		const localIds: Set<UUID> = new Set(local.map(s => s.id));
-		return Promise.resolve(
-			entities.filter(e => !localIds.has(e.id))
-		);
+		return entities.filter(e => !localIds.has(e.id));
 
 	}
 
-	filterUpdated(entities: Metadata[]): Promise<Metadata[]> {
+	async filterUpdated(entities: Metadata[]): Promise<Metadata[]> {
 
+		await sleep(SLEEP);
 		const localMetaData = Array.from(this.bookmarks_sync.values());
 		if (localMetaData.length === 0)
-			return Promise.resolve([]);
+			return [];
 
 		const mapLocalMetaData = new Map(localMetaData.map(e => [e.id, e]));
 		const updated = entities.filter(r => {
@@ -250,22 +241,23 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 			return isNewer(r.updateTime, localEntity.updateTime)
 
 		});
-		return Promise.resolve(updated);
+		return updated;
 
 	}
 
-	filterDeleted(entities: Metadata[]): Promise<SyncData[]> {
+	async filterDeleted(entities: Metadata[]): Promise<SyncData[]> {
 
+		await sleep(SLEEP);
 		const set: Set<UUID> = new Set(entities.map(e => e.id));
 		const localIds: SyncData[] = Array.from(this.bookmarks_sync.values());
-		return Promise.resolve(
-			localIds.filter(entity => !set.has(entity.id))
-		);
+		return localIds.filter(entity => !set.has(entity.id));
 
 	}
 
 	search(term: string): Promise<Bookmark[]> {
+
 		throw new Error('Method not implemented.');
+
 	}
 
 	searchByTags(tags: string[]): Promise<Bookmark[]> {
@@ -274,12 +266,12 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 	}
 
-	toggleTag(id: string, name: string): Promise<void> {
+	async toggleTag(id: string, name: string): Promise<void> {
 
+		await sleep(SLEEP);
 		const bookmark: Bookmark | undefined = this.bookmarks.get(id);
 		if (bookmark)
 			bookmark.tags = toggleArrayItem(bookmark.tags, name);
-		return Promise.resolve();
 
 	}
 

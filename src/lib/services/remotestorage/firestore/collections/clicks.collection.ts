@@ -79,15 +79,14 @@ export class MockClicksFirestoreCollection implements ClicksCollection {
 
 	downloadMany(): Promise<Click[]> {
 
-		return Promise.resolve(
-			Array.from(this.clicks.entries()).map(current => ({
+		const clicks = Array.from(this.clicks.entries()).map(click => ({
 
-				id: current[0],
-				current: current[1],
-				total: 0
+			id: click[0],
+			current: 0,
+			total: click[1]
 
-			} as Click))
-		);
+		} as Click));
+		return Promise.resolve(clicks);
 
 	}
 

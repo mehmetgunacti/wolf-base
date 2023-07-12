@@ -6,7 +6,7 @@ export class DownloadIdsAction extends BaseAction {
 
 		await this.postService.header(this.collection, `downloading Ids..`);
 		const remoteIds = await this.remoteStorage.bookmarks.downloadIds();
-		this.remoteMetadata.replace(remoteIds);
+		this.remoteMetadata.setItems(remoteIds);
 		await this.postService.message(this.collection, `${remoteIds.length} Ids downloaded`);
 
 	}
