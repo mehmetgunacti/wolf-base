@@ -1,9 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
-import { Bookmark, LocalStorageService, POPULAR, RemoteStorageService, commaSplit, toggleArrayItem } from 'lib';
+import { Bookmark, LocalStorageService, POPULAR, RemoteStorageService, UUID, commaSplit, toggleArrayItem } from 'lib';
 import { fromEventPattern, of } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/core';
@@ -185,12 +186,27 @@ export class EntitiesEffects {
 		() => this.actions$.pipe(
 
 			ofType(fromActions.updateBookmark),
-			switchMap(({ id, bookmark }) => this.localStorage.bookmarks.update(id, bookmark)),
-			map((bookmark: Bookmark) => fromActions.updateBookmarkSuccess({ bookmark }))
+			switchMap(({ id, bookmark }) => this.handleBookmarkUpdate(id, bookmark))
 
 		)
 
 	);
+
+	handleBookmarkUpdate = async (id: UUID, bookmark: Partial<Bookmark>): Promise<Action> => {
+
+		const count = await this.localStorage.bookmarks.update(id, bookmark);
+		if (count === 1) {
+
+			const bookmark = await this.localStorage.bookmarks.get(id);
+			if (bookmark)
+				return fromActions.updateBookmarkSuccess({ bookmark });
+
+			return fromActions.updateBookmarkFailure({ id });
+
+		}
+		return fromActions.updateBookmarkFailure({ id });
+
+	}
 
 	bookmarksShowUpdateNotification$ = createEffect(
 

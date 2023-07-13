@@ -59,10 +59,10 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 	private bookmarks_sync: Map<string, SyncData> = new Map();
 	private bookmarks_trash: Map<string, Bookmark> = new Map();
 
-	async get(id: string): Promise<Bookmark | undefined> {
+	async get(id: string): Promise<Bookmark | null> {
 
 		await sleep(SLEEP);
-		return this.bookmarks.get(id);
+		return this.bookmarks.get(id) ?? null;
 
 	}
 

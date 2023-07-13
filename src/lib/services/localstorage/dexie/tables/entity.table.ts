@@ -20,9 +20,10 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async get(id: UUID): Promise<T | undefined> {
+	async get(id: UUID): Promise<T | null> {
 
-		return await this.db.table<T>(this.tablename).get(id);
+		const item = await this.db.table<T>(this.tablename).get(id);
+		return item ?? null;
 
 	}
 

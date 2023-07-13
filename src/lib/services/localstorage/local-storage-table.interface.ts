@@ -7,7 +7,7 @@ import { RemoteData } from "lib/models/remote.model";
 
 export interface EntityTable<T extends Entity> {
 
-	get(id: UUID): Promise<T | undefined>;
+	get(id: UUID): Promise<T | null>;
 
 	create(item: Partial<T>): Promise<T>;
 	put(item: RemoteData<T>): Promise<void>;
