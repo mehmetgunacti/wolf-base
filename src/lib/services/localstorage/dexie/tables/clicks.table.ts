@@ -83,8 +83,9 @@ export class MockClicksTableImpl implements ClicksTable {
 
 	clicked(): Promise<Click[]> {
 
+		const clicks = Array.from(this.bookmarks_clicks.values());
 		return Promise.resolve(
-			Array.from(this.bookmarks_clicks.values())
+			clicks.filter(c => c.current > 0)
 		);
 
 	}
