@@ -60,6 +60,7 @@ export interface ClicksTable {
 	clicked(): Promise<Click[]>;
 	put(item: Click): Promise<void>;
 	putAll(items: Click[]): Promise<void>;
+	list(): Promise<Click[]>;
 
 }
 

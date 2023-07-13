@@ -35,7 +35,7 @@ export class UploadClicksAction implements Action<void, Promise<void>> {
 
 		}
 
-		await this.postService.message(this.collection, `${items.length} clicked bookmark numbers uploaded`);
+		await this.postService.message(this.collection, `${items.length} bookmark click data uploaded`);
 
 	}
 

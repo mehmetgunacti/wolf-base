@@ -53,13 +53,19 @@ export class ClicksTableImpl implements ClicksTable {
 
 	}
 
+	async list(): Promise<Click[]> {
+
+		return await this.db.clicks.toArray();
+
+	}
+
 }
 
 export class MockClicksTableImpl implements ClicksTable {
 
 	private bookmarks_clicks: Map<string, Click> = new Map();
 
-	click(id: string): Promise<void> {
+	async click(id: string): Promise<void> {
 
 		const click = this.bookmarks_clicks.get(id);
 		if (click) {
@@ -77,31 +83,31 @@ export class MockClicksTableImpl implements ClicksTable {
 
 			});
 
-		return Promise.resolve();
-
 	}
 
-	clicked(): Promise<Click[]> {
+	async clicked(): Promise<Click[]> {
 
 		const clicks = Array.from(this.bookmarks_clicks.values());
-		return Promise.resolve(
-			clicks.filter(c => c.current > 0)
-		);
+		return clicks.filter(c => c.current > 0);
 
 	}
 
-	put(item: Click): Promise<void> {
+	async put(item: Click): Promise<void> {
 
 		this.bookmarks_clicks.set(item.id, item);
-		return Promise.resolve();
 
 	}
 
-	putAll(items: Click[]): Promise<void> {
+	async putAll(items: Click[]): Promise<void> {
 
 		for (const item of items)
 			this.bookmarks_clicks.set(item.id, item);
-		return Promise.resolve();
+
+	}
+
+	async list(): Promise<Click[]> {
+
+		return Array.from(this.bookmarks_clicks.values());
 
 	}
 
