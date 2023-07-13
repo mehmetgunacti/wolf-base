@@ -21,7 +21,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	@Output() delete: EventEmitter<UUID> = new EventEmitter();
 	@Output() tagInput: EventEmitter<string> = new EventEmitter();
 
-	@ViewChild('autocomplete') autocompleteCharge!: AutoComplete;
+	@ViewChild('autocomplete') autocompleteChange!: AutoComplete;
 
 	form: BookmarkForm = inject(BOOKMARK_FORM);
 	bookmark$: Subject<Bookmark>;
@@ -122,7 +122,7 @@ will be deleted. Continue?`)
 				event.query.substring(0, event.query.length - 1)
 			]);
 			this.tagSuggestions$.next([]);
-			this.autocompleteCharge.multiInputEL.nativeElement.value = '';
+			this.autocompleteChange.multiInputEL.nativeElement.value = '';
 
 		} else
 			this.tagInput.emit(event.query);
