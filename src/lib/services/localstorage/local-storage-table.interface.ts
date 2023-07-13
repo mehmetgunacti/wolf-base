@@ -1,7 +1,7 @@
 import { UUID } from "lib/constants/common.constant";
 import { SyncData } from "lib/models";
 import { Bookmark, Click } from "lib/models/bookmark.model";
-import { Configuration } from "lib/models/configuration.model";
+import { Configuration, Credentials } from "lib/models/configuration.model";
 import { Entity, Metadata } from "lib/models/entity.model";
 import { RemoteData } from "lib/models/remote.model";
 
@@ -67,12 +67,15 @@ export interface ConfigurationTable {
 
 	getSyncWorkerActive(): Promise<boolean>;
 	getSidebarVisible(): Promise<boolean>;
+	getCredentials(): Promise<Credentials>;
 	isDarkTheme(): Promise<boolean>;
 
 	setSyncWorkerActive(active: boolean): Promise<void>;
 	setSidebarVisible(visible: boolean): Promise<void>;
 	setDarkTheme(dark: boolean): Promise<void>;
 	toggleTheme(): Promise<void>;
+	
+	saveCredentials(credentials: Credentials): Promise<void>;
 
 	dump(): Promise<Configuration>;
 

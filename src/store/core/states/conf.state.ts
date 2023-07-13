@@ -11,6 +11,9 @@ export const initialConfState: ConfState = {
 	initialized: false,
 	syncWorkerActive: false,
 	sidebarVisible: true,
-	darkTheme: true
+	darkTheme: true,
+	apiKey: null,
+	baseURL: null,
+	projectId: null
 
 };

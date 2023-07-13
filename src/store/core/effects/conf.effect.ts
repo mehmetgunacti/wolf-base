@@ -4,7 +4,7 @@ import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
 import { Configuration, LocalStorageService } from 'lib';
 import { fromEventPattern } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 
 @Injectable()
@@ -52,6 +52,18 @@ export class ConfEffects {
 
 		),
 		{ dispatch: false }
+
+	);
+
+	saveCredentials$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(fromActions.saveCredentials),
+			switchMap(({ credentials }) => this.localStorage.configuration.saveCredentials(credentials)),
+			map(() => fromActions.showNotification({ severity: 'success', detail: 'Configuration updated' }))
+
+		)
 
 	);
 

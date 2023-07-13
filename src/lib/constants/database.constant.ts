@@ -12,6 +12,9 @@ export enum CONF_KEYS {
 
 	syncWorkerActive = 'syncWorkerActive',
 	sidebarVisible = 'sidebarVisible',
-	darkTheme = 'darkTheme'
+	darkTheme = 'darkTheme',
+	apiKey = 'apiKey',
+	baseURL = 'baseURL',
+	projectId = 'projectId'
 
 }
