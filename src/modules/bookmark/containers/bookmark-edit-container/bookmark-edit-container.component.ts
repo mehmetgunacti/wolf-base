@@ -1,4 +1,4 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
 import { combineLatest, filter, map, Observable, Subject } from 'rxjs';
@@ -11,14 +11,16 @@ import * as fromStore from 'store/bookmark';
 })
 export class BookmarkEditContainerComponent implements OnInit, AfterContentInit {
 
+	private store: Store = inject(Store);
+
 	bookmark$: Observable<Bookmark | null | undefined>;
 	tagSuggestions$!: Observable<string[]>;
 	tagInput = new Subject<string>();
 
-	constructor(
-		private store: Store<fromStore.BookmarkModuleState>
-	) {
-		this.bookmark$ = store.select(fromStore.selectedBookmark);
+	constructor() {
+
+		this.bookmark$ = this.store.select(fromStore.selectedBookmark);
+
 	}
 
 	ngOnInit(): void { }
