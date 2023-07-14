@@ -9,4 +9,4 @@ export interface Configuration {
 
 }
 
-export interface Credentials extends Pick<Configuration, 'apiKey' | 'baseURL' | 'projectId'> { }
+export interface FirestoreConfig extends Pick<Configuration, 'apiKey' | 'baseURL' | 'projectId'> { }

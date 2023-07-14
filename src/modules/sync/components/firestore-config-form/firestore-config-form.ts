@@ -1,8 +1,8 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Credentials } from 'lib';
+import { FirestoreConfig } from 'lib';
 import { FormClass, FormClassImpl } from 'modules/shared';
 
-export interface EditForm extends Record<keyof Credentials, FormControl> {
+export interface EditForm extends Record<keyof FirestoreConfig, FormControl> {
 
 	apiKey: FormControl<string | null>;
 	baseURL: FormControl<string | null>;
@@ -10,9 +10,9 @@ export interface EditForm extends Record<keyof Credentials, FormControl> {
 
 }
 
-export interface CredentialsForm extends EditForm, FormClass<Credentials> { }
+export interface FirestoreConfigForm extends EditForm, FormClass<FirestoreConfig> { }
 
-export class EditFormImpl extends FormClassImpl<Credentials> implements CredentialsForm {
+export class EditFormImpl extends FormClassImpl<FirestoreConfig> implements FirestoreConfigForm {
 
 	protected override createFormGroup(): FormGroup<EditForm> {
 
@@ -24,7 +24,7 @@ export class EditFormImpl extends FormClassImpl<Credentials> implements Credenti
 
 	}
 
-	setValues(item: Credentials): void {
+	setValues(item: FirestoreConfig): void {
 
 		this.apiKey.setValue(item.apiKey, { emitEvent: false });
 		this.baseURL.setValue(item.baseURL, { emitEvent: false });
@@ -32,7 +32,7 @@ export class EditFormImpl extends FormClassImpl<Credentials> implements Credenti
 
 	}
 
-	override get value(): Credentials {
+	override get value(): FirestoreConfig {
 
 		return this._formGroup.value;
 

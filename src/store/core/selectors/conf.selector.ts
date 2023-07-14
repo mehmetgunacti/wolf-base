@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 import { ConfState, CoreModuleState } from '../states';
 import { coreModuleState } from './module.selector';
 import { state } from '@angular/animations';
-import { Credentials } from 'lib';
+import { FirestoreConfig } from 'lib';
 
 export const confState = createSelector(
 
@@ -32,16 +32,16 @@ export const isThemeDark = createSelector(
 
 );
 
-export const isApiKeyAvailable = createSelector(
+export const isFirestoreApiKeyMissing = createSelector(
 
 	confState,
-	(state: ConfState) => !!state.apiKey
+	(state: ConfState) => !state.apiKey
 
 );
 
-export const getCredentials = createSelector(
+export const getFirestoreConfig = createSelector(
 
 	confState,
-	({ apiKey, baseURL, projectId }): Credentials => ({ apiKey, baseURL, projectId })
+	({ apiKey, baseURL, projectId }): FirestoreConfig => ({ apiKey, baseURL, projectId })
 
 );

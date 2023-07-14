@@ -1,3 +1,4 @@
 @import './pages/sync-page/sync-page.component.scss';
-@import './pages/sync-credentials-page/sync-credentials-page.component.scss';
-@import './components/credentials-form/credentials-form.component.scss';
+@import './containers/firestore-config-container/firestore-config-container.component.scss';
+@import './containers/sync-summary-container/sync-summary-container.component.scss';
+@import './components/firestore-config-form/firestore-config-form.component.scss';

@@ -1,0 +1,45 @@
+// app-bookmark-edit-container {}
+.firestoreConfigContainerComponent {
+
+    width		: 100vw;
+    height		: 100vh;
+    max-height	: initial !important;
+
+    @include lg() {
+
+        width	: 80vw;
+        height	: 95vh;
+
+    }
+
+    // & .p-dialog-content {
+
+    //     display: flex;
+
+    // }
+
+    // & app-bookmark-edit-container {
+    //     display: block;
+    //     height: 100%;
+    // }
+
+    & .p-dialog-content {
+
+        @extend %flex-column;
+
+        & app-firestore-config-container {
+
+            flex    : 1;
+            @extend %flex-column;
+
+            & app-bookmark-form {
+
+                flex		: 1;
+
+            }
+
+        }
+
+    }
+
+}

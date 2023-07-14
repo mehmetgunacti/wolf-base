@@ -1,12 +1,13 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import produce from 'immer';
-import { syncEvent } from '../actions';
-import { SyncModuleState, initialSyncState } from '../states';
+import * as fromActions from '../actions';
+import * as fromStates from '../states';
+import * as fromCore from 'store/core';
 
-export const syncReducer: ActionReducer<SyncModuleState, Action> = createReducer(
+export const syncReducer: ActionReducer<fromStates.SyncModuleState, Action> = createReducer(
 
-	initialSyncState,
-	on(syncEvent, (state, { when, collection, message, inProgress }) => {
+	fromStates.initialSyncState,
+	on(fromActions.syncEvent, (state, { when, collection, message, inProgress }): fromStates.SyncModuleState => {
 
 		return produce(
 			state,
@@ -21,6 +22,9 @@ export const syncReducer: ActionReducer<SyncModuleState, Action> = createReducer
 			}
 		);
 
-	})
+	}),
+	on(fromActions.showFirestoreDialog, (state): fromStates.SyncModuleState => ({ ...state, firestoreConfigDialogVisible: true })),
+	on(fromActions.closeFirestoreDialog, (state): fromStates.SyncModuleState => ({ ...state, firestoreConfigDialogVisible: false })),
+	on(fromCore.saveFirestoreConfigSuccess, (state): fromStates.SyncModuleState => ({ ...state, firestoreConfigDialogVisible: false }))
 
 );

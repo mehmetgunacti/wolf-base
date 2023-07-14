@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
 import { Configuration, LocalStorageService } from 'lib';
-import { fromEventPattern } from 'rxjs';
+import { fromEventPattern, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 
@@ -55,13 +55,13 @@ export class ConfEffects {
 
 	);
 
-	saveCredentials$ = createEffect(
+	saveConfig$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.saveCredentials),
-			switchMap(({ credentials }) => this.localStorage.configuration.saveCredentials(credentials)),
-			map(() => fromActions.showNotification({ severity: 'success', detail: 'Configuration updated' }))
+			ofType(fromActions.saveFirestoreConfig),
+			switchMap(({ config }) => this.localStorage.configuration.saveConfig(config)),
+			switchMap(() => of(fromActions.saveFirestoreConfigSuccess()))
 
 		)
 

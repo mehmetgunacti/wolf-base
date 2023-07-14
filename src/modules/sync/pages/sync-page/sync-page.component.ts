@@ -1,10 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as bookmarkSelectors from 'store/bookmark/selectors';
-import * as syncSelectors from 'store/sync/selectors';
-
-import * as actions from 'store/sync/actions';
+import * as fromCore from 'store/core';
+import * as fromSync from 'store/sync';
 
 @Component({
 	selector: 'app-sync-page',
@@ -14,27 +12,33 @@ export class SyncPageComponent {
 
 	private store: Store = inject(Store);
 
-	bookmarksClicked$: Observable<number>;
-	bookmarksCreated$: Observable<number>;
-	bookmarksDeleted$: Observable<number>;
-	bookmarksUpdated$: Observable<number>;
-
-	messages$: Observable<string[]>;
+	isBigScreen$: Observable<boolean>;
+	isFirestoreConfigDialogVisible$: Observable<boolean>;
+	isFirestoreConfigMissing$: Observable<boolean>;
 
 	constructor() {
 
-		this.bookmarksCreated$ = this.store.select(bookmarkSelectors.bookmarksCreated);
-		this.bookmarksClicked$ = this.store.select(bookmarkSelectors.bookmarksClicked);
-		this.bookmarksDeleted$ = this.store.select(bookmarkSelectors.bookmarksCreated);
-		this.bookmarksUpdated$ = this.store.select(bookmarkSelectors.bookmarksUpdated);
+		this.isBigScreen$ = this.store.select(fromCore.isBigScreen);
+		this.isFirestoreConfigDialogVisible$ = this.store.select(fromSync.isFirestoreConfigDialogVisible);
+		this.isFirestoreConfigMissing$ = this.store.select(fromCore.isFirestoreApiKeyMissing);
 
-		this.messages$ = this.store.select(syncSelectors.messages);
+	}
+
+	closeFirestoreDialog(): void {
+
+		this.store.dispatch(fromSync.closeFirestoreDialog());
 
 	}
 
 	onStart(): void {
 
-		this.store.dispatch(actions.syncTrigger());
+		this.store.dispatch(fromSync.syncTrigger());
+
+	}
+
+	showFirestoreConfig(): void {
+
+		this.store.dispatch(fromSync.showFirestoreDialog());
 
 	}
 

@@ -1,11 +1,13 @@
-import { CredentialsFormComponent } from "./components/credentials-form/credentials-form.component";
-import { SyncCredentialsPageComponent } from "./pages/sync-credentials-page/sync-credentials-page.component";
+import { FirestoreConfigFormComponent } from "./components/firestore-config-form/firestore-config-form.component";
+import { FirestoreConfigContainerComponent } from "./containers/firestore-config-container/firestore-config-container.component";
+import { SyncSummaryContainerComponent } from "./containers/sync-summary-container/sync-summary-container.component";
 import { SyncPageComponent } from "./pages/sync-page/sync-page.component";
 
 export const components = [
 
 	SyncPageComponent,
-	SyncCredentialsPageComponent,
-	CredentialsFormComponent
+	FirestoreConfigContainerComponent,
+	FirestoreConfigFormComponent,
+	SyncSummaryContainerComponent
 
 ];

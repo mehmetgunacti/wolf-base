@@ -1,7 +1,7 @@
 import { ConfigurationTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { KeyValueTableImpl } from './key-value.table';
 import { CONF_KEYS } from 'lib/constants/database.constant';
-import { Configuration, Credentials } from 'lib/models/configuration.model';
+import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
 import { createNBookmarks } from 'lib/utils';
 
 export class ConfigurationTableImpl extends KeyValueTableImpl implements ConfigurationTable {
@@ -48,21 +48,21 @@ export class ConfigurationTableImpl extends KeyValueTableImpl implements Configu
 
 	}
 
-	async getCredentials(): Promise<Credentials> {
+	async getConfig(): Promise<FirestoreConfig> {
 
 		const { apiKey, baseURL, projectId } = await this.dump<Configuration>();
-		const credentials: Credentials = { apiKey, baseURL, projectId };
-		return credentials;
+		const config: FirestoreConfig = { apiKey, baseURL, projectId };
+		return config;
 
 	}
 
-	async saveCredentials(credentials: Credentials): Promise<void> {
+	async saveConfig(config: FirestoreConfig): Promise<void> {
 
 		await this.db.transaction('rw', this.db.configuration, async () => {
 
-			await this.set(CONF_KEYS.apiKey, credentials.apiKey);
-			await this.set(CONF_KEYS.baseURL, credentials.baseURL);
-			await this.set(CONF_KEYS.projectId, credentials.projectId);
+			await this.set(CONF_KEYS.apiKey, config.apiKey);
+			await this.set(CONF_KEYS.baseURL, config.baseURL);
+			await this.set(CONF_KEYS.projectId, config.projectId);
 
 		});
 
@@ -131,17 +131,17 @@ export class MockConfigurationTableImpl implements ConfigurationTable {
 
 	}
 
-	async getCredentials(): Promise<Credentials> {
+	async getConfig(): Promise<FirestoreConfig> {
 
 		const { apiKey, baseURL, projectId } = this.conf;
-		const credentials: Credentials = { apiKey, baseURL, projectId };
-		return credentials;
+		const config: FirestoreConfig = { apiKey, baseURL, projectId };
+		return config;
 
 	}
 
-	async saveCredentials(credentials: Credentials): Promise<void> {
+	async saveConfig(config: FirestoreConfig): Promise<void> {
 
-		const { apiKey, baseURL, projectId } = credentials;
+		const { apiKey, baseURL, projectId } = config;
 		this.conf.apiKey = apiKey;
 		this.conf.baseURL = baseURL;
 		this.conf.projectId = projectId;

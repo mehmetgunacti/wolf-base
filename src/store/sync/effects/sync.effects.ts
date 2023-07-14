@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { SyncService } from 'services/sync.service';
-import * as fromActions from '../actions';
+import * as fromCore from 'store/core';
+import * as fromSync from '../actions';
 
 @Injectable()
 export class SyncEffects {
@@ -14,11 +15,22 @@ export class SyncEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.syncTrigger),
+			ofType(fromSync.syncTrigger),
 			tap(() => this.syncService.trigger())
 
 		),
 		{ dispatch: false }
+
+	);
+
+	saveFirestoreConfigSuccess$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(fromCore.saveFirestoreConfig),
+			map(() => fromCore.showNotification({ severity: 'success', detail: 'Configuration saved' }))
+
+		)
 
 	);
 

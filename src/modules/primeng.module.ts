@@ -29,6 +29,7 @@ import { DividerModule } from 'primeng/divider';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { TabViewModule } from 'primeng/tabview';
 import { DataViewModule } from 'primeng/dataview';
+import { MessagesModule } from 'primeng/messages';
 
 export const modules = [
 	AvatarModule,
@@ -49,6 +50,7 @@ export const modules = [
 	InputTextareaModule,
 	InputTextModule,
 	InputNumberModule,
+	MessagesModule,
 	OverlayPanelModule,
 	PanelModule,
 	PanelMenuModule,
