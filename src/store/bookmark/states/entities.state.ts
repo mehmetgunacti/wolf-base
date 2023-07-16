@@ -4,7 +4,6 @@ import { Bookmark, Click, UUID } from 'lib';
 export interface EntitiesState {
 
 	entities: Map<UUID, Bookmark>;
-	editDialogVisible: boolean;
 	selected: UUID | null;
 	clicks: Click[];
 
@@ -13,7 +12,6 @@ export interface EntitiesState {
 export const entitiesInitialState: EntitiesState = {
 
 	entities: new Map(),
-	editDialogVisible: false,
 	selected: null,
 	clicks: []
 
