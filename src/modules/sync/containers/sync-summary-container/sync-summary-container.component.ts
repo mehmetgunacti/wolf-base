@@ -22,10 +22,10 @@ export class SyncSummaryContainerComponent {
 
 	constructor() {
 
-		this.bookmarksCreated$ = this.store.select(bookmarkSelectors.bookmarksCreated);
+		this.bookmarksCreated$ = this.store.select(syncSelectors.bookmarksCreated);
 		this.bookmarksClicked$ = this.store.select(bookmarkSelectors.bookmarksClicked);
-		this.bookmarksDeleted$ = this.store.select(bookmarkSelectors.bookmarksCreated);
-		this.bookmarksUpdated$ = this.store.select(bookmarkSelectors.bookmarksUpdated);
+		this.bookmarksDeleted$ = this.store.select(syncSelectors.bookmarksCreated);
+		this.bookmarksUpdated$ = this.store.select(syncSelectors.bookmarksUpdated);
 
 		this.messages$ = this.store.select(syncSelectors.messages);
 

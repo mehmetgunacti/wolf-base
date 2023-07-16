@@ -1,4 +1,4 @@
-import { Bookmark, UUID } from 'lib';
+import { Bookmark, Click, UUID } from 'lib';
 
 // todo move some properties to ui state
 export interface EntitiesState {
@@ -7,6 +7,7 @@ export interface EntitiesState {
 	editDialogVisible: boolean;
 	selected: UUID | null;
 	tagCloudVisible: boolean;
+	clicks: Click[];
 
 }
 
@@ -15,6 +16,7 @@ export const entitiesInitialState: EntitiesState = {
 	entities: new Map(),
 	editDialogVisible: false,
 	selected: null,
-	tagCloudVisible: false
+	tagCloudVisible: false,
+	clicks: []
 
 };

@@ -10,7 +10,7 @@ import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/core';
 import * as fromActions from '../actions';
 
-const generateBookmarks = (localStorage: LocalStorageService): Observable<Bookmark[]> => {
+const combineBookmarksAndClicks = (localStorage: LocalStorageService): Observable<Bookmark[]> => {
 
 	const bookmarksList$ = fromEventPattern<Bookmark[]>(
 
@@ -57,10 +57,23 @@ export class EntitiesEffects {
 
 	listFromIndexedDb$ = createEffect(
 
-		() => generateBookmarks(this.localStorage).pipe(
+		() => combineBookmarksAndClicks(this.localStorage).pipe(
 
 			map((bookmarks: Bookmark[]) => fromActions.loadAllBookmarksSuccess({ bookmarks }))
 
+		)
+
+	);
+
+	loadClicks$ = createEffect(
+
+		() => fromEventPattern<Click[]>(
+
+			(handler) => liveQuery(() => this.localStorage.clicks.list()).subscribe(handler),
+			(handler, unsubscribe) => unsubscribe()
+	
+		).pipe(
+			map(clicks => fromActions.bookmarksClicksSuccess({ clicks }))
 		)
 
 	);

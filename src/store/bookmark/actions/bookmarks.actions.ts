@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Bookmark, UUID } from 'lib';
+import { Bookmark, Click, UUID } from 'lib';
 
 export const loadAllBookmarksSuccess = createAction('[Bookmarks] Load All Success', props<{ bookmarks: Bookmark[] }>());
 
@@ -20,3 +20,5 @@ export const openEditBookmarkDialog = createAction('[Bookmarks] Open Edit Bookma
 export const closeEditBookmarkDialog = createAction('[Bookmarks] Close Edit Bookmark Dialog');
 
 export const togglePopular = createAction('[Bookmarks] Toggle Popular', props<{ id: UUID }>());
+
+export const bookmarksClicksSuccess = createAction('[Bookmarks] Bookmarks Clicks Success', props<{ clicks: Click[] }>());

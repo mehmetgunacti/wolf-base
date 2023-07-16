@@ -8,6 +8,13 @@ const selectorBookmarksState = createSelector(
 
 );
 
+export const bookmarks = createSelector(
+
+	selectorBookmarksState,
+	state => state.entities
+
+);
+
 export const bookmarksIds = createSelector(
 
 	selectorBookmarksState,
@@ -40,5 +47,12 @@ export const selectedBookmark = createSelector(
 
 	selectorBookmarksState,
 	state => state.selected ? state.entities.get(state.selected) : null
+
+);
+
+export const bookmarksClicked = createSelector(
+
+	selectorBookmarksState,
+	state => state.clicks.filter(c => c.current > 0).length
 
 );

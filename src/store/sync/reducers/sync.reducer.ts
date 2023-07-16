@@ -1,8 +1,8 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import produce from 'immer';
+import * as fromCore from 'store/core';
 import * as fromActions from '../actions';
 import * as fromStates from '../states';
-import * as fromCore from 'store/core';
 
 export const syncReducer: ActionReducer<fromStates.SyncModuleState, Action> = createReducer(
 
@@ -25,6 +25,8 @@ export const syncReducer: ActionReducer<fromStates.SyncModuleState, Action> = cr
 	}),
 	on(fromActions.showFirestoreDialog, (state): fromStates.SyncModuleState => ({ ...state, firestoreConfigDialogVisible: true })),
 	on(fromActions.closeFirestoreDialog, (state): fromStates.SyncModuleState => ({ ...state, firestoreConfigDialogVisible: false })),
-	on(fromCore.saveFirestoreConfigSuccess, (state): fromStates.SyncModuleState => ({ ...state, firestoreConfigDialogVisible: false }))
+	on(fromCore.saveFirestoreConfigSuccess, (state): fromStates.SyncModuleState => ({ ...state, firestoreConfigDialogVisible: false })),
+	on(fromActions.bookmarksSyncSuccess, (state, { syncData }): fromStates.SyncModuleState => ({ ...state, syncData: syncData })),
+	on(fromActions.bookmarksTrashCountSuccess, (state, { count }): fromStates.SyncModuleState => ({ ...state, trashCount: count }))
 
 );
