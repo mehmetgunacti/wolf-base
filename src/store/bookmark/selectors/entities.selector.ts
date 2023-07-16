@@ -1,5 +1,4 @@
 import { createSelector } from '@ngrx/store';
-import * as fromStates from '../states';
 import { selectorModuleState } from './module.selector';
 
 const selectorBookmarksState = createSelector(
@@ -9,20 +8,26 @@ const selectorBookmarksState = createSelector(
 
 );
 
-const {
-	selectIds,
-	selectEntities,
-	selectAll,
-	selectTotal,
-} = fromStates.entitiesAdapter.getSelectors(selectorBookmarksState);
+export const bookmarksIds = createSelector(
 
-export const bookmarksIds = selectIds;
+	selectorBookmarksState,
+	state => state.entities.keys()
 
-export const bookmarks = selectEntities;
+);
 
-export const bookmarksArray = selectAll;
+export const bookmarksArray = createSelector(
 
-export const bookmarksCount = selectTotal;
+	selectorBookmarksState,
+	state => Array.from(state.entities.values())
+
+);
+
+export const bookmarksCount = createSelector(
+
+	selectorBookmarksState,
+	state => state.entities.size
+
+);
 
 export const isEditDialogVisible = createSelector(
 
@@ -34,7 +39,6 @@ export const isEditDialogVisible = createSelector(
 export const selectedBookmark = createSelector(
 
 	selectorBookmarksState,
-	bookmarks,
-	(state, dictionary) => state.selected ? dictionary[state.selected] : null
+	state => state.selected ? state.entities.get(state.selected) : null
 
 );

@@ -1,21 +1,20 @@
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Bookmark, UUID } from 'lib';
 
 // todo move some properties to ui state
-export interface EntitiesState extends EntityState<Bookmark> {
+export interface EntitiesState {
 
+	entities: Map<UUID, Bookmark>;
 	editDialogVisible: boolean;
 	selected: UUID | null;
 	tagCloudVisible: boolean;
 
 }
 
-export const entitiesAdapter: EntityAdapter<Bookmark> = createEntityAdapter<Bookmark>();
+export const entitiesInitialState: EntitiesState = {
 
-export const entitiesInitialState: EntitiesState = entitiesAdapter.getInitialState({
-
+	entities: new Map(),
 	editDialogVisible: false,
 	selected: null,
 	tagCloudVisible: false
 
-});
+};

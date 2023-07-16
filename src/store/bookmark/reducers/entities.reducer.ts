@@ -6,8 +6,11 @@ const reducer = createReducer(
 
 	fromStates.entitiesInitialState,
 
-	on(fromActions.loadAllBookmarksSuccess, (state, { bookmarks }): fromStates.EntitiesState =>
-		fromStates.entitiesAdapter.setAll(bookmarks, { ...state, searchTerm: null })
+	on(
+		fromActions.loadAllBookmarksSuccess, (state, { bookmarks }): fromStates.EntitiesState => ({
+			...state,
+			entities: bookmarks.reduce((map, bookmark) => { map.set(bookmark.id, bookmark); return map; }, new Map())
+		})
 	),
 	on(fromActions.openAddBookmarkDialog, (state): fromStates.EntitiesState => ({ ...state, editDialogVisible: true, selected: null })),
 	on(fromActions.openEditBookmarkDialog, (state, { id }): fromStates.EntitiesState => ({ ...state, editDialogVisible: true, selected: id })),
