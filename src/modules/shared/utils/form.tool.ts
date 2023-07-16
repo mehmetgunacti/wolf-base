@@ -9,7 +9,8 @@ export interface FormClass<T> {
 	setValues(item: T): void;
 	patchValue(item: T): void;
 	isInvalid(): boolean;
-	valueChanges: Observable<T>;
+	isPristine(): boolean;
+	valueChanges$: Observable<T>;
 
 }
 
@@ -18,7 +19,9 @@ export abstract class FormClassImpl<T> implements FormClass<T> {
 	protected _formGroup: FormGroup;
 
 	constructor() {
+
 		this._formGroup = this.createFormGroup();
+
 	}
 
 	get value(): T {
@@ -30,7 +33,7 @@ export abstract class FormClassImpl<T> implements FormClass<T> {
 	abstract setValues(item: T): void;
 	protected abstract createFormGroup(): FormGroup;
 
-	get valueChanges(): Observable<T> {
+	get valueChanges$(): Observable<T> {
 
 		return this._formGroup.valueChanges;
 
@@ -42,8 +45,14 @@ export abstract class FormClassImpl<T> implements FormClass<T> {
 
 	}
 
+	isPristine(): boolean {
+
+		return this._formGroup.pristine;
+
+	}
+
 	patchValue(item: T): void {
-		
+
 		this._formGroup.patchValue(item as Record<string, any>);
 
 	}

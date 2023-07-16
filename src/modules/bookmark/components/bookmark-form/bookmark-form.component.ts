@@ -43,7 +43,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 		this.subscriptions.add(
 
-			this.form.valueChanges.pipe(
+			this.form.valueChanges$.pipe(
 
 				debounceTime(200),
 				distinctUntilChanged()
