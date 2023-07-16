@@ -36,13 +36,6 @@ export const bookmarksCount = createSelector(
 
 );
 
-export const isEditDialogVisible = createSelector(
-
-	selectorBookmarksState,
-	state => state.editDialogVisible
-
-);
-
 export const selectedBookmark = createSelector(
 
 	selectorBookmarksState,

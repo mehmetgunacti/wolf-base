@@ -25,8 +25,5 @@ export const syncReducer: ActionReducer<fromStates.SyncModuleState, Action> = cr
 	}),
 	on(fromActions.showFirestoreDialog, (state): fromStates.SyncModuleState => ({ ...state, firestoreConfigDialogVisible: true })),
 	on(fromActions.closeFirestoreDialog, (state): fromStates.SyncModuleState => ({ ...state, firestoreConfigDialogVisible: false })),
-	on(fromCore.saveFirestoreConfigSuccess, (state): fromStates.SyncModuleState => ({ ...state, firestoreConfigDialogVisible: false })),
-	on(fromActions.bookmarksSyncSuccess, (state, { syncData }): fromStates.SyncModuleState => ({ ...state, syncData: syncData })),
-	on(fromActions.bookmarksTrashCountSuccess, (state, { count }): fromStates.SyncModuleState => ({ ...state, trashCount: count }))
-
+	on(fromCore.saveFirestoreConfigSuccess, (state): fromStates.SyncModuleState => ({ ...state, firestoreConfigDialogVisible: false }))
 );

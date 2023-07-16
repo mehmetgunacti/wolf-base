@@ -32,6 +32,7 @@ export const effects = [
 
 	// Bookmarks
 	fromBookmark.EntitiesEffects,
+	fromBookmark.SyncEffects,
 
 	// Sync
 	fromSync.SyncEffects

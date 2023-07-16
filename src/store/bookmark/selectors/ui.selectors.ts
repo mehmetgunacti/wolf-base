@@ -1,9 +1,7 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { BookmarkModuleState } from '../states';
+import { createSelector } from '@ngrx/store';
 import { bookmarksArray, bookmarksCount } from './entities.selector';
+import { selectorModuleState } from './module.selector';
 import { filteredBookmarkCount } from './tags.selectors';
-
-const selectorModuleState = createFeatureSelector<BookmarkModuleState>('bookmark');
 
 const selectorUIState = createSelector(
 	selectorModuleState,
@@ -27,5 +25,12 @@ export const menuSyncableItemsCount = createSelector(
 
 	bookmarksArray,
 	bookmarks => -1
+
+);
+
+export const isEditDialogVisible = createSelector(
+
+	selectorUIState,
+	state => state.editDialogVisible
 
 );

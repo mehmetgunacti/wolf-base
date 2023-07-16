@@ -15,10 +15,6 @@ export const deleteBookmarkSuccess = createAction('[Bookmarks] Delete Bookmark S
 
 export const clickBookmark = createAction('[Bookmarks] Click Bookmark', props<{ id: UUID }>());
 
-export const openAddBookmarkDialog = createAction('[Bookmarks] Open Add Bookmark Dialog');
-export const openEditBookmarkDialog = createAction('[Bookmarks] Open Edit Bookmark Dialog', props<{ id: UUID }>());
-export const closeEditBookmarkDialog = createAction('[Bookmarks] Close Edit Bookmark Dialog');
-
 export const togglePopular = createAction('[Bookmarks] Toggle Popular', props<{ id: UUID }>());
 
 export const bookmarksClicksSuccess = createAction('[Bookmarks] Bookmarks Clicks Success', props<{ clicks: Click[] }>());
