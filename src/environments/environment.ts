@@ -9,5 +9,5 @@ export const environment = {
 		styleUrl: 'https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css',
 		scriptUrl: 'https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js'
 	},
-	remoteURLLookup: 'https://www.digitalsales.ie/meta-tag-data-extractor.php?url='
+	remoteURLLookup: 'https://tools.buzzstream.com/metaDataService?url='
 };
