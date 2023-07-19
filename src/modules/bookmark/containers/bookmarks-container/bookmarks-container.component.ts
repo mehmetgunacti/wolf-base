@@ -46,7 +46,7 @@ export class BookmarksContainerComponent implements OnInit {
 
 	onPopular(id: UUID): void {
 
-		this.store.dispatch(BookmarkActions.togglePopular({ id }));
+		this.store.dispatch(BookmarkActions.UI.togglePopular({ id }));
 
 	}
 

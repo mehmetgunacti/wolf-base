@@ -1,41 +1,40 @@
 import { createSelector } from '@ngrx/store';
-import { ConfState, CoreModuleState } from '../states';
-import { coreModuleState } from './module.selector';
-import { state } from '@angular/animations';
 import { FirestoreConfig } from 'lib';
+import { CoreConfigurationState, CoreModuleState } from 'store/states/core.state';
+import { coreModuleState } from './module.selector';
 
 export const confState = createSelector(
 
 	coreModuleState,
-	(state: CoreModuleState): ConfState => state.conf
+	(state: CoreModuleState): CoreConfigurationState => state.conf
 
 );
 
 export const isInitialized = createSelector(
 
 	confState,
-	(state: ConfState) => state.initialized
+	(state: CoreConfigurationState) => state.initialized
 
 );
 
 export const isSidebarVisible = createSelector(
 
 	confState,
-	(state: ConfState) => state.sidebarVisible
+	(state: CoreConfigurationState) => state.sidebarVisible
 
 );
 
 export const isThemeDark = createSelector(
 
 	confState,
-	(state: ConfState) => state.darkTheme
+	(state: CoreConfigurationState) => state.darkTheme
 
 );
 
 export const isFirestoreApiKeyMissing = createSelector(
 
 	confState,
-	(state: ConfState) => !state.apiKey
+	(state: CoreConfigurationState) => !state.apiKey
 
 );
 

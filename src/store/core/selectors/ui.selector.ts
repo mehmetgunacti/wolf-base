@@ -1,18 +1,17 @@
 import { createSelector } from '@ngrx/store';
-import { CoreModuleState } from '../states';
-import { UIState } from '../states/ui.state';
 import { coreModuleState } from './module.selector';
+import { CoreModuleState, CoreUIState } from 'store/states/core.state';
 
 export const uiState = createSelector(
 
 	coreModuleState,
-	(state: CoreModuleState): UIState => state.ui
+	(state: CoreModuleState): CoreUIState => state.ui
 
 );
 
 export const isBigScreen = createSelector(
 
 	uiState,
-	(state: UIState) => state.bigScreen
+	(state: CoreUIState) => state.bigScreen
 
 );

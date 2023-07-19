@@ -1,27 +1,27 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { BookmarkActions } from 'store/actions';
-import * as fromStates from '../states';
+import { BookmarkEntitiesState, initialBookmarkEntitiesState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(
 
-	fromStates.entitiesInitialState,
+	initialBookmarkEntitiesState,
 
 	on(
-		BookmarkActions.loadAllBookmarksSuccess, (state, { bookmarks }): fromStates.EntitiesState => ({
+		BookmarkActions.loadAllBookmarksSuccess, (state, { bookmarks }): BookmarkEntitiesState => ({
 			...state,
 			entities: bookmarks.reduce((map, bookmark) => { map.set(bookmark.id, bookmark); return map; }, new Map())
 		})
 	),
-	on(BookmarkActions.UI.openAddBookmarkDialog, (state): fromStates.EntitiesState => ({ ...state, selected: null })),
-	on(BookmarkActions.UI.openEditBookmarkDialog, (state, { id }): fromStates.EntitiesState => ({ ...state, selected: id })),
-	on(BookmarkActions.UI.closeEditBookmarkDialog, (state): fromStates.EntitiesState => ({ ...state, selected: null })),
-	on(BookmarkActions.createBookmarkSuccess, (state): fromStates.EntitiesState => ({ ...state, selected: null })),
-	on(BookmarkActions.updateBookmarkSuccess, (state): fromStates.EntitiesState => ({ ...state, selected: null })),
-	on(BookmarkActions.clicksSuccess, (state, { clicks }): fromStates.EntitiesState => ({ ...state, clicks }))
-	// on(BookmarkActions.togglePopular, (state, { id }): fromStates.EntitiesState => fromStates.entitiesAdapter.updateOne({ id, changes: { tags: toggleArrayItem(state.entities[id]?.tags, POPULAR) } }, state))
+	on(BookmarkActions.UI.openAddBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
+	on(BookmarkActions.UI.openEditBookmarkDialog, (state, { id }): BookmarkEntitiesState => ({ ...state, selected: id })),
+	on(BookmarkActions.UI.closeEditBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
+	on(BookmarkActions.createBookmarkSuccess, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
+	on(BookmarkActions.updateBookmarkSuccess, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
+	on(BookmarkActions.clicksSuccess, (state, { clicks }): BookmarkEntitiesState => ({ ...state, clicks }))
+	// on(BookmarkActions.togglePopular, (state, { id }): BookmarkEntitiesState => fromStates.entitiesAdapter.updateOne({ id, changes: { tags: toggleArrayItem(state.entities[id]?.tags, POPULAR) } }, state))
 
 );
 
-export function entitiesReducer(state: fromStates.EntitiesState | undefined, action: Action): fromStates.EntitiesState {
+export function entitiesReducer(state: BookmarkEntitiesState | undefined, action: Action): BookmarkEntitiesState {
 	return reducer(state, action);
 }

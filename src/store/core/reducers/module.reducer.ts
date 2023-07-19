@@ -1,5 +1,5 @@
 import { ActionReducerMap } from "@ngrx/store";
-import { CoreModuleState } from "../states";
+import { CoreModuleState } from "store/states/core.state";
 import { confReducer } from "./conf.reducer";
 import { uiReducer } from "./ui.reducer";
 

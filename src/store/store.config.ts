@@ -2,7 +2,7 @@ import { Action, ActionReducer, ActionReducerMap, MetaReducer, combineReducers }
 import * as fromBookmark from './bookmark';
 import * as fromCore from './core';
 import * as fromSync from './sync';
-import { AppState } from './app.state';
+import { AppState } from './states/app.state';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 

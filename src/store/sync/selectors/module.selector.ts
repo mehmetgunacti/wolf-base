@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { SyncModuleState } from "../states";
+import { SyncModuleState } from "store/states/sync.state";
 
 export const syncModuleState = createFeatureSelector<SyncModuleState>('sync');
 
