@@ -25,6 +25,10 @@ const routes: Routes = [
 				loadChildren: () => import('modules/sync/sync.module').then(m => m.SyncModule)
 			},
 			{
+				path: 'settings',
+				loadChildren: () => import('modules/settings/settings.module').then(m => m.SettingsModule)
+			},
+			{
 				path: '403',
 				component: UnauthorizedComponent
 			}

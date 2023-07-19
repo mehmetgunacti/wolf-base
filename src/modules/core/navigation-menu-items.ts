@@ -30,6 +30,12 @@ export const miSync = (badge?: string): MenuItem => ({
 	styleClass: 'menuBadge orange'
 });
 
+export const miSettings: MenuItem = {
+	label: 'Settings',
+	icon: PrimeIcons.COG,
+	routerLink: ['/settings']
+};
+
 // export const miNotes: MenuItem = {
 // 	label: 'Notes',
 // 	icon: 'pi pi-fw fa-bookmark',

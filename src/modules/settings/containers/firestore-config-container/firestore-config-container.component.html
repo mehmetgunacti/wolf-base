@@ -1,0 +1,9 @@
+<p-card header="Firestore Configuration">
+
+	<app-firestore-config-form
+		[config]="config$ | async"
+		(save)="onSave($event)"
+		(cancel)="onCancel()">
+	</app-firestore-config-form>
+
+</p-card>

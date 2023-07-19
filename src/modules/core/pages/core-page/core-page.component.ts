@@ -64,6 +64,7 @@ export class CorePageComponent implements OnDestroy {
 				menuItems.push(navItems.miBookmarks(bookmarkBadge));
 				menuItems.push(navItems.miDatabase);
 				menuItems.push(navItems.miSync(syncableCount > 0 ? `${syncableCount}`: undefined));
+				menuItems.push(navItems.miSettings);
 				return menuItems;
 
 			})
