@@ -72,7 +72,7 @@ export class EntitiesEffects {
 			(handler, unsubscribe) => unsubscribe()
 
 		).pipe(
-			map(clicks => BookmarkActions.bookmarksClicksSuccess({ clicks }))
+			map(clicks => BookmarkActions.clicksSuccess({ clicks }))
 		)
 
 	);
@@ -239,7 +239,7 @@ export class EntitiesEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(BookmarkActions.togglePopular),
+			ofType(BookmarkActions.UI.togglePopular),
 			tap(({ id }) => this.localStorage.bookmarks.toggleTag(id, POPULAR))
 
 		),

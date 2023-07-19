@@ -17,7 +17,7 @@ const reducer = createReducer(
 	on(BookmarkActions.UI.closeEditBookmarkDialog, (state): fromStates.EntitiesState => ({ ...state, selected: null })),
 	on(BookmarkActions.createBookmarkSuccess, (state): fromStates.EntitiesState => ({ ...state, selected: null })),
 	on(BookmarkActions.updateBookmarkSuccess, (state): fromStates.EntitiesState => ({ ...state, selected: null })),
-	on(BookmarkActions.bookmarksClicksSuccess, (state, { clicks }): fromStates.EntitiesState => ({ ...state, clicks }))
+	on(BookmarkActions.clicksSuccess, (state, { clicks }): fromStates.EntitiesState => ({ ...state, clicks }))
 	// on(BookmarkActions.togglePopular, (state, { id }): fromStates.EntitiesState => fromStates.entitiesAdapter.updateOne({ id, changes: { tags: toggleArrayItem(state.entities[id]?.tags, POPULAR) } }, state))
 
 );
