@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
-import { CoreActions } from 'store/actions';
+import { navigate } from 'store/actions/core-navigation.actions';
 
 @Injectable()
 export class CoreNavigationEffects {
@@ -16,7 +16,7 @@ export class CoreNavigationEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(CoreActions.Navigation.navigate),
+			ofType(navigate),
 			tap(({ url, skipLocationChange }) => this.router.navigateByUrl(url, { skipLocationChange }))
 
 		),

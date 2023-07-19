@@ -2,7 +2,7 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } 
 import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
 import { Observable, Subject, combineLatest, filter, map } from 'rxjs';
-import { BookmarkActions } from 'store/actions';
+import { createBookmark, deleteBookmark, updateBookmark } from 'store/actions/bookmark.actions';
 import { selectedBookmark } from 'store/selectors/bookmark-entities.selectors';
 import { distinctTagsArray } from 'store/selectors/bookmark-tags.selectors';
 
@@ -50,19 +50,19 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	onCreate(bookmark: Partial<Bookmark>): void {
 
-		this.store.dispatch(BookmarkActions.createBookmark({ bookmark }));
+		this.store.dispatch(createBookmark({ bookmark }));
 
 	}
 
 	onUpdate(id: UUID, bookmark: Partial<Bookmark>) {
 
-		this.store.dispatch(BookmarkActions.updateBookmark({ id, bookmark }));
+		this.store.dispatch(updateBookmark({ id, bookmark }));
 
 	}
 
 	onDelete(id: UUID): void {
 
-		this.store.dispatch(BookmarkActions.deleteBookmark({ id }));
+		this.store.dispatch(deleteBookmark({ id }));
 
 	}
 

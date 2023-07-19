@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { createEffect } from '@ngrx/effects';
 import { Breakpoint } from 'lib';
 import { map } from 'rxjs/operators';
-import { CoreActions } from 'store/actions';
+import { setBigScreen } from 'store/actions/core-ui.actions';
 
 @Injectable()
 export class CoreUIEffects {
@@ -15,7 +15,7 @@ export class CoreUIEffects {
 		() => this.breakpointObserver
 			.observe(`(min-width: ${ Breakpoint.lg })`)
 			.pipe(
-				map((result) => CoreActions.UI.setBigScreen({ isBigScreen: result.matches }))
+				map((result) => setBigScreen({ isBigScreen: result.matches }))
 			)
 
 	);

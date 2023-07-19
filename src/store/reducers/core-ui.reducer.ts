@@ -1,12 +1,12 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import produce from 'immer';
-import { CoreActions } from 'store/actions';
+import { setBigScreen } from 'store/actions/core-ui.actions';
 import { CoreUIState, initialCoreUIState } from 'store/states/core.state';
 
 export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 
 	initialCoreUIState,
-	on(CoreActions.UI.setBigScreen, (state, { isBigScreen }) => {
+	on(setBigScreen, (state, { isBigScreen }) => {
 
 		return produce(
 			state,

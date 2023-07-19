@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/cor
 import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
 import { Observable } from 'rxjs';
-import { BookmarkActions } from 'store/actions';
+import { openEditBookmarkDialog, togglePopular } from 'store/actions/bookmark-ui.actions';
+import { clickBookmark } from 'store/actions/bookmark.actions';
 import { filteredBookmarks } from 'store/selectors/bookmark-tags.selectors';
 
 @Component({
@@ -40,19 +41,19 @@ export class BookmarksContainerComponent implements OnInit {
 
 	onEdit(id: UUID): void {
 
-		this.store.dispatch(BookmarkActions.UI.openEditBookmarkDialog({ id }));
+		this.store.dispatch(openEditBookmarkDialog({ id }));
 
 	}
 
 	onPopular(id: UUID): void {
 
-		this.store.dispatch(BookmarkActions.UI.togglePopular({ id }));
+		this.store.dispatch(togglePopular({ id }));
 
 	}
 
 	onClick(id: UUID): void {
 
-		this.store.dispatch(BookmarkActions.clickBookmark({ id }));
+		this.store.dispatch(clickBookmark({ id }));
 
 	}
 

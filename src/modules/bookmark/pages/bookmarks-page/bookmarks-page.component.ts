@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { slideUpDownTrigger } from 'modules/shared';
 import { Observable } from 'rxjs';
-import { BookmarkActions } from 'store/actions';
+import { clickTag, emptySelectedTags, search } from 'store/actions/bookmark-tags.actions';
+import { closeEditBookmarkDialog, openAddBookmarkDialog, toggleSearchAndTagCloudVisibility } from 'store/actions/bookmark-ui.actions';
 import { selectedTags } from 'store/selectors/bookmark-tags.selectors';
 import { isEditDialogVisible, selectorTagCloudVisibility } from 'store/selectors/bookmark-ui.selectors';
 import { isBigScreen } from 'store/selectors/core-ui.selectors';
@@ -33,37 +34,37 @@ export class BookmarksPageComponent {
 
 	onSearch(term: string): void {
 
-		this.store.dispatch(BookmarkActions.Tags.search({ term }));
+		this.store.dispatch(search({ term }));
 
 	}
 
 	toggleTagCloud(): void {
 
-		this.store.dispatch(BookmarkActions.UI.toggleSearchAndTagCloudVisibility());
+		this.store.dispatch(toggleSearchAndTagCloudVisibility());
 
 	}
 
 	openAddDialog(): void {
 
-		this.store.dispatch(BookmarkActions.UI.openAddBookmarkDialog());
+		this.store.dispatch(openAddBookmarkDialog());
 
 	}
 
 	closeAddDialog(): void {
 
-		this.store.dispatch(BookmarkActions.UI.closeEditBookmarkDialog());
+		this.store.dispatch(closeEditBookmarkDialog());
 
 	}
 
 	onTagClicked(name: string): void {
 
-		this.store.dispatch(BookmarkActions.Tags.clickTag({ name }));
+		this.store.dispatch(clickTag({ name }));
 
 	}
 
 	emptyFilter(): void {
 
-		this.store.dispatch(BookmarkActions.Tags.emptySelectedTags());
+		this.store.dispatch(emptySelectedTags());
 
 	}
 

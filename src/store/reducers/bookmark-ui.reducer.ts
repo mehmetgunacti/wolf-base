@@ -1,16 +1,17 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { BookmarkActions } from 'store/actions';
+import { closeEditBookmarkDialog, openAddBookmarkDialog, openEditBookmarkDialog, toggleSearchAndTagCloudVisibility } from 'store/actions/bookmark-ui.actions';
+import { createBookmarkSuccess, updateBookmarkSuccess } from 'store/actions/bookmark.actions';
 import { BookmarkUIState, initialBookmarkUIState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(
 
 	initialBookmarkUIState,
-	on(BookmarkActions.UI.toggleSearchAndTagCloudVisibility, state => ({ ...state, tagCloudVisible: !state.tagCloudVisible })),
-	on(BookmarkActions.UI.openAddBookmarkDialog, (state): BookmarkUIState => ({ ...state, editDialogVisible: true })),
-	on(BookmarkActions.UI.openEditBookmarkDialog, (state, { id }): BookmarkUIState => ({ ...state, editDialogVisible: true })),
-	on(BookmarkActions.UI.closeEditBookmarkDialog, (state): BookmarkUIState => ({ ...state, editDialogVisible: false })),
-	on(BookmarkActions.createBookmarkSuccess, (state): BookmarkUIState => ({ ...state, editDialogVisible: false })),
-	on(BookmarkActions.updateBookmarkSuccess, (state): BookmarkUIState => ({ ...state, editDialogVisible: false }))
+	on(toggleSearchAndTagCloudVisibility, state => ({ ...state, tagCloudVisible: !state.tagCloudVisible })),
+	on(openAddBookmarkDialog, (state): BookmarkUIState => ({ ...state, editDialogVisible: true })),
+	on(openEditBookmarkDialog, (state, { id }): BookmarkUIState => ({ ...state, editDialogVisible: true })),
+	on(closeEditBookmarkDialog, (state): BookmarkUIState => ({ ...state, editDialogVisible: false })),
+	on(createBookmarkSuccess, (state): BookmarkUIState => ({ ...state, editDialogVisible: false })),
+	on(updateBookmarkSuccess, (state): BookmarkUIState => ({ ...state, editDialogVisible: false }))
 
 );
 

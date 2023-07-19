@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { SyncActions } from 'store/actions';
+import { syncTrigger } from 'store/actions/sync.actions';
 import * as fromCore from 'store/selectors/core-configuration.selectors';
 
 @Component({
@@ -22,7 +22,7 @@ export class SyncPageComponent {
 
 	onStart(): void {
 
-		this.store.dispatch(SyncActions.syncTrigger());
+		this.store.dispatch(syncTrigger());
 
 	}
 

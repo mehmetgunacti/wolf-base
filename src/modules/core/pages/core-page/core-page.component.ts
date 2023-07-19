@@ -2,7 +2,7 @@ import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
-import { CoreActions } from 'store/actions';
+import { setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
 import { menuBookmarkBadge, menuSyncableItemsCount } from 'store/selectors/bookmark-ui.selectors';
 import { isSidebarVisible, isThemeDark } from 'store/selectors/core-configuration.selectors';
 import { isBigScreen } from 'store/selectors/core-ui.selectors';
@@ -84,13 +84,13 @@ export class CorePageComponent implements OnDestroy {
 	toggleNav(): void {
 
 		// navCollapsed is always the opposite of 'visible', no negation needed
-		this.store.dispatch(CoreActions.UI.setSidebarVisible({ visible: this.navCollapsed }));
+		this.store.dispatch(setSidebarVisible({ visible: this.navCollapsed }));
 
 	}
 
 	onSwitchTheme(): void {
 
-		this.store.dispatch(CoreActions.UI.switchTheme());
+		this.store.dispatch(switchTheme());
 
 	}
 

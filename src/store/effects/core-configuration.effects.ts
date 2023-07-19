@@ -5,7 +5,8 @@ import { liveQuery } from 'dexie';
 import { Configuration, LocalStorageService } from 'lib';
 import { fromEventPattern, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { CoreActions } from 'store/actions';
+import { setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
+import { confChanged, saveFirestoreConfig, saveFirestoreConfigSuccess } from 'store/actions/core.actions';
 
 @Injectable()
 export class CoreConfigurationEffects {
@@ -26,7 +27,7 @@ export class CoreConfigurationEffects {
 			(handler, unsubscribe) => unsubscribe()
 
 		).pipe(
-			map((configuration: Configuration) => CoreActions.confChanged({ configuration }))
+			map((configuration: Configuration) => confChanged({ configuration }))
 		)
 
 	);
@@ -35,7 +36,7 @@ export class CoreConfigurationEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(CoreActions.UI.switchTheme),
+			ofType(switchTheme),
 			tap(() => this.localStorage.configuration.toggleTheme())
 
 		),
@@ -47,7 +48,7 @@ export class CoreConfigurationEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(CoreActions.UI.setSidebarVisible),
+			ofType(setSidebarVisible),
 			tap(({ visible }) => this.localStorage.configuration.setSidebarVisible(visible))
 
 		),
@@ -59,9 +60,9 @@ export class CoreConfigurationEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(CoreActions.saveFirestoreConfig),
+			ofType(saveFirestoreConfig),
 			switchMap(({ config }) => this.localStorage.configuration.saveConfig(config)),
-			switchMap(() => of(CoreActions.saveFirestoreConfigSuccess()))
+			switchMap(() => of(saveFirestoreConfigSuccess()))
 
 		)
 

@@ -5,7 +5,7 @@ import { liveQuery } from 'dexie';
 import { LocalStorageService, SyncData } from 'lib';
 import { fromEventPattern } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { BookmarkActions } from 'store/actions';
+import { syncSuccess, trashCountSuccess } from 'store/actions/bookmark-sync.actions';
 
 @Injectable()
 export class BookmarkSyncEffects {
@@ -21,7 +21,7 @@ export class BookmarkSyncEffects {
 			(handler, unsubscribe) => unsubscribe()
 
 		).pipe(
-			map(syncData => BookmarkActions.Sync.syncSuccess({ syncData }))
+			map(syncData => syncSuccess({ syncData }))
 		)
 
 	);
@@ -34,7 +34,7 @@ export class BookmarkSyncEffects {
 			(handler, unsubscribe) => unsubscribe()
 
 		).pipe(
-			map(items => BookmarkActions.Sync.trashCountSuccess({ count: items.length }))
+			map(items => trashCountSuccess({ count: items.length }))
 		)
 
 	);

@@ -1,13 +1,13 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { BookmarkActions } from 'store/actions';
+import { syncSuccess, trashCountSuccess } from 'store/actions/bookmark-sync.actions';
 import { BookmarkSyncState, initialBookmarkSyncState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(
 
     initialBookmarkSyncState,
 
-    on(BookmarkActions.Sync.syncSuccess, (state, { syncData }): BookmarkSyncState => ({ ...state, syncData })),
-    on(BookmarkActions.Sync.trashCountSuccess, (state, { count }): BookmarkSyncState => ({ ...state, trashCount: count }))
+    on(syncSuccess, (state, { syncData }): BookmarkSyncState => ({ ...state, syncData })),
+    on(trashCountSuccess, (state, { count }): BookmarkSyncState => ({ ...state, trashCount: count }))
 
 );
 

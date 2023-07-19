@@ -4,7 +4,9 @@ import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { LocalStorageService } from 'lib';
 import { map, tap } from 'rxjs/operators';
 import { SyncService } from 'services/sync.service';
-import { CoreActions, SyncActions } from 'store/actions';
+import { showNotification } from 'store/actions/core-notification.actions';
+import { saveFirestoreConfig } from 'store/actions/core.actions';
+import { syncTrigger } from 'store/actions/sync.actions';
 
 @Injectable()
 export class SyncEffects {
@@ -17,7 +19,7 @@ export class SyncEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(SyncActions.syncTrigger),
+			ofType(syncTrigger),
 			tap(() => this.syncService.trigger())
 
 		),
@@ -29,8 +31,8 @@ export class SyncEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(CoreActions.saveFirestoreConfig),
-			map(() => CoreActions.Notification.showNotification({ severity: 'success', detail: 'Configuration saved' }))
+			ofType(saveFirestoreConfig),
+			map(() => showNotification({ severity: 'success', detail: 'Configuration saved' }))
 
 		)
 
