@@ -22,6 +22,6 @@ const reducer = createReducer(
 
 );
 
-export function entitiesReducer(state: BookmarkEntitiesState | undefined, action: Action): BookmarkEntitiesState {
+export function bookmarkEntitiesReducer(state: BookmarkEntitiesState | undefined, action: Action): BookmarkEntitiesState {
 	return reducer(state, action);
 }

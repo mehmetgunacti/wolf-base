@@ -14,6 +14,6 @@ const reducer = createReducer(
 
 );
 
-export function uiReducer(state: BookmarkUIState | undefined, action: Action): BookmarkUIState {
+export function bookmarkUIReducer(state: BookmarkUIState | undefined, action: Action): BookmarkUIState {
 	return reducer(state, action);
 }

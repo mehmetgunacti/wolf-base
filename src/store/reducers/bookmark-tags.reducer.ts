@@ -11,6 +11,6 @@ const reducer = createReducer(
 
 );
 
-export function tagsReducer(state: BookmarkTagsState | undefined, action: Action): BookmarkTagsState {
+export function bookmarkTagsReducer(state: BookmarkTagsState | undefined, action: Action): BookmarkTagsState {
 	return reducer(state, action);
 }

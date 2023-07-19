@@ -2,40 +2,40 @@ import { Bookmark, Click, SyncData, UUID } from "lib";
 
 export interface BookmarkModuleState {
 
-    entities: BookmarkEntitiesState;
-    ui: BookmarkUIState;
-    tags: BookmarkTagsState;
-    sync: BookmarkSyncState;
+	entities: BookmarkEntitiesState;
+	ui: BookmarkUIState;
+	tags: BookmarkTagsState;
+	sync: BookmarkSyncState;
 
 }
 
 // todo move some properties to ui state
 export interface BookmarkEntitiesState {
 
-    entities: Map<UUID, Bookmark>;
-    selected: UUID | null;
-    clicks: Click[];
+	entities: Map<UUID, Bookmark>;
+	selected: UUID | null;
+	clicks: Click[];
 
 }
 
 export interface BookmarkSyncState {
 
-    syncData: SyncData[];
-    trashCount: number;
+	syncData: SyncData[];
+	trashCount: number;
 
 }
 
 export interface BookmarkTagsState {
 
-    selectedTags: string[];
-    searchTerm: string | null;
+	selectedTags: string[];
+	searchTerm: string | null;
 
 }
 
 export interface BookmarkUIState {
 
-    tagCloudVisible: boolean;
-    editDialogVisible: boolean;
+	tagCloudVisible: boolean;
+	editDialogVisible: boolean;
 
 }
 
@@ -43,38 +43,38 @@ export interface BookmarkUIState {
 
 export const initialBookmarkSyncState: BookmarkSyncState = {
 
-    syncData: [],
-    trashCount: 0
+	syncData: [],
+	trashCount: 0
 
 };
 
 export const initialBookmarkEntitiesState: BookmarkEntitiesState = {
 
-    entities: new Map(),
-    selected: null,
-    clicks: []
+	entities: new Map(),
+	selected: null,
+	clicks: []
 
 };
 
 export const initialBookmarkTagsState: BookmarkTagsState = {
 
-    selectedTags: [],
-    searchTerm: null
+	selectedTags: [],
+	searchTerm: null
 
 };
 
 export const initialBookmarkUIState: BookmarkUIState = {
 
-    tagCloudVisible: false,
-    editDialogVisible: false
+	tagCloudVisible: false,
+	editDialogVisible: false
 
 };
 
 export const initialBookmarkState: BookmarkModuleState = {
 
-    entities: initialBookmarkEntitiesState,
-    ui: initialBookmarkUIState,
-    tags: initialBookmarkTagsState,
-    sync: initialBookmarkSyncState
+	entities: initialBookmarkEntitiesState,
+	ui: initialBookmarkUIState,
+	tags: initialBookmarkTagsState,
+	sync: initialBookmarkSyncState
 
 };

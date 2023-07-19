@@ -3,7 +3,7 @@ import produce from 'immer';
 import { CoreActions } from 'store/actions';
 import { CoreUIState, initialCoreUIState } from 'store/states/core.state';
 
-export const uiReducer: ActionReducer<CoreUIState, Action> = createReducer(
+export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 
 	initialCoreUIState,
 	on(CoreActions.UI.setBigScreen, (state, { isBigScreen }) => {

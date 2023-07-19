@@ -1,6 +1,4 @@
 import { Action, ActionReducer, ActionReducerMap, MetaReducer, combineReducers } from '@ngrx/store';
-import * as fromBookmark from './bookmark';
-import * as fromCore from './core';
 import { BookmarkEntitiesEffects } from './effects/bookmark-entities.effects';
 import { BookmarkSyncEffects } from './effects/bookmark-sync.effects';
 import { CoreConfigurationEffects } from './effects/core-configuration.effects';
@@ -9,8 +7,10 @@ import { CoreNotificationEffects } from './effects/core-notification.effects';
 import { CoreThemeEffects } from './effects/core-theme.effects';
 import { CoreUIEffects } from './effects/core-ui.effects';
 import { SyncEffects } from './effects/sync.effects';
+import { bookmarkReducer } from './reducers/bookmark.reducer';
+import { coreReducer } from './reducers/core.reducer';
+import { syncReducer } from './reducers/sync.reducer';
 import { AppState } from './states/app.state';
-import * as fromSync from './sync';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -49,8 +49,8 @@ export const effects = [
 
 export const reducers: ActionReducerMap<AppState> = {
 
-	core: combineReducers(fromCore.coreReducer),
-	sync: fromSync.syncReducer,
-	bookmark: combineReducers(fromBookmark.bookmarkReducer)
+	core: combineReducers(coreReducer),
+	sync: syncReducer,
+	bookmark: combineReducers(bookmarkReducer)
 
 };

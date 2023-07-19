@@ -11,6 +11,6 @@ const reducer = createReducer(
 
 );
 
-export function syncReducer(state: BookmarkSyncState | undefined, action: Action): BookmarkSyncState {
+export function bookmarkSyncReducer(state: BookmarkSyncState | undefined, action: Action): BookmarkSyncState {
     return reducer(state, action);
 }
