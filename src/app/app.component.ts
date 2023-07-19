@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { fadeOutTrigger } from 'modules';
 import { Observable, delay, of, switchMap, takeWhile, tap } from 'rxjs';
-import { isInitialized } from 'store/core';
+import { isInitialized } from 'store/selectors/core-configuration.selectors';
 
 @Component({
 	selector: 'app-root',

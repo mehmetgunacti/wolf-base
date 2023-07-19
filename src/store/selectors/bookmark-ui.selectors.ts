@@ -1,16 +1,20 @@
 import { createSelector } from '@ngrx/store';
-import { bookmarksArray, bookmarksCount } from './entities.selector';
-import { selectorModuleState } from './module.selector';
-import { filteredBookmarkCount } from './tags.selectors';
+import { selectorBookmarkModuleState } from './bookmark.selectors';
+import { bookmarksArray, bookmarksCount } from './bookmark-entities.selectors';
+import { filteredBookmarkCount } from './bookmark-tags.selectors';
 
-const selectorUIState = createSelector(
-	selectorModuleState,
+export const selectorUIState = createSelector(
+
+	selectorBookmarkModuleState,
 	state => state.ui
+
 )
 
 export const selectorTagCloudVisibility = createSelector(
+
 	selectorUIState,
 	state => state.tagCloudVisible
+
 );
 
 export const menuBookmarkBadge = createSelector(

@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as bookmarkSelectors from 'store/bookmark/selectors';
-import * as syncSelectors from 'store/sync/selectors';
+import { bookmarksClicked } from 'store/selectors/bookmark-entities.selectors';
+import { bookmarksCreated, bookmarksDeleted, bookmarksUpdated } from 'store/selectors/bookmark-sync.selectors';
+import { messages } from 'store/selectors/sync.selectors';
 
 @Component({
 	selector: 'app-sync-summary-container',
@@ -22,12 +23,12 @@ export class SyncSummaryContainerComponent {
 
 	constructor() {
 
-		this.bookmarksCreated$ = this.store.select(bookmarkSelectors.bookmarksCreated);
-		this.bookmarksClicked$ = this.store.select(bookmarkSelectors.bookmarksClicked);
-		this.bookmarksDeleted$ = this.store.select(bookmarkSelectors.bookmarksCreated);
-		this.bookmarksUpdated$ = this.store.select(bookmarkSelectors.bookmarksUpdated);
+		this.bookmarksCreated$ = this.store.select(bookmarksCreated);
+		this.bookmarksClicked$ = this.store.select(bookmarksClicked);
+		this.bookmarksDeleted$ = this.store.select(bookmarksDeleted);
+		this.bookmarksUpdated$ = this.store.select(bookmarksUpdated);
 
-		this.messages$ = this.store.select(syncSelectors.messages);
+		this.messages$ = this.store.select(messages);
 
 	}
 

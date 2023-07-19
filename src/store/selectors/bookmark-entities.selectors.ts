@@ -1,9 +1,9 @@
 import { createSelector } from '@ngrx/store';
-import { selectorModuleState } from './module.selector';
+import { selectorBookmarkModuleState } from './bookmark.selectors';
 
 const selectorBookmarksState = createSelector(
 
-	selectorModuleState,
+	selectorBookmarkModuleState,
 	state => state.entities
 
 );

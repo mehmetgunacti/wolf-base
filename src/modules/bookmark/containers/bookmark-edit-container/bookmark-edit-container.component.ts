@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
 import { Observable, Subject, combineLatest, filter, map } from 'rxjs';
 import { BookmarkActions } from 'store/actions';
-import * as fromStore from 'store/bookmark';
+import { selectedBookmark } from 'store/selectors/bookmark-entities.selectors';
+import { distinctTagsArray } from 'store/selectors/bookmark-tags.selectors';
 
 @Component({
 	selector: 'app-bookmark-edit-container',
@@ -20,7 +21,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	constructor() {
 
-		this.bookmark$ = this.store.select(fromStore.selectedBookmark);
+		this.bookmark$ = this.store.select(selectedBookmark);
 
 	}
 
@@ -29,7 +30,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 	ngAfterContentInit(): void {
 
 		this.tagSuggestions$ = combineLatest([
-			this.store.select(fromStore.distinctTagsArray),
+			this.store.select(distinctTagsArray),
 			this.tagInput
 		]).pipe(
 

@@ -3,8 +3,9 @@ import { Store } from '@ngrx/store';
 import { slideUpDownTrigger } from 'modules/shared';
 import { Observable } from 'rxjs';
 import { BookmarkActions } from 'store/actions';
-import * as fromBookmark from 'store/bookmark';
-import * as fromCore from 'store/core';
+import { selectedTags } from 'store/selectors/bookmark-tags.selectors';
+import { isEditDialogVisible, selectorTagCloudVisibility } from 'store/selectors/bookmark-ui.selectors';
+import { isBigScreen } from 'store/selectors/core-ui.selectors';
 
 @Component({
 	selector: 'app-bookmarks-page',
@@ -23,10 +24,10 @@ export class BookmarksPageComponent {
 
 	constructor() {
 
-		this.editDialogVisible$ = this.store.select(fromBookmark.isEditDialogVisible);
-		this.tagsVisible$ = this.store.select(fromBookmark.selectorTagCloudVisibility);
-		this.isBigScreen$ = this.store.select(fromCore.isBigScreen);
-		this.selectedTags$ = this.store.select(fromBookmark.selectedTags);
+		this.editDialogVisible$ = this.store.select(isEditDialogVisible);
+		this.tagsVisible$ = this.store.select(selectorTagCloudVisibility);
+		this.isBigScreen$ = this.store.select(isBigScreen);
+		this.selectedTags$ = this.store.select(selectedTags);
 
 	}
 

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
 import { Observable } from 'rxjs';
 import { BookmarkActions } from 'store/actions';
-import * as selectors from 'store/bookmark/selectors';
+import { filteredBookmarks } from 'store/selectors/bookmark-tags.selectors';
 
 @Component({
 	selector: 'app-bookmarks-container',
@@ -17,7 +17,7 @@ export class BookmarksContainerComponent implements OnInit {
 
 	constructor() {
 
-		this.bookmarks$ = this.store.select(selectors.filteredBookmarks);
+		this.bookmarks$ = this.store.select(filteredBookmarks);
 
 	}
 

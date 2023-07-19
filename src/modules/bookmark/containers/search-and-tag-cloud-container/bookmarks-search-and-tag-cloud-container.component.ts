@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Tag } from 'lib';
 import { Observable, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BookmarkActions } from 'store/actions';
-import * as fromStore from 'store/bookmark';
+import { distinctTagsArray, relatedTags, selectedTags } from 'store/selectors/bookmark-tags.selectors';
 
 @Component({
 	selector: 'app-bookmarks-search-and-tag-cloud-container',
@@ -24,9 +24,9 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 
 	constructor(private store: Store) {
 
-		this.tags$ = store.select(fromStore.distinctTagsArray);
-		this.selectedTags$ = store.select(fromStore.selectedTags);
-		this.relatedTags$ = store.select(fromStore.relatedTags);
+		this.tags$ = store.select(distinctTagsArray);
+		this.selectedTags$ = store.select(selectedTags);
+		this.relatedTags$ = store.select(relatedTags);
 
 		this.searchControl = new FormControl();
 		this.subscription = this.searchControl.valueChanges.pipe(

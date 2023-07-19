@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Bookmark, POPULAR, UUID } from 'lib';
 import { Observable, map, tap } from 'rxjs';
 import { BookmarkActions } from 'store/actions';
-import * as selectors from 'store/bookmark/selectors';
+import * as selectors from 'store/selectors/bookmark-entities.selectors';
 
 @Component({
 	selector: 'app-popular-bookmarks-container',

@@ -1,11 +1,13 @@
 import { createSelector } from '@ngrx/store';
 import { Bookmark, Tag } from 'lib';
-import { bookmarksArray } from './entities.selector';
-import { selectorModuleState } from './module.selector';
+import { bookmarksArray } from './bookmark-entities.selectors';
+import { selectorBookmarkModuleState } from './bookmark.selectors';
 
 const selectorTagsState = createSelector(
-	selectorModuleState,
+
+	selectorBookmarkModuleState,
 	state => state.tags
+
 )
 
 const arrayOfTagNames = createSelector(

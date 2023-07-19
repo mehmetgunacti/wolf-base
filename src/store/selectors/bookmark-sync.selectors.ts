@@ -1,10 +1,12 @@
 import { createSelector } from '@ngrx/store';
-import { bookmarksArray } from './entities.selector';
-import { selectorModuleState } from './module.selector';
+import { bookmarksArray } from './bookmark-entities.selectors';
+import { selectorBookmarkModuleState } from './bookmark.selectors';
 
 const selectorSyncState = createSelector(
-	selectorModuleState,
+
+	selectorBookmarkModuleState,
 	state => state.sync
+
 )
 
 export const bookmarksCreated = createSelector(
@@ -22,7 +24,7 @@ export const bookmarksCreated = createSelector(
 
 export const bookmarksDeleted = createSelector(
 
-	selectorModuleState,
+	selectorBookmarkModuleState,
 	state => state.sync.trashCount
 
 );

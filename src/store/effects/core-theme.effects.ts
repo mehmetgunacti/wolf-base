@@ -3,7 +3,7 @@ import { createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { switchMap } from 'rxjs/operators';
 import { ThemeService } from 'services/theme.service';
-import * as fromSelectors from '../core/selectors';
+import { isThemeDark } from 'store/selectors/core-configuration.selectors';
 
 @Injectable()
 export class CoreThemeEffects {
@@ -13,7 +13,7 @@ export class CoreThemeEffects {
 
 	setTheme$ = createEffect(
 
-		() => this.store.select(fromSelectors.isThemeDark).pipe(
+		() => this.store.select(isThemeDark).pipe(
 
 			switchMap(isDark => this.themeService.switchTheme(isDark))
 

@@ -3,8 +3,9 @@ import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 import { CoreActions } from 'store/actions';
-import * as fromBookmark from 'store/bookmark/selectors';
-import * as selectors from 'store/core/selectors';
+import { menuBookmarkBadge, menuSyncableItemsCount } from 'store/selectors/bookmark-ui.selectors';
+import { isSidebarVisible, isThemeDark } from 'store/selectors/core-configuration.selectors';
+import { isBigScreen } from 'store/selectors/core-ui.selectors';
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
 
@@ -36,7 +37,7 @@ export class CorePageComponent implements OnDestroy {
 
 		this.subscriptions.add(
 
-			this.store.select(selectors.isBigScreen).subscribe(
+			this.store.select(isBigScreen).subscribe(
 				result => this.bigScreen = result
 			)
 
@@ -44,16 +45,16 @@ export class CorePageComponent implements OnDestroy {
 
 		this.subscriptions.add(
 
-			store.select(selectors.isSidebarVisible).subscribe(
+			store.select(isSidebarVisible).subscribe(
 				visible => this.navCollapsed = !visible
 			)
 
 		);
 
-		this.syncableItemsCount$ = this.store.select(fromBookmark.menuSyncableItemsCount);
+		this.syncableItemsCount$ = this.store.select(menuSyncableItemsCount);
 
 		this.navMenuItems$ = combineLatest([
-			this.store.select(fromBookmark.menuBookmarkBadge),
+			this.store.select(menuBookmarkBadge),
 			this.syncableItemsCount$
 		]).pipe(
 
@@ -70,7 +71,7 @@ export class CorePageComponent implements OnDestroy {
 			})
 
 		);
-		this.isThemeDark$ = store.select(selectors.isThemeDark);
+		this.isThemeDark$ = store.select(isThemeDark);
 
 	}
 
