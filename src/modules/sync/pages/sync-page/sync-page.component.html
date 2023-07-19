@@ -10,35 +10,7 @@
 		(click)="onStart()">
 	</button>
 
-	<button
-		pButton
-		pRipple
-		type="button"
-		label="Config"
-		icon="pi pi-pencil"
-		class="p-button-text p-button-sm"
-		(click)="showFirestoreConfig()">
-	</button>
-
 </app-portal>
-
-<!-- Firestore Config Dialog -->
-<p-dialog
-	*ngIf="isFirestoreConfigDialogVisible$ | async"
-	header="Firestore Configuration"
-	[draggable]="false"
-	[visible]="isFirestoreConfigDialogVisible$ | async"
-	(visibleChange)="closeFirestoreDialog()"
-	[closeOnEscape]="true"
-	[closable]="true"
-	[modal]="true"
-	[dismissableMask]="true"
-	[maximizable]="true"
-	styleClass="firestoreConfigContainerComponent">
-
-	<app-firestore-config-container></app-firestore-config-container>
-
-</p-dialog>
 
 <p-messages severity="warn" *ngIf="isFirestoreConfigMissing$ | async">
     <ng-template pTemplate>
@@ -47,9 +19,9 @@
 			pButton
 			pRipple
 			type="button"
-			label="Click to Add"
+			label="Configure"
 			class="p-button-text p-button-sm"
-			(click)="showFirestoreConfig()">
+			routerLink="/settings">
 		</button>
     </ng-template>
 </p-messages>
