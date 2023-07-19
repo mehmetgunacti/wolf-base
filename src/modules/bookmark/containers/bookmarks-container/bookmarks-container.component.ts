@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
 import { Observable } from 'rxjs';
-import * as actions from 'store/bookmark/actions';
+import { BookmarkActions } from 'store/actions';
 import * as selectors from 'store/bookmark/selectors';
 
 @Component({
@@ -12,13 +12,12 @@ import * as selectors from 'store/bookmark/selectors';
 })
 export class BookmarksContainerComponent implements OnInit {
 
+	private store: Store = inject(Store);
 	bookmarks$: Observable<Bookmark[]>;
 
-	constructor(
-		private store: Store
-	) {
+	constructor() {
 
-		this.bookmarks$ = store.select(selectors.filteredBookmarks);
+		this.bookmarks$ = this.store.select(selectors.filteredBookmarks);
 
 	}
 
@@ -41,19 +40,19 @@ export class BookmarksContainerComponent implements OnInit {
 
 	onEdit(id: UUID): void {
 
-		this.store.dispatch(actions.openEditBookmarkDialog({ id }));
+		this.store.dispatch(BookmarkActions.UI.openEditBookmarkDialog({ id }));
 
 	}
 
 	onPopular(id: UUID): void {
 
-		this.store.dispatch(actions.togglePopular({ id }));
+		this.store.dispatch(BookmarkActions.togglePopular({ id }));
 
 	}
 
 	onClick(id: UUID): void {
 
-		this.store.dispatch(actions.clickBookmark({ id }));
+		this.store.dispatch(BookmarkActions.clickBookmark({ id }));
 
 	}
 

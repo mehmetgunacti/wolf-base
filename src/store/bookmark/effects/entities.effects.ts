@@ -7,8 +7,7 @@ import { liveQuery } from 'dexie';
 import { Bookmark, Click, LocalStorageService, POPULAR, RemoteStorageService, UUID, commaSplit, toggleArrayItem } from 'lib';
 import { Observable, combineLatest, fromEventPattern, of } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { showNotification } from 'store/core';
-import * as fromActions from '../actions';
+import { BookmarkActions, CoreActions } from 'store/actions';
 
 const combineBookmarksAndClicks = (localStorage: LocalStorageService): Observable<Bookmark[]> => {
 
@@ -59,7 +58,7 @@ export class EntitiesEffects {
 
 		() => combineBookmarksAndClicks(this.localStorage).pipe(
 
-			map((bookmarks: Bookmark[]) => fromActions.loadAllBookmarksSuccess({ bookmarks }))
+			map((bookmarks: Bookmark[]) => BookmarkActions.loadAllBookmarksSuccess({ bookmarks }))
 
 		)
 
@@ -71,9 +70,9 @@ export class EntitiesEffects {
 
 			(handler) => liveQuery(() => this.localStorage.clicks.list()).subscribe(handler),
 			(handler, unsubscribe) => unsubscribe()
-	
+
 		).pipe(
-			map(clicks => fromActions.bookmarksClicksSuccess({ clicks }))
+			map(clicks => BookmarkActions.bookmarksClicksSuccess({ clicks }))
 		)
 
 	);
@@ -82,7 +81,7 @@ export class EntitiesEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.clickTag),
+			ofType(BookmarkActions.Tags.clickTag),
 			withLatestFrom(this.activatedRoute.queryParams),
 			tap(([{ name }, params]) => {
 
@@ -109,7 +108,7 @@ export class EntitiesEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.emptySelectedTags),
+			ofType(BookmarkActions.Tags.emptySelectedTags),
 			withLatestFrom(this.activatedRoute.queryParams),
 			tap(([_, params]) => {
 
@@ -132,7 +131,7 @@ export class EntitiesEffects {
 
 			map(params => params['tags']),
 			map((tags: string) => commaSplit(tags)),
-			switchMap(tags => of(fromActions.setSelectedTags({ tags })))
+			switchMap(tags => of(BookmarkActions.Tags.setSelectedTags({ tags })))
 
 		)
 
@@ -142,7 +141,7 @@ export class EntitiesEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.search),
+			ofType(BookmarkActions.Tags.search),
 			withLatestFrom(this.activatedRoute.queryParams),
 			tap(([{ term }, params]) => {
 
@@ -168,44 +167,20 @@ export class EntitiesEffects {
 
 			map(params => params['search']),
 			filter(term => !!term),
-			switchMap(term => of(fromActions.search({ term })))
+			switchMap(term => of(BookmarkActions.Tags.search({ term })))
 
 		)
 
 	);
 
-	// bookmarksRemoveAll$ = createEffect(
-
-	// 	() => this.actions$.pipe(
-
-	// 		ofType(fromActions.bookmarksActionRemoveAll),
-	// 		map(() => fromActions.bookmarksActionLoadAllSuccess({ bookmarks: [] }))
-
-	// 	)
-
-	// );
-
-	// bookmarksSearch$ = createEffect(
-
-	// 	() => this.actions$.pipe(
-
-	// 		ofType(fromActions.searchBookmarks),
-	// 		map(p => p.term),
-	// 		switchMap(term => this.localStorage.bookmarks.search(term)),
-	// 		map(bookmarks => fromActions.searchBookmarksSuccess({ bookmarks }))
-
-	// 	)
-
-	// );
-
 	bookmarksCreate$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.createBookmark),
+			ofType(BookmarkActions.createBookmark),
 			map(param => param.bookmark),
 			switchMap(bookmark => this.localStorage.bookmarks.create(bookmark)),
-			map((bookmark: Bookmark) => fromActions.createBookmarkSuccess({ bookmark }))
+			map((bookmark: Bookmark) => BookmarkActions.createBookmarkSuccess({ bookmark }))
 
 		)
 
@@ -215,8 +190,8 @@ export class EntitiesEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.createBookmarkSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Bookmark created' }))
+			ofType(BookmarkActions.createBookmarkSuccess),
+			map(() => CoreActions.Notification.showNotification({ severity: 'success', detail: 'Bookmark created' }))
 
 		)
 
@@ -226,7 +201,7 @@ export class EntitiesEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.updateBookmark),
+			ofType(BookmarkActions.updateBookmark),
 			switchMap(({ id, bookmark }) => this.handleBookmarkUpdate(id, bookmark))
 
 		)
@@ -240,12 +215,12 @@ export class EntitiesEffects {
 
 			const bookmark = await this.localStorage.bookmarks.get(id);
 			if (bookmark)
-				return fromActions.updateBookmarkSuccess({ bookmark });
+				return BookmarkActions.updateBookmarkSuccess({ bookmark });
 
-			return fromActions.updateBookmarkFailure({ id });
+			return BookmarkActions.updateBookmarkFailure({ id });
 
 		}
-		return fromActions.updateBookmarkFailure({ id });
+		return BookmarkActions.updateBookmarkFailure({ id });
 
 	}
 
@@ -253,8 +228,8 @@ export class EntitiesEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.updateBookmarkSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Bookmark updated' }))
+			ofType(BookmarkActions.updateBookmarkSuccess),
+			map(() => CoreActions.Notification.showNotification({ severity: 'success', detail: 'Bookmark updated' }))
 
 		)
 
@@ -264,7 +239,7 @@ export class EntitiesEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.togglePopular),
+			ofType(BookmarkActions.togglePopular),
 			tap(({ id }) => this.localStorage.bookmarks.toggleTag(id, POPULAR))
 
 		),
@@ -276,11 +251,11 @@ export class EntitiesEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.deleteBookmark),
+			ofType(BookmarkActions.deleteBookmark),
 			map(p => p.id),
 			tap(id => this.localStorage.bookmarks.moveToTrash(id)),
 			// tap(() => this.toastService.show({ type: W359ToastType.SUCCESS, message: `Bookmark deleted` })),
-			// map(() => fromActions.bookmarksActionLoadAll())
+			// map(() => BookmarkActions.bookmarksActionLoadAll())
 
 		),
 		{ dispatch: false }
@@ -291,7 +266,7 @@ export class EntitiesEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.clickBookmark),
+			ofType(BookmarkActions.clickBookmark),
 			tap(({ id }) => this.localStorage.clicks.click(id)),
 			tap(({ id }) => this.remoteStorage.clicks.increase(id, 1))
 
@@ -304,10 +279,10 @@ export class EntitiesEffects {
 
 	// 	() => this.actions$.pipe(
 
-	// 		ofType(fromActions.tagsToggleSelected),
+	// 		ofType(BookmarkActions.tagsToggleSelected),
 	// 		map(p => p.id),
 	// 		switchMap(ids => this.localStorage.bookmarks.searchByTags(ids)),
-	// 		map(bookmarks => fromActions.bookmarksSearchSuccess({ bookmarks }))
+	// 		map(bookmarks => BookmarkActions.bookmarksSearchSuccess({ bookmarks }))
 
 	// 	)
 

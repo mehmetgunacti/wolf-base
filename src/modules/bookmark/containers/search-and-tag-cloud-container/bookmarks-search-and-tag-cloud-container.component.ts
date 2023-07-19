@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Tag } from 'lib';
 import { Observable, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { BookmarkActions } from 'store/actions';
 import * as fromStore from 'store/bookmark';
 
 @Component({
@@ -41,7 +42,7 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 
 	onTagClicked(name: string): void {
 
-		this.store.dispatch(fromStore.clickTag({ name }));
+		this.store.dispatch(BookmarkActions.Tags.clickTag({ name }));
 
 	}
 

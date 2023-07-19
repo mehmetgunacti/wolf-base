@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SyncEvent } from 'lib';
 import { interval, Subscription } from 'rxjs';
-import { syncEvent } from 'store/sync';
+import { SyncActions } from 'store/actions';
 
 @Injectable({
 	providedIn: 'root'
@@ -20,7 +20,7 @@ export class SyncService {
 		this.worker.onmessage = (event: MessageEvent<SyncEvent>) => {
 
 			console.log('Incoming from worker: ', event.data);
-			this.store.dispatch(syncEvent(event.data));
+			this.store.dispatch(SyncActions.syncEvent(event.data));
 
 		};
 

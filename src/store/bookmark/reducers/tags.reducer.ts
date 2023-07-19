@@ -1,13 +1,13 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as fromActions from '../actions';
+import { BookmarkActions } from 'store/actions';
 import * as fromStates from '../states';
 
 const reducer = createReducer(
 
 	fromStates.tagsInitialState,
 
-	on(fromActions.search, (state, { term }): fromStates.TagsState => ({ ...state, searchTerm: term })),
-	on(fromActions.setSelectedTags, (state, { tags }): fromStates.TagsState => ({ ...state, selectedTags: tags })),
+	on(BookmarkActions.Tags.search, (state, { term }): fromStates.TagsState => ({ ...state, searchTerm: term })),
+	on(BookmarkActions.Tags.setSelectedTags, (state, { tags }): fromStates.TagsState => ({ ...state, selectedTags: tags })),
 
 );
 

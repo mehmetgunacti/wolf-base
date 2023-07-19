@@ -2,11 +2,11 @@ import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
+import { CoreActions } from 'store/actions';
 import * as fromBookmark from 'store/bookmark/selectors';
-import * as actions from 'store/core/actions';
 import * as selectors from 'store/core/selectors';
-import * as navItems from '../../navigation-menu-items';
 import { buildInfo } from 'version';
+import * as navItems from '../../navigation-menu-items';
 
 @Component({
 	selector: 'app-core-page',
@@ -63,7 +63,7 @@ export class CorePageComponent implements OnDestroy {
 				menuItems.push(navItems.miHome);
 				menuItems.push(navItems.miBookmarks(bookmarkBadge));
 				menuItems.push(navItems.miDatabase);
-				menuItems.push(navItems.miSync(syncableCount > 0 ? `${syncableCount}`: undefined));
+				menuItems.push(navItems.miSync(syncableCount > 0 ? `${syncableCount}` : undefined));
 				menuItems.push(navItems.miSettings);
 				return menuItems;
 
@@ -83,13 +83,13 @@ export class CorePageComponent implements OnDestroy {
 	toggleNav(): void {
 
 		// navCollapsed is always the opposite of 'visible', no negation needed
-		this.store.dispatch(actions.setSidebarVisible({ visible: this.navCollapsed }));
+		this.store.dispatch(CoreActions.UI.setSidebarVisible({ visible: this.navCollapsed }));
 
 	}
 
 	onSwitchTheme(): void {
 
-		this.store.dispatch(actions.switchTheme());
+		this.store.dispatch(CoreActions.UI.switchTheme());
 
 	}
 

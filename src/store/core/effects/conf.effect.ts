@@ -5,7 +5,7 @@ import { liveQuery } from 'dexie';
 import { Configuration, LocalStorageService } from 'lib';
 import { fromEventPattern, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import * as fromActions from '../actions';
+import { CoreActions } from 'store/actions';
 
 @Injectable()
 export class ConfEffects {
@@ -26,7 +26,7 @@ export class ConfEffects {
 			(handler, unsubscribe) => unsubscribe()
 
 		).pipe(
-			map((configuration: Configuration) => fromActions.confChanged({ configuration }))
+			map((configuration: Configuration) => CoreActions.confChanged({ configuration }))
 		)
 
 	);
@@ -35,7 +35,7 @@ export class ConfEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.switchTheme),
+			ofType(CoreActions.UI.switchTheme),
 			tap(() => this.localStorage.configuration.toggleTheme())
 
 		),
@@ -47,7 +47,7 @@ export class ConfEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.setSidebarVisible),
+			ofType(CoreActions.UI.setSidebarVisible),
 			tap(({ visible }) => this.localStorage.configuration.setSidebarVisible(visible))
 
 		),
@@ -59,9 +59,9 @@ export class ConfEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(fromActions.saveFirestoreConfig),
+			ofType(CoreActions.saveFirestoreConfig),
 			switchMap(({ config }) => this.localStorage.configuration.saveConfig(config)),
-			switchMap(() => of(fromActions.saveFirestoreConfigSuccess()))
+			switchMap(() => of(CoreActions.saveFirestoreConfigSuccess()))
 
 		)
 

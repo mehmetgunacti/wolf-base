@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { errorNotification, ToastConfiguration } from 'lib';
-import { navigate, showNotification } from 'store/core';
+import { ToastConfiguration, errorNotification } from 'lib';
+import { CoreActions } from 'store/actions';
 
 @Injectable()
 export class CustomErrorHandler implements ErrorHandler {
@@ -13,16 +13,16 @@ export class CustomErrorHandler implements ErrorHandler {
 
 		console.error(error);
 		const store = this.injector.get(Store);
-		store.dispatch(showNotification(this.getToastConfiguration(error)));
+		store.dispatch(CoreActions.Notification.showNotification(this.getToastConfiguration(error)));
 		if (error instanceof HttpErrorResponse) {
 
 			if (error.error.code === 'LockedException')
-				store.dispatch(navigate({ url: '/change-password', skipLocationChange: true }));
+				store.dispatch(CoreActions.Navigation.navigate({ url: '/change-password', skipLocationChange: true }));
 
 			if (error.error.code === 'InvalidJWTTokenException') {
 
 				localStorage.removeItem('token');
-				store.dispatch(navigate({ url: '/login' }));
+				store.dispatch(CoreActions.Navigation.navigate({ url: '/login' }));
 
 			}
 

@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ToastConfiguration } from 'lib';
 import { MessageService } from 'primeng/api';
 import { tap } from 'rxjs/operators';
-import { showNotification } from '../actions/notification.action';
+import { CoreActions } from 'store/actions';
 
 @Injectable()
 export class NotificationEffects {
@@ -17,7 +17,7 @@ export class NotificationEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(showNotification),
+			ofType(CoreActions.Notification.showNotification),
 			tap((toast: ToastConfiguration) => this.messageService.add(toast))
 
 		),

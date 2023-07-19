@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FirestoreConfig } from 'lib';
 import { Observable } from 'rxjs';
+import { CoreActions } from 'store/actions';
 import * as fromCore from 'store/core';
 
 @Component({
@@ -23,7 +24,7 @@ export class FirestoreConfigContainerComponent {
 
 	onSave(config: FirestoreConfig): void {
 
-		this.store.dispatch(fromCore.saveFirestoreConfig({ config }));
+		this.store.dispatch(CoreActions.saveFirestoreConfig({ config }));
 
 	}
 

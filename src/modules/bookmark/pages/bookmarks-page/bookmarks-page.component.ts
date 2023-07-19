@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { slideUpDownTrigger } from 'modules/shared';
 import { Observable } from 'rxjs';
+import { BookmarkActions } from 'store/actions';
 import * as fromBookmark from 'store/bookmark';
 import * as fromCore from 'store/core';
 
@@ -31,37 +32,37 @@ export class BookmarksPageComponent {
 
 	onSearch(term: string): void {
 
-		this.store.dispatch(fromBookmark.search({ term }));
+		this.store.dispatch(BookmarkActions.Tags.search({ term }));
 
 	}
 
 	toggleTagCloud(): void {
 
-		this.store.dispatch(fromBookmark.toggleSearchAndTagCloudVisibility());
+		this.store.dispatch(BookmarkActions.UI.toggleSearchAndTagCloudVisibility());
 
 	}
 
 	openAddDialog(): void {
 
-		this.store.dispatch(fromBookmark.openAddBookmarkDialog());
+		this.store.dispatch(BookmarkActions.UI.openAddBookmarkDialog());
 
 	}
 
 	closeAddDialog(): void {
 
-		this.store.dispatch(fromBookmark.closeEditBookmarkDialog());
+		this.store.dispatch(BookmarkActions.UI.closeEditBookmarkDialog());
 
 	}
 
 	onTagClicked(name: string): void {
 
-		this.store.dispatch(fromBookmark.clickTag({ name }));
+		this.store.dispatch(BookmarkActions.Tags.clickTag({ name }));
 
 	}
 
 	emptyFilter(): void {
 
-		this.store.dispatch(fromBookmark.emptySelectedTags());
+		this.store.dispatch(BookmarkActions.Tags.emptySelectedTags());
 
 	}
 
