@@ -9,10 +9,3 @@ export const messages = createSelector(
 	(state: SyncModuleState): string[] => state.messages
 
 );
-
-export const isFirestoreConfigDialogVisible = createSelector(
-
-	syncModuleState,
-	state => state.firestoreConfigDialogVisible
-
-);

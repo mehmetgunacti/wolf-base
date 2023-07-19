@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { FirestoreConfig } from 'lib';
 import { Observable } from 'rxjs';
 import * as fromCore from 'store/core';
-import * as fromSync from 'store/sync';
 
 @Component({
 	selector: 'app-firestore-config-container',
@@ -25,12 +24,6 @@ export class FirestoreConfigContainerComponent {
 	onSave(config: FirestoreConfig): void {
 
 		this.store.dispatch(fromCore.saveFirestoreConfig({ config }));
-
-	}
-
-	onCancel(): void {
-
-		this.store.dispatch(fromSync.closeFirestoreDialog());
 
 	}
 
