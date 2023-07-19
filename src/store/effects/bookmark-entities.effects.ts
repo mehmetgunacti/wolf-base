@@ -46,7 +46,7 @@ const combineBookmarksAndClicks = (localStorage: LocalStorageService): Observabl
 };
 
 @Injectable()
-export class EntitiesEffects {
+export class BookmarkEntitiesEffects {
 
 	private actions$: Actions = inject(Actions);
 	private activatedRoute: ActivatedRoute = inject(ActivatedRoute);

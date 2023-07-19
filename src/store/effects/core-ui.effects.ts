@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { CoreActions } from 'store/actions';
 
 @Injectable()
-export class UIEffects {
+export class CoreUIEffects {
 
 	private breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
 

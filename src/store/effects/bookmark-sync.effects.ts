@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { BookmarkActions } from 'store/actions';
 
 @Injectable()
-export class SyncEffects {
+export class BookmarkSyncEffects {
 
 	// private actions$: Actions = inject(Actions);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);

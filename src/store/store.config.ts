@@ -1,8 +1,16 @@
 import { Action, ActionReducer, ActionReducerMap, MetaReducer, combineReducers } from '@ngrx/store';
 import * as fromBookmark from './bookmark';
 import * as fromCore from './core';
-import * as fromSync from './sync';
+import { BookmarkEntitiesEffects } from './effects/bookmark-entities.effects';
+import { BookmarkSyncEffects } from './effects/bookmark-sync.effects';
+import { CoreConfigurationEffects } from './effects/core-configuration.effects';
+import { CoreNavigationEffects } from './effects/core-navigation.effects';
+import { CoreNotificationEffects } from './effects/core-notification.effects';
+import { CoreThemeEffects } from './effects/core-theme.effects';
+import { CoreUIEffects } from './effects/core-ui.effects';
+import { SyncEffects } from './effects/sync.effects';
 import { AppState } from './states/app.state';
+import * as fromSync from './sync';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -24,18 +32,18 @@ export const metaReducers: MetaReducer<AppState>[] = [
 export const effects = [
 
 	// Core
-	fromCore.ConfEffects,
-	fromCore.NotificationEffects,
-	fromCore.NavigationEffects,
-	fromCore.UIEffects,
-	fromCore.ThemeEffects,
+	CoreConfigurationEffects,
+	CoreNotificationEffects,
+	CoreNavigationEffects,
+	CoreUIEffects,
+	CoreThemeEffects,
 
 	// Bookmarks
-	fromBookmark.EntitiesEffects,
-	fromBookmark.SyncEffects,
+	BookmarkEntitiesEffects,
+	BookmarkSyncEffects,
 
 	// Sync
-	fromSync.SyncEffects
+	SyncEffects
 
 ];
 

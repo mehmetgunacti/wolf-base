@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ToastConfiguration } from 'lib';
-import { MessageService } from 'primeng/api';
 import { tap } from 'rxjs/operators';
 import { CoreActions } from 'store/actions';
 
 @Injectable()
-export class NotificationEffects {
+export class CoreNavigationEffects {
 
 	constructor(
 		private actions$: Actions,
-		private messageService: MessageService
+		private router: Router
 	) { }
 
-	showNotification$ = createEffect(
+	navigate$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(CoreActions.Notification.showNotification),
-			tap((toast: ToastConfiguration) => this.messageService.add(toast))
+			ofType(CoreActions.Navigation.navigate),
+			tap(({ url, skipLocationChange }) => this.router.navigateByUrl(url, { skipLocationChange }))
 
 		),
 		{ dispatch: false }

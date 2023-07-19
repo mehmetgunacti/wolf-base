@@ -8,7 +8,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { CoreActions } from 'store/actions';
 
 @Injectable()
-export class ConfEffects {
+export class CoreConfigurationEffects {
 
 	private actions$: Actions = inject(Actions);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
