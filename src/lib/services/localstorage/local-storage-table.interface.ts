@@ -69,14 +69,16 @@ export interface ConfigurationTable {
 	getSyncWorkerActive(): Promise<boolean>;
 	getSidebarVisible(): Promise<boolean>;
 	getConfig(): Promise<FirestoreConfig>;
+	getTitleLookupUrl(): Promise<string | null>;
 	isDarkTheme(): Promise<boolean>;
 
 	setSyncWorkerActive(active: boolean): Promise<void>;
 	setSidebarVisible(visible: boolean): Promise<void>;
 	setDarkTheme(dark: boolean): Promise<void>;
+	setTitleLookupUrl(url: string): Promise<void>;
 	toggleTheme(): Promise<void>;
 	
-	saveConfig(config: FirestoreConfig): Promise<void>;
+	saveFirestoreConfig(config: FirestoreConfig): Promise<void>;
 
 	dump(): Promise<Configuration>;
 

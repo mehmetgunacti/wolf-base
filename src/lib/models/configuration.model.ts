@@ -6,6 +6,7 @@ export interface Configuration {
 	apiKey: string | null;
 	baseURL: string | null;
 	projectId: string | null;
+	titleLookupUrl: string | null;
 
 }
 

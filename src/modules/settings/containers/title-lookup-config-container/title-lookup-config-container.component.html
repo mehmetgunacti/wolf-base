@@ -1,0 +1,8 @@
+<p-card header="Title Lookup URL">
+
+	<app-title-lookup-config-form
+		[url]="url$ | async"
+		(save)="onSave($event)">
+	</app-title-lookup-config-form>
+
+</p-card>

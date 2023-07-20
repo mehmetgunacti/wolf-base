@@ -1,10 +1,12 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bookmark, UUID } from 'lib';
+import { Bookmark, ToastConfiguration, UUID } from 'lib';
 import { Observable, Subject, combineLatest, filter, map } from 'rxjs';
 import { createBookmark, deleteBookmark, updateBookmark } from 'store/actions/bookmark.actions';
+import { showNotification } from 'store/actions/core-notification.actions';
 import { selectedBookmark } from 'store/selectors/bookmark-entities.selectors';
 import { distinctTagsArray } from 'store/selectors/bookmark-tags.selectors';
+import { titleLookup } from 'store/selectors/core-configuration.selectors';
 
 @Component({
 	selector: 'app-bookmark-edit-container',
@@ -17,11 +19,13 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	bookmark$: Observable<Bookmark | null | undefined>;
 	tagSuggestions$!: Observable<string[]>;
+	titleLookup$: Observable<string | null>;
 	tagInput = new Subject<string>();
 
 	constructor() {
 
 		this.bookmark$ = this.store.select(selectedBookmark);
+		this.titleLookup$ = this.store.select(titleLookup);
 
 	}
 
@@ -71,6 +75,12 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 	onTagInput(val: string): void {
 
 		this.tagInput.next(val);
+
+	}
+
+	onTitleLookup(toast: ToastConfiguration): void {
+
+		this.store.dispatch(showNotification(toast));
 
 	}
 

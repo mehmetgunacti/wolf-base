@@ -31,7 +31,8 @@ export const initialCoreConfigurationState: CoreConfigurationState = {
 	darkTheme: true,
 	apiKey: null,
 	baseURL: null,
-	projectId: null
+	projectId: null,
+	titleLookupUrl: null
 
 };
 

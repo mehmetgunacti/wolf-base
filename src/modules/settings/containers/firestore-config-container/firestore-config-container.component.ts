@@ -18,7 +18,7 @@ export class FirestoreConfigContainerComponent {
 
 	constructor() {
 
-		this.config$ = this.store.select(fromCore.getFirestoreConfig);
+		this.config$ = this.store.select(fromCore.firestoreConfig);
 
 	}
 

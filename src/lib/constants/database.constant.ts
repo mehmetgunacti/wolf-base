@@ -15,6 +15,7 @@ export enum CONF_KEYS {
 	darkTheme = 'darkTheme',
 	apiKey = 'apiKey',
 	baseURL = 'baseURL',
-	projectId = 'projectId'
+	projectId = 'projectId',
+	titleLookupUrl = 'titleLookupUrl'
 
 }

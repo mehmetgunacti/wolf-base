@@ -42,7 +42,7 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 
 	}
 
-	setValues(bookmark: Bookmark): void {
+	override setValues(bookmark: Bookmark): void {
 
 		this.id.setValue(bookmark.id, { emitEvent: false });
 		this.name.setValue(bookmark.name, { emitEvent: false });

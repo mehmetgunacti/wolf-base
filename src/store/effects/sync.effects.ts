@@ -5,7 +5,7 @@ import { LocalStorageService } from 'lib';
 import { map, tap } from 'rxjs/operators';
 import { SyncService } from 'services/sync.service';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { saveFirestoreConfig } from 'store/actions/core.actions';
+import { saveFirestoreConfig, saveFirestoreConfigSuccess, saveTitleLookup, saveTitleLookupSuccess } from 'store/actions/core.actions';
 import { syncTrigger } from 'store/actions/sync.actions';
 
 @Injectable()
@@ -31,7 +31,18 @@ export class SyncEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(saveFirestoreConfig),
+			ofType(saveFirestoreConfigSuccess),
+			map(() => showNotification({ severity: 'success', detail: 'Configuration saved' }))
+
+		)
+
+	);
+
+	saveTitleLookupConfigSuccess$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(saveTitleLookupSuccess),
 			map(() => showNotification({ severity: 'success', detail: 'Configuration saved' }))
 
 		)

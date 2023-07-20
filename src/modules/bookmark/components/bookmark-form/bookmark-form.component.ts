@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
-import { environment } from 'environments/environment';
-import { Bookmark, UUID } from 'lib';
+import { Bookmark, ToastConfiguration, UUID } from 'lib';
 import { AutoComplete } from 'primeng/autocomplete';
 import { BehaviorSubject, Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
@@ -15,11 +14,13 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	@Input() bookmark: Bookmark | null | undefined;
 	@Input() tagSuggestions: string[] | null | undefined;
+	@Input() titleLookupUrl: string | null | undefined;
 
 	@Output() create: EventEmitter<Partial<Bookmark>> = new EventEmitter();
 	@Output() update: EventEmitter<{ id: UUID, bookmark: Partial<Bookmark> }> = new EventEmitter();
 	@Output() delete: EventEmitter<UUID> = new EventEmitter();
 	@Output() tagInput: EventEmitter<string> = new EventEmitter();
+	@Output() titleLookup: EventEmitter<ToastConfiguration> = new EventEmitter();
 
 	@ViewChild('autocomplete') autocompleteChange!: AutoComplete;
 
@@ -131,8 +132,27 @@ will be deleted. Continue?`)
 
 	lookupTitle(): void {
 
+		if (!this.titleLookupUrl) {
+
+			this.titleLookup.emit({
+				severity: 'warn',
+				summary: 'Missing Configuration',
+				detail: 'Title Lookup Url'
+			});
+			return;
+
+		}
+
 		// there's always a FormControl at index 0
 		const url: string = this.form.urls.at(0).getRawValue();
+		if (
+			!(url.startsWith('https://') || url.startsWith('https://'))
+		) {
+
+			this.titleLookup.emit({ severity: 'error', summary: 'Cannot Lookup URL', detail: `URL must start with 'http://' or 'https://'` });
+			return;
+
+		}
 
 		// get the title of the web page
 		const parsed: URL | null = this.parseURL(url);
@@ -140,19 +160,29 @@ will be deleted. Continue?`)
 
 			const { origin, pathname } = parsed;
 			const term = `${origin}${pathname}`;
-			const remoteURL = environment.remoteURLLookup + encodeURI(term);
+			const remoteURL = this.titleLookupUrl + encodeURI(term);
 			console.info('Looking up page title:', remoteURL);
-			fetch(remoteURL).then(
-				response => response.text().then(
-					title => {
-						console.info(remoteURL, ' returned: [', title, ']');
-						this.form.title.setValue(title);
-						this.form.title.markAsDirty();
-					}
+			this.titleLookup.emit({ severity: 'info', detail: 'Looking up title...' });
+			fetch(remoteURL)
+				.then(
+					response => response.text().then(
+						title => {
+							console.info(remoteURL, ' returned: [', title, ']');
+							this.form.title.setValue(title);
+							this.form.title.markAsDirty();
+							this.titleLookup.emit({ severity: 'success', detail: 'Title Lookup Successful' });
+						}
+					)
 				)
-			);
+				.catch(err => {
 
-		}
+					console.error('Lookup failed:', remoteURL);
+					this.titleLookup.emit({ severity: 'error', detail: 'Title Lookup Failed' });
+
+				});
+
+		} else
+			this.titleLookup.emit({ severity: 'error', detail: 'Could not parse URL' });
 
 	}
 

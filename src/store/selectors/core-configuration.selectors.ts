@@ -38,9 +38,16 @@ export const isFirestoreApiKeyMissing = createSelector(
 
 );
 
-export const getFirestoreConfig = createSelector(
+export const firestoreConfig = createSelector(
 
 	confState,
 	({ apiKey, baseURL, projectId }): FirestoreConfig => ({ apiKey, baseURL, projectId })
+
+);
+
+export const titleLookup = createSelector(
+
+	confState,
+	(state: CoreConfigurationState) => state.titleLookupUrl
 
 );

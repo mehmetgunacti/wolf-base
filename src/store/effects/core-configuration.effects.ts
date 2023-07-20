@@ -6,7 +6,7 @@ import { Configuration, LocalStorageService } from 'lib';
 import { fromEventPattern, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
-import { confChanged, saveFirestoreConfig, saveFirestoreConfigSuccess } from 'store/actions/core.actions';
+import { confChanged, saveFirestoreConfig, saveFirestoreConfigSuccess, saveTitleLookup } from 'store/actions/core.actions';
 
 @Injectable()
 export class CoreConfigurationEffects {
@@ -56,13 +56,25 @@ export class CoreConfigurationEffects {
 
 	);
 
-	saveConfig$ = createEffect(
+	saveFirestoreConfig$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(saveFirestoreConfig),
-			switchMap(({ config }) => this.localStorage.configuration.saveConfig(config)),
-			switchMap(() => of(saveFirestoreConfigSuccess()))
+			switchMap(({ config }) => this.localStorage.configuration.saveFirestoreConfig(config)),
+			map(() => saveFirestoreConfigSuccess())
+
+		)
+
+	);
+
+	saveTitleLookupConfig$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(saveTitleLookup),
+			switchMap(({ url }) => this.localStorage.configuration.setTitleLookupUrl(url)),
+			map(() => saveFirestoreConfigSuccess())
 
 		)
 
