@@ -54,7 +54,7 @@ describe('DownloadClicksAction', () => {
 
 			await action.execute();
 
-			const clicks = await localStorage.clicks.clicked();
+			const clicks = await localStorage.clicks.list();
 			const click2 = clicks.find(c => c.id === ID2);
 
 			expect(click2).toBeTruthy();
