@@ -12,7 +12,6 @@ export class FirestoreConfigFormComponent implements OnInit, OnChanges {
 	@Input() config: FirestoreConfig | null | undefined;
 
 	@Output() save: EventEmitter<FirestoreConfig> = new EventEmitter();
-	@Output() cancel: EventEmitter<void> = new EventEmitter();
 
 	form: FirestoreConfigForm = new EditFormImpl();
 
@@ -38,12 +37,6 @@ export class FirestoreConfigFormComponent implements OnInit, OnChanges {
 			return;
 
 		this.save.emit(this.form.value);
-
-	}
-
-	onCancel(): void {
-
-		this.cancel.emit();
 
 	}
 
