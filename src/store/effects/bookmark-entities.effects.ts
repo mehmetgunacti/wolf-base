@@ -9,7 +9,7 @@ import { Observable, combineLatest, fromEventPattern, of } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { clickTag, emptySelectedTags, search, setSelectedTags } from 'store/actions/bookmark-tags.actions';
 import { togglePopular } from 'store/actions/bookmark-ui.actions';
-import { clickBookmark, clicksSuccess, createBookmark, createBookmarkSuccess, deleteBookmark, loadAllBookmarksSuccess, updateBookmark, updateBookmarkFailure, updateBookmarkSuccess } from 'store/actions/bookmark.actions';
+import { clickBookmark, clicksSuccess, createBookmark, createBookmarkSuccess, deleteBookmark, deleteBookmarkSuccess, loadAllBookmarksSuccess, updateBookmark, updateBookmarkFailure, updateBookmarkSuccess } from 'store/actions/bookmark.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 
 const combineBookmarksAndClicks = (localStorage: LocalStorageService): Observable<Bookmark[]> => {
@@ -256,12 +256,21 @@ export class BookmarkEntitiesEffects {
 
 			ofType(deleteBookmark),
 			map(p => p.id),
-			tap(id => this.localStorage.bookmarks.moveToTrash(id)),
-			// tap(() => this.toastService.show({ type: W359ToastType.SUCCESS, message: `Bookmark deleted` })),
-			// map(() => bookmarksActionLoadAll())
+			switchMap(id => this.localStorage.bookmarks.moveToTrash(id)),
+			map(() => deleteBookmarkSuccess())
 
-		),
-		{ dispatch: false }
+		)
+
+	);
+
+	bookmarkDeleted$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(deleteBookmarkSuccess),
+			map(() => showNotification({ severity: 'success', detail: 'Bookmark deleted' }))
+
+		)
 
 	);
 
@@ -270,25 +279,11 @@ export class BookmarkEntitiesEffects {
 		() => this.actions$.pipe(
 
 			ofType(clickBookmark),
-			tap(({ id }) => this.localStorage.clicks.click(id)),
-			tap(({ id }) => this.remoteStorage.clicks.increase(id, 1))
+			switchMap(({ id }) => this.localStorage.clicks.click(id))
 
 		),
 		{ dispatch: false }
 
 	);
-
-	// tagsToggleSelected$ = createEffect(
-
-	// 	() => this.actions$.pipe(
-
-	// 		ofType(tagsToggleSelected),
-	// 		map(p => p.id),
-	// 		switchMap(ids => this.localStorage.bookmarks.searchByTags(ids)),
-	// 		map(bookmarks => bookmarksSearchSuccess({ bookmarks }))
-
-	// 	)
-
-	// );
 
 }

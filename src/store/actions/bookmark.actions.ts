@@ -8,6 +8,6 @@ export const updateBookmark = createAction('[Bookmark] Update Bookmark', props<{
 export const updateBookmarkSuccess = createAction('[Bookmark] Update Bookmark Success', props<{ bookmark: Bookmark }>());
 export const updateBookmarkFailure = createAction('[Bookmark] Update Bookmark Failure', props<{ id: UUID }>());
 export const deleteBookmark = createAction('[Bookmark] Delete Bookmark', props<{ id: UUID }>());
-export const deleteBookmarkSuccess = createAction('[Bookmark] Delete Bookmark Success', props<{ bookmark: Bookmark }>());
+export const deleteBookmarkSuccess = createAction('[Bookmark] Delete Bookmark Success');
 export const clickBookmark = createAction('[Bookmark] Click Bookmark', props<{ id: UUID }>());
 export const clicksSuccess = createAction('[Bookmark] Bookmarks Clicks Success', props<{ clicks: Click[] }>());
