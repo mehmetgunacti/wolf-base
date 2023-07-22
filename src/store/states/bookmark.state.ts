@@ -12,7 +12,7 @@ export interface BookmarkModuleState {
 // todo move some properties to ui state
 export interface BookmarkEntitiesState {
 
-	entities: Map<UUID, Bookmark>;
+	entities: Record<UUID, Bookmark>;
 	selected: UUID | null;
 	clicks: Click[];
 
@@ -50,7 +50,7 @@ export const initialBookmarkSyncState: BookmarkSyncState = {
 
 export const initialBookmarkEntitiesState: BookmarkEntitiesState = {
 
-	entities: new Map(),
+	entities: {},
 	selected: null,
 	clicks: []
 

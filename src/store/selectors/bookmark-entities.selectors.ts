@@ -18,28 +18,28 @@ export const bookmarks = createSelector(
 export const bookmarksIds = createSelector(
 
 	selectorBookmarksState,
-	state => state.entities.keys()
+	state => Object.keys(state.entities)
 
 );
 
 export const bookmarksArray = createSelector(
 
 	selectorBookmarksState,
-	state => Array.from(state.entities.values())
+	state => Object.values(state.entities)
 
 );
 
 export const bookmarksCount = createSelector(
 
-	selectorBookmarksState,
-	state => state.entities.size
+	bookmarksIds,
+	ids => ids.length
 
 );
 
 export const selectedBookmark = createSelector(
 
 	selectorBookmarksState,
-	state => state.selected ? state.entities.get(state.selected) : null
+	state => state.selected ? state.entities[state.selected] : null
 
 );
 

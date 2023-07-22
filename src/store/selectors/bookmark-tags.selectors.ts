@@ -65,6 +65,7 @@ export const searchTerm = createSelector(
 
 // move to entities.selector.ts
 export const filteredBookmarks = createSelector(
+
 	bookmarksArray,
 	selectedTags,
 	searchTerm,
