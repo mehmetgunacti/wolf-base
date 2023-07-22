@@ -13,9 +13,7 @@ export enum CONF_KEYS {
 	syncWorkerActive = 'syncWorkerActive',
 	sidebarVisible = 'sidebarVisible',
 	darkTheme = 'darkTheme',
-	apiKey = 'apiKey',
-	baseURL = 'baseURL',
-	projectId = 'projectId',
+	firestoreConfig = 'firestoreConfig',
 	titleLookupUrl = 'titleLookupUrl'
 
 }

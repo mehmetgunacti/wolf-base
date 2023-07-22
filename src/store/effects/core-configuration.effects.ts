@@ -21,7 +21,7 @@ export class CoreConfigurationEffects {
 			// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
 			// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
 			// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
-			(handler) => liveQuery(() => this.localStorage.configuration.dump()).subscribe(handler),
+			(handler) => liveQuery(() => this.localStorage.configuration.getConfiguration()).subscribe(handler),
 
 			// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
 			(handler, unsubscribe) => unsubscribe()
@@ -61,7 +61,7 @@ export class CoreConfigurationEffects {
 		() => this.actions$.pipe(
 
 			ofType(saveFirestoreConfig),
-			switchMap(({ config }) => this.localStorage.configuration.saveFirestoreConfig(config)),
+			switchMap(({ config }) => this.localStorage.configuration.setFirestoreConfig(config)),
 			map(() => saveFirestoreConfigSuccess())
 
 		)

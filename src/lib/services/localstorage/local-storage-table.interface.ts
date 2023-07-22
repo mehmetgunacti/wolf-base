@@ -41,10 +41,10 @@ export interface EntityTable<T extends Entity> {
 export interface KeyValueTable {
 
 	set(key: string, value: string): Promise<void>;
-	get(key: string): Promise<string>;
+	get<T>(key: string): Promise<T | null>;
 	remove(key: string): Promise<void>;
 
-	dump<T>(): Promise<T>;
+	dump(): Promise<Map<string, any>>;
 
 }
 
@@ -66,20 +66,13 @@ export interface ClicksTable {
 
 export interface ConfigurationTable {
 
-	getSyncWorkerActive(): Promise<boolean>;
-	getSidebarVisible(): Promise<boolean>;
-	getConfig(): Promise<FirestoreConfig>;
-	getTitleLookupUrl(): Promise<string | null>;
-	isDarkTheme(): Promise<boolean>;
-
-	setSyncWorkerActive(active: boolean): Promise<void>;
 	setSidebarVisible(visible: boolean): Promise<void>;
-	setDarkTheme(dark: boolean): Promise<void>;
 	setTitleLookupUrl(url: string): Promise<void>;
-	toggleTheme(): Promise<void>;
-	
-	saveFirestoreConfig(config: FirestoreConfig): Promise<void>;
+	setFirestoreConfig(config: FirestoreConfig): Promise<void>;
 
-	dump(): Promise<Configuration>;
+	toggleTheme(): Promise<void>;
+
+	getFirestoreConfig(): Promise<FirestoreConfig | null>;
+	getConfiguration(): Promise<Configuration>;
 
 }

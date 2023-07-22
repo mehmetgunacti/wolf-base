@@ -132,10 +132,7 @@ class FirestoreTool implements Firestore {
 		return await HTTP.post<FirestoreWriteResult, FirestoreWrites, number>(
 			url.toURL(),
 			url.toFirestoreWrites(),
-			(firebaseResponse: FirestoreWriteResult): number => {
-				console.log(firebaseResponse);
-				return Number(firebaseResponse?.writeResults[0]?.transformResults[0]?.integerValue);
-			}
+			(firebaseResponse: FirestoreWriteResult): number => Number(firebaseResponse?.writeResults[0]?.transformResults[0]?.integerValue)
 		);
 
 	}

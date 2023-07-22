@@ -1,19 +1,19 @@
 import { RemoteCollection, UUID } from 'lib/constants';
 import { FIRESTORE_INTEGER, FIRESTORE_VALUE } from './firestore.constant';
+import { FirestoreConfig } from 'lib/models';
 
 export class FirestoreCreateURL {
 
 	constructor(
-		public baseURL: string,
-		public projectId: string,
-		public apiKey: string,
+		public firestoreConfig: FirestoreConfig,
 		public collection: string,
 		public id: UUID
 	) { }
 
 	toURL(): string {
 
-		return `${this.baseURL}projects/${this.projectId}/databases/(default)/documents/${this.collection}?key=${this.apiKey}&documentId=${this.id}`;
+		const { baseURL, projectId, apiKey } = this.firestoreConfig;
+		return `${baseURL}projects/${projectId}/databases/(default)/documents/${this.collection}?key=${apiKey}&documentId=${this.id}`;
 
 	}
 
@@ -22,9 +22,7 @@ export class FirestoreCreateURL {
 export class FirestorePatchURL {
 
 	constructor(
-		public baseURL: string,
-		public projectId: string,
-		public apiKey: string,
+		public firestoreConfig: FirestoreConfig,
 		public collection: RemoteCollection,
 		public id: UUID,
 		public mask: string
@@ -32,7 +30,8 @@ export class FirestorePatchURL {
 
 	toURL(): string {
 
-		return `${this.baseURL}projects/${this.projectId}/databases/(default)/documents/${this.collection}/${this.id}?key=${this.apiKey}&${this.mask}`;
+		const { baseURL, projectId, apiKey } = this.firestoreConfig;
+		return `${baseURL}projects/${projectId}/databases/(default)/documents/${this.collection}/${this.id}?key=${apiKey}&${this.mask}`;
 
 	}
 
@@ -41,16 +40,15 @@ export class FirestorePatchURL {
 export class FirestoreDocumentURL {
 
 	constructor(
-		public baseURL: string,
-		public projectId: string,
-		public apiKey: string,
+		public firestoreConfig: FirestoreConfig,
 		public collection: RemoteCollection,
 		public document: UUID
 	) { }
 
 	toURL(): string {
 
-		return `${this.baseURL}projects/${this.projectId}/databases/(default)/documents/${this.collection}/${this.document}?key=${this.apiKey}`;
+		const { baseURL, projectId, apiKey } = this.firestoreConfig;
+		return `${baseURL}projects/${projectId}/databases/(default)/documents/${this.collection}/${this.document}?key=${apiKey}`;
 
 	}
 
@@ -59,9 +57,7 @@ export class FirestoreDocumentURL {
 export class FirestoreListURL {
 
 	constructor(
-		public baseURL: string,
-		public projectId: string,
-		public apiKey: string,
+		public firestoreConfig: FirestoreConfig,
 		public collection: RemoteCollection,
 		public pageSize: string,
 		public onlyIds = false
@@ -72,7 +68,8 @@ export class FirestoreListURL {
 		let queryParameters = `pageSize=${this.pageSize}`;
 		if (this.onlyIds)
 			queryParameters += `&mask.fieldPaths=dummyField`;
-		return `${this.baseURL}projects/${this.projectId}/databases/(default)/documents/${this.collection}?key=${this.apiKey}&${queryParameters}`;
+		const { baseURL, projectId, apiKey } = this.firestoreConfig;
+		return `${baseURL}projects/${projectId}/databases/(default)/documents/${this.collection}?key=${apiKey}&${queryParameters}`;
 
 	}
 
@@ -81,9 +78,7 @@ export class FirestoreListURL {
 export class FirestoreIncreaseURL {
 
 	constructor(
-		public baseURL: string,
-		public projectId: string,
-		public apiKey: string,
+		public firestoreConfig: FirestoreConfig,
 		public collection: RemoteCollection,
 		public document: string,
 		public fieldPath: string,
@@ -93,17 +88,19 @@ export class FirestoreIncreaseURL {
 
 	toURL(): string {
 
-		return `${this.baseURL}projects/${this.projectId}/databases/(default)/documents${this.command}?key=${this.apiKey}`
+		const { baseURL, projectId, apiKey } = this.firestoreConfig;
+		return `${baseURL}projects/${projectId}/databases/(default)/documents${this.command}?key=${apiKey}`
 
 	}
 
 	toFirestoreWrites(): FirestoreWrites {
 
+		const { projectId } = this.firestoreConfig;
 		const requestBody = {
 			writes: [
 				{
 					transform: {
-						document: `projects/${this.projectId}/databases/(default)/documents/${this.collection}/${this.document}`,
+						document: `projects/${projectId}/databases/(default)/documents/${this.collection}/${this.document}`,
 						fieldTransforms: [
 							{
 								fieldPath: this.fieldPath,

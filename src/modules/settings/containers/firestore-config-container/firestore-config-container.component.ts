@@ -14,7 +14,7 @@ export class FirestoreConfigContainerComponent {
 
 	private store: Store = inject(Store);
 
-	config$: Observable<FirestoreConfig>;
+	config$: Observable<FirestoreConfig | null>;
 
 	constructor() {
 

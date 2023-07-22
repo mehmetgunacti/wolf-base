@@ -16,7 +16,7 @@ export class SyncPageComponent {
 
 	constructor() {
 
-		this.isFirestoreConfigMissing$ = this.store.select(fromCore.isFirestoreApiKeyMissing);
+		this.isFirestoreConfigMissing$ = this.store.select(fromCore.isFirestoreConfigMissing);
 
 	}
 

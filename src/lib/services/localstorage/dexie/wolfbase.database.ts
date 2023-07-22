@@ -5,7 +5,7 @@ import { SyncData } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { DexieConfiguration } from 'lib/models/database.model';
 
-class DEFAULT_CONF_VALUES {
+export class DEFAULT_CONF_VALUES {
 
 	static darkTheme = true;
 	static sidebarVisible = true;

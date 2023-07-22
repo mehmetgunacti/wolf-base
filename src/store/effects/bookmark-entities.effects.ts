@@ -7,6 +7,7 @@ import { liveQuery } from 'dexie';
 import { Bookmark, Click, LocalStorageService, POPULAR, RemoteStorageService, UUID, commaSplit, toggleArrayItem } from 'lib';
 import { Observable, combineLatest, fromEventPattern, of } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { RemoteStorageServiceProxy } from 'services/remote-storage.service';
 import { clickTag, emptySelectedTags, search, setSelectedTags } from 'store/actions/bookmark-tags.actions';
 import { togglePopular } from 'store/actions/bookmark-ui.actions';
 import { clickBookmark, clicksSuccess, createBookmark, createBookmarkSuccess, deleteBookmark, deleteBookmarkSuccess, loadAllBookmarksSuccess, updateBookmark, updateBookmarkFailure, updateBookmarkSuccess } from 'store/actions/bookmark.actions';
@@ -279,7 +280,8 @@ export class BookmarkEntitiesEffects {
 		() => this.actions$.pipe(
 
 			ofType(clickBookmark),
-			switchMap(({ id }) => this.localStorage.clicks.click(id))
+			switchMap(async ({ id }) => { await this.localStorage.clicks.click(id); return id; }),
+			switchMap(id => this.remoteStorage.clicks.increase(id, 1))
 
 		),
 		{ dispatch: false }

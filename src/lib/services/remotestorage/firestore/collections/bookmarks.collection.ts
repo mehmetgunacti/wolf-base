@@ -6,13 +6,14 @@ import { FirestoreIncreaseURL, sleep } from 'lib/utils';
 import { Firestore } from 'lib/utils/firestore/firestore.tool';
 import { BookmarkFirestoreConverter } from '../converter';
 import { FirestoreCollection } from '../firestore.collection';
-import { RemoteData, RemoteMetadata } from 'lib/models';
+import { FirestoreConfig, RemoteData, RemoteMetadata } from 'lib/models';
 
 export class BookmarksFirestoreCollection extends FirestoreCollection<Bookmark> implements BookmarksCollection {
 
-	constructor(firestore: Firestore) {
+	constructor(firestore: Firestore, firestoreConfig: FirestoreConfig) {
 		super(
 			firestore,
+			firestoreConfig,
 			RemoteCollection.bookmarks,
 			new BookmarkFirestoreConverter()
 		);
@@ -21,9 +22,7 @@ export class BookmarksFirestoreCollection extends FirestoreCollection<Bookmark> 
 	async click(id: UUID, amount: number = 1): Promise<number> {
 
 		const url = new FirestoreIncreaseURL(
-			this.baseURL,
-			this.projectId,
-			this.apiKey,
+			this.firestoreConfig,
 			RemoteCollection.bookmarks_clicks,
 			id,
 			'clicks',

@@ -1,8 +1,10 @@
 import { ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
-import { LocalStorageService, RemoteStorageService, localStorageServiceFactory, remoteStorageServiceFactory } from 'lib';
+import { Store } from '@ngrx/store';
+import { LocalStorageService, RemoteStorageService, localStorageServiceFactory } from 'lib';
 import { MessageService } from 'primeng/api';
 import { CustomErrorHandler } from 'services';
+import { RemoteStorageServiceProxy } from 'services/remote-storage.service';
 
 export const routes: Routes = [
 
@@ -19,10 +21,10 @@ export const routes: Routes = [
 
 // 	return () => {
 
-		// set theme
-		// const lsTheme = localStorage.getItem('theme');
-		// const newTheme = !!lsTheme ? resolveTheme(lsTheme) : DEFAULT_THEME;
-		// store.dispatch(actions.themeSet({ newTheme }));
+// set theme
+// const lsTheme = localStorage.getItem('theme');
+// const newTheme = !!lsTheme ? resolveTheme(lsTheme) : DEFAULT_THEME;
+// store.dispatch(actions.themeSet({ newTheme }));
 
 // 	};
 
@@ -30,6 +32,13 @@ export const routes: Routes = [
 
 export const LOCAL_STORAGE_SERVICE = new InjectionToken<LocalStorageService>('LocalStorageService');
 export const REMOTE_STORAGE_SERVICE = new InjectionToken<RemoteStorageService>('RemoteStorageService');
+
+export const remoteStorageServicyProxyFactory = (): RemoteStorageServiceProxy => {
+
+	const service = new RemoteStorageServiceProxy();
+	return new Proxy(service, service);
+
+}
 
 export const providers: Provider[] = [
 
@@ -50,7 +59,7 @@ export const providers: Provider[] = [
 
 	},
 	{ provide: LOCAL_STORAGE_SERVICE, useFactory: localStorageServiceFactory },
-	{ provide: REMOTE_STORAGE_SERVICE, useFactory: remoteStorageServiceFactory },
+	{ provide: REMOTE_STORAGE_SERVICE, useFactory: remoteStorageServicyProxyFactory, deps: [Store] },
 	MessageService
 
 ];

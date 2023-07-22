@@ -8,7 +8,7 @@
 * Only import pure JavaScript functions or libraries.
 * Also, don't use index.ts files when writing import statments inside the lib folder.
 */
-import { Action, RemoteStorageService } from "lib";
+import { Action, FirestoreConfig, RemoteStorageService } from "lib";
 import { SyncEvent } from "lib/models/sync.model";
 import { localStorageServiceFactory } from "lib/services/localstorage/dexie/factories";
 import { LocalStorageService } from "lib/services/localstorage/local-storage-service.interface";
@@ -28,8 +28,24 @@ addEventListener('message', async (a: MessageEvent) => {
 	}
 
 	isRunning = true;
-	const actions: Action<void, Promise<void>>[] = createActions();
 
+	// create services
+	const localStorage: LocalStorageService = localStorageServiceFactory();
+	const postService: PostService = new PostServiceImpl();
+	// retrieve FirestoreConfig
+	const firestoreConfig: FirestoreConfig | null = await localStorage.configuration.getFirestoreConfig();
+	if (firestoreConfig === null) {
+
+		postMessage({ when: new Date(), message: 'No Firestore configuration in database', inProgress: false } as SyncEvent);
+		return;
+
+	}
+	const remoteStorage: RemoteStorageService = remoteStorageServiceFactory(firestoreConfig);
+
+	// create actions
+	const actions: Action<void, Promise<void>>[] = createActions(localStorage, remoteStorage, postService);
+
+	// invoke actions
 	for (const action of actions)
 		await action.execute();
 
@@ -38,11 +54,11 @@ addEventListener('message', async (a: MessageEvent) => {
 
 });
 
-function createActions(): Action<void, Promise<void>>[] {
-
-	const localStorage: LocalStorageService = localStorageServiceFactory();
-	const remoteStorage: RemoteStorageService = remoteStorageServiceFactory();
-	const postService: PostService = new PostServiceImpl();
+function createActions(
+	localStorage: LocalStorageService,
+	remoteStorage: RemoteStorageService,
+	postService: PostService
+): Action<void, Promise<void>>[] {
 
 	// bookmarks
 	const bookmarks = new BookmarksSyncAction(localStorage, remoteStorage, postService);

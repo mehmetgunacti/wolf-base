@@ -2,38 +2,9 @@ import { CONF_KEYS } from 'lib/constants/database.constant';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
 import { ConfigurationTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { KeyValueTableImpl } from './key-value.table';
+import { DEFAULT_CONF_VALUES } from '../wolfbase.database';
 
 export class ConfigurationTableImpl extends KeyValueTableImpl implements ConfigurationTable {
-
-	async getSyncWorkerActive(): Promise<boolean> {
-
-		return await this.get<boolean>(CONF_KEYS.syncWorkerActive);
-
-	}
-
-	async getSidebarVisible(): Promise<boolean> {
-
-		return await this.get<boolean>(CONF_KEYS.sidebarVisible);
-
-	}
-
-	async getTitleLookupUrl(): Promise<string | null> {
-	
-		return await this.get<string>(CONF_KEYS.titleLookupUrl);
-		
-	}
-
-	async isDarkTheme(): Promise<boolean> {
-
-		return await this.get<boolean>(CONF_KEYS.darkTheme);
-
-	}
-
-	async setSyncWorkerActive(active: boolean): Promise<void> {
-
-		return await this.set(CONF_KEYS.syncWorkerActive, active);
-
-	}
 
 	async setSidebarVisible(visible: boolean): Promise<void> {
 
@@ -41,14 +12,8 @@ export class ConfigurationTableImpl extends KeyValueTableImpl implements Configu
 
 	}
 
-	async setDarkTheme(dark: boolean): Promise<void> {
-
-		return await this.set(CONF_KEYS.darkTheme, dark);
-
-	}
-
 	async setTitleLookupUrl(url: string): Promise<void> {
-		
+
 		return await this.set(CONF_KEYS.titleLookupUrl, url);
 
 	}
@@ -59,23 +24,31 @@ export class ConfigurationTableImpl extends KeyValueTableImpl implements Configu
 
 	}
 
-	async getConfig(): Promise<FirestoreConfig> {
+	async getFirestoreConfig(): Promise<FirestoreConfig | null> {
 
-		const { apiKey, baseURL, projectId } = await this.dump<Configuration>();
-		const config: FirestoreConfig = { apiKey, baseURL, projectId };
-		return config;
+		return this.get(CONF_KEYS.firestoreConfig);
 
 	}
 
-	async saveFirestoreConfig(config: FirestoreConfig): Promise<void> {
+	async setFirestoreConfig(config: FirestoreConfig): Promise<void> {
 
-		await this.db.transaction('rw', this.db.configuration, async () => {
+		await this.set(CONF_KEYS.firestoreConfig, config);
 
-			await this.set(CONF_KEYS.apiKey, config.apiKey);
-			await this.set(CONF_KEYS.baseURL, config.baseURL);
-			await this.set(CONF_KEYS.projectId, config.projectId);
+	}
 
-		});
+	async getConfiguration(): Promise<Configuration> {
+
+		const map: Map<string, any> = await this.dump();
+		const conf: Configuration = {
+
+			syncWorkerActive: map.get(CONF_KEYS.syncWorkerActive) ?? null,
+			sidebarVisible: map.get(CONF_KEYS.sidebarVisible) ?? null,
+			darkTheme: map.get(CONF_KEYS.darkTheme) ?? null,
+			firestoreConfig: map.get(CONF_KEYS.firestoreConfig) ?? null,
+			titleLookupUrl: map.get(CONF_KEYS.titleLookupUrl) ?? null,
+
+		}
+		return conf;
 
 	}
 
@@ -85,43 +58,11 @@ export class MockConfigurationTableImpl implements ConfigurationTable {
 
 	private conf: Configuration = {
 
-		darkTheme: false,
-		sidebarVisible: false,
-		syncWorkerActive: false,
-		apiKey: null,
-		baseURL: null,
-		projectId: null,
+		darkTheme: DEFAULT_CONF_VALUES.darkTheme,
+		sidebarVisible: DEFAULT_CONF_VALUES.sidebarVisible,
+		syncWorkerActive: DEFAULT_CONF_VALUES.syncWorkerActive,
+		firestoreConfig: null,
 		titleLookupUrl: null
-
-	}
-
-	async getSyncWorkerActive(): Promise<boolean> {
-
-		return this.conf.syncWorkerActive;
-
-	}
-
-	async getSidebarVisible(): Promise<boolean> {
-
-		return this.conf.sidebarVisible;
-
-	}
-
-	async getTitleLookupUrl(): Promise<string | null> {
-		
-		return this.conf.titleLookupUrl;
-
-	}
-
-	async isDarkTheme(): Promise<boolean> {
-
-		return this.conf.darkTheme;
-
-	}
-
-	async setSyncWorkerActive(active: boolean): Promise<void> {
-
-		this.conf.syncWorkerActive = active;
 
 	}
 
@@ -131,14 +72,8 @@ export class MockConfigurationTableImpl implements ConfigurationTable {
 
 	}
 
-	async setDarkTheme(dark: boolean): Promise<void> {
-
-		this.conf.darkTheme = dark;
-
-	}
-
 	async setTitleLookupUrl(url: string): Promise<void> {
-		
+
 		this.conf.titleLookupUrl = url;
 
 	}
@@ -149,26 +84,21 @@ export class MockConfigurationTableImpl implements ConfigurationTable {
 
 	}
 
-	async dump(): Promise<Configuration> {
+	async getConfiguration(): Promise<Configuration> {
 
 		return this.conf;
 
 	}
 
-	async getConfig(): Promise<FirestoreConfig> {
+	async getFirestoreConfig(): Promise<FirestoreConfig | null> {
 
-		const { apiKey, baseURL, projectId } = this.conf;
-		const config: FirestoreConfig = { apiKey, baseURL, projectId };
-		return config;
+		return this.conf.firestoreConfig;
 
 	}
 
-	async saveFirestoreConfig(config: FirestoreConfig): Promise<void> {
+	async setFirestoreConfig(config: FirestoreConfig): Promise<void> {
 
-		const { apiKey, baseURL, projectId } = config;
-		this.conf.apiKey = apiKey;
-		this.conf.baseURL = baseURL;
-		this.conf.projectId = projectId;
+		this.conf.firestoreConfig = config;
 
 	}
 

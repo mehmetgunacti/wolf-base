@@ -29,9 +29,7 @@ export const initialCoreConfigurationState: CoreConfigurationState = {
 	syncWorkerActive: false,
 	sidebarVisible: true,
 	darkTheme: true,
-	apiKey: null,
-	baseURL: null,
-	projectId: null,
+	firestoreConfig: null,
 	titleLookupUrl: null
 
 };

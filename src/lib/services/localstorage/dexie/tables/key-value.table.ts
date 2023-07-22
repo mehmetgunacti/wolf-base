@@ -15,9 +15,9 @@ export class KeyValueTableImpl implements KeyValueTable {
 
 	}
 
-	async get<T>(key: string): Promise<T> {
+	async get<T>(key: string): Promise<T | null> {
 
-		return await this.db.table<T>(this.tablename).get(key) as T;
+		return await this.db.table<T>(this.tablename).get(key) ?? null;
 
 	}
 
@@ -27,37 +27,24 @@ export class KeyValueTableImpl implements KeyValueTable {
 
 	}
 
-	// get$<T>(key: string): Observable<T> {
-
-	// 	return fromEventPattern(
-
-	// 		// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
-	// 		// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
-	// 		// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
-	// 		(handler) => liveQuery(() => this.get(key)).subscribe(handler),
-
-	// 		// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
-	// 		(handler, unsubscribe) => unsubscribe()
-
-	// 	);
-
-	// }
-
 	async remove(key: string): Promise<void> {
 
 		return await this.db.table<string>(this.tablename).delete(key);
 
 	}
 
-	async dump<T>(): Promise<T> {
+	async dump(): Promise<Map<string, any>> {
 
+		// return value
+		const result: Map<string, any> = new Map();
+
+		// iterate all keys
 		const table = this.db.table(this.tablename);
 		const data = table.toCollection();
-		const result: Record<string, T> = {};
 		await data.each(
-			(obj: T, cursor) => result[cursor.key.toString()] = obj
+			(obj: any, cursor) => result.set(cursor.key.toString(), obj)
 		);
-		return result as T;
+		return result;
 
 	}
 

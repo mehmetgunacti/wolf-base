@@ -1,13 +1,17 @@
 export interface Configuration {
 
-	sidebarVisible: boolean;
-	syncWorkerActive: boolean;
-	darkTheme: boolean;
-	apiKey: string | null;
-	baseURL: string | null;
-	projectId: string | null;
+	sidebarVisible: boolean | null;
+	syncWorkerActive: boolean | null;
+	darkTheme: boolean | null;
 	titleLookupUrl: string | null;
+	firestoreConfig: FirestoreConfig | null;
 
 }
 
-export interface FirestoreConfig extends Pick<Configuration, 'apiKey' | 'baseURL' | 'projectId'> { }
+export interface FirestoreConfig {
+
+	apiKey: string;
+	baseURL: string;
+	projectId: string;
+
+}

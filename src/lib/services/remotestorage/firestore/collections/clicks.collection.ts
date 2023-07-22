@@ -1,6 +1,6 @@
-import { environment } from 'environments/environment';
 import { UUID } from 'lib/constants/common.constant';
 import { RemoteCollection } from 'lib/constants/remote.constant';
+import { FirestoreConfig } from 'lib/models';
 import { Click } from 'lib/models/bookmark.model';
 import { ClicksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL } from 'lib/utils';
@@ -8,20 +8,18 @@ import { Firestore } from 'lib/utils/firestore/firestore.tool';
 
 export class ClicksFirestoreCollection implements ClicksCollection {
 
-	protected apiKey = environment.firebase.apiKey;
-	protected baseURL = environment.firebase.baseURL;
-	protected projectId = environment.firebase.projectId;
 	protected remoteCollection = RemoteCollection.bookmarks_clicks;
 	protected pageSize = '10000';
 
-	constructor(private firestore: Firestore) { }
+	constructor(
+		private firestore: Firestore,
+		private firestoreConfig: FirestoreConfig
+	) { }
 
 	async increase(id: UUID, amount: number): Promise<number> {
 
 		const url = new FirestoreIncreaseURL(
-			this.baseURL,
-			this.projectId,
-			this.apiKey,
+			this.firestoreConfig,
 			RemoteCollection.bookmarks_clicks,
 			id,
 			'clicks',
@@ -35,9 +33,7 @@ export class ClicksFirestoreCollection implements ClicksCollection {
 	async downloadMany(): Promise<Click[]> {
 
 		const url = new FirestoreListURL(
-			this.baseURL,
-			this.projectId,
-			this.apiKey,
+			this.firestoreConfig,
 			this.remoteCollection,
 			this.pageSize
 		);

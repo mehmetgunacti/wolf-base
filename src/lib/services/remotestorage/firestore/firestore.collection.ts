@@ -1,7 +1,6 @@
-import { environment } from "environments/environment";
 import { UUID } from "lib/constants";
 import { RemoteCollection } from "lib/constants/remote.constant";
-import { RemoteData, RemoteMetadata } from "lib/models";
+import { FirestoreConfig, RemoteData, RemoteMetadata } from "lib/models";
 import { Entity } from "lib/models/entity.model";
 import { FIRESTORE_VALUE } from "lib/utils";
 import { FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "lib/utils/firestore/firestore.model";
@@ -11,12 +10,10 @@ import { RemoteStorageCollection } from "../remote-storage-collection.interface"
 export abstract class FirestoreCollection<T extends Entity> implements RemoteStorageCollection<T> {
 
 	protected pageSize = '10000'; // high number => download all
-	protected apiKey = environment.firebase.apiKey;
-	protected baseURL = environment.firebase.baseURL;
-	protected projectId = environment.firebase.projectId;
 
 	constructor(
 		protected firestore: Firestore,
+		protected firestoreConfig: FirestoreConfig,
 		protected remoteCollection: RemoteCollection,
 		protected converter: FirestoreConverter<T>
 	) { }
@@ -38,9 +35,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 	async upload(item: T): Promise<RemoteData<T>> {
 
 		const url = new FirestorePatchURL(
-			this.baseURL,
-			this.projectId,
-			this.apiKey,
+			this.firestoreConfig,
 			this.remoteCollection,
 			item.id,
 			this.converter.toUpdateMask(item)
@@ -55,9 +50,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 	async delete(id: UUID): Promise<void> {
 
 		const url = new FirestoreDocumentURL(
-			this.baseURL,
-			this.projectId,
-			this.apiKey,
+			this.firestoreConfig,
 			this.remoteCollection,
 			id
 		);
@@ -80,9 +73,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 	async trash(item: T): Promise<void> {
 
 		const url = new FirestoreCreateURL(
-			this.baseURL,
-			this.projectId,
-			this.apiKey,
+			this.firestoreConfig,
 			`${this.remoteCollection}_trash/${item.id}/items`,
 			new Date().toISOString()
 		);
@@ -94,9 +85,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 	async downloadOne(id: UUID): Promise<RemoteData<T> | null> {
 
 		const url = new FirestoreDocumentURL(
-			this.baseURL,
-			this.projectId,
-			this.apiKey,
+			this.firestoreConfig,
 			this.remoteCollection,
 			id
 		);
@@ -110,9 +99,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 	async downloadMany(): Promise<RemoteData<T>[]> {
 
 		const url = new FirestoreListURL(
-			this.baseURL,
-			this.projectId,
-			this.apiKey,
+			this.firestoreConfig,
 			this.remoteCollection,
 			this.pageSize
 		);
@@ -124,9 +111,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 	async downloadIds(): Promise<RemoteMetadata[]> {
 
 		const url = new FirestoreListURL(
-			this.baseURL,
-			this.projectId,
-			this.apiKey,
+			this.firestoreConfig,
 			this.remoteCollection,
 			this.pageSize,
 			true
