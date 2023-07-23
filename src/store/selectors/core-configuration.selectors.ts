@@ -3,7 +3,7 @@ import { DEFAULT_CONF_VALUES, FirestoreConfig } from 'lib';
 import { CoreConfigurationState, CoreModuleState } from 'store/states/core.state';
 import { coreModuleState } from './core.selectors';
 
-export const confState = createSelector(
+const confState = createSelector(
 
 	coreModuleState,
 	(state: CoreModuleState): CoreConfigurationState => state.conf
@@ -41,7 +41,7 @@ export const firestoreConfig = createSelector(
 export const isFirestoreConfigMissing = createSelector(
 
 	firestoreConfig,
-	(conf: FirestoreConfig | null) => !!conf
+	(conf: FirestoreConfig | null) => !conf
 
 );
 

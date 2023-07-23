@@ -19,7 +19,7 @@ export class RemoteStorageServiceProxy implements RemoteStorageService, ProxyHan
 		this.firestore = firestoreFactory();
 		this.config = null;
 
-		this.store.select(firestoreConfig).pipe(distinctUntilChanged()).subscribe(
+		this.store.select(firestoreConfig).subscribe(
 			config => {
 
 				if (config)
