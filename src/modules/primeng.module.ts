@@ -5,6 +5,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -39,6 +40,7 @@ export const modules = [
 	CalendarModule,
 	CardModule,
 	CheckboxModule,
+	ConfirmDialogModule,
 	ConfirmPopupModule,
 	DataViewModule,
 	DialogModule,

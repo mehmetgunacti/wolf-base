@@ -12,6 +12,8 @@
 
 </app-portal>
 
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
 <p-messages severity="warn" *ngIf="isFirestoreConfigMissing$ | async">
     <ng-template pTemplate>
 		<span>Firestore configuration missing</span>
@@ -27,7 +29,5 @@
 </p-messages>
 
 <p-card>
-
 	<app-sync-summary-container></app-sync-summary-container>
-
 </p-card>
