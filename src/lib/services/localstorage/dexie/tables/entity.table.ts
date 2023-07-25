@@ -38,7 +38,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 	async update(id: string, item: Partial<T>): Promise<number> {
 
 		let count = 0;
-		await this.db.transaction('rw', this.db.bookmarks, this.db.bookmarks_sync, async () => {
+		await this.db.transaction('rw', [this.tablename, this.tablename + '_sync'], async () => {
 
 			count = await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item });
 			if (count > 0)
@@ -51,7 +51,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async put(item: RemoteData<T>): Promise<void> {
 
-		await this.db.transaction('rw', this.db.bookmarks, this.db.bookmarks_sync, async () => {
+		await this.db.transaction('rw', [this.tablename, this.tablename + '_sync'], async () => {
 
 			// add to data table
 			await this.db.table<T>(this.tablename).put(item.entity);
@@ -81,7 +81,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async moveToTrash(id: UUID): Promise<void> {
 
-		await this.db.transaction('rw', this.db.bookmarks, this.db.bookmarks_sync, this.db.bookmarks_trash, async () => {
+		await this.db.transaction('rw', [this.tablename, this.tablename + '_sync', this.tablename + '_trash'], async () => {
 
 			const item = await this.db.table<T>(this.tablename).get(id);
 			if (item) {
@@ -98,7 +98,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async deletePermanently(id: string): Promise<void> {
 
-		await this.db.transaction('rw', [this.tablename + '_sync', this.tablename + '_trash'], async () => {
+		await this.db.transaction('rw', [this.tablename, this.tablename + '_sync', this.tablename + '_trash'], async () => {
 
 			await this.db.table(this.tablename).delete(id);
 			await this.db.table(this.tablename + '_sync').delete(id);
