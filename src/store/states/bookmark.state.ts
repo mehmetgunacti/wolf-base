@@ -14,7 +14,7 @@ export interface BookmarkEntitiesState {
 
 	entities: Record<UUID, Bookmark>;
 	selected: UUID | null;
-	clicks: Click[];
+	clicks: Record<UUID, Click>;
 
 }
 
@@ -52,7 +52,7 @@ export const initialBookmarkEntitiesState: BookmarkEntitiesState = {
 
 	entities: {},
 	selected: null,
-	clicks: []
+	clicks: {}
 
 };
 

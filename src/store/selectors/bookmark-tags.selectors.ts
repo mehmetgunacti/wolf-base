@@ -72,7 +72,7 @@ export const filteredBookmarks = createSelector(
 	(bookmarks, tags, term): Bookmark[] => {
 
 		// Filter bookmarks based on tags
-		const filteredBookmarks = tags.reduce((acc, tag) => {
+		const filteredBookmarks: Bookmark[] = tags.reduce((acc, tag) => {
 			return acc.filter(bookmark => bookmark.tags.includes(tag));
 		}, bookmarks);
 

@@ -5,49 +5,12 @@ import { Action } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
 import { Bookmark, Click, LocalStorageService, POPULAR, RemoteStorageService, UUID, commaSplit, toggleArrayItem } from 'lib';
-import { Observable, combineLatest, fromEventPattern, of } from 'rxjs';
+import { fromEventPattern, of } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { RemoteStorageServiceProxy } from 'services/remote-storage.service';
 import { clickTag, emptySelectedTags, search, setSelectedTags } from 'store/actions/bookmark-tags.actions';
 import { togglePopular } from 'store/actions/bookmark-ui.actions';
-import { clickBookmark, clicksSuccess, createBookmark, createBookmarkSuccess, deleteBookmark, deleteBookmarkSuccess, loadAllBookmarksSuccess, updateBookmark, updateBookmarkFailure, updateBookmarkSuccess } from 'store/actions/bookmark.actions';
+import { clickBookmark, createBookmark, createBookmarkSuccess, deleteBookmark, deleteBookmarkSuccess, loadAllBookmarksSuccess, loadAllClicksSuccess, updateBookmark, updateBookmarkFailure, updateBookmarkSuccess } from 'store/actions/bookmark.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
-
-const combineBookmarksAndClicks = (localStorage: LocalStorageService): Observable<Bookmark[]> => {
-
-	const bookmarksList$ = fromEventPattern<Bookmark[]>(
-
-		// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
-		// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
-		// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
-		(handler) => liveQuery(() => localStorage.bookmarks.list()).subscribe(handler),
-
-		// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
-		(handler, unsubscribe) => unsubscribe()
-
-	);
-
-	const clicksList$ = fromEventPattern<Click[]>(
-
-		(handler) => liveQuery(() => localStorage.clicks.list()).subscribe(handler),
-		(handler, unsubscribe) => unsubscribe()
-
-	)
-
-	return combineLatest([bookmarksList$, clicksList$]).pipe(
-
-		map(([bookmarks, clicks]) => {
-
-			const mapClicks = new Map();
-			clicks.forEach(c => mapClicks.set(c.id, c.total));
-			bookmarks.forEach(b => b.clicks = mapClicks.get(b.id));
-			return bookmarks;
-
-		})
-
-	);
-
-};
 
 @Injectable()
 export class BookmarkEntitiesEffects {
@@ -58,12 +21,20 @@ export class BookmarkEntitiesEffects {
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 	private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
 
-	listFromIndexedDb$ = createEffect(
+	loadBookmarks$ = createEffect(
 
-		() => combineBookmarksAndClicks(this.localStorage).pipe(
+		() => fromEventPattern<Bookmark[]>(
 
-			map((bookmarks: Bookmark[]) => loadAllBookmarksSuccess({ bookmarks }))
-
+			// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
+			// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
+			// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
+			(handler) => liveQuery(() => this.localStorage.bookmarks.list()).subscribe(handler),
+	
+			// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
+			(handler, unsubscribe) => unsubscribe()
+	
+		).pipe(
+			map(bookmarks => loadAllBookmarksSuccess({ bookmarks }))
 		)
 
 	);
@@ -76,7 +47,7 @@ export class BookmarkEntitiesEffects {
 			(handler, unsubscribe) => unsubscribe()
 
 		).pipe(
-			map(clicks => clicksSuccess({ clicks }))
+			map(clicks => loadAllClicksSuccess({ clicks }))
 		)
 
 	);
