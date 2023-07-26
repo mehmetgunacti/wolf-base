@@ -184,8 +184,7 @@ describe('BookmarksSyncAction', () => {
 			expect(await localStorage.bookmarks.getSyncData(ID8)).toBeFalsy();
 
 			// ID9
-			expect(await localStorage.bookmarks.get(ID9)).toBeFalsy();
-			expect(await localStorage.bookmarks.getSyncData(ID9)).toBeFalsy();
+			expect((await localStorage.bookmarks.getSyncData(ID9))?.error).toBeTruthy();
 
 			// ID12
 			const ID12_syncData = await localStorage.bookmarks.getSyncData(ID12);

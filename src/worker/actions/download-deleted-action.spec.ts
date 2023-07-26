@@ -49,7 +49,7 @@ describe('DownloadDeletedAction', () => {
 
 	describe('execute', () => {
 
-		it('remotely deleted items should not be present locally', async () => {
+		it('remotely deleted items should be marked as error locally', async () => {
 
 			const ID3 = 'id3';
 			const ID5 = 'id5';
@@ -65,34 +65,9 @@ describe('DownloadDeletedAction', () => {
 
 			await action.execute();
 
-			expect(await localStorage.bookmarks.get(ID3)).toBeFalsy();
-			expect(await localStorage.bookmarks.get(ID5)).toBeFalsy();
-			expect(await localStorage.bookmarks.get(ID9)).toBeFalsy();
-
-			expect(await localStorage.bookmarks.getSyncData(ID3)).toBeFalsy();
-			expect(await localStorage.bookmarks.getSyncData(ID5)).toBeFalsy();
-			expect(await localStorage.bookmarks.getSyncData(ID9)).toBeFalsy();
-
-		});
-
-		it('updated local items should be marked error', async () => {
-
-			const ID3 = 'id3';
-
-			// update will mark item as updated
-			await localStorage.bookmarks.update(ID3, createBookmark(333, ID3));
-
-			await remoteStorage.bookmarks.delete(ID3);
-
-			// download metadataList
-			metadataList.setItems(await remoteStorage.bookmarks.downloadIds());
-
-			await action.execute();
-
-			expect(await localStorage.bookmarks.get(ID3)).toBeTruthy();
-
-			const syncData = await localStorage.bookmarks.getSyncData(ID3);
-			expect(syncData?.error).toBeTruthy();
+			expect((await localStorage.bookmarks.getSyncData(ID3))?.error).toBeTruthy();
+			expect((await localStorage.bookmarks.getSyncData(ID5))?.error).toBeTruthy();
+			expect((await localStorage.bookmarks.getSyncData(ID9))?.error).toBeTruthy();
 
 		});
 

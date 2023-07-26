@@ -6,8 +6,7 @@ import {
 	RemoteCollection,
 	RemoteStorageService,
 	createBookmark,
-	createNBookmarks,
-	sleep
+	createNBookmarks
 } from "lib";
 import { MetadataList, MockPostServiceImpl, PostService } from "worker/utils";
 import { DownloadNewAction } from "./download-new.action";

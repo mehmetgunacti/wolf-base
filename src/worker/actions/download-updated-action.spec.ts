@@ -58,7 +58,7 @@ describe('DownloadUpdatedAction', () => {
 				throw new Error(`no item with id ${ID} in local storage`);
 
 			// simulation: another client just updated id2 on the server
-			await sleep(1000);
+			await sleep(100);
 			const tmp = await remoteStorage.bookmarks.upload(createBookmark(222, ID));
 
 			// add RemoteData to metadataList
@@ -83,10 +83,10 @@ describe('DownloadUpdatedAction', () => {
 				throw new Error(`no item with id ${ID} in local storage`);
 
 			// simulation: another client just updated id2 on the server
-			await sleep(1000);
+			await sleep(100);
 			const tmp = await remoteStorage.bookmarks.upload(createBookmark(222, ID));
 
-			await sleep(1000);
+			await sleep(100);
 			await localStorage.bookmarks.update(ID, { name: '222_' });
 
 			// add RemoteData to metadataList
