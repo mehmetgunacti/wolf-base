@@ -9,29 +9,57 @@ const selectorSyncState = createSelector(
 
 )
 
-export const bookmarksCreated = createSelector(
+const bookmarkErrors = createSelector(
+
+	selectorSyncState,
+	state => state.syncData.filter(sd => !!sd.error)
+
+);
+
+export const bookmarkErrorsCount = createSelector(
+
+	bookmarkErrors,
+	list => list.length
+
+);
+
+const bookmarkCreated = createSelector(
 
 	selectorSyncState,
 	bookmarksArray,
 	(state, entities) => {
 
 		const syncIds = new Set(state.syncData.map(s => s.id));
-		return entities.filter(b => !syncIds.has(b.id)).length
+		return entities.filter(b => !syncIds.has(b.id))
 
 	}
 
 );
 
-export const bookmarksDeleted = createSelector(
+export const bookmarkCreatedCount = createSelector(
 
-	selectorBookmarkModuleState,
-	state => state.sync.trashCount
+	bookmarkCreated,
+	list => list.length
 
 );
 
-export const bookmarksUpdated = createSelector(
+export const bookmarkDeletedCount = createSelector(
 
 	selectorSyncState,
-	state => state.syncData.filter(s => s.updated).length
+	state => state.trashCount
+
+);
+
+const bookmarkUpdated = createSelector(
+
+	selectorSyncState,
+	state => state.syncData.filter(s => s.updated)
+
+);
+
+export const bookmarkUpdatedCount = createSelector(
+
+	bookmarkUpdated,
+	list => list.length
 
 );

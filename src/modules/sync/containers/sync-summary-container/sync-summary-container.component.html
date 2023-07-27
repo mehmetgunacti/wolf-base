@@ -4,25 +4,30 @@
 		<div class="cell">#</div>
 		<div class="cell"></div>
 	</div>
-	<div class="row">
-		<div class="cell">Clicked</div>
-		<div class="cell">{{ bookmarksClicked$ | async }}</div>
-		<div class="cell"><button pButton [disabled]="(bookmarksClicked$ | async) === 0" (click)="onStart()" icon="pi pi-cloud-upload" label="Sync" class="p-button-text"></button></div>
+	<div class="row" *ngIf="bookmarkErrorsCount$ | async as count">
+		<div class="cell"><span style="color: lightcoral">Errors</span></div>
+		<div class="cell">{{ count }}</div>
+		<div class="cell"><button pButton [disabled]="count === 0" (click)="onStart()" icon="pi pi-eye" label="View" class="p-button-text"></button></div>
 	</div>
-	<div class="row">
+	<div class="row" *ngIf="bookmarkCreatedCount$ | async as count">
 		<div class="cell">Created</div>
-		<div class="cell">{{ bookmarksCreated$ | async }}</div>
-		<div class="cell"><button pButton [disabled]="(bookmarksCreated$ | async) === 0" (click)="onStart()" icon="pi pi-cloud-upload" label="Sync" class="p-button-text"></button></div>
+		<div class="cell">{{ count }}</div>
+		<div class="cell"><button pButton [disabled]="count === 0" (click)="onStart()" icon="pi pi-eye" label="View" class="p-button-text"></button></div>
 	</div>
-	<div class="row">
-		<div class="cell">Deleted</div>
-		<div class="cell">{{ bookmarksDeleted$ | async }}</div>
-		<div class="cell"><button pButton [disabled]="(bookmarksDeleted$ | async) === 0" (click)="onStart()" icon="pi pi-cloud-upload" label="Sync" class="p-button-text"></button></div>
-	</div>
-	<div class="row">
+	<div class="row" *ngIf="bookmarkUpdatedCount$ | async as count">
 		<div class="cell">Updated</div>
-		<div class="cell">{{ bookmarksUpdated$ | async }}</div>
-		<div class="cell"><button pButton [disabled]="(bookmarksUpdated$ | async) === 0" (click)="onStart()" icon="pi pi-cloud-upload" label="Sync" class="p-button-text"></button></div>
+		<div class="cell">{{ count }}</div>
+		<div class="cell"><button pButton [disabled]="count === 0" (click)="onStart()" icon="pi pi-eye" label="View" class="p-button-text"></button></div>
+	</div>
+	<div class="row" *ngIf="bookmarkDeletedCount$ | async as count">
+		<div class="cell">Deleted</div>
+		<div class="cell">{{ count }}</div>
+		<div class="cell"><button pButton [disabled]="count === 0" (click)="onStart()" icon="pi pi-eye" label="View" class="p-button-text"></button></div>
+	</div>
+	<div class="row" *ngIf="bookmarkClickedCount$ | async as count">
+		<div class="cell">Clicked</div>
+		<div class="cell">{{ count }}</div>
+		<div class="cell"><button pButton [disabled]="count === 0" (click)="onStart()" icon="pi pi-eye" label="View" class="p-button-text"></button></div>
 	</div>
 </div>
 

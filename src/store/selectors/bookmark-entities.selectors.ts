@@ -36,9 +36,16 @@ export const selectedBookmark = createSelector(
 
 );
 
-export const bookmarksClicked = createSelector(
+const bookmarkClicked = createSelector(
 
 	selectorBookmarksState,
-	state => Object.values(state.clicks).filter(c => c.current > 0).length
+	state => Object.values(state.clicks).filter(c => c.current > 0)
+
+);
+
+export const bookmarkClickedCount = createSelector(
+
+	bookmarkClicked,
+	list => list.length
 
 );

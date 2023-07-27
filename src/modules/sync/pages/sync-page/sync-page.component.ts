@@ -54,9 +54,11 @@ export class SyncPageComponent {
 
 				switch (type) {
 					case ConfirmEventType.REJECT:
-					case ConfirmEventType.CANCEL:
-						this.store.dispatch(showNotification({ severity: 'info', summary: 'Sync started', detail: 'Backup skipped' }));
+						this.store.dispatch(showNotification({ severity: 'info', summary: 'Sync started', detail: 'Backup skipped' }));	
 						this.store.dispatch(syncTrigger());
+						break;
+					case ConfirmEventType.CANCEL:
+						this.store.dispatch(showNotification({ severity: 'info', detail: 'Sync cancelled' }));	
 						break;
 				}
 

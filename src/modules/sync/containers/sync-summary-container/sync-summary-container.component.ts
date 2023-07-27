@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { bookmarksClicked } from 'store/selectors/bookmark-entities.selectors';
-import { bookmarksCreated, bookmarksDeleted, bookmarksUpdated } from 'store/selectors/bookmark-sync.selectors';
+import { bookmarkClickedCount } from 'store/selectors/bookmark-entities.selectors';
+import { bookmarkCreatedCount, bookmarkDeletedCount, bookmarkErrorsCount, bookmarkUpdatedCount } from 'store/selectors/bookmark-sync.selectors';
 import { messages } from 'store/selectors/sync.selectors';
 
 @Component({
@@ -14,19 +14,21 @@ export class SyncSummaryContainerComponent {
 
 	private store: Store = inject(Store);
 
-	bookmarksClicked$: Observable<number>;
-	bookmarksCreated$: Observable<number>;
-	bookmarksDeleted$: Observable<number>;
-	bookmarksUpdated$: Observable<number>;
+	bookmarkErrorsCount$: Observable<number>;
+	bookmarkClickedCount$: Observable<number>;
+	bookmarkCreatedCount$: Observable<number>;
+	bookmarkDeletedCount$: Observable<number>;
+	bookmarkUpdatedCount$: Observable<number>;
 
 	messages$: Observable<string[]>;
 
 	constructor() {
 
-		this.bookmarksCreated$ = this.store.select(bookmarksCreated);
-		this.bookmarksClicked$ = this.store.select(bookmarksClicked);
-		this.bookmarksDeleted$ = this.store.select(bookmarksDeleted);
-		this.bookmarksUpdated$ = this.store.select(bookmarksUpdated);
+		this.bookmarkErrorsCount$ = this.store.select(bookmarkErrorsCount);
+		this.bookmarkCreatedCount$ = this.store.select(bookmarkCreatedCount);
+		this.bookmarkClickedCount$ = this.store.select(bookmarkClickedCount);
+		this.bookmarkDeletedCount$ = this.store.select(bookmarkDeletedCount);
+		this.bookmarkUpdatedCount$ = this.store.select(bookmarkUpdatedCount);
 
 		this.messages$ = this.store.select(messages);
 
