@@ -19,7 +19,7 @@ export class ToastComponent implements OnInit {
 
 		this.elementRef.nativeElement.classList.add(this.conf.severity);
 		this.iconClass = this.getIconClass(this.conf);
-		if (this.conf.life) // life > 0
+		if (!this.conf.sticky && this.conf.life) // life > 0
 			setTimeout(() => this.onClose(), this.conf.life);
 
 	}

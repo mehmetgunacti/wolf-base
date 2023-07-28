@@ -58,7 +58,7 @@ export class SyncPageComponent {
 						this.store.dispatch(syncTrigger());
 						break;
 					case ConfirmEventType.CANCEL:
-						this.store.dispatch(showNotification({ severity: 'info', detail: 'Sync cancelled', closable: true, life: 15000 }));
+						this.store.dispatch(showNotification({ severity: 'info', detail: 'Sync cancelled' }));
 						break;
 				}
 

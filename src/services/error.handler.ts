@@ -72,15 +72,14 @@ export class CustomErrorHandler implements ErrorHandler {
 
 		const summary = `Client Error`;
 		let detail = `
-			<div class="grid mt-3">
-				<div class="col-3 xl:col-1">Message</div>
-				<div class="col-9 xl:col-11"><i>${error?.message}</i></div>
+			<div>
+				<div><i>${error?.message}</i></div>
 		`;
 
 		if (error instanceof HttpErrorResponse)
 			detail += `
-				<div class="col-3 xl:col-1">Status</div>
-				<div class="col-9 xl:col-11"><i>${error?.statusText} (${error?.status})</i></div>
+				<div>Status</div>
+				<div><i>${error?.statusText} (${error?.status})</i></div>
 			`
 
 		detail += `

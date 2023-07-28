@@ -21,6 +21,7 @@ export const successNotification: ToastConfiguration = {
 export const errorNotification: ToastConfiguration = {
 
 	severity: 'error',
-	sticky: true
+	sticky: true,
+	closable: true
 
 }

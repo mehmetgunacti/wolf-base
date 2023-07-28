@@ -4,7 +4,7 @@
 <div toast-center>
 	<span toast-title
 			*ngIf="conf.summary">{{conf.summary}}</span>
-	<span toast-content>{{conf.detail}}</span>
+	<span toast-content [innerHTML]="conf.detail"></span>
 </div>
 <div toast-right
 		*ngIf="conf.closable"
