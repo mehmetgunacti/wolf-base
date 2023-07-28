@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PrimeNgModule } from 'modules/primeng.module';
-import { PortalComponent, TagCloudComponent } from './components';
+import { PortalComponent, TagCloudComponent, ToastComponent, ToastWrapperComponent } from './components';
 import { SelectedTagsComponent } from './components/selected-tags/selected-tags.component';
 import { BookmarkComponent } from './components/bookmark/bookmark.component';
 
@@ -13,6 +13,8 @@ import { BookmarkComponent } from './components/bookmark/bookmark.component';
 		PortalComponent,
 		SelectedTagsComponent,
 		TagCloudComponent,
+		ToastComponent,
+		ToastWrapperComponent
 	],
 	imports: [
 		CommonModule,
@@ -26,6 +28,7 @@ import { BookmarkComponent } from './components/bookmark/bookmark.component';
 		PortalComponent,
 		SelectedTagsComponent,
 		TagCloudComponent,
+		ToastWrapperComponent,
 		ReactiveFormsModule
 	],
 	providers: []

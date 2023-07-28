@@ -7,6 +7,9 @@ export interface ToastConfiguration { // visit primeng documenation for more
 	sticky?: boolean, // false	Whether the message should be automatically closed based on life property or kept visible.
 	closable?: boolean, // true	When enabled, displays a close icon to hide a message manually.
 
+	// non-primeng related
+	id?: number
+
 }
 
 export const successNotification: ToastConfiguration = {
