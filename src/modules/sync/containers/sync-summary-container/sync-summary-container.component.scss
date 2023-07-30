@@ -24,5 +24,11 @@ app-sync-summary-container {
 		padding	: 15px;
 	}
 
+	div.column {
+		@extend %flex-center-center;
+		padding	: 15px;
+		font-style: italic;
+	}
+
 }
 

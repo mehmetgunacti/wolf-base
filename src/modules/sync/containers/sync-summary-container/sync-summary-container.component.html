@@ -1,7 +1,7 @@
 <div class="table">
 	<div class="row header">
 		<div class="cell">Bookmarks</div>
-		<div class="cell">#</div>
+		<div class="cell"></div>
 		<div class="cell"></div>
 	</div>
 	<div class="row" *ngIf="bookmarkErrorsCount$ | async as count">
@@ -28,6 +28,9 @@
 		<div class="cell">Clicked</div>
 		<div class="cell">{{ count }}</div>
 		<div class="cell"><button pButton [disabled]="count === 0" (click)="onStart()" icon="pi pi-eye" label="View" class="p-button-text"></button></div>
+	</div>
+	<div class="column" *ngIf="bookmarkEmpty$ | async">
+		No conflicts
 	</div>
 </div>
 

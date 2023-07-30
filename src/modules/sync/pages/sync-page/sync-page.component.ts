@@ -109,12 +109,6 @@ export class SyncPageComponent {
 
 	}
 
-	openConflictDialog(id: UUID): void {
-
-		this.store.dispatch(loadFirstConflict());
-
-	}
-
 	closeConflictDialog(): void {
 
 		this.store.dispatch(closeConflictDialog());
