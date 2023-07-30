@@ -1,4 +1,5 @@
 export * from './animations';
 export * from './components';
-export * from './utils';
+export * from './pipes';
 export * from './shared.module';
+export * from './utils';

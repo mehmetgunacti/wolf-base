@@ -1,45 +1,45 @@
 // app-bookmark-edit-container {}
 .bookmarkEditContainerComponent {
 
-    width		: 100vw;
-    height		: 100vh;
-    max-height	: initial !important;
+	width		: 100vw;
+	height		: 100vh;
+	max-height	: initial !important;
 
-    @include lg() {
+	@include lg() {
 
-        width	: 80vw;
-        height	: 95vh;
+		width	: 80vw;
+		height	: 95vh;
 
-    }
+	}
 
-    // & .p-dialog-content {
+	// & .p-dialog-content {
 
-    //     display: flex;
+	//     display: flex;
 
-    // }
+	// }
 
-    // & app-bookmark-edit-container {
-    //     display: block;
-    //     height: 100%;
-    // }
+	// & app-bookmark-edit-container {
+	//     display: block;
+	//     height: 100%;
+	// }
 
-    & .p-dialog-content {
+	& .p-dialog-content {
 
-        @extend %flex-column;
+		@extend %flex-column;
 
-        & app-bookmark-edit-container {
+		& app-bookmark-edit-container {
 
-            flex    : 1;
-            @extend %flex-column;
+			flex    : 1;
+			@extend %flex-column;
 
-            & app-bookmark-form {
+			& app-bookmark-form {
 
-                flex		: 1;
+				flex		: 1;
 
-            }
+			}
 
-        }
+		}
 
-    }
+	}
 
 }

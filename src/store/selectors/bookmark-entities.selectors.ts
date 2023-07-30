@@ -8,6 +8,13 @@ const selectorBookmarksState = createSelector(
 
 );
 
+export const bookmarks = createSelector(
+
+	selectorBookmarksState,
+	entities => entities.entities
+
+);
+
 export const bookmarksIds = createSelector(
 
 	selectorBookmarksState,

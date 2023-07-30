@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ToastConfiguration, errorNotification } from 'lib';
+import { HttpError, ToastConfiguration, errorNotification } from 'lib';
 import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 
@@ -33,7 +33,7 @@ export class CustomErrorHandler implements ErrorHandler {
 
 	private getToastConfiguration = (error: Error): ToastConfiguration => {
 
-		if (error instanceof HttpErrorResponse)
+		if (error instanceof HttpErrorResponse || error instanceof HttpError)
 			switch (error.status) {
 
 				case 0: return {
@@ -52,19 +52,28 @@ export class CustomErrorHandler implements ErrorHandler {
 
 				};
 
+				case 400: return {
+
+					...errorNotification,
+					summary: `${(error.error?.[0] || error.error)?.code}`,
+					detail: `${(error.error?.[0] || error.error)?.message}`
+
+				};
+
 				case 401: return {
 
 					...errorNotification,
 					summary: 'Authorization Error',
-					detail: `${error.error.message}`
+					detail: `${error.error?.message}`
 
 				};
 
-				case 400: return {
+				case 404: return {
 
 					...errorNotification,
-					summary: `${(error.error[0] || error.error).code}`,
-					detail: `${(error.error[0] || error.error).message}`
+					summary: 'Not Found',
+					detail: `${error.status}`,
+					sticky: false
 
 				};
 

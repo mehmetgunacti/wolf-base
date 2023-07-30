@@ -8,6 +8,19 @@ enum HTTP_METHOD {
 
 }
 
+export class HttpError extends Error {
+
+	constructor(
+		public url: string,
+		public status: number,
+		public statusText: string,
+		public error?: any
+	) {
+		super();
+	}
+
+}
+
 export class HTTP {
 
 	static async http<HTTPRESP, RETVAL>(
@@ -16,9 +29,10 @@ export class HTTP {
 	): Promise<RETVAL> {
 
 		const response: Response = await fetch(request);
+		console.log(response);
 
 		if (!response.ok)
-			throw new Error(response.statusText);
+			throw new HttpError(request.toString(), response.status, response.statusText);
 
 		const httpResponse: HTTPRESP = await response.json() as HTTPRESP;
 		if (responseHandler)

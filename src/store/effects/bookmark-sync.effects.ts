@@ -12,6 +12,7 @@ export class BookmarkSyncEffects {
 
 	// private actions$: Actions = inject(Actions);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
+	// private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
 
 	loadBookmarksSyncData$ = createEffect(
 

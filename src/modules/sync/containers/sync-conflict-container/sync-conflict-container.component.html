@@ -1,0 +1,9 @@
+<app-sync-conflict
+	[syncData]="syncData$ | async"
+	[entity]="entity$ | async"
+	[trashItem]="trashItem$ | async"
+	[remoteData]="remoteData$ | async"
+	(deleteLocal)="onDeleteLocal($event)"
+	(deleteRemote)="onDeleteRemote($event)"
+	(overrideLocal)="onOverrideLocal($event)"
+	(overrideRemote)="onOverrideRemote($event)"></app-sync-conflict>

@@ -3,12 +3,14 @@ import { Store } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { AsyncZippable, FlateError, zip } from 'fflate';
 import * as FileSaver from 'file-saver-es';
-import { Bookmark, IDBase, LocalStorageService } from 'lib';
+import { Bookmark, IDBase, LocalStorageService, UUID } from 'lib';
 import { ConfirmEventType, ConfirmationService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { syncTrigger } from 'store/actions/sync.actions';
+import { closeConflictDialog, loadFirstConflict, syncTrigger } from 'store/actions/sync.actions';
 import { isFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
+import { isBigScreen } from 'store/selectors/core-ui.selectors';
+import { isConflictDialogVisible, selectedConflict } from 'store/selectors/sync.selectors';
 
 const toUint8Array = <T extends IDBase>(data: T[]): Uint8Array => {
 
@@ -30,10 +32,16 @@ export class SyncPageComponent {
 	private confirmationService: ConfirmationService = inject(ConfirmationService);
 
 	isFirestoreConfigMissing$: Observable<boolean>;
+	isConflictDialogVisible$: Observable<boolean>;
+	isBigScreen$: Observable<boolean>;
+	conflictDialogTitle$: Observable<string>;
 
 	constructor() {
 
 		this.isFirestoreConfigMissing$ = this.store.select(isFirestoreConfigMissing);
+		this.isConflictDialogVisible$ = this.store.select(isConflictDialogVisible);
+		this.isBigScreen$ = this.store.select(isBigScreen);
+		this.conflictDialogTitle$ = this.store.select(selectedConflict).pipe(map(sd => `Conflict: "${sd?.error ?? ''}"`));
 
 	}
 
@@ -98,6 +106,18 @@ export class SyncPageComponent {
 			});
 
 		});
+
+	}
+
+	openConflictDialog(id: UUID): void {
+
+		this.store.dispatch(loadFirstConflict());
+
+	}
+
+	closeConflictDialog(): void {
+
+		this.store.dispatch(closeConflictDialog());
 
 	}
 

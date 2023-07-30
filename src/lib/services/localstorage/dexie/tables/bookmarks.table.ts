@@ -154,6 +154,13 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 	}
 
+	async getTrashItem(id: string): Promise<Bookmark | null> {
+
+		await sleep(SLEEP);
+		return this.bookmarks_trash.get(id) ?? null;
+
+	}
+
 	async listSyncData(): Promise<SyncData[]> {
 
 		await sleep(SLEEP);

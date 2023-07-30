@@ -170,6 +170,12 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
+	async getTrashItem(id: UUID): Promise<T | null> {
+
+		return await this.db.table<T>(this.tablename + '_trash').get(id) ?? null;
+
+	}
+
 	async filterNew(entities: Metadata[]): Promise<Metadata[]> {
 
 		// create a Map of all ids from ..._sync table

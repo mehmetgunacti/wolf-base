@@ -20,6 +20,8 @@ export interface EntityTable<T extends Entity> {
 	getSyncData(id: UUID): Promise<SyncData | null>;
 	listSyncData(): Promise<SyncData[]>;
 
+	getTrashItem(id: UUID): Promise<T | null>;
+
 	listNewIds(): Promise<UUID[]>;
 	listErrors(): Promise<SyncData[]>;
 	listUpdated(): Promise<SyncData[]>;

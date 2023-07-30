@@ -1,0 +1,21 @@
+<p-tabView>
+	<p-tabPanel header="SyncData">
+		<pre>{{ syncData | json | noData }}</pre>
+	</p-tabPanel>
+	<p-tabPanel header="Entity" [disabled]="!entity">
+		<pre>{{ entity | json | noData:'No Entity'}}</pre>
+	</p-tabPanel>
+	<p-tabPanel header="Remote Data" [disabled]="!remoteData">
+		<pre>{{ remoteData | json | noData:'No RemoteData'}}</pre>
+	</p-tabPanel>
+	<p-tabPanel header="Trash Item" [disabled]="!trashItem">
+		<pre>{{ trashItem | json | noData:'No entity found in trash' }}</pre>
+	</p-tabPanel>
+</p-tabView>
+
+<div buttons>
+	<button pButton type="button" label="Delete Local Item" class="p-button-danger" icon="pi pi-trash" iconPos="left" (click)="onDeleteLocal()"></button>
+	<button pButton type="button" label="Override Local Item" class="p-button-warn" icon="pi pi-cloud-download" iconPos="left" (click)="onOverrideLocal()" [disabled]="!remoteData"></button>
+	<button pButton type="button" label="Delete Remote Item" class="p-button-danger" icon="pi pi-trash" iconPos="left" (click)="onDeleteRemote()" [disabled]="!remoteData"></button>
+	<button pButton type="button" label="Override Remote Item" class="p-button-warn" icon="pi pi-cloud-upload" iconPos="left" (click)="onOverrideRemote()" [disabled]="!entity"></button>
+</div>

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { loadFirstConflict } from 'store/actions/sync.actions';
 import { bookmarkClickedCount } from 'store/selectors/bookmark-entities.selectors';
 import { bookmarkCreatedCount, bookmarkDeletedCount, bookmarkErrorsCount, bookmarkUpdatedCount } from 'store/selectors/bookmark-sync.selectors';
 import { messages } from 'store/selectors/sync.selectors';
@@ -36,7 +37,7 @@ export class SyncSummaryContainerComponent {
 
 	onStart(): void {
 
-		//
+		this.store.dispatch(loadFirstConflict());
 
 	}
 

@@ -14,6 +14,24 @@
 
 <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 
+<!-- Edit Dialog -->
+<p-dialog
+	*ngIf="isConflictDialogVisible$ | async"
+	[header]="conflictDialogTitle$ | async | noData:'View Conflict'"
+	[draggable]="false"
+	[visible]="isConflictDialogVisible$ | async"
+	(visibleChange)="closeConflictDialog()"
+	[closeOnEscape]="true"
+	[closable]="true"
+	[modal]="true"
+	[dismissableMask]="true"
+	[maximizable]="(isBigScreen$ | async) || false"
+	styleClass="syncConflictContainerComponent">
+
+	<app-sync-conflict-container></app-sync-conflict-container>
+
+</p-dialog>
+
 <p-messages severity="warn" *ngIf="isFirestoreConfigMissing$ | async">
     <ng-template pTemplate>
 		<span>Firestore configuration missing</span>
