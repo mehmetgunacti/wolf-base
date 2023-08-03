@@ -14,7 +14,7 @@ export const loadFirstConflict = createAction('[Sync] Load First Conflict');
 export const loadFirstConflictSuccess = createAction('[Sync] Load First Conflict Success', props<{ syncData: SyncData }>());
 
 export const loadItemSuccess = createAction('[Sync] Load Item Success', props<{ item: Entity }>());
-export const loadTrashItemSuccess = createAction('[Sync] Load Trash Item Success', props<{ item: Entity }>());
+export const loadTrashItemSuccess = createAction('[Sync] Load Trash Item Success', props<{ item: Entity | null }>());
 export const downloadRemoteDataSuccess = createAction('[Sync] Donwload RemoteData Success', props<{ remoteData: RemoteData<Entity> }>());
 
 export const purgeLocalItem = createAction('[Sync] Purge Local Item', props<{ id: UUID }>());

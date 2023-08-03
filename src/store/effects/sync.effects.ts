@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { Bookmark, LocalStorageService, RemoteData, RemoteStorageService } from 'lib';
+import { EMPTY } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { SyncService } from 'services/sync.service';
 import { showNotification } from 'store/actions/core-notification.actions';
@@ -50,7 +51,7 @@ export class SyncEffects {
 			ofType(loadFirstConflictSuccess),
 			map(({ syncData }) => syncData.id),
 			switchMap(id => this.localStorage.bookmarks.getTrashItem(id)),
-			map(item => item ? loadTrashItemSuccess({ item }) : showNotification({ severity: 'info', detail: 'No Trash Item found' }))
+			map(item => loadTrashItemSuccess({ item }))
 
 		)
 
