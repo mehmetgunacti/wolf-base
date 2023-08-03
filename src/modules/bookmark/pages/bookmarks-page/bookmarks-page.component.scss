@@ -27,22 +27,21 @@ app-bookmarks-page {
 		grid-area						: b;
 		position						: relative;
 
-		// &>section[bookmarks] {
-		// 	position					: absolute;
-		// 	display						: grid;
-		// 	grid-template-columns		: 1fr;
-		// 	grid-auto-rows				: 12rem;
-		// 	grid-gap					: 0.5rem;
-		// 	width						: 100%;
-		// 	padding						: 0 0.5rem 0.5rem;
+	}
 
-		// 	@include md() {
-		// 		grid-template-columns	: repeat(auto-fill, minmax(35rem, 1fr));
-		// 		grid-gap				: 1rem;
-		// 	}
+	& .bookmarkEditContainerComponent {
 
-		// }
-
+		width		: 100vw;
+		height		: 100vh;
+		max-height	: initial !important;
+	
+		@include lg() {
+	
+			width	: 80vw;
+			height	: 95vh;
+	
+		}
+	
 	}
 
 }

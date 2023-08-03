@@ -1,16 +1,21 @@
 <p-tabView>
+
 	<p-tabPanel header="SyncData">
 		<pre>{{ syncData | json | noData }}</pre>
 	</p-tabPanel>
-	<p-tabPanel header="Entity" [disabled]="!entity">
+
+	<p-tabPanel header="Entity" [disabled]="!entity" #entityPanel>
 		<pre>{{ entity | json | noData:'No Entity'}}</pre>
 	</p-tabPanel>
+
 	<p-tabPanel header="Remote Data" [disabled]="!remoteData">
-		<pre>{{ remoteData | json | noData:'No RemoteData'}}</pre>
+		<pre> remoteData | json | noData:'No RemoteData'</pre>
 	</p-tabPanel>
+
 	<p-tabPanel header="Trash Item" [disabled]="!trashItem">
 		<pre>{{ trashItem | json | noData:'No entity found in trash' }}</pre>
 	</p-tabPanel>
+
 </p-tabView>
 
 <div buttons>

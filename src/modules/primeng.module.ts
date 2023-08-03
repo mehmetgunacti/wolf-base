@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AccordionModule } from 'primeng/accordion';
 import { AvatarModule } from 'primeng/avatar';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
@@ -33,6 +34,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { MessagesModule } from 'primeng/messages';
 
 export const modules = [
+	AccordionModule,
 	AvatarModule,
 	AutoCompleteModule,
 	BreadcrumbModule,

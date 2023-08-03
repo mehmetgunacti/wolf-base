@@ -4,15 +4,13 @@
 		pButton
 		pRipple
 		type="button"
-		label="Start"
-		icon="pi pi-play"
+		label="Synchronize"
+		icon="pi pi-sync"
 		class="p-button-text p-button-sm"
-		(click)="onStart()">
+		(click)="onOpenSyncDialog()">
 	</button>
 
 </app-portal>
-
-<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 
 <!-- Edit Dialog -->
 <p-dialog
@@ -29,6 +27,24 @@
 	styleClass="syncConflictContainerComponent">
 
 	<app-sync-conflict-container></app-sync-conflict-container>
+
+</p-dialog>
+
+<!-- Sync Dialog -->
+<p-dialog
+	*ngIf="isSyncDialogVisible$ | async"
+	header="Synchronize"
+	[draggable]="false"
+	[visible]="isSyncDialogVisible$ | async"
+	(visibleChange)="closeSyncDialog()"
+	[closeOnEscape]="true"
+	[closable]="true"
+	[modal]="true"
+	[dismissableMask]="true"
+	[maximizable]="(isBigScreen$ | async) || false"
+	styleClass="syncSynchronizeContainerComponent">
+
+	<app-sync-synchronize-container></app-sync-synchronize-container>
 
 </p-dialog>
 

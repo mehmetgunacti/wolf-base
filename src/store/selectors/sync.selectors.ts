@@ -1,7 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { SyncModuleState } from "store/states/sync.state";
-import { bookmarks } from "./bookmark-entities.selectors";
-import { Bookmark } from "lib";
 
 export const syncModuleState = createFeatureSelector<SyncModuleState>('sync');
 
@@ -16,6 +14,13 @@ export const isConflictDialogVisible = createSelector(
 
 	syncModuleState,
 	state => state.conflictDialogVisible
+
+);
+
+export const isSyncDialogVisible = createSelector(
+
+	syncModuleState,
+	state => state.syncDialogVisible
 
 );
 

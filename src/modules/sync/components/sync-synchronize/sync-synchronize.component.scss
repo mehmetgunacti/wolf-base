@@ -1,41 +1,14 @@
-app-sync-conflict {
+app-sync-synchronize {
 
 	@extend %flex-column;
 
-	& > p-tabView {
+	[messages] {
 
-		flex	: 1;
-		display	: grid;
-
-	 	& p-tabPanel {
-
-			display	: grid;
-
-			& .p-tabview-panel {
-
-				overflow: auto;
-
-			}
-
-		}
+		flex: 1;
 
 	}
 
-	& table {
-
-		table-layout	: fixed;
-		width			: 100%;
-
-		& pre {
-
-			overflow-x: auto;
-			width: 100%;
-
-		}
-
-	}
-
-	& > [buttons] {
+	[buttons] {
 
 		@extend %flex-column;
 

@@ -1,6 +1,6 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import produce from 'immer';
-import { closeConflictDialog, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadTrashItemSuccess, syncEvent } from 'store/actions/sync.actions';
+import { clearMessages, closeConflictDialog, closeSyncDialog, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadTrashItemSuccess, openSyncDialog, syncEvent, syncTrigger } from 'store/actions/sync.actions';
 import { SyncModuleState, initialSyncState } from 'store/states/sync.state';
 
 export const syncReducer: ActionReducer<SyncModuleState, Action> = createReducer(
@@ -87,6 +87,10 @@ export const syncReducer: ActionReducer<SyncModuleState, Action> = createReducer
 			}
 		)
 
-	})
+	}),
+	on(syncTrigger, (state): SyncModuleState => ({ ...state, syncDialogVisible: true })),
+	on(openSyncDialog, (state): SyncModuleState => ({ ...state, syncDialogVisible: true })),
+	on(closeSyncDialog, (state): SyncModuleState => ({ ...state, syncDialogVisible: false })),
+	on(clearMessages, (state): SyncModuleState => ({ ...state, messages: [] }))
 
 );

@@ -1,0 +1,8 @@
+<div messages>
+	<div *ngFor="let message of messages">{{message}}</div>
+</div>
+
+<div buttons>
+	<button pButton type="button" label="Clear" icon="pi pi-trash" (click)="onClear()"></button>
+	<button pButton type="button" label="Start" icon="pi pi-play" (click)="onStart()"></button>
+</div>

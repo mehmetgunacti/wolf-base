@@ -22,8 +22,6 @@ export class SyncSummaryContainerComponent {
 	bookmarkUpdatedCount$: Observable<number>;
 	bookmarkEmpty$: Observable<boolean>;
 
-	messages$: Observable<string[]>;
-
 	constructor() {
 
 		this.bookmarkErrorsCount$ = this.store.select(bookmarkErrorsCount);
@@ -38,8 +36,6 @@ export class SyncSummaryContainerComponent {
 			this.bookmarkDeletedCount$,
 			this.bookmarkUpdatedCount$
 		]).pipe(map(([a, b, c, d, e]) => a + b + c + d + e === 0));
-
-		this.messages$ = this.store.select(messages);
 
 	}
 

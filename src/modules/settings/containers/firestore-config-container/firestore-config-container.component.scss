@@ -12,34 +12,4 @@
 
 	}
 
-	// & .p-dialog-content {
-
-	//     display: flex;
-
-	// }
-
-	// & app-bookmark-edit-container {
-	//     display: block;
-	//     height: 100%;
-	// }
-
-	& .p-dialog-content {
-
-		@extend %flex-column;
-
-		& app-firestore-config-container {
-
-			flex    : 1;
-			@extend %flex-column;
-
-			& app-bookmark-form {
-
-				flex		: 1;
-
-			}
-
-		}
-
-	}
-
 }

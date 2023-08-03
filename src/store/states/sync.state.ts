@@ -9,6 +9,7 @@ export interface SyncModuleState {
 	selectedTrashItem: Entity | null;
 	selectedRemoteData: RemoteData<Entity> | null;
 	conflictDialogVisible: boolean;
+	syncDialogVisible: boolean;
 
 }
 
@@ -17,6 +18,7 @@ export const initialSyncState: SyncModuleState = {
 	inProgress: false,
 	messages: [],
 	conflictDialogVisible: false,
+	syncDialogVisible: false,
 	selectedSyncData: null,
 	selectedItem:  null,
 	selectedTrashItem: null,
