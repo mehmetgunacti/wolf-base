@@ -21,20 +21,6 @@ app-sync-conflict {
 
 	}
 
-	& table {
-
-		table-layout	: fixed;
-		width			: 100%;
-
-		& pre {
-
-			overflow-x: auto;
-			width: 100%;
-
-		}
-
-	}
-
 	& > [buttons] {
 
 		@extend %flex-column;
