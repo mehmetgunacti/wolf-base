@@ -25,7 +25,7 @@ export const bookmarksIds = createSelector(
 export const bookmarksArray = createSelector(
 
 	selectorBookmarksState,
-	state => Object.values(state.entities).map(b => ({ ...b, clicks: state.clicks[b.id].total ?? 0 }))
+	state => Object.values(state.entities).map(b => ({ ...b, clicks: state.clicks[b.id]?.total ?? 0 }))
 
 );
 

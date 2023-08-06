@@ -71,7 +71,7 @@ export const filteredBookmarks = createSelector(
 	searchTerm,
 	(bookmarks, tags, term): Bookmark[] => {
 
-		// Filter bookmarks based on tags
+		// Filter bookmarks based on selected tags
 		const filteredBookmarks: Bookmark[] = tags.reduce((acc, tag) => {
 			return acc.filter(bookmark => bookmark.tags.includes(tag));
 		}, bookmarks);
@@ -84,12 +84,14 @@ export const filteredBookmarks = createSelector(
 
 		// Filter bookmarks based on search term
 		const result = filteredBookmarks.filter(bookmark => {
+
 			const { name, title } = bookmark;
 			const lowerCaseName = name.toLowerCase();
 			const lowerCaseTitle = title.toLowerCase();
 
 			// Check if any of the search words is present in the bookmark's name or title
 			return searchWords.every(word => lowerCaseName.includes(word) || lowerCaseTitle.includes(word));
+
 		});
 
 		return result;

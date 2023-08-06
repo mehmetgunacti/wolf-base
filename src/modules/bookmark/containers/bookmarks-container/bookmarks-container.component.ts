@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { filteredBookmarks } from 'store/selectors/bookmark-tags.selectors';
 	templateUrl: './bookmarks-container.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookmarksContainerComponent implements OnInit {
+export class BookmarksContainerComponent {
 
 	private store: Store = inject(Store);
 	bookmarks$: Observable<Bookmark[]>;
@@ -19,23 +19,6 @@ export class BookmarksContainerComponent implements OnInit {
 	constructor() {
 
 		this.bookmarks$ = this.store.select(filteredBookmarks);
-
-	}
-
-	ngOnInit(): void {
-
-
-
-	}
-
-	onRefresh(): void {
-
-		// this.store.dispatch(
-		// 	actions.loadEntities({
-		// 		entity: Entities.bookmarks,
-		// 		skipCache: true
-		// 	})
-		// );
 
 	}
 
