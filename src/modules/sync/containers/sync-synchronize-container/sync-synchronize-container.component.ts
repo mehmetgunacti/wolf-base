@@ -41,7 +41,7 @@ export class SyncSynchronizeContainerComponent {
 
 		this.confirmationService.confirm({
 
-			message: 'Backup local database first?',
+			message: 'Download (backup) local database?',
 			header: 'Confirmation',
 			icon: 'pi pi-question-circle',
 			accept: async () => {

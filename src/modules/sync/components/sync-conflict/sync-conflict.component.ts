@@ -17,6 +17,7 @@ export class SyncConflictComponent {
 	@Output() deleteRemote = new EventEmitter<UUID>();
 	@Output() overrideLocal = new EventEmitter<RemoteData<Entity>>();
 	@Output() overrideRemote = new EventEmitter<Entity>();
+	@Output() loadRemote = new EventEmitter<UUID>();
 
 	onDeleteLocal(): void {
 
@@ -43,6 +44,13 @@ export class SyncConflictComponent {
 
 		if (this.entity)
 			this.overrideRemote.emit(this.entity);
+
+	}
+
+	onLoadRemote(): void {
+
+		if (this.syncData)
+			this.loadRemote.emit(this.syncData.id);
 
 	}
 

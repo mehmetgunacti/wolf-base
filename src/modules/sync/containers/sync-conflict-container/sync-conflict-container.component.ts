@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Entity, RemoteData, SyncData, UUID } from 'lib';
 import { Observable } from 'rxjs';
-import { overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem } from 'store/actions/sync.actions';
+import { downloadRemoteData, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem } from 'store/actions/sync.actions';
 import { selectedConflict, selectedItem, selectedRemoteData, selectedTrashItem } from 'store/selectors/sync.selectors';
 
 @Component({
@@ -49,6 +49,12 @@ export class SyncConflictContainerComponent {
 	onOverrideRemote(entity: Entity): void {
 
 		this.store.dispatch(overrideRemoteItem({ entity }));
+
+	}
+
+	onLoadRemote(id: UUID): void {
+
+		this.store.dispatch(downloadRemoteData({ id }));
 
 	}
 

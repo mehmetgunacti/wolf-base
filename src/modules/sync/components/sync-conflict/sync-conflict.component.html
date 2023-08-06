@@ -4,12 +4,13 @@
 		<pre>{{ syncData | json | noData }}</pre>
 	</p-tabPanel>
 
-	<p-tabPanel header="Entity" [disabled]="!entity" #entityPanel>
+	<p-tabPanel header="Local Entity" [disabled]="!entity" #entityPanel>
 		<pre>{{ entity | json | noData:'No Entity'}}</pre>
 	</p-tabPanel>
 
-	<p-tabPanel header="Remote Data" [disabled]="!remoteData">
-		<pre> remoteData | json | noData:'No RemoteData'</pre>
+	<p-tabPanel header="Remote Entity">
+		<pre>{{ remoteData | json | noData:'Not loaded' }}</pre>
+		<button pButton type="button" label="Download" class="p-button" icon="pi pi-cloud-download" iconPos="left" (click)="onLoadRemote()"></button>
 	</p-tabPanel>
 
 	<p-tabPanel header="Trash Item" [disabled]="!trashItem">

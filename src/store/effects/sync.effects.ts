@@ -3,11 +3,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { Bookmark, LocalStorageService, RemoteData, RemoteStorageService } from 'lib';
 import { EMPTY } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { SyncService } from 'services/sync.service';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { saveFirestoreConfigSuccess, saveTitleLookupSuccess } from 'store/actions/core.actions';
-import { downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem, syncTrigger } from 'store/actions/sync.actions';
+import { downloadRemoteData, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem, syncTrigger } from 'store/actions/sync.actions';
 
 @Injectable()
 export class SyncEffects {
@@ -38,7 +38,7 @@ export class SyncEffects {
 			ofType(loadFirstConflictSuccess),
 			map(({ syncData }) => syncData.id),
 			switchMap(id => this.localStorage.bookmarks.get(id)),
-			map(item => item ? loadItemSuccess({ item }) : showNotification({ severity: 'info', detail: 'No Item found' }))
+			map(item => item ? loadItemSuccess({ item }) : showNotification({ severity: 'info', detail: 'Item not in local table' }))
 
 		)
 
@@ -61,10 +61,21 @@ export class SyncEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(loadFirstConflictSuccess),
-			map(({ syncData }) => syncData.id),
-			switchMap(id => this.remoteStorage.bookmarks.downloadOne(id)),
-			map(remoteData => remoteData ? downloadRemoteDataSuccess({ remoteData }) : showNotification({ severity: 'info', detail: 'No RemoteData found' }))
+			ofType(downloadRemoteData),
+			switchMap(({ id }) => this.remoteStorage.bookmarks.downloadOne(id)),
+			map(remoteData => downloadRemoteDataSuccess({ remoteData }))
+
+		)
+
+	);
+
+	showNoRemoteDataNotification$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(downloadRemoteDataSuccess),
+			filter(remoteData => remoteData === null),
+			map(() => showNotification({ severity: 'info', detail: 'No RemoteData found' }))
 
 		)
 
