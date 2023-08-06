@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
-import { selectorBookmarkModuleState } from './bookmark.selectors';
-import { bookmarksArray, bookmarksCount } from './bookmark-entities.selectors';
+import { bookmarksCount } from './bookmark-entities.selectors';
 import { filteredBookmarkCount } from './bookmark-tags.selectors';
+import { selectorBookmarkModuleState } from './bookmark.selectors';
 
 export const selectorUIState = createSelector(
 
@@ -22,13 +22,6 @@ export const menuBookmarkBadge = createSelector(
 	bookmarksCount,
 	filteredBookmarkCount,
 	(total, selected) => selected < total ? `${selected}/${total}` : `${total}`
-
-);
-
-export const menuSyncableItemsCount = createSelector(
-
-	bookmarksArray,
-	bookmarks => -1
 
 );
 

@@ -3,9 +3,10 @@ import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 import { setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
-import { menuBookmarkBadge, menuSyncableItemsCount } from 'store/selectors/bookmark-ui.selectors';
+import { menuBookmarkBadge } from 'store/selectors/bookmark-ui.selectors';
 import { isSidebarVisible, isThemeDark } from 'store/selectors/core-configuration.selectors';
 import { isBigScreen } from 'store/selectors/core-ui.selectors';
+import { menuSyncBadge, syncableItemsCount } from 'store/selectors/sync-ui.selectors';
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
 
@@ -51,20 +52,20 @@ export class CorePageComponent implements OnDestroy {
 
 		);
 
-		this.syncableItemsCount$ = this.store.select(menuSyncableItemsCount);
+		this.syncableItemsCount$ = this.store.select(syncableItemsCount);
 
 		this.navMenuItems$ = combineLatest([
 			this.store.select(menuBookmarkBadge),
-			this.syncableItemsCount$
+			this.store.select(menuSyncBadge),
 		]).pipe(
 
-			map(([bookmarkBadge, syncableCount]) => {
+			map(([bookmarkBadge, syncBadge]) => {
 
 				const menuItems: Array<MenuItem> = new Array();
 				menuItems.push(navItems.miHome);
 				menuItems.push(navItems.miBookmarks(bookmarkBadge));
 				menuItems.push(navItems.miDatabase);
-				menuItems.push(navItems.miSync(syncableCount > 0 ? `${syncableCount}` : undefined));
+				menuItems.push(navItems.miSync(syncBadge));
 				menuItems.push(navItems.miSettings);
 				return menuItems;
 
