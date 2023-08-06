@@ -14,11 +14,13 @@ export const fadeInFadeOutTrigger = trigger('fadeInFadeOut', [
 	transition(':leave', [
 		style({
 			height: '*',
-			opacity: '1'
+			opacity: '1',
+			transform: 'translateY(0)'
 		}),
 		animate('.5s ease-out', style({
 			height: '0',
-			opacity: '0'
+			opacity: '0',
+			transform: 'translateY(-70%)'
 		}))
 	])
 ]);
