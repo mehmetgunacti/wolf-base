@@ -10,7 +10,7 @@
 
 	<p-tabPanel header="Remote Entity">
 		<pre>{{ remoteData | json | noData:'Not loaded' }}</pre>
-		<button pButton type="button" label="Download" class="p-button" icon="pi pi-cloud-download" iconPos="left" (click)="onLoadRemote()"></button>
+		<button *ngIf="!remoteData" pButton type="button" label="Download" class="p-button" icon="pi pi-cloud-download" iconPos="left" (click)="onLoadRemote()"></button>
 	</p-tabPanel>
 
 	<p-tabPanel header="Trash Item" [disabled]="!trashItem">

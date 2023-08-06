@@ -1,3 +1,17 @@
+<app-portal outletName="portal-outlet-right">
+
+	<button
+		pButton
+		pRipple
+		type="button"
+		label="Backup"
+		icon="pi pi-database"
+		class="p-button-text p-button-sm"
+		(click)="onBackupDatabase()">
+	</button>
+
+</app-portal>
+
 <p-card>
 
 	<ng-container *ngIf="(content$ | async) ?? [] as content">

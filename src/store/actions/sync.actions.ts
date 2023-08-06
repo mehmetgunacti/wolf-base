@@ -4,6 +4,8 @@ import { Entity, RemoteData, SyncData, SyncEvent, UUID } from "lib";
 export const syncTrigger = createAction('[Sync] Trigger');
 export const syncEvent = createAction('[Sync] Message', props<SyncEvent>());
 
+export const syncBackupDatabase = createAction('[Sync] Backup Database');
+
 export const openConflictDialog = createAction('[Sync] Open Conflict Dialog');
 export const closeConflictDialog = createAction('[Sync] Close Conflict Dialog');
 

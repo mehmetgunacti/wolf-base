@@ -2,12 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { Bookmark, LocalStorageService, RemoteData, RemoteStorageService } from 'lib';
-import { EMPTY } from 'rxjs';
+import { BackupDatabase } from 'lib/utils/database.util';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { SyncService } from 'services/sync.service';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { saveFirestoreConfigSuccess, saveTitleLookupSuccess } from 'store/actions/core.actions';
-import { downloadRemoteData, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem, syncTrigger } from 'store/actions/sync.actions';
+import { downloadRemoteData, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem, syncBackupDatabase, syncTrigger } from 'store/actions/sync.actions';
 
 @Injectable()
 export class SyncEffects {
@@ -159,6 +159,18 @@ export class SyncEffects {
 			switchMap(({ entity }) => this.remoteStorage.bookmarks.upload(entity as Bookmark)),
 			switchMap(remoteData => this.localStorage.bookmarks.put(remoteData)),
 			map(() => showNotification({ severity: 'success', detail: 'Remote item updated' }))
+
+		)
+
+	);
+
+	generateZip$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(syncBackupDatabase),
+			switchMap(() => new BackupDatabase(this.localStorage).execute()),
+			map(() => syncTrigger())
 
 		)
 

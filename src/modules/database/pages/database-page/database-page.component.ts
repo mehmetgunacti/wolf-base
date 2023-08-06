@@ -1,8 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { LocalStorageService, WolfBaseTableName } from 'lib';
 import { Observable, map, switchMap } from 'rxjs';
+import { backupDatabase } from 'store/actions/database.actions';
 
 @Component({
 	selector: 'app-database-page',
@@ -15,6 +17,7 @@ export class DatabasePageComponent {
 	content$: Observable<{ key: string, value: string }[]>;
 	numberOfItems$: Observable<number>;
 
+	private store: Store = inject(Store);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 
 	constructor() {
@@ -34,6 +37,12 @@ export class DatabasePageComponent {
 			map(dump => Object.keys(dump).length)
 
 		);
+
+	}
+
+	onBackupDatabase(): void {
+
+		this.store.dispatch(backupDatabase());
 
 	}
 
