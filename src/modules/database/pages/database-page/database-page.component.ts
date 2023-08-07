@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { LocalStorageService, WolfBaseTableName } from 'lib';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, combineLatest, map, startWith, switchMap, tap, withLatestFrom } from 'rxjs';
 import { backupDatabase } from 'store/actions/database.actions';
 
 @Component({
@@ -14,8 +14,8 @@ export class DatabasePageComponent {
 
 	tableNames: { label: string, value?: string, disabled?: boolean }[];
 	fcTableName = new FormControl();
-	content$: Observable<{ key: string, value: string }[]>;
-	numberOfItems$: Observable<number>;
+	fcSearch = new FormControl('');
+	content$: Observable<string[]>;
 
 	private store: Store = inject(Store);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
@@ -25,16 +25,21 @@ export class DatabasePageComponent {
 		this.tableNames = [
 			{ label: 'Select...', disabled: true },
 			...Object.entries(WolfBaseTableName).map(([value, label]) => ({ label, value }))
-		]
-		this.content$ = this.fcTableName.valueChanges.pipe(
+		];
+
+		const tableValues$: Observable<string[]> = this.fcTableName.valueChanges.pipe(
 
 			switchMap((tablename: WolfBaseTableName) => this.localStorage.dump(tablename)),
-			map(dump => Array.from(dump, ([key, value]) => ({ key, value })))
+			map(dump => Array.from(dump.values()))
 
 		);
-		this.numberOfItems$ = this.content$.pipe(
 
-			map(dump => Object.keys(dump).length)
+		this.content$ = combineLatest([
+			tableValues$,
+			this.fcSearch.valueChanges.pipe(startWith(null))
+		 ]).pipe(
+
+			map(([values, filterValue]) => filterValue ? values.filter(v => v.toLowerCase().includes(filterValue.toLowerCase())) : values)
 
 		);
 
