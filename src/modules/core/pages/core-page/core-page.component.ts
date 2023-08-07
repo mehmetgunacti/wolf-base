@@ -10,7 +10,7 @@ import { menuSyncBadge, syncableItemsCount } from 'store/selectors/sync-ui.selec
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
 
-const formatSyncBadge = (numbers: number[]): string => {
+const formatBadge_Sync = (numbers: number[]): string => {
 
 	const [total, errors] = numbers;
 	if (total === 0)
@@ -22,6 +22,8 @@ const formatSyncBadge = (numbers: number[]): string => {
 	return `${total}`;
 
 }
+
+const formatBadge_Bookmark = ([total, filtered]: [number, number]) => filtered < total ? `${filtered}/${total}` : `${total}`;
 
 @Component({
 	selector: 'app-core-page',
@@ -72,15 +74,24 @@ export class CorePageComponent implements OnDestroy {
 			this.store.select(menuSyncBadge),
 		]).pipe(
 
-			map(([bookmarkBadge, sync]) => {
+			map(([bookmarkNumbers, syncNumbers]) => {
 
-				const menuItems: Array<MenuItem> = new Array();
-				menuItems.push(navItems.miHome);
-				menuItems.push(navItems.miBookmarks(bookmarkBadge));
-				menuItems.push(navItems.miDatabase);
-				menuItems.push(navItems.miSync(formatSyncBadge(sync)));
-				menuItems.push(navItems.miSettings);
-				return menuItems;
+				const menuItems: MenuItem[] = [
+					navItems.miHome,
+					navItems.miBookmarks(formatBadge_Bookmark(bookmarkNumbers)),
+					navItems.miDatabase,
+					navItems.miSync(formatBadge_Sync(syncNumbers)),
+					navItems.miSettings
+				];
+				if (this.bigScreen)
+					return menuItems;
+
+				return menuItems.map(
+					item => ({
+						...item,
+						command: () => this.store.dispatch(setSidebarVisible({ visible: false }))
+					})
+				);
 
 			})
 

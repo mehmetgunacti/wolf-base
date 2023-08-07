@@ -21,7 +21,7 @@ export const menuBookmarkBadge = createSelector(
 
 	bookmarksCount,
 	filteredBookmarkCount,
-	(total, selected) => selected < total ? `${selected}/${total}` : `${total}`
+	(total, filtered): [number, number] => ([total, filtered])
 
 );
 
