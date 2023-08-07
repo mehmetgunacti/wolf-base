@@ -15,7 +15,15 @@ app-database-page {
 		@extend %flex-space-between-center;
 		& span[controls] {
 
-			@extend %flex-row;
+			@extend %flex-column;
+
+			@include md() {
+
+				display			: flex;
+				flex-direction	: row;
+
+			}
+
 			& .p-dropdown, & input[pInputText] {
 
 				margin-right	: 0.2rem;
