@@ -16,7 +16,7 @@ $header-height					: 4rem;
 app-core-page {
 
 	@extend %flex-column;
-	height	: 200vh;
+	height	: 100vh;
 
 	header {
 
@@ -149,13 +149,6 @@ app-core-page {
 			z-index		: initial;
 
 		}
-
-	}
-
-
-	@include md() {
-
-		height	: 100vh;
 
 	}
 

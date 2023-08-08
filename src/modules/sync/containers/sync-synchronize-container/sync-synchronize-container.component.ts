@@ -28,9 +28,9 @@ export class SyncSynchronizeContainerComponent {
 
 		this.confirmationService.confirm({
 
-			message: 'Download (backup) local database?',
-			header: 'Confirmation',
-			icon: 'pi pi-question-circle',
+			message: 'Download local database?',
+			header: 'Backup',
+			icon: 'pi pi-database',
 			accept: async () => {
 
 				this.store.dispatch(syncBackupDatabase());
