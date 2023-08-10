@@ -5,12 +5,8 @@ $default-padding				: 0.5rem;
 $header-height					: 4rem;
 
 @keyframes fadeIn {
-	from {
-		opacity:0;
-	}
-	to {
-		opacity:1;
-	}
+	from	{ opacity : 0; }
+	to		{ opacity : 1; }
 }
 
 app-core-page {
@@ -21,41 +17,63 @@ app-core-page {
 	header {
 
 		display					: grid;
-		grid-template-columns	: 60px 1fr;
-		grid-template-rows		: 1fr 1fr;
-		grid-template-areas		: "logo right"
-								  "left left";
+		grid-template-columns	: auto 1fr;
 		background-color		: var(--surface-c);
-		min-height				: 2 * $header-height;
-
-		@include md() {
-
-			grid-template-columns	: 60px 1fr 1fr;
-			grid-template-rows		: 1fr;
-			grid-template-areas		: "logo left right";
-			min-height				: $header-height;
-
-		}
 
 		& #section-logo {
 
-			grid-area	: logo;
 			@extend %flex-center-center;
+			min-height	: $header-height;
+			min-width	: $header-height;
 
 		}
 
 		& #portal-outlet-left {
 
-			grid-area		: left;
 			@extend %flex-start-center;
-			padding-left	: 0.5rem;
+
+			&:empty {
+
+				display: none;
+
+			}
 
 		}
 
 		& #portal-outlet-right {
 
-			grid-area	: right;
+			grid-column: span 2;
 			@extend %flex-end-center;
+
+			&:not(:empty) {
+
+				min-height	: $header-height;
+
+			}
+
+		}
+
+		& #portal-outlet-left:empty + #portal-outlet-right {
+
+			grid-column: 2;
+
+		}
+
+		@include md() {
+
+			grid-template-columns: auto 1fr 1fr;
+
+			& > #portal-outlet-right {
+
+				grid-column: span 1;
+
+			}
+
+			& > #portal-outlet-left:empty + #portal-outlet-right {
+
+				grid-column: span 2;
+
+			}
 
 		}
 
