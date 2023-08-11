@@ -1,23 +1,35 @@
-<p-tabView>
+<div wrapper>
 
-	<p-tabPanel header="SyncData">
-		<pre>{{ syncData | json | noData }}</pre>
-	</p-tabPanel>
+	<p-tabView [scrollable]="true">
 
-	<p-tabPanel header="Local Entity" [disabled]="!entity" #entityPanel>
-		<pre>{{ entity | json | noData:'No Entity'}}</pre>
-	</p-tabPanel>
+		<p-tabPanel header="SyncData">
+			<code>
+				<pre>{{ syncData | json | noData }}</pre>
+			</code>
+		</p-tabPanel>
 
-	<p-tabPanel header="Remote Entity">
-		<pre>{{ remoteData | json | noData:'Not loaded' }}</pre>
-		<button *ngIf="!remoteData" pButton type="button" label="Download" class="p-button" icon="pi pi-cloud-download" iconPos="left" (click)="onLoadRemote()"></button>
-	</p-tabPanel>
+		<p-tabPanel header="Local Entity" [disabled]="!entity" #entityPanel>
+			<code>
+				<pre>{{ entity | json | noData:'No Entity'}}</pre>
+			</code>
+		</p-tabPanel>
 
-	<p-tabPanel header="Trash Item" [disabled]="!trashItem">
-		<pre>{{ trashItem | json | noData:'No entity found in trash' }}</pre>
-	</p-tabPanel>
+		<p-tabPanel header="Remote Entity">
+			<code>
+				<pre>{{ remoteData | json | noData:'Not loaded' }}</pre>
+				<button *ngIf="!remoteData" pButton type="button" label="Download" class="p-button" icon="pi pi-cloud-download" iconPos="left" (click)="onLoadRemote()"></button>
+			</code>
+		</p-tabPanel>
 
-</p-tabView>
+		<p-tabPanel header="Trash Item" [disabled]="!trashItem">
+			<code>
+				<pre>{{ trashItem | json | noData:'No entity found in trash' }}</pre>
+			</code>
+		</p-tabPanel>
+
+	</p-tabView>
+
+</div>
 
 <div buttons>
 	<button pButton type="button" label="Delete Local Item" class="p-button-danger" icon="pi pi-trash" iconPos="left" (click)="onDeleteLocal()"></button>
