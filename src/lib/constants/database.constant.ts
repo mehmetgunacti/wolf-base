@@ -5,6 +5,7 @@ export enum WolfBaseTableName {
 	bookmarks_trash = 'bookmarks_trash',
 	bookmarks_clicks = 'bookmarks_clicks',
 	configuration = 'configuration',
+	sync_log = 'sync_log'
 
 }
 

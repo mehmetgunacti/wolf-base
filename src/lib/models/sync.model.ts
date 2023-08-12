@@ -17,3 +17,11 @@ export interface SyncData extends Metadata {
 	error: string | null;
 
 }
+
+export interface SyncLog {
+
+	created: string;
+	messages: string[];
+	inProgress: boolean;
+
+}
