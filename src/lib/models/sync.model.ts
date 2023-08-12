@@ -20,8 +20,15 @@ export interface SyncData extends Metadata {
 
 export interface SyncLog {
 
-	created: string;
-	messages: string[];
+	id: string;
+	messages: SyncMessage[];
 	inProgress: boolean;
+
+}
+
+export interface SyncMessage {
+
+	severity: 'normal' | 'header';
+	message: string;
 
 }
