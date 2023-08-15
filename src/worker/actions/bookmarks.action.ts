@@ -1,13 +1,11 @@
-import { Action, LocalStorageService, RemoteStorageService } from 'lib';
+import { Action, ISODateString, LocalStorageService, RemoteStorageService } from 'lib';
 import { RemoteCollection } from 'lib/constants/remote.constant';
-import { ErrorDetected, FatalError, MetadataList, PostService } from 'worker/utils';
+import { ErrorDetected, FatalError, MetadataList } from 'worker/utils';
 import { CheckErrorsAction } from './check-errors.action';
-import { DownloadClicksAction } from './download-clicks.actions';
 import { DownloadDeletedAction } from './download-deleted.action';
 import { DownloadIdsAction } from './download-ids.action';
 import { DownloadNewAction } from './download-new.action';
 import { DownloadUpdatedAction } from './download-updated.action';
-import { UploadClicksAction } from './upload-clicks.actions';
 import { UploadDeletedAction } from './upload-deleted.action';
 import { UploadNewAction } from './upload-new.actions';
 import { UploadUpdatedAction } from './upload-updated.action';
@@ -20,24 +18,20 @@ export class BookmarksSyncAction implements Action<void, Promise<void>> {
 	constructor(
 		protected localStorage: LocalStorageService,
 		protected remoteStorage: RemoteStorageService,
-		protected postService: PostService
+		protected syncLogId: ISODateString
 	) {
 
 		const remoteMetadata: MetadataList = new MetadataList();
 		this.actions = [
 
-			new CheckErrorsAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
-			new UploadNewAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
-			new DownloadIdsAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
-			new DownloadNewAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
-			new UploadDeletedAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
-			new DownloadDeletedAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
-			new UploadUpdatedAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
-			new DownloadUpdatedAction(this.localStorage, this.remoteStorage, this.postService, this.collection, remoteMetadata),
-
-			// bookmarks related
-			new UploadClicksAction(this.localStorage, this.remoteStorage, this.postService),
-			new DownloadClicksAction(this.localStorage, this.remoteStorage, this.postService)
+			new CheckErrorsAction(this.localStorage, this.remoteStorage, this.syncLogId, this.collection, remoteMetadata),
+			new UploadNewAction(this.localStorage, this.remoteStorage, this.syncLogId, this.collection, remoteMetadata),
+			new DownloadIdsAction(this.localStorage, this.remoteStorage, this.syncLogId, this.collection, remoteMetadata),
+			new DownloadNewAction(this.localStorage, this.remoteStorage, this.syncLogId, this.collection, remoteMetadata),
+			new UploadDeletedAction(this.localStorage, this.remoteStorage, this.syncLogId, this.collection, remoteMetadata),
+			new DownloadDeletedAction(this.localStorage, this.remoteStorage, this.syncLogId, this.collection, remoteMetadata),
+			new UploadUpdatedAction(this.localStorage, this.remoteStorage, this.syncLogId, this.collection, remoteMetadata),
+			new DownloadUpdatedAction(this.localStorage, this.remoteStorage, this.syncLogId, this.collection, remoteMetadata),
 
 		]
 
@@ -53,15 +47,15 @@ export class BookmarksSyncAction implements Action<void, Promise<void>> {
 		} catch (error) {
 
 			if (error instanceof ErrorDetected)
-				await this.postService.message(this.collection, `${error.count} errors!`);
+				await this.localStorage.syncLog.log(this.syncLogId, this.collection, `${error.count} errors!`);
 
 			else if (error instanceof FatalError)
-				await this.postService.message(this.collection, `Fatal error!`);
+			await this.localStorage.syncLog.log(this.syncLogId, this.collection, `Fatal error!`);
 
 			else {
 				const e = error as Error;
 				console.error(error);
-				await this.postService.message(this.collection, `${e.message}`);
+				await this.localStorage.syncLog.log(this.syncLogId, this.collection, `${e.message}`);
 				throw error;
 			}
 

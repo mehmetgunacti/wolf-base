@@ -1,5 +1,6 @@
 import {
 	Bookmark,
+	ISODateString,
 	LocalStorageService,
 	MockFirestoreRemoteStorageService,
 	MockLocalStorageService,
@@ -8,13 +9,13 @@ import {
 	createBookmark,
 	createNBookmarks
 } from "lib";
-import { MetadataList, MockPostServiceImpl, PostService } from "worker/utils";
+import { MetadataList } from "worker/utils";
 import { UploadDeletedAction } from "./upload-deleted.action";
 
 describe('UploadDeletedAction', () => {
 
 	let action: UploadDeletedAction;
-	let postService: PostService;
+	let syncLogId: ISODateString;
 	let localStorage: LocalStorageService;
 	let remoteStorage: RemoteStorageService;
 	let metadataList: MetadataList;
@@ -22,13 +23,13 @@ describe('UploadDeletedAction', () => {
 	beforeEach(async () => {
 
 		metadataList = new MetadataList();
-		postService = new MockPostServiceImpl();
 		localStorage = new MockLocalStorageService();
+		syncLogId = (await localStorage.syncLog.create()).id;
 		remoteStorage = new MockFirestoreRemoteStorageService();
 		action = new UploadDeletedAction(
 			localStorage,
 			remoteStorage,
-			postService,
+			syncLogId,
 			RemoteCollection.bookmarks,
 			metadataList
 		);

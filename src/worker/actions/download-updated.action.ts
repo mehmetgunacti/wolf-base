@@ -7,21 +7,21 @@ export class DownloadUpdatedAction extends BaseAction {
 	async execute(): Promise<void> {
 
 		// todo recheck this logic
-		await this.postService.header(this.collection, `Finding remotely updated items`);
+		await this.localStorage.syncLog.title(this.syncLogId, this.collection, `Finding remotely updated items`);
 
 		const items: Metadata[] = await this.localStorage.bookmarks.filterUpdated(this.remoteMetadata.getItems());
 
 		// return if none
 		if (items.length === 0) {
 
-			await this.postService.message(this.collection, `no updated items on server`);
+			await this.localStorage.syncLog.log(this.syncLogId,this.collection, `no updated items on server`);
 			return;
 
 		}
 
-		await this.postService.header(this.collection, `${items.length} updated items to be downloaded`, false);
+		await this.localStorage.syncLog.subtitle(this.syncLogId, this.collection, `${items.length} updated items to be downloaded`);
 		await this.downloadUpdatedItems(items);
-		await this.postService.header(this.collection, `downloaded ${items.length} updated items`, false);
+		await this.localStorage.syncLog.subtitle(this.syncLogId, this.collection, `downloaded ${items.length} updated items`);
 
 	}
 
@@ -33,7 +33,7 @@ export class DownloadUpdatedAction extends BaseAction {
 			if (!localItem)
 				throw new FatalError(`${item.id} not found in local sync table`);
 
-			await this.postService.header(this.collection, `${idx + 1} / ${items.length}: ['${localItem.id}']`, false);
+			await this.localStorage.syncLog.subtitle(this.syncLogId, this.collection, `${idx + 1} / ${items.length}: ['${localItem.id}']`);
 
 			const localEntity = await this.localStorage.bookmarks.get(localItem.id);
 			if (!localEntity)
@@ -43,13 +43,13 @@ export class DownloadUpdatedAction extends BaseAction {
 			if (localItem.updated || localItem.deleted) {
 
 				const error = `Remotely updated item [${localItem.id}] cannot be downloaded. Local item is marked 'updated' or 'deleted'`;
-				await this.postService.message(this.collection, error);
+				await this.localStorage.syncLog.log(this.syncLogId,this.collection, error);
 				await this.localStorage.bookmarks.markError(localEntity.id, error);
 				continue;
 
 			}
 
-			await this.postService.message(this.collection, `downloading remotely updated item ['${localEntity.id}', '${localEntity.name}']`);
+			await this.localStorage.syncLog.log(this.syncLogId,this.collection, `downloading remotely updated item ['${localEntity.id}', '${localEntity.name}']`);
 			const remotelyUpdated = await this.remoteStorage.bookmarks.downloadOne(item.id);
 			if (!remotelyUpdated)
 				throw new FatalError(`${item.id} not found in remote collection`);

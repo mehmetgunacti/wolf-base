@@ -6,7 +6,7 @@ export class UploadNewAction extends BaseAction {
 
 	async execute(): Promise<void> {
 
-		await this.postService.header(this.collection, `Uploading new items`);
+		await this.localStorage.syncLog.title(this.syncLogId, this.collection, `Uploading new items`);
 
 		// read all new items
 		const ids: UUID[] = await this.localStorage.bookmarks.listNewIds();
@@ -14,15 +14,15 @@ export class UploadNewAction extends BaseAction {
 		// return if none
 		if (ids.length === 0) {
 
-			await this.postService.message(this.collection, `no new items to upload`);
+			await this.localStorage.syncLog.log(this.syncLogId, this.collection, `no new items to upload`);
 			return;
 
 		}
 
 		// upload new items
-		await this.postService.header(this.collection, `${ids.length} new items to be uploaded`, false);
+		await this.localStorage.syncLog.subtitle(this.syncLogId, this.collection, `${ids.length} new items to be uploaded`);
 		await this.uploadNewItems(ids);
-		await this.postService.header(this.collection, `uploaded ${ids.length} new items`, false);
+		await this.localStorage.syncLog.subtitle(this.syncLogId, this.collection, `uploaded ${ids.length} new items`);
 
 	}
 
@@ -35,7 +35,7 @@ export class UploadNewAction extends BaseAction {
 			if (!item)
 				throw new FatalError(`${id} not found in local table`);
 
-			await this.postService.message(this.collection, `${idx + 1} / ${ids.length}: uploading ['${item.id}', '${item.name}']`);
+			await this.localStorage.syncLog.log(this.syncLogId, this.collection, `${idx + 1} / ${ids.length}: uploading ['${item.id}', '${item.name}']`);
 
 			// upload
 			const remoteData: RemoteData<Bookmark> = await this.remoteStorage.bookmarks.upload(item);
@@ -43,7 +43,7 @@ export class UploadNewAction extends BaseAction {
 			// save to local
 			await this.localStorage.bookmarks.put(remoteData);
 
-			await this.postService.message(this.collection, `['${item.id}', '${item.name}'} done`);
+			await this.localStorage.syncLog.log(this.syncLogId, this.collection, `['${item.id}', '${item.name}'} done`);
 
 		}
 

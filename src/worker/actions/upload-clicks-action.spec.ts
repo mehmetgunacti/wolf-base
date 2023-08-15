@@ -1,30 +1,36 @@
 import {
+	ISODateString,
 	LocalStorageService,
 	MockFirestoreRemoteStorageService,
 	MockLocalStorageService,
+	RemoteCollection,
 	RemoteStorageService
 } from "lib";
-import { MetadataList, MockPostServiceImpl, PostService } from "worker/utils";
+import { MetadataList } from "worker/utils";
 import { UploadClicksAction } from "./upload-clicks.actions";
 
 describe('UploadClicksAction', () => {
 
 	let action: UploadClicksAction;
-	let postService: PostService;
+	let syncLogId: ISODateString;
 	let localStorage: LocalStorageService;
 	let remoteStorage: RemoteStorageService;
 	let metadataList: MetadataList;
+	let collection: RemoteCollection;
 
 	beforeEach(async () => {
 
 		metadataList = new MetadataList();
-		postService = new MockPostServiceImpl();
 		localStorage = new MockLocalStorageService();
+		syncLogId = (await localStorage.syncLog.create()).id;
 		remoteStorage = new MockFirestoreRemoteStorageService();
+		collection = RemoteCollection.bookmarks_clicks;
 		action = new UploadClicksAction(
 			localStorage,
 			remoteStorage,
-			postService
+			syncLogId,
+			collection,
+			new MetadataList()
 		);
 
 	});

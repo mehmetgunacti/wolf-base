@@ -18,17 +18,22 @@ export interface SyncData extends Metadata {
 
 }
 
+export type SyncMessageType = 'normal' | 'title' | 'subtitle';
+export type ISODateString = string;
+
 export interface SyncLog {
 
-	id: string;
-	messages: SyncMessage[];
+	id: ISODateString;
+	messages: Partial<Record<RemoteCollection, SyncMessage[]>>;
 	inProgress: boolean;
+	result?: string;
+	end?: ISODateString;
 
 }
 
 export interface SyncMessage {
 
-	severity: 'normal' | 'header';
+	type: SyncMessageType;
 	message: string;
 
 }

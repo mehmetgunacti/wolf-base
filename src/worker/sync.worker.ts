@@ -9,12 +9,12 @@
 * Also, don't use index.ts files when writing import statments inside the lib folder.
 */
 import { Action, FirestoreConfig, RemoteStorageService } from "lib";
-import { SyncEvent } from "lib/models/sync.model";
+import { ISODateString, SyncEvent, SyncLog } from "lib/models/sync.model";
 import { localStorageServiceFactory } from "lib/services/localstorage/dexie/factories";
 import { LocalStorageService } from "lib/services/localstorage/local-storage-service.interface";
 import { remoteStorageServiceFactory } from "lib/services/remotestorage/firestore/factories";
 import { BookmarksSyncAction } from "./actions/bookmarks.action";
-import { PostService, PostServiceImpl } from "./utils";
+import { BookmarksClicksSyncAction } from "./actions/bookmarks-clicks.action";
 
 let isRunning = false;
 
@@ -31,41 +31,46 @@ addEventListener('message', async (a: MessageEvent) => {
 
 	// create services
 	const localStorage: LocalStorageService = localStorageServiceFactory();
-	const postService: PostService = new PostServiceImpl();
+
+	// create syncLog entry
+	const syncLog: SyncLog = await localStorage.syncLog.create();
+
 	// retrieve FirestoreConfig
 	const firestoreConfig: FirestoreConfig | null = await localStorage.configuration.getFirestoreConfig();
 	if (firestoreConfig === null) {
 
-		postMessage({ when: new Date(), message: 'No Firestore configuration in database', inProgress: false } as SyncEvent);
+		localStorage.syncLog.finish(syncLog.id, 'No Firestore configuration in database');
 		return;
 
 	}
 	const remoteStorage: RemoteStorageService = remoteStorageServiceFactory(firestoreConfig);
 
 	// create actions
-	const actions: Action<void, Promise<void>>[] = createActions(localStorage, remoteStorage, postService);
+	const actions: Action<void, Promise<void>>[] = await createActions(localStorage, remoteStorage, syncLog.id);
 
 	// invoke actions
 	for (const action of actions)
 		await action.execute();
 
-	postMessage({ when: new Date(), message: 'Done.', inProgress: false } as SyncEvent);
+	await localStorage.syncLog.finish(syncLog.id, 'Done.');
 	isRunning = false;
 
 });
 
-function createActions(
+async function createActions(
 	localStorage: LocalStorageService,
 	remoteStorage: RemoteStorageService,
-	postService: PostService
-): Action<void, Promise<void>>[] {
+	syncLogId: ISODateString
+): Promise<Action<void, Promise<void>>[]> {
 
 	// bookmarks
-	const bookmarks = new BookmarksSyncAction(localStorage, remoteStorage, postService);
+	const bookmarks = new BookmarksSyncAction(localStorage, remoteStorage, syncLogId);
+	const bookmarkClicks = new BookmarksClicksSyncAction(localStorage, remoteStorage, syncLogId);
 
 	// order importante
 	return [
-		bookmarks
+		bookmarks,
+		bookmarkClicks
 	];
 
 }

@@ -1,32 +1,38 @@
 import {
 	Bookmark,
+	ISODateString,
 	LocalStorageService,
 	MockFirestoreRemoteStorageService,
 	MockLocalStorageService,
+	RemoteCollection,
 	RemoteStorageService,
 	createNBookmarks
 } from "lib";
-import { MetadataList, MockPostServiceImpl, PostService } from "worker/utils";
+import { MetadataList } from "worker/utils";
 import { DownloadClicksAction } from "./download-clicks.actions";
 
 describe('DownloadClicksAction', () => {
 
 	let action: DownloadClicksAction;
-	let postService: PostService;
+	let syncLogId: ISODateString;
 	let localStorage: LocalStorageService;
 	let remoteStorage: RemoteStorageService;
 	let metadataList: MetadataList;
+	let collection: RemoteCollection;
 
 	beforeEach(async () => {
 
 		metadataList = new MetadataList();
-		postService = new MockPostServiceImpl();
 		localStorage = new MockLocalStorageService();
+		syncLogId = (await localStorage.syncLog.create()).id;
 		remoteStorage = new MockFirestoreRemoteStorageService();
+		collection = RemoteCollection.bookmarks_clicks;
 		action = new DownloadClicksAction(
 			localStorage,
 			remoteStorage,
-			postService
+			syncLogId,
+			collection,
+			new MetadataList()
 		);
 
 		// create 1-20 bookmarks

@@ -1,13 +1,13 @@
-import { Action, LocalStorageService, RemoteStorageService } from 'lib';
+import { Action, LocalStorageService, RemoteStorageService, SyncLog } from 'lib';
 import { RemoteCollection } from 'lib/constants/remote.constant';
-import { MetadataList, PostService } from 'worker/utils';
+import { MetadataList } from 'worker/utils';
 
 export abstract class BaseAction implements Action<any, Promise<void>> {
 
 	constructor(
 		protected localStorage: LocalStorageService,
 		protected remoteStorage: RemoteStorageService,
-		protected postService: PostService,
+		protected syncLogId: string,
 		protected collection: RemoteCollection,
 		protected remoteMetadata: MetadataList
 	) { }

@@ -5,7 +5,7 @@ export class UploadDeletedAction extends BaseAction {
 
 	async execute(): Promise<void> {
 
-		await this.postService.header(this.collection, `Finding deleted items to be uploaded`);
+		await this.localStorage.syncLog.title(this.syncLogId, this.collection, `Finding deleted items to be uploaded`);
 
 		// find all deleted items
 		const items: Bookmark[] = await this.localStorage.bookmarks.listDeletedItems();
@@ -13,15 +13,15 @@ export class UploadDeletedAction extends BaseAction {
 		// return if none
 		if (items.length === 0) {
 
-			await this.postService.message(this.collection, `no items deleted locally`);
+			await this.localStorage.syncLog.log(this.syncLogId,this.collection, `no items deleted locally`);
 			return;
 
 		}
 
 		// upload deleted items
-		await this.postService.header(this.collection, `${items.length} deleted items to be uploaded`, false);
+		await this.localStorage.syncLog.subtitle(this.syncLogId, this.collection, `${items.length} deleted items to be uploaded`);
 		await this.uploadDeletedItems(items);
-		await this.postService.header(this.collection, `${items.length} deleted items done`, false);
+		await this.localStorage.syncLog.subtitle(this.syncLogId, this.collection, `${items.length} deleted items done`);
 
 	}
 
@@ -29,13 +29,13 @@ export class UploadDeletedAction extends BaseAction {
 
 		for (const [idx, item] of items.entries()) {
 
-			await this.postService.header(this.collection, `${idx + 1} / ${items.length}: handling ['${item.id}', '${item.name}']`, false);
+			await this.localStorage.syncLog.subtitle(this.syncLogId, this.collection, `${idx + 1} / ${items.length}: handling ['${item.id}', '${item.name}']`);
 
 			// if item has syncdata it was synchronized before
 			const localSyncData = await this.localStorage.bookmarks.getSyncData(item.id);
 			if (!localSyncData) { // item is new (exists only on local)
 
-				await this.postService.message(this.collection, `'${item.id}' was newly created / never synchronized`);
+				await this.localStorage.syncLog.log(this.syncLogId,this.collection, `'${item.id}' was newly created / never synchronized`);
 				await this.handleDeletedItem(item);
 				continue;
 
@@ -45,7 +45,7 @@ export class UploadDeletedAction extends BaseAction {
 			const remoteSyncData = this.remoteMetadata.get(item.id);
 			if (!remoteSyncData) { // item was deleted on another client, too
 
-				await this.postService.message(this.collection, `'${item.id}' was deleted on another client, too`);
+				await this.localStorage.syncLog.log(this.syncLogId,this.collection, `'${item.id}' was deleted on another client, too`);
 				await this.handleDeletedItem(item);
 				continue;
 
@@ -65,7 +65,7 @@ export class UploadDeletedAction extends BaseAction {
 			// ... else mark error
 			const error = `Deleted item [${item.id}] cannot be uploaded: updateTime values do not match [r: ${remoteSyncData.updateTime}, l: ${localSyncData.updateTime}]`;
 			await this.localStorage.bookmarks.markError(item.id, error);
-			await this.postService.message(this.collection, `Deleted item [${item.id}] cannot be uploaded: updateTime values do not match [r: ${remoteSyncData.updateTime}, l: ${localSyncData.updateTime}]`);
+			await this.localStorage.syncLog.log(this.syncLogId,this.collection, `Deleted item [${item.id}] cannot be uploaded: updateTime values do not match [r: ${remoteSyncData.updateTime}, l: ${localSyncData.updateTime}]`);
 
 		}
 
@@ -82,7 +82,7 @@ export class UploadDeletedAction extends BaseAction {
 		// remove from downloaded list
 		this.remoteMetadata.remove(item.id);
 
-		await this.postService.message(this.collection, `['${item.id}', '${item.name}'] done`);
+		await this.localStorage.syncLog.log(this.syncLogId,this.collection, `['${item.id}', '${item.name}'] done`);
 
 	}
 

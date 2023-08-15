@@ -29,8 +29,6 @@ export class HTTP {
 	): Promise<RETVAL> {
 
 		const response: Response = await fetch(request);
-		console.log(response);
-
 		if (!response.ok)
 			throw new HttpError(request.toString(), response.status, response.statusText);
 

@@ -1,34 +1,26 @@
-import { Action, Click, LocalStorageService, RemoteCollection, RemoteStorageService } from "lib";
-import { PostService } from "worker/utils";
+import { Click } from "lib";
+import { BaseAction } from "./base.action";
 
-export class DownloadClicksAction implements Action<void, Promise<void>> {
-
-	private collection: RemoteCollection = RemoteCollection.bookmarks_clicks;
-
-	constructor(
-		private localStorage: LocalStorageService,
-		private remoteStorage: RemoteStorageService,
-		private postService: PostService
-	) { }
+export class DownloadClicksAction extends BaseAction {
 
 	async execute(): Promise<void> {
 
 		// todo recheck this logic
-		await this.postService.header(this.collection, `Downloading all bookmark click numbers`);
+		await this.localStorage.syncLog.title(this.syncLogId, this.collection, `Downloading all bookmark click numbers`);
 
 		const clicks: Click[] = await this.remoteStorage.clicks.downloadMany();
 
 		// return if none
 		if (clicks.length === 0) {
 
-			await this.postService.message(this.collection, `no bookmark click data on server`);
+			await this.localStorage.syncLog.log(this.syncLogId, this.collection, `no bookmark click data on server`);
 			return;
 
 		}
 
-		await this.postService.header(this.collection, `saving ${clicks.length} bookmark click data`, false);
+		await this.localStorage.syncLog.log(this.syncLogId, this.collection, `saving ${clicks.length} bookmark click data`);
 		await this.localStorage.clicks.putAll(clicks);
-		await this.postService.header(this.collection, `${clicks.length} bookmark click data saved`, false);
+		await this.localStorage.syncLog.log(this.syncLogId, this.collection, `${clicks.length} bookmark click data saved`);
 
 	}
 

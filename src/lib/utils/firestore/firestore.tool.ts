@@ -176,7 +176,6 @@ class FirestoreTool implements Firestore {
 		// starts parsing with /documents/[collection]/[id] until / or ? or till end of string
 		const regex = /\/documents\/([^/]+)\/([^/]+)(?:\/|\?|$)/;
 		const matches = url.match(regex);
-		console.log('matches: ', matches);
 		if (matches && matches.length === 3) {
 
 			const collection = matches[1];
@@ -191,7 +190,6 @@ class FirestoreTool implements Firestore {
 
 	private parseFields<T>(fields: Record<keyof T, FIRESTORE_VALUE>): T {
 
-		console.log(fields);
 		const result: T = {} as T;
 		for (const key in fields) {
 

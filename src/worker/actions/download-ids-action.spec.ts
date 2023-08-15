@@ -1,5 +1,6 @@
 import {
 	Bookmark,
+	ISODateString,
 	LocalStorageService,
 	MockFirestoreRemoteStorageService,
 	MockLocalStorageService,
@@ -7,13 +8,13 @@ import {
 	RemoteStorageService,
 	createNBookmarks
 } from "lib";
-import { MetadataList, MockPostServiceImpl, PostService } from "worker/utils";
+import { MetadataList } from "worker/utils";
 import { DownloadIdsAction } from "./download-ids.action";
 
 describe('DownloadIdsAction', () => {
 
 	let action: DownloadIdsAction;
-	let postService: PostService;
+	let syncLogId: ISODateString;
 	let localStorage: LocalStorageService;
 	let remoteStorage: RemoteStorageService;
 	let metadataList: MetadataList;
@@ -21,13 +22,13 @@ describe('DownloadIdsAction', () => {
 	beforeEach(async () => {
 
 		metadataList = new MetadataList();
-		postService = new MockPostServiceImpl();
 		localStorage = new MockLocalStorageService();
+		syncLogId = (await localStorage.syncLog.create()).id;
 		remoteStorage = new MockFirestoreRemoteStorageService();
 		action = new DownloadIdsAction(
 			localStorage,
 			remoteStorage,
-			postService,
+			syncLogId,
 			RemoteCollection.bookmarks,
 			metadataList
 		);

@@ -29,10 +29,10 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			configuration: '',
 
 			// sync
-			sync_log: 'created'
+			sync_log: 'id'
 
 		},
-		version: 2
+		version: 1
 	});
 
 };
