@@ -1,6 +1,6 @@
 import { WolfBaseTableName } from '../../../constants/database.constant';
 import { DexieLocalStorageService } from './dexie.service';
-import { ClicksTableImpl, SyncLogTableImpl } from './tables';
+import { ClicksTableImpl, SyncLogsTableImpl } from './tables';
 import { BookmarksTableImpl } from './tables/bookmarks.table';
 import { ConfigurationTableImpl } from './tables/configuration.table';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
@@ -44,11 +44,11 @@ const clicksTableFactory = (wolfBaseDB?: WolfBaseDB): ClicksTableImpl => {
 
 }
 
-const syncLogTableFactory = (wolfBaseDB?: WolfBaseDB): SyncLogTableImpl => {
+const syncLogTableFactory = (wolfBaseDB?: WolfBaseDB): SyncLogsTableImpl => {
 
-	return new SyncLogTableImpl(
+	return new SyncLogsTableImpl(
 		wolfBaseDB || wolfBaseDBFactory(),
-		WolfBaseTableName.sync_log
+		WolfBaseTableName.sync_logs
 	);
 
 }

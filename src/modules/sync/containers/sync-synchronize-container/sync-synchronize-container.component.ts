@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SyncLog } from 'lib';
+import { ISODateString, RemoteCollection, SyncLog, SyncMessage } from 'lib';
 import { ConfirmEventType, ConfirmationService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { clearSyncLogs, syncBackupDatabase, syncTrigger } from 'store/actions/sync.actions';
-import { syncLogs } from 'store/selectors/sync.selectors';
+import { clearSyncLogs, loadSyncMessages, syncBackupDatabase, syncTrigger } from 'store/actions/sync.actions';
+import { syncLogs, syncMessages } from 'store/selectors/sync.selectors';
 
 @Component({
 	selector: 'app-sync-synchronize-container',
@@ -18,10 +18,12 @@ export class SyncSynchronizeContainerComponent {
 	private confirmationService: ConfirmationService = inject(ConfirmationService);
 
 	syncLogs$: Observable<SyncLog[]>;
+	messages$: Observable<SyncMessage[]>;
 
 	constructor() {
 
 		this.syncLogs$ = this.store.select(syncLogs);
+		this.messages$ = this.store.select(syncMessages);
 
 	}
 
@@ -57,6 +59,12 @@ export class SyncSynchronizeContainerComponent {
 	onClear(): void {
 
 		this.store.dispatch(clearSyncLogs());
+
+	}
+
+	onSyncIndex(syncLogId: ISODateString): void {
+
+		this.store.dispatch(loadSyncMessages({ syncLogId }));
 
 	}
 

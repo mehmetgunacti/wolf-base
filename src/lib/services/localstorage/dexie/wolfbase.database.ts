@@ -1,7 +1,7 @@
 import Dexie from 'dexie';
 import { UUID } from 'lib/constants/common.constant';
 import { CONF_KEYS, WolfBaseTableName } from 'lib/constants/database.constant';
-import { SyncData, SyncLog } from 'lib/models';
+import { ISODateString, SyncData, SyncLog, SyncMessage } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { DexieConfiguration } from 'lib/models/database.model';
 
@@ -29,7 +29,8 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			configuration: '',
 
 			// sync
-			sync_log: 'id'
+			sync_logs: 'id',
+			sync_messages: '++id, syncLogId'
 
 		},
 		version: 1
@@ -43,8 +44,9 @@ export class WolfBaseDB extends Dexie {
 	bookmarks_sync: Dexie.Table<SyncData, UUID>;
 	bookmarks_trash: Dexie.Table<Bookmark, UUID>;
 	clicks: Dexie.Table<Click, UUID>;
-	configuration: Dexie.Table<string | boolean, string>;
-	sync_log: Dexie.Table<string, SyncLog>;
+	configuration: Dexie.Table<string | boolean, CONF_KEYS>;
+	sync_logs: Dexie.Table<SyncLog, ISODateString>;
+	sync_messages: Dexie.Table<SyncMessage, number>;
 
 	constructor(conf: DexieConfiguration) {
 
@@ -57,7 +59,8 @@ export class WolfBaseDB extends Dexie {
 		this.bookmarks_trash = this.table(WolfBaseTableName.bookmarks_trash);
 		this.clicks = this.table(WolfBaseTableName.bookmarks_clicks);
 		this.configuration = this.table(WolfBaseTableName.configuration);
-		this.sync_log = this.table(WolfBaseTableName.sync_log);
+		this.sync_logs = this.table(WolfBaseTableName.sync_logs);
+		this.sync_messages = this.table(WolfBaseTableName.sync_messages);
 
 		this.on('populate', () => {
 

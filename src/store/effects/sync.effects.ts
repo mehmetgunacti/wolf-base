@@ -9,7 +9,7 @@ import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { SyncService } from 'services/sync.service';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { saveFirestoreConfigSuccess, saveTitleLookupSuccess } from 'store/actions/core.actions';
-import { clearSyncLogs, downloadRemoteData, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadSyncLogsSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem, syncBackupDatabase, syncTrigger } from 'store/actions/sync.actions';
+import { clearSyncLogs, downloadRemoteData, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadSyncLogsSuccess, loadSyncMessages, loadSyncMessagesSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem, syncBackupDatabase, syncTrigger } from 'store/actions/sync.actions';
 
 @Injectable()
 export class SyncEffects {
@@ -23,11 +23,23 @@ export class SyncEffects {
 
 		() => fromEventPattern<SyncLog[]>(
 
-			(handler) => liveQuery(() => this.localStorage.syncLog.list(s => !s.inProgress)).subscribe(handler),
+			(handler) => liveQuery(() => this.localStorage.syncLog.list()).subscribe(handler),
 			(handler, unsubscribe) => unsubscribe()
 
 		).pipe(
 			map(syncLogs => loadSyncLogsSuccess({ syncLogs }))
+		)
+
+	);
+
+	loadSyncMessages$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(loadSyncMessages),
+			switchMap(({ syncLogId }) => this.localStorage.syncLog.messages(syncLogId)),
+			map(messages => loadSyncMessagesSuccess({ messages }))
+
 		)
 
 	);

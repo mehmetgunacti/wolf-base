@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { SyncLog } from "lib";
+import { RemoteCollection, SyncLog, SyncMessage } from "lib";
 import { SyncModuleState } from "store/states/sync.state";
 
 const syncModuleState = createFeatureSelector<SyncModuleState>('sync');
@@ -8,6 +8,13 @@ export const syncLogs = createSelector(
 
 	syncModuleState,
 	(state: SyncModuleState): SyncLog[] => state.syncLogs
+
+);
+
+export const syncMessages = createSelector(
+
+	syncModuleState,
+	(state: SyncModuleState): SyncMessage[] => state.syncMessages
 
 );
 

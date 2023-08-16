@@ -1,6 +1,6 @@
 import { RemoteCollection } from "lib/constants";
 import { UUID } from "lib/constants/common.constant";
-import { ISODateString, SyncData, SyncLog, SyncMessageType } from "lib/models";
+import { ISODateString, SyncData, SyncLog, SyncMessage, SyncMessageType } from "lib/models";
 import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Configuration, FirestoreConfig } from "lib/models/configuration.model";
 import { Entity, Metadata } from "lib/models/entity.model";
@@ -80,15 +80,17 @@ export interface ConfigurationTable {
 
 }
 
-export interface SyncLogTable {
+export interface SyncLogsTable {
 
 	create(): Promise<SyncLog>;
 	finish(id: ISODateString, result: string): Promise<void>;
-	title(id: ISODateString,  collection: RemoteCollection, message: string): Promise<void>;
-	subtitle(id: ISODateString,  collection: RemoteCollection, message: string): Promise<void>;
-	log(id: ISODateString,  collection: RemoteCollection, message: string, type?: SyncMessageType): Promise<void>;
-
-	list(filterFn?: (s: SyncLog) => boolean): Promise<SyncLog[]>;
+	list(): Promise<SyncLog[]>;
 	clear(): Promise<void>;
+
+	title(id: ISODateString, collection: RemoteCollection, message: string): Promise<void>;
+	subtitle(id: ISODateString, collection: RemoteCollection, message: string): Promise<void>;
+	log(id: ISODateString, collection: RemoteCollection, message: string, type?: SyncMessageType): Promise<void>;
+
+	messages(syncLogId: ISODateString): Promise<SyncMessage[]>;
 
 }

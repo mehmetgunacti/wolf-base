@@ -1,4 +1,4 @@
-<p-accordion [activeIndex]="0" CONTENT *ngIf="(syncLogs ?? []).length > 0; else noContent">
+<p-accordion [activeIndex]="0" CONTENT *ngIf="(syncLogs ?? []).length > 0; else noContent" (onOpen)="onOpen($event)">
 
 	<p-accordionTab *ngFor="let syncLog of syncLogs">
 		<ng-template pTemplate="header">
@@ -14,7 +14,7 @@
 		<ng-template pTemplate="content">
 
 			<!-- ITERATE MESSAGES -->
-			<ng-container *ngFor="let item of syncLog.messages | keyvalue">
+			<ng-container *ngFor="let item of messages | keyvalue">
 
 				<h2>{{ item.key }}</h2>
 				<ng-container *ngFor="let message of item.value">

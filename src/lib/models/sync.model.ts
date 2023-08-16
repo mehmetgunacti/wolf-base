@@ -15,7 +15,6 @@ export type ISODateString = string;
 export interface SyncLog {
 
 	id: ISODateString;
-	messages: Partial<Record<RemoteCollection, SyncMessage[]>>;
 	inProgress: boolean;
 	result?: string;
 	end?: ISODateString;
@@ -24,6 +23,9 @@ export interface SyncLog {
 
 export interface SyncMessage {
 
+	id?: number;
+	syncLogId: ISODateString;
+	collection: RemoteCollection;
 	type: SyncMessageType;
 	message: string;
 
