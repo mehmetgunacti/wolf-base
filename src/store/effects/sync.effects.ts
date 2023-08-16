@@ -1,13 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
-import { Bookmark, LocalStorageService, RemoteData, RemoteStorageService } from 'lib';
+import { liveQuery } from 'dexie';
+import { Bookmark, LocalStorageService, RemoteData, RemoteStorageService, SyncLog } from 'lib';
 import { BackupDatabase } from 'lib/utils/database.util';
+import { fromEventPattern } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { SyncService } from 'services/sync.service';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { saveFirestoreConfigSuccess, saveTitleLookupSuccess } from 'store/actions/core.actions';
-import { downloadRemoteData, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem, syncBackupDatabase, syncTrigger } from 'store/actions/sync.actions';
+import { downloadRemoteData, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem, syncBackupDatabase, syncLogsSuccess, syncTrigger } from 'store/actions/sync.actions';
 
 @Injectable()
 export class SyncEffects {
@@ -16,6 +18,19 @@ export class SyncEffects {
 	private syncService: SyncService = inject(SyncService);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 	private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
+
+	loadSyncLogs$ = createEffect(
+
+		() => fromEventPattern<SyncLog[]>(
+
+			(handler) => liveQuery(() => this.localStorage.syncLog.list()).subscribe(handler),
+			(handler, unsubscribe) => unsubscribe()
+
+		).pipe(
+			map(syncLogs => syncLogsSuccess({ syncLogs }))
+		)
+
+	);
 
 	loadFirstConflict$ = createEffect(
 

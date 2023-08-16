@@ -1,12 +1,13 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { SyncLog } from "lib";
 import { SyncModuleState } from "store/states/sync.state";
 
 export const syncModuleState = createFeatureSelector<SyncModuleState>('sync');
 
-export const messages = createSelector(
+export const syncLogs = createSelector(
 
 	syncModuleState,
-	(state: SyncModuleState): string[] => state.messages
+	(state: SyncModuleState): SyncLog[] => state.syncLogs
 
 );
 

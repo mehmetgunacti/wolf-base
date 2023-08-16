@@ -1,7 +1,7 @@
-import { SyncLog, SyncMessage, SyncMessageType } from 'lib/models';
+import { RemoteCollection } from 'lib/constants';
+import { SyncLog, SyncMessageType } from 'lib/models';
 import { SyncLogTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { KeyValueTableImpl } from './key-value.table';
-import { RemoteCollection } from 'lib/constants';
 
 export class SyncLogTableImpl extends KeyValueTableImpl implements SyncLogTable {
 
@@ -47,7 +47,7 @@ export class SyncLogTableImpl extends KeyValueTableImpl implements SyncLogTable 
 
 	async log(id: string, collection: RemoteCollection, message: string, type: SyncMessageType = 'normal'): Promise<void> {
 
-		console.log(id, collection, message);
+		console.info(id, collection, message);
 		await this.db.sync_log
 			.where({ id })
 			.modify((syncLog: SyncLog): void => {
@@ -62,6 +62,12 @@ export class SyncLogTableImpl extends KeyValueTableImpl implements SyncLogTable 
 				messages.push({ message, type });
 
 			});
+
+	}
+
+	async list(): Promise<SyncLog[]> {
+
+		return await this.db.table<SyncLog>(this.tablename).orderBy('id').toArray();
 
 	}
 
@@ -123,6 +129,12 @@ export class MockSyncLogTableImpl implements SyncLogTable {
 
 		}
 		messages.push({ message, type });
+
+	}
+
+	async list(): Promise<SyncLog[]> {
+
+		return Array.from(this.map.values());
 
 	}
 

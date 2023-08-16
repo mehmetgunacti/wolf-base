@@ -1,6 +1,6 @@
 <p-confirmDialog></p-confirmDialog>
 
 <app-sync-synchronize
-	[messages]="messages$ | async"
+	[syncLogs]="syncLogs$ | async"
 	(start)="onStart()"
 	(clear)="onClear()"></app-sync-synchronize>

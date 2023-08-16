@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { SyncLog } from 'lib';
 
 @Component({
 	selector: 'app-sync-synchronize',
@@ -7,7 +8,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 })
 export class SyncSynchronizeComponent {
 
-	@Input() messages: string[] | undefined | null;
+	@Input() syncLogs: SyncLog[] | undefined | null;
 
 	@Output() start = new EventEmitter<void>();
 	@Output() clear = new EventEmitter<void>();

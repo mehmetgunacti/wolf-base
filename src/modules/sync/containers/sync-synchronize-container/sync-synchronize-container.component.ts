@@ -1,26 +1,33 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { SyncLog } from 'lib';
 import { ConfirmEventType, ConfirmationService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { clearMessages, syncBackupDatabase, syncTrigger } from 'store/actions/sync.actions';
-import { messages } from 'store/selectors/sync.selectors';
+import { clearSyncLogs, syncBackupDatabase, syncTrigger } from 'store/actions/sync.actions';
+import { syncLogs } from 'store/selectors/sync.selectors';
 
 @Component({
 	selector: 'app-sync-synchronize-container',
 	templateUrl: './sync-synchronize-container.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SyncSynchronizeContainerComponent {
+export class SyncSynchronizeContainerComponent implements OnDestroy {
 
 	private store: Store = inject(Store);
 	private confirmationService: ConfirmationService = inject(ConfirmationService);
 
-	messages$: Observable<string[]>;
+	syncLogs$: Observable<SyncLog[]>;
 
 	constructor() {
 
-		this.messages$ = this.store.select(messages);
+		this.syncLogs$ = this.store.select(syncLogs);
+
+	}
+
+	ngOnDestroy(): void {
+
+		console.log('ondestroy');
 
 	}
 
@@ -55,7 +62,7 @@ export class SyncSynchronizeContainerComponent {
 
 	onClear(): void {
 
-		this.store.dispatch(clearMessages());
+		this.store.dispatch(clearSyncLogs());
 
 	}
 

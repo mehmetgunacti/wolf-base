@@ -1,9 +1,9 @@
-import { Entity, RemoteData, SyncData } from "lib";
+import { Entity, RemoteData, SyncData, SyncLog } from "lib";
 
 export interface SyncModuleState {
 
 	inProgress: boolean;
-	messages: string[];
+	syncLogs: SyncLog[];
 	selectedSyncData: SyncData | null;
 	selectedItem: Entity | null;
 	selectedTrashItem: Entity | null;
@@ -16,7 +16,7 @@ export interface SyncModuleState {
 export const initialSyncState: SyncModuleState = {
 
 	inProgress: false,
-	messages: [],
+	syncLogs: [],
 	conflictDialogVisible: false,
 	syncDialogVisible: false,
 	selectedSyncData: null,

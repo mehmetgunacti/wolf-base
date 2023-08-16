@@ -1,8 +1,8 @@
 import { createAction, props } from "@ngrx/store";
-import { Entity, RemoteData, SyncData, SyncEvent, UUID } from "lib";
+import { Entity, RemoteData, SyncData, SyncLog, UUID } from "lib";
 
 export const syncTrigger = createAction('[Sync] Trigger');
-export const syncEvent = createAction('[Sync] Message', props<SyncEvent>());
+export const syncLogsSuccess = createAction('[Sync] SyncLogs', props<{ syncLogs: SyncLog[] }>());
 
 export const syncBackupDatabase = createAction('[Sync] Backup Database');
 
@@ -26,4 +26,4 @@ export const purgeRemoteItem = createAction('[Sync] Purge Remote Item', props<{ 
 export const overrideLocalItem = createAction('[Sync] Override Local Item', props<{ remoteData: RemoteData<Entity> }>());
 export const overrideRemoteItem = createAction('[Sync] Override Remote Item', props<{ entity: Entity }>());
 
-export const clearMessages = createAction('[Sync] Clear Messages');
+export const clearSyncLogs = createAction('[Sync] Clear SyncLogs');

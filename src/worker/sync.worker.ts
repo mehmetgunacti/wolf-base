@@ -9,12 +9,12 @@
 * Also, don't use index.ts files when writing import statments inside the lib folder.
 */
 import { Action, FirestoreConfig, RemoteStorageService } from "lib";
-import { ISODateString, SyncEvent, SyncLog } from "lib/models/sync.model";
+import { ISODateString, SyncLog } from "lib/models/sync.model";
 import { localStorageServiceFactory } from "lib/services/localstorage/dexie/factories";
 import { LocalStorageService } from "lib/services/localstorage/local-storage-service.interface";
 import { remoteStorageServiceFactory } from "lib/services/remotestorage/firestore/factories";
-import { BookmarksSyncAction } from "./actions/bookmarks.action";
 import { BookmarksClicksSyncAction } from "./actions/bookmarks-clicks.action";
+import { BookmarksSyncAction } from "./actions/bookmarks.action";
 
 let isRunning = false;
 

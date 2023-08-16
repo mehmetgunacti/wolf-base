@@ -1,5 +1,5 @@
 <div messages>
-	<div *ngFor="let message of messages">{{message}}</div>
+	<div *ngFor="let syncLog of syncLogs">{{syncLog.id}} (Status: {{syncLog.inProgress}})</div>
 </div>
 
 <div buttons>
