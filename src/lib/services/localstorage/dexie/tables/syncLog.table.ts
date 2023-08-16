@@ -2,6 +2,7 @@ import { RemoteCollection } from 'lib/constants';
 import { SyncLog, SyncMessageType } from 'lib/models';
 import { SyncLogTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { KeyValueTableImpl } from './key-value.table';
+import { filter } from 'rxjs';
 
 export class SyncLogTableImpl extends KeyValueTableImpl implements SyncLogTable {
 
@@ -65,9 +66,18 @@ export class SyncLogTableImpl extends KeyValueTableImpl implements SyncLogTable 
 
 	}
 
-	async list(): Promise<SyncLog[]> {
+	async list(filterFn?: (s: SyncLog) => boolean): Promise<SyncLog[]> {
 
-		return await this.db.table<SyncLog>(this.tablename).orderBy('id').reverse().toArray();
+		const arr = this.db.table<SyncLog>(this.tablename).orderBy('id').reverse();
+		if (filterFn)
+			return await arr.filter(filterFn).toArray();
+		return await arr.toArray();
+
+	}
+
+	async clear(): Promise<void> {
+
+		await this.db.sync_log.clear();
 
 	}
 
@@ -132,9 +142,18 @@ export class MockSyncLogTableImpl implements SyncLogTable {
 
 	}
 
-	async list(): Promise<SyncLog[]> {
+	async list(filterFn?: (s: SyncLog) => boolean): Promise<SyncLog[]> {
 
-		return Array.from(this.map.values());
+		const arr = Array.from(this.map.values());
+		if (filterFn)
+			return arr.filter(filterFn)
+		return arr;
+
+	}
+
+	async clear(): Promise<void> {
+
+		this.map.clear();
 
 	}
 

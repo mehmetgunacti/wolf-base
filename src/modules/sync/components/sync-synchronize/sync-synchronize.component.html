@@ -1,4 +1,4 @@
-<p-accordion [activeIndex]="0">
+<p-accordion [activeIndex]="0" CONTENT *ngIf="(syncLogs ?? []).length > 0; else noContent">
 
 	<p-accordionTab *ngFor="let syncLog of syncLogs">
 		<ng-template pTemplate="header">
@@ -7,7 +7,7 @@
 					<i class="pi pi-calendar"></i>&nbsp;<span>{{ syncLog.id | date:'medium' | noData }}</span>
 				</span>
 				<span>
-					<i class="pi pi-{{ syncLog.inProgress ? 'hourglass' : 'check-circle' }}"></i>
+					<i class="pi pi-check-circle"></i>
 				</span>
 			</div>
 		</ng-template>
@@ -26,12 +26,22 @@
 				</ng-container>
 
 			</ng-container>
+			<h2>Sync Result</h2>
+			<div>{{ syncLog.end | date:'medium' }}: {{ syncLog.result }}</div>
+
 		</ng-template>
 	</p-accordionTab>
 
 </p-accordion>
+<ng-template #noContent>
+
+	<div CONTENT>
+		<h4>No logs available</h4>
+	</div>
+
+</ng-template>
 
 <div buttons>
-	<button pButton type="button" label="Clear" icon="pi pi-trash" (click)="onClear()"></button>
+	<button pButton type="button" label="Clear All" icon="pi pi-trash" (click)="onClear()"></button>
 	<button pButton type="button" label="Start" icon="pi pi-play" (click)="onStart()"></button>
 </div>

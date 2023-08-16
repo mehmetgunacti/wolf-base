@@ -8,6 +8,17 @@ app-sync-synchronize {
 
 	}
 
+	[CONTENT] {
+
+		flex: 1;
+		& > h4 {
+
+			@extend %flex-center-center;
+
+		}
+
+	}
+
 	[HEADER] {
 
 		flex: 1;

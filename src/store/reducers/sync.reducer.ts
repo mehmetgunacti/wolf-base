@@ -1,12 +1,12 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import produce from 'immer';
-import { clearSyncLogs, closeConflictDialog, closeSyncDialog, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadTrashItemSuccess, openSyncDialog, syncLogsSuccess, syncTrigger } from 'store/actions/sync.actions';
+import { clearSyncLogs, closeConflictDialog, closeSyncDialog, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadTrashItemSuccess, openSyncDialog, loadSyncLogsSuccess, syncTrigger } from 'store/actions/sync.actions';
 import { SyncModuleState, initialSyncState } from 'store/states/sync.state';
 
 export const syncReducer: ActionReducer<SyncModuleState, Action> = createReducer(
 
 	initialSyncState,
-	on(syncLogsSuccess, (state, { syncLogs }): SyncModuleState => {
+	on(loadSyncLogsSuccess, (state, { syncLogs }): SyncModuleState => {
 
 		return produce(
 			state,
@@ -86,7 +86,6 @@ export const syncReducer: ActionReducer<SyncModuleState, Action> = createReducer
 	}),
 	on(syncTrigger, (state): SyncModuleState => ({ ...state, syncDialogVisible: true })),
 	on(openSyncDialog, (state): SyncModuleState => ({ ...state, syncDialogVisible: true })),
-	on(closeSyncDialog, (state): SyncModuleState => ({ ...state, syncDialogVisible: false })),
-	on(clearSyncLogs, (state): SyncModuleState => ({ ...state, syncLogs: [] }))
+	on(closeSyncDialog, (state): SyncModuleState => ({ ...state, syncDialogVisible: false }))
 
 );

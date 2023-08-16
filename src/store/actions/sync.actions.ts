@@ -2,7 +2,7 @@ import { createAction, props } from "@ngrx/store";
 import { Entity, RemoteData, SyncData, SyncLog, UUID } from "lib";
 
 export const syncTrigger = createAction('[Sync] Trigger');
-export const syncLogsSuccess = createAction('[Sync] SyncLogs', props<{ syncLogs: SyncLog[] }>());
+export const loadSyncLogsSuccess = createAction('[Sync] SyncLogs', props<{ syncLogs: SyncLog[] }>());
 
 export const syncBackupDatabase = createAction('[Sync] Backup Database');
 

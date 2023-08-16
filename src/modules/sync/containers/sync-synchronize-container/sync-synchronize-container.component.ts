@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SyncLog } from 'lib';
 import { ConfirmEventType, ConfirmationService } from 'primeng/api';
@@ -12,7 +12,7 @@ import { syncLogs } from 'store/selectors/sync.selectors';
 	templateUrl: './sync-synchronize-container.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SyncSynchronizeContainerComponent implements OnDestroy {
+export class SyncSynchronizeContainerComponent {
 
 	private store: Store = inject(Store);
 	private confirmationService: ConfirmationService = inject(ConfirmationService);
@@ -22,12 +22,6 @@ export class SyncSynchronizeContainerComponent implements OnDestroy {
 	constructor() {
 
 		this.syncLogs$ = this.store.select(syncLogs);
-
-	}
-
-	ngOnDestroy(): void {
-
-		console.log('ondestroy');
 
 	}
 

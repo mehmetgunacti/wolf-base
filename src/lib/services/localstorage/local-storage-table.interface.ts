@@ -88,6 +88,7 @@ export interface SyncLogTable {
 	subtitle(id: ISODateString,  collection: RemoteCollection, message: string): Promise<void>;
 	log(id: ISODateString,  collection: RemoteCollection, message: string, type?: SyncMessageType): Promise<void>;
 
-	list(): Promise<SyncLog[]>;
+	list(filterFn?: (s: SyncLog) => boolean): Promise<SyncLog[]>;
+	clear(): Promise<void>;
 
 }
