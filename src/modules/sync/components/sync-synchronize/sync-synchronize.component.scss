@@ -2,9 +2,16 @@ app-sync-synchronize {
 
 	@extend %flex-column;
 
-	[messages] {
+	.p-accordion-toggle-icon {
+
+		display: none;
+
+	}
+
+	[HEADER] {
 
 		flex: 1;
+		@extend %flex-space-between-center;
 
 	}
 

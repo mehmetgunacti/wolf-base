@@ -1,6 +1,35 @@
-<div messages>
-	<div *ngFor="let syncLog of syncLogs">{{syncLog.id}} (Status: {{syncLog.inProgress}})</div>
-</div>
+<p-accordion [activeIndex]="0">
+
+	<p-accordionTab *ngFor="let syncLog of syncLogs">
+		<ng-template pTemplate="header">
+			<div HEADER>
+				<span>
+					<i class="pi pi-calendar"></i>&nbsp;<span>{{ syncLog.id | date:'medium' | noData }}</span>
+				</span>
+				<span>
+					<i class="pi pi-{{ syncLog.inProgress ? 'hourglass' : 'check-circle' }}"></i>
+				</span>
+			</div>
+		</ng-template>
+		<ng-template pTemplate="content">
+
+			<!-- ITERATE MESSAGES -->
+			<ng-container *ngFor="let item of syncLog.messages | keyvalue">
+
+				<h2>{{ item.key }}</h2>
+				<ng-container *ngFor="let message of item.value">
+
+					<h4 *ngIf="message.type === 'title'">{{ message.message }}</h4>
+					<h5 *ngIf="message.type === 'subtitle'">{{ message.message }}</h5>
+					<div *ngIf="message.type === 'normal'">{{ message.message }}</div>
+
+				</ng-container>
+
+			</ng-container>
+		</ng-template>
+	</p-accordionTab>
+
+</p-accordion>
 
 <div buttons>
 	<button pButton type="button" label="Clear" icon="pi pi-trash" (click)="onClear()"></button>

@@ -67,7 +67,7 @@ export class SyncLogTableImpl extends KeyValueTableImpl implements SyncLogTable 
 
 	async list(): Promise<SyncLog[]> {
 
-		return await this.db.table<SyncLog>(this.tablename).orderBy('id').toArray();
+		return await this.db.table<SyncLog>(this.tablename).orderBy('id').reverse().toArray();
 
 	}
 
