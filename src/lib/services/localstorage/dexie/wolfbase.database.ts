@@ -33,7 +33,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			sync_messages: '++id, syncLogId'
 
 		},
-		version: 1
+		version: 10
 	});
 
 };
