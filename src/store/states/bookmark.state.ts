@@ -1,4 +1,4 @@
-import { Bookmark, Click, SyncData, UUID } from "lib";
+import { Bookmark, Click, RemoteMetadata, SyncData, UUID } from "lib";
 
 export interface BookmarkModuleState {
 
@@ -21,6 +21,7 @@ export interface BookmarkEntitiesState {
 export interface BookmarkSyncState {
 
 	syncData: SyncData[];
+	remoteMetadata: RemoteMetadata[];
 	trashCount: number;
 
 }
@@ -44,6 +45,7 @@ export interface BookmarkUIState {
 export const initialBookmarkSyncState: BookmarkSyncState = {
 
 	syncData: [],
+	remoteMetadata: [],
 	trashCount: 0
 
 };

@@ -10,11 +10,13 @@ export class StatsSummaryComponent {
 
 	@Input() summary: StatsSummary | undefined | null;
 
-	@Output() deleteLocal = new EventEmitter<UUID>();
-	@Output() deleteRemote = new EventEmitter<UUID>();
-	@Output() overrideLocal = new EventEmitter<RemoteData<Entity>>();
-	@Output() overrideRemote = new EventEmitter<Entity>();
-	@Output() loadRemote = new EventEmitter<UUID>();
+	@Output() downloadRemoteIds = new EventEmitter<void>();
+
+	onDownloadRemoteIds(): void {
+
+		this.downloadRemoteIds.emit();
+
+	}
 
 	onDeleteLocal(): void {
 

@@ -12,6 +12,7 @@ import { coreReducer } from './reducers/core.reducer';
 import { syncReducer } from './reducers/sync.reducer';
 import { AppState } from './states/app.state';
 import { DatabaseEffects } from './effects/database.effects';
+import { BookmarkRemoteEffects } from './effects/bookmark-remote.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -42,6 +43,7 @@ export const effects = [
 	// Bookmarks
 	BookmarkEntitiesEffects,
 	BookmarkSyncEffects,
+	BookmarkRemoteEffects,
 
 	// Database
 	DatabaseEffects,

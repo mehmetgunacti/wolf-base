@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StatsSummary } from 'lib';
 import { Observable } from 'rxjs';
-import { loadFirstConflict } from 'store/actions/sync.actions';
+import { doanloadRemoteMetadata } from 'store/actions/bookmark-sync.actions';
+import { downloadRemoteData, loadFirstConflict } from 'store/actions/sync.actions';
 import { bookmarkClickedCount } from 'store/selectors/bookmark-entities.selectors';
 import { bookmarkStatsSummary } from 'store/selectors/bookmark-sync.selectors';
 
@@ -27,9 +28,9 @@ export class StatsSummaryContainerComponent {
 
 	}
 
-	onStart(): void {
+	onDownloadRemoteIds(): void {
 
-		this.store.dispatch(loadFirstConflict());
+		this.store.dispatch(doanloadRemoteMetadata());
 
 	}
 

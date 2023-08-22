@@ -2,6 +2,12 @@ app-stats-summary {
 
 	@extend %flex-column;
 
+	[flexcc] {
+
+		@extend %flex-center-center;
+
+	}
+
 	/* Style for the fieldset */
 	fieldset {
 		width			: 100%;

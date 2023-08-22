@@ -1,13 +1,14 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { syncSuccess, trashCountSuccess } from 'store/actions/bookmark-sync.actions';
+import { loadRemoteMetadataSuccess, loadSyncDataSuccess, loadTrashCountSuccess } from 'store/actions/bookmark-sync.actions';
 import { BookmarkSyncState, initialBookmarkSyncState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(
 
     initialBookmarkSyncState,
 
-    on(syncSuccess, (state, { syncData }): BookmarkSyncState => ({ ...state, syncData })),
-    on(trashCountSuccess, (state, { count }): BookmarkSyncState => ({ ...state, trashCount: count }))
+    on(loadSyncDataSuccess, (state, { syncData }): BookmarkSyncState => ({ ...state, syncData })),
+    on(loadRemoteMetadataSuccess, (state, { remoteMetadata }): BookmarkSyncState => ({ ...state, remoteMetadata })),
+    on(loadTrashCountSuccess, (state, { count }): BookmarkSyncState => ({ ...state, trashCount: count }))
 
 );
 

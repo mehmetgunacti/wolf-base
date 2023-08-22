@@ -1,1 +1,3 @@
-<app-stats-summary [summary]="summary$ | async"></app-stats-summary>
+<app-stats-summary
+    [summary]="summary$ | async"
+    (downloadRemoteIds)="onDownloadRemoteIds()"></app-stats-summary>
