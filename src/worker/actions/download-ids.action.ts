@@ -7,7 +7,7 @@ export class DownloadIdsAction extends BaseAction {
 		await this.localStorage.syncLog.title(this.syncLogId, this.collection, `downloading Ids..`);
 		const remoteIds = await this.remoteStorage.bookmarks.downloadIds();
 		this.remoteMetadata.setItems(remoteIds);
-		await this.localStorage.syncLog.log(this.syncLogId,this.collection, `${remoteIds.length} Ids downloaded`);
+		await this.localStorage.syncLog.log(this.syncLogId,this.collection, `Ids of all ${remoteIds.length} items downloaded`);
 
 	}
 
