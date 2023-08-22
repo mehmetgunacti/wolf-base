@@ -1,4 +1,4 @@
-import { Metadata, RemoteData, SyncData, isNewer, sleep, toggleArrayItem } from 'lib';
+import { Metadata, RemoteData, RemoteMetadata, SyncData, isNewer, sleep, toggleArrayItem } from 'lib';
 import { UUID } from 'lib/constants/common.constant';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { Bookmark } from 'lib/models/bookmark.model';
@@ -57,6 +57,7 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 	private bookmarks: Map<string, Bookmark> = new Map();
 	private bookmarks_sync: Map<string, SyncData> = new Map();
+	private bookmarks_remote: Map<string, RemoteMetadata> = new Map();
 	private bookmarks_trash: Map<string, Bookmark> = new Map();
 
 	async get(id: string): Promise<Bookmark | null> {
@@ -279,6 +280,19 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 		const bookmark: Bookmark | undefined = this.bookmarks.get(id);
 		if (bookmark)
 			bookmark.tags = toggleArrayItem(bookmark.tags, name);
+
+	}
+
+	async listRemoteMetadata(): Promise<RemoteMetadata[]> {
+
+		return Array.from(this.bookmarks_remote.values());
+
+	}
+
+	async putRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
+
+		this.bookmarks_remote.clear();
+		data.forEach(d => this.bookmarks_remote.set(d.id, d));
 
 	}
 

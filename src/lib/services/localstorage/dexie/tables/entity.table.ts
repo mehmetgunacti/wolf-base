@@ -1,7 +1,7 @@
 import { Collection, IndexableType, Table } from 'dexie';
 import { UUID } from 'lib/constants/common.constant';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
-import { RemoteData, SyncData } from 'lib/models';
+import { RemoteData, RemoteMetadata, SyncData } from 'lib/models';
 import { Entity, Metadata } from 'lib/models/entity.model';
 import { isNewer } from 'lib/utils';
 import { EntityTable } from '../../local-storage-table.interface';
@@ -238,6 +238,23 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 	async listSyncData(): Promise<SyncData[]> {
 
 		return await this.db.table<SyncData>(this.tablename + '_sync').toArray();
+
+	}
+
+	async listRemoteMetadata(): Promise<RemoteMetadata[]> {
+
+		return await this.db.table<RemoteMetadata>(this.tablename + '_remote').toArray();
+
+	}
+
+	async putRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
+
+		await this.db.transaction('rw', [this.tablename + '_remote'], async () => {
+
+			await this.db.table(this.tablename + '_remote').clear();
+			await this.db.table(this.tablename + '_remote').bulkPut(data);
+
+		});
 
 	}
 

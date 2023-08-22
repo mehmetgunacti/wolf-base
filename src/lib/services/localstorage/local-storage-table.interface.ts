@@ -4,7 +4,7 @@ import { ISODateString, SyncData, SyncLog, SyncMessage, SyncMessageType } from "
 import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Configuration, FirestoreConfig } from "lib/models/configuration.model";
 import { Entity, Metadata } from "lib/models/entity.model";
-import { RemoteData } from "lib/models/remote.model";
+import { RemoteData, RemoteMetadata } from "lib/models/remote.model";
 
 export interface EntityTable<T extends Entity> {
 
@@ -20,6 +20,9 @@ export interface EntityTable<T extends Entity> {
 
 	getSyncData(id: UUID): Promise<SyncData | null>;
 	listSyncData(): Promise<SyncData[]>;
+
+	listRemoteMetadata(): Promise<RemoteMetadata[]>;
+	putRemoteMetadata(data: RemoteMetadata[]): Promise<void>;
 
 	getTrashItem(id: UUID): Promise<T | null>;
 
