@@ -1,27 +1,24 @@
 import { createSelector } from "@ngrx/store";
-import { bookmarkCreatedCount, bookmarkDeletedCount, bookmarkErrorsCount, bookmarkUpdatedCount } from "./bookmark-sync.selectors";
 
-export const syncableItemsCount = createSelector(
+// export const syncableItemsCount = createSelector(
 
-    bookmarkErrorsCount,
-    bookmarkCreatedCount,
-    bookmarkDeletedCount,
-    bookmarkUpdatedCount,
-    (a, b, c, d) => a + b + c + d
+//     bookmarkErrorsCount,
+//     bookmarkCreatedCount,
+//     bookmarkDeletedCount,
+//     bookmarkUpdatedCount,
+//     (a, b, c, d) => a + b + c + d
 
-);
+// );
 
-const syncableErrorsCount = createSelector(
+// const syncableErrorsCount = createSelector(
 
-    bookmarkErrorsCount,
-    count => count
+//     bookmarkErrorsCount,
+//     count => count
 
-);
+// );
 
 export const menuSyncBadge = createSelector(
 
-	syncableItemsCount,
-	syncableErrorsCount,
-	(total, errors) => ([total, errors])
+	() => ([4, 1])
 
 );

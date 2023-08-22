@@ -1,6 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { bookmarksArray } from './bookmark-entities.selectors';
 import { selectorBookmarkModuleState } from './bookmark.selectors';
+import { StatsSummary } from 'lib';
 
 const selectorSyncState = createSelector(
 
@@ -16,12 +17,12 @@ const bookmarkErrors = createSelector(
 
 );
 
-export const bookmarkErrorsCount = createSelector(
+// export const bookmarkErrorsCount = createSelector(
 
-	bookmarkErrors,
-	list => list.length
+// 	bookmarkErrors,
+// 	list => list.length
 
-);
+// );
 
 const bookmarkCreated = createSelector(
 
@@ -36,19 +37,19 @@ const bookmarkCreated = createSelector(
 
 );
 
-export const bookmarkCreatedCount = createSelector(
+// export const bookmarkCreatedCount = createSelector(
 
-	bookmarkCreated,
-	list => list.length
+// 	bookmarkCreated,
+// 	list => list.length
 
-);
+// );
 
-export const bookmarkDeletedCount = createSelector(
+// export const bookmarkDeletedCount = createSelector(
 
-	selectorSyncState,
-	state => state.trashCount
+// 	selectorSyncState,
+// 	state => state.trashCount
 
-);
+// );
 
 const bookmarkUpdated = createSelector(
 
@@ -57,9 +58,27 @@ const bookmarkUpdated = createSelector(
 
 );
 
-export const bookmarkUpdatedCount = createSelector(
+// export const bookmarkUpdatedCount = createSelector(
 
-	bookmarkUpdated,
-	list => list.length
+// 	bookmarkUpdated,
+// 	list => list.length
+
+// );
+
+export const bookmarkStatsSummary = createSelector(
+
+	(): StatsSummary => ({
+
+		localNew: 3,
+		localUpdated: 2,
+		localDeleted: 1,
+		localTotal: 12,
+
+		remoteNew: 2,
+		remoteUpdated: 5,
+		remoteDeleted: 3,
+		remoteTotal: 20
+
+	})
 
 );

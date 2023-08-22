@@ -1,16 +1,16 @@
 import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
-import { Observable, Subscription, combineLatest, map } from 'rxjs';
+import { Observable, Subscription, combineLatest, map, of } from 'rxjs';
 import { setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
 import { menuBookmarkBadge } from 'store/selectors/bookmark-ui.selectors';
 import { isSidebarVisible, isThemeDark } from 'store/selectors/core-configuration.selectors';
 import { isBigScreen } from 'store/selectors/core-ui.selectors';
-import { menuSyncBadge, syncableItemsCount } from 'store/selectors/sync-ui.selectors';
+import { menuSyncBadge } from 'store/selectors/sync-ui.selectors';
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
 
-const formatBadge_Sync = (numbers: number[]): string => {
+const formatBadge_Stats = (numbers: number[]): string => {
 
 	const [total, errors] = numbers;
 	if (total === 0)
@@ -67,7 +67,7 @@ export class CorePageComponent implements OnDestroy {
 
 		);
 
-		this.syncableItemsCount$ = this.store.select(syncableItemsCount);
+		this.syncableItemsCount$ = of(5);
 
 		this.navMenuItems$ = combineLatest([
 			this.store.select(menuBookmarkBadge),
@@ -80,7 +80,8 @@ export class CorePageComponent implements OnDestroy {
 					navItems.miHome,
 					navItems.miBookmarks(formatBadge_Bookmark(bookmarkNumbers)),
 					navItems.miDatabase,
-					navItems.miSync(formatBadge_Sync(syncNumbers)),
+					navItems.miStats(formatBadge_Stats(syncNumbers)),
+					navItems.miSync(formatBadge_Stats(syncNumbers)),
 					navItems.miSettings
 				];
 				if (this.bigScreen)

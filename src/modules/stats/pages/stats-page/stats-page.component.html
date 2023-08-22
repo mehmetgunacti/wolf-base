@@ -1,0 +1,17 @@
+<p-messages severity="warn" *ngIf="isFirestoreConfigMissing$ | async">
+    <ng-template pTemplate>
+		<span>Firestore configuration missing</span>
+		<button
+			pButton
+			pRipple
+			type="button"
+			label="Configure"
+			class="p-button-text p-button-sm"
+			routerLink="/settings">
+		</button>
+    </ng-template>
+</p-messages>
+
+<p-card>
+	<app-stats-summary-container></app-stats-summary-container>
+</p-card>

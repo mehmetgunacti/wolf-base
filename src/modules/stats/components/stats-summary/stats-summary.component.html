@@ -1,0 +1,40 @@
+<fieldset>
+	<legend>Bookmarks</legend>
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Local</th>
+				<th>Remote</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Total</td>
+				<td>{{ summary?.localTotal }}</td>
+				<td>{{ summary?.remoteTotal }}</td>
+			</tr>
+			<tr>
+				<td>New</td>
+				<td>{{ summary?.localNew }}</td>
+				<td>{{ summary?.remoteNew }}</td>
+			</tr>
+			<tr>
+				<td>Updated</td>
+				<td>{{ summary?.localUpdated }}</td>
+				<td>{{ summary?.remoteUpdated }}</td>
+			</tr>
+			<tr>
+				<td>Deleted</td>
+				<td>{{ summary?.localDeleted }}</td>
+				<td>{{ summary?.remoteDeleted }}</td>
+			</tr>
+			<tr>
+				<td>Conflicts</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+
+</fieldset>

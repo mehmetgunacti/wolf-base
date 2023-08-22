@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, combineLatest, map } from 'rxjs';
+import { Observable, combineLatest, map, of } from 'rxjs';
 import { loadFirstConflict } from 'store/actions/sync.actions';
 import { bookmarkClickedCount } from 'store/selectors/bookmark-entities.selectors';
-import { bookmarkCreatedCount, bookmarkDeletedCount, bookmarkErrorsCount, bookmarkUpdatedCount } from 'store/selectors/bookmark-sync.selectors';
 
 @Component({
 	selector: 'app-sync-summary-container',
@@ -23,11 +22,11 @@ export class SyncSummaryContainerComponent {
 
 	constructor() {
 
-		this.bookmarkErrorsCount$ = this.store.select(bookmarkErrorsCount);
-		this.bookmarkCreatedCount$ = this.store.select(bookmarkCreatedCount);
+		this.bookmarkErrorsCount$ = of(0);
+		this.bookmarkCreatedCount$ = of(0);
 		this.bookmarkClickedCount$ = this.store.select(bookmarkClickedCount);
-		this.bookmarkDeletedCount$ = this.store.select(bookmarkDeletedCount);
-		this.bookmarkUpdatedCount$ = this.store.select(bookmarkUpdatedCount);
+		this.bookmarkDeletedCount$ = of(0);
+		this.bookmarkUpdatedCount$ = of(0);
 		this.bookmarkEmpty$ = combineLatest([
 			this.bookmarkErrorsCount$,
 			this.bookmarkCreatedCount$,

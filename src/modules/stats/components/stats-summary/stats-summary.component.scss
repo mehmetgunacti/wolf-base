@@ -1,0 +1,45 @@
+app-stats-summary {
+
+	@extend %flex-column;
+
+	/* Style for the fieldset */
+	fieldset {
+		width			: 100%;
+		border			: 0;
+	}
+
+	legend {
+		width					: 100%;
+		padding					: 15px;
+		font-weight				: bold;
+		color					: var(--text-color);
+		border-bottom			: 1px solid var(--text-color);
+		background-color		: var(--surface-50);
+		border-top-left-radius	: var(--border-radius);
+		border-top-right-radius	: var(--border-radius);
+	}
+
+	table {
+
+		border-collapse			: collapse;
+		width					: 100%;
+
+		thead {
+			font-weight				: bold;
+			color					: var(--text-color);
+		}
+
+		th {
+			padding				: 8px;
+			font-weight			: bold;
+		}
+
+		td {
+			padding		: 8px;
+			text-align	: center;
+		}
+
+	}
+
+}
+
