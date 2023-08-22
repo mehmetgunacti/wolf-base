@@ -29,7 +29,7 @@ export class SyncSynchronizeComponent implements OnInit {
 
 	ngOnInit(): void {
 
-		if (this.syncLogs)
+		if (this.syncLogs?.length)
 			this.syncIndex.emit(this.syncLogs[0].id);
 
 	}
