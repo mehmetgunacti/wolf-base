@@ -4,7 +4,7 @@ import { Bookmark, ToastConfiguration, UUID } from 'lib';
 import { Observable, Subject, combineLatest, filter, map } from 'rxjs';
 import { createBookmark, deleteBookmark, updateBookmark } from 'store/actions/bookmark.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { selectedBookmark } from 'store/selectors/bookmark-entities.selectors';
+import { sltBookmark } from 'store/selectors/bookmark-entities.selectors';
 import { distinctTagsArray } from 'store/selectors/bookmark-tags.selectors';
 import { titleLookup } from 'store/selectors/core-configuration.selectors';
 
@@ -24,7 +24,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	constructor() {
 
-		this.bookmark$ = this.store.select(selectedBookmark);
+		this.bookmark$ = this.store.select(sltBookmark);
 		this.titleLookup$ = this.store.select(titleLookup);
 
 	}

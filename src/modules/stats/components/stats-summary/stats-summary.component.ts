@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Entity, RemoteData, StatsSummary, UUID } from 'lib';
+import { StatsSummary } from 'lib';
 
 @Component({
 	selector: 'app-stats-summary',
@@ -13,6 +13,11 @@ export class StatsSummaryComponent {
 	@Output() downloadRemoteNew = new EventEmitter<void>();
 	@Output() uploadLocalNew = new EventEmitter<void>();
 	@Output() uploadLocalClicked = new EventEmitter<void>();
+	@Output() viewRemoteDeleted = new EventEmitter<void>();
+	@Output() viewRemoteUpdated = new EventEmitter<void>();
+	@Output() uploadLocalUpdated = new EventEmitter<void>();
+	@Output() uploadLocalDeleted = new EventEmitter<void>();
+	@Output() viewErrors = new EventEmitter<void>();
 
 	onDownloadRemoteNew(): void {
 
@@ -32,15 +37,33 @@ export class StatsSummaryComponent {
 
 	}
 
-	onOverrideLocal(): void {
+	onViewRemoteDeleted(): void {
+
+		this.viewRemoteDeleted.emit();
 
 	}
 
-	onOverrideRemote(): void {
+	onViewRemoteUpdated(): void {
+
+		this.viewRemoteUpdated.emit();
 
 	}
 
-	onLoadRemote(): void {
+	onUploadLocalUpdated(): void {
+
+		this.uploadLocalUpdated.emit();
+
+	}
+
+	onUploadLocalDeleted(): void {
+
+		this.uploadLocalDeleted.emit();
+
+	}
+
+	onViewErrors(): void {
+
+		this.viewErrors.emit();
 
 	}
 

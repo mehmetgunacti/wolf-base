@@ -2,9 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StatsSummary } from 'lib';
 import { Observable } from 'rxjs';
-import { downloadRemoteMetadata, downloadRemoteNew, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
-import { selectorBookmarkClickedCount } from 'store/selectors/bookmark-entities.selectors';
-import { bookmarkStatsSummary } from 'store/selectors/bookmark-stats.selectors';
+import { downloadRemoteNew, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
+import { sltBookmarkStatsSummary } from 'store/selectors/bookmark-stats.selectors';
 
 @Component({
 	selector: 'app-stats-summary-container',
@@ -17,13 +16,9 @@ export class StatsSummaryContainerComponent {
 
 	private store: Store = inject(Store);
 
-	bookmarkClickedCount$: Observable<number>;
-
 	constructor() {
 
-		this.summary$ = this.store.select(bookmarkStatsSummary);
-
-		this.bookmarkClickedCount$ = this.store.select(selectorBookmarkClickedCount);
+		this.summary$ = this.store.select(sltBookmarkStatsSummary);
 
 	}
 
@@ -40,6 +35,36 @@ export class StatsSummaryContainerComponent {
 	}
 
 	onUploadLocalClicked(): void {
+
+		this.store.dispatch(uploadLocalClicked());
+
+	}
+
+	onViewRemoteDeleted(): void {
+
+		this.store.dispatch(uploadLocalClicked());
+
+	}
+
+	onViewRemoteUpdated(): void {
+
+		this.store.dispatch(uploadLocalClicked());
+
+	}
+
+	onUploadLocalUpdated(): void {
+
+		this.store.dispatch(uploadLocalClicked());
+
+	}
+
+	onUploadLocalDeleted(): void {
+
+		this.store.dispatch(uploadLocalClicked());
+
+	}
+
+	onViewErrors(): void {
 
 		this.store.dispatch(uploadLocalClicked());
 
