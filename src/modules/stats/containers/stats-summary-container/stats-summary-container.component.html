@@ -1,4 +1,5 @@
 <app-stats-summary
     [summary]="summary$ | async"
     (downloadRemoteNew)="onDownloadRemoteNew()"
-    (uploadLocalNew)="onUploadLocalNew()"></app-stats-summary>
+    (uploadLocalNew)="onUploadLocalNew()"
+    (uploadLocalClicked)="onUploadLocalClicked()"></app-stats-summary>

@@ -6,9 +6,10 @@ import { liveQuery } from 'dexie';
 import { LocalStorageService, RemoteMetadata, RemoteStorageService } from 'lib';
 import { fromEventPattern } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, partialDownloadSuccess, loadRemoteMetadataSuccess } from 'store/actions/bookmark-sync.actions';
+import { downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, loadRemoteMetadataSuccess, partialDownloadSuccess, partialUploadSuccess, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { selectorBookmarkRemoteCreatedIds } from 'store/selectors/bookmark-stats.selectors';
+import { selectorBookmarkClicked } from 'store/selectors/bookmark-entities.selectors';
+import { selectorBookmarkLocalCreatedIds, selectorBookmarkRemoteCreatedIds } from 'store/selectors/bookmark-stats.selectors';
 
 @Injectable()
 export class BookmarkRemoteEffects {
@@ -49,7 +50,7 @@ export class BookmarkRemoteEffects {
 		() => this.actions$.pipe(
 
 			ofType(downloadRemoteMetadataSuccess),
-			map(() => showNotification({ severity: 'info', detail: 'Bookmark Ids downloaded' }))
+			map(() => showNotification({ severity: 'info', summary: 'Download Complete', detail: 'Bookmark data refreshed' }))
 
 		)
 
@@ -73,12 +74,74 @@ export class BookmarkRemoteEffects {
 
 	);
 
+	uploadLocalNew$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(uploadLocalNew),
+			withLatestFrom(this.store.select(selectorBookmarkLocalCreatedIds)),
+			map(([, ids]) => ids),
+			switchMap(async ids => {
+
+				for (const id of ids) {
+
+					const localData = await this.localStorage.bookmarks.get(id);
+					if (localData) {
+						const uploaded = await this.remoteStorage.bookmarks.upload(localData);
+						await this.localStorage.bookmarks.put(uploaded);
+					}
+
+				}
+				return ids.length;
+				
+			}),
+			map(count => partialDownloadSuccess({ count }))
+
+		)
+
+	);
+
+	uploadLocalClicked$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(uploadLocalClicked),
+			withLatestFrom(this.store.select(selectorBookmarkClicked)),
+			map(([, clicks]) => clicks),
+			switchMap(async clicks => {
+
+				for (const click of clicks) {
+
+					const total = await this.remoteStorage.clicks.increase(click.id, click.current);
+					await this.localStorage.clicks.put({ ... click, total });
+
+				}
+				return clicks.length;
+				
+			}),
+			map(count => partialUploadSuccess({ count }))
+
+		)
+
+	);
+
 	partialDownloadSuccess$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(partialDownloadSuccess),
-			map(({ count }) => showNotification({ severity: 'info', summary: 'Download Complete', detail: `${count} items downloaded` }))
+			map(({ count }) => showNotification({ severity: 'success', summary: 'Download Complete', detail: `${count} items downloaded` }))
+
+		)
+
+	);
+
+	partialuploadSuccess$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(partialUploadSuccess),
+			map(({ count }) => showNotification({ severity: 'success', summary: 'Upload Complete', detail: `${count} items uploaded` }))
 
 		)
 

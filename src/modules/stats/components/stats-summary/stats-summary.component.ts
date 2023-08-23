@@ -12,6 +12,7 @@ export class StatsSummaryComponent {
 
 	@Output() downloadRemoteNew = new EventEmitter<void>();
 	@Output() uploadLocalNew = new EventEmitter<void>();
+	@Output() uploadLocalClicked = new EventEmitter<void>();
 
 	onDownloadRemoteNew(): void {
 
@@ -25,7 +26,9 @@ export class StatsSummaryComponent {
 
 	}
 
-	onDeleteRemote(): void {
+	onUploadLocalClicked(): void {
+
+		this.uploadLocalClicked.emit();
 
 	}
 

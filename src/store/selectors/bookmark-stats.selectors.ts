@@ -3,7 +3,7 @@ import { StatsSummary, SyncData, UUID, isAfter } from "lib";
 import { selectorBookmarkClickedCount, selectorBookmarksIds } from "./bookmark-entities.selectors";
 import { selectorBookmarkRemoteMetadataArray, selectorBookmarkSyncDataArray } from "./bookmark-sync.selectors";
 
-const localCreatedBookmarkIds = createSelector(
+export const selectorBookmarkLocalCreatedIds = createSelector(
 
 	selectorBookmarksIds,
 	selectorBookmarkSyncDataArray,
@@ -87,7 +87,7 @@ const remoteDeletedBookmarkIds = createSelector(
 export const bookmarkStatsSummary = createSelector(
 
 	selectorBookmarksIds,
-	localCreatedBookmarkIds,
+	selectorBookmarkLocalCreatedIds,
 	localUpdatedBookmarkIds,
 	localDeletedBookmarkIds,
 	selectorBookmarkClickedCount,

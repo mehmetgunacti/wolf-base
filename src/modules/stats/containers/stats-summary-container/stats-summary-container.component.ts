@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StatsSummary } from 'lib';
 import { Observable } from 'rxjs';
-import { downloadRemoteMetadata, downloadRemoteNew, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
+import { downloadRemoteMetadata, downloadRemoteNew, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
 import { selectorBookmarkClickedCount } from 'store/selectors/bookmark-entities.selectors';
 import { bookmarkStatsSummary } from 'store/selectors/bookmark-stats.selectors';
 
@@ -36,6 +36,12 @@ export class StatsSummaryContainerComponent {
 	onUploadLocalNew(): void {
 
 		this.store.dispatch(uploadLocalNew());
+
+	}
+
+	onUploadLocalClicked(): void {
+
+		this.store.dispatch(uploadLocalClicked());
 
 	}
 
