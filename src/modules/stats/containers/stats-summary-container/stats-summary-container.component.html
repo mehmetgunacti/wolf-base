@@ -1,3 +1,4 @@
 <app-stats-summary
     [summary]="summary$ | async"
-    (downloadRemoteIds)="onDownloadRemoteIds()"></app-stats-summary>
+    (downloadRemoteNew)="onDownloadRemoteNew()"
+    (uploadLocalNew)="onUploadLocalNew()"></app-stats-summary>

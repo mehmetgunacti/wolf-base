@@ -3,7 +3,7 @@ import { RemoteCollection } from "lib/constants/remote.constant";
 import { FirestoreConfig, RemoteData, RemoteMetadata } from "lib/models";
 import { Entity } from "lib/models/entity.model";
 import { FIRESTORE_VALUE } from "lib/utils";
-import { FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "lib/utils/firestore/firestore.model";
+import { FirestoreBatchGetURL, FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "lib/utils/firestore/firestore.model";
 import { Firestore } from "lib/utils/firestore/firestore.tool";
 import { RemoteStorageCollection } from "../remote-storage-collection.interface";
 
@@ -96,14 +96,28 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 
 	}
 
-	async downloadMany(): Promise<RemoteData<T>[]> {
+	async downloadMany(ids?: UUID[]): Promise<RemoteData<T>[]> {
 
-		const url = new FirestoreListURL(
-			this.firestoreConfig,
-			this.remoteCollection,
-			this.pageSize
-		);
-		const list = await this.firestore.list<T>(url);
+		let list: FirestoreDTO<T>[];
+		if (ids) {
+
+			const url = new FirestoreBatchGetURL(
+				this.firestoreConfig,
+				this.remoteCollection,
+				ids
+			);
+			list = await this.firestore.batchGet<T>(url);
+
+		} else {
+
+			const url = new FirestoreListURL(
+				this.firestoreConfig,
+				this.remoteCollection,
+				this.pageSize
+			);
+			list = await this.firestore.list<T>(url);
+
+		}
 		return list.map(dto => this.toRemoteData(dto));
 
 	}

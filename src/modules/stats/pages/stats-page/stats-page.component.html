@@ -1,3 +1,17 @@
+<app-portal outletName="portal-outlet-right">
+
+	<button
+		pButton
+		pRipple
+		type="button"
+		label="Refresh"
+		icon="pi pi-cloud-download"
+		class="p-button-text p-button-sm"
+		(click)="onDownloadRemoteIds()">
+	</button>
+
+</app-portal>
+
 <p-messages severity="warn" *ngIf="isFirestoreConfigMissing$ | async">
     <ng-template pTemplate>
 		<span>Firestore configuration missing</span>

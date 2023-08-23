@@ -1,45 +1,35 @@
 <fieldset>
 	<legend>Bookmarks</legend>
-	<table>
-		<thead>
-			<tr>
-				<th></th>
-				<th>Local</th>
-				<th flexcc>Remote <p-button icon="pi pi-refresh" styleClass="p-button-rounded p-button-text" (click)="onDownloadRemoteIds()"></p-button></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Total</td>
-				<td>{{ summary?.localTotal }}</td>
-				<td>{{ summary?.remoteTotal }}</td>
-			</tr>
-			<tr>
-				<td>New</td>
-				<td>{{ summary?.localNew }}</td>
-				<td>{{ summary?.remoteNew }}</td>
-			</tr>
-			<tr>
-				<td>Updated</td>
-				<td>{{ summary?.localUpdated }}</td>
-				<td>{{ summary?.remoteUpdated }}</td>
-			</tr>
-			<tr>
-				<td>Deleted</td>
-				<td>{{ summary?.localDeleted }}</td>
-				<td>{{ summary?.remoteDeleted }}</td>
-			</tr>
-			<tr>
-				<td>Clicked</td>
-				<td>{{ summary?.localDeleted }}</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>Conflicts</td>
-				<td></td>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
+
+	<div table *ngIf="summary">
+		<div th></div>
+		<div th>Local</div>
+		<div th>Remote</div>
+
+		<div th>Total</div>
+		<div>{{ summary.localTotal }}</div>
+		<div>{{ summary.remoteTotal }}</div>
+
+		<div th>New</div>
+		<div>{{ summary.localNew }} <p-button *ngIf="summary.localNew > 0" icon="pi pi-cloud-upload" styleClass="p-button-rounded p-button-text" (click)="onUploadLocalNew()"></p-button></div>
+		<div>{{ summary.remoteNew }} <p-button *ngIf="summary.remoteNew > 0" icon="pi pi-cloud-download" styleClass="p-button-rounded p-button-text" (click)="onDownloadRemoteNew()"></p-button></div>
+
+		<div th>Updated</div>
+		<div>{{ summary.localUpdated }}</div>
+		<div>{{ summary.remoteUpdated }}</div>
+
+		<div th>Deleted</div>
+		<div>{{ summary.localDeleted }}</div>
+		<div>{{ summary.remoteDeleted }}</div>
+
+		<div th>Clicked</div>
+		<div>{{ summary.localClicked }}</div>
+		<div></div>
+
+		<div th>Conflicts</div>
+		<div>{{ summary.localError }}</div>
+		<div></div>
+
+	</div>
 
 </fieldset>

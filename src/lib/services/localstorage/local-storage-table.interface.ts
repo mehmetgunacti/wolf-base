@@ -12,6 +12,7 @@ export interface EntityTable<T extends Entity> {
 
 	create(item: Partial<T>): Promise<T>;
 	put(item: RemoteData<T>): Promise<void>;
+	putAll(items: RemoteData<T>[]): Promise<void>;
 	update(id: UUID, item: Partial<T>): Promise<number>;
 	markError(id: UUID, error: string): Promise<void>;
 

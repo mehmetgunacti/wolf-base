@@ -1,6 +1,9 @@
 import { HTTP } from '../http.tool';
 import { FIRESTORE_TYPE, FIRESTORE_VALUE } from './firestore.constant';
 import {
+	FirestoreBatchGetRequestBody,
+	FirestoreBatchGetResponse,
+	FirestoreBatchGetURL,
 	FirestoreCreateURL,
 	FirestoreDTO,
 	FirestoreDocument,
@@ -18,6 +21,7 @@ export interface Firestore {
 	create<T>(url: FirestoreCreateURL, requestBody: FirestoreDocument<T>): Promise<FirestoreDTO<T>>;
 	update<T>(url: FirestorePatchURL, requestBody: FirestoreDocument<T>): Promise<FirestoreDTO<T>>;
 	delete(url: FirestoreDocumentURL): Promise<void>;
+	batchGet<T>(batchGetUrl: FirestoreBatchGetURL): Promise<FirestoreDTO<T>[]>;
 	list<T>(listUrl: FirestoreListURL): Promise<FirestoreDTO<T>[]>;
 	listIds<T>(listUrl: FirestoreListURL): Promise<FirestoreDTO<T>[]>;
 	get<T>(url: FirestoreDocumentURL): Promise<FirestoreDTO<T> | null>;
@@ -56,6 +60,18 @@ class FirestoreTool implements Firestore {
 	async delete(url: FirestoreDocumentURL): Promise<void> {
 
 		await HTTP.delete<void, void>(url.toURL());
+
+	}
+
+	async batchGet<T>(batchGetUrl: FirestoreBatchGetURL): Promise<FirestoreDTO<T>[]> {
+
+		return await HTTP.post<FirestoreBatchGetResponse<T>[], FirestoreBatchGetRequestBody, FirestoreDTO<T>[]>(
+
+			batchGetUrl.toURL(),
+			batchGetUrl.toRequestBody(),
+			(response: FirestoreBatchGetResponse<T>[]): FirestoreDTO<T>[] => this.parseBatchGetResponse(response)
+
+		);
 
 	}
 
@@ -137,6 +153,12 @@ class FirestoreTool implements Firestore {
 
 	}
 
+	private parseBatchGetResponse<T>(response: FirestoreBatchGetResponse<T>[]): FirestoreDTO<T>[] {
+
+		return response?.filter(r => !!r.found).map((r: FirestoreBatchGetResponse<T>) => this.parseDocument(r.found)) || [];
+
+	}
+
 	private parseDocuments<T>(firestoreResponse: FirestoreDocuments<T>): FirestoreDTO<T>[] {
 
 		return firestoreResponse?.documents?.map((d: FirestoreDocument<T>) => this.parseDocument(d)) || [];
@@ -172,7 +194,7 @@ class FirestoreTool implements Firestore {
 	}
 
 	private parseFirestoreURL(url: string): { collection: string, document: string } {
-		
+
 		// starts parsing with /documents/[collection]/[id] until / or ? or till end of string
 		const regex = /\/documents\/([^/]+)\/([^/]+)(?:\/|\?|$)/;
 		const matches = url.match(regex);

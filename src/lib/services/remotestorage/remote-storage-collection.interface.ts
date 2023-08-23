@@ -6,7 +6,7 @@ import { Entity } from "lib/models/entity.model";
 export interface RemoteStorageCollection<T extends Entity> {
 
 	downloadOne(id: UUID): Promise<RemoteData<T> | null>;
-	downloadMany(): Promise<RemoteData<T>[]>;
+	downloadMany(ids: UUID[]): Promise<RemoteData<T>[]>;
 	downloadIds(): Promise<RemoteMetadata[]>;
 
 	upload(item: T): Promise<RemoteData<T>>;

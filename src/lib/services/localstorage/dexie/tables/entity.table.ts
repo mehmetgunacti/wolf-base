@@ -73,6 +73,38 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
+	async putAll(items: RemoteData<T>[]): Promise<void> {
+
+		await this.db.transaction('rw', [this.tablename, this.tablename + '_sync'], async () => {
+
+			// add to data table
+			await this.db.table<T>(this.tablename).bulkPut(items.map(item => item.entity));
+
+			// add to sync table
+			await this.db.table<SyncData>(this.tablename + '_sync').bulkPut(items.map(
+
+				item => {
+
+					const { id, createTime, updateTime } = item.metaData;
+					return {
+
+						id,
+						createTime,
+						updateTime,
+						updated: false,
+						deleted: false,
+						error: null
+
+					}
+
+				}
+
+			));
+
+		});
+
+	}
+
 	async markError(id: UUID, error: string): Promise<void> {
 
 		await this.db.table<T>(this.tablename + '_sync').where({ id }).modify({ error } as Partial<Entity>);

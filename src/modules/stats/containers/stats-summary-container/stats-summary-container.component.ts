@@ -2,10 +2,9 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StatsSummary } from 'lib';
 import { Observable } from 'rxjs';
-import { doanloadRemoteMetadata } from 'store/actions/bookmark-sync.actions';
-import { downloadRemoteData, loadFirstConflict } from 'store/actions/sync.actions';
-import { bookmarkClickedCount } from 'store/selectors/bookmark-entities.selectors';
-import { bookmarkStatsSummary } from 'store/selectors/bookmark-sync.selectors';
+import { downloadRemoteMetadata, downloadRemoteNew, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
+import { selectorBookmarkClickedCount } from 'store/selectors/bookmark-entities.selectors';
+import { bookmarkStatsSummary } from 'store/selectors/bookmark-stats.selectors';
 
 @Component({
 	selector: 'app-stats-summary-container',
@@ -24,13 +23,19 @@ export class StatsSummaryContainerComponent {
 
 		this.summary$ = this.store.select(bookmarkStatsSummary);
 
-		this.bookmarkClickedCount$ = this.store.select(bookmarkClickedCount);
+		this.bookmarkClickedCount$ = this.store.select(selectorBookmarkClickedCount);
 
 	}
 
-	onDownloadRemoteIds(): void {
+	onDownloadRemoteNew(): void {
 
-		this.store.dispatch(doanloadRemoteMetadata());
+		this.store.dispatch(downloadRemoteNew());
+
+	}
+
+	onUploadLocalNew(): void {
+
+		this.store.dispatch(uploadLocalNew());
 
 	}
 

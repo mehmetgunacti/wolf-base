@@ -106,6 +106,13 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 	}
 
+	async putAll(items: RemoteData<Bookmark>[]): Promise<void> {
+
+		await sleep(SLEEP);
+		items.forEach(item => this.put(item));
+
+	}
+
 	async update(id: string, item: Partial<Bookmark>): Promise<number> {
 
 		await sleep(SLEEP);

@@ -1,25 +1,18 @@
 import { createSelector } from '@ngrx/store';
-import { bookmarksCount } from './bookmark-entities.selectors';
+import { selectorBookmarksCount } from './bookmark-entities.selectors';
 import { filteredBookmarkCount } from './bookmark-tags.selectors';
-import { selectorBookmarkModuleState } from './bookmark.selectors';
-
-export const selectorUIState = createSelector(
-
-	selectorBookmarkModuleState,
-	state => state.ui
-
-)
+import { selectorBookmarkUIState } from './bookmark.selectors';
 
 export const selectorTagCloudVisibility = createSelector(
 
-	selectorUIState,
+	selectorBookmarkUIState,
 	state => state.tagCloudVisible
 
 );
 
 export const menuBookmarkBadge = createSelector(
 
-	bookmarksCount,
+	selectorBookmarksCount,
 	filteredBookmarkCount,
 	(total, filtered): [number, number] => ([total, filtered])
 
@@ -27,7 +20,7 @@ export const menuBookmarkBadge = createSelector(
 
 export const isEditDialogVisible = createSelector(
 
-	selectorUIState,
+	selectorBookmarkUIState,
 	state => state.editDialogVisible
 
 );

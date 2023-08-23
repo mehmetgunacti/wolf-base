@@ -75,6 +75,34 @@ export class FirestoreListURL {
 
 }
 
+export class FirestoreBatchGetURL {
+
+	constructor(
+		public firestoreConfig: FirestoreConfig,
+		public collection: RemoteCollection,
+		public ids: UUID[]
+	) { }
+
+	toURL(): string {
+
+		const { baseURL, projectId, apiKey } = this.firestoreConfig;
+		return `${baseURL}projects/${projectId}/databases/(default)/documents:batchGet?key=${apiKey}`;
+
+	}
+
+	toRequestBody(): FirestoreBatchGetRequestBody {
+
+		const { projectId } = this.firestoreConfig;
+		return {
+
+			documents: this.ids.map(id => `projects/${projectId}/databases/(default)/documents/${this.collection}/${id}`)
+
+		}
+
+	}
+
+}
+
 export class FirestoreIncreaseURL {
 
 	constructor(
@@ -179,5 +207,17 @@ export interface FirestoreConverter<T> {
 
 	toFirestore(item: T | Partial<T>): Record<keyof T, FIRESTORE_VALUE>;
 	toUpdateMask(item: Partial<T>): string;
+
+}
+
+export interface FirestoreBatchGetRequestBody {
+
+	documents: string[];
+
+}
+
+export interface FirestoreBatchGetResponse<T> {
+
+	found: FirestoreDocument<T>
 
 }

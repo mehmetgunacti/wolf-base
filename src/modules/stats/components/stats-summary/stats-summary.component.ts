@@ -10,15 +10,18 @@ export class StatsSummaryComponent {
 
 	@Input() summary: StatsSummary | undefined | null;
 
-	@Output() downloadRemoteIds = new EventEmitter<void>();
+	@Output() downloadRemoteNew = new EventEmitter<void>();
+	@Output() uploadLocalNew = new EventEmitter<void>();
 
-	onDownloadRemoteIds(): void {
+	onDownloadRemoteNew(): void {
 
-		this.downloadRemoteIds.emit();
+		this.downloadRemoteNew.emit();
 
 	}
 
-	onDeleteLocal(): void {
+	onUploadLocalNew(): void {
+
+		this.uploadLocalNew.emit();
 
 	}
 

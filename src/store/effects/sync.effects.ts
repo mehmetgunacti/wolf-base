@@ -9,7 +9,7 @@ import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { SyncService } from 'services/sync.service';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { saveFirestoreConfigSuccess, saveTitleLookupSuccess } from 'store/actions/core.actions';
-import { clearSyncLogs, downloadRemoteData, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadSyncLogsSuccess, loadSyncMessages, loadSyncMessagesSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem, syncBackupDatabase, syncTrigger } from 'store/actions/sync.actions';
+import { clearSyncLogs, downloadRemoteData, downloadRemoteDataFailure, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadSyncLogsSuccess, loadSyncMessages, loadSyncMessagesSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem, syncBackupDatabase, syncTrigger } from 'store/actions/sync.actions';
 
 @Injectable()
 export class SyncEffects {
@@ -102,7 +102,7 @@ export class SyncEffects {
 
 			ofType(downloadRemoteData),
 			switchMap(({ id }) => this.remoteStorage.bookmarks.downloadOne(id)),
-			map(remoteData => downloadRemoteDataSuccess({ remoteData }))
+			map(remoteData => remoteData ? downloadRemoteDataSuccess({ remoteData }) : downloadRemoteDataFailure())
 
 		)
 

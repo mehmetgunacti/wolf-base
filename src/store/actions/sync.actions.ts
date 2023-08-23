@@ -22,7 +22,8 @@ export const loadItemSuccess = createAction('[Sync] Load Item Success', props<{ 
 export const loadTrashItemSuccess = createAction('[Sync] Load Trash Item Success', props<{ item: Entity | null }>());
 
 export const downloadRemoteData = createAction('[Sync] Donwload RemoteData', props<{ id: UUID }>());
-export const downloadRemoteDataSuccess = createAction('[Sync] Donwload RemoteData Success', props<{ remoteData: RemoteData<Entity> | null }>());
+export const downloadRemoteDataSuccess = createAction('[Sync] Donwload RemoteData Success', props<{ remoteData: RemoteData<Entity> }>());
+export const downloadRemoteDataFailure = createAction('[Sync] Donwload RemoteData Failure');
 
 export const purgeLocalItem = createAction('[Sync] Purge Local Item', props<{ id: UUID }>());
 export const purgeRemoteItem = createAction('[Sync] Purge Remote Item', props<{ id: UUID }>());
