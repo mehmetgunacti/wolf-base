@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ToastConfiguration } from 'lib';
+import { slideLeftSlideUpTrigger } from 'modules/shared/animations';
 import { fadeInFadeOutTrigger } from 'modules/shared/animations/fade-in-fade-out.animation';
 import { Observable } from 'rxjs';
 import { W359ToastRef } from 'services';
@@ -7,7 +8,7 @@ import { W359ToastRef } from 'services';
 @Component({
 	selector: 'app-toast-wrapper',
 	templateUrl: './toast-wrapper.component.html',
-	animations: [fadeInFadeOutTrigger]
+	animations: [slideLeftSlideUpTrigger]
 })
 export class ToastWrapperComponent {
 

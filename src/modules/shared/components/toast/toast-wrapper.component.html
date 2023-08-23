@@ -1,5 +1,5 @@
 <app-toast *ngFor="let toast of toasts$ | async"
-			@fadeInFadeOut
+			@slideLeftSlideUp
 			[conf]="toast"
 			(close)="onClose($event)">
 </app-toast>

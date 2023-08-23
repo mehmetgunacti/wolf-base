@@ -12,7 +12,7 @@
 
 		<div th>New</div>
 		<div>{{ summary.localNew }} <p-button *ngIf="summary.localNew > 0" icon="pi pi-cloud-upload" styleClass="p-button-rounded p-button-text" (click)="onUploadLocalNew()"></p-button></div>
-		<div>{{ summary.remoteNew }} <p-button *ngIf="summary.remoteNew > 0" icon="pi pi-cloud-download" styleClass="p-button-rounded p-button-text" (click)="onDownloadRemoteNew()"></p-button></div>
+		<div>{{ summary.remoteNew }} <p-button *ngIf="summary.remoteNew >= 0" icon="pi pi-cloud-download" styleClass="p-button-rounded p-button-text" (click)="onDownloadRemoteNew()"></p-button></div>
 
 		<div th>Updated</div>
 		<div>{{ summary.localUpdated }}</div>
