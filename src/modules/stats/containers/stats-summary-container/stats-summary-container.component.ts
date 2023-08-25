@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { StatsSummary } from 'lib';
 import { Observable } from 'rxjs';
 import { downloadRemoteClicked, downloadRemoteNew, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
-import { sltBookmarkStatsSummary } from 'store/selectors/bookmark-stats.selectors';
+import { selBookmarkStatsSummary } from 'store/selectors/bookmark-stats.selectors';
 
 @Component({
 	selector: 'app-stats-summary-container',
@@ -18,7 +18,7 @@ export class StatsSummaryContainerComponent {
 
 	constructor() {
 
-		this.summary$ = this.store.select(sltBookmarkStatsSummary);
+		this.summary$ = this.store.select(selBookmarkStatsSummary);
 
 	}
 

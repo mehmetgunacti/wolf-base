@@ -1,12 +1,12 @@
 import { createSelector } from "@ngrx/store";
 import { StatsSummary, SyncData, UUID, isAfter } from "lib";
-import { sltBookmarkClickedCount, sltBookmarksIds } from "./bookmark-entities.selectors";
-import { sltBookmarkRemoteMetadataArray, sltBookmarkSyncDataArray } from "./bookmark-sync.selectors";
+import { selBookmarkClickedCount, selBookmarksIds } from "./bookmark-entities.selectors";
+import { selBookmarkRemoteMetadataArray, selBookmarkSyncDataArray } from "./bookmark-sync.selectors";
 
-export const sltBookmarkLocalCreatedIds = createSelector(
+export const selBookmarkLocalCreatedIds = createSelector(
 
-	sltBookmarksIds,
-	sltBookmarkSyncDataArray,
+	selBookmarksIds,
+	selBookmarkSyncDataArray,
 	(localIds, syncData): UUID[] => {
 
 		const syncIds = new Set(syncData.map(s => s.id));
@@ -18,14 +18,14 @@ export const sltBookmarkLocalCreatedIds = createSelector(
 
 const localUpdatedBookmarkIds = createSelector(
 
-	sltBookmarkSyncDataArray,
+	selBookmarkSyncDataArray,
 	(syncData): SyncData[] => syncData.filter(s => s.updated)
 
 );
 
 const localDeletedBookmarkIds = createSelector(
 
-	sltBookmarkSyncDataArray,
+	selBookmarkSyncDataArray,
 	(syncData): SyncData[] => syncData.filter(s => s.deleted)
 
 );
@@ -39,15 +39,15 @@ const localErrorBookmarkIds = createSelector(
 		4) local item updated, remote item deleted
 	*/
 	
-	sltBookmarkSyncDataArray,
+	selBookmarkSyncDataArray,
 	(syncData): SyncData[] => syncData.filter(s => !!s.error)
 
 );
 
-export const sltBookmarkRemoteCreatedIds = createSelector(
+export const selBookmarkRemoteCreatedIds = createSelector(
 
-	sltBookmarkRemoteMetadataArray,
-	sltBookmarkSyncDataArray,
+	selBookmarkRemoteMetadataArray,
+	selBookmarkSyncDataArray,
 	(remoteMetaData, syncData): UUID[] => {
 
 		const syncIds = new Set(syncData.map(s => s.id));
@@ -59,8 +59,8 @@ export const sltBookmarkRemoteCreatedIds = createSelector(
 
 const remoteUpdatedBookmarkIds = createSelector(
 
-	sltBookmarkRemoteMetadataArray,
-	sltBookmarkSyncDataArray,
+	selBookmarkRemoteMetadataArray,
+	selBookmarkSyncDataArray,
 	(remoteMetaData, syncData): UUID[] => {
 
 		const syncIds = new Map<UUID, SyncData>();
@@ -80,8 +80,8 @@ const remoteUpdatedBookmarkIds = createSelector(
 
 const remoteDeletedBookmarkIds = createSelector(
 
-	sltBookmarkRemoteMetadataArray,
-	sltBookmarkSyncDataArray,
+	selBookmarkRemoteMetadataArray,
+	selBookmarkSyncDataArray,
 	(remoteMetaData, syncData): UUID[] => {
 
 		const remoteIds = new Set(remoteMetaData.map(r => r.id));
@@ -91,16 +91,16 @@ const remoteDeletedBookmarkIds = createSelector(
 
 );
 
-export const sltBookmarkStatsSummary = createSelector(
+export const selBookmarkStatsSummary = createSelector(
 
-	sltBookmarksIds,
-	sltBookmarkLocalCreatedIds,
+	selBookmarksIds,
+	selBookmarkLocalCreatedIds,
 	localUpdatedBookmarkIds,
 	localDeletedBookmarkIds,
-	sltBookmarkClickedCount,
+	selBookmarkClickedCount,
 	localErrorBookmarkIds,
-	sltBookmarkRemoteMetadataArray,
-	sltBookmarkRemoteCreatedIds,
+	selBookmarkRemoteMetadataArray,
+	selBookmarkRemoteCreatedIds,
 	remoteUpdatedBookmarkIds,
 	remoteDeletedBookmarkIds,
 	(localIds, localNew, localUpdated, localDeleted, clicked, localError, remoteIds, remoteNew, remoteUpdated, remoteDeleted): StatsSummary => ({

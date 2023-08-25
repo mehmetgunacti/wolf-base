@@ -8,8 +8,8 @@ import { fromEventPattern } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { downloadRemoteClicked, downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, loadRemoteMetadataSuccess, partialDownloadSuccess, partialUploadSuccess, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { sltBookmarkClicked } from 'store/selectors/bookmark-entities.selectors';
-import { sltBookmarkLocalCreatedIds, sltBookmarkRemoteCreatedIds } from 'store/selectors/bookmark-stats.selectors';
+import { selBookmarkClicked } from 'store/selectors/bookmark-entities.selectors';
+import { selBookmarkLocalCreatedIds, selBookmarkRemoteCreatedIds } from 'store/selectors/bookmark-stats.selectors';
 
 @Injectable()
 export class BookmarkRemoteEffects {
@@ -61,7 +61,7 @@ export class BookmarkRemoteEffects {
 		() => this.actions$.pipe(
 
 			ofType(downloadRemoteNew),
-			withLatestFrom(this.store.select(sltBookmarkRemoteCreatedIds)),
+			withLatestFrom(this.store.select(selBookmarkRemoteCreatedIds)),
 			map(([, ids]) => ids),
 			switchMap(async ids => {
 				const remoteData = await this.remoteStorage.bookmarks.downloadMany(ids);
@@ -79,7 +79,7 @@ export class BookmarkRemoteEffects {
 		() => this.actions$.pipe(
 
 			ofType(uploadLocalNew),
-			withLatestFrom(this.store.select(sltBookmarkLocalCreatedIds)),
+			withLatestFrom(this.store.select(selBookmarkLocalCreatedIds)),
 			map(([, ids]) => ids),
 			switchMap(async ids => {
 
@@ -106,7 +106,7 @@ export class BookmarkRemoteEffects {
 		() => this.actions$.pipe(
 
 			ofType(uploadLocalClicked),
-			withLatestFrom(this.store.select(sltBookmarkClicked)),
+			withLatestFrom(this.store.select(selBookmarkClicked)),
 			map(([, clicks]) => clicks),
 			switchMap(async clicks => {
 

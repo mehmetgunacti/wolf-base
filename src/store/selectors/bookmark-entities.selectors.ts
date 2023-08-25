@@ -1,51 +1,51 @@
 import { createSelector } from '@ngrx/store';
-import { sltBookmarkEntitiesState } from './bookmark.selectors';
+import { selBookmarkEntitiesState } from './bookmark.selectors';
 
-export const sltBookmarks = createSelector(
+export const selBookmarks = createSelector(
 
-	sltBookmarkEntitiesState,
+	selBookmarkEntitiesState,
 	entities => entities.entities
 
 );
 
-export const sltBookmarksIds = createSelector(
+export const selBookmarksIds = createSelector(
 
-	sltBookmarkEntitiesState,
+	selBookmarkEntitiesState,
 	state => Object.keys(state.entities)
 
 );
 
-export const sltBookmarksArray = createSelector(
+export const selBookmarksArray = createSelector(
 
-	sltBookmarkEntitiesState,
+	selBookmarkEntitiesState,
 	state => Object.values(state.entities).map(b => ({ ...b, clicks: state.clicks[b.id]?.total ?? 0 }))
 
 );
 
-export const sltBookmarksCount = createSelector(
+export const selBookmarksCount = createSelector(
 
-	sltBookmarksIds,
+	selBookmarksIds,
 	ids => ids.length
 
 );
 
-export const sltBookmark = createSelector(
+export const selBookmark = createSelector(
 
-	sltBookmarkEntitiesState,
+	selBookmarkEntitiesState,
 	state => state.selected ? state.entities[state.selected] : null
 
 );
 
-export const sltBookmarkClicked = createSelector(
+export const selBookmarkClicked = createSelector(
 
-	sltBookmarkEntitiesState,
+	selBookmarkEntitiesState,
 	state => Object.values(state.clicks).filter(c => c.current > 0)
 
 );
 
-export const sltBookmarkClickedCount = createSelector(
+export const selBookmarkClickedCount = createSelector(
 
-	sltBookmarkClicked,
+	selBookmarkClicked,
 	list => list.length
 
 );

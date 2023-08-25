@@ -1,32 +1,32 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { BookmarkModuleState } from 'store/states/bookmark.state';
 
-const sltBookmarkModuleState = createFeatureSelector<BookmarkModuleState>('bookmark');
+const selBookmarkModuleState = createFeatureSelector<BookmarkModuleState>('bookmark');
 
-export const sltBookmarkEntitiesState = createSelector(
+export const selBookmarkEntitiesState = createSelector(
 
-    sltBookmarkModuleState,
+    selBookmarkModuleState,
     state => state.entities
 
 );
 
-export const sltBookmarkUIState = createSelector(
+export const selBookmarkUIState = createSelector(
 
-    sltBookmarkModuleState,
+    selBookmarkModuleState,
     state => state.ui
 
 );
 
-export const sltBookmarkTagsState = createSelector(
+export const selBookmarkTagsState = createSelector(
 
-    sltBookmarkModuleState,
+    selBookmarkModuleState,
     state => state.tags
 
 );
 
-export const sltBookmarkSyncState = createSelector(
+export const selBookmarkSyncState = createSelector(
 
-    sltBookmarkModuleState,
+    selBookmarkModuleState,
     state => state.sync
 
 );

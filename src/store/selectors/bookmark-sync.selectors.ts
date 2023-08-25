@@ -1,16 +1,16 @@
 import { createSelector } from '@ngrx/store';
-import { sltBookmarkSyncState } from './bookmark.selectors';
+import { selBookmarkSyncState } from './bookmark.selectors';
 
-export const sltBookmarkSyncDataArray = createSelector(
+export const selBookmarkSyncDataArray = createSelector(
 
-	sltBookmarkSyncState,
+	selBookmarkSyncState,
 	state => state.syncData
 
 );
 
-export const sltBookmarkRemoteMetadataArray = createSelector(
+export const selBookmarkRemoteMetadataArray = createSelector(
 
-	sltBookmarkSyncState,
+	selBookmarkSyncState,
 	state => state.remoteMetadata
 
 );
