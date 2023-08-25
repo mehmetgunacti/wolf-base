@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StatsSummary } from 'lib';
 import { Observable } from 'rxjs';
-import { downloadRemoteNew, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
+import { downloadRemoteClicked, downloadRemoteNew, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
 import { sltBookmarkStatsSummary } from 'store/selectors/bookmark-stats.selectors';
 
 @Component({
@@ -67,6 +67,12 @@ export class StatsSummaryContainerComponent {
 	onViewErrors(): void {
 
 		this.store.dispatch(uploadLocalClicked());
+
+	}
+
+	onDownloadRemoteClicked(): void {
+
+		this.store.dispatch(downloadRemoteClicked());
 
 	}
 

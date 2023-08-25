@@ -32,6 +32,13 @@ const localDeletedBookmarkIds = createSelector(
 
 const localErrorBookmarkIds = createSelector(
 
+	/*
+		1) local item deleted, remote item updated
+		2) local item updated, remote item updated
+		3) local item deleted, remote item deleted
+		4) local item updated, remote item deleted
+	*/
+	
 	sltBookmarkSyncDataArray,
 	(syncData): SyncData[] => syncData.filter(s => !!s.error)
 

@@ -6,7 +6,7 @@ import { liveQuery } from 'dexie';
 import { LocalStorageService, RemoteMetadata, RemoteStorageService } from 'lib';
 import { fromEventPattern } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, loadRemoteMetadataSuccess, partialDownloadSuccess, partialUploadSuccess, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
+import { downloadRemoteClicked, downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, loadRemoteMetadataSuccess, partialDownloadSuccess, partialUploadSuccess, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { sltBookmarkClicked } from 'store/selectors/bookmark-entities.selectors';
 import { sltBookmarkLocalCreatedIds, sltBookmarkRemoteCreatedIds } from 'store/selectors/bookmark-stats.selectors';
@@ -120,6 +120,24 @@ export class BookmarkRemoteEffects {
 				
 			}),
 			map(count => partialUploadSuccess({ count }))
+
+		)
+
+	);
+
+	downloadRemoteClicked$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(downloadRemoteClicked),
+			switchMap(async () => {
+
+					const clicks = await this.remoteStorage.clicks.downloadMany();
+					await this.localStorage.clicks.putAll(clicks);
+					return clicks.length;
+				
+			}),
+			map(count => partialDownloadSuccess({ count }))
 
 		)
 

@@ -13,6 +13,7 @@ export class StatsSummaryComponent {
 	@Output() downloadRemoteNew = new EventEmitter<void>();
 	@Output() uploadLocalNew = new EventEmitter<void>();
 	@Output() uploadLocalClicked = new EventEmitter<void>();
+	@Output() downloadRemoteClicked = new EventEmitter<void>();
 	@Output() viewRemoteDeleted = new EventEmitter<void>();
 	@Output() viewRemoteUpdated = new EventEmitter<void>();
 	@Output() uploadLocalUpdated = new EventEmitter<void>();
@@ -34,6 +35,12 @@ export class StatsSummaryComponent {
 	onUploadLocalClicked(): void {
 
 		this.uploadLocalClicked.emit();
+
+	}
+
+	onDownloadRemoteClicked(): void {
+
+		this.downloadRemoteClicked.emit();
 
 	}
 

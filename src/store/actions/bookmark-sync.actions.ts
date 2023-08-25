@@ -12,6 +12,7 @@ export const uploadLocalNew = createAction('[Bookmark Sync] Upload Local New');
 export const uploadLocalNewSuccess = createAction('[Bookmark Sync] Upload Local New Success', props<{ count: number }>());
 
 export const uploadLocalClicked = createAction('[Bookmark Sync] Upload Local Clicked');
+export const downloadRemoteClicked = createAction('[Bookmark Sync] Download Remote Clicked');
 
 export const downloadRemoteNew = createAction('[Bookmark Sync] Download Remote New');
 
