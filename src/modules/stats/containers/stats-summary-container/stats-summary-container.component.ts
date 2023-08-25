@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StatsSummary } from 'lib';
 import { Observable } from 'rxjs';
-import { downloadRemoteClicked, downloadRemoteNew, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
+import { downloadRemoteClicks, downloadRemoteNew, uploadLocalClicked, uploadLocalDeleted, uploadLocalNew, uploadLocalUpdated, viewLocalDeletedRemoteDeleted, viewLocalDeletedRemoteUpdated, viewLocalUpdatedRemoteDeleted, viewLocalUpdatedRemoteUpdated, viewRemoteDeleted, viewRemoteUpdated } from 'store/actions/bookmark-sync.actions';
 import { selBookmarkStatsSummary } from 'store/selectors/bookmark-stats.selectors';
 
 @Component({
@@ -42,37 +42,55 @@ export class StatsSummaryContainerComponent {
 
 	onViewRemoteDeleted(): void {
 
-		this.store.dispatch(uploadLocalClicked());
+		this.store.dispatch(viewRemoteDeleted());
 
 	}
 
 	onViewRemoteUpdated(): void {
 
-		this.store.dispatch(uploadLocalClicked());
+		this.store.dispatch(viewRemoteUpdated());
 
 	}
 
 	onUploadLocalUpdated(): void {
 
-		this.store.dispatch(uploadLocalClicked());
+		this.store.dispatch(uploadLocalUpdated());
 
 	}
 
 	onUploadLocalDeleted(): void {
 
-		this.store.dispatch(uploadLocalClicked());
+		this.store.dispatch(uploadLocalDeleted());
 
 	}
 
-	onViewErrors(): void {
+	onDownloadRemoteClicks(): void {
 
-		this.store.dispatch(uploadLocalClicked());
+		this.store.dispatch(downloadRemoteClicks());
 
 	}
 
-	onDownloadRemoteClicked(): void {
+	onViewLocalUpdatedRemoteUpdated(): void {
 
-		this.store.dispatch(downloadRemoteClicked());
+		this.store.dispatch(viewLocalUpdatedRemoteUpdated());
+
+	}
+
+	onViewLocalDeletedRemoteDeleted(): void {
+
+		this.store.dispatch(viewLocalDeletedRemoteDeleted());
+
+	}
+
+	onViewLocalUpdatedRemoteDeleted(): void {
+
+		this.store.dispatch(viewLocalUpdatedRemoteDeleted());
+
+	}
+
+	onViewLocalDeletedRemoteUpdated(): void {
+
+		this.store.dispatch(viewLocalDeletedRemoteUpdated());
 
 	}
 

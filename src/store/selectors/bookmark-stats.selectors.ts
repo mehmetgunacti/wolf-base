@@ -16,31 +16,17 @@ export const selBookmarkLocalCreatedIds = createSelector(
 
 );
 
-const localUpdatedBookmarkIds = createSelector(
+const bookmarkLocalUpdated = createSelector(
 
 	selBookmarkSyncDataArray,
 	(syncData): SyncData[] => syncData.filter(s => s.updated)
 
 );
 
-const localDeletedBookmarkIds = createSelector(
+const bookmarklocalDeleted = createSelector(
 
 	selBookmarkSyncDataArray,
 	(syncData): SyncData[] => syncData.filter(s => s.deleted)
-
-);
-
-const localErrorBookmarkIds = createSelector(
-
-	/*
-		1) local item deleted, remote item updated
-		2) local item updated, remote item updated
-		3) local item deleted, remote item deleted
-		4) local item updated, remote item deleted
-	*/
-	
-	selBookmarkSyncDataArray,
-	(syncData): SyncData[] => syncData.filter(s => !!s.error)
 
 );
 
@@ -91,31 +77,60 @@ const remoteDeletedBookmarkIds = createSelector(
 
 );
 
+const localErrorBookmarkIds1 = createSelector(
+
+	/*
+		1) local item deleted, remote item updated
+		2) local item updated, remote item updated
+		3) local item deleted, remote item deleted
+		4) local item updated, remote item deleted
+	*/
+	
+	selBookmarkSyncDataArray,
+	// localUpdatedBookmarkIds,
+	// localDeletedBookmarkIds,
+	remoteUpdatedBookmarkIds,
+	remoteDeletedBookmarkIds,
+	(syncData, remoteUpdated, remoteDeleted): SyncData[] => {
+
+		return syncData.filter(s => {
+
+			s
+
+		});
+
+	}
+
+);
+
 export const selBookmarkStatsSummary = createSelector(
 
 	selBookmarksIds,
 	selBookmarkLocalCreatedIds,
-	localUpdatedBookmarkIds,
-	localDeletedBookmarkIds,
+	bookmarkLocalUpdated,
+	bookmarklocalDeleted,
 	selBookmarkClickedCount,
-	localErrorBookmarkIds,
 	selBookmarkRemoteMetadataArray,
 	selBookmarkRemoteCreatedIds,
 	remoteUpdatedBookmarkIds,
 	remoteDeletedBookmarkIds,
-	(localIds, localNew, localUpdated, localDeleted, clicked, localError, remoteIds, remoteNew, remoteUpdated, remoteDeleted): StatsSummary => ({
+	(localIds, localNew, localUpdated, localDeleted, clicked, remoteIds, remoteNew, remoteUpdated, remoteDeleted): StatsSummary => ({
 
 		localTotal: localIds.length,
 		localNew: localNew.length,
 		localUpdated: localUpdated.length,
 		localDeleted: localDeleted.length,
 		localClicked: clicked,
-		localError: localError.length,
 
 		remoteTotal: remoteIds.length,
 		remoteNew: remoteNew.length,
 		remoteUpdated: remoteUpdated.length,
-		remoteDeleted: remoteDeleted.length
+		remoteDeleted: remoteDeleted.length,
+
+		localUpdatedRemoteUpdated: 0,
+		localDeletedRemoteDeleted: 0,
+		localUpdatedRemoteDeleted: 0,
+		localDeletedRemoteUpdated: 0
 
 	})
 

@@ -10,15 +10,22 @@ export class StatsSummaryComponent {
 
 	@Input() summary: StatsSummary | undefined | null;
 
-	@Output() downloadRemoteNew = new EventEmitter<void>();
 	@Output() uploadLocalNew = new EventEmitter<void>();
+	@Output() downloadRemoteNew = new EventEmitter<void>();
+
 	@Output() uploadLocalClicked = new EventEmitter<void>();
-	@Output() downloadRemoteClicked = new EventEmitter<void>();
+	@Output() downloadRemoteClicks = new EventEmitter<void>();
+
 	@Output() viewRemoteDeleted = new EventEmitter<void>();
 	@Output() viewRemoteUpdated = new EventEmitter<void>();
+
 	@Output() uploadLocalUpdated = new EventEmitter<void>();
 	@Output() uploadLocalDeleted = new EventEmitter<void>();
-	@Output() viewErrors = new EventEmitter<void>();
+
+	@Output() viewLocalUpdatedRemoteUpdated = new EventEmitter<void>();
+	@Output() viewLocalDeletedRemoteDeleted = new EventEmitter<void>();
+	@Output() viewLocalUpdatedRemoteDeleted = new EventEmitter<void>();
+	@Output() viewLocalDeletedRemoteUpdated = new EventEmitter<void>();
 
 	onDownloadRemoteNew(): void {
 
@@ -38,9 +45,9 @@ export class StatsSummaryComponent {
 
 	}
 
-	onDownloadRemoteClicked(): void {
+	onDownloadRemoteClicks(): void {
 
-		this.downloadRemoteClicked.emit();
+		this.downloadRemoteClicks.emit();
 
 	}
 
@@ -68,9 +75,27 @@ export class StatsSummaryComponent {
 
 	}
 
-	onViewErrors(): void {
+	onViewUpdatedUpdated(): void {
 
-		this.viewErrors.emit();
+		this.viewLocalUpdatedRemoteUpdated.emit();
+
+	}
+
+	onViewDeletedDeleted(): void {
+
+		this.viewLocalDeletedRemoteDeleted.emit();
+
+	}
+
+	onViewUpdatedDeleted(): void {
+
+		this.viewLocalUpdatedRemoteDeleted.emit();
+
+	}
+
+	onViewDeletedUpdated(): void {
+
+		this.viewLocalDeletedRemoteUpdated.emit();
 
 	}
 

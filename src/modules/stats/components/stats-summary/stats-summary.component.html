@@ -24,11 +24,31 @@
 
 		<div th>Clicked</div>
 		<div>{{ summary.localClicked }} <p-button *ngIf="summary.localClicked > 0" icon="pi pi-cloud-upload" styleClass="p-button-rounded p-button-text green" (click)="onUploadLocalClicked()"></p-button></div>
-		<div><p-button *ngIf="summary.localClicked === 0" icon="pi pi-cloud-download" label="All" styleClass="p-button-rounded p-button-text green" (click)="onDownloadRemoteClicked()"></p-button></div>
+		<div><p-button *ngIf="summary.localClicked === 0" icon="pi pi-cloud-download" label="All" styleClass="p-button-rounded p-button-text green" (click)="onDownloadRemoteClicks()"></p-button></div>
 
-		<div th>Conflicts</div>
-		<div>{{ summary.localError }} <p-button *ngIf="summary.localError > 0" icon="pi pi-eye" styleClass="p-button-rounded p-button-text red" (click)="onViewErrors()"></p-button></div>
 		<div></div>
+		<div th>Conflicts</div>
+		<div></div>
+
+		<div th>Local</div>
+		<div th>Remote</div>
+		<div></div>
+
+		<div>Updated</div>
+		<div>Updated</div>
+		<div>{{ summary.localUpdatedRemoteUpdated }} <p-button *ngIf="summary.localUpdatedRemoteUpdated > 0" icon="pi pi-eye" styleClass="p-button-rounded p-button-text orange" (click)="onViewUpdatedUpdated()"></p-button></div>
+
+		<div>Deleted</div>
+		<div>Deleted</div>
+		<div>{{ summary.localDeletedRemoteDeleted }} <p-button *ngIf="summary.localDeletedRemoteDeleted > 0" icon="pi pi-eye" styleClass="p-button-rounded p-button-text orange" (click)="onViewDeletedDeleted()"></p-button></div>
+
+		<div>Updated</div>
+		<div>Deleted</div>
+		<div>{{ summary.localUpdatedRemoteDeleted }} <p-button *ngIf="summary.localUpdatedRemoteDeleted > 0" icon="pi pi-eye" styleClass="p-button-rounded p-button-text orange" (click)="onViewUpdatedDeleted()"></p-button></div>
+
+		<div>Deleted</div>
+		<div>Updated</div>
+		<div>{{ summary.localDeletedRemoteUpdated }} <p-button *ngIf="summary.localDeletedRemoteUpdated > 0" icon="pi pi-eye" styleClass="p-button-rounded p-button-text orange" (click)="onViewDeletedUpdated()"></p-button></div>
 
 	</div>
 

@@ -6,7 +6,7 @@ import { liveQuery } from 'dexie';
 import { LocalStorageService, RemoteMetadata, RemoteStorageService } from 'lib';
 import { fromEventPattern } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { downloadRemoteClicked, downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, loadRemoteMetadataSuccess, partialDownloadSuccess, partialUploadSuccess, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
+import { downloadRemoteClicks, downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, loadRemoteMetadataSuccess, partialDownloadSuccess, partialUploadSuccess, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { selBookmarkClicked } from 'store/selectors/bookmark-entities.selectors';
 import { selBookmarkLocalCreatedIds, selBookmarkRemoteCreatedIds } from 'store/selectors/bookmark-stats.selectors';
@@ -129,7 +129,7 @@ export class BookmarkRemoteEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(downloadRemoteClicked),
+			ofType(downloadRemoteClicks),
 			switchMap(async () => {
 
 					const clicks = await this.remoteStorage.clicks.downloadMany();
