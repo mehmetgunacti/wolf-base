@@ -1,11 +1,11 @@
 import { createSelector } from '@ngrx/store';
 import { Bookmark, Tag } from 'lib';
-import { selBookmarksArray } from './bookmark-entities.selectors';
+import { selBookmarkArray } from './bookmark-entities.selectors';
 import { selBookmarkTagsState } from './bookmark.selectors';
 
 const arrayOfTagNames = createSelector(
 
-	selBookmarksArray,
+	selBookmarkArray,
 	(bookmarks): string[][] => bookmarks.map(b => b.tags)
 
 );
@@ -59,7 +59,7 @@ export const searchTerm = createSelector(
 // move to entities.selector.ts
 export const filteredBookmarks = createSelector(
 
-	selBookmarksArray,
+	selBookmarkArray,
 	selectedTags,
 	searchTerm,
 	(bookmarks, tags, term): Bookmark[] => {

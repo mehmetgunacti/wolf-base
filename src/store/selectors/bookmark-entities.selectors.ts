@@ -8,14 +8,14 @@ export const selBookmarks = createSelector(
 
 );
 
-export const selBookmarksIds = createSelector(
+export const selBookmarkIds = createSelector(
 
 	selBookmarkEntitiesState,
 	state => Object.keys(state.entities)
 
 );
 
-export const selBookmarksArray = createSelector(
+export const selBookmarkArray = createSelector(
 
 	selBookmarkEntitiesState,
 	state => Object.values(state.entities).map(b => ({ ...b, clicks: state.clicks[b.id]?.total ?? 0 }))
@@ -24,7 +24,7 @@ export const selBookmarksArray = createSelector(
 
 export const selBookmarksCount = createSelector(
 
-	selBookmarksIds,
+	selBookmarkIds,
 	ids => ids.length
 
 );
