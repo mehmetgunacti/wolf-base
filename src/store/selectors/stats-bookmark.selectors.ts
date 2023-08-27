@@ -1,6 +1,6 @@
 import { createSelector } from "@ngrx/store";
-import { StatsSummary, SyncData, UUID } from "lib";
-import { selBookmarkClickedCount, selBookmarkIds } from "./bookmark-entities.selectors";
+import { RemoteMetadata, StatsSummary, SyncData, UUID } from "lib";
+import { selBookmarkClicked, selBookmarkIds } from "./bookmark-entities.selectors";
 import { selBookmarkRemoteMetadataArray, selBookmarkRemoteMetadataMap, selBookmarkSyncDataArray, selBookmarkSyncDataMap } from "./bookmark-sync.selectors";
 
 export const selBookmarkLocalCreatedIds = createSelector(
@@ -31,36 +31,35 @@ const bookmarklocalDeleted = createSelector(
 
 );
 
-export const selBookmarkRemoteCreatedIds = createSelector(
+export const selBookmarkRemoteCreated = createSelector(
 
 	selBookmarkRemoteMetadataArray,
 	selBookmarkSyncDataMap,
-	(remote, local): UUID[] =>
-		remote
-			.filter(r => !local[r.id])
-			.map(r => r.id)
+	(remote, local): RemoteMetadata[] => remote.filter(r => !local[r.id])
 
 );
 
-const remoteUpdatedBookmarkIds = createSelector(
+const remoteUpdatedBookmark = createSelector(
 
 	selBookmarkRemoteMetadataArray,
 	selBookmarkSyncDataMap,
-	(remote, local): UUID[] =>
-		remote
-			.filter(r => !local[r.id].deleted && !local[r.id].updated && local[r.id].updateTime !== r.updateTime)
-			.map(r => r.id)
+	(remote, local): RemoteMetadata[] => remote.filter(
+
+		r => !local[r.id].deleted && !local[r.id].updated && local[r.id].updateTime !== r.updateTime
+
+	)
 
 );
 
-const remoteDeletedBookmarkIds = createSelector(
+const remoteDeletedBookmark = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(local, remote): UUID[] =>
-		local
-			.filter(sd => !sd.updated && !sd.deleted && !remote[sd.id])
-			.map(r => r.id)
+	(local, remote): RemoteMetadata[] => local.filter(
+
+		sd => !sd.updated && !sd.deleted && !remote[sd.id]
+
+	)
 
 );
 
@@ -68,10 +67,11 @@ const localUpdatedRemoteUpdated = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(local, remote): UUID[] =>
-		local
-			.filter(sd => !sd.deleted && sd.updated && remote[sd.id] && remote[sd.id].updateTime !== sd.updateTime)
-			.map(sd => sd.id)
+	(local, remote): SyncData[] => local.filter(
+
+		sd => !sd.deleted && sd.updated && remote[sd.id] && remote[sd.id].updateTime !== sd.updateTime
+
+	)
 
 );
 
@@ -79,10 +79,11 @@ const localDeletedRemoteDeleted = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(local, remote): UUID[] =>
-		local
-			.filter(sd => sd.deleted && !remote[sd.id])
-			.map(sd => sd.id)
+	(local, remote): SyncData[] => local.filter(
+
+		sd => sd.deleted && !remote[sd.id]
+
+	)
 
 );
 
@@ -90,10 +91,11 @@ const localUpdatedRemoteDeleted = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(local, remote): UUID[] =>
-		local
-			.filter(sd => sd.updated && !remote[sd.id])
-			.map(sd => sd.id)
+	(local, remote): SyncData[] => local.filter(
+
+		sd => sd.updated && !remote[sd.id]
+
+	)
 
 );
 
@@ -101,10 +103,11 @@ const localDeletedRemoteUpdated = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(local, remote): UUID[] =>
-		local
-			.filter(sd => sd.deleted && remote[sd.id] && remote[sd.id].updateTime !== sd.updateTime)
-			.map(sd => sd.id)
+	(local, remote): SyncData[] => local.filter(
+
+		sd => sd.deleted && remote[sd.id] && remote[sd.id].updateTime !== sd.updateTime
+
+	)
 
 );
 
@@ -114,32 +117,32 @@ export const selBookmarkStatsSummary = createSelector(
 	selBookmarkLocalCreatedIds,
 	bookmarkLocalUpdated,
 	bookmarklocalDeleted,
-	selBookmarkClickedCount,
+	selBookmarkClicked,
 	selBookmarkRemoteMetadataArray,
-	selBookmarkRemoteCreatedIds,
-	remoteUpdatedBookmarkIds,
-	remoteDeletedBookmarkIds,
+	selBookmarkRemoteCreated,
+	remoteUpdatedBookmark,
+	remoteDeletedBookmark,
 	localUpdatedRemoteUpdated,
-	localDeletedRemoteDeleted,
+	localDeletedRemoteDeleted, 
 	localUpdatedRemoteDeleted,
 	localDeletedRemoteUpdated,
-	(localIds, localNew, localUpdated, localDeleted, clicked, remoteIds, remoteNew, remoteUpdated, remoteDeleted, localUpdatedRemoteUpdated, localDeletedRemoteDeleted, localUpdatedRemoteDeleted, localDeletedRemoteUpdated): StatsSummary => ({
+	(localTotal, localNew, localUpdated, localDeleted, localClicked, remoteTotal, remoteNew, remoteUpdated, remoteDeleted, localUpdatedRemoteUpdated, localDeletedRemoteDeleted, localUpdatedRemoteDeleted, localDeletedRemoteUpdated): StatsSummary => ({
 
-		localTotal: localIds.length,
-		localNew: localNew.length,
-		localUpdated: localUpdated.length,
-		localDeleted: localDeleted.length,
-		localClicked: clicked,
+		localTotal,
+		localNew,
+		localUpdated,
+		localDeleted,
+		localClicked,
 
-		remoteTotal: remoteIds.length,
-		remoteNew: remoteNew.length,
-		remoteUpdated: remoteUpdated.length,
-		remoteDeleted: remoteDeleted.length,
+		remoteTotal,
+		remoteNew,
+		remoteUpdated,
+		remoteDeleted,
 
-		localUpdatedRemoteUpdated: localUpdatedRemoteUpdated.length,
-		localDeletedRemoteDeleted: localDeletedRemoteDeleted.length,
-		localUpdatedRemoteDeleted: localUpdatedRemoteDeleted.length,
-		localDeletedRemoteUpdated: localDeletedRemoteUpdated.length
+		localUpdatedRemoteUpdated,
+		localDeletedRemoteDeleted,
+		localUpdatedRemoteDeleted,
+		localDeletedRemoteUpdated
 
 	})
 

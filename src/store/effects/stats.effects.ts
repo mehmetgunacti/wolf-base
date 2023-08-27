@@ -4,7 +4,7 @@ import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { Bookmark, LocalStorageService, RemoteData, RemoteStorageService } from 'lib';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { downloadRemoteData, downloadRemoteDataFailure, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem } from 'store/actions/stats-bookmark.actions';
+import { downloadRemoteData, downloadRemoteDataFailure, downloadRemoteDataSuccess, loadEntitySuccess, loadTrashEntitySuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem } from 'store/actions/stats-bookmark.actions';
 
 @Injectable()
 export class StatsEffects {
@@ -12,46 +12,6 @@ export class StatsEffects {
 	private actions$: Actions = inject(Actions);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 	private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
-
-	loadFirstConflict$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(loadFirstConflict),
-			switchMap(() => this.localStorage.bookmarks.listSyncData()),
-			map(list => list.filter(syncData => syncData.error)),
-			map(list => list[0]),
-			map(syncData => syncData ? loadFirstConflictSuccess({ syncData }) : showNotification({ severity: 'info', detail: 'No conflict found' }))
-
-		)
-
-	);
-
-	loadEntity$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(loadFirstConflictSuccess),
-			map(({ syncData }) => syncData.id),
-			switchMap(id => this.localStorage.bookmarks.get(id)),
-			map(item => item ? loadItemSuccess({ item }) : showNotification({ severity: 'info', detail: 'Item not in local table' }))
-
-		)
-
-	);
-
-	loadTrashItem$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(loadFirstConflictSuccess),
-			map(({ syncData }) => syncData.id),
-			switchMap(id => this.localStorage.bookmarks.getTrashItem(id)),
-			map(item => loadTrashItemSuccess({ item }))
-
-		)
-
-	);
 
 	downloadRemoteData$ = createEffect(
 

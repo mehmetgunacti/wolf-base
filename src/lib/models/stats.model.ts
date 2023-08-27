@@ -1,19 +1,24 @@
+import { UUID } from "lib/constants";
+import { SyncData } from "./sync.model";
+import { Click } from "./bookmark.model";
+import { RemoteMetadata } from "./remote.model";
+
 export interface StatsSummary {
 
-	localNew: number;
-	localUpdated: number;
-	localDeleted: number;
-	localTotal: number;
-	localClicked: number;
+	localNew: UUID[];
+	localUpdated: SyncData[];
+	localDeleted: SyncData[];
+	localTotal: UUID[];
+	localClicked: Click[];
 
-	remoteNew: number;
-	remoteUpdated: number;
-	remoteDeleted: number;
-	remoteTotal: number;
+	remoteNew: RemoteMetadata[];
+	remoteUpdated: RemoteMetadata[];
+	remoteDeleted: RemoteMetadata[];
+	remoteTotal: RemoteMetadata[];
 
-	localUpdatedRemoteUpdated: number;
-	localDeletedRemoteDeleted: number;
-	localUpdatedRemoteDeleted: number;
-	localDeletedRemoteUpdated: number;
+	localUpdatedRemoteUpdated: SyncData[];
+	localDeletedRemoteDeleted: SyncData[];
+	localUpdatedRemoteDeleted: SyncData[];
+	localDeletedRemoteUpdated: SyncData[];
 
 }

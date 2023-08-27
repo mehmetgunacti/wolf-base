@@ -1,11 +1,11 @@
-import { Entity, RemoteData, SyncData, SyncLog, SyncMessage } from "lib";
+import { Entity, RemoteData, SyncData } from "lib";
 
 export interface StatsModuleState {
 
+	selectedEntity: Entity | null;
 	selectedSyncData: SyncData | null;
 	selectedRemoteData: RemoteData<Entity> | null;
-	selectedItem: Entity | null;
-	selectedTrashItem: Entity | null;
+	selectedTrashEntity: Entity | null;
 
 	conflictDialogVisible: boolean;
 
@@ -13,10 +13,11 @@ export interface StatsModuleState {
 
 export const initialStatsState: StatsModuleState = {
 
-	conflictDialogVisible: false,
 	selectedSyncData: null,
-	selectedItem:  null,
-	selectedTrashItem: null,
-	selectedRemoteData: null
+	selectedEntity:  null,
+	selectedTrashEntity: null,
+	selectedRemoteData: null,
+	
+	conflictDialogVisible: false
 
 };

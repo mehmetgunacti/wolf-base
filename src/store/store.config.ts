@@ -14,6 +14,7 @@ import { BookmarkRemoteEffects } from './effects/bookmark-remote.effects';
 import { statsReducer } from './reducers/stats.reducer';
 import { CoreSettingsEffects } from './effects/core-settings.effects';
 import { StatsEffects } from './effects/stats.effects';
+import { SettingsEffects } from './effects/settings.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -52,6 +53,9 @@ export const effects = [
 
 	// Stats
 	StatsEffects,
+
+	// Settings
+	SettingsEffects
 
 ];
 

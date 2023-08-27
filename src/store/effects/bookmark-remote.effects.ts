@@ -9,7 +9,7 @@ import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { downloadRemoteClicks, downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, loadRemoteMetadataSuccess, partialDownloadSuccess, partialUploadSuccess, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { selBookmarkClicked } from 'store/selectors/bookmark-entities.selectors';
-import { selBookmarkLocalCreatedIds, selBookmarkRemoteCreatedIds } from 'store/selectors/stats-bookmark.selectors';
+import { selBookmarkLocalCreatedIds, selBookmarkRemoteCreated } from 'store/selectors/stats-bookmark.selectors';
 
 @Injectable()
 export class BookmarkRemoteEffects {
@@ -61,8 +61,8 @@ export class BookmarkRemoteEffects {
 		() => this.actions$.pipe(
 
 			ofType(downloadRemoteNew),
-			withLatestFrom(this.store.select(selBookmarkRemoteCreatedIds)),
-			map(([, ids]) => ids),
+			withLatestFrom(this.store.select(selBookmarkRemoteCreated)),
+			map(([, remoteMetadata]) => remoteMetadata.map(rmd => rmd.id )),
 			switchMap(async ids => {
 				const remoteData = await this.remoteStorage.bookmarks.downloadMany(ids);
 				await this.localStorage.bookmarks.putAll(remoteData);

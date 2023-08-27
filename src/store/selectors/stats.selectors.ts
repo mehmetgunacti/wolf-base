@@ -13,14 +13,14 @@ export const selStatsSelectedConflict = createSelector(
 export const selStatsSelectedItem = createSelector(
 
 	selStatsModuleState,
-	state => state.selectedItem
+	state => state.selectedEntity
 
 );
 
 export const selStatsSelectedTrashItem = createSelector(
 
 	selStatsModuleState,
-	state => state.selectedTrashItem
+	state => state.selectedTrashEntity
 
 );
 
