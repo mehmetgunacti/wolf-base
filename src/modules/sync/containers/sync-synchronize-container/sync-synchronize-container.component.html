@@ -1,8 +1,0 @@
-<p-confirmDialog></p-confirmDialog>
-
-<app-sync-synchronize
-	[syncLogs]="syncLogs$ | async"
-	[syncMessages]="messages$ | async"
-	(start)="onStart()"
-	(clear)="onClear()"
-	(syncIndex)="onSyncIndex($event)"></app-sync-synchronize>

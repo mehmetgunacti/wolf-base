@@ -1,60 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
-import { liveQuery } from 'dexie';
-import { Bookmark, LocalStorageService, RemoteData, RemoteStorageService, SyncLog } from 'lib';
-import { BackupDatabase } from 'lib/utils/database.util';
-import { fromEventPattern } from 'rxjs';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
-import { SyncService } from 'services/sync.service';
+import { Bookmark, LocalStorageService, RemoteData, RemoteStorageService } from 'lib';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { saveFirestoreConfigSuccess, saveTitleLookupSuccess } from 'store/actions/core.actions';
-import { clearSyncLogs, downloadRemoteData, downloadRemoteDataFailure, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadSyncLogsSuccess, loadSyncMessages, loadSyncMessagesSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem, syncBackupDatabase, syncTrigger } from 'store/actions/sync.actions';
+import { downloadRemoteData, downloadRemoteDataFailure, downloadRemoteDataSuccess, loadFirstConflict, loadFirstConflictSuccess, loadItemSuccess, loadTrashItemSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem } from 'store/actions/stats-bookmark.actions';
 
 @Injectable()
-export class SyncEffects {
+export class StatsEffects {
 
 	private actions$: Actions = inject(Actions);
-	private syncService: SyncService = inject(SyncService);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 	private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
-
-	loadSyncLogs$ = createEffect(
-
-		() => fromEventPattern<SyncLog[]>(
-
-			(handler) => liveQuery(() => this.localStorage.syncLog.list()).subscribe(handler),
-			(handler, unsubscribe) => unsubscribe()
-
-		).pipe(
-			map(syncLogs => loadSyncLogsSuccess({ syncLogs }))
-		)
-
-	);
-
-	loadSyncMessages$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(loadSyncMessages),
-			switchMap(({ syncLogId }) => this.localStorage.syncLog.messages(syncLogId)),
-			map(messages => loadSyncMessagesSuccess({ messages }))
-
-		)
-
-	);
-
-	clearSyncLogs$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(clearSyncLogs),
-			switchMap(() => this.localStorage.syncLog.clear()),
-			map(() => showNotification({ severity: 'info', detail: 'All logs cleared' }))
-
-		)
-
-	);
 
 	loadFirstConflict$ = createEffect(
 
@@ -70,7 +27,7 @@ export class SyncEffects {
 
 	);
 
-	loadItem$ = createEffect(
+	loadEntity$ = createEffect(
 
 		() => this.actions$.pipe(
 
@@ -120,40 +77,6 @@ export class SyncEffects {
 
 	);
 
-	syncTrigger$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(syncTrigger),
-			tap(() => this.syncService.trigger())
-
-		),
-		{ dispatch: false }
-
-	);
-
-	saveFirestoreConfigSuccess$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(saveFirestoreConfigSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Configuration saved' }))
-
-		)
-
-	);
-
-	saveTitleLookupConfigSuccess$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(saveTitleLookupSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Configuration saved' }))
-
-		)
-
-	);
-
 	purgeLocalItem$ = createEffect(
 
 		() => this.actions$.pipe(
@@ -198,18 +121,6 @@ export class SyncEffects {
 			switchMap(({ entity }) => this.remoteStorage.bookmarks.upload(entity as Bookmark)),
 			switchMap(remoteData => this.localStorage.bookmarks.put(remoteData)),
 			map(() => showNotification({ severity: 'success', detail: 'Remote item updated' }))
-
-		)
-
-	);
-
-	generateZip$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(syncBackupDatabase),
-			switchMap(() => new BackupDatabase(this.localStorage).execute()),
-			map(() => syncTrigger())
 
 		)
 

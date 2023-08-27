@@ -25,10 +25,6 @@ const routes: Routes = [
 				loadChildren: () => import('modules/stats/stats.module').then(m => m.StatsModule)
 			},
 			{
-				path: 'sync',
-				loadChildren: () => import('modules/sync/sync.module').then(m => m.SyncModule)
-			},
-			{
 				path: 'settings',
 				loadChildren: () => import('modules/settings/settings.module').then(m => m.SettingsModule)
 			},

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { saveTitleLookup } from 'store/actions/core.actions';
+import { saveTitleLookup } from 'store/actions/settings.actions';
 import { titleLookup } from 'store/selectors/core-configuration.selectors';
 
 @Component({

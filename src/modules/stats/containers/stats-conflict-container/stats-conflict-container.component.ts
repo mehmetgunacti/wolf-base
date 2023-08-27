@@ -2,15 +2,15 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Entity, RemoteData, SyncData, UUID } from 'lib';
 import { Observable } from 'rxjs';
-import { downloadRemoteData, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem } from 'store/actions/sync.actions';
-import { selectedConflict, selectedItem, selectedRemoteData, selectedTrashItem } from 'store/selectors/sync.selectors';
+import { downloadRemoteData, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem } from 'store/actions/stats-bookmark.actions';
+import { selStatsSelectedConflict, selStatsSelectedItem, selStatsSelectedRemoteData, selStatsSelectedTrashItem } from 'store/selectors/stats.selectors';
 
 @Component({
-	selector: 'app-sync-conflict-container',
-	templateUrl: './sync-conflict-container.component.html',
+	selector: 'app-stats-conflict-container',
+	templateUrl: './stats-conflict-container.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SyncConflictContainerComponent {
+export class StatsConflictContainerComponent {
 
 	private store: Store = inject(Store);
 
@@ -21,10 +21,10 @@ export class SyncConflictContainerComponent {
 
 	constructor() {
 
-		this.syncData$ = this.store.select(selectedConflict);
-		this.entity$ = this.store.select(selectedItem);
-		this.trashItem$ = this.store.select(selectedTrashItem);
-		this.remoteData$ = this.store.select(selectedRemoteData);
+		this.syncData$ = this.store.select(selStatsSelectedConflict);
+		this.entity$ = this.store.select(selStatsSelectedItem);
+		this.trashItem$ = this.store.select(selStatsSelectedTrashItem);
+		this.remoteData$ = this.store.select(selStatsSelectedRemoteData);
 
 	}
 

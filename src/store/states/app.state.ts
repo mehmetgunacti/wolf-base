@@ -1,12 +1,12 @@
 import { BookmarkModuleState, initialBookmarkState } from "./bookmark.state";
 import { CoreModuleState, initialCoreState } from "./core.state";
-import { SyncModuleState, initialSyncState } from "./sync.state";
+import { StatsModuleState, initialStatsState } from "./stats.state";
 
 export interface AppState {
 
 	core: CoreModuleState,
 	bookmark: BookmarkModuleState,
-	sync: SyncModuleState
+	stats: StatsModuleState
 
 }
 
@@ -14,6 +14,6 @@ export const initialAppState: AppState = {
 
 	core: initialCoreState,
 	bookmark: initialBookmarkState,
-	sync: initialSyncState
+	stats: initialStatsState
 
 };

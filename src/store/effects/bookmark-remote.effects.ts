@@ -9,7 +9,7 @@ import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { downloadRemoteClicks, downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, loadRemoteMetadataSuccess, partialDownloadSuccess, partialUploadSuccess, uploadLocalClicked, uploadLocalNew } from 'store/actions/bookmark-sync.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { selBookmarkClicked } from 'store/selectors/bookmark-entities.selectors';
-import { selBookmarkLocalCreatedIds, selBookmarkRemoteCreatedIds } from 'store/selectors/bookmark-stats.selectors';
+import { selBookmarkLocalCreatedIds, selBookmarkRemoteCreatedIds } from 'store/selectors/stats-bookmark.selectors';
 
 @Injectable()
 export class BookmarkRemoteEffects {

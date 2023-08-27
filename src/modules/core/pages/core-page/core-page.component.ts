@@ -5,10 +5,10 @@ import { Observable, Subscription, combineLatest, map, of } from 'rxjs';
 import { setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
 import { menuBookmarkBadge } from 'store/selectors/bookmark-ui.selectors';
 import { isSidebarVisible, isThemeDark } from 'store/selectors/core-configuration.selectors';
-import { isBigScreen } from 'store/selectors/core-ui.selectors';
-import { menuSyncBadge } from 'store/selectors/sync-ui.selectors';
+import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
+import { selStatsMenuBadge } from 'store/selectors/stats-ui.selectors';
 
 const formatBadge_Stats = (numbers: number[]): string => {
 
@@ -53,7 +53,7 @@ export class CorePageComponent implements OnDestroy {
 
 		this.subscriptions.add(
 
-			this.store.select(isBigScreen).subscribe(
+			this.store.select(selCoreIsBigScreen).subscribe(
 				result => this.bigScreen = result
 			)
 
@@ -71,17 +71,16 @@ export class CorePageComponent implements OnDestroy {
 
 		this.navMenuItems$ = combineLatest([
 			this.store.select(menuBookmarkBadge),
-			this.store.select(menuSyncBadge),
+			this.store.select(selStatsMenuBadge),
 		]).pipe(
 
-			map(([bookmarkNumbers, syncNumbers]) => {
+			map(([bookmarkNumbers, statsNumbers]) => {
 
 				const menuItems: MenuItem[] = [
 					navItems.miHome,
 					navItems.miBookmarks(formatBadge_Bookmark(bookmarkNumbers)),
 					navItems.miDatabase,
-					navItems.miStats(formatBadge_Stats(syncNumbers)),
-					navItems.miSync(formatBadge_Stats(syncNumbers)),
+					navItems.miStats(formatBadge_Stats(statsNumbers)),
 					navItems.miSettings
 				];
 				if (this.bigScreen)

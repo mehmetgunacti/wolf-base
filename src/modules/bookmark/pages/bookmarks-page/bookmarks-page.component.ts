@@ -6,7 +6,7 @@ import { clickTag, emptySelectedTags, search } from 'store/actions/bookmark-tags
 import { closeEditBookmarkDialog, openAddBookmarkDialog, toggleSearchAndTagCloudVisibility } from 'store/actions/bookmark-ui.actions';
 import { selectedTags } from 'store/selectors/bookmark-tags.selectors';
 import { isEditDialogVisible, selTagCloudVisibility } from 'store/selectors/bookmark-ui.selectors';
-import { isBigScreen } from 'store/selectors/core-ui.selectors';
+import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 
 @Component({
 	selector: 'app-bookmarks-page',
@@ -27,7 +27,7 @@ export class BookmarksPageComponent {
 
 		this.editDialogVisible$ = this.store.select(isEditDialogVisible);
 		this.tagsVisible$ = this.store.select(selTagCloudVisibility);
-		this.isBigScreen$ = this.store.select(isBigScreen);
+		this.isBigScreen$ = this.store.select(selCoreIsBigScreen);
 		this.selectedTags$ = this.store.select(selectedTags);
 
 	}

@@ -1,4 +1,4 @@
-<app-sync-conflict
+<app-stats-conflict
 	[syncData]="syncData$ | async"
 	[entity]="entity$ | async"
 	[trashItem]="trashItem$ | async"
@@ -7,4 +7,4 @@
 	(deleteRemote)="onDeleteRemote($event)"
 	(overrideLocal)="onOverrideLocal($event)"
 	(overrideRemote)="onOverrideRemote($event)"
-	(loadRemote)="onLoadRemote($event)"></app-sync-conflict>
+	(loadRemote)="onLoadRemote($event)"></app-stats-conflict>

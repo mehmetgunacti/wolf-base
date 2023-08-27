@@ -31,15 +31,6 @@ export const miStats = (badge?: string): MenuItem => ({
 	command: () => console.log('badge', badge)
 });
 
-export const miSync = (badge?: string): MenuItem => ({
-	label: 'Synchronize',
-	icon: PrimeIcons.SYNC,
-	routerLink: ['/sync'],
-	badge,
-	styleClass: 'menuBadge orange',
-	command: () => console.log('badge', badge)
-});
-
 export const miSettings: MenuItem = {
 	label: 'Settings',
 	icon: PrimeIcons.COG,

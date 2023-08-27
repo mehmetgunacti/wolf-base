@@ -12,6 +12,24 @@
 
 </app-portal>
 
+<!-- Conflict Dialog -->
+<p-dialog
+	*ngIf="isConflictDialogVisible$ | async"
+	header="View Conflict"
+	[draggable]="false"
+	[visible]="isConflictDialogVisible$ | async"
+	(visibleChange)="closeConflictDialog()"
+	[closeOnEscape]="true"
+	[closable]="true"
+	[modal]="true"
+	[dismissableMask]="true"
+	[maximizable]="(isBigScreen$ | async) || false"
+	styleClass="statsConflictContainerComponent">
+
+	<app-stats-conflict-container></app-stats-conflict-container>
+
+</p-dialog>
+
 <p-messages severity="warn" *ngIf="isFirestoreConfigMissing$ | async">
     <ng-template pTemplate>
 		<span>Firestore configuration missing</span>

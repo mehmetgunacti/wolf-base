@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { Entity, RemoteData, SyncData, UUID } from 'lib';
 
 @Component({
-	selector: 'app-sync-conflict',
-	templateUrl: './sync-conflict.component.html',
+	selector: 'app-stats-conflict',
+	templateUrl: './stats-conflict.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SyncConflictComponent {
+export class StatsConflictComponent {
 
 	@Input() syncData: SyncData | undefined | null;
 	@Input() entity: Entity | undefined | null;

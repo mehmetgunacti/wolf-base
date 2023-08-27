@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StatsSummary } from 'lib';
 import { Observable } from 'rxjs';
-import { downloadRemoteClicks, downloadRemoteNew, uploadLocalClicked, uploadLocalDeleted, uploadLocalNew, uploadLocalUpdated, viewLocalDeletedRemoteDeleted, viewLocalDeletedRemoteUpdated, viewLocalUpdatedRemoteDeleted, viewLocalUpdatedRemoteUpdated, viewRemoteDeleted, viewRemoteUpdated } from 'store/actions/bookmark-sync.actions';
-import { selBookmarkStatsSummary } from 'store/selectors/bookmark-stats.selectors';
+import { downloadRemoteClicks, downloadRemoteNew, uploadLocalClicked, uploadLocalDeleted, uploadLocalNew, uploadLocalUpdated, viewLocalDeletedRemoteDeleted, viewLocalDeletedRemoteUpdated, viewLocalUpdatedRemoteDeleted, viewLocalUpdatedRemoteUpdated, viewRemoteDeleted, viewRemoteUpdated } from 'store/actions/stats-bookmark.actions';
+import { selBookmarkStatsSummary } from 'store/selectors/stats-bookmark.selectors';
 
 @Component({
 	selector: 'app-stats-summary-container',
