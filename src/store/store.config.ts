@@ -1,6 +1,6 @@
 import { Action, ActionReducer, ActionReducerMap, MetaReducer, combineReducers } from '@ngrx/store';
 import { BookmarkEntitiesEffects } from './effects/bookmark-entities.effects';
-import { BookmarkSyncEffects } from './effects/bookmark-sync.effects';
+import { BookmarkLocalStorageEffects } from './effects/bookmark-local-storage.effects';
 import { CoreEffects } from './effects/core.effects';
 import { CoreNavigationEffects } from './effects/core-navigation.effects';
 import { CoreNotificationEffects } from './effects/core-notification.effects';
@@ -10,7 +10,7 @@ import { bookmarkReducer } from './reducers/bookmark.reducer';
 import { coreReducer } from './reducers/core.reducer';
 import { AppState } from './states/app.state';
 import { DatabaseEffects } from './effects/database.effects';
-import { BookmarkRemoteEffects } from './effects/bookmark-remote.effects';
+import { StatsBookmarkEffects } from './effects/stats-bookmark.effects';
 import { statsReducer } from './reducers/stats.reducer';
 import { CoreSettingsEffects } from './effects/core-settings.effects';
 import { StatsEffects } from './effects/stats.effects';
@@ -45,8 +45,8 @@ export const effects = [
 
 	// Bookmarks
 	BookmarkEntitiesEffects,
-	BookmarkSyncEffects,
-	BookmarkRemoteEffects,
+	BookmarkLocalStorageEffects,
+	StatsBookmarkEffects,
 
 	// Database
 	DatabaseEffects,

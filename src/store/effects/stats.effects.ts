@@ -4,7 +4,7 @@ import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { Bookmark, LocalStorageService, RemoteData, RemoteStorageService } from 'lib';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { downloadRemoteData, downloadRemoteDataFailure, downloadRemoteDataSuccess, loadEntitySuccess, loadTrashEntitySuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem } from 'store/actions/stats-bookmark.actions';
+import { downloadRemoteData, downloadRemoteDataFailure, downloadRemoteDataSuccess, overrideLocalItem, overrideRemoteItem, partialDownloadSuccess, partialUploadSuccess, purgeLocalItem, purgeRemoteItem } from 'store/actions/stats-bookmark.actions';
 
 @Injectable()
 export class StatsEffects {
@@ -81,6 +81,29 @@ export class StatsEffects {
 			switchMap(({ entity }) => this.remoteStorage.bookmarks.upload(entity as Bookmark)),
 			switchMap(remoteData => this.localStorage.bookmarks.put(remoteData)),
 			map(() => showNotification({ severity: 'success', detail: 'Remote item updated' }))
+
+		)
+
+	);
+
+	
+	partialDownloadSuccess$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(partialDownloadSuccess),
+			map(({ count }) => showNotification({ severity: 'success', summary: 'Download Complete', detail: `${count} items downloaded` }))
+
+		)
+
+	);
+
+	partialuploadSuccess$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(partialUploadSuccess),
+			map(({ count }) => showNotification({ severity: 'success', summary: 'Upload Complete', detail: `${count} items uploaded` }))
 
 		)
 

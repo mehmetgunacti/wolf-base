@@ -1,9 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Entity, RemoteData, RemoteMetadata, SyncData, UUID } from 'lib';
-
-export const loadSyncDataSuccess = createAction('[Stats Bookmark] Load SyncData Success', props<{ syncData: SyncData[] }>());
-export const loadRemoteMetadataSuccess = createAction('[Stats Bookmark] Load RemoteMetadata Success', props<{ remoteMetadata: RemoteMetadata[] }>());
-export const loadTrashCountSuccess = createAction('[Stats Bookmark] Load Trash Count Success', props<{ count: number }>());
+import { Entity, RemoteData, UUID } from 'lib';
 
 export const downloadRemoteMetadata = createAction('[Stats Bookmark] Download RemoteMetadata');
 export const downloadRemoteMetadataSuccess = createAction('[Stats Bookmark] Download RemoteMetadata Success');
@@ -11,10 +7,10 @@ export const downloadRemoteMetadataSuccess = createAction('[Stats Bookmark] Down
 export const uploadLocalNew = createAction('[Stats Bookmark] Upload Local New');
 export const uploadLocalNewSuccess = createAction('[Stats Bookmark] Upload Local New Success', props<{ count: number }>());
 
-export const downloadRemoteNew = createAction('[Stats Bookmark] Download Remote New');
-
 export const uploadLocalClicked = createAction('[Stats Bookmark] Upload Local Clicked');
 export const downloadRemoteClicks = createAction('[Stats Bookmark] Download Remote Clicks');
+
+export const downloadRemoteNew = createAction('[Stats Bookmark] Download Remote New');
 
 export const partialDownloadSuccess = createAction('[Stats Bookmark] Partial Download Success', props<{ count: number }>());
 export const partialUploadSuccess = createAction('[Stats Bookmark] Partial Upload Success', props<{ count: number }>());

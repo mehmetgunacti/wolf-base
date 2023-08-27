@@ -5,10 +5,10 @@ import { liveQuery } from 'dexie';
 import { LocalStorageService, RemoteMetadata, SyncData } from 'lib';
 import { fromEventPattern } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { loadRemoteMetadataSuccess, loadSyncDataSuccess, loadTrashCountSuccess } from 'store/actions/bookmark-sync.actions';
+import { loadRemoteMetadataSuccess, loadSyncDataSuccess, loadTrashCountSuccess } from 'store/actions/bookmark.actions';
 
 @Injectable()
-export class BookmarkSyncEffects {
+export class BookmarkLocalStorageEffects {
 
 	// private actions$: Actions = inject(Actions);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
