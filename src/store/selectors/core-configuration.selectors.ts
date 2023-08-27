@@ -10,42 +10,42 @@ const confState = createSelector(
 
 );
 
-export const isInitialized = createSelector(
+export const selCoreIsInitialized = createSelector(
 
 	confState,
 	(state: CoreConfigurationState) => state.initialized
 
 );
 
-export const isSidebarVisible = createSelector(
+export const selCoreIsSidebarVisible = createSelector(
 
 	confState,
 	(state: CoreConfigurationState) => state.sidebarVisible
 
 );
 
-export const isThemeDark = createSelector(
+export const selCoreIsThemeDark = createSelector(
 
 	confState,
 	(state: CoreConfigurationState) => state.darkTheme ?? DEFAULT_CONF_VALUES.darkTheme
 
 );
 
-export const firestoreConfig = createSelector(
+export const selCoreFirestoreConfig = createSelector(
 
 	confState,
 	({ firestoreConfig }): FirestoreConfig | null => firestoreConfig
 
 );
 
-export const isFirestoreConfigMissing = createSelector(
+export const selCoreIsFirestoreConfigMissing = createSelector(
 
-	firestoreConfig,
+	selCoreFirestoreConfig,
 	(conf: FirestoreConfig | null) => !conf
 
 );
 
-export const titleLookup = createSelector(
+export const selCoreTitleLookupUrl = createSelector(
 
 	confState,
 	(state: CoreConfigurationState) => state.titleLookupUrl

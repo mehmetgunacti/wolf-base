@@ -6,7 +6,7 @@ import { createBookmark, deleteBookmark, updateBookmark } from 'store/actions/bo
 import { showNotification } from 'store/actions/core-notification.actions';
 import { selBookmark } from 'store/selectors/bookmark-entities.selectors';
 import { distinctTagsArray } from 'store/selectors/bookmark-tags.selectors';
-import { titleLookup } from 'store/selectors/core-configuration.selectors';
+import { selCoreTitleLookupUrl } from 'store/selectors/core-configuration.selectors';
 
 @Component({
 	selector: 'app-bookmark-edit-container',
@@ -25,7 +25,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 	constructor() {
 
 		this.bookmark$ = this.store.select(selBookmark);
-		this.titleLookup$ = this.store.select(titleLookup);
+		this.titleLookup$ = this.store.select(selCoreTitleLookupUrl);
 
 	}
 

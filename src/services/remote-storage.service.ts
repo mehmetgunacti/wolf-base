@@ -3,7 +3,7 @@ import { Store } from "@ngrx/store";
 import { BookmarksCollection, ClicksCollection, Firestore, FirestoreConfig, MockBookmarksFirestoreCollection, MockClicksFirestoreCollection, RemoteStorageService, bookmarksCollectionFactory, clicksCollectionFactory, firestoreFactory } from "lib";
 import { distinctUntilChanged } from "rxjs";
 import { showNotification } from "store/actions/core-notification.actions";
-import { firestoreConfig } from "store/selectors/core-configuration.selectors";
+import { selCoreFirestoreConfig } from "store/selectors/core-configuration.selectors";
 
 export class RemoteStorageServiceProxy implements RemoteStorageService, ProxyHandler<RemoteStorageService> {
 
@@ -19,7 +19,7 @@ export class RemoteStorageServiceProxy implements RemoteStorageService, ProxyHan
 		this.firestore = firestoreFactory();
 		this.config = null;
 
-		this.store.select(firestoreConfig).subscribe(
+		this.store.select(selCoreFirestoreConfig).subscribe(
 			config => {
 
 				if (config)

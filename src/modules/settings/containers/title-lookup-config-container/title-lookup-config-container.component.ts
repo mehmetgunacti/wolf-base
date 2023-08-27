@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { saveTitleLookup } from 'store/actions/settings.actions';
-import { titleLookup } from 'store/selectors/core-configuration.selectors';
+import { selCoreTitleLookupUrl } from 'store/selectors/core-configuration.selectors';
 
 @Component({
 	selector: 'app-title-lookup-config-container',
@@ -17,7 +17,7 @@ export class TitleLookupConfigContainerComponent {
 
 	constructor() {
 
-		this.url$ = this.store.select(titleLookup);
+		this.url$ = this.store.select(selCoreTitleLookupUrl);
 
 	}
 

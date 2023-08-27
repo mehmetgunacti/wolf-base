@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { fadeOutTrigger } from 'modules';
 import { Observable, delay, of, switchMap, takeWhile, tap } from 'rxjs';
-import { isInitialized } from 'store/selectors/core-configuration.selectors';
+import { selCoreIsInitialized } from 'store/selectors/core-configuration.selectors';
 
 @Component({
 	selector: 'app-root',
@@ -24,7 +24,7 @@ export class AppComponent {
 	
 	constructor(store: Store) {
 
-		this.initialized$ = store.select(isInitialized).pipe(
+		this.initialized$ = store.select(selCoreIsInitialized).pipe(
 
 			switchMap((value: boolean) => {
 

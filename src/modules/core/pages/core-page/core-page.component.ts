@@ -4,7 +4,7 @@ import { MenuItem } from 'primeng/api';
 import { Observable, Subscription, combineLatest, map, of } from 'rxjs';
 import { setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
 import { menuBookmarkBadge } from 'store/selectors/bookmark-ui.selectors';
-import { isSidebarVisible, isThemeDark } from 'store/selectors/core-configuration.selectors';
+import { selCoreIsSidebarVisible, selCoreIsThemeDark } from 'store/selectors/core-configuration.selectors';
 import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
@@ -61,7 +61,7 @@ export class CorePageComponent implements OnDestroy {
 
 		this.subscriptions.add(
 
-			store.select(isSidebarVisible).subscribe(
+			store.select(selCoreIsSidebarVisible).subscribe(
 				visible => this.navCollapsed = !visible
 			)
 
@@ -96,7 +96,7 @@ export class CorePageComponent implements OnDestroy {
 			})
 
 		);
-		this.isThemeDark$ = store.select(isThemeDark);
+		this.isThemeDark$ = store.select(selCoreIsThemeDark);
 
 	}
 

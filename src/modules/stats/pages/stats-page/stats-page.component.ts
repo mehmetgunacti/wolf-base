@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { downloadRemoteMetadata } from 'store/actions/stats-bookmark.actions';
 import { closeConflictDialog } from 'store/actions/stats.actions';
-import { isFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
+import { selCoreIsFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
 import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 import { selIsConflictDialogVisible } from 'store/selectors/stats-ui.selectors';
 
@@ -21,7 +21,7 @@ export class StatsPageComponent {
 
 	constructor() {
 
-		this.isFirestoreConfigMissing$ = this.store.select(isFirestoreConfigMissing);
+		this.isFirestoreConfigMissing$ = this.store.select(selCoreIsFirestoreConfigMissing);
 		this.isConflictDialogVisible$ = this.store.select(selIsConflictDialogVisible);
 		this.isBigScreen$ = this.store.select(selCoreIsBigScreen);
 
