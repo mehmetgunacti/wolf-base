@@ -25,9 +25,16 @@ export const viewLocalUntouchedRemoteDeleted = createAction('[Stats Bookmark] Vi
 export const viewLocalUntouchedRemoteDeletedSuccess = createAction('[Stats Bookmark] View Local Untouched Remote Deleted Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null }>());
 
 export const viewLocalUpdatedRemoteUpdated = createAction('[Stats Bookmark] View Local Updated Remote Updated');
+export const viewLocalUpdatedRemoteUpdatedSuccess = createAction('[Stats Bookmark] View Local Updated Remote Updated Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null, remoteMetadata: RemoteMetadata | null }>());
+
 export const viewLocalDeletedRemoteDeleted = createAction('[Stats Bookmark] View Local Deleted Remote Deleted');
+export const viewLocalDeletedRemoteDeletedSuccess = createAction('[Stats Bookmark] View Local Deleted Remote Deleted Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null }>());
+
 export const viewLocalUpdatedRemoteDeleted = createAction('[Stats Bookmark] View Local Updated Remote Deleted');
+export const viewLocalUpdatedRemoteDeletedSuccess = createAction('[Stats Bookmark] View Local Updated Remote Deleted Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null }>());
+
 export const viewLocalDeletedRemoteUpdated = createAction('[Stats Bookmark] View Local Deleted Remote Updated');
+export const viewLocalDeletedRemoteUpdatedSuccess = createAction('[Stats Bookmark] View Local Deleted Remote Updated Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null, remoteMetadata: RemoteMetadata | null }>());
 
 export const purgeLocalItem = createAction('[Stats Bookmark] Purge Local Item', props<{ id: UUID }>());
 export const purgeRemoteItem = createAction('[Stats Bookmark] Purge Remote Item', props<{ id: UUID }>());

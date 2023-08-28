@@ -5,7 +5,7 @@ import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { LocalStorageService, RemoteStorageService } from 'lib';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { downloadRemoteClicks, downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, partialDownloadSuccess, partialUploadSuccess, uploadLocalClicked, uploadLocalNew, viewLocalUntouchedRemoteDeleted, viewLocalUntouchedRemoteDeletedSuccess, viewLocalUntouchedRemoteUpdated, viewLocalUntouchedRemoteUpdatedSuccess } from 'store/actions/stats-bookmark.actions';
+import { downloadRemoteClicks, downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, partialDownloadSuccess, partialUploadSuccess, uploadLocalClicked, uploadLocalNew, viewLocalDeletedRemoteDeleted, viewLocalDeletedRemoteDeletedSuccess, viewLocalDeletedRemoteUpdated, viewLocalDeletedRemoteUpdatedSuccess, viewLocalUntouchedRemoteDeleted, viewLocalUntouchedRemoteDeletedSuccess, viewLocalUntouchedRemoteUpdated, viewLocalUntouchedRemoteUpdatedSuccess, viewLocalUpdatedRemoteDeleted, viewLocalUpdatedRemoteDeletedSuccess, viewLocalUpdatedRemoteUpdated, viewLocalUpdatedRemoteUpdatedSuccess } from 'store/actions/stats-bookmark.actions';
 import { selBookmarkClicked } from 'store/selectors/bookmark-entities.selectors';
 import { selBookmarkLocalCreatedIds, selBookmarkRemoteCreated, selBookmarkRemoteDeleted, selBookmarkRemoteUpdated } from 'store/selectors/stats-bookmark.selectors';
 
@@ -35,7 +35,7 @@ export class StatsBookmarkEffects {
 		() => this.actions$.pipe(
 
 			ofType(downloadRemoteMetadataSuccess),
-			map(() => showNotification({ severity: 'info', summary: 'Download Complete', detail: 'Bookmark data refreshed' }))
+			map(() => showNotification({ severity: 'info', summary: 'Download Complete', detail: 'Remote data refreshed' }))
 
 		)
 
@@ -49,9 +49,11 @@ export class StatsBookmarkEffects {
 			withLatestFrom(this.store.select(selBookmarkRemoteCreated)),
 			map(([, remoteMetadata]) => remoteMetadata.map(rmd => rmd.id)),
 			switchMap(async ids => {
+
 				const remoteData = await this.remoteStorage.bookmarks.downloadMany(ids);
 				await this.localStorage.bookmarks.putAll(remoteData);
 				return remoteData;
+
 			}),
 			map(remoteData => partialDownloadSuccess({ count: remoteData.length }))
 
@@ -166,5 +168,84 @@ export class StatsBookmarkEffects {
 		)
 
 	);
+
+	viewLocalUpdatedRemoteUpdated$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(viewLocalUpdatedRemoteUpdated),
+			withLatestFrom(this.store.select(selBookmarkRemoteUpdated)),
+			map(([, syncData]) => syncData[0].id), // take first
+			switchMap(async (id) => {
+
+				const syncData = await this.localStorage.bookmarks.getSyncData(id);
+				const bookmark = await this.localStorage.bookmarks.get(id);
+				const remoteMetadata = await this.localStorage.bookmarks.getRemoteMetadata(id);
+				return viewLocalUpdatedRemoteUpdatedSuccess({ syncData, bookmark, remoteMetadata });
+
+			})
+
+		)
+
+	);
+
+	viewLocalDeletedRemoteDeleted$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(viewLocalDeletedRemoteDeleted),
+			withLatestFrom(this.store.select(selBookmarkRemoteUpdated)),
+			map(([, syncData]) => syncData[0].id), // take first
+			switchMap(async (id) => {
+
+				const syncData = await this.localStorage.bookmarks.getSyncData(id);
+				const bookmark = await this.localStorage.bookmarks.get(id);
+				return viewLocalDeletedRemoteDeletedSuccess({ syncData, bookmark });
+
+			})
+
+		)
+
+	);
+
+	viewLocalUpdatedRemoteDeleted$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(viewLocalUpdatedRemoteDeleted),
+			withLatestFrom(this.store.select(selBookmarkRemoteUpdated)),
+			map(([, syncData]) => syncData[0].id), // take first
+			switchMap(async (id) => {
+
+				const syncData = await this.localStorage.bookmarks.getSyncData(id);
+				const bookmark = await this.localStorage.bookmarks.get(id);
+				return viewLocalUpdatedRemoteDeletedSuccess({ syncData, bookmark });
+
+			})
+
+		)
+
+	);
+
+	viewLocalDeletedRemoteUpdated$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(viewLocalDeletedRemoteUpdated),
+			withLatestFrom(this.store.select(selBookmarkRemoteUpdated)),
+			map(([, syncData]) => syncData[0].id), // take first
+			switchMap(async (id) => {
+
+				const syncData = await this.localStorage.bookmarks.getSyncData(id);
+				const bookmark = await this.localStorage.bookmarks.get(id);
+				const remoteMetadata = await this.localStorage.bookmarks.getRemoteMetadata(id);
+				return viewLocalDeletedRemoteUpdatedSuccess({ syncData, bookmark, remoteMetadata });
+
+			})
+
+		)
+
+	);
+	
 
 }
