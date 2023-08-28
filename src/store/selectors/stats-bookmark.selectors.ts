@@ -11,7 +11,7 @@ export const selBookmarkLocalCreatedIds = createSelector(
 
 );
 
-const bookmarkLocalUpdated = createSelector(
+export const selBookmarkLocalUpdatedRemoteUntouched = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
@@ -23,7 +23,7 @@ const bookmarkLocalUpdated = createSelector(
 
 );
 
-const bookmarklocalDeleted = createSelector(
+export const selBookmarkLocalDeletedRemoteUntouched = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
@@ -67,7 +67,7 @@ export const selBookmarkRemoteDeleted = createSelector(
 
 );
 
-const localUpdatedRemoteUpdated = createSelector(
+export const selBookmarkLocalUpdatedRemoteUpdated = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
@@ -79,7 +79,7 @@ const localUpdatedRemoteUpdated = createSelector(
 
 );
 
-const localDeletedRemoteDeleted = createSelector(
+export const selBookmarkLocalDeletedRemoteDeleted = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
@@ -91,7 +91,7 @@ const localDeletedRemoteDeleted = createSelector(
 
 );
 
-const localUpdatedRemoteDeleted = createSelector(
+export const selBookmarkLocalUpdatedRemoteDeleted = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
@@ -103,7 +103,7 @@ const localUpdatedRemoteDeleted = createSelector(
 
 );
 
-const localDeletedRemoteUpdated = createSelector(
+export const selBookmarkLocalDeletedRemoteUpdated = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
@@ -119,17 +119,17 @@ export const selBookmarkStatsSummary = createSelector(
 
 	selBookmarkIds,
 	selBookmarkLocalCreatedIds,
-	bookmarkLocalUpdated,
-	bookmarklocalDeleted,
+	selBookmarkLocalUpdatedRemoteUntouched,
+	selBookmarkLocalDeletedRemoteUntouched,
 	selBookmarkClicked,
 	selBookmarkRemoteMetadataArray,
 	selBookmarkRemoteCreated,
 	selBookmarkRemoteUpdated,
 	selBookmarkRemoteDeleted,
-	localUpdatedRemoteUpdated,
-	localDeletedRemoteDeleted,
-	localUpdatedRemoteDeleted,
-	localDeletedRemoteUpdated,
+	selBookmarkLocalUpdatedRemoteUpdated,
+	selBookmarkLocalDeletedRemoteDeleted,
+	selBookmarkLocalUpdatedRemoteDeleted,
+	selBookmarkLocalDeletedRemoteUpdated,
 	(localTotal, localNew, localUpdated, localDeleted, localClicked, remoteTotal, remoteNew, remoteUpdated, remoteDeleted, localUpdatedRemoteUpdated, localDeletedRemoteDeleted, localUpdatedRemoteDeleted, localDeletedRemoteUpdated): StatsSummary => ({
 
 		localTotal,

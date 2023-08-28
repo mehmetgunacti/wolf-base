@@ -5,9 +5,9 @@ import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { LocalStorageService, RemoteStorageService } from 'lib';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { downloadRemoteClicks, downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, partialDownloadSuccess, partialUploadSuccess, uploadLocalClicked, uploadLocalNew, viewLocalDeletedRemoteDeleted, viewLocalDeletedRemoteDeletedSuccess, viewLocalDeletedRemoteUpdated, viewLocalDeletedRemoteUpdatedSuccess, viewLocalUntouchedRemoteDeleted, viewLocalUntouchedRemoteDeletedSuccess, viewLocalUntouchedRemoteUpdated, viewLocalUntouchedRemoteUpdatedSuccess, viewLocalUpdatedRemoteDeleted, viewLocalUpdatedRemoteDeletedSuccess, viewLocalUpdatedRemoteUpdated, viewLocalUpdatedRemoteUpdatedSuccess } from 'store/actions/stats-bookmark.actions';
+import { downloadRemoteClicks, downloadRemoteMetadata, downloadRemoteMetadataSuccess, downloadRemoteNew, partialDownloadSuccess, partialUploadSuccess, uploadLocalClicked, uploadLocalNew, uploadLocalUpdated, viewLocalDeletedRemoteDeleted, viewLocalDeletedRemoteDeletedSuccess, viewLocalDeletedRemoteUpdated, viewLocalDeletedRemoteUpdatedSuccess, viewLocalUntouchedRemoteDeleted, viewLocalUntouchedRemoteDeletedSuccess, viewLocalUntouchedRemoteUpdated, viewLocalUntouchedRemoteUpdatedSuccess, viewLocalUpdatedRemoteDeleted, viewLocalUpdatedRemoteDeletedSuccess, viewLocalUpdatedRemoteUpdated, viewLocalUpdatedRemoteUpdatedSuccess } from 'store/actions/stats-bookmark.actions';
 import { selBookmarkClicked } from 'store/selectors/bookmark-entities.selectors';
-import { selBookmarkLocalCreatedIds, selBookmarkRemoteCreated, selBookmarkRemoteDeleted, selBookmarkRemoteUpdated } from 'store/selectors/stats-bookmark.selectors';
+import { selBookmarkLocalCreatedIds, selBookmarkLocalDeletedRemoteDeleted, selBookmarkLocalDeletedRemoteUntouched, selBookmarkLocalDeletedRemoteUpdated, selBookmarkLocalUpdatedRemoteDeleted, selBookmarkLocalUpdatedRemoteUntouched, selBookmarkLocalUpdatedRemoteUpdated, selBookmarkRemoteCreated, selBookmarkRemoteDeleted, selBookmarkRemoteUpdated } from 'store/selectors/stats-bookmark.selectors';
 
 @Injectable()
 export class StatsBookmarkEffects {
@@ -36,6 +36,60 @@ export class StatsBookmarkEffects {
 
 			ofType(downloadRemoteMetadataSuccess),
 			map(() => showNotification({ severity: 'info', summary: 'Download Complete', detail: 'Remote data refreshed' }))
+
+		)
+
+	);
+
+	uploadLocalUpdated$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(uploadLocalUpdated),
+			withLatestFrom(this.store.select(selBookmarkLocalUpdatedRemoteUntouched)),
+			map(([, syncData]) => syncData.map(sd => sd.id)),
+			switchMap(async ids => {
+
+				for (const id of ids) {
+
+					const localData = await this.localStorage.bookmarks.get(id);
+					if (localData) {
+						const uploaded = await this.remoteStorage.bookmarks.upload(localData);
+						await this.localStorage.bookmarks.put(uploaded);
+					}
+
+				}
+				return ids.length;
+
+			}),
+			map(count => partialDownloadSuccess({ count }))
+
+		)
+
+	);
+
+	uploadLocalDeleted$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(uploadLocalUpdated),
+			withLatestFrom(this.store.select(selBookmarkLocalDeletedRemoteUntouched)),
+			map(([, syncData]) => syncData.map(sd => sd.id)),
+			switchMap(async ids => {
+
+				for (const id of ids) {
+
+					const localSyncData = await this.localStorage.bookmarks.getSyncData(id);
+					if (localSyncData) {
+						await this.remoteStorage.bookmarks.delete(localSyncData.id);
+						await this.localStorage.bookmarks.deletePermanently(localSyncData.id);
+					}
+
+				}
+				return ids.length;
+
+			}),
+			map(count => partialUploadSuccess({ count }))
 
 		)
 
@@ -174,7 +228,7 @@ export class StatsBookmarkEffects {
 		() => this.actions$.pipe(
 
 			ofType(viewLocalUpdatedRemoteUpdated),
-			withLatestFrom(this.store.select(selBookmarkRemoteUpdated)),
+			withLatestFrom(this.store.select(selBookmarkLocalUpdatedRemoteUpdated)),
 			map(([, syncData]) => syncData[0].id), // take first
 			switchMap(async (id) => {
 
@@ -194,7 +248,7 @@ export class StatsBookmarkEffects {
 		() => this.actions$.pipe(
 
 			ofType(viewLocalDeletedRemoteDeleted),
-			withLatestFrom(this.store.select(selBookmarkRemoteUpdated)),
+			withLatestFrom(this.store.select(selBookmarkLocalDeletedRemoteDeleted)),
 			map(([, syncData]) => syncData[0].id), // take first
 			switchMap(async (id) => {
 
@@ -213,7 +267,7 @@ export class StatsBookmarkEffects {
 		() => this.actions$.pipe(
 
 			ofType(viewLocalUpdatedRemoteDeleted),
-			withLatestFrom(this.store.select(selBookmarkRemoteUpdated)),
+			withLatestFrom(this.store.select(selBookmarkLocalUpdatedRemoteDeleted)),
 			map(([, syncData]) => syncData[0].id), // take first
 			switchMap(async (id) => {
 
@@ -232,7 +286,7 @@ export class StatsBookmarkEffects {
 		() => this.actions$.pipe(
 
 			ofType(viewLocalDeletedRemoteUpdated),
-			withLatestFrom(this.store.select(selBookmarkRemoteUpdated)),
+			withLatestFrom(this.store.select(selBookmarkLocalDeletedRemoteUpdated)),
 			map(([, syncData]) => syncData[0].id), // take first
 			switchMap(async (id) => {
 
@@ -246,6 +300,5 @@ export class StatsBookmarkEffects {
 		)
 
 	);
-	
 
 }
