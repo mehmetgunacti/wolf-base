@@ -8,6 +8,7 @@ export interface StatsModuleState {
 	selectedTrashEntity: Entity | null;
 
 	conflictDialogVisible: boolean;
+	conflictDialogTitle: string | null;
 
 }
 
@@ -18,6 +19,7 @@ export const initialStatsState: StatsModuleState = {
 	selectedTrashEntity: null,
 	selectedRemoteData: null,
 	
-	conflictDialogVisible: false
+	conflictDialogVisible: false,
+	conflictDialogTitle: null
 
 };

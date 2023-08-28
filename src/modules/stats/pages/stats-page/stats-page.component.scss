@@ -2,4 +2,20 @@ app-stats-page {
 
 	@extend %flex-column;
 
+	&   .statsConflictContainerComponent {
+
+		width		: 100vw;
+		height		: 100vh;
+		max-height	: initial !important;
+	
+		@include lg() {
+	
+			width	: 85vw;
+			height  : initial;
+			height	: 95vh;
+	
+		}
+
+	} 
+
 }

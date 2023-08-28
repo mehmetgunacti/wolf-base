@@ -39,7 +39,7 @@ export const selBookmarkRemoteCreated = createSelector(
 
 );
 
-const remoteUpdatedBookmark = createSelector(
+export const selBookmarkRemoteUpdated = createSelector(
 
 	selBookmarkRemoteMetadataArray,
 	selBookmarkSyncDataMap,
@@ -51,11 +51,11 @@ const remoteUpdatedBookmark = createSelector(
 
 );
 
-const remoteDeletedBookmark = createSelector(
+export const selBookmarkRemoteDeleted = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(local, remote): RemoteMetadata[] => local.filter(
+	(local, remote): SyncData[] => local.filter(
 
 		sd => !sd.updated && !sd.deleted && !remote[sd.id]
 
@@ -120,8 +120,8 @@ export const selBookmarkStatsSummary = createSelector(
 	selBookmarkClicked,
 	selBookmarkRemoteMetadataArray,
 	selBookmarkRemoteCreated,
-	remoteUpdatedBookmark,
-	remoteDeletedBookmark,
+	selBookmarkRemoteUpdated,
+	selBookmarkRemoteDeleted,
 	localUpdatedRemoteUpdated,
 	localDeletedRemoteDeleted, 
 	localUpdatedRemoteDeleted,

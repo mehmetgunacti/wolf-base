@@ -5,7 +5,7 @@ import { downloadRemoteMetadata } from 'store/actions/stats-bookmark.actions';
 import { closeConflictDialog } from 'store/actions/stats.actions';
 import { selCoreIsFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
 import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
-import { selIsConflictDialogVisible } from 'store/selectors/stats-ui.selectors';
+import { selStatsConflictDialogTitle, selStatsIsConflictDialogVisible } from 'store/selectors/stats-ui.selectors';
 
 @Component({
 	selector: 'app-stats-page',
@@ -18,12 +18,14 @@ export class StatsPageComponent {
 	isFirestoreConfigMissing$: Observable<boolean>;
 	isConflictDialogVisible$: Observable<boolean>;
 	isBigScreen$: Observable<boolean>;
+	dialogTitle$: Observable<string | null>;
 
 	constructor() {
 
 		this.isFirestoreConfigMissing$ = this.store.select(selCoreIsFirestoreConfigMissing);
-		this.isConflictDialogVisible$ = this.store.select(selIsConflictDialogVisible);
+		this.isConflictDialogVisible$ = this.store.select(selStatsIsConflictDialogVisible);
 		this.isBigScreen$ = this.store.select(selCoreIsBigScreen);
+		this.dialogTitle$ = this.store.select(selStatsConflictDialogTitle);
 
 	}
 

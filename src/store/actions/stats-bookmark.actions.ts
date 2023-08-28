@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Entity, RemoteData, UUID } from 'lib';
+import { Bookmark, Entity, RemoteData, RemoteMetadata, SyncData, UUID } from 'lib';
 
 export const downloadRemoteMetadata = createAction('[Stats Bookmark] Download RemoteMetadata');
 export const downloadRemoteMetadataSuccess = createAction('[Stats Bookmark] Download RemoteMetadata Success');
@@ -18,8 +18,11 @@ export const partialUploadSuccess = createAction('[Stats Bookmark] Partial Uploa
 export const uploadLocalUpdated = createAction('[Stats Bookmark] Upload Local Updated');
 export const uploadLocalDeleted = createAction('[Stats Bookmark] Upload Local Deleted');
 
-export const viewRemoteUpdated = createAction('[Stats Bookmark] View Remote Updated');
-export const viewRemoteDeleted = createAction('[Stats Bookmark] View Remote Deleted');
+export const viewLocalUntouchedRemoteUpdated = createAction('[Stats Bookmark] View Local Untouched Remote Updated');
+export const viewLocalUntouchedRemoteUpdatedSuccess = createAction('[Stats Bookmark] View Local Untouched Remote Updated Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null, remoteMetadata: RemoteMetadata }>());
+
+export const viewLocalUntouchedRemoteDeleted = createAction('[Stats Bookmark] View Local Untouched Remote Deleted');
+export const viewLocalUntouchedRemoteDeletedSuccess = createAction('[Stats Bookmark] View Local Untouched Remote Deleted Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null }>());
 
 export const viewLocalUpdatedRemoteUpdated = createAction('[Stats Bookmark] View Local Updated Remote Updated');
 export const viewLocalDeletedRemoteDeleted = createAction('[Stats Bookmark] View Local Deleted Remote Deleted');
