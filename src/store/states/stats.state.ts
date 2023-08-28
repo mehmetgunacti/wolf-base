@@ -1,9 +1,10 @@
-import { Entity, RemoteData, SyncData } from "lib";
+import { Entity, RemoteData, RemoteMetadata, SyncData } from "lib";
 
 export interface StatsModuleState {
 
 	selectedEntity: Entity | null;
 	selectedSyncData: SyncData | null;
+	selectedRemoteMetadata: RemoteMetadata | null;
 	selectedRemoteData: RemoteData<Entity> | null;
 	selectedTrashEntity: Entity | null;
 
@@ -15,6 +16,7 @@ export interface StatsModuleState {
 export const initialStatsState: StatsModuleState = {
 
 	selectedSyncData: null,
+	selectedRemoteMetadata: null,
 	selectedEntity:  null,
 	selectedTrashEntity: null,
 	selectedRemoteData: null,

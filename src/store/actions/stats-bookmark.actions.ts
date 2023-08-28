@@ -19,7 +19,7 @@ export const uploadLocalUpdated = createAction('[Stats Bookmark] Upload Local Up
 export const uploadLocalDeleted = createAction('[Stats Bookmark] Upload Local Deleted');
 
 export const viewLocalUntouchedRemoteUpdated = createAction('[Stats Bookmark] View Local Untouched Remote Updated');
-export const viewLocalUntouchedRemoteUpdatedSuccess = createAction('[Stats Bookmark] View Local Untouched Remote Updated Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null, remoteMetadata: RemoteMetadata }>());
+export const viewLocalUntouchedRemoteUpdatedSuccess = createAction('[Stats Bookmark] View Local Untouched Remote Updated Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null, remoteMetadata: RemoteMetadata | null }>());
 
 export const viewLocalUntouchedRemoteDeleted = createAction('[Stats Bookmark] View Local Untouched Remote Deleted');
 export const viewLocalUntouchedRemoteDeletedSuccess = createAction('[Stats Bookmark] View Local Untouched Remote Deleted Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null }>());

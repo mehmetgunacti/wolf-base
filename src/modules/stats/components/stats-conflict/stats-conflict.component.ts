@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Entity, RemoteData, SyncData, UUID } from 'lib';
+import { Entity, RemoteData, RemoteMetadata, SyncData, UUID } from 'lib';
 
 @Component({
 	selector: 'app-stats-conflict',
@@ -12,6 +12,7 @@ export class StatsConflictComponent {
 	@Input() entity: Entity | undefined | null;
 	@Input() trashItem: Entity | undefined | null;
 	@Input() remoteData: RemoteData<Entity> | undefined | null;
+	@Input() remoteMetadata: RemoteMetadata | undefined | null;
 
 	@Output() deleteLocal = new EventEmitter<UUID>();
 	@Output() deleteRemote = new EventEmitter<UUID>();

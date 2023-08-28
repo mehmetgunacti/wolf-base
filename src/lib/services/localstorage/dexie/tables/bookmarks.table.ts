@@ -290,6 +290,12 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 	}
 
+	async getRemoteMetadata(id: UUID): Promise<RemoteMetadata | null> {
+
+		return this.bookmarks_remote.get(id) ?? null;
+
+	}
+
 	async listRemoteMetadata(): Promise<RemoteMetadata[]> {
 
 		return Array.from(this.bookmarks_remote.values());

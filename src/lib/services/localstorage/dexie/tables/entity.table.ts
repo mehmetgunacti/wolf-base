@@ -273,6 +273,12 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
+	async getRemoteMetadata(id: UUID): Promise<RemoteMetadata | null> {
+
+		return await this.db.table<RemoteMetadata>(this.tablename + '_remote').get(id) ?? null;
+
+	}
+
 	async listRemoteMetadata(): Promise<RemoteMetadata[]> {
 
 		return await this.db.table<RemoteMetadata>(this.tablename + '_remote').toArray();

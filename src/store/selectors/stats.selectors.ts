@@ -30,3 +30,10 @@ export const selStatsSelectedRemoteData = createSelector(
 	state => state.selectedRemoteData
 
 );
+
+export const selStatsSelectedRemoteMetadata = createSelector(
+
+	selStatsModuleState,
+	state => state.selectedRemoteMetadata
+
+);

@@ -1,6 +1,6 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import produce from 'immer';
-import { downloadRemoteDataSuccess, loadEntitySuccess, loadTrashEntitySuccess, viewLocalUntouchedRemoteDeleted, viewLocalUntouchedRemoteDeletedSuccess } from 'store/actions/stats-bookmark.actions';
+import { downloadRemoteDataSuccess, loadEntitySuccess, loadTrashEntitySuccess, viewLocalUntouchedRemoteDeleted, viewLocalUntouchedRemoteDeletedSuccess, viewLocalUntouchedRemoteUpdated, viewLocalUntouchedRemoteUpdatedSuccess } from 'store/actions/stats-bookmark.actions';
 import { closeConflictDialog } from 'store/actions/stats.actions';
 import { StatsModuleState, initialStatsState } from 'store/states/stats.state';
 
@@ -11,6 +11,7 @@ const hideConflictDialog = (state: StatsModuleState): StatsModuleState => {
 		draft => {
 
 			draft.selectedSyncData = null;
+			draft.selectedRemoteMetadata = null;
 			draft.selectedEntity = null;
 			draft.selectedTrashEntity = null;
 			draft.selectedRemoteData = null;
@@ -37,6 +38,25 @@ export const statsReducer: ActionReducer<StatsModuleState, Action> = createReduc
 				draft.selectedTrashEntity = null;
 				draft.selectedRemoteData = null;
 				draft.conflictDialogTitle = 'Local Untouched, Remote Deleted';
+				draft.conflictDialogVisible = true;
+
+			}
+		)
+
+	}),
+	on(viewLocalUntouchedRemoteUpdated, hideConflictDialog),
+	on(viewLocalUntouchedRemoteUpdatedSuccess, (state, { syncData, bookmark, remoteMetadata }): StatsModuleState => {
+
+		return produce(
+			state,
+			draft => {
+
+				draft.selectedSyncData = syncData;
+				draft.selectedRemoteMetadata = remoteMetadata;
+				draft.selectedEntity = bookmark;
+				draft.selectedTrashEntity = null;
+				draft.selectedRemoteData = null;
+				draft.conflictDialogTitle = 'Local Untouched, Remote Updated';
 				draft.conflictDialogVisible = true;
 
 			}

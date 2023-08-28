@@ -22,6 +22,7 @@ export interface EntityTable<T extends Entity> {
 	getSyncData(id: UUID): Promise<SyncData | null>;
 	listSyncData(): Promise<SyncData[]>;
 
+	getRemoteMetadata(id: UUID): Promise<RemoteMetadata | null>;
 	listRemoteMetadata(): Promise<RemoteMetadata[]>;
 	putRemoteMetadata(data: RemoteMetadata[]): Promise<void>;
 

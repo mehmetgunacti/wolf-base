@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Entity, RemoteData, SyncData, UUID } from 'lib';
+import { Entity, RemoteData, RemoteMetadata, SyncData, UUID } from 'lib';
 import { Observable } from 'rxjs';
 import { downloadRemoteData, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem } from 'store/actions/stats-bookmark.actions';
-import { selStatsSelectedConflict, selStatsSelectedItem, selStatsSelectedRemoteData, selStatsSelectedTrashItem } from 'store/selectors/stats.selectors';
+import { selStatsSelectedConflict, selStatsSelectedItem, selStatsSelectedRemoteData, selStatsSelectedRemoteMetadata, selStatsSelectedTrashItem } from 'store/selectors/stats.selectors';
 
 @Component({
 	selector: 'app-stats-conflict-container',
@@ -18,6 +18,7 @@ export class StatsConflictContainerComponent {
 	entity$: Observable<Entity | null>;
 	trashItem$: Observable<Entity | null>;
 	remoteData$: Observable<RemoteData<Entity> | null>;
+	remoteMetadata$: Observable<RemoteMetadata | null>;
 
 	constructor() {
 
@@ -25,6 +26,7 @@ export class StatsConflictContainerComponent {
 		this.entity$ = this.store.select(selStatsSelectedItem);
 		this.trashItem$ = this.store.select(selStatsSelectedTrashItem);
 		this.remoteData$ = this.store.select(selStatsSelectedRemoteData);
+		this.remoteMetadata$ = this.store.select(selStatsSelectedRemoteMetadata);
 
 	}
 
