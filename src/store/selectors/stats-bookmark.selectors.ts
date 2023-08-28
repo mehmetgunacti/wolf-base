@@ -15,9 +15,11 @@ const bookmarkLocalUpdated = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(syncData, remote): SyncData[] =>
-		syncData
-			.filter(s => s.updated && !s.deleted && remote[s.id] && s.updateTime === remote[s.id].updateTime)
+	(syncData, remote): SyncData[] => syncData.filter(
+
+		s => s.updated && !s.deleted && remote[s.id] && s.updateTime === remote[s.id].updateTime
+
+	)
 
 );
 
@@ -25,9 +27,11 @@ const bookmarklocalDeleted = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(syncData, remote): SyncData[] =>
-		syncData
-			.filter(s => s.deleted && remote[s.id] && s.updateTime === remote[s.id].updateTime)
+	(syncData, remote): SyncData[] => syncData.filter(
+
+		s => s.deleted && remote[s.id] && s.updateTime === remote[s.id].updateTime
+
+	)
 
 );
 
@@ -45,7 +49,7 @@ export const selBookmarkRemoteUpdated = createSelector(
 	selBookmarkSyncDataMap,
 	(remote, local): RemoteMetadata[] => remote.filter(
 
-		r => !local[r.id].deleted && !local[r.id].updated && local[r.id].updateTime !== r.updateTime
+		r => local[r.id] && !local[r.id].deleted && !local[r.id].updated && local[r.id].updateTime !== r.updateTime
 
 	)
 
@@ -123,7 +127,7 @@ export const selBookmarkStatsSummary = createSelector(
 	selBookmarkRemoteUpdated,
 	selBookmarkRemoteDeleted,
 	localUpdatedRemoteUpdated,
-	localDeletedRemoteDeleted, 
+	localDeletedRemoteDeleted,
 	localUpdatedRemoteDeleted,
 	localDeletedRemoteUpdated,
 	(localTotal, localNew, localUpdated, localDeleted, localClicked, remoteTotal, remoteNew, remoteUpdated, remoteDeleted, localUpdatedRemoteUpdated, localDeletedRemoteDeleted, localUpdatedRemoteDeleted, localDeletedRemoteUpdated): StatsSummary => ({
