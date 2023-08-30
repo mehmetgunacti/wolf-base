@@ -1,42 +1,44 @@
+import { UUID } from 'lib/constants';
 import { RemoteData, RemoteMetadata } from 'lib/models';
 import { Bookmark } from 'lib/models/bookmark.model';
 import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
-import { sleep } from 'lib/utils';
+import { Observable, delay, map, of } from 'rxjs';
 
 const SLEEP = 20;
 
 export class MockBookmarksFirestoreCollection implements BookmarksCollection {
 
-	private bookmarks: Map<string, RemoteData<Bookmark>> = new Map();
-	private bookmarks_trash: Map<string, RemoteData<Bookmark>> = new Map();
+	private bookmarks: Record<string, RemoteData<Bookmark>> = {};
+	private bookmarks_trash: Record<string, RemoteData<Bookmark>> = {};
 
-	async downloadOne(id: string): Promise<RemoteData<Bookmark> | null> {
+	downloadOne(id: string): Observable<RemoteData<Bookmark> | null> {
 
-		await sleep(SLEEP);
-		return this.bookmarks.get(id) ?? null;
-
-	}
-
-	async downloadMany(): Promise<RemoteData<Bookmark>[]> {
-
-		await sleep(SLEEP);
-		return [...this.bookmarks.values()];
+		return of(this.bookmarks[id] ?? null).pipe(delay(SLEEP));
 
 	}
 
-	async downloadIds(): Promise<RemoteMetadata[]> {
+	downloadMany(ids?: UUID[]): Observable<RemoteData<Bookmark>[]> {
 
-		await sleep(SLEEP);
-		return [...this.bookmarks.values()].map(b => b.metaData);
+		if (ids)
+			return of(Object.keys(this.bookmarks).filter(id => ids.includes(id)).map(id => this.bookmarks[id])).pipe(delay(SLEEP));
+
+		return of(Object.values(this.bookmarks)).pipe(delay(SLEEP));
 
 	}
 
-	async upload(item: Bookmark): Promise<RemoteData<Bookmark>> {
+	downloadIds(): Observable<RemoteMetadata[]> {
 
-		await sleep(SLEEP);
-		const current = this.bookmarks.get(item.id);
+		return this.downloadMany().pipe(
+			map(arr => arr.map(item => item.metaData))
+		)
+
+	}
+
+	upload(item: Bookmark): Observable<RemoteData<Bookmark>> {
+
+		const current = this.bookmarks[item.id];
 		const createTime = current ? current.metaData.createTime : new Date().toISOString();
-		const metadata: RemoteMetadata = {
+		const metaData: RemoteMetadata = {
 
 			id: item.id,
 			createTime,
@@ -45,35 +47,35 @@ export class MockBookmarksFirestoreCollection implements BookmarksCollection {
 		};
 		const remoteData: RemoteData<Bookmark> = {
 
-			metaData: metadata,
+			metaData,
 			entity: item,
 
 		};
-		this.bookmarks.set(item.id, remoteData);
-		return remoteData;
+		this.bookmarks[item.id] = remoteData;
+		return of(remoteData).pipe(delay(SLEEP));
 
 	}
 
-	async delete(id: string): Promise<void> {
+	delete(id: string): Observable<void> {
 
-		await sleep(SLEEP);
-		this.bookmarks.delete(id);
+		delete this.bookmarks[id];
+		return of().pipe(delay(SLEEP));
 
 	}
 
-	async moveToTrash(id: string): Promise<void> {
+	moveToTrash(id: string): Observable<void> {
 
-		await sleep(SLEEP);
-		const b = this.bookmarks.get(id);
+
+		const b = this.bookmarks[id];
 		if (b)
-			this.bookmarks_trash.set(id, b);
+			this.bookmarks_trash[id] = b;
+		return this.delete(id);
 
 	}
 
-	async trash(item: Bookmark): Promise<void> {
+	trash(item: Bookmark): Observable<RemoteData<Bookmark>> {
 
-		await sleep(SLEEP);
-		const metadata: RemoteMetadata = {
+		const metaData: RemoteMetadata = {
 
 			id: item.id,
 			createTime: new Date().toISOString(),
@@ -82,11 +84,12 @@ export class MockBookmarksFirestoreCollection implements BookmarksCollection {
 		};
 		const remoteData: RemoteData<Bookmark> = {
 
-			metaData: metadata,
+			metaData,
 			entity: item,
 
 		};
-		this.bookmarks_trash.set(item.id, remoteData);
+		this.bookmarks_trash[item.id] = remoteData;
+		return of(remoteData).pipe(delay(SLEEP));
 
 	}
 

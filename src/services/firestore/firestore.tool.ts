@@ -1,7 +1,8 @@
-import { HTTP } from '../http.tool';
+import { HttpClient } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { EMPTY, Observable, concatMap, expand, map, toArray } from 'rxjs';
 import { FIRESTORE_TYPE, FIRESTORE_VALUE } from './firestore.constant';
 import {
-	FirestoreBatchGetRequestBody,
 	FirestoreBatchGetResponse,
 	FirestoreBatchGetURL,
 	FirestoreCreateURL,
@@ -12,20 +13,19 @@ import {
 	FirestoreIncreaseURL,
 	FirestoreListURL,
 	FirestorePatchURL,
-	FirestoreWriteResult,
-	FirestoreWrites
+	FirestoreWriteResult
 } from './firestore.model';
 
 export interface Firestore {
 
-	create<T>(url: FirestoreCreateURL, requestBody: FirestoreDocument<T>): Promise<FirestoreDTO<T>>;
-	update<T>(url: FirestorePatchURL, requestBody: FirestoreDocument<T>): Promise<FirestoreDTO<T>>;
-	delete(url: FirestoreDocumentURL): Promise<void>;
-	batchGet<T>(batchGetUrl: FirestoreBatchGetURL): Promise<FirestoreDTO<T>[]>;
-	list<T>(listUrl: FirestoreListURL): Promise<FirestoreDTO<T>[]>;
-	listIds<T>(listUrl: FirestoreListURL): Promise<FirestoreDTO<T>[]>;
-	get<T>(url: FirestoreDocumentURL): Promise<FirestoreDTO<T> | null>;
-	increase(url: FirestoreIncreaseURL): Promise<number>;
+	create<T>(url: FirestoreCreateURL, requestBody: FirestoreDocument<T>): Observable<FirestoreDTO<T>>;
+	update<T>(url: FirestorePatchURL, requestBody: FirestoreDocument<T>): Observable<FirestoreDTO<T>>;
+	delete(url: FirestoreDocumentURL): Observable<void>;
+	batchGet<T>(batchGetUrl: FirestoreBatchGetURL): Observable<FirestoreDTO<T>[]>;
+	list<T>(listUrl: FirestoreListURL): Observable<FirestoreDTO<T>[]>;
+	listIds<T>(listUrl: FirestoreListURL): Observable<FirestoreDTO<T>[]>;
+	get<T>(url: FirestoreDocumentURL): Observable<FirestoreDTO<T> | null>;
+	increase(url: FirestoreIncreaseURL): Observable<number>;
 
 }
 
@@ -33,122 +33,71 @@ export const firestoreFactory = (): Firestore => new FirestoreTool();
 
 class FirestoreTool implements Firestore {
 
-	async create<T>(url: FirestoreCreateURL, requestBody: FirestoreDocument<T>): Promise<FirestoreDTO<T>> {
+	private http: HttpClient = inject(HttpClient);
 
-		return await HTTP.post<FirestoreDocument<T>, FirestoreDocument<T>, FirestoreDTO<T>>(
+	create<T>(url: FirestoreCreateURL, requestBody: FirestoreDocument<T>): Observable<FirestoreDTO<T>> {
 
-			url.toURL(),
-			requestBody,
-			(response: FirestoreDocument<T>): FirestoreDTO<T> => this.parseDocument(response)
+		return this.http.post<FirestoreDocument<T>>(url.toURL(), requestBody).pipe(
+			map(this.parseDocument)
+		);
+
+	}
+
+	update<T>(url: FirestorePatchURL, requestBody: FirestoreDocument<T>): Observable<FirestoreDTO<T>> {
+
+		return this.http.patch<FirestoreDocument<T>>(url.toURL(), requestBody).pipe(
+			map(this.parseDocument)
+		);
+
+	}
+
+	delete(url: FirestoreDocumentURL): Observable<void> {
+
+		return this.http.delete<void>(url.toURL());
+
+	}
+
+	batchGet<T>(url: FirestoreBatchGetURL): Observable<FirestoreDTO<T>[]> {
+
+		return this.http.post<FirestoreBatchGetResponse<T>[]>(url.toURL(), url.toRequestBody()).pipe(
+			map(this.parseBatchGetResponse)
+		)
+
+	}
+
+	list<T>(listUrl: FirestoreListURL): Observable<FirestoreDTO<T>[]> {
+
+		const url = listUrl.toURL();
+		return this.http.get<FirestoreDocuments<T>>(url).pipe(
+
+			expand(({ nextPageToken }) => (nextPageToken ? this.http.get<FirestoreDocuments<T>>(`${url}&pageToken=${nextPageToken}`) : EMPTY)),
+			concatMap(documents => this.parseDocuments(documents)),
+			toArray()
 
 		);
 
 	}
 
-	async update<T>(url: FirestorePatchURL, requestBody: FirestoreDocument<T>): Promise<FirestoreDTO<T>> {
-
-		return HTTP.patch<FirestoreDocument<T>, FirestoreDocument<T>, FirestoreDTO<T>>(
-
-			url.toURL(),
-			requestBody,
-			(response: FirestoreDocument<T>): FirestoreDTO<T> => this.parseDocument(response)
-
-		);
-
-	}
-
-	async delete(url: FirestoreDocumentURL): Promise<void> {
-
-		await HTTP.delete<void, void>(url.toURL());
-
-	}
-
-	async batchGet<T>(batchGetUrl: FirestoreBatchGetURL): Promise<FirestoreDTO<T>[]> {
-
-		return await HTTP.post<FirestoreBatchGetResponse<T>[], FirestoreBatchGetRequestBody, FirestoreDTO<T>[]>(
-
-			batchGetUrl.toURL(),
-			batchGetUrl.toRequestBody(),
-			(response: FirestoreBatchGetResponse<T>[]): FirestoreDTO<T>[] => this.parseBatchGetResponse(response)
-
-		);
-
-	}
-
-	async list<T>(listUrl: FirestoreListURL): Promise<FirestoreDTO<T>[]> {
-
-		let url = listUrl.toURL();
-		let nextPageToken: string | undefined = '';
-		let items: FirestoreDTO<T>[] = [];
-
-		do {
-
-			if (nextPageToken)
-				url = `${url}&pageToken=${nextPageToken}`;
-
-			items = [
-				...items,
-				...await HTTP.get<FirestoreDocuments<T>, FirestoreDTO<T>[]>(
-					url,
-					(response: FirestoreDocuments<T>): FirestoreDTO<T>[] => {
-						nextPageToken = response.nextPageToken;
-						return this.parseDocuments(response);
-					}
-				)
-			];
-
-		} while (!!nextPageToken);
-
-		return items;
-
-	}
-
-	async listIds<T>(listUrl: FirestoreListURL): Promise<FirestoreDTO<T>[]> {
+	listIds<T>(listUrl: FirestoreListURL): Observable<FirestoreDTO<T>[]> {
 
 		// create url
 		listUrl.onlyIds = true;
-		let url = listUrl.toURL();
-
-		let nextPageToken: string | undefined = '';
-		let items: FirestoreDTO<T>[] = [];
-
-		do {
-
-			if (nextPageToken)
-				url = `${url}&pageToken=${nextPageToken}`;
-
-			items = [
-				...items,
-				...await HTTP.get<FirestoreDocuments<T>, FirestoreDTO<T>[]>(
-					url,
-					(response: FirestoreDocuments<T>): FirestoreDTO<T>[] => {
-						nextPageToken = response.nextPageToken;
-						return this.parseDocuments(response);
-					}
-				)
-			];
-
-		} while (!!nextPageToken);
-
-		return items;
+		return this.list(listUrl);
 
 	}
 
-	async get<T>(url: FirestoreDocumentURL): Promise<FirestoreDTO<T>> {
+	get<T>(url: FirestoreDocumentURL): Observable<FirestoreDTO<T>> {
 
-		return await HTTP.get<FirestoreDocument<T>, FirestoreDTO<T>>(
-			url.toURL(),
-			(response: FirestoreDocument<T>) => this.parseDocument(response)
+		return this.http.get<FirestoreDocument<T>>(url.toURL()).pipe(
+			map(this.parseDocument)
 		);
 
 	}
 
-	async increase(url: FirestoreIncreaseURL): Promise<number> {
+	increase(url: FirestoreIncreaseURL): Observable<number> {
 
-		return await HTTP.post<FirestoreWriteResult, FirestoreWrites, number>(
-			url.toURL(),
-			url.toFirestoreWrites(),
-			(firebaseResponse: FirestoreWriteResult): number => Number(firebaseResponse?.writeResults[0]?.transformResults[0]?.integerValue)
+		return this.http.post<FirestoreWriteResult>(url.toURL(), url.toFirestoreWrites()).pipe(
+			map((firebaseResponse: FirestoreWriteResult): number => Number(firebaseResponse?.writeResults[0]?.transformResults[0]?.integerValue))
 		);
 
 	}

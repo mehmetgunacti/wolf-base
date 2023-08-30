@@ -1,7 +1,7 @@
 import { WolfBaseTableName } from '../../../constants/database.constant';
 import { LocalStorageService } from '../local-storage-service.interface';
-import { BookmarksTable, ClicksTable, ConfigurationTable, SyncLogsTable } from '../local-storage-table.interface';
-import { MockBookmarksTableImpl, MockClicksTableImpl, MockConfigurationTableImpl, MockSyncLogsTableImpl } from './tables';
+import { BookmarksTable, ClicksTable, ConfigurationTable } from '../local-storage-table.interface';
+import { MockBookmarksTableImpl, MockClicksTableImpl, MockConfigurationTableImpl } from './tables';
 import { WolfBaseDB } from './wolfbase.database';
 
 export class DexieLocalStorageService implements LocalStorageService {
@@ -10,8 +10,7 @@ export class DexieLocalStorageService implements LocalStorageService {
 		private db: WolfBaseDB,
 		public bookmarks: BookmarksTable,
 		public configuration: ConfigurationTable,
-		public clicks: ClicksTable,
-		public syncLog: SyncLogsTable
+		public clicks: ClicksTable
 	) { }
 
 	async drop(): Promise<void> {
@@ -45,7 +44,6 @@ export class MockLocalStorageService implements LocalStorageService {
 	bookmarks: BookmarksTable = new MockBookmarksTableImpl();
 	clicks: ClicksTable = new MockClicksTableImpl();
 	configuration: ConfigurationTable = new MockConfigurationTableImpl();
-	syncLog: SyncLogsTable = new MockSyncLogsTableImpl();
 
 	drop(): Promise<void> {
 		throw new Error('Method not implemented.');

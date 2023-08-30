@@ -3,10 +3,10 @@ import { RemoteCollection } from 'lib/constants/remote.constant';
 import { FirestoreConfig } from 'lib/models';
 import { Bookmark } from 'lib/models/bookmark.model';
 import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
-import { FirestoreIncreaseURL } from 'lib/utils';
-import { Firestore } from 'lib/utils/firestore/firestore.tool';
 import { BookmarkFirestoreConverter } from '../converter';
 import { FirestoreCollection } from '../firestore.collection';
+import { Firestore, FirestoreIncreaseURL } from 'services/firestore';
+import { Observable } from 'rxjs';
 
 export class BookmarksFirestoreCollection extends FirestoreCollection<Bookmark> implements BookmarksCollection {
 
@@ -19,7 +19,7 @@ export class BookmarksFirestoreCollection extends FirestoreCollection<Bookmark> 
 		);
 	}
 
-	async click(id: UUID, amount: number = 1): Promise<number> {
+	click(id: UUID, amount: number = 1): Observable<number> {
 
 		const url = new FirestoreIncreaseURL(
 			this.firestoreConfig,
@@ -29,7 +29,7 @@ export class BookmarksFirestoreCollection extends FirestoreCollection<Bookmark> 
 			':commit',
 			amount
 		);
-		return await this.firestore.increase(url);
+		return this.firestore.increase(url);
 
 	}
 

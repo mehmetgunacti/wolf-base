@@ -1,4 +1,4 @@
-import { Firestore, firestoreFactory } from 'lib/utils/firestore/firestore.tool';
+import { Firestore, firestoreFactory } from 'services/firestore';
 import { BookmarksCollection, ClicksCollection } from '../remote-storage-collection.interface';
 import { ClicksFirestoreCollection } from './collections';
 import { BookmarksFirestoreCollection } from './collections/bookmarks.collection';

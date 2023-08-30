@@ -1,11 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
-import { Bookmark, Click, LocalStorageService, POPULAR, RemoteStorageService, UUID, commaSplit, toggleArrayItem } from 'lib';
-import { fromEventPattern, of } from 'rxjs';
+import { Bookmark, Click, LocalStorageService, POPULAR, RemoteStorageService, commaSplit, toggleArrayItem } from 'lib';
+import { from, fromEventPattern, iif, of } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { clickTag, emptySelectedTags, search, setSelectedTags } from 'store/actions/bookmark-tags.actions';
 import { togglePopular } from 'store/actions/bookmark-ui.actions';
@@ -29,10 +28,10 @@ export class BookmarkEntitiesEffects {
 			// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
 			// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
 			(handler) => liveQuery(() => this.localStorage.bookmarks.list()).subscribe(handler),
-	
+
 			// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
 			(handler, unsubscribe) => unsubscribe()
-	
+
 		).pipe(
 			map(bookmarks => loadAllBookmarksSuccess({ bookmarks }))
 		)
@@ -177,27 +176,17 @@ export class BookmarkEntitiesEffects {
 		() => this.actions$.pipe(
 
 			ofType(updateBookmark),
-			switchMap(({ id, bookmark }) => this.handleBookmarkUpdate(id, bookmark))
-
+			switchMap(({ id, bookmark }) => from(this.localStorage.bookmarks.update(id, bookmark)).pipe(
+				switchMap(count => iif(
+					() => count === 1,
+					from(this.localStorage.bookmarks.get(id)).pipe(
+						map(bookmark => bookmark ? updateBookmarkSuccess({ bookmark }) : updateBookmarkFailure({ id }))
+					),
+					of(updateBookmarkFailure({ id }))
+				))
+			))
 		)
-
 	);
-
-	handleBookmarkUpdate = async (id: UUID, bookmark: Partial<Bookmark>): Promise<Action> => {
-
-		const count = await this.localStorage.bookmarks.update(id, bookmark);
-		if (count === 1) {
-
-			const bookmark = await this.localStorage.bookmarks.get(id);
-			if (bookmark)
-				return updateBookmarkSuccess({ bookmark });
-
-			return updateBookmarkFailure({ id });
-
-		}
-		return updateBookmarkFailure({ id });
-
-	}
 
 	bookmarksShowUpdateNotification$ = createEffect(
 

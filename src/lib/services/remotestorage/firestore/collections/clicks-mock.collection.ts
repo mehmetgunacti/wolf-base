@@ -1,29 +1,24 @@
+import { UUID } from 'lib/constants';
 import { Click } from 'lib/models/bookmark.model';
 import { ClicksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
+import { Observable, of } from 'rxjs';
 
 export class MockClicksFirestoreCollection implements ClicksCollection {
 
-	private clicks: Map<string, number> = new Map();
+	private clicks: Record<UUID, number> = {};
 
-	increase(id: string, amount: number): Promise<number> {
+	increase(id: string, amount: number): Observable<number> {
 
-		let current = this.clicks.get(id) ?? 0;
+		let current = this.clicks[id] ?? 0;
 		current += amount;
-		this.clicks.set(id, current);
-		return Promise.resolve(current);
+		this.clicks[id] = current;
+		return of(current);
 
 	}
 
-	downloadMany(): Promise<Click[]> {
+	downloadMany(): Observable<Click[]> {
 
-		const clicks = Array.from(this.clicks.entries()).map(click => ({
-
-			id: click[0],
-			current: 0,
-			total: click[1]
-
-		} as Click));
-		return Promise.resolve(clicks);
+		return of(Object.keys(this.clicks).map(id => ({ id, current: 0, total: this.clicks[id] })));
 
 	}
 

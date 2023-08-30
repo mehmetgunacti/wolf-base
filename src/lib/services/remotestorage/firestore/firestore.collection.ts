@@ -2,9 +2,8 @@ import { UUID } from "lib/constants";
 import { RemoteCollection } from "lib/constants/remote.constant";
 import { FirestoreConfig, RemoteData, RemoteMetadata } from "lib/models";
 import { Entity } from "lib/models/entity.model";
-import { FIRESTORE_VALUE } from "lib/utils";
-import { FirestoreBatchGetURL, FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "lib/utils/firestore/firestore.model";
-import { Firestore } from "lib/utils/firestore/firestore.tool";
+import { Observable, filter, map, switchMap } from "rxjs";
+import { FIRESTORE_VALUE, Firestore, FirestoreBatchGetURL, FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "services/firestore";
 import { RemoteStorageCollection } from "../remote-storage-collection.interface";
 
 export abstract class FirestoreCollection<T extends Entity> implements RemoteStorageCollection<T> {
@@ -18,21 +17,7 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 		protected converter: FirestoreConverter<T>
 	) { }
 
-	// async create(item: T): Promise<SyncDTO<T>> {
-
-	// 	const url = new FirestoreCreateURL(
-	// 		this.baseURL,
-	// 		this.projectId,
-	// 		this.apiKey,
-	// 		this.remoteCollection,
-	// 		item.id
-	// 	);
-	// 	const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
-	// 	return await this.firestore.create(url, { fields: requestBody });
-
-	// }
-
-	async upload(item: T): Promise<RemoteData<T>> {
+	upload(item: T): Observable<RemoteData<T>> {
 
 		const url = new FirestorePatchURL(
 			this.firestoreConfig,
@@ -41,36 +26,36 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 			this.converter.toUpdateMask(item)
 		);
 		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
-		return this.toRemoteData(
-			await this.firestore.update(url, { fields: requestBody })
+		return this.firestore.update(url, { fields: requestBody }).pipe(
+			map(this.toRemoteData)
 		);
 
 	}
 
-	async delete(id: UUID): Promise<void> {
+	delete(id: UUID): Observable<void> {
 
 		const url = new FirestoreDocumentURL(
 			this.firestoreConfig,
 			this.remoteCollection,
 			id
 		);
-		await this.firestore.delete(url);
+		return this.firestore.delete(url);
 
 	}
 
-	async moveToTrash(id: UUID): Promise<void> {
+	moveToTrash(id: UUID): Observable<void> {
 
-		const remoteData = await this.downloadOne(id);
-		if (remoteData) {
+		return this.downloadOne(id).pipe(
 
-			await this.delete(id);
-			await this.trash(remoteData.entity);
+			filter((remoteData): remoteData is RemoteData<T> => remoteData !== null),
+			switchMap((remoteData: RemoteData<T>) => this.trash(remoteData.entity)),
+			switchMap((remoteData: RemoteData<T>) => this.delete(remoteData.entity.id))
 
-		}
+		)
 
 	}
 
-	async trash(item: T): Promise<void> {
+	trash(item: T): Observable<RemoteData<T>> {
 
 		const url = new FirestoreCreateURL(
 			this.firestoreConfig,
@@ -78,27 +63,27 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 			new Date().toISOString()
 		);
 		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
-		await this.firestore.create(url, { fields: requestBody });
+		return this.firestore.create(url, { fields: requestBody }).pipe(
+			map(this.toRemoteData)
+		);
 
 	}
 
-	async downloadOne(id: UUID): Promise<RemoteData<T> | null> {
+	downloadOne(id: UUID): Observable<RemoteData<T> | null> {
 
 		const url = new FirestoreDocumentURL(
 			this.firestoreConfig,
 			this.remoteCollection,
 			id
 		);
-		const dto = await this.firestore.get<T>(url);
-		if (dto)
-			return this.toRemoteData(dto);
-		return null;
+		return this.firestore.get<T>(url).pipe(
+			map(dto => dto ? this.toRemoteData(dto) : null)
+		)
 
 	}
 
-	async downloadMany(ids?: UUID[]): Promise<RemoteData<T>[]> {
+	downloadMany(ids?: UUID[]): Observable<RemoteData<T>[]> {
 
-		let list: FirestoreDTO<T>[];
 		if (ids) {
 
 			const url = new FirestoreBatchGetURL(
@@ -106,23 +91,28 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 				this.remoteCollection,
 				ids
 			);
-			list = await this.firestore.batchGet<T>(url);
+			return this.firestore.batchGet<T>(url).pipe(
 
-		} else {
+				map(list => list.map(dto => this.toRemoteData(dto)))
 
-			const url = new FirestoreListURL(
-				this.firestoreConfig,
-				this.remoteCollection,
-				this.pageSize
 			);
-			list = await this.firestore.list<T>(url);
 
 		}
-		return list.map(dto => this.toRemoteData(dto));
+
+		const url = new FirestoreListURL(
+			this.firestoreConfig,
+			this.remoteCollection,
+			this.pageSize
+		);
+		return this.firestore.list<T>(url).pipe(
+
+			map(list => list.map(dto => this.toRemoteData(dto)))
+
+		);
 
 	}
 
-	async downloadIds(): Promise<RemoteMetadata[]> {
+	downloadIds(): Observable<RemoteMetadata[]> {
 
 		const url = new FirestoreListURL(
 			this.firestoreConfig,
@@ -130,8 +120,11 @@ export abstract class FirestoreCollection<T extends Entity> implements RemoteSto
 			this.pageSize,
 			true
 		);
-		const list = await this.firestore.listIds<T>(url);
-		return list.map(dto => this.toRemoteMetaData(dto));
+		return this.firestore.listIds<T>(url).pipe(
+
+			map(list => list.map(dto => this.toRemoteMetaData(dto)))
+
+		);
 
 	}
 

@@ -1,9 +1,9 @@
-import { Injectable, inject } from "@angular/core";
+import { inject } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { BookmarksCollection, ClicksCollection, Firestore, FirestoreConfig, MockBookmarksFirestoreCollection, MockClicksFirestoreCollection, RemoteStorageService, bookmarksCollectionFactory, clicksCollectionFactory, firestoreFactory } from "lib";
-import { distinctUntilChanged } from "rxjs";
+import { BookmarksCollection, ClicksCollection, FirestoreConfig, MockBookmarksFirestoreCollection, MockClicksFirestoreCollection, RemoteStorageService, bookmarksCollectionFactory, clicksCollectionFactory } from "lib";
 import { showNotification } from "store/actions/core-notification.actions";
 import { selCoreFirestoreConfig } from "store/selectors/core-configuration.selectors";
+import { Firestore, firestoreFactory } from "./firestore";
 
 export class RemoteStorageServiceProxy implements RemoteStorageService, ProxyHandler<RemoteStorageService> {
 

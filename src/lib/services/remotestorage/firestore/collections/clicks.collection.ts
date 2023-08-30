@@ -3,8 +3,8 @@ import { RemoteCollection } from 'lib/constants/remote.constant';
 import { FirestoreConfig } from 'lib/models';
 import { Click } from 'lib/models/bookmark.model';
 import { ClicksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
-import { FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL } from 'lib/utils';
-import { Firestore } from 'lib/utils/firestore/firestore.tool';
+import { Observable, map } from 'rxjs';
+import { Firestore, FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL } from 'services/firestore';
 
 export class ClicksFirestoreCollection implements ClicksCollection {
 
@@ -16,7 +16,7 @@ export class ClicksFirestoreCollection implements ClicksCollection {
 		private firestoreConfig: FirestoreConfig
 	) { }
 
-	async increase(id: UUID, amount: number): Promise<number> {
+	increase(id: UUID, amount: number): Observable<number> {
 
 		const url = new FirestoreIncreaseURL(
 			this.firestoreConfig,
@@ -26,19 +26,20 @@ export class ClicksFirestoreCollection implements ClicksCollection {
 			':commit',
 			amount
 		);
-		return await this.firestore.increase(url);
+		return this.firestore.increase(url);
 
 	}
 
-	async downloadMany(): Promise<Click[]> {
+	downloadMany(): Observable<Click[]> {
 
 		const url = new FirestoreListURL(
 			this.firestoreConfig,
 			this.remoteCollection,
 			this.pageSize
 		);
-		const items: FirestoreDTO<{ clicks: number }>[] = await this.firestore.list<{ clicks: number }>(url);
-		return items.map(dto => this.convertToClick(dto));
+		return this.firestore.list<{ clicks: number }>(url).pipe(
+			map(items => items.map(dto => this.convertToClick(dto)))
+		);
 
 	}
 

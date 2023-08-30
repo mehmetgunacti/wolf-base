@@ -1,5 +1,5 @@
 import { Bookmark } from "lib/models";
-import { FIRESTORE_VALUE, FirestoreConverter } from "lib/utils";
+import { FIRESTORE_VALUE, FirestoreConverter } from "services/firestore";
 
 export class BookmarkFirestoreConverter implements FirestoreConverter<Bookmark> {
 

@@ -1,7 +1,8 @@
 import { AsyncZippable, FlateError, zip } from "fflate";
 import * as FileSaver from 'file-saver-es';
-import { Bookmark, IDBase } from "lib/models";
+import { IDBase } from "lib/models";
 import { LocalStorageService } from "lib/services";
+import { Observable, combineLatest, map, switchMap } from "rxjs";
 import { sleep } from "./helper.tool";
 
 const toUint8Array = <T extends IDBase>(data: T[]): Uint8Array => {
@@ -16,38 +17,39 @@ export class BackupDatabase {
 
 	constructor(private localStorage: LocalStorageService) { }
 
-	async execute(): Promise<void> {
+	execute(): Observable<void> {
 
-		const bookmarks: Bookmark[] = await this.localStorage.bookmarks.list();
-		const bookmark_trash: Bookmark[] = await this.localStorage.bookmarks.listDeletedItems();
+		return combineLatest([
+			this.localStorage.bookmarks.list(),
+			this.localStorage.bookmarks.listDeletedItems()
+		]).pipe(
+			map(([bookmarks, bookmark_trash]) => ({
+				'bookmark.json': toUint8Array(bookmarks),
+				'bookmark_deleted.json': toUint8Array(bookmark_trash)
+			})),
+			switchMap((zippable: AsyncZippable) => new Promise<void>((resolve, reject) => {
 
-		const zippable: AsyncZippable = {
-			'bookmark.json': toUint8Array(bookmarks),
-			'bookmark_deleted.json': toUint8Array(bookmark_trash)
-		};
+				zip(zippable, { level: 9 }, async (err: FlateError | null, data: Uint8Array) => {
 
-		return new Promise((resolve, reject) => {
+					if (err) {
 
-			zip(zippable, { level: 9 }, async (err: FlateError | null, data: Uint8Array) => {
+						reject(err.message);
+						return;
 
-				if (err) {
+					}
 
-					reject(err.message);
-					return;
+					// Generate the zip file
+					const content: Blob = new Blob([data], { type: 'application/zip' });
 
-				}
+					// save zip file
+					FileSaver.saveAs(content, `backup_${new Date().toISOString()}.zip`);
+					await sleep(1000);
+					resolve();
 
-				// Generate the zip file
-				const content: Blob = new Blob([data], { type: 'application/zip' });
+				});
 
-				// save zip file
-				FileSaver.saveAs(content, `backup_${new Date().toISOString()}.zip`);
-				await sleep(1000);
-				resolve();
-
-			});
-
-		});
+			}))
+		);
 
 	}
 

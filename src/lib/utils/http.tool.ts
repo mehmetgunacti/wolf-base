@@ -21,7 +21,7 @@ export class HttpError extends Error {
 
 }
 
-export class HTTP {
+export class HTTP1 {
 
 	static async http<HTTPRESP, RETVAL>(
 		request: RequestInfo,
@@ -47,7 +47,7 @@ export class HTTP {
 		args: RequestInit = { method: HTTP_METHOD.GET }
 	): Promise<RETVAL> {
 
-		return await HTTP.http<HTTPRESP, RETVAL>(new Request(path, args), responseHandler);
+		return await HTTP1.http<HTTPRESP, RETVAL>(new Request(path, args), responseHandler);
 
 	}
 
@@ -75,7 +75,7 @@ export class HTTP {
 		args: RequestInit = { method: HTTP_METHOD.POST, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }
 	): Promise<RETVAL> {
 
-		return await HTTP.http<HTTPRESP, RETVAL>(new Request(path, args), responseHandler);
+		return await HTTP1.http<HTTPRESP, RETVAL>(new Request(path, args), responseHandler);
 
 	}
 
@@ -86,7 +86,7 @@ export class HTTP {
 		args: RequestInit = { method: HTTP_METHOD.PUT, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }
 	): Promise<RETVAL> {
 
-		return await HTTP.http<HTTPRESP, RETVAL>(new Request(path, args), responseHandler);
+		return await HTTP1.http<HTTPRESP, RETVAL>(new Request(path, args), responseHandler);
 
 	}
 
@@ -97,7 +97,7 @@ export class HTTP {
 		args: RequestInit = { method: HTTP_METHOD.PATCH, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }
 	): Promise<RETVAL> {
 
-		return await HTTP.http<HTTPRESP, RETVAL>(new Request(path, args), responseHandler);
+		return await HTTP1.http<HTTPRESP, RETVAL>(new Request(path, args), responseHandler);
 
 	}
 
@@ -107,7 +107,7 @@ export class HTTP {
 		args: RequestInit = { method: HTTP_METHOD.DELETE }
 	): Promise<RETVAL> {
 
-		return await HTTP.http<HTTPRESP, RETVAL>(new Request(path, args), responseHandler);
+		return await HTTP1.http<HTTPRESP, RETVAL>(new Request(path, args), responseHandler);
 
 	}
 
