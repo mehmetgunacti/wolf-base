@@ -1,6 +1,6 @@
 import { WolfBaseTableName } from 'lib/constants/database.constant';
-import { KeyValueTable } from '../../local-storage-table.interface';
 import { WolfBaseDB } from '../wolfbase.database';
+import { KeyValueTable } from 'lib';
 
 export class KeyValueTableImpl implements KeyValueTable {
 

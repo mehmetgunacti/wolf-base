@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { LocalStorageService, WolfBaseTableName } from 'lib';
-import { Observable, combineLatest, map, startWith, switchMap, tap, withLatestFrom } from 'rxjs';
+import { Observable, combineLatest, map, startWith, switchMap } from 'rxjs';
 import { backupDatabase } from 'store/actions/database.actions';
 
 @Component({
@@ -18,7 +18,7 @@ export class DatabasePageComponent {
 	content$: Observable<string[]>;
 
 	private store: Store = inject(Store);
-	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
+	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE); // todo: move this to ngrx
 
 	constructor() {
 

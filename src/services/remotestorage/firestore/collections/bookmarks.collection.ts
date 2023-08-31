@@ -2,11 +2,11 @@ import { UUID } from 'lib/constants/common.constant';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { FirestoreConfig } from 'lib/models';
 import { Bookmark } from 'lib/models/bookmark.model';
-import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
-import { BookmarkFirestoreConverter } from '../converter';
-import { FirestoreCollection } from '../firestore.collection';
-import { Firestore, FirestoreIncreaseURL } from 'services/firestore';
 import { Observable } from 'rxjs';
+import { Firestore, FirestoreIncreaseURL } from 'services/firestore';
+import { BookmarkFirestoreConverter } from '../converter';
+import { BookmarksCollection } from 'lib';
+import { FirestoreCollection } from 'lib/services/firestore.collection';
 
 export class BookmarksFirestoreCollection extends FirestoreCollection<Bookmark> implements BookmarksCollection {
 

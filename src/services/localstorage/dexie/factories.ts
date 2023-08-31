@@ -1,4 +1,4 @@
-import { WolfBaseTableName } from '../../../constants/database.constant';
+import { WolfBaseTableName } from 'lib';
 import { DexieLocalStorageService } from './dexie.service';
 import { ClicksTableImpl } from './tables';
 import { BookmarksTableImpl } from './tables/bookmarks.table';

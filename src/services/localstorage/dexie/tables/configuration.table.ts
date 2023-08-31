@@ -1,8 +1,8 @@
+import { ConfigurationTable } from 'lib';
 import { CONF_KEYS } from 'lib/constants/database.constant';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
-import { ConfigurationTable } from 'lib/services/localstorage/local-storage-table.interface';
-import { KeyValueTableImpl } from './key-value.table';
 import { DEFAULT_CONF_VALUES } from '../wolfbase.database';
+import { KeyValueTableImpl } from './key-value.table';
 
 export class ConfigurationTableImpl extends KeyValueTableImpl implements ConfigurationTable {
 

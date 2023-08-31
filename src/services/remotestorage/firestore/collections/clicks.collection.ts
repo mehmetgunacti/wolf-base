@@ -1,8 +1,8 @@
+import { ClicksCollection } from 'lib';
 import { UUID } from 'lib/constants/common.constant';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { FirestoreConfig } from 'lib/models';
 import { Click } from 'lib/models/bookmark.model';
-import { ClicksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { Observable, map } from 'rxjs';
 import { Firestore, FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL } from 'services/firestore';
 

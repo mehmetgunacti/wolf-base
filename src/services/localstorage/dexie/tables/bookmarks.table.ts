@@ -1,8 +1,7 @@
-import { Metadata, RemoteData, RemoteMetadata, SyncData, isNewer, sleep, toggleArrayItem } from 'lib';
+import { BookmarksTable, Metadata, RemoteData, RemoteMetadata, SyncData, isNewer, sleep, toggleArrayItem } from 'lib';
 import { UUID } from 'lib/constants/common.constant';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { Bookmark } from 'lib/models/bookmark.model';
-import { BookmarksTable } from 'lib/services/localstorage/local-storage-table.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { WolfBaseDB } from '../wolfbase.database';
 import { EntityTableImpl } from './entity.table';

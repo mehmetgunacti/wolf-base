@@ -1,7 +1,7 @@
 import { UUID, WolfBaseTableName } from "lib/constants";
 import { Click } from "lib/models";
-import { ClicksTable } from "../../local-storage-table.interface";
 import { WolfBaseDB } from "../wolfbase.database";
+import { ClicksTable } from "lib";
 
 export class ClicksTableImpl implements ClicksTable {
 

@@ -1,5 +1,4 @@
-import { BookmarksCollection, ClicksCollection } from "../remote-storage-collection.interface";
-import { RemoteStorageService } from "../remote-storage-service.interface";
+import { BookmarksCollection, ClicksCollection, RemoteStorageService } from "lib";
 
 export class FirestoreRemoteStorageService implements RemoteStorageService {
 

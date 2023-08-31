@@ -1,5 +1,4 @@
-import { BookmarksCollection, ClicksCollection } from "../remote-storage-collection.interface";
-import { RemoteStorageService } from "../remote-storage-service.interface";
+import { BookmarksCollection, ClicksCollection, RemoteStorageService } from "lib";
 import { MockBookmarksFirestoreCollection, MockClicksFirestoreCollection } from "./collections";
 
 export class MockFirestoreRemoteStorageService implements RemoteStorageService {

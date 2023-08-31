@@ -1,10 +1,10 @@
+import { RemoteStorageCollection } from "lib";
 import { UUID } from "lib/constants";
 import { RemoteCollection } from "lib/constants/remote.constant";
 import { FirestoreConfig, RemoteData, RemoteMetadata } from "lib/models";
 import { Entity } from "lib/models/entity.model";
 import { Observable, filter, map, switchMap } from "rxjs";
 import { FIRESTORE_VALUE, Firestore, FirestoreBatchGetURL, FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from "services/firestore";
-import { RemoteStorageCollection } from "../remote-storage-collection.interface";
 
 export abstract class FirestoreCollection<T extends Entity> implements RemoteStorageCollection<T> {
 

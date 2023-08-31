@@ -1,6 +1,4 @@
-import { WolfBaseTableName } from '../../../constants/database.constant';
-import { LocalStorageService } from '../local-storage-service.interface';
-import { BookmarksTable, ClicksTable, ConfigurationTable } from '../local-storage-table.interface';
+import { BookmarksTable, ClicksTable, ConfigurationTable, LocalStorageService, WolfBaseTableName } from 'lib';
 import { MockBookmarksTableImpl, MockClicksTableImpl, MockConfigurationTableImpl } from './tables';
 import { WolfBaseDB } from './wolfbase.database';
 

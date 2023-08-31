@@ -2,6 +2,8 @@ export * from './backend.service';
 export * from './dom.service';
 export * from './error.handler';
 export * from './firestore';
+export * from './localstorage';
 export * from './remote-storage.service';
+export * from './remotestorage';
 export * from './theme.service';
 export * from './toast.service';

@@ -1,11 +1,11 @@
 import { Firestore, firestoreFactory } from 'services/firestore';
-import { BookmarksCollection, ClicksCollection } from '../remote-storage-collection.interface';
 import { ClicksFirestoreCollection } from './collections';
 import { BookmarksFirestoreCollection } from './collections/bookmarks.collection';
-import { FirestoreRemoteStorageService } from './firestore.service';
 import { FirestoreConfig } from 'lib/models';
+import { BookmarksCollection, ClicksCollection, RemoteStorageService } from 'lib';
+import { FirestoreRemoteStorageService } from 'lib/services/firestore.service';
 
-export const remoteStorageServiceFactory = (firestoreConfig: FirestoreConfig): FirestoreRemoteStorageService => {
+export const remoteStorageServiceFactory = (firestoreConfig: FirestoreConfig): RemoteStorageService => {
 
 	const firestore: Firestore = firestoreFactory();
 	return new FirestoreRemoteStorageService(

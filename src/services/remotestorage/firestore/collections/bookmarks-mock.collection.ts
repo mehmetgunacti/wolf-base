@@ -1,7 +1,7 @@
+import { BookmarksCollection } from 'lib';
 import { UUID } from 'lib/constants';
 import { RemoteData, RemoteMetadata } from 'lib/models';
 import { Bookmark } from 'lib/models/bookmark.model';
-import { BookmarksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { Observable, delay, map, of } from 'rxjs';
 
 const SLEEP = 20;

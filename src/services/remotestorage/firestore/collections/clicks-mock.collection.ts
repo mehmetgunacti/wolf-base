@@ -1,6 +1,6 @@
+import { ClicksCollection } from 'lib';
 import { UUID } from 'lib/constants';
 import { Click } from 'lib/models/bookmark.model';
-import { ClicksCollection } from 'lib/services/remotestorage/remote-storage-collection.interface';
 import { Observable, of } from 'rxjs';
 
 export class MockClicksFirestoreCollection implements ClicksCollection {

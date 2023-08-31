@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
-import { Bookmark, LocalStorageService, RemoteData, RemoteStorageService } from 'lib';
+import { Bookmark, RemoteData } from 'lib';
 import { filter, map, switchMap } from 'rxjs/operators';
+import { LocalStorageService, RemoteStorageService } from 'lib';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { downloadRemoteData, downloadRemoteDataFailure, downloadRemoteDataSuccess, overrideLocalItem, overrideRemoteItem, partialDownloadSuccess, partialUploadSuccess, purgeLocalItem, purgeRemoteItem } from 'store/actions/stats-bookmark.actions';
 

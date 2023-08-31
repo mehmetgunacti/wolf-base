@@ -1,10 +1,10 @@
 import { Collection, IndexableType, Table } from 'dexie';
+import { EntityTable } from 'lib';
 import { UUID } from 'lib/constants/common.constant';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { RemoteData, RemoteMetadata, SyncData } from 'lib/models';
 import { Entity, Metadata } from 'lib/models/entity.model';
 import { isNewer } from 'lib/utils';
-import { EntityTable } from '../../local-storage-table.interface';
 import { WolfBaseDB } from '../wolfbase.database';
 
 export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T> {
