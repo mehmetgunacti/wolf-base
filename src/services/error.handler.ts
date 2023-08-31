@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { HttpError, ToastConfiguration, errorNotification } from 'lib';
+import { ToastConfiguration, errorNotification } from 'lib';
 import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 
@@ -33,7 +33,7 @@ export class CustomErrorHandler implements ErrorHandler {
 
 	private getToastConfiguration = (error: Error): ToastConfiguration => {
 
-		if (error instanceof HttpErrorResponse || error instanceof HttpError)
+		if (error instanceof HttpErrorResponse)
 			switch (error.status) {
 
 				case 0: return {
