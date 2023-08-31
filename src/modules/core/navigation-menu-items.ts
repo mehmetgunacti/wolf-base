@@ -22,6 +22,12 @@ export const miDatabase: MenuItem = {
 	routerLink: ['/database']
 };
 
+export const miLogs: MenuItem = {
+	label: 'Logs',
+	icon: PrimeIcons.LIST,
+	routerLink: ['/logs']
+};
+
 export const miStats = (badge?: string): MenuItem => ({
 	label: 'Stats',
 	icon: PrimeIcons.CHART_BAR,

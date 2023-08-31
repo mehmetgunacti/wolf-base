@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { selStatsModuleState } from "./stats.selectors";
 import { DatabaseModuleState } from "store/states/database.state";
 
 const selDatabaseModuleState = createFeatureSelector<DatabaseModuleState>('database');

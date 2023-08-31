@@ -81,7 +81,8 @@ export class CorePageComponent implements OnDestroy {
 					navItems.miBookmarks(formatBadge_Bookmark(bookmarkNumbers)),
 					navItems.miDatabase,
 					navItems.miStats(formatBadge_Stats(statsNumbers)),
-					navItems.miSettings
+					navItems.miSettings,
+					navItems.miLogs
 				];
 				if (this.bigScreen)
 					return menuItems;

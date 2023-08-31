@@ -16,7 +16,8 @@ import { coreReducer } from './reducers/core.reducer';
 import { databaseReducer } from './reducers/database.reducer';
 import { statsReducer } from './reducers/stats.reducer';
 import { AppState } from './states/app.state';
-import { LogEffects } from './effects/log.effects';
+import { LogsEffects } from './effects/logs.effects';
+import { logsReducer } from './reducers/logs.reducer';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -60,7 +61,7 @@ export const effects = [
 	SettingsEffects,
 
 	// Logs
-	LogEffects
+	LogsEffects
 
 ];
 
@@ -69,6 +70,7 @@ export const reducers: ActionReducerMap<AppState> = {
 	core: combineReducers(coreReducer),
 	stats: statsReducer,
 	bookmark: combineReducers(bookmarkReducer),
-	database: databaseReducer
+	database: databaseReducer,
+	logs: logsReducer
 
 };

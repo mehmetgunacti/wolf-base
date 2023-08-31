@@ -1,0 +1,11 @@
+<p-card header="Logs" *ngIf="list$ | async as logs">
+
+	<ng-container *ngFor="let log of list$ | async">
+
+		<h6>{{ log.date | date:'dd.MM.yyyy hh:mm:ss' }}</h6>
+		<h5>{{ log.message }}</h5>
+
+	</ng-container>
+	<p *ngIf="logs.length === 0"><i>nothing to display</i></p>
+
+</p-card>

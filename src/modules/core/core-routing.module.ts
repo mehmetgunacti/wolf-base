@@ -21,6 +21,10 @@ const routes: Routes = [
 				loadChildren: () => import('modules/database/database.module').then(m => m.DatabaseModule)
 			},
 			{
+				path: 'logs',
+				loadChildren: () => import('modules/logs/logs.module').then(m => m.LogsModule)
+			},
+			{
 				path: 'stats',
 				loadChildren: () => import('modules/stats/stats.module').then(m => m.StatsModule)
 			},
