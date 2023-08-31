@@ -1,24 +1,25 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { LocalStorageService, WolfBaseTableName } from 'lib';
-import { Observable, combineLatest, map, startWith, switchMap } from 'rxjs';
-import { backupDatabase } from 'store/actions/database.actions';
+import { WolfBaseTableName } from 'lib';
+import { Observable, Subscription, startWith, tap } from 'rxjs';
+import { backupDatabase, loadValues, search } from 'store/actions/database.actions';
+import { selDatabaseSelectedContent } from 'store/selectors/database.selectors';
 
 @Component({
 	selector: 'app-database-page',
 	templateUrl: './database-page.component.html'
 })
-export class DatabasePageComponent {
+export class DatabasePageComponent implements OnDestroy {
 
 	tableNames: { label: string, value?: string, disabled?: boolean }[];
 	fcTableName = new FormControl();
 	fcSearch = new FormControl('');
 	content$: Observable<string[]>;
 
+	subscriptions: Subscription = new Subscription();
+
 	private store: Store = inject(Store);
-	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE); // todo: move this to ngrx
 
 	constructor() {
 
@@ -27,21 +28,34 @@ export class DatabasePageComponent {
 			...Object.entries(WolfBaseTableName).map(([value, label]) => ({ label, value }))
 		];
 
-		const tableValues$: Observable<string[]> = this.fcTableName.valueChanges.pipe(
+		this.subscriptions.add(
 
-			switchMap((tablename: WolfBaseTableName) => this.localStorage.dump(tablename)),
-			map(dump => Array.from(dump.values()))
+			this.fcTableName.valueChanges.pipe(
+
+				tap(tablename => this.store.dispatch(loadValues({ tablename })))
+
+			).subscribe()
+
+		);
+
+		this.subscriptions.add(
+
+			this.fcSearch.valueChanges.pipe(
+
+				startWith(null),
+				tap(searchValue => this.store.dispatch(search({ value: searchValue })))
+
+			).subscribe()
 
 		);
 
-		this.content$ = combineLatest([
-			tableValues$,
-			this.fcSearch.valueChanges.pipe(startWith(null))
-		 ]).pipe(
+		this.content$ = this.store.select(selDatabaseSelectedContent);
 
-			map(([values, filterValue]) => filterValue ? values.filter(v => v.toLowerCase().includes(filterValue.toLowerCase())) : values)
+	}
 
-		);
+	ngOnDestroy(): void {
+
+		this.subscriptions.unsubscribe();
 
 	}
 

@@ -3,8 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { LocalStorageService } from 'lib';
 import { BackupDatabase } from 'lib/utils/database.util';
-import { switchMap } from 'rxjs/operators';
-import { backupDatabase } from 'store/actions/database.actions';
+import { map, switchMap } from 'rxjs/operators';
+import { backupDatabase, loadValues, loadValuesSuccess } from 'store/actions/database.actions';
 
 @Injectable()
 export class DatabaseEffects {
@@ -21,6 +21,19 @@ export class DatabaseEffects {
 
 		),
 		{ dispatch: false }
+
+	);
+
+	selectValues$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(loadValues),
+			switchMap(({ tablename }) => this.localStorage.dump(tablename)),
+			map(dump => Array.from(dump.values())),
+			map(selectedValues => loadValuesSuccess({ selectedValues }))
+
+		)
 
 	);
 
