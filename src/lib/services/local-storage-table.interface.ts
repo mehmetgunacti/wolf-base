@@ -1,5 +1,5 @@
 import { UUID } from "lib/constants/common.constant";
-import { SyncData } from "lib/models";
+import { LogMessage, SyncData } from "lib/models";
 import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Configuration, FirestoreConfig } from "lib/models/configuration.model";
 import { Entity, Metadata } from "lib/models/entity.model";
@@ -81,5 +81,13 @@ export interface ConfigurationTable {
 
 	getFirestoreConfig(): Promise<FirestoreConfig | null>;
 	getConfiguration(): Promise<Configuration>;
+
+}
+
+export interface LogsTable {
+
+	add(message: LogMessage): Promise<void>;
+	list(): Promise<LogMessage[]>;
+	clear(): Promise<void>;
 
 }

@@ -1,6 +1,5 @@
 import { Bookmark } from './bookmark.model';
-import { IDBase } from './id-base.model';
-import { ISODateString } from './sync.model';
+import { IDBase, ISODateString } from './id-base.model';
 
 export type WolfEntity = Bookmark;
 // export type PartialEntity<T extends Entity> = Omit<Partial<T>, keyof Entity>;
