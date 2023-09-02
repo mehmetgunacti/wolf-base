@@ -35,7 +35,7 @@ export class FirestoreAPIClientImpl implements FirestoreAPIClient {
 	create<T>(url: FirestoreCreateURL, requestBody: FirestoreDocument<T>): Observable<FirestoreDTO<T>> {
 
 		return this.http.post<FirestoreDocument<T>>(url.toURL(), requestBody).pipe(
-			map(this.parseDocument)
+			map(response => this.parseDocument(response))
 		);
 
 	}
@@ -43,7 +43,7 @@ export class FirestoreAPIClientImpl implements FirestoreAPIClient {
 	update<T>(url: FirestorePatchURL, requestBody: FirestoreDocument<T>): Observable<FirestoreDTO<T>> {
 
 		return this.http.patch<FirestoreDocument<T>>(url.toURL(), requestBody).pipe(
-			map(this.parseDocument)
+			map(response => this.parseDocument(response))
 		);
 
 	}
@@ -57,7 +57,7 @@ export class FirestoreAPIClientImpl implements FirestoreAPIClient {
 	batchGet<T>(url: FirestoreBatchGetURL): Observable<FirestoreDTO<T>[]> {
 
 		return this.http.post<FirestoreBatchGetResponse<T>[]>(url.toURL(), url.toRequestBody()).pipe(
-			map(this.parseBatchGetResponse)
+			map(response => this.parseBatchGetResponse(response))
 		)
 
 	}
@@ -86,7 +86,7 @@ export class FirestoreAPIClientImpl implements FirestoreAPIClient {
 	get<T>(url: FirestoreDocumentURL): Observable<FirestoreDTO<T>> {
 
 		return this.http.get<FirestoreDocument<T>>(url.toURL()).pipe(
-			map(this.parseDocument)
+			map(response => this.parseDocument(response))
 		);
 
 	}
@@ -101,12 +101,7 @@ export class FirestoreAPIClientImpl implements FirestoreAPIClient {
 
 	private parseBatchGetResponse<T>(response: FirestoreBatchGetResponse<T>[]): FirestoreDTO<T>[] {
 
-		console.log(response);
-		console.log(response?.filter(r => !!r.found));
-		const item = response?.filter(r => !!r.found).map(r => r.found)[0];
-		console.log(this);
-		return [this.parseDocument(item)];
-		// return response?.filter(r => !!r.found).map((r: FirestoreBatchGetResponse<T>) => this.parseDocument(r.found)) || [];
+		return response?.filter(r => !!r.found).map((r: FirestoreBatchGetResponse<T>) => this.parseDocument(r.found)) || [];
 
 	}
 
@@ -118,8 +113,6 @@ export class FirestoreAPIClientImpl implements FirestoreAPIClient {
 
 	// todo make parameter 'item' optional (if case no data returns..)
 	private parseDocument<T>(item: FirestoreDocument<T>): FirestoreDTO<T> {
-
-		console.log(item);
 
 		// parse 'document'
 		const { collection, document } = this.parseFirestoreURL(item.name ?? '');
