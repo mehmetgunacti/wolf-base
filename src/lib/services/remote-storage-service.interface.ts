@@ -1,7 +1,4 @@
-import {
-	BookmarksCollection,
-	ClicksCollection
-} from './remote-storage-collection.interface';
+import { BookmarksCollection, ClicksCollection } from './remote-storage-collection.interface';
 
 export interface RemoteStorageService {
 

@@ -1,10 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LocalStorageService, RemoteStorageService } from 'lib';
 import { MessageService } from 'primeng/api';
-import { CustomErrorHandler, localStorageServiceFactory } from 'services';
-import { RemoteStorageServiceProxy } from 'services/remote-storage.service';
+import { CustomErrorHandler, DexieLocalStorageServiceImpl, FirestoreRemoteStorageServiceImpl } from 'services';
 
 export const routes: Routes = [
 
@@ -33,18 +33,11 @@ export const routes: Routes = [
 export const LOCAL_STORAGE_SERVICE = new InjectionToken<LocalStorageService>('LocalStorageService');
 export const REMOTE_STORAGE_SERVICE = new InjectionToken<RemoteStorageService>('RemoteStorageService');
 
-export const remoteStorageServicyProxyFactory = (): RemoteStorageServiceProxy => {
-
-	const service = new RemoteStorageServiceProxy();
-	return new Proxy(service, service);
-
-}
-
 export const providers: Provider[] = [
 
 	// {
 
-	// 	// when Angular initializes
+	// 	// Angular initializes
 	// 	provide: APP_INITIALIZER,
 	// 	useFactory: appInitializerFactory,
 	// 	multi: true,
@@ -58,8 +51,8 @@ export const providers: Provider[] = [
 		useClass: CustomErrorHandler
 
 	},
-	{ provide: LOCAL_STORAGE_SERVICE, useFactory: localStorageServiceFactory },
-	{ provide: REMOTE_STORAGE_SERVICE, useFactory: remoteStorageServicyProxyFactory, deps: [Store] },
+	{ provide: LOCAL_STORAGE_SERVICE, useClass: DexieLocalStorageServiceImpl },
+	{ provide: REMOTE_STORAGE_SERVICE, useClass: FirestoreRemoteStorageServiceImpl, deps: [Store, HttpClient] },
 	MessageService
 
 ];

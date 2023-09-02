@@ -30,7 +30,7 @@ export class DatabaseEffects {
 
 			ofType(loadValues),
 			switchMap(({ tablename }) => this.localStorage.dump(tablename)),
-			map(dump => Array.from(dump.values())),
+			map(dump => Object.values(dump)),
 			map(selectedValues => loadValuesSuccess({ selectedValues }))
 
 		)

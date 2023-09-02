@@ -11,8 +11,6 @@ export interface LocalStorageService {
 	configuration: ConfigurationTable;
 	logs: LogsTable;
 
-	drop(): Promise<void>;
-	clear(tablename: WolfBaseTableName): Promise<void>;
-	dump(tablename: WolfBaseTableName): Promise<Map<string, string>>;
+	dump(tablename: WolfBaseTableName): Promise<Record<string, string>>;
 
 }

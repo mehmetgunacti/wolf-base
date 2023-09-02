@@ -1,3 +1,3 @@
-export * from './firestore.constant';
-export * from './firestore.model';
-export * from './firestore.tool';
+export * from './collections';
+export * from './firestore.collection';
+export * from './firestore.service';
