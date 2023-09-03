@@ -6,5 +6,5 @@ import { environment } from 'environments/environment';
 	templateUrl: './home-page.component.html'
 })
 export class HomePageComponent {
-	env = environment.production;
+	isProd = environment.production;
 }

@@ -3,7 +3,6 @@ import { BookmarkEntitiesEffects } from './effects/bookmark-entities.effects';
 import { BookmarkLocalStorageEffects } from './effects/bookmark-local-storage.effects';
 import { CoreNavigationEffects } from './effects/core-navigation.effects';
 import { CoreNotificationEffects } from './effects/core-notification.effects';
-import { CoreSettingsEffects } from './effects/core-settings.effects';
 import { CoreThemeEffects } from './effects/core-theme.effects';
 import { CoreUIEffects } from './effects/core-ui.effects';
 import { CoreEffects } from './effects/core.effects';
@@ -44,7 +43,6 @@ export const effects = [
 	CoreNavigationEffects,
 	CoreUIEffects,
 	CoreThemeEffects,
-	CoreSettingsEffects,
 
 	// Bookmarks
 	BookmarkEntitiesEffects,
