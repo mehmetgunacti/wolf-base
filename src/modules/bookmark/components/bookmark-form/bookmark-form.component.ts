@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { Bookmark, ToastConfiguration, UUID } from 'lib';
-import { AutoComplete } from 'primeng/autocomplete';
+import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { BehaviorSubject, Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
 
@@ -114,7 +114,7 @@ will be deleted. Continue?`)
 
 	}
 
-	onTagInput(event: { e: InputEvent, query: string }): void {
+	onTagInput(event: AutoCompleteCompleteEvent): void {
 
 		if (event.query.endsWith(' ')) {
 
@@ -123,7 +123,8 @@ will be deleted. Continue?`)
 				event.query.substring(0, event.query.length - 1)
 			]);
 			this.tagSuggestions$.next([]);
-			this.autocompleteChange.multiInputEL.nativeElement.value = '';
+			if (this.autocompleteChange.multiInputEl)
+				this.autocompleteChange.multiInputEl.nativeElement.value = '';
 
 		} else
 			this.tagInput.emit(event.query);

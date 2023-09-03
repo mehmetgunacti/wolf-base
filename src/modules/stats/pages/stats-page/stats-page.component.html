@@ -17,7 +17,7 @@
 	*ngIf="isConflictDialogVisible$ | async"
 	[header]="dialogTitle$ | async | noData:'View'"
 	[draggable]="false"
-	[visible]="isConflictDialogVisible$ | async"
+	[visible]="(isConflictDialogVisible$ | async) ?? false"
 	(visibleChange)="closeConflictDialog()"
 	[closeOnEscape]="true"
 	[closable]="true"

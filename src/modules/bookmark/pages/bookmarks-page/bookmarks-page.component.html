@@ -40,7 +40,7 @@
 	*ngIf="editDialogVisible$ | async"
 	header="Add Bookmark"
 	[draggable]="false"
-	[visible]="editDialogVisible$ | async"
+	[visible]="(editDialogVisible$ | async) ?? false"
 	(visibleChange)="closeAddDialog()"
 	[closeOnEscape]="true"
 	[closable]="true"

@@ -76,3 +76,8 @@
 		opacity: 0;
 	}
 }
+
+// fix
+.p-autocomplete-token-icon {
+	display: flex;
+}
