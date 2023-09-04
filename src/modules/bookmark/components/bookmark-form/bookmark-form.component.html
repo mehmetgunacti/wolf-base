@@ -54,7 +54,8 @@
 					type="text"
 					pInputText
 					[ngClass]="{ 'ng-invalid ng-dirty': fcUrl.invalid && fcUrl.dirty }"
-					[formControl]="fcUrl">
+					[formControl]="fcUrl"
+					(input)="checkUrl($event)">
 				<label>URL {{ form.urls.controls.length > 1 && idx === 0 ? '(Primary)' : '' }}</label>
 			</span>
 			<button *ngIf="idx === 0" pButton pRipple type="button" icon="pi pi-plus" class="p-button-text" title="Add URL" (click)="addURL()"></button>

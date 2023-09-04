@@ -238,4 +238,14 @@ will be deleted. Continue?`)
 
 	}
 
+	checkUrl(event: Event): void {
+
+		const inputElement = event.target as HTMLInputElement;
+		const value = inputElement.value;
+
+		if (value === "h" || value === "H")
+			inputElement.value = "https://";
+
+	}
+
 }
