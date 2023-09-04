@@ -31,7 +31,7 @@
 			<app-theme-switcher [isDark]="isThemeDark$ | async"
 								(switchTheme)="onSwitchTheme()"></app-theme-switcher>
 		</div>
-		<div bottom-version>v{{ builtVersion }} (#{{ builtNumber }}) {{ builtTime | date:'medium' }}</div>
+		<div bottom-version>v{{ builtVersion }} (#{{ builtNumber }}) {{ builtTime | date:'dd.MM.yyyy hh:mm:ss' }}</div>
 
 	</nav>
 	<article>
