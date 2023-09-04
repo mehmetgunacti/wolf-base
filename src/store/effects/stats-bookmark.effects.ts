@@ -240,9 +240,9 @@ export class StatsBookmarkEffects {
 			map(([, syncData]) => syncData[0].id), // take first
 			switchMap(id => combineLatest([
 				this.localStorage.bookmarks.getSyncData(id),
-				this.localStorage.bookmarks.get(id)
+				this.localStorage.bookmarks.getTrashItem(id)
 			]).pipe(
-				map(([syncData, bookmark]) => viewLocalDeletedRemoteDeletedSuccess({ syncData, bookmark }))
+				map(([syncData, trashItem]) => viewLocalDeletedRemoteDeletedSuccess({ syncData, trashItem }))
 			))
 
 		)
@@ -276,10 +276,10 @@ export class StatsBookmarkEffects {
 			map(([, syncData]) => syncData[0].id), // take first
 			switchMap(id => combineLatest([
 				this.localStorage.bookmarks.getSyncData(id),
-				this.localStorage.bookmarks.get(id),
+				this.localStorage.bookmarks.getTrashItem(id),
 				this.localStorage.bookmarks.getRemoteMetadata(id)
 			]).pipe(
-				map(([syncData, bookmark, remoteMetadata]) => viewLocalDeletedRemoteUpdatedSuccess({ syncData, bookmark, remoteMetadata }))
+				map(([syncData, trashItem, remoteMetadata]) => viewLocalDeletedRemoteUpdatedSuccess({ syncData, trashItem, remoteMetadata }))
 			))
 
 		)

@@ -80,14 +80,14 @@ export const statsReducer: ActionReducer<StatsModuleState, Action> = createReduc
 
 	}),
 	on(viewLocalDeletedRemoteDeleted, hideConflictDialog),
-	on(viewLocalDeletedRemoteDeletedSuccess, (state, { syncData, bookmark }): StatsModuleState => {
+	on(viewLocalDeletedRemoteDeletedSuccess, (state, { syncData, trashItem }): StatsModuleState => {
 
 		return produce(
 			state,
 			draft => {
 
 				draft.selectedSyncData = syncData;
-				draft.selectedEntity = bookmark;
+				draft.selectedTrashEntity = trashItem;
 
 				draft.conflictDialogVisible = true;
 				draft.conflictDialogTitle = 'Local Deleted, Remote Deleted';
@@ -114,7 +114,7 @@ export const statsReducer: ActionReducer<StatsModuleState, Action> = createReduc
 
 	}),
 	on(viewLocalDeletedRemoteUpdated, hideConflictDialog),
-	on(viewLocalDeletedRemoteUpdatedSuccess, (state, { syncData, bookmark, remoteMetadata }): StatsModuleState => {
+	on(viewLocalDeletedRemoteUpdatedSuccess, (state, { syncData, trashItem, remoteMetadata }): StatsModuleState => {
 
 		return produce(
 			state,
@@ -122,7 +122,7 @@ export const statsReducer: ActionReducer<StatsModuleState, Action> = createReduc
 
 				draft.selectedSyncData = syncData;
 				draft.selectedRemoteMetadata = remoteMetadata;
-				draft.selectedEntity = bookmark;
+				draft.selectedTrashEntity = trashItem;
 
 				draft.conflictDialogVisible = true;
 				draft.conflictDialogTitle = 'Local Deleted, Remote Updated';
