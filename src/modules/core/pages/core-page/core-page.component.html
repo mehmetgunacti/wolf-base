@@ -8,8 +8,8 @@
 			(click)="toggleNav()"
 			styleClass="p-button-text"
 			icon="pi pi-bars"
-			[badge]="((syncableItemsCount$ | async) ?? 0) > 0 ? '.' : ''"
-			badgeClass="dotBadge"></p-button>
+			[badge]="(navButtonBadge$ | async) ?? ''"
+			[badgeClass]="(navButtonBadgeClass$ | async) ?? ''"></p-button>
 
 	</section>
 	<section id="portal-outlet-left">

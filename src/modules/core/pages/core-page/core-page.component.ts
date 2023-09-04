@@ -1,27 +1,14 @@
 import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
-import { Observable, Subscription, combineLatest, map, of } from 'rxjs';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
 import { setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
 import { menuBookmarkBadge } from 'store/selectors/bookmark-ui.selectors';
 import { selCoreIsSidebarVisible, selCoreIsThemeDark } from 'store/selectors/core-configuration.selectors';
 import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
+import { selStatsMenuBadgeNumbers } from 'store/selectors/stats-ui.selectors';
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
-import { selStatsMenuBadge } from 'store/selectors/stats-ui.selectors';
-
-const formatBadge_Stats = (numbers: number[]): string => {
-
-	const [total, errors] = numbers;
-	if (total === 0)
-		return '';
-
-	if (errors > 0)
-		return `${errors}/${total}`;
-
-	return `${total}`;
-
-}
 
 const formatBadge_Bookmark = ([total, filtered]: [number, number]) => filtered < total ? `${filtered}/${total}` : `${total}`;
 
@@ -32,8 +19,9 @@ const formatBadge_Bookmark = ([total, filtered]: [number, number]) => filtered <
 export class CorePageComponent implements OnDestroy {
 
 	navMenuItems$: Observable<MenuItem[]>;
+	navButtonBadge$: Observable<string>;
+	navButtonBadgeClass$: Observable<string>;
 	isThemeDark$: Observable<boolean>;
-	syncableItemsCount$: Observable<number>;
 
 	subscriptions = new Subscription();
 
@@ -67,11 +55,12 @@ export class CorePageComponent implements OnDestroy {
 
 		);
 
-		this.syncableItemsCount$ = of(5);
-
+		const menuBadgeNumbers$: Observable<number[]> = this.store.select(selStatsMenuBadgeNumbers);
+		this.navButtonBadge$ = menuBadgeNumbers$.pipe(map(([total]) => total > 0 ? '.' : ''));
+		this.navButtonBadgeClass$ = menuBadgeNumbers$.pipe(map(([total, errors]) => 'navButtonBadge' + (errors ? ' red' : total ? ' orange' : '')));
 		this.navMenuItems$ = combineLatest([
 			this.store.select(menuBookmarkBadge),
-			this.store.select(selStatsMenuBadge),
+			menuBadgeNumbers$,
 		]).pipe(
 
 			map(([bookmarkNumbers, statsNumbers]) => {
@@ -80,7 +69,7 @@ export class CorePageComponent implements OnDestroy {
 					navItems.miHome,
 					navItems.miBookmarks(formatBadge_Bookmark(bookmarkNumbers)),
 					navItems.miDatabase,
-					navItems.miStats(formatBadge_Stats(statsNumbers)),
+					navItems.miStats(statsNumbers),
 					navItems.miSettings,
 					navItems.miLogs
 				];

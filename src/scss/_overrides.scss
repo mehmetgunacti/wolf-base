@@ -81,3 +81,23 @@ p-confirmdialog {
 	padding: 0 !important;
 
 }
+
+span.p-menuitem-badge {
+
+	margin-left: auto !important;
+
+	&.red {
+
+		background-color: var(--red-600) !important;
+		color			: var(--text-color) !important;
+
+	}
+
+	&.orange {
+
+		background-color: var(--orange-600) !important;
+		color			: var(--text-color) !important;
+
+	}
+
+}

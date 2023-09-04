@@ -172,33 +172,23 @@ app-core-page {
 
 }
 
-.menuBadge {
-
-	& > a > span.p-menuitem-badge {
-
-		margin-left: auto;
-
-	}
-
-	&.orange > a > span.p-menuitem-badge {
-
-		background-color: #EE6B00;
-		color			: white;
-
-	}
-
-}
-
-.dotBadge {
+.navButtonBadge {
 
 	position			: absolute;
-	color				: #EE6B00 !important;
-	background-color	: #EE6B00 !important;
+	color				: var(--orange-600) !important;
+	background-color	: var(--orange-600) !important;
 	min-width			: 10px !important;
 	height				: 10px !important;
 	width				: 10px !important;
 	line-height			: 0 !important;
 	bottom				: 8px;
 	right				: 10px;
+
+	&.red {
+
+		background-color: var(--red-600) !important;
+		color			: var(--red-600) !important;
+
+	}
 
 }

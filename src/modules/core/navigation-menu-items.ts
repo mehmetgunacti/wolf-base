@@ -28,13 +28,13 @@ export const miLogs: MenuItem = {
 	routerLink: ['/logs']
 };
 
-export const miStats = (badge?: string): MenuItem => ({
+export const miStats = ([total, errors]: number[]): MenuItem => ({
 	label: 'Stats',
 	icon: PrimeIcons.CHART_BAR,
 	routerLink: ['/stats'],
-	badge,
-	styleClass: 'menuBadge orange',
-	command: () => console.log('badge', badge)
+	badge: errors ? `${errors}/${total}` : total ? `${total}` : '',
+	badgeStyleClass: errors ? 'red' : total ? 'orange' : '',
+	command: () => console.log('badge', total, errors)
 });
 
 export const miSettings: MenuItem = {
