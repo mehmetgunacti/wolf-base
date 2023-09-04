@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ToastConfiguration } from 'lib';
 import { slideLeftSlideUpTrigger } from 'modules/shared/animations';
-import { fadeInFadeOutTrigger } from 'modules/shared/animations/fade-in-fade-out.animation';
 import { Observable } from 'rxjs';
 import { W359ToastRef } from 'services';
 
@@ -22,7 +21,8 @@ export class ToastWrapperComponent {
 
 	onClose(id: number): void {
 
-		this.toastRef.remove(id);
+		if (id > -1)
+			this.toastRef.remove(id);
 
 	}
 
