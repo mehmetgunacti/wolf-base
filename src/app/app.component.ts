@@ -28,8 +28,10 @@ export class AppComponent {
 
 			switchMap((value: boolean) => {
 
+				// to tweak splashscreen duration:
+				// delay(), _splashscreen.scss and fade-out.animation.ts
 				if (value)
-					return of(true).pipe(delay(2500));
+					return of(true).pipe(delay(1400));
 				return of(false);
 
 			}),

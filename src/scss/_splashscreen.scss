@@ -5,10 +5,10 @@
 		opacity		: 0;
 	}
 
-	70% {
-		transform	: scale(1.4);
-		opacity		: 1;
-	}
+	// 70% {
+	// 	transform	: scale(1.1);
+	// 	opacity		: 1;
+	// }
 
 	100% {
 		transform	: scale(1);
@@ -59,7 +59,7 @@
 
 		width	    : 50vw;
 		max-width	: 500px;
-		animation	: scaleAndFade 2s ease-in-out;
+		animation	: scaleAndFade 1300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 		// animation	: heartbeat 2s ease-in-out;
 
 	}

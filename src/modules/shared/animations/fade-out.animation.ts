@@ -5,7 +5,7 @@ export const fadeOutTrigger = trigger('fadeOut', [
 
     transition(':leave', [
 
-        animate('400ms ease-out', keyframes([
+        animate('300ms ease-out', keyframes([
 
             style({ opacity: '1' }),
             style({ opacity: '0' })
