@@ -71,7 +71,7 @@ export class StatsEffects {
 	// 	() => this.actions$.pipe(
 
 	// 		ofType(overrideLocalItem),
-	// 		switchMap(() => this.store.select(selStatsSelectedRemoteData)),
+	// 		withLatestFrom(this.store.select(selStatsSelectedRemoteData)),
 	// 		filter((remoteData): remoteData is RemoteData<Entity> => !!remoteData),
 	// 		switchMap(remoteData => this.localStorage.bookmarks.put(remoteData as RemoteData<Bookmark>)),
 	// 		map(() => downloadSuccess({ count: 1 }))
@@ -85,7 +85,7 @@ export class StatsEffects {
 	// 	() => this.actions$.pipe(
 
 	// 		ofType(overrideRemoteItem),
-	// 		switchMap(() => this.store.select(selStatsSelectedItem)),
+	// 		withLatestFrom(this.store.select(selStatsSelectedItem)),
 	// 		filter((entity): entity is Entity => !!entity),
 	// 		switchMap(entity => this.remoteStorage.bookmarks.upload(entity as Bookmark)),
 	// 		switchMap(remoteData => this.localStorage.bookmarks.put(remoteData)),
