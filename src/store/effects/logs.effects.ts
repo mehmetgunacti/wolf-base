@@ -12,9 +12,11 @@ const convertToast = (toast: ToastConfiguration): LogMessage => {
 
 	const { summary, detail } = toast;
 	return {
+
 		category: LogCategory.notification,
 		date: new Date().toISOString(),
-		message: `${[summary, detail].filter(e => !!e).join('/')}`
+		message: `${[summary, detail].filter(e => !!e).join(' : ')}`
+
 	};
 
 }
