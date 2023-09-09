@@ -1,5 +1,5 @@
 import { Collection, IndexableType, Table } from 'dexie';
-import { EntityTable } from 'lib';
+import { EntityTable, LogCategory } from 'lib';
 import { UUID } from 'lib/constants/common.constant';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { RemoteData, RemoteMetadata, SyncData } from 'lib/models';
@@ -37,7 +37,10 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 	async update(id: string, item: Partial<T>): Promise<number> {
 
 		let count = 0;
-		await this.db.transaction('rw', [this.tablename, this.tablename + '_sync'], async () => {
+		await this.db.transaction('rw', [
+			this.tablename,
+			this.tablename + '_sync'
+		], async () => {
 
 			count = await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item });
 			if (count > 0)
@@ -48,58 +51,68 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async put(item: RemoteData<T>): Promise<void> {
+	async put(item: RemoteData<T>, category: LogCategory): Promise<void> {
 
-		await this.db.transaction('rw', [this.tablename, this.tablename + '_sync'], async () => {
+		await this.db.transaction('rw', [
+			this.tablename,
+			this.tablename + '_sync',
+			this.tablename + '_trash',
+			this.tablename + '_remote',
+			WolfBaseTableName.logs
+		], async () => await this._put(item, category));
 
-			// add to data table
-			await this.db.table<T>(this.tablename).put(item.entity);
+	}
 
-			// add to sync table
-			const { id, createTime, updateTime } = item.metaData;
-			await this.db.table<SyncData>(this.tablename + '_sync').put({
+	async putAll(items: RemoteData<T>[], category: LogCategory): Promise<void> {
 
-				id,
-				createTime,
-				updateTime,
-				updated: false,
-				deleted: false,
-				error: null
+		await this.db.transaction('rw', [
+			this.tablename,
+			this.tablename + '_sync',
+			this.tablename + '_trash',
+			this.tablename + '_remote',
+			WolfBaseTableName.logs
+		], async () => {
 
-			});
+			for (const item of items)
+				await this._put(item, category);
 
 		});
 
 	}
 
-	async putAll(items: RemoteData<T>[]): Promise<void> {
+	private async _put(remoteData: RemoteData<T>, category: LogCategory): Promise<void> {
 
-		await this.db.transaction('rw', [this.tablename, this.tablename + '_sync'], async () => {
+		const { id, createTime, updateTime } = remoteData.metaData;
 
-			// add to data table
-			await this.db.table<T>(this.tablename).bulkPut(items.map(item => item.entity));
+		// move local entity to trash
+		const entity = await this.db.table<T>(this.tablename).get(id);
+		if (entity)
+			await this.db.table(this.tablename + '_trash').add(entity);
 
-			// add to sync table
-			await this.db.table<SyncData>(this.tablename + '_sync').bulkPut(items.map(
+		// store incoming entity
+		await this.db.table<T>(this.tablename).put(remoteData.entity);
 
-				item => {
+		// add/update 'remote'
+		await this.db.table<RemoteMetadata>(this.tablename + '_remote').put(remoteData.metaData, id);
 
-					const { id, createTime, updateTime } = item.metaData;
-					return {
+		// add to sync table
+		await this.db.table<SyncData>(this.tablename + '_sync').put({
 
-						id,
-						createTime,
-						updateTime,
-						updated: false,
-						deleted: false,
-						error: null
+			id,
+			createTime,
+			updateTime,
+			updated: false,
+			deleted: false,
+			error: null
 
-					}
+		});
 
-				}
-
-			));
-
+		// add log
+		await this.db.logs.add({
+			category,
+			date: new Date().toISOString(),
+			message: `"${remoteData.entity.name}" stored`,
+			entityId: id
 		});
 
 	}
@@ -112,12 +125,16 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async moveToTrash(id: UUID): Promise<void> {
 
-		await this.db.transaction('rw', [this.tablename, this.tablename + '_sync', this.tablename + '_trash'], async () => {
+		await this.db.transaction('rw', [
+			this.tablename,
+			this.tablename + '_sync',
+			this.tablename + '_trash'
+		], async () => {
 
 			const item = await this.db.table<T>(this.tablename).get(id);
 			if (item) {
 
-				await this.db.table<T>(this.tablename + '_trash').put(item);
+				await this.db.table<T>(this.tablename + '_trash').add(item);
 				await this.db.table<T>(this.tablename + '_sync').where({ id }).modify({ deleted: true } as SyncData);
 				await this.db.table(this.tablename).delete(id);
 
@@ -127,13 +144,36 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async deletePermanently(id: string): Promise<void> {
+	async deletePermanently(id: string, category: LogCategory): Promise<void> {
 
-		await this.db.transaction('rw', [this.tablename, this.tablename + '_sync', this.tablename + '_trash'], async () => {
+		await this.db.transaction('rw', [
+			this.tablename,
+			this.tablename + '_sync',
+			this.tablename + '_trash',
+			this.tablename + '_remote',
+			WolfBaseTableName.logs
+		], async () => {
 
-			await this.db.table(this.tablename).delete(id);
+			let logMessage = 'metadata deleted';
+			const item = await this.db.table<T>(this.tablename).get(id);
+			if (item) {
+
+				logMessage = `"${item.name}" deleted`;
+				await this.db.table(this.tablename + '_trash').add(item);
+				await this.db.table(this.tablename).delete(id);
+
+			}
+
 			await this.db.table(this.tablename + '_sync').delete(id);
-			await this.db.table(this.tablename + '_trash').delete(id);
+			await this.db.table(this.tablename + '_remote').delete(id);
+
+			// add log
+			await this.db.logs.add({
+				category,
+				date: new Date().toISOString(),
+				message: logMessage,
+				entityId: id
+			});
 
 		});
 

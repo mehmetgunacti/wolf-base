@@ -36,8 +36,8 @@
 </div>
 
 <div buttons>
-	<button pButton type="button" label="Delete Local" class="p-button-danger" icon="pi pi-trash" iconPos="left" (click)="onDeleteLocal()"></button>
+	<!-- <button pButton type="button" label="Delete Local" class="p-button-danger" icon="pi pi-trash" iconPos="left" (click)="onDeleteLocal()"></button> -->
 	<button pButton type="button" label="Override Local" class="p-button-warn" icon="pi pi-cloud-download" iconPos="left" (click)="onOverrideLocal()" [disabled]="!remoteData"></button>
-	<button pButton type="button" label="Delete Remote" class="p-button-danger" icon="pi pi-trash" iconPos="left" (click)="onDeleteRemote()" [disabled]="!remoteData"></button>
+	<!-- <button pButton type="button" label="Delete Remote" class="p-button-danger" icon="pi pi-trash" iconPos="left" (click)="onDeleteRemote()" [disabled]="!remoteData"></button> -->
 	<button pButton type="button" label="Override Remote" class="p-button-warn" icon="pi pi-cloud-upload" iconPos="left" (click)="onOverrideRemote()" [disabled]="!entity"></button>
 </div>

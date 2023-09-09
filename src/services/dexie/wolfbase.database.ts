@@ -1,5 +1,5 @@
 import Dexie from 'dexie';
-import { UUID } from 'lib/constants/common.constant';
+import { UUID, UUID_ISODate } from 'lib/constants/common.constant';
 import { CONF_KEYS, WolfBaseTableName } from 'lib/constants/database.constant';
 import { LogMessage, RemoteMetadata, SyncData } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
@@ -22,7 +22,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			// bookmarks
 			bookmarks: 'id, *tags, clicks',
 			bookmarks_sync: 'id',
-			bookmarks_trash: 'id',
+			bookmarks_trash: '++id',
 			bookmarks_clicks: 'id, current',
 			bookmarks_remote: 'id',
 
@@ -43,7 +43,7 @@ export class WolfBaseDB extends Dexie {
 	bookmarks: Dexie.Table<Bookmark, UUID>;
 	bookmarks_sync: Dexie.Table<SyncData, UUID>;
 	bookmarks_remote: Dexie.Table<RemoteMetadata, UUID>;
-	bookmarks_trash: Dexie.Table<Bookmark, UUID>;
+	bookmarks_trash: Dexie.Table<Bookmark, number>;
 	clicks: Dexie.Table<Click, UUID>;
 	configuration: Dexie.Table<string | boolean, CONF_KEYS>;
 	logs: Dexie.Table<LogMessage, number>;

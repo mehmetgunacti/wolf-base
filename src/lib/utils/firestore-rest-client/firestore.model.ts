@@ -42,13 +42,17 @@ export class FirestoreDocumentURL {
 	constructor(
 		public firestoreConfig: FirestoreConfig,
 		public collection: RemoteCollection,
-		public document: UUID
+		public document: UUID,
+		public onlyMetadata = false
 	) { }
 
 	toURL(): string {
 
 		const { baseURL, projectId, apiKey } = this.firestoreConfig;
-		return `${baseURL}projects/${projectId}/databases/(default)/documents/${this.collection}/${this.document}?key=${apiKey}`;
+		let url = `${baseURL}projects/${projectId}/databases/(default)/documents/${this.collection}/${this.document}?key=${apiKey}`;
+		if (this.onlyMetadata)
+			url += `&mask.fieldPaths=dummyField`;
+		return url;
 
 	}
 
@@ -60,13 +64,13 @@ export class FirestoreListURL {
 		public firestoreConfig: FirestoreConfig,
 		public collection: RemoteCollection,
 		public pageSize: string,
-		public onlyIds = false
+		public onlyMetadata = false
 	) { }
 
 	toURL(): string {
 
 		let queryParameters = `pageSize=${this.pageSize}`;
-		if (this.onlyIds)
+		if (this.onlyMetadata)
 			queryParameters += `&mask.fieldPaths=dummyField`;
 		const { baseURL, projectId, apiKey } = this.firestoreConfig;
 		return `${baseURL}projects/${projectId}/databases/(default)/documents/${this.collection}?key=${apiKey}&${queryParameters}`;

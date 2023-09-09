@@ -42,15 +42,15 @@ export class StatsConflictContainerComponent {
 
 	}
 
-	onOverrideLocal(remoteData: RemoteData<Entity>): void {
+	onOverrideLocal(): void {
 
-		this.store.dispatch(overrideLocalItem({ remoteData }));
+		this.store.dispatch(overrideLocalItem());
 
 	}
 
-	onOverrideRemote(entity: Entity): void {
+	onOverrideRemote(): void {
 
-		this.store.dispatch(overrideRemoteItem({ entity }));
+		this.store.dispatch(overrideRemoteItem());
 
 	}
 

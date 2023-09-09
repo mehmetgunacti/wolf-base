@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
-import { LocalStorageService, LogMessage, ToastConfiguration } from 'lib';
+import { LocalStorageService, LogCategory, LogMessage, ToastConfiguration } from 'lib';
 import { fromEventPattern } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
@@ -12,8 +12,9 @@ const convertToast = (toast: ToastConfiguration): LogMessage => {
 
 	const { summary, detail } = toast;
 	return {
+		category: LogCategory.notification,
 		date: new Date().toISOString(),
-		message: `[Notification]: ${[summary, detail].filter(e => !!e).join('/')}`
+		message: `${[summary, detail].filter(e => !!e).join('/')}`
 	};
 
 }

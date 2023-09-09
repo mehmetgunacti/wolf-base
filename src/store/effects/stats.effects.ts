@@ -1,16 +1,20 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
-import { Bookmark, RemoteData } from 'lib';
+import { Bookmark, Entity, RemoteData } from 'lib';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { LocalStorageService, RemoteStorageService } from 'lib';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { downloadRemoteData, downloadRemoteDataFailure, downloadRemoteDataSuccess, overrideLocalItem, overrideRemoteItem, partialDownloadSuccess, partialUploadSuccess, purgeLocalItem, purgeRemoteItem } from 'store/actions/stats-bookmark.actions';
+import { downloadRemoteData, downloadRemoteDataFailure, downloadRemoteDataSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem } from 'store/actions/stats-bookmark.actions';
+import { Store } from '@ngrx/store';
+import { selStatsSelectedItem, selStatsSelectedRemoteData } from 'store/selectors/stats.selectors';
+import { deleteSuccess, downloadSuccess, uploadSuccess } from 'store/actions/stats.actions';
 
 @Injectable()
 export class StatsEffects {
 
 	private actions$: Actions = inject(Actions);
+	private store: Store = inject(Store);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 	private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
 
@@ -38,17 +42,17 @@ export class StatsEffects {
 
 	);
 
-	purgeLocalItem$ = createEffect(
+	// purgeLocalItem$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(purgeLocalItem),
-			switchMap(({ id }) => this.localStorage.bookmarks.deletePermanently(id)),
-			map(() => showNotification({ severity: 'success', detail: 'Local item deleted' }))
+	// 		ofType(purgeLocalItem),
+	// 		switchMap(({ id }) => this.localStorage.bookmarks.deletePermanently(id)),
+	// 		map(() => showNotification({ severity: 'success', detail: 'Local item deleted' }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 	purgeRemoteItem$ = createEffect(
 
@@ -62,49 +66,64 @@ export class StatsEffects {
 
 	);
 
-	overrideLocalItem$ = createEffect(
+	// overrideLocalItem$ = createEffect(
+
+	// 	() => this.actions$.pipe(
+
+	// 		ofType(overrideLocalItem),
+	// 		switchMap(() => this.store.select(selStatsSelectedRemoteData)),
+	// 		filter((remoteData): remoteData is RemoteData<Entity> => !!remoteData),
+	// 		switchMap(remoteData => this.localStorage.bookmarks.put(remoteData as RemoteData<Bookmark>)),
+	// 		map(() => downloadSuccess({ count: 1 }))
+
+	// 	)
+
+	// );
+
+	// overrideRemoteItem$ = createEffect(
+
+	// 	() => this.actions$.pipe(
+
+	// 		ofType(overrideRemoteItem),
+	// 		switchMap(() => this.store.select(selStatsSelectedItem)),
+	// 		filter((entity): entity is Entity => !!entity),
+	// 		switchMap(entity => this.remoteStorage.bookmarks.upload(entity as Bookmark)),
+	// 		switchMap(remoteData => this.localStorage.bookmarks.put(remoteData)),
+	// 		map(() => uploadSuccess({ count: 1 }))
+
+	// 	)
+
+	// );
+
+
+	downloadSuccess$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(overrideLocalItem),
-			switchMap(({ remoteData }) => this.localStorage.bookmarks.put(remoteData as RemoteData<Bookmark>)),
-			map(() => showNotification({ severity: 'success', detail: 'Local item updated' }))
+			ofType(downloadSuccess),
+			map(({ count }) => showNotification({ severity: 'success', summary: 'Download Complete', detail: `${count} item(s) downloaded` }))
 
 		)
 
 	);
 
-	overrideRemoteItem$ = createEffect(
+	uploadSuccess$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(overrideRemoteItem),
-			switchMap(({ entity }) => this.remoteStorage.bookmarks.upload(entity as Bookmark)),
-			switchMap(remoteData => this.localStorage.bookmarks.put(remoteData)),
-			map(() => showNotification({ severity: 'success', detail: 'Remote item updated' }))
+			ofType(uploadSuccess),
+			map(({ count }) => showNotification({ severity: 'success', summary: 'Upload Complete', detail: `${count} item(s) uploaded` }))
 
 		)
 
 	);
 
-	
-	partialDownloadSuccess$ = createEffect(
+	deleteSuccess$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(partialDownloadSuccess),
-			map(({ count }) => showNotification({ severity: 'success', summary: 'Download Complete', detail: `${count} items downloaded` }))
-
-		)
-
-	);
-
-	partialuploadSuccess$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(partialUploadSuccess),
-			map(({ count }) => showNotification({ severity: 'success', summary: 'Upload Complete', detail: `${count} items uploaded` }))
+			ofType(deleteSuccess),
+			map(({ count }) => showNotification({ severity: 'success', summary: 'Delete Complete', detail: `${count} item(s) deleted` }))
 
 		)
 

@@ -1,6 +1,6 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import produce from 'immer';
-import { downloadRemoteDataSuccess, loadEntitySuccess, loadTrashEntitySuccess, viewLocalDeletedRemoteDeleted, viewLocalDeletedRemoteDeletedSuccess, viewLocalDeletedRemoteUpdated, viewLocalDeletedRemoteUpdatedSuccess, viewLocalUntouchedRemoteDeleted, viewLocalUntouchedRemoteDeletedSuccess, viewLocalUntouchedRemoteUpdated, viewLocalUntouchedRemoteUpdatedSuccess, viewLocalUpdatedRemoteDeleted, viewLocalUpdatedRemoteDeletedSuccess, viewLocalUpdatedRemoteUpdated, viewLocalUpdatedRemoteUpdatedSuccess } from 'store/actions/stats-bookmark.actions';
+import { downloadRemoteDataSuccess, loadEntitySuccess, loadTrashEntitySuccess, viewLocalDeletedRemoteUpdated, viewLocalDeletedRemoteUpdatedSuccess, viewLocalUntouchedRemoteDeleted, viewLocalUntouchedRemoteDeletedSuccess, viewLocalUntouchedRemoteUpdated, viewLocalUntouchedRemoteUpdatedSuccess, viewLocalUpdatedRemoteDeleted, viewLocalUpdatedRemoteDeletedSuccess, viewLocalUpdatedRemoteUpdated, viewLocalUpdatedRemoteUpdatedSuccess } from 'store/actions/stats-bookmark.actions';
 import { closeConflictDialog } from 'store/actions/stats.actions';
 import { StatsModuleState, initialStatsState } from 'store/states/stats.state';
 
@@ -74,23 +74,6 @@ export const statsReducer: ActionReducer<StatsModuleState, Action> = createReduc
 
 				draft.conflictDialogVisible = true;
 				draft.conflictDialogTitle = 'Local Updated, Remote Updated';
-
-			}
-		)
-
-	}),
-	on(viewLocalDeletedRemoteDeleted, hideConflictDialog),
-	on(viewLocalDeletedRemoteDeletedSuccess, (state, { syncData, trashItem }): StatsModuleState => {
-
-		return produce(
-			state,
-			draft => {
-
-				draft.selectedSyncData = syncData;
-				draft.selectedTrashEntity = trashItem;
-
-				draft.conflictDialogVisible = true;
-				draft.conflictDialogTitle = 'Local Deleted, Remote Deleted';
 
 			}
 		)

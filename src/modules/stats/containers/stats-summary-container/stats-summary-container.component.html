@@ -1,14 +1,20 @@
 <app-stats-summary
 	[summary]="summary$ | async"
+
 	(downloadRemoteNew)="onDownloadRemoteNew()"
 	(uploadLocalNew)="onUploadLocalNew()"
+
 	(uploadLocalClicked)="onUploadLocalClicked()"
 	(downloadRemoteClicks)="onDownloadRemoteClicks()"
+
 	(viewRemoteDeleted)="onViewRemoteDeleted()"
 	(viewRemoteUpdated)="onViewRemoteUpdated()"
+
 	(uploadLocalUpdated)="onUploadLocalUpdated()"
 	(uploadLocalDeleted)="onUploadLocalDeleted()"
+
+	(deleteLocalMetadata)="onDeleteLocalMetadata()"
+
 	(viewLocalUpdatedRemoteUpdated)="onViewLocalUpdatedRemoteUpdated()"
-	(viewLocalDeletedRemoteDeleted)="onViewLocalDeletedRemoteDeleted()"
 	(viewLocalUpdatedRemoteDeleted)="onViewLocalUpdatedRemoteDeleted()"
 	(viewLocalDeletedRemoteUpdated)="onViewLocalDeletedRemoteUpdated()"></app-stats-summary>

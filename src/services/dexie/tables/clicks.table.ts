@@ -35,19 +35,15 @@ export class DexieClicksTableImpl implements ClicksTable {
 
 	}
 
-	async put(item: Click): Promise<void> {
-
-		await this.db.clicks.put(item);
-
-	}
-
 	async putAll(items: Click[]): Promise<void> {
 
+		// remove obsolete click objects
+		const bookmarkIds = new Set(await this.db.bookmarks.toCollection().primaryKeys() as UUID[]);
+		items = items.filter(({ id }) => bookmarkIds.has(id));
 		await this.db.transaction('rw', WolfBaseTableName.bookmarks_clicks, async () => {
 
 			await this.db.clicks.clear();
 			await this.db.clicks.bulkAdd(items);
-
 
 		});
 

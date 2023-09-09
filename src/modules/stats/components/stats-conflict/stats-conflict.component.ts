@@ -16,8 +16,8 @@ export class StatsConflictComponent {
 
 	@Output() deleteLocal = new EventEmitter<UUID>();
 	@Output() deleteRemote = new EventEmitter<UUID>();
-	@Output() overrideLocal = new EventEmitter<RemoteData<Entity>>();
-	@Output() overrideRemote = new EventEmitter<Entity>();
+	@Output() overrideLocal = new EventEmitter<void>();
+	@Output() overrideRemote = new EventEmitter<void>();
 	@Output() loadRemote = new EventEmitter<UUID>();
 
 	onDeleteLocal(): void {
@@ -37,14 +37,14 @@ export class StatsConflictComponent {
 	onOverrideLocal(): void {
 
 		if (this.remoteData)
-			this.overrideLocal.emit(this.remoteData);
+			this.overrideLocal.emit();
 
 	}
 
 	onOverrideRemote(): void {
 
 		if (this.entity)
-			this.overrideRemote.emit(this.entity);
+			this.overrideRemote.emit();
 
 	}
 

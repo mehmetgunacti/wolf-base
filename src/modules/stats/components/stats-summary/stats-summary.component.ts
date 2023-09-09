@@ -22,8 +22,9 @@ export class StatsSummaryComponent {
 	@Output() uploadLocalUpdated = new EventEmitter<void>();
 	@Output() uploadLocalDeleted = new EventEmitter<void>();
 
+	@Output() deleteLocalMetadata = new EventEmitter<void>();
+
 	@Output() viewLocalUpdatedRemoteUpdated = new EventEmitter<void>();
-	@Output() viewLocalDeletedRemoteDeleted = new EventEmitter<void>();
 	@Output() viewLocalUpdatedRemoteDeleted = new EventEmitter<void>();
 	@Output() viewLocalDeletedRemoteUpdated = new EventEmitter<void>();
 
@@ -81,9 +82,9 @@ export class StatsSummaryComponent {
 
 	}
 
-	onViewDeletedDeleted(): void {
+	onDeleteLocalMetadata(): void {
 
-		this.viewLocalDeletedRemoteDeleted.emit();
+		this.deleteLocalMetadata.emit();
 
 	}
 

@@ -32,12 +32,6 @@ export class MockClicksTableImpl implements ClicksTable {
 
 	}
 
-	async put(item: Click): Promise<void> {
-
-		this.bookmarks_clicks.set(item.id, item);
-
-	}
-
 	async putAll(items: Click[]): Promise<void> {
 
 		for (const item of items)

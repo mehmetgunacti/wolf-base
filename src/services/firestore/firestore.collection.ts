@@ -4,7 +4,7 @@ import { RemoteCollection } from "lib/constants/remote.constant";
 import { FirestoreConfig, RemoteData, RemoteMetadata } from "lib/models";
 import { Entity } from "lib/models/entity.model";
 import { FirestoreAPIClient } from "lib/utils/firestore-rest-client/firestore-api.tool";
-import { Observable, filter, map, switchMap } from "rxjs";
+import { Observable, defaultIfEmpty, filter, map, switchMap } from "rxjs";
 
 export abstract class FirestoreCollectionImpl<T extends Entity> implements RemoteStorageCollection<T> {
 
@@ -27,7 +27,7 @@ export abstract class FirestoreCollectionImpl<T extends Entity> implements Remot
 		);
 		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
 		return this.firestore.update(url, { fields: requestBody }).pipe(
-			map(this.toRemoteData)
+			map(dto => this.toRemoteData(dto))
 		);
 
 	}
@@ -43,13 +43,15 @@ export abstract class FirestoreCollectionImpl<T extends Entity> implements Remot
 
 	}
 
-	moveToTrash(id: UUID): Observable<void> {
+	moveToTrash(id: UUID): Observable<UUID | null> {
 
 		return this.downloadOne(id).pipe(
 
 			filter((remoteData): remoteData is RemoteData<T> => remoteData !== null),
 			switchMap((remoteData: RemoteData<T>) => this.trash(remoteData.entity)),
-			switchMap((remoteData: RemoteData<T>) => this.delete(remoteData.entity.id))
+			switchMap((remoteData: RemoteData<T>) => this.delete(remoteData.entity.id)),
+			map(() => id),
+			defaultIfEmpty(null)
 
 		)
 
@@ -64,17 +66,18 @@ export abstract class FirestoreCollectionImpl<T extends Entity> implements Remot
 		);
 		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
 		return this.firestore.create(url, { fields: requestBody }).pipe(
-			map(this.toRemoteData)
+			map(dto => this.toRemoteData(dto))
 		);
 
 	}
 
-	downloadOne(id: UUID): Observable<RemoteData<T> | null> {
+	downloadOne(id: UUID, onlyMetadata: boolean = false): Observable<RemoteData<T> | null> {
 
 		const url = new FirestoreDocumentURL(
 			this.firestoreConfig,
 			this.remoteCollection,
-			id
+			id,
+			onlyMetadata
 		);
 		return this.firestore.get<T>(url).pipe(
 			map(dto => dto ? this.toRemoteData(dto) : null)
@@ -112,7 +115,7 @@ export abstract class FirestoreCollectionImpl<T extends Entity> implements Remot
 
 	}
 
-	downloadIds(): Observable<RemoteMetadata[]> {
+	downloadMetadata(ids?: UUID[]): Observable<RemoteMetadata[]> {
 
 		const url = new FirestoreListURL(
 			this.firestoreConfig,
@@ -122,7 +125,7 @@ export abstract class FirestoreCollectionImpl<T extends Entity> implements Remot
 		);
 		return this.firestore.listIds<T>(url).pipe(
 
-			map(list => list.map(dto => this.toRemoteMetaData(dto)))
+			map(list => list.map(dto => this.toRemoteMetadata(dto)))
 
 		);
 
@@ -151,7 +154,7 @@ export abstract class FirestoreCollectionImpl<T extends Entity> implements Remot
 
 	}
 
-	private toRemoteMetaData(dto: FirestoreDTO<T>): RemoteMetadata {
+	private toRemoteMetadata(dto: FirestoreDTO<T>): RemoteMetadata {
 
 		const { document, createTime, updateTime } = dto;
 		const metaData: RemoteMetadata = {

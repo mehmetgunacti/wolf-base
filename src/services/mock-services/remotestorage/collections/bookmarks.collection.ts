@@ -23,9 +23,9 @@ export class MockBookmarksCollection implements BookmarksCollection {
 
 	}
 
-	downloadIds(): Observable<RemoteMetadata[]> {
+	downloadMetadata(ids?: UUID[]): Observable<RemoteMetadata[]> {
 
-		return this.downloadMany().pipe(
+		return this.downloadMany(ids).pipe(
 			map(arr => arr.map(item => item.metaData))
 		)
 
@@ -35,7 +35,7 @@ export class MockBookmarksCollection implements BookmarksCollection {
 
 		const current = this.bookmarks[item.id];
 		const createTime = current ? current.metaData.createTime : new Date().toISOString();
-		const metaData: RemoteMetadata = {
+		const metadata: RemoteMetadata = {
 
 			id: item.id,
 			createTime,
@@ -44,7 +44,7 @@ export class MockBookmarksCollection implements BookmarksCollection {
 		};
 		const remoteData: RemoteData<Bookmark> = {
 
-			metaData,
+			metaData: metadata,
 			entity: item,
 
 		};
@@ -60,13 +60,16 @@ export class MockBookmarksCollection implements BookmarksCollection {
 
 	}
 
-	moveToTrash(id: string): Observable<void> {
+	moveToTrash(id: string): Observable<UUID | null> {
 
 
 		const b = this.bookmarks[id];
-		if (b)
+		if (b) {
 			this.bookmarks_trash[id] = b;
-		return this.delete(id);
+			this.delete(id);
+			return of(id);
+		}
+		return of(null);
 
 	}
 

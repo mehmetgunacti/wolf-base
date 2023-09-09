@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StatsSummary } from 'lib';
 import { Observable } from 'rxjs';
-import { downloadRemoteClicks, downloadRemoteNew, uploadLocalClicked, uploadLocalDeleted, uploadLocalNew, uploadLocalUpdated, viewLocalDeletedRemoteDeleted, viewLocalDeletedRemoteUpdated, viewLocalUpdatedRemoteDeleted, viewLocalUpdatedRemoteUpdated, viewLocalUntouchedRemoteDeleted, viewLocalUntouchedRemoteUpdated } from 'store/actions/stats-bookmark.actions';
+import { downloadClicks, downloadNew, uploadClicks, uploadDeleted, uploadNew, uploadUpdated, viewLocalDeletedRemoteUpdated, viewLocalUpdatedRemoteDeleted, deletePermanently, viewLocalUntouchedRemoteDeleted, viewLocalUntouchedRemoteUpdated, viewLocalUpdatedRemoteUpdated } from 'store/actions/stats-bookmark.actions';
 import { selBookmarkStatsSummary } from 'store/selectors/stats-bookmark.selectors';
 
 @Component({
@@ -24,19 +24,19 @@ export class StatsSummaryContainerComponent {
 
 	onDownloadRemoteNew(): void {
 
-		this.store.dispatch(downloadRemoteNew());
+		this.store.dispatch(downloadNew());
 
 	}
 
 	onUploadLocalNew(): void {
 
-		this.store.dispatch(uploadLocalNew());
+		this.store.dispatch(uploadNew());
 
 	}
 
 	onUploadLocalClicked(): void {
 
-		this.store.dispatch(uploadLocalClicked());
+		this.store.dispatch(uploadClicks());
 
 	}
 
@@ -54,19 +54,19 @@ export class StatsSummaryContainerComponent {
 
 	onUploadLocalUpdated(): void {
 
-		this.store.dispatch(uploadLocalUpdated());
+		this.store.dispatch(uploadUpdated());
 
 	}
 
 	onUploadLocalDeleted(): void {
 
-		this.store.dispatch(uploadLocalDeleted());
+		this.store.dispatch(uploadDeleted());
 
 	}
 
 	onDownloadRemoteClicks(): void {
 
-		this.store.dispatch(downloadRemoteClicks());
+		this.store.dispatch(downloadClicks());
 
 	}
 
@@ -76,9 +76,9 @@ export class StatsSummaryContainerComponent {
 
 	}
 
-	onViewLocalDeletedRemoteDeleted(): void {
+	onDeleteLocalMetadata(): void {
 
-		this.store.dispatch(viewLocalDeletedRemoteDeleted());
+		this.store.dispatch(deletePermanently());
 
 	}
 

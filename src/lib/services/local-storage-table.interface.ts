@@ -1,8 +1,9 @@
+import { LogCategory } from "lib/constants";
 import { UUID } from "lib/constants/common.constant";
 import { LogMessage, SyncData } from "lib/models";
 import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Configuration, FirestoreConfig } from "lib/models/configuration.model";
-import { Entity, Metadata } from "lib/models/entity.model";
+import { Entity } from "lib/models/entity.model";
 import { RemoteData, RemoteMetadata } from "lib/models/remote.model";
 
 export interface EntityTable<T extends Entity> {
@@ -10,8 +11,8 @@ export interface EntityTable<T extends Entity> {
 	get(id: UUID): Promise<T | null>;
 
 	create(item: Partial<T>): Promise<T>;
-	put(item: RemoteData<T>): Promise<void>;
-	putAll(items: RemoteData<T>[]): Promise<void>;
+	put(item: RemoteData<T>, category: LogCategory): Promise<void>;
+	putAll(items: RemoteData<T>[], category: LogCategory): Promise<void>;
 	update(id: UUID, item: Partial<T>): Promise<number>;
 	markError(id: UUID, error: string): Promise<void>;
 
@@ -33,7 +34,7 @@ export interface EntityTable<T extends Entity> {
 
 	moveToTrash(id: UUID): Promise<void>;
 	listDeletedItems(): Promise<T[]>;
-	deletePermanently(id: UUID): Promise<void>;
+	deletePermanently(id: UUID, category: LogCategory): Promise<void>;
 
 	search(term: string): Promise<T[]>;
 	searchByTags(tags: string[]): Promise<T[]>;
@@ -60,7 +61,6 @@ export interface ClicksTable {
 
 	click(id: UUID): Promise<void>;
 	clicked(): Promise<Click[]>;
-	put(item: Click): Promise<void>;
 	putAll(items: Click[]): Promise<void>;
 	list(): Promise<Click[]>;
 

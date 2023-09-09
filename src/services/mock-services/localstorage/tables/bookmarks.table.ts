@@ -1,4 +1,4 @@
-import { Bookmark, BookmarksTable, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from "lib";
+import { Bookmark, BookmarksTable, LogCategory, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from "lib";
 import { v4 as uuidv4 } from 'uuid';
 
 const SLEEP = 20;
@@ -172,7 +172,15 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 	}
 
-	async deletePermanently(id: string): Promise<void> {
+	async deleteMetadata(id: UUID, category: LogCategory): Promise<void> {
+
+		await sleep(SLEEP);
+		this.bookmarks_sync.delete(id);
+		this.bookmarks_remote.delete(id);
+
+	}
+
+	async deletePermanently(id: string, category: LogCategory): Promise<void> {
 
 		await sleep(SLEEP);
 		this.bookmarks.delete(id);

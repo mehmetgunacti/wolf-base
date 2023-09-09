@@ -2,44 +2,52 @@ import { createAction, props } from '@ngrx/store';
 import { Bookmark, Entity, RemoteData, RemoteMetadata, SyncData, UUID } from 'lib';
 
 export const downloadRemoteMetadata = createAction('[Stats Bookmark] Download RemoteMetadata');
-export const downloadRemoteMetadataSuccess = createAction('[Stats Bookmark] Download RemoteMetadata Success');
 
-export const uploadLocalNew = createAction('[Stats Bookmark] Upload Local New');
-export const uploadLocalNewSuccess = createAction('[Stats Bookmark] Upload Local New Success', props<{ count: number }>());
+export const uploadNew = createAction('[Stats Bookmark] Upload New');
+export const downloadNew = createAction('[Stats Bookmark] Download New');
 
-export const uploadLocalClicked = createAction('[Stats Bookmark] Upload Local Clicked');
-export const downloadRemoteClicks = createAction('[Stats Bookmark] Download Remote Clicks');
+export const uploadUpdated = createAction('[Stats Bookmark] Upload Updated');
+export const uploadDeleted = createAction('[Stats Bookmark] Upload Deleted');
 
-export const downloadRemoteNew = createAction('[Stats Bookmark] Download Remote New');
+export const downloadUpdated = createAction('[Stats Bookmark] Download Updated');
+export const downloadDeleted = createAction('[Stats Bookmark] Download Deleted');
 
-export const partialDownloadSuccess = createAction('[Stats Bookmark] Partial Download Success', props<{ count: number }>());
-export const partialUploadSuccess = createAction('[Stats Bookmark] Partial Upload Success', props<{ count: number }>());
+export const uploadClicks = createAction('[Stats Bookmark] Upload Clicks');
+export const downloadClicks = createAction('[Stats Bookmark] Download Clicks');
 
-export const uploadLocalUpdated = createAction('[Stats Bookmark] Upload Local Updated');
-export const uploadLocalDeleted = createAction('[Stats Bookmark] Upload Local Deleted');
+export const deletePermanently = createAction('[Stats Bookmark] Delete Permanently');
 
-export const viewLocalUntouchedRemoteUpdated = createAction('[Stats Bookmark] View Local Untouched Remote Updated');
-export const viewLocalUntouchedRemoteUpdatedSuccess = createAction('[Stats Bookmark] View Local Untouched Remote Updated Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null, remoteMetadata: RemoteMetadata | null }>());
+export const forceUploadUpdated = createAction('[Stats Bookmark] Force Upload Updated');
+export const forceDownloadUpdated = createAction('[Stats Bookmark] Force Download Updated');
+
+export const forceUploadDeleted = createAction('[Stats Bookmark] Force Upload Deleted');
+
+
+
+export const viewLocalUpdatedRemoteUpdatedSuccess = createAction('[Stats Bookmark] View Local Updated Remote Updated Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null, remoteMetadata: RemoteMetadata | null }>());
+
+
+// export const viewLocalDeletedRemoteDeletedSuccess = createAction('[Stats Bookmark] View Local Deleted Remote Deleted Success', props<{ syncData: SyncData | null, trashItem: Bookmark | null }>());
+
+export const viewLocalUpdatedRemoteDeleted = createAction('[Stats Bookmark] View Local Updated Remote Deleted');
+export const viewLocalUpdatedRemoteDeletedSuccess = createAction('[Stats Bookmark] View Local Updated Remote Deleted Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null }>());
 
 export const viewLocalUntouchedRemoteDeleted = createAction('[Stats Bookmark] View Local Untouched Remote Deleted');
 export const viewLocalUntouchedRemoteDeletedSuccess = createAction('[Stats Bookmark] View Local Untouched Remote Deleted Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null }>());
 
+export const viewLocalUntouchedRemoteUpdated = createAction('[Stats Bookmark] View Local Untouched Remote Updated');
+export const viewLocalUntouchedRemoteUpdatedSuccess = createAction('[Stats Bookmark] View Local Untouched Remote Updated Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null, remoteMetadata: RemoteMetadata | null }>());
+
 export const viewLocalUpdatedRemoteUpdated = createAction('[Stats Bookmark] View Local Updated Remote Updated');
-export const viewLocalUpdatedRemoteUpdatedSuccess = createAction('[Stats Bookmark] View Local Updated Remote Updated Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null, remoteMetadata: RemoteMetadata | null }>());
-
-export const viewLocalDeletedRemoteDeleted = createAction('[Stats Bookmark] View Local Deleted Remote Deleted');
-export const viewLocalDeletedRemoteDeletedSuccess = createAction('[Stats Bookmark] View Local Deleted Remote Deleted Success', props<{ syncData: SyncData | null, trashItem: Bookmark | null }>());
-
-export const viewLocalUpdatedRemoteDeleted = createAction('[Stats Bookmark] View Local Updated Remote Deleted');
-export const viewLocalUpdatedRemoteDeletedSuccess = createAction('[Stats Bookmark] View Local Updated Remote Deleted Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null }>());
 
 export const viewLocalDeletedRemoteUpdated = createAction('[Stats Bookmark] View Local Deleted Remote Updated');
 export const viewLocalDeletedRemoteUpdatedSuccess = createAction('[Stats Bookmark] View Local Deleted Remote Updated Success', props<{ syncData: SyncData | null, trashItem: Bookmark | null, remoteMetadata: RemoteMetadata | null }>());
 
 export const purgeLocalItem = createAction('[Stats Bookmark] Purge Local Item', props<{ id: UUID }>());
 export const purgeRemoteItem = createAction('[Stats Bookmark] Purge Remote Item', props<{ id: UUID }>());
-export const overrideLocalItem = createAction('[Stats Bookmark] Override Local Item', props<{ remoteData: RemoteData<Entity> }>());
-export const overrideRemoteItem = createAction('[Stats Bookmark] Override Remote Item', props<{ entity: Entity }>());
+
+export const overrideLocalItem = createAction('[Stats Bookmark] Override Local Item');
+export const overrideRemoteItem = createAction('[Stats Bookmark] Override Remote Item');
 
 export const downloadRemoteData = createAction('[Stats Bookmark] Donwload RemoteData', props<{ id: UUID }>());
 export const downloadRemoteDataSuccess = createAction('[Stats Bookmark] Donwload RemoteData Success', props<{ remoteData: RemoteData<Entity> }>());

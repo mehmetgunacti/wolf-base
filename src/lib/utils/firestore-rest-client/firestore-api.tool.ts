@@ -78,7 +78,7 @@ export class FirestoreAPIClientImpl implements FirestoreAPIClient {
 	listIds<T>(listUrl: FirestoreListURL): Observable<FirestoreDTO<T>[]> {
 
 		// create url
-		listUrl.onlyIds = true;
+		listUrl.onlyMetadata = true;
 		return this.list(listUrl);
 
 	}
