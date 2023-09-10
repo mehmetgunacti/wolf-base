@@ -1,5 +1,5 @@
 import { ClicksTable } from "lib";
-import { UUID, WolfBaseTableName } from "lib/constants";
+import { LogCategory, UUID, WolfBaseTableName } from "lib/constants";
 import { Click } from "lib/models";
 import { WolfBaseDB } from "../wolfbase.database";
 
@@ -39,11 +39,18 @@ export class DexieClicksTableImpl implements ClicksTable {
 
 		// remove obsolete click objects
 		const bookmarkIds = new Set(await this.db.bookmarks.toCollection().primaryKeys() as UUID[]);
-		items = items.filter(({ id }) => bookmarkIds.has(id));
-		await this.db.transaction('rw', WolfBaseTableName.bookmarks_clicks, async () => {
+		const matching = items.filter(({ id }) => bookmarkIds.has(id));
+		await this.db.transaction('rw', [WolfBaseTableName.bookmarks_clicks, WolfBaseTableName.logs], async () => {
 
 			await this.db.clicks.clear();
-			await this.db.clicks.bulkAdd(items);
+			await this.db.clicks.bulkAdd(matching);
+
+			// add log
+			await this.db.logs.add({
+				category: LogCategory.store_clicks,
+				date: new Date().toISOString(),
+				message: `${items.length} downloaded, ${matching.length} stored`
+			});
 
 		});
 

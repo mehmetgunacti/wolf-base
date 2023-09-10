@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { Bookmark, LocalStorageService, LogCategory, RemoteData, RemoteMetadata, RemoteStorageService, UUID } from 'lib';
 import { Observable, combineLatest, from } from 'rxjs';
-import { filter, map, switchMap, toArray, withLatestFrom } from 'rxjs/operators';
+import { concatMap, filter, map, mergeMap, switchMap, toArray, withLatestFrom } from 'rxjs/operators';
 import { deletePermanently, downloadClicks, downloadDeleted, downloadNew, downloadRemoteMetadata, downloadUpdated, uploadClicks, uploadDeleted, uploadNew, uploadUpdated, viewLocalDeletedRemoteUpdated, viewLocalDeletedRemoteUpdatedSuccess, viewLocalUpdatedRemoteDeleted, viewLocalUpdatedRemoteDeletedSuccess, viewLocalUpdatedRemoteUpdated, viewLocalUpdatedRemoteUpdatedSuccess } from 'store/actions/stats-bookmark.actions';
 import { deleteSuccess, downloadSuccess, uploadSuccess } from 'store/actions/stats.actions';
 import { selBookmarkClicked } from 'store/selectors/bookmark-entities.selectors';
@@ -43,25 +43,6 @@ export class StatsBookmarkEffects {
 
 	);
 
-	downloadNewEntities$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(downloadNew),
-			withLatestFrom(this.store.select(selBookmarkRemoteCreated)),
-			map(([, rmd]) => rmd.map(rmd => rmd.id)),
-
-			// download remote entities
-			switchMap((ids: UUID[]) => this.remoteStorage.bookmarks.downloadMany(ids)),
-
-			// save all return values
-			switchMap((remoteData: RemoteData<Bookmark>[]) => from(this.localStorage.bookmarks.putAll(remoteData, LogCategory.download_new)).pipe(map(() => remoteData.length))),
-			map(count => downloadSuccess({ count }))
-
-		)
-
-	);
-
 	uploadUpdatedEntities$ = createEffect(
 
 		() => this.actions$.pipe(
@@ -77,26 +58,57 @@ export class StatsBookmarkEffects {
 
 	private uploadEntity$ = (ids: UUID[], category: LogCategory): Observable<any> => from(ids).pipe(
 
-		// read local entity
-		switchMap(id => from(this.localStorage.bookmarks.get(id)).pipe(
+		// for each incoming id
+		mergeMap(id =>
 
-			// check if entity exists, skip if it doesn't
-			filter((bookmark): bookmark is Bookmark => bookmark !== null),
+			// read entity from local storage
+			from(this.localStorage.bookmarks.get(id)).pipe(
 
-			// upload entity
-			switchMap(bookmark => this.remoteStorage.bookmarks.upload(bookmark)),
+				// check if entity exists
+				filter((bookmark): bookmark is Bookmark => bookmark !== null),
 
-			// save return value
-			switchMap(remoteData => this.localStorage.bookmarks.put(remoteData, category)),
+				// upload entity
+				switchMap(entity => this.remoteStorage.bookmarks.upload(entity).pipe(
 
-			// map to id
-			map(() => id)
+					// store all returned RemoteData
+					switchMap(remoteData => this.localStorage.bookmarks.put(remoteData, category))
 
-		)),
+				)),
+
+				// map to id
+				map(() => id)
+
+			)
+
+		),
 		toArray(),
 		map(ids => uploadSuccess({ count: ids.length }))
 
 	);
+
+	downloadNewEntities$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(downloadNew),
+			withLatestFrom(this.store.select(selBookmarkRemoteCreated)),
+			map(([, rmd]) => rmd.map(rmd => rmd.id)),
+
+			// download remote entities
+			switchMap((ids: UUID[]) => this.remoteStorage.bookmarks.downloadMany(ids).pipe(
+
+				// store all returned RemoteData
+				switchMap((remoteData: RemoteData<Bookmark>[]) => from(this.localStorage.bookmarks.putAll(remoteData, LogCategory.download_new)).pipe(map(() => remoteData.length))),
+
+			)),
+
+			// return
+			map(count => downloadSuccess({ count }))
+
+		)
+
+	);
+
 
 	uploadDeleted$ = createEffect(
 
@@ -106,14 +118,21 @@ export class StatsBookmarkEffects {
 			withLatestFrom(this.store.select(selBookmarkLocalDeletedRemoteUntouched)),
 			switchMap(([, syncData]) => from(syncData).pipe(
 
-				// move from collection to trash
-				switchMap(({ id }) => this.remoteStorage.bookmarks.moveToTrash(id)),
+				// for each incoming id
+				mergeMap(({ id }) =>
 
-				// success?
-				filter((id): id is UUID => id !== null),
+					// move from collection to trash
+					this.remoteStorage.bookmarks.moveToTrash(id).pipe(
 
-				// delete local metadata
-				switchMap(id => from(this.localStorage.bookmarks.deletePermanently(id, LogCategory.upload_deleted)).pipe(map(() => id))),
+						// success?
+						filter((id): id is UUID => id !== null),
+
+						// delete local metadata
+						switchMap(id => from(this.localStorage.bookmarks.deletePermanently(id, LogCategory.upload_deleted)).pipe(map(() => id)))
+
+					)
+
+				)
 
 			)),
 			toArray(),
@@ -131,14 +150,21 @@ export class StatsBookmarkEffects {
 			withLatestFrom(this.store.select(selBookmarkRemoteUpdated)),
 			switchMap(([, metadata]) => from(metadata).pipe(
 
-				// download remote entity
-				switchMap(({ id }) => this.remoteStorage.bookmarks.downloadOne(id)),
+				// for each incoming id
+				mergeMap(({ id }) =>
 
-				// success?
-				filter((remoteData): remoteData is RemoteData<Bookmark> => remoteData !== null),
+					// download remote entity
+					this.remoteStorage.bookmarks.downloadOne(id).pipe(
 
-				// store entity
-				switchMap(remoteData => from(this.localStorage.bookmarks.put(remoteData, LogCategory.download_updated)).pipe(map(() => remoteData.entity.id)))
+						// success?
+						filter((remoteData): remoteData is RemoteData<Bookmark> => remoteData !== null),
+
+						// store entity
+						switchMap(remoteData => from(this.localStorage.bookmarks.put(remoteData, LogCategory.download_updated)).pipe(map(() => remoteData.entity.id)))
+
+					)
+
+				),
 
 			)),
 			toArray(),
@@ -157,7 +183,7 @@ export class StatsBookmarkEffects {
 			switchMap(([, syncData]) => from(syncData).pipe(
 
 				// move local entity to trash, delete metadata
-				switchMap(syncData => from(this.localStorage.bookmarks.deletePermanently(syncData.id, LogCategory.download_deleted)).pipe(map(() => syncData.id))),
+				mergeMap(syncData => from(this.localStorage.bookmarks.deletePermanently(syncData.id, LogCategory.download_deleted)).pipe(map(() => syncData.id))),
 
 			)),
 			toArray(),
@@ -176,11 +202,10 @@ export class StatsBookmarkEffects {
 			switchMap(([, clicks]) => from(clicks).pipe(
 
 				// upload click number
-				switchMap(click => this.remoteStorage.clicks.increase(click.id, click.current))
+				mergeMap(click => this.remoteStorage.clicks.increase(click.id, click.current))
 
 			)),
-			toArray(),
-			map(numbers => uploadSuccess({ count: numbers.length }))
+			map(() => downloadClicks())
 
 		)
 
@@ -212,7 +237,7 @@ export class StatsBookmarkEffects {
 			switchMap(([, syncData]) => from(syncData).pipe(
 
 				// move local entity to trash, delete metadata
-				switchMap(syncData => from(this.localStorage.bookmarks.deletePermanently(syncData.id, LogCategory.download_deleted)).pipe(map(() => syncData.id))),
+				mergeMap(syncData => from(this.localStorage.bookmarks.deletePermanently(syncData.id, LogCategory.download_deleted)).pipe(map(() => syncData.id))),
 
 			)),
 			toArray(),
