@@ -244,7 +244,7 @@ will be deleted. Continue?`)
 		const value = inputElement.value;
 
 		if (value === "h" || value === "H")
-			inputElement.value = "https://";
+			inputElement.value = "https://www.";
 
 	}
 
