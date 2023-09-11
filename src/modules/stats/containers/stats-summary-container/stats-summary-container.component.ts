@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StatsSummary } from 'lib';
 import { Observable } from 'rxjs';
-import { downloadClicks, downloadNew, uploadClicks, uploadDeleted, uploadNew, uploadUpdated, viewLocalDeletedRemoteUpdated, viewLocalUpdatedRemoteDeleted, deletePermanently, viewLocalUntouchedRemoteDeleted, viewLocalUntouchedRemoteUpdated, viewLocalUpdatedRemoteUpdated } from 'store/actions/stats-bookmark.actions';
+import { downloadClicks, downloadNew, uploadClicks, uploadDeleted, uploadNew, uploadUpdated, viewLocalDeletedRemoteUpdated, viewLocalUpdatedRemoteDeleted, deletePermanently, viewLocalUpdatedRemoteUpdated, downloadDeleted, downloadUpdated } from 'store/actions/stats-bookmark.actions';
 import { selBookmarkStatsSummary } from 'store/selectors/stats-bookmark.selectors';
 
 @Component({
@@ -22,49 +22,51 @@ export class StatsSummaryContainerComponent {
 
 	}
 
-	onDownloadRemoteNew(): void {
+	onDownloadNew(): void {
 
 		this.store.dispatch(downloadNew());
 
 	}
 
-	onUploadLocalNew(): void {
+	onUploadNew(): void {
 
 		this.store.dispatch(uploadNew());
 
 	}
 
-	onUploadLocalClicked(): void {
+	onUploadClicks(): void {
 
 		this.store.dispatch(uploadClicks());
 
 	}
 
-	onViewRemoteDeleted(): void {
+	onDownloadDeleted(): void {
 
-		this.store.dispatch(viewLocalUntouchedRemoteDeleted());
-
-	}
-
-	onViewRemoteUpdated(): void {
-
-		this.store.dispatch(viewLocalUntouchedRemoteUpdated());
+		console.log('onDownloadDeleted');
+		
+		this.store.dispatch(downloadDeleted());
 
 	}
 
-	onUploadLocalUpdated(): void {
+	onDownloadUpdated(): void {
+
+		this.store.dispatch(downloadUpdated());
+
+	}
+
+	onUploadUpdated(): void {
 
 		this.store.dispatch(uploadUpdated());
 
 	}
 
-	onUploadLocalDeleted(): void {
+	onUploadDeleted(): void {
 
 		this.store.dispatch(uploadDeleted());
 
 	}
 
-	onDownloadRemoteClicks(): void {
+	onDownloadClicks(): void {
 
 		this.store.dispatch(downloadClicks());
 

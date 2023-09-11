@@ -1,17 +1,17 @@
 <app-stats-summary
 	[summary]="summary$ | async"
 
-	(downloadRemoteNew)="onDownloadRemoteNew()"
-	(uploadLocalNew)="onUploadLocalNew()"
+	(downloadNew)="onDownloadNew()"
+	(uploadNew)="onUploadNew()"
 
-	(uploadLocalClicked)="onUploadLocalClicked()"
-	(downloadRemoteClicks)="onDownloadRemoteClicks()"
+	(uploadClicks)="onUploadClicks()"
+	(downloadClicks)="onDownloadClicks()"
 
-	(viewRemoteDeleted)="onViewRemoteDeleted()"
-	(viewRemoteUpdated)="onViewRemoteUpdated()"
+	(downloadDeleted)="onDownloadDeleted()"
+	(downloadUpdated)="onDownloadUpdated()"
 
-	(uploadLocalUpdated)="onUploadLocalUpdated()"
-	(uploadLocalDeleted)="onUploadLocalDeleted()"
+	(uploadUpdated)="onUploadUpdated()"
+	(uploadDeleted)="onUploadDeleted()"
 
 	(deleteLocalMetadata)="onDeleteLocalMetadata()"
 

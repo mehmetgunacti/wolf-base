@@ -10,17 +10,17 @@ export class StatsSummaryComponent {
 
 	@Input() summary: StatsSummary | undefined | null;
 
-	@Output() uploadLocalNew = new EventEmitter<void>();
-	@Output() downloadRemoteNew = new EventEmitter<void>();
+	@Output() uploadNew = new EventEmitter<void>();
+	@Output() downloadNew = new EventEmitter<void>();
 
-	@Output() uploadLocalClicked = new EventEmitter<void>();
-	@Output() downloadRemoteClicks = new EventEmitter<void>();
+	@Output() uploadClicks = new EventEmitter<void>();
+	@Output() downloadClicks = new EventEmitter<void>();
 
-	@Output() viewRemoteDeleted = new EventEmitter<void>();
-	@Output() viewRemoteUpdated = new EventEmitter<void>();
+	@Output() downloadDeleted = new EventEmitter<void>();
+	@Output() downloadUpdated = new EventEmitter<void>();
 
-	@Output() uploadLocalUpdated = new EventEmitter<void>();
-	@Output() uploadLocalDeleted = new EventEmitter<void>();
+	@Output() uploadUpdated = new EventEmitter<void>();
+	@Output() uploadDeleted = new EventEmitter<void>();
 
 	@Output() deleteLocalMetadata = new EventEmitter<void>();
 
@@ -28,51 +28,53 @@ export class StatsSummaryComponent {
 	@Output() viewLocalUpdatedRemoteDeleted = new EventEmitter<void>();
 	@Output() viewLocalDeletedRemoteUpdated = new EventEmitter<void>();
 
-	onDownloadRemoteNew(): void {
+	onDownloadNew(): void {
 
-		this.downloadRemoteNew.emit();
-
-	}
-
-	onUploadLocalNew(): void {
-
-		this.uploadLocalNew.emit();
+		this.downloadNew.emit();
 
 	}
 
-	onUploadLocalClicked(): void {
+	onUploadNew(): void {
 
-		this.uploadLocalClicked.emit();
-
-	}
-
-	onDownloadRemoteClicks(): void {
-
-		this.downloadRemoteClicks.emit();
+		this.uploadNew.emit();
 
 	}
 
-	onViewRemoteDeleted(): void {
+	onUploadClicks(): void {
 
-		this.viewRemoteDeleted.emit();
-
-	}
-
-	onViewRemoteUpdated(): void {
-
-		this.viewRemoteUpdated.emit();
+		this.uploadClicks.emit();
 
 	}
 
-	onUploadLocalUpdated(): void {
+	onDownloadClicks(): void {
 
-		this.uploadLocalUpdated.emit();
+		this.downloadClicks.emit();
 
 	}
 
-	onUploadLocalDeleted(): void {
+	onDownloadDeleted(): void {
 
-		this.uploadLocalDeleted.emit();
+		console.log('11111111');
+		
+		this.downloadDeleted.emit();
+
+	}
+
+	onDownloadUpdated(): void {
+
+		this.downloadUpdated.emit();
+
+	}
+
+	onUploadUpdated(): void {
+
+		this.uploadUpdated.emit();
+
+	}
+
+	onUploadDeleted(): void {
+
+		this.uploadDeleted.emit();
 
 	}
 
