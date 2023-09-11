@@ -3,8 +3,10 @@ import { ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LocalStorageService, RemoteStorageService } from 'lib';
+import { SyncService } from 'lib/services/sync-service.interface';
 import { MessageService } from 'primeng/api';
 import { CustomErrorHandler, DexieLocalStorageServiceImpl, FirestoreRemoteStorageServiceImpl } from 'services';
+import { SyncServiceImpl } from 'services/sync.service';
 
 export const routes: Routes = [
 
@@ -32,6 +34,7 @@ export const routes: Routes = [
 
 export const LOCAL_STORAGE_SERVICE = new InjectionToken<LocalStorageService>('LocalStorageService');
 export const REMOTE_STORAGE_SERVICE = new InjectionToken<RemoteStorageService>('RemoteStorageService');
+export const SYNC_SERVICE = new InjectionToken<SyncService>('SyncService');
 
 export const providers: Provider[] = [
 
@@ -53,6 +56,7 @@ export const providers: Provider[] = [
 	},
 	{ provide: LOCAL_STORAGE_SERVICE, useClass: DexieLocalStorageServiceImpl },
 	{ provide: REMOTE_STORAGE_SERVICE, useClass: FirestoreRemoteStorageServiceImpl, deps: [Store, HttpClient] },
+	{ provide: SYNC_SERVICE, useClass: SyncServiceImpl, deps: [LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE] },
 	MessageService
 
 ];

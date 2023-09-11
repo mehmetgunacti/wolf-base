@@ -3,5 +3,6 @@ export * from './dom.service';
 export * from './error.handler';
 export * from './firestore';
 export * from './mock-services';
+export * from './sync.service';
 export * from './theme.service';
 export * from './toast.service';

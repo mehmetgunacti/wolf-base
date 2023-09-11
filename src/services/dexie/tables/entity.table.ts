@@ -51,7 +51,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async put(item: RemoteData<T>, category: LogCategory): Promise<void> {
+	async put(item: RemoteData<T>): Promise<void> {
 
 		await this.db.transaction('rw', [
 			this.tablename,
@@ -59,11 +59,11 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 			this.tablename + '_trash',
 			this.tablename + '_remote',
 			WolfBaseTableName.logs
-		], async () => await this._put(item, category));
+		], async () => await this._put(item));
 
 	}
 
-	async putAll(items: RemoteData<T>[], category: LogCategory): Promise<void> {
+	async putAll(items: RemoteData<T>[]): Promise<void> {
 
 		await this.db.transaction('rw', [
 			this.tablename,
@@ -74,13 +74,13 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 		], async () => {
 
 			for (const item of items)
-				await this._put(item, category);
+				await this._put(item);
 
 		});
 
 	}
 
-	private async _put(remoteData: RemoteData<T>, category: LogCategory): Promise<void> {
+	private async _put(remoteData: RemoteData<T>): Promise<void> {
 
 		const { id, createTime, updateTime } = remoteData.metaData;
 
@@ -109,7 +109,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 		// add log
 		await this.db.logs.add({
-			category,
+			category: LogCategory.remote_data_stored,
 			date: new Date().toISOString(),
 			message: `"${remoteData.entity.name}" stored`,
 			entityId: id
@@ -144,7 +144,13 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async deletePermanently(id: string, category: LogCategory): Promise<void> {
+	async delete(id: string): Promise<void> {
+
+		await this.bulkDelete([id]);
+
+	}
+
+	async bulkDelete(ids: UUID[]): Promise<void> {
 
 		await this.db.transaction('rw', [
 			this.tablename,
@@ -155,25 +161,31 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 		], async () => {
 
 			let logMessage = 'metadata deleted';
-			const item = await this.db.table<T>(this.tablename).get(id);
-			if (item) {
 
-				logMessage = `"${item.name}" deleted`;
-				await this.db.table(this.tablename + '_trash').add(item);
-				await this.db.table(this.tablename).delete(id);
+			for (const id of ids) {
+
+				const item = await this.db.table<T>(this.tablename).get(id);
+				if (item) {
+
+					logMessage = `"${item.name}" deleted`;
+					await this.db.table(this.tablename + '_trash').add(item);
+					await this.db.table(this.tablename).delete(id);
+
+				}
+
+				await this.db.table(this.tablename + '_sync').delete(id);
+				await this.db.table(this.tablename + '_remote').delete(id);
+
+				// add log
+				await this.db.logs.add({
+					category: LogCategory.entity_deleted,
+					date: new Date().toISOString(),
+					message: logMessage,
+					entityId: id
+				});
+
 
 			}
-
-			await this.db.table(this.tablename + '_sync').delete(id);
-			await this.db.table(this.tablename + '_remote').delete(id);
-
-			// add log
-			await this.db.logs.add({
-				category,
-				date: new Date().toISOString(),
-				message: logMessage,
-				entityId: id
-			});
 
 		});
 

@@ -1,4 +1,3 @@
-import { LogCategory } from "lib/constants";
 import { UUID } from "lib/constants/common.constant";
 import { LogMessage, SyncData } from "lib/models";
 import { Bookmark, Click } from "lib/models/bookmark.model";
@@ -11,8 +10,8 @@ export interface EntityTable<T extends Entity> {
 	get(id: UUID): Promise<T | null>;
 
 	create(item: Partial<T>): Promise<T>;
-	put(item: RemoteData<T>, category: LogCategory): Promise<void>;
-	putAll(items: RemoteData<T>[], category: LogCategory): Promise<void>;
+	put(item: RemoteData<T>): Promise<void>;
+	putAll(items: RemoteData<T>[]): Promise<void>;
 	update(id: UUID, item: Partial<T>): Promise<number>;
 	markError(id: UUID, error: string): Promise<void>;
 
@@ -34,7 +33,8 @@ export interface EntityTable<T extends Entity> {
 
 	moveToTrash(id: UUID): Promise<void>;
 	listDeletedItems(): Promise<T[]>;
-	deletePermanently(id: UUID, category: LogCategory): Promise<void>;
+	delete(id: UUID): Promise<void>;
+	bulkDelete(ids: UUID[]): Promise<void>;
 
 	search(term: string): Promise<T[]>;
 	searchByTags(tags: string[]): Promise<T[]>;

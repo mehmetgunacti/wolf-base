@@ -172,7 +172,7 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 	}
 
-	async deleteMetadata(id: UUID, category: LogCategory): Promise<void> {
+	async deleteMetadata(id: UUID): Promise<void> {
 
 		await sleep(SLEEP);
 		this.bookmarks_sync.delete(id);
@@ -180,7 +180,14 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 	}
 
-	async deletePermanently(id: string, category: LogCategory): Promise<void> {
+	async bulkDelete(ids: UUID[]): Promise<void> {
+
+		for (const id of ids)
+			await this.delete(id);
+
+	}
+
+	async delete(id: string): Promise<void> {
 
 		await sleep(SLEEP);
 		this.bookmarks.delete(id);
