@@ -11,7 +11,7 @@ export interface RemoteStorageCollection<T extends Entity> {
 	downloadMetadata(ids?: UUID[]): Observable<RemoteMetadata[]>;
 
 	upload(item: T): Observable<RemoteData<T>>;
-	delete(id: UUID): Observable<void>;
+
 	moveToTrash(id: UUID): Observable<UUID | null>;
 	trash(item: T): Observable<RemoteData<T>>;
 

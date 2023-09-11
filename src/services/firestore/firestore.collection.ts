@@ -32,7 +32,7 @@ export abstract class FirestoreCollectionImpl<T extends Entity> implements Remot
 
 	}
 
-	delete(id: UUID): Observable<void> {
+	private delete(id: UUID): Observable<void> {
 
 		const url = new FirestoreDocumentURL(
 			this.firestoreConfig,

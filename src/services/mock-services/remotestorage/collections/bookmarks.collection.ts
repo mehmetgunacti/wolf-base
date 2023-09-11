@@ -53,7 +53,7 @@ export class MockBookmarksCollection implements BookmarksCollection {
 
 	}
 
-	delete(id: string): Observable<void> {
+	private delete(id: string): Observable<void> {
 
 		delete this.bookmarks[id];
 		return of().pipe(delay(SLEEP));

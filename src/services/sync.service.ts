@@ -112,6 +112,7 @@ export class SyncServiceImpl implements SyncService {
 
 	deleteMany(ids: string[]): Observable<number> {
 
+		console.log(ids);
 		return from(this.localStorage.bookmarks.bulkDelete(ids)).pipe(map(() => ids.length));
 
 	}

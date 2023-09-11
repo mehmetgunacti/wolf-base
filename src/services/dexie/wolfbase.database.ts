@@ -22,7 +22,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			// bookmarks
 			bookmarks: 'id, *tags, clicks',
 			bookmarks_sync: 'id',
-			bookmarks_trash: '++id',
+			bookmarks_trash: '++, id, name',
 			bookmarks_clicks: 'id, current',
 			bookmarks_remote: 'id',
 
@@ -33,7 +33,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			logs: '++id'
 
 		},
-		version: 11
+		version: 14
 	});
 
 };

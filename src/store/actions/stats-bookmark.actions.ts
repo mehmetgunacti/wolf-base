@@ -32,12 +32,6 @@ export const viewLocalUpdatedRemoteUpdatedSuccess = createAction('[Stats Bookmar
 export const viewLocalUpdatedRemoteDeleted = createAction('[Stats Bookmark] View Local Updated Remote Deleted');
 export const viewLocalUpdatedRemoteDeletedSuccess = createAction('[Stats Bookmark] View Local Updated Remote Deleted Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null }>());
 
-export const viewLocalUntouchedRemoteDeleted = createAction('[Stats Bookmark] View Local Untouched Remote Deleted');
-export const viewLocalUntouchedRemoteDeletedSuccess = createAction('[Stats Bookmark] View Local Untouched Remote Deleted Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null }>());
-
-export const viewLocalUntouchedRemoteUpdated = createAction('[Stats Bookmark] View Local Untouched Remote Updated');
-export const viewLocalUntouchedRemoteUpdatedSuccess = createAction('[Stats Bookmark] View Local Untouched Remote Updated Success', props<{ syncData: SyncData | null, bookmark: Bookmark | null, remoteMetadata: RemoteMetadata | null }>());
-
 export const viewLocalUpdatedRemoteUpdated = createAction('[Stats Bookmark] View Local Updated Remote Updated');
 
 export const viewLocalDeletedRemoteUpdated = createAction('[Stats Bookmark] View Local Deleted Remote Updated');
