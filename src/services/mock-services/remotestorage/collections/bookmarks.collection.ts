@@ -1,5 +1,5 @@
 import { Bookmark, BookmarksCollection, RemoteData, RemoteMetadata, UUID } from "lib";
-import { Observable, delay, map, of } from "rxjs";
+import { Observable, defaultIfEmpty, delay, filter, map, of } from "rxjs";
 
 const SLEEP = 20;
 
@@ -8,7 +8,7 @@ export class MockBookmarksCollection implements BookmarksCollection {
 	private bookmarks: Record<string, RemoteData<Bookmark>> = {};
 	private bookmarks_trash: Record<string, RemoteData<Bookmark>> = {};
 
-	downloadOne(id: string): Observable<RemoteData<Bookmark> | null> {
+	download(id: string): Observable<RemoteData<Bookmark> | null> {
 
 		return of(this.bookmarks[id] ?? null).pipe(delay(SLEEP));
 
@@ -23,15 +23,25 @@ export class MockBookmarksCollection implements BookmarksCollection {
 
 	}
 
-	downloadMetadata(ids?: UUID[]): Observable<RemoteMetadata[]> {
+	downloadAllMetadata(): Observable<RemoteMetadata[]> {
 
-		return this.downloadMany(ids).pipe(
+		return this.downloadMany().pipe(
 			map(arr => arr.map(item => item.metaData))
 		)
 
 	}
 
-	upload(item: Bookmark): Observable<RemoteData<Bookmark>> {
+	downloadMetadata(id: UUID): Observable<RemoteMetadata | null> {
+
+		const item = this.bookmarks[id];
+		if (item)
+			return of(item.metaData).pipe(delay(SLEEP));
+
+		return of(null).pipe(delay(SLEEP));
+
+	}
+
+	upload(item: Bookmark): Observable<RemoteMetadata> {
 
 		const current = this.bookmarks[item.id];
 		const createTime = current ? current.metaData.createTime : new Date().toISOString();
@@ -49,11 +59,11 @@ export class MockBookmarksCollection implements BookmarksCollection {
 
 		};
 		this.bookmarks[item.id] = remoteData;
-		return of(remoteData).pipe(delay(SLEEP));
+		return of(remoteData.metaData).pipe(delay(SLEEP));
 
 	}
 
-	private delete(id: string): Observable<void> {
+	delete(id: string): Observable<void> {
 
 		delete this.bookmarks[id];
 		return of().pipe(delay(SLEEP));

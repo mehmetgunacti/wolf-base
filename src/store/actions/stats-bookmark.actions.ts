@@ -15,7 +15,7 @@ export const downloadDeleted = createAction('[Stats Bookmark] Download Deleted')
 export const uploadClicks = createAction('[Stats Bookmark] Upload Clicks');
 export const downloadClicks = createAction('[Stats Bookmark] Download Clicks');
 
-export const deletePermanently = createAction('[Stats Bookmark] Delete Permanently');
+export const deleteMetadata = createAction('[Stats Bookmark] Delete Metadata');
 
 export const forceUploadUpdated = createAction('[Stats Bookmark] Force Upload Updated');
 export const forceDownloadUpdated = createAction('[Stats Bookmark] Force Download Updated');

@@ -2,13 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
-import { Bookmark, LogCategory, RemoteData, RemoteMetadata, SyncService, UUID } from 'lib';
-import { Observable, combineLatest, from } from 'rxjs';
-import { filter, map, mergeMap, switchMap, toArray, withLatestFrom } from 'rxjs/operators';
-import { deletePermanently, downloadClicks, downloadDeleted, downloadNew, downloadRemoteMetadata, downloadUpdated, uploadClicks, uploadDeleted, uploadNew, uploadUpdated, viewLocalDeletedRemoteUpdated, viewLocalDeletedRemoteUpdatedSuccess, viewLocalUpdatedRemoteDeleted, viewLocalUpdatedRemoteDeletedSuccess, viewLocalUpdatedRemoteUpdated, viewLocalUpdatedRemoteUpdatedSuccess } from 'store/actions/stats-bookmark.actions';
+import { SyncService } from 'lib';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { deleteMetadata, downloadClicks, downloadDeleted, downloadNew, downloadRemoteMetadata, downloadUpdated, uploadClicks, uploadDeleted, uploadNew, uploadUpdated } from 'store/actions/stats-bookmark.actions';
 import { deleteSuccess, downloadSuccess, uploadSuccess } from 'store/actions/stats.actions';
 import { selBookmarkClicked } from 'store/selectors/bookmark-entities.selectors';
-import { selBookmarkLocalCreatedIds, selBookmarkLocalDeletedRemoteDeleted, selBookmarkLocalDeletedRemoteUntouched, selBookmarkLocalDeletedRemoteUpdated, selBookmarkLocalUpdatedRemoteDeleted, selBookmarkLocalUpdatedRemoteUntouched, selBookmarkLocalUpdatedRemoteUpdated, selBookmarkRemoteCreated, selBookmarkRemoteDeleted, selBookmarkRemoteUpdated } from 'store/selectors/stats-bookmark.selectors';
+import { selBookmarkLocalCreatedIds, selBookmarkLocalDeletedRemoteDeleted, selBookmarkLocalDeletedRemoteUntouched, selBookmarkLocalUpdatedRemoteUntouched, selBookmarkRemoteCreated, selBookmarkRemoteDeleted, selBookmarkRemoteUpdated } from 'store/selectors/stats-bookmark.selectors';
 
 @Injectable()
 export class StatsBookmarkEffects {
@@ -37,8 +36,8 @@ export class StatsBookmarkEffects {
 
 			ofType(uploadNew),
 			withLatestFrom(this.store.select(selBookmarkLocalCreatedIds)),
-			switchMap(([, ids]) => this.syncService.uploadEntities(ids)),
-			map(ids => uploadSuccess({ count: ids.length }))
+			switchMap(([, ids]) => this.syncService.uploadNew(ids)),
+			map(count => uploadSuccess({ count }))
 
 		)
 
@@ -50,8 +49,8 @@ export class StatsBookmarkEffects {
 
 			ofType(uploadUpdated),
 			withLatestFrom(this.store.select(selBookmarkLocalUpdatedRemoteUntouched)),
-			switchMap(([, syncData]) => this.syncService.uploadEntities(syncData.map(sd => sd.id))),
-			map(ids => uploadSuccess({ count: ids.length }))
+			switchMap(([, syncData]) => this.syncService.uploadUpdated(syncData.map(sd => sd.id))),
+			map(count => uploadSuccess({ count }))
 
 		)
 
@@ -76,7 +75,7 @@ export class StatsBookmarkEffects {
 
 			ofType(downloadNew),
 			withLatestFrom(this.store.select(selBookmarkRemoteCreated)),
-			switchMap(([, syncData]) => this.syncService.downloadMany(syncData.map(sd => sd.id))),
+			switchMap(([, syncData]) => this.syncService.downloadNew(syncData.map(sd => sd.id))),
 			map(count => downloadSuccess({ count }))
 
 		)
@@ -89,13 +88,12 @@ export class StatsBookmarkEffects {
 
 			ofType(downloadUpdated),
 			withLatestFrom(this.store.select(selBookmarkRemoteUpdated)),
-			switchMap(([, metadata]) => this.syncService.downloadMany(metadata.map(md => md.id))),
+			switchMap(([, metadata]) => this.syncService.downloadUpdated(metadata.map(md => md.id))),
 			map(count => downloadSuccess({ count }))
 
 		)
 
 	);
-
 
 	downloadDeleted$ = createEffect(
 
@@ -103,7 +101,7 @@ export class StatsBookmarkEffects {
 
 			ofType(downloadDeleted),
 			withLatestFrom(this.store.select(selBookmarkRemoteDeleted)),
-			switchMap(([, syncData]) => this.syncService.deleteMany(syncData.map(sd => sd.id))),
+			switchMap(([, syncData]) => this.syncService.downloadDeleted(syncData.map(sd => sd.id))),
 			map(count => deleteSuccess({ count }))
 
 		)
@@ -135,20 +133,20 @@ export class StatsBookmarkEffects {
 
 	);
 
-	deletePermanently$ = createEffect(
+// ************************************************************
+
+	deleteMetadata$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(deletePermanently),
+			ofType(deleteMetadata),
 			withLatestFrom(this.store.select(selBookmarkLocalDeletedRemoteDeleted)),
-			switchMap(([, syncData]) => this.syncService.deleteMany(syncData.map(sd => sd.id))),
+			switchMap(([, syncData]) => this.syncService.deleteMetadata(syncData.map(sd => sd.id))),
 			map(count => deleteSuccess({ count }))
 
 		)
 
 	);
-
-	// ************************************************************
 
 	// viewLocalUpdatedRemoteUpdated$ = createEffect(
 

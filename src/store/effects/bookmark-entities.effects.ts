@@ -42,7 +42,7 @@ export class BookmarkEntitiesEffects {
 
 		() => fromEventPattern<Click[]>(
 
-			(handler) => liveQuery(() => this.localStorage.clicks.list()).subscribe(handler),
+			(handler) => liveQuery(() => this.localStorage.clicks.listAll()).subscribe(handler),
 			(handler, unsubscribe) => unsubscribe()
 
 		).pipe(
@@ -179,7 +179,7 @@ export class BookmarkEntitiesEffects {
 			switchMap(({ id, bookmark }) => from(this.localStorage.bookmarks.update(id, bookmark)).pipe(
 				switchMap(count => iif(
 					() => count === 1,
-					from(this.localStorage.bookmarks.get(id)).pipe(
+					from(this.localStorage.bookmarks.getEntity(id)).pipe(
 						map(bookmark => bookmark ? updateBookmarkSuccess({ bookmark }) : updateBookmarkFailure({ id }))
 					),
 					of(updateBookmarkFailure({ id }))
@@ -240,8 +240,7 @@ export class BookmarkEntitiesEffects {
 		() => this.actions$.pipe(
 
 			ofType(clickBookmark),
-			switchMap(async ({ id }) => { await this.localStorage.clicks.click(id); return id; }),
-			switchMap(id => this.remoteStorage.clicks.increase(id, 1))
+			switchMap(({ id }) => from(this.localStorage.clicks.click(id)))
 
 		),
 		{ dispatch: false }

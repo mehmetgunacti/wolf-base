@@ -1,21 +1,27 @@
 import { UUID } from "lib/constants";
-import { Click, SyncData } from "lib/models";
+import { Click } from "lib/models";
 import { Observable } from "rxjs";
 
 export interface SyncService {
 
 	downloadMetadata(): Observable<number>;
 
-	uploadEntities(ids: UUID[]): Observable<UUID[]>;
+	uploadNew(ids: UUID[]): Observable<number>;
+
+	uploadUpdated(ids: UUID[]): Observable<number>;
 
 	uploadDeleted(ids: UUID[]): Observable<number>;
 
-	downloadMany(ids: UUID[]): Observable<number>;
+	downloadNew(ids: UUID[]): Observable<number>;
 
-	deleteMany(ids: UUID[]): Observable<number>;
+	downloadUpdated(ids: UUID[]): Observable<number>;
+
+	downloadDeleted(ids: UUID[]): Observable<number>;
 
 	uploadClicks(clicks: Click[]): Observable<number>;
 
 	downloadClicks(): Observable<number>;
+
+	deleteMetadata(ids: UUID[]): Observable<number>;
 
 }

@@ -1,4 +1,4 @@
-import { Bookmark, BookmarksTable, LogCategory, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from "lib";
+import { Bookmark, BookmarksTable, LogCategory, Metadata, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from "lib";
 import { v4 as uuidv4 } from 'uuid';
 
 const SLEEP = 20;
@@ -8,9 +8,9 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 	private bookmarks: Map<string, Bookmark> = new Map();
 	private bookmarks_sync: Map<string, SyncData> = new Map();
 	private bookmarks_remote: Map<string, RemoteMetadata> = new Map();
-	private bookmarks_trash: Map<string, Bookmark> = new Map();
+	private bookmarks_trash: Bookmark[] = [];
 
-	async get(id: string): Promise<Bookmark | null> {
+	async getEntity(id: string): Promise<Bookmark | null> {
 
 		await sleep(SLEEP);
 		return this.bookmarks.get(id) ?? null;
@@ -53,13 +53,6 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 		this.bookmarks.set(item.metaData.id, item.entity);
 		this.bookmarks_sync.set(item.metaData.id, syncData);
-
-	}
-
-	async putAll(items: RemoteData<Bookmark>[]): Promise<void> {
-
-		await sleep(SLEEP);
-		items.forEach(item => this.put(item));
 
 	}
 
@@ -112,13 +105,6 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 	}
 
-	async getTrashItem(id: string): Promise<Bookmark | null> {
-
-		await sleep(SLEEP);
-		return this.bookmarks_trash.get(id) ?? null;
-
-	}
-
 	async listSyncData(): Promise<SyncData[]> {
 
 		await sleep(SLEEP);
@@ -155,7 +141,7 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 		const bookmark: Bookmark | undefined = this.bookmarks.get(id);
 		if (bookmark) {
 
-			this.bookmarks_trash.set(id, bookmark);
+			this.bookmarks_trash.push(bookmark);
 			this.bookmarks.delete(id);
 			const sync: SyncData | undefined = this.bookmarks_sync.get(id);
 			if (sync)
@@ -172,27 +158,24 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 	}
 
-	async deleteMetadata(id: UUID): Promise<void> {
-
-		await sleep(SLEEP);
-		this.bookmarks_sync.delete(id);
-		this.bookmarks_remote.delete(id);
-
-	}
-
-	async bulkDelete(ids: UUID[]): Promise<void> {
+	async bulkDelete(ids: UUID[]): Promise<number> {
 
 		for (const id of ids)
 			await this.delete(id);
+		return ids.length;
 
 	}
 
-	async delete(id: string): Promise<void> {
+	async delete(id: string): Promise<number> {
 
 		await sleep(SLEEP);
+		const item = this.bookmarks.get(id);
+		if (item)
+			this.bookmarks_trash.push(item);
 		this.bookmarks.delete(id);
 		this.bookmarks_sync.delete(id);
-		this.bookmarks_trash.delete(id);
+		this.bookmarks_remote.delete(id);
+		return 1;
 
 	}
 
@@ -229,10 +212,37 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 
 	}
 
-	async putRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
+	async storeRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
 
 		this.bookmarks_remote.clear();
 		data.forEach(d => this.bookmarks_remote.set(d.id, d));
+
+	}
+
+	async storeRemoteData(items: RemoteData<Bookmark>[]): Promise<number> {
+
+		await sleep(SLEEP);
+		items.forEach(item => this.put(item));
+		return items.length;
+
+	}
+
+	async storeMetadata(data: Metadata): Promise<void> {
+
+		await sleep(SLEEP);
+		const syncData: SyncData = {
+
+			id: data.id,
+			createTime: data.createTime,
+			updateTime: data.updateTime,
+			updated: false,
+			deleted: false,
+			error: null
+
+		}
+
+		this.bookmarks_sync.set(data.id, syncData);
+		this.bookmarks_remote.set(data.id, data);
 
 	}
 

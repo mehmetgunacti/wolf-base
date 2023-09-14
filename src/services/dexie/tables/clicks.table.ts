@@ -29,13 +29,13 @@ export class DexieClicksTableImpl implements ClicksTable {
 
 	}
 
-	async clicked(): Promise<Click[]> {
+	async listClicked(): Promise<Click[]> {
 
 		return await this.db.clicks.where('current').above(0).toArray();
 
 	}
 
-	async putAll(items: Click[]): Promise<void> {
+	async storeClicks(items: Click[]): Promise<number> {
 
 		// remove obsolete click objects
 		const bookmarkIds = new Set(await this.db.bookmarks.toCollection().primaryKeys() as UUID[]);
@@ -53,10 +53,11 @@ export class DexieClicksTableImpl implements ClicksTable {
 			});
 
 		});
+		return items.length;
 
 	}
 
-	async list(): Promise<Click[]> {
+	async listAll(): Promise<Click[]> {
 
 		return await this.db.clicks.toArray();
 

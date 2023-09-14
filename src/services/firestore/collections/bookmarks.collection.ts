@@ -5,9 +5,9 @@ import { FirestoreConfig } from 'lib/models';
 import { Bookmark } from 'lib/models/bookmark.model';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
 import { Observable } from 'rxjs';
-import { FirestoreCollectionImpl } from '../firestore.collection';
+import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 
-export class BookmarksFirestoreCollectionImpl extends FirestoreCollectionImpl<Bookmark> implements BookmarksCollection {
+export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Bookmark> implements BookmarksCollection {
 
 	constructor(firestore: FirestoreAPIClient, firestoreConfig: FirestoreConfig) {
 		super(

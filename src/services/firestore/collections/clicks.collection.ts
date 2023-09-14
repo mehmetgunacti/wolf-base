@@ -4,7 +4,7 @@ import { RemoteCollection } from 'lib/constants/remote.constant';
 import { FirestoreConfig } from 'lib/models';
 import { Click } from 'lib/models/bookmark.model';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
-import { Observable, map, of } from 'rxjs';
+import { Observable, concatMap, from, map, of } from 'rxjs';
 
 export class ClicksFirestoreCollectionImpl implements ClicksCollection {
 
@@ -16,7 +16,31 @@ export class ClicksFirestoreCollectionImpl implements ClicksCollection {
 		private firestoreConfig: FirestoreConfig
 	) { }
 
-	increase(id: UUID, amount: number): Observable<number> {
+	uploadClicks(clicks: Click[]): Observable<number> {
+
+		return from(clicks).pipe(
+
+			concatMap(click => this.increase(click.id, click.current)),
+			map(() => clicks.length)
+
+		);
+
+	}
+
+	downloadAll(): Observable<Click[]> {
+
+		const url = new FirestoreListURL(
+			this.firestoreConfig,
+			this.remoteCollection,
+			this.pageSize
+		);
+		return this.firestore.list<{ clicks: number }>(url).pipe(
+			map(items => items.map(dto => this.convertToClick(dto)))
+		);
+
+	}
+
+	private increase(id: UUID, amount: number): Observable<number> {
 
 		const url = new FirestoreIncreaseURL(
 			this.firestoreConfig,
@@ -27,19 +51,6 @@ export class ClicksFirestoreCollectionImpl implements ClicksCollection {
 			amount
 		);
 		return this.firestore.increase(url);
-
-	}
-
-	downloadMany(): Observable<Click[]> {
-
-		const url = new FirestoreListURL(
-			this.firestoreConfig,
-			this.remoteCollection,
-			this.pageSize
-		);
-		return this.firestore.list<{ clicks: number }>(url).pipe(
-			map(items => items.map(dto => this.convertToClick(dto)))
-		);
 
 	}
 

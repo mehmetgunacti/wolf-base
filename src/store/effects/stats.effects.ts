@@ -1,34 +1,29 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
-import { Bookmark, Entity, RemoteData } from 'lib';
-import { filter, map, switchMap } from 'rxjs/operators';
-import { LocalStorageService, RemoteStorageService } from 'lib';
+import { filter, map } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { downloadRemoteData, downloadRemoteDataFailure, downloadRemoteDataSuccess, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem } from 'store/actions/stats-bookmark.actions';
-import { Store } from '@ngrx/store';
-import { selStatsSelectedItem, selStatsSelectedRemoteData } from 'store/selectors/stats.selectors';
+import { downloadRemoteDataSuccess } from 'store/actions/stats-bookmark.actions';
 import { deleteSuccess, downloadSuccess, uploadSuccess } from 'store/actions/stats.actions';
 
 @Injectable()
 export class StatsEffects {
 
 	private actions$: Actions = inject(Actions);
-	private store: Store = inject(Store);
-	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
-	private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
+	// private store: Store = inject(Store);
+	// private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
+	// private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
 
-	downloadRemoteData$ = createEffect(
+	// downloadRemoteData$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(downloadRemoteData),
-			switchMap(({ id }) => this.remoteStorage.bookmarks.downloadOne(id)),
-			map(remoteData => remoteData ? downloadRemoteDataSuccess({ remoteData }) : downloadRemoteDataFailure())
+	// 		ofType(downloadRemoteData),
+	// 		switchMap(({ id }) => this.remoteStorage.bookmarks.download(id)),
+	// 		map(remoteData => remoteData ? downloadRemoteDataSuccess({ remoteData }) : downloadRemoteDataFailure())
 
-		)
+	// 	)
 
-	);
+	// );
 
 	showNoRemoteDataNotification$ = createEffect(
 
@@ -54,17 +49,17 @@ export class StatsEffects {
 
 	// );
 
-	purgeRemoteItem$ = createEffect(
+	// purgeRemoteItem$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(purgeRemoteItem),
-			switchMap(({ id }) => this.remoteStorage.bookmarks.moveToTrash(id)),
-			map(() => showNotification({ severity: 'success', detail: 'Remote item deleted' }))
+	// 		ofType(purgeRemoteItem),
+	// 		switchMap(({ id }) => this.remoteStorage.bookmarks.moveToTrash(id)),
+	// 		map(() => showNotification({ severity: 'success', detail: 'Remote item deleted' }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 	// overrideLocalItem$ = createEffect(
 

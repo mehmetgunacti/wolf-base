@@ -2,6 +2,7 @@ export enum LogCategory {
 
 	remote_data_stored = 'remote_data_stored',
 	entity_deleted = 'entity_deleted',
+	metadata_deleted = 'metadata_deleted',
 	notification ='notification',
 	store_clicks = 'store_clicks'
 

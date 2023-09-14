@@ -3,7 +3,7 @@ import { EntityTable, LogCategory } from 'lib';
 import { UUID } from 'lib/constants/common.constant';
 import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { RemoteData, RemoteMetadata, SyncData } from 'lib/models';
-import { Entity } from 'lib/models/entity.model';
+import { Entity, Metadata } from 'lib/models/entity.model';
 import { WolfBaseDB } from '../wolfbase.database';
 
 export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T> {
@@ -13,16 +13,56 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 		protected tablename: WolfBaseTableName
 	) { }
 
-	async toArray(): Promise<any[]> {
-
-		return await this.db.table(this.tablename).toArray();
-
-	}
-
-	async get(id: UUID): Promise<T | null> {
+	async getEntity(id: UUID): Promise<T | null> {
 
 		const item = await this.db.table<T>(this.tablename).get(id);
 		return item ?? null;
+
+	}
+
+	async getSyncData(id: UUID): Promise<SyncData | null> {
+
+		return await this.db.table<SyncData>(this.tablename + '_sync').get(id) ?? null;
+
+	}
+
+	async storeRemoteData(items: RemoteData<T>[]): Promise<number> {
+
+		await this.db.transaction('rw', [
+			this.tablename,
+			this.tablename + '_sync',
+			this.tablename + '_trash',
+			this.tablename + '_remote',
+			WolfBaseTableName.logs
+		], async () => {
+
+			for (const item of items)
+				await this._put(item);
+
+		});
+		return items.length;
+
+	}
+
+	async storeMetadata(data: Metadata): Promise<void> {
+
+		await this.db.transaction('rw', [this.tablename + '_sync', this.tablename + '_remote'], async () => {
+
+			await this.db.table(this.tablename + '_sync').put(data, data.id);
+			await this.db.table(this.tablename + '_remote').put(data, data.id);
+
+		});
+
+	}
+
+	async storeRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
+
+		await this.db.transaction('rw', [this.tablename + '_remote'], async () => {
+
+			await this.db.table(this.tablename + '_remote').clear();
+			await this.db.table(this.tablename + '_remote').bulkPut(data);
+
+		});
 
 	}
 
@@ -34,7 +74,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async update(id: string, item: Partial<T>): Promise<number> {
+	async update(id: UUID, item: Partial<T>): Promise<number> {
 
 		let count = 0;
 		await this.db.transaction('rw', [
@@ -51,32 +91,70 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async put(item: RemoteData<T>): Promise<void> {
+	async list(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; } | undefined): Promise<T[]> {
 
-		await this.db.transaction('rw', [
-			this.tablename,
-			this.tablename + '_sync',
-			this.tablename + '_trash',
-			this.tablename + '_remote',
-			WolfBaseTableName.logs
-		], async () => await this._put(item));
+		const table: Table<T, IndexableType> = this.db.table<T>(this.tablename);
+		let collection: Collection<T, IndexableType>;
+
+		if (params) {
+
+			if (params.orderBy)
+				collection = table.orderBy(params.orderBy);
+			else
+				collection = table.toCollection();
+
+			if (params.reverse)
+				collection = collection.reverse();
+
+			if (params.limit)
+				collection = collection.limit(params.limit);
+
+			if (params.filterFn)
+				collection = collection.filter(params.filterFn);
+
+			return await collection.toArray();
+
+		}
+		return await table.toArray();
 
 	}
 
-	async putAll(items: RemoteData<T>[]): Promise<void> {
+	async listSyncData(): Promise<SyncData[]> {
+
+		return await this.db.table<SyncData>(this.tablename + '_sync').toArray();
+
+	}
+
+	async listRemoteMetadata(): Promise<RemoteMetadata[]> {
+
+		return await this.db.table<RemoteMetadata>(this.tablename + '_remote').toArray();
+
+	}
+
+	async moveToTrash(id: UUID): Promise<void> {
 
 		await this.db.transaction('rw', [
 			this.tablename,
 			this.tablename + '_sync',
-			this.tablename + '_trash',
-			this.tablename + '_remote',
-			WolfBaseTableName.logs
+			this.tablename + '_trash'
 		], async () => {
 
-			for (const item of items)
-				await this._put(item);
+			const item = await this.db.table<T>(this.tablename).get(id);
+			if (item) {
+
+				await this.db.table<T>(this.tablename + '_trash').add(item);
+				await this.db.table<T>(this.tablename + '_sync').where({ id }).modify({ deleted: true } as SyncData);
+				await this.db.table(this.tablename).delete(id);
+
+			}
 
 		});
+
+	}
+
+	async listDeletedItems(): Promise<T[]> {
+
+		return await this.db.table<T>(this.tablename + '_trash').toArray();
 
 	}
 
@@ -117,40 +195,14 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	}
 
-	async markError(id: UUID, error: string): Promise<void> {
-
-		await this.db.table<T>(this.tablename + '_sync').where({ id }).modify({ error } as Partial<Entity>);
-
-	}
-
-	async moveToTrash(id: UUID): Promise<void> {
-
-		await this.db.transaction('rw', [
-			this.tablename,
-			this.tablename + '_sync',
-			this.tablename + '_trash'
-		], async () => {
-
-			const item = await this.db.table<T>(this.tablename).get(id);
-			if (item) {
-
-				await this.db.table<T>(this.tablename + '_trash').add(item);
-				await this.db.table<T>(this.tablename + '_sync').where({ id }).modify({ deleted: true } as SyncData);
-				await this.db.table(this.tablename).delete(id);
-
-			}
-
-		});
-
-	}
-
-	async delete(id: string): Promise<void> {
+	async delete(id: string): Promise<number> {
 
 		await this.bulkDelete([id]);
+		return 1;
 
 	}
 
-	async bulkDelete(ids: UUID[]): Promise<void> {
+	async bulkDelete(ids: UUID[]): Promise<number> {
 
 		await this.db.transaction('rw', [
 			this.tablename,
@@ -188,121 +240,13 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 			}
 
 		});
-
-	}
-
-	async list(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; } | undefined): Promise<T[]> {
-
-		const table: Table<T, IndexableType> = this.db.table<T>(this.tablename);
-		let collection: Collection<T, IndexableType>;
-
-		if (params) {
-
-			if (params.orderBy)
-				collection = table.orderBy(params.orderBy);
-			else
-				collection = table.toCollection();
-
-			if (params.reverse)
-				collection = collection.reverse();
-
-			if (params.limit)
-				collection = collection.limit(params.limit);
-
-			if (params.filterFn)
-				collection = collection.filter(params.filterFn);
-
-			return await collection.toArray();
-
-		}
-		return await table.toArray();
-
-	}
-
-	async listNewIds(): Promise<UUID[]> {
-
-		const syncData = await this.db.table<SyncData>(this.tablename + '_sync').toArray();
-		const setSyncIds = new Set(syncData.map(s => s.id));
-
-		const ids = await this.listIds();
-		return ids.filter(id => !setSyncIds.has(id));
-
-	}
-
-	async listErrors(): Promise<SyncData[]> {
-
-		return await this.db.table<SyncData>(this.tablename + '_sync').filter(s => !!s.error).toArray();
-
-	}
-
-	async listUpdated(): Promise<SyncData[]> {
-
-		return await this.db.table<SyncData>(this.tablename + '_sync').filter(s => s.updated).toArray();
-
-	}
-
-	async listDeletedItems(): Promise<T[]> {
-
-		return await this.db.table<T>(this.tablename + '_trash').toArray();
-
-	}
-
-	async getSyncData(id: UUID): Promise<SyncData | null> {
-
-		return await this.db.table<SyncData>(this.tablename + '_sync').get(id) ?? null;
-
-	}
-
-	async getTrashItem(id: UUID): Promise<T | null> {
-
-		return await this.db.table<T>(this.tablename + '_trash').get(id) ?? null;
-
-	}
-
-	async listSyncData(): Promise<SyncData[]> {
-
-		return await this.db.table<SyncData>(this.tablename + '_sync').toArray();
-
-	}
-
-	async getRemoteMetadata(id: UUID): Promise<RemoteMetadata | null> {
-
-		return await this.db.table<RemoteMetadata>(this.tablename + '_remote').get(id) ?? null;
-
-	}
-
-	async listRemoteMetadata(): Promise<RemoteMetadata[]> {
-
-		return await this.db.table<RemoteMetadata>(this.tablename + '_remote').toArray();
-
-	}
-
-	async putRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
-
-		await this.db.transaction('rw', [this.tablename + '_remote'], async () => {
-
-			await this.db.table(this.tablename + '_remote').clear();
-			await this.db.table(this.tablename + '_remote').bulkPut(data);
-
-		});
+		return ids.length;
 
 	}
 
 	async listIds(): Promise<UUID[]> {
 
 		return await this.db.table<T>(this.tablename).toCollection().primaryKeys() as UUID[];
-
-	}
-
-	search(term: string): Promise<T[]> {
-
-		throw new Error('Method not implemented.');
-
-	}
-
-	searchByTags(tags: string[]): Promise<T[]> {
-
-		throw new Error('Method not implemented.');
 
 	}
 

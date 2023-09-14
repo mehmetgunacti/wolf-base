@@ -25,21 +25,22 @@ export class MockClicksTableImpl implements ClicksTable {
 
 	}
 
-	async clicked(): Promise<Click[]> {
+	async listClicked(): Promise<Click[]> {
 
 		const clicks = Array.from(this.bookmarks_clicks.values());
 		return clicks.filter(c => c.current > 0);
 
 	}
 
-	async putAll(items: Click[]): Promise<void> {
+	async storeClicks(items: Click[]): Promise<number> {
 
 		for (const item of items)
 			this.bookmarks_clicks.set(item.id, item);
+		return items.length;
 
 	}
 
-	async list(): Promise<Click[]> {
+	async listAll(): Promise<Click[]> {
 
 		return Array.from(this.bookmarks_clicks.values());
 

@@ -6,13 +6,15 @@ import { Observable } from "rxjs";
 
 export interface RemoteStorageCollection<T extends Entity> {
 
-	downloadOne(id: UUID, onlyMetadata?: boolean): Observable<RemoteData<T> | null>;
-	downloadMany(ids?: UUID[]): Observable<RemoteData<T>[]>;
-	downloadMetadata(ids?: UUID[]): Observable<RemoteMetadata[]>;
+	upload(item: T): Observable<RemoteMetadata>;
 
-	upload(item: T): Observable<RemoteData<T>>;
+	download(id: UUID): Observable<RemoteData<T> | null>;
+	downloadMany(ids: UUID[]): Observable<RemoteData<T>[]>;
 
-	moveToTrash(id: UUID): Observable<UUID | null>;
+	downloadMetadata(id: UUID): Observable<RemoteMetadata | null>;
+	downloadAllMetadata(): Observable<RemoteMetadata[]>;
+
+	delete(id: UUID): Observable<void>;
 	trash(item: T): Observable<RemoteData<T>>;
 
 }
@@ -21,7 +23,7 @@ export interface BookmarksCollection extends RemoteStorageCollection<Bookmark> {
 
 export interface ClicksCollection {
 
-	increase(id: UUID, amount: number): Observable<number>;
-	downloadMany(): Observable<Click[]>;
+	uploadClicks(clicks: Click[]): Observable<number>;
+	downloadAll(): Observable<Click[]>;
 
 }
