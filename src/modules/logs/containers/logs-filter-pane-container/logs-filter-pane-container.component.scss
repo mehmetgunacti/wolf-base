@@ -1,0 +1,22 @@
+app-logs-filter-pane-container {
+
+	display: block;
+	width: 100%;
+
+	& app-logs-filter {
+
+		& .p-dropdown {
+
+			display: flex;
+
+		}
+
+		& .p-inputtext {
+
+			width: 100%;
+
+		}
+
+	}
+
+}

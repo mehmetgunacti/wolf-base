@@ -1,0 +1,10 @@
+<span controls>
+	<span class="p-float-label">
+		<p-dropdown inputId="tablenames" [options]="categories" [formControl]="fcCategory"></p-dropdown>
+		<label for="tablenames">Table</label>
+	</span>
+	<span class="p-float-label">
+		<input id="searchbox" type="text" #searchbox pInputText [formControl]="fcSearch">
+		<label for="searchbox">Entity ID</label>
+	</span>
+</span>

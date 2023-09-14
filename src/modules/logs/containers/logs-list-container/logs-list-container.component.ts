@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LogMessage } from 'lib';
 import { Observable } from 'rxjs';
+import { loadLogs, toggleFilterPane } from 'store/actions/logs.actions';
 import { selLogsAll } from 'store/selectors/logs.selectors';
 
 @Component({
@@ -13,11 +14,23 @@ export class LogsListContainerComponent {
 
 	private store: Store = inject(Store);
 
-	list$: Observable<LogMessage[]>;
+	logMessages$: Observable<LogMessage[]>;
 
 	constructor() {
 
-		this.list$ = this.store.select(selLogsAll);
+		this.logMessages$ = this.store.select(selLogsAll);
+
+	}
+
+	onRefresh(): void {
+
+		this.store.dispatch(loadLogs());
+
+	}
+
+	onFilter(): void {
+
+		this.store.dispatch(toggleFilterPane());
 
 	}
 

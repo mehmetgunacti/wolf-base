@@ -1,15 +1,4 @@
-<app-portal outletName="portal-outlet-right">
-
-    <button
-		pButton
-		pRipple
-		type="button"
-		label="Clear"
-		icon="pi pi-trash"
-		class="p-button-text p-button-sm"
-		(click)="onClearLogs()">
-	</button>
-
-</app-portal>
+<!-- Filter Pane -->
+<app-logs-filter-pane-container *ngIf="filterPaneVisible$ | async" @slideUpDown/>
 
 <app-logs-list-container></app-logs-list-container>

@@ -69,6 +69,6 @@ export const reducers: ActionReducerMap<AppState> = {
 	stats: statsReducer,
 	bookmark: combineReducers(bookmarkReducer),
 	database: databaseReducer,
-	logs: logsReducer
+	logs: combineReducers(logsReducer)
 
 };

@@ -1,18 +1,26 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { clearLogs } from 'store/actions/logs.actions';
+import { slideUpDownTrigger } from 'modules/shared';
+import { Observable } from 'rxjs';
+import { loadLogs } from 'store/actions/logs.actions';
+import { selLogsFilterPaneVisibility } from 'store/selectors/logs.selectors';
 
 @Component({
 	selector: 'app-logs-page',
-	templateUrl: './logs-page.component.html'
+	templateUrl: './logs-page.component.html',
+	animations: [slideUpDownTrigger]
 })
 export class LogsPageComponent {
 
 	private store: Store = inject(Store);
 
-	onClearLogs(): void {
+	filterPaneVisible$: Observable<boolean>;
 
-		this.store.dispatch(clearLogs());
+	constructor() {
+
+		this.filterPaneVisible$ = this.store.select(selLogsFilterPaneVisibility);
+
+		this.store.dispatch(loadLogs());
 
 	}
 

@@ -1,5 +1,6 @@
-import { LogMessage, LogsTable } from 'lib';
+import { LogCategory, LogMessage, LogsTable } from 'lib';
 import { WolfBaseDB } from '../wolfbase.database';
+import { Collection, IndexableType, Table } from 'dexie';
 
 export class DexieLogsTableImpl implements LogsTable {
 
@@ -11,7 +12,10 @@ export class DexieLogsTableImpl implements LogsTable {
 
 	}
 
-	async list(): Promise<LogMessage[]> {
+	async list(params?: { category: LogCategory | null; }): Promise<LogMessage[]> {
+
+		if (params?.category)
+			return await this.db.logs.where('category').equals(params.category).toArray();
 
 		return await this.db.logs.toArray();
 

@@ -1,10 +1,11 @@
-import { Action, ActionReducer, createReducer, on } from "@ngrx/store";
-import { loadLogsSuccess } from "store/actions/logs.actions";
-import { LogsModuleState, initialLogsState } from "store/states/logs.state";
+import { ActionReducerMap } from "@ngrx/store";
+import { LogsModuleState } from "store/states/logs.state";
+import { logsEntriesReducer } from "./logs-entries.reducer";
+import { logsUIReducer } from "./logs-ui.reducer";
 
-export const logsReducer: ActionReducer<LogsModuleState, Action> = createReducer(
+export const logsReducer: ActionReducerMap<LogsModuleState> = {
 
-	initialLogsState,
-	on(loadLogsSuccess, (state, { logs }): LogsModuleState => ({ ...state, logs }))
+	entries: logsEntriesReducer,
+	ui: logsUIReducer
 
-);
+}

@@ -1,3 +1,4 @@
+import { LogCategory } from "lib/constants";
 import { UUID } from "lib/constants/common.constant";
 import { LogMessage, SyncData } from "lib/models";
 import { Bookmark, Click } from "lib/models/bookmark.model";
@@ -77,7 +78,7 @@ export interface ConfigurationTable {
 export interface LogsTable {
 
 	add(message: LogMessage): Promise<void>;
-	list(): Promise<LogMessage[]>;
+	list(params?: { category: LogCategory | null; }): Promise<LogMessage[]>;
 	clear(): Promise<void>;
 
 }
