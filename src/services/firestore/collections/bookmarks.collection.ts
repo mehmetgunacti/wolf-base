@@ -1,10 +1,8 @@
-import { BookmarksCollection, FIRESTORE_VALUE, FirestoreConverter, FirestoreIncreaseURL } from 'lib';
-import { UUID } from 'lib/constants/common.constant';
+import { BookmarksCollection, FIRESTORE_VALUE, FirestoreConverter } from 'lib';
 import { RemoteCollection } from 'lib/constants/remote.constant';
 import { FirestoreConfig } from 'lib/models';
 import { Bookmark } from 'lib/models/bookmark.model';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
-import { Observable } from 'rxjs';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 
 export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Bookmark> implements BookmarksCollection {
@@ -16,20 +14,6 @@ export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageColl
 			RemoteCollection.bookmarks,
 			new BookmarkFirestoreConverter()
 		);
-	}
-
-	click(id: UUID, amount: number = 1): Observable<number> {
-
-		const url = new FirestoreIncreaseURL(
-			this.firestoreConfig,
-			RemoteCollection.bookmarks_clicks,
-			id,
-			'clicks',
-			':commit',
-			amount
-		);
-		return this.firestore.increase(url);
-
 	}
 
 }
