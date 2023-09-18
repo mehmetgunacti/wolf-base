@@ -196,13 +196,6 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async delete(id: string): Promise<number> {
 
-		await this.bulkDelete([id]);
-		return 1;
-
-	}
-
-	async bulkDelete(ids: UUID[]): Promise<number> {
-
 		await this.db.transaction('rw', [
 			this.entity,
 			this.entity + '_sync',
@@ -213,33 +206,37 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 			let logMessage = 'metadata deleted';
 
-			for (const id of ids) {
+			const item = await this.db.table<T>(this.entity).get(id);
+			if (item) {
 
-				const item = await this.db.table<T>(this.entity).get(id);
-				if (item) {
-
-					logMessage = `"${item.name}" deleted`;
-					await this.db.table(this.entity + '_trash').add(item);
-					await this.db.table(this.entity).delete(id);
-
-				}
-
-				await this.db.table(this.entity + '_sync').delete(id);
-				await this.db.table(this.entity + '_remote').delete(id);
-
-				// add log
-				await this.db.logs.add({
-					category: LogCategory.entity_deleted,
-					date: new Date().toISOString(),
-					message: logMessage,
-					entityId: id
-				});
-
+				logMessage = `"${item.name}" deleted`;
+				await this.db.table(this.entity + '_trash').add(item);
+				await this.db.table(this.entity).delete(id);
 
 			}
 
+			await this.db.table(this.entity + '_sync').delete(id);
+			await this.db.table(this.entity + '_remote').delete(id);
+
+			// add log
+			await this.db.logs.add({
+				category: LogCategory.entity_deleted,
+				date: new Date().toISOString(),
+				message: logMessage,
+				entityId: id
+			});
+
 		});
-		return ids.length;
+		return 1;
+
+	}
+
+	async bulkDelete(ids: UUID[]): Promise<number> {
+
+		let counter = 0;
+		for (const id of ids)
+			counter += await this.delete(id);
+		return counter;
 
 	}
 
