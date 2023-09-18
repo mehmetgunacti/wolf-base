@@ -1,4 +1,4 @@
-import { WolfBaseTableName } from 'lib/constants/database.constant';
+import { LocalTableNames } from 'lib/constants/database.constant';
 import { WolfBaseDB } from '../wolfbase.database';
 import { KeyValueTable } from 'lib';
 
@@ -6,7 +6,7 @@ export class KeyValueTableImpl implements KeyValueTable {
 
 	constructor(
 		protected db: WolfBaseDB,
-		protected tablename: WolfBaseTableName
+		protected tablename: LocalTableNames
 	) { }
 
 	async set<T>(key: string, value: T): Promise<void> {

@@ -1,6 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { FirestoreConfig } from 'lib';
-import { DEFAULT_CONF_VALUES } from 'services';
+import { DEFAULT_CONF_VALUES, FirestoreConfig } from 'lib';
 import { CoreConfigurationState, CoreModuleState } from 'store/states/core.state';
 import { coreModuleState } from './core.selectors';
 

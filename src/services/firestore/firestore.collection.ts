@@ -12,7 +12,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 	constructor(
 		protected firestore: FirestoreAPIClient,
 		protected firestoreConfig: FirestoreConfig,
-		protected remoteCollection: WolfEntity,
+		protected entity: WolfEntity,
 		protected converter: FirestoreConverter<T>
 	) { }
 
@@ -20,7 +20,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestorePatchURL(
 			this.firestoreConfig,
-			this.remoteCollection,
+			this.entity,
 			item.id,
 			this.converter.toUpdateMask(item)
 		);
@@ -37,7 +37,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestoreDocumentURL(
 			this.firestoreConfig,
-			this.remoteCollection,
+			this.entity,
 			id
 		);
 		return this.firestore.get<T>(url).pipe(
@@ -50,7 +50,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestoreBatchGetURL(
 			this.firestoreConfig,
-			this.remoteCollection,
+			this.entity,
 			ids
 		);
 		return this.firestore.batchGet<T>(url).pipe(
@@ -65,7 +65,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestoreDocumentURL(
 			this.firestoreConfig,
-			this.remoteCollection,
+			this.entity,
 			id,
 			true
 		);
@@ -81,7 +81,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestoreListURL(
 			this.firestoreConfig,
-			this.remoteCollection,
+			this.entity,
 			this.pageSize,
 			true
 		);
@@ -97,7 +97,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestoreDocumentURL(
 			this.firestoreConfig,
-			this.remoteCollection,
+			this.entity,
 			id
 		);
 		return this.firestore.delete(url);
@@ -108,7 +108,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestoreCreateURL(
 			this.firestoreConfig,
-			`${this.remoteCollection}_trash/${item.id}/items`,
+			`${this.entity}_trash/${item.id}/items`,
 			new Date().toISOString()
 		);
 		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);

@@ -1,21 +1,14 @@
 import Dexie from 'dexie';
-import { UUID, UUID_ISODate } from 'lib/constants/common.constant';
-import { CONF_KEYS, WolfBaseTableName } from 'lib/constants/database.constant';
-import { KBContent, KBEntry, LogMessage, RemoteMetadata, SyncData } from 'lib/models';
+import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalTableNames } from 'lib';
+import { UUID } from 'lib/constants/common.constant';
+import { KBEntry, LogMessage, RemoteMetadata, SyncData } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { DexieConfiguration } from 'lib/models/database.model';
-
-export class DEFAULT_CONF_VALUES {
-
-	static darkTheme = true;
-	static sidebarVisible = true;
-	static syncWorkerActive = true;
-
-}
 
 export const wolfBaseDBFactory = (): WolfBaseDB => {
 
 	return new WolfBaseDB({
+
 		dbName: 'WolfBaseDB',
 		tables: {
 
@@ -46,6 +39,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 
 		},
 		version: 1
+
 	});
 
 };
@@ -66,10 +60,10 @@ export class WolfBaseDB extends Dexie {
 	kb_entries_trash: Dexie.Table<KBEntry, number>;
 
 	// knowledge base contents
-	kb_contents: Dexie.Table<KBContent, UUID>;
+	kb_contents: Dexie.Table<string, UUID>;
 	kb_contents_sync: Dexie.Table<SyncData, UUID>;
 	kb_contents_remote: Dexie.Table<RemoteMetadata, UUID>;
-	kb_contents_trash: Dexie.Table<KBContent, number>;
+	kb_contents_trash: Dexie.Table<string, number>;
 
 	configuration: Dexie.Table<string | boolean, CONF_KEYS>;
 	logs: Dexie.Table<LogMessage, number>;
@@ -80,25 +74,24 @@ export class WolfBaseDB extends Dexie {
 		this.version(conf.version)
 			.stores(conf.tables);
 
-		this.bookmarks = this.table(WolfBaseTableName.bookmarks);
-		this.bookmarks_sync = this.table(WolfBaseTableName.bookmarks_sync);
-		this.bookmarks_remote = this.table(WolfBaseTableName.bookmarks_remote);
-		this.bookmarks_trash = this.table(WolfBaseTableName.bookmarks_trash);
-		this.bookmarks_clicks = this.table(WolfBaseTableName.bookmarks_clicks);
+		this.bookmarks = this.table(LocalTableNames.bookmarks);
+		this.bookmarks_sync = this.table(LocalTableNames.bookmarks_sync);
+		this.bookmarks_remote = this.table(LocalTableNames.bookmarks_remote);
+		this.bookmarks_trash = this.table(LocalTableNames.bookmarks_trash);
+		this.bookmarks_clicks = this.table(LocalTableNames.bookmarks_clicks);
 
-		this.kb_entries = this.table(WolfBaseTableName.kb_entries);
-		this.kb_entries_sync = this.table(WolfBaseTableName.kb_entries_sync);
-		this.kb_entries_remote = this.table(WolfBaseTableName.kb_entries_remote);
-		this.kb_entries_trash = this.table(WolfBaseTableName.kb_entries_trash);
+		this.kb_entries = this.table(LocalTableNames.kb_entries);
+		this.kb_entries_sync = this.table(LocalTableNames.kb_entries_sync);
+		this.kb_entries_remote = this.table(LocalTableNames.kb_entries_remote);
+		this.kb_entries_trash = this.table(LocalTableNames.kb_entries_trash);
 
-		this.kb_contents = this.table(WolfBaseTableName.kb_contents);
-		this.kb_contents_sync = this.table(WolfBaseTableName.kb_contents_sync);
-		this.kb_contents_remote = this.table(WolfBaseTableName.kb_contents_remote);
-		this.kb_contents_trash = this.table(WolfBaseTableName.kb_contents_trash);
+		this.kb_contents = this.table(LocalTableNames.kb_contents);
+		this.kb_contents_sync = this.table(LocalTableNames.kb_contents_sync);
+		this.kb_contents_remote = this.table(LocalTableNames.kb_contents_remote);
+		this.kb_contents_trash = this.table(LocalTableNames.kb_contents_trash);
 
-		this.configuration = this.table(WolfBaseTableName.configuration);
-
-		this.logs = this.table(WolfBaseTableName.logs);
+		this.configuration = this.table(LocalTableNames.configuration);
+		this.logs = this.table(LocalTableNames.logs);
 
 		this.on('populate', () => {
 

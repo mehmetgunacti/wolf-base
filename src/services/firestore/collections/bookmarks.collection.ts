@@ -2,10 +2,12 @@ import { BookmarksCollection, FIRESTORE_VALUE, FirestoreConverter, FirestoreDTO,
 import { FirestoreConfig } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
-import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 import { Observable, concatMap, from, map } from 'rxjs';
+import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 
 export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Bookmark> implements BookmarksCollection {
+
+	private bookmarks_clicks = WolfEntity.bookmarks + '_clicks';
 
 	constructor(firestore: FirestoreAPIClient, firestoreConfig: FirestoreConfig) {
 		super(
@@ -31,7 +33,7 @@ export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageColl
 
 		const url = new FirestoreListURL(
 			this.firestoreConfig,
-			this.remoteCollection,
+			this.bookmarks_clicks,
 			this.pageSize
 		);
 		return this.firestore.list<{ clicks: number }>(url).pipe(
@@ -44,7 +46,7 @@ export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageColl
 
 		const url = new FirestoreIncreaseURL(
 			this.firestoreConfig,
-			WolfEntity.bookmarks + '_clicks',
+			this.bookmarks_clicks,
 			id,
 			'clicks',
 			':commit',

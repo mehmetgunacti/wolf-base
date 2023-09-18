@@ -1,7 +1,7 @@
 import { UUID } from "lib/constants";
 import { Entity } from "./entity.model";
+import { ISODateString } from "./id-base.model";
 import { Tag } from "./tag.model";
-import { IDBase, ISODateString } from "./id-base.model";
 
 export interface KBEntry extends Entity {
 
@@ -12,8 +12,8 @@ export interface KBEntry extends Entity {
 
 }
 
-export interface KBContent extends IDBase {
+// export interface KBContent extends IDBase {
 
-    content: string;
+//     content: string;
 
-}
+// }

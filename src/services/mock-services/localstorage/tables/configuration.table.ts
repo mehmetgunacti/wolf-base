@@ -1,6 +1,5 @@
-import { ConfigurationTable } from 'lib';
+import { ConfigurationTable, DEFAULT_CONF_VALUES } from 'lib';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
-import { DEFAULT_CONF_VALUES } from 'services/dexie';
 
 export class MockConfigurationTableImpl implements ConfigurationTable {
 

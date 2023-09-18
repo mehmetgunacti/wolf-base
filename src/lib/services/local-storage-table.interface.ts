@@ -1,6 +1,6 @@
 import { LogCategory } from "lib/constants";
 import { UUID } from "lib/constants/common.constant";
-import { LogMessage, SyncData } from "lib/models";
+import { KBEntry, LogMessage, SyncData } from "lib/models";
 import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Configuration, FirestoreConfig } from "lib/models/configuration.model";
 import { Entity, Metadata } from "lib/models/entity.model";
@@ -79,3 +79,6 @@ export interface LogsTable {
 	clear(): Promise<void>;
 
 }
+
+export interface KBEntriesTable extends EntityTable<KBEntry> { }
+export interface KBContentsTable extends KeyValueTable { }

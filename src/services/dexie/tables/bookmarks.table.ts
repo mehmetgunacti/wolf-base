@@ -1,6 +1,5 @@
-import { BookmarksTable, LogCategory, toggleArrayItem } from 'lib';
+import { BookmarksTable, LogCategory, WolfEntity, toggleArrayItem } from 'lib';
 import { UUID } from 'lib/constants/common.constant';
-import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { v4 as uuidv4 } from 'uuid';
 import { WolfBaseDB } from '../wolfbase.database';
@@ -9,7 +8,7 @@ import { EntityTableImpl } from './entity.table';
 export class DexieBookmarksTableImpl extends EntityTableImpl<Bookmark> implements BookmarksTable {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfBaseTableName.bookmarks);
+		super(db, WolfEntity.bookmarks);
 	}
 
 	protected override newItemFromPartial(item: Partial<Bookmark>): Bookmark {
@@ -81,7 +80,7 @@ export class DexieBookmarksTableImpl extends EntityTableImpl<Bookmark> implement
 		// remove obsolete click objects
 		const bookmarkIds = new Set(await this.db.bookmarks.toCollection().primaryKeys() as UUID[]);
 		const matching = items.filter(({ id }) => bookmarkIds.has(id));
-		await this.db.transaction('rw', [WolfBaseTableName.bookmarks_clicks, WolfBaseTableName.logs], async () => {
+		await this.db.transaction('rw', [this.db.bookmarks_clicks, this.db.logs], async () => {
 
 			await this.db.bookmarks_clicks.clear();
 			await this.db.bookmarks_clicks.bulkAdd(matching);

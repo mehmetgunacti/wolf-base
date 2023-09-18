@@ -1,12 +1,17 @@
-import { BookmarksTable, ConfigurationTable, LocalStorageService, LogsTable, WolfBaseTableName } from 'lib';
+import { BookmarksTable, ConfigurationTable, LocalStorageService, LogsTable, LocalTableNames, KBEntriesTable, KBContentsTable } from 'lib';
 import { DexieBookmarksTableImpl, DexieConfigurationTableImpl, DexieLogsTableImpl } from './tables';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
+import { DexieKBEntriesTableImpl } from './tables/kb-entries.table';
+import { DexieKBContentsTableImpl } from './tables/kb-contents.table';
 
 export class DexieLocalStorageServiceImpl implements LocalStorageService {
 
 	private db: WolfBaseDB;
 
 	public bookmarks: BookmarksTable;
+	kbEntries: KBEntriesTable;
+	kbContents: KBContentsTable;
+
 	public configuration: ConfigurationTable;
 	public logs: LogsTable;
 
@@ -14,13 +19,15 @@ export class DexieLocalStorageServiceImpl implements LocalStorageService {
 
 		const db: WolfBaseDB = wolfBaseDBFactory();
 		this.bookmarks = new DexieBookmarksTableImpl(db);
+		this.kbEntries = new DexieKBEntriesTableImpl(db);
+		this.kbContents = new DexieKBContentsTableImpl(db);
 		this.configuration = new DexieConfigurationTableImpl(db);
 		this.logs = new DexieLogsTableImpl(db);
 		this.db = db;
 
 	}
 
-	async dump(tablename: WolfBaseTableName): Promise<Record<string, string>> {
+	async dump(tablename: LocalTableNames): Promise<Record<string, string>> {
 
 		const table = this.db.table(tablename);
 		const data = table.toCollection();

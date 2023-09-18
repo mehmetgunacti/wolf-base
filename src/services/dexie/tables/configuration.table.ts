@@ -1,5 +1,5 @@
 import { ConfigurationTable } from 'lib';
-import { CONF_KEYS, WolfBaseTableName } from 'lib/constants/database.constant';
+import { CONF_KEYS, LocalTableNames } from 'lib/constants/database.constant';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
 import { KeyValueTableImpl } from './key-value.table';
 import { WolfBaseDB } from '../wolfbase.database';
@@ -7,7 +7,7 @@ import { WolfBaseDB } from '../wolfbase.database';
 export class DexieConfigurationTableImpl extends KeyValueTableImpl implements ConfigurationTable {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfBaseTableName.configuration)
+		super(db, LocalTableNames.configuration)
 	}
 
 	async setSidebarVisible(visible: boolean): Promise<void> {

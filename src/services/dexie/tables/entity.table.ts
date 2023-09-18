@@ -1,7 +1,6 @@
 import { Collection, IndexableType, Table } from 'dexie';
-import { EntityTable, LogCategory } from 'lib';
+import { EntityTable, LocalTableNames, LogCategory, WolfEntity } from 'lib';
 import { UUID } from 'lib/constants/common.constant';
-import { WolfBaseTableName } from 'lib/constants/database.constant';
 import { RemoteData, RemoteMetadata, SyncData } from 'lib/models';
 import { Entity, Metadata } from 'lib/models/entity.model';
 import { WolfBaseDB } from '../wolfbase.database';
@@ -10,30 +9,30 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	constructor(
 		protected db: WolfBaseDB,
-		protected tablename: WolfBaseTableName
+		protected entity: WolfEntity
 	) { }
 
 	async getEntity(id: UUID): Promise<T | null> {
 
-		const item = await this.db.table<T>(this.tablename).get(id);
+		const item = await this.db.table<T>(this.entity).get(id);
 		return item ?? null;
 
 	}
 
 	async getSyncData(id: UUID): Promise<SyncData | null> {
 
-		return await this.db.table<SyncData>(this.tablename + '_sync').get(id) ?? null;
+		return await this.db.table<SyncData>(this.entity + '_sync').get(id) ?? null;
 
 	}
 
 	async storeRemoteData(items: RemoteData<T>[]): Promise<number> {
 
 		await this.db.transaction('rw', [
-			this.tablename,
-			this.tablename + '_sync',
-			this.tablename + '_trash',
-			this.tablename + '_remote',
-			WolfBaseTableName.logs
+			this.entity,
+			this.entity + '_sync',
+			this.entity + '_trash',
+			this.entity + '_remote',
+			LocalTableNames.logs
 		], async () => {
 
 			for (const item of items)
@@ -46,10 +45,10 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async storeMetadata(data: Metadata): Promise<void> {
 
-		await this.db.transaction('rw', [this.tablename + '_sync', this.tablename + '_remote'], async () => {
+		await this.db.transaction('rw', [this.entity + '_sync', this.entity + '_remote'], async () => {
 
-			await this.db.table(this.tablename + '_sync').put(data, data.id);
-			await this.db.table(this.tablename + '_remote').put(data, data.id);
+			await this.db.table(this.entity + '_sync').put(data, data.id);
+			await this.db.table(this.entity + '_remote').put(data, data.id);
 
 		});
 
@@ -57,10 +56,10 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async storeRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
 
-		await this.db.transaction('rw', [this.tablename + '_remote'], async () => {
+		await this.db.transaction('rw', [this.entity + '_remote'], async () => {
 
-			await this.db.table(this.tablename + '_remote').clear();
-			await this.db.table(this.tablename + '_remote').bulkPut(data);
+			await this.db.table(this.entity + '_remote').clear();
+			await this.db.table(this.entity + '_remote').bulkPut(data);
 
 		});
 
@@ -69,7 +68,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 	async create(item: Partial<T>): Promise<T> {
 
 		const newItem: T = this.newItemFromPartial(item);
-		await this.db.table<T>(this.tablename).add(newItem);
+		await this.db.table<T>(this.entity).add(newItem);
 		return newItem;
 
 	}
@@ -78,13 +77,13 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 		let count = 0;
 		await this.db.transaction('rw', [
-			this.tablename,
-			this.tablename + '_sync'
+			this.entity,
+			this.entity + '_sync'
 		], async () => {
 
-			count = await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item });
+			count = await this.db.table<T>(this.entity).where('id').equals(id).modify({ ...item });
 			if (count > 0)
-				await this.db.table<SyncData>(this.tablename + '_sync').where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
+				await this.db.table<SyncData>(this.entity + '_sync').where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
 
 		});
 		return count;
@@ -93,7 +92,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async list(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; } | undefined): Promise<T[]> {
 
-		const table: Table<T, IndexableType> = this.db.table<T>(this.tablename);
+		const table: Table<T, IndexableType> = this.db.table<T>(this.entity);
 		let collection: Collection<T, IndexableType>;
 
 		if (params) {
@@ -121,30 +120,30 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async listSyncData(): Promise<SyncData[]> {
 
-		return await this.db.table<SyncData>(this.tablename + '_sync').toArray();
+		return await this.db.table<SyncData>(this.entity + '_sync').toArray();
 
 	}
 
 	async listRemoteMetadata(): Promise<RemoteMetadata[]> {
 
-		return await this.db.table<RemoteMetadata>(this.tablename + '_remote').toArray();
+		return await this.db.table<RemoteMetadata>(this.entity + '_remote').toArray();
 
 	}
 
 	async moveToTrash(id: UUID): Promise<void> {
 
 		await this.db.transaction('rw', [
-			this.tablename,
-			this.tablename + '_sync',
-			this.tablename + '_trash'
+			this.entity,
+			this.entity + '_sync',
+			this.entity + '_trash'
 		], async () => {
 
-			const item = await this.db.table<T>(this.tablename).get(id);
+			const item = await this.db.table<T>(this.entity).get(id);
 			if (item) {
 
-				await this.db.table<T>(this.tablename + '_trash').add(item);
-				await this.db.table<T>(this.tablename + '_sync').where({ id }).modify({ deleted: true } as SyncData);
-				await this.db.table(this.tablename).delete(id);
+				await this.db.table<T>(this.entity + '_trash').add(item);
+				await this.db.table<T>(this.entity + '_sync').where({ id }).modify({ deleted: true } as SyncData);
+				await this.db.table(this.entity).delete(id);
 
 			}
 
@@ -154,7 +153,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async listDeletedItems(): Promise<T[]> {
 
-		return await this.db.table<T>(this.tablename + '_trash').toArray();
+		return await this.db.table<T>(this.entity + '_trash').toArray();
 
 	}
 
@@ -163,18 +162,18 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 		const { id, createTime, updateTime } = remoteData.metaData;
 
 		// move local entity to trash
-		const entity = await this.db.table<T>(this.tablename).get(id);
+		const entity = await this.db.table<T>(this.entity).get(id);
 		if (entity)
-			await this.db.table(this.tablename + '_trash').add(entity);
+			await this.db.table(this.entity + '_trash').add(entity);
 
 		// store incoming entity
-		await this.db.table<T>(this.tablename).put(remoteData.entity);
+		await this.db.table<T>(this.entity).put(remoteData.entity);
 
 		// add/update 'remote'
-		await this.db.table<RemoteMetadata>(this.tablename + '_remote').put(remoteData.metaData, id);
+		await this.db.table<RemoteMetadata>(this.entity + '_remote').put(remoteData.metaData, id);
 
 		// add to sync table
-		await this.db.table<SyncData>(this.tablename + '_sync').put({
+		await this.db.table<SyncData>(this.entity + '_sync').put({
 
 			id,
 			createTime,
@@ -205,28 +204,28 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 	async bulkDelete(ids: UUID[]): Promise<number> {
 
 		await this.db.transaction('rw', [
-			this.tablename,
-			this.tablename + '_sync',
-			this.tablename + '_trash',
-			this.tablename + '_remote',
-			WolfBaseTableName.logs
+			this.entity,
+			this.entity + '_sync',
+			this.entity + '_trash',
+			this.entity + '_remote',
+			LocalTableNames.logs
 		], async () => {
 
 			let logMessage = 'metadata deleted';
 
 			for (const id of ids) {
 
-				const item = await this.db.table<T>(this.tablename).get(id);
+				const item = await this.db.table<T>(this.entity).get(id);
 				if (item) {
 
 					logMessage = `"${item.name}" deleted`;
-					await this.db.table(this.tablename + '_trash').add(item);
-					await this.db.table(this.tablename).delete(id);
+					await this.db.table(this.entity + '_trash').add(item);
+					await this.db.table(this.entity).delete(id);
 
 				}
 
-				await this.db.table(this.tablename + '_sync').delete(id);
-				await this.db.table(this.tablename + '_remote').delete(id);
+				await this.db.table(this.entity + '_sync').delete(id);
+				await this.db.table(this.entity + '_remote').delete(id);
 
 				// add log
 				await this.db.logs.add({
@@ -246,7 +245,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	async listIds(): Promise<UUID[]> {
 
-		return await this.db.table<T>(this.tablename).toCollection().primaryKeys() as UUID[];
+		return await this.db.table<T>(this.entity).toCollection().primaryKeys() as UUID[];
 
 	}
 
