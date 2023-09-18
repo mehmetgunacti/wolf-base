@@ -1,6 +1,5 @@
 import { LogCategory, LogMessage, LogsTable } from 'lib';
 import { WolfBaseDB } from '../wolfbase.database';
-import { Collection, IndexableType, Table } from 'dexie';
 
 export class DexieLogsTableImpl implements LogsTable {
 

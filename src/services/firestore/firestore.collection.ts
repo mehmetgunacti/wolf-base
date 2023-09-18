@@ -1,6 +1,5 @@
 import { FIRESTORE_VALUE, FirestoreBatchGetURL, FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL, RemoteStorageCollection } from "lib";
-import { UUID } from "lib/constants";
-import { RemoteCollection } from "lib/constants/remote.constant";
+import { UUID, WolfEntity } from "lib/constants";
 import { FirestoreConfig, RemoteData, RemoteMetadata } from "lib/models";
 import { Entity } from "lib/models/entity.model";
 import { FirestoreAPIClient } from "lib/utils/firestore-rest-client/firestore-api.tool";
@@ -13,7 +12,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 	constructor(
 		protected firestore: FirestoreAPIClient,
 		protected firestoreConfig: FirestoreConfig,
-		protected remoteCollection: RemoteCollection,
+		protected remoteCollection: WolfEntity,
 		protected converter: FirestoreConverter<T>
 	) { }
 

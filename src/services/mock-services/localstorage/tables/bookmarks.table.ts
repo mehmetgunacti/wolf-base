@@ -1,4 +1,4 @@
-import { Bookmark, BookmarksTable, LogCategory, Metadata, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from "lib";
+import { Bookmark, BookmarksTable, Click, Metadata, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from "lib";
 import { v4 as uuidv4 } from 'uuid';
 
 const SLEEP = 20;
@@ -9,6 +9,7 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 	private bookmarks_sync: Map<string, SyncData> = new Map();
 	private bookmarks_remote: Map<string, RemoteMetadata> = new Map();
 	private bookmarks_trash: Bookmark[] = [];
+	private bookmarks_clicks: Map<string, Click> = new Map();
 
 	async getEntity(id: string): Promise<Bookmark | null> {
 
@@ -245,5 +246,47 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 		this.bookmarks_remote.set(data.id, data);
 
 	}
+
+	async click(id: string): Promise<void> {
+
+		const click = this.bookmarks_clicks.get(id);
+		if (click) {
+
+			click.current += 1;
+			click.total += 1;
+
+		} else
+
+			this.bookmarks_clicks.set(id, {
+
+				id,
+				current: 1,
+				total: 1
+
+			});
+
+	}
+
+	async listClicked(): Promise<Click[]> {
+
+		const clicks = Array.from(this.bookmarks_clicks.values());
+		return clicks.filter(c => c.current > 0);
+
+	}
+
+	async storeClicks(items: Click[]): Promise<number> {
+
+		for (const item of items)
+			this.bookmarks_clicks.set(item.id, item);
+		return items.length;
+
+	}
+
+	async listClicks(): Promise<Click[]> {
+
+		return Array.from(this.bookmarks_clicks.values());
+
+	}
+
 
 }

@@ -1,9 +1,9 @@
-import { BookmarksCollection, FIRESTORE_VALUE, FirestoreConverter } from 'lib';
-import { RemoteCollection } from 'lib/constants/remote.constant';
+import { BookmarksCollection, FIRESTORE_VALUE, FirestoreConverter, FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL, UUID, WolfEntity } from 'lib';
 import { FirestoreConfig } from 'lib/models';
-import { Bookmark } from 'lib/models/bookmark.model';
+import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
+import { Observable, concatMap, from, map } from 'rxjs';
 
 export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Bookmark> implements BookmarksCollection {
 
@@ -11,9 +11,62 @@ export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageColl
 		super(
 			firestore,
 			firestoreConfig,
-			RemoteCollection.bookmarks,
+			WolfEntity.bookmarks,
 			new BookmarkFirestoreConverter()
 		);
+	}
+
+	uploadClicks(clicks: Click[]): Observable<number> {
+
+		return from(clicks).pipe(
+
+			concatMap(click => this.increase(click.id, click.current)),
+			map(() => clicks.length)
+
+		);
+
+	}
+
+	downloadClicks(): Observable<Click[]> {
+
+		const url = new FirestoreListURL(
+			this.firestoreConfig,
+			this.remoteCollection,
+			this.pageSize
+		);
+		return this.firestore.list<{ clicks: number }>(url).pipe(
+			map(items => items.map(dto => this.convertToClick(dto)))
+		);
+
+	}
+
+	private increase(id: UUID, amount: number): Observable<number> {
+
+		const url = new FirestoreIncreaseURL(
+			this.firestoreConfig,
+			WolfEntity.bookmarks + '_clicks',
+			id,
+			'clicks',
+			':commit',
+			amount
+		);
+		return this.firestore.increase(url);
+
+	}
+
+	private convertToClick(dto: FirestoreDTO<{ clicks: number }>): Click {
+
+		const total = dto.entity.clicks;
+		const id = dto.document;
+
+		return {
+
+			id,
+			total,
+			current: 0
+
+		};
+
 	}
 
 }

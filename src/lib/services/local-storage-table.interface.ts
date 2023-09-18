@@ -51,13 +51,10 @@ export interface BookmarksTable extends EntityTable<Bookmark> {
 
 	toggleTag(id: UUID, name: string): Promise<void>;
 
-}
-
-export interface ClicksTable {
-
+	// clicks
 	click(id: UUID): Promise<void>;
 	storeClicks(items: Click[]): Promise<number>;
-	listAll(): Promise<Click[]>;
+	listClicks(): Promise<Click[]>;
 	listClicked(): Promise<Click[]>;
 
 }

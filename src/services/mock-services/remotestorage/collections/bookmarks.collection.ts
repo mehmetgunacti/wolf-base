@@ -1,5 +1,5 @@
-import { Bookmark, BookmarksCollection, RemoteData, RemoteMetadata, UUID } from "lib";
-import { Observable, defaultIfEmpty, delay, filter, map, of } from "rxjs";
+import { Bookmark, BookmarksCollection, Click, RemoteData, RemoteMetadata, UUID } from "lib";
+import { Observable, delay, map, of } from "rxjs";
 
 const SLEEP = 20;
 
@@ -7,6 +7,7 @@ export class MockBookmarksCollection implements BookmarksCollection {
 
 	private bookmarks: Record<string, RemoteData<Bookmark>> = {};
 	private bookmarks_trash: Record<string, RemoteData<Bookmark>> = {};
+	private clicks: Record<UUID, number> = {};
 
 	download(id: string): Observable<RemoteData<Bookmark> | null> {
 
@@ -100,6 +101,29 @@ export class MockBookmarksCollection implements BookmarksCollection {
 		};
 		this.bookmarks_trash[item.id] = remoteData;
 		return of(remoteData).pipe(delay(SLEEP));
+
+	}
+
+	uploadClicks(clicks: Click[]): Observable<number> {
+
+		for (const click of clicks)
+			this.clicks[click.id] += click.current;
+		return of(clicks.length);
+
+	}
+
+	increase(id: string, amount: number): Observable<number> {
+
+		let current = this.clicks[id] ?? 0;
+		current += amount;
+		this.clicks[id] = current;
+		return of(current);
+
+	}
+
+	downloadClicks(): Observable<Click[]> {
+
+		return of(Object.keys(this.clicks).map(id => ({ id, current: 0, total: this.clicks[id] })));
 
 	}
 

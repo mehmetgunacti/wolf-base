@@ -1,5 +1,5 @@
-import { BookmarksTable, ClicksTable, ConfigurationTable, LocalStorageService, LogsTable, WolfBaseTableName } from 'lib';
-import { DexieBookmarksTableImpl, DexieClicksTableImpl, DexieConfigurationTableImpl, DexieLogsTableImpl } from './tables';
+import { BookmarksTable, ConfigurationTable, LocalStorageService, LogsTable, WolfBaseTableName } from 'lib';
+import { DexieBookmarksTableImpl, DexieConfigurationTableImpl, DexieLogsTableImpl } from './tables';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
 
 export class DexieLocalStorageServiceImpl implements LocalStorageService {
@@ -8,7 +8,6 @@ export class DexieLocalStorageServiceImpl implements LocalStorageService {
 
 	public bookmarks: BookmarksTable;
 	public configuration: ConfigurationTable;
-	public clicks: ClicksTable;
 	public logs: LogsTable;
 
 	constructor() {
@@ -16,7 +15,6 @@ export class DexieLocalStorageServiceImpl implements LocalStorageService {
 		const db: WolfBaseDB = wolfBaseDBFactory();
 		this.bookmarks = new DexieBookmarksTableImpl(db);
 		this.configuration = new DexieConfigurationTableImpl(db);
-		this.clicks = new DexieClicksTableImpl(db);
 		this.logs = new DexieLogsTableImpl(db);
 		this.db = db;
 

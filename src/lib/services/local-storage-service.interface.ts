@@ -1,5 +1,5 @@
 import { WolfBaseTableName } from 'lib/constants/database.constant';
-import { BookmarksTable, ClicksTable, ConfigurationTable, LogsTable } from './local-storage-table.interface';
+import { BookmarksTable, ConfigurationTable, LogsTable } from './local-storage-table.interface';
 
 export interface LocalStorageService {
 
@@ -7,7 +7,6 @@ export interface LocalStorageService {
 	bookmarks: BookmarksTable;
 
 	// non-entity tables
-	clicks: ClicksTable;
 	configuration: ConfigurationTable;
 	logs: LogsTable;
 

@@ -42,7 +42,7 @@ export class BookmarkEntitiesEffects {
 
 		() => fromEventPattern<Click[]>(
 
-			(handler) => liveQuery(() => this.localStorage.clicks.listAll()).subscribe(handler),
+			(handler) => liveQuery(() => this.localStorage.bookmarks.listClicks()).subscribe(handler),
 			(handler, unsubscribe) => unsubscribe()
 
 		).pipe(
@@ -240,7 +240,7 @@ export class BookmarkEntitiesEffects {
 		() => this.actions$.pipe(
 
 			ofType(clickBookmark),
-			switchMap(({ id }) => from(this.localStorage.clicks.click(id)))
+			switchMap(({ id }) => from(this.localStorage.bookmarks.click(id)))
 
 		),
 		{ dispatch: false }

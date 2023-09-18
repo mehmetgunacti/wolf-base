@@ -19,11 +19,9 @@ export interface RemoteStorageCollection<T extends Entity> {
 
 }
 
-export interface BookmarksCollection extends RemoteStorageCollection<Bookmark> { }
-
-export interface ClicksCollection {
+export interface BookmarksCollection extends RemoteStorageCollection<Bookmark> {
 
 	uploadClicks(clicks: Click[]): Observable<number>;
-	downloadAll(): Observable<Click[]>;
+	downloadClicks(): Observable<Click[]>;
 
 }

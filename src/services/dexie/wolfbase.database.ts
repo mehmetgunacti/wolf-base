@@ -45,7 +45,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			logs: '++id, category, entityId'
 
 		},
-		version: 16
+		version: 1
 	});
 
 };

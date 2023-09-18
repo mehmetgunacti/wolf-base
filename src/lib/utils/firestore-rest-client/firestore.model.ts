@@ -1,4 +1,4 @@
-import { RemoteCollection, UUID } from 'lib/constants';
+import { UUID } from 'lib/constants';
 import { FIRESTORE_INTEGER, FIRESTORE_VALUE } from './firestore.constant';
 import { FirestoreConfig } from 'lib/models';
 
@@ -23,7 +23,7 @@ export class FirestorePatchURL {
 
 	constructor(
 		public firestoreConfig: FirestoreConfig,
-		public collection: RemoteCollection,
+		public collection: string,
 		public id: UUID,
 		public mask: string
 	) { }
@@ -41,7 +41,7 @@ export class FirestoreDocumentURL {
 
 	constructor(
 		public firestoreConfig: FirestoreConfig,
-		public collection: RemoteCollection,
+		public collection: string,
 		public document: UUID,
 		public onlyMetadata = false
 	) { }
@@ -62,7 +62,7 @@ export class FirestoreListURL {
 
 	constructor(
 		public firestoreConfig: FirestoreConfig,
-		public collection: RemoteCollection,
+		public collection: string,
 		public pageSize: string,
 		public onlyMetadata = false
 	) { }
@@ -83,7 +83,7 @@ export class FirestoreBatchGetURL {
 
 	constructor(
 		public firestoreConfig: FirestoreConfig,
-		public collection: RemoteCollection,
+		public collection: string,
 		public ids: UUID[]
 	) { }
 
@@ -111,7 +111,7 @@ export class FirestoreIncreaseURL {
 
 	constructor(
 		public firestoreConfig: FirestoreConfig,
-		public collection: RemoteCollection,
+		public collection: string,
 		public document: string,
 		public fieldPath: string,
 		public command: string, // e.g. ':commit'

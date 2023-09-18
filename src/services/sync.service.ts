@@ -2,7 +2,7 @@ import { inject } from "@angular/core";
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from "app/app.config";
 import { Bookmark, Click, LocalStorageService, RemoteData, RemoteMetadata, RemoteStorageService, SyncData, UUID } from "lib";
 import { SyncService } from "lib/services/sync-service.interface";
-import { EMPTY, Observable, concatMap, filter, from, iif, map, mergeMap, switchMap, toArray } from "rxjs";
+import { EMPTY, Observable, concatMap, filter, from, iif, map, switchMap, toArray } from "rxjs";
 
 export class SyncServiceImpl implements SyncService {
 
@@ -197,17 +197,17 @@ export class SyncServiceImpl implements SyncService {
 
 	uploadClicks(clicks: Click[]): Observable<number> {
 
-		return from(this.remoteStorage.clicks.uploadClicks(clicks));
+		return from(this.remoteStorage.bookmarks.uploadClicks(clicks));
 
 	}
 
 	downloadClicks(): Observable<number> {
 
 		// download all clicks
-		return this.remoteStorage.clicks.downloadAll().pipe(
+		return this.remoteStorage.bookmarks.downloadClicks().pipe(
 
 			// store clicks
-			switchMap(clicks => from(this.localStorage.clicks.storeClicks(clicks)))
+			switchMap(clicks => from(this.localStorage.bookmarks.storeClicks(clicks)))
 
 		);
 
