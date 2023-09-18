@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { fadeOutTrigger } from 'modules';
+import { fadeOutTrigger } from 'modules/shared';
 import { Observable, delay, of, switchMap, takeWhile, tap } from 'rxjs';
 import { selCoreIsInitialized } from 'store/selectors/core-configuration.selectors';
 

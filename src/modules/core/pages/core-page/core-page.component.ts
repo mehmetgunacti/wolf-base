@@ -68,6 +68,7 @@ export class CorePageComponent implements OnDestroy {
 				const menuItems: MenuItem[] = [
 					navItems.miHome,
 					navItems.miBookmarks(formatBadge_Bookmark(bookmarkNumbers)),
+					navItems.miKnowledgeBase,
 					navItems.miStats(statsNumbers),
 					navItems.miSettings,
 					navItems.miDatabase,

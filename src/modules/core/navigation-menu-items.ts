@@ -16,6 +16,12 @@ export const miBookmarks = (badge: string): MenuItem => ({
 	styleClass: 'menuBadge'
 });
 
+export const miKnowledgeBase: MenuItem = {
+	label: 'Knowledge Base',
+	icon: PrimeIcons.SITEMAP,
+	routerLink: ['/kb']
+};
+
 export const miDatabase: MenuItem = {
 	label: 'Database',
 	icon: PrimeIcons.DATABASE,

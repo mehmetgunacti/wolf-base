@@ -4,6 +4,7 @@ export * from './configuration.model';
 export * from './database.model';
 export * from './entity.model';
 export * from './id-base.model';
+export * from './knowledge-base.model';
 export * from './log.model';
 export * from './remote.model';
 export * from './stats.model';

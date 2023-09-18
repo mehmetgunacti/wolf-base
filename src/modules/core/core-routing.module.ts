@@ -12,9 +12,13 @@ const routes: Routes = [
 				path: '',
 				loadChildren: () => import('modules/home/home.module').then(m => m.HomeModule)
 			},
-   			{
+			{
 				path: 'bookmarks',
 				loadChildren: () => import('modules/bookmark/bookmark.module').then(m => m.BookmarkModule)
+			},
+			{
+				path: 'kb',
+				loadChildren: () => import('modules/knowledge-base/knowledge-base.module').then(m => m.KnowledgeBaseModule)
 			},
 			{
 				path: 'database',
