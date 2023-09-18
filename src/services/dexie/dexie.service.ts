@@ -8,12 +8,11 @@ export class DexieLocalStorageServiceImpl implements LocalStorageService {
 
 	private db: WolfBaseDB;
 
-	public bookmarks: BookmarksTable;
+	bookmarks: BookmarksTable;
 	kbEntries: KBEntriesTable;
 	kbContents: KBContentsTable;
-
-	public configuration: ConfigurationTable;
-	public logs: LogsTable;
+	configuration: ConfigurationTable;
+	logs: LogsTable;
 
 	constructor() {
 
@@ -33,7 +32,7 @@ export class DexieLocalStorageServiceImpl implements LocalStorageService {
 		const data = table.toCollection();
 		const result: Record<string, string> = {};
 		await data.each(
-			(obj: any, cursor) => result[cursor.key.toString(), JSON.stringify(obj, null, '\t')]
+			(obj: any, cursor) => result[cursor.key.toString()] = JSON.stringify(obj, null, '\t')
 		);
 		return result;
 
