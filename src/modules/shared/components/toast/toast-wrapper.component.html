@@ -1,5 +1,5 @@
 <app-toast *ngFor="let toast of toasts$ | async"
-			@slideLeftSlideUp
+			@animateToast
 			[conf]="toast"
 			(close)="onClose($event)"
 			(click)="onClose(toast?.id ?? -1)">

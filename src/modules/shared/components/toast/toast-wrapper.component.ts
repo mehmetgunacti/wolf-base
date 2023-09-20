@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { ToastConfiguration } from 'lib';
-import { slideLeftSlideUpTrigger } from 'modules/shared/animations';
-import { Observable } from 'rxjs';
+import { toastTrigger } from 'modules/shared/animations';
+import { Observable, map } from 'rxjs';
 import { W359ToastRef } from 'services';
 
 @Component({
 	selector: 'app-toast-wrapper',
 	templateUrl: './toast-wrapper.component.html',
-	animations: [slideLeftSlideUpTrigger]
+	animations: [toastTrigger]
 })
 export class ToastWrapperComponent {
 
@@ -16,7 +16,7 @@ export class ToastWrapperComponent {
 	toasts$: Observable<ToastConfiguration[]>;
 
 	constructor() {
-		this.toasts$ = this.toastRef.toasts$;
+		this.toasts$ = this.toastRef.toasts$.pipe(map(conf => conf.reverse()));
 	}
 
 	onClose(id: number): void {
