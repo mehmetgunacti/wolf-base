@@ -34,10 +34,10 @@ export const miLogs: MenuItem = {
 	routerLink: ['/logs']
 };
 
-export const miStats = ([total, errors]: number[]): MenuItem => ({
-	label: 'Stats',
-	icon: PrimeIcons.CHART_BAR,
-	routerLink: ['/stats'],
+export const miCloud = ([total, errors]: number[]): MenuItem => ({
+	label: 'Cloud Sync',
+	icon: PrimeIcons.SYNC,
+	routerLink: ['/cloud'],
 	badge: errors ? `${errors}/${total}` : total ? `${total}` : '',
 	badgeStyleClass: errors ? 'red' : total ? 'orange' : '',
 	command: () => console.log('badge', total, errors)
@@ -48,29 +48,3 @@ export const miSettings: MenuItem = {
 	icon: PrimeIcons.COG,
 	routerLink: ['/settings']
 };
-
-// export const miNotes: MenuItem = {
-// 	label: 'Notes',
-// 	icon: 'pi pi-fw fa-bookmark',
-// 	routerLink: ['/notes']
-// };
-// export const miWikis: MenuItem = {
-// 	label: 'Wikis',
-// 	icon: 'pi pi-fw fa-bookmark',
-// 	routerLink: ['/wikis']
-// };
-// export const miTasks: MenuItem = {
-// 	label: 'Tasks',
-// 	icon: 'pi pi-fw fa-bookmark',
-// 	routerLink: ['/tasks']
-// };
-// export const miFasts: MenuItem = {
-// 	label: 'Fasts',
-// 	icon: 'pi pi-fw fa-bookmark',
-// 	routerLink: ['/fasts']
-// };
-// export const miWords: MenuItem = {
-// 	label: 'Words',
-// 	icon: 'pi pi-fw fa-bookmark',
-// 	routerLink: ['/words']
-// };

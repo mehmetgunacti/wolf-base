@@ -4,9 +4,9 @@ import { MenuItem } from 'primeng/api';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 import { setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
 import { menuBookmarkBadge } from 'store/selectors/bookmark-ui.selectors';
+import { selCloudMenuBadgeNumbers } from 'store/selectors/cloud-ui.selectors';
 import { selCoreIsSidebarVisible, selCoreIsThemeDark } from 'store/selectors/core-configuration.selectors';
 import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
-import { selStatsMenuBadgeNumbers } from 'store/selectors/stats-ui.selectors';
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
 
@@ -55,12 +55,12 @@ export class CorePageComponent implements OnDestroy {
 
 		);
 
-		const menuBadgeNumbers$: Observable<number[]> = this.store.select(selStatsMenuBadgeNumbers);
-		this.navButtonBadge$ = menuBadgeNumbers$.pipe(map(([total]) => total > 0 ? '.' : ''));
-		this.navButtonBadgeClass$ = menuBadgeNumbers$.pipe(map(([total, errors]) => 'navButtonBadge' + (errors ? ' red' : total ? ' orange' : '')));
+		const menuCloudNumbers$: Observable<number[]> = this.store.select(selCloudMenuBadgeNumbers);
+		this.navButtonBadge$ = menuCloudNumbers$.pipe(map(([total]) => total > 0 ? '.' : ''));
+		this.navButtonBadgeClass$ = menuCloudNumbers$.pipe(map(([total, errors]) => 'navButtonBadge' + (errors ? ' red' : total ? ' orange' : '')));
 		this.navMenuItems$ = combineLatest([
 			this.store.select(menuBookmarkBadge),
-			menuBadgeNumbers$,
+			menuCloudNumbers$,
 		]).pipe(
 
 			map(([bookmarkNumbers, statsNumbers]) => {
@@ -69,7 +69,7 @@ export class CorePageComponent implements OnDestroy {
 					navItems.miHome,
 					navItems.miBookmarks(formatBadge_Bookmark(bookmarkNumbers)),
 					navItems.miKnowledgeBase,
-					navItems.miStats(statsNumbers),
+					navItems.miCloud(statsNumbers),
 					navItems.miSettings,
 					navItems.miDatabase,
 					navItems.miLogs

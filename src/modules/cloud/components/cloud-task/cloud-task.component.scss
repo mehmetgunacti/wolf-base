@@ -1,0 +1,58 @@
+app-cloud-task {
+
+	@extend %flex-column;
+	gap: 0.5rem;
+
+	[footer] {
+
+		@extend %flex-end-center;
+
+	}
+
+	& fieldset {
+
+		&.success {
+
+			border				: none !important;
+			background-color	: var(--green-700) !important;
+
+			& > legend {
+
+				border				: none !important;
+				background-color	: var(--green-900) !important;
+		
+			}
+
+		}
+
+		&.warning {
+
+			border				: none !important;
+			background-color	: var(--orange-700) !important;
+
+			& > legend {
+
+				border				: none !important;
+				background-color	: var(--orange-900) !important;
+		
+			}
+
+		}
+
+		&.danger {
+
+			border				: none !important;
+			background-color	: var(--red-700) !important;
+
+			& > legend {
+
+				border				: none !important;
+				background-color	: var(--red-900) !important;
+		
+			}
+
+		}
+
+	}
+
+}

@@ -1,0 +1,66 @@
+<p-fieldset [styleClass]="task.color">
+
+	<!-- HEADER -->
+	<ng-template pTemplate="header">
+
+		<ng-container [ngSwitch]="task.entity">
+
+			<!-- Bookmarks -->
+			<div *ngSwitchCase="WolfEntity.bookmarks">
+				<i class="pi pi-bookmark"></i>
+				<span> Bookmarks</span>
+			</div>
+
+			<!-- Knowledge Base Entries -->
+			<div *ngSwitchCase="WolfEntity.kb_entries">
+				<i class="pi pi-sitemap"></i>
+				<span> Knowledge Base Entries</span>
+			</div>
+
+			<!-- Knowledge Base Contents -->
+			<div *ngSwitchCase="WolfEntity.kb_contents">
+				<i class="pi pi-sitemap"></i>
+				<span> Knowledge Base Contents</span>
+			</div>
+
+			<!-- UNKNOWN CASE -->
+			<div *ngSwitchDefault>
+				<i class="pi pi-question-circle"></i>
+				<span> UNKNOWN</span>
+			</div>
+
+		</ng-container>
+
+	</ng-template>
+
+	<!-- CONTENT -->
+	<ng-container [ngSwitch]="task.type">
+
+		<div *ngSwitchCase="CloudTaskType.local_new">{{ task.count }} {{ task.count > 1 ? 'items' : 'item' }} created</div>
+		<div *ngSwitchCase="CloudTaskType.local_updated">{{ task.count }} {{ task.count > 1 ? 'items' : 'item' }} updated</div>
+		<div *ngSwitchCase="CloudTaskType.local_deleted">{{ task.count }} {{ task.count > 1 ? 'items' : 'item' }} deleted</div>
+		<div *ngSwitchCase="CloudTaskType.clicked">{{ task.count }} bookmark(s) clicked</div>
+		<div *ngSwitchCase="CloudTaskType.remote_new">{{ task.count }} new {{ task.count > 1 ? 'items' : 'item' }} on server</div>
+		<div *ngSwitchCase="CloudTaskType.remote_updated">{{ task.count }} updated {{ task.count > 1 ? 'items' : 'item' }} on server</div>
+		<div *ngSwitchCase="CloudTaskType.remote_deleted">{{ task.count }} deleted {{ task.count > 1 ? 'items' : 'item' }} on server</div>
+		<div *ngSwitchCase="CloudTaskType.updated_updated">Conflict: {{ task.count }} updated {{ task.count > 1 ? 'items' : 'item' }} locally and on server</div>
+		<div *ngSwitchCase="CloudTaskType.deleted_deleted">{{ task.count }} deleted {{ task.count > 1 ? 'items' : 'item' }} locally and on server </div>
+		<div *ngSwitchCase="CloudTaskType.updated_deleted">Conflict: {{ task.count }} {{ task.count > 1 ? 'items' : 'item' }} updated locally, deleted on server</div>
+		<div *ngSwitchCase="CloudTaskType.deleted_updated">Conflict: {{ task.count }} {{ task.count > 1 ? 'items' : 'item' }} deleted locally, updated on server</div>
+
+	</ng-container>
+
+	<!-- FOOTER -->
+	<div footer>
+
+		<ng-container [ngSwitch]="task.action">
+
+			<button *ngSwitchCase="'upload'"   pButton type="button" label="Upload"   icon="pi pi-cloud-upload"   class="p-button-{{task.color}}" (click)="onActionClicked()"></button>
+			<button *ngSwitchCase="'download'" pButton type="button" label="Download" icon="pi pi-cloud-download" class="p-button-{{task.color}}" (click)="onActionClicked()"></button>
+			<button *ngSwitchCase="'view'"     pButton type="button" label="View"     icon="pi pi-eye"            class="p-button-{{task.color}}" (click)="onActionClicked()"></button>			
+
+		</ng-container>
+
+	</div>
+
+</p-fieldset>

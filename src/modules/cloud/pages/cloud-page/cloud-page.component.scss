@@ -1,0 +1,27 @@
+app-cloud-page {
+
+	@extend %flex-column;
+
+	& .p-message-wrapper {
+
+		@extend %flex-space-between-center;
+
+	}
+
+	& .cloudConflictContainerComponent {
+
+		width		: 100vw;
+		height		: 100vh;
+		max-height	: initial !important;
+	
+		@include lg() {
+	
+			width	: 85vw;
+			height  : initial;
+			height	: 95vh;
+	
+		}
+
+	} 
+
+}
