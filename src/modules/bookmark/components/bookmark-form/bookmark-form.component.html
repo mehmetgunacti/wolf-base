@@ -24,7 +24,7 @@
 
 		<!-- ID -->
 		<div *ngIf="bookmark?.id">
-			<span class="p-float-label p-fluid">
+			<span class="p-float-label">
 				<input
 					type="text"
 					pInputText
@@ -34,22 +34,10 @@
 			</span>
 		</div>
 
-		<!-- CREATED -->
-		<!-- <div *ngIf="bookmark?.createTime">
-			<span class="p-float-label p-fluid">
-				<input
-					type="text"
-					pInputText
-					[value]="bookmark?.createTime"
-					readonly>
-				<label>Created</label>
-			</span>
-		</div> -->
-
 		<!-- URLs -->
 		<div *ngFor="let fcUrl of form.urls.controls; let idx = index">
 			<span
-				class="p-float-label p-fluid">
+				class="p-float-label">
 				<input
 					type="text"
 					pInputText
@@ -64,7 +52,7 @@
 
 		<!-- NAME -->
 		<div>
-			<span class="p-float-label p-fluid">
+			<span class="p-float-label">
 				<input
 					type="text"
 					pInputText
@@ -77,7 +65,7 @@
 
 		<!-- TITLE -->
 		<div>
-			<span class="p-float-label p-fluid">
+			<span class="p-float-label">
 				<input
 					type="text"
 					pInputText
@@ -90,7 +78,7 @@
 
 		<!-- TAGS -->
 		<div>
-			<span class="p-float-label p-fluid">
+			<span class="p-float-label">
 				<p-autoComplete
 					#autocomplete
 					[formControl]="form.tags"
@@ -107,7 +95,7 @@
 
 		<!-- CLICKS -->
 		<div>
-			<span class="p-float-label p-fluid">
+			<span class="p-float-label">
 				<input
 					type="number"
 					pInputText
