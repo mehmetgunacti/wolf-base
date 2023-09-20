@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CloudTask, CloudTaskType } from 'lib';
+import { CloudTask, CloudTaskType, WolfEntity } from 'lib';
 import { Observable } from 'rxjs';
 import { cloudTaskAction } from 'store/actions/cloud.actions';
 import { selBookmarkCloudTasks } from 'store/selectors/cloud-bookmark.selectors';
@@ -22,9 +22,9 @@ export class CloudSummaryContainerComponent {
 
 	}
 
-	onAction(taskType: CloudTaskType): void {
+	onAction([entity, taskType]: [WolfEntity, CloudTaskType]): void {
 
-		this.store.dispatch(cloudTaskAction({ taskType }));
+		this.store.dispatch(cloudTaskAction({ entity, taskType }));
 
 	}
 

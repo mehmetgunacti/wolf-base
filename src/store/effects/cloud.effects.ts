@@ -34,7 +34,7 @@ export class CloudEffects {
 			ofType(cloudTaskAction),
 			withLatestFrom(this.store.select(selCoreIsFirestoreConfigMissing)),
 			filter(([, missing]) => !missing),
-			map(([taskType]) => showNotification({ severity: 'info', summary: 'Task Action', detail: `${taskType}` }))
+			map(([{ entity, taskType }]) => showNotification({ severity: 'info', summary: 'Task Action', detail: `${entity}: ${taskType}` }))
 
 		)
 
@@ -47,7 +47,7 @@ export class CloudEffects {
 			ofType(cloudTaskAction),
 			withLatestFrom(this.store.select(selCoreIsFirestoreConfigMissing)),
 			filter(([, missing]) => missing),
-			map(([taskType]) => showNotification({ severity: 'error', summary: 'Synchronization Failed', detail: `Firestore configuration missing` }))
+			map(() => showNotification({ severity: 'error', summary: 'Synchronization Failed', detail: `Firestore configuration missing` }))
 
 		)
 

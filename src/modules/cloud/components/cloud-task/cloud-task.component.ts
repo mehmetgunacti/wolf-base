@@ -13,11 +13,11 @@ export class CloudTaskComponent {
 
 	@Input({ required: true }) task!: CloudTask;
 
-	@Output() action: EventEmitter<CloudTaskType> = new EventEmitter();
+	@Output() action: EventEmitter<[WolfEntity, CloudTaskType]> = new EventEmitter();
 
 	onActionClicked(): void {
 
-		this.action.emit(this.task.type);
+		this.action.emit([this.task.entity, this.task.type]);
 
 	}
 
