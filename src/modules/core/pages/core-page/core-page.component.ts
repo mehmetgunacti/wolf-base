@@ -1,7 +1,8 @@
 import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { MenuItem } from 'primeng/api';
-import { Observable, Subscription, combineLatest, map } from 'rxjs';
+import { MenuItem, PrimeIcons } from 'primeng/api';
+import { Observable, Subscription, map } from 'rxjs';
+import { navigate } from 'store/actions/core-navigation.actions';
 import { setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
 import { menuBookmarkBadge } from 'store/selectors/bookmark-ui.selectors';
 import { selCloudMenuBadgeNumbers } from 'store/selectors/cloud-ui.selectors';
@@ -10,7 +11,7 @@ import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
 
-const formatBadge_Bookmark = ([total, filtered]: [number, number]) => filtered < total ? `${filtered}/${total}` : `${total}`;
+const formatBadge_Bookmark = ([total, filtered]: [number, number]) => filtered < total ? `${filtered}/${total}` : total > 0 ? `${total}` : '';
 
 @Component({
 	selector: 'app-core-page',
@@ -18,9 +19,10 @@ const formatBadge_Bookmark = ([total, filtered]: [number, number]) => filtered <
 })
 export class CorePageComponent implements OnDestroy {
 
+	PrimeIcons = PrimeIcons;
+
 	navMenuItems$: Observable<MenuItem[]>;
-	navButtonBadge$: Observable<string>;
-	navButtonBadgeClass$: Observable<string>;
+	cloudNumbers$: Observable<number[]>;
 	isThemeDark$: Observable<boolean>;
 
 	subscriptions = new Subscription();
@@ -55,24 +57,15 @@ export class CorePageComponent implements OnDestroy {
 
 		);
 
-		const menuCloudNumbers$: Observable<number[]> = this.store.select(selCloudMenuBadgeNumbers);
-		this.navButtonBadge$ = menuCloudNumbers$.pipe(map(([total]) => total > 0 ? '.' : ''));
-		this.navButtonBadgeClass$ = menuCloudNumbers$.pipe(map(([total, errors]) => 'navButtonBadge' + (errors ? ' red' : total ? ' orange' : '')));
-		this.navMenuItems$ = combineLatest([
-			this.store.select(menuBookmarkBadge),
-			menuCloudNumbers$,
-		]).pipe(
+		this.cloudNumbers$ = this.store.select(selCloudMenuBadgeNumbers);
+		this.navMenuItems$ = this.store.select(menuBookmarkBadge).pipe(
 
-			map(([bookmarkNumbers, statsNumbers]) => {
+			map(bookmarkNumbers => {
 
 				const menuItems: MenuItem[] = [
 					navItems.miHome,
 					navItems.miBookmarks(formatBadge_Bookmark(bookmarkNumbers)),
-					navItems.miKnowledgeBase,
-					navItems.miCloud(statsNumbers),
-					navItems.miSettings,
-					navItems.miDatabase,
-					navItems.miLogs
+					navItems.miKnowledgeBase
 				];
 				if (this.bigScreen)
 					return menuItems;
@@ -107,6 +100,14 @@ export class CorePageComponent implements OnDestroy {
 	onSwitchTheme(): void {
 
 		this.store.dispatch(switchTheme());
+
+	}
+
+	navTo(url: string): void {
+
+		this.store.dispatch(navigate({ url }));
+		if (!this.bigScreen)
+			this.store.dispatch(setSidebarVisible({ visible: false }));
 
 	}
 

@@ -138,28 +138,28 @@ export const selBookmarkNonConflictCloudTasks = createSelector(
 
 		const tasks: CloudTask[] = [];
 
-		if (localNew)
+		if (localNew.length > 0)
 			tasks.push(toCloudTask(localNew.length, WolfEntity.bookmarks, CloudTaskType.local_new, 'success', 'upload'));
 
-		if (localUpdated)
+		if (localUpdated.length > 0)
 			tasks.push(toCloudTask(localUpdated.length, WolfEntity.bookmarks, CloudTaskType.local_updated, 'success', 'upload'));
 
-		if (localDeleted)
+		if (localDeleted.length > 0)
 			tasks.push(toCloudTask(localDeleted.length, WolfEntity.bookmarks, CloudTaskType.local_deleted, 'success', 'upload'));
 
-		if (remoteNew)
+		if (remoteNew.length > 0)
 			tasks.push(toCloudTask(remoteNew.length, WolfEntity.bookmarks, CloudTaskType.remote_new, 'success', 'download'));
 
-		if (remoteUpdated)
+		if (remoteUpdated.length > 0)
 			tasks.push(toCloudTask(remoteUpdated.length, WolfEntity.bookmarks, CloudTaskType.remote_updated, 'warning', 'download'));
 
-		if (remoteDeleted)
+		if (remoteDeleted.length > 0)
 			tasks.push(toCloudTask(remoteDeleted.length, WolfEntity.bookmarks, CloudTaskType.remote_deleted, 'warning', 'download'));
 
-		if (localDeletedRemoteDeleted)
+		if (localDeletedRemoteDeleted.length > 0)
 			tasks.push(toCloudTask(localDeletedRemoteDeleted.length, WolfEntity.bookmarks, CloudTaskType.deleted_deleted, 'success', 'download'));
 
-		if (clicked)
+		if (clicked.length > 0)
 			tasks.push(toCloudTask(clicked.length, WolfEntity.bookmarks, CloudTaskType.clicked, 'success', 'upload'));
 
 		return tasks;
@@ -181,13 +181,13 @@ export const selBookmarkConflictCloudTasks = createSelector(
 
 		const tasks: CloudTask[] = [];
 
-		if (localUpdatedRemoteUpdated)
+		if (localUpdatedRemoteUpdated.length > 0)
 			tasks.push(toCloudTask(localUpdatedRemoteUpdated.length, WolfEntity.bookmarks, CloudTaskType.updated_updated, 'danger', 'view'));
 
-		if (localUpdatedRemoteDeleted)
+		if (localUpdatedRemoteDeleted.length > 0)
 			tasks.push(toCloudTask(localUpdatedRemoteDeleted.length, WolfEntity.bookmarks, CloudTaskType.updated_deleted, 'danger', 'view'));
 
-		if (localDeletedRemoteUpdated)
+		if (localDeletedRemoteUpdated.length > 0)
 			tasks.push(toCloudTask(localDeletedRemoteUpdated.length, WolfEntity.bookmarks, CloudTaskType.deleted_updated, 'danger', 'view'));
 
 		return tasks;

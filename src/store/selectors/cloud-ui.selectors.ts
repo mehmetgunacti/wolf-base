@@ -25,7 +25,10 @@ export const selCloudMenuBadgeNumbers = createSelector(
 
 		const lengthOfNonConflicts = nonConflicts.length;
 		const lengthOfConflicts = conflicts.length;
-		return [lengthOfConflicts + lengthOfNonConflicts, lengthOfConflicts];
+		const total = lengthOfConflicts + lengthOfNonConflicts;
+		if (total > 0)
+			return [total, lengthOfConflicts];
+		return [];
 
 	}
 

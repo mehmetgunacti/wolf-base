@@ -22,11 +22,11 @@ export const miKnowledgeBase: MenuItem = {
 	routerLink: ['/kb']
 };
 
-export const miDatabase: MenuItem = {
-	label: 'Database',
-	icon: PrimeIcons.DATABASE,
-	routerLink: ['/database']
-};
+// export const miDatabase: MenuItem = {
+// 	label: 'Database',
+// 	icon: PrimeIcons.DATABASE,
+// 	routerLink: ['/database']
+// };
 
 export const miLogs: MenuItem = {
 	label: 'Logs',
