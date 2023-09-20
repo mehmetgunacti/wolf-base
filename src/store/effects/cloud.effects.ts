@@ -1,15 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { downloadRemoteDataSuccess } from 'store/actions/cloud-bookmark.actions';
-import { deleteSuccess, downloadSuccess, uploadSuccess } from 'store/actions/cloud.actions';
+import { cloudTaskAction, deleteSuccess, downloadSuccess, uploadSuccess } from 'store/actions/cloud.actions';
+import { Store } from '@ngrx/store';
+import { selCoreIsFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
 
 @Injectable()
 export class CloudEffects {
 
 	private actions$: Actions = inject(Actions);
-	// private store: Store = inject(Store);
+	private store: Store = inject(Store);
 	// private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 	// private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
 
@@ -24,6 +26,32 @@ export class CloudEffects {
 	// 	)
 
 	// );
+
+	cloudTaskAction$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(cloudTaskAction),
+			withLatestFrom(this.store.select(selCoreIsFirestoreConfigMissing)),
+			filter(([, missing]) => !missing),
+			map(([taskType]) => showNotification({ severity: 'info', summary: 'Task Action', detail: `${taskType}` }))
+
+		)
+
+	);
+
+	firestoreConfigMissing$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(cloudTaskAction),
+			withLatestFrom(this.store.select(selCoreIsFirestoreConfigMissing)),
+			filter(([, missing]) => missing),
+			map(([taskType]) => showNotification({ severity: 'error', summary: 'Synchronization Failed', detail: `Firestore configuration missing` }))
+
+		)
+
+	);
 
 	showNoRemoteDataNotification$ = createEffect(
 

@@ -3,7 +3,7 @@ import { inject } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { BookmarksCollection, FirestoreConfig, RemoteStorageService } from "lib";
 import { FirestoreAPIClient, FirestoreAPIClientImpl } from "lib/utils/firestore-rest-client/firestore-api.tool";
-import { MockBookmarksCollection } from "services/mock-services/remotestorage/collections/bookmarks.collection";
+import { VoidBookmarksCollection } from "services/mock-services/remotestorage/collections/bookmarks.collection";
 import { selCoreFirestoreConfig } from "store/selectors/core-configuration.selectors";
 import { BookmarksFirestoreCollectionImpl } from "./collections";
 
@@ -37,7 +37,7 @@ export class FirestoreRemoteStorageServiceImpl implements RemoteStorageService {
 
 		} else {
 
-			this.bookmarks = new MockBookmarksCollection();
+			this.bookmarks = new VoidBookmarksCollection();
 
 		}
 

@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CloudTask } from 'lib';
+import { CloudTask, CloudTaskType } from 'lib';
 import { Observable } from 'rxjs';
+import { cloudTaskAction } from 'store/actions/cloud.actions';
 import { selBookmarkCloudTasks } from 'store/selectors/cloud-bookmark.selectors';
 
 @Component({
@@ -21,9 +22,9 @@ export class CloudSummaryContainerComponent {
 
 	}
 
-	onAction(): void {
+	onAction(taskType: CloudTaskType): void {
 
-		console.log('action');
+		this.store.dispatch(cloudTaskAction({ taskType }));
 
 	}
 

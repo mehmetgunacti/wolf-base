@@ -13,11 +13,11 @@ export class CloudTaskComponent {
 
 	@Input({ required: true }) task!: CloudTask;
 
-	@Output() action: EventEmitter<void> = new EventEmitter();
+	@Output() action: EventEmitter<CloudTaskType> = new EventEmitter();
 
 	onActionClicked(): void {
 
-		this.action.emit();
+		this.action.emit(this.task.type);
 
 	}
 
