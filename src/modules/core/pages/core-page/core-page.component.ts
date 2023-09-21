@@ -10,6 +10,7 @@ import { selCoreIsSidebarVisible, selCoreIsThemeDark } from 'store/selectors/cor
 import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
+import { ActivatedRoute } from '@angular/router';
 
 const formatBadge_Bookmark = ([total, filtered]: [number, number]) => filtered < total ? `${filtered}/${total}` : total > 0 ? `${total}` : '';
 
@@ -38,8 +39,11 @@ export class CorePageComponent implements OnDestroy {
 	builtNumber = buildInfo.builtNumber;
 
 	constructor(
-		private store: Store
+		private store: Store,
+		private activatedRoute: ActivatedRoute
 	) {
+
+		this.activatedRoute.paramMap.subscribe(a => console.log('===========paramMap$', a.getAll('id')));
 
 		this.subscriptions.add(
 

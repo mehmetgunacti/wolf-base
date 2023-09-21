@@ -1,1 +1,89 @@
-app-kb-entry-form
+<form>
+
+	<!-- ID -->
+	<div *ngIf="kbEntry?.id">
+		<span class="p-float-label p-fluid">
+			<input
+				type="text"
+				pInputText
+				[value]="kbEntry?.id"
+				readonly>
+			<label>ID</label>
+		</span>
+	</div>
+
+	<!-- NAME -->
+	<div>
+		<span class="p-float-label p-fluid">
+			<input
+				type="text"
+				pInputText
+				[ngClass]="{ 'ng-invalid ng-dirty': form.name.invalid && form.name.dirty }"
+				[formControl]="form.name">
+			<label>Name</label>
+		</span>
+	</div>
+
+	<!-- PARENT -->
+	<div>
+		<span class="p-float-label p-fluid md:w-20rem w-full">
+			<p-treeSelect inputId="parentID" [options]="getNodes()" [formControl]="fcParentNodes"></p-treeSelect>
+			<label for="parentID">Parent Entry</label>
+		</span>
+	</div>
+
+	<!-- URLs -->
+	<div *ngFor="let fcUrl of form.urls.controls; let idx = index">
+		<span
+			class="p-float-label p-fluid">
+			<input
+				type="text"
+				pInputText
+				[ngClass]="{ 'ng-invalid ng-dirty': fcUrl.invalid && fcUrl.dirty }"
+				[formControl]="fcUrl"
+				(input)="checkUrl($event)">
+			<label>URL {{ form.urls.controls.length > 1 && idx === 0 ? '(Primary)' : '' }}</label>
+		</span>
+		<button *ngIf="idx === 0" pButton pRipple type="button" icon="pi pi-plus" class="p-button-text" title="Add URL" (click)="addURL()"></button>
+		<button *ngIf="idx > 0" pButton pRipple type="button" icon="pi pi-minus" class="p-button-text" title="Remove URL" (click)="removeURL(idx)"></button>
+	</div>
+
+	<!-- TAGS -->
+	<div>
+		<span class="p-float-label p-fluid">
+			<p-autoComplete
+				#autocomplete
+				[formControl]="form.tags"
+				[suggestions]="(tagSuggestions$ | async) || []"
+				(completeMethod)="onTagInput($event)"
+				[multiple]="true"
+				[baseZIndex]="10000"
+				appendTo="body">
+			</p-autoComplete>
+			<label>Tags</label>
+		</span>
+		<button pButton pRipple type="button" [icon]="isPopular ? 'pi pi-heart-fill' : 'pi pi-heart'" class="p-button-text" title="Toggle 'popular'" (click)="onTogglePopular()"></button>
+	</div>
+
+</form>
+
+<div form-element-buttons>
+
+	<button
+		*ngIf="this.kbEntry"
+		pButton
+		type="button"
+		label="Delete"
+		icon="pi pi-trash"
+		iconPos="left"
+		class="p-button-danger"
+		(click)="onDelete()"></button>
+	<button
+		pButton
+		type="button"
+		label="Save"
+		icon="pi pi-save"
+		iconPos="left"
+		(click)="onSave()"></button>
+
+</div>

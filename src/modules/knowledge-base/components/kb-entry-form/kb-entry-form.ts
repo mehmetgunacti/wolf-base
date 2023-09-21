@@ -13,7 +13,12 @@ interface EditForm {
 
 }
 
-export interface KBEntryForm extends EditForm, FormClass<KBEntry> { }
+export interface KBEntryForm extends EditForm, FormClass<KBEntry> {
+
+	addURL(): void;
+	removeURL(idx: number): void;
+
+}
 
 export const KB_ENTRY_FORM = new InjectionToken<KBEntryForm>('KBEntryForm');
 
@@ -55,6 +60,18 @@ export class EditFormImpl extends FormClassImpl<KBEntry> implements KBEntryForm 
 			...kbEntry
 
 		} as KBEntry;
+
+	}
+
+	addURL(): void {
+
+		this.urls.push(new FormControl(null, { validators: [Validators.required], nonNullable: true }));
+
+	}
+
+	removeURL(idx: number): void {
+		
+		this.urls.removeAt(idx);
 
 	}
 

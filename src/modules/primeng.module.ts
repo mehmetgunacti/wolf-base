@@ -32,6 +32,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { TabViewModule } from 'primeng/tabview';
 import { DataViewModule } from 'primeng/dataview';
 import { MessagesModule } from 'primeng/messages';
+import { TreeSelectModule } from 'primeng/treeselect';
 
 export const modules = [
 	AccordionModule,
@@ -66,7 +67,8 @@ export const modules = [
 	TagModule,
 	ToastModule,
 	TooltipModule,
-	ToggleButtonModule
+	ToggleButtonModule,
+	TreeSelectModule
 ];
 
 @NgModule({
