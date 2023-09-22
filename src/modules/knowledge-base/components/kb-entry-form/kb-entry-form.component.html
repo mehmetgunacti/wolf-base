@@ -57,7 +57,7 @@
 				[suggestions]="(tagSuggestions$ | async) || []"
 				(completeMethod)="onTagInput($event)"
 				[multiple]="true"
-				[baseZIndex]="10000"
+				[overlayOptions]="{ baseZIndex: 10000 }"
 				appendTo="body">
 			</p-autoComplete>
 			<label>Tags</label>

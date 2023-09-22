@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnDestroy } from '@angular/core';
+import { Component, HostBinding, OnDestroy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MenuItem, PrimeIcons } from 'primeng/api';
 import { Observable, Subscription, map } from 'rxjs';
@@ -10,7 +10,6 @@ import { selCoreIsSidebarVisible, selCoreIsThemeDark } from 'store/selectors/cor
 import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
-import { ActivatedRoute } from '@angular/router';
 
 const formatBadge_Bookmark = ([total, filtered]: [number, number]) => filtered < total ? `${filtered}/${total}` : total > 0 ? `${total}` : '';
 
@@ -38,12 +37,9 @@ export class CorePageComponent implements OnDestroy {
 	builtVersion = buildInfo.version;
 	builtNumber = buildInfo.builtNumber;
 
-	constructor(
-		private store: Store,
-		private activatedRoute: ActivatedRoute
-	) {
+	private store: Store = inject(Store);
 
-		this.activatedRoute.paramMap.subscribe(a => console.log('===========paramMap$', a.getAll('id')));
+	constructor() {
 
 		this.subscriptions.add(
 
@@ -55,7 +51,7 @@ export class CorePageComponent implements OnDestroy {
 
 		this.subscriptions.add(
 
-			store.select(selCoreIsSidebarVisible).subscribe(
+			this.store.select(selCoreIsSidebarVisible).subscribe(
 				visible => this.navCollapsed = !visible
 			)
 
@@ -84,7 +80,7 @@ export class CorePageComponent implements OnDestroy {
 			})
 
 		);
-		this.isThemeDark$ = store.select(selCoreIsThemeDark);
+		this.isThemeDark$ = this.store.select(selCoreIsThemeDark);
 
 	}
 

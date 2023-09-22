@@ -16,3 +16,5 @@ export const deleteKBEntrySuccess = createAction('[KnowledgeBase] Delete KB Entr
 export const loadSyncDataSuccess = createAction('[Knowledge Base] Load SyncData Success', props<{ syncData: SyncData[] }>());
 export const loadRemoteMetadataSuccess = createAction('[Knowledge Base] Load RemoteMetadata Success', props<{ remoteMetadata: RemoteMetadata[] }>());
 export const loadTrashCountSuccess = createAction('[Knowledge Base] Load Trash Count Success', props<{ count: number }>());
+
+export const setSelected = createAction('[Knowledge Base] Set Selected', props<{ id: UUID }>());

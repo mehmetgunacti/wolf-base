@@ -1,6 +1,7 @@
 import { Action, ActionReducer, ActionReducerMap, MetaReducer, combineReducers } from '@ngrx/store';
 import { BookmarkEntitiesEffects } from './effects/bookmark-entities.effects';
 import { BookmarkLocalStorageEffects } from './effects/bookmark-local-storage.effects';
+import { CloudBookmarkEffects } from './effects/cloud-bookmark.effects';
 import { CloudEffects } from './effects/cloud.effects';
 import { CoreNavigationEffects } from './effects/core-navigation.effects';
 import { CoreNotificationEffects } from './effects/core-notification.effects';
@@ -17,7 +18,6 @@ import { databaseReducer } from './reducers/database.reducer';
 import { knowledgeBaseReducer } from './reducers/knowledge-base.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { AppState } from './states/app.state';
-import { CloudBookmarkEffects } from './effects/cloud-bookmark.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
