@@ -1,5 +1,10 @@
 <p-card header="Knowledge Base Entry">
 
-    <app-kb-entry-form></app-kb-entry-form>
+	<app-kb-entry-form
+		[tagSuggestions]="tagSuggestions$ | async"
+		(create)="onCreate($event)"
+		(update)="onUpdate($event.id, $event.kbEntry)"
+		(delete)="onDelete($event)"
+		(tagInput)="onTagInput($event)"></app-kb-entry-form>
 
 </p-card>

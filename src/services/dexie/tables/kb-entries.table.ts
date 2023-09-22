@@ -1,4 +1,4 @@
-import { KBEntriesTable, KBEntry, WolfEntity } from 'lib';
+import { KBEntriesTable, KBEntry, WolfEntity, toggleArrayItem } from 'lib';
 import { UUID } from 'lib/constants/common.constant';
 import { v4 as uuidv4 } from 'uuid';
 import { WolfBaseDB } from '../wolfbase.database';
@@ -24,12 +24,24 @@ export class DexieKBEntriesTableImpl extends EntityTableImpl<KBEntry> implements
             id,
             name: '',
             tags: [],
-            source: [''],
+            urls: [''],
             parent: null,
             updated: new Date().toISOString()
 
         };
         return { ...instance, ...item, id } as KBEntry;
+
+    }
+
+    async toggleTag(id: UUID, name: string): Promise<void> {
+
+        await this.db.kb_entries
+            .where({ id })
+            .modify((kbEntry: KBEntry): void => {
+
+                kbEntry.tags = toggleArrayItem(kbEntry.tags, name);
+
+            });
 
     }
 

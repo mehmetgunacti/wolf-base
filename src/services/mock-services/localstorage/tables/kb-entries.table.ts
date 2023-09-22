@@ -1,4 +1,4 @@
-import { KBEntriesTable, KBEntry, Metadata, RemoteData, RemoteMetadata, SyncData, UUID, sleep } from "lib";
+import { KBEntriesTable, KBEntry, Metadata, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from "lib";
 import { v4 as uuidv4 } from 'uuid';
 
 const SLEEP = 20;
@@ -24,7 +24,7 @@ export class MockKBEntriesTableImpl implements KBEntriesTable {
 
 			name: '',
 			tags: [],
-			source: [''],
+			urls: [''],
 			parent: null,
 			updated: new Date().toISOString(),
 			...item,
@@ -233,6 +233,15 @@ export class MockKBEntriesTableImpl implements KBEntriesTable {
 
 		this.kbEntries_sync.set(data.id, syncData);
 		this.kbEntries_remote.set(data.id, data);
+
+	}
+
+	async toggleTag(id: string, name: string): Promise<void> {
+
+		await sleep(SLEEP);
+		const kbEntry: KBEntry | undefined = this.kbEntries.get(id);
+		if (kbEntry)
+			kbEntry.tags = toggleArrayItem(kbEntry.tags, name);
 
 	}
 

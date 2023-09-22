@@ -1,6 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { KBEntry, UUID } from 'lib';
-import { createBookmarkSuccess, updateBookmarkSuccess } from 'store/actions/bookmark.actions';
 import { createKBentrySuccess, loadAllKBEntriesSuccess, updateKBEntrySuccess } from 'store/actions/knowledge-base.actions';
 import { KnowledgeBaseEntitiesState, initialKnowledgeBaseEntitiesState } from 'store/states/knowledge-base.state';
 
@@ -9,9 +8,9 @@ const reducer = createReducer(
 	initialKnowledgeBaseEntitiesState,
 
 	on(
-		loadAllKBEntriesSuccess, (state, { entries }): KnowledgeBaseEntitiesState => ({
+		loadAllKBEntriesSuccess, (state, { kbEntries }): KnowledgeBaseEntitiesState => ({
 			...state,
-			entities: entries.reduce((record, entry) => { record[entry.id] = entry; return record; }, {} as Record<UUID, KBEntry>)
+			entities: kbEntries.reduce((record, entry) => { record[entry.id] = entry; return record; }, {} as Record<UUID, KBEntry>)
 		})
 	),
 	on(createKBentrySuccess, (state): KnowledgeBaseEntitiesState => ({ ...state, selected: null })),

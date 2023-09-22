@@ -6,7 +6,7 @@ import { selKnowledgeBaseTagsState } from './knowledge-base.selectors';
 const arrayOfTagNames = createSelector(
 
 	selKBEntriesArray,
-	(entries): string[][] => entries.map(e => e.tags.map(t => t.name))
+	(entries): string[][] => entries.map(e => e.tags)
 
 );
 
@@ -66,7 +66,7 @@ export const filteredKBEntries = createSelector(
 
 		// Filter entries based on selected tags
 		const filteredEntries: KBEntry[] = tags.reduce((acc, tag) => {
-			return acc.filter(entry => entry.tags.map(t => t.name).includes(tag));
+			return acc.filter(entry => entry.tags.includes(tag));
 		}, entries);
 
 		if (!term)
@@ -95,7 +95,7 @@ export const filteredKBEntries = createSelector(
 const arrOfFilteredTagNames = createSelector(
 
 	filteredKBEntries,
-	(entries): string[][] => entries.map(e => e.tags.map(t => t.name))
+	(entries): string[][] => entries.map(e => e.tags)
 
 );
 

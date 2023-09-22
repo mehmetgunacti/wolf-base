@@ -3,16 +3,15 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
-import { Bookmark, Click, LocalStorageService, POPULAR, RemoteStorageService, commaSplit, toggleArrayItem } from 'lib';
+import { KBEntry, LocalStorageService, POPULAR, RemoteStorageService, commaSplit, toggleArrayItem } from 'lib';
 import { from, fromEventPattern, iif, of } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { clickTag, emptySelectedTags, search, setSelectedTags } from 'store/actions/bookmark-tags.actions';
-import { togglePopular } from 'store/actions/bookmark-ui.actions';
-import { clickBookmark, createBookmark, createBookmarkSuccess, deleteBookmark, deleteBookmarkSuccess, loadAllBookmarksSuccess, loadAllClicksSuccess, updateBookmark, updateBookmarkFailure, updateBookmarkSuccess } from 'store/actions/bookmark.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
+import { clickTag, emptySelectedTags, search, setSelectedTags, togglePopular } from 'store/actions/knowledge-base-tags.actions';
+import { createKBEntry, createKBentrySuccess, deleteKBEntry, deleteKBEntrySuccess, loadAllKBEntriesSuccess, updateKBEntry, updateKBEntryFailure, updateKBEntrySuccess } from 'store/actions/knowledge-base.actions';
 
 @Injectable()
-export class BookmarkEntitiesEffects {
+export class KnowledgeBaseEntitiesEffects {
 
 	private actions$: Actions = inject(Actions);
 	private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
@@ -22,31 +21,18 @@ export class BookmarkEntitiesEffects {
 
 	loadBookmarks$ = createEffect(
 
-		() => fromEventPattern<Bookmark[]>(
+		() => fromEventPattern<KBEntry[]>(
 
 			// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
 			// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
 			// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
-			(handler) => liveQuery(() => this.localStorage.bookmarks.list()).subscribe(handler),
+			(handler) => liveQuery(() => this.localStorage.kbEntries.list()).subscribe(handler),
 
 			// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
 			(handler, unsubscribe) => unsubscribe()
 
 		).pipe(
-			map(bookmarks => loadAllBookmarksSuccess({ bookmarks }))
-		)
-
-	);
-
-	loadClicks$ = createEffect(
-
-		() => fromEventPattern<Click[]>(
-
-			(handler) => liveQuery(() => this.localStorage.bookmarks.listClicks()).subscribe(handler),
-			(handler, unsubscribe) => unsubscribe()
-
-		).pipe(
-			map(clicks => loadAllClicksSuccess({ clicks }))
+			map(kbEntries => loadAllKBEntriesSuccess({ kbEntries }))
 		)
 
 	);
@@ -147,103 +133,91 @@ export class BookmarkEntitiesEffects {
 
 	);
 
-	bookmarksCreate$ = createEffect(
+	createKBEntry$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(createBookmark),
-			map(param => param.bookmark),
-			switchMap(bookmark => this.localStorage.bookmarks.create(bookmark)),
-			map((bookmark: Bookmark) => createBookmarkSuccess({ bookmark }))
+			ofType(createKBEntry),
+			map(param => param.kbEntry),
+			switchMap(kbEntry => this.localStorage.kbEntries.create(kbEntry)),
+			map((kbEntry: KBEntry) => createKBentrySuccess({ kbEntry }))
 
 		)
 
 	);
 
-	bookmarksShowCreateNotification$ = createEffect(
+	kbEntryShowCreateNotification$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(createBookmarkSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Bookmark created' }))
+			ofType(createKBentrySuccess),
+			map(() => showNotification({ severity: 'success', summary: 'Knowledge Base', detail: 'Entry created' }))
 
 		)
 
 	);
 
-	bookmarksUpdate$ = createEffect(
+	updateKBEntry$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(updateBookmark),
-			switchMap(({ id, bookmark }) => from(this.localStorage.bookmarks.update(id, bookmark)).pipe(
+			ofType(updateKBEntry),
+			switchMap(({ id, kbEntry }) => from(this.localStorage.kbEntries.update(id, kbEntry)).pipe(
 				switchMap(count => iif(
 					() => count === 1,
-					from(this.localStorage.bookmarks.getEntity(id)).pipe(
-						map(bookmark => bookmark ? updateBookmarkSuccess({ bookmark }) : updateBookmarkFailure({ id }))
+					from(this.localStorage.kbEntries.getEntity(id)).pipe(
+						map(kbEntry => kbEntry ? updateKBEntrySuccess({ kbEntry }) : updateKBEntryFailure({ id }))
 					),
-					of(updateBookmarkFailure({ id }))
+					of(updateKBEntryFailure({ id }))
 				))
 			))
 		)
 	);
 
-	bookmarksShowUpdateNotification$ = createEffect(
+	kbEntryShowUpdateNotification$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(updateBookmarkSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Bookmark updated' }))
+			ofType(updateKBEntrySuccess),
+			map(() => showNotification({ severity: 'success', summary: 'Knowledge Base', detail: 'Entry updated' }))
 
 		)
 
 	);
 
-	bookmarkTogglePopularTag$ = createEffect(
+	kbEntryTogglePopularTag$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(togglePopular),
-			tap(({ id }) => this.localStorage.bookmarks.toggleTag(id, POPULAR))
+			tap(({ id }) => this.localStorage.kbEntries.toggleTag(id, POPULAR))
 
 		),
 		{ dispatch: false }
 
 	);
 
-	bookmarksDelete$ = createEffect(
+	kbEntryDelete$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(deleteBookmark),
+			ofType(deleteKBEntry),
 			map(p => p.id),
-			switchMap(id => this.localStorage.bookmarks.moveToTrash(id)),
-			map(() => deleteBookmarkSuccess())
+			switchMap(id => this.localStorage.kbEntries.moveToTrash(id)),
+			map(() => deleteKBEntrySuccess())
 
 		)
 
 	);
 
-	bookmarkDeleted$ = createEffect(
+	kbEntryDeleted$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(deleteBookmarkSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Bookmark deleted' }))
+			ofType(deleteKBEntrySuccess),
+			map(() => showNotification({ severity: 'success', summary: 'Knowledge Base', detail: 'Entry deleted' }))
 
 		)
-
-	);
-
-	bookmarksClick$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(clickBookmark),
-			switchMap(({ id }) => from(this.localStorage.bookmarks.click(id)))
-
-		),
-		{ dispatch: false }
 
 	);
 

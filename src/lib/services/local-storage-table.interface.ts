@@ -80,5 +80,9 @@ export interface LogsTable {
 
 }
 
-export interface KBEntriesTable extends EntityTable<KBEntry> { }
+export interface KBEntriesTable extends EntityTable<KBEntry> {
+
+	toggleTag(id: UUID, name: string): Promise<void>;
+
+}
 export interface KBContentsTable extends KeyValueTable { }
