@@ -25,7 +25,9 @@ export class DexieKBEntriesTableImpl extends EntityTableImpl<KBEntry> implements
             name: '',
             tags: [],
             urls: [''],
+            parentId: null,
             parent: null,
+            entries: [],
             updated: new Date().toISOString()
 
         };

@@ -1,3 +1,4 @@
+[{{kbEntry?.id}}]
 <form>
 
 	<!-- ID -->
@@ -27,7 +28,7 @@
 	<!-- PARENT -->
 	<div>
 		<span class="p-float-label p-fluid md:w-20rem w-full">
-			<p-treeSelect inputId="parentID" [options]="getNodes()" [formControl]="fcParentNodes"></p-treeSelect>
+			<p-treeSelect inputId="parentID" [options]="parents" [formControl]="form.parentId"></p-treeSelect>
 			<label for="parentID">Parent Entry</label>
 		</span>
 	</div>

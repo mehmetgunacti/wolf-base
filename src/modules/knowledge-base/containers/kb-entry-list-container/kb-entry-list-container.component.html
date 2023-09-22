@@ -1,1 +1,9 @@
-app-kb-entry-list-container
+<p-card header="Knowledge Base Entries">
+
+    <ul>
+
+        <li *ngFor="let kbEntry of kbEntries$ | async"><a [routerLink]="kbEntry.id">{{ kbEntry.name }}</a></li>
+
+    </ul>
+
+</p-card>

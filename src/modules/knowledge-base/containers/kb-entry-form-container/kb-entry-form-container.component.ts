@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { KBEntry, UUID } from 'lib';
 import { Observable, Subject, combineLatest, filter, map } from 'rxjs';
 import { createKBEntry, deleteKBEntry, updateKBEntry } from 'store/actions/knowledge-base.actions';
+import { selKBEntriesArray } from 'store/selectors/knowledge-base-entities.selectors';
 import { distinctTagsArray } from 'store/selectors/knowledge-base-tags.selectors';
 
 @Component({
@@ -16,9 +17,13 @@ export class KBEntryFormContainerComponent implements AfterContentInit {
 
 	tagSuggestions$!: Observable<string[]>;
 	tagInput = new Subject<string>();
+	kbParents$: Observable<KBEntry[]>;
 
+	constructor() {
 
-	constructor() { }
+		this.kbParents$ = this.store.select(selKBEntriesArray);
+
+	}
 
 	ngAfterContentInit(): void {
 

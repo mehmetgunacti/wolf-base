@@ -20,19 +20,21 @@ export class MockKBEntriesTableImpl implements KBEntriesTable {
 	async create(item: Partial<KBEntry>): Promise<KBEntry> {
 
 		await sleep(SLEEP);
-		const bookmark: KBEntry = {
+		const kbEntry: KBEntry = {
 
 			name: '',
 			tags: [],
 			urls: [''],
+			parentId: null,
 			parent: null,
+			entries: [],
 			updated: new Date().toISOString(),
 			...item,
 			id: uuidv4()
 
 		};
-		this.kbEntries.set(bookmark.id, bookmark);
-		return bookmark;
+		this.kbEntries.set(kbEntry.id, kbEntry);
+		return kbEntry;
 
 	}
 

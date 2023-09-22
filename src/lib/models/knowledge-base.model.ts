@@ -4,10 +4,13 @@ import { ISODateString } from "./id-base.model";
 
 export interface KBEntry extends Entity {
 
-    parent: UUID | null;
+    parentId: UUID | null;
     tags: string[],
     updated: ISODateString;
     urls: string[];
+
+    parent: KBEntry | null;
+    entries: KBEntry[];
 
 }
 

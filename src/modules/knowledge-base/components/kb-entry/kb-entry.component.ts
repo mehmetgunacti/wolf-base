@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { KBEntry } from 'lib';
 
 @Component({
 	selector: 'app-kb-entry',
@@ -8,8 +8,7 @@ import { Store } from '@ngrx/store';
 })
 export class KBEntryComponent {
 
-	private store: Store = inject(Store);
-
-	constructor() {	}
+	@Input() kbEntry: KBEntry | null | undefined;
+	@Input() parents: KBEntry[] = [];
 
 }

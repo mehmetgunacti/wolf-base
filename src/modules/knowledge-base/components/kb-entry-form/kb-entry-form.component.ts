@@ -4,6 +4,29 @@ import { KBEntry, UUID } from 'lib';
 import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { Subject, Subscription } from 'rxjs';
 import { EditFormImpl, KBEntryForm, KB_ENTRY_FORM } from './kb-entry-form';
+import { TreeNode } from 'primeng/api';
+
+function transformEntries(entries?: KBEntry[]): TreeNode<KBEntry>[] {
+
+	return [
+		{ label: '[Root Entry]' },
+		...toTreeNode(entries?.filter(e => e.parentId === null))
+	];
+
+}
+
+function toTreeNode(entries?: KBEntry[]): TreeNode<KBEntry>[] {
+
+	if (entries)
+		return entries
+			.reduce(
+				(prev, e) => { prev.push({ key: e.id, label: e.name, children: toTreeNode(e.entries) } as TreeNode); return prev; },
+				[] as TreeNode<KBEntry>[]
+			)
+			.sort((a, b) => a.label! > b.label! ? 1 : -1);
+	return [];
+
+}
 
 @Component({
 	selector: 'app-kb-entry-form',
@@ -14,6 +37,7 @@ import { EditFormImpl, KBEntryForm, KB_ENTRY_FORM } from './kb-entry-form';
 export class KBEntryFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	@Input() kbEntry: KBEntry | null | undefined;
+	@Input({ transform: transformEntries }) parents: TreeNode<KBEntry>[] = [];
 	@Input() tagSuggestions: string[] | null | undefined;
 
 	@Output() create: EventEmitter<Partial<KBEntry>> = new EventEmitter();
@@ -128,6 +152,7 @@ will be deleted. Continue?`)
 	addURL(): void {
 
 		this.form.addURL();
+		console.log(this.parents);
 
 	}
 
@@ -144,63 +169,6 @@ will be deleted. Continue?`)
 
 		if (value === "h" || value === "H")
 			inputElement.value = "https://www.";
-
-	}
-
-	getNodes(): any {
-
-		return [
-			{
-				key: '0',
-				label: 'Documents',
-				data: 'Documents Folder',
-				icon: 'pi pi-fw pi-inbox',
-				children: [
-					{
-						key: '0-0',
-						label: 'Work',
-						data: 'Work Folder',
-						icon: 'pi pi-fw pi-cog',
-						children: [
-							{ key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
-							{ key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
-						]
-					},
-					{
-						key: '0-1',
-						label: 'Home',
-						data: 'Home Folder',
-						icon: 'pi pi-fw pi-home',
-						children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
-					}
-				]
-			},
-			{
-				key: '1',
-				label: 'Documents',
-				data: 'Documents Folder',
-				icon: 'pi pi-fw pi-inbox',
-				children: [
-					{
-						key: '1-0',
-						label: 'Work',
-						data: 'Work Folder',
-						icon: 'pi pi-fw pi-cog',
-						children: [
-							{ key: '1-1-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
-							{ key: '1-1-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
-						]
-					},
-					{
-						key: '1-1',
-						label: 'Home',
-						data: 'Home Folder',
-						icon: 'pi pi-fw pi-home',
-						children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
-					}
-				]
-			}
-		];
 
 	}
 

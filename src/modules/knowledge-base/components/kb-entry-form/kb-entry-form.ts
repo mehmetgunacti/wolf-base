@@ -2,11 +2,12 @@ import { InjectionToken } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { KBEntry, UUID } from 'lib';
 import { FormClass, FormClassImpl } from 'modules/shared';
+import { TreeNode } from 'primeng/api';
 
 interface EditForm {
 
 	id: FormControl<string | null>;
-	parent: FormControl<UUID | null>;
+	parentId: FormControl<TreeNode | null>;
 	name: FormControl<string>;
 	tags: FormControl<string[]>;
 	urls: FormArray<FormControl<string>>;
@@ -28,7 +29,7 @@ export class EditFormImpl extends FormClassImpl<KBEntry> implements KBEntryForm 
 
 		return new FormGroup<EditForm>({
 			id: new FormControl(),
-			parent: new FormControl(),
+			parentId: new FormControl(),
 			name: new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
 			tags: new FormControl([], { validators: [Validators.required], nonNullable: true }),
 			urls: new FormArray([
@@ -57,7 +58,8 @@ export class EditFormImpl extends FormClassImpl<KBEntry> implements KBEntryForm 
 		const kbEntry: Partial<KBEntry> = this._formGroup.value;
 		return {
 
-			...kbEntry
+			...kbEntry,
+			parentId: this.parentId.value?.key ?? null
 
 		} as KBEntry;
 
@@ -79,8 +81,8 @@ export class EditFormImpl extends FormClassImpl<KBEntry> implements KBEntryForm 
 		return <FormControl<UUID>>this._formGroup.controls['id'];
 	}
 
-	get parent(): FormControl<UUID | null> {
-		return <FormControl<UUID>>this._formGroup.controls['parent'];
+	get parentId(): FormControl<TreeNode | null> {
+		return <FormControl<TreeNode>>this._formGroup.controls['parentId'];
 	}
 
 	get name(): FormControl<string> {

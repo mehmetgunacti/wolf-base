@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { KBEntry } from 'lib';
+import { Observable } from 'rxjs';
+import { selKBRootEntriesArray } from 'store/selectors/knowledge-base-entities.selectors';
 
 @Component({
 	selector: 'app-kb-entry-list-container',
@@ -10,6 +13,12 @@ export class KBEntryListContainerComponent {
 
 	private store: Store = inject(Store);
 
-	constructor() {	}
+	kbEntries$: Observable<KBEntry[]>;
+
+	constructor() {
+
+		this.kbEntries$ = this.store.select(selKBRootEntriesArray);
+
+	}
 
 }

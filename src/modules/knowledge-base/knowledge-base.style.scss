@@ -5,12 +5,12 @@
 
 // containers
 @import './containers/kb-content-form-container/kb-content-form-container.component.scss';
-@import './containers/kb-entry-display-container/kb-entry-container.component.scss';
+@import './containers/kb-entry-container/kb-entry-container.component.scss';
 @import './containers/kb-entry-form-container/kb-entry-form-container.component.scss';
 @import './containers/kb-entry-list-container/kb-entry-list-container.component.scss';
 
 // pages
-@import './containers/kb-content-form-container/kb-content-form-container.component.scss';
-@import './containers/kb-entry-display-container/kb-entry-container.component.scss';
-@import './containers/kb-entry-form-container/kb-entry-form-container.component.scss';
-@import './containers/kb-entry-list-container/kb-entry-list-container.component.scss';
+@import './pages/kb-content-form-page/kb-content-form-page.component.scss';
+@import './pages/kb-entry-page/kb-entry-page.component.scss';
+@import './pages/kb-entry-form-page/kb-entry-form-page.component.scss';
+@import './pages/kb-entry-list-page/kb-entry-list-page.component.scss';

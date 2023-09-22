@@ -2,6 +2,7 @@
 
 	<app-kb-entry-form
 		[tagSuggestions]="tagSuggestions$ | async"
+		[parents]="(kbParents$ | async) || []"
 		(create)="onCreate($event)"
 		(update)="onUpdate($event.id, $event.kbEntry)"
 		(delete)="onDelete($event)"

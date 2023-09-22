@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { selKnowledgeBaseEntitiesState } from './knowledge-base.selectors';
+import { KBEntry, UUID } from 'lib';
 
 export const selKBEntries = createSelector(
 
@@ -22,6 +23,13 @@ export const selKBEntriesArray = createSelector(
 
 );
 
+export const selKBRootEntriesArray = createSelector(
+
+	selKBEntriesArray,
+	entries => entries.filter(e => e.parent === null)
+
+);
+
 export const selKnowledgeBaseCount = createSelector(
 
 	selKnowledgeBaseIds,
@@ -32,7 +40,15 @@ export const selKnowledgeBaseCount = createSelector(
 export const selKBEntrySelected = createSelector(
 
 	selKnowledgeBaseEntitiesState,
-	state => state.selected ? state.entities[state.selected] : null
+	state => state.selected
+
+);
+
+export const selKBEntrySelectedEntry = createSelector(
+
+	selKBEntries,
+	selKBEntrySelected,
+	(entries, id) => id ? entries[id] : null
 
 );
 

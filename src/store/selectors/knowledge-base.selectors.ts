@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { KnowledgeBaseModuleState } from 'store/states/knowledge-base.state';
 
-const selKnowledgeBaseModuleState = createFeatureSelector<KnowledgeBaseModuleState>('bookmark');
+const selKnowledgeBaseModuleState = createFeatureSelector<KnowledgeBaseModuleState>('knowledgeBase');
 
 export const selKnowledgeBaseEntitiesState = createSelector(
 

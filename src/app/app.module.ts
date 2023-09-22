@@ -18,7 +18,7 @@ import * as config from './app.config';
 		BrowserModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
-		RouterModule.forRoot(config.routes, { bindToComponentInputs: true }),
+		RouterModule.forRoot(config.routes),
 		StoreModule.forRoot(store.reducers, { metaReducers: store.metaReducers }),
 		EffectsModule.forRoot(store.effects),
 		StoreDevtoolsModule.instrument(),
