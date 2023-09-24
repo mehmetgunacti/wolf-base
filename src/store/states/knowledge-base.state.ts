@@ -1,4 +1,4 @@
-import { KBEntry, RemoteMetadata, SyncData, UUID } from "lib";
+import { KBEntry, KBEntryNode, RemoteMetadata, SyncData, UUID } from "lib";
 
 export interface KnowledgeBaseModuleState {
 
@@ -12,7 +12,7 @@ export interface KnowledgeBaseModuleState {
 // todo move some properties to ui state
 export interface KnowledgeBaseEntitiesState {
 
-	entities: Record<UUID, KBEntry>;
+	entities: Record<UUID, KBEntryNode>;
 	selected: UUID | null;
 	content: string | null;
 

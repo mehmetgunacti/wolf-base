@@ -1,10 +1,23 @@
-<p *ngIf="kbEntry">
-    parent: {{ kbEntry.parent }}
-    <br>name: {{ kbEntry.name }}
-</p>
+<p-card *ngIf="node">
 
+	<ng-template pTemplate="header">
+		<p-breadcrumb [model]="menuItems" [home]="home"></p-breadcrumb>
+	</ng-template>
 
-asd
-fa
-sdf
-asdf
+	<div node_name>{{ node.name }}</div>
+	<div node_updated>
+		<i class="pi pi-clock"></i> {{ node.updated | date:'dd.MM.yyyy hh:mm' }}
+	</div>
+	<div node_tags>
+		<p-tag [value]="tag" *ngFor="let tag of node.tags" [rounded]="true"></p-tag>
+	</div>
+	<ng-container *ngIf="node.children.length > 0">
+		<details node_children [open]="!content || node.children.length < 3">
+			<summary>Entries</summary>
+			<ul>
+				<li *ngFor="let child of node.children"><a [routerLink]="['/kb', child.id]">{{ child.name }}</a></li>
+			</ul>
+		</details>
+	</ng-container>
+
+</p-card>

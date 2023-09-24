@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { KBEntry } from 'lib';
-import { EMPTY, Observable, expand, of, skip, toArray } from 'rxjs';
+import { KBEntryNode } from 'lib';
+import { Observable } from 'rxjs';
 import { selKBEntrySelectedEntry } from 'store/selectors/knowledge-base-entities.selectors';
 
 @Component({
@@ -13,19 +13,11 @@ export class KBEntryContainerComponent {
 
 	private store: Store = inject(Store);
 
-	kbEntry$: Observable<KBEntry | null>;
-	kbParents$: Observable<KBEntry[]>;
+	kbEntryNode$: Observable<KBEntryNode | null>;
 
 	constructor() {
 
-		this.kbEntry$ = this.store.select(selKBEntrySelectedEntry);
-		this.kbParents$ = this.kbEntry$.pipe(
-
-			expand(kbEntry => kbEntry?.parent ? of(kbEntry.parent) : EMPTY),
-			skip(1),
-			toArray()
-
-		);
+		this.kbEntryNode$ = this.store.select(selKBEntrySelectedEntry);
 
 	}
 

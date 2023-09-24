@@ -1,11 +1,10 @@
 import { createSelector } from '@ngrx/store';
-import { KBEntry, Tag } from 'lib';
-import { selKBEntriesArray } from './knowledge-base-entities.selectors';
-import { selKnowledgeBaseTagsState } from './knowledge-base.selectors';
+import { Tag } from 'lib';
+import { selKBEntryNodeArray } from './knowledge-base-entities.selectors';
 
 const arrayOfTagNames = createSelector(
 
-	selKBEntriesArray,
+	selKBEntryNodeArray,
 	(entries): string[][] => entries.map(e => e.tags)
 
 );
@@ -35,95 +34,95 @@ export const distinctTagsArray = createSelector(
 
 );
 
-const distinctTagNames = createSelector(
+// const distinctTagNames = createSelector(
 
-	arrayOfTagNames,
-	(tags: string[][]): string[] => [...new Set(tags.flat())]
+// 	arrayOfTagNames,
+// 	(tags: string[][]): string[] => [...new Set(tags.flat())]
 
-);
+// );
 
-export const selectedTags = createSelector(
+// export const selectedTags = createSelector(
 
-	selKnowledgeBaseTagsState,
-	state => state.selectedTags
+// 	selKnowledgeBaseTagsState,
+// 	state => state.selectedTags
 
-);
+// );
 
-export const searchTerm = createSelector(
+// export const searchTerm = createSelector(
 
-	selKnowledgeBaseTagsState,
-	state => state.searchTerm
+// 	selKnowledgeBaseTagsState,
+// 	state => state.searchTerm
 
-);
+// );
 
 // move to entities.selector.ts
-export const filteredKBEntries = createSelector(
+// export const filteredKBEntries = createSelector(
 
-	selKBEntriesArray,
-	selectedTags,
-	searchTerm,
-	(entries, tags, term): KBEntry[] => {
+// 	selKBEntriesArray,
+// 	selectedTags,
+// 	searchTerm,
+// 	(entries, tags, term): KBEntry[] => {
 
-		// Filter entries based on selected tags
-		const filteredEntries: KBEntry[] = tags.reduce((acc, tag) => {
-			return acc.filter(entry => entry.tags.includes(tag));
-		}, entries);
+// 		// Filter entries based on selected tags
+// 		const filteredEntries: KBEntry[] = tags.reduce((acc, tag) => {
+// 			return acc.filter(entry => entry.tags.includes(tag));
+// 		}, entries);
 
-		if (!term)
-			return filteredEntries;
+// 		if (!term)
+// 			return filteredEntries;
 
-		// Split the search term into an array of individual words
-		const searchWords = term.toLowerCase().split(' ');
+// 		// Split the search term into an array of individual words
+// 		const searchWords = term.toLowerCase().split(' ');
 
-		// Filter entries based on search term
-		const result = filteredEntries.filter(entry => {
+// 		// Filter entries based on search term
+// 		const result = filteredEntries.filter(entry => {
 
-			const { name } = entry;
-			const lowerCaseName = name.toLowerCase();
+// 			const { name } = entry;
+// 			const lowerCaseName = name.toLowerCase();
 
-			// Check if any of the search words is present in the entity's name
-			return searchWords.every(word => lowerCaseName.includes(word));
+// 			// Check if any of the search words is present in the entity's name
+// 			return searchWords.every(word => lowerCaseName.includes(word));
 
-		});
+// 		});
 
-		return result;
+// 		return result;
 
-	}
+// 	}
 
-);
+// );
 
-const arrOfFilteredTagNames = createSelector(
+// const arrOfFilteredTagNames = createSelector(
 
-	filteredKBEntries,
-	(entries): string[][] => entries.map(e => e.tags)
+// 	filteredKBEntries,
+// 	(entries): string[][] => entries.map(e => e.tags)
 
-);
+// );
 
-export const filteredKnowledgeBaseCount = createSelector(
+// export const filteredKnowledgeBaseCount = createSelector(
 
-	filteredKBEntries,
-	(entries: KBEntry[]) => entries.length
+// 	filteredKBEntries,
+// 	(entries: KBEntry[]) => entries.length
 
-);
+// );
 
-export const relatedTags = createSelector(
+// export const relatedTags = createSelector(
 
-	arrOfFilteredTagNames,
-	distinctTagNames,
-	selectedTags,
-	(arrTagsArray: string[][], distinctTagNames: string[], selectedTags: string[]): string[] => {
+// 	arrOfFilteredTagNames,
+// 	distinctTagNames,
+// 	selectedTags,
+// 	(arrTagsArray: string[][], distinctTagNames: string[], selectedTags: string[]): string[] => {
 
-		if (selectedTags.length === 0)
-			return distinctTagNames;
+// 		if (selectedTags.length === 0)
+// 			return distinctTagNames;
 
-		return [
-			...new Set(
-				arrTagsArray
-					.filter(arrTags => selectedTags.every(tag => arrTags.includes(tag)))
-					.flat()
-			)
-		];
+// 		return [
+// 			...new Set(
+// 				arrTagsArray
+// 					.filter(arrTags => selectedTags.every(tag => arrTags.includes(tag)))
+// 					.flat()
+// 			)
+// 		];
 
-	}
+// 	}
 
-);
+// );

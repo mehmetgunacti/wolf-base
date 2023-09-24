@@ -1,9 +1,9 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { KBEntry, UUID } from 'lib';
+import { KBEntry, KBEntryNode, UUID } from 'lib';
 import { Observable, Subject, combineLatest, filter, map } from 'rxjs';
-import { createKBEntry, deleteKBEntry, updateKBEntry } from 'store/actions/knowledge-base.actions';
-import { selKBEntriesArray } from 'store/selectors/knowledge-base-entities.selectors';
+import { createEntity, deleteEntity, updateEntity } from 'store/actions/kb-entry-entity.actions';
+import { selKBEntryRootNodes } from 'store/selectors/knowledge-base-entities.selectors';
 import { distinctTagsArray } from 'store/selectors/knowledge-base-tags.selectors';
 
 @Component({
@@ -17,11 +17,11 @@ export class KBEntryFormContainerComponent implements AfterContentInit {
 
 	tagSuggestions$!: Observable<string[]>;
 	tagInput = new Subject<string>();
-	kbParents$: Observable<KBEntry[]>;
+	kbParents$: Observable<KBEntryNode[]>;
 
 	constructor() {
 
-		this.kbParents$ = this.store.select(selKBEntriesArray);
+		this.kbParents$ = this.store.select(selKBEntryRootNodes);
 
 	}
 
@@ -48,19 +48,19 @@ export class KBEntryFormContainerComponent implements AfterContentInit {
 
 	onCreate(kbEntry: Partial<KBEntry>): void {
 
-		this.store.dispatch(createKBEntry({ kbEntry }));
+		this.store.dispatch(createEntity({ kbEntry }));
 
 	}
 
 	onUpdate(id: UUID, kbEntry: Partial<KBEntry>) {
 
-		this.store.dispatch(updateKBEntry({ id, kbEntry }));
+		this.store.dispatch(updateEntity({ id, kbEntry }));
 
 	}
 
 	onDelete(id: UUID): void {
 
-		this.store.dispatch(deleteKBEntry({ id }));
+		this.store.dispatch(deleteEntity({ id }));
 
 	}
 

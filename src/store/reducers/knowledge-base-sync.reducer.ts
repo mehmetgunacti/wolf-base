@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { loadRemoteMetadataSuccess, loadSyncDataSuccess, loadTrashCountSuccess } from 'store/actions/knowledge-base.actions';
+import { loadRemoteMetadataSuccess, loadSyncDataSuccess, loadTrashCountSuccess } from 'store/actions/kb-entry-entity.actions';
 import { KnowledgeBaseSyncState, initialKnowledgeBaseSyncState } from 'store/states/knowledge-base.state';
 
 const reducer = createReducer(

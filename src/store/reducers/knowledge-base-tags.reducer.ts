@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { search, setSelectedTags } from 'store/actions/knowledge-base-tags.actions';
+import { search, setSelectedTags } from 'store/actions/kb-entry-tag.actions';
 import { KnowledgeBaseTagsState, initialKnowledgeBaseTagsState } from 'store/states/knowledge-base.state';
 
 const reducer = createReducer(

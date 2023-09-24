@@ -1,9 +1,7 @@
-<p-card header="Knowledge Base Entries">
+<p-card header="Knowledge Base">
 
-    <ul>
-
-        <li *ngFor="let kbEntry of kbEntries$ | async"><a [routerLink]="kbEntry.id">{{ kbEntry.name }}</a></li>
-
-    </ul>
+	<ul>
+		<li *ngFor="let kbEntry of kbEntries$ | async"><a [routerLink]="kbEntry.id">{{ kbEntry.name }}</a></li>
+	</ul>
 
 </p-card>

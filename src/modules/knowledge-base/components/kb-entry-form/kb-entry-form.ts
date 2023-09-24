@@ -10,7 +10,7 @@ interface EditForm {
 	parentId: FormControl<TreeNode | null>;
 	name: FormControl<string>;
 	tags: FormControl<string[]>;
-	urls: FormArray<FormControl<string>>;
+	urls: FormArray<FormControl<string | null>>;
 
 }
 
@@ -33,7 +33,7 @@ export class EditFormImpl extends FormClassImpl<KBEntry> implements KBEntryForm 
 			name: new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
 			tags: new FormControl([], { validators: [Validators.required], nonNullable: true }),
 			urls: new FormArray([
-				new FormControl('', { validators: [Validators.required], nonNullable: true })
+				new FormControl('')
 			])
 		});
 

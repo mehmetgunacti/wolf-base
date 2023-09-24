@@ -2,4 +2,84 @@ app-kb-entry {
 
 	display: grid;
 
+	& .p-card-body,
+	& .p-card-body .p-card-content {
+
+		padding-top : 0 !important;
+
+	}
+
+	& .p-breadcrumb {
+		
+		border : none;
+		&.p-breadcrumb-list {
+
+			flex-wrap: wrap !important;
+
+		}
+
+	}
+
+	& [node_name] {
+
+		font-size		: x-large;
+		margin-bottom	: 1rem;
+
+	}
+
+	& [node_updated] {
+
+		font-size		: small;
+		font-style		: italic;
+		margin-bottom	: 0.5rem;
+		color			: var(--text-color-secondary);
+		& i {
+
+			font-size : small;
+
+		}
+
+	}
+
+	& [node_tags] {
+
+		margin-bottom	: 0.5rem;
+		& p-tag {
+
+			margin-right: 0.3rem;
+
+			& .p-tag {
+
+				padding: 1px 7px;
+
+				& .p-tag-value {
+
+					font-size	: x-small;
+
+				}
+
+			}
+
+		}
+
+	}
+
+	& [node_children] {
+
+		font-size : small;
+
+		& summary {
+
+			cursor : pointer;
+
+		}
+
+		& ul > li {
+
+			line-height : 1.2rem;
+
+		}
+
+	}
+
 }

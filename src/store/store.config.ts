@@ -19,6 +19,7 @@ import { knowledgeBaseReducer } from './reducers/knowledge-base.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { AppState } from './states/app.state';
 import { KnowledgeBaseEntitiesEffects } from './effects/knowledge-base-entities.effects';
+import { KnowledgeBaseTagsEffects } from './effects/knowledge-base-tags.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -52,6 +53,7 @@ export const effects = [
 
 	// Knowledge Base
 	KnowledgeBaseEntitiesEffects,
+	KnowledgeBaseTagsEffects,
 
 	// Database
 	DatabaseEffects,

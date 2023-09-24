@@ -10,11 +10,13 @@ const routes: Route[] = [
 
 	{
 		path: '',
-		component: KBEntryListPageComponent
+		component: KBEntryListPageComponent,
+		//canActivate: [kbEntryGuard]
 	},
 	{
 		path: 'new',
-		component: KBEntryFormPageComponent
+		component: KBEntryFormPageComponent,
+		// canActivate: [kbEntryGuard]
 	},
 	{
 		path: ':id',
@@ -24,7 +26,7 @@ const routes: Route[] = [
 	{
 		path: ':id/edit',
 		component: KBEntryFormPageComponent,
-		canActivate: [kbEntryGuard]
+		// canActivate: [kbEntryGuard]
 	},
 	{
 		path: ':id/edit/content',

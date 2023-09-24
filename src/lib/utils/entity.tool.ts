@@ -1,41 +1,45 @@
-import { Bookmark, RemoteData } from "lib/models";
+import { UUID } from "lib/constants";
+import { KBEntry, KBEntryNode } from "lib/models";
 
-export const createRemoteData = <T>(num: number, entity: T): RemoteData<T> => ({
+export const toKBEntryNodes = (entries: KBEntry[]): Record<UUID, KBEntryNode> => {
 
-	entity,
-	metaData: {
-		id: `id${num}`,
-		createTime: new Date().toISOString(),
-		updateTime: new Date().toISOString()
-	}
+	// create dictionary
+	const dictionary: Record<UUID, KBEntryNode> = entries.reduce(
 
-});
+		(dictionary, entry) => {
 
-export const createBookmark = (num: number, id?: string): Bookmark => ({
+			dictionary[entry.id] = { ...entry, parent: null, children: [] } as KBEntryNode;
+			return dictionary;
 
-	id: id ?? `id${num}`,
-	name: `name${num}`,
-	title: `title${num}`,
-	tags: [`tag${num}`],
-	urls: [`url${num}`],
-	clicks: num
+		},
+		{} as Record<UUID, KBEntryNode>
 
-});
-
-export const createNBookmarks = (length: number, start: number = 1): Bookmark[] => {
-
-	return Array.from(
-		{ length },
-		(_, index) => createBookmark(start + index)
 	);
 
-}
+	// add remaining properties
+	entries.forEach(e => {
 
-export const createNRemoteDataBookmarks = (length: number, start: number = 1): RemoteData<Bookmark>[] => {
+		// if not root
+		if (e.parentId) {
 
-	return Array.from(
-		{ length },
-		(_, index) => createRemoteData(start + index, createBookmark(start + index))
-	);
+			// lookup parent
+			const parent = dictionary[e.parentId];
+			if (parent) {
+
+				// lookup node
+				const node = dictionary[e.id];
+				if (node) {
+
+					parent.children.push(node);
+					node.parent = parent;
+
+				}
+
+			}
+
+		}
+
+	})
+	return dictionary;
 
 }

@@ -2,40 +2,33 @@ import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { UUID } from "lib";
-import { Observable, of, switchMap, tap, withLatestFrom } from "rxjs";
-import { navigate } from "store/actions/core-navigation.actions";
+import { Observable, iif, of, switchMap, tap } from "rxjs";
 import { showNotification } from "store/actions/core-notification.actions";
-import { setSelected } from "store/actions/knowledge-base.actions";
-import { selKBEntries } from "store/selectors/knowledge-base-entities.selectors";
+import { setSelected } from "store/actions/kb-entry-entity.actions";
+import { selKBEntriesDictionary } from "store/selectors/knowledge-base-entities.selectors";
 
 export const kbEntryGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
 
 	const store = inject(Store);
-	const id: UUID | null = route.paramMap.get('id');
+	const paramId: UUID | null = route.paramMap.get('id');
+	if (paramId === null)
+		return preventRouting(store, 'Navigation Error', 'ID could not be read from URL');
 
-	return of(id).pipe(
+	const id: UUID = paramId;
+	return store.select(selKBEntriesDictionary).pipe(
 
-		withLatestFrom(store.select(selKBEntries)),
-		switchMap(([id, entries]) => {
+		switchMap(entries => iif(
 
-			// check id
-			if (id == null)
-				return preventRouting(store, 'id not available', 'ID: ' + id);
+			() => entries[id] === null,
+			preventRouting(store, 'KB Entry not found', 'ID: ' + id),
+			of(true).pipe(
 
-			// retrieve entry
-			const entry = entries[id];
-			if (entry)
-				return of(true).pipe(
+				// dispatch id
+				tap(() => store.dispatch(setSelected({ id })))
 
-					// dispatch id
-					tap(() => store.dispatch(setSelected({ id })))
+			)
 
-				);
-
-			// dispatch error if no entry found
-			return preventRouting(store, 'KB Entry not found', 'ID: ' + id);
-
-		})
+		))
 
 	);
 
@@ -45,8 +38,7 @@ function preventRouting(store: Store, summary: string, detail: string): Observab
 
 	return of(false).pipe(
 
-		tap(() => store.dispatch(showNotification({ severity: 'warn', summary, detail }))),
-		tap(() => store.dispatch(navigate({ url: 'kb' }))),
+		tap(() => store.dispatch(showNotification({ severity: 'warn', summary, detail })))
 
 	);
 

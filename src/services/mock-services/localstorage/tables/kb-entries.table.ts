@@ -26,8 +26,6 @@ export class MockKBEntriesTableImpl implements KBEntriesTable {
 			tags: [],
 			urls: [''],
 			parentId: null,
-			parent: null,
-			entries: [],
 			updated: new Date().toISOString(),
 			...item,
 			id: uuidv4()

@@ -1,30 +1,20 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { KBEntry, UUID } from 'lib';
+import { KBEntry, KBEntryNode, UUID } from 'lib';
 import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { Subject, Subscription } from 'rxjs';
 import { EditFormImpl, KBEntryForm, KB_ENTRY_FORM } from './kb-entry-form';
 import { TreeNode } from 'primeng/api';
 
-function transformEntries(entries?: KBEntry[]): TreeNode<KBEntry>[] {
+function toTreeNode(nodes: KBEntryNode[]): TreeNode<void>[] {
 
-	return [
-		{ label: '[Root Entry]' },
-		...toTreeNode(entries?.filter(e => e.parentId === null))
-	];
-
-}
-
-function toTreeNode(entries?: KBEntry[]): TreeNode<KBEntry>[] {
-
-	if (entries)
-		return entries
-			.reduce(
-				(prev, e) => { prev.push({ key: e.id, label: e.name, children: toTreeNode(e.entries) } as TreeNode); return prev; },
-				[] as TreeNode<KBEntry>[]
-			)
-			.sort((a, b) => a.label! > b.label! ? 1 : -1);
-	return [];
+	return nodes.map(node => (
+		{
+			key: node.id,
+			label: node.name,
+			children: toTreeNode(node.children)
+		} as TreeNode<void>
+	));
 
 }
 
@@ -37,7 +27,7 @@ function toTreeNode(entries?: KBEntry[]): TreeNode<KBEntry>[] {
 export class KBEntryFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	@Input() kbEntry: KBEntry | null | undefined;
-	@Input({ transform: transformEntries }) parents: TreeNode<KBEntry>[] = [];
+	@Input({ transform: toTreeNode }) parents: TreeNode<void>[] = [];
 	@Input() tagSuggestions: string[] | null | undefined;
 
 	@Output() create: EventEmitter<Partial<KBEntry>> = new EventEmitter();

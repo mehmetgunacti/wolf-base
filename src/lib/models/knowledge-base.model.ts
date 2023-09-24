@@ -1,21 +1,25 @@
 import { UUID } from "lib/constants";
 import { Entity } from "./entity.model";
-import { ISODateString } from "./id-base.model";
+import { IDBase, ISODateString } from "./id-base.model";
 
 export interface KBEntry extends Entity {
 
-    parentId: UUID | null;
-    tags: string[],
-    updated: ISODateString;
-    urls: string[];
-
-    parent: KBEntry | null;
-    entries: KBEntry[];
+	parentId: UUID | null;
+	tags: string[],
+	updated: ISODateString;
+	urls: string[];
 
 }
 
-// export interface KBContent extends IDBase {
+export interface KBEntryNode extends KBEntry {
 
-//     content: string;
+	parent: KBEntryNode | null;
+	children: KBEntryNode[];
 
-// }
+}
+
+export interface KBContent extends IDBase {
+
+	content: string;
+
+}
