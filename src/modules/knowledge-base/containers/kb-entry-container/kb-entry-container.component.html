@@ -1,1 +1,25 @@
-<app-kb-entry [kbEntryNode]="kbEntryNode$ | async"></app-kb-entry>
+<app-portal outletName="portal-outlet-right">
+
+	<button
+		pButton
+		pRipple
+		type="button"
+		label="Entry"
+		icon="pi pi-pencil"
+		class="p-button-text p-button-sm"
+		routerLink="edit">
+	</button>
+
+	<button
+		pButton
+		pRipple
+		type="button"
+		label="Add"
+		icon="pi pi-plus"
+		class="p-button-text p-button-sm"
+		routerLink="edit">
+	</button>
+
+</app-portal>
+
+<app-kb-entry [entry]="entry$ | async"></app-kb-entry>

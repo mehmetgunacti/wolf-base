@@ -1,18 +1,26 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { KBEntry, KBEntryNode, UUID } from 'lib';
 import { TreeNode } from 'primeng/api';
 import { EditFormImpl, KBEntryForm, KB_ENTRY_FORM } from './kb-entry-form';
 
+const confirmMessage = (name: string) => `
+${name}
+
+will be deleted. Continue?`;
+
 function toTreeNode(nodes: KBEntryNode[]): TreeNode<void>[] {
 
-	return nodes.map(node => (
+	const a = nodes.map(node => (
 		{
 			key: node.id,
 			label: node.name,
 			children: toTreeNode(node.children)
 		} as TreeNode<void>
 	));
+	console.log(a);
+	return a;
+	
 
 }
 
@@ -22,37 +30,28 @@ function toTreeNode(nodes: KBEntryNode[]): TreeNode<void>[] {
 	providers: [{ provide: KB_ENTRY_FORM, useClass: EditFormImpl }],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class KBEntryFormComponent implements OnInit, OnChanges {
+export class KBEntryFormComponent {
 
-	@Input() kbEntry: KBEntry | null | undefined;
+	@Input() set entry(value: KBEntry | null) {
+
+		if (value) {
+
+			this.kbEntry = value;
+			this.form.patchValue(value);
+
+		}
+
+	};
 	@Input({ transform: toTreeNode }) parents: TreeNode<void>[] = [];
 
 	@Output() create: EventEmitter<Partial<KBEntry>> = new EventEmitter();
 	@Output() update: EventEmitter<{ id: UUID, kbEntry: Partial<KBEntry> }> = new EventEmitter();
 	@Output() delete: EventEmitter<UUID> = new EventEmitter();
 
+	kbEntry: KBEntry | null = null;
 	form: KBEntryForm = inject(KB_ENTRY_FORM);
 	fcParentNodes = new FormControl();
 	isPopular: boolean = false;
-
-	constructor() { }
-
-	ngOnInit(): void {
-
-		if (this.kbEntry)
-			this.form.setValues(this.kbEntry);
-
-	}
-
-	ngOnChanges(changes: SimpleChanges): void {
-
-		const kbEntry: KBEntry = changes['kbEntry']?.currentValue;
-		if (kbEntry)
-			this.form.patchValue({
-				...kbEntry,
-			});
-
-	}
 
 	onSave(): void {
 
@@ -72,27 +71,20 @@ export class KBEntryFormComponent implements OnInit, OnChanges {
 		if (!this.kbEntry)
 			return;
 
-		if (
-			confirm(`
-${this.kbEntry.name}
-
-will be deleted. Continue?`)
-		)
+		if (confirm(confirmMessage(this.kbEntry.name)))
 			this.delete.emit(this.kbEntry.id);
 
 	}
 
 	onTogglePopular(): void {
 
-		// todo
-		console.log('todo: toggle popular');
+		this.form.togglePopular();
 
 	}
 
 	addURL(): void {
 
 		this.form.addURL();
-		console.log(this.parents);
 
 	}
 
@@ -102,7 +94,7 @@ will be deleted. Continue?`)
 
 	}
 
-	checkUrl(event: Event): void {
+	prefixUrl(event: Event): void {
 
 		const inputElement = event.target as HTMLInputElement;
 		const value = inputElement.value;
@@ -110,6 +102,11 @@ will be deleted. Continue?`)
 		if (value === "h" || value === "H")
 			inputElement.value = "https://www.";
 
+	}
+
+	nodeSelect(a: any): void {
+		console.log(a);
+		
 	}
 
 }

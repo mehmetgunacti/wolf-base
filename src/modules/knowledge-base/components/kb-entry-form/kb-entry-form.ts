@@ -10,6 +10,7 @@ interface EditForm {
 	parentId: FormControl<TreeNode | null>;
 	name: FormControl<string>;
 	urls: FormArray<FormControl<string | null>>;
+	popular: FormControl<boolean>;
 
 }
 
@@ -17,6 +18,7 @@ export interface KBEntryForm extends EditForm, FormClass<KBEntry> {
 
 	addURL(): void;
 	removeURL(idx: number): void;
+	togglePopular(): void;
 
 }
 
@@ -32,7 +34,8 @@ export class EditFormImpl extends FormClassImpl<KBEntry> implements KBEntryForm 
 			name: new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
 			urls: new FormArray([
 				new FormControl('')
-			])
+			]),
+			popular: new FormControl()
 		});
 
 	}
@@ -70,8 +73,14 @@ export class EditFormImpl extends FormClassImpl<KBEntry> implements KBEntryForm 
 	}
 
 	removeURL(idx: number): void {
-		
+
 		this.urls.removeAt(idx);
+
+	}
+
+	togglePopular(): void {
+		
+		this.popular.setValue(!this.popular.getRawValue());
 
 	}
 
@@ -87,16 +96,12 @@ export class EditFormImpl extends FormClassImpl<KBEntry> implements KBEntryForm 
 		return <FormControl<string>>this._formGroup.controls['name'];
 	}
 
-	get title(): FormControl<string> {
-		return <FormControl<string>>this._formGroup.controls['title'];
-	}
-
-	get image(): FormControl<string | null> {
-		return <FormControl<string | null>>this._formGroup.controls['image'];
-	}
-
 	get urls(): FormArray {
 		return <FormArray>this._formGroup.controls['urls'];
+	}
+
+	get popular(): FormControl<boolean> {
+		return <FormControl<boolean>>this._formGroup.controls['popular'];
 	}
 
 }

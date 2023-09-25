@@ -26,7 +26,7 @@ const routes: Route[] = [
 	{
 		path: ':id/edit',
 		component: KBEntryFormPageComponent,
-		// canActivate: [kbEntryGuard]
+		canActivate: [kbEntryGuard]
 	},
 	{
 		path: ':id/edit/content',

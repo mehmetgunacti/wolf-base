@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { KBEntry, KBEntryNode, UUID } from 'lib';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { createEntity, deleteEntity, updateEntity } from 'store/actions/kb-entry-entity.actions';
-import { selKBEntryNodeRootNodesArray } from 'store/selectors/knowledge-base-entities.selectors';
+import { selKBEntryNodeRootNodesArray, selKBEntrySelectedEntry } from 'store/selectors/knowledge-base-entities.selectors';
 
 @Component({
 	selector: 'app-kb-entry-form-container',
@@ -14,11 +14,13 @@ export class KBEntryFormContainerComponent {
 
 	private store: Store = inject(Store);
 
+	entry$: Observable<KBEntry | null>;
 	kbParents$: Observable<KBEntryNode[]>;
 
 	constructor() {
 
-		this.kbParents$ = this.store.select(selKBEntryNodeRootNodesArray);
+		this.entry$ = this.store.select(selKBEntrySelectedEntry);
+		this.kbParents$ = this.store.select(selKBEntryNodeRootNodesArray).pipe(tap(a => console.log(a)));
 
 	}
 

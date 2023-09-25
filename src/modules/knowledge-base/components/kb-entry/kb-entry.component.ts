@@ -30,7 +30,7 @@ export class KBEntryComponent implements OnInit {
 	childrenMenuItems: MenuItem[] = [];
 	home: MenuItem = { icon: PrimeIcons.HOME, routerLink: '/kb' };
 
-	@Input() set kbEntryNode(node: KBEntryNode | null | undefined) {
+	@Input() set entry(node: KBEntryNode | null | undefined) {
 
 		if (node) {
 

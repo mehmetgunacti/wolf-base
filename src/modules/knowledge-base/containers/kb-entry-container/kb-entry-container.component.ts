@@ -13,11 +13,11 @@ export class KBEntryContainerComponent {
 
 	private store: Store = inject(Store);
 
-	kbEntryNode$: Observable<KBEntryNode | null>;
+	entry$: Observable<KBEntryNode | null>;
 
 	constructor() {
 
-		this.kbEntryNode$ = this.store.select(selKBEntrySelectedEntry);
+		this.entry$ = this.store.select(selKBEntrySelectedEntry);
 
 	}
 

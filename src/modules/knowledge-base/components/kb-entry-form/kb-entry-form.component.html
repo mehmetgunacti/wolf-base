@@ -1,12 +1,12 @@
 <form>
 
 	<!-- ID -->
-	<div *ngIf="kbEntry?.id">
+	<div *ngIf="form.id">
 		<span class="p-float-label p-fluid">
 			<input
 				type="text"
 				pInputText
-				[value]="kbEntry?.id"
+				[formControl]="form.id"
 				readonly>
 			<label>ID</label>
 		</span>
@@ -27,7 +27,7 @@
 	<!-- PARENT -->
 	<div>
 		<span class="p-float-label p-fluid md:w-20rem w-full">
-			<p-treeSelect inputId="parentID" [options]="parents" [formControl]="form.parentId"></p-treeSelect>
+			<p-treeSelect inputId="parentID" [options]="parents" [formControl]="form.parentId" (onNodeSelect)="nodeSelect($event)"></p-treeSelect>
 			<label for="parentID">Parent Entry</label>
 		</span>
 	</div>
@@ -41,7 +41,7 @@
 				pInputText
 				[ngClass]="{ 'ng-invalid ng-dirty': fcUrl.invalid && fcUrl.dirty }"
 				[formControl]="fcUrl"
-				(input)="checkUrl($event)">
+				(input)="prefixUrl($event)">
 			<label>URL {{ form.urls.controls.length > 1 && idx === 0 ? '(Primary)' : '' }}</label>
 		</span>
 		<button *ngIf="idx === 0" pButton pRipple type="button" icon="pi pi-plus" class="p-button-text" title="Add URL" (click)="addURL()"></button>

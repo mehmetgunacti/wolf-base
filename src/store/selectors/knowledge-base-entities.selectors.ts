@@ -9,6 +9,13 @@ export const selKBEntryArray = createSelector(
 
 );
 
+export const selKBEntryIDs = createSelector(
+
+	selKBEntryArray,
+	entries => entries.map(e => e.id)
+
+);
+
 export const selKBEntryRootEntryArray = createSelector(
 
 	selKBEntryArray,

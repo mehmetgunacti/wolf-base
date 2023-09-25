@@ -3,9 +3,10 @@ import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from "@ang
 import { Store } from "@ngrx/store";
 import { UUID } from "lib";
 import { Observable, iif, of, switchMap, tap } from "rxjs";
+import { navigate } from "store/actions/core-navigation.actions";
 import { showNotification } from "store/actions/core-notification.actions";
 import { setSelected } from "store/actions/kb-entry-entity.actions";
-import { selKBEntryNodeDictionary } from "store/selectors/knowledge-base-entities.selectors";
+import { selKBEntryIDs } from "store/selectors/knowledge-base-entities.selectors";
 
 export const kbEntryGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
 
@@ -15,18 +16,18 @@ export const kbEntryGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 		return preventRouting(store, 'Navigation Error', 'ID could not be read from URL');
 
 	const id: UUID = paramId;
-	return store.select(selKBEntryNodeDictionary).pipe(
+	return store.select(selKBEntryIDs).pipe(
 
-		switchMap(entries => iif(
+		switchMap(entrIds => iif(
 
-			() => entries[id] === null,
-			preventRouting(store, 'KB Entry not found', 'ID: ' + id),
+			() => entrIds.includes(id),
 			of(true).pipe(
 
 				// dispatch id
 				tap(() => store.dispatch(setSelected({ id })))
 
-			)
+			),
+			preventRouting(store, 'KB Entry not found', 'ID: ' + id)
 
 		))
 
@@ -38,7 +39,8 @@ function preventRouting(store: Store, summary: string, detail: string): Observab
 
 	return of(false).pipe(
 
-		tap(() => store.dispatch(showNotification({ severity: 'warn', summary, detail })))
+		tap(() => store.dispatch(showNotification({ severity: 'warn', summary, detail }))),
+		tap(() => store.dispatch(navigate({ url: '/kb' })))
 
 	);
 
