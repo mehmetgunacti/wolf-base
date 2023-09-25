@@ -97,6 +97,12 @@ app-core-page {
 			transition			: margin-left $animation-duration $animation-ease;
 			padding				: $default-padding;
 
+			@include lg() {
+
+				padding-right	: 0;
+
+			}
+
 			& > div[bottom-buttons] {
 
 				@extend %flex-row;
