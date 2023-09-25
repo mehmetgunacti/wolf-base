@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { KBEntry } from 'lib';
-import { Observable } from 'rxjs';
+import { MenuItem, PrimeIcons } from 'primeng/api';
+import { Observable, map } from 'rxjs';
 import { selKBEntryRootEntryArray } from 'store/selectors/knowledge-base-entities.selectors';
 
 @Component({
@@ -13,11 +13,15 @@ export class KBEntryListContainerComponent {
 
 	private store: Store = inject(Store);
 
-	kbEntries$: Observable<KBEntry[]>;
+	menuItems$: Observable<MenuItem[]>;
 
 	constructor() {
 
-		this.kbEntries$ = this.store.select(selKBEntryRootEntryArray);
+		this.menuItems$ = this.store.select(selKBEntryRootEntryArray).pipe(
+
+			map(entries => entries.map(n => ({ label: n.name, icon: PrimeIcons.ANGLE_RIGHT, routerLink: ['/kb', n.id] })))
+
+		);
 
 	}
 

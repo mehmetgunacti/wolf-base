@@ -1,7 +1,5 @@
 <p-card header="Knowledge Base">
 
-	<ul>
-		<li *ngFor="let kbEntry of kbEntries$ | async"><a [routerLink]="kbEntry.id">{{ kbEntry.name }}</a></li>
-	</ul>
+	<p-menu [model]="(menuItems$ | async) ?? []"></p-menu>
 
 </p-card>

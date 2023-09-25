@@ -1,5 +1,12 @@
 app-kb-entry-list-container {
 
 	display: grid;
+	.p-menu {
+
+		box-shadow	: none;
+		border		: none;
+		width		: 100%;
+
+	}
 
 }
