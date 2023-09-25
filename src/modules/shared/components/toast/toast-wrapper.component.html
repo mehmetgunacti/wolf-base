@@ -1,6 +1,0 @@
-<app-toast *ngFor="let toast of toasts$ | async"
-			@animateToast
-			[conf]="toast"
-			(close)="onClose($event)"
-			(click)="onClose(toast?.id ?? -1)">
-</app-toast>
