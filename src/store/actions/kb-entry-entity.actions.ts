@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { KBEntry, RemoteMetadata, SyncData, UUID } from 'lib';
 
-export const loadAllEntitiesSuccess		= createAction('[KB Entry] Load All Entities Success', props<{ kbEntries: KBEntry[] }>());
+export const loadAllEntitiesSuccess		= createAction('[KB Entry] Load All Entities Success', props<{ entries: KBEntry[] }>());
 
 export const createEntity				= createAction('[KB Entry] Create Entity', props<{ kbEntry: Partial<KBEntry> }>());
 export const createEntitySuccess		= createAction('[KB Entry] Create Entity Success', props<{ kbEntry: KBEntry }>());

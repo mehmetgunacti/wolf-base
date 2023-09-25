@@ -5,9 +5,9 @@ import { IDBase, ISODateString } from "./id-base.model";
 export interface KBEntry extends Entity {
 
 	parentId: UUID | null;
-	tags: string[],
 	updated: ISODateString;
 	urls: string[];
+	popular: boolean;
 
 }
 

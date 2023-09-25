@@ -1,11 +1,9 @@
 <p-card header="Knowledge Base Entry">
 
 	<app-kb-entry-form
-		[tagSuggestions]="tagSuggestions$ | async"
 		[parents]="(kbParents$ | async) || []"
 		(create)="onCreate($event)"
 		(update)="onUpdate($event.id, $event.kbEntry)"
-		(delete)="onDelete($event)"
-		(tagInput)="onTagInput($event)"></app-kb-entry-form>
+		(delete)="onDelete($event)"></app-kb-entry-form>
 
 </p-card>

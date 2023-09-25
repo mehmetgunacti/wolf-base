@@ -1,48 +1,24 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { KBEntry, KBEntryNode, UUID } from 'lib';
-import { Observable, Subject, combineLatest, filter, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { createEntity, deleteEntity, updateEntity } from 'store/actions/kb-entry-entity.actions';
-import { selKBEntryRootNodes } from 'store/selectors/knowledge-base-entities.selectors';
-import { distinctTagsArray } from 'store/selectors/knowledge-base-tags.selectors';
+import { selKBEntryNodeRootNodesArray } from 'store/selectors/knowledge-base-entities.selectors';
 
 @Component({
 	selector: 'app-kb-entry-form-container',
 	templateUrl: './kb-entry-form-container.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class KBEntryFormContainerComponent implements AfterContentInit {
+export class KBEntryFormContainerComponent {
 
 	private store: Store = inject(Store);
 
-	tagSuggestions$!: Observable<string[]>;
-	tagInput = new Subject<string>();
 	kbParents$: Observable<KBEntryNode[]>;
 
 	constructor() {
 
-		this.kbParents$ = this.store.select(selKBEntryRootNodes);
-
-	}
-
-	ngAfterContentInit(): void {
-
-		this.tagSuggestions$ = combineLatest([
-			this.store.select(distinctTagsArray),
-			this.tagInput
-		]).pipe(
-
-			filter(([tags, tagInput]) => !!tagInput && tags.length > 0),
-			map(
-
-				([tags, tagInput]) =>
-					tags
-						.filter(t => t.name.startsWith(tagInput))
-						.map(t => t.name)
-
-			)
-
-		);
+		this.kbParents$ = this.store.select(selKBEntryNodeRootNodesArray);
 
 	}
 
@@ -61,12 +37,6 @@ export class KBEntryFormContainerComponent implements AfterContentInit {
 	onDelete(id: UUID): void {
 
 		this.store.dispatch(deleteEntity({ id }));
-
-	}
-
-	onTagInput(val: string): void {
-
-		this.tagInput.next(val);
 
 	}
 

@@ -48,23 +48,6 @@
 		<button *ngIf="idx > 0" pButton pRipple type="button" icon="pi pi-minus" class="p-button-text" title="Remove URL" (click)="removeURL(idx)"></button>
 	</div>
 
-	<!-- TAGS -->
-	<div>
-		<span class="p-float-label p-fluid">
-			<p-autoComplete
-				#autocomplete
-				[formControl]="form.tags"
-				[suggestions]="(tagSuggestions$ | async) || []"
-				(completeMethod)="onTagInput($event)"
-				[multiple]="true"
-				[overlayOptions]="{ baseZIndex: 10000 }"
-				appendTo="body">
-			</p-autoComplete>
-			<label>Tags</label>
-		</span>
-		<button pButton pRipple type="button" [icon]="isPopular ? 'pi pi-heart-fill' : 'pi pi-heart'" class="p-button-text" title="Toggle 'popular'" (click)="onTogglePopular()"></button>
-	</div>
-
 </form>
 
 <div form-element-buttons>

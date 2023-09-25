@@ -5,7 +5,7 @@ import { UUID } from "lib";
 import { Observable, iif, of, switchMap, tap } from "rxjs";
 import { showNotification } from "store/actions/core-notification.actions";
 import { setSelected } from "store/actions/kb-entry-entity.actions";
-import { selKBEntriesDictionary } from "store/selectors/knowledge-base-entities.selectors";
+import { selKBEntryNodeDictionary } from "store/selectors/knowledge-base-entities.selectors";
 
 export const kbEntryGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
 
@@ -15,7 +15,7 @@ export const kbEntryGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 		return preventRouting(store, 'Navigation Error', 'ID could not be read from URL');
 
 	const id: UUID = paramId;
-	return store.select(selKBEntriesDictionary).pipe(
+	return store.select(selKBEntryNodeDictionary).pipe(
 
 		switchMap(entries => iif(
 

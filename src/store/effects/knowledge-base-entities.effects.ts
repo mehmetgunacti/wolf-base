@@ -27,7 +27,7 @@ export class KnowledgeBaseEntitiesEffects {
 			(handler, unsubscribe) => unsubscribe()
 
 		).pipe(
-			map(kbEntries => loadAllEntitiesSuccess({ kbEntries }))
+			map(entries => loadAllEntitiesSuccess({ entries }))
 		)
 
 	);

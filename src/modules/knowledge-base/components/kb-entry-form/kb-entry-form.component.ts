@@ -1,10 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { KBEntry, KBEntryNode, UUID } from 'lib';
-import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
-import { Subject, Subscription } from 'rxjs';
-import { EditFormImpl, KBEntryForm, KB_ENTRY_FORM } from './kb-entry-form';
 import { TreeNode } from 'primeng/api';
+import { EditFormImpl, KBEntryForm, KB_ENTRY_FORM } from './kb-entry-form';
 
 function toTreeNode(nodes: KBEntryNode[]): TreeNode<void>[] {
 
@@ -24,43 +22,25 @@ function toTreeNode(nodes: KBEntryNode[]): TreeNode<void>[] {
 	providers: [{ provide: KB_ENTRY_FORM, useClass: EditFormImpl }],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class KBEntryFormComponent implements OnInit, OnChanges, OnDestroy {
+export class KBEntryFormComponent implements OnInit, OnChanges {
 
 	@Input() kbEntry: KBEntry | null | undefined;
 	@Input({ transform: toTreeNode }) parents: TreeNode<void>[] = [];
-	@Input() tagSuggestions: string[] | null | undefined;
 
 	@Output() create: EventEmitter<Partial<KBEntry>> = new EventEmitter();
 	@Output() update: EventEmitter<{ id: UUID, kbEntry: Partial<KBEntry> }> = new EventEmitter();
 	@Output() delete: EventEmitter<UUID> = new EventEmitter();
-	@Output() tagInput: EventEmitter<string> = new EventEmitter();
-
-	@ViewChild('autocomplete') autocompleteChange!: AutoComplete;
 
 	form: KBEntryForm = inject(KB_ENTRY_FORM);
 	fcParentNodes = new FormControl();
-	tagSuggestions$: Subject<string[]>;
-	subscriptions: Subscription = new Subscription();
 	isPopular: boolean = false;
 
-	constructor() {
-
-		this.tagSuggestions$ = new Subject<string[]>();
-
-	}
+	constructor() { }
 
 	ngOnInit(): void {
 
 		if (this.kbEntry)
 			this.form.setValues(this.kbEntry);
-
-		this.subscriptions.add(
-
-			this.form.tags.valueChanges.subscribe(
-				tags => this.isPopular = tags.includes('popular')
-			)
-
-		);
 
 	}
 
@@ -71,16 +51,6 @@ export class KBEntryFormComponent implements OnInit, OnChanges, OnDestroy {
 			this.form.patchValue({
 				...kbEntry,
 			});
-
-		const tagSuggestions: string[] = changes['tagSuggestions']?.currentValue;
-		if (tagSuggestions)
-			this.tagSuggestions$.next(tagSuggestions);
-
-	}
-
-	ngOnDestroy(): void {
-
-		this.subscriptions.unsubscribe();
 
 	}
 
@@ -112,30 +82,10 @@ will be deleted. Continue?`)
 
 	}
 
-	onTagInput(event: AutoCompleteCompleteEvent): void {
-
-		if (event.query.endsWith(' ')) {
-
-			this.form.tags.patchValue([
-				...this.form.tags.getRawValue(),
-				event.query.substring(0, event.query.length - 1)
-			]);
-			this.tagSuggestions$.next([]);
-			if (this.autocompleteChange.multiInputEl)
-				this.autocompleteChange.multiInputEl.nativeElement.value = '';
-
-		} else
-			this.tagInput.emit(event.query);
-
-	}
-
 	onTogglePopular(): void {
 
-		const POPULAR = 'popular';
-		const tags: string[] = this.form.tags.value;
-		this.form.tags.setValue(
-			tags.includes(POPULAR) ? tags.filter(v => v !== POPULAR) : [POPULAR, ...tags]
-		);
+		// todo
+		console.log('todo: toggle popular');
 
 	}
 

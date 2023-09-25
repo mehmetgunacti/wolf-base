@@ -1,35 +1,41 @@
 import { createSelector } from '@ngrx/store';
-import { KBEntry, UUID } from 'lib';
-import { TreeNode } from 'primeng/api';
 import { selKnowledgeBaseEntitiesState } from './knowledge-base.selectors';
+import { KBEntryNode, UUID, toKBEntryNodes } from 'lib';
 
-export const selKBEntriesDictionary = createSelector(
+export const selKBEntryArray = createSelector(
 
 	selKnowledgeBaseEntitiesState,
-	entities => entities.entities
+	state => state.entries
 
 );
 
-export const selKBEntryNodeArray = createSelector(
+export const selKBEntryRootEntryArray = createSelector(
 
-	selKnowledgeBaseEntitiesState,
-	state => Object.values(state.entities)
-
-);
-
-export const selKBEntryRootNodes = createSelector(
-
-	selKBEntryNodeArray,
+	selKBEntryArray,
 	entries => entries.filter(e => e.parentId === null)
 
 );
 
-// export const selKBEntriesCount = createSelector(
+export const selKBEntryNodeDictionary = createSelector(
 
-// 	selKBEntriesArray,
-// 	entries => entries.length
+	selKBEntryArray,
+	(entries): Record<UUID, KBEntryNode> => toKBEntryNodes(entries)
 
-// );
+);
+
+export const selKBEntryNodeRootNodesArray = createSelector(
+
+	selKBEntryNodeDictionary,
+	(dictionary): KBEntryNode[] => Object.values(dictionary).filter(k => k.parentId === null)
+
+);
+
+export const selKBEntriesCount = createSelector(
+
+	selKBEntryArray,
+	entries => entries.length
+
+);
 
 export const selKBEntrySelectedId = createSelector(
 
@@ -40,7 +46,7 @@ export const selKBEntrySelectedId = createSelector(
 
 export const selKBEntrySelectedEntry = createSelector(
 
-	selKBEntriesDictionary,
+	selKBEntryNodeDictionary,
 	selKBEntrySelectedId,
 	(dictionary, id) => id ? dictionary[id] : null
 

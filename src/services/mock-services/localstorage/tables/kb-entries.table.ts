@@ -23,11 +23,11 @@ export class MockKBEntriesTableImpl implements KBEntriesTable {
 		const kbEntry: KBEntry = {
 
 			name: '',
-			tags: [],
 			urls: [''],
 			parentId: null,
 			updated: new Date().toISOString(),
 			...item,
+			popular: false,
 			id: uuidv4()
 
 		};
@@ -233,15 +233,6 @@ export class MockKBEntriesTableImpl implements KBEntriesTable {
 
 		this.kbEntries_sync.set(data.id, syncData);
 		this.kbEntries_remote.set(data.id, data);
-
-	}
-
-	async toggleTag(id: string, name: string): Promise<void> {
-
-		await sleep(SLEEP);
-		const kbEntry: KBEntry | undefined = this.kbEntries.get(id);
-		if (kbEntry)
-			kbEntry.tags = toggleArrayItem(kbEntry.tags, name);
 
 	}
 

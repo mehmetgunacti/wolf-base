@@ -12,7 +12,7 @@ app-kb-entry {
 	& .p-breadcrumb {
 		
 		border : none;
-		&.p-breadcrumb-list {
+		& .p-breadcrumb-list {
 
 			flex-wrap: wrap !important;
 
@@ -36,29 +36,6 @@ app-kb-entry {
 		& i {
 
 			font-size : small;
-
-		}
-
-	}
-
-	& [node_tags] {
-
-		margin-bottom	: 0.5rem;
-		& p-tag {
-
-			margin-right: 0.3rem;
-
-			& .p-tag {
-
-				padding: 1px 7px;
-
-				& .p-tag-value {
-
-					font-size	: x-small;
-
-				}
-
-			}
 
 		}
 

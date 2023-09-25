@@ -12,7 +12,7 @@ export interface KnowledgeBaseModuleState {
 // todo move some properties to ui state
 export interface KnowledgeBaseEntitiesState {
 
-	entities: Record<UUID, KBEntryNode>;
+	entries: KBEntry[];
 	selected: UUID | null;
 	content: string | null;
 
@@ -52,7 +52,7 @@ export const initialKnowledgeBaseSyncState: KnowledgeBaseSyncState = {
 
 export const initialKnowledgeBaseEntitiesState: KnowledgeBaseEntitiesState = {
 
-	entities: {},
+	entries: [],
 	selected: null,
 	content: null
 
