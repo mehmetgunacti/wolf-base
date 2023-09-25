@@ -26,7 +26,8 @@ export class KBEntryComponent implements OnInit {
 
 	node: KBEntryNode | null = null;
 	content: KBContent | null | undefined;
-	menuItems: MenuItem[] = [];
+	parentMenuItems: MenuItem[] = [];
+	childrenMenuItems: MenuItem[] = [];
 	home: MenuItem = { icon: PrimeIcons.HOME, routerLink: '/kb' };
 
 	@Input() set kbEntryNode(node: KBEntryNode | null | undefined) {
@@ -34,7 +35,8 @@ export class KBEntryComponent implements OnInit {
 		if (node) {
 
 			this.node = node;
-			this.menuItems = createMenu(node?.parent ?? null);
+			this.parentMenuItems = createMenu(node?.parent ?? null);
+			this.childrenMenuItems = this.node.children.map(n => ({ label: n.name, icon: PrimeIcons.ANGLE_RIGHT, routerLink: ['/kb', n.id] }));
 
 		}
 

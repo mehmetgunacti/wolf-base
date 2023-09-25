@@ -1,15 +1,16 @@
-import { KBContentsTable, UUID } from 'lib';
+import { KBContent, KBContentsTable, UUID } from 'lib';
 
 export class MockKBContentsTableImpl implements KBContentsTable {
 
-	private contents: Record<UUID, string> = {}
+	// updated: new Date().toISOString(),
+	private contents: Record<UUID, KBContent> = {}
 
-	async set(key: UUID, value: string): Promise<void> {
+	async set(key: UUID, value: KBContent): Promise<void> {
 		this.contents[key] = value;
 	}
 
-	async get<T>(key: string): Promise<T | null> {
-		return (this.contents[key] ?? null) as T;
+	async get(key: string): Promise<KBContent | null> {
+		return (this.contents[key] ?? null) as KBContent;
 	}
 
 	async remove(key: UUID): Promise<void> {

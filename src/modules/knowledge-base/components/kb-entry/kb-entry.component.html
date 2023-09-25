@@ -1,20 +1,18 @@
-<p-card *ngIf="node">
+<p-breadcrumb [model]="parentMenuItems" [home]="home"></p-breadcrumb>
+<p-card *ngIf="node" [header]="node.name">
 
-	<ng-template pTemplate="header">
-		<p-breadcrumb [model]="menuItems" [home]="home"></p-breadcrumb>
-	</ng-template>
-
-	<div node_name>{{ node.name }}</div>
-	<div node_updated>
-		<i class="pi pi-clock"></i> {{ node.updated | date:'dd.MM.yyyy hh:mm' }}
-	</div>
 	<ng-container *ngIf="node.children.length > 0">
-		<details node_children [open]="!content || node.children.length < 3">
-			<summary>Entries</summary>
-			<ul>
-				<li *ngFor="let child of node.children"><a [routerLink]="['/kb', child.id]">{{ child.name }}</a></li>
-			</ul>
-		</details>
+
+		<p-panel header="Entries" [toggleable]="true" [collapsed]="!!content && node.children.length > 3">
+			<p-menu [model]="childrenMenuItems"></p-menu>
+		</p-panel>
+
 	</ng-container>
+	<br>
+	content
+
+	<ng-template pTemplate="footer" *ngIf="content">
+		<span updated><i class="pi pi-clock"></i> {{ content.updated | date:'EEEE dd.MM.yyyy hh:mm' }}</span>
+	</ng-template>
 
 </p-card>

@@ -33,6 +33,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { DataViewModule } from 'primeng/dataview';
 import { MessagesModule } from 'primeng/messages';
 import { TreeSelectModule } from 'primeng/treeselect';
+import { MenuModule } from 'primeng/menu';
 
 export const modules = [
 	AccordionModule,
@@ -55,6 +56,7 @@ export const modules = [
 	InputTextareaModule,
 	InputTextModule,
 	InputNumberModule,
+	MenuModule,
 	MessagesModule,
 	OverlayPanelModule,
 	PanelModule,

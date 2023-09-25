@@ -1,33 +1,44 @@
 app-kb-entry {
 
-	display: grid;
+	display	: grid;
+	gap		: 0.3rem;
 
-	& .p-card-body,
-	& .p-card-body .p-card-content {
+	// & .p-card-body,
+	// & .p-card-body .p-card-content {
 
-		padding-top : 0 !important;
+	// 	padding-top : 0 !important;
 
-	}
+	// }
 
-	& .p-breadcrumb {
+	.p-breadcrumb {
 		
 		border : none;
 		& .p-breadcrumb-list {
 
 			flex-wrap: wrap !important;
 
+			& .p-menuitem-text,
+			& .p-menuitem-separator,
+			& .p-menuitem-icon {
+
+				color: var(--text-color) !important;
+
+			}
+
 		}
 
 	}
 
-	& [node_name] {
+	.p-panel,
+	.p-menu {
 
-		font-size		: x-large;
-		margin-bottom	: 1rem;
+		box-shadow	: none;
+		border		: none;
+		width		: 100%;
 
 	}
 
-	& [node_updated] {
+	[node_updated] {
 
 		font-size		: small;
 		font-style		: italic;
@@ -43,15 +54,7 @@ app-kb-entry {
 
 	& [node_children] {
 
-		font-size : small;
-
-		& summary {
-
-			cursor : pointer;
-
-		}
-
-		& ul > li {
+		li {
 
 			line-height : 1.2rem;
 

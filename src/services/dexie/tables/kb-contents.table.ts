@@ -8,5 +8,7 @@ export class DexieKBContentsTableImpl extends KeyValueTableImpl implements KBCon
     constructor(db: WolfBaseDB) {
         super(db, LocalTableNames.kb_contents)
     }
+    
+    //	updated: new Date().toISOString(),
 
 }

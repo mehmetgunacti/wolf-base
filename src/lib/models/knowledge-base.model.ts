@@ -5,7 +5,6 @@ import { IDBase, ISODateString } from "./id-base.model";
 export interface KBEntry extends Entity {
 
 	parentId: UUID | null;
-	updated: ISODateString;
 	urls: string[];
 	popular: boolean;
 
@@ -21,5 +20,6 @@ export interface KBEntryNode extends KBEntry {
 export interface KBContent extends IDBase {
 
 	content: string;
+	updated: ISODateString;
 
 }
