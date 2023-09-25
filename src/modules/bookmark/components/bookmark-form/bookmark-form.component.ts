@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { Bookmark, ToastConfiguration, UUID } from 'lib';
-import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { BehaviorSubject, Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
 
@@ -22,7 +21,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	@Output() tagInput: EventEmitter<string> = new EventEmitter();
 	@Output() titleLookup: EventEmitter<ToastConfiguration> = new EventEmitter();
 
-	@ViewChild('autocomplete') autocompleteChange!: AutoComplete;
+	// @ViewChild('autocomplete') autocompleteChange!: AutoComplete;
 
 	form: BookmarkForm = inject(BOOKMARK_FORM);
 	bookmark$: Subject<Bookmark>;
@@ -114,22 +113,22 @@ will be deleted. Continue?`)
 
 	}
 
-	onTagInput(event: AutoCompleteCompleteEvent): void {
+	// onTagInput(event: AutoCompleteCompleteEvent): void {
 
-		if (event.query.endsWith(' ')) {
+	// 	if (event.query.endsWith(' ')) {
 
-			this.form.tags.patchValue([
-				...this.form.tags.getRawValue(),
-				event.query.substring(0, event.query.length - 1)
-			]);
-			this.tagSuggestions$.next([]);
-			if (this.autocompleteChange.multiInputEl)
-				this.autocompleteChange.multiInputEl.nativeElement.value = '';
+	// 		this.form.tags.patchValue([
+	// 			...this.form.tags.getRawValue(),
+	// 			event.query.substring(0, event.query.length - 1)
+	// 		]);
+	// 		this.tagSuggestions$.next([]);
+	// 		if (this.autocompleteChange.multiInputEl)
+	// 			this.autocompleteChange.multiInputEl.nativeElement.value = '';
 
-		} else
-			this.tagInput.emit(event.query);
+	// 	} else
+	// 		this.tagInput.emit(event.query);
 
-	}
+	// }
 
 	lookupTitle(): void {
 

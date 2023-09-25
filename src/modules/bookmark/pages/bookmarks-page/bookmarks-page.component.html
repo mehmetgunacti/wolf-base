@@ -36,7 +36,7 @@
 <app-bookmarks-search-and-tag-cloud-container tagCloud *ngIf="tagsVisible$ | async" @slideUpDown (search)="onSearch($event)"/>
 
 <!-- Edit Dialog -->
-<p-dialog
+<!-- <p-dialog
 	*ngIf="editDialogVisible$ | async"
 	header="Add Bookmark"
 	[draggable]="false"
@@ -47,11 +47,11 @@
 	[modal]="true"
 	[dismissableMask]="true"
 	[maximizable]="(isBigScreen$ | async) || false"
-	styleClass="bookmarkEditContainerComponent">
+	styleClass="bookmarkEditContainerComponent"> -->
 
 	<app-bookmark-edit-container></app-bookmark-edit-container>
 
-</p-dialog>
+<!-- </p-dialog> -->
 
 <!-- Bookmarks list -->
 <app-bookmarks-container></app-bookmarks-container>

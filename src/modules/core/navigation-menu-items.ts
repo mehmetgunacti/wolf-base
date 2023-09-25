@@ -1,4 +1,4 @@
-import { MenuItem, PrimeIcons } from 'primeng/api';
+import { MenuItem, PrimeIcons } from 'lib';
 
 export const miHome: MenuItem = {
 	label: 'Home',

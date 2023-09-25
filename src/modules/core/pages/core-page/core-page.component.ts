@@ -1,6 +1,6 @@
 import { Component, HostBinding, OnDestroy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { MenuItem, PrimeIcons } from 'primeng/api';
+import { MenuItem, PrimeIcons } from 'lib';
 import { Observable, Subscription, map } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
 import { setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';

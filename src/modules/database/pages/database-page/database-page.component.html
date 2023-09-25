@@ -12,11 +12,11 @@
 
 </app-portal>
 
-<p-card>
-
+<div>
+	dataview
 	<ng-container *ngIf="(content$ | async) ?? [] as content">
 
-		<p-dataView #dv [value]="content || []" [rows]="5" [paginator]="true">
+		<!-- <p-dataView #dv [value]="content || []" [rows]="5" [paginator]="true">
 
 			<ng-template pTemplate="header">
 
@@ -39,8 +39,8 @@
 
 			</ng-template>
 
-		</p-dataView>
+		</p-dataView> -->
 
 	</ng-container>
 
-</p-card>
+</div>

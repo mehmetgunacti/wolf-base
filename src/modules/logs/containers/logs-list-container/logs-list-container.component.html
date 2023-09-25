@@ -20,7 +20,7 @@
 	</button>
 
 </app-portal>
-<p-card *ngIf="logMessages$ | async as logs">
+<div *ngIf="logMessages$ | async as logs">
 
 	<ng-template pTemplate="header">
 		<span>Logs</span>
@@ -36,4 +36,4 @@
 	</ng-container>
 	<p *ngIf="logs.length === 0"><i>nothing to display</i></p>
 
-</p-card>
+</div>

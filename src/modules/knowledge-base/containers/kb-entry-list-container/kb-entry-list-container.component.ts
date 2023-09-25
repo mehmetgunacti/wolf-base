@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { MenuItem, PrimeIcons } from 'primeng/api';
+import { MenuItem, PrimeIcons } from 'lib';
 import { Observable, map } from 'rxjs';
 import { selKBEntryRootEntryArray } from 'store/selectors/knowledge-base-entities.selectors';
 

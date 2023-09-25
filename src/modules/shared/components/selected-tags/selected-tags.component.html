@@ -4,7 +4,7 @@
 		*ngFor="let tag of tags"
 		pButton
 		type="button"
-		[label]="tag"
+		[value]="tag"
 		(click)="onTagClick(tag)"
 		class="p-button p-button-sm"></button>
 
@@ -21,7 +21,7 @@
 		*ngFor="let tag of selectedTags"
 		pButton
 		type="button"
-		[label]="tag"
+		[value]="tag"
 		(click)="onTagClick(tag)"
 		class="p-button p-button-sm"></button>
 

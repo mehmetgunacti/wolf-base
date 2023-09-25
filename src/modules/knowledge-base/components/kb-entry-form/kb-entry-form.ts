@@ -2,7 +2,7 @@ import { InjectionToken } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { KBEntry, UUID } from 'lib';
 import { FormClass, FormClassImpl } from 'modules/shared';
-import { TreeNode } from 'primeng/api';
+import { TreeNode } from 'lib';
 
 interface EditForm {
 

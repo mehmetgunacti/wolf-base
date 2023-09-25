@@ -1,16 +1,16 @@
-<p-confirmPopup></p-confirmPopup>
-<p-toast></p-toast>
+<!-- <p-confirmPopup></p-confirmPopup>
+<p-toast></p-toast> -->
 <header>
 
 	<section id="section-logo">
 
-		<p-button
+		<button
 			*ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers"
 			(click)="toggleNav()"
 			styleClass="p-button-text"
-			icon="pi pi-bars"
-			[badge]="cloudNumbers.length > 0 ? '.' : ''"
-			[badgeClass]="'navButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')"></p-button>
+			icon="pi pi-bars">.</button>
+			<!-- [badge]="cloudNumbers.length > 0 ? '.' : ''"
+			[badgeClass]="'navButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')"></p-button> -->
 
 	</section>
 	<section id="portal-outlet-left">
@@ -26,36 +26,39 @@
 	<div *ngIf="!bigScreen" id="nav-overlay" (click)="toggleNav()"></div>
 	<nav>
 
-		<p-panelMenu [model]="(navMenuItems$ | async) || []"></p-panelMenu>
+		<div>p-panelMenu [model]="(navMenuItems$ | async) || []"p-panelMenu</div>
 		<div bottom-buttons>
 
-			<p-button
-				[icon]="PrimeIcons.COG"
+			<button
 				(click)="navTo('/settings')"
 				styleClass="p-button-rounded p-button-text"
-				title="Settings"></p-button>
+				title="Settings"></button>
+				<!-- [icon]="PrimeIcons.COG" -->
 
-			<p-button
+			<button
 				*ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers"
-				[icon]="PrimeIcons.SYNC"
-				[styleClass]="'p-button-rounded p-button-text cloudButton' + (cloudNumbers[1] > 0 ? ' p-button-danger' : cloudNumbers[0] > 0 ? ' p-button-warning' : '')"
+				
 				(click)="navTo('/cloud')"
-				[title]="cloudNumbers.length > 0 ? cloudNumbers[0] + ' syncable items available' : 'Cloud'"
+				[title]="cloudNumbers.length > 0 ? cloudNumbers[0] + ' syncable items available' : 'Cloud'"></button>
+				<!-- [icon]="PrimeIcons.SYNC"
+				[styleClass]="'p-button-rounded p-button-text cloudButton' + (cloudNumbers[1] > 0 ? ' p-button-danger' : cloudNumbers[0] > 0 ? ' p-button-warning' : '')"
 				[badge]="cloudNumbers.length > 0 ? '' + cloudNumbers[0] : ''"
-				[badgeClass]="'cloudButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')"
-				></p-button>
+				[badgeClass]="'cloudButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')" -->
+				
 
-			<p-button
-				[icon]="PrimeIcons.DATABASE"
+			<button
+				
 				styleClass="p-button-rounded p-button-text"
 				(click)="navTo('/database')"
-				title="Database"></p-button>
+				title="Database"></button>
+				<!-- [icon]="PrimeIcons.DATABASE" -->
 
-			<p-button
-				[icon]="PrimeIcons.LIST"
+			<button
+				
 				styleClass="p-button-rounded p-button-text"
 				(click)="navTo('/logs')"
-				title="View Logs"></p-button>
+				title="View Logs"></button>
+				<!-- [icon]="PrimeIcons.LIST" -->
 
 			<app-theme-switcher [isDark]="isThemeDark$ | async"
 								(switchTheme)="onSwitchTheme()"></app-theme-switcher>

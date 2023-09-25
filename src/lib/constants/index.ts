@@ -5,4 +5,5 @@ export * from './entity.constant';
 export * from './log.constant';
 export * from './responsive.constant';
 export * from './sync.constant';
+export * from './temp.constants';
 export * from './ui.constant';

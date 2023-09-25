@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { ToastConfiguration } from 'lib';
-import { PrimeIcons } from 'primeng/api';
+import { PrimeIcons, ToastConfiguration } from 'lib';
 
 @Component({
 	selector: 'app-toast',
@@ -11,7 +10,7 @@ export class ToastComponent implements OnInit {
 	private elementRef: ElementRef = inject(ElementRef);
 
 	@Input() conf!: ToastConfiguration;
-	iconClass!: PrimeIcons;
+	iconClass!: string;
 
 	@Output() close = new EventEmitter<number>();
 

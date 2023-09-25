@@ -4,7 +4,6 @@ import { Routes } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LocalStorageService, RemoteStorageService } from 'lib';
 import { SyncService } from 'lib/services/sync-service.interface';
-import { MessageService } from 'primeng/api';
 import { CustomErrorHandler, DexieLocalStorageServiceImpl, FirestoreRemoteStorageServiceImpl } from 'services';
 import { SyncServiceImpl } from 'services/sync.service';
 
@@ -57,6 +56,5 @@ export const providers: Provider[] = [
 	{ provide: LOCAL_STORAGE_SERVICE, useClass: DexieLocalStorageServiceImpl },
 	{ provide: REMOTE_STORAGE_SERVICE, useClass: FirestoreRemoteStorageServiceImpl, deps: [Store, HttpClient] },
 	{ provide: SYNC_SERVICE, useClass: SyncServiceImpl, deps: [LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE] },
-	MessageService
 
 ];

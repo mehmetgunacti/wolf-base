@@ -1,11 +1,13 @@
-<p-breadcrumb [model]="parentMenuItems" [home]="home"></p-breadcrumb>
-<p-card *ngIf="node" [header]="node.name">
+<div>
+	p-breadcrumb [model]="parentMenuItems" [home]="home" p-breadcrumb
+</div>
+<div> *ngIf="node" [header]="node.name"
 
-	<ng-container *ngIf="node.children.length > 0">
+	<ng-container> *ngIf="node.children.length > 0"
 
-		<p-panel header="Entries" [toggleable]="true" [collapsed]="!!content && node.children.length > 3">
-			<p-menu [model]="childrenMenuItems"></p-menu>
-		</p-panel>
+		<div>p-panel header="Entries" [toggleable]="true" [collapsed]="!!content && node.children.length > 3"
+			p-menu [model]="childrenMenuItems" p-menu
+		</div>
 
 	</ng-container>
 	<br>
@@ -15,4 +17,4 @@
 		<span updated><i class="pi pi-clock"></i> {{ content.updated | date:'EEEE dd.MM.yyyy hh:mm' }}</span>
 	</ng-template>
 
-</p-card>
+</div>

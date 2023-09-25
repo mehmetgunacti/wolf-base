@@ -12,7 +12,7 @@
 </app-portal>
 
 <!-- Conflict Dialog -->
-<p-dialog
+<!-- <p-dialog
 	*ngIf="isConflictDialogVisible$ | async"
 	[header]="dialogTitle$ | async | noData:'View'"
 	[draggable]="false"
@@ -27,9 +27,9 @@
 
 	<app-cloud-conflict-container></app-cloud-conflict-container>
 
-</p-dialog>
+</p-dialog> -->
 
-<p-messages severity="warn" *ngIf="isFirestoreConfigMissing$ | async">
+<div>p-messages severity="warn" *ngIf="isFirestoreConfigMissing$ | async
     <ng-template pTemplate>
 		<span>Firestore configuration missing</span>
 		<button
@@ -40,6 +40,6 @@
 			routerLink="/settings">
 		</button>
     </ng-template>
-</p-messages>
+</div>
 
 <app-cloud-summary-container></app-cloud-summary-container>

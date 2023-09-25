@@ -32,7 +32,7 @@
 			</ng-container>
 
 			<div bookmark-tags *ngIf="item.tags">
-				<p-tag [value]="tag" *ngFor="let tag of item.tags" [rounded]="true"></p-tag>
+				<button [value]="tag" *ngFor="let tag of item.tags"></button>
 			</div>
 
 		</div>

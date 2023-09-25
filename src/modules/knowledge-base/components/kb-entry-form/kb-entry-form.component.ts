@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { KBEntry, KBEntryNode, UUID } from 'lib';
-import { TreeNode } from 'primeng/api';
+import { TreeNode } from 'lib';
 import { EditFormImpl, KBEntryForm, KB_ENTRY_FORM } from './kb-entry-form';
 
 const confirmMessage = (name: string) => `
@@ -9,14 +9,14 @@ ${name}
 
 will be deleted. Continue?`;
 
-function toTreeNode(nodes: KBEntryNode[]): TreeNode<void>[] {
+function toTreeNode(nodes: KBEntryNode[]): TreeNode[] {
 
 	const a = nodes.map(node => (
 		{
 			key: node.id,
 			label: node.name,
 			children: toTreeNode(node.children)
-		} as TreeNode<void>
+		} as TreeNode
 	));
 	console.log(a);
 	return a;
@@ -42,7 +42,7 @@ export class KBEntryFormComponent {
 		}
 
 	};
-	@Input({ transform: toTreeNode }) parents: TreeNode<void>[] = [];
+	@Input({ transform: toTreeNode }) parents: TreeNode[] = [];
 
 	@Output() create: EventEmitter<Partial<KBEntry>> = new EventEmitter();
 	@Output() update: EventEmitter<{ id: UUID, kbEntry: Partial<KBEntry> }> = new EventEmitter();

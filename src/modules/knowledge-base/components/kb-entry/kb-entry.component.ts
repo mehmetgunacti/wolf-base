@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { KBContent, KBEntryNode } from 'lib';
-import { MenuItem, PrimeIcons } from 'primeng/api';
+import { MenuItem, PrimeIcons } from 'lib';
 
 function createMenu(node: KBEntryNode | null): MenuItem[] {
 
