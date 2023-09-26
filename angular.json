@@ -60,7 +60,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/wolf-app/src/favicon.ico",
-              "projects/wolf-app/src/assets"
+              "projects/wolf-app/src/assets",
+              "projects/wolf-app/src/manifest.webmanifest"
             ],
             "styles": [
               "projects/wolf-app/src/styles.scss"
