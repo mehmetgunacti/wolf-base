@@ -2,7 +2,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { Injectable, InjectionToken, Injector } from '@angular/core';
 import { ToastConfiguration } from 'lib';
-import { ToastWrapperComponent } from 'modules/shared';
+// import { ToastWrapperComponent } from 'modules/shared';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 export const W359ToastData = new InjectionToken<ToastConfiguration>('W359_TOAST_DATA');
@@ -93,9 +93,9 @@ export class ToastService {
 		this.toastRef = new W359ToastRef(overlayRef);
 
 		const injector = this.getInjector(this.parentInjector);
-		const toastPortal = new ComponentPortal(ToastWrapperComponent, null, injector);
+		// const toastPortal = new ComponentPortal(ToastWrapperComponent, null, injector);
 
-		overlayRef.attach(toastPortal);
+		// overlayRef.attach(toastPortal);
 
 	}
 

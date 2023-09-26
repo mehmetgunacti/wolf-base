@@ -26,6 +26,10 @@
     "paths": {
       "wolf-lib": [
         "dist/wolf-lib"
+      ],
+      "*": [
+        "*",
+        "projects/wolf-app/src/*"
       ]
     }
   },
