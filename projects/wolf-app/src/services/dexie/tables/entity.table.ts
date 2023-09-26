@@ -1,5 +1,5 @@
 import { Collection, IndexableType, Table } from 'dexie';
-import { EntityTable, LocalTableNames, LogCategory, WolfEntity } from 'lib';
+import { EntityTable, LocalTableNames, LogCategory, WolfEntity } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { RemoteData, RemoteMetadata, SyncData } from 'lib/models';
 import { Entity, Metadata } from 'lib/models/entity.model';

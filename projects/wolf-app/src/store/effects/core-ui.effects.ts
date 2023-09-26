@@ -2,7 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { Breakpoint, LocalStorageService } from 'lib';
+import { Breakpoint, LocalStorageService } from '@lib';
 import { map, switchMap } from 'rxjs/operators';
 import { setBigScreen, setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
 

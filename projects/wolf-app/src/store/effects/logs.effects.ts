@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { LocalStorageService, LogCategory, LogMessage, ToastConfiguration } from 'lib';
+import { LocalStorageService, LogCategory, LogMessage, ToastConfiguration } from '@lib';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { clearLogs, loadLogs, loadLogsSuccess, setSelectedCategory } from 'store/actions/logs.actions';

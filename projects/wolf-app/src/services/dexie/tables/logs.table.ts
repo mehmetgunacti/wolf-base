@@ -1,4 +1,4 @@
-import { LogCategory, LogMessage, LogsTable } from 'lib';
+import { LogCategory, LogMessage, LogsTable } from '@lib';
 import { WolfBaseDB } from '../wolfbase.database';
 
 export class DexieLogsTableImpl implements LogsTable {

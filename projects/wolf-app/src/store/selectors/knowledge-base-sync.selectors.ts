@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { RemoteMetadata, SyncData, UUID } from 'lib';
+import { RemoteMetadata, SyncData, UUID } from '@lib';
 import { selKnowledgeBaseSyncState } from './knowledge-base.selectors';
 
 export const selKnowledgeBaseSyncDataArray = createSelector(

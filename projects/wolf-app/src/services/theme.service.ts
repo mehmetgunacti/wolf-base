@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { THEME_DARK, THEME_LIGHT } from 'lib';
+import { THEME_DARK, THEME_LIGHT } from '@lib';
 import { DOMService } from './dom.service';
 import { Observable, of } from 'rxjs';
 

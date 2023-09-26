@@ -1,4 +1,4 @@
-import { Entity, RemoteData, RemoteMetadata, SyncData } from "lib";
+import { Entity, RemoteData, RemoteMetadata, SyncData } from "@lib";
 
 export interface CloudModuleState {
 
@@ -20,7 +20,7 @@ export const initialCloudState: CloudModuleState = {
 	selectedEntity:  null,
 	selectedTrashEntity: null,
 	selectedRemoteData: null,
-	
+
 	conflictDialogVisible: false,
 	conflictDialogTitle: null
 

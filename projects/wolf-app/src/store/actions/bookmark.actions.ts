@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Bookmark, Click, RemoteMetadata, SyncData, UUID } from 'lib';
+import { Bookmark, Click, RemoteMetadata, SyncData, UUID } from '@lib';
 
 export const loadAllBookmarksSuccess = createAction('[Bookmark] Load All Success', props<{ bookmarks: Bookmark[] }>());
 export const loadAllClicksSuccess = createAction('[Bookmark Clicks] Load All Success', props<{ clicks: Click[] }>());

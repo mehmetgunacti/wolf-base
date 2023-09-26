@@ -1,6 +1,6 @@
 import { inject } from "@angular/core";
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from "app/app.config";
-import { Bookmark, Click, LocalStorageService, RemoteData, RemoteMetadata, RemoteStorageService, SyncData, UUID } from "lib";
+import { Bookmark, Click, LocalStorageService, RemoteData, RemoteMetadata, RemoteStorageService, SyncData, UUID } from '@lib';
 import { SyncService } from "lib/services/sync-service.interface";
 import { EMPTY, Observable, concatMap, filter, from, iif, map, switchMap, toArray } from "rxjs";
 

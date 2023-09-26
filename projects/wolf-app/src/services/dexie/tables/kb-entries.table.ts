@@ -1,4 +1,4 @@
-import { KBEntriesTable, KBEntry, WolfEntity, toggleArrayItem } from 'lib';
+import { KBEntriesTable, KBEntry, WolfEntity, toggleArrayItem } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { v4 as uuidv4 } from 'uuid';
 import { WolfBaseDB } from '../wolfbase.database';

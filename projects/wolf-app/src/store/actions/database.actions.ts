@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { LocalTableNames } from "lib";
+import { LocalTableNames } from '@lib';
 
 export const backupDatabase = createAction('[Database] Backup Database');
 

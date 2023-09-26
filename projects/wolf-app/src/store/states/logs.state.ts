@@ -1,4 +1,4 @@
-import { LogCategory, LogMessage } from "lib";
+import { LogCategory, LogMessage } from "@lib";
 
 export interface LogsModuleState {
 

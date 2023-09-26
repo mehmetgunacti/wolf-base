@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UUID } from 'lib';
+import { UUID } from '@lib';
 
 export const clickTag			= createAction('[Knowledge Base Tags] Click Tag', props<{ name: string }>());
 export const setSelectedTags	= createAction('[Knowledge Base Tags] Set Selected Tags', props<{ tags: string[] }>());

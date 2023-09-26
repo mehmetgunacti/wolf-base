@@ -1,5 +1,5 @@
 import { createSelector } from "@ngrx/store";
-import { CloudTask } from "lib";
+import { CloudTask } from '@lib';
 import { selBookmarkConflictCloudTasks, selBookmarkNonConflictCloudTasks } from "./cloud-bookmark.selectors";
 import { selCloudModuleState } from "./cloud.selectors";
 

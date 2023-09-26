@@ -1,4 +1,4 @@
-import { BookmarksTable, ConfigurationTable, KBContentsTable, KBEntriesTable, LocalStorageService, LocalTableNames, LogsTable } from "lib";
+import { BookmarksTable, ConfigurationTable, KBContentsTable, KBEntriesTable, LocalStorageService, LocalTableNames, LogsTable } from '@lib';
 import { MockBookmarksTableImpl, MockConfigurationTableImpl, MockKBContentsTableImpl, MockKBEntriesTableImpl, MockLogsTableImpl } from "./tables";
 
 export class MockLocalStorageService implements LocalStorageService {

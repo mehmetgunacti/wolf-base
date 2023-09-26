@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { createEffect } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
-import { LocalStorageService, RemoteMetadata, SyncData } from 'lib';
+import { LocalStorageService, RemoteMetadata, SyncData } from '@lib';
 import { fromEventPattern } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { loadRemoteMetadataSuccess, loadSyncDataSuccess, loadTrashCountSuccess } from 'store/actions/bookmark.actions';

@@ -1,4 +1,4 @@
-import { ConfigurationTable } from 'lib';
+import { ConfigurationTable } from '@lib';
 import { CONF_KEYS, LocalTableNames } from 'lib/constants/database.constant';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
 import { KeyValueTableImpl } from './key-value.table';

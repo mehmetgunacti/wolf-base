@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { KBEntry, RemoteMetadata, SyncData, UUID } from 'lib';
+import { KBEntry, RemoteMetadata, SyncData, UUID } from '@lib';
 
 export const loadAllEntitiesSuccess		= createAction('[KB Entry] Load All Entities Success', props<{ entries: KBEntry[] }>());
 

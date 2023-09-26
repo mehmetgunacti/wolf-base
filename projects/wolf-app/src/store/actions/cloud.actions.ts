@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { CloudTaskType, WolfEntity } from "lib";
+import { CloudTaskType, WolfEntity } from '@lib';
 
 export const openConflictDialog = createAction('[Cloud] Open Conflict Dialog');
 export const closeConflictDialog = createAction('[Cloud] Close Conflict Dialog');

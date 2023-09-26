@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { BookmarksCollection, FirestoreConfig, RemoteStorageService } from "lib";
+import { BookmarksCollection, FirestoreConfig, RemoteStorageService } from '@lib';
 import { FirestoreAPIClient, FirestoreAPIClientImpl } from "lib/utils/firestore-rest-client/firestore-api.tool";
 import { VoidBookmarksCollection } from "services/mock-services/remotestorage/collections/bookmarks.collection";
 import { selCoreFirestoreConfig } from "store/selectors/core-configuration.selectors";

@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Bookmark, Click, UUID } from 'lib';
+import { Bookmark, Click, UUID } from '@lib';
 import { closeEditBookmarkDialog, openAddBookmarkDialog, openEditBookmarkDialog } from 'store/actions/bookmark-ui.actions';
 import { createBookmarkSuccess, loadAllBookmarksSuccess, loadAllClicksSuccess, updateBookmarkSuccess } from 'store/actions/bookmark.actions';
 import { BookmarkEntitiesState, initialBookmarkEntitiesState } from 'store/states/bookmark.state';

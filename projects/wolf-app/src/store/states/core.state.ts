@@ -1,4 +1,4 @@
-import { Configuration } from "lib";
+import { Configuration } from "@lib";
 
 export interface CoreModuleState {
 

@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { Bookmark, Tag } from 'lib';
+import { Bookmark, Tag } from '@lib';
 import { selBookmarkArray } from './bookmark-entities.selectors';
 import { selBookmarkTagsState } from './bookmark.selectors';
 

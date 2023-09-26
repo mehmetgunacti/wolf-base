@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { LocalStorageService } from 'lib';
+import { LocalStorageService } from '@lib';
 import { BackupDatabase } from 'lib/utils/database.util';
 import { map, switchMap } from 'rxjs/operators';
 import { backupDatabase, loadValues, loadValuesSuccess } from 'store/actions/database.actions';

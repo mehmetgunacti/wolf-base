@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
-import { KBEntry, LocalStorageService } from 'lib';
+import { KBEntry, LocalStorageService } from '@lib';
 import { from, fromEventPattern, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';

@@ -1,4 +1,4 @@
-import { KBContent, KBContentsTable, UUID } from 'lib';
+import { KBContent, KBContentsTable, UUID } from '@lib';
 
 export class MockKBContentsTableImpl implements KBContentsTable {
 

@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { FirestoreConfig } from "lib";
+import { FirestoreConfig } from '@lib';
 
 export const saveFirestoreConfig = createAction('[Settings] Save Firestore Config', props<{ config: FirestoreConfig }>());
 export const saveFirestoreConfigSuccess = createAction('[Settings] Save Firestore Config Success');

@@ -1,5 +1,5 @@
 import Dexie from 'dexie';
-import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalTableNames } from 'lib';
+import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalTableNames } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { KBEntry, LogMessage, RemoteMetadata, SyncData } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';

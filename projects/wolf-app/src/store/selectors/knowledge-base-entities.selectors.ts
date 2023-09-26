@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { selKnowledgeBaseEntitiesState } from './knowledge-base.selectors';
-import { KBEntryNode, UUID, toKBEntryNodes } from 'lib';
+import { KBEntryNode, UUID, toKBEntryNodes } from '@lib';
 
 export const selKBEntryArray = createSelector(
 

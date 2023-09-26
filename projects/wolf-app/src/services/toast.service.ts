@@ -1,7 +1,7 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { Injectable, InjectionToken, Injector } from '@angular/core';
-import { ToastConfiguration } from 'lib';
+import { ToastConfiguration } from '@lib';
 // import { ToastWrapperComponent } from 'modules/shared';
 import { BehaviorSubject, Observable } from 'rxjs';
 

@@ -1,4 +1,4 @@
-import { ConfigurationTable, DEFAULT_CONF_VALUES } from 'lib';
+import { ConfigurationTable, DEFAULT_CONF_VALUES } from '@lib';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
 
 export class MockConfigurationTableImpl implements ConfigurationTable {

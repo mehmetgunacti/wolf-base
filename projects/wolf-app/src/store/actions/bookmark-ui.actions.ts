@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UUID } from 'lib';
+import { UUID } from '@lib';
 
 export const toggleSearchAndTagCloudVisibility = createAction('[Bookmark UI] Toggle Search Tag Cloud Visibility');
 export const openAddBookmarkDialog = createAction('[Bookmark UI] Open Add Bookmark Dialog');

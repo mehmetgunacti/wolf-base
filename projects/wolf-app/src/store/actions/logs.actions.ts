@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { LogCategory, LogMessage } from "lib";
+import { LogCategory, LogMessage } from '@lib';
 
 export const loadLogs = createAction('[Logs] Load Logs');
 export const loadLogsSuccess = createAction('[Logs] Load Logs Success', props<{ logs: LogMessage[] }>());

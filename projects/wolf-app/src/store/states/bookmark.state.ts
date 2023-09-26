@@ -1,4 +1,4 @@
-import { Bookmark, Click, RemoteMetadata, SyncData, UUID } from "lib";
+import { Bookmark, Click, RemoteMetadata, SyncData, UUID } from "@lib";
 
 export interface BookmarkModuleState {
 

@@ -1,4 +1,4 @@
-import { BookmarksTable, ConfigurationTable, LocalStorageService, LogsTable, LocalTableNames, KBEntriesTable, KBContentsTable } from 'lib';
+import { BookmarksTable, ConfigurationTable, LocalStorageService, LogsTable, LocalTableNames, KBEntriesTable, KBContentsTable } from '@lib';
 import { DexieBookmarksTableImpl, DexieConfigurationTableImpl, DexieLogsTableImpl } from './tables';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
 import { DexieKBEntriesTableImpl } from './tables/kb-entries.table';

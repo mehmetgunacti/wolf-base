@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { LocalStorageService, RemoteStorageService } from 'lib';
+import { LocalStorageService, RemoteStorageService } from '@lib';
 import { SyncService } from 'lib/services/sync-service.interface';
 import { CustomErrorHandler, DexieLocalStorageServiceImpl, FirestoreRemoteStorageServiceImpl } from 'services';
 import { SyncServiceImpl } from 'services/sync.service';

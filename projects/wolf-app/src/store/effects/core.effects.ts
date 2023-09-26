@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { createEffect } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
-import { Configuration, LocalStorageService } from 'lib';
+import { Configuration, LocalStorageService } from '@lib';
 import { fromEventPattern } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { confChanged } from 'store/actions/core.actions';

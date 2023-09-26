@@ -1,4 +1,4 @@
-import { KBEntry, KBEntryNode, RemoteMetadata, SyncData, UUID } from "lib";
+import { KBEntry, RemoteMetadata, SyncData, UUID } from "@lib";
 
 export interface KnowledgeBaseModuleState {
 

@@ -1,4 +1,4 @@
-import { BookmarksCollection, FIRESTORE_VALUE, FirestoreConverter, FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL, UUID, WolfEntity } from 'lib';
+import { BookmarksCollection, FIRESTORE_VALUE, FirestoreConverter, FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL, UUID, WolfEntity } from '@lib';
 import { FirestoreConfig } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';

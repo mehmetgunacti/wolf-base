@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
-import { SyncService } from 'lib';
+import { SyncService } from '@lib';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { deleteMetadata, downloadClicks, downloadDeleted, downloadNew, downloadRemoteMetadata, downloadUpdated, uploadClicks, uploadDeleted, uploadNew, uploadUpdated } from 'store/actions/cloud-bookmark.actions';
 import { deleteSuccess, downloadSuccess, uploadSuccess } from 'store/actions/cloud.actions';

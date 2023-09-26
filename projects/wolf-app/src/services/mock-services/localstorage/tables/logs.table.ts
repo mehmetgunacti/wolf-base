@@ -1,4 +1,4 @@
-import { LogMessage, LogsTable } from 'lib';
+import { LogMessage, LogsTable } from '@lib';
 
 export class MockLogsTableImpl implements LogsTable {
 

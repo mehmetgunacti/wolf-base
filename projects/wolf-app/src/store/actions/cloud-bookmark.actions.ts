@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Bookmark, Entity, RemoteData, RemoteMetadata, SyncData, UUID } from 'lib';
+import { Bookmark, Entity, RemoteData, RemoteMetadata, SyncData, UUID } from '@lib';
 
 export const downloadRemoteMetadata = createAction('[Cloud Bookmark] Download RemoteMetadata');
 

@@ -1,4 +1,4 @@
-import { BookmarksTable, LogCategory, WolfEntity, toggleArrayItem } from 'lib';
+import { BookmarksTable, LogCategory, WolfEntity, toggleArrayItem } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { v4 as uuidv4 } from 'uuid';

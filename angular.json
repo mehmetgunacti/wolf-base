@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/wolf-lib",
       "sourceRoot": "projects/wolf-lib/src",
-      "prefix": "lib",
+      "prefix": "w",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

@@ -1,5 +1,5 @@
 import { createSelector } from "@ngrx/store";
-import { CloudTask, CloudTaskType, RemoteMetadata, SyncData, UUID, WolfEntity, toCloudTask } from "lib";
+import { CloudTask, CloudTaskType, RemoteMetadata, SyncData, UUID, WolfEntity, toCloudTask } from '@lib';
 import { selBookmarkClicked, selBookmarkIds } from "./bookmark-entities.selectors";
 import { selBookmarkRemoteMetadataArray, selBookmarkRemoteMetadataMap, selBookmarkSyncDataArray, selBookmarkSyncDataMap } from "./bookmark-sync.selectors";
 
