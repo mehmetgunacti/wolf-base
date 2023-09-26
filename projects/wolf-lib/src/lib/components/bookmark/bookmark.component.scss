@@ -1,0 +1,161 @@
+app-bookmark {
+
+	@extend %component-shadow;
+	--bookmark-hover-transition		: all ease-in-out 250ms;
+	--bookmark-edit-button-opacity	: 0;
+
+	display				: flex;
+	position			: relative;
+	transition			: all ease-in-out 250ms;
+	padding				: 0.5rem;
+	overflow			: hidden;
+	border-radius		: var(--border-radius);
+	background-color	: var(--surface-a);
+
+	& > div[bookmark-overlay] {
+
+		position					: absolute;
+		width						: 100%;
+		height						: 100%;
+		top							: 0;
+		left						: 0;
+		background-color			: transparent;
+		pointer-events				: auto;
+		z-index						: 1000;
+
+	}
+
+	&:hover {
+		--bookmark-edit-button-opacity : 1;
+	}
+
+	div[bookmark-image] {
+		@extend %flex-center-y;
+
+		& > img.compact {
+
+			width	: 55px;
+			height	: 55px;
+
+		}
+
+	}
+
+	div[bookmark-right] {
+
+		@extend %flex-column;
+		padding	: 0.6rem;
+		flex	: 1;
+
+		div[bookmark-top] {
+			flex: 1;
+			@extend %flex-start-center;
+
+				span[bookmark-name] {
+
+					color			: var(--text-color);
+					font-weight		: bolder;
+					position		: relative;
+					font-size		: larger;
+
+					sup {
+						position		: absolute;
+						visibility		: hidden;
+						opacity			: 0;
+						transition		: var(--bookmark-hover-transition);
+						margin-left		: 0.3rem;
+						top				: -6px;
+						&>i {
+							font-size	: x-small;
+						}
+					}
+					
+				}
+
+				span[bookmark-title] {
+					color		: var(--text-color-secondary);
+					font-size	: small;
+				}
+
+				&:hover {
+					span[bookmark-name] sup {
+						visibility			: initial;
+						opacity				: initial;
+					}
+				}
+
+		}
+
+		div[bookmark-bottom] {
+
+			@extend %flex-column;
+
+			div[bookmark-url] {
+				word-break		: break-all;
+				padding-right	: 1rem;
+				font-size		: x-small;
+				color			: var(--gray-500);
+				margin-top		: 0.9rem;
+			}
+
+			div[bookmark-tags] {
+
+				margin-top	: 0.3rem;
+
+				&>p-tag {
+
+					margin-right: 0.3rem;
+
+					& .p-tag {
+
+						padding: 1px 7px;
+
+						& .p-tag-value {
+
+							font-size	: x-small;
+	
+						}
+
+					}
+
+				}
+				&>span {
+
+					padding				: 1px 5px;
+					margin-top			: 3px;
+					margin-right		: 3px;
+					min-width			: initial;
+					font-size			: 0.75rem;
+					background-color	: transparent;
+
+				}
+
+			}
+
+		}
+
+	}
+
+	#editButton {
+
+		position				: absolute;
+		opacity					: var(--bookmark-edit-button-opacity);
+		transition				: var(--bookmark-hover-transition);
+		bottom					: 1rem;
+		right					: 1rem;
+		color 					: var(--text-color);
+
+	}
+
+	#popularButton {
+
+		position				: absolute;
+		opacity					: var(--bookmark-edit-button-opacity);
+		transition				: var(--bookmark-hover-transition);
+		top						: 1rem;
+		right					: 1rem;
+		color 					: var(--text-color);
+
+	}
+
+}

@@ -8,10 +8,10 @@ const routes: Routes = [
 		path: '',
 		component: CorePageComponent,
 		children: [
-			// {
-			// 	path: '',
-			// 	loadChildren: () => import('modules/home/home.module').then(m => m.HomeModule)
-			// },
+			{
+				path: '',
+				loadChildren: () => import('modules/home/home.module').then(m => m.HomeModule)
+			},
 			// {
 			// 	path: 'bookmarks',
 			// 	loadChildren: () => import('modules/bookmark/bookmark.module').then(m => m.BookmarkModule)
