@@ -1,0 +1,75 @@
+<!-- <p-confirmPopup></p-confirmPopup>
+<p-toast></p-toast> -->
+<header>
+
+	<section id="section-logo">
+
+		<button
+			*ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers"
+			(click)="toggleNav()"
+			styleClass="p-button-text"
+			icon="pi pi-bars">.</button>
+			<!-- [badge]="cloudNumbers.length > 0 ? '.' : ''"
+			[badgeClass]="'navButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')"></p-button> -->
+
+	</section>
+	<section id="portal-outlet-left">
+		<!-- content will be placed dynamically via Cdk Portal -->
+	</section>
+	<section id="portal-outlet-right">
+		<!-- content will be placed dynamically via Cdk Portal -->
+	</section>
+
+</header>
+<main>
+
+	<div *ngIf="!bigScreen" id="nav-overlay" (click)="toggleNav()"></div>
+	<nav>
+
+		<div>p-panelMenu [model]="(navMenuItems$ | async) || []"p-panelMenu</div>
+		<div bottom-buttons>
+
+			<button
+				(click)="navTo('/settings')"
+				styleClass="p-button-rounded p-button-text"
+				title="Settings"></button>
+				<!-- [icon]="PrimeIcons.COG" -->
+
+			<button
+				*ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers"
+				
+				(click)="navTo('/cloud')"
+				[title]="cloudNumbers.length > 0 ? cloudNumbers[0] + ' syncable items available' : 'Cloud'"></button>
+				<!-- [icon]="PrimeIcons.SYNC"
+				[styleClass]="'p-button-rounded p-button-text cloudButton' + (cloudNumbers[1] > 0 ? ' p-button-danger' : cloudNumbers[0] > 0 ? ' p-button-warning' : '')"
+				[badge]="cloudNumbers.length > 0 ? '' + cloudNumbers[0] : ''"
+				[badgeClass]="'cloudButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')" -->
+				
+
+			<button
+				
+				styleClass="p-button-rounded p-button-text"
+				(click)="navTo('/database')"
+				title="Database"></button>
+				<!-- [icon]="PrimeIcons.DATABASE" -->
+
+			<button
+				
+				styleClass="p-button-rounded p-button-text"
+				(click)="navTo('/logs')"
+				title="View Logs"></button>
+				<!-- [icon]="PrimeIcons.LIST" -->
+
+			<app-theme-switcher [isDark]="isThemeDark$ | async"
+								(switchTheme)="onSwitchTheme()"></app-theme-switcher>
+		</div>
+		<div bottom-version>v{{ builtVersion }} (#{{ builtNumber }}) {{ builtTime | date:'dd.MM.yyyy hh:mm:ss' }}</div>
+
+	</nav>
+	<article>
+
+		<router-outlet></router-outlet>
+
+	</article>
+
+</main>
