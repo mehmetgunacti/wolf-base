@@ -1,5 +1,3 @@
-<!-- <p-confirmPopup></p-confirmPopup>
-<p-toast></p-toast> -->
 <header>
 
 	<section id="section-logo">
@@ -32,29 +30,28 @@
 			<button
 				(click)="navTo('/settings')"
 				styleClass="p-button-rounded p-button-text"
-				title="Settings"></button>
-				<!-- [icon]="PrimeIcons.COG" -->
+				title="Settings">{{ WolfIcons.COG }}</button>
 
 			<button
 				*ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers"
-				
+
 				(click)="navTo('/cloud')"
 				[title]="cloudNumbers.length > 0 ? cloudNumbers[0] + ' syncable items available' : 'Cloud'"></button>
 				<!-- [icon]="PrimeIcons.SYNC"
 				[styleClass]="'p-button-rounded p-button-text cloudButton' + (cloudNumbers[1] > 0 ? ' p-button-danger' : cloudNumbers[0] > 0 ? ' p-button-warning' : '')"
 				[badge]="cloudNumbers.length > 0 ? '' + cloudNumbers[0] : ''"
 				[badgeClass]="'cloudButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')" -->
-				
+
 
 			<button
-				
+
 				styleClass="p-button-rounded p-button-text"
 				(click)="navTo('/database')"
 				title="Database"></button>
 				<!-- [icon]="PrimeIcons.DATABASE" -->
 
 			<button
-				
+
 				styleClass="p-button-rounded p-button-text"
 				(click)="navTo('/logs')"
 				title="View Logs"></button>

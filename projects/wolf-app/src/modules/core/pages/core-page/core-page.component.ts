@@ -1,5 +1,5 @@
 import { Component, HostBinding, OnDestroy, inject } from '@angular/core';
-import { MenuItem, PrimeIcons } from '@lib';
+import { MenuItem, WolfIcons } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, map } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
@@ -19,7 +19,7 @@ const formatBadge_Bookmark = ([total, filtered]: [number, number]) => filtered <
 })
 export class CorePageComponent implements OnDestroy {
 
-	PrimeIcons = PrimeIcons;
+	WolfIcons = WolfIcons;
 
 	navMenuItems$: Observable<MenuItem[]>;
 	cloudNumbers$: Observable<number[]>;

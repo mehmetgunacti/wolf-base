@@ -1,15 +1,15 @@
-import { MenuItem, PrimeIcons } from '@lib';
+import { MenuItem, WolfIcons } from '@lib';
 
 export const miHome: MenuItem = {
 	label: 'Home',
-	icon: PrimeIcons.HOME,
+	icon: WolfIcons.HOME,
 	routerLink: [''],
 	routerLinkActiveOptions: { exact: true }
 };
 
 export const miBookmarks = (badge: string): MenuItem => ({
 	label: 'Bookmarks',
-	icon: PrimeIcons.BOOKMARK,
+	icon: WolfIcons.BOOKMARK,
 	routerLink: ['/bookmarks'],
 	queryParams: { tags: 'popular' },
 	badge,
@@ -18,25 +18,25 @@ export const miBookmarks = (badge: string): MenuItem => ({
 
 export const miKnowledgeBase: MenuItem = {
 	label: 'Knowledge Base',
-	icon: PrimeIcons.SITEMAP,
+	icon: WolfIcons.SITEMAP,
 	routerLink: ['/kb']
 };
 
 // export const miDatabase: MenuItem = {
 // 	label: 'Database',
-// 	icon: PrimeIcons.DATABASE,
+// 	icon: WolfIcons.DATABASE,
 // 	routerLink: ['/database']
 // };
 
 export const miLogs: MenuItem = {
 	label: 'Logs',
-	icon: PrimeIcons.LIST,
+	icon: WolfIcons.LIST,
 	routerLink: ['/logs']
 };
 
 export const miCloud = ([total, errors]: number[]): MenuItem => ({
 	label: 'Cloud Sync',
-	icon: PrimeIcons.SYNC,
+	icon: WolfIcons.SYNC,
 	routerLink: ['/cloud'],
 	badge: errors ? `${errors}/${total}` : total ? `${total}` : '',
 	badgeStyleClass: errors ? 'red' : total ? 'orange' : '',
@@ -45,6 +45,6 @@ export const miCloud = ([total, errors]: number[]): MenuItem => ({
 
 export const miSettings: MenuItem = {
 	label: 'Settings',
-	icon: PrimeIcons.COG,
+	icon: WolfIcons.COG,
 	routerLink: ['/settings']
 };
