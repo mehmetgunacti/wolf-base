@@ -1,17 +1,12 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans');
 
-@import './scss/hard-reset';
-@import './scss/cdk-overlay';
-@import './scss/responsive';
+@import '../../wolf-lib/src/lib/lib';
+
 @import './scss/overrides';
 @import './scss/index';
 @import './scss/extensions';
-@import './scss/helper';
 @import './scss/splashscreen';
-@import './scss/themes';
-
-@import '../../wolf-lib/src/lib/lib';
 
 // core
 @import './modules/core/core.style.scss';
