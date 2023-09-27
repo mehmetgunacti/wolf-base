@@ -10,6 +10,7 @@ import { selCoreIsSidebarVisible, selCoreIsThemeDark } from 'store/selectors/cor
 import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
+import { showNotification } from 'store/actions/core-notification.actions';
 
 const formatBadge_Bookmark = ([total, filtered]: [number, number]) => filtered < total ? `${filtered}/${total}` : total > 0 ? `${total}` : '';
 
@@ -40,6 +41,8 @@ export class CorePageComponent implements OnDestroy {
 	private store: Store = inject(Store);
 
 	constructor() {
+
+		this.store.dispatch(showNotification({ severity: 'success', summary: 'Toast', sticky: true }));
 
 		this.subscriptions.add(
 

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NoDataPipe, PortalComponent, BookmarkComponent } from '@lib';
+import { ToastModule } from 'lib/toast-module/toast.module';
 
 @NgModule({
 	declarations: [
@@ -17,7 +18,8 @@ import { NoDataPipe, PortalComponent, BookmarkComponent } from '@lib';
 	imports: [
 		CommonModule,
 		RouterModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		ToastModule
 	],
 	exports: [
 		BookmarkComponent,
@@ -25,6 +27,7 @@ import { NoDataPipe, PortalComponent, BookmarkComponent } from '@lib';
 		// SelectedTagsComponent,
 		// TagCloudComponent,
 		// ToastWrapperComponent,
+		// ToastModule,
 		ReactiveFormsModule,
 		NoDataPipe
 	],

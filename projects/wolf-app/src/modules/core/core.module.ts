@@ -5,6 +5,8 @@ import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switch
 import { CoreRoutingModule } from './core-routing.module';
 import { CorePageComponent } from './pages/core-page/core-page.component';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
+import { SharedModule } from 'modules/shared/shared.module';
+import { ToastService } from '@lib';
 
 @NgModule({
 	declarations: [
@@ -17,7 +19,6 @@ import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.compone
 		CoreRoutingModule,
 		FormsModule,
 		ReactiveFormsModule
-
 	],
 	exports: [],
 	providers: [

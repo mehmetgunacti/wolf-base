@@ -1,13 +1,13 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
-import { Injectable, InjectionToken, Injector } from '@angular/core';
-import { ToastConfiguration } from '@lib';
-// import { ToastWrapperComponent } from 'modules/shared';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { Injectable, InjectionToken, Injector, Provider } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ToastConfiguration } from './toast.util';
+import { ToastWrapperComponent } from './toast-wrapper.component';
 
-export const W359ToastData = new InjectionToken<ToastConfiguration>('W359_TOAST_DATA');
+export const WolfToastData = new InjectionToken<ToastConfiguration>('WOLF_TOAST_DATA');
 
-export class W359ToastRef {
+export class WolfToastRef {
 
 	private counter = 0;
 
@@ -61,19 +61,21 @@ export class W359ToastRef {
 
 }
 
-
 @Injectable({ providedIn: 'root' })
 export class ToastService {
 
-	private toastRef: W359ToastRef | undefined;
+	private toastRef: WolfToastRef | undefined;
 
 	constructor(
 		private overlay: Overlay,
 		private parentInjector: Injector
-	) { }
+	) {
+		console.log('toast service instantiated');
+	}
 
 	public show(data?: Partial<ToastConfiguration>): void {
 
+		console.log('toast service showing data', data);
 		if (!this.toastRef || this.toastRef.isEmpty())
 			this.attach();
 
@@ -90,20 +92,30 @@ export class ToastService {
 			.top();
 
 		const overlayRef: OverlayRef = this.overlay.create({ hasBackdrop: false, positionStrategy });
-		this.toastRef = new W359ToastRef(overlayRef);
+		this.toastRef = new WolfToastRef(overlayRef);
 
 		const injector = this.getInjector(this.parentInjector);
-		// const toastPortal = new ComponentPortal(ToastWrapperComponent, null, injector);
+		console.log('toast service before attaching');
+		const toastPortal = new ComponentPortal(ToastWrapperComponent, null, injector);
+		console.log('toast service after attaching');
 
-		// overlayRef.attach(toastPortal);
+		overlayRef.attach(toastPortal);
 
 	}
 
-	private getInjector(parentInjector: Injector): PortalInjector {
+	private getInjector(parentInjector: Injector): Injector {
 
-		const tokens = new WeakMap();
-		tokens.set(W359ToastRef, this.toastRef);
-		return new PortalInjector(parentInjector, tokens);
+		const providers: Provider[] = [
+			{
+				provide: WolfToastRef,
+				useValue: this.toastRef
+			}
+		];
+
+		return Injector.create({
+			parent: parentInjector,
+			providers: providers
+		});
 
 	}
 

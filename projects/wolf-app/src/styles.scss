@@ -10,5 +10,17 @@
 @import './scss/helper';
 @import './scss/splashscreen';
 
+@import '../../wolf-lib/src/lib/lib';
+
 // core
 @import './modules/core/core.style.scss';
+
+:root {
+	--blue-800: blue;
+	--green-700: green;
+}
+
+
+body{
+	background-color: chocolate;
+}
