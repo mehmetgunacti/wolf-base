@@ -6,7 +6,7 @@
 			*ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers"
 			(click)="toggleNav()"
 			styleClass="p-button-text"
-			icon="pi pi-bars">.</button>
+			icon="pi pi-bars"><i [class]="WolfIcons.MENU"></i></button>
 			<!-- [badge]="cloudNumbers.length > 0 ? '.' : ''"
 			[badgeClass]="'navButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')"></p-button> -->
 
@@ -30,14 +30,14 @@
 			<button
 				(click)="navTo('/settings')"
 				styleClass="p-button-rounded p-button-text"
-				title="Settings">{{ WolfIcons.COG }}</button>
+				title="Settings"><i [class]="WolfIcons.COG"></i></button>
 
 			<button
 				*ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers"
 
 				(click)="navTo('/cloud')"
-				[title]="cloudNumbers.length > 0 ? cloudNumbers[0] + ' syncable items available' : 'Cloud'"></button>
-				<!-- [icon]="PrimeIcons.SYNC"
+				[title]="cloudNumbers.length > 0 ? cloudNumbers[0] + ' syncable items available' : 'Cloud'"><i [class]="WolfIcons.CLOUD_UP"></i></button>
+				<!--
 				[styleClass]="'p-button-rounded p-button-text cloudButton' + (cloudNumbers[1] > 0 ? ' p-button-danger' : cloudNumbers[0] > 0 ? ' p-button-warning' : '')"
 				[badge]="cloudNumbers.length > 0 ? '' + cloudNumbers[0] : ''"
 				[badgeClass]="'cloudButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')" -->
@@ -47,14 +47,13 @@
 
 				styleClass="p-button-rounded p-button-text"
 				(click)="navTo('/database')"
-				title="Database"></button>
-				<!-- [icon]="PrimeIcons.DATABASE" -->
+				title="Database"><i [class]="WolfIcons.DATABASE"></i></button>
 
 			<button
 
 				styleClass="p-button-rounded p-button-text"
 				(click)="navTo('/logs')"
-				title="View Logs"></button>
+				title="View Logs"><i [class]="WolfIcons.JOURNAL"></i></button>
 				<!-- [icon]="PrimeIcons.LIST" -->
 
 			<app-theme-switcher [isDark]="isThemeDark$ | async"

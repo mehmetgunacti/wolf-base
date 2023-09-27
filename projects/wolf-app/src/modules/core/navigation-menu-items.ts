@@ -18,7 +18,7 @@ export const miBookmarks = (badge: string): MenuItem => ({
 
 export const miKnowledgeBase: MenuItem = {
 	label: 'Knowledge Base',
-	icon: WolfIcons.SITEMAP,
+	icon: WolfIcons.BOOK,
 	routerLink: ['/kb']
 };
 
@@ -28,23 +28,23 @@ export const miKnowledgeBase: MenuItem = {
 // 	routerLink: ['/database']
 // };
 
-export const miLogs: MenuItem = {
-	label: 'Logs',
-	icon: WolfIcons.LIST,
-	routerLink: ['/logs']
-};
+// export const miLogs: MenuItem = {
+// 	label: 'Logs',
+// 	icon: WolfIcons.LIST,
+// 	routerLink: ['/logs']
+// };
 
-export const miCloud = ([total, errors]: number[]): MenuItem => ({
-	label: 'Cloud Sync',
-	icon: WolfIcons.SYNC,
-	routerLink: ['/cloud'],
-	badge: errors ? `${errors}/${total}` : total ? `${total}` : '',
-	badgeStyleClass: errors ? 'red' : total ? 'orange' : '',
-	command: () => console.log('badge', total, errors)
-});
+// export const miCloud = ([total, errors]: number[]): MenuItem => ({
+// 	label: 'Cloud Sync',
+// 	icon: WolfIcons.CLOUD_UP,
+// 	routerLink: ['/cloud'],
+// 	badge: errors ? `${errors}/${total}` : total ? `${total}` : '',
+// 	badgeStyleClass: errors ? 'red' : total ? 'orange' : '',
+// 	command: () => console.log('badge', total, errors)
+// });
 
-export const miSettings: MenuItem = {
-	label: 'Settings',
-	icon: WolfIcons.COG,
-	routerLink: ['/settings']
-};
+// export const miSettings: MenuItem = {
+// 	label: 'Settings',
+// 	icon: WolfIcons.COG,
+// 	routerLink: ['/settings']
+// };
