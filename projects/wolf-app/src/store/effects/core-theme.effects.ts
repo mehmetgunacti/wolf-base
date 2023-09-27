@@ -1,21 +1,21 @@
+import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
 import { createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { switchMap } from 'rxjs/operators';
-import { ThemeService } from 'services/theme.service';
-import { selCoreIsThemeDark } from 'store/selectors/core-configuration.selectors';
+import { tap } from 'rxjs/operators';
+import { selCoreTheme } from 'store/selectors/core-ui.selectors';
 
 @Injectable()
 export class CoreThemeEffects {
 
 	private store: Store = inject(Store);
-	private themeService: ThemeService = inject(ThemeService);
+	private document: Document = inject(DOCUMENT);
 
 	setTheme$ = createEffect(
 
-		() => this.store.select(selCoreIsThemeDark).pipe(
+		() => this.store.select(selCoreTheme).pipe(
 
-			switchMap(isDark => this.themeService.switchTheme(isDark))
+			tap(theme => this.document.body.className = theme ?? '')
 
 		),
 		{ dispatch: false }

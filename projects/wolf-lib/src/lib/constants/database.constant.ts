@@ -1,3 +1,5 @@
+import { Theme } from './theme.constant';
+
 export enum LocalTableNames {
 
 	// bookmarks
@@ -28,7 +30,7 @@ export enum CONF_KEYS {
 
 	syncWorkerActive = 'syncWorkerActive',
 	sidebarVisible = 'sidebarVisible',
-	darkTheme = 'darkTheme',
+	theme = 'theme',
 	firestoreConfig = 'firestoreConfig',
 	titleLookupUrl = 'titleLookupUrl'
 
@@ -36,7 +38,7 @@ export enum CONF_KEYS {
 
 export class DEFAULT_CONF_VALUES {
 
-	static darkTheme = true;
+	static theme = Theme.DARK;
 	static sidebarVisible = true;
 	static syncWorkerActive = true;
 

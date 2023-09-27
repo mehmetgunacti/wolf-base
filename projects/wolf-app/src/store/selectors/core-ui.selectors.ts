@@ -15,3 +15,17 @@ export const selCoreIsBigScreen = createSelector(
 	(state: CoreUIState) => state.bigScreen
 
 );
+
+export const selCoreIsSidebarVisible = createSelector(
+
+	selCoreUIState,
+	(state: CoreUIState) => state.sidebarVisible
+
+);
+
+export const selCoreTheme = createSelector(
+
+	selCoreUIState,
+	(state: CoreUIState) => state.theme
+
+);

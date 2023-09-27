@@ -1,11 +1,11 @@
-import { ConfigurationTable, DEFAULT_CONF_VALUES } from '@lib';
+import { ConfigurationTable, DEFAULT_CONF_VALUES, getNextTheme } from '@lib';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
 
 export class MockConfigurationTableImpl implements ConfigurationTable {
 
 	private conf: Configuration = {
 
-		darkTheme: DEFAULT_CONF_VALUES.darkTheme,
+		theme: DEFAULT_CONF_VALUES.theme,
 		sidebarVisible: DEFAULT_CONF_VALUES.sidebarVisible,
 		syncWorkerActive: DEFAULT_CONF_VALUES.syncWorkerActive,
 		firestoreConfig: null,
@@ -27,7 +27,7 @@ export class MockConfigurationTableImpl implements ConfigurationTable {
 
 	async toggleTheme(): Promise<void> {
 
-		this.conf.darkTheme = !this.conf.darkTheme;
+		this.conf.theme = getNextTheme(this.conf.theme ?? DEFAULT_CONF_VALUES.theme);
 
 	}
 

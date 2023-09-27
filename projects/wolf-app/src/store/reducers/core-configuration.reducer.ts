@@ -5,15 +5,13 @@ import { CoreConfigurationState, initialCoreConfigurationState } from 'store/sta
 export const coreConfigurationReducer: ActionReducer<CoreConfigurationState, Action> = createReducer(
 
 	initialCoreConfigurationState,
-	// on(fromActions.confSetAll, (state, params) => {
+	on(confChanged, (state, { configuration: { syncWorkerActive, firestoreConfig, titleLookupUrl } }) => ({
 
-	// 	return produce(
-	// 		state,
-	// 		draft => draft
-	// 	);
+		syncWorkerActive,
+		firestoreConfig,
+		titleLookupUrl,
+		initialized: true
 
-	// }),
-
-	on(confChanged, (state, { configuration }) => ({ ...configuration, initialized: true }))
+	}))
 
 );

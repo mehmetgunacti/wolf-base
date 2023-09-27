@@ -3,14 +3,13 @@ import { MenuItem, WolfIcons } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, map } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
+import { showNotification } from 'store/actions/core-notification.actions';
 import { setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
 import { menuBookmarkBadge } from 'store/selectors/bookmark-ui.selectors';
 import { selCloudMenuBadgeNumbers } from 'store/selectors/cloud-ui.selectors';
-import { selCoreIsSidebarVisible, selCoreIsThemeDark } from 'store/selectors/core-configuration.selectors';
-import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
+import { selCoreIsBigScreen, selCoreIsSidebarVisible } from 'store/selectors/core-ui.selectors';
 import { buildInfo } from 'version';
 import * as navItems from '../../navigation-menu-items';
-import { showNotification } from 'store/actions/core-notification.actions';
 
 const formatBadge_Bookmark = ([total, filtered]: [number, number]) => filtered < total ? `${filtered}/${total}` : total > 0 ? `${total}` : '';
 
@@ -24,7 +23,6 @@ export class CorePageComponent implements OnDestroy {
 
 	navMenuItems$: Observable<MenuItem[]>;
 	cloudNumbers$: Observable<number[]>;
-	isThemeDark$: Observable<boolean>;
 
 	subscriptions = new Subscription();
 
@@ -83,7 +81,6 @@ export class CorePageComponent implements OnDestroy {
 			})
 
 		);
-		this.isThemeDark$ = this.store.select(selCoreIsThemeDark);
 
 	}
 

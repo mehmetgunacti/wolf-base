@@ -1,4 +1,4 @@
-import { Configuration } from "@lib";
+import { Configuration, DEFAULT_CONF_VALUES, FirestoreConfig, Theme } from "@lib";
 
 export interface CoreModuleState {
 
@@ -11,13 +11,17 @@ export interface CoreUIState {
 
 	sidebarVisible: boolean,
 	bigScreen: boolean,
-	syncableItems: number
+	syncableItems: number,
+	theme: Theme
 
 }
 
-export interface CoreConfigurationState extends Configuration {
+export interface CoreConfigurationState {
 
 	initialized: boolean;
+	syncWorkerActive: boolean | null;
+	titleLookupUrl: string | null;
+	firestoreConfig: FirestoreConfig | null;
 
 }
 
@@ -27,8 +31,6 @@ export const initialCoreConfigurationState: CoreConfigurationState = {
 
 	initialized: false,
 	syncWorkerActive: false,
-	sidebarVisible: true,
-	darkTheme: true,
 	firestoreConfig: null,
 	titleLookupUrl: null
 
@@ -38,7 +40,8 @@ export const initialCoreUIState: CoreUIState = {
 
 	sidebarVisible: true,
 	bigScreen: true,
-	syncableItems: 0
+	syncableItems: 0,
+	theme: DEFAULT_CONF_VALUES.theme,
 
 };
 

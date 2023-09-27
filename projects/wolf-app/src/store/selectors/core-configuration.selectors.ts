@@ -1,5 +1,5 @@
+import { FirestoreConfig } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { DEFAULT_CONF_VALUES, FirestoreConfig } from '@lib';
 import { CoreConfigurationState, CoreModuleState } from 'store/states/core.state';
 import { coreModuleState } from './core.selectors';
 
@@ -14,20 +14,6 @@ export const selCoreIsInitialized = createSelector(
 
 	confState,
 	(state: CoreConfigurationState) => state.initialized
-
-);
-
-export const selCoreIsSidebarVisible = createSelector(
-
-	confState,
-	(state: CoreConfigurationState) => state.sidebarVisible
-
-);
-
-export const selCoreIsThemeDark = createSelector(
-
-	confState,
-	(state: CoreConfigurationState) => state.darkTheme ?? DEFAULT_CONF_VALUES.darkTheme
 
 );
 

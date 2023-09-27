@@ -1,5 +1,5 @@
-import { ConfigurationTable } from '@lib';
-import { CONF_KEYS, LocalTableNames } from 'lib/constants/database.constant';
+import { ConfigurationTable, Theme, getNextTheme } from '@lib';
+import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalTableNames } from 'lib/constants/database.constant';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
 import { KeyValueTableImpl } from './key-value.table';
 import { WolfBaseDB } from '../wolfbase.database';
@@ -24,7 +24,12 @@ export class DexieConfigurationTableImpl extends KeyValueTableImpl implements Co
 
 	async toggleTheme(): Promise<void> {
 
-		return await this.toggle(CONF_KEYS.darkTheme);
+		const modified = await this.db.configuration.where(':id').equals(CONF_KEYS.theme).modify(
+			(currentValue: Theme, context) => { context.value = getNextTheme(currentValue); }
+		);
+
+		if (modified === 0)
+			this.set(CONF_KEYS.theme, DEFAULT_CONF_VALUES.theme);
 
 	}
 
@@ -47,7 +52,7 @@ export class DexieConfigurationTableImpl extends KeyValueTableImpl implements Co
 
 			syncWorkerActive: map.get(CONF_KEYS.syncWorkerActive) ?? null,
 			sidebarVisible: map.get(CONF_KEYS.sidebarVisible) ?? null,
-			darkTheme: map.get(CONF_KEYS.darkTheme) ?? null,
+			theme: map.get(CONF_KEYS.theme) ?? null,
 			firestoreConfig: map.get(CONF_KEYS.firestoreConfig) ?? null,
 			titleLookupUrl: map.get(CONF_KEYS.titleLookupUrl) ?? null,
 
