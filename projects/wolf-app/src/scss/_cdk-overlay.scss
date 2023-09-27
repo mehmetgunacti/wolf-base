@@ -1,0 +1,60 @@
+.cdk-overlay-container {
+	position: fixed;
+	z-index: 2000;
+}
+
+.cdk-overlay-pane {
+	position: absolute;
+	pointer-events: auto;
+	// box-sizing: border-box;
+	padding: 1rem;
+	z-index: 3000;
+}
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+	pointer-events: none;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+}
+
+.cdk-global-overlay-wrapper {
+	display: flex;
+	position: absolute;
+	z-index: 1000;
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+	opacity: .48;
+}
+
+.cdk-overlay-backdrop {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	pointer-events: auto;
+	// -webkit-tap-highlight-color: transparent;
+	transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+	opacity: 0;
+}
+
+
+
+// custom
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+	&.custom-backdrop-class {
+		background: #000;
+		opacity: 0.85 !important;
+	}
+}
+
+// .custom-panel-class {
+	// background-color: rgb(94, 0, 122);
+	// width: 40rem;
+// }
