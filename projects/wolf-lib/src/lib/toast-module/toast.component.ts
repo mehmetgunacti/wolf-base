@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { ToastConfiguration } from './toast.util';
-import { WolfIcons } from 'lib/constants';
 
 @Component({
 	selector: 'app-toast',
@@ -33,10 +32,10 @@ export class ToastComponent implements OnInit {
 	private getIconClass(data: ToastConfiguration): string {
 
 		switch (data.severity) {
-			case 'success': return WolfIcons.CHECK_CIRCLE;
-			case 'info': return WolfIcons.MEGAPHONE;
-			case 'warn': return WolfIcons.EXCLAMATION_CIRCLE;
-			case 'error': return WolfIcons.EXCLAMATION_TRIANGLE;
+			case 'success': return 'task_alt';
+			case 'info': return 'campaign';
+			case 'warn': return 'warning';
+			case 'error': return 'error';
 		}
 
 	}

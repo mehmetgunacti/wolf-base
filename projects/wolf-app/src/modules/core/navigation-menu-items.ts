@@ -1,15 +1,15 @@
-import { MenuItem, WolfIcons } from '@lib';
+import { MenuItem } from '@lib';
 
 export const miHome: MenuItem = {
 	label: 'Home',
-	icon: WolfIcons.HOME,
+	icon: 'home',
 	routerLink: [''],
 	routerLinkActiveOptions: { exact: true }
 };
 
 export const miBookmarks = (badge: string): MenuItem => ({
 	label: 'Bookmarks',
-	icon: WolfIcons.BOOKMARK,
+	icon: 'bookmarks',
 	routerLink: ['/bookmarks'],
 	queryParams: { tags: 'popular' },
 	badge,
@@ -18,7 +18,7 @@ export const miBookmarks = (badge: string): MenuItem => ({
 
 export const miKnowledgeBase: MenuItem = {
 	label: 'Knowledge Base',
-	icon: WolfIcons.BOOK,
+	icon: 'school',
 	routerLink: ['/kb']
 };
 

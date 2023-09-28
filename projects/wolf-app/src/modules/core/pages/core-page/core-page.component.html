@@ -30,13 +30,13 @@
 			<button
 				(click)="navTo('/settings')"
 				styleClass="p-button-rounded p-button-text"
-				title="Settings"><i [class]="WolfIcons.COG"></i></button>
+				title="Settings"><i class="material-symbols-outlined">settings</i></button>
 
 			<button
 				*ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers"
 
 				(click)="navTo('/cloud')"
-				[title]="cloudNumbers.length > 0 ? cloudNumbers[0] + ' syncable items available' : 'Cloud'"><i [class]="WolfIcons.CLOUD_UP"></i></button>
+				[title]="cloudNumbers.length > 0 ? cloudNumbers[0] + ' syncable items available' : 'Cloud'"><i class="material-symbols-outlined">cloud_sync</i></button>
 				<!--
 				[styleClass]="'p-button-rounded p-button-text cloudButton' + (cloudNumbers[1] > 0 ? ' p-button-danger' : cloudNumbers[0] > 0 ? ' p-button-warning' : '')"
 				[badge]="cloudNumbers.length > 0 ? '' + cloudNumbers[0] : ''"
@@ -46,22 +46,18 @@
 			<button
 				styleClass="p-button-rounded p-button-text"
 				(click)="navTo('/database')"
-				title="Database"><i [class]="WolfIcons.DATABASE"></i></button>
+				title="Database"><i class="material-symbols-outlined">database</i></button>
 
 			<button
 				styleClass="p-button-rounded p-button-text"
 				(click)="navTo('/logs')"
-				title="View Logs"><i [class]="WolfIcons.JOURNAL"></i></button>
+				title="View Logs"><i class="material-symbols-outlined">history</i></button>
 				<!-- [icon]="PrimeIcons.LIST" -->
 
 			<button
 				styleClass="p-button-rounded p-button-text"
 				(click)="onSwitchTheme()"
-				title="Switch Theme"><i class="material-symbols-outlined" style="font-size: 1.6rem">colors</i></button>
-
-				<i class="material-symbols-outlined">menu</i>
-
-				<span class="material-symbols-outlined">search</span>
+				title="Switch Theme"><i class="material-symbols-outlined">colors</i></button>
 
 		</div>
 		<div bottom-version>v{{ builtVersion }} (#{{ builtNumber }}) {{ builtTime | date:'dd.MM.yyyy hh:mm:ss' }}</div>

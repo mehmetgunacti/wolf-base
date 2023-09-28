@@ -1,4 +1,4 @@
-export enum WolfIcons {
+export enum WolfIcons1 {
 
 	CHECK_CIRCLE = 'bi bi-check2-square',
 	MEGAPHONE = 'bi bi-megaphone-fill',
