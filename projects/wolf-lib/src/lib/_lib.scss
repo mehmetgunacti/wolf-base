@@ -1,10 +1,16 @@
-@import './scss/hard-reset';
-@import './scss/cdk-overlay';
-@import './scss/responsive';
-@import './scss/helper';
-@import './scss/themes';
+@import './scss/core/hard-reset';
 
+@import './scss/mixins/util';
+@import './scss/mixins/responsive';
+
+@import './scss/core/helper';
+@import './scss/core/root';
+@import './scss/core/variables';
+
+// components
+@import './scss/components/button';
 @import './components/bookmark/bookmark.component.scss';
 @import './toast-module/toast.component.scss';
 
-@import './scss/button';
+@import "node_modules/@angular/cdk/overlay";
+@import './scss/core/cdk-overlay';

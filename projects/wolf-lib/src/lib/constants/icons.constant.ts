@@ -12,7 +12,7 @@ export enum WolfIcons {
 	CLOUD_UP = 'bi bi-cloud-arrow-up-fill',
 	COG = 'bi bi-gear-fill',
 	DATABASE = 'bi bi-database-fill',
-	PALETTE = 'bi bi-palette',
+	PALETTE = 'bi bi-paint-bucket',
 	MOON = 'bi bi-moon-fill',
 	MENU = 'bi bi-list'
 

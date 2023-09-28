@@ -1,0 +1,12 @@
+@mixin css-static($map) {
+
+	@each $key,
+	$value in $map {
+
+		@if type-of($value) !='map' {
+			#{$key} : #{$value};
+		}
+
+	}
+
+}

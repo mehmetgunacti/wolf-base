@@ -1,0 +1,60 @@
+$w-button  : (
+	"position"							: relative,
+	"display"							: inline-flex,
+	"align-items"						: center,
+	"justify-content"					: center,
+
+	"background-image"					: none,
+	"cursor"							: pointer,
+	"text-decoration"					: none,
+	"white-space"						: pre,
+
+	"padding"							: $w-padding-v	$w-padding-h,
+	"margin"							: $w-margin-v	$w-margin-h,
+	"font-size"							: $w-font-size,
+	"line-height"						: $w-line-height,
+	"border-radius"						: $w-border-radius,
+
+	"border-width"						: 1px,
+	"border-style"						: solid,
+	"transition"						: "color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out"
+);
+
+%w-button {
+
+	@include css-static($w-button);
+
+}
+
+button {
+
+	@extend %w-button;
+
+}
+
+button1 {
+
+	display				: inline-flex;
+	background-color	: var(--button-bg);
+	color				: var(--button-color);
+	border				: none;
+	border-radius		: 5px;
+	padding				: 6px 10px;
+	font-size			: 1.6rem;
+	cursor				: pointer;
+
+	transition			: background-color 0.3s ease;
+
+	&:hover {
+
+		background-color	: hsl(207, 100%, 39%);
+
+	}
+
+	&:active {
+
+		background-color	: hsl(207, 100%, 25%);
+
+	}
+
+}

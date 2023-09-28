@@ -6,7 +6,7 @@
 			*ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers"
 			(click)="toggleNav()"
 			styleClass="p-button-text"
-			icon="pi pi-bars"><i [class]="WolfIcons.MENU"></i></button>
+			icon="pi pi-bars"><i class="material-symbols-outlined">menu</i></button>
 			<!-- [badge]="cloudNumbers.length > 0 ? '.' : ''"
 			[badgeClass]="'navButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')"></p-button> -->
 
@@ -57,7 +57,11 @@
 			<button
 				styleClass="p-button-rounded p-button-text"
 				(click)="onSwitchTheme()"
-				title="Switch Theme"><i [class]="WolfIcons.PALETTE"></i></button>
+				title="Switch Theme"><i class="material-symbols-outlined" style="font-size: 1.6rem">colors</i></button>
+
+				<i class="material-symbols-outlined">menu</i>
+
+				<span class="material-symbols-outlined">search</span>
 
 		</div>
 		<div bottom-version>v{{ builtVersion }} (#{{ builtNumber }}) {{ builtTime | date:'dd.MM.yyyy hh:mm:ss' }}</div>
