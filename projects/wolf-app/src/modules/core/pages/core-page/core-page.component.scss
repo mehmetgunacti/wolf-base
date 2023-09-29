@@ -16,6 +16,8 @@ app-core-page {
 
 	header {
 
+		@extend %padded-container;
+
 		display					: grid;
 		grid-template-columns	: auto 1fr;
 		background-color		: var(--surface-c);
@@ -81,6 +83,7 @@ app-core-page {
 
 	main {
 
+		@extend %padded-container;
 		flex		: 1;
 		position	: relative;
 		display		: flex;
@@ -88,6 +91,7 @@ app-core-page {
 
 		nav {
 
+			@extend %padded-container;
 			@extend %flex-column;
 			position			: absolute;
 			z-index				: 10;
@@ -216,17 +220,17 @@ app-core-page {
 		line-height			: 0 !important;
 		bottom				: 0px;
 		right				: 0px;
-		
+
 		&.red {
-			
+
 			background-color: var(--red-600) !important;
-			
+
 		}
-		
+
 	}
-	
+
 	.cloudButton {
-		
+
 		overflow			: visible !important;
 
 		&.orange {

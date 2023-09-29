@@ -6,15 +6,15 @@ $w-padding-v-xs		: 0.1rem;
 
 $w-padding-h-xl		: 2rem;
 $w-padding-h-lg		: 1.6rem;
-$w-padding-h		: 1.1rem;
+$w-padding-h		: 1rem;
 $w-padding-h-sm		: 0.7rem;
 $w-padding-h-xs		: 0.3rem;
 
-$w-padding-xl		: $w-padding-h-xl $w-padding-h-xl;
-$w-padding-lg		: $w-padding-h-lg $w-padding-h-lg;
-$w-padding			: $w-padding-h    $w-padding-h;
-$w-padding-sm		: $w-padding-h-sm $w-padding-h-sm;
-$w-padding-xs		: $w-padding-h-xs $w-padding-h-xs;
+$w-padding-xl		: $w-padding-v-xl $w-padding-h-xl;
+$w-padding-lg		: $w-padding-v-lg $w-padding-h-lg;
+$w-padding			: $w-padding-v    $w-padding-h;
+$w-padding-sm		: $w-padding-v-sm $w-padding-h-sm;
+$w-padding-xs		: $w-padding-v-xs $w-padding-h-xs;
 
 $w-margin-v			: 1rem;
 
