@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NoDataPipe, PortalComponent, BookmarkComponent } from '@lib';
-import { ToastModule } from 'lib/toast-module/toast.module';
+import { ToastModule } from 'lib/components/toast/toast.module';
 
 @NgModule({
 	declarations: [

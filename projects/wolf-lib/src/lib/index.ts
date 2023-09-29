@@ -1,6 +1,6 @@
 export * from './components/portal.component';
 export * from './components/bookmark/bookmark.component';
-export * from './toast-module';
+export * from './components/toast';
 export * from './constants';
 export * from './models';
 export * from './pipes';

@@ -1,0 +1,22 @@
+@import './scss/core/hard-reset';
+
+@import './scss/core/variables';
+
+@import './scss/mixins/util';
+@import './scss/mixins/responsive';
+
+@import './scss/core/helper';
+@import './scss/core/root';
+
+
+// components
+@import './scss/components/button';
+@import './components/bookmark/bookmark.component.scss';
+@import './components/toast/toast.component.scss';
+
+@import "node_modules/@angular/cdk/overlay";
+@import './scss/core/cdk-overlay';
+
+@import './scss/themes/default';
+@import './scss/themes/light';
+@import './scss/themes/blue';
