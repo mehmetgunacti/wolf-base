@@ -1,3 +1,5 @@
+// padding
+
 $w-padding-v-xl		: 0.9rem;
 $w-padding-v-lg		: 0.8rem;
 $w-padding-v		: 0.6rem;
@@ -16,12 +18,28 @@ $w-padding			: $w-padding-v    $w-padding-h;
 $w-padding-sm		: $w-padding-v-sm $w-padding-h-sm;
 $w-padding-xs		: $w-padding-v-xs $w-padding-h-xs;
 
-$w-margin-v			: 1rem;
+// margin
 
-$w-margin-h			: 0.1rem;
+$w-margin-v-xl		: 1.4rem;
+$w-margin-v-lg		: 1.1rem;
+$w-margin-v			: 0.9rem;
+$w-margin-v-sm		: 0.6rem;
+$w-margin-v-xs		: 0.2rem;
+
+$w-margin-h-xl		: 1.4rem;
+$w-margin-h-lg		: 1.1rem;
+$w-margin-h			: 0.9rem;
+$w-margin-h-sm		: 0.6rem;
+$w-margin-h-xs		: 0.2rem;
+
+$w-margin-xl		: $w-margin-v-xl $w-margin-h-xl;
+$w-margin-lg		: $w-margin-v-lg $w-margin-h-lg;
+$w-margin			: $w-margin-v    $w-margin-h;
+$w-margin-sm		: $w-margin-v-sm $w-margin-h-sm;
+$w-margin-xs		: $w-margin-v-xs $w-margin-h-xs;
 
 $w-font-size		: 1.4rem;
 
 $w-line-height		: 1;
 
-$w-border-radius	: 5px;
+$w-border-radius	: 4px;

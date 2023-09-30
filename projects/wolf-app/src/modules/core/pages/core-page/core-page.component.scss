@@ -84,6 +84,7 @@ app-core-page {
 	main {
 
 		@extend %padded-container;
+		padding-left: 0;
 		flex		: 1;
 		position	: relative;
 		display		: flex;

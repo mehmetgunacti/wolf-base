@@ -1,0 +1,8 @@
+app-toast-wrapper {
+
+	@extend %flex-column;
+
+	row-gap			: 0.4rem;
+	margin			: $w-margin-xl;
+
+}

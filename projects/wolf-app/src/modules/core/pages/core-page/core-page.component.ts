@@ -38,7 +38,15 @@ export class CorePageComponent implements OnDestroy {
 
 	constructor() {
 
-		this.store.dispatch(showNotification({ severity: 'success', summary: 'Toast', sticky: true }));
+		this.store.dispatch(showNotification({ severity: 'info', summary: 'Toast Summary', sticky: true }));
+		this.store.dispatch(showNotification({ severity: 'success', summary: 'Toast Summary', sticky: true }));
+		this.store.dispatch(showNotification({ severity: 'warn', summary: 'Toast Summary', sticky: true }));
+		this.store.dispatch(showNotification({ severity: 'error', summary: 'Toast Summary', sticky: true }));
+
+		this.store.dispatch(showNotification({ severity: 'info', summary: 'Toast Summary', detail: 'Detail Here', sticky: true }));
+		this.store.dispatch(showNotification({ severity: 'success', summary: 'Toast Summary', detail: 'Detail Here', sticky: true }));
+		this.store.dispatch(showNotification({ severity: 'warn', summary: 'Toast Summary', detail: 'Detail Here', sticky: true }));
+		this.store.dispatch(showNotification({ severity: 'error', summary: 'Toast Summary', detail: 'Detail Here', sticky: true }));
 
 		this.subscriptions.add(
 

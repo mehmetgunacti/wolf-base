@@ -1,13 +1,11 @@
 <div toast-left>
-	<i class="material-symbols-outlined">{{ iconClass }}</i>
+
+	<span class="material-symbols-outlined">{{ iconClass }}</span>
+
 </div>
-<div toast-center>
-	<span toast-title
-			*ngIf="conf.summary">{{conf.summary}}</span>
-	<span toast-content [innerHTML]="conf.detail"></span>
-</div>
-<div toast-right
-		*ngIf="conf.closable"
-		(click)="onClose()">
-	<i class="pi pi-times"></i>
+<div toast-right>
+
+	<div toast-title *ngIf="conf.summary">{{conf.summary}}</div>
+	<div *ngIf="conf.detail" [innerHTML]="conf.detail"></div>
+
 </div>

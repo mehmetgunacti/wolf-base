@@ -8,4 +8,16 @@
 	--button-bg			: #004e7c;
 	--button-color		: white;
 
+	--success			: forestgreen;
+	--success-text		: var(--text-color);
+
+	--info				: #004e7c;
+	--info-text			: var(--text-color);
+
+	--warn				: rgb(235, 116, 19);
+	--warn-text			: var(--text-color);
+
+	--error				: rgb(184, 32, 32);
+	--error-text		: var(--text-color);
+
 }

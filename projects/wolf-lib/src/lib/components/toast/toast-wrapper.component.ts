@@ -16,7 +16,9 @@ export class ToastWrapperComponent {
 	toasts$: Observable<ToastConfiguration[]>;
 
 	constructor() {
+
 		this.toasts$ = this.toastRef.toasts$.pipe(map(conf => conf.reverse()));
+
 	}
 
 	onClose(id: number): void {
