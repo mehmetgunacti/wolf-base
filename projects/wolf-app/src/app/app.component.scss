@@ -3,6 +3,8 @@
 @import 'z-index';
 @import 'mixins/responsive';
 
+$bg-transition: background-color 1.2s cubic-bezier(0.25, 1, 0.25, 1);
+
 :host {
 
 	display				: grid;
@@ -12,9 +14,10 @@
 
 		@extend %padded-container;
 		display					: flex;
-		background-color		: rgb(5, 55, 5);
 		height					: $header-height;
 		width					: 100vw;
+		background-color		: var(--background-header);
+		transition				: $bg-transition;
 
 	}
 
@@ -25,12 +28,12 @@
 
 		&>nav {
 
-			background-color	: purple;
+			background-color	: var(--background-nav);
 			position			: absolute;
 			height				: calc(100vh - $header-height);
 			width				: $nav-width;
 			margin-left			: -$nav-width;
-			transition			: margin-left 0.6s cubic-bezier(0.25, 1, 0.25, 1);
+			transition			: margin-left 0.6s cubic-bezier(0.25, 1, 0.25, 1), $bg-transition;
 			z-index				: $z-index-nav-overlay;
 
 			@include md() {
@@ -45,7 +48,8 @@
 		&>main {
 
 			flex				: 1;
-			background-color	: blue;
+			background-color	: var(--background);
+			transition			: $bg-transition;
 			position			: relative;
 
 		}

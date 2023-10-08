@@ -1,16 +1,16 @@
-:root {
+body.gray {
 
 	--brand: hsl(202, 100%, 24%);
 	--brand-hue			: 202;
 	--brand-saturation	: 100%;
 	--brand-lightness	: 24%;
 
-	--accent			: #282c34;
-	--text-color		: #E6E6E8;
+	--accent			: #cccccc;
+	--text-color		: #f2f2f2;
 	--secondary-text	: #4b5263;
-	--background		: #4C555C;
-	--background-header	: #17181C;
-	--background-nav	: #22242A;
+	--background		: #7D8597;
+	--background-header	: #33415C;
+	--background-nav	: #5C677D;
 
 	--button-bg			: #004e7c;
 	--button-color		: white;

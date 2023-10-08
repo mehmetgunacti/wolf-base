@@ -1,7 +1,10 @@
 export enum Theme {
 
 	DARK = 'dark',
-	LIGHT = 'light',
-	BLUE = 'blue'
+	BLUE = 'blue',
+	// LIGHT = 'light',
+	// MIXED = 'mixed',
+	// GREEN = 'green',
+	// GRAY = 'gray'
 
 }
