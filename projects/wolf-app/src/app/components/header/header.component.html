@@ -1,0 +1,14 @@
+<section id="section-logo">
+
+	<button
+		*ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers"
+		(click)="toggleNav()"
+		styleClass="p-button-text"
+		icon="pi pi-bars"><i class="material-symbols-outlined">menu</i></button>
+		<!-- [badge]="cloudNumbers.length > 0 ? '.' : ''"
+		[badgeClass]="'navButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')"></p-button> -->
+
+</section>
+<section id="portal-outlet">
+	<!-- content will be placed dynamically via Cdk Portal -->
+</section>

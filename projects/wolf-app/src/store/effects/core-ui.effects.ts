@@ -3,13 +3,16 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { Breakpoint, LocalStorageService } from '@lib';
-import { map, switchMap } from 'rxjs/operators';
-import { setBigScreen, setSidebarVisible, switchTheme } from 'store/actions/core-ui.actions';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { hideSidebar, setBigScreen, switchTheme, toggleSidebar } from 'store/actions/core-ui.actions';
+import { Store } from '@ngrx/store';
+import { selCoreIsSidebarVisible } from 'store/selectors/core-ui.selectors';
 
 @Injectable()
 export class CoreUIEffects {
 
 	private actions$: Actions = inject(Actions);
+	private store: Store = inject(Store);
 	private breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
 	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
 
@@ -35,12 +38,25 @@ export class CoreUIEffects {
 
 	);
 
-	setSidebarVisibility$ = createEffect(
+	toggleSidebar$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(setSidebarVisible),
-			switchMap(({ visible }) => this.localStorage.configuration.setSidebarVisible(visible))
+			ofType(toggleSidebar),
+			withLatestFrom(this.store.select(selCoreIsSidebarVisible)),
+			switchMap(([, visible]) => this.localStorage.configuration.setSidebarVisible(!visible))
+
+		),
+		{ dispatch: false }
+
+	);
+
+	hideSidebar$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(hideSidebar),
+			switchMap(() => this.localStorage.configuration.setSidebarVisible(false))
 
 		),
 		{ dispatch: false }

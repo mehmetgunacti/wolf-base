@@ -12,7 +12,7 @@ export const routes: Routes = [
 	{
 
 		path: '',
-		loadChildren: () => import('../modules/core/core.module').then(m => m.CoreModule)
+		loadChildren: () => import('../modules/home/home.module').then(m => m.HomeModule)
 
 	}
 
