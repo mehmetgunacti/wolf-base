@@ -19,6 +19,7 @@ app-toast {
 
 		flex			: 1;
 		@extend %flex-column-center;
+		padding			: $w-padding-v $w-padding-h $w-padding-v 0;
 
 		[toast-title] {
 
