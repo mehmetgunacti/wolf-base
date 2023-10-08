@@ -9,6 +9,7 @@
 	&>header {
 
 		@extend %padded-container;
+		display					: flex;
 		background-color		: rgb(5, 55, 5);
 		height					: $header-height;
 		width					: 100vw;
