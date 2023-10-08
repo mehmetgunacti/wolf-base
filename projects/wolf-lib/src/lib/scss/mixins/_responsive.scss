@@ -1,10 +1,19 @@
-// this is the only place primeflex is being used
-// @import '../../node_modules/primeflex/core/variables';
+// these values should be the same : responsive.constant.ts
 
-$sm: 540px;
-$md: 720px;
-$lg: 960px;
-$xl: 1140px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
+@mixin bigScreen() {
+
+	@media screen and (min-width: $md) {
+
+		@content;
+
+	}
+
+}
 
 @mixin sm() {
 	@media screen and (min-width: $sm) {

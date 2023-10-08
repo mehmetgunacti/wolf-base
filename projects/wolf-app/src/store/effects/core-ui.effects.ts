@@ -19,7 +19,7 @@ export class CoreUIEffects {
 	setBigScreen$ = createEffect(
 
 		() => this.breakpointObserver
-			.observe(`(min-width: ${Breakpoint.lg})`)
+			.observe(`(min-width: ${Breakpoint.md})`)
 			.pipe(
 				map((result) => setBigScreen({ isBigScreen: result.matches }))
 			)

@@ -13,15 +13,15 @@ import * as store from 'store/store.config';
 import { AppComponent } from './app.component';
 import * as config from './app.config';
 import { HeaderComponent } from './components/header/header.component';
-import { NavOverlayDirective } from './components/nav-overlay/nav-overlay.component';
 import { NavComponent } from './components/nav/nav.component';
+import { NavOverlayComponent } from './components/nav-overlay/nav-overlay.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HeaderComponent,
 		NavComponent,
-		NavOverlayDirective
+		NavOverlayComponent
 	],
 	imports: [
 		BrowserModule,

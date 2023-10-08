@@ -1,6 +1,7 @@
 import { Component, HostBinding, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
+import { hideSidebar } from 'store/actions/core-ui.actions';
 import { selCoreIsSidebarVisible } from 'store/selectors/core-ui.selectors';
 
 @Component({
@@ -18,6 +19,12 @@ export class AppComponent {
 	constructor() {
 
 		this.store.select(selCoreIsSidebarVisible).pipe(takeUntilDestroyed()).subscribe(visible => this.navVisible = visible);
+
+	}
+
+	hideSidebar(): void {
+
+		this.store.dispatch(hideSidebar());
 
 	}
 
