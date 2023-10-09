@@ -1,5 +1,5 @@
 @import 'variables';
-@import 'helper';
+@import 'core/helper';
 @import 'z-index';
 @import 'mixins/responsive';
 
@@ -29,6 +29,7 @@ $bg-transition: background-color 1.2s cubic-bezier(0.25, 1, 0.25, 1);
 		&>nav {
 
 			@extend %padded-container;
+			@extend %flex-column;
 			position			: absolute;
 			height				: calc(100vh - $header-height);
 			width				: $nav-width;

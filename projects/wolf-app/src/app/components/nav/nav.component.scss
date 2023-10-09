@@ -1,10 +1,25 @@
 @import 'variables';
 @import 'mixins/responsive';
+@import 'core/variables';
 
 :host {
 
 	display				: contents;
 
+	&>[bottom-buttons] {
+
+		margin-top		: auto;
+
+	}
+
+	&>[bottom-version] {
+
+		padding			: $w-padding-sm;
+		padding-left	: $w-padding-h-xs;
+		font-size		: 1rem;
+		color			: var(--secondary-text);
+
+	}
 
 }
 
