@@ -1,9 +1,8 @@
 @import 'variables';
 @import 'core/helper';
+@import 'core/variables';
 @import 'z-index';
 @import 'mixins/responsive';
-
-$bg-transition: background-color 1.2s cubic-bezier(0.25, 1, 0.25, 1);
 
 :host {
 

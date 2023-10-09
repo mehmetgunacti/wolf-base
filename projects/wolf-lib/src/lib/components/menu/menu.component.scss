@@ -12,6 +12,7 @@
 		@extend %flex-center-y;
 		height				: 6rem;
 		cursor				: pointer;
+		transition			: $bg-transition;
 
 		&:hover {
 
@@ -42,11 +43,13 @@
 
 			@extend %flex-center-center;
 			width				: 6rem;
+			font-size			: 1.2rem;
 
 			&>span {
 
 				padding				: $w-padding-sm;
 				border-radius		: var(--border-radius);
+				transition			: $bg-transition;
 
 				&:not(:empty) {
 

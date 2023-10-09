@@ -1,10 +1,9 @@
 <section id="section-logo">
 
 	<button
+		class="icon-only"
 		*ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers"
-		(click)="toggleNav()"
-		styleClass="p-button-text"
-		icon="pi pi-bars"><i class="material-symbols-outlined">menu</i></button>
+		(click)="toggleNav()"><i class="material-symbols-outlined">menu</i></button>
 		<!-- [badge]="cloudNumbers.length > 0 ? '.' : ''"
 		[badgeClass]="'navButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')"></p-button> -->
 

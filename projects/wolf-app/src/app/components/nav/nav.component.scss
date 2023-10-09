@@ -8,7 +8,15 @@
 
 	&>[bottom-buttons] {
 
+		display			: flex;
 		margin-top		: auto;
+    	gap				: 0.5rem;
+
+		&>button:last-child {
+
+			margin-left	: auto;
+
+		}
 
 	}
 
