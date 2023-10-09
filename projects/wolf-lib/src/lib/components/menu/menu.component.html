@@ -1,0 +1,9 @@
+<div *ngFor="let item of items" (click)="onClick(item.url)">
+
+	<div icon>
+		<span class="material-symbols-outlined">{{item.icon}}</span>
+	</div>
+	<span label>{{ item.label }}</span>
+	<div badge><span>{{ item.badge }}</span></div>
+
+</div>

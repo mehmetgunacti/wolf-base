@@ -28,13 +28,14 @@ $bg-transition: background-color 1.2s cubic-bezier(0.25, 1, 0.25, 1);
 
 		&>nav {
 
-			background-color	: var(--background-nav);
+			@extend %padded-container;
 			position			: absolute;
 			height				: calc(100vh - $header-height);
 			width				: $nav-width;
 			margin-left			: -$nav-width;
 			transition			: margin-left 0.6s cubic-bezier(0.25, 1, 0.25, 1), $bg-transition;
 			z-index				: $z-index-nav-overlay;
+			background-color	: var(--background-nav);
 
 			@include md() {
 

@@ -1,0 +1,63 @@
+@import 'core/helper';
+@import 'core/variables';
+
+:host {
+
+	@extend %panel-container;
+	background-color		: var(--background-panel);
+	overflow				: hidden;
+
+	&>div {
+
+		@extend %flex-center-y;
+		height				: 6rem;
+		cursor				: pointer;
+
+		&:hover {
+
+			background-color: var(--background);
+
+		}
+
+		&>div[icon] {
+
+			@extend %flex-center-center;
+			width			: 5rem;
+
+			&>span {
+
+				font-size	: 2.2rem;
+
+			}
+
+		}
+
+		&>span[label] {
+
+			flex 			: 1;
+
+		}
+
+		&>div[badge] {
+
+			@extend %flex-center-center;
+			width				: 6rem;
+
+			&>span {
+
+				padding				: $w-padding-sm;
+				border-radius		: var(--border-radius);
+
+				&:not(:empty) {
+
+					background-color	: var(--secondary-text);
+
+				}
+
+			}
+
+		}
+
+	}
+
+}
