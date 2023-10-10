@@ -1,3 +1,5 @@
+@import 'core/variables';
+
 :host {
 
     display			: flex;
@@ -8,13 +10,14 @@
 
 		padding				: 0.25rem;
 		margin-bottom		: 3rem;
-		background-color	: rgb(30, 30, 30);
+		background-color	: var(--background-nav);
 		border				: 1px solid rgba(255, 255, 255, 0.3);
 		border-radius		: 0.25rem;
 		max-width			: 100%;
 		width				: 127px;
 		height				: 127px;
 		position			: relative;
+		transition			: $bg-transition;
 
 		&:hover {
 			border-color	: rgba(255, 255, 255, 0.6);
