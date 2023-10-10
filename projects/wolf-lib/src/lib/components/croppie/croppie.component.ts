@@ -22,7 +22,7 @@ const croppieOptions: CroppieOptions = {
 };
 
 @Component({
-	selector: 'app-croppie',
+	selector: 'w-croppie',
 	templateUrl: './croppie.component.html',
 	styleUrls: ['./croppie.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush

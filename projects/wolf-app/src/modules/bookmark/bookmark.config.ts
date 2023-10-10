@@ -9,7 +9,6 @@ export const components = [
 
 	// components
 	BookmarkFormComponent,
-	CroppieComponent,
 	SelectedTagsComponent,
 
 	// containers
