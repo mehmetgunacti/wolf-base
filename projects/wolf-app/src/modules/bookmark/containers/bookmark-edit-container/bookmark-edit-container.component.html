@@ -1,0 +1,9 @@
+<app-bookmark-form
+		[bookmark]="bookmark$ | async"
+		[tagSuggestions]="tagSuggestions$ | async"
+		[titleLookupUrl]="titleLookup$ | async"
+		(create)="onCreate($event)"
+		(update)="onUpdate($event.id, $event.bookmark)"
+		(delete)="onDelete($event)"
+		(tagInput)="onTagInput($event)"
+		(titleLookup)="onTitleLookup($event)"></app-bookmark-form>
