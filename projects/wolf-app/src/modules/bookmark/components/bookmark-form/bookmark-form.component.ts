@@ -6,6 +6,7 @@ import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
 @Component({
 	selector: 'app-bookmark-form',
 	templateUrl: './bookmark-form.component.html',
+	styleUrls: ['./bookmark-form.component.scss'],
 	providers: [{ provide: BOOKMARK_FORM, useClass: EditFormImpl }],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

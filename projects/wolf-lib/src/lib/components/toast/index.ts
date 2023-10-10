@@ -3,3 +3,4 @@ export * from './toast.animation';
 export * from './toast.component';
 export * from './toast.service';
 export * from './toast.util';
+export * from './toast.module';

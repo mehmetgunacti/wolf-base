@@ -11,6 +11,7 @@ import { selCoreTitleLookupUrl } from 'store/selectors/core-configuration.select
 @Component({
 	selector: 'app-bookmark-edit-container',
 	templateUrl: './bookmark-edit-container.component.html',
+	styleUrls: ['./bookmark-edit-container.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarkEditContainerComponent implements OnInit, AfterContentInit {

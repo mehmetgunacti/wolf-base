@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { slideUpDownTrigger } from 'modules/shared';
+import { slideUpDownTrigger } from '@lib';
 import { Observable } from 'rxjs';
 import { clickTag, emptySelectedTags, search } from 'store/actions/bookmark-tags.actions';
 import { closeEditBookmarkDialog, openAddBookmarkDialog, toggleSearchAndTagCloudVisibility } from 'store/actions/bookmark-ui.actions';
@@ -11,6 +11,7 @@ import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 @Component({
 	selector: 'app-bookmarks-page',
 	templateUrl: './bookmarks-page.component.html',
+	styleUrls: ['./bookmarks-page.component.html'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [slideUpDownTrigger]
 })

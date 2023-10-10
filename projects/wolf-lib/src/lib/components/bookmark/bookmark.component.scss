@@ -1,4 +1,6 @@
-app-bookmark {
+@import 'core/helper';
+
+:host {
 
 	@extend %component-shadow;
 	--bookmark-hover-transition		: all ease-in-out 250ms;
@@ -10,7 +12,7 @@ app-bookmark {
 	padding				: 0.5rem;
 	overflow			: hidden;
 	border-radius		: var(--border-radius);
-	background-color	: var(--surface-a);
+	background-color	: var(--background-panel);
 
 	& > div[bookmark-overlay] {
 
@@ -69,7 +71,7 @@ app-bookmark {
 							font-size	: x-small;
 						}
 					}
-					
+
 				}
 
 				span[bookmark-title] {
@@ -113,7 +115,7 @@ app-bookmark {
 						& .p-tag-value {
 
 							font-size	: x-small;
-	
+
 						}
 
 					}

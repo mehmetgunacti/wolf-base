@@ -24,6 +24,7 @@ const croppieOptions: CroppieOptions = {
 @Component({
 	selector: 'app-croppie',
 	templateUrl: './croppie.component.html',
+	styleUrls: ['./croppie.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CroppieComponent implements OnDestroy, AfterViewInit {

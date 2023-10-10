@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EmbeddedViewRef, Input, OnDestroy, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
-	selector: 'app-portal',
+	selector: 'w-portal',
 	template: `
 	<ng-template #pageActions>
 	  <ng-content></ng-content>
@@ -15,7 +15,7 @@ export class PortalComponent implements AfterViewInit, OnDestroy {
 	private disposeFn!: () => void;
 	private viewRef!: EmbeddedViewRef<{}>;
 
-	@Input({ required: true }) outletName!: 'portal-outlet'; // | 'portal-outlet-right';
+	@Input() outletName: 'portal-outlet' = 'portal-outlet'; // | 'portal-outlet-right';
 
 	constructor(private viewContainerRef: ViewContainerRef) { }
 

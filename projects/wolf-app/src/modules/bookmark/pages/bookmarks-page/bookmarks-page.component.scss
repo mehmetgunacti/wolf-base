@@ -1,4 +1,6 @@
-app-bookmarks-page {
+@import 'mixins/responsive';
+
+:host {
 
 	display                     : grid;
 	grid-template-columns		: 1fr;
@@ -6,7 +8,7 @@ app-bookmarks-page {
 	grid-template-areas			: "t"
 	 							  "b";
 
-	@include md() {
+	@include bigScreen() {
 
 		grid-template-columns	: repeat(12, 1fr);
 		grid-template-areas		: ". . t t t t t t t t . ."
@@ -34,14 +36,14 @@ app-bookmarks-page {
 		width		: 100vw;
 		height		: 100vh;
 		max-height	: initial !important;
-	
+
 		@include lg() {
-	
+
 			width	: 80vw;
 			height	: 95vh;
-	
+
 		}
-	
+
 	}
 
 }

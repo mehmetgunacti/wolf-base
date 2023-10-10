@@ -1,0 +1,4 @@
+<a *ngFor="let tag of uiTags"
+	(click)="onTagClick(tag.tag.name)"
+	[ngClass]="tag.className"
+	[ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</a>

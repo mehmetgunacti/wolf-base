@@ -9,6 +9,7 @@ import { distinctTagsArray, relatedTags, selectedTags } from 'store/selectors/bo
 @Component({
 	selector: 'app-bookmarks-search-and-tag-cloud-container',
 	templateUrl: './bookmarks-search-and-tag-cloud-container.component.html',
+	styleUrls: ['./bookmarks-search-and-tag-cloud-container.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {

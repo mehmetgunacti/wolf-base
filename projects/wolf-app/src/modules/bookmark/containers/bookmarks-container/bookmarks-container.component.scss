@@ -1,4 +1,6 @@
-app-bookmarks-container {
+@import 'mixins/responsive';
+
+:host{
 
 	// & app-bookmark {
 
@@ -13,7 +15,7 @@ app-bookmarks-container {
 	// width						: 100%;
 	// padding						: 0 0.5rem 0.5rem;
 
-	@include md() {
+	@include bigScreen() {
 		grid-template-columns	: repeat(auto-fill, minmax(360px, 1fr));
 		// grid-auto-rows			: 9rem;
 		// grid-gap				: 1rem;

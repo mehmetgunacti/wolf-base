@@ -16,8 +16,8 @@
 	</button>
 </div>
 
-<app-tag-cloud
+<w-tag-cloud
     [tags]="tags$ | async"
     [selectedTags]="selectedTags$ | async"
     [relatedTags]="relatedTags$ | async"
-    (tagClick)="onTagClicked($event)"></app-tag-cloud>
+    (tagClick)="onTagClicked($event)"></w-tag-cloud>

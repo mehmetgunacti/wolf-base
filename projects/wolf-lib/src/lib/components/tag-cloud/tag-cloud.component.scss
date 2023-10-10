@@ -1,0 +1,72 @@
+:host {
+
+	display: block;
+	padding: 1rem;
+
+	div[selected-tags] {
+
+		@extend %flex-start-center;
+		margin		: 0.3rem 0;
+		min-height	: 1.5rem;
+
+		&>i {
+			color		: var(--accent);
+			font-size	: smaller;
+		}
+
+		button.p-button {
+
+			padding				: 1px 5px;
+			margin-top			: 3px;
+			margin-right		: 3px;
+			min-width			: initial;
+			font-size			: 0.75rem;
+			background-color	: transparent;
+			color				: var(--accent);
+
+			&:hover, &:active, &:focus {
+				color			: var(--text-color);
+			}
+
+		}
+
+	}
+
+	&>a {
+
+		display			: inline-block;
+		margin			: 0.2rem;
+		font-size 		: 1.1rem;
+		line-height		: 0.8;
+		cursor			: pointer;
+
+		&.selected {
+			color		: orange;
+		}
+
+		&.related {
+			color 		: var(--accent);
+		}
+
+		&.disabled {
+			color 		: var(--gray-700);
+		}
+
+
+		// & sup {
+
+		// 	display				: inline-block;
+		// 	font-size			: 10px;
+		// 	color				: white;
+		// 	background-color	: orangered;
+		// 	border-radius		: 40px;
+		// 	padding				: 4px 0;
+		// 	width				: 16px;
+		// 	text-align			: center;
+		// 	margin-left			: 2px;
+
+		// }
+
+	}
+
+}

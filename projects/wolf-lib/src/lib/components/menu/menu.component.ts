@@ -32,13 +32,13 @@ export class MenuComponent {
 			icon: 'home'
 		},
 		{
-			url: '/home',
+			url: '/bookmarks',
 			label: 'Bookmarks',
 			icon: 'bookmarks',
 			badge: '470'
 		},
 		{
-			url: '/home',
+			url: '/kb',
 			label: 'Knowledge Base',
 			icon: 'school'
 		},

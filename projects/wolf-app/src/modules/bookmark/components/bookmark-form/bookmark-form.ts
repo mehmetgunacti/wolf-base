@@ -1,7 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Bookmark, UUID } from 'lib';
-import { FormClass, FormClassImpl } from 'modules/shared';
+import { Bookmark, UUID, FormClass, FormClassImpl } from '@lib';
 
 interface EditForm {
 
@@ -87,7 +86,7 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 	}
 
 	removeURL(idx: number): void {
-		
+
 		this.urls.removeAt(idx);
 
 	}

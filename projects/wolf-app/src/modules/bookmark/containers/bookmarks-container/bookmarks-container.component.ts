@@ -9,6 +9,7 @@ import { filteredBookmarks } from 'store/selectors/bookmark-tags.selectors';
 @Component({
 	selector: 'app-bookmarks-container',
 	templateUrl: './bookmarks-container.component.html',
+	styleUrls: ['./bookmarks-container.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarksContainerComponent {

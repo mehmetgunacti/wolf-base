@@ -1,17 +1,4 @@
-<!-- top-left corner standard/selected tags -->
-<app-portal outletName="portal-outlet-left">
-
-	<app-selected-tags
-		[tags]="['popular', 'news', 'im-bored', 'shopping']"
-		[selectedTags]="selectedTags$ | async"
-		(filterClick)="emptyFilter()"
-		(tagClick)="onTagClicked($event)"
-		></app-selected-tags>
-
-</app-portal>
-
-<!-- top-right corner buttons -->
-<app-portal outletName="portal-outlet-right">
+<w-portal>
 	<button
 		pButton
 		pRipple
@@ -30,10 +17,16 @@
 		class="p-button-text p-button-sm"
 		(click)="openAddDialog()">
 	</button>
-</app-portal>
+</w-portal>
 
 <!-- Search and Tag-cloud -->
 <app-bookmarks-search-and-tag-cloud-container tagCloud *ngIf="tagsVisible$ | async" @slideUpDown (search)="onSearch($event)"/>
+<w-selected-tags
+	[tags]="['popular', 'news', 'im-bored', 'shopping']"
+	[selectedTags]="selectedTags$ | async"
+	(filterClick)="emptyFilter()"
+	(tagClick)="onTagClicked($event)"
+	></w-selected-tags>
 
 <!-- Edit Dialog -->
 <!-- <p-dialog

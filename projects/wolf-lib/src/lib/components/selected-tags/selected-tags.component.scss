@@ -1,0 +1,28 @@
+:host {
+
+	@extend %flex-start-center;
+	margin		: 0.3rem 0;
+	min-height	: 1.5rem;
+
+	&>i {
+		color		: var(--accent);
+		font-size	: smaller;
+	}
+
+	button.p-button {
+
+		padding				: 1px 5px;
+		margin-top			: 3px;
+		margin-right		: 3px;
+		min-width			: initial;
+		font-size			: 0.75rem;
+		background-color	: transparent;
+		color				: var(--accent);
+
+		&:hover, &:active, &:focus {
+			color			: var(--text-color);
+		}
+
+	}
+
+}

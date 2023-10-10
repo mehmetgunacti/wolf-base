@@ -5,6 +5,7 @@ import { Bookmark } from 'lib/models';
 @Component({
 	selector: 'app-bookmark',
 	templateUrl: './bookmark.component.html',
+	styleUrls: ['./bookmark.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarkComponent {

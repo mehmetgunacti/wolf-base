@@ -14,6 +14,12 @@ export const routes: Routes = [
 		path: '',
 		loadChildren: () => import('../modules/home/home.module').then(m => m.HomeModule)
 
+	},
+	{
+
+		path: 'bookmarks',
+		loadChildren: () => import('../modules/bookmark/bookmark.module').then(m => m.BookmarkModule)
+
 	}
 
 ];
