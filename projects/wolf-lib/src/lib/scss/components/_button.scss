@@ -9,8 +9,8 @@ $w-button  : (
 	"text-decoration"					: none,
 	"white-space"						: pre,
 
-	"padding"							: $w-padding-v	$w-padding-h,
-	"font-size"							: $w-font-size,
+	"padding"							: 0.8rem 1.2rem,
+	"font-size"							: 1.6rem,
 	"line-height"						: $w-line-height,
 	"border-radius"						: $w-border-radius,
 
@@ -54,6 +54,13 @@ button {
 			border-radius		: 25px;
 
 		}
+
+	}
+
+	&.danger {
+
+		background-color	: var(--error);
+		color				: var(--error-text);
 
 	}
 

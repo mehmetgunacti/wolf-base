@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
-import { LocalStorageService, RemoteStorageService } from '@lib';
+import { LocalStorageService, RemoteStorageService, WOverlayService } from '@lib';
 import { Store } from '@ngrx/store';
 import { SyncService } from 'lib/services/sync-service.interface';
 import { CustomErrorHandler, DexieLocalStorageServiceImpl, FirestoreRemoteStorageServiceImpl } from 'services';
@@ -62,5 +62,6 @@ export const providers: Provider[] = [
 	{ provide: LOCAL_STORAGE_SERVICE, useClass: DexieLocalStorageServiceImpl },
 	{ provide: REMOTE_STORAGE_SERVICE, useClass: FirestoreRemoteStorageServiceImpl, deps: [Store, HttpClient] },
 	{ provide: SYNC_SERVICE, useClass: SyncServiceImpl, deps: [LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE] },
+	{ provide: WOverlayService }
 
 ];

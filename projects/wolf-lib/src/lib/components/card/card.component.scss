@@ -1,0 +1,41 @@
+@import 'core/helper';
+@import 'core/variables';
+
+:host {
+
+	@extend %flex-column;
+	background-color		: var(--background-panel);
+	border-radius			: var(--border-radius);
+	padding					: var(--padding);
+
+	&>header {
+
+		@extend %flex-space-between-center;
+
+		&>[card-title] {
+
+			@extend %flex-center-y;
+
+		}
+
+		&>[card-buttons] {
+
+			@extend %flex-center-y;
+
+		}
+
+	}
+
+	&>footer {
+
+		@extend %flex-center-y;
+
+		&:empty {
+
+			display		: none;
+
+		}
+
+	}
+
+}

@@ -1,5 +1,12 @@
+@import 'core/helper';
+
 :host {
 
-	display: grid;
+	&>div {
+
+		@extend %padded-container;
+		@extend %panel-container;
+
+	}
 
 }

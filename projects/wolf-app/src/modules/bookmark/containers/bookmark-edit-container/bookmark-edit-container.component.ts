@@ -2,6 +2,7 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } 
 import { Store } from '@ngrx/store';
 import { Bookmark, ToastConfiguration, UUID } from 'lib';
 import { Observable, Subject, combineLatest, filter, map } from 'rxjs';
+import { closeEditBookmarkDialog } from 'store/actions/bookmark-ui.actions';
 import { createBookmark, deleteBookmark, updateBookmark } from 'store/actions/bookmark.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { selBookmark } from 'store/selectors/bookmark-entities.selectors';
@@ -71,7 +72,11 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	}
 
-	close(): void { }
+	onClose(): void {
+
+		this.store.dispatch(closeEditBookmarkDialog());
+
+	}
 
 	onTagInput(val: string): void {
 

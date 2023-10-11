@@ -121,6 +121,6 @@
 </form>
 
 <div form-element-buttons>
-	<button *ngIf="this.bookmark" pButton type="button" label="Delete" icon="pi pi-trash" iconPos="left" class="p-button-danger" (click)="onDelete()"></button>
-	<button pButton type="button" label="Save" icon="pi pi-save" iconPos="left" (click)="onSave()"></button>
+	<button type="button" class="danger" (click)="onDelete()">Delete</button>
+	<button type="button" (click)="onSave()">Save</button>
 </div>

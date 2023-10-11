@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NoDataPipe, PortalComponent, BookmarkComponent, TagCloudComponent, ToastModule } from '@lib';
+import { BookmarkComponent, CardModule, NoDataPipe, PortalComponent, TagCloudComponent, ToastModule } from '@lib';
 
 @NgModule({
 	declarations: [
@@ -18,7 +18,8 @@ import { NoDataPipe, PortalComponent, BookmarkComponent, TagCloudComponent, Toas
 		CommonModule,
 		RouterModule,
 		ReactiveFormsModule,
-		ToastModule
+		ToastModule,
+		CardModule
 	],
 	exports: [
 		BookmarkComponent,
@@ -28,7 +29,8 @@ import { NoDataPipe, PortalComponent, BookmarkComponent, TagCloudComponent, Toas
 		// ToastWrapperComponent,
 		// ToastModule,
 		ReactiveFormsModule,
-		NoDataPipe
+		NoDataPipe,
+		CardModule
 	],
 	providers: []
 })

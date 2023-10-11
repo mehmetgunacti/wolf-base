@@ -1,4 +1,16 @@
-<app-bookmark-form
+<w-card>
+	<ng-container card-title>Edit Bookmark</ng-container>
+	<ng-container card-buttons>
+
+		<button>button 1</button>
+		<button
+			class="icon-only rounded"
+			(click)="onClose()"
+			title="Switch Theme"><span class="material-symbols-outlined">close</span></button>
+
+	</ng-container>
+
+	<app-bookmark-form
 		[bookmark]="bookmark$ | async"
 		[tagSuggestions]="tagSuggestions$ | async"
 		[titleLookupUrl]="titleLookup$ | async"
@@ -7,3 +19,5 @@
 		(delete)="onDelete($event)"
 		(tagInput)="onTagInput($event)"
 		(titleLookup)="onTitleLookup($event)"></app-bookmark-form>
+
+</w-card>

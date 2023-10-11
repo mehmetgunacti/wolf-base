@@ -1,21 +1,12 @@
 <w-portal>
 	<button
-		pButton
-		pRipple
 		type="button"
-		label="Search"
-		icon="pi pi-search"
-		class="p-button-text p-button-sm"
 		(click)="toggleTagCloud()">
+		Search
 	</button>
 	<button
-		pButton
-		pRipple
-		type="button"
-		label="Add"
-		icon="pi pi-plus"
-		class="p-button-text p-button-sm"
 		(click)="openAddDialog()">
+		Add
 	</button>
 </w-portal>
 
@@ -42,7 +33,7 @@
 	[maximizable]="(isBigScreen$ | async) || false"
 	styleClass="bookmarkEditContainerComponent"> -->
 
-	<app-bookmark-edit-container></app-bookmark-edit-container>
+	<!-- <app-bookmark-edit-container></app-bookmark-edit-container> -->
 
 <!-- </p-dialog> -->
 

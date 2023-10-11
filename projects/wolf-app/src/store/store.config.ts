@@ -19,6 +19,7 @@ import { knowledgeBaseReducer } from './reducers/knowledge-base.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { AppState } from './states/app.state';
 import { KnowledgeBaseEntitiesEffects } from './effects/knowledge-base-entities.effects';
+import { BookmarkUIEffects } from './effects/bookmark-ui.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -49,6 +50,7 @@ export const effects = [
 	// Bookmarks
 	BookmarkEntitiesEffects,
 	BookmarkLocalStorageEffects,
+	BookmarkUIEffects,
 
 	// Knowledge Base
 	KnowledgeBaseEntitiesEffects,
