@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { clickTag, emptySelectedTags, search } from 'store/actions/bookmark-tags.actions';
 import { closeEditBookmarkDialog, openAddBookmarkDialog, toggleSearchAndTagCloudVisibility } from 'store/actions/bookmark-ui.actions';
 import { selectedTags } from 'store/selectors/bookmark-tags.selectors';
-import { isEditDialogVisible, selTagCloudVisibility } from 'store/selectors/bookmark-ui.selectors';
+import { selTagCloudVisibility } from 'store/selectors/bookmark-ui.selectors';
 import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 
 @Component({
@@ -17,7 +17,6 @@ import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 })
 export class BookmarksPageComponent {
 
-	editDialogVisible$: Observable<boolean>;
 	tagsVisible$: Observable<boolean>;
 	isBigScreen$: Observable<boolean>;
 	selectedTags$: Observable<string[]>;
@@ -26,7 +25,6 @@ export class BookmarksPageComponent {
 
 	constructor() {
 
-		this.editDialogVisible$ = this.store.select(isEditDialogVisible);
 		this.tagsVisible$ = this.store.select(selTagCloudVisibility);
 		this.isBigScreen$ = this.store.select(selCoreIsBigScreen);
 		this.selectedTags$ = this.store.select(selectedTags);

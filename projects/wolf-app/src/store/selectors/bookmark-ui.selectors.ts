@@ -18,9 +18,9 @@ export const menuBookmarkBadge = createSelector(
 
 );
 
-export const isEditDialogVisible = createSelector(
+export const selBookmarkOverlayId = createSelector(
 
 	selBookmarkUIState,
-	state => state.editDialogVisible
+	state => state.editDialogOverlayId
 
 );

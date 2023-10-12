@@ -1,4 +1,4 @@
-import { Bookmark, Click, RemoteMetadata, SyncData, UUID } from "@lib";
+import { Bookmark, Click, OVERLAY_ID, RemoteMetadata, SyncData, UUID } from "@lib";
 
 export interface BookmarkModuleState {
 
@@ -36,7 +36,8 @@ export interface BookmarkTagsState {
 export interface BookmarkUIState {
 
 	tagCloudVisible: boolean;
-	editDialogVisible: boolean;
+	editDialogOverlayId: OVERLAY_ID | null;
+
 
 }
 
@@ -68,7 +69,7 @@ export const initialBookmarkTagsState: BookmarkTagsState = {
 export const initialBookmarkUIState: BookmarkUIState = {
 
 	tagCloudVisible: false,
-	editDialogVisible: false
+	editDialogOverlayId: null
 
 };
 
