@@ -1,0 +1,36 @@
+input[type=text] {
+
+	border-radius			: var(--border-radius);
+	padding					: var(--padding)
+
+}
+
+.input-container {
+
+	position				: relative;
+
+
+	&>label {
+
+		position			: absolute;
+		top					: 50%;
+		left				: 10px;
+		transform			: translateY(-50%);
+		pointer-events		: none;
+		transition			: 0.3s;
+		border-radius		: 5px;
+		padding				: 2px 3px;
+
+	}
+
+	&>input:focus + label {
+
+		top					: 0px;
+		font-size			: 12px;
+		color				: #555;
+		background-color	: white;
+		border				: 1px solid grey;
+
+	}
+
+}

@@ -27,7 +27,6 @@
 			<span class="p-float-label p-fluid">
 				<input
 					type="text"
-					pInputText
 					[value]="bookmark?.id"
 					readonly>
 				<label>ID</label>
@@ -39,7 +38,6 @@
 			<span class="p-float-label p-fluid">
 				<input
 					type="text"
-					pInputText
 					[value]="bookmark?.createTime"
 					readonly>
 				<label>Created</label>
@@ -48,11 +46,9 @@
 
 		<!-- URLs -->
 		<div *ngFor="let fcUrl of form.urls.controls; let idx = index">
-			<span
-				class="p-float-label p-fluid">
+			<span class="input-container">
 				<input
 					type="text"
-					pInputText
 					[ngClass]="{ 'ng-invalid ng-dirty': fcUrl.invalid && fcUrl.dirty }"
 					[formControl]="fcUrl"
 					(input)="checkUrl($event)">
@@ -64,10 +60,9 @@
 
 		<!-- NAME -->
 		<div>
-			<span class="p-float-label p-fluid">
+			<span class="input-container">
 				<input
 					type="text"
-					pInputText
 					[ngClass]="{ 'ng-invalid ng-dirty': form.name.invalid && form.name.dirty }"
 					[formControl]="form.name">
 				<label>Name</label>
@@ -77,10 +72,9 @@
 
 		<!-- TITLE -->
 		<div>
-			<span class="p-float-label p-fluid">
+			<span class="input-container">
 				<input
 					type="text"
-					pInputText
 					[ngClass]="{ 'ng-invalid ng-dirty': form.title.invalid && form.title.dirty }"
 					[formControl]="form.title">
 				<label>Title</label>
@@ -90,7 +84,7 @@
 
 		<!-- TAGS -->
 		<div>
-			<span class="p-float-label p-fluid">
+			<span class="input-container">
 				<!-- <p-autoComplete
 					#autocomplete
 					[formControl]="form.tags"
@@ -107,10 +101,9 @@
 
 		<!-- CLICKS -->
 		<div>
-			<span class="p-float-label p-fluid">
+			<span class="input-container">
 				<input
 					type="number"
-					pInputText
 					[formControl]="form.clicks">
 				<label>Clicks</label>
 			</span>
