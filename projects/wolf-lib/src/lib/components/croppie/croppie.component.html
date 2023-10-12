@@ -8,7 +8,7 @@
 		<div *ngIf="(initialized$ | async); else notInitialized"
 			id="croppie-placeholder"
 			(click)="fileinput.click()">
-				<i class="pi pi-image" style="font-size: 24px; color: grey; margin: 5px;"></i>
+				<span class="material-symbols-outlined">image</span>
 				<span>Pick Image</span>
 		</div>
 		<ng-template #notInitialized>
