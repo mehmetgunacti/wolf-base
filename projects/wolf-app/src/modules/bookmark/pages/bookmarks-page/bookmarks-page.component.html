@@ -19,24 +19,16 @@
 	(tagClick)="onTagClicked($event)"
 	></w-selected-tags>
 
-<!-- Edit Dialog -->
-<!-- <p-dialog
-	*ngIf="editDialogVisible$ | async"
-	header="Add Bookmark"
-	[draggable]="false"
-	[visible]="(editDialogVisible$ | async) ?? false"
-	(visibleChange)="closeAddDialog()"
-	[closeOnEscape]="true"
-	[closable]="true"
-	[modal]="true"
-	[dismissableMask]="true"
-	[maximizable]="(isBigScreen$ | async) || false"
-	styleClass="bookmarkEditContainerComponent"> -->
-
-	<!-- <app-bookmark-edit-container></app-bookmark-edit-container> -->
-
-<!-- </p-dialog> -->
-
 <!-- Bookmarks list -->
-<app-bookmarks-container></app-bookmarks-container>
+<!-- <app-bookmarks-container></app-bookmarks-container> -->
+
+<div>
+	<span class="input-container">
+		<input
+			type="text"
+			placeholder="">
+		<label>Title</label>
+	</span>
+	<button class="icon-only rounded"><span class="material-symbols-outlined">search</span></button>
+</div>
 

@@ -51,11 +51,12 @@
 					type="text"
 					[ngClass]="{ 'ng-invalid ng-dirty': fcUrl.invalid && fcUrl.dirty }"
 					[formControl]="fcUrl"
+					placeholder=""
 					(input)="checkUrl($event)">
 				<label>URL {{ form.urls.controls.length > 1 && idx === 0 ? '(Primary)' : '' }}</label>
 			</span>
-			<button *ngIf="idx === 0" pButton pRipple type="button" icon="pi pi-plus" class="p-button-text" title="Add URL" (click)="addURL()"></button>
-			<button *ngIf="idx > 0" pButton pRipple type="button" icon="pi pi-minus" class="p-button-text" title="Remove URL" (click)="removeURL(idx)"></button>
+			<button *ngIf="idx === 0" type="button" class="icon-only" title="Add URL" (click)="addURL()"><span class="material-symbols-outlined">add</span></button>
+			<button *ngIf="idx > 0" type="button" class="icon-only" title="Remove URL" (click)="removeURL(idx)"><span class="material-symbols-outlined">remove</span></button>
 		</div>
 
 		<!-- NAME -->
@@ -64,10 +65,11 @@
 				<input
 					type="text"
 					[ngClass]="{ 'ng-invalid ng-dirty': form.name.invalid && form.name.dirty }"
-					[formControl]="form.name">
+					[formControl]="form.name"
+					placeholder="">
 				<label>Name</label>
 			</span>
-			<button pButton pRipple type="button" icon="pi pi-reply" class="p-button-text" title="Parse URL" (click)="nameFromURL()"></button>
+			<button type="button" class="icon-only" title="Parse URL" (click)="nameFromURL()"><span class="material-symbols-outlined">move_down</span></button>
 		</div>
 
 		<!-- TITLE -->
@@ -76,10 +78,11 @@
 				<input
 					type="text"
 					[ngClass]="{ 'ng-invalid ng-dirty': form.title.invalid && form.title.dirty }"
-					[formControl]="form.title">
+					[formControl]="form.title"
+					placeholder="">
 				<label>Title</label>
 			</span>
-			<button pButton pRipple type="button" icon="pi pi-search" class="p-button-text" title="Lookup title" (click)="lookupTitle()"></button>
+			<button type="button" class="icon-only" title="Lookup title" (click)="lookupTitle()"><span class="material-symbols-outlined">search</span></button>
 		</div>
 
 		<!-- TAGS -->
@@ -104,7 +107,8 @@
 			<span class="input-container">
 				<input
 					type="number"
-					[formControl]="form.clicks">
+					[formControl]="form.clicks"
+					placeholder="">
 				<label>Clicks</label>
 			</span>
 		</div>
