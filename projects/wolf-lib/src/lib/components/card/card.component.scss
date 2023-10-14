@@ -6,7 +6,7 @@
 	@extend %flex-column;
 	background-color		: var(--background-panel);
 	border-radius			: var(--border-radius);
-	padding					: var(--padding);
+	padding					: var(--gap) var(--gap);
 
 	&>header {
 
@@ -23,6 +23,14 @@
 			@extend %flex-center-y;
 
 		}
+
+	}
+
+	&>main {
+
+		flex				: 1;
+		display				: grid;
+		padding				: var(--gap) var(--gap);
 
 	}
 

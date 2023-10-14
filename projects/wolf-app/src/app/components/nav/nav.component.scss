@@ -22,8 +22,8 @@
 
 	&>[bottom-version] {
 
-		padding			: $w-padding-sm;
-		padding-left	: $w-padding-h-xs;
+		padding			: var(--gap-sm) var(--gap-sm);
+		padding-left	: var(--gap-xs);
 		font-size		: 1rem;
 		color			: var(--secondary-text);
 

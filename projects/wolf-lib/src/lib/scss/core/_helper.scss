@@ -113,12 +113,6 @@
 
 }
 
-%padded-container {
-
-	padding		: var(--padding);
-
-}
-
 %panel-container {
 
 	@extend %flex-column;

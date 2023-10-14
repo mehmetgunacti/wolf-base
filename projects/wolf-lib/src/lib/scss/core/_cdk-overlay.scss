@@ -44,7 +44,6 @@
 }
 
 
-
 // custom
 
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
@@ -54,7 +53,8 @@
 	}
 }
 
-// .custom-panel-class {
-	// background-color: rgb(94, 0, 122);
-	// width: 40rem;
-// }
+.custom-panel-class {
+
+	display 		: grid;
+
+}

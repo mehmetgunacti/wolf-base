@@ -47,7 +47,7 @@
 
 			&>span {
 
-				padding				: $w-padding-sm;
+				padding				: var(--gap) var(--gap);
 				border-radius		: var(--border-radius);
 				transition			: $bg-transition;
 

@@ -1,42 +1,12 @@
-// padding
+// gap
 
-$w-padding-v-xl		: 0.9rem;
-$w-padding-v-lg		: 0.8rem;
-$w-padding-v		: 0.6rem;
-$w-padding-v-sm		: 0.3rem;
-$w-padding-v-xs		: 0.1rem;
-
-$w-padding-h-xl		: 2rem;
-$w-padding-h-lg		: 1.6rem;
-$w-padding-h		: 1rem;
-$w-padding-h-sm		: 0.7rem;
-$w-padding-h-xs		: 0.3rem;
-
-$w-padding-xl		: $w-padding-v-xl $w-padding-h-xl;
-$w-padding-lg		: $w-padding-v-lg $w-padding-h-lg;
-$w-padding			: $w-padding-v    $w-padding-h;
-$w-padding-sm		: $w-padding-v-sm $w-padding-h-sm;
-$w-padding-xs		: $w-padding-v-xs $w-padding-h-xs;
-
-// margin
-
-$w-margin-v-xl		: 1.4rem;
-$w-margin-v-lg		: 1.1rem;
-$w-margin-v			: 0.9rem;
-$w-margin-v-sm		: 0.6rem;
-$w-margin-v-xs		: 0.2rem;
-
-$w-margin-h-xl		: 1.4rem;
-$w-margin-h-lg		: 1.1rem;
-$w-margin-h			: 0.9rem;
-$w-margin-h-sm		: 0.6rem;
-$w-margin-h-xs		: 0.2rem;
-
-$w-margin-xl		: $w-margin-v-xl $w-margin-h-xl;
-$w-margin-lg		: $w-margin-v-lg $w-margin-h-lg;
-$w-margin			: $w-margin-v    $w-margin-h;
-$w-margin-sm		: $w-margin-v-sm $w-margin-h-sm;
-$w-margin-xs		: $w-margin-v-xs $w-margin-h-xs;
+$w-gap-xxl			: 1.8rem;
+$w-gap-xl			: 1.6rem;
+$w-gap-lg			: 1.3rem;
+$w-gap				: 1rem;
+$w-gap-sm			: 0.7rem;
+$w-gap-xs			: 0.4rem;
+$w-gap-xxs			: 0.2rem;
 
 $w-font-size		: 1.6rem;
 

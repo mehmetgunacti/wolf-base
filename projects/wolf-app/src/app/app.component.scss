@@ -11,12 +11,12 @@
 
 	&>header {
 
-		@extend %padded-container;
 		display					: flex;
 		height					: $header-height;
 		width					: 100vw;
 		background-color		: var(--background-header);
 		transition				: $bg-transition;
+		padding					: var(--gap) var(--gap);
 		padding-left			: 0;
 
 	}
@@ -28,7 +28,6 @@
 
 		&>nav {
 
-			@extend %padded-container;
 			@extend %flex-column;
 			position			: absolute;
 			height				: calc(100vh - $header-height);
@@ -37,6 +36,7 @@
 			transition			: margin-left 0.6s cubic-bezier(0.25, 1, 0.25, 1), $bg-transition;
 			z-index				: $z-index-nav-overlay;
 			background-color	: var(--background-nav);
+			padding				: var(--gap) var(--gap);
 
 			@include md() {
 

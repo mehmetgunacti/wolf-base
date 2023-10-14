@@ -59,7 +59,7 @@ select {
 
 	& + button {
 
-		margin-left			: $w-margin-h-sm;
+		margin-left			: var(--gap-sm);
 
 	}
 
