@@ -6,12 +6,11 @@ select {
 	padding					: 1rem;
 	background-color		: var(--background-input);
 	color					: var(--text-color);
-	border					: 1px solid transparent !important;
+	border					: var(--border-input);
 
 	&:focus,
 	&:focus-visible {
 
-		border				: 1px solid transparent;
 		outline				: 1px solid var(--focus-glow);
 		box-shadow			: 0 0 10px var(--focus-glow);
 

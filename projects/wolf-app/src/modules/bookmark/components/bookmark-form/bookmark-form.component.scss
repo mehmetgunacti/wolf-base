@@ -52,7 +52,7 @@
 		& > div[bookmark-form-left] {
 
 			@extend %flex-column;
-			& > app-croppie {
+			& > w-croppie {
 
 				justify-content: center;
 				padding: 0.5rem;
@@ -84,7 +84,7 @@
 	& > div[form-element-buttons] {
 
 		@extend %flex-space-between-center;
-		padding		: 0 var(--gap-lg);
+		padding		: var(--gap-lg);
 
 		& button:last-child {
 			margin-left: auto;
