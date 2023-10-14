@@ -12,8 +12,8 @@ select {
 	&:focus-visible {
 
 		border				: 1px solid transparent;
-		outline				: 1px solid #719ECE;
-		box-shadow			: 0 0 10px #719ECE;
+		outline				: 1px solid var(--focus-glow);
+		box-shadow			: 0 0 10px var(--focus-glow);
 
 	}
 
@@ -54,6 +54,12 @@ select {
 		color				: var(--text-color);
 		background-color	: var(--background-input);
 		border				: none;
+
+	}
+
+	& + button {
+
+		margin-left			: $w-margin-h-sm;
 
 	}
 
