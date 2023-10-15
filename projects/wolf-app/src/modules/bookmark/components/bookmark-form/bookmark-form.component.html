@@ -88,9 +88,14 @@
 		<!-- TAGS -->
 		<div>
 			<span class="input-container">
+				<w-tagbox [wControl]="form.tags"></w-tagbox>
+				<!-- <input
+					type="text"
+					[ngClass]="{ 'ng-invalid ng-dirty': form.tags.invalid && form.tags.dirty }"
+					[formControl]="form.tags"
+					placeholder=""> -->
 				<!-- <p-autoComplete
 					#autocomplete
-					[formControl]="form.tags"
 					[suggestions]="(tagSuggestions$ | async) || []"
 					(completeMethod)="onTagInput($event)"
 					[multiple]="true"

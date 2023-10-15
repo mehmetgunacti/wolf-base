@@ -1,0 +1,41 @@
+@import 'mixins/util';
+
+$w-tagbox-tag :(
+	"display"				: flex,
+	"align-items"			: center,
+	"padding"				: 0.2rem 0.4rem,
+	"border-radius"			: 3px,
+	"font-size"				: 1.2rem,
+	"white-space"			: nowrap,
+	"background-color"		: #E1ECF4,
+	"color"					: #2c5777,
+	"margin"				: 3px 2px,
+	"cursor"				: pointer
+);
+
+:host {
+
+	&>[form-element] {
+
+		div {
+
+			display				: inline-flex;
+			flex-wrap			: wrap;
+
+			span.tag {
+
+				@include css-static($w-tagbox-tag);
+
+			}
+
+		}
+
+		& > input {
+
+			width				: 100%;
+
+		}
+
+	}
+
+}

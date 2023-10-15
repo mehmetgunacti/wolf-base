@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BookmarkComponent, CardModule, NoDataPipe, PortalComponent, TagCloudComponent, ToastModule } from '@lib';
+import { TagboxModule } from 'lib/components/tagbox/tagbox.module';
 
 @NgModule({
 	declarations: [
@@ -18,6 +19,7 @@ import { BookmarkComponent, CardModule, NoDataPipe, PortalComponent, TagCloudCom
 		CommonModule,
 		RouterModule,
 		ReactiveFormsModule,
+		TagboxModule,
 		ToastModule,
 		CardModule
 	],
@@ -30,7 +32,8 @@ import { BookmarkComponent, CardModule, NoDataPipe, PortalComponent, TagCloudCom
 		// ToastModule,
 		ReactiveFormsModule,
 		NoDataPipe,
-		CardModule
+		CardModule,
+		TagboxModule
 	],
 	providers: []
 })
