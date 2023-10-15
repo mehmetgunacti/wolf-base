@@ -1,21 +1,18 @@
-<div form-element>
-	<div>
-		<span class="tag"
-			  *ngFor="let t of wControl.value"
-			  title="Click to remove"
-			  (click)="removeTag(t)">
-			{{t}}
-		</span>
-	</div>
-	<input #element
-		type="text"
-		list="browsers"
-		placeholder=""
-		(keydown.enter)="element.value = element.value + ' '; onInput(); $event.preventDefault()"
-		(input)="onInput()"
-		(focus)="onFocus()"
-		(blur)="onBlur()" />
+<div>
+	<button *ngFor="let t of wControl.value"
+		title="Click to remove"
+		(click)="removeTag(t)">
+		{{t}} <span class="material-symbols-outlined">close</span>
+	</button>
 </div>
+<input #element
+	type="text"
+	list="browsers"
+	placeholder=""
+	(keydown.enter)="element.value = element.value + ' '; onInput(); $event.preventDefault()"
+	(input)="onInput()"
+	(focus)="onFocus()"
+	(blur)="onBlur()" />
 <datalist id="browsers" (change)="addTag($event)">
 	<option *ngFor="let s of wSuggestions" [value]="s"></option>
 	<option value="Firefox "></option>

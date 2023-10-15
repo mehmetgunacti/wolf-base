@@ -1,38 +1,70 @@
 @import 'mixins/util';
+@import 'components/input-text';
 
-$w-tagbox-tag :(
-	"display"				: flex,
-	"align-items"			: center,
-	"padding"				: 0.2rem 0.4rem,
-	"border-radius"			: 3px,
-	"font-size"				: 1.2rem,
-	"white-space"			: nowrap,
-	"background-color"		: #E1ECF4,
-	"color"					: #2c5777,
-	"margin"				: 3px 2px,
-	"cursor"				: pointer
-);
+
+// $w-tagbox-tag :(
+// 	"display"				: flex,
+// 	"align-items"			: center,
+// 	"padding"				: var(--gap-xs) var(--gap-xs),
+// 	"border-radius"			: 3px,
+// 	"font-size"				: 1.2rem,
+// 	"white-space"			: nowrap,
+// 	"background-color"		: var(--accent),
+// 	"color"					: var(--text-color),
+// 	"cursor"				: pointer
+// );
 
 :host {
 
-	&>[form-element] {
+	@extend %input-element;
+	display				: inline-flex;
+	padding				: 0;
 
-		div {
+	& > div {
 
-			display				: inline-flex;
-			flex-wrap			: wrap;
+		display					: inline-flex;
+		flex-wrap				: wrap;
+		padding					: var(--gap-sm);
+		padding-right			: 0;
+		gap						: var(--gap-xxs);
 
-			span.tag {
+		&:empty {
 
-				@include css-static($w-tagbox-tag);
+			padding				: 0;
+
+		}
+
+		&>button {
+
+			padding				: var(--gap-xs) var(--gap-xxs);
+			background-color	: var(--accent);
+			color				: var(--text-color);
+			font-size			: 1.4rem;
+			line-height			: 1.2;
+			border				: 1px solid transparent;
+
+			&>span.material-symbols-outlined {
+
+				font-size		: 1.4rem;
+				margin			: var(--gap-xxs);
 
 			}
 
 		}
 
-		& > input {
+	}
 
-			width				: 100%;
+	& > input {
+
+		flex				: 1;
+		background-color	: transparent;
+		min-width			: 40%;
+
+		&:focus,
+		&:focus-visible {
+
+			outline			: none;
+			box-shadow		: none;
 
 		}
 

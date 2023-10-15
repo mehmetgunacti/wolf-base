@@ -57,6 +57,15 @@ button {
 
 	}
 
+	&:focus,
+	&:focus-visible,
+	&.focus {
+
+		outline				: 1px solid var(--focus-glow);
+		box-shadow			: 0 0 10px var(--focus-glow);
+
+	}
+
 	&.danger {
 
 		background-color	: var(--error);

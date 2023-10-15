@@ -11,12 +11,12 @@ export class TagboxComponent {
 
 	@ViewChild('element', { static: true }) e!: ElementRef<HTMLInputElement>;
 
-	@Input() wControl: FormControl<string[]> = new FormControl();
+	@Input() wControl: FormControl<string[]> = new FormControl<string[]>([], { nonNullable: true });
 	@Input() wSuggestions: string[] = [];
 
 	@Output() wInput = new EventEmitter<string>();
 
-	@HostBinding('class.focused') focused = false;
+	@HostBinding('class.focus') focused = false;
 	error: string | null = '';
 	subscriptions = new Subscription();
 

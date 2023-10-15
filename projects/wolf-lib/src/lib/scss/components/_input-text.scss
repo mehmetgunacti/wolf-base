@@ -1,6 +1,4 @@
-input,
-textarea,
-select {
+%input-element  {
 
 	border-radius			: var(--border-radius);
 	padding					: 1rem;
@@ -9,12 +7,21 @@ select {
 	border					: var(--border-input);
 
 	&:focus,
-	&:focus-visible {
+	&:focus-visible,
+	&.focus {
 
 		outline				: 1px solid var(--focus-glow);
 		box-shadow			: 0 0 10px var(--focus-glow);
 
 	}
+
+}
+
+input,
+textarea,
+select {
+
+	@extend %input-element;
 
 }
 
@@ -36,7 +43,8 @@ select {
 
 	}
 
-	&>input {
+	&>input,
+	&>.input-element {
 
 		width				: 100%;
 
@@ -46,7 +54,10 @@ select {
 	// placeholder attribute has to be set (empty string)
 	// <input placeholder="">
 	&>input:not(:placeholder-shown) + label,
-	&>input:focus + label {
+	&>input:focus + label,
+	&>.input-element.focus + label,
+	&>.input-element>input:not(:placeholder-shown) + label,
+	&>.input-element>input:focus + label {
 
 		top					: 0px;
 		font-size			: 1rem;
