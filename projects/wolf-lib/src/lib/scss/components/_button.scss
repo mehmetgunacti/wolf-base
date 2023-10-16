@@ -27,8 +27,38 @@ $w-button  : (
 
 button {
 
+	--button-bg-hue				: var(--info-hue);
+	--button-bg-sat				: var(--info-sat);
+	--button-bg-lig				: var(--info-lig);
+	--button-text				: var(--info-text);
+
 	@extend %w-button;
+	background-color			: hsl(var(--button-bg-hue) var(--button-bg-sat) var(--button-bg-lig));
+	border-color				: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%));;
+	color						: var(--button-text);
 	transition					: $bg-transition;
+
+	&:hover,
+	&:focus {
+
+		background-color		: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 5%));
+
+	}
+
+	&:focus,
+	&:focus-visible,
+	&.focus {
+
+		outline					: 1px solid var(--focus-glow);
+		box-shadow				: 0 0 10px var(--focus-glow);
+
+	}
+
+	&:active {
+
+		background-color		: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%));
+
+	}
 
 	&.icon-only {
 
@@ -57,46 +87,12 @@ button {
 
 	}
 
-	&:focus,
-	&:focus-visible,
-	&.focus {
-
-		outline				: 1px solid var(--focus-glow);
-		box-shadow			: 0 0 10px var(--focus-glow);
-
-	}
-
 	&.danger {
 
-		background-color	: var(--error);
-		color				: var(--error-text);
-
-	}
-
-}
-
-button1 {
-
-	display				: inline-flex;
-	background-color	: var(--button-bg);
-	color				: var(--button-color);
-	border				: none;
-	border-radius		: 5px;
-	padding				: 6px 10px;
-	font-size			: 1.6rem;
-	cursor				: pointer;
-
-	transition			: background-color 0.3s ease;
-
-	&:hover {
-
-		background-color	: hsl(207, 100%, 39%);
-
-	}
-
-	&:active {
-
-		background-color	: hsl(207, 100%, 25%);
+		--button-bg-hue			: var(--error-hue);
+		// --button-bg-sat			: var(--error-sat);
+		// --button-bg-lig			: var(--error-lig);
+		--button-text			: var(--error-text);
 
 	}
 

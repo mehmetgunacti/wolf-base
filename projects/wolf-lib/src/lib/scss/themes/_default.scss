@@ -18,19 +18,23 @@
 
 	--focus-glow		: #719ECE;
 
-	--button-bg			: #004e7c;
-	--button-color		: white;
-
 	--success			: forestgreen;
 	--success-text		: var(--text-color);
 
-	--info				: #004e7c;
+	// --info:  hsl(202, 100%, 24%);
+	--info-hue			: 202;
+	--info-sat			: 100%;
+	--info-lig			: 24%;
+
 	--info-text			: var(--text-color);
 
 	--warn				: rgb(235, 116, 19);
 	--warn-text			: var(--text-color);
 
-	--error				: rgb(184, 32, 32);
+	// --error				: hsl(0, 70%, 42%);
+	--error-hue			: 0;
+	--error-sat			: 70%;
+	--error-lig			: 42%;
 	--error-text		: var(--text-color);
 
 }
