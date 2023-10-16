@@ -9,8 +9,7 @@
 	border					: var(--border-input);
 
 	&:focus,
-	&:focus-visible,
-	&.focus {
+	&:focus-visible {
 
 		outline				: 1px solid var(--focus-glow);
 		box-shadow			: 0 0 10px var(--focus-glow);
