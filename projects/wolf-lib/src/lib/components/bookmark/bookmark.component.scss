@@ -75,7 +75,7 @@
 				}
 
 				span[bookmark-title] {
-					color		: var(--text-color-secondary);
+					color		: var(--secondary-text);
 					font-size	: small;
 				}
 
@@ -93,42 +93,25 @@
 			@extend %flex-column;
 
 			div[bookmark-url] {
+
 				word-break		: break-all;
 				padding-right	: 1rem;
 				font-size		: x-small;
-				color			: var(--gray-500);
-				margin-top		: 0.9rem;
+				color			: var(--secondary-text);
+
 			}
 
 			div[bookmark-tags] {
 
-				margin-top	: 0.3rem;
+				margin-top		: var(--gap-xs);
 
-				&>p-tag {
+				&>button {
 
-					margin-right: 0.3rem;
-
-					& .p-tag {
-
-						padding: 1px 7px;
-
-						& .p-tag-value {
-
-							font-size	: x-small;
-
-						}
-
-					}
-
-				}
-				&>span {
-
-					padding				: 1px 5px;
-					margin-top			: 3px;
-					margin-right		: 3px;
-					min-width			: initial;
-					font-size			: 0.75rem;
-					background-color	: transparent;
+					margin-right		: var(--gap-xs);
+					padding				: var(--gap-xs) var(--gap-sm);
+					border				: 0;
+					font-size			: small;
+					background-color	: hsl(var(--accent-hue) var(--accent-sat) var(--accent-lig));
 
 				}
 

@@ -31,7 +31,7 @@
 		&>button {
 
 			padding				: var(--gap-xs) var(--gap-xxs);
-			background-color	: var(--accent);
+			background-color	: hsl(var(--accent-hue) var(--accent-sat) var(--accent-lig));
 			color				: var(--text-color);
 			font-size			: 1.4rem;
 			line-height			: 1.2;

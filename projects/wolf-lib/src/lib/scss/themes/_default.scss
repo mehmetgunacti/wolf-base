@@ -5,9 +5,14 @@
 	--brand-saturation	: 100%;
 	--brand-lightness	: 24%;
 
-	--accent			: #282c34;
+	// --accent			: hsl(220, 13%, 18%);
+	--accent-hue		: 220;
+	--accent-sat		: 13%;
+	--accent-lig		: 18%;
+
 	--text-color		: #E6E6E8;
 	--secondary-text	: #4b5263;
+
 	--background		: #4C555C;
 	--background-header	: #17181C;
 	--background-nav	: rgb(130, 130, 130);

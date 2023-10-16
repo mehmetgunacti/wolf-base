@@ -32,7 +32,7 @@
 			</ng-container>
 
 			<div bookmark-tags *ngIf="item.tags">
-				<button [value]="tag" *ngFor="let tag of item.tags"></button>
+				<button *ngFor="let tag of item.tags">{{ tag }}</button>
 			</div>
 
 		</div>
