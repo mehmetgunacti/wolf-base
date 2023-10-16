@@ -27,6 +27,7 @@
 			<span class="p-float-label p-fluid">
 				<input
 					type="text"
+					inputElement
 					[value]="bookmark?.id"
 					readonly>
 				<label>ID</label>
@@ -51,7 +52,7 @@
 					type="text"
 					[ngClass]="{ 'ng-invalid ng-dirty': fcUrl.invalid && fcUrl.dirty }"
 					[formControl]="fcUrl"
-					placeholder=""
+					inputElement
 					(input)="checkUrl($event)">
 				<label>URL {{ form.urls.controls.length > 1 && idx === 0 ? '(Primary)' : '' }}</label>
 			</span>
@@ -66,7 +67,7 @@
 					type="text"
 					[ngClass]="{ 'ng-invalid ng-dirty': form.name.invalid && form.name.dirty }"
 					[formControl]="form.name"
-					placeholder="">
+					inputElement>
 				<label>Name</label>
 			</span>
 			<button type="button" class="icon-only" title="Parse URL" (click)="nameFromURL()"><span class="material-symbols-outlined">move_down</span></button>
@@ -79,7 +80,7 @@
 					type="text"
 					[ngClass]="{ 'ng-invalid ng-dirty': form.title.invalid && form.title.dirty }"
 					[formControl]="form.title"
-					placeholder="">
+					inputElement>
 				<label>Title</label>
 			</span>
 			<button type="button" class="icon-only" title="Lookup title" (click)="lookupTitle()"><span class="material-symbols-outlined">search</span></button>
@@ -88,23 +89,10 @@
 		<!-- TAGS -->
 		<div>
 			<span class="input-container">
-				<w-tagbox [wControl]="form.tags"></w-tagbox>
-				<!-- <input
-					type="text"
-					[ngClass]="{ 'ng-invalid ng-dirty': form.tags.invalid && form.tags.dirty }"
-					[formControl]="form.tags"
-					placeholder=""> -->
-				<!-- <p-autoComplete
-					#autocomplete
-					[suggestions]="(tagSuggestions$ | async) || []"
-					(completeMethod)="onTagInput($event)"
-					[multiple]="true"
-					[overlayOptions]="{ baseZIndex: 10000 }"
-					appendTo="body">
-				</p-autoComplete> -->
+				<w-tagbox [wControl]="form.tags" class="input-element"></w-tagbox>
 				<label>Tags</label>
 			</span>
-			<!-- <button pButton pRipple type="button" [icon]="isPopular ? 'pi pi-heart-fill' : 'pi pi-heart'" class="p-button-text" title="Toggle 'popular'" (click)="onTogglePopular()"></button> -->
+			<button type="button" class="icon-only" title="Toggle 'popular'" (click)="onTogglePopular()"><span class="material-symbols-outlined">{{ isPopular ? 'favorite' : 'favorite' }}</span></button>
 		</div>
 
 		<!-- CLICKS -->
@@ -113,7 +101,8 @@
 				<input
 					type="number"
 					[formControl]="form.clicks"
-					placeholder="">
+					inputElement
+					focused="always">
 				<label>Clicks</label>
 			</span>
 		</div>

@@ -1,13 +1,13 @@
-import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
 	selector: 'w-tagbox',
 	templateUrl: './tagbox.component.html',
 	styleUrls: ['./tagbox.component.scss']
 })
-export class TagboxComponent {
+export class TagboxComponent implements OnInit {
 
 	@ViewChild('element', { static: true }) e!: ElementRef<HTMLInputElement>;
 
@@ -18,7 +18,17 @@ export class TagboxComponent {
 
 	@HostBinding('class.focus') focused = false;
 	error: string | null = '';
-	subscriptions = new Subscription();
+	tags$!: Observable<string[]>;
+
+	ngOnInit(): void {
+
+		this.tags$ = this.wControl.valueChanges.pipe(
+
+			tap(tags => tags.length > 0 ? this.onFocus() : this.onBlur())
+
+		);
+
+	}
 
 	removeTag(t: string): void {
 
@@ -28,21 +38,7 @@ export class TagboxComponent {
 		this.wControl.markAsDirty();
 		this.wControl.updateValueAndValidity();
 
-	}
-
-	addTag(s: any): void {
-
-		console.log(s);
-
-		alert(s);
-		const tags: string[] = this.wControl.value;
-		if (!tags.includes(s)) {
-			this.wControl.setValue([...tags, s]);
-			this.wControl.markAsDirty();
-			this.wControl.updateValueAndValidity();
-			this.e.nativeElement.value = '';
-		}
-		this.e.nativeElement.focus();
+		this.onBlur();
 
 	}
 
@@ -76,9 +72,8 @@ export class TagboxComponent {
 
 			// add to tag list
 			this.wControl.setValue([...this.wControl.value, tagName]);
-
-			// mark as dirty
 			this.wControl.markAsDirty();
+			this.wControl.updateValueAndValidity();
 
 			// set input value to empty space
 			this.e.nativeElement.value = '';
@@ -94,13 +89,21 @@ export class TagboxComponent {
 
 	onBlur(): void {
 
-		this.focused = false;
+		if (this.isNotFocused())
+			this.focused = false;
 
 	}
 
 	onFocus(): void {
 
 		this.focused = true;
+
+	}
+
+	private isNotFocused(): boolean {
+
+		// no tags (buttons) and <input> element must be empty
+		return this.wControl.value.length === 0 && this.e.nativeElement.value === '';
 
 	}
 

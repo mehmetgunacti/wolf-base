@@ -1,5 +1,5 @@
 <div>
-	<button *ngFor="let t of wControl.value"
+	<button *ngFor="let t of tags$ | async"
 		title="Click to remove"
 		(click)="removeTag(t)">
 		{{t}} <span class="material-symbols-outlined">close</span>
@@ -7,16 +7,11 @@
 </div>
 <input #element
 	type="text"
-	list="browsers"
-	placeholder=""
+	list="suggestions"
 	(keydown.enter)="element.value = element.value + ' '; onInput(); $event.preventDefault()"
 	(input)="onInput()"
 	(focus)="onFocus()"
 	(blur)="onBlur()" />
-<datalist id="browsers" (change)="addTag($event)">
+<datalist id="suggestions">
 	<option *ngFor="let s of wSuggestions" [value]="s"></option>
-	<option value="Firefox "></option>
-	<option value="Chrome "></option>
-	<option value="Opera "></option>
-	<option value="Safari "></option>
 </datalist>

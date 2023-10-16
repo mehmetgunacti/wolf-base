@@ -1,3 +1,5 @@
+@import 'core/helper';
+
 %input-element  {
 
 	border-radius			: var(--border-radius);
@@ -27,49 +29,38 @@ select {
 
 .input-container {
 
+	@extend %flex-column;
 	position				: relative;
+	min-height				: 4rem;
 
 	&>label {
 
 		position			: absolute;
-		top					: 53%;
-		left				: 10px;
+		top					: 50%;
+		left				: 5px;
 		transform			: translateY(-50%);
 		pointer-events		: none;
 		transition			: 0.3s;
 		border-radius		: 5px;
-		padding				: 2px 5px;
+		padding				: 1px 5px;
 		font-size			: 1.4rem;
 
 	}
 
-	&>input,
 	&>.input-element {
 
+		flex				: 1;
 		width				: 100%;
 
-	}
+		&.focus + label {
 
-	// IMPORTANT:
-	// placeholder attribute has to be set (empty string)
-	// <input placeholder="">
-	&>input:not(:placeholder-shown) + label,
-	&>input:focus + label,
-	&>.input-element.focus + label,
-	&>.input-element>input:not(:placeholder-shown) + label,
-	&>.input-element>input:focus + label {
+			top					: 0px;
+			font-size			: 1rem;
+			color				: var(--text-color);
+			background-color	: var(--background-input);
+			border				: none;
 
-		top					: 0px;
-		font-size			: 1rem;
-		color				: var(--text-color);
-		background-color	: var(--background-input);
-		border				: none;
-
-	}
-
-	& + button {
-
-		margin-left			: var(--gap-sm);
+		}
 
 	}
 

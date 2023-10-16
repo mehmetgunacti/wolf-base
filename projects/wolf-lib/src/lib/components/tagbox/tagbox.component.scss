@@ -1,19 +1,6 @@
 @import 'mixins/util';
 @import 'components/input-text';
 
-
-// $w-tagbox-tag :(
-// 	"display"				: flex,
-// 	"align-items"			: center,
-// 	"padding"				: var(--gap-xs) var(--gap-xs),
-// 	"border-radius"			: 3px,
-// 	"font-size"				: 1.2rem,
-// 	"white-space"			: nowrap,
-// 	"background-color"		: var(--accent),
-// 	"color"					: var(--text-color),
-// 	"cursor"				: pointer
-// );
-
 :host {
 
 	@extend %input-element;
@@ -58,6 +45,7 @@
 
 		flex				: 1;
 		background-color	: transparent;
+		border				: 0;
 		min-width			: 40%;
 
 		&:focus,
