@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BookmarkComponent, CardModule, NoDataPipe, PortalComponent, TagCloudComponent, ToastModule } from '@lib';
 import { TagboxModule } from 'lib/components/tagbox/tagbox.module';
+import { InputElementDirective } from 'lib/directives/input-element.directive';
 
 @NgModule({
 	declarations: [
@@ -13,6 +14,7 @@ import { TagboxModule } from 'lib/components/tagbox/tagbox.module';
 		TagCloudComponent,
 		// ToastComponent,
 		// ToastWrapperComponent,
+		InputElementDirective,
 		NoDataPipe
 	],
 	imports: [
@@ -30,6 +32,7 @@ import { TagboxModule } from 'lib/components/tagbox/tagbox.module';
 		TagCloudComponent,
 		// ToastWrapperComponent,
 		// ToastModule,
+		InputElementDirective,
 		ReactiveFormsModule,
 		NoDataPipe,
 		CardModule,
