@@ -14,4 +14,6 @@ $w-line-height		: 1;
 
 $w-border-radius	: 4px;
 
-$bg-transition		: background-color 1s cubic-bezier(0.25, 1, 0.25, 1);
+$transition			: 1s cubic-bezier(0.25, 1, 0.25, 1);
+
+$bg-transition		: background-color $transition;

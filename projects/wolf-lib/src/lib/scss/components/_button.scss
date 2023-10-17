@@ -9,7 +9,7 @@ $w-button  : (
 	"text-decoration"					: none,
 	"white-space"						: pre,
 
-	"padding"							: 0.8rem 1.2rem,
+	"padding"							: var(--gap) var(--gap-lg),
 	"font-size"							: 1.6rem,
 	"line-height"						: $w-line-height,
 	"border-radius"						: $w-border-radius,
@@ -32,11 +32,29 @@ button {
 	--button-bg-lig				: var(--info-lig);
 	--button-text				: var(--info-text);
 
-	@extend %w-button;
+	position					: relative;
+	display						: inline-flex;
+	align-items					: center;
+	justify-content				: center;
+
+	background-image			: none;
+	cursor						: pointer;
+	text-decoration				: none;
+	white-space					: pre;
+
+	padding						: var(--gap) var(--gap-lg);
+	font-size					: 1.6rem;
+	line-height					: 1;
+	border-radius				: var(--border-radius);
+
 	background-color			: hsl(var(--button-bg-hue) var(--button-bg-sat) var(--button-bg-lig));
+
+	border-width				: 1px;
+	border-style				: solid;
 	border-color				: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%));;
+
 	color						: var(--button-text);
-	transition					: $bg-transition;
+	transition					: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 
 	&:hover,
 	&:focus {
