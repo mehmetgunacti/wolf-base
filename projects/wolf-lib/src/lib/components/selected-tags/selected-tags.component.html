@@ -2,27 +2,21 @@
 
 	<button
 		*ngFor="let tag of tags"
-		pButton
 		type="button"
-		[value]="tag"
-		(click)="onTagClick(tag)"
-		class="p-button p-button-sm"></button>
+		class="tag-button"
+		(click)="onTagClick(tag)">{{ tag }}</button>
 
 </ng-container>
 <ng-template #selected>
 
 	<button
-		pButton
 		type="button"
-		icon="pi pi-filter-slash"
 		(click)="emptyFilter()"
-		class="p-button p-button-sm"></button>
+		class="icon-only rounded"><span class="material-symbols-outlined">filter_alt</span></button>
 	<button
 		*ngFor="let tag of selectedTags"
-		pButton
+		class="tag-button"
 		type="button"
-		[value]="tag"
-		(click)="onTagClick(tag)"
-		class="p-button p-button-sm"></button>
+		(click)="onTagClick(tag)">{{ tag }}</button>
 
 </ng-template>

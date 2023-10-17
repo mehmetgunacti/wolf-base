@@ -45,10 +45,11 @@ button {
 	padding						: var(--gap) var(--gap-lg);
 	font-size					: 1.6rem;
 	line-height					: 1;
-	border-radius				: var(--border-radius);
+	min-width					: 9rem;
 
 	background-color			: hsl(var(--button-bg-hue) var(--button-bg-sat) var(--button-bg-lig));
 
+	border-radius				: var(--border-radius);
 	border-width				: 1px;
 	border-style				: solid;
 	border-color				: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%));;
@@ -84,6 +85,7 @@ button {
 		color					: var(--text-color);
 		border					: none;
 		padding					: 1.2rem;
+		min-width				: unset;
 
 		&>span {
 
@@ -111,6 +113,31 @@ button {
 		// --button-bg-sat			: var(--error-sat);
 		// --button-bg-lig			: var(--error-lig);
 		--button-text			: var(--error-text);
+
+	}
+
+	&.tag-button {
+
+		padding				: var(--gap-xs) var(--gap-sm);
+		background-color	: hsl(var(--accent-hue) var(--accent-sat) var(--accent-lig));
+		color				: var(--text-color);
+		font-size			: 1.4rem;
+		line-height			: 1.2;
+		border				: 1px solid transparent;
+		min-width			: unset;
+
+		&>span.material-symbols-outlined {
+
+			font-size		: 1.4rem;
+			margin			: var(--gap-xxs);
+
+		}
+
+		&.small {
+
+			padding			: var(--gap-xxs) var(--gap-xxs);
+
+		}
 
 	}
 

@@ -103,17 +103,10 @@
 
 			div[bookmark-tags] {
 
+				display			: flex;
 				margin-top		: var(--gap-xs);
-
-				&>button {
-
-					margin-right		: var(--gap-xs);
-					padding				: var(--gap-xs) var(--gap-sm);
-					border				: 0;
-					font-size			: small;
-					background-color	: hsl(var(--accent-hue) var(--accent-sat) var(--accent-lig));
-
-				}
+				padding			: var(--gap-sm);
+				gap				: var(--gap-xs);
 
 			}
 

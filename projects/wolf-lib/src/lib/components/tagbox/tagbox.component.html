@@ -1,7 +1,8 @@
 <div>
 	<button *ngFor="let t of tags$ | async"
 		title="Click to remove"
-		(click)="removeTag(t)">
+		(click)="removeTag(t)"
+		class="tag-button small">
 		{{t}} <span class="material-symbols-outlined">close</span>
 	</button>
 </div>
