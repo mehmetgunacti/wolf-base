@@ -99,6 +99,15 @@ button {
 
 		}
 
+		&:focus,
+		&:focus-visible,
+		&.focus {
+
+			outline					: 0;
+			box-shadow				: none;
+
+		}
+
 		&.rounded {
 
 			border-radius		: 25px;

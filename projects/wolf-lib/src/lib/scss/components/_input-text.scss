@@ -16,6 +16,13 @@
 
 	}
 
+	&.ng-invalid.ng-dirty {
+
+		outline				: 1px solid hsl(var(--error-hue) var(--error-sat) var(--error-lig));
+		box-shadow			: 0 0 10px hsl(var(--error-hue) var(--error-sat) var(--error-lig));
+
+	}
+
 }
 
 input,

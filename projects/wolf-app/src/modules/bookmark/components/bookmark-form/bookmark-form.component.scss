@@ -33,17 +33,26 @@
 		flex			: 1;
 		margin-bottom	: 1rem;
 
-		& > div > div {
+		& > div[bookmark-form-right] {
 
-			@extend %flex-row;
-			padding: 0.5rem;
-			&>span {
-				flex: 1;
-			}
+			@extend %flex-column;
+			gap				: var(--gap-sm);
 
-			& .material-symbols-outlined {
+			& > div {
 
-				font-size: 1.4rem;
+				@extend %flex-row;
+				gap				: var(--gap-xs);
+				& > span {
+
+					flex		: 1;
+
+				}
+
+				& .material-symbols-outlined {
+
+					font-size	: 1.4rem;
+
+				}
 
 			}
 

@@ -211,6 +211,8 @@ will be deleted. Continue?`)
 		this.form.tags.setValue(
 			tags.includes(POPULAR) ? tags.filter(v => v !== POPULAR) : [POPULAR, ...tags]
 		);
+		this.form.tags.markAsDirty();
+		this.form.tags.updateValueAndValidity();
 
 	}
 

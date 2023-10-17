@@ -17,7 +17,7 @@ export class TagboxComponent implements OnInit {
 	@Output() wInput = new EventEmitter<string>();
 
 	@HostBinding('class.focus') focused = false;
-	error: string | null = '';
+	@HostBinding('class.error') error = false;
 	tags$!: Observable<string[]>;
 
 	ngOnInit(): void {
@@ -91,12 +91,14 @@ export class TagboxComponent implements OnInit {
 
 		if (this.isNotFocused())
 			this.focused = false;
+		this.error = this.wControl.invalid && this.wControl.dirty;
 
 	}
 
 	onFocus(): void {
 
 		this.focused = true;
+		this.error = this.wControl.invalid && this.wControl.dirty;
 
 	}
 
