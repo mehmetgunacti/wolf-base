@@ -24,7 +24,7 @@
 
 		<!-- ID -->
 		<div *ngIf="bookmark?.id">
-			<span class="p-float-label p-fluid">
+			<span class="input-container">
 				<input
 					type="text"
 					inputElement
@@ -89,7 +89,7 @@
 			<span class="input-container">
 				<input
 					type="number"
-					[formControl]="form.clicks"
+										[formControl]="form.clicks"
 					inputElement
 					focused="always">
 				<label>Clicks</label>
