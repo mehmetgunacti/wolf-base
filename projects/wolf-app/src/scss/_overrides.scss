@@ -107,3 +107,17 @@ span.p-menuitem-badge {
 	font-size			: 2.2rem;
 
 }
+
+.cr-slider-wrap {
+
+	width	: initial !important;
+
+	& > input:focus,
+	& > input:focus-visible {
+
+		outline		: none;
+		box-shadow	: none;
+
+	}
+
+}
