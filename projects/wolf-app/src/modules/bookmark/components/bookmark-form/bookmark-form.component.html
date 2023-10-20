@@ -81,7 +81,7 @@
 				<w-tagbox [wControl]="form.tags" class="input-element"></w-tagbox>
 				<label>Tags</label>
 			</span>
-			<button type="button" class="icon-only" title="Toggle 'popular'" (click)="onTogglePopular()"><span class="material-symbols-outlined">{{ isPopular ? 'favorite' : 'favorite' }}</span></button>
+			<button type="button" class="icon-only" title="Toggle 'popular'" (click)="onTogglePopular()"><span class="material-symbols-outlined" [class.filled]="isPopular">favorite</span></button>
 		</div>
 
 		<!-- CLICKS -->
@@ -89,7 +89,7 @@
 			<span class="input-container">
 				<input
 					type="number"
-										[formControl]="form.clicks"
+					[formControl]="form.clicks"
 					inputElement
 					focused="always">
 				<label>Clicks</label>
