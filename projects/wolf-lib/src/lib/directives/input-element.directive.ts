@@ -1,4 +1,3 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
@@ -14,11 +13,14 @@ export class InputElementDirective implements OnInit {
 
 	constructor(private el: ElementRef, private renderer: Renderer2) { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 
 		this.renderer.addClass(this.el.nativeElement, 'input-element');
+		if (!!this.el.nativeElement.value)
+			this.addClassFocus();
+
 		if (this.alwaysFocused)
-			this.renderer.addClass(this.el.nativeElement, 'focus');
+			this.addClassFocus();
 
 	}
 
@@ -26,7 +28,7 @@ export class InputElementDirective implements OnInit {
 	onFocus() {
 
 		if (!this.alwaysFocused)
-			this.renderer.addClass(this.el.nativeElement, 'focus');
+			this.addClassFocus();
 
 	}
 
@@ -35,7 +37,7 @@ export class InputElementDirective implements OnInit {
 
 		if (!this.alwaysFocused)
 			if (!this.el.nativeElement.value)
-				this.renderer.removeClass(this.el.nativeElement, 'focus');
+				this.removeClassFocus();
 
 	}
 
@@ -44,9 +46,21 @@ export class InputElementDirective implements OnInit {
 
 		if (!this.alwaysFocused)
 			if (this.el.nativeElement.value)
-				this.renderer.addClass(this.el.nativeElement, 'focus');
+				this.addClassFocus()
 			else
-				this.renderer.removeClass(this.el.nativeElement, 'focus');
+				this.removeClassFocus()
+
+	}
+
+	private addClassFocus(): void {
+
+		this.renderer.addClass(this.el.nativeElement, 'focus');
+
+	}
+
+	private removeClassFocus(): void {
+
+		this.renderer.removeClass(this.el.nativeElement, 'focus');
 
 	}
 
