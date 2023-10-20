@@ -8,6 +8,7 @@ import * as selectors from 'store/selectors/bookmark-entities.selectors';
 @Component({
 	selector: 'app-popular-bookmarks-container',
 	templateUrl: './popular-bookmarks-container.component.html',
+	styleUrls: ['./popular-bookmarks-container.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopularBookmarksContainerComponent implements OnInit {
