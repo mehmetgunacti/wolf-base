@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { BookmarkEditContainerComponent } from 'modules/bookmark/containers/bookmark-edit-container/bookmark-edit-container.component';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 import { closeEditBookmarkDialog, closeEditBookmarkDialogSuccess, openAddBookmarkDialog, openAddBookmarkDialogSuccess, openEditBookmarkDialog } from 'store/actions/bookmark-ui.actions';
+import { createBookmarkSuccess, updateBookmarkSuccess } from 'store/actions/bookmark.actions';
 import { selBookmarkOverlayId } from 'store/selectors/bookmark-ui.selectors';
 
 @Injectable()
@@ -35,7 +36,7 @@ export class BookmarkUIEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(closeEditBookmarkDialog),
+			ofType(closeEditBookmarkDialog, updateBookmarkSuccess, createBookmarkSuccess),
 			withLatestFrom(this.store.select(selBookmarkOverlayId)),
 			map(([, id]) => id),
 			filter((id): id is OVERLAY_ID => id !== null),
