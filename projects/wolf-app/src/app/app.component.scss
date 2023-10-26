@@ -49,9 +49,13 @@
 		&>main {
 
 			flex				: 1;
+			position			: relative;
+
+			height				: calc(100vh - 6rem);
+			overflow-y			: auto;
+
 			background-color	: var(--background);
 			transition			: $bg-transition;
-			position			: relative;
 
 		}
 
