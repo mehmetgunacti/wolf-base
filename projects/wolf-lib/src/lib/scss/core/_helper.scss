@@ -115,8 +115,8 @@
 
 %panel-container {
 
-	@extend %flex-column;
-	background-color		: var(--background-panel);
+	// @extend %flex-column;
+	background-color		: hsl(var(--background-nav-hue) var(--background-nav-sat) var(--background-nav-lig));
 	border-radius			: var(--border-radius);
 
 }

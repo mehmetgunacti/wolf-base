@@ -11,7 +11,7 @@
 	right				: 0;
 	bottom				: 0;
 
-	background-color	: rgba(0, 0, 0, 0.7);
+	background-color	: var(--background-overlay);
 	z-index				: $z-index-nav-overlay;
 
 	opacity				: 0;

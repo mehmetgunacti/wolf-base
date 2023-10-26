@@ -5,84 +5,84 @@
 :host {
 
 	@extend %flex-column;
+	gap				: var(--gap-sm);
 
 	& > div[bookmark-wrapper] {
 
-		position						: sticky;
-		top								: 0;
-		min-height						: 10rem;
-		margin-bottom					: var(--gap-xxl);
+		min-height	: 13rem;
 
-		& > div[bookmark-overlay] {
+		& > app-bookmark {
 
-			position					: absolute;
-			width						: 100%;
-			height						: 100%;
-			top							: 0;
-			left						: 0;
-			background-color			: transparent;
-			pointer-events				: auto;
+			height	: 100%;
 
 		}
 
 	}
 
-	& > form {
+	& > div[bookmark-form] {
 
-		@extend %flex-column;
-		flex			: 1;
-		margin-bottom	: 1rem;
-		gap				: var(--gap);
+		display				: block;
+		overflow-y			: auto;
+		flex				: 1;
+		padding-top			: 1rem;
 
-		& > div[bookmark-form-left] {
+		& > form {
 
 			@extend %flex-column;
-			& > w-croppie {
+			gap						: var(--gap);
 
-				justify-content: center;
+			& > div[bookmark-form-left] {
+
+				@extend %flex-column;
+				& > w-croppie {
+
+					justify-content	: center;
+
+				}
 
 			}
 
-		}
+			& > div[bookmark-form-right] {
 
-		& > div[bookmark-form-right] {
+				@extend %flex-column;
+				padding			: var(--gap-xs);
+				gap				: var(--gap-lg);
 
-			@extend %flex-column;
-			gap				: var(--gap);
+				& > div {
 
-			& > div {
+					@extend %flex-row;
+					gap			: var(--gap-xs);
+					& :first-child {
 
-				@extend %flex-row;
-				gap				: var(--gap-xs);
-				& :first-child {
+						flex	: 1;
+
+					}
+
+					& .material-symbols-outlined {
+
+						font-size	: 1.4rem;
+
+					}
+
+				}
+
+			}
+
+			@include md() {
+
+				flex-direction	: row;
+
+				& > div[bookmark-form-left] {
 
 					flex		: 1;
 
 				}
 
-				& .material-symbols-outlined {
+				div[bookmark-form-right] {
 
-					font-size	: 1.4rem;
+					flex		: 4;
 
 				}
-
-			}
-
-		}
-
-		@include md() {
-
-			flex-direction: row;
-
-			& > div[bookmark-form-left] {
-
-				flex: 1;
-
-			}
-
-			div[bookmark-form-right] {
-
-				flex: 4;
 
 			}
 
@@ -93,10 +93,12 @@
 	& > div[form-element-buttons] {
 
 		@extend %flex-space-between-center;
-		padding		: var(--gap-lg);
+		padding				: var(--gap-xs);
 
 		& button:last-child {
-			margin-left: auto;
+
+			margin-left		: auto;
+
 		}
 
 	}

@@ -7,6 +7,7 @@
 	background-color		: var(--background-panel);
 	border-radius			: var(--border-radius);
 	padding					: var(--gap) var(--gap);
+	gap						: var(--gap);
 
 	&>header {
 
@@ -15,6 +16,9 @@
 		&>[card-title] {
 
 			@extend %flex-center-y;
+			font-size		: 2.5rem;
+			padding-left	: var(--gap-sm);
+			font-weight		: bold;
 
 		}
 
@@ -29,7 +33,8 @@
 	&>main {
 
 		flex				: 1;
-		display				: grid;
+		display				: flex; // for overflow to work -> flex row, not column
+		overflow			: hidden;
 
 	}
 

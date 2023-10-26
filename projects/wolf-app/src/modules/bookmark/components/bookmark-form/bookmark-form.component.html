@@ -9,64 +9,68 @@
 
 </div>
 
-<form>
+<div bookmark-form>
 
-	<div bookmark-form-left>
+	<form>
 
-		<w-croppie
-			[wControl]="form.image"
-			wType="circle"
-			wClass="primary"></w-croppie>
+		<div bookmark-form-left>
 
-	</div>
+			<w-croppie
+				[wControl]="form.image"
+				wType="circle"
+				wClass="primary"></w-croppie>
 
-	<div bookmark-form-right>
-
-		<!-- ID -->
-		<div *ngIf="bookmark?.id">
-			<w-input [control]="form.id" name="ID" [readonly]="true"/>
 		</div>
 
-		<!-- URLs -->
-		<div *ngFor="let fcUrl of form.urls.controls; let idx = index">
-			<w-input
-				[control]="fcUrl"
-				[name]="'URL' + (form.urls.controls.length > 1 && idx === 0 ? ' (Primary)' : '')"/>
-			<button *ngIf="idx === 0" type="button" class="icon-only" title="Add URL" (click)="addURL()"><span class="material-symbols-outlined">add</span></button>
-			<button *ngIf="idx > 0" type="button" class="icon-only" title="Remove URL" (click)="removeURL(idx)"><span class="material-symbols-outlined">remove</span></button>
+		<div bookmark-form-right>
+
+			<!-- ID -->
+			<div *ngIf="bookmark?.id">
+				<w-input [control]="form.id" name="ID" [readonly]="true"/>
+			</div>
+
+			<!-- URLs -->
+			<div *ngFor="let fcUrl of form.urls.controls; let idx = index">
+				<w-input
+					[control]="fcUrl"
+					[name]="'URL' + (form.urls.controls.length > 1 && idx === 0 ? ' (Primary)' : '')"/>
+				<button *ngIf="idx === 0" type="button" class="icon-only" title="Add URL" (click)="addURL()"><span class="material-symbols-outlined">add</span></button>
+				<button *ngIf="idx > 0" type="button" class="icon-only" title="Remove URL" (click)="removeURL(idx)"><span class="material-symbols-outlined">remove</span></button>
+			</div>
+
+			<!-- NAME -->
+			<div>
+				<w-input [control]="form.name" name="Name"/>
+				<button type="button" class="icon-only" title="Parse URL" (click)="nameFromURL()"><span class="material-symbols-outlined">move_down</span></button>
+			</div>
+
+			<!-- TITLE -->
+			<div>
+				<w-input [control]="form.title" name="Title"/>
+				<button type="button" class="icon-only" title="Lookup title" (click)="lookupTitle()"><span class="material-symbols-outlined">search</span></button>
+			</div>
+
+			<!-- TAGS -->
+			<div>
+				<w-input-tag
+					[control]="form.tags"
+					name="Tags"
+					class="input-element"
+					(tagInput)="onTagInput($event)"
+					[suggestions]="(tagSuggestions$ | async) ?? []"/>
+				<button type="button" class="icon-only" title="Toggle 'popular'" (click)="onTogglePopular()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes('popular')">favorite</span></button>
+			</div>
+
+			<!-- CLICKS -->
+			<div>
+				<w-input [control]="form.clicks" name="Clicks" type="number"/>
+			</div>
+
 		</div>
 
-		<!-- NAME -->
-		<div>
-			<w-input [control]="form.name" name="Name"/>
-			<button type="button" class="icon-only" title="Parse URL" (click)="nameFromURL()"><span class="material-symbols-outlined">move_down</span></button>
-		</div>
+	</form>
 
-		<!-- TITLE -->
-		<div>
-			<w-input [control]="form.title" name="Title"/>
-			<button type="button" class="icon-only" title="Lookup title" (click)="lookupTitle()"><span class="material-symbols-outlined">search</span></button>
-		</div>
-
-		<!-- TAGS -->
-		<div>
-			<w-input-tag
-				[control]="form.tags"
-				name="Tags"
-				class="input-element"
-				(tagInput)="onTagInput($event)"
-				[suggestions]="(tagSuggestions$ | async) ?? []"/>
-			<button type="button" class="icon-only" title="Toggle 'popular'" (click)="onTogglePopular()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes('popular')">favorite</span></button>
-		</div>
-
-		<!-- CLICKS -->
-		<div>
-			<w-input [control]="form.clicks" name="Clicks" type="number"/>
-		</div>
-
-	</div>
-
-</form>
+</div>
 
 <div form-element-buttons>
 	<button type="button" class="danger" (click)="onDelete()">Delete</button>
