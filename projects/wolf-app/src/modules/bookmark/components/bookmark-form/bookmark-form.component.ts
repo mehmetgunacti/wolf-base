@@ -19,7 +19,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	@Output() create: EventEmitter<Partial<Bookmark>> = new EventEmitter();
 	@Output() update: EventEmitter<{ id: UUID, bookmark: Partial<Bookmark> }> = new EventEmitter();
 	@Output() delete: EventEmitter<UUID> = new EventEmitter();
-	@Output() tagInput: EventEmitter<string> = new EventEmitter();
+	@Output() tagInput: EventEmitter<string | null> = new EventEmitter();
 	@Output() titleLookup: EventEmitter<ToastConfiguration> = new EventEmitter();
 
 	form: BookmarkForm = inject(BOOKMARK_FORM);
@@ -83,22 +83,11 @@ will be deleted. Continue?`)
 
 	}
 
-	// onTagInput(event: AutoCompleteCompleteEvent): void {
+	onTagInput(val: string | null): void {
 
-	// 	if (event.query.endsWith(' ')) {
+		this.tagInput.emit(val);
 
-	// 		this.form.tags.patchValue([
-	// 			...this.form.tags.getRawValue(),
-	// 			event.query.substring(0, event.query.length - 1)
-	// 		]);
-	// 		this.tagSuggestions$.next([]);
-	// 		if (this.autocompleteChange.multiInputEl)
-	// 			this.autocompleteChange.multiInputEl.nativeElement.value = '';
-
-	// 	} else
-	// 		this.tagInput.emit(event.query);
-
-	// }
+	}
 
 	lookupTitle(): void {
 

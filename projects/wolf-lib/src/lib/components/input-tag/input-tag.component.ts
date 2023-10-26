@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormControlStatus } from '@angular/forms';
-import { Observable, combineLatest, filter, fromEvent, map, merge, startWith, tap } from 'rxjs';
+import { filterArrayElements } from 'lib/utils';
+import { BehaviorSubject, Observable, combineLatest, filter, fromEvent, map, merge, startWith, tap } from 'rxjs';
 
 @Component({
 	selector: 'w-input-tag',
@@ -13,16 +14,30 @@ export class InputTagComponent implements OnInit {
 
 	@Input() control: FormControl<string[]> = new FormControl<string[]>([], { nonNullable: true });
 	@Input() name: string = '';
-	@Input() suggestions: string[] = [];
+	@Input() set suggestions(arr: string[]) {
 
-	@Output() input = new EventEmitter<string>();
+		this._suggestions.next(arr);
+
+	}
+
+	@Output() tagInput = new EventEmitter<string | null>();
 
 	@HostBinding('class.error') error = false;
 
 	tags$!: Observable<string[]>;
 	hasValue$!: Observable<boolean>;
 
+	_suggestions: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+	suggestions$!: Observable<string[]>;
+
 	ngOnInit(): void {
+
+		// filter non-selected tags
+		this.suggestions$ = this._suggestions.asObservable().pipe(
+
+			map(arr => filterArrayElements(arr, this.control.value))
+
+		);
 
 		// when <input> has focus and Enter key is pressed
 		const enter$: Observable<string> = fromEvent<KeyboardEvent>(this.e.nativeElement, 'keydown').pipe(
@@ -51,7 +66,8 @@ export class InputTagComponent implements OnInit {
 		// emit changes to tags array
 		this.tags$ = this.control.valueChanges.pipe(
 
-			startWith(this.control.value)
+			startWith(this.control.value),
+			tap(() => this.tagInput.emit(null)) // clear suggestions popup
 
 		);
 
@@ -115,7 +131,7 @@ export class InputTagComponent implements OnInit {
 		}
 
 		// emit value to receive tag suggestions
-		this.input.emit(tagName);
+		this.tagInput.emit(tagName);
 
 	}
 

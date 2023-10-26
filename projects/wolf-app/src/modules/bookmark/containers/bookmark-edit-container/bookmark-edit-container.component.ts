@@ -22,7 +22,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 	bookmark$: Observable<Bookmark | null | undefined>;
 	tagSuggestions$!: Observable<string[]>;
 	titleLookup$: Observable<string | null>;
-	tagInput = new Subject<string>();
+	tagInput = new Subject<string | null>();
 
 	constructor() {
 
@@ -40,15 +40,13 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 			this.tagInput
 		]).pipe(
 
-			filter(([tags, tagInput]) => !!tagInput && tags.length > 0),
-			map(
+			map(([tags, tagInput]) => {
 
-				([tags, tagInput]) =>
-					tags
-						.filter(t => t.name.startsWith(tagInput))
-						.map(t => t.name)
+				if (!!tagInput)
+					return tags.filter(t => t.name.startsWith(tagInput)).map(t => t.name);
+				return [];
 
-			)
+			})
 
 		);
 
@@ -78,7 +76,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	}
 
-	onTagInput(val: string): void {
+	onTagInput(val: string | null): void {
 
 		this.tagInput.next(val);
 

@@ -46,7 +46,7 @@
 	top					: 0px;
 	font-size			: 1rem;
 	color				: var(--text-color);
-	background-color	: var(--background-input);
+	background			: linear-gradient(to bottom, var(--background-input) 60%, transparent 100%);
 	border				: none;
 
 }

@@ -9,5 +9,5 @@
 <input #element type="text" list="suggestions" />
 <label [class.up]="hasValue$ | async">{{name}}</label>
 <datalist id="suggestions">
-	<option *ngFor="let s of suggestions" [value]="s"></option>
+	<option *ngFor="let s of suggestions$ | async" [value]="s + ' '"></option>
 </datalist>
