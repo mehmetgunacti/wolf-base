@@ -23,7 +23,7 @@ export class NavComponent {
 
 	navTo(url: string): void {
 
-		this.store.dispatch(navigate({ url }));
+		this.store.dispatch(navigate({ url, closeOnNavSuccess: true }));
 
 	}
 

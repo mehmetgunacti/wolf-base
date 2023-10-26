@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 export const toastTrigger = trigger('animateToast', [
 
@@ -20,9 +20,6 @@ export const toastTrigger = trigger('animateToast', [
 			'500ms ease-in',
 			style({
 				transform: 'translateX(100%)', // Slide out to the top
-				height: 0, // Collapse height on exit
-				margin: 0, // Remove margin on exit
-				padding: 0, // Remove padding on exit
 				opacity: 0, // Fade out on exit
 			})
 		),

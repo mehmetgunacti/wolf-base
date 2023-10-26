@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { tap } from 'rxjs/operators';
-import { navigate } from 'store/actions/core-navigation.actions';
+import { Store } from '@ngrx/store';
+import { from } from 'rxjs';
+import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { navigate, navigateSuccess } from 'store/actions/core-navigation.actions';
+import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 
 @Injectable()
 export class CoreNavigationEffects {
 
 	constructor(
 		private actions$: Actions,
-		private router: Router
+		private router: Router,
+		private store: Store
 	) { }
 
 	navigate$ = createEffect(
@@ -17,10 +21,15 @@ export class CoreNavigationEffects {
 		() => this.actions$.pipe(
 
 			ofType(navigate),
-			tap(({ url, skipLocationChange }) => this.router.navigateByUrl(url, { skipLocationChange }))
+			withLatestFrom(this.store.select(selCoreIsBigScreen)),
+			switchMap(([{ url, closeOnNavSuccess }, bigScreen]) => from(this.router.navigateByUrl(url, { skipLocationChange: false })).pipe(
 
-		),
-		{ dispatch: false }
+				filter(success => success && !bigScreen && !!closeOnNavSuccess),
+				map(() => navigateSuccess())
+
+			))
+
+		)
 
 	);
 
