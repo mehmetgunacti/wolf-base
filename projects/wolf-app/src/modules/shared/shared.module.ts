@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { BookmarkComponent, CardModule, NoDataPipe, PortalComponent, TagCloudComponent, ToastModule } from '@lib';
+import { BookmarkComponent, CardModule, InputModule, NoDataPipe, PortalComponent, TagCloudComponent, ToastModule } from '@lib';
 import { TagboxModule } from 'lib/components/tagbox/tagbox.module';
 import { InputElementDirective } from 'lib/directives/input-element.directive';
 
@@ -23,7 +23,8 @@ import { InputElementDirective } from 'lib/directives/input-element.directive';
 		ReactiveFormsModule,
 		TagboxModule,
 		ToastModule,
-		CardModule
+		CardModule,
+		InputModule
 	],
 	exports: [
 		BookmarkComponent,
@@ -36,7 +37,8 @@ import { InputElementDirective } from 'lib/directives/input-element.directive';
 		ReactiveFormsModule,
 		NoDataPipe,
 		CardModule,
-		TagboxModule
+		TagboxModule,
+		InputModule
 	],
 	providers: []
 })

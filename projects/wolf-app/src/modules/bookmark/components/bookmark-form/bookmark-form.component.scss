@@ -54,7 +54,7 @@
 
 				@extend %flex-row;
 				gap				: var(--gap-xs);
-				& > span {
+				& :first-child {
 
 					flex		: 1;
 

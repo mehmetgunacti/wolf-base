@@ -1,0 +1,7 @@
+<input
+	[type]="type"
+	[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
+	[formControl]="control"
+	placeholder=""
+	[readonly]="readonly">
+<label [class.up]="hasValue$ | async">{{name}}</label>

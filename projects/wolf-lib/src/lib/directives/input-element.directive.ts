@@ -1,4 +1,6 @@
-import { Directive, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Directive({
 	selector: '[inputElement]'
@@ -11,33 +13,66 @@ export class InputElementDirective implements OnInit {
 	})
 	alwaysFocused: boolean = false;
 
+	@Input({ alias: 'formControl' }) control!: FormControl;
+
+	@HostBinding('class.has-focus') focused = false;
+	@HostBinding('class.has-error') hasError = false;
+	@HostBinding('class.input-element') inputElement = true;
+
+	private subscriptions: Subscription = new Subscription();
+
 	constructor(private el: ElementRef, private renderer: Renderer2) { }
 
 	ngOnInit(): void {
 
-		this.renderer.addClass(this.el.nativeElement, 'input-element');
+		this.subscriptions.add(
+
+			this.control.valueChanges.subscribe(
+
+				// a => console.log(a)
+
+			)
+
+		);
+
+		this.subscriptions.add(
+
+			this.control.statusChanges.subscribe(
+
+				status => this.hasError = status === 'INVALID' && this.control.dirty
+
+			)
+
+		);
+
+
+		// this.renderer.addClass(this.el.nativeElement, 'input-element');
 		if (!!this.el.nativeElement.value)
-			this.addClassFocus();
+			this.focused = true;
+		// this.addClass('focus');
 
 		if (this.alwaysFocused)
-			this.addClassFocus();
+			this.focused = false;
+		// this.addClass('focus');
 
 	}
 
 	@HostListener('focus')
 	onFocus() {
 
-		if (!this.alwaysFocused)
-			this.addClassFocus();
+		// if (!this.alwaysFocused)
+		this.focused = true;
+		// this.addClass('focus');
 
 	}
 
 	@HostListener('blur')
 	onBlur() {
 
-		if (!this.alwaysFocused)
-			if (!this.el.nativeElement.value)
-				this.removeClassFocus();
+		// if (!this.alwaysFocused)
+		// 	if (!this.el.nativeElement.value)
+		this.focused = !!this.control.value;
+		// this.removeClass('focus');
 
 	}
 
@@ -46,21 +81,23 @@ export class InputElementDirective implements OnInit {
 
 		if (!this.alwaysFocused)
 			if (this.el.nativeElement.value)
-				this.addClassFocus()
+				this.focused = true;
+			// this.addClass('focus')
 			else
-				this.removeClassFocus()
+				this.focused = false;
+		// this.removeClass('focus')
 
 	}
 
-	private addClassFocus(): void {
+	private addClass(name: string): void {
 
-		this.renderer.addClass(this.el.nativeElement, 'focus');
+		this.renderer.addClass(this.el.nativeElement, name);
 
 	}
 
-	private removeClassFocus(): void {
+	private removeClass(name: string): void {
 
-		this.renderer.removeClass(this.el.nativeElement, 'focus');
+		this.renderer.removeClass(this.el.nativeElement, name);
 
 	}
 

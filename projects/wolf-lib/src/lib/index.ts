@@ -3,6 +3,7 @@ export * from './components/portal.component';
 export * from './components/card';
 export * from './components/croppie';
 export * from './components/bookmark/bookmark.component';
+export * from './components/input';
 export * from './components/selected-tags/selected-tags.component';
 export * from './components/tag-cloud/tag-cloud.component';
 export * from './components/toast';

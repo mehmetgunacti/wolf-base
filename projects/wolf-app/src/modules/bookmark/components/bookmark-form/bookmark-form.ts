@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Bookmark, UUID, FormClass, FormClassImpl } from '@lib';
+import { Bookmark, FormClass, FormClassImpl, UUID } from '@lib';
 
 interface EditForm {
 
@@ -28,6 +28,7 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 	protected override createFormGroup(): FormGroup<EditForm> {
 
 		return new FormGroup<EditForm>({
+
 			id: new FormControl(),
 			name: new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
 			title: new FormControl('', { validators: [Validators.required], nonNullable: true }),
@@ -36,22 +37,23 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 			urls: new FormArray([
 				new FormControl('', { validators: [Validators.required], nonNullable: true })
 			]),
-			clicks: new FormControl(0, { nonNullable: true })
+			clicks: new FormControl(0, { validators: [Validators.required], nonNullable: true })
+
 		});
 
 	}
 
 	override setValues(bookmark: Bookmark): void {
 
-		this.id.setValue(bookmark.id, { emitEvent: false });
-		this.name.setValue(bookmark.name, { emitEvent: false });
-		this.title.setValue(bookmark.title, { emitEvent: false });
-		this.tags.setValue(bookmark.tags, { emitEvent: false });
-		this.image.setValue(bookmark.image ?? null, { emitEvent: false });
-		this.clicks.setValue(bookmark.clicks, { emitEvent: false });
+		this.id.setValue(bookmark.id); // , { emitEvent: false });
+		this.name.setValue(bookmark.name); // , { emitEvent: false });
+		this.title.setValue(bookmark.title); // , { emitEvent: false });
+		this.tags.setValue(bookmark.tags); // , { emitEvent: false });
+		this.image.setValue(bookmark.image ?? null); // , { emitEvent: false });
+		this.clicks.setValue(bookmark.clicks); // , { emitEvent: false });
 
 		// set urls
-		bookmark.urls.forEach((url, idx) => this.handleUrl(this.urls, idx, url))
+		bookmark.urls.forEach((url, idx) => this.handleUrl(this.urls, idx, url));
 
 	}
 
@@ -64,7 +66,7 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 			arr.setControl(idx, fc);
 
 		} else if (fc.value !== value)
-			fc.setValue(value, { emitEvent: false });
+			fc.setValue(value); // , { emitEvent: false });
 
 	}
 

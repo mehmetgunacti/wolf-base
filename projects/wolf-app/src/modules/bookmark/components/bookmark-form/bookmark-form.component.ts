@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, inject } from '@angular/core';
 import { Bookmark, ToastConfiguration, UUID } from 'lib';
-import { BehaviorSubject, Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Observable, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
 
 @Component({
@@ -22,56 +22,29 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	@Output() tagInput: EventEmitter<string> = new EventEmitter();
 	@Output() titleLookup: EventEmitter<ToastConfiguration> = new EventEmitter();
 
-	// @ViewChild('autocomplete') autocompleteChange!: AutoComplete;
-
 	form: BookmarkForm = inject(BOOKMARK_FORM);
-	bookmark$: Subject<Bookmark>;
+	bookmark$: Observable<Bookmark>;
 	tagSuggestions$: Subject<string[]>;
-	subscriptions: Subscription = new Subscription();
-	isPopular: boolean = false;
 
 	constructor() {
 
 		this.tagSuggestions$ = new Subject<string[]>();
-		this.bookmark$ = new BehaviorSubject<Bookmark>(this.form.value);
+		this.bookmark$ = this.form.valueChanges$.pipe(
 
-	}
-
-	ngOnInit(): void {
-
-		if (this.bookmark)
-			this.form.setValues(this.bookmark);
-
-		this.subscriptions.add(
-
-			this.form.valueChanges$.pipe(
-
-				debounceTime(200),
-				distinctUntilChanged()
-
-			).subscribe(
-				bookmark => this.bookmark$.next(bookmark)
-			)
-
-		);
-
-		this.subscriptions.add(
-
-			this.form.tags.valueChanges.subscribe(
-				tags => this.isPopular = tags.includes('popular')
-			)
+			debounceTime(200),
+			distinctUntilChanged()
 
 		);
 
 	}
+
+	ngOnInit(): void { }
 
 	ngOnChanges(changes: SimpleChanges): void {
 
 		const bookmark: Bookmark = changes['bookmark']?.currentValue;
 		if (bookmark)
-			this.form.patchValue({
-				...bookmark,
-			});
+			this.form.setValues(bookmark);
 
 		const tagSuggestions: string[] = changes['tagSuggestions']?.currentValue;
 		if (tagSuggestions)
@@ -79,11 +52,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	}
 
-	ngOnDestroy(): void {
-
-		this.subscriptions.unsubscribe();
-
-	}
+	ngOnDestroy(): void { }
 
 	onSave(): void {
 

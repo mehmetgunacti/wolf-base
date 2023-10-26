@@ -1,0 +1,51 @@
+@import 'core/helper';
+
+%input-element  {
+
+	border-radius			: var(--border-radius);
+	padding					: 1rem;
+	background-color		: var(--background-input);
+	color					: var(--text-color);
+	border					: var(--border-input);
+	min-height				: $input-element-min-height;
+
+	&:focus,
+	&:focus-visible {
+
+		outline				: 1px solid var(--focus-glow);
+		box-shadow			: 0 0 10px var(--focus-glow);
+
+	}
+
+	&.ng-invalid.ng-dirty {
+
+		outline				: 1px solid hsl(var(--error-hue) var(--error-sat) var(--error-lig));
+		box-shadow			: 0 0 10px hsl(var(--error-hue) var(--error-sat) var(--error-lig));
+
+	}
+
+}
+
+%input-label {
+
+	position			: absolute;
+	top					: 50%;
+	left				: 5px;
+	transform			: translateY(-50%);
+	pointer-events		: none;
+	transition			: 0.3s;
+	border-radius		: 5px;
+	padding				: 1px 5px;
+	font-size			: 1.4rem;
+
+}
+
+%input-label-up {
+
+	top					: 0px;
+	font-size			: 1rem;
+	color				: var(--text-color);
+	background-color	: var(--background-input);
+	border				: none;
+
+}

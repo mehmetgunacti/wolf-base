@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, tap } from 'rxjs';
+import { Observable, startWith, tap } from 'rxjs';
 
 @Component({
 	selector: 'w-tagbox',
@@ -17,14 +17,19 @@ export class TagboxComponent implements OnInit {
 	@Output() wInput = new EventEmitter<string>();
 
 	@HostBinding('class.focus') focused = false;
+	@HostBinding('class:inputFocus') inputFocus = false;
 	@HostBinding('class.error') error = false;
+
 	tags$!: Observable<string[]>;
 
 	ngOnInit(): void {
 
+		console.log(this.wControl.value);
+
 		this.tags$ = this.wControl.valueChanges.pipe(
 
-			tap(tags => tags.length > 0 ? this.onFocus() : this.onBlur())
+			startWith(this.wControl.value),
+			tap(tags => this.focused = tags.length > 0)
 
 		);
 
@@ -38,7 +43,7 @@ export class TagboxComponent implements OnInit {
 		this.wControl.markAsDirty();
 		this.wControl.updateValueAndValidity();
 
-		this.onBlur();
+		// this.onBlur();
 
 	}
 
@@ -87,17 +92,18 @@ export class TagboxComponent implements OnInit {
 
 	}
 
-	onBlur(): void {
+	onFocus(): void {
 
-		if (this.isNotFocused())
-			this.focused = false;
-		this.error = this.wControl.invalid && this.wControl.dirty;
+		this.inputFocus = true;
+		// this.error = this.wControl.invalid && this.wControl.dirty;
 
 	}
 
-	onFocus(): void {
+	onBlur(): void {
 
-		this.focused = true;
+		// if (this.isNotFocused())
+// 			this.focused = false;
+		this.inputFocus = false;
 		this.error = this.wControl.invalid && this.wControl.dirty;
 
 	}

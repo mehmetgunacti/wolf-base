@@ -14,7 +14,7 @@ export interface FormClass<T> {
 
 }
 
-export abstract class FormClassImpl<T> implements FormClass<T> {
+export abstract class FormClassImpl<T extends Record<string, any>> implements FormClass<T> {
 
 	protected _formGroup: FormGroup;
 
@@ -53,7 +53,7 @@ export abstract class FormClassImpl<T> implements FormClass<T> {
 
 	patchValue(item: T): void {
 
-		this._formGroup.patchValue(item as Record<string, any>);
+		this._formGroup.patchValue(item as T);
 
 	}
 

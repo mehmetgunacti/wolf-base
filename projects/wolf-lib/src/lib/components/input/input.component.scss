@@ -1,0 +1,34 @@
+@import 'core/helper';
+@import 'core/variables';
+@import 'components/input-element';
+
+:host {
+
+	@extend %flex-column;
+	position				: relative;
+	min-height				: $input-element-min-height;
+
+	&>input {
+
+		@extend %input-element;
+
+		&:focus + label {
+
+			@extend %input-label-up;
+
+		}
+
+	}
+
+	&>label {
+
+		@extend %input-label;
+		&.up {
+
+			@extend %input-label-up;
+
+		}
+
+	}
+
+}
