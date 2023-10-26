@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { from } from 'rxjs';
@@ -28,6 +28,18 @@ export class CoreNavigationEffects {
 				map(() => navigateSuccess())
 
 			))
+
+		)
+
+	);
+
+	successfulNavigation$ = createEffect(
+
+		() => this.router.events.pipe(
+
+			withLatestFrom(this.store.select(selCoreIsBigScreen)),
+			filter(([event, bigScreen]) => !bigScreen && event instanceof NavigationEnd),
+			map(() => navigateSuccess())
 
 		)
 
