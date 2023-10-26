@@ -1,49 +1,10 @@
+@import 'core/helper';
 @import 'mixins/responsive';
 
 :host {
 
-	display                     : grid;
-	grid-template-columns		: 1fr;
-	grid-template-rows			: auto 1fr;
-	grid-template-areas			: "t"
-	 							  "b";
-
-	@include bigScreen() {
-
-		grid-template-columns	: repeat(12, 1fr);
-		grid-template-areas		: ". . t t t t t t t t . ."
-								  "b b b b b b b b b b b b";
-
-	}
-
-	app-bookmarks-search-and-tag-cloud-container {
-
-		grid-area				: t;
-		padding					: 0.5rem;
-		margin					: 0 auto;
-
-	}
-
-	app-bookmarks-container {
-
-		grid-area						: b;
-		position						: relative;
-
-	}
-
-	& .bookmarkEditContainerComponent {
-
-		width		: 100vw;
-		height		: 100vh;
-		max-height	: initial !important;
-
-		@include lg() {
-
-			width	: 80vw;
-			height	: 95vh;
-
-		}
-
-	}
+	@extend %flex-column;
+	padding						: var(--gap-sm);
+	gap							: var(--gap-sm);
 
 }

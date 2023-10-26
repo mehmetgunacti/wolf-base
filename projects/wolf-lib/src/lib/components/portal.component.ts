@@ -7,7 +7,7 @@ import { AfterViewInit, Component, EmbeddedViewRef, Input, OnDestroy, TemplateRe
 	  <ng-content></ng-content>
 	</ng-template>
 	`,
-	styles: []
+	styles: [':host { position: absolute; }']
 })
 export class PortalComponent implements AfterViewInit, OnDestroy {
 

@@ -3,8 +3,6 @@
 :host {
 
 	@extend %flex-start-center;
-	padding		: var(--gap-xs) var(--gap-sm);
-	min-height	: 6rem;
 	gap			: var(--gap-xs);
 
 }

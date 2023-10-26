@@ -12,7 +12,8 @@
 	<button
 		type="button"
 		(click)="emptyFilter()"
-		class="icon-only rounded"><span class="material-symbols-outlined">filter_alt</span></button>
+		title="Clear Filter"
+		class="icon-only small"><span class="material-symbols-outlined">filter_alt</span></button>
 	<button
 		*ngFor="let tag of selectedTags"
 		class="tag-button"

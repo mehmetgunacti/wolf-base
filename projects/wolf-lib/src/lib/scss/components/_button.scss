@@ -114,6 +114,12 @@ button {
 
 		}
 
+		&.small {
+
+			padding			: var(--gap-xxs) var(--gap-xxs);
+
+		}
+
 	}
 
 	&.danger {

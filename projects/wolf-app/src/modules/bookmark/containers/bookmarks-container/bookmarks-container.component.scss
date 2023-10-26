@@ -4,8 +4,7 @@
 
 	display						: grid;
 	grid-template-columns		: 1fr;
-	grid-gap					: var(--gap-sm);
-	padding						: var(--gap-sm);
+	gap							: var(--gap-sm);
 
 	@include bigScreen() {
 

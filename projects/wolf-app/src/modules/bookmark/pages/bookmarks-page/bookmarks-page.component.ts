@@ -11,7 +11,7 @@ import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 @Component({
 	selector: 'app-bookmarks-page',
 	templateUrl: './bookmarks-page.component.html',
-	styleUrls: ['./bookmarks-page.component.html'],
+	styleUrls: ['./bookmarks-page.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [slideUpDownTrigger]
 })
