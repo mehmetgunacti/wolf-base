@@ -79,10 +79,13 @@ export class CustomErrorHandler implements ErrorHandler {
 
 			}
 
+		let message = (error?.message ?? '&laquo;no further detail&raquo;');
+		if (message.length > 150)
+			message = message.substring(0, 200) + '...';
 		const summary = `Client Error`;
 		let detail = `
 			<div>
-				<div><i>${error?.message}</i></div>
+				<div><i>${message}</i></div>
 		`;
 
 		if (error instanceof HttpErrorResponse)
