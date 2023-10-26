@@ -12,7 +12,7 @@
 	padding				: 0.5rem;
 	overflow			: hidden;
 	border-radius		: var(--border-radius);
-	background-color	: var(--background-panel);
+	background-color	: hsl(var(--background-panel-hue) var(--background-panel-sat) var(--background-panel-lig));
 
 	& > div[bookmark-overlay] {
 

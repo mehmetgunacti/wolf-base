@@ -4,7 +4,7 @@
 :host {
 
 	@extend %panel-container;
-	background-color		: var(--background-panel);
+	background-color		: hsl(var(--background-panel-hue) var(--background-panel-sat) var(--background-panel-lig));
 	overflow				: hidden;
 
 	&>div {
@@ -14,10 +14,15 @@
 		cursor				: pointer;
 		transition			: $bg-transition;
 
-		&.active,
+		&.active {
+
+			background-color: hsl(var(--background-panel-hue) var(--background-panel-sat) calc(var(--background-panel-lig) + 5%));
+
+		}
+
 		&:hover {
 
-			background-color: var(--background);
+			background-color: hsl(var(--background-panel-hue) var(--background-panel-sat) calc(var(--background-panel-lig) + 10%));
 
 		}
 
@@ -54,7 +59,7 @@
 
 				&:not(:empty) {
 
-					background-color	: var(--secondary-text);
+					background-color: hsl(var(--background-panel-hue) var(--background-panel-sat) calc(var(--background-panel-lig) + 3%));
 
 				}
 

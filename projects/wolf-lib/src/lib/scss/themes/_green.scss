@@ -6,12 +6,20 @@ body.green {
 	--brand-lightness	: 24%;
 
 	--accent			: #cccccc;
-	--text-color		: #f2f2f2;
-	--secondary-text	: #4b5263;
+	--text-color		: hsl(0, 0%, 95%);
+	--secondary-text	: hsl(0, 0%, 75%);
 	--background		: #99ABA9;
 	--background-header	: #424F50;
-	--background-panel	: hsl(180, 8%, 30%);
-	--background-nav	: hsl(180, 8%, 46%);
+
+	// --background-nav	: hsl(180, 8%, 46%);
+	--background-nav-hue	: 180;
+	--background-nav-sat	: 8%;
+	--background-nav-lig	: 46%;
+
+	// --background-panel	: hsl(180, 8%, 30%);
+	--background-panel-hue	: 180;
+	--background-panel-sat	: 8%;
+	--background-panel-lig	: 30%;
 
 	--button-bg			: #004e7c;
 	--button-color		: white;

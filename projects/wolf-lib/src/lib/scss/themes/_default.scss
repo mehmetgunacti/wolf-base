@@ -15,8 +15,17 @@
 
 	--background		: #4C555C;
 	--background-header	: #17181C;
-	--background-nav	: rgb(130, 130, 130);
-	--background-panel	: #22242A;
+
+	// --background-nav	: hsl(225, 11%, 10%);
+	--background-nav-hue	: 225;
+	--background-nav-sat	: 11%;
+	--background-nav-lig	: 10%;
+
+	// --background-panel	: hsl(225, 11%, 15%);
+	--background-panel-hue	: 225;
+	--background-panel-sat	: 11%;
+	--background-panel-lig	: 15%;
+
 	--background-input	: #4b5263;
 
 	--border-input		: 1px solid transparent;
