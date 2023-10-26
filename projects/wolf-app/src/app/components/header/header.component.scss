@@ -5,13 +5,6 @@
 :host {
 
 	display				: contents;
-	position			: absolute;
-	height				: calc(100vh - $header-height);
-	width				: $nav-width;
-	margin-left			: -$nav-width;
-	transition			: margin-left 0.6s cubic-bezier(0.25, 1, 0.25, 1);
-	z-index				: 100;
-
 	& #section-logo {
 
 		@extend %flex-center-center;
@@ -25,11 +18,5 @@
 		@extend %flex-end-center;
 
 	}
-
-}
-
-:host-context(.navVisible) {
-
-	margin-left			: 0;
 
 }
