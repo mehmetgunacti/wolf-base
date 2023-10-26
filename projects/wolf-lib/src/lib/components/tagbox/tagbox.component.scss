@@ -1,18 +1,12 @@
 @import 'mixins/util';
-@import 'components/input-text';
+@import 'components/input-element';
 
 :host {
 
 	@extend %input-element;
+	position			: relative;
 	display				: inline-flex;
 	padding				: 0;
-
-	&.focus {
-
-		outline				: 1px solid var(--focus-glow);
-		box-shadow			: 0 0 10px var(--focus-glow);
-
-	}
 
 	&.error {
 
@@ -40,15 +34,34 @@
 	& > input {
 
 		flex				: 1;
-		background-color	: transparent;
 		border				: 0;
 		min-width			: 40%;
+		padding				: 1rem;
+		background-color	: transparent;
+		color				: var(--text-color);
 
 		&:focus,
 		&:focus-visible {
 
 			outline			: none;
 			box-shadow		: none;
+
+			& + label {
+
+				@extend %input-label-up;
+
+			}
+
+		}
+
+	}
+
+	&>label {
+
+		@extend %input-label;
+		&.up {
+
+			@extend %input-label-up;
 
 		}
 

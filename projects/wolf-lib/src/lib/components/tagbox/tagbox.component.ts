@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable, startWith, tap } from 'rxjs';
+import { FormControl, FormControlStatus } from '@angular/forms';
+import { EMPTY, Observable, combineLatest, filter, fromEvent, map, merge, startWith, switchMap, tap } from 'rxjs';
 
 @Component({
 	selector: 'w-tagbox',
@@ -11,45 +11,72 @@ export class TagboxComponent implements OnInit {
 
 	@ViewChild('element', { static: true }) e!: ElementRef<HTMLInputElement>;
 
-	@Input() wControl: FormControl<string[]> = new FormControl<string[]>([], { nonNullable: true });
-	@Input() wSuggestions: string[] = [];
+	@Input() control: FormControl<string[]> = new FormControl<string[]>([], { nonNullable: true });
+	@Input() name: string = '';
+	@Input() suggestions: string[] = [];
 
-	@Output() wInput = new EventEmitter<string>();
+	@Output() input = new EventEmitter<string>();
 
-	@HostBinding('class.focus') focused = false;
-	@HostBinding('class:inputFocus') inputFocus = false;
 	@HostBinding('class.error') error = false;
 
 	tags$!: Observable<string[]>;
+	hasValue$!: Observable<boolean>;
 
 	ngOnInit(): void {
 
-		console.log(this.wControl.value);
+		// when <input> has focus and Enter key is pressed
+		const enter$: Observable<string> = fromEvent<KeyboardEvent>(this.e.nativeElement, 'keydown').pipe(
 
-		this.tags$ = this.wControl.valueChanges.pipe(
+			filter((event: KeyboardEvent) => event.key === 'Enter'),
+			tap(event => event.preventDefault()),
+			map(() => this.e.nativeElement.value += ' ')
 
-			startWith(this.wControl.value),
-			tap(tags => this.focused = tags.length > 0)
+		);
+
+		// whenever the value of <input> changes
+		const input$: Observable<string> = fromEvent<InputEvent>(this.e.nativeElement, 'input').pipe(
+
+			map(event => (event.target as HTMLInputElement).value)
+
+		);
+
+		// whenever value entered
+		const onInput$: Observable<string> = merge(enter$, input$).pipe(
+
+			startWith(''),
+			tap(val => this.emitInputValue(val))
+
+		)
+
+		// emit changes to tags array
+		this.tags$ = this.control.valueChanges.pipe(
+
+			startWith(this.control.value)
+
+		);
+
+		// set .error class
+		const status$: Observable<FormControlStatus> = this.control.statusChanges.pipe(
+
+			startWith(this.control.status),
+			tap((status: FormControlStatus) => this.error = status === 'INVALID' && this.control.dirty)
+
+		);
+
+		// toggle .up class on <label>
+		this.hasValue$ = combineLatest([
+			this.tags$,
+			onInput$,
+			status$
+		]).pipe(
+
+			map(([tags, val]) => tags.length > 0 || !!val)
 
 		);
 
 	}
 
-	removeTag(t: string): void {
-
-		const tags: string[] = this.wControl.value;
-
-		this.wControl.setValue(tags.filter(item => item !== t));
-		this.wControl.markAsDirty();
-		this.wControl.updateValueAndValidity();
-
-		// this.onBlur();
-
-	}
-
-	onInput(): void {
-
-		const val = this.e.nativeElement.value;
+	private emitInputValue(val: string): void {
 
 		// Check for trailing space
 		const hasTrailingSpace = val.endsWith(' ');
@@ -68,7 +95,7 @@ export class TagboxComponent implements OnInit {
 		if (hasTrailingSpace) {
 
 			// check if already in tag list
-			if (this.wControl.value.includes(tagName)) {
+			if (this.control.value.includes(tagName)) {
 
 				this.e.nativeElement.value = tagName; // removes trailing space
 				return;
@@ -76,9 +103,9 @@ export class TagboxComponent implements OnInit {
 			}
 
 			// add to tag list
-			this.wControl.setValue([...this.wControl.value, tagName]);
-			this.wControl.markAsDirty();
-			this.wControl.updateValueAndValidity();
+			this.control.setValue([...this.control.value, tagName]);
+			this.control.markAsDirty();
+			this.control.updateValueAndValidity();
 
 			// set input value to empty space
 			this.e.nativeElement.value = '';
@@ -88,30 +115,19 @@ export class TagboxComponent implements OnInit {
 		}
 
 		// emit value to receive tag suggestions
-		this.wInput.emit(tagName);
+		this.input.emit(tagName);
 
 	}
 
-	onFocus(): void {
+	removeTag(t: string): void {
 
-		this.inputFocus = true;
-		// this.error = this.wControl.invalid && this.wControl.dirty;
+		const tags: string[] = this.control.value;
 
-	}
+		this.control.setValue(tags.filter(item => item !== t));
+		this.control.markAsDirty();
+		this.control.updateValueAndValidity();
 
-	onBlur(): void {
-
-		// if (this.isNotFocused())
-// 			this.focused = false;
-		this.inputFocus = false;
-		this.error = this.wControl.invalid && this.wControl.dirty;
-
-	}
-
-	private isNotFocused(): boolean {
-
-		// no tags (buttons) and <input> element must be empty
-		return this.wControl.value.length === 0 && this.e.nativeElement.value === '';
+		// this.onBlur();
 
 	}
 
