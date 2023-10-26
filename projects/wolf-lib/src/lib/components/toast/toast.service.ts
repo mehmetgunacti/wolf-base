@@ -1,9 +1,9 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Injectable, InjectionToken, Injector, Provider } from '@angular/core';
+import { Injectable, InjectionToken, Injector, Provider, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ToastConfiguration } from './toast.util';
 import { ToastWrapperComponent } from './toast-wrapper.component';
+import { ToastConfiguration } from './toast.util';
 
 export const WolfToastData = new InjectionToken<ToastConfiguration>('WOLF_TOAST_DATA');
 
@@ -66,16 +66,11 @@ export class ToastService {
 
 	private toastRef: WolfToastRef | undefined;
 
-	constructor(
-		private overlay: Overlay,
-		private parentInjector: Injector
-	) {
-		console.log('toast service instantiated');
-	}
+	private overlay: Overlay = inject(Overlay);
+	private parentInjector: Injector = inject(Injector);
 
 	public show(data?: Partial<ToastConfiguration>): void {
 
-		console.log('toast service showing data', data);
 		if (!this.toastRef || this.toastRef.isEmpty())
 			this.attach();
 
@@ -95,10 +90,7 @@ export class ToastService {
 		this.toastRef = new WolfToastRef(overlayRef);
 
 		const injector = this.getInjector(this.parentInjector);
-		console.log('toast service before attaching');
 		const toastPortal = new ComponentPortal(ToastWrapperComponent, null, injector);
-		console.log('toast service after attaching');
-
 		overlayRef.attach(toastPortal);
 
 	}

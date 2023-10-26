@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Bookmark, FormClass, FormClassImpl, UUID } from '@lib';
+import { Bookmark, FormClass, FormClassImpl, UUID, numberValidator } from '@lib';
 
 interface EditForm {
 
@@ -37,7 +37,7 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 			urls: new FormArray([
 				new FormControl('', { validators: [Validators.required], nonNullable: true })
 			]),
-			clicks: new FormControl(0, { validators: [Validators.required], nonNullable: true })
+			clicks: new FormControl(0, { validators: [Validators.required, numberValidator], nonNullable: true })
 
 		});
 
@@ -50,7 +50,7 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 		this.title.setValue(bookmark.title); // , { emitEvent: false });
 		this.tags.setValue(bookmark.tags); // , { emitEvent: false });
 		this.image.setValue(bookmark.image ?? null); // , { emitEvent: false });
-		this.clicks.setValue(bookmark.clicks); // , { emitEvent: false });
+		this.clicks.setValue(Number(bookmark.clicks)); // , { emitEvent: false });
 
 		// set urls
 		bookmark.urls.forEach((url, idx) => this.handleUrl(this.urls, idx, url));

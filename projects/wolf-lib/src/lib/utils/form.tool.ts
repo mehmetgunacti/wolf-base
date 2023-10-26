@@ -1,4 +1,4 @@
-import { FormArray, FormControl, FormGroup, AbstractControl } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 export type IForm = Record<string, FormControl | FormArray | FormGroup>;
@@ -147,3 +147,11 @@ export const getDirtyValues = <T>(form: FormGroup): Partial<T> => {
 	return dirtyValues as T;
 
 };
+
+export function numberValidator(control: AbstractControl): ValidationErrors | null {
+
+	const isNumber = typeof control.value === 'number';
+	const isFinite = Number.isFinite(Number(control.value));
+	return isNumber && isFinite ? null : { notNumber: true };
+
+}
