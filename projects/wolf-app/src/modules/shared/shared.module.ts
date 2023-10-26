@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BookmarkComponent, CardModule, InputModule, NoDataPipe, PortalComponent, TagCloudComponent, ToastModule } from '@lib';
-import { TagboxModule } from 'lib/components/tagbox/tagbox.module';
+import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 import { InputElementDirective } from 'lib/directives/input-element.directive';
 
 @NgModule({
@@ -21,7 +21,7 @@ import { InputElementDirective } from 'lib/directives/input-element.directive';
 		CommonModule,
 		RouterModule,
 		ReactiveFormsModule,
-		TagboxModule,
+		InputTagModule,
 		ToastModule,
 		CardModule,
 		InputModule
@@ -37,7 +37,7 @@ import { InputElementDirective } from 'lib/directives/input-element.directive';
 		ReactiveFormsModule,
 		NoDataPipe,
 		CardModule,
-		TagboxModule,
+		InputTagModule,
 		InputModule
 	],
 	providers: []

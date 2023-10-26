@@ -1,13 +1,13 @@
 import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormControlStatus } from '@angular/forms';
-import { EMPTY, Observable, combineLatest, filter, fromEvent, map, merge, startWith, switchMap, tap } from 'rxjs';
+import { Observable, combineLatest, filter, fromEvent, map, merge, startWith, tap } from 'rxjs';
 
 @Component({
-	selector: 'w-tagbox',
-	templateUrl: './tagbox.component.html',
-	styleUrls: ['./tagbox.component.scss']
+	selector: 'w-input-tag',
+	templateUrl: './input-tag.component.html',
+	styleUrls: ['./input-tag.component.scss']
 })
-export class TagboxComponent implements OnInit {
+export class InputTagComponent implements OnInit {
 
 	@ViewChild('element', { static: true }) e!: ElementRef<HTMLInputElement>;
 

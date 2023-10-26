@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { TagboxComponent } from './tagbox.component';
+import { InputTagComponent } from './input-tag.component';
 
 @NgModule({
 	declarations: [
-		TagboxComponent
+		InputTagComponent
 	],
 	imports: [
 		CommonModule
 	],
 	exports: [
-		TagboxComponent
+		InputTagComponent
 	]
 })
-export class TagboxModule { }
+export class InputTagModule { }
