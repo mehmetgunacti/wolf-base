@@ -104,6 +104,7 @@
 			div[bookmark-tags] {
 
 				display			: flex;
+				flex-wrap		: wrap;
 				margin-top		: var(--gap-xs);
 				padding			: var(--gap-sm);
 				gap				: var(--gap-xs);
