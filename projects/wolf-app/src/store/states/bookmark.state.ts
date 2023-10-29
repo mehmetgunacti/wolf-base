@@ -35,9 +35,7 @@ export interface BookmarkTagsState {
 
 export interface BookmarkUIState {
 
-	tagCloudVisible: boolean;
 	editDialogOverlayId: OVERLAY_ID | null;
-
 
 }
 
@@ -68,7 +66,6 @@ export const initialBookmarkTagsState: BookmarkTagsState = {
 
 export const initialBookmarkUIState: BookmarkUIState = {
 
-	tagCloudVisible: false,
 	editDialogOverlayId: null
 
 };

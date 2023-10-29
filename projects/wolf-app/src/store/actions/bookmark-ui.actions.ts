@@ -1,8 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { OVERLAY_ID, UUID } from '@lib';
 
-export const toggleSearchAndTagCloudVisibility = createAction('[Bookmark UI] Toggle Search Tag Cloud Visibility');
-
 export const openAddBookmarkDialog = createAction('[Bookmark UI] Open Add Dialog');
 export const openAddBookmarkDialogSuccess = createAction('[Bookmark UI] Open Add Dialog Success', props<{ id: OVERLAY_ID }>());
 

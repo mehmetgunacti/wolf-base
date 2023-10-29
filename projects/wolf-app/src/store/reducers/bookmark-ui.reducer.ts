@@ -1,11 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { closeEditBookmarkDialogSuccess, openAddBookmarkDialogSuccess, openEditBookmarkDialogSuccess, toggleSearchAndTagCloudVisibility } from 'store/actions/bookmark-ui.actions';
+import { closeEditBookmarkDialogSuccess, openAddBookmarkDialogSuccess, openEditBookmarkDialogSuccess } from 'store/actions/bookmark-ui.actions';
 import { BookmarkUIState, initialBookmarkUIState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(
 
 	initialBookmarkUIState,
-	on(toggleSearchAndTagCloudVisibility, state => ({ ...state, tagCloudVisible: !state.tagCloudVisible })),
 	on(openAddBookmarkDialogSuccess, (state, { id }): BookmarkUIState => ({ ...state, editDialogOverlayId: id })),
 	on(openEditBookmarkDialogSuccess, (state, { id }): BookmarkUIState => ({ ...state, editDialogOverlayId: id })),
 	on(closeEditBookmarkDialogSuccess, (state): BookmarkUIState => ({ ...state, editDialogOverlayId: null })),

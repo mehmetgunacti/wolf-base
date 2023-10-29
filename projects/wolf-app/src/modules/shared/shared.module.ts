@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { BookmarkComponent, CardModule, InputModule, NoDataPipe, PortalComponent, TagCloudComponent, ToastModule } from '@lib';
+import { AutofocusDirective, BookmarkComponent, CardModule, InputModule, NoDataPipe, PortalComponent, TagCloudComponent, ToastModule } from '@lib';
 import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
-import { InputElementDirective } from 'lib/directives/input-element.directive';
 
 @NgModule({
 	declarations: [
@@ -14,7 +13,7 @@ import { InputElementDirective } from 'lib/directives/input-element.directive';
 		TagCloudComponent,
 		// ToastComponent,
 		// ToastWrapperComponent,
-		InputElementDirective,
+		AutofocusDirective,
 		NoDataPipe
 	],
 	imports: [
@@ -33,7 +32,7 @@ import { InputElementDirective } from 'lib/directives/input-element.directive';
 		TagCloudComponent,
 		// ToastWrapperComponent,
 		// ToastModule,
-		InputElementDirective,
+		AutofocusDirective,
 		ReactiveFormsModule,
 		NoDataPipe,
 		CardModule,

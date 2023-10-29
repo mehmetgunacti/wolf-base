@@ -1,19 +1,13 @@
 <w-portal>
 	<button
-		type="button"
-		class="icon-only"
-		(click)="toggleTagCloud()">
-		<span class="material-symbols-outlined">search</span> Search
-	</button>
-	<button
 		class="icon-only"
 		(click)="openAddDialog()">
-		<span class="material-symbols-outlined">add</span> Add
+		<span class="material-symbols-outlined">add</span> Bookmark
 	</button>
 </w-portal>
 
 <!-- Search and Tag-cloud -->
-<app-bookmarks-search-and-tag-cloud-container tagCloud *ngIf="tagsVisible$ | async" @slideUpDown (search)="onSearch($event)"/>
+<app-bookmarks-search-and-tag-cloud-container/>
 
 <!-- Bookmarks list -->
 <app-bookmarks-container></app-bookmarks-container>

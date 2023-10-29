@@ -1,24 +1,26 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, OnDestroy, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Tag } from 'lib';
+import { Tag, slideUpDownTrigger } from 'lib';
 import { Observable, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
-import { clickTag, emptySelectedTags } from 'store/actions/bookmark-tags.actions';
+import { clickTag, emptySelectedTags, search } from 'store/actions/bookmark-tags.actions';
 import { distinctTagsArray, relatedTags, selectedTags } from 'store/selectors/bookmark-tags.selectors';
 
 @Component({
 	selector: 'app-bookmarks-search-and-tag-cloud-container',
 	templateUrl: './bookmarks-search-and-tag-cloud-container.component.html',
 	styleUrls: ['./bookmarks-search-and-tag-cloud-container.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	animations: [slideUpDownTrigger]
 })
 export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
-
-	@Output() search: EventEmitter<string> = new EventEmitter();
 
 	tags$: Observable<Tag[]>;
 	selectedTags$: Observable<string[]>;
 	relatedTags$: Observable<string[]>;
+
+	@HostBinding('class.open')
+	cloudVisible = false;
 
 	searchControl: FormControl;
 	subscription: Subscription;
@@ -33,12 +35,14 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 		this.subscription = this.searchControl.valueChanges.pipe(
 			debounceTime(400),
 			distinctUntilChanged()
-		).subscribe(term => this.search.emit(term));
+		).subscribe(term => this.store.dispatch(search({ term })));
 
 	}
 
 	ngOnDestroy(): void {
+
 		this.subscription.unsubscribe();
+
 	}
 
 	onTagClicked(name: string): void {
@@ -56,6 +60,13 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 	emptyFilter(): void {
 
 		this.store.dispatch(emptySelectedTags());
+
+	}
+
+	toggleCloud(): void {
+
+		this.cloudVisible = !this.cloudVisible;
+		// this.store.dispatch(toggleSearchAndTagCloudVisibility());
 
 	}
 
