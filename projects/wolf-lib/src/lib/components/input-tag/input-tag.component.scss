@@ -37,6 +37,7 @@
 		border				: 0;
 		min-width			: 40%;
 		padding				: 1rem;
+		color				: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
 		background-color	: transparent;
 
 		&:focus,

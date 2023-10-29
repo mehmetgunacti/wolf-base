@@ -8,6 +8,8 @@ app-toast {
 	border				: 0;
 	border-radius		: var(--border-radius);
 
+	color				: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+
 	[toast-left] {
 
 		@extend %flex-center-center;
@@ -30,67 +32,27 @@ app-toast {
 
 	}
 
-	// [toast-left],
-	// [toast-right] {
-	// 	@extend %flex-center-center;
-	// }
-
-	// [toast-center] {
-	// 	@extend %flex-column;
-	// 	justify-content: center;
-	// 	flex			: 1;
-	// }
-
-	// [toast-content] {
-	// 	@extend %flex-start-center;
-	// 	flex			: 1;
-	// }
-
-	// [toast-title] {
-	// 	font-weight		: bold;
-	// }
-
-	// [toast-left] {
-
-	// 	padding-right	: 0;
-	// 	& > i {
-	// 		font-size	: 2rem;
-	// 	}
-
-	// }
-
-	// [toast-right] {
-
-	// 	padding-left	: 0;
-	// 	cursor			: pointer;
-
-	// }
-
 	&.success {
 
-		color				: var(--success-text);
-		background-color	: var(--success);
+		background-color	: hsl(var(--col-success-hue) var(--col-success-sat) var(--col-success-lig) / var(--col-success-alp));
 
 	}
 
 	&.info {
 
-		color				: var(--info-text);
-		background-color	: var(--info);
+		background-color	: hsl(var(--col-info-hue) var(--col-info-sat) var(--col-info-lig) / var(--col-info-alp));
 
 	}
 
 	&.warn {
 
-		color				: var(--warn-text);
-		background-color	: var(--warn);
+		background-color	: hsl(var(--col-warn-hue) var(--col-warn-sat) var(--col-warn-lig) / var(--col-warn-alp));
 
 	}
 
 	&.error {
 
-		color				: var(--error-text);
-		background-color	: var(--error);
+		background-color	: hsl(var(--col-error-hue) var(--col-error-sat) var(--col-error-lig) / var(--col-error-alp));
 
 	}
 
