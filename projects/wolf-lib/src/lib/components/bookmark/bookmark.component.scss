@@ -5,6 +5,16 @@
 	@extend %component-shadow;
 	--bookmark-hover-transition		: all ease-in-out 250ms;
 	--bookmark-edit-button-opacity	: 0;
+	--font-size 					: larger;
+	--image-size					: 110px;
+
+	&.compact {
+
+		--font-size					: medium;
+		--image-size				: 55px;
+
+	}
+
 
 	display				: flex;
 	position			: relative;
@@ -33,12 +43,13 @@
 	}
 
 	div[bookmark-image] {
+
 		@extend %flex-center-y;
 
-		& > img.compact {
+		& > img {
 
-			width	: 55px;
-			height	: 55px;
+			width	: var(--image-size);
+			height	: var(--image-size);
 
 		}
 
@@ -54,37 +65,37 @@
 			flex: 1;
 			@extend %flex-start-center;
 
-				span[bookmark-name] {
+			span[bookmark-name] {
 
-					font-weight		: bolder;
-					position		: relative;
-					font-size		: larger;
+				font-size		: var(--font-size);
+				font-weight		: bolder;
+				position		: relative;
 
-					sup {
-						position		: absolute;
-						visibility		: hidden;
-						opacity			: 0;
-						transition		: var(--bookmark-hover-transition);
-						margin-left		: 0.3rem;
-						top				: -6px;
-						&>i {
-							font-size	: x-small;
-						}
-					}
-
-				}
-
-				span[bookmark-title] {
-					color		: var(--secondary-text);
-					font-size	: small;
-				}
-
-				&:hover {
-					span[bookmark-name] sup {
-						visibility			: initial;
-						opacity				: initial;
+				sup {
+					position		: absolute;
+					visibility		: hidden;
+					opacity			: 0;
+					transition		: var(--bookmark-hover-transition);
+					margin-left		: 0.3rem;
+					top				: -6px;
+					&>i {
+						font-size	: x-small;
 					}
 				}
+
+			}
+
+			span[bookmark-title] {
+				color		: var(--secondary-text);
+				font-size	: small;
+			}
+
+			&:hover {
+				span[bookmark-name] sup {
+					visibility			: initial;
+					opacity				: initial;
+				}
+			}
 
 		}
 

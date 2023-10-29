@@ -12,7 +12,6 @@ export class BookmarkComponent {
 
 	@Input() item: Bookmark | null | undefined;
 	@Input() showDetails = false;
-	@Input() compact = false;
 	@Input() editable = true;
 	@Input() popularButton = true;
 	@Input() disabled = false;
