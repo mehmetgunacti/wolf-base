@@ -11,8 +11,9 @@
 	transition			: all ease-in-out 250ms;
 	padding				: 0.5rem;
 	overflow			: hidden;
+
+	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
 	border-radius		: var(--border-radius);
-	background-color	: hsl(var(--background-panel-hue) var(--background-panel-sat) var(--background-panel-lig));
 
 	& > div[bookmark-overlay] {
 
@@ -55,7 +56,6 @@
 
 				span[bookmark-name] {
 
-					color			: var(--text-color);
 					font-weight		: bolder;
 					position		: relative;
 					font-size		: larger;
@@ -122,7 +122,6 @@
 		transition				: var(--bookmark-hover-transition);
 		bottom					: 1rem;
 		right					: 1rem;
-		color 					: var(--text-color);
 
 	}
 
@@ -133,7 +132,6 @@
 		transition				: var(--bookmark-hover-transition);
 		top						: 1rem;
 		right					: 1rem;
-		color 					: var(--text-color);
 
 	}
 

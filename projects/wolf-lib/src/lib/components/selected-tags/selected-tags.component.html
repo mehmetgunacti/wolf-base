@@ -3,7 +3,7 @@
 	<button
 		*ngFor="let tag of tags"
 		type="button"
-		class="tag-button"
+		class="tag"
 		(click)="onTagClick(tag)">{{ tag }}</button>
 
 </ng-container>
@@ -16,7 +16,7 @@
 		class="icon-only small"><span class="material-symbols-outlined">filter_alt</span></button>
 	<button
 		*ngFor="let tag of selectedTags"
-		class="tag-button"
+		class="tag"
 		type="button"
 		(click)="onTagClick(tag)">{{ tag }}</button>
 

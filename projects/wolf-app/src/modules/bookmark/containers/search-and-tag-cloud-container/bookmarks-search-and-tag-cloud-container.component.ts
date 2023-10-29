@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Tag } from 'lib';
 import { Observable, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
-import { clickTag } from 'store/actions/bookmark-tags.actions';
+import { clickTag, emptySelectedTags } from 'store/actions/bookmark-tags.actions';
 import { distinctTagsArray, relatedTags, selectedTags } from 'store/selectors/bookmark-tags.selectors';
 
 @Component({
@@ -50,6 +50,12 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 	onSearchReset(): void {
 
 		this.searchControl.reset();
+
+	}
+
+	emptyFilter(): void {
+
+		this.store.dispatch(emptySelectedTags());
 
 	}
 

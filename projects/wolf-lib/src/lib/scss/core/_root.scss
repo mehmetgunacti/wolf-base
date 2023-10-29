@@ -1,15 +1,15 @@
 :root {
 
-	--border-radius 	:  #{$w-border-radius};
+	--border-radius 		:  #{$w-border-radius};
 
-	--gap-xxl			: #{$w-gap-xxl};
-	--gap-xl			: #{$w-gap-xl};
-	--gap-lg			: #{$w-gap-lg};
-	--gap				: #{$w-gap};
-	--gap-sm			: #{$w-gap-sm};
-	--gap-xs			: #{$w-gap-xs};
-	--gap-xxs			: #{$w-gap-xxs};
+	--gap-xxl				: #{$w-gap-xxl};
+	--gap-xl				: #{$w-gap-xl};
+	--gap-lg				: #{$w-gap-lg};
+	--gap					: #{$w-gap};
+	--gap-sm				: #{$w-gap-sm};
+	--gap-xs				: #{$w-gap-xs};
+	--gap-xxs				: #{$w-gap-xxs};
+
+	--input-element-height 	: #{$input-element-min-height};
 
 }
-
-// .material-icons.md-18

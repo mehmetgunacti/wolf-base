@@ -3,8 +3,8 @@
 
 :host {
 
-	@extend %panel-container;
-	background-color		: hsl(var(--background-panel-hue) var(--background-panel-sat) var(--background-panel-lig));
+	background-color		: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+	border-radius			: var(--border-radius);
 	overflow				: hidden;
 
 	&>div {
@@ -16,13 +16,13 @@
 
 		&.active {
 
-			background-color: hsl(var(--background-panel-hue) var(--background-panel-sat) calc(var(--background-panel-lig) + 5%));
+			background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 5%) / var(--col-bg-panel-alp));
 
 		}
 
 		&:hover {
 
-			background-color: hsl(var(--background-panel-hue) var(--background-panel-sat) calc(var(--background-panel-lig) + 10%));
+			background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 10%) / var(--col-bg-panel-alp));
 
 		}
 
@@ -59,7 +59,7 @@
 
 				&:not(:empty) {
 
-					background-color: hsl(var(--background-panel-hue) var(--background-panel-sat) calc(var(--background-panel-lig) + 3%));
+					background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 3%) / var(--col-bg-panel-alp));
 
 				}
 

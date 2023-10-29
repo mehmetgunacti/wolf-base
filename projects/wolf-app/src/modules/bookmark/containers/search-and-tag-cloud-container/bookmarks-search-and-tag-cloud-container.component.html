@@ -1,4 +1,11 @@
-<div class="p-inputgroup">
+<w-selected-tags
+	[tags]="['popular', 'news', 'im-bored', 'shopping']"
+	[selectedTags]="selectedTags$ | async"
+	(filterClick)="emptyFilter()"
+	(tagClick)="onTagClicked($event)"
+	></w-selected-tags>
+
+<div>
 	<input
 		type="text"
 		pInputText
@@ -8,11 +15,9 @@
 		[autofocus]="true">
 	<button
 		type="button"
-		pButton
-		pRipple
-		icon="pi pi-times"
-		styleClass="p-button-warn"
+		class="square small"
 		(click)="onSearchReset()">
+		<span class="material-symbols-outlined">search</span>
 	</button>
 </div>
 

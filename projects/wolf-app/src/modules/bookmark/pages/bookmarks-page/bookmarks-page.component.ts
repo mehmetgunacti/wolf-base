@@ -19,7 +19,6 @@ export class BookmarksPageComponent {
 
 	tagsVisible$: Observable<boolean>;
 	isBigScreen$: Observable<boolean>;
-	selectedTags$: Observable<string[]>;
 
 	private store: Store = inject(Store);
 
@@ -27,7 +26,6 @@ export class BookmarksPageComponent {
 
 		this.tagsVisible$ = this.store.select(selTagCloudVisibility);
 		this.isBigScreen$ = this.store.select(selCoreIsBigScreen);
-		this.selectedTags$ = this.store.select(selectedTags);
 
 	}
 
@@ -58,12 +56,6 @@ export class BookmarksPageComponent {
 	onTagClicked(name: string): void {
 
 		this.store.dispatch(clickTag({ name }));
-
-	}
-
-	emptyFilter(): void {
-
-		this.store.dispatch(emptySelectedTags());
 
 	}
 

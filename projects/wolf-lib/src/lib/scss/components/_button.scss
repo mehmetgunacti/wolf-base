@@ -1,36 +1,11 @@
-$w-button  : (
-	"position"							: relative,
-	"display"							: inline-flex,
-	"align-items"						: center,
-	"justify-content"					: center,
-
-	"background-image"					: none,
-	"cursor"							: pointer,
-	"text-decoration"					: none,
-	"white-space"						: pre,
-
-	"padding"							: var(--gap) var(--gap-lg),
-	"font-size"							: 1.6rem,
-	"line-height"						: $w-line-height,
-	"border-radius"						: $w-border-radius,
-
-	"border-width"						: 1px,
-	"border-style"						: solid,
-	"transition"						: "color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out"
-);
-
-%w-button {
-
-	@include css-static($w-button);
-
-}
-
 button {
 
-	--button-bg-hue				: var(--info-hue);
-	--button-bg-sat				: var(--info-sat);
-	--button-bg-lig				: var(--info-lig);
-	--button-text				: var(--info-text);
+	--button-width				: 9rem;
+
+	--button-bg-hue				: var(--col-info-hue);
+	--button-bg-sat				: var(--col-info-sat);
+	--button-bg-lig				: var(--col-info-lig);
+	--button-bg-alp				: var(--col-info-alp);
 
 	position					: relative;
 	display						: inline-flex;
@@ -45,103 +20,97 @@ button {
 	padding						: var(--gap) var(--gap-lg);
 	font-size					: 1.6rem;
 	line-height					: 1;
-	min-width					: 9rem;
-
-	background-color			: hsl(var(--button-bg-hue) var(--button-bg-sat) var(--button-bg-lig));
+	min-width					: var(--button-width);
 
 	border-radius				: var(--border-radius);
 	border-width				: 1px;
 	border-style				: solid;
-	border-color				: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%));;
 
-	color						: var(--button-text);
+	color						: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+	background-color			: hsl(var(--button-bg-hue) var(--button-bg-sat) var(--button-bg-lig) / var(--button-bg-alp));
+	border-color				: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%) / var(--button-bg-alp));
+
 	transition					: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 
 	&:hover,
 	&:focus {
 
-		background-color		: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 5%));
+		--button-bg-lig			: calc(var(--col-info-lig) - 5%);
 
 	}
 
 	&:focus,
-	&:focus-visible,
-	&.focus {
+	&:focus-visible {
 
-		outline					: 1px solid var(--focus-glow);
-		box-shadow				: 0 0 10px var(--focus-glow);
+		@extend %glow;
 
 	}
 
 	&:active {
 
-		background-color		: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%));
+		--button-bg-lig			: calc(var(--col-info-lig) - 10%);
 
 	}
 
 	&.icon-only {
 
-		background-color		: transparent;
-		color					: var(--text-color);
+		--button-bg-alp			: 0;
+
 		border					: none;
 		padding					: 1.2rem;
 		min-width				: unset;
 
-		&>span {
-
-			color				: var(--text-color);
-
-		}
-
 		&:hover {
 
-			background-color	: rgba(255, 255, 255, 0.09);
+			--button-bg-hue		: 0deg;
+			--button-bg-sat		: 0%;
+			--button-bg-lig		: 100%;
+			--button-bg-alp		: 0.09;
 
 		}
 
-		&:focus,
-		&:focus-visible,
-		&.focus {
+	}
 
-			outline					: 0;
-			box-shadow				: none;
+	&.rounded {
 
-		}
+		--border-radius		: 25px;
 
-		&.rounded {
+	}
 
-			border-radius		: 25px;
+	&.square {
 
-		}
+		min-width			: unset;
+		width				: var(--input-element-height);
+		height				: var(--input-element-height);
 
-		&.small {
+	}
 
-			padding			: var(--gap-xxs) var(--gap-xxs);
+	&.small {
 
-		}
+		padding				: var(--gap-xxs) var(--gap-xxs);
 
 	}
 
 	&.danger {
 
-		--button-bg-hue			: var(--error-hue);
-		// --button-bg-sat			: var(--error-sat);
-		// --button-bg-lig			: var(--error-lig);
-		--button-text			: var(--error-text);
+		--button-bg-hue		: var(--col-error-hue);
 
 	}
 
-	&.tag-button {
+	&.tag {
+
+		--button-bg-hue		: var(--col-accent-hue);
+		--button-bg-sat		: var(--col-accent-sat);
+		--button-bg-lig		: var(--col-accent-lig);
+		--button-bg-alp		: var(--col-accent-alp);
 
 		padding				: var(--gap-xs) var(--gap-sm);
-		background-color	: hsl(var(--accent-hue) var(--accent-sat) var(--accent-lig));
-		color				: var(--text-color);
 		font-size			: 1.4rem;
 		line-height			: 1.2;
 		border				: 1px solid transparent;
 		min-width			: unset;
 
-		&>span.material-symbols-outlined {
+		& > .material-symbols-outlined {
 
 			font-size		: 1.4rem;
 			margin			: var(--gap-xxs);
@@ -150,7 +119,7 @@ button {
 
 		&.small {
 
-			padding			: var(--gap-xxs) var(--gap-xxs);
+			padding			: var(--gap-xxs);
 
 		}
 

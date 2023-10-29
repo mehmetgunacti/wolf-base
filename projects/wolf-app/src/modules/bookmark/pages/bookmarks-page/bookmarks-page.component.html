@@ -14,12 +14,6 @@
 
 <!-- Search and Tag-cloud -->
 <app-bookmarks-search-and-tag-cloud-container tagCloud *ngIf="tagsVisible$ | async" @slideUpDown (search)="onSearch($event)"/>
-<w-selected-tags
-	[tags]="['popular', 'news', 'im-bored', 'shopping']"
-	[selectedTags]="selectedTags$ | async"
-	(filterClick)="emptyFilter()"
-	(tagClick)="onTagClicked($event)"
-	></w-selected-tags>
 
 <!-- Bookmarks list -->
 <app-bookmarks-container></app-bookmarks-container>

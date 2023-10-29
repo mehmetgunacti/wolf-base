@@ -1,5 +1,26 @@
+@import 'core/helper';
+@import 'components/input-element';
+
 :host {
 
-    display: block;
+    @extend %flex-column;
+	padding				: var(--gap-xl) var(--gap-lg);
+	gap					: var(--gap);
+	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+	border-radius		: var(--border-radius);
+	@extend %component-shadow;
+
+	& > div {
+
+		@extend %flex-center-center;
+		gap		: var(--gap-xxs);
+
+		& > input {
+
+			@extend %input-element;
+
+		}
+
+	}
 
 }

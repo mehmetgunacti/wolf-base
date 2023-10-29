@@ -5,23 +5,24 @@
 
 	border-radius			: var(--border-radius);
 	padding					: 1rem;
-	background-color		: var(--background-input);
-	color					: var(--text-color);
+	background-color		: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp));
+	color					: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
 	border					: var(--border-input);
-	min-height				: $input-element-min-height;
+	min-height				: var(--input-element-height);
 
 	&:focus,
 	&:focus-visible {
 
-		outline				: 1px solid var(--focus-glow);
-		box-shadow			: 0 0 10px var(--focus-glow);
+		outline				: 1px solid hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
+		box-shadow			: 0 0 10px hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
 
 	}
 
 	&.ng-invalid.ng-dirty {
 
-		outline				: 1px solid hsl(var(--error-hue) var(--error-sat) var(--error-lig));
-		box-shadow			: 0 0 10px hsl(var(--error-hue) var(--error-sat) var(--error-lig));
+		--col-focus-hue		: 0;
+		outline				: 1px solid hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
+		box-shadow			: 0 0 10px hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
 
 	}
 
@@ -45,8 +46,7 @@
 
 	top					: 0px;
 	font-size			: 1rem;
-	color				: var(--text-color);
-	background			: linear-gradient(to bottom, var(--background-input) 60%, transparent 100%);
+	background			: linear-gradient(to bottom, hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp)) 60%, transparent 100%);
 	border				: none;
 
 }
