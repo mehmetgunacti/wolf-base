@@ -1,22 +1,10 @@
 body.light {
 
 	// --col-accent				: hsl(205, 14%, 52%);
-	--col-accent-hue			: 205deg;
-	--col-accent-sat			: 14%;
-	--col-accent-lig			: 52%;
+	--col-accent-hue			: 35deg;
+	--col-accent-sat			: 30%;
+	--col-accent-lig			: 50%;
 	--col-accent-alp			: 1;
-
-	// --col-text				: ;
-	--col-text-hue				: 240deg;
-	--col-text-sat				: 4%;
-	--col-text-lig				: 91%;
-	--col-text-alp				: 1;
-
-	// --col-text-secondary		: ;
-	--col-text-secondary-hue	: 0deg;
-	--col-text-secondary-sat	: 0%;
-	--col-text-secondary-lig	: 64%;
-	--col-text-secondary-alp	: 1;
 
 	// --col-bg-body			: hsl(206, 14%, 90%);
 	--col-bg-body-hue			: 208deg;
@@ -33,52 +21,28 @@ body.light {
 	//--col-bg-nav				: hsl(208, 13%, 81%);
 	--col-bg-nav-hue			: 208deg;
 	--col-bg-nav-sat			: 25%;
-	--col-bg-nav-lig			: 70%;
+	--col-bg-nav-lig			: 60%;
 	--col-bg-nav-alp			: 1;
 
 	//--col-bg-panel			: hsl(203, 14%, 71%);
 	--col-bg-panel-hue			: 208deg;
-	--col-bg-panel-sat			: 25%;
-	--col-bg-panel-lig			: 55%;
+	--col-bg-panel-sat			: 20%;
+	--col-bg-panel-lig			: 50%;
 	--col-bg-panel-alp			: 1;
 
-	// --col-bg-input			: hsl(222deg 14% 34% / 1);
-	--col-bg-input-hue			: 222deg;
-	--col-bg-input-sat			: 14%;
-	--col-bg-input-lig			: 34%;
+	// --col-bg-input			: hsl(208deg 25% 80% / 1);
+	--col-bg-input-hue			: 208deg;
+	--col-bg-input-sat			: 25%;
+	--col-bg-input-lig			: 70%;
 	--col-bg-input-alp			: 1;
 
-	// --col-success			: hsl(120deg 61% 34% / 1);
-	--col-success-hue			: 120deg;
-	--col-success-sat			: 61%;
-	--col-success-lig			: 34%;
-	--col-success-alp			: 1;
-
-	// --col-info				: hsl(202deg 100% 24% / 1);
-	--col-info-hue				: 202deg;
-	--col-info-sat				: 100%;
-	--col-info-lig				: 24%;
-	--col-info-alp				: 1;
-
-	// --col-warn				: hsl(27deg 85% 50% / 1);
-	--col-warn-hue				: 27deg;
-	--col-warn-sat				: 85%;
-	--col-warn-lig				: 50%;
-	--col-warn-alp				: 1;
-
-	// --col-error				: hsl(0deg 70% 42% / 1);
-	--col-error-hue				: 0deg;
-	--col-error-sat				: 70%;
-	--col-error-lig				: 42%;
-	--col-error-alp				: 1;
-
 	// overlay
-	--background-overlay		: hsl(0deg 0% 0% / 75%);
+	--background-overlay		: hsl(0deg 0% 15% / 60%);
 
-	// --focus					: hsl(203 88% 43% / 1);
-	--col-focus-hue				: 203;
-	--col-focus-sat				: 40%;
-	--col-focus-lig				: 55%;
+	// --focus					: hsl(35 30% 60% / 1);
+	--col-focus-hue				: 35deg;
+	--col-focus-sat				: 30%;
+	--col-focus-lig				: 60%;
 	--col-focus-alp				: 1;
 
 }
