@@ -18,14 +18,14 @@
 	&:focus,
 	&:focus-visible {
 
-		@extend %glow;
+		@extend %highlight;
 
 	}
 
 	&.ng-invalid.ng-dirty {
 
 		--col-focus-hue		: 0;
-		@extend %glow;
+		@extend %highlight;
 
 	}
 

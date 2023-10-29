@@ -42,7 +42,7 @@ button {
 	&:focus,
 	&:focus-visible {
 
-		@extend %glow;
+		@extend %highlight;
 
 	}
 
