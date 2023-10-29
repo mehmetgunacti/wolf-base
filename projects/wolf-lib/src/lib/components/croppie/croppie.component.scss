@@ -1,4 +1,5 @@
 @import 'core/variables';
+@import 'core/helper';
 
 :host {
 
@@ -10,19 +11,25 @@
 
 		padding				: 0.25rem;
 		margin-bottom		: 3rem;
-		background-color	: var(--background-input);
-		border				: var(--border-input);
+
 		border-radius		: var(--border-radius);
+		border-width		: 1px;
+		border-style		: solid;
+
+		background-color	: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp));
+		border-color		: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) calc(var(--col-bg-input-lig) - 10%) / var(--col-bg-input-alp));
+
 		max-width			: 100%;
 		width				: 127px;
 		height				: 127px;
 		position			: relative;
 		transition			: $bg-transition;
 
-		&:hover {
+		&:hover,
+		&:focus,
+		&:focus-visible {
 
-			outline			: 1px solid var(--focus-glow);
-			box-shadow		: 0 0 10px var(--focus-glow);
+			@extend %glow;
 
 		}
 
