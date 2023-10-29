@@ -15,19 +15,19 @@
 
 		&.selected {
 
-			color 		: var(--col-accent);
+			color 		: hsl(var(--col-accent-hue) var(--col-accent-sat) var(--col-accent-lig) / var(--col-accent-alp));
 
 		}
 
 		&.related {
 
-			color 		: hsl(var(--col-accent-hue) var(--col-accent-sat) var(--col-accent-lig) / var(--col-accent-alp));
+			color 		: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
 
 		}
 
 		&.disabled {
 
-			color 		: hsl(var(--col-accent-hue) var(--col-accent-sat) var(--col-accent-lig) / var(--col-accent-alp));
+			color 		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
 
 		}
 

@@ -5,7 +5,6 @@
 
     @extend %flex-column;
 	padding				: var(--gap);
-    padding-left		: var(--gap-xl);
 	gap					: var(--gap);
 	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
 	border-radius		: var(--border-radius);
@@ -23,6 +22,7 @@
 
 		display			: flex;
 		align-items		: center;
+		padding-left	: var(--gap);
 
 		& :first-child {
 
@@ -42,7 +42,7 @@
 	& > aside {
 
 		@extend %flex-column;
-		gap		: var(--gap-lg);
+		gap				: var(--gap);
 
 		& > div {
 
@@ -59,6 +59,12 @@
 				}
 
 			}
+
+		}
+
+		& > w-tag-cloud {
+
+			margin		: var(--gap) 0;
 
 		}
 
