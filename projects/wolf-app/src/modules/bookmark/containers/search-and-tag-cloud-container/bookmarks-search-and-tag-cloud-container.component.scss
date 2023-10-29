@@ -52,6 +52,11 @@
 			& > input {
 
 				@extend %input-element;
+				&::placeholder {
+
+					color	: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+
+				}
 
 			}
 
