@@ -20,7 +20,7 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 	relatedTags$: Observable<string[]>;
 
 	@HostBinding('class.open')
-	cloudVisible = true;
+	cloudVisible = false;
 
 	searchControl: FormControl;
 	subscription: Subscription;
