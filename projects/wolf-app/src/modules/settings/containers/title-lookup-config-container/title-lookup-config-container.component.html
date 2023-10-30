@@ -1,9 +1,6 @@
-<div>
-	header="Title Lookup URL"
+<w-card>
 
-	<app-title-lookup-config-form
-		[url]="url$ | async"
-		(save)="onSave($event)">
-	</app-title-lookup-config-form>
+	<ng-container card-title>Title Lookup URL</ng-container>
+	<app-title-lookup-config-form [url]="url$ | async" (save)="onSave($event)"/>
 
-</div>
+</w-card>

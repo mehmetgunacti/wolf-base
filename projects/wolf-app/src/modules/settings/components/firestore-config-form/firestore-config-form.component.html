@@ -2,44 +2,23 @@
 
 	<!-- API KEY -->
 	<div>
-		<span class="p-float-label p-fluid">
-			<input
-				type="text"
-				pInputText
-				[ngClass]="{ 'ng-invalid ng-dirty': form.apiKey.invalid && form.apiKey.dirty }"
-				[formControl]="form.apiKey">
-			<label>API Key</label>
-		</span>
+		<w-input [control]="form.apiKey" name="API Key"/>
 	</div>
 
 	<!-- BASE URL -->
 	<div>
-		<span class="p-float-label p-fluid">
-			<input
-				type="text"
-				pInputText
-				[ngClass]="{ 'ng-invalid ng-dirty': form.baseURL.invalid && form.baseURL.dirty }"
-				[formControl]="form.baseURL">
-			<label>Base URL</label>
-		</span>
+		<w-input [control]="form.baseURL" name="Base URL"/>
 	</div>
 
 	<!-- PROJECT ID -->
 	<div>
-		<span class="p-float-label p-fluid">
-			<input
-				type="text"
-				pInputText
-				[ngClass]="{ 'ng-invalid ng-dirty': form.projectId.invalid && form.projectId.dirty }"
-				[formControl]="form.projectId">
-			<label>Project ID</label>
-		</span>
+		<w-input [control]="form.projectId" name="Project ID"/>
 	</div>
 
 </form>
 
 <div form-element-buttons>
 
-	<button pButton type="button" label="Save" icon="pi pi-save" iconPos="left" (click)="onSave()" [disabled]="form.isPristine()"></button>
+	<button type="button" (click)="onSave()" [disabled]="form.isPristine()"><span class="material-symbols-outlined">save</span> Save</button>
 
 </div>

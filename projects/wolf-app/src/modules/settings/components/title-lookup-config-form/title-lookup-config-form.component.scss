@@ -1,16 +1,14 @@
+@import 'core/helper';
+
 :host {
 
 	@extend %flex-column;
-
+	flex		: 1;
+	padding		: var(--gap-sm);
 	& > form {
 
 		@extend %flex-column;
-
-		& > div {
-
-			margin: 0.5rem 0;
-
-		}
+		gap		: var(--gap-lg);
 
 	}
 
@@ -20,7 +18,9 @@
 		margin-top : 1rem;
 
 		& button:last-child {
+
 			margin-left: auto;
+
 		}
 
 	}
