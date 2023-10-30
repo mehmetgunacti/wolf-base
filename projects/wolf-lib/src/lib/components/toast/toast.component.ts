@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, inject } fr
 import { ToastConfiguration } from './toast.util';
 
 @Component({
-	selector: 'app-toast',
+	selector: 'w-toast',
 	templateUrl: './toast.component.html'
 })
 export class ToastComponent implements OnInit {

@@ -5,7 +5,7 @@ import { ToastConfiguration } from './toast.util';
 import { WolfToastRef } from './toast.service';
 
 @Component({
-	selector: 'app-toast-wrapper',
+	selector: 'w-toast-wrapper',
 	templateUrl: './toast-wrapper.component.html',
 	animations: [toastTrigger]
 })

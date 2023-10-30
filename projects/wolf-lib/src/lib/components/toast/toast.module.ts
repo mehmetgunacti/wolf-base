@@ -12,7 +12,8 @@ import { ToastComponent } from './toast.component';
 		CommonModule
 	],
 	exports: [
-		ToastWrapperComponent
+		ToastWrapperComponent,
+		ToastComponent
 	]
 })
 export class ToastModule { }
