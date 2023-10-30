@@ -5,13 +5,10 @@
 
 	display	: contents;
 
-	&>w-card {
+	& > w-card {
 
 		width				: 100vw;
 		height				: 100vh;
-
-		background-color	: hsl(var(--col-bg-body-hue) var(--col-bg-body-sat) var(--col-bg-body-lig) / var(--col-bg-body-alp));
-		border-radius		: var(--border-radius);
 
 		@include bigScreen {
 
