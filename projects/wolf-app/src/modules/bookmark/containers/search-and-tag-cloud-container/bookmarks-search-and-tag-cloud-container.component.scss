@@ -1,4 +1,5 @@
 @import 'core/helper';
+@import 'core/variables';
 @import 'components/input-element';
 
 :host {
@@ -8,6 +9,8 @@
 	gap					: var(--gap);
 	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
 	border-radius		: var(--border-radius);
+	transition			: $bg-transition;
+
 	@extend %component-shadow;
 
 	--chevron-angle		: 0deg;

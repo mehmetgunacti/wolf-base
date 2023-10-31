@@ -30,7 +30,7 @@ button {
 	background-color			: hsl(var(--button-bg-hue) var(--button-bg-sat) var(--button-bg-lig) / var(--button-bg-alp));
 	border-color				: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%) / var(--button-bg-alp));
 
-	transition					: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+	transition					: color $transition, $bg-transition, border-color $transition;
 
 	&:hover,
 	&:focus {

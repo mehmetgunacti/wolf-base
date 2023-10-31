@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
 import { switchTheme } from 'store/actions/core-ui.actions';
 import { selCloudMenuBadgeNumbers } from 'store/selectors/cloud-ui.selectors';
-import { buildInfo } from 'version';
 
 @Component({
 	selector: 'app-nav',
@@ -16,10 +15,6 @@ export class NavComponent {
 	private store: Store = inject(Store);
 
 	cloudNumbers$: Observable<number[]> = this.store.select(selCloudMenuBadgeNumbers);
-
-	builtTime = buildInfo.builtTime;
-	builtVersion = buildInfo.version;
-	builtNumber = buildInfo.builtNumber;
 
 	navTo(url: string): void {
 

@@ -1,4 +1,5 @@
 @import 'core/helper';
+@import 'core/variables';
 
 :host {
 
@@ -18,6 +19,7 @@
 		position			: relative;
 		background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
 		border-radius		: var(--border-radius);
+		transition			: $bg-transition;
 
 		& > legend {
 
@@ -36,6 +38,7 @@
 			border				: none;
 			background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) - 5%) / var(--col-bg-panel-alp));
 			border-radius		: var(--border-radius);
+			transition			: $bg-transition;
 
 		}
 

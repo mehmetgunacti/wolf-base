@@ -1,4 +1,5 @@
 @import 'core/helper';
+@import 'core/variables';
 
 :host {
 
@@ -18,12 +19,12 @@
 
 	display				: flex;
 	position			: relative;
-	transition			: all ease-in-out 250ms;
 	padding				: 0.5rem;
 	overflow			: hidden;
 
 	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
 	border-radius		: var(--border-radius);
+	transition			: all ease-in-out 250ms, background-color $transition;
 
 	& > div[bookmark-overlay] {
 

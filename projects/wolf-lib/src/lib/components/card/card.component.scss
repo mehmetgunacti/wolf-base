@@ -4,10 +4,10 @@
 :host {
 
 	@extend %flex-column;
-	background-color		: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
 	border-radius			: var(--border-radius);
 	padding					: var(--gap) var(--gap);
-	gap						: var(--gap);
+	background-color		: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+	transition				: $bg-transition;
 
 	&>header {
 
@@ -54,6 +54,13 @@
 			display		: none;
 
 		}
+
+	}
+
+	&>header:not(:empty) + main:not(:empty),
+	&>main:not(:empty) + footer:not(:empty) {
+
+		margin-top		: var(--gap);
 
 	}
 

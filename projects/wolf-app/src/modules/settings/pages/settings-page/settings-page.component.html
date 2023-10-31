@@ -1,2 +1,7 @@
 <app-firestore-config-container></app-firestore-config-container>
 <app-title-lookup-config-container></app-title-lookup-config-container>
+<w-card>
+	<ng-container card-title>
+		<div version>v{{ builtVersion }} (#{{ builtNumber }}) {{ builtTime | date:'dd.MM.yyyy hh:mm:ss' }}</div>
+	</ng-container>
+</w-card>

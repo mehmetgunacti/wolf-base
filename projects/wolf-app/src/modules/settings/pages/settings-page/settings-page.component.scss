@@ -6,4 +6,14 @@
 	padding	: var(--gap-sm);
 	gap		: var(--gap);
 
+	[version] {
+
+	    flex: 1;
+		@extend %flex-end-center;
+		font-size		: 1.4rem;
+		color			: var(--secondary-text);
+	    justify-content: flex-end;
+
+	}
+
 }

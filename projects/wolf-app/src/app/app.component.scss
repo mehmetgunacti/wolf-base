@@ -9,6 +9,7 @@
 	display				: grid;
 	grid-template-rows	: $header-height 1fr;
 	background-color	: hsl(var(--col-bg-body-hue) var(--col-bg-body-sat) var(--col-bg-body-lig) / var(--col-bg-body-alp));
+	transition			: $bg-transition;
 
 	&>header {
 
