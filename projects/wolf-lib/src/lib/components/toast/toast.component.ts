@@ -3,7 +3,8 @@ import { ToastConfiguration } from './toast.util';
 
 @Component({
 	selector: 'w-toast',
-	templateUrl: './toast.component.html'
+	templateUrl: './toast.component.html',
+	styleUrls: ['./toast.component.scss']
 })
 export class ToastComponent implements OnInit {
 

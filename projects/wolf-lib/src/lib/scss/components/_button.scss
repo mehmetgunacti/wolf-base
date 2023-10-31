@@ -35,7 +35,9 @@ button {
 	&:hover,
 	&:focus {
 
-		--button-bg-lig			: calc(var(--col-info-lig) - 5%);
+		color					: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+		background-color		: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 5%) / var(--button-bg-alp));
+		border-color			: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%) / var(--button-bg-alp));
 
 	}
 
@@ -48,7 +50,10 @@ button {
 
 	&:active {
 
-		--button-bg-lig			: calc(var(--col-info-lig) - 10%);
+		color					: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+		background-color		: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%) / var(--button-bg-alp));
+		border-color			: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%) / var(--button-bg-alp));
+
 
 	}
 
@@ -91,9 +96,30 @@ button {
 
 	}
 
-	&.danger {
+	&.success {
 
-		--button-bg-hue		: var(--col-error-hue);
+		--button-bg-hue				: var(--col-success-hue);
+		--button-bg-sat				: var(--col-success-sat);
+		--button-bg-lig				: var(--col-success-lig);
+		--button-bg-alp				: var(--col-success-alp);
+
+	}
+
+	&.warn {
+
+		--button-bg-hue				: var(--col-warn-hue);
+		--button-bg-sat				: var(--col-warn-sat);
+		--button-bg-lig				: var(--col-warn-lig);
+		--button-bg-alp				: var(--col-warn-alp);
+
+	}
+
+	&.error {
+
+		--button-bg-hue				: var(--col-error-hue);
+		--button-bg-sat				: var(--col-error-sat);
+		--button-bg-lig				: var(--col-error-lig);
+		--button-bg-alp				: var(--col-error-alp);
 
 	}
 

@@ -1,0 +1,4 @@
+<app-cloud-task
+	*ngFor="let task of tasks$ | async"
+	[task]="task"
+	(action)="onAction($event)"></app-cloud-task>

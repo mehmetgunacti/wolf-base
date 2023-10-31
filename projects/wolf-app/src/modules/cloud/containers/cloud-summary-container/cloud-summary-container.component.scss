@@ -1,0 +1,8 @@
+@import 'core/helper';
+
+:host {
+
+	@extend %flex-column;
+	gap: 0.5rem;
+
+}

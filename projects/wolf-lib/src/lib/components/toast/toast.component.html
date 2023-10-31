@@ -7,5 +7,6 @@
 
 	<div toast-title *ngIf="conf.summary">{{conf.summary}}</div>
 	<div *ngIf="conf.detail" [innerHTML]="conf.detail"></div>
+	<ng-content/>
 
 </div>

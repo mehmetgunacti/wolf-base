@@ -1,0 +1,24 @@
+<w-portal>
+
+	<button
+		class="icon-only"
+		(click)="onDownloadRemoteIds()">
+		<span class="material-symbols-outlined">refresh</span> Refresh
+	</button>
+
+</w-portal>
+<!-- *ngIf="isFirestoreConfigMissing$ | async" -->
+<w-toast
+			class="warn" [conf]="{ severity: 'info' }">
+
+	<div style='display: flex; justify-content: space-between; align-items: center;'>
+
+		<span>Firestore configuration missing</span>
+		<button class="icon-only" routerLink="/settings">
+			<span class="material-symbols-outlined">settings</span> Configure
+		</button>
+
+	</div>
+
+</w-toast>
+<app-cloud-summary-container></app-cloud-summary-container>

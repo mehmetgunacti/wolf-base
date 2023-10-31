@@ -1,0 +1,9 @@
+@import 'core/helper';
+
+:host {
+
+	@extend %flex-column;
+	padding						: var(--gap-sm);
+	gap							: var(--gap-sm);
+
+}

@@ -45,4 +45,28 @@ body.light {
 	--col-focus-lig				: 60%;
 	--col-focus-alp				: 1;
 
+	// --col-success
+	--col-success-hue			: 120deg;
+	--col-success-sat			: 25%;
+	--col-success-lig			: 40%;
+	--col-success-alp			: 1;
+
+	// --col-info				: hsl(202deg 100% 24% / 1);
+	--col-info-hue				: 202deg;
+	--col-info-sat				: 25%;
+	--col-info-lig				: 40%;
+	--col-info-alp				: 1;
+
+	// --col-warn				: hsl(27deg 85% 50% / 1);
+	--col-warn-hue				: 27deg;
+	--col-warn-sat				: 45%;
+	--col-warn-lig				: 55%;
+	--col-warn-alp				: 1;
+
+	// --col-error				: hsl(0deg 70% 42% / 1);
+	--col-error-hue				: 0deg;
+	--col-error-sat				: 25%;
+	--col-error-lig				: 40%;
+	--col-error-alp				: 1;
+
 }

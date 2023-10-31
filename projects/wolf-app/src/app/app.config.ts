@@ -23,6 +23,12 @@ export const routes: Routes = [
 	},
 	{
 
+		path: 'cloud',
+		loadChildren: () => import('../modules/cloud/cloud.module').then(m => m.CloudModule)
+
+	},
+	{
+
 		path: 'settings',
 		loadChildren: () => import('../modules/settings/settings.module').then(m => m.SettingsModule)
 

@@ -37,7 +37,8 @@ import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 		NoDataPipe,
 		CardModule,
 		InputTagModule,
-		InputModule
+		InputModule,
+		ToastModule
 	],
 	providers: []
 })
