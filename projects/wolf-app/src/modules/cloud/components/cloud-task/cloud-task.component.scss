@@ -7,16 +7,12 @@
 	gap			: 0.5rem;
 	margin-top	: 2rem;
 
-	[footer] {
-
-		@extend %flex-end-center;
-
-	}
-
 	& > fieldset {
 
-		padding				: var(--gap-xxl);
+		@extend %flex-start-center;
 		position			: relative;
+		padding				: 4rem var(--gap);
+
 		background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
 		border-radius		: var(--border-radius);
 		transition			: $bg-transition;
@@ -42,44 +38,21 @@
 
 		}
 
-		& > [content] {
+		& > main {
 
 			padding				: var(--gap-xxl);
 
 		}
 
-		// &.success {
+		& > footer {
 
-		// 	& > legend {
+			flex		: 1;
+			@extend %flex-end-center;
+			position	: absolute;
+			right		: var(--gap-lg);
+			bottom		: var(--gap-lg);
 
-		// 		border				: none;
-		// 		background-color	: hsl(var(--col-success-hue) var(--col-success-sat) calc(var(--col-success-lig) - 5%) / var(--col-success-alp));
-
-		// 	}
-
-		// }
-
-		// &.warn {
-
-		// 	& > legend {
-
-		// 		border				: none;
-		// 		background-color	: hsl(var(--col-warn-hue) var(--col-warn-sat) calc(var(--col-warn-lig) - 5%) / var(--col-warn-alp));
-
-		// 	}
-
-		// }
-
-		// &.error {
-
-		// 	& > legend {
-
-		// 		border				: none !important;
-		// 		background-color	: hsl(var(--col-error-hue) var(--col-error-sat) calc(var(--col-error-lig) - 5%) / var(--col-error-alp));
-
-		// 	}
-
-		// }
+		}
 
 	}
 
