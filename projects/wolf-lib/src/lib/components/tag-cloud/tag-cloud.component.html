@@ -1,4 +1,16 @@
-<a *ngFor="let tag of uiTags"
-	(click)="onTagClick(tag.tag.name)"
-	[ngClass]="tag.className"
-	[ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</a>
+<ng-container *ngFor="let tag of uiTags">
+
+	<ng-container *ngIf="tag.className === 'disabled'; else tagAnchor">
+
+		<span class="disabled" [ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</span>
+
+	</ng-container>
+	<ng-template #tagAnchor>
+
+		<a (click)="onTagClick(tag.tag.name)"
+			[ngClass]="tag.className"
+			[ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</a>
+
+	</ng-template>
+
+</ng-container>

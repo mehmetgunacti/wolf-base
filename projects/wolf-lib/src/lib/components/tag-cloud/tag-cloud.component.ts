@@ -5,8 +5,8 @@ interface TagUI {
 
 	tag: Tag;
 	fontSize: string;
-	selectedIdx: number;
-	disabled: boolean;
+	// selectedIdx: number;
+	// disabled: boolean;
 	className: string;
 
 }
@@ -68,20 +68,22 @@ export class TagCloudComponent implements OnChanges {
 
 			// For each count value, determine which bucket it falls into and assign the appropriate font size.
 			for (let i = 0; i < sortedArr.length; i++) {
+
 				const fontSizeIndex = Math.floor(i / bucketSize);
 				const count = sortedArr[i];
 				const fontSize = fontSizeMap.get(count) || fontSizeValues[fontSizeIndex];
 				fontSizeMap.set(count, fontSize);
+
 			}
 
 			// For each tag, create a new TagUI object with the font size based on the count value, and add it to the uiArr array.
 			uiArr.push(
 				...this.tags.map(
-					(tag) => ({
+					(tag): TagUI => ({
 						tag,
 						fontSize: fontSizeMap.get(tag.count) || '1em',
-						selectedIdx: this.selectedTags?.indexOf(tag.name) ?? -1,
-						disabled: false,
+						// selectedIdx: this.selectedTags?.indexOf(tag.name) ?? -1,
+						// disabled: false,
 						className: this.setClassName(tag.name)
 					})
 				)
