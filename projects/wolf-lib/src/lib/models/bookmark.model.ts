@@ -11,7 +11,7 @@ export interface Bookmark extends Entity {
 
 }
 
-export interface Click extends IDBase {
+export interface Click extends Entity {
 
 	total: number;
 	current: number;

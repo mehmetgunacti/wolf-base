@@ -124,6 +124,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 		const metaData: RemoteMetadata = {
 
 			id: dto.document,
+			name: dto.entity.name,
 			createTime,
 			updateTime
 
@@ -147,6 +148,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 		const metaData: RemoteMetadata = {
 
 			id: document,
+			name: dto.entity.name,
 			createTime,
 			updateTime
 

@@ -44,6 +44,7 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 		const syncData: SyncData = {
 
 			id: item.metaData.id,
+			name: item.metaData.name,
 			createTime: item.metaData.createTime,
 			updateTime: item.metaData.updateTime,
 			updated: false,
@@ -234,6 +235,7 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 		const syncData: SyncData = {
 
 			id: data.id,
+			name: data.name,
 			createTime: data.createTime,
 			updateTime: data.updateTime,
 			updated: false,
@@ -260,6 +262,7 @@ export class MockBookmarksTableImpl implements BookmarksTable {
 			this.bookmarks_clicks.set(id, {
 
 				id,
+				name: this.bookmarks.get(id)?.name ?? 'not found',
 				current: 1,
 				total: 1
 

@@ -36,7 +36,7 @@ export class CloudBookmarkEffects {
 
 			ofType(uploadNew),
 			withLatestFrom(this.store.select(selBookmarkLocalNew)),
-			switchMap(([, ids]) => this.syncService.uploadNew(ids)),
+			switchMap(([, entities]) => this.syncService.uploadNew(entities.map(e => e.id))),
 			map(count => uploadSuccess({ count }))
 
 		)

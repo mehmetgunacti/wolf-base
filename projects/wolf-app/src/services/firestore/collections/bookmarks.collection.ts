@@ -64,6 +64,7 @@ export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageColl
 		return {
 
 			id,
+			name: id,
 			total,
 			current: 0
 

@@ -159,7 +159,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 
 	private async _put(remoteData: RemoteData<T>): Promise<void> {
 
-		const { id, createTime, updateTime } = remoteData.metaData;
+		const { id, name, createTime, updateTime } = remoteData.metaData;
 
 		// move local entity to trash
 		const entity = await this.db.table<T>(this.entity).get(id);
@@ -176,6 +176,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 		await this.db.table<SyncData>(this.entity + '_sync').put({
 
 			id,
+			name,
 			createTime,
 			updateTime,
 			updated: false,

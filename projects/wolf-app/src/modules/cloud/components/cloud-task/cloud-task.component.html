@@ -1,4 +1,4 @@
-<fieldset [class]="task.color">
+<fieldset>
 
 	<legend>
 
@@ -37,17 +37,17 @@
 
 		<ng-container [ngSwitch]="task.type">
 
-			<ng-container *ngSwitchCase="CloudTaskType.local_new">{{ task.count }} {{ task.count > 1 ? 'items' : 'item' }} created</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.local_updated">{{ task.count }} {{ task.count > 1 ? 'items' : 'item' }} updated</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.local_deleted">{{ task.count }} {{ task.count > 1 ? 'items' : 'item' }} deleted</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.clicked">{{ task.count }} bookmark(s) clicked</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.remote_new">{{ task.count }} new {{ task.count > 1 ? 'items' : 'item' }} on server</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.remote_updated">{{ task.count }} updated {{ task.count > 1 ? 'items' : 'item' }} on server</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.remote_deleted">{{ task.count }} deleted {{ task.count > 1 ? 'items' : 'item' }} on server</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.updated_updated">Conflict: {{ task.count }} updated {{ task.count > 1 ? 'items' : 'item' }} locally and on server</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.deleted_deleted">{{ task.count }} deleted {{ task.count > 1 ? 'items' : 'item' }} locally and on server </ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.updated_deleted">Conflict: {{ task.count }} {{ task.count > 1 ? 'items' : 'item' }} updated locally, deleted on server</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.deleted_updated">Conflict: {{ task.count }} {{ task.count > 1 ? 'items' : 'item' }} deleted locally, updated on server</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.local_new">{{ task.entities.length }} {{ task.entities.length > 1 ? 'items' : 'item' }} created</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.local_updated">{{ task.entities.length }} {{ task.entities.length > 1 ? 'items' : 'item' }} updated</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.local_deleted">{{ task.entities.length }} {{ task.entities.length > 1 ? 'items' : 'item' }} deleted</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.clicked">{{ task.entities.length }} {{ task.entities.length > 1 ? 'bookmarks' : 'bookmark' }} clicked</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.remote_new">{{ task.entities.length }} new {{ task.entities.length > 1 ? 'items' : 'item' }} on server</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.remote_updated">{{ task.entities.length }} updated {{ task.entities.length > 1 ? 'items' : 'item' }} on server</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.remote_deleted">{{ task.entities.length }} deleted {{ task.entities.length > 1 ? 'items' : 'item' }} on server</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.updated_updated">Conflict: {{ task.entities.length }} updated {{ task.entities.length > 1 ? 'items' : 'item' }} locally and on server</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.deleted_deleted">{{ task.entities.length }} deleted {{ task.entities.length > 1 ? 'items' : 'item' }} locally and on server </ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.updated_deleted">Conflict: {{ task.entities.length }} {{ task.entities.length > 1 ? 'items' : 'item' }} updated locally, deleted on server</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.deleted_updated">Conflict: {{ task.entities.length }} {{ task.entities.length > 1 ? 'items' : 'item' }} deleted locally, updated on server</ng-container>
 
 		</ng-container>
 
@@ -58,9 +58,9 @@
 
 		<ng-container [ngSwitch]="task.action">
 
-			<button *ngSwitchCase="'upload'"   type="button" [class]="task.color" (click)="onActionClicked()"><span class="material-symbols-outlined">cloud_upload</span> Upload</button>
-			<button *ngSwitchCase="'download'" type="button" [class]="task.color" (click)="onActionClicked()"><span class="material-symbols-outlined">cloud_download</span> Download</button>
-			<button *ngSwitchCase="'view'"     type="button" [class]="task.color" (click)="onActionClicked()"><span class="material-symbols-outlined">eye</span> View</button>
+			<button *ngSwitchCase="'upload'"   type="button" (click)="onActionClicked()"><span class="material-symbols-outlined">cloud_upload</span> Upload</button>
+			<button *ngSwitchCase="'download'" type="button" (click)="onActionClicked()"><span class="material-symbols-outlined">cloud_download</span> Download</button>
+			<button *ngSwitchCase="'view'"     type="button" (click)="onActionClicked()"><span class="material-symbols-outlined">eye</span> View</button>
 
 		</ng-container>
 

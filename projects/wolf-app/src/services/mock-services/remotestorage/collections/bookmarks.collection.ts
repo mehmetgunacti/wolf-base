@@ -49,6 +49,7 @@ export class MockBookmarksCollection implements BookmarksCollection {
 		const metadata: RemoteMetadata = {
 
 			id: item.id,
+			name: item.name,
 			createTime,
 			updateTime: new Date().toISOString(),
 
@@ -89,6 +90,7 @@ export class MockBookmarksCollection implements BookmarksCollection {
 		const metaData: RemoteMetadata = {
 
 			id: item.id,
+			name: item.name,
 			createTime: new Date().toISOString(),
 			updateTime: new Date().toISOString(),
 
@@ -123,7 +125,7 @@ export class MockBookmarksCollection implements BookmarksCollection {
 
 	downloadClicks(): Observable<Click[]> {
 
-		return of(Object.keys(this.clicks).map(id => ({ id, current: 0, total: this.clicks[id] })));
+		return of(Object.keys(this.clicks).map(id => ({ id, name: this.bookmarks[id].entity.name ,current: 0, total: this.clicks[id] })));
 
 	}
 

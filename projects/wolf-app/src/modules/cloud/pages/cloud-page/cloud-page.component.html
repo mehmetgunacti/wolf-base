@@ -7,9 +7,8 @@
 	</button>
 
 </w-portal>
-<!-- *ngIf="isFirestoreConfigMissing$ | async" -->
-<w-toast
-			class="warn" [conf]="{ severity: 'info' }">
+
+<w-toast *ngIf="isFirestoreConfigMissing$ | async" class="warn" [conf]="{ severity: 'info' }">
 
 	<div style='display: flex; justify-content: space-between; align-items: center;'>
 

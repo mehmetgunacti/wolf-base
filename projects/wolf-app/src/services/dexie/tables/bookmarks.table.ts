@@ -63,6 +63,7 @@ export class DexieBookmarksTableImpl extends EntityTableImpl<Bookmark> implement
 		if (affected !== 1)
 			await this.db.bookmarks_clicks.add({
 				id,
+				name: id,
 				total: 1,
 				current: 1
 			});

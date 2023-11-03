@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { selBookmarkEntitiesState } from './bookmark.selectors';
+import { Click, Entity } from '@lib';
 
 export const selBookmarks = createSelector(
 
@@ -39,7 +40,7 @@ export const selBookmark = createSelector(
 export const selBookmarkClicked = createSelector(
 
 	selBookmarkEntitiesState,
-	state => Object.values(state.clicks).filter(c => c.current > 0)
+	(state): Click[] => Object.values(state.clicks).filter(c => c.current > 0)
 
 );
 

@@ -41,6 +41,7 @@ export class MockKBEntriesTableImpl implements KBEntriesTable {
 		const syncData: SyncData = {
 
 			id: item.metaData.id,
+			name: item.metaData.name,
 			createTime: item.metaData.createTime,
 			updateTime: item.metaData.updateTime,
 			updated: false,
@@ -222,6 +223,7 @@ export class MockKBEntriesTableImpl implements KBEntriesTable {
 		const syncData: SyncData = {
 
 			id: data.id,
+			name: data.name,
 			createTime: data.createTime,
 			updateTime: data.updateTime,
 			updated: false,
