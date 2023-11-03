@@ -46,7 +46,8 @@ span,
 h1, h2, h3, h4, h5, h6,
 a {
 
-	color	: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+	color		: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+	transition	: color $transition;
 
 }
 

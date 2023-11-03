@@ -22,7 +22,7 @@ button {
 	line-height					: 1;
 	min-width					: var(--button-width);
 
-	border-radius				: var(--border-radius);
+	border-radius				: var(--border-radius-sm);
 	border-width				: 1px;
 	border-style				: solid;
 
@@ -131,7 +131,7 @@ button {
 		--button-bg-alp		: var(--col-accent-alp);
 
 		padding				: var(--gap-xs) var(--gap-sm);
-		font-size			: 1.4rem;
+		font-size			: 1.3rem;
 		line-height			: 1.2;
 		border				: 1px solid transparent;
 		min-width			: unset;

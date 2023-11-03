@@ -9,11 +9,12 @@
 
 	& > div[bookmark-wrapper] {
 
-		min-height	: 13rem;
+		min-height	: 14rem;
 
 		& > app-bookmark {
 
-			height	: 100%;
+			height					: 100%;
+			--bookmark-bg-color		: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) - 10%) / var(--col-bg-panel-alp));
 
 		}
 

@@ -8,6 +8,7 @@
 	--bookmark-edit-button-opacity	: 0;
 	--font-size 					: larger;
 	--image-size					: 110px;
+	--bookmark-bg-color				: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
 
 	&.compact {
 
@@ -22,7 +23,7 @@
 	padding				: 0.5rem;
 	overflow			: hidden;
 
-	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+	background-color	: var(--bookmark-bg-color);
 	border-radius		: var(--border-radius);
 	transition			: all ease-in-out 250ms, background-color $transition;
 
@@ -87,7 +88,7 @@
 			}
 
 			span[bookmark-title] {
-				color		: var(--secondary-text);
+				color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
 				font-size	: small;
 			}
 
@@ -107,9 +108,8 @@
 			div[bookmark-url] {
 
 				word-break		: break-all;
-				padding-right	: 1rem;
 				font-size		: x-small;
-				color			: var(--secondary-text);
+				color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
 
 			}
 
@@ -118,7 +118,7 @@
 				display			: flex;
 				flex-wrap		: wrap;
 				margin-top		: var(--gap-xs);
-				padding			: var(--gap-sm);
+				padding			: var(--gap-sm) var(--gap-sm) var(--gap-sm) 0;
 				gap				: var(--gap-xs);
 
 			}

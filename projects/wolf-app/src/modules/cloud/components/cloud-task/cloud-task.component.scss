@@ -17,7 +17,7 @@
 		position			: relative;
 		padding				: 4rem var(--gap);
 
-		background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+		background-color	: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
 		border-radius		: var(--border-radius);
 		transition			: $bg-transition;
 
@@ -36,7 +36,7 @@
 			margin-left			: var(--gap);
 
 			border				: none;
-			background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) - 3%)/var(--col-bg-panel-alp));
+			background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
 			border-radius		: var(--border-radius);
 			transition			: $bg-transition;
 

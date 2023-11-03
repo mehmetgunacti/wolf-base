@@ -36,6 +36,18 @@ body.light {
 	--col-bg-input-lig			: 70%;
 	--col-bg-input-alp			: 1;
 
+	// --col-text
+	--col-text-hue				: 240deg;
+	--col-text-sat				: 4%;
+	--col-text-lig				: 91%;
+	--col-text-alp				: 1;
+
+	// --col-text-secondary
+	--col-text-secondary-hue	: 208deg;
+	--col-text-secondary-sat	: 20%;
+	--col-text-secondary-lig	: 43%;
+	--col-text-secondary-alp	: 1;
+
 	// overlay
 	--background-overlay		: hsl(0deg 0% 15% / 60%);
 

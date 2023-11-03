@@ -3,10 +3,10 @@
 
 %input-element  {
 
-	padding					: 1rem;
+	padding					: var(--gap);
 	color					: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
 
-	border-radius			: var(--border-radius);
+	border-radius			: var(--border-radius-sm);
 	border-width			: 1px;
 	border-style			: solid;
 
@@ -39,7 +39,7 @@
 	left				: 5px;
 	transform			: translateY(-50%);
 	pointer-events		: none;
-	border-radius		: 5px;
+	border-radius		: var(--border-radius-xs);
 	padding				: 1px 5px;
 	font-size			: 1.4rem;
 	transition			: all $transition, $bg-transition, border-color $transition;
@@ -48,7 +48,7 @@
 
 %input-label-up {
 
-	top					: 0px;
+	top					: -1px;
 	font-size			: 1rem;
 	background			: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp));
 	border				: none;
