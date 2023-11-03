@@ -1,36 +1,36 @@
 body.light {
 
-	// --col-accent				: hsl(205, 14%, 52%);
-	--col-accent-hue			: 35deg;
-	--col-accent-sat			: 60%;
-	--col-accent-lig			: 45%;
+	// --col-accent
+	--col-accent-hue			: 32deg;
+	--col-accent-sat			: 52%;
+	--col-accent-lig			: 50%;
 	--col-accent-alp			: 1;
 
-	// --col-bg-body			: hsl(206, 14%, 90%);
+	// --col-bg-body
 	--col-bg-body-hue			: 208deg;
 	--col-bg-body-sat			: 25%;
 	--col-bg-body-lig			: 80%;
 	--col-bg-body-alp			: 1;
 
-	// --col-bg-header			: hsl(206, 13%, 62%);
+	// --col-bg-header
 	--col-bg-header-hue			: 208deg;
 	--col-bg-header-sat			: 25%;
 	--col-bg-header-lig			: 50%;
 	--col-bg-header-alp			: 1;
 
-	//--col-bg-nav				: hsl(208, 13%, 81%);
+	//--col-bg-nav
 	--col-bg-nav-hue			: 208deg;
 	--col-bg-nav-sat			: 25%;
 	--col-bg-nav-lig			: 60%;
 	--col-bg-nav-alp			: 1;
 
-	//--col-bg-panel			: hsl(203, 14%, 71%);
+	//--col-bg-panel
 	--col-bg-panel-hue			: 208deg;
 	--col-bg-panel-sat			: 20%;
 	--col-bg-panel-lig			: 50%;
 	--col-bg-panel-alp			: 1;
 
-	// --col-bg-input			: hsl(208deg 25% 80% / 1);
+	// --col-bg-input
 	--col-bg-input-hue			: 208deg;
 	--col-bg-input-sat			: 25%;
 	--col-bg-input-lig			: 70%;
@@ -39,7 +39,7 @@ body.light {
 	// overlay
 	--background-overlay		: hsl(0deg 0% 15% / 60%);
 
-	// --focus					: hsl(35 30% 60% / 1);
+	// --focus
 	--col-focus-hue				: 35deg;
 	--col-focus-sat				: 30%;
 	--col-focus-lig				: 60%;
@@ -51,19 +51,19 @@ body.light {
 	--col-success-lig			: 40%;
 	--col-success-alp			: 1;
 
-	// --col-info				: hsl(202deg 100% 24% / 1);
+	// --col-info
 	--col-info-hue				: 202deg;
 	--col-info-sat				: 25%;
 	--col-info-lig				: 40%;
 	--col-info-alp				: 1;
 
-	// --col-warn				: hsl(27deg 85% 50% / 1);
+	// --col-warn
 	--col-warn-hue				: 27deg;
 	--col-warn-sat				: 45%;
 	--col-warn-lig				: 55%;
 	--col-warn-alp				: 1;
 
-	// --col-error				: hsl(0deg 70% 42% / 1);
+	// --col-error
 	--col-error-hue				: 0deg;
 	--col-error-sat				: 25%;
 	--col-error-lig				: 40%;
