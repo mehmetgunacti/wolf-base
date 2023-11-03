@@ -1,5 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { closeEditBookmarkDialogSuccess, openAddBookmarkDialogSuccess, openEditBookmarkDialogSuccess } from 'store/actions/bookmark-ui.actions';
+import { fromClipboardFailure } from 'store/actions/bookmark.actions';
 import { BookmarkUIState, initialBookmarkUIState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(
@@ -8,6 +9,7 @@ const reducer = createReducer(
 	on(openAddBookmarkDialogSuccess, (state, { id }): BookmarkUIState => ({ ...state, editDialogOverlayId: id })),
 	on(openEditBookmarkDialogSuccess, (state, { id }): BookmarkUIState => ({ ...state, editDialogOverlayId: id })),
 	on(closeEditBookmarkDialogSuccess, (state): BookmarkUIState => ({ ...state, editDialogOverlayId: null })),
+	on(fromClipboardFailure, (state, { shaking }): BookmarkUIState => ({ ...state, shaking })),
 	// on(createBookmarkSuccess, (state): BookmarkUIState => ({ ...state, editDialogVisible: false })),
 	// on(updateBookmarkSuccess, (state): BookmarkUIState => ({ ...state, editDialogVisible: false })),
 	// on(deleteBookmarkSuccess, (state): BookmarkUIState => ({ ...state, editDialogVisible: false }))

@@ -36,6 +36,7 @@ export interface BookmarkTagsState {
 export interface BookmarkUIState {
 
 	editDialogOverlayId: OVERLAY_ID | null;
+	shaking: boolean;
 
 }
 
@@ -66,7 +67,8 @@ export const initialBookmarkTagsState: BookmarkTagsState = {
 
 export const initialBookmarkUIState: BookmarkUIState = {
 
-	editDialogOverlayId: null
+	editDialogOverlayId: null,
+	shaking: false
 
 };
 

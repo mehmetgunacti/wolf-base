@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Bookmark, Click, LocalStorageService, POPULAR, commaSplit, toggleArrayItem } from '@lib';
+import { Bookmark, Click, LocalStorageService, TAG_POPULAR, commaSplit, toggleArrayItem } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
@@ -177,14 +177,19 @@ export class BookmarkEntitiesEffects {
 			ofType(updateBookmark),
 			switchMap(({ id, bookmark }) => from(this.localStorage.bookmarks.update(id, bookmark)).pipe(
 				switchMap(count => iif(
+
 					() => count === 1,
 					from(this.localStorage.bookmarks.getEntity(id)).pipe(
 						map(bookmark => bookmark ? updateBookmarkSuccess({ bookmark }) : updateBookmarkFailure({ id }))
 					),
 					of(updateBookmarkFailure({ id }))
+
 				))
+
 			))
+
 		)
+
 	);
 
 	bookmarksShowUpdateNotification$ = createEffect(
@@ -203,7 +208,7 @@ export class BookmarkEntitiesEffects {
 		() => this.actions$.pipe(
 
 			ofType(togglePopular),
-			tap(({ id }) => this.localStorage.bookmarks.toggleTag(id, POPULAR))
+			tap(({ id }) => this.localStorage.bookmarks.toggleTag(id, TAG_POPULAR))
 
 		),
 		{ dispatch: false }

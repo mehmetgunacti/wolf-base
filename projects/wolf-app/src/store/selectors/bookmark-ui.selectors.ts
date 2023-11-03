@@ -17,3 +17,10 @@ export const selBookmarkOverlayId = createSelector(
 	state => state.editDialogOverlayId
 
 );
+
+export const selBookmarkShaking = createSelector(
+
+	selBookmarkUIState,
+	state => state.shaking
+
+);

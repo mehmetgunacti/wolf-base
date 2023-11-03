@@ -1,9 +1,19 @@
 <w-portal>
+
+	<button
+		class="icon-only"
+		(click)="fromClipboard()"
+		[class.shake]="isShaking$ | async"
+		title="Create from copied URL">
+		<span class="material-symbols-outlined">content_paste</span> Clipboard
+	</button>
+
 	<button
 		class="icon-only"
 		(click)="openAddDialog()">
-		<span class="material-symbols-outlined">add</span> Bookmark
+		<span class="material-symbols-outlined">bookmark_add</span> Bookmark
 	</button>
+
 </w-portal>
 
 <!-- Search and Tag-cloud -->

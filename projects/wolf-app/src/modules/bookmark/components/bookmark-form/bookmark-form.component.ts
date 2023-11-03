@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, inject } from '@angular/core';
-import { Bookmark, ToastConfiguration, UUID } from 'lib';
+import { Bookmark, TAG_POPULAR, ToastConfiguration, UUID, parseURL } from 'lib';
 import { Observable, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
 
@@ -114,7 +114,7 @@ will be deleted. Continue?`)
 		}
 
 		// get the title of the web page
-		const parsed: URL | null = this.parseURL(url);
+		const parsed: URL | null = parseURL(url);
 		if (parsed) {
 
 			const { origin, pathname } = parsed;
@@ -151,7 +151,7 @@ will be deleted. Continue?`)
 		const url: string = this.form.urls.at(0).getRawValue();
 
 		// set hostname as bookmark name
-		const parsed: URL | null = this.parseURL(url);
+		const parsed: URL | null = parseURL(url);
 		if (parsed) {
 
 			const hostname = parsed.hostname;
@@ -164,25 +164,12 @@ will be deleted. Continue?`)
 
 	onTogglePopular(): void {
 
-		const POPULAR = 'popular';
 		const tags: string[] = this.form.tags.value;
 		this.form.tags.setValue(
-			tags.includes(POPULAR) ? tags.filter(v => v !== POPULAR) : [POPULAR, ...tags]
+			tags.includes(TAG_POPULAR) ? tags.filter(v => v !== TAG_POPULAR) : [TAG_POPULAR, ...tags]
 		);
 		this.form.tags.markAsDirty();
 		this.form.tags.updateValueAndValidity();
-
-	}
-
-	private parseURL(url: string): URL | null {
-
-		try {
-			return new URL(url.toLowerCase());
-		} catch (err) {
-			console.error('url:', url);
-			console.error('err', err, url);
-			return null;
-		}
 
 	}
 

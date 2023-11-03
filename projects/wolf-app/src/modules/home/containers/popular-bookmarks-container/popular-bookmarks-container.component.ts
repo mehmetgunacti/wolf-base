@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Bookmark, POPULAR, UUID } from '@lib';
+import { Bookmark, TAG_POPULAR, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { clickBookmark } from 'store/actions/bookmark.actions';
@@ -18,7 +18,7 @@ export class PopularBookmarksContainerComponent implements OnInit {
 	constructor(private store: Store) {
 
 		this.bookmarks$ = store.select(selectors.selBookmarkArray).pipe(
-			map(bookmarks => bookmarks.filter(b => b.tags.includes(POPULAR)))
+			map(bookmarks => bookmarks.filter(b => b.tags.includes(TAG_POPULAR)))
 		);
 
 	}
