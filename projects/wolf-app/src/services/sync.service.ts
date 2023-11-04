@@ -1,12 +1,12 @@
 import { inject } from "@angular/core";
 import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from "app/app.config";
-import { Bookmark, Click, LocalStorageService, RemoteData, RemoteMetadata, RemoteStorageService, SyncData, UUID } from '@lib';
+import { Bookmark, Click, LocalRepositoryService, RemoteData, RemoteMetadata, RemoteStorageService, SyncData, UUID } from '@lib';
 import { SyncService } from "lib/services/sync-service.interface";
 import { EMPTY, Observable, concatMap, filter, from, iif, map, switchMap, toArray } from "rxjs";
 
 export class SyncServiceImpl implements SyncService {
 
-	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
+	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
 	private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
 
 	downloadMetadata(): Observable<number> {
@@ -17,7 +17,7 @@ export class SyncServiceImpl implements SyncService {
 			switchMap((rmd: RemoteMetadata[]) =>
 
 				// store list in local storage
-				from(this.localStorage.bookmarks.storeRemoteMetadata(rmd)).pipe(
+				from(this.localRepository.bookmarks.storeRemoteMetadata(rmd)).pipe(
 
 					// return length of list
 					map(() => rmd.length)
@@ -38,7 +38,7 @@ export class SyncServiceImpl implements SyncService {
 			concatMap(id =>
 
 				// read entity from local storage
-				from(this.localStorage.bookmarks.getEntity(id)).pipe(
+				from(this.localRepository.bookmarks.getEntity(id)).pipe(
 
 					// check if entity exists
 					filter((bookmark): bookmark is Bookmark => bookmark !== null),
@@ -64,13 +64,13 @@ export class SyncServiceImpl implements SyncService {
 			concatMap(id =>
 
 				// read entity from local storage
-				from(this.localStorage.bookmarks.getEntity(id)).pipe(
+				from(this.localRepository.bookmarks.getEntity(id)).pipe(
 
 					// if entity does not exist, skip this id
 					filter((bookmark): bookmark is Bookmark => bookmark !== null),
 
 					// read syncData from local storage
-					switchMap(bookmark => from(this.localStorage.bookmarks.getSyncData(id)).pipe(
+					switchMap(bookmark => from(this.localRepository.bookmarks.getSyncData(id)).pipe(
 
 						// perform syncData checks; skip this id if checks fail
 						filter((syncData): syncData is SyncData => !!syncData && syncData.updated && !syncData.deleted),
@@ -93,7 +93,7 @@ export class SyncServiceImpl implements SyncService {
 									this.uploadAndStore(bookmark),
 
 									// save remoteMetadata if syncData - remoteMetadata checks fail
-									from(this.localStorage.bookmarks.storeRemoteMetadata([remoteMetadata])).pipe(() => EMPTY)
+									from(this.localRepository.bookmarks.storeRemoteMetadata([remoteMetadata])).pipe(() => EMPTY)
 
 								)
 
@@ -118,7 +118,7 @@ export class SyncServiceImpl implements SyncService {
 		return this.remoteStorage.bookmarks.upload(entity).pipe(
 
 			// store _sync and _remote data
-			switchMap(remoteMetadata => this.localStorage.bookmarks.storeMetadata(remoteMetadata)),
+			switchMap(remoteMetadata => this.localRepository.bookmarks.storeMetadata(remoteMetadata)),
 
 			// complete stream
 			map(() => entity.id)
@@ -141,7 +141,7 @@ export class SyncServiceImpl implements SyncService {
 					filter((remoteData): remoteData is RemoteData<Bookmark> => remoteData !== null),
 
 					// delete local metadata
-					switchMap(() => from(this.localStorage.bookmarks.delete(id)).pipe(map(() => id)))
+					switchMap(() => from(this.localRepository.bookmarks.delete(id)).pipe(map(() => id)))
 
 				)
 
@@ -183,7 +183,7 @@ export class SyncServiceImpl implements SyncService {
 		return this.remoteStorage.bookmarks.downloadMany(ids).pipe(
 
 			// store all returned RemoteData
-			switchMap(remoteData => from(this.localStorage.bookmarks.storeRemoteData(remoteData)))
+			switchMap(remoteData => from(this.localRepository.bookmarks.storeRemoteData(remoteData)))
 
 		);
 
@@ -191,7 +191,7 @@ export class SyncServiceImpl implements SyncService {
 
 	downloadDeleted(ids: string[]): Observable<number> {
 
-		return from(this.localStorage.bookmarks.bulkDelete(ids));
+		return from(this.localRepository.bookmarks.bulkDelete(ids));
 
 	}
 
@@ -207,7 +207,7 @@ export class SyncServiceImpl implements SyncService {
 		return this.remoteStorage.bookmarks.downloadClicks().pipe(
 
 			// store clicks
-			switchMap(clicks => from(this.localStorage.bookmarks.storeClicks(clicks)))
+			switchMap(clicks => from(this.localRepository.bookmarks.storeClicks(clicks)))
 
 		);
 
@@ -215,7 +215,7 @@ export class SyncServiceImpl implements SyncService {
 
 	deleteMetadata(ids: UUID[]): Observable<number> {
 
-		return from(this.localStorage.bookmarks.bulkDelete(ids));
+		return from(this.localRepository.bookmarks.bulkDelete(ids));
 
 	}
 

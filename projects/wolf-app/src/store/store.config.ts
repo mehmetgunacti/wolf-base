@@ -20,6 +20,7 @@ import { logsReducer } from './reducers/logs.reducer';
 import { AppState } from './states/app.state';
 import { KnowledgeBaseEntitiesEffects } from './effects/knowledge-base-entities.effects';
 import { BookmarkUIEffects } from './effects/bookmark-ui.effects';
+import { CoreEntityEffects } from './effects/core-entity.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -42,6 +43,7 @@ export const effects = [
 
 	// Core
 	CoreEffects,
+	CoreEntityEffects,
 	CoreNotificationEffects,
 	CoreNavigationEffects,
 	CoreUIEffects,

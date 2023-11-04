@@ -2,7 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { Breakpoint, LocalStorageService } from '@lib';
+import { Breakpoint, LocalRepositoryService } from '@lib';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { hideSidebar, setBigScreen, switchTheme, toggleSidebar } from 'store/actions/core-ui.actions';
 import { Store } from '@ngrx/store';
@@ -14,7 +14,7 @@ export class CoreUIEffects {
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
 	private breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
-	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
+	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
 
 	setBigScreen$ = createEffect(
 
@@ -31,7 +31,7 @@ export class CoreUIEffects {
 		() => this.actions$.pipe(
 
 			ofType(switchTheme),
-			switchMap(() => this.localStorage.configuration.toggleTheme())
+			switchMap(() => this.localRepository.configuration.toggleTheme())
 
 		),
 		{ dispatch: false }
@@ -44,7 +44,7 @@ export class CoreUIEffects {
 
 			ofType(toggleSidebar),
 			withLatestFrom(this.store.select(selCoreIsSidebarVisible)),
-			switchMap(([, visible]) => this.localStorage.configuration.setSidebarVisible(!visible))
+			switchMap(([, visible]) => this.localRepository.configuration.setSidebarVisible(!visible))
 
 		),
 		{ dispatch: false }
@@ -56,7 +56,7 @@ export class CoreUIEffects {
 		() => this.actions$.pipe(
 
 			ofType(hideSidebar),
-			switchMap(() => this.localStorage.configuration.setSidebarVisible(false))
+			switchMap(() => this.localRepository.configuration.setSidebarVisible(false))
 
 		),
 		{ dispatch: false }

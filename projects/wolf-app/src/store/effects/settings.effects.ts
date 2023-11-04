@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { LocalStorageService } from '@lib';
+import { LocalRepositoryService } from '@lib';
 import { map, switchMap } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { saveFirestoreConfig, saveFirestoreConfigSuccess, saveTitleLookup, saveTitleLookupSuccess } from 'store/actions/settings.actions';
@@ -10,14 +10,14 @@ import { saveFirestoreConfig, saveFirestoreConfigSuccess, saveTitleLookup, saveT
 export class SettingsEffects {
 
     private actions$: Actions = inject(Actions);
-	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
+	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
 
 	saveFirestoreConfig$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(saveFirestoreConfig),
-			switchMap(({ config }) => this.localStorage.configuration.setFirestoreConfig(config)),
+			switchMap(({ config }) => this.localRepository.configuration.setFirestoreConfig(config)),
 			map(() => saveFirestoreConfigSuccess())
 
 		)
@@ -40,7 +40,7 @@ export class SettingsEffects {
 		() => this.actions$.pipe(
 
 			ofType(saveTitleLookup),
-			switchMap(({ url }) => this.localStorage.configuration.setTitleLookupUrl(url)),
+			switchMap(({ url }) => this.localRepository.configuration.setTitleLookupUrl(url)),
 			map(() => saveTitleLookupSuccess())
 
 		)

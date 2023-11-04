@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
-import { LocalStorageService, RemoteStorageService, WOverlayService } from '@lib';
+import { LocalRepositoryService, RemoteStorageService, WOverlayService } from '@lib';
 import { Store } from '@ngrx/store';
 import { SyncService } from 'lib/services/sync-service.interface';
 import { CustomErrorHandler, DexieLocalStorageServiceImpl, FirestoreRemoteStorageServiceImpl } from 'services';
@@ -49,7 +49,7 @@ export const routes: Routes = [
 
 // }
 
-export const LOCAL_STORAGE_SERVICE = new InjectionToken<LocalStorageService>('LocalStorageService');
+export const LOCAL_STORAGE_SERVICE = new InjectionToken<LocalRepositoryService>('LocalStorageService');
 export const REMOTE_STORAGE_SERVICE = new InjectionToken<RemoteStorageService>('RemoteStorageService');
 export const SYNC_SERVICE = new InjectionToken<SyncService>('SyncService');
 

@@ -1,7 +1,7 @@
 import { AsyncZippable, FlateError, zip } from "fflate";
 import * as FileSaver from 'file-saver-es';
 import { IDBase } from "lib/models";
-import { LocalStorageService } from "lib/services";
+import { LocalRepositoryService } from "lib/services";
 import { Observable, combineLatest, map, switchMap } from "rxjs";
 import { sleep } from "./helper.tool";
 
@@ -15,13 +15,13 @@ const toUint8Array = <T extends IDBase>(data: T[]): Uint8Array => {
 
 export class BackupDatabase {
 
-	constructor(private localStorage: LocalStorageService) { }
+	constructor(private localRepository: LocalRepositoryService) { }
 
 	execute(): Observable<void> {
 
 		return combineLatest([
-			this.localStorage.bookmarks.list(),
-			this.localStorage.bookmarks.listDeletedItems()
+			this.localRepository.bookmarks.list(),
+			this.localRepository.bookmarks.listDeletedItems()
 		]).pipe(
 			map(([bookmarks, bookmark_trash]) => ({
 				'bookmark.json': toUint8Array(bookmarks),

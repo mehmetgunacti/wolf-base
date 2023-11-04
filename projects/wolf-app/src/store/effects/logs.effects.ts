@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
-import { LocalStorageService, LogCategory, LogMessage, ToastConfiguration } from '@lib';
+import { LocalRepositoryService, LogCategory, LogMessage, ToastConfiguration } from '@lib';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { clearLogs, loadLogs, loadLogsSuccess, setSelectedCategory } from 'store/actions/logs.actions';
@@ -26,7 +26,7 @@ export class LogsEffects {
 
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
-	private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
+	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
 
 	loadLogs$ = createEffect(
 
@@ -34,7 +34,7 @@ export class LogsEffects {
 
 			ofType(loadLogs, setSelectedCategory),
 			withLatestFrom(this.store.select(selLogsSelectedCategory)),
-			switchMap(([, category]) => this.localStorage.logs.list({ category })),
+			switchMap(([, category]) => this.localRepository.logs.list({ category })),
 			map(logs => loadLogsSuccess({ logs }))
 
 		)
@@ -46,7 +46,7 @@ export class LogsEffects {
 		() => this.actions$.pipe(
 
 			ofType(clearLogs),
-			switchMap(() => this.localStorage.logs.clear())
+			switchMap(() => this.localRepository.logs.clear())
 
 		),
 		{ dispatch: false }
@@ -58,7 +58,7 @@ export class LogsEffects {
 		() => this.actions$.pipe(
 
 			ofType(showNotification),
-			switchMap(conf => this.localStorage.logs.add(convertToast(conf)))
+			switchMap(conf => this.localRepository.logs.add(convertToast(conf)))
 
 		),
 		{ dispatch: false }

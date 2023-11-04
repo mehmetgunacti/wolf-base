@@ -1,9 +1,9 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bookmark, ToastConfiguration, UUID } from 'lib';
-import { Observable, Subject, combineLatest, filter, map } from 'rxjs';
+import { Bookmark, ToastConfiguration, UUID, WolfEntity } from 'lib';
+import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { closeEditBookmarkDialog } from 'store/actions/bookmark-ui.actions';
-import { createBookmark, deleteBookmark, updateBookmark } from 'store/actions/bookmark.actions';
+import { createEntity, deleteEntity, updateEntity } from 'store/actions/core-entity.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { selBookmark } from 'store/selectors/bookmark-entities.selectors';
 import { distinctTagsArray } from 'store/selectors/bookmark-tags.selectors';
@@ -54,19 +54,20 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	onCreate(bookmark: Partial<Bookmark>): void {
 
-		this.store.dispatch(createBookmark({ bookmark }));
+		//this.store.dispatch(createBookmark({ bookmark }));
+		this.store.dispatch(createEntity({ entity: WolfEntity.bookmarks, data: bookmark }));
 
 	}
 
-	onUpdate(id: UUID, bookmark: Partial<Bookmark>) {
+	onUpdate(id: UUID, data: Partial<Bookmark>) {
 
-		this.store.dispatch(updateBookmark({ id, bookmark }));
+		this.store.dispatch(updateEntity({ id, data, entity: WolfEntity.bookmarks }));
 
 	}
 
 	onDelete(id: UUID): void {
 
-		this.store.dispatch(deleteBookmark({ id }));
+		this.store.dispatch(deleteEntity({ entity: WolfEntity.bookmarks, id }));
 
 	}
 

@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { OVERLAY_ID, TAG_NEW, WOverlayService } from '@lib';
+import { Entity, OVERLAY_ID, TAG_NEW, WOverlayService, WolfEntity } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BookmarkEditContainerComponent } from 'modules/bookmark/containers/bookmark-edit-container/bookmark-edit-container.component';
@@ -7,7 +7,8 @@ import { concat, of, timer } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { ClipboardService } from 'services/clipboard.service';
 import { closeEditBookmarkDialog, closeEditBookmarkDialogSuccess, openAddBookmarkDialog, openAddBookmarkDialogSuccess, openEditBookmarkDialog } from 'store/actions/bookmark-ui.actions';
-import { createBookmark, createBookmarkSuccess, fromClipboard, fromClipboardFailure, updateBookmarkSuccess } from 'store/actions/bookmark.actions';
+import { fromClipboard, fromClipboardFailure } from 'store/actions/bookmark.actions';
+import { createEntity, createEntitySuccess, deleteEntitySuccess, updateEntitySuccess } from 'store/actions/core-entity.actions';
 import { selBookmarkOverlayId } from 'store/selectors/bookmark-ui.selectors';
 
 // note: timer value (600) has to be ~ as in _shake.scss
@@ -47,7 +48,7 @@ export class BookmarkUIEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(closeEditBookmarkDialog, updateBookmarkSuccess, createBookmarkSuccess),
+			ofType(closeEditBookmarkDialog, updateEntitySuccess, createEntitySuccess, deleteEntitySuccess),
 			withLatestFrom(this.store.select(selBookmarkOverlayId)),
 			map(([, id]) => id),
 			filter((id): id is OVERLAY_ID => id !== null),
@@ -57,8 +58,6 @@ export class BookmarkUIEffects {
 		)
 
 	);
-
-
 
 	fromClipboard$ = createEffect(
 
@@ -70,13 +69,14 @@ export class BookmarkUIEffects {
 
 				if (url === null)
 					return fromClipboardFailure$;
-				return of(createBookmark({
-					bookmark: {
+				return of(createEntity({
+					entity: WolfEntity.bookmarks,
+					data: {
 						urls: [url.toString()],
 						title: url.hostname,
 						name: url.hostname,
 						tags: [TAG_NEW]
-					}
+					} as unknown as Entity
 				}));
 
 			})

@@ -70,7 +70,7 @@ export class CloudEffects {
 	// 	() => this.actions$.pipe(
 
 	// 		ofType(purgeLocalItem),
-	// 		switchMap(({ id }) => this.localStorage.bookmarks.deletePermanently(id)),
+	// 		switchMap(({ id }) => this.localRepository.bookmarks.deletePermanently(id)),
 	// 		map(() => showNotification({ severity: 'success', detail: 'Local item deleted' }))
 
 	// 	)
@@ -96,7 +96,7 @@ export class CloudEffects {
 	// 		ofType(overrideLocalItem),
 	// 		withLatestFrom(this.store.select(selCloudSelectedRemoteData)),
 	// 		filter((remoteData): remoteData is RemoteData<Entity> => !!remoteData),
-	// 		switchMap(remoteData => this.localStorage.bookmarks.put(remoteData as RemoteData<Bookmark>)),
+	// 		switchMap(remoteData => this.localRepository.bookmarks.put(remoteData as RemoteData<Bookmark>)),
 	// 		map(() => downloadSuccess({ count: 1 }))
 
 	// 	)
@@ -111,7 +111,7 @@ export class CloudEffects {
 	// 		withLatestFrom(this.store.select(selCloudSelectedItem)),
 	// 		filter((entity): entity is Entity => !!entity),
 	// 		switchMap(entity => this.remoteStorage.bookmarks.upload(entity as Bookmark)),
-	// 		switchMap(remoteData => this.localStorage.bookmarks.put(remoteData)),
+	// 		switchMap(remoteData => this.localRepository.bookmarks.put(remoteData)),
 	// 		map(() => uploadSuccess({ count: 1 }))
 
 	// 	)

@@ -1,10 +1,10 @@
-import { BookmarksRepository, ConfigurationRepository, KBContentsRepository, KBEntriesRepository, LocalRepositoryNames, LocalStorageService, LogsRepository } from '@lib';
+import { BookmarksRepository, ConfigurationRepository, Entity, EntityRepository, KBContentsRepository, KBEntriesRepository, LocalRepositoryNames, LocalRepositoryService, LogsRepository, WolfEntity } from '@lib';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
 import { DexieBookmarksRepositoryImpl, DexieConfigurationRepositoryImpl, DexieLogsRepositoryImpl } from './tables';
 import { DexieKBEntriesRepositoryImpl } from './tables/kb-entries.table';
 import { DexieKBContentsRepositoryImpl } from './tables/kb-contents.table';
 
-export class DexieLocalStorageServiceImpl implements LocalStorageService {
+export class DexieLocalStorageServiceImpl implements LocalRepositoryService {
 
 	private db: WolfBaseDB;
 
@@ -23,6 +23,18 @@ export class DexieLocalStorageServiceImpl implements LocalStorageService {
 		this.configuration = new DexieConfigurationRepositoryImpl(db);
 		this.logs = new DexieLogsRepositoryImpl(db);
 		this.db = db;
+
+	}
+
+	getRepository(entity: WolfEntity): EntityRepository<Entity> {
+
+		switch (entity) {
+
+			case WolfEntity.bookmarks: return this.bookmarks;
+
+		}
+
+		throw Error('Unknown entity');
 
 	}
 

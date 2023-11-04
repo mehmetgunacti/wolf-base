@@ -156,9 +156,9 @@ export class CloudBookmarkEffects {
 	// 		withLatestFrom(this.store.select(selBookmarkLocalUpdatedRemoteUpdated)),
 	// 		map(([, syncData]) => syncData[0].id), // take first
 	// 		switchMap(id => combineLatest([
-	// 			this.localStorage.bookmarks.getSyncData(id),
-	// 			this.localStorage.bookmarks.get(id),
-	// 			this.localStorage.bookmarks.getRemoteMetadata(id)
+	// 			this.localRepository.bookmarks.getSyncData(id),
+	// 			this.localRepository.bookmarks.get(id),
+	// 			this.localRepository.bookmarks.getRemoteMetadata(id)
 	// 		]).pipe(
 	// 			map(([syncData, bookmark, remoteMetadata]) => viewLocalUpdatedRemoteUpdatedSuccess({ syncData, bookmark, remoteMetadata }))
 	// 		))
@@ -175,8 +175,8 @@ export class CloudBookmarkEffects {
 	// 		withLatestFrom(this.store.select(selBookmarkLocalUpdatedRemoteDeleted)),
 	// 		map(([, syncData]) => syncData[0].id), // take first
 	// 		switchMap(id => combineLatest([
-	// 			this.localStorage.bookmarks.getSyncData(id),
-	// 			this.localStorage.bookmarks.get(id)
+	// 			this.localRepository.bookmarks.getSyncData(id),
+	// 			this.localRepository.bookmarks.get(id)
 	// 		]).pipe(
 	// 			map(([syncData, bookmark]) => viewLocalUpdatedRemoteDeletedSuccess({ syncData, bookmark }))
 	// 		))
@@ -193,9 +193,9 @@ export class CloudBookmarkEffects {
 	// 		withLatestFrom(this.store.select(selBookmarkLocalDeletedRemoteUpdated)),
 	// 		map(([, syncData]) => syncData[0].id), // take first
 	// 		switchMap(id => combineLatest([
-	// 			this.localStorage.bookmarks.getSyncData(id),
-	// 			this.localStorage.bookmarks.getTrashItem(id),
-	// 			this.localStorage.bookmarks.getRemoteMetadata(id)
+	// 			this.localRepository.bookmarks.getSyncData(id),
+	// 			this.localRepository.bookmarks.getTrashItem(id),
+	// 			this.localRepository.bookmarks.getRemoteMetadata(id)
 	// 		]).pipe(
 	// 			map(([syncData, trashItem, remoteMetadata]) => viewLocalDeletedRemoteUpdatedSuccess({ syncData, trashItem, remoteMetadata }))
 	// 		))

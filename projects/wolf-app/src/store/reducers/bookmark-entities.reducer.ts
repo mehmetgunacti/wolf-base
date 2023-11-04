@@ -1,13 +1,12 @@
-import { Action, createReducer, on } from '@ngrx/store';
 import { Bookmark, Click, UUID } from '@lib';
+import { Action, createReducer, on } from '@ngrx/store';
 import { closeEditBookmarkDialog, openAddBookmarkDialog, openEditBookmarkDialog } from 'store/actions/bookmark-ui.actions';
-import { createBookmarkSuccess, loadAllBookmarksSuccess, loadAllClicksSuccess, updateBookmarkSuccess } from 'store/actions/bookmark.actions';
+import { loadAllBookmarksSuccess, loadAllClicksSuccess } from 'store/actions/bookmark.actions';
 import { BookmarkEntitiesState, initialBookmarkEntitiesState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(
 
 	initialBookmarkEntitiesState,
-
 	on(
 		loadAllBookmarksSuccess, (state, { bookmarks }): BookmarkEntitiesState => ({
 			...state,
@@ -22,9 +21,7 @@ const reducer = createReducer(
 	),
 	on(openAddBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
 	on(openEditBookmarkDialog, (state, { id }): BookmarkEntitiesState => ({ ...state, selected: id })),
-	on(closeEditBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
-	on(createBookmarkSuccess, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
-	on(updateBookmarkSuccess, (state): BookmarkEntitiesState => ({ ...state, selected: null }))
+	on(closeEditBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null }))
 
 );
 
