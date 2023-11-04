@@ -1,6 +1,6 @@
 import { Theme } from './theme.constant';
 
-export enum LocalTableNames {
+export enum LocalRepositoryNames {
 
 	// bookmarks
 	bookmarks = 'bookmarks',

@@ -1,5 +1,5 @@
 import Dexie from 'dexie';
-import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalTableNames } from '@lib';
+import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalRepositoryNames } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { KBEntry, LogMessage, RemoteMetadata, SyncData } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
@@ -74,24 +74,24 @@ export class WolfBaseDB extends Dexie {
 		this.version(conf.version)
 			.stores(conf.tables);
 
-		this.bookmarks = this.table(LocalTableNames.bookmarks);
-		this.bookmarks_sync = this.table(LocalTableNames.bookmarks_sync);
-		this.bookmarks_remote = this.table(LocalTableNames.bookmarks_remote);
-		this.bookmarks_trash = this.table(LocalTableNames.bookmarks_trash);
-		this.bookmarks_clicks = this.table(LocalTableNames.bookmarks_clicks);
+		this.bookmarks = this.table(LocalRepositoryNames.bookmarks);
+		this.bookmarks_sync = this.table(LocalRepositoryNames.bookmarks_sync);
+		this.bookmarks_remote = this.table(LocalRepositoryNames.bookmarks_remote);
+		this.bookmarks_trash = this.table(LocalRepositoryNames.bookmarks_trash);
+		this.bookmarks_clicks = this.table(LocalRepositoryNames.bookmarks_clicks);
 
-		this.kb_entries = this.table(LocalTableNames.kb_entries);
-		this.kb_entries_sync = this.table(LocalTableNames.kb_entries_sync);
-		this.kb_entries_remote = this.table(LocalTableNames.kb_entries_remote);
-		this.kb_entries_trash = this.table(LocalTableNames.kb_entries_trash);
+		this.kb_entries = this.table(LocalRepositoryNames.kb_entries);
+		this.kb_entries_sync = this.table(LocalRepositoryNames.kb_entries_sync);
+		this.kb_entries_remote = this.table(LocalRepositoryNames.kb_entries_remote);
+		this.kb_entries_trash = this.table(LocalRepositoryNames.kb_entries_trash);
 
-		this.kb_contents = this.table(LocalTableNames.kb_contents);
-		this.kb_contents_sync = this.table(LocalTableNames.kb_contents_sync);
-		this.kb_contents_remote = this.table(LocalTableNames.kb_contents_remote);
-		this.kb_contents_trash = this.table(LocalTableNames.kb_contents_trash);
+		this.kb_contents = this.table(LocalRepositoryNames.kb_contents);
+		this.kb_contents_sync = this.table(LocalRepositoryNames.kb_contents_sync);
+		this.kb_contents_remote = this.table(LocalRepositoryNames.kb_contents_remote);
+		this.kb_contents_trash = this.table(LocalRepositoryNames.kb_contents_trash);
 
-		this.configuration = this.table(LocalTableNames.configuration);
-		this.logs = this.table(LocalTableNames.logs);
+		this.configuration = this.table(LocalRepositoryNames.configuration);
+		this.logs = this.table(LocalRepositoryNames.logs);
 
 		this.on('populate', () => {
 

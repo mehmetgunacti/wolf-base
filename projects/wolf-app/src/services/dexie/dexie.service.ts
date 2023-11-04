@@ -1,35 +1,35 @@
-import { BookmarksTable, ConfigurationTable, LocalStorageService, LogsTable, LocalTableNames, KBEntriesTable, KBContentsTable } from '@lib';
-import { DexieBookmarksTableImpl, DexieConfigurationTableImpl, DexieLogsTableImpl } from './tables';
+import { BookmarksRepository, ConfigurationRepository, KBContentsRepository, KBEntriesRepository, LocalRepositoryNames, LocalStorageService, LogsRepository } from '@lib';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
-import { DexieKBEntriesTableImpl } from './tables/kb-entries.table';
-import { DexieKBContentsTableImpl } from './tables/kb-contents.table';
+import { DexieBookmarksRepositoryImpl, DexieConfigurationRepositoryImpl, DexieLogsRepositoryImpl } from './tables';
+import { DexieKBEntriesRepositoryImpl } from './tables/kb-entries.table';
+import { DexieKBContentsRepositoryImpl } from './tables/kb-contents.table';
 
 export class DexieLocalStorageServiceImpl implements LocalStorageService {
 
 	private db: WolfBaseDB;
 
-	bookmarks: BookmarksTable;
-	kbEntries: KBEntriesTable;
-	kbContents: KBContentsTable;
-	configuration: ConfigurationTable;
-	logs: LogsTable;
+	bookmarks: BookmarksRepository;
+	kbEntries: KBEntriesRepository;
+	kbContents: KBContentsRepository;
+	configuration: ConfigurationRepository;
+	logs: LogsRepository;
 
 	constructor() {
 
 		const db: WolfBaseDB = wolfBaseDBFactory();
-		this.bookmarks = new DexieBookmarksTableImpl(db);
-		this.kbEntries = new DexieKBEntriesTableImpl(db);
-		this.kbContents = new DexieKBContentsTableImpl(db);
-		this.configuration = new DexieConfigurationTableImpl(db);
-		this.logs = new DexieLogsTableImpl(db);
+		this.bookmarks = new DexieBookmarksRepositoryImpl(db);
+		this.kbEntries = new DexieKBEntriesRepositoryImpl(db);
+		this.kbContents = new DexieKBContentsRepositoryImpl(db);
+		this.configuration = new DexieConfigurationRepositoryImpl(db);
+		this.logs = new DexieLogsRepositoryImpl(db);
 		this.db = db;
 
 	}
 
-	async dump(tablename: LocalTableNames): Promise<Record<string, string>> {
+	async dump(repositoryname: LocalRepositoryNames): Promise<Record<string, string>> {
 
-		const table = this.db.table(tablename);
-		const data = table.toCollection();
+		const Repository = this.db.table(repositoryname);
+		const data = Repository.toCollection();
 		const result: Record<string, string> = {};
 		await data.each(
 			(obj: any, cursor) => result[cursor.key.toString()] = JSON.stringify(obj, null, '\t')

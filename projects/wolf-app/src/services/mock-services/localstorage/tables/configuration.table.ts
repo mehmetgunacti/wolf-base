@@ -1,7 +1,7 @@
-import { ConfigurationTable, DEFAULT_CONF_VALUES, getNextTheme } from '@lib';
+import { ConfigurationRepository, DEFAULT_CONF_VALUES, getNextTheme } from '@lib';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
 
-export class MockConfigurationTableImpl implements ConfigurationTable {
+export class MockConfigurationRepositoryImpl implements ConfigurationRepository {
 
 	private conf: Configuration = {
 

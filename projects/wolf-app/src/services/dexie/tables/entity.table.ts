@@ -1,11 +1,11 @@
 import { Collection, IndexableType, Table } from 'dexie';
-import { EntityTable, LocalTableNames, LogCategory, WolfEntity } from '@lib';
+import { EntityRepository, LocalRepositoryNames, LogCategory, WolfEntity } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { RemoteData, RemoteMetadata, SyncData } from 'lib/models';
 import { Entity, Metadata } from 'lib/models/entity.model';
 import { WolfBaseDB } from '../wolfbase.database';
 
-export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T> {
+export abstract class EntityRepositoryImpl<T extends Entity> implements EntityRepository<T> {
 
 	constructor(
 		protected db: WolfBaseDB,
@@ -32,7 +32,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 			this.entity + '_sync',
 			this.entity + '_trash',
 			this.entity + '_remote',
-			LocalTableNames.logs
+			LocalRepositoryNames.logs
 		], async () => {
 
 			for (const item of items)
@@ -202,7 +202,7 @@ export abstract class EntityTableImpl<T extends Entity> implements EntityTable<T
 			this.entity + '_sync',
 			this.entity + '_trash',
 			this.entity + '_remote',
-			LocalTableNames.logs
+			LocalRepositoryNames.logs
 		], async () => {
 
 			let logMessage = 'metadata deleted';

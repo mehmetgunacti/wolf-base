@@ -1,13 +1,13 @@
-import { ConfigurationTable, Theme, getNextTheme } from '@lib';
-import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalTableNames } from 'lib/constants/database.constant';
+import { ConfigurationRepository, Theme, getNextTheme } from '@lib';
+import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalRepositoryNames } from 'lib/constants/database.constant';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
-import { KeyValueTableImpl } from './key-value.table';
+import { KeyValueRepositoryImpl } from './key-value.table';
 import { WolfBaseDB } from '../wolfbase.database';
 
-export class DexieConfigurationTableImpl extends KeyValueTableImpl implements ConfigurationTable {
+export class DexieConfigurationRepositoryImpl extends KeyValueRepositoryImpl implements ConfigurationRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, LocalTableNames.configuration)
+		super(db, LocalRepositoryNames.configuration)
 	}
 
 	async setSidebarVisible(visible: boolean): Promise<void> {

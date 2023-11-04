@@ -1,17 +1,17 @@
-import { LocalTableNames } from 'lib/constants/database.constant';
-import { BookmarksTable, ConfigurationTable, KBContentsTable, KBEntriesTable, LogsTable } from './local-storage-table.interface';
+import { LocalRepositoryNames } from 'lib/constants/database.constant';
+import { BookmarksRepository, ConfigurationRepository, KBContentsRepository, KBEntriesRepository, LogsRepository } from 'lib/repositories';
 
 export interface LocalStorageService {
 
 	// entity tables
-	bookmarks: BookmarksTable;
-	kbEntries: KBEntriesTable;
-	kbContents: KBContentsTable;
+	bookmarks: BookmarksRepository;
+	kbEntries: KBEntriesRepository;
+	kbContents: KBContentsRepository;
 
 	// non-entity tables
-	configuration: ConfigurationTable;
-	logs: LogsTable;
+	configuration: ConfigurationRepository;
+	logs: LogsRepository;
 
-	dump(tablename: LocalTableNames): Promise<Record<string, string>>;
+	dump(tablename: LocalRepositoryNames): Promise<Record<string, string>>;
 
 }

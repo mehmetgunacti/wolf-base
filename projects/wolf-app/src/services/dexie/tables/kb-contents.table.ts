@@ -1,12 +1,12 @@
-import { KBContentsTable } from '@lib';
-import { LocalTableNames } from 'lib/constants/database.constant';
+import { KBContentsRepository } from '@lib';
+import { LocalRepositoryNames } from 'lib/constants/database.constant';
 import { WolfBaseDB } from '../wolfbase.database';
-import { KeyValueTableImpl } from './key-value.table';
+import { KeyValueRepositoryImpl } from './key-value.table';
 
-export class DexieKBContentsTableImpl extends KeyValueTableImpl implements KBContentsTable {
+export class DexieKBContentsRepositoryImpl extends KeyValueRepositoryImpl implements KBContentsRepository {
 
     constructor(db: WolfBaseDB) {
-        super(db, LocalTableNames.kb_contents)
+        super(db, LocalRepositoryNames.kb_contents)
     }
 
     //	updated: new Date().toISOString(),

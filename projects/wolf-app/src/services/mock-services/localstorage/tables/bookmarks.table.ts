@@ -1,9 +1,9 @@
-import { Bookmark, BookmarksTable, Click, Metadata, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from '@lib';
+import { Bookmark, BookmarksRepository, Click, Metadata, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from '@lib';
 import { v4 as uuidv4 } from 'uuid';
 
 const SLEEP = 20;
 
-export class MockBookmarksTableImpl implements BookmarksTable {
+export class MockBookmarksRepositoryImpl implements BookmarksRepository {
 
 	private bookmarks: Map<string, Bookmark> = new Map();
 	private bookmarks_sync: Map<string, SyncData> = new Map();

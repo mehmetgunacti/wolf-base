@@ -1,6 +1,6 @@
-import { LogMessage, LogsTable } from '@lib';
+import { LogMessage, LogsRepository } from '@lib';
 
-export class MockLogsTableImpl implements LogsTable {
+export class MockLogsRepositoryImpl implements LogsRepository {
 
 	private map: Record<number, LogMessage> = {};
 

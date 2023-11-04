@@ -1,12 +1,12 @@
-import { LocalTableNames } from 'lib/constants/database.constant';
+import { LocalRepositoryNames } from 'lib/constants/database.constant';
 import { WolfBaseDB } from '../wolfbase.database';
-import { KeyValueTable } from '@lib';
+import { KeyValueRepository } from '@lib';
 
-export class KeyValueTableImpl implements KeyValueTable {
+export class KeyValueRepositoryImpl implements KeyValueRepository {
 
 	constructor(
 		protected db: WolfBaseDB,
-		protected tablename: LocalTableNames
+		protected tablename: LocalRepositoryNames
 	) { }
 
 	async set<T>(key: string, value: T): Promise<void> {

@@ -1,9 +1,9 @@
-import { KBEntriesTable, KBEntry, Metadata, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from '@lib';
+import { KBEntriesRepository, KBEntry, Metadata, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from '@lib';
 import { v4 as uuidv4 } from 'uuid';
 
 const SLEEP = 20;
 
-export class MockKBEntriesTableImpl implements KBEntriesTable {
+export class MockKBEntriesRepositoryImpl implements KBEntriesRepository {
 
 	private kbEntries: Map<string, KBEntry> = new Map();
 	private kbEntries_sync: Map<string, SyncData> = new Map();
