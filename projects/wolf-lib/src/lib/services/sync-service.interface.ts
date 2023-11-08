@@ -1,6 +1,6 @@
-import { UUID } from "lib/constants";
-import { Click } from "lib/models";
-import { Observable } from "rxjs";
+import { UUID } from 'lib/constants';
+import { Click } from 'lib/models';
+import { Observable } from 'rxjs';
 
 export interface SyncService {
 

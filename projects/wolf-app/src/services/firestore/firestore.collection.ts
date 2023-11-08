@@ -4,7 +4,7 @@ import { FirestoreConfig, RemoteData, RemoteMetadata } from "lib/models";
 import { Entity } from "lib/models/entity.model";
 import { EntityRemoteRepository } from 'lib/repositories/remote';
 import { FirestoreAPIClient } from "lib/utils/firestore-rest-client/firestore-api.tool";
-import { Observable, map } from "rxjs";
+import { Observable, map } from 'rxjs';
 
 export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> implements EntityRemoteRepository<T> {
 

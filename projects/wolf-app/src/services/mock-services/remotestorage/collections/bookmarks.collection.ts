@@ -1,6 +1,6 @@
 import { Bookmark, Click, RemoteData, RemoteMetadata, UUID } from '@lib';
 import { BookmarksRemoteRepository } from 'lib/repositories/remote';
-import { Observable, delay, map, of } from "rxjs";
+import { Observable, delay, map, of } from 'rxjs';
 
 const SLEEP = 20;
 

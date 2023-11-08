@@ -2,7 +2,7 @@ import { AsyncZippable, FlateError, zip } from "fflate";
 import * as FileSaver from 'file-saver-es';
 import { IDBase } from "lib/models";
 import { LocalRepositoryService } from "lib/services";
-import { Observable, combineLatest, map, switchMap } from "rxjs";
+import { Observable, combineLatest, map, switchMap } from 'rxjs';
 import { sleep } from "./helper.tool";
 
 const toUint8Array = <T extends IDBase>(data: T[]): Uint8Array => {

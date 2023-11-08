@@ -19,19 +19,17 @@ export enum CloudTaskType {
 	 clicked = 'clicked'
 
 }
-type CloudTaskAction = 'upload' | 'download' | 'view';
 
 export interface CloudTask {
 
 	entities: Entity[],
 	entity: WolfEntity;
 	type: CloudTaskType;
-	action: CloudTaskAction;
 
 }
 
-export function createCloudTask(entities: Entity[], entity: WolfEntity, type: CloudTaskType, action: CloudTaskAction): CloudTask {
+export function createCloudTask(entities: Entity[], entity: WolfEntity, type: CloudTaskType): CloudTask {
 
-	return { entities, entity, type, action };
+	return { entities, entity, type };
 
 }
