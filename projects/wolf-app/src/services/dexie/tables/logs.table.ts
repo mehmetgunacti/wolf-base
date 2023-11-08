@@ -1,7 +1,8 @@
-import { LogCategory, LogMessage, LogsRepository } from '@lib';
+import { LogCategory, LogMessage } from '@lib';
 import { WolfBaseDB } from '../wolfbase.database';
+import { LogsLocalRepository } from 'lib/repositories/local';
 
-export class DexieLogsRepositoryImpl implements LogsRepository {
+export class DexieLogsLocalRepositoryImpl implements LogsLocalRepository {
 
 	constructor(private db: WolfBaseDB) { }
 

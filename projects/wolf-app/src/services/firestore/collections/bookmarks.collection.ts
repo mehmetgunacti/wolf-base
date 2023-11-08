@@ -1,11 +1,12 @@
-import { BookmarksCollection, FIRESTORE_VALUE, FirestoreConverter, FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL, UUID, WolfEntity } from '@lib';
+import { FIRESTORE_VALUE, FirestoreConverter, FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL, UUID, WolfEntity } from '@lib';
 import { FirestoreConfig } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
+import { BookmarksRemoteRepository } from 'lib/repositories/remote';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
 import { Observable, concatMap, from, map } from 'rxjs';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 
-export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Bookmark> implements BookmarksCollection {
+export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Bookmark> implements BookmarksRemoteRepository {
 
 	private bookmarks_clicks = WolfEntity.bookmarks + '_clicks';
 

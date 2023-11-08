@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
-import { LocalRepositoryService, RemoteStorageService, WOverlayService } from '@lib';
+import { LocalRepositoryService, RemoteRepositoryService, WOverlayService } from '@lib';
 import { Store } from '@ngrx/store';
 import { SyncService } from 'lib/services/sync-service.interface';
-import { CustomErrorHandler, DexieLocalStorageServiceImpl, FirestoreRemoteStorageServiceImpl } from 'services';
+import { CustomErrorHandler, DexieLocalRepositoryServiceImpl, FirestoreRemoteRepositoryServiceImpl } from 'services';
 import { SyncServiceImpl } from 'services/sync.service';
 
 export const routes: Routes = [
@@ -49,8 +49,8 @@ export const routes: Routes = [
 
 // }
 
-export const LOCAL_STORAGE_SERVICE = new InjectionToken<LocalRepositoryService>('LocalStorageService');
-export const REMOTE_STORAGE_SERVICE = new InjectionToken<RemoteStorageService>('RemoteStorageService');
+export const LOCAL_STORAGE_SERVICE = new InjectionToken<LocalRepositoryService>('LocalRepositoryService');
+export const REMOTE_STORAGE_SERVICE = new InjectionToken<RemoteRepositoryService>('RemoteRepositoryService');
 export const SYNC_SERVICE = new InjectionToken<SyncService>('SyncService');
 
 export const providers: Provider[] = [
@@ -71,8 +71,8 @@ export const providers: Provider[] = [
 		useClass: CustomErrorHandler
 
 	},
-	{ provide: LOCAL_STORAGE_SERVICE, useClass: DexieLocalStorageServiceImpl },
-	{ provide: REMOTE_STORAGE_SERVICE, useClass: FirestoreRemoteStorageServiceImpl, deps: [Store, HttpClient] },
+	{ provide: LOCAL_STORAGE_SERVICE, useClass: DexieLocalRepositoryServiceImpl },
+	{ provide: REMOTE_STORAGE_SERVICE, useClass: FirestoreRemoteRepositoryServiceImpl, deps: [Store, HttpClient] },
 	{ provide: SYNC_SERVICE, useClass: SyncServiceImpl, deps: [LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE] },
 	{ provide: WOverlayService }
 

@@ -1,11 +1,12 @@
-import { BookmarksRepository, LogCategory, WolfEntity, toggleArrayItem } from '@lib';
+import { LogCategory, WolfEntity, toggleArrayItem } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { v4 as uuidv4 } from 'uuid';
 import { WolfBaseDB } from '../wolfbase.database';
-import { EntityRepositoryImpl } from './entity.table';
+import { EntityLocalRepositoryImpl } from './entity.table';
+import { BookmarksLocalRepository } from 'lib/repositories/local';
 
-export class DexieBookmarksRepositoryImpl extends EntityRepositoryImpl<Bookmark> implements BookmarksRepository {
+export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Bookmark> implements BookmarksLocalRepository {
 
 	constructor(db: WolfBaseDB) {
 		super(db, WolfEntity.bookmarks);

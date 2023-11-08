@@ -10,7 +10,6 @@ export * from './components/toast';
 export * from './constants';
 export * from './models';
 export * from './pipes';
-export * from './repositories';
 export * from './services';
 export * from './utils';
 export * from './directives';

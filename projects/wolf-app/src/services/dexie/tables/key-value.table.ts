@@ -1,8 +1,8 @@
 import { LocalRepositoryNames } from 'lib/constants/database.constant';
 import { WolfBaseDB } from '../wolfbase.database';
-import { KeyValueRepository } from '@lib';
+import { KeyValueRepository } from 'lib/repositories/local';
 
-export class KeyValueRepositoryImpl implements KeyValueRepository {
+export class KeyValueLocalRepositoryImpl implements KeyValueRepository {
 
 	constructor(
 		protected db: WolfBaseDB,

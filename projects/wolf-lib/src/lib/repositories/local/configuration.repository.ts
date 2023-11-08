@@ -1,6 +1,6 @@
 import { Configuration, FirestoreConfig } from 'lib/models';
 
-export interface ConfigurationRepository {
+export interface ConfigurationLocalRepository {
 
 	setSidebarVisible(visible: boolean): Promise<void>;
 	setTitleLookupUrl(url: string): Promise<void>;

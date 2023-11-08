@@ -1,11 +1,12 @@
-import { FIRESTORE_VALUE, FirestoreBatchGetURL, FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL, RemoteStorageCollection } from '@lib';
+import { FIRESTORE_VALUE, FirestoreBatchGetURL, FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from '@lib';
 import { UUID, WolfEntity } from "lib/constants";
 import { FirestoreConfig, RemoteData, RemoteMetadata } from "lib/models";
 import { Entity } from "lib/models/entity.model";
+import { EntityRemoteRepository } from 'lib/repositories/remote';
 import { FirestoreAPIClient } from "lib/utils/firestore-rest-client/firestore-api.tool";
 import { Observable, map } from "rxjs";
 
-export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> implements RemoteStorageCollection<T> {
+export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> implements EntityRemoteRepository<T> {
 
 	protected pageSize = '10000'; // high number => download all
 

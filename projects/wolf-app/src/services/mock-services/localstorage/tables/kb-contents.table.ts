@@ -1,6 +1,7 @@
-import { KBContent, KBContentsRepository, UUID } from '@lib';
+import { KBContent, UUID } from '@lib';
+import { KBContentsLocalRepository } from 'lib/repositories/local';
 
-export class MockKBContentsRepositoryImpl implements KBContentsRepository {
+export class MockKBContentsLocalRepositoryImpl implements KBContentsLocalRepository {
 
 	// updated: new Date().toISOString(),
 	private contents: Record<UUID, KBContent> = {}

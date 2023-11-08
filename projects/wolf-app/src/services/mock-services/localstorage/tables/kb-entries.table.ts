@@ -1,9 +1,10 @@
-import { KBEntriesRepository, KBEntry, Metadata, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from '@lib';
+import { KBEntry, Metadata, RemoteData, RemoteMetadata, SyncData, UUID, sleep, toggleArrayItem } from '@lib';
+import { KBEntriesLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
 
 const SLEEP = 20;
 
-export class MockKBEntriesRepositoryImpl implements KBEntriesRepository {
+export class MockKBEntriesLocalRepositoryImpl implements KBEntriesLocalRepository {
 
 	private kbEntries: Map<string, KBEntry> = new Map();
 	private kbEntries_sync: Map<string, SyncData> = new Map();

@@ -1,8 +1,8 @@
 import { Bookmark, Click } from 'lib/models';
-import { EntityRepository } from './entity.repository';
+import { EntityLocalRepository } from './entity.repository';
 import { UUID } from 'lib/constants';
 
-export interface BookmarksRepository extends EntityRepository<Bookmark> {
+export interface BookmarksLocalRepository extends EntityLocalRepository<Bookmark> {
 
 	toggleTag(id: UUID, name: string): Promise<void>;
 

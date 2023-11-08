@@ -1,7 +1,7 @@
 import { UUID } from 'lib/constants';
 import { Entity, Metadata, RemoteData, RemoteMetadata, SyncData } from 'lib/models';
 
-export interface EntityRepository<T extends Entity> {
+export interface EntityLocalRepository<T extends Entity> {
 
 	getEntity(id: UUID): Promise<T | null>;
 	getSyncData(id: UUID): Promise<SyncData | null>;

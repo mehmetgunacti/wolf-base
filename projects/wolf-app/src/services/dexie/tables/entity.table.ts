@@ -1,11 +1,12 @@
 import { Collection, IndexableType, Table } from 'dexie';
-import { EntityRepository, LocalRepositoryNames, LogCategory, WolfEntity } from '@lib';
+import { LocalRepositoryNames, LogCategory, WolfEntity } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { RemoteData, RemoteMetadata, SyncData } from 'lib/models';
 import { Entity, Metadata } from 'lib/models/entity.model';
 import { WolfBaseDB } from '../wolfbase.database';
+import { EntityLocalRepository } from 'lib/repositories/local';
 
-export abstract class EntityRepositoryImpl<T extends Entity> implements EntityRepository<T> {
+export abstract class EntityLocalRepositoryImpl<T extends Entity> implements EntityLocalRepository<T> {
 
 	constructor(
 		protected db: WolfBaseDB,

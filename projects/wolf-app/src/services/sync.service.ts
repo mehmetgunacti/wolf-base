@@ -1,18 +1,18 @@
-import { inject } from "@angular/core";
-import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from "app/app.config";
-import { Bookmark, Click, LocalRepositoryService, RemoteData, RemoteMetadata, RemoteStorageService, SyncData, UUID } from '@lib';
-import { SyncService } from "lib/services/sync-service.interface";
-import { EMPTY, Observable, concatMap, filter, from, iif, map, switchMap, toArray } from "rxjs";
+import { inject } from '@angular/core';
+import { Bookmark, Click, LocalRepositoryService, RemoteData, RemoteMetadata, SyncData, SyncService, UUID } from '@lib';
+import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
+import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
+import { EMPTY, Observable, concatMap, filter, from, iif, map, switchMap, toArray } from 'rxjs';
 
 export class SyncServiceImpl implements SyncService {
 
 	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
-	private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
+	private remoteRepository: RemoteRepositoryService = inject(REMOTE_STORAGE_SERVICE);
 
 	downloadMetadata(): Observable<number> {
 
 		// download remote metadata list
-		return this.remoteStorage.bookmarks.downloadAllMetadata().pipe(
+		return this.remoteRepository.bookmarks.downloadAllMetadata().pipe(
 
 			switchMap((rmd: RemoteMetadata[]) =>
 
@@ -76,7 +76,7 @@ export class SyncServiceImpl implements SyncService {
 						filter((syncData): syncData is SyncData => !!syncData && syncData.updated && !syncData.deleted),
 
 						// download remoteMetadata
-						switchMap(syncData => this.remoteStorage.bookmarks.downloadMetadata(id).pipe(
+						switchMap(syncData => this.remoteRepository.bookmarks.downloadMetadata(id).pipe(
 
 							// if remoteMetadata does not exist, skip this id
 							filter((remoteMetadata): remoteMetadata is RemoteMetadata => remoteMetadata !== null),
@@ -115,7 +115,7 @@ export class SyncServiceImpl implements SyncService {
 
 	private uploadAndStore(entity: Bookmark): Observable<UUID> {
 
-		return this.remoteStorage.bookmarks.upload(entity).pipe(
+		return this.remoteRepository.bookmarks.upload(entity).pipe(
 
 			// store _sync and _remote data
 			switchMap(remoteMetadata => this.localRepository.bookmarks.storeMetadata(remoteMetadata)),
@@ -155,11 +155,11 @@ export class SyncServiceImpl implements SyncService {
 
 	private moveRemoteToTrash(id: UUID): Observable<RemoteData<Bookmark>> {
 
-		return this.remoteStorage.bookmarks.download(id).pipe(
+		return this.remoteRepository.bookmarks.download(id).pipe(
 
 			filter((remoteData): remoteData is RemoteData<Bookmark> => remoteData !== null),
 
-			switchMap(remoteData => this.remoteStorage.bookmarks.trash(remoteData.entity))
+			switchMap(remoteData => this.remoteRepository.bookmarks.trash(remoteData.entity))
 
 		);
 
@@ -180,7 +180,7 @@ export class SyncServiceImpl implements SyncService {
 	private downloadAndStore(ids: UUID[]): Observable<number> {
 
 		// download remoteData
-		return this.remoteStorage.bookmarks.downloadMany(ids).pipe(
+		return this.remoteRepository.bookmarks.downloadMany(ids).pipe(
 
 			// store all returned RemoteData
 			switchMap(remoteData => from(this.localRepository.bookmarks.storeRemoteData(remoteData)))
@@ -197,14 +197,14 @@ export class SyncServiceImpl implements SyncService {
 
 	uploadClicks(clicks: Click[]): Observable<number> {
 
-		return from(this.remoteStorage.bookmarks.uploadClicks(clicks));
+		return from(this.remoteRepository.bookmarks.uploadClicks(clicks));
 
 	}
 
 	downloadClicks(): Observable<number> {
 
 		// download all clicks
-		return this.remoteStorage.bookmarks.downloadClicks().pipe(
+		return this.remoteRepository.bookmarks.downloadClicks().pipe(
 
 			// store clicks
 			switchMap(clicks => from(this.localRepository.bookmarks.storeClicks(clicks)))

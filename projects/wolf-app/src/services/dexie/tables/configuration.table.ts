@@ -1,10 +1,11 @@
-import { ConfigurationRepository, Theme, getNextTheme } from '@lib';
+import { Theme, getNextTheme } from '@lib';
 import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalRepositoryNames } from 'lib/constants/database.constant';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
-import { KeyValueRepositoryImpl } from './key-value.table';
+import { KeyValueLocalRepositoryImpl } from './key-value.table';
 import { WolfBaseDB } from '../wolfbase.database';
+import { ConfigurationLocalRepository } from 'lib/repositories/local';
 
-export class DexieConfigurationRepositoryImpl extends KeyValueRepositoryImpl implements ConfigurationRepository {
+export class DexieConfigurationRepositoryImpl extends KeyValueLocalRepositoryImpl implements ConfigurationLocalRepository {
 
 	constructor(db: WolfBaseDB) {
 		super(db, LocalRepositoryNames.configuration)

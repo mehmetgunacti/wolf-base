@@ -1,20 +1,20 @@
 import { WolfEntity } from 'lib/constants';
 import { LocalRepositoryNames } from 'lib/constants/database.constant';
 import { Entity } from 'lib/models';
-import { BookmarksRepository, ConfigurationRepository, EntityRepository, KBContentsRepository, KBEntriesRepository, LogsRepository } from 'lib/repositories';
+import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, KBContentsLocalRepository, KBEntriesLocalRepository, LogsLocalRepository } from 'lib/repositories/local';
 
 export interface LocalRepositoryService {
 
 	// entity tables
-	bookmarks: BookmarksRepository;
-	kbEntries: KBEntriesRepository;
-	kbContents: KBContentsRepository;
+	bookmarks: BookmarksLocalRepository;
+	kbEntries: KBEntriesLocalRepository;
+	kbContents: KBContentsLocalRepository;
 
 	// non-entity tables
-	configuration: ConfigurationRepository;
-	logs: LogsRepository;
+	configuration: ConfigurationLocalRepository;
+	logs: LogsLocalRepository;
 
-	getRepository(entity: WolfEntity): EntityRepository<Entity>;
+	getRepository(entity: WolfEntity): EntityLocalRepository<Entity>;
 
 	dump(tablename: LocalRepositoryNames): Promise<Record<string, string>>;
 

@@ -15,8 +15,8 @@ export class CloudBookmarkEffects {
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
 	private syncService: SyncService = inject(SYNC_SERVICE);
-	// private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
-	// private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
+	// private localStorage: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
+	// private remoteRepository: RemoteRepositoryService = inject(REMOTE_STORAGE_SERVICE);
 
 	downloadRemoteMetadata$ = createEffect(
 

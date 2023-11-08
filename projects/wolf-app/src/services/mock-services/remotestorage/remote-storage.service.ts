@@ -1,8 +1,20 @@
-import { BookmarksCollection, RemoteStorageService } from '@lib';
+import { Entity, RemoteRepositoryService, WolfEntity } from '@lib';
+import { BookmarksRemoteRepository, EntityRemoteRepository } from 'lib/repositories/remote';
 import { MockBookmarksCollection } from "./collections/bookmarks.collection";
 
-export class MockRemoteStorageService implements RemoteStorageService {
+export class MockRemoteRepositoryService implements RemoteRepositoryService {
 
-	bookmarks: BookmarksCollection = new MockBookmarksCollection();
+	bookmarks: BookmarksRemoteRepository = new MockBookmarksCollection();
+
+	getRepository(entity: WolfEntity): EntityRemoteRepository<Entity> {
+
+		switch (entity) {
+
+			case WolfEntity.bookmarks: return this.bookmarks;
+
+		}
+		throw Error('Unknown entity');
+
+	}
 
 }

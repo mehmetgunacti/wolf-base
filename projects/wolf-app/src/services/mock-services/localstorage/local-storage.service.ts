@@ -1,15 +1,16 @@
-import { BookmarksRepository, ConfigurationRepository, KBContentsRepository, KBEntriesRepository, LocalRepositoryService, LocalRepositoryNames, LogsRepository, Entity, EntityRepository, WolfEntity } from '@lib';
-import { MockBookmarksRepositoryImpl, MockConfigurationRepositoryImpl, MockKBContentsRepositoryImpl, MockKBEntriesRepositoryImpl, MockLogsRepositoryImpl } from "./tables";
+import { Entity, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
+import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, KBContentsLocalRepository, KBEntriesLocalRepository, LogsLocalRepository } from 'lib/repositories/local';
+import { MockBookmarksLocalRepositoryImpl, MockConfigurationLocalRepositoryImpl, MockKBContentsLocalRepositoryImpl, MockKBEntriesLocalRepositoryImpl, MockLogsLocalRepositoryImpl } from "./tables";
 
-export class MockLocalStorageService implements LocalRepositoryService {
+export class MockLocalRepositoryService implements LocalRepositoryService {
 
-	bookmarks: BookmarksRepository = new MockBookmarksRepositoryImpl();
-	kbEntries: KBEntriesRepository = new MockKBEntriesRepositoryImpl();
-	kbContents: KBContentsRepository = new MockKBContentsRepositoryImpl();
-	configuration: ConfigurationRepository = new MockConfigurationRepositoryImpl();
-	logs: LogsRepository = new MockLogsRepositoryImpl();
+	bookmarks: BookmarksLocalRepository = new MockBookmarksLocalRepositoryImpl();
+	kbEntries: KBEntriesLocalRepository = new MockKBEntriesLocalRepositoryImpl();
+	kbContents: KBContentsLocalRepository = new MockKBContentsLocalRepositoryImpl();
+	configuration: ConfigurationLocalRepository = new MockConfigurationLocalRepositoryImpl();
+	logs: LogsLocalRepository = new MockLogsLocalRepositoryImpl();
 
-	getRepository(entity: WolfEntity): EntityRepository<Entity> {
+	getRepository(entity: WolfEntity): EntityLocalRepository<Entity> {
 
 		switch (entity) {
 

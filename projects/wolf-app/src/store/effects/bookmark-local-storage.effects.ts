@@ -12,7 +12,7 @@ export class BookmarkLocalStorageEffects {
 
 	// private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
-	// private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
+	// private remoteRepository: RemoteRepositoryService = inject(REMOTE_STORAGE_SERVICE);
 
 	loadBookmarks$ = createEffect(
 

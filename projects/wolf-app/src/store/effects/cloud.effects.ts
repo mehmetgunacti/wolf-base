@@ -12,15 +12,15 @@ export class CloudEffects {
 
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
-	// private localStorage: LocalStorageService = inject(LOCAL_STORAGE_SERVICE);
-	// private remoteStorage: RemoteStorageService = inject(REMOTE_STORAGE_SERVICE);
+	// private localStorage: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
+	// private remoteRepository: RemoteRepositoryService = inject(REMOTE_STORAGE_SERVICE);
 
 	// downloadRemoteData$ = createEffect(
 
 	// 	() => this.actions$.pipe(
 
 	// 		ofType(downloadRemoteData),
-	// 		switchMap(({ id }) => this.remoteStorage.bookmarks.download(id)),
+	// 		switchMap(({ id }) => this.remoteRepository.bookmarks.download(id)),
 	// 		map(remoteData => remoteData ? downloadRemoteDataSuccess({ remoteData }) : downloadRemoteDataFailure())
 
 	// 	)
@@ -34,7 +34,7 @@ export class CloudEffects {
 			ofType(cloudTaskAction),
 			withLatestFrom(this.store.select(selCoreIsFirestoreConfigMissing)),
 			filter(([, missing]) => !missing),
-			map(([{ entity, taskType }]) => showNotification({ severity: 'info', summary: 'Task Action', detail: `${entity}: ${taskType}` }))
+			map(([{ task }]) => showNotification({ severity: 'info', summary: 'Task Action', detail: `${task.entity}: ${task.type}` }))
 
 		)
 
@@ -82,7 +82,7 @@ export class CloudEffects {
 	// 	() => this.actions$.pipe(
 
 	// 		ofType(purgeRemoteItem),
-	// 		switchMap(({ id }) => this.remoteStorage.bookmarks.moveToTrash(id)),
+	// 		switchMap(({ id }) => this.remoteRepository.bookmarks.moveToTrash(id)),
 	// 		map(() => showNotification({ severity: 'success', detail: 'Remote item deleted' }))
 
 	// 	)
@@ -110,7 +110,7 @@ export class CloudEffects {
 	// 		ofType(overrideRemoteItem),
 	// 		withLatestFrom(this.store.select(selCloudSelectedItem)),
 	// 		filter((entity): entity is Entity => !!entity),
-	// 		switchMap(entity => this.remoteStorage.bookmarks.upload(entity as Bookmark)),
+	// 		switchMap(entity => this.remoteRepository.bookmarks.upload(entity as Bookmark)),
 	// 		switchMap(remoteData => this.localRepository.bookmarks.put(remoteData)),
 	// 		map(() => uploadSuccess({ count: 1 }))
 

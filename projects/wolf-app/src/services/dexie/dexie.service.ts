@@ -1,18 +1,19 @@
-import { BookmarksRepository, ConfigurationRepository, Entity, EntityRepository, KBContentsRepository, KBEntriesRepository, LocalRepositoryNames, LocalRepositoryService, LogsRepository, WolfEntity } from '@lib';
-import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
-import { DexieBookmarksRepositoryImpl, DexieConfigurationRepositoryImpl, DexieLogsRepositoryImpl } from './tables';
-import { DexieKBEntriesRepositoryImpl } from './tables/kb-entries.table';
+import { Entity, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
+import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, KBContentsLocalRepository, KBEntriesLocalRepository, LogsLocalRepository } from 'lib/repositories/local';
+import { DexieBookmarksRepositoryImpl, DexieConfigurationRepositoryImpl, DexieLogsLocalRepositoryImpl } from './tables';
 import { DexieKBContentsRepositoryImpl } from './tables/kb-contents.table';
+import { DexieKBEntriesRepositoryImpl } from './tables/kb-entries.table';
+import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
 
-export class DexieLocalStorageServiceImpl implements LocalRepositoryService {
+export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 	private db: WolfBaseDB;
 
-	bookmarks: BookmarksRepository;
-	kbEntries: KBEntriesRepository;
-	kbContents: KBContentsRepository;
-	configuration: ConfigurationRepository;
-	logs: LogsRepository;
+	bookmarks: BookmarksLocalRepository;
+	kbEntries: KBEntriesLocalRepository;
+	kbContents: KBContentsLocalRepository;
+	configuration: ConfigurationLocalRepository;
+	logs: LogsLocalRepository;
 
 	constructor() {
 
@@ -21,19 +22,18 @@ export class DexieLocalStorageServiceImpl implements LocalRepositoryService {
 		this.kbEntries = new DexieKBEntriesRepositoryImpl(db);
 		this.kbContents = new DexieKBContentsRepositoryImpl(db);
 		this.configuration = new DexieConfigurationRepositoryImpl(db);
-		this.logs = new DexieLogsRepositoryImpl(db);
+		this.logs = new DexieLogsLocalRepositoryImpl(db);
 		this.db = db;
 
 	}
 
-	getRepository(entity: WolfEntity): EntityRepository<Entity> {
+	getRepository(entity: WolfEntity): EntityLocalRepository<Entity> {
 
 		switch (entity) {
 
 			case WolfEntity.bookmarks: return this.bookmarks;
 
 		}
-
 		throw Error('Unknown entity');
 
 	}

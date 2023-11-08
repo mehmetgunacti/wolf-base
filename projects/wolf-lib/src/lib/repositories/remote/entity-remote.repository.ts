@@ -1,10 +1,9 @@
 import { UUID } from "lib/constants";
 import { RemoteData, RemoteMetadata } from "lib/models";
-import { Bookmark, Click } from "lib/models/bookmark.model";
 import { Entity } from "lib/models/entity.model";
 import { Observable } from "rxjs";
 
-export interface RemoteStorageCollection<T extends Entity> {
+export interface EntityRemoteRepository<T extends Entity> {
 
 	upload(item: T): Observable<RemoteMetadata>;
 
@@ -16,12 +15,5 @@ export interface RemoteStorageCollection<T extends Entity> {
 
 	delete(id: UUID): Observable<void>;
 	trash(item: T): Observable<RemoteData<T>>;
-
-}
-
-export interface BookmarksCollection extends RemoteStorageCollection<Bookmark> {
-
-	uploadClicks(clicks: Click[]): Observable<number>;
-	downloadClicks(): Observable<Click[]>;
 
 }

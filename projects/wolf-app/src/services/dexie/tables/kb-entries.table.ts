@@ -1,10 +1,11 @@
-import { KBEntriesRepository, KBEntry, WolfEntity, toggleArrayItem } from '@lib';
+import { KBEntry, WolfEntity } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { v4 as uuidv4 } from 'uuid';
 import { WolfBaseDB } from '../wolfbase.database';
-import { EntityRepositoryImpl } from './entity.table';
+import { EntityLocalRepositoryImpl } from './entity.table';
+import { KBEntriesLocalRepository } from 'lib/repositories/local';
 
-export class DexieKBEntriesRepositoryImpl extends EntityRepositoryImpl<KBEntry> implements KBEntriesRepository {
+export class DexieKBEntriesRepositoryImpl extends EntityLocalRepositoryImpl<KBEntry> implements KBEntriesLocalRepository {
 
 	constructor(db: WolfBaseDB) {
 		super(db, WolfEntity.kb_entries);

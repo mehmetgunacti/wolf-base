@@ -1,9 +1,10 @@
-import { Bookmark, BookmarksCollection, Click, RemoteData, RemoteMetadata, UUID } from '@lib';
+import { Bookmark, Click, RemoteData, RemoteMetadata, UUID } from '@lib';
+import { BookmarksRemoteRepository } from 'lib/repositories/remote';
 import { Observable, delay, map, of } from "rxjs";
 
 const SLEEP = 20;
 
-export class MockBookmarksCollection implements BookmarksCollection {
+export class MockBookmarksCollection implements BookmarksRemoteRepository {
 
 	private bookmarks: Record<string, RemoteData<Bookmark>> = {};
 	private bookmarks_trash: Record<string, RemoteData<Bookmark>> = {};
@@ -125,13 +126,13 @@ export class MockBookmarksCollection implements BookmarksCollection {
 
 	downloadClicks(): Observable<Click[]> {
 
-		return of(Object.keys(this.clicks).map(id => ({ id, name: this.bookmarks[id].entity.name ,current: 0, total: this.clicks[id] })));
+		return of(Object.keys(this.clicks).map(id => ({ id, name: this.bookmarks[id].entity.name, current: 0, total: this.clicks[id] })));
 
 	}
 
 }
 
-export class VoidBookmarksCollection implements BookmarksCollection {
+export class VoidBookmarksCollection implements BookmarksRemoteRepository {
 
 	uploadClicks(clicks: Click[]): Observable<number> {
 		throw new Error("Method not implemented.");
