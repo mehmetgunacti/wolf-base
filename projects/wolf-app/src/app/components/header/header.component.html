@@ -1,11 +1,14 @@
 <section id="section-logo">
 
-	<button
-		class="icon-only"
-		*ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers"
-		(click)="toggleNav()"><i class="material-symbols-outlined bold">menu</i></button>
-		<!-- [badge]="cloudNumbers.length > 0 ? '.' : ''"
-		[badgeClass]="'navButtonBadge' + (cloudNumbers[1] > 0 ? ' red' : cloudNumbers[0] > 0 ? ' orange' : '')"></p-button> -->
+	<div class="badge-container" *ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers">
+
+		<button
+			class="icon-only"
+			(click)="toggleNav()"><i class="material-symbols-outlined bold">menu</i>
+		</button>
+		<span *ngIf="cloudNumbers.length > 0" class="badge small"></span>
+
+	</div>
 
 </section>
 <section id="portal-outlet">

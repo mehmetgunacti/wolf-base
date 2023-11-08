@@ -1,0 +1,32 @@
+.badge-container {
+
+	position	: relative;
+
+	.badge {
+
+		position	: absolute;
+		right		: 0;
+		bottom		: 0;
+
+		padding				: var(--gap-xs) var(--gap-sm);
+		background-color	: hsl(var(--col-accent-hue) var(--col-accent-sat) var(--col-accent-lig) / var(--col-accent-alp));
+		border-radius		: 25px;
+
+		line-height			: 1;
+		font-size			: x-small;
+	    font-weight			: bold;
+
+		&.small {
+
+			right				: 6px;
+			bottom				: 7px;
+			padding				: var(--gap-sm);
+			line-height			: 0.5;
+			font-size			: xx-small;
+			font-weight			: normal;
+
+		}
+
+	}
+
+}
