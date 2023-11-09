@@ -76,6 +76,7 @@ export class CloudEffects {
 
 	);
 
+	// show notification if config is missing
 	firestoreConfigMissing$ = createEffect(
 
 		() => this.actions$.pipe(

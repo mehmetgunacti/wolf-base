@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BookmarkSyncService, CloudTaskType } from '@lib';
+import { BookmarkSyncService, Click, CloudTaskType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BOOKMARK_SYNC_SERVICE } from 'app/app.config';
@@ -27,7 +27,7 @@ export class CloudBookmarkEffects {
 				switch (task.type) {
 
 					case CloudTaskType.clicked:
-						return this.syncService.uploadClicks();
+						return this.syncService.uploadClicks(task.entities as Click[]);
 
 					default:
 						return EMPTY;

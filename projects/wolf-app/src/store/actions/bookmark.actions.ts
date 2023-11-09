@@ -7,7 +7,7 @@ export const loadAllClicksSuccess = createAction('[Bookmark Clicks] Load All Suc
 export const fromClipboard = createAction('[Bookmark] From Clipboard');
 export const fromClipboardFailure = createAction('[Bookmark] From Clipboard Failure', props<{ shaking: boolean }>());
 
-export const clickBookmark = createAction('[Bookmark] Click Bookmark', props<{ id: UUID }>());
+export const clickBookmark = createAction('[Bookmark] Click', props<{ id: UUID }>());
 
 export const loadSyncDataSuccess = createAction('[Stats Bookmark] Load SyncData Success', props<{ syncData: SyncData[] }>());
 export const loadRemoteMetadataSuccess = createAction('[Stats Bookmark] Load RemoteMetadata Success', props<{ remoteMetadata: RemoteMetadata[] }>());

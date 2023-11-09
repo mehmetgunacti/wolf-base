@@ -23,6 +23,6 @@ export interface SyncService {
 
 export interface BookmarkSyncService {
 
-	uploadClicks(): Observable<number>;
+	uploadClicks(clicks: Click[]): Observable<number>;
 
 }
