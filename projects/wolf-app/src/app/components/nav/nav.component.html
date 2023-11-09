@@ -1,4 +1,4 @@
-<w-menu (clicked)="navTo($event)"></w-menu>
+<w-menu [items]="(menuItems$ | async) ?? []" (clicked)="navTo($event)"></w-menu>
 <div bottom-buttons>
 
 	<button

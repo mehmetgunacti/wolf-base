@@ -3,7 +3,7 @@ import { selBookmarksCount } from './bookmark-entities.selectors';
 import { filteredBookmarkCount } from './bookmark-tags.selectors';
 import { selBookmarkUIState } from './bookmark.selectors';
 
-export const menuBookmarkBadge = createSelector(
+export const selBookmarkMenuBadge = createSelector(
 
 	selBookmarksCount,
 	filteredBookmarkCount,

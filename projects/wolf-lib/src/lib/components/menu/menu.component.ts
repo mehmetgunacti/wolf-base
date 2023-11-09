@@ -1,13 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-
-export interface MenuItem {
-
-	url: string;
-	label: string;
-	icon?: string;
-	badge?: string;
-
-}
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { MenuItem } from 'lib/models';
 
 @Component({
 	selector: 'w-menu',
@@ -17,6 +9,8 @@ export interface MenuItem {
 })
 export class MenuComponent {
 
+	@Input() items: MenuItem[] = [];
+
 	@Output() clicked: EventEmitter<string> = new EventEmitter();
 
 	onClick(url: string): void {
@@ -24,25 +18,5 @@ export class MenuComponent {
 		this.clicked.emit(url);
 
 	}
-
-	items: MenuItem[] = [
-		{
-			url: '/',
-			label: 'Home',
-			icon: 'home'
-		},
-		{
-			url: '/bookmarks',
-			label: 'Bookmarks',
-			icon: 'bookmarks',
-			badge: '470'
-		},
-		{
-			url: '/kb',
-			label: 'Knowledge Base',
-			icon: 'school'
-		},
-
-	];
 
 }

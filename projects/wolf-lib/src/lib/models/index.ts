@@ -7,6 +7,7 @@ export * from './entity.model';
 export * from './id-base.model';
 export * from './knowledge-base.model';
 export * from './log.model';
+export * from './menu.model';
 export * from './remote.model';
 export * from './sync.model';
 export * from './tag.model';
