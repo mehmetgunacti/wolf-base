@@ -1,4 +1,17 @@
-<app-cloud-task
-	*ngFor="let task of tasks$ | async"
-	[task]="task"
-	(action)="onAction($event)"></app-cloud-task>
+<ng-container *ngIf="tasks$ | async as tasks">
+
+	<ng-container *ngIf="tasks.length > 0; else notasks">
+
+		<app-cloud-task
+			*ngFor="let task of tasks$ | async"
+			[task]="task"
+			(action)="onAction($event)"></app-cloud-task>
+
+	</ng-container>
+	<ng-template #notasks>
+
+		<div class="empty">No tasks available</div>
+
+	</ng-template>
+
+</ng-container>
