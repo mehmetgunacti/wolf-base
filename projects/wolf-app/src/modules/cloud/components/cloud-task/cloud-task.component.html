@@ -56,7 +56,7 @@
 	<!-- FOOTER -->
 	<footer>
 
-		<ng-container [ngSwitch]="task.action">
+		<ng-container [ngSwitch]="actionType">
 
 			<button *ngSwitchCase="'upload'"   type="button" (click)="onActionClicked()"><span class="material-symbols-outlined">cloud_upload</span> Upload</button>
 			<button *ngSwitchCase="'download'" type="button" (click)="onActionClicked()"><span class="material-symbols-outlined">cloud_download</span> Download</button>

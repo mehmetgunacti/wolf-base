@@ -16,7 +16,7 @@ export enum CloudTaskType {
 	updated_deleted = 'updated_deleted',
 	deleted_updated = 'deleted_updated',
 
-	 clicked = 'clicked'
+	clicked = 'clicked'
 
 }
 

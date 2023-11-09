@@ -1,31 +1,32 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { filter, map, withLatestFrom } from 'rxjs/operators';
+import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { downloadRemoteDataSuccess } from 'store/actions/cloud-bookmark.actions';
-import { cloudTaskAction, deleteSuccess, downloadSuccess, uploadSuccess } from 'store/actions/cloud.actions';
+import { cloudTaskAction, deleteSuccess, downloadRemoteDataSuccess, downloadRemoteMetadata, downloadSuccess, uploadSuccess } from 'store/actions/cloud.actions';
 import { Store } from '@ngrx/store';
 import { selCoreIsFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
+import { SYNC_SERVICE } from 'app/app.config';
+import { CloudTaskType, SyncService } from '@lib';
+import { EMPTY } from 'rxjs';
 
 @Injectable()
 export class CloudEffects {
 
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
-	// private localStorage: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
-	// private remoteRepository: RemoteRepositoryService = inject(REMOTE_STORAGE_SERVICE);
+	private syncService: SyncService = inject(SYNC_SERVICE);
 
-	// downloadRemoteData$ = createEffect(
+	downloadRemoteMetadata$ = createEffect(
 
-	// 	() => this.actions$.pipe(
+		() => this.actions$.pipe(
 
-	// 		ofType(downloadRemoteData),
-	// 		switchMap(({ id }) => this.remoteRepository.bookmarks.download(id)),
-	// 		map(remoteData => remoteData ? downloadRemoteDataSuccess({ remoteData }) : downloadRemoteDataFailure())
+			ofType(downloadRemoteMetadata),
+			switchMap(() => this.syncService.downloadMetadata()),
+			map(count => downloadSuccess({ count }))
 
-	// 	)
+		)
 
-	// );
+	);
 
 	cloudTaskAction$ = createEffect(
 
@@ -34,9 +35,44 @@ export class CloudEffects {
 			ofType(cloudTaskAction),
 			withLatestFrom(this.store.select(selCoreIsFirestoreConfigMissing)),
 			filter(([, missing]) => !missing),
-			map(([{ task }]) => showNotification({ severity: 'info', summary: 'Task Action', detail: `${task.entity}: ${task.type}` }))
+			switchMap(([{ task }]) => {
 
-		)
+				switch (task.type) {
+
+					case CloudTaskType.local_new:
+						return this.syncService.uploadNew(task);
+
+					case CloudTaskType.local_updated:
+						return this.syncService.uploadUpdated(task);
+
+					case CloudTaskType.local_deleted:
+						return this.syncService.uploadDeleted(task);
+
+					case CloudTaskType.remote_new:
+						return this.syncService.downloadNew(task);
+
+					case CloudTaskType.remote_updated:
+						return this.syncService.downloadUpdated(task);
+
+					case CloudTaskType.remote_deleted:
+						return this.syncService.downloadDeleted(task);
+
+					case CloudTaskType.deleted_deleted:
+						return this.syncService.downloadDeleted(task);
+
+					case CloudTaskType.updated_updated:
+					case CloudTaskType.updated_deleted:
+					case CloudTaskType.deleted_updated:
+						return EMPTY;
+
+				}
+				return EMPTY;
+
+			}),
+			// map(([{ task }]) => showNotification({ severity: 'info', summary: 'Task Action', detail: `${task.entity}: ${task.type}` }))
+
+		),
+		{ dispatch: false }
 
 	);
 

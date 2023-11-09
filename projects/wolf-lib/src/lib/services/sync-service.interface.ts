@@ -1,27 +1,28 @@
-import { UUID } from 'lib/constants';
-import { Click } from 'lib/models';
+import { Click, CloudTask } from 'lib/models';
 import { Observable } from 'rxjs';
 
 export interface SyncService {
 
 	downloadMetadata(): Observable<number>;
 
-	uploadNew(ids: UUID[]): Observable<number>;
+	uploadNew(task: CloudTask): Observable<number>;
 
-	uploadUpdated(ids: UUID[]): Observable<number>;
+	uploadUpdated(task: CloudTask): Observable<number>;
 
-	uploadDeleted(ids: UUID[]): Observable<number>;
+	uploadDeleted(task: CloudTask): Observable<number>;
 
-	downloadNew(ids: UUID[]): Observable<number>;
+	downloadNew(task: CloudTask): Observable<number>;
 
-	downloadUpdated(ids: UUID[]): Observable<number>;
+	downloadUpdated(task: CloudTask): Observable<number>;
 
-	downloadDeleted(ids: UUID[]): Observable<number>;
+	downloadDeleted(task: CloudTask): Observable<number>;
 
-	uploadClicks(clicks: Click[]): Observable<number>;
+	deleteMetadata(task: CloudTask): Observable<number>;
 
-	downloadClicks(): Observable<number>;
+}
 
-	deleteMetadata(ids: UUID[]): Observable<number>;
+export interface BookmarkSyncService {
+
+	uploadClicks(): Observable<number>;
 
 }

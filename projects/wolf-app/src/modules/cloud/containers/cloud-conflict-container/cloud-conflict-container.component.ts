@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Entity, RemoteData, RemoteMetadata, SyncData, UUID } from 'lib';
 import { Observable } from 'rxjs';
-import { downloadRemoteData, overrideLocalItem, overrideRemoteItem, purgeLocalItem, purgeRemoteItem } from 'store/actions/cloud-bookmark.actions';
 import { selCloudSelectedConflict, selCloudSelectedItem, selCloudSelectedRemoteData, selCloudSelectedRemoteMetadata, selCloudSelectedTrashItem } from 'store/selectors/cloud.selectors';
 
 @Component({
@@ -32,31 +31,31 @@ export class CloudConflictContainerComponent {
 
 	onDeleteLocal(id: UUID): void {
 
-		this.store.dispatch(purgeLocalItem({ id }));
+		console.log('this.store.dispatch(purgeLocalItem({ id }));');
 
 	}
 
 	onDeleteRemote(id: UUID): void {
 
-		this.store.dispatch(purgeRemoteItem({ id }));
+		console.log('this.store.dispatch(purgeRemoteItem({ id }));');
 
 	}
 
 	onOverrideLocal(): void {
 
-		this.store.dispatch(overrideLocalItem());
+		console.log('this.store.dispatch(overrideLocalItem());');
 
 	}
 
 	onOverrideRemote(): void {
 
-		this.store.dispatch(overrideRemoteItem());
+		console.log('this.store.dispatch(overrideRemoteItem());');
 
 	}
 
 	onLoadRemote(id: UUID): void {
 
-		this.store.dispatch(downloadRemoteData({ id }));
+		console.log('this.store.dispatch(downloadRemoteData({ id }));');
 
 	}
 

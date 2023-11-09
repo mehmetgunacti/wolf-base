@@ -13,7 +13,7 @@
 			(click)="navTo('/cloud')"
 			[title]="cloudNumbers.length > 0 ? cloudNumbers[0] + ' syncable items available' : 'Cloud'"><span class="material-symbols-outlined">cloud_sync</span>
 		</button>
-		<span *ngIf="cloudNumbers.length > 0" class="badge">23</span>
+		<span *ngIf="cloudNumbers.length > 0" class="badge">{{ cloudNumbers[0] }}</span>
 	</div>
 
 	<button

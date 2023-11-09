@@ -1,12 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CloudTask, CloudTaskType, WolfEntity } from 'lib';
 
-interface CloudTaskUI extends CloudTask {
-
-	action: 'upload' | 'download' | 'view';
-
-}
-
 function toAction(type: CloudTaskType): 'upload' | 'download' | 'view' {
 
 	switch (type) {
@@ -32,12 +26,6 @@ function toAction(type: CloudTaskType): 'upload' | 'download' | 'view' {
 
 }
 
-function createUI(task: CloudTask): CloudTaskUI {
-
-	return { ...task, action: toAction(task.type) };
-
-}
-
 @Component({
 	selector: 'app-cloud-task',
 	templateUrl: './cloud-task.component.html',
@@ -48,8 +36,15 @@ export class CloudTaskComponent {
 
 	WolfEntity = WolfEntity;
 	CloudTaskType = CloudTaskType;
+	task!: CloudTask;
+	actionType!: 'upload' | 'download' | 'view';
 
-	@Input({ required: true, transform: createUI }) task!: CloudTaskUI;
+	@Input({ required: true, alias: 'task' }) set _task(task: CloudTask) {
+
+		this.task = task;
+		this.actionType = toAction(task.type);
+
+	}
 
 	@Output() action: EventEmitter<CloudTask> = new EventEmitter();
 
