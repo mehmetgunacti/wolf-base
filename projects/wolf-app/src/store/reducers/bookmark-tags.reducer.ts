@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { search, setSelectedTags } from 'store/actions/bookmark-tags.actions';
+import { search, setSelectedTags } from 'store/actions/bookmark.actions';
 import { BookmarkTagsState, initialBookmarkTagsState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(

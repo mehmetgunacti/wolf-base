@@ -1,27 +1,35 @@
 import { Bookmark, Click, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
-import { closeEditBookmarkDialog, openAddBookmarkDialog, openEditBookmarkDialog } from 'store/actions/bookmark-ui.actions';
-import { loadAllBookmarksSuccess, loadAllClicksSuccess } from 'store/actions/bookmark.actions';
+import { produce } from 'immer';
+import * as bmActions from 'store/actions/bookmark.actions';
 import { BookmarkEntitiesState, initialBookmarkEntitiesState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(
 
 	initialBookmarkEntitiesState,
+	on(bmActions.loadOneBookmarkSuccess, (state, { bookmark }): BookmarkEntitiesState => {
+
+		return produce(
+			state,
+			draft => { draft.entities[bookmark.id] = bookmark }
+		);
+
+	}),
 	on(
-		loadAllBookmarksSuccess, (state, { bookmarks }): BookmarkEntitiesState => ({
+		bmActions.loadAllBookmarksSuccess, (state, { bookmarks }): BookmarkEntitiesState => ({
 			...state,
 			entities: bookmarks.reduce((record, bookmark) => { record[bookmark.id] = bookmark; return record; }, {} as Record<UUID, Bookmark>)
 		})
 	),
 	on(
-		loadAllClicksSuccess, (state, { clicks }): BookmarkEntitiesState => ({
+		bmActions.loadAllClicksSuccess, (state, { clicks }): BookmarkEntitiesState => ({
 			...state,
 			clicks: clicks.reduce((record, click) => { record[click.id] = click; return record; }, {} as Record<UUID, Click>)
 		})
 	),
-	on(openAddBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
-	on(openEditBookmarkDialog, (state, { id }): BookmarkEntitiesState => ({ ...state, selected: id })),
-	on(closeEditBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null }))
+	on(bmActions.openAddBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
+	on(bmActions.openEditBookmarkDialog, (state, { id }): BookmarkEntitiesState => ({ ...state, selected: id })),
+	on(bmActions.closeEditBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null }))
 
 );
 

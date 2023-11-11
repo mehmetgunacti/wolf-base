@@ -2,7 +2,7 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } 
 import { Store } from '@ngrx/store';
 import { Bookmark, ToastConfiguration, UUID, WolfEntity } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
-import { closeEditBookmarkDialog } from 'store/actions/bookmark-ui.actions';
+import { closeEditBookmarkDialog } from 'store/actions/bookmark.actions';
 import { createEntity, deleteEntity, updateEntity } from 'store/actions/core-entity.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import { selBookmark } from 'store/selectors/bookmark-entities.selectors';

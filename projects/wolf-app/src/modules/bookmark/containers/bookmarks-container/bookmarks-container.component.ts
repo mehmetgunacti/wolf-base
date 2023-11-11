@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark, UUID } from 'lib';
 import { Observable } from 'rxjs';
-import { openEditBookmarkDialog, togglePopular } from 'store/actions/bookmark-ui.actions';
+import { openEditBookmarkDialog, togglePopular } from 'store/actions/bookmark.actions';
 import { clickBookmark } from 'store/actions/bookmark.actions';
 import { filteredBookmarks } from 'store/selectors/bookmark-tags.selectors';
 

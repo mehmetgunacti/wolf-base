@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Entity, LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
+import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { createEntity, createEntitySuccess, deleteEntity, deleteEntitySuccess, updateEntity, updateEntitySuccess } from 'store/actions/core-entity.actions';
@@ -11,7 +11,7 @@ import { showNotification } from 'store/actions/core-notification.actions';
 export class CoreEntityEffects {
 
 	private actions$: Actions = inject(Actions);
-	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
+	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
 	create$ = createEffect(
 
@@ -23,7 +23,7 @@ export class CoreEntityEffects {
 				from(
 					this.localRepository.getRepository(params.entity).create(params.data)
 				).pipe(
-					map((data: Entity) => createEntitySuccess({ entity: params.entity, data }))
+					map((data: Entity) => createEntitySuccess({ entity: params.entity, id: data.id }))
 				)
 
 			)
@@ -54,7 +54,7 @@ export class CoreEntityEffects {
 					this.localRepository.getRepository(entity).update(id, data)
 				).pipe(
 
-					map(() => updateEntitySuccess({ entity }))
+					map(() => updateEntitySuccess({ id, entity }))
 
 				)
 

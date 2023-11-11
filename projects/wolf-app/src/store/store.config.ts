@@ -1,6 +1,6 @@
 import { Action, ActionReducer, ActionReducerMap, MetaReducer, combineReducers } from '@ngrx/store';
 import { BookmarkEntitiesEffects } from './effects/bookmark-entities.effects';
-import { BookmarkLocalStorageEffects } from './effects/bookmark-local-storage.effects';
+import { BookmarkLocalRepositoryEffects } from './effects/bookmark-local-repository.effects';
 import { CloudBookmarkEffects } from './effects/cloud-bookmark.effects';
 import { CloudEffects } from './effects/cloud.effects';
 import { CoreNavigationEffects } from './effects/core-navigation.effects';
@@ -51,7 +51,7 @@ export const effects = [
 
 	// Bookmarks
 	BookmarkEntitiesEffects,
-	BookmarkLocalStorageEffects,
+	BookmarkLocalRepositoryEffects,
 	BookmarkUIEffects,
 
 	// Knowledge Base

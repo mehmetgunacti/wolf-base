@@ -1,14 +1,14 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { closeEditBookmarkDialogSuccess, openAddBookmarkDialogSuccess, openEditBookmarkDialogSuccess } from 'store/actions/bookmark-ui.actions';
+import * as bmActions from 'store/actions/bookmark.actions';
 import { fromClipboardFailure } from 'store/actions/bookmark.actions';
 import { BookmarkUIState, initialBookmarkUIState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(
 
 	initialBookmarkUIState,
-	on(openAddBookmarkDialogSuccess, (state, { id }): BookmarkUIState => ({ ...state, editDialogOverlayId: id })),
-	on(openEditBookmarkDialogSuccess, (state, { id }): BookmarkUIState => ({ ...state, editDialogOverlayId: id })),
-	on(closeEditBookmarkDialogSuccess, (state): BookmarkUIState => ({ ...state, editDialogOverlayId: null })),
+	on(bmActions.openAddBookmarkDialogSuccess, (state, { id }): BookmarkUIState => ({ ...state, editDialogOverlayId: id })),
+	on(bmActions.openEditBookmarkDialogSuccess, (state, { id }): BookmarkUIState => ({ ...state, editDialogOverlayId: id })),
+	on(bmActions.closeEditBookmarkDialogSuccess, (state): BookmarkUIState => ({ ...state, editDialogOverlayId: null })),
 	on(fromClipboardFailure, (state, { shaking }): BookmarkUIState => ({ ...state, shaking })),
 	// on(createBookmarkSuccess, (state): BookmarkUIState => ({ ...state, editDialogVisible: false })),
 	// on(updateBookmarkSuccess, (state): BookmarkUIState => ({ ...state, editDialogVisible: false })),

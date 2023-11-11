@@ -1,13 +1,13 @@
 import { inject } from '@angular/core';
 import { Bookmark, CloudTask, Entity, LocalRepositoryService, RemoteData, RemoteMetadata, SyncData, SyncService, UUID, WolfEntity } from '@lib';
-import { LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE } from 'app/app.config';
+import { LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE } from 'app/app.config';
 import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
 import { EMPTY, Observable, concatMap, filter, from, iif, map, switchMap, toArray } from 'rxjs';
 
 export class SyncServiceImpl implements SyncService {
 
-	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
-	private remoteRepository: RemoteRepositoryService = inject(REMOTE_STORAGE_SERVICE);
+	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
+	private remoteRepository: RemoteRepositoryService = inject(REMOTE_REPOSITORY_SERVICE);
 
 	downloadMetadata(): Observable<number> {
 

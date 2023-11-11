@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
+import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { LocalRepositoryService } from '@lib';
 import { map, switchMap } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
@@ -10,7 +10,7 @@ import { saveFirestoreConfig, saveFirestoreConfigSuccess, saveTitleLookup, saveT
 export class SettingsEffects {
 
     private actions$: Actions = inject(Actions);
-	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
+	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
 	saveFirestoreConfig$ = createEffect(
 

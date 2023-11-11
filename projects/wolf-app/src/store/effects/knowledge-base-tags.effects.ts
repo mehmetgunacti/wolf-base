@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
+import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { LocalRepositoryService, TAG_POPULAR } from '@lib';
 import { tap } from 'rxjs/operators';
 import { togglePopular } from 'store/actions/kb-entry-tag.actions';
@@ -9,7 +9,7 @@ import { togglePopular } from 'store/actions/kb-entry-tag.actions';
 export class KnowledgeBaseTagsEffects {
 
 	private actions$: Actions = inject(Actions);
-	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
+	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
 	kbEntryTogglePopularTag$ = createEffect(
 

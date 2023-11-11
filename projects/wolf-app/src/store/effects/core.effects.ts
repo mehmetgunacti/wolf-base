@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { createEffect } from '@ngrx/effects';
-import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
+import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { liveQuery } from 'dexie';
 import { Configuration, LocalRepositoryService } from '@lib';
 import { fromEventPattern } from 'rxjs';
@@ -10,7 +10,7 @@ import { confChanged } from 'store/actions/core.actions';
 @Injectable()
 export class CoreEffects {
 
-	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
+	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
 	listenToConfChanges$ = createEffect(
 

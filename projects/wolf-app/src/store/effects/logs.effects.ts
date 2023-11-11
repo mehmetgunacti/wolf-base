@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
+import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { LocalRepositoryService, LogCategory, LogMessage, ToastConfiguration } from '@lib';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
@@ -26,7 +26,7 @@ export class LogsEffects {
 
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
-	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
+	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
 	loadLogs$ = createEffect(
 

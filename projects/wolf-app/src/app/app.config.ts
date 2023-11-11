@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ErrorHandler, InjectionToken, Provider } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
 import { LocalRepositoryService, RemoteRepositoryService, WOverlayService } from '@lib';
 import { Store } from '@ngrx/store';
@@ -7,6 +7,7 @@ import { BookmarkSyncService, SyncService } from 'lib/services/sync-service.inte
 import { CustomErrorHandler, DexieLocalRepositoryServiceImpl, FirestoreRemoteRepositoryServiceImpl } from 'services';
 import { BookmarkSyncServiceImpl } from 'services/bookmark-sync.service';
 import { SyncServiceImpl } from 'services/sync.service';
+import { loadAllBookmarks, loadAllClicks, loadAllRemoteMetadata, loadAllSyncData, loadTrashCount } from 'store/actions/bookmark.actions';
 
 export const routes: Routes = [
 
@@ -37,35 +38,36 @@ export const routes: Routes = [
 
 ];
 
-// const appInitializerFactory = (store: Store) => {
+const appInitializerFactory = (store: Store) => {
 
-// 	return () => {
+	return () => {
 
-// set theme
-// const lsTheme = localStorage.getItem('theme');
-// const newTheme = !!lsTheme ? resolveTheme(lsTheme) : DEFAULT_THEME;
-// store.dispatch(actions.themeSet({ newTheme }));
+		store.dispatch(loadAllBookmarks());
+		store.dispatch(loadAllClicks());
+		store.dispatch(loadAllSyncData());
+		store.dispatch(loadAllRemoteMetadata());
+		store.dispatch(loadTrashCount());
 
-// 	};
+	};
 
-// }
+}
 
-export const LOCAL_STORAGE_SERVICE = new InjectionToken<LocalRepositoryService>('LocalRepositoryService');
-export const REMOTE_STORAGE_SERVICE = new InjectionToken<RemoteRepositoryService>('RemoteRepositoryService');
+export const LOCAL_REPOSITORY_SERVICE = new InjectionToken<LocalRepositoryService>('LocalRepositoryService');
+export const REMOTE_REPOSITORY_SERVICE = new InjectionToken<RemoteRepositoryService>('RemoteRepositoryService');
 export const SYNC_SERVICE = new InjectionToken<SyncService>('SyncService');
 export const BOOKMARK_SYNC_SERVICE = new InjectionToken<BookmarkSyncService>('BookmarkSyncService');
 
 export const providers: Provider[] = [
 
-	// {
+	{
 
-	// 	// Angular initializes
-	// 	provide: APP_INITIALIZER,
-	// 	useFactory: appInitializerFactory,
-	// 	multi: true,
-	// 	deps: [Store]
+		// Angular initializes
+		provide: APP_INITIALIZER,
+		useFactory: appInitializerFactory,
+		multi: true,
+		deps: [Store]
 
-	// },
+	},
 	{
 
 		// catch errors globally
@@ -73,10 +75,10 @@ export const providers: Provider[] = [
 		useClass: CustomErrorHandler
 
 	},
-	{ provide: LOCAL_STORAGE_SERVICE, useClass: DexieLocalRepositoryServiceImpl },
-	{ provide: REMOTE_STORAGE_SERVICE, useClass: FirestoreRemoteRepositoryServiceImpl, deps: [Store, HttpClient] },
-	{ provide: SYNC_SERVICE, useClass: SyncServiceImpl, deps: [LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE] },
-	{ provide: BOOKMARK_SYNC_SERVICE, useClass: BookmarkSyncServiceImpl, deps: [LOCAL_STORAGE_SERVICE, REMOTE_STORAGE_SERVICE] },
+	{ provide: LOCAL_REPOSITORY_SERVICE, useClass: DexieLocalRepositoryServiceImpl },
+	{ provide: REMOTE_REPOSITORY_SERVICE, useClass: FirestoreRemoteRepositoryServiceImpl, deps: [Store, HttpClient] },
+	{ provide: SYNC_SERVICE, useClass: SyncServiceImpl, deps: [LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE] },
+	{ provide: BOOKMARK_SYNC_SERVICE, useClass: BookmarkSyncServiceImpl, deps: [LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE] },
 	{ provide: WOverlayService }
 
 ];

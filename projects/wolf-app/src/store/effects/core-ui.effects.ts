@@ -1,7 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_STORAGE_SERVICE } from 'app/app.config';
+import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { Breakpoint, LocalRepositoryService } from '@lib';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { hideSidebar, setBigScreen, switchTheme, toggleSidebar } from 'store/actions/core-ui.actions';
@@ -14,7 +14,7 @@ export class CoreUIEffects {
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
 	private breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
-	private localRepository: LocalRepositoryService = inject(LOCAL_STORAGE_SERVICE);
+	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
 	setBigScreen$ = createEffect(
 
