@@ -32,7 +32,7 @@ export class BookmarkEntityUpdateEffects {
 
 	);
 
-	updateSuccessToNotification$ = createEffect(
+	showNotification$ = createEffect(
 
 		() => this.actions$.pipe(
 
@@ -43,12 +43,23 @@ export class BookmarkEntityUpdateEffects {
 
 	);
 
-	updateSuccessToLoadOneBookmark$ = createEffect(
+	loadOneBookmark$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(bmActions.updateSuccess),
 			map(({ id }) => bmActions.loadOneBookmark({ id }))
+
+		)
+
+	);
+
+	loadOneBookmarkSync$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bmActions.updateSuccess),
+			map(({ id }) => bmActions.loadOneSyncData({ id }))
 
 		)
 

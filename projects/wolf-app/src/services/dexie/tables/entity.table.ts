@@ -107,12 +107,30 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 		let count = 0;
 		await this.db.transaction('rw', [
 			this.tablename,
-			this.tablename + '_sync'
+			this.tablename + '_sync',
+			this.tablename + '_trash',
+			LocalRepositoryNames.logs
 		], async () => {
 
-			count = await this.db.table<T>(this.tablename).where('id').equals(id).modify({ ...item });
-			if (count > 0)
+			const entity = await this.db.table<T>(this.tablename).get(id);
+			if (entity) {
+
+				await this.db.table<T>(this.tablename + '_trash').add(entity);
+				await this.db.table<T>(this.tablename).update(id, { ...entity, item });
 				await this.db.table<SyncData>(this.tablename + '_sync').where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
+
+				// add log
+				await this.db.logs.add({
+
+					category: LogCategory.entity_updated,
+					date: new Date().toISOString(),
+					message: `"${capitalize(this.entity.name)}" updated`,
+					entityId: id,
+					entityName: item.name
+
+				});
+
+			}
 
 		});
 		return count;

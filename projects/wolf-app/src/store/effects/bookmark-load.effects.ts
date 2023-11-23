@@ -53,6 +53,32 @@ export class BookmarkLoadEffects {
 
 	);
 
+
+	loadOneSyncData$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bmActions.loadOneSyncData),
+			switchMap(({ id }) =>
+
+				from(this.localRepository.bookmarks.getSyncData(id)).pipe(
+
+					map(syncData => {
+
+						if (syncData === null)
+							return bmActions.loadOneSyncDataFailure({ id });
+						return bmActions.loadOneSyncDataSuccess({ syncData });
+
+					})
+
+				)
+
+			)
+
+		)
+
+	);
+
 	loadAllSyncData$ = createEffect(
 
 		() => this.actions$.pipe(

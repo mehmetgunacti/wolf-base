@@ -25,6 +25,10 @@ export const fromClipboardFailure			= createAction('[Bookmark] From Clipboard Fa
 
 export const clickBookmark					= createAction('[Bookmark] Click', props<{ id: UUID }>());
 
+export const loadOneSyncData				= createAction('[Bookmark] Load One SyncData', props<{ id: UUID }>());
+export const loadOneSyncDataSuccess			= createAction('[Bookmark] Load One SyncData Success', props<{ syncData: SyncData }>());
+export const loadOneSyncDataFailure			= createAction('[Bookmark] Load One SyncData Failure', props<{ id: UUID }>());
+
 export const loadAllSyncData				= createAction('[Bookmark] Load All SyncData');
 export const loadAllSyncDataSuccess			= createAction('[Bookmark] Load All SyncData Success', props<{ syncData: SyncData[] }>());
 

@@ -20,8 +20,8 @@ export interface BookmarkEntitiesState {
 
 export interface BookmarkSyncState {
 
-	syncData: SyncData[];
-	remoteMetadata: RemoteMetadata[];
+	syncData: Record<UUID, SyncData>;
+	remoteMetadata: Record<UUID, RemoteMetadata>;
 	trashCount: number;
 
 }
@@ -44,8 +44,8 @@ export interface BookmarkUIState {
 
 export const initialBookmarkSyncState: BookmarkSyncState = {
 
-	syncData: [],
-	remoteMetadata: [],
+	syncData: {},
+	remoteMetadata: {},
 	trashCount: 0
 
 };
