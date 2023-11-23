@@ -1,5 +1,6 @@
 import { Action, ActionReducer, ActionReducerMap, MetaReducer, combineReducers } from '@ngrx/store';
 import { BookmarkEntityCreateEffects } from './effects/bookmark-entity-create.effects';
+import { BookmarkEntityUpdateEffects } from './effects/bookmark-entity-update.effects';
 import { BookmarkLoadEffects } from './effects/bookmark-load.effects';
 import { BookmarkUIEffects } from './effects/bookmark-ui.effects';
 import { CloudBookmarkEffects } from './effects/cloud-bookmark.effects';
@@ -51,6 +52,7 @@ export const effects = [
 
 	// Bookmarks
 	BookmarkEntityCreateEffects,
+	BookmarkEntityUpdateEffects,
 	BookmarkLoadEffects,
 	BookmarkUIEffects,
 
