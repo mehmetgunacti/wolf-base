@@ -1,5 +1,5 @@
 import { FIRESTORE_VALUE, FirestoreBatchGetURL, FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from '@lib';
-import { UUID, WolfEntity } from "lib/constants";
+import { EntityName, UUID } from "lib/constants";
 import { FirestoreConfig, RemoteData, RemoteMetadata } from "lib/models";
 import { Entity } from "lib/models/entity.model";
 import { EntityRemoteRepository } from 'lib/repositories/remote';
@@ -9,19 +9,22 @@ import { Observable, map } from 'rxjs';
 export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> implements EntityRemoteRepository<T> {
 
 	protected pageSize = '10000'; // high number => download all
+	private collection: string;
 
 	constructor(
 		protected firestore: FirestoreAPIClient,
 		protected firestoreConfig: FirestoreConfig,
-		protected entity: WolfEntity,
+		protected entity: EntityName,
 		protected converter: FirestoreConverter<T>
-	) { }
+	) {
+		this.collection = entity.plural;
+	}
 
 	upload(item: T): Observable<RemoteMetadata> {
 
 		const url = new FirestorePatchURL(
 			this.firestoreConfig,
-			this.entity,
+			this.collection,
 			item.id,
 			this.converter.toUpdateMask(item)
 		);
@@ -38,7 +41,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestoreDocumentURL(
 			this.firestoreConfig,
-			this.entity,
+			this.collection,
 			id
 		);
 		return this.firestore.get<T>(url).pipe(
@@ -51,7 +54,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestoreBatchGetURL(
 			this.firestoreConfig,
-			this.entity,
+			this.collection,
 			ids
 		);
 		return this.firestore.batchGet<T>(url).pipe(
@@ -66,7 +69,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestoreDocumentURL(
 			this.firestoreConfig,
-			this.entity,
+			this.collection,
 			id,
 			true
 		);
@@ -82,7 +85,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestoreListURL(
 			this.firestoreConfig,
-			this.entity,
+			this.collection,
 			this.pageSize,
 			true
 		);
@@ -98,7 +101,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestoreDocumentURL(
 			this.firestoreConfig,
-			this.entity,
+			this.collection,
 			id
 		);
 		return this.firestore.delete(url);
@@ -109,7 +112,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 		const url = new FirestoreCreateURL(
 			this.firestoreConfig,
-			`${this.entity}_trash/${item.id}/items`,
+			`${this.collection}_trash/${item.id}/items`,
 			new Date().toISOString()
 		);
 		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);

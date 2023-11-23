@@ -25,3 +25,10 @@ export function isUrl(url: URL | null): url is URL {
     return url !== null;
 }
 
+export function capitalize(val: string): string {
+
+	if (val.length < 1)
+		return val;
+	return val.charAt(0).toUpperCase() + val.slice(1);
+
+}

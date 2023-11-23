@@ -8,5 +8,6 @@ export interface LogMessage {
     category: LogCategory;
     message: string;
     entityId?: UUID;
+	entityName?: string;
 
 }

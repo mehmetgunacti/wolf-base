@@ -8,7 +8,7 @@ import { KBEntriesLocalRepository } from 'lib/repositories/local';
 export class DexieKBEntriesRepositoryImpl extends EntityLocalRepositoryImpl<KBEntry> implements KBEntriesLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfEntity.kb_entries);
+		super(db, WolfEntity.kb_entry);
 	}
 
 	protected override newItemFromPartial(item: Partial<KBEntry>): KBEntry {

@@ -139,28 +139,28 @@ export const selBookmarkNonConflictCloudTasks = createSelector(
 		const tasks: CloudTask[] = [];
 
 		if (localNew.length > 0)
-			tasks.push(createCloudTask(localNew, WolfEntity.bookmarks, CloudTaskType.local_new));
+			tasks.push(createCloudTask(localNew, WolfEntity.bookmark, CloudTaskType.local_new));
 
 		if (localUpdated.length > 0)
-			tasks.push(createCloudTask(localUpdated, WolfEntity.bookmarks, CloudTaskType.local_updated));
+			tasks.push(createCloudTask(localUpdated, WolfEntity.bookmark, CloudTaskType.local_updated));
 
 		if (localDeleted.length > 0)
-			tasks.push(createCloudTask(localDeleted, WolfEntity.bookmarks, CloudTaskType.local_deleted));
+			tasks.push(createCloudTask(localDeleted, WolfEntity.bookmark, CloudTaskType.local_deleted));
 
 		if (remoteNew.length > 0)
-			tasks.push(createCloudTask(remoteNew, WolfEntity.bookmarks, CloudTaskType.remote_new));
+			tasks.push(createCloudTask(remoteNew, WolfEntity.bookmark, CloudTaskType.remote_new));
 
 		if (remoteUpdated.length > 0)
-			tasks.push(createCloudTask(remoteUpdated, WolfEntity.bookmarks, CloudTaskType.remote_updated));
+			tasks.push(createCloudTask(remoteUpdated, WolfEntity.bookmark, CloudTaskType.remote_updated));
 
 		if (remoteDeleted.length > 0)
-			tasks.push(createCloudTask(remoteDeleted, WolfEntity.bookmarks, CloudTaskType.remote_deleted));
+			tasks.push(createCloudTask(remoteDeleted, WolfEntity.bookmark, CloudTaskType.remote_deleted));
 
 		if (localDeletedRemoteDeleted.length > 0)
-			tasks.push(createCloudTask(localDeletedRemoteDeleted, WolfEntity.bookmarks, CloudTaskType.deleted_deleted));
+			tasks.push(createCloudTask(localDeletedRemoteDeleted, WolfEntity.bookmark, CloudTaskType.deleted_deleted));
 
 		if (clicked.length > 0)
-			tasks.push(createCloudTask(clicked, WolfEntity.bookmarks, CloudTaskType.clicked));
+			tasks.push(createCloudTask(clicked, WolfEntity.bookmark, CloudTaskType.clicked));
 
 		return tasks;
 
@@ -182,13 +182,13 @@ export const selBookmarkConflictCloudTasks = createSelector(
 		const tasks: CloudTask[] = [];
 
 		if (localUpdatedRemoteUpdated.length > 0)
-			tasks.push(createCloudTask(localUpdatedRemoteUpdated, WolfEntity.bookmarks, CloudTaskType.updated_updated));
+			tasks.push(createCloudTask(localUpdatedRemoteUpdated, WolfEntity.bookmark, CloudTaskType.updated_updated));
 
 		if (localUpdatedRemoteDeleted.length > 0)
-			tasks.push(createCloudTask(localUpdatedRemoteDeleted, WolfEntity.bookmarks, CloudTaskType.updated_deleted));
+			tasks.push(createCloudTask(localUpdatedRemoteDeleted, WolfEntity.bookmark, CloudTaskType.updated_deleted));
 
 		if (localDeletedRemoteUpdated.length > 0)
-			tasks.push(createCloudTask(localDeletedRemoteUpdated, WolfEntity.bookmarks, CloudTaskType.deleted_updated));
+			tasks.push(createCloudTask(localDeletedRemoteUpdated, WolfEntity.bookmark, CloudTaskType.deleted_updated));
 
 		return tasks;
 

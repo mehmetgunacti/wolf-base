@@ -1,5 +1,14 @@
+import { Bookmark, Click, Entity, OVERLAY_ID, RemoteMetadata, SyncData, UUID } from '@lib';
 import { createAction, props } from '@ngrx/store';
-import { Bookmark, Click, OVERLAY_ID, RemoteMetadata, SyncData, UUID } from '@lib';
+
+export const create							= createAction('[Bookmark] Create', props<{ bookmark: Partial<Bookmark> }>());
+export const createSuccess					= createAction('[Bookmark] Create Success', props<{ bookmark: Bookmark }>());
+
+export const update							= createAction('[Bookmark] Update', props<{ id: UUID, bookmark: Partial<Bookmark> }>());
+export const updateSuccess					= createAction('[Bookmark] Update Success', props<{ id: UUID }>());
+
+export const remove							= createAction('[Bookmark] Remove', props<{ bookmark: Entity }>());
+export const removeSuccess					= createAction('[Bookmark] Remove Success', props<{ id: UUID }>());
 
 export const loadOneBookmark				= createAction('[Bookmark] Load One', props<{ id: UUID }>());
 export const loadOneBookmarkSuccess			= createAction('[Bookmark] Load One Success', props<{ bookmark: Bookmark }>());

@@ -8,13 +8,13 @@ import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 
 export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Bookmark> implements BookmarksRemoteRepository {
 
-	private bookmarks_clicks = WolfEntity.bookmarks + '_clicks';
+	private bookmarks_clicks = WolfEntity.bookmark.plural + '_clicks';
 
 	constructor(firestore: FirestoreAPIClient, firestoreConfig: FirestoreConfig) {
 		super(
 			firestore,
 			firestoreConfig,
-			WolfEntity.bookmarks,
+			WolfEntity.bookmark,
 			new BookmarkFirestoreConverter()
 		);
 	}

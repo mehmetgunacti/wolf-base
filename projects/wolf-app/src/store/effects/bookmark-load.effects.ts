@@ -2,14 +2,44 @@ import { Injectable, inject } from '@angular/core';
 import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import * as bmActions from 'store/actions/bookmark.actions';
 
 @Injectable()
-export class BookmarkLocalRepositoryEffects {
+export class BookmarkLoadEffects {
 
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
+
+	loadOneBookmark$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bmActions.loadOneBookmark),
+			switchMap(({ id }) =>
+
+				from(this.localRepository.bookmarks.getEntity(id)).pipe(
+					map(bookmark => bookmark ? bmActions.loadOneBookmarkSuccess({ bookmark }) : bmActions.loadOneBookmarkFailure({ id }))
+				)
+
+			),
+
+		)
+
+	);
+
+	loadAllBookmarks$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bmActions.loadAllBookmarks),
+			switchMap(() => this.localRepository.bookmarks.list()),
+			map(bookmarks => bmActions.loadAllBookmarksSuccess({ bookmarks }))
+
+		)
+
+	);
 
 	loadAllClicks$ = createEffect(
 

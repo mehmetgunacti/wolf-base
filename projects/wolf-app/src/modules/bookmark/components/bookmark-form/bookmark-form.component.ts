@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, inject } from '@angular/core';
-import { Bookmark, TAG_POPULAR, ToastConfiguration, UUID, parseURL } from 'lib';
+import { Bookmark, Entity, TAG_POPULAR, ToastConfiguration, UUID, parseURL } from 'lib';
 import { Observable, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
 
@@ -18,7 +18,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	@Output() create: EventEmitter<Partial<Bookmark>> = new EventEmitter();
 	@Output() update: EventEmitter<{ id: UUID, bookmark: Partial<Bookmark> }> = new EventEmitter();
-	@Output() delete: EventEmitter<UUID> = new EventEmitter();
+	@Output() remove: EventEmitter<Entity> = new EventEmitter();
 	@Output() tagInput: EventEmitter<string | null> = new EventEmitter();
 	@Output() titleLookup: EventEmitter<ToastConfiguration> = new EventEmitter();
 
@@ -79,7 +79,7 @@ ${this.bookmark.title}
 
 will be deleted. Continue?`)
 		)
-			this.delete.emit(this.bookmark.id);
+			this.remove.emit(this.bookmark);
 
 	}
 

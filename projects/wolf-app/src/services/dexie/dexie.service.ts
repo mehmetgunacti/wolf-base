@@ -31,7 +31,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 		switch (entity) {
 
-			case WolfEntity.bookmarks: return this.bookmarks;
+			case WolfEntity.bookmark: return this.bookmarks;
 
 		}
 		throw Error('Unknown entity');

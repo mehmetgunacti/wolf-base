@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { createEntity, createEntitySuccess, deleteEntity, deleteEntitySuccess, updateEntity, updateEntitySuccess } from 'store/actions/core-entity.actions';
+// import { createEntity, createEntitySuccess, deleteEntity, deleteEntitySuccess, updateEntity, updateEntitySuccess } from 'store/actions/core-entity.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 
 @Injectable()
@@ -13,98 +13,98 @@ export class CoreEntityEffects {
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
-	create$ = createEffect(
+	// create$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(createEntity),
-			switchMap(params =>
+	// 		ofType(createEntity),
+	// 		switchMap(params =>
 
-				from(
-					this.localRepository.getRepository(params.entity).create(params.data)
-				).pipe(
-					map((data: Entity) => createEntitySuccess({ entity: params.entity, id: data.id }))
-				)
+	// 			from(
+	// 				this.localRepository.getRepository(params.entity).create(params.data)
+	// 			).pipe(
+	// 				map((data: Entity) => createEntitySuccess({ entity: params.entity, id: data.id }))
+	// 			)
 
-			)
+	// 		)
 
-		)
+	// 	)
 
-	);
+	// );
 
-	createSuccessNotification$ = createEffect(
+	// createSuccessNotification$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(createEntitySuccess),
-			map(({ entity }) => showNotification({ severity: 'success', detail: entity + ' created' }))
+	// 		ofType(createEntitySuccess),
+	// 		map(({ entity }) => showNotification({ severity: 'success', detail: entity + ' created' }))
 
-		)
+	// 	)
 
-	);
+	// );
 
-	update$ = createEffect(
+	// update$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(updateEntity),
-			switchMap(({ id, data, entity }) =>
+	// 		ofType(updateEntity),
+	// 		switchMap(({ id, data, entity }) =>
 
-				from(
-					this.localRepository.getRepository(entity).update(id, data)
-				).pipe(
+	// 			from(
+	// 				this.localRepository.getRepository(entity).update(id, data)
+	// 			).pipe(
 
-					map(() => updateEntitySuccess({ id, entity }))
+	// 				map(() => updateEntitySuccess({ id, entity }))
 
-				)
+	// 			)
 
-			)
+	// 		)
 
-		)
+	// 	)
 
-	);
+	// );
 
-	updateSuccessNotification$ = createEffect(
+	// updateSuccessNotification$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(updateEntitySuccess),
-			map(({ entity }) => showNotification({ severity: 'success', detail: entity + ' updated' }))
+	// 		ofType(updateEntitySuccess),
+	// 		map(({ entity }) => showNotification({ severity: 'success', detail: entity + ' updated' }))
 
-		)
+	// 	)
 
-	);
+	// );
 
-	delete$ = createEffect(
+	// delete$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(deleteEntity),
-			switchMap(({ id, entity }) =>
+	// 		ofType(deleteEntity),
+	// 		switchMap(({ id, entity }) =>
 
-				from(
-					this.localRepository.bookmarks.moveToTrash(id)
-				).pipe(
+	// 			from(
+	// 				this.localRepository.bookmarks.moveToTrash(id)
+	// 			).pipe(
 
-					map(() => deleteEntitySuccess({ entity }))
+	// 				map(() => deleteEntitySuccess({ entity }))
 
-				)
+	// 			)
 
-			)
+	// 		)
 
-		)
+	// 	)
 
-	);
+	// );
 
-	deleteSuccessNotification$ = createEffect(
+	// deleteSuccessNotification$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(deleteEntitySuccess),
-			map(({ entity }) => showNotification({ severity: 'success', detail: entity + ' deleted' }))
+	// 		ofType(deleteEntitySuccess),
+	// 		map(({ entity }) => showNotification({ severity: 'success', detail: entity + ' deleted' }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 }

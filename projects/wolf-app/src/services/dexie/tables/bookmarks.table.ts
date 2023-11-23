@@ -9,7 +9,7 @@ import { BookmarksLocalRepository } from 'lib/repositories/local';
 export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Bookmark> implements BookmarksLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfEntity.bookmarks);
+		super(db, WolfEntity.bookmark);
 	}
 
 	protected override newItemFromPartial(item: Partial<Bookmark>): Bookmark {
