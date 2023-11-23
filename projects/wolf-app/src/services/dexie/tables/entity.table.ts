@@ -225,7 +225,7 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	}
 
-	async delete(id: string): Promise<number> {
+	async remove(id: string): Promise<number> {
 
 		await this.db.transaction('rw', [
 			this.tablename,
@@ -263,11 +263,11 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	}
 
-	async bulkDelete(ids: UUID[]): Promise<number> {
+	async bulkRemove(ids: UUID[]): Promise<number> {
 
 		let counter = 0;
 		for (const id of ids)
-			counter += await this.delete(id);
+			counter += await this.remove(id);
 		return counter;
 
 	}

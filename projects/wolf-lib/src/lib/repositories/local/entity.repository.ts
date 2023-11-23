@@ -12,8 +12,8 @@ export interface EntityLocalRepository<T extends Entity> {
 
 	storeRemoteMetadata(data: RemoteMetadata[]): Promise<void>;
 
-	delete(id: UUID): Promise<number>;
-	bulkDelete(ids: UUID[]): Promise<number>;
+	remove(id: UUID): Promise<number>;
+	bulkRemove(ids: UUID[]): Promise<number>;
 
 	create(item: Partial<T>): Promise<T>;
 	update(id: UUID, item: Partial<T>): Promise<number>;

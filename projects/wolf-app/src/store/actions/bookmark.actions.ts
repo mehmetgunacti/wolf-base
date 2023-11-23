@@ -7,7 +7,7 @@ export const createSuccess					= createAction('[Bookmark] Create Success', props
 export const update							= createAction('[Bookmark] Update', props<{ id: UUID, bookmark: Partial<Bookmark> }>());
 export const updateSuccess					= createAction('[Bookmark] Update Success', props<{ id: UUID }>());
 
-export const remove							= createAction('[Bookmark] Remove', props<{ bookmark: Entity }>());
+export const remove							= createAction('[Bookmark] Remove', props<{ id: UUID }>());
 export const removeSuccess					= createAction('[Bookmark] Remove Success', props<{ id: UUID }>());
 
 export const loadOneBookmark				= createAction('[Bookmark] Load One', props<{ id: UUID }>());

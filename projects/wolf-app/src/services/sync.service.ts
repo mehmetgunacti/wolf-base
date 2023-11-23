@@ -141,7 +141,7 @@ export class SyncServiceImpl implements SyncService {
 					filter((remoteData): remoteData is RemoteData<Bookmark> => remoteData !== null),
 
 					// delete local metadata
-					switchMap(() => from(this.localRepository.getRepository(task.entity).delete(entity.id)).pipe(map(() => entity.id)))
+					switchMap(() => from(this.localRepository.getRepository(task.entity).remove(entity.id)).pipe(map(() => entity.id)))
 
 				)
 
@@ -191,13 +191,13 @@ export class SyncServiceImpl implements SyncService {
 
 	downloadDeleted(task: CloudTask): Observable<number> {
 
-		return from(this.localRepository.getRepository(task.entity).bulkDelete(task.entities.map(e => e.id)));
+		return from(this.localRepository.getRepository(task.entity).bulkRemove(task.entities.map(e => e.id)));
 
 	}
 
 	deleteMetadata(task: CloudTask): Observable<number> {
 
-		return from(this.localRepository.getRepository(task.entity).bulkDelete(task.entities.map(e => e.id)));
+		return from(this.localRepository.getRepository(task.entity).bulkRemove(task.entities.map(e => e.id)));
 
 	}
 

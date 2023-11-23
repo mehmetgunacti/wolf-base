@@ -27,6 +27,14 @@ const reducer = createReducer(
 			clicks: clicks.reduce((record, click) => { record[click.id] = click; return record; }, {} as Record<UUID, Click>)
 		})
 	),
+	on(bmActions.removeSuccess, (state, { id }): BookmarkEntitiesState => {
+
+		return produce(
+			state,
+			draft => { delete draft.entities[id]; }
+		);
+
+	}),
 	on(bmActions.openAddBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
 	on(bmActions.openEditBookmarkDialog, (state, { id }): BookmarkEntitiesState => ({ ...state, selected: id })),
 	on(bmActions.closeEditBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null }))

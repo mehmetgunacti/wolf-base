@@ -158,15 +158,15 @@ export class MockKBEntriesLocalRepositoryImpl implements KBEntriesLocalRepositor
 
 	}
 
-	async bulkDelete(ids: UUID[]): Promise<number> {
+	async bulkRemove(ids: UUID[]): Promise<number> {
 
 		for (const id of ids)
-			await this.delete(id);
+			await this.remove(id);
 		return ids.length;
 
 	}
 
-	async delete(id: string): Promise<number> {
+	async remove(id: string): Promise<number> {
 
 		await sleep(SLEEP);
 		const item = this.kbEntries.get(id);

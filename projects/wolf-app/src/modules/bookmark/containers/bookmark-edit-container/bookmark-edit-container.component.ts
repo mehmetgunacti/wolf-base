@@ -1,6 +1,6 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bookmark, Entity, ToastConfiguration, UUID, WolfEntity } from 'lib';
+import { Bookmark, ToastConfiguration, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { closeEditBookmarkDialog, create, remove, update } from 'store/actions/bookmark.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
@@ -63,9 +63,9 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	}
 
-	onRemove(bookmark: Entity): void {
+	onRemove(id: UUID): void {
 
-		this.store.dispatch(remove({ bookmark }));
+		this.store.dispatch(remove({ id }));
 
 	}
 

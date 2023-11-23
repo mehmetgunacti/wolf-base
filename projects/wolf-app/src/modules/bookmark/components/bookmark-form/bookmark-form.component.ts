@@ -18,7 +18,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	@Output() create: EventEmitter<Partial<Bookmark>> = new EventEmitter();
 	@Output() update: EventEmitter<{ id: UUID, bookmark: Partial<Bookmark> }> = new EventEmitter();
-	@Output() remove: EventEmitter<Entity> = new EventEmitter();
+	@Output() remove: EventEmitter<UUID> = new EventEmitter();
 	@Output() tagInput: EventEmitter<string | null> = new EventEmitter();
 	@Output() titleLookup: EventEmitter<ToastConfiguration> = new EventEmitter();
 
@@ -79,7 +79,7 @@ ${this.bookmark.title}
 
 will be deleted. Continue?`)
 		)
-			this.remove.emit(this.bookmark);
+			this.remove.emit(this.bookmark.id);
 
 	}
 
