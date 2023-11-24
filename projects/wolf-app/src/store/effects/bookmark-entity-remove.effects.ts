@@ -32,12 +32,23 @@ export class BookmarkEntityRemoveEffects {
 
 	);
 
-	removeSuccessToNotification$ = createEffect(
+	showNotification$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(bmActions.removeSuccess),
 			map(() => showNotification({ severity: 'success', detail: 'Bookmark removed' }))
+
+		)
+
+	);
+
+	loadOneBookmarkSync$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bmActions.removeSuccess),
+			map(({ id }) => bmActions.loadOneSyncData({ id }))
 
 		)
 

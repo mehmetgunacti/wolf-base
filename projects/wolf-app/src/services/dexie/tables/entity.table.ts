@@ -182,17 +182,30 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 		await this.db.transaction('rw', [
 			this.tablename,
 			this.tablename + '_sync',
-			this.tablename + '_trash'
+			this.tablename + '_trash',
+			LocalRepositoryNames.logs
 		], async () => {
 
 			const item = await this.db.table<T>(this.tablename).get(id);
 			if (item) {
 
-				await this.db.table<T>(this.tablename + '_trash').add(item);
-				await this.db.table<T>(this.tablename + '_sync').where({ id }).modify({ deleted: true } as SyncData);
+				await this.db.table(this.tablename + '_trash').add(item);
 				await this.db.table(this.tablename).delete(id);
 
 			}
+
+			await this.db.table(this.tablename + '_sync').where({ id }).modify({ deleted: true } as SyncData);
+
+			// add log
+			await this.db.logs.add({
+
+				category: LogCategory.entity_deleted,
+				date: new Date().toISOString(),
+				message: `"${capitalize(this.entity.name)}" moved to trash`,
+				entityId: id,
+				entityName: item?.name ?? '[n/a]'
+
+			});
 
 		});
 
