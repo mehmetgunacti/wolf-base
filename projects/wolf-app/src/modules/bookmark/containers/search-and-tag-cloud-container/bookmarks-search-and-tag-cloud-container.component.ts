@@ -66,7 +66,6 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 	toggleCloud(): void {
 
 		this.cloudVisible = !this.cloudVisible;
-		// this.store.dispatch(toggleSearchAndTagCloudVisibility());
 
 	}
 

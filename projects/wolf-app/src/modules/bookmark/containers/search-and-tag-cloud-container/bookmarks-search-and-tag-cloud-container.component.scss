@@ -6,7 +6,6 @@
 
     @extend %flex-column;
 	padding				: var(--gap);
-	gap					: var(--gap);
 	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
 	border-radius		: var(--border-radius);
 	transition			: $bg-transition;
@@ -46,11 +45,13 @@
 
 		@extend %flex-column;
 		gap				: var(--gap);
+		overflow		: hidden;
 
 		& > div {
 
 			@extend %flex-center-center;
-			gap		: var(--gap-xxs);
+			gap			: var(--gap-xxs);
+			margin-top	: var(--gap);
 
 			& > input {
 

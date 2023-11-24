@@ -14,15 +14,15 @@
 	</button>
 
 </header>
-
-<aside *ngIf="cloudVisible" @slideUpDown>
+<aside [@slideUpDown]="cloudVisible ? 'opened' : 'closed'">
 
 	<div>
 		<input
 			type="text"
 			placeholder="Keyword"
 			[formControl]="searchControl"
-			autofocus>
+			[autofocus]="cloudVisible"
+			[after]="500">
 		<button
 			type="button"
 			class="square small"
