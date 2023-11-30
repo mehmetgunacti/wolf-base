@@ -136,39 +136,49 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadDeleted(task: CloudTask): Observable<number> {
+	uploadDeleted(entityName: EntityName, entities: Entity[]): Observable<UUID> {
 
-		return from(task.entities).pipe(
+		return from(entities).pipe(
 
 			// for each id
 			concatMap(entity =>
 
-				// move from collection to trash
-				this.moveRemoteToTrash(entity.id).pipe(
+				// download entity
+				this.remoteRepository.getRepository(entityName).download(entity.id).pipe(
 
-					// success?
+					// check if entity exist on server
 					filter((remoteData): remoteData is RemoteData<Bookmark> => remoteData !== null),
 
-					// delete local metadata
-					switchMap(() => from(this.localRepository.getRepository(task.entity).remove(entity.id)).pipe(map(() => entity.id)))
+					switchMap(remoteData =>
+
+						// upload to remote trash collection
+						this.remoteRepository.getRepository(entityName).trash(remoteData.entity).pipe(
+
+							switchMap(() =>
+
+								// delete from collection
+								this.remoteRepository.getRepository(entityName).delete(entity.id).pipe(
+
+									// delete local metadata
+									switchMap(() =>
+
+										from(this.localRepository.getRepository(entityName).remove(entity.id)).pipe(
+											map(() => entity.id)
+										)
+
+									)
+
+								)
+
+							)
+
+						)
+
+					)
 
 				)
 
-			),
-			toArray(),
-			map(ids => ids.length)
-
-		);
-
-	}
-
-	private moveRemoteToTrash(id: UUID): Observable<RemoteData<Bookmark>> {
-
-		return this.remoteRepository.bookmarks.download(id).pipe(
-
-			filter((remoteData): remoteData is RemoteData<Bookmark> => remoteData !== null),
-
-			switchMap(remoteData => this.remoteRepository.bookmarks.trash(remoteData.entity))
+			)
 
 		);
 

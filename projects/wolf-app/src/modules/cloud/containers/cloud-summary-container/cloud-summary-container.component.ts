@@ -14,10 +14,9 @@ function getAction(task: CloudTask): Action | null {
 
 		case CloudTaskType.local_updated:
 			return bmActions.syncLocalUpdated();
-		// 	return this.syncService.uploadUpdated(task);
 
-		// case CloudTaskType.local_deleted:
-		// 	return this.syncService.uploadDeleted(task);
+		case CloudTaskType.local_deleted:
+			return bmActions.syncLocalDeleted();
 
 		// case CloudTaskType.remote_new:
 		// 	return this.syncService.downloadNew(task);

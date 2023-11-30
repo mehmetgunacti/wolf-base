@@ -25,6 +25,7 @@ import { logsReducer } from './reducers/logs.reducer';
 import { AppState } from './states/app.state';
 import { BookmarkSyncLocalNewEffects } from './effects/bookmark-sync-local-new.effects';
 import { BookmarkSyncLocalUpdatedEffects } from './effects/bookmark-sync-local-updated.effects';
+import { BookmarkSyncLocalDeletedEffects } from './effects/bookmark-sync-local-deleted.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -56,6 +57,7 @@ export const effects = [
 	// Bookmarks
 	BookmarkSyncLocalNewEffects,
 	BookmarkSyncLocalUpdatedEffects,
+	BookmarkSyncLocalDeletedEffects,
 
 	BookmarkEntityCreateEffects,
 	BookmarkEntityUpdateEffects,

@@ -48,6 +48,17 @@ const reducer = createReducer(
 		);
 
 	}),
+	on(bmActions.syncLocalDeletedSuccess, (state, { id }): BookmarkSyncState => {
+
+		return produce(
+			state,
+			draft => {
+				delete draft.syncData[id];
+				delete draft.remoteMetadata[id];
+			}
+		);
+
+	})
 
 );
 

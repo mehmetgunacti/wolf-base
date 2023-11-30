@@ -56,6 +56,10 @@ export const search							= createAction('[Bookmark] Search', props<{ term: stri
 
 // CLOUD SYNC
 export const syncLocalNew					= createAction('[Bookmark] Sync Local New');
+
 export const syncLocalUpdated				= createAction('[Bookmark] Sync Local Updated');
+
+export const syncLocalDeleted				= createAction('[Bookmark] Sync Local Deleted');
+export const syncLocalDeletedSuccess		= createAction('[Bookmark] Sync Local Deleted Success', props<{ id: UUID }>());
 
 export const uploadSuccess					= createAction('[Bookmark] Upload Success', props<{ remoteMetadata: RemoteMetadata }>());

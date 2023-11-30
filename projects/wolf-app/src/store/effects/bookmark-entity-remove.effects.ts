@@ -21,7 +21,7 @@ export class BookmarkEntityRemoveEffects {
 			switchMap(({ id }) =>
 
 				from(
-					this.localRepository.bookmarks.remove(id)
+					this.localRepository.bookmarks.moveToTrash(id)
 				).pipe(
 					map(() => bmActions.removeSuccess({ id }))
 				)
