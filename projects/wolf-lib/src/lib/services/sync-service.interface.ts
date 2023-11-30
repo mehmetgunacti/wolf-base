@@ -8,7 +8,7 @@ export interface SyncService {
 
 	uploadNew(entityName: EntityName, entities: Entity[]): Observable<RemoteMetadata>;
 
-	uploadUpdated(task: CloudTask): Observable<number>;
+	uploadUpdated(entityName: EntityName, entities: Entity[]): Observable<RemoteMetadata>;
 
 	uploadDeleted(task: CloudTask): Observable<number>;
 

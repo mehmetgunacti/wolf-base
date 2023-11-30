@@ -5,24 +5,24 @@ import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as bmActions from 'store/actions/bookmark.actions';
-import { selBookmarkLocalNew } from 'store/selectors/cloud-bookmark.selectors';
+import { selBookmarkLocalUpdated } from 'store/selectors/cloud-bookmark.selectors';
 
 @Injectable()
-export class BookmarkSyncLocalNewEffects {
+export class BookmarkSyncLocalUpdatedEffects {
 
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
 	private syncService: SyncService = inject(SYNC_SERVICE);
 
-	syncLocalNew$ = createEffect(
+	syncLocalUpdated$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.syncLocalNew),
-			withLatestFrom(this.store.select(selBookmarkLocalNew)),
+			ofType(bmActions.syncLocalUpdated),
+			withLatestFrom(this.store.select(selBookmarkLocalUpdated)),
 			switchMap(([, entities]) =>
 
-				this.syncService.uploadNew(WolfEntity.bookmark, entities).pipe(
+				this.syncService.uploadUpdated(WolfEntity.bookmark, entities).pipe(
 					map(remoteMetadata => bmActions.uploadSuccess({ remoteMetadata }))
 				)
 

@@ -42,8 +42,8 @@ export class CloudEffects {
 					// case CloudTaskType.local_new:
 					// 	return this.syncService.uploadNew(task);
 
-					case CloudTaskType.local_updated:
-						return this.syncService.uploadUpdated(task);
+					// case CloudTaskType.local_updated:
+					// 	return this.syncService.uploadUpdated(task);
 
 					case CloudTaskType.local_deleted:
 						return this.syncService.uploadDeleted(task);

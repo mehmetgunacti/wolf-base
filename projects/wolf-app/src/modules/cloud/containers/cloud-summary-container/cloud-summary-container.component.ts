@@ -2,9 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
 import { CloudTask, CloudTaskType } from 'lib';
 import { Observable } from 'rxjs';
-import { cloudTaskAction } from 'store/actions/cloud.actions';
-import { selBookmarkCloudTasks } from 'store/selectors/cloud-bookmark.selectors';
 import * as bmActions from 'store/actions/bookmark.actions';
+import { selBookmarkCloudTasks } from 'store/selectors/cloud-bookmark.selectors';
 
 function getAction(task: CloudTask): Action | null {
 
@@ -13,7 +12,8 @@ function getAction(task: CloudTask): Action | null {
 		case CloudTaskType.local_new:
 			return bmActions.syncLocalNew();
 
-		// case CloudTaskType.local_updated:
+		case CloudTaskType.local_updated:
+			return bmActions.syncLocalUpdated();
 		// 	return this.syncService.uploadUpdated(task);
 
 		// case CloudTaskType.local_deleted:

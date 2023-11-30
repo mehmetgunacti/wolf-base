@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Bookmark, CloudTask, Entity, EntityName, LocalRepositoryService, RemoteData, RemoteMetadata, SyncData, SyncService, UUID, WolfEntity } from '@lib';
 import { LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE } from 'app/app.config';
 import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
-import { EMPTY, Observable, concatMap, filter, from, iif, map, switchMap, toArray } from 'rxjs';
+import { EMPTY, Observable, concatMap, filter, from, iif, map, of, switchMap, toArray } from 'rxjs';
 
 export class SyncServiceImpl implements SyncService {
 
@@ -54,58 +54,66 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadUpdated(task: CloudTask): Observable<number> {
+	uploadUpdated(entityName: EntityName, entities: Entity[]): Observable<RemoteMetadata> {
 
-		return from(task.entities).pipe(
+		return from(entities).pipe(
 
-			// for each incoming id
+			// for each incoming entity
 			concatMap(entity =>
 
 				// read entity from local storage
-				from(this.localRepository.getRepository(task.entity).getEntity(entity.id)).pipe(
+				from(this.localRepository.getRepository(entityName).getEntity(entity.id)).pipe(
 
-					// if entity does not exist, skip this id
+					// if entity does not exist, skip
 					filter((bookmark): bookmark is Bookmark => bookmark !== null),
 
-					// read syncData from local storage
-					switchMap(bookmark => from(this.localRepository.getRepository(task.entity).getSyncData(entity.id)).pipe(
+					switchMap(bookmark =>
 
-						// perform syncData checks; skip this id if checks fail
-						filter((syncData): syncData is SyncData => !!syncData && syncData.updated && !syncData.deleted),
+						// read syncData from local storage
+						from(this.localRepository.getRepository(entityName).getSyncData(entity.id)).pipe(
 
-						// download remoteMetadata
-						switchMap(syncData => this.remoteRepository.bookmarks.downloadMetadata(entity.id).pipe(
+							// perform syncData checks; skip this id if checks fail
+							filter((syncData): syncData is SyncData => !!syncData && syncData.updated && !syncData.deleted),
 
-							// if remoteMetadata does not exist, skip this id
-							filter((remoteMetadata): remoteMetadata is RemoteMetadata => remoteMetadata !== null),
+							switchMap(syncData =>
 
-							// compare updateTime
-							switchMap(remoteMetadata =>
+								// download remoteMetadata
+								this.remoteRepository.bookmarks.downloadMetadata(entity.id).pipe(
 
-								iif(
+									// if remoteMetadata does not exist, skip this id
+									// (in this case, remoteMetadata will not be removed from indexedDb table
+									// problem will resolve when the "refresh" button is pressed and a "downloadAllRemoteMetadata" occurs)
+									filter((remoteMetadata): remoteMetadata is RemoteMetadata => remoteMetadata !== null),
 
-									// perform syncData - remoteMetadata checks
-									() => syncData.updateTime === remoteMetadata.updateTime,
+									// compare updateTime
+									switchMap(remoteMetadata =>
 
-									// upload entity
-									this.uploadAndStore(task.entity, bookmark),
+										iif(
 
-									// save remoteMetadata if syncData - remoteMetadata checks fail
-									from(this.localRepository.getRepository(task.entity).storeRemoteMetadata([remoteMetadata])).pipe(() => EMPTY)
+											// perform syncData - remoteMetadata checks
+											() => syncData.updateTime === remoteMetadata.updateTime,
+
+											// upload entity
+											this.uploadAndStore(entityName, bookmark),
+
+											// save remoteMetadata if syncData - remoteMetadata checks fail
+											from(this.localRepository.getRepository(entityName).storeRemoteMetadata([remoteMetadata])).pipe(() => of(remoteMetadata))
+
+										)
+
+									)
 
 								)
 
 							)
 
-						))
+						)
 
-					))
+					)
 
 				)
 
-			),
-			toArray(),
-			map(ids => ids.length)
+			)
 
 		);
 
