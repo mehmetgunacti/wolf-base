@@ -1,4 +1,4 @@
-import { WolfEntity } from 'lib/constants';
+import { EntityName } from 'lib/constants';
 import { LocalRepositoryNames } from 'lib/constants/database.constant';
 import { Entity } from 'lib/models';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, KBContentsLocalRepository, KBEntriesLocalRepository, LogsLocalRepository } from 'lib/repositories/local';
@@ -14,7 +14,7 @@ export interface LocalRepositoryService {
 	configuration: ConfigurationLocalRepository;
 	logs: LogsLocalRepository;
 
-	getRepository(entity: WolfEntity): EntityLocalRepository<Entity>;
+	getRepository(entityName: EntityName): EntityLocalRepository<Entity>;
 
 	dump(tablename: LocalRepositoryNames): Promise<Record<string, string>>;
 

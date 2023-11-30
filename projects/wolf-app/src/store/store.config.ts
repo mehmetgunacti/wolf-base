@@ -23,6 +23,7 @@ import { databaseReducer } from './reducers/database.reducer';
 import { knowledgeBaseReducer } from './reducers/knowledge-base.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { AppState } from './states/app.state';
+import { BookmarkSyncLocalNewEffects } from './effects/bookmark-sync-local-new.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -52,6 +53,7 @@ export const effects = [
 	CoreThemeEffects,
 
 	// Bookmarks
+	BookmarkSyncLocalNewEffects,
 	BookmarkEntityCreateEffects,
 	BookmarkEntityUpdateEffects,
 	BookmarkEntityRemoveEffects,

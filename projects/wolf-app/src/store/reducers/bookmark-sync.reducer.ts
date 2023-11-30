@@ -36,7 +36,18 @@ const reducer = createReducer(
 			draft => { delete draft.syncData[id] }
 		);
 
-	})
+	}),
+	on(bmActions.uploadSuccess, (state, { remoteMetadata }): BookmarkSyncState => {
+
+		return produce(
+			state,
+			draft => {
+				draft.syncData[remoteMetadata.id] = { ...remoteMetadata, updated: false, deleted: false, error: null };
+				draft.remoteMetadata[remoteMetadata.id] = remoteMetadata;
+			}
+		);
+
+	}),
 
 );
 

@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { Bookmark, CloudTask, Entity, LocalRepositoryService, RemoteData, RemoteMetadata, SyncData, SyncService, UUID, WolfEntity } from '@lib';
+import { Bookmark, CloudTask, Entity, EntityName, LocalRepositoryService, RemoteData, RemoteMetadata, SyncData, SyncService, UUID, WolfEntity } from '@lib';
 import { LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE } from 'app/app.config';
 import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
 import { EMPTY, Observable, concatMap, filter, from, iif, map, switchMap, toArray } from 'rxjs';
@@ -30,27 +30,25 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadNew(task: CloudTask): Observable<number> {
+	uploadNew(entityName: EntityName, entities: Entity[]): Observable<RemoteMetadata> {
 
-		return from(task.entities).pipe(
+		return from(entities).pipe(
 
 			// for each incoming id
 			concatMap(entity =>
 
 				// read entity from local storage
-				from(this.localRepository.getRepository(task.entity).getEntity(entity.id)).pipe(
+				from(this.localRepository.getRepository(entityName).getEntity(entity.id)).pipe(
 
 					// check if entity exists
 					filter((bookmark): bookmark is Bookmark => bookmark !== null),
 
 					// upload entity
-					switchMap(entity => this.uploadAndStore(task.entity, entity))
+					switchMap(entity => this.uploadAndStore(entityName, entity))
 
 				)
 
-			),
-			toArray(),
-			map(ids => ids.length)
+			)
 
 		);
 
@@ -113,15 +111,18 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	private uploadAndStore(entity: WolfEntity, e: Entity): Observable<UUID> {
+	private uploadAndStore(entityName: EntityName, entity: Entity): Observable<RemoteMetadata> {
 
-		return this.remoteRepository.getRepository(entity).upload(e).pipe(
+		return this.remoteRepository.getRepository(entityName).upload(entity).pipe(
 
 			// store _sync and _remote data
-			switchMap(remoteMetadata => this.localRepository.getRepository(entity).storeMetadata(remoteMetadata)),
+			switchMap(remoteMetadata =>
 
-			// complete stream
-			map(() => e.id)
+				from(this.localRepository.getRepository(entityName).storeMetadata(remoteMetadata)).pipe(
+					map(() => remoteMetadata)
+				)
+
+			)
 
 		);
 
@@ -177,13 +178,13 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	private downloadAndStore(entity: WolfEntity, entities: Entity[]): Observable<number> {
+	private downloadAndStore(entityName: EntityName, entities: Entity[]): Observable<number> {
 
 		// download remoteData
 		return this.remoteRepository.bookmarks.downloadMany(entities.map(e => e.id)).pipe(
 
 			// store all returned RemoteData
-			switchMap(remoteData => from(this.localRepository.getRepository(entity).storeRemoteData(remoteData)))
+			switchMap(remoteData => from(this.localRepository.getRepository(entityName).storeRemoteData(remoteData)))
 
 		);
 

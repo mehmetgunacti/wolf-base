@@ -5,6 +5,7 @@ import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import * as bmActions from 'store/actions/bookmark.actions';
+import * as cloudActions from 'store/actions/cloud.actions';
 
 @Injectable()
 export class BookmarkLoadEffects {
@@ -86,6 +87,17 @@ export class BookmarkLoadEffects {
 			ofType(bmActions.loadAllSyncData),
 			switchMap(() => this.localRepository.bookmarks.listSyncData()),
 			map(syncData => bmActions.loadAllSyncDataSuccess({ syncData }))
+
+		)
+
+	);
+
+	downloadRemoteDataSuccess$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(cloudActions.downloadRemoteDataSuccess),
+			map(() => bmActions.loadAllRemoteMetadata())
 
 		)
 

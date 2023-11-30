@@ -9,5 +9,5 @@ export const uploadSuccess = createAction('[Cloud] Upload Success', props<{ coun
 export const deleteSuccess = createAction('[Cloud] Delete Success', props<{ count: number }>());
 
 export const downloadRemoteMetadata = createAction('[Cloud] Download RemoteMetadata');
-export const downloadRemoteDataSuccess = createAction('[Cloud] Donwload RemoteData Success', props<{ remoteData: RemoteData<Entity> }>());
+export const downloadRemoteDataSuccess = createAction('[Cloud] Donwload RemoteData Success', props<{ count: number }>());
 export const cloudTaskAction = createAction('[Cloud] Task Action', props<{ task: CloudTask }>());

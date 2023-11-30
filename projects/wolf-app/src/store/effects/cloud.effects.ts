@@ -22,7 +22,7 @@ export class CloudEffects {
 
 			ofType(downloadRemoteMetadata),
 			switchMap(() => this.syncService.downloadMetadata()),
-			map(count => downloadSuccess({ count }))
+			map(count => downloadRemoteDataSuccess({ count }))
 
 		)
 
@@ -39,8 +39,8 @@ export class CloudEffects {
 
 				switch (task.type) {
 
-					case CloudTaskType.local_new:
-						return this.syncService.uploadNew(task);
+					// case CloudTaskType.local_new:
+					// 	return this.syncService.uploadNew(task);
 
 					case CloudTaskType.local_updated:
 						return this.syncService.uploadUpdated(task);

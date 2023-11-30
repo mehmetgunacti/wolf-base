@@ -1,9 +1,45 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { CloudTask } from 'lib';
+import { Action, Store } from '@ngrx/store';
+import { CloudTask, CloudTaskType } from 'lib';
 import { Observable } from 'rxjs';
 import { cloudTaskAction } from 'store/actions/cloud.actions';
 import { selBookmarkCloudTasks } from 'store/selectors/cloud-bookmark.selectors';
+import * as bmActions from 'store/actions/bookmark.actions';
+
+function getAction(task: CloudTask): Action | null {
+
+	switch (task.type) {
+
+		case CloudTaskType.local_new:
+			return bmActions.syncLocalNew();
+
+		// case CloudTaskType.local_updated:
+		// 	return this.syncService.uploadUpdated(task);
+
+		// case CloudTaskType.local_deleted:
+		// 	return this.syncService.uploadDeleted(task);
+
+		// case CloudTaskType.remote_new:
+		// 	return this.syncService.downloadNew(task);
+
+		// case CloudTaskType.remote_updated:
+		// 	return this.syncService.downloadUpdated(task);
+
+		// case CloudTaskType.remote_deleted:
+		// 	return this.syncService.downloadDeleted(task);
+
+		// case CloudTaskType.deleted_deleted:
+		// 	return this.syncService.downloadDeleted(task);
+
+		// case CloudTaskType.updated_updated:
+		// case CloudTaskType.updated_deleted:
+		// case CloudTaskType.deleted_updated:
+		// 	return EMPTY;
+
+	}
+	return null;
+
+}
 
 @Component({
 	selector: 'app-cloud-summary-container',
@@ -25,7 +61,9 @@ export class CloudSummaryContainerComponent {
 
 	onAction(task: CloudTask): void {
 
-		this.store.dispatch(cloudTaskAction({ task }));
+		const action: Action | null = getAction(task);
+		if (action !== null)
+			this.store.dispatch(action);
 
 	}
 

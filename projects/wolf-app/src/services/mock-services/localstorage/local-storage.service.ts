@@ -1,4 +1,4 @@
-import { Entity, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
+import { Entity, EntityName, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, KBContentsLocalRepository, KBEntriesLocalRepository, LogsLocalRepository } from 'lib/repositories/local';
 import { MockBookmarksLocalRepositoryImpl, MockConfigurationLocalRepositoryImpl, MockKBContentsLocalRepositoryImpl, MockKBEntriesLocalRepositoryImpl, MockLogsLocalRepositoryImpl } from "./tables";
 
@@ -10,11 +10,11 @@ export class MockLocalRepositoryService implements LocalRepositoryService {
 	configuration: ConfigurationLocalRepository = new MockConfigurationLocalRepositoryImpl();
 	logs: LogsLocalRepository = new MockLogsLocalRepositoryImpl();
 
-	getRepository(entity: WolfEntity): EntityLocalRepository<Entity> {
+	getRepository(entityName: EntityName): EntityLocalRepository<Entity> {
 
-		switch (entity) {
+		switch (entityName.name) {
 
-			case WolfEntity.bookmark: return this.bookmarks;
+			case WolfEntity.bookmark.name: return this.bookmarks;
 
 		}
 

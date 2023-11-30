@@ -1,11 +1,12 @@
-import { Click, CloudTask } from 'lib/models';
+import { EntityName } from 'lib/constants';
+import { Click, CloudTask, Entity, RemoteMetadata } from 'lib/models';
 import { Observable } from 'rxjs';
 
 export interface SyncService {
 
 	downloadMetadata(): Observable<number>;
 
-	uploadNew(task: CloudTask): Observable<number>;
+	uploadNew(entityName: EntityName, entities: Entity[]): Observable<RemoteMetadata>;
 
 	uploadUpdated(task: CloudTask): Observable<number>;
 

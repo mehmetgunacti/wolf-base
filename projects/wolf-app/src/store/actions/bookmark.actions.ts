@@ -53,3 +53,7 @@ export const clickTag						= createAction('[Bookmark] Click Tag', props<{ name: 
 export const setSelectedTags				= createAction('[Bookmark] Set Selected Tags', props<{ tags: string[] }>());
 export const emptySelectedTags				= createAction('[Bookmark] Empty Selected Tags');
 export const search							= createAction('[Bookmark] Search', props<{ term: string }>());
+
+// CLOUD SYNC
+export const syncLocalNew					= createAction('[Bookmark] Sync Local New');
+export const uploadSuccess					= createAction('[Bookmark] Upload Success', props<{ remoteMetadata: RemoteMetadata }>());
