@@ -2,22 +2,22 @@
 
 	<legend>
 
-		<ng-container [ngSwitch]="task.entity">
+		<ng-container [ngSwitch]="task.entity.name">
 
 			<!-- Bookmarks -->
-			<ng-container *ngSwitchCase="WolfEntity.bookmarks">
+			<ng-container *ngSwitchCase="WolfEntity.bookmark.name">
 				<span class="material-symbols-outlined">bookmarks</span>
 				<span> Bookmarks</span>
 			</ng-container>
 
 			<!-- Knowledge Base Entries -->
-			<ng-container *ngSwitchCase="WolfEntity.kb_entries">
+			<ng-container *ngSwitchCase="WolfEntity.kb_entry.name">
 				<span class="material-symbols-outlined">school</span>
 				<span> Knowledge Base Entries</span>
 			</ng-container>
 
 			<!-- Knowledge Base Contents -->
-			<ng-container *ngSwitchCase="WolfEntity.kb_contents">
+			<ng-container *ngSwitchCase="WolfEntity.kb_content.name">
 				<span class="material-symbols-outlined">school</span>
 				<span> Knowledge Base Contents</span>
 			</ng-container>

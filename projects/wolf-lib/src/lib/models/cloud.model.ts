@@ -1,4 +1,4 @@
-import { WolfEntity } from "lib/constants";
+import { EntityName } from "lib/constants";
 import { Entity } from './entity.model';
 
 export enum CloudTaskType {
@@ -23,12 +23,12 @@ export enum CloudTaskType {
 export interface CloudTask {
 
 	entities: Entity[],
-	entity: WolfEntity;
+	entity: EntityName;
 	type: CloudTaskType;
 
 }
 
-export function createCloudTask(entities: Entity[], entity: WolfEntity, type: CloudTaskType): CloudTask {
+export function createCloudTask(entities: Entity[], entity: EntityName, type: CloudTaskType): CloudTask {
 
 	return { entities, entity, type };
 

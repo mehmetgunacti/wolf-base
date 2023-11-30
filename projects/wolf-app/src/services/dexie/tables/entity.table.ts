@@ -116,7 +116,7 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 			if (entity) {
 
 				await this.db.table<T>(this.tablename + '_trash').add(entity);
-				await this.db.table<T>(this.tablename).update(id, { ...entity, item });
+				count = await this.db.table<T>(this.tablename).update(id, { ...entity, ...item });
 				await this.db.table<SyncData>(this.tablename + '_sync').where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
 
 				// add log
@@ -186,10 +186,10 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 			LocalRepositoryNames.logs
 		], async () => {
 
-			const item = await this.db.table<T>(this.tablename).get(id);
-			if (item) {
+			const entity = await this.db.table<T>(this.tablename).get(id);
+			if (entity) {
 
-				await this.db.table(this.tablename + '_trash').add(item);
+				await this.db.table(this.tablename + '_trash').add(entity);
 				await this.db.table(this.tablename).delete(id);
 
 			}
@@ -203,7 +203,7 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 				date: new Date().toISOString(),
 				message: `"${capitalize(this.entity.name)}" moved to trash`,
 				entityId: id,
-				entityName: item?.name ?? '[n/a]'
+				entityName: entity?.name ?? '[n/a]'
 
 			});
 
