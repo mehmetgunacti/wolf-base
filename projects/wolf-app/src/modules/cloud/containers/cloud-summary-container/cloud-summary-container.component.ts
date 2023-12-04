@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
-import { CloudTask, CloudTaskType } from 'lib';
+import { CloudTask, SyncTaskType } from 'lib';
 import { Observable } from 'rxjs';
 import * as bmActions from 'store/actions/bookmark.actions';
 import { selBookmarkCloudTasks } from 'store/selectors/cloud-bookmark.selectors';
@@ -9,22 +9,22 @@ function getAction(task: CloudTask): Action | null {
 
 	switch (task.type) {
 
-		case CloudTaskType.local_new:
+		case SyncTaskType.local_new:
 			return bmActions.syncLocalNew();
 
-		case CloudTaskType.local_updated:
+		case SyncTaskType.local_updated:
 			return bmActions.syncLocalUpdated();
 
-		case CloudTaskType.local_deleted:
+		case SyncTaskType.local_deleted:
 			return bmActions.syncLocalDeleted();
 
-		case CloudTaskType.remote_new:
+		case SyncTaskType.remote_new:
 			return bmActions.syncRemoteNew();
 
-		case CloudTaskType.remote_updated:
+		case SyncTaskType.remote_updated:
 			return bmActions.syncRemoteUpdated();
 
-		case CloudTaskType.remote_deleted:
+		case SyncTaskType.remote_deleted:
 			return bmActions.syncRemoteDeleted();
 
 		// case CloudTaskType.deleted_deleted:

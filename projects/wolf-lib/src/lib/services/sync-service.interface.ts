@@ -1,22 +1,22 @@
-import { EntityName, UUID } from 'lib/constants';
-import { Click, Entity, RemoteData, RemoteMetadata } from 'lib/models';
+import { EntityName } from 'lib/constants';
+import { Click, NameBase } from 'lib/models';
 import { Observable } from 'rxjs';
 
 export interface SyncService {
 
 	downloadMetadata(): Observable<number>;
 
-	uploadNew<T extends Entity>(entityName: EntityName, entities: T[]): Observable<RemoteMetadata>;
+	uploadNew(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
 
-	uploadUpdated<T extends Entity>(entityName: EntityName, entities: T[]): Observable<RemoteMetadata>;
+	uploadUpdated(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
 
-	uploadDeleted<T extends Entity>(entityName: EntityName, entities: T[]): Observable<UUID>;
+	uploadDeleted(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
 
-	downloadNew<T extends Entity>(entityName: EntityName, ids: UUID[]): Observable<RemoteData<T>>;
+	downloadNew(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
 
-	downloadUpdated<T extends Entity>(entityName: EntityName, ids: UUID[]): Observable<RemoteData<T>>;
+	downloadUpdated(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
 
-	downloadDeleted(entityName: EntityName, ids: UUID[]): Observable<UUID>;
+	downloadDeleted(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
 
 }
 

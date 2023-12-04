@@ -61,7 +61,7 @@ export class BookmarkEntityCreateEffects {
 		() => this.actions$.pipe(
 
 			ofType(bmActions.createSuccess),
-			map(({ bookmark }) => bmActions.loadOneBookmark({ id: bookmark.id }))
+			map(({ bookmark }) => bmActions.loadOne({ id: bookmark.id }))
 
 		)
 

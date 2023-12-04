@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BookmarkSyncService, Click, CloudTaskType } from '@lib';
+import { BookmarkSyncService, Click, SyncTaskType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BOOKMARK_SYNC_SERVICE } from 'app/app.config';
@@ -9,7 +9,7 @@ import { cloudTaskAction } from 'store/actions/cloud.actions';
 import { selCoreIsFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
 
 @Injectable()
-export class CloudBookmarkEffects {
+export class BookmarkSyncClicksEffects {
 
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
@@ -26,8 +26,8 @@ export class CloudBookmarkEffects {
 
 				switch (task.type) {
 
-					case CloudTaskType.clicked:
-						return this.syncService.uploadClicks(task.entities as Click[]);
+					// case CloudTaskType.clicked:
+					// 	return this.syncService.uploadClicks(task.entities as Click[]);
 
 					default:
 						return EMPTY;

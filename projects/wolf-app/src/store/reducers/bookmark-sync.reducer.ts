@@ -37,35 +37,45 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(bmActions.uploadSuccess, (state, { remoteMetadata }): BookmarkSyncState => {
+	// on(bmActions.uploadSuccess, (state, { remoteMetadata }): BookmarkSyncState => {
+
+	// 	return produce(
+	// 		state,
+	// 		draft => {
+	// 			draft.syncData[remoteMetadata.id] = { ...remoteMetadata, updated: false, deleted: false, error: null };
+	// 			draft.remoteMetadata[remoteMetadata.id] = remoteMetadata;
+	// 		}
+	// 	);
+
+	// }),
+	on(bmActions.syncLocalDeletedSuccess, (state, { item }): BookmarkSyncState => {
 
 		return produce(
 			state,
 			draft => {
-				draft.syncData[remoteMetadata.id] = { ...remoteMetadata, updated: false, deleted: false, error: null };
-				draft.remoteMetadata[remoteMetadata.id] = remoteMetadata;
+				delete draft.syncData[item.id];
+				delete draft.remoteMetadata[item.id];
 			}
 		);
 
 	}),
-	on(bmActions.downloadDeletedSuccess, (state, { id }): BookmarkSyncState => {
+	on(bmActions.syncRemoteDeletedSuccess, (state, { item }): BookmarkSyncState => {
 
 		return produce(
 			state,
 			draft => {
-				delete draft.syncData[id];
-				delete draft.remoteMetadata[id];
+				delete draft.syncData[item.id];
+				delete draft.remoteMetadata[item.id];
 			}
 		);
 
 	}),
-	on(bmActions.syncLocalDeletedSuccess, (state, { id }): BookmarkSyncState => {
+	on(bmActions.syncDeletedDeletedSuccess, (state, { item }): BookmarkSyncState => {
 
 		return produce(
 			state,
 			draft => {
-				delete draft.syncData[id];
-				delete draft.remoteMetadata[id];
+				delete draft.syncData[item.id];
 			}
 		);
 

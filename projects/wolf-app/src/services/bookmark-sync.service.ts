@@ -20,7 +20,7 @@ export class BookmarkSyncServiceImpl implements BookmarkSyncService {
 
 					switchMap(() =>
 
-						// then download all clicks
+						// download all clicks
 						this.remoteRepository.bookmarks.downloadClicks().pipe(
 
 							// save all downloaded clicks

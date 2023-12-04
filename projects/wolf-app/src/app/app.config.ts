@@ -7,7 +7,7 @@ import { BookmarkSyncService, SyncService } from 'lib/services/sync-service.inte
 import { CustomErrorHandler, DexieLocalRepositoryServiceImpl, FirestoreRemoteRepositoryServiceImpl } from 'services';
 import { BookmarkSyncServiceImpl } from 'services/bookmark-sync.service';
 import { SyncServiceImpl } from 'services/sync.service';
-import { loadAllBookmarks, loadAllClicks, loadAllRemoteMetadata, loadAllSyncData, loadTrashCount } from 'store/actions/bookmark.actions';
+import { loadAll, loadAllClicks, loadAllRemoteMetadata, loadAllSyncData, loadTrashCount } from 'store/actions/bookmark.actions';
 
 export const routes: Routes = [
 
@@ -42,7 +42,7 @@ const appInitializerFactory = (store: Store) => {
 
 	return () => {
 
-		store.dispatch(loadAllBookmarks());
+		store.dispatch(loadAll());
 		store.dispatch(loadAllClicks());
 		store.dispatch(loadAllSyncData());
 		store.dispatch(loadAllRemoteMetadata());

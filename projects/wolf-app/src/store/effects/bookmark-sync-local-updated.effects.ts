@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Bookmark, SyncService, WolfEntity } from '@lib';
+import { SyncService, WolfEntity } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
@@ -23,10 +23,32 @@ export class BookmarkSyncLocalUpdatedEffects {
 			switchMap(([, entities]) =>
 
 				this.syncService.uploadUpdated(WolfEntity.bookmark, entities).pipe(
-					map(remoteMetadata => bmActions.uploadSuccess({ remoteMetadata }))
+					map(item => bmActions.syncLocalUpdatedSuccess({ item }))
 				)
 
 			)
+
+		)
+
+	);
+
+	loadOneSyncData$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bmActions.syncLocalUpdatedSuccess),
+			map(({ item }) => bmActions.loadOneSyncData({ id: item.id }))
+
+		)
+
+	);
+
+	loadOneRemoteMetadata$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bmActions.syncLocalUpdatedSuccess),
+			map(({ item }) => bmActions.loadOneRemoteMetadata({ id: item.id }))
 
 		)
 

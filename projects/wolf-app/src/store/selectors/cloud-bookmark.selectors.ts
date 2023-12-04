@@ -1,4 +1,4 @@
-import { Bookmark, CloudTask, CloudTaskType, Entity, SyncData, UUID, WolfEntity, createCloudTask } from '@lib';
+import { Bookmark, CloudTask, SyncTaskType, Entity, RemoteMetadata, SyncData, UUID, WolfEntity, NameBase, toCloudTask } from '@lib';
 import { createSelector } from "@ngrx/store";
 import { selBookmarkArray, selBookmarkClicked } from "./bookmark-entities.selectors";
 import { selBookmarkRemoteMetadataArray, selBookmarkRemoteMetadataMap, selBookmarkSyncDataArray, selBookmarkSyncDataMap } from "./bookmark-sync.selectors";
@@ -7,7 +7,7 @@ export const selBookmarkLocalNew = createSelector(
 
 	selBookmarkArray,
 	selBookmarkSyncDataMap,
-	(localEntities, syncDataMap): Bookmark[] => localEntities.filter(entity => !syncDataMap[entity.id])
+	(bookmarks, syncDataMap): NameBase[] => bookmarks.filter(entity => !syncDataMap[entity.id])
 
 );
 
@@ -27,7 +27,7 @@ export const selBookmarkLocalUpdated = createSelector(
 
 	selBookmarkArray,
 	selBookmarkSyncDataLocalUpdatedIds,
-	(bookmarks, ids): Bookmark[] => bookmarks.filter(
+	(bookmarks, ids): NameBase[] => bookmarks.filter(
 
 		e => ids.includes(e.id)
 
@@ -51,7 +51,7 @@ export const selBookmarkLocalDeleted = createSelector(
 
 	selBookmarkArray,
 	selBookmarkSyncDataLocalDeletedIds,
-	(bookmarks, ids): Bookmark[] => bookmarks.filter(
+	(bookmarks, ids): NameBase[] => bookmarks.filter(
 
 		e => ids.includes(e.id)
 
@@ -63,7 +63,7 @@ export const selBookmarkRemoteNew = createSelector(
 
 	selBookmarkRemoteMetadataArray,
 	selBookmarkSyncDataMap,
-	(remote, local): Entity[] => remote.filter(r => !local[r.id])
+	(remote, local): NameBase[] => remote.filter(r => !local[r.id])
 
 );
 
@@ -71,7 +71,7 @@ export const selBookmarkRemoteUpdated = createSelector(
 
 	selBookmarkRemoteMetadataArray,
 	selBookmarkSyncDataMap,
-	(remote, local): Entity[] => remote.filter(
+	(remote, local): NameBase[] => remote.filter(
 
 		r => local[r.id] && !local[r.id].deleted && !local[r.id].updated && local[r.id].updateTime !== r.updateTime
 
@@ -83,7 +83,7 @@ export const selBookmarkRemoteDeleted = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(local, remote): Entity[] => local.filter(
+	(local, remote): NameBase[] => local.filter(
 
 		sd => !sd.updated && !sd.deleted && !remote[sd.id]
 
@@ -95,7 +95,7 @@ export const selBookmarkLocalUpdatedRemoteUpdated = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(local, remote): Entity[] => local.filter(
+	(local, remote): NameBase[] => local.filter(
 
 		sd => !sd.deleted && sd.updated && remote[sd.id] && remote[sd.id].updateTime !== sd.updateTime
 
@@ -107,7 +107,7 @@ export const selBookmarkLocalDeletedRemoteDeleted = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(local, remote): Entity[] => local.filter(
+	(syncData, remote): NameBase[] => syncData.filter(
 
 		sd => sd.deleted && !remote[sd.id]
 
@@ -119,7 +119,7 @@ export const selBookmarkLocalUpdatedRemoteDeleted = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(local, remote): Entity[] => local.filter(
+	(local, remote): NameBase[] => local.filter(
 
 		sd => sd.updated && !remote[sd.id]
 
@@ -131,7 +131,7 @@ export const selBookmarkLocalDeletedRemoteUpdated = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(local, remote): Entity[] => local.filter(
+	(local, remote): NameBase[] => local.filter(
 
 		sd => sd.deleted && remote[sd.id] && remote[sd.id].updateTime !== sd.updateTime
 
@@ -163,28 +163,28 @@ export const selBookmarkNonConflictCloudTasks = createSelector(
 		const tasks: CloudTask[] = [];
 
 		if (localNew.length > 0)
-			tasks.push(createCloudTask(localNew, WolfEntity.bookmark, CloudTaskType.local_new));
+			tasks.push(toCloudTask(localNew, WolfEntity.bookmark, SyncTaskType.local_new));
 
 		if (localUpdated.length > 0)
-			tasks.push(createCloudTask(localUpdated, WolfEntity.bookmark, CloudTaskType.local_updated));
+			tasks.push(toCloudTask(localUpdated, WolfEntity.bookmark, SyncTaskType.local_updated));
 
 		if (localDeleted.length > 0)
-			tasks.push(createCloudTask(localDeleted, WolfEntity.bookmark, CloudTaskType.local_deleted));
+			tasks.push(toCloudTask(localDeleted, WolfEntity.bookmark, SyncTaskType.local_deleted));
 
 		if (remoteNew.length > 0)
-			tasks.push(createCloudTask(remoteNew, WolfEntity.bookmark, CloudTaskType.remote_new));
+			tasks.push(toCloudTask(remoteNew, WolfEntity.bookmark, SyncTaskType.remote_new));
 
 		if (remoteUpdated.length > 0)
-			tasks.push(createCloudTask(remoteUpdated, WolfEntity.bookmark, CloudTaskType.remote_updated));
+			tasks.push(toCloudTask(remoteUpdated, WolfEntity.bookmark, SyncTaskType.remote_updated));
 
 		if (remoteDeleted.length > 0)
-			tasks.push(createCloudTask(remoteDeleted, WolfEntity.bookmark, CloudTaskType.remote_deleted));
+			tasks.push(toCloudTask(remoteDeleted, WolfEntity.bookmark, SyncTaskType.remote_deleted));
 
 		if (localDeletedRemoteDeleted.length > 0)
-			tasks.push(createCloudTask(localDeletedRemoteDeleted, WolfEntity.bookmark, CloudTaskType.deleted_deleted));
+			tasks.push(toCloudTask(localDeletedRemoteDeleted, WolfEntity.bookmark, SyncTaskType.deleted_deleted));
 
 		if (clicked.length > 0)
-			tasks.push(createCloudTask(clicked, WolfEntity.bookmark, CloudTaskType.clicked));
+			tasks.push(toCloudTask(clicked, WolfEntity.bookmark, SyncTaskType.clicked));
 
 		return tasks;
 
@@ -206,13 +206,13 @@ export const selBookmarkConflictCloudTasks = createSelector(
 		const tasks: CloudTask[] = [];
 
 		if (localUpdatedRemoteUpdated.length > 0)
-			tasks.push(createCloudTask(localUpdatedRemoteUpdated, WolfEntity.bookmark, CloudTaskType.updated_updated));
+			tasks.push(toCloudTask(localUpdatedRemoteUpdated, WolfEntity.bookmark, SyncTaskType.updated_updated));
 
 		if (localUpdatedRemoteDeleted.length > 0)
-			tasks.push(createCloudTask(localUpdatedRemoteDeleted, WolfEntity.bookmark, CloudTaskType.updated_deleted));
+			tasks.push(toCloudTask(localUpdatedRemoteDeleted, WolfEntity.bookmark, SyncTaskType.updated_deleted));
 
 		if (localDeletedRemoteUpdated.length > 0)
-			tasks.push(createCloudTask(localDeletedRemoteUpdated, WolfEntity.bookmark, CloudTaskType.deleted_updated));
+			tasks.push(toCloudTask(localDeletedRemoteUpdated, WolfEntity.bookmark, SyncTaskType.deleted_updated));
 
 		return tasks;
 

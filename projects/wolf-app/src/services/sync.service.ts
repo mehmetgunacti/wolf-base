@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { Entity, EntityName, LocalRepositoryService, RemoteData, RemoteMetadata, SyncData, SyncService, UUID } from '@lib';
+import { Entity, EntityName, LocalRepositoryService, NameBase, RemoteData, RemoteMetadata, SyncData, SyncService } from '@lib';
 import { LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE } from 'app/app.config';
 import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
 import { Observable, concatMap, filter, from, iif, map, of, switchMap } from 'rxjs';
@@ -30,18 +30,18 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadNew<T extends Entity>(entityName: EntityName, entities: T[]): Observable<RemoteMetadata> {
+	uploadNew(entityName: EntityName, items: NameBase[]): Observable<NameBase> {
 
-		return from(entities).pipe(
+		return from(items).pipe(
 
 			// for each incoming id
-			concatMap(entity =>
+			concatMap(item =>
 
 				// read entity from local storage
-				from(this.localRepository.getRepository(entityName).getEntity(entity.id)).pipe(
+				from(this.localRepository.getRepository(entityName).getEntity(item.id)).pipe(
 
 					// check if entity exists
-					filter((entity): entity is T => entity !== null),
+					filter((entity): entity is Entity => entity !== null),
 
 					// upload entity
 					switchMap(entity => this.uploadAndStore(entityName, entity))
@@ -54,18 +54,18 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadUpdated<T extends Entity>(entityName: EntityName, entities: T[]): Observable<RemoteMetadata> {
+	uploadUpdated(entityName: EntityName, items: NameBase[]): Observable<RemoteMetadata> {
 
-		return from(entities).pipe(
+		return from(items).pipe(
 
 			// for each incoming entity
-			concatMap(entity =>
+			concatMap(item =>
 
 				// read entity from local storage
-				from(this.localRepository.getRepository(entityName).getEntity(entity.id)).pipe(
+				from(this.localRepository.getRepository(entityName).getEntity(item.id)).pipe(
 
 					// if entity does not exist, skip
-					filter((entity): entity is T => entity !== null),
+					filter((entity): entity is Entity => entity !== null),
 
 					switchMap(entity =>
 
@@ -119,7 +119,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	private uploadAndStore<T extends Entity>(entityName: EntityName, entity: T): Observable<RemoteMetadata> {
+	private uploadAndStore(entityName: EntityName, entity: Entity): Observable<RemoteMetadata> {
 
 		return this.remoteRepository.getRepository(entityName).upload(entity).pipe(
 
@@ -136,18 +136,18 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadDeleted<T extends Entity>(entityName: EntityName, entities: T[]): Observable<UUID> {
+	uploadDeleted(entityName: EntityName, items: NameBase[]): Observable<NameBase> {
 
-		return from(entities).pipe(
+		return from(items).pipe(
 
 			// for each id
-			concatMap(entity =>
+			concatMap(item =>
 
 				// download entity
-				this.remoteRepository.getRepository(entityName).download(entity.id).pipe(
+				this.remoteRepository.getRepository(entityName).download(item.id).pipe(
 
 					// check if entity exist on server
-					filter((remoteData): remoteData is RemoteData<T> => remoteData !== null),
+					filter((remoteData): remoteData is RemoteData<Entity> => remoteData !== null),
 
 					switchMap(remoteData =>
 
@@ -157,13 +157,13 @@ export class SyncServiceImpl implements SyncService {
 							switchMap(() =>
 
 								// delete from collection
-								this.remoteRepository.getRepository(entityName).delete(entity.id).pipe(
+								this.remoteRepository.getRepository(entityName).delete(item.id).pipe(
 
 									// delete local metadata
 									switchMap(() =>
 
-										from(this.localRepository.getRepository(entityName).remove(entity.id)).pipe(
-											map(() => entity.id)
+										from(this.localRepository.getRepository(entityName).remove(item.id)).pipe(
+											map(() => item)
 										)
 
 									)
@@ -184,33 +184,39 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	downloadNew<T extends Entity>(entityName: EntityName, ids: UUID[]): Observable<RemoteData<T>> {
+	downloadNew(entityName: EntityName, items: NameBase[]): Observable<NameBase> {
 
-		return this.downloadAndStore(entityName, ids);
-
-	}
-
-	downloadUpdated<T extends Entity>(entityName: EntityName, ids: UUID[]): Observable<RemoteData<T>> {
-
-		return this.downloadAndStore(entityName, ids);
+		return this.downloadAndStore(entityName, items);
 
 	}
 
-	private downloadAndStore<T extends Entity>(entityName: EntityName, ids: UUID[]): Observable<RemoteData<T>> {
+	downloadUpdated(entityName: EntityName, items: NameBase[]): Observable<NameBase> {
 
-		return from(ids).pipe(
+		return this.downloadAndStore(entityName, items);
+
+	}
+
+	private downloadAndStore(entityName: EntityName, items: NameBase[]): Observable<NameBase> {
+
+		return from(items).pipe(
 
 			// for each id
-			concatMap(id =>
+			concatMap(item =>
 
 				// download entity
-				this.remoteRepository.getRepository(entityName).download(id).pipe(
+				this.remoteRepository.getRepository(entityName).download(item.id).pipe(
 
 					// check if entity exist on server
-					filter((remoteData): remoteData is RemoteData<T> => remoteData !== null),
+					filter((remoteData): remoteData is RemoteData<Entity> => remoteData !== null),
 
-					// store all returned RemoteData
-					switchMap(remoteData => from(this.localRepository.getRepository<T>(entityName).storeDownloadedEntity(remoteData)))
+					switchMap(remoteData =>
+
+						// store all returned RemoteData
+						from(this.localRepository.getRepository(entityName).storeDownloadedEntity(remoteData)).pipe(
+							map(() => item)
+						)
+
+					)
 
 				)
 
@@ -220,15 +226,17 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	downloadDeleted(entityName: EntityName, ids: UUID[]): Observable<UUID> {
+	downloadDeleted(entityName: EntityName, items: NameBase[]): Observable<NameBase> {
 
-		return from(ids).pipe(
+		return from(items).pipe(
 
 			// for each id
-			concatMap(id =>
+			concatMap(item =>
 
 				// delete entity locally
-				from(this.localRepository.getRepository(entityName).remove(id))
+				from(this.localRepository.getRepository(entityName).remove(item.id)).pipe(
+					map(() => item)
+				)
 
 			)
 

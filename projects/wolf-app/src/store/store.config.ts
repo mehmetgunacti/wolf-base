@@ -10,7 +10,6 @@ import { BookmarkSyncRemoteDeletedEffects } from './effects/bookmark-sync-remote
 import { BookmarkSyncRemoteNewEffects } from './effects/bookmark-sync-remote-new.effects';
 import { BookmarkSyncRemoteUpdatedEffects } from './effects/bookmark-sync-remote-updated.effects';
 import { BookmarkUIEffects } from './effects/bookmark-ui.effects';
-import { CloudBookmarkEffects } from './effects/cloud-bookmark.effects';
 import { CloudEffects } from './effects/cloud.effects';
 import { CoreEntityEffects } from './effects/core-entity.effects';
 import { CoreNavigationEffects } from './effects/core-navigation.effects';
@@ -29,6 +28,7 @@ import { databaseReducer } from './reducers/database.reducer';
 import { knowledgeBaseReducer } from './reducers/knowledge-base.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { AppState } from './states/app.state';
+import { BookmarkSyncClicksEffects } from './effects/bookmark-sync-clicks.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -66,6 +66,8 @@ export const effects = [
 	BookmarkSyncRemoteUpdatedEffects,
 	BookmarkSyncRemoteDeletedEffects,
 
+	BookmarkSyncClicksEffects,
+
 	BookmarkEntityCreateEffects,
 	BookmarkEntityUpdateEffects,
 	BookmarkEntityMoveToTrashEffects,
@@ -81,7 +83,6 @@ export const effects = [
 
 	// Cloud
 	CloudEffects,
-	CloudBookmarkEffects,
 
 	// Settings
 	SettingsEffects,

@@ -1,7 +1,7 @@
 import { EntityName } from "lib/constants";
-import { Entity } from './entity.model';
+import { NameBase } from './id-base.model';
 
-export enum CloudTaskType {
+export enum SyncTaskType {
 
 	local_new = 'local_new',
 	local_updated = 'local_updated',
@@ -22,14 +22,14 @@ export enum CloudTaskType {
 
 export interface CloudTask {
 
-	entities: Entity[],
+	items: NameBase[];
 	entity: EntityName;
-	type: CloudTaskType;
+	type: SyncTaskType;
 
 }
 
-export function createCloudTask(entities: Entity[], entity: EntityName, type: CloudTaskType): CloudTask {
+export function toCloudTask(items: NameBase[], entity: EntityName, type: SyncTaskType): CloudTask {
 
-	return { entities, entity, type };
+	return { items, entity, type };
 
 }

@@ -1,25 +1,25 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { CloudTask, CloudTaskType, WolfEntity } from 'lib';
+import { CloudTask, SyncTaskType, WolfEntity } from 'lib';
 
-function toAction(type: CloudTaskType): 'upload' | 'download' | 'view' {
+function toAction(type: SyncTaskType): 'upload' | 'download' | 'view' {
 
 	switch (type) {
 
-		case CloudTaskType.local_new:
-		case CloudTaskType.local_updated:
-		case CloudTaskType.local_deleted:
-		case CloudTaskType.clicked:
+		case SyncTaskType.local_new:
+		case SyncTaskType.local_updated:
+		case SyncTaskType.local_deleted:
+		case SyncTaskType.clicked:
 			return 'upload';
 
-		case CloudTaskType.remote_new:
-		case CloudTaskType.remote_updated:
-		case CloudTaskType.remote_deleted:
-		case CloudTaskType.deleted_deleted:
+		case SyncTaskType.remote_new:
+		case SyncTaskType.remote_updated:
+		case SyncTaskType.remote_deleted:
+		case SyncTaskType.deleted_deleted:
 			return 'download';
 
-		case CloudTaskType.updated_updated:
-		case CloudTaskType.updated_deleted:
-		case CloudTaskType.deleted_updated:
+		case SyncTaskType.updated_updated:
+		case SyncTaskType.updated_deleted:
+		case SyncTaskType.deleted_updated:
 			return 'view';
 
 	}
@@ -35,7 +35,7 @@ function toAction(type: CloudTaskType): 'upload' | 'download' | 'view' {
 export class CloudTaskComponent {
 
 	WolfEntity = WolfEntity;
-	CloudTaskType = CloudTaskType;
+	CloudTaskType = SyncTaskType;
 	task!: CloudTask;
 	actionType!: 'upload' | 'download' | 'view';
 

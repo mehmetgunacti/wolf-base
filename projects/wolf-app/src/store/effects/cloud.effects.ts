@@ -6,7 +6,7 @@ import { cloudTaskAction, deleteSuccess, downloadRemoteDataSuccess, downloadRemo
 import { Store } from '@ngrx/store';
 import { selCoreIsFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
 import { SYNC_SERVICE } from 'app/app.config';
-import { CloudTaskType, Entity, SyncService } from '@lib';
+import { SyncTaskType, Entity, SyncService } from '@lib';
 import { EMPTY } from 'rxjs';
 
 @Injectable()
@@ -60,9 +60,9 @@ export class CloudEffects {
 					// case CloudTaskType.deleted_deleted:
 					// 	return this.syncService.downloadDeleted(task);
 
-					case CloudTaskType.updated_updated:
-					case CloudTaskType.updated_deleted:
-					case CloudTaskType.deleted_updated:
+					case SyncTaskType.updated_updated:
+					case SyncTaskType.updated_deleted:
+					case SyncTaskType.deleted_updated:
 						return EMPTY;
 
 				}

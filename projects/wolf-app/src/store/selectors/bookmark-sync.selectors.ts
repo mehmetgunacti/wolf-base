@@ -5,7 +5,7 @@ import { selBookmarkSyncState } from './bookmark.selectors';
 export const selBookmarkSyncDataArray = createSelector(
 
 	selBookmarkSyncState,
-	state => Object.values(state.syncData)
+	(state): SyncData[] => Object.values(state.syncData)
 
 );
 

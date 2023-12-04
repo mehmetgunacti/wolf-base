@@ -7,7 +7,7 @@ import { BookmarkEntitiesState, initialBookmarkEntitiesState } from 'store/state
 const reducer = createReducer(
 
 	initialBookmarkEntitiesState,
-	on(bmActions.loadOneBookmarkSuccess, (state, { bookmark }): BookmarkEntitiesState => {
+	on(bmActions.loadOneSuccess, (state, { bookmark }): BookmarkEntitiesState => {
 
 		return produce(
 			state,
@@ -16,7 +16,7 @@ const reducer = createReducer(
 
 	}),
 	on(
-		bmActions.loadAllBookmarksSuccess, (state, { bookmarks }): BookmarkEntitiesState => ({
+		bmActions.loadAllSuccess, (state, { bookmarks }): BookmarkEntitiesState => ({
 			...state,
 			entities: bookmarks.reduce((record, bookmark) => { record[bookmark.id] = bookmark; return record; }, {} as Record<UUID, Bookmark>)
 		})
@@ -35,12 +35,12 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(bmActions.downloadDeletedSuccess, (state, { id }): BookmarkEntitiesState => {
+	on(bmActions.syncRemoteDeletedSuccess, (state, { item }): BookmarkEntitiesState => {
 
 		return produce(
 			state,
 			draft => {
-				delete draft.entities[id];
+				delete draft.entities[item.id];
 			}
 		);
 

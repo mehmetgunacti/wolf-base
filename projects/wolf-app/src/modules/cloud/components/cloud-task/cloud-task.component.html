@@ -37,17 +37,17 @@
 
 		<ng-container [ngSwitch]="task.type">
 
-			<ng-container *ngSwitchCase="CloudTaskType.local_new">{{ task.entities.length }} {{ task.entities.length > 1 ? 'items' : 'item' }} created</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.local_updated">{{ task.entities.length }} {{ task.entities.length > 1 ? 'items' : 'item' }} updated</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.local_deleted">{{ task.entities.length }} {{ task.entities.length > 1 ? 'items' : 'item' }} deleted</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.clicked">{{ task.entities.length }} {{ task.entities.length > 1 ? 'bookmarks' : 'bookmark' }} clicked</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.remote_new">{{ task.entities.length }} new {{ task.entities.length > 1 ? 'items' : 'item' }} on server</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.remote_updated">{{ task.entities.length }} updated {{ task.entities.length > 1 ? 'items' : 'item' }} on server</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.remote_deleted">{{ task.entities.length }} deleted {{ task.entities.length > 1 ? 'items' : 'item' }} on server</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.updated_updated">Conflict: {{ task.entities.length }} updated {{ task.entities.length > 1 ? 'items' : 'item' }} locally and on server</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.deleted_deleted">{{ task.entities.length }} deleted {{ task.entities.length > 1 ? 'items' : 'item' }} locally and on server </ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.updated_deleted">Conflict: {{ task.entities.length }} {{ task.entities.length > 1 ? 'items' : 'item' }} updated locally, deleted on server</ng-container>
-			<ng-container *ngSwitchCase="CloudTaskType.deleted_updated">Conflict: {{ task.entities.length }} {{ task.entities.length > 1 ? 'items' : 'item' }} deleted locally, updated on server</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.local_new">{{ task.items.length }} {{ task.items.length > 1 ? 'items' : 'item' }} created</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.local_updated">{{ task.items.length }} {{ task.items.length > 1 ? 'items' : 'item' }} updated</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.local_deleted">{{ task.items.length }} {{ task.items.length > 1 ? 'items' : 'item' }} deleted</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.clicked">{{ task.items.length }} {{ task.items.length > 1 ? 'bookmarks' : 'bookmark' }} clicked</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.remote_new">{{ task.items.length }} new {{ task.items.length > 1 ? 'items' : 'item' }} on server</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.remote_updated">{{ task.items.length }} updated {{ task.items.length > 1 ? 'items' : 'item' }} on server</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.remote_deleted">{{ task.items.length }} deleted {{ task.items.length > 1 ? 'items' : 'item' }} on server</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.updated_updated">Conflict: {{ task.items.length }} updated {{ task.items.length > 1 ? 'items' : 'item' }} locally and on server</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.deleted_deleted">{{ task.items.length }} deleted {{ task.items.length > 1 ? 'items' : 'item' }} locally and on server </ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.updated_deleted">Conflict: {{ task.items.length }} {{ task.items.length > 1 ? 'items' : 'item' }} updated locally, deleted on server</ng-container>
+			<ng-container *ngSwitchCase="CloudTaskType.deleted_updated">Conflict: {{ task.items.length }} {{ task.items.length > 1 ? 'items' : 'item' }} deleted locally, updated on server</ng-container>
 
 		</ng-container>
 

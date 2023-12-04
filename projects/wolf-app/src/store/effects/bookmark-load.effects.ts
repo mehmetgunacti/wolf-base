@@ -17,11 +17,11 @@ export class BookmarkLoadEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.loadOneBookmark),
+			ofType(bmActions.loadOne),
 			switchMap(({ id }) =>
 
 				from(this.localRepository.bookmarks.getEntity(id)).pipe(
-					map(bookmark => bookmark ? bmActions.loadOneBookmarkSuccess({ bookmark }) : bmActions.loadOneBookmarkFailure({ id }))
+					map(bookmark => bookmark ? bmActions.loadOneSuccess({ bookmark }) : bmActions.loadOneFailure({ id }))
 				)
 
 			),
@@ -34,9 +34,9 @@ export class BookmarkLoadEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.loadAllBookmarks),
+			ofType(bmActions.loadAll),
 			switchMap(() => this.localRepository.bookmarks.list()),
-			map(bookmarks => bmActions.loadAllBookmarksSuccess({ bookmarks }))
+			map(bookmarks => bmActions.loadAllSuccess({ bookmarks }))
 
 		)
 
