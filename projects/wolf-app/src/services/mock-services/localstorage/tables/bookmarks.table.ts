@@ -161,15 +161,7 @@ export class MockBookmarksLocalRepositoryImpl implements BookmarksLocalRepositor
 
 	}
 
-	async bulkRemove(ids: UUID[]): Promise<number> {
-
-		for (const id of ids)
-			await this.remove(id);
-		return ids.length;
-
-	}
-
-	async remove(id: string): Promise<number> {
+	async remove(id: string): Promise<UUID> {
 
 		await sleep(SLEEP);
 		const item = this.bookmarks.get(id);
@@ -178,7 +170,7 @@ export class MockBookmarksLocalRepositoryImpl implements BookmarksLocalRepositor
 		this.bookmarks.delete(id);
 		this.bookmarks_sync.delete(id);
 		this.bookmarks_remote.delete(id);
-		return 1;
+		return id;
 
 	}
 
@@ -222,7 +214,11 @@ export class MockBookmarksLocalRepositoryImpl implements BookmarksLocalRepositor
 
 	}
 
-	async storeRemoteData(items: RemoteData<Bookmark>[]): Promise<number> {
+	async storeDownloadedEntity(data: RemoteData<Bookmark>): Promise<RemoteData<Bookmark>> {
+		throw new Error('Method not implemented.');
+	}
+
+	async storeDownloadedEntities(items: RemoteData<Bookmark>[]): Promise<number> {
 
 		await sleep(SLEEP);
 		items.forEach(item => this.put(item));

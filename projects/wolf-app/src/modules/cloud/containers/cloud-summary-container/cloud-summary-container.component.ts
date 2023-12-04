@@ -18,14 +18,14 @@ function getAction(task: CloudTask): Action | null {
 		case CloudTaskType.local_deleted:
 			return bmActions.syncLocalDeleted();
 
-		// case CloudTaskType.remote_new:
-		// 	return this.syncService.downloadNew(task);
+		case CloudTaskType.remote_new:
+			return bmActions.syncRemoteNew();
 
-		// case CloudTaskType.remote_updated:
-		// 	return this.syncService.downloadUpdated(task);
+		case CloudTaskType.remote_updated:
+			return bmActions.syncRemoteUpdated();
 
-		// case CloudTaskType.remote_deleted:
-		// 	return this.syncService.downloadDeleted(task);
+		case CloudTaskType.remote_deleted:
+			return bmActions.syncRemoteDeleted();
 
 		// case CloudTaskType.deleted_deleted:
 		// 	return this.syncService.downloadDeleted(task);

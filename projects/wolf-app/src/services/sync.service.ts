@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
-import { Bookmark, CloudTask, Entity, EntityName, LocalRepositoryService, RemoteData, RemoteMetadata, SyncData, SyncService, UUID, WolfEntity } from '@lib';
+import { Entity, EntityName, LocalRepositoryService, RemoteData, RemoteMetadata, SyncData, SyncService, UUID } from '@lib';
 import { LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE } from 'app/app.config';
 import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
-import { EMPTY, Observable, concatMap, filter, from, iif, map, of, switchMap, toArray } from 'rxjs';
+import { Observable, concatMap, filter, from, iif, map, of, switchMap } from 'rxjs';
 
 export class SyncServiceImpl implements SyncService {
 
@@ -30,7 +30,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadNew(entityName: EntityName, entities: Entity[]): Observable<RemoteMetadata> {
+	uploadNew<T extends Entity>(entityName: EntityName, entities: T[]): Observable<RemoteMetadata> {
 
 		return from(entities).pipe(
 
@@ -41,7 +41,7 @@ export class SyncServiceImpl implements SyncService {
 				from(this.localRepository.getRepository(entityName).getEntity(entity.id)).pipe(
 
 					// check if entity exists
-					filter((bookmark): bookmark is Bookmark => bookmark !== null),
+					filter((entity): entity is T => entity !== null),
 
 					// upload entity
 					switchMap(entity => this.uploadAndStore(entityName, entity))
@@ -54,7 +54,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadUpdated(entityName: EntityName, entities: Entity[]): Observable<RemoteMetadata> {
+	uploadUpdated<T extends Entity>(entityName: EntityName, entities: T[]): Observable<RemoteMetadata> {
 
 		return from(entities).pipe(
 
@@ -65,9 +65,9 @@ export class SyncServiceImpl implements SyncService {
 				from(this.localRepository.getRepository(entityName).getEntity(entity.id)).pipe(
 
 					// if entity does not exist, skip
-					filter((bookmark): bookmark is Bookmark => bookmark !== null),
+					filter((entity): entity is T => entity !== null),
 
-					switchMap(bookmark =>
+					switchMap(entity =>
 
 						// read syncData from local storage
 						from(this.localRepository.getRepository(entityName).getSyncData(entity.id)).pipe(
@@ -94,7 +94,7 @@ export class SyncServiceImpl implements SyncService {
 											() => syncData.updateTime === remoteMetadata.updateTime,
 
 											// upload entity
-											this.uploadAndStore(entityName, bookmark),
+											this.uploadAndStore(entityName, entity),
 
 											// save remoteMetadata if syncData - remoteMetadata checks fail
 											from(this.localRepository.getRepository(entityName).storeRemoteMetadata([remoteMetadata])).pipe(() => of(remoteMetadata))
@@ -119,7 +119,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	private uploadAndStore(entityName: EntityName, entity: Entity): Observable<RemoteMetadata> {
+	private uploadAndStore<T extends Entity>(entityName: EntityName, entity: T): Observable<RemoteMetadata> {
 
 		return this.remoteRepository.getRepository(entityName).upload(entity).pipe(
 
@@ -136,7 +136,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadDeleted(entityName: EntityName, entities: Entity[]): Observable<UUID> {
+	uploadDeleted<T extends Entity>(entityName: EntityName, entities: T[]): Observable<UUID> {
 
 		return from(entities).pipe(
 
@@ -147,7 +147,7 @@ export class SyncServiceImpl implements SyncService {
 				this.remoteRepository.getRepository(entityName).download(entity.id).pipe(
 
 					// check if entity exist on server
-					filter((remoteData): remoteData is RemoteData<Bookmark> => remoteData !== null),
+					filter((remoteData): remoteData is RemoteData<T> => remoteData !== null),
 
 					switchMap(remoteData =>
 
@@ -184,39 +184,55 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	downloadNew(task: CloudTask): Observable<number> {
+	downloadNew<T extends Entity>(entityName: EntityName, ids: UUID[]): Observable<RemoteData<T>> {
 
-		return this.downloadAndStore(task.entity, task.entities);
-
-	}
-
-	downloadUpdated(task: CloudTask): Observable<number> {
-
-		return this.downloadAndStore(task.entity, task.entities);
+		return this.downloadAndStore(entityName, ids);
 
 	}
 
-	private downloadAndStore(entityName: EntityName, entities: Entity[]): Observable<number> {
+	downloadUpdated<T extends Entity>(entityName: EntityName, ids: UUID[]): Observable<RemoteData<T>> {
 
-		// download remoteData
-		return this.remoteRepository.bookmarks.downloadMany(entities.map(e => e.id)).pipe(
+		return this.downloadAndStore(entityName, ids);
 
-			// store all returned RemoteData
-			switchMap(remoteData => from(this.localRepository.getRepository(entityName).storeRemoteData(remoteData)))
+	}
+
+	private downloadAndStore<T extends Entity>(entityName: EntityName, ids: UUID[]): Observable<RemoteData<T>> {
+
+		return from(ids).pipe(
+
+			// for each id
+			concatMap(id =>
+
+				// download entity
+				this.remoteRepository.getRepository(entityName).download(id).pipe(
+
+					// check if entity exist on server
+					filter((remoteData): remoteData is RemoteData<T> => remoteData !== null),
+
+					// store all returned RemoteData
+					switchMap(remoteData => from(this.localRepository.getRepository<T>(entityName).storeDownloadedEntity(remoteData)))
+
+				)
+
+			)
 
 		);
 
 	}
 
-	downloadDeleted(task: CloudTask): Observable<number> {
+	downloadDeleted(entityName: EntityName, ids: UUID[]): Observable<UUID> {
 
-		return from(this.localRepository.getRepository(task.entity).bulkRemove(task.entities.map(e => e.id)));
+		return from(ids).pipe(
 
-	}
+			// for each id
+			concatMap(id =>
 
-	deleteMetadata(task: CloudTask): Observable<number> {
+				// delete entity locally
+				from(this.localRepository.getRepository(entityName).remove(id))
 
-		return from(this.localRepository.getRepository(task.entity).bulkRemove(task.entities.map(e => e.id)));
+			)
+
+		);
 
 	}
 

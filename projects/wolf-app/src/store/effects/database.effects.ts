@@ -24,17 +24,17 @@ export class DatabaseEffects {
 
 	);
 
-	selectValues$ = createEffect(
+	// selectValues$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(loadValues),
-			switchMap(({ tablename }) => this.localRepository.dump(tablename)),
-			map(dump => Object.values(dump)),
-			map(selectedValues => loadValuesSuccess({ selectedValues }))
+	// 		ofType(loadValues),
+	// 		switchMap(({ tablename }) => this.localRepository.dump(tablename)),
+	// 		map(dump => Object.values(dump)),
+	// 		map(selectedValues => loadValuesSuccess({ selectedValues }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 }

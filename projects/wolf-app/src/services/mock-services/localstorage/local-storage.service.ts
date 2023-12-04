@@ -1,6 +1,6 @@
 import { Entity, EntityName, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, KBContentsLocalRepository, KBEntriesLocalRepository, LogsLocalRepository } from 'lib/repositories/local';
-import { MockBookmarksLocalRepositoryImpl, MockConfigurationLocalRepositoryImpl, MockKBContentsLocalRepositoryImpl, MockKBEntriesLocalRepositoryImpl, MockLogsLocalRepositoryImpl } from "./tables";
+import { MockBookmarksLocalRepositoryImpl, MockConfigurationLocalRepositoryImpl, MockKBContentsLocalRepositoryImpl, MockKBEntriesLocalRepositoryImpl, MockLogsLocalRepositoryImpl } from './tables';
 
 export class MockLocalRepositoryService implements LocalRepositoryService {
 
@@ -10,21 +10,14 @@ export class MockLocalRepositoryService implements LocalRepositoryService {
 	configuration: ConfigurationLocalRepository = new MockConfigurationLocalRepositoryImpl();
 	logs: LogsLocalRepository = new MockLogsLocalRepositoryImpl();
 
-	getRepository(entityName: EntityName): EntityLocalRepository<Entity> {
+	getRepository<T extends Entity>(entityName: EntityName): EntityLocalRepository<T> {
 
 		switch (entityName.name) {
 
-			case WolfEntity.bookmark.name: return this.bookmarks;
+			case WolfEntity.bookmark.name: return this.bookmarks as unknown as  EntityLocalRepository<T>;
 
 		}
-
 		throw Error('Unknown entity');
-
-	}
-
-	async dump(tablename: LocalRepositoryNames): Promise<Record<string, string>> {
-
-		return {};
 
 	}
 

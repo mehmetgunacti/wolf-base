@@ -14,8 +14,6 @@ export interface LocalRepositoryService {
 	configuration: ConfigurationLocalRepository;
 	logs: LogsLocalRepository;
 
-	getRepository(entityName: EntityName): EntityLocalRepository<Entity>;
-
-	dump(tablename: LocalRepositoryNames): Promise<Record<string, string>>;
+	getRepository<T extends Entity>(entityName: EntityName): EntityLocalRepository<T>;
 
 }

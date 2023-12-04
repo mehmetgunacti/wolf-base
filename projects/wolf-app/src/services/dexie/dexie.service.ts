@@ -1,4 +1,4 @@
-import { Entity, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
+import { Entity, EntityName, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, KBContentsLocalRepository, KBEntriesLocalRepository, LogsLocalRepository } from 'lib/repositories/local';
 import { DexieBookmarksRepositoryImpl, DexieConfigurationRepositoryImpl, DexieLogsLocalRepositoryImpl } from './tables';
 import { DexieKBContentsRepositoryImpl } from './tables/kb-contents.table';
@@ -27,18 +27,18 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 	}
 
-	getRepository(entity: WolfEntity): EntityLocalRepository<Entity> {
+	getRepository<T extends Entity>(entityName: EntityName): EntityLocalRepository<T> {
 
-		switch (entity) {
+		switch (entityName.name) {
 
-			case WolfEntity.bookmark: return this.bookmarks;
+			case WolfEntity.bookmark.name: return this.bookmarks as unknown as  EntityLocalRepository<T>;
 
 		}
 		throw Error('Unknown entity');
 
 	}
 
-	async dump(repositoryname: LocalRepositoryNames): Promise<Record<string, string>> {
+	private async dump(repositoryname: LocalRepositoryNames): Promise<Record<string, string>> {
 
 		const Repository = this.db.table(repositoryname);
 		const data = Repository.toCollection();

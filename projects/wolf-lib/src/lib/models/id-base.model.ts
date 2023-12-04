@@ -7,3 +7,9 @@ export interface IDBase {
 	id: UUID;
 
 }
+
+export interface NameBase extends IDBase {
+
+	name: string;
+
+}

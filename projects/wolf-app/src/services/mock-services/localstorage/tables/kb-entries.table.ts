@@ -128,6 +128,10 @@ export class MockKBEntriesLocalRepositoryImpl implements KBEntriesLocalRepositor
 
 	}
 
+	async storeDownloadedEntity(data: RemoteData<KBEntry>): Promise<RemoteData<KBEntry>> {
+		throw new Error('Method not implemented.');
+	}
+
 	async listUpdated(): Promise<SyncData[]> {
 
 		await sleep(SLEEP);
@@ -158,15 +162,7 @@ export class MockKBEntriesLocalRepositoryImpl implements KBEntriesLocalRepositor
 
 	}
 
-	async bulkRemove(ids: UUID[]): Promise<number> {
-
-		for (const id of ids)
-			await this.remove(id);
-		return ids.length;
-
-	}
-
-	async remove(id: string): Promise<number> {
+	async remove(id: UUID): Promise<UUID> {
 
 		await sleep(SLEEP);
 		const item = this.kbEntries.get(id);
@@ -175,7 +171,7 @@ export class MockKBEntriesLocalRepositoryImpl implements KBEntriesLocalRepositor
 		this.kbEntries.delete(id);
 		this.kbEntries_sync.delete(id);
 		this.kbEntries_remote.delete(id);
-		return 1;
+		return id;
 
 	}
 
@@ -210,7 +206,7 @@ export class MockKBEntriesLocalRepositoryImpl implements KBEntriesLocalRepositor
 
 	}
 
-	async storeRemoteData(items: RemoteData<KBEntry>[]): Promise<number> {
+	async storeDownloadedEntities(items: RemoteData<KBEntry>[]): Promise<number> {
 
 		await sleep(SLEEP);
 		items.forEach(item => this.put(item));

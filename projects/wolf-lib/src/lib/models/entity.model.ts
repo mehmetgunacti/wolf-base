@@ -1,12 +1,8 @@
-import { IDBase, ISODateString } from './id-base.model';
+import { ISODateString, NameBase } from './id-base.model';
 
-export interface Entity extends IDBase {
+export interface Entity extends NameBase { }
 
-	name: string;
-
-}
-
-export interface Metadata extends Entity {
+export interface Metadata extends NameBase {
 
 	createTime: ISODateString;
 	updateTime: ISODateString;

@@ -1,4 +1,4 @@
-import { CloudTask, CloudTaskType, Entity, WolfEntity, createCloudTask } from '@lib';
+import { Bookmark, CloudTask, CloudTaskType, Entity, SyncData, UUID, WolfEntity, createCloudTask } from '@lib';
 import { createSelector } from "@ngrx/store";
 import { selBookmarkArray, selBookmarkClicked } from "./bookmark-entities.selectors";
 import { selBookmarkRemoteMetadataArray, selBookmarkRemoteMetadataMap, selBookmarkSyncDataArray, selBookmarkSyncDataMap } from "./bookmark-sync.selectors";
@@ -7,29 +7,53 @@ export const selBookmarkLocalNew = createSelector(
 
 	selBookmarkArray,
 	selBookmarkSyncDataMap,
-	(localEntities, syncDataMap): Entity[] => localEntities.filter(entity => !syncDataMap[entity.id])
+	(localEntities, syncDataMap): Bookmark[] => localEntities.filter(entity => !syncDataMap[entity.id])
+
+);
+
+const selBookmarkSyncDataLocalUpdatedIds = createSelector(
+
+	selBookmarkSyncDataArray,
+	selBookmarkRemoteMetadataMap,
+	(syncData, remote): UUID[] => syncData.filter(
+
+		s => s.updated && !s.deleted && remote[s.id] && s.updateTime === remote[s.id].updateTime
+
+	).map(s => s.id)
 
 );
 
 export const selBookmarkLocalUpdated = createSelector(
 
-	selBookmarkSyncDataArray,
-	selBookmarkRemoteMetadataMap,
-	(syncData, remote): Entity[] => syncData.filter(
+	selBookmarkArray,
+	selBookmarkSyncDataLocalUpdatedIds,
+	(bookmarks, ids): Bookmark[] => bookmarks.filter(
 
-		s => s.updated && !s.deleted && remote[s.id] && s.updateTime === remote[s.id].updateTime
+		e => ids.includes(e.id)
 
 	)
 
 );
 
-export const selBookmarkLocalDeleted = createSelector(
+const selBookmarkSyncDataLocalDeletedIds = createSelector(
 
 	selBookmarkSyncDataArray,
 	selBookmarkRemoteMetadataMap,
-	(syncData, remote): Entity[] => syncData.filter(
+	(syncData, remote): UUID[] => syncData.filter(
 
 		s => s.deleted && remote[s.id] && s.updateTime === remote[s.id].updateTime
+
+	).map(s => s.id)
+
+);
+
+export const selBookmarkLocalDeleted = createSelector(
+
+	selBookmarkArray,
+	selBookmarkSyncDataLocalDeletedIds,
+	(bookmarks, ids): Bookmark[] => bookmarks.filter(
+
+		e => ids.includes(e.id)
 
 	)
 

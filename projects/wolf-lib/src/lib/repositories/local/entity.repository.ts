@@ -6,14 +6,14 @@ export interface EntityLocalRepository<T extends Entity> {
 	getEntity(id: UUID): Promise<T | null>;
 	getSyncData(id: UUID): Promise<SyncData | null>;
 
-	storeRemoteData(data: RemoteData<T>[]): Promise<number>;
+	storeDownloadedEntity(data: RemoteData<T>): Promise<RemoteData<T>>;
+	storeDownloadedEntities(data: RemoteData<T>[]): Promise<number>;
 
 	storeMetadata(data: Metadata): Promise<void>;
 
 	storeRemoteMetadata(data: RemoteMetadata[]): Promise<void>;
 
-	remove(id: UUID): Promise<number>;
-	bulkRemove(ids: UUID[]): Promise<number>;
+	remove(id: UUID): Promise<UUID>;
 
 	create(item: Partial<T>): Promise<T>;
 	update(id: UUID, item: Partial<T>): Promise<number>;

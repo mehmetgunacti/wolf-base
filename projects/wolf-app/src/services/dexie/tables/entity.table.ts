@@ -30,7 +30,24 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	}
 
-	async storeRemoteData(items: RemoteData<T>[]): Promise<number> {
+	async storeDownloadedEntity(item: RemoteData<T>): Promise<RemoteData<T>> {
+
+		await this.db.transaction('rw', [
+			this.tablename,
+			this.tablename + '_sync',
+			this.tablename + '_trash',
+			this.tablename + '_remote',
+			LocalRepositoryNames.logs
+		], async () => {
+
+			await this._put(item);
+
+		});
+		return item;
+
+	}
+
+	async storeDownloadedEntities(items: RemoteData<T>[]): Promise<number> {
 
 		await this.db.transaction('rw', [
 			this.tablename,
@@ -256,7 +273,7 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	}
 
-	async remove(id: string): Promise<number> {
+	async remove(id: string): Promise<UUID> {
 
 		await this.db.transaction('rw', [
 			this.tablename,
@@ -290,16 +307,7 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 			});
 
 		});
-		return 1;
-
-	}
-
-	async bulkRemove(ids: UUID[]): Promise<number> {
-
-		let counter = 0;
-		for (const id of ids)
-			counter += await this.remove(id);
-		return counter;
+		return id;
 
 	}
 

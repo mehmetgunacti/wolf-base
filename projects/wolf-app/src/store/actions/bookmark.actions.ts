@@ -1,4 +1,4 @@
-import { Bookmark, Click, Entity, OVERLAY_ID, RemoteMetadata, SyncData, UUID } from '@lib';
+import { Bookmark, Click, Entity, OVERLAY_ID, RemoteData, RemoteMetadata, SyncData, UUID } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 export const create							= createAction('[Bookmark] Create', props<{ bookmark: Partial<Bookmark> }>());
@@ -55,11 +55,15 @@ export const emptySelectedTags				= createAction('[Bookmark] Empty Selected Tags
 export const search							= createAction('[Bookmark] Search', props<{ term: string }>());
 
 // CLOUD SYNC
+export const uploadSuccess					= createAction('[Bookmark] Upload Success', props<{ remoteMetadata: RemoteMetadata }>());
+export const downloadSuccess				= createAction('[Bookmark] Download Success', props<{ remoteData: RemoteData<Bookmark> }>());
+
 export const syncLocalNew					= createAction('[Bookmark] Sync Local New');
-
 export const syncLocalUpdated				= createAction('[Bookmark] Sync Local Updated');
-
 export const syncLocalDeleted				= createAction('[Bookmark] Sync Local Deleted');
 export const syncLocalDeletedSuccess		= createAction('[Bookmark] Sync Local Deleted Success', props<{ id: UUID }>());
 
-export const uploadSuccess					= createAction('[Bookmark] Upload Success', props<{ remoteMetadata: RemoteMetadata }>());
+export const syncRemoteNew					= createAction('[Bookmark] Sync Remote New');
+export const syncRemoteUpdated				= createAction('[Bookmark] Sync Remote Updated');
+export const syncRemoteDeleted				= createAction('[Bookmark] Sync Remote Deleted');
+
