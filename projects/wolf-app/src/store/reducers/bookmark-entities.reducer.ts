@@ -27,7 +27,7 @@ const reducer = createReducer(
 			clicks: clicks.reduce((record, click) => { record[click.id] = click; return record; }, {} as Record<UUID, Click>)
 		})
 	),
-	on(bmActions.removeSuccess, (state, { id }): BookmarkEntitiesState => {
+	on(bmActions.moveToTrashSuccess, (state, { id }): BookmarkEntitiesState => {
 
 		return produce(
 			state,

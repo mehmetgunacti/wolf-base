@@ -45,7 +45,7 @@ export class BookmarkUIEffects {
 				bmActions.closeEditBookmarkDialog,
 				bmActions.createSuccess,
 				bmActions.updateSuccess,
-				bmActions.removeSuccess
+				bmActions.moveToTrashSuccess
 			),
 			withLatestFrom(this.store.select(selBookmarkOverlayId)),
 			map(([, id]) => id),

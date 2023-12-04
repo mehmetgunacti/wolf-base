@@ -8,22 +8,22 @@ import * as bmActions from 'store/actions/bookmark.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 
 @Injectable()
-export class BookmarkEntityRemoveEffects {
+export class BookmarkEntityMoveToTrashEffects {
 
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
-	remove$ = createEffect(
+	moveToTrash$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.remove),
+			ofType(bmActions.moveToTrash),
 			switchMap(({ id }) =>
 
 				from(
 					this.localRepository.bookmarks.moveToTrash(id)
 				).pipe(
-					map(() => bmActions.removeSuccess({ id }))
+					map(() => bmActions.moveToTrashSuccess({ id }))
 				)
 
 			)
@@ -36,8 +36,8 @@ export class BookmarkEntityRemoveEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.removeSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Bookmark removed' }))
+			ofType(bmActions.moveToTrashSuccess),
+			map(() => showNotification({ severity: 'success', detail: 'Bookmark moved to trash' }))
 
 		)
 
@@ -47,7 +47,7 @@ export class BookmarkEntityRemoveEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.removeSuccess),
+			ofType(bmActions.moveToTrashSuccess),
 			map(({ id }) => bmActions.loadOneSyncData({ id }))
 
 		)
