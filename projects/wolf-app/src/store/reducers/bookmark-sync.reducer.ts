@@ -37,6 +37,22 @@ const reducer = createReducer(
 		);
 
 	}),
+	on(bmActions.loadOneRemoteMetadataSuccess, (state, { remoteMetadata }): BookmarkSyncState => {
+
+		return produce(
+			state,
+			draft => { draft.remoteMetadata[remoteMetadata.id] = remoteMetadata }
+		);
+
+	}),
+	on(bmActions.loadOneRemoteMetadataFailure, (state, { id }): BookmarkSyncState => {
+
+		return produce(
+			state,
+			draft => { delete draft.remoteMetadata[id] }
+		);
+
+	}),
 	// on(bmActions.uploadSuccess, (state, { remoteMetadata }): BookmarkSyncState => {
 
 	// 	return produce(

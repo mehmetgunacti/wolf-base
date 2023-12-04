@@ -5,6 +5,7 @@ export interface EntityLocalRepository<T extends Entity> {
 
 	getEntity(id: UUID): Promise<T | null>;
 	getSyncData(id: UUID): Promise<SyncData | null>;
+	getRemoteMetadata(id: UUID): Promise<RemoteMetadata | null>;
 
 	storeDownloadedEntity(data: RemoteData<T>): Promise<RemoteData<T>>;
 	storeDownloadedEntities(data: RemoteData<T>[]): Promise<number>;

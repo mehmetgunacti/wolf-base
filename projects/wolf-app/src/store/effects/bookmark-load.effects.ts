@@ -115,6 +115,31 @@ export class BookmarkLoadEffects {
 
 	);
 
+	loadOneRemoteMetadata$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bmActions.loadOneRemoteMetadata),
+			switchMap(({ id }) =>
+
+				from(this.localRepository.bookmarks.getRemoteMetadata(id)).pipe(
+
+					map(remoteMetadata => {
+
+						if (remoteMetadata === null)
+							return bmActions.loadOneRemoteMetadataFailure({ id });
+						return bmActions.loadOneRemoteMetadataSuccess({ remoteMetadata });
+
+					})
+
+				)
+
+			)
+
+		)
+
+	);
+
 	loadTrashCount$ = createEffect(
 
 		() => this.actions$.pipe(

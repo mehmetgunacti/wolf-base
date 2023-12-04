@@ -30,6 +30,12 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	}
 
+	async getRemoteMetadata(id: string): Promise<RemoteMetadata | null> {
+
+		return await this.db.table<RemoteMetadata>(this.tablename + '_remote').get(id) ?? null;
+
+	}
+
 	async storeDownloadedEntity(item: RemoteData<T>): Promise<RemoteData<T>> {
 
 		await this.db.transaction('rw', [
