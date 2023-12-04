@@ -35,6 +35,16 @@ const reducer = createReducer(
 		);
 
 	}),
+	on(bmActions.downloadDeletedSuccess, (state, { id }): BookmarkEntitiesState => {
+
+		return produce(
+			state,
+			draft => {
+				delete draft.entities[id];
+			}
+		);
+
+	}),
 	on(bmActions.openAddBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
 	on(bmActions.openEditBookmarkDialog, (state, { id }): BookmarkEntitiesState => ({ ...state, selected: id })),
 	on(bmActions.closeEditBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null }))
