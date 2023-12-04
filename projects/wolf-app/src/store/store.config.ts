@@ -3,6 +3,12 @@ import { BookmarkEntityCreateEffects } from './effects/bookmark-entity-create.ef
 import { BookmarkEntityRemoveEffects } from './effects/bookmark-entity-remove.effects';
 import { BookmarkEntityUpdateEffects } from './effects/bookmark-entity-update.effects';
 import { BookmarkLoadEffects } from './effects/bookmark-load.effects';
+import { BookmarkSyncLocalDeletedEffects } from './effects/bookmark-sync-local-deleted.effects';
+import { BookmarkSyncLocalNewEffects } from './effects/bookmark-sync-local-new.effects';
+import { BookmarkSyncLocalUpdatedEffects } from './effects/bookmark-sync-local-updated.effects';
+import { BookmarkSyncRemoteDeletedEffects } from './effects/bookmark-sync-remote-deleted.effects';
+import { BookmarkSyncRemoteNewEffects } from './effects/bookmark-sync-remote-new.effects';
+import { BookmarkSyncRemoteUpdatedEffects } from './effects/bookmark-sync-remote-updated.effects';
 import { BookmarkUIEffects } from './effects/bookmark-ui.effects';
 import { CloudBookmarkEffects } from './effects/cloud-bookmark.effects';
 import { CloudEffects } from './effects/cloud.effects';
@@ -23,9 +29,6 @@ import { databaseReducer } from './reducers/database.reducer';
 import { knowledgeBaseReducer } from './reducers/knowledge-base.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { AppState } from './states/app.state';
-import { BookmarkSyncLocalNewEffects } from './effects/bookmark-sync-local-new.effects';
-import { BookmarkSyncLocalUpdatedEffects } from './effects/bookmark-sync-local-updated.effects';
-import { BookmarkSyncLocalDeletedEffects } from './effects/bookmark-sync-local-deleted.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -58,6 +61,10 @@ export const effects = [
 	BookmarkSyncLocalNewEffects,
 	BookmarkSyncLocalUpdatedEffects,
 	BookmarkSyncLocalDeletedEffects,
+
+	BookmarkSyncRemoteNewEffects,
+	BookmarkSyncRemoteUpdatedEffects,
+	BookmarkSyncRemoteDeletedEffects,
 
 	BookmarkEntityCreateEffects,
 	BookmarkEntityUpdateEffects,

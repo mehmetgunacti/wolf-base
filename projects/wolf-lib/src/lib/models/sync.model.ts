@@ -1,4 +1,4 @@
-import { Metadata } from "./entity.model";
+import { Metadata } from './entity.model';
 
 export interface SyncData extends Metadata {
 

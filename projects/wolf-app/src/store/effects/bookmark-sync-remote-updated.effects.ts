@@ -5,24 +5,24 @@ import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as bmActions from 'store/actions/bookmark.actions';
-import { selBookmarkRemoteNew } from 'store/selectors/cloud-bookmark.selectors';
+import { selBookmarkRemoteUpdated } from 'store/selectors/cloud-bookmark.selectors';
 
 @Injectable()
-export class BookmarkSyncRemoteNewEffects {
+export class BookmarkSyncRemoteUpdatedEffects {
 
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
 	private syncService: SyncService = inject(SYNC_SERVICE);
 
-	syncRemoteNew$ = createEffect(
+	syncRemoteUpdated$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.syncRemoteNew),
-			withLatestFrom(this.store.select(selBookmarkRemoteNew)),
+			ofType(bmActions.syncRemoteUpdated),
+			withLatestFrom(this.store.select(selBookmarkRemoteUpdated)),
 			switchMap(([, entities]) =>
 
-				this.syncService.downloadNew<Bookmark>(WolfEntity.bookmark, entities.map(e => e.id)).pipe(
+				this.syncService.downloadUpdated<Bookmark>(WolfEntity.bookmark, entities.map(e => e.id)).pipe(
 					map(remoteData => bmActions.downloadSuccess({ remoteData }))
 				)
 
