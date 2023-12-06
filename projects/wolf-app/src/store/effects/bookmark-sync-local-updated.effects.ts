@@ -20,35 +20,15 @@ export class BookmarkSyncLocalUpdatedEffects {
 
 			ofType(bmActions.syncLocalUpdated),
 			withLatestFrom(this.store.select(selBookmarkLocalUpdated)),
-			switchMap(([, entities]) =>
+			switchMap(([, items]) =>
 
-				this.syncService.uploadUpdated(WolfEntity.bookmark, entities).pipe(
-					map(item => bmActions.syncLocalUpdatedSuccess({ item }))
+				this.syncService.uploadUpdated(WolfEntity.bookmark, items).pipe(
+
+					map(item => bmActions.loadOne({ id: item.id }))
+
 				)
 
 			)
-
-		)
-
-	);
-
-	loadOneSyncData$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(bmActions.syncLocalUpdatedSuccess),
-			map(({ item }) => bmActions.loadOneSyncData({ id: item.id }))
-
-		)
-
-	);
-
-	loadOneRemoteMetadata$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(bmActions.syncLocalUpdatedSuccess),
-			map(({ item }) => bmActions.loadOneRemoteMetadata({ id: item.id }))
 
 		)
 

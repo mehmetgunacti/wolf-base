@@ -23,7 +23,9 @@ export class BookmarkSyncDeletedDeletedEffects {
 			switchMap(([, items]) =>
 
 				this.syncService.downloadDeleted(WolfEntity.bookmark, items).pipe(
-					map(item => bmActions.syncDeletedDeletedSuccess({ item }))
+
+					map(item => bmActions.unloadOne({ id: item.id }))
+
 				)
 
 			)

@@ -13,46 +13,63 @@ export class BookmarkLoadEffects {
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
-	loadOneBookmark$ = createEffect(
+	loadOne$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(bmActions.loadOne),
 			switchMap(({ id }) =>
 
-				from(this.localRepository.bookmarks.getEntity(id)).pipe(
-					map(bookmark => bookmark ? bmActions.loadOneSuccess({ bookmark }) : bmActions.loadOneFailure({ id }))
-				)
+				Promise.all([
 
+					Promise.resolve(id),
+					this.localRepository.bookmarks.getEntity(id),
+					this.localRepository.bookmarks.getSyncData(id),
+					this.localRepository.bookmarks.getRemoteMetadata(id),
+					this.localRepository.bookmarks.getClick(id)
+
+				])
 			),
+			map(([id, bookmark, syncData, remoteMetadata, click]) => bmActions.loadOneSuccess({ id, bookmark, syncData, remoteMetadata, click }))
 
 		)
 
 	);
 
-	loadAllBookmarks$ = createEffect(
+	loadAll$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(bmActions.loadAll),
-			switchMap(() => this.localRepository.bookmarks.list()),
-			map(bookmarks => bmActions.loadAllSuccess({ bookmarks }))
+			switchMap(() =>
+
+				Promise.all([
+
+					this.localRepository.bookmarks.list(),
+					this.localRepository.bookmarks.listSyncData(),
+					this.localRepository.bookmarks.listRemoteMetadata(),
+					this.localRepository.bookmarks.listClicks()
+
+				])
+
+			),
+			map(([bookmarks, syncData, remoteMetadata, clicks]) => bmActions.loadAllSuccess({ bookmarks, syncData, remoteMetadata, clicks }))
 
 		)
 
 	);
 
-	loadAllClicks$ = createEffect(
+	// loadAllClicks$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(bmActions.loadAllClicks),
-			switchMap(() => this.localRepository.bookmarks.listClicks()),
-			map(clicks => bmActions.loadAllClicksSuccess({ clicks }))
+	// 		ofType(bmActions.loadAllClicks),
+	// 		switchMap(() => this.localRepository.bookmarks.listClicks()),
+	// 		map(clicks => bmActions.loadAllClicksSuccess({ clicks }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 
 	loadOneSyncData$ = createEffect(
@@ -64,13 +81,7 @@ export class BookmarkLoadEffects {
 
 				from(this.localRepository.bookmarks.getSyncData(id)).pipe(
 
-					map(syncData => {
-
-						if (syncData === null)
-							return bmActions.loadOneSyncDataFailure({ id });
-						return bmActions.loadOneSyncDataSuccess({ syncData });
-
-					})
+					map(syncData => bmActions.loadOneSyncDataSuccess({ syncData }))
 
 				)
 
@@ -80,17 +91,17 @@ export class BookmarkLoadEffects {
 
 	);
 
-	loadAllSyncData$ = createEffect(
+	// loadAllSyncData$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(bmActions.loadAllSyncData),
-			switchMap(() => this.localRepository.bookmarks.listSyncData()),
-			map(syncData => bmActions.loadAllSyncDataSuccess({ syncData }))
+	// 		ofType(bmActions.loadAllSyncData),
+	// 		switchMap(() => this.localRepository.bookmarks.listSyncData()),
+	// 		map(syncData => bmActions.loadAllSyncDataSuccess({ syncData }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 	downloadRemoteDataSuccess$ = createEffect(
 
@@ -115,41 +126,41 @@ export class BookmarkLoadEffects {
 
 	);
 
-	loadOneRemoteMetadata$ = createEffect(
+	// loadOneRemoteMetadata$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(bmActions.loadOneRemoteMetadata),
-			switchMap(({ id }) =>
+	// 		ofType(bmActions.loadOneRemoteMetadata),
+	// 		switchMap(({ id }) =>
 
-				from(this.localRepository.bookmarks.getRemoteMetadata(id)).pipe(
+	// 			from(this.localRepository.bookmarks.getRemoteMetadata(id)).pipe(
 
-					map(remoteMetadata => {
+	// 				map(remoteMetadata => {
 
-						if (remoteMetadata === null)
-							return bmActions.loadOneRemoteMetadataFailure({ id });
-						return bmActions.loadOneRemoteMetadataSuccess({ remoteMetadata });
+	// 					if (remoteMetadata === null)
+	// 						return bmActions.loadOneRemoteMetadataFailure({ id });
+	// 					return bmActions.loadOneRemoteMetadataSuccess({ remoteMetadata });
 
-					})
+	// 				})
 
-				)
+	// 			)
 
-			)
+	// 		)
 
-		)
+	// 	)
 
-	);
+	// );
 
-	loadTrashCount$ = createEffect(
+	// loadTrashCount$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(bmActions.loadTrashCount),
-			switchMap(() => this.localRepository.bookmarks.listDeletedItems()),
-			map(items => bmActions.loadTrashCountSuccess({ count: items.length }))
+	// 		ofType(bmActions.loadTrashCount),
+	// 		switchMap(() => this.localRepository.bookmarks.listDeletedItems()),
+	// 		map(items => bmActions.loadTrashCountSuccess({ count: items.length }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 }

@@ -71,6 +71,12 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 
 	}
 
+	async getClick(id: string): Promise<Click | null> {
+
+		return await this.db.bookmarks_clicks.get(id) ?? null;
+
+	}
+
 	async listClicked(): Promise<Click[]> {
 
 		return await this.db.bookmarks_clicks.where('current').above(0).toArray();

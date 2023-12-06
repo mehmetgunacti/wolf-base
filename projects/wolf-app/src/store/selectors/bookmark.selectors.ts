@@ -23,10 +23,3 @@ export const selBookmarkTagsState = createSelector(
 	state => state.tags
 
 );
-
-export const selBookmarkSyncState = createSelector(
-
-	selBookmarkModuleState,
-	state => state.sync
-
-);

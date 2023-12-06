@@ -5,7 +5,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { BookmarkEditContainerComponent } from 'modules/bookmark/containers/bookmark-edit-container/bookmark-edit-container.component';
-import { of } from 'rxjs';
+import { from, of } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import * as bmActions from 'store/actions/bookmark.actions';
 import { selBookmarkOverlayId } from 'store/selectors/bookmark-ui.selectors';
@@ -170,8 +170,13 @@ export class BookmarkUIEffects {
 		() => this.actions$.pipe(
 
 			ofType(bmActions.clickBookmark),
-			switchMap(({ id }) => this.localRepository.bookmarks.click(id)),
-			map(() => bmActions.loadAllClicks())
+			switchMap(({ id }) =>
+
+				from(this.localRepository.bookmarks.click(id)).pipe(
+					map(() => bmActions.loadOneClick({ id }))
+				)
+
+			)
 
 		)
 

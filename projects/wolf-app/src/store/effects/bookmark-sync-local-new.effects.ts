@@ -23,32 +23,12 @@ export class BookmarkSyncLocalNewEffects {
 			switchMap(([, items]) =>
 
 				this.syncService.uploadNew(WolfEntity.bookmark, items).pipe(
-					map(item => bmActions.syncLocalNewSuccess({ item }))
+
+					map(item => bmActions.loadOne({ id: item.id }))
+
 				)
 
 			)
-
-		)
-
-	);
-
-	loadOneSyncData$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(bmActions.syncLocalNewSuccess),
-			map(({ item }) => bmActions.loadOneSyncData({ id: item.id }))
-
-		)
-
-	);
-
-	loadOneRemoteMetadata$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(bmActions.syncLocalNewSuccess),
-			map(({ item }) => bmActions.loadOneRemoteMetadata({ id: item.id }))
 
 		)
 

@@ -5,7 +5,6 @@ export interface BookmarkModuleState {
 	entities: BookmarkEntitiesState;
 	ui: BookmarkUIState;
 	tags: BookmarkTagsState;
-	sync: BookmarkSyncState;
 
 }
 
@@ -13,16 +12,11 @@ export interface BookmarkModuleState {
 export interface BookmarkEntitiesState {
 
 	entities: Record<UUID, Bookmark>;
-	selected: UUID | null;
-	clicks: Record<UUID, Click>;
-
-}
-
-export interface BookmarkSyncState {
-
 	syncData: Record<UUID, SyncData>;
 	remoteMetadata: Record<UUID, RemoteMetadata>;
-	trashCount: number;
+	clicks: Record<UUID, Click>;
+
+	selected: UUID | null;
 
 }
 
@@ -42,17 +36,11 @@ export interface BookmarkUIState {
 
 // INITIALIZATION
 
-export const initialBookmarkSyncState: BookmarkSyncState = {
-
-	syncData: {},
-	remoteMetadata: {},
-	trashCount: 0
-
-};
-
 export const initialBookmarkEntitiesState: BookmarkEntitiesState = {
 
 	entities: {},
+	syncData: {},
+	remoteMetadata: {},
 	selected: null,
 	clicks: {}
 
@@ -76,7 +64,6 @@ export const initialBookmarkState: BookmarkModuleState = {
 
 	entities: initialBookmarkEntitiesState,
 	ui: initialBookmarkUIState,
-	tags: initialBookmarkTagsState,
-	sync: initialBookmarkSyncState
+	tags: initialBookmarkTagsState
 
 };

@@ -23,43 +23,12 @@ export class BookmarkSyncRemoteUpdatedEffects {
 			switchMap(([, items]) =>
 
 				this.syncService.downloadUpdated(WolfEntity.bookmark, items).pipe(
-					map(item => bmActions.syncRemoteUpdatedSuccess({ item }))
+
+					map(item => bmActions.loadOne({ id: item.id }))
+
 				)
 
 			)
-
-		)
-
-	);
-
-	loadOne$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(bmActions.syncRemoteUpdatedSuccess),
-			map(({ item }) => bmActions.loadOne({ id: item.id }))
-
-		)
-
-	);
-
-	loadOneSyncData$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(bmActions.syncRemoteUpdatedSuccess),
-			map(({ item }) => bmActions.loadOneSyncData({ id: item.id }))
-
-		)
-
-	);
-
-	loadOneRemoteMetadata$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(bmActions.syncRemoteUpdatedSuccess),
-			map(({ item }) => bmActions.loadOneRemoteMetadata({ id: item.id }))
 
 		)
 

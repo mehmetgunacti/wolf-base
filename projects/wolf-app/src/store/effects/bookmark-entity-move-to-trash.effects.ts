@@ -37,7 +37,7 @@ export class BookmarkEntityMoveToTrashEffects {
 		() => this.actions$.pipe(
 
 			ofType(bmActions.moveToTrashSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Bookmark moved to trash' }))
+			map(() => showNotification({ severity: 'success', detail: 'Bookmark removed' }))
 
 		)
 

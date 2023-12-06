@@ -267,6 +267,12 @@ export class MockBookmarksLocalRepositoryImpl implements BookmarksLocalRepositor
 
 	}
 
+	async getClick(id: string): Promise<Click | null> {
+
+		return this.bookmarks_clicks.get(id) ?? null;
+
+	}
+
 	async listClicked(): Promise<Click[]> {
 
 		const clicks = Array.from(this.bookmarks_clicks.values());

@@ -1,10 +1,10 @@
 import { RemoteMetadata, SyncData, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selBookmarkSyncState } from './bookmark.selectors';
+import { selBookmarkEntitiesState } from './bookmark.selectors';
 
 export const selBookmarkSyncDataArray = createSelector(
 
-	selBookmarkSyncState,
+	selBookmarkEntitiesState,
 	(state): SyncData[] => Object.values(state.syncData)
 
 );
@@ -24,8 +24,8 @@ export const selBookmarkSyncDataMap = createSelector(
 
 export const selBookmarkRemoteMetadataArray = createSelector(
 
-	selBookmarkSyncState,
-	state => Object.values(state.remoteMetadata)
+	selBookmarkEntitiesState,
+	(state): RemoteMetadata[] => Object.values(state.remoteMetadata)
 
 );
 
