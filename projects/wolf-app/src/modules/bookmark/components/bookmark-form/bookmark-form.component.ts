@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, inject } from '@angular/core';
-import { Bookmark, Entity, TAG_POPULAR, ToastConfiguration, UUID, parseURL } from 'lib';
+import { Bookmark, TAG_POPULAR, ToastConfiguration, UUID, parseURL } from 'lib';
 import { Observable, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
 

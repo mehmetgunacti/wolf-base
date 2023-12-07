@@ -29,7 +29,6 @@ export class MockBookmarksLocalRepositoryImpl implements BookmarksLocalRepositor
 			tags: [],
 			image: '',
 			urls: [''],
-			clicks: 0,
 			...item,
 			id: uuidv4()
 

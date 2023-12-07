@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Bookmark, FormClass, FormClassImpl, UUID, numberValidator } from '@lib';
+import { Bookmark, FormClass, FormClassImpl, UUID } from '@lib';
 
 interface EditForm {
 
@@ -10,7 +10,6 @@ interface EditForm {
 	tags: FormControl<string[]>;
 	image: FormControl<string | null>;
 	urls: FormArray<FormControl<string>>;
-	clicks: FormControl<number>;
 
 }
 
@@ -36,8 +35,7 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 			image: new FormControl(''),
 			urls: new FormArray([
 				new FormControl('', { validators: [Validators.required], nonNullable: true })
-			]),
-			clicks: new FormControl(0, { validators: [Validators.required, numberValidator], nonNullable: true })
+			])
 
 		});
 
@@ -50,7 +48,6 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 		this.title.setValue(bookmark.title); // , { emitEvent: false });
 		this.tags.setValue(bookmark.tags); // , { emitEvent: false });
 		this.image.setValue(bookmark.image ?? null); // , { emitEvent: false });
-		this.clicks.setValue(Number(bookmark.clicks)); // , { emitEvent: false });
 
 		// set urls
 		bookmark.urls.forEach((url, idx) => this.handleUrl(this.urls, idx, url));
@@ -73,6 +70,8 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 	override get value(): Bookmark {
 
 		const bookmark: Partial<Bookmark> = this._formGroup.value;
+		console.log(bookmark);
+
 		return {
 
 			...bookmark
@@ -115,10 +114,6 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 
 	get urls(): FormArray {
 		return <FormArray>this._formGroup.controls['urls'];
-	}
-
-	get clicks(): FormControl<number> {
-		return <FormControl<number>>this._formGroup.controls['clicks'];
 	}
 
 }

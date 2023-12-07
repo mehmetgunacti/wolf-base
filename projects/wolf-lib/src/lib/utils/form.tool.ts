@@ -150,8 +150,10 @@ export const getDirtyValues = <T>(form: FormGroup): Partial<T> => {
 
 export function numberValidator(control: AbstractControl): ValidationErrors | null {
 
-	const isNumber = typeof control.value === 'number';
-	const isFinite = Number.isFinite(Number(control.value));
-	return isNumber && isFinite ? null : { notNumber: true };
+	console.log(control.value);
+	const numberValue = Number(control.value);
+    const isNumber = !isNaN(numberValue);
+    const isFinite = Number.isFinite(numberValue);
+    return isNumber && isFinite ? null : { notNumber: true };
 
 }

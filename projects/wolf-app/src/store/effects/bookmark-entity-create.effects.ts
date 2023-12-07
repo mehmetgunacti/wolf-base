@@ -77,17 +77,15 @@ export class BookmarkEntityCreateEffects {
 
 				if (url === null)
 					return fromClipboardFailure$;
-				return of(bmActions.create({
-					bookmark: {
+				const bookmark: Partial<Bookmark> = {
 
-						urls: [url.toString()],
-						title: url.hostname + '_' + this.tmpCounter,
-						name: url.hostname + '_' + this.tmpCounter++,
-						tags: [TAG_NEW],
-						claicks: 0
+					urls: [url.toString()],
+					title: url.hostname + '_' + this.tmpCounter,
+					name: url.hostname + '_' + this.tmpCounter++,
+					tags: [TAG_NEW]
 
-					} as Partial<Bookmark>
-				}));
+				};
+				return of(bmActions.create({ bookmark }));
 
 			})
 

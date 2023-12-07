@@ -28,8 +28,7 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 			title: '',
 			tags: [],
 			image: '',
-			urls: [''],
-			clicks: 0
+			urls: ['']
 
 		};
 		return { ...instance, ...item, id } as Bookmark;
