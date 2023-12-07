@@ -158,8 +158,13 @@ export class BookmarkUIEffects {
 		() => this.actions$.pipe(
 
 			ofType(bmActions.togglePopular),
-			map(({ id }) => this.localRepository.bookmarks.toggleTag(id, TAG_POPULAR)),
-			map(() => bmActions.loadAll())
+			switchMap(({ id }) =>
+
+				from(this.localRepository.bookmarks.toggleTag(id, TAG_POPULAR)).pipe(
+					map(() => bmActions.loadOne({ id }))
+				)
+
+			)
 
 		)
 
