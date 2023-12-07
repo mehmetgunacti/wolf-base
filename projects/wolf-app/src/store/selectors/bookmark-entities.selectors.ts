@@ -1,6 +1,6 @@
+import { Bookmark, Click, ClickedBookmark } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selBookmarkEntitiesState } from './bookmark.selectors';
-import { Bookmark, Click, Entity } from '@lib';
 
 export const selBookmarks = createSelector(
 
@@ -19,7 +19,7 @@ export const selBookmarkIds = createSelector(
 export const selBookmarkArray = createSelector(
 
 	selBookmarkEntitiesState,
-	(state): Bookmark[] => Object.values(state.entities).map(b => ({ ...b, clicks: state.clicks[b.id]?.total ?? 0 }))
+	(state): ClickedBookmark[] => Object.values(state.entities).map(b => ({ ...b, clicks: state.clicks[b.id]?.total ?? 0 }))
 
 );
 

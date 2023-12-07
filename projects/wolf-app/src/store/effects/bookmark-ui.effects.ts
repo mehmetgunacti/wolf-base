@@ -153,7 +153,7 @@ export class BookmarkUIEffects {
 
 	);
 
-	bookmarkTogglePopularTag$ = createEffect(
+	togglePopularTag$ = createEffect(
 
 		() => this.actions$.pipe(
 
@@ -170,7 +170,7 @@ export class BookmarkUIEffects {
 
 	);
 
-	bookmarksClick$ = createEffect(
+	click$ = createEffect(
 
 		() => this.actions$.pipe(
 
