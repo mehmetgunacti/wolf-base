@@ -67,12 +67,23 @@ const reducer = createReducer(
 
 		})
 	),
-	// on(
-	// 	bmActions.loadAllClicksSuccess, (state, { clicks }): BookmarkEntitiesState => ({
-	// 		...state,
-	// 		clicks: clicks.reduce((record, click) => { record[click.id] = click; return record; }, {} as Record<UUID, Click>)
-	// 	})
-	// ),
+	on(
+		bmActions.loadOneClickSuccess, (state, { id, click }): BookmarkEntitiesState => {
+
+			return produce(
+				state,
+				draft => {
+
+					if (click === null)
+						delete draft.clicks[id];
+					else
+						draft.clicks[id] = click;
+
+				}
+			);
+
+		}
+	),
 	on(bmActions.moveToTrashSuccess, (state, { id }): BookmarkEntitiesState => {
 
 		return produce(

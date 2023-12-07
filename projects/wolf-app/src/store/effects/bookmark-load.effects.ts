@@ -59,17 +59,22 @@ export class BookmarkLoadEffects {
 
 	);
 
-	// loadAllClicks$ = createEffect(
+	loadOneClick$ = createEffect(
 
-	// 	() => this.actions$.pipe(
+		() => this.actions$.pipe(
 
-	// 		ofType(bmActions.loadAllClicks),
-	// 		switchMap(() => this.localRepository.bookmarks.listClicks()),
-	// 		map(clicks => bmActions.loadAllClicksSuccess({ clicks }))
+			ofType(bmActions.loadOneClick),
+			switchMap(({ id }) =>
 
-	// 	)
+				from(this.localRepository.bookmarks.getClick(id)).pipe(
+					map(click => bmActions.loadOneClickSuccess({ id, click }))
+				)
 
-	// );
+			)
+
+		)
+
+	);
 
 
 	loadOneSyncData$ = createEffect(
