@@ -9,7 +9,7 @@ export class BookmarkSyncServiceImpl implements BookmarkSyncService {
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 	private remoteRepository: RemoteRepositoryService = inject(REMOTE_REPOSITORY_SERVICE);
 
-	uploadClicks(clicks: Click[]): Observable<number> {
+	uploadClicks(clicks: Click[]): Observable<Click> {
 
 		return of(clicks).pipe(
 
@@ -18,17 +18,8 @@ export class BookmarkSyncServiceImpl implements BookmarkSyncService {
 				// upload all clicks
 				this.remoteRepository.bookmarks.uploadClicks(clicks).pipe(
 
-					switchMap(() =>
-
-						// download all clicks
-						this.remoteRepository.bookmarks.downloadClicks().pipe(
-
-							// save all downloaded clicks
-							switchMap(clicks => this.localRepository.bookmarks.storeClicks(clicks))
-
-						)
-
-					)
+					// store click locally
+					switchMap(click => this.localRepository.bookmarks.storeClick(click))
 
 				)
 

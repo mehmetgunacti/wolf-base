@@ -9,6 +9,7 @@ export interface BookmarksLocalRepository extends EntityLocalRepository<Bookmark
 	// clicks
 	click(id: UUID): Promise<void>;
 	getClick(id: UUID): Promise<Click | null>;
+	storeClick(click: Click): Promise<Click>;
 	storeClicks(items: Click[]): Promise<number>;
 	listClicks(): Promise<Click[]>;
 	listClicked(): Promise<Click[]>;

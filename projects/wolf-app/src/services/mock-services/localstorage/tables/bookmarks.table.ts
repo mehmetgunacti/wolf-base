@@ -258,7 +258,6 @@ export class MockBookmarksLocalRepositoryImpl implements BookmarksLocalRepositor
 			this.bookmarks_clicks.set(id, {
 
 				id,
-				name: this.bookmarks.get(id)?.name ?? 'not found',
 				current: 1,
 				total: 1
 
@@ -276,6 +275,13 @@ export class MockBookmarksLocalRepositoryImpl implements BookmarksLocalRepositor
 
 		const clicks = Array.from(this.bookmarks_clicks.values());
 		return clicks.filter(c => c.current > 0);
+
+	}
+
+	async storeClick(click: Click): Promise<Click> {
+
+		this.bookmarks_clicks.set(click.id, click);
+		return click;
 
 	}
 

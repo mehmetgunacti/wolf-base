@@ -107,11 +107,11 @@ export class MockBookmarksCollection implements BookmarksRemoteRepository {
 
 	}
 
-	uploadClicks(clicks: Click[]): Observable<number> {
+	uploadClicks(clicks: Click[]): Observable<Click> {
 
 		for (const click of clicks)
 			this.clicks[click.id] += click.current;
-		return of(clicks.length);
+		return of(clicks[0]);
 
 	}
 
@@ -134,7 +134,7 @@ export class MockBookmarksCollection implements BookmarksRemoteRepository {
 
 export class VoidBookmarksCollection implements BookmarksRemoteRepository {
 
-	uploadClicks(clicks: Click[]): Observable<number> {
+	uploadClicks(clicks: Click[]): Observable<Click> {
 		throw new Error("Method not implemented.");
 	}
 

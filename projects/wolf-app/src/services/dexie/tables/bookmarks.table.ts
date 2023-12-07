@@ -1,10 +1,10 @@
 import { LogCategory, WolfEntity, toggleArrayItem } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
+import { BookmarksLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
 import { WolfBaseDB } from '../wolfbase.database';
 import { EntityLocalRepositoryImpl } from './entity.table';
-import { BookmarksLocalRepository } from 'lib/repositories/local';
 
 export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Bookmark> implements BookmarksLocalRepository {
 
@@ -63,7 +63,6 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 		if (affected !== 1)
 			await this.db.bookmarks_clicks.add({
 				id,
-				name: id,
 				total: 1,
 				current: 1
 			});
@@ -79,6 +78,13 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 	async listClicked(): Promise<Click[]> {
 
 		return await this.db.bookmarks_clicks.where('current').above(0).toArray();
+
+	}
+
+	async storeClick(click: Click): Promise<Click> {
+
+		await this.db.bookmarks_clicks.put(click);
+		return click;
 
 	}
 

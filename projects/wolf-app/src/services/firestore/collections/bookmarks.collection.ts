@@ -19,12 +19,27 @@ export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageColl
 		);
 	}
 
-	uploadClicks(clicks: Click[]): Observable<number> {
+	uploadClicks(clicks: Click[]): Observable<Click> {
 
 		return from(clicks).pipe(
 
-			concatMap(click => this.increase(click.id, click.current)),
-			map(() => clicks.length)
+			concatMap(click =>
+
+				this.increase(click.id, click.current).pipe(
+					map(total => {
+
+						const c: Click = {
+							id: click.id,
+							current: 0,
+							total
+						};
+						return c;
+
+					})
+
+				)
+
+			)
 
 		);
 
@@ -65,7 +80,6 @@ export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageColl
 		return {
 
 			id,
-			name: id,
 			total,
 			current: 0
 

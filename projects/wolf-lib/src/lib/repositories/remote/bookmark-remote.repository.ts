@@ -4,7 +4,7 @@ import { EntityRemoteRepository } from './entity-remote.repository';
 
 export interface BookmarksRemoteRepository extends EntityRemoteRepository<Bookmark> {
 
-	uploadClicks(clicks: Click[]): Observable<number>;
+	uploadClicks(clicks: Click[]): Observable<Click>;
 	downloadClicks(): Observable<Click[]>;
 
 }

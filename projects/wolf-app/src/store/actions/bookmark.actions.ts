@@ -92,3 +92,5 @@ export const syncRemoteDeleted				= createAction('[Bookmark] Sync Remote Deleted
 
 export const syncDeletedDeleted				= createAction('[Bookmark] Sync Deleted Deleted');
 // export const syncDeletedDeletedSuccess		= createAction('[Bookmark] Sync Deleted Deleted Success', props<{ item: NameBase }>());
+
+export const syncClicked					= createAction('[Bookmark] Sync Clicked');

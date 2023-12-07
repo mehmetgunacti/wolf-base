@@ -1,4 +1,5 @@
 import { Entity } from './entity.model';
+import { IDBase } from './id-base.model';
 
 export interface Bookmark extends Entity {
 
@@ -15,7 +16,7 @@ export interface ClickedBookmark extends Bookmark {
 
 }
 
-export interface Click extends Entity {
+export interface Click extends IDBase {
 
 	total: number;
 	current: number;

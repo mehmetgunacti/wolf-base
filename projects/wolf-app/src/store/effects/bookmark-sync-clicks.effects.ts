@@ -1,12 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { BookmarkSyncService, Click, SyncTaskType } from '@lib';
+import { BookmarkSyncService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BOOKMARK_SYNC_SERVICE } from 'app/app.config';
-import { EMPTY } from 'rxjs';
-import { filter, switchMap, withLatestFrom } from 'rxjs/operators';
-import { cloudTaskAction } from 'store/actions/cloud.actions';
-import { selCoreIsFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { loadOneClickSuccess, syncClicked } from 'store/actions/bookmark.actions';
+import { selBookmarkClicked } from 'store/selectors/bookmark-entities.selectors';
 
 @Injectable()
 export class BookmarkSyncClicksEffects {
@@ -15,29 +14,21 @@ export class BookmarkSyncClicksEffects {
 	private store: Store = inject(Store);
 	private syncService: BookmarkSyncService = inject(BOOKMARK_SYNC_SERVICE);
 
-	cloudTaskAction$ = createEffect(
+	syncClicked$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(cloudTaskAction),
-			withLatestFrom(this.store.select(selCoreIsFirestoreConfigMissing)),
-			filter(([, missing]) => !missing),
-			switchMap(([{ task }]) => {
+			ofType(syncClicked),
+			withLatestFrom(this.store.select(selBookmarkClicked)),
+			switchMap(([, clicks]) =>
 
-				switch (task.type) {
+				this.syncService.uploadClicks(clicks).pipe(
+					map(click => loadOneClickSuccess({ id: click.id, click }))
+				)
 
-					// case CloudTaskType.clicked:
-					// 	return this.syncService.uploadClicks(task.entities as Click[]);
+			)
 
-					default:
-						return EMPTY;
-
-				}
-
-			}),
-
-		),
-		{ dispatch: false }
+		)
 
 	);
 

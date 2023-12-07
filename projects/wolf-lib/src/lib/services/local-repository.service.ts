@@ -1,5 +1,4 @@
 import { EntityName } from 'lib/constants';
-import { LocalRepositoryNames } from 'lib/constants/database.constant';
 import { Entity } from 'lib/models';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, KBContentsLocalRepository, KBEntriesLocalRepository, LogsLocalRepository } from 'lib/repositories/local';
 
