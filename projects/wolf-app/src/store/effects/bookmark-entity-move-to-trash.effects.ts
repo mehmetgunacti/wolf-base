@@ -48,7 +48,7 @@ export class BookmarkEntityMoveToTrashEffects {
 		() => this.actions$.pipe(
 
 			ofType(bmActions.moveToTrashSuccess),
-			map(({ id }) => bmActions.loadOneSyncData({ id }))
+			map(({ id }) => bmActions.loadOne({ id }))
 
 		)
 

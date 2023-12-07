@@ -49,9 +49,9 @@ const selBookmarkSyncDataLocalDeletedIds = createSelector(
 
 export const selBookmarkLocalDeleted = createSelector(
 
-	selBookmarkArray,
+	selBookmarkSyncDataArray,
 	selBookmarkSyncDataLocalDeletedIds,
-	(bookmarks, ids): NameBase[] => bookmarks.filter(
+	(syncData, ids): NameBase[] => syncData.filter(
 
 		e => ids.includes(e.id)
 

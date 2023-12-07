@@ -41,6 +41,21 @@ const reducer = createReducer(
 		);
 
 	}),
+	on(bmActions.unloadOne, (state, { id }): BookmarkEntitiesState => {
+
+		return produce(
+			state,
+			draft => {
+
+				delete draft.entities[id];
+				delete draft.syncData[id];
+				delete draft.remoteMetadata[id];
+				delete draft.clicks[id];
+
+			}
+		);
+
+	}),
 	on(
 		bmActions.loadAllSuccess, (state, { bookmarks, syncData, remoteMetadata, clicks }): BookmarkEntitiesState => ({
 
