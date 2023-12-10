@@ -1,4 +1,4 @@
-import { LogCategory, WolfEntity, toggleArrayItem } from '@lib';
+import { LocalRepositoryNames, LogCategory, SyncData, WolfEntity, toggleArrayItem } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { BookmarksLocalRepository } from 'lib/repositories/local';
@@ -37,13 +37,23 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 
 	async toggleTag(id: UUID, name: string): Promise<void> {
 
-		await this.db.bookmarks
-			.where({ id })
-			.modify((bookmark: Bookmark): void => {
+		await this.db.transaction('rw', [
+			LocalRepositoryNames.bookmarks,
+			LocalRepositoryNames.bookmarks_sync
+		], async () => {
+
+			// update bookmarks table
+			const count = await this.db.bookmarks.where({ id }).modify((bookmark: Bookmark): void => {
 
 				bookmark.tags = toggleArrayItem(bookmark.tags, name);
 
 			});
+
+			// update syncData
+			if (count > 0)
+				await this.db.table<SyncData>(LocalRepositoryNames.bookmarks_sync).where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
+
+		});
 
 	}
 
