@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { UUID } from 'lib/constants';
-import { Bookmark } from 'lib/models';
+import { ClickedBookmark } from 'lib/models';
 
 @Component({
 	selector: 'app-bookmark',
@@ -10,7 +10,7 @@ import { Bookmark } from 'lib/models';
 })
 export class BookmarkComponent {
 
-	@Input() item: Bookmark | null | undefined;
+	@Input() item: ClickedBookmark | null | undefined;
 	@Input() showDetails = false;
 	@Input() editable = true;
 	@Input() popularButton = true;

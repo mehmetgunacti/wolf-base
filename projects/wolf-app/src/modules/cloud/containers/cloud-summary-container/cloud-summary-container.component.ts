@@ -30,8 +30,8 @@ function getAction(task: CloudTask): Action | null {
 		case SyncTaskType.clicked:
 			return bmActions.syncClicked();
 
-		// case CloudTaskType.deleted_deleted:
-		// 	return this.syncService.downloadDeleted(task);
+		case SyncTaskType.deleted_deleted:
+			return bmActions.syncDeletedDeleted();
 
 		// case CloudTaskType.updated_updated:
 		// case CloudTaskType.updated_deleted:

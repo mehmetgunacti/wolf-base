@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, inject } from '@angular/core';
-import { Bookmark, TAG_POPULAR, ToastConfiguration, UUID, parseURL } from 'lib';
+import { Bookmark, ClickedBookmark, TAG_POPULAR, ToastConfiguration, UUID, parseURL } from 'lib';
 import { Observable, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
 
@@ -23,7 +23,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 	@Output() titleLookup: EventEmitter<ToastConfiguration> = new EventEmitter();
 
 	form: BookmarkForm = inject(BOOKMARK_FORM);
-	bookmark$: Observable<Bookmark>;
+	bookmark$: Observable<ClickedBookmark>;
 	tagSuggestions$: Subject<string[]>;
 
 	constructor() {
@@ -42,7 +42,7 @@ export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	ngOnChanges(changes: SimpleChanges): void {
 
-		const bookmark: Bookmark = changes['bookmark']?.currentValue;
+		const bookmark: ClickedBookmark = changes['bookmark']?.currentValue;
 		if (bookmark)
 			this.form.setValues(bookmark);
 

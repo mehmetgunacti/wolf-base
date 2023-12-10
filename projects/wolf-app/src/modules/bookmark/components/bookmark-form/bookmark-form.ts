@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Bookmark, FormClass, FormClassImpl, UUID } from '@lib';
+import { Bookmark, ClickedBookmark, FormClass, FormClassImpl, UUID } from '@lib';
 
 interface EditForm {
 
@@ -13,7 +13,7 @@ interface EditForm {
 
 }
 
-export interface BookmarkForm extends EditForm, FormClass<Bookmark> {
+export interface BookmarkForm extends EditForm, FormClass<ClickedBookmark> {
 
 	addURL(): void;
 	removeURL(idx: number): void;
@@ -22,7 +22,7 @@ export interface BookmarkForm extends EditForm, FormClass<Bookmark> {
 
 export const BOOKMARK_FORM = new InjectionToken<BookmarkForm>('BookmarkForm');
 
-export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkForm {
+export class EditFormImpl extends FormClassImpl<ClickedBookmark> implements BookmarkForm {
 
 	protected override createFormGroup(): FormGroup<EditForm> {
 
@@ -67,16 +67,17 @@ export class EditFormImpl extends FormClassImpl<Bookmark> implements BookmarkFor
 
 	}
 
-	override get value(): Bookmark {
+	override get value(): ClickedBookmark {
 
 		const bookmark: Partial<Bookmark> = this._formGroup.value;
 		console.log(bookmark);
 
 		return {
 
-			...bookmark
+			...bookmark,
+			clicks: 0
 
-		} as Bookmark;
+		} as ClickedBookmark;
 
 	}
 

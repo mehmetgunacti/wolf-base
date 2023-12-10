@@ -1,10 +1,10 @@
+import { EntityName, LocalRepositoryNames, LogCategory, capitalize } from '@lib';
 import { Collection, IndexableType, Table } from 'dexie';
-import { EntityName, LocalRepositoryNames, LogCategory, WolfEntity, capitalize } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { RemoteData, RemoteMetadata, SyncData } from 'lib/models';
 import { Entity, Metadata } from 'lib/models/entity.model';
-import { WolfBaseDB } from '../wolfbase.database';
 import { EntityLocalRepository } from 'lib/repositories/local';
+import { WolfBaseDB } from '../wolfbase.database';
 
 export abstract class EntityLocalRepositoryImpl<T extends Entity> implements EntityLocalRepository<T> {
 
@@ -78,8 +78,8 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 			this.tablename + '_remote'
 		], async () => {
 
-			await this.db.table(this.tablename + '_sync').put(data, data.id);
-			await this.db.table(this.tablename + '_remote').put(data, data.id);
+			await this.db.table<SyncData>(this.tablename + '_sync').put({ ...data, updated: false, deleted: false, error: null }, data.id);
+			await this.db.table<RemoteMetadata>(this.tablename + '_remote').put(data, data.id);
 
 		});
 

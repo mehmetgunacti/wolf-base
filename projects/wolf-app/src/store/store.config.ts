@@ -29,6 +29,7 @@ import { knowledgeBaseReducer } from './reducers/knowledge-base.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { AppState } from './states/app.state';
 import { BookmarkSyncClicksEffects } from './effects/bookmark-sync-clicks.effects';
+import { BookmarkSyncDeletedDeletedEffects } from './effects/bookmark-sync-deleted-deleted.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -65,6 +66,8 @@ export const effects = [
 	BookmarkSyncRemoteNewEffects,
 	BookmarkSyncRemoteUpdatedEffects,
 	BookmarkSyncRemoteDeletedEffects,
+
+	BookmarkSyncDeletedDeletedEffects,
 
 	BookmarkSyncClicksEffects,
 
