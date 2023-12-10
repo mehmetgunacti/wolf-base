@@ -41,12 +41,12 @@ function exec(command) {
 function updateVersion(commitCount, package_json_version) {
 
 	const versionInfo = `// this file is automatically created
-export const buildInfo = { 
-	version: '${package_json_version}',  
+export const buildInfo = {
+	version: '${package_json_version}',
 	builtTime: '${new Date().toISOString()}',
 	builtNumber: '${commitCount}'
 };`;
-	writeFileSync('./src/version.ts', versionInfo);
+	writeFileSync('./projects/wolf-app/src/version.ts', versionInfo);
 
 }
 
