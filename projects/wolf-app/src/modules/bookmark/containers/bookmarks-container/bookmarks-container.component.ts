@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Bookmark, ClickedBookmark, UUID } from 'lib';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { openEditBookmarkDialog, togglePopular } from 'store/actions/bookmark.actions';
 import { clickBookmark } from 'store/actions/bookmark.actions';
 import { filteredBookmarks } from 'store/selectors/bookmark-tags.selectors';
@@ -19,7 +19,9 @@ export class BookmarksContainerComponent {
 
 	constructor() {
 
-		this.bookmarks$ = this.store.select(filteredBookmarks);
+		this.bookmarks$ = this.store.select(filteredBookmarks).pipe(
+			map(bookmarks => bookmarks.sort((b1, b2) => b2.clicks - b1.clicks))
+		);
 
 	}
 
