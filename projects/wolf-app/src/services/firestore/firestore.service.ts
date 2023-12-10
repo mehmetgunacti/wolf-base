@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { Entity, FirestoreConfig, WolfEntity } from '@lib';
+import { Entity, EntityName, FirestoreConfig, WolfEntity } from '@lib';
 import { Store } from "@ngrx/store";
 import { BookmarksRemoteRepository, EntityRemoteRepository } from 'lib/repositories/remote';
 import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
@@ -31,11 +31,11 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 
 	}
 
-	getRepository(entity: WolfEntity): EntityRemoteRepository<Entity> {
+	getRepository(entity: EntityName): EntityRemoteRepository<Entity> {
 
-		switch (entity) {
+		switch (entity.name) {
 
-			case WolfEntity.bookmark: return this.bookmarks;
+			case WolfEntity.bookmark.name: return this.bookmarks;
 
 		}
 		throw Error('Unknown entity');
