@@ -57,9 +57,9 @@
 
 		&>div[badge] {
 
-			@extend %flex-center-center;
-			width				: 6rem;
+			@extend %flex-end-center;
 			font-size			: 1.2rem;
+			margin-right		: var(--gap);
 
 			&>span {
 
