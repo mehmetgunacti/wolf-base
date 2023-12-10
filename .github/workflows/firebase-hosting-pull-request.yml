@@ -33,3 +33,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WOLF_359_BASE }}'
           projectId: wolf-359-base
           channelId: live
+		  public: 'dist/wolf-app'
