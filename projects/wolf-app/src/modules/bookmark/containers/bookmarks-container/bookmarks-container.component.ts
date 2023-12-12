@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bookmark, ClickedBookmark, UUID } from 'lib';
+import { ClickedBookmark, UUID } from 'lib';
 import { Observable, map } from 'rxjs';
 import { openEditBookmarkDialog, togglePopular } from 'store/actions/bookmark.actions';
 import { clickBookmark } from 'store/actions/bookmark.actions';
