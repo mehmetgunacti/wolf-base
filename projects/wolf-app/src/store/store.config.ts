@@ -3,6 +3,8 @@ import { BookmarkEntityCreateEffects } from './effects/bookmark-entity-create.ef
 import { BookmarkEntityMoveToTrashEffects } from './effects/bookmark-entity-move-to-trash.effects';
 import { BookmarkEntityUpdateEffects } from './effects/bookmark-entity-update.effects';
 import { BookmarkLoadEffects } from './effects/bookmark-load.effects';
+import { BookmarkSyncClicksEffects } from './effects/bookmark-sync-clicks.effects';
+import { BookmarkSyncDeletedDeletedEffects } from './effects/bookmark-sync-deleted-deleted.effects';
 import { BookmarkSyncLocalDeletedEffects } from './effects/bookmark-sync-local-deleted.effects';
 import { BookmarkSyncLocalNewEffects } from './effects/bookmark-sync-local-new.effects';
 import { BookmarkSyncLocalUpdatedEffects } from './effects/bookmark-sync-local-updated.effects';
@@ -10,8 +12,6 @@ import { BookmarkSyncRemoteDeletedEffects } from './effects/bookmark-sync-remote
 import { BookmarkSyncRemoteNewEffects } from './effects/bookmark-sync-remote-new.effects';
 import { BookmarkSyncRemoteUpdatedEffects } from './effects/bookmark-sync-remote-updated.effects';
 import { BookmarkUIEffects } from './effects/bookmark-ui.effects';
-import { CloudEffects } from './effects/cloud.effects';
-import { CoreEntityEffects } from './effects/core-entity.effects';
 import { CoreNavigationEffects } from './effects/core-navigation.effects';
 import { CoreNotificationEffects } from './effects/core-notification.effects';
 import { CoreThemeEffects } from './effects/core-theme.effects';
@@ -28,8 +28,7 @@ import { databaseReducer } from './reducers/database.reducer';
 import { knowledgeBaseReducer } from './reducers/knowledge-base.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { AppState } from './states/app.state';
-import { BookmarkSyncClicksEffects } from './effects/bookmark-sync-clicks.effects';
-import { BookmarkSyncDeletedDeletedEffects } from './effects/bookmark-sync-deleted-deleted.effects';
+import { BookmarkSyncEffects } from './effects/bookmark-sync.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -52,13 +51,14 @@ export const effects = [
 
 	// Core
 	CoreEffects,
-	CoreEntityEffects,
 	CoreNotificationEffects,
 	CoreNavigationEffects,
 	CoreUIEffects,
 	CoreThemeEffects,
 
 	// Bookmarks
+	BookmarkSyncEffects,
+
 	BookmarkSyncLocalNewEffects,
 	BookmarkSyncLocalUpdatedEffects,
 	BookmarkSyncLocalDeletedEffects,
@@ -83,9 +83,6 @@ export const effects = [
 
 	// Database
 	DatabaseEffects,
-
-	// Cloud
-	CloudEffects,
 
 	// Settings
 	SettingsEffects,

@@ -285,11 +285,11 @@ export class MockBookmarksLocalRepositoryImpl implements BookmarksLocalRepositor
 
 	}
 
-	async storeClicks(items: Click[]): Promise<number> {
+	async storeClicks(items: Click[]): Promise<Click[]> {
 
 		for (const item of items)
 			this.bookmarks_clicks.set(item.id, item);
-		return items.length;
+		return items;
 
 	}
 

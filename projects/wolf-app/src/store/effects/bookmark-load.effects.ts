@@ -5,7 +5,6 @@ import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import * as bmActions from 'store/actions/bookmark.actions';
-import * as cloudActions from 'store/actions/cloud.actions';
 
 @Injectable()
 export class BookmarkLoadEffects {
@@ -59,6 +58,23 @@ export class BookmarkLoadEffects {
 
 	);
 
+	loadAllClicks$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bmActions.loadAllClicks),
+			switchMap(() =>
+
+				from(this.localRepository.bookmarks.listClicks()).pipe(
+					map(clicks => bmActions.loadAllClicksSuccess({ clicks }))
+				)
+
+			)
+
+		)
+
+	);
+
 	loadOneClick$ = createEffect(
 
 		() => this.actions$.pipe(
@@ -96,29 +112,6 @@ export class BookmarkLoadEffects {
 
 	);
 
-	// loadAllSyncData$ = createEffect(
-
-	// 	() => this.actions$.pipe(
-
-	// 		ofType(bmActions.loadAllSyncData),
-	// 		switchMap(() => this.localRepository.bookmarks.listSyncData()),
-	// 		map(syncData => bmActions.loadAllSyncDataSuccess({ syncData }))
-
-	// 	)
-
-	// );
-
-	downloadRemoteDataSuccess$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(cloudActions.downloadRemoteDataSuccess),
-			map(() => bmActions.loadAllRemoteMetadata())
-
-		)
-
-	);
-
 	loadAllRemoteMetadata$ = createEffect(
 
 		() => this.actions$.pipe(
@@ -130,42 +123,5 @@ export class BookmarkLoadEffects {
 		)
 
 	);
-
-	// loadOneRemoteMetadata$ = createEffect(
-
-	// 	() => this.actions$.pipe(
-
-	// 		ofType(bmActions.loadOneRemoteMetadata),
-	// 		switchMap(({ id }) =>
-
-	// 			from(this.localRepository.bookmarks.getRemoteMetadata(id)).pipe(
-
-	// 				map(remoteMetadata => {
-
-	// 					if (remoteMetadata === null)
-	// 						return bmActions.loadOneRemoteMetadataFailure({ id });
-	// 					return bmActions.loadOneRemoteMetadataSuccess({ remoteMetadata });
-
-	// 				})
-
-	// 			)
-
-	// 		)
-
-	// 	)
-
-	// );
-
-	// loadTrashCount$ = createEffect(
-
-	// 	() => this.actions$.pipe(
-
-	// 		ofType(bmActions.loadTrashCount),
-	// 		switchMap(() => this.localRepository.bookmarks.listDeletedItems()),
-	// 		map(items => bmActions.loadTrashCountSuccess({ count: items.length }))
-
-	// 	)
-
-	// );
 
 }

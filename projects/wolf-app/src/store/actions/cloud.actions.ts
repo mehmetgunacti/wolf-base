@@ -1,4 +1,3 @@
-import { CloudTask, Entity, RemoteData } from '@lib';
 import { createAction, props } from "@ngrx/store";
 
 export const openConflictDialog = createAction('[Cloud] Open Conflict Dialog');
@@ -8,6 +7,4 @@ export const downloadSuccess = createAction('[Cloud] Download Success', props<{ 
 export const uploadSuccess = createAction('[Cloud] Upload Success', props<{ count: number }>());
 export const deleteSuccess = createAction('[Cloud] Delete Success', props<{ count: number }>());
 
-export const downloadRemoteMetadata = createAction('[Cloud] Download RemoteMetadata');
-export const downloadRemoteDataSuccess = createAction('[Cloud] Donwload RemoteData Success', props<{ count: number }>());
-export const cloudTaskAction = createAction('[Cloud] Task Action', props<{ task: CloudTask }>());
+export const startSync = createAction('[Cloud] Start Sync');

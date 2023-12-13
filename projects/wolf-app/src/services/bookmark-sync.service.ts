@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { BookmarkSyncService, Click, LocalRepositoryService } from '@lib';
 import { LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE } from 'app/app.config';
 import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, filter, from, of, switchMap } from 'rxjs';
 
 export class BookmarkSyncServiceImpl implements BookmarkSyncService {
 
@@ -20,6 +20,33 @@ export class BookmarkSyncServiceImpl implements BookmarkSyncService {
 
 					// store click locally
 					switchMap(click => this.localRepository.bookmarks.storeClick(click))
+
+				)
+
+			)
+
+		)
+
+	}
+
+	downloadClicks(): Observable<Click[]> {
+
+		return from(this.localRepository.bookmarks.listClicked()).pipe(
+
+			// check if clicked bookmarks available
+			filter(clicked => clicked.length === 0),
+
+			// download all clicks
+			switchMap(() =>
+
+				this.remoteRepository.bookmarks.downloadClicks().pipe(
+
+					switchMap(clicks =>
+
+						// store all clicks
+						this.localRepository.bookmarks.storeClicks(clicks)
+
+					)
 
 				)
 

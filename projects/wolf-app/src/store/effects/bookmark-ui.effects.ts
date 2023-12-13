@@ -174,7 +174,7 @@ export class BookmarkUIEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.clickBookmark),
+			ofType(bmActions.click),
 			switchMap(({ id }) =>
 
 				from(this.localRepository.bookmarks.click(id)).pipe(

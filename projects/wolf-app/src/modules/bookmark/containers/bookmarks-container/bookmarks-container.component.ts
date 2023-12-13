@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { ClickedBookmark, UUID } from 'lib';
 import { Observable, map } from 'rxjs';
 import { openEditBookmarkDialog, togglePopular } from 'store/actions/bookmark.actions';
-import { clickBookmark } from 'store/actions/bookmark.actions';
+import { click } from 'store/actions/bookmark.actions';
 import { filteredBookmarks } from 'store/selectors/bookmark-tags.selectors';
 
 @Component({
@@ -39,7 +39,7 @@ export class BookmarksContainerComponent {
 
 	onClick(id: UUID): void {
 
-		this.store.dispatch(clickBookmark({ id }));
+		this.store.dispatch(click({ id }));
 
 	}
 

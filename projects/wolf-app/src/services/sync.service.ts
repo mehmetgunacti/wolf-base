@@ -9,15 +9,15 @@ export class SyncServiceImpl implements SyncService {
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 	private remoteRepository: RemoteRepositoryService = inject(REMOTE_REPOSITORY_SERVICE);
 
-	downloadMetadata(): Observable<number> {
+	downloadMetadata(entityName: EntityName): Observable<number> {
 
 		// download remote metadata list
-		return this.remoteRepository.bookmarks.downloadAllMetadata().pipe(
+		return this.remoteRepository.getRepository(entityName).downloadAllMetadata().pipe(
 
 			switchMap((rmd: RemoteMetadata[]) =>
 
 				// store list in local storage
-				from(this.localRepository.bookmarks.storeRemoteMetadata(rmd)).pipe(
+				from(this.localRepository.getRepository(entityName).storeRemoteMetadata(rmd)).pipe(
 
 					// return length of list
 					map(() => rmd.length)

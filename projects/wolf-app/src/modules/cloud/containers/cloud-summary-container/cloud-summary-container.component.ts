@@ -28,7 +28,7 @@ function getAction(task: CloudTask): Action | null {
 			return bmActions.syncRemoteDeleted();
 
 		case SyncTaskType.clicked:
-			return bmActions.syncClicked();
+			return bmActions.uploadClicked();
 
 		case SyncTaskType.deleted_deleted:
 			return bmActions.syncDeletedDeleted();

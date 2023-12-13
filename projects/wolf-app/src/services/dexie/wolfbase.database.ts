@@ -17,7 +17,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			bookmarks_sync: 'id',
 			bookmarks_trash: '++, id, name',
 			bookmarks_remote: 'id',
-			bookmarks_clicks: 'id',
+			bookmarks_clicks: 'id, current',
 
 			// knowledge base entry
 			kb_entries: 'id',
@@ -38,7 +38,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			logs: '++id, category, entityId'
 
 		},
-		version: 1
+		version: 2
 
 	});
 

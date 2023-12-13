@@ -63,9 +63,23 @@ const reducer = createReducer(
 			entities: bookmarks.reduce((record, bookmark) => { record[bookmark.id] = bookmark; return record; }, {} as Record<UUID, Bookmark>),
 			syncData: syncData.reduce((record, syncData) => { record[syncData.id] = syncData; return record; }, {} as Record<UUID, SyncData>),
 			remoteMetadata: remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>),
-			clicks: clicks.reduce((record, click) => { record[click.id] = click; return record; }, {} as Record<UUID, Click>),
+			clicks: clicks.reduce((record, click) => { record[click.id] = click; return record; }, {} as Record<UUID, Click>)
 
 		})
+	),
+	on(
+		bmActions.loadAllClicksSuccess, (state, { clicks }): BookmarkEntitiesState => {
+
+			return produce(
+				state,
+				draft => {
+
+					draft.clicks = clicks.reduce((record, click) => { record[click.id] = click; return record; }, {} as Record<UUID, Click>)
+
+				}
+			);
+
+		}
 	),
 	on(
 		bmActions.loadOneClickSuccess, (state, { id, click }): BookmarkEntitiesState => {

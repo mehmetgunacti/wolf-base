@@ -98,7 +98,7 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 
 	}
 
-	async storeClicks(items: Click[]): Promise<number> {
+	async storeClicks(items: Click[]): Promise<Click[]> {
 
 		// remove obsolete click objects
 		const bookmarkIds = new Set(await this.db.bookmarks.toCollection().primaryKeys() as UUID[]);
@@ -107,7 +107,6 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 
 			await this.db.bookmarks_clicks.clear();
 			await this.db.bookmarks_clicks.bulkAdd(matching);
-
 			// add log
 			await this.db.logs.add({
 				category: LogCategory.store_clicks,
@@ -116,7 +115,7 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 			});
 
 		});
-		return items.length;
+		return matching;
 
 	}
 

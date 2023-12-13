@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 export interface SyncService {
 
-	downloadMetadata(): Observable<number>;
+	downloadMetadata(entityName: EntityName): Observable<number>;
 
 	uploadNew(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
 
@@ -23,5 +23,7 @@ export interface SyncService {
 export interface BookmarkSyncService {
 
 	uploadClicks(clicks: Click[]): Observable<Click>;
+
+	downloadClicks(): Observable<Click[]>;
 
 }

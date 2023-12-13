@@ -15,7 +15,7 @@ export const moveToTrash					= createAction('[Bookmark] Move to Trash', props<{ 
 export const moveToTrashSuccess				= createAction('[Bookmark] Move to Trash Success', props<{ id: UUID }>());
 
 // CLICK
-export const clickBookmark					= createAction('[Bookmark] Click', props<{ id: UUID }>());
+export const click							= createAction('[Bookmark] Click', props<{ id: UUID }>());
 
 // LOAD FROM LOCAL DATABASE INTO MEMORY
 //// Entity
@@ -30,24 +30,17 @@ export const unloadOne						= createAction('[Bookmark] Unload One', props<{ id: 
 //// Clicks
 export const loadOneClick					= createAction('[Bookmark] Load One Click', props<{ id: UUID }>());
 export const loadOneClickSuccess			= createAction('[Bookmark] Load One Click Success', props<{ id: UUID, click: Click | null }>());
-// export const loadAllClicks					= createAction('[Bookmark] Load All Clicks');
-// export const loadAllClicksSuccess			= createAction('[Bookmark] Load All Clicks Success', props<{ clicks: Click[] }>());
 
-//// SyncData
-// export const loadAllSyncData				= createAction('[Bookmark] Load All SyncData');
-// export const loadAllSyncDataSuccess			= createAction('[Bookmark] Load All SyncData Success', props<{ syncData: SyncData[] }>());
+export const loadAllClicks					= createAction('[Bookmark] Load All Clicks');
+export const loadAllClicksSuccess			= createAction('[Bookmark] Load All Clicks Success', props<{ clicks: Click[] }>());
 
+// SyncData
 export const loadOneSyncData				= createAction('[Bookmark] Load One SyncData', props<{ id: UUID }>());
 export const loadOneSyncDataSuccess			= createAction('[Bookmark] Load One SyncData Success', props<{ syncData: SyncData | null }>());
-// export const loadOneSyncDataFailure			= createAction('[Bookmark] Load One SyncData Failure', props<{ id: UUID }>());
 
 //// RemoteMetadata
 export const loadAllRemoteMetadata			= createAction('[Bookmark] Load All RemoteMetadata');
 export const loadAllRemoteMetadataSuccess	= createAction('[Bookmark] Load All RemoteMetadata Success', props<{ remoteMetadata: RemoteMetadata[] }>());
-
-// export const loadOneRemoteMetadata			= createAction('[Bookmark] Load One RemoteMetadata', props<{ id: UUID }>());
-// export const loadOneRemoteMetadataSuccess	= createAction('[Bookmark] Load One RemoteMetadata Success', props<{ remoteMetadata: RemoteMetadata }>());
-// export const loadOneRemoteMetadataFailure	= createAction('[Bookmark] Load One RemoteMetadata Failure', props<{ id: UUID }>());
 
 //// Trash Count
 // export const loadTrashCount					= createAction('[Bookmark] Load Trash Count');
@@ -72,25 +65,25 @@ export const emptySelectedTags				= createAction('[Bookmark] Empty Selected Tags
 export const search							= createAction('[Bookmark] Search', props<{ term: string }>());
 
 // CLOUD SYNC
+// local_new
 export const syncLocalNew					= createAction('[Bookmark] Sync Local New');
-// export const syncLocalNewSuccess			= createAction('[Bookmark] Sync Local New Success', props<{ id: UUID, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
 
+// local_updated
 export const syncLocalUpdated				= createAction('[Bookmark] Sync Local Updated');
-// export const syncLocalUpdatedSuccess		= createAction('[Bookmark] Sync Local Updated Success', props<{ id: UUID, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
 
+// local_deleted
 export const syncLocalDeleted				= createAction('[Bookmark] Sync Local Deleted');
-// export const syncLocalDeletedSuccess		= createAction('[Bookmark] Sync Local Deleted Success', props<{ item: NameBase }>());
 
+// remote_new
 export const syncRemoteNew					= createAction('[Bookmark] Sync Remote New');
-// export const syncRemoteNewSuccess			= createAction('[Bookmark] Sync Remote New Success', props<{ id: UUID, bookmark: Bookmark | null, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
 
+// remote_updated
 export const syncRemoteUpdated				= createAction('[Bookmark] Sync Remote Updated');
-// export const syncRemoteUpdatedSuccess		= createAction('[Bookmark] Sync Remote Updated Success', props<{ id: UUID, bookmark: Bookmark | null, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
 
+// remote_deleted
 export const syncRemoteDeleted				= createAction('[Bookmark] Sync Remote Deleted');
-// export const syncRemoteDeletedSuccess		= createAction('[Bookmark] Sync Remote Deleted Success', props<{ item: NameBase }>());
 
+// deleted_deleted
 export const syncDeletedDeleted				= createAction('[Bookmark] Sync Deleted Deleted');
-// export const syncDeletedDeletedSuccess		= createAction('[Bookmark] Sync Deleted Deleted Success', props<{ item: NameBase }>());
 
-export const syncClicked					= createAction('[Bookmark] Sync Clicked');
+export const uploadClicked					= createAction('[Bookmark] Upload Clicked');
