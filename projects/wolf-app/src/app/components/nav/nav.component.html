@@ -1,16 +1,20 @@
-<w-menu [items]="(menuItems$ | async) ?? []" (clicked)="navTo($event)"></w-menu>
+<w-menu [items]="(menuItems$ | async) ?? []"></w-menu>
 <div bottom-buttons>
 
 	<button
 		class="icon-only rounded"
-		(click)="navTo('/settings')"
+		routerLink="/settings"
+		routerLinkActive="active"
+		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
 		styleClass="p-button-rounded p-button-text"
 		title="Settings"><span class="material-symbols-outlined">settings</span></button>
 
 	<div class="badge-container" *ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers">
 		<button
 			class="icon-only rounded"
-			(click)="navTo('/cloud')"
+			routerLink="/cloud"
+			routerLinkActive="active"
+			[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
 			[title]="cloudNumbers.length > 0 ? cloudNumbers[0] + ' syncable items available' : 'Cloud'"><span class="material-symbols-outlined">cloud_sync</span>
 		</button>
 		<span *ngIf="cloudNumbers.length > 0" class="badge">{{ cloudNumbers[0] }}</span>
@@ -18,12 +22,16 @@
 
 	<button
 		class="icon-only rounded"
-		(click)="navTo('/database')"
+		routerLinkActive="/database"
+		routerLinkActive="active"
+		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
 		title="Database"><span class="material-symbols-outlined">database</span></button>
 
 	<button
 		class="icon-only rounded"
-		(click)="navTo('/logs')"
+		routerLinkActive="/logs"
+		routerLinkActive="active"
+		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
 		title="View Logs"><span class="material-symbols-outlined">history</span></button>
 
 	<button

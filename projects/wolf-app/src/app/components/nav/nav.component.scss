@@ -12,6 +12,12 @@
 		margin-top		: auto;
     	gap				: 0.5rem;
 
+		button.active {
+
+			background-color: hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig)/var(--col-focus-alp));
+
+		}
+
 		&>button:last-child {
 
 			margin-left	: auto;

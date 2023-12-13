@@ -11,12 +11,12 @@ import { BookmarkSyncLocalUpdatedEffects } from './effects/bookmark-sync-local-u
 import { BookmarkSyncRemoteDeletedEffects } from './effects/bookmark-sync-remote-deleted.effects';
 import { BookmarkSyncRemoteNewEffects } from './effects/bookmark-sync-remote-new.effects';
 import { BookmarkSyncRemoteUpdatedEffects } from './effects/bookmark-sync-remote-updated.effects';
+import { BookmarkSyncEffects } from './effects/bookmark-sync.effects';
 import { BookmarkUIEffects } from './effects/bookmark-ui.effects';
-import { CoreNavigationEffects } from './effects/core-navigation.effects';
+import { CoreLoadEffects } from './effects/core-load.effects';
 import { CoreNotificationEffects } from './effects/core-notification.effects';
 import { CoreThemeEffects } from './effects/core-theme.effects';
 import { CoreUIEffects } from './effects/core-ui.effects';
-import { CoreEffects } from './effects/core.effects';
 import { DatabaseEffects } from './effects/database.effects';
 import { KnowledgeBaseEntitiesEffects } from './effects/knowledge-base-entities.effects';
 import { LogsEffects } from './effects/logs.effects';
@@ -28,7 +28,6 @@ import { databaseReducer } from './reducers/database.reducer';
 import { knowledgeBaseReducer } from './reducers/knowledge-base.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { AppState } from './states/app.state';
-import { BookmarkSyncEffects } from './effects/bookmark-sync.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -50,9 +49,8 @@ export const metaReducers: MetaReducer<AppState>[] = [
 export const effects = [
 
 	// Core
-	CoreEffects,
+	CoreLoadEffects,
 	CoreNotificationEffects,
-	CoreNavigationEffects,
 	CoreUIEffects,
 	CoreThemeEffects,
 

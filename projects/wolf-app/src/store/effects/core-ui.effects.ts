@@ -1,18 +1,20 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Injectable, inject } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { NavigationEnd, Router } from '@angular/router';
 import { Breakpoint, LocalRepositoryService } from '@lib';
-import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { hideSidebar, setBigScreen, switchTheme, toggleSidebar } from 'store/actions/core-ui.actions';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { selCoreIsSidebarVisible } from 'store/selectors/core-ui.selectors';
+import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { hideSidebar, setBigScreen, switchTheme, toggleSidebar } from 'store/actions/core-ui.actions';
+import { selCoreIsBigScreen, selCoreIsSidebarVisible } from 'store/selectors/core-ui.selectors';
 
 @Injectable()
 export class CoreUIEffects {
 
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
+	private router: Router = inject(Router);
 	private breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
@@ -60,6 +62,18 @@ export class CoreUIEffects {
 
 		),
 		{ dispatch: false }
+
+	);
+
+	successfulNavigation$ = createEffect(
+
+		() => this.router.events.pipe(
+
+			withLatestFrom(this.store.select(selCoreIsBigScreen)),
+			filter(([event, bigScreen]) => !bigScreen && event instanceof NavigationEnd),
+			map(() => hideSidebar())
+
+		)
 
 	);
 

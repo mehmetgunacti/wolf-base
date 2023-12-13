@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MenuItem } from 'lib/models';
 
 @Component({
@@ -10,13 +10,5 @@ import { MenuItem } from 'lib/models';
 export class MenuComponent {
 
 	@Input() items: MenuItem[] = [];
-
-	@Output() clicked: EventEmitter<string> = new EventEmitter();
-
-	onClick(url: string): void {
-
-		this.clicked.emit(url);
-
-	}
 
 }

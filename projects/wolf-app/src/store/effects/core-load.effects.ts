@@ -8,10 +8,11 @@ import { map } from 'rxjs/operators';
 import { confChanged } from 'store/actions/core.actions';
 
 @Injectable()
-export class CoreEffects {
+export class CoreLoadEffects {
 
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
+	// todo: remove auto load
 	listenToConfChanges$ = createEffect(
 
 		() => fromEventPattern<Configuration>(
