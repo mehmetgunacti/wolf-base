@@ -51,7 +51,7 @@ export class FirestoreDocumentURL {
 		const { baseURL, projectId, apiKey } = this.firestoreConfig;
 		let url = `${baseURL}projects/${projectId}/databases/(default)/documents/${this.collection}/${this.document}?key=${apiKey}`;
 		if (this.onlyMetadata)
-			url += `&mask.fieldPaths=dummyField`;
+			url += `&mask.fieldPaths=name`;
 		return url;
 
 	}
@@ -71,7 +71,7 @@ export class FirestoreListURL {
 
 		let queryParameters = `pageSize=${this.pageSize}`;
 		if (this.onlyMetadata)
-			queryParameters += `&mask.fieldPaths=dummyField`;
+			queryParameters += `&mask.fieldPaths=name`;
 		const { baseURL, projectId, apiKey } = this.firestoreConfig;
 		return `${baseURL}projects/${projectId}/databases/(default)/documents/${this.collection}?key=${apiKey}&${queryParameters}`;
 
