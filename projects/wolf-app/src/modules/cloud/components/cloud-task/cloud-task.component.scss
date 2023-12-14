@@ -15,6 +15,7 @@
 
 		@extend %flex-start-center;
 		position			: relative;
+		display				: block;
 		padding				: 4rem var(--gap);
 
 		background-color	: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
@@ -45,6 +46,26 @@
 		& > main {
 
 			padding				: var(--gap-xxl);
+
+			& > div[details] {
+
+				max-height			: 25rem;
+				overflow-y			: auto;
+				width				: 100%;
+
+				& > div[detail] {
+
+					margin-top		: var(--gap-xl);
+
+					& > h6 {
+
+						color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+
+					}
+
+				}
+
+			}
 
 		}
 

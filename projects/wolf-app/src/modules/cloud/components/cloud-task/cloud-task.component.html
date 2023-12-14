@@ -51,12 +51,12 @@
 
 		</ng-container>
 
-		<br>
-		<ng-container *ngFor="let item of task.items">
-			<br>
-			<h6>{{ item.id }}</h6>
-			<h4>{{ item.name }}</h4>
-		</ng-container>
+		<div details>
+			<div detail *ngFor="let item of task.items">
+				<h6>{{ item.id }}</h6>
+				<h4>{{ item.name }}</h4>
+			</div>
+		</div>
 
 	</main>
 
