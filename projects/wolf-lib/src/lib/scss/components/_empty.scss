@@ -1,8 +1,10 @@
 .empty {
 
 	@extend %flex-center-center;
-	color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
-	padding 	: var(--gap-xxl);
-	font-style	: italic;
+	flex-direction	: column;
+    gap				: var(--gap);
+	color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+	padding 		: var(--gap-xxl);
+	font-style		: italic;
 
 }
