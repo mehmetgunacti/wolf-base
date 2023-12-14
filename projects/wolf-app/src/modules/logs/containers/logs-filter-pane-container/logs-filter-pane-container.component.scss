@@ -1,6 +1,5 @@
 @import 'core/helper';
 @import 'core/variables';
-@import 'components/input-element';
 
 :host {
 
@@ -36,39 +35,6 @@
 
 			transform: rotate(var(--chevron-angle));
 			transition: 300ms linear;
-
-		}
-
-	}
-
-	& > aside {
-
-		@extend %flex-column;
-		gap				: var(--gap);
-		overflow		: hidden;
-
-		& > div {
-
-			@extend %flex-center-center;
-			gap			: var(--gap-xxs);
-			margin-top	: var(--gap);
-
-			& > input {
-
-				@extend %input-element;
-				&::placeholder {
-
-					color	: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
-
-				}
-
-			}
-
-		}
-
-		& > w-tag-cloud {
-
-			margin		: var(--gap) 0;
 
 		}
 

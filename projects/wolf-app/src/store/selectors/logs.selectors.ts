@@ -1,10 +1,7 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { LogsModuleState } from "store/states/logs.state";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { LogsModuleState } from 'store/states/logs.state';
 
 const selLogsModuleState = createFeatureSelector<LogsModuleState>('logs');
-
-
-// logs entries
 
 const selLogsEntriesState = createSelector(
 
@@ -16,14 +13,7 @@ const selLogsEntriesState = createSelector(
 export const selLogsAll = createSelector(
 
 	selLogsEntriesState,
-	state => state.logs.reverse()
-
-);
-
-export const selLogsSelectedCategory = createSelector(
-
-	selLogsEntriesState,
-	state => state.selectedCategory
+	state => state.logs //.reverse()
 
 );
 
@@ -33,12 +23,5 @@ const selLogsUIState = createSelector(
 
 	selLogsModuleState,
 	state => state.ui
-
-);
-
-export const selLogsFilterPaneVisibility = createSelector(
-
-	selLogsUIState,
-	state => state.filterPaneVisible
 
 );

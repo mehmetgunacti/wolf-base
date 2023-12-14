@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, map, startWith, tap } from 'rxjs';
+import { Observable, map, startWith } from 'rxjs';
 
 @Component({
 	selector: 'w-input',

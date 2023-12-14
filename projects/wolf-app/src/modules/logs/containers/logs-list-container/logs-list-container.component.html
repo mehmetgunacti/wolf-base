@@ -1,0 +1,27 @@
+<w-portal>
+
+	<button
+		class="icon-only"
+		(click)="onRefresh()">
+		<span class="material-symbols-outlined">refresh</span> Refresh
+	</button>
+
+</w-portal>
+
+<w-card>
+
+	<ng-container card-title>Logs</ng-container>
+	<div *ngIf="logMessages$ | async as logs">
+
+		<ng-container *ngFor="let log of logs">
+
+			<h6>[{{ log.category }}] {{ log.date | date:'dd.MM.yyyy hh:mm:ss' }}</h6>
+			<h6 *ngIf="log.entityId">{{ log.entityId }}</h6>
+			<h4 [innerHTML]="log.message"></h4>
+
+		</ng-container>
+		<p *ngIf="logs.length === 0"><i>nothing to display</i></p>
+
+	</div>
+
+</w-card>

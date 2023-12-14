@@ -1,4 +1,5 @@
-import { LogCategory, LogMessage } from "@lib";
+import { LogMessage } from '@lib';
+
 
 export interface LogsModuleState {
 
@@ -10,27 +11,19 @@ export interface LogsModuleState {
 export interface LogsEntriesState {
 
 	logs: LogMessage[];
-	selectedCategory: LogCategory | null;
 
 }
 
 export interface LogsUIState {
-
-	filterPaneVisible: boolean;
-
 }
 
 export const initialLogsEntriesState: LogsEntriesState = {
 
-	logs: [],
-	selectedCategory: null
+	logs: []
 
 };
 
 export const initialLogsUIState: LogsUIState = {
-
-	filterPaneVisible: false
-
 }
 
 export const initialLogsState: LogsModuleState = {

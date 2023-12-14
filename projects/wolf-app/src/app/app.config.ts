@@ -31,6 +31,12 @@ export const routes: Routes = [
 	},
 	{
 
+		path: 'logs',
+		loadChildren: () => import('../modules/logs/logs.module').then(m => m.LogsModule)
+
+	},
+	{
+
 		path: 'settings',
 		loadChildren: () => import('../modules/settings/settings.module').then(m => m.SettingsModule)
 

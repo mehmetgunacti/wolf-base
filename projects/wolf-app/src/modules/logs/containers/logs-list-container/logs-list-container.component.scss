@@ -1,0 +1,12 @@
+@import 'core/helper';
+@import 'core/variables';
+
+:host {
+
+	w-card {
+
+		@extend %component-shadow;
+
+	}
+
+}

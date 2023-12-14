@@ -70,8 +70,6 @@ export class EditFormImpl extends FormClassImpl<ClickedBookmark> implements Book
 	override get value(): ClickedBookmark {
 
 		const bookmark: Partial<Bookmark> = this._formGroup.value;
-		console.log(bookmark);
-
 		return {
 
 			...bookmark,

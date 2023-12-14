@@ -1,12 +1,11 @@
 import { Injectable, inject } from '@angular/core';
+import { LocalRepositoryService, LogCategory, LogMessage, ToastConfiguration } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
-import { LocalRepositoryService, LogCategory, LogMessage, ToastConfiguration } from '@lib';
-import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { clearLogs, loadLogs, loadLogsSuccess, setSelectedCategory } from 'store/actions/logs.actions';
-import { selLogsSelectedCategory } from 'store/selectors/logs.selectors';
+import { clearLogs, loadLogs, loadLogsSuccess } from 'store/actions/logs.actions';
 
 const convertToast = (toast: ToastConfiguration): LogMessage => {
 
@@ -32,9 +31,8 @@ export class LogsEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(loadLogs, setSelectedCategory),
-			withLatestFrom(this.store.select(selLogsSelectedCategory)),
-			switchMap(([, category]) => this.localRepository.logs.list({ category })),
+			ofType(loadLogs),
+			switchMap(({entityId, category}) => this.localRepository.logs.list({ entityId, category })),
 			map(logs => loadLogsSuccess({ logs }))
 
 		)

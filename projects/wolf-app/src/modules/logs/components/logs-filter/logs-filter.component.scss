@@ -1,0 +1,20 @@
+@import 'core/helper';
+
+:host {
+
+	display		: flex;
+	gap			: var(--gap-sm);
+
+	& > div {
+
+		@extend %flex-center-center;
+		width: 3rem;
+
+	}
+	& > w-input {
+
+		flex	: 1;
+
+	}
+
+}

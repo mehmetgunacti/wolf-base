@@ -1,11 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { toggleFilterPane } from "store/actions/logs.actions";
 import { LogsUIState, initialLogsUIState } from "store/states/logs.state";
 
 const reducer = createReducer(
 
     initialLogsUIState,
-    on(toggleFilterPane, (state): LogsUIState => ({ ...state, filterPaneVisible: !state.filterPaneVisible }))
+    // on(toggleFilterPane, (state): LogsUIState => ({ ...state, filterPaneVisible: !state.filterPaneVisible }))
 
 );
 

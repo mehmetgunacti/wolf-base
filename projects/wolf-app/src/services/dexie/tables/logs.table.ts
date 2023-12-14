@@ -1,4 +1,4 @@
-import { LogCategory, LogMessage } from '@lib';
+import { LogCategory, LogMessage, UUID } from '@lib';
 import { WolfBaseDB } from '../wolfbase.database';
 import { LogsLocalRepository } from 'lib/repositories/local';
 
@@ -12,12 +12,21 @@ export class DexieLogsLocalRepositoryImpl implements LogsLocalRepository {
 
 	}
 
-	async list(params?: { category: LogCategory | null; }): Promise<LogMessage[]> {
+	async list(params?: { category?: LogCategory; entityId?: UUID, limit?: number }): Promise<LogMessage[]> {
 
-		if (params?.category)
-			return await this.db.logs.where('category').equals(params.category).toArray();
+		const limit = params?.limit || 100;
+		const { entityId, category } = params ?? {};
 
-		return await this.db.logs.toArray();
+		if (entityId && category)
+			return await this.db.logs.where('entityId').equals(entityId).and(log => log.category === category).reverse().sortBy(':id');
+
+		if (category)
+			return await this.db.logs.where('category').equals(category).limit(limit).reverse().sortBy(':id');
+
+		if (entityId)
+			return await this.db.logs.where('entityId').equals(entityId).reverse().sortBy(':id');
+
+		return await this.db.logs.limit(limit).reverse().sortBy(':id');
 
 	}
 

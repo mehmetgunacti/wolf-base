@@ -1,3 +1,20 @@
+div,
+span,
+h1, h2, h3, h4, h5, h6,
+a {
+
+	color		: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+	transition	: color $transition;
+
+}
+
+a:focus,
+a:focus-visible {
+
+	outline: 3px solid hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
+
+}
+
 h1 {
 
 	font-size		: 2rem;
@@ -22,38 +39,22 @@ h3 {
 h4 {
 
 	font-size		: 1.3rem;
-	margin-bottom	: 0.5rem;
+	margin-bottom	: 1.1rem;
 
 }
 
 h5 {
 
-	font-size		: 1.1rem;
+	font-size		: 1.2rem;
 	margin-bottom	: 0.3rem;
 
 }
 
 h6 {
 
-	font-size		: 0.9rem;
+	font-size		: 1rem;
 	font-style		: italic;
-	margin-bottom	: 0;
-
-}
-
-div,
-span,
-h1, h2, h3, h4, h5, h6,
-a {
-
-	color		: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
-	transition	: color $transition;
-
-}
-
-a:focus,
-a:focus-visible {
-
-	outline: 3px solid hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
+	color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+	margin-bottom	: 0.3rem;
 
 }
