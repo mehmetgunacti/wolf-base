@@ -1,0 +1,40 @@
+<header>
+
+	<w-selected-tags
+		[tags]="['popular', 'news', 'im-bored', 'shopping']"
+		[selectedTags]="selectedTags$ | async"
+		(filterClick)="emptyFilter()"
+		(tagClick)="onTagClicked($event)"></w-selected-tags>
+
+	<button
+		type="button"
+		class="icon-only"
+		(click)="toggleCloud()">
+		<span class="material-symbols-outlined">chevron_left</span>
+	</button>
+
+</header>
+<aside [@slideUpDown]="cloudVisible ? 'opened' : 'closed'">
+
+	<div>
+		<input
+			type="text"
+			placeholder="Keyword"
+			[formControl]="searchControl"
+			[autofocus]="cloudVisible"
+			[after]="500">
+		<button
+			type="button"
+			class="square small"
+			(click)="onSearchReset()">
+			<span class="material-symbols-outlined">search</span>
+		</button>
+	</div>
+
+	<w-tag-cloud
+		[tags]="tags$ | async"
+		[selectedTags]="selectedTags$ | async"
+		[relatedTags]="relatedTags$ | async"
+		(tagClick)="onTagClicked($event)"></w-tag-cloud>
+
+</aside>

@@ -1,4 +1,3 @@
-import { CroppieComponent, SelectedTagsComponent } from '@lib';
 import { BookmarkFormComponent } from './components/bookmark-form/bookmark-form.component';
 import { BookmarkEditContainerComponent } from './containers/bookmark-edit-container/bookmark-edit-container.component';
 import { BookmarksContainerComponent } from './containers/bookmarks-container/bookmarks-container.component';
@@ -9,7 +8,6 @@ export const components = [
 
 	// components
 	BookmarkFormComponent,
-	SelectedTagsComponent,
 
 	// containers
 	BookmarkEditContainerComponent,

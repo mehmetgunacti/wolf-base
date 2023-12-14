@@ -1,0 +1,6 @@
+<app-note
+	*ngFor="let note of notes$ | async"
+	[item]="note"
+	(edit)="onEdit($event)"
+	(popular)="onPopular($event)"
+	(linkClick)="onClick($event)"></app-note>

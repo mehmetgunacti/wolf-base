@@ -1,6 +1,6 @@
-import { createSelector } from "@ngrx/store";
 import { CloudTask } from '@lib';
-import { selBookmarkConflictCloudTasks, selBookmarkNonConflictCloudTasks } from "./cloud-bookmark.selectors";
+import { createSelector } from "@ngrx/store";
+import { selBookmarkConflictCloudTasks, selBookmarkNonConflictCloudTasks } from './bookmark-selectors/bookmark-cloud.selectors';
 import { selCloudModuleState } from "./cloud.selectors";
 
 export const selCloudIsConflictDialogVisible = createSelector(

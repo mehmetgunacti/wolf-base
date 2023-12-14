@@ -1,0 +1,162 @@
+@import 'core/helper';
+@import 'core/variables';
+
+:host {
+
+	@extend %component-shadow;
+	--note-hover-transition		: all ease-in-out 250ms;
+	--note-edit-button-opacity	: 0;
+	--font-size 					: larger;
+	--image-size					: 110px;
+	--note-bg-color				: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
+
+	&.compact {
+
+		--font-size					: medium;
+		--image-size				: 55px;
+
+	}
+
+
+	display				: flex;
+	position			: relative;
+	padding				: 0.5rem;
+	overflow			: hidden;
+
+	background-color	: var(--note-bg-color);
+	border-radius		: var(--border-radius);
+	transition			: all ease-in-out 250ms, background-color $transition;
+
+	& > div[note-overlay] {
+
+		position					: absolute;
+		width						: 100%;
+		height						: 100%;
+		top							: 0;
+		left						: 0;
+		background-color			: transparent;
+		pointer-events				: auto;
+		z-index						: 1000;
+
+	}
+
+	&:hover {
+		--note-edit-button-opacity : 1;
+	}
+
+	div[note-image] {
+
+		@extend %flex-center-y;
+
+		& > img {
+
+			width	: var(--image-size);
+			height	: var(--image-size);
+
+		}
+
+	}
+
+	div[note-right] {
+
+		@extend %flex-column;
+		padding	: 0.6rem;
+		flex	: 1;
+
+		div[note-top] {
+			flex: 1;
+			@extend %flex-start-center;
+
+			span[note-name] {
+
+				font-size		: var(--font-size);
+				font-weight		: bolder;
+				position		: relative;
+
+				sup {
+					position		: absolute;
+					visibility		: hidden;
+					opacity			: 0;
+					transition		: var(--note-hover-transition);
+					margin-left		: 0.3rem;
+					top				: -6px;
+					&>i {
+						font-size	: x-small;
+					}
+				}
+
+			}
+
+			span[note-title] {
+				color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+				font-size	: small;
+			}
+
+			&:hover {
+				span[note-name] sup {
+					visibility			: initial;
+					opacity				: initial;
+				}
+			}
+
+		}
+
+		div[note-bottom] {
+
+			@extend %flex-column;
+
+			div[note-url] {
+
+				word-break		: break-all;
+				font-size		: x-small;
+				color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+
+			}
+
+			div[note-tags] {
+
+				display			: flex;
+				flex-wrap		: wrap;
+				margin-top		: var(--gap-xs);
+				padding			: var(--gap-sm) var(--gap-sm) var(--gap-sm) 0;
+				gap				: var(--gap-xs);
+
+			}
+
+		}
+
+	}
+
+	#editButton {
+
+		position				: absolute;
+		opacity					: var(--note-edit-button-opacity);
+		transition				: var(--note-hover-transition);
+		bottom					: 1rem;
+		right					: 1rem;
+
+	}
+
+	#popularButton {
+
+		position				: absolute;
+		opacity					: var(--note-edit-button-opacity);
+		transition				: var(--note-hover-transition);
+		top						: 1rem;
+		right					: 1rem;
+
+	}
+
+	#editButton,
+	#popularButton {
+
+		&:focus,
+		&:focus-visible {
+
+			opacity				: 1;
+
+		}
+
+	}
+
+}

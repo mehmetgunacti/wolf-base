@@ -9,6 +9,12 @@ export enum LocalRepositoryNames {
 	bookmarks_trash = 'bookmarks_trash',
 	bookmarks_clicks = 'bookmarks_clicks',
 
+	// notes
+	notes = 'notes',
+	notes_sync = 'notes_sync',
+	notes_remote = 'notes_remote',
+	notes_trash = 'notes_trash',
+
 	// knowledge base entries
 	kb_entries = 'kb_entries',
 	kb_entries_sync = 'kb_entries_sync',

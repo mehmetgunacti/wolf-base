@@ -1,0 +1,28 @@
+@import 'core/helper';
+@import 'mixins/responsive';
+
+:host {
+
+	display	: contents;
+
+	& > w-card {
+
+		width				: 100vw;
+		height				: 100vh;
+
+		@include bigScreen {
+
+			width		: 80vw;
+			height		: 90vh;
+
+		}
+
+		& app-note-form {
+
+			flex		: 1;
+
+		}
+
+	}
+
+}

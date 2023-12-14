@@ -1,7 +1,7 @@
 import Dexie from 'dexie';
 import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalRepositoryNames } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
-import { KBEntry, LogMessage, RemoteMetadata, SyncData } from 'lib/models';
+import { KBEntry, LogMessage, Note, RemoteMetadata, SyncData } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { DexieConfiguration } from 'lib/models/database.model';
 
@@ -18,6 +18,12 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			bookmarks_trash: '++, id, name',
 			bookmarks_remote: 'id',
 			bookmarks_clicks: 'id, current',
+
+			// notes
+			notes: 'id, name, content',
+			notes_sync: 'id',
+			notes_trash: '++, id, name',
+			notes_remote: 'id',
 
 			// knowledge base entry
 			kb_entries: 'id',
@@ -38,7 +44,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			logs: '++id, category, entityId'
 
 		},
-		version: 2
+		version: 3
 
 	});
 
@@ -52,6 +58,12 @@ export class WolfBaseDB extends Dexie {
 	bookmarks_remote: Dexie.Table<RemoteMetadata, UUID>;
 	bookmarks_trash: Dexie.Table<Bookmark, number>;
 	bookmarks_clicks: Dexie.Table<Click, UUID>;
+
+	// notes
+	notes: Dexie.Table<Note, UUID>;
+	notes_sync: Dexie.Table<SyncData, UUID>;
+	notes_remote: Dexie.Table<RemoteMetadata, UUID>;
+	notes_trash: Dexie.Table<Note, number>;
 
 	// knowledge base entries
 	kb_entries: Dexie.Table<KBEntry, UUID>;
@@ -79,6 +91,11 @@ export class WolfBaseDB extends Dexie {
 		this.bookmarks_remote = this.table(LocalRepositoryNames.bookmarks_remote);
 		this.bookmarks_trash = this.table(LocalRepositoryNames.bookmarks_trash);
 		this.bookmarks_clicks = this.table(LocalRepositoryNames.bookmarks_clicks);
+
+		this.notes = this.table(LocalRepositoryNames.notes);
+		this.notes_sync = this.table(LocalRepositoryNames.notes_sync);
+		this.notes_remote = this.table(LocalRepositoryNames.notes_remote);
+		this.notes_trash = this.table(LocalRepositoryNames.notes_trash);
 
 		this.kb_entries = this.table(LocalRepositoryNames.kb_entries);
 		this.kb_entries_sync = this.table(LocalRepositoryNames.kb_entries_sync);

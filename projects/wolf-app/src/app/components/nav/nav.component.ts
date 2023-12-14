@@ -3,7 +3,7 @@ import { MenuItem } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { switchTheme } from 'store/actions/core-ui.actions';
-import { selBookmarkMenuBadge } from 'store/selectors/bookmark-ui.selectors';
+import { selBookmarkMenuBadge } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
 import { selCloudMenuBadgeNumbers } from 'store/selectors/cloud-ui.selectors';
 
 @Component({
@@ -35,6 +35,11 @@ export class NavComponent {
 						label: 'Bookmarks',
 						icon: 'bookmarks',
 						badge: filtered < total ? `${filtered} / ${total}` : `${total}`
+					},
+					{
+						url: '/notes',
+						label: 'Notes',
+						icon: 'note_stack'
 					},
 					{
 						url: '/kb',

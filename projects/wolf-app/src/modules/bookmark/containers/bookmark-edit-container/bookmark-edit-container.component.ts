@@ -4,8 +4,8 @@ import { Bookmark, ToastConfiguration, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { closeEditBookmarkDialog, create, moveToTrash, update } from 'store/actions/bookmark.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { selBookmark } from 'store/selectors/bookmark-entities.selectors';
-import { distinctTagsArray } from 'store/selectors/bookmark-tags.selectors';
+import { selBookmark } from 'store/selectors/bookmark-selectors/bookmark-entities.selectors';
+import { distinctTagsArray } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
 import { selCoreTitleLookupUrl } from 'store/selectors/core-configuration.selectors';
 
 @Component({

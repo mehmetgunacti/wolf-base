@@ -3,7 +3,7 @@ import { ClickedBookmark, TAG_POPULAR, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { click } from 'store/actions/bookmark.actions';
-import * as selectors from 'store/selectors/bookmark-entities.selectors';
+import * as bmSelectors from 'store/selectors/bookmark-selectors/bookmark-entities.selectors';
 
 @Component({
 	selector: 'app-popular-bookmarks-container',
@@ -17,7 +17,7 @@ export class PopularBookmarksContainerComponent implements OnInit {
 
 	constructor(private store: Store) {
 
-		this.bookmarks$ = store.select(selectors.selBookmarkArray).pipe(
+		this.bookmarks$ = store.select(bmSelectors.selBookmarkArray).pipe(
 			map(bookmarks => bookmarks.filter(b => b.tags.includes(TAG_POPULAR))),
 			map(bookmarks => bookmarks.sort((b1, b2) => b2.clicks - b1.clicks))
 		);

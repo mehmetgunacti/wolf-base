@@ -1,8 +1,9 @@
 import { Entity, EntityName, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
-import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, KBContentsLocalRepository, KBEntriesLocalRepository, LogsLocalRepository } from 'lib/repositories/local';
+import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, KBContentsLocalRepository, KBEntriesLocalRepository, LogsLocalRepository, NotesLocalRepository } from 'lib/repositories/local';
 import { DexieBookmarksRepositoryImpl, DexieConfigurationRepositoryImpl, DexieLogsLocalRepositoryImpl } from './tables';
 import { DexieKBContentsRepositoryImpl } from './tables/kb-contents.table';
 import { DexieKBEntriesRepositoryImpl } from './tables/kb-entries.table';
+import { DexieNotesRepositoryImpl } from './tables/notes.table';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
 
 export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
@@ -10,6 +11,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 	private db: WolfBaseDB;
 
 	bookmarks: BookmarksLocalRepository;
+	notes: NotesLocalRepository;
 	kbEntries: KBEntriesLocalRepository;
 	kbContents: KBContentsLocalRepository;
 	configuration: ConfigurationLocalRepository;
@@ -19,6 +21,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 		const db: WolfBaseDB = wolfBaseDBFactory();
 		this.bookmarks = new DexieBookmarksRepositoryImpl(db);
+		this.notes = new DexieNotesRepositoryImpl(db);
 		this.kbEntries = new DexieKBEntriesRepositoryImpl(db);
 		this.kbContents = new DexieKBContentsRepositoryImpl(db);
 		this.configuration = new DexieConfigurationRepositoryImpl(db);
@@ -31,7 +34,8 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 		switch (entityName.name) {
 
-			case WolfEntity.bookmark.name: return this.bookmarks as unknown as  EntityLocalRepository<T>;
+			case WolfEntity.bookmark.name: return this.bookmarks as unknown as EntityLocalRepository<T>;
+			case WolfEntity.note.name: return this.notes as unknown as EntityLocalRepository<T>;
 
 		}
 		throw Error('Unknown entity');

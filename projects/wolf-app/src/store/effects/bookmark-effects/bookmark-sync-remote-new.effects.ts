@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as bmActions from 'store/actions/bookmark.actions';
-import { selBookmarkRemoteNew } from 'store/selectors/cloud-bookmark.selectors';
+import { selBookmarkRemoteNew } from 'store/selectors/bookmark-selectors/bookmark-cloud.selectors';
 
 @Injectable()
 export class BookmarkSyncRemoteNewEffects {

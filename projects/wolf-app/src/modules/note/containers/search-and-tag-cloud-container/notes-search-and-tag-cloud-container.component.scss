@@ -1,0 +1,77 @@
+@import 'core/helper';
+@import 'core/variables';
+@import 'components/input-element';
+
+:host {
+
+	@extend %flex-column;
+	padding				: var(--gap);
+	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+	border-radius		: var(--border-radius);
+	transition			: $bg-transition;
+
+	@extend %component-shadow;
+
+	--chevron-angle		: 0deg;
+
+	&.open {
+
+		--chevron-angle	: -90deg;
+
+	}
+
+	& > header {
+
+		display			: flex;
+		align-items		: center;
+		padding-left	: var(--gap);
+
+		& :first-child {
+
+			flex		: 1;
+
+		}
+
+		& .material-symbols-outlined {
+
+			transform: rotate(var(--chevron-angle));
+			transition: 300ms linear;
+
+		}
+
+	}
+
+	& > aside {
+
+		@extend %flex-column;
+		gap				: var(--gap);
+		overflow		: hidden;
+
+		& > div {
+
+			@extend %flex-center-center;
+			gap			: var(--gap-xxs);
+			margin-top	: var(--gap);
+
+			& > input {
+
+				@extend %input-element;
+				&::placeholder {
+
+					color	: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+
+				}
+
+			}
+
+		}
+
+		& > w-tag-cloud {
+
+			margin		: var(--gap) 0;
+
+		}
+
+	}
+
+}

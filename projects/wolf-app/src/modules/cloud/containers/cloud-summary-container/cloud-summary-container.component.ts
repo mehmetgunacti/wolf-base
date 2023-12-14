@@ -3,7 +3,7 @@ import { Action, Store } from '@ngrx/store';
 import { CloudTask, SyncTaskType } from 'lib';
 import { Observable } from 'rxjs';
 import * as bmActions from 'store/actions/bookmark.actions';
-import { selBookmarkCloudTasks } from 'store/selectors/cloud-bookmark.selectors';
+import { selBookmarkCloudTasks } from 'store/selectors/bookmark-selectors/bookmark-cloud.selectors';
 
 function getAction(task: CloudTask): Action | null {
 

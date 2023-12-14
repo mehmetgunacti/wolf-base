@@ -25,6 +25,12 @@ export const routes: Routes = [
 	},
 	{
 
+		path: 'notes',
+		loadChildren: () => import('../modules/note/note.module').then(m => m.NoteModule)
+
+	},
+	{
+
 		path: 'cloud',
 		loadChildren: () => import('../modules/cloud/cloud.module').then(m => m.CloudModule)
 

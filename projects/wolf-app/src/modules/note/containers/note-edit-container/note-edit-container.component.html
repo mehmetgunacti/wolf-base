@@ -1,0 +1,22 @@
+<w-card>
+	<ng-container card-title>Edit Note</ng-container>
+	<ng-container card-buttons>
+
+		<button
+			class="icon-only rounded"
+			(click)="onClose()"
+			title="Switch Theme"><span class="material-symbols-outlined">close</span></button>
+
+	</ng-container>
+
+	<app-note-form
+		[note]="note$ | async"
+		[tagSuggestions]="tagSuggestions$ | async"
+		[titleLookupUrl]="titleLookup$ | async"
+		(create)="onCreate($event)"
+		(update)="onUpdate($event.id, $event.note)"
+		(remove)="onRemove($event)"
+		(tagInput)="onTagInput($event)"
+		(titleLookup)="onTitleLookup($event)"></app-note-form>
+
+</w-card>

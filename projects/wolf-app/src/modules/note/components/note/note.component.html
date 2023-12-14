@@ -1,0 +1,13 @@
+<ng-container *ngIf="item">
+
+	<div>{{ item.name }}</div>
+	<br>
+	<br>
+	<div [innerHTML]="item.content"></div>
+	<br>
+	<br>
+	<div note-tags *ngIf="item.tags">
+		<button *ngFor="let tag of item.tags" class="tag">{{ tag }}</button>
+	</div>
+
+</ng-container>

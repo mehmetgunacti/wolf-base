@@ -8,7 +8,7 @@ import { BookmarkEditContainerComponent } from 'modules/bookmark/containers/book
 import { from, of } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import * as bmActions from 'store/actions/bookmark.actions';
-import { selBookmarkOverlayId } from 'store/selectors/bookmark-ui.selectors';
+import { selBookmarkOverlayId } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
 
 @Injectable()
 export class BookmarkUIEffects {

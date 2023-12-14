@@ -5,3 +5,4 @@ export * from './kb-content.repository';
 export * from './kb-entry.repository';
 export * from './key-value.repository';
 export * from './log.repository';
+export * from './note.repository';

@@ -1,0 +1,58 @@
+@import 'core/helper';
+@import 'core/variables';
+@import 'mixins/responsive';
+
+:host {
+
+	@extend %flex-column;
+	gap				: var(--gap-sm);
+
+	& > div[note-form] {
+
+		display				: block;
+		overflow-y			: auto;
+		flex				: 1;
+		padding-top			: 1rem;
+
+		& > form {
+
+			@extend %flex-column;
+			padding			: var(--gap-xs);
+			gap				: var(--gap-lg);
+
+			& > div {
+
+				@extend %flex-row;
+				gap			: var(--gap-xs);
+				& :first-child {
+
+					flex	: 1;
+
+				}
+
+				& .material-symbols-outlined {
+
+					font-size	: 1.4rem;
+
+				}
+
+			}
+
+		}
+
+	}
+
+	& > div[form-element-buttons] {
+
+		@extend %flex-space-between-center;
+		padding				: var(--gap-xs);
+
+		& button:last-child {
+
+			margin-left		: auto;
+
+		}
+
+	}
+
+}

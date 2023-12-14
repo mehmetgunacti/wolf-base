@@ -2,9 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ClickedBookmark, UUID } from 'lib';
 import { Observable, map } from 'rxjs';
-import { openEditBookmarkDialog, togglePopular } from 'store/actions/bookmark.actions';
-import { click } from 'store/actions/bookmark.actions';
-import { filteredBookmarks } from 'store/selectors/bookmark-tags.selectors';
+import { click, openEditBookmarkDialog, togglePopular } from 'store/actions/bookmark.actions';
+import { filteredBookmarks } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
 
 @Component({
 	selector: 'app-bookmarks-container',
