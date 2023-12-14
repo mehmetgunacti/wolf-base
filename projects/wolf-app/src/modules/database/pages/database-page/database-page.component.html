@@ -1,0 +1,42 @@
+<w-portal>
+
+	<button
+		class="icon-only"
+		(click)="onBackupDatabase()">
+		<span class="material-symbols-outlined">folder_zip</span> Backup
+	</button>
+
+</w-portal>
+
+<div>
+	dataview
+	<ng-container *ngIf="(content$ | async) ?? [] as content">
+
+		<!-- <p-dataView #dv [value]="content || []" [rows]="5" [paginator]="true">
+
+			<ng-template pTemplate="header">
+
+				<span controls>
+					<span class="p-float-label">
+						<p-dropdown inputId="tablenames" [options]="tableNames" [formControl]="fcTableName"></p-dropdown>
+						<label for="tablenames">Table</label>
+					</span>
+					<span class="p-float-label">
+						<input id="searchbox" type="text" #searchbox pInputText [formControl]="fcSearch">
+						<label for="searchbox">Search</label>
+					</span>
+				</span>
+				<span>Items: {{ content.length }}</span>
+
+			</ng-template>
+			<ng-template let-item pTemplate="listItem">
+
+				<pre>{{ item }}</pre>
+
+			</ng-template>
+
+		</p-dataView> -->
+
+	</ng-container>
+
+</div>
