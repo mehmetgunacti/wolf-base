@@ -12,3 +12,4 @@ export * from './note.model';
 export * from './remote.model';
 export * from './sync.model';
 export * from './tag.model';
+export * from './treenode.model';

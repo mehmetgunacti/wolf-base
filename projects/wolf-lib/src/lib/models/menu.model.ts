@@ -1,6 +1,6 @@
 export interface MenuItem {
 
-	url: string;
+	url: string[];
 	label: string;
 	icon?: string;
 	badge?: string;

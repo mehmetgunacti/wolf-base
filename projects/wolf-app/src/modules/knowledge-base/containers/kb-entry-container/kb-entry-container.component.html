@@ -1,0 +1,17 @@
+<w-portal>
+
+	<button
+		class="icon-only"
+		routerLink="new">
+		<span class="material-symbols-outlined">post_add</span> Add
+	</button>
+
+	<button
+		class="icon-only"
+		routerLink="edit">
+		<span class="material-symbols-outlined">edit_note</span> Edit
+	</button>
+
+</w-portal>
+
+<app-kb-entry [entry]="entry$ | async"></app-kb-entry>

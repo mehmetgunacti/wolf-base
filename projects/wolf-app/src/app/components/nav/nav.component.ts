@@ -26,23 +26,23 @@ export class NavComponent {
 
 				const items: MenuItem[] = [
 					{
-						url: '/',
+						url: ['/'],
 						label: 'Home',
 						icon: 'home'
 					},
 					{
-						url: '/bookmarks',
+						url: ['/bookmarks'],
 						label: 'Bookmarks',
 						icon: 'bookmarks',
 						badge: filtered < total ? `${filtered} / ${total}` : `${total}`
 					},
 					{
-						url: '/notes',
+						url: ['/notes'],
 						label: 'Notes',
 						icon: 'note_stack'
 					},
 					{
-						url: '/kb',
+						url: ['/kb'],
 						label: 'Knowledge Base',
 						icon: 'school'
 					}

@@ -1,0 +1,10 @@
+<div>header="Knowledge Base Entry"
+
+	<app-kb-entry-form
+		[entry]="entry$ | async"
+		[parents]="(kbParents$ | async) || []"
+		(create)="onCreate($event)"
+		(update)="onUpdate($event.id, $event.kbEntry)"
+		(delete)="onDelete($event)"></app-kb-entry-form>
+
+</div>

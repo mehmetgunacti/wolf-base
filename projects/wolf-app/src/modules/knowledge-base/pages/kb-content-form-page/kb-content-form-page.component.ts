@@ -1,0 +1,9 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+
+@Component({
+	selector: 'app-kb-content-form-page',
+	templateUrl: './kb-content-form-page.component.html',
+	styleUrls: ['./kb-content-form-page.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class KBContentFormPageComponent { }
