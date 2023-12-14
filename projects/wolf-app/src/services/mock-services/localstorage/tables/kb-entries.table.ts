@@ -199,7 +199,14 @@ export class MockKBEntriesLocalRepositoryImpl implements KBEntriesLocalRepositor
 
 	}
 
-	async storeRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
+	async storeOneRemoteMetadata(data: RemoteMetadata): Promise<RemoteMetadata> {
+
+		this.kbEntries_remote.set(data.id, data);
+		return data;
+
+	}
+
+	async storeAllRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
 
 		this.kbEntries_remote.clear();
 		data.forEach(d => this.kbEntries_remote.set(d.id, d));

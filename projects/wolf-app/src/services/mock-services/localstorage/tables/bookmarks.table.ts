@@ -206,7 +206,14 @@ export class MockBookmarksLocalRepositoryImpl implements BookmarksLocalRepositor
 
 	}
 
-	async storeRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
+	async storeOneRemoteMetadata(data: RemoteMetadata): Promise<RemoteMetadata> {
+
+		this.bookmarks_remote.set(data.id, data);
+		return data;
+
+	}
+
+	async storeAllRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
 
 		this.bookmarks_remote.clear();
 		data.forEach(d => this.bookmarks_remote.set(d.id, d));

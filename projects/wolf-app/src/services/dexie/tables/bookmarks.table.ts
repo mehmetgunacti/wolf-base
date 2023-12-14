@@ -51,7 +51,7 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 
 			// update syncData
 			if (count > 0)
-				await this.db.table<SyncData>(LocalRepositoryNames.bookmarks_sync).where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
+				await this.db.bookmarks_sync.where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
 
 		});
 

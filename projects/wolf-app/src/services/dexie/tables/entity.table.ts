@@ -85,14 +85,27 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	}
 
-	async storeRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
+	async storeOneRemoteMetadata(data: RemoteMetadata): Promise<RemoteMetadata> {
 
 		await this.db.transaction('rw', [
 			this.tablename + '_remote'
 		], async () => {
 
-			await this.db.table(this.tablename + '_remote').clear();
-			await this.db.table(this.tablename + '_remote').bulkPut(data);
+			await this.db.table<RemoteMetadata>(this.tablename + '_remote').put(data, data.id);
+
+		});
+		return data;
+
+	}
+
+	async storeAllRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
+
+		await this.db.transaction('rw', [
+			this.tablename + '_remote'
+		], async () => {
+
+			await this.db.table<RemoteMetadata>(this.tablename + '_remote').clear();
+			await this.db.table<RemoteMetadata>(this.tablename + '_remote').bulkPut(data);
 
 		});
 

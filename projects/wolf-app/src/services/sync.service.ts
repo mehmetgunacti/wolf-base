@@ -17,7 +17,7 @@ export class SyncServiceImpl implements SyncService {
 			switchMap((rmd: RemoteMetadata[]) =>
 
 				// store list in local storage
-				from(this.localRepository.getRepository(entityName).storeRemoteMetadata(rmd)).pipe(
+				from(this.localRepository.getRepository(entityName).storeAllRemoteMetadata(rmd)).pipe(
 
 					// return length of list
 					map(() => rmd.length)
@@ -97,7 +97,7 @@ export class SyncServiceImpl implements SyncService {
 											this.uploadAndStore(entityName, entity),
 
 											// save remoteMetadata if syncData - remoteMetadata checks fail
-											from(this.localRepository.getRepository(entityName).storeRemoteMetadata([remoteMetadata])).pipe(() => of(remoteMetadata))
+											from(this.localRepository.getRepository(entityName).storeOneRemoteMetadata(remoteMetadata))
 
 										)
 

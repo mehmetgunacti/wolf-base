@@ -12,7 +12,8 @@ export interface EntityLocalRepository<T extends Entity> {
 
 	storeMetadata(data: Metadata): Promise<void>;
 
-	storeRemoteMetadata(data: RemoteMetadata[]): Promise<void>;
+	storeOneRemoteMetadata(data: RemoteMetadata): Promise<RemoteMetadata>;
+	storeAllRemoteMetadata(data: RemoteMetadata[]): Promise<void>;
 
 	remove(id: UUID): Promise<UUID>;
 
