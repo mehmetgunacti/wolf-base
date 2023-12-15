@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MenuItem } from '@lib';
+import { MenuItem, TAG_PINNED, TAG_POPULAR } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { switchTheme } from 'store/actions/core-ui.actions';
@@ -32,13 +32,14 @@ export class NavComponent {
 					},
 					{
 						url: ['/bookmarks'],
-						queryParams: { tags: 'popular' },
+						queryParams: { tags: TAG_POPULAR },
 						label: 'Bookmarks',
 						icon: 'bookmarks',
 						badge: filtered < total ? `${filtered} / ${total}` : `${total}`
 					},
 					{
 						url: ['/notes'],
+						queryParams: { tags: TAG_PINNED },
 						label: 'Notes',
 						icon: 'note_stack'
 					},
