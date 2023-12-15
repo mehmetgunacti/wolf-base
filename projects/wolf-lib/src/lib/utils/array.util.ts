@@ -16,7 +16,7 @@ export const toggleArrayItem = <T>(arr: T[] = [], item: T): T[] => {
 
 }
 
-export const commaSplit = (input?: string): string[] => {
+export const commaSplit = (input: string | null | undefined): string[] => {
 
 	if (!input)
 		return [];

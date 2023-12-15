@@ -67,8 +67,8 @@ export class NoteUIEffects {
 
 		() => this.activatedRoute.queryParams.pipe(
 
-			map(params => params['tags']),
-			map((tags: string) => commaSplit(tags)),
+			filter(() => this.router.routerState.snapshot.url.startsWith('/notes')),
+			map(params => commaSplit(params['tags'])),
 			map(tags => noteActions.setSelectedTags({ tags }))
 
 		)

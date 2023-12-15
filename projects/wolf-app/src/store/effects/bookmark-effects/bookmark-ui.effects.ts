@@ -109,8 +109,8 @@ export class BookmarkUIEffects {
 
 		() => this.activatedRoute.queryParams.pipe(
 
-			map(params => params['tags']),
-			map((tags: string) => commaSplit(tags)),
+			filter(() => this.router.routerState.snapshot.url.startsWith('/bookmarks')),
+			map(params => commaSplit(params['tags'])),
 			map(tags => bmActions.setSelectedTags({ tags }))
 
 		)
