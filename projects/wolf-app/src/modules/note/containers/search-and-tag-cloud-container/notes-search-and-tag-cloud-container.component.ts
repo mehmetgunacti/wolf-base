@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Tag, slideUpDownTrigger } from 'lib';
+import { TAG_PINNED, Tag, slideUpDownTrigger } from 'lib';
 import { Observable, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { clickTag, emptySelectedTags, search } from 'store/actions/note.actions';
 import { distinctTagsArray, relatedTags, selectedTags } from 'store/selectors/note-selectors/note-tags.selectors';
@@ -14,6 +14,8 @@ import { distinctTagsArray, relatedTags, selectedTags } from 'store/selectors/no
 	animations: [slideUpDownTrigger]
 })
 export class NotesSearchAndTagCloudContainerComponent implements OnDestroy {
+
+	TAG_PINNED = TAG_PINNED;
 
 	tags$: Observable<Tag[]>;
 	selectedTags$: Observable<string[]>;

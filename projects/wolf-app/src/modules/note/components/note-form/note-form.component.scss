@@ -4,37 +4,26 @@
 
 :host {
 
-	@extend %flex-column;
-	gap				: var(--gap-sm);
+	form {
 
-	& > div[note-form] {
+		flex			: 1;
+		@extend %flex-column;
+		padding			: var(--gap-xs);
+		gap				: var(--gap);
 
-		display				: block;
-		overflow-y			: auto;
-		flex				: 1;
-		padding-top			: 1rem;
+		& > div {
 
-		& > form {
+			@extend %flex-row;
+			gap			: var(--gap-xs);
+			& :first-child {
 
-			@extend %flex-column;
-			padding			: var(--gap-xs);
-			gap				: var(--gap-lg);
+				flex	: 1;
 
-			& > div {
+			}
 
-				@extend %flex-row;
-				gap			: var(--gap-xs);
-				& :first-child {
+			& .material-symbols-outlined {
 
-					flex	: 1;
-
-				}
-
-				& .material-symbols-outlined {
-
-					font-size	: 1.4rem;
-
-				}
+				font-size	: 1.4rem;
 
 			}
 
@@ -42,8 +31,9 @@
 
 	}
 
-	& > div[form-element-buttons] {
+	div[form-element-buttons] {
 
+		flex				: 1;
 		@extend %flex-space-between-center;
 		padding				: var(--gap-xs);
 

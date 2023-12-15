@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, inject } from '@angular/core';
-import { Note, TAG_PINNED, ToastConfiguration, UUID } from 'lib';
-import { Observable, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Note, TAG_PINNED, UUID } from 'lib';
+import { Subject } from 'rxjs';
 import { EditFormImpl, NOTE_FORM, NoteForm } from './note-form';
 
 @Component({
@@ -16,27 +16,18 @@ export class NoteFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	@Input() note: Note | null | undefined;
 	@Input() tagSuggestions: string[] | null | undefined;
-	@Input() titleLookupUrl: string | null | undefined;
 
 	@Output() create: EventEmitter<Partial<Note>> = new EventEmitter();
 	@Output() update: EventEmitter<{ id: UUID, note: Partial<Note> }> = new EventEmitter();
 	@Output() remove: EventEmitter<UUID> = new EventEmitter();
 	@Output() tagInput: EventEmitter<string | null> = new EventEmitter();
-	@Output() titleLookup: EventEmitter<ToastConfiguration> = new EventEmitter();
 
 	form: NoteForm = inject(NOTE_FORM);
-	note$: Observable<Note>;
 	tagSuggestions$: Subject<string[]>;
 
 	constructor() {
 
 		this.tagSuggestions$ = new Subject<string[]>();
-		this.note$ = this.form.valueChanges$.pipe(
-
-			debounceTime(200),
-			distinctUntilChanged()
-
-		);
 
 	}
 
@@ -90,7 +81,7 @@ will be deleted. Continue?`)
 
 	}
 
-	onTogglePopular(): void {
+	onTogglePinned(): void {
 
 		const tags: string[] = this.form.tags.value;
 		this.form.tags.setValue(

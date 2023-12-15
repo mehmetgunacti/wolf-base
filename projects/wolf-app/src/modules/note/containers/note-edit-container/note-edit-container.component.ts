@@ -1,10 +1,8 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Note, ToastConfiguration, UUID } from 'lib';
+import { Note, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
-import { showNotification } from 'store/actions/core-notification.actions';
 import { create, moveToTrash, update } from 'store/actions/note.actions';
-import { selCoreTitleLookupUrl } from 'store/selectors/core-configuration.selectors';
 import { selNote } from 'store/selectors/note-selectors/note-entities.selectors';
 import { distinctTagsArray } from 'store/selectors/note-selectors/note-tags.selectors';
 
@@ -20,13 +18,11 @@ export class NoteEditContainerComponent implements OnInit, AfterContentInit {
 
 	note$: Observable<Note | null | undefined>;
 	tagSuggestions$!: Observable<string[]>;
-	titleLookup$: Observable<string | null>;
 	tagInput = new Subject<string | null>();
 
 	constructor() {
 
 		this.note$ = this.store.select(selNote);
-		this.titleLookup$ = this.store.select(selCoreTitleLookupUrl);
 
 	}
 
@@ -69,19 +65,9 @@ export class NoteEditContainerComponent implements OnInit, AfterContentInit {
 
 	}
 
-	onClose(): void {
-
-	}
-
 	onTagInput(val: string | null): void {
 
 		this.tagInput.next(val);
-
-	}
-
-	onTitleLookup(toast: ToastConfiguration): void {
-
-		this.store.dispatch(showNotification(toast));
 
 	}
 

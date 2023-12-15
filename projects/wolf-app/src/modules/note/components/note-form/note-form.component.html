@@ -1,6 +1,8 @@
-<form>
+<w-card>
 
-	<div note-form-right>
+	<ng-container card-title>{{ !!note ? 'Edit' : 'Add' }} Note</ng-container>
+
+	<form>
 
 		<!-- ID -->
 		<div *ngIf="note?.id">
@@ -25,14 +27,20 @@
 				class="input-element"
 				(tagInput)="onTagInput($event)"
 				[suggestions]="(tagSuggestions$ | async) ?? []"/>
-			<button type="button" class="icon-only" [title]="'Toggle \''+TAG_PINNED+'\''" (click)="onTogglePopular()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_PINNED)">push_pin</span></button>
+			<button type="button" class="icon-only" [title]="'Toggle \''+TAG_PINNED+'\''" (click)="onTogglePinned()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_PINNED)">push_pin</span></button>
 		</div>
 
-	</div>
+	</form>
 
-</form>
+	<ng-container card-footer>
 
-<div form-element-buttons>
-	<button type="button" (click)="onDelete()" class="error"><span class="material-symbols-outlined">delete</span> Delete</button>
-	<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>
-</div>
+		<div form-element-buttons>
+
+			<button type="button" (click)="onDelete()" class="error"><span class="material-symbols-outlined">delete</span> Delete</button>
+			<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>
+
+		</div>
+
+	</ng-container>
+
+</w-card>
