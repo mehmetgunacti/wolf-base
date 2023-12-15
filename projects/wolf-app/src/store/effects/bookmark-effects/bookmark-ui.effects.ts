@@ -107,10 +107,10 @@ export class BookmarkUIEffects {
 
 	onQueryParamsChangeSetSelectedTags$ = createEffect(
 
-		() => this.activatedRoute.queryParams.pipe(
+		() => this.activatedRoute.queryParamMap.pipe(
 
 			filter(() => this.router.routerState.snapshot.url.startsWith('/bookmarks')),
-			map(params => commaSplit(params['tags'])),
+			map(paramMap => commaSplit(paramMap.get('tags'))),
 			map(tags => bmActions.setSelectedTags({ tags }))
 
 		)

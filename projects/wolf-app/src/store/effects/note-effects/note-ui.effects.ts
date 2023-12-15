@@ -65,10 +65,10 @@ export class NoteUIEffects {
 
 	onQueryParamsChangeSetSelectedTags$ = createEffect(
 
-		() => this.activatedRoute.queryParams.pipe(
+		() => this.activatedRoute.queryParamMap.pipe(
 
 			filter(() => this.router.routerState.snapshot.url.startsWith('/notes')),
-			map(params => commaSplit(params['tags'])),
+			map(paramMap => commaSplit(paramMap.get('tags'))),
 			map(tags => noteActions.setSelectedTags({ tags }))
 
 		)
