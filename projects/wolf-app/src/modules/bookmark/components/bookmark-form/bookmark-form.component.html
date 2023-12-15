@@ -58,7 +58,7 @@
 					class="input-element"
 					(tagInput)="onTagInput($event)"
 					[suggestions]="(tagSuggestions$ | async) ?? []"/>
-				<button type="button" class="icon-only" title="Toggle 'popular'" (click)="onTogglePopular()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes('popular')">favorite</span></button>
+				<button type="button" class="icon-only" [title]="'Toggle \''+TAG_POPULAR+'\''" (click)="onTogglePopular()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_POPULAR)">favorite</span></button>
 			</div>
 
 		</div>

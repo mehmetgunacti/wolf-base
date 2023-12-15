@@ -12,6 +12,8 @@ import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
 })
 export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {
 
+	TAG_POPULAR = TAG_POPULAR;
+
 	@Input() bookmark: Bookmark | null | undefined;
 	@Input() tagSuggestions: string[] | null | undefined;
 	@Input() titleLookupUrl: string | null | undefined;
