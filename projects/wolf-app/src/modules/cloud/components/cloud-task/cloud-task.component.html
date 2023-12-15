@@ -10,6 +10,12 @@
 				<span> Bookmarks</span>
 			</ng-container>
 
+			<!-- Bookmarks -->
+			<ng-container *ngSwitchCase="WolfEntity.note.name">
+				<span class="material-symbols-outlined">note_stack</span>
+				<span> Notes</span>
+			</ng-container>
+
 			<!-- Knowledge Base Entries -->
 			<ng-container *ngSwitchCase="WolfEntity.kb_entry.name">
 				<span class="material-symbols-outlined">school</span>
