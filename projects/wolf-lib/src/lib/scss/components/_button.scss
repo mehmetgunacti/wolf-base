@@ -62,7 +62,7 @@ button {
 		--button-bg-alp			: 0;
 
 		border					: none;
-		padding					: 1.2rem;
+		padding					: 0.8rem;
 		min-width				: unset;
 
 		&:hover {
@@ -78,7 +78,7 @@ button {
 
 	&.rounded {
 
-		--border-radius		: 25px;
+		--border-radius-sm		: 25px;
 
 	}
 

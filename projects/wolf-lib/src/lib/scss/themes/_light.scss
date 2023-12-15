@@ -51,12 +51,6 @@ body.light {
 	// overlay
 	--background-overlay		: hsl(0deg 0% 15% / 60%);
 
-	// --focus
-	--col-focus-hue				: 35deg;
-	--col-focus-sat				: 30%;
-	--col-focus-lig				: 60%;
-	--col-focus-alp				: 1;
-
 	// --col-success
 	--col-success-hue			: 120deg;
 	--col-success-sat			: 25%;
@@ -80,5 +74,11 @@ body.light {
 	--col-error-sat				: 25%;
 	--col-error-lig				: 40%;
 	--col-error-alp				: 1;
+
+	// --focus
+	--col-focus-hue				: 36;
+	--col-focus-sat				: 95%;
+	--col-focus-lig				: 40%;
+	--col-focus-alp				: 1;
 
 }

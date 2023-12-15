@@ -11,8 +11,8 @@
 		@extend %flex-center-y;
 		height				: 6rem;
 		cursor				: pointer;
-		background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
-		transition			: $bg-transition;
+		// background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+		// transition			: $bg-transition;
 
 		&:focus,
 		&:focus-visible,
@@ -20,13 +20,19 @@
 		&.active:focus-visible {
 
 			outline				: 0;
-			background-color	: hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
+			// background-color	: hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
+			background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 5%) / var(--col-bg-panel-alp));
 
 		}
 
 		&.active {
 
-			background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 5%) / var(--col-bg-panel-alp));
+			& > [icon] > button {
+
+				background-color	: hsl(var(--col-accent-hue) var(--col-accent-sat) var(--col-accent-lig)/var(--col-accent-alp));
+				border-radius		: var(--border-radius-sm);
+
+			}
 
 		}
 

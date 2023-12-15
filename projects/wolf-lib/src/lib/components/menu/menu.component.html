@@ -1,7 +1,9 @@
 <a *ngFor="let item of items" [routerLink]="item.url" routerLinkActive="active" [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }">
 
 	<div icon>
-		<span class="material-symbols-outlined">{{item.icon}}</span>
+		<button class="icon-only rounded" disabled>
+			<span class="material-symbols-outlined">{{item.icon}}</span>
+		</button>
 	</div>
 	<span label>{{ item.label }}</span>
 	<div badge><span>{{ item.badge }}</span></div>

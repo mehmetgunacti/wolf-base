@@ -6,7 +6,7 @@
 
 	display				: contents;
 
-	&>[bottom-buttons] {
+	& > [bottom-buttons] {
 
 		display			: flex;
 		margin-top		: auto;
@@ -14,11 +14,11 @@
 
 		button.active {
 
-			background-color: hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig)/var(--col-focus-alp));
+			background-color	: hsl(var(--col-accent-hue) var(--col-accent-sat) var(--col-accent-lig)/var(--col-accent-alp));
 
 		}
 
-		&>button:last-child {
+		& > button:last-child {
 
 			margin-left	: auto;
 
