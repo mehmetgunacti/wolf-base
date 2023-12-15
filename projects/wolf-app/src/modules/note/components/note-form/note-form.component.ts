@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, inject } from '@angular/core';
-import { Note, TAG_POPULAR, ToastConfiguration, UUID } from 'lib';
+import { Note, TAG_PINNED, ToastConfiguration, UUID } from 'lib';
 import { Observable, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { EditFormImpl, NOTE_FORM, NoteForm } from './note-form';
 
@@ -11,6 +11,8 @@ import { EditFormImpl, NOTE_FORM, NoteForm } from './note-form';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NoteFormComponent implements OnInit, OnChanges, OnDestroy {
+
+	TAG_PINNED = TAG_PINNED;
 
 	@Input() note: Note | null | undefined;
 	@Input() tagSuggestions: string[] | null | undefined;
@@ -92,7 +94,7 @@ will be deleted. Continue?`)
 
 		const tags: string[] = this.form.tags.value;
 		this.form.tags.setValue(
-			tags.includes(TAG_POPULAR) ? tags.filter(v => v !== TAG_POPULAR) : [TAG_POPULAR, ...tags]
+			tags.includes(TAG_PINNED) ? tags.filter(tag => tag !== TAG_PINNED) : [TAG_PINNED, ...tags]
 		);
 		this.form.tags.markAsDirty();
 		this.form.tags.updateValueAndValidity();
