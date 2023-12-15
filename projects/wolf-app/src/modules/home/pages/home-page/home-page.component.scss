@@ -1,4 +1,6 @@
-app-home-page {
+@import 'core/helper';
+
+:host {
 
 	@extend %flex-column;
 	// display				: flex;
