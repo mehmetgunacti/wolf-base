@@ -2,7 +2,7 @@ import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { UUID } from "lib";
-import { Observable, iif, of, switchMap, tap } from "rxjs";
+import { Observable, iif, of, switchMap, tap, withLatestFrom } from "rxjs";
 import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from "store/actions/core-notification.actions";
 import { setSelected } from "store/actions/kb-entry-entity.actions";
@@ -16,20 +16,25 @@ export const kbEntryGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 		return preventRouting(store, 'Navigation Error', 'ID could not be read from URL');
 
 	const id: UUID = paramId;
-	return store.select(selKBEntryIDs).pipe(
+	return of(id).pipe(
 
-		switchMap(entrIds => iif(
+		withLatestFrom(store.select(selKBEntryIDs)),
+		switchMap(([id, entrIds]) =>
 
-			() => entrIds.includes(id),
-			of(true).pipe(
+			iif(
 
-				// dispatch id
-				tap(() => store.dispatch(setSelected({ id })))
+				() => entrIds.includes(id),
+				of(true).pipe(
 
-			),
-			preventRouting(store, 'KB Entry not found', 'ID: ' + id)
+					// dispatch id
+					tap(() => store.dispatch(setSelected({ id })))
 
-		))
+				),
+				preventRouting(store, 'KB Entry not found', 'ID: ' + id)
+
+			)
+
+		)
 
 	);
 
