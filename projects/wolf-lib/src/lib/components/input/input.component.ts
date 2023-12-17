@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 
@@ -14,6 +14,8 @@ export class InputComponent implements OnInit {
 	@Input() name: string = '';
 	@Input() type: string = 'text';
 	@Input() readonly = false;
+
+	@Output() inputChanged: EventEmitter<string> = new EventEmitter();
 
 	hasValue$!: Observable<boolean>;
 
@@ -37,6 +39,15 @@ export class InputComponent implements OnInit {
 
 		}
 		throw new Error('[Not implemented] val is of type ' + (typeof val));
+
+	}
+
+	onInput(event: Event): void {
+
+		const inputElement = event.target as HTMLInputElement;
+		const value = inputElement.value;
+
+		this.inputChanged.emit(value);
 
 	}
 

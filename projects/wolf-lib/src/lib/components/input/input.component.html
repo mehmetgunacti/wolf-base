@@ -3,5 +3,6 @@
 	[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
 	[formControl]="control"
 	placeholder=""
-	[readonly]="readonly">
+	[readonly]="readonly"
+	(input)="onInput($event)">
 <label [class.up]="hasValue$ | async">{{name}}</label>

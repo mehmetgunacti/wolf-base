@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnD
 import { Bookmark, ClickedBookmark, TAG_POPULAR, ToastConfiguration, UUID, parseURL } from 'lib';
 import { Observable, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
+import { FormControl } from '@angular/forms';
 
 @Component({
 	selector: 'app-bookmark-form',
@@ -187,13 +188,10 @@ will be deleted. Continue?`)
 
 	}
 
-	checkUrl(event: Event): void {
-
-		const inputElement = event.target as HTMLInputElement;
-		const value = inputElement.value;
+	checkUrl(value: string, fc: FormControl): void {
 
 		if (value === "h" || value === "H")
-			inputElement.value = "https://www.";
+			fc.setValue("https://www.");
 
 	}
 
