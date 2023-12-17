@@ -19,9 +19,6 @@ const fromClipboardFailure$ = concat(
 @Injectable()
 export class BookmarkEntityCreateEffects {
 
-	// todo: remove later
-	tmpCounter: number = 0;
-
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 	private clipboardService: ClipboardService = inject(ClipboardService);
@@ -80,8 +77,8 @@ export class BookmarkEntityCreateEffects {
 				const bookmark: Partial<Bookmark> = {
 
 					urls: [url.toString()],
-					title: url.hostname + '_' + this.tmpCounter,
-					name: url.hostname + '_' + this.tmpCounter++,
+					title: url.hostname,
+					name: url.hostname,
 					tags: [TAG_NEW]
 
 				};
