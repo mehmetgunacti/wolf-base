@@ -1,5 +1,6 @@
 <app-note-form
 	[note]="note$ | async"
+	[nodes]="nodes$ | async"
 	[tagSuggestions]="tagSuggestions$ | async"
 	(create)="onCreate($event)"
 	(update)="onUpdate($event.id, $event.note)"

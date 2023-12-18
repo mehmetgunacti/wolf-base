@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AutofocusDirective, BookmarkComponent, CardModule, InputModule, NoDataPipe, PortalComponent, SelectedTagsComponent, TagCloudComponent, ToastModule } from '@lib';
 import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
+import { SelectModule } from 'lib/components/select/select.module';
 
 @NgModule({
 	declarations: [
@@ -40,6 +41,7 @@ import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 		InputTagModule,
 		InputModule,
 		ToastModule,
+		SelectModule,
 		SelectedTagsComponent
 	],
 	providers: []

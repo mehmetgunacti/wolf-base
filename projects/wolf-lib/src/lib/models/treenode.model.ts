@@ -1,7 +1,8 @@
+import { HasParentId } from './entity.model';
+
 export interface TreeNode {
 
-    key?: string,
-    label?: string,
-    children?: any
+	value: HasParentId;
+	level: number;
 
 }

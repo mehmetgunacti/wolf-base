@@ -14,9 +14,9 @@
 			<w-input [control]="form.name" name="Name"/>
 		</div>
 
-		<!-- CONTENT -->
+		<!-- PARENT ID -->
 		<div>
-			<w-input [control]="form.parentId" name="Parent Id"/>
+			<w-select [control]="form.parentId" [nodes]="nodes ?? []" name="Parent Id"/>
 		</div>
 
 		<!-- TAGS -->

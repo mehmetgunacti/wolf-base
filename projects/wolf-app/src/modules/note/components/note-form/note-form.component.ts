@@ -15,6 +15,7 @@ export class NoteFormComponent implements OnInit, OnChanges, OnDestroy {
 	TAG_PINNED = TAG_PINNED;
 
 	@Input() note: Note | null | undefined;
+	@Input() nodes: Note[] | null | undefined = [];
 	@Input() tagSuggestions: string[] | null | undefined;
 
 	@Output() create: EventEmitter<Partial<Note>> = new EventEmitter();

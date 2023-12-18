@@ -1,9 +1,9 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Note, UUID } from 'lib';
-import { Observable, Subject, combineLatest, map } from 'rxjs';
+import { Observable, Subject, combineLatest, map, tap } from 'rxjs';
 import { create, moveToTrash, update } from 'store/actions/note.actions';
-import { selNote } from 'store/selectors/note-selectors/note-entities.selectors';
+import { selNote, selNoteArray } from 'store/selectors/note-selectors/note-entities.selectors';
 import { distinctTagsArray } from 'store/selectors/note-selectors/note-tags.selectors';
 
 @Component({
@@ -17,12 +17,14 @@ export class NoteEditContainerComponent implements OnInit, AfterContentInit {
 	private store: Store = inject(Store);
 
 	note$: Observable<Note | null | undefined>;
+	nodes$: Observable<Note[]>;
 	tagSuggestions$!: Observable<string[]>;
 	tagInput = new Subject<string | null>();
 
 	constructor() {
 
 		this.note$ = this.store.select(selNote);
+		this.nodes$ = this.store.select(selNoteArray);
 
 	}
 
