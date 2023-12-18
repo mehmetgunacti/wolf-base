@@ -6,6 +6,7 @@ import { concat, from, of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { ClipboardService } from 'services';
 import * as bmActions from 'store/actions/bookmark.actions';
+import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 
 // note: timer value (600) has to be ~ as in lib/components/_shake.scss
@@ -48,6 +49,17 @@ export class BookmarkEntityCreateEffects {
 
 			ofType(bmActions.createSuccess),
 			map(() => showNotification({ severity: 'success', detail: 'Bookmark created' }))
+
+		)
+
+	);
+
+	navigate$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bmActions.createSuccess),
+			map(({ bookmark }) => navigate({ url: ['/bookmarks'], queryParams: { id: bookmark.id } }))
 
 		)
 

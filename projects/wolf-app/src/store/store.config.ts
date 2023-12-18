@@ -42,6 +42,7 @@ import { BookmarkLoadEffects } from './effects/bookmark-effects/bookmark-load.ef
 import { BookmarkUIEffects } from './effects/bookmark-effects/bookmark-ui.effects';
 import { bookmarkReducer } from './reducers/bookmark-reducers/bookmark.reducer';
 import { noteReducer } from './reducers/note-reducers/note.reducer';
+import { CoreNavigationEffects } from './effects/core-navigation.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -64,6 +65,7 @@ export const effects = [
 
 	// Core
 	CoreLoadEffects,
+	CoreNavigationEffects,
 	CoreNotificationEffects,
 	CoreUIEffects,
 	CoreThemeEffects,

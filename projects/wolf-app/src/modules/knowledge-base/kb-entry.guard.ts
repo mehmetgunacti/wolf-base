@@ -45,7 +45,7 @@ function preventRouting(store: Store, summary: string, detail: string): Observab
 	return of(false).pipe(
 
 		tap(() => store.dispatch(showNotification({ severity: 'warn', summary, detail }))),
-		tap(() => store.dispatch(navigate({ url: '/kb' })))
+		tap(() => store.dispatch(navigate({ url: ['/kb'] })))
 
 	);
 
