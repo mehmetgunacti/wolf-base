@@ -5,6 +5,7 @@ import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import * as bmActions from 'store/actions/bookmark.actions';
+import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 
 @Injectable()
@@ -27,6 +28,17 @@ export class BookmarkEntityUpdateEffects {
 				)
 
 			)
+
+		)
+
+	);
+
+	navigate$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bmActions.updateSuccess),
+			map(({ id }) => navigate({ url: ['/bookmarks'], queryParams: { id } }))
 
 		)
 
