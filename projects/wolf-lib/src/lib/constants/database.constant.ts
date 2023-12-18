@@ -16,10 +16,10 @@ export enum LocalRepositoryNames {
 	notes_trash = 'notes_trash',
 
 	// note content
-	notes_content = 'notes_content',
-	notes_content_sync = 'notes_content_sync',
-	notes_content_remote = 'notes_content_remote',
-	notes_content_trash = 'notes_content_trash',
+	note_content = 'note_content',
+	note_content_sync = 'note_content_sync',
+	note_content_remote = 'note_content_remote',
+	note_content_trash = 'note_content_trash',
 
 	configuration = 'configuration',
 	logs = 'logs'

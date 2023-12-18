@@ -1,7 +1,7 @@
 import { Entity, EntityName, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
-import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NotesContentLocalRepository, NotesLocalRepository } from 'lib/repositories/local';
+import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository, NotesLocalRepository } from 'lib/repositories/local';
 import { DexieBookmarksRepositoryImpl, DexieConfigurationRepositoryImpl, DexieLogsLocalRepositoryImpl } from './tables';
-import { DexieNotesContentRepositoryImpl } from './tables/notes-content.table';
+import { DexieNoteContentRepositoryImpl } from './tables/notes-content.table';
 import { DexieNotesRepositoryImpl } from './tables/notes.table';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
 
@@ -11,7 +11,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 	bookmarks: BookmarksLocalRepository;
 	notes: NotesLocalRepository;
-	notesContent: NotesContentLocalRepository;
+	noteContent: NoteContentLocalRepository;
 	configuration: ConfigurationLocalRepository;
 	logs: LogsLocalRepository;
 
@@ -20,7 +20,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 		const db: WolfBaseDB = wolfBaseDBFactory();
 		this.bookmarks = new DexieBookmarksRepositoryImpl(db);
 		this.notes = new DexieNotesRepositoryImpl(db);
-		this.notesContent = new DexieNotesContentRepositoryImpl(db);
+		this.noteContent = new DexieNoteContentRepositoryImpl(db);
 		this.configuration = new DexieConfigurationRepositoryImpl(db);
 		this.logs = new DexieLogsLocalRepositoryImpl(db);
 		this.db = db;

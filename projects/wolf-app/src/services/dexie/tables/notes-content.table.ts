@@ -1,9 +1,9 @@
 import { NoteContent, UUID, WolfEntity } from '@lib';
-import { NotesContentLocalRepository } from 'lib/repositories/local';
+import { NoteContentLocalRepository } from 'lib/repositories/local';
 import { WolfBaseDB } from '../wolfbase.database';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class DexieNotesContentRepositoryImpl extends EntityLocalRepositoryImpl<NoteContent> implements NotesContentLocalRepository {
+export class DexieNoteContentRepositoryImpl extends EntityLocalRepositoryImpl<NoteContent> implements NoteContentLocalRepository {
 
 	constructor(db: WolfBaseDB) {
 		super(db, WolfEntity.note_content);

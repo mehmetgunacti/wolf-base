@@ -1,10 +1,10 @@
 import { Metadata, Note, NoteContent, RemoteData, RemoteMetadata, SyncData, UUID, sleep } from '@lib';
-import { NotesContentLocalRepository } from 'lib/repositories/local';
+import { NoteContentLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
 
 const SLEEP = 20;
 
-export class MockNotesContentLocalRepositoryImpl implements NotesContentLocalRepository {
+export class MockNoteContentLocalRepositoryImpl implements NoteContentLocalRepository {
 
 	private content: Map<string, NoteContent> = new Map();
 	private content_sync: Map<string, SyncData> = new Map();

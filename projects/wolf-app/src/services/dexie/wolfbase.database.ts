@@ -26,10 +26,10 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			notes_remote: 'id',
 
 			// note content
-			notes_content: 'id, name, content',
-			notes_content_sync: 'id',
-			notes_content_trash: '++, id, name',
-			notes_content_remote: 'id',
+			note_content: 'id, name, content',
+			note_content_sync: 'id',
+			note_content_trash: '++, id, name',
+			note_content_remote: 'id',
 
 			// configuration
 			configuration: '',
@@ -60,10 +60,10 @@ export class WolfBaseDB extends Dexie {
 	notes_trash: Dexie.Table<Note, number>;
 
 	// note content
-	notes_content: Dexie.Table<string, UUID>;
-	notes_content_sync: Dexie.Table<SyncData, UUID>;
-	notes_content_remote: Dexie.Table<RemoteMetadata, UUID>;
-	notes_content_trash: Dexie.Table<string, number>;
+	note_content: Dexie.Table<string, UUID>;
+	note_content_sync: Dexie.Table<SyncData, UUID>;
+	note_content_remote: Dexie.Table<RemoteMetadata, UUID>;
+	note_content_trash: Dexie.Table<string, number>;
 
 	configuration: Dexie.Table<string | boolean, CONF_KEYS>;
 	logs: Dexie.Table<LogMessage, number>;
@@ -85,10 +85,10 @@ export class WolfBaseDB extends Dexie {
 		this.notes_remote = this.table(LocalRepositoryNames.notes_remote);
 		this.notes_trash = this.table(LocalRepositoryNames.notes_trash);
 
-		this.notes_content = this.table(LocalRepositoryNames.notes_content);
-		this.notes_content_sync = this.table(LocalRepositoryNames.notes_content_sync);
-		this.notes_content_remote = this.table(LocalRepositoryNames.notes_content_remote);
-		this.notes_content_trash = this.table(LocalRepositoryNames.notes_content_trash);
+		this.note_content = this.table(LocalRepositoryNames.note_content);
+		this.note_content_sync = this.table(LocalRepositoryNames.note_content_sync);
+		this.note_content_remote = this.table(LocalRepositoryNames.note_content_remote);
+		this.note_content_trash = this.table(LocalRepositoryNames.note_content_trash);
 
 		this.configuration = this.table(LocalRepositoryNames.configuration);
 		this.logs = this.table(LocalRepositoryNames.logs);

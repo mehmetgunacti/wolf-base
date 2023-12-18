@@ -1,6 +1,6 @@
 import { EntityName } from 'lib/constants';
 import { Entity } from 'lib/models';
-import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NotesContentLocalRepository } from 'lib/repositories/local';
+import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository } from 'lib/repositories/local';
 import { NotesLocalRepository } from 'lib/repositories/local/note.repository';
 
 export interface LocalRepositoryService {
@@ -8,7 +8,7 @@ export interface LocalRepositoryService {
 	// entity tables
 	bookmarks: BookmarksLocalRepository;
 	notes: NotesLocalRepository;
-	notesContent: NotesContentLocalRepository;
+	noteContent: NoteContentLocalRepository;
 
 	// non-entity tables
 	configuration: ConfigurationLocalRepository;
