@@ -35,7 +35,7 @@ export class NavComponent {
 						queryParams: { tags: TAG_POPULAR },
 						label: 'Bookmarks',
 						icon: 'bookmarks',
-						badge: filtered < total ? `${filtered} / ${total}` : `${total}`
+						badge: filtered === 0 ? `${total}` : filtered < total ? `${filtered} / ${total}` : `${total}`
 					},
 					{
 						url: ['/notes'],
