@@ -1,6 +1,12 @@
-<app-bookmark
-	*ngFor="let bookmark of bookmarks$ | async"
-	[item]="bookmark"
-	(edit)="onEdit($event)"
-	(popular)="onPopular($event)"
-	(linkClick)="onClick($event)"></app-bookmark>
+<ng-container *ngIf="(bookmarks$ | async) as bookmarks">
+
+	<app-bookmark
+		*ngFor="let bookmark of bookmarks"
+		[item]="bookmark"
+		(edit)="onEdit($event)"
+		(popular)="onPopular($event)"
+		(linkClick)="onClick($event)"/>
+
+	<div *ngIf="bookmarks.length === 0" class="empty">{{ count$ | async }} bookmarks available</div>
+
+</ng-container>

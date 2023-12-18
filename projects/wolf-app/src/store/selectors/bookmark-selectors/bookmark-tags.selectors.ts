@@ -57,12 +57,15 @@ const selBMSelectedBookmark = createSelector(
 
 );
 
-export const filteredBookmarks = createSelector(
+export const selBMfilteredBookmarks = createSelector(
 
 	selBMSelectedBookmark,
 	selBMBookmarksArray,
 	selBMQueryParams,
 	(selectedBookmark, bookmarks, params): ClickedBookmark[] => {
+
+		if (!params.id && !params.search && params.tags.length === 0)
+			return [];
 
 		if (selectedBookmark)
 			return [selectedBookmark];
@@ -98,14 +101,14 @@ export const filteredBookmarks = createSelector(
 
 const arrOfFilteredTagNames = createSelector(
 
-	filteredBookmarks,
+	selBMfilteredBookmarks,
 	(bookmarks): string[][] => bookmarks.map(b => b.tags)
 
 );
 
 export const filteredBookmarkCount = createSelector(
 
-	filteredBookmarks,
+	selBMfilteredBookmarks,
 	(bookmarks: Bookmark[]) => bookmarks.length
 
 );
