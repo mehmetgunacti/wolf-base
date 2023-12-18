@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { LocalRepositoryService, OVERLAY_ID, TAG_POPULAR, WOverlayService, commaSplit, toggleArrayItem } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -107,11 +107,22 @@ export class BookmarkUIEffects {
 
 	onQueryParamsChangeSetSelectedTags$ = createEffect(
 
-		() => this.activatedRoute.queryParamMap.pipe(
+		() => this.router.events.pipe(
 
-			filter(() => this.router.routerState.snapshot.url.startsWith('/bookmarks')),
-			map(paramMap => commaSplit(paramMap.get('tags'))),
-			map(tags => bmActions.setSelectedTags({ tags }))
+			filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+			filter(e => e.urlAfterRedirects.startsWith('/bookmarks')),
+			withLatestFrom(this.activatedRoute.queryParamMap),
+			map(([, paramMap]) =>
+
+				bmActions.setQueryParams({
+
+					id: paramMap.get('id') ?? null,
+					search: paramMap.get('search') ?? null,
+					tags: commaSplit(paramMap.get('tags'))
+
+				})
+
+			)
 
 		)
 

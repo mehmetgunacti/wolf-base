@@ -1,11 +1,11 @@
 import { createSelector } from '@ngrx/store';
-import { Bookmark, ClickedBookmark, Tag } from '@lib';
-import { selBookmarkArray } from './bookmark-entities.selectors';
-import { selBookmarkTagsState } from './bookmark.selectors';
+import { Bookmark, ClickedBookmark, QueryParams, Tag } from '@lib';
+import { selBMClickedBookmarks, selBMBookmarksArray } from './bookmark-entities.selectors';
+import { selBookmarkEntitiesState, selBookmarkUIState } from './bookmark.selectors';
 
 const arrayOfTagNames = createSelector(
 
-	selBookmarkArray,
+	selBMBookmarksArray,
 	(bookmarks): string[][] => bookmarks.map(b => b.tags)
 
 );
@@ -42,38 +42,41 @@ const distinctTagNames = createSelector(
 
 );
 
-export const selectedTags = createSelector(
+export const selBMQueryParams = createSelector(
 
-	selBookmarkTagsState,
-	state => state.selectedTags
-
-);
-
-export const searchTerm = createSelector(
-
-	selBookmarkTagsState,
-	state => state.searchTerm
+	selBookmarkUIState,
+	state => state.queryParams
 
 );
 
-// move to entities.selector.ts
+const selBMSelectedBookmark = createSelector(
+
+	selBMClickedBookmarks,
+	selBMQueryParams,
+	(clickedBMs, params): ClickedBookmark | null => params.id ? clickedBMs[params.id] : null
+
+);
+
 export const filteredBookmarks = createSelector(
 
-	selBookmarkArray,
-	selectedTags,
-	searchTerm,
-	(bookmarks, tags, term): ClickedBookmark[] => {
+	selBMSelectedBookmark,
+	selBMBookmarksArray,
+	selBMQueryParams,
+	(selectedBookmark, bookmarks, params): ClickedBookmark[] => {
+
+		if (selectedBookmark)
+			return [selectedBookmark];
 
 		// Filter bookmarks based on selected tags
-		const filteredBookmarks: ClickedBookmark[] = tags.reduce((acc, tag) => {
+		const filteredBookmarks: ClickedBookmark[] = params.tags.reduce((acc, tag) => {
 			return acc.filter(bookmark => bookmark.tags.includes(tag));
 		}, bookmarks);
 
-		if (!term)
+		if (!params.search)
 			return filteredBookmarks;
 
 		// Split the search term into an array of individual words
-		const searchWords = term.toLowerCase().split(' ');
+		const searchWords = params.search.toLowerCase().split(' ');
 
 		// Filter bookmarks based on search term
 		const result = filteredBookmarks.filter(bookmark => {
@@ -111,16 +114,16 @@ export const relatedTags = createSelector(
 
 	arrOfFilteredTagNames,
 	distinctTagNames,
-	selectedTags,
-	(arrTagsArray: string[][], distinctTagNames: string[], selectedTags: string[]): string[] => {
+	selBMQueryParams,
+	(arrTagsArray: string[][], distinctTagNames: string[], params: QueryParams): string[] => {
 
-		if (selectedTags.length === 0)
+		if (params.tags.length === 0)
 			return distinctTagNames;
 
 		return [
 			...new Set(
 				arrTagsArray
-					.filter(arrTags => selectedTags.every(tag => arrTags.includes(tag)))
+					.filter(arrTags => params.tags.every(tag => arrTags.includes(tag)))
 					.flat()
 			)
 		];

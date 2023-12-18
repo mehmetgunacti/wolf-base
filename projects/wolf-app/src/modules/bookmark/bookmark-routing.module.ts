@@ -5,7 +5,7 @@ import { BookmarksPageComponent } from './pages/bookmarks-page/bookmarks-page.co
 const routes: Route[] = [
 	{
 		path: '',
-		component: BookmarksPageComponent,
+		component: BookmarksPageComponent
 	}
 ];
 

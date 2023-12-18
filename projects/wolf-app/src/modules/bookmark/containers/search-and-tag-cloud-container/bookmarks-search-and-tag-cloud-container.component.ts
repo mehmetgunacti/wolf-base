@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy } from '@ang
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Tag, slideUpDownTrigger } from 'lib';
-import { Observable, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Observable, Subscription, debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { clickTag, emptySelectedTags, search } from 'store/actions/bookmark.actions';
-import { distinctTagsArray, relatedTags, selectedTags } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
+import { distinctTagsArray, relatedTags, selBMQueryParams } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
 
 @Component({
 	selector: 'app-bookmarks-search-and-tag-cloud-container',
@@ -28,7 +28,7 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 	constructor(private store: Store) {
 
 		this.tags$ = store.select(distinctTagsArray);
-		this.selectedTags$ = store.select(selectedTags);
+		this.selectedTags$ = store.select(selBMQueryParams).pipe(map(q => q.tags));
 		this.relatedTags$ = store.select(relatedTags);
 
 		this.searchControl = new FormControl();

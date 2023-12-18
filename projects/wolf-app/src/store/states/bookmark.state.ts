@@ -1,10 +1,9 @@
-import { Bookmark, Click, OVERLAY_ID, RemoteMetadata, SyncData, UUID } from "@lib";
+import { Bookmark, Click, OVERLAY_ID, QueryParams, RemoteMetadata, SyncData, UUID } from "@lib";
 
 export interface BookmarkModuleState {
 
 	entities: BookmarkEntitiesState;
 	ui: BookmarkUIState;
-	tags: BookmarkTagsState;
 
 }
 
@@ -16,20 +15,15 @@ export interface BookmarkEntitiesState {
 	remoteMetadata: Record<UUID, RemoteMetadata>;
 	clicks: Record<UUID, Click>;
 
-	selected: UUID | null;
-
-}
-
-export interface BookmarkTagsState {
-
-	selectedTags: string[];
-	searchTerm: string | null;
-
 }
 
 export interface BookmarkUIState {
 
+	queryParams: QueryParams;
+
+	editId: UUID | null;
 	editDialogOverlayId: OVERLAY_ID | null;
+
 	shaking: boolean;
 
 }
@@ -41,20 +35,19 @@ export const initialBookmarkEntitiesState: BookmarkEntitiesState = {
 	entities: {},
 	syncData: {},
 	remoteMetadata: {},
-	selected: null,
 	clicks: {}
-
-};
-
-export const initialBookmarkTagsState: BookmarkTagsState = {
-
-	selectedTags: [],
-	searchTerm: null
 
 };
 
 export const initialBookmarkUIState: BookmarkUIState = {
 
+	queryParams: {
+		id: null,
+		search: null,
+		tags: []
+	},
+
+	editId: null,
 	editDialogOverlayId: null,
 	shaking: false
 
@@ -63,7 +56,6 @@ export const initialBookmarkUIState: BookmarkUIState = {
 export const initialBookmarkState: BookmarkModuleState = {
 
 	entities: initialBookmarkEntitiesState,
-	ui: initialBookmarkUIState,
-	tags: initialBookmarkTagsState
+	ui: initialBookmarkUIState
 
 };

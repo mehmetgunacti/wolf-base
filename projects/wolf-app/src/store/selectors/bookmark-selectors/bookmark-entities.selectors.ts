@@ -1,39 +1,55 @@
-import { Bookmark, Click, ClickedBookmark, NamedClick } from '@lib';
+import { Bookmark, Click, ClickedBookmark, NamedClick, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selBookmarkEntitiesState } from './bookmark.selectors';
 
-export const selBookmarks = createSelector(
+const selBMBookmarks = createSelector(
 
 	selBookmarkEntitiesState,
-	entities => entities.entities
+	(state): Record<UUID, Bookmark> => state.entities
 
 );
 
-export const selBookmarkIds = createSelector(
+const selBMClicks = createSelector(
+
+	selBookmarkEntitiesState,
+	(state): Record<UUID, Click> => state.clicks
+
+);
+
+export const selBMClickedBookmarks = createSelector(
+
+	selBMBookmarks,
+	selBMClicks,
+	(bookmarks, clicks): Record<UUID, ClickedBookmark> => {
+
+		const bm: Record<UUID, ClickedBookmark> = {};
+		Object.keys(bookmarks).forEach(
+			id => bm[id] = { ...bookmarks[id], clicks: clicks[id]?.total ?? 0 }
+		);
+		return bm;
+
+	}
+
+);
+
+const selBMIds = createSelector(
 
 	selBookmarkEntitiesState,
 	state => Object.keys(state.entities)
 
 );
 
-export const selBookmarkArray = createSelector(
+export const selBMBookmarksArray = createSelector(
 
-	selBookmarkEntitiesState,
-	(state): ClickedBookmark[] => Object.values(state.entities).map(b => ({ ...b, clicks: state.clicks[b.id]?.total ?? 0 }))
+	selBMClickedBookmarks,
+	(clickedBookmarks): ClickedBookmark[] => Object.values(clickedBookmarks)
 
 );
 
 export const selBookmarksCount = createSelector(
 
-	selBookmarkIds,
+	selBMIds,
 	ids => ids.length
-
-);
-
-export const selBookmark = createSelector(
-
-	selBookmarkEntitiesState,
-	state => state.selected ? state.entities[state.selected] : null
 
 );
 

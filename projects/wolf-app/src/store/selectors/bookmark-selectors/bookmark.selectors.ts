@@ -16,10 +16,3 @@ export const selBookmarkUIState = createSelector(
 	state => state.ui
 
 );
-
-export const selBookmarkTagsState = createSelector(
-
-	selBookmarkModuleState,
-	state => state.tags
-
-);

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { fromClipboard, openAddBookmarkDialog } from 'store/actions/bookmark.actions';
+import { selBookmarksCount } from 'store/selectors/bookmark-selectors/bookmark-entities.selectors';
 import { selBookmarkShaking } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
 import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
 
@@ -21,7 +22,7 @@ export class BookmarksPageComponent {
 	constructor() {
 
 		this.isBigScreen$ = this.store.select(selCoreIsBigScreen);
-		this.isShaking$ = this.store.select(selBookmarkShaking)
+		this.isShaking$ = this.store.select(selBookmarkShaking);
 
 	}
 

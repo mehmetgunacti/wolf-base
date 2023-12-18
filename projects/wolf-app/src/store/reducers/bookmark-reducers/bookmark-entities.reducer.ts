@@ -116,9 +116,7 @@ const reducer = createReducer(
 	// 	);
 
 	// }),
-	on(bmActions.openAddBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
-	on(bmActions.openEditBookmarkDialog, (state, { id }): BookmarkEntitiesState => ({ ...state, selected: id })),
-	on(bmActions.closeEditBookmarkDialog, (state): BookmarkEntitiesState => ({ ...state, selected: null })),
+
 	// on(bmActions.loadAllSyncDataSuccess, (state, { syncData }): BookmarkEntitiesState => ({
 
 	// 	...state,
