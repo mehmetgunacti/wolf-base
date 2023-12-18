@@ -108,7 +108,7 @@ will be deleted. Continue?`)
 		// there's always a FormControl at index 0
 		const url: string = this.form.urls.at(0).getRawValue();
 		if (
-			!(url.startsWith('https://') || url.startsWith('https://'))
+			!(url.startsWith('http://') || url.startsWith('https://'))
 		) {
 
 			this.titleLookup.emit({ severity: 'error', summary: 'Cannot Lookup URL', detail: `URL must start with 'http://' or 'https://'` });
