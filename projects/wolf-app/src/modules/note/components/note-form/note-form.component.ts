@@ -52,7 +52,7 @@ export class NoteFormComponent implements OnInit, OnChanges, OnDestroy {
 		if (this.form.isInvalid())
 			return;
 
-		const note: Note = this.form.value;
+		const note: Note = { ...this.form.value, modified: new Date().toUTCString() };
 		if (note.id)
 			this.update.emit({ id: note.id, note });
 		else

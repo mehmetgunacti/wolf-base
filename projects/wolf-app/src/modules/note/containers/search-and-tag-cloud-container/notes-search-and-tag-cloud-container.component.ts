@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy } from '@ang
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { TAG_PINNED, Tag, slideUpDownTrigger } from 'lib';
-import { Observable, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Observable, Subscription, debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { clickTag, emptySelectedTags, search } from 'store/actions/note.actions';
-import { distinctTagsArray, relatedTags, selectedTags } from 'store/selectors/note-selectors/note-tags.selectors';
+import { distinctTagsArray, relatedTags, selNoteQueryParams } from 'store/selectors/note-selectors/note-tags.selectors';
 
 @Component({
 	selector: 'app-notes-search-and-tag-cloud-container',
@@ -30,7 +30,7 @@ export class NotesSearchAndTagCloudContainerComponent implements OnDestroy {
 	constructor(private store: Store) {
 
 		this.tags$ = store.select(distinctTagsArray);
-		this.selectedTags$ = store.select(selectedTags);
+		this.selectedTags$ = store.select(selNoteQueryParams).pipe(map(q => q.tags));
 		this.relatedTags$ = store.select(relatedTags);
 
 		this.searchControl = new FormControl();

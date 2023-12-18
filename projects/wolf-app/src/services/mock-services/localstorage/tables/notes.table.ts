@@ -24,8 +24,9 @@ export class MockNotesLocalRepositoryImpl implements NotesLocalRepository {
 		const note: Note = {
 
 			name: '',
-			content: '',
+			parentId: null,
 			tags: [],
+			modified: new Date().toUTCString(),
 			...item,
 			id: uuidv4()
 

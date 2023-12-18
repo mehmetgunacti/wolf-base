@@ -1,7 +1,7 @@
-import { createSelector } from '@ngrx/store';
 import { Bookmark, ClickedBookmark, QueryParams, Tag } from '@lib';
-import { selBMClickedBookmarks, selBMBookmarksArray } from './bookmark-entities.selectors';
-import { selBookmarkEntitiesState, selBookmarkUIState } from './bookmark.selectors';
+import { createSelector } from '@ngrx/store';
+import { selBMBookmarksArray, selBMClickedBookmarks } from './bookmark-entities.selectors';
+import { selBookmarkUIState } from './bookmark.selectors';
 
 const arrayOfTagNames = createSelector(
 

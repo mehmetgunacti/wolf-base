@@ -16,16 +16,10 @@
 				<span> Notes</span>
 			</ng-container>
 
-			<!-- Knowledge Base Entries -->
-			<ng-container *ngSwitchCase="WolfEntity.kb_entry.name">
-				<span class="material-symbols-outlined">school</span>
-				<span> Knowledge Base Entries</span>
-			</ng-container>
-
-			<!-- Knowledge Base Contents -->
-			<ng-container *ngSwitchCase="WolfEntity.kb_content.name">
-				<span class="material-symbols-outlined">school</span>
-				<span> Knowledge Base Contents</span>
+			<!-- Notes Content -->
+			<ng-container *ngSwitchCase="WolfEntity.note_content.name">
+				<span class="material-symbols-outlined">note_stack</span>
+				<span> Notes Content</span>
 			</ng-container>
 
 			<!-- UNKNOWN CASE -->

@@ -1,18 +1,18 @@
 import { UUID } from "lib/constants";
-import { KBEntry, KBEntryNode } from "lib/models";
+import { Note, NoteNode } from 'lib/models';
 
-export const toKBEntryNodes = (entries: KBEntry[]): Record<UUID, KBEntryNode> => {
+export const toNoteNodes = (entries: Note[]): Record<UUID, NoteNode> => {
 
 	// create dictionary
-	const dictionary: Record<UUID, KBEntryNode> = entries.reduce(
+	const dictionary: Record<UUID, NoteNode> = entries.reduce(
 
 		(dictionary, entry) => {
 
-			dictionary[entry.id] = { ...entry, parent: null, children: [] } as KBEntryNode;
+			dictionary[entry.id] = { ...entry, parent: null, children: [] } as NoteNode;
 			return dictionary;
 
 		},
-		{} as Record<UUID, KBEntryNode>
+		{} as Record<UUID, NoteNode>
 
 	);
 

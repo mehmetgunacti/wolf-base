@@ -16,10 +16,3 @@ export const selNoteUIState = createSelector(
 	state => state.ui
 
 );
-
-export const selNoteTagsState = createSelector(
-
-	selNoteModuleState,
-	state => state.tags
-
-);

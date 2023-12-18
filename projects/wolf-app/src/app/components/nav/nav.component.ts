@@ -42,11 +42,6 @@ export class NavComponent {
 						queryParams: { tags: TAG_PINNED },
 						label: 'Notes',
 						icon: 'note_stack'
-					},
-					{
-						url: ['/kb'],
-						label: 'Knowledge Base',
-						icon: 'school'
 					}
 
 				];

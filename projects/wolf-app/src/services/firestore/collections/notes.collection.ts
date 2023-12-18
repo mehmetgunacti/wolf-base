@@ -24,10 +24,12 @@ class NoteFirestoreConverter implements FirestoreConverter<Note> {
 
 		const fields = {} as Record<keyof Note, FIRESTORE_VALUE>;
 		fields['name'] = { stringValue: note.name };
-		fields['content'] = { stringValue: note.content };
+		if (note.parentId)
+			fields['parentId'] = { stringValue: note.parentId };
 		fields['tags'] = {
 			arrayValue: { values: note.tags.map(v => ({ stringValue: v })) }
 		};
+		fields['modified'] = { stringValue: note.modified };
 
 		return fields;
 
@@ -44,11 +46,14 @@ class NoteFirestoreConverter implements FirestoreConverter<Note> {
 		if (note.name)
 			fields.add('name');
 
-		if (note.content)
-			fields.add('content');
+		if (note.parentId)
+			fields.add('parentId');
 
 		if (note.tags)
 			fields.add('tags');
+
+		if (note.modified)
+			fields.add('modified');
 
 		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
 

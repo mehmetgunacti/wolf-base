@@ -17,7 +17,6 @@ export class WolfEntity {
 
 	static bookmark = new EntityName('bookmark', 'bookmarks');
 	static note = new EntityName('note', 'notes');
-	static kb_entry = new EntityName('kb_entry', 'kb_entries');
-	static kb_content = new EntityName('kb_content', 'kb_contents');
+	static note_content = new EntityName('note_content', 'note_content');
 
 }

@@ -40,7 +40,7 @@ export const loadAllRemoteMetadataSuccess	= createAction('[Note] Load All Remote
 // export const loadTrashCountSuccess			= createAction('[Note] Load Trash Count Success', props<{ count: number }>());
 
 // UI
-
+export const setSelectedId					= createAction('[Note] Set Selected Id', props<{ id: UUID | null }>());
 
 // TAGS
 export const togglePopular					= createAction('[Note] Toggle Popular', props<{ id: UUID }>());

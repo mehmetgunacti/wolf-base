@@ -1,14 +1,12 @@
-import { Note, RemoteMetadata, SyncData, UUID } from "@lib";
+import { Note, NoteContent, QueryParams, RemoteMetadata, SyncData, UUID } from "@lib";
 
 export interface NoteModuleState {
 
 	entities: NoteEntitiesState;
 	ui: NoteUIState;
-	tags: NoteTagsState;
 
 }
 
-// todo move some properties to ui state
 export interface NoteEntitiesState {
 
 	entities: Record<UUID, Note>;
@@ -16,17 +14,14 @@ export interface NoteEntitiesState {
 	remoteMetadata: Record<UUID, RemoteMetadata>;
 
 	selected: UUID | null;
-
-}
-
-export interface NoteTagsState {
-
-	selectedTags: string[];
-	searchTerm: string | null;
+	content: NoteContent | null;
 
 }
 
 export interface NoteUIState {
+
+	queryParams: QueryParams;
+
 }
 
 // INITIALIZATION
@@ -36,24 +31,25 @@ export const initialNoteEntitiesState: NoteEntitiesState = {
 	entities: {},
 	syncData: {},
 	remoteMetadata: {},
-	selected: null
+	selected: null,
 
-};
-
-export const initialNoteTagsState: NoteTagsState = {
-
-	selectedTags: [],
-	searchTerm: null
+	content: null
 
 };
 
 export const initialNoteUIState: NoteUIState = {
+
+	queryParams: {
+		id: null,
+		search: null,
+		tags: []
+	}
+
 };
 
 export const initialNoteState: NoteModuleState = {
 
 	entities: initialNoteEntitiesState,
-	ui: initialNoteUIState,
-	tags: initialNoteTagsState
+	ui: initialNoteUIState
 
 };

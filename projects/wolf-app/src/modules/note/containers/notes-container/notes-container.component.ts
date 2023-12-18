@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Note, UUID } from 'lib';
 import { Observable } from 'rxjs';
 import { click, togglePopular } from 'store/actions/note.actions';
-import { filteredNotes } from 'store/selectors/note-selectors/note-tags.selectors';
+import { selNotefilteredNotes } from 'store/selectors/note-selectors/note-tags.selectors';
 
 @Component({
 	selector: 'app-notes-container',
@@ -18,7 +18,7 @@ export class NotesContainerComponent {
 
 	constructor() {
 
-		this.notes$ = this.store.select(filteredNotes);
+		this.notes$ = this.store.select(selNotefilteredNotes);
 
 	}
 

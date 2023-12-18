@@ -1,4 +1,3 @@
-import { UUID } from 'lib/constants';
 import { Entity } from './entity.model';
 import { IDBase, NameBase } from './id-base.model';
 
@@ -25,11 +24,3 @@ export interface Click extends IDBase {
 }
 
 export interface NamedClick extends Click, NameBase { }
-
-export interface QueryParams {
-
-	search: string | null,
-	tags: string[],
-	id: UUID | null
-
-}

@@ -1,7 +1,7 @@
-import { Note, Tag } from '@lib';
+import { Note, QueryParams, Tag } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selNoteArray } from './note-entities.selectors';
-import { selNoteTagsState } from './note.selectors';
+import { selNote, selNoteArray } from './note-entities.selectors';
+import { selNoteUIState } from './note.selectors';
 
 const arrayOfTagNames = createSelector(
 
@@ -42,48 +42,41 @@ const distinctTagNames = createSelector(
 
 );
 
-export const selectedTags = createSelector(
+export const selNoteQueryParams = createSelector(
 
-	selNoteTagsState,
-	state => state.selectedTags
-
-);
-
-export const searchTerm = createSelector(
-
-	selNoteTagsState,
-	state => state.searchTerm
+	selNoteUIState,
+	state => state.queryParams
 
 );
 
-// move to entities.selector.ts
-export const filteredNotes = createSelector(
+export const selNotefilteredNotes = createSelector(
 
 	selNoteArray,
-	selectedTags,
-	searchTerm,
-	(notes, tags, term): Note[] => {
+	selNoteQueryParams,
+	(notes, params): Note[] => {
+
+		if (!params.search && params.tags.length === 0)
+			return [];
 
 		// Filter notes based on selected tags
-		const filteredNotes: Note[] = tags.reduce((acc, tag) => {
+		const filteredNotes: Note[] = params.tags.reduce((acc, tag) => {
 			return acc.filter(note => note.tags.includes(tag));
 		}, notes);
 
-		if (!term)
+		if (!params.search)
 			return filteredNotes;
 
 		// Split the search term into an array of individual words
-		const searchWords = term.toLowerCase().split(' ');
+		const searchWords = params.search.toLowerCase().split(' ');
 
 		// Filter notes based on search term
 		const result = filteredNotes.filter(note => {
 
-			const { name, content } = note;
+			const { name } = note;
 			const lowerCaseName = name.toLowerCase();
-			const lowerCaseTitle = content.toLowerCase();
 
 			// Check if any of the search words is present in the note's name or title
-			return searchWords.every(word => lowerCaseName.includes(word) || lowerCaseTitle.includes(word));
+			return searchWords.every(word => lowerCaseName.includes(word));
 
 		});
 
@@ -95,14 +88,14 @@ export const filteredNotes = createSelector(
 
 const arrOfFilteredTagNames = createSelector(
 
-	filteredNotes,
+	selNotefilteredNotes,
 	(notes): string[][] => notes.map(b => b.tags)
 
 );
 
 export const filteredNoteCount = createSelector(
 
-	filteredNotes,
+	selNotefilteredNotes,
 	(notes: Note[]) => notes.length
 
 );
@@ -111,16 +104,16 @@ export const relatedTags = createSelector(
 
 	arrOfFilteredTagNames,
 	distinctTagNames,
-	selectedTags,
-	(arrTagsArray: string[][], distinctTagNames: string[], selectedTags: string[]): string[] => {
+	selNoteQueryParams,
+	(arrTagsArray: string[][], distinctTagNames: string[], params: QueryParams): string[] => {
 
-		if (selectedTags.length === 0)
+		if (params.tags.length === 0)
 			return distinctTagNames;
 
 		return [
 			...new Set(
 				arrTagsArray
-					.filter(arrTags => selectedTags.every(tag => arrTags.includes(tag)))
+					.filter(arrTags => params.tags.every(tag => arrTags.includes(tag)))
 					.flat()
 			)
 		];

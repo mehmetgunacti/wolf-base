@@ -15,17 +15,11 @@ export enum LocalRepositoryNames {
 	notes_remote = 'notes_remote',
 	notes_trash = 'notes_trash',
 
-	// knowledge base entries
-	kb_entries = 'kb_entries',
-	kb_entries_sync = 'kb_entries_sync',
-	kb_entries_remote = 'kb_entries_remote',
-	kb_entries_trash = 'kb_entries_trash',
-
-	// knowledge base contents
-	kb_contents = 'kb_contents',
-	kb_contents_sync = 'kb_contents_sync',
-	kb_contents_remote = 'kb_contents_remote',
-	kb_contents_trash = 'kb_contents_trash',
+	// note content
+	notes_content = 'notes_content',
+	notes_content_sync = 'notes_content_sync',
+	notes_content_remote = 'notes_content_remote',
+	notes_content_trash = 'notes_content_trash',
 
 	configuration = 'configuration',
 	logs = 'logs'

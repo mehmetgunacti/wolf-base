@@ -25,8 +25,9 @@ export class DexieNotesRepositoryImpl extends EntityLocalRepositoryImpl<Note> im
 
 			id,
 			name: '',
-			content: '',
-			tags: []
+			parentId: null,
+			tags: [],
+			modified: new Date().toUTCString()
 
 		};
 		return { ...instance, ...item, id } as Note;

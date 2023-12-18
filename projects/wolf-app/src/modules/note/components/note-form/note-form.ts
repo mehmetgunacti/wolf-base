@@ -6,7 +6,7 @@ interface EditForm {
 
 	id: FormControl<string | null>;
 	name: FormControl<string>;
-	content: FormControl<string>;
+	parentId: FormControl<string | null>;
 	tags: FormControl<string[]>;
 
 }
@@ -23,7 +23,7 @@ export class EditFormImpl extends FormClassImpl<Note> implements NoteForm {
 
 			id: new FormControl(),
 			name: new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
-			content: new FormControl('', { validators: [Validators.required], nonNullable: true }),
+			parentId: new FormControl(),
 			tags: new FormControl([], { validators: [Validators.required], nonNullable: true })
 
 		});
@@ -34,7 +34,7 @@ export class EditFormImpl extends FormClassImpl<Note> implements NoteForm {
 
 		this.id.setValue(note.id); // , { emitEvent: false });
 		this.name.setValue(note.name); // , { emitEvent: false });
-		this.content.setValue(note.content); // , { emitEvent: false });
+		this.parentId.setValue(note.parentId); // , { emitEvent: false });
 		this.tags.setValue(note.tags); // , { emitEvent: false });
 
 	}
@@ -54,8 +54,8 @@ export class EditFormImpl extends FormClassImpl<Note> implements NoteForm {
 		return <FormControl<string>>this._formGroup.controls['name'];
 	}
 
-	get content(): FormControl<string> {
-		return <FormControl<string>>this._formGroup.controls['content'];
+	get parentId(): FormControl<string | null> {
+		return <FormControl<string | null>>this._formGroup.controls['parentId'];
 	}
 
 	get tags(): FormControl<string[]> {

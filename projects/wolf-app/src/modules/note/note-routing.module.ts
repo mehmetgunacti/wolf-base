@@ -9,17 +9,22 @@ const routes: Route[] = [
 		component: NotesPageComponent,
 	},
 	{
-		path: 'edit/:id',
-		component: NoteFormPageComponent
-	},
-	{
 		path: 'new',
 		component: NoteFormPageComponent
 	},
 	{
 		path: ':id',
 		component: NoteFormPageComponent
+	},
+	{
+		path: ':id/edit',
+		component: NoteFormPageComponent
+	},
+	{
+		path: ':id/content/edit',
+		component: NoteFormPageComponent
 	}
+
 ];
 
 @NgModule({

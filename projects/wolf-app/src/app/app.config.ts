@@ -32,12 +32,6 @@ export const routes: Routes = [
 	},
 	{
 
-		path: 'kb',
-		loadChildren: () => import('../modules/knowledge-base/knowledge-base.module').then(m => m.KnowledgeBaseModule)
-
-	},
-	{
-
 		path: 'cloud',
 		loadChildren: () => import('../modules/cloud/cloud.module').then(m => m.CloudModule)
 

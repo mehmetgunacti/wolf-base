@@ -5,10 +5,10 @@ import { UUID } from "lib";
 import { Observable, iif, of, switchMap, tap, withLatestFrom } from "rxjs";
 import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from "store/actions/core-notification.actions";
-import { setSelected } from "store/actions/kb-entry-entity.actions";
-import { selKBEntryIDs } from "store/selectors/knowledge-base-entities.selectors";
+import { setSelectedId } from 'store/actions/note.actions';
+import { selNoteIds } from 'store/selectors/note-selectors/note-entities.selectors';
 
-export const kbEntryGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
+export const noteEntryGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
 
 	const store = inject(Store);
 	const paramId: UUID | null = route.paramMap.get('id');
@@ -18,19 +18,19 @@ export const kbEntryGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 	const id: UUID = paramId;
 	return of(id).pipe(
 
-		withLatestFrom(store.select(selKBEntryIDs)),
-		switchMap(([id, entrIds]) =>
+		withLatestFrom(store.select(selNoteIds)),
+		switchMap(([id, ids]) =>
 
 			iif(
 
-				() => entrIds.includes(id),
+				() => ids.includes(id),
 				of(true).pipe(
 
 					// dispatch id
-					tap(() => store.dispatch(setSelected({ id })))
+					tap(() => store.dispatch(setSelectedId({ id })))
 
 				),
-				preventRouting(store, 'KB Entry not found', 'ID: ' + id)
+				preventRouting(store, 'Note not found', 'ID: ' + id)
 
 			)
 
@@ -45,7 +45,7 @@ function preventRouting(store: Store, summary: string, detail: string): Observab
 	return of(false).pipe(
 
 		tap(() => store.dispatch(showNotification({ severity: 'warn', summary, detail }))),
-		tap(() => store.dispatch(navigate({ url: ['/kb'] })))
+		tap(() => store.dispatch(navigate({ url: ['/notes'] })))
 
 	);
 
