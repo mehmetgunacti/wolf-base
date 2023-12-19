@@ -15,7 +15,7 @@
 
 		<ng-container *ngFor="let log of logs">
 
-			<h6>[{{ log.category }}] {{ log.date | date:'dd.MM.yyyy hh:mm:ss' }}</h6>
+			<h6>[{{ log.category }}] {{ log.date | date:'dd.MM.yyyy hh:mm:ss' }} ({{ log.date | timePast }})</h6>
 			<h6 *ngIf="log.entityId">{{ log.entityId }}</h6>
 			<h4 [innerHTML]="log.message"></h4>
 
