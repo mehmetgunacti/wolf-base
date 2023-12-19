@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AutofocusDirective, BookmarkComponent, CardModule, InputModule, NoDataPipe, PortalComponent, SelectedTagsComponent, TagCloudComponent, ToastModule } from '@lib';
+import { AutofocusDirective, BookmarkComponent, CardModule, InputModule, NoDataPipe, PortalComponent, SelectedTagsComponent, TagCloudComponent, TimePastPipe, ToastModule } from '@lib';
 import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 import { SelectModule } from 'lib/components/select/select.module';
 
@@ -16,7 +16,8 @@ import { SelectModule } from 'lib/components/select/select.module';
 		// ToastWrapperComponent,
 		AutofocusDirective,
 		NoDataPipe,
-		SelectedTagsComponent
+		SelectedTagsComponent,
+		TimePastPipe
 	],
 	imports: [
 		CommonModule,
@@ -40,6 +41,7 @@ import { SelectModule } from 'lib/components/select/select.module';
 		CardModule,
 		InputTagModule,
 		InputModule,
+		TimePastPipe,
 		ToastModule,
 		SelectModule,
 		SelectedTagsComponent

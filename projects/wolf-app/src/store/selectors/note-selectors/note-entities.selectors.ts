@@ -23,6 +23,13 @@ export const selNoteArray = createSelector(
 
 );
 
+export const selNoteRootArray = createSelector(
+
+	selNoteArray,
+	(arr): Note[] => arr.filter(n => n.parentId === null)
+
+);
+
 export const selNotesCount = createSelector(
 
 	selNoteIds,

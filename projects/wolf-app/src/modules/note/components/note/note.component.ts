@@ -2,6 +2,21 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { UUID } from 'lib/constants';
 import { Note } from 'lib/models';
 
+// function createMenu(node: KBEntryNode | null): MenuItem[] {
+
+// 	if (node === null)
+// 		return [];
+
+// 	return [
+// 		...createMenu(node.parent ?? null),
+// 		{
+// 			label: node.name,
+// 			routerLink: ['/kb', node.id]
+// 		}
+// 	] as MenuItem[];
+
+// }
+
 @Component({
 	selector: 'app-note',
 	templateUrl: './note.component.html',

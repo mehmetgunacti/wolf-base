@@ -1,6 +1,15 @@
-<app-note
-	*ngFor="let note of notes$ | async"
-	[item]="note"
-	(edit)="onEdit($event)"
-	(popular)="onPopular($event)"
-	(linkClick)="onClick($event)"></app-note>
+<w-card>
+
+	<ng-container card-title>Notes</ng-container>
+	<ul>
+		<li *ngFor="let note of notes$ | async">
+			<h6><span class="material-symbols-outlined">schedule</span> {{ note.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{ note.modified | timePast }})</h6>
+			<h4>
+				<a [routerLink]="['/notes', note.id]" tabindex="0">
+					{{ note.name }}
+				</a>
+			</h4>
+		</li>
+	</ul>
+
+</w-card>
