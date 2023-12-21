@@ -1,4 +1,4 @@
-import { Note, RemoteMetadata, SyncData, UUID } from '@lib';
+import { Note, NoteContent, RemoteMetadata, SyncData, UUID } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // CRUD
@@ -26,6 +26,8 @@ export const loadOne						= createAction('[Note] Load One', props<{ id: UUID }>(
 export const loadOneSuccess					= createAction('[Note] Load One Success', props<{ id: UUID, note: Note | null, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
 
 export const unloadOne						= createAction('[Note] Unload One', props<{ id: UUID }>());
+
+export const loadOneContentSuccess			= createAction('[Note] Load One Content Success', props<{ content: NoteContent | null }>());
 
 // SyncData
 export const loadOneSyncData				= createAction('[Note] Load One SyncData', props<{ id: UUID }>());

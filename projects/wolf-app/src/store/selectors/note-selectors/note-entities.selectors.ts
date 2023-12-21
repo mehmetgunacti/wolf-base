@@ -51,6 +51,13 @@ export const selNoteSelected = createSelector(
 
 );
 
+export const selNoteContent = createSelector(
+
+	selNoteEntitiesState,
+	state => state.content
+
+);
+
 function calcParents(entities: Record<UUID, Note>, selectedId: UUID | null): Note[] {
 
 	if (!selectedId)

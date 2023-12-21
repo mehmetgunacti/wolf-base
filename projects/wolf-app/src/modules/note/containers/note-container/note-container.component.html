@@ -1,2 +1,3 @@
-<w-breadcrumb [items]="(parents$ | async) ?? []" [home]="['/notes']" (clicked)="navTo($event)"/>
-<app-note [note]="note$ | async" [children]="(children$ | async) ?? []"/>
+<w-breadcrumb [items]="(parents$ | async) ?? []" [home]="['/notes']" (clicked)="navTo($event)" />
+<app-note [note]="note$ | async" [children]="(children$ | async) ?? []" />
+<app-note-content [content]="content$ | async" />

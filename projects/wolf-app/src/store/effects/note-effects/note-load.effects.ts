@@ -2,8 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
-import { from } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { from, iif, of } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
 import * as noteActions from 'store/actions/note.actions';
 
 @Injectable()
@@ -82,6 +82,20 @@ export class NoteLoadEffects {
 			ofType(noteActions.loadAllRemoteMetadata),
 			switchMap(() => this.localRepository.notes.listRemoteMetadata()),
 			map(remoteMetadata => noteActions.loadAllRemoteMetadataSuccess({ remoteMetadata }))
+
+		)
+
+	);
+
+	loadNoteContent$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(noteActions.setSelectedId),
+			map(param => param.id),
+			filter((id): id is string => !!id),
+			switchMap(id => this.localRepository.noteContent.getEntity(id)),
+			map(content => noteActions.loadOneContentSuccess({ content }))
 
 		)
 

@@ -25,6 +25,7 @@ export class MockNoteContentLocalRepositoryImpl implements NoteContentLocalRepos
 
 			name: '',
 			content: '',
+			modified: new Date().toISOString(),
 			...item,
 			id: uuidv4()
 

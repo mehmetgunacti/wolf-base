@@ -9,6 +9,6 @@ import { NoteContent } from 'lib/models';
 })
 export class NoteContentComponent {
 
-	@Input() note: NoteContent | null | undefined;
+	@Input() content: NoteContent | null | undefined;
 
 }

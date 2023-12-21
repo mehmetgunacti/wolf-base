@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MenuItem, Note } from '@lib';
+import { MenuItem, Note, NoteContent } from '@lib';
 import { Store } from '@ngrx/store';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
-import { selNoteSelected, selNoteSelectedEntityChildren, selNoteSelectedEntityParents } from 'store/selectors/note-selectors/note-entities.selectors';
+import { selNoteContent, selNoteSelected, selNoteSelectedEntityChildren, selNoteSelectedEntityParents } from 'store/selectors/note-selectors/note-entities.selectors';
 
 @Component({
 	selector: 'app-note-container',
@@ -18,6 +18,7 @@ export class NoteContainerComponent {
 	note$: Observable<Note | null>;
 	parents$: Observable<MenuItem[]>;
 	children$: Observable<Note[]>;
+	content$: Observable<NoteContent | null>;
 
 	constructor() {
 
@@ -31,6 +32,7 @@ export class NoteContainerComponent {
 			)
 		);
 		this.children$ = this.store.select(selNoteSelectedEntityChildren);
+		this.content$ = this.store.select(selNoteContent);
 
 	}
 
