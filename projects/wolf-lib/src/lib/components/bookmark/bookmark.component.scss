@@ -6,17 +6,16 @@
 	@extend %component-shadow;
 	--bookmark-hover-transition		: all ease-in-out 250ms;
 	--bookmark-edit-button-opacity	: 0;
-	--font-size 					: larger;
+	--font-size 					: 1.6rem;
 	--image-size					: 110px;
 	--bookmark-bg-color				: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
 
 	&.compact {
 
-		--font-size					: medium;
+		--font-size					: 1.4rem;
 		--image-size				: 55px;
 
 	}
-
 
 	display				: flex;
 	position			: relative;
@@ -80,8 +79,8 @@
 					transition		: var(--bookmark-hover-transition);
 					margin-left		: 0.3rem;
 					top				: -6px;
-					&>i {
-						font-size	: x-small;
+					&>.material-symbols-outlined {
+						font-size	: var(--font-size);
 					}
 				}
 
@@ -89,7 +88,7 @@
 
 			span[bookmark-title] {
 				color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
-				font-size	: small;
+				font-size	: 1.2rem;
 			}
 
 			&:hover {
