@@ -11,6 +11,5 @@ export interface Note extends HasParentId {
 export interface NoteContent extends Entity {
 
 	content: string;
-	modified: ISODateString;
 
 }

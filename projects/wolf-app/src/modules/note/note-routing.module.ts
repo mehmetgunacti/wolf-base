@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { setEditIdGuard, setSelectedIdGuard } from './note.guard';
+import { setSelectedIdGuard } from './note.guard';
 import { NoteFormPageComponent } from './pages/note-form-page/note-form-page.component';
 import { NotePageComponent } from './pages/note-page/note-page.component';
 import { NotesPageComponent } from './pages/notes-page/notes-page.component';
+import { NoteContentFormPageComponent } from './pages/note-content-form-page/note-content-form-page.component';
 
 const routes: Route[] = [
 	{
@@ -22,11 +23,12 @@ const routes: Route[] = [
 	{
 		path: ':id/edit',
 		component: NoteFormPageComponent,
-		canActivate: [setEditIdGuard]
+		canActivate: [setSelectedIdGuard]
 	},
 	{
 		path: ':id/content/edit',
-		component: NoteFormPageComponent
+		component: NoteContentFormPageComponent,
+		canActivate: [setSelectedIdGuard]
 	}
 
 ];

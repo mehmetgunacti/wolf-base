@@ -37,17 +37,10 @@ export const selNotesCount = createSelector(
 
 );
 
-export const selNoteEdited = createSelector(
-
-	selNoteEntitiesState,
-	state => state.editId ? state.entities[state.editId] : null
-
-);
-
 export const selNoteSelected = createSelector(
 
 	selNoteEntitiesState,
-	state => state.selected ? state.entities[state.selected] : null
+	state => state.selectedId ? state.entities[state.selectedId] : null
 
 );
 
@@ -82,7 +75,7 @@ function calcParents(entities: Record<UUID, Note>, selectedId: UUID | null): Not
 export const selNoteSelectedEntityParents = createSelector(
 
 	selNoteEntitiesState,
-	(state): Note[] => calcParents(state.entities, state.selected)
+	(state): Note[] => calcParents(state.entities, state.selectedId)
 
 );
 

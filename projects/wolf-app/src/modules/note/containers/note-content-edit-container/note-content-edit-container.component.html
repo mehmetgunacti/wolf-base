@@ -1,0 +1,20 @@
+<w-portal>
+
+	<button
+		class="icon-only"
+		(click)="onRemove()">
+		<span class="material-symbols-outlined">delete</span> Remove
+	</button>
+
+	<button
+		class="icon-only"
+		(click)="onSave()">
+		<span class="material-symbols-outlined">save</span> Save
+	</button>
+
+</w-portal>
+
+<app-note [note]="note$ | async" />
+<div class="card">
+	<w-input [control]="fcContent"/>
+</div>

@@ -1,13 +1,9 @@
 @import 'core/helper';
-@import 'core/variables';
+@import 'mixins/responsive';
 
 :host {
 
 	@extend %flex-column;
-
-	div[note-content] {
-
-
-	}
+	gap	: var(--gap-sm);
 
 }

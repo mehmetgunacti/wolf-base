@@ -1,8 +1,3 @@
 <w-card *ngIf="content">
-
-	<h6>
-		<span class="material-symbols-outlined">schedule</span> {{ content.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{ content.modified | timePast }})
-	</h6>
 	<div content [innerHTML]="content.content"></div>
-
 </w-card>

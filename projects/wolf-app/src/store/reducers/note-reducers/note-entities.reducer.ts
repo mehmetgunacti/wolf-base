@@ -78,15 +78,14 @@ const reducer = createReducer(
 		return produce(
 			state,
 			draft => {
-				draft.selected = id;
+				draft.selectedId = id;
 				if (!id)
 					draft.content = null;
 			}
 		);
 
 	}),
-	on(noteActions.loadOneContentSuccess, (state, { content }): NoteEntitiesState => ({ ...state, content })),
-	on(noteActions.setEditId, (state, { id }): NoteEntitiesState => ({ ...state, editId: id }))
+	on(noteActions.loadOneContentSuccess, (state, { content }): NoteEntitiesState => ({ ...state, content: content }))
 
 );
 

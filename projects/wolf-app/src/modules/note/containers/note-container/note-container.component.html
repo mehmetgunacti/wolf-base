@@ -1,3 +1,19 @@
+<w-portal>
+
+	<button
+		class="icon-only"
+		[routerLink]="['/notes/', (note$ | async)?.id, 'content', 'edit' ]">
+		<span class="material-symbols-outlined">edit_note</span> Content
+	</button>
+
+	<button
+		class="icon-only"
+		[routerLink]="['/notes/', (note$ | async)?.id, 'edit' ]">
+		<span class="material-symbols-outlined">edit</span> Edit
+	</button>
+
+</w-portal>
+
 <w-breadcrumb [items]="(parents$ | async) ?? []" [home]="['/notes']" (clicked)="navTo($event)" />
 <app-note [note]="note$ | async" [children]="(children$ | async) ?? []" />
 <app-note-content [content]="content$ | async" />

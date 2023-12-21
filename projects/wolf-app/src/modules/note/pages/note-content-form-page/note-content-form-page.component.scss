@@ -1,13 +1,7 @@
 @import 'core/helper';
-@import 'core/variables';
 
 :host {
 
 	@extend %flex-column;
-
-	div[note-content] {
-
-
-	}
 
 }

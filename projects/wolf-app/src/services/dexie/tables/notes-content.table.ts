@@ -21,8 +21,7 @@ export class DexieNoteContentRepositoryImpl extends EntityLocalRepositoryImpl<No
 
 			id,
 			name: '',
-			content: '',
-			modified: new Date().toISOString()
+			content: ''
 
 		};
 		return { ...instance, ...item, id } as NoteContent;
