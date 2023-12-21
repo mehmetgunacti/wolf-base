@@ -1,0 +1,8 @@
+@import 'core/helper';
+@import 'mixins/responsive';
+
+:host {
+
+	@extend %flex-column;
+
+}

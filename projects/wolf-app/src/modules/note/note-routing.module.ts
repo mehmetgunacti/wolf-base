@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { NotesPageComponent } from './pages/notes-page/notes-page.component';
 import { NoteFormPageComponent } from './pages/note-form-page/note-form-page.component';
+import { NotePageComponent } from './pages/note-page/note-page.component';
 
 const routes: Route[] = [
 	{
@@ -14,7 +15,7 @@ const routes: Route[] = [
 	},
 	{
 		path: ':id',
-		component: NoteFormPageComponent
+		component: NotePageComponent
 	},
 	{
 		path: ':id/edit',

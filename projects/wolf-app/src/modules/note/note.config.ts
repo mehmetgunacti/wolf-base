@@ -4,6 +4,7 @@ import { NoteEditContainerComponent } from './containers/note-edit-container/not
 import { NotesContainerComponent } from './containers/notes-container/notes-container.component';
 import { NotesSearchAndTagCloudContainerComponent } from './containers/search-and-tag-cloud-container/notes-search-and-tag-cloud-container.component';
 import { NoteFormPageComponent } from './pages/note-form-page/note-form-page.component';
+import { NotePageComponent } from './pages/note-page/note-page.component';
 import { NotesPageComponent } from './pages/notes-page/notes-page.component';
 
 export const components = [
@@ -18,6 +19,7 @@ export const components = [
 	NotesSearchAndTagCloudContainerComponent,
 
 	// pages
+	NotePageComponent,
 	NotesPageComponent,
 	NoteFormPageComponent
 
