@@ -1,0 +1,8 @@
+@import 'core/helper';
+@import 'core/variables';
+
+:host{
+
+	@extend %flex-column;
+
+}

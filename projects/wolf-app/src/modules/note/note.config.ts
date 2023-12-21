@@ -1,5 +1,6 @@
 import { NoteFormComponent } from './components/note-form/note-form.component';
 import { NoteComponent } from './components/note/note.component';
+import { NoteContainerComponent } from './containers/note-container/note-container.component';
 import { NoteEditContainerComponent } from './containers/note-edit-container/note-edit-container.component';
 import { NotesContainerComponent } from './containers/notes-container/notes-container.component';
 import { NotesSearchAndTagCloudContainerComponent } from './containers/search-and-tag-cloud-container/notes-search-and-tag-cloud-container.component';
@@ -14,6 +15,7 @@ export const components = [
 	NoteFormComponent,
 
 	// containers
+	NoteContainerComponent,
 	NoteEditContainerComponent,
 	NotesContainerComponent,
 	NotesSearchAndTagCloudContainerComponent,
