@@ -1,0 +1,9 @@
+<w-card *ngIf="note">
+
+	<h6>
+		<span class="material-symbols-outlined">schedule</span> {{ note.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{ note.modified | timePast }})
+	</h6>
+
+	<div content [innerHTML]="note.content"></div>
+
+</w-card>

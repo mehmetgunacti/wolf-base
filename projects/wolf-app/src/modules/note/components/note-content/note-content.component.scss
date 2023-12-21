@@ -1,0 +1,25 @@
+@import 'core/helper';
+@import 'core/variables';
+
+:host {
+
+	@extend %flex-column;
+
+	h6 {
+
+		@extend %flex-start-center;
+		& > .material-symbols-outlined {
+
+			font-size		: 1.2rem;
+			color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig)/var(--col-text-secondary-alp));
+
+		}
+
+	}
+
+	div[note-content] {
+
+
+	}
+
+}

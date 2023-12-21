@@ -1,3 +1,4 @@
+import { NoteContentComponent } from './components/note-content/note-content.component';
 import { NoteFormComponent } from './components/note-form/note-form.component';
 import { NoteComponent } from './components/note/note.component';
 import { NoteContainerComponent } from './containers/note-container/note-container.component';
@@ -12,6 +13,7 @@ export const components = [
 
 	// components
 	NoteComponent,
+	NoteContentComponent,
 	NoteFormComponent,
 
 	// containers
