@@ -3,13 +3,12 @@
 
 :host {
 
-	&>a {
+	& > a {
 
 		@extend %flex-center-y;
 		height				: 6rem;
 		border-radius		: var(--border-radius);
 		cursor				: pointer;
-		// background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
 		transition			: $bg-transition;
 
 		&.active {

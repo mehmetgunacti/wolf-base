@@ -8,42 +8,42 @@
 	ul {
 
 		flex			: 1;
+		li {
 
-	}
+			padding				: var(--gap);
+    		margin				: var(--gap-xs);
+			border-radius		: var(--border-radius-sm);
+			cursor				: pointer;
+			transition			: $bg-transition;
 
-	li {
+			&:hover {
 
-		padding			: var(--gap);
-		border-radius	: var(--border-radius-sm);
-		border-left		: 4px solid transparent;
-		transition		: $bg-transition;
-
-		&:hover {
-
-			border-left			: 4px solid hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig)/var(--col-text-secondary-alp));
-			background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 10%)/var(--col-bg-panel-alp));
-
-			a {
-
-				text-decoration	: underline;
+				background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 10%) / var(--col-bg-panel-alp));
 
 			}
 
-		}
+			&:focus,
+			&:focus-visible {
 
-		h4 {
+				outline: 3px solid hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
 
-			margin-bottom	: 0;
+			}
 
-		}
+			h4 {
 
-		h6 {
+				margin-bottom	: 0;
 
-			@extend %flex-start-center;
-			& > .material-symbols-outlined {
+			}
 
-				font-size		: 1.2rem;
-				color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig)/var(--col-text-secondary-alp));
+			h6 {
+
+				@extend %flex-start-center;
+				& > .material-symbols-outlined {
+
+					font-size		: 1.2rem;
+					color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig)/var(--col-text-secondary-alp));
+
+				}
 
 			}
 

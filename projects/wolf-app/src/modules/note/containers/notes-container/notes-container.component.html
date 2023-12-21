@@ -2,12 +2,10 @@
 
 	<ng-container card-title>Notes</ng-container>
 	<ul>
-		<li *ngFor="let note of notes$ | async">
+		<li *ngFor="let note of notes$ | async" [routerLink]="['/notes', note.id]" tabindex="0">
 			<h6><span class="material-symbols-outlined">schedule</span> {{ note.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{ note.modified | timePast }})</h6>
 			<h4>
-				<a [routerLink]="['/notes', note.id]" tabindex="0">
-					{{ note.name }}
-				</a>
+				{{ note.name }}
 			</h4>
 		</li>
 	</ul>
