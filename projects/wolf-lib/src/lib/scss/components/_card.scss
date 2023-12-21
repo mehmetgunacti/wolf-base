@@ -1,0 +1,12 @@
+@import 'core/helper';
+@import 'core/variables';
+
+.card {
+
+	@extend %flex-column;
+	border-radius			: var(--border-radius);
+	padding					: var(--gap) var(--gap);
+	background-color		: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
+	transition				: $bg-transition;
+
+}
