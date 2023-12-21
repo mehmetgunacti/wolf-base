@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import * as noteActions from 'store/actions/note.actions';
 
@@ -27,6 +28,17 @@ export class NoteEntityUpdateEffects {
 				)
 
 			)
+
+		)
+
+	);
+
+	navigate$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(noteActions.updateSuccess),
+			map(({ id }) => navigate({ url: ['/notes', id] }))
 
 		)
 
