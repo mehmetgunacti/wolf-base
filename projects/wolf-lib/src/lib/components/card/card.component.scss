@@ -28,6 +28,13 @@
 
 		}
 
+		&>[card-title]:empty,
+		&>[card-buttons]:empty {
+
+			display			: none;
+
+		}
+
 	}
 
 	& > main {
