@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Note } from '@lib';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'app-note-form-page',
@@ -7,8 +6,4 @@ import { Note } from '@lib';
 	styleUrls: ['./note-form-page.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NoteFormPageComponent {
-
-	@Input() note: Note | null | undefined;
-
-}
+export class NoteFormPageComponent { }
