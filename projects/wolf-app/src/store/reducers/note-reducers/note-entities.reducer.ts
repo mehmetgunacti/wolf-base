@@ -72,7 +72,9 @@ const reducer = createReducer(
 		...state,
 		remoteMetadata: remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>)
 
-	}))
+	})),
+	on(noteActions.setSelectedId, (state, { id }): NoteEntitiesState => ({ ...state, selected: id })),
+	on(noteActions.setEditId, (state, { id }): NoteEntitiesState => ({ ...state, editId: id }))
 
 );
 

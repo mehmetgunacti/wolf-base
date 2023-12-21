@@ -1,0 +1,12 @@
+<ul>
+	<button
+		type="button"
+		class="icon-only rounded"
+		(click)="onClick(home)">
+		<span class="material-symbols-outlined">home</span>
+	</button>
+	<li *ngFor="let item of items" (click)="onClick(item.url)">
+		<span class="material-symbols-outlined">chevron_right</span>
+		<span>{{ item.label }}</span>
+	</li>
+</ul>

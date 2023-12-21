@@ -1,6 +1,6 @@
 import { Note, QueryParams, Tag } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selNote, selNoteArray } from './note-entities.selectors';
+import { selNoteArray } from './note-entities.selectors';
 import { selNoteUIState } from './note.selectors';
 
 const arrayOfTagNames = createSelector(

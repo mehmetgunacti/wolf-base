@@ -5,8 +5,34 @@ import { UUID } from "lib";
 import { Observable, iif, of, switchMap, tap, withLatestFrom } from "rxjs";
 import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from "store/actions/core-notification.actions";
-import { setSelectedId } from 'store/actions/note.actions';
+import { setEditId, setSelectedId } from 'store/actions/note.actions';
 import { selNoteIds } from 'store/selectors/note-selectors/note-entities.selectors';
+
+export const setEditIdGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
+
+	const store = inject(Store);
+	const id: UUID | null = route.paramMap.get('id');
+	return of(true).pipe(
+
+		// dispatch id
+		tap(() => store.dispatch(setEditId({ id })))
+
+	);
+
+}
+
+export const setSelectedIdGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
+
+	const store = inject(Store);
+	const id: UUID | null = route.paramMap.get('id');
+	return of(true).pipe(
+
+		// dispatch id
+		tap(() => store.dispatch(setSelectedId({ id })))
+
+	);
+
+}
 
 export const noteEntryGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
 

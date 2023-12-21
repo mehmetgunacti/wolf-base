@@ -1,6 +1,2 @@
-<w-card>
-
-	<ng-container card-title>Note</ng-container>
-a note
-
-</w-card>
+<w-breadcrumb [items]="(parents$ | async) ?? []" [home]="['/notes']" (clicked)="navTo($event)"/>
+<app-note [note]="note$ | async" [children]="(children$ | async) ?? []"/>

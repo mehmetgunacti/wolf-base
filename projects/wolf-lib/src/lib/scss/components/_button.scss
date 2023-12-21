@@ -130,11 +130,12 @@ button {
 		--button-bg-lig		: var(--col-accent-lig);
 		--button-bg-alp		: var(--col-accent-alp);
 
-		padding				: var(--gap-xs) var(--gap-sm);
-		font-size			: 1.3rem;
+		padding				: var(--gap-xxs) var(--gap-sm);
+		font-size			: 1.2rem;
 		line-height			: 1.2;
 		border				: 1px solid transparent;
 		min-width			: unset;
+		border-radius		: 15px;
 
 		& > .material-symbols-outlined {
 

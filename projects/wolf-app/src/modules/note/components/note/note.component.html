@@ -1,13 +1,23 @@
-<ng-container *ngIf="item">
+<w-card *ngIf="note">
 
-	<div>{{ item.name }}</div>
-	<br>
-	<br>
-	<div [innerHTML]="item.parentId"></div>
-	<br>
-	<br>
-	<div note-tags *ngIf="item.tags">
-		<button *ngFor="let tag of item.tags" class="tag">{{ tag }}</button>
+	<ng-container card-title>{{ note.name }}</ng-container>
+	<div note-body>
+
+		<h6>
+			<span class="material-symbols-outlined">schedule</span> {{ note.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{ note.modified | timePast }})
+		</h6>
+
+		<div note-tags *ngIf="note.tags as tags">
+			<button *ngFor="let tag of tags" class="tag">{{ tag }}</button>
+		</div>
+
+		<h5>Notes</h5>
+		<ul>
+			<li *ngFor="let note of children" [routerLink]="['/notes', note.id]" tabindex="0">
+				<h4>{{ note.name }}</h4>
+			</li>
+		</ul>
+
 	</div>
 
-</ng-container>
+</w-card>
