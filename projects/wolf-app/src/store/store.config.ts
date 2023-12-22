@@ -41,6 +41,8 @@ import { databaseReducer } from './reducers/database.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { noteReducer } from './reducers/note-reducers/note.reducer';
 import { AppState } from './states/app.state';
+import { NoteContentEntityCreateEffects } from './effects/note-content-effects/note-content-entity-create.effects';
+import { NoteContentLoadEffects } from './effects/note-content-effects/note-content-load.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -109,6 +111,10 @@ export const effects = [
 
 	NoteLoadEffects,
 	NoteUIEffects,
+
+	// Notes Content
+	NoteContentEntityCreateEffects,
+	NoteContentLoadEffects,
 
 	// Database
 	DatabaseEffects,

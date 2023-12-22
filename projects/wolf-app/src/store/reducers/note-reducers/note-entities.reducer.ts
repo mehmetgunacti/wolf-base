@@ -2,6 +2,7 @@ import { Note, RemoteMetadata, SyncData, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
 import * as noteActions from 'store/actions/note.actions';
+import * as contentActions from 'store/actions/note-content.actions';
 import { NoteEntitiesState, initialNoteEntitiesState } from 'store/states/note.state';
 
 const reducer = createReducer(
@@ -85,7 +86,7 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(noteActions.loadOneContentSuccess, (state, { content }): NoteEntitiesState => ({ ...state, content: content }))
+	on(contentActions.loadOneContentSuccess, (state, { content }): NoteEntitiesState => ({ ...state, content: content }))
 
 );
 

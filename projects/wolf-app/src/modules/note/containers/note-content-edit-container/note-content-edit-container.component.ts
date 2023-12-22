@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Note, NoteContent, UUID } from 'lib';
-import { Observable } from 'rxjs';
+import { Note, NoteContent } from 'lib';
+import { Observable, filter, take, tap } from 'rxjs';
+import { create } from 'store/actions/note-content.actions';
 import { selNoteContent, selNoteSelected } from 'store/selectors/note-selectors/note-entities.selectors';
 
 @Component({
@@ -29,14 +30,17 @@ export class NoteContentEditContainerComponent {
 
 	onSave(): void {
 
-		console.log('save content');
+		this.note$.pipe(
+			filter((note): note is Note => !!note),
+			tap(note => this.store.dispatch(create({ content: { id: note.id, name: note.name, content: this.fcContent.value } }))),
+			take(1)
+		).subscribe();
 
 	}
 
 	onRemove(): void {
 
-		console.log('delete content');
-		// this.store.dispatch(moveToTrash({ id }));
+
 
 	}
 

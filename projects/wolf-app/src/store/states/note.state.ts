@@ -13,6 +13,9 @@ export interface NoteEntitiesState {
 	syncData: Record<UUID, SyncData>;
 	remoteMetadata: Record<UUID, RemoteMetadata>;
 
+	contentSyncData: Record<UUID, SyncData>;
+	contentRemoteMetadata: Record<UUID, RemoteMetadata>;
+
 	selectedId: UUID | null;
 	content: NoteContent | null;
 
@@ -31,6 +34,9 @@ export const initialNoteEntitiesState: NoteEntitiesState = {
 	entities: {},
 	syncData: {},
 	remoteMetadata: {},
+
+	contentSyncData: {},
+	contentRemoteMetadata: {},
 
 	selectedId: null,
 	content: null

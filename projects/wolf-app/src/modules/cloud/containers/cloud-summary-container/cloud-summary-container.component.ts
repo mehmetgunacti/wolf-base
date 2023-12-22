@@ -67,9 +67,6 @@ function getNoteAction(taskType: SyncTaskType): Action | null {
 		case SyncTaskType.remote_deleted:
 			return noteActions.syncRemoteDeleted();
 
-		case SyncTaskType.clicked:
-			return noteActions.uploadClicked();
-
 		case SyncTaskType.deleted_deleted:
 			return noteActions.syncDeletedDeleted();
 

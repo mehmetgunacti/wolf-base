@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Note, UUID } from 'lib';
 import { Observable } from 'rxjs';
-import { click, togglePopular } from 'store/actions/note.actions';
+import { togglePopular } from 'store/actions/note.actions';
 import { selNoteRootArray } from 'store/selectors/note-selectors/note-entities.selectors';
 
 @Component({
@@ -29,12 +29,6 @@ export class NotesContainerComponent {
 	onPopular(id: UUID): void {
 
 		this.store.dispatch(togglePopular({ id }));
-
-	}
-
-	onClick(id: UUID): void {
-
-		this.store.dispatch(click({ id }));
 
 	}
 

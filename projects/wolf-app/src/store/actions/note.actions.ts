@@ -14,9 +14,6 @@ export const updateSuccess					= createAction('[Note] Update Success', props<{ i
 export const moveToTrash					= createAction('[Note] Move to Trash', props<{ id: UUID }>());
 export const moveToTrashSuccess				= createAction('[Note] Move to Trash Success', props<{ id: UUID }>());
 
-// CLICK
-export const click							= createAction('[Note] Click', props<{ id: UUID }>());
-
 // LOAD FROM LOCAL DATABASE INTO MEMORY
 //// Entity
 export const loadAll						= createAction('[Note] Load All');
@@ -26,8 +23,6 @@ export const loadOne						= createAction('[Note] Load One', props<{ id: UUID }>(
 export const loadOneSuccess					= createAction('[Note] Load One Success', props<{ id: UUID, note: Note | null, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
 
 export const unloadOne						= createAction('[Note] Unload One', props<{ id: UUID }>());
-
-export const loadOneContentSuccess			= createAction('[Note] Load One Content Success', props<{ content: NoteContent | null }>());
 
 // SyncData
 export const loadOneSyncData				= createAction('[Note] Load One SyncData', props<{ id: UUID }>());
@@ -74,5 +69,3 @@ export const syncRemoteDeleted				= createAction('[Note] Sync Remote Deleted');
 
 // deleted_deleted
 export const syncDeletedDeleted				= createAction('[Note] Sync Deleted Deleted');
-
-export const uploadClicked					= createAction('[Note] Upload Clicked');
