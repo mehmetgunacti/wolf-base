@@ -3,13 +3,13 @@
 	<ng-container card-title>{{ note.name }}</ng-container>
 	<div note-body>
 
-		<h6>
-			<span class="material-symbols-outlined">schedule</span> {{ note.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{ note.modified | timePast }})
-		</h6>
-
 		<div note-tags *ngIf="note.tags as tags">
 			<button *ngFor="let tag of tags" class="tag">{{ tag }}</button>
 		</div>
+
+		<h6>
+			<span class="material-symbols-outlined">schedule</span> {{ note.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{ note.modified | timePast }})
+		</h6>
 
 		<div note-children *ngIf="children.length > 0">
 			<h4>Notes</h4>
