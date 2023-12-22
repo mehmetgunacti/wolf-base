@@ -16,20 +16,3 @@ export const selCloudConflictDialogTitle = createSelector(
 	state => state.conflictDialogTitle
 
 );
-
-export const selCloudMenuBadgeNumbers = createSelector(
-
-	selBookmarkNonConflictCloudTasks,
-	selBookmarkConflictCloudTasks,
-	(nonConflicts: CloudTask[], conflicts: CloudTask[]): number[] => {
-
-		const lengthOfNonConflicts = nonConflicts.length;
-		const lengthOfConflicts = conflicts.length;
-		const total = lengthOfConflicts + lengthOfNonConflicts;
-		if (total > 0)
-			return [total, lengthOfConflicts];
-		return [];
-
-	}
-
-);

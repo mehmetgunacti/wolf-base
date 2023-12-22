@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { switchTheme } from 'store/actions/core-ui.actions';
 import { selBookmarkMenuBadge } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
-import { selCloudMenuBadgeNumbers } from 'store/selectors/cloud-ui.selectors';
+import { selCloudNumberOfAvailableTasks } from 'store/selectors/cloud.selectors';
 
 @Component({
 	selector: 'app-nav',
@@ -15,7 +15,7 @@ export class NavComponent {
 
 	private store: Store = inject(Store);
 
-	cloudNumbers$: Observable<number[]> = this.store.select(selCloudMenuBadgeNumbers);
+	cloudNumbers$: Observable<number> = this.store.select(selCloudNumberOfAvailableTasks);
 	menuItems$: Observable<MenuItem[]>;
 
 	constructor() {

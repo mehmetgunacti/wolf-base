@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
 import { CloudTask, SyncTaskType, WolfEntity } from 'lib';
-import { Observable, combineLatest, map, toArray } from 'rxjs';
+import { Observable } from 'rxjs';
 import * as bmActions from 'store/actions/bookmark.actions';
 import * as noteActions from 'store/actions/note.actions';
-import { selBookmarkCloudTasks } from 'store/selectors/bookmark-selectors/bookmark-cloud.selectors';
-import { selNoteCloudTasks } from 'store/selectors/note-selectors/note-cloud.selectors';
+import { selCloudAvailableTasks } from 'store/selectors/cloud.selectors';
 
 function getBookmarkAction(taskType: SyncTaskType): Action | null {
 
@@ -106,12 +105,7 @@ export class CloudSummaryContainerComponent {
 
 	constructor() {
 
-		this.tasks$ = combineLatest([
-			this.store.select(selBookmarkCloudTasks),
-			this.store.select(selNoteCloudTasks)
-		]).pipe(
-			map(([bookmarks, notes]) => [...bookmarks, ...notes])
-		);
+		this.tasks$ = this.store.select(selCloudAvailableTasks);
 
 	}
 

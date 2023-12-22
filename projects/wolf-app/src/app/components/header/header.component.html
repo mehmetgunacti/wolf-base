@@ -1,12 +1,12 @@
 <section id="section-logo">
 
-	<div class="badge-container" *ngIf="((cloudNumbers$ | async) ?? []) as cloudNumbers">
+	<div class="badge-container" *ngIf="(cloudNumbers$ | async) as cloudNumbers">
 
 		<button
 			class="icon-only"
 			(click)="toggleNav()"><i class="material-symbols-outlined bold">menu</i>
 		</button>
-		<span *ngIf="cloudNumbers.length > 0" class="badge small"></span>
+		<span *ngIf="cloudNumbers > 0" class="badge small"></span>
 
 	</div>
 
