@@ -13,7 +13,8 @@ const routes: Route[] = [
 	},
 	{
 		path: 'new',
-		component: NoteFormPageComponent
+		component: NoteFormPageComponent,
+		canActivate: [setSelectedIdGuard]
 	},
 	{
 		path: ':id',
