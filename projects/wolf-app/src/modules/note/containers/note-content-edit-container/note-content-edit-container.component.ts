@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Note, NoteContent } from 'lib';
+import { Note } from 'lib';
 import { Observable, filter, take, tap } from 'rxjs';
 import { create } from 'store/actions/note-content.actions';
 import { selNoteContent, selNoteSelected } from 'store/selectors/note-selectors/note-entities.selectors';
@@ -17,14 +18,16 @@ export class NoteContentEditContainerComponent {
 	private store: Store = inject(Store);
 
 	note$: Observable<Note | null>;
-	content$: Observable<NoteContent | null>;
 
 	fcContent: FormControl = new FormControl('', { validators: [Validators.required], nonNullable: true });
 
 	constructor() {
 
 		this.note$ = this.store.select(selNoteSelected);
-		this.content$ = this.store.select(selNoteContent);
+		this.store.select(selNoteContent).pipe(
+			takeUntilDestroyed(),
+			tap(content => this.fcContent.setValue(content?.content))
+		).subscribe();
 
 	}
 
