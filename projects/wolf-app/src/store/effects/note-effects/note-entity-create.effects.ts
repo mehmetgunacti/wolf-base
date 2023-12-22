@@ -11,9 +11,6 @@ import * as noteActions from 'store/actions/note.actions';
 @Injectable()
 export class NoteEntityCreateEffects {
 
-	// todo: remove later
-	tmpCounter: number = 0;
-
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
