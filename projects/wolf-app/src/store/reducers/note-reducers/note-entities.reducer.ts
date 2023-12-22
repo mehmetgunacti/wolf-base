@@ -86,7 +86,7 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(contentActions.loadOneContentSuccess, (state, { content }): NoteEntitiesState => ({ ...state, content: content }))
+	on(contentActions.loadOneContentSuccess, (state, { content }): NoteEntitiesState => ({ ...state, content }))
 
 );
 
