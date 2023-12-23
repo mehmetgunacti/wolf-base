@@ -45,8 +45,7 @@ export const selCloudAvailableTasks = createSelector(
 
 	selBookmarkCloudTasks,
 	selNoteCloudTasks,
-	// selNoteContentCloudTasks,
-	// (bookmarks, notes, contents) => [...bookmarks, ...notes, ...contents]
-	(bookmarks, notes) => [...bookmarks, ...notes]
+	selNoteContentCloudTasks,
+	(bookmarks, notes, contents) => [...bookmarks, ...notes, ...contents]
 
 );
