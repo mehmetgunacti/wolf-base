@@ -1,5 +1,6 @@
 .empty {
 
+	flex: 1;
 	@extend %flex-center-center;
 	flex-direction	: column;
     gap				: var(--gap);
