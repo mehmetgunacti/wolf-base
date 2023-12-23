@@ -2,20 +2,23 @@ import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { Entity, EntityName, FirestoreConfig, WolfEntity } from '@lib';
 import { Store } from "@ngrx/store";
-import { BookmarksRemoteRepository, EntityRemoteRepository } from 'lib/repositories/remote';
+import { BookmarksRemoteRepository, EntityRemoteRepository, NoteContentRemoteRepository } from 'lib/repositories/remote';
+import { NotesRemoteRepository } from 'lib/repositories/remote/note-remote.repository';
 import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
 import { FirestoreAPIClient, FirestoreAPIClientImpl } from "lib/utils/firestore-rest-client/firestore-api.tool";
 import { VoidBookmarksCollection } from "services/mock-services/remotestorage/collections/bookmarks.collection";
+import { VoidNoteContentCollection } from 'services/mock-services/remotestorage/collections/note-content.collection';
+import { VoidNotesCollection } from 'services/mock-services/remotestorage/collections/notes.collection';
 import { selCoreFirestoreConfig } from "store/selectors/core-configuration.selectors";
 import { BookmarksFirestoreCollectionImpl } from "./collections";
-import { NotesRemoteRepository } from 'lib/repositories/remote/note-remote.repository';
+import { NoteContentContentFirestoreCollectionImpl } from './collections/note-content.collection';
 import { NotesFirestoreCollectionImpl } from './collections/notes.collection';
-import { VoidNotesCollection } from 'services/mock-services/remotestorage/collections/notes.collection';
 
 export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositoryService {
 
 	public bookmarks!: BookmarksRemoteRepository;
 	public notes!: NotesRemoteRepository;
+	public noteContent!: NoteContentRemoteRepository;
 
 	private store: Store = inject(Store);
 	private http: HttpClient = inject(HttpClient);
@@ -41,6 +44,7 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 
 			case WolfEntity.bookmark.name: return this.bookmarks;
 			case WolfEntity.note.name: return this.notes;
+			case WolfEntity.note_content.name: return this.noteContent;
 
 		}
 		throw Error('Unknown entity');
@@ -53,11 +57,13 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 
 			this.bookmarks = new BookmarksFirestoreCollectionImpl(this.firestore, config);
 			this.notes = new NotesFirestoreCollectionImpl(this.firestore, config);
+			this.noteContent = new NoteContentContentFirestoreCollectionImpl(this.firestore, config);
 
 		} else {
 
 			this.bookmarks = new VoidBookmarksCollection();
 			this.notes = new VoidNotesCollection();
+			this.noteContent = new VoidNoteContentCollection();
 
 		}
 

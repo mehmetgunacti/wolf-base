@@ -3,11 +3,11 @@ import { SyncService, WolfEntity } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap } from 'rxjs/operators';
-import { loadAllRemoteMetadata } from 'store/actions/note.actions';
+import { loadAllRemoteMetadata } from 'store/actions/note-content.actions';
 import { startSync } from 'store/actions/cloud.actions';
 
 @Injectable()
-export class NoteSyncEffects {
+export class NoteContentSyncEffects {
 
 	private actions$: Actions = inject(Actions);
 	private syncService: SyncService = inject(SYNC_SERVICE);
@@ -19,7 +19,7 @@ export class NoteSyncEffects {
 			ofType(startSync),
 			switchMap(() =>
 
-				this.syncService.downloadMetadata(WolfEntity.note).pipe(
+				this.syncService.downloadMetadata(WolfEntity.note_content).pipe(
 					map(() => loadAllRemoteMetadata())
 				)
 

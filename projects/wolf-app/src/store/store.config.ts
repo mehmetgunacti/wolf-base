@@ -20,6 +20,9 @@ import { CoreThemeEffects } from './effects/core-theme.effects';
 import { CoreUIEffects } from './effects/core-ui.effects';
 import { DatabaseEffects } from './effects/database.effects';
 import { LogsEffects } from './effects/logs.effects';
+import { NoteContentEntityCreateEffects } from './effects/note-content-effects/note-content-entity-create.effects';
+import { NoteContentLoadEffects } from './effects/note-content-effects/note-content-load.effects';
+import { NoteContentSyncEffects } from './effects/note-content-effects/note-content-sync.effects';
 import { NoteEntityCreateEffects } from './effects/note-effects/note-entity-create.effects';
 import { NoteEntityMoveToTrashEffects } from './effects/note-effects/note-entity-move-to-trash.effects';
 import { NoteEntityUpdateEffects } from './effects/note-effects/note-entity-update.effects';
@@ -39,10 +42,9 @@ import { cloudReducer } from './reducers/cloud.reducer';
 import { coreReducer } from './reducers/core.reducer';
 import { databaseReducer } from './reducers/database.reducer';
 import { logsReducer } from './reducers/logs.reducer';
+import { noteContentReducer } from './reducers/note-content-reducers/note-content.reducer';
 import { noteReducer } from './reducers/note-reducers/note.reducer';
 import { AppState } from './states/app.state';
-import { NoteContentEntityCreateEffects } from './effects/note-content-effects/note-content-entity-create.effects';
-import { NoteContentLoadEffects } from './effects/note-content-effects/note-content-load.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -116,6 +118,8 @@ export const effects = [
 	NoteContentEntityCreateEffects,
 	NoteContentLoadEffects,
 
+	NoteContentSyncEffects,
+
 	// Database
 	DatabaseEffects,
 
@@ -133,6 +137,7 @@ export const reducers: ActionReducerMap<AppState> = {
 	cloud: cloudReducer,
 	bookmark: combineReducers(bookmarkReducer),
 	note: combineReducers(noteReducer),
+	noteContent: combineReducers(noteContentReducer),
 	database: databaseReducer,
 	logs: combineReducers(logsReducer)
 

@@ -1,13 +1,24 @@
 <w-card>
 
 	<ng-container card-title>Notes</ng-container>
-	<ul>
-		<li *ngFor="let note of notes$ | async" [routerLink]="['/notes', note.id]" tabindex="0">
-			<h6><span class="material-symbols-outlined">schedule</span> {{ note.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{ note.modified | timePast }})</h6>
-			<h4>
-				{{ note.name }}
-			</h4>
-		</li>
-	</ul>
+	<ng-container *ngIf="(notes$ | async) as notes">
+		<ul *ngIf="notes.length > 0; else noNotes">
+			<li *ngFor="let note of notes" [routerLink]="['/notes', note.id]" tabindex="0">
+				<h6><span class="material-symbols-outlined">schedule</span> {{ note.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{ note.modified | timePast }})</h6>
+				<h4>
+					{{ note.name }}
+				</h4>
+			</li>
+		</ul>
+		<ng-template #noNotes>
+			<div class="empty">
+				No notes available
+				<br>
+				<button routerLink="/notes/new" class="icon-only">
+					<span class="material-symbols-outlined">add</span> Add Note
+				</button>
+			</div>
+		</ng-template>
+	</ng-container>
 
 </w-card>

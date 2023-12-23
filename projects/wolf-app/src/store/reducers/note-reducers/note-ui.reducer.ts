@@ -1,5 +1,5 @@
 import { Action, createReducer } from '@ngrx/store';
-import { NoteUIState, initialNoteUIState } from 'store/states/note.state';
+import { Note_UIState, initialNoteUIState } from 'store/states/note.state';
 
 const reducer = createReducer(
 
@@ -14,6 +14,6 @@ const reducer = createReducer(
 
 );
 
-export function noteUIReducer(state: NoteUIState | undefined, action: Action): NoteUIState {
+export function note_UIReducer(state: Note_UIState | undefined, action: Action): Note_UIState {
 	return reducer(state, action);
 }

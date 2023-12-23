@@ -16,8 +16,11 @@ export const moveToTrashSuccess				= createAction('[Note Content] Move to Trash 
 
 // LOAD FROM LOCAL DATABASE INTO MEMORY
 //// Entity
+export const loadAll						= createAction('[Note Content] Load All');
+export const loadAllSuccess					= createAction('[Note Content] Load All Success', props<{ ids: UUID[], syncData: SyncData[], remoteMetadata: RemoteMetadata[] }>());
+
 export const loadOne						= createAction('[Note Content] Load One', props<{ id: UUID }>());
-export const loadOneSuccess					= createAction('[Note Content] Load One Success', props<{ id: UUID, content: NoteContent | null, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
+export const loadOneSuccess					= createAction('[Note Content] Load One Success', props<{ id: UUID, contentAvailable: boolean, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
 
 export const unloadOne						= createAction('[Note Content] Unload One', props<{ id: UUID }>());
 

@@ -2,7 +2,7 @@ import { Note, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selNoteEntitiesState } from './note.selectors';
 
-export const selNotes = createSelector(
+export const selNote_entities = createSelector(
 
 	selNoteEntitiesState,
 	entities => entities.entities
@@ -41,13 +41,6 @@ export const selNoteSelected = createSelector(
 
 	selNoteEntitiesState,
 	state => state.selectedId ? state.entities[state.selectedId] : null
-
-);
-
-export const selNoteContent = createSelector(
-
-	selNoteEntitiesState,
-	state => state.content
 
 );
 

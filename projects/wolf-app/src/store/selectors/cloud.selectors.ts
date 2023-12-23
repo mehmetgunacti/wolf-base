@@ -2,6 +2,7 @@ import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { CloudModuleState } from "store/states/cloud.state";
 import { selBookmarkCloudTasks } from './bookmark-selectors/bookmark-cloud.selectors';
 import { selNoteCloudTasks } from './note-selectors/note-cloud.selectors';
+import { selNoteContentCloudTasks } from './note-content-selectors/note-content-cloud.selectors';
 
 export const selCloudModuleState = createFeatureSelector<CloudModuleState>('cloud');
 
@@ -44,7 +45,8 @@ export const selCloudAvailableTasks = createSelector(
 
 	selBookmarkCloudTasks,
 	selNoteCloudTasks,
-	(bookmarks, notes) => [...bookmarks, ...notes]
+	selNoteContentCloudTasks,
+	(bookmarks, notes, contents) => [...bookmarks, ...notes, ...contents]
 
 );
 

@@ -1,11 +1,11 @@
 import { ActionReducerMap } from "@ngrx/store";
-import { NoteModuleState } from "store/states/note.state";
-import { noteEntitiesReducer } from "./note-entities.reducer";
-import { noteUIReducer } from "./note-ui.reducer";
+import { Note_ModuleState } from "store/states/note.state";
+import { note_EntitiesReducer } from "./note-entities.reducer";
+import { note_UIReducer } from "./note-ui.reducer";
 
-export const noteReducer: ActionReducerMap<NoteModuleState> = {
+export const noteReducer: ActionReducerMap<Note_ModuleState> = {
 
-	entities: noteEntitiesReducer,
-	ui: noteUIReducer
+	entities: note_EntitiesReducer,
+	ui: note_UIReducer
 
 }

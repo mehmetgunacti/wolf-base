@@ -78,7 +78,7 @@ export class SyncServiceImpl implements SyncService {
 							switchMap(syncData =>
 
 								// download remoteMetadata
-								this.remoteRepository.bookmarks.downloadMetadata(entity.id).pipe(
+								this.remoteRepository.getRepository(entityName).downloadMetadata(entity.id).pipe(
 
 									// if remoteMetadata does not exist, skip this id
 									// (in this case, remoteMetadata will not be removed from indexedDb table

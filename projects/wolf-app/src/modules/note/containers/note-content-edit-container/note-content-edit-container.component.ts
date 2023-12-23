@@ -5,7 +5,8 @@ import { Store } from '@ngrx/store';
 import { Note } from 'lib';
 import { Observable, filter, take, tap } from 'rxjs';
 import { create } from 'store/actions/note-content.actions';
-import { selNoteContent, selNoteSelected } from 'store/selectors/note-selectors/note-entities.selectors';
+import { selNoteContent_content } from 'store/selectors/note-content-selectors/note-content-entities.selectors';
+import { selNoteSelected } from 'store/selectors/note-selectors/note-entities.selectors';
 
 @Component({
 	selector: 'app-note-content-edit-container',
@@ -24,7 +25,7 @@ export class NoteContentEditContainerComponent {
 	constructor() {
 
 		this.note$ = this.store.select(selNoteSelected);
-		this.store.select(selNoteContent).pipe(
+		this.store.select(selNoteContent_content).pipe(
 			takeUntilDestroyed(),
 			tap(content => this.fcContent.setValue(content?.content))
 		).subscribe();

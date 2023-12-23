@@ -1,7 +1,7 @@
 import { CloudTask, NameBase, SyncTaskType, UUID, WolfEntity, toCloudTask } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selNoteArray } from './note-entities.selectors';
-import { selNoteRemoteMetadataArray, selNoteRemoteMetadataMap, selNoteSyncDataArray, selNoteSyncDataMap } from "./note-sync.selectors";
+import { selNoteRemoteMetadataArray, selNoteRemoteMetadataMap, selNoteSyncDataArray, selNoteSyncDataMap } from './note-sync.selectors';
 
 export const selNoteLocalNew = createSelector(
 

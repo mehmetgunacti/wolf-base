@@ -3,7 +3,8 @@ import { MenuItem, Note, NoteContent } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
-import { selNoteContent, selNoteSelected, selNoteSelectedEntityChildren, selNoteSelectedEntityParents } from 'store/selectors/note-selectors/note-entities.selectors';
+import { selNoteContent_content } from 'store/selectors/note-content-selectors/note-content-entities.selectors';
+import { selNoteSelected, selNoteSelectedEntityChildren, selNoteSelectedEntityParents } from 'store/selectors/note-selectors/note-entities.selectors';
 
 @Component({
 	selector: 'app-note-container',
@@ -32,7 +33,7 @@ export class NoteContainerComponent {
 			)
 		);
 		this.children$ = this.store.select(selNoteSelectedEntityChildren);
-		this.content$ = this.store.select(selNoteContent);
+		this.content$ = this.store.select(selNoteContent_content);
 
 	}
 

@@ -33,6 +33,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 			case WolfEntity.bookmark.name: return this.bookmarks as unknown as EntityLocalRepository<T>;
 			case WolfEntity.note.name: return this.notes as unknown as EntityLocalRepository<T>;
+			case WolfEntity.note_content.name: return this.noteContent as unknown as EntityLocalRepository<T>;
 
 		}
 		throw Error('Unknown entity');

@@ -1,27 +1,23 @@
-import { Note, NoteContent, QueryParams, RemoteMetadata, SyncData, UUID } from "@lib";
+import { Note, QueryParams, RemoteMetadata, SyncData, UUID } from '@lib';
 
-export interface NoteModuleState {
+export interface Note_ModuleState {
 
-	entities: NoteEntitiesState;
-	ui: NoteUIState;
+	entities: Note_EntitiesState;
+	ui: Note_UIState;
 
 }
 
-export interface NoteEntitiesState {
+export interface Note_EntitiesState {
 
 	entities: Record<UUID, Note>;
 	syncData: Record<UUID, SyncData>;
 	remoteMetadata: Record<UUID, RemoteMetadata>;
 
-	contentSyncData: Record<UUID, SyncData>;
-	contentRemoteMetadata: Record<UUID, RemoteMetadata>;
-
 	selectedId: UUID | null;
-	content: NoteContent | null;
 
 }
 
-export interface NoteUIState {
+export interface Note_UIState {
 
 	queryParams: QueryParams;
 
@@ -29,21 +25,17 @@ export interface NoteUIState {
 
 // INITIALIZATION
 
-export const initialNoteEntitiesState: NoteEntitiesState = {
+export const note_initialEntitiesState: Note_EntitiesState = {
 
 	entities: {},
 	syncData: {},
 	remoteMetadata: {},
 
-	contentSyncData: {},
-	contentRemoteMetadata: {},
-
-	selectedId: null,
-	content: null
+	selectedId: null
 
 };
 
-export const initialNoteUIState: NoteUIState = {
+export const initialNoteUIState: Note_UIState = {
 
 	queryParams: {
 		id: null,
@@ -53,9 +45,9 @@ export const initialNoteUIState: NoteUIState = {
 
 };
 
-export const initialNoteState: NoteModuleState = {
+export const initialNoteState: Note_ModuleState = {
 
-	entities: initialNoteEntitiesState,
+	entities: note_initialEntitiesState,
 	ui: initialNoteUIState
 
 };

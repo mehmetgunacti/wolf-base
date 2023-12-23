@@ -4,14 +4,36 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
-import * as noteActions from 'store/actions/note.actions';
 import * as contentActions from 'store/actions/note-content.actions';
+import * as noteActions from 'store/actions/note.actions';
 
 @Injectable()
 export class NoteContentLoadEffects {
 
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
+
+	loadAll$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(contentActions.loadAll),
+			switchMap(() =>
+
+				Promise.all([
+
+					this.localRepository.noteContent.listIds(),
+					this.localRepository.noteContent.listSyncData(),
+					this.localRepository.noteContent.listRemoteMetadata()
+
+				])
+
+			),
+			map(([ids, syncData, remoteMetadata]) => contentActions.loadAllSuccess({ ids, syncData, remoteMetadata }))
+
+		)
+
+	);
 
 	loadOne$ = createEffect(
 
@@ -23,13 +45,13 @@ export class NoteContentLoadEffects {
 				Promise.all([
 
 					Promise.resolve(id),
-					this.localRepository.noteContent.getEntity(id),
+					this.localRepository.noteContent.listIds(),
 					this.localRepository.noteContent.getSyncData(id),
 					this.localRepository.noteContent.getRemoteMetadata(id)
 
 				])
 			),
-			map(([id, content, syncData, remoteMetadata]) => contentActions.loadOneSuccess({ id, content, syncData, remoteMetadata }))
+			map(([id, ids, syncData, remoteMetadata]) => contentActions.loadOneSuccess({ id, contentAvailable: ids.includes(id), syncData, remoteMetadata }))
 
 		)
 
@@ -42,7 +64,7 @@ export class NoteContentLoadEffects {
 			ofType(contentActions.loadOneSyncData),
 			switchMap(({ id }) =>
 
-				from(this.localRepository.notes.getSyncData(id)).pipe(
+				from(this.localRepository.noteContent.getSyncData(id)).pipe(
 
 					map(syncData => contentActions.loadOneSyncDataSuccess({ syncData }))
 
@@ -59,7 +81,7 @@ export class NoteContentLoadEffects {
 		() => this.actions$.pipe(
 
 			ofType(contentActions.loadAllRemoteMetadata),
-			switchMap(() => this.localRepository.notes.listRemoteMetadata()),
+			switchMap(() => this.localRepository.noteContent.listRemoteMetadata()),
 			map(remoteMetadata => contentActions.loadAllRemoteMetadataSuccess({ remoteMetadata }))
 
 		)

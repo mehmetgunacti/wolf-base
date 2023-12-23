@@ -9,6 +9,7 @@ import { BookmarkSyncServiceImpl } from 'services/bookmark-sync.service';
 import { SyncServiceImpl } from 'services/sync.service';
 import * as bmActions from 'store/actions/bookmark.actions';
 import * as noteActions from 'store/actions/note.actions';
+import * as noteContentActions from 'store/actions/note-content.actions';
 
 export const routes: Routes = [
 
@@ -63,6 +64,7 @@ const appInitializerFactory = (store: Store) => {
 
 		store.dispatch(bmActions.loadAll());
 		store.dispatch(noteActions.loadAll());
+		store.dispatch(noteContentActions.loadAll());
 
 	};
 

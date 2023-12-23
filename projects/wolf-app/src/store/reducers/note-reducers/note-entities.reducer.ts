@@ -2,13 +2,12 @@ import { Note, RemoteMetadata, SyncData, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
 import * as noteActions from 'store/actions/note.actions';
-import * as contentActions from 'store/actions/note-content.actions';
-import { NoteEntitiesState, initialNoteEntitiesState } from 'store/states/note.state';
+import { Note_EntitiesState, note_initialEntitiesState } from 'store/states/note.state';
 
 const reducer = createReducer(
 
-	initialNoteEntitiesState,
-	on(noteActions.loadOneSuccess, (state, { id, note, syncData, remoteMetadata }): NoteEntitiesState => {
+	note_initialEntitiesState,
+	on(noteActions.loadOneSuccess, (state, { id, note, syncData, remoteMetadata }): Note_EntitiesState => {
 
 		return produce(
 			state,
@@ -36,7 +35,7 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(noteActions.unloadOne, (state, { id }): NoteEntitiesState => {
+	on(noteActions.unloadOne, (state, { id }): Note_EntitiesState => {
 
 		return produce(
 			state,
@@ -51,7 +50,7 @@ const reducer = createReducer(
 
 	}),
 	on(
-		noteActions.loadAllSuccess, (state, { notes, syncData, remoteMetadata }): NoteEntitiesState => ({
+		noteActions.loadAllSuccess, (state, { notes, syncData, remoteMetadata }): Note_EntitiesState => ({
 
 			...state,
 			entities: notes.reduce((record, note) => { record[note.id] = note; return record; }, {} as Record<UUID, Note>),
@@ -60,7 +59,7 @@ const reducer = createReducer(
 
 		})
 	),
-	on(noteActions.moveToTrashSuccess, (state, { id }): NoteEntitiesState => {
+	on(noteActions.moveToTrashSuccess, (state, { id }): Note_EntitiesState => {
 
 		return produce(
 			state,
@@ -68,28 +67,25 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(noteActions.loadAllRemoteMetadataSuccess, (state, { remoteMetadata }): NoteEntitiesState => ({
+	on(noteActions.loadAllRemoteMetadataSuccess, (state, { remoteMetadata }): Note_EntitiesState => ({
 
 		...state,
 		remoteMetadata: remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>)
 
 	})),
-	on(noteActions.setSelectedId, (state, { id }): NoteEntitiesState => {
+	on(noteActions.setSelectedId, (state, { id }): Note_EntitiesState => {
 
 		return produce(
 			state,
 			draft => {
 				draft.selectedId = id;
-				if (!id)
-					draft.content = null;
 			}
 		);
 
-	}),
-	on(contentActions.loadOneContentSuccess, (state, { content }): NoteEntitiesState => ({ ...state, content }))
+	})
 
 );
 
-export function noteEntitiesReducer(state: NoteEntitiesState | undefined, action: Action): NoteEntitiesState {
+export function note_EntitiesReducer(state: Note_EntitiesState | undefined, action: Action): Note_EntitiesState {
 	return reducer(state, action);
 }
