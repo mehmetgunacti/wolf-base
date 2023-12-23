@@ -56,7 +56,13 @@ export const selBookmarksCount = createSelector(
 export const selBookmarkClicked = createSelector(
 
 	selBookmarkEntitiesState,
-	(state): NamedClick[] => Object.values(state.clicks).filter(c => c.current > 0).map(c => ({ ...c, name: state.entities[c.id].name }))
+	(state): NamedClick[] => Object.values(state.clicks).filter(c => c.current > 0).map(c => {
+
+		if (!state.entities[c.id])
+			console.log('not found: ' + c.id);
+		return { ...c, name: state.entities[c.id]?.name ?? 'BOOKMARK_NOT_FOUND' };
+
+	})
 
 );
 
