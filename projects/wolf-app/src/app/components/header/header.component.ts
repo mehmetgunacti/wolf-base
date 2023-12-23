@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
+import { CloudTask } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { toggleSidebar } from 'store/actions/core-ui.actions';
-import { selCloudNumberOfAvailableTasks } from 'store/selectors/cloud.selectors';
+import { selCloudAvailableTasks } from 'store/selectors/cloud.selectors';
 
 @Component({
 	selector: 'app-header',
@@ -13,7 +14,7 @@ export class HeaderComponent {
 
 	private store: Store = inject(Store);
 
-	cloudNumbers$: Observable<number> = this.store.select(selCloudNumberOfAvailableTasks);
+	cloudTasks$: Observable<CloudTask[]> = this.store.select(selCloudAvailableTasks);
 
 	toggleNav(): void {
 

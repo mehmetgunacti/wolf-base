@@ -9,15 +9,15 @@
 		styleClass="p-button-rounded p-button-text"
 		title="Settings"><span class="material-symbols-outlined">settings</span></button>
 
-	<div class="badge-container" *ngIf="(cloudNumbers$ | async) as cloudNumbers">
+	<div class="badge-container" *ngIf="(cloudTasks$ | async) as cloudTasks">
 		<button
 			class="icon-only rounded"
 			routerLink="/cloud"
 			routerLinkActive="active"
 			[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
-			[title]="cloudNumbers > 0 ? cloudNumbers + ' syncable items available' : 'Cloud'"><span class="material-symbols-outlined">cloud_sync</span>
+			[title]="cloudTasks.length > 0 ? cloudTasks.length + ' syncable items available' : 'Cloud'"><span class="material-symbols-outlined">cloud_sync</span>
 		</button>
-		<span *ngIf="cloudNumbers > 0" class="badge">{{ cloudNumbers }}</span>
+		<span *ngIf="cloudTasks.length > 0" class="badge">{{ cloudTasks.length }}</span>
 	</div>
 
 	<button

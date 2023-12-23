@@ -49,10 +49,3 @@ export const selCloudAvailableTasks = createSelector(
 	(bookmarks, notes, contents) => [...bookmarks, ...notes, ...contents]
 
 );
-
-export const selCloudNumberOfAvailableTasks = createSelector(
-
-	selCloudAvailableTasks,
-	tasks => tasks.length
-
-);

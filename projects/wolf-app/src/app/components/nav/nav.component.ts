@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { MenuItem, TAG_PINNED, TAG_POPULAR } from '@lib';
+import { CloudTask, MenuItem, TAG_PINNED, TAG_POPULAR } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { switchTheme } from 'store/actions/core-ui.actions';
 import { selBookmarkMenuBadge } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
-import { selCloudNumberOfAvailableTasks } from 'store/selectors/cloud.selectors';
+import { selCloudAvailableTasks } from 'store/selectors/cloud.selectors';
 
 @Component({
 	selector: 'app-nav',
@@ -15,7 +15,7 @@ export class NavComponent {
 
 	private store: Store = inject(Store);
 
-	cloudNumbers$: Observable<number> = this.store.select(selCloudNumberOfAvailableTasks);
+	cloudTasks$: Observable<CloudTask[]> = this.store.select(selCloudAvailableTasks);
 	menuItems$: Observable<MenuItem[]>;
 
 	constructor() {
