@@ -8,4 +8,18 @@
 	padding 		: var(--gap-xxl);
 	font-style		: italic;
 
+	& > .empty-message {
+
+		@extend %flex-center-y;
+		color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+		font-style	: italic;
+
+		& > .material-symbols-outlined {
+
+			color	: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+
+		}
+
+	}
+
 }
