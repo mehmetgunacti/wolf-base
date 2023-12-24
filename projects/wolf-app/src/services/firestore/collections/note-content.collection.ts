@@ -11,7 +11,7 @@ export class NoteContentContentFirestoreCollectionImpl extends FirestoreRemoteSt
 		super(
 			firestore,
 			firestoreConfig,
-			WolfEntity.note,
+			WolfEntity.note_content,
 			new NoteContentFirestoreConverter()
 		);
 	}
