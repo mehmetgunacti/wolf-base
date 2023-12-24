@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Note, UUID } from 'lib';
 import { Observable } from 'rxjs';
 import { togglePopular } from 'store/actions/note.actions';
-import { selNoteRootArray } from 'store/selectors/note-selectors/note-entities.selectors';
+import { selNote_rootArray } from 'store/selectors/note-selectors/note-entities.selectors';
 
 @Component({
 	selector: 'app-notes-container',
@@ -18,7 +18,7 @@ export class NotesContainerComponent {
 
 	constructor() {
 
-		this.notes$ = this.store.select(selNoteRootArray);
+		this.notes$ = this.store.select(selNote_rootArray);
 
 	}
 

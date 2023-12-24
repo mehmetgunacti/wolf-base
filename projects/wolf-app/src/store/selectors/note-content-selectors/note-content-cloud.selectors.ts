@@ -3,7 +3,7 @@ import { createSelector } from '@ngrx/store';
 import { selNoteContent_array } from './note-content-entities.selectors';
 import { selNoteContent_remoteMetadataArray, selNoteContent_remoteMetadataMap, selNoteContent_syncDataArray, selNoteContent_syncDataMap } from './note-content-sync.selectors';
 
-export const selNoteContentLocalNew = createSelector(
+export const selNoteContent_LocalNew = createSelector(
 
 	selNoteContent_array,
 	selNoteContent_syncDataMap,
@@ -11,7 +11,7 @@ export const selNoteContentLocalNew = createSelector(
 
 );
 
-const selNoteContentSyncDataLocalUpdatedIds = createSelector(
+const selNoteContent_SyncDataLocalUpdatedIds = createSelector(
 
 	selNoteContent_syncDataArray,
 	selNoteContent_remoteMetadataMap,
@@ -23,10 +23,10 @@ const selNoteContentSyncDataLocalUpdatedIds = createSelector(
 
 );
 
-export const selNoteContentLocalUpdated = createSelector(
+export const selNoteContent_LocalUpdated = createSelector(
 
 	selNoteContent_array,
-	selNoteContentSyncDataLocalUpdatedIds,
+	selNoteContent_SyncDataLocalUpdatedIds,
 	(noteContents, ids): NameBase[] => noteContents.filter(
 
 		e => ids.includes(e.id)
@@ -35,7 +35,7 @@ export const selNoteContentLocalUpdated = createSelector(
 
 );
 
-const selNoteContentSyncDataLocalDeletedIds = createSelector(
+const selNoteContent_SyncDataLocalDeletedIds = createSelector(
 
 	selNoteContent_syncDataArray,
 	selNoteContent_remoteMetadataMap,
@@ -47,10 +47,10 @@ const selNoteContentSyncDataLocalDeletedIds = createSelector(
 
 );
 
-export const selNoteContentLocalDeleted = createSelector(
+export const selNoteContent_LocalDeleted = createSelector(
 
 	selNoteContent_syncDataArray,
-	selNoteContentSyncDataLocalDeletedIds,
+	selNoteContent_SyncDataLocalDeletedIds,
 	(syncData, ids): NameBase[] => syncData.filter(
 
 		e => ids.includes(e.id)
@@ -59,7 +59,7 @@ export const selNoteContentLocalDeleted = createSelector(
 
 );
 
-export const selNoteContentRemoteNew = createSelector(
+export const selNoteContent_RemoteNew = createSelector(
 
 	selNoteContent_remoteMetadataArray,
 	selNoteContent_syncDataMap,
@@ -67,7 +67,7 @@ export const selNoteContentRemoteNew = createSelector(
 
 );
 
-export const selNoteContentRemoteUpdated = createSelector(
+export const selNoteContent_RemoteUpdated = createSelector(
 
 	selNoteContent_remoteMetadataArray,
 	selNoteContent_syncDataMap,
@@ -79,7 +79,7 @@ export const selNoteContentRemoteUpdated = createSelector(
 
 );
 
-export const selNoteContentRemoteDeleted = createSelector(
+export const selNoteContent_RemoteDeleted = createSelector(
 
 	selNoteContent_syncDataArray,
 	selNoteContent_remoteMetadataMap,
@@ -91,7 +91,7 @@ export const selNoteContentRemoteDeleted = createSelector(
 
 );
 
-export const selNoteContentLocalUpdatedRemoteUpdated = createSelector(
+export const selNoteContent_LocalUpdatedRemoteUpdated = createSelector(
 
 	selNoteContent_syncDataArray,
 	selNoteContent_remoteMetadataMap,
@@ -103,7 +103,7 @@ export const selNoteContentLocalUpdatedRemoteUpdated = createSelector(
 
 );
 
-export const selNoteContentLocalDeletedRemoteDeleted = createSelector(
+export const selNoteContent_LocalDeletedRemoteDeleted = createSelector(
 
 	selNoteContent_syncDataArray,
 	selNoteContent_remoteMetadataMap,
@@ -115,7 +115,7 @@ export const selNoteContentLocalDeletedRemoteDeleted = createSelector(
 
 );
 
-export const selNoteContentLocalUpdatedRemoteDeleted = createSelector(
+export const selNoteContent_LocalUpdatedRemoteDeleted = createSelector(
 
 	selNoteContent_syncDataArray,
 	selNoteContent_remoteMetadataMap,
@@ -127,7 +127,7 @@ export const selNoteContentLocalUpdatedRemoteDeleted = createSelector(
 
 );
 
-export const selNoteContentLocalDeletedRemoteUpdated = createSelector(
+const selNoteContent_LocalDeletedRemoteUpdated = createSelector(
 
 	selNoteContent_syncDataArray,
 	selNoteContent_remoteMetadataMap,
@@ -139,15 +139,15 @@ export const selNoteContentLocalDeletedRemoteUpdated = createSelector(
 
 );
 
-export const selNoteContentNonConflictCloudTasks = createSelector(
+const selNoteContent_NonConflictCloudTasks = createSelector(
 
-	selNoteContentLocalNew,
-	selNoteContentLocalUpdated,
-	selNoteContentLocalDeleted,
-	selNoteContentRemoteNew,
-	selNoteContentRemoteUpdated,
-	selNoteContentRemoteDeleted,
-	selNoteContentLocalDeletedRemoteDeleted,
+	selNoteContent_LocalNew,
+	selNoteContent_LocalUpdated,
+	selNoteContent_LocalDeleted,
+	selNoteContent_RemoteNew,
+	selNoteContent_RemoteUpdated,
+	selNoteContent_RemoteDeleted,
+	selNoteContent_LocalDeletedRemoteDeleted,
 	(
 		localNew,
 		localUpdated,
@@ -189,9 +189,9 @@ export const selNoteContentNonConflictCloudTasks = createSelector(
 
 export const selNoteContentConflictCloudTasks = createSelector(
 
-	selNoteContentLocalUpdatedRemoteUpdated,
-	selNoteContentLocalUpdatedRemoteDeleted,
-	selNoteContentLocalDeletedRemoteUpdated,
+	selNoteContent_LocalUpdatedRemoteUpdated,
+	selNoteContent_LocalUpdatedRemoteDeleted,
+	selNoteContent_LocalDeletedRemoteUpdated,
 	(
 		localUpdatedRemoteUpdated,
 		localUpdatedRemoteDeleted,
@@ -217,7 +217,7 @@ export const selNoteContentConflictCloudTasks = createSelector(
 
 export const selNoteContentCloudTasks = createSelector(
 
-	selNoteContentNonConflictCloudTasks,
+	selNoteContent_NonConflictCloudTasks,
 	selNoteContentConflictCloudTasks,
 	(nonConflicts: CloudTask[], conflicts: CloudTask[]): CloudTask[] => [...nonConflicts, ...conflicts]
 

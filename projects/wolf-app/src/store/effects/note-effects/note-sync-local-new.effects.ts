@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as noteActions from 'store/actions/note.actions';
-import { selNoteLocalNew } from 'store/selectors/note-selectors/note-cloud.selectors';
+import { selNote_LocalNew } from 'store/selectors/note-selectors/note-cloud.selectors';
 
 @Injectable()
 export class NoteSyncLocalNewEffects {
@@ -19,7 +19,7 @@ export class NoteSyncLocalNewEffects {
 		() => this.actions$.pipe(
 
 			ofType(noteActions.syncLocalNew),
-			withLatestFrom(this.store.select(selNoteLocalNew)),
+			withLatestFrom(this.store.select(selNote_LocalNew)),
 			switchMap(([, items]) =>
 
 				this.syncService.uploadNew(WolfEntity.note, items).pipe(

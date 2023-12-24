@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as noteActions from 'store/actions/note.actions';
-import { selNoteLocalDeletedRemoteDeleted } from 'store/selectors/note-selectors/note-cloud.selectors';
+import { selNote_LocalDeletedRemoteDeleted } from 'store/selectors/note-selectors/note-cloud.selectors';
 
 @Injectable()
 export class NoteSyncDeletedDeletedEffects {
@@ -19,7 +19,7 @@ export class NoteSyncDeletedDeletedEffects {
 		() => this.actions$.pipe(
 
 			ofType(noteActions.syncDeletedDeleted),
-			withLatestFrom(this.store.select(selNoteLocalDeletedRemoteDeleted)),
+			withLatestFrom(this.store.select(selNote_LocalDeletedRemoteDeleted)),
 			switchMap(([, items]) =>
 
 				this.syncService.downloadDeleted(WolfEntity.note, items).pipe(

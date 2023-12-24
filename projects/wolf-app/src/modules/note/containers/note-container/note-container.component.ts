@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
 import { selNoteContent_content } from 'store/selectors/note-content-selectors/note-content-entities.selectors';
-import { selNoteSelected, selNoteSelectedEntityChildren, selNoteSelectedEntityParents } from 'store/selectors/note-selectors/note-entities.selectors';
+import { selNote_selected, selNote_selectedEntityChildren, selNote_selectedEntityParents } from 'store/selectors/note-selectors/note-entities.selectors';
 
 @Component({
 	selector: 'app-note-container',
@@ -23,8 +23,8 @@ export class NoteContainerComponent {
 
 	constructor() {
 
-		this.note$ = this.store.select(selNoteSelected);
-		this.parents$ = this.store.select(selNoteSelectedEntityParents).pipe(
+		this.note$ = this.store.select(selNote_selected);
+		this.parents$ = this.store.select(selNote_selectedEntityParents).pipe(
 			map(
 				notes => notes.map(note => ({
 					label: note.name,
@@ -32,7 +32,7 @@ export class NoteContainerComponent {
 				}))
 			)
 		);
-		this.children$ = this.store.select(selNoteSelectedEntityChildren);
+		this.children$ = this.store.select(selNote_selectedEntityChildren);
 		this.content$ = this.store.select(selNoteContent_content);
 
 	}

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Note, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { create, moveToTrash, update } from 'store/actions/note.actions';
-import { selNoteArray, selNoteSelected } from 'store/selectors/note-selectors/note-entities.selectors';
+import { selNote_array, selNote_selected } from 'store/selectors/note-selectors/note-entities.selectors';
 import { distinctTagsArray } from 'store/selectors/note-selectors/note-tags.selectors';
 
 @Component({
@@ -23,8 +23,8 @@ export class NoteEditContainerComponent implements OnInit, AfterContentInit {
 
 	constructor() {
 
-		this.note$ = this.store.select(selNoteSelected);
-		this.nodes$ = this.store.select(selNoteArray);
+		this.note$ = this.store.select(selNote_selected);
+		this.nodes$ = this.store.select(selNote_array);
 
 	}
 

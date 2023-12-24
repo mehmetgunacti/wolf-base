@@ -1,45 +1,45 @@
 import { Note, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selNoteEntitiesState } from './note.selectors';
+import { selNote_EntitiesState } from './note.selectors';
 
 export const selNote_entities = createSelector(
 
-	selNoteEntitiesState,
+	selNote_EntitiesState,
 	entities => entities.entities
 
 );
 
-export const selNoteIds = createSelector(
+export const selNote_ids = createSelector(
 
-	selNoteEntitiesState,
+	selNote_EntitiesState,
 	state => Object.keys(state.entities)
 
 );
 
-export const selNoteArray = createSelector(
+export const selNote_array = createSelector(
 
-	selNoteEntitiesState,
+	selNote_EntitiesState,
 	(state): Note[] => Object.values(state.entities)
 
 );
 
-export const selNoteRootArray = createSelector(
+export const selNote_rootArray = createSelector(
 
-	selNoteArray,
+	selNote_array,
 	(arr): Note[] => arr.filter(n => n.parentId === null)
 
 );
 
-export const selNotesCount = createSelector(
+export const selNotes_count = createSelector(
 
-	selNoteIds,
+	selNote_ids,
 	ids => ids.length
 
 );
 
-export const selNoteSelected = createSelector(
+export const selNote_selected = createSelector(
 
-	selNoteEntitiesState,
+	selNote_EntitiesState,
 	state => state.selectedId ? state.entities[state.selectedId] : null
 
 );
@@ -65,17 +65,17 @@ function calcParents(entities: Record<UUID, Note>, selectedId: UUID | null): Not
 
 }
 
-export const selNoteSelectedEntityParents = createSelector(
+export const selNote_selectedEntityParents = createSelector(
 
-	selNoteEntitiesState,
+	selNote_EntitiesState,
 	(state): Note[] => calcParents(state.entities, state.selectedId)
 
 );
 
-export const selNoteSelectedEntityChildren = createSelector(
+export const selNote_selectedEntityChildren = createSelector(
 
-	selNoteArray,
-	selNoteSelected,
+	selNote_array,
+	selNote_selected,
 	(all, selected): Note[] => selected ? all.filter(n => n.parentId === selected.id) : []
 
 );

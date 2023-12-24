@@ -1,10 +1,10 @@
 import { RemoteMetadata, SyncData, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selNoteEntitiesState } from '../note-selectors/note.selectors';
+import { selNoteContent_EntitiesState } from './note-content.selectors';
 
 export const selNoteContent_syncDataArray = createSelector(
 
-	selNoteEntitiesState,
+	selNoteContent_EntitiesState,
 	(state): SyncData[] => Object.values(state.syncData)
 
 );
@@ -24,7 +24,7 @@ export const selNoteContent_syncDataMap = createSelector(
 
 export const selNoteContent_remoteMetadataArray = createSelector(
 
-	selNoteEntitiesState,
+	selNoteContent_EntitiesState,
 	(state): RemoteMetadata[] => Object.values(state.remoteMetadata)
 
 );

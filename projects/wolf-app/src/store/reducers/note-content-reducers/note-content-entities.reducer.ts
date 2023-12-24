@@ -16,7 +16,7 @@ const reducer = createReducer(
 			draft => {
 
 				// id
-				if (contentActions)
+				if (contentAvailable)
 					delete draft.ids[id];
 				else
 					draft.ids[id] = true;

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as noteActions from 'store/actions/note.actions';
-import { selNoteRemoteUpdated } from 'store/selectors/note-selectors/note-cloud.selectors';
+import { selNote_RemoteUpdated } from 'store/selectors/note-selectors/note-cloud.selectors';
 
 @Injectable()
 export class NoteSyncRemoteUpdatedEffects {
@@ -19,7 +19,7 @@ export class NoteSyncRemoteUpdatedEffects {
 		() => this.actions$.pipe(
 
 			ofType(noteActions.syncRemoteUpdated),
-			withLatestFrom(this.store.select(selNoteRemoteUpdated)),
+			withLatestFrom(this.store.select(selNote_RemoteUpdated)),
 			switchMap(([, items]) =>
 
 				this.syncService.downloadUpdated(WolfEntity.note, items).pipe(

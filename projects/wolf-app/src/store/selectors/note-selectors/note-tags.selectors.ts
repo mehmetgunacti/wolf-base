@@ -1,11 +1,11 @@
 import { Note, QueryParams, Tag } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selNoteArray } from './note-entities.selectors';
-import { selNoteUIState } from './note.selectors';
+import { selNote_array } from './note-entities.selectors';
+import { selNote_UIState } from './note.selectors';
 
 const arrayOfTagNames = createSelector(
 
-	selNoteArray,
+	selNote_array,
 	(notes): string[][] => notes.map(b => b.tags)
 
 );
@@ -44,14 +44,14 @@ const distinctTagNames = createSelector(
 
 export const selNoteQueryParams = createSelector(
 
-	selNoteUIState,
+	selNote_UIState,
 	state => state.queryParams
 
 );
 
 export const selNotefilteredNotes = createSelector(
 
-	selNoteArray,
+	selNote_array,
 	selNoteQueryParams,
 	(notes, params): Note[] => {
 
