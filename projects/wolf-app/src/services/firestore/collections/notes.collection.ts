@@ -26,12 +26,43 @@ class NoteFirestoreConverter implements FirestoreConverter<Note> {
 		fields['name'] = { stringValue: note.name };
 		if (note.parentId)
 			fields['parentId'] = { stringValue: note.parentId };
+		else
+			fields['parentId'] = { nullValue: null }
 		fields['tags'] = {
 			arrayValue: { values: note.tags.map(v => ({ stringValue: v })) }
 		};
 		fields['modified'] = { stringValue: note.modified };
 
 		return fields;
+
+	}
+
+	fromFirestore(note: Note): Note {
+
+		// validate incoming
+		let { id, name, modified, parentId, tags } = note;
+		if (!id)
+			throw new Error(`Firestore Note: invalid 'id' value`);
+
+		if (!name)
+			throw new Error(`Firestore Note: invalid 'name' value`);
+
+		if (!modified)
+			throw new Error(`Firestore Note: invalid 'name' value`);
+
+		if (!Array.isArray(tags) || tags.length === 0)
+			throw new Error(`Firestore Note: invalid 'tags' value`);
+
+		const validated: Note = {
+
+			id,
+			name,
+			modified,
+			parentId: parentId || null,
+			tags
+
+		};
+		return validated;
 
 	}
 
@@ -46,8 +77,8 @@ class NoteFirestoreConverter implements FirestoreConverter<Note> {
 		if (note.name)
 			fields.add('name');
 
-		if (note.parentId)
-			fields.add('parentId');
+		// always included, value or null
+		fields.add('parentId');
 
 		if (note.tags)
 			fields.add('tags');

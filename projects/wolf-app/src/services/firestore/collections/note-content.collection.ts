@@ -29,6 +29,30 @@ class NoteContentFirestoreConverter implements FirestoreConverter<NoteContent> {
 
 	}
 
+	fromFirestore(incoming: NoteContent): NoteContent {
+
+		// validate incoming
+		let { id, name, content } = incoming;
+		if (!id)
+			throw new Error(`Firestore NoteContent: invalid 'id' value`);
+
+		if (!name)
+			throw new Error(`Firestore NoteContent: invalid 'name' value`);
+
+		if (!content)
+			throw new Error(`Firestore NoteContent: invalid 'content' value`);
+
+		const validated: NoteContent = {
+
+			id,
+			name,
+			content
+
+		};
+		return validated;
+
+	}
+
 	toUpdateMask(note: Partial<NoteContent>): string {
 
 		// exclude some fields like id, ... from update list

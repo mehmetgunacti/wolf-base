@@ -45,7 +45,9 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 			id
 		);
 		return this.firestore.get<T>(url).pipe(
+
 			map(dto => dto ? this.toRemoteData(dto) : null)
+
 		)
 
 	}
@@ -117,7 +119,9 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 		);
 		const requestBody: Record<keyof T, FIRESTORE_VALUE> = this.converter.toFirestore(item);
 		return this.firestore.create(url, { fields: requestBody }).pipe(
+
 			map(dto => this.toRemoteData(dto))
+
 		);
 
 	}
@@ -136,10 +140,10 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 		const remoteData: RemoteData<T> = {
 
 			metaData,
-			entity: {
+			entity: this.converter.fromFirestore({
 				...dto.entity,
 				id: document
-			}
+			})
 
 		};
 		return remoteData;

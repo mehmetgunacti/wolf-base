@@ -110,6 +110,39 @@ class BookmarkFirestoreConverter implements FirestoreConverter<Bookmark> {
 
 	}
 
+	fromFirestore(incoming: Bookmark): Bookmark {
+
+		// validate incoming
+		let { id, name, title, tags, urls, image } = incoming;
+		if (!id)
+			throw new Error(`Firestore Bookmark: invalid 'id' value`);
+
+		if (!name)
+			throw new Error(`Firestore Bookmark: invalid 'name' value`);
+
+		if (!title)
+			throw new Error(`Firestore Bookmark: invalid 'title' value`);
+
+		if (!Array.isArray(tags) || tags.length === 0)
+			throw new Error(`Firestore Bookmark: invalid 'tags' value`);
+
+		if (!Array.isArray(urls) || urls.length === 0)
+			throw new Error(`Firestore Bookmark: invalid 'urls' value`);
+
+		const validated: Bookmark = {
+
+			id,
+			name,
+			title,
+			tags,
+			urls,
+			image
+
+		};
+		return validated;
+
+	}
+
 	toUpdateMask(bookmark: Partial<Bookmark>): string {
 
 		// exclude some fields like id, ... from update list
