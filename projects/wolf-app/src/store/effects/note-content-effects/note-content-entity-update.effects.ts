@@ -6,10 +6,10 @@ import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
-import * as noteActions from 'store/actions/note.actions';
+import * as actions from 'store/actions/note-content.actions';
 
 @Injectable()
-export class NoteEntityUpdateEffects {
+export class NoteContentEntityUpdateEffects {
 
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
@@ -18,13 +18,13 @@ export class NoteEntityUpdateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.update),
-			switchMap(({ id, note }) =>
+			ofType(actions.update),
+			switchMap(({ id, content }) =>
 
 				from(
-					this.localRepository.notes.update(id, note)
+					this.localRepository.noteContent.update(id, content)
 				).pipe(
-					map(() => noteActions.updateSuccess({ id }))
+					map(() => actions.updateSuccess({ id }))
 				)
 
 			)
@@ -37,7 +37,7 @@ export class NoteEntityUpdateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.updateSuccess),
+			ofType(actions.updateSuccess),
 			map(({ id }) => navigate({ url: ['/notes', id] }))
 
 		)
@@ -48,30 +48,30 @@ export class NoteEntityUpdateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.updateSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Note updated' }))
+			ofType(actions.updateSuccess),
+			map(() => showNotification({ severity: 'success', detail: 'Note Content updated' }))
 
 		)
 
 	);
 
-	loadOneNote$ = createEffect(
+	loadOne$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.updateSuccess),
-			map(({ id }) => noteActions.loadOne({ id }))
+			ofType(actions.updateSuccess),
+			map(({ id }) => actions.loadOne({ id }))
 
 		)
 
 	);
 
-	loadOneNoteSync$ = createEffect(
+	loadOneSync$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.updateSuccess),
-			map(({ id }) => noteActions.loadOneSyncData({ id }))
+			ofType(actions.updateSuccess),
+			map(({ id }) => actions.loadOneSyncData({ id }))
 
 		)
 

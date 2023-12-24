@@ -8,7 +8,7 @@ import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import * as noteActions from 'store/actions/note.actions';
 
 @Injectable()
-export class NoteUIEffects {
+export class NoteContentUIEffects {
 
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);

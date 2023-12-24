@@ -4,11 +4,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import * as noteActions from 'store/actions/note.actions';
+import * as actions from 'store/actions/note-content.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 
 @Injectable()
-export class NoteEntityMoveToTrashEffects {
+export class NoteContentEntityMoveToTrashEffects {
 
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
@@ -17,13 +17,13 @@ export class NoteEntityMoveToTrashEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.moveToTrash),
+			ofType(actions.moveToTrash),
 			switchMap(({ id }) =>
 
 				from(
-					this.localRepository.notes.moveToTrash(id)
+					this.localRepository.noteContent.moveToTrash(id)
 				).pipe(
-					map(() => noteActions.moveToTrashSuccess({ id }))
+					map(() => actions.moveToTrashSuccess({ id }))
 				)
 
 			)
@@ -36,19 +36,19 @@ export class NoteEntityMoveToTrashEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.moveToTrashSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Note removed' }))
+			ofType(actions.moveToTrashSuccess),
+			map(() => showNotification({ severity: 'success', detail: 'Note Content removed' }))
 
 		)
 
 	);
 
-	loadOneNoteSync$ = createEffect(
+	loadOneNoteContentSync$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.moveToTrashSuccess),
-			map(({ id }) => noteActions.loadOne({ id }))
+			ofType(actions.moveToTrashSuccess),
+			map(({ id }) => actions.loadOne({ id }))
 
 		)
 

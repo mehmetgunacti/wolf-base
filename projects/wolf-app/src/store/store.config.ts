@@ -45,6 +45,15 @@ import { logsReducer } from './reducers/logs.reducer';
 import { noteContentReducer } from './reducers/note-content-reducers/note-content.reducer';
 import { noteReducer } from './reducers/note-reducers/note.reducer';
 import { AppState } from './states/app.state';
+import { NoteContentEntityMoveToTrashEffects } from './effects/note-content-effects/note-content-entity-move-to-trash.effects';
+import { NoteContentEntityUpdateEffects } from './effects/note-content-effects/note-content-entity-update.effects';
+import { NoteContentSyncDeletedDeletedEffects } from './effects/note-content-effects/note-content-sync-deleted-deleted.effects';
+import { NoteContentSyncLocalDeletedEffects } from './effects/note-content-effects/note-content-sync-local-deleted.effects';
+import { NoteContentSyncLocalNewEffects } from './effects/note-content-effects/note-content-sync-local-new.effects';
+import { NoteContentSyncLocalUpdatedEffects } from './effects/note-content-effects/note-content-sync-local-updated.effects';
+import { NoteContentSyncRemoteDeletedEffects } from './effects/note-content-effects/note-content-sync-remote-deleted.effects';
+import { NoteContentSyncRemoteNewEffects } from './effects/note-content-effects/note-content-sync-remote-new.effects';
+import { NoteContentSyncRemoteUpdatedEffects } from './effects/note-content-effects/note-content-sync-remote-updated.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -119,6 +128,16 @@ export const effects = [
 	NoteContentLoadEffects,
 
 	NoteContentSyncEffects,
+
+	NoteContentEntityMoveToTrashEffects,
+	NoteContentEntityUpdateEffects,
+	NoteContentSyncDeletedDeletedEffects,
+	NoteContentSyncLocalDeletedEffects,
+	NoteContentSyncLocalNewEffects,
+	NoteContentSyncLocalUpdatedEffects,
+	NoteContentSyncRemoteDeletedEffects,
+	NoteContentSyncRemoteNewEffects,
+	NoteContentSyncRemoteUpdatedEffects,
 
 	// Database
 	DatabaseEffects,

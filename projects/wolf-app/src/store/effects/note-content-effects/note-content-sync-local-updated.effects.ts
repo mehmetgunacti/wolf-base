@@ -4,27 +4,27 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import * as noteActions from 'store/actions/note.actions';
-import { selNote_RemoteNew } from 'store/selectors/note-selectors/note-cloud.selectors';
+import * as actions from 'store/actions/note-content.actions';
+import { selNoteContent_LocalUpdated } from 'store/selectors/note-content-selectors/note-content-cloud.selectors';
 
 @Injectable()
-export class NoteSyncRemoteNewEffects {
+export class NoteContentSyncLocalUpdatedEffects {
 
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
 	private syncService: SyncService = inject(SYNC_SERVICE);
 
-	syncRemoteNew$ = createEffect(
+	syncLocalUpdated$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.syncRemoteNew),
-			withLatestFrom(this.store.select(selNote_RemoteNew)),
+			ofType(actions.syncLocalUpdated),
+			withLatestFrom(this.store.select(selNoteContent_LocalUpdated)),
 			switchMap(([, items]) =>
 
-				this.syncService.downloadNew(WolfEntity.note, items).pipe(
+				this.syncService.uploadUpdated(WolfEntity.note_content, items).pipe(
 
-					map(item => noteActions.loadOne({ id: item.id }))
+					map(item => actions.loadOne({ id: item.id }))
 
 				)
 
