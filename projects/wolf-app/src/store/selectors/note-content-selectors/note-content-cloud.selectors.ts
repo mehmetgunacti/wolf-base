@@ -187,7 +187,7 @@ const selNoteContent_NonConflictCloudTasks = createSelector(
 
 );
 
-export const selNoteContentConflictCloudTasks = createSelector(
+export const selNoteContent_ConflictCloudTasks = createSelector(
 
 	selNoteContent_LocalUpdatedRemoteUpdated,
 	selNoteContent_LocalUpdatedRemoteDeleted,
@@ -215,10 +215,10 @@ export const selNoteContentConflictCloudTasks = createSelector(
 
 );
 
-export const selNoteContentCloudTasks = createSelector(
+export const selNoteContent_CloudTasks = createSelector(
 
 	selNoteContent_NonConflictCloudTasks,
-	selNoteContentConflictCloudTasks,
+	selNoteContent_ConflictCloudTasks,
 	(nonConflicts: CloudTask[], conflicts: CloudTask[]): CloudTask[] => [...nonConflicts, ...conflicts]
 
 );
