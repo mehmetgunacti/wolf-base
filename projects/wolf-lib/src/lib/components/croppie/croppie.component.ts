@@ -2,11 +2,11 @@ import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnDestroy, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CroppieOptions } from 'croppie';
-import { environment } from 'environments/environment';
 import { Observable, Subscription, combineLatest, timer } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { CroppieWrapper, createCroppieWrapper } from './croppie.model';
 import { DOMService } from 'services/dom.service';
+import { CroppieWrapper, createCroppieWrapper } from './croppie.model';
+import { external } from './external-files';
 
 const croppieOptions: CroppieOptions = {
 	viewport: {
@@ -58,8 +58,8 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 
 			combineLatest([
 
-				this.domService.appendScriptToBody(environment.croppie.scriptUrl), // Observable<number>
-				this.domService.appendLinkToHead(environment.croppie.styleUrl), // Observable<number>
+				this.domService.appendScriptToBody(external.scriptUrl), // Observable<number>
+				this.domService.appendLinkToHead(external.styleUrl), // Observable<number>
 				timer(500)
 
 			]).subscribe({
