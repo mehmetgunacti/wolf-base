@@ -64,6 +64,7 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 
 			]).subscribe({
 
+				next: val => console.info(`${val} loaded`),
 				complete: () => {
 					if (this.document.defaultView?.Croppie) {
 						const el: HTMLElement = this.croppieDiv.nativeElement;

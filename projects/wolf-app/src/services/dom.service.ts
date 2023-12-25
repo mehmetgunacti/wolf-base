@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
-import { EMPTY, Observable, Subject } from 'rxjs';
+import { EMPTY, Observable, Subject, of } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -9,11 +9,11 @@ export class DOMService {
 
 	private readonly document: Document = inject(DOCUMENT);
 
-	appendLinkToHead(url: string): Observable<number> {
+	appendLinkToHead(url: string): Observable<string> {
 
 		const existing = this.checkLinkElement(url);
 		if (existing)
-			return EMPTY;
+			return of(url); // dummy value
 
 		const [el, subject] = this.createLink(url);
 		this.document.head.appendChild(el);
@@ -36,14 +36,14 @@ export class DOMService {
 
 	}
 
-	private createLink(href: string): [HTMLLinkElement, Subject<number>] {
+	private createLink(href: string): [HTMLLinkElement, Subject<string>] {
 
-		const subject = new Subject<number>();
+		const subject = new Subject<string>();
 		const el: HTMLLinkElement = this.document.createElement('link');
 		el.rel = 'stylesheet';
 		el.type = 'text/css';
 		el.onload = () => {
-			subject.next(0); // dummy value
+			subject.next(href); // dummy value
 			subject.complete();
 		};
 		el.onerror = (ev) => subject.error(ev);
@@ -52,11 +52,11 @@ export class DOMService {
 
 	}
 
-	appendScriptToBody(src: string): Observable<number> {
+	appendScriptToBody(src: string): Observable<string> {
 
 		const existing = this.checkScriptElement(src);
 		if (existing)
-			return EMPTY;
+			return of(src); // dummy value
 
 		const [el, subject] = this.createScript(src);
 		this.document.body.appendChild(el);
@@ -71,16 +71,16 @@ export class DOMService {
 
 	}
 
-	private createScript(src: string): [HTMLScriptElement, Subject<number>] {
+	private createScript(src: string): [HTMLScriptElement, Subject<string>] {
 
-		const subject = new Subject<number>();
+		const subject = new Subject<string>();
 		const el: HTMLScriptElement = this.document.createElement('script');
 		el.type = 'text/javascript';
 		el.src = src;
 		el.async = true;
 		el.defer = true;
 		el.onload = () => {
-			subject.next(0); // dummy value
+			subject.next(src); // dummy value
 			subject.complete();
 		};
 		el.onerror = (ev) => subject.error(ev);
