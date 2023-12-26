@@ -1,3 +1,3 @@
-<w-card *ngIf="content">
-	<div content [innerHTML]="content.content"></div>
+<w-card>
+	<div content [innerHTML]="result$ | async"></div>
 </w-card>
