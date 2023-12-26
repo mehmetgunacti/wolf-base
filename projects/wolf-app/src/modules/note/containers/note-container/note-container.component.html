@@ -15,5 +15,15 @@
 </w-portal>
 
 <w-breadcrumb [items]="(parents$ | async) ?? []" [home]="['/notes']" (clicked)="navTo($event)" />
-<app-note [note]="note$ | async" [children]="(children$ | async) ?? []" />
-<app-note-content [content]="content$ | async" />
+<ng-container *ngIf="note$ | async as note; else noNote">
+	<app-note [note]="note" [children]="(children$ | async) ?? []" />
+	<app-note-content [content]="content$ | async" />
+</ng-container>
+<ng-template #noNote>
+	<div class="empty">
+		<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No note available</span>
+		<button routerLink="/notes" class="icon-only">
+			<span class="material-symbols-outlined">note_stack</span> Notes
+		</button>
+	</div>
+</ng-template>
