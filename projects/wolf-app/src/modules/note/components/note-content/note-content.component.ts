@@ -1,6 +1,5 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { NoteContent } from 'lib/models';
 import { BehaviorSubject, Observable, Subject, combineLatest, map } from 'rxjs';
 import { DOMService } from 'services';
@@ -31,7 +30,6 @@ export class NoteContentComponent {
 
 	private domService: DOMService = inject(DOMService);
 	private readonly document: Document = inject(DOCUMENT);
-	private sanitizer: DomSanitizer = inject(DomSanitizer);
 
 	result$: Observable<string | null> = combineLatest([
 		this.subjectContent.asObservable(),
@@ -43,7 +41,11 @@ export class NoteContentComponent {
 			if (!content || !loaded)
 				return null;
 
-			const md = this.document.defaultView?.markdownit();
+			const config = {
+				breaks: true,
+				linkify: true
+			};
+			const md = this.document.defaultView?.markdownit(config);
 			return md.render(content);
 
 		})
