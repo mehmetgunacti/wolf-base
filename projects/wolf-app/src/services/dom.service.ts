@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
-import { EMPTY, Observable, Subject, of } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -12,9 +12,14 @@ export class DOMService {
 	appendLinkToHead(url: string): Observable<string> {
 
 		const existing = this.checkLinkElement(url);
-		if (existing)
+		if (existing) {
+
+			console.info(`${url} already loaded.`);
 			return of(url); // dummy value
 
+		}
+
+		console.info(`Appending to <head>: ${url}`);
 		const [el, subject] = this.createLink(url);
 		this.document.head.appendChild(el);
 		return subject.asObservable();
@@ -55,9 +60,14 @@ export class DOMService {
 	appendScriptToBody(src: string): Observable<string> {
 
 		const existing = this.checkScriptElement(src);
-		if (existing)
+		if (existing) {
+
+			console.info(`${src} already loaded.`);
 			return of(src); // dummy value
 
+		}
+
+		console.info(`Appending to <body>: ${src}`);
 		const [el, subject] = this.createScript(src);
 		this.document.body.appendChild(el);
 		return subject.asObservable();

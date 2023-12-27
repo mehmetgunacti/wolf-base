@@ -17,7 +17,7 @@
 <w-breadcrumb [items]="(parents$ | async) ?? []" [home]="['/notes']" (clicked)="navTo($event)" />
 <ng-container *ngIf="note$ | async as note; else noNote">
 	<app-note [note]="note" [children]="(children$ | async) ?? []" />
-	<app-note-content [content]="content$ | async" />
+
 </ng-container>
 <ng-template #noNote>
 	<div class="empty">
@@ -27,3 +27,4 @@
 		</button>
 	</div>
 </ng-template>
+<app-note-content [content]="content$ | async" />
