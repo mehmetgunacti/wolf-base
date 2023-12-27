@@ -26,10 +26,6 @@ export const unloadOne						= createAction('[Note Content] Unload One', props<{ 
 
 export const loadOneContentSuccess			= createAction('[Note Content] Load One Content Success', props<{ content: NoteContent | null }>());
 
-// SyncData
-export const loadOneSyncData				= createAction('[Note Content] Load One SyncData', props<{ id: UUID }>());
-export const loadOneSyncDataSuccess			= createAction('[Note Content] Load One SyncData Success', props<{ syncData: SyncData | null }>());
-
 //// RemoteMetadata
 export const loadAllRemoteMetadata			= createAction('[Note Content] Load All RemoteMetadata');
 export const loadAllRemoteMetadataSuccess	= createAction('[Note Content] Load All RemoteMetadata Success', props<{ remoteMetadata: RemoteMetadata[] }>());

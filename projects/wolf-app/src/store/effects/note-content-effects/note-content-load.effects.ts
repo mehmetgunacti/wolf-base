@@ -57,25 +57,6 @@ export class NoteContentLoadEffects {
 
 	);
 
-	loadOneSyncData$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(contentActions.loadOneSyncData),
-			switchMap(({ id }) =>
-
-				from(this.localRepository.noteContent.getSyncData(id)).pipe(
-
-					map(syncData => contentActions.loadOneSyncDataSuccess({ syncData }))
-
-				)
-
-			)
-
-		)
-
-	);
-
 	loadAllRemoteMetadata$ = createEffect(
 
 		() => this.actions$.pipe(

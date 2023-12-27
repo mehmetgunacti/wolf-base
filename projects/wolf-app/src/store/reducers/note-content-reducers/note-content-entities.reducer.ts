@@ -17,9 +17,9 @@ const reducer = createReducer(
 
 				// id
 				if (contentAvailable)
-					delete draft.ids[id];
-				else
 					draft.ids[id] = true;
+				else
+					delete draft.ids[id];
 
 				// syncData
 				if (syncData === null)

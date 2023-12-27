@@ -66,15 +66,4 @@ export class NoteContentEntityUpdateEffects {
 
 	);
 
-	loadOneSync$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(actions.updateSuccess),
-			map(({ id }) => actions.loadOneSyncData({ id }))
-
-		)
-
-	);
-
 }
