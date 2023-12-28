@@ -1,0 +1,35 @@
+table {
+
+	width				: 100%;
+	border				: none;
+	border-collapse		: collapse;
+	border-spacing		: 0;
+	text-align			: left;
+
+}
+
+table.striped tr:nth-of-type(2n) {
+
+	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+
+}
+
+td,
+th {
+
+	vertical-align		: middle;
+	padding				: var(--gap);
+
+}
+
+thead {
+
+	border-bottom		: 1px solid hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+
+}
+
+tfoot {
+
+	border-top			: 1px solid hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+
+}

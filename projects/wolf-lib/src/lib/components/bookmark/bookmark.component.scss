@@ -66,29 +66,37 @@
 			flex: 1;
 			@extend %flex-start-center;
 
-			span[bookmark-name] {
+			& > a {
 
-				font-size		: var(--font-size);
-				font-weight		: bolder;
-				position		: relative;
+				text-decoration : none;
 
-				sup {
-					position		: absolute;
-					visibility		: hidden;
-					opacity			: 0;
-					transition		: var(--bookmark-hover-transition);
-					margin-left		: 0.3rem;
-					top				: -6px;
-					&>.material-symbols-outlined {
-						font-size	: var(--font-size);
+				span[bookmark-name] {
+
+					font-size		: var(--font-size);
+					font-weight		: bolder;
+					position		: relative;
+
+					sup {
+						position		: absolute;
+						visibility		: hidden;
+						opacity			: 0;
+						transition		: var(--bookmark-hover-transition);
+						margin-left		: 0.3rem;
+						top				: -6px;
+						&>.material-symbols-outlined {
+							font-size	: var(--font-size);
+						}
 					}
+
 				}
 
-			}
+				span[bookmark-title] {
 
-			span[bookmark-title] {
-				color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
-				font-size	: 1.2rem;
+					color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+					font-size	: 1.2rem;
+
+				}
+
 			}
 
 			&:hover {

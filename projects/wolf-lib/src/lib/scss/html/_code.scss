@@ -1,0 +1,37 @@
+code,
+kbd,
+pre,
+samp,
+tt {
+
+	font-family			: var(--font-family-mono);
+
+}
+
+code,
+kbd {
+
+	font-size			: 90%;
+	white-space			: pre-wrap;
+	border-radius		: var(--border-radius-sm);
+	padding				: var(--gap-xs) var(--gap-sm);
+	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+
+}
+
+pre {
+
+	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+	font-size			: 90%;
+	padding				: var(--gap-xs) var(--gap-sm);
+	border-radius		: var(--border-radius-sm);
+	overflow-x			: auto;
+
+}
+
+pre code {
+
+	background			: none;
+	padding				: 0;
+
+}

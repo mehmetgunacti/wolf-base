@@ -7,7 +7,6 @@
 
 @import './scss/core/helper';
 @import './scss/core/root';
-@import './scss/core/defaults';
 
 
 // components
@@ -20,6 +19,14 @@
 @import './components/bookmark/bookmark.component.scss';
 @import './components/toast/toast-wrapper.component.scss';
 @import './components/toast/toast.component.scss';
+
+@import './scss/html/a';
+@import './scss/html/code';
+@import './scss/html/div';
+@import './scss/html/h';
+@import './scss/html/hr';
+@import './scss/html/span';
+@import './scss/html/table';
 
 @import "node_modules/@angular/cdk/overlay";
 @import './scss/core/cdk-overlay';

@@ -1,0 +1,6 @@
+span {
+
+	color		: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+	transition	: color $transition;
+
+}
