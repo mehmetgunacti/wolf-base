@@ -18,18 +18,17 @@ declare global {
 })
 export class NoteContentComponent {
 
-	private subjectContent: Subject<string> = new Subject<string>();
+	private subjectContent: Subject<string | null> = new Subject<string | null>();
 	private subjectMD: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-	@Input() set content(nc: NoteContent | null) {
-
-		if (nc)
-			this.subjectContent.next(nc.content);
-
-	}
 
 	private domService: DOMService = inject(DOMService);
 	private readonly document: Document = inject(DOCUMENT);
+
+	@Input() set content(nc: NoteContent | null) {
+
+		this.subjectContent.next(nc?.content ?? null);
+
+	}
 
 	result$: Observable<string | null> = combineLatest([
 		this.subjectContent.asObservable(),
