@@ -41,6 +41,7 @@ export class NoteContentComponent {
 				return null;
 
 			const config = {
+				html: true,
 				breaks: true,
 				linkify: true
 			};
