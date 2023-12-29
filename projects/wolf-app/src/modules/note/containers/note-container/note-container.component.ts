@@ -17,21 +17,23 @@ export class NoteContainerComponent {
 	private store: Store = inject(Store);
 
 	note$: Observable<Note | null>;
-	parents$: Observable<MenuItem[]>;
+	parents$: Observable<Note[]>;
 	children$: Observable<Note[]>;
 	content$: Observable<NoteContent | null>;
 
 	constructor() {
 
 		this.note$ = this.store.select(selNote_selected);
-		this.parents$ = this.store.select(selNote_selectedEntityParents).pipe(
-			map(
-				notes => notes.map(note => ({
-					label: note.name,
-					url: ['/notes', note.id]
-				}))
-			)
-		);
+		this.parents$ = this.store.select(selNote_selectedEntityParents);
+
+		// .pipe(
+		// 	map(
+		// 		notes => notes.map(note => ({
+		// 			label: note.name,
+		// 			url: ['/notes', note.id]
+		// 		}))
+		// 	)
+		// );
 		this.children$ = this.store.select(selNote_selectedEntityChildren);
 		this.content$ = this.store.select(selNoteContent_content);
 

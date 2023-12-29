@@ -5,6 +5,30 @@
 
 	@extend %flex-column;
 
+	div[note-header] {
+
+		@extend %flex-column;
+		gap			: var(--gap-sm);
+
+		h1 {
+
+			margin-left		: var(--gap-sm);
+			margin-right	: var(--gap-sm);
+
+		}
+
+		& > ul {
+
+			& > li {
+
+				padding		: var(--gap-xxs) var(--gap-sm);
+
+			}
+
+		}
+
+	}
+
 	div[note-body] {
 
 		flex		: 1;
@@ -41,47 +65,57 @@
 
 			}
 
-			ul {
+		}
 
-				flex			: 1;
-				li {
+	}
 
-					padding				: var(--gap);
-					margin				: var(--gap-xs);
-					border-radius		: var(--border-radius-sm);
-					cursor				: pointer;
-					transition			: $bg-transition;
+	ul {
 
-					&:hover {
+		flex			: 1;
+		li {
 
-						background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 10%) / var(--col-bg-panel-alp));
+			@extend %flex-center-y;
+			padding				: var(--gap);
+			margin				: var(--gap-xs);
+			border-radius		: var(--border-radius-sm);
+			cursor				: pointer;
+			transition			: $bg-transition;
+			gap					: var(--gap-xs);
 
-					}
+			&:hover {
 
-					&:focus,
-					&:focus-visible {
+				background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 10%) / var(--col-bg-panel-alp));
 
-						outline: 3px solid hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
+			}
 
-					}
+			&:focus,
+			&:focus-visible {
 
-					h4 {
+				outline: 3px solid hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
 
-						margin-bottom	: 0;
+			}
 
-					}
+			.material-symbols-outlined {
 
-					h6 {
+				font-size		: 1.4rem;
+				color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig)/var(--col-text-secondary-alp));
 
-						@extend %flex-start-center;
-						& > .material-symbols-outlined {
+			}
 
-							font-size		: 1.2rem;
-							color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig)/var(--col-text-secondary-alp));
+			h4 {
 
-						}
+				margin-bottom	: 0;
+				color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig)/var(--col-text-secondary-alp));
 
-					}
+			}
+
+			h6 {
+
+				@extend %flex-start-center;
+				& > .material-symbols-outlined {
+
+					font-size		: 1.2rem;
+					color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig)/var(--col-text-secondary-alp));
 
 				}
 

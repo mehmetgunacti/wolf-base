@@ -1,6 +1,18 @@
-<w-card *ngIf="note">
+<div class="card" *ngIf="note">
 
-	<ng-container card-title>{{ note.name }}</ng-container>
+	<div note-header>
+		<ul>
+			<li [routerLink]="['/notes']" tabindex="0">
+				<span class="material-symbols-outlined">note_stack</span>
+				<h4>Notes</h4>
+			</li>
+			<li *ngFor="let note of parents; let idx = index" [routerLink]="['/notes', note.id]" tabindex="0" [style.margin-left.px]="(idx + 1) * 15">
+				<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
+				<h4>{{ note.name }}</h4>
+			</li>
+		</ul>
+		<h1>{{ note.name }}</h1>
+	</div>
 	<div note-body>
 
 		<div note-tags *ngIf="note.tags as tags">
@@ -22,4 +34,4 @@
 
 	</div>
 
-</w-card>
+</div>
