@@ -28,20 +28,23 @@ export class NavComponent {
 					{
 						url: ['/'],
 						label: 'Home',
-						icon: 'home'
+						icon: 'home',
+						routerLinkActiveOptions: { exact: true }
 					},
 					{
 						url: ['/bookmarks'],
 						queryParams: { tags: TAG_POPULAR },
 						label: 'Bookmarks',
 						icon: 'bookmarks',
-						badge: filtered === 0 ? `${total}` : filtered < total ? `${filtered} / ${total}` : `${total}`
+						badge: filtered === 0 ? `${total}` : filtered < total ? `${filtered} / ${total}` : `${total}`,
+						routerLinkActiveOptions: { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
 					},
 					{
 						url: ['/notes'],
 						queryParams: { tags: TAG_PINNED },
 						label: 'Notes',
-						icon: 'note_stack'
+						icon: 'note_stack',
+						routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
 					}
 
 				];

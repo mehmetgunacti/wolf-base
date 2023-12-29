@@ -1,4 +1,4 @@
-<a *ngFor="let item of items" [routerLink]="item.url" [queryParams]="item.queryParams" routerLinkActive="active" [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }">
+<a *ngFor="let item of items" [routerLink]="item.url" [queryParams]="item.queryParams" routerLinkActive="active" [routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }">
 
 	<div icon>
 		<button class="icon-only rounded" disabled>
