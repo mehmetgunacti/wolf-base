@@ -46,7 +46,7 @@ export const buildInfo = {
 	builtTime: '${new Date().toISOString()}',
 	builtNumber: '${commitCount}'
 };`;
-	writeFileSync('./projects/wolf-app/src/version.ts', versionInfo);
+	writeFileSync('./src/version.ts', versionInfo);
 
 }
 
