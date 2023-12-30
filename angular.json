@@ -3,74 +3,48 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"wolf-lib": {
-			"projectType": "library",
-			"root": "projects/wolf-lib",
-			"sourceRoot": "projects/wolf-lib/src",
-			"prefix": "w",
-			"architect": {
-				"build": {
-					"builder": "@angular-devkit/build-angular:ng-packagr",
-					"options": {
-						"project": "projects/wolf-lib/ng-package.json"
-					},
-					"configurations": {
-						"production": {
-							"tsConfig": "projects/wolf-lib/tsconfig.lib.prod.json"
-						},
-						"development": {
-							"tsConfig": "projects/wolf-lib/tsconfig.lib.json"
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"tsConfig": "projects/wolf-lib/tsconfig.spec.json",
-						"polyfills": [
-							"zone.js",
-							"zone.js/testing"
-						]
-					}
-				}
-			}
-		},
-		"wolf-app": {
+		"wolf-base": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
-					"style": "scss"
+					"style": "scss",
+					"standalone": false
+				},
+				"@schematics/angular:directive": {
+					"standalone": false
+				},
+				"@schematics/angular:pipe": {
+					"standalone": false
 				}
 			},
-			"root": "projects/wolf-app",
-			"sourceRoot": "projects/wolf-app/src",
+			"root": "",
+			"sourceRoot": "src",
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:browser",
+					"builder": "@angular-devkit/build-angular:application",
 					"options": {
-						"outputPath": "dist/wolf-app",
-						"index": "projects/wolf-app/src/index.html",
-						"main": "projects/wolf-app/src/main.ts",
+						"outputPath": "dist/wolf-base",
+						"index": "src/index.html",
+						"browser": "src/main.ts",
 						"polyfills": [
 							"zone.js"
 						],
-						"tsConfig": "projects/wolf-app/tsconfig.app.json",
+						"tsConfig": "tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/wolf-app/src/favicon.ico",
-							"projects/wolf-app/src/assets",
-							"projects/wolf-app/src/manifest.webmanifest"
-						],
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest"
+            ],
 						"styles": [
-							"projects/wolf-app/src/styles.scss"
+							"src/styles.scss"
 						],
 						"scripts": [],
 						"stylePreprocessorOptions": {
 							"includePaths": [
-								"projects/wolf-app/src/scss",
-								"projects/wolf-lib/src/lib/scss"
+								"src/scss",
+								"src/lib/scss"
 							]
 						}
 					},
@@ -88,19 +62,17 @@
 									"maximumError": "4kb"
 								}
 							],
-							"outputHashing": "all"
+              "outputHashing": "all",
+              "serviceWorker": "ngsw-config.json"
 						},
 						"development": {
-							"buildOptimizer": false,
 							"optimization": false,
-							"vendorChunk": true,
 							"extractLicenses": false,
 							"sourceMap": true,
-							"namedChunks": true,
 							"fileReplacements": [
 								{
-									"replace": "./projects/wolf-app/src/environments/environment.ts",
-									"with": "./projects/wolf-app/src/environments/environment.development.ts"
+									"replace": "./src/environments/environment.ts",
+									"with": "./src/environments/environment.development.ts"
 								}
 							]
 						}
@@ -111,10 +83,10 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"browserTarget": "wolf-app:build:production"
+							"buildTarget": "wolf-base:build:production"
 						},
 						"development": {
-							"browserTarget": "wolf-app:build:development"
+							"buildTarget": "wolf-base:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -122,7 +94,7 @@
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "wolf-app:build"
+						"buildTarget": "wolf-base:build"
 					}
 				},
 				"test": {
@@ -132,111 +104,15 @@
 							"zone.js",
 							"zone.js/testing"
 						],
-						"tsConfig": "projects/wolf-app/tsconfig.spec.json",
+						"tsConfig": "tsconfig.spec.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/wolf-app/src/favicon.ico",
-							"projects/wolf-app/src/assets"
-						],
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest"
+            ],
 						"styles": [
-							"projects/wolf-app/src/styles.scss"
-						],
-						"scripts": []
-					}
-				}
-			}
-		},
-		"wolf-showcase": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"style": "scss"
-				}
-			},
-			"root": "projects/wolf-showcase",
-			"sourceRoot": "projects/wolf-showcase/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "@angular-devkit/build-angular:browser",
-					"options": {
-						"outputPath": "dist/wolf-showcase",
-						"index": "projects/wolf-showcase/src/index.html",
-						"main": "projects/wolf-showcase/src/main.ts",
-						"polyfills": [
-							"zone.js"
-						],
-						"tsConfig": "projects/wolf-showcase/tsconfig.app.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/wolf-showcase/src/favicon.ico",
-							"projects/wolf-showcase/src/assets"
-						],
-						"styles": [
-							"projects/wolf-showcase/src/styles.scss"
-						],
-						"scripts": []
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kb",
-									"maximumError": "1mb"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "2kb",
-									"maximumError": "4kb"
-								}
-							],
-							"outputHashing": "all"
-						},
-						"development": {
-							"buildOptimizer": false,
-							"optimization": false,
-							"vendorChunk": true,
-							"extractLicenses": false,
-							"sourceMap": true,
-							"namedChunks": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
-					"configurations": {
-						"production": {
-							"browserTarget": "wolf-showcase:build:production"
-						},
-						"development": {
-							"browserTarget": "wolf-showcase:build:development"
-						}
-					},
-					"defaultConfiguration": "development"
-				},
-				"extract-i18n": {
-					"builder": "@angular-devkit/build-angular:extract-i18n",
-					"options": {
-						"browserTarget": "wolf-showcase:build"
-					}
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"polyfills": [
-							"zone.js",
-							"zone.js/testing"
-						],
-						"tsConfig": "projects/wolf-showcase/tsconfig.spec.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/wolf-showcase/src/favicon.ico",
-							"projects/wolf-showcase/src/assets"
-						],
-						"styles": [
-							"projects/wolf-showcase/src/styles.scss"
+							"src/styles.scss"
 						],
 						"scripts": []
 					}
