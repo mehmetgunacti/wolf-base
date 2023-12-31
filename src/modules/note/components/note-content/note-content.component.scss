@@ -5,4 +5,12 @@
 
 	@extend %flex-column;
 
+	table {
+
+		display		: block;
+		overflow-x	: auto;
+		width		: 100%;
+
+	}
+
 }
