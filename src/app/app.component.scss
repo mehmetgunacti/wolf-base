@@ -6,59 +6,71 @@
 
 :host {
 
-	display				: grid;
-	grid-template-rows	: $header-height 1fr;
+	display				: block;
+	height				: 100vh;
 	background-color	: hsl(var(--col-bg-body-hue) var(--col-bg-body-sat) var(--col-bg-body-lig) / var(--col-bg-body-alp));
 	transition			: $bg-transition;
 
 	&>header {
 
+		position				: absolute;
+		z-index					: 4000;
+
 		display					: flex;
 		height					: $header-height;
-		background-color		: hsl(var(--col-bg-header-hue) var(--col-bg-header-sat) var(--col-bg-header-lig) / var(--col-bg-header-alp));
-		transition				: $bg-transition;
+		width					: 100vw;
+
 		padding					: var(--gap) var(--gap);
 		padding-left			: 0;
 
+		background-color		: hsl(var(--col-bg-header-hue) var(--col-bg-header-sat) var(--col-bg-header-lig) / var(--col-bg-header-alp));
+		transition				: $bg-transition;
+
 	}
 
-	&>section {
+	& > nav {
 
-		display					: flex;
-		position				: relative;
+		position			: absolute;
+		z-index				: $z-index-nav;
 
-		&>nav {
+		display				: block;
 
-			@extend %flex-column;
-			position			: absolute;
-			height				: calc(100vh - $header-height);
-			width				: $nav-width;
-			margin-left			: -$nav-width;
-			transition			: margin-left 0.6s cubic-bezier(0.25, 1, 0.25, 1), $bg-transition;
-			z-index				: $z-index-nav-overlay;
-			background-color	: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
-			padding				: var(--gap) var(--gap);
+		top					: $header-height;
+		bottom				: 0;
+		width				: $nav-width;
+		padding				: var(--gap-sm);
 
-			@include md() {
+		margin-left			: -$nav-width;
 
-				position		: relative;
-				z-index			: unset;
+		background-color	: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
+		transition			: margin-left 0.6s cubic-bezier(0.25, 1, 0.25, 1), $bg-transition;
 
-			}
+	}
 
-		}
+	& > main {
 
-		&>main {
+		position			: absolute;
+		z-index				: $z-index-main;
 
-			flex				: 1;
-			position			: relative;
+		display				: block;
 
-			padding				: var(--gap-sm);
-			height				: calc(100vh - 6rem);
-			overflow-y			: auto;
+		top					: $header-height;
+		bottom				: 0;
 
-			background-color	: var(--background);
-			transition			: $bg-transition;
+		width				: 100vw;
+		padding				: var(--gap-sm);
+
+		padding				: var(--gap-sm);
+
+		overflow-y			: auto;
+		@extend %w-scrollbar;
+
+		background-color	: var(--background);
+		transition			: padding-left 0.6s cubic-bezier(0.25, 1, 0.25, 1), $bg-transition;
+
+		@include bigScreen() {
+
+			padding-left	: var(--gap-sm);
 
 		}
 
@@ -66,11 +78,23 @@
 
 	&.navVisible {
 
-		&>section {
+		& > nav {
 
-			&>nav {
+			margin-left		: 0;
 
-				margin-left		: -0;
+			@include bigScreen() {
+
+
+
+			}
+
+		}
+
+		& > main {
+
+			@include bigScreen() {
+
+				padding-left	: calc($nav-width + var(--gap-sm));
 
 			}
 

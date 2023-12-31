@@ -80,24 +80,23 @@
 	align-items		: center;
 }
 
-%w359-scrollbar {
-
-	overflow-y						: scroll;
+%w-scrollbar {
 
 	&::-webkit-scrollbar {
-		width						: var(--w359-scrollbar-width);
-		border-radius				: var(--w359-scrollbar-border-radius);
+		width						: var(--scrollbar-width);
+		border-radius				: var(--border-radius-sm);
+		margin-top: 50rem;
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background-color			: var(--w359-scrollbar-background-color);
-		border-radius				: var(--w359-scrollbar-border-radius);
+		background-color			: var(--scrollbar-background-color);
+		border-radius				: var(--border-radius);
 	}
 
 }
 
 .w359-scrollbar {
-	@extend %w359-scrollbar;
+	@extend %w-scrollbar;
 }
 
 %component-shadow {

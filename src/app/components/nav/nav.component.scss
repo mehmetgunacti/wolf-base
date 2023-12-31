@@ -1,10 +1,12 @@
 @import 'variables';
 @import 'mixins/responsive';
 @import 'core/variables';
+@import 'core/helper';
 
 :host {
 
-	display				: contents;
+	@extend %flex-column;
+	height			: 100%;
 
 	& > [bottom-buttons] {
 
