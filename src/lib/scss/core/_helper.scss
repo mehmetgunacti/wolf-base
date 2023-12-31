@@ -84,12 +84,12 @@
 
 	&::-webkit-scrollbar {
 		width						: var(--scrollbar-width);
+		height						: var(--scrollbar-width);
 		border-radius				: var(--border-radius-sm);
-		margin-top: 50rem;
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background-color			: var(--scrollbar-background-color);
+		background-color			: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) - 4%) / var(--col-bg-panel-alp));
 		border-radius				: var(--border-radius);
 	}
 
