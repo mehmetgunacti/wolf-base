@@ -30,6 +30,7 @@ pre {
 	overflow			: auto;
 
 	@extend %w-scrollbar;
+	transition	: $bg-transition;
 
 }
 
