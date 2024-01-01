@@ -41,6 +41,8 @@
     "@mdit/plugin-alert": "^0.8.0",
     "@mdit/plugin-align": "^0.8.0",
     "@mdit/plugin-mark": "^0.8.0",
+    "@mdit/plugin-sub": "^0.8.0",
+    "@mdit/plugin-sup": "^0.8.0",
     "@mdit/plugin-tasklist": "^0.8.0",
     "@ngrx/store-devtools": "^17.0.1",
     "@types/croppie": "^2.6.4",
