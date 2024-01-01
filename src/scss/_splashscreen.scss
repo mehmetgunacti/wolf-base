@@ -1,3 +1,5 @@
+@import 'z-index';
+
 @keyframes scaleAndFade {
 
 	0% {
@@ -45,7 +47,7 @@
 	}
 
 }
-  
+
 #splashScreen {
 
 	@extend %flex-center-center;
@@ -53,7 +55,7 @@
 	height				: 100vh;
 	background-color	: #121212;
 	position			: absolute;
-	z-index				: 1000;
+	z-index				: $z-index-splash-screen;
 
 	& > img {
 
