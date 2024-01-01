@@ -1,31 +1,30 @@
 import { Injectable } from '@angular/core';
 
 import hljs from 'highlight.js/lib/core';
-import asciidoc from 'highlight.js/lib/languages/asciidoc.js';
-import autohotkey from 'highlight.js/lib/languages/autohotkey.js';
-import bash from 'highlight.js/lib/languages/bash.js';
-import c from 'highlight.js/lib/languages/c.js';
-import cpp from 'highlight.js/lib/languages/cpp.js';
-import csharp from 'highlight.js/lib/languages/csharp.js';
-import css from 'highlight.js/lib/languages/css.js';
-import dockerfile from 'highlight.js/lib/languages/dockerfile.js';
-import gradle from 'highlight.js/lib/languages/gradle.js';
-import http from 'highlight.js/lib/languages/http.js';
-import ini from 'highlight.js/lib/languages/ini.js';
-import java from 'highlight.js/lib/languages/java.js';
-import javascript from 'highlight.js/lib/languages/javascript.js';
-import json from 'highlight.js/lib/languages/json.js';
-import kotlin from 'highlight.js/lib/languages/kotlin.js';
-import markdown from 'highlight.js/lib/languages/markdown.js';
-import powershell from 'highlight.js/lib/languages/powershell.js';
-import properties from 'highlight.js/lib/languages/properties.js';
-import python from 'highlight.js/lib/languages/python.js';
-import scss from 'highlight.js/lib/languages/scss.js';
-import shell from 'highlight.js/lib/languages/shell.js';
-import sql from 'highlight.js/lib/languages/sql.js';
-import typescript from 'highlight.js/lib/languages/typescript.js';
-import xml from 'highlight.js/lib/languages/xml.js';
-import yaml from 'highlight.js/lib/languages/yaml.js';
+import asciidoc from 'highlight.js/lib/languages/asciidoc';
+import autohotkey from 'highlight.js/lib/languages/autohotkey';
+import bash from 'highlight.js/lib/languages/bash';
+import c from 'highlight.js/lib/languages/c';
+import cpp from 'highlight.js/lib/languages/cpp';
+import css from 'highlight.js/lib/languages/css';
+import dockerfile from 'highlight.js/lib/languages/dockerfile';
+import gradle from 'highlight.js/lib/languages/gradle';
+import http from 'highlight.js/lib/languages/http';
+import ini from 'highlight.js/lib/languages/ini';
+import java from 'highlight.js/lib/languages/java';
+import javascript from 'highlight.js/lib/languages/javascript';
+import json from 'highlight.js/lib/languages/json';
+import kotlin from 'highlight.js/lib/languages/kotlin';
+import markdown from 'highlight.js/lib/languages/markdown';
+import powershell from 'highlight.js/lib/languages/powershell';
+import properties from 'highlight.js/lib/languages/properties';
+import python from 'highlight.js/lib/languages/python';
+import scss from 'highlight.js/lib/languages/scss';
+import shell from 'highlight.js/lib/languages/shell';
+import sql from 'highlight.js/lib/languages/sql';
+import typescript from 'highlight.js/lib/languages/typescript';
+import xml from 'highlight.js/lib/languages/xml';
+import yaml from 'highlight.js/lib/languages/yaml';
 import { default as MarkdownIt } from 'markdown-it';
 
 import { tasklist } from '@mdit/plugin-tasklist';
@@ -34,6 +33,7 @@ import { align } from '@mdit/plugin-align';
 import { mark } from '@mdit/plugin-mark';
 import { sub } from '@mdit/plugin-sub';
 import { sup } from '@mdit/plugin-sup';
+import { ins } from '@lib';
 
 @Injectable({ providedIn: 'root' })
 export class MarkdownService {
@@ -47,7 +47,6 @@ export class MarkdownService {
 		hljs.registerLanguage('bash', bash);
 		hljs.registerLanguage('c', c);
 		hljs.registerLanguage('cpp', cpp);
-		hljs.registerLanguage('csharp', csharp);
 		hljs.registerLanguage('css', css);
 		hljs.registerLanguage('dockerfile', dockerfile);
 		hljs.registerLanguage('gradle', gradle);
@@ -95,7 +94,8 @@ export class MarkdownService {
 			.use(align)
 			.use(mark)
 			.use(sub)
-			.use(sup);
+			.use(sup)
+			.use(ins);
 
 	}
 
