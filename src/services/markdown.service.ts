@@ -31,6 +31,7 @@ import { default as MarkdownIt } from 'markdown-it';
 import { tasklist } from '@mdit/plugin-tasklist';
 import { alert } from '@mdit/plugin-alert';
 import { align } from '@mdit/plugin-align';
+import { mark } from '@mdit/plugin-mark';
 
 @Injectable({ providedIn: 'root' })
 export class MarkdownService {
@@ -89,7 +90,8 @@ export class MarkdownService {
 		this.md = MarkdownIt(config)
 			.use(tasklist, { label: true })
 			.use(alert)
-			.use(align);
+			.use(align)
+			.use(mark);
 
 	}
 
