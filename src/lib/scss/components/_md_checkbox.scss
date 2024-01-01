@@ -1,0 +1,80 @@
+.task-list-item-checkbox {
+
+	position		: absolute;
+	opacity			: 0;
+	height			: 0;
+	width			: 0;
+
+	// &:checked + .task-list-item-label {
+
+	// 	color			: #2196F3;
+	// 	text-decoration	: line-through;
+
+	// }
+
+	// &:disabled + .task-list-item-label {
+
+	// 	color			: #ccc;
+	// 	text-decoration	: line-through;
+
+	// }
+
+}
+
+.task-list-item-label {
+
+	position			: relative;
+	padding-left		: 35px;
+	cursor				: pointer;
+	font-size			: 16px;
+	user-select			: none;
+
+	&:before {
+
+		content			: "";
+		position		: absolute;
+		left			: 0;
+		top				: 0;
+		height			: 15px;
+		padding			: 10px;
+		width			: 15px;
+		background-color: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+		border-radius	: 4px;
+
+	}
+
+	&:after {
+
+		content			: "\2713";
+		position		: absolute;
+		display			: none;
+		font-weight		: bolder;
+		left			: 4px;
+		top				: -2px;
+		color			: #2196F3;
+
+	}
+
+}
+
+.task-list-item-checkbox:checked ~ .task-list-item-label:after {
+
+	display				: block;
+
+}
+
+// .task-list-item-checkbox:disabled~.task-list-item-label {
+
+// 	&:before {
+
+// 		border-color	: #b8b8b8;
+
+// 	}
+
+// 	&:after {
+
+// 		background-color: #b8b8b8;
+
+// 	}
+
+// }

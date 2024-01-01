@@ -26,7 +26,8 @@ import sql from 'highlight.js/lib/languages/sql.js';
 import typescript from 'highlight.js/lib/languages/typescript.js';
 import xml from 'highlight.js/lib/languages/xml.js';
 import yaml from 'highlight.js/lib/languages/yaml.js';
-import { default as MarkdownIt, default as markdownit } from 'markdown-it';
+import { default as MarkdownIt } from 'markdown-it';
+import { tasklist } from "@mdit/plugin-tasklist";
 
 @Injectable({ providedIn: 'root' })
 export class MarkdownService {
@@ -82,7 +83,9 @@ export class MarkdownService {
 			}
 
 		};
-		this.md = markdownit(config);
+		this.md = MarkdownIt(config).use(tasklist, {
+			label: true
+		});
 
 	}
 
