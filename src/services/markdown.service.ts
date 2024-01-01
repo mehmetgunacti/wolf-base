@@ -27,7 +27,9 @@ import typescript from 'highlight.js/lib/languages/typescript.js';
 import xml from 'highlight.js/lib/languages/xml.js';
 import yaml from 'highlight.js/lib/languages/yaml.js';
 import { default as MarkdownIt } from 'markdown-it';
+
 import { tasklist } from "@mdit/plugin-tasklist";
+import { alert } from "@mdit/plugin-alert";
 
 @Injectable({ providedIn: 'root' })
 export class MarkdownService {
@@ -83,9 +85,9 @@ export class MarkdownService {
 			}
 
 		};
-		this.md = MarkdownIt(config).use(tasklist, {
-			label: true
-		});
+		this.md = MarkdownIt(config)
+			.use(tasklist, { label: true })
+			.use(alert);
 
 	}
 
