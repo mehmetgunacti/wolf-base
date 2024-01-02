@@ -139,11 +139,8 @@ export class BookmarkUIEffects {
 
 		() => this.router.events.pipe(
 
-			tap(a => console.log(a)),
 			filter((e): e is NavigationEnd => e instanceof NavigationEnd),
-			tap(a => console.log(a)),
 			filter(e => e.urlAfterRedirects.startsWith('/bookmarks')),
-			tap(a => console.log('it starts with bookmarks')),
 			withLatestFrom(this.activatedRoute.queryParamMap),
 			map(([, paramMap]) =>
 
@@ -160,18 +157,6 @@ export class BookmarkUIEffects {
 		)
 
 	);
-
-	// onQueryParamsChangeSetSearch$ = createEffect(
-
-	// 	() => this.activatedRoute.queryParams.pipe(
-
-	// 		map(params => params['search']),
-	// 		filter(term => !!term),
-	// 		switchMap(term => of(bmActions.search({ term })))
-
-	// 	)
-
-	// );
 
 	togglePopularTag$ = createEffect(
 
