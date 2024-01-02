@@ -1,5 +1,16 @@
 :root {
 
+	--font-size-xxl			: 2.8rem;
+	--font-size-xl			: 2.3rem;
+	--font-size-lg			: 2rem;
+	--font-size				: 1.6rem;
+	--font-size-sm			: 1.3rem;
+	--font-size-xs			: 1.1rem;
+	--font-size-xxs			: 0.9rem;
+
+	--font-family			: 'Nunito Sans', serif;
+	--font-family-mono		: 'Source Code Pro', monospace;
+
 	--gap					: 1rem;
 
 	--gap-xxl				: calc(var(--gap) * 1.8);
@@ -18,5 +29,7 @@
 	--input-element-height 	: #{$input-element-min-height};
 
 	--scrollbar-width				: 8px;
+
+
 
 }
