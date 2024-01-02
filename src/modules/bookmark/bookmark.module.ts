@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'modules/shared/shared.module';
 import { BookmarkRoutingModule } from './bookmark-routing.module';
 import * as fromConfig from './bookmark.config';
-import { CroppieModule } from '@lib';
+import { CardModule, CroppieModule } from '@lib';
 
 @NgModule({
 	declarations: [...fromConfig.components],
@@ -13,7 +13,8 @@ import { CroppieModule } from '@lib';
 		BookmarkRoutingModule,
 		ReactiveFormsModule,
 		SharedModule,
-		CroppieModule
+		CroppieModule,
+		CardModule
 	]
 })
 export class BookmarkModule { }

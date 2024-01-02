@@ -8,9 +8,9 @@
 
 </w-portal>
 
-<w-card>
+<div class="card">
 
-	<ng-container card-title>Logs</ng-container>
+	<h1>Logs</h1>
 	<div *ngIf="logMessages$ | async as logs">
 
 		<ng-container *ngFor="let log of logs">
@@ -24,4 +24,4 @@
 
 	</div>
 
-</w-card>
+</div>
