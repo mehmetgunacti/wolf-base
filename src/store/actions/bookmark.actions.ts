@@ -1,4 +1,4 @@
-import { Bookmark, Click, OVERLAY_ID, RemoteMetadata, SyncData, UUID } from '@lib';
+import { Bookmark, BookmarkQueryParams, Click, OVERLAY_ID, RemoteMetadata, SyncData, UUID } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // CRUD
@@ -58,7 +58,7 @@ export const closeEditBookmarkDialogSuccess	= createAction('[Bookmark] Close Edi
 
 export const setSelectedId					= createAction('[Bookmark] Set Selected Id', props<{ id: UUID | null }>());
 
-export const setQueryParams					= createAction('[Bookmark] Set Query State', props<{ id: UUID | null, search: string | null, tags: string[] }>());
+export const setQueryParams					= createAction('[Bookmark] Set Query State', props<BookmarkQueryParams>());
 
 
 

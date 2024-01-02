@@ -1,4 +1,4 @@
-import { Bookmark, ClickedBookmark, QueryParams, Tag } from '@lib';
+import { Bookmark, ClickedBookmark, BookmarkQueryParams, Tag } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selBM_array, selBM_clickedBookmarks } from './bookmark-entities.selectors';
 import { selBookmarkUIState } from './bookmark.selectors';
@@ -118,7 +118,7 @@ export const relatedTags = createSelector(
 	arrOfFilteredTagNames,
 	distinctTagNames,
 	selBMQueryParams,
-	(arrTagsArray: string[][], distinctTagNames: string[], params: QueryParams): string[] => {
+	(arrTagsArray: string[][], distinctTagNames: string[], params: BookmarkQueryParams): string[] => {
 
 		if (params.tags.length === 0)
 			return distinctTagNames;

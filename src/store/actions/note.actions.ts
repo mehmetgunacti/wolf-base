@@ -1,4 +1,4 @@
-import { Note, NoteContent, RemoteMetadata, SyncData, UUID } from '@lib';
+import { Note, NoteContent, NoteQueryParams, RemoteMetadata, SyncData, UUID } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // CRUD
@@ -40,7 +40,7 @@ export const loadAllRemoteMetadataSuccess	= createAction('[Note] Load All Remote
 export const setEditId						= createAction('[Note] Set Edit Id', props<{ id: UUID | null }>());
 export const setSelectedId					= createAction('[Note] Set Selected Id', props<{ id: UUID | null }>());
 
-export const setQueryParams					= createAction('[Note] Set Query State', props<{ search: string | null, tags: string[] }>());
+export const setQueryParams					= createAction('[Note] Set Query State', props<NoteQueryParams>());
 
 // TAGS
 export const clickTag						= createAction('[Note] Click Tag', props<{ name: string }>());

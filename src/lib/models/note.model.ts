@@ -13,3 +13,10 @@ export interface NoteContent extends Entity {
 	content: string;
 
 }
+
+export interface NoteQueryParams {
+
+	search: string | null,
+	tags: string[]
+
+}

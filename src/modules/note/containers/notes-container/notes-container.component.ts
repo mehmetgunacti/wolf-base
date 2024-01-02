@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Note, QueryParams, UUID } from 'lib';
+import { Note, UUID } from 'lib';
 import { Observable, iif, map, switchMap } from 'rxjs';
 import { selNote_rootArray } from 'store/selectors/note-selectors/note-entities.selectors';
 import { selNote_filteredNotes, selNote_queryParams } from 'store/selectors/note-selectors/note-tags.selectors';

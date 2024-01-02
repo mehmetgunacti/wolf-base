@@ -1,4 +1,4 @@
-import { Note, QueryParams, RemoteMetadata, SyncData, UUID } from '@lib';
+import { Note, NoteQueryParams, RemoteMetadata, SyncData, UUID } from '@lib';
 
 export interface Note_ModuleState {
 
@@ -19,7 +19,7 @@ export interface Note_EntitiesState {
 
 export interface Note_UIState {
 
-	queryParams: QueryParams;
+	queryParams: NoteQueryParams;
 
 }
 
@@ -38,7 +38,6 @@ export const note_initialEntitiesState: Note_EntitiesState = {
 export const initialNoteUIState: Note_UIState = {
 
 	queryParams: {
-		id: null,
 		search: null,
 		tags: []
 	}

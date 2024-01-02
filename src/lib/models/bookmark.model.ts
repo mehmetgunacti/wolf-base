@@ -1,3 +1,4 @@
+import { UUID } from 'lib/constants';
 import { Entity } from './entity.model';
 import { IDBase, NameBase } from './id-base.model';
 
@@ -24,3 +25,11 @@ export interface Click extends IDBase {
 }
 
 export interface NamedClick extends Click, NameBase { }
+
+export interface BookmarkQueryParams {
+
+	id: UUID | null,
+	search: string | null,
+	tags: string[]
+
+}

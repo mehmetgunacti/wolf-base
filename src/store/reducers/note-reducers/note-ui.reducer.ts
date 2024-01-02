@@ -5,7 +5,7 @@ import * as noteActions from 'store/actions/note.actions';
 const reducer = createReducer(
 
 	initialNoteUIState,
-	on(noteActions.setQueryParams, (state, { search, tags }): Note_UIState => ({ ...state, queryParams: { id: null, search, tags } }))
+	on(noteActions.setQueryParams, (state, { search, tags }): Note_UIState => ({ ...state, queryParams: { search, tags } }))
 	// on(noteActions.openAddNoteDialogSuccess, (state, { id }): NoteUIState => ({ ...state, editDialogOverlayId: id })),
 	// on(noteActions.openEditNoteDialogSuccess, (state, { id }): NoteUIState => ({ ...state, editDialogOverlayId: id })),
 	// on(noteActions.closeEditNoteDialogSuccess, (state): NoteUIState => ({ ...state, editDialogOverlayId: null })),

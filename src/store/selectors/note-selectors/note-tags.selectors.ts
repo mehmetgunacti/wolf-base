@@ -1,4 +1,4 @@
-import { Note, QueryParams, Tag } from '@lib';
+import { Note, NoteQueryParams, Tag } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selNote_array, selNote_rootArray } from './note-entities.selectors';
 import { selNote_UIState } from './note.selectors';
@@ -105,7 +105,7 @@ export const relatedTags = createSelector(
 	arrOfFilteredTagNames,
 	distinctTagNames,
 	selNote_queryParams,
-	(arrTagsArray: string[][], distinctTagNames: string[], params: QueryParams): string[] => {
+	(arrTagsArray: string[][], distinctTagNames: string[], params: NoteQueryParams): string[] => {
 
 		if (params.tags.length === 0)
 			return distinctTagNames;

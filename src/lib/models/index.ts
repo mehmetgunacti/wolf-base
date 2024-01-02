@@ -8,7 +8,6 @@ export * from './id-base.model';
 export * from './log.model';
 export * from './menu.model';
 export * from './note.model';
-export * from './query-params.model';
 export * from './remote.model';
 export * from './sync.model';
 export * from './tag.model';
