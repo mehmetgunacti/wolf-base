@@ -45,7 +45,9 @@
 
 		@extend %flex-column;
 		gap				: var(--gap);
-		overflow		: hidden;
+		overflow		: auto;
+		max-height		: 30rem;
+		@extend %w-scrollbar;
 
 		& > div {
 

@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy } from '@ang
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { TAG_PINNED, Tag, slideUpDownTrigger } from 'lib';
-import { Observable, Subscription, debounceTime, distinctUntilChanged, map } from 'rxjs';
+import { Observable, Subscription, debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs';
 import { clickTag, emptySelectedTags, search } from 'store/actions/note.actions';
-import { distinctTagsArray, relatedTags, selNoteQueryParams } from 'store/selectors/note-selectors/note-tags.selectors';
+import { distinctTagsArray, relatedTags, selNote_queryParams } from 'store/selectors/note-selectors/note-tags.selectors';
 
 @Component({
 	selector: 'app-notes-search-and-tag-cloud-container',
@@ -21,6 +21,7 @@ export class NotesSearchAndTagCloudContainerComponent implements OnDestroy {
 	selectedTags$: Observable<string[]>;
 	relatedTags$: Observable<string[]>;
 
+
 	@HostBinding('class.open')
 	cloudVisible = false;
 
@@ -30,10 +31,18 @@ export class NotesSearchAndTagCloudContainerComponent implements OnDestroy {
 	constructor(private store: Store) {
 
 		this.tags$ = store.select(distinctTagsArray);
-		this.selectedTags$ = store.select(selNoteQueryParams).pipe(map(q => q.tags));
 		this.relatedTags$ = store.select(relatedTags);
 
+		const queryParams$ = store.select(selNote_queryParams);
+		this.selectedTags$ = queryParams$.pipe(map(q => q.tags));
+
 		this.searchControl = new FormControl();
+		queryParams$.pipe(
+			map(q => q.search),
+			filter(term => !!term),
+			take(1) // only one value on page load
+		).subscribe(term => this.searchControl.setValue(term ?? ''));
+
 		this.subscription = this.searchControl.valueChanges.pipe(
 			debounceTime(400),
 			distinctUntilChanged()

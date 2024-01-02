@@ -1,6 +1,16 @@
-<w-card>
+<div class="card">
 
-	<ng-container card-title>Notes</ng-container>
+	<ng-container *ngIf="(isFiltered$ | async) as isFiltered; else notFiltered">
+		<h1>Search Results
+			<h6 *ngIf="(queryParamsAsString$ | async) as paramsText">
+				<span>{{ paramsText }}</span>
+			</h6>
+		</h1>
+	</ng-container>
+	<ng-template #notFiltered>
+		<h1>Root Nodes</h1>
+	</ng-template>
+
 	<ng-container *ngIf="(notes$ | async) as notes">
 		<ul *ngIf="notes.length > 0; else noNotes">
 			<li *ngFor="let note of notes" [routerLink]="['/notes', note.id]" tabindex="0">
@@ -21,4 +31,4 @@
 		</ng-template>
 	</ng-container>
 
-</w-card>
+</div>

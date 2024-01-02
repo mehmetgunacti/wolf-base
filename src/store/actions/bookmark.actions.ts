@@ -63,7 +63,7 @@ export const setQueryParams					= createAction('[Bookmark] Set Query State', pro
 
 
 // TAGS
-export const togglePopular					= createAction('[Bookmark] Toggle Popular', props<{ id: UUID }>());
+export const togglePopular					= createAction('[Bookmark] Toggle Tag Popular', props<{ id: UUID }>());
 
 export const clickTag						= createAction('[Bookmark] Click Tag', props<{ name: string }>());
 export const setSelectedTags				= createAction('[Bookmark] Set Selected Tags', props<{ tags: string[] }>());

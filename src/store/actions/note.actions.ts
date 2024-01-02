@@ -40,9 +40,9 @@ export const loadAllRemoteMetadataSuccess	= createAction('[Note] Load All Remote
 export const setEditId						= createAction('[Note] Set Edit Id', props<{ id: UUID | null }>());
 export const setSelectedId					= createAction('[Note] Set Selected Id', props<{ id: UUID | null }>());
 
-// TAGS
-export const togglePopular					= createAction('[Note] Toggle Popular', props<{ id: UUID }>());
+export const setQueryParams					= createAction('[Note] Set Query State', props<{ search: string | null, tags: string[] }>());
 
+// TAGS
 export const clickTag						= createAction('[Note] Click Tag', props<{ name: string }>());
 export const setSelectedTags				= createAction('[Note] Set Selected Tags', props<{ tags: string[] }>());
 export const emptySelectedTags				= createAction('[Note] Empty Selected Tags');

@@ -1,11 +1,11 @@
 import { Bookmark, ClickedBookmark, QueryParams, Tag } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selBMBookmarksArray, selBMClickedBookmarks } from './bookmark-entities.selectors';
+import { selBM_array, selBM_clickedBookmarks } from './bookmark-entities.selectors';
 import { selBookmarkUIState } from './bookmark.selectors';
 
 const arrayOfTagNames = createSelector(
 
-	selBMBookmarksArray,
+	selBM_array,
 	(bookmarks): string[][] => bookmarks.map(b => b.tags)
 
 );
@@ -51,16 +51,16 @@ export const selBMQueryParams = createSelector(
 
 const selBMSelectedBookmark = createSelector(
 
-	selBMClickedBookmarks,
+	selBM_clickedBookmarks,
 	selBMQueryParams,
 	(clickedBMs, params): ClickedBookmark | null => params.id ? clickedBMs[params.id] : null
 
 );
 
-export const selBMfilteredBookmarks = createSelector(
+export const selBM_filteredBookmarks = createSelector(
 
 	selBMSelectedBookmark,
-	selBMBookmarksArray,
+	selBM_array,
 	selBMQueryParams,
 	(selectedBookmark, bookmarks, params): ClickedBookmark[] => {
 
@@ -101,14 +101,14 @@ export const selBMfilteredBookmarks = createSelector(
 
 const arrOfFilteredTagNames = createSelector(
 
-	selBMfilteredBookmarks,
+	selBM_filteredBookmarks,
 	(bookmarks): string[][] => bookmarks.map(b => b.tags)
 
 );
 
 export const filteredBookmarkCount = createSelector(
 
-	selBMfilteredBookmarks,
+	selBM_filteredBookmarks,
 	(bookmarks: Bookmark[]) => bookmarks.length
 
 );

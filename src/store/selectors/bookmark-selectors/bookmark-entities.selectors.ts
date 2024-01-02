@@ -16,7 +16,7 @@ const selBMClicks = createSelector(
 
 );
 
-export const selBMClickedBookmarks = createSelector(
+export const selBM_clickedBookmarks = createSelector(
 
 	selBMBookmarks,
 	selBMClicks,
@@ -32,28 +32,28 @@ export const selBMClickedBookmarks = createSelector(
 
 );
 
-const selBMIds = createSelector(
+const selBM_ids = createSelector(
 
 	selBookmarkEntitiesState,
 	state => Object.keys(state.entities)
 
 );
 
-export const selBMBookmarksArray = createSelector(
+export const selBM_array = createSelector(
 
-	selBMClickedBookmarks,
+	selBM_clickedBookmarks,
 	(clickedBookmarks): ClickedBookmark[] => Object.values(clickedBookmarks)
 
 );
 
-export const selBookmarksCount = createSelector(
+export const selBM_count = createSelector(
 
-	selBMIds,
+	selBM_ids,
 	ids => ids.length
 
 );
 
-export const selBookmarkClicked = createSelector(
+export const selBM_clicked = createSelector(
 
 	selBookmarkEntitiesState,
 	(state): NamedClick[] =>
@@ -64,9 +64,9 @@ export const selBookmarkClicked = createSelector(
 
 );
 
-export const selBookmarkClickedCount = createSelector(
+export const selBM_clickedCount = createSelector(
 
-	selBookmarkClicked,
+	selBM_clicked,
 	list => list.length
 
 );

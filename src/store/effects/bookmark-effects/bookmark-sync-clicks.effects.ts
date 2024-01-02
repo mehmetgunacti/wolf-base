@@ -6,7 +6,7 @@ import { BOOKMARK_SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { loadAllClicks, loadOneClickSuccess, uploadClicked } from 'store/actions/bookmark.actions';
 import { startSync } from 'store/actions/cloud.actions';
-import { selBookmarkClicked } from 'store/selectors/bookmark-selectors/bookmark-entities.selectors';
+import { selBM_clicked } from 'store/selectors/bookmark-selectors/bookmark-entities.selectors';
 
 @Injectable()
 export class BookmarkSyncClicksEffects {
@@ -20,7 +20,7 @@ export class BookmarkSyncClicksEffects {
 		() => this.actions$.pipe(
 
 			ofType(uploadClicked),
-			withLatestFrom(this.store.select(selBookmarkClicked)),
+			withLatestFrom(this.store.select(selBM_clicked)),
 			switchMap(([, clicks]) =>
 
 				this.syncService.uploadClicks(clicks).pipe(

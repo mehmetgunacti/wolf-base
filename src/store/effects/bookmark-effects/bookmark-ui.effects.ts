@@ -92,10 +92,10 @@ export class BookmarkUIEffects {
 			withLatestFrom(this.activatedRoute.queryParams),
 			tap(([_, params]) => {
 
-				// Destructure 'tags' from the query parameters, keeping the rest of the parameters in 'rest'
+				// Destructure 'tags' from query parameters
 				const { tags, ...queryParams } = params;
 
-				// Navigate to the current route with the updated query parameters
+				// updated query parameters in address bar
 				this.router.navigate([], { queryParams });
 
 			})

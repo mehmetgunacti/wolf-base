@@ -1,11 +1,11 @@
 import { createSelector } from '@ngrx/store';
-import { selBookmarksCount } from './bookmark-entities.selectors';
+import { selBM_count } from './bookmark-entities.selectors';
 import { filteredBookmarkCount } from './bookmark-tags.selectors';
 import { selBookmarkEntitiesState, selBookmarkUIState } from './bookmark.selectors';
 
 export const selBookmarkMenuBadge = createSelector(
 
-	selBookmarksCount,
+	selBM_count,
 	filteredBookmarkCount,
 	(total, filtered): [number, number] => ([total, filtered])
 

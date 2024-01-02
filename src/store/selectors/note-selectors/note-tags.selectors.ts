@@ -1,6 +1,6 @@
 import { Note, QueryParams, Tag } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selNote_array } from './note-entities.selectors';
+import { selNote_array, selNote_rootArray } from './note-entities.selectors';
 import { selNote_UIState } from './note.selectors';
 
 const arrayOfTagNames = createSelector(
@@ -42,18 +42,19 @@ const distinctTagNames = createSelector(
 
 );
 
-export const selNoteQueryParams = createSelector(
+export const selNote_queryParams = createSelector(
 
 	selNote_UIState,
 	state => state.queryParams
 
 );
 
-export const selNotefilteredNotes = createSelector(
+export const selNote_filteredNotes = createSelector(
 
 	selNote_array,
-	selNoteQueryParams,
-	(notes, params): Note[] => {
+	selNote_queryParams,
+	selNote_rootArray,
+	(notes, params, rootNotes): Note[] => {
 
 		if (!params.search && params.tags.length === 0)
 			return [];
@@ -79,7 +80,6 @@ export const selNotefilteredNotes = createSelector(
 			return searchWords.every(word => lowerCaseName.includes(word));
 
 		});
-
 		return result;
 
 	}
@@ -88,14 +88,14 @@ export const selNotefilteredNotes = createSelector(
 
 const arrOfFilteredTagNames = createSelector(
 
-	selNotefilteredNotes,
+	selNote_filteredNotes,
 	(notes): string[][] => notes.map(b => b.tags)
 
 );
 
 export const filteredNoteCount = createSelector(
 
-	selNotefilteredNotes,
+	selNote_filteredNotes,
 	(notes: Note[]) => notes.length
 
 );
@@ -104,7 +104,7 @@ export const relatedTags = createSelector(
 
 	arrOfFilteredTagNames,
 	distinctTagNames,
-	selNoteQueryParams,
+	selNote_queryParams,
 	(arrTagsArray: string[][], distinctTagNames: string[], params: QueryParams): string[] => {
 
 		if (params.tags.length === 0)
