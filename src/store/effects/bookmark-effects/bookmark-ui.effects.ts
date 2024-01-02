@@ -65,11 +65,11 @@ export class BookmarkUIEffects {
 			withLatestFrom(this.activatedRoute.queryParams),
 			tap(([{ name }, params]) => {
 
-				// Toggle the clicked tag in the 'tags' query parameter array
-				const tagsArr: string[] = toggleArrayItem(commaSplit(params['tags']), name);
-
-				// Destructure 'tags' from the query parameters, keeping the rest of the parameters in 'rest'
+				// Destructure 'tags' from the query parameters
 				const { tags, ...rest } = params;
+
+				// create new 'tags' array by adding/removing incoming (clicked) tag value
+				const tagsArr: string[] = toggleArrayItem(commaSplit(tags), name);
 
 				// Create a new set of query parameters based on the toggled 'tagsArr'
 				const queryParams: Params = tagsArr.length === 0 ? rest : { ...params, tags: tagsArr.join(',') };
@@ -105,12 +105,45 @@ export class BookmarkUIEffects {
 
 	);
 
+	// when user enters search term into search box, update 'address bar' query params
+	onSearchSetURLQueryParam$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bmActions.search),
+			withLatestFrom(this.activatedRoute.queryParams),
+			tap(([{ term }, params]) => {
+
+				// term: user just entered a search term
+				// term is an empty string when user empties search box
+
+				// Destructure current 'address bar' state (query params)
+				const { search, ...rest } = params;
+
+				// if term is an empty string -> remove 'search' from address bar (query params)
+				// otherwise add new, incoming search term as 'search' to address bar (query params)
+				const queryParams: Params = term ? { ...params, search: term } : rest;
+
+				// Navigate to the current route with the updated query parameters
+				this.router.navigate([], { queryParams });
+
+			})
+
+		),
+		{ dispatch: false }
+
+	);
+
+	// whenever address bar query params change emit setQueryParams action for reducers to update state
 	onQueryParamsChangeSetSelectedTags$ = createEffect(
 
 		() => this.router.events.pipe(
 
+			tap(a => console.log(a)),
 			filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+			tap(a => console.log(a)),
 			filter(e => e.urlAfterRedirects.startsWith('/bookmarks')),
+			tap(a => console.log('it starts with bookmarks')),
 			withLatestFrom(this.activatedRoute.queryParamMap),
 			map(([, paramMap]) =>
 
@@ -128,41 +161,17 @@ export class BookmarkUIEffects {
 
 	);
 
-	onSearchSetURLQueryParam$ = createEffect(
+	// onQueryParamsChangeSetSearch$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.activatedRoute.queryParams.pipe(
 
-			ofType(bmActions.search),
-			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([{ term }, params]) => {
+	// 		map(params => params['search']),
+	// 		filter(term => !!term),
+	// 		switchMap(term => of(bmActions.search({ term })))
 
-				// Destructure 'tags' from the query parameters, keeping the rest of the parameters in 'rest'
-				const { search, ...rest } = params;
+	// 	)
 
-				// Create a new set of query parameters based on the toggled 'tagsArr'
-				const queryParams: Params = term ? { ...params, search: term } : rest;
-
-				// Navigate to the current route with the updated query parameters
-				this.router.navigate([], { queryParams });
-
-			})
-
-		),
-		{ dispatch: false }
-
-	);
-
-	onQueryParamsChangeSetSearch$ = createEffect(
-
-		() => this.activatedRoute.queryParams.pipe(
-
-			map(params => params['search']),
-			filter(term => !!term),
-			switchMap(term => of(bmActions.search({ term })))
-
-		)
-
-	);
+	// );
 
 	togglePopularTag$ = createEffect(
 

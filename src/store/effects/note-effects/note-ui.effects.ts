@@ -63,53 +63,53 @@ export class NoteUIEffects {
 
 	);
 
-	onQueryParamsChangeSetSelectedTags$ = createEffect(
+	// onQueryParamsChangeSetSelectedTags$ = createEffect(
 
-		() => this.activatedRoute.queryParamMap.pipe(
+	// 	() => this.activatedRoute.queryParamMap.pipe(
 
-			filter(() => this.router.routerState.snapshot.url.startsWith('/notes')),
-			map(paramMap => commaSplit(paramMap.get('tags'))),
-			map(tags => noteActions.setSelectedTags({ tags }))
+	// 		filter(() => this.router.routerState.snapshot.url.startsWith('/notes')),
+	// 		map(paramMap => commaSplit(paramMap.get('tags'))),
+	// 		map(tags => noteActions.setSelectedTags({ tags }))
 
-		)
+	// 	)
 
-	);
+	// );
 
-	onSearchSetURLQueryParam$ = createEffect(
+	// onSearchSetURLQueryParam$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(noteActions.search),
-			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([{ term }, params]) => {
+	// 		ofType(noteActions.search),
+	// 		withLatestFrom(this.activatedRoute.queryParams),
+	// 		tap(([{ term }, params]) => {
 
-				// Destructure 'tags' from the query parameters, keeping the rest of the parameters in 'rest'
-				const { search, ...rest } = params;
+	// 			// Destructure 'tags' from the query parameters, keeping the rest of the parameters in 'rest'
+	// 			const { search, ...rest } = params;
 
-				// Create a new set of query parameters based on the toggled 'tagsArr'
-				const queryParams: Params = term ? { ...params, search: term } : rest;
+	// 			// Create a new set of query parameters based on the toggled 'tagsArr'
+	// 			const queryParams: Params = term ? { ...params, search: term } : rest;
 
-				// Navigate to the current route with the updated query parameters
-				this.router.navigate([], { queryParams });
+	// 			// Navigate to the current route with the updated query parameters
+	// 			this.router.navigate([], { queryParams });
 
-			})
+	// 		})
 
-		),
-		{ dispatch: false }
+	// 	),
+	// 	{ dispatch: false }
 
-	);
+	// );
 
-	onQueryParamsChangeSetSearch$ = createEffect(
+	// onQueryParamsChangeSetSearch$ = createEffect(
 
-		() => this.activatedRoute.queryParams.pipe(
+	// 	() => this.activatedRoute.queryParams.pipe(
 
-			map(params => params['search']),
-			filter(term => !!term),
-			switchMap(term => of(noteActions.search({ term })))
+	// 		map(params => params['search']),
+	// 		filter(term => !!term),
+	// 		switchMap(term => of(noteActions.search({ term })))
 
-		)
+	// 	)
 
-	);
+	// );
 
 	togglePopularTag$ = createEffect(
 
