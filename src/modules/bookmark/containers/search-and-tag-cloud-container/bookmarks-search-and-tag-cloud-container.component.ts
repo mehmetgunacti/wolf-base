@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Tag, slideUpDownTrigger } from 'lib';
+import { TAG_POPULAR, Tag, slideUpDownTrigger } from 'lib';
 import { Observable, Subscription, debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { clickTag, emptySelectedTags, search } from 'store/actions/bookmark.actions';
 import { distinctTagsArray, relatedTags, selBMQueryParams } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
@@ -14,6 +14,8 @@ import { distinctTagsArray, relatedTags, selBMQueryParams } from 'store/selector
 	animations: [slideUpDownTrigger]
 })
 export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
+
+	TAG_POPULAR = TAG_POPULAR;
 
 	tags$: Observable<Tag[]>;
 	selectedTags$: Observable<string[]>;

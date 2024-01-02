@@ -65,16 +65,16 @@ export class BookmarkUIEffects {
 			withLatestFrom(this.activatedRoute.queryParams),
 			tap(([{ name }, params]) => {
 
-				// Destructure 'tags' from the query parameters
+				// Destructure 'tags' from query parameters
 				const { tags, ...rest } = params;
 
 				// create new 'tags' array by adding/removing incoming (clicked) tag value
 				const tagsArr: string[] = toggleArrayItem(commaSplit(tags), name);
 
-				// Create a new set of query parameters based on the toggled 'tagsArr'
+				// Create a new set of query parameters based on toggled 'tagsArr'
 				const queryParams: Params = tagsArr.length === 0 ? rest : { ...params, tags: tagsArr.join(',') };
 
-				// Navigate to the current route with the updated query parameters
+				// Navigate to current route with updated query parameters
 				this.router.navigate([], { queryParams });
 
 			})

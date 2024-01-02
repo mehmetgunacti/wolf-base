@@ -1,7 +1,7 @@
 <header>
 
 	<w-selected-tags
-		[tags]="['popular', 'news', 'im-bored', 'shopping']"
+		[tags]="[TAG_POPULAR, 'news', 'im-bored', 'shopping']"
 		[selectedTags]="selectedTags$ | async"
 		(filterClick)="emptyFilter()"
 		(tagClick)="onTagClicked($event)"></w-selected-tags>
@@ -27,7 +27,7 @@
 			type="button"
 			class="square small"
 			(click)="onSearchReset()">
-			<span class="material-symbols-outlined">search</span>
+			<span class="material-symbols-outlined">backspace</span>
 		</button>
 	</div>
 
