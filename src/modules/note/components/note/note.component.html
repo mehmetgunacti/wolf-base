@@ -1,16 +1,25 @@
 <div class="card" *ngIf="note">
 
 	<div note-header>
-		<ul>
-			<li [routerLink]="['/notes']" tabindex="0">
+		<div note-menu>
+			<div note-menu-item [routerLink]="['/notes']" tabindex="0">
+
 				<span class="material-symbols-outlined">note_stack</span>
 				<h4>Notes</h4>
-			</li>
-			<li *ngFor="let note of parents; let idx = index" [routerLink]="['/notes', note.id]" tabindex="0" [style.margin-left.px]="(idx + 1) * 15">
-				<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
-				<h4>{{ note.name }}</h4>
-			</li>
-		</ul>
+
+			</div>
+			<div
+				note-menu-item
+				*ngFor="let note of parents; let idx = index"
+				[routerLink]="['/notes', note.id]"
+				tabindex="0"
+				[style.margin-left.px]="(idx + 1) * 15">
+
+					<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
+					<h4>{{ note.name }}</h4>
+
+			</div>
+		</div>
 		<h1>{{ note.name }}</h1>
 	</div>
 	<div note-body>
@@ -25,13 +34,17 @@
 
 		<div note-children *ngIf="children.length > 0">
 			<h4>Sub-Notes</h4>
-			<ul>
-				<li *ngFor="let note of children" [routerLink]="['/notes', note.id]" tabindex="0">
+			<div note-menu>
+				<div
+					note-menu-item
+					*ngFor="let note of children"
+					[routerLink]="['/notes', note.id]"
+					tabindex="0">
+
 					<h4>{{ note.name }}</h4>
-				</li>
-			</ul>
+
+				</div>
+			</div>
 		</div>
-
 	</div>
-
 </div>

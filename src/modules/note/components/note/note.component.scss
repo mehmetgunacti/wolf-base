@@ -17,16 +17,6 @@
 
 		}
 
-		& > ul {
-
-			& > li {
-
-				padding		: var(--gap-xxs) var(--gap-sm);
-
-			}
-
-		}
-
 	}
 
 	div[note-body] {
@@ -69,10 +59,10 @@
 
 	}
 
-	ul {
+	div[note-menu] {
 
 		flex			: 1;
-		li {
+		div[note-menu-item] {
 
 			@extend %flex-center-y;
 			padding				: var(--gap);
@@ -120,6 +110,16 @@
 				}
 
 			}
+
+		}
+
+	}
+
+	div[note-menu] {
+
+		div[note-menu-item] {
+
+			padding		: var(--gap-xxs) var(--gap-sm);
 
 		}
 
