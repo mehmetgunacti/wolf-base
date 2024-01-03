@@ -1,50 +1,44 @@
 <div class="card" *ngIf="note">
 
-	<div note-header>
-		<div note-menu>
-			<div note-menu-item [routerLink]="['/notes']" tabindex="0">
+	<div class="note-menu">
+		<div class="note-menu-item small" [routerLink]="['/notes']" tabindex="0">
 
+			<div class="title-box small">
 				<span class="material-symbols-outlined">note_stack</span>
-				<h4>Notes</h4>
-
+				<span>Notes</span>
 			</div>
-			<div
-				note-menu-item
-				*ngFor="let note of parents; let idx = index"
-				[routerLink]="['/notes', note.id]"
-				tabindex="0"
-				[style.margin-left.px]="(idx + 1) * 15">
 
-					<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
-					<h4>{{ note.name }}</h4>
-
-			</div>
 		</div>
-		<h1>{{ note.name }}</h1>
-	</div>
-	<div note-body>
+		<div class="note-menu-item small" *ngFor="let note of parents; let idx = index"
+			[routerLink]="['/notes', note.id]" tabindex="0" [style.margin-left.px]="(idx + 1) * 15">
 
-		<div note-tags *ngIf="note.tags as tags">
-			<button *ngFor="let tag of tags" class="tag">{{ tag }}</button>
-		</div>
-
-		<h6>
-			<span class="material-symbols-outlined">schedule</span> {{ note.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{ note.modified | timePast }})
-		</h6>
-
-		<div note-children *ngIf="children.length > 0">
-			<h4>Sub-Notes</h4>
-			<div note-menu>
-				<div
-					note-menu-item
-					*ngFor="let note of children"
-					[routerLink]="['/notes', note.id]"
-					tabindex="0">
-
-					<h4>{{ note.name }}</h4>
-
-				</div>
+			<div class="title-box small">
+				<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
+				<span>{{ note.name }}</span>
 			</div>
+
 		</div>
 	</div>
+	<h2>{{ note.name }}</h2>
+
+	<div note-children *ngIf="children.length > 0">
+
+		<h5>Sub-Notes</h5>
+		<div class="note-menu">
+			<div class="note-menu-item small" *ngFor="let note of children" [routerLink]="['/notes', note.id]" tabindex="0">
+
+				<div class="title-box small">{{ note.name }}</div>
+
+			</div>
+		</div>
+
+	</div>
+	<div note-tags *ngIf="note.tags as tags">
+		<button *ngFor="let tag of tags" class="tag xs">{{ tag }}</button>
+	</div>
+	<div class="sub-msg right">
+		<span class="material-symbols-outlined">schedule</span> {{ note.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{
+		note.modified | timePast }})
+	</div>
+
 </div>

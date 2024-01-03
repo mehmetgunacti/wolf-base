@@ -10,13 +10,13 @@
 
 <div class="card">
 
-	<h1>Logs</h1>
+	<h2>Logs</h2>
 	<div *ngIf="logMessages$ | async as logs">
 
 		<ng-container *ngFor="let log of logs">
 
-			<h6>[{{ log.category }}] {{ log.date | date:'dd.MM.yyyy hh:mm:ss' }} ({{ log.date | timePast }})</h6>
-			<h6 *ngIf="log.entityId">{{ log.entityId }}</h6>
+			<span class="sub-msg">[{{ log.category }}] {{ log.date | date:'dd.MM.yyyy hh:mm:ss' }} ({{ log.date | timePast }})</span>
+			<span class="sub-msg" *ngIf="log.entityId">{{ log.entityId }}</span>
 			<h4 [innerHTML]="log.message"></h4>
 
 		</ng-container>

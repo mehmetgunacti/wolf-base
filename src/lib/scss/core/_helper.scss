@@ -22,6 +22,12 @@
 	align-items		: flex-start;
 }
 
+%flex-center-end {
+	display			: flex;
+	justify-content	: flex-end;
+	align-items		: center;
+}
+
 %flex-column {
 	display			: flex;
 	flex-direction	: column;
@@ -31,6 +37,12 @@
 	display			: flex;
 	flex-direction	: column;
 	justify-content	: center;
+}
+
+%flex-column-start {
+	display			: flex;
+	flex-direction	: column;
+	align-items		: start;
 }
 
 %flex-row {

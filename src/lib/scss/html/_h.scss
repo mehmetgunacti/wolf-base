@@ -7,44 +7,98 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 
-	font-size		: 2rem;
-	margin-bottom	: 1.3rem;
+	@extend %flex-center-y;
+	font-size		: var(--font-size-xxl);
+	margin-bottom	: var(--gap-xxl);
+
+	.material-symbols-outlined {
+
+		font-size		: inherit;
+		color			: inherit;
+		margin-right	: var(--gap-sm);
+
+	}
 
 }
 
 h2 {
 
-	font-size		: 1.7rem;
-	margin-bottom	: 1.1rem;
+	@extend %flex-center-y;
+	font-size		: var(--font-size-xl);
+	margin-bottom	: var(--gap-xl);
+
+	.material-symbols-outlined {
+
+		font-size		: inherit;
+		color			: inherit;
+		margin-right	: var(--gap-sm);
+
+	}
 
 }
 
 h3 {
 
-	font-size		: 1.5rem;
-	margin-bottom	: 0.9rem;
+	@extend %flex-center-y;
+	font-size		: var(--font-size-lg);
+	margin-bottom	: var(--gap-lg);
+
+	.material-symbols-outlined {
+
+		font-size		: inherit;
+		color			: inherit;
+		margin-right	: var(--gap-sm);
+
+	}
 
 }
 
 h4 {
 
-	font-size		: 1.3rem;
-	margin-bottom	: 0.7rem;
+	@extend %flex-center-y;
+	font-size		: var(--font-size);
+	margin-bottom	: var(--gap);
+
+	.material-symbols-outlined {
+
+		font-size		: inherit;
+		color			: inherit;
+		margin-right	: var(--gap-xxs);
+
+	}
 
 }
 
 h5 {
 
-	font-size		: 1.2rem;
-	margin-bottom	: 0.5rem;
+	@extend %flex-center-y;
+	font-size		: var(--font-size-sm);
+	margin-bottom	: var(--gap-sm);
+
+	.material-symbols-outlined {
+
+		font-size		: inherit;
+		color			: inherit;
+		margin-right	: var(--gap-xxs);
+
+	}
 
 }
 
 h6 {
 
-	font-size		: 1rem;
+	@extend %flex-center-y;
+	font-size		: var(--font-size-xs);
+	margin-bottom	: var(--gap-xs);
 	font-style		: italic;
 	color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
-	margin-bottom	: 0.3rem;
+
+	.material-symbols-outlined {
+
+		font-size		: inherit;
+		color			: inherit;
+		margin-right	: var(--gap-xxs);
+
+	}
 
 }

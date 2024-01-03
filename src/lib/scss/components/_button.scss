@@ -150,6 +150,13 @@ button {
 
 		}
 
+		&.xs {
+
+			font-size		: var(--font-size-xs);
+			padding			: var(--gap-xxs) var(--gap-sm) 0;
+
+		}
+
 	}
 
 }

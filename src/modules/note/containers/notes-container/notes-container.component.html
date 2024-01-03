@@ -1,25 +1,31 @@
 <div class="card">
 
 	<ng-container *ngIf="(isFiltered$ | async) as isFiltered; else notFiltered">
-		<h1>Search Results
-			<h6 *ngIf="(queryParamsAsString$ | async) as paramsText">
-				<span>{{ paramsText }}</span>
-			</h6>
-		</h1>
+		<h2>Search Results
+			<ng-container  *ngIf="(queryParamsAsString$ | async) as paramsText">
+				<span class="sub-msg">{{ paramsText }}</span>
+			</ng-container>
+		</h2>
 	</ng-container>
 	<ng-template #notFiltered>
-		<h1>Root Nodes</h1>
+		<h2>Root Nodes</h2>
 	</ng-template>
 
 	<ng-container *ngIf="(notes$ | async) as notes">
-		<ul *ngIf="notes.length > 0; else noNotes">
-			<li *ngFor="let note of notes" [routerLink]="['/notes', note.id]" tabindex="0">
-				<h6><span class="material-symbols-outlined">schedule</span> {{ note.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{ note.modified | timePast }})</h6>
-				<h4>
-					{{ note.name }}
-				</h4>
-			</li>
-		</ul>
+
+		<div class="note-menu" *ngIf="notes.length > 0; else noNotes">
+			<div class="note-menu-item" *ngFor="let note of notes" [routerLink]="['/notes', note.id]" tabindex="0">
+
+				<div class="title-box vertical">
+					<span class="sub-msg">
+						<span class="material-symbols-outlined">schedule</span>
+						<span>{{ note.modified | timePast }}</span>
+					</span>
+					<span>{{ note.name }}</span>
+				</div>
+
+			</div>
+		</div>
 		<ng-template #noNotes>
 			<div class="empty">
 				No notes available
@@ -29,6 +35,7 @@
 				</button>
 			</div>
 		</ng-template>
+
 	</ng-container>
 
 </div>
