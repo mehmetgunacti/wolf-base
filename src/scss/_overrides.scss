@@ -15,6 +15,12 @@
 
 	}
 
+	& + span {
+
+		margin-left		: var(--gap-xxs);
+
+	}
+
 }
 
 .cr-slider-wrap {

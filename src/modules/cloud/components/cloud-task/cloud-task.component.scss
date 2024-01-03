@@ -47,15 +47,17 @@
 
 			padding				: var(--gap-xxl);
 
-			& > div[details] {
+			& > [task_details] {
 
 				max-height			: 25rem;
 				overflow-y			: auto;
 				width				: 100%;
+				@extend %w-scrollbar;
 
-				& > div[detail] {
+				& > span {
 
-					margin-top		: var(--gap-xl);
+					font-size		: var(--font-size-xs);
+					color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
 
 				}
 

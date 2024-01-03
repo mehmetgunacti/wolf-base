@@ -35,7 +35,7 @@
 	<!-- CONTENT -->
 	<main>
 
-		<ng-container [ngSwitch]="task.type">
+		<h5 [ngSwitch]="task.type">
 
 			<ng-container *ngSwitchCase="CloudTaskType.local_new">{{ task.items.length }} {{ task.items.length > 1 ? 'items' : 'item' }} created</ng-container>
 			<ng-container *ngSwitchCase="CloudTaskType.local_updated">{{ task.items.length }} {{ task.items.length > 1 ? 'items' : 'item' }} updated</ng-container>
@@ -49,13 +49,17 @@
 			<ng-container *ngSwitchCase="CloudTaskType.updated_deleted">Conflict: {{ task.items.length }} {{ task.items.length > 1 ? 'items' : 'item' }} updated locally, deleted on server</ng-container>
 			<ng-container *ngSwitchCase="CloudTaskType.deleted_updated">Conflict: {{ task.items.length }} {{ task.items.length > 1 ? 'items' : 'item' }} deleted locally, updated on server</ng-container>
 
-		</ng-container>
+		</h5>
 
-		<div details>
-			<div detail *ngFor="let item of task.items">
-				<h6>{{ item.id }}</h6>
+		<div task_details>
+
+			<ng-container *ngFor="let item of task.items">
+
+				<span>{{ item.id }}</span>
 				<h4>{{ item.name }}</h4>
-			</div>
+
+			</ng-container>
+
 		</div>
 
 	</main>

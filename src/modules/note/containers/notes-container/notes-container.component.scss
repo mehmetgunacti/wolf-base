@@ -5,16 +5,70 @@
 
 	@extend %flex-column;
 
-	& h2 {
+	[note_entries] {
 
-		@extend %flex-column-start;
+		& > a {
+
+			@extend %flex-column;
+			padding				: var(--gap);
+			border-radius		: var(--border-radius-sm);
+			text-decoration		: none;
+			transition			: $bg-transition;
+
+
+			& > span:first-child {
+
+				@extend %flex-center-y;
+				color				: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+				& > span:first-child {
+
+					font-size		: var(--font-size-sm);
+					color			: inherit;
+					margin-right	: var(--gap-xxs);
+
+				}
+
+				& > span:last-child {
+
+					font-size		: var(--font-size-xs);
+					color			: inherit;
+
+				}
+
+			}
+
+			& > span:last-child {
+
+				font-size			: var(--font-size);
+
+			}
+
+			&:hover {
+
+				background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 10%) / var(--col-bg-panel-alp));
+
+			}
+
+			&:focus,
+			&:focus-visible {
+
+				outline				: 3px solid hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
+
+			}
+
+		}
 
 	}
 
-	& h4 {
+	& h2 {
 
 		@extend %flex-column-start;
-		margin-bottom	: 0;
+		& > span {
+
+			color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+			font-size	: var(--font-size-xs);
+
+		}
 
 	}
 

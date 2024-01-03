@@ -5,4 +5,12 @@
 	@extend %flex-column;
 	gap		: var(--gap);
 
+	span {
+
+		@extend %flex-column-end;
+		font-size		: var(--font-size-xs);
+		color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+
+	}
+
 }
