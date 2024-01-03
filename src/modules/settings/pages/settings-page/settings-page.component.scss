@@ -5,14 +5,4 @@
 	@extend %flex-column;
 	gap		: var(--gap);
 
-	[version] {
-
-	    flex: 1;
-		@extend %flex-end-center;
-		font-size		: 1.4rem;
-		color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
-	    justify-content: flex-end;
-
-	}
-
 }
