@@ -1,6 +1,6 @@
 p {
 
 	display		: block;
-	transition	: $bg-transition;
+	transition	: $bg-transition, color $transition;
 
 }
