@@ -10,4 +10,10 @@
 	transition				: $bg-transition;
 	gap						: var(--gap-sm);
 
+	&.lighter {
+
+		background-color	: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) calc(var(--col-bg-nav-lig) - 3%) / var(--col-bg-nav-alp));
+
+	}
+
 }
