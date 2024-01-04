@@ -2,15 +2,45 @@
 
 	<button
 		class="icon-only"
-		[routerLink]="['/notes/', (note$ | async)?.id, 'content', 'edit' ]">
-		<span class="material-symbols-outlined">edit_note</span> Content
+		[cdkMenuTriggerFor]="menu">
+		<span class="material-symbols-outlined">menu_open</span>
 	</button>
 
-	<button
-		class="icon-only"
-		[routerLink]="['/notes/', (note$ | async)?.id, 'edit' ]">
-		<span class="material-symbols-outlined">edit</span> Edit
-	</button>
+	<ng-template #menu>
+		<div class="card" cdkMenu *ngIf="(note$ | async) as note">
+
+			<button
+				cdkMenuItem
+				class="icon-only"
+				[routerLink]="['/notes/', note.id, 'new' ]">
+				<span class="material-symbols-outlined">add</span> Add Note
+			</button>
+
+			<button
+				cdkMenuItem
+				class="icon-only"
+				[routerLink]="['/notes/', note.id, 'edit' ]">
+				<span class="material-symbols-outlined">edit</span> Edit Note
+			</button>
+
+			<hr cdkMenuItem>
+
+			<button
+				cdkMenuItem
+				class="icon-only"
+				[routerLink]="['/notes/', note.id, 'content', 'edit' ]">
+				<span class="material-symbols-outlined">edit_note</span> Edit Content
+			</button>
+
+			<button
+				cdkMenuItem
+				class="icon-only"
+				[routerLink]="['/logs/']">
+				<span class="material-symbols-outlined">history</span> View Logs
+			</button>
+
+		</div>
+	</ng-template>
 
 </w-portal>
 

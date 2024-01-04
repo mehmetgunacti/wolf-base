@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AutofocusDirective, BookmarkComponent, InputModule, NoDataPipe, PortalComponent, SanitizeHtmlPipe, SelectedTagsComponent, TagCloudComponent, TimePastPipe, ToastModule } from '@lib';
 import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 import { SelectModule } from 'lib/components/select/select.module';
+import { CdkMenuModule } from '@angular/cdk/menu';
 
 @NgModule({
 	declarations: [
@@ -26,7 +27,8 @@ import { SelectModule } from 'lib/components/select/select.module';
 		ReactiveFormsModule,
 		InputTagModule,
 		ToastModule,
-		InputModule
+		InputModule,
+		CdkMenuModule
 	],
 	exports: [
 		BookmarkComponent,
@@ -44,7 +46,8 @@ import { SelectModule } from 'lib/components/select/select.module';
 		SanitizeHtmlPipe,
 		ToastModule,
 		SelectModule,
-		SelectedTagsComponent
+		SelectedTagsComponent,
+		CdkMenuModule
 	],
 	providers: []
 })
