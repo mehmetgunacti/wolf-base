@@ -5,7 +5,7 @@
 
 	@extend %flex-column;
 	border-radius			: var(--border-radius);
-	padding					: var(--gap) var(--gap);
+	padding					: var(--gap-xl) var(--gap-xxl);
 	background-color		: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
 	transition				: $bg-transition;
 	gap						: var(--gap-sm);

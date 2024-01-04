@@ -1,16 +1,19 @@
 ol {
 
-	margin-left	: var(--gap-xl);
+	margin		: var(--gap-sm) var(--gap-xl);
 	list-style	: decimal;
 
 	& > li {
 
-		margin-left	: var(--gap-xl);
+		margin-left		: var(--gap-xl);
+		margin-bottom	: var(--gap);
+		line-height		: 1.2;
+		text-align		: justify;
 		&::marker {
 
-			font-size	: var(--font-size-sm);
-			color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
-			transition	: color 1s cubic-bezier(0.25, 1, 0.25, 1);
+			font-size		: var(--font-size-sm);
+			color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+			transition		: color 1s cubic-bezier(0.25, 1, 0.25, 1);
 
 		}
 
