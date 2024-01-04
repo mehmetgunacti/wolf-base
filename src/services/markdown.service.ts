@@ -20,7 +20,6 @@ import powershell from 'highlight.js/lib/languages/powershell';
 import properties from 'highlight.js/lib/languages/properties';
 import python from 'highlight.js/lib/languages/python';
 import scss from 'highlight.js/lib/languages/scss';
-import shell from 'highlight.js/lib/languages/shell';
 import sql from 'highlight.js/lib/languages/sql';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
@@ -61,7 +60,6 @@ export class MarkdownService {
 		hljs.registerLanguage('properties', properties);
 		hljs.registerLanguage('python', python);
 		hljs.registerLanguage('scss', scss);
-		hljs.registerLanguage('shell', shell);
 		hljs.registerLanguage('sql', sql);
 		hljs.registerLanguage('typescript', typescript);
 		hljs.registerLanguage('xml', xml);
