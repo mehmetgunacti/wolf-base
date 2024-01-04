@@ -1,5 +1,5 @@
 @import 'variables';
-@import 'z-index';
+@import 'core/z-index';
 @import 'mixins/responsive';
 
 :host {
@@ -11,7 +11,7 @@
 	right				: 0;
 	bottom				: 0;
 
-	background-color	: var(--background-overlay);
+	background-color	: var(--col-bg-overlay);
 	z-index				: $z-index-nav-overlay;
 
 	opacity				: 0;

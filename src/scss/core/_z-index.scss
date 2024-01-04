@@ -1,0 +1,17 @@
+$z-index-splash-screen		: 6000;
+
+// override Angular CDK
+// these 3 variables are found in node_modules '@angular/cdk/overlay/_index.scss'
+// "!default" flag means that the variable will only be assigned this value if it hasn’t been assigned a value before this line
+// removed !default flag, so these values are being used
+$overlay-container-z-index	: 5000;
+$overlay-z-index			: 5000;
+$overlay-backdrop-z-index	: 5000;
+
+$z-index-header				: 4000;
+$z-index-nav				: 3000;
+$z-index-nav-overlay		: 2000;
+$z-index-main				: 1000;
+
+$z-index-bookmark-overlay	: 100;
+$z-index-croppie-close-btn	: 100;

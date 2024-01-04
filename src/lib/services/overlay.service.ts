@@ -18,7 +18,7 @@ export const DEFAULT_CONFIG: OverlayDialogConfig<any> = {
 
 	panelClass: 'custom-panel-class',
 	hasBackdrop: true,
-	backdropClass: 'custom-backdrop-class'
+	backdropClass: 'cdk-overlay-dark-backdrop'
 
 };
 

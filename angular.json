@@ -44,7 +44,7 @@
 						"stylePreprocessorOptions": {
 							"includePaths": [
 								"src/scss",
-								"src/lib/scss",
+								"src/lib",
 								"node_modules"
 							]
 						}
