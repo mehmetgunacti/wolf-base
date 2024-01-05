@@ -1,20 +1,17 @@
+import { CdkMenuModule } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AutofocusDirective, BookmarkComponent, InputModule, NoDataPipe, PortalComponent, SanitizeHtmlPipe, SelectedTagsComponent, TagCloudComponent, TimePastPipe, ToastModule } from '@lib';
+import { AutofocusDirective, BookmarkComponent, InputModule, NoDataPipe, PortalComponent, SanitizeHtmlPipe, SelectedTagsComponent, TimePastPipe, ToastModule } from '@lib';
 import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 import { SelectModule } from 'lib/components/select/select.module';
-import { CdkMenuModule } from '@angular/cdk/menu';
+import { TagCloudModule } from 'lib/components/tag-cloud/tag-cloud.module';
 
 @NgModule({
 	declarations: [
 		BookmarkComponent,
 		PortalComponent,
-		// SelectedTagsComponent,
-		TagCloudComponent,
-		// ToastComponent,
-		// ToastWrapperComponent,
 		AutofocusDirective,
 		NoDataPipe,
 		SelectedTagsComponent,
@@ -28,15 +25,12 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 		InputTagModule,
 		ToastModule,
 		InputModule,
-		CdkMenuModule
+		CdkMenuModule,
+		TagCloudModule
 	],
 	exports: [
 		BookmarkComponent,
 		PortalComponent,
-		// SelectedTagsComponent,
-		TagCloudComponent,
-		// ToastWrapperComponent,
-		// ToastModule,
 		AutofocusDirective,
 		ReactiveFormsModule,
 		NoDataPipe,
@@ -47,7 +41,8 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 		ToastModule,
 		SelectModule,
 		SelectedTagsComponent,
-		CdkMenuModule
+		CdkMenuModule,
+		TagCloudModule
 	],
 	providers: []
 })
