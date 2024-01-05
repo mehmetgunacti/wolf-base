@@ -1,7 +1,8 @@
 import { CdkMenuTrigger } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild, WritableSignal, computed, inject, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, map, startWith } from 'rxjs';
+import { formatBytes } from 'lib/utils';
+import { Observable, map, startWith, tap } from 'rxjs';
 import { ClipboardService } from 'services';
 
 @Component({
@@ -18,10 +19,14 @@ export class EditorComponent implements OnInit {
 	@Input() control!: FormControl;
 	@Input() name: string = '';
 	@Input() readonly = false;
-	@Input() rows = 20;
+	@Input() rows = 30;
 	@Input() cols = 20;
 
 	@Output() inputChanged: EventEmitter<string> = new EventEmitter();
+
+
+	private contentSize: WritableSignal<number> = signal(0);
+	contentSizeString = computed(() => formatBytes(this.contentSize()));
 
 	hasValue$!: Observable<boolean>;
 
@@ -32,6 +37,7 @@ export class EditorComponent implements OnInit {
 		this.hasValue$ = this.control.valueChanges.pipe(
 
 			startWith(this.control.value),
+			tap(val => this.contentSize.set(val?.length ?? 0)),
 			map(val => this.hasValue(val))
 
 		);
@@ -74,6 +80,13 @@ export class EditorComponent implements OnInit {
 
 	}
 
+	addEmptyTask(): void {
+
+		const s = '\n- [ ] ';
+		this.editorInsert(s);
+
+	}
+
 	async addImage(): Promise<void> {
 
 		const base64 = await this.clipboardService.base64ImageFromClipboard();
@@ -91,12 +104,16 @@ export class EditorComponent implements OnInit {
 
 	editorInsert(text: string) {
 
+		console.log(text.length);
+
+
 		const textarea = this.editor.nativeElement;
 		const start = textarea.selectionStart;
 		const end = textarea.selectionEnd;
 
 		textarea.value = textarea.value.substring(0, start) + text + textarea.value.substring(end);
 		textarea.selectionStart = textarea.selectionEnd = start + text.length;
+		textarea.focus();
 
 		// manually trigger change, since updates / events are not triggered when DOM is manually updated (?)
 		this.control.setValue(this.editor.nativeElement.value);

@@ -5,6 +5,7 @@
 :host {
 
 	@extend %flex-column;
+	position	: relative;
 	gap			: var(--gap);
 	min-height	: $input-element-min-height;
 
@@ -22,6 +23,7 @@
 		& > textarea {
 
 			@extend %input-element;
+			@extend %w-scrollbar;
 
 			&:focus + label {
 
@@ -42,6 +44,18 @@
 			}
 
 		}
+
+	}
+
+	& > [content-size] {
+
+		position			: absolute;
+		top					: var(--gap-xxs);
+		right				: var(--gap-xxs);
+		background-color	: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp));
+		border-radius		: var(--border-radius-sm);
+		padding				: var(--gap-xs) var(--gap-sm);
+		font-size			: var(--font-size-xs);
 
 	}
 
