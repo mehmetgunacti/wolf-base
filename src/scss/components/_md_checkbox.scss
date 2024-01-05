@@ -39,16 +39,32 @@
 
 	&:after {
 
-		content			: "\2713";
-		pointer-events	: none;
-		position		: absolute;
-		display			: none;
-		font-weight		: bolder;
-		font-size		: 1.6rem;
-		left			: 4px;
-		top				: -2px;
-		color			: hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / var(--col-primary-alp));
-		transition		: color $transition;
+		content						: "";
+		position					: absolute;
+		left						: 0px;
+		top							: -3px;
+		pointer-events				: none;
+		display						: none;
+
+		padding						: 6px 0px 7px 0px;
+		margin						: 0px 0px 0px 4px;
+
+		transform					: rotate(34deg);
+
+		height						: 21px;
+		width						: 11px;
+
+		border-right-width			: 5px;
+		border-right-style			: solid;
+		border-bottom-width			: 5px;
+		border-bottom-style			: solid;
+
+		border-bottom-right-radius	: 2px;
+		border-top-right-radius		: 3px;
+		border-bottom-left-radius	: 3px;
+
+		border-color				: hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / var(--col-primary-alp));
+		transition					: border-color $transition;
 
 	}
 
