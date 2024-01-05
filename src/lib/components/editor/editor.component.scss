@@ -5,28 +5,41 @@
 :host {
 
 	@extend %flex-column;
-	position				: relative;
-	min-height				: $input-element-min-height;
+	gap			: var(--gap);
+	min-height	: $input-element-min-height;
 
-	& > textarea {
+	& > [buttons] {
 
-		@extend %input-element;
-
-		&:focus + label {
-
-			@extend %input-label-up;
-
-		}
+		@extend %flex-center-y;
 
 	}
 
-	& > label {
+	& > [area] {
 
-		@extend %input-label;
-		top		: 2rem;
-		&.up {
+		@extend %flex-column;
+		position				: relative;
 
-			@extend %input-label-up;
+		& > textarea {
+
+			@extend %input-element;
+
+			&:focus + label {
+
+				@extend %input-label-up;
+
+			}
+
+		}
+
+		& > label {
+
+			@extend %input-label;
+			top		: 2rem;
+			&.up {
+
+				@extend %input-label-up;
+
+			}
 
 		}
 

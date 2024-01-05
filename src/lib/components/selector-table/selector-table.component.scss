@@ -1,0 +1,37 @@
+:host {
+
+	& > div.card {
+
+		padding	: var(--gap);
+
+		& > div:first-child {
+
+			font-size		: var(--font-size-xs);
+			text-align		: center;
+			padding	: var(--gap-xs);
+
+		}
+		[table-selectors] {
+
+			display					: grid;
+			grid-template-columns	: repeat(7, 2rem);
+			grid-template-rows		: repeat(6, 2rem);
+			gap						: 4px;
+
+			& > div {
+
+				background-color: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp));
+
+				&:hover {
+
+					background-color: hsl(var(--col-accent-hue) var(--col-accent-sat) var(--col-accent-lig) / var(--col-accent-alp));
+
+				}
+
+			}
+
+		}
+
+	}
+
+}

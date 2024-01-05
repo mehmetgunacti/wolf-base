@@ -1,9 +1,34 @@
-<textarea
-	[rows]="rows"
-	[cols]="cols"
-	[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
-	[formControl]="control"
-	placeholder=""
-	[readonly]="readonly"
-	(input)="onInput($event)"></textarea>
-<label [class.up]="hasValue$ | async">{{name}}</label>
+<div buttons>
+
+	<button class="icon-only">
+		<span class="material-symbols-outlined">add</span>
+	</button>
+
+	<button
+		class="icon-only"
+		[cdkMenuTriggerFor]="menu">
+		<span class="material-symbols-outlined">table</span>
+	</button>
+	<ng-template #menu>
+
+		<w-selector-table
+			[rows]="6"
+			[cols]="7"
+			(result)="addTable($event)"
+			cdkMenu/>
+
+	</ng-template>
+
+</div>
+<div area>
+	<textarea
+		#editor
+		[rows]="rows"
+		[cols]="cols"
+		[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
+		[formControl]="control"
+		placeholder=""
+		[readonly]="readonly"
+		(input)="onInput($event)"></textarea>
+	<label [class.up]="hasValue$ | async">{{name}}</label>
+</div>

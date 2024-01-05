@@ -1,0 +1,16 @@
+<div class="card lighter">
+
+	<div #display>[select]</div>
+	<div table-selectors>
+		@for (row of _rowsArray(); track $index;) {
+
+			@for (col of _colsArray(); track $index;) {
+
+				<div (click)="onCreateTable(col, row)" (mouseover)="display.innerHTML=col + ' x ' + row;"></div>
+
+			}
+
+		}
+	</div>
+
+</div>

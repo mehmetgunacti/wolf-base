@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CdkMenuTrigger } from '@angular/cdk/menu';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 
@@ -9,6 +10,9 @@ import { Observable, map, startWith } from 'rxjs';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditorComponent implements OnInit {
+
+	@ViewChild('editor') editor!: ElementRef<HTMLTextAreaElement>;
+	@ViewChild(CdkMenuTrigger) trigger!: CdkMenuTrigger;
 
 	@Input() control!: FormControl;
 	@Input() name: string = '';
@@ -37,12 +41,52 @@ export class EditorComponent implements OnInit {
 
 	}
 
+	@HostListener('keydown', ['$event'])
+	onKeydownHandler(event: KeyboardEvent) {
+
+		if (event.key == 'Tab') {
+
+			const replacement = '    '; // instead of '\t'
+
+			event.preventDefault();
+			const textarea = this.editor.nativeElement;
+			const start = textarea.selectionStart;
+			const end = textarea.selectionEnd;
+
+			// Insert the '\t' character at the cursor's position
+			textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+
+			// Place the cursor after the inserted '\t' character
+			textarea.selectionStart = textarea.selectionEnd = start + replacement.length;
+
+		}
+
+	}
+
 	onInput(event: Event): void {
 
 		const inputElement = event.target as HTMLInputElement;
 		const value = inputElement.value;
 
 		this.inputChanged.emit(value);
+
+	}
+
+	addTable(text: string): void {
+
+		this.editorInsert(text);
+		this.trigger.close();
+
+	}
+
+	editorInsert(text: string) {
+
+		const textarea = this.editor.nativeElement;
+		const start = textarea.selectionStart;
+		const end = textarea.selectionEnd;
+
+		textarea.value = textarea.value.substring(0, start) + text + textarea.value.substring(end);
+		textarea.selectionStart = textarea.selectionEnd = start + text.length;
 
 	}
 
