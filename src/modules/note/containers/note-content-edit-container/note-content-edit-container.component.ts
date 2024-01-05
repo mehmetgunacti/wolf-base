@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Note } from 'lib';
-import { Observable, filter, iif, map, switchMap, take, tap, withLatestFrom } from 'rxjs';
+import { Observable, filter, take, tap, withLatestFrom } from 'rxjs';
 import { create, update } from 'store/actions/note-content.actions';
 import { selNoteContent_content } from 'store/selectors/note-content-selectors/note-content-entities.selectors';
 import { selNote_selected } from 'store/selectors/note-selectors/note-entities.selectors';
@@ -46,12 +46,6 @@ export class NoteContentEditContainerComponent {
 				this.store.dispatch(create({ content: { id: note.id, name: note.name, content: this.fcContent.value } }));
 
 		});
-
-	}
-
-	onRemove(): void {
-
-
 
 	}
 

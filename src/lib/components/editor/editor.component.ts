@@ -1,7 +1,8 @@
 import { CdkMenuTrigger } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
+import { ClipboardService } from 'services';
 
 @Component({
 	selector: 'w-editor',
@@ -23,6 +24,8 @@ export class EditorComponent implements OnInit {
 	@Output() inputChanged: EventEmitter<string> = new EventEmitter();
 
 	hasValue$!: Observable<boolean>;
+
+	private clipboardService: ClipboardService = inject(ClipboardService);
 
 	ngOnInit(): void {
 
@@ -67,8 +70,15 @@ export class EditorComponent implements OnInit {
 
 		const inputElement = event.target as HTMLInputElement;
 		const value = inputElement.value;
-
 		this.inputChanged.emit(value);
+
+	}
+
+	async addImage(): Promise<void> {
+
+		const base64 = await this.clipboardService.base64ImageFromClipboard();
+		if (base64)
+			this.editorInsert(`\n![base64-image](${base64})\n`);
 
 	}
 
@@ -87,6 +97,10 @@ export class EditorComponent implements OnInit {
 
 		textarea.value = textarea.value.substring(0, start) + text + textarea.value.substring(end);
 		textarea.selectionStart = textarea.selectionEnd = start + text.length;
+
+		// manually trigger change, since updates / events are not triggered when DOM is manually updated (?)
+		this.control.setValue(this.editor.nativeElement.value);
+		this.inputChanged.emit(this.editor.nativeElement.value);
 
 	}
 

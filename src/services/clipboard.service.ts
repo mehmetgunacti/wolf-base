@@ -24,4 +24,31 @@ export class ClipboardService {
 
 	}
 
+	async base64ImageFromClipboard(): Promise<string | null> {
+
+		try {
+
+			const items: ClipboardItems = await navigator.clipboard.read();
+			if (!items)
+				return null; // Handle case where clipboard data is unavailable
+
+			const imageItem = items.find((item) => item.types.find(t => t.startsWith('image/')));
+			if (!imageItem)
+				return null; // Handle case where no image is found in clipboard
+
+			const blob = await imageItem.getType('image/png') || await imageItem.getType('image/jpeg');
+			return new Promise((resolve, reject) => {
+				const reader = new FileReader();
+				reader.onloadend = () => resolve(reader.result as string);
+				reader.onerror = reject;
+				reader.readAsDataURL(blob);
+			});
+
+		} catch (error) {
+			console.error(error);
+			return null;
+		}
+
+	}
+
 }
