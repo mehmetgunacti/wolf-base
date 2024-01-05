@@ -1,6 +1,12 @@
 import { UUID } from "lib/constants";
 import { IDBase } from "lib/models";
 
+export function createArray(n: number): number[] {
+
+	return Array.from({ length: n }, (_, i) => i + 1);
+
+}
+
 export function filterArrayElements(array: string[], elementsToFilterOut: string[]) {
 
 	return array.filter(element => !elementsToFilterOut.includes(element));
