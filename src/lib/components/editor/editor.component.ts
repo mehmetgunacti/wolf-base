@@ -121,4 +121,11 @@ export class EditorComponent implements OnInit {
 
 	}
 
+	addAlignCenter(): void {}
+	addAlignRight(): void {}
+	addAlignJustify(): void {}
+	addBold(): void {}
+	addItalic(): void {}
+	addStrikethrough(): void {}
+
 }

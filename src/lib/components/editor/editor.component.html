@@ -2,7 +2,60 @@
 
 	<button
 		class="icon-only"
+		(click)="addBold()"
+		title="Bold"
+		tabindex="0">
+		<span class="material-symbols-outlined">format_bold</span>
+	</button>
+
+	<button
+		class="icon-only"
+		(click)="addItalic()"
+		title="Italic"
+		tabindex="0">
+		<span class="material-symbols-outlined">format_italic</span>
+	</button>
+
+	<button
+		class="icon-only"
+		(click)="addStrikethrough()"
+		title="Strikethrough"
+		tabindex="0">
+		<span class="material-symbols-outlined">format_strikethrough</span>
+	</button>
+
+	<div class="v-divider"></div>
+
+	<button
+		class="icon-only"
+		(click)="addAlignCenter()"
+		title="Align Center"
+		tabindex="0">
+		<span class="material-symbols-outlined">format_align_center</span>
+	</button>
+
+	<button
+		class="icon-only"
+		(click)="addAlignRight()"
+		title="Align Right"
+		tabindex="0">
+		<span class="material-symbols-outlined">format_align_right</span>
+	</button>
+
+	<button
+		class="icon-only"
+		(click)="addAlignJustify()"
+		title="Align Justify"
+		tabindex="0">
+		<span class="material-symbols-outlined">format_align_justify</span>
+	</button>
+
+	<div class="v-divider"></div>
+
+	<button
+		class="icon-only"
 		(click)="addEmptyTask()"
+		title="Add Empty Task"
 		tabindex="0">
 		<span class="material-symbols-outlined">check_box</span>
 	</button>
@@ -10,6 +63,7 @@
 	<button
 		class="icon-only"
 		[cdkMenuTriggerFor]="menu"
+		title="Add Table"
 		tabindex="0">
 		<span class="material-symbols-outlined">table</span>
 	</button>
@@ -26,6 +80,7 @@
 	<button
 		class="icon-only"
 		(click)="addImage()"
+		title="Image from Clipboard"
 		tabindex="0">
 		<span class="material-symbols-outlined">image</span>
 	</button>
