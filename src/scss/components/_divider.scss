@@ -1,0 +1,9 @@
+.v-divider {
+
+	display		: inline-flex;
+	border-left	: 1px solid hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp));
+    width		: 0;
+    margin		: var(--gap-sm) var(--gap-xxs);
+	align-self	: stretch;
+
+}
