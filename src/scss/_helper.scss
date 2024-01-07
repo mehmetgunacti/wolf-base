@@ -1,4 +1,4 @@
-@import 'core/variables';
+@import 'variables';
 
 // placeholder selectors
 
@@ -98,42 +98,4 @@
 	display			: flex;
 	justify-content	: space-evenly;
 	align-items		: center;
-}
-
-%w-scrollbar {
-
-	&::-webkit-scrollbar {
-		width						: var(--scrollbar-width);
-		height						: var(--scrollbar-width);
-		border-radius				: var(--border-radius-sm);
-		background-color			: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 4%) / 0.4);
-		transition					: $bg-transition;
-	}
-
-	&::-webkit-scrollbar-thumb {
-		border-radius				: var(--border-radius);
-		background-color			: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) - 2%) / var(--col-bg-panel-alp));
-		transition					: $bg-transition;
-	}
-
-}
-
-.w359-scrollbar {
-	@extend %w-scrollbar;
-}
-
-%component-shadow {
-
-	// from theme 'mdc-light-indigo' -> .p-panelmenu .p-panelmenu-panel
-	box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-
-}
-
-%highlight {
-
-
-	outline			: 3px solid hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
-	// box-shadow		: 0 0 10px hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
-	// background-color: hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
-
 }

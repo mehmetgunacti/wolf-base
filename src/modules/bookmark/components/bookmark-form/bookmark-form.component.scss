@@ -1,6 +1,6 @@
-@import 'core/helper';
-@import 'core/variables';
-@import 'mixins/responsive';
+@import 'helper';
+@import 'variables';
+@import 'mixins';
 
 :host {
 
@@ -27,7 +27,7 @@
 		flex				: 1;
 		padding-top			: 1rem;
 
-		@extend %w-scrollbar;
+		@include mx-webkit-scrollbar;
 
 		& > form {
 

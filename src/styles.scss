@@ -1,8 +1,11 @@
 /*
-	Note: for this file to compile:
+	for relatives paths to work,
+	add property "stylePreprocessorOptions" with values
 
-	add this property to "options" (after "scripts") under
-	"angular.json > projects > wolf-base > architect > build > options"
+		"src/scss", "node_modules"
+
+	to object "options".
+	-> "angular.json > projects > wolf-base > architect > build > options"
 
 	"options": {
 		// ...
@@ -10,92 +13,36 @@
 		"stylePreprocessorOptions": {
 			"includePaths": [
 				"src/scss",
-				"src/lib",
 				"node_modules"
 			]
 		}
 	}
-
 */
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans');
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
-@import 'highlight.js/scss/github-dark';
+// external dependencies (google fonts, etc.)
+@import 'external';
 
-@import 'core/hard-reset';
-@import 'core/variables';
-@import 'mixins/util';
-@import 'mixins/responsive';
-@import 'core/helper';
-@import 'core/z-index'; // <-- overrides Angular CDK z-index values
+// variables
+@import 'variables'; // <-- overrides Angular CDK z-index values
 
-// defines all default css variables
-@import 'core/root';
+// mixins
+@import 'mixins';
 
-/******************************
-* Angular CDK Overlay - start *
-*******************************/
+// helper
+@import 'helper';
 
-// import angular cdk scss file
-@import '@angular/cdk/overlay';
+// css components
+@import 'components';
 
-// note: default z-index values are set in 'core/z-index'
+// standart html tag stylings
+@import 'hard-reset';
+@import 'html';
 
-// override backdrop color
-$overlay-backdrop-color: var(--col-bg-overlay);
+// third party
+@import 'third-party';
 
-// generate angular cdk overlay styles
-@include overlay();
-
-/****************************
-* Angular CDK Overlay - end *
-*****************************/
-
-@import 'overrides';
-@import 'index';
-@import 'extensions';
-@import 'splashscreen';
-
-// components
-@import 'components/button';
-@import 'components/divider';
-@import 'components/input-element';
-@import 'components/shake';
-@import 'components/badge';
-@import 'components/card';
-@import 'components/empty';
-
-// markdown-it
-@import 'components/md_alert';
-@import 'components/md_checkbox';
-
-@import 'components/bookmark/bookmark.component';
-@import 'components/toast/toast-wrapper.component';
-@import 'components/toast/toast.component';
-
-// html
-@import 'html/a';
-@import 'html/blockquote';
-@import 'html/code';
-@import 'html/div';
-@import 'html/h';
-@import 'html/hr';
-@import 'html/ins';
-@import 'html/mark';
-@import 'html/p';
-@import 'html/span';
-@import 'html/table';
-@import 'html/ol';
-@import 'html/ul';
+// css variables
+@import 'root';
 
 // Themes
-// for the 'switch theme' button to work,
-// theme names have to be added in 'Theme' enum as well:
-// src/lib/constants/theme.constant.ts
-@import 'themes/default';
-@import 'themes/light';
-// @import 'themes/blue';
-// @import 'themes/green';
-// @import 'themes/gray';
-// @import 'themes/mixed';
+@import 'themes';

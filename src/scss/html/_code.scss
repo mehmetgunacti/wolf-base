@@ -1,4 +1,4 @@
-@import 'core/helper';
+@import 'helper';
 
 code,
 kbd,
@@ -29,7 +29,7 @@ pre {
 	border-radius		: var(--border-radius-sm);
 	overflow			: auto;
 
-	@extend %w-scrollbar;
+	@include mx-webkit-scrollbar;
 	transition	: $bg-transition;
 
 }

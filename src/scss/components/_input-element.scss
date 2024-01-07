@@ -1,5 +1,5 @@
-@import 'core/helper';
-@import 'core/variables';
+@import 'helper';
+@import 'variables';
 
 %input-element  {
 
@@ -19,14 +19,14 @@
 	&:focus,
 	&:focus-visible {
 
-		@extend %highlight;
+		@include mx-outline;
 
 	}
 
 	&.ng-invalid.ng-dirty {
 
 		--col-focus-hue		: 0;
-		@extend %highlight;
+		@include mx-outline;
 
 	}
 

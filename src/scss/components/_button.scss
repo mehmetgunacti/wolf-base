@@ -1,3 +1,6 @@
+@import 'variables';
+@import 'mixins';
+
 button {
 
 	--button-width				: 9rem;
@@ -44,7 +47,7 @@ button {
 	&:focus,
 	&:focus-visible {
 
-		@extend %highlight;
+		@include mx-outline;
 
 	}
 

@@ -1,9 +1,11 @@
-@import 'core/helper';
-@import 'core/variables';
+@import 'helper';
+@import 'variables';
+@import 'mixins';
 
 .card {
 
-	@extend %flex-column;
+	@include flex-column;
+	@include mx-component-box;
 	border-radius			: var(--border-radius);
 	padding					: var(--gap-xl) var(--gap-xxl);
 	background-color		: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));

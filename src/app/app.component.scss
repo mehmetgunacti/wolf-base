@@ -1,8 +1,7 @@
 @import 'variables';
-@import 'core/helper';
-@import 'core/variables';
-@import 'core/z-index';
-@import 'mixins/responsive';
+@import 'helper';
+@import 'variables';
+@import 'mixins';
 
 :host {
 
@@ -44,7 +43,7 @@
 		padding				: var(--gap-sm);
 
 		overflow-y			: auto;
-		@extend %w-scrollbar;
+		@include mx-webkit-scrollbar;
 
 		transition			: left 0.6s cubic-bezier(0.25, 1, 0.25, 1), $bg-transition;
 

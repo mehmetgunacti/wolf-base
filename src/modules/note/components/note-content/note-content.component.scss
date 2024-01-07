@@ -1,8 +1,8 @@
-@import 'core/helper';
-@import 'core/variables';
+@import 'helper';
+@import 'variables';
 
 :host {
 
-	@extend %flex-column;
+	display	: contents;
 
 }

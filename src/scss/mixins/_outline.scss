@@ -1,0 +1,5 @@
+@mixin mx-outline {
+
+	outline			: 3px solid hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
+
+}

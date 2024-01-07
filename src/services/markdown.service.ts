@@ -29,6 +29,7 @@ import { default as MarkdownIt } from 'markdown-it';
 import { tasklist } from '@mdit/plugin-tasklist';
 import { alert } from '@mdit/plugin-alert';
 import { align } from '@mdit/plugin-align';
+import { attrs } from "@mdit/plugin-attrs";
 import { mark } from '@mdit/plugin-mark';
 import { sub } from '@mdit/plugin-sub';
 import { sup } from '@mdit/plugin-sup';
@@ -90,6 +91,7 @@ export class MarkdownService {
 			.use(tasklist, { label: true })
 			.use(alert)
 			.use(align)
+			.use(attrs)
 			.use(mark)
 			.use(sub)
 			.use(sup)

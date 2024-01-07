@@ -1,6 +1,6 @@
-@import 'core/variables';
-@import 'core/helper';
-@import 'core/z-index';
+@import 'variables';
+@import 'helper';
+@import 'mixins';
 
 :host {
 
@@ -30,7 +30,7 @@
 		&:focus,
 		&:focus-visible {
 
-			@extend %highlight;
+			@include mx-outline;
 
 		}
 

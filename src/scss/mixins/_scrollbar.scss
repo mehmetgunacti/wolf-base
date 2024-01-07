@@ -1,0 +1,17 @@
+@mixin mx-webkit-scrollbar {
+
+	&::-webkit-scrollbar {
+		width						: var(--scrollbar-width);
+		height						: var(--scrollbar-width);
+		border-radius				: var(--border-radius-sm);
+		background-color			: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 4%) / 0.4);
+		transition					: $bg-transition;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius				: var(--border-radius);
+		background-color			: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) - 2%) / var(--col-bg-panel-alp));
+		transition					: $bg-transition;
+	}
+
+}

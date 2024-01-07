@@ -1,0 +1,14 @@
+/******************************
+* Angular CDK Overlay - start *
+*******************************/
+
+// import angular cdk scss file from node_modules (index.scss)
+@import '@angular/cdk/overlay';
+
+// note: default z-index values are set in '_variables.scss'
+
+// override backdrop color
+$overlay-backdrop-color: var(--col-bg-overlay);
+
+// generate angular cdk overlay styles
+@include overlay();

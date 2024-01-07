@@ -1,0 +1,8 @@
+@mixin mx-component-box {
+
+	padding				: var(--gap-xl) var(--gap-xxl);
+	border-radius		: var(--border-radius);
+	background-color	: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
+	transition			: $bg-transition;
+
+}

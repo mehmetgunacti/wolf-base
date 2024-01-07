@@ -1,4 +1,6 @@
-app-toast-wrapper {
+@import 'helper';
+
+:host {
 
 	@extend %flex-column;
 

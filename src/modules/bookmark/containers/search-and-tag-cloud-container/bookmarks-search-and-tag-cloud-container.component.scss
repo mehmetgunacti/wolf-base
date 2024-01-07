@@ -1,6 +1,7 @@
-@import 'core/helper';
-@import 'core/variables';
-@import 'components/input-element';
+@import 'helper';
+@import 'variables';
+@import 'mixins';
+@import 'components';
 
 :host {
 
@@ -10,7 +11,7 @@
 	border-radius		: var(--border-radius);
 	transition			: $bg-transition;
 
-	@extend %component-shadow;
+	@include mx-box-shadow;
 
 	--chevron-angle		: 0deg;
 
@@ -47,7 +48,7 @@
 		gap				: var(--gap);
 		overflow		: auto;
 		max-height		: 30rem;
-		@extend %w-scrollbar;
+		@include mx-webkit-scrollbar;
 
 		& > div {
 

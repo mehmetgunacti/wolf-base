@@ -7,6 +7,7 @@ import { WolfToastRef } from './toast.service';
 @Component({
 	selector: 'w-toast-wrapper',
 	templateUrl: './toast-wrapper.component.html',
+	styleUrl: './toast-wrapper.component.scss',
 	animations: [toastTrigger]
 })
 export class ToastWrapperComponent {

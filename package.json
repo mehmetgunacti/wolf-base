@@ -1,6 +1,6 @@
 {
   "name": "wolf-base",
-  "version": "0.1.24",
+  "version": "0.1.25",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -40,6 +40,7 @@
     "@angular/compiler-cli": "^17.0.0",
     "@mdit/plugin-alert": "^0.8.0",
     "@mdit/plugin-align": "^0.8.0",
+    "@mdit/plugin-attrs": "^0.8.0",
     "@mdit/plugin-mark": "^0.8.0",
     "@mdit/plugin-sub": "^0.8.0",
     "@mdit/plugin-sup": "^0.8.0",

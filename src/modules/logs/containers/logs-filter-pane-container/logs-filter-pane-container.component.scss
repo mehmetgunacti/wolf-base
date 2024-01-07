@@ -1,5 +1,6 @@
-@import 'core/helper';
-@import 'core/variables';
+@import 'helper';
+@import 'variables';
+@import 'mixins';
 
 :host {
 
@@ -9,7 +10,7 @@
 	border-radius		: var(--border-radius);
 	transition			: $bg-transition;
 
-	@extend %component-shadow;
+	@include mx-box-shadow;
 
 	--chevron-angle		: 0deg;
 

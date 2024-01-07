@@ -1,6 +1,13 @@
-@import 'core/helper';
-@import 'core/variables';
-@import 'components/input-element';
+@import 'helper';
+@import 'variables';
+@import 'mixins';
+@import 'components';
+
+[format_menu] {
+
+	@extend %flex-column;
+
+}
 
 :host {
 
@@ -13,6 +20,20 @@
 
 		@extend %flex-center-y;
 
+		& [format-buttons] {
+
+			background-color: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp));
+
+		}
+
+		& > button:last-of-type {
+
+			// preview button
+			margin-left			: auto;
+			width				: 10rem;
+
+		}
+
 	}
 
 	& > [area] {
@@ -23,7 +44,7 @@
 		& > textarea {
 
 			@extend %input-element;
-			@extend %w-scrollbar;
+			@include mx-webkit-scrollbar;
 
 			&:focus + label {
 
@@ -37,25 +58,21 @@
 
 			@extend %input-label;
 			top		: 2rem;
+
 			&.up {
 
 				@extend %input-label-up;
 
 			}
 
+			&.right {
+
+				right	: 5px;
+    			left	: unset;
+
+			}
+
 		}
-
-	}
-
-	& > [content-size] {
-
-		position			: absolute;
-		top					: var(--gap-xxs);
-		right				: var(--gap-xxs);
-		background-color	: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp));
-		border-radius		: var(--border-radius-sm);
-		padding				: var(--gap-xs) var(--gap-sm);
-		font-size			: var(--font-size-xs);
 
 	}
 

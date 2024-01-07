@@ -1,0 +1,10 @@
+// for the 'switch theme' button to work,
+// theme names have to be added in 'Theme' enum as well:
+// src/lib/constants/theme.constant.ts
+@import 'default';
+@import 'light';
+// @import 'themes/blue';
+// @import 'themes/green';
+// @import 'themes/gray';
+// @import 'themes/mixed';
+
