@@ -131,40 +131,30 @@
 		tabindex="0">
 		<span class="material-symbols-outlined">live_tv</span>
 		<span>Preview</span>
-		<!-- <span class="material-symbols-outlined">{{ isPreview() ? 'edit_note' : 'live_tv' }}</span>
-		<span>{{ isPreview() ? 'Editor' : 'Preview' }}</span> -->
 	</button>
 
 </div>
 
 <div area>
 
-	<!-- @if (isPreview()) {
-
-		<div [innerHTML]="control.value | markdownToHtml | sanitizeHtml"></div>
-
-	} @else { -->
-
-		<textarea
-			#editor
-			[rows]="rows"
-			[cols]="cols"
-			[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
-			[formControl]="control"
-			placeholder=""
-			[readonly]="readonly"
-			(input)="onInput($event)"></textarea>
-		<label [class.up]="hasValue$ | async">{{name}}</label>
-		<label class="up right">{{ contentSizeString() }}</label>
-
-	<!-- } -->
-
+	<textarea
+		#editor
+		[rows]="rows"
+		[cols]="cols"
+		[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
+		[formControl]="control"
+		placeholder=""
+		[readonly]="readonly"
+		(input)="onInput($event)"></textarea>
+	<label [class.up]="hasValue$ | async">{{name}}</label>
+	<label class="up right">{{ contentSizeString() }}</label>
 
 </div>
 
 <ng-template #previewTemplate>
 
-	<w-card>
+	<w-overlay-container [content]="content() | markdownToHtml | sanitizeHtml">
+
 		<ng-container card-title>Preview</ng-container>
 		<ng-container card-buttons>
 
@@ -176,7 +166,6 @@
 
 		</ng-container>
 
-		<div class="card" [innerHTML]="content() | markdownToHtml | sanitizeHtml"></div>
+	</w-overlay-container>
 
-	</w-card>
 </ng-template>

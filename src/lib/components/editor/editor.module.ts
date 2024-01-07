@@ -6,7 +6,7 @@ import { MarkdownModule, SanitizeHtmlModule } from 'lib/pipes';
 import { SelectorTableModule } from '../selector-table/selector-table.module';
 import { EditorComponent } from './editor.component';
 import { DialogModule } from '@angular/cdk/dialog';
-import { CardModule } from '../card';
+import { OverlayContainerModule } from '../overlay-container';
 
 @NgModule({
 
@@ -19,7 +19,7 @@ import { CardModule } from '../card';
 		SanitizeHtmlModule,
 		MarkdownModule,
 		DialogModule,
-		CardModule
+		OverlayContainerModule
 	],
 	exports: [EditorComponent]
 

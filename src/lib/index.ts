@@ -1,6 +1,6 @@
 export * from './animations';
 export * from './components/portal.component';
-export * from './components/card';
+export * from './components/overlay-container';
 export * from './components/croppie';
 export * from './components/bookmark/bookmark.component';
 export * from './components/input';

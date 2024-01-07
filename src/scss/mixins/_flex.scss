@@ -1,14 +1,29 @@
-@mixin flex-column {
+@mixin mx-flex-column {
 
 	display				: flex;
 	flex-direction		: column;
 
 }
 
-@mixin flex-center-center {
+@mixin mx-flex-center-center {
 
 	display				: flex;
 	align-items			: center;
 	justify-content		: center;
+
+}
+
+@mixin mx-flex-center-y {
+
+	display				: flex;
+	align-items			: center;
+
+}
+
+@mixin mx-flex-space-between-center {
+
+	display				: flex;
+	align-items			: center;
+	justify-content		: space-between;
 
 }

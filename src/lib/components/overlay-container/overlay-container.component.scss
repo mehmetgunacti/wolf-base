@@ -1,0 +1,63 @@
+@import 'helper';
+@import 'variables';
+@import 'mixins';
+
+:host {
+
+	@include mx-component;
+	@include mx-responsive;
+	@include mx-flex-column;
+	gap		: var(--gap);
+
+	& > header {
+
+		@include mx-flex-space-between-center;
+
+		&>[card-title] {
+
+			@include mx-flex-center-y;
+			padding			: var(--gap-sm);
+			font-size		: 2rem;
+			font-weight		: bold;
+
+		}
+
+		&>[card-buttons] {
+
+			@include mx-flex-center-y;
+
+		}
+
+		&>[card-title]:empty,
+		&>[card-buttons]:empty {
+
+			display			: none;
+
+		}
+
+	}
+
+	& > main {
+
+		display		: flex;
+		overflow	: auto;
+		height		: 100%;
+		// padding		: var(--gap-sm);
+
+		@include mx-webkit-scrollbar;
+
+	}
+
+	& > footer {
+
+		@include mx-flex-center-y;
+
+		&:empty {
+
+			display		: none;
+
+		}
+
+	}
+
+}

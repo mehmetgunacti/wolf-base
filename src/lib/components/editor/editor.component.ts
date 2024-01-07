@@ -60,7 +60,7 @@ export class EditorComponent implements OnInit {
 	onPreviewOpen(): void {
 
 		// this.isPreview.set(!this.isPreview());
-		this.previewDialogRef = this.dialogService.open(this.previewTemplate, { width: '250px' });
+		this.previewDialogRef = this.dialogService.open(this.previewTemplate);
 
 	}
 
