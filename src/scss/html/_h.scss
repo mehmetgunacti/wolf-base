@@ -7,98 +7,58 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 
-	@extend %flex-center-y;
-	font-size		: var(--font-size-xxl);
-	margin-bottom	: var(--gap-xxl);
-
-	.material-symbols-outlined {
-
-		font-size		: inherit;
-		color			: inherit;
-		margin-right	: var(--gap-sm);
-
-	}
+	font-size		: var(--font-size-h1);
+	font-weight		: bold;
+	color			: hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / var(--col-primary-alp));
+	margin-bottom	: var(--gap);
 
 }
 
 h2 {
 
-	@extend %flex-center-y;
-	font-size		: var(--font-size-xl);
-	margin-bottom	: var(--gap-xl);
+	font-size		: var(--font-size-h2);
+	font-weight		: bold;
+	padding-bottom	: var(--gap-sm);
+	margin-bottom	: var(--gap);
 
-	.material-symbols-outlined {
-
-		font-size		: inherit;
-		color			: inherit;
-		margin-right	: var(--gap-sm);
-
-	}
+	border-bottom	: 1px solid hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+	transition		: border $transition;
 
 }
 
 h3 {
 
-	@extend %flex-center-y;
-	font-size		: var(--font-size-lg);
-	margin-bottom	: var(--gap-lg);
-
-	.material-symbols-outlined {
-
-		font-size		: inherit;
-		color			: inherit;
-		margin-right	: var(--gap-sm);
-
-	}
+	font-size		: var(--font-size-h3);
+	font-weight		: bold;
+	margin-bottom	: var(--gap-sm);
 
 }
 
 h4 {
 
-	@extend %flex-center-y;
-	font-size		: var(--font-size);
-	margin-bottom	: var(--gap);
-
-	.material-symbols-outlined {
-
-		font-size		: inherit;
-		color			: inherit;
-		margin-right	: var(--gap-xxs);
-
-	}
+	font-size		: var(--font-size-h4);
+	font-weight		: bold;
+	color			: hsl(var(--col-primary-hue) var(--col-primary-sat) calc(var(--col-primary-lig) + 3%) / var(--col-primary-alp));
+	margin-bottom	: var(--gap-sm);
 
 }
 
 h5 {
 
-	@extend %flex-center-y;
-	font-size		: var(--font-size-sm);
-	margin-bottom	: var(--gap-sm);
-
-	.material-symbols-outlined {
-
-		font-size		: inherit;
-		color			: inherit;
-		margin-right	: var(--gap-xxs);
-
-	}
+	font-size		: var(--font-size-h5);
+	font-weight		: bold;
+	font-style		: italic;
+	color			: hsl(var(--col-primary-hue) var(--col-primary-sat) calc(var(--col-primary-lig) + 3%) / var(--col-primary-alp));
+	margin-bottom	: var(--gap-xs);
 
 }
 
 h6 {
 
-	@extend %flex-center-y;
-	font-size		: var(--font-size-xs);
-	margin-bottom	: var(--gap-xs);
+	font-size		: var(--font-size-h6);
+	font-weight		: bold;
 	font-style		: italic;
 	color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
-
-	.material-symbols-outlined {
-
-		font-size		: inherit;
-		color			: inherit;
-		margin-right	: var(--gap-xxs);
-
-	}
+	margin-bottom	: var(--gap-xs);
 
 }
