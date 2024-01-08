@@ -6,9 +6,6 @@ import { BookmarkUIState, initialBookmarkUIState } from 'store/states/bookmark.s
 const reducer = createReducer(
 
 	initialBookmarkUIState,
-	on(bmActions.openAddBookmarkDialogSuccess, (state, { id }): BookmarkUIState => ({ ...state, editDialogOverlayId: id })),
-	on(bmActions.openEditBookmarkDialogSuccess, (state, { id }): BookmarkUIState => ({ ...state, editDialogOverlayId: id })),
-	on(bmActions.closeEditBookmarkDialogSuccess, (state): BookmarkUIState => ({ ...state, editDialogOverlayId: null })),
 	on(fromClipboardFailure, (state, { shaking }): BookmarkUIState => ({ ...state, shaking })),
 	on(bmActions.openAddBookmarkDialog, (state): BookmarkUIState => ({ ...state, editId: null })),
 	on(bmActions.openEditBookmarkDialog, (state, { id }): BookmarkUIState => ({ ...state, editId: id })),

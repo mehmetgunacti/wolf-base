@@ -1,4 +1,4 @@
-import { Bookmark, BookmarkQueryParams, Click, OVERLAY_ID, RemoteMetadata, SyncData, UUID } from '@lib';
+import { Bookmark, BookmarkQueryParams, Click, RemoteMetadata, SyncData, UUID } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // CRUD
@@ -48,19 +48,11 @@ export const loadAllRemoteMetadataSuccess	= createAction('[Bookmark] Load All Re
 
 // UI
 export const openAddBookmarkDialog			= createAction('[Bookmark] Open Add Dialog');
-export const openAddBookmarkDialogSuccess	= createAction('[Bookmark] Open Add Dialog Success', props<{ id: OVERLAY_ID }>());
-
 export const openEditBookmarkDialog			= createAction('[Bookmark] Open Edit Dialog', props<{ id: UUID }>());
-export const openEditBookmarkDialogSuccess	= createAction('[Bookmark] Open Edit Dialog Success', props<{ id: OVERLAY_ID }>());
-
 export const closeEditBookmarkDialog		= createAction('[Bookmark] Close Edit Dialog');
-export const closeEditBookmarkDialogSuccess	= createAction('[Bookmark] Close Edit Dialog Success');
 
 export const setSelectedId					= createAction('[Bookmark] Set Selected Id', props<{ id: UUID | null }>());
-
 export const setQueryParams					= createAction('[Bookmark] Set Query State', props<BookmarkQueryParams>());
-
-
 
 // TAGS
 export const togglePopular					= createAction('[Bookmark] Toggle Tag Popular', props<{ id: UUID }>());

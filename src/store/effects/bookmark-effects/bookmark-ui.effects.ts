@@ -1,14 +1,14 @@
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
-import { LocalRepositoryService, OVERLAY_ID, TAG_POPULAR, WOverlayService, commaSplit, toggleArrayItem } from '@lib';
+import { LocalRepositoryService, TAG_POPULAR, commaSplit, toggleArrayItem } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { BookmarkEditContainerComponent } from 'modules/bookmark/containers/bookmark-edit-container/bookmark-edit-container.component';
-import { from, of } from 'rxjs';
+import { from } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import * as bmActions from 'store/actions/bookmark.actions';
-import { selBookmarkOverlayId } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
 
 @Injectable()
 export class BookmarkUIEffects {
@@ -18,22 +18,21 @@ export class BookmarkUIEffects {
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 	private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 	private router: Router = inject(Router);
-	private overlayService: WOverlayService = inject(WOverlayService);
+	private dialogService: Dialog = inject(Dialog);
+
+	private dialogRef: DialogRef<null, BookmarkEditContainerComponent> | null = null;
 
 	openAddBookmarkDialog$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(bmActions.openAddBookmarkDialog, bmActions.openEditBookmarkDialog),
-			map(() => this.overlayService.open(
-				BookmarkEditContainerComponent,
-				{
-					cleanupFn: () => this.store.dispatch(bmActions.closeEditBookmarkDialog())
-				}
-			)),
-			map(id => bmActions.openAddBookmarkDialogSuccess({ id }))
+			map(() => {
+				this.dialogRef = this.dialogService.open(BookmarkEditContainerComponent);
+			})
 
-		)
+		),
+		{ dispatch: false }
 
 	);
 
@@ -47,13 +46,10 @@ export class BookmarkUIEffects {
 				bmActions.updateSuccess,
 				bmActions.moveToTrashSuccess
 			),
-			withLatestFrom(this.store.select(selBookmarkOverlayId)),
-			map(([, id]) => id),
-			filter((id): id is OVERLAY_ID => id !== null),
-			tap(id => this.overlayService.close(id)),
-			map(() => bmActions.closeEditBookmarkDialogSuccess())
+			map(() => this.dialogRef?.close())
 
-		)
+		),
+		{ dispatch: false }
 
 	);
 

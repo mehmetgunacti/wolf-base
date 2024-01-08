@@ -1,4 +1,4 @@
-import { Bookmark, Click, OVERLAY_ID, BookmarkQueryParams, RemoteMetadata, SyncData, UUID } from "@lib";
+import { Bookmark, BookmarkQueryParams, Click, RemoteMetadata, SyncData, UUID } from "@lib";
 
 export interface BookmarkModuleState {
 
@@ -20,10 +20,7 @@ export interface BookmarkEntitiesState {
 export interface BookmarkUIState {
 
 	queryParams: BookmarkQueryParams;
-
 	editId: UUID | null;
-	editDialogOverlayId: OVERLAY_ID | null;
-
 	shaking: boolean;
 
 }
@@ -48,7 +45,6 @@ export const initialBookmarkUIState: BookmarkUIState = {
 	},
 
 	editId: null,
-	editDialogOverlayId: null,
 	shaking: false
 
 };

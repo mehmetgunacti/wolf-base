@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
-import { LocalRepositoryService, RemoteRepositoryService, WOverlayService } from '@lib';
+import { LocalRepositoryService, RemoteRepositoryService } from '@lib';
 import { Store } from '@ngrx/store';
 import { BookmarkSyncService, SyncService } from 'lib/services/sync-service.interface';
 import { CustomErrorHandler, DexieLocalRepositoryServiceImpl, FirestoreRemoteRepositoryServiceImpl } from 'services';
 import { BookmarkSyncServiceImpl } from 'services/bookmark-sync.service';
 import { SyncServiceImpl } from 'services/sync.service';
 import * as bmActions from 'store/actions/bookmark.actions';
-import * as noteActions from 'store/actions/note.actions';
 import * as noteContentActions from 'store/actions/note-content.actions';
+import * as noteActions from 'store/actions/note.actions';
 
 export const routes: Routes = [
 
@@ -96,7 +96,6 @@ export const providers: Provider[] = [
 	{ provide: LOCAL_REPOSITORY_SERVICE, useClass: DexieLocalRepositoryServiceImpl },
 	{ provide: REMOTE_REPOSITORY_SERVICE, useClass: FirestoreRemoteRepositoryServiceImpl, deps: [Store, HttpClient] },
 	{ provide: SYNC_SERVICE, useClass: SyncServiceImpl, deps: [LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE] },
-	{ provide: BOOKMARK_SYNC_SERVICE, useClass: BookmarkSyncServiceImpl, deps: [LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE] },
-	{ provide: WOverlayService }
+	{ provide: BOOKMARK_SYNC_SERVICE, useClass: BookmarkSyncServiceImpl, deps: [LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE] }
 
 ];

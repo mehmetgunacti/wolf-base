@@ -11,13 +11,6 @@ export const selBookmarkMenuBadge = createSelector(
 
 );
 
-export const selBookmarkOverlayId = createSelector(
-
-	selBookmarkUIState,
-	state => state.editDialogOverlayId
-
-);
-
 export const selBookmarkShaking = createSelector(
 
 	selBookmarkUIState,
