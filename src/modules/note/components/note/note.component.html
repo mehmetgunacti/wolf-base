@@ -38,7 +38,7 @@
 
 	<div note_tags *ngIf="note.tags as tags">
 
-		<button *ngFor="let tag of tags" class="tag xs">{{ tag }}</button>
+		<button *ngFor="let tag of tags" class="tag xs" [routerLink]="['/notes']" [queryParams]="{ 'tags': tag }">{{ tag }}</button>
 
 	</div>
 
