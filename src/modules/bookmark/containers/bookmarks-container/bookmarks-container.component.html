@@ -5,7 +5,8 @@
 		[item]="bookmark"
 		(edit)="onEdit($event)"
 		(popular)="onPopular($event)"
-		(linkClick)="onClick($event)"/>
+		(linkClick)="onClick($event)"
+		[showDetails]="true"/>
 
 	<div *ngIf="bookmarks.length === 0" class="empty">{{ count$ | async }} bookmarks available</div>
 

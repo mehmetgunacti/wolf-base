@@ -27,12 +27,12 @@
 		</div>
 		<div bookmark-bottom *ngIf="showDetails">
 
-			<ng-container *ngFor="let url of item.urls">
+			<!-- <ng-container *ngFor="let url of item.urls">
 				<div bookmark-url *ngIf="!!url">{{ url }}</div>
-			</ng-container>
+			</ng-container> -->
 
 			<div bookmark-tags *ngIf="item.tags">
-				<button *ngFor="let tag of item.tags" class="tag">{{ tag }}</button>
+				<button *ngFor="let tag of item.tags" class="tag xs" [routerLink]="['/bookmarks']" [queryParams]="{ 'tags': tag }">{{ tag }}</button>
 			</div>
 
 		</div>
