@@ -10,7 +10,7 @@ import { ClickedBookmark } from 'lib/models';
 })
 export class BookmarkComponent {
 
-	@Input() item: ClickedBookmark | null | undefined;
+	@Input() bookmark: ClickedBookmark | null | undefined;
 	@Input() showDetails = false;
 	@Input() editable = true;
 	@Input() popularButton = true;
@@ -22,22 +22,22 @@ export class BookmarkComponent {
 
 	onEdit(): void {
 
-		if (this.item)
-			this.edit.emit(this.item.id);
+		if (this.bookmark)
+			this.edit.emit(this.bookmark.id);
 
 	}
 
 	onLinkClick(): void {
 
-		if (this.item)
-			this.linkClick.emit(this.item.id);
+		if (this.bookmark)
+			this.linkClick.emit(this.bookmark.id);
 
 	}
 
 	onPopular(): void {
 
-		if (this.item)
-			this.popular.emit(this.item.id);
+		if (this.bookmark)
+			this.popular.emit(this.bookmark.id);
 
 	}
 

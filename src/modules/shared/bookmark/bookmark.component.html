@@ -1,44 +1,44 @@
-<ng-container *ngIf="item">
+<ng-container *ngIf="bookmark as bm">
 
 	<div *ngIf="disabled" bookmark-overlay></div>
 	<div bookmark-image>
 
 		<img
 			id="bookmark-image"
-			src="{{ item.image || 'assets/placeholder.svg' }}"
-			title="{{ item.id }} : {{ item.title + '\r\n' + item.urls + '\r\n' }} #{{ item.clicks }}">
+			src="{{ bm.image || 'assets/placeholder.svg' }}"
+			title="{{ bm.id }} : {{ bm.title + '\r\n' + bm.urls + '\r\n' }} #{{ bm.clicks }}">
 
 	</div>
 	<div bookmark-right>
 
 		<div bookmark-top>
 
-			<a href="{{ item.urls }}" target="_blank" (click)="onLinkClick()">
+			<a href="{{ bm.urls }}" target="_blank" (click)="onLinkClick()">
 
-				<span bookmark-name>{{ item.name }}
+				<span bookmark-name>{{ bm.name }}
 					<sup>
 						<span class="material-symbols-outlined">open_in_new</span>
 					</sup>
 				</span><br>
-				<span bookmark-title>{{ item.title }}</span>
+				<span bookmark-title>{{ bm.title }}</span>
 
 			</a>
 
 		</div>
 		<div bookmark-bottom *ngIf="showDetails">
 
-			<!-- <ng-container *ngFor="let url of item.urls">
+			<!-- <ng-container *ngFor="let url of bm.urls">
 				<div bookmark-url *ngIf="!!url">{{ url }}</div>
 			</ng-container> -->
 
-			<div bookmark-tags *ngIf="item.tags">
-				<button *ngFor="let tag of item.tags" class="tag xs" [routerLink]="['/bookmarks']" [queryParams]="{ 'tags': tag }">{{ tag }}</button>
+			<div bookmark-tags *ngIf="bm.tags">
+				<button *ngFor="let tag of bm.tags" class="tag xs" [routerLink]="['/bookmarks']" [queryParams]="{ 'tags': tag }">{{ tag }}</button>
 			</div>
 
 		</div>
 
 	</div>
-	<a *ngIf="popularButton" href="javascript:void(0)" id="popularButton" title="Toggle 'popular'" (click)="onPopular()"><span class="material-symbols-outlined" [class.filled]="item.tags.includes('popular')">favorite</span></a>
+	<a *ngIf="popularButton" href="javascript:void(0)" id="popularButton" title="Toggle 'popular'" (click)="onPopular()"><span class="material-symbols-outlined" [class.filled]="bm.tags.includes('popular')">favorite</span></a>
 	<a *ngIf="editable" href="javascript:void(0)" id="editButton" title="Edit" (click)="onEdit()"><span class="material-symbols-outlined">edit</span></a>
 
 </ng-container>
