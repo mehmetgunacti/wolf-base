@@ -95,7 +95,8 @@ button {
 
 	&.small {
 
-		padding				: var(--gap-xxs) var(--gap-xxs);
+		font-size			: var(--font-size-xs);
+		padding				: var(--gap-xs);
 
 	}
 

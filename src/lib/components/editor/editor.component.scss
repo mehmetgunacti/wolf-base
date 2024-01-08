@@ -3,9 +3,24 @@
 @import 'mixins';
 @import 'components';
 
-[format_menu] {
+.code_menu {
 
-	@extend %flex-column;
+	max-height	: 20rem;
+	overflow-y	: auto;
+	@include mx-webkit-scrollbar;
+
+	fieldset {
+
+		@include mx-flex-column-start;
+		& > legend {
+
+			color		: hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / var(--col-primary-alp));
+			font-weight	: bold;
+			font-size	: var(--font-size-sm);
+
+		}
+
+	}
 
 }
 
@@ -26,11 +41,22 @@
 
 		}
 
+		// PREVIEW BUTTON
 		& > button:last-of-type {
 
-			// preview button
 			margin-left			: auto;
-			width				: 10rem;
+
+			& > span:last-child {
+
+				display	: none;
+
+				@include bigScreen {
+
+					display	: block;
+
+				}
+
+			}
 
 		}
 

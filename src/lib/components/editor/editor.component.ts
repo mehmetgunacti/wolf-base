@@ -1,9 +1,9 @@
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { CdkMenuTrigger } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, TemplateRef, ViewChild, WritableSignal, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild, WritableSignal, computed, inject, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Dialog, DialogRef, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
 import { formatBytes } from 'lib/utils';
-import { Observable, delay, interval, map, of, startWith, take, takeUntil, takeWhile, tap, timer } from 'rxjs';
+import { Observable, map, startWith, take, tap, timer } from 'rxjs';
 import { ClipboardService } from 'services';
 
 @Component({
@@ -31,7 +31,6 @@ export class EditorComponent implements OnInit {
 
 	// isPreview: WritableSignal<boolean> = signal(false);
 	btnImageShake: WritableSignal<boolean> = signal(false);
-
 
 	hasValue$!: Observable<boolean>;
 
@@ -71,7 +70,7 @@ export class EditorComponent implements OnInit {
 
 	}
 
-	@HostListener('keydown', ['$event'])
+	// @HostListener('keydown', ['$event'])
 	onKeydownHandler(event: KeyboardEvent) {
 
 		if (event.key == 'Tab') {
@@ -192,6 +191,24 @@ export class EditorComponent implements OnInit {
 
 		const s = '==';
 		this.updateEditor(s, 'wrap');
+
+	}
+
+	addInlineCode(): void {
+
+		const s = '`';
+		this.updateEditor(s, 'wrap');
+
+	}
+
+	addCodeBlock(lang: string): void {
+
+		// const selectElement = e.target as HTMLSelectElement;
+		// const lang = selectElement.value;
+		// selectElement.selectedIndex = 0;
+
+		const s = '\n```' + (lang) + '\n\n```';
+		this.updateEditor(s, 'replace');
 
 	}
 

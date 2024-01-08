@@ -32,12 +32,12 @@ pre {
 	@include mx-webkit-scrollbar;
 	transition	: $bg-transition;
 
-}
+	& > code {
 
-pre code {
+		background-color	: unset;
+		padding				: 0;
+		white-space			: pre;
 
-	background			: none;
-	padding				: 0;
-	white-space			: pre;
+	}
 
 }
