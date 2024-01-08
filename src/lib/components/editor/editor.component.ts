@@ -26,18 +26,18 @@ export class EditorComponent implements OnInit {
 
 	@Output() inputChanged: EventEmitter<string> = new EventEmitter();
 
-	content: WritableSignal<string | null> = signal('11111111111111111111111111111111');
+	content: WritableSignal<string | null> = signal(null);
 	contentSizeString = computed(() => formatBytes(this.content()?.length ?? 0));
 
 	// isPreview: WritableSignal<boolean> = signal(false);
 	btnImageShake: WritableSignal<boolean> = signal(false);
 
-	previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
 
 	hasValue$!: Observable<boolean>;
 
 	private clipboardService: ClipboardService = inject(ClipboardService);
 	private dialogService: Dialog = inject(Dialog);
+	private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
 
 	ngOnInit(): void {
 
