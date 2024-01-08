@@ -4,17 +4,20 @@
 :host {
 
 	@extend %flex-column;
+	gap		: var(--gap-sm);
 
 	[note_parents],
 	[note_children] {
 
-		& > a {
+		& > a,
+		& > [note-sub-title] {
 
 			@extend %flex-center-y;
 			padding				: var(--gap-xs);
 			border-radius		: var(--border-radius-sm);
 			text-decoration		: none;
 			font-size			: var(--font-size-sm);
+			gap					: var(--gap-xxs);
 			color				: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
 			transition			: $bg-transition;
 
@@ -24,6 +27,10 @@
 				font-size		: inherit;
 
 			}
+
+		}
+
+		& > a {
 
 			&:hover {
 

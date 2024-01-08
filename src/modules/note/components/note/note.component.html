@@ -1,4 +1,5 @@
-<div class="card" *ngIf="note">
+<ng-container *ngIf="note">
+<div class="card">
 
 	<div note_parents>
 
@@ -21,18 +22,7 @@
 
 	<div note_title>
 
-		<h2>{{ note.name }}</h2>
-
-	</div>
-
-	<div note_children *ngIf="children.length > 0">
-
-		<h5>Sub-Notes</h5>
-		<a *ngFor="let note of children" [routerLink]="['/notes', note.id]" tabindex="0">
-
-			<span>{{ note.name }}</span>
-
-		</a>
+		<h1>{{ note.name }}</h1>
 
 	</div>
 
@@ -50,3 +40,21 @@
 	</div>
 
 </div>
+<div class="card" note_children *ngIf="children.length > 0">
+
+	<span note-sub-title>
+		<span class="material-symbols-outlined">sticky_note_2</span>
+		<span>Sub-Notes</span>
+	</span>
+	<a	*ngFor="let note of children"
+		[routerLink]="['/notes', note.id]"
+		tabindex="0"
+		[style.margin-left.px]="15">
+
+		<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
+		<span>{{ note.name }}</span>
+
+	</a>
+
+</div>
+</ng-container>
