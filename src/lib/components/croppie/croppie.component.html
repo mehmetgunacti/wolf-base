@@ -2,7 +2,9 @@
 
 	<span id="close"
 		*ngIf="(imageLoaded$ | async) else placeholder"
-		(click)="unbindCroppie()"></span>
+		(click)="unbindCroppie()">
+		<span class="material-symbols-outlined">close</span>
+	</span>
 	<ng-template #placeholder>
 
 		<div *ngIf="(initialized$ | async); else notInitialized"

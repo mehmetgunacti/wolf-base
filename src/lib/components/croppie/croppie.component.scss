@@ -44,16 +44,19 @@
 			justify-content		: center;
 			z-index				: $z-index-croppie-close-btn;
 			cursor				: pointer;
-			color				: white;
+			color				: hsl(0 0% 18% / 0.8);
 			background-color	: white;
 			border				: 6px solid var(--warn);
 			border-radius		: 80px;
 			width				: 20px;
 			height				: 20px;
 
-			font-size			: 10px;
-			font-family			: sans-serif;
-			font-weight			: bold;
+			& > span {
+
+				font-size		: var(--font-size-sm);
+				font-weight		: bold;
+
+			}
 
 		}
 
