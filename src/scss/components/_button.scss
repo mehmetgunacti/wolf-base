@@ -149,7 +149,8 @@ button {
 
 		&.small {
 
-			padding			: var(--gap-xxs);
+			padding			: var(--gap-xs);
+			padding			: var(--gap-xxs) var(--gap-sm);
 
 		}
 
