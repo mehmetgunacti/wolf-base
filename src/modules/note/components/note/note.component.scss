@@ -59,20 +59,11 @@
 	[note_info] {
 
 		@extend %flex-center-end;
-		color				: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
 
-		& > span:first-child {
+		& > span {
 
-			font-size		: var(--font-size-sm);
-			color			: inherit;
-			margin-right	: var(--gap-xxs);
-
-		}
-
-		& > span:last-child {
-
-			font-size		: var(--font-size-xs);
-			color			: inherit;
+			color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+			font-size	: var(--font-size-xs);
 
 		}
 

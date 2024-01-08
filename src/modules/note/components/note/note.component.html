@@ -34,8 +34,7 @@
 
 	<div note_info>
 
-		<span class="material-symbols-outlined">schedule</span>
-		<span>{{ note.modified | date:'EEEE dd.MM.yyyy hh:mm' }} ({{ note.modified | timePast }})</span>
+		<span [title]="note.modified | date:'EEEE dd.MM.yyyy hh:mm'">Last edited: {{ note.modified | timePast }}</span>
 
 	</div>
 
