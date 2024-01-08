@@ -5,6 +5,7 @@
 :host {
 
 	@extend %flex-column;
+	height			: 100%;
 	gap				: var(--gap-sm);
 
 	& > div[bookmark-wrapper] {
@@ -25,7 +26,7 @@
 		display				: block;
 		overflow-y			: auto;
 		flex				: 1;
-		padding-top			: 1rem;
+		padding-top			: var(--gap-xxl);
 
 		@include mx-webkit-scrollbar;
 
