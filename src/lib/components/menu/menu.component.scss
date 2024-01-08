@@ -1,11 +1,12 @@
 @import 'helper';
 @import 'variables';
+@import 'mixins';
 
 :host {
 
 	& > a {
 
-		@extend %flex-center-y;
+		@include mx-flex-center-y;
 		height				: 6rem;
 		border-radius		: var(--border-radius);
 		cursor				: pointer;
@@ -14,10 +15,10 @@
 
 		&.active {
 
-			& > [icon] > button {
+			& > [icon] {
 
 				background-color	: hsl(var(--col-accent-hue) var(--col-accent-sat) var(--col-accent-lig)/var(--col-accent-alp));
-				border-radius		: var(--border-radius-sm);
+				border-radius		: 25px;
 
 			}
 
@@ -29,33 +30,29 @@
 
 		}
 
-		&>div[icon] {
+		& > [icon] {
 
-			@extend %flex-center-center;
-			width			: 5rem;
-
-			&>span {
-
-				font-size	: 2.2rem;
-
-			}
+			@include mx-flex-center-center;
+			padding		: var(--gap);
+			margin		: var(--gap-sm);
+			font-size	: var(--font-size-h2);
 
 		}
 
-		&>span[label] {
+		& > [label] {
 
-			flex 			: 1;
-			font-size		: var(--font-size-h3);
+			flex 		: 1;
+			font-size	: var(--font-size-h4);
 
 		}
 
-		&>div[badge] {
+		& > [badge] {
 
-			@extend %flex-end-center;
-			font-size			: 1.2rem;
+			@include mx-flex-center-center;
+			font-size			: var(--font-size-sm);
 			margin-right		: var(--gap);
 
-			&>span {
+			& > span {
 
 				padding				: var(--gap) var(--gap);
 				border-radius		: var(--border-radius);
