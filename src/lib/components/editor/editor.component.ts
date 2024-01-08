@@ -174,6 +174,20 @@ export class EditorComponent implements OnInit {
 
 	}
 
+	addSub(): void {
+
+		const s = '~';
+		this.updateEditor(s, 'wrap');
+
+	}
+
+	addSup(): void {
+
+		const s = '^';
+		this.updateEditor(s, 'wrap');
+
+	}
+
 	private updateEditor(text: string, action: 'replace' | 'wrap') {
 
 		const textarea = this.editor.nativeElement;
