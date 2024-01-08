@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AutofocusDirective, BookmarkComponent, InputModule, NoDataPipe, PortalComponent, SanitizeHtmlModule, SelectedTagsComponent, TimePastPipe, ToastModule } from '@lib';
+import { AutofocusDirective, InputModule, NoDataPipe, PortalComponent, SanitizeHtmlModule, SelectedTagsComponent, TimePastPipe, ToastModule } from '@lib';
 import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 import { SelectModule } from 'lib/components/select/select.module';
 import { TagCloudModule } from 'lib/components/tag-cloud/tag-cloud.module';
+import { BookmarkComponent } from './bookmark/bookmark.component';
 
 @NgModule({
 	declarations: [
