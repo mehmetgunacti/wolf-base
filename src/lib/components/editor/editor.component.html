@@ -1,121 +1,14 @@
-<div buttons>
+<div buttons cdkMenuBar>
 
+	<!-- STYLE BUTTON -->
 	<button
 		class="icon-only"
 		[cdkMenuTriggerFor]="format_menu"
 		title="Format Options"
-		tabindex="0">
+		tabindex="0"
+		cdkMenuItem>
 		<span class="material-symbols-outlined">style</span>
 	</button>
-	<ng-template #format_menu>
-
-		<div class="card darker" cdkMenu>
-
-			<div>
-
-				<!-- BOLD BUTTON -->
-				<button
-					class="icon-only"
-					(click)="addBold()"
-					title="Bold"
-					tabindex="0"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_bold</span>
-				</button>
-
-				<!-- ITALIC BUTTON -->
-				<button
-					class="icon-only"
-					(click)="addItalic()"
-					title="Italic"
-					tabindex="0"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_italic</span>
-				</button>
-
-				<!-- STRIKETHROUGH BUTTON -->
-				<button
-					class="icon-only"
-					(click)="addStrikethrough()"
-					title="Strikethrough"
-					tabindex="0"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_strikethrough</span>
-				</button>
-
-			</div>
-
-			<div>
-
-				<!-- ALIGN CENTER BUTTON -->
-				<button
-					class="icon-only"
-					(click)="addAlignCenter()"
-					title="Align Center"
-					tabindex="0"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_align_center</span>
-				</button>
-
-				<!-- ALIGN RIGHT BUTTON -->
-				<button
-					class="icon-only"
-					(click)="addAlignRight()"
-					title="Align Right"
-					tabindex="0"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_align_right</span>
-				</button>
-
-				<!-- ALIGN JUSTIFY BUTTON -->
-				<button
-					class="icon-only"
-					(click)="addAlignJustify()"
-					title="Align Justify"
-					tabindex="0"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_align_justify</span>
-				</button>
-
-			</div>
-
-			<div>
-
-				<!-- SUB BUTTON -->
-				<button
-					class="icon-only"
-					(click)="addSub()"
-					title="Subscript (H2O)"
-					tabindex="0"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">subscript</span>
-				</button>
-
-				<!-- SUP BUTTON -->
-				<button
-					class="icon-only"
-					(click)="addSup()"
-					title="Superscript (E=mc2)"
-					tabindex="0"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">superscript</span>
-				</button>
-
-				<!-- HIGHLIGHT BUTTON -->
-				<button
-					class="icon-only"
-					(click)="addHighlight()"
-					title="Highlight"
-					tabindex="0"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_ink_highlighter</span>
-				</button>
-
-			</div>
-
-		</div>
-
-	</ng-template>
 
 	<!-- DIVIDER -->
 	<div class="v-divider"></div>
@@ -125,7 +18,8 @@
 		class="icon-only"
 		(click)="addEmptyTask()"
 		title="Add Empty Task"
-		tabindex="0">
+		tabindex="0"
+		cdkMenuItem>
 		<span class="material-symbols-outlined">check_box</span>
 	</button>
 
@@ -134,7 +28,8 @@
 		class="icon-only"
 		[cdkMenuTriggerFor]="table_menu"
 		title="Add Table"
-		tabindex="0">
+		tabindex="0"
+		cdkMenuItem>
 		<span class="material-symbols-outlined">table</span>
 	</button>
 	<ng-template #table_menu>
@@ -156,7 +51,8 @@
 		(click)="addImage(btnImage)"
 		title="Image from Clipboard"
 		tabindex="0"
-		[class.shake]="btnImageShake()">
+		[class.shake]="btnImageShake()"
+		cdkMenuItem>
 		<span class="material-symbols-outlined">image</span>
 	</button>
 
@@ -165,174 +61,27 @@
 		class="icon-only"
 		(click)="addInlineCode()"
 		title="Inline Code"
-		tabindex="0">
+		tabindex="0"
+		cdkMenuItem>
 		<span class="material-symbols-outlined">code</span>
 	</button>
 
+	<!-- CODE BLOCKS BUTTON -->
 	<button
 		class="icon-only"
 		[cdkMenuTriggerFor]="code_menu"
 		title="Code Block"
-		tabindex="0">
+		tabindex="0"
+		cdkMenuItem>
 		<span class="material-symbols-outlined">code_blocks</span>
 	</button>
-	<ng-template #code_menu>
-
-		<div class="card darker code_menu" cdkMenu>
-
-			<fieldset>
-				<legend>Frequent</legend>
-
-				<button class="icon-only small" (click)="addCodeBlock('')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>Empty Block</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('java')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>java</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('typescript')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>typescript</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('javascript')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>javascript</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('scss')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>scss</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('bash')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>bash</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('sql')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>sql</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('xml')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>xml</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('yaml')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>yaml</span>
-				</button>
-
-			</fieldset>
-
-			<fieldset>
-				<legend>Other</legend>
-
-				<button class="icon-only small" (click)="addCodeBlock('asciidoc')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>asciidoc</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('autohotkey')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>autohotkey</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('c')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>c</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('cpp')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>cpp</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('css')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>css</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('dockerfile')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>dockerfile</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('gradle')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>gradle</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('http')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>http</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('ini')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>ini</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('json')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>json</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('kotlin')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>kotlin</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('markdown')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>markdown</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('powershell')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>powershell</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('properties')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>properties</span>
-				</button>
-				<button class="icon-only small" (click)="addCodeBlock('python')" tabindex="0" cdkMenuItem>
-					<span class="material-symbols-outlined small">chevron_right</span>
-					<span>python</span>
-				</button>
-
-			</fieldset>
-
-		</div>
-
-	</ng-template>
-
-	<!-- CODE BUTTON -->
-	<!-- <select (change)="addCodeBlock('')" tabindex="0">
-		<option value="" disabled selected hidden>Code Block</option>
-
-		<optgroup label="Frequent">
-			<option value="">Empty Block</option>
-			<option value="java">java</option>
-			<option value="typescript">typescript</option>
-			<option value="javascript">javascript</option>
-			<option value="scss">scss</option>
-			<option value="bash">bash</option>
-			<option value="sql">sql</option>
-			<option value="xml">xml</option>
-			<option value="yaml">yaml</option>
-		</optgroup>
-
-		<optgroup label="Other">
-			<option value="asciidoc">asciidoc</option>
-			<option value="autohotkey">autohotkey</option>
-			<option value="c">c</option>
-			<option value="cpp">cpp</option>
-			<option value="css">css</option>
-			<option value="dockerfile">dockerfile</option>
-			<option value="gradle">gradle</option>
-			<option value="http">http</option>
-			<option value="ini">ini</option>
-			<option value="json">json</option>
-			<option value="kotlin">kotlin</option>
-			<option value="markdown">markdown</option>
-			<option value="powershell">powershell</option>
-			<option value="properties">properties</option>
-			<option value="python">python</option>
-		</optgroup>
-
-	</select> -->
 
 	<!-- PREVIEW BUTTON -->
 	<button
 		class="icon-only"
 		(click)="onPreviewOpen()"
-		tabindex="0">
+		tabindex="0"
+		cdkMenuItem>
 		<span class="material-symbols-outlined">live_tv</span>
 		<span>Preview</span>
 	</button>
@@ -371,5 +120,231 @@
 		</ng-container>
 
 	</w-overlay-container>
+
+</ng-template>
+
+<ng-template #format_menu>
+
+	<div class="card darker" cdkMenu>
+
+		<div>
+
+			<!-- BOLD BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addBold()"
+				title="Bold"
+				tabindex="0"
+				cdkMenuItem>
+				<span class="material-symbols-outlined">format_bold</span>
+			</button>
+
+			<!-- ITALIC BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addItalic()"
+				title="Italic"
+				tabindex="0"
+				cdkMenuItem>
+				<span class="material-symbols-outlined">format_italic</span>
+			</button>
+
+			<!-- STRIKETHROUGH BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addStrikethrough()"
+				title="Strikethrough"
+				tabindex="0"
+				cdkMenuItem>
+				<span class="material-symbols-outlined">format_strikethrough</span>
+			</button>
+
+		</div>
+
+		<div>
+
+			<!-- ALIGN CENTER BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addAlignCenter()"
+				title="Align Center"
+				tabindex="0"
+				cdkMenuItem>
+				<span class="material-symbols-outlined">format_align_center</span>
+			</button>
+
+			<!-- ALIGN RIGHT BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addAlignRight()"
+				title="Align Right"
+				tabindex="0"
+				cdkMenuItem>
+				<span class="material-symbols-outlined">format_align_right</span>
+			</button>
+
+			<!-- ALIGN JUSTIFY BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addAlignJustify()"
+				title="Align Justify"
+				tabindex="0"
+				cdkMenuItem>
+				<span class="material-symbols-outlined">format_align_justify</span>
+			</button>
+
+		</div>
+
+		<div>
+
+			<!-- SUB BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addSub()"
+				title="Subscript (H2O)"
+				tabindex="0"
+				cdkMenuItem>
+				<span class="material-symbols-outlined">subscript</span>
+			</button>
+
+			<!-- SUP BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addSup()"
+				title="Superscript (E=mc2)"
+				tabindex="0"
+				cdkMenuItem>
+				<span class="material-symbols-outlined">superscript</span>
+			</button>
+
+			<!-- HIGHLIGHT BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addHighlight()"
+				title="Highlight"
+				tabindex="0"
+				cdkMenuItem>
+				<span class="material-symbols-outlined">format_ink_highlighter</span>
+			</button>
+
+		</div>
+
+	</div>
+
+</ng-template>
+
+<ng-template #code_menu>
+
+	<div class="card darker code_menu" cdkMenu>
+
+		<fieldset>
+			<legend>Frequent</legend>
+
+			<button class="icon-only small" (click)="addCodeBlock('')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>Empty Block</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('java')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>java</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('typescript')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>typescript</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('javascript')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>javascript</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('scss')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>scss</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('bash')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>bash</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('sql')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>sql</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('xml')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>xml</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('yaml')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>yaml</span>
+			</button>
+
+		</fieldset>
+
+		<fieldset>
+			<legend>Other</legend>
+
+			<button class="icon-only small" (click)="addCodeBlock('asciidoc')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>asciidoc</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('autohotkey')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>autohotkey</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('c')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>c</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('cpp')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>cpp</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('css')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>css</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('dockerfile')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>dockerfile</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('gradle')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>gradle</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('http')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>http</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('ini')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>ini</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('json')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>json</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('kotlin')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>kotlin</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('markdown')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>markdown</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('powershell')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>powershell</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('properties')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>properties</span>
+			</button>
+			<button class="icon-only small" (click)="addCodeBlock('python')" tabindex="0" cdkMenuItem>
+				<span class="material-symbols-outlined small">chevron_right</span>
+				<span>python</span>
+			</button>
+
+		</fieldset>
+
+	</div>
 
 </ng-template>
