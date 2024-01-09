@@ -5,10 +5,10 @@ button {
 
 	--button-width				: 9rem;
 
-	--button-bg-hue				: var(--col-info-hue);
-	--button-bg-sat				: var(--col-info-sat);
-	--button-bg-lig				: var(--col-info-lig);
-	--button-bg-alp				: var(--col-info-alp);
+	--button-bg-hue				: 215deg;
+	--button-bg-sat				: 65%;
+	--button-bg-lig				: 30%;
+	--button-bg-alp				: 1;
 
 	position					: relative;
 	display						: inline-flex;
