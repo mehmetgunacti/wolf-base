@@ -21,7 +21,7 @@ h2 {
 	padding-bottom	: var(--gap-sm);
 	margin-bottom	: var(--gap-xxl);
 
-	border-bottom	: 1px solid hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+	border-bottom	: 2px solid hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / var(--col-primary-alp));
 	transition		: border $transition;
 
 }

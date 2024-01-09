@@ -13,23 +13,23 @@
 
 		@include mx-flex-space-between-center;
 
-		&>[card-title] {
+		& > [card-title] {
 
 			@include mx-flex-center-y;
 			padding			: var(--gap-sm);
-			font-size		: 2rem;
+			font-size		: var(--font-size-h2);
 			font-weight		: bold;
 
 		}
 
-		&>[card-buttons] {
+		& > [card-buttons] {
 
 			@include mx-flex-center-y;
 
 		}
 
-		&>[card-title]:empty,
-		&>[card-buttons]:empty {
+		& > [card-title]:empty,
+		& > [card-buttons]:empty {
 
 			display			: none;
 
@@ -42,7 +42,7 @@
 		display		: block;
 		overflow	: auto;
 		height		: 100%;
-		// padding		: var(--gap-sm);
+		padding		: var(--gap-xs);
 
 		@include mx-webkit-scrollbar;
 

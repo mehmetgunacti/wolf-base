@@ -42,21 +42,21 @@
 		content						: "";
 		position					: absolute;
 		left						: 0px;
-		top							: -3px;
+		top							: 0px;
 		pointer-events				: none;
 		display						: none;
 
-		padding						: 6px 0px 7px 0px;
-		margin						: 0px 0px 0px 4px;
+		padding						: 4px 0px 3px 0px;
+		margin						: 2px 0px 0px 5px;
 
-		transform					: rotate(34deg);
+		transform					: rotate(38deg);
 
-		height						: 21px;
-		width						: 11px;
+		height						: 15px;
+		width						: 10px;
 
-		border-right-width			: 5px;
+		border-right-width			: 6px;
 		border-right-style			: solid;
-		border-bottom-width			: 5px;
+		border-bottom-width			: 6px;
 		border-bottom-style			: solid;
 
 		border-bottom-right-radius	: 2px;

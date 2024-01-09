@@ -1,38 +1,92 @@
 table {
 
 	width				: 100%;
-	border				: none;
-	border-collapse		: collapse;
-	border-spacing		: 0;
 	text-align			: left;
+	white-space			: nowrap;
+	margin-bottom		: var(--gap);
 
 	display				: block;
     overflow-x			: auto;
 
-}
+	border				: none;
+	border-collapse		: collapse;
+	border-spacing		: 0;
 
-table.striped tr:nth-of-type(2n) {
+	& > thead {
 
-	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+		background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+		border-width		: 2px;
+		border-style		: solid;
+		border-color		: transparent;
+		border-bottom-color	: hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / calc(var(--col-primary-alp) - 0.3));
 
-}
+		& > tr:first-child {
 
-td,
-th {
+			& > th:first-child {
 
-	vertical-align		: middle;
-	padding				: var(--gap);
+				border-top-left-radius	: var(--border-radius-sm);
 
-}
+			}
 
-thead {
+			& > th:last-child {
 
-	border-bottom		: 1px solid hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+				border-top-right-radius	: var(--border-radius-sm);
 
-}
+			}
 
-tfoot {
+		}
 
-	border-top			: 1px solid hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+	}
+
+	& > tbody {
+
+		background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 1%) / var(--col-bg-panel-alp));
+
+		& > tr {
+
+			border-bottom	: 1px solid hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) - 1%)/var(--col-bg-panel-alp));
+
+			&:last-child {
+
+				border-bottom	: 0;
+
+				& > td:first-child {
+
+					border-bottom-left-radius	: var(--border-radius-sm);
+
+				}
+
+				& > td:last-child {
+
+					border-bottom-right-radius	: var(--border-radius-sm);
+
+				}
+
+			}
+
+		}
+
+	}
+
+	td,
+	th {
+
+		vertical-align		: middle;
+		padding				: var(--gap) var(--gap-lg);
+		white-space			: nowrap;
+
+	}
+
+	&.striped > tbody > tr:nth-of-type(2n) {
+
+		background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+
+	}
+
+	& > tfoot {
+
+		border-top			: 2px solid hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+
+	}
 
 }

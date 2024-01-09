@@ -28,6 +28,7 @@ pre {
 	padding				: var(--gap);
 	border-radius		: var(--border-radius-sm);
 	overflow			: auto;
+	margin-bottom		: var(--gap);
 
 	@include mx-webkit-scrollbar;
 	transition	: $bg-transition;

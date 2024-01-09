@@ -1,5 +1,8 @@
 hr {
 
-	border-top	: 1px solid hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+	margin-top		: var(--gap-xs);
+	height			: var(--gap);
+	border			: 0;
+	border-top		: 1px solid hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig)/var(--col-primary-alp));
 
 }
