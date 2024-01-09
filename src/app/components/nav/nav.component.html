@@ -1,6 +1,7 @@
 <w-menu [items]="(menuItems$ | async) ?? []"></w-menu>
 <div bottom-buttons>
 
+	<!-- SETTINGS BUTTON -->
 	<button
 		class="icon-only rounded"
 		routerLink="/settings"
@@ -9,6 +10,7 @@
 		styleClass="p-button-rounded p-button-text"
 		title="Settings"><span class="material-symbols-outlined">settings</span></button>
 
+	<!-- CLOUD TASKS BUTTON -->
 	<div class="badge-container" *ngIf="(cloudTasks$ | async) as cloudTasks">
 		<button
 			class="icon-only rounded"
@@ -20,6 +22,7 @@
 		<span *ngIf="cloudTasks.length > 0" class="badge">{{ cloudTasks.length }}</span>
 	</div>
 
+	<!-- DATABASE BUTTON -->
 	<button
 		class="icon-only rounded"
 		routerLink="/database"
@@ -27,6 +30,7 @@
 		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
 		title="Database"><span class="material-symbols-outlined">database</span></button>
 
+	<!-- LOGS BUTTON -->
 	<button
 		class="icon-only rounded"
 		routerLink="/logs"
@@ -34,6 +38,7 @@
 		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
 		title="View Logs"><span class="material-symbols-outlined">history</span></button>
 
+	<!-- SWITCH THEME BUTTON -->
 	<button
 		class="icon-only rounded"
 		(click)="onSwitchTheme()"
