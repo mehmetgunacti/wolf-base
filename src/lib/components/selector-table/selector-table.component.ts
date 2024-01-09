@@ -1,5 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { hasModifierKey } from '@angular/cdk/keycodes';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Renderer2, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
 import { createArray } from 'lib/utils';
+
+function parseId(id: string): number[] {
+
+	return id.substring(1).split('_').map(Number);
+
+}
 
 @Component({
 	selector: 'w-selector-table',
@@ -7,7 +14,7 @@ import { createArray } from 'lib/utils';
 	styleUrl: 'selector-table.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectorTableComponent {
+export class SelectorTableComponent implements AfterViewInit {
 
 	_rows: WritableSignal<number> = signal(3);
 	_cols: WritableSignal<number> = signal(4);
@@ -24,7 +31,15 @@ export class SelectorTableComponent {
 
 	@Output() result: EventEmitter<string> = new EventEmitter<string>();
 
-	onCreateTable(col: number, row: number): void {
+	private renderer: Renderer2 = inject(Renderer2);
+
+	ngAfterViewInit(): void {
+
+		this.setFocus(1, 1);
+
+	}
+
+	onClick(col: number, row: number): void {
 
 		const newLine = '\n';
 
@@ -50,6 +65,48 @@ export class SelectorTableComponent {
 
 		}
 		this.result.emit(output + newLine);
+
+	}
+
+	onKeydown(event: KeyboardEvent): void {
+
+		event.preventDefault();
+		if (hasModifierKey(event)) // ctrl, shift etc.
+			return;
+
+		const anchor: HTMLAnchorElement = event.target as HTMLAnchorElement;
+		const [col, row] = parseId(anchor.id);
+
+		switch (event.key) {
+
+			case "Enter":
+				this.onClick(col, row);
+				break;
+
+			case "ArrowUp":
+				this.setFocus(col, row === 1 ? this._rows() : row - 1);
+				break;
+
+			case "ArrowDown":
+				this.setFocus(col, row === this._rows() ? 1 : row + 1);
+				break;
+
+			case "ArrowLeft":
+				this.setFocus(col === 1 ? this._cols() : col - 1, row);
+				break;
+
+			case "ArrowRight":
+				this.setFocus(col === this._cols() ? 1 : col + 1, row);
+				break;
+
+		}
+
+	}
+
+	setFocus(col: number, row: number): void {
+
+		const element = this.renderer.selectRootElement(`#_${col}_${row}`);
+		setTimeout(() => element.focus(), 0);
 
 	}
 

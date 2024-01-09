@@ -2,15 +2,22 @@
 
 	<div #display>[select]</div>
 	<div table-selectors>
+
 		@for (row of _rowsArray(); track $index;) {
 
 			@for (col of _colsArray(); track $index;) {
 
-				<div (click)="onCreateTable(col, row)" (mouseover)="display.innerHTML=col + ' x ' + row;"></div>
+				<a	tabindex="0"
+					[id]="'_' + col + '_' + row"
+					(click)="onClick(col, row)"
+					(keydown)="onKeydown($event);"
+					(focus)="display.innerHTML=col + ' x ' + row;"
+					(mouseover)="display.innerHTML=col + ' x ' + row;"></a>
 
 			}
 
 		}
+
 	</div>
 
 </div>

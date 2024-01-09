@@ -32,17 +32,6 @@
 		cdkMenuItem>
 		<span class="material-symbols-outlined">table</span>
 	</button>
-	<ng-template #table_menu>
-
-		<div cdkMenu>
-			<w-selector-table
-				[rows]="6"
-				[cols]="7"
-				(result)="addTable($event)"
-				cdkMenuItem/>
-		</div>
-
-	</ng-template>
 
 	<!-- IMAGE FROM CLIPBOARD BUTTON -->
 	<button
@@ -120,6 +109,17 @@
 		</ng-container>
 
 	</w-overlay-container>
+
+</ng-template>
+
+<ng-template #table_menu>
+
+	<div cdkMenu>
+		<w-selector-table
+			[rows]="6"
+			[cols]="7"
+			(result)="addTable($event)"/>
+	</div>
 
 </ng-template>
 
