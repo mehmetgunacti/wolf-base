@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({ name: 'timePast' })
@@ -28,11 +29,14 @@ export class TimePastPipe implements PipeTransform {
 			return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
 
 		const diffInMonths = Math.floor(diffInDays / 30);
-		if (diffInMonths < 12)
+		if (diffInMonths < 3)
 			return `${diffInMonths} month${diffInMonths > 1 ? 's' : ''} ago`;
 
-		const diffInYears = Math.floor(diffInMonths / 12);
-		return `${diffInYears} year${diffInYears > 1 ? 's' : ''} ago`;
+		const datePipeFormatted = new DatePipe('en-US').transform(utcString, 'EEEE dd.MM.yyyy hh:mm');
+		return datePipeFormatted ?? utcString;
+
+		// const diffInYears = Math.floor(diffInMonths / 12);
+		// return `${diffInYears} year${diffInYears > 1 ? 's' : ''} ago`;
 
 	}
 
