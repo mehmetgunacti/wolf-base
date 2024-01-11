@@ -41,7 +41,7 @@
 </div>
 <div class="card" note_children *ngIf="children.length > 0">
 
-	<div note_nested>Nested Notes</div>
+	<div note_nested>Child Notes</div>
 	<a	*ngFor="let note of children"
 		[routerLink]="['/notes', note.id]"
 		tabindex="0"
