@@ -41,10 +41,7 @@
 </div>
 <div class="card" note_children *ngIf="children.length > 0">
 
-	<span note-sub-title>
-		<span class="material-symbols-outlined">sticky_note_2</span>
-		<span>Sub-Notes</span>
-	</span>
+	<div note_nested>Nested Notes</div>
 	<a	*ngFor="let note of children"
 		[routerLink]="['/notes', note.id]"
 		tabindex="0"

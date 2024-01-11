@@ -50,6 +50,14 @@
 
 	}
 
+	[note_nested] {
+
+		font-size	: var(--font-size-h5);
+    	font-weight	: bold;
+	    color		: fn-hsl(primary);
+
+	}
+
 	[note_tags] {
 
 		@extend %flex-center-end;
