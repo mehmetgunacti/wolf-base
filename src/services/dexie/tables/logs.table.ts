@@ -12,19 +12,20 @@ export class DexieLogsLocalRepositoryImpl implements LogsLocalRepository {
 
 	}
 
-	async list(params?: { category?: LogCategory; entityId?: UUID, limit?: number }): Promise<LogMessage[]> {
+	async list(params: { categories?: LogCategory[]; entityId?: UUID | null, limit: number }): Promise<LogMessage[]> {
 
-		const limit = params?.limit || 100;
-		const { entityId, category } = params ?? {};
+		const { entityId, categories, limit } = params;
 
-		if (entityId && category)
-			return await this.db.logs.where('entityId').equals(entityId).and(log => log.category === category).reverse().sortBy(':id');
-
-		if (category)
-			return await this.db.logs.where('category').equals(category).limit(limit).reverse().sortBy(':id');
+		// todo:
+		// if (entityId && category)
+		//	return await this.db.logs.where('entityId').equals(entityId).and(log => log.category === category).reverse().sortBy(':id');
 
 		if (entityId)
 			return await this.db.logs.where('entityId').equals(entityId).reverse().sortBy(':id');
+
+		// todo: only first category is used
+		if (categories && categories.length > 0)
+			return await this.db.logs.where('category').equals(categories[0]).limit(limit).reverse().sortBy(':id');
 
 		return await this.db.logs.limit(limit).reverse().sortBy(':id');
 

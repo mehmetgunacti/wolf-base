@@ -1,14 +1,14 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { loadLogsSuccess } from "store/actions/logs.actions";
-import { LogsEntriesState, initialLogsEntriesState } from "store/states/logs.state";
+import { loadSuccess } from "store/actions/logs.actions";
+import { Logs_EntriesState, initialLogsEntriesState } from "store/states/logs.state";
 
 const reducer = createReducer(
 
     initialLogsEntriesState,
-    on(loadLogsSuccess, (state, { logs }): LogsEntriesState => ({ ...state, logs: [...logs] }))
+    on(loadSuccess, (state, { logs }): Logs_EntriesState => ({ ...state, logs: [...logs] }))
 
 );
 
-export function logsEntriesReducer(state: LogsEntriesState | undefined, action: Action): LogsEntriesState {
+export function logsEntriesReducer(state: Logs_EntriesState | undefined, action: Action): Logs_EntriesState {
     return reducer(state, action);
 }

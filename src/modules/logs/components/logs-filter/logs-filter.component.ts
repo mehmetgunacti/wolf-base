@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LogCategory, UUID } from 'lib';
 import { Subscription, filter } from 'rxjs';
@@ -16,7 +16,11 @@ export class LogsFilterComponent implements OnChanges, OnDestroy {
 	fcSearch = new FormControl('');
 	subscription: Subscription = new Subscription();
 
-	// @Input() selectedCategory: LogCategory | null = null;
+	@Input() set selectedId(id: UUID | null) {
+
+		this.fcSearch.setValue(id, { emitEvent: false });
+
+	}
 
 	@Output() category: EventEmitter<LogCategory> = new EventEmitter();
 	@Output() entityId: EventEmitter<UUID> = new EventEmitter();

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { LogCategory, LogMessage } from 'lib';
+import { LogMessage, UUID } from 'lib';
 import { Observable } from 'rxjs';
-import { loadLogs } from 'store/actions/logs.actions';
-import { selLogsAll } from 'store/selectors/logs.selectors';
+import { refresh } from 'store/actions/logs.actions';
+import { selLogs_allEntries, selLogs_selectedId } from 'store/selectors/logs.selectors';
 
 @Component({
 	selector: 'app-logs-list-container',
@@ -16,16 +16,18 @@ export class LogsListContainerComponent {
 	private store: Store = inject(Store);
 
 	logMessages$: Observable<LogMessage[]>;
+	selectedId$: Observable<UUID | null>;
 
 	constructor() {
 
-		this.logMessages$ = this.store.select(selLogsAll);
+		this.logMessages$ = this.store.select(selLogs_allEntries);
+		this.selectedId$ = this.store.select(selLogs_selectedId);
 
 	}
 
 	onRefresh(): void {
 
-		this.store.dispatch(loadLogs({ category: LogCategory.notification }));
+		this.store.dispatch(refresh());
 
 	}
 

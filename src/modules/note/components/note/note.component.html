@@ -34,7 +34,7 @@
 
 	<div note_info>
 
-		<span [title]="note.modified | date:'EEEE dd.MM.yyyy hh:mm'">Last edited: {{ note.modified | timePast }}</span>
+		<span [title]="note.modified | date:'EEEE dd.MM.yyyy hh:mm'">Last edited: {{ note.modified | timePast:false }}</span>
 
 	</div>
 

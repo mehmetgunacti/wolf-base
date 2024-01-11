@@ -1,7 +1,11 @@
 import { createAction, props } from "@ngrx/store";
 import { LogCategory, LogMessage, UUID } from '@lib';
 
-export const loadLogs = createAction('[Logs] Load Logs', props<{ entityId?: UUID, category?: LogCategory }>());
-export const loadLogsSuccess = createAction('[Logs] Load Logs Success', props<{ logs: LogMessage[] }>());
+export const load = createAction('[Logs] Load', props<{ selectedId: UUID | null, categories: LogCategory[], limit?: number }>());
+export const loadSuccess = createAction('[Logs] Load Success', props<{ logs: LogMessage[] }>());
+
+export const refresh = createAction('[Logs] Refresh');
 
 export const clearLogs = createAction('[Logs] Clear Logs');
+
+export const setSelectedId = createAction('[Logs] Set Selected', props<{ id: UUID | null }>());

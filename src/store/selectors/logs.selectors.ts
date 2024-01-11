@@ -1,27 +1,34 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { LogsModuleState } from 'store/states/logs.state';
+import { Logs_ModuleState } from 'store/states/logs.state';
 
-const selLogsModuleState = createFeatureSelector<LogsModuleState>('logs');
+const selLogs_moduleState = createFeatureSelector<Logs_ModuleState>('logs');
 
-const selLogsEntriesState = createSelector(
+const selLogs_entriesState = createSelector(
 
-	selLogsModuleState,
+	selLogs_moduleState,
 	state => state.entries
 
 );
 
-export const selLogsAll = createSelector(
+export const selLogs_allEntries = createSelector(
 
-	selLogsEntriesState,
+	selLogs_entriesState,
 	state => state.logs //.reverse()
 
 );
 
 // logs ui
 
-const selLogsUIState = createSelector(
+export const selLogs_uiState = createSelector(
 
-	selLogsModuleState,
+	selLogs_moduleState,
 	state => state.ui
+
+);
+
+export const selLogs_selectedId = createSelector(
+
+	selLogs_uiState,
+	state => state.selectedId
 
 );

@@ -3,9 +3,11 @@ import { LocalRepositoryService, LogCategory, LogMessage, ToastConfiguration } f
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { clearLogs, loadLogs, loadLogsSuccess } from 'store/actions/logs.actions';
+import { clearLogs, load, loadSuccess, refresh } from 'store/actions/logs.actions';
+import * as logSelectors from 'store/selectors/logs.selectors';
+import * as logActions from 'store/actions/logs.actions';
 
 const convertToast = (toast: ToastConfiguration): LogMessage => {
 
@@ -31,9 +33,12 @@ export class LogsEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(loadLogs),
-			switchMap(({entityId, category}) => this.localRepository.logs.list({ entityId, category })),
-			map(logs => loadLogsSuccess({ logs }))
+			// ignore action params, use params from state
+			ofType(logActions.load, logActions.refresh),
+			withLatestFrom(this.store.select(logSelectors.selLogs_uiState)),
+			map(([, params]) => params),
+			switchMap(({ selectedId, categories, limit }) => this.localRepository.logs.list({ entityId: selectedId, categories, limit })),
+			map(logs => loadSuccess({ logs }))
 
 		)
 

@@ -10,18 +10,40 @@
 
 <div class="card">
 
-	<div card_title>Logs</div>
-	<ng-container *ngIf="logMessages$ | async as logs">
+	<div card_title>Logs
 
-		<div log_entry *ngFor="let log of logs">
+		@if (selectedId$ | async; as selectedId) {
 
-			<span>[{{ log.category }}] {{ log.date | date:'dd.MM.yyyy hh:mm:ss' }} ({{ log.date | timePast }})</span>
-			<span *ngIf="log.entityId">{{ log.entityId }}</span>
-			<h4 [innerHTML]="log.message"></h4>
+			<small>{{ selectedId }}</small>
 
-		</div>
-		<div class="empty" *ngIf="logs.length === 0">Nothing to display</div>
+		} @else {
 
-	</ng-container>
+			<small>Latest Notifications</small>
+
+		}
+
+	</div>
+
+	@if (logMessages$ | async; as logs) {
+
+		@for (log of logs; track log.id) {
+
+			<div log_entry>
+
+				<small>[{{ log.category }}]</small>
+				<small>{{ log.date | timePast:true }}</small>
+				<small *ngIf="log.entityId">{{ log.entityId }}</small>
+				<h5 [innerHTML]="log.message"></h5>
+
+			</div>
+
+		}
+		@if (logs.length === 0) {
+
+			<div class="empty">Nothing to display</div>
+
+		}
+
+	}
 
 </div>

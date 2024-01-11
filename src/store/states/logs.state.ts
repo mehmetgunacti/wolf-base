@@ -1,32 +1,42 @@
-import { LogMessage } from '@lib';
+import { LogCategory, LogMessage, UUID } from '@lib';
 
 
-export interface LogsModuleState {
+export interface Logs_ModuleState {
 
-	entries: LogsEntriesState;
-	ui: LogsUIState;
+	entries: Logs_EntriesState;
+	ui: Logs_UIState;
 
 }
 
-export interface LogsEntriesState {
+export interface Logs_EntriesState {
 
 	logs: LogMessage[];
 
 }
 
-export interface LogsUIState {
+export interface Logs_UIState {
+
+	categories: LogCategory[],
+	selectedId: UUID | null;
+	limit: number;
+
 }
 
-export const initialLogsEntriesState: LogsEntriesState = {
+export const initialLogsEntriesState: Logs_EntriesState = {
 
 	logs: []
 
 };
 
-export const initialLogsUIState: LogsUIState = {
+export const initialLogsUIState: Logs_UIState = {
+
+	categories: [LogCategory.notification],
+	selectedId: null,
+	limit: 100
+
 }
 
-export const initialLogsState: LogsModuleState = {
+export const initialLogsState: Logs_ModuleState = {
 
 	entries: initialLogsEntriesState,
 	ui: initialLogsUIState
