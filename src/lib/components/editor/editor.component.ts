@@ -206,13 +206,14 @@ export class EditorComponent implements OnInit {
 		// const selectElement = e.target as HTMLSelectElement;
 		// const lang = selectElement.value;
 		// selectElement.selectedIndex = 0;
-
-		const s = '\n```' + (lang) + '\n\n```';
-		this.updateEditor(s, 'replace');
+		const start = '\n```';
+		const end = "\n```";
+		const s = start + lang + '\n' + end;
+		this.updateEditor(s, 'replace', end.length);
 
 	}
 
-	private updateEditor(text: string, action: 'replace' | 'wrap') {
+	private updateEditor(text: string, action: 'replace' | 'wrap', fromEnd: number = 0) {
 
 		const textarea = this.editor.nativeElement;
 		const start = textarea.selectionStart;
@@ -224,7 +225,7 @@ export class EditorComponent implements OnInit {
 		if (action === 'wrap')
 			textarea.value = textarea.value.substring(0, start) + text + textarea.value.substring(start, end) + text + textarea.value.substring(end);
 
-		textarea.selectionStart = textarea.selectionEnd = start + text.length;
+		textarea.selectionStart = textarea.selectionEnd = start + text.length - fromEnd;
 		textarea.focus();
 
 		// manually trigger change, since updates / events are not triggered when DOM is manually updated (?)
