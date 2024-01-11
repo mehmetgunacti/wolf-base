@@ -12,7 +12,7 @@ ul {
 		&::marker {
 
 			font-size		: var(--font-size-sm);
-			color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+			color			: fn-hsl(text-secondary);
 			transition		: color 1s cubic-bezier(0.25, 1, 0.25, 1);
 
 		}

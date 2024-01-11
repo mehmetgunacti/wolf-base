@@ -19,7 +19,7 @@
 		display				: block;
 		padding				: 4rem var(--gap);
 
-		background-color	: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
+		background-color	: fn-hsl(bg-3);
 		border-radius		: var(--border-radius);
 		transition			: $bg-transition;
 
@@ -38,7 +38,7 @@
 			margin-left			: var(--gap);
 
 			border				: none;
-			background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+			background-color	: fn-hsl(bg-4);
 			border-radius		: var(--border-radius);
 			transition			: $bg-transition;
 
@@ -58,7 +58,7 @@
 				& > span {
 
 					font-size		: var(--font-size-xs);
-					color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+					color			: fn-hsl(text-secondary);
 
 				}
 

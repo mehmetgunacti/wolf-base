@@ -3,12 +3,7 @@
 
 button {
 
-	--button-width				: 9rem;
-
-	--button-bg-hue				: 215deg;
-	--button-bg-sat				: 65%;
-	--button-bg-lig				: 30%;
-	--button-bg-alp				: 1;
+	--col-button-width				: 9rem;
 
 	position					: relative;
 	display						: inline-flex;
@@ -23,24 +18,24 @@ button {
 	padding						: var(--gap) var(--gap-lg);
 	font-size					: 1.6rem;
 	line-height					: 1;
-	min-width					: var(--button-width);
+	min-width					: var(--col-button-width);
 
 	border-radius				: var(--border-radius-sm);
 	border-width				: 1px;
 	border-style				: solid;
 
-	color						: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
-	background-color			: hsl(var(--button-bg-hue) var(--button-bg-sat) var(--button-bg-lig) / var(--button-bg-alp));
-	border-color				: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%) / var(--button-bg-alp));
+	color						: fn-hsl(text);
+	background-color			: fn-hsl(button-bg);
+	border-color				: fn-hsl(button-bg, (lig: "- 10%"));
 
 	transition					: color $transition, $bg-transition, border-color $transition;
 
 	&:hover,
 	&:focus {
 
-		color					: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
-		background-color		: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 5%) / var(--button-bg-alp));
-		border-color			: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%) / var(--button-bg-alp));
+		color					: fn-hsl(text);
+		background-color		: fn-hsl(button-bg, (lig: "- 5%"));
+		border-color			: fn-hsl(button-bg, (lig: "- 10%"));
 
 	}
 
@@ -53,16 +48,16 @@ button {
 
 	&:active {
 
-		color					: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
-		background-color		: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%) / var(--button-bg-alp));
-		border-color			: hsl(var(--button-bg-hue) var(--button-bg-sat) calc(var(--button-bg-lig) - 10%) / var(--button-bg-alp));
+		color					: fn-hsl(text);
+		background-color		: fn-hsl(button-bg, (lig: "- 10%"));
+		border-color			: fn-hsl(button-bg, (lig: "- 10%"));
 
 
 	}
 
 	&.icon-only {
 
-		--button-bg-alp			: 0;
+		--col-button-bg-alp			: 0;
 
 		border					: none;
 		padding					: 0.8rem;
@@ -70,10 +65,10 @@ button {
 
 		&:hover {
 
-			--button-bg-hue		: 0deg;
-			--button-bg-sat		: 0%;
-			--button-bg-lig		: 100%;
-			--button-bg-alp		: 0.09;
+			--col-button-bg-hue		: 0deg;
+			--col-button-bg-sat		: 0%;
+			--col-button-bg-lig		: 100%;
+			--col-button-bg-alp		: 0.09;
 
 		}
 
@@ -102,37 +97,37 @@ button {
 
 	&.success {
 
-		--button-bg-hue				: var(--col-success-hue);
-		--button-bg-sat				: var(--col-success-sat);
-		--button-bg-lig				: var(--col-success-lig);
-		--button-bg-alp				: var(--col-success-alp);
+		--col-button-bg-hue				: var(--col-success-hue);
+		--col-button-bg-sat				: var(--col-success-sat);
+		--col-button-bg-lig				: var(--col-success-lig);
+		--col-button-bg-alp				: var(--col-success-alp);
 
 	}
 
 	&.warn {
 
-		--button-bg-hue				: var(--col-warn-hue);
-		--button-bg-sat				: var(--col-warn-sat);
-		--button-bg-lig				: var(--col-warn-lig);
-		--button-bg-alp				: var(--col-warn-alp);
+		--col-button-bg-hue				: var(--col-warn-hue);
+		--col-button-bg-sat				: var(--col-warn-sat);
+		--col-button-bg-lig				: var(--col-warn-lig);
+		--col-button-bg-alp				: var(--col-warn-alp);
 
 	}
 
 	&.error {
 
-		--button-bg-hue				: var(--col-error-hue);
-		--button-bg-sat				: var(--col-error-sat);
-		--button-bg-lig				: var(--col-error-lig);
-		--button-bg-alp				: var(--col-error-alp);
+		--col-button-bg-hue				: var(--col-error-hue);
+		--col-button-bg-sat				: var(--col-error-sat);
+		--col-button-bg-lig				: var(--col-error-lig);
+		--col-button-bg-alp				: var(--col-error-alp);
 
 	}
 
 	&.tag {
 
-		--button-bg-hue		: var(--col-accent-hue);
-		--button-bg-sat		: var(--col-accent-sat);
-		--button-bg-lig		: var(--col-accent-lig);
-		--button-bg-alp		: var(--col-accent-alp);
+		--col-button-bg-hue		: var(--col-accent-hue);
+		--col-button-bg-sat		: var(--col-accent-sat);
+		--col-button-bg-lig		: var(--col-accent-lig);
+		--col-button-bg-alp		: var(--col-accent-alp);
 
 		padding				: var(--gap-xxs) var(--gap-sm);
 		font-size			: 1.2rem;

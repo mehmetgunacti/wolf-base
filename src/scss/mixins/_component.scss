@@ -1,8 +1,8 @@
-@mixin mx-component {
+@mixin mx-component($bg: 3) {
 
 	padding				: var(--gap-xl) var(--gap-xxl);
 	border-radius		: var(--border-radius);
-	background-color	: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
+	background-color	: fn-hsl(bg-#{$bg});
 	transition			: $bg-transition;
 
 }

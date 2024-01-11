@@ -11,7 +11,7 @@
 	border				: 0;
 	border-radius		: var(--border-radius);
 
-	color				: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+	color				: fn-hsl(text);
 	transition			: $bg-transition;
 
 	[toast-left] {
@@ -38,25 +38,25 @@
 
 	&.success {
 
-		background-color	: hsl(var(--col-success-hue) var(--col-success-sat) var(--col-success-lig) / var(--col-success-alp));
+		background-color	: fn-hsl(success);
 
 	}
 
 	&.info {
 
-		background-color	: hsl(var(--col-info-hue) var(--col-info-sat) var(--col-info-lig) / var(--col-info-alp));
+		background-color	: fn-hsl(info);
 
 	}
 
 	&.warn {
 
-		background-color	: hsl(var(--col-warn-hue) var(--col-warn-sat) var(--col-warn-lig) / var(--col-warn-alp));
+		background-color	: fn-hsl(warn);
 
 	}
 
 	&.error {
 
-		background-color	: hsl(var(--col-error-hue) var(--col-error-sat) var(--col-error-lig) / var(--col-error-alp));
+		background-color	: fn-hsl(error);
 
 	}
 

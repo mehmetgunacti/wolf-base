@@ -1,6 +1,6 @@
 a {
 
-	color		: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+	color		: fn-hsl(text);
 	transition	: color $transition;
 
 }
@@ -8,6 +8,6 @@ a {
 a:focus,
 a:focus-visible {
 
-	outline: 3px solid hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
+	outline: 3px solid fn-hsl(focus);
 
 }

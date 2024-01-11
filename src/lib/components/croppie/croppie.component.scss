@@ -17,8 +17,8 @@
 		border-width		: 1px;
 		border-style		: solid;
 
-		background-color	: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp));
-		border-color		: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) calc(var(--col-bg-input-lig) - 10%) / var(--col-bg-input-alp));
+		background-color	: fn-hsl(bg-2);
+		border-color		: fn-hsl(bg-2, (lig: "- 10%"));
 
 		max-width			: 100%;
 		width				: 127px;

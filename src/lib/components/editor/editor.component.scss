@@ -14,7 +14,7 @@
 		@include mx-flex-column-start;
 		& > legend {
 
-			color		: hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / var(--col-primary-alp));
+			color		: fn-hsl(primary);
 			font-weight	: bold;
 			font-size	: var(--font-size-sm);
 
@@ -37,7 +37,7 @@
 
 		& [format-buttons] {
 
-			background-color: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp));
+			background-color: fn-hsl(bg-1);
 
 		}
 

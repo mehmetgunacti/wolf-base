@@ -1,8 +1,17 @@
 hr {
 
-	margin-top		: var(--gap-xs);
-	height			: var(--gap);
+	margin-top		: 0;
+	margin-bottom	: var(--gap-sm);
 	border			: 0;
-	border-top		: 1px solid hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig)/var(--col-primary-alp));
+	border-top		: 1px solid fn-hsl(accent);
+
+	transition		: border $transition;
+
+	&.even {
+
+		margin-top		: var(--gap-sm);
+		margin-bottom	: var(--gap-sm);
+
+	}
 
 }

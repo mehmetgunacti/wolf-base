@@ -14,11 +14,11 @@ table {
 
 	& > thead {
 
-		background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+		background-color	: fn-hsl(bg-4, (lig: "- 2%"));
 		border-width		: 2px;
 		border-style		: solid;
 		border-color		: transparent;
-		border-bottom-color	: hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / calc(var(--col-primary-alp) - 0.3));
+		border-bottom-color	: fn-hsl(primary, (alp: "- 0.3"));
 
 		& > tr:first-child {
 
@@ -40,11 +40,11 @@ table {
 
 	& > tbody {
 
-		background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 1%) / var(--col-bg-panel-alp));
+		background-color	: fn-hsl(bg-4, (lig: "+ 1%"));
 
 		& > tr {
 
-			border-bottom	: 1px solid hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) - 1%)/var(--col-bg-panel-alp));
+			border-bottom	: 1px solid fn-hsl(bg-4, (lig: "- 1%"));
 
 			&:last-child {
 
@@ -79,13 +79,13 @@ table {
 
 	&.striped > tbody > tr:nth-of-type(2n) {
 
-		background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+		background-color	: fn-hsl(bg-4);
 
 	}
 
 	& > tfoot {
 
-		border-top			: 2px solid hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+		border-top			: 2px solid fn-hsl(text-secondary);
 
 	}
 

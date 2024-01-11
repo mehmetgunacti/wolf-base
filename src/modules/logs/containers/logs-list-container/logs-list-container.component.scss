@@ -10,7 +10,7 @@
 		@extend %flex-column;
 		& > span {
 
-			color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+			color		: fn-hsl(text-secondary);
 			font-size	: var(--font-size-xs);
 
 		}

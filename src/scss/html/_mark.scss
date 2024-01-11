@@ -3,8 +3,8 @@ mark {
 	font-style			: italic;
 	font-weight			: bold;
 	padding-inline		: var(--gap-xs) var(--gap-sm);
-	color				: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
-	background-color	: hsl(var(--col-accent-hue) var(--col-accent-sat) var(--col-accent-lig) / var(--col-accent-alp));
+	color				: fn-hsl(text);
+	background-color	: fn-hsl(accent);
 	border-radius		: var(--border-radius-xs);
 
 }

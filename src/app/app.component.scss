@@ -7,7 +7,7 @@
 
 	display				: block;
 	height				: 100vh;
-	background-color	: hsl(var(--col-bg-body-hue) var(--col-bg-body-sat) var(--col-bg-body-lig) / var(--col-bg-body-alp));
+	background-color	: fn-hsl(bg-0);
 	transition			: $bg-transition;
 
 	& > header {
@@ -23,8 +23,10 @@
 		padding					: var(--gap);
 		padding-left			: 0;
 
-		background-color		: hsl(var(--col-bg-header-hue) var(--col-bg-header-sat) var(--col-bg-header-lig) / var(--col-bg-header-alp));
+		background-color		: fn-hsl(bg-6);
 		transition				: $bg-transition;
+
+		@include mx-box-shadow;
 
 	}
 
@@ -63,8 +65,10 @@
 
 		margin-left			: -$nav-width;
 
-		background-color	: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
+		background-color	: fn-hsl(bg-5);
 		transition			: margin-left 0.6s cubic-bezier(0.25, 1, 0.25, 1), $bg-transition;
+
+		@include mx-box-shadow;
 
 	}
 

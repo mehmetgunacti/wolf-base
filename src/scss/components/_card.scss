@@ -6,21 +6,12 @@
 
 	@include mx-flex-column;
 	@include mx-component;
-	border-radius			: var(--border-radius);
-	padding					: var(--gap-xl) var(--gap-xxl);
-	background-color		: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
-	transition				: $bg-transition;
-	gap						: var(--gap-sm);
+	@include mx-box-shadow;
+	gap		: var(--gap-sm);
 
 	&.darker {
 
-		background-color	: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) calc(var(--col-bg-nav-lig) - 3%) / var(--col-bg-nav-alp));
-
-	}
-
-	&.lighter {
-
-		background-color	: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp));
+		background-color	: fn-hsl(bg-4);
 
 	}
 

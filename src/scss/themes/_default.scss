@@ -1,15 +1,15 @@
 :root {
 
 	// --col-accent
-	--col-accent-hue			: 32deg;
-	--col-accent-sat			: 70%;
-	--col-accent-lig			: 45%;
+	--col-accent-hue			: 200deg;
+	--col-accent-sat			: 85%;
+	--col-accent-lig			: 34%;
 	--col-accent-alp			: 1;
 
 	// --col-text
-	--col-text-hue				: 240deg;
-	--col-text-sat				: 4%;
-	--col-text-lig				: 91%;
+	--col-text-hue				: 210deg;
+	--col-text-sat				: 26%;
+	--col-text-lig				: 84%;
 	--col-text-alp				: 1;
 
 	// --col-text-secondary
@@ -18,40 +18,63 @@
 	--col-text-secondary-lig	: 64%;
 	--col-text-secondary-alp	: 1;
 
-	// --col-bg-body
-	--col-bg-body-hue			: 206deg;
-	--col-bg-body-sat			: 10%;
-	--col-bg-body-lig			: 33%;
-	--col-bg-body-alp			: 1;
+	/*************
+	* BACKGROUND *
+	**************/
 
-	// --col-bg-header
-	--col-bg-header-hue			: 228deg;
-	--col-bg-header-sat			: 10%;
-	--col-bg-header-lig			: 10%;
-	--col-bg-header-alp			: 1;
+	// bg 0 (<body> bg)
+	--col-bg-0-hue				: 210deg;
+	--col-bg-0-sat				: 11%;
+	--col-bg-0-lig				: 33%;
+	--col-bg-0-alp				: 1;
 
-	// --col-bg-nav
-	--col-bg-nav-hue			: 225deg;
-	--col-bg-nav-sat			: 11%;
-	--col-bg-nav-lig			: 18%;
-	--col-bg-nav-alp			: 1;
+	// bg 1 (<input>, <textarea> bg)
+	--col-bg-1-hue				: 210deg;
+	--col-bg-1-sat				: 11%;
+	--col-bg-1-lig				: 42%;
+	--col-bg-1-alp				: 1;
 
-	// --col-bg-panel
-	--col-bg-panel-hue			: 225deg;
-	--col-bg-panel-sat			: 10%;
-	--col-bg-panel-lig			: 14%;
-	--col-bg-panel-alp			: 1;
+	// bg 2
+	--col-bg-2-hue				: 210deg;
+	--col-bg-2-sat				: 11%;
+	--col-bg-2-lig				: 20%;
+	--col-bg-2-alp				: 1;
 
-	// --col-bg-input
-	--col-bg-input-hue			: 222deg;
-	--col-bg-input-sat			: 14%;
-	--col-bg-input-lig			: 34%;
-	--col-bg-input-alp			: 1;
+	// bg 3 (<card>, bookmark, ..)
+	--col-bg-3-hue				: 210deg;
+	--col-bg-3-sat				: 11%;
+	--col-bg-3-lig				: 13%;
+	--col-bg-3-alp				: 1;
+
+	// bg 4 (popup menu)
+	--col-bg-4-hue				: 210deg;
+	--col-bg-4-sat				: 11%;
+	--col-bg-4-lig				: 11%;
+	--col-bg-4-alp				: 1;
+
+	// bg 5 (<nav> bg)
+	--col-bg-5-hue				: 210deg;
+	--col-bg-5-sat				: 11%;
+	--col-bg-5-lig				: 9%;
+	--col-bg-5-alp				: 1;
+
+	// bg 6 (<head> bg)
+	--col-bg-6-hue				: 210deg;
+	--col-bg-6-sat				: 11%;
+	--col-bg-6-lig				: 7%;
+	--col-bg-6-alp				: 1;
+
+
+	// default button
+	--col-button-bg-hue			: 215deg;
+	--col-button-bg-sat			: 65%;
+	--col-button-bg-lig			: 30%;
+	--col-button-bg-alp			: 1;
 
 	// --col-primary
 	--col-primary-hue			: 215deg;
-	--col-primary-sat			: 78%;
-	--col-primary-lig			: 58%;
+	--col-primary-sat			: 65%;
+	--col-primary-lig			: 45%;
 	--col-primary-alp			: 1;
 
 	// --col-success
@@ -67,15 +90,15 @@
 	--col-info-alp				: 1;
 
 	// --col-warn
-	--col-warn-hue				: 40deg;
-	--col-warn-sat				: 72%;
-	--col-warn-lig				: 47%;
+	--col-warn-hue				: 26deg;
+	--col-warn-sat				: 65%;
+	--col-warn-lig				: 38%;
 	--col-warn-alp				: 1;
 
 	// --col-error
-	--col-error-hue				: 2deg;
-	--col-error-sat				: 93%;
-	--col-error-lig				: 63%;
+	--col-error-hue				: 355deg;
+	--col-error-sat				: 54%;
+	--col-error-lig				: 32%;
 	--col-error-alp				: 1;
 
 	// overlay

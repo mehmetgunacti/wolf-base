@@ -17,7 +17,7 @@
 
 			& > [icon] {
 
-				background-color	: hsl(var(--col-accent-hue) var(--col-accent-sat) var(--col-accent-lig)/var(--col-accent-alp));
+				background-color	: fn-hsl(accent);
 				border-radius		: 25px;
 
 			}
@@ -26,7 +26,7 @@
 
 		&:hover {
 
-			background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 10%) / var(--col-bg-panel-alp));
+			background-color	: fn-hsl(bg-4, (lig: "+ 10%"));
 
 		}
 
@@ -60,7 +60,7 @@
 
 				&:not(:empty) {
 
-					background-color	: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) calc(var(--col-bg-nav-lig) - 3%) / var(--col-bg-nav-alp));
+					background-color	: fn-hsl(bg-3, (lig: "- 3%"));
 
 				}
 

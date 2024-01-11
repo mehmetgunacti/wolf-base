@@ -20,12 +20,12 @@
 
 			& > a {
 
-				background-color: hsl(var(--col-bg-input-hue) var(--col-bg-input-sat) var(--col-bg-input-lig) / var(--col-bg-input-alp));
+				background-color: fn-hsl(bg-1);
 
 				&:hover,
 				&:focus {
 
-					background-color: hsl(var(--col-accent-hue) var(--col-accent-sat) var(--col-accent-lig) / var(--col-accent-alp));
+					background-color: fn-hsl(accent);
 
 				}
 

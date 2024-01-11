@@ -11,7 +11,7 @@
 		pointer-events		: none;
 
 		padding				: var(--gap-xs) var(--gap-sm);
-		background-color	: hsl(var(--col-accent-hue) var(--col-accent-sat) var(--col-accent-lig) / var(--col-accent-alp));
+		background-color	: fn-hsl(accent);
 		border-radius		: 25px;
 
 		line-height			: 1;

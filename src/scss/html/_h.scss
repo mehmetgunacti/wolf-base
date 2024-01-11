@@ -1,6 +1,6 @@
 h1, h2, h3, h4, h5, h6 {
 
-	color		: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+	color		: fn-hsl(text);
 	transition	: color $transition;
 
 }
@@ -9,7 +9,7 @@ h1 {
 
 	font-size		: var(--font-size-h1);
 	font-weight		: bold;
-	color			: hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / var(--col-primary-alp));
+	color			: fn-hsl(primary);
 	margin-bottom	: var(--gap-xxl);
 
 }
@@ -21,7 +21,7 @@ h2 {
 	padding-bottom	: var(--gap-sm);
 	margin-bottom	: var(--gap-xxl);
 
-	border-bottom	: 2px solid hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / var(--col-primary-alp));
+	border-bottom	: 2px solid fn-hsl(text-secondary);
 	transition		: border $transition;
 
 }
@@ -38,7 +38,7 @@ h4 {
 
 	font-size		: var(--font-size-h4);
 	font-weight		: bold;
-	color			: hsl(var(--col-primary-hue) var(--col-primary-sat) calc(var(--col-primary-lig) + 3%) / var(--col-primary-alp));
+	color			: fn-hsl(primary, (lig: "+ 3%"));
 	margin-bottom	: var(--gap-xl);
 
 }
@@ -48,7 +48,7 @@ h5 {
 	font-size		: var(--font-size-h5);
 	font-weight		: bold;
 	font-style		: italic;
-	color			: hsl(var(--col-primary-hue) var(--col-primary-sat) calc(var(--col-primary-lig) + 3%) / var(--col-primary-alp));
+	color			: fn-hsl(primary, (lig: "+ 3%"));
 	margin-bottom	: var(--gap);
 
 }
@@ -58,7 +58,7 @@ h6 {
 	font-size		: var(--font-size-h6);
 	font-weight		: bold;
 	font-style		: italic;
-	color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+	color			: fn-hsl(text-secondary);
 	margin-bottom	: var(--gap);
 
 }

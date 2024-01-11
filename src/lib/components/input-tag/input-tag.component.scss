@@ -10,8 +10,8 @@
 
 	&.error {
 
-		outline				: 1px solid hsl(var(--error-hue) var(--error-sat) var(--error-lig));
-		box-shadow			: 0 0 10px hsl(var(--error-hue) var(--error-sat) var(--error-lig));
+		outline				: 1px solid fn-hsl(error);
+		box-shadow			: 0 0 10px fn-hsl(error);
 
 	}
 
@@ -37,7 +37,7 @@
 		border				: 0;
 		min-width			: 40%;
 		padding				: 1rem;
-		color				: hsl(var(--col-text-hue) var(--col-text-sat) var(--col-text-lig) / var(--col-text-alp));
+		color				: fn-hsl(error);
 		background-color	: transparent;
 
 		&:focus,

@@ -17,13 +17,13 @@ kbd {
 	white-space			: pre-wrap;
 	border-radius		: var(--border-radius-sm);
 	padding				: var(--gap-xs) var(--gap-sm);
-	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+	background-color	: fn-hsl(bg-5);
 
 }
 
 pre {
 
-	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+	background-color	: fn-hsl(bg-5);
 	font-size			: 90%;
 	padding				: var(--gap);
 	border-radius		: var(--border-radius-sm);

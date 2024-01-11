@@ -6,7 +6,7 @@
 
 	@extend %flex-column;
 	padding				: var(--gap);
-	background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+	background-color	: fn-hsl(bg-4);
 	border-radius		: var(--border-radius);
 	transition			: $bg-transition;
 

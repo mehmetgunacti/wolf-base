@@ -1,0 +1,43 @@
+$theme-colors: (
+	accent: true,
+	button-bg: true,
+	text: true,
+	text-secondary: true,
+	bg-0: true,
+	bg-1: true,
+	bg-2: true,
+	bg-3: true,
+	bg-4: true,
+	bg-5: true,
+	bg-6: true,
+	primary: true,
+	success: true,
+	info: true,
+	warn: true,
+	error: true,
+	focus: true
+);
+
+@function fn-hsl($name, $options: ()) {
+
+	$hue: map-get($options, "hue");
+	$sat: map-get($options, "sat");
+	$lig: map-get($options, "lig");
+	$alp: map-get($options, "alp");
+
+	@if map-has-key($theme-colors, $name) {
+
+		$hue: if($hue != null, calc(var(--col-#{$name}-hue) #{$hue}), var(--col-#{$name}-hue));
+		$sat: if($sat != null, calc(var(--col-#{$name}-sat) #{$sat}), var(--col-#{$name}-sat));
+		$lig: if($lig != null, calc(var(--col-#{$name}-lig) #{$lig}), var(--col-#{$name}-lig));
+		$alp: if($alp != null, calc(var(--col-#{$name}-alp) #{$alp}), var(--col-#{$name}-alp));
+
+		@return hsl($hue $sat $lig / $alp);
+
+	}
+
+	@else {
+		@error "Invalid color name: #{$name}.";
+	}
+
+}

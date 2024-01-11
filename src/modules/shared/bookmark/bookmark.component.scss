@@ -9,7 +9,7 @@
 	--bookmark-edit-button-opacity	: 0;
 	--font-size 					: 1.6rem;
 	--image-size					: 110px;
-	--bookmark-bg-color				: hsl(var(--col-bg-nav-hue) var(--col-bg-nav-sat) var(--col-bg-nav-lig) / var(--col-bg-nav-alp));
+	--bookmark-bg-color				: #{fn-hsl(bg-3)};
 
 	&.compact {
 
@@ -93,7 +93,7 @@
 
 				span[bookmark-title] {
 
-					color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+					color		: fn-hsl(text-secondary);
 					font-size	: 1.2rem;
 
 				}
@@ -117,7 +117,7 @@
 
 				word-break		: break-all;
 				font-size		: x-small;
-				color			: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+				color			: fn-hsl(text-secondary);
 
 			}
 

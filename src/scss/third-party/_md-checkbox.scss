@@ -31,7 +31,7 @@
 		height			: 15px;
 		padding			: 10px;
 		width			: 15px;
-		background-color: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) var(--col-bg-panel-lig) / var(--col-bg-panel-alp));
+		background-color: fn-hsl(bg-4);
 		border-radius	: 4px;
 		transition		: $bg-transition;
 
@@ -63,7 +63,7 @@
 		border-top-right-radius		: 3px;
 		border-bottom-left-radius	: 3px;
 
-		border-color				: hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / var(--col-primary-alp));
+		border-color				: fn-hsl(primary);
 		transition					: border-color $transition;
 
 	}

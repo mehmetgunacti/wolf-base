@@ -1,5 +1,6 @@
 @import 'helper';
 @import 'variables';
+@import 'mixins';
 
 :host{
 
@@ -19,7 +20,7 @@
 			& > span:first-child {
 
 				@extend %flex-center-y;
-				color				: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+				color				: fn-hsl(text-secondary);
 				& > span:first-child {
 
 					font-size		: var(--font-size-sm);
@@ -45,14 +46,14 @@
 
 			&:hover {
 
-				background-color	: hsl(var(--col-bg-panel-hue) var(--col-bg-panel-sat) calc(var(--col-bg-panel-lig) + 10%) / var(--col-bg-panel-alp));
+				background-color	: fn-hsl(bg-4, (lig: "+ 10%"));
 
 			}
 
 			&:focus,
 			&:focus-visible {
 
-				outline				: 3px solid hsl(var(--col-focus-hue) var(--col-focus-sat) var(--col-focus-lig) / var(--col-focus-alp));
+				outline				: 3px solid fn-hsl(focus);
 
 			}
 
@@ -65,7 +66,7 @@
 		@extend %flex-column-start;
 		& > span {
 
-			color		: hsl(var(--col-text-secondary-hue) var(--col-text-secondary-sat) var(--col-text-secondary-lig) / var(--col-text-secondary-alp));
+			color		: fn-hsl(text-secondary);
 			font-size	: var(--font-size-xs);
 
 		}
