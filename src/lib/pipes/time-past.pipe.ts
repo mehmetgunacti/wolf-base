@@ -4,7 +4,20 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({ name: 'timePast' })
 export class TimePastPipe implements PipeTransform {
 
-	transform(utcString: string): string {
+	transform(utcString: string, useDatePipe: boolean = true): string {
+
+		const result = this.shortForm(utcString);
+		if (useDatePipe) {
+
+			const datePipeFormatted = new DatePipe('en-US').transform(utcString, 'EEEE dd.MM.yyyy hh:mm');
+			return `${datePipeFormatted} (${result})`;
+
+		}
+		return result;
+
+	}
+
+	private shortForm(utcString: string): string {
 
 		const now = new Date().getTime();
 		const past = new Date(utcString).getTime();
@@ -29,14 +42,11 @@ export class TimePastPipe implements PipeTransform {
 			return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
 
 		const diffInMonths = Math.floor(diffInDays / 30);
-		if (diffInMonths < 3)
+		if (diffInMonths < 12)
 			return `${diffInMonths} month${diffInMonths > 1 ? 's' : ''} ago`;
 
-		const datePipeFormatted = new DatePipe('en-US').transform(utcString, 'EEEE dd.MM.yyyy hh:mm');
-		return datePipeFormatted ?? utcString;
-
-		// const diffInYears = Math.floor(diffInMonths / 12);
-		// return `${diffInYears} year${diffInYears > 1 ? 's' : ''} ago`;
+		const diffInYears = Math.floor(diffInMonths / 12);
+		return `${diffInYears} year${diffInYears > 1 ? 's' : ''} ago`;
 
 	}
 
