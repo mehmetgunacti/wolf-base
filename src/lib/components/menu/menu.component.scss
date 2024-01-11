@@ -33,9 +33,11 @@
 		& > [icon] {
 
 			@include mx-flex-center-center;
-			padding		: var(--gap);
-			margin		: var(--gap-sm);
-			font-size	: var(--font-size-h2);
+			padding				: var(--gap);
+			margin				: var(--gap-sm);
+			font-size			: var(--font-size-h2);
+			background-color	: transparent;
+			border-radius		: 25px;
 
 		}
 
