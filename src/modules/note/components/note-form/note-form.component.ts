@@ -20,7 +20,6 @@ export class NoteFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	@Output() create: EventEmitter<Partial<Note>> = new EventEmitter();
 	@Output() update: EventEmitter<{ id: UUID, note: Partial<Note> }> = new EventEmitter();
-	@Output() remove: EventEmitter<UUID> = new EventEmitter();
 	@Output() tagInput: EventEmitter<string | null> = new EventEmitter();
 
 	form: NoteForm = inject(NOTE_FORM);
@@ -58,21 +57,6 @@ export class NoteFormComponent implements OnInit, OnChanges, OnDestroy {
 			this.update.emit({ id: note.id, note });
 		else
 			this.create.emit(note);
-
-	}
-
-	onDelete(): void {
-
-		if (!this.note)
-			return;
-
-		if (
-			confirm(`
-${this.note.name}
-
-will be deleted. Continue?`)
-		)
-			this.remove.emit(this.note.id);
 
 	}
 

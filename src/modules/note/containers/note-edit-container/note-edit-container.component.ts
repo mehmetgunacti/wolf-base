@@ -61,12 +61,6 @@ export class NoteEditContainerComponent implements OnInit, AfterContentInit {
 
 	}
 
-	onRemove(id: UUID): void {
-
-		this.store.dispatch(moveToTrash({ id }));
-
-	}
-
 	onTagInput(val: string | null): void {
 
 		this.tagInput.next(val);

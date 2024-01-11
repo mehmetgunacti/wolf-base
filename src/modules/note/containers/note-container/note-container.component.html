@@ -39,6 +39,15 @@
 				<span class="material-symbols-outlined">history</span> View Logs
 			</button>
 
+			<hr>
+
+			<button
+				cdkMenuItem
+				class="icon-only"
+				(click)="onRemove(note.id)">
+				<span class="material-symbols-outlined">delete</span> Remote Note
+			</button>
+
 		</div>
 	</ng-template>
 

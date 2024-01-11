@@ -4,5 +4,4 @@
 	[tagSuggestions]="tagSuggestions$ | async"
 	(create)="onCreate($event)"
 	(update)="onUpdate($event.id, $event.note)"
-	(remove)="onRemove($event)"
 	(tagInput)="onTagInput($event)"></app-note-form>

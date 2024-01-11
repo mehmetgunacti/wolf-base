@@ -9,14 +9,15 @@
 			<w-input [control]="form.id" name="ID" [readonly]="true"/>
 		</div>
 
-		<!-- NAME -->
-		<div>
-			<w-input [control]="form.name" name="Name"/>
-		</div>
 
 		<!-- PARENT ID -->
 		<div>
-			<w-select [control]="form.parentId" [nodes]="nodes ?? []" name="Parent Id"/>
+			<w-select [control]="form.parentId" [nodes]="nodes ?? []" name="Parent"/>
+		</div>
+
+		<!-- NAME -->
+		<div>
+			<w-input [control]="form.name" name="Name"/>
 		</div>
 
 		<!-- TAGS -->
@@ -36,7 +37,6 @@
 
 		<div form-element-buttons>
 
-			<button type="button" (click)="onDelete()" class="error"><span class="material-symbols-outlined">delete</span> Delete</button>
 			<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>
 
 		</div>

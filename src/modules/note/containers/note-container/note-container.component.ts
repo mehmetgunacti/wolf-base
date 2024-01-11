@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MenuItem, Note, NoteContent } from '@lib';
+import { MenuItem, Note, NoteContent, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
+import { moveToTrash } from 'store/actions/note.actions';
 import { selNoteContent_content } from 'store/selectors/note-content-selectors/note-content-entities.selectors';
 import { selNote_selected, selNote_selectedEntityChildren, selNote_selectedEntityParents } from 'store/selectors/note-selectors/note-entities.selectors';
 
@@ -42,6 +43,13 @@ export class NoteContainerComponent {
 	navTo(url: string[]): void {
 
 		this.store.dispatch(navigate({ url }));
+
+	}
+
+	onRemove(id: UUID): void {
+
+		// this.store.dispatch(moveToTrash({ id }));
+		console.log('not implemented');
 
 	}
 
