@@ -1,15 +1,18 @@
 <div class="card">
 
-	<ng-container *ngIf="(isFiltered$ | async) as isFiltered; else notFiltered">
-		<h2>Search Results
-			<ng-container  *ngIf="(queryParamsAsString$ | async) as paramsText">
-				<span>{{ paramsText }}</span>
-			</ng-container>
-		</h2>
-	</ng-container>
-	<ng-template #notFiltered>
-		<h2>Root Notes</h2>
-	</ng-template>
+	@if (isFiltered$ | async) {
+
+		<div card_title>Search Results
+			@if (queryParamsAsString$ | async; as paramsText) {
+				<small>{{ paramsText }}</small>
+			}
+		</div>
+
+	} @else {
+
+		<div card_title>Root Notes</div>
+
+	}
 
 	<ng-container *ngIf="(notes$ | async) as notes">
 

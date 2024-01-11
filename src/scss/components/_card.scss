@@ -7,7 +7,19 @@
 	@include mx-flex-column;
 	@include mx-component;
 	@include mx-box-shadow;
-	gap		: var(--gap-sm);
+	gap		: var(--gap-xl);
+
+	& > [card_title] {
+
+		display	: block;
+		@include mx-h3;
+		& > small {
+
+			display	: block;
+
+		}
+
+	}
 
 	&.darker {
 

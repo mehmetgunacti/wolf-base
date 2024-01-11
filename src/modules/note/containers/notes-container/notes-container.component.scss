@@ -61,16 +61,4 @@
 
 	}
 
-	& h2 {
-
-		@extend %flex-column-start;
-		& > span {
-
-			color		: fn-hsl(text-secondary);
-			font-size	: var(--font-size-xs);
-
-		}
-
-	}
-
 }

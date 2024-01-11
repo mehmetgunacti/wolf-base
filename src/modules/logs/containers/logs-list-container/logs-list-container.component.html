@@ -10,7 +10,7 @@
 
 <div class="card">
 
-	<h2>Logs</h2>
+	<div card_title>Logs</div>
 	<ng-container *ngIf="logMessages$ | async as logs">
 
 		<div log_entry *ngFor="let log of logs">
