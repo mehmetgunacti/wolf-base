@@ -107,11 +107,13 @@
 
 <ng-template #table_menu>
 
-	<div cdkMenu>
+	<div class="card darker" cdkMenu>
+
 		<w-selector-table
 			[rows]="6"
 			[cols]="7"
 			(result)="addTable($event)"/>
+
 	</div>
 
 </ng-template>
