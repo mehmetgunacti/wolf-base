@@ -3,6 +3,20 @@
 @import 'mixins';
 @import 'components';
 
+.quote_menu {
+
+	// max-height	: 20rem;
+	// overflow-y	: auto;
+	// @include mx-webkit-scrollbar;
+
+	button {
+
+		justify-content: flex-start;
+
+	}
+
+}
+
 .code_menu {
 
 	max-height	: 20rem;

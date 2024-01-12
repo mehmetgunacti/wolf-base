@@ -5,7 +5,6 @@
 		class="icon-only"
 		[cdkMenuTriggerFor]="format_menu"
 		title="Format Options"
-		tabindex="0"
 		cdkMenuItem>
 		<span class="material-symbols-outlined">style</span>
 	</button>
@@ -17,8 +16,7 @@
 	<button
 		class="icon-only"
 		(click)="addEmptyTask()"
-		title="Add Empty Task"
-		tabindex="0"
+		title="Task"
 		cdkMenuItem>
 		<span class="material-symbols-outlined">check_box</span>
 	</button>
@@ -27,10 +25,27 @@
 	<button
 		class="icon-only"
 		[cdkMenuTriggerFor]="table_menu"
-		title="Add Table"
-		tabindex="0"
+		title="Table"
 		cdkMenuItem>
 		<span class="material-symbols-outlined">table</span>
+	</button>
+
+	<!-- CODE BUTTON -->
+	<button
+		class="icon-only"
+		[cdkMenuTriggerFor]="code_menu"
+		title="Code"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">code_blocks</span>
+	</button>
+
+	<!-- ADD BLOCKQUOTE BUTTON -->
+	<button
+		class="icon-only"
+		[cdkMenuTriggerFor]="quote_menu"
+		title="Blockquote"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_quote</span>
 	</button>
 
 	<!-- IMAGE FROM CLIPBOARD BUTTON -->
@@ -39,27 +54,15 @@
 		class="icon-only"
 		(click)="addImage(btnImage)"
 		title="Image from Clipboard"
-		tabindex="0"
 		[class.shake]="btnImageShake()"
 		cdkMenuItem>
 		<span class="material-symbols-outlined">image</span>
-	</button>
-
-	<!-- CODE BLOCKS BUTTON -->
-	<button
-		class="icon-only"
-		[cdkMenuTriggerFor]="code_menu"
-		title="Code Block"
-		tabindex="0"
-		cdkMenuItem>
-		<span class="material-symbols-outlined">code_blocks</span>
 	</button>
 
 	<!-- PREVIEW BUTTON -->
 	<button
 		class="icon-only"
 		(click)="onPreviewOpen()"
-		tabindex="0"
 		cdkMenuItem>
 		<span class="material-symbols-outlined">live_tv</span>
 		<span>Preview</span>
@@ -124,7 +127,6 @@
 				class="icon-only"
 				(click)="addBold()"
 				title="Bold"
-				tabindex="0"
 				cdkMenuItem>
 				<span class="material-symbols-outlined">format_bold</span>
 			</button>
@@ -134,7 +136,6 @@
 				class="icon-only"
 				(click)="addItalic()"
 				title="Italic"
-				tabindex="0"
 				cdkMenuItem>
 				<span class="material-symbols-outlined">format_italic</span>
 			</button>
@@ -144,7 +145,6 @@
 				class="icon-only"
 				(click)="addStrikethrough()"
 				title="Strikethrough"
-				tabindex="0"
 				cdkMenuItem>
 				<span class="material-symbols-outlined">format_strikethrough</span>
 			</button>
@@ -158,7 +158,6 @@
 				class="icon-only"
 				(click)="addAlignCenter()"
 				title="Align Center"
-				tabindex="0"
 				cdkMenuItem>
 				<span class="material-symbols-outlined">format_align_center</span>
 			</button>
@@ -168,7 +167,6 @@
 				class="icon-only"
 				(click)="addAlignRight()"
 				title="Align Right"
-				tabindex="0"
 				cdkMenuItem>
 				<span class="material-symbols-outlined">format_align_right</span>
 			</button>
@@ -178,7 +176,6 @@
 				class="icon-only"
 				(click)="addAlignJustify()"
 				title="Align Justify"
-				tabindex="0"
 				cdkMenuItem>
 				<span class="material-symbols-outlined">format_align_justify</span>
 			</button>
@@ -192,7 +189,6 @@
 				class="icon-only"
 				(click)="addSub()"
 				title="Subscript (H2O)"
-				tabindex="0"
 				cdkMenuItem>
 				<span class="material-symbols-outlined">subscript</span>
 			</button>
@@ -202,7 +198,6 @@
 				class="icon-only"
 				(click)="addSup()"
 				title="Superscript (E=mc2)"
-				tabindex="0"
 				cdkMenuItem>
 				<span class="material-symbols-outlined">superscript</span>
 			</button>
@@ -212,12 +207,49 @@
 				class="icon-only"
 				(click)="addHighlight()"
 				title="Highlight"
-				tabindex="0"
 				cdkMenuItem>
 				<span class="material-symbols-outlined">format_ink_highlighter</span>
 			</button>
 
 		</div>
+
+	</div>
+
+</ng-template>
+
+<ng-template #quote_menu>
+
+	<div class="card darker quote_menu" cdkMenu>
+
+		<button class="medium" (click)="addBlockquote()" cdkMenuItem>
+			<span class="material-symbols-outlined small">chevron_right</span>
+			<span>Blockquote</span>
+		</button>
+
+		<button class="medium primary" (click)="addBlockquote('note')" cdkMenuItem>
+			<span class="material-symbols-outlined small">chevron_right</span>
+			<span>&quot;Note&quot;</span>
+		</button>
+
+		<button class="medium success" (click)="addBlockquote('tip')" cdkMenuItem>
+			<span class="material-symbols-outlined small">chevron_right</span>
+			<span>&quot;Tip&quot;</span>
+		</button>
+
+		<button class="medium info" (click)="addBlockquote('important')" cdkMenuItem>
+			<span class="material-symbols-outlined small">chevron_right</span>
+			<span>&quot;Important&quot;</span>
+		</button>
+
+		<button class="medium warn" (click)="addBlockquote('warning')" cdkMenuItem>
+			<span class="material-symbols-outlined small">chevron_right</span>
+			<span>&quot;Warning&quot;</span>
+		</button>
+
+		<button class="medium error" (click)="addBlockquote('caution')" cdkMenuItem>
+			<span class="material-symbols-outlined small">chevron_right</span>
+			<span>&quot;Caution&quot;</span>
+		</button>
 
 	</div>
 

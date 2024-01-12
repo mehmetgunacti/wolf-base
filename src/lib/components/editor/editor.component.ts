@@ -213,6 +213,34 @@ export class EditorComponent implements OnInit {
 
 	}
 
+	addBlockquote(type?: 'warning' | 'note' | 'tip' | 'important' | 'caution'): void {
+
+		let start = '';
+		switch (type) {
+
+			case 'warning':
+				start = '\n\n> [!warning]';
+				break;
+			case 'note':
+				start = '\n\n> [!note]';
+				break;
+			case 'tip':
+				start = '\n\n> [!tip]';
+				break;
+			case 'important':
+				start = '\n\n> [!important]';
+				break;
+			case 'caution':
+				start = '\n\n> [!caution]';
+				break;
+
+		}
+
+		let s = start + '\n> \n\n';
+		this.updateEditor(s, 'replace', 2);
+
+	}
+
 	private updateEditor(text: string, action: 'replace' | 'wrap', fromEnd: number = 0) {
 
 		const textarea = this.editor.nativeElement;

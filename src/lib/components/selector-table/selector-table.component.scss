@@ -1,14 +1,17 @@
+@import 'mixins';
+
 :host {
 
-	& > div.card {
+	& > div {
 
 		padding	: var(--gap);
+		gap		: var(--gap-sm);
 
 		& > div:first-child {
 
 			font-size		: var(--font-size-xs);
 			text-align		: center;
-			padding			: var(--gap-xs);
+			padding			: var(--gap-xxs) var(--gap-xs);
 
 		}
 		[table-selectors] {

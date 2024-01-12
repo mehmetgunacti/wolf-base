@@ -88,10 +88,26 @@ button {
 
 	}
 
+	&.medium {
+
+		font-size			: var(--font-size-sm);
+		padding				: var(--gap-sm);
+
+	}
+
 	&.small {
 
 		font-size			: var(--font-size-xs);
 		padding				: var(--gap-xs);
+
+	}
+
+	&.primary {
+
+		--col-button-bg-hue				: var(--col-primary-hue);
+		--col-button-bg-sat				: var(--col-primary-sat);
+		--col-button-bg-lig				: var(--col-primary-lig);
+		--col-button-bg-alp				: var(--col-primary-alp);
 
 	}
 
@@ -101,6 +117,15 @@ button {
 		--col-button-bg-sat				: var(--col-success-sat);
 		--col-button-bg-lig				: var(--col-success-lig);
 		--col-button-bg-alp				: var(--col-success-alp);
+
+	}
+
+	&.info {
+
+		--col-button-bg-hue				: var(--col-info-hue);
+		--col-button-bg-sat				: var(--col-info-sat);
+		--col-button-bg-lig				: var(--col-info-lig);
+		--col-button-bg-alp				: var(--col-info-alp);
 
 	}
 
