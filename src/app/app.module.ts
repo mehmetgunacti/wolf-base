@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { NavOverlayComponent } from './components/nav-overlay/nav-overlay.component';
 import { NavComponent } from './components/nav/nav.component';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
 	declarations: [
@@ -39,6 +40,7 @@ import { SplashScreenComponent } from './components/splash-screen/splash-screen.
 			// or after 30 seconds (whichever comes first).
 			registrationStrategy: 'registerWhenStable:30000' // 'registerImmediately'
 		}),
+		ScrollingModule
 	],
 	providers: config.providers,
 	bootstrap: [AppComponent]
