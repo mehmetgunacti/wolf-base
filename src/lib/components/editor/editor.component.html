@@ -45,16 +45,6 @@
 		<span class="material-symbols-outlined">image</span>
 	</button>
 
-	<!-- INLINE CODE BUTTON -->
-	<button
-		class="icon-only"
-		(click)="addInlineCode()"
-		title="Inline Code"
-		tabindex="0"
-		cdkMenuItem>
-		<span class="material-symbols-outlined">code</span>
-	</button>
-
 	<!-- CODE BLOCKS BUTTON -->
 	<button
 		class="icon-only"
@@ -238,41 +228,49 @@
 	<div class="card darker code_menu" cdkMenu>
 
 		<fieldset>
+			<!-- INLINE CODE BUTTON -->
+			<button class="icon-only small" (click)="addInlineCode()" cdkMenuItem>
+				<span class="material-symbols-outlined small">code</span>
+				<span>Inline Code</span>
+			</button>
+		</fieldset>
+
+		<fieldset>
 			<legend>Frequent</legend>
 
-			<button class="icon-only small" (click)="addCodeBlock('')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>Empty Block</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('java')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('java')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>java</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('typescript')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('typescript')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>typescript</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('javascript')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('javascript')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>javascript</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('scss')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('scss')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>scss</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('bash')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('bash')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>bash</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('sql')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('sql')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>sql</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('xml')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('xml')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>xml</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('yaml')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('yaml')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>yaml</span>
 			</button>
@@ -282,63 +280,63 @@
 		<fieldset>
 			<legend>Other</legend>
 
-			<button class="icon-only small" (click)="addCodeBlock('asciidoc')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('asciidoc')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>asciidoc</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('autohotkey')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('autohotkey')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>autohotkey</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('c')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('c')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>c</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('cpp')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('cpp')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>cpp</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('css')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('css')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>css</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('dockerfile')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('dockerfile')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>dockerfile</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('gradle')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('gradle')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>gradle</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('http')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('http')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>http</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('ini')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('ini')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>ini</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('json')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('json')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>json</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('kotlin')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('kotlin')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>kotlin</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('markdown')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('markdown')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>markdown</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('powershell')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('powershell')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>powershell</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('properties')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('properties')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>properties</span>
 			</button>
-			<button class="icon-only small" (click)="addCodeBlock('python')" tabindex="0" cdkMenuItem>
+			<button class="icon-only small" (click)="addCodeBlock('python')" cdkMenuItem>
 				<span class="material-symbols-outlined small">chevron_right</span>
 				<span>python</span>
 			</button>
