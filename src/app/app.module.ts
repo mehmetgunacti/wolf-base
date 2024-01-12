@@ -14,6 +14,7 @@ import * as config from './app.config';
 import { HeaderComponent } from './components/header/header.component';
 import { NavOverlayComponent } from './components/nav-overlay/nav-overlay.component';
 import { NavComponent } from './components/nav/nav.component';
+import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 
 @NgModule({
 	declarations: [
@@ -21,7 +22,8 @@ import { NavComponent } from './components/nav/nav.component';
 		HeaderComponent,
 		NavComponent,
 		NavOverlayComponent,
-		MenuComponent
+		MenuComponent,
+		SplashScreenComponent
 	],
 	imports: [
 		BrowserModule,

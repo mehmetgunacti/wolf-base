@@ -1,6 +1,11 @@
-<app-nav-overlay/>
+@if (splashVisible()) {
+
+	<app-splash-screen @fadeOut />
+
+}
+<app-nav-overlay />
 <header>
-	<app-header/>
+	<app-header />
 </header>
 <nav>
 	<app-nav />

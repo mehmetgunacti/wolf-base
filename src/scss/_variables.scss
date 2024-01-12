@@ -1,7 +1,8 @@
 $nav-width					: 28rem;
 $header-height				: 6rem;
 
-$transition					: 1s cubic-bezier(0.25, 1, 0.25, 1);
+$transition-timing-fn		: cubic-bezier(0.25, 1, 0.25, 1);
+$transition					: 1s $transition-timing-fn;
 $bg-transition				: background-color $transition;
 $input-element-min-height	: 4rem;
 

@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 @keyframes scaleAndFade {
 
@@ -48,14 +49,16 @@
 
 }
 
-#splashScreen {
+:host {
 
-	@extend %flex-center-center;
+	@include mx-flex-center-center;
 	width				: 100vw;
 	height				: 100vh;
-	background-color	: #121212;
 	position			: absolute;
 	z-index				: $z-index-splash-screen;
+
+	background-color	: fn-hsl(bg-6);
+	transition			: background-color 600ms ease-in;
 
 	& > img {
 
