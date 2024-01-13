@@ -1,0 +1,13 @@
+.menu {
+
+	@include mx-component(4);
+	@include mx-flex-column;
+
+	& > hr {
+
+		margin-top		: var(--gap-sm);
+		margin-bottom	: var(--gap-sm);
+
+	}
+
+}

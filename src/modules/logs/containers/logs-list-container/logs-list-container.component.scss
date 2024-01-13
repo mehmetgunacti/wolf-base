@@ -1,31 +1,35 @@
 @import 'helper';
 @import 'variables';
+@import 'components';
 @import 'mixins';
 
 :host {
 
-	@extend %flex-column;
+	@include mx-card;
 
-	[log_entry] {
+	& > main {
 
-		& > div:first-child {
+		& > div[log_entry] {
 
-			margin-bottom	: var(--gap-xs);
-			@include mx-flex-space-between-center;
-			& > small {
+			display			: block;
+			margin-bottom	: var(--gap-xl);
 
-				color		: fn-hsl(primary);
-				font-weight	: bold;
+			& > div:first-child { // first child: in case log message contains html
+
+				display		: flex;
+				gap			: var(--gap-xs);
+				& > small {
+
+					font-weight: bold;
+					&:nth-child(1) {
+
+						color		: fn-hsl(primary);
+
+					}
+
+				}
 
 			}
-
-		}
-
-		@extend %flex-column;
-		& > small {
-
-			color		: fn-hsl(text-secondary);
-			font-size	: var(--font-size-xs);
 
 		}
 

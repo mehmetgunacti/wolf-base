@@ -1,0 +1,27 @@
+.cr-slider {
+
+	border-radius	: var(--border-radius-sm);
+	padding			: var(--gap-sm);
+
+	&:focus {
+
+		@include mx-outline(!important);
+		// outline			: 1px solid red !important; // fn-hsl(focus) !important;
+		// outline-style	: solid !important;
+
+	}
+
+}
+
+.cr-boundary,
+.cr-image,
+.cr-viewport {
+
+	&:focus,
+	&:focus-within {
+
+		@include mx-outline;
+
+	}
+
+}

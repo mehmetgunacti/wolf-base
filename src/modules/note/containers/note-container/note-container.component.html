@@ -8,7 +8,7 @@
 
 	<ng-template #menu>
 
-		<div class="card darker" cdkMenu *ngIf="(note$ | async) as note">
+		<div class="menu" cdkMenu1 *ngIf="(note$ | async) as note">
 
 			<button
 				cdkMenuItem
@@ -17,7 +17,7 @@
 				<span class="material-symbols-outlined">post_add</span> Child Note
 			</button>
 
-			<hr class="even">
+			<hr>
 
 			<button
 				cdkMenuItem
@@ -33,7 +33,7 @@
 				<span class="material-symbols-outlined">edit_note</span> Edit Content
 			</button>
 
-			<hr class="even">
+			<hr>
 
 			<button
 				cdkMenuItem

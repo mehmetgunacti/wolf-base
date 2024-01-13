@@ -1,20 +1,23 @@
 @import 'helper';
 @import 'variables';
-@import 'mixins/responsive';
+@import 'components';
+@import 'mixins';
 
 :host {
 
+	@include mx-card;
+
 	form {
 
-		flex			: 1;
-		@extend %flex-column;
+		@include mx-flex-column;
 		padding			: var(--gap-xs);
 		gap				: var(--gap);
 
 		& > div {
 
-			@extend %flex-row;
-			gap			: var(--gap-xs);
+			display			: flex;
+			flex-direction	: row;
+			gap				: var(--gap-xs);
 			& :first-child {
 
 				flex	: 1;
@@ -31,18 +34,24 @@
 
 	}
 
-	div[form-element-buttons] {
+	& > footer {
 
-		flex				: 1;
-		@extend %flex-space-between-center;
-		padding				: var(--gap-xs);
-
-		& button:last-child {
-
-			margin-left		: auto;
-
-		}
+		@include mx-flex-end-center;
 
 	}
+
+	// div[form-element-buttons] {
+
+	// 	flex				: 1;
+	// 	@extend %flex-space-between-center;
+	// 	padding				: var(--gap-xs);
+
+	// 	& button:last-child {
+
+	// 		margin-left		: auto;
+
+	// 	}
+
+	// }
 
 }

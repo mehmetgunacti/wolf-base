@@ -1,27 +1,19 @@
 @import 'helper';
 @import 'variables';
+@import 'components';
 @import 'mixins';
 
 :host {
 
 	@extend %flex-column;
-	gap				: 0.5rem;
 	margin-top		: 2rem;
-
-	border-radius	: var(--border-radius);
-
-	@include mx-box-shadow;
 
 	& > fieldset {
 
-		@extend %flex-start-center;
+		@include mx-card;
+		@include mx-flex-column;
 		position			: relative;
-		display				: block;
-		padding				: 4rem var(--gap);
-
-		background-color	: fn-hsl(bg-3);
-		border-radius		: var(--border-radius);
-		transition			: $bg-transition;
+		padding-top			: calc(var(--gap-xl) + var(--gap-xxl));
 
 		& > legend {
 
@@ -38,7 +30,7 @@
 			margin-left			: var(--gap);
 
 			border				: none;
-			background-color	: fn-hsl(bg-4);
+			background-color	: fn-hsl(bg-3);
 			border-radius		: var(--border-radius);
 			transition			: $bg-transition;
 
@@ -46,21 +38,11 @@
 
 		& > main {
 
-			padding				: var(--gap-xxl);
+			@include mx-scrollable;
 
-			& > [task_details] {
+			& > div {
 
-				max-height			: 25rem;
-				overflow-y			: auto;
-				width				: 100%;
-				@include mx-webkit-scrollbar;
-
-				& > span {
-
-					font-size		: var(--font-size-xs);
-					color			: fn-hsl(text-secondary);
-
-				}
+				margin-bottom	: var(--gap-xl);
 
 			}
 
@@ -68,11 +50,8 @@
 
 		& > footer {
 
-			flex		: 1;
-			@extend %flex-end-center;
-			position	: absolute;
-			right		: var(--gap-lg);
-			bottom		: var(--gap-lg);
+			@include mx-flex-end-center;
+			padding			: var(--gap-sm);
 
 		}
 

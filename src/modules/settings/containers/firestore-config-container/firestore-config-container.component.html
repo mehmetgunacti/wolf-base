@@ -1,6 +1,10 @@
-<div class="card">
+<header>
 
 	<div card_title>Firestore Configuration</div>
+
+</header>
+<main>
+
 	<app-firestore-config-form [config]="config$ | async" (save)="onSave($event)" />
 
-</div>
+</main>

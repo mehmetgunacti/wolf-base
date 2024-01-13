@@ -6,11 +6,4 @@
 	@extend %flex-column;
 	gap	: var(--gap-sm);
 
-	#cardmenu hr {
-
-		margin-top		: var(--gap-sm);
-		margin-bottom	: var(--gap-sm);
-
-	}
-
 }

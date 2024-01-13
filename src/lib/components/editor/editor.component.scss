@@ -35,12 +35,6 @@
 
 		@extend %flex-center-y;
 
-		& [format-buttons] {
-
-			background-color: fn-hsl(bg-1);
-
-		}
-
 		// PREVIEW BUTTON
 		& > button:last-of-type {
 

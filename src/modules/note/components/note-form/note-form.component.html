@@ -1,6 +1,9 @@
-<div class="card">
+<header>
 
 	<div card_title>{{ !!note ? 'Edit' : 'Add' }} Note</div>
+
+</header>
+<main>
 
 	<form>
 
@@ -8,7 +11,6 @@
 		<div *ngIf="note?.id">
 			<w-input [control]="form.id" name="ID" [readonly]="true"/>
 		</div>
-
 
 		<!-- PARENT ID -->
 		<div>
@@ -33,14 +35,9 @@
 
 	</form>
 
-	<ng-container card-footer>
+</main>
+<footer>
 
-		<div form-element-buttons>
+	<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>
 
-			<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>
-
-		</div>
-
-	</ng-container>
-
-</div>
+</footer>

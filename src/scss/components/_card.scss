@@ -2,28 +2,43 @@
 @import 'variables';
 @import 'mixins';
 
-.card {
+@mixin mx-card($bg: 2) {
 
-	@include mx-flex-column;
-	@include mx-component;
+	display	: block;
+	@include mx-component($bg);
 	@include mx-box-shadow;
+
 	gap		: var(--gap-xl);
 
-	& > [card_title] {
+	& > header {
 
-		display	: block;
-		@include mx-h3;
-		& > small {
+		& > [card_title] {
 
-			display	: block;
+			display			: block;
+			margin-bottom	: var(--gap-xl);
+			@include mx-h3;
 
 		}
 
 	}
 
+	& > main,
+	& > footer {
+
+		display		: block;
+		padding		: var(--gap-sm);
+
+	}
+
+}
+
+.card {
+
+	@include mx-card;
+
 	&.darker {
 
-		background-color	: fn-hsl(bg-3, (lig: "- 1%"));
+		background-color	: fn-hsl(bg-3);
 
 	}
 

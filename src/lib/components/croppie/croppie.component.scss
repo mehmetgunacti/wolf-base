@@ -17,8 +17,8 @@
 		border-width		: 1px;
 		border-style		: solid;
 
-		background-color	: fn-hsl(bg-2);
-		border-color		: fn-hsl(bg-2, (lig: "- 10%"));
+		background-color	: fn-hsl(bg-1);
+		border-color		: fn-hsl(bg-1, (lig: "- 10%"));
 
 		max-width			: 100%;
 		width				: 127px;
@@ -26,13 +26,13 @@
 		position			: relative;
 		transition			: $bg-transition;
 
-		&:hover,
-		&:focus,
-		&:focus-visible {
+		// &:hover,
+		// &:focus,
+		// &:focus-visible {
 
-			@include mx-outline;
+		// 	@include mx-outline;
 
-		}
+		// }
 
 		#close {
 
@@ -50,6 +50,8 @@
 			border-radius		: 80px;
 			width				: 20px;
 			height				: 20px;
+			min-width			: 0;
+			padding				: 0;
 
 			& > span {
 
@@ -71,13 +73,17 @@
 			width			: 120px;
 			height			: 120px;
 
+			background-color: unset;
+			border-color	: transparent;
+			border-radius	: var(--border-radius-sm);
+
 			cursor			: pointer;
 
+			&:hover,
 			&:focus,
 			&:focus-visible {
 
-				outline				: 1px solid var(--focus-glow);
-				box-shadow			: 0 0 10px var(--focus-glow);
+				@include mx-outline;
 
 			}
 

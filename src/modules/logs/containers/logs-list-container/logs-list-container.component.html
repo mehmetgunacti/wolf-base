@@ -8,7 +8,7 @@
 
 </w-portal>
 
-<div class="card">
+<header>
 
 	<div card_title>Logs
 
@@ -24,19 +24,20 @@
 
 	</div>
 
+</header>
+<main>
+
 	@if (logMessages$ | async; as logs) {
 
 		@for (log of logs; track log.id) {
 
 			<div log_entry>
-
 				<div>
 					<small>[{{ log.category }}]</small>
-					<small>{{ log.date | timePast:true }}</small>
+					<small *ngIf="log.entityId">{{ log.entityId }}</small>
 				</div>
-				<small *ngIf="log.entityId">{{ log.entityId }}</small>
+				<small>{{ log.date | timePast:true }}</small>
 				<div [innerHTML]="log.message"></div>
-
 			</div>
 
 		}
@@ -48,4 +49,4 @@
 
 	}
 
-</div>
+</main>

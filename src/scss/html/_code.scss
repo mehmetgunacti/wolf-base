@@ -17,13 +17,13 @@ kbd {
 	white-space			: pre-wrap;
 	border-radius		: var(--border-radius-sm);
 	padding				: var(--gap-xs) var(--gap-sm);
-	background-color	: fn-hsl(bg-5);
+	background-color	: fn-hsl(bg-2, (lig: "- 3%"));
 
 }
 
 pre {
 
-	background-color	: fn-hsl(bg-5);
+	background-color	: fn-hsl(bg-2, (lig: "- 3%"));
 	font-size			: 90%;
 	padding				: var(--gap);
 	border-radius		: var(--border-radius-sm);

@@ -1,5 +1,5 @@
-@mixin mx-outline {
+@mixin mx-outline($important: "") {
 
-	outline	: 3px solid fn-hsl(focus);
+	outline	: 3px solid fn-hsl(focus) #{$important};
 
 }

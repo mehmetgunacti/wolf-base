@@ -1,8 +1,8 @@
-@import 'helper';
+@import 'mixins';
 
 :host {
 
-	@extend %flex-column;
+	@include mx-flex-column;
 	gap: var(--gap-sm);
 
 }

@@ -4,7 +4,7 @@
 
 :host {
 
-	@extend %flex-column;
+	@include mx-flex-column;
 	height			: 100%;
 	gap				: var(--gap-sm);
 
@@ -15,7 +15,7 @@
 		& > app-bookmark {
 
 			height				: 100%;
-			--bookmark-bg-color	: #{fn-hsl(bg-4)};
+			// --bookmark-bg-color	: #{fn-hsl(bg-3)};
 
 		}
 
@@ -26,6 +26,7 @@
 		display				: block;
 		overflow-y			: auto;
 		flex				: 1;
+		padding				: var(--gap-xs);
 		padding-top			: var(--gap-xxl);
 
 		@include mx-webkit-scrollbar;
@@ -33,7 +34,7 @@
 		& > form {
 
 			@extend %flex-column;
-			gap						: var(--gap);
+			gap				: var(--gap);
 
 			& > div[bookmark-form-left] {
 

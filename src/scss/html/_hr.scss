@@ -7,11 +7,4 @@ hr {
 
 	transition		: border $transition;
 
-	&.even {
-
-		margin-top		: var(--gap-sm);
-		margin-bottom	: var(--gap-sm);
-
-	}
-
 }

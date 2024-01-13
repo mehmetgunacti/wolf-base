@@ -1,6 +1,11 @@
-<div class="card">
+<header>
 
 	<div card_title>Title Lookup URL</div>
+
+</header>
+
+<main>
+
 	<app-title-lookup-config-form [url]="url$ | async" (save)="onSave($event)"/>
 
-</div>
+</main>

@@ -26,7 +26,7 @@
 
 		&:hover {
 
-			background-color	: fn-hsl(bg-4, (lig: "+ 10%"));
+			background-color	: fn-hsl(bg-3, (lig: "+ 10%"));
 
 		}
 
@@ -62,7 +62,7 @@
 
 				&:not(:empty) {
 
-					background-color	: fn-hsl(bg-3, (lig: "- 3%"));
+					background-color	: fn-hsl(bg-2, (lig: "- 3%"));
 
 				}
 

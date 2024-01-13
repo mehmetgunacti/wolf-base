@@ -1,15 +1,16 @@
 @import 'helper';
+@import 'mixins';
 
 :host {
 
 	@extend %flex-column;
 	gap		: var(--gap);
 
-	span {
+	[version_info] {
 
-		@extend %flex-column-end;
-		font-size		: var(--font-size-xs);
-		color			: fn-hsl(text-secondary);
+		@include mx-flex-end-center;
+		@include mx-component;
+		@include mx-box-shadow;
 
 	}
 

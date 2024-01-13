@@ -10,8 +10,8 @@
 	border-width			: 1px;
 	border-style			: solid;
 
-	background-color		: fn-hsl(bg-2);
-	border-color			: fn-hsl(bg-2, (lig: "- 10%"));
+	background-color		: fn-hsl(bg-1);
+	border-color			: fn-hsl(bg-1, (lig: "- 10%"));
 	transition				: $bg-transition, border-color $transition;
 
 	min-height				: var(--input-element-height);
@@ -50,7 +50,7 @@
 
 	top					: -1px;
 	font-size			: 1rem;
-	background-color	: fn-hsl(accent);
+	background-color	: fn-hsl(bg-3);
 	border				: none;
 
 }

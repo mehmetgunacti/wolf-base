@@ -1,17 +1,53 @@
-<ng-container *ngIf="note">
-<div class="card">
+@if (note) {
 
-	<div note_parents>
+	<div note_main>
 
-		<a [routerLink]="['/notes']" tabindex="0">
-			<span class="material-symbols-outlined">note_stack</span>
-			<span>Notes</span>
-		</a>
+		<div note_parents>
 
-		<a	*ngFor="let note of parents; let idx = index"
+			<a [routerLink]="['/notes']" tabindex="0">
+				<span class="material-symbols-outlined">note_stack</span>
+				<span>Notes</span>
+			</a>
+
+			<a	*ngFor="let note of parents; let idx = index"
+				[routerLink]="['/notes', note.id]"
+				tabindex="0"
+				[style.margin-left.px]="(idx + 1) * 15">
+
+				<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
+				<span>{{ note.name }}</span>
+
+			</a>
+
+		</div>
+
+		<h1>{{ note.name }}</h1>
+
+		<div note_tags *ngIf="note.tags as tags">
+
+			<button *ngFor="let tag of tags" class="tag xs" [routerLink]="['/notes']" [queryParams]="{ 'tags': tag }">{{ tag }}</button>
+
+		</div>
+
+		<div note_info>
+
+			<small [title]="note.modified | date:'EEEE dd.MM.yyyy hh:mm'">Last edited: {{ note.modified | timePast:false }}</small>
+
+		</div>
+
+	</div>
+
+}
+
+@if (children.length > 0) {
+
+	<div note_children>
+
+		<div note_nested>Child Notes</div>
+		<a	*ngFor="let note of children"
 			[routerLink]="['/notes', note.id]"
 			tabindex="0"
-			[style.margin-left.px]="(idx + 1) * 15">
+			[style.margin-left.px]="15">
 
 			<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
 			<span>{{ note.name }}</span>
@@ -20,37 +56,4 @@
 
 	</div>
 
-	<div note_title>
-
-		<h1>{{ note.name }}</h1>
-
-	</div>
-
-	<div note_tags *ngIf="note.tags as tags">
-
-		<button *ngFor="let tag of tags" class="tag xs" [routerLink]="['/notes']" [queryParams]="{ 'tags': tag }">{{ tag }}</button>
-
-	</div>
-
-	<div note_info>
-
-		<span [title]="note.modified | date:'EEEE dd.MM.yyyy hh:mm'">Last edited: {{ note.modified | timePast:false }}</span>
-
-	</div>
-
-</div>
-<div class="card" note_children *ngIf="children.length > 0">
-
-	<div note_nested>Child Notes</div>
-	<a	*ngFor="let note of children"
-		[routerLink]="['/notes', note.id]"
-		tabindex="0"
-		[style.margin-left.px]="15">
-
-		<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
-		<span>{{ note.name }}</span>
-
-	</a>
-
-</div>
-</ng-container>
+}

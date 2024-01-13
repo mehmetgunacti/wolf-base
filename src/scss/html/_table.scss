@@ -14,7 +14,7 @@ table {
 
 	& > thead {
 
-		background-color	: fn-hsl(bg-4, (lig: "- 2%"));
+		background-color	: fn-hsl(bg-2, (lig: "- 2%"));
 		border-width		: 2px;
 		border-style		: solid;
 		border-color		: transparent;
@@ -40,11 +40,11 @@ table {
 
 	& > tbody {
 
-		background-color	: fn-hsl(bg-4, (lig: "+ 1%"));
+		background-color	: fn-hsl(bg-2, (lig: "- 1%"));
 
 		& > tr {
 
-			border-bottom	: 1px solid fn-hsl(bg-4, (lig: "- 1%"));
+			border-bottom	: 1px solid fn-hsl(bg-3, (lig: "- 1%"));
 
 			&:last-child {
 
@@ -79,7 +79,7 @@ table {
 
 	&.striped > tbody > tr:nth-of-type(2n) {
 
-		background-color	: fn-hsl(bg-4);
+		background-color	: fn-hsl(bg-3);
 
 	}
 

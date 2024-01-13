@@ -1,18 +1,20 @@
 <div class="img-thumbnail">
 
-	<span id="close"
+	<button id="close"
 		*ngIf="(imageLoaded$ | async) else placeholder"
-		(click)="unbindCroppie()">
+		(click)="unbindCroppie()"
+		tabindex="0">
 		<span class="material-symbols-outlined">close</span>
-	</span>
+	</button>
 	<ng-template #placeholder>
 
-		<div *ngIf="(initialized$ | async); else notInitialized"
+		<button type="button" *ngIf="(initialized$ | async); else notInitialized"
 			id="croppie-placeholder"
-			(click)="fileinput.click()" tabindex="0">
+			(click)="fileinput.click()"
+			tabindex="0">
 				<span class="material-symbols-outlined">image</span>
 				<span>Pick Image</span>
-		</div>
+		</button>
 		<ng-template #notInitialized>
 			<div id="croppie-placeholder">
 				<span>Initializing...</span>

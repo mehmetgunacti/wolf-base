@@ -1,46 +1,39 @@
-<div class="card">
+@if (isFiltered$ | async) {
 
-	@if (isFiltered$ | async) {
+	<div card_title>Search Results
+		@if (queryParamsAsString$ | async; as paramsText) {
+			<small>{{ paramsText }}</small>
+		}
+	</div>
 
-		<div card_title>Search Results
-			@if (queryParamsAsString$ | async; as paramsText) {
-				<small>{{ paramsText }}</small>
-			}
+} @else {
+
+	<div card_title>Root Notes</div>
+
+}
+
+<ng-container *ngIf="(notes$ | async) as notes">
+
+	<div note_entries *ngIf="notes.length > 0; else noNotes">
+
+		<a	*ngFor="let note of notes"
+			[routerLink]="['/notes', note.id]"
+			tabindex="0">
+
+			<small>{{ note.modified | timePast }}</small>
+			<span>{{ note.name }}</span>
+
+		</a>
+
+	</div>
+	<ng-template #noNotes>
+		<div class="empty">
+			No notes available
+			<br>
+			<button routerLink="/notes/new" class="icon-only">
+				<span class="material-symbols-outlined">add</span> Add Note
+			</button>
 		</div>
+	</ng-template>
 
-	} @else {
-
-		<div card_title>Root Notes</div>
-
-	}
-
-	<ng-container *ngIf="(notes$ | async) as notes">
-
-		<div note_entries *ngIf="notes.length > 0; else noNotes">
-
-			<a	*ngFor="let note of notes"
-				[routerLink]="['/notes', note.id]"
-				tabindex="0">
-
-				<span>
-					<span class="material-symbols-outlined">schedule</span>
-					<span>{{ note.modified | timePast }}</span>
-				</span>
-				<span>{{ note.name }}</span>
-
-			</a>
-
-		</div>
-		<ng-template #noNotes>
-			<div class="empty">
-				No notes available
-				<br>
-				<button routerLink="/notes/new" class="icon-only">
-					<span class="material-symbols-outlined">add</span> Add Note
-				</button>
-			</div>
-		</ng-template>
-
-	</ng-container>
-
-</div>
+</ng-container>

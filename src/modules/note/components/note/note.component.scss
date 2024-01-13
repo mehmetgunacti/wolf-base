@@ -1,5 +1,6 @@
 @import 'helper';
 @import 'variables';
+@import 'components';
 @import 'mixins';
 
 :host {
@@ -7,11 +8,41 @@
 	@extend %flex-column;
 	gap		: var(--gap-sm);
 
+	& > [note_main] {
+
+		@include mx-card(3);
+		[note_parents] {
+
+			margin-bottom	: var(--gap-lg);
+
+		}
+
+		[note_tags] {
+
+			@extend %flex-center-end;
+			gap			: var(--gap-xxs);
+
+		}
+
+		[note_info] {
+
+			@extend %flex-center-end;
+			padding-top	: var(--gap-sm);
+
+		}
+
+	}
+
+	& > [note_children] {
+
+		@include mx-card(3);
+
+	}
+
 	[note_parents],
 	[note_children] {
 
-		& > a,
-		& > [note-sub-title] {
+		& > a {
 
 			@extend %flex-center-y;
 			padding				: var(--gap-xs);
@@ -29,13 +60,9 @@
 
 			}
 
-		}
-
-		& > a {
-
 			&:hover {
 
-				background-color	: fn-hsl(bg-4, (lig: "+ 10%"));
+				background-color	: fn-hsl(bg-3, (lig: "+ 10%"));
 
 			}
 
@@ -55,26 +82,6 @@
 		font-size	: var(--font-size-h5);
     	font-weight	: bold;
 	    color		: fn-hsl(primary);
-
-	}
-
-	[note_tags] {
-
-		@extend %flex-center-end;
-		gap			: var(--gap-xxs);
-
-	}
-
-	[note_info] {
-
-		@extend %flex-center-end;
-
-		& > span {
-
-			color		: fn-hsl(text-secondary);
-			font-size	: var(--font-size-xs);
-
-		}
 
 	}
 

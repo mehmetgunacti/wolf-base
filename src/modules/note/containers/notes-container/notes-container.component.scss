@@ -4,9 +4,10 @@
 
 :host{
 
-	@extend %flex-column;
+	@include mx-flex-column;
+	@include mx-component;
 
-	[note_entries] {
+	& > [note_entries] {
 
 		& > a {
 
@@ -46,7 +47,7 @@
 
 			&:hover {
 
-				background-color	: fn-hsl(bg-4, (lig: "+ 10%"));
+				background-color	: fn-hsl(bg-3, (lig: "+ 10%"));
 
 			}
 

@@ -3,7 +3,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, 
 import { FormControl } from '@angular/forms';
 import { CroppieOptions } from 'croppie';
 import { Observable, Subscription, combineLatest, timer } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { delay, distinctUntilChanged, tap } from 'rxjs/operators';
 import { DOMService } from 'services/dom.service';
 import { CroppieWrapper, createCroppieWrapper } from './croppie.model';
 import { external } from './external-files';
@@ -47,8 +47,28 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 	) {
 
 		this.croppieWrapper = createCroppieWrapper();
-		this.imageLoaded$ = this.croppieWrapper.imageLoaded$;
 		this.initialized$ = this.croppieWrapper.initialized$;
+		this.imageLoaded$ = this.croppieWrapper.imageLoaded$.pipe(
+			delay(400),
+			tap((loaded) => {
+
+				if (loaded) {
+
+					setTimeout(() => {
+
+							const slider: HTMLInputElement | null = this.document.querySelector('.cr-slider');
+							if (slider) {
+								slider.step = "0.1";
+								slider.focus();
+							}
+
+						}, 400
+					)
+
+				}
+
+			})
+		);
 
 	}
 

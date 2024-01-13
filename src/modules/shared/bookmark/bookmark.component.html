@@ -13,7 +13,7 @@
 
 		<div bookmark-top>
 
-			<a href="{{ bm.urls }}" target="_blank" (click)="onLinkClick()">
+			<a [tabindex]="disabled ? -1 : 0" href="{{ bm.urls }}" target="_blank" (click)="onLinkClick()">
 
 				<span bookmark-name>{{ bm.name }}
 					<sup>
@@ -32,7 +32,13 @@
 			</ng-container> -->
 
 			<div bookmark-tags *ngIf="bm.tags">
-				<button *ngFor="let tag of bm.tags" class="tag xs" [routerLink]="['/bookmarks']" [queryParams]="{ 'tags': tag }">{{ tag }}</button>
+
+				@for (tag of bm.tags; track tag) {
+
+					<button [disabled]="disabled" class="tag xs" [routerLink]="['/bookmarks']" [queryParams]="{ 'tags': tag }">{{ tag }}</button>
+
+				}
+
 			</div>
 
 		</div>

@@ -1,22 +1,22 @@
 <header>
 
 	<div card_title><ng-content select="[card_title]"></ng-content></div>
-	<div card-buttons><ng-content select="[card-buttons]"></ng-content></div>
+	<div card_buttons><ng-content select="[card_buttons]"></ng-content></div>
 
 </header>
-@if (content) {
+<main>
 
-	<main>
+	@if (content) {
+
 		<div [innerHTML]="content"></div>
-	</main>
 
-} @else {
+	} @else {
 
-	<main>
 		<ng-content/>
-	</main>
 
-}
+	}
+
+</main>
 <footer>
 
 	<ng-content select="[card-footer]"></ng-content>

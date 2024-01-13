@@ -4,14 +4,22 @@
 		width						: var(--scrollbar-width);
 		height						: var(--scrollbar-width);
 		border-radius				: var(--border-radius-sm);
-		background-color			: fn-hsl(bg-4, (lig: "+ 4%", alp: "0.4"));
+		background-color			: fn-hsl(bg-3, (lig: "+ 4%", alp: "0.4"));
 		transition					: $bg-transition;
 	}
 
 	&::-webkit-scrollbar-thumb {
 		border-radius				: var(--border-radius);
-		background-color			: fn-hsl(bg-4, (lig: "- 2%"));
+		background-color			: fn-hsl(bg-3, (lig: "- 2%"));
 		transition					: $bg-transition;
 	}
+
+}
+
+@mixin mx-scrollable($maxHeight: 25rem) {
+
+	max-height			: $maxHeight;
+	overflow-y			: auto;
+	@include mx-webkit-scrollbar;
 
 }
