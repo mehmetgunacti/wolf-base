@@ -30,10 +30,12 @@
 
 			<div log_entry>
 
-				<small>[{{ log.category }}]</small>
-				<small>{{ log.date | timePast:true }}</small>
+				<div>
+					<small>[{{ log.category }}]</small>
+					<small>{{ log.date | timePast:true }}</small>
+				</div>
 				<small *ngIf="log.entityId">{{ log.entityId }}</small>
-				<h5 [innerHTML]="log.message"></h5>
+				<div [innerHTML]="log.message"></div>
 
 			</div>
 

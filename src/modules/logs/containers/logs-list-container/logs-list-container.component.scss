@@ -1,5 +1,6 @@
 @import 'helper';
 @import 'variables';
+@import 'mixins';
 
 :host {
 
@@ -7,8 +8,21 @@
 
 	[log_entry] {
 
+		& > div:first-child {
+
+			margin-bottom	: var(--gap-xs);
+			@include mx-flex-space-between-center;
+			& > small {
+
+				color		: fn-hsl(primary);
+				font-weight	: bold;
+
+			}
+
+		}
+
 		@extend %flex-column;
-		& > span {
+		& > small {
 
 			color		: fn-hsl(text-secondary);
 			font-size	: var(--font-size-xs);
