@@ -102,6 +102,12 @@ button {
 
 	}
 
+	&.align-left {
+
+		justify-content		: flex-start;
+
+	}
+
 	&.primary {
 
 		--col-button-bg-hue				: var(--col-primary-hue);
