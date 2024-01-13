@@ -13,7 +13,7 @@
 
 		@include mx-flex-space-between-center;
 
-		& > [card-title] {
+		& > [card_title] {
 
 			@include mx-flex-center-y;
 			padding			: var(--gap-sm);
@@ -28,7 +28,7 @@
 
 		}
 
-		& > [card-title]:empty,
+		& > [card_title]:empty,
 		& > [card-buttons]:empty {
 
 			display			: none;
