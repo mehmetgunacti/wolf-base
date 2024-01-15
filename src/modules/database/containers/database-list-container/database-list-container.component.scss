@@ -1,0 +1,38 @@
+@import 'helper';
+@import 'variables';
+@import 'components';
+@import 'mixins';
+
+:host {
+
+	@include mx-card;
+
+	& > main {
+
+		& > div[log_entry] {
+
+			display			: block;
+			margin-bottom	: var(--gap-xl);
+
+			& > div:first-child { // first child: in case log message contains html
+
+				display		: flex;
+				gap			: var(--gap-xs);
+				& > small {
+
+					font-weight: bold;
+					&:nth-child(1) {
+
+						color		: fn-hsl(primary);
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+}

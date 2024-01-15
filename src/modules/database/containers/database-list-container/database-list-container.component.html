@@ -1,0 +1,52 @@
+<w-portal>
+
+	<button
+		class="icon-only"
+		(click)="onRefresh()">
+		<span class="material-symbols-outlined">refresh</span> Refresh
+	</button>
+
+</w-portal>
+
+<header>
+
+	<div card_title>Logs
+
+		@if (selectedId$ | async; as selectedId) {
+
+			<small>{{ selectedId }}</small>
+
+		} @else {
+
+			<small>Latest Notifications</small>
+
+		}
+
+	</div>
+
+</header>
+<main>
+
+	@if (logMessages$ | async; as logs) {
+
+		@for (log of logs; track log.id) {
+
+			<div log_entry>
+				<div>
+					<small>[{{ log.category }}]</small>
+					<small *ngIf="log.entityId">{{ log.entityId }}</small>
+				</div>
+				<small>{{ log.date | timePast:true }}</small>
+				<div [innerHTML]="log.message"></div>
+			</div>
+
+		}
+		@if (logs.length === 0) {
+
+			<div class="empty">Nothing to display</div>
+
+		}
+
+	}
+
+</main>
