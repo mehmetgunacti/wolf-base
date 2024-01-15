@@ -1,5 +1,5 @@
 @import 'variables';
-@import 'mixins/responsive';
+@import 'mixins';
 
 :host {
 
@@ -15,7 +15,7 @@
 
 	opacity				: 0;
 	visibility			: hidden;
-	transition			: opacity 0.5s ease, visibility 0.5s ease;
+	transition			: opacity 0.5s $transition-timing-fn, visibility 0.5s $transition-timing-fn;
 
 	@include bigScreen() {
 

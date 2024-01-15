@@ -11,8 +11,8 @@
 $overlay-backdrop-color			: var(--col-bg-overlay);
 
 // override backdrop transition (same as $bg-transition)
-$backdrop-animation-duration		: 1s;
-$backdrop-animation-timing-function	: cubic-bezier(0.25, 1, 0.25, 1);
+$backdrop-animation-duration		: 0.4s;
+$backdrop-animation-timing-function	: ease; // $transition-timing-fn; //  cubic-bezier(0.25, 1, 0.25, 1);
 
 // generate angular cdk overlay styles
 @include overlay();
