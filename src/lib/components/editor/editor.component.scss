@@ -5,10 +5,6 @@
 
 .code_menu {
 
-	max-height	: 20rem;
-	overflow-y	: auto;
-	@include mx-webkit-scrollbar;
-
 	fieldset {
 
 		@include mx-flex-column-start;

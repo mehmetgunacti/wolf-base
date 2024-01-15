@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ArrayDataSource } from '@angular/cdk/collections';
+import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, ViewChild, WritableSignal, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UUID } from 'lib/constants';
 import { HasParentId, TreeNode } from 'lib/models';
+import { NULL, TreeItem, toTreeItems } from './select.util';
+import { CdkMenuTrigger } from '@angular/cdk/menu';
 
 @Component({
 	selector: 'w-select',
@@ -9,49 +13,41 @@ import { HasParentId, TreeNode } from 'lib/models';
 	styleUrls: ['./select.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectComponent {
+export class SelectComponent implements AfterViewInit {
 
-	treeNodes: TreeNode[] = [];
+	@ViewChild(CdkMenuTrigger) trigger!: CdkMenuTrigger;
+	@ViewChild('select') select!: ElementRef<HTMLSelectElement>;
+
 
 	@Input() name: string = '';
 	@Input() control!: FormControl<UUID | null>;
-	@Input() set nodes(arr: HasParentId[]) {
+	@Input() nodes: HasParentId[] = [];
 
-		this.treeNodes = this.prepareNodes(arr);
+	popupWidth: WritableSignal<number> = signal(200);
 
-	};
+	@HostListener('window:resize', ['$event'])
+	onResize() {
 
-	private prepareNodes(nodes: HasParentId[]): TreeNode[] {
-
-		const NULL = 'null';
-
-		// sort by name
-		nodes.sort((a, b) => a.name.localeCompare(b.name));
-
-		const map: Map<UUID, HasParentId[]> = new Map();
-		map.set(NULL, []);
-		nodes.forEach(n => {
-
-			const key = n.parentId ?? NULL;
-			if (!map.has(key))
-				map.set(key, []);
-			map.get(key)?.push(n);
-
-		});
-		return this.concatArray(NULL, 0, map);
+		this.popupWidth.set(this.select.nativeElement.offsetWidth);
 
 	}
 
-	private concatArray(key: string, level: number, map: Map<UUID, HasParentId[]>): TreeNode[] {
+	ngAfterViewInit(): void {
 
-		const retValue: TreeNode[] = [];
-		map.get(key)?.forEach(node => {
+		this.popupWidth.set(this.select.nativeElement.offsetWidth);
 
-			retValue.push({ value: node, level });
-			retValue.push(...this.concatArray(node.id, level + 1, map))
+	}
 
-		});
-		return retValue;
+	selectItem(item: HasParentId): void {
+
+		this.control.setValue(item.id === NULL ? null : item.id);
+		this.trigger.close();
+
+	}
+
+	onKeydown(id: UUID): void {
+
+		console.log(id);
 
 	}
 

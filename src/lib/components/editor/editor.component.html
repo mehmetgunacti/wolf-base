@@ -107,7 +107,7 @@
 
 <ng-template #table_menu>
 
-	<div class="card darker" cdkMenu>
+	<div class="menu" cdkMenu>
 
 		<w-selector-table
 			[rows]="6"
@@ -120,7 +120,7 @@
 
 <ng-template #format_menu>
 
-	<div class="card darker" cdkMenu>
+	<div class="menu" cdkMenu>
 
 		<div>
 
@@ -221,7 +221,7 @@
 
 <ng-template #quote_menu>
 
-	<div class="card darker quote_menu" cdkMenu>
+	<div class="menu quote_menu" cdkMenu>
 
 		<button class="medium align-left" (click)="addBlockquote()" cdkMenuItem>
 			<span class="material-symbols-outlined small">chevron_right</span>
@@ -259,7 +259,7 @@
 
 <ng-template #code_menu>
 
-	<div class="card darker code_menu" cdkMenu>
+	<div class="menu scrollable code_menu" cdkMenu>
 
 		<fieldset>
 			<!-- INLINE CODE BUTTON -->

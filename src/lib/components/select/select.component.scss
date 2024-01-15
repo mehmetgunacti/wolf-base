@@ -1,6 +1,14 @@
 @import 'helper';
 @import 'variables';
 @import 'components';
+@import 'mixins';
+
+
+.select-popup {
+
+	flex	: 1;
+
+}
 
 :host {
 
