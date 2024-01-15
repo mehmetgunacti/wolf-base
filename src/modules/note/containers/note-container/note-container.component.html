@@ -8,7 +8,7 @@
 
 	<ng-template #menu>
 
-		<div class="menu" cdkMenu1 *ngIf="(note$ | async) as note">
+		<div class="menu" cdkMenu *ngIf="(note$ | async) as note">
 
 			<button
 				cdkMenuItem
@@ -46,7 +46,7 @@
 				cdkMenuItem
 				class="icon-only align-left"
 				(click)="onRemove(note.id)">
-				<span class="material-symbols-outlined">delete</span> Remote Note
+				<span class="material-symbols-outlined">delete</span> Remove Note
 			</button>
 
 		</div>
