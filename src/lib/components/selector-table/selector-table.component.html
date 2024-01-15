@@ -10,7 +10,8 @@
 				(click)="onClick(col, row)"
 				(keydown)="onKeydown($event);"
 				(focus)="display.innerHTML=col + ' x ' + row;"
-				(mouseover)="display.innerHTML=col + ' x ' + row;"></a>
+				(mouseover)="display.innerHTML=col + ' x ' + row;"
+				(mouseover)="setFocus(col, row)"></a>
 
 		}
 
