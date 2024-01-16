@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Host
 import { FormControl } from '@angular/forms';
 import { UUID } from 'lib/constants';
 import { HasParentId } from 'lib/models';
-import { NULL } from './select.util';
+import { ROOT_ID } from './select.util';
+import { hasModifierKey } from '@angular/cdk/keycodes';
 
 @Component({
 	selector: 'w-select',
@@ -29,23 +30,37 @@ export class SelectComponent {
 
 	}
 
-	onSelectClicked(el: HTMLSelectElement, event: Event): void {
+	onSelectClicked(event: MouseEvent): void {
 
-		event.preventDefault();
-		this.popupWidth.set(el.clientWidth);
+		event.preventDefault; // prevents native select options to open
+		this.select.nativeElement.focus();
+		this.popupWidth.set(this.select.nativeElement.clientWidth);
 
 	}
 
-	onItemSelected(item: HasParentId): void {
+	onItemSelected(item: HasParentId | null): void {
 
-		this.control.setValue(item.id === NULL ? null : item.id);
+		if (item !== null)
+			this.control.setValue(item.id === ROOT_ID ? null : item.id);
+
 		this.trigger.close();
+		this.select.nativeElement.focus();
 
 	}
 
-	onKeydown(id: UUID): void {
+	onKeydown(event: KeyboardEvent): void {
 
-		console.log(id);
+		this.popupWidth.set(this.select.nativeElement.clientWidth);
+
+		if (hasModifierKey(event)) // ctrl, shift etc.
+			return;
+
+		switch (event.key) {
+
+			case "Tab": break;
+			default: event.preventDefault(); // prevents native select options to open
+
+		}
 
 	}
 

@@ -1,11 +1,18 @@
 import { ArrayDataSource } from '@angular/cdk/collections';
+import { hasModifierKey } from '@angular/cdk/keycodes';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Renderer2, inject } from '@angular/core';
-import { UUID } from 'lib/constants';
 import { HasParentId } from 'lib/models';
-import { NULL, TreeItem, toTreeItems } from './select.util';
-import { DOCUMENT } from '@angular/common';
-import { hasModifierKey } from '@angular/cdk/keycodes';
+import { ROOT_ID, TreeItem, toTreeItems } from './select.util';
+
+
+// flatten for key events
+const flattenTree = (item: TreeItem): TreeItem[] => {
+
+	const flattenedChildren = item.children.flatMap(flattenTree);
+	return [item, ...flattenedChildren];
+
+};
 
 @Component({
 	selector: 'w-options',
@@ -15,7 +22,7 @@ import { hasModifierKey } from '@angular/cdk/keycodes';
 })
 export class OptionsComponent implements AfterViewInit {
 
-	ROOT: HasParentId = { id: NULL, name: 'Root', parentId: null };
+	ROOT: HasParentId = { id: ROOT_ID, name: 'Root', parentId: null };
 
 	private flattenedItems!: TreeItem[];
 	treeItems: TreeItem[] = [];
@@ -38,70 +45,36 @@ export class OptionsComponent implements AfterViewInit {
 		this.treeItems = Object.values(dictionary).filter(item => item.parent === null);
 		this.dataSource = new ArrayDataSource(this.treeItems);
 
-		// flatten for key events
-		const flattenTree = (tree: TreeItem): TreeItem[] => {
-			const { value, parent, children, icon } = tree;
-			const flattenedChildren = children.flatMap(flattenTree);
-			return [{ value, parent, icon, children: [] }, ...flattenedChildren];
-		};
-		this.flattenedItems = this.treeItems.flatMap(e => flattenTree(e));
-
-		// console.log(this.flattenedItems.map(e => e.value));
+		this.flattenedItems = this.treeItems.flatMap(flattenTree);
 
 	};
 
-	@Output() selected: EventEmitter<HasParentId> = new EventEmitter();
+	@Output() selected: EventEmitter<HasParentId | null> = new EventEmitter();
 
 	private renderer: Renderer2 = inject(Renderer2);
 
 	ngAfterViewInit(): void {
 
-		this.setFocus(NULL);
+		this.setFocus(ROOT_ID);
 
 	}
 
-	selectItem(item: HasParentId): void {
-
-		//const idxBblocks = this.flattenedItems.findIndex(e => e.value.id === 'ebcfb021-e64b-4e5c-b71b-66a543a91ffe');
-		// const idxBblocks = this.flattenedItems.findIndex(e => e.value.id === item.id);
-		// const bblock = this.flattenedItems[idxBblocks];
-
-		// console.log(this.flattenedItems[idxBblocks], this.treeControl. getDescendants(bblock));
-
-
+	selectItem(item: HasParentId | null): void {
 
 		this.selected.emit(item);
-		// const idx = this.flattenedItems.findIndex(e => e.value.id === item.id);
-		// console.log(idx);
-
-		// let prevIdx = idx;
-
-		// let prev: TreeItem;
-		// // do {
-
-		// 	--prevIdx;
-		// 	if (prevIdx < 0)
-		// 		prevIdx = this.flattenedItems.length - 1;
-		// 	prev = this.flattenedItems[prevIdx];
-
-		// // } while (!this.treeControl.isExpanded(prev));
-
-		// console.log(this.treeControl.isExpanded(prev));
 
 	}
 
 	onKeydown(event: KeyboardEvent, item: TreeItem): void {
 
-		console.log(event.key);
-
-
 		if (hasModifierKey(event)) // ctrl, shift etc.
 			return;
 
-		const btn: HTMLButtonElement = event.target as HTMLButtonElement;
-
-
 		switch (event.key) {
+
+			case "Escape": // just close the popup
+				this.selectItem(null);
+				break;
 
 			case "Enter":
 				event.preventDefault();
@@ -109,35 +82,87 @@ export class OptionsComponent implements AfterViewInit {
 				break;
 
 			case "ArrowDown":
+
 				event.preventDefault();
-				// this.setFocus('');
-				console.log(this.treeItems);
-				console.log(this.treeControl.getChildren(item));
-				const c = this.treeControl.getChildren(item);
-
-
-				// not 050f1ab9-6eed-4ccf-9e0d-f4c3a53b6dd0 sub plugins
-				// yes 53294d6e-809a-4b03-8a09-0382e798e4fc asdfa
-
+				const nextFocusable = this.getNextFocusable(item);
+				this.setFocus(nextFocusable.value.id);
 				break;
 
 			case "ArrowUp":
-				event.preventDefault();
-				// this.setFocus('');
-				console.log(this.treeItems);
-				console.log(this.treeControl);
 
+				event.preventDefault();
+				const prevFocusable = this.getPrevFocusable(item);
+				this.setFocus(prevFocusable.value.id);
 				break;
 
-			// case "ArrowLeft":
-			// 	this.setFocus('');
-			// 	break;
+			case "ArrowLeft":
 
-			// case "ArrowRight":
-			// 	this.setFocus('');
-			// 	break;
+				event.preventDefault();
+				if (item.children.length > 0)
+					this.treeControl.collapse(item);
+				break;
+
+			case "ArrowRight":
+
+				event.preventDefault();
+				if (item.children.length > 0)
+					this.treeControl.expand(item);
+				break;
 
 		}
+
+	}
+
+	private getNextFocusable(current: TreeItem): TreeItem {
+
+		const maxIdx = this.flattenedItems.length - 1;
+		if (maxIdx === 0) // list only has Root?
+			return current;
+
+		const curIdx = this.flattenedItems.findIndex(item => item.value.id === current.value.id);
+		let nextIdx = curIdx;
+		do {
+
+			nextIdx = nextIdx === maxIdx ? 0 : ++nextIdx;
+
+		} while (!this.isAllParentsExpanded(nextIdx));
+
+		return this.flattenedItems[nextIdx];
+
+	}
+
+	private getPrevFocusable(current: TreeItem): TreeItem {
+
+		const maxIdx = this.flattenedItems.length - 1;
+		if (maxIdx === 0) // list only has Root?
+			return current;
+
+		const curIdx = this.flattenedItems.findIndex(item => item.value.id === current.value.id);
+		let prevIdx = curIdx;
+		do {
+
+			prevIdx = prevIdx === 0 ? maxIdx : --prevIdx;
+
+		} while (!this.isAllParentsExpanded(prevIdx));
+
+		return this.flattenedItems[prevIdx];
+
+	}
+
+	private isAllParentsExpanded(idx: number): boolean {
+
+		const currItem = this.flattenedItems[idx];
+		const parent = currItem.parent;
+		if (parent === null)
+			return true;
+
+		const parentIdx = this.flattenedItems.findIndex(item => item.value.id === parent.value.id);
+		if (parentIdx === -1) // should never happen, but still
+			throw new Error(`Parent ID ${parent.value.id} ['${parent.value.name}'] of ID ${currItem.value.id} ['${currItem.value.name}'] could not be found`)
+
+		if (this.treeControl.isExpanded(this.flattenedItems[parentIdx]))
+			return this.isAllParentsExpanded(parentIdx);
+		return false;
 
 	}
 
@@ -145,7 +170,7 @@ export class OptionsComponent implements AfterViewInit {
 
 		// 2nd parameter must be true, or else content disappears
 		const element: HTMLButtonElement = this.renderer.selectRootElement(`#mi_${id}`, true);
-		setTimeout(() => element.focus(), 100);
+		setTimeout(() => element.focus(), 20);
 
 	}
 

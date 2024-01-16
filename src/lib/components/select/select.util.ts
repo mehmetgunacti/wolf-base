@@ -1,7 +1,7 @@
 import { UUID } from 'lib/constants';
 import { HasParentId } from 'lib/models';
 
-export const NULL = 'null';
+export const ROOT_ID = 'ROOT_ID';
 
 export interface TreeItem {
 

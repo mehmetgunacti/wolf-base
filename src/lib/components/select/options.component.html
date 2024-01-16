@@ -16,10 +16,10 @@
 				tabindex="0"
 				class="icon-only small"
 				type="button"
-				(click)="selectItem(node.value)"
 				(keydown)="onKeydown($event, node);"
+				(click)="selectItem(node.value)"
 				[id]="'mi_' + node.value.id">{{node.value.name}}</button>
-		</div>
+			</div>
 
 	</cdk-nested-tree-node>
 
