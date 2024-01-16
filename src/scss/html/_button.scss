@@ -100,6 +100,12 @@ button {
 		font-size			: var(--font-size-xs);
 		padding				: var(--gap-xs);
 
+		& > .material-symbols-outlined {
+
+			font-size: var(--font-size-h5);
+
+		}
+
 	}
 
 	&.align-left {

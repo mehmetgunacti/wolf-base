@@ -6,7 +6,7 @@
 		<!-- use a disabled button to provide padding for tree leaf -->
 		<div class="exapmle-expandable-node">
 			<button
-				class="icon-only rounded"
+				class="icon-only rounded small"
 				type="button"
 				style="visibility: hidden;"
 				disabled>
@@ -14,11 +14,11 @@
 			</button>
 			<button
 				tabindex="0"
-				class="icon-only"
+				class="icon-only small"
 				type="button"
 				(click)="selectItem(node.value)"
-				[id]="'mi_' + node.value.id"
-				(keydown)="onKeydown($event, node);">{{node.value.name}}</button>
+				(keydown)="onKeydown($event, node);"
+				[id]="'mi_' + node.value.id">{{node.value.name}}</button>
 		</div>
 
 	</cdk-nested-tree-node>
@@ -31,7 +31,7 @@
 				tabindex="0"
 				type="button"
 				cdkTreeNodeToggle
-				class="icon-only rounded"
+				class="icon-only rounded small"
 				[id]="'mt_' + node.value.id">
 				<span class="material-symbols-outlined">
 					{{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
@@ -40,7 +40,7 @@
 			<button
 				tabindex="0"
 				type="button"
-				class="icon-only"
+				class="icon-only small"
 				[id]="'mi_' + node.value.id"
 				(click)="selectItem(node.value)"
 				(keydown)="onKeydown($event, node);">{{node.value.name}}</button>

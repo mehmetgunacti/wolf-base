@@ -1,11 +1,9 @@
-import { ArrayDataSource } from '@angular/cdk/collections';
-import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, ViewChild, WritableSignal, signal } from '@angular/core';
+import { CdkMenuTrigger } from '@angular/cdk/menu';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, Renderer2, ViewChild, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UUID } from 'lib/constants';
-import { HasParentId, TreeNode } from 'lib/models';
-import { NULL, TreeItem, toTreeItems } from './select.util';
-import { CdkMenuTrigger } from '@angular/cdk/menu';
+import { HasParentId } from 'lib/models';
+import { NULL } from './select.util';
 
 @Component({
 	selector: 'w-select',
@@ -13,11 +11,10 @@ import { CdkMenuTrigger } from '@angular/cdk/menu';
 	styleUrls: ['./select.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectComponent implements AfterViewInit {
+export class SelectComponent {
 
 	@ViewChild(CdkMenuTrigger) trigger!: CdkMenuTrigger;
 	@ViewChild('select') select!: ElementRef<HTMLSelectElement>;
-
 
 	@Input() name: string = '';
 	@Input() control!: FormControl<UUID | null>;
@@ -28,17 +25,18 @@ export class SelectComponent implements AfterViewInit {
 	@HostListener('window:resize', ['$event'])
 	onResize() {
 
-		this.popupWidth.set(this.select.nativeElement.offsetWidth);
+		this.trigger.close();
 
 	}
 
-	ngAfterViewInit(): void {
+	onSelectClicked(el: HTMLSelectElement, event: Event): void {
 
-		this.popupWidth.set(this.select.nativeElement.offsetWidth);
+		event.preventDefault();
+		this.popupWidth.set(el.clientWidth);
 
 	}
 
-	selectItem(item: HasParentId): void {
+	onItemSelected(item: HasParentId): void {
 
 		this.control.setValue(item.id === NULL ? null : item.id);
 		this.trigger.close();

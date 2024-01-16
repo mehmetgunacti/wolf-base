@@ -1,11 +1,11 @@
 <select
+	id="select"
 	#select
 	[formControl]="control"
 	[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
 	[cdkMenuTriggerFor]="select_menu"
-	(click)="$event.preventDefault();"
-	(mousedown)="$event.preventDefault();"
-	(keydown)="$event.preventDefault();">
+	(mousedown)="onSelectClicked(select, $event);"
+	(keydown)="onSelectClicked(select, $event);">
 
 	<option [ngValue]="null">Root</option>
 	<option *ngFor="let node of nodes" [value]="node.id">{{ node.name }}</option>
@@ -15,9 +15,9 @@
 
 <ng-template #select_menu>
 
-	<div class="menu scrollable select-popup" [style.width]="popupWidth() + 'px'" cdkMenu1>
+	<div #popup class="menu small scrollable select-popup" [style.width]="popupWidth() + 'px'" cdkMenu>
 
-		<w-options [nodes]="nodes" (selected)="selectItem($event)"/>
+		<w-options [nodes]="nodes" (selected)="onItemSelected($event)"/>
 
 	</div>
 
