@@ -1,11 +1,11 @@
 @import 'helper';
 @import 'variables';
 @import 'mixins';
+@import 'components';
 
 :host{
 
-	@include mx-flex-column;
-	@include mx-component;
+	@include mx-card;
 
 	& > [note_entries] {
 

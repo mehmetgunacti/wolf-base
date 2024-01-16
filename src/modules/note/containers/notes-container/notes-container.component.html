@@ -1,4 +1,5 @@
-@if (isFiltered$ | async) {
+<header>
+	@if (isFiltered$ | async) {
 
 	<div card_title>Search Results
 		@if (queryParamsAsString$ | async; as paramsText) {
@@ -6,11 +7,12 @@
 		}
 	</div>
 
-} @else {
+	} @else {
 
 	<div card_title>Root Notes</div>
 
-}
+	}
+</header>
 
 <ng-container *ngIf="(notes$ | async) as notes">
 

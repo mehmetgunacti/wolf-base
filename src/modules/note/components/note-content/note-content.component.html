@@ -1,1 +1,21 @@
-<div class="card" *ngIf="result$ | async as result" [innerHTML]="result | sanitizeHtml"></div>
+@if (note) {
+
+	@if(result$ | async; as  result) {
+
+		<h1>{{ note.name }}</h1>
+		<div [innerHTML]="result | sanitizeHtml"></div>
+
+	} @else {
+
+		<div class="empty">
+			<span class="empty-message"><span class="material-symbols-outlined">edit_off</span>&nbsp;No content available</span>
+			<button
+				class="icon-only"
+				[routerLink]="['/notes', note.id, 'content', 'edit' ]">
+				<span class="material-symbols-outlined">edit_note</span> Add Content
+			</button>
+		</div>
+
+	}
+
+}

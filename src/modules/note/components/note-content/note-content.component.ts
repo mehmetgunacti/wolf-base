@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
-import { NoteContent } from 'lib/models';
+import { Note, NoteContent } from 'lib/models';
 import { Observable, Subject, map } from 'rxjs';
 import { MarkdownService } from 'services/markdown.service';
 
@@ -14,6 +14,8 @@ export class NoteContentComponent {
 	private subjectContent: Subject<string | null> = new Subject<string | null>();
 
 	private markdownService: MarkdownService = inject(MarkdownService);
+
+	@Input() note: Note | null | undefined;
 
 	@Input() set content(nc: NoteContent | null) {
 

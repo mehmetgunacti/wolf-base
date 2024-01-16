@@ -1,8 +1,8 @@
 @import 'helper';
-@import 'variables';
+@import 'components';
 
 :host {
 
-	display	: contents;
+	@include mx-card;
 
 }
