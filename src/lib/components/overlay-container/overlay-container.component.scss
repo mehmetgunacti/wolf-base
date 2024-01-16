@@ -4,7 +4,7 @@
 
 :host {
 
-	@include mx-component(3);
+	@include mx-component();
 	@include mx-responsive;
 	@include mx-flex-column;
 	gap		: var(--gap);
