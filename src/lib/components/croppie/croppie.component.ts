@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, ViewChild, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CroppieOptions } from 'croppie';
 import { Observable, Subscription, combineLatest, timer } from 'rxjs';
@@ -41,10 +41,10 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 	imageLoaded$: Observable<boolean>;
 	initialized$: Observable<boolean>;
 
-	constructor(
-		@Inject(DOCUMENT) private readonly document: Document,
-		private domService: DOMService
-	) {
+	private document: Document = inject(DOCUMENT);
+	private domService: DOMService = inject(DOMService);
+
+	constructor() {
 
 		this.croppieWrapper = createCroppieWrapper();
 		this.initialized$ = this.croppieWrapper.initialized$;
@@ -87,7 +87,7 @@ export class CroppieComponent implements OnDestroy, AfterViewInit {
 				next: val => console.info(`${val} loaded`),
 				complete: () => {
 					if (this.document.defaultView?.Croppie) {
-						const el: HTMLElement = this.croppieDiv.nativeElement;
+						const el: HTMLDivElement = this.croppieDiv.nativeElement;
 						const croppie: Croppie = new this.document.defaultView.Croppie(el, croppieOptions);
 						this.croppieWrapper.init(croppie, el);
 						this.croppieWrapper.bind(this.wControl.value);

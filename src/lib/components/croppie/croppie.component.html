@@ -1,27 +1,36 @@
 <div class="img-thumbnail">
 
-	<button id="close"
-		*ngIf="(imageLoaded$ | async) else placeholder"
-		(click)="unbindCroppie()"
-		tabindex="0">
-		<span class="material-symbols-outlined">close</span>
-	</button>
-	<ng-template #placeholder>
+	@if(imageLoaded$ | async) {
 
-		<button type="button" *ngIf="(initialized$ | async); else notInitialized"
-			id="croppie-placeholder"
-			(click)="fileinput.click()"
+		<button
+			id="close"
+			type="button"
+			(click)="unbindCroppie()"
 			tabindex="0">
-				<span class="material-symbols-outlined">image</span>
-				<span>Pick Image</span>
+			<span class="material-symbols-outlined">close</span>
 		</button>
-		<ng-template #notInitialized>
+
+	} @else {
+
+		@if (initialized$ | async) {
+
+			<button	type="button"
+					id="croppie-placeholder"
+					(click)="fileinput.click()"
+					tabindex="0">
+						<span class="material-symbols-outlined">image</span>
+						<span>Pick Image</span>
+			</button>
+
+		} @else {
+
 			<div id="croppie-placeholder">
 				<span>Initializing...</span>
 			</div>
-		</ng-template>
 
-	</ng-template>
+		}
+
+	}
 	<div #croppieDiv
 		[ngStyle]="{'visibility': (imageLoaded$ | async) ? 'visible': 'hidden'}"></div>
 
