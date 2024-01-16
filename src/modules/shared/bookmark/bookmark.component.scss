@@ -5,8 +5,9 @@
 :host {
 
 	@include mx-box-shadow;
-	--bookmark-hover-transition		: all ease-in-out 250ms;
+	--bookmark-hover-transition		: opacity 400ms ease-in-out;
 	--bookmark-edit-button-opacity	: 0;
+	--bookmark-name-sup-opacity		: 0;
 	--font-size 					: 1.6rem;
 	--image-size					: 110px;
 	--bookmark-bg-color				: #{fn-hsl(bg-2)};
@@ -41,7 +42,9 @@
 	}
 
 	&:hover {
+
 		--bookmark-edit-button-opacity : 1;
+
 	}
 
 	div[bookmark-image] {
@@ -79,8 +82,7 @@
 
 					sup {
 						position		: absolute;
-						visibility		: hidden;
-						opacity			: 0;
+						opacity			: var(--bookmark-name-sup-opacity);
 						transition		: var(--bookmark-hover-transition);
 						margin-left		: 0.3rem;
 						top				: -6px;
@@ -101,10 +103,9 @@
 			}
 
 			&:hover {
-				span[bookmark-name] sup {
-					visibility			: initial;
-					opacity				: initial;
-				}
+
+				--bookmark-name-sup-opacity : 1;
+
 			}
 
 		}
@@ -142,6 +143,7 @@
 		transition				: var(--bookmark-hover-transition);
 		bottom					: 1rem;
 		right					: 1rem;
+		border-radius			: var(--border-radius-sm);
 
 	}
 
@@ -152,6 +154,7 @@
 		transition				: var(--bookmark-hover-transition);
 		top						: 1rem;
 		right					: 1rem;
+		border-radius			: var(--border-radius-sm);
 
 	}
 
