@@ -9,10 +9,7 @@ $input-element-min-height	: 4rem;
 /**********
 * Z-INDEX *
 **********/
-$z-index-splash-screen		: 9000;
-$z-index-header				: 8000;
-$z-index-nav				: 7000;
-$z-index-nav-overlay		: 6000;
+$z-index-splash-screen		: 6000;
 
 // override Angular CDK
 // these 3 variables are found in node_modules '@angular/cdk/overlay/_index.scss'
@@ -22,6 +19,10 @@ $overlay-container-z-index	: 5000;
 $overlay-z-index			: 5000;
 $overlay-backdrop-z-index	: 5000;
 
+$z-index-header				: 4000;
+$z-index-nav				: 3000;
+$z-index-nav-overlay		: 2000;
 $z-index-main				: 1000;
+
 $z-index-bookmark-overlay	: 100;
 $z-index-croppie-close-btn	: 100;
