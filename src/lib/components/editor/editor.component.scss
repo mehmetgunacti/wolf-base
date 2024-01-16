@@ -3,6 +3,44 @@
 @import 'mixins';
 @import 'components';
 
+.quote_menu {
+
+	gap: var(--gap-sm);
+
+	& > button > span:first-child {
+
+		width: 15px;
+		height: var(--gap-xxl);
+		border-left: 6px solid;
+
+		&.default {
+			border-left-color: fn-hsl(success);
+		}
+
+		&.primary {
+			border-left-color: fn-hsl(primary);
+		}
+
+		&.success {
+			border-left-color: fn-hsl(success);
+		}
+
+		&.info {
+			border-left-color: fn-hsl(info);
+		}
+
+		&.warn {
+			border-left-color: fn-hsl(warn);
+		}
+
+		&.error {
+			border-left-color: fn-hsl(error);
+		}
+
+	}
+
+}
+
 .code_menu {
 
 	fieldset {
