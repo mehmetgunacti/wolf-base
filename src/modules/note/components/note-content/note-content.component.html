@@ -3,7 +3,7 @@
 	@if(content) {
 
 		<h1>{{ note.name }}</h1>
-		<div [innerHTML]="content.content | markdownToHtml | sanitizeHtml"></div>
+		<w-markdown-viewer [markdown]="content.content"/>
 
 	} @else {
 

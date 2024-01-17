@@ -1,0 +1,70 @@
+import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+
+@Component({
+	selector: 'w-markdown-viewer',
+	templateUrl: './markdown-viewer.component.html',
+	styleUrls: ['./markdown-viewer.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class MarkdownViewerComponent implements AfterViewInit {
+
+	@Input() markdown: string | null = null;
+
+	private document: Document = inject(DOCUMENT);
+
+	ngAfterViewInit(): void {
+
+		setTimeout(() => {
+
+			if (this.addTocHeading())
+				this.addClickListeners();
+
+		}, 100);
+
+	}
+
+	private addTocHeading(): boolean {
+
+		const navs: NodeListOf<HTMLElement> = this.document.querySelectorAll('nav.table-of-contents');
+		if (navs.length === 0)
+			return false;
+
+		const tocTitle = this.document.createElement("h3");
+		const titleText = this.document.createTextNode("Table of Contents");
+		tocTitle.appendChild(titleText);
+
+		navs.forEach(nav => {
+
+			const firstChild = nav.firstChild;
+			nav.insertBefore(tocTitle.cloneNode(true), firstChild);
+
+		});
+		return true;
+
+	}
+
+	private addClickListeners(): void {
+
+		const anchors: NodeListOf<HTMLAnchorElement> = this.document.querySelectorAll('nav.table-of-contents a');
+		anchors.forEach(anchor => {
+
+			const href = anchor.getAttribute('href');
+			if (href && href.startsWith("#")) {
+
+				anchor.addEventListener('click', event => {
+
+					event.preventDefault();
+					const target = this.document.getElementById(href.substring(1));
+					if (target)
+						target.scrollIntoView({ behavior: 'smooth' });
+
+				});
+
+			}
+
+		});
+
+	}
+
+}

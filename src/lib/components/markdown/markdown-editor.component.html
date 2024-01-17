@@ -88,7 +88,7 @@
 
 <ng-template #previewTemplate>
 
-	<w-overlay-container [content]="content() | markdownToHtml | sanitizeHtml">
+	<w-overlay-container>
 
 		<ng-container card_title>Preview</ng-container>
 		<ng-container card_buttons>
@@ -100,6 +100,8 @@
 			</button>
 
 		</ng-container>
+
+		<w-markdown-viewer [markdown]="content()"/>
 
 	</w-overlay-container>
 

@@ -1,7 +1,4 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import hljs from 'highlight.js/lib/core';
 import asciidoc from 'highlight.js/lib/languages/asciidoc';
@@ -29,20 +26,20 @@ import xml from 'highlight.js/lib/languages/xml';
 import yaml from 'highlight.js/lib/languages/yaml';
 import { default as MarkdownIt } from 'markdown-it';
 
-import { tasklist } from '@mdit/plugin-tasklist';
+import { ins } from '@lib';
 import { alert } from '@mdit/plugin-alert';
 import { align } from '@mdit/plugin-align';
 import { attrs } from "@mdit/plugin-attrs";
 import { mark } from '@mdit/plugin-mark';
 import { sub } from '@mdit/plugin-sub';
 import { sup } from '@mdit/plugin-sup';
-import { ins } from '@lib';
+import { tasklist } from '@mdit/plugin-tasklist';
 
 import anchor from 'markdown-it-anchor';
 import markdownItTocDoneRight from 'markdown-it-toc-done-right';
 
-@Pipe({ name: 'markdownToHtml' })
-export class MarkdownToHtmlPipe implements PipeTransform {
+@Injectable({ providedIn: 'root' })
+export class MarkdownService {
 
 	private md: MarkdownIt;
 
@@ -109,7 +106,7 @@ export class MarkdownToHtmlPipe implements PipeTransform {
 
 	}
 
-	transform(content: string | null): string | null {
+	render(content: string | null): string | null {
 
 		if (!content)
 			return null;
@@ -118,12 +115,3 @@ export class MarkdownToHtmlPipe implements PipeTransform {
 	}
 
 }
-
-@NgModule({
-
-	declarations: [MarkdownToHtmlPipe],
-	imports: [CommonModule],
-	exports: [MarkdownToHtmlPipe]
-
-})
-export class MarkdownModule { }

@@ -7,12 +7,12 @@ import { Observable, map, startWith, take, tap, timer } from 'rxjs';
 import { ClipboardService } from 'services';
 
 @Component({
-	selector: 'w-editor',
-	templateUrl: './editor.component.html',
-	styleUrls: ['./editor.component.scss'],
+	selector: 'w-markdown-editor',
+	templateUrl: './markdown-editor.component.html',
+	styleUrls: ['./markdown-editor.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditorComponent implements OnInit {
+export class MarkdownEditorComponent implements OnInit {
 
 	@ViewChild('editor') editor!: ElementRef<HTMLTextAreaElement>;
 	@ViewChild(CdkMenuTrigger) trigger!: CdkMenuTrigger;

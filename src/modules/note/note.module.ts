@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CroppieModule, MarkdownModule } from '@lib';
-import { EditorModule } from 'lib/components/editor/editor.module';
+import { CroppieModule } from '@lib';
 import { SharedModule } from 'modules/shared/shared.module';
 import { NoteRoutingModule } from './note-routing.module';
 import * as fromConfig from './note.config';
+import { MarkdownModule } from 'lib/components/markdown';
 
 @NgModule({
 	declarations: [...fromConfig.components],
@@ -14,7 +14,6 @@ import * as fromConfig from './note.config';
 		NoteRoutingModule,
 		ReactiveFormsModule,
 		SharedModule,
-		EditorModule,
 		CroppieModule,
 		MarkdownModule
 	]
