@@ -2,6 +2,7 @@ export * from './animations';
 export * from './components/portal.component';
 export * from './components/overlay-container';
 export * from './components/croppie';
+export * from './components/editor';
 export * from './components/input';
 export * from './components/selected-tags/selected-tags.component';
 export * from './components/tag-cloud/tag-cloud.component';

@@ -38,6 +38,9 @@ import { sub } from '@mdit/plugin-sub';
 import { sup } from '@mdit/plugin-sup';
 import { ins } from '@lib';
 
+import anchor from 'markdown-it-anchor';
+import markdownItTocDoneRight from 'markdown-it-toc-done-right';
+
 @Pipe({ name: 'markdownToHtml' })
 export class MarkdownToHtmlPipe implements PipeTransform {
 
@@ -98,7 +101,11 @@ export class MarkdownToHtmlPipe implements PipeTransform {
 			.use(mark)
 			.use(sub)
 			.use(sup)
-			.use(ins);
+			.use(ins)
+			.use(anchor)
+			.use(markdownItTocDoneRight, {
+				listType: 'ul'
+			});
 
 	}
 

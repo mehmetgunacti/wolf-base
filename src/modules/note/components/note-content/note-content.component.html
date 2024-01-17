@@ -1,9 +1,9 @@
 @if (note) {
 
-	@if(result$ | async; as  result) {
+	@if(content) {
 
 		<h1>{{ note.name }}</h1>
-		<div [innerHTML]="result | sanitizeHtml"></div>
+		<div [innerHTML]="content.content | markdownToHtml | sanitizeHtml"></div>
 
 	} @else {
 
