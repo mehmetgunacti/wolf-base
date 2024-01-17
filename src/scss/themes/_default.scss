@@ -1,11 +1,5 @@
 :root {
 
-	// --col-accent
-	--col-accent-hue			: 200deg;
-	--col-accent-sat			: 85%;
-	--col-accent-lig			: 34%;
-	--col-accent-alp			: 1;
-
 	// --col-text
 	--col-text-hue				: 210deg;
 	--col-text-sat				: 26%;
@@ -109,5 +103,11 @@
 	--col-focus-sat				: 70%;
 	--col-focus-lig				: 40%;
 	--col-focus-alp				: 1;
+
+	// --col-accent
+	--col-accent-hue			: 200deg;
+	--col-accent-sat			: 85%;
+	--col-accent-lig			: 34%;
+	--col-accent-alp			: 1;
 
 }

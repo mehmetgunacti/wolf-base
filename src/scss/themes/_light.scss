@@ -1,11 +1,5 @@
 body.light {
 
-	// --col-accent
-	--col-accent-hue		: 32deg;
-	--col-accent-sat		: 72%;
-	--col-accent-lig		: 42%;
-	--col-accent-alp		: 1;
-
 	--col-bg-0-hue			: 208deg;
 	--col-bg-0-sat			: 25%;
 	--col-bg-0-lig			: 80%;
@@ -18,7 +12,7 @@ body.light {
 
 	--col-bg-2-hue			: 208deg;
 	--col-bg-2-sat			: 25%;
-	--col-bg-2-lig			: 65%;
+	--col-bg-2-lig			: 58%;
 	--col-bg-2-alp			: 1;
 
 	--col-bg-3-hue			: 208deg;
@@ -96,5 +90,11 @@ body.light {
 	--col-focus-sat				: 95%;
 	--col-focus-lig				: 40%;
 	--col-focus-alp				: 1;
+
+	// --col-accent
+	--col-accent-hue			: 32deg;
+	--col-accent-sat			: 72%;
+	--col-accent-lig			: 42%;
+	--col-accent-alp			: 1;
 
 }

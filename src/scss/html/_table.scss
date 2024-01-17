@@ -12,13 +12,18 @@ table {
 	border-collapse		: collapse;
 	border-spacing		: 0;
 
+	transition			: $bg-transition;
+	@include mx-webkit-scrollbar;
+
 	& > thead {
 
-		background-color	: fn-hsl(bg-2, (lig: "- 2%"));
 		border-width		: 2px;
 		border-style		: solid;
 		border-color		: transparent;
 		border-bottom-color	: fn-hsl(primary, (alp: "- 0.3"));
+
+		background-color	: fn-hsl(bg-2, (lig: "- 2%"));
+		transition			: border $transition, $bg-transition;
 
 		& > tr:first-child {
 
@@ -41,10 +46,12 @@ table {
 	& > tbody {
 
 		background-color	: fn-hsl(bg-2, (lig: "- 1%"));
+		transition			: $bg-transition;
 
 		& > tr {
 
 			border-bottom	: 1px solid fn-hsl(bg-3, (lig: "- 1%"));
+			transition		: border $transition;
 
 			&:last-child {
 
