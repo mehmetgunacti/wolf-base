@@ -1,5 +1,5 @@
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Renderer2, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, Renderer2, Signal, ViewChild, WritableSignal, computed, inject, signal } from '@angular/core';
 import { createArray } from 'lib/utils';
 
 function parseId(id: string): number[] {
@@ -15,6 +15,8 @@ function parseId(id: string): number[] {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectorTableComponent implements AfterViewInit {
+
+	@ViewChild('display') display!: ElementRef<HTMLDivElement>;
 
 	_rows: WritableSignal<number> = signal(3);
 	_cols: WritableSignal<number> = signal(4);
@@ -105,8 +107,20 @@ export class SelectorTableComponent implements AfterViewInit {
 
 	setFocus(col: number, row: number): void {
 
+		for (let i = 1; i <= this._cols(); ++i)
+			for (let j = 1; j <= this._rows(); ++j) {
+
+				const el: HTMLDivElement = this.renderer.selectRootElement(`#_${i}_${j}`);
+				if (col >= i && row >= j)
+					el.classList.add('focus');
+				else
+					el.classList.remove('focus');
+
+			}
+
 		const element = this.renderer.selectRootElement(`#_${col}_${row}`);
 		setTimeout(() => element.focus(), 0);
+		this.display.nativeElement.innerHTML = col + ' x ' + row;
 
 	}
 

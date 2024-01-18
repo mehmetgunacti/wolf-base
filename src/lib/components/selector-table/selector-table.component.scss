@@ -23,7 +23,8 @@
 			background-color: fn-hsl(bg-1);
 
 			&:hover,
-			&:focus {
+			// &:focus
+			&.focus {
 
 				background-color: fn-hsl(accent);
 
