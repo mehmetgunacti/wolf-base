@@ -31,7 +31,7 @@ export class SelectorTableComponent implements AfterViewInit {
 		this._cols.set(val);
 	};
 
-	@Output() result: EventEmitter<string> = new EventEmitter<string>();
+	@Output() result: EventEmitter<[number, number]> = new EventEmitter<[number, number]>();
 
 	private renderer: Renderer2 = inject(Renderer2);
 
@@ -43,31 +43,7 @@ export class SelectorTableComponent implements AfterViewInit {
 
 	onClick(col: number, row: number): void {
 
-		const newLine = '\n';
-
-		let output = newLine + '|';
-
-		// first line
-		for (let c = 0; c < col; ++c)
-			output += '  |';
-		output += newLine + '|';
-
-		// separator line
-		for (let c = 0; c < col; ++c)
-			output += ' - |';
-		output += newLine;
-
-		// rows & columns
-		for (let r = 0; r < row; ++r) {
-
-			output += '|';
-			for (let c = 0; c < col; ++c)
-				output += '  |';
-			output += newLine;
-
-		}
-		this.result.emit(output + newLine);
-
+		this.result.emit([col, row]);
 	}
 
 	onKeydown(event: KeyboardEvent): void {

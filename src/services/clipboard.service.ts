@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { parseURL } from '@lib';
 import { Observable, catchError, from, map, of } from 'rxjs';
 
+const errorMessage = 'Clipboard access is not supported by this browser.<br>Please try a different browser or check if the browser is up-to-date.';
+
 @Injectable({
 	providedIn: 'root'
 })
 export class ClipboardService {
 
 	fromClipboard(): Observable<URL | null> {
+
+		if (navigator?.clipboard?.readText === undefined)
+			throw new Error(errorMessage);
 
 		return from(navigator.clipboard.readText()).pipe(
 
@@ -25,6 +30,9 @@ export class ClipboardService {
 	}
 
 	async base64ImageFromClipboard(): Promise<string | null> {
+
+		if (navigator?.clipboard?.read === undefined)
+			throw new Error(errorMessage);
 
 		try {
 

@@ -9,8 +9,6 @@ import { MenuItem, Note } from 'lib/models';
 })
 export class NoteComponent {
 
-
-
 	@Input() note: Note | null | undefined;
 	@Input() parents: Note[] = [];
 	@Input() children: Note[] = [];

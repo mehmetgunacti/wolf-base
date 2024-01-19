@@ -1,7 +1,13 @@
 .menu {
 
 	@include mx-component(4);
-	@include mx-flex-column;
+	@include mx-flex-column-stretch;
+
+	& > button {
+
+		@include mx-flex-start-center;
+
+	}
 
 	& > hr {
 
@@ -21,6 +27,14 @@
 	&.small {
 
 		padding		: var(--gap) var(--gap-xs);
+
+	}
+
+	&.horizontal {
+
+		@include mx-flex-center-y;
+		flex-direction	: row;
+
 
 	}
 

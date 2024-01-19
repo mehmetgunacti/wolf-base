@@ -13,6 +13,14 @@
 
 }
 
+@mixin mx-flex-column-stretch {
+
+	display				: flex;
+	flex-direction		: column;
+	align-items			: stretch;
+
+}
+
 @mixin mx-flex-center-center {
 
 	display				: flex;

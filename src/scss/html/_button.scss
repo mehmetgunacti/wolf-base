@@ -30,6 +30,13 @@ button {
 
 	transition					: color $transition, $bg-transition, border-color $transition;
 
+	& > span {
+
+		color					: inherit;
+		background-color		: unset;
+
+	}
+
 	&:hover,
 	&:focus {
 
@@ -59,9 +66,9 @@ button {
 
 		--col-button-bg-alp			: 0;
 
-		border					: none;
-		padding					: 0.8rem;
-		min-width				: unset;
+		border						: none;
+		padding						: 0.8rem;
+		min-width					: unset;
 
 		&:hover {
 
@@ -69,6 +76,19 @@ button {
 			--col-button-bg-sat		: 0%;
 			--col-button-bg-lig		: 100%;
 			--col-button-bg-alp		: 0.09;
+
+		}
+
+		&.primary {	color			: fn-hsl(primary); }
+		&.success { color			: fn-hsl(success); }
+		&.info { color				: fn-hsl(info);	}
+		&.warn { color				: fn-hsl(warn); }
+		&.error { color				: fn-hsl(error); }
+
+		&[disabled] {
+
+			color					: fn-hsl(text, (alp: "- 0.8"));
+			background-color		: unset;
 
 		}
 
@@ -193,6 +213,72 @@ button {
 			padding			: var(--gap-xxs) var(--gap-sm);
 
 		}
+
+	}
+
+	&.text-only {
+
+		--col-button-bg-alp			: 0;
+
+		border						: none;
+		padding						: 0.8rem;
+		min-width					: unset;
+
+		&.primary {
+
+			color					: fn-hsl(primary);
+
+		}
+
+		&.success {
+
+			color					: fn-hsl(success);
+
+		}
+
+		&.info {
+
+			color					: fn-hsl(info);
+
+		}
+
+		&.warn {
+
+			color					: fn-hsl(warn);
+
+		}
+
+		&.error {
+
+			color					: fn-hsl(error);
+
+		}
+
+		&:hover {
+
+			// --col-button-bg-hue		: 0deg;
+			// --col-button-bg-sat		: 0%;
+			// --col-button-bg-lig		: 100%;
+			--col-button-bg-alp		: 0.09;
+
+		}
+
+		&[disabled] {
+
+			color					: fn-hsl(text-secondary, (alp: "- 0.2"));
+			background-color		: unset;
+
+		}
+
+	}
+
+	&[disabled] {
+
+		color					: fn-hsl(text-secondary);
+		--col-button-bg-hue		: 0deg;
+		--col-button-bg-sat		: 0%;
+		--col-button-bg-lig		: 100%;
+		--col-button-bg-alp		: 0.09;
 
 	}
 

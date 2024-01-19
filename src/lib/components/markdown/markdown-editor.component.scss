@@ -3,7 +3,13 @@
 @import 'mixins';
 @import 'components';
 
-.quote_menu {
+.save-menu {
+
+	gap: var(--gap-sm);
+
+}
+
+.quote-menu {
 
 	gap: var(--gap-sm);
 
@@ -41,7 +47,7 @@
 
 }
 
-.code_menu {
+.code-menu {
 
 	fieldset {
 
@@ -60,31 +66,34 @@
 
 :host {
 
+	flex		: 1;
 	@extend %flex-column;
 	position	: relative;
 	gap			: var(--gap);
-	min-height	: $input-element-min-height;
+	min-height	: 100%;
 
 	& > [buttons] {
 
-		@extend %flex-center-y;
+		@extend %flex-column;
 
-		// PREVIEW BUTTON
-		& > button:last-of-type {
+		& button[aria-expanded=true] {
 
-			margin-left			: auto;
+			background-color	: fn-hsl(bg-3);
+			transition			: background-color 0s;
 
-			& > span:last-child {
+		}
 
-				display	: none;
+		& > [buttons_1] {
 
-				@include bigScreen {
+			@include mx-flex-end-center;
+			gap			: var(--gap-sm);
 
-					display	: block;
+		}
 
-				}
+		& > [buttons_2] {
 
-			}
+			@include mx-flex-center-y;
+			flex-wrap	: wrap;
 
 		}
 
@@ -92,12 +101,15 @@
 
 	& > [area] {
 
+		flex		: 1;
 		@extend %flex-column;
-		position				: relative;
+		position	: relative;
 
 		& > textarea {
 
+			flex	: 1;
 			@extend %input-element;
+			padding-top	: var(--gap);
 			@include mx-webkit-scrollbar;
 
 			&:focus + label {

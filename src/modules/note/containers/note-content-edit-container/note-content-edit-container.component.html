@@ -1,16 +1,10 @@
-<w-portal>
+@if (note$ | async; as note) {
 
-	<button
-		class="icon-only"
-		(click)="onSave()">
-		<span class="material-symbols-outlined">save</span> Save
-	</button>
+	<app-note [note]="note" />
+	<div editor>
 
-</w-portal>
+		<w-markdown-editor [control]="fcContent" (save)="onSave()" (saveClose)="onSaveClose()" (cancel)="onCancel(note.id)" name="Content"/>
 
-<app-note [note]="note$ | async" />
-<div class="card">
+	</div>
 
-	<w-markdown-editor [control]="fcContent" name="Content"/>
-
-</div>
+}

@@ -2,24 +2,28 @@
 
 	<div note_main>
 
-		<div note_parents>
+		@if (parents.length > 0) {
 
-			<a [routerLink]="['/notes']" tabindex="0">
-				<span class="material-symbols-outlined">note_stack</span>
-				<span>Notes</span>
-			</a>
+			<div note_parents>
 
-			<a	*ngFor="let note of parents; let idx = index"
-				[routerLink]="['/notes', note.id]"
-				tabindex="0"
-				[style.margin-left.px]="(idx + 1) * 15">
+				<a [routerLink]="['/notes']" tabindex="0">
+					<span class="material-symbols-outlined">note_stack</span>
+					<span>Notes</span>
+				</a>
 
-				<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
-				<span>{{ note.name }}</span>
+				<a	*ngFor="let note of parents; let idx = index"
+					[routerLink]="['/notes', note.id]"
+					tabindex="0"
+					[style.margin-left.px]="(idx + 1) * 15">
 
-			</a>
+					<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
+					<span>{{ note.name }}</span>
 
-		</div>
+				</a>
+
+			</div>
+
+		}
 
 		<h3>{{ note.name }}</h3>
 

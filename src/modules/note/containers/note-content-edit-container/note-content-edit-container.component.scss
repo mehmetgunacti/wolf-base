@@ -1,9 +1,18 @@
 @import 'helper';
-@import 'mixins/responsive';
+@import 'mixins';
+@import 'components';
 
 :host {
 
-	@extend %flex-column;
-	gap	: var(--gap-sm);
+	flex	: 1;
+	@include mx-flex-column;
+	gap		: var(--gap-sm);
+
+	& > [editor] {
+
+		flex	: 1;
+		@include mx-card;
+
+	}
 
 }

@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Note } from 'lib';
+import { Note, UUID } from 'lib';
 import { Observable, filter, take, tap, withLatestFrom } from 'rxjs';
+import { navigate } from 'store/actions/core-navigation.actions';
 import { create, update } from 'store/actions/note-content.actions';
 import { selNoteContent_content } from 'store/selectors/note-content-selectors/note-content-entities.selectors';
 import { selNote_selected } from 'store/selectors/note-selectors/note-entities.selectors';
@@ -32,7 +33,7 @@ export class NoteContentEditContainerComponent {
 
 	}
 
-	onSave(): void {
+	onSaveClose(): void {
 
 		this.note$.pipe(
 			filter((note): note is Note => !!note),
@@ -46,6 +47,19 @@ export class NoteContentEditContainerComponent {
 				this.store.dispatch(create({ content: { id: note.id, name: note.name, content: this.fcContent.value } }));
 
 		});
+
+	}
+
+	onSave(): void {
+
+		// todo
+		this.onSaveClose();
+
+	}
+
+	onCancel(id: UUID): void {
+
+		this.store.dispatch(navigate({ url: ['/notes', id] }));
 
 	}
 
