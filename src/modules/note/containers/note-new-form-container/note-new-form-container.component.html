@@ -1,7 +1,6 @@
 <app-note-form
-	[note]="note$ | async"
+	[parentId]="(note$ | async)?.id"
 	[nodes]="nodes$ | async"
 	[tagSuggestions]="tagSuggestions$ | async"
 	(create)="onCreate($event)"
-	(update)="onUpdate($event.id, $event.note)"
 	(tagInput)="onTagInput($event)"></app-note-form>

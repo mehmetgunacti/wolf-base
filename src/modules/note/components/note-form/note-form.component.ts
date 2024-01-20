@@ -17,6 +17,7 @@ export class NoteFormComponent implements OnInit, OnChanges, OnDestroy {
 	@Input() note: Note | null | undefined;
 	@Input() nodes: Note[] | null | undefined = [];
 	@Input() tagSuggestions: string[] | null | undefined;
+	@Input() parentId: UUID | null | undefined;
 
 	@Output() create: EventEmitter<Partial<Note>> = new EventEmitter();
 	@Output() update: EventEmitter<{ id: UUID, note: Partial<Note> }> = new EventEmitter();
@@ -36,8 +37,10 @@ export class NoteFormComponent implements OnInit, OnChanges, OnDestroy {
 	ngOnChanges(changes: SimpleChanges): void {
 
 		const note: Note = changes['note']?.currentValue;
-		if (note)
+		if (note) // when on edit page with ':id' in url
 			this.form.setValues(note);
+		else if (this.parentId) // when on 'new' page with ':id' in url
+			this.form.parentId.setValue(this.parentId);
 
 		const tagSuggestions: string[] = changes['tagSuggestions']?.currentValue;
 		if (tagSuggestions)

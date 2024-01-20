@@ -2,17 +2,17 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } 
 import { Store } from '@ngrx/store';
 import { Note, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
-import { create, moveToTrash, update } from 'store/actions/note.actions';
+import { update } from 'store/actions/note.actions';
 import { selNote_array, selNote_selected } from 'store/selectors/note-selectors/note-entities.selectors';
 import { distinctTagsArray } from 'store/selectors/note-selectors/note-tags.selectors';
 
 @Component({
-	selector: 'app-note-edit-container',
-	templateUrl: './note-edit-container.component.html',
-	styleUrls: ['./note-edit-container.component.scss'],
+	selector: 'app-note-edit-form-container',
+	templateUrl: './note-edit-form-container.component.html',
+	styleUrls: ['./note-edit-form-container.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NoteEditContainerComponent implements OnInit, AfterContentInit {
+export class NoteEditFormContainerComponent implements OnInit, AfterContentInit {
 
 	private store: Store = inject(Store);
 
@@ -46,12 +46,6 @@ export class NoteEditContainerComponent implements OnInit, AfterContentInit {
 			})
 
 		);
-
-	}
-
-	onCreate(note: Partial<Note>): void {
-
-		this.store.dispatch(create({ note }));
 
 	}
 
