@@ -8,6 +8,7 @@ import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 import { SelectModule } from 'lib/components/select/select.module';
 import { TagCloudModule } from 'lib/components/tag-cloud/tag-cloud.module';
 import { BookmarkComponent } from './bookmark/bookmark.component';
+import { DisplayModule } from 'lib/components/display/display.module';
 
 @NgModule({
 	declarations: [
@@ -27,7 +28,8 @@ import { BookmarkComponent } from './bookmark/bookmark.component';
 		InputModule,
 		CdkMenuModule,
 		TagCloudModule,
-		SanitizeHtmlModule
+		SanitizeHtmlModule,
+		DisplayModule
 	],
 	exports: [
 		BookmarkComponent,
@@ -43,7 +45,8 @@ import { BookmarkComponent } from './bookmark/bookmark.component';
 		SelectedTagsComponent,
 		CdkMenuModule,
 		TagCloudModule,
-		SanitizeHtmlModule
+		SanitizeHtmlModule,
+		DisplayModule
 	],
 	providers: []
 })
