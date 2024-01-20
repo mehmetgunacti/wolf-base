@@ -1,6 +1,6 @@
 .v-divider {
 
-	display		: inline-flex;
+	display		: block;
 	border-left	: 1px solid fn-hsl(bg-1);
     width		: 0;
     margin		: var(--gap-sm) var(--gap-xxs);
