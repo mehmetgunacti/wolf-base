@@ -220,6 +220,38 @@ export function addAlignJustify(props: TextareaProperties): TextareaProperties {
 
 }
 
+export function addHeading(props: TextareaProperties, heading: string): TextareaProperties {
+
+	//
+	// ${heading}
+	//
+	const first = `\n\n${heading} `;
+	const second = '\n\n';
+
+	const { value, selectionStart, selectionEnd } = props;
+
+	// Selection is multi-line?
+	if (selectionStart !== selectionEnd) {
+
+		const firstPiece = value.substring(0, selectionStart);
+		const middlePiece = value.substring(selectionStart, selectionEnd);
+		const lastPiece = value.substring(selectionEnd);
+
+		const result = firstPiece + first + middlePiece + second + lastPiece;
+
+		return {
+
+			value: result,
+			selectionStart: selectionStart + first.length,
+			selectionEnd: selectionEnd + first.length
+
+		};
+
+	}
+	return insert(props, first, second);
+
+}
+
 export function addBold(props: TextareaProperties): TextareaProperties {
 
 	const s = '**';
@@ -244,60 +276,14 @@ export function addStrikethrough(props: TextareaProperties): TextareaProperties 
 export function addSub(props: TextareaProperties): TextareaProperties {
 
 	const CHAR = '~';
-	return wrapRegardSpace(props, CHAR);
+	return wrapEachWord(props, CHAR);
 
 }
 
 export function addSup(props: TextareaProperties): TextareaProperties {
 
 	const CHAR = '^';
-	return wrapRegardSpace(props, CHAR);
-
-}
-
-function wrapRegardSpace(props: TextareaProperties, CHAR: string): TextareaProperties {
-
-	/*
-
-	lore<selelectionStart>m ip<selectionEnd>sum
-
-	↓↓↓↓↓ becomes ↓↓↓↓↓
-
-	lore^<selelectionStart>m^ ^ip<selectionEnd>^sum
-
-	*/
-
-	const { value, selectionStart, selectionEnd } = props;
-
-	if (selectionStart === selectionEnd)
-		return props;
-
-	const textStart = value.substring(0, selectionStart);
-	const textMiddle = value.substring(selectionStart, selectionEnd);
-	const textEnd = value.substring(selectionEnd);
-
-	const newTextMiddle = textMiddle.split(' ').map(s => s.trim() === '' ? s : CHAR + s + CHAR).join(' ');
-
-	const lengthOld = textMiddle.length;
-	const lengthNew = newTextMiddle.length;
-
-	let startShifts = 0;
-	let endShifts = 0;
-
-	if (lengthOld !== lengthNew) { // no change?
-
-		startShifts = newTextMiddle.startsWith(CHAR) ? 1 : 0;
-		endShifts = lengthNew - lengthOld - 1;
-
-	}
-
-	return {
-
-		value: textStart + newTextMiddle + textEnd,
-		selectionStart: selectionStart + startShifts,
-		selectionEnd: selectionEnd + endShifts
-
-	};
+	return wrapEachWord(props, CHAR);
 
 }
 
@@ -503,5 +489,51 @@ function endIndexOfCurrentLine(value: string, selectionEnd: number): number {
 		idxLineEnd = value.length;
 
 	return idxLineEnd;
+
+}
+
+function wrapEachWord(props: TextareaProperties, CHAR: string): TextareaProperties {
+
+	/*
+
+	lore<selelectionStart>m ip<selectionEnd>sum
+
+	↓↓↓↓↓ becomes ↓↓↓↓↓
+
+	lore^<selelectionStart>m^ ^ip<selectionEnd>^sum
+
+	*/
+
+	const { value, selectionStart, selectionEnd } = props;
+
+	if (selectionStart === selectionEnd)
+		return props;
+
+	const textStart = value.substring(0, selectionStart);
+	const textMiddle = value.substring(selectionStart, selectionEnd);
+	const textEnd = value.substring(selectionEnd);
+
+	const newTextMiddle = textMiddle.split(' ').map(s => s.trim() === '' ? s : CHAR + s + CHAR).join(' ');
+
+	const lengthOld = textMiddle.length;
+	const lengthNew = newTextMiddle.length;
+
+	let startShifts = 0;
+	let endShifts = 0;
+
+	if (lengthOld !== lengthNew) { // no change?
+
+		startShifts = newTextMiddle.startsWith(CHAR) ? 1 : 0;
+		endShifts = lengthNew - lengthOld - 1;
+
+	}
+
+	return {
+
+		value: textStart + newTextMiddle + textEnd,
+		selectionStart: selectionStart + startShifts,
+		selectionEnd: selectionEnd + endShifts
+
+	};
 
 }

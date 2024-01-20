@@ -25,6 +25,15 @@
 	</div>
 	<div buttons_2 cdkMenuBar>
 
+		<!-- HEADING BUTTON -->
+		<button
+			class="icon-only"
+			[cdkMenuTriggerFor]="format_heading"
+			title="Heading"
+			cdkMenuItem>
+			<span class="material-symbols-outlined">format_h1</span>
+		</button>
+
 		<!-- BOLD BUTTON -->
 		<button
 			class="icon-only"
@@ -211,6 +220,68 @@
 			[rows]="6"
 			[cols]="7"
 			(result)="addTable($event)"/>
+
+	</div>
+
+</ng-template>
+
+<ng-template #format_heading>
+
+	<div class="menu scrollable" cdkMenu>
+
+		<!-- H1 BUTTON -->
+		<button
+			class="icon-only"
+			(click)="addHeading('#')"
+			title="Align Center"
+			cdkMenuItem>
+			<h1>Heading 1</h1>
+		</button>
+
+		<!-- H2 BUTTON -->
+		<button
+			class="icon-only"
+			(click)="addHeading('##')"
+			title="Heading 2"
+			cdkMenuItem>
+			<h2>Heading 2</h2>
+		</button>
+
+		<!-- H3 BUTTON -->
+		<button
+			class="icon-only"
+			(click)="addHeading('###')"
+			title="Heading 3"
+			cdkMenuItem>
+			<h3>Heading 3</h3>
+		</button>
+
+		<!-- H4 BUTTON -->
+		<button
+			class="icon-only"
+			(click)="addHeading('####')"
+			title="Heading 4"
+			cdkMenuItem>
+			<h4>Heading 4</h4>
+		</button>
+
+		<!-- H5 BUTTON -->
+		<button
+			class="icon-only"
+			(click)="addHeading('#####')"
+			title="Heading 5"
+			cdkMenuItem>
+			<h5>Heading 5</h5>
+		</button>
+
+		<!-- H6 BUTTON -->
+		<button
+			class="icon-only"
+			(click)="addHeading('######')"
+			title="Heading 6"
+			cdkMenuItem>
+			<h6>Heading 6</h6>
+		</button>
 
 	</div>
 

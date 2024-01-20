@@ -165,6 +165,14 @@ export class MarkdownEditorComponent implements OnInit {
 
 	}
 
+	addHeading(heading: string): void {
+
+		this.updateEditor(
+			tool.addHeading(this.editor.nativeElement, heading)
+		);
+
+	}
+
 	addBold(): void {
 
 		this.updateEditor(
