@@ -28,7 +28,7 @@ export function tab(props: TextareaProperties): TextareaProperties {
 		return {
 
 			value: result,
-			selectionStart: selectionStart,
+			selectionStart: startIdx,
 			selectionEnd: selectionEnd + shift
 
 		};
@@ -80,7 +80,7 @@ export function shiftTab(props: TextareaProperties): TextareaProperties {
 			return {
 
 				value: result,
-				selectionStart: selectionStart,
+				selectionStart: startIdx,
 				selectionEnd: selectionEnd - shift
 
 			};
