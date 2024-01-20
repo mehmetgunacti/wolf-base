@@ -1,5 +1,15 @@
+<w-portal>
+
+	<button
+		class="icon-only"
+		[routerLink]="cancelLink$ | async">
+		<span class="material-symbols-outlined">cancel</span> Cancel
+	</button>
+
+</w-portal>
+
 <app-note-form
-	[parentId]="(note$ | async)?.id"
+	[parentId]="parentId$ | async"
 	[nodes]="nodes$ | async"
 	[tagSuggestions]="tagSuggestions$ | async"
 	(create)="onCreate($event)"

@@ -1,6 +1,6 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Note } from 'lib';
+import { Note, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { create } from 'store/actions/note.actions';
 import { selNote_array, selNote_selected } from 'store/selectors/note-selectors/note-entities.selectors';
@@ -16,14 +16,24 @@ export class NoteNewFormContainerComponent implements OnInit, AfterContentInit {
 
 	private store: Store = inject(Store);
 
-	note$: Observable<Note | null | undefined>;
+	parentId$: Observable<UUID | null>;
+	cancelLink$: Observable<string[]>;
 	nodes$: Observable<Note[]>;
 	tagSuggestions$!: Observable<string[]>;
 	tagInput = new Subject<string | null>();
 
 	constructor() {
 
-		this.note$ = this.store.select(selNote_selected);
+		this.parentId$ = this.store.select(selNote_selected).pipe(
+
+			map(p => p ? p.id : null)
+
+		);
+		this.cancelLink$ = this.parentId$.pipe(
+
+			map(id => id ? ['/notes', id] : ['/notes'])
+
+		);
 		this.nodes$ = this.store.select(selNote_array);
 
 	}
