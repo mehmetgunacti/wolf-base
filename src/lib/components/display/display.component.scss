@@ -1,0 +1,19 @@
+@import 'helper';
+@import 'variables';
+@import 'mixins';
+
+:host {
+
+	display	: contents;
+	&.onlyBigScreen {
+
+		display		: none;
+		@include bigScreen {
+
+			display	: contents;
+
+		}
+
+	}
+
+}
