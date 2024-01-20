@@ -9,6 +9,7 @@ import { SelectorTableModule } from '../selector-table/selector-table.module';
 import { MarkdownEditorComponent } from './markdown-editor.component';
 import { MarkdownViewerComponent } from './markdown-viewer.component';
 import { MarkdownToHtmlPipe } from './markdown-to-html.pipe';
+import { DisplayModule } from '../display/display.module';
 
 @NgModule({
 
@@ -24,7 +25,8 @@ import { MarkdownToHtmlPipe } from './markdown-to-html.pipe';
 		SelectorTableModule,
 		SanitizeHtmlModule,
 		DialogModule,
-		OverlayContainerModule
+		OverlayContainerModule,
+		DisplayModule
 	],
 	exports: [
 		MarkdownEditorComponent,

@@ -94,6 +94,22 @@
 
 			@include mx-flex-center-y;
 			flex-wrap	: wrap;
+			overflow-x	: auto;
+			@include mx-webkit-scrollbar;
+
+			@include bigScreen {
+
+				flex-wrap: nowrap;
+
+			}
+
+			& > div,
+			& > div > div {
+
+				@include mx-flex-center-y;
+				flex-wrap	: nowrap;
+
+			}
 
 		}
 
