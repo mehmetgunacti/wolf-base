@@ -36,7 +36,6 @@ export class MarkdownEditorComponent implements OnInit {
 	content: WritableSignal<string | null> = signal(null);
 	contentSizeString = computed(() => formatBytes(this.content()?.length ?? 0));
 
-
 	// isPreview: WritableSignal<boolean> = signal(false);
 	btnImageShake: WritableSignal<boolean> = signal(false);
 
@@ -48,7 +47,6 @@ export class MarkdownEditorComponent implements OnInit {
 	private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
 
 	ngOnInit(): void {
-
 
 		this.hasValue$ = this.control.valueChanges.pipe(
 
@@ -306,6 +304,7 @@ export class MarkdownEditorComponent implements OnInit {
 		this.updateEditor(
 			tool.addTable(this.editor.nativeElement, event)
 		);
+		this.trigger.close();
 
 	}
 

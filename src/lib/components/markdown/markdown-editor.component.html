@@ -1,6 +1,26 @@
-<div buttons>
+<div buttons cdkMenuBar>
 
-	<div buttons_1 cdkMenuBar>
+	<div buttons_1>
+
+		<!-- SAVE BUTTON -->
+		<button
+			cdkMenuItem
+			class="icon-only"
+			(click)="onSave()"
+			[disabled]="!control.dirty">
+			<span class="material-symbols-outlined">save</span>
+			<span>Save</span>
+		</button>
+
+		<!-- SAVE & CLOSE BUTTON -->
+		<button
+			cdkMenuItem
+			class="icon-only"
+			(click)="onSave()"
+			[disabled]="!control.dirty">
+			<span class="material-symbols-outlined">save</span>
+			<span>Save & Close</span>
+		</button>
 
 		<!-- SAVE MENU -->
 		<button
@@ -23,7 +43,7 @@
 		</button>
 
 	</div>
-	<div buttons_2 cdkMenuBar>
+	<div buttons_2>
 
 		<!-- HEADING BUTTON -->
 		<button
@@ -33,6 +53,9 @@
 			cdkMenuItem>
 			<span class="material-symbols-outlined">format_h1</span>
 		</button>
+
+		<!-- DIVIDER -->
+		<div class="v-divider"></div>
 
 		<!-- BOLD BUTTON -->
 		<button
@@ -61,16 +84,43 @@
 			<span class="material-symbols-outlined">format_strikethrough</span>
 		</button>
 
+		<!-- HIGHLIGHT BUTTON -->
+		<button
+			class="icon-only"
+			(click)="addHighlight()"
+			title="Highlight"
+			cdkMenuItem>
+			<span class="material-symbols-outlined">format_ink_highlighter</span>
+		</button>
+
 		<!-- DIVIDER -->
 		<div class="v-divider"></div>
 
-		<!-- STYLE BUTTON -->
+		<!-- ALIGN CENTER BUTTON -->
 		<button
 			class="icon-only"
-			[cdkMenuTriggerFor]="format_paragraph"
-			title="Format Options"
+			(click)="addAlignCenter()"
+			title="Align Center"
 			cdkMenuItem>
-			<span class="material-symbols-outlined">format_paragraph</span>
+			<span class="material-symbols-outlined">format_align_center</span>
+		</button>
+
+		<!-- ALIGN RIGHT BUTTON -->
+		<button
+			class="icon-only"
+			(click)="addAlignRight()"
+			title="Align Right"
+			cdkMenuItem>
+			<span class="material-symbols-outlined">format_align_right</span>
+		</button>
+
+		<!-- ALIGN JUSTIFY BUTTON -->
+		<button
+			class="icon-only"
+			(click)="addAlignJustify()"
+			title="Align Justify"
+			cdkMenuItem>
+			<span class="material-symbols-outlined">format_align_justify</span>
 		</button>
 
 		<!-- DIVIDER -->
@@ -94,22 +144,46 @@
 			<span class="material-symbols-outlined">superscript</span>
 		</button>
 
-		<!-- HIGHLIGHT BUTTON -->
+		<!-- DIVIDER -->
+		<div class="v-divider"></div>
+
+		<!-- BULLETED LIST BUTTON -->
 		<button
 			class="icon-only"
-			(click)="addHighlight()"
-			title="Highlight"
+			(click)="addListBulleted()"
+			title="Bulleted List"
 			cdkMenuItem>
-			<span class="material-symbols-outlined">format_ink_highlighter</span>
+			<span class="material-symbols-outlined">format_list_bulleted</span>
 		</button>
 
-		<!-- LIST BUTTON -->
+		<!-- LIST NUMBERED BUTTON -->
 		<button
 			class="icon-only"
-			[cdkMenuTriggerFor]="list_menu"
-			title="Add List"
+			(click)="addListNumbered()"
+			title="Numbered List"
 			cdkMenuItem>
-			<span class="material-symbols-outlined">list</span>
+			<span class="material-symbols-outlined">format_list_numbered</span>
+		</button>
+
+		<!-- DIVIDER -->
+		<div class="v-divider"></div>
+
+		<!-- DECREASE INDENT BUTTON -->
+		<button
+			class="icon-only"
+			(click)="addDecreaseIndent()"
+			title="Decrease Indent"
+			cdkMenuItem>
+			<span class="material-symbols-outlined">format_indent_decrease</span>
+		</button>
+
+		<!-- INCREASE INDENT BUTTON -->
+		<button
+			class="icon-only"
+			(click)="addIncreaseIndent()"
+			title="Increase Indent"
+			cdkMenuItem>
+			<span class="material-symbols-outlined">format_indent_increase</span>
 		</button>
 
 		<!-- DIVIDER -->
@@ -145,11 +219,14 @@
 		<!-- ADD BLOCKQUOTE BUTTON -->
 		<button
 			class="icon-only"
-			[cdkMenuTriggerFor]="quote_menu"
+			[cdkMenuTriggerFor]="blockquote_menu"
 			title="Blockquote"
 			cdkMenuItem>
 			<span class="material-symbols-outlined">format_quote</span>
 		</button>
+
+		<!-- DIVIDER -->
+		<div class="v-divider"></div>
 
 		<!-- IMAGE FROM CLIPBOARD BUTTON -->
 		<button
@@ -227,102 +304,71 @@
 
 <ng-template #format_heading>
 
-	<div class="menu scrollable" cdkMenu>
+	<div>
 
-		<!-- H1 BUTTON -->
-		<button
-			class="icon-only"
-			(click)="addHeading('#')"
-			title="Align Center"
-			cdkMenuItem>
-			<h1>Heading 1</h1>
-		</button>
+		<div class="menu scrollable" cdkMenu>
 
-		<!-- H2 BUTTON -->
-		<button
-			class="icon-only"
-			(click)="addHeading('##')"
-			title="Heading 2"
-			cdkMenuItem>
-			<h2>Heading 2</h2>
-		</button>
+			<!-- H1 BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addHeading('#')"
+				title="Align Center"
+				cdkMenuItem>
+				<h1>Heading 1</h1>
+			</button>
 
-		<!-- H3 BUTTON -->
-		<button
-			class="icon-only"
-			(click)="addHeading('###')"
-			title="Heading 3"
-			cdkMenuItem>
-			<h3>Heading 3</h3>
-		</button>
+			<!-- H2 BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addHeading('##')"
+				title="Heading 2"
+				cdkMenuItem>
+				<h2>Heading 2</h2>
+			</button>
 
-		<!-- H4 BUTTON -->
-		<button
-			class="icon-only"
-			(click)="addHeading('####')"
-			title="Heading 4"
-			cdkMenuItem>
-			<h4>Heading 4</h4>
-		</button>
+			<!-- H3 BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addHeading('###')"
+				title="Heading 3"
+				cdkMenuItem>
+				<h3>Heading 3</h3>
+			</button>
 
-		<!-- H5 BUTTON -->
-		<button
-			class="icon-only"
-			(click)="addHeading('#####')"
-			title="Heading 5"
-			cdkMenuItem>
-			<h5>Heading 5</h5>
-		</button>
+			<!-- H4 BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addHeading('####')"
+				title="Heading 4"
+				cdkMenuItem>
+				<h4>Heading 4</h4>
+			</button>
 
-		<!-- H6 BUTTON -->
-		<button
-			class="icon-only"
-			(click)="addHeading('######')"
-			title="Heading 6"
-			cdkMenuItem>
-			<h6>Heading 6</h6>
-		</button>
+			<!-- H5 BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addHeading('#####')"
+				title="Heading 5"
+				cdkMenuItem>
+				<h5>Heading 5</h5>
+			</button>
 
-	</div>
+			<!-- H6 BUTTON -->
+			<button
+				class="icon-only"
+				(click)="addHeading('######')"
+				title="Heading 6"
+				cdkMenuItem>
+				<h6>Heading 6</h6>
+			</button>
 
-</ng-template>
-
-<ng-template #format_paragraph>
-
-	<div class="menu horizontal" cdkMenu>
-
-		<!-- ALIGN CENTER BUTTON -->
-		<button
-			class="icon-only"
-			(click)="addAlignCenter()"
-			title="Align Center"
-			cdkMenuItem>
-			<span class="material-symbols-outlined">format_align_center</span>
-		</button>
-
-		<!-- ALIGN RIGHT BUTTON -->
-		<button
-			class="icon-only"
-			(click)="addAlignRight()"
-			title="Align Right"
-			cdkMenuItem>
-			<span class="material-symbols-outlined">format_align_right</span>
-		</button>
-
-		<!-- ALIGN JUSTIFY BUTTON -->
-		<button
-			class="icon-only"
-			(click)="addAlignJustify()"
-			title="Align Justify"
-			cdkMenuItem>
-			<span class="material-symbols-outlined">format_align_justify</span>
-		</button>
+		</div>
 
 	</div>
 
 </ng-template>
 
-<ng-template #quote_menu>
+<ng-template #blockquote_menu>
 
 	<div class="menu quote-menu" cdkMenu>
 
@@ -362,123 +408,127 @@
 
 <ng-template #code_menu>
 
-	<div class="menu scrollable code-menu" cdkMenu>
+	<div>
 
-		<fieldset>
-			<!-- INLINE CODE BUTTON -->
-			<button class="icon-only small" (click)="addInlineCode()" cdkMenuItem>
-				<span class="material-symbols-outlined small">code</span>
-				<span>Inline Code</span>
-			</button>
-		</fieldset>
+		<div class="menu scrollable code-menu" cdkMenu>
 
-		<fieldset>
-			<legend>Frequent</legend>
+			<fieldset>
+				<!-- INLINE CODE BUTTON -->
+				<button class="icon-only small" (click)="addInlineCode()" cdkMenuItem>
+					<span class="material-symbols-outlined small">code</span>
+					<span>Inline Code</span>
+				</button>
+			</fieldset>
 
-			<button class="icon-only small" (click)="addCodeBlock()" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>Empty Block</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('java')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>java</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('typescript')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>typescript</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('javascript')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>javascript</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('scss')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>scss</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('bash')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>bash</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('sql')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>sql</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('xml')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>xml</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('yaml')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>yaml</span>
-			</button>
+			<fieldset>
+				<legend>Frequent</legend>
 
-		</fieldset>
+				<button class="icon-only small" (click)="addCodeBlock()" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>Empty Block</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('java')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>java</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('typescript')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>typescript</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('javascript')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>javascript</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('scss')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>scss</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('bash')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>bash</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('sql')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>sql</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('xml')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>xml</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('yaml')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>yaml</span>
+				</button>
 
-		<fieldset>
-			<legend>Other</legend>
+			</fieldset>
 
-			<button class="icon-only small" (click)="addCodeBlock('asciidoc')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>asciidoc</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('autohotkey')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>autohotkey</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('c')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>c</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('cpp')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>cpp</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('css')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>css</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('dockerfile')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>dockerfile</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('gradle')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>gradle</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('http')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>http</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('ini')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>ini</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('json')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>json</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('kotlin')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>kotlin</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('markdown')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>markdown</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('powershell')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>powershell</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('properties')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>properties</span>
-			</button>
-			<button class="icon-only small" (click)="addCodeBlock('python')" cdkMenuItem>
-				<span class="material-symbols-outlined small">chevron_right</span>
-				<span>python</span>
-			</button>
+			<fieldset>
+				<legend>Other</legend>
 
-		</fieldset>
+				<button class="icon-only small" (click)="addCodeBlock('asciidoc')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>asciidoc</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('autohotkey')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>autohotkey</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('c')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>c</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('cpp')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>cpp</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('css')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>css</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('dockerfile')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>dockerfile</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('gradle')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>gradle</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('http')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>http</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('ini')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>ini</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('json')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>json</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('kotlin')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>kotlin</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('markdown')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>markdown</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('powershell')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>powershell</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('properties')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>properties</span>
+				</button>
+				<button class="icon-only small" (click)="addCodeBlock('python')" cdkMenuItem>
+					<span class="material-symbols-outlined small">chevron_right</span>
+					<span>python</span>
+				</button>
+
+			</fieldset>
+
+		</div>
 
 	</div>
 
@@ -518,58 +568,6 @@
 			<span class="material-symbols-outlined">save</span>
 			<span>Save & Close</span>
 		</button>
-
-	</div>
-
-</ng-template>
-
-<ng-template #list_menu>
-
-	<div class="menu" cdkMenu>
-
-		<div>
-
-			<!-- LISTE BULLETED BUTTON -->
-			<button
-				class="icon-only"
-				(click)="addListBulleted()"
-				title="Bold"
-				cdkMenuItem>
-				<span class="material-symbols-outlined">format_list_bulleted</span>
-			</button>
-
-			<!-- ITALIC BUTTON -->
-			<button
-				class="icon-only"
-				(click)="addListNumbered()"
-				title="Italic"
-				cdkMenuItem>
-				<span class="material-symbols-outlined">format_list_numbered</span>
-			</button>
-
-		</div>
-
-		<div>
-
-			<!-- ALIGN CENTER BUTTON -->
-			<button
-				class="icon-only"
-				(click)="addDecreaseIndent()"
-				title="Decrease Indent"
-				cdkMenuItem>
-				<span class="material-symbols-outlined">format_indent_decrease</span>
-			</button>
-
-			<!-- ALIGN RIGHT BUTTON -->
-			<button
-				class="icon-only"
-				(click)="addIncreaseIndent()"
-				title="Increase Indent"
-				cdkMenuItem>
-				<span class="material-symbols-outlined">format_indent_increase</span>
-			</button>
-
-		</div>
 
 	</div>
 

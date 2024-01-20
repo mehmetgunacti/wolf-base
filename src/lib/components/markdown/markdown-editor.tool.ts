@@ -9,7 +9,7 @@ export interface TextareaProperties {
 
 }
 
-export function tab(props: TextareaProperties): TextareaProperties {
+export function tab(props: TextareaProperties, tabString: string = TAB): TextareaProperties {
 
 	const { value, selectionStart, selectionEnd } = props;
 
@@ -20,7 +20,7 @@ export function tab(props: TextareaProperties): TextareaProperties {
 		const lastPiece = value.substring(selectionEnd);
 		const startIdx = startIndexOfCurrentLine(value, selectionStart);
 		const selection = value.substring(startIdx, selectionEnd);
-		const newSelection = TAB + selection.replaceAll(NL, NL + TAB);
+		const newSelection = tabString + selection.replaceAll(NL, NL + tabString);
 		const shift = newSelection.length - selection.length;
 
 		const result = value.substring(0, startIdx) + newSelection + lastPiece;
@@ -36,13 +36,13 @@ export function tab(props: TextareaProperties): TextareaProperties {
 	}
 
 	// Insert TAB at the cursor's position
-	const result = value.substring(0, selectionStart) + TAB + value.substring(selectionStart);
+	const result = value.substring(0, selectionStart) + tabString + value.substring(selectionStart);
 
 	return {
 
 		value: result,
-		selectionStart: selectionStart + TAB.length,
-		selectionEnd: selectionEnd + TAB.length
+		selectionStart: selectionStart + tabString.length,
+		selectionEnd: selectionEnd + tabString.length
 
 	};
 
@@ -58,7 +58,7 @@ function hasTabAfterNewlines(s: string): boolean {
 
 }
 
-export function shiftTab(props: TextareaProperties): TextareaProperties {
+export function shiftTab(props: TextareaProperties, tabString: string = TAB): TextareaProperties {
 
 	const { value, selectionStart, selectionEnd } = props;
 
@@ -71,9 +71,9 @@ export function shiftTab(props: TextareaProperties): TextareaProperties {
 
 		const piece = value.substring(startIdx, selectionEnd);
 
-		if (piece.startsWith(TAB) && hasTabAfterNewlines(piece)) {
+		if (piece.startsWith(tabString) && hasTabAfterNewlines(piece)) {
 
-			const newPiece = piece.substring(TAB.length).replaceAll(NL + TAB, NL);
+			const newPiece = piece.substring(tabString.length).replaceAll(NL + tabString, NL);
 			const result = value.substring(0, startIdx) + newPiece + lastPiece;
 			const shift = piece.length - newPiece.length;
 
@@ -91,19 +91,19 @@ export function shiftTab(props: TextareaProperties): TextareaProperties {
 	}
 
 	let startPiece = value.substring(0, selectionStart);
-	if (startPiece.endsWith(TAB))
-		startPiece = value.substring(0, selectionStart - TAB.length);
+	if (startPiece.endsWith(tabString))
+		startPiece = value.substring(0, selectionStart - tabString.length);
 	else
 		return props;
 
 	// remove TAB at the cursor's position
-	const result = startPiece + value.substring(startPiece.length + TAB.length);
+	const result = startPiece + value.substring(startPiece.length + tabString.length);
 
 	return {
 
 		value: result,
-		selectionStart: selectionStart - TAB.length,
-		selectionEnd: selectionEnd - TAB.length
+		selectionStart: selectionStart - tabString.length,
+		selectionEnd: selectionEnd - tabString.length
 
 	};
 
@@ -125,9 +125,10 @@ export function addToc(props: TextareaProperties): TextareaProperties {
 
 export function addTable(props: TextareaProperties, [col, row]: [number, number]): TextareaProperties {
 
-	const newLine = '\n';
+	const newLine = NL;
+	const { value, selectionStart, selectionEnd } = props;
 
-	let output = newLine + '|';
+	let output = newLine + newLine + '|';
 
 	// first line
 	for (let c = 0; c < col; ++c)
@@ -148,9 +149,19 @@ export function addTable(props: TextareaProperties, [col, row]: [number, number]
 		output += newLine;
 
 	}
-	output += newLine;
 
-	return insert(props, output);
+	const firstPiece = value.substring(0, selectionStart);
+	const lastPiece = value.substring(selectionStart)
+
+	const result = firstPiece + output + (lastPiece.startsWith(newLine) ? '' : newLine) + lastPiece;
+	const cursor = props.selectionStart + 4; // set the cursor at center of 1st cell of header row
+	return {
+
+		value: result,
+		selectionStart: cursor,
+		selectionEnd: cursor
+
+	};
 
 }
 
@@ -261,7 +272,7 @@ export function addBold(props: TextareaProperties): TextareaProperties {
 
 export function addItalic(props: TextareaProperties): TextareaProperties {
 
-	const s = '_';
+	const s = '*';
 	return wrap(props, s);
 
 }
@@ -331,53 +342,13 @@ export function addCodeBlock(props: TextareaProperties, lang: string = ''): Text
 
 export function addIncreaseIndent(props: TextareaProperties): TextareaProperties {
 
-	const { value, selectionStart, selectionEnd } = props;
-	const INDENT = '  ';
-
-	const startIdx = startIndexOfCurrentLine(value, selectionStart);
-	const result = value.substring(0, startIdx) + INDENT + value.substring(startIdx);
-
-	return {
-
-		value: result,
-		selectionStart: selectionStart + INDENT.length,
-		selectionEnd: selectionEnd + INDENT.length
-
-	};
+	return tab(props, '  ');
 
 }
 
 export function addDecreaseIndent(props: TextareaProperties): TextareaProperties {
 
-	const { value, selectionStart, selectionEnd } = props;
-	const INDENT = '  ';
-	const SPACE = ' ';
-
-	let shift = 0;
-	let startIdx = startIndexOfCurrentLine(value, selectionStart);
-	const startPiece = value.substring(0, startIdx);
-
-	let endPiece = value.substring(startIdx);
-	if (endPiece.startsWith(INDENT)) {
-
-		endPiece = value.substring(startIdx + INDENT.length);
-		shift = INDENT.length;
-
-	} else if (endPiece.startsWith(SPACE)) {
-
-		endPiece = value.substring(startIdx + SPACE.length);
-		shift = SPACE.length;
-
-	}
-
-	const result = startPiece + endPiece;
-	return {
-
-		value: result,
-		selectionStart: selectionStart - shift,
-		selectionEnd: selectionEnd - shift
-
-	};
+	return shiftTab(props, '  ');
 
 }
 
