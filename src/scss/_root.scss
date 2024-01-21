@@ -15,7 +15,7 @@
 	--font-family			: 'Nunito Sans', serif;
 	--font-family-mono		: 'Source Code Pro', monospace;
 
-	--gap					: 1rem;
+	--gap					: 0.7rem;
 
 	--gap-xxl				: calc(var(--gap) * 1.8);
 	--gap-xl				: calc(var(--gap) * 1.6);
@@ -32,6 +32,12 @@
 
 	--input-element-height 	: #{$input-element-min-height};
 
-	--scrollbar-width				: 8px;
+	--scrollbar-width		: 8px;
+
+	@include bigScreen {
+
+		--gap				: 1rem;
+
+	}
 
 }

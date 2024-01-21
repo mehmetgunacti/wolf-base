@@ -8,6 +8,8 @@
 	@extend %flex-column;
 	height			: 100%;
 
+	--gap			: 1rem;
+
 	& > [bottom-buttons] {
 
 		display			: flex;
