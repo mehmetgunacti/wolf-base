@@ -16,6 +16,8 @@ import { NavOverlayComponent } from './components/nav-overlay/nav-overlay.compon
 import { NavComponent } from './components/nav/nav.component';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NgProgressHttpModule } from 'ngx-progressbar/http';
+import { NgProgressModule } from 'ngx-progressbar';
 
 @NgModule({
 	declarations: [
@@ -35,12 +37,16 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 		EffectsModule.forRoot(store.effects),
 		StoreDevtoolsModule.instrument(),
 		ServiceWorkerModule.register('ngsw-worker.js', {
+
 			enabled: !isDevMode(), // environment.production
 			// Register the ServiceWorker as soon as the application is stable
 			// or after 30 seconds (whichever comes first).
 			registrationStrategy: 'registerWhenStable:30000' // 'registerImmediately'
+
 		}),
-		ScrollingModule
+		ScrollingModule,
+		NgProgressModule.withConfig({ thick: false, color: 'red', spinner: false }),
+		NgProgressHttpModule,
 	],
 	providers: config.providers,
 	bootstrap: [AppComponent]
