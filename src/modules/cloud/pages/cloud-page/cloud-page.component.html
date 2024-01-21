@@ -10,7 +10,7 @@
 
 <w-toast *ngIf="isFirestoreConfigMissing$ | async" class="warn" [conf]="{ severity: 'info' }">
 
-	<div style='display: flex; justify-content: space-between; align-items: center;'>
+	<div config_alert>
 
 		<span>Firestore configuration missing</span>
 		<button class="icon-only" routerLink="/settings">

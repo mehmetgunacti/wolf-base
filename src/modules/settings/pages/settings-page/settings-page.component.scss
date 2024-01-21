@@ -6,7 +6,7 @@
 	@extend %flex-column;
 	gap		: var(--gap);
 
-	[update-alert] {
+	[update_alert] {
 
 		@include mx-flex-space-between-center;
 

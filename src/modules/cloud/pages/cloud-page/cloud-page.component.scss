@@ -1,8 +1,15 @@
 @import 'helper';
+@import 'mixins';
 
 :host {
 
 	@extend %flex-column;
-	gap							: var(--gap-sm);
+	gap			: var(--gap-sm);
+
+	& [config_alert] {
+
+		@include mx-flex-space-between-center;
+
+	}
 
 }
