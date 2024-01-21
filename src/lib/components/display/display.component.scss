@@ -16,4 +16,10 @@
 
 	}
 
+	@container (min-width: var(--show-after)) {
+
+		display	: contents;
+
+	}
+
 }

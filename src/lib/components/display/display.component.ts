@@ -12,4 +12,8 @@ export class DisplayComponent {
 	@HostBinding('class.onlyBigScreen')
 	showOnlyOnBigScreen: boolean = false;
 
+	@Input()
+	@HostBinding('style.--show-after')
+	showContentAfter: string = "0px";
+
 }

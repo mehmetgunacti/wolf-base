@@ -7,9 +7,8 @@ import { SanitizeHtmlModule } from 'lib/pipes';
 import { OverlayContainerModule } from '../overlay-container';
 import { SelectorTableModule } from '../selector-table/selector-table.module';
 import { MarkdownEditorComponent } from './markdown-editor.component';
-import { MarkdownViewerComponent } from './markdown-viewer.component';
 import { MarkdownToHtmlPipe } from './markdown-to-html.pipe';
-import { DisplayModule } from '../display/display.module';
+import { MarkdownViewerComponent } from './markdown-viewer.component';
 
 @NgModule({
 
@@ -25,8 +24,7 @@ import { DisplayModule } from '../display/display.module';
 		SelectorTableModule,
 		SanitizeHtmlModule,
 		DialogModule,
-		OverlayContainerModule,
-		DisplayModule
+		OverlayContainerModule
 	],
 	exports: [
 		MarkdownEditorComponent,

@@ -15,6 +15,16 @@ $xl: 1200px;
 
 }
 
+@mixin mx-is-wider-than($width) {
+
+	@media screen and (min-width: $width) {
+
+		@content;
+
+	}
+
+}
+
 @mixin sm() {
 	@media screen and (min-width: $sm) {
 		@content;

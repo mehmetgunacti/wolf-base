@@ -39,9 +39,7 @@
 			class="icon-only"
 			(click)="onPreviewOpen()">
 			<span class="material-symbols-outlined">live_tv</span>
-			<w-display [showOnlyOnBigScreen]="true">
-				<span>Preview</span>
-			</w-display>
+			<span style="display: var(--display-element);">Preview</span>
 		</button>
 
 	</div>
@@ -163,9 +161,7 @@
 		<div>
 
 			<!-- DIVIDER -->
-			<w-display [showOnlyOnBigScreen]="true">
-				<div class="v-divider only-big-screen"></div>
-			</w-display>
+			<div class="v-divider" style="display: var(--display-element)"></div>
 
 			<div>
 
