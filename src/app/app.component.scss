@@ -12,14 +12,15 @@
 
 	& > header {
 
-		position				: absolute;
+		position				: fixed;
 		z-index					: $z-index-header;
 
-		display					: flex;
-
+		top						: 0;
+		left					: 0;
+		right					: 0;
 		height					: $header-height;
-		width					: 100vw;
 
+		display					: flex;
 		padding					: var(--gap);
 		padding-left			: 0;
 
@@ -32,14 +33,14 @@
 
 	& > main {
 
-		position			: absolute;
+		position			: fixed;
 		z-index				: $z-index-main;
 
 		display				: block;
 
 		top					: $header-height;
 		right				: 0;
-		bottom				: 0;
+		height				: calc(100dvh - #{$header-height});
 		left				: 0;
 
 		padding				: var(--gap-sm);
@@ -47,26 +48,27 @@
 		overflow-y			: auto;
 		@include mx-webkit-scrollbar;
 
-		transition			: left 0.6s cubic-bezier(0.25, 1, 0.25, 1), $bg-transition;
+		transition			: height $transition, left 0.6s $transition-timing-fn, $bg-transition;
 
 	}
 
 	& > nav {
 
-		position			: absolute;
+		position			: fixed;
 		z-index				: $z-index-nav;
 
 		display				: block;
 
 		top					: $header-height;
-		bottom				: 0;
+		left				: 0;
+		height				: calc(100dvh - #{$header-height});
 		width				: $nav-width;
-		padding				: var(--gap-sm);
 
+		padding				: var(--gap-sm);
 		margin-left			: -$nav-width;
 
 		background-color	: fn-hsl(bg-5);
-		transition			: margin-left 0.6s cubic-bezier(0.25, 1, 0.25, 1), $bg-transition;
+		transition			: height $transition, margin-left 0.6s $transition-timing-fn, $bg-transition;
 
 		@include mx-box-shadow;
 
