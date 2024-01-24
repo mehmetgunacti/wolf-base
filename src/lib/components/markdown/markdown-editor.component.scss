@@ -140,6 +140,7 @@ $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 &
 			padding-top	: var(--gap);
 			@include mx-webkit-scrollbar;
 
+			&:valid + label,
 			&:focus + label {
 
 				@extend %input-label-up;

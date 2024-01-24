@@ -7,19 +7,10 @@
 			cdkMenuItem
 			class="icon-only"
 			(click)="onSave()"
+			title="Save"
 			[disabled]="!control.dirty">
 			<span class="material-symbols-outlined">save</span>
 			<span>Save</span>
-		</button>
-
-		<!-- SAVE & CLOSE BUTTON -->
-		<button
-			cdkMenuItem
-			class="icon-only"
-			(click)="onSave()"
-			[disabled]="!control.dirty">
-			<span class="material-symbols-outlined">save</span>
-			<span>Save & Close</span>
 		</button>
 
 		<!-- SAVE MENU -->
@@ -31,6 +22,31 @@
 			<span class="material-symbols-outlined">menu</span>
 			<span>Menu</span>
 		</button>
+
+		<!-- DIVIDER -->
+		<div class="v-divider"></div>
+
+		<!-- UNDO BUTTON -->
+		<button
+			cdkMenuItem
+			class="icon-only"
+			(click)="onUndo()"
+			title="Undo"
+			[disabled]="!history.canUndo()">
+			<span class="material-symbols-outlined">undo</span>
+		</button>
+
+		<!-- REDO BUTTON -->
+		<button
+			cdkMenuItem
+			class="icon-only"
+			(click)="onRedo()"
+			title="Redo"
+			[disabled]="!history.canRedo()">
+			<span class="material-symbols-outlined">redo</span>
+		</button>
+
+		<button class="icon-only" (click)="check()">check</button>
 
 		<!-- PREVIEW BUTTON -->
 		<button
@@ -290,14 +306,15 @@
 	<textarea
 		#editor
 		[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
-		[formControl]="control"
 		placeholder=""
 		[readonly]="readonly"
 		(focus)="onFocus()"
 		(blur)="onBlur()"
-		(input)="onInput($event)"></textarea>
-	<label [class.up]="hasValue$ | async">{{name}}</label>
-	<label class="up right">{{ contentSizeString() }}</label>
+		(input)="onInput($event)"
+		[value]="history.content()"
+		required></textarea>
+	<label>{{name}}</label>
+	<label class="up right">{{ history.sizeFormatted() }}</label>
 
 </div>
 
@@ -316,7 +333,7 @@
 
 		</ng-container>
 
-		<w-markdown-viewer [markdown]="content()"/>
+		<w-markdown-viewer [markdown]="history.content()"/>
 
 	</w-overlay-container>
 

@@ -1,3 +1,6 @@
+import { Signal, WritableSignal, computed, signal } from '@angular/core';
+import { formatBytes } from 'lib/utils';
+
 const NL = '\n';
 const TAB = ' '.repeat(4); // 4 spaces instead of '\t'
 
@@ -508,3 +511,125 @@ function wrapEachWord(props: TextareaProperties, CHAR: string): TextareaProperti
 	};
 
 }
+
+export class History {
+
+	stack: WritableSignal<string[]> = signal(['']);
+	idx: WritableSignal<number> = signal(0);
+
+	canUndo: Signal<boolean> = computed(() => this.idx() > 0);
+	canRedo: Signal<boolean> = computed(() => this.idx() < this.stack().length - 1);
+	content: Signal<string> = computed(() => this.stack()[this.idx()]);
+	size: Signal<number> = computed(() => this.content().length);
+	sizeFormatted = computed(() => `${formatBytes(this.size())} / ${formatBytes(this.stack().reduce((t, a) => t + a.length, 0))} (${this.stack().length})`);
+
+	saveState(content: string = '', replaceCurrent: boolean = false): void {
+
+		if (content === this.content())
+			return;
+
+		const arr = [...this.stack().slice(0, this.idx() + 1)]; // clears redo-cache (right-side of index)
+		if (!replaceCurrent) // mainly for replacing initial empty string (after content is loaded from IndexedDb)
+			this.incIdx();
+		arr[this.idx()] = content;
+		this.stack.set(arr);
+		// console.log(this.idx(), this.stack());
+
+	}
+
+	undo(): void {
+
+		if (this.canUndo())
+			this.decIdx();
+		// console.log(this.idx(), this.stack());
+
+
+	}
+
+	redo(): void {
+
+		if (this.canRedo())
+			this.incIdx();
+		// console.log(this.idx(), this.stack());
+
+	}
+
+	private incIdx(): void {
+
+		if (this.idx() < this.stack().length)
+			this.idx.update(idx => ++idx);
+
+	}
+
+	private decIdx(): void {
+
+		if (this.idx() > 0)
+			this.idx.update(idx => --idx);
+
+	}
+
+}
+
+/*
+export class History {
+
+	stack: string[] = [''];
+	idx: number = 0;
+
+	canUndo: WritableSignal<boolean> = signal(false);
+	canRedo: WritableSignal<boolean> = signal(false);
+
+	saveState(content: string = ''): void {
+
+		this.stack[this.idx] = content;
+		this.incIdx();
+		this.stack.length = this.idx;
+		this.canUndo.set(true);
+		this.canRedo.set(false);
+
+		console.log(this.idx, this.stack);
+
+	}
+
+	undo(): string | null {
+
+		this.decIdx();
+		if (this.idx === 0) {
+			this.canUndo.set(false);
+			return null;
+		}
+		this.canRedo.set(true);
+		return this.stack[this.idx];
+
+	}
+
+	redo(): string | null {
+
+		this.incIdx();
+		if (this.idx === this.stack.length) {
+			this.canRedo.set(false);
+			return null;
+		}
+		this.canUndo.set(true);
+		return this.stack[this.idx];
+
+	}
+
+	private incIdx(): void {
+
+		if (this.idx < this.stack.length)
+			this.idx += 1;
+
+	}
+
+	private decIdx(): void {
+
+		if (this.idx > 0)
+			this.idx -= 1;
+
+	}
+
+}
+
+
+*/

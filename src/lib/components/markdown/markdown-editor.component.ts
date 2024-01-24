@@ -1,12 +1,11 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenuTrigger } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, TemplateRef, ViewChild, WritableSignal, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { formatBytes } from 'lib/utils';
-import { Observable, map, startWith, take, tap, timer } from 'rxjs';
+import { Subscription, debounceTime, distinctUntilChanged, map, take, tap, timer } from 'rxjs';
 import { ClipboardService } from 'services';
-import * as tool from './markdown-editor.tool';
+import * as helper from './markdown-editor.tool';
 import { TextareaProperties } from './markdown-editor.tool';
 
 @Component({
@@ -15,46 +14,63 @@ import { TextareaProperties } from './markdown-editor.tool';
 	styleUrls: ['./markdown-editor.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MarkdownEditorComponent implements OnInit {
+export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	@ViewChild('editor') editor!: ElementRef<HTMLTextAreaElement>;
 	@ViewChild('btnSaveMenu') btnSaveMenu!: ElementRef<HTMLButtonElement>;
 	@ViewChild(CdkMenuTrigger) trigger!: CdkMenuTrigger;
 	@ViewChild('previewTemplate') previewTemplate!: TemplateRef<HTMLDivElement>;
 
-	@Input() control!: FormControl;
+	@Input() control!: FormControl<string>;
 	@Input() name: string = '';
 	@Input() readonly = false;
 	@Input() rows = 30;
 	@Input() cols = 20;
 
-	@Output() inputChanged: EventEmitter<string> = new EventEmitter();
+	// @Output() inputChanged: EventEmitter<string> = new EventEmitter();
 	@Output() save: EventEmitter<string> = new EventEmitter();
 	@Output() saveClose: EventEmitter<string> = new EventEmitter();
 	@Output() cancel: EventEmitter<void> = new EventEmitter();
 
-	content: WritableSignal<string | null> = signal(null);
-	contentSizeString = computed(() => formatBytes(this.content()?.length ?? 0));
-
 	// isPreview: WritableSignal<boolean> = signal(false);
 	btnImageShake: WritableSignal<boolean> = signal(false);
-
-	hasValue$!: Observable<boolean>;
 	hasFocus: boolean = false;
+	history: helper.History = new helper.History();
 
 	private clipboardService: ClipboardService = inject(ClipboardService);
 	private dialogService: Dialog = inject(Dialog);
 	private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
 
+	subscription: Subscription = new Subscription();
+
 	ngOnInit(): void {
 
-		this.hasValue$ = this.control.valueChanges.pipe(
+		this.subscription = this.control.valueChanges.pipe(
 
-			startWith(this.control.value),
-			tap(val => this.content.set(val)),
-			map(val => !!val)
+			debounceTime(400),
+			distinctUntilChanged(),
+			tap(val => this.history.saveState(val, !this.control.dirty))
 
-		);
+		).subscribe();
+
+	}
+
+	onInput(event: Event): void {
+
+		const textarea = event.target as HTMLInputElement;
+		const content = textarea.value;
+
+		/* Order important: first empty string has to be replaced with actual content
+		*  onInput() content comes from textarea, but control.valueChanges also emits once
+		*  data arrives from database (initial) */
+		this.control.markAsDirty();
+		this.control.setValue(content);
+
+	}
+
+	ngOnDestroy(): void {
+
+		this.subscription.unsubscribe();
 
 	}
 
@@ -77,6 +93,26 @@ export class MarkdownEditorComponent implements OnInit {
 	onSaveAndClose(): void {
 
 		this.saveClose.emit(this.editor.nativeElement.value);
+
+	}
+
+	onUndo(): void {
+
+		this.history.undo();
+		this.editor.nativeElement.focus();
+
+	}
+
+	onRedo(): void {
+
+		this.history.redo();
+		this.editor.nativeElement.focus();
+
+	}
+
+	check(): void {
+
+		console.log(this.history.idx(), this.history.stack());
 
 	}
 
@@ -105,16 +141,28 @@ export class MarkdownEditorComponent implements OnInit {
 
 				event.preventDefault();
 				this.updateEditor(
-					tool.shiftTab(this.editor.nativeElement)
+					helper.shiftTab(this.editor.nativeElement)
 				);
 
+			} else if (hasModifierKey(event, 'ctrlKey') && hasModifierKey(event, 'shiftKey') && event.key.toLowerCase() === 'z') {
+
+				event.preventDefault();
+				this.history.redo();
+
+			} else if (hasModifierKey(event, 'ctrlKey') && event.key.toLowerCase() === 'z') {
+
+				event.preventDefault();
+				this.history.undo();
+
 			}
+
+
 
 		} else if (event.key === 'Tab') {
 
 			event.preventDefault();
 			this.updateEditor(
-				tool.tab(this.editor.nativeElement)
+				helper.tab(this.editor.nativeElement)
 			);
 
 		} else if (event.key === 'Escape') {
@@ -138,19 +186,11 @@ export class MarkdownEditorComponent implements OnInit {
 
 	}
 
-	onInput(event: Event): void {
-
-		const inputElement = event.target as HTMLInputElement;
-		const value = inputElement.value;
-		this.inputChanged.emit(value);
-
-	}
-
 	async addImage(btn: HTMLButtonElement): Promise<void> {
 
 		const base64 = await this.clipboardService.base64ImageFromClipboard();
 		if (base64)
-			this.updateEditor(tool.addImage(this.editor.nativeElement, base64));
+			this.updateEditor(helper.addImage(this.editor.nativeElement, base64));
 		else
 			timer(0, 600)
 				.pipe(take(2))
@@ -166,7 +206,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addHeading(heading: string): void {
 
 		this.updateEditor(
-			tool.addHeading(this.editor.nativeElement, heading)
+			helper.addHeading(this.editor.nativeElement, heading)
 		);
 
 	}
@@ -174,7 +214,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addBold(): void {
 
 		this.updateEditor(
-			tool.addBold(this.editor.nativeElement)
+			helper.addBold(this.editor.nativeElement)
 		);
 
 	}
@@ -182,7 +222,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addItalic(): void {
 
 		this.updateEditor(
-			tool.addItalic(this.editor.nativeElement)
+			helper.addItalic(this.editor.nativeElement)
 		);
 
 	}
@@ -190,7 +230,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addStrikethrough(): void {
 
 		this.updateEditor(
-			tool.addStrikethrough(this.editor.nativeElement)
+			helper.addStrikethrough(this.editor.nativeElement)
 		);
 
 	}
@@ -198,7 +238,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addAlignCenter(): void {
 
 		this.updateEditor(
-			tool.addAlignCenter(this.editor.nativeElement)
+			helper.addAlignCenter(this.editor.nativeElement)
 		);
 
 	}
@@ -206,7 +246,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addAlignRight(): void {
 
 		this.updateEditor(
-			tool.addAlignRight(this.editor.nativeElement)
+			helper.addAlignRight(this.editor.nativeElement)
 		);
 
 	}
@@ -214,7 +254,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addAlignJustify(): void {
 
 		this.updateEditor(
-			tool.addAlignJustify(this.editor.nativeElement)
+			helper.addAlignJustify(this.editor.nativeElement)
 		);
 
 	}
@@ -222,7 +262,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addSub(): void {
 
 		this.updateEditor(
-			tool.addSub(this.editor.nativeElement)
+			helper.addSub(this.editor.nativeElement)
 		);
 
 	}
@@ -230,7 +270,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addSup(): void {
 
 		this.updateEditor(
-			tool.addSup(this.editor.nativeElement)
+			helper.addSup(this.editor.nativeElement)
 		);
 
 	}
@@ -238,7 +278,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addHighlight(): void {
 
 		this.updateEditor(
-			tool.addHighlight(this.editor.nativeElement)
+			helper.addHighlight(this.editor.nativeElement)
 		);
 
 	}
@@ -246,7 +286,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addBlockquote(type?: 'warning' | 'note' | 'tip' | 'important' | 'caution'): void {
 
 		this.updateEditor(
-			tool.addBlockquote(this.editor.nativeElement, type)
+			helper.addBlockquote(this.editor.nativeElement, type)
 		);
 
 	}
@@ -254,7 +294,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addInlineCode(): void {
 
 		this.updateEditor(
-			tool.addInlineCode(this.editor.nativeElement)
+			helper.addInlineCode(this.editor.nativeElement)
 		);
 
 	}
@@ -262,7 +302,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addCodeBlock(lang?: string): void {
 
 		this.updateEditor(
-			tool.addCodeBlock(this.editor.nativeElement, lang)
+			helper.addCodeBlock(this.editor.nativeElement, lang)
 		);
 
 	}
@@ -270,7 +310,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addListNumbered(): void {
 
 		this.updateEditor(
-			tool.addListNumbered(this.editor.nativeElement)
+			helper.addListNumbered(this.editor.nativeElement)
 		);
 
 	}
@@ -278,7 +318,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addDecreaseIndent(): void {
 
 		this.updateEditor(
-			tool.addDecreaseIndent(this.editor.nativeElement)
+			helper.addDecreaseIndent(this.editor.nativeElement)
 		);
 
 	}
@@ -286,7 +326,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addIncreaseIndent(): void {
 
 		this.updateEditor(
-			tool.addIncreaseIndent(this.editor.nativeElement)
+			helper.addIncreaseIndent(this.editor.nativeElement)
 		);
 
 	}
@@ -294,7 +334,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addListBulleted(): void {
 
 		this.updateEditor(
-			tool.addListBulleted(this.editor.nativeElement)
+			helper.addListBulleted(this.editor.nativeElement)
 		);
 
 	}
@@ -302,7 +342,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addTable(event: [number, number]): void {
 
 		this.updateEditor(
-			tool.addTable(this.editor.nativeElement, event)
+			helper.addTable(this.editor.nativeElement, event)
 		);
 		this.trigger.close();
 
@@ -311,7 +351,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addToc(): void {
 
 		this.updateEditor(
-			tool.addToc(this.editor.nativeElement)
+			helper.addToc(this.editor.nativeElement)
 		);
 
 	}
@@ -320,7 +360,7 @@ export class MarkdownEditorComponent implements OnInit {
 	addEmptyTask(): void {
 
 		this.updateEditor(
-			tool.addEmptyTask(this.editor.nativeElement)
+			helper.addEmptyTask(this.editor.nativeElement)
 		);
 
 	}
@@ -335,10 +375,15 @@ export class MarkdownEditorComponent implements OnInit {
 		textarea.selectionEnd = selectionEnd;
 		textarea.focus();
 
-		// manually trigger change, since updates / events are not triggered when DOM is manually updated (?)
-		this.control.setValue(this.editor.nativeElement.value);
+		this.setNewValue(value);
+
+	}
+
+	private setNewValue(content: string): void {
+		console.log(content);
+
+		this.control.setValue(content);
 		this.control.markAsDirty();
-		this.inputChanged.emit(this.editor.nativeElement.value);
 
 	}
 

@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { delay, of } from 'rxjs';
 import { selCoreIsSidebarVisible } from 'store/selectors/core-ui.selectors';
 import { splashTrigger } from './components/splash-screen/splash-screen.animation';
+import { environment } from 'environments/environment';
 
 @Component({
 	selector: 'app-root',
@@ -30,7 +31,7 @@ export class AppComponent {
 		// to tweak splashscreen animation & duration:
 		// delay(), splashscreen-component.scss and splash-screen.animation.ts
 		of(false)
-			.pipe(delay(1400)) // splash screen visible for n ms
+			.pipe(delay(environment.splash)) // splash screen visible for n ms
 			.subscribe(() => this.splashVisible.set(false));
 
 	}
