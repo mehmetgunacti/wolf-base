@@ -1,6 +1,7 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 
-export const fadeOutTrigger = trigger('fadeOut', [
+// @WOLF359
+export const splashTrigger = trigger('splash', [
 
 	transition(':leave', [
 

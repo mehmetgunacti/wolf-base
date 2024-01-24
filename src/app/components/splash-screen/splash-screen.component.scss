@@ -4,41 +4,16 @@
 @keyframes scaleAndFade {
 
 	0% {
-		transform	: scale(0.5);
-		opacity		: 0;
-	}
-
-	// 70% {
-	// 	transform	: scale(1.1);
-	// 	opacity		: 1;
-	// }
-
-	100% {
-		transform	: scale(1);
-		opacity		: 1;
-	}
-
-}
-
-@keyframes heartbeat {
-
-	0% {
-		transform	: scale(0.5);
+		transform	: scale(0.8);
 		opacity		: 0;
 	}
 
 	30% {
-		transform	: scale(1.2);
-		opacity		: 0.5;
+		transform	: scale(1.02);
 	}
 
 	50% {
-		transform	: scale(0.9);
-		opacity		: 1;
-	}
-
-	75% {
-		transform	: scale(1.1);
+	 	transform	: scale(1);
 		opacity		: 1;
 	}
 
@@ -52,9 +27,8 @@
 :host {
 
 	@include mx-flex-center-center;
-	width				: 100vw;
-	height				: 100vh;
 	position			: absolute;
+	inset				: 0;
 	z-index				: $z-index-splash-screen;
 
 	background-color	: fn-hsl(bg-6);
@@ -64,8 +38,7 @@
 
 		width	    : 50vw;
 		max-width	: 500px;
-		animation	: scaleAndFade 1300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		// animation	: heartbeat 2s ease-in-out;
+		animation	: scaleAndFade 2000ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 1;
 
 	}
 
