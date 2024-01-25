@@ -4,8 +4,8 @@ const CR = '\r';
 const NL = '\n';
 const SPACE = ' ';
 const TAB_T = '\t';
-const TAB = SPACE.repeat(4); // 4 spaces instead of '\t'
-const EMPTY = '';
+const TAB = '\t'; // tab-size : 4; <-- css of textarea
+const INDENT = SPACE.repeat(2);
 
 function isSelection({ sIndex, eIndex }: EditorProperties): boolean {
 
@@ -13,11 +13,9 @@ function isSelection({ sIndex, eIndex }: EditorProperties): boolean {
 
 }
 
-function startIndexOfCurrentLine({ content, sIndex }: EditorProperties): number {
+function isSelectionMultiLine({ content, sIndex, eIndex }: EditorProperties): boolean {
 
-	const c = content.substring(0, sIndex);
-	const idx = c.lastIndexOf('\n') + 1;
-	return idx;
+	return content.substring(sIndex, eIndex).indexOf(NL) > -1;
 
 }
 
@@ -28,31 +26,6 @@ function hasTabAfterNewlines(s: string): boolean {
 		if (lines[i].endsWith(NL) && !lines[i + 1]?.startsWith(TAB))
 			return false;
 	return true;
-
-}
-
-// function isPrevChar({ content, sIndex }: TextareaProperties, ...chars: string[]): boolean {
-
-// 	return chars.includes(content.charAt(sIndex - 1));
-
-// }
-
-// function isNextChar({ content, eIndex }: TextareaProperties, ...chars: string[]): boolean {
-
-// 	return chars.includes(content.charAt(eIndex + 1));
-
-// }
-
-// function isStart({ sIndex }: TextareaProperties): boolean {
-
-// 	return sIndex === 0;
-
-// }
-
-function isEnd(element: HTMLTextAreaElement): boolean {
-
-	const { value, selectionEnd } = element;
-	return selectionEnd === value.length;
 
 }
 
@@ -85,6 +58,20 @@ function findWordIndexes(props: EditorProperties): [number, number] {
 
 }
 
+function extractLineStartIndexes(props: EditorProperties): number[] {
+
+	const { content, eIndex } = props;
+	const firstIdx = startIndexOfCurrentLine(props);
+	const piece = content.substring(firstIdx, eIndex);
+	const list = [firstIdx];
+	let idx = -1;
+	while (++idx < piece.length)
+		if (piece.charAt(idx) === NL)
+			list.unshift(idx + firstIdx + 1);
+	return list;
+
+}
+
 function insert(props: EditorProperties, first: string, second: string = ''): EditorProperties {
 
 	/*
@@ -113,13 +100,56 @@ function insert(props: EditorProperties, first: string, second: string = ''): Ed
 
 }
 
-function endIndexOfCurrentLine(value: string, selectionEnd: number): number {
+function insertCharsAt(props: EditorProperties, c: string, idx?: number): EditorProperties {
 
-	let idxLineEnd = value.indexOf('\n', selectionEnd);
-	if (idxLineEnd === -1)
-		idxLineEnd = value.length;
+	const { content, sIndex, eIndex } = props;
+	const insertAt: number = idx ?? sIndex;
+	return {
 
-	return idxLineEnd;
+		content: content.substring(0, insertAt) + c + content.substring(insertAt),
+		sIndex: sIndex + c.length,
+		eIndex: eIndex + c.length
+
+	};
+
+}
+
+function removeCharsAt(props: EditorProperties, c: string, idx?: number): EditorProperties {
+
+	const { content, sIndex, eIndex } = props;
+	const removeAt: number = idx ?? sIndex;
+
+	let startPiece = content.substring(0, removeAt);
+	if (startPiece.endsWith(c))
+		startPiece = content.substring(0, removeAt - c.length);
+	else
+		return props;
+
+	const result = startPiece + content.substring(removeAt);
+	return {
+
+		content: result,
+		sIndex: sIndex - c.length,
+		eIndex: eIndex - c.length
+
+	};
+
+}
+
+function startIndexOfCurrentLine({ content, sIndex }: EditorProperties): number {
+
+	const c = content.substring(0, sIndex);
+	const idx = c.lastIndexOf(NL) + 1;
+	return idx;
+
+}
+
+function endIndexOfCurrentLine({ content, eIndex }: EditorProperties): number {
+
+	let idx = content.indexOf(NL, eIndex);
+	if (idx < 0)
+		idx = content.length;
+	return idx;
 
 }
 
@@ -196,7 +226,7 @@ function addClass(props: EditorProperties, s: string): EditorProperties {
 	const { content, sIndex, eIndex } = props;
 
 	const idxLineStart = startIndexOfCurrentLine(props);
-	const idxLineEnd = endIndexOfCurrentLine(content, eIndex);
+	const idxLineEnd = endIndexOfCurrentLine(props);
 
 	const textStart = content.substring(0, idxLineStart);
 	const textMiddle = content.substring(idxLineStart, idxLineEnd);
@@ -251,6 +281,83 @@ function wrap({ content, sIndex, eIndex }: EditorProperties, text: string): Edit
 
 }
 
+function shiftSelectionRight(props: EditorProperties, c: string): EditorProperties {
+
+	const { content, sIndex, eIndex } = props;
+
+	let tmp = content;
+	const indexes = extractLineStartIndexes(props);
+	indexes.forEach(idx => {
+
+		tmp = tmp.substring(0, idx) + c + tmp.substring(idx);
+
+	});
+	return {
+		content: tmp,
+		sIndex: sIndex + c.length,
+		eIndex: eIndex + indexes.length * c.length
+	}
+
+}
+
+function shiftSelectionLeft(props: EditorProperties, c: string): EditorProperties {
+
+	const { content, sIndex, eIndex } = props;
+
+	let tmp = content;
+	const indexes = extractLineStartIndexes(props);
+	indexes.forEach(idx => {
+
+		const c1 = tmp.substring(idx);
+		if (c1.startsWith(c))
+			tmp = tmp.substring(0, idx) + c1.substring(c.length);
+
+	});
+	const shift = content.length - tmp.length;
+	return {
+		content: tmp,
+		sIndex: sIndex - (content.substring(indexes[indexes.length - 1]).startsWith(c) ? c.length : 0),
+		eIndex: eIndex - shift
+	}
+
+}
+
+function shiftLineRight(props: EditorProperties, c: string): EditorProperties {
+
+	const { content, sIndex, eIndex } = props;
+
+	const startIdx = startIndexOfCurrentLine(props);
+	const firstPiece = content.substring(0, startIdx);
+	const rest = content.substring(startIdx);
+	const result: EditorProperties = {
+
+		content: firstPiece + INDENT + rest,
+		sIndex: sIndex + INDENT.length,
+		eIndex: eIndex + INDENT.length
+
+	};
+	return result;
+
+}
+
+function shiftLineLeft(props: EditorProperties, c: string): EditorProperties {
+
+	const { content, sIndex, eIndex } = props;
+
+	const startIdx = startIndexOfCurrentLine(props);
+	const firstPiece = content.substring(0, startIdx);
+	const rest = content.substring(startIdx);
+	const result: EditorProperties = {
+
+		content: firstPiece + INDENT + rest,
+		sIndex: sIndex + INDENT.length,
+		eIndex: eIndex + INDENT.length
+
+	};
+	return result;
+
+}
+
 export class ButtonActions {
 
 	addBold(element: HTMLTextAreaElement): EditorProperties {
@@ -274,95 +381,45 @@ export class ButtonActions {
 
 	}
 
-	tab(element: HTMLTextAreaElement, tabString: string = TAB): EditorProperties {
+	tab(element: HTMLTextAreaElement): EditorProperties {
 
 		const props: EditorProperties = extractProps(element);
-		const { content, sIndex, eIndex } = props;
 
-		// Selection is multi-line?
-		if (content.substring(sIndex, eIndex).indexOf(NL) > -1) {
+		if (isSelectionMultiLine(props))
+			return shiftSelectionRight(props, TAB);
 
-			// shift all selected lines
-			const lastPiece = content.substring(eIndex);
-			const startIdx = startIndexOfCurrentLine(props);
-			const selection = content.substring(startIdx, eIndex);
-			const newSelection = tabString + selection.replaceAll(NL, NL + tabString);
-			const shift = newSelection.length - selection.length;
-
-			const result = content.substring(0, startIdx) + newSelection + lastPiece;
-
-			return {
-
-				content: result,
-				sIndex: startIdx,
-				eIndex: eIndex + shift
-
-			};
-
-		}
-
-		// Insert TAB at the cursor's position
-		const result = content.substring(0, sIndex) + tabString + content.substring(sIndex);
-
-		return {
-
-			content: result,
-			sIndex: sIndex + tabString.length,
-			eIndex: eIndex + tabString.length
-
-		};
+		return insertCharsAt(props, TAB);
 
 	}
 
-	shiftTab(element: HTMLTextAreaElement, tabString: string = TAB): EditorProperties {
+	shiftTab(element: HTMLTextAreaElement): EditorProperties {
 
 		const props: EditorProperties = extractProps(element);
-		const { content, sIndex, eIndex } = props;
+		if (isSelectionMultiLine(props))
+			return shiftSelectionLeft(props, TAB);
 
-		// Selection is multi-line?
-		if (content.substring(sIndex, eIndex).indexOf(NL) > -1) {
+		return removeCharsAt(props, TAB);
 
-			// shift all selected lines
-			const lastPiece = content.substring(eIndex);
-			const startIdx = startIndexOfCurrentLine(props);
+	}
 
-			const piece = content.substring(startIdx, eIndex);
+	increaseIndent(element: HTMLTextAreaElement): EditorProperties {
 
-			if (piece.startsWith(tabString) && hasTabAfterNewlines(piece)) {
+		const props: EditorProperties = extractProps(element);
 
-				const newPiece = piece.substring(tabString.length).replaceAll(NL + tabString, NL);
-				const result = content.substring(0, startIdx) + newPiece + lastPiece;
-				const shift = piece.length - newPiece.length;
+		if (isSelectionMultiLine(props))
+			return shiftSelectionRight(props, INDENT);
 
-				return {
+		return shiftLineRight(props, INDENT);
 
-					content: result,
-					sIndex: startIdx,
-					eIndex: eIndex - shift
+	}
 
-				};
+	decreaseIndent(element: HTMLTextAreaElement): EditorProperties {
 
-			} else
-				return props;
+		const props: EditorProperties = extractProps(element);
+		if (isSelectionMultiLine(props))
+			return shiftSelectionLeft(props, INDENT);
 
-		}
-
-		let startPiece = content.substring(0, sIndex);
-		if (startPiece.endsWith(tabString))
-			startPiece = content.substring(0, sIndex - tabString.length);
-		else
-			return props;
-
-		// remove TAB at the cursor's position
-		const result = startPiece + content.substring(startPiece.length + tabString.length);
-
-		return {
-
-			content: result,
-			sIndex: sIndex - tabString.length,
-			eIndex: eIndex - tabString.length
-
-		};
+		return removeCharsAt(props, INDENT);
 
 	}
 
@@ -525,18 +582,6 @@ export class ButtonActions {
 		const first = '\n\n```' + lang + '\n';
 		const second = '\n```\n\n';
 		return insert(extractProps(element), first, second);
-
-	}
-
-	addIncreaseIndent(element: HTMLTextAreaElement): EditorProperties {
-
-		return this.tab(element, '  ');
-
-	}
-
-	addDecreaseIndent(element: HTMLTextAreaElement): EditorProperties {
-
-		return this.shiftTab(element, '  ');
 
 	}
 
