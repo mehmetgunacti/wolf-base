@@ -173,8 +173,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 		textarea.selectionEnd = eIndex;
 		textarea.focus();
 
-		this.control.setValue(content);
-		this.control.markAsDirty();
+		this.updateControl(content);
 
 	}
 
@@ -203,11 +202,19 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 		textarea.selectionEnd = eIndex;
 		textarea.focus();
 
-		/* Order important: first empty string has to be replaced with actual content
-		*  onInput() content comes from textarea, but control.valueChanges also emits once
-		*  data arrives from database (initial) */
+		this.updateControl(content, false);
+
+	}
+
+	private updateControl(content: string, emitEvent: boolean = true): void {
+
+		/* Order Important!
+		 * undoCache's initialization depends on the order here:
+		 * control continues initializing 'undoCache' until it's 'dirty'.
+		 * see: ngOnInit() */
 		this.control.markAsDirty();
-		this.control.setValue(content, { emitEvent: false });
+		this.control.setValue(content, { emitEvent });
+
 
 	}
 

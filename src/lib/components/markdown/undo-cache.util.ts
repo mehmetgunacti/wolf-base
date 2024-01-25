@@ -11,17 +11,16 @@ const EMPTY_PROPS: EditorProperties = {
 export class UndoCache {
 
 	// signals
-	stack: WritableSignal<EditorProperties[]> = signal([EMPTY_PROPS]);
-	idx: WritableSignal<number> = signal(0);
+	private stack: WritableSignal<EditorProperties[]> = signal([EMPTY_PROPS]);
+	private idx: WritableSignal<number> = signal(0);
 
 	// computed values
 	canUndo: Signal<boolean> = computed(() => this.idx() > 0);
 	canRedo: Signal<boolean> = computed(() => this.idx() < this.stack().length - 1);
 	props: Signal<EditorProperties> = computed(() => this.stack()[this.idx()]);
 	size: Signal<number> = computed(() => this.props().content.length);
-
-	memSize = computed(() => `${formatBytes(this.stack().reduce((t, a) => t + a.content.length, 0))}`);
-	discSize = computed(() => `${formatBytes(this.size())}`);
+	memSize: Signal<string> = computed(() => `${formatBytes(this.stack().reduce((t, a) => t + a.content.length, 0))}`);
+	discSize: Signal<string> = computed(() => `${formatBytes(this.size())}`);
 
 	initialize(content: string): void {
 
