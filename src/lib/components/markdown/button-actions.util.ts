@@ -21,6 +21,16 @@ function startIndexOfCurrentLine({ content, sIndex }: EditorProperties): number 
 
 }
 
+function hasTabAfterNewlines(s: string): boolean {
+
+	let lines = s.split(NL);
+	for (let i = 0; i < lines.length; i++)
+		if (lines[i].endsWith(NL) && !lines[i + 1]?.startsWith(TAB))
+			return false;
+	return true;
+
+}
+
 // function isPrevChar({ content, sIndex }: TextareaProperties, ...chars: string[]): boolean {
 
 // 	return chars.includes(content.charAt(sIndex - 1));
@@ -72,32 +82,6 @@ function findWordIndexes(props: EditorProperties): [number, number] {
 		findPrevIdx(props, SPACE, TAB_T, NL, CR) + 1,
 		findNextIdx(props, SPACE, TAB_T, NL, CR)
 	];
-
-}
-
-function wrap({ content, sIndex, eIndex }: EditorProperties, text: string): EditorProperties {
-
-	/*
-
-	lore<selelectionStart>m ip<selectionEnd>sum
-
-	↓↓↓↓↓ becomes ↓↓↓↓↓
-
-	lore${text}<selelectionStart>m ip<selectionEnd>${text}sum
-
-	*/
-
-	const textStart = content.substring(0, sIndex);
-	const textMiddle = content.substring(sIndex, eIndex);
-	const textEnd = content.substring(eIndex);
-
-	return {
-
-		content: textStart + text + textMiddle + text + textEnd,
-		sIndex: sIndex + text.length,
-		eIndex: eIndex + text.length
-
-	};
 
 }
 
@@ -232,23 +216,47 @@ function addClass(props: EditorProperties, s: string): EditorProperties {
 
 }
 
+function wrap({ content, sIndex, eIndex }: EditorProperties, text: string): EditorProperties {
+
+	/*
+
+	lore<selelectionStart>m ip<selectionEnd>sum
+
+	↓↓↓↓↓ becomes ↓↓↓↓↓
+
+	lore${text}<selelectionStart>m ip<selectionEnd>${text}sum
+
+	*/
+
+	const props: EditorProperties = { content, sIndex, eIndex };
+	if (!isSelection(props)) {
+
+		const [startIdx, endIdx] = findWordIndexes(props);
+		sIndex = startIdx;
+		eIndex = endIdx;
+
+	}
+
+	const textStart = content.substring(0, sIndex);
+	const textMiddle = content.substring(sIndex, eIndex);
+	const textEnd = content.substring(eIndex);
+
+	return {
+
+		content: textStart + text + textMiddle + text + textEnd,
+		sIndex: sIndex + text.length,
+		eIndex: eIndex + text.length
+
+	};
+
+}
+
 export class ButtonActions {
 
 	addBold(element: HTMLTextAreaElement): EditorProperties {
 
 		const s = '**';
-		const props: EditorProperties = extractProps(element);
-
-		if (isSelection(props))
-			return wrap(props, s);
-
-		const [startIdx, endIdx] = findWordIndexes(props);
-		const result: EditorProperties = {
-			content: props.content,
-			sIndex: startIdx,
-			eIndex: endIdx
-		};
-		return wrap(result, s);
+		return wrap(extractProps(element), s);
 
 	}
 
@@ -306,16 +314,6 @@ export class ButtonActions {
 
 	}
 
-	private hasTabAfterNewlines(s: string): boolean {
-
-		let lines = s.split(NL);
-		for (let i = 0; i < lines.length; i++)
-			if (lines[i].endsWith(NL) && !lines[i + 1]?.startsWith(TAB))
-				return false;
-		return true;
-
-	}
-
 	shiftTab(element: HTMLTextAreaElement, tabString: string = TAB): EditorProperties {
 
 		const props: EditorProperties = extractProps(element);
@@ -330,7 +328,7 @@ export class ButtonActions {
 
 			const piece = content.substring(startIdx, eIndex);
 
-			if (piece.startsWith(tabString) && this.hasTabAfterNewlines(piece)) {
+			if (piece.startsWith(tabString) && hasTabAfterNewlines(piece)) {
 
 				const newPiece = piece.substring(tabString.length).replaceAll(NL + tabString, NL);
 				const result = content.substring(0, startIdx) + newPiece + lastPiece;
