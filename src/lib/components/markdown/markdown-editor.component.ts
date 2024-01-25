@@ -1,13 +1,13 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenuTrigger } from '@angular/cdk/menu';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscription, debounceTime, distinctUntilChanged, take, tap, timer } from 'rxjs';
+import { Subject, Subscription, debounceTime, distinctUntilChanged, take, tap, timer } from 'rxjs';
 import { ClipboardService } from 'services';
 import { ButtonActions } from './button-actions.util';
-import { UndoCache } from './history.util';
 import { TextareaProperties } from './textarea-properties.model';
+import { UndoCache } from './undo-cache.util';
 
 @Component({
 	selector: 'w-markdown-editor',
@@ -15,18 +15,16 @@ import { TextareaProperties } from './textarea-properties.model';
 	styleUrls: ['./markdown-editor.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MarkdownEditorComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	@ViewChild('editor') editor!: ElementRef<HTMLTextAreaElement>;
 	@ViewChild('btnSaveMenu') btnSaveMenu!: ElementRef<HTMLButtonElement>;
 	@ViewChild(CdkMenuTrigger) trigger!: CdkMenuTrigger;
 	@ViewChild('previewTemplate') previewTemplate!: TemplateRef<HTMLDivElement>;
 
-	@Input() control!: FormControl<string>;
+	@Input({ required: true }) control!: FormControl<string>;
 	@Input() name: string = '';
 	@Input() readonly = false;
-	@Input() rows = 30;
-	@Input() cols = 20;
 
 	@Output() save: EventEmitter<string> = new EventEmitter();
 	@Output() saveClose: EventEmitter<string> = new EventEmitter();
@@ -36,45 +34,49 @@ export class MarkdownEditorComponent implements OnInit, AfterViewInit, OnDestroy
 	undoCache: UndoCache = new UndoCache();
 	actions: ButtonActions = new ButtonActions();
 	btnImageShake: WritableSignal<boolean> = signal(false);
+	buffer: Subject<string> = new Subject();
 
 	private dialogService: Dialog = inject(Dialog);
 	private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
 	private clipboardService: ClipboardService = inject(ClipboardService);
 
-	subscription: Subscription = new Subscription();
+	private subscriptions: Subscription = new Subscription();
 
 	ngOnInit(): void {
 
-		this.subscription = this.control.valueChanges.pipe(
+		this.subscriptions.add(
 
-			debounceTime(400),
-			distinctUntilChanged(),
-			tap(val => this.undoCache.saveState(val, !this.control.dirty))
+			this.buffer.asObservable().pipe(
 
-		).subscribe();
+				debounceTime(400),
+				distinctUntilChanged(),
+				tap(() => this.undoCache.saveState(this.editor.nativeElement))
 
-	}
+			).subscribe()
 
-	ngAfterViewInit(): void {
+		);
+
+		this.subscriptions.add(
+
+			this.control.valueChanges.pipe(
+
+				tap(val => {
+
+					if (!this.control.dirty) // first value from db
+						this.undoCache.initialize(val)
+					this.buffer.next(val);
+
+				})
+
+			).subscribe()
+
+		);
 
 	}
 
 	ngOnDestroy(): void {
 
-		this.subscription.unsubscribe();
-
-	}
-
-	onInput(event: Event): void {
-
-		const textarea = event.target as HTMLInputElement;
-		const content = textarea.value;
-
-		/* Order important: first empty string has to be replaced with actual content
-		*  onInput() content comes from textarea, but control.valueChanges also emits once
-		*  data arrives from database (initial) */
-		this.control.markAsDirty();
-		this.control.setValue(content);
+		this.subscriptions.unsubscribe();
 
 	}
 
@@ -97,12 +99,6 @@ export class MarkdownEditorComponent implements OnInit, AfterViewInit, OnDestroy
 	onSaveAndClose(): void {
 
 		this.saveClose.emit(this.editor.nativeElement.value);
-
-	}
-
-	check(): void {
-
-		console.log(this.undoCache.idx(), this.undoCache.stack());
 
 	}
 
@@ -136,12 +132,12 @@ export class MarkdownEditorComponent implements OnInit, AfterViewInit, OnDestroy
 			} else if (hasModifierKey(event, 'ctrlKey') && hasModifierKey(event, 'shiftKey') && event.key.toLowerCase() === 'z') {
 
 				event.preventDefault();
-				this.undoCache.redo();
+				this.onRedo();
 
 			} else if (hasModifierKey(event, 'ctrlKey') && event.key.toLowerCase() === 'z') {
 
 				event.preventDefault();
-				this.undoCache.undo();
+				this.onUndo();
 
 			}
 
@@ -169,14 +165,7 @@ export class MarkdownEditorComponent implements OnInit, AfterViewInit, OnDestroy
 		textarea.selectionEnd = selectionEnd;
 		textarea.focus();
 
-		this.setNewValue(value);
-
-	}
-
-	private setNewValue(content: string): void {
-		console.log(content);
-
-		this.control.setValue(content, { emitEvent: false });
+		this.control.setValue(value);
 		this.control.markAsDirty();
 
 	}
@@ -184,14 +173,33 @@ export class MarkdownEditorComponent implements OnInit, AfterViewInit, OnDestroy
 	onUndo(): void {
 
 		this.undoCache.undo();
-		this.editor.nativeElement.focus();
+		this.onUndoRedo();
 
 	}
 
 	onRedo(): void {
 
 		this.undoCache.redo();
-		this.editor.nativeElement.focus();
+		this.onUndoRedo();
+
+	}
+
+	private onUndoRedo(): void {
+
+		const content = this.undoCache.props();
+		const { value, selectionStart, selectionEnd } = content;
+		const textarea = this.editor.nativeElement;
+
+		textarea.value = value;
+		textarea.selectionStart = selectionStart;
+		textarea.selectionEnd = selectionEnd;
+		textarea.focus();
+
+		/* Order important: first empty string has to be replaced with actual content
+		*  onInput() content comes from textarea, but control.valueChanges also emits once
+		*  data arrives from database (initial) */
+		this.control.markAsDirty();
+		this.control.setValue(value, { emitEvent: false });
 
 	}
 

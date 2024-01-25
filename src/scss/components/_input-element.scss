@@ -34,22 +34,30 @@
 
 %input-label {
 
+	@include mx-flex-center-y;
 	position			: absolute;
 	top					: 50%;
 	left				: 5px;
+	gap					: var(--gap-sm);
 	transform			: translateY(-50%);
 	pointer-events		: none;
 	border-radius		: var(--border-radius-xs);
 	padding				: 1px 5px;
-	font-size			: 1.4rem;
+	font-size			: var(--font-size-sm);
 	transition			: all $transition, $bg-transition, border-color $transition;
+
+	& span {
+
+		font-size		: inherit;
+
+	}
 
 }
 
 %input-label-up {
 
 	top					: -1px;
-	font-size			: 1rem;
+	font-size			: var(--font-size-xxs);
 	background-color	: fn-hsl(bg-3);
 	border				: none;
 

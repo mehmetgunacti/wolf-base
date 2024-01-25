@@ -5,3 +5,9 @@ export interface TextareaProperties {
 	selectionEnd: number;
 
 }
+
+export const textareaProps = (value: string):TextareaProperties => ({
+	value,
+	selectionStart: value.length,
+	selectionEnd: value.length
+});

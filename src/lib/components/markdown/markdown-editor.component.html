@@ -2,17 +2,6 @@
 
 	<div buttons_1>
 
-		<!-- SAVE BUTTON -->
-		<button
-			cdkMenuItem
-			class="icon-only"
-			(click)="onSave()"
-			title="Save"
-			[disabled]="!control.dirty">
-			<span class="material-symbols-outlined">save</span>
-			<span>Save</span>
-		</button>
-
 		<!-- SAVE MENU -->
 		<button
 			#btnSaveMenu
@@ -45,8 +34,6 @@
 			[disabled]="!undoCache.canRedo()">
 			<span class="material-symbols-outlined">redo</span>
 		</button>
-
-		<button class="icon-only" (click)="check()">check</button>
 
 		<!-- PREVIEW BUTTON -->
 		<button
@@ -311,10 +298,18 @@
 		[readonly]="readonly"
 		(focus)="hasFocus = true"
 		(blur)="hasFocus = false"
-		(input)="onInput($event)"
 		required></textarea>
 	<label>{{name}}</label>
-	<label class="up right">{{ undoCache.sizeFormatted() }}</label>
+	<label class="up right">
+		<span class="icon-container">
+			<span class="material-symbols-outlined">description</span>
+			<span>{{ undoCache.discSize() }}</span>
+		</span>
+		<span class="icon-container">
+			<span class="material-symbols-outlined">memory</span>
+			<span>{{ undoCache.memSize() }}</span>
+		</span>
+	</label>
 
 </div>
 
@@ -333,7 +328,7 @@
 
 		</ng-container>
 
-		<w-markdown-viewer [markdown]="undoCache.content()"/>
+		<w-markdown-viewer [markdown]="undoCache.props().value"/>
 
 	</w-overlay-container>
 
