@@ -1,12 +1,13 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenuTrigger } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscription, debounceTime, distinctUntilChanged, map, take, tap, timer } from 'rxjs';
+import { Subscription, debounceTime, distinctUntilChanged, take, tap, timer } from 'rxjs';
 import { ClipboardService } from 'services';
-import * as helper from './markdown-editor.tool';
-import { TextareaProperties } from './markdown-editor.tool';
+import { ButtonActions } from './button-actions.util';
+import { UndoCache } from './history.util';
+import { TextareaProperties } from './textarea-properties.model';
 
 @Component({
 	selector: 'w-markdown-editor',
@@ -14,7 +15,7 @@ import { TextareaProperties } from './markdown-editor.tool';
 	styleUrls: ['./markdown-editor.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MarkdownEditorComponent implements OnInit, OnDestroy {
+export class MarkdownEditorComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	@ViewChild('editor') editor!: ElementRef<HTMLTextAreaElement>;
 	@ViewChild('btnSaveMenu') btnSaveMenu!: ElementRef<HTMLButtonElement>;
@@ -27,19 +28,18 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 	@Input() rows = 30;
 	@Input() cols = 20;
 
-	// @Output() inputChanged: EventEmitter<string> = new EventEmitter();
 	@Output() save: EventEmitter<string> = new EventEmitter();
 	@Output() saveClose: EventEmitter<string> = new EventEmitter();
 	@Output() cancel: EventEmitter<void> = new EventEmitter();
 
-	// isPreview: WritableSignal<boolean> = signal(false);
-	btnImageShake: WritableSignal<boolean> = signal(false);
 	hasFocus: boolean = false;
-	history: helper.History = new helper.History();
+	undoCache: UndoCache = new UndoCache();
+	actions: ButtonActions = new ButtonActions();
+	btnImageShake: WritableSignal<boolean> = signal(false);
 
-	private clipboardService: ClipboardService = inject(ClipboardService);
 	private dialogService: Dialog = inject(Dialog);
 	private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
+	private clipboardService: ClipboardService = inject(ClipboardService);
 
 	subscription: Subscription = new Subscription();
 
@@ -49,9 +49,19 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 			debounceTime(400),
 			distinctUntilChanged(),
-			tap(val => this.history.saveState(val, !this.control.dirty))
+			tap(val => this.undoCache.saveState(val, !this.control.dirty))
 
 		).subscribe();
+
+	}
+
+	ngAfterViewInit(): void {
+
+	}
+
+	ngOnDestroy(): void {
+
+		this.subscription.unsubscribe();
 
 	}
 
@@ -65,12 +75,6 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 		*  data arrives from database (initial) */
 		this.control.markAsDirty();
 		this.control.setValue(content);
-
-	}
-
-	ngOnDestroy(): void {
-
-		this.subscription.unsubscribe();
 
 	}
 
@@ -96,23 +100,9 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	}
 
-	onUndo(): void {
-
-		this.history.undo();
-		this.editor.nativeElement.focus();
-
-	}
-
-	onRedo(): void {
-
-		this.history.redo();
-		this.editor.nativeElement.focus();
-
-	}
-
 	check(): void {
 
-		console.log(this.history.idx(), this.history.stack());
+		console.log(this.undoCache.idx(), this.undoCache.stack());
 
 	}
 
@@ -140,30 +130,25 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 			if (hasModifierKey(event, 'shiftKey') && event.key === 'Tab') {
 
 				event.preventDefault();
-				this.updateEditor(
-					helper.shiftTab(this.editor.nativeElement)
-				);
+				this.updateEditor(this.actions.shiftTab(this.editor.nativeElement));
+
 
 			} else if (hasModifierKey(event, 'ctrlKey') && hasModifierKey(event, 'shiftKey') && event.key.toLowerCase() === 'z') {
 
 				event.preventDefault();
-				this.history.redo();
+				this.undoCache.redo();
 
 			} else if (hasModifierKey(event, 'ctrlKey') && event.key.toLowerCase() === 'z') {
 
 				event.preventDefault();
-				this.history.undo();
+				this.undoCache.undo();
 
 			}
-
-
 
 		} else if (event.key === 'Tab') {
 
 			event.preventDefault();
-			this.updateEditor(
-				helper.tab(this.editor.nativeElement)
-			);
+			this.updateEditor(this.actions.tab(this.editor.nativeElement));
 
 		} else if (event.key === 'Escape') {
 
@@ -174,198 +159,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	}
 
-	onFocus(): void {
-
-		this.hasFocus = true;
-
-	}
-
-	onBlur(): void {
-
-		this.hasFocus = false;
-
-	}
-
-	async addImage(btn: HTMLButtonElement): Promise<void> {
-
-		const base64 = await this.clipboardService.base64ImageFromClipboard();
-		if (base64)
-			this.updateEditor(helper.addImage(this.editor.nativeElement, base64));
-		else
-			timer(0, 600)
-				.pipe(take(2))
-				.subscribe({
-
-					next: () => this.btnImageShake.set(true),
-					complete: () => this.btnImageShake.set(false)
-
-				});
-
-	}
-
-	addHeading(heading: string): void {
-
-		this.updateEditor(
-			helper.addHeading(this.editor.nativeElement, heading)
-		);
-
-	}
-
-	addBold(): void {
-
-		this.updateEditor(
-			helper.addBold(this.editor.nativeElement)
-		);
-
-	}
-
-	addItalic(): void {
-
-		this.updateEditor(
-			helper.addItalic(this.editor.nativeElement)
-		);
-
-	}
-
-	addStrikethrough(): void {
-
-		this.updateEditor(
-			helper.addStrikethrough(this.editor.nativeElement)
-		);
-
-	}
-
-	addAlignCenter(): void {
-
-		this.updateEditor(
-			helper.addAlignCenter(this.editor.nativeElement)
-		);
-
-	}
-
-	addAlignRight(): void {
-
-		this.updateEditor(
-			helper.addAlignRight(this.editor.nativeElement)
-		);
-
-	}
-
-	addAlignJustify(): void {
-
-		this.updateEditor(
-			helper.addAlignJustify(this.editor.nativeElement)
-		);
-
-	}
-
-	addSub(): void {
-
-		this.updateEditor(
-			helper.addSub(this.editor.nativeElement)
-		);
-
-	}
-
-	addSup(): void {
-
-		this.updateEditor(
-			helper.addSup(this.editor.nativeElement)
-		);
-
-	}
-
-	addHighlight(): void {
-
-		this.updateEditor(
-			helper.addHighlight(this.editor.nativeElement)
-		);
-
-	}
-
-	addBlockquote(type?: 'warning' | 'note' | 'tip' | 'important' | 'caution'): void {
-
-		this.updateEditor(
-			helper.addBlockquote(this.editor.nativeElement, type)
-		);
-
-	}
-
-	addInlineCode(): void {
-
-		this.updateEditor(
-			helper.addInlineCode(this.editor.nativeElement)
-		);
-
-	}
-
-	addCodeBlock(lang?: string): void {
-
-		this.updateEditor(
-			helper.addCodeBlock(this.editor.nativeElement, lang)
-		);
-
-	}
-
-	addListNumbered(): void {
-
-		this.updateEditor(
-			helper.addListNumbered(this.editor.nativeElement)
-		);
-
-	}
-
-	addDecreaseIndent(): void {
-
-		this.updateEditor(
-			helper.addDecreaseIndent(this.editor.nativeElement)
-		);
-
-	}
-
-	addIncreaseIndent(): void {
-
-		this.updateEditor(
-			helper.addIncreaseIndent(this.editor.nativeElement)
-		);
-
-	}
-
-	addListBulleted(): void {
-
-		this.updateEditor(
-			helper.addListBulleted(this.editor.nativeElement)
-		);
-
-	}
-
-	addTable(event: [number, number]): void {
-
-		this.updateEditor(
-			helper.addTable(this.editor.nativeElement, event)
-		);
-		this.trigger.close();
-
-	}
-
-	addToc(): void {
-
-		this.updateEditor(
-			helper.addToc(this.editor.nativeElement)
-		);
-
-	}
-
-
-	addEmptyTask(): void {
-
-		this.updateEditor(
-			helper.addEmptyTask(this.editor.nativeElement)
-		);
-
-	}
-
-	private updateEditor(props: TextareaProperties): void {
+	updateEditor(props: TextareaProperties): void {
 
 		const textarea = this.editor.nativeElement;
 		const { value, selectionStart, selectionEnd } = props;
@@ -382,8 +176,46 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 	private setNewValue(content: string): void {
 		console.log(content);
 
-		this.control.setValue(content);
+		this.control.setValue(content, { emitEvent: false });
 		this.control.markAsDirty();
+
+	}
+
+	onUndo(): void {
+
+		this.undoCache.undo();
+		this.editor.nativeElement.focus();
+
+	}
+
+	onRedo(): void {
+
+		this.undoCache.redo();
+		this.editor.nativeElement.focus();
+
+	}
+
+	addTable(event: [number, number]): void {
+
+		this.actions.addTable(this.editor.nativeElement, event);
+		this.trigger.close();
+
+	}
+
+	async addImage(btn: HTMLButtonElement): Promise<void> {
+
+		const base64 = await this.clipboardService.base64ImageFromClipboard();
+		if (base64)
+			this.updateEditor(this.actions.addImage(this.editor.nativeElement, base64));
+		else
+			timer(0, 600)
+				.pipe(take(2))
+				.subscribe({
+
+					next: () => this.btnImageShake.set(true),
+					complete: () => this.btnImageShake.set(false)
+
+				});
 
 	}
 
