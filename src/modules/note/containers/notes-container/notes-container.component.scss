@@ -17,6 +17,13 @@
 			text-decoration		: none;
 			transition			: $bg-transition;
 
+			& .material-symbols-outlined {
+
+				font-size		: var(--font-size-xs);
+				color			: fn-hsl(focus);
+
+			}
+
 
 			& > span:first-child {
 
