@@ -132,12 +132,20 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 			} else if (hasModifierKey(event, 'ctrlKey') && hasModifierKey(event, 'shiftKey') && event.key.toLowerCase() === 'z') {
 
 				event.preventDefault();
-				this.onRedo();
+				// this.onRedo();
+				this.editor.nativeElement.selectionStart = 88;
+				this.editor.nativeElement.selectionEnd = 90;
 
 			} else if (hasModifierKey(event, 'ctrlKey') && event.key.toLowerCase() === 'z') {
 
 				event.preventDefault();
-				this.onUndo();
+				// this.onUndo();
+				const { value, selectionStart, selectionEnd, selectionDirection } = this.editor.nativeElement;
+				console.log(selectionStart, selectionEnd, selectionDirection);
+				console.log('start + 1', value.substring(selectionStart, selectionStart + 1));
+				console.log('end + 1', value.substring(selectionEnd, selectionEnd + 1));
+
+
 
 			}
 

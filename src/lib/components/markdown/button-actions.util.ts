@@ -1,9 +1,149 @@
 import { TextareaProperties } from './textarea-properties.model';
 
+const CR = '\r';
 const NL = '\n';
-const TAB = ' '.repeat(4); // 4 spaces instead of '\t'
+const SPACE = ' ';
+const TAB_T = '\t';
+const TAB = SPACE.repeat(4); // 4 spaces instead of '\t'
+const EMPTY = '';
+
+function isSelection(props: TextareaProperties): boolean {
+
+	const { selectionStart, selectionEnd } = props;
+	return selectionStart !== selectionEnd;
+
+}
+
+function startIndexOfCurrentLine(props: TextareaProperties): number {
+
+	const { value, selectionStart } = props;
+	const c = value.substring(0, selectionStart);
+	const idx = c.lastIndexOf('\n') + 1;
+	return idx;
+
+}
+
+function isPrevChar(props: TextareaProperties, ...chars: string[]): boolean {
+
+	const { value, selectionStart } = props;
+	return chars.includes(value.charAt(selectionStart - 1));
+
+}
+
+function isNextChar(props: TextareaProperties, ...chars: string[]): boolean {
+
+	const { value, selectionEnd } = props;
+	return chars.includes(value.charAt(selectionEnd + 1));
+
+}
+
+function isStart(props: TextareaProperties): boolean {
+
+	const { selectionStart } = props;
+	return selectionStart === 0;
+
+}
+
+function isEnd(props: TextareaProperties): boolean {
+
+	const { value, selectionEnd } = props;
+	return selectionEnd === value.length;
+
+}
+
+function findPrevIdx(props: TextareaProperties, ...chars: string[]): number {
+
+	const { value, selectionStart } = props;
+	const piece = value.substring(0, selectionStart);
+	return Math.max(...chars.map(c => piece.lastIndexOf(c)));
+
+}
+
+function findNextIdx(props: TextareaProperties, ...chars: string[]): number {
+
+	const { value, selectionEnd } = props;
+	const piece = value.substring(selectionEnd);
+
+	const idx = Math.min(...chars.map(
+		c => {
+			const idx = piece.indexOf(c);
+			return idx < 0 ? piece.length : idx
+		})
+	);
+	return value.substring(0, selectionEnd).length + idx;
+
+}
+
+function findWordIndexes(props: TextareaProperties): [number, number] {
+
+	return [
+		findPrevIdx(props, SPACE, TAB_T, NL, CR) + 1,
+		findNextIdx(props, SPACE, TAB_T, NL, CR)
+	];
+
+}
+
+function wrap(props: TextareaProperties, text: string): TextareaProperties {
+
+	/*
+
+	lore<selelectionStart>m ip<selectionEnd>sum
+
+	↓↓↓↓↓ becomes ↓↓↓↓↓
+
+	lore${text}<selelectionStart>m ip<selectionEnd>${text}sum
+
+	*/
+
+	const { value, selectionStart, selectionEnd } = props;
+
+	const textStart = value.substring(0, selectionStart);
+	const textMiddle = value.substring(selectionStart, selectionEnd);
+	const textEnd = value.substring(selectionEnd);
+
+	return {
+
+		value: textStart + text + textMiddle + text + textEnd,
+		selectionStart: selectionStart + text.length,
+		selectionEnd: selectionEnd + text.length
+
+	};
+
+}
 
 export class ButtonActions {
+
+	addBold({ value, selectionStart, selectionEnd }: TextareaProperties): TextareaProperties {
+
+		const s = '**';
+		const props = { value, selectionStart, selectionEnd };
+
+		if (isSelection(props))
+			return wrap(props, s);
+
+		const [startIdx, endIdx] = findWordIndexes({ value, selectionStart, selectionEnd });
+		const result: TextareaProperties = {
+			value,
+			selectionStart: startIdx,
+			selectionEnd: endIdx
+		};
+		return wrap(result, s);
+
+	}
+
+	addItalic(props: TextareaProperties): TextareaProperties {
+
+		const s = '*';
+		return wrap(props, s);
+
+	}
+
+	addStrikethrough(props: TextareaProperties): TextareaProperties {
+
+		const s = '~~';
+		return wrap(props, s);
+
+	}
 
 	tab(props: TextareaProperties, tabString: string = TAB): TextareaProperties {
 
@@ -14,7 +154,7 @@ export class ButtonActions {
 
 			// shift all selected lines
 			const lastPiece = value.substring(selectionEnd);
-			const startIdx = this.startIndexOfCurrentLine(value, selectionStart);
+			const startIdx = startIndexOfCurrentLine(props);
 			const selection = value.substring(startIdx, selectionEnd);
 			const newSelection = tabString + selection.replaceAll(NL, NL + tabString);
 			const shift = newSelection.length - selection.length;
@@ -63,7 +203,7 @@ export class ButtonActions {
 
 			// shift all selected lines
 			const lastPiece = value.substring(selectionEnd);
-			const startIdx = this.startIndexOfCurrentLine(value, selectionStart);
+			const startIdx = startIndexOfCurrentLine(props);
 
 			const piece = value.substring(startIdx, selectionEnd);
 
@@ -187,7 +327,7 @@ export class ButtonActions {
 
 		const { value, selectionStart, selectionEnd } = props;
 
-		const idxLineStart = this.startIndexOfCurrentLine(value, selectionStart);
+		const idxLineStart = startIndexOfCurrentLine(props);
 		const idxLineEnd = this.endIndexOfCurrentLine(value, selectionEnd);
 
 		const textStart = value.substring(0, idxLineStart);
@@ -258,27 +398,6 @@ export class ButtonActions {
 
 	}
 
-	addBold(props: TextareaProperties): TextareaProperties {
-
-		const s = '**';
-		return this.wrap(props, s);
-
-	}
-
-	addItalic(props: TextareaProperties): TextareaProperties {
-
-		const s = '*';
-		return this.wrap(props, s);
-
-	}
-
-	addStrikethrough(props: TextareaProperties): TextareaProperties {
-
-		const s = '~~';
-		return this.wrap(props, s);
-
-	}
-
 	addSub(props: TextareaProperties): TextareaProperties {
 
 		const CHAR = '~';
@@ -310,14 +429,14 @@ export class ButtonActions {
 	addHighlight(props: TextareaProperties): TextareaProperties {
 
 		const s = '==';
-		return this.wrap(props, s);
+		return wrap(props, s);
 
 	}
 
 	addInlineCode(props: TextareaProperties): TextareaProperties {
 
 		const s = '`';
-		return this.wrap(props, s);
+		return wrap(props, s);
 
 	}
 
@@ -383,35 +502,6 @@ export class ButtonActions {
 
 	}
 
-	private wrap(props: TextareaProperties, text: string): TextareaProperties {
-
-		/*
-
-		lore<selelectionStart>m ip<selectionEnd>sum
-
-		↓↓↓↓↓ becomes ↓↓↓↓↓
-
-		lore${text}<selelectionStart>m ip<selectionEnd>${text}sum
-
-		*/
-
-		const { value, selectionStart, selectionEnd } = props;
-
-		const textStart = value.substring(0, selectionStart);
-		const textMiddle = value.substring(selectionStart, selectionEnd);
-		const textEnd = value.substring(selectionEnd);
-
-		const selection = selectionStart + text.length;
-		return {
-
-			value: textStart + text + textMiddle + text + textEnd,
-			selectionStart: selection,
-			selectionEnd: selection
-
-		};
-
-	}
-
 	private insert(props: TextareaProperties, first: string, second: string = ''): TextareaProperties {
 
 		/*
@@ -437,14 +527,6 @@ export class ButtonActions {
 			selectionEnd: selStart
 
 		};
-
-	}
-
-	private startIndexOfCurrentLine(value: string, selectionStart: number): number {
-
-		const c = value.substring(0, selectionStart);
-		const idx = c.lastIndexOf('\n') + 1;
-		return idx;
 
 	}
 
