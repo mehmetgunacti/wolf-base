@@ -1,47 +1,46 @@
 import { Signal, WritableSignal, computed, signal } from '@angular/core';
 import { formatBytes } from 'lib/utils';
-import { TextareaProperties } from './textarea-properties.model';
+import { EditorProperties } from './textarea-properties.model';
 
-const EMPTY_PROPS: TextareaProperties = {
-	value: '',
-	selectionStart: 0,
-	selectionEnd: 0
+const EMPTY_PROPS: EditorProperties = {
+	content: '',
+	sIndex: 0,
+	eIndex: 0
 }
 
 export class UndoCache {
 
 	// signals
-	stack: WritableSignal<TextareaProperties[]> = signal([EMPTY_PROPS]);
+	stack: WritableSignal<EditorProperties[]> = signal([EMPTY_PROPS]);
 	idx: WritableSignal<number> = signal(0);
 
 	// computed values
 	canUndo: Signal<boolean> = computed(() => this.idx() > 0);
 	canRedo: Signal<boolean> = computed(() => this.idx() < this.stack().length - 1);
-	props: Signal<TextareaProperties> = computed(() => this.stack()[this.idx()]);
-	size: Signal<number> = computed(() => this.props().value.length);
+	props: Signal<EditorProperties> = computed(() => this.stack()[this.idx()]);
+	size: Signal<number> = computed(() => this.props().content.length);
 
-	memSize = computed(() => `${formatBytes(this.stack().reduce((t, a) => t + a.value.length, 0))}`);
+	memSize = computed(() => `${formatBytes(this.stack().reduce((t, a) => t + a.content.length, 0))}`);
 	discSize = computed(() => `${formatBytes(this.size())}`);
 
 	initialize(content: string): void {
 
 		this.stack.set([{
-			value: content,
-			selectionStart: content.length,
-			selectionEnd: content.length
+			content: content,
+			sIndex: content.length,
+			eIndex: content.length
 		}]);
 
 	}
 
-	saveState(props: TextareaProperties): void {
+	saveState({ content, sIndex, eIndex }: EditorProperties): void {
 
-		if (props.value === this.props().value)
+		if (content === this.props().content)
 			return;
 
-		const { value, selectionStart, selectionEnd } = props;
 		const arr = [...this.stack().slice(0, this.idx() + 1)]; // clears redo-cache (right-side of index)
 		this.incIdx();
-		arr[this.idx()] = { value, selectionStart, selectionEnd };
+		arr[this.idx()] = { content, sIndex, eIndex };
 		this.stack.set(arr);
 
 	}

@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, tap, timer } from 'rxjs';
 import { ClipboardService } from 'services';
 import { ButtonActions } from './button-actions.util';
-import { TextareaProperties } from './textarea-properties.model';
+import { EditorProperties, extractProps } from './textarea-properties.model';
 import { UndoCache } from './undo-cache.util';
 
 @Component({
@@ -50,7 +50,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 				debounceTime(400),
 				distinctUntilChanged(),
-				tap(() => this.undoCache.saveState(this.editor.nativeElement))
+				tap(() => this.undoCache.saveState(extractProps(this.editor.nativeElement)))
 
 			).subscribe()
 
@@ -60,11 +60,11 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 			this.control.valueChanges.pipe(
 
-				tap(val => {
+				tap(content => {
 
 					if (!this.control.dirty) // first value from db
-						this.undoCache.initialize(val)
-					this.buffer.next(val);
+						this.undoCache.initialize(content)
+					this.buffer.next(content);
 
 				})
 
@@ -163,17 +163,17 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	}
 
-	updateEditor(props: TextareaProperties): void {
+	updateEditor(props: EditorProperties): void {
 
 		const textarea = this.editor.nativeElement;
-		const { value, selectionStart, selectionEnd } = props;
+		const { content, sIndex, eIndex } = props;
 
-		textarea.value = value;
-		textarea.selectionStart = selectionStart;
-		textarea.selectionEnd = selectionEnd;
+		textarea.value = content;
+		textarea.selectionStart = sIndex;
+		textarea.selectionEnd = eIndex;
 		textarea.focus();
 
-		this.control.setValue(value);
+		this.control.setValue(content);
 		this.control.markAsDirty();
 
 	}
@@ -194,20 +194,20 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	private onUndoRedo(): void {
 
-		const content = this.undoCache.props();
-		const { value, selectionStart, selectionEnd } = content;
+		const props = this.undoCache.props();
+		const { content, sIndex, eIndex } = props;
 		const textarea = this.editor.nativeElement;
 
-		textarea.value = value;
-		textarea.selectionStart = selectionStart;
-		textarea.selectionEnd = selectionEnd;
+		textarea.value = content;
+		textarea.selectionStart = sIndex;
+		textarea.selectionEnd = eIndex;
 		textarea.focus();
 
 		/* Order important: first empty string has to be replaced with actual content
 		*  onInput() content comes from textarea, but control.valueChanges also emits once
 		*  data arrives from database (initial) */
 		this.control.markAsDirty();
-		this.control.setValue(value, { emitEvent: false });
+		this.control.setValue(content, { emitEvent: false });
 
 	}
 

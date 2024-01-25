@@ -1,4 +1,4 @@
-import { TextareaProperties } from './textarea-properties.model';
+import { EditorProperties, extractProps } from './textarea-properties.model';
 
 const CR = '\r';
 const NL = '\n';
@@ -7,74 +7,66 @@ const TAB_T = '\t';
 const TAB = SPACE.repeat(4); // 4 spaces instead of '\t'
 const EMPTY = '';
 
-function isSelection(props: TextareaProperties): boolean {
+function isSelection({ sIndex, eIndex }: EditorProperties): boolean {
 
-	const { selectionStart, selectionEnd } = props;
-	return selectionStart !== selectionEnd;
+	return sIndex !== eIndex;
 
 }
 
-function startIndexOfCurrentLine(props: TextareaProperties): number {
+function startIndexOfCurrentLine({ content, sIndex }: EditorProperties): number {
 
-	const { value, selectionStart } = props;
-	const c = value.substring(0, selectionStart);
+	const c = content.substring(0, sIndex);
 	const idx = c.lastIndexOf('\n') + 1;
 	return idx;
 
 }
 
-function isPrevChar(props: TextareaProperties, ...chars: string[]): boolean {
+// function isPrevChar({ content, sIndex }: TextareaProperties, ...chars: string[]): boolean {
 
-	const { value, selectionStart } = props;
-	return chars.includes(value.charAt(selectionStart - 1));
+// 	return chars.includes(content.charAt(sIndex - 1));
 
-}
+// }
 
-function isNextChar(props: TextareaProperties, ...chars: string[]): boolean {
+// function isNextChar({ content, eIndex }: TextareaProperties, ...chars: string[]): boolean {
 
-	const { value, selectionEnd } = props;
-	return chars.includes(value.charAt(selectionEnd + 1));
+// 	return chars.includes(content.charAt(eIndex + 1));
 
-}
+// }
 
-function isStart(props: TextareaProperties): boolean {
+// function isStart({ sIndex }: TextareaProperties): boolean {
 
-	const { selectionStart } = props;
-	return selectionStart === 0;
+// 	return sIndex === 0;
 
-}
+// }
 
-function isEnd(props: TextareaProperties): boolean {
+function isEnd(element: HTMLTextAreaElement): boolean {
 
-	const { value, selectionEnd } = props;
+	const { value, selectionEnd } = element;
 	return selectionEnd === value.length;
 
 }
 
-function findPrevIdx(props: TextareaProperties, ...chars: string[]): number {
+function findPrevIdx({ content, sIndex }: EditorProperties, ...chars: string[]): number {
 
-	const { value, selectionStart } = props;
-	const piece = value.substring(0, selectionStart);
+	const piece = content.substring(0, sIndex);
 	return Math.max(...chars.map(c => piece.lastIndexOf(c)));
 
 }
 
-function findNextIdx(props: TextareaProperties, ...chars: string[]): number {
+function findNextIdx({ content, eIndex }: EditorProperties, ...chars: string[]): number {
 
-	const { value, selectionEnd } = props;
-	const piece = value.substring(selectionEnd);
-
+	const piece = content.substring(eIndex);
 	const idx = Math.min(...chars.map(
 		c => {
 			const idx = piece.indexOf(c);
 			return idx < 0 ? piece.length : idx
 		})
 	);
-	return value.substring(0, selectionEnd).length + idx;
+	return content.substring(0, eIndex).length + idx;
 
 }
 
-function findWordIndexes(props: TextareaProperties): [number, number] {
+function findWordIndexes(props: EditorProperties): [number, number] {
 
 	return [
 		findPrevIdx(props, SPACE, TAB_T, NL, CR) + 1,
@@ -83,7 +75,7 @@ function findWordIndexes(props: TextareaProperties): [number, number] {
 
 }
 
-function wrap(props: TextareaProperties, text: string): TextareaProperties {
+function wrap({ content, sIndex, eIndex }: EditorProperties, text: string): EditorProperties {
 
 	/*
 
@@ -95,17 +87,146 @@ function wrap(props: TextareaProperties, text: string): TextareaProperties {
 
 	*/
 
-	const { value, selectionStart, selectionEnd } = props;
-
-	const textStart = value.substring(0, selectionStart);
-	const textMiddle = value.substring(selectionStart, selectionEnd);
-	const textEnd = value.substring(selectionEnd);
+	const textStart = content.substring(0, sIndex);
+	const textMiddle = content.substring(sIndex, eIndex);
+	const textEnd = content.substring(eIndex);
 
 	return {
 
-		value: textStart + text + textMiddle + text + textEnd,
-		selectionStart: selectionStart + text.length,
-		selectionEnd: selectionEnd + text.length
+		content: textStart + text + textMiddle + text + textEnd,
+		sIndex: sIndex + text.length,
+		eIndex: eIndex + text.length
+
+	};
+
+}
+
+function insert(props: EditorProperties, first: string, second: string = ''): EditorProperties {
+
+	/*
+
+	lorem ip<cursor>sum
+
+	↓↓↓↓↓ becomes ↓↓↓↓↓
+
+	lorem ip${first}<cursor>${second}sum
+
+	*/
+
+	const { content, sIndex, eIndex } = props;
+
+	const textStart = content.substring(0, sIndex);
+	const textEnd = content.substring(eIndex);
+
+	const selStart = sIndex + first.length;
+	return {
+
+		content: textStart + first + second + textEnd,
+		sIndex: selStart,
+		eIndex: selStart
+
+	};
+
+}
+
+function endIndexOfCurrentLine(value: string, selectionEnd: number): number {
+
+	let idxLineEnd = value.indexOf('\n', selectionEnd);
+	if (idxLineEnd === -1)
+		idxLineEnd = value.length;
+
+	return idxLineEnd;
+
+}
+
+function wrapEachWord(props: EditorProperties, CHAR: string): EditorProperties {
+
+	/*
+
+	lore<selelectionStart>m ip<selectionEnd>sum
+
+	↓↓↓↓↓ becomes ↓↓↓↓↓
+
+	lore^<selelectionStart>m^ ^ip<selectionEnd>^sum
+
+	*/
+
+	const { content, sIndex, eIndex } = props;
+
+	if (sIndex === eIndex)
+		return props;
+
+	const textStart = content.substring(0, sIndex);
+	const textMiddle = content.substring(sIndex, eIndex);
+	const textEnd = content.substring(eIndex);
+
+	const newTextMiddle = textMiddle.split(' ').map(s => s.trim() === '' ? s : CHAR + s + CHAR).join(' ');
+
+	const lengthOld = textMiddle.length;
+	const lengthNew = newTextMiddle.length;
+
+	let startShifts = 0;
+	let endShifts = 0;
+
+	if (lengthOld !== lengthNew) { // no change?
+
+		startShifts = newTextMiddle.startsWith(CHAR) ? 1 : 0;
+		endShifts = lengthNew - lengthOld - 1;
+
+	}
+
+	return {
+
+		content: textStart + newTextMiddle + textEnd,
+		sIndex: sIndex + startShifts,
+		eIndex: eIndex + endShifts
+
+	};
+
+}
+
+function addClass(props: EditorProperties, s: string): EditorProperties {
+
+	/*
+
+		lorem ipsum
+		lor<selectionStart>em ip<cursor>sum
+		lorem ipsum
+		lorem i<selectionEnd>psum
+		lorem ipsum
+
+		↓↓↓↓↓↓ becomes ↓↓↓↓↓↓↓↓
+
+		lorem ipsum
+		\n
+		\n
+		lor<selectionStart>em ip<cursor>sum
+		lorem ipsum
+		lorem i<selectionEnd>psum
+		\n
+		\n
+		lorem ipsum
+
+	*/
+
+	const { content, sIndex, eIndex } = props;
+
+	const idxLineStart = startIndexOfCurrentLine(props);
+	const idxLineEnd = endIndexOfCurrentLine(content, eIndex);
+
+	const textStart = content.substring(0, idxLineStart);
+	const textMiddle = content.substring(idxLineStart, idxLineEnd);
+	const textEnd = content.substring(idxLineEnd);
+
+	if (textMiddle.endsWith(s))
+		return props;
+
+	const result = textStart + NL + textMiddle + s + NL + textEnd;
+	return {
+
+		content: result,
+		sIndex: sIndex + 1, // 1 NL added
+		eIndex: eIndex + 1 // 1 NL added
 
 	};
 
@@ -113,72 +234,73 @@ function wrap(props: TextareaProperties, text: string): TextareaProperties {
 
 export class ButtonActions {
 
-	addBold({ value, selectionStart, selectionEnd }: TextareaProperties): TextareaProperties {
+	addBold(element: HTMLTextAreaElement): EditorProperties {
 
 		const s = '**';
-		const props = { value, selectionStart, selectionEnd };
+		const props: EditorProperties = extractProps(element);
 
 		if (isSelection(props))
 			return wrap(props, s);
 
-		const [startIdx, endIdx] = findWordIndexes({ value, selectionStart, selectionEnd });
-		const result: TextareaProperties = {
-			value,
-			selectionStart: startIdx,
-			selectionEnd: endIdx
+		const [startIdx, endIdx] = findWordIndexes(props);
+		const result: EditorProperties = {
+			content: props.content,
+			sIndex: startIdx,
+			eIndex: endIdx
 		};
 		return wrap(result, s);
 
 	}
 
-	addItalic(props: TextareaProperties): TextareaProperties {
+	addItalic(element: HTMLTextAreaElement): EditorProperties {
 
 		const s = '*';
-		return wrap(props, s);
+		return wrap(extractProps(element), s);
 
 	}
 
-	addStrikethrough(props: TextareaProperties): TextareaProperties {
+	addStrikethrough(element: HTMLTextAreaElement): EditorProperties {
 
 		const s = '~~';
-		return wrap(props, s);
+		return wrap(extractProps(element), s);
 
 	}
 
-	tab(props: TextareaProperties, tabString: string = TAB): TextareaProperties {
+	tab(element: HTMLTextAreaElement, tabString: string = TAB): EditorProperties {
 
-		const { value, selectionStart, selectionEnd } = props;
+		const props: EditorProperties = extractProps(element);
+		const { content, sIndex, eIndex } = props;
 
 		// Selection is multi-line?
-		if (value.substring(selectionStart, selectionEnd).indexOf(NL) > -1) {
+		if (content.substring(sIndex, eIndex).indexOf(NL) > -1) {
 
 			// shift all selected lines
-			const lastPiece = value.substring(selectionEnd);
+			const lastPiece = content.substring(eIndex);
 			const startIdx = startIndexOfCurrentLine(props);
-			const selection = value.substring(startIdx, selectionEnd);
+			const selection = content.substring(startIdx, eIndex);
 			const newSelection = tabString + selection.replaceAll(NL, NL + tabString);
 			const shift = newSelection.length - selection.length;
 
-			const result = value.substring(0, startIdx) + newSelection + lastPiece;
+			const result = content.substring(0, startIdx) + newSelection + lastPiece;
 
 			return {
 
-				value: result,
-				selectionStart: startIdx,
-				selectionEnd: selectionEnd + shift
+				content: result,
+				sIndex: startIdx,
+				eIndex: eIndex + shift
 
 			};
 
 		}
 
 		// Insert TAB at the cursor's position
-		const result = value.substring(0, selectionStart) + tabString + value.substring(selectionStart);
+		const result = content.substring(0, sIndex) + tabString + content.substring(sIndex);
 
 		return {
 
-			value: result,
-			selectionStart: selectionStart + tabString.length,
-			selectionEnd: selectionEnd + tabString.length
+			content: result,
+			sIndex: sIndex + tabString.length,
+			eIndex: eIndex + tabString.length
 
 		};
 
@@ -194,30 +316,31 @@ export class ButtonActions {
 
 	}
 
-	shiftTab(props: TextareaProperties, tabString: string = TAB): TextareaProperties {
+	shiftTab(element: HTMLTextAreaElement, tabString: string = TAB): EditorProperties {
 
-		const { value, selectionStart, selectionEnd } = props;
+		const props: EditorProperties = extractProps(element);
+		const { content, sIndex, eIndex } = props;
 
 		// Selection is multi-line?
-		if (value.substring(selectionStart, selectionEnd).indexOf(NL) > -1) {
+		if (content.substring(sIndex, eIndex).indexOf(NL) > -1) {
 
 			// shift all selected lines
-			const lastPiece = value.substring(selectionEnd);
+			const lastPiece = content.substring(eIndex);
 			const startIdx = startIndexOfCurrentLine(props);
 
-			const piece = value.substring(startIdx, selectionEnd);
+			const piece = content.substring(startIdx, eIndex);
 
 			if (piece.startsWith(tabString) && this.hasTabAfterNewlines(piece)) {
 
 				const newPiece = piece.substring(tabString.length).replaceAll(NL + tabString, NL);
-				const result = value.substring(0, startIdx) + newPiece + lastPiece;
+				const result = content.substring(0, startIdx) + newPiece + lastPiece;
 				const shift = piece.length - newPiece.length;
 
 				return {
 
-					value: result,
-					selectionStart: startIdx,
-					selectionEnd: selectionEnd - shift
+					content: result,
+					sIndex: startIdx,
+					eIndex: eIndex - shift
 
 				};
 
@@ -226,43 +349,43 @@ export class ButtonActions {
 
 		}
 
-		let startPiece = value.substring(0, selectionStart);
+		let startPiece = content.substring(0, sIndex);
 		if (startPiece.endsWith(tabString))
-			startPiece = value.substring(0, selectionStart - tabString.length);
+			startPiece = content.substring(0, sIndex - tabString.length);
 		else
 			return props;
 
 		// remove TAB at the cursor's position
-		const result = startPiece + value.substring(startPiece.length + tabString.length);
+		const result = startPiece + content.substring(startPiece.length + tabString.length);
 
 		return {
 
-			value: result,
-			selectionStart: selectionStart - tabString.length,
-			selectionEnd: selectionEnd - tabString.length
+			content: result,
+			sIndex: sIndex - tabString.length,
+			eIndex: eIndex - tabString.length
 
 		};
 
 	}
 
-	addEmptyTask(props: TextareaProperties): TextareaProperties {
+	addEmptyTask(element: HTMLTextAreaElement): EditorProperties {
 
 		const s = '\n- [ ] ';
-		return this.insert(props, s);
+		return insert(extractProps(element), s);
 
 	}
 
-	addToc(props: TextareaProperties): TextareaProperties {
+	addToc(element: HTMLTextAreaElement): EditorProperties {
 
 		const s = '\n\n${toc}\n\n';
-		return this.insert(props, s);
+		return insert(extractProps(element), s);
 
 	}
 
-	addTable(props: TextareaProperties, [col, row]: [number, number]): TextareaProperties {
+	addTable(element: HTMLTextAreaElement, [col, row]: [number, number]): EditorProperties {
 
 		const newLine = NL;
-		const { value, selectionStart, selectionEnd } = props;
+		const { content, sIndex, eIndex } = extractProps(element);
 
 		let output = newLine + newLine + '|';
 
@@ -286,87 +409,40 @@ export class ButtonActions {
 
 		}
 
-		const firstPiece = value.substring(0, selectionStart);
-		const lastPiece = value.substring(selectionStart)
+		const firstPiece = content.substring(0, sIndex);
+		const lastPiece = content.substring(sIndex)
 
 		const result = firstPiece + output + (lastPiece.startsWith(newLine) ? '' : newLine) + lastPiece;
-		const cursor = props.selectionStart + 4; // set the cursor at center of 1st cell of header row
+		const cursor = sIndex + 4; // set the cursor at center of 1st cell of header row
 		return {
 
-			value: result,
-			selectionStart: cursor,
-			selectionEnd: cursor
+			content: result,
+			sIndex: cursor,
+			eIndex: cursor
 
 		};
 
 	}
 
-	private addClass(props: TextareaProperties, s: string): TextareaProperties {
+	addAlignCenter(element: HTMLTextAreaElement): EditorProperties {
 
-		/*
-
-			lorem ipsum
-			lor<selectionStart>em ip<cursor>sum
-			lorem ipsum
-			lorem i<selectionEnd>psum
-			lorem ipsum
-
-			↓↓↓↓↓↓ becomes ↓↓↓↓↓↓↓↓
-
-			lorem ipsum
-			\n
-			\n
-			lor<selectionStart>em ip<cursor>sum
-			lorem ipsum
-			lorem i<selectionEnd>psum
-			\n
-			\n
-			lorem ipsum
-
-		*/
-
-		const { value, selectionStart, selectionEnd } = props;
-
-		const idxLineStart = startIndexOfCurrentLine(props);
-		const idxLineEnd = this.endIndexOfCurrentLine(value, selectionEnd);
-
-		const textStart = value.substring(0, idxLineStart);
-		const textMiddle = value.substring(idxLineStart, idxLineEnd);
-		const textEnd = value.substring(idxLineEnd);
-
-		if (textMiddle.endsWith(s))
-			return props;
-
-		const result = textStart + NL + textMiddle + s + NL + textEnd;
-		return {
-
-			value: result,
-			selectionStart: selectionStart + 1, // 1 NL added
-			selectionEnd: selectionEnd + 1 // 1 NL added
-
-		};
+		return addClass(extractProps(element), '{.text-align-center}');
 
 	}
 
-	addAlignCenter(props: TextareaProperties): TextareaProperties {
+	addAlignRight(element: HTMLTextAreaElement): EditorProperties {
 
-		return this.addClass(props, '{.text-align-center}');
-
-	}
-
-	addAlignRight(props: TextareaProperties): TextareaProperties {
-
-		return this.addClass(props, '{.text-align-right}');
+		return addClass(extractProps(element), '{.text-align-right}');
 
 	}
 
-	addAlignJustify(props: TextareaProperties): TextareaProperties {
+	addAlignJustify(element: HTMLTextAreaElement): EditorProperties {
 
-		return this.addClass(props, '{.text-align-justify}');
+		return addClass(extractProps(element), '{.text-align-justify}');
 
 	}
 
-	addHeading(props: TextareaProperties, heading: string): TextareaProperties {
+	addHeading(element: HTMLTextAreaElement, heading: string): EditorProperties {
 
 		//
 		// ${heading}
@@ -374,73 +450,73 @@ export class ButtonActions {
 		const first = `\n\n${heading} `;
 		const second = '\n\n';
 
-		const { value, selectionStart, selectionEnd } = props;
+		const props: EditorProperties = extractProps(element);
+		const { content, sIndex, eIndex } = props;
 
-		// Selection is multi-line?
-		if (selectionStart !== selectionEnd) {
+		if (isSelection(props)) {
 
-			const firstPiece = value.substring(0, selectionStart);
-			const middlePiece = value.substring(selectionStart, selectionEnd);
-			const lastPiece = value.substring(selectionEnd);
+			const firstPiece = content.substring(0, sIndex);
+			const middlePiece = content.substring(sIndex, eIndex);
+			const lastPiece = content.substring(eIndex);
 
 			const result = firstPiece + first + middlePiece + second + lastPiece;
 
 			return {
 
-				value: result,
-				selectionStart: selectionStart + first.length,
-				selectionEnd: selectionEnd + first.length
+				content: result,
+				sIndex: sIndex + first.length,
+				eIndex: eIndex + first.length
 
 			};
 
 		}
-		return this.insert(props, first, second);
+		return insert(props, first, second);
 
 	}
 
-	addSub(props: TextareaProperties): TextareaProperties {
+	addSub(element: HTMLTextAreaElement): EditorProperties {
 
 		const CHAR = '~';
-		return this.wrapEachWord(props, CHAR);
+		return wrapEachWord(extractProps(element), CHAR);
 
 	}
 
-	addSup(props: TextareaProperties): TextareaProperties {
+	addSup(element: HTMLTextAreaElement): EditorProperties {
 
 		const CHAR = '^';
-		return this.wrapEachWord(props, CHAR);
+		return wrapEachWord(extractProps(element), CHAR);
 
 	}
 
-	addListBulleted(props: TextareaProperties): TextareaProperties {
+	addListBulleted(element: HTMLTextAreaElement): EditorProperties {
 
 		const s = '\n\n+ a\n+ b\n  - c\n    * d\n\n';
-		return this.insert(props, s);
+		return insert(extractProps(element), s);
 
 	}
 
-	addListNumbered(props: TextareaProperties): TextareaProperties {
+	addListNumbered(element: HTMLTextAreaElement): EditorProperties {
 
 		const s = '\n\n1. a\n1. b\n1. c\n  1. d\n\n';
-		return this.insert(props, s);
+		return insert(extractProps(element), s);
 
 	}
 
-	addHighlight(props: TextareaProperties): TextareaProperties {
+	addHighlight(element: HTMLTextAreaElement): EditorProperties {
 
 		const s = '==';
-		return wrap(props, s);
+		return wrap(extractProps(element), s);
 
 	}
 
-	addInlineCode(props: TextareaProperties): TextareaProperties {
+	addInlineCode(element: HTMLTextAreaElement): EditorProperties {
 
 		const s = '`';
-		return wrap(props, s);
+		return wrap(extractProps(element), s);
 
 	}
 
-	addCodeBlock(props: TextareaProperties, lang: string = ''): TextareaProperties {
+	addCodeBlock(element: HTMLTextAreaElement, lang: string = ''): EditorProperties {
 
 		//
 		// ```lang
@@ -450,34 +526,34 @@ export class ButtonActions {
 
 		const first = '\n\n```' + lang + '\n';
 		const second = '\n```\n\n';
-		return this.insert(props, first, second);
+		return insert(extractProps(element), first, second);
 
 	}
 
-	addIncreaseIndent(props: TextareaProperties): TextareaProperties {
+	addIncreaseIndent(element: HTMLTextAreaElement): EditorProperties {
 
-		return this.tab(props, '  ');
-
-	}
-
-	addDecreaseIndent(props: TextareaProperties): TextareaProperties {
-
-		return this.shiftTab(props, '  ');
+		return this.tab(element, '  ');
 
 	}
 
-	addImage(props: TextareaProperties, base64: string): TextareaProperties {
+	addDecreaseIndent(element: HTMLTextAreaElement): EditorProperties {
+
+		return this.shiftTab(element, '  ');
+
+	}
+
+	addImage(element: HTMLTextAreaElement, base64: string): EditorProperties {
 
 		return {
 
-			...props,
-			value: `\n![base64-image](${base64})\n`
+			...extractProps(element),
+			content: `\n![base64-image](${base64})\n`
 
 		}
 
 	}
 
-	addBlockquote(props: TextareaProperties, type?: 'warning' | 'note' | 'tip' | 'important' | 'caution'): TextareaProperties {
+	addBlockquote(element: HTMLTextAreaElement, type?: 'warning' | 'note' | 'tip' | 'important' | 'caution'): EditorProperties {
 
 		if (type) {
 
@@ -488,7 +564,7 @@ export class ButtonActions {
 
 			const first = `\n\n> [!${type}]\n> `;
 			const second = '\n\n';
-			return this.insert(props, first, second);
+			return insert(extractProps(element), first, second);
 
 		}
 
@@ -498,91 +574,7 @@ export class ButtonActions {
 
 		const first = `\n\n> `;
 		const second = '\n\n';
-		return this.insert(props, first, second);
-
-	}
-
-	private insert(props: TextareaProperties, first: string, second: string = ''): TextareaProperties {
-
-		/*
-
-		lorem ip<cursor>sum
-
-		↓↓↓↓↓ becomes ↓↓↓↓↓
-
-		lorem ip${first}<cursor>${second}sum
-
-		*/
-
-		const { value, selectionStart, selectionEnd } = props;
-
-		const textStart = value.substring(0, selectionStart);
-		const textEnd = value.substring(selectionEnd);
-
-		const selStart = selectionStart + first.length;
-		return {
-
-			value: textStart + first + second + textEnd,
-			selectionStart: selStart,
-			selectionEnd: selStart
-
-		};
-
-	}
-
-	private endIndexOfCurrentLine(value: string, selectionEnd: number): number {
-
-		let idxLineEnd = value.indexOf('\n', selectionEnd);
-		if (idxLineEnd === -1)
-			idxLineEnd = value.length;
-
-		return idxLineEnd;
-
-	}
-
-	private wrapEachWord(props: TextareaProperties, CHAR: string): TextareaProperties {
-
-		/*
-
-		lore<selelectionStart>m ip<selectionEnd>sum
-
-		↓↓↓↓↓ becomes ↓↓↓↓↓
-
-		lore^<selelectionStart>m^ ^ip<selectionEnd>^sum
-
-		*/
-
-		const { value, selectionStart, selectionEnd } = props;
-
-		if (selectionStart === selectionEnd)
-			return props;
-
-		const textStart = value.substring(0, selectionStart);
-		const textMiddle = value.substring(selectionStart, selectionEnd);
-		const textEnd = value.substring(selectionEnd);
-
-		const newTextMiddle = textMiddle.split(' ').map(s => s.trim() === '' ? s : CHAR + s + CHAR).join(' ');
-
-		const lengthOld = textMiddle.length;
-		const lengthNew = newTextMiddle.length;
-
-		let startShifts = 0;
-		let endShifts = 0;
-
-		if (lengthOld !== lengthNew) { // no change?
-
-			startShifts = newTextMiddle.startsWith(CHAR) ? 1 : 0;
-			endShifts = lengthNew - lengthOld - 1;
-
-		}
-
-		return {
-
-			value: textStart + newTextMiddle + textEnd,
-			selectionStart: selectionStart + startShifts,
-			selectionEnd: selectionEnd + endShifts
-
-		};
+		return insert(extractProps(element), first, second);
 
 	}
 
