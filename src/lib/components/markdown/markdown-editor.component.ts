@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListe
 import { FormControl } from '@angular/forms';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, tap, timer } from 'rxjs';
 import { ClipboardService } from 'services';
-import { ButtonActions } from './button-actions.util';
+import { ButtonActions, TASK_COMPL, TASK_EMPTY, lineStartsWith } from './button-actions.util';
 import { EditorProperties, extractProps } from './textarea-properties.model';
 import { UndoCache } from './undo-cache.util';
 
@@ -132,20 +132,12 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 			} else if (hasModifierKey(event, 'ctrlKey') && hasModifierKey(event, 'shiftKey') && event.key.toLowerCase() === 'z') {
 
 				event.preventDefault();
-				// this.onRedo();
-				this.editor.nativeElement.selectionStart = 88;
-				this.editor.nativeElement.selectionEnd = 90;
+				this.onRedo();
 
 			} else if (hasModifierKey(event, 'ctrlKey') && event.key.toLowerCase() === 'z') {
 
 				event.preventDefault();
-				// this.onUndo();
-				const { value, selectionStart, selectionEnd, selectionDirection } = this.editor.nativeElement;
-				console.log(selectionStart, selectionEnd, selectionDirection);
-				console.log('start + 1', value.substring(selectionStart, selectionStart + 1));
-				console.log('end + 1', value.substring(selectionEnd, selectionEnd + 1));
-
-
+				this.onUndo();
 
 			}
 
@@ -158,6 +150,16 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 			this.hasFocus = false;
 			this.btnSaveMenu.nativeElement.focus();
+
+		} else if (event.key === 'Enter') {
+
+			const text = lineStartsWith(extractProps(this.editor.nativeElement), [TASK_EMPTY, TASK_COMPL]);
+			if (text) {
+
+				event.preventDefault();
+				this.updateEditor(this.actions.addEmptyTask(this.editor.nativeElement));
+
+			}
 
 		}
 

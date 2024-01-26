@@ -6,6 +6,8 @@ const SPACE = ' ';
 const TAB_T = '\t';
 const TAB = '\t'; // tab-size : 4; <-- css of textarea
 const INDENT = SPACE.repeat(2);
+export const TASK_EMPTY = '- [ ] ';
+export const TASK_COMPL = '- [x] ';
 
 function isSelection({ sIndex, eIndex }: EditorProperties): boolean {
 
@@ -19,13 +21,23 @@ function isSelectionMultiLine({ content, sIndex, eIndex }: EditorProperties): bo
 
 }
 
-function hasTabAfterNewlines(s: string): boolean {
+export function lineStartsWith(props: EditorProperties, prefixes: string[]): string {
 
-	let lines = s.split(NL);
-	for (let i = 0; i < lines.length; i++)
-		if (lines[i].endsWith(NL) && !lines[i + 1]?.startsWith(TAB))
-			return false;
-	return true;
+	const { content } = props;
+	const line = content.substring(startIndexOfCurrentLine(props));
+	for (const pre of prefixes)
+		if (line.startsWith(pre))
+			return line.substring(pre.length, line.indexOf(NL));
+	return '';
+
+}
+
+export function currentLine(props: EditorProperties): string {
+
+	const { content } = props;
+	const line = content.substring(startIndexOfCurrentLine(props));
+	const lineEnd = line.indexOf(NL);
+	return line.substring(0, lineEnd < 0 ? line.length : lineEnd);
 
 }
 
@@ -133,6 +145,21 @@ function removeCharsAt(props: EditorProperties, c: string, idx?: number): Editor
 		eIndex: eIndex - c.length
 
 	};
+
+}
+
+export function removeCurrentLine(props: EditorProperties): EditorProperties {
+
+	const { content } = props;
+	const lineIdx = startIndexOfCurrentLine(props);
+	const first = content.substring(0, lineIdx);
+	const rest = content.substring(lineIdx);
+	const nextNL = rest.indexOf(NL);
+	const result = first + (nextNL < 0 ? '' : rest.substring(nextNL));
+	return {
+		...props,
+		content: result
+	}
 
 }
 
@@ -246,7 +273,7 @@ function addClass(props: EditorProperties, s: string): EditorProperties {
 
 }
 
-function wrap({ content, sIndex, eIndex }: EditorProperties, text: string): EditorProperties {
+function wrap({ content, sIndex, eIndex }: EditorProperties, pre: string, post?: string): EditorProperties {
 
 	/*
 
@@ -273,9 +300,9 @@ function wrap({ content, sIndex, eIndex }: EditorProperties, text: string): Edit
 
 	return {
 
-		content: textStart + text + textMiddle + text + textEnd,
-		sIndex: sIndex + text.length,
-		eIndex: eIndex + text.length
+		content: textStart + pre + textMiddle + (post ?? pre) + textEnd,
+		sIndex: sIndex + pre.length,
+		eIndex: eIndex + pre.length
 
 	};
 
@@ -425,7 +452,7 @@ export class ButtonActions {
 
 	addEmptyTask(element: HTMLTextAreaElement): EditorProperties {
 
-		const s = '\n- [ ] ';
+		const s = NL + TASK_EMPTY;
 		return insert(extractProps(element), s);
 
 	}
@@ -581,7 +608,7 @@ export class ButtonActions {
 
 		const first = '\n\n```' + lang + '\n';
 		const second = '\n```\n\n';
-		return insert(extractProps(element), first, second);
+		return wrap(extractProps(element), first, second);
 
 	}
 
@@ -598,26 +625,18 @@ export class ButtonActions {
 
 	addBlockquote(element: HTMLTextAreaElement, type?: 'warning' | 'note' | 'tip' | 'important' | 'caution'): EditorProperties {
 
-		if (type) {
-
-			//
-			// > [!type]
-			// >
-			//
-
-			const first = `\n\n> [!${type}]\n> `;
-			const second = '\n\n';
-			return insert(extractProps(element), first, second);
-
-		}
-
 		//
+		// > [!type]	<-- with type
 		// >
 		//
 
-		const first = `\n\n> `;
+		//
+		// >			<-- without type
+		//
+
+		const first = type ? `\n\n> [!${type}]\n> ` : `\n\n> `;
 		const second = '\n\n';
-		return insert(extractProps(element), first, second);
+		return wrap(extractProps(element), first, second);
 
 	}
 
