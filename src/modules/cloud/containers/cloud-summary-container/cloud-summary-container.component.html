@@ -1,22 +1,18 @@
-<ng-container *ngIf="tasks$ | async as tasks">
+@for(task of tasks$ | async; track task) {
 
-	<ng-container *ngIf="tasks.length > 0; else notasks">
+	<app-cloud-task
+		[task]="task"
+		(action)="onAction($event)"/>
 
-		<app-cloud-task
-			*ngFor="let task of tasks$ | async"
-			[task]="task"
-			(action)="onAction($event)"></app-cloud-task>
+} @empty {
 
-	</ng-container>
-	<ng-template #notasks>
+	<div class="card empty">
 
-		<div class="empty">
-			<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No tasks available</span>
-			<button routerLink="/" class="icon-only">
-				<span class="material-symbols-outlined">home</span> Home
-			</button>
-		</div>
+		<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No tasks available</span>
+		<button routerLink="/" class="icon-only">
+			<span class="material-symbols-outlined">home</span> Home
+		</button>
 
-	</ng-template>
+	</div>
 
-</ng-container>
+}
