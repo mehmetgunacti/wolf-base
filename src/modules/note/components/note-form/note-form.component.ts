@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, effect, inject, input } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Note, TAG_PINNED, UUID } from 'lib';
-import { Subject, Subscription, filter, map, startWith, tap } from 'rxjs';
 import { EditFormImpl, NOTE_FORM, NoteForm } from './note-form';
+
+function elseEmptyArray<T>(v: T[] | null | undefined): T[] { return v ?? []; }
 
 @Component({
 	selector: 'app-note-form',
@@ -10,62 +12,45 @@ import { EditFormImpl, NOTE_FORM, NoteForm } from './note-form';
 	providers: [{ provide: NOTE_FORM, useClass: EditFormImpl }],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NoteFormComponent implements OnInit, OnChanges, OnDestroy {
+export class NoteFormComponent {
 
 	TAG_PINNED = TAG_PINNED;
 
-	@Input() note: Note | null | undefined;
-	@Input() nodes: Note[] | null | undefined = [];
-	@Input() tagSuggestions: string[] | null | undefined;
-	@Input() parentId: UUID | null | undefined;
+	/* @Input() */
+	note = input<Note | null>(null);
+	parentId = input<UUID | null>(null);
+	nodes = input<Note[], Note[] | null>([], { transform: elseEmptyArray<Note> });
+	tagSuggestions = input<string[], string[] | null>([], { transform: elseEmptyArray<string> });
 
 	@Output() create: EventEmitter<Partial<Note>> = new EventEmitter();
 	@Output() update: EventEmitter<{ id: UUID, note: Partial<Note> }> = new EventEmitter();
 	@Output() tagInput: EventEmitter<string | null> = new EventEmitter();
 
 	form: NoteForm = inject(NOTE_FORM);
-	tagSuggestions$: Subject<string[]> = new Subject<string[]>();
-	subscription: Subscription = new Subscription();
 
-	ngOnInit(): void {
+	constructor() {
 
-		if (this.parentId) // on ':id/new' page
-			this.form.parentId.setValue(this.parentId);
+		// on incoming 'note' set form values
+		effect(() => {
 
-		this.subscription.add(
+			const note = this.note();
+			if (note)
+				this.form.setValues(note);
 
-			this.form.parentId.valueChanges
-				.pipe(
+		});
 
-					startWith(this.parentId),
-					map(parentId => parentId ? this.nodes?.find(n => n.id === parentId)?.tags ?? [] : [])
+		// on incoming 'parentId' set form value
+		effect(() => this.form.parentId.setValue(this.parentId()));
 
-				)
-				.subscribe(
-					tags => this.form.tags.setValue(tags)
-				)
+		// when user changes parentId using selectbox, update 'tags' form value
+		const changedParentId = toSignal(this.form.parentId.valueChanges, { initialValue: this.parentId() });
+		effect(() => {
 
-		);
+			const newParentId = changedParentId();
+			const tags = this.nodes().find(n => n.id === newParentId)?.tags ?? [];
+			this.form.tags.setValue(tags);
 
-	}
-
-	ngOnChanges(changes: SimpleChanges): void {
-
-		const note: Note = changes['note']?.currentValue;
-		if (note) { // on ':id/edit' page
-			console.log(note);
-			this.form.setValues(note);
-		}
-
-		const tagSuggestions: string[] = changes['tagSuggestions']?.currentValue;
-		if (tagSuggestions)
-			this.tagSuggestions$.next(tagSuggestions);
-
-	}
-
-	ngOnDestroy(): void {
-
-		this.subscription.unsubscribe();
+		});
 
 	}
 
