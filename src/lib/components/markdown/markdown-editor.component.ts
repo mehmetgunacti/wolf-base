@@ -40,7 +40,6 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 	private dialogService: Dialog = inject(Dialog);
 	private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
 	private clipboardService: ClipboardService = inject(ClipboardService);
-	private focusMonitor: FocusMonitor = inject(FocusMonitor);
 
 	private subscriptions: Subscription = new Subscription();
 
@@ -51,26 +50,28 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 			this.buffer.asObservable().pipe(
 
 				debounceTime(400),
-				distinctUntilChanged(),
-				tap(() => this.undoCache.saveState(extractProps(this.editor.nativeElement)))
+				distinctUntilChanged()
 
-			).subscribe()
+			).subscribe(
+				() => this.undoCache.saveState(extractProps(this.editor.nativeElement))
+			)
 
 		);
 
 		this.subscriptions.add(
 
-			this.control.valueChanges.pipe(
+			this.control.valueChanges.subscribe(
 
-				tap(content => {
+				content => {
 
-					if (!this.control.dirty) // first value from db
+					if (this.control.pristine) // first value from db
 						this.undoCache.initialize(content)
-					this.buffer.next(content);
+					else
+						this.buffer.next(content);
 
-				})
+				}
 
-			).subscribe()
+			)
 
 		);
 
