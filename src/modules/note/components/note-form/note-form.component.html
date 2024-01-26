@@ -30,7 +30,9 @@
 				class="input-element"
 				(tagInput)="onTagInput($event)"
 				[suggestions]="tagSuggestions()"/>
-			<button type="button" class="icon-only" [title]="'Toggle \''+TAG_PINNED+'\''" (click)="onTogglePinned()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_PINNED)">push_pin</span></button>
+			<button type="button" class="icon-only" [title]="'Toggle \''+TAG_PINNED+'\''" (click)="onTogglePinned()">
+				<span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_PINNED)">push_pin</span>
+			</button>
 		</div>
 
 	</form>

@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, effect, inject, input } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject, input } from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { Note, TAG_PINNED, UUID, elseEmptyArray } from 'lib';
+import { filter, map, tap } from 'rxjs';
 import { EditFormImpl, NOTE_FORM, NoteForm } from './note-form';
 
 @Component({
@@ -29,26 +30,31 @@ export class NoteFormComponent {
 	constructor() {
 
 		// on incoming 'note' set form values
-		effect(() => {
+		toObservable(this.note).pipe(
 
-			const note = this.note();
-			if (note)
-				this.form.setValues(note);
+			takeUntilDestroyed(),
+			filter((note): note is Note => note !== null),
+			tap(note => this.form.setValues(note))
 
-		});
+		).subscribe();
 
 		// on incoming 'parentId' set form value
-		effect(() => this.form.parentId.setValue(this.parentId()));
+		toObservable(this.parentId).pipe(
+
+			takeUntilDestroyed(),
+			filter((id): id is UUID => id !== null),
+			tap(id => this.form.parentId.setValue(id))
+
+		).subscribe();
 
 		// when user changes parentId using selectbox, update 'tags' form value
-		const changedParentId = toSignal(this.form.parentId.valueChanges, { initialValue: this.parentId() });
-		effect(() => {
+		this.form.parentId.valueChanges.pipe(
 
-			const newParentId = changedParentId();
-			const tags = this.nodes().find(n => n.id === newParentId)?.tags ?? [];
-			this.form.tags.setValue(tags);
+			takeUntilDestroyed(),
+			map(parentId => this.nodes().find(n => n.id === parentId)?.tags ?? []),
+			tap(tags => this.form.tags.setValue(tags))
 
-		});
+		).subscribe();
 
 	}
 
