@@ -5,6 +5,7 @@
 		cdkMenuItem
 		class="icon-only"
 		(click)="onSave()"
+		title="Save Changes"
 		[disabled]="!control.dirty"
 		[cdkMenuItemDisabled]="!control.dirty">
 		<span class="material-symbols-outlined">save</span>
@@ -14,6 +15,7 @@
 	<button
 		cdkMenuItem
 		class="icon-only"
+		title="Close Editor"
 		(click)="onCancel(control.dirty)">
 		<span class="material-symbols-outlined">cancel</span>
 	</button>
@@ -25,6 +27,7 @@
 	<button
 		cdkMenuItem
 		class="icon-only"
+		title="Open Preview"
 		(click)="onPreviewOpen()">
 		<span class="material-symbols-outlined">live_tv</span>
 	</button>
