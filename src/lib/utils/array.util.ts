@@ -1,6 +1,12 @@
 import { UUID } from "lib/constants";
 import { IDBase } from "lib/models";
 
+export function elseEmptyArray<T>(v: T[] | null | undefined): T[] {
+
+	return v ?? [];
+
+}
+
 export function createArray(n: number): number[] {
 
 	return Array.from({ length: n }, (_, i) => i + 1);
