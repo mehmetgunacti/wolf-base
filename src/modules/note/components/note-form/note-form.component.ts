@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, effect, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Note, TAG_PINNED, UUID } from 'lib';
+import { Note, TAG_PINNED, UUID, elseEmptyArray } from 'lib';
 import { EditFormImpl, NOTE_FORM, NoteForm } from './note-form';
-
-function elseEmptyArray<T>(v: T[] | null | undefined): T[] { return v ?? []; }
 
 @Component({
 	selector: 'app-note-form',
