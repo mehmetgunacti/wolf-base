@@ -1,6 +1,9 @@
 @if (note$ | async; as note) {
 
-	<app-note [note]="note" />
+	<w-portal>
+		<div>{{note.name}}</div>
+	</w-portal>
+	<!-- <app-note [note]="note" /> -->
 	<div editor>
 
 		<w-markdown-editor [control]="fcContent" (save)="onSave()" (saveClose)="onSaveClose()" (cancel)="onCancel(note.id)" name="Content"/>

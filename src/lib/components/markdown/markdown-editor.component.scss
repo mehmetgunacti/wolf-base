@@ -82,6 +82,7 @@ $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 &
 		padding		: var(--gap-xxs);
 		flex-wrap	: nowrap;
 		overflow-x	: auto;
+		@include mx-webkit-scrollbar;
 
 		& button[aria-expanded=true] {
 
