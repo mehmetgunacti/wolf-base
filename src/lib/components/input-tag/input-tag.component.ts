@@ -14,9 +14,9 @@ export class InputTagComponent implements OnInit {
 
 	@Input() control: FormControl<string[]> = new FormControl<string[]>([], { nonNullable: true });
 	@Input() name: string = '';
-	@Input() set suggestions(arr: string[]) {
+	@Input() set suggestions(arr: string[] | null) {
 
-		this._suggestions.next(arr);
+		this._suggestions.next(arr ?? []);
 
 	}
 
