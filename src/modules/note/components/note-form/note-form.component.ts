@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, inject } from '@angular/core';
 import { Note, TAG_PINNED, UUID } from 'lib';
-import { Subject } from 'rxjs';
+import { Subject, Subscription, filter, map, startWith, tap } from 'rxjs';
 import { EditFormImpl, NOTE_FORM, NoteForm } from './note-form';
 
 @Component({
@@ -24,23 +24,38 @@ export class NoteFormComponent implements OnInit, OnChanges, OnDestroy {
 	@Output() tagInput: EventEmitter<string | null> = new EventEmitter();
 
 	form: NoteForm = inject(NOTE_FORM);
-	tagSuggestions$: Subject<string[]>;
+	tagSuggestions$: Subject<string[]> = new Subject<string[]>();
+	subscription: Subscription = new Subscription();
 
-	constructor() {
+	ngOnInit(): void {
 
-		this.tagSuggestions$ = new Subject<string[]>();
+		if (this.parentId) // on ':id/new' page
+			this.form.parentId.setValue(this.parentId);
+
+		this.subscription.add(
+
+			this.form.parentId.valueChanges
+				.pipe(
+
+					startWith(this.parentId),
+					map(parentId => parentId ? this.nodes?.find(n => n.id === parentId)?.tags ?? [] : [])
+
+				)
+				.subscribe(
+					tags => this.form.tags.setValue(tags)
+				)
+
+		);
 
 	}
-
-	ngOnInit(): void { }
 
 	ngOnChanges(changes: SimpleChanges): void {
 
 		const note: Note = changes['note']?.currentValue;
-		if (note) // when on edit page with ':id' in url
+		if (note) { // on ':id/edit' page
+			console.log(note);
 			this.form.setValues(note);
-		else if (this.parentId) // when on 'new' page with ':id' in url
-			this.form.parentId.setValue(this.parentId);
+		}
 
 		const tagSuggestions: string[] = changes['tagSuggestions']?.currentValue;
 		if (tagSuggestions)
@@ -48,7 +63,11 @@ export class NoteFormComponent implements OnInit, OnChanges, OnDestroy {
 
 	}
 
-	ngOnDestroy(): void { }
+	ngOnDestroy(): void {
+
+		this.subscription.unsubscribe();
+
+	}
 
 	onSave(): void {
 
