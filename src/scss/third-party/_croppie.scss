@@ -3,9 +3,9 @@
 	border-radius	: var(--border-radius-sm);
 	padding			: var(--gap-sm);
 
-	&:focus {
+	&:focus-visible {
 
-		@include mx-outline(!important);
+		@include mx-outline((important: !important));
 		// outline			: 1px solid red !important; // fn-hsl(focus) !important;
 		// outline-style	: solid !important;
 
@@ -17,10 +17,10 @@
 .cr-image,
 .cr-viewport {
 
-	&:focus,
+	&:focus-visible,
 	&:focus-within {
 
-		@include mx-outline;
+		@include mx-outline((important: !important));
 
 	}
 

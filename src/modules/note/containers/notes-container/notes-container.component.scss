@@ -58,10 +58,10 @@
 
 			}
 
-			&:focus,
+			// &:focus,
 			&:focus-visible {
 
-				outline				: 3px solid fn-hsl(focus);
+				@include mx-outline;
 
 			}
 

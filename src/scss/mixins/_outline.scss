@@ -1,5 +1,11 @@
-@mixin mx-outline($important: "") {
+@mixin mx-outline($options: ()) {
 
-	outline	: 3px solid fn-hsl(focus) #{$important};
+
+	$important	: map-get($options, "important");
+	$color		: map-get($options, "color");
+	$color		: "focus" !default;
+
+	outline		: 2px solid fn-hsl($color) #{$important};
+	box-shadow	: 0 0 8px fn-hsl($color);
 
 }

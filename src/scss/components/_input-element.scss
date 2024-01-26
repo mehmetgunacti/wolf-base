@@ -16,7 +16,6 @@
 
 	min-height				: var(--input-element-height);
 
-	&:focus,
 	&:focus-visible {
 
 		@include mx-outline;

@@ -75,7 +75,7 @@
 			cursor			: pointer;
 
 			&:hover,
-			&:focus,
+			// &:focus,
 			&:focus-visible {
 
 				@include mx-outline;
