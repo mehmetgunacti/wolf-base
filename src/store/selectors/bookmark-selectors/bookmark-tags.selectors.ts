@@ -84,12 +84,12 @@ export const selBM_filteredBookmarks = createSelector(
 		// Filter bookmarks based on search term
 		const result = filteredBookmarks.filter(bookmark => {
 
-			const { name, title } = bookmark;
+			const { name, title, tags } = bookmark;
 			const lowerCaseName = name.toLowerCase();
 			const lowerCaseTitle = title.toLowerCase();
 
 			// Check if any of the search words is present in the bookmark's name or title
-			return searchWords.every(word => lowerCaseName.includes(word) || lowerCaseTitle.includes(word));
+			return searchWords.every(word => lowerCaseName.includes(word) || lowerCaseTitle.includes(word) || tags.some(tag => tag.includes(word)));
 
 		});
 
