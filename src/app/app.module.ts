@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { RouterModule, withViewTransitions } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -32,7 +32,7 @@ import { NgProgressModule } from 'ngx-progressbar';
 		BrowserModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
-		RouterModule.forRoot(config.routes),
+		RouterModule.forRoot(config.routes, { enableViewTransitions: true }),
 		StoreModule.forRoot(store.reducers, { metaReducers: store.metaReducers }),
 		EffectsModule.forRoot(store.effects),
 		StoreDevtoolsModule.instrument(),
