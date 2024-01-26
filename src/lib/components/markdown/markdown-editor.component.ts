@@ -1,6 +1,7 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { CdkMenuTrigger } from '@angular/cdk/menu';
+import { CdkMenuBar, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, tap, timer } from 'rxjs';
@@ -18,8 +19,8 @@ import { UndoCache } from './undo-cache.util';
 export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	@ViewChild('editor') editor!: ElementRef<HTMLTextAreaElement>;
-	@ViewChild('btnSaveMenu') btnSaveMenu!: ElementRef<HTMLButtonElement>;
 	@ViewChild(CdkMenuTrigger) trigger!: CdkMenuTrigger;
+	@ViewChild(CdkMenuBar) menuBar!: CdkMenuBar;
 	@ViewChild('previewTemplate') previewTemplate!: TemplateRef<HTMLDivElement>;
 
 	@Input({ required: true }) control!: FormControl<string>;
@@ -30,7 +31,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 	@Output() saveClose: EventEmitter<string> = new EventEmitter();
 	@Output() cancel: EventEmitter<void> = new EventEmitter();
 
-	hasFocus: boolean = false;
+	hasFocus: WritableSignal<boolean> = signal(false);
 	undoCache: UndoCache = new UndoCache();
 	actions: ButtonActions = new ButtonActions();
 	btnImageShake: WritableSignal<boolean> = signal(false);
@@ -39,6 +40,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 	private dialogService: Dialog = inject(Dialog);
 	private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
 	private clipboardService: ClipboardService = inject(ClipboardService);
+	private focusMonitor: FocusMonitor = inject(FocusMonitor);
 
 	private subscriptions: Subscription = new Subscription();
 
@@ -148,8 +150,8 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 		} else if (event.key === 'Escape') {
 
-			this.hasFocus = false;
-			this.btnSaveMenu.nativeElement.focus();
+			this.hasFocus.set(false);
+			this.menuBar.focusFirstItem();
 
 		} else if (event.key === 'Enter') {
 

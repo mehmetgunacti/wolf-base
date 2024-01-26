@@ -1,290 +1,264 @@
 <div buttons cdkMenuBar>
 
-	<div buttons_1>
+	<!-- SAVE BUTTON -->
+	<button
+		cdkMenuItem
+		class="icon-only"
+		(click)="onSave()"
+		[disabled]="!control.dirty"
+		[cdkMenuItemDisabled]="!control.dirty">
+		<span class="material-symbols-outlined">save</span>
+	</button>
 
-		<!-- SAVE MENU -->
-		<button
-			#btnSaveMenu
-			cdkMenuItem
-			class="icon-only"
-			[cdkMenuTriggerFor]="save_menu">
-			<span class="material-symbols-outlined">menu</span>
-			<span>Menu</span>
-		</button>
+	<!-- CANCEL BUTTON -->
+	<button
+		cdkMenuItem
+		class="icon-only"
+		(click)="onCancel(control.dirty)">
+		<span class="material-symbols-outlined">cancel</span>
+	</button>
 
-		<!-- DIVIDER -->
-		<div class="v-divider"></div>
+	<!-- DIVIDER -->
+	<div class="v-divider"></div>
 
-		<!-- UNDO BUTTON -->
-		<button
-			cdkMenuItem
-			class="icon-only"
-			(click)="onUndo()"
-			title="Undo"
-			[disabled]="!undoCache.canUndo()">
-			<span class="material-symbols-outlined">undo</span>
-		</button>
+	<!-- PREVIEW BUTTON -->
+	<button
+		cdkMenuItem
+		class="icon-only"
+		(click)="onPreviewOpen()">
+		<span class="material-symbols-outlined">live_tv</span>
+	</button>
 
-		<!-- REDO BUTTON -->
-		<button
-			cdkMenuItem
-			class="icon-only"
-			(click)="onRedo()"
-			title="Redo"
-			[disabled]="!undoCache.canRedo()">
-			<span class="material-symbols-outlined">redo</span>
-		</button>
+	<!-- DIVIDER -->
+	<div class="v-divider"></div>
 
-		<!-- PREVIEW BUTTON -->
-		<button
-			style="margin-left: auto;"
-			cdkMenuItem
-			class="icon-only"
-			(click)="onPreviewOpen()">
-			<span class="material-symbols-outlined">live_tv</span>
-			<span style="display: var(--display-element);">Preview</span>
-		</button>
+	<!-- UNDO BUTTON -->
+	<button
+		cdkMenuItem
+		class="icon-only"
+		(click)="onUndo()"
+		title="Undo"
+		[disabled]="!undoCache.canUndo()"
+		[cdkMenuItemDisabled]="!undoCache.canUndo()">
+		<span class="material-symbols-outlined">undo</span>
+	</button>
 
-	</div>
-	<div buttons_2 cdkScrollable>
-		<div>
+	<!-- REDO BUTTON -->
+	<button
+		cdkMenuItem
+		class="icon-only"
+		(click)="onRedo()"
+		title="Redo"
+		[disabled]="!undoCache.canRedo()"
+		[cdkMenuItemDisabled]="!undoCache.canRedo()">
+		<span class="material-symbols-outlined">redo</span>
+	</button>
 
-			<!-- HEADING BUTTON -->
-			<button
-				class="icon-only"
-				[cdkMenuTriggerFor]="format_heading"
-				title="Heading"
-				cdkMenuItem>
-				<span class="material-symbols-outlined">format_h1</span>
-			</button>
+	<!-- DIVIDER -->
+	<div class="v-divider"></div>
 
-			<!-- DIVIDER -->
-			<div class="v-divider"></div>
+	<!-- HEADING BUTTON -->
+	<button
+		class="icon-only"
+		[cdkMenuTriggerFor]="format_heading"
+		title="Heading"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_h1</span>
+	</button>
 
-			<div>
+	<!-- DIVIDER -->
+	<div class="v-divider"></div>
 
-				<!-- BOLD BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addBold(editor))"
-					title="Bold"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_bold</span>
-				</button>
+	<!-- BOLD BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addBold(editor))"
+		title="Bold"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_bold</span>
+	</button>
 
-				<!-- ITALIC BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addItalic(editor))"
-					title="Italic"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_italic</span>
-				</button>
+	<!-- ITALIC BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addItalic(editor))"
+		title="Italic"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_italic</span>
+	</button>
 
-				<!-- STRIKETHROUGH BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addStrikethrough(editor))"
-					title="Strikethrough"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_strikethrough</span>
-				</button>
+	<!-- STRIKETHROUGH BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addStrikethrough(editor))"
+		title="Strikethrough"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_strikethrough</span>
+	</button>
 
-				<!-- HIGHLIGHT BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addHighlight(editor))"
-					title="Highlight"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_ink_highlighter</span>
-				</button>
+	<!-- HIGHLIGHT BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addHighlight(editor))"
+		title="Highlight"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_ink_highlighter</span>
+	</button>
 
-			</div>
+	<!-- DIVIDER -->
+	<div class="v-divider"></div>
 
-			<!-- DIVIDER -->
-			<div class="v-divider"></div>
+	<!-- ALIGN CENTER BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addAlignCenter(editor))"
+		title="Align Center"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_align_center</span>
+	</button>
 
-			<div>
+	<!-- ALIGN RIGHT BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addAlignRight(editor))"
+		title="Align Right"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_align_right</span>
+	</button>
 
-				<!-- ALIGN CENTER BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addAlignCenter(editor))"
-					title="Align Center"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_align_center</span>
-				</button>
+	<!-- ALIGN JUSTIFY BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addAlignJustify(editor))"
+		title="Align Justify"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_align_justify</span>
+	</button>
 
-				<!-- ALIGN RIGHT BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addAlignRight(editor))"
-					title="Align Right"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_align_right</span>
-				</button>
+	<!-- DIVIDER -->
+	<div class="v-divider"></div>
 
-				<!-- ALIGN JUSTIFY BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addAlignJustify(editor))"
-					title="Align Justify"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_align_justify</span>
-				</button>
+	<!-- SUB BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addSub(editor))"
+		title="Subscript (H2O)"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">subscript</span>
+	</button>
 
-			</div>
+	<!-- SUP BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addSup(editor))"
+		title="Superscript (E=mc2)"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">superscript</span>
+	</button>
 
-			<!-- DIVIDER -->
-			<div class="v-divider"></div>
+	<!-- DIVIDER -->
+	<div class="v-divider"></div>
 
-			<div>
+	<!-- BULLETED LIST BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addListBulleted(editor))"
+		title="Bulleted List"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_list_bulleted</span>
+	</button>
 
-				<!-- SUB BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addSub(editor))"
-					title="Subscript (H2O)"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">subscript</span>
-				</button>
+	<!-- LIST NUMBERED BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addListNumbered(editor))"
+		title="Numbered List"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_list_numbered</span>
+	</button>
 
-				<!-- SUP BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addSup(editor))"
-					title="Superscript (E=mc2)"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">superscript</span>
-				</button>
+	<!-- DIVIDER -->
+	<div class="v-divider"></div>
 
-			</div>
+	<!-- DECREASE INDENT BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.decreaseIndent(editor))"
+		title="Decrease Indent"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_indent_decrease</span>
+	</button>
 
-		</div>
-		<div>
+	<!-- INCREASE INDENT BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.increaseIndent(editor))"
+		title="Increase Indent"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_indent_increase</span>
+	</button>
 
-			<!-- DIVIDER -->
-			<div class="v-divider" style="display: var(--display-element)"></div>
+	<!-- DIVIDER -->
+	<div class="v-divider"></div>
 
-			<div>
+	<!-- ADD CHECKBOX (TASK) BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addEmptyTask(editor))"
+		title="Task"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">check_box</span>
+	</button>
 
-				<!-- BULLETED LIST BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addListBulleted(editor))"
-					title="Bulleted List"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_list_bulleted</span>
-				</button>
+	<!-- ADD TABLE BUTTON -->
+	<button
+		class="icon-only"
+		[cdkMenuTriggerFor]="table_menu"
+		title="Table"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">table</span>
+	</button>
 
-				<!-- LIST NUMBERED BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addListNumbered(editor))"
-					title="Numbered List"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_list_numbered</span>
-				</button>
+	<!-- CODE BUTTON -->
+	<button
+		class="icon-only"
+		[cdkMenuTriggerFor]="code_menu"
+		title="Code"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">code_blocks</span>
+	</button>
 
-			</div>
+	<!-- ADD BLOCKQUOTE BUTTON -->
+	<button
+		class="icon-only"
+		[cdkMenuTriggerFor]="blockquote_menu"
+		title="Blockquote"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">format_quote</span>
+	</button>
 
-			<!-- DIVIDER -->
-			<div class="v-divider"></div>
+	<!-- DIVIDER -->
+	<div class="v-divider"></div>
 
-			<div>
+	<!-- IMAGE FROM CLIPBOARD BUTTON -->
+	<button
+		#btnImage
+		class="icon-only"
+		(click)="addImage(btnImage)"
+		title="Image from Clipboard"
+		[class.shake]="btnImageShake()"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">image</span>
+	</button>
 
-				<!-- DECREASE INDENT BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.decreaseIndent(editor))"
-					title="Decrease Indent"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_indent_decrease</span>
-				</button>
-
-				<!-- INCREASE INDENT BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.increaseIndent(editor))"
-					title="Increase Indent"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_indent_increase</span>
-				</button>
-
-			</div>
-
-			<!-- DIVIDER -->
-			<div class="v-divider"></div>
-
-			<div>
-
-				<!-- ADD CHECKBOX (TASK) BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addEmptyTask(editor))"
-					title="Task"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">check_box</span>
-				</button>
-
-				<!-- ADD TABLE BUTTON -->
-				<button
-					class="icon-only"
-					[cdkMenuTriggerFor]="table_menu"
-					title="Table"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">table</span>
-				</button>
-
-				<!-- CODE BUTTON -->
-				<button
-					class="icon-only"
-					[cdkMenuTriggerFor]="code_menu"
-					title="Code"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">code_blocks</span>
-				</button>
-
-				<!-- ADD BLOCKQUOTE BUTTON -->
-				<button
-					class="icon-only"
-					[cdkMenuTriggerFor]="blockquote_menu"
-					title="Blockquote"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">format_quote</span>
-				</button>
-
-			</div>
-
-			<!-- DIVIDER -->
-			<div class="v-divider"></div>
-
-			<div>
-
-				<!-- IMAGE FROM CLIPBOARD BUTTON -->
-				<button
-					#btnImage
-					class="icon-only"
-					(click)="addImage(btnImage)"
-					title="Image from Clipboard"
-					[class.shake]="btnImageShake()"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">image</span>
-				</button>
-
-				<!-- TOC BUTTON -->
-				<button
-					class="icon-only"
-					(click)="updateEditor(actions.addToc(editor))"
-					title="Table of Contents"
-					cdkMenuItem>
-					<span class="material-symbols-outlined">toc</span>
-				</button>
-
-			</div>
-
-		</div>
-	</div>
+	<!-- TOC BUTTON -->
+	<button
+		class="icon-only"
+		(click)="updateEditor(actions.addToc(editor))"
+		title="Table of Contents"
+		cdkMenuItem>
+		<span class="material-symbols-outlined">toc</span>
+	</button>
 
 </div>
 
@@ -296,8 +270,8 @@
 		placeholder=""
 		[formControl]="control"
 		[readonly]="readonly"
-		(focus)="hasFocus = true"
-		(blur)="hasFocus = false"
+		(focus)="hasFocus.set(true)"
+		(blur)="hasFocus.set(false)"
 		required></textarea>
 	<label>{{name}}</label>
 	<label class="up right">
@@ -575,45 +549,6 @@
 			</fieldset>
 
 		</div>
-
-	</div>
-
-</ng-template>
-
-<ng-template #save_menu>
-
-	<div class="menu save-menu" cdkMenu>
-
-		<!-- CANCEL BUTTON -->
-		<button
-			cdkMenuItem
-			class="icon-only"
-			(click)="onCancel(control.dirty)">
-			<span class="material-symbols-outlined">cancel</span>
-			<span>Cancel</span>
-		</button>
-
-		<hr>
-
-		<!-- SAVE BUTTON -->
-		<button
-			cdkMenuItem
-			class="icon-only"
-			(click)="onSave()"
-			[disabled]="!control.dirty">
-			<span class="material-symbols-outlined">save</span>
-			<span>Save</span>
-		</button>
-
-		<!-- SAVE & CLOSE BUTTON -->
-		<button
-			cdkMenuItem
-			class="icon-only"
-			(click)="onSave()"
-			[disabled]="!control.dirty">
-			<span class="material-symbols-outlined">save</span>
-			<span>Save & Close</span>
-		</button>
 
 	</div>
 

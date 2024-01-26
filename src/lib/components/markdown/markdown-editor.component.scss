@@ -78,50 +78,15 @@ $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 &
 
 	& > [buttons] {
 
-		@extend %flex-column;
-		container-type	: inline-size;
+		@include mx-flex-center-y;
+		padding		: var(--gap-xxs);
+		flex-wrap	: nowrap;
+		overflow-x	: auto;
 
 		& button[aria-expanded=true] {
 
 			background-color	: fn-hsl(bg-3);
 			transition			: background-color 0s;
-
-		}
-
-		& > [buttons_1] {
-
-			@include mx-flex-end-center;
-			gap			: var(--gap-sm);
-
-			@container (min-width: #{$button-bar-width}) {
-
-				--display-element	: block;
-
-			}
-
-		}
-
-		& > [buttons_2] {
-
-			@include mx-flex-center-y;
-			flex-wrap	: wrap;
-			overflow-x	: auto;
-			@include mx-webkit-scrollbar;
-
-			@container (min-width: #{$button-bar-width}) {
-
-				flex-wrap			: nowrap;
-				--display-element	: block;
-
-			}
-
-			& > div,
-			& > div > div {
-
-				@include mx-flex-center-y;
-				flex-wrap	: nowrap;
-
-			}
 
 		}
 
