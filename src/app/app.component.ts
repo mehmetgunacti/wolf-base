@@ -23,9 +23,6 @@ export class AppComponent {
 	@HostBinding('class.navVisible')
 	navVisible = true;
 
-	@HostBinding('class.ms-windows')
-	isMSWindows = false;
-
 	constructor() {
 
 		this.store
