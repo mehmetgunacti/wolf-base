@@ -32,8 +32,6 @@
 
 	--input-element-height 	: #{$input-element-min-height};
 
-	--scrollbar-width		: 8px;
-
 	@include bigScreen {
 
 		--gap				: 1rem;

@@ -1,32 +1,20 @@
 @mixin mx-webkit-scrollbar {
 
-	&::-webkit-scrollbar {
+	.platform-windows &::-webkit-scrollbar {
 
-		-webkit-appearance	: none;
-		width				: 0px;
-		background			: transparent;
+		width						: 8px;
+		height						: 8px;
+		border-radius				: var(--border-radius-sm);
+		background-color			: fn-hsl(bg-6 , (lig: "+ 4%", alp: "0.4"));
+		transition					: $bg-transition;
 
 	}
 
-	@include bigScreen {
+	.platform-windows &::-webkit-scrollbar-thumb {
 
-		&::-webkit-scrollbar {
-
-			width						: var(--scrollbar-width);
-			height						: var(--scrollbar-width);
-			border-radius				: var(--border-radius-sm);
-			background-color			: fn-hsl(bg-3, (lig: "+ 4%", alp: "0.4"));
-			transition					: $bg-transition;
-
-		}
-
-		&::-webkit-scrollbar-thumb {
-
-			border-radius				: var(--border-radius);
-			background-color			: fn-hsl(bg-3, (lig: "- 2%"));
-			transition					: $bg-transition;
-
-		}
+		border-radius				: var(--border-radius);
+		background-color			: fn-hsl(bg-6);
+		transition					: $bg-transition;
 
 	}
 

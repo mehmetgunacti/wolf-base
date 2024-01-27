@@ -80,7 +80,7 @@ $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 &
 
 		@include mx-flex-center-y;
 		padding		: var(--gap-xxs);
-		flex-wrap	: nowrap;
+		flex-wrap	: wrap;
 		overflow-x	: auto;
 		@include mx-webkit-scrollbar;
 
@@ -107,8 +107,8 @@ $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 &
 			tab-size	: 4;
 			white-space	: pre;
 			overflow	: auto;
+			cursor		: auto;
 			@include mx-webkit-scrollbar;
-
 
 			&:valid + label,
 			&:focus + label {

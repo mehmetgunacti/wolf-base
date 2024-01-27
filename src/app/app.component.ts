@@ -5,6 +5,7 @@ import { delay, of } from 'rxjs';
 import { selCoreIsSidebarVisible } from 'store/selectors/core-ui.selectors';
 import { splashTrigger } from './components/splash-screen/splash-screen.animation';
 import { environment } from 'environments/environment';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
 	selector: 'app-root',
@@ -17,9 +18,13 @@ export class AppComponent {
 	splashVisible: WritableSignal<boolean> = signal(true);
 
 	private store: Store = inject(Store);
+	private document: Document = inject(DOCUMENT);
 
 	@HostBinding('class.navVisible')
 	navVisible = true;
+
+	@HostBinding('class.ms-windows')
+	isMSWindows = false;
 
 	constructor() {
 
@@ -33,6 +38,11 @@ export class AppComponent {
 		of(false)
 			.pipe(delay(environment.splash)) // splash screen visible for n ms
 			.subscribe(() => this.splashVisible.set(false));
+
+		// on Windows add 'platform-windows' class to <body>
+		const isMSWindows = (this.document.defaultView?.navigator as any)?.userAgentData?.platform === 'Windows';
+		if (isMSWindows)
+			this.document.body.classList.add('platform-windows');
 
 	}
 

@@ -15,7 +15,20 @@ export class CoreThemeEffects {
 
 		() => this.store.select(selCoreTheme).pipe(
 
-			tap(theme => this.document.body.className = theme ?? '')
+			// replace 'theme-' class from <body>
+			tap(theme => {
+
+				const list: string[] = [theme];
+				this.document.body.classList.forEach(v => {
+
+					if (!v.startsWith('theme-'))
+						list.push(v);
+
+				});
+				this.document.body.className = list.join(' ');
+
+			})
+
 
 		),
 		{ dispatch: false }
