@@ -18,6 +18,7 @@ kbd {
 	border-radius		: var(--border-radius-sm);
 	padding				: var(--gap-xs) var(--gap-sm);
 	background-color	: fn-hsl(bg-2, (lig: "- 3%"));
+	transition			: $bg-transition;
 
 }
 
@@ -31,7 +32,7 @@ pre {
 	margin-bottom		: var(--gap);
 
 	@include mx-webkit-scrollbar;
-	transition	: $bg-transition;
+	transition			: $bg-transition;
 
 	& > code {
 
