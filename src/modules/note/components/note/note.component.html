@@ -48,15 +48,18 @@
 	<div note_children>
 
 		<div note_nested>Child Notes</div>
-		<a	*ngFor="let note of children"
-			[routerLink]="['/notes', note.id]"
-			tabindex="0"
-			[style.margin-left.px]="15">
+		@for (note of children; track note) {
 
-			<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
-			<span>{{ note.name }}</span>
+			<a	[routerLink]="['/notes', note.id]"
+				tabindex="0"
+				[style.margin-left.px]="15">
 
-		</a>
+				<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
+				<span>{{ note.name }}</span>
+
+			</a>
+
+		}
 
 	</div>
 

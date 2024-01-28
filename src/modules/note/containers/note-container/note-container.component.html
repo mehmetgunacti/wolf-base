@@ -1,66 +1,66 @@
 @if (note$ | async; as note) {
 
-<w-portal>
+	<w-portal>
 
-	<button
-		class="icon-only"
-		[cdkMenuTriggerFor]="menu">
-		<span class="material-symbols-outlined">menu_open</span>
-	</button>
+		<button
+			class="icon-only"
+			[cdkMenuTriggerFor]="menu">
+			<span class="material-symbols-outlined">menu_open</span>
+		</button>
 
-	<ng-template #menu>
+		<ng-template #menu>
 
-		<div class="menu" cdkMenu>
+			<div class="menu" cdkMenu>
 
-			<button
-				cdkMenuItem
-				class="icon-only align-left"
-				[routerLink]="['/notes', note.id, 'new' ]">
-				<span class="material-symbols-outlined">post_add</span> Child Note
-			</button>
+				<button
+					cdkMenuItem
+					class="icon-only align-left"
+					[routerLink]="['/notes', note.id, 'new' ]">
+					<span class="material-symbols-outlined">post_add</span> Child Note
+				</button>
 
-			<hr>
+				<hr>
 
-			<button
-				cdkMenuItem
-				class="icon-only align-left"
-				[routerLink]="['/notes', note.id, 'edit' ]">
-				<span class="material-symbols-outlined">edit</span> Edit Note
-			</button>
+				<button
+					cdkMenuItem
+					class="icon-only align-left"
+					[routerLink]="['/notes', note.id, 'edit' ]">
+					<span class="material-symbols-outlined">edit</span> Edit Note
+				</button>
 
-			<button
-				cdkMenuItem
-				class="icon-only align-left"
-				[routerLink]="['/notes', note.id, 'content', 'edit' ]">
-				<span class="material-symbols-outlined">edit_note</span> {{ (content$ | async) ? 'Edit' : 'Add '}} Content
-			</button>
+				<button
+					cdkMenuItem
+					class="icon-only align-left"
+					[routerLink]="['/notes', note.id, 'content', 'edit' ]">
+					<span class="material-symbols-outlined">edit_note</span> {{ (content$ | async) ? 'Edit' : 'Add '}} Content
+				</button>
 
-			<hr>
+				<hr>
 
-			<button
-				cdkMenuItem
-				class="icon-only align-left"
-				[routerLink]="['/logs', note.id]">
-				<span class="material-symbols-outlined">history</span> View Logs
-			</button>
+				<button
+					cdkMenuItem
+					class="icon-only align-left"
+					[routerLink]="['/logs', note.id]">
+					<span class="material-symbols-outlined">history</span> View Logs
+				</button>
 
-			<button
-				cdkMenuItem
-				class="icon-only align-left"
-				(click)="onRemove(note.id)">
-				<span class="material-symbols-outlined">delete</span> Remove Note
-			</button>
+				<button
+					cdkMenuItem
+					class="icon-only align-left"
+					(click)="onRemove(note.id)">
+					<span class="material-symbols-outlined">delete</span> Remove Note
+				</button>
 
-		</div>
+			</div>
 
-	</ng-template>
+		</ng-template>
 
-</w-portal>
+	</w-portal>
 
-<app-note
-	[note]="note"
-	[parents]="(parents$ | async) ?? []"
-	[children]="(children$ | async) ?? []" />
+	<app-note
+		[note]="note"
+		[parents]="(parents$ | async) ?? []"
+		[children]="(children$ | async) ?? []" />
 
 	<app-note-content [note]="note" [content]="content$ | async" />
 
