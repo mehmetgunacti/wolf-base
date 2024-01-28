@@ -1,41 +1,15 @@
 @import 'helper';
 @import 'variables';
 @import 'mixins';
+@import 'components';
 
 :host {
 
-	@include mx-component();
+	@include mx-card;
 	@include mx-responsive;
 	@include mx-flex-column;
+
 	gap		: var(--gap);
-
-	& > header {
-
-		@include mx-flex-space-between-center;
-
-		& > [card_title] {
-
-			@include mx-flex-center-y;
-			padding			: var(--gap-sm);
-			font-size		: var(--font-size-h2);
-			font-weight		: bold;
-
-		}
-
-		& > [card_buttons] {
-
-			@include mx-flex-center-y;
-
-		}
-
-		& > [card_title]:empty,
-		& > [card_buttons]:empty {
-
-			display			: none;
-
-		}
-
-	}
 
 	& > main {
 

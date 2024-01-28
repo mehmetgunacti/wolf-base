@@ -12,11 +12,19 @@
 
 	& > header {
 
+		@include mx-flex-space-between-start;
+
 		& > [card_title] {
 
 			display			: block;
 			margin-bottom	: var(--gap-xl);
 			@include mx-h3;
+
+		}
+
+		& > [card_buttons] {
+
+			@include mx-flex-center-y;
 
 		}
 

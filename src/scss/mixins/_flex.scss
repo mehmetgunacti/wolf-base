@@ -44,6 +44,14 @@
 
 }
 
+@mixin mx-flex-space-between-start {
+
+	display				: flex;
+	align-items			: flex-start;
+	justify-content		: space-between;
+
+}
+
 @mixin mx-flex-start-center {
 
 	display			: flex;
