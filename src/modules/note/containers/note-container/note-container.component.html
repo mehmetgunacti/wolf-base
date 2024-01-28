@@ -70,13 +70,19 @@
 
 } @else {
 
-	<div class="empty">
-		<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No note available</span>
-		<button
-			class="icon-only"
-			[routerLink]="['/notes', 'new' ]">
-			<span class="material-symbols-outlined">post_add</span> Add Note
-		</button>
+	<div class="card darker">
+
+		<div class="empty">
+
+			<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No note available</span>
+			<button
+				class="icon-only"
+				[routerLink]="['/notes', 'new' ]">
+				<span class="material-symbols-outlined">post_add</span> Add Note
+			</button>
+
+		</div>
+
 	</div>
 
 }
