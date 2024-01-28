@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, InputSignal, input } from '@angular/core';
 import { Note, NoteContent } from 'lib/models';
 
 @Component({
@@ -9,7 +9,7 @@ import { Note, NoteContent } from 'lib/models';
 })
 export class NoteContentComponent {
 
-	@Input() note: Note | null | undefined;
-	@Input() content: NoteContent | null | undefined;
+	note: InputSignal<Note | null> = input.required();
+	content: InputSignal<NoteContent | null> = input.required();
 
 }

@@ -62,7 +62,11 @@
 		[parents]="(parents$ | async) ?? []"
 		[children]="(children$ | async) ?? []" />
 
-	<app-note-content [note]="note" [content]="content$ | async" />
+	@if (content$ | async; as content) {
+
+		<app-note-content [note]="note" [content]="content" />
+
+	}
 
 } @else {
 
