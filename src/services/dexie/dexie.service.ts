@@ -40,13 +40,13 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 	}
 
-	private async dump(repositoryname: LocalRepositoryNames): Promise<Record<string, string>> {
+	async dump<T = any>(repoName: LocalRepositoryNames): Promise<Record<string, T>> {
 
-		const Repository = this.db.table(repositoryname);
+		const Repository = this.db.table(repoName);
 		const data = Repository.toCollection();
-		const result: Record<string, string> = {};
+		const result: Record<string, any> = {};
 		await data.each(
-			(obj: any, cursor) => result[cursor.key.toString()] = JSON.stringify(obj, null, '\t')
+			(obj: any, cursor) => result[cursor.key.toString()] = obj // JSON.stringify(obj, null, '\t')
 		);
 		return result;
 

@@ -1,17 +1,11 @@
 import { AsyncZippable, FlateError, zip } from "fflate";
 import * as FileSaver from 'file-saver-es';
-import { IDBase } from "lib/models";
+import { LocalRepositoryNames } from 'lib/constants';
 import { LocalRepositoryService } from "lib/services";
-import { Observable, combineLatest, map, switchMap } from 'rxjs';
+import { Observable, concatMap, delay, filter, from, map, switchMap, toArray } from 'rxjs';
 import { sleep } from "./helper.tool";
 
-const toUint8Array = <T extends IDBase>(data: T[]): Uint8Array => {
-
-	const content: string[] = data.map(item => JSON.stringify(item));
-	const json = '[\r\n' + content.join('\r\n') + ',\r\n]';
-	return new TextEncoder().encode(json);
-
-}
+const encode = <T>(data: Record<string, T>): Uint8Array => new TextEncoder().encode(JSON.stringify(data, null, '\t'));
 
 export class BackupDatabase {
 
@@ -19,14 +13,20 @@ export class BackupDatabase {
 
 	execute(): Observable<void> {
 
-		return combineLatest([
-			this.localRepository.bookmarks.list(),
-			this.localRepository.bookmarks.listDeletedItems()
-		]).pipe(
-			map(([bookmarks, bookmark_trash]) => ({
-				'bookmark.json': toUint8Array(bookmarks),
-				'bookmark_deleted.json': toUint8Array(bookmark_trash)
-			})),
+		return from(Object.values(LocalRepositoryNames)).pipe(
+
+			filter(name => name !== LocalRepositoryNames.configuration),
+			concatMap(name =>
+
+				// return tuple [filename, uint8array]
+				from(this.localRepository.dump(name)).pipe(
+					map((dump): [string, Uint8Array] => [`${name}.json`, encode(dump)]),
+					delay(100)
+				)
+
+			),
+			toArray(),
+			map(a => a.reduce((p, c) => { p[c[0]] = c[1]; return p; }, {} as AsyncZippable)),
 			switchMap((zippable: AsyncZippable) => new Promise<void>((resolve, reject) => {
 
 				zip(zippable, { level: 9 }, async (err: FlateError | null, data: Uint8Array) => {
@@ -42,8 +42,8 @@ export class BackupDatabase {
 					const content: Blob = new Blob([data], { type: 'application/zip' });
 
 					// save zip file
-					FileSaver.saveAs(content, `backup_${new Date().toISOString()}.zip`);
-					await sleep(1000);
+					FileSaver.saveAs(content, `wolf-base_${new Date().toISOString()}.zip`);
+					await sleep(500);
 					resolve();
 
 				});

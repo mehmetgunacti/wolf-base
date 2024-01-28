@@ -1,4 +1,4 @@
-import { Entity, EntityName, LocalRepositoryService, WolfEntity } from '@lib';
+import { Entity, EntityName, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository } from 'lib/repositories/local';
 import { NotesLocalRepository } from 'lib/repositories/local/note.repository';
 import { MockBookmarksLocalRepositoryImpl, MockConfigurationLocalRepositoryImpl, MockLogsLocalRepositoryImpl } from './tables';
@@ -24,6 +24,10 @@ export class MockLocalRepositoryService implements LocalRepositoryService {
 		}
 		throw Error('Unknown entity');
 
+	}
+
+	dump<T = any>(repoName: LocalRepositoryNames): Promise<Record<string, T>> {
+		throw new Error('Method not implemented.');
 	}
 
 }
