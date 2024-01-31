@@ -63,7 +63,7 @@ export class NoteFormComponent {
 		if (this.form.isInvalid())
 			return;
 
-		const note: Note = { ...this.form.value, modified: new Date().toUTCString() };
+		const note: Note = { ...this.form.value, modified: new Date().toISOString() };
 		if (note.id)
 			this.update.emit({ id: note.id, note });
 		else

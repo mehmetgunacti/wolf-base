@@ -8,13 +8,11 @@ const EMPTY_PROPS: EditorProperties = {
 	eIndex: 0
 }
 
-const LS_MAX_SAVE_COUNT = 50;
+const LS_MAX_SAVE_COUNT = 500; // 500 / 10 = 50 ls entries
 const LS_SAVE_THRESHOLD = 10;
-const LS_PREFIX = 'nc_editor_';
+const LS_PREFIX = 'note_content_editor_';
 
 export class UndoCache {
-
-
 
 	// signals
 	private stack: WritableSignal<EditorProperties[]> = signal([EMPTY_PROPS]);
@@ -53,7 +51,7 @@ export class UndoCache {
 
 		this.counter.update(c => c + 1);
 		if (this.counter() % LS_SAVE_THRESHOLD === 0)
-			localStorage.setItem(`${LS_PREFIX}${this.counter()}`, content);
+			localStorage.setItem(`${LS_PREFIX}${this.counter()}_${new Date().toISOString()}`, content);
 
 		// LS_MAX_SAVE_COUNT localStorage entries
 		if (this.counter() > LS_MAX_SAVE_COUNT)

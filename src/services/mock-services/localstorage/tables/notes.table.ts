@@ -26,7 +26,7 @@ export class MockNotesLocalRepositoryImpl implements NotesLocalRepository {
 			name: '',
 			parentId: null,
 			tags: [],
-			modified: new Date().toUTCString(),
+			modified: new Date().toISOString(),
 			...item,
 			id: uuidv4()
 
