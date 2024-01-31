@@ -1,4 +1,18 @@
-<w-menu [items]="(menuItems$ | async) ?? []"></w-menu>
+<div nav-menu>
+
+	@for (item of menuItems$ | async; track item) {
+
+		<a  [routerLink]="item.url" [queryParams]="item.queryParams" routerLinkActive="active" [routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }">
+
+			<span icon class="material-symbols-outlined">{{item.icon}}</span>
+			<span label>{{ item.label }}</span>
+			<div badge><span>{{ item.badge }}</span></div>
+
+		</a>
+
+	}
+
+</div>
 <div bottom-buttons>
 
 	<!-- SETTINGS BUTTON -->
@@ -11,16 +25,33 @@
 		title="Settings"><span class="material-symbols-outlined">settings</span></button>
 
 	<!-- CLOUD TASKS BUTTON -->
-	<div class="badge-container" *ngIf="(cloudTasks$ | async) as cloudTasks">
+	<!-- @if ((cloudTasks$ | async); as cloudTasks) {
+
 		<button
 			class="icon-only rounded"
 			routerLink="/cloud"
 			routerLinkActive="active"
 			[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
-			[title]="cloudTasks.length > 0 ? cloudTasks.length + ' syncable items available' : 'Cloud'"><span class="material-symbols-outlined">cloud_sync</span>
+			[title]="cloudTasks.length > 0 ? cloudTasks.length + ' syncable items available' : 'Cloud'"
+			[attr.data-badge]="cloudTasks.length"><span class="material-symbols-outlined">cloud_sync</span>
 		</button>
-		<span *ngIf="cloudTasks.length > 0" class="badge">{{ cloudTasks.length }}</span>
-	</div>
+
+	} -->
+
+	<!-- CLOUD TASKS BUTTON -->
+	@if ((cloudTasks$ | async); as cloudTasks) {
+
+		<button
+			class="icon-only rounded"
+			routerLink="/cloud"
+			routerLinkActive="active"
+			[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
+			[title]="cloudTasks.length > 0 ? cloudTasks.length + ' syncable items available' : 'Cloud'">
+			<span class="material-symbols-outlined">cloud_sync</span>
+			<span class="badge">{{cloudTasks.length}}</span>
+		</button>
+
+	}
 
 	<!-- DATABASE BUTTON -->
 	<button

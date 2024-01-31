@@ -7,6 +7,7 @@ import { BookmarkSyncService, SyncService } from 'lib/services/sync-service.inte
 import { CustomErrorHandler, DexieLocalRepositoryServiceImpl, FirestoreRemoteRepositoryServiceImpl } from 'services';
 import { BookmarkSyncServiceImpl } from 'services/bookmark-sync.service';
 import { SyncServiceImpl } from 'services/sync.service';
+import * as coreActions from 'store/actions/core.actions';
 import * as bmActions from 'store/actions/bookmark.actions';
 import * as noteContentActions from 'store/actions/note-content.actions';
 import * as noteActions from 'store/actions/note.actions';
@@ -62,6 +63,7 @@ const appInitializerFactory = (store: Store) => {
 
 	return () => {
 
+		store.dispatch(coreActions.loadAll());
 		store.dispatch(bmActions.loadAll());
 		store.dispatch(noteActions.loadAll());
 		store.dispatch(noteContentActions.loadAll());

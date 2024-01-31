@@ -1,6 +1,19 @@
 import { UUID } from "lib/constants";
 import { IDBase } from "lib/models";
 
+export function replaceByPrefix(oldValues: string[], prefix: string, newValue: string): string[] {
+
+	const list: string[] = [newValue];
+	oldValues.forEach(v => {
+
+		if (!v.startsWith(prefix))
+			list.push(v);
+
+	});
+	return list;
+
+}
+
 export function elseEmptyArray<T>(v: T[] | null | undefined): T[] {
 
 	return v ?? [];

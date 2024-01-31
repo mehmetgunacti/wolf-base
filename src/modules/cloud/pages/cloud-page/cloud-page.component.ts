@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { closeConflictDialog, startSync } from 'store/actions/cloud.actions';
 import { selCloudConflictDialogTitle, selCloudIsConflictDialogVisible } from 'store/selectors/cloud-ui.selectors';
 import { selCoreIsFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
-import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
+import { selCore_isBigScreen } from 'store/selectors/core-ui.selectors';
 
 @Component({
 	selector: 'app-cloud-page',
@@ -24,7 +24,7 @@ export class CloudPageComponent {
 
 		this.isFirestoreConfigMissing$ = this.store.select(selCoreIsFirestoreConfigMissing);
 		this.isConflictDialogVisible$ = this.store.select(selCloudIsConflictDialogVisible);
-		this.isBigScreen$ = this.store.select(selCoreIsBigScreen);
+		this.isBigScreen$ = this.store.select(selCore_isBigScreen);
 		this.dialogTitle$ = this.store.select(selCloudConflictDialogTitle);
 
 	}

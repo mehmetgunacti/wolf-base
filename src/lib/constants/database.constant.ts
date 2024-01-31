@@ -1,3 +1,4 @@
+import { SidebarState } from './sidebar.constant';
 import { Theme } from './theme.constant';
 
 export enum LocalRepositoryNames {
@@ -38,8 +39,8 @@ export enum CONF_KEYS {
 
 export class DEFAULT_CONF_VALUES {
 
-	static theme = Theme.DARK;
-	static sidebarVisible = true;
-	static syncWorkerActive = true;
+	static theme: Theme = Theme.DARK;
+	static sidebarState: SidebarState = SidebarState.FULL;
+	static syncWorkerActive: boolean = true;
 
 }

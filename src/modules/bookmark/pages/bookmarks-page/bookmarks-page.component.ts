@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { fromClipboard, openAddBookmarkDialog } from 'store/actions/bookmark.actions';
 import { selBookmarkShaking } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
-import { selCoreIsBigScreen } from 'store/selectors/core-ui.selectors';
+import { selCore_isBigScreen } from 'store/selectors/core-ui.selectors';
 
 @Component({
 	selector: 'app-bookmarks-page',
@@ -20,7 +20,7 @@ export class BookmarksPageComponent {
 
 	constructor() {
 
-		this.isBigScreen$ = this.store.select(selCoreIsBigScreen);
+		this.isBigScreen$ = this.store.select(selCore_isBigScreen);
 		this.isShaking$ = this.store.select(selBookmarkShaking);
 
 	}

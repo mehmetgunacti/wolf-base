@@ -1,4 +1,6 @@
-import { createAction, props } from '@ngrx/store';
 import { Configuration } from '@lib';
+import { createAction, props } from '@ngrx/store';
 
-export const confChanged = createAction('[Configuration] Configuration Changed', props<{ configuration: Configuration }>());
+export const loadAll = createAction('[Configuration] Load All');
+export const loadAllSuccess = createAction('[Configuration] Load All Success', props<{ configuration: Configuration }>());
+

@@ -1,30 +1,42 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
-import { createEffect } from '@ngrx/effects';
+import { LocalRepositoryService, replaceByPrefix } from '@lib';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs/operators';
-import { selCoreTheme } from 'store/selectors/core-ui.selectors';
+import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { switchMap, tap } from 'rxjs/operators';
+import { setTheme } from 'store/actions/core-ui.actions';
+import { selCore_theme } from 'store/selectors/core-ui.selectors';
 
 @Injectable()
 export class CoreThemeEffects {
 
+	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
+	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 	private document: Document = inject(DOCUMENT);
 
 	setTheme$ = createEffect(
 
-		() => this.store.select(selCoreTheme).pipe(
+		() => this.actions$.pipe(
 
-			// replace 'theme-' class from <body>
+			ofType(setTheme),
+			switchMap(({ theme }) => this.localRepository.configuration.setTheme(theme))
+
+		),
+		{ dispatch: false }
+
+	);
+
+	setThemeOnBodyTag$ = createEffect(
+
+		() => this.store.select(selCore_theme).pipe(
+
+			// replace 'theme-' class of <body>
 			tap(theme => {
 
-				const list: string[] = [theme];
-				this.document.body.classList.forEach(v => {
-
-					if (!v.startsWith('theme-'))
-						list.push(v);
-
-				});
+				const currentList: string[] = this.document.body.classList.value.split(' ');
+				const list: string[] = replaceByPrefix(currentList, 'theme-', theme);
 				this.document.body.className = list.join(' ');
 
 			})

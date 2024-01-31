@@ -1,4 +1,4 @@
-import { DEFAULT_CONF_VALUES, getNextTheme } from '@lib';
+import { DEFAULT_CONF_VALUES, SidebarState, Theme } from '@lib';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
 import { ConfigurationLocalRepository } from 'lib/repositories/local';
 
@@ -7,16 +7,16 @@ export class MockConfigurationLocalRepositoryImpl implements ConfigurationLocalR
 	private conf: Configuration = {
 
 		theme: DEFAULT_CONF_VALUES.theme,
-		sidebarVisible: DEFAULT_CONF_VALUES.sidebarVisible,
+		sidebarState: DEFAULT_CONF_VALUES.sidebarState,
 		syncWorkerActive: DEFAULT_CONF_VALUES.syncWorkerActive,
 		firestoreConfig: null,
 		titleLookupUrl: null
 
 	}
 
-	async setSidebarVisible(visible: boolean): Promise<void> {
+	async setSidebarState(visible: SidebarState): Promise<void> {
 
-		this.conf.sidebarVisible = visible;
+		this.conf.sidebarState = visible;
 
 	}
 
@@ -26,9 +26,9 @@ export class MockConfigurationLocalRepositoryImpl implements ConfigurationLocalR
 
 	}
 
-	async toggleTheme(): Promise<void> {
+	async setTheme(theme: Theme): Promise<void> {
 
-		this.conf.theme = getNextTheme(this.conf.theme ?? DEFAULT_CONF_VALUES.theme);
+		this.conf.theme = theme;
 
 	}
 

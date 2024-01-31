@@ -13,15 +13,24 @@ import { BookmarkSyncRemoteNewEffects } from './effects/bookmark-effects/bookmar
 import { BookmarkSyncRemoteUpdatedEffects } from './effects/bookmark-effects/bookmark-sync-remote-updated.effects';
 import { BookmarkSyncEffects } from './effects/bookmark-effects/bookmark-sync.effects';
 import { BookmarkUIEffects } from './effects/bookmark-effects/bookmark-ui.effects';
-import { CoreLoadEffects } from './effects/core-load.effects';
 import { CoreNavigationEffects } from './effects/core-navigation.effects';
 import { CoreNotificationEffects } from './effects/core-notification.effects';
+import { CoreSidebarEffects } from './effects/core-sidebar.effects';
 import { CoreThemeEffects } from './effects/core-theme.effects';
 import { CoreUIEffects } from './effects/core-ui.effects';
 import { DatabaseEffects } from './effects/database.effects';
 import { LogsEffects } from './effects/logs.effects';
 import { NoteContentEntityCreateEffects } from './effects/note-content-effects/note-content-entity-create.effects';
+import { NoteContentEntityMoveToTrashEffects } from './effects/note-content-effects/note-content-entity-move-to-trash.effects';
+import { NoteContentEntityUpdateEffects } from './effects/note-content-effects/note-content-entity-update.effects';
 import { NoteContentLoadEffects } from './effects/note-content-effects/note-content-load.effects';
+import { NoteContentSyncDeletedDeletedEffects } from './effects/note-content-effects/note-content-sync-deleted-deleted.effects';
+import { NoteContentSyncLocalDeletedEffects } from './effects/note-content-effects/note-content-sync-local-deleted.effects';
+import { NoteContentSyncLocalNewEffects } from './effects/note-content-effects/note-content-sync-local-new.effects';
+import { NoteContentSyncLocalUpdatedEffects } from './effects/note-content-effects/note-content-sync-local-updated.effects';
+import { NoteContentSyncRemoteDeletedEffects } from './effects/note-content-effects/note-content-sync-remote-deleted.effects';
+import { NoteContentSyncRemoteNewEffects } from './effects/note-content-effects/note-content-sync-remote-new.effects';
+import { NoteContentSyncRemoteUpdatedEffects } from './effects/note-content-effects/note-content-sync-remote-updated.effects';
 import { NoteContentSyncEffects } from './effects/note-content-effects/note-content-sync.effects';
 import { NoteEntityCreateEffects } from './effects/note-effects/note-entity-create.effects';
 import { NoteEntityMoveToTrashEffects } from './effects/note-effects/note-entity-move-to-trash.effects';
@@ -45,15 +54,7 @@ import { logsReducer } from './reducers/logs.reducer';
 import { noteContentReducer } from './reducers/note-content-reducers/note-content.reducer';
 import { noteReducer } from './reducers/note-reducers/note.reducer';
 import { AppState } from './states/app.state';
-import { NoteContentEntityMoveToTrashEffects } from './effects/note-content-effects/note-content-entity-move-to-trash.effects';
-import { NoteContentEntityUpdateEffects } from './effects/note-content-effects/note-content-entity-update.effects';
-import { NoteContentSyncDeletedDeletedEffects } from './effects/note-content-effects/note-content-sync-deleted-deleted.effects';
-import { NoteContentSyncLocalDeletedEffects } from './effects/note-content-effects/note-content-sync-local-deleted.effects';
-import { NoteContentSyncLocalNewEffects } from './effects/note-content-effects/note-content-sync-local-new.effects';
-import { NoteContentSyncLocalUpdatedEffects } from './effects/note-content-effects/note-content-sync-local-updated.effects';
-import { NoteContentSyncRemoteDeletedEffects } from './effects/note-content-effects/note-content-sync-remote-deleted.effects';
-import { NoteContentSyncRemoteNewEffects } from './effects/note-content-effects/note-content-sync-remote-new.effects';
-import { NoteContentSyncRemoteUpdatedEffects } from './effects/note-content-effects/note-content-sync-remote-updated.effects';
+import { CoreLoadEffects } from './effects/core-load.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -80,6 +81,7 @@ export const effects = [
 	CoreNotificationEffects,
 	CoreUIEffects,
 	CoreThemeEffects,
+	CoreSidebarEffects,
 
 	// Bookmarks
 	BookmarkSyncEffects,

@@ -30,6 +30,47 @@ button {
 
 	transition					: color $transition, $bg-transition, border-color $transition;
 
+	& > .badge {
+
+		position			: absolute;
+		bottom				: 0;
+		right				: 0;
+		padding				: 4px 6px;
+		background-color	: fn-hsl(accent);
+		border-radius		: 25px;
+		pointer-events		: none;
+
+		line-height			: 1;
+		font-size			: xx-small;
+	    font-weight			: bold;
+
+	}
+
+	&[data-badge]::after,
+	&[data-badge-empty]::after, {
+
+		content: attr(data-badge);
+		position			: absolute;
+		bottom				: 0;
+		right				: 0;
+		padding				: 4px 6px;
+		background-color	: fn-hsl(accent);
+		border-radius		: 25px;
+		pointer-events		: none;
+
+		line-height			: 1;
+		font-size			: xx-small;
+	    font-weight			: bold;
+
+	}
+
+	&[data-badge="0"]::after,
+	&:not([data-badge])::after {
+
+		display: none;
+
+	}
+
 	& > span {
 
 		color					: inherit;

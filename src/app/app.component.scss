@@ -50,48 +50,86 @@
 
 		transition			: height $transition, left 0.6s $transition-timing-fn, $bg-transition;
 
-	}
+		@include bigScreen() {
 
-	& > nav {
+			body.sidebar-full & {
 
-		position			: fixed;
-		z-index				: $z-index-nav;
+				left		: $nav-full-width;
 
-		display				: block;
+			}
 
-		top					: $header-height;
-		left				: 0;
-		height				: calc(100dvh - #{$header-height});
-		width				: $nav-width;
+			body.sidebar-half & {
 
-		padding				: var(--gap-sm);
-		margin-left			: -$nav-width;
-
-		background-color	: fn-hsl(bg-5);
-		transition			: height $transition, margin-left 0.6s $transition-timing-fn, $bg-transition;
-
-		@include mx-box-shadow;
-
-	}
-
-	&.navVisible {
-
-		& > nav {
-
-			margin-left		: 0;
-
-		}
-
-		& > main {
-
-			@include bigScreen() {
-
-				left	: $nav-width;
+				left		: $nav-half-width;
 
 			}
 
 		}
 
 	}
+
+	& > nav {
+
+		@include mx-flex-column;
+		position			: fixed;
+		z-index				: $z-index-nav;
+
+		top					: $header-height;
+		left				: 0;
+		height				: calc(100dvh - #{$header-height});
+		width				: $nav-full-width;
+
+		padding				: var(--gap-sm);
+		margin-left			: 0;
+
+		overflow			: hidden;
+
+		background-color	: fn-hsl(bg-5);
+		transition			: height $transition, width 0.6s $transition-timing-fn, margin-left 0.6s $transition-timing-fn, $bg-transition;
+
+		@include mx-box-shadow;
+
+		body.sidebar-full & {
+
+			margin-left		: 0;
+			width			: $nav-full-width;
+
+		}
+
+		body.sidebar-half & {
+
+			margin-left		: 0;
+			width			: $nav-half-width;
+
+		}
+
+		body.sidebar-hidden & {
+
+			margin-left		: -$nav-full-width;
+			width			: $nav-full-width;
+
+		}
+
+	}
+
+	// &.navVisible {
+
+		// & > nav {
+
+		// 	margin-left		: 0;
+
+		// }
+
+		// & > main {
+
+		// 	@include bigScreen() {
+
+		// 		left	: $nav-full-width;
+
+		// 	}
+
+		// }
+
+	// }
 
 }

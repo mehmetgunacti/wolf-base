@@ -5,7 +5,8 @@
 	$color		: map-get($options, "color");
 	$color		: "focus" !default;
 
-	outline		: 2px solid fn-hsl($color) #{$important};
-	box-shadow	: 0 0 8px fn-hsl($color);
+	outline			: 2px solid fn-hsl($color) #{$important};
+	outline-offset	: 3px
+	// box-shadow	: 0 0 8px fn-hsl($color);
 
 }

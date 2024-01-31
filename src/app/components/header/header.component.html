@@ -1,14 +1,15 @@
 <section id="section-logo">
 
-	<div class="badge-container" *ngIf="(cloudTasks$ | async) as cloudTasks">
+	@if ((cloudTasks$ | async); as cloudTasks) {
 
 		<button
 			class="icon-only"
-			(click)="toggleNav()"><i class="material-symbols-outlined bold">menu</i>
+			(click)="toggleNav()">
+			<span class="material-symbols-outlined bold">menu</span>
+			<span class="badge">{{cloudTasks.length}}</span>
 		</button>
-		<span *ngIf="cloudTasks.length > 0" class="badge empty"></span>
 
-	</div>
+	}
 
 </section>
 <section id="portal-outlet">

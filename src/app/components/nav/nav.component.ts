@@ -1,15 +1,17 @@
-import { Component, inject } from '@angular/core';
-import { CloudTask, MenuItem, TAG_PINNED, TAG_POPULAR } from '@lib';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { CloudTask, MenuItem, TAG_PINNED, TAG_POPULAR, Theme, getNextTheme } from '@lib';
 import { Store } from '@ngrx/store';
-import { Observable, map } from 'rxjs';
-import { switchTheme } from 'store/actions/core-ui.actions';
+import { Observable, map, take } from 'rxjs';
+import { setTheme } from 'store/actions/core-ui.actions';
 import { selBookmarkMenuBadge } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
 import { selCloudAvailableTasks } from 'store/selectors/cloud.selectors';
+import { selCore_theme } from 'store/selectors/core-ui.selectors';
 
 @Component({
 	selector: 'app-nav',
 	templateUrl: './nav.component.html',
-	styleUrls: ['./nav.component.scss']
+	styleUrls: ['./nav.component.scss'],
+	// encapsulation: ViewEncapsulation.None
 })
 export class NavComponent {
 
@@ -58,7 +60,12 @@ export class NavComponent {
 
 	onSwitchTheme(): void {
 
-		this.store.dispatch(switchTheme());
+		this.store.select(selCore_theme)
+			.pipe(
+				take(1)
+			).subscribe(
+				(theme: Theme) => this.store.dispatch(setTheme({ theme: getNextTheme(theme) }))
+			);
 
 	}
 

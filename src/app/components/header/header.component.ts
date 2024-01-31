@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { CloudTask } from '@lib';
+import { CloudTask, SidebarState, getNextSidebarState } from '@lib';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { toggleSidebar } from 'store/actions/core-ui.actions';
+import { Observable, combineLatest, take } from 'rxjs';
+import { setSidebarState } from 'store/actions/core-ui.actions';
 import { selCloudAvailableTasks } from 'store/selectors/cloud.selectors';
+import { selCore_isBigScreen, selCore_sidebarState } from 'store/selectors/core-ui.selectors';
 
 @Component({
 	selector: 'app-header',
@@ -18,7 +19,20 @@ export class HeaderComponent {
 
 	toggleNav(): void {
 
-		this.store.dispatch(toggleSidebar());
+		combineLatest([
+			this.store.select(selCore_sidebarState),
+			this.store.select(selCore_isBigScreen)
+		])
+			.pipe(
+				take(1)
+			).subscribe(
+
+				([state, isBigScreen]) =>
+					this.store.dispatch(
+						setSidebarState({ sidebarState: getNextSidebarState(state, isBigScreen) })
+					)
+
+			);
 
 	}
 

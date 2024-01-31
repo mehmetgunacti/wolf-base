@@ -96,7 +96,7 @@ export class WolfBaseDB extends Dexie {
 		this.on('populate', () => {
 
 			this.configuration.put(DEFAULT_CONF_VALUES.syncWorkerActive, CONF_KEYS.syncWorkerActive);
-			this.configuration.put(DEFAULT_CONF_VALUES.sidebarVisible, CONF_KEYS.sidebarVisible);
+			this.configuration.put(DEFAULT_CONF_VALUES.sidebarState, CONF_KEYS.sidebarVisible);
 			this.configuration.put(DEFAULT_CONF_VALUES.theme, CONF_KEYS.theme);
 
 		});

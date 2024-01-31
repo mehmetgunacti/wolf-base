@@ -1,8 +1,8 @@
-import { Theme } from 'lib/constants';
+import { SidebarState, Theme } from 'lib/constants';
 
 export interface Configuration {
 
-	sidebarVisible: boolean | null;
+	sidebarState: SidebarState;
 	syncWorkerActive: boolean | null;
 	theme: Theme | null;
 	titleLookupUrl: string | null;

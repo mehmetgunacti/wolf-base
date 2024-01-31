@@ -1,32 +1,24 @@
 import { Injectable, inject } from '@angular/core';
-import { createEffect } from '@ngrx/effects';
+import { LocalRepositoryService } from '@lib';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
-import { liveQuery } from 'dexie';
-import { Configuration, LocalRepositoryService } from '@lib';
-import { fromEventPattern } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { confChanged } from 'store/actions/core.actions';
+import { map, switchMap } from 'rxjs/operators';
+import { loadAll, loadAllSuccess } from 'store/actions/core.actions';
 
 @Injectable()
 export class CoreLoadEffects {
 
+	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
-	// todo: remove auto load
-	listenToConfChanges$ = createEffect(
+	loadAll$ = createEffect(
 
-		() => fromEventPattern<Configuration>(
+		() => this.actions$.pipe(
 
-			// this function (first parameter) is called when the fromEventPattern() observable is subscribed to.
-			// note: the observable returned by Dexie's liveQuery() is not an rxjs Observable
-			// hence we use fromEventPattern to convert the Dexie Observable to an rxjs Observable.
-			(handler) => liveQuery(() => this.localRepository.configuration.getConfiguration()).subscribe(handler),
+			ofType(loadAll),
+			switchMap(() => this.localRepository.configuration.getConfiguration()),
+			map(configuration => loadAllSuccess({ configuration }))
 
-			// this function (second parameter) is called when the fromEventPattern() observable is unsubscribed from
-			(handler, unsubscribe) => unsubscribe()
-
-		).pipe(
-			map((configuration: Configuration) => confChanged({ configuration }))
 		)
 
 	);

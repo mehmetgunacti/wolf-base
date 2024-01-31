@@ -5,5 +5,6 @@ export * from './entity.constant';
 export * from './icons.constant';
 export * from './log.constant';
 export * from './responsive.constant';
+export * from './sidebar.constant';
 export * from './sync.constant';
 export * from './theme.constant';
