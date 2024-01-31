@@ -6,13 +6,7 @@
 
 	@include mx-flex-column;
 	flex			: 1;
-	width			: calc(#{$nav-full-width} - 2 * var(--gap-sm));
-
-	& button.icon-only {
-
-		width: 36px;
-
-	}
+	// width			: calc(#{$nav-full-width} - 2 * var(--gap-sm));
 
 	body.sidebar-hidden & {
 
@@ -20,19 +14,46 @@
 
 	}
 
+	body.sidebar-full & {
+
+		width			: $nav-full-width;
+
+	}
+
+	body.sidebar-half &,
+	body.sidebar-hidden & {
+
+		width			: $nav-half-width;
+
+	}
+
 	div[nav-menu] {
+
+		padding			: var(--gap);
 
 		& > a {
 
 			--_hover-color		: transparent;
 
 			@include mx-flex-center-y;
-			height				: 6rem;
+			height				: $nav-half-width;
 			border-radius		: var(--border-radius);
 			color				: fn-hsl(text);
 			cursor				: pointer;
 			transition			: $bg-transition;
 			text-decoration		: none;
+
+			width				: $nav-half-width;
+			overflow			: hidden;
+
+			padding				: 0;
+			margin				: 0;
+
+			body.sidebar-full & {
+
+				width			: auto;
+
+			}
 
 			&.active {
 
@@ -55,11 +76,10 @@
 			& > [icon] {
 
 				@include mx-flex-center-center;
-				padding				: 0.8rem;
+				margin-right		: var(--gap-sm);
 				background-color	: var(--_hover-color);
 				border-radius		: 25px;
-				width				: 36px;
-				aspect-ratio		: 1;
+				padding				: var(--gap);
 
 			}
 
@@ -67,7 +87,7 @@
 
 				flex 		: 1;
 				font-size	: var(--font-size-h4);
-				padding-left: var(--gap-sm);
+				padding-left: var(--gap);
 
 			}
 
@@ -100,6 +120,8 @@
 	div[bottom-buttons] {
 
 		display			: flex;
+		align-items		: flex-start;
+		padding			: var(--gap);
 		margin-top		: auto;
 		gap				: 0.5rem;
 
@@ -118,6 +140,8 @@
 		body.sidebar-full & {
 
 			flex-direction	: row;
+			align-items		: flex-end;
+			height			: $nav-half-width;
 
 		}
 
@@ -125,6 +149,8 @@
 		body.sidebar-hidden & {
 
 			flex-direction	: column-reverse;
+			width			: $nav-half-width;
+
 			& > button:last-child {
 
 				margin-left	: unset;

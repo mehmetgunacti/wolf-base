@@ -79,7 +79,7 @@
 		height				: calc(100dvh - #{$header-height});
 		width				: $nav-full-width;
 
-		padding				: var(--gap-sm);
+		padding				: 0;
 		margin-left			: 0;
 
 		overflow			: hidden;
@@ -108,28 +108,15 @@
 			margin-left		: -$nav-full-width;
 			width			: $nav-full-width;
 
+			@include bigScreen {
+
+				margin-left		: -$nav-half-width;
+				width			: $nav-half-width;
+
+			}
+
 		}
 
 	}
-
-	// &.navVisible {
-
-		// & > nav {
-
-		// 	margin-left		: 0;
-
-		// }
-
-		// & > main {
-
-		// 	@include bigScreen() {
-
-		// 		left	: $nav-full-width;
-
-		// 	}
-
-		// }
-
-	// }
 
 }

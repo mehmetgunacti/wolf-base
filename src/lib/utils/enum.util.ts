@@ -26,8 +26,8 @@ export function getNextSidebarState(currentState: SidebarState, isBigScreen: boo
 	if (isBigScreen)
 		order = [
 			SidebarState.FULL,
-			SidebarState.HALF,
-			SidebarState.HIDDEN
+			SidebarState.HIDDEN,
+			SidebarState.HALF
 		];
 	else
 		order = [
