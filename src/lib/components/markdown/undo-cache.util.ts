@@ -8,11 +8,20 @@ const EMPTY_PROPS: EditorProperties = {
 	eIndex: 0
 }
 
+const LS_MAX_SAVE_COUNT = 50;
+const LS_SAVE_THRESHOLD = 10;
+const LS_PREFIX = 'nc_editor_';
+
 export class UndoCache {
+
+
 
 	// signals
 	private stack: WritableSignal<EditorProperties[]> = signal([EMPTY_PROPS]);
 	private idx: WritableSignal<number> = signal(0);
+
+	// save to local-storage
+	private counter: WritableSignal<number> = signal(0);
 
 	// computed values
 	canUndo: Signal<boolean> = computed(() => this.idx() > 0);
@@ -41,6 +50,14 @@ export class UndoCache {
 		this.incIdx();
 		arr[this.idx()] = { content, sIndex, eIndex };
 		this.stack.set(arr);
+
+		this.counter.update(c => c + 1);
+		if (this.counter() % LS_SAVE_THRESHOLD === 0)
+			localStorage.setItem(`${LS_PREFIX}${this.counter()}`, content);
+
+		// LS_MAX_SAVE_COUNT localStorage entries
+		if (this.counter() > LS_MAX_SAVE_COUNT)
+			this.counter.set(0);
 
 	}
 
