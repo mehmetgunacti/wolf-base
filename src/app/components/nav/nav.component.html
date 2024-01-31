@@ -25,20 +25,6 @@
 		title="Settings"><span class="material-symbols-outlined">settings</span></button>
 
 	<!-- CLOUD TASKS BUTTON -->
-	<!-- @if ((cloudTasks$ | async); as cloudTasks) {
-
-		<button
-			class="icon-only rounded"
-			routerLink="/cloud"
-			routerLinkActive="active"
-			[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
-			[title]="cloudTasks.length > 0 ? cloudTasks.length + ' syncable items available' : 'Cloud'"
-			[attr.data-badge]="cloudTasks.length"><span class="material-symbols-outlined">cloud_sync</span>
-		</button>
-
-	} -->
-
-	<!-- CLOUD TASKS BUTTON -->
 	@if ((cloudTasks$ | async); as cloudTasks) {
 
 		<button
@@ -48,7 +34,9 @@
 			[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
 			[title]="cloudTasks.length > 0 ? cloudTasks.length + ' syncable items available' : 'Cloud'">
 			<span class="material-symbols-outlined">cloud_sync</span>
-			<span class="badge">{{cloudTasks.length}}</span>
+			@if (cloudTasks.length > 0) {
+				<span class="badge">{{cloudTasks.length}}</span>
+			}
 		</button>
 
 	}
