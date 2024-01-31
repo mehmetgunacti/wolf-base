@@ -1,5 +1,5 @@
 import { Signal, WritableSignal, computed, signal } from '@angular/core';
-import { formatBytes } from 'lib/utils';
+import { formatBytes, sleep } from 'lib/utils';
 import { EditorProperties } from './textarea-properties.model';
 
 const EMPTY_PROPS: EditorProperties = {
@@ -8,18 +8,65 @@ const EMPTY_PROPS: EditorProperties = {
 	eIndex: 0
 }
 
-const LS_MAX_SAVE_COUNT = 500; // 500 / 10 = 50 ls entries
-const LS_SAVE_THRESHOLD = 10;
-const LS_PREFIX = 'note_content_editor_';
+interface LSEntries {
+
+	entries: LSEntry[];
+
+}
+
+interface LSEntry {
+
+	time: string;
+	content: string;
+
+}
+
+class LSManager {
+
+	/** total number of entries to be hold in LS */
+	private static LS_MAX_SAVE_COUNT = 20;
+
+	/** save every n update to UndoCache */
+	private static LS_SAVE_THRESHOLD = 5;
+
+	/** name of LS entry */
+	private static LS_ENTRIES = 'note_content_editor';
+
+	private counter: number = 0;
+
+	public save(content: string): void {
+
+		this.counter++;
+		if (this.counter % LSManager.LS_SAVE_THRESHOLD > 0)
+			return;
+
+		const entries: LSEntries = this.readEntries();
+		entries.entries.push({
+			time: new Date().toISOString(),
+			content
+		});
+		if (entries.entries.length > LSManager.LS_MAX_SAVE_COUNT)
+			entries.entries.splice(0, 1);
+		localStorage.setItem(LSManager.LS_ENTRIES, JSON.stringify(entries));
+
+	}
+
+	private readEntries(): LSEntries {
+
+		const s = localStorage.getItem(LSManager.LS_ENTRIES);
+		if (s)
+			return JSON.parse(s) as LSEntries;
+		return { entries: [] };
+
+	}
+
+}
 
 export class UndoCache {
 
 	// signals
 	private stack: WritableSignal<EditorProperties[]> = signal([EMPTY_PROPS]);
 	private idx: WritableSignal<number> = signal(0);
-
-	// save to local-storage
-	private counter: WritableSignal<number> = signal(0);
 
 	// computed values
 	canUndo: Signal<boolean> = computed(() => this.idx() > 0);
@@ -28,6 +75,8 @@ export class UndoCache {
 	size: Signal<number> = computed(() => this.props().content.length);
 	memSize: Signal<string> = computed(() => `${formatBytes(this.stack().reduce((t, a) => t + a.content.length, 0))}`);
 	discSize: Signal<string> = computed(() => `${formatBytes(this.size())}`);
+
+	private lsManager: LSManager = new LSManager();
 
 	initialize(content: string): void {
 
@@ -49,13 +98,8 @@ export class UndoCache {
 		arr[this.idx()] = { content, sIndex, eIndex };
 		this.stack.set(arr);
 
-		this.counter.update(c => c + 1);
-		if (this.counter() % LS_SAVE_THRESHOLD === 0)
-			localStorage.setItem(`${LS_PREFIX}${this.counter()}_${new Date().toISOString()}`, content);
-
-		// LS_MAX_SAVE_COUNT localStorage entries
-		if (this.counter() > LS_MAX_SAVE_COUNT)
-			this.counter.set(0);
+		// save to localStorage
+		this.lsManager.save(content);
 
 	}
 
