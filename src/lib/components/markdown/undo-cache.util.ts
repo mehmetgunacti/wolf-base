@@ -36,7 +36,7 @@ export class UndoCacheImpl {
 	canUndo: Signal<boolean> = computed(() => this.idx() > 0);
 	canRedo: Signal<boolean> = computed(() => this.idx() < this.stack().length - 1);
 	props: Signal<EditorProperties> = computed(() => this.stack()[this.idx()]);
-	size: Signal<number> = computed(() => this.props()?.content.length ?? 0);
+	size: Signal<number> = computed(() => this.props().content.length ?? 0);
 	memSize: Signal<string> = computed(() => `${formatBytes(this.stack().reduce((t, a) => t + a.content.length, 0))}`);
 	discSize: Signal<string> = computed(() => `${formatBytes(this.size())}`);
 

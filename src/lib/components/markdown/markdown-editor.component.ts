@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
 import { ClipboardService } from 'services';
 import { ButtonActions, TASK_COMPL, TASK_EMPTY, lineStartsWith } from './button-actions.util';
-import { LOCAL_STORAGE_MANAGER, LSEntry, LocalStorageManager } from './local-storage-manager.util';
+import { LOCAL_STORAGE_MANAGER, LSEntry, LocalStorageManager, LocalStorageManagerImpl } from './local-storage-manager.util';
 import { EditorProperties, extractProps } from './textarea-properties.model';
 import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 
@@ -14,6 +14,10 @@ import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 	selector: 'w-markdown-editor',
 	templateUrl: './markdown-editor.component.html',
 	styleUrls: ['./markdown-editor.component.scss'],
+	providers: [
+		{ provide: UNDO_CACHE, useClass: UndoCacheImpl },
+		{ provide: LOCAL_STORAGE_MANAGER, useClass: LocalStorageManagerImpl },
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownEditorComponent implements OnInit, OnDestroy {

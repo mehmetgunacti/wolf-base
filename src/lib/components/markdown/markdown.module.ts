@@ -32,11 +32,7 @@ import { UNDO_CACHE, UndoCacheImpl } from './undo-cache.util';
 		MarkdownEditorComponent,
 		MarkdownViewerComponent,
 		MarkdownToHtmlPipe
-	],
-	providers: [
-		{ provide: UNDO_CACHE, useClass: UndoCacheImpl },
-		{ provide: LOCAL_STORAGE_MANAGER, useClass: LocalStorageManagerImpl },
-	],
+	]
 
 })
 export class MarkdownModule { }
