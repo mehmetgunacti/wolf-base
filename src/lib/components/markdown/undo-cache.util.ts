@@ -1,6 +1,5 @@
-import { Injectable, InjectionToken, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
+import { Injectable, InjectionToken, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { formatBytes } from 'lib/utils';
-import { LOCAL_STORAGE_MANAGER, LocalStorageManager } from './local-storage-manager.util';
 import { EditorProperties } from './textarea-properties.model';
 
 const EMPTY_PROPS: EditorProperties = {
@@ -26,8 +25,6 @@ export class UndoCache {
 	memSize: Signal<string> = computed(() => `${formatBytes(this.stack().reduce((t, a) => t + a.content.length, 0))}`);
 	discSize: Signal<string> = computed(() => `${formatBytes(this.size())}`);
 
-	private lsManager: LocalStorageManager = inject(LOCAL_STORAGE_MANAGER);
-
 	initialize(content: string): void {
 
 		if (content)
@@ -50,9 +47,6 @@ export class UndoCache {
 		this.incIdx();
 		arr[this.idx()] = { content, sIndex, eIndex };
 		this.stack.set(arr);
-
-		// save to localStorage
-		this.lsManager.save(content);
 
 	}
 

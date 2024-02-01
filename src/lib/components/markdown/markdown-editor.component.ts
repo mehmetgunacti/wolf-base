@@ -128,7 +128,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	onRecoverOpen(): void {
 
-		const hasEntries = this.lsManager.open();
+		const hasEntries = this.lsManager.init();
 		if (hasEntries)
 			this.recoverDialogRef = this.dialogService.open(this.recoverTemplate);
 		else

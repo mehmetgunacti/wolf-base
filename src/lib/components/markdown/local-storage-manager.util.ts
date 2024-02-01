@@ -13,6 +13,19 @@ export interface LSEntry {
 
 }
 
+export interface LocalStorageManager {
+
+	recoverableContent: Signal<LSEntry | null>;
+	hasPrev: Signal<boolean>;
+	hasNext: Signal<boolean>;
+
+	save(content: string, skipThreshold?: boolean): void;
+	init(): boolean;
+	next(): void;
+	previous(): void;
+
+}
+
 /** total number of entries to be hold in LS */
 const LS_MAX_SAVE_COUNT = 20;
 
@@ -25,7 +38,7 @@ const LS_ENTRIES = 'note_content_editor';
 export const LOCAL_STORAGE_MANAGER = new InjectionToken<LocalStorageManager>('LocalStorageManager');
 
 @Injectable()
-export class LocalStorageManager {
+export class LocalStorageManagerImpl implements LocalStorageManager {
 
 	private counter: number = 0;
 	private entries: LSEntries | null = null;
@@ -57,7 +70,7 @@ export class LocalStorageManager {
 
 	}
 
-	open(): boolean {
+	init(): boolean {
 
 		this.entries = this.readEntries();
 		this.viewCounter.set(0);
@@ -72,7 +85,7 @@ export class LocalStorageManager {
 
 	}
 
-	prev(): void {
+	previous(): void {
 
 		const curLength = this.entries?.entries.length ?? 0;
 		this.viewCounter.update(c => c < 0 ? curLength : c - 1);
