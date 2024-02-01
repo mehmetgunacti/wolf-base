@@ -1,5 +1,6 @@
-import { Signal, WritableSignal, computed, signal } from '@angular/core';
-import { formatBytes, sleep } from 'lib/utils';
+import { Injectable, InjectionToken, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
+import { formatBytes } from 'lib/utils';
+import { LOCAL_STORAGE_MANAGER, LocalStorageManager } from './local-storage-manager.util';
 import { EditorProperties } from './textarea-properties.model';
 
 const EMPTY_PROPS: EditorProperties = {
@@ -8,60 +9,9 @@ const EMPTY_PROPS: EditorProperties = {
 	eIndex: 0
 }
 
-interface LSEntries {
+export const UNDO_CACHE = new InjectionToken<UndoCache>('UndoCache');
 
-	entries: LSEntry[];
-
-}
-
-interface LSEntry {
-
-	time: string;
-	content: string;
-
-}
-
-class LSManager {
-
-	/** total number of entries to be hold in LS */
-	private static LS_MAX_SAVE_COUNT = 20;
-
-	/** save every n update to UndoCache */
-	private static LS_SAVE_THRESHOLD = 5;
-
-	/** name of LS entry */
-	private static LS_ENTRIES = 'note_content_editor';
-
-	private counter: number = 0;
-
-	public save(content: string): void {
-
-		this.counter++;
-		if (this.counter % LSManager.LS_SAVE_THRESHOLD > 0)
-			return;
-
-		const entries: LSEntries = this.readEntries();
-		entries.entries.push({
-			time: new Date().toISOString(),
-			content
-		});
-		if (entries.entries.length > LSManager.LS_MAX_SAVE_COUNT)
-			entries.entries.splice(0, 1);
-		localStorage.setItem(LSManager.LS_ENTRIES, JSON.stringify(entries));
-
-	}
-
-	private readEntries(): LSEntries {
-
-		const s = localStorage.getItem(LSManager.LS_ENTRIES);
-		if (s)
-			return JSON.parse(s) as LSEntries;
-		return { entries: [] };
-
-	}
-
-}
-
+@Injectable()
 export class UndoCache {
 
 	// signals
@@ -76,7 +26,7 @@ export class UndoCache {
 	memSize: Signal<string> = computed(() => `${formatBytes(this.stack().reduce((t, a) => t + a.content.length, 0))}`);
 	discSize: Signal<string> = computed(() => `${formatBytes(this.size())}`);
 
-	private lsManager: LSManager = new LSManager();
+	private lsManager: LocalStorageManager = inject(LOCAL_STORAGE_MANAGER);
 
 	initialize(content: string): void {
 

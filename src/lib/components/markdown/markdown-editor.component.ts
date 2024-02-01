@@ -1,14 +1,14 @@
-import { FocusMonitor } from '@angular/cdk/a11y';
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { CdkMenuBar, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
+import { CdkMenuBar, CdkMenuTrigger } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subject, Subscription, debounceTime, distinctUntilChanged, take, tap, timer } from 'rxjs';
+import { Subject, Subscription, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
 import { ClipboardService } from 'services';
 import { ButtonActions, TASK_COMPL, TASK_EMPTY, lineStartsWith } from './button-actions.util';
+import { LOCAL_STORAGE_MANAGER, LocalStorageManager } from './local-storage-manager.util';
 import { EditorProperties, extractProps } from './textarea-properties.model';
-import { UndoCache } from './undo-cache.util';
+import { UNDO_CACHE, UndoCache } from './undo-cache.util';
 
 @Component({
 	selector: 'w-markdown-editor',
@@ -22,6 +22,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 	@ViewChild(CdkMenuTrigger) trigger!: CdkMenuTrigger;
 	@ViewChild(CdkMenuBar) menuBar!: CdkMenuBar;
 	@ViewChild('previewTemplate') previewTemplate!: TemplateRef<HTMLDivElement>;
+	@ViewChild('recoverTemplate') recoverTemplate!: TemplateRef<HTMLDivElement>;
 
 	@Input({ required: true }) control!: FormControl<string>;
 	@Input() name: string = '';
@@ -32,13 +33,16 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 	@Output() cancel: EventEmitter<void> = new EventEmitter();
 
 	hasFocus: WritableSignal<boolean> = signal(false);
-	undoCache: UndoCache = new UndoCache();
 	actions: ButtonActions = new ButtonActions();
 	btnImageShake: WritableSignal<boolean> = signal(false);
+	btnOpenRecovery: WritableSignal<boolean> = signal(false);
 	buffer: Subject<string> = new Subject();
 
+	undoCache: UndoCache = inject(UNDO_CACHE);
+	lsManager: LocalStorageManager = inject(LOCAL_STORAGE_MANAGER);
 	private dialogService: Dialog = inject(Dialog);
 	private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
+	private recoverDialogRef: DialogRef<null, HTMLDivElement> | null = null;
 	private clipboardService: ClipboardService = inject(ClipboardService);
 
 	private subscriptions: Subscription = new Subscription();
@@ -53,7 +57,15 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 				distinctUntilChanged()
 
 			).subscribe(
-				() => this.undoCache.saveState(extractProps(this.editor.nativeElement))
+
+				() => {
+
+					const props = extractProps(this.editor.nativeElement);
+					this.undoCache.saveState(props);
+					this.lsManager.save(props.content);
+
+				}
+
 			)
 
 		);
@@ -111,10 +123,46 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	}
 
+	onRecoverOpen(): void {
+
+		const hasEntries = this.lsManager.open();
+		if (hasEntries)
+			this.recoverDialogRef = this.dialogService.open(this.recoverTemplate);
+		else
+			timer(0, 600)
+				.pipe(take(2))
+				.subscribe({
+
+					next: () => this.btnOpenRecovery.set(true),
+					complete: () => this.btnOpenRecovery.set(false)
+
+				});
+
+	}
+
 	onPreviewClose(): void {
 
 		if (this.previewDialogRef)
 			this.previewDialogRef.close();
+
+	}
+
+	onRecoverClose(): void {
+
+		if (this.recoverDialogRef)
+			this.recoverDialogRef.close();
+
+	}
+
+	onRecoverReplace(): void {
+
+		const recovered: string | null = this.lsManager.recoverableContent();
+		if (recovered) {
+
+			this.updateControl(recovered);
+			this.recoverDialogRef?.close();
+
+		}
 
 	}
 
@@ -219,7 +267,6 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 		 * see: ngOnInit() */
 		this.control.markAsDirty();
 		this.control.setValue(content, { emitEvent });
-
 
 	}
 

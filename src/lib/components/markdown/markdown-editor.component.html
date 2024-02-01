@@ -32,6 +32,16 @@
 		<span class="material-symbols-outlined">live_tv</span>
 	</button>
 
+	<!-- RECOVER BUTTON -->
+	<button
+		cdkMenuItem
+		class="icon-only"
+		title="Recover"
+		[class.shake]="btnOpenRecovery()"
+		(click)="onRecoverOpen()">
+		<span class="material-symbols-outlined">device_reset</span>
+	</button>
+
 	<!-- DIVIDER -->
 	<div class="v-divider"></div>
 
@@ -306,6 +316,51 @@
 		</ng-container>
 
 		<w-markdown-viewer [markdown]="undoCache.props().content"/>
+
+	</w-overlay-container>
+
+</ng-template>
+
+<ng-template #recoverTemplate>
+
+	<w-overlay-container cdkMenu>
+
+		<ng-container card_title>Recover</ng-container>
+		<ng-container card_buttons>
+
+			<button
+				cdkMenuItem
+				class="icon-only rounded"
+				[disabled]="!lsManager.hasPrev()"
+				[cdkMenuItemDisabled]="!lsManager.hasPrev()"
+				(click)="lsManager.prev()">
+				<span class="material-symbols-outlined">navigate_before</span>
+			</button>
+			<button
+				cdkMenuItem
+				class="icon-only rounded"
+				[disabled]="!lsManager.hasNext()"
+				[cdkMenuItemDisabled]="!lsManager.hasNext()"
+				(click)="lsManager.next()">
+				<span class="material-symbols-outlined">navigate_next</span>
+			</button>
+			<button
+				cdkMenuItem
+				class="icon-only rounded"
+				(click)="onRecoverReplace()">
+				<span class="material-symbols-outlined">published_with_changes</span>
+				<span>Replace</span>
+			</button>
+			<button
+				cdkMenuItem
+				class="icon-only rounded"
+				(click)="onRecoverClose()">
+				<span class="material-symbols-outlined">close</span>
+			</button>
+
+		</ng-container>
+
+		<w-markdown-viewer [markdown]="lsManager.recoverableContent()"/>
 
 	</w-overlay-container>
 
