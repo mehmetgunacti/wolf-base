@@ -1,13 +1,12 @@
 import { EditorProperties, extractProps } from './textarea-properties.model';
 
-const CR = '\r';
-const NL = '\n';
-const SPACE = ' ';
-const TAB_T = '\t';
-const TAB = '\t'; // tab-size : 4; <-- css of textarea
-const INDENT = SPACE.repeat(2);
-export const TASK_EMPTY = '- [ ] ';
-export const TASK_COMPL = '- [x] ';
+const C_CR = '\r';
+const C_NL = '\n';
+const C_SPACE = ' ';
+export const C_TAB = '\t'; // tab-size : 4; <-- css of textarea
+export const C_INDENT = C_SPACE.repeat(2);
+export const C_TASK_EMPTY = '- [ ] ';
+export const C_TASK_COMPL = '- [x] ';
 
 function isSelection({ sIndex, eIndex }: EditorProperties): boolean {
 
@@ -17,18 +16,26 @@ function isSelection({ sIndex, eIndex }: EditorProperties): boolean {
 
 function isSelectionMultiLine({ content, sIndex, eIndex }: EditorProperties): boolean {
 
-	return content.substring(sIndex, eIndex).indexOf(NL) > -1;
+	return content.substring(sIndex, eIndex).indexOf(C_NL) > -1;
 
 }
 
-export function lineStartsWith(props: EditorProperties, prefixes: string[]): string {
+export function lineStartsWithOneOf(props: EditorProperties, prefixes: string[], substitute: string[]): [string, number] | null {
 
-	const { content } = props;
-	const line = content.substring(startIndexOfCurrentLine(props));
-	for (const pre of prefixes)
-		if (line.startsWith(pre))
-			return line.substring(pre.length, line.indexOf(NL));
-	return '';
+	const line = currentLine(props);
+	console.log(line);
+	for (let idx = 0; idx < prefixes.length; ++idx) {
+
+		const pre = prefixes[idx];
+		let count = 0;
+		while (line.substring(count * pre.length).startsWith(pre))
+			count++;
+
+		if (count > 0)
+			return [substitute[idx], count];
+
+	}
+	return null;
 
 }
 
@@ -36,7 +43,7 @@ export function currentLine(props: EditorProperties): string {
 
 	const { content } = props;
 	const line = content.substring(startIndexOfCurrentLine(props));
-	const lineEnd = line.indexOf(NL);
+	const lineEnd = line.indexOf(C_NL);
 	return line.substring(0, lineEnd < 0 ? line.length : lineEnd);
 
 }
@@ -64,8 +71,8 @@ function findNextIdx({ content, eIndex }: EditorProperties, ...chars: string[]):
 function findWordIndexes(props: EditorProperties): [number, number] {
 
 	return [
-		findPrevIdx(props, SPACE, TAB_T, NL, CR) + 1,
-		findNextIdx(props, SPACE, TAB_T, NL, CR)
+		findPrevIdx(props, C_SPACE, C_TAB, C_NL, C_CR) + 1,
+		findNextIdx(props, C_SPACE, C_TAB, C_NL, C_CR)
 	];
 
 }
@@ -78,7 +85,7 @@ function extractLineStartIndexes(props: EditorProperties): number[] {
 	const list = [firstIdx];
 	let idx = -1;
 	while (++idx < piece.length)
-		if (piece.charAt(idx) === NL)
+		if (piece.charAt(idx) === C_NL)
 			list.unshift(idx + firstIdx + 1);
 	return list;
 
@@ -154,7 +161,7 @@ export function removeCurrentLine(props: EditorProperties): EditorProperties {
 	const lineIdx = startIndexOfCurrentLine(props);
 	const first = content.substring(0, lineIdx);
 	const rest = content.substring(lineIdx);
-	const nextNL = rest.indexOf(NL);
+	const nextNL = rest.indexOf(C_NL);
 	const result = first + (nextNL < 0 ? '' : rest.substring(nextNL));
 	return {
 		...props,
@@ -166,14 +173,14 @@ export function removeCurrentLine(props: EditorProperties): EditorProperties {
 function startIndexOfCurrentLine({ content, sIndex }: EditorProperties): number {
 
 	const c = content.substring(0, sIndex);
-	const idx = c.lastIndexOf(NL) + 1;
+	const idx = c.lastIndexOf(C_NL) + 1;
 	return idx;
 
 }
 
 function endIndexOfCurrentLine({ content, eIndex }: EditorProperties): number {
 
-	let idx = content.indexOf(NL, eIndex);
+	let idx = content.indexOf(C_NL, eIndex);
 	if (idx < 0)
 		idx = content.length;
 	return idx;
@@ -262,7 +269,7 @@ function addClass(props: EditorProperties, s: string): EditorProperties {
 	if (textMiddle.endsWith(s))
 		return props;
 
-	const result = textStart + NL + textMiddle + s + NL + textEnd;
+	const result = textStart + C_NL + textMiddle + s + C_NL + textEnd;
 	return {
 
 		content: result,
@@ -358,9 +365,9 @@ function shiftLineRight(props: EditorProperties, c: string): EditorProperties {
 	const rest = content.substring(startIdx);
 	const result: EditorProperties = {
 
-		content: firstPiece + INDENT + rest,
-		sIndex: sIndex + INDENT.length,
-		eIndex: eIndex + INDENT.length
+		content: firstPiece + C_INDENT + rest,
+		sIndex: sIndex + C_INDENT.length,
+		eIndex: eIndex + C_INDENT.length
 
 	};
 	return result;
@@ -376,9 +383,9 @@ function shiftLineLeft(props: EditorProperties, c: string): EditorProperties {
 	const rest = content.substring(startIdx);
 	const result: EditorProperties = {
 
-		content: firstPiece + INDENT + rest,
-		sIndex: sIndex + INDENT.length,
-		eIndex: eIndex + INDENT.length
+		content: firstPiece + C_INDENT + rest,
+		sIndex: sIndex + C_INDENT.length,
+		eIndex: eIndex + C_INDENT.length
 
 	};
 	return result;
@@ -413,9 +420,9 @@ export class ButtonActions {
 		const props: EditorProperties = extractProps(element);
 
 		if (isSelectionMultiLine(props))
-			return shiftSelectionRight(props, TAB);
+			return shiftSelectionRight(props, C_TAB);
 
-		return insertCharsAt(props, TAB);
+		return insertCharsAt(props, C_TAB);
 
 	}
 
@@ -423,9 +430,9 @@ export class ButtonActions {
 
 		const props: EditorProperties = extractProps(element);
 		if (isSelectionMultiLine(props))
-			return shiftSelectionLeft(props, TAB);
+			return shiftSelectionLeft(props, C_TAB);
 
-		return removeCharsAt(props, TAB);
+		return removeCharsAt(props, C_TAB);
 
 	}
 
@@ -434,9 +441,9 @@ export class ButtonActions {
 		const props: EditorProperties = extractProps(element);
 
 		if (isSelectionMultiLine(props))
-			return shiftSelectionRight(props, INDENT);
+			return shiftSelectionRight(props, C_INDENT);
 
-		return shiftLineRight(props, INDENT);
+		return shiftLineRight(props, C_INDENT);
 
 	}
 
@@ -444,15 +451,22 @@ export class ButtonActions {
 
 		const props: EditorProperties = extractProps(element);
 		if (isSelectionMultiLine(props))
-			return shiftSelectionLeft(props, INDENT);
+			return shiftSelectionLeft(props, C_INDENT);
 
-		return removeCharsAt(props, INDENT);
+		return removeCharsAt(props, C_INDENT);
 
 	}
 
 	addEmptyTask(element: HTMLTextAreaElement): EditorProperties {
 
-		const s = NL + TASK_EMPTY;
+		const s = C_NL + C_TASK_EMPTY;
+		return insert(extractProps(element), s);
+
+	}
+
+	addNewLine(element: HTMLTextAreaElement, c: string, times: number = 1): EditorProperties {
+
+		const s = C_NL + c.repeat(times);
 		return insert(extractProps(element), s);
 
 	}
@@ -466,7 +480,7 @@ export class ButtonActions {
 
 	addTable(element: HTMLTextAreaElement, [col, row]: [number, number]): EditorProperties {
 
-		const newLine = NL;
+		const newLine = C_NL;
 		const { content, sIndex, eIndex } = extractProps(element);
 
 		let output = newLine + newLine + '|';
