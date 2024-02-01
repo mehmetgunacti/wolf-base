@@ -10,7 +10,7 @@ import { LOCAL_STORAGE_MANAGER, LocalStorageManagerImpl } from './local-storage-
 import { MarkdownEditorComponent } from './markdown-editor.component';
 import { MarkdownToHtmlPipe } from './markdown-to-html.pipe';
 import { MarkdownViewerComponent } from './markdown-viewer.component';
-import { UNDO_CACHE, UndoCache } from './undo-cache.util';
+import { UNDO_CACHE, UndoCacheImpl } from './undo-cache.util';
 
 @NgModule({
 
@@ -34,7 +34,7 @@ import { UNDO_CACHE, UndoCache } from './undo-cache.util';
 		MarkdownToHtmlPipe
 	],
 	providers: [
-		{ provide: UNDO_CACHE, useClass: UndoCache },
+		{ provide: UNDO_CACHE, useClass: UndoCacheImpl },
 		{ provide: LOCAL_STORAGE_MANAGER, useClass: LocalStorageManagerImpl },
 	],
 

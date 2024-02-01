@@ -8,7 +8,7 @@ import { ClipboardService } from 'services';
 import { ButtonActions, TASK_COMPL, TASK_EMPTY, lineStartsWith } from './button-actions.util';
 import { LOCAL_STORAGE_MANAGER, LSEntry, LocalStorageManager } from './local-storage-manager.util';
 import { EditorProperties, extractProps } from './textarea-properties.model';
-import { UNDO_CACHE, UndoCache } from './undo-cache.util';
+import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 
 @Component({
 	selector: 'w-markdown-editor',

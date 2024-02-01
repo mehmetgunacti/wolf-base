@@ -8,10 +8,25 @@ const EMPTY_PROPS: EditorProperties = {
 	eIndex: 0
 }
 
+export interface UndoCache {
+
+	props: Signal<EditorProperties>;
+	canUndo: Signal<boolean>;
+	canRedo: Signal<boolean>;
+	memSize: Signal<string>;
+	discSize: Signal<string>;
+
+	initialize(content: string): void;
+	saveState(props: EditorProperties): void;
+	undo(): void;
+	redo(): void;
+
+}
+
 export const UNDO_CACHE = new InjectionToken<UndoCache>('UndoCache');
 
 @Injectable()
-export class UndoCache {
+export class UndoCacheImpl {
 
 	// signals
 	private stack: WritableSignal<EditorProperties[]> = signal([EMPTY_PROPS]);
