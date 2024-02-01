@@ -22,7 +22,7 @@ export class UndoCache {
 	canUndo: Signal<boolean> = computed(() => this.idx() > 0);
 	canRedo: Signal<boolean> = computed(() => this.idx() < this.stack().length - 1);
 	props: Signal<EditorProperties> = computed(() => this.stack()[this.idx()]);
-	size: Signal<number> = computed(() => this.props().content.length);
+	size: Signal<number> = computed(() => this.props()?.content.length ?? 0);
 	memSize: Signal<string> = computed(() => `${formatBytes(this.stack().reduce((t, a) => t + a.content.length, 0))}`);
 	discSize: Signal<string> = computed(() => `${formatBytes(this.size())}`);
 
@@ -30,11 +30,14 @@ export class UndoCache {
 
 	initialize(content: string): void {
 
-		this.stack.set([{
-			content: content,
-			sIndex: content.length,
-			eIndex: content.length
-		}]);
+		if (content)
+			this.stack.set([{
+				content: content,
+				sIndex: content.length,
+				eIndex: content.length
+			}]);
+		else
+			console.warn(`'content' should not be undefined or null`);
 
 	}
 

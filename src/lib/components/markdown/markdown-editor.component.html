@@ -363,7 +363,8 @@
 		@if(lsManager.recoverableContent(); as lsEntry) {
 
 			<h6>{{ lsEntry.time | date:'EEEE dd.MM.yyyy hh:mm:ss' }}</h6>
-			<w-markdown-viewer [markdown]="lsEntry.content"/>
+			<pre>{{lsEntry.content}}</pre>
+			<!-- <w-markdown-viewer [markdown]="lsEntry.content"/> -->
 
 		}
 
