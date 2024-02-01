@@ -52,7 +52,7 @@ export class LocalStorageManager {
 			content
 		});
 		if (entries.entries.length > LS_MAX_SAVE_COUNT)
-			entries.entries.splice(0, 1);
+			entries.entries.pop();
 		localStorage.setItem(LS_ENTRIES, JSON.stringify(entries));
 
 	}
