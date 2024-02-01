@@ -614,12 +614,10 @@ export class ButtonActions {
 
 	addImage(element: HTMLTextAreaElement, base64: string): EditorProperties {
 
-		return {
+		console.log('addImage');
 
-			...extractProps(element),
-			content: `\n![base64-image](${base64})\n`
-
-		}
+		const first = `\n![base64-image](${base64})\n`;
+		return insert(extractProps(element), first);
 
 	}
 
