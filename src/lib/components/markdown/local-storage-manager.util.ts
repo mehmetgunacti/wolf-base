@@ -31,12 +31,11 @@ export class LocalStorageManager {
 	private entries: LSEntries | null = null;
 
 	private viewCounter: WritableSignal<number> = signal(0);
-	recoverableContent: Signal<string | null> = computed(
-		() => this.entries?.entries[this.viewCounter()].content ?? null
+	recoverableContent: Signal<LSEntry | null> = computed(
+		() => this.entries?.entries[this.viewCounter()] ?? null
 	);
 	hasPrev: Signal<boolean> = computed(() => !!this.entries?.entries[this.viewCounter() - 1]);
 	hasNext: Signal<boolean> = computed(() => !!this.entries?.entries[this.viewCounter() + 1]);
-
 
 	save(content: string): void {
 
@@ -47,7 +46,7 @@ export class LocalStorageManager {
 		let entries = this.readEntries();
 		if (!entries)
 			entries = { entries: [] };
-		entries.entries.push({
+		entries.entries.unshift({
 			time: new Date().toISOString(),
 			content
 		});

@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
 import { ClipboardService } from 'services';
 import { ButtonActions, TASK_COMPL, TASK_EMPTY, lineStartsWith } from './button-actions.util';
-import { LOCAL_STORAGE_MANAGER, LocalStorageManager } from './local-storage-manager.util';
+import { LOCAL_STORAGE_MANAGER, LSEntry, LocalStorageManager } from './local-storage-manager.util';
 import { EditorProperties, extractProps } from './textarea-properties.model';
 import { UNDO_CACHE, UndoCache } from './undo-cache.util';
 
@@ -156,10 +156,10 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	onRecoverReplace(): void {
 
-		const recovered: string | null = this.lsManager.recoverableContent();
-		if (recovered) {
+		const lsEntry: LSEntry | null = this.lsManager.recoverableContent();
+		if (lsEntry) {
 
-			this.updateControl(recovered);
+			this.updateControl(lsEntry.content);
 			this.recoverDialogRef?.close();
 
 		}

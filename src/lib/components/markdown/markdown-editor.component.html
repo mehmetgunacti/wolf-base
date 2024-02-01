@@ -360,7 +360,12 @@
 
 		</ng-container>
 
-		<w-markdown-viewer [markdown]="lsManager.recoverableContent()"/>
+		@if(lsManager.recoverableContent(); as lsEntry) {
+
+			<h6>{{ lsEntry.time | date:'EEEE dd.MM.yyyy hh:mm:ss' }}</h6>
+			<w-markdown-viewer [markdown]="lsEntry.content"/>
+
+		}
 
 	</w-overlay-container>
 
