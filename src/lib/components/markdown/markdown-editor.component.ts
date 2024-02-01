@@ -76,9 +76,12 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 				content => {
 
-					if (this.control.pristine) // first value from db
-						this.undoCache.initialize(content)
-					else
+					if (this.control.pristine) { // first value from db
+
+						this.undoCache.initialize(content);
+						this.lsManager.save(content, true);
+
+					} else
 						this.buffer.next(content);
 
 				}

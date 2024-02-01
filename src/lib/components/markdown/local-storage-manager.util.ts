@@ -37,11 +37,12 @@ export class LocalStorageManager {
 	hasPrev: Signal<boolean> = computed(() => !!this.entries?.entries[this.viewCounter() - 1]);
 	hasNext: Signal<boolean> = computed(() => !!this.entries?.entries[this.viewCounter() + 1]);
 
-	save(content: string): void {
+	save(content: string, skipThreshold: boolean = false): void {
 
 		this.counter++;
-		if (this.counter % LS_SAVE_THRESHOLD > 0)
-			return;
+		if (!skipThreshold)
+			if (this.counter % LS_SAVE_THRESHOLD > 0)
+				return;
 
 		let entries = this.readEntries();
 		if (!entries)
