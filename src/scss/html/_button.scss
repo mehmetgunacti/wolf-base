@@ -133,6 +133,12 @@ button {
 
 		}
 
+		&:has(span + span) {
+
+			gap						: var(--gap-xs);
+
+		}
+
 	}
 
 	&.rounded {
