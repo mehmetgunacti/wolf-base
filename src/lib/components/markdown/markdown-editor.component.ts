@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListe
 import { FormControl } from '@angular/forms';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
 import { ClipboardService } from 'services';
-import { ButtonActions, C_INDENT, C_TAB, C_TASK_COMPL, C_TASK_EMPTY, lineStartsWithOneOf } from './button-actions.util';
+import { ButtonActions, C_ASTERISK, C_DASH, C_INDENT, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_PLUS, C_TAB, C_TASK_COMPL, C_TASK_EMPTY, lineStartsWithOneOf } from './button-actions.util';
 import { LOCAL_STORAGE_MANAGER, LSEntry, LocalStorageManager, LocalStorageManagerImpl } from './local-storage-manager.util';
 import { EditorProperties, extractProps } from './textarea-properties.model';
 import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
@@ -184,7 +184,14 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 			if (hasModifierKey(event, 'shiftKey') && event.key === 'Tab') {
 
 				event.preventDefault();
-				this.updateEditor(this.actions.shiftTab(this.editor.nativeElement));
+				const tuple = lineStartsWithOneOf(
+					extractProps(this.editor.nativeElement),
+					[C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS]
+				)
+				if (tuple && tuple[1] > 0)
+					this.updateEditor(this.actions.decreaseIndent(this.editor.nativeElement));
+				else
+					this.updateEditor(this.actions.shiftTab(this.editor.nativeElement));
 
 
 			} else if (hasModifierKey(event, 'ctrlKey') && hasModifierKey(event, 'shiftKey') && event.key.toLowerCase() === 'z') {
@@ -202,7 +209,14 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 		} else if (event.key === 'Tab') {
 
 			event.preventDefault();
-			this.updateEditor(this.actions.tab(this.editor.nativeElement));
+			const tuple = lineStartsWithOneOf(
+				extractProps(this.editor.nativeElement),
+				[C_ASTERISK, C_DASH, C_PLUS, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS]
+			)
+			if (tuple && tuple[1] > 0)
+				this.updateEditor(this.actions.increaseIndent(this.editor.nativeElement));
+			else
+				this.updateEditor(this.actions.tab(this.editor.nativeElement));
 
 		} else if (event.key === 'Escape') {
 
@@ -211,7 +225,11 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 		} else if (event.key === 'Enter') {
 
-			const tuple = lineStartsWithOneOf(extractProps(this.editor.nativeElement), [C_TAB, C_INDENT, C_TASK_EMPTY, C_TASK_COMPL], [C_TAB, C_INDENT, C_TASK_EMPTY, C_TASK_EMPTY]);
+			const tuple = lineStartsWithOneOf(
+				extractProps(this.editor.nativeElement),
+				[C_TASK_EMPTY, C_TASK_COMPL, C_ASTERISK, C_DASH, C_PLUS, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_TAB, C_INDENT],
+				[C_TASK_EMPTY, C_TASK_EMPTY, C_ASTERISK, C_DASH, C_PLUS, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_TAB, C_INDENT]
+			);
 			if (tuple && tuple[1] > 0) {
 
 				event.preventDefault();

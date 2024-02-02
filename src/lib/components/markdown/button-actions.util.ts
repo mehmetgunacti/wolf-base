@@ -7,6 +7,12 @@ export const C_TAB = '\t'; // tab-size : 4; <-- css of textarea
 export const C_INDENT = C_SPACE.repeat(2);
 export const C_TASK_EMPTY = '- [ ] ';
 export const C_TASK_COMPL = '- [x] ';
+export const C_ASTERISK = '* ';
+export const C_DASH = '- ';
+export const C_PLUS = '+ ';
+export const C_LIST_ASTERISK = '  * ';
+export const C_LIST_DASH = '  - ';
+export const C_LIST_PLUS = '  + ';
 
 function isSelection({ sIndex, eIndex }: EditorProperties): boolean {
 
@@ -20,10 +26,9 @@ function isSelectionMultiLine({ content, sIndex, eIndex }: EditorProperties): bo
 
 }
 
-export function lineStartsWithOneOf(props: EditorProperties, prefixes: string[], substitute: string[]): [string, number] | null {
+export function lineStartsWithOneOf(props: EditorProperties, prefixes: string[], substitute: string[] = []): [string, number] | null {
 
 	const line = currentLine(props);
-	console.log(line);
 	for (let idx = 0; idx < prefixes.length; ++idx) {
 
 		const pre = prefixes[idx];
