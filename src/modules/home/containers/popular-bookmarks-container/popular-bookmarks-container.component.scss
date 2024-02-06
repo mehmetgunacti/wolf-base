@@ -1,4 +1,5 @@
-@import 'mixins/responsive';
+@import 'mixins';
+@import 'components';
 
 :host {
 
@@ -9,6 +10,9 @@
 	@include md() {
 
 		grid-template-columns	: repeat(auto-fill, minmax(300px, 1fr));
+
+		@include mx-scrollable(35rem);
+
 
 	}
 
