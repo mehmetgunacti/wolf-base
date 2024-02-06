@@ -1,10 +1,29 @@
-@for(bookmark of bookmarks$ | async; track bookmark) {
+<header>
 
-	<app-bookmark
-		class="compact"
-		[bookmark]="bookmark"
-		(linkClick)="onClick($event)"
-		[editable]="false"
-		[popularButton]="false"></app-bookmark>
+	<span class="material-symbols-outlined">bookmarks</span>
 
-}
+	@for(tag of ['news', 'im-bored', 'shopping']; track tag) {
+
+		<button
+			type="button"
+			class="tag"
+			[routerLink]="['/bookmarks']"
+			[queryParams]="{'tags': tag}">{{ tag }}</button>
+
+	}
+
+</header>
+<main>
+
+	@for(bookmark of bookmarks$ | async; track bookmark) {
+
+		<app-bookmark
+			class="compact"
+			[bookmark]="bookmark"
+			(linkClick)="onClick($event)"
+			[editable]="false"
+			[popularButton]="false"></app-bookmark>
+
+	}
+
+</main>

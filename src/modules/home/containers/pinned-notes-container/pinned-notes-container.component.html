@@ -1,5 +1,24 @@
-@for(note of notes$ | async; track note) {
+<header>
 
-	<app-note-header [note]="note"/>
+	<span class="material-symbols-outlined">note_stack</span>
 
-}
+	@for(tag of ['news', 'im-bored', 'shopping']; track tag) {
+
+		<button
+			type="button"
+			class="tag"
+			[routerLink]="['/bookmarks']"
+			[queryParams]="{'tags': tag}">{{ tag }}</button>
+
+	}
+
+</header>
+<main>
+
+	@for(note of notes$ | async; track note) {
+
+		<app-note-header [note]="note"/>
+
+	}
+
+</main>
