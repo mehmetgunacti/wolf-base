@@ -1,4 +1,4 @@
-import { Note, UUID } from '@lib';
+import { Note, TAG_PINNED, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selNote_EntitiesState } from './note.selectors';
 
@@ -27,6 +27,13 @@ export const selNote_rootArray = createSelector(
 
 	selNote_array,
 	(arr): Note[] => arr.filter(n => n.parentId === null)
+
+);
+
+export const selNote_pinnedArray = createSelector(
+
+	selNote_array,
+	(arr): Note[] => arr.filter(n => n.tags.includes(TAG_PINNED))
 
 );
 

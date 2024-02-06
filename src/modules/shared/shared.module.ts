@@ -9,10 +9,12 @@ import { SelectModule } from 'lib/components/select/select.module';
 import { TagCloudModule } from 'lib/components/tag-cloud/tag-cloud.module';
 import { BookmarkComponent } from './bookmark/bookmark.component';
 import { DisplayModule } from 'lib/components/display/display.module';
+import { NoteHeaderComponent } from './note-header/note-header.component';
 
 @NgModule({
 	declarations: [
 		BookmarkComponent,
+		NoteHeaderComponent,
 		PortalComponent,
 		AutofocusDirective,
 		NoDataPipe,
@@ -33,6 +35,7 @@ import { DisplayModule } from 'lib/components/display/display.module';
 	],
 	exports: [
 		BookmarkComponent,
+		NoteHeaderComponent,
 		PortalComponent,
 		AutofocusDirective,
 		ReactiveFormsModule,

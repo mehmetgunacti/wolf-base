@@ -1,0 +1,15 @@
+@if(note(); as note) {
+
+	<a [routerLink]="['/notes', note.id]" tabindex="0">
+
+		<small>{{ note.modified | timePast }}</small>
+		<span>
+			{{ note.name }}
+			<sup *ngIf="note.tags.includes(TAG_PINNED)">
+				<span class="material-symbols-outlined filled">push_pin</span>
+			</sup>
+		</span>
+
+	</a>
+
+}

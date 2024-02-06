@@ -1,0 +1,68 @@
+@import 'helper';
+@import 'variables';
+@import 'mixins';
+
+:host {
+
+	display: grid;
+
+	& > a {
+
+		@extend %flex-column;
+		padding				: var(--gap);
+		border-radius		: var(--border-radius-sm);
+		text-decoration		: none;
+		transition			: $bg-transition;
+		background-color	: fn-hsl(bg-2);
+
+		& .material-symbols-outlined {
+
+			font-size		: var(--font-size-xs);
+			color			: fn-hsl(focus);
+
+		}
+
+
+		& > span:first-child {
+
+			@extend %flex-center-y;
+			color				: fn-hsl(text-secondary);
+			& > span:first-child {
+
+				font-size		: var(--font-size-sm);
+				color			: inherit;
+				margin-right	: var(--gap-xxs);
+
+			}
+
+			& > span:last-child {
+
+				font-size		: var(--font-size-xs);
+				color			: inherit;
+
+			}
+
+		}
+
+		& > span:last-child {
+
+			font-size			: var(--font-size);
+
+		}
+
+		&:hover {
+
+			background-color	: fn-hsl(bg-3, (lig: "- 2%", alp: "- 0.4"));
+
+		}
+
+		// &:focus,
+		&:focus-visible {
+
+			@include mx-outline;
+
+		}
+
+	}
+
+}
