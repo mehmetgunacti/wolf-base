@@ -1,7 +1,10 @@
-<app-bookmark
-	*ngFor="let bookmark of bookmarks$ | async"
-	class="compact"
-	[bookmark]="bookmark"
-	(linkClick)="onClick($event)"
-	[editable]="false"
-	[popularButton]="false"></app-bookmark>
+@for(bookmark of bookmarks$ | async; track bookmark) {
+
+	<app-bookmark
+		class="compact"
+		[bookmark]="bookmark"
+		(linkClick)="onClick($event)"
+		[editable]="false"
+		[popularButton]="false"></app-bookmark>
+
+}
