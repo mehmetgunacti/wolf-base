@@ -185,7 +185,7 @@ export class FirestoreAPIClientImpl implements FirestoreAPIClient {
 			return field.booleanValue as T;
 
 		if (FIRESTORE_TYPE.arrayValue in field)
-			return field.arrayValue.values.map(v => this.parseField(v)) as unknown as T;
+			return (field.arrayValue.values?.map(v => this.parseField(v)) ?? []) as unknown as T;
 
 		if (FIRESTORE_TYPE.bytesValue in field)
 			return field.bytesValue as T;
