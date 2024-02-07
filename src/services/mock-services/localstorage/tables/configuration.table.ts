@@ -8,9 +8,10 @@ export class MockConfigurationLocalRepositoryImpl implements ConfigurationLocalR
 
 		theme: DEFAULT_CONF_VALUES.theme,
 		sidebarState: DEFAULT_CONF_VALUES.sidebarState,
-		syncWorkerActive: DEFAULT_CONF_VALUES.syncWorkerActive,
 		firestoreConfig: null,
-		titleLookupUrl: null
+		titleLookupUrl: null,
+		popularBookmarks: [],
+		pinnedNotest: []
 
 	}
 

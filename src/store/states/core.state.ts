@@ -19,7 +19,6 @@ export interface CoreUIState {
 export interface CoreConfigurationState {
 
 	initialized: boolean;
-	syncWorkerActive: boolean | null;
 	titleLookupUrl: string | null;
 	firestoreConfig: FirestoreConfig | null;
 
@@ -30,7 +29,6 @@ export interface CoreConfigurationState {
 export const initialCoreConfigurationState: CoreConfigurationState = {
 
 	initialized: false,
-	syncWorkerActive: false,
 	firestoreConfig: null,
 	titleLookupUrl: null
 

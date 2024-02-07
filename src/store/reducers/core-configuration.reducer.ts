@@ -5,9 +5,8 @@ import { CoreConfigurationState, initialCoreConfigurationState } from 'store/sta
 export const coreConfigurationReducer: ActionReducer<CoreConfigurationState, Action> = createReducer(
 
 	initialCoreConfigurationState,
-	on(loadAllSuccess, (state, { configuration: { syncWorkerActive, firestoreConfig, titleLookupUrl } }) => ({
+	on(loadAllSuccess, (state, { configuration: { firestoreConfig, titleLookupUrl } }) => ({
 
-		syncWorkerActive,
 		firestoreConfig,
 		titleLookupUrl,
 		initialized: true

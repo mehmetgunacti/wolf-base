@@ -3,10 +3,11 @@ import { SidebarState, Theme } from 'lib/constants';
 export interface Configuration {
 
 	sidebarState: SidebarState;
-	syncWorkerActive: boolean | null;
-	theme: Theme | null;
+	theme: Theme;
 	titleLookupUrl: string | null;
 	firestoreConfig: FirestoreConfig | null;
+	popularBookmarks: string[];
+	pinnedNotest: string[];
 
 }
 
