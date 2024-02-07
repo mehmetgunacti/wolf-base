@@ -5,6 +5,7 @@
 :host {
 
 	display: grid;
+	@include mx-box-shadow;
 
 	& > a {
 
