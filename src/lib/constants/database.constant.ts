@@ -1,3 +1,4 @@
+import { Configuration, FirestoreConfig } from 'lib/models';
 import { SidebarState } from './sidebar.constant';
 import { Theme } from './theme.constant';
 
@@ -27,20 +28,24 @@ export enum LocalRepositoryNames {
 
 }
 
-export enum CONF_KEYS {
+export const CONF_KEYS: { [K in keyof Configuration]: K } = {
 
-	syncWorkerActive = 'syncWorkerActive',
-	sidebarVisible = 'sidebarVisible',
-	theme = 'theme',
-	firestoreConfig = 'firestoreConfig',
-	titleLookupUrl = 'titleLookupUrl'
+	theme: 'theme',
+	sidebarState: 'sidebarState',
+	firestoreConfig: 'firestoreConfig',
+	titleLookupUrl: 'titleLookupUrl',
+	popularBookmarks: 'popularBookmarks',
+	pinnedNotest: 'pinnedNotest'
 
 }
 
-export class DEFAULT_CONF_VALUES {
+export const DEFAULT_CONF_VALUES: Configuration = {
 
-	static theme: Theme = Theme.DARK;
-	static sidebarState: SidebarState = SidebarState.FULL;
-	static syncWorkerActive: boolean = true;
+	theme: Theme.DARK,
+	sidebarState: SidebarState.FULL,
+	firestoreConfig: null,
+	titleLookupUrl: null,
+	popularBookmarks: ['news', 'shopping', 'shopping'],
+	pinnedNotest: ['java', 'todo', 'code']
 
 }

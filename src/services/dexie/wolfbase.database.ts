@@ -38,7 +38,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			logs: '++id, category, entityId'
 
 		},
-		version: 5
+		version: 7
 
 	});
 
@@ -65,7 +65,7 @@ export class WolfBaseDB extends Dexie {
 	note_content_remote: Dexie.Table<RemoteMetadata, UUID>;
 	note_content_trash: Dexie.Table<string, number>;
 
-	configuration: Dexie.Table<string | boolean, CONF_KEYS>;
+	configuration: Dexie.Table<string | boolean, typeof CONF_KEYS>;
 	logs: Dexie.Table<LogMessage, number>;
 
 	constructor(conf: DexieConfiguration) {
@@ -93,11 +93,27 @@ export class WolfBaseDB extends Dexie {
 		this.configuration = this.table(LocalRepositoryNames.configuration);
 		this.logs = this.table(LocalRepositoryNames.logs);
 
-		this.on('populate', () => {
+		this.on('ready', async (db) => {
 
-			this.configuration.put(DEFAULT_CONF_VALUES.syncWorkerActive, CONF_KEYS.syncWorkerActive);
-			this.configuration.put(DEFAULT_CONF_VALUES.sidebarState, CONF_KEYS.sidebarVisible);
-			this.configuration.put(DEFAULT_CONF_VALUES.theme, CONF_KEYS.theme);
+			const defaults: Record<string, any> = DEFAULT_CONF_VALUES;
+			const table = db.table(LocalRepositoryNames.configuration);
+
+			// read configuration table
+			const currentValues: Record<string, any> = {};
+			await table.each((val, c) => currentValues[c.key] = val);
+
+			// add new configuration properties
+			for (let key in DEFAULT_CONF_VALUES) {
+
+				if (!currentValues[key])
+					await table.put(defaults[key], key);
+				delete currentValues[key];
+
+			}
+
+			// delete obsolete table entries
+			for (let key in currentValues)
+				await table.delete(key);
 
 		});
 
