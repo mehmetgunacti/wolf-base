@@ -177,7 +177,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 	onKeydownHandler(event: KeyboardEvent) {
 
 		if (!this.hasFocus)
-			return;
+			return;				console.log(event.key);
 
 		if (hasModifierKey(event)) {
 
@@ -203,6 +203,16 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 				event.preventDefault();
 				this.onUndo();
+
+			} else if (hasModifierKey(event, 'ctrlKey') && event.key === 'ArrowDown') {
+
+				event.preventDefault();
+				this.editor.nativeElement.scrollTop += 30;
+
+			} else if (hasModifierKey(event, 'ctrlKey') && event.key === 'ArrowUp') {
+
+				event.preventDefault();
+				this.editor.nativeElement.scrollTop -= 30;
 
 			}
 
