@@ -50,7 +50,7 @@ class NoteFirestoreConverter implements FirestoreConverter<Note> {
 		if (!modified)
 			throw new Error(`Firestore Note: invalid 'name' value`);
 
-		if (!Array.isArray(tags) || tags.length === 0)
+		if (!Array.isArray(tags))
 			throw new Error(`Firestore Note: invalid 'tags' value`);
 
 		const validated: Note = {
