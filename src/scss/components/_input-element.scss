@@ -15,6 +15,7 @@
 	transition				: $bg-transition, border-color $transition;
 
 	min-height				: var(--input-element-height);
+	width					: 100%;
 
 	&:focus-visible {
 
