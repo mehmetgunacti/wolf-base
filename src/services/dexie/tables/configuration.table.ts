@@ -51,7 +51,7 @@ export class DexieConfigurationRepositoryImpl extends KeyValueLocalRepositoryImp
 			firestoreConfig: map.get(CONF_KEYS.firestoreConfig) ?? null,
 			titleLookupUrl: map.get(CONF_KEYS.titleLookupUrl) ?? null,
 			popularBookmarks: map.get(CONF_KEYS.popularBookmarks) ?? null,
-			pinnedNotest: map.get(CONF_KEYS.pinnedNotest) ?? null
+			pinnedNotes: map.get(CONF_KEYS.pinnedNotes) ?? null
 
 		}
 		return conf;

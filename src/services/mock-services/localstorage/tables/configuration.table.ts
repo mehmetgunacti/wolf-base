@@ -11,7 +11,7 @@ export class MockConfigurationLocalRepositoryImpl implements ConfigurationLocalR
 		firestoreConfig: null,
 		titleLookupUrl: null,
 		popularBookmarks: [],
-		pinnedNotest: []
+		pinnedNotes: []
 
 	}
 

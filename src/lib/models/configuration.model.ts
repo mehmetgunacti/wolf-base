@@ -7,7 +7,7 @@ export interface Configuration {
 	titleLookupUrl: string | null;
 	firestoreConfig: FirestoreConfig | null;
 	popularBookmarks: string[];
-	pinnedNotest: string[];
+	pinnedNotes: string[];
 
 }
 

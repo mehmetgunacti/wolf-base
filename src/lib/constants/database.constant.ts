@@ -1,4 +1,4 @@
-import { Configuration, FirestoreConfig } from 'lib/models';
+import { Configuration } from 'lib/models';
 import { SidebarState } from './sidebar.constant';
 import { Theme } from './theme.constant';
 
@@ -35,7 +35,7 @@ export const CONF_KEYS: { [K in keyof Configuration]: K } = {
 	firestoreConfig: 'firestoreConfig',
 	titleLookupUrl: 'titleLookupUrl',
 	popularBookmarks: 'popularBookmarks',
-	pinnedNotest: 'pinnedNotest'
+	pinnedNotes: 'pinnedNotes'
 
 }
 
@@ -46,6 +46,6 @@ export const DEFAULT_CONF_VALUES: Configuration = {
 	firestoreConfig: null,
 	titleLookupUrl: null,
 	popularBookmarks: ['news', 'shopping', 'shopping'],
-	pinnedNotest: ['java', 'todo', 'code']
+	pinnedNotes: ['java', 'todo', 'code']
 
 }
