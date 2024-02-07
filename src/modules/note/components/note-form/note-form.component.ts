@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject, input } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { Note, TAG_PINNED, UUID, elseEmptyArray } from 'lib';
-import { filter, map, tap } from 'rxjs';
+import { filter, tap } from 'rxjs';
 import { EditFormImpl, NOTE_FORM, NoteForm } from './note-form';
 
 @Component({
@@ -47,14 +47,13 @@ export class NoteFormComponent {
 
 		).subscribe();
 
-		// when user changes parentId using selectbox, update 'tags' form value
-		this.form.parentId.valueChanges.pipe(
+	}
 
-			takeUntilDestroyed(),
-			map(parentId => this.nodes().find(n => n.id === parentId)?.tags ?? []),
-			tap(tags => this.form.tags.setValue(tags))
+	onCopyTags(): void {
 
-		).subscribe();
+		const parentTags: string[] = this.nodes().find(n => n.id === this.form.parentId.value)?.tags ?? [];
+		const currentTags: string[] = this.form.tags.value;
+		this.form.tags.setValue([...currentTags, ...parentTags]);
 
 	}
 
