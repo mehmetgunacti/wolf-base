@@ -9,7 +9,7 @@ import { FirestoreAPIClient, FirestoreAPIClientImpl } from "lib/utils/firestore-
 import { VoidBookmarksCollection } from "services/mock-services/remotestorage/collections/bookmarks.collection";
 import { VoidNoteContentCollection } from 'services/mock-services/remotestorage/collections/note-content.collection';
 import { VoidNotesCollection } from 'services/mock-services/remotestorage/collections/notes.collection';
-import { selCoreFirestoreConfig } from "store/selectors/core-configuration.selectors";
+import { selCore_firestoreConfig } from "store/selectors/core-configuration.selectors";
 import { BookmarksFirestoreCollectionImpl } from "./collections";
 import { NoteContentContentFirestoreCollectionImpl } from './collections/note-content.collection';
 import { NotesFirestoreCollectionImpl } from './collections/notes.collection';
@@ -30,7 +30,7 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 		this.init();
 
 		// update when config available
-		this.store.select(selCoreFirestoreConfig).subscribe(config => {
+		this.store.select(selCore_firestoreConfig).subscribe(config => {
 
 			this.init(config);
 

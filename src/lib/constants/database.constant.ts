@@ -45,7 +45,7 @@ export const DEFAULT_CONF_VALUES: Configuration = {
 	sidebarState: SidebarState.FULL,
 	firestoreConfig: null,
 	titleLookupUrl: null,
-	popularBookmarks: ['news', 'shopping', 'shopping'],
+	popularBookmarks: ['2-be-read', 'new', 'im-bored', 'news', 'shopping'],
 	pinnedNotes: ['java', 'todo', 'code']
 
 }

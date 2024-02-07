@@ -6,7 +6,7 @@ import { closeEditBookmarkDialog, create, moveToTrash, update } from 'store/acti
 import { showNotification } from 'store/actions/core-notification.actions';
 import { selBookmarkEditId } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
 import { distinctTagsArray } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
-import { selCoreTitleLookupUrl } from 'store/selectors/core-configuration.selectors';
+import { selCore_titleLookupUrl } from 'store/selectors/core-configuration.selectors';
 
 @Component({
 	selector: 'app-bookmark-edit-container',
@@ -26,7 +26,7 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 	constructor() {
 
 		this.bookmark$ = this.store.select(selBookmarkEditId);
-		this.titleLookup$ = this.store.select(selCoreTitleLookupUrl);
+		this.titleLookup$ = this.store.select(selCore_titleLookupUrl);
 
 	}
 

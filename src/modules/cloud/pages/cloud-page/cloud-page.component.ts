@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { closeConflictDialog, startSync } from 'store/actions/cloud.actions';
 import { selCloudConflictDialogTitle, selCloudIsConflictDialogVisible } from 'store/selectors/cloud-ui.selectors';
-import { selCoreIsFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
+import { selCore_isFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
 import { selCore_isBigScreen } from 'store/selectors/core-ui.selectors';
 
 @Component({
@@ -22,7 +22,7 @@ export class CloudPageComponent {
 
 	constructor() {
 
-		this.isFirestoreConfigMissing$ = this.store.select(selCoreIsFirestoreConfigMissing);
+		this.isFirestoreConfigMissing$ = this.store.select(selCore_isFirestoreConfigMissing);
 		this.isConflictDialogVisible$ = this.store.select(selCloudIsConflictDialogVisible);
 		this.isBigScreen$ = this.store.select(selCore_isBigScreen);
 		this.dialogTitle$ = this.store.select(selCloudConflictDialogTitle);

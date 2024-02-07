@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { ClickedBookmark, TAG_POPULAR, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { click } from 'store/actions/bookmark.actions';
 import * as bmSelectors from 'store/selectors/bookmark-selectors/bookmark-entities.selectors';
+import * as coreSelectors from 'store/selectors/core-configuration.selectors';
 
 @Component({
 	selector: 'app-popular-bookmarks-container',
@@ -14,13 +15,17 @@ import * as bmSelectors from 'store/selectors/bookmark-selectors/bookmark-entiti
 export class PopularBookmarksContainerComponent implements OnInit {
 
 	bookmarks$: Observable<ClickedBookmark[]>;
+	tags$: Observable<string[]>;
 
-	constructor(private store: Store) {
+	private store: Store = inject(Store);
 
-		this.bookmarks$ = store.select(bmSelectors.selBM_array).pipe(
+	constructor() {
+
+		this.bookmarks$ = this.store.select(bmSelectors.selBM_array).pipe(
 			map(bookmarks => bookmarks.filter(b => b.tags.includes(TAG_POPULAR))),
 			map(bookmarks => bookmarks.sort((b1, b2) => b2.clicks - b1.clicks))
 		);
+		this.tags$ = this.store.select(coreSelectors.selCore_popularBookmarks);
 
 	}
 

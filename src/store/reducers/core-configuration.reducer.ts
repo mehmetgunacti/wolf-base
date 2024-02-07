@@ -5,11 +5,13 @@ import { CoreConfigurationState, initialCoreConfigurationState } from 'store/sta
 export const coreConfigurationReducer: ActionReducer<CoreConfigurationState, Action> = createReducer(
 
 	initialCoreConfigurationState,
-	on(loadAllSuccess, (state, { configuration: { firestoreConfig, titleLookupUrl } }) => ({
+	on(loadAllSuccess, (state, { configuration: { firestoreConfig, titleLookupUrl, popularBookmarks, pinnedNotes } }) => ({
 
 		firestoreConfig,
 		titleLookupUrl,
-		initialized: true
+		initialized: true,
+		popularBookmarks,
+		pinnedNotes
 
 	}))
 

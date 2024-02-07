@@ -2,7 +2,7 @@
 
 	<span class="material-symbols-outlined">note_stack</span>
 
-	@for(tag of ['news', 'im-bored', 'shopping']; track tag) {
+	@for(tag of tags$ | async; track tag) {
 
 		<button
 			type="button"

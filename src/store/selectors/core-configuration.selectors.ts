@@ -10,30 +10,44 @@ const confState = createSelector(
 
 );
 
-export const selCoreIsInitialized = createSelector(
+export const selCore_isInitialized = createSelector(
 
 	confState,
 	(state: CoreConfigurationState) => state.initialized
 
 );
 
-export const selCoreFirestoreConfig = createSelector(
+export const selCore_firestoreConfig = createSelector(
 
 	confState,
 	({ firestoreConfig }): FirestoreConfig | null => firestoreConfig
 
 );
 
-export const selCoreIsFirestoreConfigMissing = createSelector(
+export const selCore_isFirestoreConfigMissing = createSelector(
 
-	selCoreFirestoreConfig,
+	selCore_firestoreConfig,
 	(conf: FirestoreConfig | null) => !conf
 
 );
 
-export const selCoreTitleLookupUrl = createSelector(
+export const selCore_titleLookupUrl = createSelector(
 
 	confState,
 	(state: CoreConfigurationState) => state.titleLookupUrl
+
+);
+
+export const selCore_popularBookmarks = createSelector(
+
+	confState,
+	(state: CoreConfigurationState) => state.popularBookmarks
+
+);
+
+export const selCore_pinnedNotes = createSelector(
+
+	confState,
+	(state: CoreConfigurationState) => state.pinnedNotes
 
 );

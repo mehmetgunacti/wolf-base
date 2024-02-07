@@ -2,7 +2,7 @@
 
 	<span class="material-symbols-outlined">bookmarks</span>
 
-	@for(tag of ['news', 'im-bored', 'shopping']; track tag) {
+	@for(tag of tags$ | async; track tag) {
 
 		<button
 			type="button"

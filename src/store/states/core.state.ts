@@ -21,6 +21,8 @@ export interface CoreConfigurationState {
 	initialized: boolean;
 	titleLookupUrl: string | null;
 	firestoreConfig: FirestoreConfig | null;
+	popularBookmarks: string[],
+	pinnedNotes: string[]
 
 }
 
@@ -30,7 +32,9 @@ export const initialCoreConfigurationState: CoreConfigurationState = {
 
 	initialized: false,
 	firestoreConfig: null,
-	titleLookupUrl: null
+	titleLookupUrl: null,
+	popularBookmarks: [],
+	pinnedNotes: []
 
 };
 
