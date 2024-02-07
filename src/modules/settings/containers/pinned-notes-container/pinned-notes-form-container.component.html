@@ -1,0 +1,14 @@
+<header>
+
+	<div card_title>Pinned Notes</div>
+
+</header>
+<main>
+
+	<app-pinned-notes-form
+		[tags]="tags$ | async"
+		[tagSuggestions]="tagSuggestions$ | async"
+		(tagInput)="onTagInput($event)"
+		(save)="onSave($event)" />
+
+</main>

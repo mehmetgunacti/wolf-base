@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, Input, InputSignal, OnInit, Output, ViewChild, input } from '@angular/core';
 import { FormControl, FormControlStatus } from '@angular/forms';
 import { filterArrayElements } from 'lib/utils';
 import { BehaviorSubject, Observable, combineLatest, filter, fromEvent, map, merge, startWith, tap } from 'rxjs';
@@ -11,6 +11,8 @@ import { BehaviorSubject, Observable, combineLatest, filter, fromEvent, map, mer
 export class InputTagComponent implements OnInit {
 
 	@ViewChild('element', { static: true }) e!: ElementRef<HTMLInputElement>;
+
+	id: InputSignal<string> = input.required();
 
 	@Input() control: FormControl<string[]> = new FormControl<string[]>([], { nonNullable: true });
 	@Input() name: string = '';

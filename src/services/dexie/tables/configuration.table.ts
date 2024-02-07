@@ -29,6 +29,18 @@ export class DexieConfigurationRepositoryImpl extends KeyValueLocalRepositoryImp
 
 	}
 
+	async setPinnedNotes(tags: string[]): Promise<void> {
+
+		return await this.set(CONF_KEYS.pinnedNotes, tags);
+
+	}
+
+	async setPopularBookmarks(tags: string[]): Promise<void> {
+
+		return await this.set(CONF_KEYS.popularBookmarks, tags);
+
+	}
+
 	async getFirestoreConfig(): Promise<FirestoreConfig | null> {
 
 		return this.get(CONF_KEYS.firestoreConfig);

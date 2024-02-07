@@ -6,8 +6,8 @@
 		{{t}} <span class="material-symbols-outlined">close</span>
 	</button>
 </div>
-<input #element type="text" list="suggestions" />
+<input #element type="text" [attr.list]="id() + '_suggestions'" />
 <label [class.up]="hasValue$ | async">{{name}}</label>
-<datalist id="suggestions">
+<datalist [id]="id() + '_suggestions'">
 	<option *ngFor="let s of suggestions$ | async" [value]="s + ' '"></option>
 </datalist>

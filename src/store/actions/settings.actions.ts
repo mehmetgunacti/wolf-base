@@ -6,3 +6,9 @@ export const saveFirestoreConfigSuccess = createAction('[Settings] Save Firestor
 
 export const saveTitleLookup = createAction('[Settings] Save Title Lookup', props<{ url: string }>());
 export const saveTitleLookupSuccess = createAction('[Settings] Save Title Lookup Success');
+
+export const savePopularBookmarksConfig = createAction('[Settings] Save Popular Bookmarks', props<{ tags: string[] }>());
+export const savePopularBookmarksConfigSuccess = createAction('[Settings] Save Popular Bookmarks Success');
+
+export const savePinnedNotesConfig = createAction('[Settings] Save Pinned Notes', props<{ tags: string[] }>());
+export const savePinnedNotesConfigSuccess = createAction('[Settings] Save Pinned Notes Success');

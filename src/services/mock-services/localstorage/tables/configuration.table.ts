@@ -15,6 +15,19 @@ export class MockConfigurationLocalRepositoryImpl implements ConfigurationLocalR
 
 	}
 
+	async setPinnedNotes(tags: string[]): Promise<void> {
+
+		throw new Error('Method not implemented.');
+
+	}
+
+	async setPopularBookmarks(tags: string[]): Promise<void> {
+
+		throw new Error('Method not implemented.');
+
+	}
+
+
 	async setSidebarState(visible: SidebarState): Promise<void> {
 
 		this.conf.sidebarState = visible;

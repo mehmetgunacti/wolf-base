@@ -1,0 +1,14 @@
+<header>
+
+	<div card_title>Popular Bookmarks</div>
+
+</header>
+<main>
+
+	<app-popular-bookmarks-form
+		[tags]="tags$ | async"
+		[tagSuggestions]="tagSuggestions$ | async"
+		(tagInput)="onTagInput($event)"
+		(save)="onSave($event)" />
+
+</main>
