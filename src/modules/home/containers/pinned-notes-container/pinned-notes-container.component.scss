@@ -9,6 +9,7 @@
 	& > header {
 
 		@include mx-component(3);
+		@include mx-box-shadow;
 		display	: flex;
 		padding-inline	: var(--gap-lg);
 		gap				: var(--gap-xs);

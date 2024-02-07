@@ -4,12 +4,12 @@
 
 :host {
 
-	display: grid;
-	@include mx-box-shadow;
+	display: contents;
 
 	& > a {
 
-		@extend %flex-column;
+		@include mx-flex-column;
+		@include mx-box-shadow;
 		padding				: var(--gap);
 		border-radius		: var(--border-radius-sm);
 		text-decoration		: none;
