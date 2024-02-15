@@ -1,7 +1,7 @@
 <header>
 
 	<w-selected-tags
-		[tags]="[TAG_POPULAR, 'news', 'im-bored', 'shopping']"
+		[tags]="popularTags$ | async"
 		[selectedTags]="selectedTags$ | async"
 		(filterClick)="emptyFilter()"
 		(tagClick)="onTagClicked($event)"></w-selected-tags>

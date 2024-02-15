@@ -5,6 +5,7 @@ import { TAG_POPULAR, Tag, slideUpDownTrigger } from 'lib';
 import { Observable, Subscription, debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { clickTag, emptySelectedTags, search } from 'store/actions/bookmark.actions';
 import { distinctTagsArray, relatedTags, selBMQueryParams } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
+import { selCore_popularBookmarks } from 'store/selectors/core-configuration.selectors';
 
 @Component({
 	selector: 'app-bookmarks-search-and-tag-cloud-container',
@@ -20,6 +21,7 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 	tags$: Observable<Tag[]>;
 	selectedTags$: Observable<string[]>;
 	relatedTags$: Observable<string[]>;
+	popularTags$: Observable<string[]>;
 
 	@HostBinding('class.open')
 	cloudVisible = false;
@@ -32,6 +34,7 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 		this.tags$ = store.select(distinctTagsArray);
 		this.selectedTags$ = store.select(selBMQueryParams).pipe(map(q => q.tags));
 		this.relatedTags$ = store.select(relatedTags);
+		this.popularTags$ = this.store.select(selCore_popularBookmarks).pipe(map(tags => [TAG_POPULAR, ...tags]));
 
 		this.searchControl = new FormControl();
 		this.subscription = this.searchControl.valueChanges.pipe(
