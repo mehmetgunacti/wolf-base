@@ -1,7 +1,7 @@
 <header>
 
 	<w-selected-tags
-		[tags]="[TAG_PINNED, 'code', 'linux', 'android']"
+		[tags]="pinned$ | async"
 		[selectedTags]="selectedTags$ | async"
 		(filterClick)="emptyFilter()"
 		(tagClick)="onTagClicked($event)"></w-selected-tags>

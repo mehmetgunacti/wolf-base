@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { TAG_PINNED, Tag, slideUpDownTrigger } from 'lib';
 import { Observable, Subscription, debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs';
 import { clickTag, emptySelectedTags, search } from 'store/actions/note.actions';
+import { selCore_pinnedNotes } from 'store/selectors/core-configuration.selectors';
 import { distinctTagsArray, relatedTags, selNote_queryParams } from 'store/selectors/note-selectors/note-tags.selectors';
 
 @Component({
@@ -20,6 +21,7 @@ export class NotesSearchAndTagCloudContainerComponent implements OnDestroy {
 	tags$: Observable<Tag[]>;
 	selectedTags$: Observable<string[]>;
 	relatedTags$: Observable<string[]>;
+	pinned$: Observable<string[]>;
 
 
 	@HostBinding('class.open')
@@ -32,6 +34,7 @@ export class NotesSearchAndTagCloudContainerComponent implements OnDestroy {
 
 		this.tags$ = store.select(distinctTagsArray);
 		this.relatedTags$ = store.select(relatedTags);
+		this.pinned$ = this.store.select(selCore_pinnedNotes).pipe(map(tags => [TAG_PINNED, ...tags]));
 
 		const queryParams$ = store.select(selNote_queryParams);
 		this.selectedTags$ = queryParams$.pipe(map(q => q.tags));
