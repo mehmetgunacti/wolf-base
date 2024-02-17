@@ -253,6 +253,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 				this.updateEditor(this.actions.addNewLine(this.editor.nativeElement, tuple[0], tuple[1]));
 
 			}
+			this.editor.nativeElement.scrollLeft = 0;
 
 		}
 
