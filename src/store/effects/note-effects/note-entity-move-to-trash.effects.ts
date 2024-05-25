@@ -5,6 +5,7 @@ import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import * as noteActions from 'store/actions/note.actions';
+import * as coreActions from 'store/actions/core-navigation.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 
 @Injectable()
@@ -43,12 +44,23 @@ export class NoteEntityMoveToTrashEffects {
 
 	);
 
-	loadOneNoteSync$ = createEffect(
+	loadAllNotes$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(noteActions.moveToTrashSuccess),
-			map(({ id }) => noteActions.loadOne({ id }))
+			map(({ id }) => noteActions.loadAll())
+
+		)
+
+	);
+
+	navigate$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(noteActions.moveToTrashSuccess),
+			map(() => coreActions.navigate({ url: ['/notes'] }))
 
 		)
 

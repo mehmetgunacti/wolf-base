@@ -1,4 +1,4 @@
-import { LocalRepositoryNames, SyncData, WolfEntity, toggleArrayItem } from '@lib';
+import { LocalRepositoryNames, LogCategory, SyncData, WolfEntity, capitalize, toggleArrayItem } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { Note } from 'lib/models/note.model';
 import { NotesLocalRepository } from 'lib/repositories/local';
@@ -10,6 +10,61 @@ export class DexieNotesRepositoryImpl extends EntityLocalRepositoryImpl<Note> im
 
 	constructor(db: WolfBaseDB) {
 		super(db, WolfEntity.note);
+	}
+
+	override async moveToTrash(id: UUID): Promise<void> {
+
+		await this.db.transaction('rw', [
+			LocalRepositoryNames.notes,
+			LocalRepositoryNames.notes_sync,
+			LocalRepositoryNames.notes_trash,
+			LocalRepositoryNames.note_content,
+			LocalRepositoryNames.note_content_sync,
+			LocalRepositoryNames.note_content_trash,
+			LocalRepositoryNames.logs
+		], async () => {
+
+			// delete Note from notes table
+			const note = await this.db.notes.get(id);
+			if (note) {
+
+				await this.db.notes_trash.add(note);
+				await this.db.notes.delete(id);
+
+			}
+			await this.db.notes_sync.where({ id }).modify({ deleted: true } as SyncData);
+
+			// delete NoteContent from note_content table
+			const noteContent = await this.db.note_content.get(id);
+			if (noteContent) {
+
+				await this.db.note_content_trash.add(noteContent);
+				await this.db.note_content.delete(id);
+
+			}
+			await this.db.note_content_sync.where({ id }).modify({ deleted: true } as SyncData);
+
+			const children = await this.db.notes.where({ parentId: id }).toArray();
+			for (const child of children) {
+
+				await this.db.notes.where({ id: child.id }).modify({ parentId: null } as Note);
+				await this.db.notes_sync.where({ id: child.id }).modify({ updated: true } as SyncData);
+
+			}
+
+			// add log
+			await this.db.logs.add({
+
+				category: LogCategory.entity_deleted,
+				date: new Date().toISOString(),
+				message: `"${capitalize(this.entity.name)}" moved to trash`,
+				entityId: id,
+				entityName: note?.name ?? '[n/a]'
+
+			});
+
+		});
+
 	}
 
 	protected override newItemFromPartial(item: Partial<Note>): Note {

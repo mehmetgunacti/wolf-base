@@ -50,8 +50,8 @@ export class NoteContainerComponent {
 
 	onRemove(id: UUID): void {
 
-		// this.store.dispatch(moveToTrash({ id }));
-		console.log('not implemented');
+		if (confirm(`Note will be deleted. Continue?`))
+			this.store.dispatch(moveToTrash({ id }));
 
 	}
 

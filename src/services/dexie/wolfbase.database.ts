@@ -20,7 +20,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			bookmarks_clicks: 'id, current',
 
 			// notes
-			notes: 'id, name',
+			notes: 'id, name, parentId',
 			notes_sync: 'id',
 			notes_trash: '++, id, name',
 			notes_remote: 'id',
@@ -38,7 +38,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			logs: '++id, category, entityId'
 
 		},
-		version: 7
+		version: 8
 
 	});
 
