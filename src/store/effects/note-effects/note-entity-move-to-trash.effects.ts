@@ -4,9 +4,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import * as noteActions from 'store/actions/note.actions';
-import * as coreActions from 'store/actions/core-navigation.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
+import * as noteActions from 'store/actions/note.actions';
 
 @Injectable()
 export class NoteEntityMoveToTrashEffects {
@@ -50,17 +49,6 @@ export class NoteEntityMoveToTrashEffects {
 
 			ofType(noteActions.moveToTrashSuccess),
 			map(({ id }) => noteActions.loadAll())
-
-		)
-
-	);
-
-	navigate$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(noteActions.moveToTrashSuccess),
-			map(() => coreActions.navigate({ url: ['/notes'] }))
 
 		)
 
