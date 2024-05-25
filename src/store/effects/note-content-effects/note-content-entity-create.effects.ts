@@ -6,7 +6,8 @@ import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
-import * as actions from 'store/actions/note-content.actions';
+import * as actionNoteContent from 'store/actions/note-content.actions';
+import * as actionNote from 'store/actions/note.actions';
 
 @Injectable()
 export class NoteContentEntityCreateEffects {
@@ -18,13 +19,13 @@ export class NoteContentEntityCreateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(actions.create),
+			ofType(actionNoteContent.create),
 			switchMap(({ content }) =>
 
 				from(
 					this.localRepository.noteContent.create(content)
 				).pipe(
-					map((content: NoteContent) => actions.createSuccess({ content }))
+					map((content: NoteContent) => actionNoteContent.createSuccess({ content }))
 				)
 
 			)
@@ -37,7 +38,7 @@ export class NoteContentEntityCreateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(actions.createSuccess),
+			ofType(actionNoteContent.createSuccess),
 			map(() => showNotification({ severity: 'success', detail: 'Content created' }))
 
 		)
@@ -48,7 +49,7 @@ export class NoteContentEntityCreateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(actions.createSuccess),
+			ofType(actionNoteContent.createSuccess),
 			map(({ content }) => navigate({ url: ['/notes', content.id] }))
 
 		)
@@ -59,8 +60,19 @@ export class NoteContentEntityCreateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(actions.createSuccess),
-			map(({ content }) => actions.loadOne({ id: content.id }))
+			ofType(actionNoteContent.createSuccess),
+			map(({ content }) => actionNoteContent.loadOne({ id: content.id }))
+
+		)
+
+	);
+
+	loadOneNote$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(actionNoteContent.createSuccess),
+			map(({ content }) => actionNote.loadOne({ id: content.id }))
 
 		)
 
