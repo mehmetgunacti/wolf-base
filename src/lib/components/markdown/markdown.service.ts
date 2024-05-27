@@ -31,6 +31,7 @@ import { alert } from '@mdit/plugin-alert';
 import { align } from '@mdit/plugin-align';
 import { attrs } from "@mdit/plugin-attrs";
 import { mark } from '@mdit/plugin-mark';
+import { plantuml } from "@mdit/plugin-plantuml";
 import { sub } from '@mdit/plugin-sub';
 import { sup } from '@mdit/plugin-sup';
 import { tasklist } from '@mdit/plugin-tasklist';
@@ -100,6 +101,7 @@ export class MarkdownService {
 			.use(sup)
 			.use(ins)
 			.use(anchor)
+			.use(plantuml)
 			.use(markdownItTocDoneRight, {
 				listType: 'ul'
 			});

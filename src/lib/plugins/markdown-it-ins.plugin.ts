@@ -1,6 +1,6 @@
 import { type PluginSimple } from "markdown-it";
-import { type RuleInline } from "markdown-it/lib/parser_inline.js";
-import type StateInline from "markdown-it/lib/rules_inline/state_inline.js";
+import { RuleInline } from 'markdown-it/lib/parser_inline.mjs';
+import StateInline, { Delimiter } from 'markdown-it/lib/rules_inline/state_inline.mjs';
 
 // ++to-ins-tag++   =>  <ins>to-ins-tag</ins>
 
@@ -47,7 +47,7 @@ const tokenize: RuleInline = (state, silent) => {
 
 };
 
-const postProcess = (state: StateInline, delimiters: StateInline.Delimiter[],): void => {
+const postProcess = (state: StateInline, delimiters: Delimiter[],): void => {
 
 	let token;
 	const loneMarkers = [];
