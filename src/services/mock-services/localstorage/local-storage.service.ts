@@ -30,4 +30,12 @@ export class MockLocalRepositoryService implements LocalRepositoryService {
 		throw new Error('Method not implemented.');
 	}
 
+	count(repoName: LocalRepositoryNames): Promise<number> {
+		throw new Error('Method not implemented.');
+	}
+
+	size(repoName: LocalRepositoryNames): Promise<number> {
+		throw new Error('Method not implemented.');
+	}
+
 }

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { DatabaseReport } from '@lib';
 import { Store } from '@ngrx/store';
-import { LogMessage, UUID } from 'lib';
-import { Observable } from 'rxjs';
-import { refresh } from 'store/actions/logs.actions';
-import { selLogs_allEntries, selLogs_selectedId } from 'store/selectors/logs.selectors';
+import { Observable, tap } from 'rxjs';
+import { loadReport } from 'store/actions/database.actions';
+import * as reports from 'store/selectors/database.selectors';
 
 @Component({
 	selector: 'app-database-list-container',
@@ -15,19 +15,18 @@ export class DatabaseListContainerComponent {
 
 	private store: Store = inject(Store);
 
-	logMessages$: Observable<LogMessage[]>;
-	selectedId$: Observable<UUID | null>;
+	report$: Observable<DatabaseReport>;
 
 	constructor() {
 
-		this.logMessages$ = this.store.select(selLogs_allEntries);
-		this.selectedId$ = this.store.select(selLogs_selectedId);
+		this.report$ = this.store.select(reports.selDatabaseReport);
+		this.store.dispatch(loadReport());
 
 	}
 
 	onRefresh(): void {
 
-		this.store.dispatch(refresh());
+		this.store.dispatch(loadReport());
 
 	}
 

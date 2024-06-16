@@ -4,7 +4,6 @@ import { LocalRepositoryNames } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, startWith, tap } from 'rxjs';
 import { backupDatabase, loadValues, search } from 'store/actions/database.actions';
-import { selDatabaseSelectedContent } from 'store/selectors/database.selectors';
 
 @Component({
 	selector: 'app-database-page',
@@ -16,7 +15,6 @@ export class DatabasePageComponent implements OnDestroy {
 	tableNames: { label: string, value?: string, disabled?: boolean }[];
 	fcTableName = new FormControl();
 	fcSearch = new FormControl('');
-	content$: Observable<string[]>;
 
 	subscriptions: Subscription = new Subscription();
 
@@ -49,8 +47,6 @@ export class DatabasePageComponent implements OnDestroy {
 			).subscribe()
 
 		);
-
-		this.content$ = this.store.select(selDatabaseSelectedContent);
 
 	}
 

@@ -5,31 +5,75 @@
 
 :host {
 
-	@include mx-card;
+	display						: grid;
+	grid-template-columns		: 1fr;
+	gap							: var(--gap-sm);
 
-	& > main {
+	@include bigScreen() {
 
-		& > div[log_entry] {
+		grid-template-columns	: repeat(auto-fill, minmax(35rem, 1fr));
 
-			display			: block;
-			margin-bottom	: var(--gap-xl);
+	}
 
-			& > div:first-child { // first child: in case log message contains html
+	& > fieldset {
 
-				display		: flex;
-				gap			: var(--gap-xs);
-				& > small {
+		@include mx-card;
+		@include mx-flex-column;
+		margin-top			: 2rem;
+		position			: relative;
+		padding-top			: calc(var(--gap-xl) + var(--gap-xxl)); // vars instead of rem or px
 
-					font-weight: bold;
-					&:nth-child(1) {
+		& > legend {
 
-						color		: fn-hsl(primary);
+			position			: absolute;
+			display				: flex;
+			align-items			: center;
+
+			gap					: var(--gap-xs);
+
+			top					: -2rem;
+			left				: 0rem;
+
+			padding				: var(--gap);
+			margin-left			: var(--gap);
+
+			border				: none;
+			background-color	: fn-hsl(bg-3);
+			border-radius		: var(--border-radius);
+			transition			: $bg-transition;
+
+		}
+
+		& > main {
+
+			& > table {
+
+				width			: 100%;
+
+				& > tr > td {
+
+					&:first-child {
+
+						width		: 100%;
+
+					}
+
+					&:not(:first-child) {
+
+						text-align	: end;
 
 					}
 
 				}
 
 			}
+
+		}
+
+		& > footer {
+
+			@include mx-flex-end-center;
+			padding			: var(--gap-sm);
 
 		}
 

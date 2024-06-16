@@ -16,5 +16,7 @@ export interface LocalRepositoryService {
 
 	getRepository<T extends Entity>(entityName: EntityName): EntityLocalRepository<T>;
 	dump<T = any>(repoName: LocalRepositoryNames): Promise<Record<string, T>>;
+	count(repoName: LocalRepositoryNames): Promise<number>;
+	size(repoName: LocalRepositoryNames): Promise<number>;
 
 }

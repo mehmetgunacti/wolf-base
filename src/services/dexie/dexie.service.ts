@@ -52,4 +52,18 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 	}
 
+	async count(repoName: LocalRepositoryNames): Promise<number> {
+
+		return await this.db.table(repoName).count();
+
+	}
+
+	async size(repoName: LocalRepositoryNames): Promise<number> {
+
+		let size = 0;
+		await this.db.table(repoName).each(obj => size += JSON.stringify(obj).length);
+		return size;
+
+	}
+
 }

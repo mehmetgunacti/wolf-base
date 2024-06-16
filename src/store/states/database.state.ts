@@ -1,13 +1,13 @@
+import { DatabaseReport, emptyDatabaseReport } from '@lib';
+
 export interface DatabaseModuleState {
 
-	selectedValues: string[];
-	searchValue: string | null;
+	report: DatabaseReport;
 
 }
 
 export const initialDatabaseState: DatabaseModuleState = {
 
-	selectedValues: [],
-	searchValue: null
+	report: emptyDatabaseReport
 
 };

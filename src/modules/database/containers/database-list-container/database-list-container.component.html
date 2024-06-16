@@ -8,45 +8,170 @@
 
 </w-portal>
 
-<header>
+@if (report$ | async; as report) {
 
-	<div card_title>Logs
+	<fieldset>
 
-		@if (selectedId$ | async; as selectedId) {
+		<legend>
 
-			<small>{{ selectedId }}</small>
+				<!-- Bookmarks -->
+				<span class="material-symbols-outlined">bookmarks</span>
+				<span> Bookmarks</span>
 
-		} @else {
+		</legend>
 
-			<small>Latest Notifications</small>
+		<main>
 
-		}
+			<table>
 
-	</div>
+				<tr>
+					<td><strong>Entities</strong></td>
+					<td>{{ report.bookmarks.entities.count }}</td>
+					<td>{{ report.bookmarks.entities.size | formatBytes }}</td>
+				</tr>
 
-</header>
-<main>
+				<tr>
+					<td><strong>Sync Data</strong></td>
+					<td>{{ report.bookmarks.syncData.count }}</td>
+					<td>{{ report.bookmarks.syncData.size | formatBytes }}</td>
+				</tr>
 
-	@if (logMessages$ | async; as logs) {
+				<tr>
+					<td><strong>Remote Data</strong></td>
+					<td>{{ report.bookmarks.remoteData.count }}</td>
+					<td>{{ report.bookmarks.remoteData.size | formatBytes }}</td>
+				</tr>
 
-		@for (log of logs; track log.id) {
+				<tr>
+					<td><strong>Clicks</strong></td>
+					<td>{{ report.bookmarks.clicks.count }}</td>
+					<td>{{ report.bookmarks.clicks.size | formatBytes }}</td>
+				</tr>
 
-			<div log_entry>
-				<div>
-					<small>[{{ log.category }}]</small>
-					<small *ngIf="log.entityId">{{ log.entityId }}</small>
-				</div>
-				<small>{{ log.date | timePast:true }}</small>
-				<div [innerHTML]="log.message"></div>
-			</div>
+				<tr>
+					<td><strong>Trash</strong></td>
+					<td>{{ report.bookmarks.trash.count }}</td>
+					<td>{{ report.bookmarks.trash.size | formatBytes }}</td>
+				</tr>
 
-		}
-		@if (logs.length === 0) {
+			</table>
 
-			<div class="empty">Nothing to display</div>
+		</main>
 
-		}
+	</fieldset>
 
-	}
+	<fieldset>
 
-</main>
+		<legend>
+
+				<!-- Notes -->
+				<span class="material-symbols-outlined">note_stack</span>
+				<span> Notes</span>
+
+		</legend>
+
+		<main>
+
+			<table>
+
+				<tr>
+					<td><strong>Entities</strong></td>
+					<td>{{ report.notes.entities.count }}</td>
+					<td>{{ report.notes.entities.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Sync Data</strong></td>
+					<td>{{ report.notes.syncData.count }}</td>
+					<td>{{ report.notes.syncData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Remote Data</strong></td>
+					<td>{{ report.notes.remoteData.count }}</td>
+					<td>{{ report.notes.remoteData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Trash</strong></td>
+					<td>{{ report.notes.trash.count }}</td>
+					<td>{{ report.notes.trash.size | formatBytes }}</td>
+				</tr>
+
+			</table>
+
+		</main>
+
+	</fieldset>
+
+	<fieldset>
+
+		<legend>
+
+				<!-- Note Content -->
+				<span class="material-symbols-outlined">note_stack</span>
+				<span> Note Content</span>
+
+		</legend>
+
+		<main>
+
+			<table>
+
+				<tr>
+					<td><strong>Entities</strong></td>
+					<td>{{ report.notesContent.entities.count }}</td>
+					<td>{{ report.notesContent.entities.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Sync Data</strong></td>
+					<td>{{ report.notesContent.syncData.count }}</td>
+					<td>{{ report.notesContent.syncData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Remote Data</strong></td>
+					<td>{{ report.notesContent.remoteData.count }}</td>
+					<td>{{ report.notesContent.remoteData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Trash</strong></td>
+					<td>{{ report.notesContent.trash.count }}</td>
+					<td>{{ report.notesContent.trash.size | formatBytes }}</td>
+				</tr>
+
+			</table>
+
+		</main>
+
+	</fieldset>
+
+	<fieldset>
+
+		<legend>
+
+				<!-- Logs -->
+				<span class="material-symbols-outlined">history</span>
+				<span> Logs</span>
+
+		</legend>
+
+		<main>
+
+			<table>
+
+				<tr>
+					<td><strong>Entries</strong></td>
+					<td>{{ report.logs.count }}</td>
+					<td>{{ report.logs.size | formatBytes }}</td>
+				</tr>
+
+			</table>
+
+		</main>
+
+	</fieldset>
+
+}
