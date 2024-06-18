@@ -6,11 +6,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SanitizeHtmlModule } from 'lib/pipes';
 import { OverlayContainerModule } from '../overlay-container';
 import { SelectorTableModule } from '../selector-table/selector-table.module';
-import { LOCAL_STORAGE_MANAGER, LocalStorageManagerImpl } from './local-storage-manager.util';
 import { MarkdownEditorComponent } from './markdown-editor.component';
 import { MarkdownToHtmlPipe } from './markdown-to-html.pipe';
 import { MarkdownViewerComponent } from './markdown-viewer.component';
-import { UNDO_CACHE, UndoCacheImpl } from './undo-cache.util';
 
 @NgModule({
 

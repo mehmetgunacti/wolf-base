@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
 import { ClipboardService } from 'services';
 import { ButtonActions, C_ASTERISK, C_DASH, C_INDENT, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_PLUS, C_TAB, C_TASK_COMPL, C_TASK_EMPTY, lineStartsWithOneOf } from './button-actions.util';
-import { LOCAL_STORAGE_MANAGER, LSEntry, LocalStorageManager, LocalStorageManagerImpl } from './local-storage-manager.util';
+import { RECOVERY_MANAGER, LSEntry, RecoveryManager, RecoveryManagerImpl } from './recovery-manager.util';
 import { EditorProperties, extractProps } from './textarea-properties.model';
 import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 
@@ -16,7 +16,7 @@ import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 	styleUrls: ['./markdown-editor.component.scss'],
 	providers: [
 		{ provide: UNDO_CACHE, useClass: UndoCacheImpl },
-		{ provide: LOCAL_STORAGE_MANAGER, useClass: LocalStorageManagerImpl },
+		{ provide: RECOVERY_MANAGER, useClass: RecoveryManagerImpl },
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -43,7 +43,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 	buffer: Subject<string> = new Subject();
 
 	undoCache: UndoCache = inject(UNDO_CACHE);
-	lsManager: LocalStorageManager = inject(LOCAL_STORAGE_MANAGER);
+	lsManager: RecoveryManager = inject(RECOVERY_MANAGER);
 	private dialogService: Dialog = inject(Dialog);
 	private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
 	private recoverDialogRef: DialogRef<null, HTMLDivElement> | null = null;

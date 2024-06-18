@@ -13,7 +13,7 @@ export interface LSEntry {
 
 }
 
-export interface LocalStorageManager {
+export interface RecoveryManager {
 
 	recoverableContent: Signal<LSEntry | null>;
 	hasPrev: Signal<boolean>;
@@ -35,10 +35,10 @@ const LS_SAVE_THRESHOLD = 5;
 /** name of LS entry */
 const LS_ENTRIES = 'note_content_editor';
 
-export const LOCAL_STORAGE_MANAGER = new InjectionToken<LocalStorageManager>('LocalStorageManager');
+export const RECOVERY_MANAGER = new InjectionToken<RecoveryManager>('RecoveryManager');
 
 @Injectable()
-export class LocalStorageManagerImpl implements LocalStorageManager {
+export class RecoveryManagerImpl implements RecoveryManager {
 
 	private counter: number = 0;
 	private entries: LSEntries | null = null;
