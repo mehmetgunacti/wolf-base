@@ -331,17 +331,17 @@
 			<button
 				cdkMenuItem
 				class="icon-only rounded"
-				[disabled]="!lsManager.hasPrev()"
-				[cdkMenuItemDisabled]="!lsManager.hasPrev()"
-				(click)="lsManager.previous()">
+				[disabled]="!recoveryManager.hasPrev()"
+				[cdkMenuItemDisabled]="!recoveryManager.hasPrev()"
+				(click)="recoveryManager.previous()">
 				<span class="material-symbols-outlined">navigate_before</span>
 			</button>
 			<button
 				cdkMenuItem
 				class="icon-only rounded"
-				[disabled]="!lsManager.hasNext()"
-				[cdkMenuItemDisabled]="!lsManager.hasNext()"
-				(click)="lsManager.next()">
+				[disabled]="!recoveryManager.hasNext()"
+				[cdkMenuItemDisabled]="!recoveryManager.hasNext()"
+				(click)="recoveryManager.next()">
 				<span class="material-symbols-outlined">navigate_next</span>
 			</button>
 			<button
@@ -360,7 +360,7 @@
 
 		</ng-container>
 
-		@if(lsManager.recoverableContent(); as lsEntry) {
+		@if(recoveryManager.recoverableContent(); as lsEntry) {
 
 			<h6>{{ lsEntry.time | date:'EEEE dd.MM.yyyy HH:mm:ss' }}</h6>
 			<pre>{{lsEntry.content}}</pre>

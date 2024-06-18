@@ -43,7 +43,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 	buffer: Subject<string> = new Subject();
 
 	undoCache: UndoCache = inject(UNDO_CACHE);
-	lsManager: RecoveryManager = inject(RECOVERY_MANAGER);
+	recoveryManager: RecoveryManager = inject(RECOVERY_MANAGER);
 	private dialogService: Dialog = inject(Dialog);
 	private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
 	private recoverDialogRef: DialogRef<null, HTMLDivElement> | null = null;
@@ -66,7 +66,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 					const props = extractProps(this.editor.nativeElement);
 					this.undoCache.saveState(props);
-					this.lsManager.save(props.content);
+					this.recoveryManager.save(props.content);
 
 				}
 
@@ -83,7 +83,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 					if (this.control.pristine) { // first value from db
 
 						this.undoCache.initialize(content);
-						this.lsManager.save(content, true);
+						this.recoveryManager.save(content, true);
 
 					} else
 						this.buffer.next(content);
@@ -132,7 +132,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	onRecoverOpen(): void {
 
-		const hasEntries = this.lsManager.init();
+		const hasEntries = this.recoveryManager.init();
 		if (hasEntries)
 			this.recoverDialogRef = this.dialogService.open(this.recoverTemplate);
 		else
@@ -163,7 +163,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	onRecoverReplace(): void {
 
-		const lsEntry: LSEntry | null = this.lsManager.recoverableContent();
+		const lsEntry: LSEntry | null = this.recoveryManager.recoverableContent();
 		if (lsEntry) {
 
 			this.updateControl(lsEntry.content);
