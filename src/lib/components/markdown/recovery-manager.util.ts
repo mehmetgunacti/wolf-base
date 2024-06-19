@@ -1,14 +1,9 @@
 import { Injectable, InjectionToken, Signal, WritableSignal, computed, signal } from '@angular/core';
-
-export interface LSEntries {
-
-	entries: LSEntry[];
-
-}
+import { toDateObject } from 'lib/utils';
 
 export interface LSEntry {
 
-	time: string;
+	time: Date;
 	content: string;
 
 }
@@ -19,85 +14,188 @@ export interface RecoveryManager {
 	hasPrev: Signal<boolean>;
 	hasNext: Signal<boolean>;
 
-	save(content: string, skipThreshold?: boolean): void;
 	init(): boolean;
+	save(content: string): void;
 	next(): void;
 	previous(): void;
 
 }
 
+/** index of first entry in LS */
+const LS_MIN_INDEX = 1;
+
 /** total number of entries to be hold in LS */
-const LS_MAX_SAVE_COUNT = 20;
+const LS_MAX_INDEX = 6;
 
 /** save every n update to UndoCache */
-const LS_SAVE_THRESHOLD = 5;
+const LS_SAVE_THRESHOLD = 2;
 
 /** name of LS entry */
-const LS_ENTRIES = 'note_content_editor';
+const LS_ENTRY_KEY = 'note_editor_';
 
 export const RECOVERY_MANAGER = new InjectionToken<RecoveryManager>('RecoveryManager');
 
 @Injectable()
 export class RecoveryManagerImpl implements RecoveryManager {
 
-	private counter: number = 0;
-	private entries: LSEntries | null = null;
+	private nextIndex: number = -1;
+	private thresholdCounter: number = 0;
 
-	private viewCounter: WritableSignal<number> = signal(0);
-	recoverableContent: Signal<LSEntry | null> = computed(
-		() => this.entries?.entries[this.viewCounter()] ?? null
+	private readonly viewCounter: WritableSignal<number> = signal(-1); // -1 = uninitialized
+	public readonly recoverableContent: Signal<LSEntry | null> = computed(
+
+		() => this.readEntry(this.viewCounter())
+
 	);
-	hasPrev: Signal<boolean> = computed(() => !!this.entries?.entries[this.viewCounter() - 1]);
-	hasNext: Signal<boolean> = computed(() => !!this.entries?.entries[this.viewCounter() + 1]);
+	public readonly hasPrev: Signal<boolean> = computed(() => this.readTimestamp(this.viewCounter() - 1) !== null);
+	public readonly hasNext: Signal<boolean> = computed(() => this.readTimestamp(this.viewCounter() + 1) !== null);
 
-	save(content: string, skipThreshold: boolean = false): void {
+	constructor() {
 
-		this.counter++;
-		if (!skipThreshold)
-			if (this.counter % LS_SAVE_THRESHOLD > 0)
-				return;
+		this.init();
 
-		let entries = this.readEntries();
-		if (!entries)
-			entries = { entries: [] };
-		entries.entries.unshift({
-			time: new Date().toISOString(),
+	}
+
+	public init(): boolean {
+
+		const mostRecentIndex = this.findIndexOfMostRecentEntry();
+		if (mostRecentIndex === null) {
+
+			this.nextIndex = LS_MIN_INDEX;
+			return false;
+
+		}
+		this.viewCounter.set(mostRecentIndex);
+		this.nextIndex = this.peekNextIndex(mostRecentIndex);
+		return true;
+
+	}
+
+	public save(content: string): void {
+
+		this.thresholdCounter++;
+		if (this.thresholdCounter % LS_SAVE_THRESHOLD > 0)
+			return;
+
+		this.writeEntry(this.nextIndex, content);
+		this.viewCounter.set(this.nextIndex);
+		this.nextIndex = this.peekNextIndex(this.nextIndex);
+
+	}
+
+	public next(): void {
+
+		this.viewCounter.update(idx => this.peekNextIndex(idx));
+
+	}
+
+	public previous(): void {
+
+		this.viewCounter.update(idx => this.peekPrevIndex(idx));
+
+	}
+
+	private readEntry(idx: number): LSEntry | null {
+
+		const time: Date | null = this.readTimestamp(idx);
+		if (time === null)
+			return null;
+
+		const content: string | null = this.readContent(idx);
+		if (content === null)
+			return null;
+
+		const entry: LSEntry = {
+
+			time,
 			content
-		});
-		if (entries.entries.length > LS_MAX_SAVE_COUNT)
-			entries.entries.pop();
-		localStorage.setItem(LS_ENTRIES, JSON.stringify(entries));
+
+		};
+		return entry;
 
 	}
 
-	init(): boolean {
+	private readContent(idx: number): string | null {
 
-		this.entries = this.readEntries();
-		this.viewCounter.set(0);
-		return this.entries !== null;
-
-	}
-
-	next(): void {
-
-		const curLength = this.entries?.entries.length ?? 0;
-		this.viewCounter.update(c => c > curLength ? 0 : c + 1);
+		const key = this.getContentKey(idx);
+		return this.read(key);
 
 	}
 
-	previous(): void {
+	private readTimestamp(idx: number): Date | null {
 
-		const curLength = this.entries?.entries.length ?? 0;
-		this.viewCounter.update(c => c < 0 ? curLength : c - 1);
+		const key = this.getTimestampKey(idx);
+		const value = this.read(key);
+		if (value === null)
+			return null;
+		return toDateObject(value);
 
 	}
 
-	private readEntries(): LSEntries | null {
+	private writeEntry(idx: number, content: string): void {
 
-		const s = localStorage.getItem(LS_ENTRIES);
-		if (s)
-			return JSON.parse(s) as LSEntries;
-		return null;
+		const timestampKey = this.getTimestampKey(idx);
+		this.write(timestampKey, new Date().getTime().toString());
+
+		const contentKey = this.getContentKey(idx);
+		this.write(contentKey, content);
+
+	}
+
+	private getContentKey(idx: number): string {
+
+		return LS_ENTRY_KEY + idx.toString().padStart(3, '0');
+
+	}
+
+	private getTimestampKey(idx: number): string {
+
+		return this.getContentKey(idx) + '_ts';
+
+	}
+
+	private peekNextIndex(idx: number): number {
+
+		return idx + 1 > LS_MAX_INDEX ? LS_MIN_INDEX : idx + 1;
+
+	}
+
+	private peekPrevIndex(idx: number): number {
+
+		return idx - 1 < LS_MIN_INDEX ? LS_MAX_INDEX : idx - 1;
+
+	}
+
+	private findIndexOfMostRecentEntry(): number | null {
+
+		const firstTS: Date | null = this.readTimestamp(LS_MIN_INDEX);
+		// if there are no entries at all, return null
+		if (firstTS === null)
+			return null;
+
+		// array of array; 1st element = idx, 2nd element = milliseconds
+		const arr: number[][] = [[LS_MIN_INDEX, firstTS.getTime()]];
+		for (let idx = LS_MIN_INDEX + 1; idx <= LS_MAX_INDEX; ++idx) {
+
+			const currentTS = this.readTimestamp(idx);
+			if (currentTS === null)
+				break;
+			arr.push([idx, currentTS.getTime()]);
+
+		}
+		return arr.sort((a, b) => b[1] - a[1])[0][0];
+
+	}
+
+	private read(key: string): string | null {
+
+		return localStorage.getItem(key);
+
+	}
+
+	private write(key: string, value: string): void {
+
+		localStorage.setItem(key, value);
 
 	}
 

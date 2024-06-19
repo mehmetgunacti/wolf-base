@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
 import { ClipboardService } from 'services';
 import { ButtonActions, C_ASTERISK, C_DASH, C_INDENT, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_PLUS, C_TAB, C_TASK_COMPL, C_TASK_EMPTY, lineStartsWithOneOf } from './button-actions.util';
-import { RECOVERY_MANAGER, LSEntry, RecoveryManager, RecoveryManagerImpl } from './recovery-manager.util';
+import { LSEntry, RECOVERY_MANAGER, RecoveryManager, RecoveryManagerImpl } from './recovery-manager.util';
 import { EditorProperties, extractProps } from './textarea-properties.model';
 import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 
@@ -80,12 +80,9 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 				content => {
 
-					if (this.control.pristine) { // first value from db
-
+					if (this.control.pristine) // first value from db
 						this.undoCache.initialize(content);
-						this.recoveryManager.save(content, true);
-
-					} else
+					else
 						this.buffer.next(content);
 
 				}
