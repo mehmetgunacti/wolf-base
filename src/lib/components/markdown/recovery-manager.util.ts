@@ -32,10 +32,10 @@ export interface RecoveryManager {
 const LS_MIN_INDEX = 1;
 
 /** total number of entries to be hold in LS */
-const LS_MAX_INDEX = 6;
+const LS_MAX_INDEX = 50;
 
 /** save every n update to UndoCache */
-const LS_SAVE_THRESHOLD = 2;
+const LS_SAVE_THRESHOLD = 5;
 
 /** name of LS entry */
 const LS_ENTRY_KEY = 'note_editor_';
