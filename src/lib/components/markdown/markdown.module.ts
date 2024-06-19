@@ -3,7 +3,7 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SanitizeHtmlModule } from 'lib/pipes';
+import { SanitizeHtmlModule, TimePastModule, TimePastPipe } from 'lib/pipes';
 import { OverlayContainerModule } from '../overlay-container';
 import { SelectorTableModule } from '../selector-table/selector-table.module';
 import { MarkdownEditorComponent } from './markdown-editor.component';
@@ -24,7 +24,8 @@ import { MarkdownViewerComponent } from './markdown-viewer.component';
 		SelectorTableModule,
 		SanitizeHtmlModule,
 		DialogModule,
-		OverlayContainerModule
+		OverlayContainerModule,
+		TimePastModule
 	],
 	exports: [
 		MarkdownEditorComponent,
