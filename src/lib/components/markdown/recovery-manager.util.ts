@@ -1,6 +1,13 @@
 import { Injectable, InjectionToken, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { toDateObject } from 'lib/utils';
 
+interface LSTimestamp {
+
+	index: number,
+	timestamp: number
+
+}
+
 export interface LSEntry {
 
 	time: Date;
@@ -14,7 +21,7 @@ export interface RecoveryManager {
 	hasPrev: Signal<boolean>;
 	hasNext: Signal<boolean>;
 
-	init(): boolean;
+	init(): void;
 	save(content: string): void;
 	next(): void;
 	previous(): void;
@@ -38,17 +45,25 @@ export const RECOVERY_MANAGER = new InjectionToken<RecoveryManager>('RecoveryMan
 @Injectable()
 export class RecoveryManagerImpl implements RecoveryManager {
 
+	private timestamps: LSTimestamp[] = [];
 	private nextIndex: number = -1;
 	private thresholdCounter: number = 0;
 
-	private readonly viewCounter: WritableSignal<number> = signal(-1); // -1 = uninitialized
+	private readonly viewIndex: WritableSignal<number> = signal(0);
 	public readonly recoverableContent: Signal<LSEntry | null> = computed(
 
-		() => this.readEntry(this.viewCounter())
+		() => {
+
+			const lsTimestamp = this.timestamps[this.viewIndex()];
+			if (lsTimestamp)
+				return this.readEntry(lsTimestamp.index);
+			return null;
+
+		}
 
 	);
-	public readonly hasPrev: Signal<boolean> = computed(() => this.readTimestamp(this.viewCounter() - 1) !== null);
-	public readonly hasNext: Signal<boolean> = computed(() => this.readTimestamp(this.viewCounter() + 1) !== null);
+	public readonly hasPrev: Signal<boolean> = computed(() => !!this.timestamps[this.viewIndex() - 1]);
+	public readonly hasNext: Signal<boolean> = computed(() => !!this.timestamps[this.viewIndex() + 1]);
 
 	constructor() {
 
@@ -56,18 +71,18 @@ export class RecoveryManagerImpl implements RecoveryManager {
 
 	}
 
-	public init(): boolean {
+	public init(): void {
 
-		const mostRecentIndex = this.findIndexOfMostRecentEntry();
-		if (mostRecentIndex === null) {
+		this.timestamps = this.readTimestamps(); // ordered by 'index' field, descending
+		if (this.timestamps.length < 1) {// empty?
 
 			this.nextIndex = LS_MIN_INDEX;
-			return false;
+			return;
 
 		}
-		this.viewCounter.set(mostRecentIndex);
-		this.nextIndex = this.peekNextIndex(mostRecentIndex);
-		return true;
+		this.viewIndex.set(-1); // force re-calculate dependent signals
+		this.viewIndex.set(0);
+		this.nextIndex = this.peekNextIndex(this.timestamps[0].index);
 
 	}
 
@@ -78,20 +93,19 @@ export class RecoveryManagerImpl implements RecoveryManager {
 			return;
 
 		this.writeEntry(this.nextIndex, content);
-		this.viewCounter.set(this.nextIndex);
 		this.nextIndex = this.peekNextIndex(this.nextIndex);
 
 	}
 
 	public next(): void {
 
-		this.viewCounter.update(idx => this.peekNextIndex(idx));
+		this.viewIndex.update(idx => this.timestamps[idx + 1] ? idx + 1 : idx);
 
 	}
 
 	public previous(): void {
 
-		this.viewCounter.update(idx => this.peekPrevIndex(idx));
+		this.viewIndex.update(idx => this.timestamps[idx - 1] ? idx - 1 : idx);
 
 	}
 
@@ -166,24 +180,21 @@ export class RecoveryManagerImpl implements RecoveryManager {
 
 	}
 
-	private findIndexOfMostRecentEntry(): number | null {
+	private readTimestamps(): LSTimestamp[] {
 
-		const firstTS: Date | null = this.readTimestamp(LS_MIN_INDEX);
-		// if there are no entries at all, return null
-		if (firstTS === null)
-			return null;
+		const arr: LSTimestamp[] = [];
+		for (let index = LS_MIN_INDEX; index <= LS_MAX_INDEX; ++index) {
 
-		// array of array; 1st element = idx, 2nd element = milliseconds
-		const arr: number[][] = [[LS_MIN_INDEX, firstTS.getTime()]];
-		for (let idx = LS_MIN_INDEX + 1; idx <= LS_MAX_INDEX; ++idx) {
-
-			const currentTS = this.readTimestamp(idx);
+			const currentTS = this.readTimestamp(index);
 			if (currentTS === null)
 				break;
-			arr.push([idx, currentTS.getTime()]);
+			arr.push({
+				index,
+				timestamp: currentTS.getTime()
+			});
 
 		}
-		return arr.sort((a, b) => b[1] - a[1])[0][0];
+		return arr.sort((a, b) => b.timestamp - a.timestamp);
 
 	}
 
