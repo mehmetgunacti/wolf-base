@@ -86,7 +86,7 @@ export class ToastService {
 			.right()
 			.top();
 
-		const overlayRef: OverlayRef = this.overlay.create({ hasBackdrop: false, positionStrategy });
+		const overlayRef: OverlayRef = this.overlay.create({ hasBackdrop: false, positionStrategy, panelClass: 'toast-overlay-pane' });
 		this.toastRef = new WolfToastRef(overlayRef);
 
 		const injector = this.getInjector(this.parentInjector);
