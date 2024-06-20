@@ -2,7 +2,7 @@
 
 	@if(content(); as content) {
 
-		<h1>{{ note.name }}</h1>
+		<h1>{{ note.name | hideEnum }}</h1>
 		<w-markdown-viewer [markdown]="content.content"/>
 
 	}

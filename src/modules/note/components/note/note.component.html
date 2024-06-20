@@ -17,7 +17,7 @@
 					[style.margin-left.px]="(idx + 1) * 15">
 
 					<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
-					<span>{{ note.name }}</span>
+					<span>{{ note.name | hideEnum }}</span>
 
 				</a>
 
@@ -25,7 +25,7 @@
 
 		</div>
 
-		<h3>{{ note.name }}</h3>
+		<h3>{{ note.name | hideEnum }}</h3>
 
 		<div note_tags *ngIf="note.tags as tags">
 
@@ -55,7 +55,7 @@
 				[style.margin-left.px]="15">
 
 				<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
-				<span>{{ note.name }}</span>
+				<span>{{ note.name | hideEnum }}</span>
 
 			</a>
 

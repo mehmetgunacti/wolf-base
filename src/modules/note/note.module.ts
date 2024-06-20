@@ -6,6 +6,7 @@ import { SharedModule } from 'modules/shared/shared.module';
 import { NoteRoutingModule } from './note-routing.module';
 import * as fromConfig from './note.config';
 import { MarkdownModule } from 'lib/components/markdown';
+import { HideEnumModule } from 'lib/pipes/hide-enum.pipe';
 
 @NgModule({
 	declarations: [...fromConfig.components],
@@ -15,7 +16,8 @@ import { MarkdownModule } from 'lib/components/markdown';
 		ReactiveFormsModule,
 		SharedModule,
 		CroppieModule,
-		MarkdownModule
+		MarkdownModule,
+		HideEnumModule
 	]
 })
 export class NoteModule { }
