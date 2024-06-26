@@ -55,6 +55,7 @@ import { noteContentReducer } from './reducers/note-content-reducers/note-conten
 import { noteReducer } from './reducers/note-reducers/note.reducer';
 import { AppState } from './states/app.state';
 import { CoreLoadEffects } from './effects/core-load.effects';
+import { wordReducer } from './reducers/word-reducers/word.reducer';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -159,6 +160,7 @@ export const reducers: ActionReducerMap<AppState> = {
 	bookmark: combineReducers(bookmarkReducer),
 	note: combineReducers(noteReducer),
 	noteContent: combineReducers(noteContentReducer),
+	word: combineReducers(wordReducer),
 	database: databaseReducer,
 	logs: combineReducers(logsReducer)
 
