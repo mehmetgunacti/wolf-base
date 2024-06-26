@@ -1,14 +1,17 @@
 import { Entity, RemoteRepositoryService, WolfEntity } from '@lib';
 import { BookmarksRemoteRepository, EntityRemoteRepository, NoteContentRemoteRepository, NotesRemoteRepository } from 'lib/repositories/remote';
+import { WordsRemoteRepository } from 'lib/repositories/remote/word-remote.repository';
 import { MockBookmarksCollection } from "./collections/bookmarks.collection";
 import { MockNoteContentContentCollection } from './collections/note-content.collection';
 import { MockNotesCollection } from './collections/notes.collection';
+import { MockWordsCollection } from './collections/words.collection';
 
 export class MockRemoteRepositoryService implements RemoteRepositoryService {
 
 	bookmarks: BookmarksRemoteRepository = new MockBookmarksCollection();
 	notes: NotesRemoteRepository = new MockNotesCollection();
 	noteContent: NoteContentRemoteRepository = new MockNoteContentContentCollection();
+	words: WordsRemoteRepository = new MockWordsCollection();
 
 	getRepository(entity: WolfEntity): EntityRemoteRepository<Entity> {
 
@@ -17,6 +20,7 @@ export class MockRemoteRepositoryService implements RemoteRepositoryService {
 			case WolfEntity.bookmark: return this.bookmarks;
 			case WolfEntity.note: return this.notes;
 			case WolfEntity.note_content: return this.noteContent;
+			case WolfEntity.word: return this.words;
 
 		}
 		throw Error('Unknown entity');

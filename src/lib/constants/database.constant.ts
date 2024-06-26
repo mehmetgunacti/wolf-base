@@ -23,6 +23,12 @@ export enum LocalRepositoryNames {
 	note_content_remote = 'note_content_remote',
 	note_content_trash = 'note_content_trash',
 
+	// words
+	words = 'words',
+	words_sync = 'words_sync',
+	words_remote = 'words_remote',
+	words_trash = 'words_trash',
+
 	configuration = 'configuration',
 	logs = 'logs'
 

@@ -12,4 +12,4 @@ export * from './remote.model';
 export * from './sync.model';
 export * from './tag.model';
 export * from './treenode.model';
-export * from './words.model';
+export * from './word.model';

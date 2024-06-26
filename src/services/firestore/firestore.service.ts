@@ -4,13 +4,15 @@ import { Entity, EntityName, FirestoreConfig, WolfEntity } from '@lib';
 import { Store } from "@ngrx/store";
 import { BookmarksRemoteRepository, EntityRemoteRepository, NoteContentRemoteRepository } from 'lib/repositories/remote';
 import { NotesRemoteRepository } from 'lib/repositories/remote/note-remote.repository';
+import { WordsRemoteRepository } from 'lib/repositories/remote/word-remote.repository';
 import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
 import { FirestoreAPIClient, FirestoreAPIClientImpl } from "lib/utils/firestore-rest-client/firestore-api.tool";
 import { VoidBookmarksCollection } from "services/mock-services/remotestorage/collections/bookmarks.collection";
 import { VoidNoteContentCollection } from 'services/mock-services/remotestorage/collections/note-content.collection';
 import { VoidNotesCollection } from 'services/mock-services/remotestorage/collections/notes.collection';
+import { VoidWordsCollection } from 'services/mock-services/remotestorage/collections/words.collection';
 import { selCore_firestoreConfig } from "store/selectors/core-configuration.selectors";
-import { BookmarksFirestoreCollectionImpl } from "./collections";
+import { BookmarksFirestoreCollectionImpl, WordsFirestoreCollectionImpl } from "./collections";
 import { NoteContentContentFirestoreCollectionImpl } from './collections/note-content.collection';
 import { NotesFirestoreCollectionImpl } from './collections/notes.collection';
 
@@ -19,6 +21,7 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 	public bookmarks!: BookmarksRemoteRepository;
 	public notes!: NotesRemoteRepository;
 	public noteContent!: NoteContentRemoteRepository;
+	public words!: WordsRemoteRepository;
 
 	private store: Store = inject(Store);
 	private http: HttpClient = inject(HttpClient);
@@ -58,12 +61,14 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 			this.bookmarks = new BookmarksFirestoreCollectionImpl(this.firestore, config);
 			this.notes = new NotesFirestoreCollectionImpl(this.firestore, config);
 			this.noteContent = new NoteContentContentFirestoreCollectionImpl(this.firestore, config);
+			this.words = new WordsFirestoreCollectionImpl(this.firestore, config);
 
 		} else {
 
 			this.bookmarks = new VoidBookmarksCollection();
 			this.notes = new VoidNotesCollection();
 			this.noteContent = new VoidNoteContentCollection();
+			this.words = new VoidWordsCollection();
 
 		}
 
