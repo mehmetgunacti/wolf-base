@@ -34,6 +34,12 @@ export const routes: Routes = [
 	},
 	{
 
+		path: 'words',
+		loadChildren: () => import('../modules/word/word.module').then(m => m.WordModule)
+
+	},
+	{
+
 		path: 'cloud',
 		loadChildren: () => import('../modules/cloud/cloud.module').then(m => m.CloudModule)
 

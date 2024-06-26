@@ -1,0 +1,20 @@
+@if(word$ | async; as word) {
+
+	<w-portal>
+
+		<button
+			class="icon-only"
+			[routerLink]="['/words', word.id ]">
+			<span class="material-symbols-outlined">cancel</span> Cancel
+		</button>
+
+	</w-portal>
+
+	<app-word-form
+		[word]="word"
+		[nodes]="[]"
+		[tagSuggestions]="[]"
+		(update)="onUpdate($event.id, $event.word)"
+		(tagInput)="onTagInput($event)"></app-word-form>
+
+}

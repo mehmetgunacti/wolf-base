@@ -1,0 +1,88 @@
+@import 'helper';
+@import 'variables';
+@import 'components';
+@import 'mixins';
+
+:host {
+
+	@extend %flex-column;
+	gap		: var(--gap-sm);
+
+	& > [word_main] {
+
+		@include mx-card(3);
+		[word_parents] {
+
+			margin-bottom	: var(--gap-lg);
+
+		}
+
+		[word_tags] {
+
+			@extend %flex-center-end;
+			gap			: var(--gap-xxs);
+
+		}
+
+		[word_info] {
+
+			@extend %flex-center-end;
+			padding-top	: var(--gap-sm);
+
+		}
+
+	}
+
+	& > [word_children] {
+
+		@include mx-card(3);
+
+	}
+
+	[word_parents],
+	[word_children] {
+
+		& > a {
+
+			@extend %flex-center-y;
+			padding				: var(--gap-xs);
+			border-radius		: var(--border-radius-sm);
+			text-decoration		: none;
+			font-size			: var(--font-size-sm);
+			gap					: var(--gap-xxs);
+			color				: fn-hsl(text-secondary);
+			transition			: $bg-transition;
+
+			& > span {
+
+				color			: inherit;
+				font-size		: inherit;
+
+			}
+
+			&:hover {
+
+				background-color	: fn-hsl(bg-3, (lig: "+ 10%"));
+
+			}
+
+			// &:focus,
+			&:focus-visible {
+
+				outline				: 3px solid fn-hsl(focus);
+
+			}
+
+		}
+
+	}
+
+	[word_nested] {
+
+		font-size	: var(--font-size-h5);
+    	font-weight	: bold;
+	    color		: fn-hsl(primary);
+
+	}
+
+}

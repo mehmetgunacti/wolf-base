@@ -47,6 +47,12 @@ export class NavComponent {
 						label: 'Notes',
 						icon: 'note_stack',
 						routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
+					},
+					{
+						url: ['/words'],
+						label: 'Words',
+						icon: 'dictionary',
+						routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
 					}
 
 				];

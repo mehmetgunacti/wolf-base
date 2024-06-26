@@ -1,0 +1,49 @@
+<header>
+
+	<div card_title>{{ word() ? 'Edit' : 'Add' }} Word</div>
+
+</header>
+<main>
+
+	<form>
+
+		<!-- ID -->
+		<div *ngIf="word()?.id">
+			<w-input [control]="form.id" name="ID" [readonly]="true"/>
+		</div>
+
+		<!-- PARENT ID -->
+		<!-- <div>
+			<w-select [control]="form.parentId" [nodes]="nodes()" name="Parent"/>
+		</div> -->
+
+		<!-- NAME -->
+		<div>
+			<w-input [control]="form.name" name="Name"/>
+		</div>
+
+		<!-- TAGS -->
+		<div>
+			<w-input-tag
+				[control]="form.tags"
+				id="wordForm"
+				name="Tags"
+				class="input-element"
+				(tagInput)="onTagInput($event)"
+				[suggestions]="tagSuggestions()"/>
+			<button type="button" class="icon-only" [title]="'Toggle \''+TAG_PINNED+'\''" (click)="onTogglePinned()">
+				<span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_PINNED)">push_pin</span>
+			</button>
+			<button type="button" class="icon-only" title="Copy all from Parent" (click)="onCopyTags()">
+				<span class="material-symbols-outlined">content_copy</span>
+			</button>
+		</div>
+
+	</form>
+
+</main>
+<footer>
+
+	<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>
+
+</footer>
