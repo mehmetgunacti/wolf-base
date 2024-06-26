@@ -10,6 +10,7 @@ import { TagCloudModule } from 'lib/components/tag-cloud/tag-cloud.module';
 import { BookmarkComponent } from './bookmark/bookmark.component';
 import { DisplayModule } from 'lib/components/display/display.module';
 import { NoteHeaderComponent } from './note-header/note-header.component';
+import { TextareaModule } from 'lib/components/textarea';
 
 @NgModule({
 	declarations: [
@@ -32,7 +33,8 @@ import { NoteHeaderComponent } from './note-header/note-header.component';
 		TagCloudModule,
 		SanitizeHtmlModule,
 		DisplayModule,
-		TimePastModule
+		TimePastModule,
+		TextareaModule
 	],
 	exports: [
 		BookmarkComponent,
@@ -51,7 +53,8 @@ import { NoteHeaderComponent } from './note-header/note-header.component';
 		CdkMenuModule,
 		TagCloudModule,
 		SanitizeHtmlModule,
-		DisplayModule
+		DisplayModule,
+		TextareaModule
 	],
 	providers: []
 })

@@ -1,0 +1,8 @@
+<textarea
+	[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
+	[formControl]="control"
+	placeholder=""
+	[readonly]="readonly"
+	(input)="onInput($event)"
+	[rows]="rows"></textarea>
+<label [class.up]="hasValue$ | async">{{name}}</label>
