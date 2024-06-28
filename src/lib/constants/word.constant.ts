@@ -1,4 +1,4 @@
-import { HasParentId } from 'lib/models'
+import { NameBase } from 'lib/models'
 
 export enum WordProgress {
 
@@ -20,7 +20,7 @@ export enum DefinitionLanguage {
 
 }
 
-const DefinitionLanguageLabels: Record<string, string> = {
+export const DefinitionLanguageLabels: Record<string, string> = {
 
 	[DefinitionLanguage.en]: 'English',
 	[DefinitionLanguage.de]: 'Deutsch',
@@ -28,7 +28,7 @@ const DefinitionLanguageLabels: Record<string, string> = {
 
 }
 
-export const DEFINITION_LANGUAGES: HasParentId[] = Object.keys(DefinitionLanguageLabels).map(k => ({ id: k, name: DefinitionLanguageLabels[k], parentId: null }));
+export const DEFINITION_LANGUAGES: NameBase[] = Object.keys(DefinitionLanguageLabels).map(k => ({ id: k, name: DefinitionLanguageLabels[k] }));
 
 export enum DefinitionType {
 
@@ -38,7 +38,7 @@ export enum DefinitionType {
 
 }
 
-const DefinitionTypeLabels: Record<string, string> = {
+export const DefinitionTypeLabels: Record<string, string> = {
 
 	[DefinitionType.verb]: 'Verb',
 	[DefinitionType.noun]: 'Noun',
@@ -46,4 +46,4 @@ const DefinitionTypeLabels: Record<string, string> = {
 
 }
 
-export const DEFINITION_TYPES: HasParentId[] = Object.keys(DefinitionTypeLabels).map(k => ({ id: k, name: DefinitionTypeLabels[k], parentId: null }));
+export const DEFINITION_TYPES: NameBase[] = Object.keys(DefinitionTypeLabels).map(k => ({ id: k, name: DefinitionTypeLabels[k] }));
