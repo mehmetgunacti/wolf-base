@@ -1,15 +1,22 @@
 @if (word) {
 
-	<h1>{{ word.name }}</h1>
-	@if (word.pronunciation) {
+	<h1>
 
-		<small>{{ word.pronunciation }}</small>
+		{{ word.name }}
+		@if (word.pronunciation) {
 
-	}
+			<small>{{ word.pronunciation }}</small>
+
+		}
+
+	</h1>
 
 	@if (word.context) {
 
-		<p><strong>Context:</strong> {{ word.context }}</p>
+		<blockquote>
+			<small>Context:</small>
+			{{ word.context }}
+		</blockquote>
 
 	}
 
@@ -25,11 +32,22 @@
 		<div definition>
 
 			<small><img class="flag" [src]="'assets/flags/' + definition.language + '.svg'"> {{ definition.type | defType }}</small>
-			<strong>{{ definition.name }}</strong>
+			<h3>{{ definition.name }}</h3>
 
 			@for (sample of definition.samples; track $index) {
 
-				<blockquote>{{ sample }}</blockquote>
+				<blockquote>
+					@if (definition.samples.length > 1) {
+
+						<small>Sample #{{ $index + 1 }}</small>
+
+					} @else {
+
+						<small>Sample</small>
+
+					}
+					{{ sample }}
+				</blockquote>
 
 			}
 
