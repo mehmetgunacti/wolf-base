@@ -61,6 +61,15 @@ export class DatabaseEffects {
 				this.localRepository.count(LocalRepositoryNames.note_content_trash),
 				this.localRepository.size(LocalRepositoryNames.note_content_trash),
 
+				this.localRepository.count(LocalRepositoryNames.words),
+				this.localRepository.size(LocalRepositoryNames.words),
+				this.localRepository.count(LocalRepositoryNames.words_sync),
+				this.localRepository.size(LocalRepositoryNames.words_sync),
+				this.localRepository.count(LocalRepositoryNames.words_remote),
+				this.localRepository.size(LocalRepositoryNames.words_remote),
+				this.localRepository.count(LocalRepositoryNames.words_trash),
+				this.localRepository.size(LocalRepositoryNames.words_trash),
+
 				this.localRepository.count(LocalRepositoryNames.logs),
 				this.localRepository.size(LocalRepositoryNames.logs)
 
@@ -94,7 +103,15 @@ export class DatabaseEffects {
 						trash: { count: arr[24], size: arr[25] }
 
 					},
-					logs: { count: arr[26], size: arr[27] }
+					words: {
+
+						entities: { count: arr[26], size: arr[27] },
+						syncData: { count: arr[28], size: arr[29] },
+						remoteData: { count: arr[30], size: arr[31] },
+						trash: { count: arr[32], size: arr[33] }
+
+					},
+					logs: { count: arr[34], size: arr[35] }
 
 				};
 				return report;

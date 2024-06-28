@@ -43,6 +43,7 @@ export interface DatabaseReport {
 	bookmarks: EntityReport & { clicks: EntityReportRow; };
 	notes: EntityReport;
 	notesContent: EntityReport;
+	words: EntityReport;
 	logs: EntityReportRow;
 
 }
@@ -52,6 +53,7 @@ export const emptyDatabaseReport: DatabaseReport = {
 	bookmarks: { ...emptyEntityReport, clicks: emptyRow },
 	notes: emptyEntityReport,
 	notesContent: emptyEntityReport,
+	words: emptyEntityReport,
 	logs: emptyRow
 
 }

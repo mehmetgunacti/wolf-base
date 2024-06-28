@@ -152,6 +152,50 @@
 
 		<legend>
 
+				<!-- Notes -->
+				<span class="material-symbols-outlined">dictionary</span>
+				<span> Words</span>
+
+		</legend>
+
+		<main>
+
+			<table>
+
+				<tr>
+					<td><strong>Entities</strong></td>
+					<td>{{ report.words.entities.count }}</td>
+					<td>{{ report.words.entities.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Sync Data</strong></td>
+					<td>{{ report.words.syncData.count }}</td>
+					<td>{{ report.words.syncData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Remote Data</strong></td>
+					<td>{{ report.words.remoteData.count }}</td>
+					<td>{{ report.words.remoteData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Trash</strong></td>
+					<td>{{ report.words.trash.count }}</td>
+					<td>{{ report.words.trash.size | formatBytes }}</td>
+				</tr>
+
+			</table>
+
+		</main>
+
+	</fieldset>
+
+	<fieldset>
+
+		<legend>
+
 				<!-- Logs -->
 				<span class="material-symbols-outlined">history</span>
 				<span> Logs</span>
