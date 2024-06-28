@@ -48,6 +48,7 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 			case WolfEntity.bookmark.name: return this.bookmarks;
 			case WolfEntity.note.name: return this.notes;
 			case WolfEntity.note_content.name: return this.noteContent;
+			case WolfEntity.word.name: return this.words;
 
 		}
 		throw Error('Unknown entity');

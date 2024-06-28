@@ -10,7 +10,7 @@ export class WordsFirestoreCollectionImpl extends FirestoreRemoteStorageCollecti
 		super(
 			firestore,
 			firestoreConfig,
-			WolfEntity.note,
+			WolfEntity.word,
 			new WordFirestoreConverter()
 		);
 	}

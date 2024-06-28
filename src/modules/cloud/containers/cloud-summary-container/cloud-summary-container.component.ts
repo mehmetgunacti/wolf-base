@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import * as bmActions from 'store/actions/bookmark.actions';
 import * as noteActions from 'store/actions/note.actions';
 import * as contentActions from 'store/actions/note-content.actions';
+import * as wordActions from 'store/actions/word.actions';
 import { selCloudAvailableTasks } from 'store/selectors/cloud.selectors';
 
 function getBookmarkAction(taskType: SyncTaskType): Action | null {
@@ -115,6 +116,41 @@ function getNoteContentAction(taskType: SyncTaskType): Action | null {
 
 }
 
+function getWordAction(taskType: SyncTaskType): Action | null {
+
+	switch (taskType) {
+
+		case SyncTaskType.local_new:
+			return wordActions.syncLocalNew();
+
+		case SyncTaskType.local_updated:
+			return wordActions.syncLocalUpdated();
+
+		case SyncTaskType.local_deleted:
+			return wordActions.syncLocalDeleted();
+
+		case SyncTaskType.remote_new:
+			return wordActions.syncRemoteNew();
+
+		case SyncTaskType.remote_updated:
+			return wordActions.syncRemoteUpdated();
+
+		case SyncTaskType.remote_deleted:
+			return wordActions.syncRemoteDeleted();
+
+		case SyncTaskType.deleted_deleted:
+			return wordActions.syncDeletedDeleted();
+
+		// case CloudTaskType.updated_updated:
+		// case CloudTaskType.updated_deleted:
+		// case CloudTaskType.deleted_updated:
+		// 	return EMPTY;
+
+	}
+	return null;
+
+}
+
 function getAction(task: CloudTask): Action | null {
 
 	if (WolfEntity.bookmark.name === task.entity.name)
@@ -125,6 +161,9 @@ function getAction(task: CloudTask): Action | null {
 
 	if (WolfEntity.note_content.name === task.entity.name)
 		return getNoteContentAction(task.type);
+
+	if (WolfEntity.word.name === task.entity.name)
+		return getWordAction(task.type);
 
 	return null;
 

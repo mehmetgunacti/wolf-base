@@ -10,7 +10,7 @@
 				<span> Bookmarks</span>
 			</ng-container>
 
-			<!-- Bookmarks -->
+			<!-- Notes -->
 			<ng-container *ngSwitchCase="WolfEntity.note.name">
 				<span class="material-symbols-outlined">note_stack</span>
 				<span> Notes</span>
@@ -20,6 +20,12 @@
 			<ng-container *ngSwitchCase="WolfEntity.note_content.name">
 				<span class="material-symbols-outlined">note_stack</span>
 				<span> Note Content</span>
+			</ng-container>
+
+			<!-- Words -->
+			<ng-container *ngSwitchCase="WolfEntity.word.name">
+				<span class="material-symbols-outlined">dictionary</span>
+				<span> Words</span>
 			</ng-container>
 
 			<!-- UNKNOWN CASE -->

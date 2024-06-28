@@ -3,6 +3,7 @@ import { CloudModuleState } from "store/states/cloud.state";
 import { selBookmarkCloudTasks } from './bookmark-selectors/bookmark-cloud.selectors';
 import { selNoteCloudTasks } from './note-selectors/note-cloud.selectors';
 import { selNoteContent_CloudTasks } from './note-content-selectors/note-content-cloud.selectors';
+import { selWordCloudTasks } from './word-selectors/word-cloud.selectors';
 
 export const selCloudModuleState = createFeatureSelector<CloudModuleState>('cloud');
 
@@ -46,6 +47,7 @@ export const selCloudAvailableTasks = createSelector(
 	selBookmarkCloudTasks,
 	selNoteCloudTasks,
 	selNoteContent_CloudTasks,
-	(bookmarks, notes, contents) => [...bookmarks, ...notes, ...contents]
+	selWordCloudTasks,
+	(bookmarks, notes, contents, words) => [...bookmarks, ...notes, ...contents, ...words]
 
 );
