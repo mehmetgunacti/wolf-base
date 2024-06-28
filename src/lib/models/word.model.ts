@@ -15,7 +15,7 @@ export interface Word extends Entity {
 
 	dictionary: UUID | null;
 	definitions: Definition[];
-	context: string | null;
+	contexts: string[];
 	pronunciation: string | null;
 
 }

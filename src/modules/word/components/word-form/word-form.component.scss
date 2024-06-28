@@ -32,6 +32,18 @@
 
 		}
 
+		& div[context] {
+
+			display		: flex;
+
+			& *:first-child {
+
+				flex	: 1;
+
+			}
+
+		}
+
 		& > fieldset {
 
 			position	: relative;

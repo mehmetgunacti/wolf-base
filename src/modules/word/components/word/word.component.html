@@ -11,11 +11,19 @@
 
 	</h1>
 
-	@if (word.context) {
+	@for (context of word.contexts; track $index) {
 
 		<blockquote>
-			<small>Context:</small>
-			{{ word.context }}
+			@if (word.contexts.length > 1) {
+
+				<small>Context #{{ $index + 1 }}</small>
+
+			} @else {
+
+				<small>Context</small>
+
+			}
+			{{ context }}
 		</blockquote>
 
 	}

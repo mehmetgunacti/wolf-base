@@ -24,7 +24,7 @@ export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> im
 
 			id,
 			name: '',
-			context: null,
+			contexts: [],
 			dictionary: null,
 			pronunciation: null,
 			definitions: []

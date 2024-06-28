@@ -17,10 +17,37 @@ interface WordFormSchema {
 
 	id: FormControl<UUID | null>;
 	name: FormControl<string>;
-	context: FormControl<string | null>;
+	contexts: FormArray<FormControl<string>>;
 	dictionary: FormControl<UUID | null>;
 	pronunciation: FormControl<string | null>;
 	definitions: FormArray<FormGroup<DefinitionFormSchema>>;
+
+}
+
+class ContextForm {
+
+	// to be used by @if (... track objectId)
+	readonly objectId: string;
+	readonly fc: FormControl<string>;
+
+	constructor(s?: string) {
+
+		// objectId
+		this.objectId = 'context_' + Math.random();
+
+		// form field
+		this.fc = new FormControl();
+
+		if (s)
+			this.setValue(s);
+
+	}
+
+	setValue(s: string): void {
+
+		this.fc.setValue(s);
+
+	}
 
 }
 
@@ -134,9 +161,9 @@ export class WordForm {
 	// form fields
 	readonly id: FormControl<UUID | null>;
 	readonly name: FormControl<string>;
-	readonly context: FormControl<string | null>;
 	readonly dictionary: FormControl<UUID | null>;
 	readonly pronunciation: FormControl<string | null>;
+	readonly contexts: WritableSignal<ContextForm[]>;
 
 	// definitions
 	readonly definitions: WritableSignal<DefinitionForm[]>;
@@ -146,9 +173,11 @@ export class WordForm {
 		// form fields
 		this.id = new FormControl<UUID | null>(null);
 		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-		this.context = new FormControl<string | null>(null);
 		this.dictionary = new FormControl<UUID | null>(null);
 		this.pronunciation = new FormControl<string | null>(null);
+
+		// contexts
+		this.contexts = signal([new ContextForm()]);
 
 		// definitions
 		this.definitions = signal([new DefinitionForm()])
@@ -175,15 +204,35 @@ export class WordForm {
 
 	}
 
+	addContext(): void {
+
+		this.contexts.update(list => {
+			list.push(new ContextForm());
+			return list;
+		});
+
+	}
+
+	removeContext(objectId: string): void {
+
+		this.contexts.update(
+			list => {
+				list.splice(list.findIndex(s => s.objectId === objectId), 1);
+				return list;
+			}
+		);
+
+	}
+
 	formGroup(): FormGroup<WordFormSchema> {
 
 		return new FormGroup<WordFormSchema>({
 
 			id: this.id,
 			name: this.name,
-			context: this.context,
 			dictionary: this.dictionary,
 			pronunciation: this.pronunciation,
+			contexts: new FormArray(this.contexts().map(c => c.fc)),
 			definitions: new FormArray<FormGroup<DefinitionFormSchema>>(this.definitions().map(d => d.formGroup()))
 
 		});
@@ -194,9 +243,10 @@ export class WordForm {
 
 		this.id.setValue(word.id);
 		this.name.setValue(word.name);
-		this.context.setValue(word.context);
 		this.dictionary.setValue(word.dictionary);
 		this.pronunciation.setValue(word.pronunciation);
+
+		this.contexts.set(word.contexts.map(c => new ContextForm(c)));
 
 		this.definitions.set(
 			word.definitions.map(d => new DefinitionForm(d))

@@ -24,7 +24,7 @@ export class MockWordsLocalRepositoryImpl implements WordLocalRepository {
 		const note: Word = {
 
 			name: '',
-			context: null,
+			contexts: [],
 			dictionary: null,
 			pronunciation: null,
 			definitions: [],

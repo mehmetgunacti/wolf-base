@@ -17,15 +17,32 @@
 			<w-input [control]="form.name" name="Term"/>
 		</div>
 
-		<!-- CONTEXT -->
-		<div>
-			<w-textarea [control]="form.context" name="Context" [rows]="3"/>
-		</div>
-
 		<!-- PRONUNCIATION -->
 		<div>
 			<w-input [control]="form.pronunciation" name="Pronunciation"/>
 		</div>
+
+		<div>
+			<button type="button" (click)="form.addContext()">Add Context</button>
+		</div>
+
+		@for (context of form.contexts(); track context.objectId) {
+
+			<!-- CONTEXTS -->
+			<div context>
+				<w-textarea [control]="context.fc" [name]="'Context #' + ($index + 1)" [rows]="3"/>
+
+				<button
+					type="button"
+					class="icon-only small"
+					[title]="'Remove Sample #' + ($index + 1)"
+					(click)="form.removeContext(context.objectId)">
+					<span class="material-symbols-outlined warn">do_not_disturb_on</span>
+				</button>
+
+			</div>
+
+		}
 
 		@for (definition of form.definitions(); track definition.objectId) {
 

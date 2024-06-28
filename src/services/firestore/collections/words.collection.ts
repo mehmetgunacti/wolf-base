@@ -105,10 +105,9 @@ class WordFirestoreConverter implements FirestoreConverter<Word> {
 		else
 			fields['pronunciation'] = { nullValue: null }
 
-		if (entry.context)
-			fields['context'] = { stringValue: entry.context };
-		else
-			fields['context'] = { nullValue: null }
+		fields['contexts'] = {
+			arrayValue: { values: entry.contexts.map(s => ({ stringValue: s })) }
+		};
 
 		if (entry.dictionary)
 			fields['dictionary'] = { stringValue: entry.dictionary };
@@ -126,12 +125,15 @@ class WordFirestoreConverter implements FirestoreConverter<Word> {
 	fromFirestore(entry: Word): Word {
 
 		// validate incoming
-		let { id, name, dictionary, context, pronunciation, definitions } = entry;
+		let { id, name, dictionary, contexts, pronunciation, definitions } = entry;
 		if (!id)
 			throw new Error(`Firestore WordEntry: invalid 'id' value`);
 
 		if (!name)
 			throw new Error(`Firestore WordEntry: invalid 'name' value`);
+
+		if (!Array.isArray(contexts))
+			throw new Error(`Firestore WordEntry: invalid 'contexts' value`);
 
 		if (!Array.isArray(definitions))
 			throw new Error(`Firestore WordEntry: invalid 'definitions' value`);
@@ -141,7 +143,7 @@ class WordFirestoreConverter implements FirestoreConverter<Word> {
 			id,
 			name,
 			dictionary,
-			context,
+			contexts,
 			pronunciation,
 			definitions
 
@@ -163,8 +165,8 @@ class WordFirestoreConverter implements FirestoreConverter<Word> {
 		if (entry.dictionary)
 			fields.add('dictionary');
 
-		if (entry.context)
-			fields.add('context');
+		if (entry.contexts)
+			fields.add('contexts');
 
 		if (entry.definitions)
 			fields.add('definitions');
