@@ -10,6 +10,8 @@ import { Observable, map, startWith } from 'rxjs';
 })
 export class TextareaComponent implements OnInit {
 
+	label_id: string = 'textarea_' + Math.random();
+
 	@Input() control!: FormControl;
 	@Input() name: string = '';
 	@Input() readonly: boolean = false;
@@ -24,15 +26,10 @@ export class TextareaComponent implements OnInit {
 		this.hasValue$ = this.control.valueChanges.pipe(
 
 			startWith(this.control.value),
-			map(val => this.hasValue(val))
+			map(val => !!val),
+
 
 		);
-
-	}
-
-	private hasValue(val: any): boolean {
-
-		return !!val;
 
 	}
 

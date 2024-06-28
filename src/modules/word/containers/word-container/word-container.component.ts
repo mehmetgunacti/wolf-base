@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
-import { Observable, Subject, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
+import { selWord_selected } from 'store/selectors/word-selectors/word-entities.selectors';
 
 @Component({
 	selector: 'app-word-container',
@@ -18,7 +19,7 @@ export class WordContainerComponent {
 
 	constructor() {
 
-		this.word$ = new Subject(); //this.store.select(selWord_selected);
+		this.word$ = this.store.select(selWord_selected);
 
 	}
 

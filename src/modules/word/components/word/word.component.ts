@@ -10,7 +10,5 @@ import { MenuItem, Word } from 'lib/models';
 export class WordComponent {
 
 	@Input() word: Word | null | undefined;
-	@Input() parents: Word[] = [];
-	@Input() children: Word[] = [];
 
 }

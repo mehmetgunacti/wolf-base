@@ -3,6 +3,13 @@
 @import 'components';
 @import 'mixins';
 
+
+.select-popup {
+
+	flex	: 1;
+
+}
+
 :host {
 
 	@extend %flex-column;

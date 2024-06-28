@@ -13,6 +13,7 @@ import { BookmarkSyncRemoteNewEffects } from './effects/bookmark-effects/bookmar
 import { BookmarkSyncRemoteUpdatedEffects } from './effects/bookmark-effects/bookmark-sync-remote-updated.effects';
 import { BookmarkSyncEffects } from './effects/bookmark-effects/bookmark-sync.effects';
 import { BookmarkUIEffects } from './effects/bookmark-effects/bookmark-ui.effects';
+import { CoreLoadEffects } from './effects/core-load.effects';
 import { CoreNavigationEffects } from './effects/core-navigation.effects';
 import { CoreNotificationEffects } from './effects/core-notification.effects';
 import { CoreSidebarEffects } from './effects/core-sidebar.effects';
@@ -46,6 +47,19 @@ import { NoteSyncRemoteUpdatedEffects } from './effects/note-effects/note-sync-r
 import { NoteSyncEffects } from './effects/note-effects/note-sync.effects';
 import { NoteUIEffects } from './effects/note-effects/note-ui.effects';
 import { SettingsEffects } from './effects/settings.effects';
+import { WordEntityCreateEffects } from './effects/word-effects/word-entity-create.effects';
+import { WordEntityMoveToTrashEffects } from './effects/word-effects/word-entity-move-to-trash.effects';
+import { WordEntityUpdateEffects } from './effects/word-effects/word-entity-update.effects';
+import { WordLoadEffects } from './effects/word-effects/word-load.effects';
+import { WordSyncDeletedDeletedEffects } from './effects/word-effects/word-sync-deleted-deleted.effects';
+import { WordSyncLocalDeletedEffects } from './effects/word-effects/word-sync-local-deleted.effects';
+import { WordSyncLocalNewEffects } from './effects/word-effects/word-sync-local-new.effects';
+import { WordSyncLocalUpdatedEffects } from './effects/word-effects/word-sync-local-updated.effects';
+import { WordSyncRemoteDeletedEffects } from './effects/word-effects/word-sync-remote-deleted.effects';
+import { WordSyncRemoteNewEffects } from './effects/word-effects/word-sync-remote-new.effects';
+import { WordSyncRemoteUpdatedEffects } from './effects/word-effects/word-sync-remote-updated.effects';
+import { WordSyncEffects } from './effects/word-effects/word-sync.effects';
+import { WordUIEffects } from './effects/word-effects/word-ui.effects';
 import { bookmarkReducer } from './reducers/bookmark-reducers/bookmark.reducer';
 import { cloudReducer } from './reducers/cloud.reducer';
 import { coreReducer } from './reducers/core.reducer';
@@ -53,9 +67,8 @@ import { databaseReducer } from './reducers/database.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { noteContentReducer } from './reducers/note-content-reducers/note-content.reducer';
 import { noteReducer } from './reducers/note-reducers/note.reducer';
-import { AppState } from './states/app.state';
-import { CoreLoadEffects } from './effects/core-load.effects';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
+import { AppState } from './states/app.state';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -141,6 +154,26 @@ export const effects = [
 	NoteContentSyncRemoteDeletedEffects,
 	NoteContentSyncRemoteNewEffects,
 	NoteContentSyncRemoteUpdatedEffects,
+
+	// Words
+	WordSyncEffects,
+
+	WordSyncLocalNewEffects,
+	WordSyncLocalUpdatedEffects,
+	WordSyncLocalDeletedEffects,
+
+	WordSyncRemoteNewEffects,
+	WordSyncRemoteUpdatedEffects,
+	WordSyncRemoteDeletedEffects,
+
+	WordSyncDeletedDeletedEffects,
+
+	WordEntityCreateEffects,
+	WordEntityUpdateEffects,
+	WordEntityMoveToTrashEffects,
+
+	WordLoadEffects,
+	WordUIEffects,
 
 	// Database
 	DatabaseEffects,

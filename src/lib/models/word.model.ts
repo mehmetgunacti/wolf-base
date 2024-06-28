@@ -3,7 +3,7 @@ import { DefinitionLanguage, DefinitionType } from 'lib/constants/word.constant'
 import { Entity } from './entity.model';
 import { NameBase } from './id-base.model';
 
-export interface WordDefinition extends NameBase {
+export interface Definition extends NameBase {
 
 	language: DefinitionLanguage;
 	type: DefinitionType;
@@ -14,7 +14,7 @@ export interface WordDefinition extends NameBase {
 export interface Word extends Entity {
 
 	dictionary: UUID | null;
-	definitions: WordDefinition[];
+	definitions: Definition[];
 	context: string | null;
 	pronunciation: string | null;
 

@@ -1,7 +1,9 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UUID, Word } from 'lib';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { update } from 'store/actions/word.actions';
+import { selWord_selected } from 'store/selectors/word-selectors/word-entities.selectors';
 
 @Component({
 	selector: 'app-word-edit-form-container',
@@ -9,7 +11,7 @@ import { Observable, Subject } from 'rxjs';
 	styleUrls: ['./word-edit-form-container.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WordEditFormContainerComponent implements OnInit, AfterContentInit {
+export class WordEditFormContainerComponent {
 
 	private store: Store = inject(Store);
 
@@ -17,40 +19,13 @@ export class WordEditFormContainerComponent implements OnInit, AfterContentInit 
 
 	constructor() {
 
-		this.word$ = new Subject();
-
-	}
-
-	ngOnInit(): void { }
-
-	ngAfterContentInit(): void {
-
-		// this.tagSuggestions$ = combineLatest([
-		// 	this.store.select(distinctTagsArray),
-		// 	this.tagInput
-		// ]).pipe(
-
-		// 	map(([tags, tagInput]) => {
-
-		// 		if (!!tagInput)
-		// 			return tags.filter(t => t.name.startsWith(tagInput)).map(t => t.name);
-		// 		return [];
-
-		// 	})
-
-		// );
+		this.word$ = this.store.select(selWord_selected);
 
 	}
 
 	onUpdate(id: UUID, word: Partial<Word>) {
 
-		// this.store.dispatch(update({ id, word }));
-
-	}
-
-	onTagInput(val: string | null): void {
-
-		// this.tagInput.next(val);
+		this.store.dispatch(update({ id, word }));
 
 	}
 

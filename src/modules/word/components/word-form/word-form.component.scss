@@ -32,6 +32,54 @@
 
 		}
 
+		& > fieldset {
+
+			position	: relative;
+
+			& > legend {
+
+				padding-top		: 2rem;
+				padding-bottom	: 1rem;
+
+			}
+
+			& > button {
+
+				position		: absolute;
+				top				: -3rem;
+				right			: 0;
+
+			}
+
+			& div[definition] {
+
+				display					: grid;
+				grid-template-columns	: 1fr 1fr;
+				grid-gap				: var(--gap-sm);
+
+				& div:first-child,
+				& div[sample] {
+
+					grid-column: span 2;
+
+				}
+
+				& div[sample] {
+
+					display		: flex;
+
+					& *:first-child {
+
+						flex	: 1;
+
+					}
+
+				}
+
+			}
+
+		}
+
 	}
 
 	& > footer {

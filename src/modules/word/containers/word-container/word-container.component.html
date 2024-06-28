@@ -15,15 +15,6 @@
 				<button
 					cdkMenuItem
 					class="icon-only align-left"
-					[routerLink]="['/words', word.id, 'new' ]">
-					<span class="material-symbols-outlined">post_add</span> Child Word
-				</button>
-
-				<hr>
-
-				<button
-					cdkMenuItem
-					class="icon-only align-left"
 					[routerLink]="['/words', word.id, 'edit' ]">
 					<span class="material-symbols-outlined">edit</span> Edit Word
 				</button>
@@ -50,10 +41,7 @@
 
 	</w-portal>
 
-	<app-word
-		[word]="word"
-		[parents]="[]"
-		[children]="[]" />
+	<app-word [word]="word"/>
 
 } @else {
 

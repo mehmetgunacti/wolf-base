@@ -5,12 +5,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SelectComponent } from './select.component';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { OptionsComponent } from './options.component';
+import { SelectTreeComponent } from './select-tree.component';
 
 @NgModule({
 
-	declarations: [SelectComponent, OptionsComponent],
+	declarations: [
+		SelectComponent,
+		SelectTreeComponent,
+		OptionsComponent
+	],
 	imports: [CommonModule, ReactiveFormsModule, CdkTreeModule, CdkMenuModule],
-	exports: [SelectComponent]
+	exports: [
+		SelectComponent,
+		SelectTreeComponent
+	]
 
 })
 export class SelectModule { }

@@ -2,15 +2,10 @@
 
 	<button
 		class="icon-only"
-		[routerLink]="cancelLink$ | async">
+		[routerLink]="['/words']">
 		<span class="material-symbols-outlined">cancel</span> Cancel
 	</button>
 
 </w-portal>
 
-<app-word-form
-	[parentId]="parentId$ | async"
-	[nodes]="nodes$ | async"
-	[tagSuggestions]="[]"
-	(create)="onCreate($event)"
-	(tagInput)="onTagInput($event)"></app-word-form>
+<app-word-form (create)="onCreate($event)"/>

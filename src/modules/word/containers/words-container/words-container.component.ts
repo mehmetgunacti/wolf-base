@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TAG_PINNED, UUID, Word } from 'lib';
-import { Observable, Subject, map } from 'rxjs';
+import { Word } from 'lib';
+import { Observable } from 'rxjs';
+import { selWord_array } from 'store/selectors/word-selectors/word-entities.selectors';
 
 @Component({
 	selector: 'app-words-container',
@@ -11,60 +12,15 @@ import { Observable, Subject, map } from 'rxjs';
 })
 export class WordsContainerComponent {
 
-	TAG_PINNED = TAG_PINNED;
-
 	private store: Store = inject(Store);
 
-	queryParamsAsString$: Observable<string | null>;
-	isFiltered$: Observable<boolean>;
 	words$: Observable<Word[]>;
 
 	constructor() {
 
-		const queryParams$ = new Subject(); // this.store.select(selWord_queryParams);
-
-		this.queryParamsAsString$ = queryParams$.pipe(
-			map(params => {
-
-				// if (!!params.search && params.tags.length > 0)
-				// 	return `"${params.search}", [${params.tags}]`;
-
-				// if (!!params.search)
-				// 	return `"${params.search}"`;
-
-				// return `[${params.tags}]`
-				return 'abc';
-
-			})
-		)
-
-		this.isFiltered$ = new Subject();
-		// queryParams$.pipe(
-		// 	map(params => params.tags.length > 0 || !!params.search)
-		// );
-
-		this.words$ = new Subject();
-
-		// this.isFiltered$.pipe(
-
-		// 	switchMap(filtered =>
-
-		// 		iif(
-
-		// 			() => filtered,
-		// 			this.store.select(selWord_filteredWords),
-		// 			this.store.select(selWord_rootArray)
-
-		// 		)
-
-		// 	)
-
-		// );
+		this.words$ = this.store.select(selWord_array);
 
 	}
 
-	onEdit(id: UUID): void {
-
-	}
 
 }

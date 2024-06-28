@@ -1,34 +1,30 @@
 <header>
-	@if (isFiltered$ | async) {
 
-	<div card_title>Search Results
-		@if (queryParamsAsString$ | async; as paramsText) {
-			<small>{{ paramsText }}</small>
-		}
-	</div>
+	<div card_title>Word Entries</div>
+
+</header>
+
+@if (words$ | async; as words) {
+
+	@if (words.length > 0) {
+
+		<div word_entries>
+
+			@for (word of words; track $index) {
+
+				<a [routerLink]="['/words', word.id]" tabindex="0">
+
+					<span>{{ word.name }}</span>
+					<small>{{ word.definitions.length }} definitions</small>
+
+				</a>
+
+			}
+
+		</div>
 
 	} @else {
 
-	<div card_title>Root Words</div>
-
-	}
-</header>
-
-<ng-container *ngIf="(words$ | async) as words">
-
-	<div word_entries *ngIf="words.length > 0; else noWords">
-
-		<a	*ngFor="let word of words"
-			[routerLink]="['/words', word.id]"
-			tabindex="0">
-
-			<small>'' | timePast</small>
-			<span>{{ word.name }}</span>
-
-		</a>
-
-	</div>
-	<ng-template #noWords>
 		<div class="empty">
 			No words available
 			<br>
@@ -36,6 +32,7 @@
 				<span class="material-symbols-outlined">add</span> Add Word
 			</button>
 		</div>
-	</ng-template>
 
-</ng-container>
+	}
+
+}

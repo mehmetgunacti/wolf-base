@@ -11,6 +11,7 @@ import * as coreActions from 'store/actions/core.actions';
 import * as bmActions from 'store/actions/bookmark.actions';
 import * as noteContentActions from 'store/actions/note-content.actions';
 import * as noteActions from 'store/actions/note.actions';
+import * as wordActions from 'store/actions/word.actions';
 
 export const routes: Routes = [
 
@@ -73,6 +74,7 @@ const appInitializerFactory = (store: Store) => {
 		store.dispatch(bmActions.loadAll());
 		store.dispatch(noteActions.loadAll());
 		store.dispatch(noteContentActions.loadAll());
+		store.dispatch(wordActions.loadAll());
 
 	};
 

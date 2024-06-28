@@ -1,5 +1,5 @@
 import { FIRESTORE_VALUE, FirestoreConverter, WolfEntity } from '@lib';
-import { FirestoreConfig, Word, WordDefinition } from 'lib/models';
+import { FirestoreConfig, Word, Definition } from 'lib/models';
 import { WordsRemoteRepository } from 'lib/repositories/remote/word-remote.repository';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
@@ -17,11 +17,11 @@ export class WordsFirestoreCollectionImpl extends FirestoreRemoteStorageCollecti
 
 }
 
-class WordDefinitionFirestoreConverter implements FirestoreConverter<WordDefinition> {
+class WordDefinitionFirestoreConverter implements FirestoreConverter<Definition> {
 
-	toFirestore(item: WordDefinition): Record<keyof WordDefinition, FIRESTORE_VALUE> {
+	toFirestore(item: Definition): Record<keyof Definition, FIRESTORE_VALUE> {
 
-		const fields = {} as Record<keyof WordDefinition, FIRESTORE_VALUE>;
+		const fields = {} as Record<keyof Definition, FIRESTORE_VALUE>;
 
 		fields['name'] = { stringValue: item.name };
 		fields['language'] = { stringValue: item.language };
@@ -33,7 +33,7 @@ class WordDefinitionFirestoreConverter implements FirestoreConverter<WordDefinit
 
 	}
 
-	fromFirestore(item: WordDefinition): WordDefinition {
+	fromFirestore(item: Definition): Definition {
 
 		// validate incoming
 		let { id, name, language, type, samples } = item;
@@ -52,7 +52,7 @@ class WordDefinitionFirestoreConverter implements FirestoreConverter<WordDefinit
 		if (!Array.isArray(samples))
 			throw new Error(`Firestore WordDefinition: invalid 'samples' value`);
 
-		const validated: WordDefinition = {
+		const validated: Definition = {
 
 			id,
 			name,
@@ -65,7 +65,7 @@ class WordDefinitionFirestoreConverter implements FirestoreConverter<WordDefinit
 
 	}
 
-	toUpdateMask(item: Partial<WordDefinition>): string {
+	toUpdateMask(item: Partial<Definition>): string {
 
 		// exclude some fields like id, ... from update list
 		// (empty string would delete string on server)

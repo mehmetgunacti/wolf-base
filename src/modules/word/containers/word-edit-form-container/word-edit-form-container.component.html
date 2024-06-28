@@ -10,11 +10,6 @@
 
 	</w-portal>
 
-	<app-word-form
-		[word]="word"
-		[nodes]="[]"
-		[tagSuggestions]="[]"
-		(update)="onUpdate($event.id, $event.word)"
-		(tagInput)="onTagInput($event)"></app-word-form>
+	<app-word-form [word]="word" (update)="onUpdate($event.id, $event.word)"/>
 
 }

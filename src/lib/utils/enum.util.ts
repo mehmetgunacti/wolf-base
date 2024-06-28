@@ -1,4 +1,19 @@
 import { DEFAULT_CONF_VALUES, SidebarState, Theme } from 'lib/constants';
+import { HasParentId } from 'lib/models';
+
+export function convertEnum<T>(enumObject: T): HasParentId[] {
+
+	const result: HasParentId[] = [];
+	for (const key in enumObject)
+		if (Object.prototype.hasOwnProperty.call(enumObject, key)) {
+
+			const value = enumObject[key as keyof T];
+			result.push({ id: key, name: '' + value, parentId: null });
+
+		}
+	return result;
+
+}
 
 export function getNextTheme(currentTheme: Theme): Theme {
 

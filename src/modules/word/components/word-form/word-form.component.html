@@ -12,31 +12,92 @@
 			<w-input [control]="form.id" name="ID" [readonly]="true"/>
 		</div>
 
-		<!-- PARENT ID -->
-		<!-- <div>
-			<w-select [control]="form.parentId" [nodes]="nodes()" name="Parent"/>
-		</div> -->
-
 		<!-- NAME -->
 		<div>
-			<w-input [control]="form.name" name="Name"/>
+			<w-input [control]="form.name" name="Term"/>
 		</div>
 
-		<!-- TAGS -->
+		<!-- CONTEXT -->
 		<div>
-			<w-input-tag
-				[control]="form.tags"
-				id="wordForm"
-				name="Tags"
-				class="input-element"
-				(tagInput)="onTagInput($event)"
-				[suggestions]="tagSuggestions()"/>
-			<button type="button" class="icon-only" [title]="'Toggle \''+TAG_PINNED+'\''" (click)="onTogglePinned()">
-				<span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_PINNED)">push_pin</span>
-			</button>
-			<button type="button" class="icon-only" title="Copy all from Parent" (click)="onCopyTags()">
-				<span class="material-symbols-outlined">content_copy</span>
-			</button>
+			<w-textarea [control]="form.context" name="Context" [rows]="3"/>
+		</div>
+
+		<!-- PRONUNCIATION -->
+		<div>
+			<w-input [control]="form.pronunciation" name="Pronunciation"/>
+		</div>
+
+		@for (definition of form.definitions(); track definition.objectId) {
+
+			<fieldset>
+				<legend>Definition #{{$index + 1}}</legend>
+
+				@if($index > 0) {
+
+					<button
+						type="button"
+						class="icon-only small"
+						(click)="form.removeDefinition(definition.objectId)">
+						<span class="material-symbols-outlined warn">do_not_disturb_on</span> Remove Definition #{{ $index + 1 }}
+					</button>
+
+				}
+
+				<div definition>
+
+					<!-- NAME -->
+					<div>
+						<w-input [control]="definition.name" name="Meaning"/>
+					</div>
+
+					<!-- LANGUAGE -->
+					<div>
+						<w-select [control]="definition.language" name="Language" [nodes]="DEFINITION_LANGUAGES"/>
+					</div>
+
+					<!-- TYPE -->
+					<div>
+						<w-select [control]="definition.type" name="Type" [nodes]="DEFINITION_TYPES"/>
+					</div>
+
+					@for (sample of definition.samples(); track sample.objectId) {
+
+						<!-- SAMPLES -->
+						<div sample>
+							<w-textarea [control]="sample.fc" [name]="'Sample #' + ($index + 1)" [rows]="3"/>
+
+							@if($index < 1) {
+
+								<button
+									type="button"
+									class="icon-only small"
+									title="Add Sample"
+									(click)="definition.addSample()">
+									<span class="material-symbols-outlined success">add_circle</span>
+								</button>
+
+							} @else {
+
+								<button
+									type="button"
+									class="icon-only small"
+									[title]="'Remove Sample #' + ($index + 1)"
+									(click)="definition.removeSample(sample.objectId)">
+									<span class="material-symbols-outlined warn">do_not_disturb_on</span>
+								</button>
+
+							}
+
+						</div>
+
+					}
+
+				</div>
+			</fieldset>
+
+		}
+		<div>
+			<button type="button" (click)="form.addDefinition()">Add Definition</button>
 		</div>
 
 	</form>

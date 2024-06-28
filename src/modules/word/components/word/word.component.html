@@ -2,62 +2,41 @@
 
 	<div word_main>
 
-		<div word_parents>
-
-			<a [routerLink]="['/words']" tabindex="0">
-				<span class="material-symbols-outlined">word_stack</span>
-				<span>Words</span>
-			</a>
-
-			@if (parents.length > 0) {
-
-				<a	*ngFor="let word of parents; let idx = index"
-					[routerLink]="['/words', word.id]"
-					tabindex="0"
-					[style.margin-left.px]="(idx + 1) * 15">
-
-					<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
-					<span>{{ word.name | hideEnum }}</span>
-
-				</a>
-
-			}
-
-		</div>
-
 		<h3>{{ word.name | hideEnum }}</h3>
 
-		<!-- <div word_tags *ngIf="word.tags as tags">
+		<h6>Context:</h6>
+		<p>{{ word.context }}</p>
 
-			<button *ngFor="let tag of tags" class="tag xs" [routerLink]="['/words']" [queryParams]="{ 'tags': tag }">{{ tag }}</button>
+		@for (d of word.definitions; track d.id) {
 
-		</div>
+			<h5>Definition #{{ $index + 1 }}</h5>
+			<table>
+				<tr>
+					<th>Language</th>
+					<td>{{ d.language }}</td>
+					<th>Type</th>
+					<td>{{ d.type }}</td>
+				</tr>
+				<tr>
+					<th colspan="4">Meaning</th>
+				</tr>
+				<tr>
+					<td colspan="4">{{ d.name }}</td>
+				</tr>
+				<tr>
+					<th>Samples</th>
+				</tr>
+				@for (s of d.samples; track $index) {
 
-		<div word_info>
+					<tr>
+						<th colspan="4"># {{ $index + 1 }}</th>
+					</tr>
+					<tr>
+						<td colspan="4">{{ s }}</td>
+					</tr>
 
-			<small [title]="word.modified | date:'EEEE dd.MM.yyyy hh:mm'">Last edited: {{ word.modified | timePast:false }}</small>
-
-		</div> -->
-
-	</div>
-
-}
-
-@if (children.length > 0) {
-
-	<div word_children>
-
-		<div word_nested>Child Words</div>
-		@for (word of children; track word) {
-
-			<a	[routerLink]="['/words', word.id]"
-				tabindex="0"
-				[style.margin-left.px]="15">
-
-				<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
-				<span>{{ word.name | hideEnum }}</span>
-
-			</a>
+				}
+			</table>
 
 		}
 
