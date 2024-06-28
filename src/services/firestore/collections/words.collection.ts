@@ -142,9 +142,9 @@ class WordFirestoreConverter implements FirestoreConverter<Word> {
 
 			id,
 			name,
-			dictionary,
+			dictionary: dictionary ?? null,
+			pronunciation: pronunciation ?? null,
 			contexts,
-			pronunciation,
 			definitions
 
 		};
@@ -162,17 +162,17 @@ class WordFirestoreConverter implements FirestoreConverter<Word> {
 		if (entry.name)
 			fields.add('name');
 
-		if (entry.dictionary)
-			fields.add('dictionary');
+		// if (entry.dictionary)
+		fields.add('dictionary');
+
+		// if (entry.pronunciation)
+		fields.add('pronunciation');
 
 		if (entry.contexts)
 			fields.add('contexts');
 
 		if (entry.definitions)
 			fields.add('definitions');
-
-		if (entry.pronunciation)
-			fields.add('pronunciation');
 
 		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
 
