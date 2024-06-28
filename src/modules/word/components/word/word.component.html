@@ -1,45 +1,40 @@
 @if (word) {
 
-	<div word_main>
+	<h1>{{ word.name }}</h1>
+	@if (word.pronunciation) {
 
-		<h3>{{ word.name | hideEnum }}</h3>
+		<small>{{ word.pronunciation }}</small>
 
-		<h6>Context:</h6>
-		<p>{{ word.context }}</p>
+	}
 
-		@for (d of word.definitions; track d.id) {
+	@if (word.context) {
 
-			<h5>Definition #{{ $index + 1 }}</h5>
-			<table>
-				<tr>
-					<th>Language</th>
-					<td>{{ d.language | defLanguage }}</td>
-					<th>Type</th>
-					<td>{{ d.type | defType }}</td>
-				</tr>
-				<tr>
-					<th colspan="4">Meaning</th>
-				</tr>
-				<tr>
-					<td colspan="4">{{ d.name }}</td>
-				</tr>
-				<tr>
-					<th>Samples</th>
-				</tr>
-				@for (s of d.samples; track $index) {
+		<p><strong>Context:</strong> {{ word.context }}</p>
 
-					<tr>
-						<th colspan="4"># {{ $index + 1 }}</th>
-					</tr>
-					<tr>
-						<td colspan="4">{{ s }}</td>
-					</tr>
+	}
 
-				}
-			</table>
+	@if (word.dictionary) {
 
-		}
+		<p><strong>Dictionary:</strong> {{ word.dictionary }}</p>
 
-	</div>
+	}
+
+	@for (definition of word.definitions; track $index) {
+
+		<!-- <h6 definition>Definition #{{ $index + 1}}</h6> -->
+		<div definition>
+
+			<small><img class="flag" [src]="'assets/flags/' + definition.language + '.svg'"> {{ definition.type | defType }}</small>
+			<strong>{{ definition.name }}</strong>
+
+			@for (sample of definition.samples; track $index) {
+
+				<blockquote>{{ sample }}</blockquote>
+
+			}
+
+		</div>
+
+	}
 
 }
