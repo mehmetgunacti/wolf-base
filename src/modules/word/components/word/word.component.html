@@ -13,9 +13,9 @@
 			<table>
 				<tr>
 					<th>Language</th>
-					<td>{{ d.language }}</td>
+					<td>{{ d.language | defLanguage }}</td>
 					<th>Type</th>
-					<td>{{ d.type }}</td>
+					<td>{{ d.type | defType }}</td>
 				</tr>
 				<tr>
 					<th colspan="4">Meaning</th>

@@ -8,6 +8,8 @@ import { WordEditFormPageComponent } from './pages/word-edit-form-page/word-form
 import { WordNewFormPageComponent } from './pages/word-new-form-page/word-new-form-page.component';
 import { WordPageComponent } from './pages/word-page/word-page.component';
 import { WordsPageComponent } from './pages/words-page/words-page.component';
+import { LanguagePipe } from './pipes/language.pipe';
+import { TypePipe } from './pipes/type.pipe';
 
 export const components = [
 
@@ -25,6 +27,10 @@ export const components = [
 	WordPageComponent,
 	WordsPageComponent,
 	WordEditFormPageComponent,
-	WordNewFormPageComponent
+	WordNewFormPageComponent,
+
+	// pipes
+	LanguagePipe,
+	TypePipe
 
 ];
