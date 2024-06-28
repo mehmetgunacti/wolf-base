@@ -1,9 +1,7 @@
 <select
-	#select
+	[id]="label_id"
 	[formControl]="control"
-	[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
-	(mousedown)="onSelectClicked($event);"
-	(keydown)="onKeydown($event);">
+	[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }">
 
 	@for (node of nodes; track $index) {
 
@@ -12,4 +10,4 @@
 	}
 
 </select>
-<label class="up">{{name}}</label>
+<label [for]="label_id" class="up">{{name}}</label>

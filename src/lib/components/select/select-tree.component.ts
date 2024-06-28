@@ -14,6 +14,8 @@ import { hasModifierKey } from '@angular/cdk/keycodes';
 })
 export class SelectTreeComponent {
 
+	label_id: string = 'select_tree_' + Math.random();
+
 	@ViewChild(CdkMenuTrigger) trigger!: CdkMenuTrigger;
 	@ViewChild('select') select!: ElementRef<HTMLSelectElement>;
 
