@@ -15,7 +15,7 @@
 				<a [routerLink]="['/words', word.id]" tabindex="0">
 
 					<span>{{ word.name }}</span>
-					<small>{{ word.definitions.length }} definitions</small>
+					<small>{{ word.definitions.length }} definition{{ word.definitions.length > 1 ? 's' : '' }}</small>
 
 				</a>
 

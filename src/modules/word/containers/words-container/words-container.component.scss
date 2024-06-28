@@ -17,38 +17,9 @@
 			text-decoration		: none;
 			transition			: $bg-transition;
 
-			& .material-symbols-outlined {
+			& > small {
 
-				font-size		: var(--font-size-xs);
-				color			: fn-hsl(focus);
-
-			}
-
-
-			& > span:first-child {
-
-				@extend %flex-center-y;
 				color				: fn-hsl(text-secondary);
-				& > span:first-child {
-
-					font-size		: var(--font-size-sm);
-					color			: inherit;
-					margin-right	: var(--gap-xxs);
-
-				}
-
-				& > span:last-child {
-
-					font-size		: var(--font-size-xs);
-					color			: inherit;
-
-				}
-
-			}
-
-			& > span:last-child {
-
-				font-size			: var(--font-size);
 
 			}
 
@@ -58,7 +29,6 @@
 
 			}
 
-			// &:focus,
 			&:focus-visible {
 
 				@include mx-outline;
