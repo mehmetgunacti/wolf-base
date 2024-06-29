@@ -3,6 +3,7 @@ import { UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
+import { moveToTrash } from 'store/actions/word.actions';
 import { selWord_selected } from 'store/selectors/word-selectors/word-entities.selectors';
 
 @Component({
@@ -31,8 +32,8 @@ export class WordContainerComponent {
 
 	onRemove(id: UUID): void {
 
-		// if (confirm(`Word will be deleted. Continue?`))
-		// 	this.store.dispatch(moveToTrash({ id }));
+		if (confirm(`Word will be deleted. Continue?`))
+			this.store.dispatch(moveToTrash({ id }));
 
 	}
 
