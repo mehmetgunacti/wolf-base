@@ -10,13 +10,13 @@
 
 @if (report$ | async; as report) {
 
-	<w-toast [conf]="{ 'severity': 'info' }" icon="database">
+	<w-toast [conf]="{ 'severity': 'info' }" icon="monitoring">
 
 		<div total>
 
 			@if (total$ | async; as total) {
 
-				<span> Total size: {{ total | formatBytes }}</span>
+				Total size: {{ total | formatBytes }}
 
 			}
 
