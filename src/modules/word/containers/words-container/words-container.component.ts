@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Word } from 'lib';
-import { Observable } from 'rxjs';
-import { selWord_array } from 'store/selectors/word-selectors/word-entities.selectors';
+import { Observable, map } from 'rxjs';
+import { selWord_array, selWord_filtered } from 'store/selectors/word-selectors/word-entities.selectors';
 
 @Component({
 	selector: 'app-words-container',
@@ -18,7 +18,9 @@ export class WordsContainerComponent {
 
 	constructor() {
 
-		this.words$ = this.store.select(selWord_array);
+		this.words$ = this.store.select(selWord_filtered).pipe(
+			map(words => words.sort((a, b) => a.name.localeCompare(b.name)))
+		);
 
 	}
 

@@ -19,3 +19,9 @@ export interface Word extends Entity {
 	pronunciation: string | null;
 
 }
+
+export interface WordQueryParams {
+
+	search: string | null
+
+}

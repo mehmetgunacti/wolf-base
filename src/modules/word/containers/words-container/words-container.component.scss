@@ -9,6 +9,8 @@
 
 	& > [word_entries] {
 
+		@include mx-scrollable(calc(100dvh - 4 * #{$header-height}));
+
 		& > a {
 
 			@extend %flex-column;

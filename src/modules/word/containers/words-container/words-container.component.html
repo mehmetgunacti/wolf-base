@@ -1,10 +1,10 @@
-<header>
-
-	<div card_title>Word Entries</div>
-
-</header>
-
 @if (words$ | async; as words) {
+
+	<header>
+
+		<div card_title>Words <small>{{ words.length }} Entries</small></div>
+
+	</header>
 
 	@if (words.length > 0) {
 

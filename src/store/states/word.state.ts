@@ -1,4 +1,4 @@
-import { Word, RemoteMetadata, SyncData, UUID } from '@lib';
+import { Word, RemoteMetadata, SyncData, UUID, WordQueryParams } from '@lib';
 
 export interface Word_ModuleState {
 
@@ -17,7 +17,11 @@ export interface Word_EntitiesState {
 
 }
 
-export interface Word_UIState {}
+export interface Word_UIState {
+
+	queryParams: WordQueryParams;
+
+}
 
 // INITIALIZATION
 
@@ -34,8 +38,7 @@ export const word_initialEntitiesState: Word_EntitiesState = {
 export const initialWordUIState: Word_UIState = {
 
 	queryParams: {
-		search: null,
-		tags: []
+		search: null
 	}
 
 };

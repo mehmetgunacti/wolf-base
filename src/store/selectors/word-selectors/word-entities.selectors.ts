@@ -1,6 +1,6 @@
-import { Word, TAG_PINNED, UUID } from '@lib';
+import { Word } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selWord_EntitiesState } from './word.selectors';
+import { selWord_EntitiesState, selWord_UIState } from './word.selectors';
 
 export const selWord_entities = createSelector(
 
@@ -34,5 +34,20 @@ export const selWord_selected = createSelector(
 
 	selWord_EntitiesState,
 	state => state.selectedId ? state.entities[state.selectedId] : null
+
+);
+
+export const selWord_search = createSelector(
+
+	selWord_UIState,
+	state => state.queryParams.search
+
+);
+
+export const selWord_filtered = createSelector(
+
+	selWord_array,
+	selWord_search,
+	(arr, search) => search !== null ? arr.filter(word => word.name.toLocaleLowerCase().includes(search.toLowerCase())) : arr
 
 );

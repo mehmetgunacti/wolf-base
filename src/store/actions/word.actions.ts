@@ -1,4 +1,4 @@
-import { RemoteMetadata, SyncData, UUID, Word } from '@lib';
+import { RemoteMetadata, SyncData, UUID, Word, WordQueryParams } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // CRUD
@@ -37,8 +37,9 @@ export const loadAllRemoteMetadataSuccess	= createAction('[Word] Load All Remote
 // export const loadTrashCountSuccess			= createAction('[Word] Load Trash Count Success', props<{ count: number }>());
 
 // UI
-export const setEditId						= createAction('[Word] Set Edit Id', props<{ id: UUID | null }>());
+export const search							= createAction('[Word] Search', props<{ term: string | null }>());
 export const setSelectedId					= createAction('[Word] Set Selected Id', props<{ id: UUID | null }>());
+export const setQueryParams					= createAction('[Word] Set Query State', props<WordQueryParams>());
 
 // CLOUD SYNC
 // local_new
