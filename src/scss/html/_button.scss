@@ -187,6 +187,7 @@ button {
 		--col-button-bg-sat				: var(--col-primary-sat);
 		--col-button-bg-lig				: var(--col-primary-lig);
 		--col-button-bg-alp				: var(--col-primary-alp);
+		color							: fn-hsl(text);
 
 	}
 
@@ -196,6 +197,7 @@ button {
 		--col-button-bg-sat				: var(--col-success-sat);
 		--col-button-bg-lig				: var(--col-success-lig);
 		--col-button-bg-alp				: var(--col-success-alp);
+		color							: fn-hsl(text);
 
 	}
 
@@ -205,6 +207,7 @@ button {
 		--col-button-bg-sat				: var(--col-info-sat);
 		--col-button-bg-lig				: var(--col-info-lig);
 		--col-button-bg-alp				: var(--col-info-alp);
+		color							: fn-hsl(text);
 
 	}
 
@@ -214,6 +217,7 @@ button {
 		--col-button-bg-sat				: var(--col-warn-sat);
 		--col-button-bg-lig				: var(--col-warn-lig);
 		--col-button-bg-alp				: var(--col-warn-alp);
+		color							: fn-hsl(text);
 
 	}
 
@@ -223,6 +227,7 @@ button {
 		--col-button-bg-sat				: var(--col-error-sat);
 		--col-button-bg-lig				: var(--col-error-lig);
 		--col-button-bg-alp				: var(--col-error-alp);
+		color							: fn-hsl(text);
 
 	}
 
