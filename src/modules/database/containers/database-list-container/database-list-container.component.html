@@ -10,6 +10,20 @@
 
 @if (report$ | async; as report) {
 
+	<w-toast [conf]="{ 'severity': 'info' }">
+
+		<div total>
+
+			@if (total$ | async; as total) {
+
+				<span> Total size: {{ total | formatBytes }}</span>
+
+			}
+
+		</div>
+
+	</w-toast>
+
 	<fieldset>
 
 		<legend>

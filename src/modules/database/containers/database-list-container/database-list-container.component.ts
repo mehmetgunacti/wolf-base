@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DatabaseReport } from '@lib';
 import { Store } from '@ngrx/store';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { loadReport } from 'store/actions/database.actions';
 import * as reports from 'store/selectors/database.selectors';
 
@@ -16,10 +16,12 @@ export class DatabaseListContainerComponent {
 	private store: Store = inject(Store);
 
 	report$: Observable<DatabaseReport>;
+	total$: Observable<number>;
 
 	constructor() {
 
 		this.report$ = this.store.select(reports.selDatabaseReport);
+		this.total$ = this.store.select(reports.selDatabase_TotalSize);
 		this.store.dispatch(loadReport());
 
 	}

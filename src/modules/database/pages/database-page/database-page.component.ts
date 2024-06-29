@@ -2,7 +2,7 @@ import { Component, OnDestroy, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LocalRepositoryNames } from '@lib';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription, startWith, tap } from 'rxjs';
+import { Subscription, startWith, tap } from 'rxjs';
 import { backupDatabase, loadValues, search } from 'store/actions/database.actions';
 
 @Component({
