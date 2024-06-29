@@ -6,6 +6,7 @@ import * as bmActions from 'store/actions/bookmark.actions';
 import * as noteActions from 'store/actions/note.actions';
 import * as contentActions from 'store/actions/note-content.actions';
 import * as wordActions from 'store/actions/word.actions';
+import * as quoteActions from 'store/actions/quote.actions';
 import { selCloudAvailableTasks } from 'store/selectors/cloud.selectors';
 
 function getBookmarkAction(taskType: SyncTaskType): Action | null {
@@ -151,6 +152,41 @@ function getWordAction(taskType: SyncTaskType): Action | null {
 
 }
 
+function getQuoteAction(taskType: SyncTaskType): Action | null {
+
+	switch (taskType) {
+
+		case SyncTaskType.local_new:
+			return quoteActions.syncLocalNew();
+
+		case SyncTaskType.local_updated:
+			return quoteActions.syncLocalUpdated();
+
+		case SyncTaskType.local_deleted:
+			return quoteActions.syncLocalDeleted();
+
+		case SyncTaskType.remote_new:
+			return quoteActions.syncRemoteNew();
+
+		case SyncTaskType.remote_updated:
+			return quoteActions.syncRemoteUpdated();
+
+		case SyncTaskType.remote_deleted:
+			return quoteActions.syncRemoteDeleted();
+
+		case SyncTaskType.deleted_deleted:
+			return quoteActions.syncDeletedDeleted();
+
+		// case CloudTaskType.updated_updated:
+		// case CloudTaskType.updated_deleted:
+		// case CloudTaskType.deleted_updated:
+		// 	return EMPTY;
+
+	}
+	return null;
+
+}
+
 function getAction(task: CloudTask): Action | null {
 
 	if (WolfEntity.bookmark.name === task.entity.name)
@@ -164,6 +200,9 @@ function getAction(task: CloudTask): Action | null {
 
 	if (WolfEntity.word.name === task.entity.name)
 		return getWordAction(task.type);
+
+	if (WolfEntity.quote.name === task.entity.name)
+		return getQuoteAction(task.type);
 
 	return null;
 

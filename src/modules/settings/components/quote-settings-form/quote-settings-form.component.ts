@@ -10,7 +10,7 @@ import { Quote, UUID } from '@lib';
 })
 export class QuoteSettingsFormComponent {
 
-	fcId: FormControl<UUID | null> = new FormControl<UUID | null>("1");
+	fcId: FormControl<UUID | null> = new FormControl<UUID | null>(null);
 	fcName: FormControl<string> = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
 	fcAuthor: FormControl<string | null> = new FormControl<string | null>(null);
 	fcContext: FormControl<string | null> = new FormControl<string | null>(null);

@@ -27,9 +27,13 @@ class QuoteFirestoreConverter implements FirestoreConverter<Quote> {
 
 		if (entry.author)
 			fields['author'] = { stringValue: entry.author };
+		else
+			fields['author'] = { nullValue: null };
 
 		if (entry.context)
 			fields['context'] = { stringValue: entry.context };
+		else
+			fields['context'] = { nullValue: null };
 
 		return fields;
 
@@ -68,6 +72,7 @@ class QuoteFirestoreConverter implements FirestoreConverter<Quote> {
 			fields.add('name');
 
 		fields.add('author');
+		fields.add('context');
 
 		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
 
