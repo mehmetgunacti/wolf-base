@@ -33,9 +33,6 @@ export const loadAllRemoteMetadataSuccess	= createAction('[Quote] Load All Remot
 // export const loadTrashCount					= createAction('[Quote] Load Trash Count');
 // export const loadTrashCountSuccess			= createAction('[Quote] Load Trash Count Success', props<{ count: number }>());
 
-// UI
-export const setSelectedId					= createAction('[Quote] Set Selected Id', props<{ id: UUID | null }>());
-
 // CLOUD SYNC
 // local_new
 export const syncLocalNew					= createAction('[Quote] Sync Local New');
