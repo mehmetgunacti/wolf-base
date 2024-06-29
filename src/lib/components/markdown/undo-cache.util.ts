@@ -26,7 +26,7 @@ export interface UndoCache {
 export const UNDO_CACHE = new InjectionToken<UndoCache>('UndoCache');
 
 @Injectable()
-export class UndoCacheImpl {
+export class UndoCacheImpl implements UndoCache {
 
 	// signals
 	private stack: WritableSignal<EditorProperties[]> = signal([EMPTY_PROPS]);
