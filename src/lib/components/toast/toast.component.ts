@@ -11,6 +11,7 @@ export class ToastComponent implements OnInit {
 	private elementRef: ElementRef = inject(ElementRef);
 
 	@Input() conf!: ToastConfiguration;
+	@Input() icon: string | null = null;
 	iconClass!: string;
 
 	@Output() close = new EventEmitter<number>();
@@ -18,7 +19,7 @@ export class ToastComponent implements OnInit {
 	ngOnInit(): void {
 
 		this.elementRef.nativeElement.classList.add(this.conf.severity);
-		this.iconClass = this.getIconClass(this.conf);
+		this.iconClass = this.icon ?? this.getIconClass(this.conf);
 		if (!this.conf.sticky && this.conf.life) // life > 0
 			setTimeout(() => this.onClose(), this.conf.life);
 
