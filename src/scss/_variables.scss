@@ -12,6 +12,8 @@ $input-element-min-height	: 4rem;
 **********/
 $z-index-splash-screen		: 6000;
 
+$z-index-ng-progress		: 5500;
+
 // override Angular CDK
 // these 3 variables are found in node_modules '@angular/cdk/overlay/_index.scss'
 // "!default" flag means that the variable will only be assigned this value if it hasn’t been assigned a value before this line
