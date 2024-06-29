@@ -5,4 +5,5 @@ export * from './key-value.repository';
 export * from './log.repository';
 export * from './note-content.repository';
 export * from './note.repository';
+export * from './quote-entry.repository';
 export * from './word-entry.repository';

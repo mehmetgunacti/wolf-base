@@ -1,6 +1,6 @@
 import { Entity, EntityName, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
-import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository, NotesLocalRepository, WordLocalRepository } from 'lib/repositories/local';
-import { DexieBookmarksRepositoryImpl, DexieConfigurationRepositoryImpl, DexieLogsLocalRepositoryImpl } from './tables';
+import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository, NotesLocalRepository, QuoteLocalRepository, WordLocalRepository } from 'lib/repositories/local';
+import { DexieBookmarksRepositoryImpl, DexieConfigurationRepositoryImpl, DexieLogsLocalRepositoryImpl, DexieQuotesRepositoryImpl } from './tables';
 import { DexieNoteContentRepositoryImpl } from './tables/notes-content.table';
 import { DexieNotesRepositoryImpl } from './tables/notes.table';
 import { DexieWordsRepositoryImpl } from './tables/words.table';
@@ -14,6 +14,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 	notes: NotesLocalRepository;
 	noteContent: NoteContentLocalRepository;
 	words: WordLocalRepository;
+	quotes: QuoteLocalRepository;
 	configuration: ConfigurationLocalRepository;
 	logs: LogsLocalRepository;
 
@@ -24,6 +25,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 		this.notes = new DexieNotesRepositoryImpl(db);
 		this.noteContent = new DexieNoteContentRepositoryImpl(db);
 		this.words = new DexieWordsRepositoryImpl(db);
+		this.quotes = new DexieQuotesRepositoryImpl(db);
 		this.configuration = new DexieConfigurationRepositoryImpl(db);
 		this.logs = new DexieLogsLocalRepositoryImpl(db);
 		this.db = db;
@@ -38,6 +40,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 			case WolfEntity.note.name: return this.notes as unknown as EntityLocalRepository<T>;
 			case WolfEntity.note_content.name: return this.noteContent as unknown as EntityLocalRepository<T>;
 			case WolfEntity.word.name: return this.words as unknown as EntityLocalRepository<T>;
+			case WolfEntity.quote.name: return this.quotes as unknown as EntityLocalRepository<T>;
 
 		}
 		throw Error('Unknown entity');

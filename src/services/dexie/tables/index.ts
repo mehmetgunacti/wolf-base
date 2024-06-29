@@ -5,4 +5,5 @@ export * from './key-value.table';
 export * from './logs.table';
 export * from './notes-content.table';
 export * from './notes.table';
+export * from './quotes.table';
 export * from './words.table';

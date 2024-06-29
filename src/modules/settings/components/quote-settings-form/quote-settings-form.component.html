@@ -1,0 +1,24 @@
+<form>
+
+	<w-input [control]="fcId" [readonly]="true" name="ID" />
+	<w-textarea [control]="fcName" name="Quote" [rows]="3" />
+	<w-input [control]="fcAuthor" name="Author" />
+	<w-input [control]="fcContext" name="Context" />
+
+</form>
+
+<div form-element-buttons>
+
+	<button type="button" (click)="onReset()" [disabled]="fcName.pristine">
+		<span class="material-symbols-outlined">clear_all</span> Clear
+	</button>
+
+	<button type="button" class="error" (click)="onDelete(fcId.value)" [disabled]="!fcId.value">
+		<span class="material-symbols-outlined">delete</span> Delete
+	</button>
+
+	<button type="button" (click)="onSave()" [disabled]="fcName.pristine">
+		<span class="material-symbols-outlined">save</span> Save
+	</button>
+
+</div>

@@ -19,5 +19,6 @@ export class WolfEntity {
 	static note = new EntityName('note', 'notes');
 	static note_content = new EntityName('note_content', 'note_content');
 	static word = new EntityName('word', 'words');
+	static quote = new EntityName('quote', 'quotes');
 
 }

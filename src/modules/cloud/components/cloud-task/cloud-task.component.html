@@ -28,6 +28,12 @@
 				<span> Words</span>
 			</ng-container>
 
+			<!-- Quotes -->
+			<ng-container *ngSwitchCase="WolfEntity.quote.name">
+				<span class="material-symbols-outlined">format_quote</span>
+				<span> Quotes</span>
+			</ng-container>
+
 			<!-- UNKNOWN CASE -->
 			<ng-container *ngSwitchDefault>
 				<span class="material-symbols-outlined">help</span>

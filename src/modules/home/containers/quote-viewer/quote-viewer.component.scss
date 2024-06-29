@@ -1,0 +1,14 @@
+@import 'helper';
+@import 'variables';
+@import 'components';
+@import 'mixins';
+
+:host {
+
+	@include mx-flex-center-y;
+	@include mx-component(3);
+	@include mx-box-shadow;
+	padding-inline	: var(--gap-lg);
+	gap				: var(--gap-xs);
+
+}

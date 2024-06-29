@@ -1,0 +1,11 @@
+@import 'helper';
+@import 'components';
+@import 'mixins';
+
+:host {
+
+	@include mx-card;
+	@include mx-flex-column;
+	gap			: var(--gap-sm);
+
+}

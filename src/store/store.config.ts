@@ -46,6 +46,18 @@ import { NoteSyncRemoteNewEffects } from './effects/note-effects/note-sync-remot
 import { NoteSyncRemoteUpdatedEffects } from './effects/note-effects/note-sync-remote-updated.effects';
 import { NoteSyncEffects } from './effects/note-effects/note-sync.effects';
 import { NoteUIEffects } from './effects/note-effects/note-ui.effects';
+import { QuoteEntityCreateEffects } from './effects/quote-effects/quote-entity-create.effects';
+import { QuoteEntityMoveToTrashEffects } from './effects/quote-effects/quote-entity-move-to-trash.effects';
+import { QuoteEntityUpdateEffects } from './effects/quote-effects/quote-entity-update.effects';
+import { QuoteLoadEffects } from './effects/quote-effects/quote-load.effects';
+import { QuoteSyncDeletedDeletedEffects } from './effects/quote-effects/quote-sync-deleted-deleted.effects';
+import { QuoteSyncLocalDeletedEffects } from './effects/quote-effects/quote-sync-local-deleted.effects';
+import { QuoteSyncLocalNewEffects } from './effects/quote-effects/quote-sync-local-new.effects';
+import { QuoteSyncLocalUpdatedEffects } from './effects/quote-effects/quote-sync-local-updated.effects';
+import { QuoteSyncRemoteDeletedEffects } from './effects/quote-effects/quote-sync-remote-deleted.effects';
+import { QuoteSyncRemoteNewEffects } from './effects/quote-effects/quote-sync-remote-new.effects';
+import { QuoteSyncRemoteUpdatedEffects } from './effects/quote-effects/quote-sync-remote-updated.effects';
+import { QuoteSyncEffects } from './effects/quote-effects/quote-sync.effects';
 import { SettingsEffects } from './effects/settings.effects';
 import { WordEntityCreateEffects } from './effects/word-effects/word-entity-create.effects';
 import { WordEntityMoveToTrashEffects } from './effects/word-effects/word-entity-move-to-trash.effects';
@@ -69,6 +81,7 @@ import { noteContentReducer } from './reducers/note-content-reducers/note-conten
 import { noteReducer } from './reducers/note-reducers/note.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
+import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -175,6 +188,25 @@ export const effects = [
 	WordLoadEffects,
 	WordUIEffects,
 
+	// Quotes
+	QuoteSyncEffects,
+
+	QuoteSyncLocalNewEffects,
+	QuoteSyncLocalUpdatedEffects,
+	QuoteSyncLocalDeletedEffects,
+
+	QuoteSyncRemoteNewEffects,
+	QuoteSyncRemoteUpdatedEffects,
+	QuoteSyncRemoteDeletedEffects,
+
+	QuoteSyncDeletedDeletedEffects,
+
+	QuoteEntityCreateEffects,
+	QuoteEntityUpdateEffects,
+	QuoteEntityMoveToTrashEffects,
+
+	QuoteLoadEffects,
+
 	// Database
 	DatabaseEffects,
 
@@ -194,6 +226,7 @@ export const reducers: ActionReducerMap<AppState> = {
 	note: combineReducers(noteReducer),
 	noteContent: combineReducers(noteContentReducer),
 	word: combineReducers(wordReducer),
+	quote: combineReducers(quoteReducer),
 	database: databaseReducer,
 	logs: combineReducers(logsReducer)
 
