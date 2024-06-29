@@ -20,7 +20,7 @@ export class DatabaseListContainerComponent {
 
 	constructor() {
 
-		this.report$ = this.store.select(reports.selDatabaseReport);
+		this.report$ = this.store.select(reports.selDatabase_Report);
 		this.total$ = this.store.select(reports.selDatabase_TotalSize);
 		this.store.dispatch(loadReport());
 

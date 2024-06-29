@@ -1,16 +1,18 @@
 import { Injectable, inject } from '@angular/core';
+import { DatabaseReport, LocalRepositoryNames, LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
-import { DatabaseReport, EntityReport, LocalRepositoryNames, LocalRepositoryService } from '@lib';
 import { BackupDatabase } from 'lib/utils/database.util';
-import { map, switchMap } from 'rxjs/operators';
-import { backupDatabase, loadReport, loadReportSuccess, loadValues, loadValuesSuccess } from 'store/actions/database.actions';
+import { NgProgress } from 'ngx-progressbar';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { backupDatabase, loadReport, loadReportSuccess } from 'store/actions/database.actions';
 
 @Injectable()
 export class DatabaseEffects {
 
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
+	private progress: NgProgress = inject(NgProgress);
 
 	generateZip$ = createEffect(
 
@@ -29,6 +31,7 @@ export class DatabaseEffects {
 		() => this.actions$.pipe(
 
 			ofType(loadReport),
+			tap(() => this.progress.ref().start()),
 			switchMap(() => Promise.all([
 
 				this.localRepository.count(LocalRepositoryNames.bookmarks),
@@ -123,17 +126,16 @@ export class DatabaseEffects {
 
 	);
 
-	// selectValues$ = createEffect(
+	loadReportSuccess$ = createEffect(
 
-	// 	() => this.actions$.pipe(
+		() => this.actions$.pipe(
 
-	// 		ofType(loadValues),
-	// 		switchMap(({ tablename }) => this.localRepository.dump(tablename)),
-	// 		map(dump => Object.values(dump)),
-	// 		map(selectedValues => loadValuesSuccess({ selectedValues }))
+			ofType(loadReportSuccess),
+			tap(() => this.progress.ref().complete())
 
-	// 	)
+		),
+		{ dispatch: false }
 
-	// );
+	);
 
 }

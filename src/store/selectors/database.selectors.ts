@@ -3,7 +3,7 @@ import { DatabaseModuleState } from 'store/states/database.state';
 
 const selDatabaseModuleState = createFeatureSelector<DatabaseModuleState>('database');
 
-export const selDatabaseReport = createSelector(
+export const selDatabase_Report = createSelector(
 
 	selDatabaseModuleState,
 	state => state.report
@@ -12,7 +12,7 @@ export const selDatabaseReport = createSelector(
 
 export const selDatabase_TotalSize = createSelector(
 
-	selDatabaseReport,
+	selDatabase_Report,
 	report => {
 
 		let sum = 0;
