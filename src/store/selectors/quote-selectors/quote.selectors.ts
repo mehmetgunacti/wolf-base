@@ -9,3 +9,10 @@ export const selQuote_EntitiesState = createSelector(
 	state => state.entities
 
 );
+
+export const selQuote_UIState = createSelector(
+
+	selQuote_ModuleState,
+	state => state.ui
+
+);

@@ -1,0 +1,24 @@
+@if (quotes().length > 0) {
+
+	<div quotes_list>
+
+		@for (quote of quotes(); track quote.id) {
+
+			<a (click)="onSelect(quote)" tabindex="0">
+
+				<small>{{ quote.id }}</small>
+				<span>{{ quote.name }}</span>
+
+			</a>
+
+		}
+
+	</div>
+
+} @else {
+
+	<div class="empty">
+		No quotes available
+	</div>
+
+}

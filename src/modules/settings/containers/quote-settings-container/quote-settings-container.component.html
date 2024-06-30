@@ -5,6 +5,12 @@
 </header>
 <main>
 
-	<app-quote-settings-form (save)="onSave($event)" />
+	<app-quote-settings-form
+		[quote]="selected$ | async"
+		(create)="onCreate($event)"
+		(update)="onUpdate($event)"
+		(delete)="onDelete($event)"
+		(reset)="onReset()" />
+	<app-quote-settings-list [quotes]="(quotes$ | async) ?? []" (select)="onSelected($event)" />
 
 </main>

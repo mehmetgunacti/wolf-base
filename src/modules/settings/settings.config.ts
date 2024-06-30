@@ -2,6 +2,7 @@ import { FirestoreConfigFormComponent } from "./components/firestore-config-form
 import { PinnedNotesFormComponent } from './components/pinned-notes-form/pinned-notes-form.component';
 import { PopularBookmarksFormComponent } from './components/popular-bookmarks-form/popular-bookmarks-form.component';
 import { QuoteSettingsFormComponent } from './components/quote-settings-form/quote-settings-form.component';
+import { QuoteSettingsListComponent } from './components/quote-settings-list/quote-settings-list.component';
 import { TitleLookupConfigFormComponent } from "./components/title-lookup-config-form/title-lookup-config-form.component";
 import { FirestoreConfigContainerComponent } from "./containers/firestore-config-container/firestore-config-container.component";
 import { PinnedNotesFormContainerComponent } from './containers/pinned-notes-container/pinned-notes-form-container.component';
@@ -27,6 +28,7 @@ export const components = [
 	PopularBookmarksFormComponent,
 
 	QuoteSettingsFormComponent,
-	QuoteSettingsContainerComponent
+	QuoteSettingsContainerComponent,
+	QuoteSettingsListComponent
 
 ];

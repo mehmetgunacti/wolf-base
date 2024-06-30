@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Quote } from '@lib';
+import { Quote, UUID } from '@lib';
 import { Store } from '@ngrx/store';
-import { create, update } from 'store/actions/quote.actions';
+import { Observable } from 'rxjs';
+import { create, moveToTrash, setSelectedId, update } from 'store/actions/quote.actions';
+import { selQuote_array } from 'store/selectors/quote-selectors/quote-entities.selectors';
+import { selQuote_selected } from 'store/selectors/quote-selectors/quote-ui.selectors';
 
 @Component({
 	selector: 'app-quote-settings-container',
@@ -13,12 +16,36 @@ export class QuoteSettingsContainerComponent {
 
 	private store: Store = inject(Store);
 
-	onSave(quote: Partial<Quote>): void {
+	quotes$: Observable<Quote[]> = this.store.select(selQuote_array);
+	selected$: Observable<Quote | null> = this.store.select(selQuote_selected);
 
-		if (quote.id)
-			this.store.dispatch(update({ id: quote.id, quote }));
-		else
-			this.store.dispatch(create({ quote }));
+	onCreate(quote: Partial<Quote>): void {
+
+		this.store.dispatch(create({ quote }));
+
+	}
+
+	onUpdate(quote: Quote): void {
+
+		this.store.dispatch(update({ id: quote.id, quote }));
+
+	}
+
+	onSelected(id: UUID): void {
+
+		this.store.dispatch(setSelectedId({ id }));
+
+	}
+
+	onDelete(id: UUID): void {
+
+		this.store.dispatch(moveToTrash({ id }));
+
+	}
+
+	onReset(): void {
+
+		this.store.dispatch(setSelectedId({ id: null }));
 
 	}
 

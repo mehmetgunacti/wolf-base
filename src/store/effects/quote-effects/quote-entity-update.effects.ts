@@ -4,7 +4,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import * as quoteActions from 'store/actions/quote.actions';
 
@@ -28,17 +27,6 @@ export class QuoteEntityUpdateEffects {
 				)
 
 			)
-
-		)
-
-	);
-
-	navigate$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(quoteActions.updateSuccess),
-			map(({ id }) => navigate({ url: ['/quotes', id] }))
 
 		)
 

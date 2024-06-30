@@ -32,7 +32,7 @@ export class QuoteViewerComponent {
 
 	constructor() {
 
-		this.timer$ = timer(0, 2000);
+		this.timer$ = timer(0, 60 * 1000); // 1 min
 
 		const selected$: Observable<Quote | null> = this.timer$.pipe(
 
