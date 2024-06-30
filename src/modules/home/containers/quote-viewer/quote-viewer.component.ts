@@ -39,7 +39,8 @@ export class QuoteViewerComponent {
 			switchMap(() =>
 
 				this.store.select(selQuote_array).pipe(
-					map(list => list[Math.floor(Math.random() * list.length)])
+					map(list => list[Math.floor(Math.random() * list.length)]),
+					map(quote => quote ?? picard)
 				)
 
 			)
