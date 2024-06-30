@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { coreModuleState } from './core.selectors';
 import { CoreModuleState, CoreUIState } from 'store/states/core.state';
+import { coreModuleState } from './core.selectors';
 
 export const selCore_uiState = createSelector(
 
@@ -27,5 +27,12 @@ export const selCore_theme = createSelector(
 
 	selCore_uiState,
 	(state: CoreUIState) => state.theme
+
+);
+
+export const selCore_quotesRunning = createSelector(
+
+	selCore_uiState,
+	(state: CoreUIState) => state.quotesRunning
 
 );

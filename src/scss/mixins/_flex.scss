@@ -60,6 +60,14 @@
 
 }
 
+@mixin mx-flex-center-start {
+
+	display			: flex;
+	justify-content	: center;
+	align-items		: flex-start;
+
+}
+
 @mixin mx-flex-end-center {
 
 	display			: flex;

@@ -1,7 +1,7 @@
 import { DEFAULT_CONF_VALUES } from '@lib';
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import { setBigScreen, setSidebarState, setTheme } from 'store/actions/core-ui.actions';
+import { setBigScreen, setQuotesRunning, setSidebarState, setTheme } from 'store/actions/core-ui.actions';
 import { loadAllSuccess } from 'store/actions/core.actions';
 import { CoreUIState, initialCoreUIState } from 'store/states/core.state';
 
@@ -12,7 +12,8 @@ export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 
 		...state,
 		sidebarState: configuration.sidebarState ?? DEFAULT_CONF_VALUES.sidebarState,
-		theme: configuration.theme ?? DEFAULT_CONF_VALUES.theme
+		theme: configuration.theme ?? DEFAULT_CONF_VALUES.theme,
+		quotesRunning: configuration.quotesRunning ?? DEFAULT_CONF_VALUES.quotesRunning
 
 	})),
 	on(setBigScreen, (state, { isBigScreen }) => {
@@ -24,6 +25,7 @@ export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 
 	}),
 	on(setSidebarState, (state, { sidebarState }): CoreUIState => ({ ...state, sidebarState })),
-	on(setTheme, (state, { theme }): CoreUIState => ({ ...state, theme }))
+	on(setTheme, (state, { theme }): CoreUIState => ({ ...state, theme })),
+	on(setQuotesRunning, (state, { running }): CoreUIState => ({ ...state, quotesRunning: running }))
 
 );

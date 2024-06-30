@@ -8,6 +8,7 @@ export interface Configuration {
 	firestoreConfig: FirestoreConfig | null;
 	popularBookmarks: string[];
 	pinnedNotes: string[];
+	quotesRunning: boolean;
 
 }
 

@@ -1,5 +1,5 @@
 import { SidebarState, Theme } from '@lib';
-import { CONF_KEYS, LocalRepositoryNames } from 'lib/constants/database.constant';
+import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalRepositoryNames } from 'lib/constants/database.constant';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
 import { ConfigurationLocalRepository } from 'lib/repositories/local';
 import { WolfBaseDB } from '../wolfbase.database';
@@ -41,6 +41,12 @@ export class DexieConfigurationRepositoryImpl extends KeyValueLocalRepositoryImp
 
 	}
 
+	async setQuotesRunning(running: boolean): Promise<void> {
+
+		return await this.set(CONF_KEYS.quotesRunning, running);
+
+	}
+
 	async getFirestoreConfig(): Promise<FirestoreConfig | null> {
 
 		return this.get(CONF_KEYS.firestoreConfig);
@@ -63,7 +69,8 @@ export class DexieConfigurationRepositoryImpl extends KeyValueLocalRepositoryImp
 			firestoreConfig: map.get(CONF_KEYS.firestoreConfig) ?? null,
 			titleLookupUrl: map.get(CONF_KEYS.titleLookupUrl) ?? null,
 			popularBookmarks: map.get(CONF_KEYS.popularBookmarks) ?? null,
-			pinnedNotes: map.get(CONF_KEYS.pinnedNotes) ?? null
+			pinnedNotes: map.get(CONF_KEYS.pinnedNotes) ?? null,
+			quotesRunning: map.get(CONF_KEYS.quotesRunning) ?? DEFAULT_CONF_VALUES.quotesRunning
 
 		}
 		return conf;

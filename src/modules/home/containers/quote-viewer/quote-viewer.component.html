@@ -1,2 +1,36 @@
-<span class="material-symbols-outlined">format_quote</span>
-<span>Quote of the day</span>
+<div quote_icon>
+	<span class="material-symbols-outlined">format_quote</span>
+</div>
+<div quote_outer>
+
+	@if (quote$ | async; as quote) {
+
+		<div quote_inner [@quoteChange]="quote.id">
+
+			<div quote_name>{{ quote.name }}</div>
+			@if (quote.author) {<div quote_author>{{ quote.author }}</div>}
+			@if (quote.context) {<div quote_context>{{ quote.context }}</div>}
+
+		</div>
+
+	}
+
+</div>
+
+@if (running$ | async; as running) {
+
+	<div overlay (click)="setRunning(false)" @fadeOut>
+
+		<span class="material-symbols-outlined">play_circle</span>
+
+	</div>
+
+} @else {
+
+	<div overlay (click)="setRunning(true)" @fadeOut>
+
+		<span class="material-symbols-outlined">pause_circle</span>
+
+	</div>
+
+}

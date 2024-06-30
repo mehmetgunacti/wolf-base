@@ -41,7 +41,8 @@ export const CONF_KEYS: { [K in keyof Configuration]: K } = {
 	firestoreConfig: 'firestoreConfig',
 	titleLookupUrl: 'titleLookupUrl',
 	popularBookmarks: 'popularBookmarks',
-	pinnedNotes: 'pinnedNotes'
+	pinnedNotes: 'pinnedNotes',
+	quotesRunning: 'quotesRunning'
 
 }
 
@@ -52,6 +53,7 @@ export const DEFAULT_CONF_VALUES: Configuration = {
 	firestoreConfig: null,
 	titleLookupUrl: null,
 	popularBookmarks: ['2-be-read', 'new', 'im-bored', 'news', 'shopping'],
-	pinnedNotes: ['java', 'todo', 'code']
+	pinnedNotes: ['java', 'todo', 'code'],
+	quotesRunning: false
 
 }

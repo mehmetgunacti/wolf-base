@@ -11,7 +11,8 @@ export class MockConfigurationLocalRepositoryImpl implements ConfigurationLocalR
 		firestoreConfig: null,
 		titleLookupUrl: null,
 		popularBookmarks: [],
-		pinnedNotes: []
+		pinnedNotes: [],
+		quotesRunning: true
 
 	}
 
@@ -27,6 +28,11 @@ export class MockConfigurationLocalRepositoryImpl implements ConfigurationLocalR
 
 	}
 
+	async setQuotesRunning(running: boolean): Promise<void> {
+
+		this.conf.quotesRunning = running;
+
+	}
 
 	async setSidebarState(visible: SidebarState): Promise<void> {
 

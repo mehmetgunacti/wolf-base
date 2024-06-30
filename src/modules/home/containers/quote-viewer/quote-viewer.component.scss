@@ -5,10 +5,73 @@
 
 :host {
 
-	@include mx-flex-center-y;
+	display			: flex;
+	position		: relative;
+	min-height		: 2 * $header-height;
+
 	@include mx-component(3);
 	@include mx-box-shadow;
-	padding-inline	: var(--gap-lg);
-	gap				: var(--gap-xs);
+
+	// & > [quote_icon] { }
+
+	& > [quote_outer] {
+
+		flex		: 1;
+		@include mx-flex-center-center;
+
+		& > [quote_inner] {
+
+			& > [quote_name] {
+
+				text-align	: center;
+				font-style	: italic;
+				font-size	: 90%;
+				padding		: 0 var(--gap-sm) var(--gap-sm) var(--gap-sm);
+
+			}
+
+			& > [quote_author] {
+
+				text-align	: end;
+				font-size	: smaller;
+				padding		: var(--gap-xs);
+
+			}
+
+			& > [quote_context] {
+
+				text-align	: end;
+				font-size	: xx-small;
+				padding		: 0 var(--gap-xs);
+
+			}
+
+		}
+
+	}
+
+	& > [overlay] {
+
+		// display			: flex;
+		// justify-content	: end;
+		@include mx-flex-center-center;
+
+		position		: absolute;
+		top				: 0;
+		left			: 0;
+		right			: 0;
+		bottom			: 0;
+		opacity			: 0;
+
+		padding			: var(--gap-sm);
+		cursor			: pointer;
+
+		& > span {
+
+			transform	: scale(2);
+
+		}
+
+	}
 
 }
