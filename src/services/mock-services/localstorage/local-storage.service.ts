@@ -1,10 +1,11 @@
 import { Entity, EntityName, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository, QuoteLocalRepository, WordLocalRepository } from 'lib/repositories/local';
 import { NotesLocalRepository } from 'lib/repositories/local/note.repository';
-import { MockBookmarksLocalRepositoryImpl, MockConfigurationLocalRepositoryImpl, MockLogsLocalRepositoryImpl, MockQuotesLocalRepositoryImpl } from './tables';
+import { MockBookmarksLocalRepositoryImpl, MockConfigurationLocalRepositoryImpl, MockLogsLocalRepositoryImpl, MockQuizEntryLocalRepositoryImpl, MockQuotesLocalRepositoryImpl } from './tables';
 import { MockNoteContentLocalRepositoryImpl } from './tables/note-content.table';
 import { MockNotesLocalRepositoryImpl } from './tables/notes.table';
 import { MockWordsLocalRepositoryImpl } from './tables/words.table';
+import { QuizEntryLocalRepository } from 'lib/repositories/local/quiz-entry.repository';
 
 
 export class MockLocalRepositoryService implements LocalRepositoryService {
@@ -13,6 +14,7 @@ export class MockLocalRepositoryService implements LocalRepositoryService {
 	notes: NotesLocalRepository = new MockNotesLocalRepositoryImpl();
 	noteContent: NoteContentLocalRepository = new MockNoteContentLocalRepositoryImpl();
 	words: WordLocalRepository = new MockWordsLocalRepositoryImpl();
+	quizEntries: QuizEntryLocalRepository = new MockQuizEntryLocalRepositoryImpl();
 	quotes: QuoteLocalRepository = new MockQuotesLocalRepositoryImpl();
 	configuration: ConfigurationLocalRepository = new MockConfigurationLocalRepositoryImpl();
 	logs: LogsLocalRepository = new MockLogsLocalRepositoryImpl();

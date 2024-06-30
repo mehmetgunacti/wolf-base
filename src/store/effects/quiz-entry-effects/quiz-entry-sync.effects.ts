@@ -3,7 +3,7 @@ import { SyncService, WolfEntity } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap } from 'rxjs/operators';
-import { loadAllRemoteMetadata } from 'store/actions/quizEntry.actions';
+import { loadAllRemoteMetadata } from 'store/actions/quiz-entry.actions';
 import { startSync } from 'store/actions/cloud.actions';
 
 @Injectable()

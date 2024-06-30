@@ -2,7 +2,8 @@ import { EntityName, LocalRepositoryNames } from 'lib/constants';
 import { Entity } from 'lib/models';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository, QuoteLocalRepository } from 'lib/repositories/local';
 import { NotesLocalRepository } from 'lib/repositories/local/note.repository';
-import { WordLocalRepository } from 'lib/repositories/local/word-entry.repository';
+import { QuizEntryLocalRepository } from 'lib/repositories/local/quiz-entry.repository';
+import { WordLocalRepository } from 'lib/repositories/local/word.repository';
 
 export interface LocalRepositoryService {
 
@@ -11,6 +12,7 @@ export interface LocalRepositoryService {
 	notes: NotesLocalRepository;
 	noteContent: NoteContentLocalRepository;
 	words: WordLocalRepository;
+	quizEntries: QuizEntryLocalRepository;
 	quotes: QuoteLocalRepository;
 
 	// non-entity tables

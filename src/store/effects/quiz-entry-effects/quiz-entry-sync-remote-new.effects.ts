@@ -4,8 +4,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import * as quizEntryActions from 'store/actions/quizEntry.actions';
-import { selQuizEntry_RemoteNew } from 'store/selectors/quizEntry-selectors/quizEntry-cloud.selectors';
+import * as quizEntryActions from 'store/actions/quiz-entry.actions';
+import { selQuizEntry_RemoteNew } from 'store/selectors/quiz-entry-selectors/quiz-entry-cloud.selectors';
 
 @Injectable()
 export class QuizEntrySyncRemoteNewEffects {

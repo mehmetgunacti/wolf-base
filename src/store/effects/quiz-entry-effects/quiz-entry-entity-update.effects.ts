@@ -5,7 +5,7 @@ import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
-import * as quizEntryActions from 'store/actions/quizEntry.actions';
+import * as quizEntryActions from 'store/actions/quiz-entry.actions';
 
 @Injectable()
 export class QuizEntryEntityUpdateEffects {

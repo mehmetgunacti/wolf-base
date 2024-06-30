@@ -5,6 +5,8 @@ import { DexieNoteContentRepositoryImpl } from './tables/notes-content.table';
 import { DexieNotesRepositoryImpl } from './tables/notes.table';
 import { DexieWordsRepositoryImpl } from './tables/words.table';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
+import { QuizEntryLocalRepository } from 'lib/repositories/local/quiz-entry.repository';
+import { DexieQuizEntriesRepositoryImpl } from './tables/quiz-entries.table';
 
 export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
@@ -14,6 +16,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 	notes: NotesLocalRepository;
 	noteContent: NoteContentLocalRepository;
 	words: WordLocalRepository;
+	quizEntries: QuizEntryLocalRepository;
 	quotes: QuoteLocalRepository;
 	configuration: ConfigurationLocalRepository;
 	logs: LogsLocalRepository;
@@ -25,6 +28,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 		this.notes = new DexieNotesRepositoryImpl(db);
 		this.noteContent = new DexieNoteContentRepositoryImpl(db);
 		this.words = new DexieWordsRepositoryImpl(db);
+		this.quizEntries = new DexieQuizEntriesRepositoryImpl(db);
 		this.quotes = new DexieQuotesRepositoryImpl(db);
 		this.configuration = new DexieConfigurationRepositoryImpl(db);
 		this.logs = new DexieLogsLocalRepositoryImpl(db);

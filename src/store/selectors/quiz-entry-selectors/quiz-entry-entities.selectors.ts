@@ -1,6 +1,6 @@
 import { QuizEntry } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selQuizEntry_EntitiesState } from './quizEntry.selectors';
+import { selQuizEntry_EntitiesState } from './quiz-entry.selectors';
 
 export const selQuizEntry_entities = createSelector(
 

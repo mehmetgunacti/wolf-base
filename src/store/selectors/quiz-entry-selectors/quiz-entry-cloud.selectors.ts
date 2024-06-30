@@ -1,7 +1,7 @@
 import { CloudTask, NameBase, SyncTaskType, UUID, WolfEntity, toCloudTask } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selQuizEntry_array } from './quizEntry-entities.selectors';
-import { selQuizEntryRemoteMetadataArray, selQuizEntryRemoteMetadataMap, selQuizEntrySyncDataArray, selQuizEntrySyncDataMap } from './quizEntry-sync.selectors';
+import { selQuizEntry_array } from './quiz-entry-entities.selectors';
+import { selQuizEntryRemoteMetadataArray, selQuizEntryRemoteMetadataMap, selQuizEntrySyncDataArray, selQuizEntrySyncDataMap } from './quiz-entry-sync.selectors';
 
 export const selQuizEntry_LocalNew = createSelector(
 
