@@ -11,6 +11,7 @@ import { BookmarkComponent } from './bookmark/bookmark.component';
 import { DisplayModule } from 'lib/components/display/display.module';
 import { NoteHeaderComponent } from './note-header/note-header.component';
 import { TextareaModule } from 'lib/components/textarea';
+import { SwtichModule } from 'lib/components/switch/switch.module';
 
 @NgModule({
 	declarations: [
@@ -34,7 +35,8 @@ import { TextareaModule } from 'lib/components/textarea';
 		SanitizeHtmlModule,
 		DisplayModule,
 		TimePastModule,
-		TextareaModule
+		TextareaModule,
+		SwtichModule
 	],
 	exports: [
 		BookmarkComponent,
@@ -54,7 +56,8 @@ import { TextareaModule } from 'lib/components/textarea';
 		TagCloudModule,
 		SanitizeHtmlModule,
 		DisplayModule,
-		TextareaModule
+		TextareaModule,
+		SwtichModule
 	],
 	providers: []
 })
