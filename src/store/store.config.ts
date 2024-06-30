@@ -82,6 +82,19 @@ import { noteReducer } from './reducers/note-reducers/note.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
 import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
+import { QuizEntrySyncEffects } from './effects/quiz-entry-effects/quiz-entry-sync.effects';
+import { QuizEntrySyncLocalNewEffects } from './effects/quiz-entry-effects/quiz-entry-sync-local-new.effects';
+import { QuizEntrySyncLocalUpdatedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-local-updated.effects';
+import { QuizEntrySyncLocalDeletedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-local-deleted.effects';
+import { QuizEntrySyncRemoteNewEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-new.effects';
+import { QuizEntrySyncRemoteUpdatedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-updated.effects';
+import { QuizEntrySyncRemoteDeletedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-deleted.effects';
+import { QuizEntrySyncDeletedDeletedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-deleted-deleted.effects';
+import { QuizEntryEntityCreateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-create.effects';
+import { QuizEntryEntityUpdateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-update.effects';
+import { QuizEntryEntityMoveToTrashEffects } from './effects/quiz-entry-effects/quiz-entry-entity-move-to-trash.effects';
+import { QuizEntryLoadEffects } from './effects/quiz-entry-effects/quiz-entry-load.effects';
+import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.reducer';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -188,6 +201,25 @@ export const effects = [
 	WordLoadEffects,
 	WordUIEffects,
 
+	//
+	QuizEntrySyncEffects,
+
+	QuizEntrySyncLocalNewEffects,
+	QuizEntrySyncLocalUpdatedEffects,
+	QuizEntrySyncLocalDeletedEffects,
+
+	QuizEntrySyncRemoteNewEffects,
+	QuizEntrySyncRemoteUpdatedEffects,
+	QuizEntrySyncRemoteDeletedEffects,
+
+	QuizEntrySyncDeletedDeletedEffects,
+
+	QuizEntryEntityCreateEffects,
+	QuizEntryEntityUpdateEffects,
+	QuizEntryEntityMoveToTrashEffects,
+
+	QuizEntryLoadEffects,
+
 	// Quotes
 	QuoteSyncEffects,
 
@@ -226,6 +258,7 @@ export const reducers: ActionReducerMap<AppState> = {
 	note: combineReducers(noteReducer),
 	noteContent: combineReducers(noteContentReducer),
 	word: combineReducers(wordReducer),
+	quizEntry: combineReducers(quizEntryReducer),
 	quote: combineReducers(quoteReducer),
 	database: databaseReducer,
 	logs: combineReducers(logsReducer)
