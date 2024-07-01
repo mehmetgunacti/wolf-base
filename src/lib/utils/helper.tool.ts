@@ -1,3 +1,9 @@
+export function elseEmptyObject<T>(v: T | null | undefined): T {
+
+	return v ?? {} as T;
+
+}
+
 export const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export function parseURL(url: string): URL | null {
