@@ -34,6 +34,12 @@
 				<span> Quotes</span>
 			</ng-container>
 
+			<!-- Quiz Entries -->
+			<ng-container *ngSwitchCase="WolfEntity.quizEntry.name">
+				<span class="material-symbols-outlined">timer</span>
+				<span> Quiz Entries</span>
+			</ng-container>
+
 			<!-- UNKNOWN CASE -->
 			<ng-container *ngSwitchDefault>
 				<span class="material-symbols-outlined">help</span>
