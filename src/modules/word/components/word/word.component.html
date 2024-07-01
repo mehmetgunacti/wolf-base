@@ -61,9 +61,8 @@
 
 			<div schedule>
 				<w-switch
-					[control]="controls[definition.id]"
-					(on)="onSchedule(definition)"
-					(off)="onCancel(definition)"/>
+					[checked]="scheduledIds().includes(definition.id)"
+					(checkedChange)="onSchedule(definition, $event)"/>
 			</div>
 
 		</div>

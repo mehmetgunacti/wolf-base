@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, InputSignal, OnInit, Output, input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, InputSignal, Output, input } from '@angular/core';
 import { Definition, UUID, Word, elseEmptyArray } from '@lib';
 
 @Component({
@@ -8,9 +7,7 @@ import { Definition, UUID, Word, elseEmptyArray } from '@lib';
 	styleUrls: ['./word.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WordComponent implements OnInit {
-
-	controls: Record<UUID, FormControl<boolean>> = {};
+export class WordComponent {
 
 	word: InputSignal<Word> = input.required();
 	scheduledIds = input<UUID[], UUID[] | null>([], { transform: elseEmptyArray });
@@ -18,25 +15,12 @@ export class WordComponent implements OnInit {
 	@Output() schedule: EventEmitter<Definition> = new EventEmitter();
 	@Output() cancel: EventEmitter<Definition> = new EventEmitter();
 
-	ngOnInit(): void {
+	onSchedule(definition: Definition, checked: boolean): void {
 
-		this.word().definitions.forEach(d => {
-
-			this.controls[d.id] = new FormControl<boolean>(this.scheduledIds().includes(d.id), { nonNullable: true });
-
-		});
-
-	}
-
-	onSchedule(definition: Definition): void {
-
-		this.schedule.emit(definition);
-
-	}
-
-	onCancel(definition: Definition): void {
-
-		this.cancel.emit(definition);
+		if (checked)
+			this.schedule.emit(definition);
+		else
+			this.cancel.emit(definition);
 
 	}
 
