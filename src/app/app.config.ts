@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { APP_INITIALIZER, ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
 import { LocalRepositoryService, RemoteRepositoryService } from '@lib';
@@ -90,7 +90,6 @@ export const SYNC_SERVICE = new InjectionToken<SyncService>('SyncService');
 export const BOOKMARK_SYNC_SERVICE = new InjectionToken<BookmarkSyncService>('BookmarkSyncService');
 
 export const providers: Provider[] = [
-
 	{
 
 		// Angular initializes

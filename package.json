@@ -1,6 +1,6 @@
 {
   "name": "wolf-base",
-  "version": "0.1.121",
+  "version": "0.1.122",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,19 +24,19 @@
     "@ngrx/effects": "^18.0.1",
     "@ngrx/store": "^18.0.1",
     "dexie": "^3.2.4",
-    "fflate": "^0.8.1",
+    "fflate": "^0.8.2",
     "file-saver-es": "^2.0.5",
     "highlight.js": "^11.9.0",
-    "immer": "^10.0.3",
+    "immer": "^10.1.1",
     "markdown-it": "^14.1.0",
-    "markdown-it-anchor": "^8.6.7",
+    "markdown-it-anchor": "^9.0.1",
     "markdown-it-toc-done-right": "^4.2.0",
     "ngx-progressbar": "^11.1.0",
-    "rxjs": "~7.8.0",
+    "rxjs": "~7.8.1",
     "tslib": "^2.3.0",
-    "uuid": "^9.0.1",
+    "uuid": "^10.0.0",
     "zone.js": "~0.14.2",
-    "@ngrx/operators": "^18.0.0"
+    "@ngrx/operators": "^18.0.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.0.7",
@@ -55,7 +55,7 @@
     "@types/file-saver-es": "^2.0.3",
     "@types/jasmine": "~5.1.0",
     "@types/markdown-it": "^14.1.1",
-    "@types/uuid": "^9.0.7",
+    "@types/uuid": "^10.0.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
