@@ -37,7 +37,7 @@ export class QuizEntryEntityMoveToTrashEffects {
 		() => this.actions$.pipe(
 
 			ofType(quizEntryActions.moveToTrashSuccess),
-			map(({ entry }) => showNotification({ severity: 'success', summary: 'Definition Schedule Cancelled', detail: `'${entry.name}'` }))
+			map(({ entry }) => showNotification({ severity: 'info', summary: 'Schedule Off', detail: `'${entry.name}'`, icon: 'timer_off' }))
 
 		)
 

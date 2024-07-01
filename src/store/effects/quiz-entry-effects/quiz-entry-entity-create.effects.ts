@@ -43,7 +43,7 @@ export class QuizEntryEntityCreateEffects {
 		() => this.actions$.pipe(
 
 			ofType(quizEntryActions.createSuccess),
-			map(({ quizEntry }) => showNotification({ severity: 'success', summary: 'Definition Scheduled', detail: `'${quizEntry.name}'` }))
+			map(({ quizEntry }) => showNotification({ severity: 'success', summary: 'Schedule On', detail: `'${quizEntry.name}'`, icon: 'timer' }))
 
 		)
 
