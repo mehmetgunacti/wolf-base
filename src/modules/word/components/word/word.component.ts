@@ -13,7 +13,7 @@ export class WordComponent implements OnInit {
 	controls: Record<UUID, FormControl<boolean>> = {};
 
 	word: InputSignal<Word> = input.required();
-	scheduledIds: InputSignal<UUID[], UUID[] | null> = input([], { transform: elseEmptyArray });
+	scheduledIds = input<UUID[], UUID[] | null>([], { transform: elseEmptyArray });
 
 	@Output() schedule: EventEmitter<Definition> = new EventEmitter();
 	@Output() cancel: EventEmitter<Definition> = new EventEmitter();

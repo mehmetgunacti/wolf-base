@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,36 +19,27 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { NgProgressModule } from 'ngx-progressbar';
 
-@NgModule({
-	declarations: [
-		AppComponent,
-		HeaderComponent,
-		NavComponent,
-		NavOverlayComponent,
-		MenuComponent,
-		SplashScreenComponent
-	],
-	imports: [
-		BrowserModule,
-		BrowserAnimationsModule,
-		HttpClientModule,
-		RouterModule.forRoot(config.routes, { enableViewTransitions: true }),
-		StoreModule.forRoot(store.reducers, { metaReducers: store.metaReducers }),
-		EffectsModule.forRoot(store.effects),
-		StoreDevtoolsModule.instrument(),
-		ServiceWorkerModule.register('ngsw-worker.js', {
-
-			enabled: !isDevMode(), // environment.production
-			// Register the ServiceWorker as soon as the application is stable
-			// or after 30 seconds (whichever comes first).
-			registrationStrategy: 'registerWhenStable:30000' // 'registerImmediately'
-
-		}),
-		ScrollingModule,
-		NgProgressModule.withConfig({ thick: false, color: 'red', spinner: false }),
-		NgProgressHttpModule,
-	],
-	providers: config.providers,
-	bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HeaderComponent,
+        NavComponent,
+        NavOverlayComponent,
+        MenuComponent,
+        SplashScreenComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule.forRoot(config.routes, { enableViewTransitions: true }),
+        StoreModule.forRoot(store.reducers, { metaReducers: store.metaReducers }),
+        EffectsModule.forRoot(store.effects),
+        StoreDevtoolsModule.instrument(),
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: !isDevMode(), // environment.production
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000' // 'registerImmediately'
+        }),
+        ScrollingModule,
+        NgProgressModule.withConfig({ thick: false, color: 'red', spinner: false }),
+        NgProgressHttpModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
