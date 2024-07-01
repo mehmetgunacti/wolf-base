@@ -24,7 +24,8 @@ export class SwitchComponent implements OnInit {
 		effect(() => {
 
 			const checked = this.checked();
-			this.control().setValue(checked);
+			if (checked !== this.control().value)
+				this.control().setValue(checked);
 
 		});
 
