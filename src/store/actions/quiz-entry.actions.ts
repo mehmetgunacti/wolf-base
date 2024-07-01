@@ -1,15 +1,15 @@
-import { RemoteMetadata, SyncData, UUID, QuizEntry } from '@lib';
+import { RemoteMetadata, SyncData, UUID, QuizEntry, Definition, NameBase } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // CRUD
-export const create							= createAction('[QuizEntry] Create', props<{ quizEntry: Partial<QuizEntry> }>());
+export const create							= createAction('[QuizEntry] Create', props<{ definition: Definition }>());
 export const createSuccess					= createAction('[QuizEntry] Create Success', props<{ quizEntry: QuizEntry }>());
 
 export const update							= createAction('[QuizEntry] Update', props<{ id: UUID, quizEntry: Partial<QuizEntry> }>());
 export const updateSuccess					= createAction('[QuizEntry] Update Success', props<{ id: UUID }>());
 
-export const moveToTrash					= createAction('[QuizEntry] Move to Trash', props<{ id: UUID }>());
-export const moveToTrashSuccess				= createAction('[QuizEntry] Move to Trash Success', props<{ id: UUID }>());
+export const moveToTrash					= createAction('[QuizEntry] Move to Trash', props<{ entry: NameBase }>());
+export const moveToTrashSuccess				= createAction('[QuizEntry] Move to Trash Success', props<{ entry: NameBase }>());
 
 // LOAD FROM LOCAL DATABASE INTO MEMORY
 //// Entity
@@ -34,7 +34,8 @@ export const loadAllRemoteMetadataSuccess	= createAction('[QuizEntry] Load All R
 // export const loadTrashCountSuccess			= createAction('[QuizEntry] Load Trash Count Success', props<{ count: number }>());
 
 // UI
-export const setSelectedId					= createAction('[QuizEntry] Set Selected Id', props<{ id: UUID | null }>());
+// export const schedule						= createAction('[Word] Schedule Definition', props<{ definition: Definition }>());
+// export const cancel							= createAction('[Word] Cancel Definition Schedule', props<{ id: UUID }>());
 
 // CLOUD SYNC
 // local_new

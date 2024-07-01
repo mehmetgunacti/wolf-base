@@ -19,10 +19,15 @@ export class QuizEntryEntityCreateEffects {
 		() => this.actions$.pipe(
 
 			ofType(quizEntryActions.create),
-			switchMap(({ quizEntry }) =>
+			switchMap(({ definition }) =>
 
 				from(
-					this.localRepository.quizEntries.create(quizEntry)
+					this.localRepository.quizEntries.create({
+
+						id: definition.id,
+						name: definition.name
+
+					})
 				).pipe(
 					map((quizEntry: QuizEntry) => quizEntryActions.createSuccess({ quizEntry }))
 				)
@@ -38,7 +43,7 @@ export class QuizEntryEntityCreateEffects {
 		() => this.actions$.pipe(
 
 			ofType(quizEntryActions.createSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'QuizEntry created' }))
+			map(({ quizEntry }) => showNotification({ severity: 'success', summary: 'Definition Scheduled', detail: `'${quizEntry.name}'` }))
 
 		)
 

@@ -18,12 +18,12 @@ export class QuizEntryEntityMoveToTrashEffects {
 		() => this.actions$.pipe(
 
 			ofType(quizEntryActions.moveToTrash),
-			switchMap(({ id }) =>
+			switchMap(({ entry }) =>
 
 				from(
-					this.localRepository.quizEntries.moveToTrash(id)
+					this.localRepository.quizEntries.moveToTrash(entry.id)
 				).pipe(
-					map(() => quizEntryActions.moveToTrashSuccess({ id }))
+					map(() => quizEntryActions.moveToTrashSuccess({ entry }))
 				)
 
 			)
@@ -37,7 +37,7 @@ export class QuizEntryEntityMoveToTrashEffects {
 		() => this.actions$.pipe(
 
 			ofType(quizEntryActions.moveToTrashSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'QuizEntry removed' }))
+			map(({ entry }) => showNotification({ severity: 'success', summary: 'Definition Schedule Cancelled', detail: `'${entry.name}'` }))
 
 		)
 
@@ -48,7 +48,7 @@ export class QuizEntryEntityMoveToTrashEffects {
 		() => this.actions$.pipe(
 
 			ofType(quizEntryActions.moveToTrashSuccess),
-			map(({ id }) => quizEntryActions.loadAll())
+			map(() => quizEntryActions.loadAll())
 
 		)
 

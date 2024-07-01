@@ -41,7 +41,11 @@
 
 	</w-portal>
 
-	<app-word [word]="word" [scheduledIds]="scheduledIds$ | async"/>
+	<app-word
+		[word]="word"
+		[scheduledIds]="scheduledIds$ | async"
+		(schedule)="onSchedule($event)"
+		(cancel)="onCancel($event)"/>
 
 } @else {
 

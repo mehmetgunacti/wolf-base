@@ -59,11 +59,11 @@ const reducer = createReducer(
 
 		})
 	),
-	on(quizEntryActions.moveToTrashSuccess, (state, { id }): QuizEntry_EntitiesState => {
+	on(quizEntryActions.moveToTrashSuccess, (state, { entry }): QuizEntry_EntitiesState => {
 
 		return produce(
 			state,
-			draft => { delete draft.entities[id]; }
+			draft => { delete draft.entities[entry.id]; }
 		);
 
 	}),

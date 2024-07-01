@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { UUID, Word } from '@lib';
+import { Definition, UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { moveToTrash } from 'store/actions/word.actions';
+import * as wordActions from 'store/actions/word.actions';
+import * as quizEntryActions from 'store/actions/quiz-entry.actions';
 import { selQuizEntry_ids } from 'store/selectors/quiz-entry-selectors/quiz-entry-entities.selectors';
 import { selWord_selected } from 'store/selectors/word-selectors/word-entities.selectors';
 
@@ -29,7 +30,19 @@ export class WordContainerComponent {
 	onRemove(id: UUID): void {
 
 		if (confirm(`Word will be deleted. Continue?`))
-			this.store.dispatch(moveToTrash({ id }));
+			this.store.dispatch(wordActions.moveToTrash({ id }));
+
+	}
+
+	onSchedule(definition: Definition): void {
+
+		this.store.dispatch(quizEntryActions.create({ definition }));
+
+	}
+
+	onCancel(definition: Definition): void {
+
+		this.store.dispatch(quizEntryActions.moveToTrash({ entry: definition }));
 
 	}
 
