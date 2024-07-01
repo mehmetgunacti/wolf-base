@@ -1,4 +1,4 @@
-@if (word) {
+@if (word(); as word) {
 
 	<h1>
 
@@ -40,7 +40,7 @@
 		<div definition>
 
 			<small><img class="flag" [src]="'assets/flags/' + definition.language + '.svg'"> {{ definition.type | defType }}</small>
-			<h3>{{ definition.name }}</h3>
+			<h3>{{ definition.name }}{{ definition.id }}</h3>
 
 			@for (sample of definition.samples; track $index) {
 
@@ -58,6 +58,13 @@
 				</blockquote>
 
 			}
+
+			<div schedule>
+				<w-switch
+					[checked]="scheduledIds().includes(definition.id)"
+					(on)="onSchedule(definition.id)"
+					(off)="onCancel(definition.id)"/>
+			</div>
 
 		</div>
 

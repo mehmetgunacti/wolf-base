@@ -9,8 +9,17 @@
 
 	& div[definition] {
 
+		position	: relative;
 		margin-top	: calc(2 * var(--gap-lg));
 		@include mx-component(4);
+
+		& > [schedule] {
+
+			position	: absolute;
+			top			: 0;
+			right		: 0;
+			padding		: var(--gap-xxl) var(--gap-xxl);
+		}
 
 	}
 

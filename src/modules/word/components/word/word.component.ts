@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Word } from 'lib/models';
+import { ChangeDetectionStrategy, Component, EventEmitter, InputSignal, Output, input } from '@angular/core';
+import { UUID, Word, elseEmptyArray } from '@lib';
 
 @Component({
 	selector: 'app-word',
@@ -9,6 +9,24 @@ import { Word } from 'lib/models';
 })
 export class WordComponent {
 
-	@Input() word: Word | null | undefined;
+	word: InputSignal<Word> = input.required();
+	scheduledIds: InputSignal<UUID[], UUID[] | null> = input([], { transform: elseEmptyArray });
+
+	@Output() schedule: EventEmitter<UUID> = new EventEmitter();
+	@Output() cancel: EventEmitter<UUID> = new EventEmitter();
+
+	onSchedule(definitionId: UUID): void {
+
+		console.log('onSchedule', definitionId);
+		this.schedule.emit(definitionId);
+
+	}
+
+	onCancel(definitionId: UUID): void {
+
+		console.log('onCancel', definitionId);
+		this.cancel.emit(definitionId);
+
+	}
 
 }

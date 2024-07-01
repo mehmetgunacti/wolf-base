@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { navigate } from 'store/actions/core-navigation.actions';
 import { moveToTrash } from 'store/actions/word.actions';
+import { selQuizEntry_ids } from 'store/selectors/quiz-entry-selectors/quiz-entry-entities.selectors';
 import { selWord_selected } from 'store/selectors/word-selectors/word-entities.selectors';
 
 @Component({
@@ -17,16 +17,12 @@ export class WordContainerComponent {
 	private store: Store = inject(Store);
 
 	word$: Observable<Word | null>;
+	scheduledIds$: Observable<UUID[]>;
 
 	constructor() {
 
 		this.word$ = this.store.select(selWord_selected);
-
-	}
-
-	navTo(url: string[]): void {
-
-		this.store.dispatch(navigate({ url }));
+		this.scheduledIds$ = this.store.select(selQuizEntry_ids);
 
 	}
 
