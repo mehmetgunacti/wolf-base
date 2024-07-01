@@ -1,4 +1,4 @@
-import { WolfEntity, Word } from '@lib';
+import { Definition, WolfEntity, Word } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { WordLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
@@ -19,6 +19,11 @@ export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> im
 	}
 
 	protected override newInstance(id: UUID, item: Partial<Word>): Word {
+
+		const definitions: Definition[] = item.definitions ?? [];
+		if (definitions.length < 1)
+			throw Error('Create `Word`: definitions array is empty')
+		definitions.forEach(d => d.id = uuidv4());
 
 		const instance: Word = {
 
