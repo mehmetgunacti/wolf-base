@@ -23,6 +23,7 @@ class WordDefinitionFirestoreConverter implements FirestoreConverter<Definition>
 
 		const fields = {} as Record<keyof Definition, FIRESTORE_VALUE>;
 
+		fields['id'] = { stringValue: item.id };
 		fields['name'] = { stringValue: item.name };
 		fields['language'] = { stringValue: item.language };
 		fields['type'] = { stringValue: item.type };
@@ -37,6 +38,7 @@ class WordDefinitionFirestoreConverter implements FirestoreConverter<Definition>
 
 		// validate incoming
 		let { id, name, language, type, samples } = item;
+
 		if (!id)
 			throw new Error(`Firestore WordDefinition: invalid 'id' value`);
 
@@ -71,6 +73,9 @@ class WordDefinitionFirestoreConverter implements FirestoreConverter<Definition>
 		// (empty string would delete string on server)
 
 		const fields = new Set<string>();
+
+		if (item.id)
+			fields.add('id');
 
 		if (item.name)
 			fields.add('name');
@@ -145,7 +150,7 @@ class WordFirestoreConverter implements FirestoreConverter<Word> {
 			dictionary: dictionary ?? null,
 			pronunciation: pronunciation ?? null,
 			contexts,
-			definitions
+			definitions: definitions.map(d => this.definitionConverter.fromFirestore(d))
 
 		};
 		return validated;
