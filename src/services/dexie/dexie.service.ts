@@ -45,6 +45,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 			case WolfEntity.note_content.name: return this.noteContent as unknown as EntityLocalRepository<T>;
 			case WolfEntity.word.name: return this.words as unknown as EntityLocalRepository<T>;
 			case WolfEntity.quote.name: return this.quotes as unknown as EntityLocalRepository<T>;
+			case WolfEntity.quizEntry.name: return this.quizEntries as unknown as EntityLocalRepository<T>;
 
 		}
 		throw Error('Unknown entity');
