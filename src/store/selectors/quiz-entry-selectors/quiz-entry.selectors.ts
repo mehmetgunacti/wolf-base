@@ -9,10 +9,3 @@ export const selQuizEntry_EntitiesState = createSelector(
 	state => state.entities
 
 );
-
-export const selQuizEntry_UIState = createSelector(
-
-	selQuizEntry_ModuleState,
-	state => state.ui
-
-);
