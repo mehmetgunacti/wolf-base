@@ -13,6 +13,7 @@ import * as noteContentActions from 'store/actions/note-content.actions';
 import * as noteActions from 'store/actions/note.actions';
 import * as wordActions from 'store/actions/word.actions';
 import * as quoteActions from 'store/actions/quote.actions';
+import * as quizEntryActions from 'store/actions/quiz-entry.actions';
 
 export const routes: Routes = [
 
@@ -77,6 +78,7 @@ const appInitializerFactory = (store: Store) => {
 		store.dispatch(noteContentActions.loadAll());
 		store.dispatch(wordActions.loadAll());
 		store.dispatch(quoteActions.loadAll());
+		store.dispatch(quizEntryActions.loadAll());
 
 	};
 
