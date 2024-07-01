@@ -1,4 +1,4 @@
-import { Component, DestroyRef, EventEmitter, InputSignal, OnInit, Output, effect, inject, input } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, InputSignal, OnInit, Output, inject, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
 
@@ -11,25 +11,12 @@ export const fcBoolean = () => new FormControl<boolean>(false, { nonNullable: tr
 })
 export class SwitchComponent implements OnInit {
 
-	control = input(fcBoolean(), { transform: (fc: FormControl<boolean> | null | undefined): FormControl<boolean> => fc ?? fcBoolean() });
-	checked = input(false);
+	control: InputSignal<FormControl<boolean>> = input.required<FormControl<boolean>>();
 
 	destroyRef = inject(DestroyRef);
 
 	@Output() on: EventEmitter<boolean> = new EventEmitter();
 	@Output() off: EventEmitter<boolean> = new EventEmitter();
-
-	constructor() {
-
-		effect(() => {
-
-			const checked = this.checked();
-			if (checked !== this.control().value)
-				this.control().setValue(checked);
-
-		});
-
-	}
 
 	ngOnInit(): void {
 
