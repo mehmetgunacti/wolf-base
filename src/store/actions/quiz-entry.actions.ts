@@ -1,12 +1,13 @@
-import { RemoteMetadata, SyncData, UUID, QuizEntry, Definition, NameBase } from '@lib';
+import { RemoteMetadata, SyncData, UUID, QuizProgress, Definition, NameBase } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // CRUD
 export const create							= createAction('[QuizEntry] Create', props<{ definition: Definition }>());
-export const createSuccess					= createAction('[QuizEntry] Create Success', props<{ quizEntry: QuizEntry }>());
+export const createSuccess					= createAction('[QuizEntry] Create Success', props<{ quizEntry: QuizProgress }>());
 
-export const update							= createAction('[QuizEntry] Update', props<{ id: UUID, quizEntry: Partial<QuizEntry> }>());
+export const update							= createAction('[QuizEntry] Update', props<{ id: UUID, answeredRight: boolean }>());
 export const updateSuccess					= createAction('[QuizEntry] Update Success', props<{ id: UUID }>());
+export const updateFailure					= createAction('[QuizEntry] Update Failure', props<{ id: UUID }>());
 
 export const moveToTrash					= createAction('[QuizEntry] Move to Trash', props<{ entry: NameBase }>());
 export const moveToTrashSuccess				= createAction('[QuizEntry] Move to Trash Success', props<{ entry: NameBase }>());
@@ -14,10 +15,10 @@ export const moveToTrashSuccess				= createAction('[QuizEntry] Move to Trash Suc
 // LOAD FROM LOCAL DATABASE INTO MEMORY
 //// Entity
 export const loadAll						= createAction('[QuizEntry] Load All');
-export const loadAllSuccess					= createAction('[QuizEntry] Load All Success', props<{ quizEntries: QuizEntry[], syncData: SyncData[], remoteMetadata: RemoteMetadata[] }>());
+export const loadAllSuccess					= createAction('[QuizEntry] Load All Success', props<{ quizEntries: QuizProgress[], syncData: SyncData[], remoteMetadata: RemoteMetadata[] }>());
 
 export const loadOne						= createAction('[QuizEntry] Load One', props<{ id: UUID }>());
-export const loadOneSuccess					= createAction('[QuizEntry] Load One Success', props<{ id: UUID, quizEntry: QuizEntry | null, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
+export const loadOneSuccess					= createAction('[QuizEntry] Load One Success', props<{ id: UUID, quizEntry: QuizProgress | null, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
 
 export const unloadOne						= createAction('[QuizEntry] Unload One', props<{ id: UUID }>());
 

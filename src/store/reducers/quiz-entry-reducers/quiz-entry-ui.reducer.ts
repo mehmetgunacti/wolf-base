@@ -5,7 +5,7 @@ import { quizEntry_initialUIState, QuizEntry_UIState } from 'store/states/quiz-e
 const reducer = createReducer(
 
 	quizEntry_initialUIState,
-	on(quizEntryActions.setNow, (state): QuizEntry_UIState => ({ ...state, now: new Date().getTime() }))
+	on(quizEntryActions.setNow, (state): QuizEntry_UIState => ({ ...state, now: new Date().getTime() })),
 
 );
 

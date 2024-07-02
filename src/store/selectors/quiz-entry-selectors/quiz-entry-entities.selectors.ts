@@ -1,4 +1,4 @@
-import { QuizEntry } from '@lib';
+import { QuizProgress } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selQuizEntry_EntitiesState } from './quiz-entry.selectors';
 
@@ -19,7 +19,7 @@ export const selQuizEntry_ids = createSelector(
 export const selQuizEntry_array = createSelector(
 
 	selQuizEntry_EntitiesState,
-	(state): QuizEntry[] => Object.values(state.entities)
+	(state): QuizProgress[] => Object.values(state.entities)
 
 );
 

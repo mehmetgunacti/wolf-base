@@ -1,4 +1,4 @@
-import { QuizEntry, RemoteMetadata, SyncData, UUID } from '@lib';
+import { QuizProgress, RemoteMetadata, SyncData, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
 import * as quizEntryActions from 'store/actions/quiz-entry.actions';
@@ -53,7 +53,7 @@ const reducer = createReducer(
 		quizEntryActions.loadAllSuccess, (state, { quizEntries, syncData, remoteMetadata }): QuizEntry_EntitiesState => ({
 
 			...state,
-			entities: quizEntries.reduce((record, quizEntry) => { record[quizEntry.id] = quizEntry; return record; }, {} as Record<UUID, QuizEntry>),
+			entities: quizEntries.reduce((record, quizEntry) => { record[quizEntry.id] = quizEntry; return record; }, {} as Record<UUID, QuizProgress>),
 			syncData: syncData.reduce((record, syncData) => { record[syncData.id] = syncData; return record; }, {} as Record<UUID, SyncData>),
 			remoteMetadata: remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>)
 

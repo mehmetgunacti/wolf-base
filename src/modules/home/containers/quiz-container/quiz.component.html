@@ -1,0 +1,32 @@
+@if (quiz(); as quiz) {
+
+	<div quiz_header>
+
+		<div quiz_icon>
+			<span class="material-symbols-outlined">quiz</span>
+		</div>
+		<div quiz_question>{{ quiz.question }}</div>
+
+	</div>
+	<div quiz_choices>
+
+		@for (choice of quiz.choices; track $index) {
+
+			<div quiz_choice (click)="checkAnswer(quiz, quiz.choiceIds[$index])">{{ quiz.choices[$index] }}</div>
+
+		}
+
+	</div>
+
+} @else {
+
+	<div quiz_header>
+
+		<div quiz_icon>
+			<span class="material-symbols-outlined">quiz</span>
+		</div>
+		<div quiz_question>Quiz</div>
+
+	</div>
+
+}

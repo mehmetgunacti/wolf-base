@@ -1,9 +1,27 @@
-import { QuizProgress } from 'lib/constants';
+import { Progress, UUID } from 'lib/constants';
 import { Entity } from './entity.model';
 
-export interface QuizEntry extends Entity {
+export interface QuizProgress extends Entity {
 
 	next: number;
-	level: QuizProgress;
+	level: Progress;
+
+}
+
+export class Quiz {
+
+	constructor(
+		public progressId: UUID,
+		public question: string,
+		public questionId: UUID,
+		public choices: string[],
+		public choiceIds: UUID[]
+	) { }
+
+	onRightAnswer(choiceId: UUID): boolean {
+
+		return this.questionId === choiceId;
+
+	}
 
 }

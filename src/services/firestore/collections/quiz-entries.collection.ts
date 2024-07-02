@@ -1,10 +1,10 @@
 import { FIRESTORE_VALUE, FirestoreConverter, WolfEntity } from '@lib';
-import { FirestoreConfig, QuizEntry } from 'lib/models';
+import { FirestoreConfig, QuizProgress } from 'lib/models';
 import { QuizEntriesRemoteRepository } from 'lib/repositories/remote';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 
-export class QuizEntriesFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<QuizEntry> implements QuizEntriesRemoteRepository {
+export class QuizEntriesFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<QuizProgress> implements QuizEntriesRemoteRepository {
 
 	constructor(firestore: FirestoreAPIClient, firestoreConfig: FirestoreConfig) {
 		super(
@@ -17,11 +17,11 @@ export class QuizEntriesFirestoreCollectionImpl extends FirestoreRemoteStorageCo
 
 }
 
-class QuizEntryFirestoreConverter implements FirestoreConverter<QuizEntry> {
+class QuizEntryFirestoreConverter implements FirestoreConverter<QuizProgress> {
 
-	toFirestore(entry: QuizEntry): Record<keyof QuizEntry, FIRESTORE_VALUE> {
+	toFirestore(entry: QuizProgress): Record<keyof QuizProgress, FIRESTORE_VALUE> {
 
-		const fields = {} as Record<keyof QuizEntry, FIRESTORE_VALUE>;
+		const fields = {} as Record<keyof QuizProgress, FIRESTORE_VALUE>;
 		fields['name'] = { stringValue: entry.name };
 		fields['level'] = { stringValue: entry.level };
 		fields['next'] = { integerValue: entry.next };
@@ -29,7 +29,7 @@ class QuizEntryFirestoreConverter implements FirestoreConverter<QuizEntry> {
 
 	}
 
-	fromFirestore(entry: QuizEntry): QuizEntry {
+	fromFirestore(entry: QuizProgress): QuizProgress {
 
 		// validate incoming
 		let { id, name, level, next } = entry;
@@ -39,7 +39,7 @@ class QuizEntryFirestoreConverter implements FirestoreConverter<QuizEntry> {
 		if (!name)
 			throw new Error(`Firestore QuizEntry: invalid 'name' value`);
 
-		const validated: QuizEntry = {
+		const validated: QuizProgress = {
 
 			id,
 			name,
@@ -51,7 +51,7 @@ class QuizEntryFirestoreConverter implements FirestoreConverter<QuizEntry> {
 
 	}
 
-	toUpdateMask(entry: Partial<QuizEntry>): string {
+	toUpdateMask(entry: Partial<QuizProgress>): string {
 
 		// exclude some fields like id, ... from update list
 		// (empty string would delete string on server)

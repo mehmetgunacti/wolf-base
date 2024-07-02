@@ -1,0 +1,105 @@
+@import 'helper';
+@import 'variables';
+@import 'components';
+@import 'mixins';
+
+:host {
+
+	@include mx-flex-column;
+	grid-gap	: var(--gap-sm);
+
+	& > [quiz_header] {
+
+		@include mx-component(3);
+		@include mx-box-shadow;
+		@include mx-flex-center-y;
+
+		& > [quiz_question] {
+
+			flex		: 1;
+			@include mx-flex-center-center;
+			@include mx-h5;
+
+		}
+
+	}
+
+	& > [quiz_choices] {
+
+		display					: grid;
+		grid-template-columns	: repeat(auto-fill, minmax(25rem, 1fr));
+		grid-gap				: var(--gap-sm);
+		cursor					: pointer;
+
+		& > [quiz_choice] {
+
+			@include mx-component;
+			@include mx-box-shadow;
+
+		}
+
+	}
+
+	// & > [quote_icon] { }
+
+	& > [quote_outer] {
+
+		flex		: 1;
+		@include mx-flex-center-center;
+
+		& > [quote_inner] {
+
+			& > [quote_name] {
+
+				text-align	: center;
+				font-style	: italic;
+				font-size	: 90%;
+				padding		: 0 var(--gap-sm) var(--gap-sm) var(--gap-sm);
+
+			}
+
+			& > [quote_author] {
+
+				text-align	: end;
+				font-size	: smaller;
+				padding		: var(--gap-xs);
+
+			}
+
+			& > [quote_context] {
+
+				text-align	: end;
+				font-size	: xx-small;
+				padding		: 0 var(--gap-xs);
+
+			}
+
+		}
+
+	}
+
+	& > [overlay] {
+
+		// display			: flex;
+		// justify-content	: end;
+		@include mx-flex-center-center;
+
+		position		: absolute;
+		top				: 0;
+		left			: 0;
+		right			: 0;
+		bottom			: 0;
+		opacity			: 0;
+
+		padding			: var(--gap-sm);
+		cursor			: pointer;
+
+		& > span {
+
+			transform	: scale(2);
+
+		}
+
+	}
+
+}

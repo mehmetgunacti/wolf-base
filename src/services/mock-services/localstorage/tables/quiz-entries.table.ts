@@ -1,4 +1,4 @@
-import { Metadata, QuizEntry, QuizProgress, RemoteData, RemoteMetadata, SyncData, UUID, sleep } from '@lib';
+import { Metadata, Progress, QuizProgress, RemoteData, RemoteMetadata, SyncData, UUID, sleep } from '@lib';
 import { QuizEntryLocalRepository } from 'lib/repositories/local/quiz-entry.repository';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -6,25 +6,25 @@ const SLEEP = 20;
 
 export class MockQuizEntryLocalRepositoryImpl implements QuizEntryLocalRepository {
 
-	private quizEntries: Map<string, QuizEntry> = new Map();
+	private quizEntries: Map<string, QuizProgress> = new Map();
 	private quizEntries_sync: Map<string, SyncData> = new Map();
 	private quizEntries_remote: Map<string, RemoteMetadata> = new Map();
-	private quizEntries_trash: QuizEntry[] = [];
+	private quizEntries_trash: QuizProgress[] = [];
 
-	async getEntity(id: string): Promise<QuizEntry | null> {
+	async getEntity(id: string): Promise<QuizProgress | null> {
 
 		await sleep(SLEEP);
 		return this.quizEntries.get(id) ?? null;
 
 	}
 
-	async create(item: Partial<QuizEntry>): Promise<QuizEntry> {
+	async create(item: Partial<QuizProgress>): Promise<QuizProgress> {
 
 		await sleep(SLEEP);
-		const quizEntry: QuizEntry = {
+		const quizEntry: QuizProgress = {
 
 			name: '',
-			level: QuizProgress.START,
+			level: Progress.START,
 			next: new Date().getTime(),
 			...item,
 			id: uuidv4()
@@ -35,7 +35,7 @@ export class MockQuizEntryLocalRepositoryImpl implements QuizEntryLocalRepositor
 
 	}
 
-	async put(item: RemoteData<QuizEntry>): Promise<void> {
+	async put(item: RemoteData<QuizProgress>): Promise<void> {
 
 		await sleep(SLEEP);
 		const syncData: SyncData = {
@@ -55,10 +55,10 @@ export class MockQuizEntryLocalRepositoryImpl implements QuizEntryLocalRepositor
 
 	}
 
-	async update(id: string, item: Partial<QuizEntry>): Promise<number> {
+	async update(id: string, item: Partial<QuizProgress>): Promise<number> {
 
 		await sleep(SLEEP);
-		const quizEntry: QuizEntry | undefined = this.quizEntries.get(id);
+		const quizEntry: QuizProgress | undefined = this.quizEntries.get(id);
 		if (!quizEntry)
 			return 0;
 
@@ -83,7 +83,7 @@ export class MockQuizEntryLocalRepositoryImpl implements QuizEntryLocalRepositor
 
 	}
 
-	async list(): Promise<QuizEntry[]> {
+	async list(): Promise<QuizProgress[]> {
 
 		await sleep(SLEEP);
 		return Array.from(this.quizEntries.values());
@@ -137,7 +137,7 @@ export class MockQuizEntryLocalRepositoryImpl implements QuizEntryLocalRepositor
 	async moveToTrash(id: string): Promise<void> {
 
 		await sleep(SLEEP);
-		const quizEntry: QuizEntry | undefined = this.quizEntries.get(id);
+		const quizEntry: QuizProgress | undefined = this.quizEntries.get(id);
 		if (quizEntry) {
 
 			this.quizEntries_trash.push(quizEntry);
@@ -150,7 +150,7 @@ export class MockQuizEntryLocalRepositoryImpl implements QuizEntryLocalRepositor
 
 	}
 
-	async listDeletedItems(): Promise<QuizEntry[]> {
+	async listDeletedItems(): Promise<QuizProgress[]> {
 
 		await sleep(300);
 		return Array.from(this.quizEntries_trash.values());
@@ -170,13 +170,13 @@ export class MockQuizEntryLocalRepositoryImpl implements QuizEntryLocalRepositor
 
 	}
 
-	search(term: string): Promise<QuizEntry[]> {
+	search(term: string): Promise<QuizProgress[]> {
 
 		throw new Error('Method not implemented.');
 
 	}
 
-	searchByTags(tags: string[]): Promise<QuizEntry[]> {
+	searchByTags(tags: string[]): Promise<QuizProgress[]> {
 
 		throw new Error('Method not implemented.');
 
@@ -208,11 +208,11 @@ export class MockQuizEntryLocalRepositoryImpl implements QuizEntryLocalRepositor
 
 	}
 
-	async storeDownloadedEntity(data: RemoteData<QuizEntry>): Promise<RemoteData<QuizEntry>> {
+	async storeDownloadedEntity(data: RemoteData<QuizProgress>): Promise<RemoteData<QuizProgress>> {
 		throw new Error('Method not implemented.');
 	}
 
-	async storeDownloadedEntities(items: RemoteData<QuizEntry>[]): Promise<number> {
+	async storeDownloadedEntities(items: RemoteData<QuizProgress>[]): Promise<number> {
 
 		await sleep(SLEEP);
 		items.forEach(item => this.put(item));

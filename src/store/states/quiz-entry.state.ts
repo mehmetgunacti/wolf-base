@@ -1,4 +1,4 @@
-import { QuizEntry, RemoteMetadata, SyncData, UUID } from '@lib';
+import { QuizProgress, RemoteMetadata, SyncData, UUID } from '@lib';
 
 export interface QuizEntry_ModuleState {
 
@@ -9,7 +9,7 @@ export interface QuizEntry_ModuleState {
 
 export interface QuizEntry_EntitiesState {
 
-	entities: Record<UUID, QuizEntry>;
+	entities: Record<UUID, QuizProgress>;
 	syncData: Record<UUID, SyncData>;
 	remoteMetadata: Record<UUID, RemoteMetadata>;
 
