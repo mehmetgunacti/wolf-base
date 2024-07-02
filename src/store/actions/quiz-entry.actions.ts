@@ -34,8 +34,7 @@ export const loadAllRemoteMetadataSuccess	= createAction('[QuizEntry] Load All R
 // export const loadTrashCountSuccess			= createAction('[QuizEntry] Load Trash Count Success', props<{ count: number }>());
 
 // UI
-// export const schedule						= createAction('[Word] Schedule Definition', props<{ definition: Definition }>());
-// export const cancel							= createAction('[Word] Cancel Definition Schedule', props<{ id: UUID }>());
+export const setNow							= createAction('[QuizEntry] Set Now');
 
 // CLOUD SYNC
 // local_new
