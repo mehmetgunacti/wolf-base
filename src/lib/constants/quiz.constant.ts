@@ -9,3 +9,5 @@ export enum QuizProgress {
 	FINISHED = 'FINISHED:'
 
 }
+
+export const NUMBER_OF_CHOICES = 5;
