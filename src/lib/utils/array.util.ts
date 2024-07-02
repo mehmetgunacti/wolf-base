@@ -1,6 +1,14 @@
 import { UUID } from "lib/constants";
 import { IDBase } from "lib/models";
 
+export function insertAtRandomPosition<T>(arr: T[], element: T) {
+
+	const randomIndex = Math.floor(Math.random() * (arr.length + 1));
+	arr.splice(randomIndex, 0, element);
+	return arr;
+
+}
+
 export function replaceByPrefix(oldValues: string[], prefix: string, newValue: string): string[] {
 
 	const list: string[] = [newValue];
