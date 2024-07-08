@@ -12,6 +12,9 @@ import { DisplayModule } from 'lib/components/display/display.module';
 import { NoteHeaderComponent } from './note-header/note-header.component';
 import { TextareaModule } from 'lib/components/textarea';
 import { SwtichModule } from 'lib/components/switch/switch.module';
+import { WordComponent } from './word/word.component';
+import { LanguagePipe } from 'lib/pipes/language.pipe';
+import { TypePipe } from 'lib/pipes/type.pipe';
 
 @NgModule({
 	declarations: [
@@ -21,7 +24,11 @@ import { SwtichModule } from 'lib/components/switch/switch.module';
 		AutofocusDirective,
 		NoDataPipe,
 		SelectedTagsComponent,
-		FormatBytesPipe
+		FormatBytesPipe,
+		WordComponent,
+		LanguagePipe,
+		TypePipe
+
 	],
 	imports: [
 		CommonModule,
@@ -57,7 +64,8 @@ import { SwtichModule } from 'lib/components/switch/switch.module';
 		SanitizeHtmlModule,
 		DisplayModule,
 		TextareaModule,
-		SwtichModule
+		SwtichModule,
+		WordComponent
 	],
 	providers: []
 })

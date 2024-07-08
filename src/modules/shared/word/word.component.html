@@ -59,11 +59,15 @@
 
 			}
 
-			<div schedule>
-				<w-switch
-					[checked]="scheduledIds().includes(definition.id)"
-					(checkedChange)="onSchedule(definition, $event)"/>
-			</div>
+			@if (schedulable()) {
+
+				<div schedule>
+					<w-switch
+						[checked]="scheduledIds().includes(definition.id)"
+						(checkedChange)="onSchedule(definition, $event)"/>
+				</div>
+
+			}
 
 		</div>
 
