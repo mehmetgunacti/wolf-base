@@ -32,4 +32,10 @@ export class DexieQuizEntriesRepositoryImpl extends EntityLocalRepositoryImpl<Qu
 
 	}
 
+	async putEntry(entry: QuizProgress): Promise<void> {
+
+		await this.db.table(WolfEntity.quizEntry.plural).put(entry);
+
+	}
+
 }

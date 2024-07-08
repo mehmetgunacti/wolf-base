@@ -24,17 +24,31 @@
 
 	}
 
+	& > [quiz_answer] {
+
+		position	: relative;
+
+		& > button {
+
+			position	: absolute;
+			top			: var(--gap-xxl);
+			right		: var(--gap-xxl);
+
+		}
+
+	}
+
 	& > [quiz_choices] {
 
 		display					: grid;
 		grid-template-columns	: repeat(auto-fill, minmax(25rem, 1fr));
 		grid-gap				: var(--gap-sm);
-		cursor					: pointer;
 
 		& > [quiz_choice] {
 
 			@include mx-component;
 			@include mx-box-shadow;
+			cursor		: pointer;
 
 		}
 

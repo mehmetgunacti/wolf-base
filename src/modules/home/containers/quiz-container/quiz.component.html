@@ -5,18 +5,35 @@
 		<div quiz_icon>
 			<span class="material-symbols-outlined">quiz</span>
 		</div>
-		<div quiz_question>{{ quiz.question }}</div>
+		<div quiz_question [@quoteChange]="quiz.question.id" [title]="quiz.words[0].definitions[0].samples.join('\n\n')">{{ quiz.question.name }}</div>
 
 	</div>
-	<div quiz_choices>
+	@if (quiz.showAnswer) {
 
-		@for (choice of quiz.choices; track $index) {
+		<div quiz_answer>
 
-			<div quiz_choice (click)="checkAnswer(quiz, quiz.choiceIds[$index])">{{ quiz.choices[$index] }}</div>
+			<app-word [word]="quiz.words[0]" [schedulable]="false"/>
+			<button type="button" class="icon-only" (click)="next(quiz)"><span class="material-symbols-outlined">play_arrow</span> Next</button>
 
-		}
+		</div>
 
-	</div>
+	} @else {
+
+		<div quiz_choices>
+
+			@for (choice of quiz.choices; track $index) {
+
+				<div
+					quiz_choice
+					(click)="checkAnswer(quiz, choice.id)">
+					<span [@quoteChange]="choice.id">{{ choice.name }}</span>
+				</div>
+
+			}
+
+		</div>
+
+	}
 
 } @else {
 

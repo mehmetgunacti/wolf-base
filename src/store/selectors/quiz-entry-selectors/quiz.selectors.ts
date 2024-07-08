@@ -63,68 +63,96 @@ export const selQuiz_next = createSelector(
 
 	selQuiz_definitionIdWordMap,
 	selQuiz_nextProgress,
-	selWord_array,
-	(map, progress, words): Quiz | null => {
+	(map, progress): Quiz | null => {
 
 		if (!progress)
 			return null;
 
-		const word = map[progress.id];
-		if (!word)
-			return null;
+		const question = map[progress.id];
+		if (!question)
+			throw Error('progress.id not found in map');
 
-		// ask Word.name or Word.definitions[0].name ?
-		const askWord = Math.random() < 0.5;
+		const result: Word[] = [question]; // first entry is the question, rest are choices
 
-		if (askWord) {
+		const potentialChoices: Word[] = Object.values(map).filter(w => w.definitions[0].type === question.definitions[0].type);
+		for (let i = 0; i < NUMBER_OF_CHOICES; ++i) { // choose NUMBER_OF_CHOICES random definitions
 
-			const potentialChoices: Definition[] =
-				words
-					.filter(w => w.id !== word.id) // remove question
-					.flatMap(w => w.definitions)
-					.filter(d => d.type === word.definitions[0].type);  // filter definitions of same type
-
-			const choices: Definition[] = [];
-			for (let i = 0; i < NUMBER_OF_CHOICES; ++i) { // choose 5 random definitions
-
-				const randomIdx = Math.floor(potentialChoices.length * Math.random());
-				choices.push(potentialChoices[randomIdx]);
-
-			}
-			insertAtRandomPosition(choices, word.definitions[0]); // add actual answer
-			return new Quiz(
-				word.definitions[0].id,
-				word.name,
-				word.definitions[0].id,
-				choices.map(d => d.name),
-				choices.map(d => d.id)
-			);
-
-		} else {
-
-			const potentialChoices: Word[] =
-				Object.values(map)
-					.filter(w => w.id !== word.id) // remove question
-					.filter(w => compareDefinitonType(w, word)); // filter words of same type
-
-			const choices: Word[] = [];
-			for (let i = 0; i < NUMBER_OF_CHOICES; ++i) { // choose 5 random words
-
-				const randomIdx = Math.floor(potentialChoices.length * Math.random());
-				choices.push(potentialChoices[randomIdx]);
-
-			}
-			insertAtRandomPosition(choices, word); // add actual answer as `NUMBER_OF_CHOICES + 1` choice
-			return new Quiz(
-				word.definitions[0].id,
-				word.definitions[0].name,
-				word.definitions[0].id,
-				choices.map(w => w.name),
-				choices.map(w => w.definitions[0].id)
-			);
+			const randomIdx = Math.floor(potentialChoices.length * Math.random());
+			result.push(potentialChoices[randomIdx]);
 
 		}
+		return new Quiz(result);
 
 	}
 
 );
+
+// export const selQuiz_next1 = createSelector(
+
+// 	selQuiz_definitionIdWordMap,
+// 	selQuiz_nextProgress,
+// 	selWord_array,
+// 	(map, progress, words): Quiz | null => {
+
+// 		if (!progress)
+// 			return null;
+
+// 		const word = map[progress.id];
+// 		if (!word)
+// 			return null;
+
+// 		// ask Word.name or Word.definitions[0].name ?
+// 		const askWord = Math.random() < 0.5;
+
+// 		if (askWord) {
+
+// 			const potentialChoices: Definition[] =
+// 				words
+// 					.filter(w => w.id !== word.id) // remove question
+// 					.flatMap(w => w.definitions)
+// 					.filter(d => d.type === word.definitions[0].type);  // filter definitions of same type
+
+// 			const choices: Definition[] = [];
+// 			for (let i = 0; i < NUMBER_OF_CHOICES; ++i) { // choose 5 random definitions
+
+// 				const randomIdx = Math.floor(potentialChoices.length * Math.random());
+// 				choices.push(potentialChoices[randomIdx]);
+
+// 			}
+// 			insertAtRandomPosition(choices, word.definitions[0]); // add actual answer
+// 			return new Quiz(
+// 				word.definitions[0].id,
+// 				word.name,
+// 				word.definitions[0].id,
+// 				choices.map(d => d.name),
+// 				choices.map(d => d.id)
+// 			);
+
+// 		} else {
+
+// 			const potentialChoices: Word[] =
+// 				Object.values(map)
+// 					.filter(w => w.id !== word.id) // remove question
+// 					.filter(w => compareDefinitonType(w, word)); // filter words of same type
+
+// 			const choices: Word[] = [];
+// 			for (let i = 0; i < NUMBER_OF_CHOICES; ++i) { // choose 5 random words
+
+// 				const randomIdx = Math.floor(potentialChoices.length * Math.random());
+// 				choices.push(potentialChoices[randomIdx]);
+
+// 			}
+// 			insertAtRandomPosition(choices, word); // add actual answer as `NUMBER_OF_CHOICES + 1` choice
+// 			return new Quiz(
+// 				word.definitions[0].id,
+// 				word.definitions[0].name,
+// 				word.definitions[0].id,
+// 				choices.map(w => w.name),
+// 				choices.map(w => w.definitions[0].id)
+// 			);
+
+// 		}
+
+// 	}
+
+// );

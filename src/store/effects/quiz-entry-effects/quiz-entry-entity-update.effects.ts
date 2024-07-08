@@ -49,28 +49,6 @@ export class QuizEntryEntityUpdateEffects {
 
 	);
 
-	showSuccess$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(quizEntryActions.updateSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Correct!' }))
-
-		)
-
-	);
-
-	showFailure$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(quizEntryActions.updateFailure),
-			map(() => showNotification({ severity: 'warn', detail: `Wrong answer!` }))
-
-		)
-
-	);
-
 	loadOneQuizEntry$ = createEffect(
 
 		() => this.actions$.pipe(

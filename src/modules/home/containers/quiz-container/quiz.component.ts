@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { onEnterFadeOutTrigger, Quiz, quoteChangeTrigger, UUID } from '@lib';
+import { lazyFadeIn, Quiz, quoteChangeTrigger, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { setNow, update } from 'store/actions/quiz-entry.actions';
 import { selQuiz_next } from 'store/selectors/quiz-entry-selectors/quiz.selectors';
@@ -9,14 +9,13 @@ import { selQuiz_next } from 'store/selectors/quiz-entry-selectors/quiz.selector
 	selector: 'app-quiz',
 	templateUrl: './quiz.component.html',
 	styleUrls: ['./quiz.component.scss'],
-	animations: [onEnterFadeOutTrigger, quoteChangeTrigger],
+	animations: [quoteChangeTrigger, lazyFadeIn],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizComponent {
 
 	private store: Store = inject(Store);
 
-	// quiz$: Observable<Quiz | null>;
 	quiz: Signal<Quiz | null>;
 
 	constructor() {
@@ -28,7 +27,14 @@ export class QuizComponent {
 
 	checkAnswer(quiz: Quiz, choiceId: UUID): void {
 
-		this.store.dispatch(update({ id: quiz.progressId, answeredRight: quiz.onRightAnswer(choiceId) }));
+		if (quiz.onRightAnswer(choiceId))
+			this.store.dispatch(update({ id: quiz.words[0].definitions[0].id, answeredRight: true }));
+
+	}
+
+	next(quiz: Quiz): void {
+
+		this.store.dispatch(update({ id: quiz.words[0].definitions[0].id, answeredRight: false }));
 
 	}
 

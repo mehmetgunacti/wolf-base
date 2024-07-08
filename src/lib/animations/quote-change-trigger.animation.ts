@@ -11,3 +11,14 @@ export const quoteChangeTrigger = trigger('quoteChange', [
 	])
 
 ]);
+
+export const lazyFadeIn = trigger('lazyFadeIn', [
+
+	transition('* => *', [
+
+		style({ opacity: 0 }),
+		animate('{{delay}}ms', style({ opacity: 1 }))
+
+	], { params: { delay: 100 } })
+
+]);

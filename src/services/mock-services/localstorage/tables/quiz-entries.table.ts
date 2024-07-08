@@ -5,6 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 const SLEEP = 20;
 
 export class MockQuizEntryLocalRepositoryImpl implements QuizEntryLocalRepository {
+	putEntry(entry: QuizProgress): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
 
 	private quizEntries: Map<string, QuizProgress> = new Map();
 	private quizEntries_sync: Map<string, SyncData> = new Map();
