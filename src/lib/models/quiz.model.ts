@@ -14,6 +14,7 @@ export class Quiz {
 
 	question: NameBase;
 	choices: NameBase[];
+	title: string;
 	showAnswer = false;
 
 	constructor(public words: Word[]) {
@@ -21,16 +22,20 @@ export class Quiz {
 		// What to ask; word or definition?
 		const askWord = Math.random() < 0.5;
 
-		const def = words[0].definitions[0];
-		const isVerb = def.type === DefinitionType.verb;
+		const word = words[0];
+		const definition = word.definitions[0];
+		const isVerb = definition.type === DefinitionType.verb;
 
 		// prepare question
 		this.question = {
 
-			id: words[0].definitions[0].id,
-			name: askWord ? `(${def.type})` + (isVerb ? ' to ' : ' ') + words[0].name : words[0].definitions[0].name
+			id: definition.id,
+			name: `(${definition.type}) ` + (askWord ? (isVerb ? 'to ' : ' ') + word.name : definition.name)
 
 		};
+
+		// set title
+		this.title = definition.samples.join('\n\n').replaceAll(word.name, '***');
 
 		// prepare choices
 		const tmpChoices: NameBase[] = [];

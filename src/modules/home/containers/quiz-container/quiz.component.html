@@ -5,7 +5,7 @@
 		<div quiz_icon>
 			<span class="material-symbols-outlined">quiz</span>
 		</div>
-		<div quiz_question [@quoteChange]="quiz.question.id" [title]="quiz.words[0].definitions[0].samples.join('\n\n')">{{ quiz.question.name }}</div>
+		<div quiz_question [@quoteChange]="quiz.question.id" [title]="quiz.title">{{ quiz.question.name }}</div>
 
 	</div>
 	@if (quiz.showAnswer) {
