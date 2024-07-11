@@ -9,83 +9,76 @@ import { selQuizEntry_UIState } from './quiz-entry.selectors';
  * Whenever the user answers a question, right or wrong, 'now' gets updated in database
  * and this selector emits a new value => all other selectors are triggered => new Quiz
  */
-const selQuiz_now = createSelector(
+// const selQuiz_now = createSelector(
 
-	selQuizEntry_UIState,
-	state => state.now
+// 	selQuizEntry_UIState,
+// 	state => state.now
 
-);
+// );
 
-const selQuiz_nextProgress = createSelector(
+// const selQuiz_nextProgress = createSelector(
 
-	selQuiz_now,
-	selQuizEntry_array,
-	(now: number, arr: QuizProgress[]): QuizProgress | null => arr.filter(q => q.next < now).at(0) ?? null
+// 	selQuiz_now,
+// 	selQuizEntry_array,
+// 	(now: number, arr: QuizProgress[]): QuizProgress | null => arr.filter(q => q.next < now).at(0) ?? null
 
-);
+// );
 
 /**
  * creates a Definition ID - Word Record,
  * where Words' definitions[] array contains only the one Definition,
  * which ID is also the resulting Record's ID
  */
-const selQuiz_definitionIdWordMap = createSelector(
+// export const selQuiz_definitionIdWordMap = createSelector(
 
-	selWord_array,
-	(words: Word[]): Record<UUID, Word> => {
+// 	selWord_array,
+// 	(words: Word[]): Record<UUID, Word> => {
 
-		const map: Record<UUID, Word> = {};
-		words.forEach(w => {
+// 		const map: Record<UUID, Word> = {};
+// 		words.forEach(w => {
 
-			w.definitions.forEach(d => {
+// 			w.definitions.forEach(d => {
 
-				// need a copy of Word, because 'definitions' array is being modified
-				map[d.id] = produce(w, (draft) => { draft.definitions = [d]; });
+// 				// need a copy of Word, because 'definitions' array is being modified
+// 				map[d.id] = produce(w, (draft) => { draft.definitions = [d]; });
 
-			});
+// 			});
 
-		});
-		return map;
+// 		});
+// 		return map;
 
-	}
+// 	}
 
-);
+// );
 
-function compareDefinitonType(a: Word, b: Word): boolean {
+// export const selQuiz_next = createSelector(
 
-	if (a.definitions[0] && b.definitions[0])
-		return a.definitions[0].type === b.definitions[0].type;
-	throw Error('Word.definitions[0] undefined');
+// 	selQuiz_definitionIdWordMap,
+// 	selQuiz_nextProgress,
+// 	(map, progress): Quiz | null => {
 
-}
+// 		if (!progress)
+// 			return null;
 
-export const selQuiz_next = createSelector(
+// 		const question = map[progress.id];
+// 		if (!question)
+// 			throw Error('progress.id not found in map');
 
-	selQuiz_definitionIdWordMap,
-	selQuiz_nextProgress,
-	(map, progress): Quiz | null => {
+// 		const result: Word[] = [question]; // first entry is the question, rest are choices
 
-		if (!progress)
-			return null;
+// 		const potentialChoices: Word[] = Object.values(map).filter(w => w.definitions[0].type === question.definitions[0].type);
+// 		for (let i = 0; i < NUMBER_OF_CHOICES; ++i) { // choose NUMBER_OF_CHOICES random definitions
 
-		const question = map[progress.id];
-		if (!question)
-			throw Error('progress.id not found in map');
+// 			const randomIdx = Math.floor(potentialChoices.length * Math.random());
+// 			result.push(potentialChoices[randomIdx]);
 
-		const result: Word[] = [question]; // first entry is the question, rest are choices
+// 		}
+// 		console.log('creating new Quiz()..');
+// 		return new Quiz(result);
 
-		const potentialChoices: Word[] = Object.values(map).filter(w => w.definitions[0].type === question.definitions[0].type);
-		for (let i = 0; i < NUMBER_OF_CHOICES; ++i) { // choose NUMBER_OF_CHOICES random definitions
+// 	}
 
-			const randomIdx = Math.floor(potentialChoices.length * Math.random());
-			result.push(potentialChoices[randomIdx]);
-
-		}
-		return new Quiz(result);
-
-	}
-
-);
+// );
 
 // export const selQuiz_next1 = createSelector(
 

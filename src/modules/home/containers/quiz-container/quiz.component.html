@@ -8,24 +8,28 @@
 		<div quiz_question [@quoteChange]="quiz.question.id" [title]="quiz.title">{{ quiz.question.name }}</div>
 
 	</div>
-	@if (quiz.showAnswer) {
+	@if (showAnswer()) {
 
-		<div quiz_answer>
+		<div quiz_answer @quizChoices>
 
 			<app-word [word]="quiz.words[0]" [schedulable]="false"/>
-			<button type="button" class="icon-only" (click)="next(quiz)"><span class="material-symbols-outlined">play_arrow</span> Next</button>
+			<div quiz_answer_buttons>
+				<button type="button" class="rounded" (click)="next(quiz)"><span class="material-symbols-outlined">check</span></button>
+			</div>
 
 		</div>
 
 	} @else {
 
-		<div quiz_choices>
+		<div quiz_choices @quizChoices>
 
 			@for (choice of quiz.choices; track $index) {
 
 				<div
 					quiz_choice
-					(click)="checkAnswer(quiz, choice.id)">
+					(click)="checkAnswer(quiz, choice.id)"
+					[class.success]="blinkSuccess() === choice.id"
+					[class.failure]="blinkFailure() === choice.id">
 					<span [@quoteChange]="choice.id">{{ choice.name }}</span>
 				</div>
 

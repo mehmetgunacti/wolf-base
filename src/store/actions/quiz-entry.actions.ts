@@ -35,7 +35,7 @@ export const loadAllRemoteMetadataSuccess	= createAction('[QuizEntry] Load All R
 // export const loadTrashCountSuccess			= createAction('[QuizEntry] Load Trash Count Success', props<{ count: number }>());
 
 // UI
-export const setNow							= createAction('[QuizEntry] Set Now');
+// export const setNow							= createAction('[QuizEntry] Set Now');
 
 // CLOUD SYNC
 // local_new

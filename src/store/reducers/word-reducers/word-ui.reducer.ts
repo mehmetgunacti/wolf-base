@@ -1,11 +1,23 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { setQueryParams } from 'store/actions/word.actions';
+import { produce } from 'immer';
+import { setQueryParams, setSelectedId } from 'store/actions/word.actions';
 import { Word_UIState, initialWordUIState } from 'store/states/word.state';
 
 const reducer = createReducer(
 
 	initialWordUIState,
-	on(setQueryParams, (state, { search }): Word_UIState => ({ ...state, queryParams: { search } }))
+	on(setQueryParams, (state, { search }): Word_UIState => ({ ...state, queryParams: { search } })),
+	on(setSelectedId, (state, { id }): Word_UIState => {
+
+		return produce(
+			state,
+			draft => {
+				draft.selectedId = id;
+			}
+		);
+
+	})
+
 	// on(wordActions.openEditWordDialogSuccess, (state, { id }): WordUIState => ({ ...state, editDialogOverlayId: id })),
 	// on(wordActions.closeEditWordDialogSuccess, (state): WordUIState => ({ ...state, editDialogOverlayId: null })),
 	// on(fromClipboardFailure, (state, { shaking }): WordUIState => ({ ...state, shaking })),

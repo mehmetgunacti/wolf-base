@@ -71,16 +71,16 @@ export class QuizEntryEntityUpdateEffects {
 
 	);
 
-	setNow$ = createEffect(
+	// setNow$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(quizEntryActions.updateSuccess, quizEntryActions.updateFailure),
-			map(() => quizEntryActions.setNow())
+	// 		ofType(quizEntryActions.updateSuccess, quizEntryActions.updateFailure),
+	// 		map(() => quizEntryActions.setNow())
 
-		)
+	// 	)
 
-	);
+	// );
 
 
 

@@ -13,12 +13,11 @@ export interface Word_EntitiesState {
 	syncData: Record<UUID, SyncData>;
 	remoteMetadata: Record<UUID, RemoteMetadata>;
 
-	selectedId: UUID | null;
-
 }
 
 export interface Word_UIState {
 
+	selectedId: UUID | null;
 	queryParams: WordQueryParams;
 
 }
@@ -29,14 +28,13 @@ export const word_initialEntitiesState: Word_EntitiesState = {
 
 	entities: {},
 	syncData: {},
-	remoteMetadata: {},
-
-	selectedId: null
+	remoteMetadata: {}
 
 };
 
 export const initialWordUIState: Word_UIState = {
 
+	selectedId: null,
 	queryParams: {
 		search: null
 	}

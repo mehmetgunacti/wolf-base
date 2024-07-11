@@ -28,7 +28,7 @@
 
 		position	: relative;
 
-		& > button {
+		& > [quiz_answer_buttons] {
 
 			position	: absolute;
 			top			: var(--gap-xxl);
@@ -50,67 +50,23 @@
 			@include mx-box-shadow;
 			cursor		: pointer;
 
-		}
+			&:hover {
 
-	}
-
-	// & > [quote_icon] { }
-
-	& > [quote_outer] {
-
-		flex		: 1;
-		@include mx-flex-center-center;
-
-		& > [quote_inner] {
-
-			& > [quote_name] {
-
-				text-align	: center;
-				font-style	: italic;
-				font-size	: 90%;
-				padding		: 0 var(--gap-sm) var(--gap-sm) var(--gap-sm);
+				background-color	: fn-hsl(bg-3);
 
 			}
 
-			& > [quote_author] {
+			&.success {
 
-				text-align	: end;
-				font-size	: smaller;
-				padding		: var(--gap-xs);
+				background-color	: fn-hsl(success);
 
 			}
 
-			& > [quote_context] {
+			&.failure {
 
-				text-align	: end;
-				font-size	: xx-small;
-				padding		: 0 var(--gap-xs);
+				background-color	: fn-hsl(error);
 
 			}
-
-		}
-
-	}
-
-	& > [overlay] {
-
-		// display			: flex;
-		// justify-content	: end;
-		@include mx-flex-center-center;
-
-		position		: absolute;
-		top				: 0;
-		left			: 0;
-		right			: 0;
-		bottom			: 0;
-		opacity			: 0;
-
-		padding			: var(--gap-sm);
-		cursor			: pointer;
-
-		& > span {
-
-			transform	: scale(2);
 
 		}
 

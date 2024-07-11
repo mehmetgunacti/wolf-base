@@ -1,11 +1,10 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import * as quizEntryActions from 'store/actions/quiz-entry.actions';
+import { Action, createReducer } from '@ngrx/store';
 import { quizEntry_initialUIState, QuizEntry_UIState } from 'store/states/quiz-entry.state';
 
 const reducer = createReducer(
 
 	quizEntry_initialUIState,
-	on(quizEntryActions.setNow, (state): QuizEntry_UIState => ({ ...state, now: new Date().getTime() })),
+	// on(quizEntryActions.setNow, (state): QuizEntry_UIState => ({ ...state, now: new Date().getTime() })),
 
 );
 

@@ -30,13 +30,6 @@ export const selWords_count = createSelector(
 
 );
 
-export const selWord_selected = createSelector(
-
-	selWord_EntitiesState,
-	state => state.selectedId ? state.entities[state.selectedId] : null
-
-);
-
 export const selWord_search = createSelector(
 
 	selWord_UIState,
@@ -49,5 +42,20 @@ export const selWord_filtered = createSelector(
 	selWord_array,
 	selWord_search,
 	(arr, search) => search !== null ? arr.filter(word => word.name.toLocaleLowerCase().includes(search.toLowerCase())) : arr
+
+);
+
+const selWord_selectedId = createSelector(
+
+	selWord_UIState,
+	state => state.selectedId
+
+);
+
+export const selWord_selected = createSelector(
+
+	selWord_entities,
+	selWord_selectedId,
+	(entities, selectedId) => selectedId ? entities[selectedId] : null
 
 );

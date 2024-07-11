@@ -15,7 +15,6 @@ export class Quiz {
 	question: NameBase;
 	choices: NameBase[];
 	title: string;
-	showAnswer = false;
 
 	constructor(public words: Word[]) {
 
@@ -52,11 +51,7 @@ export class Quiz {
 
 	onRightAnswer(choiceId: UUID): boolean {
 
-		if (this.question.id !== choiceId) {
-			this.showAnswer = true;
-			return false;
-		}
-		return true;
+		return this.question.id === choiceId;
 
 	}
 

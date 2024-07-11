@@ -72,17 +72,7 @@ const reducer = createReducer(
 		...state,
 		remoteMetadata: remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>)
 
-	})),
-	on(wordActions.setSelectedId, (state, { id }): Word_EntitiesState => {
-
-		return produce(
-			state,
-			draft => {
-				draft.selectedId = id;
-			}
-		);
-
-	})
+	}))
 
 );
 

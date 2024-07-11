@@ -1,40 +1,71 @@
-import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, Signal, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { lazyFadeIn, Quiz, quoteChangeTrigger, UUID } from '@lib';
 import { Store } from '@ngrx/store';
-import { setNow, update } from 'store/actions/quiz-entry.actions';
-import { selQuiz_next } from 'store/selectors/quiz-entry-selectors/quiz.selectors';
+import { take, tap, timer } from 'rxjs';
+import { QuizService } from 'services/quiz.service';
+import { update } from 'store/actions/quiz-entry.actions';
+import { quizChoicesTrigger } from './quiz-choices.animation';
 
 @Component({
 	selector: 'app-quiz',
 	templateUrl: './quiz.component.html',
 	styleUrls: ['./quiz.component.scss'],
-	animations: [quoteChangeTrigger, lazyFadeIn],
+	animations: [quoteChangeTrigger, lazyFadeIn, quizChoicesTrigger],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizComponent {
 
 	private store: Store = inject(Store);
+	private quizService: QuizService = inject(QuizService);
 
 	quiz: Signal<Quiz | null>;
+	showAnswer = signal(false);
+	blinkSuccess: WritableSignal<UUID | null> = signal(null);
+	blinkFailure: WritableSignal<UUID | null> = signal(null);
 
 	constructor() {
 
-		this.quiz = toSignal(this.store.select(selQuiz_next), { initialValue: null });
-		this.store.dispatch(setNow());
+		this.quiz = toSignal(this.quizService.quiz$, { initialValue: null });
 
 	}
 
 	checkAnswer(quiz: Quiz, choiceId: UUID): void {
 
-		if (quiz.onRightAnswer(choiceId))
-			this.store.dispatch(update({ id: quiz.words[0].definitions[0].id, answeredRight: true }));
+		if (quiz.onRightAnswer(choiceId)) {
+
+			timer(0, 200).pipe(
+				take(6),
+				tap(counter => this.blinkSuccess.set(counter % 2 === 0 ? choiceId : null))
+			).subscribe({
+				complete: () => this.store.dispatch(update({ id: quiz.words[0].definitions[0].id, answeredRight: true }))
+			});
+
+		} else {
+
+			timer(0, 200).pipe(
+
+				take(7),
+				tap(counter => this.blinkFailure.set(counter % 2 === 0 ? choiceId : null))
+
+			).subscribe({
+				complete: () => this.showAnswer.set(true)
+			});
+
+		}
 
 	}
 
 	next(quiz: Quiz): void {
 
-		this.store.dispatch(update({ id: quiz.words[0].definitions[0].id, answeredRight: false }));
+		timer(0, 1100).pipe(
+
+			take(2),
+			tap(() => this.showAnswer.set(false))
+
+		).subscribe({
+			complete: () => this.store.dispatch(update({ id: quiz.words[0].definitions[0].id, answeredRight: false }))
+		});
 
 	}
 
