@@ -144,6 +144,8 @@ button {
 	&.rounded {
 
 		--border-radius-sm		: 25px;
+		min-width				: auto;
+		padding					: var(--gap);
 
 	}
 
