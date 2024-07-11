@@ -2,7 +2,7 @@
 
 	<h1>
 
-		{{ word.name }}
+		<a [routerLink]="['/words', word.id]">{{ word.name }}</a>
 		@if (word.pronunciation) {
 
 			<small>{{ word.pronunciation }}</small>
