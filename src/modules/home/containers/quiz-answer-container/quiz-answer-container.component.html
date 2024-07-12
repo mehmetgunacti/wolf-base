@@ -22,7 +22,12 @@
 
 			<div footer_buttons>
 				<button type="button" (click)="onEdit(w.definitions[0].id, w.id)" class="icon-only"><span class="material-symbols-outlined">edit</span> Edit</button>
-				<a [href]="'https://www.google.com/search?q=' + w.name" target="_blank" class="button icon-only"><span class="material-symbols-outlined">search</span> Google <sup><span class="material-symbols-outlined small">open_in_new</span></sup></a>
+				<a
+					class="button icon-only align-left"
+					[href]="'https://www.google.com/search?q=' + w.name"
+					target="_blank">
+					<span class="material-symbols-outlined">search</span> Google <sup><span class="material-symbols-outlined small">open_in_new</span></sup>
+				</a>
 				<button type="button" (click)="onClose(w.definitions[0].id)"><span class="material-symbols-outlined">check</span> Got It</button>
 			</div>
 
