@@ -1,4 +1,4 @@
-import { DefinitionType, Progress, UUID } from 'lib/constants';
+import { DefinitionLanguage, DefinitionType, Progress, UUID } from 'lib/constants';
 import { Entity } from './entity.model';
 import { NameBase } from './id-base.model';
 import { Word } from './word.model';

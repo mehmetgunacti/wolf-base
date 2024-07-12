@@ -19,8 +19,11 @@ export class QuizComponent {
 	private store: Store = inject(Store);
 	private quizService: QuizService = inject(QuizService);
 
+	protected SHOW_ANSWER = 'show_answer';
+
 	quiz: Signal<Quiz | null>;
 	showAnswer = signal(false);
+	showIDontKnow = signal(false);
 	blinkSuccess: WritableSignal<UUID | null> = signal(null);
 	blinkFailure: WritableSignal<UUID | null> = signal(null);
 
@@ -32,7 +35,7 @@ export class QuizComponent {
 
 	checkAnswer(quiz: Quiz, choiceId: UUID): void {
 
-		if (quiz.onRightAnswer(choiceId)) {
+		if (quiz.onRightAnswer(choiceId)) { // blink green, dispatch action
 
 			timer(0, 200).pipe(
 				take(6),
@@ -43,14 +46,17 @@ export class QuizComponent {
 
 		} else {
 
-			timer(0, 200).pipe(
+			if (choiceId === this.SHOW_ANSWER) // show answer button pressed
+				this.showAnswer.set(true);
+			else
+				timer(0, 200).pipe( // blink red, show answer
 
-				take(7),
-				tap(counter => this.blinkFailure.set(counter % 2 === 0 ? choiceId : null))
+					take(7),
+					tap(counter => this.blinkFailure.set(counter % 2 === 0 ? choiceId : null))
 
-			).subscribe({
-				complete: () => this.showAnswer.set(true)
-			});
+				).subscribe({
+					complete: () => this.showAnswer.set(true)
+				});
 
 		}
 

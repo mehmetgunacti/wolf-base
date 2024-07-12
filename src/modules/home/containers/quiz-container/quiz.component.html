@@ -6,6 +6,14 @@
 			<span class="material-symbols-outlined">quiz</span>
 		</div>
 		<div quiz_question [@quoteChange]="quiz.question.id" [title]="quiz.title">{{ quiz.question.name }}</div>
+		<div quiz_solve>
+			<button
+				class="icon-only"
+				(click)="checkAnswer(quiz, SHOW_ANSWER)"
+				title="Show Answer">
+				<span class="material-symbols-outlined">contact_support</span>
+		</button>
+		</div>
 
 	</div>
 	@if (showAnswer()) {

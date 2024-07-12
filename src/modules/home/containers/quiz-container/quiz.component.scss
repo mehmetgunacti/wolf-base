@@ -12,7 +12,7 @@
 
 		@include mx-component(3);
 		@include mx-box-shadow;
-		@include mx-flex-center-y;
+		@include mx-flex-space-between-center;
 
 		& > [quiz_question] {
 
@@ -41,7 +41,7 @@
 	& > [quiz_choices] {
 
 		display					: grid;
-		grid-template-columns	: repeat(auto-fill, minmax(25rem, 1fr));
+		grid-template-columns	: repeat(auto-fill, minmax(35rem, 1fr));
 		grid-gap				: var(--gap-sm);
 
 		& > [quiz_choice] {

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { NUMBER_OF_CHOICES, Quiz, QuizProgress, UUID, Word } from '@lib';
+import { DefinitionLanguage, DefinitionType, NUMBER_OF_CHOICES, Quiz, QuizProgress, UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { produce } from "immer";
 import { combineLatest, Observable, timer } from 'rxjs';
@@ -47,8 +47,13 @@ export class QuizService {
 
 	constructor() {
 
+		// update 'now' every 60 seconds
 		const timer$: Observable<number> = timer(Date.now(), 60 * 1000).pipe(map(() => Date.now()));
+
+		// array of all QuizProgress
 		const allProgress$: Observable<QuizProgress[]> = this.store.select(selQuizEntry_array).pipe(map(sortArr));
+
+		// find latest QuizProgress
 		const quizProgress$: Observable<QuizProgress | null> = combineLatest([
 			timer$,
 			allProgress$
@@ -58,6 +63,8 @@ export class QuizService {
 			distinctUntilChanged()
 
 		);
+
+		// transform Word[] into Record for lookup
 		const definitionIdWordMap$: Observable<Record<UUID, Word>> = this.store.select(selWord_array).pipe(
 
 			distinctUntilChanged(),

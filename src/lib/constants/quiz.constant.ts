@@ -44,4 +44,4 @@ export function increase(p: Progress): number {
 
 }
 
-export const NUMBER_OF_CHOICES = 7; // total choices - 1
+export const NUMBER_OF_CHOICES = 5; // total choices - 1
