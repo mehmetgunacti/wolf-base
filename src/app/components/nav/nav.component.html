@@ -1,6 +1,6 @@
 <div nav-menu>
 
-	@for (item of menuItems$ | async; track item) {
+	@for (item of menuItems$ | async; track $index) {
 
 		<a  [routerLink]="item.url" [queryParams]="item.queryParams" routerLinkActive="active" [routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }">
 
