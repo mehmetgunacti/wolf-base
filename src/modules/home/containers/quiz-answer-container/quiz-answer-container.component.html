@@ -1,0 +1,40 @@
+@let w = word();
+
+@if (w) {
+
+	<w-overlay-container>
+
+		<ng-container card_title>Remember</ng-container>
+		<ng-container card_buttons>
+
+			<button
+				class="icon-only rounded"
+				(click)="onClose(w.definitions[0].id)"
+				title="Close">
+				<span class="material-symbols-outlined">close</span>
+			</button>
+
+		</ng-container>
+
+		<app-word [word]="w" [schedulable]="false"/>
+
+		<ng-container card_footer>
+
+			<button type="button" (click)="onEdit(w.definitions[0].id, w.id)" class="icon-only"><span class="material-symbols-outlined">edit</span> Edit</button>
+			<button type="button" (click)="onClose(w.definitions[0].id)"><span class="material-symbols-outlined">check</span> Got It</button>
+
+		</ng-container>
+
+	</w-overlay-container>
+
+} @else {
+
+	<w-overlay-container>
+
+		<ng-container card_title>Error</ng-container>
+
+		<h3>No Incoming 'Word'</h3>
+
+	</w-overlay-container>
+
+}

@@ -95,6 +95,7 @@ import { QuizEntryEntityUpdateEffects } from './effects/quiz-entry-effects/quiz-
 import { QuizEntryEntityMoveToTrashEffects } from './effects/quiz-entry-effects/quiz-entry-entity-move-to-trash.effects';
 import { QuizEntryLoadEffects } from './effects/quiz-entry-effects/quiz-entry-load.effects';
 import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.reducer';
+import { QuizUIEffects } from './effects/quiz-entry-effects/quiz-ui.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -201,7 +202,7 @@ export const effects = [
 	WordLoadEffects,
 	WordUIEffects,
 
-	//
+	// Quiz
 	QuizEntrySyncEffects,
 
 	QuizEntrySyncLocalNewEffects,
@@ -219,6 +220,7 @@ export const effects = [
 	QuizEntryEntityMoveToTrashEffects,
 
 	QuizEntryLoadEffects,
+	QuizUIEffects,
 
 	// Quotes
 	QuoteSyncEffects,

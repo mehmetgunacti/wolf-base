@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, signal, Signal, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { lazyFadeIn, Quiz, quoteChangeTrigger, UUID } from '@lib';
+import { lazyFadeIn, Quiz, quoteChangeTrigger, UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { take, tap, timer } from 'rxjs';
 import { QuizService } from 'services/quiz.service';
-import { update } from 'store/actions/quiz-entry.actions';
+import { openShowAnswerDialog, update } from 'store/actions/quiz-entry.actions';
 import { quizChoicesTrigger } from './quiz-choices.animation';
 
 @Component({
@@ -19,11 +19,7 @@ export class QuizComponent {
 	private store: Store = inject(Store);
 	private quizService: QuizService = inject(QuizService);
 
-	protected SHOW_ANSWER = 'show_answer';
-
 	quiz: Signal<Quiz | null>;
-	showAnswer = signal(false);
-	showIDontKnow = signal(false);
 	blinkSuccess: WritableSignal<UUID | null> = signal(null);
 	blinkFailure: WritableSignal<UUID | null> = signal(null);
 
@@ -46,32 +42,22 @@ export class QuizComponent {
 
 		} else {
 
-			if (choiceId === this.SHOW_ANSWER) // show answer button pressed
-				this.showAnswer.set(true);
-			else
-				timer(0, 200).pipe( // blink red, show answer
+			timer(0, 200).pipe( // blink red, show answer
 
-					take(7),
-					tap(counter => this.blinkFailure.set(counter % 2 === 0 ? choiceId : null))
+				take(7),
+				tap(counter => this.blinkFailure.set(counter % 2 === 0 ? choiceId : null))
 
-				).subscribe({
-					complete: () => this.showAnswer.set(true)
-				});
+			).subscribe({
+				complete: () => this.store.dispatch(openShowAnswerDialog({ word: quiz.words[0] }))
+			});
 
 		}
 
 	}
 
-	next(quiz: Quiz): void {
+	showAnswer(word: Word): void {
 
-		timer(0, 1100).pipe(
-
-			take(2),
-			tap(() => this.showAnswer.set(false))
-
-		).subscribe({
-			complete: () => this.store.dispatch(update({ id: quiz.words[0].definitions[0].id, answeredRight: false }))
-		});
+		this.store.dispatch(openShowAnswerDialog({ word }));
 
 	}
 

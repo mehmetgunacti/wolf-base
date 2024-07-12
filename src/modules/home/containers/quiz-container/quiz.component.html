@@ -9,43 +9,28 @@
 		<div quiz_solve>
 			<button
 				class="icon-only small"
-				(click)="checkAnswer(quiz, SHOW_ANSWER)"
+				(click)="showAnswer(quiz.words[0])"
 				title="Show Answer">
 				<span class="material-symbols-outlined">contact_support</span>
 		</button>
 		</div>
 
 	</div>
-	@if (showAnswer()) {
+	<div quiz_choices @quizChoices>
 
-		<div quiz_answer @quizChoices>
+		@for (choice of quiz.choices; track $index) {
 
-			<app-word [word]="quiz.words[0]" [schedulable]="false"/>
-			<div quiz_answer_buttons>
-				<button type="button" class="rounded" (click)="next(quiz)"><span class="material-symbols-outlined">check</span></button>
+			<div
+				quiz_choice
+				(click)="checkAnswer(quiz, choice.id)"
+				[class.success]="blinkSuccess() === choice.id"
+				[class.failure]="blinkFailure() === choice.id">
+				<span [@quoteChange]="choice.id">{{ choice.name }}</span>
 			</div>
 
-		</div>
+		}
 
-	} @else {
-
-		<div quiz_choices @quizChoices>
-
-			@for (choice of quiz.choices; track $index) {
-
-				<div
-					quiz_choice
-					(click)="checkAnswer(quiz, choice.id)"
-					[class.success]="blinkSuccess() === choice.id"
-					[class.failure]="blinkFailure() === choice.id">
-					<span [@quoteChange]="choice.id">{{ choice.name }}</span>
-				</div>
-
-			}
-
-		</div>
-
-	}
+	</div>
 
 } @else {
 

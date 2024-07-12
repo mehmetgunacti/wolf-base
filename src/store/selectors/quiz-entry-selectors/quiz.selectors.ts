@@ -5,6 +5,13 @@ import { selQuizEntry_array } from '../quiz-entry-selectors/quiz-entry-entities.
 import { selWord_array } from '../word-selectors/word-entities.selectors';
 import { selQuizEntry_UIState } from './quiz-entry.selectors';
 
+export const selQuiz_answer = createSelector(
+
+	selQuizEntry_UIState,
+	state => state.answer
+
+);
+
 /**
  * Whenever the user answers a question, right or wrong, 'now' gets updated in database
  * and this selector emits a new value => all other selectors are triggered => new Quiz

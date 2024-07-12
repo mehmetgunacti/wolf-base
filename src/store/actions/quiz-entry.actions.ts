@@ -1,4 +1,4 @@
-import { RemoteMetadata, SyncData, UUID, QuizProgress, Definition, NameBase } from '@lib';
+import { RemoteMetadata, SyncData, UUID, QuizProgress, Definition, NameBase, Word } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // CRUD
@@ -36,6 +36,8 @@ export const loadAllRemoteMetadataSuccess	= createAction('[QuizEntry] Load All R
 
 // UI
 // export const setNow							= createAction('[QuizEntry] Set Now');
+export const openShowAnswerDialog			= createAction('[Quiz] Open Show Answer Dialog', props<{ word: Word }>());
+export const closeShowAnswerDialog			= createAction('[Quiz] Close Show Answer Dialog', props<{ quizProgressId: UUID, editWord?: UUID }>());
 
 // CLOUD SYNC
 // local_new

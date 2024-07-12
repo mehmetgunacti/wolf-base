@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'modules/shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import * as fromConfig from './home.config';
+import { OverlayContainerModule } from '@lib';
 
 @NgModule({
 	declarations: fromConfig.components,
@@ -11,7 +12,8 @@ import * as fromConfig from './home.config';
 		CommonModule,
 		HomeRoutingModule,
 		ReactiveFormsModule,
-		SharedModule
+		SharedModule,
+		OverlayContainerModule
 	],
 	providers: []
 })

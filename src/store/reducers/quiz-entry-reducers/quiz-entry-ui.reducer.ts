@@ -1,10 +1,12 @@
-import { Action, createReducer } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
+import { closeShowAnswerDialog, openShowAnswerDialog } from 'store/actions/quiz-entry.actions';
 import { quizEntry_initialUIState, QuizEntry_UIState } from 'store/states/quiz-entry.state';
 
 const reducer = createReducer(
 
 	quizEntry_initialUIState,
-	// on(quizEntryActions.setNow, (state): QuizEntry_UIState => ({ ...state, now: new Date().getTime() })),
+	on(openShowAnswerDialog, (state, { word }): QuizEntry_UIState => ({ ...state, answer: word })),
+	on(closeShowAnswerDialog, (state): QuizEntry_UIState => ({ ...state, answer: null })),
 
 );
 
