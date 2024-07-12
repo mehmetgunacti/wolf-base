@@ -6,6 +6,8 @@ export enum Progress {
 	LEVEL_THREE = 'LEVEL_THREE',
 	LEVEL_FOUR = 'LEVEL_FOUR',
 	LEVEL_FIVE = 'LEVEL_FIVE',
+	LEVEL_SIX = 'LEVEL_SIX',
+	LEVEL_SEVEN = 'LEVEL_SEVEN',
 	FINISHED = 'FINISHED:'
 
 }
@@ -19,7 +21,9 @@ export function next(p: Progress): Progress {
 		case Progress.LEVEL_TWO: return Progress.LEVEL_THREE;
 		case Progress.LEVEL_THREE: return Progress.LEVEL_FOUR;
 		case Progress.LEVEL_FOUR: return Progress.LEVEL_FIVE;
-		case Progress.LEVEL_FIVE: return Progress.FINISHED;
+		case Progress.LEVEL_FIVE: return Progress.LEVEL_SIX;
+		case Progress.LEVEL_SIX: return Progress.LEVEL_SEVEN;
+		case Progress.LEVEL_SEVEN: return Progress.FINISHED;
 
 	};
 	throw Error('unknown Progress');
@@ -38,6 +42,8 @@ export function increase(p: Progress): number {
 		case Progress.LEVEL_THREE: return now + 7 * day;
 		case Progress.LEVEL_FOUR: return now + 16 * day;
 		case Progress.LEVEL_FIVE: return now + 50 * day;
+		case Progress.LEVEL_SIX: return now + 70 * day;
+		case Progress.LEVEL_SEVEN: return now + 100 * day;
 
 	};
 	throw Error('unknown Progress');
