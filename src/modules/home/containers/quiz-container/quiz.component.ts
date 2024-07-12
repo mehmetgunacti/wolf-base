@@ -1,17 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject, signal, Signal, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { lazyFadeIn, Quiz, quoteChangeTrigger, UUID, Word } from '@lib';
+import { Quiz, quoteChangeTrigger, UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { take, tap, timer } from 'rxjs';
 import { QuizService } from 'services/quiz.service';
 import { openShowAnswerDialog, update } from 'store/actions/quiz-entry.actions';
-import { quizChoicesTrigger } from './quiz-choices.animation';
 
 @Component({
 	selector: 'app-quiz',
 	templateUrl: './quiz.component.html',
 	styleUrls: ['./quiz.component.scss'],
-	animations: [quoteChangeTrigger, lazyFadeIn, quizChoicesTrigger],
+	animations: [quoteChangeTrigger],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizComponent {
