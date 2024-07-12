@@ -14,6 +14,13 @@
 		@include mx-box-shadow;
 		@include mx-flex-space-between-center;
 
+		& > [quiz_icon],
+		& > [quiz_solve] {
+
+			display		: flex;
+
+		}
+
 		& > [quiz_question] {
 
 			flex		: 1;
