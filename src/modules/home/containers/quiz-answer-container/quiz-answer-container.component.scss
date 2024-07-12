@@ -2,4 +2,18 @@
 
 	display	: contents;
 
+	[footer_buttons] {
+
+		display		: flex;
+		width		: 100%;
+		gap			: var(--gap-sm);
+
+		& > button:last-child {
+
+			margin-left	: auto;
+
+		}
+
+	}
+
 }
