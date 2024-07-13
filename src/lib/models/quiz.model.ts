@@ -14,7 +14,7 @@ export class Quiz {
 
 	question: NameBase;
 	choices: NameBase[];
-	title: string;
+	samples: string[];
 
 	constructor(public words: Word[]) {
 
@@ -33,8 +33,8 @@ export class Quiz {
 
 		};
 
-		// set title
-		this.title = definition.samples.join('\n\n').replaceAll(word.name, '***');
+		// set samples
+		this.samples = [...word.definitions.flatMap(d => d.samples.map(s => askWord ? s.replaceAll(word.name, `<mark>${word.name}</mark>`) : s.replaceAll(word.name, '***')))];
 
 		// prepare choices
 		const tmpChoices: NameBase[] = [];

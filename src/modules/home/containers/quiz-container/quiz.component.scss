@@ -12,25 +12,33 @@
 
 		@include mx-component(3);
 		@include mx-box-shadow;
-		@include mx-flex-space-between-center;
 
-		& > [quiz_icon],
-		& > [quiz_solve] {
+		& > [quiz_question_wrapper] {
 
-			display		: flex;
+			@include mx-flex-space-between-center;
+			& > [quiz_icon],
+			& > [quiz_solve] {
+
+				display		: flex;
+
+			}
+			& > [quiz_question] {
+
+				flex		: 1;
+				@include mx-flex-center-center;
+				@include mx-h5;
+
+			}
 
 		}
+		& > [quiz_samples] {
 
-		& > [quiz_question] {
-
-			flex		: 1;
-			@include mx-flex-center-center;
-			@include mx-h5;
+			display		: grid;
+			font-size	: smaller;
 
 		}
 
 	}
-
 	& > [quiz_answer] {
 
 		position	: relative;

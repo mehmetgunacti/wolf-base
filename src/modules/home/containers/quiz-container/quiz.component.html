@@ -2,17 +2,30 @@
 
 	<div quiz_header>
 
-		<div quiz_icon>
-			<span class="material-symbols-outlined">quiz</span>
+		<div quiz_question_wrapper>
+			<div quiz_icon>
+				<span class="material-symbols-outlined">quiz</span>
+			</div>
+			<div quiz_question [@quoteChange]="quiz.question.id">
+				{{ quiz.question.name }}
+			</div>
+			<div quiz_solve>
+				<button
+					class="icon-only small"
+					(click)="showAnswer(quiz.words[0])"
+					title="Show Answer">
+					<span class="material-symbols-outlined">contact_support</span>
+				</button>
+			</div>
 		</div>
-		<div quiz_question [@quoteChange]="quiz.question.id" [title]="quiz.title">{{ quiz.question.name }}</div>
-		<div quiz_solve>
-			<button
-				class="icon-only small"
-				(click)="showAnswer(quiz.words[0])"
-				title="Show Answer">
-				<span class="material-symbols-outlined">contact_support</span>
-		</button>
+		<div quiz_samples>
+
+			@for (sample of quiz.samples; track $index) {
+
+				<blockquote [innerHTML]="sample"></blockquote>
+
+			}
+
 		</div>
 
 	</div>
