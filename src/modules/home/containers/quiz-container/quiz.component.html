@@ -18,6 +18,15 @@
 				</button>
 			</div>
 		</div>
+		<div quiz_contexts>
+
+			@for (context of quiz.contexts; track $index) {
+
+				<blockquote class="primary" [innerHTML]="context"></blockquote>
+
+			}
+
+		</div>
 		<div quiz_samples>
 
 			@for (sample of quiz.samples; track $index) {

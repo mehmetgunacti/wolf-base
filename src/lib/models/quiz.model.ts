@@ -1,7 +1,8 @@
-import { DefinitionLanguage, DefinitionType, Progress, UUID } from 'lib/constants';
+import { DefinitionType, Progress, UUID } from 'lib/constants';
 import { Entity } from './entity.model';
 import { NameBase } from './id-base.model';
 import { Word } from './word.model';
+import { maskOrHighlight } from 'lib/utils';
 
 export interface QuizProgress extends Entity {
 
@@ -14,6 +15,7 @@ export class Quiz {
 
 	question: NameBase;
 	choices: NameBase[];
+	contexts: string[];
 	samples: string[];
 
 	constructor(public words: Word[]) {
@@ -33,8 +35,17 @@ export class Quiz {
 
 		};
 
+		// set contexts
+		this.contexts = [
+			...word.contexts.map(s => maskOrHighlight(s, word.name, askWord))
+		]
+
 		// set samples
-		this.samples = [...word.definitions.flatMap(d => d.samples.map(s => askWord ? s.replaceAll(word.name, `<mark>${word.name}</mark>`) : s.replaceAll(word.name, '***')))];
+		this.samples = [
+			...word.definitions.flatMap(
+				d => d.samples.map(s => maskOrHighlight(s, word.name, askWord))
+			)
+		];
 
 		// prepare choices
 		const tmpChoices: NameBase[] = [];

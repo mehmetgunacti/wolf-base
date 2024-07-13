@@ -5,3 +5,4 @@ export * from './enum.util';
 export * from './firestore-rest-client';
 export * from './form.tool';
 export * from './helper.tool';
+export * from './string.util';
