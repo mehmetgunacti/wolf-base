@@ -11,4 +11,11 @@ blockquote {
 
 	}
 
+	&.primary {
+
+		color			: inherit !important;
+		border-left		: 2px solid fn-hsl(primary);
+
+	}
+
 }
