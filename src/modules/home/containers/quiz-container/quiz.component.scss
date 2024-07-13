@@ -25,8 +25,8 @@
 			& > [quiz_question] {
 
 				flex		: 1;
-				@include mx-flex-center-center;
 				@include mx-h5;
+				@include mx-flex-column-center;
 
 			}
 

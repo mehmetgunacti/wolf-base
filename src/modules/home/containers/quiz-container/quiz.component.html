@@ -3,20 +3,33 @@
 	<div quiz_header>
 
 		<div quiz_question_wrapper>
+
 			<div quiz_icon>
+
 				<span class="material-symbols-outlined">quiz</span>
+
 			</div>
 			<div quiz_question [@quoteChange]="quiz.question.id">
+
 				{{ quiz.question.name }}
+				@if (quiz.pronunciation && quiz.askWord) {
+
+					<small>{{ quiz.pronunciation }}</small>
+
+				}
+
 			</div>
 			<div quiz_solve>
+
 				<button
 					class="icon-only small"
 					(click)="showAnswer(quiz.words[0])"
 					title="Show Answer">
 					<span class="material-symbols-outlined">contact_support</span>
 				</button>
+
 			</div>
+
 		</div>
 		<div quiz_contexts>
 

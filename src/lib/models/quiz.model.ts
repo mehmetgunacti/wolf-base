@@ -13,8 +13,12 @@ export interface QuizProgress extends Entity {
 
 export class Quiz {
 
+	askWord: boolean;
+
 	question: NameBase;
+	pronunciation: string | null;
 	choices: NameBase[];
+
 	contexts: string[];
 	samples: string[];
 
@@ -22,6 +26,7 @@ export class Quiz {
 
 		// What to ask; word or definition?
 		const askWord = Math.random() < 0.5;
+		this.askWord = askWord;
 
 		const word = words[0];
 		const definition = word.definitions[0];
@@ -34,6 +39,9 @@ export class Quiz {
 			name: `(${definition.type}) ` + (askWord ? (isVerb ? 'to ' : ' ') + word.name : definition.name)
 
 		};
+
+		// set pronunciation
+		this.pronunciation = word.pronunciation;
 
 		// set contexts
 		this.contexts = [
