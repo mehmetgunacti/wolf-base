@@ -1,6 +1,7 @@
 export function maskOrHighlight(sentence: string, word: string, askWord: boolean, useWordBoundary: boolean = false): string {
 
 	const maskedWord = askWord ? `<mark>${word}</mark>` : '***';
+	const maskedIngWord = askWord ? `<mark>${word.slice(0, -1)}ing</mark>` : '***ing';
 
 	// .: Matches any single character except newline.
 	// *: Matches 0 or more of the preceding element.
@@ -17,20 +18,22 @@ export function maskOrHighlight(sentence: string, word: string, askWord: boolean
 	// wihtout escaping e.g. '$5.00' would not be replaced correctly
 	const escapedWord = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+	let regex;
 	if (useWordBoundary) {
 
-		// To word boundary or not to word boundary, that's the question:
-		//
 		// Using word boundary (\\b):
 		// if word is 'space' then 'spaceship' -> 'spaceship'
-		const regex = new RegExp(`\\b${escapedWord}\\b`, 'gi');
-		return sentence.replace(regex, maskedWord);
+		regex = new RegExp(`\\b${escapedWord}\\b|\\b${escapedWord.slice(0, -1)}ing\\b`, 'gi');
+
+	} else {
+
+		// Not using word boundary:
+		// if word is 'space' then 'spaceship' -> '***ship'
+		regex = new RegExp(`${escapedWord}|${escapedWord.slice(0, -1)}ing`, 'gi');
 
 	}
-
-	// Not using word boundary:
-	// if word is 'space' then 'spaceship' -> '***ship'
-	const regex = new RegExp(escapedWord, 'gi');
-	return sentence.replace(regex, maskedWord);
+	return sentence.replace(regex, (match) => {
+		return match.toLowerCase().endsWith('ing') ? maskedIngWord : maskedWord;
+	});
 
 }
