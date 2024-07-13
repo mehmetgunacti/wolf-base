@@ -3,6 +3,7 @@ import { UUID } from 'lib/constants/common.constant';
 import { WordLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
 import { WolfBaseDB } from '../wolfbase.database';
+import { produce } from 'immer';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
 export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> implements WordLocalRepository {
@@ -23,6 +24,7 @@ export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> im
 		const definitions: Definition[] = item.definitions ?? [];
 		if (definitions.length < 1)
 			throw Error('Create `Word`: definitions array is empty')
+
 		definitions.forEach(d => d.id = uuidv4());
 
 		const instance: Word = {
@@ -36,6 +38,24 @@ export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> im
 
 		};
 		return { ...instance, ...item, id } as Word;
+
+	}
+
+	override async update(id: UUID, item: Partial<Word>): Promise<number> {
+
+		// normally, entity IDs are set during entity creation
+		// Definition is part of Word, but is not an Entity itself
+		// new definitions can be added to 'definitions' array in Word update form
+		// => IDs have to be set manually during Word update
+		const updated: Partial<Word> = produce(
+			item,
+			draft => {
+
+				draft.definitions?.filter(d => !d.id).forEach(d => d.id = uuidv4())
+
+			}
+		);
+		return await super.update(id, updated);
 
 	}
 
