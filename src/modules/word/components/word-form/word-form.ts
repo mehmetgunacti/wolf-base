@@ -42,7 +42,7 @@ class ContextForm {
 		this.objectId = 'context_' + Math.random();
 
 		// form field
-		this.fc = new FormControl();
+		this.fc = new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
 
 		if (s)
 			this.setValue(s);
