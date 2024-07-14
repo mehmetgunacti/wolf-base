@@ -1,10 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Signal, WritableSignal, inject, signal } from '@angular/core';
 import { Quote, onEnterFadeOutTrigger, quoteChangeTrigger } from '@lib';
 import { Store } from '@ngrx/store';
-import { Observable, iif, map, of, switchMap, tap, timer } from 'rxjs';
-import { setQuotesRunning } from 'store/actions/core-ui.actions';
-import { selCore_quotesRunning } from 'store/selectors/core-ui.selectors';
-import { selQuote_array } from 'store/selectors/quote-selectors/quote-entities.selectors';
+import { setRunning } from 'store/actions/quote.actions';
+import { selQuoteViewer_quote, selQuoteViewer_running } from 'store/selectors/quote-selectors/quote-viewer.selectors';
 
 const picard: Quote = {
 
@@ -24,47 +22,25 @@ const picard: Quote = {
 })
 export class QuoteViewerComponent {
 
+	protected PICARD = picard;
+
 	private store: Store = inject(Store);
 
-	running$: Observable<boolean>;
-	quote$: Observable<Quote | null>;
-	timer$: Observable<number>;
+	quote: Signal<Quote | null> = this.store.selectSignal(selQuoteViewer_quote);
+	running: Signal<boolean> = this.store.selectSignal(selQuoteViewer_running);
+	showPlay: WritableSignal<boolean> = signal(false);
 
-	constructor() {
+	@HostListener('click')
+	setRunning(): void {
 
-		this.timer$ = timer(0, 60 * 1000); // 1 min
+		const running = this.running();
+		if (!running) { // show play icon for 2,5 seconds
 
-		const selected$: Observable<Quote | null> = this.timer$.pipe(
+			this.showPlay.set(true); // fades out 2s (css class 'play')
+			setTimeout(() => this.showPlay.set(false), 2500);
 
-			switchMap(() =>
-
-				this.store.select(selQuote_array).pipe(
-					map(list => list[Math.floor(Math.random() * list.length)]),
-					map(quote => quote ?? picard)
-				)
-
-			)
-
-		);
-
-		this.running$ = this.store.select(selCore_quotesRunning);
-		this.quote$ = this.running$.pipe(
-
-			switchMap(running => iif(
-
-				() => running,
-				selected$,
-				of(picard)
-
-			))
-
-		);
-
-	}
-
-	setRunning(running: boolean): void {
-
-		this.store.dispatch(setQuotesRunning({ running }));
+		}
+		this.store.dispatch(setRunning({ running: !this.running() }));
 
 	}
 

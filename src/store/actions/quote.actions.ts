@@ -33,7 +33,11 @@ export const loadAllRemoteMetadataSuccess	= createAction('[Quote] Load All Remot
 // export const loadTrashCount					= createAction('[Quote] Load Trash Count');
 // export const loadTrashCountSuccess			= createAction('[Quote] Load Trash Count Success', props<{ count: number }>());
 
-// UI
+// Viewer
+export const changeQuote					= createAction('[Quote Viewer] Change Quote', props<{ id: UUID }>());
+export const setRunning						= createAction('[Quote Viewer] Set Running', props<{ running: boolean }>());
+
+// Settings
 export const setSelectedId					= createAction('[Quote] Set Selected Id', props<{ id: UUID | null }>());
 
 // CLOUD SYNC

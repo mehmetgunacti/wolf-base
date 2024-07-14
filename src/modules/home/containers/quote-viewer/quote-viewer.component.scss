@@ -3,6 +3,17 @@
 @import 'components';
 @import 'mixins';
 
+@keyframes fadeOut {
+
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+
+}
+
 :host {
 
 	display			: flex;
@@ -12,12 +23,44 @@
 	@include mx-component(3);
 	@include mx-box-shadow;
 
-	// & > [quote_icon] { }
+	& > [quote_icon_container] {
+
+		& > [quote_icon] {
+
+			position	: relative;
+
+			& > [quote_badge] {
+
+				position		: absolute;
+				right			: -6px;
+				bottom			: 5px;
+				line-height		: 0.5;
+				font-size		: 1.5rem;
+				color			: fn-hsl(accent);
+
+				&.paused {
+
+					color		: fn-hsl(warn);
+
+				}
+
+				&.play {
+
+					animation: fadeOut 2s forwards;
+
+				}
+
+			}
+
+		}
+
+	}
 
 	& > [quote_outer] {
 
 		flex		: 1;
 		@include mx-flex-center-center;
+		cursor		: pointer;
 
 		& > [quote_inner] {
 
@@ -45,30 +88,6 @@
 				padding		: 0 var(--gap-xs);
 
 			}
-
-		}
-
-	}
-
-	& > [overlay] {
-
-		// display			: flex;
-		// justify-content	: end;
-		@include mx-flex-center-center;
-
-		position		: absolute;
-		top				: 0;
-		left			: 0;
-		right			: 0;
-		bottom			: 0;
-		opacity			: 0;
-
-		padding			: var(--gap-sm);
-		cursor			: pointer;
-
-		& > span {
-
-			transform	: scale(2);
 
 		}
 

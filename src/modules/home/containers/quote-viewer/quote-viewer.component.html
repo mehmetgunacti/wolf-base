@@ -1,9 +1,25 @@
-<div quote_icon>
-	<span class="material-symbols-outlined">format_quote</span>
+<div quote_icon_container>
+
+	<div quote_icon>
+
+		<span class="material-symbols-outlined">format_quote</span>
+		@if (!running()) {
+
+			<span class="material-symbols-outlined paused" quote_badge>pause_circle</span>
+
+		}
+		@if (showPlay()) {
+
+			<span class="material-symbols-outlined play" quote_badge>play_circle</span>
+
+		}
+
+	</div>
+
 </div>
 <div quote_outer>
 
-	@if (quote$ | async; as quote) {
+	@if (quote() ?? PICARD; as quote) {
 
 		<div quote_inner [@quoteChange]="quote.id">
 
@@ -16,21 +32,3 @@
 	}
 
 </div>
-
-@if (running$ | async; as running) {
-
-	<div overlay (click)="setRunning(false)" @fadeOut>
-
-		<span class="material-symbols-outlined">play_circle</span>
-
-	</div>
-
-} @else {
-
-	<div overlay (click)="setRunning(true)" @fadeOut>
-
-		<span class="material-symbols-outlined">pause_circle</span>
-
-	</div>
-
-}

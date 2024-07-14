@@ -96,6 +96,7 @@ import { QuizEntryEntityMoveToTrashEffects } from './effects/quiz-entry-effects/
 import { QuizEntryLoadEffects } from './effects/quiz-entry-effects/quiz-entry-load.effects';
 import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.reducer';
 import { QuizUIEffects } from './effects/quiz-entry-effects/quiz-ui.effects';
+import { QuoteViewerEffects } from './effects/quote-effects/quote-viewer.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -240,6 +241,8 @@ export const effects = [
 	QuoteEntityMoveToTrashEffects,
 
 	QuoteLoadEffects,
+
+	QuoteViewerEffects,
 
 	// Database
 	DatabaseEffects,

@@ -10,9 +10,16 @@ export const selQuote_EntitiesState = createSelector(
 
 );
 
-export const selQuote_UIState = createSelector(
+export const selQuote_SettingsState = createSelector(
 
 	selQuote_ModuleState,
-	state => state.ui
+	state => state.settings
+
+);
+
+export const selQuote_ViewerState = createSelector(
+
+	selQuote_ModuleState,
+	state => state.viewer
 
 );
