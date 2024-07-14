@@ -88,4 +88,26 @@
 
 	}
 
+	& > [quiz_empty_header] {
+
+		@include mx-component(3);
+		@include mx-box-shadow;
+		display		: flex;
+
+		& > [quiz_icon] {
+
+			display		: flex;
+
+		}
+
+		& > [quiz_question] {
+
+			flex	: 1;
+			@include mx-flex-center-center;
+			gap		: var(--gap-sm);
+
+		}
+
+	}
+
 }
