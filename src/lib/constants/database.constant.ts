@@ -23,6 +23,18 @@ export enum LocalRepositoryNames {
 	note_content_remote = 'note_content_remote',
 	note_content_trash = 'note_content_trash',
 
+	// quiz entries
+	quiz_entries = 'quiz_entries',
+	quiz_entries_sync = 'quiz_entries_sync',
+	quiz_entries_remote = 'quiz_entries_remote',
+	quiz_entries_trash = 'quiz_entries_trash',
+
+	// quotes
+	quotes = 'quotes',
+	quotes_sync = 'quotes_sync',
+	quotes_remote = 'quotes_remote',
+	quotes_trash = 'quotes_trash',
+
 	// words
 	words = 'words',
 	words_sync = 'words_sync',

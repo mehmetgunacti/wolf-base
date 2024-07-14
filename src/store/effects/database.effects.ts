@@ -64,6 +64,24 @@ export class DatabaseEffects {
 				this.localRepository.count(LocalRepositoryNames.note_content_trash),
 				this.localRepository.size(LocalRepositoryNames.note_content_trash),
 
+				this.localRepository.count(LocalRepositoryNames.quiz_entries),
+				this.localRepository.size(LocalRepositoryNames.quiz_entries),
+				this.localRepository.count(LocalRepositoryNames.quiz_entries_sync),
+				this.localRepository.size(LocalRepositoryNames.quiz_entries_sync),
+				this.localRepository.count(LocalRepositoryNames.quiz_entries_remote),
+				this.localRepository.size(LocalRepositoryNames.quiz_entries_remote),
+				this.localRepository.count(LocalRepositoryNames.quiz_entries_trash),
+				this.localRepository.size(LocalRepositoryNames.quiz_entries_trash),
+
+				this.localRepository.count(LocalRepositoryNames.quotes),
+				this.localRepository.size(LocalRepositoryNames.quotes),
+				this.localRepository.count(LocalRepositoryNames.quotes_sync),
+				this.localRepository.size(LocalRepositoryNames.quotes_sync),
+				this.localRepository.count(LocalRepositoryNames.quotes_remote),
+				this.localRepository.size(LocalRepositoryNames.quotes_remote),
+				this.localRepository.count(LocalRepositoryNames.quotes_trash),
+				this.localRepository.size(LocalRepositoryNames.quotes_trash),
+
 				this.localRepository.count(LocalRepositoryNames.words),
 				this.localRepository.size(LocalRepositoryNames.words),
 				this.localRepository.count(LocalRepositoryNames.words_sync),
@@ -106,7 +124,7 @@ export class DatabaseEffects {
 						trash: { count: arr[24], size: arr[25] }
 
 					},
-					words: {
+					quizEntries: {
 
 						entities: { count: arr[26], size: arr[27] },
 						syncData: { count: arr[28], size: arr[29] },
@@ -114,7 +132,23 @@ export class DatabaseEffects {
 						trash: { count: arr[32], size: arr[33] }
 
 					},
-					logs: { count: arr[34], size: arr[35] }
+					quotes: {
+
+						entities: { count: arr[34], size: arr[35] },
+						syncData: { count: arr[36], size: arr[37] },
+						remoteData: { count: arr[38], size: arr[39] },
+						trash: { count: arr[40], size: arr[41] }
+
+					},
+					words: {
+
+						entities: { count: arr[42], size: arr[43] },
+						syncData: { count: arr[44], size: arr[45] },
+						remoteData: { count: arr[46], size: arr[47] },
+						trash: { count: arr[48], size: arr[49] }
+
+					},
+					logs: { count: arr[50], size: arr[51] }
 
 				};
 				return report;

@@ -167,6 +167,51 @@
 		<legend>
 
 				<!-- Notes -->
+				<span class="material-symbols-outlined">format_quote</span>
+				<span> Quotes</span>
+
+		</legend>
+
+		<main>
+
+			<table>
+
+				<tr>
+					<td><strong>Entities</strong></td>
+					<td>{{ report.quotes.entities.count }}</td>
+					<td>{{ report.quotes.entities.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Sync Data</strong></td>
+					<td>{{ report.quotes.syncData.count }}</td>
+					<td>{{ report.quotes.syncData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Remote Data</strong></td>
+					<td>{{ report.quotes.remoteData.count }}</td>
+					<td>{{ report.quotes.remoteData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Trash</strong></td>
+					<td>{{ report.quotes.trash.count }}</td>
+					<td>{{ report.quotes.trash.size | formatBytes }}</td>
+				</tr>
+
+			</table>
+
+		</main>
+
+	</fieldset>
+
+
+	<fieldset>
+
+		<legend>
+
+				<!-- Notes -->
 				<span class="material-symbols-outlined">dictionary</span>
 				<span> Words</span>
 
@@ -198,6 +243,50 @@
 					<td><strong>Trash</strong></td>
 					<td>{{ report.words.trash.count }}</td>
 					<td>{{ report.words.trash.size | formatBytes }}</td>
+				</tr>
+
+			</table>
+
+		</main>
+
+	</fieldset>
+
+	<fieldset>
+
+		<legend>
+
+				<!-- Notes -->
+				<span class="material-symbols-outlined">trending_up</span>
+				<span> Quiz Progress</span>
+
+		</legend>
+
+		<main>
+
+			<table>
+
+				<tr>
+					<td><strong>Entities</strong></td>
+					<td>{{ report.quizEntries.entities.count }}</td>
+					<td>{{ report.quizEntries.entities.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Sync Data</strong></td>
+					<td>{{ report.quizEntries.syncData.count }}</td>
+					<td>{{ report.quizEntries.syncData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Remote Data</strong></td>
+					<td>{{ report.quizEntries.remoteData.count }}</td>
+					<td>{{ report.quizEntries.remoteData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Trash</strong></td>
+					<td>{{ report.quizEntries.trash.count }}</td>
+					<td>{{ report.quizEntries.trash.size | formatBytes }}</td>
 				</tr>
 
 			</table>
