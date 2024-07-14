@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { DefinitionLanguage, DefinitionType, NUMBER_OF_CHOICES, Quiz, QuizProgress, UUID, Word } from '@lib';
+import { NUMBER_OF_CHOICES, Quiz, QuizProgress, UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { produce } from "immer";
 import { combineLatest, Observable, timer } from 'rxjs';
@@ -83,7 +83,7 @@ export class QuizService {
 
 				const question = map[progress.id];
 				if (!question)
-					throw Error('progress.id not found in map');
+					return null;
 
 				const result: Word[] = [question]; // first entry is the question, rest are choices
 

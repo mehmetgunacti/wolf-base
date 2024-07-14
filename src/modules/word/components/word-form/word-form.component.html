@@ -30,8 +30,8 @@
 
 			<!-- CONTEXTS -->
 			<div context>
-				<w-textarea [control]="context.fc" [name]="'Context #' + ($index + 1)" [rows]="3"/>
 
+				<w-textarea [control]="context.fc" [name]="'Context #' + ($index + 1)" [rows]="3"/>
 				<button
 					type="button"
 					class="icon-only small"
@@ -62,27 +62,58 @@
 
 				<div definition>
 
-					<!-- NAME -->
-					<div>
-						<w-input [control]="definition.name" name="Meaning"/>
-					</div>
-
-					<!-- LANGUAGE -->
-					<div>
-						<w-select [control]="definition.language" name="Language" [nodes]="DEFINITION_LANGUAGES"/>
-					</div>
-
 					<!-- TYPE -->
 					<div>
 						<w-select [control]="definition.type" name="Type" [nodes]="DEFINITION_TYPES"/>
 					</div>
 
+					@for (lang of definition.languages(); track lang.objectId) {
+
+						<!-- LANGUAGES -->
+						<div language>
+
+							<!-- LANGUAGE -->
+							<div>
+								<w-select [control]="lang.language" name="Language" [nodes]="DEFINITION_LANGUAGES"/>
+							</div>
+
+							<!-- NAME -->
+							<div>
+								<w-input [control]="lang.name" name="Meaning"/>
+							</div>
+
+							@if($index < 1) {
+
+								<button
+									type="button"
+									class="icon-only small"
+									title="Add Language"
+									(click)="definition.addLanguage()">
+									<span class="material-symbols-outlined success">add_circle</span>
+								</button>
+
+							} @else {
+
+								<button
+									type="button"
+									class="icon-only small"
+									[title]="'Remove Language #' + ($index + 1)"
+									(click)="definition.removeLanguage(lang.objectId)">
+									<span class="material-symbols-outlined warn">do_not_disturb_on</span>
+								</button>
+
+							}
+
+						</div>
+
+					}
+
 					@for (sample of definition.samples(); track sample.objectId) {
 
 						<!-- SAMPLES -->
 						<div sample>
-							<w-textarea [control]="sample.fc" [name]="'Sample #' + ($index + 1)" [rows]="3"/>
 
+							<w-textarea [control]="sample.fc" [name]="'Sample #' + ($index + 1)" [rows]="3"/>
 							@if($index < 1) {
 
 								<button

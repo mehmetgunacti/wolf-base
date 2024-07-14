@@ -65,20 +65,35 @@
 
 			& div[definition] {
 
-				display					: grid;
-				grid-template-columns	: 1fr 1fr;
+				@include mx-flex-column;
+				// grid-template-columns	: 1fr 1fr;
 				grid-gap				: var(--gap-sm);
 
-				& div:first-child,
-				& div[sample] {
+				// & div:first-child,
+				// & div[language]
+				// & div[sample] {
 
-					grid-column: span 2;
+				// 	grid-column: span 2;
+
+				// }
+
+				& div[language] {
+
+					display		: flex;
+					grid-gap	: var(--gap-sm);
+
+					& div:nth-child(2) {
+
+						flex		: 1;
+
+					}
 
 				}
 
 				& div[sample] {
 
 					display		: flex;
+					grid-gap	: var(--gap-sm);
 
 					& *:first-child {
 

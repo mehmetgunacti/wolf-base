@@ -36,11 +36,15 @@
 
 	@for (definition of word.definitions; track $index) {
 
-		<!-- <h6 definition>Definition #{{ $index + 1}}</h6> -->
 		<div definition>
 
-			<small><img class="flag" [src]="'assets/flags/' + definition.language + '.svg'"> {{ definition.type | defType }}</small>
-			<h3>{{ definition.name }}</h3>
+			<small>{{ definition.type | defType }}</small>
+
+			<div language>
+
+				<app-languages [languages]="definition.languages"/>
+
+			</div>
 
 			@for (sample of definition.samples; track $index) {
 

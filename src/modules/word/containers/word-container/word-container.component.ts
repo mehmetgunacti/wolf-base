@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Definition, UUID, Word } from '@lib';
+import { Definition, definitionName, UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as wordActions from 'store/actions/word.actions';
@@ -40,9 +40,9 @@ export class WordContainerComponent {
 
 	}
 
-	onCancel(definition: Definition): void {
+	onCancelSchedule(definition: Definition): void {
 
-		this.store.dispatch(quizEntryActions.moveToTrash({ entry: definition }));
+		this.store.dispatch(quizEntryActions.moveToTrash({ entry: { id: definition.id, name: definitionName(definition) } }));
 
 	}
 

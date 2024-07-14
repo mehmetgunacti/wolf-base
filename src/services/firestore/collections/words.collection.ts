@@ -1,5 +1,5 @@
 import { FIRESTORE_VALUE, FirestoreConverter, WolfEntity } from '@lib';
-import { FirestoreConfig, Word, Definition } from 'lib/models';
+import { FirestoreConfig, Word, Definition, Language } from 'lib/models';
 import { WordsRemoteRepository } from 'lib/repositories/remote/word-remote.repository';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
@@ -17,18 +17,74 @@ export class WordsFirestoreCollectionImpl extends FirestoreRemoteStorageCollecti
 
 }
 
+class WordLanguageFirestoreConverter implements FirestoreConverter<Language> {
+
+	toFirestore(item: Language): Record<keyof Language, FIRESTORE_VALUE> {
+
+		const fields = {} as Record<keyof Language, FIRESTORE_VALUE>;
+		fields['name'] = { stringValue: item.name };
+		fields['language'] = { stringValue: item.language };
+		return fields;
+
+	}
+
+	fromFirestore(item: Language): Language {
+
+		// validate incoming
+		let { name, language } = item;
+
+		if (!name)
+			throw new Error(`Firestore WordLanguage: invalid 'name' value`);
+
+		if (!language)
+			throw new Error(`Firestore WordLanguage: invalid 'language' value`);
+
+		const validated: Language = {
+
+			name,
+			language
+
+		};
+		return validated;
+
+	}
+
+	toUpdateMask(item: Partial<Language>): string {
+
+		// exclude some fields like id, ... from update list
+		// (empty string would delete string on server)
+
+		const fields = new Set<string>();
+
+		if (item.name)
+			fields.add('name');
+
+		if (item.language)
+			fields.add('language');
+
+		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
+
+	}
+
+}
+
 class WordDefinitionFirestoreConverter implements FirestoreConverter<Definition> {
+
+	languageConverter: WordLanguageFirestoreConverter = new WordLanguageFirestoreConverter();
 
 	toFirestore(item: Definition): Record<keyof Definition, FIRESTORE_VALUE> {
 
 		const fields = {} as Record<keyof Definition, FIRESTORE_VALUE>;
 
 		fields['id'] = { stringValue: item.id };
-		fields['name'] = { stringValue: item.name };
-		fields['language'] = { stringValue: item.language };
+		// fields['name'] = { stringValue: item.name };
+		// fields['language'] = { stringValue: item.language };
 		fields['type'] = { stringValue: item.type };
 		fields['samples'] = {
 			arrayValue: { values: item.samples.map(s => ({ stringValue: s })) }
+		};
+		fields['languages'] = {
+			arrayValue: { values: item.languages.map(d => ({ mapValue: { fields: this.languageConverter.toFirestore(d) } })) }
 		};
 		return fields;
 
@@ -37,16 +93,13 @@ class WordDefinitionFirestoreConverter implements FirestoreConverter<Definition>
 	fromFirestore(item: Definition): Definition {
 
 		// validate incoming
-		let { id, name, language, type, samples } = item;
+		let { id, languages, type, samples } = item;
 
 		if (!id)
 			throw new Error(`Firestore WordDefinition: invalid 'id' value`);
 
-		if (!name)
-			throw new Error(`Firestore WordDefinition: invalid 'name' value`);
-
-		if (!language)
-			throw new Error(`Firestore WordDefinition: invalid 'language' value`);
+		if (!Array.isArray(languages))
+			throw new Error(`Firestore WordDefinition: invalid 'languages' value`);
 
 		if (!type)
 			throw new Error(`Firestore WordDefinition: invalid 'type' value`);
@@ -57,8 +110,7 @@ class WordDefinitionFirestoreConverter implements FirestoreConverter<Definition>
 		const validated: Definition = {
 
 			id,
-			name,
-			language,
+			languages,
 			type,
 			samples
 
@@ -77,11 +129,8 @@ class WordDefinitionFirestoreConverter implements FirestoreConverter<Definition>
 		if (item.id)
 			fields.add('id');
 
-		if (item.name)
-			fields.add('name');
-
-		if (item.language)
-			fields.add('language');
+		if (item.languages)
+			fields.add('languages');
 
 		if (item.type)
 			fields.add('type');

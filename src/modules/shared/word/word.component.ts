@@ -14,14 +14,14 @@ export class WordComponent {
 	schedulable = input<boolean, boolean | null>(true, { transform: s => s === null ? true : s });
 
 	@Output() schedule: EventEmitter<Definition> = new EventEmitter();
-	@Output() cancel: EventEmitter<Definition> = new EventEmitter();
+	@Output() cancelSchedule: EventEmitter<Definition> = new EventEmitter();
 
 	onSchedule(definition: Definition, checked: boolean): void {
 
 		if (checked)
 			this.schedule.emit(definition);
 		else
-			this.cancel.emit(definition);
+			this.cancelSchedule.emit(definition);
 
 	}
 

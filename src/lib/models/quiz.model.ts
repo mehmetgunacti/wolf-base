@@ -1,7 +1,7 @@
 import { DefinitionType, Progress, UUID } from 'lib/constants';
 import { Entity } from './entity.model';
 import { NameBase } from './id-base.model';
-import { Word } from './word.model';
+import { Definition, definitionName, Word } from './word.model';
 import { maskOrHighlight } from 'lib/utils';
 
 export interface QuizProgress extends Entity {
@@ -14,10 +14,13 @@ export interface QuizProgress extends Entity {
 export class Quiz {
 
 	askWord: boolean;
+	isVerb: boolean;
 
-	question: NameBase;
+	word: Word;
+	definition: Definition;
+	// question: NameBase;
 	pronunciation: string | null;
-	choices: NameBase[];
+	choices: Word[];
 
 	contexts: string[];
 	samples: string[];
@@ -30,15 +33,18 @@ export class Quiz {
 
 		const word = words[0];
 		const definition = word.definitions[0];
-		const isVerb = definition.type === DefinitionType.verb;
+
+		this.word = word;
+		this.definition = definition;
+		this.isVerb = definition.type === DefinitionType.verb;
 
 		// prepare question
-		this.question = {
+		// this.question = {
 
-			id: definition.id,
-			name: `(${definition.type}) ` + (askWord ? (isVerb ? 'to ' : ' ') + word.name : definition.name)
+		// 	id: definition.id,
+		// 	name: `(${definition.type}) ` + (askWord ? (isVerb ? 'to ' : ' ') + word.name : definitionName(definition))
 
-		};
+		// };
 
 		// set pronunciation
 		this.pronunciation = word.pronunciation;
@@ -56,21 +62,21 @@ export class Quiz {
 		];
 
 		// prepare choices
-		const tmpChoices: NameBase[] = [];
-		const tmpWords = [...words].sort(() => Math.random() - 0.5); // shuffle
-		tmpWords.forEach(w => tmpChoices.push({
+		// const tmpChoices: Word[] = [];
+		// const tmpWords = [...words].sort(() => Math.random() - 0.5); // shuffle
+		// tmpWords.forEach(w => tmpChoices.push({
 
-			id: w.definitions[0].id,
-			name: askWord ? w.definitions[0].name : w.name
+		// 	id: w.definitions[0].id,
+		// 	name: askWord ? definitionName(w.definitions[0]) : w.name
 
-		}));
-		this.choices = tmpChoices;
+		// }));
+		this.choices = [...words].sort(() => Math.random() - 0.5); // shuffle
 
 	}
 
 	onRightAnswer(choiceId: UUID): boolean {
 
-		return this.question.id === choiceId;
+		return this.definition.id === choiceId;
 
 	}
 

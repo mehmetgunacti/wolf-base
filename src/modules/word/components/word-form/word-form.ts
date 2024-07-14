@@ -1,14 +1,20 @@
 import { InjectionToken, WritableSignal, signal } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Definition, UUID, Word } from '@lib';
+import { Definition, Language, UUID, Word } from '@lib';
 import { DefinitionLanguage, DefinitionType } from 'lib/constants/word.constant';
+
+interface LanguageFormSchema {
+
+	name: FormControl<string>;
+	language: FormControl<DefinitionLanguage>;
+
+}
 
 interface DefinitionFormSchema {
 
 	id: FormControl<string | null>;
-	name: FormControl<string>;
-	language: FormControl<DefinitionLanguage>;
 	type: FormControl<DefinitionType>;
+	languages: FormArray<FormGroup<LanguageFormSchema>>;
 	samples: FormArray<FormControl<string>>;
 
 }
@@ -78,6 +84,49 @@ class SampleForm {
 
 }
 
+class LanguageForm {
+
+	// to be used by @if (... track objectId)
+	readonly objectId: string;
+
+	// form fields
+	readonly name: FormControl<string>;
+	readonly language: FormControl<DefinitionLanguage>;
+
+	constructor(language?: Language) {
+
+		// object id
+		this.objectId = 'definition_' + Math.random();
+
+		// form fields
+		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
+		this.language = new FormControl<DefinitionLanguage>(DefinitionLanguage.en, { validators: [Validators.required], nonNullable: true });
+
+		if (language)
+			this.setValue(language);
+
+	}
+
+	formGroup(): FormGroup<LanguageFormSchema> {
+
+		return new FormGroup({
+
+			name: this.name,
+			language: this.language
+
+		});
+
+	}
+
+	setValue(language: Language): void {
+
+		this.name.setValue(language.name);
+		this.language.setValue(language.language);
+
+	}
+
+}
+
 class DefinitionForm {
 
 	// to be used by @if (... track objectId)
@@ -85,9 +134,8 @@ class DefinitionForm {
 
 	// form fields
 	readonly id: FormControl<UUID | null>;
-	readonly name: FormControl<string>;
-	readonly language: FormControl<DefinitionLanguage>;
 	readonly type: FormControl<DefinitionType>;
+	readonly languages: WritableSignal<LanguageForm[]>;
 	readonly samples: WritableSignal<SampleForm[]>;
 
 	constructor(definition?: Definition) {
@@ -97,15 +145,36 @@ class DefinitionForm {
 
 		// form fields
 		this.id = new FormControl<UUID | null>(null);
-		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-		this.language = new FormControl<DefinitionLanguage>(DefinitionLanguage.en, { validators: [Validators.required], nonNullable: true });
 		this.type = new FormControl<DefinitionType>(DefinitionType.noun, { validators: [Validators.required], nonNullable: true });
+
+		// languages
+		this.languages = signal([new LanguageForm()]);
 
 		// samples
 		this.samples = signal([new SampleForm()]);
 
 		if (definition)
 			this.setValue(definition);
+
+	}
+
+	addLanguage(): void {
+
+		this.languages.update(list => {
+			list.push(new LanguageForm());
+			return list;
+		});
+
+	}
+
+	removeLanguage(objectId: string): void {
+
+		this.languages.update(
+			list => {
+				list.splice(list.findIndex(s => s.objectId === objectId), 1);
+				return list;
+			}
+		);
 
 	}
 
@@ -134,9 +203,8 @@ class DefinitionForm {
 		return new FormGroup({
 
 			id: this.id,
-			name: this.name,
-			language: this.language,
 			type: this.type,
+			languages: new FormArray(this.languages().map(l => l.formGroup())),
 			samples: new FormArray(this.samples().map(s => s.fc))
 
 		});
@@ -146,10 +214,9 @@ class DefinitionForm {
 	setValue(definition: Definition): void {
 
 		this.id.setValue(definition.id);
-		this.name.setValue(definition.name);
-		this.language.setValue(definition.language);
 		this.type.setValue(definition.type);
 
+		this.languages.set(definition.languages.map(l => new LanguageForm(l)));
 		this.samples.set(definition.samples.map(s => new SampleForm(s)));
 
 	}

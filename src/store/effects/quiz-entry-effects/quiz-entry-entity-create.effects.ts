@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { LocalRepositoryService, QuizProgress } from '@lib';
+import { definitionName, LocalRepositoryService, QuizProgress } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
@@ -25,7 +25,7 @@ export class QuizEntryEntityCreateEffects {
 					this.localRepository.quizEntries.create({
 
 						id: definition.id,
-						name: definition.name
+						name: definitionName(definition)
 
 					})
 				).pipe(

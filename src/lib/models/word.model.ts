@@ -1,26 +1,18 @@
 import { UUID } from 'lib/constants';
 import { DefinitionLanguage, DefinitionType } from 'lib/constants/word.constant';
 import { Entity } from './entity.model';
-import { NameBase } from './id-base.model';
+import { IDBase } from './id-base.model';
 
-// export interface Language {
-
-// 	language: DefinitionLanguage;
-// 	name: string;
-
-// }
-
-// export interface Definition extends IDBase {
-
-// 	languages: Language[];
-// 	type: DefinitionType;
-// 	samples: string[];
-
-// }
-
-export interface Definition extends NameBase {
+export interface Language {
 
 	language: DefinitionLanguage;
+	name: string;
+
+}
+
+export interface Definition extends IDBase {
+
+	languages: Language[];
 	type: DefinitionType;
 	samples: string[];
 
@@ -38,5 +30,11 @@ export interface Word extends Entity {
 export interface WordQueryParams {
 
 	search: string | null
+
+}
+
+export function definitionName(definition: Definition): string {
+
+	return definition.languages.map(l => `(${l.language}) ${l.name}`).join(',');
 
 }
