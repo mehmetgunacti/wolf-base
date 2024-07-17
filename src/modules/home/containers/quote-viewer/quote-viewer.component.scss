@@ -16,12 +16,13 @@
 
 :host {
 
+	@include mx-component(3);
+	@include mx-box-shadow;
 	display			: flex;
 	position		: relative;
 	min-height		: 2 * $header-height;
+	padding-inline	: var(--gap-lg);
 
-	@include mx-component(3);
-	@include mx-box-shadow;
 
 	& > [quote_icon_container] {
 
