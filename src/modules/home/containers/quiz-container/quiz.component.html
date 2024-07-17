@@ -11,12 +11,13 @@
 			</div>
 			<div quiz_question [@quoteChange]="quiz.definition.id">
 
+				<small>({{quiz.definition.type}})</small>
 				@if (quiz.askWord) {
 
 					@if (quiz.isVerb) { to } {{ quiz.word.name }}
 					@if (quiz.pronunciation) {
 
-						<small>{{ quiz.pronunciation }}</small>
+						<br><small>{{ quiz.pronunciation }}</small>
 
 					}
 
@@ -50,11 +51,19 @@
 		</div>
 		<div quiz_samples>
 
-			@for (sample of quiz.samples; track $index) {
+			<blockquote class="small">
 
-				<blockquote [innerHTML]="sample"></blockquote>
+				<ul class="clear">
 
-			}
+					@for (sample of quiz.samples; track $index) {
+
+						<li [innerHTML]="sample"></li>
+
+					}
+
+				</ul>
+
+			</blockquote>
 
 		</div>
 
@@ -71,11 +80,7 @@
 
 				@if (quiz.askWord) {
 
-					<div quiz_def_lang>
-
-						<app-languages [languages]="choice.definitions[0].languages" />
-
-					</div>
+					<app-languages [languages]="choice.definitions[0].languages" />
 
 				} @else {
 

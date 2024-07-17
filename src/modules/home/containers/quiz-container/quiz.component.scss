@@ -12,6 +12,7 @@
 
 		@include mx-component(3);
 		@include mx-box-shadow;
+		padding-inline	: var(--gap-lg);
 
 		& > [quiz_question_wrapper] {
 
@@ -26,7 +27,8 @@
 
 				flex		: 1;
 				@include mx-h5;
-				@include mx-flex-column-center;
+				@include mx-flex-center-center;
+				gap		: var(--gap-sm);
 
 			}
 
@@ -36,6 +38,7 @@
 
 			display		: grid;
 			font-size	: smaller;
+			padding		: var(--gap-sm) var(--gap-xl);
 
 		}
 
