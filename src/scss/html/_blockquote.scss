@@ -11,6 +11,13 @@ blockquote {
 
 	}
 
+	&.small {
+
+		padding		: var(--gap-sm) var(--gap-xl);
+    	margin		: var(--gap-xxs) 0;
+
+	}
+
 	&.primary {
 
 		color			: inherit !important;
