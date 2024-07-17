@@ -2,7 +2,7 @@ mark {
 
 	font-style			: italic;
 	font-weight			: bold;
-	padding-inline		: var(--gap-xs) var(--gap-sm);
+	padding-inline		: var(--gap-xs);
 	color				: fn-hsl(text);
 	background-color	: fn-hsl(accent);
 	border-radius		: var(--border-radius-xs);
