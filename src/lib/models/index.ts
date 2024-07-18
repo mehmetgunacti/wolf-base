@@ -8,6 +8,7 @@ export * from './id-base.model';
 export * from './log.model';
 export * from './menu.model';
 export * from './note.model';
+export * from './project.model';
 export * from './quiz.model';
 export * from './quote.model';
 export * from './remote.model';
