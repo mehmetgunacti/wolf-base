@@ -1,0 +1,75 @@
+@if (project$ | async; as project) {
+
+	<w-portal>
+
+		<button
+			class="icon-only"
+			[cdkMenuTriggerFor]="menu">
+			<span class="material-symbols-outlined">menu_open</span>
+		</button>
+
+		<ng-template #menu>
+
+			<div class="menu" cdkMenu>
+
+				<button
+					cdkMenuItem
+					class="icon-only align-left"
+					[routerLink]="['/projects', project.id, 'edit' ]">
+					<span class="material-symbols-outlined">edit</span> Edit Project
+				</button>
+
+				<a
+					cdkMenuItem
+					class="button icon-only align-left"
+					[href]="'https://www.google.com/search?q=' + project.name"
+					target="_blank">
+					<span class="material-symbols-outlined">search</span> Google <sup><span class="material-symbols-outlined small">open_in_new</span></sup>
+				</a>
+
+				<hr>
+
+				<button
+					cdkMenuItem
+					class="icon-only align-left"
+					[routerLink]="['/logs', project.id]">
+					<span class="material-symbols-outlined">history</span> View Logs
+				</button>
+
+				<button
+					cdkMenuItem
+					class="icon-only align-left"
+					(click)="onRemove(project.id)">
+					<span class="material-symbols-outlined">delete</span> Remove Project
+				</button>
+
+			</div>
+
+		</ng-template>
+
+	</w-portal>
+
+	<app-project
+		[project]="project"
+		[scheduledIds]="scheduledIds$ | async"
+		(schedule)="onSchedule($event)"
+		(cancelSchedule)="onCancelSchedule($event)"/>
+
+} @else {
+
+	<div class="card darker">
+
+		<div class="empty">
+
+			<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No project available</span>
+			<button
+				class="icon-only"
+				[routerLink]="['/projects', 'new' ]">
+				<span class="material-symbols-outlined">post_add</span> Add Project
+			</button>
+
+		</div>
+
+	</div>
+
+}

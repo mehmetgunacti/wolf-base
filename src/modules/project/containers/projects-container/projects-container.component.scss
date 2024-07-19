@@ -1,0 +1,44 @@
+@import 'helper';
+@import 'variables';
+@import 'mixins';
+@import 'components';
+
+:host{
+
+	@include mx-card;
+
+	& > [project_entries] {
+
+		@include mx-scrollable(calc(100dvh - 4 * #{$header-height}));
+
+		& > a {
+
+			@extend %flex-column;
+			padding				: var(--gap);
+			border-radius		: var(--border-radius-sm);
+			text-decoration		: none;
+			transition			: $bg-transition;
+
+			& > small {
+
+				color				: fn-hsl(text-secondary);
+
+			}
+
+			&:hover {
+
+				background-color	: fn-hsl(bg-3, (lig: "- 2%", alp: "- 0.4"));
+
+			}
+
+			&:focus-visible {
+
+				@include mx-outline;
+
+			}
+
+		}
+
+	}
+
+}

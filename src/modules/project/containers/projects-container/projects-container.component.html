@@ -1,0 +1,38 @@
+@if (projects$ | async; as projects) {
+
+	<header>
+
+		<div card_title>Projects <small>{{ projects.length }} Entries</small></div>
+
+	</header>
+
+	@if (projects.length > 0) {
+
+		<div project_entries>
+
+			@for (project of projects; track $index) {
+
+				<a [routerLink]="['/projects', project.id]" tabindex="0">
+
+					<span>{{ project.name }}</span>
+					<small>{{ project.definitions.length }} definition{{ project.definitions.length > 1 ? 's' : '' }}</small>
+
+				</a>
+
+			}
+
+		</div>
+
+	} @else {
+
+		<div class="empty">
+			No projects available
+			<br>
+			<button routerLink="/projects/new" class="icon-only">
+				<span class="material-symbols-outlined">add</span> Add Project
+			</button>
+		</div>
+
+	}
+
+}

@@ -1,0 +1,15 @@
+@if(project$ | async; as project) {
+
+	<w-portal>
+
+		<button
+			class="icon-only"
+			[routerLink]="['/projects', project.id ]">
+			<span class="material-symbols-outlined">cancel</span> Cancel
+		</button>
+
+	</w-portal>
+
+	<app-project-form [project]="project" (update)="onUpdate($event.id, $event.project)"/>
+
+}
