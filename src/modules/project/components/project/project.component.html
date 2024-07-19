@@ -1,0 +1,26 @@
+@if (project(); as project) {
+
+	<h1>
+
+		{{ project.name }}
+
+	</h1>
+
+	<div>ID</div><div>{{ project.id }}</div>
+	<div>name</div><div>{{ project.name }}</div>
+	<div>description</div><div>{{ project.description }}</div>
+	<div>status</div><div>{{ project.status }}</div>
+	<div>start</div><div>{{ project.start }}</div>
+	<div>end</div><div>{{ project.end }}</div>
+
+	@for (taskGroup of project.taskGroups; track $index) {
+
+		<div>Name</div><div>{{ taskGroup.name }}</div>
+
+	}
+
+} @else {
+
+	no project
+
+}

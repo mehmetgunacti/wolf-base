@@ -1,5 +1,5 @@
 import { Entity, EntityName, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
-import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository, NotesLocalRepository, QuoteLocalRepository, WordLocalRepository } from 'lib/repositories/local';
+import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository, NotesLocalRepository, ProjectLocalRepository, QuoteLocalRepository, WordLocalRepository } from 'lib/repositories/local';
 import { DexieBookmarksRepositoryImpl, DexieConfigurationRepositoryImpl, DexieLogsLocalRepositoryImpl, DexieQuotesRepositoryImpl } from './tables';
 import { DexieNoteContentRepositoryImpl } from './tables/notes-content.table';
 import { DexieNotesRepositoryImpl } from './tables/notes.table';
@@ -7,31 +7,34 @@ import { DexieWordsRepositoryImpl } from './tables/words.table';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
 import { QuizEntryLocalRepository } from 'lib/repositories/local/quiz-entry.repository';
 import { DexieQuizEntriesRepositoryImpl } from './tables/quiz-entries.table';
+import { DexieProjectsRepositoryImpl } from './tables/projects.table';
 
 export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 	private db: WolfBaseDB;
 
 	bookmarks: BookmarksLocalRepository;
-	notes: NotesLocalRepository;
-	noteContent: NoteContentLocalRepository;
-	words: WordLocalRepository;
-	quizEntries: QuizEntryLocalRepository;
-	quotes: QuoteLocalRepository;
 	configuration: ConfigurationLocalRepository;
 	logs: LogsLocalRepository;
+	notes: NotesLocalRepository;
+	noteContent: NoteContentLocalRepository;
+	projects: ProjectLocalRepository;
+	quizEntries: QuizEntryLocalRepository;
+	quotes: QuoteLocalRepository;
+	words: WordLocalRepository;
 
 	constructor() {
 
 		const db: WolfBaseDB = wolfBaseDBFactory();
 		this.bookmarks = new DexieBookmarksRepositoryImpl(db);
-		this.notes = new DexieNotesRepositoryImpl(db);
-		this.noteContent = new DexieNoteContentRepositoryImpl(db);
-		this.words = new DexieWordsRepositoryImpl(db);
-		this.quizEntries = new DexieQuizEntriesRepositoryImpl(db);
-		this.quotes = new DexieQuotesRepositoryImpl(db);
 		this.configuration = new DexieConfigurationRepositoryImpl(db);
 		this.logs = new DexieLogsLocalRepositoryImpl(db);
+		this.notes = new DexieNotesRepositoryImpl(db);
+		this.noteContent = new DexieNoteContentRepositoryImpl(db);
+		this.projects = new DexieProjectsRepositoryImpl(db);
+		this.quizEntries = new DexieQuizEntriesRepositoryImpl(db);
+		this.quotes = new DexieQuotesRepositoryImpl(db);
+		this.words = new DexieWordsRepositoryImpl(db);
 		this.db = db;
 
 	}
@@ -43,9 +46,10 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 			case WolfEntity.bookmark.name: return this.bookmarks as unknown as EntityLocalRepository<T>;
 			case WolfEntity.note.name: return this.notes as unknown as EntityLocalRepository<T>;
 			case WolfEntity.note_content.name: return this.noteContent as unknown as EntityLocalRepository<T>;
-			case WolfEntity.word.name: return this.words as unknown as EntityLocalRepository<T>;
-			case WolfEntity.quote.name: return this.quotes as unknown as EntityLocalRepository<T>;
+			case WolfEntity.project.name: return this.projects as unknown as EntityLocalRepository<T>;
 			case WolfEntity.quizEntry.name: return this.quizEntries as unknown as EntityLocalRepository<T>;
+			case WolfEntity.quote.name: return this.quotes as unknown as EntityLocalRepository<T>;
+			case WolfEntity.word.name: return this.words as unknown as EntityLocalRepository<T>;
 
 		}
 		throw Error('Unknown entity');

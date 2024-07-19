@@ -32,18 +32,6 @@
 
 		}
 
-		& div[context] {
-
-			display		: flex;
-
-			& *:first-child {
-
-				flex	: 1;
-
-			}
-
-		}
-
 		& > fieldset {
 
 			position	: relative;
@@ -63,45 +51,10 @@
 
 			}
 
-			& div[definition] {
+			& div[task_group] {
 
 				@include mx-flex-column;
-				// grid-template-columns	: 1fr 1fr;
-				grid-gap				: var(--gap-sm);
-
-				// & div:first-child,
-				// & div[language]
-				// & div[sample] {
-
-				// 	grid-column: span 2;
-
-				// }
-
-				& div[language] {
-
-					display		: flex;
-					grid-gap	: var(--gap-sm);
-
-					& div:nth-child(2) {
-
-						flex		: 1;
-
-					}
-
-				}
-
-				& div[sample] {
-
-					display		: flex;
-					grid-gap	: var(--gap-sm);
-
-					& *:first-child {
-
-						flex	: 1;
-
-					}
-
-				}
+				grid-gap		: var(--gap-sm);
 
 			}
 
@@ -114,19 +67,5 @@
 		@include mx-flex-end-center;
 
 	}
-
-	// div[form-element-buttons] {
-
-	// 	flex				: 1;
-	// 	@extend %flex-space-between-center;
-	// 	padding				: var(--gap-xs);
-
-	// 	& button:last-child {
-
-	// 		margin-left		: auto;
-
-	// 	}
-
-	// }
 
 }

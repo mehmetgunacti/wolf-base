@@ -17,135 +17,55 @@
 			<w-input [control]="form.name" name="Term"/>
 		</div>
 
-		<!-- PRONUNCIATION -->
+		<!-- DESCRIPTION -->
 		<div>
-			<w-input [control]="form.pronunciation" name="Pronunciation"/>
+			<w-input [control]="form.description" name="Description"/>
 		</div>
 
+		<!-- STATUS -->
 		<div>
-			<button type="button" (click)="form.addContext()">Add Context</button>
+			<w-select [control]="form.status" name="Status" [nodes]="PROJECT_STATUS"/>
 		</div>
 
-		@for (context of form.contexts(); track context.objectId) {
+		<!-- START -->
+		<div>
+			<w-input [control]="form.start" name="Start" type="date"/>
+		</div>
 
-			<!-- CONTEXTS -->
-			<div context>
+		<!-- END -->
+		<div>
+			<w-input [control]="form.end" name="End" type="date"/>
+		</div>
 
-				<w-textarea [control]="context.fc" [name]="'Context #' + ($index + 1)" [rows]="3"/>
-				<button
-					type="button"
-					class="icon-only small"
-					[title]="'Remove Sample #' + ($index + 1)"
-					(click)="form.removeContext(context.objectId)">
-					<span class="material-symbols-outlined warn">do_not_disturb_on</span>
-				</button>
-
-			</div>
-
-		}
-
-		@for (definition of form.definitions(); track definition.objectId) {
+		@for (taskGroup of form.taskGroups(); track taskGroup.objectId) {
 
 			<fieldset>
-				<legend>Definition #{{$index + 1}}</legend>
+				<legend>Task Group #{{$index + 1}}</legend>
 
 				@if($index > 0) {
 
 					<button
 						type="button"
 						class="icon-only small"
-						(click)="form.removeDefinition(definition.objectId)">
-						<span class="material-symbols-outlined warn">do_not_disturb_on</span> Remove Definition #{{ $index + 1 }}
+						(click)="form.removeTaskGroup(taskGroup.objectId)">
+						<span class="material-symbols-outlined warn">do_not_disturb_on</span> Remove Task Group #{{ $index + 1 }}
 					</button>
 
 				}
 
-				<div definition>
+				<div task_group>
 
-					<!-- TYPE -->
+					<!-- NAME -->
 					<div>
-						<w-select [control]="definition.type" name="Type" [nodes]="DEFINITION_TYPES"/>
+						<w-input [control]="taskGroup.name" name="Name"/>
 					</div>
-
-					@for (lang of definition.languages(); track lang.objectId) {
-
-						<!-- LANGUAGES -->
-						<div language>
-
-							<!-- LANGUAGE -->
-							<div>
-								<w-select [control]="lang.language" name="Language" [nodes]="DEFINITION_LANGUAGES"/>
-							</div>
-
-							<!-- NAME -->
-							<div>
-								<w-input [control]="lang.name" name="Meaning"/>
-							</div>
-
-							@if($index < 1) {
-
-								<button
-									type="button"
-									class="icon-only small"
-									title="Add Language"
-									(click)="definition.addLanguage()">
-									<span class="material-symbols-outlined success">add_circle</span>
-								</button>
-
-							} @else {
-
-								<button
-									type="button"
-									class="icon-only small"
-									[title]="'Remove Language #' + ($index + 1)"
-									(click)="definition.removeLanguage(lang.objectId)">
-									<span class="material-symbols-outlined warn">do_not_disturb_on</span>
-								</button>
-
-							}
-
-						</div>
-
-					}
-
-					@for (sample of definition.samples(); track sample.objectId) {
-
-						<!-- SAMPLES -->
-						<div sample>
-
-							<w-textarea [control]="sample.fc" [name]="'Sample #' + ($index + 1)" [rows]="3"/>
-							@if($index < 1) {
-
-								<button
-									type="button"
-									class="icon-only small"
-									title="Add Sample"
-									(click)="definition.addSample()">
-									<span class="material-symbols-outlined success">add_circle</span>
-								</button>
-
-							} @else {
-
-								<button
-									type="button"
-									class="icon-only small"
-									[title]="'Remove Sample #' + ($index + 1)"
-									(click)="definition.removeSample(sample.objectId)">
-									<span class="material-symbols-outlined warn">do_not_disturb_on</span>
-								</button>
-
-							}
-
-						</div>
-
-					}
 
 				</div>
 			</fieldset>
 
 		}
 		<div>
-			<button type="button" (click)="form.addDefinition()">Add Definition</button>
+			<button type="button" (click)="form.addTaskGroup()">Add Task Group</button>
 		</div>
 
 	</form>

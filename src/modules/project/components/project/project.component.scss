@@ -1,0 +1,40 @@
+@import 'helper';
+@import 'variables';
+@import 'components';
+@import 'mixins';
+
+:host {
+
+	@include mx-card(3);
+
+	& div[definition] {
+
+		position	: relative;
+		margin-top	: calc(2 * var(--gap-lg));
+		@include mx-component(4);
+
+		& > [language] {
+
+			@include mx-flex-center-y;
+			gap		: var(--gap-sm);
+
+		}
+
+		& > [schedule] {
+
+			position	: absolute;
+			top			: 0;
+			right		: 0;
+			padding		: var(--gap-xxl) var(--gap-xxl);
+		}
+
+	}
+
+	& img.flag {
+
+		width	: 12px;
+		height	: 9px;
+
+	}
+
+}

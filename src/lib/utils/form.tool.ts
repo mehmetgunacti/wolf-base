@@ -1,6 +1,22 @@
 import { FormArray, FormControl, FormGroup, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
 
+export class ObjectId {
+
+	private idx: number = 0;
+
+	constructor(
+		private name: string
+	) { }
+
+	next(): string {
+
+		return this.name + (++this.idx);
+
+	}
+
+}
+
 export type IForm = Record<string, FormControl | FormArray | FormGroup>;
 
 export interface FormClass<T> {

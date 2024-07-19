@@ -4,11 +4,11 @@ import { ISODateString, NameBase } from './id-base.model';
 
 export interface Project extends Entity {
 
-	description: string | null;
-	taskGroups: TaskGroup[];
 	status: ProjectStatus;
 	start: ISODateString;
+	description: string | null;
 	end: ISODateString | null;
+	taskGroups: TaskGroup[];
 
 }
 
@@ -20,6 +20,7 @@ export interface TaskGroup extends NameBase {
 
 export interface Task extends NameBase {
 
+	projectId: UUID;
 	taskGroupId: UUID;
 	description: string | null;
 	status: TaskState;

@@ -9,7 +9,7 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class DexieProjectsRepositoryImpl extends EntityLocalRepositoryImpl<Project> implements ProjectLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfEntity.word);
+		super(db, WolfEntity.project);
 	}
 
 	protected override newItemFromPartial(item: Partial<Project>): Project {

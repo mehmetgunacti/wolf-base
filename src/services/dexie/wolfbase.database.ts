@@ -31,6 +31,12 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			note_content_trash: '++, id, name',
 			note_content_remote: 'id',
 
+			// projects
+			projects: 'id, name',
+			projects_sync: 'id',
+			projects_trash: '++, id, name',
+			projects_remote: 'id',
+
 			// quizEntries
 			quiz_entries: 'id, name',
 			quiz_entries_sync: 'id',
@@ -56,7 +62,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			logs: '++id, category, entityId'
 
 		},
-		version: 11
+		version: 12
 
 	});
 

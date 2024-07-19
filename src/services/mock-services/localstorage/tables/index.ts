@@ -3,6 +3,7 @@ export * from './configuration.table';
 export * from './logs.table';
 export * from './note-content.table';
 export * from './notes.table';
+export * from './projects.table';
 export * from './quiz-entries.table';
 export * from './quotes.table';
 export * from './words.table';

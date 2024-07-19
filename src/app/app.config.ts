@@ -12,6 +12,7 @@ import * as bmActions from 'store/actions/bookmark.actions';
 import * as noteContentActions from 'store/actions/note-content.actions';
 import * as noteActions from 'store/actions/note.actions';
 import * as wordActions from 'store/actions/word.actions';
+import * as projectActions from 'store/actions/project.actions';
 import * as quoteActions from 'store/actions/quote.actions';
 import * as quizEntryActions from 'store/actions/quiz-entry.actions';
 
@@ -39,6 +40,12 @@ export const routes: Routes = [
 
 		path: 'words',
 		loadChildren: () => import('../modules/word/word.module').then(m => m.WordModule)
+
+	},
+	{
+
+		path: 'projects',
+		loadChildren: () => import('../modules/project/project.module').then(m => m.ProjectModule)
 
 	},
 	{
@@ -79,6 +86,7 @@ const appInitializerFactory = (store: Store) => {
 		store.dispatch(wordActions.loadAll());
 		store.dispatch(quoteActions.loadAll());
 		store.dispatch(quizEntryActions.loadAll());
+		store.dispatch(projectActions.loadAll());
 
 	};
 

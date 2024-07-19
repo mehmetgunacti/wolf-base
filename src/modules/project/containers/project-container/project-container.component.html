@@ -49,11 +49,7 @@
 
 	</w-portal>
 
-	<app-project
-		[project]="project"
-		[scheduledIds]="scheduledIds$ | async"
-		(schedule)="onSchedule($event)"
-		(cancelSchedule)="onCancelSchedule($event)"/>
+	<app-project [project]="project"/>
 
 } @else {
 

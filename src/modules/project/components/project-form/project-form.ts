@@ -1,21 +1,28 @@
 import { InjectionToken, WritableSignal, signal } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Definition, Language, UUID, Project } from '@lib';
-import { DefinitionLanguage, DefinitionType } from 'lib/constants/project.constant';
+import { ISODateString, ObjectId, Project, ProjectStatus, Task, TaskGroup, TaskPriority, TaskState, UUID } from '@lib';
 
-interface LanguageFormSchema {
+interface TaskFormSchema {
 
+	id: FormControl<UUID | null>;
 	name: FormControl<string>;
-	language: FormControl<DefinitionLanguage>;
+
+	projectId: FormControl<UUID | null>;
+	taskGroupId: FormControl<UUID | null>;
+	description: FormControl<string | null>;
+	status: FormControl<TaskState>;
+	priority: FormControl<TaskPriority>;
+	optional: FormControl<boolean>;
+	start: FormControl<ISODateString>;
+	end: FormControl<ISODateString | null>;
 
 }
 
-interface DefinitionFormSchema {
+interface TaskGroupFormSchema {
 
-	id: FormControl<string | null>;
-	type: FormControl<DefinitionType>;
-	languages: FormArray<FormGroup<LanguageFormSchema>>;
-	samples: FormArray<FormControl<string>>;
+	id: FormControl<UUID | null>;
+	name: FormControl<string>;
+	tasks: FormArray<FormGroup<TaskFormSchema>>;
 
 }
 
@@ -23,201 +30,150 @@ interface ProjectFormSchema {
 
 	id: FormControl<UUID | null>;
 	name: FormControl<string>;
-	contexts: FormArray<FormControl<string>>;
-	dictionary: FormControl<UUID | null>;
-	pronunciation: FormControl<string | null>;
-	definitions: FormArray<FormGroup<DefinitionFormSchema>>;
+	description: FormControl<string | null>;
+	status: FormControl<ProjectStatus>;
+	start: FormControl<ISODateString>;
+	end: FormControl<ISODateString | null>;
+	taskGroups: FormArray<FormGroup<TaskGroupFormSchema>>;
 
 }
 
-class ContextForm {
-
-	// to be used by @if (... track objectId)
-	readonly objectId: string;
-	readonly fc: FormControl<string>;
-
-	constructor(s?: string) {
-
-		// objectId
-		this.objectId = 'context_' + Math.random();
-
-		// form field
-		this.fc = new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-
-		if (s)
-			this.setValue(s);
-
-	}
-
-	setValue(s: string): void {
-
-		this.fc.setValue(s);
-
-	}
-
-}
-
-class SampleForm {
-
-	// to be used by @if (... track objectId)
-	readonly objectId: string;
-	readonly fc: FormControl<string>;
-
-	constructor(s?: string) {
-
-		// objectId
-		this.objectId = 'sample_' + Math.random();
-
-		// form field
-		this.fc = new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-
-		if (s)
-			this.setValue(s);
-
-	}
-
-	setValue(s: string): void {
-
-		this.fc.setValue(s);
-
-	}
-
-}
-
-class LanguageForm {
-
-	// to be used by @if (... track objectId)
-	readonly objectId: string;
-
-	// form fields
-	readonly name: FormControl<string>;
-	readonly language: FormControl<DefinitionLanguage>;
-
-	constructor(language?: Language) {
-
-		// object id
-		this.objectId = 'definition_' + Math.random();
-
-		// form fields
-		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-		this.language = new FormControl<DefinitionLanguage>(DefinitionLanguage.en, { validators: [Validators.required], nonNullable: true });
-
-		if (language)
-			this.setValue(language);
-
-	}
-
-	formGroup(): FormGroup<LanguageFormSchema> {
-
-		return new FormGroup({
-
-			name: this.name,
-			language: this.language
-
-		});
-
-	}
-
-	setValue(language: Language): void {
-
-		this.name.setValue(language.name);
-		this.language.setValue(language.language);
-
-	}
-
-}
-
-class DefinitionForm {
-
-	// to be used by @if (... track objectId)
-	readonly objectId: string;
+class TaskForm {
 
 	// form fields
 	readonly id: FormControl<UUID | null>;
-	readonly type: FormControl<DefinitionType>;
-	readonly languages: WritableSignal<LanguageForm[]>;
-	readonly samples: WritableSignal<SampleForm[]>;
+	readonly name: FormControl<string>;
+	readonly projectId: FormControl<UUID | null>;
+	readonly taskGroupId: FormControl<UUID | null>;
+	readonly description: FormControl<string | null>;
+	readonly status: FormControl<TaskState>;
+	readonly priority: FormControl<TaskPriority>;
+	readonly optional: FormControl<boolean>;
+	readonly start: FormControl<ISODateString>;
+	readonly end: FormControl<ISODateString | null>;
 
-	constructor(definition?: Definition) {
+	constructor(
+		// to be used by @for (... track objectId)
+		public readonly objectId: string,
+		task?: Task
+	) {
 
-		// object id
-		this.objectId = 'definition_' + Math.random();
 
-		// form fields
-		this.id = new FormControl<UUID | null>(null);
-		this.type = new FormControl<DefinitionType>(DefinitionType.noun, { validators: [Validators.required], nonNullable: true });
+		this.id = new FormControl(null);
+		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
+		this.projectId = new FormControl();
+		this.taskGroupId = new FormControl();
+		this.description = new FormControl();
+		this.status = new FormControl();
+		this.priority = new FormControl();
+		this.optional = new FormControl();
+		this.start = new FormControl();
+		this.end = new FormControl();
 
-		// languages
-		this.languages = signal([new LanguageForm()]);
-
-		// samples
-		this.samples = signal([new SampleForm()]);
-
-		if (definition)
-			this.setValue(definition);
-
-	}
-
-	addLanguage(): void {
-
-		this.languages.update(list => {
-			list.push(new LanguageForm());
-			return list;
-		});
-
-	}
-
-	removeLanguage(objectId: string): void {
-
-		this.languages.update(
-			list => {
-				list.splice(list.findIndex(s => s.objectId === objectId), 1);
-				return list;
-			}
-		);
+		if (task)
+			this.setValue(task);
 
 	}
 
-	addSample(): void {
-
-		this.samples.update(list => {
-			list.push(new SampleForm());
-			return list;
-		});
-
-	}
-
-	removeSample(objectId: string): void {
-
-		this.samples.update(
-			list => {
-				list.splice(list.findIndex(s => s.objectId === objectId), 1);
-				return list;
-			}
-		);
-
-	}
-
-	formGroup(): FormGroup<DefinitionFormSchema> {
+	formGroup(): FormGroup<TaskFormSchema> {
 
 		return new FormGroup({
 
 			id: this.id,
-			type: this.type,
-			languages: new FormArray(this.languages().map(l => l.formGroup())),
-			samples: new FormArray(this.samples().map(s => s.fc))
+			name: this.name,
+			projectId: this.projectId,
+			taskGroupId: this.taskGroupId,
+			description: this.description,
+			status: this.status,
+			priority: this.priority,
+			optional: this.optional,
+			start: this.start,
+			end: this.end
 
 		});
 
 	}
 
-	setValue(definition: Definition): void {
+	setValue(task: Task): void {
 
-		this.id.setValue(definition.id);
-		this.type.setValue(definition.type);
+		this.id.setValue(task.id);
+		this.name.setValue(task.name);
+		this.projectId.setValue(task.projectId);
+		this.taskGroupId.setValue(task.taskGroupId);
+		this.description.setValue(task.description);
+		this.status.setValue(task.status);
+		this.priority.setValue(task.priority);
+		this.optional.setValue(task.optional);
+		this.start.setValue(task.start);
+		this.end.setValue(task.end);
 
-		this.languages.set(definition.languages.map(l => new LanguageForm(l)));
-		this.samples.set(definition.samples.map(s => new SampleForm(s)));
+	}
+
+}
+
+class TaskGroupForm {
+
+	readonly id: FormControl<UUID | null>;
+	readonly name: FormControl<string>;
+	readonly tasks: WritableSignal<TaskForm[]>;
+
+	private taskId: ObjectId = new ObjectId('task_');
+
+	constructor(
+		// to be used by @for (... track objectId)
+		public readonly objectId: string,
+		taskGroup?: TaskGroup
+	) {
+
+		// form fields
+		this.id = new FormControl<UUID | null>(null);
+		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
+
+		// tasks
+		this.tasks = signal([new TaskForm(this.taskId.next())]);
+
+		if (taskGroup)
+			this.setValue(taskGroup);
+
+	}
+
+	addTask(): void {
+
+		this.tasks.update(list => {
+			list.push(new TaskForm(this.taskId.next()));
+			return list;
+		});
+
+	}
+
+	removeTask(id: UUID): void {
+
+		this.tasks.update(
+			list => list.filter(item => item.id.value === id)
+		);
+
+	}
+
+	formGroup(): FormGroup<TaskGroupFormSchema> {
+
+		return new FormGroup({
+
+			id: this.id,
+			name: this.name,
+			tasks: new FormArray(this.tasks().map(t => t.formGroup()))
+
+		});
+
+	}
+
+	setValue(taskGroup: TaskGroup): void {
+
+		this.id.setValue(taskGroup.id);
+		this.name.setValue(taskGroup.name);
+
+		this.tasks.set(
+			taskGroup.tasks.map(t => new TaskForm(this.taskId.next(), t))
+		);
 
 	}
 
@@ -228,63 +184,45 @@ export class ProjectForm {
 	// form fields
 	readonly id: FormControl<UUID | null>;
 	readonly name: FormControl<string>;
-	readonly dictionary: FormControl<UUID | null>;
-	readonly pronunciation: FormControl<string | null>;
-	readonly contexts: WritableSignal<ContextForm[]>;
+	readonly description: FormControl<string | null>;
+	readonly status: FormControl<ProjectStatus>;
+	readonly start: FormControl<string>;
+	readonly end: FormControl<string | null>;
 
-	// definitions
-	readonly definitions: WritableSignal<DefinitionForm[]>;
+	// task groups
+	readonly taskGroups: WritableSignal<TaskGroupForm[]>;
+
+	private taskGroupId: ObjectId = new ObjectId('taskGroup_');
 
 	constructor() {
 
 		// form fields
 		this.id = new FormControl<UUID | null>(null);
 		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-		this.dictionary = new FormControl<UUID | null>(null);
-		this.pronunciation = new FormControl<string | null>(null);
+		this.description = new FormControl<string | null>(null);
+		this.status = new FormControl<ProjectStatus>(ProjectStatus.ongoing, { validators: [Validators.required], nonNullable: true });
+		this.start = new FormControl<ISODateString>(new Date().toISOString(), { validators: [Validators.required], nonNullable: true });
+		this.end = new FormControl<string | null>(null);
 
-		// contexts
-		this.contexts = signal([new ContextForm()]);
-
-		// definitions
-		this.definitions = signal([new DefinitionForm()])
+		// task groups
+		this.taskGroups = signal<TaskGroupForm[]>([new TaskGroupForm(this.taskGroupId.next())]);
 
 	}
 
-	addDefinition(): void {
+	addTaskGroup(): void {
 
-		this.definitions.update(list => {
-			list.push(new DefinitionForm());
+		this.taskGroups.update(list => {
+			list.push(new TaskGroupForm(this.taskGroupId.next()));
 			return list;
 		});
 
 	}
 
-	removeDefinition(objectId: string): void {
+	removeTaskGroup(objectId: string): void {
 
-		this.definitions.update(
+		this.taskGroups.update(
 			list => {
 				list.splice(list.findIndex(d => d.objectId === objectId), 1);
-				return list;
-			}
-		);
-
-	}
-
-	addContext(): void {
-
-		this.contexts.update(list => {
-			list.push(new ContextForm());
-			return list;
-		});
-
-	}
-
-	removeContext(objectId: string): void {
-
-		this.contexts.update(
-			list => {
-				list.splice(list.findIndex(s => s.objectId === objectId), 1);
 				return list;
 			}
 		);
@@ -297,10 +235,11 @@ export class ProjectForm {
 
 			id: this.id,
 			name: this.name,
-			dictionary: this.dictionary,
-			pronunciation: this.pronunciation,
-			contexts: new FormArray(this.contexts().map(c => c.fc)),
-			definitions: new FormArray<FormGroup<DefinitionFormSchema>>(this.definitions().map(d => d.formGroup()))
+			description: this.description,
+			status: this.status,
+			start: this.start,
+			end: this.end,
+			taskGroups: new FormArray(this.taskGroups().map(tg => tg.formGroup()))
 
 		});
 
@@ -310,14 +249,12 @@ export class ProjectForm {
 
 		this.id.setValue(project.id);
 		this.name.setValue(project.name);
-		this.dictionary.setValue(project.dictionary);
-		this.pronunciation.setValue(project.pronunciation);
+		this.description.setValue(project.description);
+		this.status.setValue(project.status);
+		this.start.setValue(project.start);
+		this.end.setValue(project.end);
 
-		this.contexts.set(project.contexts.map(c => new ContextForm(c)));
-
-		this.definitions.set(
-			project.definitions.map(d => new DefinitionForm(d))
-		);
+		this.taskGroups.set(project.taskGroups.map(tg => new TaskGroupForm(this.taskGroupId.next(), tg)));
 
 	}
 

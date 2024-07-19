@@ -1,5 +1,6 @@
 import { ProjectFilterComponent } from './components/project-filter/project-filter.component';
 import { ProjectFormComponent } from './components/project-form/project-form.component';
+import { ProjectComponent } from './components/project/project.component';
 import { ProjectContainerComponent } from './containers/project-container/project-container.component';
 import { ProjectEditFormContainerComponent } from './containers/project-edit-form-container/project-edit-form-container.component';
 import { ProjectFilterContainerComponent } from './containers/project-filter-container/project-filter-container.component';
@@ -13,6 +14,7 @@ import { ProjectsPageComponent } from './pages/projects-page/projects-page.compo
 export const components = [
 
 	// components
+	ProjectComponent,
 	ProjectFormComponent,
 	ProjectFilterComponent,
 	ProjectFilterContainerComponent,

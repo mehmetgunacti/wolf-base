@@ -49,11 +49,17 @@ export class NavComponent {
 						routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
 					},
 					{
+						url: ['/projects'],
+						label: 'Projects',
+						icon: 'task_alt',
+						routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
+					},
+					{
 						url: ['/words'],
 						label: 'Words',
 						icon: 'dictionary',
 						routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
-					}
+					},
 
 				];
 				return items;
