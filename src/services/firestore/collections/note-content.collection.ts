@@ -5,7 +5,7 @@ import { NoteContentRemoteRepository } from 'lib/repositories/remote';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 
-export class NoteContentContentFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<NoteContent> implements NoteContentRemoteRepository {
+export class NoteContentFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<NoteContent> implements NoteContentRemoteRepository {
 
 	constructor(firestore: FirestoreAPIClient, firestoreConfig: FirestoreConfig) {
 		super(
