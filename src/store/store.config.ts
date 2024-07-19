@@ -97,6 +97,20 @@ import { QuizEntryLoadEffects } from './effects/quiz-entry-effects/quiz-entry-lo
 import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.reducer';
 import { QuizUIEffects } from './effects/quiz-entry-effects/quiz-ui.effects';
 import { QuoteViewerEffects } from './effects/quote-effects/quote-viewer.effects';
+import { ProjectSyncEffects } from './effects/project-effects/project-sync.effects';
+import { ProjectSyncLocalNewEffects } from './effects/project-effects/project-sync-local-new.effects';
+import { ProjectSyncLocalUpdatedEffects } from './effects/project-effects/project-sync-local-updated.effects';
+import { ProjectSyncLocalDeletedEffects } from './effects/project-effects/project-sync-local-deleted.effects';
+import { ProjectSyncRemoteNewEffects } from './effects/project-effects/project-sync-remote-new.effects';
+import { ProjectSyncRemoteUpdatedEffects } from './effects/project-effects/project-sync-remote-updated.effects';
+import { ProjectSyncRemoteDeletedEffects } from './effects/project-effects/project-sync-remote-deleted.effects';
+import { ProjectSyncDeletedDeletedEffects } from './effects/project-effects/project-sync-deleted-deleted.effects';
+import { ProjectEntityCreateEffects } from './effects/project-effects/project-entity-create.effects';
+import { ProjectEntityUpdateEffects } from './effects/project-effects/project-entity-update.effects';
+import { ProjectEntityMoveToTrashEffects } from './effects/project-effects/project-entity-move-to-trash.effects';
+import { ProjectLoadEffects } from './effects/project-effects/project-load.effects';
+import { ProjectUIEffects } from './effects/project-effects/project-ui.effects';
+import { projectReducer } from './reducers/project-reducers/project.reducer';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -183,6 +197,26 @@ export const effects = [
 	NoteContentSyncRemoteNewEffects,
 	NoteContentSyncRemoteUpdatedEffects,
 
+	// Projects
+	ProjectSyncEffects,
+
+	ProjectSyncLocalNewEffects,
+	ProjectSyncLocalUpdatedEffects,
+	ProjectSyncLocalDeletedEffects,
+
+	ProjectSyncRemoteNewEffects,
+	ProjectSyncRemoteUpdatedEffects,
+	ProjectSyncRemoteDeletedEffects,
+
+	ProjectSyncDeletedDeletedEffects,
+
+	ProjectEntityCreateEffects,
+	ProjectEntityUpdateEffects,
+	ProjectEntityMoveToTrashEffects,
+
+	ProjectLoadEffects,
+	ProjectUIEffects,
+
 	// Words
 	WordSyncEffects,
 
@@ -257,15 +291,16 @@ export const effects = [
 
 export const reducers: ActionReducerMap<AppState> = {
 
+	bookmark: combineReducers(bookmarkReducer),
 	core: combineReducers(coreReducer),
 	cloud: cloudReducer,
-	bookmark: combineReducers(bookmarkReducer),
+	database: databaseReducer,
+	logs: combineReducers(logsReducer),
 	note: combineReducers(noteReducer),
 	noteContent: combineReducers(noteContentReducer),
-	word: combineReducers(wordReducer),
+	project: combineReducers(projectReducer),
 	quizEntry: combineReducers(quizEntryReducer),
 	quote: combineReducers(quoteReducer),
-	database: databaseReducer,
-	logs: combineReducers(logsReducer)
+	word: combineReducers(wordReducer),
 
 };
