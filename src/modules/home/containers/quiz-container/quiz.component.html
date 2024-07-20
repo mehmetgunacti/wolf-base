@@ -4,9 +4,14 @@
 
 		<div quiz_question_wrapper>
 
-			<div quiz_icon>
+			<div quiz_icon class="badge-container">
 
 				<span class="material-symbols-outlined">quiz</span>
+				@if (dueItemsCount(); as count) {
+
+					<span class="badge small">{{count}}</span>
+
+				}
 
 			</div>
 			<div quiz_question [@quoteChange]="quiz.definition.id">

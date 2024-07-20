@@ -6,6 +6,7 @@ import { take, tap, timer } from 'rxjs';
 import { QuizService } from 'services/quiz.service';
 import { openShowAnswerDialog, revealChoices, update } from 'store/actions/quiz-entry.actions';
 import { selQuiz_choicesVisible } from 'store/selectors/quiz-entry-selectors/quiz-entry-ui.selectors';
+import { selQuiz_dueItemsCount } from 'store/selectors/quiz-entry-selectors/quiz.selectors';
 
 @Component({
 	selector: 'app-quiz',
@@ -20,6 +21,7 @@ export class QuizComponent {
 	private quizService: QuizService = inject(QuizService);
 
 	quiz: Signal<Quiz | null>;
+	dueItemsCount: Signal<number>;
 	choicesVisible: Signal<boolean>;
 	blinkSuccess: WritableSignal<UUID | null> = signal(null);
 	blinkFailure: WritableSignal<UUID | null> = signal(null);
@@ -27,6 +29,7 @@ export class QuizComponent {
 	constructor() {
 
 		this.quiz = toSignal(this.quizService.quiz$, { initialValue: null });
+		this.dueItemsCount = this.store.selectSignal(selQuiz_dueItemsCount);
 		this.choicesVisible = this.store.selectSignal(selQuiz_choicesVisible);
 
 	}

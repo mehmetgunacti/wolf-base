@@ -37,22 +37,35 @@ export const selQuiz_definitionIdWordMap = createSelector(
 
 );
 
-export const selQuiz_quizProgress = createSelector(
+const selQuiz_dueItems = createSelector(
 
 	selQuizEntry_array,
 	selCore_now,
-	(allProgress, now): QuizProgress | null => {
+	(allProgress, now): QuizProgress[] => {
 
 		// sort array by 'next', then 'name'
-		allProgress.sort((a, b) => {
+		return allProgress
+			.sort((a, b) => {
 
-			if (a.next === b.next)
-				return a.name.localeCompare(b.name);
-			return a.next - b.next;
+				if (a.next === b.next)
+					return a.name.localeCompare(b.name);
+				return a.next - b.next;
 
-		});
-		return allProgress.find(q => q.next < now) ?? null;
-
+			})
+			.filter(q => q.next < now);
 	}
+
+);
+export const selQuiz_dueItemsCount = createSelector(
+
+	selQuiz_dueItems,
+	items => items.length
+
+);
+
+export const selQuiz_quizProgress = createSelector(
+
+	selQuiz_dueItems,
+	(dueItems: QuizProgress[]): QuizProgress | null => dueItems[0] ?? null
 
 );
