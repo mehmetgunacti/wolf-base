@@ -1,40 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { NUMBER_OF_CHOICES, Quiz, QuizProgress, UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
-import { produce } from "immer";
-import { combineLatest, Observable, timer } from 'rxjs';
-import { distinctUntilChanged, map, shareReplay } from 'rxjs/operators';
-import { selQuizEntry_array } from 'store/selectors/quiz-entry-selectors/quiz-entry-entities.selectors';
-import { selWord_array } from 'store/selectors/word-selectors/word-entities.selectors';
-
-function sortArr(arr: QuizProgress[]): QuizProgress[] {
-
-	return arr.sort((a, b) => {
-
-		if (a.next === b.next)
-			return a.name.localeCompare(b.name);
-		return a.next - b.next;
-
-	});
-
-};
-
-function toMap(words: Word[]): Record<UUID, Word> {
-
-	const map: Record<UUID, Word> = {};
-	words.forEach(w => {
-
-		w.definitions.forEach(d => {
-
-			// need a copy of Word, because 'definitions' array is being modified
-			map[d.id] = produce(w, (draft) => { draft.definitions = [d]; });
-
-		});
-
-	});
-	return map;
-
-}
+import { combineLatest, Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { selQuiz_definitionIdWordMap, selQuiz_quizProgress } from 'store/selectors/quiz-entry-selectors/quiz.selectors';
 
 @Injectable({
 	providedIn: 'root'
@@ -47,30 +16,12 @@ export class QuizService {
 
 	constructor() {
 
-		// update 'now' every 60 seconds
-		const timer$: Observable<number> = timer(Date.now(), 60 * 1000).pipe(map(() => Date.now()));
+		// select QuizProgress
+		const quizProgress$: Observable<QuizProgress | null> = this.store.select(selQuiz_quizProgress);
 
-		// array of all QuizProgress
-		const allProgress$: Observable<QuizProgress[]> = this.store.select(selQuizEntry_array).pipe(map(sortArr));
+		// select lookup map
+		const definitionIdWordMap$: Observable<Record<UUID, Word>> = this.store.select(selQuiz_definitionIdWordMap);
 
-		// find latest QuizProgress
-		const quizProgress$: Observable<QuizProgress | null> = combineLatest([
-			timer$,
-			allProgress$
-		]).pipe(
-
-			map(([now, arr]): QuizProgress | null => arr.find(q => q.next < now) ?? null),
-			distinctUntilChanged()
-
-		);
-
-		// transform Word[] into Record for lookup
-		const definitionIdWordMap$: Observable<Record<UUID, Word>> = this.store.select(selWord_array).pipe(
-
-			distinctUntilChanged(),
-			map(toMap),
-
-		);
 		this.quiz$ = combineLatest([
 			definitionIdWordMap$,
 			quizProgress$
@@ -81,19 +32,23 @@ export class QuizService {
 				if (!progress)
 					return null;
 
-				const question = map[progress.id];
+				const question: Word = map[progress.id];
 				if (!question)
 					return null;
 
-				const result: Word[] = [question]; // first entry is the question, rest are choices
-
+				const choices: Word[] = [];
 				const potentialChoices: Word[] = Object.values(map).filter(w => w.definitions[0].type === question.definitions[0].type);
-				for (let i = 0; i < NUMBER_OF_CHOICES; ++i) { // choose NUMBER_OF_CHOICES random definitions
 
-					const randomIdx = Math.floor(potentialChoices.length * Math.random());
-					result.push(potentialChoices[randomIdx]);
+				// choose NUMBER_OF_CHOICES random, unique definitions
+				while (choices.length < NUMBER_OF_CHOICES && potentialChoices.length > 0) {
+
+					const randomIdx = Math.floor(Math.random() * potentialChoices.length);
+					const randomWord = potentialChoices.splice(randomIdx, 1)[0]; // remove a random word
+					choices.push(randomWord);
 
 				}
+
+				const result = [question, ...choices]; // first entry is the question, rest are choices
 				return new Quiz(result);
 
 			}),
