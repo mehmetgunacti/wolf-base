@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal, Signal, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Quiz, quoteChangeTrigger, slideDown, slideUpDownTrigger, UUID, Word } from '@lib';
+import { Quiz, quoteChangeTrigger, slideUpDownTrigger, UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { take, tap, timer } from 'rxjs';
 import { QuizService } from 'services/quiz.service';
@@ -11,7 +11,7 @@ import { selQuiz_choicesVisible } from 'store/selectors/quiz-entry-selectors/qui
 	selector: 'app-quiz',
 	templateUrl: './quiz.component.html',
 	styleUrls: ['./quiz.component.scss'],
-	animations: [quoteChangeTrigger, slideDown, slideUpDownTrigger],
+	animations: [quoteChangeTrigger, slideUpDownTrigger],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizComponent {

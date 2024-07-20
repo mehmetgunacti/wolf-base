@@ -35,7 +35,6 @@ export const loadAllRemoteMetadataSuccess	= createAction('[QuizEntry] Load All R
 // export const loadTrashCountSuccess			= createAction('[QuizEntry] Load Trash Count Success', props<{ count: number }>());
 
 // UI
-// export const setNow							= createAction('[QuizEntry] Set Now');
 export const openShowAnswerDialog			= createAction('[Quiz] Open Show Answer Dialog', props<{ word: Word }>());
 export const closeShowAnswerDialog			= createAction('[Quiz] Close Show Answer Dialog', props<{ quizProgressId: UUID, editWord?: UUID }>());
 export const revealChoices					= createAction('[Quiz] Reveal Choices');
