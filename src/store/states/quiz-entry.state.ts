@@ -19,6 +19,7 @@ export interface QuizEntry_UIState {
 
 	now: number;
 	answer: Word | null;
+	choicesVisible: boolean;
 
 }
 
@@ -35,7 +36,8 @@ export const quizEntry_initialEntitiesState: QuizEntry_EntitiesState = {
 export const quizEntry_initialUIState: QuizEntry_UIState = {
 
 	now: new Date().getTime(),
-	answer: null
+	answer: null,
+	choicesVisible: false
 
 };
 

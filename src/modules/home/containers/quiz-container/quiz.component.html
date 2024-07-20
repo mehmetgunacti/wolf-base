@@ -37,6 +37,17 @@
 					<span class="material-symbols-outlined">contact_support</span>
 				</button>
 
+				@if (!choicesVisible()) {
+
+					<button
+						class="icon-only small"
+						(click)="showChoices()"
+						title="Show Choices">
+						<span class="material-symbols-outlined">stat_minus_2</span>
+					</button>
+
+				}
+
 			</div>
 
 		</div>
@@ -68,31 +79,36 @@
 		</div>
 
 	</div>
-	<div quiz_choices>
 
-		@for (choice of quiz.choices; track $index) {
+	@if (choicesVisible()) {
 
-			<div
-				quiz_choice
-				(click)="checkAnswer(quiz, choice.definitions[0].id)"
-				[class.success]="blinkSuccess() === choice.definitions[0].id"
-				[class.failure]="blinkFailure() === choice.definitions[0].id">
+		<div quiz_choices @slideDown>
 
-				@if (quiz.askWord) {
+			@for (choice of quiz.choices; track $index) {
 
-					<app-languages [languages]="choice.definitions[0].languages" />
+				<div
+					quiz_choice
+					(click)="checkAnswer(quiz, choice.definitions[0].id)"
+					[class.success]="blinkSuccess() === choice.definitions[0].id"
+					[class.failure]="blinkFailure() === choice.definitions[0].id">
 
-				} @else {
+					@if (quiz.askWord) {
 
-					<span [@quoteChange]="choice.id">@if (quiz.isVerb) { to } {{ choice.name }}</span>
+						<app-languages [languages]="choice.definitions[0].languages" />
 
-				}
+					} @else {
 
-			</div>
+						<span [@quoteChange]="choice.id">@if (quiz.isVerb) { to } {{ choice.name }}</span>
 
-		}
+					}
 
-	</div>
+				</div>
+
+			}
+
+		</div>
+
+	}
 
 } @else {
 
