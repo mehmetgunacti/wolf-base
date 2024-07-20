@@ -9,23 +9,25 @@ export const slideUpDownTrigger = trigger('slideUpDown', [
 
 ]);
 
-// trigger('slideUpDown', [
+export const slideDown = trigger('slideDown', [
 
-// 	transition(':enter', [
+	transition(':enter', [
 
-// 		// css styles at start of transition
-// 		style({ height: 0, opacity: 0 }),
+		// css styles at start of transition
+		style({ height: 0, opacity: 0 }),
 
-// 		// animation and styles at end of transition
-// 		animate('300ms', style({ height: '*', opacity: 1 }))
-// 	]),
-// 	transition(':leave', [
+		// animation and styles at end of transition
+		animate('300ms', style({ height: '*', opacity: 1 }))
 
-// 		// css styles at start of transition
-// 		style({ height: '*', opacity: 1, overflow: 'hidden' }),
+	]),
+	transition(':leave', [
 
-// 		// animation and styles at end of transition
-// 		animate('300ms', style({ height: 0, opacity: 0 }))
-// 	])
+		// css styles at start of transition
+		style({ height: '*', opacity: 1, overflow: 'hidden' }),
 
-// ]);
+		// animation and styles at end of transition
+		animate('300ms', style({ height: 0, opacity: 0 }))
+
+	])
+
+]);
