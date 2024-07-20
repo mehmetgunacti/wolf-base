@@ -2,8 +2,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 
 export const slideUpDownTrigger = trigger('slideUpDown', [
 
-	state('closed', style({ height: '0px', visibility: 'hidden' })),
-	state('opened', style({ height: '*', visibility: 'visible' })),
+	state('closed', style({ height: '0px', visibility: 'hidden', opacity: 0 })),
+	state('opened', style({ height: '*', visibility: 'visible', opacity: 1 })),
 
 	transition('closed <=> opened', animate('300ms ease-in'))
 
