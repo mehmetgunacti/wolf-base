@@ -12,7 +12,8 @@ export interface CoreUIState {
 	sidebarState: SidebarState,
 	bigScreen: boolean,
 	syncableItems: number,
-	theme: Theme
+	theme: Theme,
+	now: number
 
 }
 
@@ -43,7 +44,8 @@ export const initialCoreUIState: CoreUIState = {
 	sidebarState: DEFAULT_CONF_VALUES.sidebarState,
 	bigScreen: true,
 	syncableItems: 0,
-	theme: DEFAULT_CONF_VALUES.theme
+	theme: DEFAULT_CONF_VALUES.theme,
+	now: Date.now()
 
 };
 

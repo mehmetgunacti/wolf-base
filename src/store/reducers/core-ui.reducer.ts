@@ -1,7 +1,7 @@
 import { DEFAULT_CONF_VALUES } from '@lib';
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import { setBigScreen, setSidebarState, setTheme } from 'store/actions/core-ui.actions';
+import { setBigScreen, setNow, setSidebarState, setTheme } from 'store/actions/core-ui.actions';
 import { loadAllSuccess } from 'store/actions/core.actions';
 import { CoreUIState, initialCoreUIState } from 'store/states/core.state';
 
@@ -25,6 +25,7 @@ export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 
 	}),
 	on(setSidebarState, (state, { sidebarState }): CoreUIState => ({ ...state, sidebarState })),
-	on(setTheme, (state, { theme }): CoreUIState => ({ ...state, theme }))
+	on(setTheme, (state, { theme }): CoreUIState => ({ ...state, theme })),
+	on(setNow, (state): CoreUIState => ({ ...state, now: Date.now() }))
 
 );
