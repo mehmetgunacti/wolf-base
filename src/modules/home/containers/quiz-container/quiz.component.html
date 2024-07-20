@@ -80,35 +80,31 @@
 
 	</div>
 
-	@if (choicesVisible()) {
+	<div quiz_choices [@slideUpDown]="choicesVisible() ? 'opened' : 'closed'">
 
-		<div quiz_choices @slideDown>
+		@for (choice of quiz.choices; track $index) {
 
-			@for (choice of quiz.choices; track $index) {
+			<div
+				quiz_choice
+				(click)="checkAnswer(quiz, choice.definitions[0].id)"
+				[class.success]="blinkSuccess() === choice.definitions[0].id"
+				[class.failure]="blinkFailure() === choice.definitions[0].id">
 
-				<div
-					quiz_choice
-					(click)="checkAnswer(quiz, choice.definitions[0].id)"
-					[class.success]="blinkSuccess() === choice.definitions[0].id"
-					[class.failure]="blinkFailure() === choice.definitions[0].id">
+				@if (quiz.askWord) {
 
-					@if (quiz.askWord) {
+					<app-languages [languages]="choice.definitions[0].languages" />
 
-						<app-languages [languages]="choice.definitions[0].languages" />
+				} @else {
 
-					} @else {
+					<span [@quoteChange]="choice.id">@if (quiz.isVerb) { to } {{ choice.name }}</span>
 
-						<span [@quoteChange]="choice.id">@if (quiz.isVerb) { to } {{ choice.name }}</span>
+				}
 
-					}
+			</div>
 
-				</div>
+		}
 
-			}
-
-		</div>
-
-	}
+	</div>
 
 } @else {
 
