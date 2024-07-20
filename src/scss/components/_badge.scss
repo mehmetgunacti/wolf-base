@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .badge-container {
 
 	position	: relative;
@@ -29,8 +31,8 @@
 
 		&.small {
 
-			right				: 6px;
-			bottom				: 7px;
+			right				: -25px;
+			bottom				: -5px;
 			line-height			: 0.5;
 			font-size			: xx-small;
 			font-weight			: normal;
