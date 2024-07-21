@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Quote, UUID, isInvalid } from '@lib';
+import { Quote, UUID, isInvalid, standardizeQuotes } from '@lib';
 
 interface QuoteForm {
 
@@ -22,7 +22,7 @@ export class QuoteSettingsFormComponent {
 	form: FormGroup<QuoteForm> = new FormGroup({
 
 		id: new FormControl<UUID | null>(null),
-		name: new FormControl<string>('“”', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
+		name: new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
 		author: new FormControl<string | null>(null, { validators: [Validators.minLength(3)] }),
 		context: new FormControl<string | null>(null, { validators: [Validators.minLength(3)] })
 
@@ -59,7 +59,7 @@ export class QuoteSettingsFormComponent {
 
 		this.form.reset({
 			id: null,
-			name: '“”',
+			name: '',
 			author: null,
 			context: null
 		});
@@ -78,6 +78,19 @@ export class QuoteSettingsFormComponent {
 		if (id)
 			if (confirm('Delete Quote?'))
 				this.delete.emit(id);
+
+	}
+
+	onQuotationMark(): void {
+
+		const fcName = this.form.controls.name;
+		fcName.setValue(
+
+			standardizeQuotes(fcName.value)
+
+		);
+		fcName.markAsDirty();
+		fcName.updateValueAndValidity();
 
 	}
 

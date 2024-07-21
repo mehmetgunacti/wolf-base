@@ -37,3 +37,18 @@ export function maskOrHighlight(sentence: string, word: string, askWord: boolean
 	});
 
 }
+
+export function standardizeQuotes(inputText: string): string {
+
+	// /^abc/ matches “abc” only if it appears at the beginning of the string.
+	const cleanedStart = inputText.replace(/^['"‘’“”‘’]/, '');
+
+	// /xyz$/ matches “xyz” only if it appears at the end of the string.
+	const cleanedEnd = cleanedStart.replace(/['"‘’“”‘’]$/, '');
+
+	// Wrap the cleaned text in standard double quotes
+	const standardizedText = `“${cleanedEnd}”`;
+
+	return standardizedText;
+
+}
