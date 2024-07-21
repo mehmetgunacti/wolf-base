@@ -67,9 +67,10 @@
 
 			& > [quote_name] {
 
-				text-align	: center;
+				font-family	: inherit;
 				font-style	: italic;
 				font-size	: 90%;
+				text-align	: center;
 				padding		: 0 var(--gap-sm) var(--gap-sm) var(--gap-sm);
 
 			}

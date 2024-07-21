@@ -23,7 +23,7 @@
 
 		<div quote_inner [@quoteChange]="quote.id">
 
-			<div quote_name>{{ quote.name }}</div>
+			<pre quote_name>{{ quote.name }}</pre>
 			@if (quote.author) {<div quote_author>{{ quote.author }}</div>}
 			@if (quote.context) {<div quote_context>{{ quote.context }}</div>}
 
