@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { timer } from 'rxjs';
 import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { setNow } from 'store/actions/core-ui.actions';
 import { loadAllSuccess } from 'store/actions/core.actions';
 import { changeQuote, setRunning } from 'store/actions/quote.actions';
 import { selQuote_ids } from 'store/selectors/quote-selectors/quote-entities.selectors';
@@ -45,20 +46,12 @@ export class QuoteViewerEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(setRunning),
-			switchMap(
-
-				({ running }) => timer(0, 60 * 1000).pipe(
-
-					filter(() => running),
-					withLatestFrom(this.store.select(selQuote_ids)),
-					map(([, ids]) => ids[Math.floor(Math.random() * ids.length)]),
-					map(id => changeQuote({ id }))
-
-
-				)
-
-			)
+			ofType(setNow),
+			withLatestFrom(this.store.select(selQuoteViewer_running)),
+			filter(([, running]) => running),
+			withLatestFrom(this.store.select(selQuote_ids)),
+			map(([, ids]) => ids[Math.floor(Math.random() * ids.length)]),
+			map(id => changeQuote({ id }))
 
 		)
 
