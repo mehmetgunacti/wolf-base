@@ -18,38 +18,62 @@
 
 	@include mx-component(3);
 	@include mx-box-shadow;
-	display			: flex;
+	@include mx-flex-column-center;
 	position		: relative;
 	min-height		: 2 * $header-height;
 	padding-inline	: var(--gap-lg);
 
+	&::before {
 
-	& > [quote_icon_container] {
+		content		: "„";
+		position	: absolute;
+		color		: hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / 0.3);
+		left		: var(--gap-sm);
+		top			: calc(-3 * var(--gap-sm));
+		font-weight	: bold;
+		font-size	: 15rem;
+		line-height	: 0;
 
-		& > [quote_icon] {
+		@include bigScreen {
 
-			position	: relative;
+			top		: calc(-1 * var(--gap-sm));
+        	left	: var(--gap);
 
-			& > [quote_badge] {
+		}
 
-				position		: absolute;
-				right			: -6px;
-				bottom			: 5px;
-				line-height		: 0.5;
-				font-size		: 1.5rem;
-				color			: fn-hsl(accent);
+	}
 
-				&.paused {
+	& > [quote_icon] {
 
-					color		: fn-hsl(warn);
+		position	: absolute;
+		right		: var(--gap-xxl);
+    	top			: calc(2 * var(--gap-xxl));
 
-				}
+		@include bigScreen {
 
-				&.play {
+			top		: calc(2 * var(--gap-lg));
+			right	: calc(2 * var(--gap-sm));
 
-					animation: fadeOut 2s forwards;
+		}
 
-				}
+		& > [quote_badge] {
+
+			position		: absolute;
+			right			: -6px;
+			bottom			: 5px;
+			line-height		: 0.5;
+			font-size		: 1.5rem;
+			color			: fn-hsl(accent);
+
+			&.paused {
+
+				color		: fn-hsl(warn);
+
+			}
+
+			&.play {
+
+				animation: fadeOut 2s forwards;
 
 			}
 
@@ -57,23 +81,33 @@
 
 	}
 
-	& > [quote_outer] {
+	& > figure {
 
-		flex		: 1;
-		@include mx-flex-center-center;
+		@include mx-flex-column;
 		cursor		: pointer;
 
-		& > [quote_inner] {
+		& > blockquote {
+
+			position		: relative;
+			border-left		: 0;
+			margin-bottom	: 0;
 
 			& > [quote_name] {
 
-				font-family	: inherit;
-				font-style	: italic;
-				font-size	: 90%;
-				text-align	: center;
-				padding		: 0 var(--gap-sm) var(--gap-sm) var(--gap-sm);
+				font-family		: inherit;
+				font-weight		: bold;
+				font-style		: italic;
+				font-size		: larger;
+				text-align		: center;
+				padding			: 0 var(--gap-sm) var(--gap-sm) var(--gap-sm);
+				background		: none;
+				margin-bottom	: 0;
 
 			}
+
+		}
+
+		& > figcaption {
 
 			& > [quote_author] {
 

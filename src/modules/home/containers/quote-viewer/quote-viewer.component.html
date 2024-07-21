@@ -1,34 +1,42 @@
-<div quote_icon_container>
+<div quote_icon>
 
-	<div quote_icon>
+	@if (!running()) {
 
-		<span class="material-symbols-outlined">format_quote</span>
-		@if (!running()) {
+		<span class="material-symbols-outlined paused" quote_badge>pause_circle</span>
 
-			<span class="material-symbols-outlined paused" quote_badge>pause_circle</span>
+	}
+	@if (showPlay()) {
 
-		}
-		@if (showPlay()) {
-
-			<span class="material-symbols-outlined play" quote_badge>play_circle</span>
-
-		}
-
-	</div>
-
-</div>
-<div quote_outer>
-
-	@if (quote() ?? PICARD; as quote) {
-
-		<div quote_inner [@quoteChange]="quote.id">
-
-			<pre quote_name>{{ quote.name }}</pre>
-			@if (quote.author) {<div quote_author>{{ quote.author }}</div>}
-			@if (quote.context) {<div quote_context>{{ quote.context }}</div>}
-
-		</div>
+		<span class="material-symbols-outlined play" quote_badge>play_circle</span>
 
 	}
 
 </div>
+<figure quote_outer>
+
+	@if (quote() ?? PICARD; as quote) {
+
+		<blockquote quote_inner [@quoteChange]="quote.id">
+
+			<pre quote_name>{{ quote.name }}</pre>
+
+		</blockquote>
+		@if (quote.author) {
+
+			<figcaption>
+
+				<div quote_author>{{ quote.author }}</div>
+				@if (quote.context) {
+
+					<div quote_context>{{ quote.context }}</div>
+
+				}
+
+			</figcaption>
+
+		}
+
+	}
+
+</figure>
+
