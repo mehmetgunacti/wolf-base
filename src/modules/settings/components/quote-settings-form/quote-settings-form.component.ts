@@ -22,7 +22,7 @@ export class QuoteSettingsFormComponent {
 	form: FormGroup<QuoteForm> = new FormGroup({
 
 		id: new FormControl<UUID | null>(null),
-		name: new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
+		name: new FormControl<string>('“”', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
 		author: new FormControl<string | null>(null, { validators: [Validators.minLength(3)] }),
 		context: new FormControl<string | null>(null, { validators: [Validators.minLength(3)] })
 
@@ -59,7 +59,7 @@ export class QuoteSettingsFormComponent {
 
 		this.form.reset({
 			id: null,
-			name: '',
+			name: '“”',
 			author: null,
 			context: null
 		});
