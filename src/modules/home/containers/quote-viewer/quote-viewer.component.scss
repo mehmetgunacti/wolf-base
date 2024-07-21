@@ -25,9 +25,11 @@
 
 	&::before {
 
+		--col-primary-alp: 0.5;
+
 		content		: "„";
 		position	: absolute;
-		color		: hsl(var(--col-primary-hue) var(--col-primary-sat) var(--col-primary-lig) / 0.3);
+		color		: fn-hsl(primary);
 		left		: var(--gap-sm);
 		top			: calc(-3 * var(--gap-sm));
 		font-weight	: bold;
@@ -97,7 +99,7 @@
 				font-family		: inherit;
 				font-weight		: bold;
 				font-style		: italic;
-				font-size		: larger;
+				font-size		: var(--font-size-h4);
 				text-align		: center;
 				padding			: 0 var(--gap-sm) var(--gap-sm) var(--gap-sm);
 				background		: none;
