@@ -6,7 +6,6 @@
 :host {
 
 	@include mx-flex-column;
-	grid-gap	: var(--gap-sm);
 
 	& > [quiz_header] {
 
@@ -62,7 +61,7 @@
 		display					: grid;
 		grid-template-columns	: repeat(auto-fill, minmax(35rem, 1fr));
 		grid-gap				: var(--gap-sm);
-		overflow				: hidden;
+		padding-top				: var(--gap-sm);
 
 		& > [quiz_choice] {
 

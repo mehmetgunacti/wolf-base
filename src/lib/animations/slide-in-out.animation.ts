@@ -9,6 +9,15 @@ export const slideUpDownTrigger = trigger('slideUpDown', [
 
 ]);
 
+export const slideChoicesTrigger = trigger('slideChoices', [
+
+	state('closed', style({ height: '0px', visibility: 'hidden', opacity: 0, overflow: 'hidden', paddingTop: 0 })),
+	state('opened', style({ height: '*', visibility: 'visible', opacity: 1, overflow: 'visible' })),
+
+	transition('closed <=> opened', animate('300ms ease-in'))
+
+]);
+
 export const slideDown = trigger('slideDown', [
 
 	transition(':enter', [
@@ -17,16 +26,21 @@ export const slideDown = trigger('slideDown', [
 		style({ height: 0, opacity: 0 }),
 
 		// animation and styles at end of transition
-		animate('300ms', style({ height: '*', opacity: 1 }))
+		animate('300ms', style({ height: '*', opacity: 1, overflow: 'visible' })),
+
+		// style({ overflow: 'hidden' })
 
 	]),
 	transition(':leave', [
 
 		// css styles at start of transition
-		style({ height: '*', opacity: 1, overflow: 'hidden' }),
+		style({ height: '*', opacity: 1 }),
 
 		// animation and styles at end of transition
-		animate('300ms', style({ height: 0, opacity: 0 }))
+		animate('300ms', style({ height: 0, opacity: 0, overflow: 'hidden' })),
+
+
+		//style({ overflow: 'visible' })
 
 	])
 

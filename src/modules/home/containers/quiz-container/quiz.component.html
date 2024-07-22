@@ -85,7 +85,7 @@
 
 	</div>
 
-	<div quiz_choices [@slideUpDown]="choicesVisible() ? 'opened' : 'closed'">
+	<div quiz_choices [@slideChoices]="choicesVisible() ? 'opened' : 'closed'">
 
 		@for (choice of quiz.choices; track $index) {
 
