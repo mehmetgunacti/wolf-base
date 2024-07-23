@@ -67,6 +67,7 @@
 
 			@include mx-component;
 			@include mx-box-shadow;
+			color		: fn-hsl(text);
 			cursor		: pointer;
 
 			&:hover {
