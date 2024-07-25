@@ -12,11 +12,11 @@
 	}
 
 </div>
-<figure quote_outer>
+@if (quote() ?? PICARD; as quote) {
 
-	@if (quote() ?? PICARD; as quote) {
+	<figure quote_outer #quoteOuter [@quoteHeight]="{ value: quote.id, params: { startHeight: quoteOuter.clientHeight }}">
 
-		<blockquote quote_inner [@quoteChange]="quote.id">
+		<blockquote quote_inner>
 
 			<pre quote_name>{{ quote.name }}</pre>
 
@@ -36,7 +36,6 @@
 
 		}
 
-	}
+	</figure>
 
-</figure>
-
+}

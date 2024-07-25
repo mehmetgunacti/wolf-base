@@ -2,7 +2,7 @@ import { PinnedNotesContainerComponent } from './containers/pinned-notes-contain
 import { PopularBookmarksContainerComponent } from "./containers/popular-bookmarks-container/popular-bookmarks-container.component";
 import { QuizAnswerContainerComponent } from './containers/quiz-answer-container/quiz-answer-container.component';
 import { QuizComponent } from './containers/quiz-container/quiz.component';
-import { QuoteViewerComponent } from './containers/quote-viewer/quote-viewer.component';
+import { QuoteContainerComponent } from './containers/quote-container/quote-container.component';
 import { HomePageComponent } from "./pages/home-page/home-page.component";
 
 export const components = [
@@ -10,7 +10,7 @@ export const components = [
 	HomePageComponent,
 	PopularBookmarksContainerComponent,
 	PinnedNotesContainerComponent,
-	QuoteViewerComponent,
+	QuoteContainerComponent,
 	QuizComponent,
 	QuizAnswerContainerComponent
 

@@ -3,6 +3,7 @@ import { Quote, onEnterFadeOutTrigger, quoteChangeTrigger } from '@lib';
 import { Store } from '@ngrx/store';
 import { setRunning } from 'store/actions/quote.actions';
 import { selQuoteViewer_quote, selQuoteViewer_running } from 'store/selectors/quote-selectors/quote-viewer.selectors';
+import { quoteHeightTrigger } from './quote-container.animation';
 
 const picard: Quote = {
 
@@ -14,13 +15,13 @@ const picard: Quote = {
 };
 
 @Component({
-	selector: 'app-quote-viewer',
-	templateUrl: './quote-viewer.component.html',
-	styleUrls: ['./quote-viewer.component.scss'],
-	animations: [onEnterFadeOutTrigger, quoteChangeTrigger],
+	selector: 'app-quote-container',
+	templateUrl: './quote-container.component.html',
+	styleUrls: ['./quote-container.component.scss'],
+	animations: [onEnterFadeOutTrigger, quoteHeightTrigger],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class QuoteViewerComponent {
+export class QuoteContainerComponent {
 
 	protected PICARD = picard;
 
