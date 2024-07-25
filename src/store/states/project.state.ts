@@ -1,4 +1,4 @@
-import { Project, RemoteMetadata, SyncData, UUID } from '@lib';
+import { Project, ProjectQueryParams, RemoteMetadata, SyncData, UUID } from '@lib';
 
 export interface Project_ModuleState {
 
@@ -18,6 +18,7 @@ export interface Project_EntitiesState {
 export interface Project_UIState {
 
 	selectedId: UUID | null;
+	queryParams: ProjectQueryParams;
 
 }
 
@@ -33,7 +34,10 @@ export const project_initialEntitiesState: Project_EntitiesState = {
 
 export const initialProjectUIState: Project_UIState = {
 
-	selectedId: null
+	selectedId: null,
+	queryParams: {
+		search: null
+	}
 
 };
 

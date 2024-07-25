@@ -28,6 +28,12 @@
 				<span> Words</span>
 			</ng-container>
 
+			<!-- Projects -->
+			<ng-container *ngSwitchCase="WolfEntity.project.name">
+				<span class="material-symbols-outlined">task_alt</span>
+				<span> Projects</span>
+			</ng-container>
+
 			<!-- Quotes -->
 			<ng-container *ngSwitchCase="WolfEntity.quote.name">
 				<span class="material-symbols-outlined">format_quote</span>

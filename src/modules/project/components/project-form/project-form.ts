@@ -1,6 +1,7 @@
 import { InjectionToken, WritableSignal, signal } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ISODateString, ObjectId, Project, ProjectStatus, Task, TaskGroup, TaskPriority, TaskState, UUID } from '@lib';
+import { formatDate } from '@angular/common';
 
 interface TaskFormSchema {
 
@@ -22,7 +23,7 @@ interface TaskGroupFormSchema {
 
 	id: FormControl<UUID | null>;
 	name: FormControl<string>;
-	tasks: FormArray<FormGroup<TaskFormSchema>>;
+	// tasks: FormArray<FormGroup<TaskFormSchema>>;
 
 }
 
@@ -32,7 +33,7 @@ interface ProjectFormSchema {
 	name: FormControl<string>;
 	description: FormControl<string | null>;
 	status: FormControl<ProjectStatus>;
-	start: FormControl<ISODateString>;
+	start: FormControl<string>;
 	end: FormControl<ISODateString | null>;
 	taskGroups: FormArray<FormGroup<TaskGroupFormSchema>>;
 
@@ -57,7 +58,6 @@ class TaskForm {
 		public readonly objectId: string,
 		task?: Task
 	) {
-
 
 		this.id = new FormControl(null);
 		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
@@ -160,7 +160,7 @@ class TaskGroupForm {
 
 			id: this.id,
 			name: this.name,
-			tasks: new FormArray(this.tasks().map(t => t.formGroup()))
+			// tasks: new FormArray(this.tasks().map(t => t.formGroup()))
 
 		});
 
@@ -171,9 +171,9 @@ class TaskGroupForm {
 		this.id.setValue(taskGroup.id);
 		this.name.setValue(taskGroup.name);
 
-		this.tasks.set(
-			taskGroup.tasks.map(t => new TaskForm(this.taskId.next(), t))
-		);
+		// this.tasks.set(
+		// 	taskGroup.tasks.map(t => new TaskForm(this.taskId.next(), t))
+		// );
 
 	}
 
@@ -201,7 +201,7 @@ export class ProjectForm {
 		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
 		this.description = new FormControl<string | null>(null);
 		this.status = new FormControl<ProjectStatus>(ProjectStatus.ongoing, { validators: [Validators.required], nonNullable: true });
-		this.start = new FormControl<ISODateString>(new Date().toISOString(), { validators: [Validators.required], nonNullable: true });
+		this.start = new FormControl<string>(formatDate(new Date(), 'yyyy-MM-dd', 'en'), { validators: [Validators.required], nonNullable: true });
 		this.end = new FormControl<string | null>(null);
 
 		// task groups
@@ -251,7 +251,7 @@ export class ProjectForm {
 		this.name.setValue(project.name);
 		this.description.setValue(project.description);
 		this.status.setValue(project.status);
-		this.start.setValue(project.start);
+		this.start.setValue(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
 		this.end.setValue(project.end);
 
 		this.taskGroups.set(project.taskGroups.map(tg => new TaskGroupForm(this.taskGroupId.next(), tg)));

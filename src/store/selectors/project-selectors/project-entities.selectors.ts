@@ -30,6 +30,21 @@ export const selProjects_count = createSelector(
 
 );
 
+export const selProject_search = createSelector(
+
+	selProject_UIState,
+	state => state.queryParams.search
+
+);
+
+export const selProject_filtered = createSelector(
+
+	selProject_array,
+	selProject_search,
+	(arr, search) => search !== null ? arr.filter(word => word.name.toLocaleLowerCase().includes(search.toLowerCase())) : arr
+
+);
+
 const selProject_selectedId = createSelector(
 
 	selProject_UIState,

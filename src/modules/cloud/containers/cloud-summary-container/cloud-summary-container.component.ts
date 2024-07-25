@@ -6,6 +6,7 @@ import * as bmActions from 'store/actions/bookmark.actions';
 import * as noteActions from 'store/actions/note.actions';
 import * as contentActions from 'store/actions/note-content.actions';
 import * as wordActions from 'store/actions/word.actions';
+import * as projectActions from 'store/actions/project.actions';
 import * as quoteActions from 'store/actions/quote.actions';
 import * as quizEntryActions from 'store/actions/quiz-entry.actions';
 import { selCloudAvailableTasks } from 'store/selectors/cloud.selectors';
@@ -223,6 +224,41 @@ function getQuizEntryAction(taskType: SyncTaskType): Action | null {
 
 }
 
+function getProjectAction(taskType: SyncTaskType): Action | null {
+
+	switch (taskType) {
+
+		case SyncTaskType.local_new:
+			return projectActions.syncLocalNew();
+
+		case SyncTaskType.local_updated:
+			return projectActions.syncLocalUpdated();
+
+		case SyncTaskType.local_deleted:
+			return projectActions.syncLocalDeleted();
+
+		case SyncTaskType.remote_new:
+			return projectActions.syncRemoteNew();
+
+		case SyncTaskType.remote_updated:
+			return projectActions.syncRemoteUpdated();
+
+		case SyncTaskType.remote_deleted:
+			return projectActions.syncRemoteDeleted();
+
+		case SyncTaskType.deleted_deleted:
+			return projectActions.syncDeletedDeleted();
+
+		// case CloudTaskType.updated_updated:
+		// case CloudTaskType.updated_deleted:
+		// case CloudTaskType.deleted_updated:
+		// 	return EMPTY;
+
+	}
+	return null;
+
+}
+
 function getAction(task: CloudTask): Action | null {
 
 	if (WolfEntity.bookmark.name === task.entity.name)
@@ -242,6 +278,9 @@ function getAction(task: CloudTask): Action | null {
 
 	if (WolfEntity.quizEntry.name === task.entity.name)
 		return getQuizEntryAction(task.type);
+
+	if (WolfEntity.project.name === task.entity.name)
+		return getProjectAction(task.type);
 
 	return null;
 

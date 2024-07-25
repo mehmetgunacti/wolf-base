@@ -1,4 +1,4 @@
-@for(task of tasks$ | async; track task) {
+@for(task of tasks$ | async; track task.entity.name) {
 
 	<app-cloud-task
 		[task]="task"

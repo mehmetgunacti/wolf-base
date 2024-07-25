@@ -25,7 +25,16 @@ export class DexieProjectsRepositoryImpl extends EntityLocalRepositoryImpl<Proje
 		if (taskGroups.length < 1)
 			throw Error('Create `Project`: taskGroups array is empty')
 
-		taskGroups.forEach(d => d.id = uuidv4());
+		const updated: Partial<Project> = produce(
+
+			item,
+			draft => {
+
+				draft.taskGroups?.filter(tg => !tg.id).forEach(tg => tg.id = uuidv4())
+
+			}
+
+		);
 
 		const instance: Project = {
 
@@ -44,7 +53,7 @@ export class DexieProjectsRepositoryImpl extends EntityLocalRepositoryImpl<Proje
 			end: null
 
 		};
-		return { ...instance, ...item, id } as Project;
+		return { ...instance, ...updated, id } as Project;
 
 	}
 

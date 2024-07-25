@@ -43,5 +43,27 @@ export class ProjectUIEffects {
 
 	);
 
+	// whenever address bar query params change emit setQueryParams action for reducers to update state
+	onQueryParamsChange$ = createEffect(
+
+		() => this.router.events.pipe(
+
+			filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+			filter(e => e.urlAfterRedirects.startsWith('/projects')),
+			withLatestFrom(this.activatedRoute.queryParamMap),
+			map(([, paramMap]) =>
+
+				projectActions.setQueryParams({
+
+					search: paramMap.get('search') ?? null
+
+				})
+
+			)
+
+		)
+
+	);
+
 }
 

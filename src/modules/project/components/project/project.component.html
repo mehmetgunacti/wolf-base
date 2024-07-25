@@ -3,21 +3,50 @@
 	<h1>
 
 		{{ project.name }}
+		<small>{{ project.id }}</small>
 
 	</h1>
 
-	<div>ID</div><div>{{ project.id }}</div>
-	<div>name</div><div>{{ project.name }}</div>
-	<div>description</div><div>{{ project.description }}</div>
-	<div>status</div><div>{{ project.status }}</div>
-	<div>start</div><div>{{ project.start }}</div>
-	<div>end</div><div>{{ project.end }}</div>
+	<div row>
+
+		<small>Description</small>
+		<div>{{ project.description }}</div>
+	</div>
+
+	<div row>
+
+		<small>Status</small>
+		<div>{{ ProjectStatusLabels[project.status] }}</div>
+
+	</div>
+
+	<div row start_end_row>
+
+		<div>
+
+			<small>Start : {{ project.start | timePast:false }}</small>
+			<div>{{ project.start | date:'EEEE dd.MM.yyyy' }}</div>
+
+		</div>
+		<div>
+
+			<small>End</small>
+			<div>{{ project.end | date:'EEEE dd.MM.yyyy' }}</div>
+
+		</div>
+
+	</div>
 
 	@for (taskGroup of project.taskGroups; track $index) {
 
-		<div>Name</div><div>{{ taskGroup.name }}</div>
+		<fieldset>
+
+			<legend>{{ taskGroup.name }}</legend>
+
+		</fieldset>
 
 	}
+
 
 } @else {
 

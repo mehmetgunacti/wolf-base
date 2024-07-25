@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { search } from 'store/actions/project.actions';
+import { selProject_search } from 'store/selectors/project-selectors/project-entities.selectors';
 
 @Component({
 	selector: 'app-project-filter-container',
@@ -19,7 +20,7 @@ export class ProjectFilterContainerComponent {
 
 	constructor() {
 
-		this.term$ = of(''); // this.store.select(selProject_search);
+		this.term$ = this.store.select(selProject_search);
 
 	}
 

@@ -9,7 +9,7 @@ export enum ProjectStatus {
 
 }
 
-const ProjectStatusLabels: Record<string, string> = {
+export const ProjectStatusLabels: Record<string, string> = {
 
 	[ProjectStatus.ongoing]: 'Ongoing',
 	[ProjectStatus.paused]: 'On Hold',
@@ -29,7 +29,7 @@ export enum TaskState {
 
 }
 
-const TaskStateLabels: Record<string, string> = {
+export const TaskStateLabels: Record<string, string> = {
 
 	[TaskState.ongoing]: 'Ongoing',
 	[TaskState.paused]: 'On Hold',
@@ -48,7 +48,7 @@ export enum TaskPriority {
 
 }
 
-const TaskPriorityLabels: Record<string, string> = {
+export const TaskPriorityLabels: Record<string, string> = {
 
 	[TaskPriority.high]: 'High',
 	[TaskPriority.normal]: 'Normal',

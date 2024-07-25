@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, InputSignal, input } from '@angular/core';
-import { Project } from '@lib';
+import { Project, PROJECT_STATUS, ProjectStatusLabels } from '@lib';
 
 @Component({
 	selector: 'app-project',
@@ -8,6 +8,8 @@ import { Project } from '@lib';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectComponent {
+
+	protected ProjectStatusLabels = ProjectStatusLabels;
 
 	project: InputSignal<Project> = input.required();
 

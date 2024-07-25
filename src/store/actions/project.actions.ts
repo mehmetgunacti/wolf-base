@@ -1,4 +1,4 @@
-import { RemoteMetadata, SyncData, UUID, Project } from '@lib';
+import { RemoteMetadata, SyncData, UUID, Project, ProjectQueryParams } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // CRUD
@@ -39,6 +39,7 @@ export const loadAllRemoteMetadataSuccess	= createAction('[Project] Load All Rem
 // UI
 export const search							= createAction('[Project] Search', props<{ term: string | null }>());
 export const setSelectedId					= createAction('[Project] Set Selected Id', props<{ id: UUID | null }>());
+export const setQueryParams					= createAction('[Project] Set Query State', props<ProjectQueryParams>());
 
 // CLOUD SYNC
 // local_new

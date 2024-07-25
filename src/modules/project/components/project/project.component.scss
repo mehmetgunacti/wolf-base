@@ -6,34 +6,39 @@
 :host {
 
 	@include mx-card(3);
+	@include mx-flex-column;
+	gap		: var(--gap-sm);
 
-	& div[definition] {
+	fieldset {
 
-		position	: relative;
-		margin-top	: calc(2 * var(--gap-lg));
 		@include mx-component(4);
 
-		& > [language] {
+		& > legend {
 
-			@include mx-flex-center-y;
-			gap		: var(--gap-sm);
+			@include mx-component(5);
+			padding 	: var(--gap-xs) var(--gap);
 
-		}
-
-		& > [schedule] {
-
-			position	: absolute;
-			top			: 0;
-			right		: 0;
-			padding		: var(--gap-xxl) var(--gap-xxl);
 		}
 
 	}
 
-	& img.flag {
+	[row] {
 
-		width	: 12px;
-		height	: 9px;
+		@include mx-component(4);
+		padding		: var(--gap-lg);
+
+	}
+
+	[start_end_row] {
+
+		display		: flex;
+		gap			: var(--gap-sm);
+
+		& > div {
+
+			width	: 50%;
+
+		}
 
 	}
 

@@ -30,3 +30,9 @@ export interface Task extends NameBase {
 	end: ISODateString | null;
 
 }
+
+export interface ProjectQueryParams {
+
+	search: string | null
+
+}
