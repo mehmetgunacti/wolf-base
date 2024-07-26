@@ -36,6 +36,7 @@ export const loadAllRemoteMetadataSuccess	= createAction('[Quote] Load All Remot
 // Viewer
 export const changeQuote					= createAction('[Quote Viewer] Change Quote', props<{ id: UUID }>());
 export const setRunning						= createAction('[Quote Viewer] Set Running', props<{ running: boolean }>());
+export const disableAnimation				= createAction('[Quote Viewer] Disable Animation');
 
 // Settings
 export const setSelectedId					= createAction('[Quote] Set Selected Id', props<{ id: UUID | null }>());

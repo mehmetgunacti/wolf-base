@@ -24,3 +24,10 @@ export const selQuoteViewer_quote = createSelector(
 	(entities, id) => id ? entities[id] ?? null : null
 
 );
+
+export const selQuoteViewer_animate = createSelector(
+
+	selQuote_ViewerState,
+	(state: Quote_ViewerState) => state.animate
+
+);

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, HostListener, Signal, WritableSignal, inject, signal } from '@angular/core';
 import { Quote, onEnterFadeOutTrigger, quoteChangeTrigger } from '@lib';
 import { Store } from '@ngrx/store';
-import { setRunning } from 'store/actions/quote.actions';
-import { selQuoteViewer_quote, selQuoteViewer_running } from 'store/selectors/quote-selectors/quote-viewer.selectors';
+import { disableAnimation, setRunning } from 'store/actions/quote.actions';
+import { selQuoteViewer_animate, selQuoteViewer_quote, selQuoteViewer_running } from 'store/selectors/quote-selectors/quote-viewer.selectors';
 import { quoteHeightTrigger } from './quote-container.animation';
 
 const picard: Quote = {
@@ -28,6 +28,7 @@ export class QuoteContainerComponent {
 	private store: Store = inject(Store);
 
 	quote: Signal<Quote | null> = this.store.selectSignal(selQuoteViewer_quote);
+	animate: Signal<boolean> = this.store.selectSignal(selQuoteViewer_animate);
 	running: Signal<boolean> = this.store.selectSignal(selQuoteViewer_running);
 	showPlay: WritableSignal<boolean> = signal(false);
 
@@ -42,6 +43,12 @@ export class QuoteContainerComponent {
 
 		}
 		this.store.dispatch(setRunning({ running: !this.running() }));
+
+	}
+
+	onAnimationEnd(): void {
+
+		this.store.dispatch(disableAnimation());
 
 	}
 

@@ -14,7 +14,12 @@
 </div>
 @if (quote() ?? PICARD; as quote) {
 
-	<figure quote_outer #quoteOuter [@quoteHeight]="{ value: quote.id, params: { startHeight: quoteOuter.clientHeight }}">
+	<figure
+			quote_outer
+			#quoteOuter
+			[@quoteHeight]="{ value: quote.id, params: { startHeight: quoteOuter.clientHeight }}"
+			[@.disabled]="!animate()"
+			(@quoteHeight.done)="onAnimationEnd()">
 
 		<blockquote quote_inner>
 

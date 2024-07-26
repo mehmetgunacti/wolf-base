@@ -20,6 +20,7 @@ export interface Quote_ViewerState {
 
 	selectedId: UUID | null;
 	running: boolean;
+	animate: boolean;
 
 }
 
@@ -42,7 +43,8 @@ export const quote_initialEntitiesState: Quote_EntitiesState = {
 export const quote_initialViewerState: Quote_ViewerState = {
 
 	selectedId: null,
-	running: false
+	running: false,
+	animate: true
 
 };
 
