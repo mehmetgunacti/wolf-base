@@ -1,6 +1,8 @@
-@if (quotes().length > 0) {
+<w-input type="search" [control]="fcSearch" name="Search" />
 
-	<div quotes_list>
+<div quotes_list>
+
+	@if (quotes().length > 0) {
 
 		@for (quote of quotes(); track quote.id) {
 
@@ -13,12 +15,12 @@
 
 		}
 
-	</div>
+	} @else {
 
-} @else {
+		<div class="empty">
+			No quotes available
+		</div>
 
-	<div class="empty">
-		No quotes available
-	</div>
+	}
 
-}
+</div>

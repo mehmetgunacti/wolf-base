@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, InputSignal, Output, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, InputSignal, Output, input, output } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl } from '@angular/forms';
 import { Quote, UUID } from '@lib';
 
 @Component({
@@ -10,8 +12,21 @@ import { Quote, UUID } from '@lib';
 export class QuoteSettingsListComponent {
 
 	quotes: InputSignal<Quote[]> = input.required();
+	fcSearch: FormControl<string | null>;
 
 	@Output() select: EventEmitter<UUID> = new EventEmitter();
+	search = output<string>();
+
+	constructor() {
+
+		this.fcSearch = new FormControl('');
+		this.fcSearch.valueChanges.pipe(
+			takeUntilDestroyed()
+		).subscribe(
+			term => this.search.emit(term ?? '')
+		)
+
+	}
 
 	onSelect(quote: Quote): void {
 

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Quote, UUID } from '@lib';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 import { create, moveToTrash, setSelectedId, update } from 'store/actions/quote.actions';
 import { selQuote_array } from 'store/selectors/quote-selectors/quote-entities.selectors';
 import { selQuoteSettings_selected } from 'store/selectors/quote-selectors/quote-settings.selectors';
@@ -14,10 +14,31 @@ import { selQuoteSettings_selected } from 'store/selectors/quote-selectors/quote
 })
 export class QuoteSettingsContainerComponent {
 
+	private search: Subject<string> = new BehaviorSubject<string>('');
 	private store: Store = inject(Store);
 
-	quotes$: Observable<Quote[]> = this.store.select(selQuote_array);
+	quotes$: Observable<Quote[]> = combineLatest([
+		this.store.select(selQuote_array),
+		this.search.asObservable()
+	]).pipe(
+
+		map(([quotes, searchTerm]) => {
+
+			if (searchTerm)
+				return quotes.filter(quote => quote.name.includes(searchTerm));
+			return quotes;
+
+		})
+
+	);
 	selected$: Observable<Quote | null> = this.store.select(selQuoteSettings_selected);
+
+	onSearch(term: string): void {
+
+		console.log(term);
+		this.search.next(term);
+
+	}
 
 	onCreate(quote: Partial<Quote>): void {
 

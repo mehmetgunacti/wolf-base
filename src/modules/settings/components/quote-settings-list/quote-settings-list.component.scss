@@ -7,6 +7,9 @@
 
 :host{
 
+	@include mx-flex-column;
+	gap		: var(--gap-sm);
+
 	& > [quotes_list] {
 
 		@include mx-component(4);

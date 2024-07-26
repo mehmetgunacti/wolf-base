@@ -11,6 +11,9 @@
 		(update)="onUpdate($event)"
 		(delete)="onDelete($event)"
 		(reset)="onReset()" />
-	<app-quote-settings-list [quotes]="(quotes$ | async) ?? []" (select)="onSelected($event)" />
+	<app-quote-settings-list
+		[quotes]="(quotes$ | async) ?? []"
+		(select)="onSelected($event)"
+		(search)="onSearch($event)" />
 
 </main>
