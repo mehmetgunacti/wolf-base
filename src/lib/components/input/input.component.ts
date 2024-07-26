@@ -36,6 +36,7 @@ export class InputComponent implements OnInit {
 
 			case 'text': return  !!val;
 			case 'date': return !!val;
+			case 'search': return !!val;
 			case 'number': return typeof val === 'number' && Number.isFinite(Number(val));
 
 		}
