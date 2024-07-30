@@ -21,7 +21,6 @@ export class QuizContainerComponent {
 	private store: Store = inject(Store);
 	private quizService: QuizService = inject(QuizService);
 
-
 	quiz: Signal<Quiz | null>;
 	dueItemsCount: Signal<number>;
 	choicesVisible: Signal<boolean>;
