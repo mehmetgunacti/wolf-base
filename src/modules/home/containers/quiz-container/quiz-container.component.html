@@ -1,9 +1,28 @@
+<ng-template #questionTemplate let-quiz>
+
+	@if (quiz.isVerb) { to } {{ quiz.word.name }}
+	@if (quiz.word.pronunciation) {
+
+		<br><small>{{ quiz.word.pronunciation }}</small>
+
+	}
+
+</ng-template>
+<ng-template #choiceTemplate let-quiz="quiz" let-choice="choice">
+
+	<span>@if (quiz.isVerb) { to } {{ choice.name }}</span>
+
+</ng-template>
+
 @if (quiz(); as quiz) {
 
 	<div quiz_header>
 
 		<div quiz_question_wrapper>
 
+			<!---------->
+			<!-- ICON -->
+			<!---------->
 			<div quiz_icon class="badge-container">
 
 				<span class="material-symbols-outlined">quiz</span>
@@ -14,17 +33,16 @@
 				}
 
 			</div>
+
+			<!-------------->
+			<!-- QUESTION -->
+			<!-------------->
 			<div quiz_question [@quoteChange]="quiz.definition.id">
 
 				<small>({{quiz.definition.type}})</small>
 				@if (quiz.askWord) {
 
-					@if (quiz.isVerb) { to } {{ quiz.word.name }}
-					@if (quiz.pronunciation) {
-
-						<br><small>{{ quiz.pronunciation }}</small>
-
-					}
+					<ng-container *ngTemplateOutlet="questionTemplate; context: { $implicit: quiz }" />
 
 				} @else {
 
@@ -33,6 +51,10 @@
 				}
 
 			</div>
+
+			<!----------------------->
+			<!-- TOP-RIGHT BUTTONS -->
+			<!----------------------->
 			<div quiz_solve>
 
 				<button
@@ -58,9 +80,9 @@
 		</div>
 		<div quiz_contexts>
 
-			@for (context of quiz.contexts; track $index) {
+			@for (context of quiz.word.contexts; track $index) {
 
-				<blockquote class="primary" [innerHTML]="context"></blockquote>
+				<blockquote class="primary" [innerHTML]="context | markHighlight:quiz.word.name:quiz.askWord"></blockquote>
 
 			}
 
@@ -71,10 +93,12 @@
 
 				<ul class="clear">
 
-					@for (sample of quiz.samples; track $index) {
+					@for (definition of quiz.word.definitions; track $index) {
+						@for (sample of definition.samples; track $index) {
 
-						<li [innerHTML]="sample"></li>
+							<li [innerHTML]="sample | markHighlight:quiz.word.name:quiz.askWord"></li>
 
+						}
 					}
 
 				</ul>
@@ -85,15 +109,22 @@
 
 	</div>
 
-	<div quiz_choices [@slideChoices]="choicesVisible() ? 'opened' : 'closed'">
+	<!------------->
+	<!-- CHOICES -->
+	<!------------->
+	<div
+		quiz_choices
+		[@slideChoices]="choicesVisible() ? 'opened' : 'closed'"
+		[@choicesBlink]="animationState()"
+		(@choicesBlink.done)="complete($event, quiz)">
 
 		@for (choice of quiz.choices; track $index) {
 
 			<div
 				quiz_choice
-				(click)="checkAnswer(quiz, choice.definitions[0].id)"
-				[class.success]="blinkSuccess() === choice.definitions[0].id"
-				[class.failure]="blinkFailure() === choice.definitions[0].id">
+				[class.correct]="quiz.correctChoice() === $index"
+				[class.incorrect]="quiz.incorrectChoice() === $index"
+				(click)="onChoiceClick(quiz, $index)">
 
 				@if (quiz.askWord) {
 
@@ -101,7 +132,7 @@
 
 				} @else {
 
-					<span [@quoteChange]="choice.id">@if (quiz.isVerb) { to } {{ choice.name }}</span>
+					<ng-container *ngTemplateOutlet="choiceTemplate; context: { choice, quiz }" />
 
 				}
 

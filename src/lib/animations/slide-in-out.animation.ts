@@ -11,8 +11,8 @@ export const slideUpDownTrigger = trigger('slideUpDown', [
 
 export const slideChoicesTrigger = trigger('slideChoices', [
 
-	state('closed', style({ height: '0px', visibility: 'hidden', opacity: 0, overflow: 'hidden', paddingTop: 0 })),
-	state('opened', style({ height: '*', visibility: 'visible', opacity: 1, overflow: 'visible' })),
+	state('closed', style({ height: '0px', visibility: 'hidden', opacity: 0, paddingTop: 0 })),
+	state('opened', style({ height: '*', visibility: 'visible', opacity: 1 })),
 
 	transition('closed <=> opened', animate('300ms ease-in'))
 

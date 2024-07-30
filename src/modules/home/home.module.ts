@@ -5,6 +5,7 @@ import { SharedModule } from 'modules/shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import * as fromConfig from './home.config';
 import { OverlayContainerModule } from '@lib';
+import { MarkOrHighlightModule } from 'lib/pipes/mark-or-highlight.pipe';
 
 @NgModule({
 	declarations: fromConfig.components,
@@ -13,7 +14,8 @@ import { OverlayContainerModule } from '@lib';
 		HomeRoutingModule,
 		ReactiveFormsModule,
 		SharedModule,
-		OverlayContainerModule
+		OverlayContainerModule,
+		MarkOrHighlightModule
 	],
 	providers: []
 })

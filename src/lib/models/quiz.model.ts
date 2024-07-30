@@ -3,6 +3,16 @@ import { Entity } from './entity.model';
 import { NameBase } from './id-base.model';
 import { Definition, definitionName, Word } from './word.model';
 import { maskOrHighlight } from 'lib/utils';
+import { signal } from '@angular/core';
+
+export const enum AnimState {
+
+	active = 'active',
+	inactive = 'inactive'
+
+}
+
+type Index = number;
 
 export interface QuizProgress extends Entity {
 
@@ -18,12 +28,13 @@ export class Quiz {
 
 	word: Word;
 	definition: Definition;
-	// question: NameBase;
-	pronunciation: string | null;
+
 	choices: Word[];
 
-	contexts: string[];
-	samples: string[];
+	private correctIndex: Index = -1;
+
+	correctChoice = signal<Index | null>(null);
+	incorrectChoice = signal<Index | null>(null);
 
 	constructor(public words: Word[]) {
 
@@ -38,39 +49,24 @@ export class Quiz {
 		this.definition = definition;
 		this.isVerb = definition.type === DefinitionType.verb;
 
-		// prepare question
-		// this.question = {
-
-		// 	id: definition.id,
-		// 	name: `(${definition.type}) ` + (askWord ? (isVerb ? 'to ' : ' ') + word.name : definitionName(definition))
-
-		// };
-
-		// set pronunciation
-		this.pronunciation = word.pronunciation;
-
-		// set contexts
-		this.contexts = [
-			...word.contexts.map(s => maskOrHighlight(s, word.name, askWord))
-		]
-
-		// set samples
-		this.samples = [
-			...word.definitions.flatMap(
-				d => d.samples.map(s => maskOrHighlight(s, word.name, askWord))
-			)
-		];
-
-		// prepare choices
-		// const tmpChoices: Word[] = [];
-		// const tmpWords = [...words].sort(() => Math.random() - 0.5); // shuffle
-		// tmpWords.forEach(w => tmpChoices.push({
-
-		// 	id: w.definitions[0].id,
-		// 	name: askWord ? definitionName(w.definitions[0]) : w.name
-
-		// }));
 		this.choices = [...words].sort(() => Math.random() - 0.5); // shuffle
+		this.correctIndex = this.choices.findIndex(w => w.id === this.word.id);
+
+	}
+
+	onClick(index: Index): void {
+
+		if (index === this.correctIndex) {
+
+			this.correctChoice.set(index);
+			this.incorrectChoice.set(null);
+
+		} else {
+
+			this.correctChoice.set(this.correctIndex);
+			this.incorrectChoice.set(index);
+
+		}
 
 	}
 
