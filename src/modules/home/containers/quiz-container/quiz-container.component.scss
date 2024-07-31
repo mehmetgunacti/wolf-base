@@ -35,12 +35,17 @@
 			}
 
 		}
-		& > [quiz_contexts],
-		& > [quiz_samples] {
 
-			display		: grid;
-			font-size	: smaller;
-			padding		: var(--gap-sm) var(--gap-xl);
+		& > [quiz_hints] {
+
+			& > [quiz_contexts],
+			& > [quiz_samples] {
+
+				display		: grid;
+				font-size	: smaller;
+				padding		: var(--gap-sm) var(--gap-xl);
+
+			}
 
 		}
 

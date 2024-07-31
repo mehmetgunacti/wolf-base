@@ -64,46 +64,49 @@
 					<span class="material-symbols-outlined">contact_support</span>
 				</button>
 
-				@if (!choicesVisible()) {
-
-					<button
-						class="icon-only small"
-						(click)="showChoices()"
-						title="Show Choices">
-						<span class="material-symbols-outlined">stat_minus_2</span>
-					</button>
-
-				}
+				<button
+					class="icon-only small"
+					(click)="increaseVisibility()"
+					[title]="btnTitle()"
+					[@upsideDown]="visibility() === QuizVisibility.CHOICES">
+					<span class="material-symbols-outlined">stat_minus_2</span>
+				</button>
 
 			</div>
 
 		</div>
-		<div quiz_contexts>
+		<div
+			quiz_hints
+			[@slideChoices]="visibility() >= QuizVisibility.HINTS ? 'opened' : 'closed'">
 
-			@for (context of quiz.word.contexts; track $index) {
+			<div quiz_contexts>
 
-				<blockquote class="primary" [innerHTML]="context | markHighlight:quiz.word.name:quiz.askWord"></blockquote>
+				@for (context of quiz.word.contexts; track $index) {
 
-			}
+					<blockquote class="primary" [innerHTML]="context | markHighlight:quiz.word.name:quiz.askWord"></blockquote>
 
-		</div>
-		<div quiz_samples>
+				}
 
-			<blockquote class="small">
+			</div>
+			<div quiz_samples>
 
-				<ul class="clear">
+				<blockquote class="small">
 
-					@for (definition of quiz.word.definitions; track $index) {
-						@for (sample of definition.samples; track $index) {
+					<ul class="clear">
 
-							<li [innerHTML]="sample | markHighlight:quiz.word.name:quiz.askWord"></li>
+						@for (definition of quiz.word.definitions; track $index) {
+							@for (sample of definition.samples; track $index) {
 
+								<li [innerHTML]="sample | markHighlight:quiz.word.name:quiz.askWord"></li>
+
+							}
 						}
-					}
 
-				</ul>
+					</ul>
 
-			</blockquote>
+				</blockquote>
+
+			</div>
 
 		</div>
 
@@ -114,7 +117,7 @@
 	<!------------->
 	<div
 		quiz_choices
-		[@slideChoices]="choicesVisible() ? 'opened' : 'closed'"
+		[@slideChoices]="visibility() === QuizVisibility.CHOICES ? 'opened' : 'closed'"
 		[@choicesBlink]="animationState()"
 		(@choicesBlink.done)="complete($event, quiz)">
 

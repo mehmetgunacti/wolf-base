@@ -1,4 +1,4 @@
-import { trigger, state, style, animate, transition, group, query, keyframes } from '@angular/animations';
+import { animate, group, keyframes, query, state, style, transition, trigger } from '@angular/animations';
 
 const timing = '1.5s';
 export const choicesBlinkTrigger = trigger('choicesBlink', [
@@ -19,7 +19,7 @@ export const choicesBlinkTrigger = trigger('choicesBlink', [
 
 						style({ backgroundColor: 'var(--color-green)' }),
 						style({ backgroundColor: '*' }),
-						style({ backgroundColor: 'var(--color-green)'}),
+						style({ backgroundColor: 'var(--color-green)' }),
 						style({ backgroundColor: '*' }),
 						style({ backgroundColor: 'var(--color-green)' })
 

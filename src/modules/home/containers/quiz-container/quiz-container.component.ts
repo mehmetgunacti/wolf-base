@@ -1,11 +1,11 @@
 import { AnimationEvent } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, inject, signal, Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, Signal, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { AnimState, Quiz, quoteChangeTrigger, slideChoicesTrigger, Word } from '@lib';
+import { AnimState, Quiz, QuizVisibility, quoteChangeTrigger, slideChoicesTrigger, upsideDownTrigger, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { QuizService } from 'services/quiz.service';
-import { openShowAnswerDialog, revealChoices, update } from 'store/actions/quiz-entry.actions';
-import { selQuiz_choicesVisible } from 'store/selectors/quiz-entry-selectors/quiz-entry-ui.selectors';
+import { increaseVisibility, openShowAnswerDialog, update } from 'store/actions/quiz-entry.actions';
+import { selQuiz_visibility } from 'store/selectors/quiz-entry-selectors/quiz-entry-ui.selectors';
 import { selQuiz_dueItemsCount } from 'store/selectors/quiz-entry-selectors/quiz.selectors';
 import { choicesBlinkTrigger } from './quiz.animation';
 
@@ -13,24 +13,39 @@ import { choicesBlinkTrigger } from './quiz.animation';
 	selector: 'app-quiz-container',
 	templateUrl: './quiz-container.component.html',
 	styleUrls: ['./quiz-container.component.scss'],
-	animations: [choicesBlinkTrigger, slideChoicesTrigger, quoteChangeTrigger],
+	animations: [choicesBlinkTrigger, slideChoicesTrigger, quoteChangeTrigger, upsideDownTrigger],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizContainerComponent {
+
+	QuizVisibility = QuizVisibility;
 
 	private store: Store = inject(Store);
 	private quizService: QuizService = inject(QuizService);
 
 	quiz: Signal<Quiz | null>;
+	visibility: Signal<QuizVisibility>;
+	btnTitle: Signal<string>;
 	dueItemsCount: Signal<number>;
-	choicesVisible: Signal<boolean>;
 	animationState: WritableSignal<AnimState>;
 
 	constructor() {
 
 		this.quiz = toSignal(this.quizService.quiz$, { initialValue: null });
 		this.dueItemsCount = this.store.selectSignal(selQuiz_dueItemsCount);
-		this.choicesVisible = this.store.selectSignal(selQuiz_choicesVisible);
+		this.visibility = this.store.selectSignal(selQuiz_visibility);
+		this.btnTitle = computed(() => {
+
+			const current: QuizVisibility = this.visibility();
+			switch (current) {
+
+				case QuizVisibility.HEADER: return 'Show Hints';
+				case QuizVisibility.HINTS: return 'Show Choices';
+				default: return 'Hide All';
+
+			}
+
+		});
 		this.animationState = signal<AnimState>(AnimState.inactive);
 
 	}
@@ -64,9 +79,9 @@ export class QuizContainerComponent {
 
 	}
 
-	showChoices(): void {
+	increaseVisibility(): void {
 
-		this.store.dispatch(revealChoices());
+		this.store.dispatch(increaseVisibility());
 
 	}
 

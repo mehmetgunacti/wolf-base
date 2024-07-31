@@ -51,3 +51,23 @@ export function increase(p: Progress): number {
 }
 
 export const NUMBER_OF_CHOICES = 5; // total choices - 1
+
+export enum QuizVisibility {
+
+	HEADER = 0,
+	HINTS = 1,
+	CHOICES = 2
+
+}
+
+export function incVisibility(current: QuizVisibility): QuizVisibility {
+
+	switch (current) {
+
+		case QuizVisibility.HEADER: return QuizVisibility.HINTS;
+		case QuizVisibility.HINTS: return QuizVisibility.CHOICES;
+		default: return QuizVisibility.HEADER;
+
+	}
+
+}

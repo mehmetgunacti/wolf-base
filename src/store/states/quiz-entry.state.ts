@@ -1,4 +1,4 @@
-import { QuizProgress, RemoteMetadata, SyncData, UUID, Word } from '@lib';
+import { QuizProgress, QuizVisibility, RemoteMetadata, SyncData, UUID, Word } from '@lib';
 
 export interface QuizEntry_ModuleState {
 
@@ -19,7 +19,7 @@ export interface QuizEntry_UIState {
 
 	now: number;
 	answer: Word | null;
-	choicesVisible: boolean;
+	visibility: QuizVisibility;
 
 }
 
@@ -37,7 +37,7 @@ export const quizEntry_initialUIState: QuizEntry_UIState = {
 
 	now: new Date().getTime(),
 	answer: null,
-	choicesVisible: false
+	visibility: QuizVisibility.HEADER
 
 };
 
