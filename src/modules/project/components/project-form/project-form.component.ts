@@ -39,8 +39,6 @@ export class ProjectFormComponent {
 	onSave(): void {
 
 		const formGroup = this.form.formGroup();
-		console.log(isInvalid(formGroup));
-
 		if (isInvalid(formGroup))
 			return;
 
