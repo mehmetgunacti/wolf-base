@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import { setQueryParams, setSelectedId } from 'store/actions/project.actions';
+import { setQueryParams, setSelectedId, toggleInfo } from 'store/actions/project.actions';
 import { initialProjectUIState, Project_UIState } from 'store/states/project.state';
 
 const reducer = createReducer(
@@ -16,14 +16,8 @@ const reducer = createReducer(
 			}
 		);
 
-	})
-
-	// on(projectActions.openEditProjectDialogSuccess, (state, { id }): ProjectUIState => ({ ...state, editDialogOverlayId: id })),
-	// on(projectActions.closeEditProjectDialogSuccess, (state): ProjectUIState => ({ ...state, editDialogOverlayId: null })),
-	// on(fromClipboardFailure, (state, { shaking }): ProjectUIState => ({ ...state, shaking })),
-	// on(createProjectSuccess, (state): ProjectUIState => ({ ...state, editDialogVisible: false })),
-	// on(updateProjectSuccess, (state): ProjectUIState => ({ ...state, editDialogVisible: false })),
-	// on(deleteProjectSuccess, (state): ProjectUIState => ({ ...state, editDialogVisible: false }))
+	}),
+	on(toggleInfo, (state): Project_UIState => ({ ...state, infoVisible: !state.infoVisible }))
 
 );
 

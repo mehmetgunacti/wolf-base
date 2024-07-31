@@ -1,37 +1,53 @@
 @if (project(); as project) {
 
-	<h1>
+	<div project_title>
 
 		{{ project.name }}
 		<small>{{ project.id }}</small>
 
-	</h1>
+		<div top_right>
 
-	<div row>
-
-		<small>Description</small>
-		<div>{{ project.description }}</div>
-	</div>
-
-	<div row>
-
-		<small>Status</small>
-		<div>{{ ProjectStatusLabels[project.status] }}</div>
-
-	</div>
-
-	<div row start_end_row>
-
-		<div>
-
-			<small>Start : {{ project.start | timePast:false }}</small>
-			<div>{{ project.start | date:'EEEE dd.MM.yyyy' }}</div>
+			<button
+				class="icon-only small"
+				(click)="toggle()"
+				title="Toggle Info Panel">
+				<span class="material-symbols-outlined">info</span>
+			</button>
 
 		</div>
-		<div>
 
-			<small>End</small>
-			<div>{{ project.end | date:'EEEE dd.MM.yyyy' }}</div>
+	</div>
+
+	<div project_info [@slideDown]="infoVisible()">
+
+		<div row>
+
+			<small>Description</small>
+			<div>{{ project.description }}</div>
+
+		</div>
+
+		<div row>
+
+			<small>Status</small>
+			<div>{{ ProjectStatusLabels[project.status] }}</div>
+
+		</div>
+
+		<div row start_end_row>
+
+			<div>
+
+				<small>Start : {{ project.start | timePast:false }}</small>
+				<div>{{ project.start | date:'EEEE dd.MM.yyyy' }}</div>
+
+			</div>
+			<div>
+
+				<small>End</small>
+				<div>{{ project.end | date:'EEEE dd.MM.yyyy' }}</div>
+
+			</div>
 
 		</div>
 
@@ -46,7 +62,6 @@
 		</fieldset>
 
 	}
-
 
 } @else {
 

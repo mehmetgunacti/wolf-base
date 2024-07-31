@@ -19,14 +19,6 @@
 					<span class="material-symbols-outlined">edit</span> Edit Project
 				</button>
 
-				<a
-					cdkMenuItem
-					class="button icon-only align-left"
-					[href]="'https://www.google.com/search?q=' + project.name"
-					target="_blank">
-					<span class="material-symbols-outlined">search</span> Google <sup><span class="material-symbols-outlined small">open_in_new</span></sup>
-				</a>
-
 				<hr>
 
 				<button
@@ -36,20 +28,16 @@
 					<span class="material-symbols-outlined">history</span> View Logs
 				</button>
 
-				<button
-					cdkMenuItem
-					class="icon-only align-left"
-					(click)="onRemove(project.id)">
-					<span class="material-symbols-outlined">delete</span> Remove Project
-				</button>
-
 			</div>
 
 		</ng-template>
 
 	</w-portal>
 
-	<app-project [project]="project"/>
+	<app-project
+		[project]="project"
+		[infoVisible]="infoVisible()"
+		(toggleInfo)="onToggleInfo()"/>
 
 } @else {
 

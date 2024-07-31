@@ -19,6 +19,7 @@ export interface Project_UIState {
 
 	selectedId: UUID | null;
 	queryParams: ProjectQueryParams;
+	infoVisible: boolean;
 
 }
 
@@ -37,7 +38,8 @@ export const initialProjectUIState: Project_UIState = {
 	selectedId: null,
 	queryParams: {
 		search: null
-	}
+	},
+	infoVisible: false
 
 };
 

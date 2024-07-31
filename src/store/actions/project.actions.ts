@@ -40,6 +40,7 @@ export const loadAllRemoteMetadataSuccess	= createAction('[Project] Load All Rem
 export const search							= createAction('[Project] Search', props<{ term: string | null }>());
 export const setSelectedId					= createAction('[Project] Set Selected Id', props<{ id: UUID | null }>());
 export const setQueryParams					= createAction('[Project] Set Query State', props<ProjectQueryParams>());
+export const toggleInfo						= createAction('[Project] Toggle Info Panel');
 
 // CLOUD SYNC
 // local_new

@@ -7,7 +7,23 @@
 
 	@include mx-card(3);
 	@include mx-flex-column;
-	gap		: var(--gap-sm);
+	gap			: var(--gap-sm);
+
+	[project_title] {
+
+		position	: relative;
+		@include mx-h1;
+
+		[top_right] {
+
+			position	: absolute;
+			display		: flex;
+			top			: 0;
+			right		: 0;
+
+		}
+
+	}
 
 	fieldset {
 
@@ -19,6 +35,14 @@
 			padding 	: var(--gap-xs) var(--gap);
 
 		}
+
+	}
+
+	[project_info] {
+
+		@include mx-flex-column;
+		gap			: var(--gap-sm);
+		overflow	: hidden;
 
 	}
 

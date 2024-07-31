@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { Definition, definitionName, UUID, Project } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as projectActions from 'store/actions/project.actions';
-import * as quizEntryActions from 'store/actions/quiz-entry.actions';
 import { selQuizEntry_ids } from 'store/selectors/quiz-entry-selectors/quiz-entry-entities.selectors';
 import { selProject_selected } from 'store/selectors/project-selectors/project-entities.selectors';
+import { selProject_infoVisible } from 'store/selectors/project-selectors/project-ui.selectors';
 
 @Component({
 	selector: 'app-project-container',
@@ -19,30 +19,19 @@ export class ProjectContainerComponent {
 
 	project$: Observable<Project | null>;
 	scheduledIds$: Observable<UUID[]>;
+	infoVisible: Signal<boolean>;
 
 	constructor() {
 
 		this.project$ = this.store.select(selProject_selected);
 		this.scheduledIds$ = this.store.select(selQuizEntry_ids);
+		this.infoVisible = this.store.selectSignal(selProject_infoVisible);
 
 	}
 
-	onRemove(id: UUID): void {
+	onToggleInfo(): void {
 
-		if (confirm(`Project will be deleted. Continue?`))
-			this.store.dispatch(projectActions.moveToTrash({ id }));
-
-	}
-
-	onSchedule(definition: Definition): void {
-
-		this.store.dispatch(quizEntryActions.create({ definition }));
-
-	}
-
-	onCancelSchedule(definition: Definition): void {
-
-		this.store.dispatch(quizEntryActions.moveToTrash({ entry: { id: definition.id, name: definitionName(definition) } }));
+		this.store.dispatch(projectActions.toggleInfo());
 
 	}
 
