@@ -35,4 +35,10 @@ export class ProjectContainerComponent {
 
 	}
 
+	onOpenNewTaskDialog(): void {
+
+		this.store.dispatch(projectActions.openNewTaskDialog());
+
+	}
+
 }

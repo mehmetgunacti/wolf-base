@@ -1,0 +1,71 @@
+@import 'helper';
+@import 'variables';
+@import 'components';
+@import 'mixins';
+
+:host {
+
+	@include mx-card;
+
+	form {
+
+		@include mx-flex-column;
+		padding			: var(--gap-xs);
+		gap				: var(--gap);
+
+		& > div {
+
+			display			: flex;
+			flex-direction	: row;
+			gap				: var(--gap-xs);
+			& :first-child {
+
+				flex	: 1;
+
+			}
+
+			& .material-symbols-outlined {
+
+				font-size	: 1.4rem;
+
+			}
+
+		}
+
+		& > fieldset {
+
+			position	: relative;
+
+			& > legend {
+
+				padding-top		: 2rem;
+				padding-bottom	: 1rem;
+
+			}
+
+			& > button {
+
+				position		: absolute;
+				top				: -3rem;
+				right			: 0;
+
+			}
+
+			& div[task_group] {
+
+				@include mx-flex-column;
+				grid-gap		: var(--gap-sm);
+
+			}
+
+		}
+
+	}
+
+	& > footer {
+
+		@include mx-flex-end-center;
+
+	}
+
+}

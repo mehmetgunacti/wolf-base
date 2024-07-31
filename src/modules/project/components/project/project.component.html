@@ -9,7 +9,7 @@
 
 			<button
 				class="icon-only small"
-				(click)="toggle()"
+				(click)="onToggle()"
 				title="Toggle Info Panel">
 				<span class="material-symbols-outlined">info</span>
 			</button>
@@ -58,6 +58,17 @@
 		<fieldset>
 
 			<legend>{{ taskGroup.name }}</legend>
+			<legend>
+				<button
+					class="icon-only small"
+					(click)="onNewTask()"
+					title="Toggle Info Panel">
+					<span class="material-symbols-outlined">add</span>
+					Add Task
+				</button>
+			</legend>
+
+			<div style="height: 10rem; border: 1px solid red;"></div>
 
 		</fieldset>
 

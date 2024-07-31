@@ -1,0 +1,11 @@
+<w-portal>
+
+	<button
+		class="icon-only"
+		[routerLink]="['/projects']">
+		<span class="material-symbols-outlined">cancel</span> Cancel
+	</button>
+
+</w-portal>
+
+<app-task-form (create)="onCreate($event)"/>

@@ -27,12 +27,22 @@
 
 	fieldset {
 
+		position	: relative;
 		@include mx-component(4);
 
 		& > legend {
 
 			@include mx-component(5);
 			padding 	: var(--gap-xs) var(--gap);
+
+			&:nth-child(2) {
+
+				position	: absolute;
+				top			: calc(-3 * var(--gap));
+				right		: calc(2 * var(--gap));
+				padding		: var(--gap-xs);
+
+			}
 
 		}
 

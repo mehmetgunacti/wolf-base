@@ -1,8 +1,10 @@
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { TaskNewFormContainerComponent } from 'modules/project/containers/task-new-form-container/task-new-form-container.component';
 import { filter, map, tap, withLatestFrom } from 'rxjs';
 import * as projectActions from 'store/actions/project.actions';
 
@@ -13,6 +15,24 @@ export class ProjectUIEffects {
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 	private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 	private router: Router = inject(Router);
+
+	private dialogService: Dialog = inject(Dialog);
+
+	private dialogRef: DialogRef<null, TaskNewFormContainerComponent> | null = null;
+
+	openNewTaskDialog$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(projectActions.openNewTaskDialog),
+			map(() => {
+				this.dialogRef = this.dialogService.open(TaskNewFormContainerComponent, { closeOnNavigation: true });
+			})
+
+		),
+		{ dispatch: false }
+
+	);
 
 	// when user enters search term into search box, update 'address bar' query params
 	onSearchSetURLQueryParam$ = createEffect(

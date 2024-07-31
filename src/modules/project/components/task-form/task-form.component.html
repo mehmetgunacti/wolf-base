@@ -1,0 +1,67 @@
+<header>
+
+	<div card_title>{{ task() ? 'Edit' : 'Add' }} Project</div>
+
+</header>
+<main>
+
+	<form>
+
+		<!-- ID -->
+		<div *ngIf="task()?.id">
+			<w-input [control]="form.id" name="ID" [readonly]="true"/>
+		</div>
+
+		<!-- PROJECT ID -->
+		<div>
+			<w-input [control]="form.projectId" name="Project ID" [readonly]="true"/>
+		</div>
+
+		<!-- TASK GROUP ID -->
+		<div>
+			<w-input [control]="form.taskGroupId" name="Task Group ID" [readonly]="true"/>
+		</div>
+
+		<!-- NAME -->
+		<div>
+			<w-input [control]="form.name" name="Term"/>
+		</div>
+
+		<!-- DESCRIPTION -->
+		<div>
+			<w-input [control]="form.description" name="Description"/>
+		</div>
+
+		<!-- STATUS -->
+		<div>
+			<w-select [control]="form.status" name="Status" [nodes]="TASK_STATE"/>
+		</div>
+
+		<!-- PRIORITY -->
+		<div>
+			<w-select [control]="form.priority" name="Priority" [nodes]="TASK_PRIORITIES"/>
+		</div>
+
+		<!-- OPTIONAL -->
+		<div>
+			Optional <w-switch [checked]="!!optional()" />
+		</div>
+
+		<!-- START -->
+		<div>
+			<w-input [control]="form.start" name="Start" type="date"/>
+		</div>
+
+		<!-- END -->
+		<div>
+			<w-input [control]="form.end" name="End" type="date"/>
+		</div>
+
+	</form>
+
+</main>
+<footer>
+
+	<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>
+
+</footer>

@@ -1,23 +1,7 @@
+import { formatDate } from '@angular/common';
 import { InjectionToken, WritableSignal, signal } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ISODateString, ObjectId, Project, ProjectStatus, Task, TaskGroup, TaskPriority, TaskState, UUID } from '@lib';
-import { formatDate } from '@angular/common';
-
-interface TaskFormSchema {
-
-	id: FormControl<UUID | null>;
-	name: FormControl<string>;
-
-	projectId: FormControl<UUID | null>;
-	taskGroupId: FormControl<UUID | null>;
-	description: FormControl<string | null>;
-	status: FormControl<TaskState>;
-	priority: FormControl<TaskPriority>;
-	optional: FormControl<boolean>;
-	start: FormControl<ISODateString>;
-	end: FormControl<ISODateString | null>;
-
-}
+import { ISODateString, ObjectId, Project, ProjectStatus, TaskGroup, UUID } from '@lib';
 
 interface TaskGroupFormSchema {
 
@@ -39,83 +23,10 @@ interface ProjectFormSchema {
 
 }
 
-class TaskForm {
-
-	// form fields
-	readonly id: FormControl<UUID | null>;
-	readonly name: FormControl<string>;
-	readonly projectId: FormControl<UUID | null>;
-	readonly taskGroupId: FormControl<UUID | null>;
-	readonly description: FormControl<string | null>;
-	readonly status: FormControl<TaskState>;
-	readonly priority: FormControl<TaskPriority>;
-	readonly optional: FormControl<boolean>;
-	readonly start: FormControl<ISODateString>;
-	readonly end: FormControl<ISODateString | null>;
-
-	constructor(
-		// to be used by @for (... track objectId)
-		public readonly objectId: string,
-		task?: Task
-	) {
-
-		this.id = new FormControl(null);
-		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-		this.projectId = new FormControl();
-		this.taskGroupId = new FormControl();
-		this.description = new FormControl();
-		this.status = new FormControl();
-		this.priority = new FormControl();
-		this.optional = new FormControl();
-		this.start = new FormControl();
-		this.end = new FormControl();
-
-		if (task)
-			this.setValue(task);
-
-	}
-
-	formGroup(): FormGroup<TaskFormSchema> {
-
-		return new FormGroup({
-
-			id: this.id,
-			name: this.name,
-			projectId: this.projectId,
-			taskGroupId: this.taskGroupId,
-			description: this.description,
-			status: this.status,
-			priority: this.priority,
-			optional: this.optional,
-			start: this.start,
-			end: this.end
-
-		});
-
-	}
-
-	setValue(task: Task): void {
-
-		this.id.setValue(task.id);
-		this.name.setValue(task.name);
-		this.projectId.setValue(task.projectId);
-		this.taskGroupId.setValue(task.taskGroupId);
-		this.description.setValue(task.description);
-		this.status.setValue(task.status);
-		this.priority.setValue(task.priority);
-		this.optional.setValue(task.optional);
-		this.start.setValue(task.start);
-		this.end.setValue(task.end);
-
-	}
-
-}
-
 class TaskGroupForm {
 
 	readonly id: FormControl<UUID | null>;
 	readonly name: FormControl<string>;
-	readonly tasks: WritableSignal<TaskForm[]>;
 
 	private taskId: ObjectId = new ObjectId('task_');
 
@@ -129,28 +40,8 @@ class TaskGroupForm {
 		this.id = new FormControl<UUID | null>(null);
 		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
 
-		// tasks
-		this.tasks = signal([new TaskForm(this.taskId.next())]);
-
 		if (taskGroup)
 			this.setValue(taskGroup);
-
-	}
-
-	addTask(): void {
-
-		this.tasks.update(list => {
-			list.push(new TaskForm(this.taskId.next()));
-			return list;
-		});
-
-	}
-
-	removeTask(id: UUID): void {
-
-		this.tasks.update(
-			list => list.filter(item => item.id.value === id)
-		);
 
 	}
 
@@ -159,8 +50,7 @@ class TaskGroupForm {
 		return new FormGroup({
 
 			id: this.id,
-			name: this.name,
-			// tasks: new FormArray(this.tasks().map(t => t.formGroup()))
+			name: this.name
 
 		});
 
@@ -170,10 +60,6 @@ class TaskGroupForm {
 
 		this.id.setValue(taskGroup.id);
 		this.name.setValue(taskGroup.name);
-
-		// this.tasks.set(
-		// 	taskGroup.tasks.map(t => new TaskForm(this.taskId.next(), t))
-		// );
 
 	}
 

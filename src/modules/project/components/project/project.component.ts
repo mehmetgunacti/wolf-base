@@ -16,10 +16,17 @@ export class ProjectComponent {
 	infoVisible: InputSignal<boolean> = input(false);
 
 	toggleInfo = output<boolean>();
+	newTask = output<void>();
 
-	toggle(): void {
+	onToggle(): void {
 
 		this.toggleInfo.emit(!this.infoVisible());
+
+	}
+
+	onNewTask(): void {
+
+		this.newTask.emit();
 
 	}
 
