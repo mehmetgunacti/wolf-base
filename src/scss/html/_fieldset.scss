@@ -1,0 +1,35 @@
+fieldset {
+
+	position	: relative;
+
+	& > legend {
+
+		&:nth-child(2) {
+
+			position	: absolute;
+			top			: calc(-4 * var(--gap));
+			right		: calc(2 * var(--gap));
+			padding		: var(--gap-xs);
+
+			@include bigScreen() {
+
+				top			: calc(-3 * var(--gap));
+
+			}
+
+		}
+
+	}
+
+	&.component {
+
+		& > legend {
+
+			@include mx-component(3);
+			padding 	: var(--gap-xs) var(--gap);
+
+		}
+
+	}
+
+}
