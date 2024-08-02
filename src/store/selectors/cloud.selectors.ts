@@ -7,6 +7,7 @@ import { selWordCloudTasks } from './word-selectors/word-cloud.selectors';
 import { selQuoteCloudTasks } from './quote-selectors/quote-cloud.selectors';
 import { selQuizEntryCloudTasks } from './quiz-entry-selectors/quiz-entry-cloud.selectors';
 import { selProjectCloudTasks } from './project-selectors/project-cloud.selectors';
+import { selTaskCloudTasks } from './project-task-selectors/task-cloud.selectors';
 
 export const selCloudModuleState = createFeatureSelector<CloudModuleState>('cloud');
 
@@ -54,6 +55,7 @@ export const selCloudAvailableTasks = createSelector(
 	selQuoteCloudTasks,
 	selQuizEntryCloudTasks,
 	selProjectCloudTasks,
-	(bookmarks, notes, contents, words, quotes, quizEntries, projects) => [...bookmarks, ...notes, ...contents, ...words, ...quotes, ...quizEntries, ...projects]
+	selTaskCloudTasks,
+	(bookmarks, notes, contents, words, quotes, quizEntries, projects, tasks) => [...bookmarks, ...notes, ...contents, ...words, ...quotes, ...quizEntries, ...projects, ...tasks]
 
 );

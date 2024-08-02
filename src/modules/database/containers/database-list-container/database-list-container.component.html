@@ -166,6 +166,94 @@
 
 		<legend>
 
+				<!-- Projects -->
+				<span class="material-symbols-outlined">task_alt</span>
+				<span> Projects</span>
+
+		</legend>
+
+		<main>
+
+			<table>
+
+				<tr>
+					<td><strong>Entities</strong></td>
+					<td>{{ report.projects.entities.count }}</td>
+					<td>{{ report.projects.entities.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Sync Data</strong></td>
+					<td>{{ report.projects.syncData.count }}</td>
+					<td>{{ report.projects.syncData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Remote Data</strong></td>
+					<td>{{ report.projects.remoteData.count }}</td>
+					<td>{{ report.projects.remoteData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Trash</strong></td>
+					<td>{{ report.projects.trash.count }}</td>
+					<td>{{ report.projects.trash.size | formatBytes }}</td>
+				</tr>
+
+			</table>
+
+		</main>
+
+	</fieldset>
+
+	<fieldset>
+
+		<legend>
+
+				<!-- Projects -->
+				<span class="material-symbols-outlined">task_alt</span>
+				<span> Project Tasks</span>
+
+		</legend>
+
+		<main>
+
+			<table>
+
+				<tr>
+					<td><strong>Entities</strong></td>
+					<td>{{ report.tasks.entities.count }}</td>
+					<td>{{ report.tasks.entities.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Sync Data</strong></td>
+					<td>{{ report.tasks.syncData.count }}</td>
+					<td>{{ report.tasks.syncData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Remote Data</strong></td>
+					<td>{{ report.tasks.remoteData.count }}</td>
+					<td>{{ report.tasks.remoteData.size | formatBytes }}</td>
+				</tr>
+
+				<tr>
+					<td><strong>Trash</strong></td>
+					<td>{{ report.tasks.trash.count }}</td>
+					<td>{{ report.tasks.trash.size | formatBytes }}</td>
+				</tr>
+
+			</table>
+
+		</main>
+
+	</fieldset>
+
+	<fieldset>
+
+		<legend>
+
 				<!-- Notes -->
 				<span class="material-symbols-outlined">format_quote</span>
 				<span> Quotes</span>
@@ -205,7 +293,6 @@
 		</main>
 
 	</fieldset>
-
 
 	<fieldset>
 

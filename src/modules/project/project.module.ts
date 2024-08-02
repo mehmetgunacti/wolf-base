@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CroppieModule } from '@lib';
+import { CroppieModule, OverlayContainerModule } from '@lib';
 import { SharedModule } from 'modules/shared/shared.module';
 import { ProjectRoutingModule } from './project-routing.module';
 import * as fromConfig from './project.config';
@@ -17,7 +17,8 @@ import { HideEnumModule } from 'lib/pipes/hide-enum.pipe';
 		SharedModule,
 		CroppieModule,
 		MarkdownModule,
-		HideEnumModule
+		HideEnumModule,
+		OverlayContainerModule
 	]
 })
 export class ProjectModule { }

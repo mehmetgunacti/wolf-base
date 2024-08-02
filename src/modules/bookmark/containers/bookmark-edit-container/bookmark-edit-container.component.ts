@@ -7,11 +7,14 @@ import { showNotification } from 'store/actions/core-notification.actions';
 import { selBookmarkEditId } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
 import { distinctTagsArray } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
 import { selCore_titleLookupUrl } from 'store/selectors/core-configuration.selectors';
+import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
 
 @Component({
 	selector: 'app-bookmark-edit-container',
 	templateUrl: './bookmark-edit-container.component.html',
 	styleUrls: ['./bookmark-edit-container.component.scss'],
+	animations: [dialogFadeOutTrigger],
+	host: { '[@fadeOut]': '' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarkEditContainerComponent implements OnInit, AfterContentInit {

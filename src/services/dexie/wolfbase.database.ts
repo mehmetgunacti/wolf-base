@@ -49,6 +49,12 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			quotes_trash: '++, id, name',
 			quotes_remote: 'id',
 
+			// project taks
+			tasks: 'id, name',
+			tasks_sync: 'id',
+			tasks_trash: '++, id, name',
+			tasks_remote: 'id',
+
 			// words
 			words: 'id, name',
 			words_sync: 'id',
@@ -62,7 +68,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 			logs: '++id, category, entityId'
 
 		},
-		version: 12
+		version: 20
 
 	});
 
@@ -70,6 +76,7 @@ export const wolfBaseDBFactory = (): WolfBaseDB => {
 
 export class WolfBaseDB extends Dexie {
 
+	// todo: not all tables are listed here?
 	// bookmarks
 	bookmarks: Dexie.Table<Bookmark, UUID>;
 	bookmarks_sync: Dexie.Table<SyncData, UUID>;

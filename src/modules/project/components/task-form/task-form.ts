@@ -1,14 +1,15 @@
-import { InjectionToken } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { InjectionToken, LOCALE_ID } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ISODateString, Task, TaskPriority, TaskState, UUID } from '@lib';
+import { emptyNameBase, ISODateString, NameBase, Task, TaskPriority, TaskState, UUID } from '@lib';
 
 interface TaskFormSchema {
 
 	id: FormControl<UUID | null>;
 	name: FormControl<string>;
 
-	projectId: FormControl<UUID | null>;
-	taskGroupId: FormControl<UUID | null>;
+	project: FormControl<NameBase | null>;
+	taskGroup: FormControl<NameBase | null>;
 	description: FormControl<string | null>;
 	status: FormControl<TaskState>;
 	priority: FormControl<TaskPriority>;
@@ -23,8 +24,8 @@ export class TaskForm {
 	// form fields
 	readonly id: FormControl<UUID | null>;
 	readonly name: FormControl<string>;
-	readonly projectId: FormControl<UUID | null>;
-	readonly taskGroupId: FormControl<UUID | null>;
+	readonly project: FormControl<NameBase | null>;
+	readonly taskGroup: FormControl<NameBase | null>;
 	readonly description: FormControl<string | null>;
 	readonly status: FormControl<TaskState>;
 	readonly priority: FormControl<TaskPriority>;
@@ -36,13 +37,13 @@ export class TaskForm {
 
 		this.id = new FormControl(null);
 		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-		this.projectId = new FormControl();
-		this.taskGroupId = new FormControl();
+		this.project = new FormControl<NameBase>(emptyNameBase(), { validators: [Validators.required], nonNullable: true });
+		this.taskGroup = new FormControl<NameBase>(emptyNameBase(), { validators: [Validators.required], nonNullable: true });
 		this.description = new FormControl();
-		this.status = new FormControl();
-		this.priority = new FormControl();
-		this.optional = new FormControl();
-		this.start = new FormControl();
+		this.status = new FormControl<TaskState>(TaskState.ongoing, { validators: [Validators.required], nonNullable: true });
+		this.priority = new FormControl<TaskPriority>(TaskPriority.normal, { validators: [Validators.required], nonNullable: true });
+		this.optional = new FormControl<boolean>(false, { validators: [Validators.required], nonNullable: true });
+		this.start = new FormControl<string>(formatDate(new Date(), 'yyyy-MM-dd', 'en'), { validators: [Validators.required], nonNullable: true });
 		this.end = new FormControl();
 
 	}
@@ -53,8 +54,8 @@ export class TaskForm {
 
 			id: this.id,
 			name: this.name,
-			projectId: this.projectId,
-			taskGroupId: this.taskGroupId,
+			project: this.project,
+			taskGroup: this.taskGroup,
 			description: this.description,
 			status: this.status,
 			priority: this.priority,
@@ -68,15 +69,17 @@ export class TaskForm {
 
 	setValue(task: Task): void {
 
+		console.log('incoming task setting values', task);
+
 		this.id.setValue(task.id);
 		this.name.setValue(task.name);
-		this.projectId.setValue(task.projectId);
-		this.taskGroupId.setValue(task.taskGroupId);
+		this.project.setValue(task.project);
+		this.taskGroup.setValue(task.taskGroup);
 		this.description.setValue(task.description);
 		this.status.setValue(task.status);
 		this.priority.setValue(task.priority);
 		this.optional.setValue(task.optional);
-		this.start.setValue(task.start);
+		this.start.setValue(formatDate(task.start, 'yyyy-MM-dd', 'en'));
 		this.end.setValue(task.end);
 
 	}

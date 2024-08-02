@@ -13,3 +13,9 @@ export interface NameBase extends IDBase {
 	name: string;
 
 }
+
+export function emptyNameBase(): NameBase {
+
+	return { id: 'EMPTY_ID', name: 'EMPTY_NAME_BASE' };
+
+}

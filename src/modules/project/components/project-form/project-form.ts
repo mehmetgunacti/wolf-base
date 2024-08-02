@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { InjectionToken, WritableSignal, signal } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ISODateString, ObjectId, Project, ProjectStatus, TaskGroup, UUID } from '@lib';
+import { ISODateString, NameBase, ObjectId, Project, ProjectStatus, UUID } from '@lib';
 
 interface TaskGroupFormSchema {
 
@@ -33,7 +33,7 @@ class TaskGroupForm {
 	constructor(
 		// to be used by @for (... track objectId)
 		public readonly objectId: string,
-		taskGroup?: TaskGroup
+		taskGroup?: NameBase
 	) {
 
 		// form fields
@@ -56,7 +56,7 @@ class TaskGroupForm {
 
 	}
 
-	setValue(taskGroup: TaskGroup): void {
+	setValue(taskGroup: NameBase): void {
 
 		this.id.setValue(taskGroup.id);
 		this.name.setValue(taskGroup.name);

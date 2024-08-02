@@ -22,12 +22,6 @@
 				<span> Note Content</span>
 			</ng-container>
 
-			<!-- Words -->
-			<ng-container *ngSwitchCase="WolfEntity.word.name">
-				<span class="material-symbols-outlined">dictionary</span>
-				<span> Words</span>
-			</ng-container>
-
 			<!-- Projects -->
 			<ng-container *ngSwitchCase="WolfEntity.project.name">
 				<span class="material-symbols-outlined">task_alt</span>
@@ -44,6 +38,18 @@
 			<ng-container *ngSwitchCase="WolfEntity.quizEntry.name">
 				<span class="material-symbols-outlined">timer</span>
 				<span> Quiz Entries</span>
+			</ng-container>
+
+			<!-- Project Tasks -->
+			<ng-container *ngSwitchCase="WolfEntity.task.name">
+				<span class="material-symbols-outlined">task_alt</span>
+				<span> Project Tasks</span>
+			</ng-container>
+
+			<!-- Words -->
+			<ng-container *ngSwitchCase="WolfEntity.word.name">
+				<span class="material-symbols-outlined">dictionary</span>
+				<span> Words</span>
 			</ng-container>
 
 			<!-- UNKNOWN CASE -->

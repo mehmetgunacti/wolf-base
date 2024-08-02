@@ -1,0 +1,37 @@
+@let t = task();
+
+<!-- PROJECT ID -->
+<h4>
+	<small>{{ t.project.id }}</small>
+	{{ t.project.name }}
+</h4>
+
+<!-- TASK GROUP ID -->
+<h4>
+	<small>{{ t.taskGroup.id }}</small>
+	{{ t.taskGroup.name }}
+</h4>
+
+<!-- ID -->
+<div>{{ t.id }}</div>
+
+<!-- NAME -->
+<div>{{ t.name }}</div>
+
+<!-- DESCRIPTION -->
+<div>{{ t.description }}</div>
+
+<!-- STATUS -->
+<div>{{ TASK_STATE[t.status] }}</div>
+
+<!-- PRIORITY -->
+<div>{{ TASK_PRIORITIES[t.priority] }}</div>
+
+<!-- OPTIONAL -->
+<div>Optional: {{ t.optional }}</div>
+
+<!-- START -->
+<div>{{ t.start | date:'EEEE dd.MM.yyyy' }}</div>
+
+<!-- END -->
+<div>{{ t.end | date:'EEEE dd.MM.yyyy' }}</div>

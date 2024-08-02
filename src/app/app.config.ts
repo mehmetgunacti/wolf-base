@@ -13,8 +13,11 @@ import * as noteContentActions from 'store/actions/note-content.actions';
 import * as noteActions from 'store/actions/note.actions';
 import * as wordActions from 'store/actions/word.actions';
 import * as projectActions from 'store/actions/project.actions';
+import * as taskActions from 'store/actions/project-task.actions';
 import * as quoteActions from 'store/actions/quote.actions';
 import * as quizEntryActions from 'store/actions/quiz-entry.actions';
+import { AnimationAwareDialog } from 'services/animation-aware-dialog.service';
+import { Dialog } from '@angular/cdk/dialog';
 
 export const routes: Routes = [
 
@@ -87,6 +90,7 @@ const appInitializerFactory = (store: Store) => {
 		store.dispatch(quoteActions.loadAll());
 		store.dispatch(quizEntryActions.loadAll());
 		store.dispatch(projectActions.loadAll());
+		store.dispatch(taskActions.loadAll());
 
 	};
 
@@ -117,6 +121,7 @@ export const providers: Provider[] = [
 	{ provide: LOCAL_REPOSITORY_SERVICE, useClass: DexieLocalRepositoryServiceImpl },
 	{ provide: REMOTE_REPOSITORY_SERVICE, useClass: FirestoreRemoteRepositoryServiceImpl, deps: [Store, HttpClient] },
 	{ provide: SYNC_SERVICE, useClass: SyncServiceImpl, deps: [LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE] },
-	{ provide: BOOKMARK_SYNC_SERVICE, useClass: BookmarkSyncServiceImpl, deps: [LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE] }
+	{ provide: BOOKMARK_SYNC_SERVICE, useClass: BookmarkSyncServiceImpl, deps: [LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE] },
+	{ provide: Dialog, useClass: AnimationAwareDialog }
 
 ];

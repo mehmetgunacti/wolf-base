@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Project } from 'lib';
 import { Observable, map } from 'rxjs';
-import { selProject_filtered } from 'store/selectors/project-selectors/project-entities.selectors';
+import { selProject_filtered } from 'store/selectors/project-selectors/project-ui.selectors';
 
 @Component({
 	selector: 'app-projects-container',

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { search } from 'store/actions/project.actions';
-import { selProject_search } from 'store/selectors/project-selectors/project-entities.selectors';
+import { selProject_search } from 'store/selectors/project-selectors/project-ui.selectors';
 
 @Component({
 	selector: 'app-project-filter-container',

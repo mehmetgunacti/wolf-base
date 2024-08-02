@@ -2,6 +2,7 @@ import { ProjectFilterComponent } from './components/project-filter/project-filt
 import { ProjectFormComponent } from './components/project-form/project-form.component';
 import { ProjectComponent } from './components/project/project.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
+import { TaskComponent } from './components/task/task.component';
 import { ProjectContainerComponent } from './containers/project-container/project-container.component';
 import { ProjectEditFormContainerComponent } from './containers/project-edit-form-container/project-edit-form-container.component';
 import { ProjectFilterContainerComponent } from './containers/project-filter-container/project-filter-container.component';
@@ -20,6 +21,7 @@ export const components = [
 	ProjectFormComponent,
 	ProjectFilterComponent,
 	ProjectFilterContainerComponent,
+	TaskComponent,
 	TaskFormComponent,
 
 	// containers

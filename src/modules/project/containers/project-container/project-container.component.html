@@ -36,9 +36,10 @@
 
 	<app-project
 		[project]="project"
+		[taskGroupMap]="taskGroupMap()"
 		[infoVisible]="infoVisible()"
 		(toggleInfo)="onToggleInfo()"
-		(newTask)="onOpenNewTaskDialog()"/>
+		(newTask)="onOpenNewTaskDialog($event)"/>
 
 } @else {
 

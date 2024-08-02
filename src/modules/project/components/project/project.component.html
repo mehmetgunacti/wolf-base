@@ -1,51 +1,55 @@
 @if (project(); as project) {
 
-	<div project_title>
+	<div project_title_wrapper>
 
-		{{ project.name }}
-		<small>{{ project.id }}</small>
+		<div project_title>
 
-		<div top_right>
+			{{ project.name }}
+			<small>{{ project.id }}</small>
 
-			<button
-				class="icon-only small"
-				(click)="onToggle()"
-				title="Toggle Info Panel">
-				<span class="material-symbols-outlined">info</span>
-			</button>
+			<div top_right>
 
-		</div>
-
-	</div>
-
-	<div project_info [@slideDown]="infoVisible()">
-
-		<div row>
-
-			<small>Description</small>
-			<div>{{ project.description }}</div>
-
-		</div>
-
-		<div row>
-
-			<small>Status</small>
-			<div>{{ ProjectStatusLabels[project.status] }}</div>
-
-		</div>
-
-		<div row start_end_row>
-
-			<div>
-
-				<small>Start : {{ project.start | timePast:false }}</small>
-				<div>{{ project.start | date:'EEEE dd.MM.yyyy' }}</div>
+				<button
+					class="icon-only small"
+					(click)="onToggle()"
+					title="Toggle Info Panel">
+					<span class="material-symbols-outlined">info</span>
+				</button>
 
 			</div>
-			<div>
 
-				<small>End</small>
-				<div>{{ project.end | date:'EEEE dd.MM.yyyy' }}</div>
+		</div>
+
+		<div project_info [@slideDown]="infoVisible()">
+
+			<div row>
+
+				<small>Description</small>
+				<div>{{ project.description }}</div>
+
+			</div>
+
+			<div row>
+
+				<small>Status</small>
+				<div>{{ ProjectStatusLabels[project.status] }}</div>
+
+			</div>
+
+			<div row start_end_row>
+
+				<div>
+
+					<small>Start : {{ project.start | timePast:false }}</small>
+					<div>{{ project.start | date:'EEEE dd.MM.yyyy' }}</div>
+
+				</div>
+				<div>
+
+					<small>End</small>
+					<div>{{ project.end | date:'EEEE dd.MM.yyyy' }}</div>
+
+				</div>
 
 			</div>
 
@@ -55,20 +59,34 @@
 
 	@for (taskGroup of project.taskGroups; track $index) {
 
-		<fieldset>
+		<fieldset class="component">
 
 			<legend>{{ taskGroup.name }}</legend>
 			<legend>
 				<button
 					class="icon-only small"
-					(click)="onNewTask()"
+					(click)="onNewTask(taskGroup.id)"
 					title="Toggle Info Panel">
 					<span class="material-symbols-outlined">add</span>
 					Add Task
 				</button>
 			</legend>
 
-			<div style="height: 10rem; border: 1px solid red;"></div>
+			<div task_list>
+
+				@for (task of taskGroupMap()[taskGroup.id]; track task.id) {
+
+					<a task_item [title]="task.description ?? ''" (click)="onOpenTask(task.id)" tabindex="0">
+
+						<small><span class="material-symbols-outlined">manufacturing</span> {{ ProjectStatusLabels[task.status] }}</small>
+						<small><span class="material-symbols-outlined">swap_vert</span> {{ TaskPriorityLabels[task.priority] }}</small>
+						<span>{{ task.name }}</span>
+
+					</a>
+
+				}
+
+			</div>
 
 		</fieldset>
 

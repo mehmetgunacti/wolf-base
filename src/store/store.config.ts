@@ -46,6 +46,45 @@ import { NoteSyncRemoteNewEffects } from './effects/note-effects/note-sync-remot
 import { NoteSyncRemoteUpdatedEffects } from './effects/note-effects/note-sync-remote-updated.effects';
 import { NoteSyncEffects } from './effects/note-effects/note-sync.effects';
 import { NoteUIEffects } from './effects/note-effects/note-ui.effects';
+import { ProjectEntityCreateEffects } from './effects/project-effects/project-entity-create.effects';
+import { ProjectEntityMoveToTrashEffects } from './effects/project-effects/project-entity-move-to-trash.effects';
+import { ProjectEntityUpdateEffects } from './effects/project-effects/project-entity-update.effects';
+import { ProjectLoadEffects } from './effects/project-effects/project-load.effects';
+import { ProjectSyncDeletedDeletedEffects } from './effects/project-effects/project-sync-deleted-deleted.effects';
+import { ProjectSyncLocalDeletedEffects } from './effects/project-effects/project-sync-local-deleted.effects';
+import { ProjectSyncLocalNewEffects } from './effects/project-effects/project-sync-local-new.effects';
+import { ProjectSyncLocalUpdatedEffects } from './effects/project-effects/project-sync-local-updated.effects';
+import { ProjectSyncRemoteDeletedEffects } from './effects/project-effects/project-sync-remote-deleted.effects';
+import { ProjectSyncRemoteNewEffects } from './effects/project-effects/project-sync-remote-new.effects';
+import { ProjectSyncRemoteUpdatedEffects } from './effects/project-effects/project-sync-remote-updated.effects';
+import { ProjectSyncEffects } from './effects/project-effects/project-sync.effects';
+import { ProjectUIEffects } from './effects/project-effects/project-ui.effects';
+import { TaskEntityCreateEffects } from './effects/project-task-effects/project-task-entity-create.effects';
+import { TaskEntityMoveToTrashEffects } from './effects/project-task-effects/project-task-entity-move-to-trash.effects';
+import { TaskEntityUpdateEffects } from './effects/project-task-effects/project-task-entity-update.effects';
+import { TaskLoadEffects } from './effects/project-task-effects/project-task-load.effects';
+import { TaskSyncDeletedDeletedEffects } from './effects/project-task-effects/project-task-sync-deleted-deleted.effects';
+import { TaskSyncLocalDeletedEffects } from './effects/project-task-effects/project-task-sync-local-deleted.effects';
+import { TaskSyncLocalNewEffects } from './effects/project-task-effects/project-task-sync-local-new.effects';
+import { TaskSyncLocalUpdatedEffects } from './effects/project-task-effects/project-task-sync-local-updated.effects';
+import { TaskSyncRemoteDeletedEffects } from './effects/project-task-effects/project-task-sync-remote-deleted.effects';
+import { TaskSyncRemoteNewEffects } from './effects/project-task-effects/project-task-sync-remote-new.effects';
+import { TaskSyncRemoteUpdatedEffects } from './effects/project-task-effects/project-task-sync-remote-updated.effects';
+import { TaskSyncEffects } from './effects/project-task-effects/project-task-sync.effects';
+import { TaskUIEffects } from './effects/project-task-effects/project-task-ui.effects';
+import { QuizEntryEntityCreateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-create.effects';
+import { QuizEntryEntityMoveToTrashEffects } from './effects/quiz-entry-effects/quiz-entry-entity-move-to-trash.effects';
+import { QuizEntryEntityUpdateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-update.effects';
+import { QuizEntryLoadEffects } from './effects/quiz-entry-effects/quiz-entry-load.effects';
+import { QuizEntrySyncDeletedDeletedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-deleted-deleted.effects';
+import { QuizEntrySyncLocalDeletedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-local-deleted.effects';
+import { QuizEntrySyncLocalNewEffects } from './effects/quiz-entry-effects/quiz-entry-sync-local-new.effects';
+import { QuizEntrySyncLocalUpdatedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-local-updated.effects';
+import { QuizEntrySyncRemoteDeletedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-deleted.effects';
+import { QuizEntrySyncRemoteNewEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-new.effects';
+import { QuizEntrySyncRemoteUpdatedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-updated.effects';
+import { QuizEntrySyncEffects } from './effects/quiz-entry-effects/quiz-entry-sync.effects';
+import { QuizUIEffects } from './effects/quiz-entry-effects/quiz-ui.effects';
 import { QuoteEntityCreateEffects } from './effects/quote-effects/quote-entity-create.effects';
 import { QuoteEntityMoveToTrashEffects } from './effects/quote-effects/quote-entity-move-to-trash.effects';
 import { QuoteEntityUpdateEffects } from './effects/quote-effects/quote-entity-update.effects';
@@ -58,6 +97,7 @@ import { QuoteSyncRemoteDeletedEffects } from './effects/quote-effects/quote-syn
 import { QuoteSyncRemoteNewEffects } from './effects/quote-effects/quote-sync-remote-new.effects';
 import { QuoteSyncRemoteUpdatedEffects } from './effects/quote-effects/quote-sync-remote-updated.effects';
 import { QuoteSyncEffects } from './effects/quote-effects/quote-sync.effects';
+import { QuoteViewerEffects } from './effects/quote-effects/quote-viewer.effects';
 import { SettingsEffects } from './effects/settings.effects';
 import { WordEntityCreateEffects } from './effects/word-effects/word-entity-create.effects';
 import { WordEntityMoveToTrashEffects } from './effects/word-effects/word-entity-move-to-trash.effects';
@@ -79,38 +119,12 @@ import { databaseReducer } from './reducers/database.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { noteContentReducer } from './reducers/note-content-reducers/note-content.reducer';
 import { noteReducer } from './reducers/note-reducers/note.reducer';
+import { projectReducer } from './reducers/project-reducers/project.reducer';
+import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.reducer';
+import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
-import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
-import { QuizEntrySyncEffects } from './effects/quiz-entry-effects/quiz-entry-sync.effects';
-import { QuizEntrySyncLocalNewEffects } from './effects/quiz-entry-effects/quiz-entry-sync-local-new.effects';
-import { QuizEntrySyncLocalUpdatedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-local-updated.effects';
-import { QuizEntrySyncLocalDeletedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-local-deleted.effects';
-import { QuizEntrySyncRemoteNewEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-new.effects';
-import { QuizEntrySyncRemoteUpdatedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-updated.effects';
-import { QuizEntrySyncRemoteDeletedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-deleted.effects';
-import { QuizEntrySyncDeletedDeletedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-deleted-deleted.effects';
-import { QuizEntryEntityCreateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-create.effects';
-import { QuizEntryEntityUpdateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-update.effects';
-import { QuizEntryEntityMoveToTrashEffects } from './effects/quiz-entry-effects/quiz-entry-entity-move-to-trash.effects';
-import { QuizEntryLoadEffects } from './effects/quiz-entry-effects/quiz-entry-load.effects';
-import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.reducer';
-import { QuizUIEffects } from './effects/quiz-entry-effects/quiz-ui.effects';
-import { QuoteViewerEffects } from './effects/quote-effects/quote-viewer.effects';
-import { ProjectSyncEffects } from './effects/project-effects/project-sync.effects';
-import { ProjectSyncLocalNewEffects } from './effects/project-effects/project-sync-local-new.effects';
-import { ProjectSyncLocalUpdatedEffects } from './effects/project-effects/project-sync-local-updated.effects';
-import { ProjectSyncLocalDeletedEffects } from './effects/project-effects/project-sync-local-deleted.effects';
-import { ProjectSyncRemoteNewEffects } from './effects/project-effects/project-sync-remote-new.effects';
-import { ProjectSyncRemoteUpdatedEffects } from './effects/project-effects/project-sync-remote-updated.effects';
-import { ProjectSyncRemoteDeletedEffects } from './effects/project-effects/project-sync-remote-deleted.effects';
-import { ProjectSyncDeletedDeletedEffects } from './effects/project-effects/project-sync-deleted-deleted.effects';
-import { ProjectEntityCreateEffects } from './effects/project-effects/project-entity-create.effects';
-import { ProjectEntityUpdateEffects } from './effects/project-effects/project-entity-update.effects';
-import { ProjectEntityMoveToTrashEffects } from './effects/project-effects/project-entity-move-to-trash.effects';
-import { ProjectLoadEffects } from './effects/project-effects/project-load.effects';
-import { ProjectUIEffects } from './effects/project-effects/project-ui.effects';
-import { projectReducer } from './reducers/project-reducers/project.reducer';
+import { taskReducer } from './reducers/project-task-reducers/task.reducer';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -217,6 +231,26 @@ export const effects = [
 	ProjectLoadEffects,
 	ProjectUIEffects,
 
+	// Project Tasks
+	TaskSyncEffects,
+
+	TaskSyncLocalNewEffects,
+	TaskSyncLocalUpdatedEffects,
+	TaskSyncLocalDeletedEffects,
+
+	TaskSyncRemoteNewEffects,
+	TaskSyncRemoteUpdatedEffects,
+	TaskSyncRemoteDeletedEffects,
+
+	TaskSyncDeletedDeletedEffects,
+
+	TaskEntityCreateEffects,
+	TaskEntityUpdateEffects,
+	TaskEntityMoveToTrashEffects,
+
+	TaskLoadEffects,
+	TaskUIEffects,
+
 	// Words
 	WordSyncEffects,
 
@@ -301,6 +335,7 @@ export const reducers: ActionReducerMap<AppState> = {
 	project: combineReducers(projectReducer),
 	quizEntry: combineReducers(quizEntryReducer),
 	quote: combineReducers(quoteReducer),
+	task: combineReducers(taskReducer),
 	word: combineReducers(wordReducer),
 
 };

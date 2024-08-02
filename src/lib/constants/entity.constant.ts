@@ -21,6 +21,7 @@ export class WolfEntity {
 	static project = new EntityName('project', 'projects');
 	static quizEntry = new EntityName('quiz_entry', 'quiz_entries');
 	static quote = new EntityName('quote', 'quotes');
+	static task = new EntityName('task', 'tasks');
 	static word = new EntityName('word', 'words');
 
 }

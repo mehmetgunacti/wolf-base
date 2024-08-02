@@ -6,4 +6,5 @@ export * from './notes.table';
 export * from './projects.table';
 export * from './quiz-entries.table';
 export * from './quotes.table';
+export * from './tasks.table';
 export * from './words.table';

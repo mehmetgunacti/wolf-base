@@ -41,6 +41,12 @@ export enum LocalRepositoryNames {
 	quotes_remote = 'quotes_remote',
 	quotes_trash = 'quotes_trash',
 
+	// project tasks
+	tasks = 'tasks',
+	tasks_sync = 'tasks_sync',
+	tasks_remote = 'tasks_remote',
+	tasks_trash = 'tasks_trash',
+
 	// words
 	words = 'words',
 	words_sync = 'words_sync',

@@ -15,11 +15,13 @@ import { VoidQuizEntriesCollection } from 'services/mock-services/remotestorage/
 import { VoidQuotesCollection } from 'services/mock-services/remotestorage/collections/quotes.collection';
 import { VoidWordsCollection } from 'services/mock-services/remotestorage/collections/words.collection';
 import { selCore_firestoreConfig } from "store/selectors/core-configuration.selectors";
-import { BookmarksFirestoreCollectionImpl, QuotesFirestoreCollectionImpl, WordsFirestoreCollectionImpl } from "./collections";
+import { BookmarksFirestoreCollectionImpl, QuotesFirestoreCollectionImpl, TasksFirestoreCollectionImpl, WordsFirestoreCollectionImpl } from "./collections";
 import { NoteContentFirestoreCollectionImpl } from './collections/note-content.collection';
 import { NotesFirestoreCollectionImpl } from './collections/notes.collection';
 import { ProjectsFirestoreCollectionImpl } from './collections/projects.collection';
 import { QuizEntriesFirestoreCollectionImpl } from './collections/quiz-entries.collection';
+import { TasksRemoteRepository } from 'lib/repositories/remote/project-task-remote.repository';
+import { VoidTasksCollection } from 'services/mock-services/remotestorage/collections/tasks.collection';
 
 export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositoryService {
 
@@ -29,6 +31,7 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 	public projects!: ProjectsRemoteRepository;
 	public quizEntries!: QuizEntriesRemoteRepository;
 	public quotes!: QuotesRemoteRepository;
+	public tasks!: TasksRemoteRepository;
 	public words!: WordsRemoteRepository;
 
 	private store: Store = inject(Store);
@@ -56,10 +59,11 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 			case WolfEntity.bookmark.name: return this.bookmarks;
 			case WolfEntity.note.name: return this.notes;
 			case WolfEntity.note_content.name: return this.noteContent;
-			case WolfEntity.word.name: return this.words;
 			case WolfEntity.project.name: return this.projects;
 			case WolfEntity.quizEntry.name: return this.quizEntries;
 			case WolfEntity.quote.name: return this.quotes;
+			case WolfEntity.task.name: return this.tasks;
+			case WolfEntity.word.name: return this.words;
 
 		}
 		throw Error('Unknown entity');
@@ -76,6 +80,7 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 			this.projects = new ProjectsFirestoreCollectionImpl(this.firestore, config);
 			this.quizEntries = new QuizEntriesFirestoreCollectionImpl(this.firestore, config);
 			this.quotes = new QuotesFirestoreCollectionImpl(this.firestore, config);
+			this.tasks = new TasksFirestoreCollectionImpl(this.firestore, config);
 			this.words = new WordsFirestoreCollectionImpl(this.firestore, config);
 
 		} else {
@@ -86,6 +91,7 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 			this.projects = new VoidProjectsCollection();
 			this.quizEntries = new VoidQuizEntriesCollection();
 			this.quotes = new VoidQuotesCollection();
+			this.tasks = new VoidTasksCollection();
 			this.words = new VoidWordsCollection();
 
 		}

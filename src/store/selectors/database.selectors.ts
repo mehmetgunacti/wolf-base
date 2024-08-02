@@ -32,6 +32,26 @@ export const selDatabase_TotalSize = createSelector(
 		sum += report.notesContent.remoteData.size ?? 0;
 		sum += report.notesContent.trash.size ?? 0;
 
+		sum += report.projects.entities.size ?? 0;
+		sum += report.projects.syncData.size ?? 0;
+		sum += report.projects.remoteData.size ?? 0;
+		sum += report.projects.trash.size ?? 0;
+
+		sum += report.quizEntries.entities.size ?? 0;
+		sum += report.quizEntries.syncData.size ?? 0;
+		sum += report.quizEntries.remoteData.size ?? 0;
+		sum += report.quizEntries.trash.size ?? 0;
+
+		sum += report.quotes.entities.size ?? 0;
+		sum += report.quotes.syncData.size ?? 0;
+		sum += report.quotes.remoteData.size ?? 0;
+		sum += report.quotes.trash.size ?? 0;
+
+		sum += report.tasks.entities.size ?? 0;
+		sum += report.tasks.syncData.size ?? 0;
+		sum += report.tasks.remoteData.size ?? 0;
+		sum += report.tasks.trash.size ?? 0;
+
 		sum += report.words.entities.size ?? 0;
 		sum += report.words.syncData.size ?? 0;
 		sum += report.words.remoteData.size ?? 0;

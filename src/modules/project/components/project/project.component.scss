@@ -5,21 +5,26 @@
 
 :host {
 
-	@include mx-card(3);
 	@include mx-flex-column;
 	gap			: var(--gap-sm);
 
-	[project_title] {
+	[project_title_wrapper] {
 
-		position	: relative;
-		@include mx-h1;
+		@include mx-card(3);
 
-		[top_right] {
+		[project_title] {
 
-			position	: absolute;
-			display		: flex;
-			top			: 0;
-			right		: 0;
+			position	: relative;
+			@include mx-h1;
+
+			[top_right] {
+
+				position	: absolute;
+				display		: flex;
+				top			: 0;
+				right		: 0;
+
+			}
 
 		}
 
@@ -27,20 +32,47 @@
 
 	fieldset {
 
-		position	: relative;
-		@include mx-component(4);
+		@include mx-component();
 
-		& > legend {
+		& > [task_list] {
 
-			@include mx-component(5);
-			padding 	: var(--gap-xs) var(--gap);
+			@include mx-flex-column;
+			gap	: var(--gap-sm);
 
-			&:nth-child(2) {
+			& > [task_item] {
 
-				position	: absolute;
-				top			: calc(-3 * var(--gap));
-				right		: calc(2 * var(--gap));
-				padding		: var(--gap-xs);
+				@include mx-component(3);
+				display					: grid;
+				grid-template-columns	: 10rem 10rem 1fr;
+				grid-template-rows		: auto 1fr;
+				gap						: var(--gap-xs);
+				padding					: var(--gap) var(--gap);
+				cursor					: pointer;
+
+				&:hover {
+
+					background-color	: fn-hsl(bg-3, (lig: "- 2%"));
+
+				}
+
+				& > span {
+
+					grid-column			: 1 / -1;
+
+				}
+
+				& > small {
+
+					@include mx-flex-center-y;
+					gap			: var(--gap-xxs);
+
+					& > .material-symbols-outlined {
+
+						font-size			: inherit;
+
+					}
+
+				}
 
 			}
 

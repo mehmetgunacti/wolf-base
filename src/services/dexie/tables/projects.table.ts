@@ -1,4 +1,4 @@
-import { Project, ProjectStatus, TaskGroup, WolfEntity } from '@lib';
+import { NameBase, Project, ProjectStatus, WolfEntity } from '@lib';
 import { produce } from 'immer';
 import { UUID } from 'lib/constants/common.constant';
 import { ProjectLocalRepository } from 'lib/repositories/local';
@@ -21,7 +21,7 @@ export class DexieProjectsRepositoryImpl extends EntityLocalRepositoryImpl<Proje
 
 	protected override newInstance(id: UUID, item: Partial<Project>): Project {
 
-		const taskGroups: TaskGroup[] = item.taskGroups ?? [];
+		const taskGroups: NameBase[] = item.taskGroups ?? [];
 		if (taskGroups.length < 1)
 			throw Error('Create `Project`: taskGroups array is empty')
 
@@ -44,8 +44,7 @@ export class DexieProjectsRepositoryImpl extends EntityLocalRepositoryImpl<Proje
 			taskGroups: [
 				{
 					id: uuidv4(),
-					name: 'default',
-					tasks: []
+					name: 'default'
 				}
 			],
 			status: ProjectStatus.ongoing,
@@ -60,7 +59,7 @@ export class DexieProjectsRepositoryImpl extends EntityLocalRepositoryImpl<Proje
 	override async update(id: UUID, item: Partial<Project>): Promise<number> {
 
 		// normally, entity IDs are set during entity creation
-		// TaskGroup is part of Project, but is not an Entity itself
+		// NameBase is part of Project, but is not an Entity itself
 		// new taskGroups can be added to 'taskGroups' array in Project update form
 		// => IDs have to be set manually during Project update
 		const updated: Partial<Project> = produce(

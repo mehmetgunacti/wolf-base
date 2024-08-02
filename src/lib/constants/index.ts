@@ -7,6 +7,5 @@ export * from './project.constant';
 export * from './quiz.constant';
 export * from './responsive.constant';
 export * from './sidebar.constant';
-export * from './sync.constant';
 export * from './theme.constant';
 export * from './word.constant';

@@ -6,6 +6,8 @@ import { MockNoteContentLocalRepositoryImpl } from './tables/note-content.table'
 import { MockNotesLocalRepositoryImpl } from './tables/notes.table';
 import { MockWordsLocalRepositoryImpl } from './tables/words.table';
 import { QuizEntryLocalRepository } from 'lib/repositories/local/quiz-entry.repository';
+import { TaskLocalRepository } from 'lib/repositories/local/project-task.repository';
+import { MockTasksLocalRepositoryImpl } from './tables/tasks.table';
 
 
 export class MockLocalRepositoryService implements LocalRepositoryService {
@@ -19,6 +21,7 @@ export class MockLocalRepositoryService implements LocalRepositoryService {
 	configuration: ConfigurationLocalRepository = new MockConfigurationLocalRepositoryImpl();
 	logs: LogsLocalRepository = new MockLogsLocalRepositoryImpl();
 	projects: ProjectLocalRepository = new MockProjectsLocalRepositoryImpl();
+	tasks: TaskLocalRepository = new MockTasksLocalRepositoryImpl();
 
 	getRepository<T extends Entity>(entityName: EntityName): EntityLocalRepository<T> {
 

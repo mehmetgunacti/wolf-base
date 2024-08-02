@@ -41,7 +41,6 @@ export const search							= createAction('[Project] Search', props<{ term: strin
 export const setSelectedId					= createAction('[Project] Set Selected Id', props<{ id: UUID | null }>());
 export const setQueryParams					= createAction('[Project] Set Query State', props<ProjectQueryParams>());
 export const toggleInfo						= createAction('[Project] Toggle Info Panel');
-export const openNewTaskDialog				= createAction('[Project] Open New Task Dialog');
 
 // CLOUD SYNC
 // local_new

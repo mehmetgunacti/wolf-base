@@ -8,20 +8,14 @@ export interface Project extends Entity {
 	start: ISODateString;
 	description: string | null;
 	end: ISODateString | null;
-	taskGroups: TaskGroup[];
-
-}
-
-export interface TaskGroup extends NameBase {
-
-	tasks: Task[];
+	taskGroups: NameBase[];
 
 }
 
 export interface Task extends NameBase {
 
-	projectId: UUID;
-	taskGroupId: UUID;
+	project: NameBase;
+	taskGroup: NameBase;
 	description: string | null;
 	status: TaskState;
 	priority: TaskPriority;

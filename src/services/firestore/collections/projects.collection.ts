@@ -1,5 +1,5 @@
 import { FIRESTORE_VALUE, FirestoreConverter, WolfEntity } from '@lib';
-import { FirestoreConfig, Project, TaskGroup } from 'lib/models';
+import { FirestoreConfig, NameBase, Project } from 'lib/models';
 import { ProjectsRemoteRepository } from 'lib/repositories/remote/project-remote.repository';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
@@ -17,40 +17,39 @@ export class ProjectsFirestoreCollectionImpl extends FirestoreRemoteStorageColle
 
 }
 
-class ProjectTaskGroupFirestoreConverter implements FirestoreConverter<TaskGroup> {
+class ProjectNameBaseFirestoreConverter implements FirestoreConverter<NameBase> {
 
-	toFirestore(item: TaskGroup): Record<keyof TaskGroup, FIRESTORE_VALUE> {
+	toFirestore(item: NameBase): Record<keyof NameBase, FIRESTORE_VALUE> {
 
-		const fields = {} as Record<keyof TaskGroup, FIRESTORE_VALUE>;
+		const fields = {} as Record<keyof NameBase, FIRESTORE_VALUE>;
 		fields['id'] = { stringValue: item.id };
 		fields['name'] = { stringValue: item.name };
 		return fields;
 
 	}
 
-	fromFirestore(item: TaskGroup): TaskGroup {
+	fromFirestore(item: NameBase): NameBase {
 
 		// validate incoming
-		let { id, name, tasks } = item;
+		let { id, name } = item;
 
 		if (!id)
-			throw new Error(`Firestore Project TaskGroup: invalid 'id' value`);
+			throw new Error(`Firestore Project NameBase: invalid 'id' value`);
 
 		if (!name)
-			throw new Error(`Firestore Project TaskGroup: invalid 'name' value`);
+			throw new Error(`Firestore Project NameBase: invalid 'name' value`);
 
-		const validated: TaskGroup = {
+		const validated: NameBase = {
 
 			id,
-			name,
-			tasks: []
+			name
 
 		};
 		return validated;
 
 	}
 
-	toUpdateMask(item: Partial<TaskGroup>): string {
+	toUpdateMask(item: Partial<NameBase>): string {
 
 		// exclude some fields like id, ... from update list
 		// (empty string would delete string on server)
@@ -71,7 +70,7 @@ class ProjectTaskGroupFirestoreConverter implements FirestoreConverter<TaskGroup
 
 class ProjectFirestoreConverter implements FirestoreConverter<Project> {
 
-	taskGroupsConverter: ProjectTaskGroupFirestoreConverter = new ProjectTaskGroupFirestoreConverter();
+	taskGroupsConverter: ProjectNameBaseFirestoreConverter = new ProjectNameBaseFirestoreConverter();
 
 	toFirestore(entry: Project): Record<keyof Project, FIRESTORE_VALUE> {
 

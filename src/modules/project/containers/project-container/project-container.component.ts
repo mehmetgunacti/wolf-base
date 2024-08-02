@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
-import { Definition, definitionName, UUID, Project } from '@lib';
+import { Project, Task, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import * as taskActions from 'store/actions/project-task.actions';
 import * as projectActions from 'store/actions/project.actions';
-import { selQuizEntry_ids } from 'store/selectors/quiz-entry-selectors/quiz-entry-entities.selectors';
-import { selProject_selected } from 'store/selectors/project-selectors/project-entities.selectors';
-import { selProject_infoVisible } from 'store/selectors/project-selectors/project-ui.selectors';
+import { selProject_infoVisible, selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
+import { selTask_taskGroupMap } from 'store/selectors/project-task-selectors/task-ui.selectors';
 
 @Component({
 	selector: 'app-project-container',
@@ -18,13 +18,13 @@ export class ProjectContainerComponent {
 	private store: Store = inject(Store);
 
 	project$: Observable<Project | null>;
-	scheduledIds$: Observable<UUID[]>;
+	taskGroupMap: Signal<Record<UUID, Task[]>>;
 	infoVisible: Signal<boolean>;
 
 	constructor() {
 
 		this.project$ = this.store.select(selProject_selected);
-		this.scheduledIds$ = this.store.select(selQuizEntry_ids);
+		this.taskGroupMap = this.store.selectSignal(selTask_taskGroupMap);
 		this.infoVisible = this.store.selectSignal(selProject_infoVisible);
 
 	}
@@ -35,9 +35,9 @@ export class ProjectContainerComponent {
 
 	}
 
-	onOpenNewTaskDialog(): void {
+	onOpenNewTaskDialog(taskGroupId: UUID): void {
 
-		this.store.dispatch(projectActions.openNewTaskDialog());
+		this.store.dispatch(taskActions.openAddTaskDialog({ taskGroupId }));
 
 	}
 

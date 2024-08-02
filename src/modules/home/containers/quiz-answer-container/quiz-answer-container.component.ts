@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, Signal, inject } from '@angular/cor
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { UUID, Word } from 'lib';
+import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
 import { closeShowAnswerDialog } from 'store/actions/quiz-entry.actions';
 import { selQuiz_answer } from 'store/selectors/quiz-entry-selectors/quiz.selectors';
 
@@ -10,6 +11,8 @@ import { selQuiz_answer } from 'store/selectors/quiz-entry-selectors/quiz.select
 	selector: 'app-quiz-answer-container',
 	templateUrl: './quiz-answer-container.component.html',
 	styleUrls: ['./quiz-answer-container.component.scss'],
+	animations: [dialogFadeOutTrigger],
+	host: { '[@fadeOut]': '' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizAnswerContainerComponent {

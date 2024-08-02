@@ -1,11 +1,20 @@
-<w-portal>
+<w-overlay-container>
 
-	<button
-		class="icon-only"
-		[routerLink]="['/projects']">
-		<span class="material-symbols-outlined">cancel</span> Cancel
-	</button>
+	<ng-container card_title>Add Task</ng-container>
+	<ng-container card_buttons>
 
-</w-portal>
+		<button
+			class="icon-only rounded"
+			(click)="onClose()"
+			title="Close">
+			<span class="material-symbols-outlined">close</span>
+		</button>
 
-<app-task-form (create)="onCreate($event)"/>
+	</ng-container>
+
+	<app-task-form
+		[project]="project()"
+		[taskGroup]="taskGroup()"
+		(create)="onCreate($event)"/>
+
+</w-overlay-container>

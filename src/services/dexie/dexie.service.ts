@@ -8,6 +8,8 @@ import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
 import { QuizEntryLocalRepository } from 'lib/repositories/local/quiz-entry.repository';
 import { DexieQuizEntriesRepositoryImpl } from './tables/quiz-entries.table';
 import { DexieProjectsRepositoryImpl } from './tables/projects.table';
+import { TaskLocalRepository } from 'lib/repositories/local/project-task.repository';
+import { DexieTasksRepositoryImpl } from './tables/project-tasks.table';
 
 export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
@@ -21,6 +23,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 	projects: ProjectLocalRepository;
 	quizEntries: QuizEntryLocalRepository;
 	quotes: QuoteLocalRepository;
+	tasks: TaskLocalRepository;
 	words: WordLocalRepository;
 
 	constructor() {
@@ -34,6 +37,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 		this.projects = new DexieProjectsRepositoryImpl(db);
 		this.quizEntries = new DexieQuizEntriesRepositoryImpl(db);
 		this.quotes = new DexieQuotesRepositoryImpl(db);
+		this.tasks = new DexieTasksRepositoryImpl(db);
 		this.words = new DexieWordsRepositoryImpl(db);
 		this.db = db;
 
@@ -49,6 +53,7 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 			case WolfEntity.project.name: return this.projects as unknown as EntityLocalRepository<T>;
 			case WolfEntity.quizEntry.name: return this.quizEntries as unknown as EntityLocalRepository<T>;
 			case WolfEntity.quote.name: return this.quotes as unknown as EntityLocalRepository<T>;
+			case WolfEntity.task.name: return this.tasks as unknown as EntityLocalRepository<T>;
 			case WolfEntity.word.name: return this.words as unknown as EntityLocalRepository<T>;
 
 		}

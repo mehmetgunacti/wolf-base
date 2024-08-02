@@ -91,6 +91,24 @@ export class DatabaseEffects {
 				this.localRepository.count(LocalRepositoryNames.words_trash),
 				this.localRepository.size(LocalRepositoryNames.words_trash),
 
+				this.localRepository.count(LocalRepositoryNames.projects),
+				this.localRepository.size(LocalRepositoryNames.projects),
+				this.localRepository.count(LocalRepositoryNames.projects_sync),
+				this.localRepository.size(LocalRepositoryNames.projects_sync),
+				this.localRepository.count(LocalRepositoryNames.projects_remote),
+				this.localRepository.size(LocalRepositoryNames.projects_remote),
+				this.localRepository.count(LocalRepositoryNames.projects_trash),
+				this.localRepository.size(LocalRepositoryNames.projects_trash),
+
+				this.localRepository.count(LocalRepositoryNames.tasks),
+				this.localRepository.size(LocalRepositoryNames.tasks),
+				this.localRepository.count(LocalRepositoryNames.tasks_sync),
+				this.localRepository.size(LocalRepositoryNames.tasks_sync),
+				this.localRepository.count(LocalRepositoryNames.tasks_remote),
+				this.localRepository.size(LocalRepositoryNames.tasks_remote),
+				this.localRepository.count(LocalRepositoryNames.tasks_trash),
+				this.localRepository.size(LocalRepositoryNames.tasks_trash),
+
 				this.localRepository.count(LocalRepositoryNames.logs),
 				this.localRepository.size(LocalRepositoryNames.logs)
 
@@ -148,7 +166,23 @@ export class DatabaseEffects {
 						trash: { count: arr[48], size: arr[49] }
 
 					},
-					logs: { count: arr[50], size: arr[51] }
+					projects: {
+
+						entities: { count: arr[50], size: arr[51] },
+						syncData: { count: arr[52], size: arr[53] },
+						remoteData: { count: arr[54], size: arr[55] },
+						trash: { count: arr[56], size: arr[57] }
+
+					},
+					tasks: {
+
+						entities: { count: arr[58], size: arr[59] },
+						syncData: { count: arr[60], size: arr[61] },
+						remoteData: { count: arr[62], size: arr[63] },
+						trash: { count: arr[64], size: arr[65] }
+
+					},
+					logs: { count: arr[66], size: arr[67] }
 
 				};
 				return report;
