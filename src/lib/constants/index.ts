@@ -5,6 +5,7 @@ export * from './entity.constant';
 export * from './log.constant';
 export * from './project.constant';
 export * from './quiz.constant';
+export * from './quote.constant';
 export * from './responsive.constant';
 export * from './sidebar.constant';
 export * from './theme.constant';
