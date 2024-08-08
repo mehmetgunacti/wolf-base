@@ -1,0 +1,57 @@
+@import 'helper';
+@import 'variables';
+@import 'components';
+@import 'mixins';
+
+:host {
+
+	& > figure {
+
+		@include mx-flex-column;
+		overflow	: hidden;
+		cursor		: pointer;
+		color		: fn-hsl(text);
+
+		& > blockquote {
+
+			margin: 0;
+			border: 0;
+
+			& > pre {
+
+				font-family		: inherit;
+				font-weight		: bold;
+				font-style		: italic;
+				font-size		: var(--font-size-h4);
+				text-align		: center;
+				padding			: 0 var(--gap-sm) var(--gap-sm) var(--gap-sm);
+				background		: none;
+				margin-bottom	: 0;
+
+			}
+
+		}
+
+		& > figcaption {
+
+			& > [quote_author] {
+
+				text-align	: end;
+				font-size	: smaller;
+				padding		: var(--gap-xs);
+
+			}
+
+			& > [quote_context] {
+
+				text-align	: end;
+				font-size	: xx-small;
+				padding		: 0 var(--gap-xs);
+
+			}
+
+		}
+
+	}
+
+}
