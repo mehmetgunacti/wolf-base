@@ -37,15 +37,15 @@ export class SlowScrollDirective implements OnInit {
 		this.scrollTimer = setInterval(() => {
 
 			const distance = this.element.scrollHeight - this.element.clientHeight;
-			console.log('scrolling', distance);
-			console.log('interval', scrollAmount, distance, scrollAmount < distance);
+			// console.log('scrolling', distance);
+			// console.log('interval', scrollAmount, distance, scrollAmount < distance);
 
 			if (scrollAmount < distance) {
 
-				console.log('1', this.element.scrollTop, scrollAmount);
+				// console.log('1', this.element.scrollTop, scrollAmount);
 				this.element.scrollTop += this.scrollStep();
 				scrollAmount += this.scrollStep();
-				console.log('2', this.element.scrollTop, scrollAmount);
+				// console.log('2', this.element.scrollTop, scrollAmount);
 
 
 			} else

@@ -14,7 +14,7 @@
 </div>
 @if ((wrapper$ | async); as wrapper) {
 
-	<div quote_wrapper slowScroll [scrollTrigger]="wrapper.value.id">
+	<div quote_wrapper>
 
 		<app-quote [quote]="wrapper.value" [class.outgoing]="wrapper.outgoing"/>
 
