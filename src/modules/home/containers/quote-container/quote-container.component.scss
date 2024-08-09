@@ -21,7 +21,7 @@
 	@include mx-flex-column-center;
 	position		: relative;
 	padding-inline	: var(--gap-lg);
-	height			: 2 * $header-height;
+	height			: 3 * $header-height;
 	cursor			: pointer;
 
 	&::before {
