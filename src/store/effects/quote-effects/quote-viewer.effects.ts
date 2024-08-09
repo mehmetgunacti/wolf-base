@@ -3,7 +3,6 @@ import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
-import { timer } from 'rxjs';
 import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { setNow } from 'store/actions/core-ui.actions';
 import { loadAllSuccess } from 'store/actions/core.actions';

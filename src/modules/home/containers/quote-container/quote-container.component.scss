@@ -20,8 +20,9 @@
 	@include mx-box-shadow;
 	@include mx-flex-column-center;
 	position		: relative;
-	min-height		: 2 * $header-height;
 	padding-inline	: var(--gap-lg);
+	height			: 2 * $header-height;
+	cursor			: pointer;
 
 	&::before {
 
@@ -83,52 +84,12 @@
 
 	}
 
-	& > figure {
+	& > [quote_wrapper] {
 
-		@include mx-flex-column;
-		overflow	: hidden;
-		cursor		: pointer;
-
-		& > blockquote {
-
-			position		: relative;
-			border-left		: 0;
-			margin-bottom	: 0;
-
-			& > [quote_name] {
-
-				font-family		: inherit;
-				font-weight		: bold;
-				font-style		: italic;
-				font-size		: var(--font-size-h4);
-				text-align		: center;
-				padding			: 0 var(--gap-sm) var(--gap-sm) var(--gap-sm);
-				background		: none;
-				margin-bottom	: 0;
-
-			}
-
-		}
-
-		& > figcaption {
-
-			& > [quote_author] {
-
-				text-align	: end;
-				font-size	: smaller;
-				padding		: var(--gap-xs);
-
-			}
-
-			& > [quote_context] {
-
-				text-align	: end;
-				font-size	: xx-small;
-				padding		: 0 var(--gap-xs);
-
-			}
-
-		}
+		@include mx-scrollable;
+		display		: grid;
+		height		: 100%;
+		width		: 100%;
 
 	}
 

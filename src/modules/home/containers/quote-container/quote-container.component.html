@@ -12,35 +12,12 @@
 	}
 
 </div>
-@if (quote() ?? PICARD; as quote) {
+@if ((wrapper$ | async); as wrapper) {
 
-	<figure
-			quote_outer
-			#quoteOuter
-			[@quoteHeight]="{ value: quote.id, params: { startHeight: quoteOuter.clientHeight }}"
-			[@.disabled]="!animate()"
-			(@quoteHeight.done)="onAnimationEnd()">
+	<div quote_wrapper slowScroll [scrollTrigger]="wrapper.value.id">
 
-		<blockquote quote_inner>
+		<app-quote [quote]="wrapper.value" [class.outgoing]="wrapper.outgoing"/>
 
-			<pre quote_name>{{ quote.name }}</pre>
-
-		</blockquote>
-		@if (quote.author) {
-
-			<figcaption>
-
-				<div quote_author>{{ quote.author }}</div>
-				@if (quote.context) {
-
-					<div quote_context>{{ quote.context }}</div>
-
-				}
-
-			</figcaption>
-
-		}
-
-	</figure>
+	</div>
 
 }

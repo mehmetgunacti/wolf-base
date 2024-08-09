@@ -1,3 +1,4 @@
+import { SlowScrollDirective } from 'lib/directives/slow-scroll.directive';
 import { QuoteComponent } from './components/quote/quote.component';
 import { PinnedNotesContainerComponent } from './containers/pinned-notes-container/pinned-notes-container.component';
 import { PopularBookmarksContainerComponent } from "./containers/popular-bookmarks-container/popular-bookmarks-container.component";
@@ -14,6 +15,8 @@ export const components = [
 	QuoteContainerComponent,
 	QuoteComponent,
 	QuizContainerComponent,
-	QuizAnswerContainerComponent
+	QuizAnswerContainerComponent,
+
+	SlowScrollDirective
 
 ];

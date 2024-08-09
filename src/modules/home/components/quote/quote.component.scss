@@ -3,19 +3,39 @@
 @import 'components';
 @import 'mixins';
 
+@keyframes fadein {
+
+	from { opacity: 0; }
+    to { opacity: 1; }
+
+}
+
 :host {
+
+	@include mx-flex-column;
+
+	&.outgoing {
+
+		--col-text-alp : 0;
+
+	}
 
 	& > figure {
 
+		flex		: 1;
 		@include mx-flex-column;
 		overflow	: hidden;
-		cursor		: pointer;
 		color		: fn-hsl(text);
+		transition	: color 1s ease;
+		animation	: fadein 2s;
 
 		& > blockquote {
 
-			margin: 0;
-			border: 0;
+			flex		: 1;
+			display		: grid;
+			place-items	: center;
+			margin		: 0;
+			border		: 0;
 
 			& > pre {
 
@@ -24,7 +44,7 @@
 				font-style		: italic;
 				font-size		: var(--font-size-h4);
 				text-align		: center;
-				padding			: 0 var(--gap-sm) var(--gap-sm) var(--gap-sm);
+				// padding			: 0 var(--gap-sm) var(--gap-sm) var(--gap-sm);
 				background		: none;
 				margin-bottom	: 0;
 
@@ -40,13 +60,17 @@
 				font-size	: smaller;
 				padding		: var(--gap-xs);
 
+				&:empty { padding: 0; }
+
 			}
 
 			& > [quote_context] {
 
 				text-align	: end;
 				font-size	: xx-small;
-				padding		: 0 var(--gap-xs);
+				padding		: var(--gap-xs);
+
+				&:empty { padding: 0; }
 
 			}
 
