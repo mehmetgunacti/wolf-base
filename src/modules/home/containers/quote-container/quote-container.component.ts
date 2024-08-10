@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener, Signal, WritableSignal, inject, signal } from '@angular/core';
-import { PICARD, Quote, onEnterFadeOutTrigger } from '@lib';
+import { Quote, onEnterFadeOutTrigger } from '@lib';
 import { Store } from '@ngrx/store';
-import { Observable, concatMap, filter, map, scan, startWith, take, timer } from 'rxjs';
+import { Observable, concatMap, filter, iif, map, of, scan, take, timer } from 'rxjs';
 import { disableAnimation, setRunning } from 'store/actions/quote.actions';
 import { selQuoteViewer_animate, selQuoteViewer_quote, selQuoteViewer_running } from 'store/selectors/quote-selectors/quote-viewer.selectors';
 
@@ -12,25 +12,13 @@ interface Pair {
 
 }
 
+const incoming = (value: Quote): QuoteWrapper => ({ value, clazz: 'incoming' });
+const outgoing = (value: Quote): QuoteWrapper => ({ value, clazz: 'outgoing' });
+
 interface QuoteWrapper {
 
 	value: Quote;
-	outgoing: boolean;
-
-}
-
-function inOrOut(pair: Pair, isPrevious: boolean): QuoteWrapper | null {
-
-	if (isPrevious) {
-
-		if (pair.prev === null)
-			return null;
-		return { value: pair.prev, outgoing: true };
-
-	}
-	if (pair.curr === null)
-		return null;
-	return { value: pair.curr, outgoing: false };
+	clazz: 'outgoing' | 'incoming' | null;
 
 }
 
@@ -48,7 +36,6 @@ export class QuoteContainerComponent {
 	wrapper$: Observable<QuoteWrapper> = this.store.select(selQuoteViewer_quote).pipe(
 
 		filter((quote): quote is Quote => !!quote),
-		startWith(PICARD),
 		scan(
 
 			(acc, curr) => ({ prev: acc.curr, curr }),
@@ -57,11 +44,16 @@ export class QuoteContainerComponent {
 		),
 		concatMap(
 
-			pair => timer(0, 1500).pipe(
+			pair => iif(
 
-				take(2),
-				map(t => inOrOut(pair, t === 0)),
-				filter((wrapper): wrapper is QuoteWrapper => wrapper !== null)
+				() => pair.prev === null,
+				of(incoming(pair.curr!)),
+				timer(0, 1500).pipe(
+
+					take(2),
+					map(t => t === 0 ? outgoing(pair.prev!) : incoming(pair.curr!))
+
+				)
 
 			)
 
