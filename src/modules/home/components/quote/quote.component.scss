@@ -6,7 +6,14 @@
 @keyframes fadein {
 
 	from { opacity: 0; }
-    to { opacity: 1; }
+	to { opacity: 1; }
+
+}
+
+@keyframes fadeOut {
+
+	from { opacity: 1; }
+	to { opacity: 0; }
 
 }
 
@@ -17,6 +24,13 @@
 	&.outgoing {
 
 		--col-text-alp : 0;
+		animation	: fadeOut 1s;
+
+	}
+
+	&.incoming {
+
+		animation	: fadein 1s;
 
 	}
 
@@ -27,7 +41,6 @@
 		overflow	: hidden;
 		color		: fn-hsl(text);
 		transition	: color 1s ease;
-		animation	: fadein 2s;
 
 		& > blockquote {
 
