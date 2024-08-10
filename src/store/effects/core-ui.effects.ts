@@ -1,8 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Injectable, inject } from '@angular/core';
-import { Breakpoint } from '@lib';
+import { Breakpoint, TIMER_DELAY, TIMER_INTERVAL } from '@lib';
 import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
-import { interval, of } from 'rxjs';
+import { interval, of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { setBigScreen, setNow } from 'store/actions/core-ui.actions';
 
@@ -29,7 +29,7 @@ export class CoreUIEffects {
 			ofType(ROOT_EFFECTS_INIT),
 			switchMap(
 
-				() => interval(60 * 1000).pipe(map(() => setNow()))
+				() => timer(TIMER_DELAY, TIMER_INTERVAL).pipe(map(() => setNow()))
 
 			)
 
