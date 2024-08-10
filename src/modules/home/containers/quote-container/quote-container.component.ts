@@ -58,7 +58,7 @@ export class QuoteContainerComponent {
 
 				() => pair.prev === null,
 				incoming$(pair, this.animate(), this.store),
-				timer(0, 1200).pipe(
+				timer(0, 800).pipe(
 
 					take(2),
 					switchMap(

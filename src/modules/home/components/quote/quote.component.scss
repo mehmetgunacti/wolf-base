@@ -24,13 +24,13 @@
 	&.outgoing {
 
 		--col-text-alp : 0;
-		animation	: fadeOut 1s;
+		animation	: fadeOut 1200ms;
 
 	}
 
 	&.incoming {
 
-		animation	: fadein 1s;
+		animation	: fadein 1200ms;
 
 	}
 

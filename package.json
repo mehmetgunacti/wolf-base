@@ -1,6 +1,6 @@
 {
   "name": "wolf-base",
-  "version": "0.1.169",
+  "version": "0.1.170",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
