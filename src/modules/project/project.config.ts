@@ -8,6 +8,8 @@ import { ProjectEditFormContainerComponent } from './containers/project-edit-for
 import { ProjectFilterContainerComponent } from './containers/project-filter-container/project-filter-container.component';
 import { ProjectNewFormContainerComponent } from './containers/project-new-form-container/project-new-form-container.component';
 import { ProjectsContainerComponent } from './containers/projects-container/projects-container.component';
+import { TaskContainerComponent } from './containers/task-container/task-container.component';
+import { TaskEditFormContainerComponent } from './containers/task-edit-form-container/task-edit-form-container.component';
 import { TaskNewFormContainerComponent } from './containers/task-new-form-container/task-new-form-container.component';
 import { ProjectEditFormPageComponent } from './pages/project-edit-form-page/project-form-edit-page.component';
 import { ProjectNewFormPageComponent } from './pages/project-new-form-page/project-new-form-page.component';
@@ -30,6 +32,8 @@ export const components = [
 	ProjectEditFormContainerComponent,
 	ProjectsContainerComponent,
 	TaskNewFormContainerComponent,
+	TaskEditFormContainerComponent,
+	TaskContainerComponent,
 
 	// pages
 	ProjectPageComponent,

@@ -69,8 +69,6 @@ export class TaskForm {
 
 	setValue(task: Task): void {
 
-		console.log('incoming task setting values', task);
-
 		this.id.setValue(task.id);
 		this.name.setValue(task.name);
 		this.project.setValue(task.project);

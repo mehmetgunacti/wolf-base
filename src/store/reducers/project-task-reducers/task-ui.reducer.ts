@@ -6,7 +6,7 @@ import * as actions from 'store/actions/project-task.actions';
 const reducer = createReducer(
 
 	initialTaskUIState,
-	on(actions.setSelectedId, (state, { id }): Task_UIState => {
+	on(actions.openTaskDialog, (state, { id }): Task_UIState => {
 
 		return produce(
 			state,
@@ -23,8 +23,8 @@ const reducer = createReducer(
 		taskGroupId
 
 	})),
-	on(actions.openEditTaskDialog, (state, { id }): Task_UIState => ({ ...state, selectedId: id })),
-	on(actions.closeEditTaskDialog, (state): Task_UIState => ({ ...state, selectedId: null, taskGroupId: null })),
+	// on(actions.openEditTaskDialog, (state, { id }): Task_UIState => ({ ...state, selectedId: id })),
+	on(actions.closeEditDialog, (state): Task_UIState => ({ ...state, selectedId: null, taskGroupId: null })),
 
 );
 

@@ -41,4 +41,10 @@ export class ProjectContainerComponent {
 
 	}
 
+	onViewTaskDialog(id: UUID): void {
+
+		this.store.dispatch(taskActions.openTaskDialog({ id }));
+
+	}
+
 }

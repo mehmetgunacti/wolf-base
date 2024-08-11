@@ -1,60 +1,86 @@
-<form>
+<w-overlay-container>
 
-	<!-- PROJECT ID -->
-	<h4>
-		<small>{{ form.project.value?.id }}</small>
-		{{ form.project.value?.name }}
-	</h4>
+	<ng-container card_title>Edit Task</ng-container>
+	<ng-container card_buttons>
 
-	<!-- TASK GROUP ID -->
-	<h4>
-		<small>{{ form.taskGroup.value?.id }}</small>
-		{{ form.taskGroup.value?.name }}
-	</h4>
+		<button
+			class="icon-only rounded"
+			(click)="onClose()"
+			title="Close">
+			<span class="material-symbols-outlined">close</span>
+		</button>
 
-	<!-- ID -->
-	<div>
-		<w-input [control]="form.id" name="ID" [readonly]="true"/>
-	</div>
+	</ng-container>
 
-	<!-- NAME -->
-	<div>
-		<w-input [control]="form.name" name="Term"/>
-	</div>
+	<form>
 
-	<!-- DESCRIPTION -->
-	<div>
-		<w-input [control]="form.description" name="Description"/>
-	</div>
+		<!-- PROJECT ID -->
+		<h4>
+			<small>{{ form.project.value?.id }}</small>
+			{{ form.project.value?.name }}
+		</h4>
 
-	<!-- STATUS -->
-	<div>
-		<w-select [control]="form.status" name="Status" [nodes]="TASK_STATE"/>
-	</div>
+		<!-- TASK GROUP ID -->
+		<h4>
+			<small>{{ form.taskGroup.value?.id }}</small>
+			{{ form.taskGroup.value?.name }}
+		</h4>
 
-	<!-- PRIORITY -->
-	<div>
-		<w-select [control]="form.priority" name="Priority" [nodes]="TASK_PRIORITIES"/>
-	</div>
+		<!-- ID -->
+		<div>
+			<w-input [control]="form.id" name="ID" [readonly]="true"/>
+		</div>
 
-	<!-- OPTIONAL -->
-	<div>
-		Optional <w-switch [checked]="!!optional()" />
-	</div>
+		<!-- NAME -->
+		<div>
+			<w-input [control]="form.name" name="Term"/>
+		</div>
 
-	<!-- START -->
-	<div>
-		<w-input [control]="form.start" name="Start" type="date"/>
-	</div>
+		<!-- DESCRIPTION -->
+		<div>
+			<w-input [control]="form.description" name="Description"/>
+		</div>
 
-	<!-- END -->
-	<div>
-		<w-input [control]="form.end" name="End" type="date"/>
-	</div>
+		<!-- STATUS -->
+		<div>
+			<w-select [control]="form.status" name="Status" [nodes]="TASK_STATE"/>
+		</div>
 
-</form>
-<div footer>
+		<!-- PRIORITY -->
+		<div>
+			<w-select [control]="form.priority" name="Priority" [nodes]="TASK_PRIORITIES"/>
+		</div>
 
-	<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>
+		<!-- OPTIONAL -->
+		<div>
+			Optional <w-switch [checked]="!!optional()" />
+		</div>
 
-</div>
+		<!-- START -->
+		<div>
+			<w-input [control]="form.start" name="Start" type="date"/>
+		</div>
+
+		<!-- END -->
+		<div>
+			<w-input [control]="form.end" name="End" type="date"/>
+		</div>
+
+	</form>
+
+	<ng-container card_footer>
+
+		<div class="footer one_one">
+
+			@if (task(); as t) {
+
+				<button type="button" (click)="onCancel(t.id)" class="icon-only"><span class="material-symbols-outlined">cancel</span> Cancel</button>
+
+			}
+			<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>
+
+		</div>
+
+	</ng-container>
+
+</w-overlay-container>

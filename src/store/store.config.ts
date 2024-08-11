@@ -59,6 +59,8 @@ import { ProjectSyncRemoteNewEffects } from './effects/project-effects/project-s
 import { ProjectSyncRemoteUpdatedEffects } from './effects/project-effects/project-sync-remote-updated.effects';
 import { ProjectSyncEffects } from './effects/project-effects/project-sync.effects';
 import { ProjectUIEffects } from './effects/project-effects/project-ui.effects';
+import { TaskEffects } from './effects/project-task-effects/project-task-dialog.effects';
+import { TaskEditEffects } from './effects/project-task-effects/project-task-edit-dialog.effects';
 import { TaskEntityCreateEffects } from './effects/project-task-effects/project-task-entity-create.effects';
 import { TaskEntityMoveToTrashEffects } from './effects/project-task-effects/project-task-entity-move-to-trash.effects';
 import { TaskEntityUpdateEffects } from './effects/project-task-effects/project-task-entity-update.effects';
@@ -71,7 +73,6 @@ import { TaskSyncRemoteDeletedEffects } from './effects/project-task-effects/pro
 import { TaskSyncRemoteNewEffects } from './effects/project-task-effects/project-task-sync-remote-new.effects';
 import { TaskSyncRemoteUpdatedEffects } from './effects/project-task-effects/project-task-sync-remote-updated.effects';
 import { TaskSyncEffects } from './effects/project-task-effects/project-task-sync.effects';
-import { TaskUIEffects } from './effects/project-task-effects/project-task-ui.effects';
 import { QuizEntryEntityCreateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-create.effects';
 import { QuizEntryEntityMoveToTrashEffects } from './effects/quiz-entry-effects/quiz-entry-entity-move-to-trash.effects';
 import { QuizEntryEntityUpdateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-update.effects';
@@ -120,11 +121,11 @@ import { logsReducer } from './reducers/logs.reducer';
 import { noteContentReducer } from './reducers/note-content-reducers/note-content.reducer';
 import { noteReducer } from './reducers/note-reducers/note.reducer';
 import { projectReducer } from './reducers/project-reducers/project.reducer';
+import { taskReducer } from './reducers/project-task-reducers/task.reducer';
 import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.reducer';
 import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
-import { taskReducer } from './reducers/project-task-reducers/task.reducer';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -249,7 +250,8 @@ export const effects = [
 	TaskEntityMoveToTrashEffects,
 
 	TaskLoadEffects,
-	TaskUIEffects,
+	TaskEditEffects,
+	TaskEffects,
 
 	// Words
 	WordSyncEffects,

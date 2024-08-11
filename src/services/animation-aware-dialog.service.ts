@@ -65,11 +65,15 @@ export class AnimationAwareDialog extends Dialog {
 
 		ref.close = async (...args) => {
 			const container = ref.containerInstance as AnimationAwareDialogContainer;
-			const animationDone = firstValueFrom(container.animationDone$);
-			// Detaching an overlay removes the overlay's content through standard
-			// Angular APIs, so the animations can be correctly triggered.
-			ref.overlayRef.detach();
-			await animationDone;
+			if (container) {
+
+				const animationDone = firstValueFrom(container.animationDone$);
+				// Detaching an overlay removes the overlay's content through standard
+				// Angular APIs, so the animations can be correctly triggered.
+				ref.overlayRef.detach();
+				await animationDone;
+
+			}
 			close(...args);
 		};
 		return ref;
@@ -100,7 +104,7 @@ export class AnimationAwareDialog extends Dialog {
 
 			]))),
 			transition(':leave', query('@*', animateChild(), { optional: true })),
-	]),
+		]),
 	],
 })
 export class AnimationAwareDialogContainer extends CdkDialogContainer {

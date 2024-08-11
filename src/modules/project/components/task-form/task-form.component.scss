@@ -5,6 +5,8 @@
 
 :host {
 
+	@include mx-overlay-content;
+
 	form {
 
 		@include mx-flex-column;
@@ -57,12 +59,6 @@
 			}
 
 		}
-
-	}
-
-	& > [footer] {
-
-		@include mx-flex-end-center;
 
 	}
 

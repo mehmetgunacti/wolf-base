@@ -1,0 +1,33 @@
+<w-overlay-container>
+
+	<ng-container card_title>View Task</ng-container>
+	<ng-container card_buttons>
+
+		<button
+			class="icon-only rounded"
+			(click)="onClose()"
+			title="Close">
+			<span class="material-symbols-outlined">close</span>
+		</button>
+
+	</ng-container>
+
+	@if (task(); as t) {
+
+		<app-task [task]="t"/>
+
+	}
+
+	<ng-container card_footer>
+
+		<div class="footer">
+
+			<button type="button" (click)="onEdit()">
+				<span class="material-symbols-outlined">edit</span> Edit
+			</button>
+
+		</div>
+
+	</ng-container>
+
+</w-overlay-container>

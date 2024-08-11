@@ -13,25 +13,49 @@
 </h4>
 
 <!-- ID -->
-<div>{{ t.id }}</div>
+<div class="viewElement">
+	<small>ID</small>
+	{{ t.id }}
+</div>
 
 <!-- NAME -->
-<div>{{ t.name }}</div>
+<div class="viewElement">
+	<small>Name</small>
+	{{ t.name }}
+</div>
 
 <!-- DESCRIPTION -->
-<div>{{ t.description }}</div>
+<div class="viewElement">
+	<small>Description</small>
+	{{ t.description }}
+</div>
 
 <!-- STATUS -->
-<div>{{ TASK_STATE[t.status] }}</div>
+<div class="viewElement">
+	<small>Status</small>
+	{{ TASK_STATE[t.status] }}
+</div>
 
 <!-- PRIORITY -->
-<div>{{ TASK_PRIORITIES[t.priority] }}</div>
+<div class="viewElement">
+	<small>Priority</small>
+	{{ TASK_PRIORITIES[t.priority] }}
+</div>
 
 <!-- OPTIONAL -->
-<div>Optional: {{ t.optional }}</div>
+<div class="viewElement">
+	<small>Optional</small>
+	{{ t.optional }}
+</div>
 
 <!-- START -->
-<div>{{ t.start | date:'EEEE dd.MM.yyyy' }}</div>
+<div class="viewElement">
+	<small>Start</small>
+	{{ t.start | date:'EEEE dd.MM.yyyy' }}
+</div>
 
 <!-- END -->
-<div>{{ t.end | date:'EEEE dd.MM.yyyy' }}</div>
+<div class="viewElement">
+	<small>End</small>
+	{{ t.end | date:'EEEE dd.MM.yyyy' }}
+</div>

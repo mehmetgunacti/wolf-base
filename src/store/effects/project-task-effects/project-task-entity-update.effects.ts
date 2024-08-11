@@ -33,12 +33,12 @@ export class TaskEntityUpdateEffects {
 
 	);
 
-	navigate$ = createEffect(
+	openTaskDialog$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(taskActions.updateSuccess),
-			map(({ id }) => navigate({ url: ['/tasks', id] }))
+			map(({ id }) => taskActions.openTaskDialog({ id }))
 
 		)
 

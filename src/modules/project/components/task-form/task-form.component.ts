@@ -22,7 +22,9 @@ export class TaskFormComponent {
 
 	/* @Output() */
 	create = output<Partial<Task>>();
-	update = output<{ id: UUID, project: Partial<Task> }>();
+	update = output<{ id: UUID, task: Partial<Task> }>();
+	cancel = output<UUID>();
+	close = output<void>();
 
 	form: TaskForm = inject(TASK_FORM);
 	optional: Signal<boolean | undefined>;
@@ -55,9 +57,21 @@ export class TaskFormComponent {
 
 		const task: Partial<Task> = formGroup.value as Partial<Task>;
 		if (task.id)
-			this.update.emit({ id: task.id, project: task });
+			this.update.emit({ id: task.id, task });
 		else
 			this.create.emit(task);
+
+	}
+
+	onCancel(id: UUID): void {
+
+		this.cancel.emit(id);
+
+	}
+
+	onClose(): void {
+
+		this.close.emit();
 
 	}
 

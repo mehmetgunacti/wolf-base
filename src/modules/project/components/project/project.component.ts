@@ -19,6 +19,7 @@ export class ProjectComponent {
 
 	toggleInfo = output<boolean>();
 	newTask = output<UUID>();
+	viewTask = output<UUID>();
 
 	onToggle(): void {
 
@@ -34,7 +35,7 @@ export class ProjectComponent {
 
 	onOpenTask(id: UUID): void {
 
-
+		this.viewTask.emit(id);
 
 	}
 
