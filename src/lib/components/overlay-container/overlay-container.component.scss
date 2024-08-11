@@ -17,15 +17,13 @@
 		overflow	: auto;
 		height		: 100%;
 		padding		: var(--gap-xs);
-
 		@include mx-webkit-scrollbar;
 
 	}
 
 	& > footer {
 
-		@include mx-flex-space-between-center;
-		gap		: var(--gap-sm);
+		display		: block;
 
 		&:empty {
 
