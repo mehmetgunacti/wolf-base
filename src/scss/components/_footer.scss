@@ -1,0 +1,49 @@
+.footer {
+
+	display			: flex;
+	gap				: var(--gap-sm);
+	margin-top		: auto;
+
+	& > *:last-child {
+
+		margin-left	: auto;
+
+	}
+
+	&.one_two {
+
+		justify-content	: end;
+
+		& > *:first-child {
+
+			margin-right	: auto;
+
+		}
+
+	}
+
+	&.two_one {
+
+		justify-content	: start;
+
+		& > *:last-child {
+
+			margin-left	: auto;
+
+		}
+
+	}
+
+	&.two_two {
+
+		justify-content	: start;
+
+		& > *:nth-child(3) {
+
+			margin-left	: auto;
+
+		}
+
+	}
+
+}
