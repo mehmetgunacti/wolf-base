@@ -25,13 +25,13 @@ export class DexieTasksRepositoryImpl extends EntityLocalRepositoryImpl<Task> im
 			id,
 			name: '',
 			project: emptyNameBase(),
-			taskGroup: emptyNameBase(),
 			description: null,
 			status: TaskState.ongoing,
 			priority: TaskPriority.normal,
 			optional: false,
 			start: new Date().toISOString(),
-			end: null
+			end: null,
+			tags: []
 
 
 		};

@@ -1,15 +1,7 @@
 import { formatDate } from '@angular/common';
-import { InjectionToken, WritableSignal, signal } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ISODateString, NameBase, ObjectId, Project, ProjectStatus, UUID } from '@lib';
-
-interface TaskGroupFormSchema {
-
-	id: FormControl<UUID | null>;
-	name: FormControl<string>;
-	// tasks: FormArray<FormGroup<TaskFormSchema>>;
-
-}
+import { InjectionToken } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ISODateString, Project, ProjectStatus, UUID } from '@lib';
 
 interface ProjectFormSchema {
 
@@ -19,49 +11,6 @@ interface ProjectFormSchema {
 	status: FormControl<ProjectStatus>;
 	start: FormControl<string>;
 	end: FormControl<ISODateString | null>;
-	taskGroups: FormArray<FormGroup<TaskGroupFormSchema>>;
-
-}
-
-class TaskGroupForm {
-
-	readonly id: FormControl<UUID | null>;
-	readonly name: FormControl<string>;
-
-	private taskId: ObjectId = new ObjectId('task_');
-
-	constructor(
-		// to be used by @for (... track objectId)
-		public readonly objectId: string,
-		taskGroup?: NameBase
-	) {
-
-		// form fields
-		this.id = new FormControl<UUID | null>(null);
-		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-
-		if (taskGroup)
-			this.setValue(taskGroup);
-
-	}
-
-	formGroup(): FormGroup<TaskGroupFormSchema> {
-
-		return new FormGroup({
-
-			id: this.id,
-			name: this.name
-
-		});
-
-	}
-
-	setValue(taskGroup: NameBase): void {
-
-		this.id.setValue(taskGroup.id);
-		this.name.setValue(taskGroup.name);
-
-	}
 
 }
 
@@ -75,11 +24,6 @@ export class ProjectForm {
 	readonly start: FormControl<string>;
 	readonly end: FormControl<string | null>;
 
-	// task groups
-	readonly taskGroups: WritableSignal<TaskGroupForm[]>;
-
-	private taskGroupId: ObjectId = new ObjectId('taskGroup_');
-
 	constructor() {
 
 		// form fields
@@ -89,29 +33,6 @@ export class ProjectForm {
 		this.status = new FormControl<ProjectStatus>(ProjectStatus.ongoing, { validators: [Validators.required], nonNullable: true });
 		this.start = new FormControl<string>(formatDate(new Date(), 'yyyy-MM-dd', 'en'), { validators: [Validators.required], nonNullable: true });
 		this.end = new FormControl<string | null>(null);
-
-		// task groups
-		this.taskGroups = signal<TaskGroupForm[]>([new TaskGroupForm(this.taskGroupId.next())]);
-
-	}
-
-	addTaskGroup(): void {
-
-		this.taskGroups.update(list => {
-			list.push(new TaskGroupForm(this.taskGroupId.next()));
-			return list;
-		});
-
-	}
-
-	removeTaskGroup(objectId: string): void {
-
-		this.taskGroups.update(
-			list => {
-				list.splice(list.findIndex(d => d.objectId === objectId), 1);
-				return list;
-			}
-		);
 
 	}
 
@@ -124,8 +45,7 @@ export class ProjectForm {
 			description: this.description,
 			status: this.status,
 			start: this.start,
-			end: this.end,
-			taskGroups: new FormArray(this.taskGroups().map(tg => tg.formGroup()))
+			end: this.end
 
 		});
 
@@ -139,8 +59,6 @@ export class ProjectForm {
 		this.status.setValue(project.status);
 		this.start.setValue(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
 		this.end.setValue(project.end);
-
-		this.taskGroups.set(project.taskGroups.map(tg => new TaskGroupForm(this.taskGroupId.next(), tg)));
 
 	}
 

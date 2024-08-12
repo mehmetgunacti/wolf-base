@@ -37,37 +37,6 @@
 			<w-input [control]="form.end" name="End" type="date"/>
 		</div>
 
-		@for (taskGroup of form.taskGroups(); track taskGroup.objectId) {
-
-			<fieldset>
-				<legend>Task Group #{{$index + 1}}</legend>
-
-				@if($index > 0) {
-
-					<button
-						type="button"
-						class="icon-only small"
-						(click)="form.removeTaskGroup(taskGroup.objectId)">
-						<span class="material-symbols-outlined warn">do_not_disturb_on</span> Remove Task Group #{{ $index + 1 }}
-					</button>
-
-				}
-
-				<div task_group>
-
-					<!-- NAME -->
-					<div>
-						<w-input [control]="taskGroup.name" name="Name"/>
-					</div>
-
-				</div>
-			</fieldset>
-
-		}
-		<div>
-			<button type="button" (click)="form.addTaskGroup()">Add Task Group</button>
-		</div>
-
 	</form>
 
 </main>

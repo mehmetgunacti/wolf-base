@@ -4,7 +4,6 @@ import { NameBase, Task } from 'lib';
 import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
 import { closeEditDialog, create } from 'store/actions/project-task.actions';
 import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
-import { selTask_selectedTaskGroup } from 'store/selectors/project-task-selectors/task-ui.selectors';
 
 @Component({
 	selector: 'app-task-new-form-container',
@@ -19,12 +18,10 @@ export class TaskNewFormContainerComponent {
 	private store: Store = inject(Store);
 
 	project: Signal<NameBase | null>;
-	taskGroup: Signal<NameBase | null>;
 
 	constructor() {
 
 		this.project = this.store.selectSignal(selProject_selected);
-		this.taskGroup = this.store.selectSignal(selTask_selectedTaskGroup);
 
 	}
 

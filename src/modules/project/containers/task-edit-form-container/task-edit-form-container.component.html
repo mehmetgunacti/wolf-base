@@ -1,7 +1,6 @@
 <app-task-form
 	[task]="task()"
 	[project]="project()"
-	[taskGroup]="taskGroup()"
 	(create)="onCreate($event)"
 	(update)="onUpdate($event.id, $event.task)"
 	(cancel)="onCancel($event)"

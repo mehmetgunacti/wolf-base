@@ -1,4 +1,4 @@
-import { ProjectStatus, TaskPriority, TaskState, UUID } from 'lib/constants';
+import { ProjectStatus, TaskPriority, TaskState } from 'lib/constants';
 import { Entity } from './entity.model';
 import { ISODateString, NameBase } from './id-base.model';
 
@@ -8,20 +8,20 @@ export interface Project extends Entity {
 	start: ISODateString;
 	description: string | null;
 	end: ISODateString | null;
-	taskGroups: NameBase[];
+	tasks: Task[];
 
 }
 
 export interface Task extends NameBase {
 
 	project: NameBase;
-	taskGroup: NameBase;
 	description: string | null;
 	status: TaskState;
 	priority: TaskPriority;
 	optional: boolean;
 	start: ISODateString;
 	end: ISODateString | null;
+	tags: string[]
 
 }
 

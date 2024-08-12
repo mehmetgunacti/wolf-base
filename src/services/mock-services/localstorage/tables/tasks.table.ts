@@ -25,13 +25,13 @@ export class MockTasksLocalRepositoryImpl implements TaskLocalRepository {
 
 			name: '',
 			project: emptyNameBase(),
-			taskGroup: emptyNameBase(),
 			description: null,
 			status: TaskState.ongoing,
 			priority: TaskPriority.normal,
 			optional: false,
 			start: new Date().toISOString(),
 			end: null,
+			tags: [],
 			...item,
 			id: uuidv4()
 

@@ -18,7 +18,6 @@ export interface Task_EntitiesState {
 export interface Task_UIState {
 
 	selectedId: UUID | null;
-	taskGroupId: UUID | null;
 
 }
 
@@ -34,8 +33,7 @@ export const task_initialEntitiesState: Task_EntitiesState = {
 
 export const initialTaskUIState: Task_UIState = {
 
-	selectedId: null,
-	taskGroupId: null
+	selectedId: null
 
 };
 

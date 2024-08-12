@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { TASK_PRIORITIES, TASK_STATE, Task, TaskPriorityLabels, TaskStateLabels } from 'lib';
+import { Task, TaskPriorityLabels, TaskStateLabels } from 'lib';
 
 @Component({
 	selector: 'app-task',

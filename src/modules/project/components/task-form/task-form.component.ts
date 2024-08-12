@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Signal, effect, inject, input, output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { NameBase, TASK_PRIORITIES, TASK_STATE, Task, UUID, isInvalid } from 'lib';
+import { NameBase, TASK_PRIORITIES, TASK_STATE, Task, UUID, elseEmptyArray, isInvalid } from 'lib';
 import { TASK_FORM, TaskForm } from './task-form';
 
 @Component({
@@ -18,13 +18,14 @@ export class TaskFormComponent {
 	/* @Input() */
 	task = input<Task | null>(null);
 	project = input<NameBase | null>(null);
-	taskGroup = input<NameBase | null>(null);
+	tagSuggestions = input<string[], string[] | null>([], { transform: elseEmptyArray<string> });
 
 	/* @Output() */
 	create = output<Partial<Task>>();
 	update = output<{ id: UUID, task: Partial<Task> }>();
 	cancel = output<UUID>();
 	close = output<void>();
+	tagInput = output<string | null>();
 
 	form: TaskForm = inject(TASK_FORM);
 	optional: Signal<boolean | undefined>;
@@ -38,12 +39,9 @@ export class TaskFormComponent {
 			const task = this.task();
 			if (task)
 				this.form.setValue(task);
-			else {
 
+			else
 				this.form.project.setValue(this.project());
-				this.form.taskGroup.setValue(this.taskGroup());
-
-			}
 
 		});
 
@@ -72,6 +70,12 @@ export class TaskFormComponent {
 	onClose(): void {
 
 		this.close.emit();
+
+	}
+
+	onTagInput(val: string | null): void {
+
+		this.tagInput.emit(val);
 
 	}
 

@@ -42,7 +42,7 @@ export const openTaskDialog					= createAction('[Task] Open Task Dialog', props<
 // export const switchToTaskDialog				= createAction('[Task] Switch to Task Dialog', props<{ id: UUID }>());
 export const closeTaskDialog				= createAction('[Task] Close Dialog');
 
-export const openAddTaskDialog				= createAction('[Task] Open New Task Dialog', props<{ taskGroupId: UUID }>());
+export const openAddTaskDialog				= createAction('[Task] Open New Task Dialog');
 export const openEditTaskDialog				= createAction('[Task] Open Edit Dialog');
 export const closeEditDialog				= createAction('[Task] Close Edit Dialog');
 

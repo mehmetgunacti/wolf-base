@@ -20,12 +20,6 @@
 			{{ form.project.value?.name }}
 		</h4>
 
-		<!-- TASK GROUP ID -->
-		<h4>
-			<small>{{ form.taskGroup.value?.id }}</small>
-			{{ form.taskGroup.value?.name }}
-		</h4>
-
 		<!-- ID -->
 		<div>
 			<w-input [control]="form.id" name="ID" [readonly]="true"/>
@@ -52,8 +46,20 @@
 		</div>
 
 		<!-- OPTIONAL -->
+		<div task_optional>
+			<span>Optional</span>
+			<w-switch [checked]="!!optional()" />
+		</div>
+
+		<!-- TAGS -->
 		<div>
-			Optional <w-switch [checked]="!!optional()" />
+			<w-input-tag
+				[control]="form.tags"
+				id="taskForm"
+				name="Tags"
+				class="input-element"
+				(tagInput)="onTagInput($event)"
+				[suggestions]="tagSuggestions()"/>
 		</div>
 
 		<!-- START -->

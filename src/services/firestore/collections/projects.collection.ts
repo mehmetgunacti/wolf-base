@@ -1,5 +1,5 @@
 import { FIRESTORE_VALUE, FirestoreConverter, WolfEntity } from '@lib';
-import { FirestoreConfig, NameBase, Project } from 'lib/models';
+import { FirestoreConfig, Project } from 'lib/models';
 import { ProjectsRemoteRepository } from 'lib/repositories/remote/project-remote.repository';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
@@ -17,60 +17,7 @@ export class ProjectsFirestoreCollectionImpl extends FirestoreRemoteStorageColle
 
 }
 
-class ProjectNameBaseFirestoreConverter implements FirestoreConverter<NameBase> {
-
-	toFirestore(item: NameBase): Record<keyof NameBase, FIRESTORE_VALUE> {
-
-		const fields = {} as Record<keyof NameBase, FIRESTORE_VALUE>;
-		fields['id'] = { stringValue: item.id };
-		fields['name'] = { stringValue: item.name };
-		return fields;
-
-	}
-
-	fromFirestore(item: NameBase): NameBase {
-
-		// validate incoming
-		let { id, name } = item;
-
-		if (!id)
-			throw new Error(`Firestore Project NameBase: invalid 'id' value`);
-
-		if (!name)
-			throw new Error(`Firestore Project NameBase: invalid 'name' value`);
-
-		const validated: NameBase = {
-
-			id,
-			name
-
-		};
-		return validated;
-
-	}
-
-	toUpdateMask(item: Partial<NameBase>): string {
-
-		// exclude some fields like id, ... from update list
-		// (empty string would delete string on server)
-
-		const fields = new Set<string>();
-
-		if (item.id)
-			fields.add('id');
-
-		if (item.name)
-			fields.add('name');
-
-		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
-
-	}
-
-}
-
 class ProjectFirestoreConverter implements FirestoreConverter<Project> {
-
-	taskGroupsConverter: ProjectNameBaseFirestoreConverter = new ProjectNameBaseFirestoreConverter();
 
 	toFirestore(entry: Project): Record<keyof Project, FIRESTORE_VALUE> {
 
@@ -83,15 +30,15 @@ class ProjectFirestoreConverter implements FirestoreConverter<Project> {
 		if (entry.description)
 			fields['description'] = { stringValue: entry.description };
 		else
-			fields['description'] = { nullValue: null }
+			fields['description'] = { nullValue: null };
 
 		if (entry.end)
 			fields['end'] = { stringValue: entry.end };
 		else
-			fields['end'] = { nullValue: null }
+			fields['end'] = { nullValue: null };
 
-		fields['taskGroups'] = {
-			arrayValue: { values: entry.taskGroups.map(d => ({ mapValue: { fields: this.taskGroupsConverter.toFirestore(d) } })) }
+		fields['tasks'] = {
+			arrayValue: { values: [] }
 		};
 
 		return fields;
@@ -101,7 +48,7 @@ class ProjectFirestoreConverter implements FirestoreConverter<Project> {
 	fromFirestore(entry: Project): Project {
 
 		// validate incoming
-		let { id, name, description, taskGroups, status, start, end } = entry;
+		let { id, name, description, tasks, status, start, end } = entry;
 		if (!id)
 			throw new Error(`Firestore Project Entry: invalid 'id' value`);
 
@@ -114,8 +61,8 @@ class ProjectFirestoreConverter implements FirestoreConverter<Project> {
 		if (!start)
 			throw new Error(`Firestore Project Entry: invalid 'start' value`);
 
-		if (!Array.isArray(taskGroups))
-			throw new Error(`Firestore Project Entry: invalid 'taskGroups' value`);
+		if (!Array.isArray(tasks))
+			throw new Error(`Firestore Project Entry: invalid 'tasks' value`);
 
 		const validated: Project = {
 
@@ -125,7 +72,7 @@ class ProjectFirestoreConverter implements FirestoreConverter<Project> {
 			start,
 			description: description ?? null,
 			end: end ?? null,
-			taskGroups: taskGroups.map(tg => this.taskGroupsConverter.fromFirestore(tg))
+			tasks
 
 		};
 		return validated;
@@ -145,8 +92,8 @@ class ProjectFirestoreConverter implements FirestoreConverter<Project> {
 		// if (entry.dictionary)
 		fields.add('description');
 
-		// if (entry.pronunciation)
-		fields.add('taskGroups');
+		// if (entry.tasks)
+		fields.add('tasks');
 
 		// if (entry.status)
 		fields.add('status');

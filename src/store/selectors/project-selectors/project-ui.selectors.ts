@@ -1,8 +1,7 @@
+import { Project } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selTasks_taskGroupMap } from '../project-task-selectors/task-entities.selectors';
 import { selProject_array, selProject_entities } from './project-entities.selectors';
 import { selProject_UIState } from './project.selectors';
-import { Project } from '@lib';
 
 export const selProject_selectedId = createSelector(
 

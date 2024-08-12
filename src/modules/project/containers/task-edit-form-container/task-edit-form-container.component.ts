@@ -4,7 +4,7 @@ import { NameBase, Task, UUID } from 'lib';
 import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
 import { closeEditDialog, create, openTaskDialog, update } from 'store/actions/project-task.actions';
 import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
-import { selTask_selected, selTask_selectedTaskGroup } from 'store/selectors/project-task-selectors/task-ui.selectors';
+import { selTask_selected } from 'store/selectors/project-task-selectors/task-ui.selectors';
 
 @Component({
 	selector: 'app-task-edit-form-container',
@@ -20,13 +20,11 @@ export class TaskEditFormContainerComponent {
 
 	task: Signal<Task | null>;
 	project: Signal<NameBase | null>;
-	taskGroup: Signal<NameBase | null>;
 
 	constructor() {
 
 		this.task = this.store.selectSignal(selTask_selected);
 		this.project = this.store.selectSignal(selProject_selected);
-		this.taskGroup = this.store.selectSignal(selTask_selectedTaskGroup);
 
 	}
 

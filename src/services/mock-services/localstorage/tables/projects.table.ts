@@ -28,7 +28,7 @@ export class MockProjectsLocalRepositoryImpl implements ProjectLocalRepository {
 			start: new Date().toISOString(),
 			description: null,
 			end: null,
-			taskGroups: [],
+			tasks: [],
 			...item,
 			id: uuidv4()
 

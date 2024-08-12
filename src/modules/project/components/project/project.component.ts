@@ -14,11 +14,10 @@ export class ProjectComponent {
 	protected TaskPriorityLabels = TaskPriorityLabels;
 
 	project: InputSignal<Project> = input.required();
-	taskGroupMap: InputSignal<Record<UUID, Task[]>> = input.required();
 	infoVisible: InputSignal<boolean> = input(false);
 
 	toggleInfo = output<boolean>();
-	newTask = output<UUID>();
+	newTask = output<void>();
 	viewTask = output<UUID>();
 
 	onToggle(): void {
@@ -27,9 +26,9 @@ export class ProjectComponent {
 
 	}
 
-	onNewTask(taskGroupId: UUID): void {
+	onNewTask(): void {
 
-		this.newTask.emit(taskGroupId);
+		this.newTask.emit();
 
 	}
 

@@ -57,43 +57,52 @@
 
 	</div>
 
-	@for (taskGroup of project.taskGroups; track $index) {
+	<fieldset class="component">
 
-		<fieldset class="component">
+		<legend>Tasks</legend>
+		<legend>
+			<button
+				class="icon-only small"
+				(click)="onNewTask()"
+				title="Toggle Info Panel">
+				<span class="material-symbols-outlined">add</span>
+				Add Task
+			</button>
+		</legend>
 
-			<legend>{{ taskGroup.name }}</legend>
-			<legend>
-				<button
-					class="icon-only small"
-					(click)="onNewTask(taskGroup.id)"
-					title="Toggle Info Panel">
-					<span class="material-symbols-outlined">add</span>
-					Add Task
-				</button>
-			</legend>
+		<div task_list>
 
-			<div task_list>
+			@for (task of project.tasks; track $index) {
 
-				@for (task of taskGroupMap()[taskGroup.id]; track task.id) {
+				<a task_item [title]="task.description ?? ''" (click)="onOpenTask(task.id)" tabindex="0">
 
-					<a task_item [title]="task.description ?? ''" (click)="onOpenTask(task.id)" tabindex="0">
+					<small><span class="material-symbols-outlined">manufacturing</span> {{ ProjectStatusLabels[task.status] }}</small>
+					<small><span class="material-symbols-outlined">swap_vert</span> {{ TaskPriorityLabels[task.priority] }}</small>
+					<span>{{ task.name }}</span>
 
-						<small><span class="material-symbols-outlined">manufacturing</span> {{ ProjectStatusLabels[task.status] }}</small>
-						<small><span class="material-symbols-outlined">swap_vert</span> {{ TaskPriorityLabels[task.priority] }}</small>
-						<span>{{ task.name }}</span>
+				</a>
 
-					</a>
+			}
 
-				}
+		</div>
 
-			</div>
-
-		</fieldset>
-
-	}
+	</fieldset>
 
 } @else {
 
-	no project
+	<div class="card darker">
+
+		<div class="empty">
+
+			<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No project available</span>
+			<button
+				class="icon-only"
+				[routerLink]="['/projects', 'new' ]">
+				<span class="material-symbols-outlined">add_task</span> Add Project
+			</button>
+
+		</div>
+
+	</div>
 
 }

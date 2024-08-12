@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { InjectionToken, LOCALE_ID } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { emptyNameBase, ISODateString, NameBase, Task, TaskPriority, TaskState, UUID } from '@lib';
 
@@ -9,7 +9,7 @@ interface TaskFormSchema {
 	name: FormControl<string>;
 
 	project: FormControl<NameBase | null>;
-	taskGroup: FormControl<NameBase | null>;
+	tags: FormControl<string[]>;
 	description: FormControl<string | null>;
 	status: FormControl<TaskState>;
 	priority: FormControl<TaskPriority>;
@@ -25,7 +25,7 @@ export class TaskForm {
 	readonly id: FormControl<UUID | null>;
 	readonly name: FormControl<string>;
 	readonly project: FormControl<NameBase | null>;
-	readonly taskGroup: FormControl<NameBase | null>;
+	readonly tags: FormControl<string[]>;
 	readonly description: FormControl<string | null>;
 	readonly status: FormControl<TaskState>;
 	readonly priority: FormControl<TaskPriority>;
@@ -38,7 +38,7 @@ export class TaskForm {
 		this.id = new FormControl(null);
 		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
 		this.project = new FormControl<NameBase>(emptyNameBase(), { validators: [Validators.required], nonNullable: true });
-		this.taskGroup = new FormControl<NameBase>(emptyNameBase(), { validators: [Validators.required], nonNullable: true });
+		this.tags = new FormControl<string[]>([], { validators: [Validators.required], nonNullable: true });
 		this.description = new FormControl();
 		this.status = new FormControl<TaskState>(TaskState.ongoing, { validators: [Validators.required], nonNullable: true });
 		this.priority = new FormControl<TaskPriority>(TaskPriority.normal, { validators: [Validators.required], nonNullable: true });
@@ -55,7 +55,7 @@ export class TaskForm {
 			id: this.id,
 			name: this.name,
 			project: this.project,
-			taskGroup: this.taskGroup,
+			tags: this.tags,
 			description: this.description,
 			status: this.status,
 			priority: this.priority,
@@ -72,7 +72,7 @@ export class TaskForm {
 		this.id.setValue(task.id);
 		this.name.setValue(task.name);
 		this.project.setValue(task.project);
-		this.taskGroup.setValue(task.taskGroup);
+		this.tags.setValue(task.tags);
 		this.description.setValue(task.description);
 		this.status.setValue(task.status);
 		this.priority.setValue(task.priority);

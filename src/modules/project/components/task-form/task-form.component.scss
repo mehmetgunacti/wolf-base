@@ -30,31 +30,9 @@
 
 			}
 
-		}
+			&[task_optional] {
 
-		& > fieldset {
-
-			position	: relative;
-
-			& > legend {
-
-				padding-top		: 2rem;
-				padding-bottom	: 1rem;
-
-			}
-
-			& > button {
-
-				position		: absolute;
-				top				: -3rem;
-				right			: 0;
-
-			}
-
-			& div[task_group] {
-
-				@include mx-flex-column;
-				grid-gap		: var(--gap-sm);
+				@include mx-flex-space-between-center;
 
 			}
 

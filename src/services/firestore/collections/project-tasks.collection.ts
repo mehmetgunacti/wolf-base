@@ -32,8 +32,8 @@ class TaskFirestoreConverter implements FirestoreConverter<Task> {
 			mapValue: { fields: this.namebaseConverter.toFirestore(entry.project) }
 		};
 
-		fields['taskGroup'] = {
-			mapValue: { fields: this.namebaseConverter.toFirestore(entry.taskGroup) }
+		fields['tags'] = {
+			arrayValue: { values: entry.tags.map(v => ({ stringValue: v })) }
 		};
 
 		if (entry.description)
@@ -58,7 +58,7 @@ class TaskFirestoreConverter implements FirestoreConverter<Task> {
 	fromFirestore(entry: Task): Task {
 
 		// validate incoming
-		let { id, name, project, taskGroup, description, status, priority, optional, start, end } = entry;
+		let { id, name, project, tags, description, status, priority, optional, start, end } = entry;
 
 		if (!id)
 			throw new Error(`Firestore Task: invalid 'id' value`);
@@ -69,8 +69,8 @@ class TaskFirestoreConverter implements FirestoreConverter<Task> {
 		if (!project)
 			throw new Error(`Firestore Task: invalid 'project' value`);
 
-		if (!taskGroup)
-			throw new Error(`Firestore Task: invalid 'taskGroup' value`);
+		if (!tags)
+			throw new Error(`Firestore Task: invalid 'tags' value`);
 
 		if (!status)
 			throw new Error(`Firestore Task: invalid 'status' value`);
@@ -89,7 +89,7 @@ class TaskFirestoreConverter implements FirestoreConverter<Task> {
 			id,
 			name,
 			project,
-			taskGroup,
+			tags,
 			description: description ?? null,
 			status,
 			priority,
@@ -115,8 +115,8 @@ class TaskFirestoreConverter implements FirestoreConverter<Task> {
 		if (entry.project)
 			fields.add('project');
 
-		if (entry.taskGroup)
-			fields.add('taskGroup');
+		if (entry.tags)
+			fields.add('tags');
 
 		fields.add('description');
 
