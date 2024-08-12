@@ -1,6 +1,6 @@
 <w-overlay-container>
 
-	<ng-container card_title>Edit Task</ng-container>
+	<ng-container card_title>@if (isEdit()) { Edit Task } @else { Add Task }</ng-container>
 	<ng-container card_buttons>
 
 		<button
@@ -20,19 +20,23 @@
 			{{ form.project.value?.name }}
 		</h4>
 
-		<!-- ID -->
-		<div>
-			<w-input [control]="form.id" name="ID" [readonly]="true"/>
-		</div>
+		@if (isEdit()) {
+
+			<!-- ID -->
+			<div>
+				<w-input [control]="form.id" name="ID" [readonly]="true"/>
+			</div>
+
+		}
 
 		<!-- NAME -->
 		<div>
-			<w-input [control]="form.name" name="Term"/>
+			<w-input [control]="form.name" name="Name"/>
 		</div>
 
 		<!-- DESCRIPTION -->
 		<div>
-			<w-input [control]="form.description" name="Description"/>
+			<w-textarea [control]="form.description" name="Description" [rows]="3"/>
 		</div>
 
 		<!-- STATUS -->
@@ -67,10 +71,14 @@
 			<w-input [control]="form.start" name="Start" type="date"/>
 		</div>
 
-		<!-- END -->
-		<div>
-			<w-input [control]="form.end" name="End" type="date"/>
-		</div>
+		@if (isEdit()) {
+
+			<!-- END -->
+			<div>
+				<w-input [control]="form.end" name="End" type="date"/>
+			</div>
+
+		}
 
 	</form>
 

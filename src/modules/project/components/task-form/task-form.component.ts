@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Signal, effect, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal, computed, effect, inject, input, output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NameBase, TASK_PRIORITIES, TASK_STATE, Task, UUID, elseEmptyArray, isInvalid } from 'lib';
 import { TASK_FORM, TaskForm } from './task-form';
@@ -29,6 +29,7 @@ export class TaskFormComponent {
 
 	form: TaskForm = inject(TASK_FORM);
 	optional: Signal<boolean | undefined>;
+	isEdit = computed(() => this.task() !== null);
 
 	constructor() {
 
