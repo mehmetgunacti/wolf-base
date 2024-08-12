@@ -13,7 +13,6 @@ interface TaskFormSchema {
 	description: FormControl<string | null>;
 	status: FormControl<TaskState>;
 	priority: FormControl<TaskPriority>;
-	optional: FormControl<boolean>;
 	start: FormControl<ISODateString>;
 	end: FormControl<ISODateString | null>;
 
@@ -29,7 +28,6 @@ export class TaskForm {
 	readonly description: FormControl<string | null>;
 	readonly status: FormControl<TaskState>;
 	readonly priority: FormControl<TaskPriority>;
-	readonly optional: FormControl<boolean>;
 	readonly start: FormControl<ISODateString>;
 	readonly end: FormControl<ISODateString | null>;
 
@@ -42,7 +40,6 @@ export class TaskForm {
 		this.description = new FormControl();
 		this.status = new FormControl<TaskState>(TaskState.ongoing, { validators: [Validators.required], nonNullable: true });
 		this.priority = new FormControl<TaskPriority>(TaskPriority.normal, { validators: [Validators.required], nonNullable: true });
-		this.optional = new FormControl<boolean>(false, { validators: [Validators.required], nonNullable: true });
 		this.start = new FormControl<string>(formatDate(new Date(), 'yyyy-MM-dd', 'en'), { validators: [Validators.required], nonNullable: true });
 		this.end = new FormControl();
 
@@ -59,7 +56,6 @@ export class TaskForm {
 			description: this.description,
 			status: this.status,
 			priority: this.priority,
-			optional: this.optional,
 			start: this.start,
 			end: this.end
 
@@ -76,7 +72,6 @@ export class TaskForm {
 		this.description.setValue(task.description);
 		this.status.setValue(task.status);
 		this.priority.setValue(task.priority);
-		this.optional.setValue(task.optional);
 		this.start.setValue(formatDate(task.start, 'yyyy-MM-dd', 'en'));
 		this.end.setValue(task.end);
 

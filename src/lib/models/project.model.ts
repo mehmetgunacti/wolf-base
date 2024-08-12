@@ -18,7 +18,6 @@ export interface Task extends NameBase {
 	description: string | null;
 	status: TaskState;
 	priority: TaskPriority;
-	optional: boolean;
 	start: ISODateString;
 	end: ISODateString | null;
 	tags: string[]

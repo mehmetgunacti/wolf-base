@@ -28,7 +28,6 @@ export class DexieTasksRepositoryImpl extends EntityLocalRepositoryImpl<Task> im
 			description: null,
 			status: TaskState.ongoing,
 			priority: TaskPriority.normal,
-			optional: false,
 			start: new Date().toISOString(),
 			end: null,
 			tags: []

@@ -43,7 +43,6 @@ class TaskFirestoreConverter implements FirestoreConverter<Task> {
 
 		fields['status'] = { stringValue: entry.status };
 		fields['priority'] = { stringValue: entry.priority };
-		fields['optional'] = { booleanValue: entry.optional };
 		fields['start'] = { stringValue: entry.start };
 
 		if (entry.end)
@@ -58,7 +57,7 @@ class TaskFirestoreConverter implements FirestoreConverter<Task> {
 	fromFirestore(entry: Task): Task {
 
 		// validate incoming
-		let { id, name, project, tags, description, status, priority, optional, start, end } = entry;
+		let { id, name, project, tags, description, status, priority, start, end } = entry;
 
 		if (!id)
 			throw new Error(`Firestore Task: invalid 'id' value`);
@@ -78,9 +77,6 @@ class TaskFirestoreConverter implements FirestoreConverter<Task> {
 		if (!priority)
 			throw new Error(`Firestore Task: invalid 'priority' value`);
 
-		if (optional === undefined) // this field is boolean
-			throw new Error(`Firestore Task: invalid 'optional' value`);
-
 		if (!start)
 			throw new Error(`Firestore Task: invalid 'start' value`);
 
@@ -93,7 +89,6 @@ class TaskFirestoreConverter implements FirestoreConverter<Task> {
 			description: description ?? null,
 			status,
 			priority,
-			optional,
 			start,
 			end: end ?? null
 
@@ -125,9 +120,6 @@ class TaskFirestoreConverter implements FirestoreConverter<Task> {
 
 		if (entry.priority)
 			fields.add('priority');
-
-		if (entry.optional !== undefined)
-			fields.add('optional');
 
 		if (entry.start)
 			fields.add('start');
