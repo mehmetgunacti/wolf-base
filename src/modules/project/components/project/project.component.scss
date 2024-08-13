@@ -79,28 +79,34 @@
 
 				}
 
-				& > [task_content] {
+				& > [task_content_wrapper] {
 
-					@include mx-component(3);
-					padding					: var(--gap);
-					margin-left				: var(--gap-sm);
-					margin-right			: var(--gap-sm);
-					border-top-left-radius	: 0;
-					border-top-right-radius	: 0;
+					overflow				: hidden;
 
-					& > [task_tags] {
+					& > [task_content] {
 
-						display			: flex;
-						flex-wrap		: wrap;
-						padding			: var(--gap-sm) var(--gap-sm) var(--gap-sm) 0;
-						gap				: var(--gap-xs);
+						@include mx-component(3);
+						padding					: var(--gap);
+						margin-left				: var(--gap-sm);
+						margin-right			: var(--gap-sm);
+						border-top-left-radius	: 0;
+						border-top-right-radius	: 0;
 
-					}
+						& > [task_tags] {
 
-					& > [task_row] {
+							display			: flex;
+							flex-wrap		: wrap;
+							padding			: var(--gap-sm) var(--gap-sm) var(--gap-sm) 0;
+							gap				: var(--gap-xs);
 
-						display					: grid;
-						grid-template-columns	: 1fr 1fr;
+						}
+
+						& > [task_row] {
+
+							display					: grid;
+							grid-template-columns	: 1fr 1fr;
+
+						}
 
 					}
 

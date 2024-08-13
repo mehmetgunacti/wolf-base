@@ -15,51 +15,47 @@
 
 		</div>
 
-		@if (infoVisible()) {
+		<div project_info [@slideDown]="infoVisible()">
 
-			<div project_info @slideDown>
+			<div row>
 
-				<div row>
+				<small>ID</small>
+				<div>{{ project.id }}</div>
 
-					<small>ID</small>
-					<div>{{ project.id }}</div>
+			</div>
+
+			<div row>
+
+				<small>Description</small>
+				<div>{{ project.description }}</div>
+
+			</div>
+
+			<div row>
+
+				<small>Status</small>
+				<div>{{ ProjectStatusLabels[project.status] }}</div>
+
+			</div>
+
+			<div row start_end_row>
+
+				<div>
+
+					<small>Start : {{ project.start | timePast:false }}</small>
+					<div>{{ project.start | date:'EEEE dd.MM.yyyy' }}</div>
 
 				</div>
+				<div>
 
-				<div row>
-
-					<small>Description</small>
-					<div>{{ project.description }}</div>
-
-				</div>
-
-				<div row>
-
-					<small>Status</small>
-					<div>{{ ProjectStatusLabels[project.status] }}</div>
-
-				</div>
-
-				<div row start_end_row>
-
-					<div>
-
-						<small>Start : {{ project.start | timePast:false }}</small>
-						<div>{{ project.start | date:'EEEE dd.MM.yyyy' }}</div>
-
-					</div>
-					<div>
-
-						<small>End</small>
-						<div>{{ project.end | date:'EEEE dd.MM.yyyy' }}</div>
-
-					</div>
+					<small>End</small>
+					<div>{{ project.end | date:'EEEE dd.MM.yyyy' }}</div>
 
 				</div>
 
 			</div>
 
-		}
+		</div>
 
 	</div>
 
@@ -95,9 +91,9 @@
 
 					</div>
 
-					@if (expanded) {
+					<div task_content_wrapper [@slideDown]="expanded">
 
-						<div task_content @slideDown>
+						<div task_content>
 
 							<!-- DESCRIPTION -->
 							<div class="viewElement">
@@ -131,7 +127,7 @@
 
 						</div>
 
-					}
+					</div>
 
 				</a>
 

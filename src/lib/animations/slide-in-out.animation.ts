@@ -1,5 +1,14 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
+export const slideDownTrigger = trigger('slideDown', [
+
+	state('false', style({ height: '0px' })),
+	state('true', style({ height: '*' })),
+
+	transition('false <=> true', animate('300ms'))
+
+]);
+
 export const slideUpDownTrigger = trigger('slideUpDown', [
 
 	state('closed', style({ height: '0px', visibility: 'hidden', opacity: 0 })),
@@ -18,7 +27,7 @@ export const slideChoicesTrigger = trigger('slideChoices', [
 
 ]);
 
-export const slideDown = trigger('slideDown', [
+const slideDown = trigger('slideDownEnterLeave', [
 
 	transition(':enter', [
 
