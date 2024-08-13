@@ -12,19 +12,16 @@
 
 		@include mx-card(3);
 
-		[project_title] {
+		& > [project_title] {
 
 			@include mx-flex-space-between-center;
 			@include mx-h1;
 
-			[top_right] {
+		}
 
-				position	: absolute;
-				display		: flex;
-				top			: 0;
-				right		: 0;
+		& > [project_info] > *:first-child {
 
-			}
+			margin-top	: var(--gap);
 
 		}
 
@@ -44,12 +41,7 @@
 				& > [task_header] {
 
 					@include mx-component(3);
-					display					: grid;
-					grid-template-columns	: 10rem 10rem 1fr;
-					grid-template-rows		: auto 1fr;
-					padding					: var(--gap-lg);
-					gap						: var(--gap-xs);
-					cursor					: pointer;
+					padding		: var(--gap-lg);
 
 					&:hover,
 					&.expanded {
@@ -58,20 +50,30 @@
 
 					}
 
-					& > span {
+					& > a {
 
-						grid-column			: 1 / -1;
+						display					: grid;
+						grid-template-columns	: 10rem 10rem 1fr;
+						grid-template-rows		: auto 1fr;
+						gap						: var(--gap-xs);
+						cursor					: pointer;
 
-					}
+						& > span {
 
-					& > small {
+							grid-column			: 1 / -1;
 
-						@include mx-flex-center-y;
-						gap			: var(--gap-xxs);
+						}
 
-						& > .material-symbols-outlined {
+						& > small {
 
-							font-size			: inherit;
+							@include mx-flex-center-y;
+							gap			: var(--gap-xxs);
+
+							& > .material-symbols-outlined {
+
+								font-size			: inherit;
+
+							}
 
 						}
 
@@ -107,6 +109,12 @@
 							grid-template-columns	: 1fr 1fr;
 
 						}
+
+					}
+
+					& > .footer {
+
+						margin-right	: var(--gap-sm);
 
 					}
 

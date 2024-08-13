@@ -65,8 +65,7 @@
 		<legend>
 			<button
 				class="icon-only small"
-				(click)="onNewTask()"
-				title="Toggle Info Panel">
+				(click)="onNewTask()">
 				<span class="material-symbols-outlined">add</span>
 				Add Task
 			</button>
@@ -77,20 +76,22 @@
 			@for (task of project.tasks; track $index) {
 
 				@let expanded = !!tasksExpanded()[task.id];
-				<a
-					task_item
-					[title]="task.description ?? ''"
-					(click)="onToggleTask(task.id)"
-					tabindex="0">
+
+				<div task_item>
 
 					<div task_header [class.expanded]="expanded">
 
-						<small><span class="material-symbols-outlined">manufacturing</span> {{ ProjectStatusLabels[task.status] }}</small>
-						<small><span class="material-symbols-outlined">swap_vert</span> {{ TaskPriorityLabels[task.priority] }}</small>
-						<span>{{ task.name }}</span>
+						<a	[title]="task.description ?? ''"
+							(click)="onToggleTask(task.id)"
+							tabindex="0">
+
+							<small><span class="material-symbols-outlined">manufacturing</span> {{ ProjectStatusLabels[task.status] }}</small>
+							<small><span class="material-symbols-outlined">swap_vert</span> {{ TaskPriorityLabels[task.priority] }}</small>
+							<span>{{ task.name }}</span>
+
+						</a>
 
 					</div>
-
 					<div task_content_wrapper [@slideDown]="expanded">
 
 						<div task_content>
@@ -126,10 +127,20 @@
 							</div>
 
 						</div>
+						<div class="footer _n">
+
+							<button
+								class="icon-only small"
+								(click)="onNewTask()">
+								<span class="material-symbols-outlined">edit</span>
+								Edit Task
+							</button>
+
+						</div>
 
 					</div>
 
-				</a>
+				</div>
 
 			}
 
