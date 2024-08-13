@@ -14,7 +14,7 @@
 
 		[project_title] {
 
-			position	: relative;
+			@include mx-flex-space-between-center;
 			@include mx-h1;
 
 			[top_right] {

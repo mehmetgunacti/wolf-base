@@ -16,6 +16,7 @@ const reducer = createReducer(
 		);
 
 	}),
+	on(actions.openAddTaskDialog, (state): Task_UIState => ({ ...state, selectedId: null })),
 	on(actions.closeEditDialog, (state): Task_UIState => ({ ...state, selectedId: null })),
 
 );

@@ -12,13 +12,13 @@
 
 	</ng-container>
 
-	<form>
+	<!-- PROJECT ID -->
+	<h4>
+		<small>{{ form.project.value?.id }}</small>
+		{{ form.project.value?.name }}
+	</h4>
 
-		<!-- PROJECT ID -->
-		<h4>
-			<small>{{ form.project.value?.id }}</small>
-			{{ form.project.value?.name }}
-		</h4>
+	<form>
 
 		@if (isEdit()) {
 
@@ -39,16 +39,6 @@
 			<w-textarea [control]="form.description" name="Description" [rows]="3"/>
 		</div>
 
-		<!-- STATUS -->
-		<div>
-			<w-select [control]="form.status" name="Status" [nodes]="TASK_STATE"/>
-		</div>
-
-		<!-- PRIORITY -->
-		<div>
-			<w-select [control]="form.priority" name="Priority" [nodes]="TASK_PRIORITIES"/>
-		</div>
-
 		<!-- TAGS -->
 		<div>
 			<w-input-tag
@@ -60,9 +50,23 @@
 				[suggestions]="tagSuggestions()"/>
 		</div>
 
-		<!-- START -->
-		<div>
-			<w-input [control]="form.start" name="Start" type="date"/>
+		<div task_row>
+
+			<!-- STATUS -->
+			<div>
+				<w-select [control]="form.status" name="Status" [nodes]="TASK_STATE"/>
+			</div>
+
+			<!-- PRIORITY -->
+			<div>
+				<w-select [control]="form.priority" name="Priority" [nodes]="TASK_PRIORITIES"/>
+			</div>
+
+			<!-- START -->
+			<div>
+				<w-input [control]="form.start" name="Start" type="date"/>
+			</div>
+
 		</div>
 
 		@if (isEdit()) {

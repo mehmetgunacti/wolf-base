@@ -9,4 +9,11 @@
 	padding			: var(--gap-xs);
 	gap				: var(--gap);
 
+	& > [task_row] {
+
+		display					: grid;
+		grid-template-columns	: 1fr 1fr 1fr 1fr;
+
+	}
+
 }

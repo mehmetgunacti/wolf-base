@@ -11,30 +11,13 @@
 
 		@include mx-flex-column;
 		padding			: var(--gap-xs);
-		gap				: var(--gap);
+		gap				: var(--gap-sm);
 
-		& > div {
+		& > [task_row] {
 
-			display			: flex;
-			flex-direction	: row;
-			gap				: var(--gap-xs);
-			& :first-child {
-
-				flex	: 1;
-
-			}
-
-			& .material-symbols-outlined {
-
-				font-size	: 1.4rem;
-
-			}
-
-			&[task_optional] {
-
-				@include mx-flex-space-between-center;
-
-			}
+			display					: grid;
+			grid-template-columns	: 1fr 1fr 1fr;
+			gap						: var(--gap-sm);
 
 		}
 

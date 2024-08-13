@@ -5,22 +5,24 @@
 		<div project_title>
 
 			{{ project.name }}
-			<small>{{ project.id }}</small>
 
-			<div top_right>
-
-				<button
-					class="icon-only small"
-					(click)="onToggle()"
-					title="Toggle Info Panel">
-					<span class="material-symbols-outlined">info</span>
-				</button>
-
-			</div>
+			<button
+				class="icon-only"
+				(click)="onToggle()"
+				title="Toggle Info Panel">
+				<span class="material-symbols-outlined">info</span>
+			</button>
 
 		</div>
 
 		<div project_info [@slideDown]="infoVisible()">
+
+			<div row>
+
+				<small>ID</small>
+				<div>{{ project.id }}</div>
+
+			</div>
 
 			<div row>
 
