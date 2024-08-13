@@ -1,12 +1,29 @@
+%margin-left-auto {
+
+	& > *:last-child {
+
+		margin-left	: auto;
+
+	}
+
+}
+
 .footer {
 
 	display			: flex;
 	gap				: var(--gap-sm);
 	margin-top		: auto;
+	padding			: var(--gap-sm);
 
-	& > *:last-child {
+	&._n {
 
-		margin-left	: auto;
+		justify-content	: end;
+
+	}
+
+	&.one_one {
+
+		@extend %margin-left-auto;
 
 	}
 
