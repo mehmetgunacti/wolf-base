@@ -23,10 +23,10 @@ export const slideDown = trigger('slideDown', [
 	transition(':enter', [
 
 		// css styles at start of transition
-		style({ height: 0, opacity: 0 }),
+		style({ height: 0, opacity: 0, overflow: 'hidden' }),
 
 		// animation and styles at end of transition
-		animate('300ms', style({ height: '*', opacity: 1, overflow: 'visible' })),
+		animate('300ms', style({ height: '*', opacity: 1})), // , overflow: 'visible' })),
 
 		// style({ overflow: 'hidden' })
 
@@ -34,10 +34,10 @@ export const slideDown = trigger('slideDown', [
 	transition(':leave', [
 
 		// css styles at start of transition
-		style({ height: '*', opacity: 1 }),
+		style({ height: '*', opacity: 1, overflow: 'hidden' }),
 
 		// animation and styles at end of transition
-		animate('300ms', style({ height: 0, opacity: 0, overflow: 'hidden' })),
+		animate('300ms', style({ height: 0, opacity: 0})), // , overflow: 'hidden' })),
 
 
 		//style({ overflow: 'visible' })

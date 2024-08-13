@@ -38,24 +38,25 @@
 
 			@include mx-flex-column;
 			gap		: var(--gap-sm);
-			cursor	: pointer;
 
 			& > [task_item] {
 
-				@include mx-component(3);
-
-				&:hover {
-
-					background-color	: fn-hsl(bg-3, (lig: "- 2%"));
-
-				}
-
 				& > [task_header] {
 
+					@include mx-component(3);
 					display					: grid;
 					grid-template-columns	: 10rem 10rem 1fr;
 					grid-template-rows		: auto 1fr;
+					padding					: var(--gap-lg);
 					gap						: var(--gap-xs);
+					cursor					: pointer;
+
+					&:hover,
+					&.expanded {
+
+						background-color	: fn-hsl(bg-3, (lig: "- 2%"));
+
+					}
 
 					& > span {
 
@@ -78,28 +79,28 @@
 
 				}
 
-				& > [task_content_wrapper] {
+				& > [task_content] {
 
-					overflow	: hidden;
-					& > [task_content] {
+					@include mx-component(3);
+					padding					: var(--gap);
+					margin-left				: var(--gap-sm);
+					margin-right			: var(--gap-sm);
+					border-top-left-radius	: 0;
+					border-top-right-radius	: 0;
 
-						padding		: var(--gap-sm);
+					& > [task_tags] {
 
-						& > [task_tags] {
+						display			: flex;
+						flex-wrap		: wrap;
+						padding			: var(--gap-sm) var(--gap-sm) var(--gap-sm) 0;
+						gap				: var(--gap-xs);
 
-							display			: flex;
-							flex-wrap		: wrap;
-							padding			: var(--gap-sm) var(--gap-sm) var(--gap-sm) 0;
-							gap				: var(--gap-xs);
+					}
 
-						}
+					& > [task_row] {
 
-						& > [task_row] {
-
-							display					: grid;
-							grid-template-columns	: 1fr 1fr;
-
-						}
+						display					: grid;
+						grid-template-columns	: 1fr 1fr;
 
 					}
 

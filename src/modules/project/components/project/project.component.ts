@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, input, InputSignal, output, signal } from '@angular/core';
-import { Project, ProjectStatusLabels, slideDownTrigger, Task, TaskPriorityLabels, UUID } from '@lib';
+import { Project, ProjectStatusLabels, slideDown, slideDownTrigger, Task, TaskPriorityLabels, UUID } from '@lib';
 
 @Component({
 	selector: 'app-project',
 	templateUrl: './project.component.html',
 	styleUrls: ['./project.component.scss'],
-	animations: [slideDownTrigger],
+	animations: [slideDown],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectComponent {

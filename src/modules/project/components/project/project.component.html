@@ -15,47 +15,51 @@
 
 		</div>
 
-		<div project_info [@slideDown]="infoVisible()">
+		@if (infoVisible()) {
 
-			<div row>
+			<div project_info @slideDown>
 
-				<small>ID</small>
-				<div>{{ project.id }}</div>
+				<div row>
 
-			</div>
-
-			<div row>
-
-				<small>Description</small>
-				<div>{{ project.description }}</div>
-
-			</div>
-
-			<div row>
-
-				<small>Status</small>
-				<div>{{ ProjectStatusLabels[project.status] }}</div>
-
-			</div>
-
-			<div row start_end_row>
-
-				<div>
-
-					<small>Start : {{ project.start | timePast:false }}</small>
-					<div>{{ project.start | date:'EEEE dd.MM.yyyy' }}</div>
-
-				</div>
-				<div>
-
-					<small>End</small>
-					<div>{{ project.end | date:'EEEE dd.MM.yyyy' }}</div>
+					<small>ID</small>
+					<div>{{ project.id }}</div>
 
 				</div>
 
+				<div row>
+
+					<small>Description</small>
+					<div>{{ project.description }}</div>
+
+				</div>
+
+				<div row>
+
+					<small>Status</small>
+					<div>{{ ProjectStatusLabels[project.status] }}</div>
+
+				</div>
+
+				<div row start_end_row>
+
+					<div>
+
+						<small>Start : {{ project.start | timePast:false }}</small>
+						<div>{{ project.start | date:'EEEE dd.MM.yyyy' }}</div>
+
+					</div>
+					<div>
+
+						<small>End</small>
+						<div>{{ project.end | date:'EEEE dd.MM.yyyy' }}</div>
+
+					</div>
+
+				</div>
+
 			</div>
 
-		</div>
+		}
 
 	</div>
 
@@ -76,22 +80,24 @@
 
 			@for (task of project.tasks; track $index) {
 
+				@let expanded = !!tasksExpanded()[task.id];
 				<a
 					task_item
 					[title]="task.description ?? ''"
 					(click)="onToggleTask(task.id)"
 					tabindex="0">
 
-					<div task_header>
+					<div task_header [class.expanded]="expanded">
 
 						<small><span class="material-symbols-outlined">manufacturing</span> {{ ProjectStatusLabels[task.status] }}</small>
 						<small><span class="material-symbols-outlined">swap_vert</span> {{ TaskPriorityLabels[task.priority] }}</small>
 						<span>{{ task.name }}</span>
 
 					</div>
-					<div task_content_wrapper [@slideDown]="!!tasksExpanded()[task.id]">
 
-						<div task_content>
+					@if (expanded) {
+
+						<div task_content @slideDown>
 
 							<!-- DESCRIPTION -->
 							<div class="viewElement">
@@ -125,7 +131,7 @@
 
 						</div>
 
-					</div>
+					}
 
 				</a>
 
