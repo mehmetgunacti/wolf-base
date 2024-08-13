@@ -8,7 +8,7 @@
 
 			<button
 				class="icon-only"
-				(click)="onToggle()"
+				(click)="onToggleInfo()"
 				title="Toggle Info Panel">
 				<span class="material-symbols-outlined">info</span>
 			</button>
@@ -76,11 +76,56 @@
 
 			@for (task of project.tasks; track $index) {
 
-				<a task_item [title]="task.description ?? ''" (click)="onOpenTask(task.id)" tabindex="0">
+				<a
+					task_item
+					[title]="task.description ?? ''"
+					(click)="onToggleTask(task.id)"
+					tabindex="0">
 
-					<small><span class="material-symbols-outlined">manufacturing</span> {{ ProjectStatusLabels[task.status] }}</small>
-					<small><span class="material-symbols-outlined">swap_vert</span> {{ TaskPriorityLabels[task.priority] }}</small>
-					<span>{{ task.name }}</span>
+					<div task_header>
+
+						<small><span class="material-symbols-outlined">manufacturing</span> {{ ProjectStatusLabels[task.status] }}</small>
+						<small><span class="material-symbols-outlined">swap_vert</span> {{ TaskPriorityLabels[task.priority] }}</small>
+						<span>{{ task.name }}</span>
+
+					</div>
+					<div task_content_wrapper [@slideDown]="!!tasksExpanded()[task.id]">
+
+						<div task_content>
+
+							<!-- DESCRIPTION -->
+							<div class="viewElement">
+								<small>Description</small>
+								{{ task.description }}
+							</div>
+							<div task_tags>
+
+								@for (tag of task.tags; track $index) {
+
+									<button disabled class="tag xs">{{ tag }}</button>
+
+								}
+
+							</div>
+							<div task_row>
+
+								<!-- START -->
+								<div class="viewElement">
+									<small>Start</small>
+									{{ task.start | date:'EEEE dd.MM.yyyy' }}
+								</div>
+
+								<!-- END -->
+								<div class="viewElement">
+									<small>End</small>
+									{{ task.end | date:'EEEE dd.MM.yyyy' }}
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
 
 				</a>
 

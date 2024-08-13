@@ -37,17 +37,12 @@
 		& > [task_list] {
 
 			@include mx-flex-column;
-			gap	: var(--gap-sm);
+			gap		: var(--gap-sm);
+			cursor	: pointer;
 
 			& > [task_item] {
 
 				@include mx-component(3);
-				display					: grid;
-				grid-template-columns	: 10rem 10rem 1fr;
-				grid-template-rows		: auto 1fr;
-				gap						: var(--gap-xs);
-				padding					: var(--gap) var(--gap);
-				cursor					: pointer;
 
 				&:hover {
 
@@ -55,20 +50,56 @@
 
 				}
 
-				& > span {
+				& > [task_header] {
 
-					grid-column			: 1 / -1;
+					display					: grid;
+					grid-template-columns	: 10rem 10rem 1fr;
+					grid-template-rows		: auto 1fr;
+					gap						: var(--gap-xs);
+
+					& > span {
+
+						grid-column			: 1 / -1;
+
+					}
+
+					& > small {
+
+						@include mx-flex-center-y;
+						gap			: var(--gap-xxs);
+
+						& > .material-symbols-outlined {
+
+							font-size			: inherit;
+
+						}
+
+					}
 
 				}
 
-				& > small {
+				& > [task_content_wrapper] {
 
-					@include mx-flex-center-y;
-					gap			: var(--gap-xxs);
+					overflow	: hidden;
+					& > [task_content] {
 
-					& > .material-symbols-outlined {
+						padding		: var(--gap-sm);
 
-						font-size			: inherit;
+						& > [task_tags] {
+
+							display			: flex;
+							flex-wrap		: wrap;
+							padding			: var(--gap-sm) var(--gap-sm) var(--gap-sm) 0;
+							gap				: var(--gap-xs);
+
+						}
+
+						& > [task_row] {
+
+							display					: grid;
+							grid-template-columns	: 1fr 1fr;
+
+						}
 
 					}
 
