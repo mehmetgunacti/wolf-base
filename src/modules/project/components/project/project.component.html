@@ -97,10 +97,8 @@
 						<div task_content>
 
 							<!-- DESCRIPTION -->
-							<div class="viewElement">
-								<small>Description</small>
-								{{ task.description }}
-							</div>
+							<div task_desc>{{ task.description }}</div>
+							<!-- TAGS -->
 							<div task_tags>
 
 								@for (tag of task.tags; track $index) {
@@ -110,19 +108,16 @@
 								}
 
 							</div>
-							<div task_row>
+							<!-- START -->
+							<div task_small>
 
-								<!-- START -->
-								<div class="viewElement">
-									<small>Start</small>
-									{{ task.start | date:'EEEE dd.MM.yyyy' }}
-								</div>
-
-								<!-- END -->
-								<div class="viewElement">
-									<small>End</small>
-									{{ task.end | date:'EEEE dd.MM.yyyy' }}
-								</div>
+								<small>
+									<span class="material-symbols-outlined small">schedule</span> {{ task.start | date:'EEEE dd.MM.yyyy' }}
+									@if (task.end) {
+										- {{ task.end | date:'EEEE dd.MM.yyyy' }}
+									}
+								</small>
+								<small>{{ task.id }}</small>
 
 							</div>
 

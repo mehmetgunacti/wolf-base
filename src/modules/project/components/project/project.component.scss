@@ -94,6 +94,13 @@
 						border-top-left-radius	: 0;
 						border-top-right-radius	: 0;
 
+						& > [task_desc] {
+
+							display			: flex;
+							margin-bottom	: var(--gap);
+
+						}
+
 						& > [task_tags] {
 
 							display			: flex;
@@ -107,6 +114,17 @@
 
 							display					: grid;
 							grid-template-columns	: 1fr 1fr;
+
+						}
+
+						& > [task_small] {
+
+							@include mx-flex-space-between-center;
+							& > small {
+
+								@include mx-flex-center-y;
+
+							}
 
 						}
 
