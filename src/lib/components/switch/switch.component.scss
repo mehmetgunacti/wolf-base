@@ -20,6 +20,7 @@
 
 		& > .switch-input {
 
+			appearance	: none;
 			position	: absolute;
 			top			: 6px;
 			left		: 8px;
@@ -29,6 +30,13 @@
 
 				outline			: 2px solid fn-hsl(focus);
     			outline-offset	: 7px;
+
+			}
+
+			&:focus {
+
+				// outline : none; <-- don't
+				outline-color	: transparent;
 
 			}
 
