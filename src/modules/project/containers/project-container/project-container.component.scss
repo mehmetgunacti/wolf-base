@@ -1,9 +1,24 @@
 @import 'helper';
 @import 'variables';
+@import 'components';
+@import 'mixins';
 
 :host{
 
-	@extend %flex-column;
+	@include mx-flex-column;
 	gap	: var(--gap-sm);
+
+	& > fieldset {
+
+		@include mx-component();
+
+		& > [task_list] {
+
+			@include mx-flex-column;
+			gap		: var(--gap-sm);
+
+		}
+
+	}
 
 }

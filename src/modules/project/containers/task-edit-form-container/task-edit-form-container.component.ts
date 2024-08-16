@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { NameBase, Task, UUID } from 'lib';
 import { combineLatest, map, Observable, Subject } from 'rxjs';
 import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
-import { closeEditDialog, create, openTaskDialog, update } from 'store/actions/project-task.actions';
+import { closeEditDialog, create, update } from 'store/actions/project-task.actions';
 import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
 import { selTask_distinctTagNames } from 'store/selectors/project-task-selectors/task-tags.selectors';
 import { selTask_selected } from 'store/selectors/project-task-selectors/task-ui.selectors';
@@ -61,12 +61,6 @@ export class TaskEditFormContainerComponent {
 	onUpdate(id: UUID, task: Partial<Task>): void {
 
 		this.store.dispatch(update({ id, task }));
-
-	}
-
-	onCancel(id: UUID): void {
-
-		this.store.dispatch(openTaskDialog({ id }));
 
 	}
 

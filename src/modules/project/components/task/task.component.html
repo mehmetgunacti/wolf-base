@@ -1,53 +1,58 @@
 @let t = task();
+@let isExpanded = expanded();
 
-<!-- PROJECT ID -->
-<h4>
-	<small>{{ t.project.id }}</small>
-	{{ t.project.name }}
-</h4>
+<div task_header [class.expanded]="isExpanded">
 
-<!-- ID -->
-<div class="viewElement">
-	<small>ID</small>
-	{{ t.id }}
-</div>
+	<a	[title]="t.description ?? ''"
+		(click)="onToggleTask(t.id)"
+		tabindex="0">
 
-<div task_row>
+		<small><span class="material-symbols-outlined">manufacturing</span> {{ TASK_STATE[t.status] }}</small>
+		<small><span class="material-symbols-outlined">swap_vert</span> {{ TASK_PRIORITIES[t.priority] }}</small>
+		<span>{{ t.name }}</span>
 
-	<!-- STATUS -->
-	<div class="viewElement">
-		<small>Status</small>
-		{{ TASK_STATE[t.status] }}
-	</div>
-
-	<!-- PRIORITY -->
-	<div class="viewElement">
-		<small>Priority</small>
-		{{ TASK_PRIORITIES[t.priority] }}
-	</div>
-
-	<!-- START -->
-	<div class="viewElement">
-		<small>Start</small>
-		{{ t.start | date:'EEEE dd.MM.yyyy' }}
-	</div>
-
-	<!-- END -->
-	<div class="viewElement">
-		<small>End</small>
-		{{ t.end | date:'EEEE dd.MM.yyyy' }}
-	</div>
+	</a>
 
 </div>
+<div task_content_wrapper [@slideDown]="isExpanded">
 
-<!-- NAME -->
-<div class="viewElement">
-	<small>Name</small>
-	{{ t.name }}
-</div>
+	<div task_content>
 
-<!-- DESCRIPTION -->
-<div class="viewElement">
-	<small>Description</small>
-	{{ t.description }}
+		<!-- DESCRIPTION -->
+		<div task_desc>{{ t.description }}</div>
+		<!-- TAGS -->
+		<div task_tags>
+
+			@for (tag of t.tags; track $index) {
+
+				<button disabled class="tag xs">{{ tag }}</button>
+
+			}
+
+		</div>
+		<!-- START -->
+		<div task_small>
+
+			<small>
+				<span class="material-symbols-outlined small">schedule</span> {{ t.start | date:'EEEE dd.MM.yyyy' }}
+				@if (t.end) {
+					- {{ t.end | date:'EEEE dd.MM.yyyy' }}
+				}
+			</small>
+			<small>{{ t.id }}</small>
+
+		</div>
+
+	</div>
+	<div class="footer _n">
+
+		<button
+			class="icon-only small"
+			(click)="onEditTask(t.id)">
+			<span class="material-symbols-outlined">edit</span>
+			Edit Task
+		</button>
+
+	</div>
+
 </div>

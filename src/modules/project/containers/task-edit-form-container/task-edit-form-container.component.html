@@ -3,7 +3,7 @@
 	[project]="project()"
 	(create)="onCreate($event)"
 	(update)="onUpdate($event.id, $event.task)"
-	(cancel)="onCancel($event)"
+	(cancel)="onClose()"
 	(close)="onClose()"
 	(tagInput)="onTagInput($event)"
 	[tagSuggestions]="tagSuggestions$ | async"/>

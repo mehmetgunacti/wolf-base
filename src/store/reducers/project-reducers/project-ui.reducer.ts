@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import { setQueryParams, setSelectedId, toggleInfo } from 'store/actions/project.actions';
+import { setQueryParams, setSelectedId } from 'store/actions/project.actions';
 import { initialProjectUIState, Project_UIState } from 'store/states/project.state';
 
 const reducer = createReducer(
@@ -16,8 +16,7 @@ const reducer = createReducer(
 			}
 		);
 
-	}),
-	on(toggleInfo, (state): Project_UIState => ({ ...state, infoVisible: !state.infoVisible }))
+	})
 
 );
 

@@ -77,6 +77,12 @@ export class TaskForm {
 
 	}
 
+	setProject(project: NameBase): void {
+
+		this.project.setValue(project);
+
+	}
+
 }
 
 export const TASK_FORM = new InjectionToken<TaskForm>('TaskForm');

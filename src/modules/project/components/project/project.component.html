@@ -2,6 +2,11 @@
 
 	<div project_title_wrapper>
 
+		<a [routerLink]="['/projects']" tabindex="0">
+			<span class="material-symbols-outlined">task_alt</span>
+			<span>Projects</span>
+		</a>
+
 		<div project_title>
 
 			{{ project.name }}
@@ -15,7 +20,7 @@
 
 		</div>
 
-		<div project_info [@slideDown]="infoVisible()">
+		<div project_info [@slideDown]="expanded()">
 
 			<div row>
 
@@ -59,89 +64,7 @@
 
 	</div>
 
-	<fieldset class="component">
 
-		<legend>Tasks</legend>
-		<legend>
-			<button
-				class="icon-only small"
-				(click)="onNewTask()">
-				<span class="material-symbols-outlined">add</span>
-				Add Task
-			</button>
-		</legend>
-
-		<div task_list>
-
-			@for (task of project.tasks; track $index) {
-
-				@let expanded = !!tasksExpanded()[task.id];
-
-				<div task_item>
-
-					<div task_header [class.expanded]="expanded">
-
-						<a	[title]="task.description ?? ''"
-							(click)="onToggleTask(task.id)"
-							tabindex="0">
-
-							<small><span class="material-symbols-outlined">manufacturing</span> {{ ProjectStatusLabels[task.status] }}</small>
-							<small><span class="material-symbols-outlined">swap_vert</span> {{ TaskPriorityLabels[task.priority] }}</small>
-							<span>{{ task.name }}</span>
-
-						</a>
-
-					</div>
-					<div task_content_wrapper [@slideDown]="expanded">
-
-						<div task_content>
-
-							<!-- DESCRIPTION -->
-							<div task_desc>{{ task.description }}</div>
-							<!-- TAGS -->
-							<div task_tags>
-
-								@for (tag of task.tags; track $index) {
-
-									<button disabled class="tag xs">{{ tag }}</button>
-
-								}
-
-							</div>
-							<!-- START -->
-							<div task_small>
-
-								<small>
-									<span class="material-symbols-outlined small">schedule</span> {{ task.start | date:'EEEE dd.MM.yyyy' }}
-									@if (task.end) {
-										- {{ task.end | date:'EEEE dd.MM.yyyy' }}
-									}
-								</small>
-								<small>{{ task.id }}</small>
-
-							</div>
-
-						</div>
-						<div class="footer _n">
-
-							<button
-								class="icon-only small"
-								(click)="onNewTask()">
-								<span class="material-symbols-outlined">edit</span>
-								Edit Task
-							</button>
-
-						</div>
-
-					</div>
-
-				</div>
-
-			}
-
-		</div>
-
-	</fieldset>
 
 } @else {
 

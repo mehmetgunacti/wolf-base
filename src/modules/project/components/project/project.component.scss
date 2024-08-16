@@ -12,6 +12,39 @@
 
 		@include mx-card(3);
 
+		& > a {
+
+			@extend %flex-center-y;
+			padding				: var(--gap-xs);
+			border-radius		: var(--border-radius-sm);
+			text-decoration		: none;
+			font-size			: var(--font-size-sm);
+			gap					: var(--gap-xxs);
+			color				: fn-hsl(text-secondary);
+			transition			: $bg-transition;
+
+			& > span {
+
+				color			: inherit;
+				font-size		: inherit;
+
+			}
+
+			&:hover {
+
+				background-color	: fn-hsl(bg-3, (lig: "+ 10%"));
+
+			}
+
+			// &:focus,
+			&:focus-visible {
+
+				outline				: 3px solid fn-hsl(focus);
+
+			}
+
+		}
+
 		& > [project_title] {
 
 			@include mx-flex-space-between-center;
@@ -19,154 +52,37 @@
 
 		}
 
-		& > [project_info] > *:first-child {
-
-			margin-top	: var(--gap);
-
-		}
-
-	}
-
-	fieldset {
-
-		@include mx-component();
-
-		& > [task_list] {
+		& > [project_info] {
 
 			@include mx-flex-column;
-			gap		: var(--gap-sm);
+			gap			: var(--gap-sm);
+			overflow	: hidden;
 
-			& > [task_item] {
+			& > *:first-child {
 
-				& > [task_header] {
+				margin-top	: var(--gap);
 
-					@include mx-component(3);
-					padding		: var(--gap-lg);
+			}
 
-					&:hover,
-					&.expanded {
+			[row] {
 
-						background-color	: fn-hsl(bg-3, (lig: "- 2%"));
+				@include mx-component(4);
+				padding		: var(--gap-lg);
 
-					}
+			}
 
-					& > a {
+			[start_end_row] {
 
-						display					: grid;
-						grid-template-columns	: 10rem 10rem 1fr;
-						grid-template-rows		: auto 1fr;
-						gap						: var(--gap-xs);
-						cursor					: pointer;
+				display		: flex;
+				gap			: var(--gap-sm);
 
-						& > span {
+				& > div {
 
-							grid-column			: 1 / -1;
-
-						}
-
-						& > small {
-
-							@include mx-flex-center-y;
-							gap			: var(--gap-xxs);
-
-							& > .material-symbols-outlined {
-
-								font-size			: inherit;
-
-							}
-
-						}
-
-					}
-
-				}
-
-				& > [task_content_wrapper] {
-
-					overflow				: hidden;
-
-					& > [task_content] {
-
-						@include mx-component(3);
-						padding					: var(--gap);
-						margin-left				: var(--gap-sm);
-						margin-right			: var(--gap-sm);
-						border-top-left-radius	: 0;
-						border-top-right-radius	: 0;
-
-						& > [task_desc] {
-
-							display			: flex;
-							margin-bottom	: var(--gap);
-
-						}
-
-						& > [task_tags] {
-
-							display			: flex;
-							flex-wrap		: wrap;
-							padding			: var(--gap-sm) var(--gap-sm) var(--gap-sm) 0;
-							gap				: var(--gap-xs);
-
-						}
-
-						& > [task_row] {
-
-							display					: grid;
-							grid-template-columns	: 1fr 1fr;
-
-						}
-
-						& > [task_small] {
-
-							@include mx-flex-space-between-center;
-							& > small {
-
-								@include mx-flex-center-y;
-
-							}
-
-						}
-
-					}
-
-					& > .footer {
-
-						margin-right	: var(--gap-sm);
-
-					}
+					width	: 50%;
 
 				}
 
 			}
-
-		}
-
-	}
-
-	[project_info] {
-
-		@include mx-flex-column;
-		gap			: var(--gap-sm);
-		overflow	: hidden;
-
-	}
-
-	[row] {
-
-		@include mx-component(4);
-		padding		: var(--gap-lg);
-
-	}
-
-	[start_end_row] {
-
-		display		: flex;
-		gap			: var(--gap-sm);
-
-		& > div {
-
-			width	: 50%;
 
 		}
 

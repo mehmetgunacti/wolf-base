@@ -38,12 +38,12 @@ export const loadAllRemoteMetadataSuccess	= createAction('[Task] Load All Remote
 
 // UI
 export const setSelectedId					= createAction('[Task] Set Selected Id', props<{ id: UUID | null }>());
-export const openTaskDialog					= createAction('[Task] Open Task Dialog', props<{ id: UUID }>());
+// export const openTaskDialog					= createAction('[Task] Open Task Dialog', props<{ id: UUID }>());
 // export const switchToTaskDialog				= createAction('[Task] Switch to Task Dialog', props<{ id: UUID }>());
-export const closeTaskDialog				= createAction('[Task] Close Dialog');
+// export const closeTaskDialog				= createAction('[Task] Close Dialog');
 
 export const openAddTaskDialog				= createAction('[Task] Open New Task Dialog');
-export const openEditTaskDialog				= createAction('[Task] Open Edit Dialog');
+export const openEditTaskDialog				= createAction('[Task] Open Edit Dialog', props<{ id: UUID }>());
 export const closeEditDialog				= createAction('[Task] Close Edit Dialog');
 
 // CLOUD SYNC

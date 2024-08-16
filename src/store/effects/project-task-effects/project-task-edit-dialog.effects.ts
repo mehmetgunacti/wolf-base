@@ -34,7 +34,6 @@ export class TaskEditEffects {
 		() => this.actions$.pipe(
 
 			ofType(
-				taskActions.openTaskDialog,
 				taskActions.closeEditDialog,
 				taskActions.createSuccess,
 				taskActions.updateSuccess

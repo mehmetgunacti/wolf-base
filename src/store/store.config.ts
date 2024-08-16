@@ -59,7 +59,6 @@ import { ProjectSyncRemoteNewEffects } from './effects/project-effects/project-s
 import { ProjectSyncRemoteUpdatedEffects } from './effects/project-effects/project-sync-remote-updated.effects';
 import { ProjectSyncEffects } from './effects/project-effects/project-sync.effects';
 import { ProjectUIEffects } from './effects/project-effects/project-ui.effects';
-import { TaskEffects } from './effects/project-task-effects/project-task-dialog.effects';
 import { TaskEditEffects } from './effects/project-task-effects/project-task-edit-dialog.effects';
 import { TaskEntityCreateEffects } from './effects/project-task-effects/project-task-entity-create.effects';
 import { TaskEntityMoveToTrashEffects } from './effects/project-task-effects/project-task-entity-move-to-trash.effects';
@@ -251,7 +250,6 @@ export const effects = [
 
 	TaskLoadEffects,
 	TaskEditEffects,
-	TaskEffects,
 
 	// Words
 	WordSyncEffects,

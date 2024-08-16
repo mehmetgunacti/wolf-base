@@ -33,16 +33,16 @@ export class TaskEntityCreateEffects {
 
 	);
 
-	openTaskDialog$ = createEffect(
+	// openTaskDialog$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(taskActions.createSuccess),
-			map(({ task }) => taskActions.openTaskDialog({ id: task.id }))
+	// 		ofType(taskActions.createSuccess),
+	// 		map(({ task }) => taskActions.openTaskDialog({ id: task.id }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 	createSuccessToNotification$ = createEffect(
 

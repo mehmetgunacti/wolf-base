@@ -36,10 +36,38 @@
 
 	<app-project
 		[project]="project"
-		[infoVisible]="infoVisible()"
-		(toggleInfo)="onToggleInfo()"
-		(newTask)="onOpenNewTaskDialog()"
-		(viewTask)="onViewTaskDialog($event)"/>
+		[expanded]="projectExpanded()"
+		(toggleInfo)="onToggleInfo()"/>
+
+	<!-- TASKS (FIELDSET) -->
+	<fieldset class="component">
+
+		<legend>Tasks</legend>
+		<legend>
+			<button
+				class="icon-only small"
+				(click)="onOpenNewTaskDialog()">
+				<span class="material-symbols-outlined">add</span>
+				Add Task
+			</button>
+		</legend>
+
+		<div task_list>
+
+			@for (task of project.tasks; track $index) {
+
+				@let expanded = !!tasksExpanded()[task.id];
+				<app-task
+					[task]="task"
+					[expanded]="expanded"
+					(editTask)="onOpenEditTaskDialog($event)"
+					(toggleTask)="onToggleTask($event)" />
+
+			}
+
+		</div>
+
+	</fieldset>
 
 } @else {
 

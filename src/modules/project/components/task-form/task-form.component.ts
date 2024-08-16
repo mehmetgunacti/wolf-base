@@ -34,11 +34,20 @@ export class TaskFormComponent {
 		effect(() => {
 
 			const task = this.task();
-			if (task)
+			if (task) // is edit? set values
 				this.form.setValue(task);
 
-			else
-				this.form.project.setValue(this.project());
+			else { // is new ? set project id and name
+
+				const project = this.project();
+				if (project) {
+
+					const { id, name } = project;
+					this.form.setProject({ id, name });
+
+				}
+
+			}
 
 		});
 

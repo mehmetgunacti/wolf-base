@@ -44,10 +44,3 @@ export const selProject_filtered = createSelector(
 	(arr, search) => search !== null ? arr.filter(word => word.name.toLocaleLowerCase().includes(search.toLowerCase())) : arr
 
 );
-
-export const selProject_infoVisible = createSelector(
-
-	selProject_UIState,
-	state => state.infoVisible
-
-);

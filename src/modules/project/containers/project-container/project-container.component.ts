@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, Signal } from '@angular/core';
 import { Project, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import * as taskActions from 'store/actions/project-task.actions';
-import * as projectActions from 'store/actions/project.actions';
-import { selProject_infoVisible, selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
+import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
 
 @Component({
 	selector: 'app-project-container',
@@ -15,19 +14,20 @@ export class ProjectContainerComponent {
 
 	private store: Store = inject(Store);
 
+	protected projectExpanded = signal<boolean>(false);
+	protected tasksExpanded = signal<Record<UUID, boolean>>({});
+
 	project: Signal<Project | null>;
-	infoVisible: Signal<boolean>;
 
 	constructor() {
 
 		this.project = this.store.selectSignal(selProject_selected);
-		this.infoVisible = this.store.selectSignal(selProject_infoVisible);
 
 	}
 
 	onToggleInfo(): void {
 
-		this.store.dispatch(projectActions.toggleInfo());
+		this.projectExpanded.update(e => e = !e);
 
 	}
 
@@ -37,9 +37,15 @@ export class ProjectContainerComponent {
 
 	}
 
-	onViewTaskDialog(id: UUID): void {
+	onOpenEditTaskDialog(id: UUID): void {
 
-		this.store.dispatch(taskActions.openTaskDialog({ id }));
+		this.store.dispatch(taskActions.openEditTaskDialog({ id }));
+
+	}
+
+	onToggleTask(id: UUID): void {
+
+		this.tasksExpanded.update(map => { map[id] = !map[id]; return map; });
 
 	}
 
