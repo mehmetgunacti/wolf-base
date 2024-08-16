@@ -57,3 +57,22 @@ export const TaskPriorityLabels: Record<string, string> = {
 }
 
 export const TASK_PRIORITIES: NameBase[] = Object.keys(TaskPriorityLabels).map(k => ({ id: k, name: TaskPriorityLabels[k] }));
+
+export enum TaskCategory {
+
+	bug = 'bug',
+	feature = 'feature',
+	improvement = 'improvement'
+
+}
+
+export const TaskCategoryLabels: Record<string, string> = {
+
+	[TaskCategory.bug]: 'Bug',
+	[TaskCategory.feature]: 'Feature',
+	[TaskCategory.improvement]: 'Improvement'
+
+}
+
+export const TASK_CATEGORIES: NameBase[] = Object.keys(TaskCategoryLabels).map(k => ({ id: k, name: TaskCategoryLabels[k] }));
+
