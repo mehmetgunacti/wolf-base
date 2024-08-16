@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, map, of, startWith } from 'rxjs';
 
 @Component({
 	selector: 'w-input',
@@ -14,6 +14,7 @@ export class InputComponent implements OnInit {
 	@Input() name: string = '';
 	@Input() type: string = 'text';
 	@Input() readonly = false;
+	@Input() labelUp: boolean | null = null;
 
 	@Output() inputChanged: EventEmitter<string> = new EventEmitter();
 
@@ -21,7 +22,8 @@ export class InputComponent implements OnInit {
 
 	ngOnInit(): void {
 
-		this.hasValue$ = this.control.valueChanges.pipe(
+		// todo : what if labelUp changes?
+		this.hasValue$ = this.labelUp ? of(true) : this.control.valueChanges.pipe(
 
 			startWith(this.control.value),
 			map(val => this.hasValue(val))
