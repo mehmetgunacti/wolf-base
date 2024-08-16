@@ -33,7 +33,7 @@ This is just me having fun with code—take it for what it is!
 ## Technology Stack
 
 - Angular & Angular CDK
-- NgRx/Core and NgRx/Effects
+- NgRx/Store and NgRx/Effects
 - PWA
 - IndexedDb / Dexie
 - For cloud sync Firestore REST Api implementation provided
