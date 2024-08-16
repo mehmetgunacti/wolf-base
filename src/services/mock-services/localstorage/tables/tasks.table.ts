@@ -1,4 +1,4 @@
-import { emptyNameBase, Metadata, RemoteData, RemoteMetadata, sleep, SyncData, Task, TaskPriority, TaskState, UUID } from '@lib';
+import { emptyNameBase, Metadata, RemoteData, RemoteMetadata, sleep, SyncData, Task, TaskCategory, TaskPriority, TaskState, UUID } from '@lib';
 import { TaskLocalRepository } from 'lib/repositories/local/project-task.repository';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -28,6 +28,7 @@ export class MockTasksLocalRepositoryImpl implements TaskLocalRepository {
 			description: null,
 			status: TaskState.ongoing,
 			priority: TaskPriority.normal,
+			category: TaskCategory.feature,
 			start: new Date().toISOString(),
 			end: null,
 			tags: [],

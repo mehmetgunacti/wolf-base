@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
-import { slideDownTrigger, Task, TaskPriorityLabels, TaskStateLabels, UUID } from 'lib';
+import { slideDownTrigger, Task, TaskCategoryLabels, TaskPriorityLabels, TaskStateLabels, UUID } from 'lib';
 
 @Component({
 	selector: 'app-task',
@@ -12,6 +12,7 @@ export class TaskComponent {
 
 	TASK_STATE = TaskStateLabels;
 	TASK_PRIORITIES = TaskPriorityLabels;
+	TASK_CATEGORIES = TaskCategoryLabels;
 
 	/* @Input() */
 	task = input.required<Task>();

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, output } from '@angular/core';
-import { NameBase, TASK_PRIORITIES, TASK_STATE, Task, UUID, elseEmptyArray, isInvalid } from 'lib';
+import { NameBase, TASK_CATEGORIES, TASK_PRIORITIES, TASK_STATE, Task, UUID, elseEmptyArray, isInvalid } from 'lib';
 import { TASK_FORM, TaskForm } from './task-form';
 
 @Component({
@@ -13,6 +13,7 @@ export class TaskFormComponent {
 
 	TASK_STATE = TASK_STATE;
 	TASK_PRIORITIES = TASK_PRIORITIES;
+	TASK_CATEGORIES = TASK_CATEGORIES;
 
 	/* @Input() */
 	task = input<Task | null>(null);

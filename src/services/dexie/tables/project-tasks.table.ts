@@ -1,4 +1,4 @@
-import { Task, TaskPriority, TaskState, WolfEntity, emptyNameBase } from '@lib';
+import { Task, TaskCategory, TaskPriority, TaskState, WolfEntity, emptyNameBase } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { TaskLocalRepository } from 'lib/repositories/local/project-task.repository';
 import { v4 as uuidv4 } from 'uuid';
@@ -28,6 +28,7 @@ export class DexieTasksRepositoryImpl extends EntityLocalRepositoryImpl<Task> im
 			description: null,
 			status: TaskState.ongoing,
 			priority: TaskPriority.normal,
+			category: TaskCategory.bug,
 			start: new Date().toISOString(),
 			end: null,
 			tags: []

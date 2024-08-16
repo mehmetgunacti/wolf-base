@@ -55,7 +55,7 @@
 				[suggestions]="tagSuggestions()"/>
 		</div>
 
-		<div task_row>
+		<div task_status_row>
 
 			<!-- STATUS -->
 			<div>
@@ -67,9 +67,14 @@
 				<w-select [control]="form.priority" name="Priority" [nodes]="TASK_PRIORITIES"/>
 			</div>
 
+			<!-- CATEGORY -->
+			<div>
+				<w-select [control]="form.category" name="Category" [nodes]="TASK_CATEGORIES"/>
+			</div>
+
 		</div>
 
-		<div task_row>
+		<div task_date_row>
 
 			<!-- START -->
 			<div>

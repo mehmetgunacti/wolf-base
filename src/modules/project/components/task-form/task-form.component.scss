@@ -13,7 +13,15 @@
 		padding			: var(--gap-xs);
 		gap				: var(--gap-sm);
 
-		& > [task_row] {
+		& > [task_status_row] {
+
+			display					: grid;
+			grid-template-columns	: 1fr 1fr 1fr;
+			gap						: var(--gap-sm);
+
+		}
+
+		& > [task_date_row] {
 
 			display					: grid;
 			grid-template-columns	: 1fr 1fr;
