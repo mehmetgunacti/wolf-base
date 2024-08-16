@@ -84,19 +84,20 @@
 
 			}
 
-			& > [task_row] {
-
-				display					: grid;
-				grid-template-columns	: 1fr 1fr;
-
-			}
-
 			& > [task_small] {
 
-				@include mx-flex-space-between-center;
+				@include mx-flex-column-start;
+
+				@include bigScreen() {
+
+					@include mx-flex-space-between-start;
+
+				}
+
 				& > small {
 
-					@include mx-flex-center-y;
+					display	: flex;
+					gap		: var(--gap-xxs);
 
 				}
 
