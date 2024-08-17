@@ -45,7 +45,7 @@ export const TASK_STATE: NameBase[] = Object.keys(TaskStateLabels).map(k => ({ i
 export enum TaskPriority {
 
 	high = 'high',
-	normal = 'normal',
+	medium = 'medium',
 	low = 'low'
 
 }
@@ -53,7 +53,7 @@ export enum TaskPriority {
 export const TaskPriorityLabels: Record<string, string> = {
 
 	[TaskPriority.high]: 'High',
-	[TaskPriority.normal]: 'Normal',
+	[TaskPriority.medium]: 'Medium',
 	[TaskPriority.low]: 'Low'
 
 }

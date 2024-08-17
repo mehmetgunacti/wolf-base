@@ -27,7 +27,7 @@ export class MockTasksLocalRepositoryImpl implements TaskLocalRepository {
 			project: emptyNameBase(),
 			description: null,
 			status: TaskState.ongoing,
-			priority: TaskPriority.normal,
+			priority: TaskPriority.medium,
 			category: TaskCategory.feature,
 			start: new Date().toISOString(),
 			end: null,

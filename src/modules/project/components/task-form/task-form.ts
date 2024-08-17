@@ -41,7 +41,7 @@ export class TaskForm {
 		this.tags = new FormControl<string[]>([], { validators: [Validators.required], nonNullable: true });
 		this.description = new FormControl();
 		this.status = new FormControl<TaskState>(TaskState.ongoing, { validators: [Validators.required], nonNullable: true });
-		this.priority = new FormControl<TaskPriority>(TaskPriority.normal, { validators: [Validators.required], nonNullable: true });
+		this.priority = new FormControl<TaskPriority>(TaskPriority.medium, { validators: [Validators.required], nonNullable: true });
 		this.category = new FormControl<TaskCategory>(TaskCategory.bug, { validators: [Validators.required], nonNullable: true });
 		this.start = new FormControl<string>(formatDate(new Date(), 'yyyy-MM-dd', 'en'), { validators: [Validators.required], nonNullable: true });
 		this.end = new FormControl();
