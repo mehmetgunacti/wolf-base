@@ -42,6 +42,19 @@
 
 				}
 
+				&.ongoing,
+				&.high {
+
+					color	: fn-hsl(warn);
+
+				}
+
+				&.completed {
+
+					color	: fn-hsl(success);
+
+				}
+
 			}
 
 		}
