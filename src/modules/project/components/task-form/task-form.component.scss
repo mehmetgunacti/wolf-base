@@ -13,6 +13,13 @@
 		padding			: var(--gap-xs);
 		gap				: var(--gap-sm);
 
+		& > [task_row] {
+
+			display			: flex;
+			flex-direction	: row;
+
+		}
+
 		& > [task_status_row] {
 
 			display					: grid;

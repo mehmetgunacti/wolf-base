@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, output } from '@angular/core';
-import { NameBase, TASK_CATEGORIES, TASK_PRIORITIES, TASK_STATE, Task, UUID, elseEmptyArray, isInvalid } from 'lib';
+import { NameBase, TAG_OPTIONAL, TASK_CATEGORIES, TASK_PRIORITIES, TASK_STATE, Task, UUID, elseEmptyArray, isInvalid } from 'lib';
 import { TASK_FORM, TaskForm } from './task-form';
 
 @Component({
@@ -11,6 +11,7 @@ import { TASK_FORM, TaskForm } from './task-form';
 })
 export class TaskFormComponent {
 
+	TAG_OPTIONAL = TAG_OPTIONAL;
 	TASK_STATE = TASK_STATE;
 	TASK_PRIORITIES = TASK_PRIORITIES;
 	TASK_CATEGORIES = TASK_CATEGORIES;
@@ -83,6 +84,17 @@ export class TaskFormComponent {
 	onTagInput(val: string | null): void {
 
 		this.tagInput.emit(val);
+
+	}
+
+	onToggleOptional(): void {
+
+		const tags: string[] = this.form.tags.value;
+		this.form.tags.setValue(
+			tags.includes(TAG_OPTIONAL) ? tags.filter(v => v !== TAG_OPTIONAL) : [TAG_OPTIONAL, ...tags]
+		);
+		this.form.tags.markAsDirty();
+		this.form.tags.updateValueAndValidity();
 
 	}
 

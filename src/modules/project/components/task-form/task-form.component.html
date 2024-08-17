@@ -45,7 +45,7 @@
 		</div>
 
 		<!-- TAGS -->
-		<div>
+		<div task_row>
 			<w-input-tag
 				[control]="form.tags"
 				id="taskForm"
@@ -53,6 +53,7 @@
 				class="input-element"
 				(tagInput)="onTagInput($event)"
 				[suggestions]="tagSuggestions()"/>
+			<button type="button" class="icon-only" [title]="'Toggle \''+TAG_OPTIONAL+'\''" (click)="onToggleOptional()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_OPTIONAL)">preliminary</span></button>
 		</div>
 
 		<div task_status_row>

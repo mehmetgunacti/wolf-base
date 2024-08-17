@@ -1,5 +1,7 @@
 import { NameBase } from 'lib/models';
 
+export const TAG_OPTIONAL = 'optional';
+
 export enum ProjectStatus {
 
 	ongoing = 'ongoing',
