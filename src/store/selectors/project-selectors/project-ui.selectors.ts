@@ -1,6 +1,6 @@
 import { Project } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selTask_filteredTasks } from '../project-task-selectors/task-tags.selectors';
+import { selTask_filteredTasks } from '../project-task-selectors/task-ui.selectors';
 import { selProject_array, selProject_entities } from './project-entities.selectors';
 import { selProject_UIState } from './project.selectors';
 
