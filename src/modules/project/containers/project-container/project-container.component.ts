@@ -9,7 +9,7 @@ function formatQueryParams(queryParams: TaskQueryParams): string {
 
 	const { search, status, category, tags } = queryParams;
 	const statusText =   `[Status: '${status === 'all' ? 'All' : TaskStateLabels[status]}']`;
-	const categoryText = `[Category: '${status === 'all' ? 'All' : TaskCategoryLabels[status]}']`;
+	const categoryText = `[Category: '${category === 'all' ? 'All' : TaskCategoryLabels[category]}']`;
 	const searchText = search ? `, [Search: '${search}']` : '';
 	const tagsText = tags.length > 0 ? `, [Tags: (${tags.join(', ')})]` : '';
 	return `${statusText}, ${categoryText}${searchText}${tagsText}`;
