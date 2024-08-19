@@ -10,7 +10,24 @@
 
 	& > fieldset {
 
-		@include mx-component();
+		@include mx-component;
+		@include mx-flex-column;
+		gap		: var(--gap-sm);
+
+		& > legend:first-child {
+
+			display			: flex;
+			flex-direction	: row;
+			align-items		: baseline;
+			gap				: var(--gap-xs);
+
+		}
+
+		& > [query_params] {
+
+			@include mx-flex-center-y;
+
+		}
 
 		& > [task_list] {
 

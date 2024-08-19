@@ -1,10 +1,18 @@
 <header>
 
-	<w-selected-tags
-		[tags]="pinned$ | async"
-		[selectedTags]="selectedTags$ | async"
-		(filterClick)="emptyFilter()"
-		(tagClick)="onTagClicked($event)"></w-selected-tags>
+	<div task_filter_controls>
+
+		<!-- STATUS -->
+		<div>
+			<w-select [control]="fcStatus" name="Status" [nodes]="TASK_STATE"/>
+		</div>
+
+		<!-- CATEGORY -->
+		<div>
+			<w-select [control]="fcCategory" name="Category" [nodes]="TASK_CATEGORIES"/>
+		</div>
+
+	</div>
 
 	<button
 		type="button"
@@ -20,14 +28,15 @@
 		<input
 			type="text"
 			placeholder="Keyword"
-			[formControl]="searchControl"
+			[formControl]="fcSearch"
 			[autofocus]="cloudVisible"
 			[after]="500">
 		<button
 			type="button"
-			class="square small"
-			(click)="onSearchReset()">
-			<span class="material-symbols-outlined">backspace</span>
+			class="icon-only"
+			title="Clear Filter"
+			(click)="onReset()">
+			<span class="material-symbols-outlined">mop</span>
 		</button>
 	</div>
 

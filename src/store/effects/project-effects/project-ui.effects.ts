@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { filter, map, tap, withLatestFrom } from 'rxjs';
@@ -46,7 +46,12 @@ export class ProjectUIEffects {
 		() => this.router.events.pipe(
 
 			filter((e): e is NavigationEnd => e instanceof NavigationEnd),
-			filter(e => e.urlAfterRedirects.startsWith('/projects')),
+			filter(e => {
+
+				const after = e.urlAfterRedirects;
+				return after.startsWith('/projects') && !after.startsWith('/projects/')
+
+			}),
 			withLatestFrom(this.activatedRoute.queryParamMap),
 			map(([, paramMap]) =>
 
@@ -63,4 +68,3 @@ export class ProjectUIEffects {
 	);
 
 }
-

@@ -1,4 +1,4 @@
-import { ProjectStatus, TaskCategory, TaskPriority, TaskState } from 'lib/constants';
+import { ProjectStatus, TaskCategory, TaskPriority, TaskState, UUID } from 'lib/constants';
 import { Entity } from './entity.model';
 import { ISODateString, NameBase } from './id-base.model';
 
@@ -28,5 +28,14 @@ export interface Task extends NameBase {
 export interface ProjectQueryParams {
 
 	search: string | null
+
+}
+
+export interface TaskQueryParams {
+
+	search: string | null,
+	status: TaskState | 'all',
+	category: TaskCategory | 'all',
+	tags: string[]
 
 }

@@ -125,6 +125,7 @@ import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.redu
 import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
+import { TaskUIEffects } from './effects/project-task-effects/project-task-ui.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -250,6 +251,8 @@ export const effects = [
 
 	TaskLoadEffects,
 	TaskEditEffects,
+
+	TaskUIEffects,
 
 	// Words
 	WordSyncEffects,

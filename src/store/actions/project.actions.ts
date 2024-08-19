@@ -1,4 +1,4 @@
-import { RemoteMetadata, SyncData, UUID, Project, ProjectQueryParams } from '@lib';
+import { RemoteMetadata, SyncData, UUID, Project, ProjectQueryParams, TaskState, TaskCategory } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // CRUD

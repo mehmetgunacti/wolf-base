@@ -1,6 +1,13 @@
 import { DEFAULT_CONF_VALUES, SidebarState, Theme } from 'lib/constants';
 import { HasParentId } from 'lib/models';
 
+export function findEnumValue<T>(enumObj: any, value: string | null): T | null {
+
+	const retValue = Object.values(enumObj).includes(value) ? (value as T) : null;
+	return retValue ?? null;
+
+}
+
 export function convertEnum<T>(enumObject: T): HasParentId[] {
 
 	const result: HasParentId[] = [];

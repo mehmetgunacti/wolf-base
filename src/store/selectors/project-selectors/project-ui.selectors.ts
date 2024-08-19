@@ -1,6 +1,6 @@
 import { Project } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selTask_array } from '../project-task-selectors/task-entities.selectors';
+import { selTask_filteredTasks } from '../project-task-selectors/task-tags.selectors';
 import { selProject_array, selProject_entities } from './project-entities.selectors';
 import { selProject_UIState } from './project.selectors';
 
@@ -15,7 +15,7 @@ export const selProject_selected = createSelector(
 
 	selProject_entities,
 	selProject_selectedId,
-	selTask_array,
+	selTask_filteredTasks,
 	(state, id, tasks): Project | null => {
 
 		const project = id ? state[id] ?? null : null;
@@ -30,10 +30,17 @@ export const selProject_selected = createSelector(
 
 );
 
-export const selProject_search = createSelector(
+const selProject_queryParams = createSelector(
 
 	selProject_UIState,
-	state => state.queryParams.search
+	state => state.queryParams
+
+);
+
+export const selProject_search = createSelector(
+
+	selProject_queryParams,
+	params => params.search
 
 );
 

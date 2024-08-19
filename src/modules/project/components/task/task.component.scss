@@ -57,6 +57,15 @@
 
 			}
 
+			& > [task_tags] {
+
+				grid-column		: 1 / -1;
+				display			: flex;
+				flex-wrap		: wrap;
+				gap				: var(--gap-xs);
+
+			}
+
 		}
 
 	}
@@ -86,14 +95,6 @@
 					display		: none;
 
 				}
-
-			}
-
-			& > [task_tags] {
-
-				display			: flex;
-				flex-wrap		: wrap;
-				gap				: var(--gap-xs);
 
 			}
 

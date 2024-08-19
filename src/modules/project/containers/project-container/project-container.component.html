@@ -34,15 +34,19 @@
 
 	</w-portal>
 
+	<!-- PROJECT -->
 	<app-project
 		[project]="project"
 		[expanded]="projectExpanded()"
 		(toggleInfo)="onToggleInfo()"/>
 
+	<!-- SEARCH AND TAG CLOUD -->
+	<app-project-search-and-tag-cloud-container/>
+
 	<!-- TASKS (FIELDSET) -->
 	<fieldset class="component">
 
-		<legend>Tasks</legend>
+		<legend>Tasks <small>({{ project.tasks.length }})</small></legend>
 		<legend>
 			<button
 				class="icon-only small"
@@ -51,6 +55,10 @@
 				Add Task
 			</button>
 		</legend>
+
+		<small query_params>
+			<span class="material-symbols-outlined small">filter_alt</span> Filters: {{ paramsText() }}
+		</small>
 
 		<div task_list>
 

@@ -5,6 +5,7 @@ import { initialTaskUIState, Task_UIState } from 'store/states/project-task.stat
 const reducer = createReducer(
 
 	initialTaskUIState,
+	on(actions.setQueryParams, (state, { search, status, category, tags }): Task_UIState => ({ ...state, queryParams: { search, status, category, tags } })),
 	on(actions.openAddTaskDialog, (state): Task_UIState => ({ ...state, selectedId: null })),
 	on(actions.openEditTaskDialog, (state, { id }): Task_UIState => ({ ...state, selectedId: id })),
 	on(actions.closeEditDialog, (state): Task_UIState => ({ ...state, selectedId: null })),

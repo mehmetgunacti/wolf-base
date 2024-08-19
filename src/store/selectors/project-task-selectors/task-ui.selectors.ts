@@ -16,3 +16,10 @@ export const selTask_selected = createSelector(
 	(entities, selectedId) => selectedId ? entities[selectedId] : null
 
 );
+
+export const selTask_queryParams = createSelector(
+
+	selTask_UIState,
+	state => state.queryParams
+
+);

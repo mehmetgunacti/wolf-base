@@ -11,16 +11,6 @@
 		<small [class]="t.priority"><span class="material-symbols-outlined">swap_vert</span> {{ TASK_PRIORITIES[t.priority] }}</small>
 		<small><span class="material-symbols-outlined">category</span> {{ TASK_CATEGORIES[t.category] }}</small>
 		<span>{{ t.name }}</span>
-
-	</a>
-
-</div>
-<div task_content_wrapper [@slideDown]="isExpanded">
-
-	<div task_content>
-
-		<!-- DESCRIPTION -->
-		<div task_desc>{{ t.description }}</div>
 		<!-- TAGS -->
 		<div task_tags>
 
@@ -31,6 +21,17 @@
 			}
 
 		</div>
+
+	</a>
+
+</div>
+<div task_content_wrapper [@slideDown]="isExpanded">
+
+	<div task_content>
+
+		<!-- DESCRIPTION -->
+		<div task_desc>{{ t.description }}</div>
+
 		<!-- START -->
 		<div task_small>
 

@@ -1,4 +1,4 @@
-import { Task, RemoteMetadata, SyncData, UUID } from '@lib';
+import { RemoteMetadata, SyncData, Task, TaskQueryParams, TaskState, UUID } from '@lib';
 
 export interface Task_ModuleState {
 
@@ -18,6 +18,7 @@ export interface Task_EntitiesState {
 export interface Task_UIState {
 
 	selectedId: UUID | null;
+	queryParams: TaskQueryParams;
 
 }
 
@@ -33,7 +34,15 @@ export const task_initialEntitiesState: Task_EntitiesState = {
 
 export const initialTaskUIState: Task_UIState = {
 
-	selectedId: null
+	selectedId: null,
+	queryParams: {
+
+		search: null,
+		status: TaskState.ongoing,
+		category: 'all',
+		tags: []
+
+	},
 
 };
 

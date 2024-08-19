@@ -25,7 +25,14 @@
 
 		display			: flex;
 		align-items		: center;
-		padding-left	: var(--gap-xs);
+
+		& > [task_filter_controls] {
+
+			display					: grid;
+			grid-template-columns	: 1fr 1fr;
+			gap						: var(--gap-sm);
+
+		}
 
 		& :first-child {
 

@@ -1,6 +1,7 @@
-import { Tag } from '@lib';
+import { Tag, Task, TaskQueryParams } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selTask_array } from './task-entities.selectors';
+import { selTask_queryParams } from './task-ui.selectors';
 
 const arrayOfTagNames = createSelector(
 
@@ -41,80 +42,82 @@ export const selTask_distinctTagNames = createSelector(
 
 );
 
-// export const selTask_filteredTasks = createSelector(
+export const selTask_filteredTasks = createSelector(
 
-// 	selTask_selected,
-// 	selTask_array,
-// 	selTask_QueryParams,
-// 	(selectedBookmark, bookmarks, params): ClickedBookmark[] => {
+	selTask_array,
+	selTask_queryParams,
+	(tasks, params): Task[] => {
 
-// 		if (!params.id && !params.search && params.tags.length === 0)
-// 			return [];
+		let entities = tasks;
 
-// 		if (selectedBookmark)
-// 			return [selectedBookmark];
+		// filter by status
+		if (params.status !== 'all')
+			entities = entities.filter(e => e.status === params.status);
 
-// 		// Filter bookmarks based on selected tags
-// 		const filteredBookmarks: ClickedBookmark[] = params.tags.reduce((acc, tag) => {
-// 			return acc.filter(bookmark => bookmark.tags.includes(tag));
-// 		}, bookmarks);
+		// filter by category
+		if (params.category !== 'all')
+			entities = entities.filter(e => e.category === params.category);
 
-// 		if (!params.search)
-// 			return filteredBookmarks;
+		// filter by tags
+		const filteredEntities: Task[] =
+			params.tags.reduce(
 
-// 		// Split the search term into an array of individual words
-// 		const searchWords = params.search.toLowerCase().split(' ');
+				(acc, tag) => { return acc.filter(e => e.tags.includes(tag)); },
+				entities
 
-// 		// Filter bookmarks based on search term
-// 		const result = filteredBookmarks.filter(bookmark => {
+			);
 
-// 			const { name, title, tags } = bookmark;
-// 			const lowerCaseName = name.toLowerCase();
-// 			const lowerCaseTitle = title.toLowerCase();
+		if (!params.search)
+			return filteredEntities;
 
-// 			// Check if any of the search words is present in the bookmark's name or title
-// 			return searchWords.every(word => lowerCaseName.includes(word) || lowerCaseTitle.includes(word) || tags.some(tag => tag.includes(word)));
+		// Split the search term into an array of individual words
+		const searchWords = params.search.toLowerCase().split(' ');
 
-// 		});
+		// Filter entities based on search term
+		const result = filteredEntities.filter(task => {
 
-// 		return result;
+			const { name, description, tags } = task;
+			const lowerCaseName = name.toLowerCase();
+			const lowerCaseDescription = description?.toLowerCase() ?? '';
 
-// 	}
+			// Check if any of the search words is present in entity properties
+			return searchWords.every(
+				word => lowerCaseName.includes(word) || lowerCaseDescription.includes(word) || tags.some(tag => tag.includes(word))
+			);
 
-// );
+		});
 
-// const arrOfFilteredTagNames = createSelector(
+		return result;
 
-// 	selBM_filteredBookmarks,
-// 	(bookmarks): string[][] => bookmarks.map(b => b.tags)
+	}
 
-// );
+);
 
-// export const filteredBookmarkCount = createSelector(
+const arrOfFilteredTagNames = createSelector(
 
-// 	selBM_filteredBookmarks,
-// 	(bookmarks: Bookmark[]) => bookmarks.length
+	selTask_filteredTasks,
+	(entities): string[][] => entities.map(b => b.tags)
 
-// );
+);
 
-// export const relatedTags = createSelector(
+export const relatedTags = createSelector(
 
-// 	arrOfFilteredTagNames,
-// 	distinctTagNames,
-// 	selBMQueryParams,
-// 	(arrTagsArray: string[][], distinctTagNames: string[], params: BookmarkQueryParams): string[] => {
+	arrOfFilteredTagNames,
+	selTask_distinctTagNames,
+	selTask_queryParams,
+	(arrTagsArray: string[][], distinctTagNames: string[], params: TaskQueryParams): string[] => {
 
-// 		if (params.tags.length === 0)
-// 			return distinctTagNames;
+		if (params.tags.length === 0)
+			return distinctTagNames;
 
-// 		return [
-// 			...new Set(
-// 				arrTagsArray
-// 					.filter(arrTags => params.tags.every(tag => arrTags.includes(tag)))
-// 					.flat()
-// 			)
-// 		];
+		return [
+			...new Set(
+				arrTagsArray
+					.filter(arrTags => params.tags.every(tag => arrTags.includes(tag)))
+					.flat()
+			)
+		];
 
-// 	}
+	}
 
-// );
+);

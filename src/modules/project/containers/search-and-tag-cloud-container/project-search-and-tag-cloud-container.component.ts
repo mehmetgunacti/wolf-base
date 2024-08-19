@@ -1,11 +1,14 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { TAG_PINNED, Tag, slideUpDownTrigger } from 'lib';
-import { Observable, Subscription, debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs';
-import { clickTag, emptySelectedTags, search } from 'store/actions/note.actions';
-import { selCore_pinnedNotes } from 'store/selectors/core-configuration.selectors';
-import { distinctTagsArray, relatedTags, selNote_queryParams } from 'store/selectors/note-selectors/note-tags.selectors';
+import { NameBase, TASK_CATEGORIES, TASK_STATE, Tag, TaskState, slideUpDownTrigger } from 'lib';
+import { Observable, debounceTime, distinctUntilChanged, map, take } from 'rxjs';
+import { clickTag, resetQueryParams, search, taskCategoryChange, taskStatusChange } from 'store/actions/project-task.actions';
+import { distinctTagsArray, relatedTags } from 'store/selectors/project-task-selectors/task-tags.selectors';
+import { selTask_queryParams } from 'store/selectors/project-task-selectors/task-ui.selectors';
+
+const all: NameBase = { id: 'all', name: 'All' };
 
 @Component({
 	selector: 'app-project-search-and-tag-cloud-container',
@@ -14,48 +17,62 @@ import { distinctTagsArray, relatedTags, selNote_queryParams } from 'store/selec
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [slideUpDownTrigger]
 })
-export class ProjectSearchAndTagCloudContainerComponent implements OnDestroy {
+export class ProjectSearchAndTagCloudContainerComponent {
 
-	TAG_PINNED = TAG_PINNED;
+	TASK_STATE = [all, ...TASK_STATE];
+	TASK_CATEGORIES = [all, ...TASK_CATEGORIES];
 
 	tags$: Observable<Tag[]>;
 	selectedTags$: Observable<string[]>;
 	relatedTags$: Observable<string[]>;
-	pinned$: Observable<string[]>;
-
 
 	@HostBinding('class.open')
 	cloudVisible = false;
 
-	searchControl: FormControl;
-	subscription: Subscription;
+	fcSearch: FormControl;
+	fcStatus: FormControl;
+	fcCategory: FormControl;
 
 	constructor(private store: Store) {
 
 		this.tags$ = store.select(distinctTagsArray);
 		this.relatedTags$ = store.select(relatedTags);
-		this.pinned$ = this.store.select(selCore_pinnedNotes).pipe(map(tags => [TAG_PINNED, ...tags]));
 
-		const queryParams$ = store.select(selNote_queryParams);
+		const queryParams$ = store.select(selTask_queryParams);
 		this.selectedTags$ = queryParams$.pipe(map(q => q.tags));
 
-		this.searchControl = new FormControl();
+		this.fcSearch = new FormControl();
+		this.fcStatus = new FormControl('');
+		this.fcCategory = new FormControl('');
+
 		queryParams$.pipe(
-			map(q => q.search),
-			filter(term => !!term),
 			take(1) // only one value on page load
-		).subscribe(term => this.searchControl.setValue(term ?? ''));
+		).subscribe(params => {
 
-		this.subscription = this.searchControl.valueChanges.pipe(
-			debounceTime(400),
-			distinctUntilChanged()
-		).subscribe(term => this.store.dispatch(search({ term })));
+			this.fcSearch.setValue(params.search ?? '');
+			this.fcStatus.setValue(params.status);
+			this.fcCategory.setValue(params.category);
 
-	}
+		});
 
-	ngOnDestroy(): void {
+		// dispatch on search
+		this.fcSearch.valueChanges
+			.pipe(
+				debounceTime(400),
+				distinctUntilChanged(),
+				takeUntilDestroyed()
+			)
+			.subscribe(term => this.store.dispatch(search({ term })));
 
-		this.subscription.unsubscribe();
+		// dispatch on status change
+		this.fcStatus.valueChanges
+			.pipe(takeUntilDestroyed())
+			.subscribe(status => this.store.dispatch(taskStatusChange({ status })));
+
+		// dispatch on category change
+		this.fcCategory.valueChanges
+			.pipe(takeUntilDestroyed())
+			.subscribe(category => this.store.dispatch(taskCategoryChange({ category })));
 
 	}
 
@@ -65,15 +82,12 @@ export class ProjectSearchAndTagCloudContainerComponent implements OnDestroy {
 
 	}
 
-	onSearchReset(): void {
+	onReset(): void {
 
-		this.searchControl.reset();
-
-	}
-
-	emptyFilter(): void {
-
-		this.store.dispatch(emptySelectedTags());
+		this.fcSearch.reset();
+		this.fcStatus.reset(TaskState.ongoing);
+		this.fcCategory.reset('all');
+		this.store.dispatch(resetQueryParams());
 
 	}
 
