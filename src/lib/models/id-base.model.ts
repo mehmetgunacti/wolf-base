@@ -1,5 +1,8 @@
 import { UUID } from "lib/constants/common.constant";
 
+// ISO 8601:
+// 2025-10-05T14:48:00.000Z
+// YYYY-MM-DDTHH:mm:ss.sssZ
 export type ISODateString = string;
 
 export interface IDBase {
