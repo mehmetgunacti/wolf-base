@@ -1,4 +1,4 @@
-import { Bookmark, CloudTask, SyncTaskType, Entity, RemoteMetadata, SyncData, UUID, EntityType, NameBase, toCloudTask } from '@lib';
+import { Bookmark, CloudTask, SyncTaskType, Entity, RemoteMetadata, SyncData, UUID, AppEntityType, NameBase, toCloudTask } from '@lib';
 import { createSelector } from "@ngrx/store";
 import { selBM_array, selBM_clicked } from "./bookmark-entities.selectors";
 import { selBookmarkRemoteMetadataArray, selBookmarkRemoteMetadataMap, selBookmarkSyncDataArray, selBookmarkSyncDataMap } from "./bookmark-sync.selectors";
@@ -163,28 +163,28 @@ export const selBookmarkNonConflictCloudTasks = createSelector(
 		const tasks: CloudTask[] = [];
 
 		if (localNew.length > 0)
-			tasks.push(toCloudTask(localNew, EntityType.bookmark, SyncTaskType.local_new));
+			tasks.push(toCloudTask(localNew, AppEntityType.bookmark, SyncTaskType.local_new));
 
 		if (localUpdated.length > 0)
-			tasks.push(toCloudTask(localUpdated, EntityType.bookmark, SyncTaskType.local_updated));
+			tasks.push(toCloudTask(localUpdated, AppEntityType.bookmark, SyncTaskType.local_updated));
 
 		if (localDeleted.length > 0)
-			tasks.push(toCloudTask(localDeleted, EntityType.bookmark, SyncTaskType.local_deleted));
+			tasks.push(toCloudTask(localDeleted, AppEntityType.bookmark, SyncTaskType.local_deleted));
 
 		if (remoteNew.length > 0)
-			tasks.push(toCloudTask(remoteNew, EntityType.bookmark, SyncTaskType.remote_new));
+			tasks.push(toCloudTask(remoteNew, AppEntityType.bookmark, SyncTaskType.remote_new));
 
 		if (remoteUpdated.length > 0)
-			tasks.push(toCloudTask(remoteUpdated, EntityType.bookmark, SyncTaskType.remote_updated));
+			tasks.push(toCloudTask(remoteUpdated, AppEntityType.bookmark, SyncTaskType.remote_updated));
 
 		if (remoteDeleted.length > 0)
-			tasks.push(toCloudTask(remoteDeleted, EntityType.bookmark, SyncTaskType.remote_deleted));
+			tasks.push(toCloudTask(remoteDeleted, AppEntityType.bookmark, SyncTaskType.remote_deleted));
 
 		if (localDeletedRemoteDeleted.length > 0)
-			tasks.push(toCloudTask(localDeletedRemoteDeleted, EntityType.bookmark, SyncTaskType.deleted_deleted));
+			tasks.push(toCloudTask(localDeletedRemoteDeleted, AppEntityType.bookmark, SyncTaskType.deleted_deleted));
 
 		if (clicked.length > 0)
-			tasks.push(toCloudTask(clicked, EntityType.bookmark, SyncTaskType.clicked));
+			tasks.push(toCloudTask(clicked, AppEntityType.bookmark, SyncTaskType.clicked));
 
 		return tasks;
 
@@ -206,13 +206,13 @@ export const selBookmarkConflictCloudTasks = createSelector(
 		const tasks: CloudTask[] = [];
 
 		if (localUpdatedRemoteUpdated.length > 0)
-			tasks.push(toCloudTask(localUpdatedRemoteUpdated, EntityType.bookmark, SyncTaskType.updated_updated));
+			tasks.push(toCloudTask(localUpdatedRemoteUpdated, AppEntityType.bookmark, SyncTaskType.updated_updated));
 
 		if (localUpdatedRemoteDeleted.length > 0)
-			tasks.push(toCloudTask(localUpdatedRemoteDeleted, EntityType.bookmark, SyncTaskType.updated_deleted));
+			tasks.push(toCloudTask(localUpdatedRemoteDeleted, AppEntityType.bookmark, SyncTaskType.updated_deleted));
 
 		if (localDeletedRemoteUpdated.length > 0)
-			tasks.push(toCloudTask(localDeletedRemoteUpdated, EntityType.bookmark, SyncTaskType.deleted_updated));
+			tasks.push(toCloudTask(localDeletedRemoteUpdated, AppEntityType.bookmark, SyncTaskType.deleted_updated));
 
 		return tasks;
 

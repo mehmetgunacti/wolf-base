@@ -1,4 +1,4 @@
-import { FIRESTORE_VALUE, FirestoreConverter, EntityType } from '@lib';
+import { FIRESTORE_VALUE, FirestoreConverter, AppEntityType } from '@lib';
 import { FirestoreConfig, Task } from 'lib/models';
 import { TasksRemoteRepository } from 'lib/repositories/remote/project-task-remote.repository';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
@@ -11,7 +11,7 @@ export class TasksFirestoreCollectionImpl extends FirestoreRemoteStorageCollecti
 		super(
 			firestore,
 			firestoreConfig,
-			EntityType.task,
+			AppEntityType.task,
 			new TaskFirestoreConverter()
 		);
 	}

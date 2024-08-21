@@ -1,4 +1,4 @@
-import { Entity, EntityType, LocalRepositoryNames, LocalRepositoryService } from '@lib';
+import { Entity, AppEntityType, LocalRepositoryNames, LocalRepositoryService } from '@lib';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository, ProjectLocalRepository, QuoteLocalRepository, WordLocalRepository } from 'lib/repositories/local';
 import { NotesLocalRepository } from 'lib/repositories/local/note.repository';
 import { TaskLocalRepository } from 'lib/repositories/local/project-task.repository';
@@ -23,14 +23,14 @@ export class MockLocalRepositoryService implements LocalRepositoryService {
 	projects: ProjectLocalRepository = new MockProjectsLocalRepositoryImpl();
 	tasks: TaskLocalRepository = new MockTasksLocalRepositoryImpl();
 
-	getRepository<T extends Entity>(entityType: EntityType): EntityLocalRepository<T> {
+	getRepository<T extends Entity>(entityType: AppEntityType): EntityLocalRepository<T> {
 
 		switch (entityType) {
 
-			case EntityType.bookmark: return this.bookmarks as unknown as EntityLocalRepository<T>;
-			case EntityType.note: return this.notes as unknown as EntityLocalRepository<T>;
-			case EntityType.noteContent: return this.noteContent as unknown as EntityLocalRepository<T>;
-			case EntityType.word: return this.words as unknown as EntityLocalRepository<T>;
+			case AppEntityType.bookmark: return this.bookmarks as unknown as EntityLocalRepository<T>;
+			case AppEntityType.note: return this.notes as unknown as EntityLocalRepository<T>;
+			case AppEntityType.noteContent: return this.noteContent as unknown as EntityLocalRepository<T>;
+			case AppEntityType.word: return this.words as unknown as EntityLocalRepository<T>;
 
 		}
 		throw Error('Unknown entity');

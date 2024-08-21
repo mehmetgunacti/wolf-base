@@ -1,4 +1,4 @@
-import { Entity, RemoteRepositoryService, EntityType } from '@lib';
+import { Entity, RemoteRepositoryService, AppEntityType } from '@lib';
 import { BookmarksRemoteRepository, EntityRemoteRepository, NoteContentRemoteRepository, NotesRemoteRepository, ProjectsRemoteRepository, QuizEntriesRemoteRepository, QuotesRemoteRepository } from 'lib/repositories/remote';
 import { WordsRemoteRepository } from 'lib/repositories/remote/word-remote.repository';
 import { MockBookmarksCollection } from "./collections/bookmarks.collection";
@@ -23,18 +23,18 @@ export class MockRemoteRepositoryService implements RemoteRepositoryService {
 	tasks: TasksRemoteRepository = new MockTasksCollection();
 
 
-	getRepository(entity: EntityType): EntityRemoteRepository<Entity> {
+	getRepository(entity: AppEntityType): EntityRemoteRepository<Entity> {
 
 		switch (entity) {
 
-			case EntityType.bookmark: return this.bookmarks;
-			case EntityType.note: return this.notes;
-			case EntityType.noteContent: return this.noteContent;
-			case EntityType.word: return this.words;
-			case EntityType.project: return this.projects;
-			case EntityType.quizEntry: return this.projects;
-			case EntityType.quote: return this.projects;
-			case EntityType.task: return this.tasks;
+			case AppEntityType.bookmark: return this.bookmarks;
+			case AppEntityType.note: return this.notes;
+			case AppEntityType.noteContent: return this.noteContent;
+			case AppEntityType.word: return this.words;
+			case AppEntityType.project: return this.projects;
+			case AppEntityType.quizEntry: return this.projects;
+			case AppEntityType.quote: return this.projects;
+			case AppEntityType.task: return this.tasks;
 
 		}
 		throw Error('Unknown entity');

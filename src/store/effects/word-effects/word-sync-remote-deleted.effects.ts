@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, EntityType } from '@lib';
+import { SyncService, AppEntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
@@ -22,7 +22,7 @@ export class WordSyncRemoteDeletedEffects {
 			withLatestFrom(this.store.select(selWord_RemoteDeleted)),
 			switchMap(([, items]) =>
 
-				this.syncService.downloadDeleted(EntityType.word, items).pipe(
+				this.syncService.downloadDeleted(AppEntityType.word, items).pipe(
 
 					map(item => wordActions.unloadOne({ id: item.id }))
 

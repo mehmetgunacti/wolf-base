@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { AppEntity, Entity, LocalRepositoryService, Note } from '@lib';
+import { AppEntities, Entity, LocalRepositoryService, Note } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
@@ -38,7 +38,7 @@ export class EntityCreateEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.createSuccess),
-			map(({ entityType }) => showNotification({ severity: 'success', detail: `${AppEntity[entityType].label} created` }))
+			map(({ entityType }) => showNotification({ severity: 'success', detail: `${AppEntities[entityType].label} created` }))
 
 		)
 
@@ -49,7 +49,7 @@ export class EntityCreateEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.createSuccess),
-			map(({ entity, entityType }) => navigate({ url: [`/${AppEntity[entityType].plural}`, entity.id] }))
+			map(({ entity, entityType }) => navigate({ url: [`/${AppEntities[entityType].plural}`, entity.id] }))
 
 		)
 

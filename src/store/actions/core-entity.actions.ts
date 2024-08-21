@@ -1,4 +1,4 @@
-import { Entity, UUID, EntityType } from '@lib';
+import { Entity, UUID, AppEntityType } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // export const createEntity = createAction('[CORE] Create Entity', props<{ entity: EntityType, data: Partial<Entity> }>());

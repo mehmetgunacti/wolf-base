@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, EntityType } from '@lib';
+import { SyncService, AppEntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
@@ -22,7 +22,7 @@ export class TaskSyncLocalNewEffects {
 			withLatestFrom(this.store.select(selTask_LocalNew)),
 			switchMap(([, items]) =>
 
-				this.syncService.uploadNew(EntityType.task, items).pipe(
+				this.syncService.uploadNew(AppEntityType.task, items).pipe(
 
 					map(item => taskActions.loadOne({ id: item.id }))
 

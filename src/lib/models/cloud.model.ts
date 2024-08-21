@@ -1,4 +1,4 @@
-import { EntityType } from "lib/constants";
+import { AppEntityType } from "lib/constants";
 import { NameBase } from './id-base.model';
 
 export enum SyncTaskType {
@@ -23,12 +23,12 @@ export enum SyncTaskType {
 export interface CloudTask {
 
 	items: NameBase[];
-	entity: EntityType;
+	entity: AppEntityType;
 	type: SyncTaskType;
 
 }
 
-export function toCloudTask(items: NameBase[], entity: EntityType, type: SyncTaskType): CloudTask {
+export function toCloudTask(items: NameBase[], entity: AppEntityType, type: SyncTaskType): CloudTask {
 
 	return { items, entity, type };
 

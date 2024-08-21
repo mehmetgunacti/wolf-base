@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { Entity, EntityType, FirestoreConfig } from '@lib';
+import { Entity, AppEntityType, FirestoreConfig } from '@lib';
 import { Store } from "@ngrx/store";
 import { BookmarksRemoteRepository, EntityRemoteRepository, NoteContentRemoteRepository, ProjectsRemoteRepository, QuizEntriesRemoteRepository, QuotesRemoteRepository } from 'lib/repositories/remote';
 import { NotesRemoteRepository } from 'lib/repositories/remote/note-remote.repository';
@@ -52,18 +52,18 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 
 	}
 
-	getRepository(entity: EntityType): EntityRemoteRepository<Entity> {
+	getRepository(entity: AppEntityType): EntityRemoteRepository<Entity> {
 
 		switch (entity) {
 
-			case EntityType.bookmark: return this.bookmarks;
-			case EntityType.note: return this.notes;
-			case EntityType.noteContent: return this.noteContent;
-			case EntityType.project: return this.projects;
-			case EntityType.quizEntry: return this.quizEntries;
-			case EntityType.quote: return this.quotes;
-			case EntityType.task: return this.tasks;
-			case EntityType.word: return this.words;
+			case AppEntityType.bookmark: return this.bookmarks;
+			case AppEntityType.note: return this.notes;
+			case AppEntityType.noteContent: return this.noteContent;
+			case AppEntityType.project: return this.projects;
+			case AppEntityType.quizEntry: return this.quizEntries;
+			case AppEntityType.quote: return this.quotes;
+			case AppEntityType.task: return this.tasks;
+			case AppEntityType.word: return this.words;
 
 		}
 		throw Error('Unknown entity');

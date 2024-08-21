@@ -1,4 +1,4 @@
-import { Task, TaskCategory, TaskPriority, TaskState, EntityType, emptyNameBase } from '@lib';
+import { Task, TaskCategory, TaskPriority, TaskState, AppEntityType, emptyNameBase } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { TaskLocalRepository } from 'lib/repositories/local/project-task.repository';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,7 +8,7 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class DexieTasksRepositoryImpl extends EntityLocalRepositoryImpl<Task> implements TaskLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, EntityType.task);
+		super(db, AppEntityType.task);
 	}
 
 	protected override newItemFromPartial(item: Partial<Task>): Task {

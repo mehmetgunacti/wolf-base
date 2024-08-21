@@ -1,4 +1,4 @@
-import { AppEntity, EntityType, Progress, QuizProgress } from '@lib';
+import { AppEntities, AppEntityType, Progress, QuizProgress } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { QuizEntryLocalRepository } from 'lib/repositories/local/quiz-entry.repository';
 import { WolfBaseDB } from '../wolfbase.database';
@@ -7,7 +7,7 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class DexieQuizEntriesRepositoryImpl extends EntityLocalRepositoryImpl<QuizProgress> implements QuizEntryLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, EntityType.quizEntry);
+		super(db, AppEntityType.quizEntry);
 	}
 
 	protected override newItemFromPartial(item: Partial<QuizProgress>): QuizProgress {
@@ -34,7 +34,7 @@ export class DexieQuizEntriesRepositoryImpl extends EntityLocalRepositoryImpl<Qu
 
 	async putEntry(entry: QuizProgress): Promise<void> {
 
-		await this.db.table(AppEntity[EntityType.quizEntry].plural).put(entry);
+		await this.db.table(AppEntities[AppEntityType.quizEntry].plural).put(entry);
 
 	}
 

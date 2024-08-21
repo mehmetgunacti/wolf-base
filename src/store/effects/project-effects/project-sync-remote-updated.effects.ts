@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, EntityType } from '@lib';
+import { SyncService, AppEntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
@@ -22,7 +22,7 @@ export class ProjectSyncRemoteUpdatedEffects {
 			withLatestFrom(this.store.select(selProject_RemoteUpdated)),
 			switchMap(([, items]) =>
 
-				this.syncService.downloadUpdated(EntityType.project, items).pipe(
+				this.syncService.downloadUpdated(AppEntityType.project, items).pipe(
 
 					map(item => projectActions.loadOne({ id: item.id }))
 

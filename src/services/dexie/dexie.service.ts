@@ -1,4 +1,4 @@
-import { Entity, EntityType, LocalRepositoryNames, LocalRepositoryService } from '@lib';
+import { Entity, AppEntityType, LocalRepositoryNames, LocalRepositoryService } from '@lib';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository, NotesLocalRepository, ProjectLocalRepository, QuoteLocalRepository, WordLocalRepository } from 'lib/repositories/local';
 import { TaskLocalRepository } from 'lib/repositories/local/project-task.repository';
 import { QuizEntryLocalRepository } from 'lib/repositories/local/quiz-entry.repository';
@@ -43,18 +43,18 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 	}
 
-	getRepository<T extends Entity>(entityType: EntityType): EntityLocalRepository<T> {
+	getRepository<T extends Entity>(entityType: AppEntityType): EntityLocalRepository<T> {
 
 		switch (entityType) {
 
-			case EntityType.bookmark: return this.bookmarks as unknown as EntityLocalRepository<T>;
-			case EntityType.note: return this.notes as unknown as EntityLocalRepository<T>;
-			case EntityType.noteContent: return this.noteContent as unknown as EntityLocalRepository<T>;
-			case EntityType.project: return this.projects as unknown as EntityLocalRepository<T>;
-			case EntityType.quizEntry: return this.quizEntries as unknown as EntityLocalRepository<T>;
-			case EntityType.quote: return this.quotes as unknown as EntityLocalRepository<T>;
-			case EntityType.task: return this.tasks as unknown as EntityLocalRepository<T>;
-			case EntityType.word: return this.words as unknown as EntityLocalRepository<T>;
+			case AppEntityType.bookmark: return this.bookmarks as unknown as EntityLocalRepository<T>;
+			case AppEntityType.note: return this.notes as unknown as EntityLocalRepository<T>;
+			case AppEntityType.noteContent: return this.noteContent as unknown as EntityLocalRepository<T>;
+			case AppEntityType.project: return this.projects as unknown as EntityLocalRepository<T>;
+			case AppEntityType.quizEntry: return this.quizEntries as unknown as EntityLocalRepository<T>;
+			case AppEntityType.quote: return this.quotes as unknown as EntityLocalRepository<T>;
+			case AppEntityType.task: return this.tasks as unknown as EntityLocalRepository<T>;
+			case AppEntityType.word: return this.words as unknown as EntityLocalRepository<T>;
 
 		}
 		throw Error('Unknown entity');

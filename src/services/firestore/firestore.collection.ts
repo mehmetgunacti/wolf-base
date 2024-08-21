@@ -1,5 +1,5 @@
 import { FIRESTORE_VALUE, FirestoreBatchGetURL, FirestoreConverter, FirestoreCreateURL, FirestoreDTO, FirestoreDocumentURL, FirestoreListURL, FirestorePatchURL } from '@lib';
-import { AppEntity, EntityType, UUID } from "lib/constants";
+import { AppEntities, AppEntityType, UUID } from "lib/constants";
 import { FirestoreConfig, RemoteData, RemoteMetadata } from "lib/models";
 import { Entity } from "lib/models/entity.model";
 import { EntityRemoteRepository } from 'lib/repositories/remote';
@@ -14,10 +14,10 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 	constructor(
 		protected firestore: FirestoreAPIClient,
 		protected firestoreConfig: FirestoreConfig,
-		protected entity: EntityType,
+		protected entity: AppEntityType,
 		protected converter: FirestoreConverter<T>
 	) {
-		this.collection = AppEntity[entity].plural;
+		this.collection = AppEntities[entity].plural;
 	}
 
 	upload(item: T): Observable<RemoteMetadata> {

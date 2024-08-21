@@ -1,4 +1,4 @@
-import { AppEntity, EntityType, LocalRepositoryNames, LogCategory, capitalize } from '@lib';
+import { AppEntities, AppEntityType, LocalRepositoryNames, LogCategory, capitalize } from '@lib';
 import { Collection, IndexableType, Table } from 'dexie';
 import { UUID } from 'lib/constants/common.constant';
 import { RemoteData, RemoteMetadata, SyncData } from 'lib/models';
@@ -12,9 +12,9 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	constructor(
 		protected db: WolfBaseDB,
-		protected entity: EntityType
+		protected entity: AppEntityType
 	) {
-		this.tablename = AppEntity[entity].plural;
+		this.tablename = AppEntities[entity].plural;
 	}
 
 	async getEntity(id: UUID): Promise<T | null> {
@@ -127,7 +127,7 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 				category: LogCategory.entity_created,
 				date: new Date().toISOString(),
-				message: `"${capitalize(AppEntity[this.entity].name)}" created`,
+				message: `"${capitalize(AppEntities[this.entity].name)}" created`,
 				entityId: newItem.id,
 				entityName: newItem.name
 
@@ -160,7 +160,7 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 					category: LogCategory.entity_updated,
 					date: new Date().toISOString(),
-					message: `"${capitalize(AppEntity[this.entity].name)}" updated`,
+					message: `"${capitalize(AppEntities[this.entity].name)}" updated`,
 					entityId: id,
 					entityName: item.name
 
@@ -237,7 +237,7 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 				category: LogCategory.entity_deleted,
 				date: new Date().toISOString(),
-				message: `"${capitalize(AppEntity[this.entity].name)}" moved to trash`,
+				message: `"${capitalize(AppEntities[this.entity].name)}" moved to trash`,
 				entityId: id,
 				entityName: entity?.name ?? '[n/a]'
 

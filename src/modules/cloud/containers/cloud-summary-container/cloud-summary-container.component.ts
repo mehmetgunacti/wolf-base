@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
-import { CloudTask, EntityType, SyncTaskType } from 'lib';
+import { CloudTask, AppEntityType, SyncTaskType } from 'lib';
 import { Observable } from 'rxjs';
 import * as bmActions from 'store/actions/bookmark.actions';
 import * as contentActions from 'store/actions/note-content.actions';
@@ -297,28 +297,28 @@ function getTaskAction(taskType: SyncTaskType): Action | null {
 
 function getAction(task: CloudTask): Action | null {
 
-	if (EntityType.bookmark === task.entity)
+	if (AppEntityType.bookmark === task.entity)
 		return getBookmarkAction(task.type);
 
-	if (EntityType.note === task.entity)
+	if (AppEntityType.note === task.entity)
 		return getNoteAction(task.type);
 
-	if (EntityType.noteContent === task.entity)
+	if (AppEntityType.noteContent === task.entity)
 		return getNoteContentAction(task.type);
 
-	if (EntityType.word === task.entity)
+	if (AppEntityType.word === task.entity)
 		return getWordAction(task.type);
 
-	if (EntityType.quote === task.entity)
+	if (AppEntityType.quote === task.entity)
 		return getQuoteAction(task.type);
 
-	if (EntityType.quizEntry === task.entity)
+	if (AppEntityType.quizEntry === task.entity)
 		return getQuizEntryAction(task.type);
 
-	if (EntityType.project === task.entity)
+	if (AppEntityType.project === task.entity)
 		return getProjectAction(task.type);
 
-	if (EntityType.task === task.entity)
+	if (AppEntityType.task === task.entity)
 		return getTaskAction(task.type);
 
 	return null;

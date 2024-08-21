@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, EntityType } from '@lib';
+import { SyncService, AppEntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class ProjectSyncEffects {
 			ofType(startSync),
 			switchMap(() =>
 
-				this.syncService.downloadMetadata(EntityType.project).pipe(
+				this.syncService.downloadMetadata(AppEntityType.project).pipe(
 					map(() => loadAllRemoteMetadata())
 				)
 

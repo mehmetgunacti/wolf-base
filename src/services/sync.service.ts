@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { Entity, EntityType, LocalRepositoryService, NameBase, RemoteData, RemoteMetadata, SyncData, SyncService } from '@lib';
+import { Entity, AppEntityType, LocalRepositoryService, NameBase, RemoteData, RemoteMetadata, SyncData, SyncService } from '@lib';
 import { LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE } from 'app/app.config';
 import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
 import { Observable, concatMap, filter, from, iif, map, of, switchMap } from 'rxjs';
@@ -9,7 +9,7 @@ export class SyncServiceImpl implements SyncService {
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 	private remoteRepository: RemoteRepositoryService = inject(REMOTE_REPOSITORY_SERVICE);
 
-	downloadMetadata(entityType: EntityType): Observable<number> {
+	downloadMetadata(entityType: AppEntityType): Observable<number> {
 
 		// download remote metadata list
 		return this.remoteRepository.getRepository(entityType).downloadAllMetadata().pipe(
@@ -30,7 +30,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadNew(entityType: EntityType, items: NameBase[]): Observable<NameBase> {
+	uploadNew(entityType: AppEntityType, items: NameBase[]): Observable<NameBase> {
 
 		return from(items).pipe(
 
@@ -54,7 +54,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadUpdated(entityType: EntityType, items: NameBase[]): Observable<RemoteMetadata> {
+	uploadUpdated(entityType: AppEntityType, items: NameBase[]): Observable<RemoteMetadata> {
 
 		return from(items).pipe(
 
@@ -119,7 +119,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	private uploadAndStore(entityType: EntityType, entity: Entity): Observable<RemoteMetadata> {
+	private uploadAndStore(entityType: AppEntityType, entity: Entity): Observable<RemoteMetadata> {
 
 		return this.remoteRepository.getRepository(entityType).upload(entity).pipe(
 
@@ -136,7 +136,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadDeleted(entityType: EntityType, items: NameBase[]): Observable<NameBase> {
+	uploadDeleted(entityType: AppEntityType, items: NameBase[]): Observable<NameBase> {
 
 		return from(items).pipe(
 
@@ -184,19 +184,19 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	downloadNew(entityType: EntityType, items: NameBase[]): Observable<NameBase> {
+	downloadNew(entityType: AppEntityType, items: NameBase[]): Observable<NameBase> {
 
 		return this.downloadAndStore(entityType, items);
 
 	}
 
-	downloadUpdated(entityType: EntityType, items: NameBase[]): Observable<NameBase> {
+	downloadUpdated(entityType: AppEntityType, items: NameBase[]): Observable<NameBase> {
 
 		return this.downloadAndStore(entityType, items);
 
 	}
 
-	private downloadAndStore(entityType: EntityType, items: NameBase[]): Observable<NameBase> {
+	private downloadAndStore(entityType: AppEntityType, items: NameBase[]): Observable<NameBase> {
 
 		return from(items).pipe(
 
@@ -226,7 +226,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	downloadDeleted(entityType: EntityType, items: NameBase[]): Observable<NameBase> {
+	downloadDeleted(entityType: AppEntityType, items: NameBase[]): Observable<NameBase> {
 
 		return from(items).pipe(
 

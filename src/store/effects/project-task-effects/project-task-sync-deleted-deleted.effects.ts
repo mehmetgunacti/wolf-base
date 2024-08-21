@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, EntityType } from '@lib';
+import { SyncService, AppEntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
@@ -22,7 +22,7 @@ export class TaskSyncDeletedDeletedEffects {
 			withLatestFrom(this.store.select(selTask_LocalDeletedRemoteDeleted)),
 			switchMap(([, items]) =>
 
-				this.syncService.downloadDeleted(EntityType.task, items).pipe(
+				this.syncService.downloadDeleted(AppEntityType.task, items).pipe(
 
 					map(item => taskActions.unloadOne({ id: item.id }))
 

@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, EntityType } from '@lib';
+import { SyncService, AppEntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
@@ -22,7 +22,7 @@ export class NoteContentSyncLocalDeletedEffects {
 			withLatestFrom(this.store.select(selNoteContent_LocalDeleted)),
 			switchMap(([, entities]) =>
 
-				this.syncService.uploadDeleted(EntityType.noteContent, entities).pipe(
+				this.syncService.uploadDeleted(AppEntityType.noteContent, entities).pipe(
 
 					map(item => actions.unloadOne({ id: item.id }))
 

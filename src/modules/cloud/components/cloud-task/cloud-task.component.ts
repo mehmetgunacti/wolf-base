@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { CloudTask, SyncTaskType, EntityType } from 'lib';
+import { CloudTask, SyncTaskType, AppEntityType } from 'lib';
 
 function toAction(type: SyncTaskType): 'upload' | 'download' | 'view' {
 
@@ -34,7 +34,7 @@ function toAction(type: SyncTaskType): 'upload' | 'download' | 'view' {
 })
 export class CloudTaskComponent {
 
-	EntityType = EntityType;
+	EntityType = AppEntityType;
 	CloudTaskType = SyncTaskType;
 	task!: CloudTask;
 	actionType!: 'upload' | 'download' | 'view';

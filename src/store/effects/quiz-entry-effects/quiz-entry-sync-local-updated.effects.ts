@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, EntityType } from '@lib';
+import { SyncService, AppEntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
@@ -22,7 +22,7 @@ export class QuizEntrySyncLocalUpdatedEffects {
 			withLatestFrom(this.store.select(selQuizEntry_LocalUpdated)),
 			switchMap(([, items]) =>
 
-				this.syncService.uploadUpdated(EntityType.quizEntry, items).pipe(
+				this.syncService.uploadUpdated(AppEntityType.quizEntry, items).pipe(
 
 					map(item => quizEntryActions.loadOne({ id: item.id }))
 

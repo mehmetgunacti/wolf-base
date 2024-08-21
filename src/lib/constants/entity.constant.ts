@@ -1,4 +1,4 @@
-export enum EntityType {
+export enum AppEntityType {
 
 	bookmark	= 'bookmark',
 	note		= 'note',
@@ -11,7 +11,7 @@ export enum EntityType {
 
 }
 
-export class EntityName {
+export class AppEntity {
 
 	constructor(
 		public name: string,
@@ -20,23 +20,22 @@ export class EntityName {
 		public labelPlural: string
 	) { }
 
-	toString(): string {
-
-		return this.plural;
-
-	}
+	toString()		: string { return this.plural; }
+	get _sync()		: string { return this.plural + '_sync'; }
+	get _remote()	: string { return this.plural + '_remote'; }
+	get _trash()	: string { return this.plural + '_trash'; }
 
 }
 
-export const AppEntity: Record<EntityType, EntityName> = {
+export const AppEntities: Record<AppEntityType, AppEntity> = {
 
-	[EntityType.bookmark]:		new EntityName('bookmark',		'bookmarks',		'Bookmark',		'Bookmarks'),
-	[EntityType.note]: 			new EntityName('note',			'notes',			'Note',			'Notes'),
-	[EntityType.noteContent]: 	new EntityName('note_content',	'note_content',		'Note Content',	'Note Content'),
-	[EntityType.project]: 		new EntityName('project',		'projects',			'Project',		'Projects'),
-	[EntityType.quizEntry]: 	new EntityName('quiz_entry',	'quiz_entries',		'Quiz Entry',	'Quiz Entries'),
-	[EntityType.quote]: 		new EntityName('quote',			'quotes',			'Quote',		'Quotes'),
-	[EntityType.task]: 			new EntityName('task',			'tasks',			'Task',			'Tasks'),
-	[EntityType.word]: 			new EntityName('word',			'words',			'Word',			'Words')
+	[AppEntityType.bookmark]:		new AppEntity('bookmark',		'bookmarks',		'Bookmark',		'Bookmarks'),
+	[AppEntityType.note]: 			new AppEntity('note',			'notes',			'Note',			'Notes'),
+	[AppEntityType.noteContent]: 	new AppEntity('note_content',	'note_content',		'Note Content',	'Note Content'),
+	[AppEntityType.project]: 		new AppEntity('project',		'projects',			'Project',		'Projects'),
+	[AppEntityType.quizEntry]: 		new AppEntity('quiz_entry',		'quiz_entries',		'Quiz Entry',	'Quiz Entries'),
+	[AppEntityType.quote]: 			new AppEntity('quote',			'quotes',			'Quote',		'Quotes'),
+	[AppEntityType.task]: 			new AppEntity('task',			'tasks',			'Task',			'Tasks'),
+	[AppEntityType.word]: 			new AppEntity('word',			'words',			'Word',			'Words')
 
 }
