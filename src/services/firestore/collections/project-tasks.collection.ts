@@ -23,7 +23,7 @@ class TaskFirestoreConverter implements FirestoreConverter<Task> {
 	namebaseConverter = new NameBaseFirestoreConverter();
 
 	toFirestore(entry: Task): Record<keyof Task, FIRESTORE_VALUE> {
-		console.log(entry);
+
 		const fields = {} as Record<keyof Task, FIRESTORE_VALUE>;
 
 		fields['name'] = { stringValue: entry.name };
