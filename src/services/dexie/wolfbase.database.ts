@@ -109,7 +109,7 @@ export class WolfBaseDB extends Dexie {
 		this.bookmarks_sync 		= this.table(AppEntities.bookmark.table_sync);
 		this.bookmarks_remote		= this.table(AppEntities.bookmark.table_remote);
 		this.bookmarks_trash		= this.table(AppEntities.bookmark.table_trash);
-		this.bookmarks_clicks		= this.table(LocalRepositoryNames.bookmarks_clicks);
+		this.bookmarks_clicks		= this.table(AppEntities.bookmark.table_clicks);
 
 		this.notes					= this.table(AppEntities.note.table);
 		this.notes_sync				= this.table(AppEntities.note.table_sync);

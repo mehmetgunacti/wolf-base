@@ -27,15 +27,21 @@ export class AppEntity {
 
 }
 
-export const AppEntities: Record<AppEntityType, AppEntity> = {
+export class BookmarkEntity extends AppEntity {
 
-	[AppEntityType.bookmark]:		new AppEntity('bookmark',		'bookmarks',		'Bookmark',		'Bookmarks'),
-	[AppEntityType.note]: 			new AppEntity('note',			'notes',			'Note',			'Notes'),
-	[AppEntityType.noteContent]: 	new AppEntity('note_content',	'note_content',		'Note Content',	'Note Content'),
-	[AppEntityType.project]: 		new AppEntity('project',		'projects',			'Project',		'Projects'),
-	[AppEntityType.quizEntry]: 		new AppEntity('quiz_entry',		'quiz_entries',		'Quiz Entry',	'Quiz Entries'),
-	[AppEntityType.quote]: 			new AppEntity('quote',			'quotes',			'Quote',		'Quotes'),
-	[AppEntityType.task]: 			new AppEntity('task',			'tasks',			'Task',			'Tasks'),
-	[AppEntityType.word]: 			new AppEntity('word',			'words',			'Word',			'Words')
+	get table_clicks() : string { return this.plural + '_clicks'; }
+
+}
+
+export class AppEntities {
+
+	static [AppEntityType.bookmark]		=	new BookmarkEntity('bookmark',	'bookmarks',		'Bookmark',		'Bookmarks');
+	static [AppEntityType.note] 		=	new AppEntity('note',			'notes',			'Note',			'Notes');
+	static [AppEntityType.noteContent]	=	new AppEntity('note_content',	'note_content',		'Note Content',	'Note Content');
+	static [AppEntityType.project]		=	new AppEntity('project',		'projects',			'Project',		'Projects');
+	static [AppEntityType.quizEntry]	= 	new AppEntity('quiz_entry',		'quiz_entries',		'Quiz Entry',	'Quiz Entries');
+	static [AppEntityType.quote]		= 	new AppEntity('quote',			'quotes',			'Quote',		'Quotes');
+	static [AppEntityType.task]			= 	new AppEntity('task',			'tasks',			'Task',			'Tasks');
+	static [AppEntityType.word]			= 	new AppEntity('word',			'words',			'Word',			'Words');
 
 }

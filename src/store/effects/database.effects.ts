@@ -44,8 +44,8 @@ export class DatabaseEffects {
 				this.localRepository.count(AppEntities.bookmark.table_trash),
 				this.localRepository.size(AppEntities.bookmark.table_trash),
 
-				this.localRepository.count(LocalRepositoryNames.bookmarks_clicks),
-				this.localRepository.size(LocalRepositoryNames.bookmarks_clicks),
+				this.localRepository.count(AppEntities.bookmark.table_clicks),
+				this.localRepository.size(AppEntities.bookmark.table_clicks),
 
 				this.localRepository.count(AppEntities.note.table),
 				this.localRepository.size(AppEntities.note.table),
