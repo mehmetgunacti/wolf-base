@@ -78,26 +78,26 @@ export class WolfBaseDB extends Dexie {
 
 	// todo: not all tables are listed here?
 	// bookmarks
-	bookmarks: Dexie.Table<Bookmark, UUID>;
-	bookmarks_sync: Dexie.Table<SyncData, UUID>;
-	bookmarks_remote: Dexie.Table<RemoteMetadata, UUID>;
-	bookmarks_trash: Dexie.Table<Bookmark, number>;
-	bookmarks_clicks: Dexie.Table<Click, UUID>;
+	// bookmarks: Dexie.Table<Bookmark, UUID>;
+	// bookmarks_sync: Dexie.Table<SyncData, UUID>;
+	// bookmarks_remote: Dexie.Table<RemoteMetadata, UUID>;
+	// bookmarks_trash: Dexie.Table<Bookmark, number>;
+	// bookmarks_clicks: Dexie.Table<Click, UUID>;
 
-	// notes
-	notes: Dexie.Table<Note, UUID>;
-	notes_sync: Dexie.Table<SyncData, UUID>;
-	notes_remote: Dexie.Table<RemoteMetadata, UUID>;
-	notes_trash: Dexie.Table<Note, number>;
+	// // notes
+	// notes: Dexie.Table<Note, UUID>;
+	// notes_sync: Dexie.Table<SyncData, UUID>;
+	// notes_remote: Dexie.Table<RemoteMetadata, UUID>;
+	// notes_trash: Dexie.Table<Note, number>;
 
-	// note content
-	note_content: Dexie.Table<string, UUID>;
-	note_content_sync: Dexie.Table<SyncData, UUID>;
-	note_content_remote: Dexie.Table<RemoteMetadata, UUID>;
-	note_content_trash: Dexie.Table<string, number>;
+	// // note content
+	// note_content: Dexie.Table<string, UUID>;
+	// note_content_sync: Dexie.Table<SyncData, UUID>;
+	// note_content_remote: Dexie.Table<RemoteMetadata, UUID>;
+	// note_content_trash: Dexie.Table<string, number>;
 
-	configuration: Dexie.Table<string | boolean, typeof CONF_KEYS>;
-	logs: Dexie.Table<LogMessage, number>;
+	// configuration: Dexie.Table<string | boolean, typeof CONF_KEYS>;
+	// logs: Dexie.Table<LogMessage, number>;
 
 	constructor(conf: DexieConfiguration) {
 
@@ -105,24 +105,24 @@ export class WolfBaseDB extends Dexie {
 		this.version(conf.version)
 			.stores(conf.tables);
 
-		this.bookmarks 				= this.table(AppEntities.bookmark.table);
-		this.bookmarks_sync 		= this.table(AppEntities.bookmark.table_sync);
-		this.bookmarks_remote		= this.table(AppEntities.bookmark.table_remote);
-		this.bookmarks_trash		= this.table(AppEntities.bookmark.table_trash);
-		this.bookmarks_clicks		= this.table(AppEntities.bookmark.table_clicks);
+		// this.bookmarks 				= this.table(AppEntities.bookmark.table);
+		// this.bookmarks_sync 		= this.table(AppEntities.bookmark.table_sync);
+		// this.bookmarks_remote		= this.table(AppEntities.bookmark.table_remote);
+		// this.bookmarks_trash		= this.table(AppEntities.bookmark.table_trash);
+		// this.bookmarks_clicks		= this.table(AppEntities.bookmark.table_clicks);
 
-		this.notes					= this.table(AppEntities.note.table);
-		this.notes_sync				= this.table(AppEntities.note.table_sync);
-		this.notes_remote			= this.table(AppEntities.note.table_remote);
-		this.notes_trash			= this.table(AppEntities.note.table_trash);
+		// this.notes					= this.table(AppEntities.note.table);
+		// this.notes_sync				= this.table(AppEntities.note.table_sync);
+		// this.notes_remote			= this.table(AppEntities.note.table_remote);
+		// this.notes_trash			= this.table(AppEntities.note.table_trash);
 
-		this.note_content			= this.table(AppEntities.noteContent.table);
-		this.note_content_sync		= this.table(AppEntities.noteContent.table_sync);
-		this.note_content_remote	= this.table(AppEntities.noteContent.table_remote);
-		this.note_content_trash		= this.table(AppEntities.noteContent.table_trash);
+		// this.note_content			= this.table(AppEntities.noteContent.table);
+		// this.note_content_sync		= this.table(AppEntities.noteContent.table_sync);
+		// this.note_content_remote	= this.table(AppEntities.noteContent.table_remote);
+		// this.note_content_trash		= this.table(AppEntities.noteContent.table_trash);
 
-		this.configuration			= this.table(LocalRepositoryNames.configuration);
-		this.logs					= this.table(LocalRepositoryNames.logs);
+		// this.configuration			= this.table(LocalRepositoryNames.configuration);
+		// this.logs					= this.table(LocalRepositoryNames.logs);
 
 		this.on('ready', async (db) => {
 

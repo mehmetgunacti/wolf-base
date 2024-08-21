@@ -1,4 +1,4 @@
-import { AppEntities, AppEntityType, LogCategory, SyncData, toggleArrayItem } from '@lib';
+import { AppEntities, LocalRepositoryNames, LogCategory, SyncData, toggleArrayItem } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { BookmarksLocalRepository } from 'lib/repositories/local';
@@ -9,7 +9,7 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Bookmark> implements BookmarksLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, AppEntityType.bookmark);
+		super(db, AppEntities.bookmark);
 	}
 
 	protected override newItemFromPartial(item: Partial<Bookmark>): Bookmark {
@@ -43,7 +43,7 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 		], async () => {
 
 			// update bookmarks table
-			const count = await this.db.bookmarks.where({ id }).modify((bookmark: Bookmark): void => {
+			const count = await this.db.table(this.appEntity.table).where({ id }).modify((bookmark: Bookmark): void => {
 
 				bookmark.tags = toggleArrayItem(bookmark.tags, name);
 
@@ -51,7 +51,7 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 
 			// update syncData
 			if (count > 0)
-				await this.db.bookmarks_sync.where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
+				await this.db.table(this.appEntity.table_sync).where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
 
 		});
 
@@ -60,7 +60,7 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 	async click(id: UUID): Promise<void> {
 
 		// try to increment value (update)
-		const affected = await this.db.bookmarks_clicks
+		const affected = await this.db.table(AppEntities.bookmark.table_clicks)
 			.where({ id })
 			.modify((click: Click): void => {
 
@@ -71,7 +71,7 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 
 		// if no object found, create one
 		if (affected !== 1)
-			await this.db.bookmarks_clicks.add({
+			await this.db.table(AppEntities.bookmark.table_clicks).add({
 				id,
 				total: 1,
 				current: 1
@@ -81,19 +81,19 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 
 	async getClick(id: string): Promise<Click | null> {
 
-		return await this.db.bookmarks_clicks.get(id) ?? null;
+		return await this.db.table(AppEntities.bookmark.table_clicks).get(id) ?? null;
 
 	}
 
 	async listClicked(): Promise<Click[]> {
 
-		return await this.db.bookmarks_clicks.where('current').above(0).toArray();
+		return await this.db.table(AppEntities.bookmark.table_clicks).where('current').above(0).toArray();
 
 	}
 
 	async storeClick(click: Click): Promise<Click> {
 
-		await this.db.bookmarks_clicks.put(click);
+		await this.db.table(AppEntities.bookmark.table_clicks).put(click);
 		return click;
 
 	}
@@ -101,14 +101,14 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 	async storeClicks(items: Click[]): Promise<Click[]> {
 
 		// remove obsolete click objects
-		const bookmarkIds = new Set(await this.db.bookmarks.toCollection().primaryKeys() as UUID[]);
+		const bookmarkIds = new Set(await this.db.table(this.appEntity.table).toCollection().primaryKeys() as UUID[]);
 		const matching = items.filter(({ id }) => bookmarkIds.has(id));
-		await this.db.transaction('rw', [this.db.bookmarks_clicks, this.db.logs], async () => {
+		await this.db.transaction('rw', [AppEntities.bookmark.table_clicks, LocalRepositoryNames.logs], async () => {
 
-			await this.db.bookmarks_clicks.clear();
-			await this.db.bookmarks_clicks.bulkAdd(matching);
+			await this.db.table(AppEntities.bookmark.table_clicks).clear();
+			await this.db.table(AppEntities.bookmark.table_clicks).bulkAdd(matching);
 			// add log
-			await this.db.logs.add({
+			await this.db.table(LocalRepositoryNames.logs).add({
 				category: LogCategory.store_clicks,
 				date: new Date().toISOString(),
 				message: `${items.length} downloaded, ${matching.length} stored`
@@ -121,7 +121,7 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 
 	async listClicks(): Promise<Click[]> {
 
-		return await this.db.bookmarks_clicks.toArray();
+		return await this.db.table(AppEntities.bookmark.table_clicks).toArray();
 
 	}
 
