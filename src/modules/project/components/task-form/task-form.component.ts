@@ -1,5 +1,7 @@
+import { formatDate } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, output } from '@angular/core';
-import { NameBase, TAG_OPTIONAL, TASK_CATEGORIES, TASK_PRIORITIES, TASK_STATE, Task, UUID, elseEmptyArray, isInvalid } from 'lib';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NameBase, TAG_OPTIONAL, TASK_CATEGORIES, TASK_PRIORITIES, TASK_STATE, Task, TaskState, UUID, elseEmptyArray, isInvalid } from 'lib';
 import { TASK_FORM, TaskForm } from './task-form';
 
 @Component({
@@ -52,6 +54,20 @@ export class TaskFormComponent {
 			}
 
 		});
+
+		// set end date depending on status
+		this.form.status.valueChanges
+			.pipe(takeUntilDestroyed())
+			.subscribe(
+				val => {
+
+					if (val === TaskState.completed || val === TaskState.abandoned)
+						this.form.end.setValue(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
+					else
+						this.form.end.setValue(null);
+
+				}
+			);
 
 	}
 
