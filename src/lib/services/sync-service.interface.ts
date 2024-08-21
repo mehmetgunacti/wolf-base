@@ -1,22 +1,22 @@
-import { EntityName } from 'lib/constants';
+import { EntityType } from 'lib/constants';
 import { Click, NameBase } from 'lib/models';
 import { Observable } from 'rxjs';
 
 export interface SyncService {
 
-	downloadMetadata(entityName: EntityName): Observable<number>;
+	downloadMetadata(entityType: EntityType): Observable<number>;
 
-	uploadNew(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
+	uploadNew(entityType: EntityType, items: NameBase[]): Observable<NameBase>;
 
-	uploadUpdated(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
+	uploadUpdated(entityType: EntityType, items: NameBase[]): Observable<NameBase>;
 
-	uploadDeleted(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
+	uploadDeleted(entityType: EntityType, items: NameBase[]): Observable<NameBase>;
 
-	downloadNew(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
+	downloadNew(entityType: EntityType, items: NameBase[]): Observable<NameBase>;
 
-	downloadUpdated(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
+	downloadUpdated(entityType: EntityType, items: NameBase[]): Observable<NameBase>;
 
-	downloadDeleted(entityName: EntityName, items: NameBase[]): Observable<NameBase>;
+	downloadDeleted(entityType: EntityType, items: NameBase[]): Observable<NameBase>;
 
 }
 

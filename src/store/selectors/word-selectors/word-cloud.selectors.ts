@@ -1,4 +1,4 @@
-import { CloudTask, NameBase, SyncTaskType, UUID, WolfEntity, toCloudTask } from '@lib';
+import { CloudTask, NameBase, SyncTaskType, UUID, EntityType, toCloudTask } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selWord_array } from './word-entities.selectors';
 import { selWordRemoteMetadataArray, selWordRemoteMetadataMap, selWordSyncDataArray, selWordSyncDataMap } from './word-sync.selectors';
@@ -161,25 +161,25 @@ const selWord_NonConflictCloudTasks = createSelector(
 		const tasks: CloudTask[] = [];
 
 		if (localNew.length > 0)
-			tasks.push(toCloudTask(localNew, WolfEntity.word, SyncTaskType.local_new));
+			tasks.push(toCloudTask(localNew, EntityType.word, SyncTaskType.local_new));
 
 		if (localUpdated.length > 0)
-			tasks.push(toCloudTask(localUpdated, WolfEntity.word, SyncTaskType.local_updated));
+			tasks.push(toCloudTask(localUpdated, EntityType.word, SyncTaskType.local_updated));
 
 		if (localDeleted.length > 0)
-			tasks.push(toCloudTask(localDeleted, WolfEntity.word, SyncTaskType.local_deleted));
+			tasks.push(toCloudTask(localDeleted, EntityType.word, SyncTaskType.local_deleted));
 
 		if (remoteNew.length > 0)
-			tasks.push(toCloudTask(remoteNew, WolfEntity.word, SyncTaskType.remote_new));
+			tasks.push(toCloudTask(remoteNew, EntityType.word, SyncTaskType.remote_new));
 
 		if (remoteUpdated.length > 0)
-			tasks.push(toCloudTask(remoteUpdated, WolfEntity.word, SyncTaskType.remote_updated));
+			tasks.push(toCloudTask(remoteUpdated, EntityType.word, SyncTaskType.remote_updated));
 
 		if (remoteDeleted.length > 0)
-			tasks.push(toCloudTask(remoteDeleted, WolfEntity.word, SyncTaskType.remote_deleted));
+			tasks.push(toCloudTask(remoteDeleted, EntityType.word, SyncTaskType.remote_deleted));
 
 		if (localDeletedRemoteDeleted.length > 0)
-			tasks.push(toCloudTask(localDeletedRemoteDeleted, WolfEntity.word, SyncTaskType.deleted_deleted));
+			tasks.push(toCloudTask(localDeletedRemoteDeleted, EntityType.word, SyncTaskType.deleted_deleted));
 
 		return tasks;
 
@@ -201,13 +201,13 @@ const selWord_ConflictCloudTasks = createSelector(
 		const tasks: CloudTask[] = [];
 
 		if (localUpdatedRemoteUpdated.length > 0)
-			tasks.push(toCloudTask(localUpdatedRemoteUpdated, WolfEntity.word, SyncTaskType.updated_updated));
+			tasks.push(toCloudTask(localUpdatedRemoteUpdated, EntityType.word, SyncTaskType.updated_updated));
 
 		if (localUpdatedRemoteDeleted.length > 0)
-			tasks.push(toCloudTask(localUpdatedRemoteDeleted, WolfEntity.word, SyncTaskType.updated_deleted));
+			tasks.push(toCloudTask(localUpdatedRemoteDeleted, EntityType.word, SyncTaskType.updated_deleted));
 
 		if (localDeletedRemoteUpdated.length > 0)
-			tasks.push(toCloudTask(localDeletedRemoteUpdated, WolfEntity.word, SyncTaskType.deleted_updated));
+			tasks.push(toCloudTask(localDeletedRemoteUpdated, EntityType.word, SyncTaskType.deleted_updated));
 
 		return tasks;
 

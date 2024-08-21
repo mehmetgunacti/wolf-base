@@ -1,6 +1,6 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Note, UUID, WolfEntity } from 'lib';
+import { Note, UUID, EntityType } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { create } from 'store/actions/entity.actions';
 import { selNote_array, selNote_selected } from 'store/selectors/note-selectors/note-entities.selectors';
@@ -61,7 +61,7 @@ export class NoteNewFormContainerComponent implements OnInit, AfterContentInit {
 
 	onCreate(entity: Partial<Note>): void {
 
-		this.store.dispatch(create({ entityName: WolfEntity.note, entity }));
+		this.store.dispatch(create({ entityType: EntityType.note, entity }));
 
 	}
 

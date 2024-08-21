@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, WolfEntity } from '@lib';
+import { SyncService, EntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
@@ -22,7 +22,7 @@ export class BookmarkSyncLocalDeletedEffects {
 			withLatestFrom(this.store.select(selBookmarkLocalDeleted)),
 			switchMap(([, entities]) =>
 
-				this.syncService.uploadDeleted(WolfEntity.bookmark, entities).pipe(
+				this.syncService.uploadDeleted(EntityType.bookmark, entities).pipe(
 
 					map(item => bmActions.unloadOne({ id: item.id }))
 

@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, WolfEntity } from '@lib';
+import { SyncService, EntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
@@ -22,7 +22,7 @@ export class ProjectSyncRemoteNewEffects {
 			withLatestFrom(this.store.select(selProject_RemoteNew)),
 			switchMap(([, items]) =>
 
-				this.syncService.downloadNew(WolfEntity.project, items).pipe(
+				this.syncService.downloadNew(EntityType.project, items).pipe(
 
 					map(item => projectActions.loadOne({ id: item.id }))
 

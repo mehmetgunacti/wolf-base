@@ -1,15 +1,15 @@
-import { Entity, EntityName, LocalRepositoryNames, LocalRepositoryService, WolfEntity } from '@lib';
+import { Entity, EntityType, LocalRepositoryNames, LocalRepositoryService } from '@lib';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository, NotesLocalRepository, ProjectLocalRepository, QuoteLocalRepository, WordLocalRepository } from 'lib/repositories/local';
+import { TaskLocalRepository } from 'lib/repositories/local/project-task.repository';
+import { QuizEntryLocalRepository } from 'lib/repositories/local/quiz-entry.repository';
 import { DexieBookmarksRepositoryImpl, DexieConfigurationRepositoryImpl, DexieLogsLocalRepositoryImpl, DexieQuotesRepositoryImpl } from './tables';
 import { DexieNoteContentRepositoryImpl } from './tables/notes-content.table';
 import { DexieNotesRepositoryImpl } from './tables/notes.table';
+import { DexieTasksRepositoryImpl } from './tables/project-tasks.table';
+import { DexieProjectsRepositoryImpl } from './tables/projects.table';
+import { DexieQuizEntriesRepositoryImpl } from './tables/quiz-entries.table';
 import { DexieWordsRepositoryImpl } from './tables/words.table';
 import { WolfBaseDB, wolfBaseDBFactory } from './wolfbase.database';
-import { QuizEntryLocalRepository } from 'lib/repositories/local/quiz-entry.repository';
-import { DexieQuizEntriesRepositoryImpl } from './tables/quiz-entries.table';
-import { DexieProjectsRepositoryImpl } from './tables/projects.table';
-import { TaskLocalRepository } from 'lib/repositories/local/project-task.repository';
-import { DexieTasksRepositoryImpl } from './tables/project-tasks.table';
 
 export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
@@ -43,18 +43,18 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 	}
 
-	getRepository<T extends Entity>(entityName: EntityName): EntityLocalRepository<T> {
+	getRepository<T extends Entity>(entityType: EntityType): EntityLocalRepository<T> {
 
-		switch (entityName.name) {
+		switch (entityType) {
 
-			case WolfEntity.bookmark.name: return this.bookmarks as unknown as EntityLocalRepository<T>;
-			case WolfEntity.note.name: return this.notes as unknown as EntityLocalRepository<T>;
-			case WolfEntity.note_content.name: return this.noteContent as unknown as EntityLocalRepository<T>;
-			case WolfEntity.project.name: return this.projects as unknown as EntityLocalRepository<T>;
-			case WolfEntity.quizEntry.name: return this.quizEntries as unknown as EntityLocalRepository<T>;
-			case WolfEntity.quote.name: return this.quotes as unknown as EntityLocalRepository<T>;
-			case WolfEntity.task.name: return this.tasks as unknown as EntityLocalRepository<T>;
-			case WolfEntity.word.name: return this.words as unknown as EntityLocalRepository<T>;
+			case EntityType.bookmark: return this.bookmarks as unknown as EntityLocalRepository<T>;
+			case EntityType.note: return this.notes as unknown as EntityLocalRepository<T>;
+			case EntityType.noteContent: return this.noteContent as unknown as EntityLocalRepository<T>;
+			case EntityType.project: return this.projects as unknown as EntityLocalRepository<T>;
+			case EntityType.quizEntry: return this.quizEntries as unknown as EntityLocalRepository<T>;
+			case EntityType.quote: return this.quotes as unknown as EntityLocalRepository<T>;
+			case EntityType.task: return this.tasks as unknown as EntityLocalRepository<T>;
+			case EntityType.word: return this.words as unknown as EntityLocalRepository<T>;
 
 		}
 		throw Error('Unknown entity');

@@ -1,4 +1,4 @@
-import { FIRESTORE_VALUE, FirestoreConverter, WolfEntity } from '@lib';
+import { FIRESTORE_VALUE, FirestoreConverter, EntityType } from '@lib';
 import { FirestoreConfig, QuizProgress } from 'lib/models';
 import { QuizEntriesRemoteRepository } from 'lib/repositories/remote';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
@@ -10,7 +10,7 @@ export class QuizEntriesFirestoreCollectionImpl extends FirestoreRemoteStorageCo
 		super(
 			firestore,
 			firestoreConfig,
-			WolfEntity.quizEntry,
+			EntityType.quizEntry,
 			new QuizEntryFirestoreConverter()
 		);
 	}

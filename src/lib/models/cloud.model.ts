@@ -1,5 +1,5 @@
-import { EntityName } from "lib/constants";
-import { IDBase, NameBase } from './id-base.model';
+import { EntityType } from "lib/constants";
+import { NameBase } from './id-base.model';
 
 export enum SyncTaskType {
 
@@ -23,12 +23,12 @@ export enum SyncTaskType {
 export interface CloudTask {
 
 	items: NameBase[];
-	entity: EntityName;
+	entity: EntityType;
 	type: SyncTaskType;
 
 }
 
-export function toCloudTask(items: NameBase[], entity: EntityName, type: SyncTaskType): CloudTask {
+export function toCloudTask(items: NameBase[], entity: EntityType, type: SyncTaskType): CloudTask {
 
 	return { items, entity, type };
 

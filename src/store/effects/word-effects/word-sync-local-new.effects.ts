@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, WolfEntity } from '@lib';
+import { SyncService, EntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
@@ -22,7 +22,7 @@ export class WordSyncLocalNewEffects {
 			withLatestFrom(this.store.select(selWord_LocalNew)),
 			switchMap(([, items]) =>
 
-				this.syncService.uploadNew(WolfEntity.word, items).pipe(
+				this.syncService.uploadNew(EntityType.word, items).pipe(
 
 					map(item => wordActions.loadOne({ id: item.id }))
 

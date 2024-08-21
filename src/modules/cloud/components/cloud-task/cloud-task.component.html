@@ -2,52 +2,52 @@
 
 	<legend>
 
-		<ng-container [ngSwitch]="task.entity.name">
+		<ng-container [ngSwitch]="task.entity">
 
 			<!-- Bookmarks -->
-			<ng-container *ngSwitchCase="WolfEntity.bookmark.name">
+			<ng-container *ngSwitchCase="EntityType.bookmark">
 				<span class="material-symbols-outlined">bookmarks</span>
 				<span> Bookmarks</span>
 			</ng-container>
 
 			<!-- Notes -->
-			<ng-container *ngSwitchCase="WolfEntity.note.name">
+			<ng-container *ngSwitchCase="EntityType.note">
 				<span class="material-symbols-outlined">note_stack</span>
 				<span> Notes</span>
 			</ng-container>
 
 			<!-- Notes Content -->
-			<ng-container *ngSwitchCase="WolfEntity.note_content.name">
+			<ng-container *ngSwitchCase="EntityType.noteContent">
 				<span class="material-symbols-outlined">note_stack</span>
 				<span> Note Content</span>
 			</ng-container>
 
 			<!-- Projects -->
-			<ng-container *ngSwitchCase="WolfEntity.project.name">
+			<ng-container *ngSwitchCase="EntityType.project">
 				<span class="material-symbols-outlined">task_alt</span>
 				<span> Projects</span>
 			</ng-container>
 
 			<!-- Quotes -->
-			<ng-container *ngSwitchCase="WolfEntity.quote.name">
+			<ng-container *ngSwitchCase="EntityType.quote">
 				<span class="material-symbols-outlined">format_quote</span>
 				<span> Quotes</span>
 			</ng-container>
 
 			<!-- Quiz Entries -->
-			<ng-container *ngSwitchCase="WolfEntity.quizEntry.name">
+			<ng-container *ngSwitchCase="EntityType.quizEntry">
 				<span class="material-symbols-outlined">timer</span>
 				<span> Quiz Entries</span>
 			</ng-container>
 
 			<!-- Project Tasks -->
-			<ng-container *ngSwitchCase="WolfEntity.task.name">
+			<ng-container *ngSwitchCase="EntityType.task">
 				<span class="material-symbols-outlined">task_alt</span>
 				<span> Project Tasks</span>
 			</ng-container>
 
 			<!-- Words -->
-			<ng-container *ngSwitchCase="WolfEntity.word.name">
+			<ng-container *ngSwitchCase="EntityType.word">
 				<span class="material-symbols-outlined">dictionary</span>
 				<span> Words</span>
 			</ng-container>
@@ -93,7 +93,7 @@
 
 			<div>
 				<small>{{ item.id }}</small>
-				<span>{{ item.name }}</span>
+				<span>{{ item }}</span>
 			</div>
 
 		}

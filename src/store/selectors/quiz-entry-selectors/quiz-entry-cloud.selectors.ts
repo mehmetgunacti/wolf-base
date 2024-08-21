@@ -1,4 +1,4 @@
-import { CloudTask, NameBase, SyncTaskType, UUID, WolfEntity, toCloudTask } from '@lib';
+import { CloudTask, NameBase, SyncTaskType, UUID, EntityType, toCloudTask } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selQuizEntry_array } from './quiz-entry-entities.selectors';
 import { selQuizEntryRemoteMetadataArray, selQuizEntryRemoteMetadataMap, selQuizEntrySyncDataArray, selQuizEntrySyncDataMap } from './quiz-entry-sync.selectors';
@@ -161,25 +161,25 @@ const selQuizEntry_NonConflictCloudTasks = createSelector(
 		const tasks: CloudTask[] = [];
 
 		if (localNew.length > 0)
-			tasks.push(toCloudTask(localNew, WolfEntity.quizEntry, SyncTaskType.local_new));
+			tasks.push(toCloudTask(localNew, EntityType.quizEntry, SyncTaskType.local_new));
 
 		if (localUpdated.length > 0)
-			tasks.push(toCloudTask(localUpdated, WolfEntity.quizEntry, SyncTaskType.local_updated));
+			tasks.push(toCloudTask(localUpdated, EntityType.quizEntry, SyncTaskType.local_updated));
 
 		if (localDeleted.length > 0)
-			tasks.push(toCloudTask(localDeleted, WolfEntity.quizEntry, SyncTaskType.local_deleted));
+			tasks.push(toCloudTask(localDeleted, EntityType.quizEntry, SyncTaskType.local_deleted));
 
 		if (remoteNew.length > 0)
-			tasks.push(toCloudTask(remoteNew, WolfEntity.quizEntry, SyncTaskType.remote_new));
+			tasks.push(toCloudTask(remoteNew, EntityType.quizEntry, SyncTaskType.remote_new));
 
 		if (remoteUpdated.length > 0)
-			tasks.push(toCloudTask(remoteUpdated, WolfEntity.quizEntry, SyncTaskType.remote_updated));
+			tasks.push(toCloudTask(remoteUpdated, EntityType.quizEntry, SyncTaskType.remote_updated));
 
 		if (remoteDeleted.length > 0)
-			tasks.push(toCloudTask(remoteDeleted, WolfEntity.quizEntry, SyncTaskType.remote_deleted));
+			tasks.push(toCloudTask(remoteDeleted, EntityType.quizEntry, SyncTaskType.remote_deleted));
 
 		if (localDeletedRemoteDeleted.length > 0)
-			tasks.push(toCloudTask(localDeletedRemoteDeleted, WolfEntity.quizEntry, SyncTaskType.deleted_deleted));
+			tasks.push(toCloudTask(localDeletedRemoteDeleted, EntityType.quizEntry, SyncTaskType.deleted_deleted));
 
 		return tasks;
 
@@ -201,13 +201,13 @@ const selQuizEntry_ConflictCloudTasks = createSelector(
 		const tasks: CloudTask[] = [];
 
 		if (localUpdatedRemoteUpdated.length > 0)
-			tasks.push(toCloudTask(localUpdatedRemoteUpdated, WolfEntity.quizEntry, SyncTaskType.updated_updated));
+			tasks.push(toCloudTask(localUpdatedRemoteUpdated, EntityType.quizEntry, SyncTaskType.updated_updated));
 
 		if (localUpdatedRemoteDeleted.length > 0)
-			tasks.push(toCloudTask(localUpdatedRemoteDeleted, WolfEntity.quizEntry, SyncTaskType.updated_deleted));
+			tasks.push(toCloudTask(localUpdatedRemoteDeleted, EntityType.quizEntry, SyncTaskType.updated_deleted));
 
 		if (localDeletedRemoteUpdated.length > 0)
-			tasks.push(toCloudTask(localDeletedRemoteUpdated, WolfEntity.quizEntry, SyncTaskType.deleted_updated));
+			tasks.push(toCloudTask(localDeletedRemoteUpdated, EntityType.quizEntry, SyncTaskType.deleted_updated));
 
 		return tasks;
 

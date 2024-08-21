@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Entity, LocalRepositoryService, Note } from '@lib';
+import { AppEntity, Entity, LocalRepositoryService, Note } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
@@ -19,12 +19,12 @@ export class EntityCreateEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.create),
-			switchMap(({ entityName, entity }) =>
+			switchMap(({ entityType, entity }) =>
 
 				from(
-					this.localRepository.getRepository(entityName).create(entity)
+					this.localRepository.getRepository(entityType).create(entity)
 				).pipe(
-					map((entity: Entity) => actions.createSuccess({ entityName, entity }))
+					map((entity: Entity) => actions.createSuccess({ entityType, entity }))
 				)
 
 			)
@@ -38,7 +38,7 @@ export class EntityCreateEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.createSuccess),
-			map(({entityName}) => showNotification({ severity: 'success', detail: `${entityName.label} created` }))
+			map(({ entityType }) => showNotification({ severity: 'success', detail: `${AppEntity[entityType].label} created` }))
 
 		)
 
@@ -49,7 +49,7 @@ export class EntityCreateEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.createSuccess),
-			map(({ entity, entityName }) => navigate({ url: [`/${entityName.plural}`, entity.id] }))
+			map(({ entity, entityType }) => navigate({ url: [`/${AppEntity[entityType].plural}`, entity.id] }))
 
 		)
 
@@ -60,7 +60,7 @@ export class EntityCreateEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.createSuccess),
-			map(({ entityName, entity }) => actions.loadOne({ entityName, id: entity.id }))
+			map(({ entityType, entity }) => actions.loadOne({ entityType, id: entity.id }))
 
 		)
 

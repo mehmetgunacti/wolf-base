@@ -1,4 +1,4 @@
-import { FIRESTORE_VALUE, FirestoreConverter, FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL, UUID, WolfEntity } from '@lib';
+import { AppEntity, EntityType, FIRESTORE_VALUE, FirestoreConverter, FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL, UUID } from '@lib';
 import { FirestoreConfig } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { BookmarksRemoteRepository } from 'lib/repositories/remote';
@@ -8,13 +8,13 @@ import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 
 export class BookmarksFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Bookmark> implements BookmarksRemoteRepository {
 
-	private bookmarks_clicks = WolfEntity.bookmark.plural + '_clicks';
+	private bookmarks_clicks = AppEntity.bookmark.plural + '_clicks';
 
 	constructor(firestore: FirestoreAPIClient, firestoreConfig: FirestoreConfig) {
 		super(
 			firestore,
 			firestoreConfig,
-			WolfEntity.bookmark,
+			EntityType.bookmark,
 			new BookmarkFirestoreConverter()
 		);
 	}

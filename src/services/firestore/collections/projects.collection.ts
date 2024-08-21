@@ -1,4 +1,4 @@
-import { FIRESTORE_VALUE, FirestoreConverter, WolfEntity } from '@lib';
+import { FIRESTORE_VALUE, FirestoreConverter, EntityType } from '@lib';
 import { FirestoreConfig, Project } from 'lib/models';
 import { ProjectsRemoteRepository } from 'lib/repositories/remote/project-remote.repository';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
@@ -10,7 +10,7 @@ export class ProjectsFirestoreCollectionImpl extends FirestoreRemoteStorageColle
 		super(
 			firestore,
 			firestoreConfig,
-			WolfEntity.project,
+			EntityType.project,
 			new ProjectFirestoreConverter()
 		);
 	}

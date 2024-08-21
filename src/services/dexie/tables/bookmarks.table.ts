@@ -1,4 +1,4 @@
-import { LocalRepositoryNames, LogCategory, SyncData, WolfEntity, toggleArrayItem } from '@lib';
+import { LocalRepositoryNames, LogCategory, SyncData, EntityType, toggleArrayItem } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { BookmarksLocalRepository } from 'lib/repositories/local';
@@ -9,7 +9,7 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Bookmark> implements BookmarksLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfEntity.bookmark);
+		super(db, EntityType.bookmark);
 	}
 
 	protected override newItemFromPartial(item: Partial<Bookmark>): Bookmark {

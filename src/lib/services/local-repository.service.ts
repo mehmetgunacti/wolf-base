@@ -1,4 +1,4 @@
-import { EntityName, LocalRepositoryNames } from 'lib/constants';
+import { EntityType, LocalRepositoryNames } from 'lib/constants';
 import { Entity } from 'lib/models';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository, ProjectLocalRepository, QuoteLocalRepository } from 'lib/repositories/local';
 import { NotesLocalRepository } from 'lib/repositories/local/note.repository';
@@ -22,7 +22,7 @@ export interface LocalRepositoryService {
 	configuration: ConfigurationLocalRepository;
 	logs: LogsLocalRepository;
 
-	getRepository<T extends Entity>(entityName: EntityName): EntityLocalRepository<T>;
+	getRepository<T extends Entity>(entityType: EntityType): EntityLocalRepository<T>;
 	dump<T = any>(repoName: LocalRepositoryNames): Promise<Record<string, T>>;
 	count(repoName: LocalRepositoryNames): Promise<number>;
 	size(repoName: LocalRepositoryNames): Promise<number>;

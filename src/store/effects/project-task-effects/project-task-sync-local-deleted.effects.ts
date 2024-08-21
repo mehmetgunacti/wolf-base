@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, WolfEntity } from '@lib';
+import { SyncService, EntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
@@ -22,7 +22,7 @@ export class TaskSyncLocalDeletedEffects {
 			withLatestFrom(this.store.select(selTask_LocalDeleted)),
 			switchMap(([, entities]) =>
 
-				this.syncService.uploadDeleted(WolfEntity.task, entities).pipe(
+				this.syncService.uploadDeleted(EntityType.task, entities).pipe(
 
 					map(item => taskActions.unloadOne({ id: item.id }))
 

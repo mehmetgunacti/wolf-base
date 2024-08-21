@@ -1,4 +1,4 @@
-import { Project, ProjectStatus, WolfEntity } from '@lib';
+import { Project, ProjectStatus, EntityType } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { ProjectLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,7 +8,7 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class DexieProjectsRepositoryImpl extends EntityLocalRepositoryImpl<Project> implements ProjectLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfEntity.project);
+		super(db, EntityType.project);
 	}
 
 	protected override newItemFromPartial(item: Partial<Project>): Project {

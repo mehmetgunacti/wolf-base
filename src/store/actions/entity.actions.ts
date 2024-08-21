@@ -1,9 +1,9 @@
-import { Entity, EntityName, RemoteMetadata, SyncData, UUID } from '@lib';
+import { Entity, EntityType, RemoteMetadata, SyncData, UUID } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // CRUD
-export const create							= createAction('[Entity] Create', props<{ entityName: EntityName, entity: Partial<Entity> }>());
-export const createSuccess					= createAction('[Entity] Create Success', props<{ entityName: EntityName, entity: Entity }>());
+export const create							= createAction('[Entity] Create', props<{ entityType: EntityType, entity: Partial<Entity> }>());
+export const createSuccess					= createAction('[Entity] Create Success', props<{ entityType: EntityType, entity: Entity }>());
 
 export const update							= createAction('[Entity] Update', props<{ id: UUID, entity: Partial<Entity> }>());
 export const updateSuccess					= createAction('[Entity] Update Success', props<{ id: UUID }>());
@@ -13,21 +13,21 @@ export const moveToTrashSuccess				= createAction('[Entity] Move to Trash Succes
 
 // LOAD (IndexedDb -> NgRx Store)
 // Entity
-export const loadAll						= createAction('[Entity] Load All', props<{ entityName: EntityName }>());
-export const loadAllSuccess					= createAction('[Entity] Load All Success', props<{ entityName: EntityName, entities: Entity[], syncData: SyncData[], remoteMetadata: RemoteMetadata[] }>());
+export const loadAll						= createAction('[Entity] Load All', props<{ entityType: EntityType }>());
+export const loadAllSuccess					= createAction('[Entity] Load All Success', props<{ entityType: EntityType, entities: Entity[], syncData: SyncData[], remoteMetadata: RemoteMetadata[] }>());
 
-export const loadOne						= createAction('[Entity] Load One', props<{ entityName: EntityName, id: UUID }>());
-export const loadOneSuccess					= createAction('[Entity] Load One Success', props<{ entityName: EntityName, id: UUID, entity: Entity | null, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
+export const loadOne						= createAction('[Entity] Load One', props<{ entityType: EntityType, id: UUID }>());
+export const loadOneSuccess					= createAction('[Entity] Load One Success', props<{ entityType: EntityType, id: UUID, entity: Entity | null, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
 
-export const unloadOne						= createAction('[Entity] Unload One', props<{ entityName: EntityName, id: UUID }>());
+export const unloadOne						= createAction('[Entity] Unload One', props<{ entityType: EntityType, id: UUID }>());
 
 // SyncData
-export const loadOneSyncData				= createAction('[Entity] Load One SyncData', props<{ entityName: EntityName, id: UUID }>());
-export const loadOneSyncDataSuccess			= createAction('[Entity] Load One SyncData Success', props<{ entityName: EntityName, syncData: SyncData | null }>());
+export const loadOneSyncData				= createAction('[Entity] Load One SyncData', props<{ entityType: EntityType, id: UUID }>());
+export const loadOneSyncDataSuccess			= createAction('[Entity] Load One SyncData Success', props<{ entityType: EntityType, syncData: SyncData | null }>());
 
 //// RemoteMetadata
-export const loadAllRemoteMetadata			= createAction('[Entity] Load All RemoteMetadata', props<{ entityName: EntityName }>());
-export const loadAllRemoteMetadataSuccess	= createAction('[Entity] Load All RemoteMetadata Success', props<{ entityName: EntityName, remoteMetadata: RemoteMetadata[] }>());
+export const loadAllRemoteMetadata			= createAction('[Entity] Load All RemoteMetadata', props<{ entityType: EntityType }>());
+export const loadAllRemoteMetadataSuccess	= createAction('[Entity] Load All RemoteMetadata Success', props<{ entityType: EntityType, remoteMetadata: RemoteMetadata[] }>());
 
 // CLOUD SYNC
 // local_new

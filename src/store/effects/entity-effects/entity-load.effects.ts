@@ -17,16 +17,16 @@ export class EntityLoadEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.loadOne),
-			switchMap(({ entityName, id }) =>
+			switchMap(({ entityType, id }) =>
 
 				from(Promise.all([
 
-					this.localRepository.getRepository(entityName).getEntity(id),
-					this.localRepository.getRepository(entityName).getSyncData(id),
-					this.localRepository.getRepository(entityName).getRemoteMetadata(id)
+					this.localRepository.getRepository(entityType).getEntity(id),
+					this.localRepository.getRepository(entityType).getSyncData(id),
+					this.localRepository.getRepository(entityType).getRemoteMetadata(id)
 
 				])).pipe(
-					map(([entity, syncData, remoteMetadata]) => actions.loadOneSuccess({ entityName, id, entity, syncData, remoteMetadata }))
+					map(([entity, syncData, remoteMetadata]) => actions.loadOneSuccess({ entityType, id, entity, syncData, remoteMetadata }))
 				)
 			)
 
@@ -39,16 +39,16 @@ export class EntityLoadEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.loadAll),
-			switchMap(({ entityName }) =>
+			switchMap(({ entityType }) =>
 
 				from(Promise.all([
 
-					this.localRepository.getRepository(entityName).list(),
-					this.localRepository.getRepository(entityName).listSyncData(),
-					this.localRepository.getRepository(entityName).listRemoteMetadata()
+					this.localRepository.getRepository(entityType).list(),
+					this.localRepository.getRepository(entityType).listSyncData(),
+					this.localRepository.getRepository(entityType).listRemoteMetadata()
 
 				])).pipe(
-					map(([entities, syncData, remoteMetadata]) => actions.loadAllSuccess({ entityName, entities, syncData, remoteMetadata }))
+					map(([entities, syncData, remoteMetadata]) => actions.loadAllSuccess({ entityType, entities, syncData, remoteMetadata }))
 				)
 
 			)
@@ -62,11 +62,11 @@ export class EntityLoadEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.loadOneSyncData),
-			switchMap(({ entityName, id }) =>
+			switchMap(({ entityType, id }) =>
 
-				from(this.localRepository.getRepository(entityName).getSyncData(id)).pipe(
+				from(this.localRepository.getRepository(entityType).getSyncData(id)).pipe(
 
-					map(syncData => actions.loadOneSyncDataSuccess({ entityName, syncData }))
+					map(syncData => actions.loadOneSyncDataSuccess({ entityType, syncData }))
 
 				)
 
@@ -81,12 +81,12 @@ export class EntityLoadEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.loadAllRemoteMetadata),
-			switchMap(({ entityName }) =>
+			switchMap(({ entityType }) =>
 
 				from(
-					this.localRepository.getRepository(entityName).listRemoteMetadata()
+					this.localRepository.getRepository(entityType).listRemoteMetadata()
 				).pipe(
-					map(remoteMetadata => actions.loadAllRemoteMetadataSuccess({ entityName, remoteMetadata }))
+					map(remoteMetadata => actions.loadAllRemoteMetadataSuccess({ entityType, remoteMetadata }))
 				)
 
 			)

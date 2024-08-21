@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, WolfEntity } from '@lib';
+import { SyncService, EntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
@@ -22,7 +22,7 @@ export class NoteContentSyncRemoteDeletedEffects {
 			withLatestFrom(this.store.select(selNoteContent_RemoteDeleted)),
 			switchMap(([, items]) =>
 
-				this.syncService.downloadDeleted(WolfEntity.note_content, items).pipe(
+				this.syncService.downloadDeleted(EntityType.noteContent, items).pipe(
 
 					map(item => actions.unloadOne({ id: item.id }))
 

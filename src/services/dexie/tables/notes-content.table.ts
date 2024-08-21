@@ -1,4 +1,4 @@
-import { LocalRepositoryNames, Note, NoteContent, SyncData, UUID, WolfEntity } from '@lib';
+import { LocalRepositoryNames, Note, NoteContent, SyncData, UUID, EntityType } from '@lib';
 import { NoteContentLocalRepository } from 'lib/repositories/local';
 import { WolfBaseDB } from '../wolfbase.database';
 import { EntityLocalRepositoryImpl } from './entity.table';
@@ -6,7 +6,7 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class DexieNoteContentRepositoryImpl extends EntityLocalRepositoryImpl<NoteContent> implements NoteContentLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfEntity.note_content);
+		super(db, EntityType.noteContent);
 	}
 
 	protected override newItemFromPartial(item: NoteContent): NoteContent {

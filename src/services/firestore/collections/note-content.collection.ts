@@ -1,4 +1,4 @@
-import { FIRESTORE_VALUE, FirestoreConverter, WolfEntity } from '@lib';
+import { FIRESTORE_VALUE, FirestoreConverter, EntityType } from '@lib';
 import { FirestoreConfig } from 'lib/models';
 import { NoteContent } from 'lib/models/note.model';
 import { NoteContentRemoteRepository } from 'lib/repositories/remote';
@@ -11,7 +11,7 @@ export class NoteContentFirestoreCollectionImpl extends FirestoreRemoteStorageCo
 		super(
 			firestore,
 			firestoreConfig,
-			WolfEntity.note_content,
+			EntityType.noteContent,
 			new NoteContentFirestoreConverter()
 		);
 	}

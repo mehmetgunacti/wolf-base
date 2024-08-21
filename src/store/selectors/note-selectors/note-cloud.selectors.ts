@@ -1,4 +1,4 @@
-import { CloudTask, NameBase, SyncTaskType, UUID, WolfEntity, toCloudTask } from '@lib';
+import { CloudTask, NameBase, SyncTaskType, UUID, EntityType, toCloudTask } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selNote_array } from './note-entities.selectors';
 import { selNoteRemoteMetadataArray, selNoteRemoteMetadataMap, selNoteSyncDataArray, selNoteSyncDataMap } from './note-sync.selectors';
@@ -161,25 +161,25 @@ const selNote_NonConflictCloudTasks = createSelector(
 		const tasks: CloudTask[] = [];
 
 		if (localNew.length > 0)
-			tasks.push(toCloudTask(localNew, WolfEntity.note, SyncTaskType.local_new));
+			tasks.push(toCloudTask(localNew, EntityType.note, SyncTaskType.local_new));
 
 		if (localUpdated.length > 0)
-			tasks.push(toCloudTask(localUpdated, WolfEntity.note, SyncTaskType.local_updated));
+			tasks.push(toCloudTask(localUpdated, EntityType.note, SyncTaskType.local_updated));
 
 		if (localDeleted.length > 0)
-			tasks.push(toCloudTask(localDeleted, WolfEntity.note, SyncTaskType.local_deleted));
+			tasks.push(toCloudTask(localDeleted, EntityType.note, SyncTaskType.local_deleted));
 
 		if (remoteNew.length > 0)
-			tasks.push(toCloudTask(remoteNew, WolfEntity.note, SyncTaskType.remote_new));
+			tasks.push(toCloudTask(remoteNew, EntityType.note, SyncTaskType.remote_new));
 
 		if (remoteUpdated.length > 0)
-			tasks.push(toCloudTask(remoteUpdated, WolfEntity.note, SyncTaskType.remote_updated));
+			tasks.push(toCloudTask(remoteUpdated, EntityType.note, SyncTaskType.remote_updated));
 
 		if (remoteDeleted.length > 0)
-			tasks.push(toCloudTask(remoteDeleted, WolfEntity.note, SyncTaskType.remote_deleted));
+			tasks.push(toCloudTask(remoteDeleted, EntityType.note, SyncTaskType.remote_deleted));
 
 		if (localDeletedRemoteDeleted.length > 0)
-			tasks.push(toCloudTask(localDeletedRemoteDeleted, WolfEntity.note, SyncTaskType.deleted_deleted));
+			tasks.push(toCloudTask(localDeletedRemoteDeleted, EntityType.note, SyncTaskType.deleted_deleted));
 
 		return tasks;
 
@@ -201,13 +201,13 @@ const selNote_ConflictCloudTasks = createSelector(
 		const tasks: CloudTask[] = [];
 
 		if (localUpdatedRemoteUpdated.length > 0)
-			tasks.push(toCloudTask(localUpdatedRemoteUpdated, WolfEntity.note, SyncTaskType.updated_updated));
+			tasks.push(toCloudTask(localUpdatedRemoteUpdated, EntityType.note, SyncTaskType.updated_updated));
 
 		if (localUpdatedRemoteDeleted.length > 0)
-			tasks.push(toCloudTask(localUpdatedRemoteDeleted, WolfEntity.note, SyncTaskType.updated_deleted));
+			tasks.push(toCloudTask(localUpdatedRemoteDeleted, EntityType.note, SyncTaskType.updated_deleted));
 
 		if (localDeletedRemoteUpdated.length > 0)
-			tasks.push(toCloudTask(localDeletedRemoteUpdated, WolfEntity.note, SyncTaskType.deleted_updated));
+			tasks.push(toCloudTask(localDeletedRemoteUpdated, EntityType.note, SyncTaskType.deleted_updated));
 
 		return tasks;
 

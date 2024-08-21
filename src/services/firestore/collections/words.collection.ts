@@ -1,4 +1,4 @@
-import { FIRESTORE_VALUE, FirestoreConverter, WolfEntity } from '@lib';
+import { FIRESTORE_VALUE, FirestoreConverter, EntityType } from '@lib';
 import { FirestoreConfig, Word, Definition, Language } from 'lib/models';
 import { WordsRemoteRepository } from 'lib/repositories/remote/word-remote.repository';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
@@ -10,7 +10,7 @@ export class WordsFirestoreCollectionImpl extends FirestoreRemoteStorageCollecti
 		super(
 			firestore,
 			firestoreConfig,
-			WolfEntity.word,
+			EntityType.word,
 			new WordFirestoreConverter()
 		);
 	}

@@ -1,4 +1,4 @@
-import { Definition, WolfEntity, Word } from '@lib';
+import { Definition, EntityType, Word } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { WordLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
@@ -9,7 +9,7 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> implements WordLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfEntity.word);
+		super(db, EntityType.word);
 	}
 
 	protected override newItemFromPartial(item: Partial<Word>): Word {

@@ -1,4 +1,4 @@
-import { FIRESTORE_VALUE, FirestoreConverter, WolfEntity } from '@lib';
+import { FIRESTORE_VALUE, FirestoreConverter, EntityType } from '@lib';
 import { FirestoreConfig, Quote } from 'lib/models';
 import { QuotesRemoteRepository } from 'lib/repositories/remote/quote-remote.repository';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
@@ -10,7 +10,7 @@ export class QuotesFirestoreCollectionImpl extends FirestoreRemoteStorageCollect
 		super(
 			firestore,
 			firestoreConfig,
-			WolfEntity.quote,
+			EntityType.quote,
 			new QuoteFirestoreConverter()
 		);
 	}

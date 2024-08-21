@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, WolfEntity } from '@lib';
+import { SyncService, EntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class TaskSyncEffects {
 			ofType(startSync),
 			switchMap(() =>
 
-				this.syncService.downloadMetadata(WolfEntity.task).pipe(
+				this.syncService.downloadMetadata(EntityType.task).pipe(
 					map(() => loadAllRemoteMetadata())
 				)
 

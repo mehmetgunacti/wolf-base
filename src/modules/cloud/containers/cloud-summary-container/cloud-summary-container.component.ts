@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
-import { CloudTask, SyncTaskType, WolfEntity } from 'lib';
+import { CloudTask, EntityType, SyncTaskType } from 'lib';
 import { Observable } from 'rxjs';
 import * as bmActions from 'store/actions/bookmark.actions';
-import * as noteActions from 'store/actions/note.actions';
 import * as contentActions from 'store/actions/note-content.actions';
-import * as wordActions from 'store/actions/word.actions';
-import * as projectActions from 'store/actions/project.actions';
-import * as quoteActions from 'store/actions/quote.actions';
-import * as quizEntryActions from 'store/actions/quiz-entry.actions';
+import * as noteActions from 'store/actions/note.actions';
 import * as taskActions from 'store/actions/project-task.actions';
+import * as projectActions from 'store/actions/project.actions';
+import * as quizEntryActions from 'store/actions/quiz-entry.actions';
+import * as quoteActions from 'store/actions/quote.actions';
+import * as wordActions from 'store/actions/word.actions';
 import { selCloudAvailableTasks } from 'store/selectors/cloud.selectors';
 
 function getBookmarkAction(taskType: SyncTaskType): Action | null {
@@ -297,28 +297,28 @@ function getTaskAction(taskType: SyncTaskType): Action | null {
 
 function getAction(task: CloudTask): Action | null {
 
-	if (WolfEntity.bookmark.name === task.entity.name)
+	if (EntityType.bookmark === task.entity)
 		return getBookmarkAction(task.type);
 
-	if (WolfEntity.note.name === task.entity.name)
+	if (EntityType.note === task.entity)
 		return getNoteAction(task.type);
 
-	if (WolfEntity.note_content.name === task.entity.name)
+	if (EntityType.noteContent === task.entity)
 		return getNoteContentAction(task.type);
 
-	if (WolfEntity.word.name === task.entity.name)
+	if (EntityType.word === task.entity)
 		return getWordAction(task.type);
 
-	if (WolfEntity.quote.name === task.entity.name)
+	if (EntityType.quote === task.entity)
 		return getQuoteAction(task.type);
 
-	if (WolfEntity.quizEntry.name === task.entity.name)
+	if (EntityType.quizEntry === task.entity)
 		return getQuizEntryAction(task.type);
 
-	if (WolfEntity.project.name === task.entity.name)
+	if (EntityType.project === task.entity)
 		return getProjectAction(task.type);
 
-	if (WolfEntity.task.name === task.entity.name)
+	if (EntityType.task === task.entity)
 		return getTaskAction(task.type);
 
 	return null;

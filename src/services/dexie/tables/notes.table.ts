@@ -1,4 +1,4 @@
-import { LocalRepositoryNames, LogCategory, SyncData, WolfEntity, capitalize, toggleArrayItem } from '@lib';
+import { AppEntity, EntityType, LocalRepositoryNames, LogCategory, SyncData, capitalize, toggleArrayItem } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { Note } from 'lib/models/note.model';
 import { NotesLocalRepository } from 'lib/repositories/local';
@@ -9,7 +9,7 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class DexieNotesRepositoryImpl extends EntityLocalRepositoryImpl<Note> implements NotesLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfEntity.note);
+		super(db, EntityType.note);
 	}
 
 	override async moveToTrash(id: UUID): Promise<void> {
@@ -57,7 +57,7 @@ export class DexieNotesRepositoryImpl extends EntityLocalRepositoryImpl<Note> im
 
 				category: LogCategory.entity_deleted,
 				date: new Date().toISOString(),
-				message: `"${capitalize(this.entity.name)}" moved to trash`,
+				message: `"${capitalize(AppEntity[this.entity].name)}" moved to trash`,
 				entityId: id,
 				entityName: note?.name ?? '[n/a]'
 
