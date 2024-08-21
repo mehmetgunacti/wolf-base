@@ -37,7 +37,7 @@
 			<!-------------->
 			<!-- QUESTION -->
 			<!-------------->
-			<div quiz_question [@quoteChange]="quiz.definition.id">
+			<div quiz_question [@quoteChange]="quiz.definition.id" (click)="increaseVisibility()">
 
 				<small>({{quiz.definition.type}})</small>
 				@if (quiz.askWord) {

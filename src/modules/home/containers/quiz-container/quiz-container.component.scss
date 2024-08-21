@@ -30,7 +30,8 @@
 				flex		: 1;
 				@include mx-h5;
 				@include mx-flex-center-center;
-				gap		: var(--gap-sm);
+				gap			: var(--gap-sm);
+				cursor		: pointer;
 
 			}
 
