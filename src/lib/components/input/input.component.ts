@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, InputSignal, OnInit, output } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
-import { Observable, map, of, startWith } from 'rxjs';
+import { combineLatest, map, Observable, startWith } from 'rxjs';
 
 @Component({
 	selector: 'w-input',
@@ -10,33 +11,40 @@ import { Observable, map, of, startWith } from 'rxjs';
 })
 export class InputComponent implements OnInit {
 
-	@Input() control!: FormControl;
-	@Input() name: string = '';
-	@Input() type: string = 'text';
-	@Input() readonly = false;
-	@Input() labelUp: boolean | null = null;
+	// @Input()
+	control: InputSignal<FormControl> = input.required();
+	name: InputSignal<string> = input.required();
+	type: InputSignal<string> = input('text');
+	readonly: InputSignal<boolean> = input(false);
+	labelUp: InputSignal<boolean | undefined> = input();
 
-	@Output() inputChanged: EventEmitter<string> = new EventEmitter();
+	// @Output()
+	inputChanged = output<string>();
 
+	labelUp$ = toObservable(this.labelUp);
 	hasValue$!: Observable<boolean>;
 
 	ngOnInit(): void {
 
-		// todo : what if labelUp changes?
-		this.hasValue$ = this.labelUp ? of(true) : this.control.valueChanges.pipe(
+		this.hasValue$ = combineLatest([
+			this.labelUp$,
+			this.control().valueChanges.pipe(
 
-			startWith(this.control.value),
-			map(val => this.hasValue(val))
+				startWith(this.control().value),
+				map(val => this.validate(val))
 
+			)
+		]).pipe(
+			map(([labelUp, control]) => labelUp ?? control)
 		);
 
 	}
 
-	private hasValue(val: any): boolean {
+	private validate(val: string): boolean {
 
-		switch(this.type) {
+		switch (this.type()) {
 
-			case 'text': return  !!val;
+			case 'text': return !!val;
 			case 'date': return !!val;
 			case 'search': return !!val;
 			case 'number': return typeof val === 'number' && Number.isFinite(Number(val));
