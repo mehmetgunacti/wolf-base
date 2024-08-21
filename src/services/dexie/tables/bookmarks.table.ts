@@ -1,4 +1,4 @@
-import { LocalRepositoryNames, LogCategory, SyncData, AppEntityType, toggleArrayItem } from '@lib';
+import { AppEntities, AppEntityType, LogCategory, SyncData, toggleArrayItem } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { BookmarksLocalRepository } from 'lib/repositories/local';
@@ -38,8 +38,8 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 	async toggleTag(id: UUID, name: string): Promise<void> {
 
 		await this.db.transaction('rw', [
-			LocalRepositoryNames.bookmarks,
-			LocalRepositoryNames.bookmarks_sync
+			AppEntities.bookmark.table,
+			AppEntities.bookmark.table_sync
 		], async () => {
 
 			// update bookmarks table

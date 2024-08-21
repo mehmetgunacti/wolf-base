@@ -1,5 +1,5 @@
 import Dexie from 'dexie';
-import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalRepositoryNames } from '@lib';
+import { AppEntities, CONF_KEYS, DEFAULT_CONF_VALUES, LocalRepositoryNames } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { LogMessage, Note, RemoteMetadata, SyncData } from 'lib/models';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
@@ -105,24 +105,24 @@ export class WolfBaseDB extends Dexie {
 		this.version(conf.version)
 			.stores(conf.tables);
 
-		this.bookmarks = this.table(LocalRepositoryNames.bookmarks);
-		this.bookmarks_sync = this.table(LocalRepositoryNames.bookmarks_sync);
-		this.bookmarks_remote = this.table(LocalRepositoryNames.bookmarks_remote);
-		this.bookmarks_trash = this.table(LocalRepositoryNames.bookmarks_trash);
-		this.bookmarks_clicks = this.table(LocalRepositoryNames.bookmarks_clicks);
+		this.bookmarks 				= this.table(AppEntities.bookmark.table);
+		this.bookmarks_sync 		= this.table(AppEntities.bookmark.table_sync);
+		this.bookmarks_remote		= this.table(AppEntities.bookmark.table_remote);
+		this.bookmarks_trash		= this.table(AppEntities.bookmark.table_trash);
+		this.bookmarks_clicks		= this.table(LocalRepositoryNames.bookmarks_clicks);
 
-		this.notes = this.table(LocalRepositoryNames.notes);
-		this.notes_sync = this.table(LocalRepositoryNames.notes_sync);
-		this.notes_remote = this.table(LocalRepositoryNames.notes_remote);
-		this.notes_trash = this.table(LocalRepositoryNames.notes_trash);
+		this.notes					= this.table(AppEntities.note.table);
+		this.notes_sync				= this.table(AppEntities.note.table_sync);
+		this.notes_remote			= this.table(AppEntities.note.table_remote);
+		this.notes_trash			= this.table(AppEntities.note.table_trash);
 
-		this.note_content = this.table(LocalRepositoryNames.note_content);
-		this.note_content_sync = this.table(LocalRepositoryNames.note_content_sync);
-		this.note_content_remote = this.table(LocalRepositoryNames.note_content_remote);
-		this.note_content_trash = this.table(LocalRepositoryNames.note_content_trash);
+		this.note_content			= this.table(AppEntities.noteContent.table);
+		this.note_content_sync		= this.table(AppEntities.noteContent.table_sync);
+		this.note_content_remote	= this.table(AppEntities.noteContent.table_remote);
+		this.note_content_trash		= this.table(AppEntities.noteContent.table_trash);
 
-		this.configuration = this.table(LocalRepositoryNames.configuration);
-		this.logs = this.table(LocalRepositoryNames.logs);
+		this.configuration			= this.table(LocalRepositoryNames.configuration);
+		this.logs					= this.table(LocalRepositoryNames.logs);
 
 		this.on('ready', async (db) => {
 

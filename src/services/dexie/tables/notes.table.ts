@@ -15,12 +15,12 @@ export class DexieNotesRepositoryImpl extends EntityLocalRepositoryImpl<Note> im
 	override async moveToTrash(id: UUID): Promise<void> {
 
 		await this.db.transaction('rw', [
-			LocalRepositoryNames.notes,
-			LocalRepositoryNames.notes_sync,
-			LocalRepositoryNames.notes_trash,
-			LocalRepositoryNames.note_content,
-			LocalRepositoryNames.note_content_sync,
-			LocalRepositoryNames.note_content_trash,
+			AppEntities.note.table,
+			AppEntities.note.table_sync,
+			AppEntities.note.table_trash,
+			AppEntities.noteContent.table,
+			AppEntities.noteContent.table_sync,
+			AppEntities.noteContent.table_trash,
 			LocalRepositoryNames.logs
 		], async () => {
 
@@ -92,8 +92,8 @@ export class DexieNotesRepositoryImpl extends EntityLocalRepositoryImpl<Note> im
 	async toggleTag(id: UUID, name: string): Promise<void> {
 
 		await this.db.transaction('rw', [
-			LocalRepositoryNames.notes,
-			LocalRepositoryNames.notes_sync
+			AppEntities.note.table,
+			AppEntities.note.table_sync
 		], async () => {
 
 			// update notes table
