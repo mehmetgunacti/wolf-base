@@ -126,6 +126,8 @@ import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
 import { TaskUIEffects } from './effects/project-task-effects/project-task-ui.effects';
+import { EntityCreateEffects } from './effects/entity-effects/entity-create.effects';
+import { EntityLoadEffects } from './effects/entity-effects/entity-load.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -154,8 +156,12 @@ export const effects = [
 	CoreThemeEffects,
 	CoreSidebarEffects,
 
+	// Entity
+	EntityCreateEffects,
+
 	// Bookmarks
 	BookmarkSyncEffects,
+	EntityLoadEffects,
 
 	BookmarkSyncLocalNewEffects,
 	BookmarkSyncLocalUpdatedEffects,
@@ -189,11 +195,11 @@ export const effects = [
 
 	NoteSyncDeletedDeletedEffects,
 
-	NoteEntityCreateEffects,
+	// NoteEntityCreateEffects,
 	NoteEntityUpdateEffects,
 	NoteEntityMoveToTrashEffects,
 
-	NoteLoadEffects,
+	// NoteLoadEffects,
 	NoteUIEffects,
 
 	// Notes Content
