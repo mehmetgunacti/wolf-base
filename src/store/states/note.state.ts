@@ -13,12 +13,11 @@ export interface Note_EntitiesState {
 	syncData: Record<UUID, SyncData>;
 	remoteMetadata: Record<UUID, RemoteMetadata>;
 
-	selectedId: UUID | null;
-
 }
 
 export interface Note_UIState {
 
+	selectedId: UUID | null;
 	queryParams: NoteQueryParams;
 
 }
@@ -31,12 +30,11 @@ export const note_initialEntitiesState: Note_EntitiesState = {
 	syncData: {},
 	remoteMetadata: {},
 
-	selectedId: null
-
 };
 
 export const initialNoteUIState: Note_UIState = {
 
+	selectedId: null,
 	queryParams: {
 		search: null,
 		tags: []

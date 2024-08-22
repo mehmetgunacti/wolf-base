@@ -1,11 +1,11 @@
-import { Project } from '@lib';
+import { Project, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selProject_EntitiesState } from './project.selectors';
 
 export const selProject_entities = createSelector(
 
 	selProject_EntitiesState,
-	entities => entities.entities
+	(entities): Record<UUID, Project> => entities.entities as Record<UUID, Project>
 
 );
 
@@ -18,8 +18,8 @@ export const selProject_ids = createSelector(
 
 export const selProject_array = createSelector(
 
-	selProject_EntitiesState,
-	(state): Project[] => Object.values(state.entities)
+	selProject_entities,
+	(state): Project[] => Object.values(state)
 
 );
 

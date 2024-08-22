@@ -1,11 +1,11 @@
-import { Task } from '@lib';
+import { Task, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selTask_EntitiesState } from './task.selectors';
 
 export const selTask_entities = createSelector(
 
 	selTask_EntitiesState,
-	entities => entities.entities
+	(entities): Record<UUID, Task> => entities.entities as Record<UUID, Task>
 
 );
 
@@ -18,8 +18,8 @@ export const selTask_ids = createSelector(
 
 export const selTask_array = createSelector(
 
-	selTask_EntitiesState,
-	(state): Task[] => Object.values(state.entities)
+	selTask_entities,
+	(state): Task[] => Object.values(state)
 
 );
 

@@ -1,12 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Task_ModuleState } from 'store/states/project-task.state';
+import { selEntity_ModuleState } from '../entity-selectors/entity.selectors';
 
 const selTask_ModuleState = createFeatureSelector<Task_ModuleState>('task');
 
 export const selTask_EntitiesState = createSelector(
 
-	selTask_ModuleState,
-	state => state.entities
+	selEntity_ModuleState,
+	state => state.task
 
 );
 

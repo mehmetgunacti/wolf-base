@@ -1,11 +1,11 @@
 import { Note, TAG_PINNED, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selNote_EntitiesState } from './note.selectors';
+import { selNote_EntitiesState, selNote_UIState } from './note.selectors';
 
 export const selNote_entities = createSelector(
 
 	selNote_EntitiesState,
-	entities => entities.entities
+	(entities): Record<UUID, Note> => entities.entities as Record<UUID, Note>
 
 );
 
@@ -18,8 +18,8 @@ export const selNote_ids = createSelector(
 
 export const selNote_array = createSelector(
 
-	selNote_EntitiesState,
-	(state): Note[] => Object.values(state.entities)
+	selNote_entities,
+	(state): Note[] => Object.values(state)
 
 );
 
@@ -46,8 +46,9 @@ export const selNotes_count = createSelector(
 
 export const selNote_selected = createSelector(
 
-	selNote_EntitiesState,
-	state => state.selectedId ? state.entities[state.selectedId] : null
+	selNote_entities,
+	selNote_UIState,
+	(entities, uiState) => uiState.selectedId ? entities[uiState.selectedId] : null
 
 );
 
@@ -74,8 +75,9 @@ function calcParents(entities: Record<UUID, Note>, selectedId: UUID | null): Not
 
 export const selNote_selectedEntityParents = createSelector(
 
-	selNote_EntitiesState,
-	(state): Note[] => calcParents(state.entities, state.selectedId)
+	selNote_entities,
+	selNote_UIState,
+	(entities, uiState): Note[] => calcParents(entities, uiState.selectedId)
 
 );
 
