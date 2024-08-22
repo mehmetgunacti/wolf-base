@@ -85,16 +85,24 @@ const appInitializerFactory = (store: Store) => {
 
 		store.dispatch(coreActions.loadAll());
 		store.dispatch(bmActions.loadAll());
+
 		// store.dispatch(noteActions.loadAll());
 		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.note }));
+
 		store.dispatch(noteContentActions.loadAll());
+
 		// store.dispatch(wordActions.loadAll());
 		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.word }));
+
 		// store.dispatch(quoteActions.loadAll());
 		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.quote }));
-		store.dispatch(quizEntryActions.loadAll());
+
+		// store.dispatch(quizEntryActions.loadAll());
+		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.quizEntry }));
+
 		//store.dispatch(projectActions.loadAll());
 		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.project }));
+
 		// store.dispatch(taskActions.loadAll());
 		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.task }));
 
