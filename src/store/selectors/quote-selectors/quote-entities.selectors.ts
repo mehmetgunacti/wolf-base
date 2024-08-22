@@ -1,11 +1,11 @@
-import { Quote } from '@lib';
+import { Quote, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selQuote_EntitiesState } from './quote.selectors';
 
 export const selQuote_entities = createSelector(
 
 	selQuote_EntitiesState,
-	entities => entities.entities
+	(entities): Record<UUID, Quote> => entities.entities as Record<UUID, Quote>
 
 );
 
@@ -18,8 +18,8 @@ export const selQuote_ids = createSelector(
 
 export const selQuote_array = createSelector(
 
-	selQuote_EntitiesState,
-	(state): Quote[] => Object.values(state.entities)
+	selQuote_entities,
+	(entities): Quote[] => Object.values(entities)
 
 );
 

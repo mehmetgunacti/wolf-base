@@ -1,12 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Quote_ModuleState } from 'store/states/quote.state';
+import { selEntity_ModuleState } from '../entity-selectors/entity.selectors';
 
 const selQuote_ModuleState = createFeatureSelector<Quote_ModuleState>('quote');
 
 export const selQuote_EntitiesState = createSelector(
 
-	selQuote_ModuleState,
-	state => state.entities
+	selEntity_ModuleState,
+	state => state.quote
 
 );
 

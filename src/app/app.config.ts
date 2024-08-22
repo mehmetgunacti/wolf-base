@@ -90,7 +90,8 @@ const appInitializerFactory = (store: Store) => {
 		store.dispatch(noteContentActions.loadAll());
 		// store.dispatch(wordActions.loadAll());
 		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.word }));
-		store.dispatch(quoteActions.loadAll());
+		// store.dispatch(quoteActions.loadAll());
+		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.quote }));
 		store.dispatch(quizEntryActions.loadAll());
 		//store.dispatch(projectActions.loadAll());
 		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.project }));

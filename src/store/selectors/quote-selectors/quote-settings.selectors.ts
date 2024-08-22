@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { selQuote_EntitiesState, selQuote_SettingsState } from './quote.selectors';
+import { selQuote_entities } from './quote-entities.selectors';
+import { selQuote_SettingsState } from './quote.selectors';
 
 const selQuoteSettings_selectedId = createSelector(
 
@@ -10,8 +11,8 @@ const selQuoteSettings_selectedId = createSelector(
 
 export const selQuoteSettings_selected = createSelector(
 
-	selQuote_EntitiesState,
+	selQuote_entities,
 	selQuoteSettings_selectedId,
-	(entities, selectedId) => selectedId ? entities.entities[selectedId] : null
+	(entities, selectedId) => selectedId ? entities[selectedId] : null
 
 );
