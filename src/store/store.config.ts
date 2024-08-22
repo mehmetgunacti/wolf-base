@@ -20,6 +20,8 @@ import { CoreSidebarEffects } from './effects/core-sidebar.effects';
 import { CoreThemeEffects } from './effects/core-theme.effects';
 import { CoreUIEffects } from './effects/core-ui.effects';
 import { DatabaseEffects } from './effects/database.effects';
+import { EntityCreateEffects } from './effects/entity-effects/entity-create.effects';
+import { EntityLoadEffects } from './effects/entity-effects/entity-load.effects';
 import { LogsEffects } from './effects/logs.effects';
 import { NoteContentEntityCreateEffects } from './effects/note-content-effects/note-content-entity-create.effects';
 import { NoteContentEntityMoveToTrashEffects } from './effects/note-content-effects/note-content-entity-move-to-trash.effects';
@@ -33,10 +35,8 @@ import { NoteContentSyncRemoteDeletedEffects } from './effects/note-content-effe
 import { NoteContentSyncRemoteNewEffects } from './effects/note-content-effects/note-content-sync-remote-new.effects';
 import { NoteContentSyncRemoteUpdatedEffects } from './effects/note-content-effects/note-content-sync-remote-updated.effects';
 import { NoteContentSyncEffects } from './effects/note-content-effects/note-content-sync.effects';
-import { NoteEntityCreateEffects } from './effects/note-effects/note-entity-create.effects';
 import { NoteEntityMoveToTrashEffects } from './effects/note-effects/note-entity-move-to-trash.effects';
 import { NoteEntityUpdateEffects } from './effects/note-effects/note-entity-update.effects';
-import { NoteLoadEffects } from './effects/note-effects/note-load.effects';
 import { NoteSyncDeletedDeletedEffects } from './effects/note-effects/note-sync-deleted-deleted.effects';
 import { NoteSyncLocalDeletedEffects } from './effects/note-effects/note-sync-local-deleted.effects';
 import { NoteSyncLocalNewEffects } from './effects/note-effects/note-sync-local-new.effects';
@@ -72,6 +72,7 @@ import { TaskSyncRemoteDeletedEffects } from './effects/project-task-effects/pro
 import { TaskSyncRemoteNewEffects } from './effects/project-task-effects/project-task-sync-remote-new.effects';
 import { TaskSyncRemoteUpdatedEffects } from './effects/project-task-effects/project-task-sync-remote-updated.effects';
 import { TaskSyncEffects } from './effects/project-task-effects/project-task-sync.effects';
+import { TaskUIEffects } from './effects/project-task-effects/project-task-ui.effects';
 import { QuizEntryEntityCreateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-create.effects';
 import { QuizEntryEntityMoveToTrashEffects } from './effects/quiz-entry-effects/quiz-entry-entity-move-to-trash.effects';
 import { QuizEntryEntityUpdateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-update.effects';
@@ -116,6 +117,7 @@ import { bookmarkReducer } from './reducers/bookmark-reducers/bookmark.reducer';
 import { cloudReducer } from './reducers/cloud.reducer';
 import { coreReducer } from './reducers/core.reducer';
 import { databaseReducer } from './reducers/database.reducer';
+import { entitiesReducer } from './reducers/entity-reducers/entities.reducer';
 import { logsReducer } from './reducers/logs.reducer';
 import { noteContentReducer } from './reducers/note-content-reducers/note-content.reducer';
 import { noteReducer } from './reducers/note-reducers/note.reducer';
@@ -125,9 +127,6 @@ import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.redu
 import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
-import { TaskUIEffects } from './effects/project-task-effects/project-task-ui.effects';
-import { EntityCreateEffects } from './effects/entity-effects/entity-create.effects';
-import { EntityLoadEffects } from './effects/entity-effects/entity-load.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -334,6 +333,7 @@ export const effects = [
 
 export const reducers: ActionReducerMap<AppState> = {
 
+	entities: entitiesReducer,
 	bookmark: combineReducers(bookmarkReducer),
 	core: combineReducers(coreReducer),
 	cloud: cloudReducer,
@@ -345,6 +345,6 @@ export const reducers: ActionReducerMap<AppState> = {
 	quizEntry: combineReducers(quizEntryReducer),
 	quote: combineReducers(quoteReducer),
 	task: combineReducers(taskReducer),
-	word: combineReducers(wordReducer),
+	word: combineReducers(wordReducer)
 
 };

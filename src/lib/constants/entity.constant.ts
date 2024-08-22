@@ -20,6 +20,8 @@ export class AppEntity {
 		public labelPlural: string
 	) { }
 
+	toString(): string { return this.plural }
+
 	get table()			: string { return this.plural; }
 	get table_sync()	: string { return this.plural + '_sync'; }
 	get table_remote()	: string { return this.plural + '_remote'; }
