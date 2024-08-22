@@ -2,20 +2,20 @@ import { Bookmark, Entity, Note, NoteContent, Project, QuizProgress, Quote, Remo
 
 export interface Entity_ModuleState {
 
-	bookmark: Entity_EntitiesState<Bookmark>;
-	note: Entity_EntitiesState<Note>;
-	noteContent: Entity_EntitiesState<NoteContent>;
-	project: Entity_EntitiesState<Project>;
-	quizEntry: Entity_EntitiesState<QuizProgress>;
-	quote: Entity_EntitiesState<Quote>;
-	task: Entity_EntitiesState<Task>;
-	word: Entity_EntitiesState<Word>;
+	bookmark: Entity_EntitiesState;
+	note: Entity_EntitiesState;
+	noteContent: Entity_EntitiesState;
+	project: Entity_EntitiesState;
+	quizEntry: Entity_EntitiesState;
+	quote: Entity_EntitiesState;
+	task: Entity_EntitiesState;
+	word: Entity_EntitiesState;
 
 }
 
-export interface Entity_EntitiesState<T extends Entity> {
+export interface Entity_EntitiesState {
 
-	entities: Record<UUID, T>;
+	entities: Record<UUID, Entity>;
 	syncData: Record<UUID, SyncData>;
 	remoteMetadata: Record<UUID, RemoteMetadata>;
 
@@ -23,7 +23,7 @@ export interface Entity_EntitiesState<T extends Entity> {
 
 // INITIALIZATION
 
-function createInitialEntitiesState<T extends Entity>(): Entity_EntitiesState<T> {
+function createInitialEntitiesState(): Entity_EntitiesState {
 
 	return {
 		entities: {},
@@ -35,13 +35,13 @@ function createInitialEntitiesState<T extends Entity>(): Entity_EntitiesState<T>
 
 export const entity_initialState: Entity_ModuleState = {
 
-	bookmark: createInitialEntitiesState<Bookmark>(),
-	note: createInitialEntitiesState<Note>(),
-	noteContent: createInitialEntitiesState<NoteContent>(),
-	project: createInitialEntitiesState<Project>(),
-	quizEntry: createInitialEntitiesState<QuizProgress>(),
-	quote: createInitialEntitiesState<Quote>(),
-	task: createInitialEntitiesState<Task>(),
-	word: createInitialEntitiesState<Word>()
+	bookmark: createInitialEntitiesState(),
+	note: createInitialEntitiesState(),
+	noteContent: createInitialEntitiesState(),
+	project: createInitialEntitiesState(),
+	quizEntry: createInitialEntitiesState(),
+	quote: createInitialEntitiesState(),
+	task: createInitialEntitiesState(),
+	word: createInitialEntitiesState()
 
 };

@@ -1,7 +1,7 @@
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { APP_INITIALIZER, ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
-import { LocalRepositoryService, RemoteRepositoryService } from '@lib';
+import { AppEntityType, LocalRepositoryService, RemoteRepositoryService } from '@lib';
 import { Store } from '@ngrx/store';
 import { BookmarkSyncService, SyncService } from 'lib/services/sync-service.interface';
 import { CustomErrorHandler, DexieLocalRepositoryServiceImpl, FirestoreRemoteRepositoryServiceImpl } from 'services';
@@ -16,6 +16,7 @@ import * as projectActions from 'store/actions/project.actions';
 import * as taskActions from 'store/actions/project-task.actions';
 import * as quoteActions from 'store/actions/quote.actions';
 import * as quizEntryActions from 'store/actions/quiz-entry.actions';
+import * as entityActions from 'store/actions/entity.actions';
 import { AnimationAwareDialog } from 'services/animation-aware-dialog.service';
 import { Dialog } from '@angular/cdk/dialog';
 
@@ -84,13 +85,16 @@ const appInitializerFactory = (store: Store) => {
 
 		store.dispatch(coreActions.loadAll());
 		store.dispatch(bmActions.loadAll());
-		store.dispatch(noteActions.loadAll());
+		// store.dispatch(noteActions.loadAll());
+		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.note }));
 		store.dispatch(noteContentActions.loadAll());
 		store.dispatch(wordActions.loadAll());
 		store.dispatch(quoteActions.loadAll());
 		store.dispatch(quizEntryActions.loadAll());
-		store.dispatch(projectActions.loadAll());
-		store.dispatch(taskActions.loadAll());
+		//store.dispatch(projectActions.loadAll());
+		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.project }));
+		// store.dispatch(taskActions.loadAll());
+		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.task }));
 
 	};
 

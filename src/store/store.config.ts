@@ -157,10 +157,10 @@ export const effects = [
 
 	// Entity
 	EntityCreateEffects,
+	EntityLoadEffects,
 
 	// Bookmarks
 	BookmarkSyncEffects,
-	EntityLoadEffects,
 
 	BookmarkSyncLocalNewEffects,
 	BookmarkSyncLocalUpdatedEffects,

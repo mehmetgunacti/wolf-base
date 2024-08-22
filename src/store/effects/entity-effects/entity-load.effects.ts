@@ -3,7 +3,7 @@ import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { concatMap, map, switchMap } from 'rxjs/operators';
 import * as actions from 'store/actions/entity.actions';
 
 @Injectable()
@@ -39,7 +39,7 @@ export class EntityLoadEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.loadAll),
-			switchMap(({ entityType }) =>
+			concatMap(({ entityType }) =>
 
 				from(Promise.all([
 
