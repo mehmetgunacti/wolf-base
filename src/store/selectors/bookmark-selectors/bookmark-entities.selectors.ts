@@ -1,25 +1,25 @@
 import { Bookmark, Click, ClickedBookmark, NamedClick, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selBookmarkEntitiesState } from './bookmark.selectors';
+import { selBookmark_ClicksState, selBookmark_EntitiesState } from './bookmark.selectors';
 
-const selBMBookmarks = createSelector(
+export const selBookmark_entities = createSelector(
 
-	selBookmarkEntitiesState,
-	(state): Record<UUID, Bookmark> => state.entities
+	selBookmark_EntitiesState,
+	(entities): Record<UUID, Bookmark> => entities.entities as Record<UUID, Bookmark>
 
 );
 
-const selBMClicks = createSelector(
+const selBookmark_Clicks = createSelector(
 
-	selBookmarkEntitiesState,
-	(state): Record<UUID, Click> => state.clicks
+	selBookmark_ClicksState,
+	(state): Record<UUID, Click> => state.values
 
 );
 
 export const selBM_clickedBookmarks = createSelector(
 
-	selBMBookmarks,
-	selBMClicks,
+	selBookmark_entities,
+	selBookmark_Clicks,
 	(bookmarks, clicks): Record<UUID, ClickedBookmark> => {
 
 		const bm: Record<UUID, ClickedBookmark> = {};
@@ -32,41 +32,42 @@ export const selBM_clickedBookmarks = createSelector(
 
 );
 
-const selBM_ids = createSelector(
+const selBookmark_ids = createSelector(
 
-	selBookmarkEntitiesState,
+	selBookmark_EntitiesState,
 	state => Object.keys(state.entities)
 
 );
 
-export const selBM_array = createSelector(
+export const selBookmark_array = createSelector(
 
 	selBM_clickedBookmarks,
 	(clickedBookmarks): ClickedBookmark[] => Object.values(clickedBookmarks)
 
 );
 
-export const selBM_count = createSelector(
+export const selBookmark_count = createSelector(
 
-	selBM_ids,
+	selBookmark_ids,
 	ids => ids.length
 
 );
 
-export const selBM_clicked = createSelector(
+export const selBookmark_clicked = createSelector(
 
-	selBookmarkEntitiesState,
-	(state): NamedClick[] =>
+	selBookmark_EntitiesState,
+	selBookmark_Clicks,
+	(state, clicks): NamedClick[] =>
 		Object
-			.values(state.clicks)
+			.values(clicks)
 			.filter(c => c.current > 0 && !!state.entities[c.id])
 			.map(c => ({ ...c, name: state.entities[c.id].name }))
 
 );
 
-export const selBM_clickedCount = createSelector(
+export const selBookmark_clickedCount = createSelector(
 
-	selBM_clicked,
+	selBookmark_clicked,
 	list => list.length
 
 );

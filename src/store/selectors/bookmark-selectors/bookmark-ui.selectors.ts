@@ -1,11 +1,11 @@
 import { createSelector } from '@ngrx/store';
-import { selBM_count } from './bookmark-entities.selectors';
+import { selBookmark_count, selBookmark_entities } from './bookmark-entities.selectors';
 import { filteredBookmarkCount } from './bookmark-tags.selectors';
-import { selBookmarkEntitiesState, selBookmarkUIState } from './bookmark.selectors';
+import { selBookmark_UIState } from './bookmark.selectors';
 
 export const selBookmarkMenuBadge = createSelector(
 
-	selBM_count,
+	selBookmark_count,
 	filteredBookmarkCount,
 	(total, filtered): [number, number] => ([total, filtered])
 
@@ -13,15 +13,15 @@ export const selBookmarkMenuBadge = createSelector(
 
 export const selBookmarkShaking = createSelector(
 
-	selBookmarkUIState,
+	selBookmark_UIState,
 	state => state.shaking
 
 );
 
 export const selBookmarkEditId = createSelector(
 
-	selBookmarkEntitiesState,
-	selBookmarkUIState,
-	(entitiesState, uiState) => uiState.editId ? entitiesState.entities[uiState.editId] : null
+	selBookmark_entities,
+	selBookmark_UIState,
+	(entities, uiState) => uiState.editId ? entities[uiState.editId] : null
 
 );

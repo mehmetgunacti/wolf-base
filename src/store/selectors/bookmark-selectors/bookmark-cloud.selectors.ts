@@ -1,11 +1,11 @@
 import { Bookmark, CloudTask, SyncTaskType, Entity, RemoteMetadata, SyncData, UUID, AppEntityType, NameBase, toCloudTask } from '@lib';
 import { createSelector } from "@ngrx/store";
-import { selBM_array, selBM_clicked } from "./bookmark-entities.selectors";
+import { selBookmark_array, selBookmark_clicked } from "./bookmark-entities.selectors";
 import { selBookmarkRemoteMetadataArray, selBookmarkRemoteMetadataMap, selBookmarkSyncDataArray, selBookmarkSyncDataMap } from "./bookmark-sync.selectors";
 
 export const selBookmarkLocalNew = createSelector(
 
-	selBM_array,
+	selBookmark_array,
 	selBookmarkSyncDataMap,
 	(bookmarks, syncDataMap): NameBase[] => bookmarks.filter(entity => !syncDataMap[entity.id])
 
@@ -25,7 +25,7 @@ const selBookmarkSyncDataLocalUpdatedIds = createSelector(
 
 export const selBookmarkLocalUpdated = createSelector(
 
-	selBM_array,
+	selBookmark_array,
 	selBookmarkSyncDataLocalUpdatedIds,
 	(bookmarks, ids): NameBase[] => bookmarks.filter(
 
@@ -148,7 +148,7 @@ export const selBookmarkNonConflictCloudTasks = createSelector(
 	selBookmarkRemoteUpdated,
 	selBookmarkRemoteDeleted,
 	selBookmarkLocalDeletedRemoteDeleted,
-	selBM_clicked,
+	selBookmark_clicked,
 	(
 		localNew,
 		localUpdated,

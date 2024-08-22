@@ -1,4 +1,4 @@
-import { BookmarkModuleState, initialBookmarkState } from "./bookmark.state";
+import { BookmarkModuleState, bookmark_initialState } from "./bookmark.state";
 import { CloudModuleState, initialCloudState } from "./cloud.state";
 import { CoreModuleState, initialCoreState } from "./core.state";
 import { DatabaseModuleState, initialDatabaseState } from "./database.state";
@@ -34,7 +34,7 @@ export const initialAppState: AppState = {
 
 	entities: entity_initialState,
 	core: initialCoreState,
-	bookmark: initialBookmarkState,
+	bookmark: bookmark_initialState,
 	cloud: initialCloudState,
 	database: initialDatabaseState,
 	logs: initialLogsState,

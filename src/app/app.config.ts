@@ -84,7 +84,9 @@ const appInitializerFactory = (store: Store) => {
 	return () => {
 
 		store.dispatch(coreActions.loadAll());
-		store.dispatch(bmActions.loadAll());
+
+		// store.dispatch(bmActions.loadAll());
+		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.bookmark }));
 
 		// store.dispatch(noteActions.loadAll());
 		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.note }));
@@ -105,6 +107,8 @@ const appInitializerFactory = (store: Store) => {
 
 		// store.dispatch(taskActions.loadAll());
 		store.dispatch(entityActions.loadAll({ entityType: AppEntityType.task }));
+
+		store.dispatch(bmActions.loadAllClicks());
 
 	};
 

@@ -21,7 +21,7 @@ export class PopularBookmarksContainerComponent implements OnInit {
 
 	constructor() {
 
-		this.bookmarks$ = this.store.select(bmSelectors.selBM_array).pipe(
+		this.bookmarks$ = this.store.select(bmSelectors.selBookmark_array).pipe(
 			map(bookmarks => bookmarks.filter(b => b.tags.includes(TAG_POPULAR))),
 			map(bookmarks => bookmarks.sort((b1, b2) => b2.clicks - b1.clicks))
 		);

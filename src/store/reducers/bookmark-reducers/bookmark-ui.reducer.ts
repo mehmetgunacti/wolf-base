@@ -1,11 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as bmActions from 'store/actions/bookmark.actions';
 import { fromClipboardFailure } from 'store/actions/bookmark.actions';
-import { BookmarkUIState, initialBookmarkUIState } from 'store/states/bookmark.state';
+import { BookmarkUIState, bookmark_initialUIState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(
 
-	initialBookmarkUIState,
+	bookmark_initialUIState,
 	on(fromClipboardFailure, (state, { shaking }): BookmarkUIState => ({ ...state, shaking })),
 	on(bmActions.openAddBookmarkDialog, (state): BookmarkUIState => ({ ...state, editId: null })),
 	on(bmActions.openEditBookmarkDialog, (state, { id }): BookmarkUIState => ({ ...state, editId: id })),
