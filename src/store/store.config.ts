@@ -22,6 +22,7 @@ import { CoreUIEffects } from './effects/core-ui.effects';
 import { DatabaseEffects } from './effects/database.effects';
 import { EntityCreateEffects } from './effects/entity-effects/entity-create.effects';
 import { EntityLoadEffects } from './effects/entity-effects/entity-load.effects';
+import { EntityUpdateEffects } from './effects/entity-effects/entity-update.effects';
 import { LogsEffects } from './effects/logs.effects';
 import { NoteContentEntityCreateEffects } from './effects/note-content-effects/note-content-entity-create.effects';
 import { NoteContentEntityMoveToTrashEffects } from './effects/note-content-effects/note-content-entity-move-to-trash.effects';
@@ -36,7 +37,6 @@ import { NoteContentSyncRemoteNewEffects } from './effects/note-content-effects/
 import { NoteContentSyncRemoteUpdatedEffects } from './effects/note-content-effects/note-content-sync-remote-updated.effects';
 import { NoteContentSyncEffects } from './effects/note-content-effects/note-content-sync.effects';
 import { NoteEntityMoveToTrashEffects } from './effects/note-effects/note-entity-move-to-trash.effects';
-import { NoteEntityUpdateEffects } from './effects/note-effects/note-entity-update.effects';
 import { NoteSyncDeletedDeletedEffects } from './effects/note-effects/note-sync-deleted-deleted.effects';
 import { NoteSyncLocalDeletedEffects } from './effects/note-effects/note-sync-local-deleted.effects';
 import { NoteSyncLocalNewEffects } from './effects/note-effects/note-sync-local-new.effects';
@@ -46,7 +46,6 @@ import { NoteSyncRemoteNewEffects } from './effects/note-effects/note-sync-remot
 import { NoteSyncRemoteUpdatedEffects } from './effects/note-effects/note-sync-remote-updated.effects';
 import { NoteSyncEffects } from './effects/note-effects/note-sync.effects';
 import { NoteUIEffects } from './effects/note-effects/note-ui.effects';
-import { ProjectEntityCreateEffects } from './effects/project-effects/project-entity-create.effects';
 import { ProjectEntityMoveToTrashEffects } from './effects/project-effects/project-entity-move-to-trash.effects';
 import { ProjectEntityUpdateEffects } from './effects/project-effects/project-entity-update.effects';
 import { ProjectLoadEffects } from './effects/project-effects/project-load.effects';
@@ -60,7 +59,6 @@ import { ProjectSyncRemoteUpdatedEffects } from './effects/project-effects/proje
 import { ProjectSyncEffects } from './effects/project-effects/project-sync.effects';
 import { ProjectUIEffects } from './effects/project-effects/project-ui.effects';
 import { TaskEditEffects } from './effects/project-task-effects/project-task-edit-dialog.effects';
-import { TaskEntityCreateEffects } from './effects/project-task-effects/project-task-entity-create.effects';
 import { TaskEntityMoveToTrashEffects } from './effects/project-task-effects/project-task-entity-move-to-trash.effects';
 import { TaskEntityUpdateEffects } from './effects/project-task-effects/project-task-entity-update.effects';
 import { TaskLoadEffects } from './effects/project-task-effects/project-task-load.effects';
@@ -73,7 +71,6 @@ import { TaskSyncRemoteNewEffects } from './effects/project-task-effects/project
 import { TaskSyncRemoteUpdatedEffects } from './effects/project-task-effects/project-task-sync-remote-updated.effects';
 import { TaskSyncEffects } from './effects/project-task-effects/project-task-sync.effects';
 import { TaskUIEffects } from './effects/project-task-effects/project-task-ui.effects';
-import { QuizEntryEntityCreateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-create.effects';
 import { QuizEntryEntityMoveToTrashEffects } from './effects/quiz-entry-effects/quiz-entry-entity-move-to-trash.effects';
 import { QuizEntryEntityUpdateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-update.effects';
 import { QuizEntryLoadEffects } from './effects/quiz-entry-effects/quiz-entry-load.effects';
@@ -86,7 +83,6 @@ import { QuizEntrySyncRemoteNewEffects } from './effects/quiz-entry-effects/quiz
 import { QuizEntrySyncRemoteUpdatedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-updated.effects';
 import { QuizEntrySyncEffects } from './effects/quiz-entry-effects/quiz-entry-sync.effects';
 import { QuizUIEffects } from './effects/quiz-entry-effects/quiz-ui.effects';
-import { QuoteEntityCreateEffects } from './effects/quote-effects/quote-entity-create.effects';
 import { QuoteEntityMoveToTrashEffects } from './effects/quote-effects/quote-entity-move-to-trash.effects';
 import { QuoteEntityUpdateEffects } from './effects/quote-effects/quote-entity-update.effects';
 import { QuoteLoadEffects } from './effects/quote-effects/quote-load.effects';
@@ -100,7 +96,6 @@ import { QuoteSyncRemoteUpdatedEffects } from './effects/quote-effects/quote-syn
 import { QuoteSyncEffects } from './effects/quote-effects/quote-sync.effects';
 import { QuoteViewerEffects } from './effects/quote-effects/quote-viewer.effects';
 import { SettingsEffects } from './effects/settings.effects';
-import { WordEntityCreateEffects } from './effects/word-effects/word-entity-create.effects';
 import { WordEntityMoveToTrashEffects } from './effects/word-effects/word-entity-move-to-trash.effects';
 import { WordEntityUpdateEffects } from './effects/word-effects/word-entity-update.effects';
 import { WordLoadEffects } from './effects/word-effects/word-load.effects';
@@ -158,6 +153,7 @@ export const effects = [
 	// Entity
 	EntityCreateEffects,
 	EntityLoadEffects,
+	EntityUpdateEffects,
 
 	// Bookmarks
 	BookmarkSyncEffects,
@@ -195,7 +191,7 @@ export const effects = [
 	NoteSyncDeletedDeletedEffects,
 
 	// NoteEntityCreateEffects,
-	NoteEntityUpdateEffects,
+	// NoteEntityUpdateEffects,
 	NoteEntityMoveToTrashEffects,
 
 	// NoteLoadEffects,
@@ -230,7 +226,7 @@ export const effects = [
 
 	ProjectSyncDeletedDeletedEffects,
 
-	ProjectEntityCreateEffects,
+	// ProjectEntityCreateEffects,
 	ProjectEntityUpdateEffects,
 	ProjectEntityMoveToTrashEffects,
 
@@ -250,7 +246,7 @@ export const effects = [
 
 	TaskSyncDeletedDeletedEffects,
 
-	TaskEntityCreateEffects,
+	// TaskEntityCreateEffects,
 	TaskEntityUpdateEffects,
 	TaskEntityMoveToTrashEffects,
 
@@ -272,7 +268,7 @@ export const effects = [
 
 	WordSyncDeletedDeletedEffects,
 
-	WordEntityCreateEffects,
+	// WordEntityCreateEffects,
 	WordEntityUpdateEffects,
 	WordEntityMoveToTrashEffects,
 
@@ -292,7 +288,7 @@ export const effects = [
 
 	QuizEntrySyncDeletedDeletedEffects,
 
-	QuizEntryEntityCreateEffects,
+	// QuizEntryEntityCreateEffects,
 	QuizEntryEntityUpdateEffects,
 	QuizEntryEntityMoveToTrashEffects,
 
@@ -312,7 +308,7 @@ export const effects = [
 
 	QuoteSyncDeletedDeletedEffects,
 
-	QuoteEntityCreateEffects,
+	// QuoteEntityCreateEffects,
 	QuoteEntityUpdateEffects,
 	QuoteEntityMoveToTrashEffects,
 

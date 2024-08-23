@@ -2,14 +2,11 @@ import { Note, NoteContent, NoteQueryParams, RemoteMetadata, SyncData, UUID } fr
 import { createAction, props } from '@ngrx/store';
 
 // CRUD
-export const create							= createAction('[Note] Create', props<{ note: Partial<Note> }>());
-export const createSuccess					= createAction('[Note] Create Success', props<{ note: Note }>());
+// export const create							= createAction('[Note] Create', props<{ note: Partial<Note> }>());
+// export const createSuccess					= createAction('[Note] Create Success', props<{ note: Note }>());
 
-export const fromClipboard					= createAction('[Note] From Clipboard');
-export const fromClipboardFailure			= createAction('[Note] From Clipboard Failure', props<{ shaking: boolean }>());
-
-export const update							= createAction('[Note] Update', props<{ id: UUID, note: Partial<Note> }>());
-export const updateSuccess					= createAction('[Note] Update Success', props<{ id: UUID }>());
+// export const update							= createAction('[Note] Update', props<{ id: UUID, note: Partial<Note> }>());
+// export const updateSuccess					= createAction('[Note] Update Success', props<{ id: UUID }>());
 
 export const moveToTrash					= createAction('[Note] Move to Trash', props<{ id: UUID }>());
 export const moveToTrashSuccess				= createAction('[Note] Move to Trash Success', props<{ id: UUID }>());

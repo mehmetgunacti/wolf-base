@@ -2,8 +2,8 @@ import { Bookmark, BookmarkQueryParams, Click, RemoteMetadata, SyncData, UUID } 
 import { createAction, props } from '@ngrx/store';
 
 // CRUD
-export const create							= createAction('[Bookmark] Create', props<{ bookmark: Partial<Bookmark> }>());
-export const createSuccess					= createAction('[Bookmark] Create Success', props<{ bookmark: Bookmark }>());
+// export const create							= createAction('[Bookmark] Create', props<{ bookmark: Partial<Bookmark> }>());
+// export const createSuccess					= createAction('[Bookmark] Create Success', props<{ bookmark: Bookmark }>());
 
 export const fromClipboard					= createAction('[Bookmark] From Clipboard');
 export const fromClipboardFailure			= createAction('[Bookmark] From Clipboard Failure', props<{ shaking: boolean }>());

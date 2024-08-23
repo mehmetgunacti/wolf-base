@@ -5,8 +5,8 @@ import { createAction, props } from '@ngrx/store';
 export const create							= createAction('[Entity] Create', props<{ entityType: AppEntityType, entity: Partial<Entity> }>());
 export const createSuccess					= createAction('[Entity] Create Success', props<{ entityType: AppEntityType, entity: Entity }>());
 
-export const update							= createAction('[Entity] Update', props<{ id: UUID, entity: Partial<Entity> }>());
-export const updateSuccess					= createAction('[Entity] Update Success', props<{ id: UUID }>());
+export const update							= createAction('[Entity] Update', props<{ entityType: AppEntityType, id: UUID, entity: Partial<Entity> }>());
+export const updateSuccess					= createAction('[Entity] Update Success', props<{ entityType: AppEntityType, id: UUID }>());
 
 export const moveToTrash					= createAction('[Entity] Move to Trash', props<{ id: UUID }>());
 export const moveToTrashSuccess				= createAction('[Entity] Move to Trash Success', props<{ id: UUID }>());

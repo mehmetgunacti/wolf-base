@@ -1,15 +1,15 @@
 import { Injectable, inject } from '@angular/core';
-import { LocalRepositoryService } from '@lib';
+import { AppEntities, LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
-import * as noteActions from 'store/actions/note.actions';
+import * as actions from 'store/actions/entity.actions';
 
 @Injectable()
-export class NoteEntityUpdateEffects {
+export class EntityUpdateEffects {
 
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
@@ -18,13 +18,13 @@ export class NoteEntityUpdateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.update),
-			switchMap(({ id, note }) =>
+			ofType(actions.update),
+			switchMap(({ entityType, id, entity }) =>
 
 				from(
-					this.localRepository.notes.update(id, note)
+					this.localRepository.getRepository(entityType).update(id, entity)
 				).pipe(
-					map(() => noteActions.updateSuccess({ id }))
+					map(() => actions.updateSuccess({ entityType, id }))
 				)
 
 			)
@@ -37,8 +37,8 @@ export class NoteEntityUpdateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.updateSuccess),
-			map(({ id }) => navigate({ url: ['/notes', id] }))
+			ofType(actions.updateSuccess),
+			map(({ id, entityType }) => navigate({ url: [`/${AppEntities[entityType].plural}`, id] }))
 
 		)
 
@@ -48,8 +48,8 @@ export class NoteEntityUpdateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.updateSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Note updated' }))
+			ofType(actions.updateSuccess),
+			map(({ entityType, id }) => showNotification({ severity: 'success', detail: `${AppEntities[entityType].label} updated` }))
 
 		)
 
@@ -59,8 +59,8 @@ export class NoteEntityUpdateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.updateSuccess),
-			map(({ id }) => noteActions.loadOne({ id }))
+			ofType(actions.updateSuccess),
+			map(({ entityType, id }) => actions.loadOne({ entityType, id }))
 
 		)
 
@@ -70,8 +70,8 @@ export class NoteEntityUpdateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.updateSuccess),
-			map(({ id }) => noteActions.loadOneSyncData({ id }))
+			ofType(actions.updateSuccess),
+			map(({ entityType, id }) => actions.loadOneSyncData({ entityType, id }))
 
 		)
 

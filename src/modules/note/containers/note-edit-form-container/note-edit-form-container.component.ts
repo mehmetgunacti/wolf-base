@@ -1,8 +1,8 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Note, UUID } from 'lib';
+import { AppEntityType, Note, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
-import { update } from 'store/actions/note.actions';
+import { update } from 'store/actions/entity.actions';
 import { selNote_array, selNote_selected } from 'store/selectors/note-selectors/note-entities.selectors';
 import { distinctTagsArray } from 'store/selectors/note-selectors/note-tags.selectors';
 
@@ -49,9 +49,9 @@ export class NoteEditFormContainerComponent implements OnInit, AfterContentInit 
 
 	}
 
-	onUpdate(id: UUID, note: Partial<Note>) {
+	onUpdate(id: UUID, entity: Partial<Note>) {
 
-		this.store.dispatch(update({ id, note }));
+		this.store.dispatch(update({ entityType: AppEntityType.note, id, entity }));
 
 	}
 
