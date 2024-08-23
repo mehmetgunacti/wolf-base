@@ -49,16 +49,16 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(
-		noteActions.loadAllSuccess, (state, { notes, syncData, remoteMetadata }): Note_EntitiesState => ({
+	// on(
+	// 	noteActions.loadAllSuccess, (state, { notes, syncData, remoteMetadata }): Note_EntitiesState => ({
 
-			...state,
-			entities: notes.reduce((record, note) => { record[note.id] = note; return record; }, {} as Record<UUID, Note>),
-			syncData: syncData.reduce((record, syncData) => { record[syncData.id] = syncData; return record; }, {} as Record<UUID, SyncData>),
-			remoteMetadata: remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>)
+	// 		...state,
+	// 		entities: notes.reduce((record, note) => { record[note.id] = note; return record; }, {} as Record<UUID, Note>),
+	// 		syncData: syncData.reduce((record, syncData) => { record[syncData.id] = syncData; return record; }, {} as Record<UUID, SyncData>),
+	// 		remoteMetadata: remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>)
 
-		})
-	),
+	// 	})
+	// ),
 	// on(noteActions.moveToTrashSuccess, (state, { id }): Note_EntitiesState => {
 
 	// 	return produce(
