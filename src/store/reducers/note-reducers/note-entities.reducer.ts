@@ -59,14 +59,14 @@ const reducer = createReducer(
 
 		})
 	),
-	on(noteActions.moveToTrashSuccess, (state, { id }): Note_EntitiesState => {
+	// on(noteActions.moveToTrashSuccess, (state, { id }): Note_EntitiesState => {
 
-		return produce(
-			state,
-			draft => { delete draft.entities[id]; }
-		);
+	// 	return produce(
+	// 		state,
+	// 		draft => { delete draft.entities[id]; }
+	// 	);
 
-	}),
+	// }),
 	on(noteActions.loadAllRemoteMetadataSuccess, (state, { remoteMetadata }): Note_EntitiesState => ({
 
 		...state,

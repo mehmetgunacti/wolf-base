@@ -8,8 +8,8 @@ import { createAction, props } from '@ngrx/store';
 // export const update							= createAction('[Note] Update', props<{ id: UUID, note: Partial<Note> }>());
 // export const updateSuccess					= createAction('[Note] Update Success', props<{ id: UUID }>());
 
-export const moveToTrash					= createAction('[Note] Move to Trash', props<{ id: UUID }>());
-export const moveToTrashSuccess				= createAction('[Note] Move to Trash Success', props<{ id: UUID }>());
+// export const moveToTrash					= createAction('[Note] Move to Trash', props<{ id: UUID }>());
+// export const moveToTrashSuccess				= createAction('[Note] Move to Trash Success', props<{ id: UUID }>());
 
 // LOAD FROM LOCAL DATABASE INTO MEMORY
 //// Entity

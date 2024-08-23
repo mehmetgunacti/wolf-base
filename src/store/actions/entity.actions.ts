@@ -8,8 +8,8 @@ export const createSuccess					= createAction('[Entity] Create Success', props<{
 export const update							= createAction('[Entity] Update', props<{ entityType: AppEntityType, id: UUID, entity: Partial<Entity> }>());
 export const updateSuccess					= createAction('[Entity] Update Success', props<{ entityType: AppEntityType, id: UUID }>());
 
-export const moveToTrash					= createAction('[Entity] Move to Trash', props<{ id: UUID }>());
-export const moveToTrashSuccess				= createAction('[Entity] Move to Trash Success', props<{ id: UUID }>());
+export const moveToTrash					= createAction('[Entity] Move to Trash', props<{ entityType: AppEntityType, id: UUID }>());
+export const moveToTrashSuccess				= createAction('[Entity] Move to Trash Success', props<{ entityType: AppEntityType, id: UUID }>());
 
 // LOAD (IndexedDb -> NgRx Store)
 // Entity

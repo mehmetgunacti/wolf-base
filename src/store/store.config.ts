@@ -36,7 +36,6 @@ import { NoteContentSyncRemoteDeletedEffects } from './effects/note-content-effe
 import { NoteContentSyncRemoteNewEffects } from './effects/note-content-effects/note-content-sync-remote-new.effects';
 import { NoteContentSyncRemoteUpdatedEffects } from './effects/note-content-effects/note-content-sync-remote-updated.effects';
 import { NoteContentSyncEffects } from './effects/note-content-effects/note-content-sync.effects';
-import { NoteEntityMoveToTrashEffects } from './effects/note-effects/note-entity-move-to-trash.effects';
 import { NoteSyncDeletedDeletedEffects } from './effects/note-effects/note-sync-deleted-deleted.effects';
 import { NoteSyncLocalDeletedEffects } from './effects/note-effects/note-sync-local-deleted.effects';
 import { NoteSyncLocalNewEffects } from './effects/note-effects/note-sync-local-new.effects';
@@ -122,6 +121,7 @@ import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.redu
 import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
+import { EntityMoveToTrashEffects } from './effects/entity-effects/entity-move-to-trash.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -154,6 +154,7 @@ export const effects = [
 	EntityCreateEffects,
 	EntityLoadEffects,
 	EntityUpdateEffects,
+	EntityMoveToTrashEffects,
 
 	// Bookmarks
 	BookmarkSyncEffects,
@@ -192,7 +193,7 @@ export const effects = [
 
 	// NoteEntityCreateEffects,
 	// NoteEntityUpdateEffects,
-	NoteEntityMoveToTrashEffects,
+	// NoteEntityMoveToTrashEffects,
 
 	// NoteLoadEffects,
 	NoteUIEffects,

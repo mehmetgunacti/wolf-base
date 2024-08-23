@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MenuItem, Note, NoteContent, UUID } from '@lib';
+import { AppEntityType, Note, NoteContent, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
-import { moveToTrash } from 'store/actions/note.actions';
+import { moveToTrash } from 'store/actions/entity.actions';
 import { selNoteContent_content } from 'store/selectors/note-content-selectors/note-content-entities.selectors';
 import { selNote_selected, selNote_selectedEntityChildren, selNote_selectedEntityParents } from 'store/selectors/note-selectors/note-entities.selectors';
 
@@ -51,7 +51,7 @@ export class NoteContainerComponent {
 	onRemove(id: UUID): void {
 
 		if (confirm(`Note will be deleted. Continue?`))
-			this.store.dispatch(moveToTrash({ id }));
+			this.store.dispatch(moveToTrash({ entityType: AppEntityType.note, id }));
 
 	}
 

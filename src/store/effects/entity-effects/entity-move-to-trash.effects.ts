@@ -1,14 +1,14 @@
 import { Injectable, inject } from '@angular/core';
-import { LocalRepositoryService } from '@lib';
+import { AppEntities, LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
-import * as noteActions from 'store/actions/note.actions';
+import * as actions from 'store/actions/entity.actions';
 
 @Injectable()
-export class NoteEntityMoveToTrashEffects {
+export class EntityMoveToTrashEffects {
 
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
@@ -17,13 +17,13 @@ export class NoteEntityMoveToTrashEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.moveToTrash),
-			switchMap(({ id }) =>
+			ofType(actions.moveToTrash),
+			switchMap(({ entityType, id }) =>
 
 				from(
-					this.localRepository.notes.moveToTrash(id)
+					this.localRepository.getRepository(entityType).moveToTrash(id)
 				).pipe(
-					map(() => noteActions.moveToTrashSuccess({ id }))
+					map(() => actions.moveToTrashSuccess({ entityType, id }))
 				)
 
 			)
@@ -36,8 +36,8 @@ export class NoteEntityMoveToTrashEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.moveToTrashSuccess),
-			map(() => showNotification({ severity: 'success', detail: 'Note removed' }))
+			ofType(actions.moveToTrashSuccess),
+			map(({ entityType, id }) => showNotification({ severity: 'success', detail: `${AppEntities[entityType].label} removed` }))
 
 		)
 
@@ -47,8 +47,8 @@ export class NoteEntityMoveToTrashEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.moveToTrashSuccess),
-			map(({ id }) => noteActions.loadAll())
+			ofType(actions.moveToTrashSuccess),
+			map(({ entityType }) => actions.loadAll({ entityType }))
 
 		)
 
