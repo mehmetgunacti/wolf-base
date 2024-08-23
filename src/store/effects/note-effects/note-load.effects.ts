@@ -12,49 +12,49 @@ export class NoteLoadEffects {
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
-	loadOne$ = createEffect(
+	// loadOne$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(noteActions.loadOne),
-			switchMap(({ id }) =>
+	// 		ofType(noteActions.loadOne),
+	// 		switchMap(({ id }) =>
 
-				Promise.all([
+	// 			Promise.all([
 
-					Promise.resolve(id),
-					this.localRepository.notes.getEntity(id),
-					this.localRepository.notes.getSyncData(id),
-					this.localRepository.notes.getRemoteMetadata(id)
+	// 				Promise.resolve(id),
+	// 				this.localRepository.notes.getEntity(id),
+	// 				this.localRepository.notes.getSyncData(id),
+	// 				this.localRepository.notes.getRemoteMetadata(id)
 
-				])
-			),
-			map(([id, note, syncData, remoteMetadata]) => noteActions.loadOneSuccess({ id, note, syncData, remoteMetadata }))
+	// 			])
+	// 		),
+	// 		map(([id, note, syncData, remoteMetadata]) => noteActions.loadOneSuccess({ id, note, syncData, remoteMetadata }))
 
-		)
+	// 	)
 
-	);
+	// );
 
-	loadAll$ = createEffect(
+	// loadAll$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(noteActions.loadAll),
-			switchMap(() =>
+	// 		ofType(noteActions.loadAll),
+	// 		switchMap(() =>
 
-				Promise.all([
+	// 			Promise.all([
 
-					this.localRepository.notes.list(),
-					this.localRepository.notes.listSyncData(),
-					this.localRepository.notes.listRemoteMetadata()
+	// 				this.localRepository.notes.list(),
+	// 				this.localRepository.notes.listSyncData(),
+	// 				this.localRepository.notes.listRemoteMetadata()
 
-				])
+	// 			])
 
-			),
-			map(([notes, syncData, remoteMetadata]) => noteActions.loadAllSuccess({ notes, syncData, remoteMetadata }))
+	// 		),
+	// 		map(([notes, syncData, remoteMetadata]) => noteActions.loadAllSuccess({ notes, syncData, remoteMetadata }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 	loadOneSyncData$ = createEffect(
 

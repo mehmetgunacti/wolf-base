@@ -16,8 +16,8 @@ import { createAction, props } from '@ngrx/store';
 // export const loadAll						= createAction('[Note] Load All');
 // export const loadAllSuccess					= createAction('[Note] Load All Success', props<{ notes: Note[], syncData: SyncData[], remoteMetadata: RemoteMetadata[] }>());
 
-export const loadOne						= createAction('[Note] Load One', props<{ id: UUID }>());
-export const loadOneSuccess					= createAction('[Note] Load One Success', props<{ id: UUID, note: Note | null, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
+// export const loadOne						= createAction('[Note] Load One', props<{ id: UUID }>());
+// export const loadOneSuccess					= createAction('[Note] Load One Success', props<{ id: UUID, note: Note | null, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>());
 
 export const unloadOne						= createAction('[Note] Unload One', props<{ id: UUID }>());
 

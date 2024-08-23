@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as noteActions from 'store/actions/note.actions';
+import * as entityActions from 'store/actions/entity.actions';
 import { selNote_LocalUpdated } from 'store/selectors/note-selectors/note-cloud.selectors';
 
 @Injectable()
@@ -24,7 +25,7 @@ export class NoteSyncLocalUpdatedEffects {
 
 				this.syncService.uploadUpdated(AppEntityType.note, items).pipe(
 
-					map(item => noteActions.loadOne({ id: item.id }))
+					map(item => entityActions.loadOne({ entityType: AppEntityType.note, id: item.id }))
 
 				)
 

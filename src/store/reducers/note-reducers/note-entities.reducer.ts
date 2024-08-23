@@ -7,34 +7,34 @@ import { Note_EntitiesState, note_initialEntitiesState } from 'store/states/note
 const reducer = createReducer(
 
 	note_initialEntitiesState,
-	on(noteActions.loadOneSuccess, (state, { id, note, syncData, remoteMetadata }): Note_EntitiesState => {
+	// on(noteActions.loadOneSuccess, (state, { id, note, syncData, remoteMetadata }): Note_EntitiesState => {
 
-		return produce(
-			state,
-			draft => {
+	// 	return produce(
+	// 		state,
+	// 		draft => {
 
-				// note
-				if (note === null)
-					delete draft.entities[id];
-				else
-					draft.entities[id] = note;
+	// 			// note
+	// 			if (note === null)
+	// 				delete draft.entities[id];
+	// 			else
+	// 				draft.entities[id] = note;
 
-				// syncData
-				if (syncData === null)
-					delete draft.syncData[id];
-				else
-					draft.syncData[id] = syncData;
+	// 			// syncData
+	// 			if (syncData === null)
+	// 				delete draft.syncData[id];
+	// 			else
+	// 				draft.syncData[id] = syncData;
 
-				// remoteMetadata
-				if (remoteMetadata === null)
-					delete draft.remoteMetadata[id];
-				else
-					draft.remoteMetadata[id] = remoteMetadata;
+	// 			// remoteMetadata
+	// 			if (remoteMetadata === null)
+	// 				delete draft.remoteMetadata[id];
+	// 			else
+	// 				draft.remoteMetadata[id] = remoteMetadata;
 
-			}
-		);
+	// 		}
+	// 	);
 
-	}),
+	// }),
 	on(noteActions.unloadOne, (state, { id }): Note_EntitiesState => {
 
 		return produce(

@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { LocalRepositoryService } from '@lib';
+import { AppEntityType, LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
@@ -8,6 +8,7 @@ import { navigate } from 'store/actions/core-navigation.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import * as actionsNoteContent from 'store/actions/note-content.actions';
 import * as actionsNote from 'store/actions/note.actions';
+import * as entityActions from 'store/actions/entity.actions';
 
 @Injectable()
 export class NoteContentEntityUpdateEffects {
@@ -72,7 +73,7 @@ export class NoteContentEntityUpdateEffects {
 		() => this.actions$.pipe(
 
 			ofType(actionsNoteContent.updateSuccess),
-			map(({ id }) => actionsNote.loadOne({ id }))
+			map(({ id }) => entityActions.loadOne({ entityType: AppEntityType.note, id }))
 
 		)
 
