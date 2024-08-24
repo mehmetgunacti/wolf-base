@@ -22,12 +22,12 @@ import { createAction, props } from '@ngrx/store';
 // export const unloadOne						= createAction('[Note] Unload One', props<{ id: UUID }>());
 
 // SyncData
-export const loadOneSyncData				= createAction('[Note] Load One SyncData', props<{ id: UUID }>());
-export const loadOneSyncDataSuccess			= createAction('[Note] Load One SyncData Success', props<{ syncData: SyncData | null }>());
+// export const loadOneSyncData				= createAction('[Note] Load One SyncData', props<{ id: UUID }>());
+// export const loadOneSyncDataSuccess			= createAction('[Note] Load One SyncData Success', props<{ syncData: SyncData | null }>());
 
 //// RemoteMetadata
-export const loadAllRemoteMetadata			= createAction('[Note] Load All RemoteMetadata');
-export const loadAllRemoteMetadataSuccess	= createAction('[Note] Load All RemoteMetadata Success', props<{ remoteMetadata: RemoteMetadata[] }>());
+// export const loadAllRemoteMetadata			= createAction('[Note] Load All RemoteMetadata');
+// export const loadAllRemoteMetadataSuccess	= createAction('[Note] Load All RemoteMetadata Success', props<{ remoteMetadata: RemoteMetadata[] }>());
 
 //// Trash Count
 // export const loadTrashCount					= createAction('[Note] Load Trash Count');

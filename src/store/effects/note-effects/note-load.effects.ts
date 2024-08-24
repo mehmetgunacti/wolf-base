@@ -56,35 +56,35 @@ export class NoteLoadEffects {
 
 	// );
 
-	loadOneSyncData$ = createEffect(
+	// loadOneSyncData$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(noteActions.loadOneSyncData),
-			switchMap(({ id }) =>
+	// 		ofType(noteActions.loadOneSyncData),
+	// 		switchMap(({ id }) =>
 
-				from(this.localRepository.notes.getSyncData(id)).pipe(
+	// 			from(this.localRepository.notes.getSyncData(id)).pipe(
 
-					map(syncData => noteActions.loadOneSyncDataSuccess({ syncData }))
+	// 				map(syncData => noteActions.loadOneSyncDataSuccess({ syncData }))
 
-				)
+	// 			)
 
-			)
+	// 		)
 
-		)
+	// 	)
 
-	);
+	// );
 
-	loadAllRemoteMetadata$ = createEffect(
+	// loadAllRemoteMetadata$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(noteActions.loadAllRemoteMetadata),
-			switchMap(() => this.localRepository.notes.listRemoteMetadata()),
-			map(remoteMetadata => noteActions.loadAllRemoteMetadataSuccess({ remoteMetadata }))
+	// 		ofType(noteActions.loadAllRemoteMetadata),
+	// 		switchMap(() => this.localRepository.notes.listRemoteMetadata()),
+	// 		map(remoteMetadata => noteActions.loadAllRemoteMetadataSuccess({ remoteMetadata }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 }

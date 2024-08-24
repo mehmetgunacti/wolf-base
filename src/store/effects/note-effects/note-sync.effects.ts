@@ -3,7 +3,7 @@ import { SyncService, AppEntityType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap } from 'rxjs/operators';
-import { loadAllRemoteMetadata } from 'store/actions/note.actions';
+import { loadAllRemoteMetadata } from 'store/actions/entity.actions';
 import { startSync } from 'store/actions/cloud.actions';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class NoteSyncEffects {
 			switchMap(() =>
 
 				this.syncService.downloadMetadata(AppEntityType.note).pipe(
-					map(() => loadAllRemoteMetadata())
+					map(() => loadAllRemoteMetadata({ entityType: AppEntityType.note }))
 				)
 
 			)

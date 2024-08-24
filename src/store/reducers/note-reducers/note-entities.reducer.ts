@@ -67,12 +67,12 @@ const reducer = createReducer(
 	// 	);
 
 	// }),
-	on(noteActions.loadAllRemoteMetadataSuccess, (state, { remoteMetadata }): Note_EntitiesState => ({
+	// on(noteActions.loadAllRemoteMetadataSuccess, (state, { remoteMetadata }): Note_EntitiesState => ({
 
-		...state,
-		remoteMetadata: remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>)
+	// 	...state,
+	// 	remoteMetadata: remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>)
 
-	}))
+	// }))
 
 );
 
