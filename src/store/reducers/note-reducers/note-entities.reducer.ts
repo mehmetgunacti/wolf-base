@@ -35,20 +35,20 @@ const reducer = createReducer(
 	// 	);
 
 	// }),
-	on(noteActions.unloadOne, (state, { id }): Note_EntitiesState => {
+	// on(noteActions.unloadOne, (state, { id }): Note_EntitiesState => {
 
-		return produce(
-			state,
-			draft => {
+	// 	return produce(
+	// 		state,
+	// 		draft => {
 
-				delete draft.entities[id];
-				delete draft.syncData[id];
-				delete draft.remoteMetadata[id];
+	// 			delete draft.entities[id];
+	// 			delete draft.syncData[id];
+	// 			delete draft.remoteMetadata[id];
 
-			}
-		);
+	// 		}
+	// 	);
 
-	}),
+	// }),
 	// on(
 	// 	noteActions.loadAllSuccess, (state, { notes, syncData, remoteMetadata }): Note_EntitiesState => ({
 

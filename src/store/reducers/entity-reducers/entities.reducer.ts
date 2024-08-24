@@ -53,6 +53,20 @@ const reducer = createReducer(
 		);
 
 	}),
+	on(actions.unloadOne, (state, { entityType, id }): Entity_ModuleState => {
+
+		return produce(
+			state,
+			draft => {
+
+				delete draft[entityType].entities[id];
+				delete draft[entityType].syncData[id];
+				delete draft[entityType].remoteMetadata[id];
+
+			}
+		);
+
+	}),
 
 );
 
