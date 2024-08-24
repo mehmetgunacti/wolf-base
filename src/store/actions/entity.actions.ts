@@ -31,22 +31,22 @@ export const loadAllRemoteMetadataSuccess	= createAction('[Entity] Load All Remo
 
 // CLOUD SYNC
 // local_new
-export const syncLocalNew					= createAction('[Entity] Sync Local New');
+export const syncLocalNew					= createAction('[Entity] Sync Local New', props<{ entityType: AppEntityType }>());
 
 // local_updated
-export const syncLocalUpdated				= createAction('[Entity] Sync Local Updated');
+export const syncLocalUpdated				= createAction('[Entity] Sync Local Updated', props<{ entityType: AppEntityType }>());
 
 // local_deleted
-export const syncLocalDeleted				= createAction('[Entity] Sync Local Deleted');
+export const syncLocalDeleted				= createAction('[Entity] Sync Local Deleted', props<{ entityType: AppEntityType }>());
 
 // remote_new
-export const syncRemoteNew					= createAction('[Entity] Sync Remote New');
+export const syncRemoteNew					= createAction('[Entity] Sync Remote New', props<{ entityType: AppEntityType }>());
 
 // remote_updated
-export const syncRemoteUpdated				= createAction('[Entity] Sync Remote Updated');
+export const syncRemoteUpdated				= createAction('[Entity] Sync Remote Updated', props<{ entityType: AppEntityType }>());
 
 // remote_deleted
-export const syncRemoteDeleted				= createAction('[Entity] Sync Remote Deleted');
+export const syncRemoteDeleted				= createAction('[Entity] Sync Remote Deleted', props<{ entityType: AppEntityType }>());
 
 // deleted_deleted
-export const syncDeletedDeleted				= createAction('[Entity] Sync Deleted Deleted');
+export const syncDeletedDeleted				= createAction('[Entity] Sync Deleted Deleted', props<{ entityType: AppEntityType }>());
