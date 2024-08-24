@@ -36,14 +36,14 @@ import { NoteContentSyncRemoteDeletedEffects } from './effects/note-content-effe
 import { NoteContentSyncRemoteNewEffects } from './effects/note-content-effects/note-content-sync-remote-new.effects';
 import { NoteContentSyncRemoteUpdatedEffects } from './effects/note-content-effects/note-content-sync-remote-updated.effects';
 import { NoteContentSyncEffects } from './effects/note-content-effects/note-content-sync.effects';
-import { NoteSyncDeletedDeletedEffects } from './effects/note-effects/note-sync-deleted-deleted.effects';
-import { NoteSyncLocalDeletedEffects } from './effects/note-effects/note-sync-local-deleted.effects';
-import { NoteSyncLocalNewEffects } from './effects/note-effects/note-sync-local-new.effects';
-import { NoteSyncLocalUpdatedEffects } from './effects/note-effects/note-sync-local-updated.effects';
-import { NoteSyncRemoteDeletedEffects } from './effects/note-effects/note-sync-remote-deleted.effects';
-import { NoteSyncRemoteNewEffects } from './effects/note-effects/note-sync-remote-new.effects';
-import { NoteSyncRemoteUpdatedEffects } from './effects/note-effects/note-sync-remote-updated.effects';
-import { NoteSyncEffects } from './effects/note-effects/note-sync.effects';
+import { EntitySyncDeletedDeletedEffects } from './effects/entity-effects/entity-sync-deleted-deleted.effects';
+import { EntitySyncLocalDeletedEffects } from './effects/entity-effects/entity-sync-local-deleted.effects';
+import { EntitySyncLocalNewEffects } from './effects/entity-effects/entity-sync-local-new.effects';
+import { EntitySyncLocalUpdatedEffects } from './effects/entity-effects/entity-sync-local-updated.effects';
+import { EntitySyncRemoteDeletedEffects } from './effects/entity-effects/entity-sync-remote-deleted.effects';
+import { EntitySyncRemoteNewEffects } from './effects/entity-effects/entity-sync-remote-new.effects';
+import { EntitySyncRemoteUpdatedEffects } from './effects/entity-effects/entity-sync-remote-updated.effects';
+import { EntitySyncEffects } from './effects/entity-effects/entity-sync.effects';
 import { NoteUIEffects } from './effects/note-effects/note-ui.effects';
 import { ProjectEntityMoveToTrashEffects } from './effects/project-effects/project-entity-move-to-trash.effects';
 import { ProjectEntityUpdateEffects } from './effects/project-effects/project-entity-update.effects';
@@ -156,6 +156,18 @@ export const effects = [
 	EntityUpdateEffects,
 	EntityMoveToTrashEffects,
 
+	EntitySyncEffects,
+
+	EntitySyncLocalNewEffects,
+	EntitySyncLocalUpdatedEffects,
+	EntitySyncLocalDeletedEffects,
+
+	EntitySyncRemoteNewEffects,
+	EntitySyncRemoteUpdatedEffects,
+	EntitySyncRemoteDeletedEffects,
+
+	EntitySyncDeletedDeletedEffects,
+
 	// Bookmarks
 	BookmarkSyncEffects,
 
@@ -179,23 +191,6 @@ export const effects = [
 	BookmarkUIEffects,
 
 	// Notes
-	NoteSyncEffects,
-
-	NoteSyncLocalNewEffects,
-	NoteSyncLocalUpdatedEffects,
-	NoteSyncLocalDeletedEffects,
-
-	NoteSyncRemoteNewEffects,
-	NoteSyncRemoteUpdatedEffects,
-	NoteSyncRemoteDeletedEffects,
-
-	NoteSyncDeletedDeletedEffects,
-
-	// NoteEntityCreateEffects,
-	// NoteEntityUpdateEffects,
-	// NoteEntityMoveToTrashEffects,
-
-	// NoteLoadEffects,
 	NoteUIEffects,
 
 	// Notes Content

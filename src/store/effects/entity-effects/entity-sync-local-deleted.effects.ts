@@ -1,15 +1,14 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, AppEntityType } from '@lib';
+import { SyncService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import * as noteActions from 'store/actions/note.actions';
-import * as entityActions from 'store/actions/entity.actions';
+import * as actions from 'store/actions/entity.actions';
 import { selNote_LocalDeleted } from 'store/selectors/note-selectors/note-cloud.selectors';
 
 @Injectable()
-export class NoteSyncLocalDeletedEffects {
+export class EntitySyncLocalDeletedEffects {
 
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
@@ -19,13 +18,13 @@ export class NoteSyncLocalDeletedEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.syncLocalDeleted),
+			ofType(actions.syncLocalDeleted),
 			withLatestFrom(this.store.select(selNote_LocalDeleted)),
-			switchMap(([, entities]) =>
+			switchMap(([{ entityType }, entities]) =>
 
-				this.syncService.uploadDeleted(AppEntityType.note, entities).pipe(
+				this.syncService.uploadDeleted(entityType, entities).pipe(
 
-					map(item => entityActions.unloadOne({ entityType: AppEntityType.note, id: item.id }))
+					map(item => actions.unloadOne({ entityType, id: item.id }))
 
 				)
 

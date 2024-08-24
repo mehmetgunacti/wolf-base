@@ -47,22 +47,22 @@ export const search							= createAction('[Note] Search', props<{ term: string }
 
 // CLOUD SYNC
 // local_new
-export const syncLocalNew					= createAction('[Note] Sync Local New');
+// export const syncLocalNew					= createAction('[Note] Sync Local New');
 
 // local_updated
-export const syncLocalUpdated				= createAction('[Note] Sync Local Updated');
+// export const syncLocalUpdated				= createAction('[Note] Sync Local Updated');
 
 // local_deleted
-export const syncLocalDeleted				= createAction('[Note] Sync Local Deleted');
+// export const syncLocalDeleted				= createAction('[Note] Sync Local Deleted');
 
 // remote_new
-export const syncRemoteNew					= createAction('[Note] Sync Remote New');
+// export const syncRemoteNew					= createAction('[Note] Sync Remote New');
 
 // remote_updated
-export const syncRemoteUpdated				= createAction('[Note] Sync Remote Updated');
+// export const syncRemoteUpdated				= createAction('[Note] Sync Remote Updated');
 
 // remote_deleted
-export const syncRemoteDeleted				= createAction('[Note] Sync Remote Deleted');
+// export const syncRemoteDeleted				= createAction('[Note] Sync Remote Deleted');
 
 // deleted_deleted
-export const syncDeletedDeleted				= createAction('[Note] Sync Deleted Deleted');
+// export const syncDeletedDeleted				= createAction('[Note] Sync Deleted Deleted');

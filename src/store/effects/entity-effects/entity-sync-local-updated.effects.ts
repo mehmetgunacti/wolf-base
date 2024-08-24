@@ -1,15 +1,14 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService, AppEntityType } from '@lib';
+import { SyncService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import * as noteActions from 'store/actions/note.actions';
-import * as entityActions from 'store/actions/entity.actions';
+import * as actions from 'store/actions/entity.actions';
 import { selNote_LocalUpdated } from 'store/selectors/note-selectors/note-cloud.selectors';
 
 @Injectable()
-export class NoteSyncLocalUpdatedEffects {
+export class EntitySyncLocalUpdatedEffects {
 
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
@@ -19,13 +18,13 @@ export class NoteSyncLocalUpdatedEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.syncLocalUpdated),
+			ofType(actions.syncLocalUpdated),
 			withLatestFrom(this.store.select(selNote_LocalUpdated)),
-			switchMap(([, items]) =>
+			switchMap(([{ entityType }, items]) =>
 
-				this.syncService.uploadUpdated(AppEntityType.note, items).pipe(
+				this.syncService.uploadUpdated(entityType, items).pipe(
 
-					map(item => entityActions.loadOne({ entityType: AppEntityType.note, id: item.id }))
+					map(item => actions.loadOne({ entityType, id: item.id }))
 
 				)
 

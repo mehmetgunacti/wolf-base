@@ -7,7 +7,7 @@ import { loadAllRemoteMetadata } from 'store/actions/entity.actions';
 import { startSync } from 'store/actions/cloud.actions';
 
 @Injectable()
-export class NoteSyncEffects {
+export class EntitySyncEffects {
 
 	private actions$: Actions = inject(Actions);
 	private syncService: SyncService = inject(SYNC_SERVICE);

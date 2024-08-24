@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
-import { CloudTask, AppEntityType, SyncTaskType } from 'lib';
+import { AppEntityType, CloudTask, SyncTaskType } from 'lib';
 import { Observable } from 'rxjs';
 import * as bmActions from 'store/actions/bookmark.actions';
+import * as entityActions from 'store/actions/entity.actions';
 import * as contentActions from 'store/actions/note-content.actions';
-import * as noteActions from 'store/actions/note.actions';
 import * as taskActions from 'store/actions/project-task.actions';
 import * as projectActions from 'store/actions/project.actions';
 import * as quizEntryActions from 'store/actions/quiz-entry.actions';
@@ -52,28 +52,29 @@ function getBookmarkAction(taskType: SyncTaskType): Action | null {
 
 function getNoteAction(taskType: SyncTaskType): Action | null {
 
+	const entityType = AppEntityType.note;
 	switch (taskType) {
 
 		case SyncTaskType.local_new:
-			return noteActions.syncLocalNew();
+			return entityActions.syncLocalNew({ entityType });
 
 		case SyncTaskType.local_updated:
-			return noteActions.syncLocalUpdated();
+			return entityActions.syncLocalUpdated({ entityType });
 
 		case SyncTaskType.local_deleted:
-			return noteActions.syncLocalDeleted();
+			return entityActions.syncLocalDeleted({ entityType });
 
 		case SyncTaskType.remote_new:
-			return noteActions.syncRemoteNew();
+			return entityActions.syncRemoteNew({ entityType });
 
 		case SyncTaskType.remote_updated:
-			return noteActions.syncRemoteUpdated();
+			return entityActions.syncRemoteUpdated({ entityType });
 
 		case SyncTaskType.remote_deleted:
-			return noteActions.syncRemoteDeleted();
+			return entityActions.syncRemoteDeleted({ entityType });
 
 		case SyncTaskType.deleted_deleted:
-			return noteActions.syncDeletedDeleted();
+			return entityActions.syncDeletedDeleted({ entityType });
 
 		// case CloudTaskType.updated_updated:
 		// case CloudTaskType.updated_deleted:
