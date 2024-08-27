@@ -11,7 +11,6 @@ import { BookmarkSyncLocalUpdatedEffects } from './effects/bookmark-effects/book
 import { BookmarkSyncRemoteDeletedEffects } from './effects/bookmark-effects/bookmark-sync-remote-deleted.effects';
 import { BookmarkSyncRemoteNewEffects } from './effects/bookmark-effects/bookmark-sync-remote-new.effects';
 import { BookmarkSyncRemoteUpdatedEffects } from './effects/bookmark-effects/bookmark-sync-remote-updated.effects';
-import { BookmarkSyncEffects } from './effects/bookmark-effects/bookmark-sync.effects';
 import { BookmarkUIEffects } from './effects/bookmark-effects/bookmark-ui.effects';
 import { CoreLoadEffects } from './effects/core-load.effects';
 import { CoreNavigationEffects } from './effects/core-navigation.effects';
@@ -35,7 +34,6 @@ import { NoteContentSyncLocalUpdatedEffects } from './effects/note-content-effec
 import { NoteContentSyncRemoteDeletedEffects } from './effects/note-content-effects/note-content-sync-remote-deleted.effects';
 import { NoteContentSyncRemoteNewEffects } from './effects/note-content-effects/note-content-sync-remote-new.effects';
 import { NoteContentSyncRemoteUpdatedEffects } from './effects/note-content-effects/note-content-sync-remote-updated.effects';
-import { NoteContentSyncEffects } from './effects/note-content-effects/note-content-sync.effects';
 import { EntitySyncDeletedDeletedEffects } from './effects/entity-effects/entity-sync-deleted-deleted.effects';
 import { EntitySyncLocalDeletedEffects } from './effects/entity-effects/entity-sync-local-deleted.effects';
 import { EntitySyncLocalNewEffects } from './effects/entity-effects/entity-sync-local-new.effects';
@@ -55,7 +53,6 @@ import { ProjectSyncLocalUpdatedEffects } from './effects/project-effects/projec
 import { ProjectSyncRemoteDeletedEffects } from './effects/project-effects/project-sync-remote-deleted.effects';
 import { ProjectSyncRemoteNewEffects } from './effects/project-effects/project-sync-remote-new.effects';
 import { ProjectSyncRemoteUpdatedEffects } from './effects/project-effects/project-sync-remote-updated.effects';
-import { ProjectSyncEffects } from './effects/project-effects/project-sync.effects';
 import { ProjectUIEffects } from './effects/project-effects/project-ui.effects';
 import { TaskEditEffects } from './effects/project-task-effects/project-task-edit-dialog.effects';
 import { TaskEntityMoveToTrashEffects } from './effects/project-task-effects/project-task-entity-move-to-trash.effects';
@@ -68,7 +65,6 @@ import { TaskSyncLocalUpdatedEffects } from './effects/project-task-effects/proj
 import { TaskSyncRemoteDeletedEffects } from './effects/project-task-effects/project-task-sync-remote-deleted.effects';
 import { TaskSyncRemoteNewEffects } from './effects/project-task-effects/project-task-sync-remote-new.effects';
 import { TaskSyncRemoteUpdatedEffects } from './effects/project-task-effects/project-task-sync-remote-updated.effects';
-import { TaskSyncEffects } from './effects/project-task-effects/project-task-sync.effects';
 import { TaskUIEffects } from './effects/project-task-effects/project-task-ui.effects';
 import { QuizEntryEntityMoveToTrashEffects } from './effects/quiz-entry-effects/quiz-entry-entity-move-to-trash.effects';
 import { QuizEntryEntityUpdateEffects } from './effects/quiz-entry-effects/quiz-entry-entity-update.effects';
@@ -80,7 +76,6 @@ import { QuizEntrySyncLocalUpdatedEffects } from './effects/quiz-entry-effects/q
 import { QuizEntrySyncRemoteDeletedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-deleted.effects';
 import { QuizEntrySyncRemoteNewEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-new.effects';
 import { QuizEntrySyncRemoteUpdatedEffects } from './effects/quiz-entry-effects/quiz-entry-sync-remote-updated.effects';
-import { QuizEntrySyncEffects } from './effects/quiz-entry-effects/quiz-entry-sync.effects';
 import { QuizUIEffects } from './effects/quiz-entry-effects/quiz-ui.effects';
 import { QuoteEntityMoveToTrashEffects } from './effects/quote-effects/quote-entity-move-to-trash.effects';
 import { QuoteEntityUpdateEffects } from './effects/quote-effects/quote-entity-update.effects';
@@ -92,7 +87,6 @@ import { QuoteSyncLocalUpdatedEffects } from './effects/quote-effects/quote-sync
 import { QuoteSyncRemoteDeletedEffects } from './effects/quote-effects/quote-sync-remote-deleted.effects';
 import { QuoteSyncRemoteNewEffects } from './effects/quote-effects/quote-sync-remote-new.effects';
 import { QuoteSyncRemoteUpdatedEffects } from './effects/quote-effects/quote-sync-remote-updated.effects';
-import { QuoteSyncEffects } from './effects/quote-effects/quote-sync.effects';
 import { QuoteViewerEffects } from './effects/quote-effects/quote-viewer.effects';
 import { SettingsEffects } from './effects/settings.effects';
 import { WordEntityMoveToTrashEffects } from './effects/word-effects/word-entity-move-to-trash.effects';
@@ -105,7 +99,6 @@ import { WordSyncLocalUpdatedEffects } from './effects/word-effects/word-sync-lo
 import { WordSyncRemoteDeletedEffects } from './effects/word-effects/word-sync-remote-deleted.effects';
 import { WordSyncRemoteNewEffects } from './effects/word-effects/word-sync-remote-new.effects';
 import { WordSyncRemoteUpdatedEffects } from './effects/word-effects/word-sync-remote-updated.effects';
-import { WordSyncEffects } from './effects/word-effects/word-sync.effects';
 import { WordUIEffects } from './effects/word-effects/word-ui.effects';
 import { bookmarkReducer } from './reducers/bookmark-reducers/bookmark.reducer';
 import { cloudReducer } from './reducers/cloud.reducer';
@@ -169,8 +162,6 @@ export const effects = [
 	EntitySyncDeletedDeletedEffects,
 
 	// Bookmarks
-	BookmarkSyncEffects,
-
 	BookmarkSyncLocalNewEffects,
 	BookmarkSyncLocalUpdatedEffects,
 	BookmarkSyncLocalDeletedEffects,
@@ -197,8 +188,6 @@ export const effects = [
 	NoteContentEntityCreateEffects,
 	NoteContentLoadEffects,
 
-	NoteContentSyncEffects,
-
 	NoteContentEntityMoveToTrashEffects,
 	NoteContentEntityUpdateEffects,
 	NoteContentSyncDeletedDeletedEffects,
@@ -210,8 +199,6 @@ export const effects = [
 	NoteContentSyncRemoteUpdatedEffects,
 
 	// Projects
-	ProjectSyncEffects,
-
 	ProjectSyncLocalNewEffects,
 	ProjectSyncLocalUpdatedEffects,
 	ProjectSyncLocalDeletedEffects,
@@ -230,8 +217,6 @@ export const effects = [
 	ProjectUIEffects,
 
 	// Project Tasks
-	TaskSyncEffects,
-
 	TaskSyncLocalNewEffects,
 	TaskSyncLocalUpdatedEffects,
 	TaskSyncLocalDeletedEffects,
@@ -252,8 +237,6 @@ export const effects = [
 	TaskUIEffects,
 
 	// Words
-	WordSyncEffects,
-
 	WordSyncLocalNewEffects,
 	WordSyncLocalUpdatedEffects,
 	WordSyncLocalDeletedEffects,
@@ -272,8 +255,6 @@ export const effects = [
 	WordUIEffects,
 
 	// Quiz
-	QuizEntrySyncEffects,
-
 	QuizEntrySyncLocalNewEffects,
 	QuizEntrySyncLocalUpdatedEffects,
 	QuizEntrySyncLocalDeletedEffects,
@@ -292,8 +273,6 @@ export const effects = [
 	QuizUIEffects,
 
 	// Quotes
-	QuoteSyncEffects,
-
 	QuoteSyncLocalNewEffects,
 	QuoteSyncLocalUpdatedEffects,
 	QuoteSyncLocalDeletedEffects,

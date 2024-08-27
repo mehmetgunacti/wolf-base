@@ -5,7 +5,7 @@ import { selQuizEntry_EntitiesState } from './quiz-entry.selectors';
 export const selQuizEntry_entities = createSelector(
 
 	selQuizEntry_EntitiesState,
-	(entities): Record<UUID, QuizProgress> => entities.entities as Record<UUID, QuizProgress>
+	(state): Record<UUID, QuizProgress> => state.entities as Record<UUID, QuizProgress>
 
 );
 

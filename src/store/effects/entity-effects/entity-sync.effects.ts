@@ -1,10 +1,12 @@
-import { Injectable, inject } from '@angular/core';
-import { SyncService, AppEntityType } from '@lib';
+import { inject, Injectable } from '@angular/core';
+import { AppEntityType, SyncService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
-import { map, switchMap } from 'rxjs/operators';
+import { merge, Observable } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { downloadRemoteMetadata } from 'store/actions/cloud.actions';
 import { loadAllRemoteMetadata } from 'store/actions/entity.actions';
-import { startSync } from 'store/actions/cloud.actions';
 
 @Injectable()
 export class EntitySyncEffects {
@@ -12,21 +14,28 @@ export class EntitySyncEffects {
 	private actions$: Actions = inject(Actions);
 	private syncService: SyncService = inject(SYNC_SERVICE);
 
-	startSync$ = createEffect(
+	downloadRemoteMetadata$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(startSync),
-			switchMap(() =>
-
-				this.syncService.downloadMetadata(AppEntityType.note).pipe(
-					map(() => loadAllRemoteMetadata({ entityType: AppEntityType.note }))
-				)
-
-			)
+			ofType(downloadRemoteMetadata),
+			switchMap(() => merge(...this.createOps())),
+			tap(console.log)
 
 		)
 
 	);
+
+	private createOps(): Observable<Action>[] {
+
+		return Object.values(AppEntityType).map(entityType =>
+
+			this.syncService.downloadMetadata(entityType).pipe(
+				map(() => loadAllRemoteMetadata({ entityType }))
+			)
+
+		);
+
+	}
 
 }

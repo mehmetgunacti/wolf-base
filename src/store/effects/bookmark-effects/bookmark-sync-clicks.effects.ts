@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { BOOKMARK_SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { loadAllClicks, loadOneClickSuccess, uploadClicked } from 'store/actions/bookmark.actions';
-import { startSync } from 'store/actions/cloud.actions';
+import { downloadRemoteMetadata } from 'store/actions/cloud.actions';
 import { selBookmark_clicked } from 'store/selectors/bookmark-selectors/bookmark-entities.selectors';
 
 @Injectable()
@@ -37,7 +37,7 @@ export class BookmarkSyncClicksEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(startSync),
+			ofType(downloadRemoteMetadata),
 			switchMap(() =>
 
 				this.syncService.downloadClicks().pipe(

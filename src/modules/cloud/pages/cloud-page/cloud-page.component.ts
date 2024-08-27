@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { closeConflictDialog, startSync } from 'store/actions/cloud.actions';
+import { closeConflictDialog, downloadRemoteMetadata } from 'store/actions/cloud.actions';
 import { selCloudConflictDialogTitle, selCloudIsConflictDialogVisible } from 'store/selectors/cloud-ui.selectors';
 import { selCore_isFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
 import { selCore_isBigScreen } from 'store/selectors/core-ui.selectors';
@@ -31,7 +31,7 @@ export class CloudPageComponent {
 
 	onDownloadRemoteIds(): void {
 
-		this.store.dispatch(startSync());
+		this.store.dispatch(downloadRemoteMetadata());
 
 	}
 

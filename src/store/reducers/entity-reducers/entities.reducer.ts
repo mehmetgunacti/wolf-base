@@ -67,14 +67,22 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(actions.loadAllRemoteMetadataSuccess, (state, { entityType, remoteMetadata }): Entity_ModuleState => ({
+	on(actions.loadAllRemoteMetadataSuccess, (state, { entityType, remoteMetadata }): Entity_ModuleState => {
 
-		...state,
-		[entityType]: {
-			remoteMetadata: remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>)
-		}
+		console.log('incoming:', entityType);
 
-	}))
+		return produce(
+
+			state,
+			draft => {
+
+				draft[entityType].remoteMetadata = remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>);
+
+			}
+
+		);
+
+	})
 
 );
 
