@@ -41,7 +41,7 @@ import { EntitySyncLocalUpdatedEffects } from './effects/entity-effects/entity-s
 import { EntitySyncRemoteDeletedEffects } from './effects/entity-effects/entity-sync-remote-deleted.effects';
 import { EntitySyncRemoteNewEffects } from './effects/entity-effects/entity-sync-remote-new.effects';
 import { EntitySyncRemoteUpdatedEffects } from './effects/entity-effects/entity-sync-remote-updated.effects';
-import { EntitySyncEffects } from './effects/entity-effects/entity-sync.effects';
+import { EntitySyncRemoteRefreshEffects } from './effects/entity-effects/entity-sync-remote-refresh.effects';
 import { NoteUIEffects } from './effects/note-effects/note-ui.effects';
 import { ProjectEntityMoveToTrashEffects } from './effects/project-effects/project-entity-move-to-trash.effects';
 import { ProjectEntityUpdateEffects } from './effects/project-effects/project-entity-update.effects';
@@ -149,7 +149,7 @@ export const effects = [
 	EntityUpdateEffects,
 	EntityMoveToTrashEffects,
 
-	EntitySyncEffects,
+	EntitySyncRemoteRefreshEffects,
 
 	EntitySyncLocalNewEffects,
 	EntitySyncLocalUpdatedEffects,

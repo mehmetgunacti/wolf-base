@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { BOOKMARK_SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { loadAllClicks, loadOneClickSuccess, uploadClicked } from 'store/actions/bookmark.actions';
-import { downloadRemoteMetadata } from 'store/actions/cloud.actions';
+import { downloadRemoteMetadata } from 'store/actions/entity.actions';
 import { selBookmark_clicked } from 'store/selectors/bookmark-selectors/bookmark-entities.selectors';
 
 @Injectable()

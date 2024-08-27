@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
-import { from, of } from 'rxjs';
+import { from } from 'rxjs';
 import { concatMap, map, switchMap } from 'rxjs/operators';
 import * as actions from 'store/actions/entity.actions';
 
@@ -76,23 +76,23 @@ export class EntityLoadEffects {
 
 	);
 
-	loadAllRemoteMetadata$ = createEffect(
+	// loadAllRemoteMetadata$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(actions.loadAllRemoteMetadata),
-			switchMap(({ entityType }) =>
+	// 		ofType(actions.loadAllRemoteMetadata),
+	// 		switchMap(({ entityType }) =>
 
-				from(
-					this.localRepository.getRepository(entityType).listRemoteMetadata()
-				).pipe(
-					map(remoteMetadata => actions.loadAllRemoteMetadataSuccess({ entityType, remoteMetadata }))
-				)
+	// 			from(
+	// 				this.localRepository.getRepository(entityType).listRemoteMetadata()
+	// 			).pipe(
+	// 				map(remoteMetadata => actions.loadAllRemoteMetadataSuccess({ entityType, remoteMetadata }))
+	// 			)
 
-			)
+	// 		)
 
-		)
+	// 	)
 
-	);
+	// );
 
 }

@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { closeConflictDialog, downloadRemoteMetadata } from 'store/actions/cloud.actions';
+import { closeConflictDialog } from 'store/actions/cloud.actions';
+import { downloadRemoteMetadata } from 'store/actions/entity.actions';
 import { selCloudConflictDialogTitle, selCloudIsConflictDialogVisible } from 'store/selectors/cloud-ui.selectors';
 import { selCore_isFirestoreConfigMissing } from 'store/selectors/core-configuration.selectors';
 import { selCore_isBigScreen } from 'store/selectors/core-ui.selectors';

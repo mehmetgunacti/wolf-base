@@ -1,8 +1,27 @@
-import { Entity, RemoteMetadata, SyncData, UUID } from '@lib';
+import { AppEntityType, Entity, RemoteMetadata, SyncData, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
 import * as actions from 'store/actions/entity.actions';
 import { entity_initialState, Entity_ModuleState } from 'store/states/entity.state';
+
+function reduceEntities(data: Entity[]): Record<UUID, Entity> {
+
+	return data.reduce((record, e) => { record[e.id] = e; return record; }, {} as Record<UUID, Entity>);
+
+}
+
+
+function reduceSyncData(data: SyncData[]): Record<UUID, SyncData> {
+
+	return data.reduce((record, sd) => { record[sd.id] = sd; return record; }, {} as Record<UUID, SyncData>);
+
+}
+
+function reduceRemoteMetadata(data: RemoteMetadata[]): Record<UUID, RemoteMetadata> {
+
+	return data.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>);
+
+}
 
 const reducer = createReducer(
 
@@ -39,9 +58,9 @@ const reducer = createReducer(
 
 		...state,
 		[entityType]: {
-			entities: entities.reduce((record, entity) => { record[entity.id] = entity; return record; }, {} as Record<UUID, Entity>),
-			syncData: syncData.reduce((record, syncData) => { record[syncData.id] = syncData; return record; }, {} as Record<UUID, SyncData>),
-			remoteMetadata: remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>)
+			entities: reduceEntities(entities),
+			syncData: reduceSyncData(syncData),
+			remoteMetadata: reduceRemoteMetadata(remoteMetadata)
 		}
 
 	})),
@@ -67,16 +86,22 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(actions.loadAllRemoteMetadataSuccess, (state, { entityType, remoteMetadata }): Entity_ModuleState => {
+	on(actions.downloadRemoteMetadataSuccess, (state, { data }): Entity_ModuleState => {
 
-		console.log('incoming:', entityType);
+		console.log('incoming:', data);
 
 		return produce(
 
 			state,
 			draft => {
 
-				draft[entityType].remoteMetadata = remoteMetadata.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>);
+				Object.keys(data).forEach(key => {
+
+					const entityType = key as AppEntityType;
+					const remoteMetadata = data[entityType];
+					draft[entityType].remoteMetadata = reduceRemoteMetadata(remoteMetadata);
+
+				});
 
 			}
 

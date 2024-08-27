@@ -9,7 +9,7 @@ export class SyncServiceImpl implements SyncService {
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 	private remoteRepository: RemoteRepositoryService = inject(REMOTE_REPOSITORY_SERVICE);
 
-	downloadMetadata(entityType: AppEntityType): Observable<Entity[]> {
+	downloadMetadata(entityType: AppEntityType): Observable<RemoteMetadata[]> {
 
 		// download remote metadata list
 		return this.remoteRepository.getRepository(entityType).downloadAllMetadata().pipe(

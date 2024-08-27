@@ -1,10 +1,10 @@
 import { AppEntityType } from 'lib/constants';
-import { Click, Entity, NameBase } from 'lib/models';
+import { Click, NameBase, RemoteMetadata } from 'lib/models';
 import { Observable } from 'rxjs';
 
 export interface SyncService {
 
-	downloadMetadata(entityType: AppEntityType): Observable<Entity[]>;
+	downloadMetadata(entityType: AppEntityType): Observable<RemoteMetadata[]>;
 
 	uploadNew(entityType: AppEntityType, items: NameBase[]): Observable<NameBase>;
 

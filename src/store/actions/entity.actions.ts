@@ -26,8 +26,9 @@ export const loadOneSyncData				= createAction('[Entity] Load One SyncData', pro
 export const loadOneSyncDataSuccess			= createAction('[Entity] Load One SyncData Success', props<{ entityType: AppEntityType, syncData: SyncData | null }>());
 
 //// RemoteMetadata
-export const loadAllRemoteMetadata			= createAction('[Entity] Load All RemoteMetadata', props<{ entityType: AppEntityType }>());
-export const loadAllRemoteMetadataSuccess	= createAction('[Entity] Load All RemoteMetadata Success', props<{ entityType: AppEntityType, remoteMetadata: RemoteMetadata[] }>());
+// export const loadAllRemoteMetadataSuccess	= createAction('[Entity] Load All RemoteMetadata Success', props<{ entityType: AppEntityType, remoteMetadata: RemoteMetadata[] }>());
+export const downloadRemoteMetadata			= createAction('[Entity] Download Remote Metadata');
+export const downloadRemoteMetadataSuccess	= createAction('[Entity] Download Remote Metadata Success', props<{ data: Record<AppEntityType, RemoteMetadata[]> }>());
 
 // CLOUD SYNC
 // local_new
