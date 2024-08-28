@@ -1,11 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { AppEntities, LocalRepositoryService } from '@lib';
+import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { navigate } from 'store/actions/core-navigation.actions';
-import { showNotification } from 'store/actions/core-notification.actions';
 import * as actions from 'store/actions/entity.actions';
 
 @Injectable()
@@ -28,28 +26,6 @@ export class EntityUpdateEffects {
 				)
 
 			)
-
-		)
-
-	);
-
-	navigate$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(actions.updateSuccess),
-			map(({ id, entityType }) => navigate({ url: [`/${AppEntities[entityType].plural}`, id] }))
-
-		)
-
-	);
-
-	showNotification$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(actions.updateSuccess),
-			map(({ entityType, id }) => showNotification({ severity: 'success', detail: `${AppEntities[entityType].label} updated` }))
 
 		)
 

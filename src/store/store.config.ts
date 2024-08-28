@@ -44,6 +44,8 @@ import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
 import { EntityMoveToTrashEffects } from './effects/entity-effects/entity-move-to-trash.effects';
+import { NoteCreateEffects } from './effects/note-effects/note-create.effects';
+import { NoteUpdateEffects } from './effects/note-effects/note-update.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -98,6 +100,8 @@ export const effects = [
 
 	// Notes
 	NoteUIEffects,
+	NoteCreateEffects,
+	NoteUpdateEffects,
 
 	// Projects
 	ProjectUIEffects,
