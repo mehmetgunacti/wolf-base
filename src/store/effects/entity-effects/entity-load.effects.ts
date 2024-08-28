@@ -2,8 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
-import { from } from 'rxjs';
-import { concatMap, map, switchMap } from 'rxjs/operators';
+import { forkJoin, from, of } from 'rxjs';
+import { concatMap, map, switchMap, tap, toArray } from 'rxjs/operators';
 import * as actions from 'store/actions/entity.actions';
 
 @Injectable()
@@ -39,19 +39,26 @@ export class EntityLoadEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.loadAll),
-			concatMap(({ entityType }) =>
+			tap(a => console.log(Date.now())),
+			switchMap(({ types }) =>
 
-				from(Promise.all([
+				from(types).pipe(
 
-					this.localRepository.getRepository(entityType).list(),
-					this.localRepository.getRepository(entityType).listSyncData(),
-					this.localRepository.getRepository(entityType).listRemoteMetadata()
+					concatMap(entityType => forkJoin({
 
-				])).pipe(
-					map(([entities, syncData, remoteMetadata]) => actions.loadAllSuccess({ entityType, entities, syncData, remoteMetadata }))
+						entityType: of(entityType),
+						entities: from(this.localRepository.getRepository(entityType).list()),
+						syncData: from(this.localRepository.getRepository(entityType).listSyncData()),
+						remoteMetadata: from(this.localRepository.getRepository(entityType).listRemoteMetadata())
+
+					})),
+					toArray()
+
 				)
 
-			)
+			),
+			tap(a => console.log(a, Date.now())),
+			map(data => actions.loadAllSuccess({ data }))
 
 		)
 
@@ -75,24 +82,5 @@ export class EntityLoadEffects {
 		)
 
 	);
-
-	// loadAllRemoteMetadata$ = createEffect(
-
-	// 	() => this.actions$.pipe(
-
-	// 		ofType(actions.loadAllRemoteMetadata),
-	// 		switchMap(({ entityType }) =>
-
-	// 			from(
-	// 				this.localRepository.getRepository(entityType).listRemoteMetadata()
-	// 			).pipe(
-	// 				map(remoteMetadata => actions.loadAllRemoteMetadataSuccess({ entityType, remoteMetadata }))
-	// 			)
-
-	// 		)
-
-	// 	)
-
-	// );
 
 }

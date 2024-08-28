@@ -54,16 +54,26 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(actions.loadAllSuccess, (state, { entityType, entities, syncData, remoteMetadata }): Entity_ModuleState => ({
+	on(actions.loadAllSuccess, (state, { data }): Entity_ModuleState => {
 
-		...state,
-		[entityType]: {
-			entities: reduceEntities(entities),
-			syncData: reduceSyncData(syncData),
-			remoteMetadata: reduceRemoteMetadata(remoteMetadata)
-		}
+		return produce(
 
-	})),
+			state,
+			draft => {
+
+				for (const d of data) {
+
+					draft[d.entityType].entities = reduceEntities(d.entities);
+					draft[d.entityType].syncData = reduceSyncData(d.syncData);
+					draft[d.entityType].remoteMetadata = reduceRemoteMetadata(d.remoteMetadata);
+
+				}
+
+			}
+
+		);
+
+	}),
 	on(actions.moveToTrashSuccess, (state, { entityType, id }): Entity_ModuleState => {
 
 		return produce(

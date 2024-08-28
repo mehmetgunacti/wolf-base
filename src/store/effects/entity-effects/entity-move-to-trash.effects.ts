@@ -43,12 +43,12 @@ export class EntityMoveToTrashEffects {
 
 	);
 
-	loadAllNotes$ = createEffect(
+	loadAll$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(actions.moveToTrashSuccess),
-			map(({ entityType }) => actions.loadAll({ entityType }))
+			map(({ entityType, id }) => actions.loadOne({ entityType, id }))
 
 		)
 
