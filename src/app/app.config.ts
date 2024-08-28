@@ -12,7 +12,6 @@ import { SyncServiceImpl } from 'services/sync.service';
 import * as bmActions from 'store/actions/bookmark.actions';
 import * as coreActions from 'store/actions/core.actions';
 import * as entityActions from 'store/actions/entity.actions';
-import * as noteContentActions from 'store/actions/note-content.actions';
 
 export const routes: Routes = [
 

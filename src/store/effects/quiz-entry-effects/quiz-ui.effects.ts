@@ -1,11 +1,12 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Injectable, inject } from '@angular/core';
-import { UUID } from '@lib';
+import { AppEntityType, UUID } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { QuizAnswerContainerComponent } from 'modules/home/containers/quiz-answer-container/quiz-answer-container.component';
 import { filter, map, tap } from 'rxjs/operators';
 import { navigate } from 'store/actions/core-navigation.actions';
 import * as quizActions from 'store/actions/quiz-entry.actions';
+import * as entityActions from 'store/actions/entity.actions';
 
 @Injectable()
 export class QuizUIEffects {
@@ -46,7 +47,7 @@ export class QuizUIEffects {
 		() => this.actions$.pipe(
 
 			ofType(quizActions.closeShowAnswerDialog),
-			map(({ quizProgressId }) => quizActions.update({ id: quizProgressId, answeredRight: false }))
+			map(({ quizProgressId }) => entityActions.update({ entityType: AppEntityType.quizEntry, id: quizProgressId, entity: { answeredRight: false } }))
 
 		)
 

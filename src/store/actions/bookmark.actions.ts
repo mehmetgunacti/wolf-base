@@ -32,25 +32,4 @@ export const emptySelectedTags				= createAction('[Bookmark] Empty Selected Tags
 export const search							= createAction('[Bookmark] Search', props<{ term: string }>());
 
 // CLOUD SYNC
-// local_new
-export const syncLocalNew					= createAction('[Bookmark] Sync Local New');
-
-// local_updated
-export const syncLocalUpdated				= createAction('[Bookmark] Sync Local Updated');
-
-// local_deleted
-export const syncLocalDeleted				= createAction('[Bookmark] Sync Local Deleted');
-
-// remote_new
-export const syncRemoteNew					= createAction('[Bookmark] Sync Remote New');
-
-// remote_updated
-export const syncRemoteUpdated				= createAction('[Bookmark] Sync Remote Updated');
-
-// remote_deleted
-export const syncRemoteDeleted				= createAction('[Bookmark] Sync Remote Deleted');
-
-// deleted_deleted
-export const syncDeletedDeleted				= createAction('[Bookmark] Sync Deleted Deleted');
-
 export const uploadClicked					= createAction('[Bookmark] Upload Clicked');

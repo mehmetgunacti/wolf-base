@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Note, UUID } from 'lib';
+import { AppEntityType, Note, NoteContent, UUID } from 'lib';
 import { Observable, filter, take, tap, withLatestFrom } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
-import { create, update } from 'store/actions/note-content.actions';
 import { selNoteContent_content } from 'store/selectors/note-content-selectors/note-content-entities.selectors';
 import { selNote_selected } from 'store/selectors/note-selectors/note-entities.selectors';
+import * as entityActions from 'store/actions/entity.actions';
 
 @Component({
 	selector: 'app-note-content-edit-container',
@@ -42,9 +42,9 @@ export class NoteContentEditContainerComponent {
 		).subscribe(([note, noteContent]) => {
 
 			if (noteContent)
-				this.store.dispatch(update({ id: note.id, content: { name: note.name, content: this.fcContent.value } }));
+				this.store.dispatch(entityActions.update({ entityType: AppEntityType.noteContent, id: note.id, entity: { name: note.name, content: this.fcContent.value } }));
 			else
-				this.store.dispatch(create({ content: { id: note.id, name: note.name, content: this.fcContent.value } }));
+				this.store.dispatch(entityActions.create({ entityType: AppEntityType.noteContent, entity: { id: note.id, name: note.name, content: this.fcContent.value } as NoteContent }));
 
 		});
 

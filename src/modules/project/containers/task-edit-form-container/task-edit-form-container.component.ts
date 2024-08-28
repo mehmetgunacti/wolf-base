@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { NameBase, Task, UUID } from 'lib';
+import { AppEntityType, NameBase, Task, UUID } from 'lib';
 import { combineLatest, map, Observable, Subject } from 'rxjs';
 import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
-import { closeEditDialog, create, update } from 'store/actions/project-task.actions';
+import * as entityActions from 'store/actions/entity.actions';
+import { closeEditDialog } from 'store/actions/project-task.actions';
 import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
 import { selTask_distinctTagNames } from 'store/selectors/project-task-selectors/task-tags.selectors';
 import { selTask_selected } from 'store/selectors/project-task-selectors/task-ui.selectors';
@@ -54,13 +55,13 @@ export class TaskEditFormContainerComponent {
 
 	onCreate(task: Partial<Task>): void {
 
-		this.store.dispatch(create({ task }));
+		this.store.dispatch(entityActions.create({ entityType: AppEntityType.task, entity: task }));
 
 	}
 
 	onUpdate(id: UUID, task: Partial<Task>): void {
 
-		this.store.dispatch(update({ id, task }));
+		this.store.dispatch(entityActions.update({ entityType: AppEntityType.task, id, entity: task }));
 
 	}
 

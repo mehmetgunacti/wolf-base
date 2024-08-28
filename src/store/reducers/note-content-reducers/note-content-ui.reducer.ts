@@ -1,6 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import * as contentActions from 'store/actions/note-content.actions';
 import * as noteActions from 'store/actions/note.actions';
 import { noteContent_initialUIState, NoteContent_UIState } from 'store/states/note-content.state';
 
@@ -19,7 +18,7 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(contentActions.loadOneContentSuccess, (state, { content }): NoteContent_UIState => ({ ...state, content }))
+	// on(contentActions.loadOneContentSuccess, (state, { content }): NoteContent_UIState => ({ ...state, content }))
 
 );
 

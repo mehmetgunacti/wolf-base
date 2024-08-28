@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UUID, Word } from 'lib';
+import { AppEntityType, UUID, Word } from 'lib';
 import { Observable } from 'rxjs';
-import { update } from 'store/actions/word.actions';
+import { update } from 'store/actions/entity.actions';
 import { selWord_selected } from 'store/selectors/word-selectors/word-entities.selectors';
 
 @Component({
@@ -25,7 +25,7 @@ export class WordEditFormContainerComponent {
 
 	onUpdate(id: UUID, word: Partial<Word>) {
 
-		this.store.dispatch(update({ id, word }));
+		this.store.dispatch(update({ entityType: AppEntityType.word, id, entity: word }));
 
 	}
 
