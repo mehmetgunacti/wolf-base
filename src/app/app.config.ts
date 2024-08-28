@@ -82,21 +82,21 @@ const appInitializerFactory = (store: Store) => {
 
 		// load entities
 		store.dispatch(entityActions.loadAll({
-			types: [
 
-				AppEntityType.bookmark,
-				AppEntityType.note,
-				AppEntityType.word,
-				AppEntityType.quote,
-				AppEntityType.quizEntry,
-				AppEntityType.project,
-				AppEntityType.task
+			filter: [
+
+				{ entityType: AppEntityType.bookmark, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.note, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.noteContent, loadEntities: false, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.word, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.quote, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.quizEntry, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.project, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.task, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
 
 			]
-		}));
 
-		// load note content
-		store.dispatch(noteContentActions.loadAll());
+		}));
 
 		// load clicks
 		store.dispatch(bmActions.loadAllClicks());

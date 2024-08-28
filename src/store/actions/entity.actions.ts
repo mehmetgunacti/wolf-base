@@ -13,7 +13,7 @@ export const moveToTrashSuccess				= createAction('[Entity] Move to Trash Succes
 
 // LOAD (IndexedDb -> NgRx Store)
 // Entity
-export const loadAll						= createAction('[Entity] Load All', props<{ types: AppEntityType[] }>());
+export const loadAll						= createAction('[Entity] Load All', props<{ filter: { entityType: AppEntityType, loadEntities: boolean, loadSyncData: boolean, loadRemoteMetadata: boolean }[] }>());
 export const loadAllSuccess					= createAction('[Entity] Load All Success', props<{ data: { entityType: AppEntityType, entities: Entity[], syncData: SyncData[], remoteMetadata: RemoteMetadata[] }[] }>());
 
 export const loadOne						= createAction('[Entity] Load One', props<{ entityType: AppEntityType, id: UUID }>());

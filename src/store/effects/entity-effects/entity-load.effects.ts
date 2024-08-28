@@ -39,17 +39,16 @@ export class EntityLoadEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.loadAll),
-			tap(a => console.log(Date.now())),
-			switchMap(({ types }) =>
+			switchMap(({ filter }) =>
 
-				from(types).pipe(
+				from(filter).pipe(
 
-					concatMap(entityType => forkJoin({
+					concatMap(({ entityType, loadEntities, loadSyncData, loadRemoteMetadata }) => forkJoin({
 
 						entityType: of(entityType),
-						entities: from(this.localRepository.getRepository(entityType).list()),
-						syncData: from(this.localRepository.getRepository(entityType).listSyncData()),
-						remoteMetadata: from(this.localRepository.getRepository(entityType).listRemoteMetadata())
+						entities: loadEntities ? from(this.localRepository.getRepository(entityType).list()) : of([]),
+						syncData: loadSyncData ? from(this.localRepository.getRepository(entityType).listSyncData()) : of([]),
+						remoteMetadata: loadRemoteMetadata ? from(this.localRepository.getRepository(entityType).listRemoteMetadata()) : of([])
 
 					})),
 					toArray()
@@ -57,7 +56,6 @@ export class EntityLoadEffects {
 				)
 
 			),
-			tap(a => console.log(a, Date.now())),
 			map(data => actions.loadAllSuccess({ data }))
 
 		)

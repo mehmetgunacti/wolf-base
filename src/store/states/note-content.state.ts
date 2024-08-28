@@ -1,16 +1,12 @@
-import { NoteContent, RemoteMetadata, SyncData, UUID } from '@lib';
+import { NoteContent } from '@lib';
 
 export interface NoteContent_ModuleState {
 
-	entities: NoteContent_EntitiesState;
+	ui: NoteContent_UIState;
 
 }
 
-export interface NoteContent_EntitiesState {
-
-	ids: Record<UUID, boolean>;
-	syncData: Record<UUID, SyncData>;
-	remoteMetadata: Record<UUID, RemoteMetadata>;
+export interface NoteContent_UIState {
 
 	content: NoteContent | null;
 
@@ -18,11 +14,7 @@ export interface NoteContent_EntitiesState {
 
 // INITIALIZATION
 
-export const noteContent_initialEntitiesState: NoteContent_EntitiesState = {
-
-	ids: {},
-	syncData: {},
-	remoteMetadata: {},
+export const noteContent_initialUIState: NoteContent_UIState = {
 
 	content: null
 
@@ -30,6 +22,6 @@ export const noteContent_initialEntitiesState: NoteContent_EntitiesState = {
 
 export const noteContent_initialState: NoteContent_ModuleState = {
 
-	entities: noteContent_initialEntitiesState
+	ui: noteContent_initialUIState
 
 };

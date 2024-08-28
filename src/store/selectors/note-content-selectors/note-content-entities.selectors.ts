@@ -1,12 +1,12 @@
 import { NameBase } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selNote_entities } from '../note-selectors/note-entities.selectors';
-import { selNoteContent_EntitiesState } from './note-content.selectors';
+import { selNoteContent_EntitiesState, selNoteContent_UIState } from './note-content.selectors';
 
 export const selNoteContent_ids = createSelector(
 
 	selNoteContent_EntitiesState,
-	entities => Object.keys(entities.ids)
+	state => Object.keys(state.entities)
 
 );
 
@@ -27,7 +27,7 @@ export const selNoteContent_count = createSelector(
 
 export const selNoteContent_content = createSelector(
 
-	selNoteContent_EntitiesState,
+	selNoteContent_UIState,
 	state => state.content
 
 );
