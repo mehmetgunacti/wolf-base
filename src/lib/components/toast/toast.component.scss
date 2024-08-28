@@ -14,6 +14,7 @@
 
 	color				: fn-hsl(text);
 	transition			: $bg-transition;
+	cursor				: pointer;
 
 	@include mx-box-shadow;
 
