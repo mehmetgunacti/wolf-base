@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppEntityType, Bookmark, ToastConfiguration, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
-import { closeEditBookmarkDialog, moveToTrash, update } from 'store/actions/bookmark.actions';
+import { closeEditBookmarkDialog } from 'store/actions/bookmark.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import * as entityActions from 'store/actions/entity.actions';
 import { distinctTagsArray } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
@@ -63,13 +63,13 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	onUpdate(id: UUID, bookmark: Partial<Bookmark>) {
 
-		this.store.dispatch(update({ id, bookmark }));
+		this.store.dispatch(entityActions.update({ entityType: AppEntityType.bookmark, id, entity: bookmark }));
 
 	}
 
 	onRemove(id: UUID): void {
 
-		this.store.dispatch(moveToTrash({ id }));
+		this.store.dispatch(entityActions.moveToTrash({ entityType: AppEntityType.bookmark, id }));
 
 	}
 

@@ -1,22 +1,25 @@
-import { Click, UUID } from '@lib';
+import { AppEntityType, Click, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
 import * as bmActions from 'store/actions/bookmark.actions';
+import * as entityActions from 'store/actions/entity.actions';
 import { bookmark_initialClicksState, BookmarkClicksState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(
 
 	bookmark_initialClicksState,
-	on(bmActions.unloadOne, (state, { id }): BookmarkClicksState => {
+	on(entityActions.unloadOne, (state, { entityType, id }): BookmarkClicksState => {
 
-		return produce(
-			state,
-			draft => {
+		if (entityType === AppEntityType.bookmark)
+			return produce(
+				state,
+				draft => {
 
-				delete draft.values[id];
+					delete draft.values[id];
 
-			}
-		);
+				}
+			);
+		return state;
 
 	}),
 	on(

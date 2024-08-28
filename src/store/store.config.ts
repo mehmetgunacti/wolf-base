@@ -1,16 +1,6 @@
 import { Action, ActionReducer, ActionReducerMap, MetaReducer, combineReducers } from '@ngrx/store';
-import { BookmarkEntityCreateEffects } from './effects/bookmark-effects/bookmark-entity-create.effects';
-import { BookmarkEntityMoveToTrashEffects } from './effects/bookmark-effects/bookmark-entity-move-to-trash.effects';
-import { BookmarkEntityUpdateEffects } from './effects/bookmark-effects/bookmark-entity-update.effects';
 import { BookmarkLoadEffects } from './effects/bookmark-effects/bookmark-load.effects';
 import { BookmarkSyncClicksEffects } from './effects/bookmark-effects/bookmark-sync-clicks.effects';
-import { BookmarkSyncDeletedDeletedEffects } from './effects/bookmark-effects/bookmark-sync-deleted-deleted.effects';
-import { BookmarkSyncLocalDeletedEffects } from './effects/bookmark-effects/bookmark-sync-local-deleted.effects';
-import { BookmarkSyncLocalNewEffects } from './effects/bookmark-effects/bookmark-sync-local-new.effects';
-import { BookmarkSyncLocalUpdatedEffects } from './effects/bookmark-effects/bookmark-sync-local-updated.effects';
-import { BookmarkSyncRemoteDeletedEffects } from './effects/bookmark-effects/bookmark-sync-remote-deleted.effects';
-import { BookmarkSyncRemoteNewEffects } from './effects/bookmark-effects/bookmark-sync-remote-new.effects';
-import { BookmarkSyncRemoteUpdatedEffects } from './effects/bookmark-effects/bookmark-sync-remote-updated.effects';
 import { BookmarkUIEffects } from './effects/bookmark-effects/bookmark-ui.effects';
 import { CoreLoadEffects } from './effects/core-load.effects';
 import { CoreNavigationEffects } from './effects/core-navigation.effects';
@@ -162,21 +152,7 @@ export const effects = [
 	EntitySyncDeletedDeletedEffects,
 
 	// Bookmarks
-	BookmarkSyncLocalNewEffects,
-	BookmarkSyncLocalUpdatedEffects,
-	BookmarkSyncLocalDeletedEffects,
-
-	BookmarkSyncRemoteNewEffects,
-	BookmarkSyncRemoteUpdatedEffects,
-	BookmarkSyncRemoteDeletedEffects,
-
-	BookmarkSyncDeletedDeletedEffects,
-
 	BookmarkSyncClicksEffects,
-
-	BookmarkEntityCreateEffects,
-	BookmarkEntityUpdateEffects,
-	BookmarkEntityMoveToTrashEffects,
 
 	BookmarkLoadEffects,
 	BookmarkUIEffects,

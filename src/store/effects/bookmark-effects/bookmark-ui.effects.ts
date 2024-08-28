@@ -1,7 +1,7 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
-import { LocalRepositoryService, TAG_POPULAR, commaSplit, toggleArrayItem } from '@lib';
+import { AppEntityType, LocalRepositoryService, TAG_POPULAR, commaSplit, toggleArrayItem } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
@@ -9,6 +9,7 @@ import { BookmarkEditContainerComponent } from 'modules/bookmark/containers/book
 import { from } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import * as bmActions from 'store/actions/bookmark.actions';
+import * as entityActions from 'store/actions/entity.actions';
 
 @Injectable()
 export class BookmarkUIEffects {
@@ -43,8 +44,8 @@ export class BookmarkUIEffects {
 			ofType(
 				bmActions.closeEditBookmarkDialog,
 				// bmActions.createSuccess,
-				bmActions.updateSuccess,
-				bmActions.moveToTrashSuccess
+				entityActions.updateSuccess,
+				entityActions.moveToTrashSuccess
 			),
 			map(() => this.dialogRef?.close())
 
@@ -162,7 +163,7 @@ export class BookmarkUIEffects {
 			switchMap(({ id }) =>
 
 				from(this.localRepository.bookmarks.toggleTag(id, TAG_POPULAR)).pipe(
-					map(() => bmActions.loadOne({ id }))
+					map(() => entityActions.loadOne({ entityType: AppEntityType.bookmark, id }))
 				)
 
 			)
