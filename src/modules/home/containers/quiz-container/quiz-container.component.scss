@@ -9,6 +9,7 @@
 	--color-red		: #{fn-hsl(error)};
 
 	@include mx-flex-column;
+	overflow		: hidden;
 
 	& > [quiz_header] {
 
