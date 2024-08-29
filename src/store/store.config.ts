@@ -24,6 +24,9 @@ import { EntitySyncRemoteRefreshEffects } from './effects/entity-effects/entity-
 import { EntitySyncRemoteUpdatedEffects } from './effects/entity-effects/entity-sync-remote-updated.effects';
 import { EntityUpdateEffects } from './effects/entity-effects/entity-update.effects';
 import { LogsEffects } from './effects/logs.effects';
+import { NoteContentCreateEffects } from './effects/note-content-effects/note-content-create.effects';
+import { NoteContentLoadEffects } from './effects/note-content-effects/note-content-load.effects';
+import { NoteContentUpdateEffects } from './effects/note-content-effects/note-content-update.effects';
 import { NoteCreateEffects } from './effects/note-effects/note-create.effects';
 import { NoteUIEffects } from './effects/note-effects/note-ui.effects';
 import { NoteUpdateEffects } from './effects/note-effects/note-update.effects';
@@ -48,7 +51,6 @@ import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.redu
 import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
-import { NoteContentLoadEffects } from './effects/note-content-effects/note-content-load.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -110,6 +112,8 @@ export const effects = [
 
 	// Note Content
 	NoteContentLoadEffects,
+	NoteContentCreateEffects,
+	NoteContentUpdateEffects,
 
 	// Projects
 	ProjectUIEffects,

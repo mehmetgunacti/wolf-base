@@ -39,8 +39,8 @@ export class DexieNoteContentRepositoryImpl extends EntityLocalRepositoryImpl<No
 		], async () => {
 
 			const id = noteContent.id;
-			await this.db.table(this.appEntity.table).where({ id }).modify({ modified: new Date().toISOString() } as Note);
-			await this.db.table(this.appEntity.table_sync).where({ id }).modify({ updated: true } as SyncData);
+			await this.db.table(AppEntities.note.table).where({ id }).modify({ modified: new Date().toISOString() } as Note);
+			await this.db.table(AppEntities.note.table_sync).where({ id }).modify({ updated: true } as SyncData);
 
 		});
 		return noteContent;
@@ -59,8 +59,8 @@ export class DexieNoteContentRepositoryImpl extends EntityLocalRepositoryImpl<No
 				AppEntities.note.table_sync
 			], async () => {
 
-				await this.db.table(this.appEntity.table).where({ id }).modify({ modified: new Date().toISOString() } as Note);
-				await this.db.table(this.appEntity.table_sync).where({ id }).modify({ updated: true } as SyncData);
+				await this.db.table(AppEntities.note.table).where({ id }).modify({ modified: new Date().toISOString() } as Note);
+				await this.db.table(AppEntities.note.table_sync).where({ id }).modify({ updated: true } as SyncData);
 
 			});
 
