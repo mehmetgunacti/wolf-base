@@ -26,15 +26,6 @@ export class NoteContainerComponent {
 
 		this.note$ = this.store.select(selNote_selected);
 		this.parents$ = this.store.select(selNote_selectedEntityParents);
-
-		// .pipe(
-		// 	map(
-		// 		notes => notes.map(note => ({
-		// 			label: note.name,
-		// 			url: ['/notes', note.id]
-		// 		}))
-		// 	)
-		// );
 		this.children$ = this.store.select(selNote_selectedEntityChildren).pipe(
 			map(c => c.sort((n1, n2) => n1.name.localeCompare(n2.name)))
 		);
