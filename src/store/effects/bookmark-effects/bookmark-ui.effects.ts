@@ -43,7 +43,7 @@ export class BookmarkUIEffects {
 
 			ofType(
 				bmActions.closeEditBookmarkDialog,
-				// bmActions.createSuccess,
+				entityActions.createSuccess,
 				entityActions.updateSuccess,
 				entityActions.moveToTrashSuccess
 			),

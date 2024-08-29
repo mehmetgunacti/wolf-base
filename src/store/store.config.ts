@@ -1,4 +1,6 @@
 import { Action, ActionReducer, ActionReducerMap, MetaReducer, combineReducers } from '@ngrx/store';
+import { BookmarkEntityCreateEffects } from './effects/bookmark-effects/bookmark-entity-create.effects';
+import { BookmarkEntityUpdateEffects } from './effects/bookmark-effects/bookmark-entity-update.effects';
 import { BookmarkLoadEffects } from './effects/bookmark-effects/bookmark-load.effects';
 import { BookmarkSyncClicksEffects } from './effects/bookmark-effects/bookmark-sync-clicks.effects';
 import { BookmarkUIEffects } from './effects/bookmark-effects/bookmark-ui.effects';
@@ -11,20 +13,24 @@ import { CoreUIEffects } from './effects/core-ui.effects';
 import { DatabaseEffects } from './effects/database.effects';
 import { EntityCreateEffects } from './effects/entity-effects/entity-create.effects';
 import { EntityLoadEffects } from './effects/entity-effects/entity-load.effects';
-import { EntityUpdateEffects } from './effects/entity-effects/entity-update.effects';
-import { LogsEffects } from './effects/logs.effects';
+import { EntityMoveToTrashEffects } from './effects/entity-effects/entity-move-to-trash.effects';
 import { EntitySyncDeletedDeletedEffects } from './effects/entity-effects/entity-sync-deleted-deleted.effects';
 import { EntitySyncLocalDeletedEffects } from './effects/entity-effects/entity-sync-local-deleted.effects';
 import { EntitySyncLocalNewEffects } from './effects/entity-effects/entity-sync-local-new.effects';
 import { EntitySyncLocalUpdatedEffects } from './effects/entity-effects/entity-sync-local-updated.effects';
 import { EntitySyncRemoteDeletedEffects } from './effects/entity-effects/entity-sync-remote-deleted.effects';
 import { EntitySyncRemoteNewEffects } from './effects/entity-effects/entity-sync-remote-new.effects';
-import { EntitySyncRemoteUpdatedEffects } from './effects/entity-effects/entity-sync-remote-updated.effects';
 import { EntitySyncRemoteRefreshEffects } from './effects/entity-effects/entity-sync-remote-refresh.effects';
+import { EntitySyncRemoteUpdatedEffects } from './effects/entity-effects/entity-sync-remote-updated.effects';
+import { EntityUpdateEffects } from './effects/entity-effects/entity-update.effects';
+import { LogsEffects } from './effects/logs.effects';
+import { NoteCreateEffects } from './effects/note-effects/note-create.effects';
 import { NoteUIEffects } from './effects/note-effects/note-ui.effects';
+import { NoteUpdateEffects } from './effects/note-effects/note-update.effects';
 import { ProjectUIEffects } from './effects/project-effects/project-ui.effects';
 import { TaskEditEffects } from './effects/project-task-effects/project-task-edit-dialog.effects';
 import { TaskUIEffects } from './effects/project-task-effects/project-task-ui.effects';
+import { QuizEntryEffects } from './effects/quiz-entry-effects/quiz-entry.effects';
 import { QuizUIEffects } from './effects/quiz-entry-effects/quiz-ui.effects';
 import { QuoteViewerEffects } from './effects/quote-effects/quote-viewer.effects';
 import { SettingsEffects } from './effects/settings.effects';
@@ -43,10 +49,6 @@ import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.redu
 import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
-import { EntityMoveToTrashEffects } from './effects/entity-effects/entity-move-to-trash.effects';
-import { NoteCreateEffects } from './effects/note-effects/note-create.effects';
-import { NoteUpdateEffects } from './effects/note-effects/note-update.effects';
-import { QuizEntryEffects } from './effects/quiz-entry-effects/quiz-entry.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -98,6 +100,8 @@ export const effects = [
 
 	BookmarkLoadEffects,
 	BookmarkUIEffects,
+	BookmarkEntityCreateEffects,
+	BookmarkEntityUpdateEffects,
 
 	// Notes
 	NoteUIEffects,
