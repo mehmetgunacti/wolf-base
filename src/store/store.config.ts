@@ -46,6 +46,7 @@ import { AppState } from './states/app.state';
 import { EntityMoveToTrashEffects } from './effects/entity-effects/entity-move-to-trash.effects';
 import { NoteCreateEffects } from './effects/note-effects/note-create.effects';
 import { NoteUpdateEffects } from './effects/note-effects/note-update.effects';
+import { QuizEntryEffects } from './effects/quiz-entry-effects/quiz-entry.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -116,6 +117,7 @@ export const effects = [
 
 	// Quiz
 	QuizUIEffects,
+	QuizEntryEffects,
 
 	// Quotes
 	QuoteViewerEffects,

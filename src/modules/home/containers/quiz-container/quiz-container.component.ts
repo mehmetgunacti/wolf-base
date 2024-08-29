@@ -4,8 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { AnimState, AppEntityType, Quiz, QuizVisibility, quoteChangeTrigger, slideChoicesTrigger, upsideDownTrigger, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { QuizService } from 'services/quiz.service';
-import * as entityActions from 'store/actions/entity.actions';
-import { increaseVisibility, openShowAnswerDialog } from 'store/actions/quiz-entry.actions';
+import * as quizActions from 'store/actions/quiz-entry.actions';
 import { selQuiz_visibility } from 'store/selectors/quiz-entry-selectors/quiz-entry-ui.selectors';
 import { selQuiz_dueItemsCount } from 'store/selectors/quiz-entry-selectors/quiz.selectors';
 import { choicesBlinkTrigger } from './quiz.animation';
@@ -61,14 +60,14 @@ export class QuizContainerComponent {
 	complete(event: AnimationEvent, quiz: Quiz): void {
 
 		this.animationState.set(AnimState.inactive);
-
-		if (event.phaseName === 'done' && event.fromState === AnimState.active && event.toState === AnimState.inactive) {
+		const animEnded = event.phaseName === 'done' && event.fromState === AnimState.active && event.toState === AnimState.inactive;
+		if (animEnded) {
 
 			if (quiz.incorrectChoice() === null) // choice was correct
-				this.store.dispatch(entityActions.update({ entityType: AppEntityType.quizEntry, id: quiz.words[0].definitions[0].id, entity: { answeredRight: true } }));
+				this.store.dispatch(quizActions.answeredRight({ quizProgressId: quiz.words[0].definitions[0].id }));
 
 			else // choice was incorrect
-				this.store.dispatch(openShowAnswerDialog({ word: quiz.words[0] }));
+				this.store.dispatch(quizActions.answeredWrong({ word: quiz.words[0] }));
 
 		}
 
@@ -76,13 +75,13 @@ export class QuizContainerComponent {
 
 	showAnswer(word: Word): void {
 
-		this.store.dispatch(openShowAnswerDialog({ word }));
+		this.store.dispatch(quizActions.answeredWrong({ word }));
 
 	}
 
 	increaseVisibility(): void {
 
-		this.store.dispatch(increaseVisibility());
+		this.store.dispatch(quizActions.increaseVisibility());
 
 	}
 
