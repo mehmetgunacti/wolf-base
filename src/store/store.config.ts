@@ -41,7 +41,6 @@ import { coreReducer } from './reducers/core.reducer';
 import { databaseReducer } from './reducers/database.reducer';
 import { entitiesReducer } from './reducers/entity-reducers/entities.reducer';
 import { logsReducer } from './reducers/logs.reducer';
-import { noteContentReducer } from './reducers/note-content-reducers/note-content.reducer';
 import { noteReducer } from './reducers/note-reducers/note.reducer';
 import { projectReducer } from './reducers/project-reducers/project.reducer';
 import { taskReducer } from './reducers/project-task-reducers/task.reducer';
@@ -49,6 +48,7 @@ import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.redu
 import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
+import { NoteContentLoadEffects } from './effects/note-content-effects/note-content-load.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -108,6 +108,9 @@ export const effects = [
 	NoteCreateEffects,
 	NoteUpdateEffects,
 
+	// Note Content
+	NoteContentLoadEffects,
+
 	// Projects
 	ProjectUIEffects,
 
@@ -146,7 +149,6 @@ export const reducers: ActionReducerMap<AppState> = {
 	database: databaseReducer,
 	logs: combineReducers(logsReducer),
 	note: combineReducers(noteReducer),
-	noteContent: combineReducers(noteContentReducer),
 	project: combineReducers(projectReducer),
 	quizEntry: combineReducers(quizEntryReducer),
 	quote: combineReducers(quoteReducer),

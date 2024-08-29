@@ -1,4 +1,4 @@
-import { NoteQueryParams, UUID } from '@lib';
+import { NoteContent, NoteQueryParams, UUID } from '@lib';
 import { createAction, props } from '@ngrx/store';
 
 // UI
@@ -12,3 +12,6 @@ export const clickTag						= createAction('[Note] Click Tag', props<{ name: stri
 export const setSelectedTags				= createAction('[Note] Set Selected Tags', props<{ tags: string[] }>());
 export const emptySelectedTags				= createAction('[Note] Empty Selected Tags');
 export const search							= createAction('[Note] Search', props<{ term: string }>());
+
+// CONTENT
+export const loadOneContentSuccess			= createAction('[Note] Load One Content Success', props<{ content: NoteContent | null }>());

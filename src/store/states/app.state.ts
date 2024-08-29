@@ -4,7 +4,6 @@ import { CoreModuleState, initialCoreState } from "./core.state";
 import { DatabaseModuleState, initialDatabaseState } from "./database.state";
 import { entity_initialState, Entity_ModuleState } from './entity.state';
 import { Logs_ModuleState, initialLogsState } from "./logs.state";
-import { NoteContent_ModuleState, noteContent_initialState } from './note-content.state';
 import { Note_ModuleState, initialNoteState } from './note.state';
 import { initialTaskState, Task_ModuleState } from './project-task.state';
 import { initialProjectState, Project_ModuleState } from './project.state';
@@ -21,7 +20,6 @@ export interface AppState {
 	database: DatabaseModuleState,
 	logs: Logs_ModuleState,
 	note: Note_ModuleState,
-	noteContent: NoteContent_ModuleState,
 	project: Project_ModuleState,
 	quizEntry: QuizEntry_ModuleState,
 	quote: Quote_ModuleState,
@@ -39,7 +37,6 @@ export const initialAppState: AppState = {
 	database: initialDatabaseState,
 	logs: initialLogsState,
 	note: initialNoteState,
-	noteContent: noteContent_initialState,
 	project: initialProjectState,
 	quizEntry: quizEntry_initialModuleState,
 	quote: quote_initialModuleState,
