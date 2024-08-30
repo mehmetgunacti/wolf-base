@@ -51,6 +51,8 @@ import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.redu
 import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
+import { ProjectCreateEffects } from './effects/project-effects/project-create.effects';
+import { ProjectUpdateEffects } from './effects/project-effects/project-update.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -117,6 +119,8 @@ export const effects = [
 
 	// Projects
 	ProjectUIEffects,
+	ProjectCreateEffects,
+	ProjectUpdateEffects,
 
 	// Project Tasks
 	TaskEditEffects,
