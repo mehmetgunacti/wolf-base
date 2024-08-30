@@ -61,22 +61,22 @@ function getAction(task: CloudTask): Action | null {
 		return filterAction(AppEntityType.note, task.type);
 
 	if (AppEntityType.noteContent === task.entity)
-		return filterAction(AppEntityType.note, task.type);
+		return filterAction(AppEntityType.noteContent, task.type);
 
 	if (AppEntityType.word === task.entity)
-		return filterAction(AppEntityType.note, task.type);
+		return filterAction(AppEntityType.word, task.type);
 
 	if (AppEntityType.quote === task.entity)
-		return filterAction(AppEntityType.note, task.type);
+		return filterAction(AppEntityType.quote, task.type);
 
 	if (AppEntityType.quizEntry === task.entity)
-		return filterAction(AppEntityType.note, task.type);
+		return filterAction(AppEntityType.quizEntry, task.type);
 
 	if (AppEntityType.project === task.entity)
-		return filterAction(AppEntityType.note, task.type);
+		return filterAction(AppEntityType.project, task.type);
 
 	if (AppEntityType.task === task.entity)
-		return filterAction(AppEntityType.note, task.type);
+		return filterAction(AppEntityType.task, task.type);
 
 	return null;
 

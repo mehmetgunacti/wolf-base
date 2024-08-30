@@ -23,7 +23,7 @@ const selBookmarkSyncDataLocalUpdatedIds = createSelector(
 
 );
 
-export const selBookmarkLocalUpdated = createSelector(
+export const selBookmark_LocalUpdated = createSelector(
 
 	selBookmark_array,
 	selBookmarkSyncDataLocalUpdatedIds,
@@ -142,7 +142,7 @@ export const selBookmarkLocalDeletedRemoteUpdated = createSelector(
 export const selBookmarkNonConflictCloudTasks = createSelector(
 
 	selBookmarkLocalNew,
-	selBookmarkLocalUpdated,
+	selBookmark_LocalUpdated,
 	selBookmarkLocalDeleted,
 	selBookmarkRemoteNew,
 	selBookmarkRemoteUpdated,

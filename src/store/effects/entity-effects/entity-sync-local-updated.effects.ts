@@ -1,11 +1,36 @@
 import { Injectable, inject } from '@angular/core';
-import { SyncService } from '@lib';
+import { AppEntityType, SyncService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
+import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as actions from 'store/actions/entity.actions';
+import { selBookmark_LocalUpdated } from 'store/selectors/bookmark-selectors/bookmark-cloud.selectors';
+import { selNoteContent_LocalUpdated } from 'store/selectors/note-content-selectors/note-content-cloud.selectors';
 import { selNote_LocalUpdated } from 'store/selectors/note-selectors/note-cloud.selectors';
+import { selProject_LocalUpdated } from 'store/selectors/project-selectors/project-cloud.selectors';
+import { selTask_LocalUpdated } from 'store/selectors/project-task-selectors/task-cloud.selectors';
+import { selQuizEntry_LocalUpdated } from 'store/selectors/quiz-entry-selectors/quiz-entry-cloud.selectors';
+import { selQuote_LocalUpdated } from 'store/selectors/quote-selectors/quote-cloud.selectors';
+import { selWord_LocalUpdated } from 'store/selectors/word-selectors/word-cloud.selectors';
+
+function useSelector(entityType: AppEntityType) {
+
+	switch (entityType) {
+
+		case AppEntityType.bookmark: return selBookmark_LocalUpdated;
+		case AppEntityType.note: return selNote_LocalUpdated;
+		case AppEntityType.noteContent: return selNoteContent_LocalUpdated;
+		case AppEntityType.project: return selProject_LocalUpdated;
+		case AppEntityType.quizEntry: return selQuizEntry_LocalUpdated;
+		case AppEntityType.quote: return selQuote_LocalUpdated;
+		case AppEntityType.task: return selTask_LocalUpdated;
+		case AppEntityType.word: return selWord_LocalUpdated;
+
+	}
+
+}
 
 @Injectable()
 export class EntitySyncLocalUpdatedEffects {
@@ -19,8 +44,13 @@ export class EntitySyncLocalUpdatedEffects {
 		() => this.actions$.pipe(
 
 			ofType(actions.syncLocalUpdated),
-			withLatestFrom(this.store.select(selNote_LocalUpdated)),
-			switchMap(([{ entityType }, items]) =>
+			switchMap(({ entityType }) => {
+
+				const selector = useSelector(entityType);
+				return of(entityType).pipe(withLatestFrom(this.store.select(selector)))
+
+			}),
+			switchMap(([entityType, items]) =>
 
 				this.syncService.uploadUpdated(entityType, items).pipe(
 
