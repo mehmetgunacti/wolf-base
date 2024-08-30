@@ -30,14 +30,20 @@ import { NoteContentUpdateEffects } from './effects/note-content-effects/note-co
 import { NoteCreateEffects } from './effects/note-effects/note-create.effects';
 import { NoteUIEffects } from './effects/note-effects/note-ui.effects';
 import { NoteUpdateEffects } from './effects/note-effects/note-update.effects';
+import { ProjectCreateEffects } from './effects/project-effects/project-create.effects';
 import { ProjectUIEffects } from './effects/project-effects/project-ui.effects';
+import { ProjectUpdateEffects } from './effects/project-effects/project-update.effects';
+import { TaskCreateEffects } from './effects/project-task-effects/project-task-create.effects';
 import { TaskEditEffects } from './effects/project-task-effects/project-task-edit-dialog.effects';
 import { TaskUIEffects } from './effects/project-task-effects/project-task-ui.effects';
+import { TaskUpdateEffects } from './effects/project-task-effects/project-task-update.effects';
 import { QuizEntryEffects } from './effects/quiz-entry-effects/quiz-entry.effects';
 import { QuizUIEffects } from './effects/quiz-entry-effects/quiz-ui.effects';
 import { QuoteViewerEffects } from './effects/quote-effects/quote-viewer.effects';
 import { SettingsEffects } from './effects/settings.effects';
+import { WordCreateEffects } from './effects/word-effects/word-create.effects';
 import { WordUIEffects } from './effects/word-effects/word-ui.effects';
+import { WordUpdateEffects } from './effects/word-effects/word-update.effects';
 import { bookmarkReducer } from './reducers/bookmark-reducers/bookmark.reducer';
 import { cloudReducer } from './reducers/cloud.reducer';
 import { coreReducer } from './reducers/core.reducer';
@@ -51,10 +57,6 @@ import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.redu
 import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
 import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
-import { ProjectCreateEffects } from './effects/project-effects/project-create.effects';
-import { ProjectUpdateEffects } from './effects/project-effects/project-update.effects';
-import { TaskUpdateEffects } from './effects/project-task-effects/project-task-update.effects';
-import { TaskCreateEffects } from './effects/project-task-effects/project-task-create.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -132,6 +134,8 @@ export const effects = [
 
 	// Words
 	WordUIEffects,
+	WordCreateEffects,
+	WordUpdateEffects,
 
 	// Quiz
 	QuizUIEffects,

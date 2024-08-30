@@ -25,7 +25,7 @@ export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> im
 		if (definitions.length < 1)
 			throw Error('Create `Word`: definitions array is empty')
 
-		definitions.forEach(d => d.id = uuidv4());
+		const withIds = definitions.map(d => ({...d, id: uuidv4() }));
 
 		const instance: Word = {
 
@@ -37,7 +37,7 @@ export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> im
 			definitions: []
 
 		};
-		return { ...instance, ...item, id } as Word;
+		return { ...instance, ...item, id, definitions: withIds } as Word;
 
 	}
 
