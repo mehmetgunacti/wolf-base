@@ -3,7 +3,7 @@ import { createSelector } from "@ngrx/store";
 import { selBookmark_array, selBookmark_clicked } from "./bookmark-entities.selectors";
 import { selBookmarkRemoteMetadataArray, selBookmarkRemoteMetadataMap, selBookmarkSyncDataArray, selBookmarkSyncDataMap } from "./bookmark-sync.selectors";
 
-export const selBookmarkLocalNew = createSelector(
+export const selBookmark_LocalNew = createSelector(
 
 	selBookmark_array,
 	selBookmarkSyncDataMap,
@@ -141,7 +141,7 @@ export const selBookmarkLocalDeletedRemoteUpdated = createSelector(
 
 export const selBookmarkNonConflictCloudTasks = createSelector(
 
-	selBookmarkLocalNew,
+	selBookmark_LocalNew,
 	selBookmark_LocalUpdated,
 	selBookmarkLocalDeleted,
 	selBookmarkRemoteNew,
