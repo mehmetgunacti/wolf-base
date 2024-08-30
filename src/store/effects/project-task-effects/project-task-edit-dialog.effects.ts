@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TaskEditFormContainerComponent } from 'modules/project/containers/task-edit-form-container/task-edit-form-container.component';
 import { map } from 'rxjs';
 import * as taskActions from 'store/actions/project-task.actions';
+import * as entityActions from 'store/actions/entity.actions';
 
 @Injectable()
 export class TaskEditEffects {
@@ -35,8 +36,8 @@ export class TaskEditEffects {
 
 			ofType(
 				taskActions.closeEditDialog,
-				// taskActions.createSuccess,
-				// taskActions.updateSuccess
+				entityActions.createSuccess,
+				entityActions.updateSuccess,
 			),
 			map(() => this.dialogRef?.close())
 

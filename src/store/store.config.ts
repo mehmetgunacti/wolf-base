@@ -53,6 +53,8 @@ import { wordReducer } from './reducers/word-reducers/word.reducer';
 import { AppState } from './states/app.state';
 import { ProjectCreateEffects } from './effects/project-effects/project-create.effects';
 import { ProjectUpdateEffects } from './effects/project-effects/project-update.effects';
+import { TaskUpdateEffects } from './effects/project-task-effects/project-task-update.effects';
+import { TaskCreateEffects } from './effects/project-task-effects/project-task-create.effects';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -124,7 +126,8 @@ export const effects = [
 
 	// Project Tasks
 	TaskEditEffects,
-
+	TaskCreateEffects,
+	TaskUpdateEffects,
 	TaskUIEffects,
 
 	// Words
