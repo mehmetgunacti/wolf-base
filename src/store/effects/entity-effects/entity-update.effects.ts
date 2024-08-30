@@ -31,7 +31,7 @@ export class EntityUpdateEffects {
 
 	);
 
-	loadOneNote$ = createEffect(
+	loadOne$ = createEffect(
 
 		() => this.actions$.pipe(
 
@@ -42,7 +42,7 @@ export class EntityUpdateEffects {
 
 	);
 
-	loadOneNoteSync$ = createEffect(
+	loadOneSync$ = createEffect(
 
 		() => this.actions$.pipe(
 
