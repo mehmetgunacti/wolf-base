@@ -37,7 +37,8 @@ import { TaskCreateEffects } from './effects/project-task-effects/project-task-c
 import { TaskEditEffects } from './effects/project-task-effects/project-task-edit-dialog.effects';
 import { TaskUIEffects } from './effects/project-task-effects/project-task-ui.effects';
 import { TaskUpdateEffects } from './effects/project-task-effects/project-task-update.effects';
-import { QuizEntryEffects } from './effects/quiz-entry-effects/quiz-entry.effects';
+import { QuizEntryCreateEffects } from './effects/quiz-entry-effects/quiz-entry-create.effects';
+import { QuizEntryLogicEffects } from './effects/quiz-entry-effects/quiz-entry-logic.effects';
 import { QuizUIEffects } from './effects/quiz-entry-effects/quiz-ui.effects';
 import { QuoteViewerEffects } from './effects/quote-effects/quote-viewer.effects';
 import { SettingsEffects } from './effects/settings.effects';
@@ -139,7 +140,8 @@ export const effects = [
 
 	// Quiz
 	QuizUIEffects,
-	QuizEntryEffects,
+	QuizEntryLogicEffects,
+	QuizEntryCreateEffects,
 
 	// Quotes
 	QuoteViewerEffects,

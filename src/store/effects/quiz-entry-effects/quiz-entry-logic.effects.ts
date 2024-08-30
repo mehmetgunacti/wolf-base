@@ -9,7 +9,7 @@ import * as quizActions from 'store/actions/quiz-entry.actions';
 import { selQuizEntry_array } from 'store/selectors/quiz-entry-selectors/quiz-entry-entities.selectors';
 
 @Injectable()
-export class QuizEntryEffects {
+export class QuizEntryLogicEffects {
 
 	private actions$: Actions = inject(Actions);
 	private store: Store = inject(Store);
