@@ -1,6 +1,7 @@
 import { Note, TAG_PINNED, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selNote_EntitiesState, selNote_UIState } from './note.selectors';
+import { selNote_EntitiesState } from '../entity-selectors/entity.selectors';
+import { selNote_UIState } from './note.selectors';
 
 export const selNote_entities = createSelector(
 

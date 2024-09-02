@@ -1,6 +1,6 @@
 import { QuizProgress, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selQuizEntry_EntitiesState } from './quiz-entry.selectors';
+import { selQuizEntry_EntitiesState } from '../entity-selectors/entity.selectors';
 
 export const selQuizEntry_entities = createSelector(
 

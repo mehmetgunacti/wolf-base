@@ -1,6 +1,7 @@
 import { Bookmark, Click, ClickedBookmark, NamedClick, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selBookmark_ClicksState, selBookmark_EntitiesState } from './bookmark.selectors';
+import { selBookmark_EntitiesState } from '../entity-selectors/entity.selectors';
+import { selBookmark_ClicksState } from './bookmark.selectors';
 
 export const selBookmark_entities = createSelector(
 

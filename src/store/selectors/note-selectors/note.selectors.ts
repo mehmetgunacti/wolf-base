@@ -1,15 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Note_ModuleState } from 'store/states/note.state';
-import { selEntity_ModuleState } from '../entity-selectors/entity.selectors';
 
 const selNote_ModuleState = createFeatureSelector<Note_ModuleState>('note');
-
-export const selNote_EntitiesState = createSelector(
-
-	selEntity_ModuleState,
-	state => state.note
-
-);
 
 export const selNote_UIState = createSelector(
 

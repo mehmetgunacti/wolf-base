@@ -1,6 +1,6 @@
 import { RemoteMetadata, SyncData, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selNoteContent_EntitiesState } from './note-content.selectors';
+import { selNoteContent_EntitiesState } from '../entity-selectors/entity.selectors';
 
 export const selNoteContent_syncDataArray = createSelector(
 

@@ -1,6 +1,6 @@
 import { RemoteMetadata, SyncData, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selTask_EntitiesState } from './task.selectors';
+import { selTask_EntitiesState } from '../entity-selectors/entity.selectors';
 
 export const selTaskSyncDataArray = createSelector(
 

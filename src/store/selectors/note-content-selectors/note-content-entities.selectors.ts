@@ -1,7 +1,7 @@
 import { NameBase } from '@lib';
 import { createSelector } from '@ngrx/store';
+import { selNoteContent_EntitiesState } from '../entity-selectors/entity.selectors';
 import { selNote_entities } from '../note-selectors/note-entities.selectors';
-import { selNoteContent_EntitiesState } from './note-content.selectors';
 import { selNote_UIState } from '../note-selectors/note.selectors';
 
 export const selNoteContent_ids = createSelector(

@@ -1,6 +1,6 @@
 import { RemoteMetadata, SyncData, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selBookmark_EntitiesState } from './bookmark.selectors';
+import { selBookmark_EntitiesState } from '../entity-selectors/entity.selectors';
 
 export const selBookmarkSyncDataArray = createSelector(
 

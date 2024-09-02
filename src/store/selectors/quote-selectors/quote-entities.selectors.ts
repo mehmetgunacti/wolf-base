@@ -1,6 +1,6 @@
 import { Quote, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selQuote_EntitiesState } from './quote.selectors';
+import { selQuote_EntitiesState } from '../entity-selectors/entity.selectors';
 
 export const selQuote_entities = createSelector(
 

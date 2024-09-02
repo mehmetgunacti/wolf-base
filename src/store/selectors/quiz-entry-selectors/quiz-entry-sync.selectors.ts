@@ -1,6 +1,6 @@
 import { RemoteMetadata, SyncData, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selQuizEntry_EntitiesState } from './quiz-entry.selectors';
+import { selQuizEntry_EntitiesState } from '../entity-selectors/entity.selectors';
 
 export const selQuizEntrySyncDataArray = createSelector(
 
