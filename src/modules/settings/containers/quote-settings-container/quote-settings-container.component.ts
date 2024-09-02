@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 import * as entityActions from 'store/actions/entity.actions';
 import { setSelectedId } from 'store/actions/quote.actions';
-import { selQuote_array } from 'store/selectors/quote-selectors/quote-entities.selectors';
+import { selEntityList } from 'store/selectors/quote-selectors/quote-entity.selectors';
 import { selQuoteSettings_selected } from 'store/selectors/quote-selectors/quote-settings.selectors';
 
 @Component({
@@ -19,7 +19,7 @@ export class QuoteSettingsContainerComponent {
 	private store: Store = inject(Store);
 
 	quotes$: Observable<Quote[]> = combineLatest([
-		this.store.select(selQuote_array),
+		this.store.select(selEntityList),
 		this.search.asObservable()
 	]).pipe(
 

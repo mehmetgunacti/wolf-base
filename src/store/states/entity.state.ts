@@ -1,4 +1,4 @@
-import { Bookmark, Entity, Note, NoteContent, Project, QuizProgress, Quote, RemoteMetadata, SyncData, Task, UUID, Word } from '@lib';
+import { Entity, RemoteMetadata, SyncData, UUID } from '@lib';
 
 export interface Entity_ModuleState {
 
@@ -19,6 +19,8 @@ export interface Entity_EntitiesState {
 	syncData: Record<UUID, SyncData>;
 	remoteMetadata: Record<UUID, RemoteMetadata>;
 
+	selectedId: UUID | null;
+
 }
 
 // INITIALIZATION
@@ -28,7 +30,8 @@ function createInitialEntitiesState(): Entity_EntitiesState {
 	return {
 		entities: {},
 		syncData: {},
-		remoteMetadata: {}
+		remoteMetadata: {},
+		selectedId: null
 	};
 
 }

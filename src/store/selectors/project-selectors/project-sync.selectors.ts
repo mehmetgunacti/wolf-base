@@ -1,43 +1,34 @@
-import { RemoteMetadata, SyncData, UUID } from '@lib';
-import { createSelector } from '@ngrx/store';
-import { selProject_EntitiesState } from '../entity-selectors/entity.selectors';
+import { AppEntityType, Project } from '@lib';
+import {
+	selEntityList,
+	selRemoteMetadataList,
+	selRemoteMetadataMap,
+	selSyncDataList,
+	selSyncDataMap
+} from '../project-selectors/project-entity.selectors';
+import { createSyncSelectors } from '../sync-selectors/selectors-factory';
 
-export const selProjectSyncDataArray = createSelector(
+const entityType = AppEntityType.project;
 
-	selProject_EntitiesState,
-	(state): SyncData[] => Object.values(state.syncData)
+export const {
 
-);
+	selLocalNew,
+	selLocalUpdated,
+	selLocalDeleted,
+	selRemoteNew,
+	selRemoteUpdated,
+	selRemoteDeleted,
+	selLocalUpdatedRemoteUpdated,
+	selLocalDeletedRemoteDeleted,
+	selLocalUpdatedRemoteDeleted,
+	selLocalDeletedRemoteUpdated,
+	selCloudTasks
 
-export const selProjectSyncDataMap = createSelector(
-
-	selProjectSyncDataArray,
-	(arr): Record<UUID, SyncData> => arr.reduce(
-		(acc, syncData) => {
-			acc[syncData.id] = syncData;
-			return acc;
-		},
-		{} as Record<string, SyncData>
-	)
-
-);
-
-export const selProjectRemoteMetadataArray = createSelector(
-
-	selProject_EntitiesState,
-	(state): RemoteMetadata[] => Object.values(state.remoteMetadata)
-
-);
-
-export const selProjectRemoteMetadataMap = createSelector(
-
-	selProjectRemoteMetadataArray,
-	(arr): Record<UUID, RemoteMetadata> => arr.reduce(
-		(acc, metadata) => {
-			acc[metadata.id] = metadata;
-			return acc;
-		},
-		{} as Record<string, RemoteMetadata>
-	)
-
+} = createSyncSelectors<Project>(
+	entityType,
+	selEntityList,
+	selSyncDataList,
+	selSyncDataMap,
+	selRemoteMetadataList,
+	selRemoteMetadataMap
 );

@@ -6,8 +6,8 @@ import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
 import * as entityActions from 'store/actions/entity.actions';
 import { closeEditDialog } from 'store/actions/project-task.actions';
 import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
+import { selSelectedEntity } from 'store/selectors/project-task-selectors/task-entity.selectors';
 import { selTask_distinctTagNames } from 'store/selectors/project-task-selectors/task-tags.selectors';
-import { selTask_selected } from 'store/selectors/project-task-selectors/task-ui.selectors';
 
 @Component({
 	selector: 'app-task-edit-form-container',
@@ -29,7 +29,7 @@ export class TaskEditFormContainerComponent {
 
 	constructor() {
 
-		this.task = this.store.selectSignal(selTask_selected);
+		this.task = this.store.selectSignal(selSelectedEntity);
 		this.project = this.store.selectSignal(selProject_selected);
 
 	}

@@ -1,43 +1,34 @@
-import { RemoteMetadata, SyncData, UUID } from '@lib';
-import { createSelector } from '@ngrx/store';
-import { selQuizEntry_EntitiesState } from '../entity-selectors/entity.selectors';
+import { AppEntityType, QuizProgress } from '@lib';
+import {
+	selEntityList,
+	selRemoteMetadataList,
+	selRemoteMetadataMap,
+	selSyncDataList,
+	selSyncDataMap
+} from '../quiz-entry-selectors/quiz-entry-entity.selectors';
+import { createSyncSelectors } from '../sync-selectors/selectors-factory';
 
-export const selQuizEntrySyncDataArray = createSelector(
+const entityType = AppEntityType.quizEntry;
 
-	selQuizEntry_EntitiesState,
-	(state): SyncData[] => Object.values(state.syncData)
+export const {
 
-);
+	selLocalNew,
+	selLocalUpdated,
+	selLocalDeleted,
+	selRemoteNew,
+	selRemoteUpdated,
+	selRemoteDeleted,
+	selLocalUpdatedRemoteUpdated,
+	selLocalDeletedRemoteDeleted,
+	selLocalUpdatedRemoteDeleted,
+	selLocalDeletedRemoteUpdated,
+	selCloudTasks
 
-export const selQuizEntrySyncDataMap = createSelector(
-
-	selQuizEntrySyncDataArray,
-	(arr): Record<UUID, SyncData> => arr.reduce(
-		(acc, syncData) => {
-			acc[syncData.id] = syncData;
-			return acc;
-		},
-		{} as Record<string, SyncData>
-	)
-
-);
-
-export const selQuizEntryRemoteMetadataArray = createSelector(
-
-	selQuizEntry_EntitiesState,
-	(state): RemoteMetadata[] => Object.values(state.remoteMetadata)
-
-);
-
-export const selQuizEntryRemoteMetadataMap = createSelector(
-
-	selQuizEntryRemoteMetadataArray,
-	(arr): Record<UUID, RemoteMetadata> => arr.reduce(
-		(acc, metadata) => {
-			acc[metadata.id] = metadata;
-			return acc;
-		},
-		{} as Record<string, RemoteMetadata>
-	)
-
+} = createSyncSelectors<QuizProgress>(
+	entityType,
+	selEntityList,
+	selSyncDataList,
+	selSyncDataMap,
+	selRemoteMetadataList,
+	selRemoteMetadataMap
 );

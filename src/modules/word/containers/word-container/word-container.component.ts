@@ -3,8 +3,8 @@ import { AppEntityType, Definition, definitionName, QuizProgress, UUID, Word } f
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as entityActions from 'store/actions/entity.actions';
-import { selQuizEntry_ids } from 'store/selectors/quiz-entry-selectors/quiz-entry-entities.selectors';
-import { selWord_selected } from 'store/selectors/word-selectors/word-entities.selectors';
+import { selEntityIds } from 'store/selectors/quiz-entry-selectors/quiz-entry-entity.selectors';
+import { selSelectedEntity } from 'store/selectors/word-selectors/word-entity.selectors';
 
 @Component({
 	selector: 'app-word-container',
@@ -21,8 +21,8 @@ export class WordContainerComponent {
 
 	constructor() {
 
-		this.word$ = this.store.select(selWord_selected);
-		this.scheduledIds$ = this.store.select(selQuizEntry_ids);
+		this.word$ = this.store.select(selSelectedEntity);
+		this.scheduledIds$ = this.store.select(selEntityIds);
 
 	}
 

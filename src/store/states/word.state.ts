@@ -1,4 +1,4 @@
-import { UUID, WordQueryParams } from '@lib';
+import { WordQueryParams } from '@lib';
 
 export interface Word_ModuleState {
 
@@ -8,7 +8,6 @@ export interface Word_ModuleState {
 
 export interface Word_UIState {
 
-	selectedId: UUID | null;
 	queryParams: WordQueryParams;
 
 }
@@ -17,7 +16,6 @@ export interface Word_UIState {
 
 export const initialWordUIState: Word_UIState = {
 
-	selectedId: null,
 	queryParams: {
 		search: null
 	}

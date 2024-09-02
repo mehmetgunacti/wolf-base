@@ -1,14 +1,14 @@
-import { AppEntityType, NoteContent } from '@lib';
+import { AppEntityType, Word } from '@lib';
 import {
 	selEntityList,
 	selRemoteMetadataList,
 	selRemoteMetadataMap,
 	selSyncDataList,
 	selSyncDataMap
-} from '../note-content-selectors/note-content-entity.selectors';
+} from '../word-selectors/word-entity.selectors';
 import { createSyncSelectors } from '../sync-selectors/selectors-factory';
 
-const entityType = AppEntityType.noteContent;
+const entityType = AppEntityType.word;
 
 export const {
 
@@ -24,7 +24,7 @@ export const {
 	selLocalDeletedRemoteUpdated,
 	selCloudTasks
 
-} = createSyncSelectors<NoteContent>(
+} = createSyncSelectors<Word>(
 	entityType,
 	selEntityList,
 	selSyncDataList,

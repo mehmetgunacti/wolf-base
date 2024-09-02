@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppEntityType, UUID, Word } from 'lib';
 import { Observable } from 'rxjs';
 import { update } from 'store/actions/entity.actions';
-import { selWord_selected } from 'store/selectors/word-selectors/word-entities.selectors';
+import { selSelectedEntity } from 'store/selectors/word-selectors/word-entity.selectors';
 
 @Component({
 	selector: 'app-word-edit-form-container',
@@ -19,7 +19,7 @@ export class WordEditFormContainerComponent {
 
 	constructor() {
 
-		this.word$ = this.store.select(selWord_selected);
+		this.word$ = this.store.select(selSelectedEntity);
 
 	}
 

@@ -1,9 +1,9 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Note, UUID, AppEntityType } from 'lib';
+import { AppEntityType, Note, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { create } from 'store/actions/entity.actions';
-import { selNote_array, selNote_selected } from 'store/selectors/note-selectors/note-entities.selectors';
+import { selEntityList, selSelectedEntity } from 'store/selectors/note-selectors/note-entity.selectors';
 import { distinctTagsArray } from 'store/selectors/note-selectors/note-tags.selectors';
 
 @Component({
@@ -24,7 +24,7 @@ export class NoteNewFormContainerComponent implements OnInit, AfterContentInit {
 
 	constructor() {
 
-		this.parentId$ = this.store.select(selNote_selected).pipe(
+		this.parentId$ = this.store.select(selSelectedEntity).pipe(
 
 			map(p => p ? p.id : null)
 
@@ -34,7 +34,7 @@ export class NoteNewFormContainerComponent implements OnInit, AfterContentInit {
 			map(id => id ? ['/notes', id] : ['/notes'])
 
 		);
-		this.nodes$ = this.store.select(selNote_array);
+		this.nodes$ = this.store.select(selEntityList);
 
 	}
 

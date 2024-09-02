@@ -126,3 +126,35 @@ export function listOf_RemoteUpdatedIds(remote: RemoteMetadata[], local: Record<
 	);
 
 }
+
+// SYNC DATA MAP
+export function mapOf_SyncData(arr: SyncData[]): Record<UUID, SyncData> {
+
+	return arr.reduce(
+		(acc, syncData) => {
+
+			acc[syncData.id] = syncData;
+			return acc;
+
+		},
+		{} as Record<UUID, SyncData>
+	);
+
+}
+
+// REMOTE METADATA MAP
+export function mapOf_RemoteMetadata(arr: RemoteMetadata[]): Record<UUID, RemoteMetadata> {
+
+	return arr.reduce(
+
+		(acc, metadata) => {
+
+			acc[metadata.id] = metadata;
+			return acc;
+
+		},
+		{} as Record<UUID, RemoteMetadata>
+
+	);
+
+}

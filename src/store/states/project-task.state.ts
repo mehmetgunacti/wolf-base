@@ -1,4 +1,4 @@
-import { TaskQueryParams, TaskState, UUID } from '@lib';
+import { TaskQueryParams, TaskState } from '@lib';
 
 export interface Task_ModuleState {
 
@@ -8,7 +8,6 @@ export interface Task_ModuleState {
 
 export interface Task_UIState {
 
-	selectedId: UUID | null;
 	queryParams: TaskQueryParams;
 
 }
@@ -17,7 +16,6 @@ export interface Task_UIState {
 
 export const initialTaskUIState: Task_UIState = {
 
-	selectedId: null,
 	queryParams: {
 
 		search: null,

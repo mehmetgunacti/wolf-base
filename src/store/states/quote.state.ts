@@ -9,7 +9,6 @@ export interface Quote_ModuleState {
 
 export interface Quote_ViewerState {
 
-	selectedId: UUID | null;
 	running: boolean;
 	animate: boolean;
 
@@ -25,7 +24,6 @@ export interface Quote_SettingsState {
 
 export const quote_initialViewerState: Quote_ViewerState = {
 
-	selectedId: null,
 	running: false,
 	animate: true
 

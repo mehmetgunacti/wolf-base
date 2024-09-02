@@ -3,8 +3,6 @@ import { createAction, props } from '@ngrx/store';
 
 // UI
 export const setEditId						= createAction('[Note] Set Edit Id', props<{ id: UUID | null }>());
-export const setSelectedId					= createAction('[Note] Set Selected Id', props<{ id: UUID | null }>());
-
 export const setQueryParams					= createAction('[Note] Set Query State', props<NoteQueryParams>());
 
 // TAGS

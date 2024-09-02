@@ -1,11 +1,11 @@
-import { Tag, Task, TaskPriority, TaskQueryParams, TaskState } from '@lib';
+import { Tag, TaskQueryParams } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selTask_array } from './task-entities.selectors';
+import { selEntityList } from './task-entity.selectors';
 import { selTask_filteredTasks, selTask_queryParams } from './task-ui.selectors';
 
 const arrayOfTagNames = createSelector(
 
-	selTask_array,
+	selEntityList,
 	(tasks): string[][] => tasks.map(t => t.tags)
 
 );

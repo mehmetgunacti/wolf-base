@@ -3,7 +3,7 @@ import { ClickedBookmark, TAG_POPULAR, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { click } from 'store/actions/bookmark.actions';
-import * as bmSelectors from 'store/selectors/bookmark-selectors/bookmark-entities.selectors';
+import * as bmSelectors from 'store/selectors/bookmark-selectors/bookmark-clicks.selectors';
 import * as coreSelectors from 'store/selectors/core-configuration.selectors';
 
 @Component({

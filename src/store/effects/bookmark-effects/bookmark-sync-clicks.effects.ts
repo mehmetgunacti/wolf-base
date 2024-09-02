@@ -6,7 +6,7 @@ import { BOOKMARK_SYNC_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { loadAllClicks, loadOneClickSuccess, uploadClicked } from 'store/actions/bookmark.actions';
 import { downloadRemoteMetadata } from 'store/actions/entity.actions';
-import { selBookmark_clicked } from 'store/selectors/bookmark-selectors/bookmark-entities.selectors';
+import { selBookmark_clicked } from 'store/selectors/bookmark-selectors/bookmark-clicks.selectors';
 
 @Injectable()
 export class BookmarkSyncClicksEffects {

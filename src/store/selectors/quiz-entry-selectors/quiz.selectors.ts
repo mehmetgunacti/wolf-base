@@ -1,10 +1,10 @@
 import { QuizProgress, UUID, Word } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selCore_now } from '../core-ui.selectors';
-import { selQuizEntry_array } from '../quiz-entry-selectors/quiz-entry-entities.selectors';
-import { selQuizEntry_UIState } from './quiz-entry.selectors';
 import { produce } from 'immer';
-import { selWord_array } from '../word-selectors/word-entities.selectors';
+import { selCore_now } from '../core-ui.selectors';
+import { selEntityList as selQuizEntry_EntityList } from '../quiz-entry-selectors/quiz-entry-entity.selectors';
+import { selEntityList as selWord_EntityList } from '../word-selectors/word-entity.selectors';
+import { selQuizEntry_UIState } from './quiz-entry.selectors';
 
 export const selQuiz_answer = createSelector(
 
@@ -32,14 +32,14 @@ function toMap(words: Word[]): Record<UUID, Word> {
 
 export const selQuiz_definitionIdWordMap = createSelector(
 
-	selWord_array,
+	selWord_EntityList,
 	(words: Word[]): Record<UUID, Word> => toMap(words)
 
 );
 
 const selQuiz_dueItems = createSelector(
 
-	selQuizEntry_array,
+	selQuizEntry_EntityList,
 	selCore_now,
 	(allProgress, now): QuizProgress[] => {
 

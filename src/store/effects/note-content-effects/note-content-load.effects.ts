@@ -1,9 +1,10 @@
 import { Injectable, inject } from '@angular/core';
-import { LocalRepositoryService } from '@lib';
+import { AppEntityType, LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { filter, map, switchMap } from 'rxjs/operators';
-import * as noteActions from 'store/actions/note.actions';
+import { setSelectedId } from 'store/actions/entity.actions';
+import { loadOneContentSuccess } from 'store/actions/note.actions';
 
 @Injectable()
 export class NoteContentLoadEffects {
@@ -15,11 +16,12 @@ export class NoteContentLoadEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(noteActions.setSelectedId),
+			ofType(setSelectedId),
+			filter(({ entityType }) => entityType === AppEntityType.note),
 			map(param => param.id),
 			filter((id): id is string => !!id),
 			switchMap(id => this.localRepository.noteContent.getEntity(id)),
-			map(content => noteActions.loadOneContentSuccess({ content }))
+			map(content => loadOneContentSuccess({ content }))
 
 		)
 

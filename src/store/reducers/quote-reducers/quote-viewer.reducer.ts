@@ -5,7 +5,7 @@ import { quote_initialViewerState, Quote_ViewerState } from 'store/states/quote.
 const reducer = createReducer(
 
 	quote_initialViewerState,
-	on(changeQuote, (state, { id }): Quote_ViewerState => ({ ...state, selectedId: id, animate: true })),
+	on(changeQuote, (state): Quote_ViewerState => ({ ...state, animate: true })),
 	on(setRunning, (state, { running }): Quote_ViewerState => ({ ...state, running })),
 	on(disableAnimation, (state): Quote_ViewerState => ({ ...state, animate: false })),
 
