@@ -215,7 +215,7 @@ const selProject_ConflictCloudTasks = createSelector(
 
 );
 
-export const selProjectCloudTasks = createSelector(
+export const selProject_CloudTasks = createSelector(
 
 	selProject_NonConflictCloudTasks,
 	selProject_ConflictCloudTasks,

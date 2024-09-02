@@ -1,25 +1,62 @@
-import { CloudTask, NameBase, SyncTaskType, UUID, AppEntityType, toCloudTask } from '@lib';
+import { AppEntityType, CloudTask, RemoteMetadata, SyncData, SyncTaskType, toCloudTask, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selWord_array } from './word-entities.selectors';
-import { selWordRemoteMetadataArray, selWordRemoteMetadataMap, selWordSyncDataArray, selWordSyncDataMap } from './word-sync.selectors';
+import { selWord_EntitiesState } from '../entity-selectors/entity.selectors';
+import { selWord_array } from '../word-selectors/word-entities.selectors';
+import * as filterFn from './cloud-filter-functions.util';
+
+const selWord_SyncDataArray = createSelector(
+
+	selWord_EntitiesState,
+	(state): SyncData[] => Object.values(state.syncData)
+
+);
+
+const selWord_SyncDataMap = createSelector(
+
+	selWord_SyncDataArray,
+	(arr): Record<UUID, SyncData> => arr.reduce(
+		(acc, syncData) => {
+			acc[syncData.id] = syncData;
+			return acc;
+		},
+		{} as Record<string, SyncData>
+	)
+
+);
+
+const selWord_RemoteMetadataArray = createSelector(
+
+	selWord_EntitiesState,
+	(state): RemoteMetadata[] => Object.values(state.remoteMetadata)
+
+);
+
+const selWord_RemoteMetadataMap = createSelector(
+
+	selWord_RemoteMetadataArray,
+	(arr): Record<UUID, RemoteMetadata> => arr.reduce(
+		(acc, metadata) => {
+			acc[metadata.id] = metadata;
+			return acc;
+		},
+		{} as Record<string, RemoteMetadata>
+	)
+
+);
 
 export const selWord_LocalNew = createSelector(
 
 	selWord_array,
-	selWordSyncDataMap,
-	(words, syncDataMap): NameBase[] => words.filter(entity => !syncDataMap[entity.id])
+	selWord_SyncDataMap,
+	filterFn.listOf_LocalNew
 
 );
 
 const selWord_SyncDataLocalUpdatedIds = createSelector(
 
-	selWordSyncDataArray,
-	selWordRemoteMetadataMap,
-	(syncData, remote): UUID[] => syncData.filter(
-
-		s => s.updated && !s.deleted && remote[s.id] && s.updateTime === remote[s.id].updateTime
-
-	).map(s => s.id)
+	selWord_SyncDataArray,
+	selWord_RemoteMetadataMap,
+	filterFn.listOf_LocalUpdatedIds
 
 );
 
@@ -27,115 +64,79 @@ export const selWord_LocalUpdated = createSelector(
 
 	selWord_array,
 	selWord_SyncDataLocalUpdatedIds,
-	(words, ids): NameBase[] => words.filter(
-
-		e => ids.includes(e.id)
-
-	)
+	filterFn.listOf_LocalUpdated
 
 );
 
 const selWord_SyncDataLocalDeletedIds = createSelector(
 
-	selWordSyncDataArray,
-	selWordRemoteMetadataMap,
-	(syncData, remote): UUID[] => syncData.filter(
-
-		s => s.deleted && remote[s.id] && s.updateTime === remote[s.id].updateTime
-
-	).map(s => s.id)
+	selWord_SyncDataArray,
+	selWord_RemoteMetadataMap,
+	filterFn.listOf_LocalDeletedIds
 
 );
 
-export const selWord_LocalDeleted = createSelector(
+const selWord_LocalDeleted = createSelector(
 
-	selWordSyncDataArray,
+	selWord_SyncDataArray,
 	selWord_SyncDataLocalDeletedIds,
-	(syncData, ids): NameBase[] => syncData.filter(
-
-		e => ids.includes(e.id)
-
-	)
+	filterFn.listOf_LocalDeleted
 
 );
 
-export const selWord_RemoteNew = createSelector(
+const selWord_RemoteNew = createSelector(
 
-	selWordRemoteMetadataArray,
-	selWordSyncDataMap,
-	(remote, local): NameBase[] => remote.filter(r => !local[r.id])
+	selWord_RemoteMetadataArray,
+	selWord_SyncDataMap,
+	filterFn.listOf_RemoteNew
 
 );
 
-export const selWord_RemoteUpdated = createSelector(
+const selWord_RemoteUpdated = createSelector(
 
-	selWordRemoteMetadataArray,
-	selWordSyncDataMap,
-	(remote, local): NameBase[] => remote.filter(
-
-		r => local[r.id] && !local[r.id].deleted && !local[r.id].updated && local[r.id].updateTime !== r.updateTime
-
-	)
+	selWord_RemoteMetadataArray,
+	selWord_SyncDataMap,
+	filterFn.listOf_RemoteUpdatedIds
 
 );
 
 export const selWord_RemoteDeleted = createSelector(
 
-	selWordSyncDataArray,
-	selWordRemoteMetadataMap,
-	(local, remote): NameBase[] => local.filter(
-
-		sd => !sd.updated && !sd.deleted && !remote[sd.id]
-
-	)
+	selWord_RemoteMetadataMap,
+	selWord_SyncDataArray,
+	filterFn.listOf_RemoteDeleted
 
 );
 
 export const selWord_LocalUpdatedRemoteUpdated = createSelector(
 
-	selWordSyncDataArray,
-	selWordRemoteMetadataMap,
-	(local, remote): NameBase[] => local.filter(
-
-		sd => !sd.deleted && sd.updated && remote[sd.id] && remote[sd.id].updateTime !== sd.updateTime
-
-	)
+	selWord_SyncDataArray,
+	selWord_RemoteMetadataMap,
+	filterFn.listOf_LocalUpdatedRemoteUpdated
 
 );
 
 export const selWord_LocalDeletedRemoteDeleted = createSelector(
 
-	selWordSyncDataArray,
-	selWordRemoteMetadataMap,
-	(syncData, remote): NameBase[] => syncData.filter(
-
-		sd => sd.deleted && !remote[sd.id]
-
-	)
+	selWord_SyncDataArray,
+	selWord_RemoteMetadataMap,
+	filterFn.listOf_LocalDeletedRemoteDeleted
 
 );
 
 export const selWord_LocalUpdatedRemoteDeleted = createSelector(
 
-	selWordSyncDataArray,
-	selWordRemoteMetadataMap,
-	(local, remote): NameBase[] => local.filter(
-
-		sd => sd.updated && !remote[sd.id]
-
-	)
+	selWord_SyncDataArray,
+	selWord_RemoteMetadataMap,
+	filterFn.listOf_LocalUpdatedRemoteDeleted
 
 );
 
 export const selWord_LocalDeletedRemoteUpdated = createSelector(
 
-	selWordSyncDataArray,
-	selWordRemoteMetadataMap,
-	(local, remote): NameBase[] => local.filter(
-
-		sd => sd.deleted && remote[sd.id] && remote[sd.id].updateTime !== sd.updateTime
-
-	)
+	selWord_SyncDataArray,
+	selWord_RemoteMetadataMap,
+	filterFn.listOf_LocalDeletedRemoteUpdated
 
 );
 
@@ -215,7 +216,7 @@ const selWord_ConflictCloudTasks = createSelector(
 
 );
 
-export const selWordCloudTasks = createSelector(
+export const selWord_CloudTasks = createSelector(
 
 	selWord_NonConflictCloudTasks,
 	selWord_ConflictCloudTasks,

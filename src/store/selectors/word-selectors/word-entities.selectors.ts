@@ -1,6 +1,7 @@
 import { UUID, Word } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selWord_EntitiesState, selWord_UIState } from './word.selectors';
+import { selWord_EntitiesState } from '../entity-selectors/entity.selectors';
+import { selWord_UIState } from './word.selectors';
 
 export const selWord_entities = createSelector(
 
@@ -9,24 +10,10 @@ export const selWord_entities = createSelector(
 
 );
 
-export const selWord_ids = createSelector(
-
-	selWord_EntitiesState,
-	state => Object.keys(state.entities)
-
-);
-
 export const selWord_array = createSelector(
 
 	selWord_entities,
 	(entities): Word[] => Object.values(entities)
-
-);
-
-export const selWords_count = createSelector(
-
-	selWord_ids,
-	ids => ids.length
 
 );
 

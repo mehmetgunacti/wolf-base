@@ -3,7 +3,7 @@ import { CloudTask, SidebarState, getNextSidebarState } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, take } from 'rxjs';
 import { setSidebarState } from 'store/actions/core-ui.actions';
-import { selCloudAvailableTasks } from 'store/selectors/cloud.selectors';
+import { selCloudAvailableTasks } from 'store/selectors/cloud-selectors/cloud.selectors';
 import { selCore_isBigScreen, selCore_sidebarState } from 'store/selectors/core-ui.selectors';
 
 @Component({

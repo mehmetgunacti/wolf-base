@@ -7,13 +7,13 @@ import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as actions from 'store/actions/entity.actions';
 import { selBookmark_LocalUpdated } from 'store/selectors/bookmark-selectors/bookmark-cloud.selectors';
+import { selWord_LocalUpdated } from 'store/selectors/cloud-selectors/cloud-word.selectors';
 import { selNoteContent_LocalUpdated } from 'store/selectors/note-content-selectors/note-content-cloud.selectors';
 import { selNote_LocalUpdated } from 'store/selectors/note-selectors/note-cloud.selectors';
 import { selProject_LocalUpdated } from 'store/selectors/project-selectors/project-cloud.selectors';
 import { selTask_LocalUpdated } from 'store/selectors/project-task-selectors/task-cloud.selectors';
 import { selQuizEntry_LocalUpdated } from 'store/selectors/quiz-entry-selectors/quiz-entry-cloud.selectors';
 import { selQuote_LocalUpdated } from 'store/selectors/quote-selectors/quote-cloud.selectors';
-import { selWord_LocalUpdated } from 'store/selectors/word-selectors/word-cloud.selectors';
 
 function useSelector(entityType: AppEntityType) {
 

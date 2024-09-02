@@ -4,7 +4,7 @@ import { AppEntityType, CloudTask, SyncTaskType } from 'lib';
 import { Observable } from 'rxjs';
 import * as bmActions from 'store/actions/bookmark.actions';
 import * as entityActions from 'store/actions/entity.actions';
-import { selCloudAvailableTasks } from 'store/selectors/cloud.selectors';
+import { selCloudAvailableTasks } from 'store/selectors/cloud-selectors/cloud.selectors';
 
 function getBookmarkAction(taskType: SyncTaskType): Action | null {
 

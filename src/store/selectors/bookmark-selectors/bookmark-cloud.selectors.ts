@@ -220,7 +220,7 @@ export const selBookmarkConflictCloudTasks = createSelector(
 
 );
 
-export const selBookmarkCloudTasks = createSelector(
+export const selBookmark_CloudTasks = createSelector(
 
 	selBookmarkNonConflictCloudTasks,
 	selBookmarkConflictCloudTasks,
