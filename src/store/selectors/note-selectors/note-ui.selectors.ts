@@ -1,6 +1,6 @@
 import { Note, TAG_PINNED, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selEntityList, selEntityMap } from './note-entity.selectors';
+import { selNote_EntityList, selNote_EntityMap } from '../entity-selectors/entity-note.selectors';
 import { selNote_UIState } from './note.selectors';
 
 // SELECTED ID
@@ -13,7 +13,7 @@ export const selNote_SelectedId = createSelector(
 
 export const selNote_SelectedEntity = createSelector(
 
-	selEntityMap,
+	selNote_EntityMap,
 	selNote_SelectedId,
 	(map, id) => id ? map[id] : null
 
@@ -21,14 +21,14 @@ export const selNote_SelectedEntity = createSelector(
 
 export const selNote_rootArray = createSelector(
 
-	selEntityList,
+	selNote_EntityList,
 	(arr): Note[] => arr.filter(n => n.parentId === null)
 
 );
 
 export const selNote_pinnedArray = createSelector(
 
-	selEntityList,
+	selNote_EntityList,
 	(arr): Note[] => arr.filter(n => n.tags.includes(TAG_PINNED))
 
 );
@@ -56,7 +56,7 @@ function calcParents(entities: Record<UUID, Note>, selectedId: UUID | null): Not
 
 export const selNote_selectedEntityParents = createSelector(
 
-	selEntityMap,
+	selNote_EntityMap,
 	selNote_SelectedId,
 	(entities, selectedId): Note[] => calcParents(entities, selectedId)
 
@@ -64,7 +64,7 @@ export const selNote_selectedEntityParents = createSelector(
 
 export const selNote_selectedEntityChildren = createSelector(
 
-	selEntityList,
+	selNote_EntityList,
 	selNote_SelectedEntity,
 	(all, selected): Note[] => selected ? all.filter(n => n.parentId === selected.id) : []
 

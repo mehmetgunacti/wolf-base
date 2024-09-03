@@ -6,27 +6,27 @@ import { SYNC_SERVICE } from 'app/app.config';
 import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as actions from 'store/actions/entity.actions';
-import { selLocalDeleted as selBookmark } from 'store/selectors/bookmark-selectors/bookmark-sync.selectors';
-import { selLocalDeleted as selNoteContent } from 'store/selectors/note-content-selectors/note-content-sync.selectors';
-import { selLocalDeleted as selNote } from 'store/selectors/note-selectors/note-sync.selectors';
-import { selLocalDeleted as selProject } from 'store/selectors/project-selectors/project-sync.selectors';
-import { selLocalDeleted as selQuizEntry } from 'store/selectors/quiz-entry-selectors/quiz-entry-sync.selectors';
-import { selLocalDeleted as selQuote } from 'store/selectors/quote-selectors/quote-sync.selectors';
-import { selLocalDeleted as selTask } from 'store/selectors/task-selectors/task-sync.selectors';
-import { selLocalDeleted as selWord } from 'store/selectors/word-selectors/word-sync.selectors';
+import { selBookmark_LocalDeleted } from 'store/selectors/sync-selectors/sync-bookmark.selectors';
+import { selNoteContent_LocalDeleted } from 'store/selectors/sync-selectors/sync-note-content.selectors';
+import { selNote_LocalDeleted } from 'store/selectors/sync-selectors/sync-note.selectors';
+import { selProject_LocalDeleted } from 'store/selectors/sync-selectors/sync-project.selectors';
+import { selQuizEntry_LocalDeleted } from 'store/selectors/sync-selectors/sync-quiz-entry.selectors';
+import { selQuote_LocalDeleted } from 'store/selectors/sync-selectors/sync-quote.selectors';
+import { selTask_LocalDeleted } from 'store/selectors/sync-selectors/sync-task.selectors';
+import { selWord_LocalDeleted } from 'store/selectors/sync-selectors/sync-word.selectors';
 
 function useSelector(entityType: AppEntityType) {
 
 	switch (entityType) {
 
-		case AppEntityType.bookmark: return selBookmark;
-		case AppEntityType.note: return selNote;
-		case AppEntityType.noteContent: return selNoteContent;
-		case AppEntityType.project: return selProject;
-		case AppEntityType.quizEntry: return selQuizEntry;
-		case AppEntityType.quote: return selQuote;
-		case AppEntityType.task: return selTask;
-		case AppEntityType.word: return selWord;
+		case AppEntityType.bookmark: return selBookmark_LocalDeleted;
+		case AppEntityType.note: return selNote_LocalDeleted;
+		case AppEntityType.noteContent: return selNoteContent_LocalDeleted;
+		case AppEntityType.project: return selProject_LocalDeleted;
+		case AppEntityType.quizEntry: return selQuizEntry_LocalDeleted;
+		case AppEntityType.quote: return selQuote_LocalDeleted;
+		case AppEntityType.task: return selTask_LocalDeleted;
+		case AppEntityType.word: return selWord_LocalDeleted;
 
 	}
 

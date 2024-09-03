@@ -1,6 +1,6 @@
 import { Task, TaskPriority, TaskQueryParams, TaskState } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selEntityList, selEntityMap } from './task-entity.selectors';
+import { selTask_EntityList, selTask_EntityMap } from '../entity-selectors/entity-task.selectors';
 import { selTask_UIState } from './task.selectors';
 
 // SELECTED ID
@@ -13,7 +13,7 @@ const selTask_SelectedId = createSelector(
 
 export const selTask_SelectedEntity = createSelector(
 
-	selEntityMap,
+	selTask_EntityMap,
 	selTask_SelectedId,
 	(map, id) => id ? map[id] : null
 
@@ -97,7 +97,7 @@ function filterTasks(params: TaskQueryParams, tasks: Task[]): Task[] {
 
 export const selTask_filteredTasks = createSelector(
 
-	selEntityList,
+	selTask_EntityList,
 	selTask_queryParams,
 	(tasks, params): Task[] => sortTasks(filterTasks(params, tasks))
 

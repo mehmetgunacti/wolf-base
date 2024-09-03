@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { selEntityList, selEntityMap } from './word-entity.selectors';
+import { selWord_EntityList, selWord_EntityMap } from '../entity-selectors/entity-word.selectors';
 import { selWord_UIState } from './word.selectors';
 
 // SELECTED ID
@@ -12,7 +12,7 @@ const selWord_SelectedId = createSelector(
 
 export const selWord_SelectedEntity = createSelector(
 
-	selEntityMap,
+	selWord_EntityMap,
 	selWord_SelectedId,
 	(map, id) => id ? map[id] : null
 
@@ -27,7 +27,7 @@ export const selWord_search = createSelector(
 
 export const selWord_filtered = createSelector(
 
-	selEntityList,
+	selWord_EntityList,
 	selWord_search,
 	(arr, search) => search !== null ? arr.filter(word => word.name.toLocaleLowerCase().includes(search.toLowerCase())) : arr
 

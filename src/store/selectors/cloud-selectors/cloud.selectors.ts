@@ -1,13 +1,13 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { CloudModuleState } from "store/states/cloud.state";
-import { selCloudTasks as selBookmark_CloudTasks } from '../bookmark-selectors/bookmark-sync.selectors';
-import { selCloudTasks as selNoteContent_CloudTasks } from '../note-content-selectors/note-content-sync.selectors';
-import { selCloudTasks as selNote_CloudTasks } from '../note-selectors/note-sync.selectors';
-import { selCloudTasks as selProject_CloudTasks } from '../project-selectors/project-sync.selectors';
-import { selCloudTasks as selQuizEntry_CloudTasks } from '../quiz-entry-selectors/quiz-entry-sync.selectors';
-import { selCloudTasks as selQuote_CloudTasks } from '../quote-selectors/quote-sync.selectors';
-import { selCloudTasks as selTask_CloudTasks } from '../task-selectors/task-sync.selectors';
-import { selCloudTasks as selWord_CloudTasks } from '../word-selectors/word-sync.selectors';
+import { selBookmark_CloudTasks } from '../sync-selectors/sync-bookmark.selectors';
+import { selNoteContent_CloudTasks } from '../sync-selectors/sync-note-content.selectors';
+import { selNote_CloudTasks } from '../sync-selectors/sync-note.selectors';
+import { selProject_CloudTasks } from '../sync-selectors/sync-project.selectors';
+import { selQuizEntry_CloudTasks } from '../sync-selectors/sync-quiz-entry.selectors';
+import { selQuote_CloudTasks } from '../sync-selectors/sync-quote.selectors';
+import { selTask_CloudTasks } from '../sync-selectors/sync-task.selectors';
+import { selWord_CloudTasks } from '../sync-selectors/sync-word.selectors';
 
 export const selCloudModuleState = createFeatureSelector<CloudModuleState>('cloud');
 

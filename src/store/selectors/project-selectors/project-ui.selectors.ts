@@ -1,7 +1,7 @@
 import { Project } from '@lib';
 import { createSelector } from '@ngrx/store';
+import { selProject_EntityList, selProject_EntityMap } from '../entity-selectors/entity-project.selectors';
 import { selTask_filteredTasks } from '../task-selectors/task-ui.selectors';
-import { selEntityList, selEntityMap } from './project-entity.selectors';
 import { selProject_UIState } from './project.selectors';
 
 // SELECTED ID
@@ -14,7 +14,7 @@ const selProject_SelectedId = createSelector(
 
 export const selProject_selected = createSelector(
 
-	selEntityMap,
+	selProject_EntityMap,
 	selProject_SelectedId,
 	selTask_filteredTasks,
 	(state, id, tasks): Project | null => {
@@ -47,7 +47,7 @@ export const selProject_search = createSelector(
 
 export const selProject_filtered = createSelector(
 
-	selEntityList,
+	selProject_EntityList,
 	selProject_search,
 	(arr, search) => search !== null ? arr.filter(word => word.name.toLocaleLowerCase().includes(search.toLowerCase())) : arr
 

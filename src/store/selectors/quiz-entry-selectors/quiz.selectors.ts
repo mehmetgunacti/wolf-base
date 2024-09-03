@@ -2,9 +2,9 @@ import { QuizProgress, UUID, Word } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { produce } from 'immer';
 import { selCore_now } from '../core-ui.selectors';
-import { selEntityList as selQuizEntry_EntityList } from '../quiz-entry-selectors/quiz-entry-entity.selectors';
-import { selEntityList as selWord_EntityList } from '../word-selectors/word-entity.selectors';
 import { selQuizEntry_UIState } from './quiz-entry.selectors';
+import { selWord_EntityList } from '../entity-selectors/entity-word.selectors';
+import { selQuizEntry_EntityList } from '../entity-selectors/entity-quiz-entry.selectors';
 
 export const selQuiz_answer = createSelector(
 

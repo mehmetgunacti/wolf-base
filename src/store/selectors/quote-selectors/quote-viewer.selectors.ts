@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { Quote_ViewerState } from 'store/states/quote.state';
+import { selQuote_EntityMap } from '../entity-selectors/entity-quote.selectors';
 import { selQuote_ViewerState } from './quote.selectors';
-import { selEntityMap } from './quote-entity.selectors';
 
 // SELECTED ID
 const selQuote_SelectedId = createSelector(
@@ -13,7 +13,7 @@ const selQuote_SelectedId = createSelector(
 
 export const selQuote_SelectedEntity = createSelector(
 
-	selEntityMap,
+	selQuote_EntityMap,
 	selQuote_SelectedId,
 	(map, id) => id ? map[id] : null
 

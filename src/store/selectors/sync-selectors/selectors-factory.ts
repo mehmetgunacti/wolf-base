@@ -1,6 +1,6 @@
 import { AppEntityType, CloudTask, Entity, RemoteMetadata, SyncData, SyncTaskType, toCloudTask, UUID } from '@lib';
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import * as filterFn from './sync-filter-functions.util';
+import * as filterFn from './filter-functions.util';
 
 export function createSyncSelectors<T extends Entity>(
 

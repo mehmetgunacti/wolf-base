@@ -1,12 +1,12 @@
-import { Bookmark, ClickedBookmark, BookmarkQueryParams, Tag } from '@lib';
+import { Bookmark, BookmarkQueryParams, ClickedBookmark, Tag } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selBookmark_UIState } from './bookmark.selectors';
-import { selEntityList } from './bookmark-entity.selectors';
+import { selBookmark_EntityList } from '../entity-selectors/entity-bookmark.selectors';
 import { selBookmark_array, selBookmark_clickedBookmarks } from './bookmark-clicks.selectors';
+import { selBookmark_UIState } from './bookmark.selectors';
 
 const arrayOfTagNames = createSelector(
 
-	selEntityList,
+	selBookmark_EntityList,
 	(bookmarks): string[][] => bookmarks.map(b => b.tags)
 
 );

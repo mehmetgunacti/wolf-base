@@ -7,4 +7,4 @@ export const setRunning			= createAction('[Quote Viewer] Set Running', props<{ r
 export const disableAnimation	= createAction('[Quote Viewer] Disable Animation');
 
 // Settings
-export const setSelectedId		= createAction('[Quote] Set Selected Id', props<{ id: UUID | null }>());
+export const setSelectedId		= createAction('[Quote Settings] Set Selected Id', props<{ id: UUID | null }>());

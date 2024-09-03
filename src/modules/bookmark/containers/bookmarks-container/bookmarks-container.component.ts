@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { ClickedBookmark, UUID } from 'lib';
 import { Observable, map } from 'rxjs';
 import { click, openEditBookmarkDialog, togglePopular } from 'store/actions/bookmark.actions';
-import { selEntityCount } from 'store/selectors/bookmark-selectors/bookmark-entity.selectors';
 import { selBM_filteredBookmarks } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
+import { selBookmark_EntityCount } from 'store/selectors/entity-selectors/entity-bookmark.selectors';
 
 @Component({
 	selector: 'app-bookmarks-container',
@@ -23,7 +23,7 @@ export class BookmarksContainerComponent {
 		this.bookmarks$ = this.store.select(selBM_filteredBookmarks).pipe(
 			map(bookmarks => bookmarks.sort((b1, b2) => b2.clicks - b1.clicks))
 		);
-		this.count$ = this.store.select(selEntityCount);
+		this.count$ = this.store.select(selBookmark_EntityCount);
 
 	}
 

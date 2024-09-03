@@ -6,27 +6,27 @@ import { SYNC_SERVICE } from 'app/app.config';
 import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as actions from 'store/actions/entity.actions';
-import { selLocalDeletedRemoteDeleted as selBookmark } from 'store/selectors/bookmark-selectors/bookmark-sync.selectors';
-import { selLocalDeletedRemoteDeleted as selNoteContent } from 'store/selectors/note-content-selectors/note-content-sync.selectors';
-import { selLocalDeletedRemoteDeleted as selNote } from 'store/selectors/note-selectors/note-sync.selectors';
-import { selLocalDeletedRemoteDeleted as selProject } from 'store/selectors/project-selectors/project-sync.selectors';
-import { selLocalDeletedRemoteDeleted as selQuizEntry } from 'store/selectors/quiz-entry-selectors/quiz-entry-sync.selectors';
-import { selLocalDeletedRemoteDeleted as selQuote } from 'store/selectors/quote-selectors/quote-sync.selectors';
-import { selLocalDeletedRemoteDeleted as selTask } from 'store/selectors/task-selectors/task-sync.selectors';
-import { selLocalDeletedRemoteDeleted as selWord } from 'store/selectors/word-selectors/word-sync.selectors';
+import { selBookmark_LocalDeletedRemoteDeleted } from 'store/selectors/sync-selectors/sync-bookmark.selectors';
+import { selNoteContent_LocalDeletedRemoteDeleted } from 'store/selectors/sync-selectors/sync-note-content.selectors';
+import { selNote_LocalDeletedRemoteDeleted } from 'store/selectors/sync-selectors/sync-note.selectors';
+import { selProject_LocalDeletedRemoteDeleted } from 'store/selectors/sync-selectors/sync-project.selectors';
+import { selQuizEntry_LocalDeletedRemoteDeleted } from 'store/selectors/sync-selectors/sync-quiz-entry.selectors';
+import { selQuote_LocalDeletedRemoteDeleted } from 'store/selectors/sync-selectors/sync-quote.selectors';
+import { selTask_LocalDeletedRemoteDeleted } from 'store/selectors/sync-selectors/sync-task.selectors';
+import { selWord_LocalDeletedRemoteDeleted } from 'store/selectors/sync-selectors/sync-word.selectors';
 
 function useSelector(entityType: AppEntityType) {
 
 	switch (entityType) {
 
-		case AppEntityType.bookmark: return selBookmark;
-		case AppEntityType.note: return selNote;
-		case AppEntityType.noteContent: return selNoteContent;
-		case AppEntityType.project: return selProject;
-		case AppEntityType.quizEntry: return selQuizEntry;
-		case AppEntityType.quote: return selQuote;
-		case AppEntityType.task: return selTask;
-		case AppEntityType.word: return selWord;
+		case AppEntityType.bookmark: return selBookmark_LocalDeletedRemoteDeleted;
+		case AppEntityType.note: return selNote_LocalDeletedRemoteDeleted;
+		case AppEntityType.noteContent: return selNoteContent_LocalDeletedRemoteDeleted;
+		case AppEntityType.project: return selProject_LocalDeletedRemoteDeleted;
+		case AppEntityType.quizEntry: return selQuizEntry_LocalDeletedRemoteDeleted;
+		case AppEntityType.quote: return selQuote_LocalDeletedRemoteDeleted;
+		case AppEntityType.task: return selTask_LocalDeletedRemoteDeleted;
+		case AppEntityType.word: return selWord_LocalDeletedRemoteDeleted;
 
 	}
 

@@ -1,11 +1,12 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { setQueryParams } from 'store/actions/word.actions';
+import { setQueryParams, setSelectedId } from 'store/actions/word.actions';
 import { Word_UIState, initialWordUIState } from 'store/states/word.state';
 
 const reducer = createReducer(
 
 	initialWordUIState,
 	on(setQueryParams, (state, { search }): Word_UIState => ({ ...state, queryParams: { search } })),
+	on(setSelectedId, (state, { id }): Word_UIState => ({ ...state, selectedId: id }))
 
 );
 

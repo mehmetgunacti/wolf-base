@@ -1,6 +1,6 @@
 import { Bookmark, Click, ClickedBookmark, NamedClick, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selEntityList, selEntityState } from './bookmark-entity.selectors';
+import { selBookmark_EntityList, selBookmark_EntityState } from '../entity-selectors/entity-bookmark.selectors';
 import { selBookmark_ClicksState } from './bookmark.selectors';
 
 const selBookmark_Clicks = createSelector(
@@ -12,7 +12,7 @@ const selBookmark_Clicks = createSelector(
 
 export const selBookmark_clickedBookmarks = createSelector(
 
-	selEntityList,
+	selBookmark_EntityList,
 	selBookmark_Clicks,
 	(list, clicks): Record<UUID, ClickedBookmark> => {
 
@@ -30,7 +30,7 @@ export const selBookmark_clickedBookmarks = createSelector(
 
 const selBookmark_ids = createSelector(
 
-	selEntityState,
+	selBookmark_EntityState,
 	state => Object.keys(state.entities)
 
 );
@@ -51,7 +51,7 @@ export const selBookmark_count = createSelector(
 
 export const selBookmark_clicked = createSelector(
 
-	selEntityState,
+	selBookmark_EntityState,
 	selBookmark_Clicks,
 	(state, clicks): NamedClick[] =>
 		Object

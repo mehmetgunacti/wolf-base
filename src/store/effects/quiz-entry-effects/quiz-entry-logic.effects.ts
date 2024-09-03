@@ -6,7 +6,7 @@ import { map, withLatestFrom } from 'rxjs/operators';
 import * as coreActions from 'store/actions/core-notification.actions';
 import * as entityActions from 'store/actions/entity.actions';
 import * as quizActions from 'store/actions/quiz-entry.actions';
-import { selEntityList } from 'store/selectors/quiz-entry-selectors/quiz-entry-entity.selectors';
+import { selQuizEntry_EntityList } from 'store/selectors/entity-selectors/entity-quiz-entry.selectors';
 
 @Injectable()
 export class QuizEntryLogicEffects {
@@ -19,7 +19,7 @@ export class QuizEntryLogicEffects {
 		() => this.actions$.pipe(
 
 			ofType(quizActions.answeredRight),
-			withLatestFrom(this.store.select(selEntityList)),
+			withLatestFrom(this.store.select(selQuizEntry_EntityList)),
 			map(([{ quizProgressId }, entries]) => {
 
 				const quizProgress = entries.find(e => e.id === quizProgressId);
@@ -47,7 +47,7 @@ export class QuizEntryLogicEffects {
 		() => this.actions$.pipe(
 
 			ofType(quizActions.closeAnswerDialog),
-			withLatestFrom(this.store.select(selEntityList)),
+			withLatestFrom(this.store.select(selQuizEntry_EntityList)),
 			map(([{ quizProgressId }, entries]) => {
 
 				const quizProgress = entries.find(e => e.id === quizProgressId);

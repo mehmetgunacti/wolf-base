@@ -3,7 +3,7 @@ import { AppEntityType, Definition, definitionName, QuizProgress, UUID, Word } f
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as entityActions from 'store/actions/entity.actions';
-import { selEntityIds } from 'store/selectors/quiz-entry-selectors/quiz-entry-entity.selectors';
+import { selWord_EntityIds } from 'store/selectors/entity-selectors/entity-word.selectors';
 import { selWord_SelectedEntity } from 'store/selectors/word-selectors/word-ui.selectors';
 
 @Component({
@@ -22,7 +22,7 @@ export class WordContainerComponent {
 	constructor() {
 
 		this.word$ = this.store.select(selWord_SelectedEntity);
-		this.scheduledIds$ = this.store.select(selEntityIds);
+		this.scheduledIds$ = this.store.select(selWord_EntityIds);
 
 	}
 
