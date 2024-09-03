@@ -3,7 +3,7 @@ import { DatabaseReport } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { loadReport } from 'store/actions/database.actions';
-import * as reports from 'store/selectors/database.selectors';
+import * as reports from 'store/selectors/database/database.selectors';
 
 @Component({
 	selector: 'app-database-list-container',

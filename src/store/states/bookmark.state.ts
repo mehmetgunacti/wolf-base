@@ -1,19 +1,16 @@
-import { Bookmark, BookmarkQueryParams, Click, RemoteMetadata, SyncData, UUID } from "@lib";
+import { BookmarkQueryParams, Click, UUID } from "@lib";
 
 export interface BookmarkModuleState {
 
-	entities: BookmarkEntitiesState;
+	clicks: BookmarkClicksState;
 	ui: BookmarkUIState;
 
 }
 
 // todo move some properties to ui state
-export interface BookmarkEntitiesState {
+export interface BookmarkClicksState {
 
-	entities: Record<UUID, Bookmark>;
-	syncData: Record<UUID, SyncData>;
-	remoteMetadata: Record<UUID, RemoteMetadata>;
-	clicks: Record<UUID, Click>;
+	values: Record<UUID, Click>;
 
 }
 
@@ -27,16 +24,13 @@ export interface BookmarkUIState {
 
 // INITIALIZATION
 
-export const initialBookmarkEntitiesState: BookmarkEntitiesState = {
+export const bookmark_initialClicksState: BookmarkClicksState = {
 
-	entities: {},
-	syncData: {},
-	remoteMetadata: {},
-	clicks: {}
+	values: {}
 
 };
 
-export const initialBookmarkUIState: BookmarkUIState = {
+export const bookmark_initialUIState: BookmarkUIState = {
 
 	queryParams: {
 		id: null,
@@ -49,9 +43,9 @@ export const initialBookmarkUIState: BookmarkUIState = {
 
 };
 
-export const initialBookmarkState: BookmarkModuleState = {
+export const bookmark_initialState: BookmarkModuleState = {
 
-	entities: initialBookmarkEntitiesState,
-	ui: initialBookmarkUIState
+	clicks: bookmark_initialClicksState,
+	ui: bookmark_initialUIState
 
 };

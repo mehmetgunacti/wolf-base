@@ -35,6 +35,6 @@ export interface WordQueryParams {
 
 export function definitionName(definition: Definition): string {
 
-	return definition.languages.map(l => `(${l.language}) ${l.name}`).join(',');
+	return definition.languages.map(l => `(${l.language}) ${l.name}`).join(', ');
 
 }

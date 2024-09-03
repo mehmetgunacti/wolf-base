@@ -4,8 +4,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { UUID, Word } from 'lib';
 import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
-import { closeShowAnswerDialog } from 'store/actions/quiz-entry.actions';
-import { selQuiz_answer } from 'store/selectors/quiz-entry-selectors/quiz.selectors';
+import * as quizActions from 'store/actions/quiz-entry.actions';
+import { selQuiz_answer } from 'store/selectors/quiz-entry/quiz.selectors';
 
 @Component({
 	selector: 'app-quiz-answer-container',
@@ -25,27 +25,27 @@ export class QuizAnswerContainerComponent {
 	constructor() {
 
 		this.dialogRef.disableClose = true; // or else backdrop clicks won't work
-		this.dialogRef.backdropClick.pipe(
-			takeUntilDestroyed()
-		).subscribe(() => {
+		this.dialogRef.backdropClick
+			.pipe(takeUntilDestroyed())
+			.subscribe(() => {
 
-			const w = this.word();
-			if (w)
-				this.onClose(w.definitions[0].id);
+				const w = this.word();
+				if (w)
+					this.onClose(w.definitions[0].id);
 
-		});
+			});
 
 	}
 
 	onClose(quizProgressId: UUID): void {
 
-		this.store.dispatch(closeShowAnswerDialog({ quizProgressId }));
+		this.store.dispatch(quizActions.closeAnswerDialog({ quizProgressId }));
 
 	}
 
 	onEdit(quizProgressId: UUID, editWord: UUID): void {
 
-		this.store.dispatch(closeShowAnswerDialog({ quizProgressId, editWord }));
+		this.store.dispatch(quizActions.closeAnswerDialog({ quizProgressId, editWord }));
 
 	}
 

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UUID, Project } from 'lib';
+import { AppEntityType, Project, UUID } from 'lib';
 import { Observable } from 'rxjs';
-import { update } from 'store/actions/project.actions';
-import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
+import * as entityActions from 'store/actions/entity.actions';
+import { selProject_selected } from 'store/selectors/project/project-ui.selectors';
 
 @Component({
 	selector: 'app-project-edit-form-container',
@@ -25,7 +25,7 @@ export class ProjectEditFormContainerComponent {
 
 	onUpdate(id: UUID, project: Partial<Project>) {
 
-		this.store.dispatch(update({ id, project }));
+		this.store.dispatch(entityActions.update({ entityType: AppEntityType.project, id, entity: project }));
 
 	}
 

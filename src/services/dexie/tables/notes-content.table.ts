@@ -1,4 +1,4 @@
-import { LocalRepositoryNames, Note, NoteContent, SyncData, UUID, WolfEntity } from '@lib';
+import { AppEntities, Note, NoteContent, SyncData, UUID } from '@lib';
 import { NoteContentLocalRepository } from 'lib/repositories/local';
 import { WolfBaseDB } from '../wolfbase.database';
 import { EntityLocalRepositoryImpl } from './entity.table';
@@ -6,7 +6,7 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class DexieNoteContentRepositoryImpl extends EntityLocalRepositoryImpl<NoteContent> implements NoteContentLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfEntity.note_content);
+		super(db, AppEntities.noteContent);
 	}
 
 	protected override newItemFromPartial(item: NoteContent): NoteContent {
@@ -34,13 +34,13 @@ export class DexieNoteContentRepositoryImpl extends EntityLocalRepositoryImpl<No
 
 		// update Note 'modified' field
 		await this.db.transaction('rw', [
-			LocalRepositoryNames.notes,
-			LocalRepositoryNames.notes_sync
+			AppEntities.note.table,
+			AppEntities.note.table_sync
 		], async () => {
 
 			const id = noteContent.id;
-			await this.db.notes.where({ id }).modify({ modified: new Date().toISOString() } as Note);
-			await this.db.notes_sync.where({ id }).modify({ updated: true } as SyncData);
+			await this.db.table(AppEntities.note.table).where({ id }).modify({ modified: new Date().toISOString() } as Note);
+			await this.db.table(AppEntities.note.table_sync).where({ id }).modify({ updated: true } as SyncData);
 
 		});
 		return noteContent;
@@ -55,12 +55,12 @@ export class DexieNoteContentRepositoryImpl extends EntityLocalRepositoryImpl<No
 		if (count === 1) {
 
 			await this.db.transaction('rw', [
-				LocalRepositoryNames.notes,
-				LocalRepositoryNames.notes_sync
+				AppEntities.note.table,
+				AppEntities.note.table_sync
 			], async () => {
 
-				await this.db.notes.where({ id }).modify({ modified: new Date().toISOString() } as Note);
-				await this.db.notes_sync.where({ id }).modify({ updated: true } as SyncData);
+				await this.db.table(AppEntities.note.table).where({ id }).modify({ modified: new Date().toISOString() } as Note);
+				await this.db.table(AppEntities.note.table_sync).where({ id }).modify({ updated: true } as SyncData);
 
 			});
 

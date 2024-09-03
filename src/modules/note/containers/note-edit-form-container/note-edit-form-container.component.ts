@@ -1,10 +1,11 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Note, UUID } from 'lib';
+import { AppEntityType, Note, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
-import { update } from 'store/actions/note.actions';
-import { selNote_array, selNote_selected } from 'store/selectors/note-selectors/note-entities.selectors';
-import { distinctTagsArray } from 'store/selectors/note-selectors/note-tags.selectors';
+import { update } from 'store/actions/entity.actions';
+import { selNote_EntityList } from 'store/selectors/entity/entity-note.selectors';
+import { distinctTagsArray } from 'store/selectors/note/note-tags.selectors';
+import { selNote_SelectedEntity } from 'store/selectors/note/note-ui.selectors';
 
 @Component({
 	selector: 'app-note-edit-form-container',
@@ -23,8 +24,8 @@ export class NoteEditFormContainerComponent implements OnInit, AfterContentInit 
 
 	constructor() {
 
-		this.note$ = this.store.select(selNote_selected);
-		this.nodes$ = this.store.select(selNote_array);
+		this.note$ = this.store.select(selNote_SelectedEntity);
+		this.nodes$ = this.store.select(selNote_EntityList);
 
 	}
 
@@ -49,9 +50,9 @@ export class NoteEditFormContainerComponent implements OnInit, AfterContentInit 
 
 	}
 
-	onUpdate(id: UUID, note: Partial<Note>) {
+	onUpdate(id: UUID, entity: Partial<Note>) {
 
-		this.store.dispatch(update({ id, note }));
+		this.store.dispatch(update({ entityType: AppEntityType.note, id, entity }));
 
 	}
 

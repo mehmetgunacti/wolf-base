@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MenuItem, Note, NoteContent, UUID } from '@lib';
+import { AppEntityType, Note, NoteContent, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
-import { moveToTrash } from 'store/actions/note.actions';
-import { selNoteContent_content } from 'store/selectors/note-content-selectors/note-content-entities.selectors';
-import { selNote_selected, selNote_selectedEntityChildren, selNote_selectedEntityParents } from 'store/selectors/note-selectors/note-entities.selectors';
+import { moveToTrash } from 'store/actions/entity.actions';
+import { selNoteContent_content } from 'store/selectors/note-content/note-content-ui.selectors';
+import { selNote_SelectedEntity, selNote_selectedEntityChildren, selNote_selectedEntityParents } from 'store/selectors/note/note-ui.selectors';
 
 @Component({
 	selector: 'app-note-container',
@@ -24,17 +24,8 @@ export class NoteContainerComponent {
 
 	constructor() {
 
-		this.note$ = this.store.select(selNote_selected);
+		this.note$ = this.store.select(selNote_SelectedEntity);
 		this.parents$ = this.store.select(selNote_selectedEntityParents);
-
-		// .pipe(
-		// 	map(
-		// 		notes => notes.map(note => ({
-		// 			label: note.name,
-		// 			url: ['/notes', note.id]
-		// 		}))
-		// 	)
-		// );
 		this.children$ = this.store.select(selNote_selectedEntityChildren).pipe(
 			map(c => c.sort((n1, n2) => n1.name.localeCompare(n2.name)))
 		);
@@ -51,7 +42,7 @@ export class NoteContainerComponent {
 	onRemove(id: UUID): void {
 
 		if (confirm(`Note will be deleted. Continue?`))
-			this.store.dispatch(moveToTrash({ id }));
+			this.store.dispatch(moveToTrash({ entityType: AppEntityType.note, id }));
 
 	}
 

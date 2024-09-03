@@ -1,23 +1,17 @@
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { Dialog } from '@angular/cdk/dialog';
+import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
-import { LocalRepositoryService, RemoteRepositoryService } from '@lib';
+import { AppEntityType, LocalRepositoryService, RemoteRepositoryService } from '@lib';
 import { Store } from '@ngrx/store';
 import { BookmarkSyncService, SyncService } from 'lib/services/sync-service.interface';
 import { CustomErrorHandler, DexieLocalRepositoryServiceImpl, FirestoreRemoteRepositoryServiceImpl } from 'services';
+import { AnimationAwareDialog } from 'services/animation-aware-dialog.service';
 import { BookmarkSyncServiceImpl } from 'services/bookmark-sync.service';
 import { SyncServiceImpl } from 'services/sync.service';
-import * as coreActions from 'store/actions/core.actions';
 import * as bmActions from 'store/actions/bookmark.actions';
-import * as noteContentActions from 'store/actions/note-content.actions';
-import * as noteActions from 'store/actions/note.actions';
-import * as wordActions from 'store/actions/word.actions';
-import * as projectActions from 'store/actions/project.actions';
-import * as taskActions from 'store/actions/project-task.actions';
-import * as quoteActions from 'store/actions/quote.actions';
-import * as quizEntryActions from 'store/actions/quiz-entry.actions';
-import { AnimationAwareDialog } from 'services/animation-aware-dialog.service';
-import { Dialog } from '@angular/cdk/dialog';
+import * as coreActions from 'store/actions/core.actions';
+import * as entityActions from 'store/actions/entity.actions';
 
 export const routes: Routes = [
 
@@ -82,15 +76,29 @@ const appInitializerFactory = (store: Store) => {
 
 	return () => {
 
+		// load configuration
 		store.dispatch(coreActions.loadAll());
-		store.dispatch(bmActions.loadAll());
-		store.dispatch(noteActions.loadAll());
-		store.dispatch(noteContentActions.loadAll());
-		store.dispatch(wordActions.loadAll());
-		store.dispatch(quoteActions.loadAll());
-		store.dispatch(quizEntryActions.loadAll());
-		store.dispatch(projectActions.loadAll());
-		store.dispatch(taskActions.loadAll());
+
+		// load entities
+		store.dispatch(entityActions.loadAll({
+
+			filter: [
+
+				{ entityType: AppEntityType.bookmark, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.note, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.noteContent, loadEntities: false, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.word, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.quote, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.quizEntry, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.project, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+				{ entityType: AppEntityType.task, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+
+			]
+
+		}));
+
+		// load clicks
+		store.dispatch(bmActions.loadAllClicks());
 
 	};
 

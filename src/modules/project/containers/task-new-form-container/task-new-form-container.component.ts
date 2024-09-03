@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { NameBase, Task } from 'lib';
+import { AppEntityType, NameBase, Task } from 'lib';
 import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
-import { closeEditDialog, create } from 'store/actions/project-task.actions';
-import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
+import { create } from 'store/actions/entity.actions';
+import { closeEditDialog } from 'store/actions/project-task.actions';
+import { selProject_selected } from 'store/selectors/project/project-ui.selectors';
 
 @Component({
 	selector: 'app-task-new-form-container',
@@ -27,7 +28,7 @@ export class TaskNewFormContainerComponent {
 
 	onCreate(task: Partial<Task>): void {
 
-		this.store.dispatch(create({ task }));
+		this.store.dispatch(create({ entityType: AppEntityType.task, entity: task }));
 
 	}
 

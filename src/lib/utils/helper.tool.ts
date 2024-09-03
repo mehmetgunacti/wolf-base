@@ -1,3 +1,15 @@
+import { AppEntityType } from 'lib/constants';
+
+export function isEntityOfType(type: AppEntityType) {
+
+	return function <T extends { entityType: AppEntityType }>(params: T) {
+
+		return params.entityType === type;
+
+	}
+
+}
+
 export function elseEmptyObject<T>(v: T | null | undefined): T {
 
 	return v ?? {} as T;

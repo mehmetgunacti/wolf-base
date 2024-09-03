@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LogCategory, UUID } from 'lib';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { load } from 'store/actions/logs.actions';
-import { selLogs_selectedId, selLogs_uiState } from 'store/selectors/logs.selectors';
+import { selLogs_selectedId } from 'store/selectors/log/logs.selectors';
 
 @Component({
 	selector: 'app-logs-filter-container',

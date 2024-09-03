@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { CloudTask, SidebarState, getNextSidebarState } from '@lib';
+import { CloudTask, getNextSidebarState } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, take } from 'rxjs';
 import { setSidebarState } from 'store/actions/core-ui.actions';
-import { selCloudAvailableTasks } from 'store/selectors/cloud.selectors';
-import { selCore_isBigScreen, selCore_sidebarState } from 'store/selectors/core-ui.selectors';
+import { selCloudAvailableTasks } from 'store/selectors/cloud/cloud.selectors';
+import { selCore_isBigScreen, selCore_sidebarState } from 'store/selectors/core/core-ui.selectors';
 
 @Component({
 	selector: 'app-header',

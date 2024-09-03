@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Note, TAG_PINNED, UUID } from 'lib';
 import { Observable, iif, map, switchMap } from 'rxjs';
-import { selNote_rootArray } from 'store/selectors/note-selectors/note-entities.selectors';
-import { selNote_filteredNotes, selNote_queryParams } from 'store/selectors/note-selectors/note-tags.selectors';
+import { selNote_filteredNotes, selNote_queryParams } from 'store/selectors/note/note-tags.selectors';
+import { selNote_rootArray } from 'store/selectors/note/note-ui.selectors';
 
 @Component({
 	selector: 'app-notes-container',

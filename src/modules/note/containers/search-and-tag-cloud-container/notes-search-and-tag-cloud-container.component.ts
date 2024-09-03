@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { TAG_PINNED, Tag, slideUpDownTrigger } from 'lib';
 import { Observable, Subscription, debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs';
 import { clickTag, emptySelectedTags, search } from 'store/actions/note.actions';
-import { selCore_pinnedNotes } from 'store/selectors/core-configuration.selectors';
-import { distinctTagsArray, relatedTags, selNote_queryParams } from 'store/selectors/note-selectors/note-tags.selectors';
+import { selCore_pinnedNotes } from 'store/selectors/core/core-configuration.selectors';
+import { distinctTagsArray, relatedTags, selNote_queryParams } from 'store/selectors/note/note-tags.selectors';
 
 @Component({
 	selector: 'app-notes-search-and-tag-cloud-container',

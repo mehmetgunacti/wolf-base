@@ -1,4 +1,4 @@
-import { FIRESTORE_VALUE, FirestoreConverter, WolfEntity } from '@lib';
+import { FIRESTORE_VALUE, FirestoreConverter, AppEntityType } from '@lib';
 import { FirestoreConfig, Task } from 'lib/models';
 import { TasksRemoteRepository } from 'lib/repositories/remote/project-task-remote.repository';
 import { FirestoreAPIClient } from 'lib/utils/firestore-rest-client/firestore-api.tool';
@@ -11,7 +11,7 @@ export class TasksFirestoreCollectionImpl extends FirestoreRemoteStorageCollecti
 		super(
 			firestore,
 			firestoreConfig,
-			WolfEntity.task,
+			AppEntityType.task,
 			new TaskFirestoreConverter()
 		);
 	}
@@ -23,7 +23,7 @@ class TaskFirestoreConverter implements FirestoreConverter<Task> {
 	namebaseConverter = new NameBaseFirestoreConverter();
 
 	toFirestore(entry: Task): Record<keyof Task, FIRESTORE_VALUE> {
-		console.log(entry);
+
 		const fields = {} as Record<keyof Task, FIRESTORE_VALUE>;
 
 		fields['name'] = { stringValue: entry.name };

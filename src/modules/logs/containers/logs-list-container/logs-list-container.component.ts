@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { LogMessage, UUID } from 'lib';
 import { Observable } from 'rxjs';
 import { refresh } from 'store/actions/logs.actions';
-import { selLogs_allEntries, selLogs_selectedId } from 'store/selectors/logs.selectors';
+import { selLogs_allEntries, selLogs_selectedId } from 'store/selectors/log/logs.selectors';
 
 @Component({
 	selector: 'app-logs-list-container',

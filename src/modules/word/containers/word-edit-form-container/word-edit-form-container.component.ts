@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UUID, Word } from 'lib';
+import { AppEntityType, UUID, Word } from 'lib';
 import { Observable } from 'rxjs';
-import { update } from 'store/actions/word.actions';
-import { selWord_selected } from 'store/selectors/word-selectors/word-entities.selectors';
+import { update } from 'store/actions/entity.actions';
+import { selWord_SelectedEntity } from 'store/selectors/word/word-ui.selectors';
 
 @Component({
 	selector: 'app-word-edit-form-container',
@@ -19,13 +19,13 @@ export class WordEditFormContainerComponent {
 
 	constructor() {
 
-		this.word$ = this.store.select(selWord_selected);
+		this.word$ = this.store.select(selWord_SelectedEntity);
 
 	}
 
 	onUpdate(id: UUID, word: Partial<Word>) {
 
-		this.store.dispatch(update({ id, word }));
+		this.store.dispatch(update({ entityType: AppEntityType.word, id, entity: word }));
 
 	}
 

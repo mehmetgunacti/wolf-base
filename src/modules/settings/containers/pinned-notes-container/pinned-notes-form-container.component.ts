@@ -2,8 +2,8 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, inject } from '@a
 import { Store } from '@ngrx/store';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { savePinnedNotesConfig } from 'store/actions/settings.actions';
-import { selCore_pinnedNotes } from 'store/selectors/core-configuration.selectors';
-import { distinctTagsArray } from 'store/selectors/note-selectors/note-tags.selectors';
+import { selCore_pinnedNotes } from 'store/selectors/core/core-configuration.selectors';
+import { distinctTagsArray } from 'store/selectors/note/note-tags.selectors';
 
 @Component({
 	selector: 'app-pinned-notes-form-container',

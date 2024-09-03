@@ -1,15 +1,15 @@
-import { Definition, WolfEntity, Word } from '@lib';
+import { AppEntities, Definition, Word } from '@lib';
+import { produce } from 'immer';
 import { UUID } from 'lib/constants/common.constant';
 import { WordLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
 import { WolfBaseDB } from '../wolfbase.database';
-import { produce } from 'immer';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
 export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> implements WordLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfEntity.word);
+		super(db, AppEntities.word);
 	}
 
 	protected override newItemFromPartial(item: Partial<Word>): Word {
@@ -25,7 +25,7 @@ export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> im
 		if (definitions.length < 1)
 			throw Error('Create `Word`: definitions array is empty')
 
-		definitions.forEach(d => d.id = uuidv4());
+		const withIds = definitions.map(d => ({...d, id: uuidv4() }));
 
 		const instance: Word = {
 
@@ -37,7 +37,7 @@ export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> im
 			definitions: []
 
 		};
-		return { ...instance, ...item, id } as Word;
+		return { ...instance, ...item, id, definitions: withIds } as Word;
 
 	}
 

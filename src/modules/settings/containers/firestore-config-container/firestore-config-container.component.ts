@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { FirestoreConfig } from 'lib';
 import { Observable } from 'rxjs';
 import { saveFirestoreConfig } from 'store/actions/settings.actions';
-import { selCore_firestoreConfig } from 'store/selectors/core-configuration.selectors';
+import { selCore_firestoreConfig } from 'store/selectors/core/core-configuration.selectors';
 
 @Component({
 	selector: 'app-firestore-config-container',

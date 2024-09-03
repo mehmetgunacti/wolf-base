@@ -1,9 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { Entity, EntityName, FirestoreConfig, WolfEntity } from '@lib';
+import { AppEntityType, Entity, FirestoreConfig } from '@lib';
 import { Store } from "@ngrx/store";
 import { BookmarksRemoteRepository, EntityRemoteRepository, NoteContentRemoteRepository, ProjectsRemoteRepository, QuizEntriesRemoteRepository, QuotesRemoteRepository } from 'lib/repositories/remote';
 import { NotesRemoteRepository } from 'lib/repositories/remote/note-remote.repository';
+import { TasksRemoteRepository } from 'lib/repositories/remote/project-task-remote.repository';
 import { WordsRemoteRepository } from 'lib/repositories/remote/word-remote.repository';
 import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
 import { FirestoreAPIClient, FirestoreAPIClientImpl } from "lib/utils/firestore-rest-client/firestore-api.tool";
@@ -13,15 +14,14 @@ import { VoidNotesCollection } from 'services/mock-services/remotestorage/collec
 import { VoidProjectsCollection } from 'services/mock-services/remotestorage/collections/projects.collection';
 import { VoidQuizEntriesCollection } from 'services/mock-services/remotestorage/collections/quiz-entries.collection';
 import { VoidQuotesCollection } from 'services/mock-services/remotestorage/collections/quotes.collection';
+import { VoidTasksCollection } from 'services/mock-services/remotestorage/collections/tasks.collection';
 import { VoidWordsCollection } from 'services/mock-services/remotestorage/collections/words.collection';
-import { selCore_firestoreConfig } from "store/selectors/core-configuration.selectors";
+import { selCore_firestoreConfig } from 'store/selectors/core/core-configuration.selectors';
 import { BookmarksFirestoreCollectionImpl, QuotesFirestoreCollectionImpl, TasksFirestoreCollectionImpl, WordsFirestoreCollectionImpl } from "./collections";
 import { NoteContentFirestoreCollectionImpl } from './collections/note-content.collection';
 import { NotesFirestoreCollectionImpl } from './collections/notes.collection';
 import { ProjectsFirestoreCollectionImpl } from './collections/projects.collection';
 import { QuizEntriesFirestoreCollectionImpl } from './collections/quiz-entries.collection';
-import { TasksRemoteRepository } from 'lib/repositories/remote/project-task-remote.repository';
-import { VoidTasksCollection } from 'services/mock-services/remotestorage/collections/tasks.collection';
 
 export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositoryService {
 
@@ -52,18 +52,18 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 
 	}
 
-	getRepository(entity: EntityName): EntityRemoteRepository<Entity> {
+	getRepository(entity: AppEntityType): EntityRemoteRepository<Entity> {
 
-		switch (entity.name) {
+		switch (entity) {
 
-			case WolfEntity.bookmark.name: return this.bookmarks;
-			case WolfEntity.note.name: return this.notes;
-			case WolfEntity.note_content.name: return this.noteContent;
-			case WolfEntity.project.name: return this.projects;
-			case WolfEntity.quizEntry.name: return this.quizEntries;
-			case WolfEntity.quote.name: return this.quotes;
-			case WolfEntity.task.name: return this.tasks;
-			case WolfEntity.word.name: return this.words;
+			case AppEntityType.bookmark: return this.bookmarks;
+			case AppEntityType.note: return this.notes;
+			case AppEntityType.noteContent: return this.noteContent;
+			case AppEntityType.project: return this.projects;
+			case AppEntityType.quizEntry: return this.quizEntries;
+			case AppEntityType.quote: return this.quotes;
+			case AppEntityType.task: return this.tasks;
+			case AppEntityType.word: return this.words;
 
 		}
 		throw Error('Unknown entity');

@@ -3,7 +3,7 @@ import { Quote, onEnterFadeOutTrigger } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, concatMap, filter, iif, of, scan, switchMap, take, tap, timer } from 'rxjs';
 import { disableAnimation, setRunning } from 'store/actions/quote.actions';
-import { selQuoteViewer_animate, selQuoteViewer_quote, selQuoteViewer_running } from 'store/selectors/quote-selectors/quote-viewer.selectors';
+import { selQuoteViewer_animate, selQuoteViewer_running, selQuote_SelectedEntity } from 'store/selectors/quote/quote-viewer.selectors';
 
 interface Pair {
 
@@ -43,7 +43,7 @@ export class QuoteContainerComponent {
 	running: Signal<boolean> = this.store.selectSignal(selQuoteViewer_running);
 	showPlay: WritableSignal<boolean> = signal(false);
 
-	wrapper$: Observable<QuoteWrapper> = this.store.select(selQuoteViewer_quote).pipe(
+	wrapper$: Observable<QuoteWrapper> = this.store.select(selQuote_SelectedEntity).pipe(
 
 		filter((quote): quote is Quote => !!quote),
 		scan(

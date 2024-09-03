@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { Entity, EntityName, LocalRepositoryService, NameBase, RemoteData, RemoteMetadata, SyncData, SyncService } from '@lib';
+import { Entity, AppEntityType, LocalRepositoryService, NameBase, RemoteData, RemoteMetadata, SyncData, SyncService } from '@lib';
 import { LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE } from 'app/app.config';
 import { RemoteRepositoryService } from 'lib/services/remote-repository.service';
 import { Observable, concatMap, filter, from, iif, map, of, switchMap } from 'rxjs';
@@ -9,18 +9,18 @@ export class SyncServiceImpl implements SyncService {
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 	private remoteRepository: RemoteRepositoryService = inject(REMOTE_REPOSITORY_SERVICE);
 
-	downloadMetadata(entityName: EntityName): Observable<number> {
+	downloadMetadata(entityType: AppEntityType): Observable<RemoteMetadata[]> {
 
 		// download remote metadata list
-		return this.remoteRepository.getRepository(entityName).downloadAllMetadata().pipe(
+		return this.remoteRepository.getRepository(entityType).downloadAllMetadata().pipe(
 
 			switchMap((rmd: RemoteMetadata[]) =>
 
 				// store list in local storage
-				from(this.localRepository.getRepository(entityName).storeAllRemoteMetadata(rmd)).pipe(
+				from(this.localRepository.getRepository(entityType).storeAllRemoteMetadata(rmd)).pipe(
 
-					// return length of list
-					map(() => rmd.length)
+					// return list
+					map(() => rmd)
 
 				)
 
@@ -30,7 +30,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadNew(entityName: EntityName, items: NameBase[]): Observable<NameBase> {
+	uploadNew(entityType: AppEntityType, items: NameBase[]): Observable<NameBase> {
 
 		return from(items).pipe(
 
@@ -38,13 +38,13 @@ export class SyncServiceImpl implements SyncService {
 			concatMap(item =>
 
 				// read entity from local storage
-				from(this.localRepository.getRepository(entityName).getEntity(item.id)).pipe(
+				from(this.localRepository.getRepository(entityType).getEntity(item.id)).pipe(
 
 					// check if entity exists
 					filter((entity): entity is Entity => entity !== null),
 
 					// upload entity
-					switchMap(entity => this.uploadAndStore(entityName, entity))
+					switchMap(entity => this.uploadAndStore(entityType, entity))
 
 				)
 
@@ -54,7 +54,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadUpdated(entityName: EntityName, items: NameBase[]): Observable<RemoteMetadata> {
+	uploadUpdated(entityType: AppEntityType, items: NameBase[]): Observable<RemoteMetadata> {
 
 		return from(items).pipe(
 
@@ -62,7 +62,7 @@ export class SyncServiceImpl implements SyncService {
 			concatMap(item =>
 
 				// read entity from local storage
-				from(this.localRepository.getRepository(entityName).getEntity(item.id)).pipe(
+				from(this.localRepository.getRepository(entityType).getEntity(item.id)).pipe(
 
 					// if entity does not exist, skip
 					filter((entity): entity is Entity => entity !== null),
@@ -70,7 +70,7 @@ export class SyncServiceImpl implements SyncService {
 					switchMap(entity =>
 
 						// read syncData from local storage
-						from(this.localRepository.getRepository(entityName).getSyncData(entity.id)).pipe(
+						from(this.localRepository.getRepository(entityType).getSyncData(entity.id)).pipe(
 
 							// perform syncData checks; skip this id if checks fail
 							filter((syncData): syncData is SyncData => !!syncData && syncData.updated && !syncData.deleted),
@@ -78,7 +78,7 @@ export class SyncServiceImpl implements SyncService {
 							switchMap(syncData =>
 
 								// download remoteMetadata
-								this.remoteRepository.getRepository(entityName).downloadMetadata(entity.id).pipe(
+								this.remoteRepository.getRepository(entityType).downloadMetadata(entity.id).pipe(
 
 									// if remoteMetadata does not exist, skip this id
 									// (in this case, remoteMetadata will not be removed from indexedDb table
@@ -94,10 +94,10 @@ export class SyncServiceImpl implements SyncService {
 											() => syncData.updateTime === remoteMetadata.updateTime,
 
 											// upload entity
-											this.uploadAndStore(entityName, entity),
+											this.uploadAndStore(entityType, entity),
 
 											// save remoteMetadata if syncData - remoteMetadata checks fail
-											from(this.localRepository.getRepository(entityName).storeOneRemoteMetadata(remoteMetadata))
+											from(this.localRepository.getRepository(entityType).storeOneRemoteMetadata(remoteMetadata))
 
 										)
 
@@ -119,14 +119,14 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	private uploadAndStore(entityName: EntityName, entity: Entity): Observable<RemoteMetadata> {
+	private uploadAndStore(entityType: AppEntityType, entity: Entity): Observable<RemoteMetadata> {
 
-		return this.remoteRepository.getRepository(entityName).upload(entity).pipe(
+		return this.remoteRepository.getRepository(entityType).upload(entity).pipe(
 
 			// store _sync and _remote data
 			switchMap(remoteMetadata =>
 
-				from(this.localRepository.getRepository(entityName).storeMetadata(remoteMetadata)).pipe(
+				from(this.localRepository.getRepository(entityType).storeMetadata(remoteMetadata)).pipe(
 					map(() => remoteMetadata)
 				)
 
@@ -136,7 +136,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	uploadDeleted(entityName: EntityName, items: NameBase[]): Observable<NameBase> {
+	uploadDeleted(entityType: AppEntityType, items: NameBase[]): Observable<NameBase> {
 
 		return from(items).pipe(
 
@@ -144,7 +144,7 @@ export class SyncServiceImpl implements SyncService {
 			concatMap(item =>
 
 				// download entity
-				this.remoteRepository.getRepository(entityName).download(item.id).pipe(
+				this.remoteRepository.getRepository(entityType).download(item.id).pipe(
 
 					// check if entity exist on server
 					filter((remoteData): remoteData is RemoteData<Entity> => remoteData !== null),
@@ -152,17 +152,17 @@ export class SyncServiceImpl implements SyncService {
 					switchMap(remoteData =>
 
 						// upload to remote trash collection
-						this.remoteRepository.getRepository(entityName).trash(remoteData.entity).pipe(
+						this.remoteRepository.getRepository(entityType).trash(remoteData.entity).pipe(
 
 							switchMap(() =>
 
 								// delete from collection
-								this.remoteRepository.getRepository(entityName).delete(item.id).pipe(
+								this.remoteRepository.getRepository(entityType).delete(item.id).pipe(
 
 									// delete local metadata
 									switchMap(() =>
 
-										from(this.localRepository.getRepository(entityName).remove(item.id)).pipe(
+										from(this.localRepository.getRepository(entityType).remove(item.id)).pipe(
 											map(() => item)
 										)
 
@@ -184,19 +184,19 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	downloadNew(entityName: EntityName, items: NameBase[]): Observable<NameBase> {
+	downloadNew(entityType: AppEntityType, items: NameBase[]): Observable<NameBase> {
 
-		return this.downloadAndStore(entityName, items);
-
-	}
-
-	downloadUpdated(entityName: EntityName, items: NameBase[]): Observable<NameBase> {
-
-		return this.downloadAndStore(entityName, items);
+		return this.downloadAndStore(entityType, items);
 
 	}
 
-	private downloadAndStore(entityName: EntityName, items: NameBase[]): Observable<NameBase> {
+	downloadUpdated(entityType: AppEntityType, items: NameBase[]): Observable<NameBase> {
+
+		return this.downloadAndStore(entityType, items);
+
+	}
+
+	private downloadAndStore(entityType: AppEntityType, items: NameBase[]): Observable<NameBase> {
 
 		return from(items).pipe(
 
@@ -204,7 +204,7 @@ export class SyncServiceImpl implements SyncService {
 			concatMap(item =>
 
 				// download entity
-				this.remoteRepository.getRepository(entityName).download(item.id).pipe(
+				this.remoteRepository.getRepository(entityType).download(item.id).pipe(
 
 					// check if entity exist on server
 					filter((remoteData): remoteData is RemoteData<Entity> => remoteData !== null),
@@ -212,7 +212,7 @@ export class SyncServiceImpl implements SyncService {
 					switchMap(remoteData =>
 
 						// store all returned RemoteData
-						from(this.localRepository.getRepository(entityName).storeDownloadedEntity(remoteData)).pipe(
+						from(this.localRepository.getRepository(entityType).storeDownloadedEntity(remoteData)).pipe(
 							map(() => item)
 						)
 
@@ -226,7 +226,7 @@ export class SyncServiceImpl implements SyncService {
 
 	}
 
-	downloadDeleted(entityName: EntityName, items: NameBase[]): Observable<NameBase> {
+	downloadDeleted(entityType: AppEntityType, items: NameBase[]): Observable<NameBase> {
 
 		return from(items).pipe(
 
@@ -234,7 +234,7 @@ export class SyncServiceImpl implements SyncService {
 			concatMap(item =>
 
 				// delete entity locally
-				from(this.localRepository.getRepository(entityName).remove(item.id)).pipe(
+				from(this.localRepository.getRepository(entityType).remove(item.id)).pipe(
 					map(() => item)
 				)
 

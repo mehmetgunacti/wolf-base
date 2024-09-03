@@ -1,4 +1,4 @@
-import { Quote, WolfEntity } from '@lib';
+import { AppEntities, Quote } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
 import { QuoteLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,7 +8,7 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class DexieQuotesRepositoryImpl extends EntityLocalRepositoryImpl<Quote> implements QuoteLocalRepository {
 
 	constructor(db: WolfBaseDB) {
-		super(db, WolfEntity.quote);
+		super(db, AppEntities.quote);
 	}
 
 	protected override newItemFromPartial(item: Partial<Quote>): Quote {

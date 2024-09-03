@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Quote, UUID } from '@lib';
+import { AppEntityType, Quote, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
-import { create, moveToTrash, setSelectedId, update } from 'store/actions/quote.actions';
-import { selQuote_array } from 'store/selectors/quote-selectors/quote-entities.selectors';
-import { selQuoteSettings_selected } from 'store/selectors/quote-selectors/quote-settings.selectors';
+import * as entityActions from 'store/actions/entity.actions';
+import { setSelectedId } from 'store/actions/quote.actions';
+import { selQuote_EntityList } from 'store/selectors/entity/entity-quote.selectors';
+import { selQuoteSettings_selected } from 'store/selectors/quote/quote-settings.selectors';
 
 @Component({
 	selector: 'app-quote-settings-container',
@@ -18,7 +19,7 @@ export class QuoteSettingsContainerComponent {
 	private store: Store = inject(Store);
 
 	quotes$: Observable<Quote[]> = combineLatest([
-		this.store.select(selQuote_array),
+		this.store.select(selQuote_EntityList),
 		this.search.asObservable()
 	]).pipe(
 
@@ -42,13 +43,13 @@ export class QuoteSettingsContainerComponent {
 
 	onCreate(quote: Partial<Quote>): void {
 
-		this.store.dispatch(create({ quote }));
+		this.store.dispatch(entityActions.create({ entityType: AppEntityType.quote, entity: quote }));
 
 	}
 
 	onUpdate(quote: Quote): void {
 
-		this.store.dispatch(update({ id: quote.id, quote }));
+		this.store.dispatch(entityActions.update({ entityType: AppEntityType.quote, id: quote.id, entity: quote }));
 
 	}
 
@@ -60,7 +61,7 @@ export class QuoteSettingsContainerComponent {
 
 	onDelete(id: UUID): void {
 
-		this.store.dispatch(moveToTrash({ id }));
+		this.store.dispatch(entityActions.moveToTrash({ entityType: AppEntityType.quote, id }));
 
 	}
 

@@ -1,27 +1,51 @@
-export class EntityName {
+export type Table = string;
 
-	constructor(
-		public name: string,
-		public plural: string
-	) { }
+export enum AppEntityType {
 
-	toString(): string {
-
-		return this.plural;
-
-	}
+	bookmark	= 'bookmark',
+	note		= 'note',
+	noteContent	= 'noteContent',
+	project		= 'project',
+	quizEntry	= 'quizEntry',
+	quote		= 'quote',
+	task		= 'task',
+	word		= 'word'
 
 }
 
-export class WolfEntity {
+export class AppEntity {
 
-	static bookmark = new EntityName('bookmark', 'bookmarks');
-	static note = new EntityName('note', 'notes');
-	static note_content = new EntityName('note_content', 'note_content');
-	static project = new EntityName('project', 'projects');
-	static quizEntry = new EntityName('quiz_entry', 'quiz_entries');
-	static quote = new EntityName('quote', 'quotes');
-	static task = new EntityName('task', 'tasks');
-	static word = new EntityName('word', 'words');
+	constructor(
+		public name: string,
+		public plural: string, // value of 'plural' is used as database table name
+		public label: string,
+		public labelPlural: string
+	) { }
+
+	toString(): string { return this.plural }
+
+	get table()			: Table { return this.plural; }
+	get table_sync()	: Table { return this.plural + '_sync'; }
+	get table_remote()	: Table { return this.plural + '_remote'; }
+	get table_trash()	: Table { return this.plural + '_trash'; }
+
+}
+
+export class BookmarkEntity extends AppEntity {
+
+	get table_clicks() : string { return this.plural + '_clicks'; }
+
+}
+
+export class AppEntities {
+
+	static [AppEntityType.bookmark]		=	new BookmarkEntity('bookmark',	'bookmarks',		'Bookmark',		'Bookmarks');
+	static [AppEntityType.note] 		=	new AppEntity('note',			'notes',			'Note',			'Notes');
+	static [AppEntityType.noteContent]	=	new AppEntity('note_content',	'note_content',		'Note Content',	'Note Content');
+	static [AppEntityType.project]		=	new AppEntity('project',		'projects',			'Project',		'Projects');
+	static [AppEntityType.quizEntry]	= 	new AppEntity('quiz_entry',		'quiz_entries',		'Quiz Entry',	'Quiz Entries');
+	static [AppEntityType.quote]		= 	new AppEntity('quote',			'quotes',			'Quote',		'Quotes');
+	static [AppEntityType.task]			= 	new AppEntity('task',			'tasks',			'Task',			'Tasks');
+	static [AppEntityType.word]			= 	new AppEntity('word',			'words',			'Word',			'Words');
 
 }

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Project } from 'lib';
-import { create } from 'store/actions/project.actions';
+import { AppEntityType, Project } from 'lib';
+import * as entityActions from 'store/actions/entity.actions';
 
 @Component({
 	selector: 'app-project-new-form-container',
@@ -15,7 +15,7 @@ export class ProjectNewFormContainerComponent {
 
 	onCreate(project: Partial<Project>): void {
 
-		this.store.dispatch(create({ project }));
+		this.store.dispatch(entityActions.create({ entityType: AppEntityType.project, entity: project }));
 
 	}
 

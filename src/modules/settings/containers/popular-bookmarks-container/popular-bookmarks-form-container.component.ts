@@ -2,8 +2,8 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, inject } from '@a
 import { Store } from '@ngrx/store';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { savePopularBookmarksConfig } from 'store/actions/settings.actions';
-import { distinctTagsArray } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
-import { selCore_popularBookmarks } from 'store/selectors/core-configuration.selectors';
+import { distinctTagsArray } from 'store/selectors/bookmark/bookmark-tags.selectors';
+import { selCore_popularBookmarks } from 'store/selectors/core/core-configuration.selectors';
 
 @Component({
 	selector: 'app-popular-bookmarks-form-container',
