@@ -1,62 +1,8 @@
 import { Action, ActionReducer, ActionReducerMap, MetaReducer, combineReducers } from '@ngrx/store';
-import { BookmarkEntityCreateEffects } from './effects/bookmark-effects/bookmark-entity-create.effects';
-import { BookmarkEntityUpdateEffects } from './effects/bookmark-effects/bookmark-entity-update.effects';
-import { BookmarkLoadEffects } from './effects/bookmark-effects/bookmark-load.effects';
-import { BookmarkSyncClicksEffects } from './effects/bookmark-effects/bookmark-sync-clicks.effects';
-import { BookmarkUIEffects } from './effects/bookmark-effects/bookmark-ui.effects';
-import { CoreLoadEffects } from './effects/core-load.effects';
-import { CoreNavigationEffects } from './effects/core-navigation.effects';
-import { CoreNotificationEffects } from './effects/core-notification.effects';
-import { CoreSidebarEffects } from './effects/core-sidebar.effects';
-import { CoreThemeEffects } from './effects/core-theme.effects';
-import { CoreUIEffects } from './effects/core-ui.effects';
-import { DatabaseEffects } from './effects/database.effects';
-import { EntityCreateEffects } from './effects/entity-effects/entity-create.effects';
-import { EntityLoadEffects } from './effects/entity-effects/entity-load.effects';
-import { EntityMoveToTrashEffects } from './effects/entity-effects/entity-move-to-trash.effects';
-import { EntitySyncDeletedDeletedEffects } from './effects/entity-effects/entity-sync-deleted-deleted.effects';
-import { EntitySyncLocalDeletedEffects } from './effects/entity-effects/entity-sync-local-deleted.effects';
-import { EntitySyncLocalNewEffects } from './effects/entity-effects/entity-sync-local-new.effects';
-import { EntitySyncLocalUpdatedEffects } from './effects/entity-effects/entity-sync-local-updated.effects';
-import { EntitySyncRemoteDeletedEffects } from './effects/entity-effects/entity-sync-remote-deleted.effects';
-import { EntitySyncRemoteNewEffects } from './effects/entity-effects/entity-sync-remote-new.effects';
-import { EntitySyncRemoteRefreshEffects } from './effects/entity-effects/entity-sync-remote-refresh.effects';
-import { EntitySyncRemoteUpdatedEffects } from './effects/entity-effects/entity-sync-remote-updated.effects';
-import { EntityUpdateEffects } from './effects/entity-effects/entity-update.effects';
-import { LogsEffects } from './effects/logs.effects';
-import { NoteContentCreateEffects } from './effects/note-content-effects/note-content-create.effects';
-import { NoteContentLoadEffects } from './effects/note-content-effects/note-content-load.effects';
-import { NoteContentUpdateEffects } from './effects/note-content-effects/note-content-update.effects';
-import { NoteCreateEffects } from './effects/note-effects/note-create.effects';
-import { NoteUIEffects } from './effects/note-effects/note-ui.effects';
-import { NoteUpdateEffects } from './effects/note-effects/note-update.effects';
-import { ProjectCreateEffects } from './effects/project-effects/project-create.effects';
-import { ProjectUIEffects } from './effects/project-effects/project-ui.effects';
-import { ProjectUpdateEffects } from './effects/project-effects/project-update.effects';
-import { TaskCreateEffects } from './effects/project-task-effects/project-task-create.effects';
-import { TaskEditEffects } from './effects/project-task-effects/project-task-edit-dialog.effects';
-import { TaskUIEffects } from './effects/project-task-effects/project-task-ui.effects';
-import { TaskUpdateEffects } from './effects/project-task-effects/project-task-update.effects';
-import { QuizEntryCreateEffects } from './effects/quiz-entry-effects/quiz-entry-create.effects';
-import { QuizEntryLogicEffects } from './effects/quiz-entry-effects/quiz-entry-logic.effects';
-import { QuizUIEffects } from './effects/quiz-entry-effects/quiz-ui.effects';
-import { QuoteViewerEffects } from './effects/quote-effects/quote-viewer.effects';
-import { SettingsEffects } from './effects/settings.effects';
-import { WordCreateEffects } from './effects/word-effects/word-create.effects';
-import { WordUIEffects } from './effects/word-effects/word-ui.effects';
-import { WordUpdateEffects } from './effects/word-effects/word-update.effects';
-import { bookmarkReducer } from './reducers/bookmark-reducers/bookmark.reducer';
-import { cloudReducer } from './reducers/cloud.reducer';
-import { coreReducer } from './reducers/core.reducer';
-import { databaseReducer } from './reducers/database.reducer';
-import { entitiesReducer } from './reducers/entity-reducers/entities.reducer';
-import { logsReducer } from './reducers/logs.reducer';
-import { noteReducer } from './reducers/note-reducers/note.reducer';
-import { projectReducer } from './reducers/project-reducers/project.reducer';
-import { taskReducer } from './reducers/project-task-reducers/task.reducer';
-import { quizEntryReducer } from './reducers/quiz-entry-reducers/quiz-entry.reducer';
-import { quoteReducer } from './reducers/quote-reducers/quote.reducer';
-import { wordReducer } from './reducers/word-reducers/word.reducer';
+
+import * as effects from './effects';
+import * as reducers from './reducers';
+
 import { AppState } from './states/app.state';
 
 function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
@@ -76,100 +22,100 @@ export const metaReducers: MetaReducer<AppState>[] = [
 
 ];
 
-export const effects = [
+export const effectList = [
 
 	// Core
-	CoreLoadEffects,
-	CoreNavigationEffects,
-	CoreNotificationEffects,
-	CoreUIEffects,
-	CoreThemeEffects,
-	CoreSidebarEffects,
+	effects.CoreLoadEffects,
+	effects.CoreNavigationEffects,
+	effects.CoreNotificationEffects,
+	effects.CoreUIEffects,
+	effects.CoreThemeEffects,
+	effects.CoreSidebarEffects,
 
 	// Entity
-	EntityCreateEffects,
-	EntityLoadEffects,
-	EntityUpdateEffects,
-	EntityMoveToTrashEffects,
+	effects.EntityCreateEffects,
+	effects.EntityLoadEffects,
+	effects.EntityUpdateEffects,
+	effects.EntityMoveToTrashEffects,
 
-	EntitySyncRemoteRefreshEffects,
+	effects.EntitySyncRemoteRefreshEffects,
 
-	EntitySyncLocalNewEffects,
-	EntitySyncLocalUpdatedEffects,
-	EntitySyncLocalDeletedEffects,
+	effects.EntitySyncLocalNewEffects,
+	effects.EntitySyncLocalUpdatedEffects,
+	effects.EntitySyncLocalDeletedEffects,
 
-	EntitySyncRemoteNewEffects,
-	EntitySyncRemoteUpdatedEffects,
-	EntitySyncRemoteDeletedEffects,
+	effects.EntitySyncRemoteNewEffects,
+	effects.EntitySyncRemoteUpdatedEffects,
+	effects.EntitySyncRemoteDeletedEffects,
 
-	EntitySyncDeletedDeletedEffects,
+	effects.EntitySyncDeletedDeletedEffects,
 
 	// Bookmarks
-	BookmarkSyncClicksEffects,
+	effects.BookmarkSyncClicksEffects,
 
-	BookmarkLoadEffects,
-	BookmarkUIEffects,
-	BookmarkEntityCreateEffects,
-	BookmarkEntityUpdateEffects,
+	effects.BookmarkLoadEffects,
+	effects.BookmarkUIEffects,
+	effects.BookmarkEntityCreateEffects,
+	effects.BookmarkEntityUpdateEffects,
 
 	// Notes
-	NoteUIEffects,
-	NoteCreateEffects,
-	NoteUpdateEffects,
+	effects.NoteUIEffects,
+	effects.NoteCreateEffects,
+	effects.NoteUpdateEffects,
 
 	// Note Content
-	NoteContentLoadEffects,
-	NoteContentCreateEffects,
-	NoteContentUpdateEffects,
+	effects.NoteContentLoadEffects,
+	effects.NoteContentCreateEffects,
+	effects.NoteContentUpdateEffects,
 
 	// Projects
-	ProjectUIEffects,
-	ProjectCreateEffects,
-	ProjectUpdateEffects,
+	effects.ProjectUIEffects,
+	effects.ProjectCreateEffects,
+	effects.ProjectUpdateEffects,
 
 	// Project Tasks
-	TaskEditEffects,
-	TaskCreateEffects,
-	TaskUpdateEffects,
-	TaskUIEffects,
+	effects.TaskEditEffects,
+	effects.TaskCreateEffects,
+	effects.TaskUpdateEffects,
+	effects.TaskUIEffects,
 
 	// Words
-	WordUIEffects,
-	WordCreateEffects,
-	WordUpdateEffects,
+	effects.WordUIEffects,
+	effects.WordCreateEffects,
+	effects.WordUpdateEffects,
 
 	// Quiz
-	QuizUIEffects,
-	QuizEntryLogicEffects,
-	QuizEntryCreateEffects,
+	effects.QuizUIEffects,
+	effects.QuizEntryLogicEffects,
+	effects.QuizEntryCreateEffects,
 
 	// Quotes
-	QuoteViewerEffects,
+	effects.QuoteViewerEffects,
 
 	// Database
-	DatabaseEffects,
+	effects.DatabaseEffects,
 
 	// Settings
-	SettingsEffects,
+	effects.SettingsEffects,
 
 	// Logs
-	LogsEffects
+	effects.LogsEffects
 
 ];
 
-export const reducers: ActionReducerMap<AppState> = {
+export const reducerList: ActionReducerMap<AppState> = {
 
-	entities: entitiesReducer,
-	bookmark: combineReducers(bookmarkReducer),
-	core: combineReducers(coreReducer),
-	cloud: cloudReducer,
-	database: databaseReducer,
-	logs: combineReducers(logsReducer),
-	note: combineReducers(noteReducer),
-	project: combineReducers(projectReducer),
-	quizEntry: combineReducers(quizEntryReducer),
-	quote: combineReducers(quoteReducer),
-	task: combineReducers(taskReducer),
-	word: combineReducers(wordReducer)
+	entities: reducers.entitiesReducer,
+	bookmark: combineReducers(reducers.bookmarkReducer),
+	core: combineReducers(reducers.coreReducer),
+	cloud: reducers.cloudReducer,
+	database: reducers.databaseReducer,
+	logs: combineReducers(reducers.logsReducer),
+	note: combineReducers(reducers.noteReducer),
+	project: combineReducers(reducers.projectReducer),
+	quizEntry: combineReducers(reducers.quizEntryReducer),
+	quote: combineReducers(reducers.quoteReducer),
+	task: combineReducers(reducers.taskReducer),
+	word: combineReducers(reducers.wordReducer)
 
 };

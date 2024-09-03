@@ -33,8 +33,8 @@ import { SplashScreenComponent } from './components/splash-screen/splash-screen.
 		BrowserModule,
 		BrowserAnimationsModule,
 		RouterModule.forRoot(config.routes, { enableViewTransitions: true }),
-		StoreModule.forRoot(store.reducers, { metaReducers: store.metaReducers }),
-		EffectsModule.forRoot(store.effects),
+		StoreModule.forRoot(store.reducerList, { metaReducers: store.metaReducers }),
+		EffectsModule.forRoot(store.effectList),
 		StoreDevtoolsModule.instrument(),
 		ServiceWorkerModule.register('ngsw-worker.js', {
 			enabled: !isDevMode(), // environment.production
