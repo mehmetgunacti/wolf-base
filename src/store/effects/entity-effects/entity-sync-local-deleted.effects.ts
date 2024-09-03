@@ -10,9 +10,9 @@ import { selLocalDeleted as selBookmark } from 'store/selectors/bookmark-selecto
 import { selLocalDeleted as selNoteContent } from 'store/selectors/note-content-selectors/note-content-sync.selectors';
 import { selLocalDeleted as selNote } from 'store/selectors/note-selectors/note-sync.selectors';
 import { selLocalDeleted as selProject } from 'store/selectors/project-selectors/project-sync.selectors';
-import { selLocalDeleted as selTask } from 'store/selectors/project-task-selectors/task-sync.selectors';
 import { selLocalDeleted as selQuizEntry } from 'store/selectors/quiz-entry-selectors/quiz-entry-sync.selectors';
 import { selLocalDeleted as selQuote } from 'store/selectors/quote-selectors/quote-sync.selectors';
+import { selLocalDeleted as selTask } from 'store/selectors/task-selectors/task-sync.selectors';
 import { selLocalDeleted as selWord } from 'store/selectors/word-selectors/word-sync.selectors';
 
 function useSelector(entityType: AppEntityType) {

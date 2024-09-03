@@ -5,7 +5,7 @@ import { DatabaseModuleState, initialDatabaseState } from "./database.state";
 import { entity_initialState, Entity_ModuleState } from './entity.state';
 import { Logs_ModuleState, initialLogsState } from "./logs.state";
 import { Note_ModuleState, initialNoteState } from './note.state';
-import { initialTaskState, Task_ModuleState } from './project-task.state';
+import { initialTaskState, Task_ModuleState } from './task.state';
 import { initialProjectState, Project_ModuleState } from './project.state';
 import { QuizEntry_ModuleState, quizEntry_initialModuleState } from './quiz-entry.state';
 import { Quote_ModuleState, quote_initialModuleState } from './quote.state';

@@ -1,7 +1,23 @@
 import { Task, TaskPriority, TaskQueryParams, TaskState } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selEntityList } from './task-entity.selectors';
+import { selEntityList, selEntityMap } from './task-entity.selectors';
 import { selTask_UIState } from './task.selectors';
+
+// SELECTED ID
+const selTask_SelectedId = createSelector(
+
+	selTask_UIState,
+	state => state.selectedId
+
+);
+
+export const selTask_SelectedEntity = createSelector(
+
+	selEntityMap,
+	selTask_SelectedId,
+	(map, id) => id ? map[id] : null
+
+);
 
 export const selTask_queryParams = createSelector(
 

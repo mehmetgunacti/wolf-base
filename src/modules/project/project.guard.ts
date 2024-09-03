@@ -1,9 +1,9 @@
 import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { AppEntityType, UUID } from "lib";
+import { UUID } from "lib";
 import { Observable, of, tap } from "rxjs";
-import { setSelectedId } from 'store/actions/entity.actions';
+import * as actions from 'store/actions/project.actions';
 
 export const setSelectedIdGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
 
@@ -12,7 +12,7 @@ export const setSelectedIdGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
 	return of(true).pipe(
 
 		// dispatch id
-		tap(() => store.dispatch(setSelectedId({ entityType: AppEntityType.project, id })))
+		tap(() => store.dispatch(actions.setSelectedId({ id })))
 
 	);
 

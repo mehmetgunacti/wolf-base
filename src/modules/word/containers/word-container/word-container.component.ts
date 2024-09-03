@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as entityActions from 'store/actions/entity.actions';
 import { selEntityIds } from 'store/selectors/quiz-entry-selectors/quiz-entry-entity.selectors';
-import { selSelectedEntity } from 'store/selectors/word-selectors/word-entity.selectors';
+import { selWord_SelectedEntity } from 'store/selectors/word-selectors/word-ui.selectors';
 
 @Component({
 	selector: 'app-word-container',
@@ -21,7 +21,7 @@ export class WordContainerComponent {
 
 	constructor() {
 
-		this.word$ = this.store.select(selSelectedEntity);
+		this.word$ = this.store.select(selWord_SelectedEntity);
 		this.scheduledIds$ = this.store.select(selEntityIds);
 
 	}

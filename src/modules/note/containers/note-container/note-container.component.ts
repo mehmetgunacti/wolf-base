@@ -4,9 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
 import { moveToTrash } from 'store/actions/entity.actions';
-import { selNoteContent_content } from 'store/selectors/note-content-selectors/note-content-entities.selectors';
-import { selNote_selectedEntityChildren, selNote_selectedEntityParents } from 'store/selectors/note-selectors/note-entities.selectors';
-import { selSelectedEntity } from 'store/selectors/note-selectors/note-entity.selectors';
+import { selNoteContent_content } from 'store/selectors/note-content-selectors/note-content-ui.selectors';
+import { selNote_SelectedEntity, selNote_selectedEntityChildren, selNote_selectedEntityParents } from 'store/selectors/note-selectors/note-ui.selectors';
 
 @Component({
 	selector: 'app-note-container',
@@ -25,7 +24,7 @@ export class NoteContainerComponent {
 
 	constructor() {
 
-		this.note$ = this.store.select(selSelectedEntity);
+		this.note$ = this.store.select(selNote_SelectedEntity);
 		this.parents$ = this.store.select(selNote_selectedEntityParents);
 		this.children$ = this.store.select(selNote_selectedEntityChildren).pipe(
 			map(c => c.sort((n1, n2) => n1.name.localeCompare(n2.name)))

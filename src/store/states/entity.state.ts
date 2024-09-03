@@ -19,8 +19,6 @@ export interface Entity_EntitiesState {
 	syncData: Record<UUID, SyncData>;
 	remoteMetadata: Record<UUID, RemoteMetadata>;
 
-	selectedId: UUID | null;
-
 }
 
 // INITIALIZATION
@@ -30,8 +28,7 @@ function createInitialEntitiesState(): Entity_EntitiesState {
 	return {
 		entities: {},
 		syncData: {},
-		remoteMetadata: {},
-		selectedId: null
+		remoteMetadata: {}
 	};
 
 }

@@ -3,12 +3,12 @@ import { Project, TaskCategoryLabels, TaskQueryParams, TaskStateLabels, UUID } f
 import { Store } from '@ngrx/store';
 import * as taskActions from 'store/actions/project-task.actions';
 import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
-import { selTask_queryParams } from 'store/selectors/project-task-selectors/task-ui.selectors';
+import { selTask_queryParams } from 'store/selectors/task-selectors/task-ui.selectors';
 
 function formatQueryParams(queryParams: TaskQueryParams): string {
 
 	const { search, status, category, tags } = queryParams;
-	const statusText =   `[Status: '${status === 'all' ? 'All' : TaskStateLabels[status]}']`;
+	const statusText = `[Status: '${status === 'all' ? 'All' : TaskStateLabels[status]}']`;
 	const categoryText = `[Category: '${category === 'all' ? 'All' : TaskCategoryLabels[category]}']`;
 	const searchText = search ? `, [Search: '${search}']` : '';
 	const tagsText = tags.length > 0 ? `, [Tags: (${tags.join(', ')})]` : '';

@@ -3,8 +3,9 @@ import { Store } from '@ngrx/store';
 import { AppEntityType, Note, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { update } from 'store/actions/entity.actions';
-import { selEntityList, selSelectedEntity } from 'store/selectors/note-selectors/note-entity.selectors';
+import { selEntityList } from 'store/selectors/note-selectors/note-entity.selectors';
 import { distinctTagsArray } from 'store/selectors/note-selectors/note-tags.selectors';
+import { selNote_SelectedEntity } from 'store/selectors/note-selectors/note-ui.selectors';
 
 @Component({
 	selector: 'app-note-edit-form-container',
@@ -23,7 +24,7 @@ export class NoteEditFormContainerComponent implements OnInit, AfterContentInit 
 
 	constructor() {
 
-		this.note$ = this.store.select(selSelectedEntity);
+		this.note$ = this.store.select(selNote_SelectedEntity);
 		this.nodes$ = this.store.select(selEntityList);
 
 	}

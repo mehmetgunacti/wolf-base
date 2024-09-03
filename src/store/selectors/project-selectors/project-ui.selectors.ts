@@ -1,13 +1,21 @@
 import { Project } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selTask_filteredTasks } from '../project-task-selectors/task-ui.selectors';
-import { selEntityList, selEntityMap, selSelectedId } from './project-entity.selectors';
+import { selTask_filteredTasks } from '../task-selectors/task-ui.selectors';
+import { selEntityList, selEntityMap } from './project-entity.selectors';
 import { selProject_UIState } from './project.selectors';
+
+// SELECTED ID
+const selProject_SelectedId = createSelector(
+
+	selProject_UIState,
+	state => state.selectedId
+
+);
 
 export const selProject_selected = createSelector(
 
 	selEntityMap,
-	selSelectedId,
+	selProject_SelectedId,
 	selTask_filteredTasks,
 	(state, id, tasks): Project | null => {
 

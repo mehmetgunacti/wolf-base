@@ -1,7 +1,7 @@
 import { AppEntityType, Entity, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
-import { selEntity_ModuleState } from './entity.selectors';
 import { Entity_EntitiesState } from 'store/states/entity.state';
+import { selEntity_ModuleState } from './entity.selectors';
 
 export function createEntitySelectors<T extends Entity>(entityType: AppEntityType) {
 
@@ -77,24 +77,6 @@ export function createEntitySelectors<T extends Entity>(entityType: AppEntityTyp
 
 	);
 
-	// SELECTED ID
-	const selSelectedId = createSelector(
-
-		selEntityState,
-		state => state.selectedId
-
-	);
-
-	// SELECTED ENTITY
-	const selSelectedEntity = createSelector(
-
-		selEntityMap,
-		selSelectedId,
-		(map, id) => id === null ? null : map[id]
-
-	);
-
-
 	return {
 
 		selEntityState,
@@ -105,9 +87,7 @@ export function createEntitySelectors<T extends Entity>(entityType: AppEntityTyp
 		selSyncDataMap,
 		selSyncDataList,
 		selRemoteMetadataMap,
-		selRemoteMetadataList,
-		selSelectedId,
-		selSelectedEntity
+		selRemoteMetadataList
 
 	};
 

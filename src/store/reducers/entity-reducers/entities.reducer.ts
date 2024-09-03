@@ -2,11 +2,7 @@ import { AppEntityType, Entity, RemoteMetadata, SyncData, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
 import * as actions from 'store/actions/entity.actions';
-import * as quoteActions from 'store/actions/quote.actions';
-import * as taskActions from 'store/actions/project-task.actions';
-import * as noteActions from 'store/actions/note.actions';
 import { entity_initialState, Entity_ModuleState } from 'store/states/entity.state';
-import { selEntity_ModuleState } from 'store/selectors/entity-selectors/entity.selectors';
 
 function reduceEntities(data: Entity[]): Record<UUID, Entity> {
 
@@ -120,11 +116,6 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(actions.setSelectedId, (state, { entityType, id }): Entity_ModuleState => ({ ...state, [entityType]: { ...state[entityType], selectedId: id } })),
-	on(quoteActions.changeQuote, (state, { id }): Entity_ModuleState => ({ ...state, quote: { ...state.quote, selectedId: id } })),
-	on(taskActions.openAddTaskDialog, (state): Entity_ModuleState => ({ ...state, task: { ...state.task, selectedId: null } })),
-	on(taskActions.openEditTaskDialog, (state, { id }): Entity_ModuleState => ({ ...state, task: { ...state.task, selectedId: id } })),
-	on(taskActions.closeEditDialog, (state): Entity_ModuleState => ({ ...state, task: { ...state.task, selectedId: null } })),
 
 );
 

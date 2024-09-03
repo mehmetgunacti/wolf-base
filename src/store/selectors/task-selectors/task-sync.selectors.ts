@@ -1,12 +1,12 @@
 import { AppEntityType, Task } from '@lib';
+import { createSyncSelectors } from '../sync-selectors/selectors-factory';
 import {
 	selEntityList,
 	selRemoteMetadataList,
 	selRemoteMetadataMap,
 	selSyncDataList,
 	selSyncDataMap
-} from '../project-task-selectors/task-entity.selectors';
-import { createSyncSelectors } from '../sync-selectors/selectors-factory';
+} from '../task-selectors/task-entity.selectors';
 
 const entityType = AppEntityType.task;
 

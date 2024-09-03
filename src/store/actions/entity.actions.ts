@@ -11,9 +11,6 @@ export const updateSuccess					= createAction('[Entity] Update Success', props<{
 export const moveToTrash					= createAction('[Entity] Move to Trash', props<{ entityType: AppEntityType, id: UUID }>());
 export const moveToTrashSuccess				= createAction('[Entity] Move to Trash Success', props<{ entityType: AppEntityType, id: UUID }>());
 
-// selectedId
-export const setSelectedId					= createAction('[Entity] Set Selected Id', props<{ entityType: AppEntityType, id: UUID | null }>());
-
 // LOAD (IndexedDb -> NgRx Store)
 // Entity
 export const loadAll						= createAction('[Entity] Load All', props<{ filter: { entityType: AppEntityType, loadEntities: boolean, loadSyncData: boolean, loadRemoteMetadata: boolean }[] }>());

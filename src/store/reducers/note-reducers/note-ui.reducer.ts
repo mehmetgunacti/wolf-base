@@ -1,28 +1,27 @@
-import { AppEntityType } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import * as entityActions from 'store/actions/entity.actions';
-import * as noteActions from 'store/actions/note.actions';
+import * as actions from 'store/actions/note.actions';
 import { Note_UIState, initialNoteUIState } from 'store/states/note.state';
 
 const reducer = createReducer(
 
 	initialNoteUIState,
-	on(noteActions.setQueryParams, (state, { search, tags }): Note_UIState => ({ ...state, queryParams: { search, tags } })),
-	on(entityActions.setSelectedId, (state, { entityType, id }): Note_UIState => {
+	on(actions.setQueryParams, (state, { search, tags }): Note_UIState => ({ ...state, queryParams: { search, tags } })),
+	on(actions.setSelectedId, (state, { id }): Note_UIState => {
 
-		if (entityType === AppEntityType.note)
-			produce(
-				state,
-				draft => {
-					if (!id)
-						draft.content = null;
-				}
-			);
-		return state;
+		return produce(
+
+			state,
+			draft => {
+				draft.selectedId = id;
+				if (!id)
+					draft.content = null;
+			}
+
+		);
 
 	}),
-	on(noteActions.loadOneContentSuccess, (state, { content }): Note_UIState => ({ ...state, content })),
+	on(actions.loadOneContentSuccess, (state, { content }): Note_UIState => ({ ...state, content })),
 
 );
 

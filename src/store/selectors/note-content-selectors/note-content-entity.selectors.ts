@@ -9,8 +9,6 @@ export const {
 	selSyncDataMap,
 	selSyncDataList,
 	selRemoteMetadataMap,
-	selRemoteMetadataList,
-	selSelectedId,
-	selSelectedEntity
+	selRemoteMetadataList
 
 } = createEntitySelectors<NoteContent>(AppEntityType.noteContent);

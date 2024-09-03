@@ -3,8 +3,9 @@ import { Store } from '@ngrx/store';
 import { AppEntityType, Note, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { create } from 'store/actions/entity.actions';
-import { selEntityList, selSelectedEntity } from 'store/selectors/note-selectors/note-entity.selectors';
+import { selEntityList } from 'store/selectors/note-selectors/note-entity.selectors';
 import { distinctTagsArray } from 'store/selectors/note-selectors/note-tags.selectors';
+import { selNote_SelectedEntity } from 'store/selectors/note-selectors/note-ui.selectors';
 
 @Component({
 	selector: 'app-note-new-form-container',
@@ -24,7 +25,7 @@ export class NoteNewFormContainerComponent implements OnInit, AfterContentInit {
 
 	constructor() {
 
-		this.parentId$ = this.store.select(selSelectedEntity).pipe(
+		this.parentId$ = this.store.select(selNote_SelectedEntity).pipe(
 
 			map(p => p ? p.id : null)
 

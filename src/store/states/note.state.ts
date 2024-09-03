@@ -1,4 +1,4 @@
-import { NoteContent, NoteQueryParams } from '@lib';
+import { NoteContent, NoteQueryParams, UUID } from '@lib';
 
 export interface Note_ModuleState {
 
@@ -8,6 +8,7 @@ export interface Note_ModuleState {
 
 export interface Note_UIState {
 
+	selectedId: UUID | null;
 	content: NoteContent | null;
 	queryParams: NoteQueryParams;
 
@@ -17,6 +18,7 @@ export interface Note_UIState {
 
 export const initialNoteUIState: Note_UIState = {
 
+	selectedId: null,
 	content: null,
 	queryParams: {
 		search: null,
