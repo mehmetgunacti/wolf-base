@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { fromClipboard, openAddBookmarkDialog } from 'store/actions/bookmark.actions';
-import { selBookmarkShaking } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
+import { selBookmarkShaking } from 'store/selectors/bookmark/bookmark-ui.selectors';
 
 @Component({
 	selector: 'app-bookmarks-page',

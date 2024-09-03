@@ -8,7 +8,7 @@ import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { setSidebarState } from 'store/actions/core-ui.actions';
 import { loadAllSuccess } from 'store/actions/core.actions';
-import { selCore_isBigScreen, selCore_sidebarState } from 'store/selectors/core-ui.selectors';
+import { selCore_isBigScreen, selCore_sidebarState } from 'store/selectors/core/core-ui.selectors';
 
 @Injectable()
 export class CoreSidebarEffects {

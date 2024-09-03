@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal, Signal } 
 import { Project, TaskCategoryLabels, TaskQueryParams, TaskStateLabels, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import * as taskActions from 'store/actions/project-task.actions';
-import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
-import { selTask_queryParams } from 'store/selectors/task-selectors/task-ui.selectors';
+import { selProject_selected } from 'store/selectors/project/project-ui.selectors';
+import { selTask_queryParams } from 'store/selectors/task/task-ui.selectors';
 
 function formatQueryParams(queryParams: TaskQueryParams): string {
 

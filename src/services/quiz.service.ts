@@ -3,7 +3,7 @@ import { NUMBER_OF_CHOICES, Quiz, QuizProgress, UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { selQuiz_definitionIdWordMap, selQuiz_quizProgress } from 'store/selectors/quiz-entry-selectors/quiz.selectors';
+import { selQuiz_definitionIdWordMap, selQuiz_quizProgress } from 'store/selectors/quiz-entry/quiz.selectors';
 
 @Injectable({
 	providedIn: 'root'

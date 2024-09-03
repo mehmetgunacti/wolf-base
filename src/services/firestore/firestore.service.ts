@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { Entity, AppEntityType, FirestoreConfig } from '@lib';
+import { AppEntityType, Entity, FirestoreConfig } from '@lib';
 import { Store } from "@ngrx/store";
 import { BookmarksRemoteRepository, EntityRemoteRepository, NoteContentRemoteRepository, ProjectsRemoteRepository, QuizEntriesRemoteRepository, QuotesRemoteRepository } from 'lib/repositories/remote';
 import { NotesRemoteRepository } from 'lib/repositories/remote/note-remote.repository';
@@ -16,7 +16,7 @@ import { VoidQuizEntriesCollection } from 'services/mock-services/remotestorage/
 import { VoidQuotesCollection } from 'services/mock-services/remotestorage/collections/quotes.collection';
 import { VoidTasksCollection } from 'services/mock-services/remotestorage/collections/tasks.collection';
 import { VoidWordsCollection } from 'services/mock-services/remotestorage/collections/words.collection';
-import { selCore_firestoreConfig } from "store/selectors/core-configuration.selectors";
+import { selCore_firestoreConfig } from 'store/selectors/core/core-configuration.selectors';
 import { BookmarksFirestoreCollectionImpl, QuotesFirestoreCollectionImpl, TasksFirestoreCollectionImpl, WordsFirestoreCollectionImpl } from "./collections";
 import { NoteContentFirestoreCollectionImpl } from './collections/note-content.collection';
 import { NotesFirestoreCollectionImpl } from './collections/notes.collection';

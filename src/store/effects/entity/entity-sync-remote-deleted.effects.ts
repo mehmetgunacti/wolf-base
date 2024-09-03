@@ -6,14 +6,14 @@ import { SYNC_SERVICE } from 'app/app.config';
 import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as actions from 'store/actions/entity.actions';
-import { selBookmark_RemoteDeleted } from 'store/selectors/sync-selectors/sync-bookmark.selectors';
-import { selNoteContent_RemoteDeleted } from 'store/selectors/sync-selectors/sync-note-content.selectors';
-import { selNote_RemoteDeleted } from 'store/selectors/sync-selectors/sync-note.selectors';
-import { selProject_RemoteDeleted } from 'store/selectors/sync-selectors/sync-project.selectors';
-import { selQuizEntry_RemoteDeleted } from 'store/selectors/sync-selectors/sync-quiz-entry.selectors';
-import { selQuote_RemoteDeleted } from 'store/selectors/sync-selectors/sync-quote.selectors';
-import { selTask_RemoteDeleted } from 'store/selectors/sync-selectors/sync-task.selectors';
-import { selWord_RemoteDeleted } from 'store/selectors/sync-selectors/sync-word.selectors';
+import { selBookmark_RemoteDeleted } from 'store/selectors/sync/sync-bookmark.selectors';
+import { selNoteContent_RemoteDeleted } from 'store/selectors/sync/sync-note-content.selectors';
+import { selNote_RemoteDeleted } from 'store/selectors/sync/sync-note.selectors';
+import { selProject_RemoteDeleted } from 'store/selectors/sync/sync-project.selectors';
+import { selQuizEntry_RemoteDeleted } from 'store/selectors/sync/sync-quiz-entry.selectors';
+import { selQuote_RemoteDeleted } from 'store/selectors/sync/sync-quote.selectors';
+import { selTask_RemoteDeleted } from 'store/selectors/sync/sync-task.selectors';
+import { selWord_RemoteDeleted } from 'store/selectors/sync/sync-word.selectors';
 
 function useSelector(entityType: AppEntityType) {
 

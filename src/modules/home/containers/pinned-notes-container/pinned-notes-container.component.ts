@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Note, compareISODateStrings } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import * as coreSelectors from 'store/selectors/core-configuration.selectors';
-import * as noteSelectors from 'store/selectors/note-selectors/note-ui.selectors';
+import * as coreSelectors from 'store/selectors/core/core-configuration.selectors';
+import * as noteSelectors from 'store/selectors/note/note-ui.selectors';
 
 @Component({
 	selector: 'app-pinned-notes-container',

@@ -4,7 +4,7 @@ import { AppEntityType, NameBase, Task } from 'lib';
 import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
 import { create } from 'store/actions/entity.actions';
 import { closeEditDialog } from 'store/actions/project-task.actions';
-import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
+import { selProject_selected } from 'store/selectors/project/project-ui.selectors';
 
 @Component({
 	selector: 'app-task-new-form-container',

@@ -6,7 +6,7 @@ import { map, withLatestFrom } from 'rxjs/operators';
 import * as coreActions from 'store/actions/core-notification.actions';
 import * as entityActions from 'store/actions/entity.actions';
 import * as quizActions from 'store/actions/quiz-entry.actions';
-import { selQuizEntry_EntityList } from 'store/selectors/entity-selectors/entity-quiz-entry.selectors';
+import { selQuizEntry_EntityList } from 'store/selectors/entity/entity-quiz-entry.selectors';
 
 @Injectable()
 export class QuizEntryLogicEffects {

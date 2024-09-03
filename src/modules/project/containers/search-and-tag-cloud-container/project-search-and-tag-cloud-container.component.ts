@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { NameBase, TASK_CATEGORIES, TASK_STATE, Tag, TaskState, slideUpDownTrigger } from 'lib';
 import { Observable, debounceTime, distinctUntilChanged, map, take } from 'rxjs';
 import { clickTag, resetQueryParams, search, taskCategoryChange, taskStatusChange } from 'store/actions/project-task.actions';
-import { distinctTagsArray, relatedTags } from 'store/selectors/task-selectors/task-tags.selectors';
-import { selTask_queryParams } from 'store/selectors/task-selectors/task-ui.selectors';
+import { distinctTagsArray, relatedTags } from 'store/selectors/task/task-tags.selectors';
+import { selTask_queryParams } from 'store/selectors/task/task-ui.selectors';
 
 const all: NameBase = { id: 'all', name: 'All' };
 

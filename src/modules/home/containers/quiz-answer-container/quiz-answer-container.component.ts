@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { UUID, Word } from 'lib';
 import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
 import * as quizActions from 'store/actions/quiz-entry.actions';
-import { selQuiz_answer } from 'store/selectors/quiz-entry-selectors/quiz.selectors';
+import { selQuiz_answer } from 'store/selectors/quiz-entry/quiz.selectors';
 
 @Component({
 	selector: 'app-quiz-answer-container',

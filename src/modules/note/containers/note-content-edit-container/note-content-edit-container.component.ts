@@ -6,8 +6,8 @@ import { AppEntityType, Note, NoteContent, UUID } from 'lib';
 import { Observable, filter, take, tap, withLatestFrom } from 'rxjs';
 import { navigate } from 'store/actions/core-navigation.actions';
 import * as entityActions from 'store/actions/entity.actions';
-import { selNoteContent_content } from 'store/selectors/note-content-selectors/note-content-ui.selectors';
-import { selNote_SelectedEntity } from 'store/selectors/note-selectors/note-ui.selectors';
+import { selNoteContent_content } from 'store/selectors/note-content/note-content-ui.selectors';
+import { selNote_SelectedEntity } from 'store/selectors/note/note-ui.selectors';
 
 @Component({
 	selector: 'app-note-content-edit-container',

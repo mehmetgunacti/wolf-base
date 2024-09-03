@@ -3,9 +3,9 @@ import { Store } from '@ngrx/store';
 import { AppEntityType, Note, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 import { create } from 'store/actions/entity.actions';
-import { selNote_EntityList } from 'store/selectors/entity-selectors/entity-note.selectors';
-import { distinctTagsArray } from 'store/selectors/note-selectors/note-tags.selectors';
-import { selNote_SelectedEntity } from 'store/selectors/note-selectors/note-ui.selectors';
+import { selNote_EntityList } from 'store/selectors/entity/entity-note.selectors';
+import { distinctTagsArray } from 'store/selectors/note/note-tags.selectors';
+import { selNote_SelectedEntity } from 'store/selectors/note/note-ui.selectors';
 
 @Component({
 	selector: 'app-note-new-form-container',

@@ -5,9 +5,9 @@ import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { showNotification } from 'store/actions/core-notification.actions';
-import { clearLogs, load, loadSuccess, refresh } from 'store/actions/logs.actions';
-import * as logSelectors from 'store/selectors/logs.selectors';
 import * as logActions from 'store/actions/logs.actions';
+import { clearLogs, loadSuccess } from 'store/actions/logs.actions';
+import * as logSelectors from 'store/selectors/log/logs.selectors';
 
 const convertToast = (toast: ToastConfiguration): LogMessage => {
 

@@ -3,9 +3,9 @@ import { CloudTask, MenuItem, TAG_PINNED, TAG_POPULAR, Theme, getNextTheme } fro
 import { Store } from '@ngrx/store';
 import { Observable, map, take } from 'rxjs';
 import { setTheme } from 'store/actions/core-ui.actions';
-import { selBookmarkMenuBadge } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
-import { selCloudAvailableTasks } from 'store/selectors/cloud-selectors/cloud.selectors';
-import { selCore_theme } from 'store/selectors/core-ui.selectors';
+import { selBookmarkMenuBadge } from 'store/selectors/bookmark/bookmark-ui.selectors';
+import { selCloudAvailableTasks } from 'store/selectors/cloud/cloud.selectors';
+import { selCore_theme } from 'store/selectors/core/core-ui.selectors';
 
 @Component({
 	selector: 'app-nav',

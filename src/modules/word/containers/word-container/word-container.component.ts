@@ -3,8 +3,8 @@ import { AppEntityType, Definition, definitionName, QuizProgress, UUID, Word } f
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as entityActions from 'store/actions/entity.actions';
-import { selWord_EntityIds } from 'store/selectors/entity-selectors/entity-word.selectors';
-import { selWord_SelectedEntity } from 'store/selectors/word-selectors/word-ui.selectors';
+import { selWord_EntityIds } from 'store/selectors/entity/entity-word.selectors';
+import { selWord_SelectedEntity } from 'store/selectors/word/word-ui.selectors';
 
 @Component({
 	selector: 'app-word-container',

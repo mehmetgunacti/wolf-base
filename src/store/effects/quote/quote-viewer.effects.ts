@@ -7,8 +7,8 @@ import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { setNow } from 'store/actions/core-ui.actions';
 import { loadAllSuccess } from 'store/actions/core.actions';
 import { changeQuote, setRunning } from 'store/actions/quote.actions';
-import { selQuote_EntityIds } from 'store/selectors/entity-selectors/entity-quote.selectors';
-import { selQuoteViewer_running } from 'store/selectors/quote-selectors/quote-viewer.selectors';
+import { selQuote_EntityIds } from 'store/selectors/entity/entity-quote.selectors';
+import { selQuoteViewer_running } from 'store/selectors/quote/quote-viewer.selectors';
 
 @Injectable()
 export class QuoteViewerEffects {

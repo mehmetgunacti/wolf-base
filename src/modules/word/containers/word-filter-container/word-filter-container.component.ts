@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { search } from 'store/actions/word.actions';
-import { selWord_search } from 'store/selectors/word-selectors/word-ui.selectors';
+import { selWord_search } from 'store/selectors/word/word-ui.selectors';
 
 @Component({
 	selector: 'app-word-filter-container',

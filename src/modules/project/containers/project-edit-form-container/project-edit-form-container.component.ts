@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppEntityType, Project, UUID } from 'lib';
 import { Observable } from 'rxjs';
 import * as entityActions from 'store/actions/entity.actions';
-import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
+import { selProject_selected } from 'store/selectors/project/project-ui.selectors';
 
 @Component({
 	selector: 'app-project-edit-form-container',

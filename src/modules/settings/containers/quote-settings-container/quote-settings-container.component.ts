@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 import * as entityActions from 'store/actions/entity.actions';
 import { setSelectedId } from 'store/actions/quote.actions';
-import { selQuote_EntityList } from 'store/selectors/entity-selectors/entity-quote.selectors';
-import { selQuoteSettings_selected } from 'store/selectors/quote-selectors/quote-settings.selectors';
+import { selQuote_EntityList } from 'store/selectors/entity/entity-quote.selectors';
+import { selQuoteSettings_selected } from 'store/selectors/quote/quote-settings.selectors';
 
 @Component({
 	selector: 'app-quote-settings-container',

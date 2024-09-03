@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { TAG_POPULAR, Tag, slideUpDownTrigger } from 'lib';
 import { Observable, Subscription, debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { clickTag, emptySelectedTags, search } from 'store/actions/bookmark.actions';
-import { distinctTagsArray, relatedTags, selBookmark_QueryParams } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
-import { selCore_popularBookmarks } from 'store/selectors/core-configuration.selectors';
+import { distinctTagsArray, relatedTags, selBookmark_QueryParams } from 'store/selectors/bookmark/bookmark-tags.selectors';
+import { selCore_popularBookmarks } from 'store/selectors/core/core-configuration.selectors';
 
 @Component({
 	selector: 'app-bookmarks-search-and-tag-cloud-container',

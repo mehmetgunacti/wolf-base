@@ -5,9 +5,9 @@ import { combineLatest, map, Observable, Subject } from 'rxjs';
 import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
 import * as entityActions from 'store/actions/entity.actions';
 import { closeEditDialog } from 'store/actions/project-task.actions';
-import { selProject_selected } from 'store/selectors/project-selectors/project-ui.selectors';
-import { selTask_distinctTagNames } from 'store/selectors/task-selectors/task-tags.selectors';
-import { selTask_SelectedEntity } from 'store/selectors/task-selectors/task-ui.selectors';
+import { selProject_selected } from 'store/selectors/project/project-ui.selectors';
+import { selTask_distinctTagNames } from 'store/selectors/task/task-tags.selectors';
+import { selTask_SelectedEntity } from 'store/selectors/task/task-ui.selectors';
 
 @Component({
 	selector: 'app-task-edit-form-container',

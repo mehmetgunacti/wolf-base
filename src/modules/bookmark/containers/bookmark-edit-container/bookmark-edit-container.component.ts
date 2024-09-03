@@ -6,9 +6,9 @@ import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
 import { closeEditBookmarkDialog } from 'store/actions/bookmark.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import * as entityActions from 'store/actions/entity.actions';
-import { distinctTagsArray } from 'store/selectors/bookmark-selectors/bookmark-tags.selectors';
-import { selBookmarkEditId } from 'store/selectors/bookmark-selectors/bookmark-ui.selectors';
-import { selCore_titleLookupUrl } from 'store/selectors/core-configuration.selectors';
+import { distinctTagsArray } from 'store/selectors/bookmark/bookmark-tags.selectors';
+import { selBookmarkEditId } from 'store/selectors/bookmark/bookmark-ui.selectors';
+import { selCore_titleLookupUrl } from 'store/selectors/core/core-configuration.selectors';
 
 @Component({
 	selector: 'app-bookmark-edit-container',

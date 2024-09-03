@@ -5,8 +5,8 @@ import { AnimState, AppEntityType, Quiz, QuizVisibility, quoteChangeTrigger, sli
 import { Store } from '@ngrx/store';
 import { QuizService } from 'services/quiz.service';
 import * as quizActions from 'store/actions/quiz-entry.actions';
-import { selQuiz_visibility } from 'store/selectors/quiz-entry-selectors/quiz-entry-ui.selectors';
-import { selQuiz_dueItemsCount } from 'store/selectors/quiz-entry-selectors/quiz.selectors';
+import { selQuiz_visibility } from 'store/selectors/quiz-entry/quiz-entry-ui.selectors';
+import { selQuiz_dueItemsCount } from 'store/selectors/quiz-entry/quiz.selectors';
 import { choicesBlinkTrigger } from './quiz.animation';
 
 @Component({

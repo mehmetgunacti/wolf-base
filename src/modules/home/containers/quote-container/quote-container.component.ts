@@ -3,7 +3,7 @@ import { Quote, onEnterFadeOutTrigger } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, concatMap, filter, iif, of, scan, switchMap, take, tap, timer } from 'rxjs';
 import { disableAnimation, setRunning } from 'store/actions/quote.actions';
-import { selQuoteViewer_animate, selQuoteViewer_running, selQuote_SelectedEntity } from 'store/selectors/quote-selectors/quote-viewer.selectors';
+import { selQuoteViewer_animate, selQuoteViewer_running, selQuote_SelectedEntity } from 'store/selectors/quote/quote-viewer.selectors';
 
 interface Pair {
 

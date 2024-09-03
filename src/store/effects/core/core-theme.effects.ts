@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { switchMap, tap } from 'rxjs/operators';
 import { setTheme } from 'store/actions/core-ui.actions';
-import { selCore_theme } from 'store/selectors/core-ui.selectors';
+import { selCore_theme } from 'store/selectors/core/core-ui.selectors';
 
 @Injectable()
 export class CoreThemeEffects {
