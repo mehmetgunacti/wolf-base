@@ -1,4 +1,4 @@
-import { Bookmark, Click, ClickedBookmark, NamedClick, UUID } from '@lib';
+import { AppEntityType, Bookmark, Click, ClickedBookmark, NamedClick, SyncTaskType, toCloudTask, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { selBookmark_EntityList, selBookmark_EntityState } from '../entity/entity-bookmark.selectors';
 import { selBookmark_ClicksState } from './bookmark.selectors';
@@ -65,5 +65,18 @@ export const selBookmark_clickedCount = createSelector(
 
 	selBookmark_clicked,
 	list => list.length
+
+);
+
+export const selBoomkark_clickedCloudTasks = createSelector(
+
+	selBookmark_clicked,
+	items => {
+
+		if (items.length > 0)
+			return toCloudTask(items, AppEntityType.bookmark, SyncTaskType.clicked);
+		return null;
+
+	}
 
 );
