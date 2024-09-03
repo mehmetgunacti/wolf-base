@@ -1,6 +1,6 @@
 # WolfBase
 
-This project is a personal playground for learning and experimenting with data synchronization in PWA. It's a tool I built for my own use, not as a polished open-source project or a model for best practices.
+This project is a personal playground for learning and experimenting with data synchronization between a PWA and server.
 Just a bit of coding fun; feel free to explore!
 
 ## What's this all about?
@@ -8,7 +8,7 @@ Just a bit of coding fun; feel free to explore!
 This project is primarily:
 - A learning exercise 📚
 - A tool for (my own) personal use 🛠️
-- An experiment in data synchronization between PWA / IndexedDb and server 🧪
+- An experiment in data synchronization between PWA (IndexedDb) and server (Firestore) 🧪
 
 ## What it's ==not== about:
 
