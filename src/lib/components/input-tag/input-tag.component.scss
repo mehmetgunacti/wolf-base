@@ -4,9 +4,9 @@
 :host {
 
 	@include mx-input-element;
-	// display				: inline-flex;
+	display				: inline-flex;
 
-	& > div {
+	& > [tags] {
 
 		display					: inline-flex;
 		flex-wrap				: wrap;
@@ -23,44 +23,9 @@
 
 	& > input {
 
-		padding-top				: 0;
-		--input-element-height	: 0;
+		flex		: 1;
+		min-width	: 10rem;
 
 	}
-
-	// 	flex				: 1;
-	// 	width				: 100%;
-	// 	border				: 0;
-	// 	min-width			: 40%;
-	// 	padding				: 1rem;
-	// 	color				: fn-hsl(text);
-	// 	background-color	: transparent;
-
-	// 	&:focus,
-	// 	&:focus-visible {
-
-	// 		outline			: none;
-	// 		box-shadow		: none;
-
-	// 		& + label {
-
-	// 			@extend %input-label-up;
-
-	// 		}
-
-	// 	}
-
-	// }
-
-	// &>label {
-
-	// 	@extend %input-label;
-	// 	&.up {
-
-	// 		@extend %input-label-up;
-
-	// 	}
-
-	// }
 
 }

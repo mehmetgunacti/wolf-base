@@ -24,7 +24,7 @@ export class EditFormImpl extends FormClassImpl<Note> implements NoteForm {
 			id: new FormControl(),
 			name: new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
 			parentId: new FormControl(),
-			tags: new FormControl([], { nonNullable: true })
+			tags: new FormControl([], { validators: [Validators.required, Validators.minLength(1)], nonNullable: true })
 
 		});
 

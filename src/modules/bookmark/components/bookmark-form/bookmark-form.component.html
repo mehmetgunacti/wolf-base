@@ -54,9 +54,8 @@
 			<!-- TAGS -->
 			<div>
 				<w-input-tag
-					[control]="form.tags"
-					id="bookmarkForm"
-					name="Tags"
+					[formControl]="form.tags"
+					label="Tags"
 					class="input-element"
 					(tagInput)="onTagInput($event)"
 					[suggestions]="(tagSuggestions$ | async) ?? []"/>

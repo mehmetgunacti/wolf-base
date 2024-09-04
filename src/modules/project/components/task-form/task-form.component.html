@@ -47,9 +47,8 @@
 		<!-- TAGS -->
 		<div task_row>
 			<w-input-tag
-				[control]="form.tags"
-				id="taskForm"
-				name="Tags"
+				[formControl]="form.tags"
+				label="Tags"
 				class="input-element"
 				(tagInput)="onTagInput($event)"
 				[suggestions]="tagSuggestions()"/>

@@ -1,103 +1,85 @@
-import { Component, ElementRef, EventEmitter, HostBinding, Input, InputSignal, OnInit, Output, ViewChild, input } from '@angular/core';
-import { FormControl, FormControlStatus } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, ElementRef, InputSignal, WritableSignal, computed, forwardRef, input, output, signal, viewChild } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { UUID } from 'lib/constants';
 import { filterArrayElements } from 'lib/utils';
-import { BehaviorSubject, Observable, combineLatest, filter, fromEvent, map, merge, startWith, tap } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
 	selector: 'w-input-tag',
 	templateUrl: './input-tag.component.html',
-	styleUrls: ['./input-tag.component.scss']
+	styleUrls: ['./input-tag.component.scss'],
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => InputTagComponent),
+			multi: true
+		}
+	],
+	host: {
+		'[tabindex]': '0',
+		'(focus)': 'onHostFocus()'
+	},
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputTagComponent implements OnInit {
+export class InputTagComponent implements ControlValueAccessor {
 
-	@ViewChild('element', { static: true }) e!: ElementRef<HTMLInputElement>;
+	private inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
-	id: InputSignal<string> = input.required();
+	// Input
+	label: InputSignal<string> = input.required();
+	labelUp: InputSignal<boolean> = input(false);
+	readonly: InputSignal<boolean> = input(false);
+	suggestions: InputSignal<string[]> = input<string[]>([]);
 
-	@Input() control: FormControl<string[]> = new FormControl<string[]>([], { nonNullable: true });
-	@Input() name: string = '';
-	@Input() set suggestions(arr: string[] | null) {
+	// Output
+	tagInput = output<string | null>();
 
-		this._suggestions.next(arr ?? []);
+	protected UUID: WritableSignal<UUID> = signal(uuidv4());
+	protected value: WritableSignal<string[]> = signal([]);
+	protected disabled: WritableSignal<boolean> = signal(false);
+	protected isLabelUp = computed(() => this.labelUp() || !!this.value());
+	protected suggestionList = computed(() => filterArrayElements(this.suggestions(), this.value()));
 
-	}
+	//////////// boilerplate
+	private onChange: any = () => { }
+	private onTouched: any = () => { }
+	registerOnChange(fn: any): void { this.onChange = fn; }
+	registerOnTouched(fn: any): void { this.onTouched = fn; }
+	writeValue(value: string[]): void { this.value.set(value); }
+	setDisabledState(isDisabled: boolean): void { this.disabled.set(isDisabled); }
+	onBlur(): void { this.onTouched(); }
+	onHostFocus(): void { this.inputElement().nativeElement.focus(); }
+	////////////
 
-	@Output() tagInput = new EventEmitter<string | null>();
+	//////////// Handle Input
+	onInput(event: Event): void {
 
-	@HostBinding('class.error') error = false;
+		const target = event.target as HTMLInputElement;
+		const inputValue = target.value;
 
-	tags$!: Observable<string[]>;
-	hasValue$!: Observable<boolean>;
-
-	_suggestions: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
-	suggestions$!: Observable<string[]>;
-
-	ngOnInit(): void {
-
-		// filter non-selected tags
-		this.suggestions$ = this._suggestions.asObservable().pipe(
-
-			map(arr => filterArrayElements(arr, this.control.value))
-
-		);
-
-		// when <input> has focus and Enter key is pressed
-		const enter$: Observable<string> = fromEvent<KeyboardEvent>(this.e.nativeElement, 'keydown').pipe(
-
-			filter((event: KeyboardEvent) => event.key === 'Enter'),
-			tap(event => event.preventDefault()),
-			map(() => this.e.nativeElement.value += ' ')
-
-		);
-
-		// whenever the value of <input> changes
-		const input$: Observable<string> = fromEvent<InputEvent>(this.e.nativeElement, 'input').pipe(
-
-			map(event => (event.target as HTMLInputElement).value)
-
-		);
-
-		// whenever value entered
-		const onInput$: Observable<string> = merge(enter$, input$).pipe(
-
-			startWith(''),
-			tap(val => this.emitInputValue(val))
-
-		)
-
-		// emit changes to tags array
-		this.tags$ = this.control.valueChanges.pipe(
-
-			startWith(this.control.value),
-			tap(() => this.tagInput.emit(null)) // clear suggestions popup
-
-		);
-
-		// set .error class
-		const status$: Observable<FormControlStatus> = this.control.statusChanges.pipe(
-
-			startWith(this.control.status),
-			tap((status: FormControlStatus) => this.error = status === 'INVALID' && this.control.dirty)
-
-		);
-
-		// toggle .up class on <label>
-		this.hasValue$ = combineLatest([
-			this.tags$,
-			onInput$,
-			status$
-		]).pipe(
-
-			map(([tags, val]) => tags.length > 0 || !!val)
-
-		);
+		// if user presses space OR CLICKS ON A SUGGESTION
+		// note: all suggestions end with a ' '
+		if (inputValue.endsWith(' '))
+			this.saveState(inputValue);
+		else
+			// else emit entered value to receive tag suggestions
+			this.tagInput.emit(inputValue);
 
 	}
+	onKeydown(event: KeyboardEvent): void {
 
-	private emitInputValue(val: string): void {
+		if (event.key === 'Enter') {
 
-		// Check for trailing space
-		const hasTrailingSpace = val.endsWith(' ');
+			event.preventDefault();
+			const target = event.target as HTMLInputElement;
+			this.saveState(target.value);
+
+		}
+
+	}
+	////////////
+
+	private saveState(val: string): void {
 
 		// only characters a-z, 0-9 and '-' are acceptable tag names
 		const tagName = val.trim().toLowerCase().replace(/[^a-z0-9-]/gi, '');
@@ -105,47 +87,45 @@ export class InputTagComponent implements OnInit {
 		// return if user has entered / pasted only invalid characters
 		if (tagName.length < 1) {
 
-			this.e.nativeElement.value = '';
+			this.inputElement().nativeElement.value = '';
 			return;
 
 		}
 
-		if (hasTrailingSpace) {
+		// check if already in tag list
+		if (this.value().includes(tagName)) {
 
-			// check if already in tag list
-			if (this.control.value.includes(tagName)) {
-
-				this.e.nativeElement.value = tagName; // removes trailing space
-				return;
-
-			}
-
-			// add to tag list
-			this.control.setValue([...this.control.value, tagName]);
-			this.control.markAsDirty();
-			this.control.updateValueAndValidity();
-
-			// set input value to empty space
-			this.e.nativeElement.value = '';
-
+			// remove invalid characters incl. trailing space
+			this.inputElement().nativeElement.value = tagName;
 			return;
 
 		}
 
-		// emit value to receive tag suggestions
-		this.tagInput.emit(tagName);
+		// enteres string is ok - save state
+		this.value.update(currentValue => {
+
+			const newState = [...currentValue, tagName];
+			this.onChange(newState);
+			this.onTouched();
+			return newState;
+
+		});
+
+		// clear input value and suggestions list
+		this.inputElement().nativeElement.value = '';
+		this.tagInput.emit(null);
 
 	}
 
 	removeTag(t: string): void {
 
-		const tags: string[] = this.control.value;
+		this.value.update(value => {
 
-		this.control.setValue(tags.filter(item => item !== t));
-		this.control.markAsDirty();
-		this.control.updateValueAndValidity();
+			const newState = value.filter(item => item !== t);
+			this.onChange(newState);
+			return newState;
 
-		// this.onBlur();
+		});
 
 	}
 

@@ -2,9 +2,8 @@
 
 	<!-- TAGS -->
 	<w-input-tag
-		[control]="control"
-		id="popularBookmarksForm"
-		name="Tags"
+		[formControl]="control"
+		label="Tags"
 		class="input-element"
 		(tagInput)="onTagInput($event)"
 		[suggestions]="tagSuggestions()"/>
