@@ -8,23 +8,19 @@
 	<form>
 
 		<!-- ID -->
-		<div *ngIf="word()?.id">
+		@if (word()?.id) {
+
 			<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
-		</div>
+
+		}
 
 		<!-- NAME -->
-		<div>
-			<w-input [formControl]="form.name" label="Term"/>
-		</div>
+		<w-input [formControl]="form.name" label="Term"/>
 
 		<!-- PRONUNCIATION -->
-		<div>
-			<w-input [formControl]="form.pronunciation" label="Pronunciation"/>
-		</div>
+		<w-input [formControl]="form.pronunciation" label="Pronunciation"/>
 
-		<div>
-			<button type="button" (click)="form.addContext()">Add Context</button>
-		</div>
+		<button type="button" (click)="form.addContext()">Add Context</button>
 
 		@for (context of form.contexts(); track context.objectId) {
 
@@ -63,9 +59,7 @@
 				<div definition>
 
 					<!-- TYPE -->
-					<div>
-						<w-select [control]="definition.type" name="Type" [nodes]="DEFINITION_TYPES"/>
-					</div>
+					<w-select [formControl]="definition.type" label="Type" [nodes]="DEFINITION_TYPES"/>
 
 					@for (lang of definition.languages(); track lang.objectId) {
 
@@ -73,14 +67,10 @@
 						<div language>
 
 							<!-- LANGUAGE -->
-							<div>
-								<w-select [control]="lang.language" name="Language" [nodes]="DEFINITION_LANGUAGES"/>
-							</div>
+							<w-select [formControl]="lang.language" label="Language" [nodes]="DEFINITION_LANGUAGES"/>
 
 							<!-- NAME -->
-							<div>
-								<w-input [formControl]="lang.name" label="Meaning"/>
-							</div>
+							<w-input [formControl]="lang.name" label="Meaning"/>
 
 							@if($index < 1) {
 
@@ -144,9 +134,7 @@
 			</fieldset>
 
 		}
-		<div>
-			<button type="button" (click)="form.addDefinition()">Add Definition</button>
-		</div>
+		<button type="button" (click)="form.addDefinition()">Add Definition</button>
 
 	</form>
 

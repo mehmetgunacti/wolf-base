@@ -28,21 +28,15 @@
 		@if (isEdit()) {
 
 			<!-- ID -->
-			<div>
-				<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
-			</div>
+			<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
 
 		}
 
 		<!-- NAME -->
-		<div>
-			<w-input [formControl]="form.name" label="Name"/>
-		</div>
+		<w-input [formControl]="form.name" label="Name"/>
 
 		<!-- DESCRIPTION -->
-		<div>
-			<w-textarea [control]="form.description" name="Description" [rows]="3"/>
-		</div>
+		<w-textarea [control]="form.description" name="Description" [rows]="3"/>
 
 		<!-- TAGS -->
 		<div task_row>
@@ -58,33 +52,23 @@
 		<div task_status_row>
 
 			<!-- STATUS -->
-			<div>
-				<w-select [control]="form.status" name="Status" [nodes]="TASK_STATE"/>
-			</div>
+			<w-select [formControl]="form.status" label="Status" [nodes]="TASK_STATE"/>
 
 			<!-- PRIORITY -->
-			<div>
-				<w-select [control]="form.priority" name="Priority" [nodes]="TASK_PRIORITIES"/>
-			</div>
+			<w-select [formControl]="form.priority" label="Priority" [nodes]="TASK_PRIORITIES"/>
 
 			<!-- CATEGORY -->
-			<div>
-				<w-select [control]="form.category" name="Category" [nodes]="TASK_CATEGORIES"/>
-			</div>
+			<w-select [formControl]="form.category" label="Category" [nodes]="TASK_CATEGORIES"/>
 
 		</div>
 
 		<div task_date_row>
 
 			<!-- START -->
-			<div>
-				<w-input [formControl]="form.start" label="Start" type="date" [labelUp]="true"/>
-			</div>
+			<w-input [formControl]="form.start" label="Start" type="date" [labelUp]="true"/>
 
 			<!-- END -->
-			<div>
-				<w-input [formControl]="form.end" label="End" type="date" [labelUp]="true"/>
-			</div>
+			<w-input [formControl]="form.end" label="End" type="date" [labelUp]="true"/>
 
 		</div>
 

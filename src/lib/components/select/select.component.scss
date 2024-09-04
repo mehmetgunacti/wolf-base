@@ -7,4 +7,11 @@
 
 	@include mx-input-element;
 
+	& > select > option {
+
+		background-color	: fn-hsl(bg-1);
+		border-color		: fn-hsl(bg-1, (lig: "- 10%"));
+
+	}
+
 }

@@ -7,6 +7,14 @@
 
 	<form>
 
+		<!-- STATUS -->
+		<!-- <div>
+			<w-select [formControl]="form.status" label="Status" [nodes]="PROJECT_STATUS"/>
+		</div>
+
+		<div>[[{{ form.status.valueChanges | async | json }}]]</div>
+		<div><button type="button" (click)="form.status.setValue(ProjectStatus.completed)">change</button></div> -->
+
 		<!-- ID -->
 		<div *ngIf="project()?.id">
 			<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
@@ -24,7 +32,7 @@
 
 		<!-- STATUS -->
 		<div>
-			<w-select [control]="form.status" name="Status" [nodes]="PROJECT_STATUS"/>
+			<w-select [formControl]="form.status" label="Status" [nodes]="PROJECT_STATUS"/>
 		</div>
 
 		<!-- START -->

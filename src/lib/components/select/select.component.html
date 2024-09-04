@@ -1,13 +1,14 @@
 <select
-	[id]="label_id"
-	[formControl]="control"
-	[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }">
+	#selectElement
+	[value]="value()"
+	(change)="onSelect($event)"
+	(blur)="onBlur()">
 
-	@for (node of nodes; track $index) {
+	@for (node of nodes(); track $index) {
 
 		<option [value]="node.id">{{ node.name }}</option>
 
 	}
 
 </select>
-<label [for]="label_id" class="up">{{name}}</label>
+<label class="up">{{value()}}</label>

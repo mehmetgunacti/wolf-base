@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject, input } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { UUID, Project, isInvalid, PROJECT_STATUS } from 'lib';
+import { UUID, Project, isInvalid, PROJECT_STATUS, ProjectStatus } from 'lib';
 import { filter, tap } from 'rxjs';
 import { PROJECT_FORM, ProjectForm } from './project-form';
 
@@ -14,6 +14,7 @@ import { PROJECT_FORM, ProjectForm } from './project-form';
 export class ProjectFormComponent {
 
 	PROJECT_STATUS = PROJECT_STATUS;
+	ProjectStatus = ProjectStatus;
 
 	/* @Input() */
 	project = input<Project | null>(null);

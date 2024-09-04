@@ -3,14 +3,10 @@
 	<div task_filter_controls>
 
 		<!-- STATUS -->
-		<div>
-			<w-select [control]="fcStatus" name="Status" [nodes]="TASK_STATE"/>
-		</div>
+		<w-select [formControl]="fcStatus" label="Status" [nodes]="TASK_STATE"/>
 
 		<!-- CATEGORY -->
-		<div>
-			<w-select [control]="fcCategory" name="Category" [nodes]="TASK_CATEGORIES"/>
-		</div>
+		<w-select [formControl]="fcCategory" label="Category" [nodes]="TASK_CATEGORIES"/>
 
 	</div>
 
@@ -25,12 +21,11 @@
 <aside [@slideUpDown]="cloudVisible ? 'opened' : 'closed'">
 
 	<div>
-		<input
-			type="text"
-			placeholder="Keyword"
+		<w-input
+			label="Keyword"
 			[formControl]="fcSearch"
 			[autofocus]="cloudVisible"
-			[after]="500">
+			[after]="500"/>
 		<button
 			type="button"
 			class="icon-only"
