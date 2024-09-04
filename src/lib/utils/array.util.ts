@@ -34,7 +34,18 @@ export function createArray(n: number): number[] {
 
 }
 
-export function filterArrayElements(array: string[], elementsToFilterOut: string[]) {
+/**
+ * Filters out specified elements from an array.
+ *
+ * @param {string[]} array - The array to filter.
+ * @param {string[]} elementsToFilterOut - The elements to remove from the array.
+ * @returns {string[]} A new array with the specified elements filtered out.
+ *
+ * @example
+ * // Returns ['apple', 'banana']
+ * filterArrayElements(['apple', 'banana', 'cherry'], ['cherry']);
+ */
+export function filterArrayElements(array: string[], elementsToFilterOut: string[]): string[] {
 
 	return array.filter(element => !elementsToFilterOut.includes(element));
 
