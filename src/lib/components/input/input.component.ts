@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input, InputSignal, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -12,9 +12,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 			multi: true
 		}
 	],
+	host: {
+		'[tabindex]': '0',
+		'(focus)': 'onHostFocus()'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputComponent implements ControlValueAccessor {
+
+	private inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
 	label: InputSignal<string> = input.required();
 	type: InputSignal<string> = input('text');
@@ -61,6 +67,12 @@ export class InputComponent implements ControlValueAccessor {
 	onBlur(): void {
 
 		this.onTouched();
+
+	}
+
+	onHostFocus(): void {
+
+		this.inputElement().nativeElement.focus();
 
 	}
 
