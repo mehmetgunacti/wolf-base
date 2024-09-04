@@ -9,17 +9,17 @@
 
 		<!-- ID -->
 		<div *ngIf="project()?.id">
-			<w-input [control]="form.id" name="ID" [readonly]="true"/>
+			<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
 		</div>
 
 		<!-- NAME -->
 		<div>
-			<w-input [control]="form.name" name="Name"/>
+			<w-input [formControl]="form.name" label="Name"/>
 		</div>
 
 		<!-- DESCRIPTION -->
 		<div>
-			<w-input [control]="form.description" name="Description"/>
+			<w-input [formControl]="form.description" label="Description"/>
 		</div>
 
 		<!-- STATUS -->
@@ -29,12 +29,12 @@
 
 		<!-- START -->
 		<div>
-			<w-input [control]="form.start" name="Start" type="date"/>
+			<w-input [formControl]="form.start" label="Start" type="date"/>
 		</div>
 
 		<!-- END -->
 		<div>
-			<w-input [control]="form.end" name="End" type="date"/>
+			<w-input [formControl]="form.end" label="End" type="date"/>
 		</div>
 
 	</form>

@@ -29,14 +29,14 @@
 
 			<!-- ID -->
 			<div>
-				<w-input [control]="form.id" name="ID" [readonly]="true"/>
+				<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
 			</div>
 
 		}
 
 		<!-- NAME -->
 		<div>
-			<w-input [control]="form.name" name="Name"/>
+			<w-input [formControl]="form.name" label="Name"/>
 		</div>
 
 		<!-- DESCRIPTION -->
@@ -79,12 +79,12 @@
 
 			<!-- START -->
 			<div>
-				<w-input [control]="form.start" name="Start" type="date" [labelUp]="true"/>
+				<w-input [formControl]="form.start" label="Start" type="date" [labelUp]="true"/>
 			</div>
 
 			<!-- END -->
 			<div>
-				<w-input [control]="form.end" name="End" type="date" [labelUp]="true"/>
+				<w-input [formControl]="form.end" label="End" type="date" [labelUp]="true"/>
 			</div>
 
 		</div>

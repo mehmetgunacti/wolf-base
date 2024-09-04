@@ -4,33 +4,40 @@
 
 :host {
 
-	@extend %flex-column;
-	position				: relative;
-	min-height				: $input-element-min-height;
-
-	&>textarea {
-
-		@extend %input-element;
-
-		&:focus + label {
-
-			@extend %input-label-up;
-
-		}
-
-	}
+	@include mx-input-element;
 
 	&>label {
 
-		@extend %input-label;
 		top		: 1.7rem;
 
-		&.up {
-
-			@extend %input-label-up;
-
-		}
-
 	}
+	// @extend %flex-column;
+	// position				: relative;
+	// min-height				: $input-element-min-height;
+
+	// &>textarea {
+
+	// 	@extend %input-element;
+
+	// 	&:focus + label {
+
+	// 		@extend %input-label-up;
+
+	// 	}
+
+	// }
+
+	// &>label {
+
+	// 	@extend %input-label;
+	// 	top		: 1.7rem;
+
+	// 	&.up {
+
+	// 		@extend %input-label-up;
+
+	// 	}
+
+	// }
 
 }

@@ -1,65 +1,66 @@
-import { ChangeDetectionStrategy, Component, input, InputSignal, OnInit, output } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { FormControl } from '@angular/forms';
-import { combineLatest, map, Observable, startWith } from 'rxjs';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, InputSignal, signal, WritableSignal } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
 	selector: 'w-input',
 	templateUrl: './input.component.html',
 	styleUrls: ['./input.component.scss'],
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => InputComponent),
+			multi: true
+		}
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputComponent implements OnInit {
+export class InputComponent implements ControlValueAccessor {
 
-	// @Input()
-	control: InputSignal<FormControl> = input.required();
-	name: InputSignal<string> = input.required();
+	label: InputSignal<string> = input.required();
 	type: InputSignal<string> = input('text');
+	labelUp: InputSignal<boolean> = input(false);
 	readonly: InputSignal<boolean> = input(false);
-	labelUp: InputSignal<boolean | undefined> = input();
 
-	// @Output()
-	inputChanged = output<string>();
+	protected value: WritableSignal<string> = signal('');
+	protected disabled: WritableSignal<boolean> = signal(false);
+	protected isLabelUp = computed(() => {
 
-	labelUp$ = toObservable(this.labelUp);
-	hasValue$!: Observable<boolean>;
+		return this.labelUp() || !!this.value();
 
-	ngOnInit(): void {
+	});
 
-		this.hasValue$ = combineLatest([
-			this.labelUp$,
-			this.control().valueChanges.pipe(
+	// boilerplate
+	private onChange: any = () => { }
+	private onTouched: any = () => { }
+	registerOnChange(fn: any): void { this.onChange = fn; }
+	registerOnTouched(fn: any): void { this.onTouched = fn; }
 
-				startWith(this.control().value),
-				map(val => this.validate(val))
+	// new value from the form model
+	writeValue(value: string): void {
 
-			)
-		]).pipe(
-			map(([labelUp, control]) => labelUp ?? control)
-		);
+		this.value.set(value);
 
 	}
 
-	private validate(val: string): boolean {
+	// called when FormControl disabled or enabled state changes
+	setDisabledState(isDisabled: boolean): void {
 
-		switch (this.type()) {
-
-			case 'text': return !!val;
-			case 'date': return !!val;
-			case 'search': return !!val;
-			case 'number': return typeof val === 'number' && Number.isFinite(Number(val));
-
-		}
-		throw new Error('[Not implemented] val is of type ' + (typeof val));
+		this.disabled.set(isDisabled);
 
 	}
 
-	onInput(event: Event): void {
+	// Method that handles the change event of the checkbox
+	onInput(value: string): void {
 
-		const inputElement = event.target as HTMLInputElement;
-		const value = inputElement.value;
+		this.value.set(value);
+		this.onChange(this.value());
+		this.onTouched();
 
-		this.inputChanged.emit(value);
+	}
+
+	onBlur(): void {
+
+		this.onTouched();
 
 	}
 

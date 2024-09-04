@@ -1,34 +1,10 @@
 @import 'helper';
 @import 'variables';
 @import 'components';
+@import 'mixins';
 
 :host {
 
-	@extend %flex-column;
-	position				: relative;
-	min-height				: $input-element-min-height;
-
-	&>input {
-
-		@extend %input-element;
-
-		&:focus + label {
-
-			@extend %input-label-up;
-
-		}
-
-	}
-
-	&>label {
-
-		@extend %input-label;
-		&.up {
-
-			@extend %input-label-up;
-
-		}
-
-	}
+	@include mx-input-element;
 
 }

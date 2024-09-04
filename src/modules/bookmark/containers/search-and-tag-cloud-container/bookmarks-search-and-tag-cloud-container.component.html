@@ -17,12 +17,11 @@
 <aside [@slideUpDown]="cloudVisible ? 'opened' : 'closed'">
 
 	<div>
-		<input
-			type="text"
-			placeholder="Keyword"
+		<w-input
+			label="Keyword"
 			[formControl]="searchControl"
 			[autofocus]="cloudVisible"
-			[after]="500">
+			[after]="500"/>
 		<button
 			type="button"
 			class="square small"

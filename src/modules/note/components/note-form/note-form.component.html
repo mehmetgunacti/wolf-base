@@ -9,7 +9,7 @@
 
 		<!-- ID -->
 		<div *ngIf="note()?.id">
-			<w-input [control]="form.id" name="ID" [readonly]="true"/>
+			<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
 		</div>
 
 		<!-- PARENT ID -->
@@ -19,7 +19,7 @@
 
 		<!-- NAME -->
 		<div>
-			<w-input [control]="form.name" name="Name"/>
+			<w-input [formControl]="form.name" label="Name"/>
 		</div>
 
 		<!-- TAGS -->

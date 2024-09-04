@@ -65,7 +65,7 @@
 
 			& > input {
 
-				@extend %input-element;
+				@include mx-input;
 				&::placeholder {
 
 					color	: fn-hsl(text);

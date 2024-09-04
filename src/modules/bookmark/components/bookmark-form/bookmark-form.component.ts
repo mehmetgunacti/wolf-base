@@ -188,6 +188,7 @@ will be deleted. Continue?`)
 
 	}
 
+	// todo add this back
 	checkUrl(value: string, fc: FormControl): void {
 
 		if (value === "h" || value === "H")

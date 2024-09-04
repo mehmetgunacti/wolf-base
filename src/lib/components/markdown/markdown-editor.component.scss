@@ -102,18 +102,20 @@ $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 &
 		& > textarea {
 
 			flex	: 1;
-			@extend %input-element;
-			padding-top	: var(--gap);
-			tab-size	: 4;
-			white-space	: pre;
-			overflow	: auto;
-			cursor		: auto;
+			@include mx-input;
+			background-color	: fn-hsl(bg-1);
+			border-color		: fn-hsl(bg-1, (lig: "- 10%"));
+			padding-top			: var(--gap);
+			tab-size			: 4;
+			white-space			: pre;
+			overflow			: auto;
+			cursor				: auto;
 			@include mx-webkit-scrollbar;
 
 			&:valid + label,
 			&:focus + label {
 
-				@extend %input-label-up;
+				@include mx-input-label-up;
 
 			}
 
@@ -121,12 +123,12 @@ $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 &
 
 		& > label {
 
-			@extend %input-label;
+			@include mx-input-label;
 			top		: 2rem;
 
 			&.up {
 
-				@extend %input-label-up;
+				@include mx-input-label-up;
 
 			}
 

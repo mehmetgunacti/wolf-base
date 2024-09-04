@@ -1,9 +1,10 @@
-@let c = control();
 <input
+	#theInput
 	[type]="type()"
-	[ngClass]="{ 'ng-invalid ng-dirty': c.invalid && c.dirty }"
-	[formControl]="c"
+	[value]="value()"
 	placeholder=""
 	[readonly]="readonly()"
-	(input)="onInput($event)">
-<label [class.up]="hasValue$ | async">{{name()}}</label>
+	[disabled]="disabled()"
+	(blur)="onBlur()"
+	(input)="onInput(theInput.value)">
+<label [class.up]="isLabelUp()">{{label()}}</label>

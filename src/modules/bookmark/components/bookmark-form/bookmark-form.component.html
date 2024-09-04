@@ -26,28 +26,28 @@
 
 			<!-- ID -->
 			<div *ngIf="bookmark?.id">
-				<w-input [control]="form.id" name="ID" [readonly]="true"/>
+				<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
 			</div>
 
 			<!-- URLs -->
 			<div *ngFor="let fcUrl of form.urls.controls; let idx = index">
 				<w-input
-					[control]="fcUrl"
-					[name]="'URL' + (form.urls.controls.length > 1 && idx === 0 ? ' (Primary)' : '')"
-					(inputChanged)="checkUrl($event, fcUrl)"/>
+					[formControl]="fcUrl"
+					[label]="'URL' + (form.urls.controls.length > 1 && idx === 0 ? ' (Primary)' : '')"/>
+					<!-- (inputChanged)="checkUrl($event, fcUrl)"/> -->
 				<button *ngIf="idx === 0" type="button" class="icon-only" title="Add URL" (click)="addURL()"><span class="material-symbols-outlined">add</span></button>
 				<button *ngIf="idx > 0" type="button" class="icon-only" title="Remove URL" (click)="removeURL(idx)"><span class="material-symbols-outlined">remove</span></button>
 			</div>
 
 			<!-- NAME -->
 			<div>
-				<w-input [control]="form.name" name="Name"/>
+				<w-input [formControl]="form.name" label="Name"/>
 				<button type="button" class="icon-only" title="Parse URL" (click)="nameFromURL()"><span class="material-symbols-outlined">move_down</span></button>
 			</div>
 
 			<!-- TITLE -->
 			<div>
-				<w-input [control]="form.title" name="Title"/>
+				<w-input [formControl]="form.title" label="Title"/>
 				<button type="button" class="icon-only" title="Lookup title" (click)="lookupTitle()"><span class="material-symbols-outlined">search</span></button>
 			</div>
 

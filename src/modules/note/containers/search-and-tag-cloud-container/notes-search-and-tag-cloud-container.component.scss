@@ -56,17 +56,6 @@
 			gap			: var(--gap-xxs);
 			margin-top	: var(--gap);
 
-			& > input {
-
-				@extend %input-element;
-				&::placeholder {
-
-					color	: fn-hsl(text);
-
-				}
-
-			}
-
 		}
 
 		& > w-tag-cloud {

@@ -5,7 +5,7 @@
 
 :host {
 
-	@extend %flex-column;
+	@include mx-flex-column;
 	padding				: var(--gap);
 	background-color	: fn-hsl(bg-3);
 	border-radius		: var(--border-radius);
@@ -44,7 +44,7 @@
 
 	& > aside {
 
-		@extend %flex-column;
+		@include mx-flex-column;
 		gap				: var(--gap);
 		overflow		: auto;
 		max-height		: 30rem;
@@ -52,20 +52,9 @@
 
 		& > div {
 
-			@extend %flex-center-center;
+			@include mx-flex-center-center;
 			gap			: var(--gap-xxs);
 			margin-top	: var(--gap);
-
-			& > input {
-
-				@extend %input-element;
-				&::placeholder {
-
-					color	: fn-hsl(text);
-
-				}
-
-			}
 
 		}
 

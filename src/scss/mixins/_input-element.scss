@@ -1,0 +1,103 @@
+@mixin mx-input {
+
+	padding				: var(--gap);
+	color				: fn-hsl(text);
+	border				: 0;
+	background-color	: transparent;
+	outline				: 0;
+
+	min-height			: var(--input-element-height);
+	width				: 100%;
+
+}
+
+@mixin mx-input-label {
+
+	@include mx-flex-center-y;
+	position			: absolute;
+	top					: 50%;
+	left				: 5px;
+	gap					: var(--gap-sm);
+	transform			: translateY(-50%);
+	pointer-events		: none;
+	border-radius		: var(--border-radius-xs);
+	padding				: 1px 5px;
+	font-size			: var(--font-size-sm);
+	transition			: all $transition, $bg-transition, border-color $transition;
+
+	& span {
+
+		font-size		: inherit;
+
+	}
+
+}
+
+@mixin mx-input-label-up {
+
+	top					: -1px;
+	font-size			: var(--font-size-xxs);
+	background-color	: fn-hsl(bg-3);
+	border				: none;
+
+}
+
+@mixin mx-input-element {
+
+	position				: relative;
+	// min-height				: $input-element-min-height;
+
+	border-radius			: var(--border-radius-sm);
+	border-width			: 1px;
+	border-style			: solid;
+
+	background-color		: fn-hsl(bg-1);
+	border-color			: fn-hsl(bg-1, (lig: "- 10%"));
+	transition				: $bg-transition, border-color $transition;
+
+	& > input,
+	& > select,
+	& > textarea {
+
+		@include mx-input;
+
+	}
+
+	& > label {
+
+		@include mx-input-label;
+		&.up {
+
+			@include mx-input-label-up;
+
+		}
+
+	}
+
+	&:has(:focus-visible) {
+
+		@include mx-outline;
+		& > label {
+
+			@include mx-input-label-up;
+
+		}
+
+	}
+
+	// ng-valid    <-> ng-invalid
+	// ng-pristine <-> ng-dirty
+	// ng-touched  <-> ng-untouched
+	&.ng-dirty.ng-invalid {
+
+		@include mx-outline((color: "error"));
+
+	}
+
+	&.ng-dirty.ng-valid {
+
+		@include mx-outline((color: "success"));
+
+	}
+
+}

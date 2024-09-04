@@ -5,25 +5,6 @@
 
 :host {
 
-	@extend %flex-column;
-	position				: relative;
-	min-height				: $input-element-min-height;
-
-	&>select {
-
-		@extend %input-element;
-
-	}
-
-	&>label {
-
-		@extend %input-label;
-		&.up {
-
-			@extend %input-label-up;
-
-		}
-
-	}
+	@include mx-input-element;
 
 }

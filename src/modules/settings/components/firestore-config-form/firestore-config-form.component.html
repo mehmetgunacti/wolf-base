@@ -1,19 +1,13 @@
 <form>
 
 	<!-- API KEY -->
-	<div>
-		<w-input [control]="form.apiKey" name="API Key"/>
-	</div>
+	<w-input [formControl]="form.apiKey" label="API Key"/>
 
 	<!-- BASE URL -->
-	<div>
-		<w-input [control]="form.baseURL" name="Base URL"/>
-	</div>
+	<w-input [formControl]="form.baseURL" label="Base URL"/>
 
 	<!-- PROJECT ID -->
-	<div>
-		<w-input [control]="form.projectId" name="Project ID"/>
-	</div>
+	<w-input [formControl]="form.projectId" label="Project ID"/>
 
 </form>
 

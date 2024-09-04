@@ -9,17 +9,17 @@
 
 		<!-- ID -->
 		<div *ngIf="word()?.id">
-			<w-input [control]="form.id" name="ID" [readonly]="true"/>
+			<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
 		</div>
 
 		<!-- NAME -->
 		<div>
-			<w-input [control]="form.name" name="Term"/>
+			<w-input [formControl]="form.name" label="Term"/>
 		</div>
 
 		<!-- PRONUNCIATION -->
 		<div>
-			<w-input [control]="form.pronunciation" name="Pronunciation"/>
+			<w-input [formControl]="form.pronunciation" label="Pronunciation"/>
 		</div>
 
 		<div>
@@ -79,7 +79,7 @@
 
 							<!-- NAME -->
 							<div>
-								<w-input [control]="lang.name" name="Meaning"/>
+								<w-input [formControl]="lang.name" label="Meaning"/>
 							</div>
 
 							@if($index < 1) {

@@ -1,20 +1,21 @@
+@import 'mixins';
 @import 'helper';
 
 :host {
 
-	@extend %flex-column;
+	@include mx-flex-column;
 	flex		: 1;
 	padding		: var(--gap);
 	& > form {
 
-		@extend %flex-column;
+		@include mx-flex-column;
 		gap		: var(--gap-lg);
 
 	}
 
 	& > div[form-element-buttons] {
 
-		@extend %flex-space-between-center;
+		@include mx-flex-space-between-center;
 		gap				: var(--gap-sm);
 		margin-top 		: 1rem;
 
