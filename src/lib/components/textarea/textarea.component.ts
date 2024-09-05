@@ -1,44 +1,65 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable, map, startWith } from 'rxjs';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
 	selector: 'w-textarea',
 	templateUrl: './textarea.component.html',
 	styleUrls: ['./textarea.component.scss'],
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => TextareaComponent),
+			multi: true
+		}
+	],
+	host: {
+		'[tabindex]': '0',
+		'(focus)': 'onHostFocus()'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TextareaComponent implements OnInit {
+export class TextareaComponent implements ControlValueAccessor {
 
-	label_id: string = 'textarea_' + Math.random();
+	private inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
-	@Input() control!: FormControl;
-	@Input() name: string = '';
-	@Input() readonly: boolean = false;
-	@Input() rows: number = 10;
+	// Input
+	label: InputSignal<string> = input.required();
+	rows: InputSignal<number> = input(10);
+	type: InputSignal<string> = input('text');
+	labelUp: InputSignal<boolean> = input(false);
+	readonly: InputSignal<boolean> = input(false);
 
-	@Output() inputChanged: EventEmitter<string> = new EventEmitter();
+	protected value: WritableSignal<string> = signal('');
+	protected disabled: WritableSignal<boolean> = signal(false);
+	protected isLabelUp = computed(() => this.labelUp() || !!this.value());
 
-	hasValue$!: Observable<boolean>;
+	//////////// boilerplate
+	private onChange: any = () => { }
+	private onTouched: any = () => { }
+	registerOnChange(fn: any): void { this.onChange = fn; }
+	registerOnTouched(fn: any): void { this.onTouched = fn; }
+	writeValue(value: string): void { this.value.set(value); }
+	setDisabledState(isDisabled: boolean): void { this.disabled.set(isDisabled); }
+	////////////
 
-	ngOnInit(): void {
+	// Method that handles the change event of the checkbox
+	onInput(value: string): void {
 
-		this.hasValue$ = this.control.valueChanges.pipe(
-
-			startWith(this.control.value),
-			map(val => !!val),
-
-
-		);
+		this.value.set(value);
+		this.onChange(this.value());
+		this.onTouched();
 
 	}
 
-	onInput(event: Event): void {
+	onBlur(): void {
 
-		const inputElement = event.target as HTMLInputElement;
-		const value = inputElement.value;
+		this.onTouched();
 
-		this.inputChanged.emit(value);
+	}
+
+	onHostFocus(): void {
+
+		this.inputElement().nativeElement.focus();
 
 	}
 
