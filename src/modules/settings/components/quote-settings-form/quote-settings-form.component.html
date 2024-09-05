@@ -1,7 +1,7 @@
 <form>
 
 	<w-input [formControl]="form.controls.id" label="ID" [readonly]="true" />
-	<w-textarea [control]="form.controls.name" name="Quote" [rows]="3" />
+	<w-textarea [formControl]="form.controls.name" label="Quote" [rows]="3" />
 	<w-input [formControl]="form.controls.author" label="Author" />
 	<w-input [formControl]="form.controls.context" label="Context" />
 

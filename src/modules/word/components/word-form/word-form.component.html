@@ -27,7 +27,7 @@
 			<!-- CONTEXTS -->
 			<div context>
 
-				<w-textarea [control]="context.fc" [name]="'Context #' + ($index + 1)" [rows]="3"/>
+				<w-textarea [formControl]="context.fc" [label]="'Context #' + ($index + 1)" [rows]="3"/>
 				<button
 					type="button"
 					class="icon-only small"
@@ -103,7 +103,7 @@
 						<!-- SAMPLES -->
 						<div sample>
 
-							<w-textarea [control]="sample.fc" [name]="'Sample #' + ($index + 1)" [rows]="3"/>
+							<w-textarea [formControl]="sample.fc" [label]="'Sample #' + ($index + 1)" [rows]="3"/>
 							@if($index < 1) {
 
 								<button
