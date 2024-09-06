@@ -8,12 +8,11 @@
 
 }
 
-.footer {
+.footer-buttons {
 
 	display			: flex;
 	gap				: var(--gap-sm);
 	margin-top		: auto;
-	padding			: var(--gap-sm);
 
 	&._n {
 
