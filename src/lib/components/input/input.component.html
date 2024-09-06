@@ -1,10 +1,10 @@
 <input
 	#inputElement
 	[type]="type()"
-	[value]="value()"
+	[value]="value"
 	placeholder=""
 	[readonly]="readonly()"
-	[disabled]="disabled()"
+	[disabled]="disabled"
 	(blur)="onBlur()"
 	(input)="onInput(inputElement.value)">
-<label [class.up]="isLabelUp()">{{label()}}</label>
+<label [class.up]="labelUp() || !!value">{{label()}}</label>

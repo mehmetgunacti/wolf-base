@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, input, InputSignal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -28,24 +28,23 @@ export class InputComponent implements ControlValueAccessor {
 	labelUp: InputSignal<boolean> = input(false);
 	readonly: InputSignal<boolean> = input(false);
 
-	protected value: WritableSignal<string> = signal('');
-	protected disabled: WritableSignal<boolean> = signal(false);
-	protected isLabelUp = computed(() => this.labelUp() || !!this.value());
+	protected value = '';
+	protected disabled = false;
 
 	//////////// boilerplate
 	private onChange: any = () => { }
 	private onTouched: any = () => { }
 	registerOnChange(fn: any): void { this.onChange = fn; }
 	registerOnTouched(fn: any): void { this.onTouched = fn; }
-	writeValue(value: string): void { this.value.set(value); }
-	setDisabledState(isDisabled: boolean): void { this.disabled.set(isDisabled); }
+	writeValue(value: string): void { this.value = value; }
+	setDisabledState(isDisabled: boolean): void { this.disabled = isDisabled; }
 	////////////
 
 	// Method that handles the change event of the checkbox
 	onInput(value: string): void {
 
-		this.value.set(value);
-		this.onChange(this.value());
+		this.value = value;
+		this.onChange(this.value);
 		this.onTouched();
 
 	}
