@@ -74,6 +74,12 @@
 
 	}
 
+	&[required] > label {
+
+		color: fn-hsl(focus);
+
+	}
+
 	&:has(:focus-visible) {
 
 		@include mx-outline;

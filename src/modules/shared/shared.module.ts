@@ -16,6 +16,7 @@ import { BookmarkComponent } from './bookmark/bookmark.component';
 import { LanguagesComponent } from './languages/languages.component';
 import { NoteHeaderComponent } from './note-header/note-header.component';
 import { WordComponent } from './word/word.component';
+import { RequiredValidatorDirective } from 'lib/directives/required-validator.directive';
 
 @NgModule({
 	declarations: [
@@ -23,6 +24,7 @@ import { WordComponent } from './word/word.component';
 		NoteHeaderComponent,
 		PortalComponent,
 		AutofocusDirective,
+		RequiredValidatorDirective,
 		NoDataPipe,
 		SelectedTagsComponent,
 		FormatBytesPipe,
@@ -52,6 +54,7 @@ import { WordComponent } from './word/word.component';
 		NoteHeaderComponent,
 		PortalComponent,
 		AutofocusDirective,
+		RequiredValidatorDirective,
 		ReactiveFormsModule,
 		NoDataPipe,
 		FormatBytesPipe,
