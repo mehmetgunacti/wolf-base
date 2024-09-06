@@ -1,6 +1,6 @@
 <select
 	#selectElement
-	[value]="value()"
+	[value]="value"
 	(change)="onSelect($event)"
 	(blur)="onBlur()">
 
@@ -11,4 +11,4 @@
 	}
 
 </select>
-<label class="up">{{value()}}</label>
+<label class="up">{{label()}}</label>
