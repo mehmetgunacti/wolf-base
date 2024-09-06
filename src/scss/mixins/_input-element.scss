@@ -17,7 +17,6 @@
 	position			: absolute;
 	top					: 50%;
 	left				: 5px;
-	gap					: var(--gap-sm);
 	transform			: translateY(-50%);
 	pointer-events		: none;
 	border-radius		: var(--border-radius-xs);
@@ -74,9 +73,11 @@
 
 	}
 
-	&[required] > label {
+	&[required] > label::before {
 
-		color: fn-hsl(focus);
+		content			: "*";
+		color			: fn-hsl(focus);
+		margin-right	: 2px;
 
 	}
 
@@ -91,9 +92,11 @@
 
 	}
 
-	// ng-valid    <-> ng-invalid
-	// ng-pristine <-> ng-dirty
-	// ng-touched  <-> ng-untouched
+	/*
+	* ng-valid    <-> ng-invalid
+	* ng-pristine <-> ng-dirty
+	* ng-touched  <-> ng-untouched
+	*/
 	&.ng-dirty.ng-invalid {
 
 		@include mx-outline((color: "error"));
