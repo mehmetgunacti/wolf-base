@@ -36,7 +36,6 @@ export class QuoteSettingsContainerComponent {
 
 	onSearch(term: string): void {
 
-		console.log(term);
 		this.search.next(term);
 
 	}
