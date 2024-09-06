@@ -3,7 +3,7 @@
 	<div card_title>Quote Settings</div>
 
 </header>
-<main>
+<section content>
 
 	<app-quote-settings-form
 		[quote]="selected$ | async"
@@ -16,4 +16,4 @@
 		(select)="onSelected($event)"
 		(search)="onSearch($event)" />
 
-</main>
+</section>

@@ -3,7 +3,7 @@
 	<div card_title>Pinned Notes</div>
 
 </header>
-<main>
+<section content>
 
 	<app-pinned-notes-form
 		[tags]="tags$ | async"
@@ -11,4 +11,4 @@
 		(tagInput)="onTagInput($event)"
 		(save)="onSave($event)" />
 
-</main>
+</section>
