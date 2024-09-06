@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input, output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Quote, UUID, isInvalid } from '@lib';
+import { Quote, UUID } from '@lib';
 
 interface QuoteForm {
 
 	id: FormControl<UUID | null>,
-	name: FormControl<string>,
+	name: FormControl<string | null>,
 	author: FormControl<string | null>,
 	context: FormControl<string | null>
 
@@ -19,36 +19,45 @@ interface QuoteForm {
 })
 export class QuoteSettingsFormComponent {
 
-	form: FormGroup<QuoteForm> = new FormGroup({
+	protected form: FormGroup<QuoteForm>;
 
-		id: new FormControl<UUID | null>(null),
-		name: new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
-		author: new FormControl<string | null>(null, { validators: [Validators.minLength(3)] }),
-		context: new FormControl<string | null>(null, { validators: [Validators.minLength(3)] })
+	// @Input
+	quote = input<Quote | null>();
 
-	});
+	// @Output
+	create = output<Partial<Quote>>();
+	update = output<Quote>();
+	delete = output<UUID>();
+	reset = output<void>();
 
+	protected isUpdate = computed(() => !!this.quote()?.id);
 
-	@Input() set quote(val: Quote | null) {
+	constructor() {
 
-		if (val)
-			this.form.setValue(val);
-		else
-			this.resetForm();
+		this.form = new FormGroup<QuoteForm>({
+
+			id: new FormControl(),
+			name: new FormControl(null, { validators: [Validators.required, Validators.minLength(3)] }),
+			author: new FormControl(null, { validators: [Validators.minLength(3)] }),
+			context: new FormControl(null, { validators: [Validators.minLength(3)] })
+
+		});
+
+		effect(() => {
+
+			const val = this.quote();
+			if (val)
+				this.form.setValue(val);
+			else
+				this.resetForm();
+
+		});
 
 	}
 
-	@Output() create: EventEmitter<Partial<Quote>> = new EventEmitter();
-	@Output() update: EventEmitter<Quote> = new EventEmitter();
-	@Output() delete: EventEmitter<UUID> = new EventEmitter();
-	@Output() reset: EventEmitter<void> = new EventEmitter();
-
 	onSave(): void {
 
-		if (isInvalid(this.form))
-			return;
-
-		if (this.form.controls.id.value)
+		if (this.isUpdate())
 			this.update.emit(this.form.value as Quote);
 		else
 			this.create.emit(this.form.value as Partial<Quote>);
@@ -57,12 +66,7 @@ export class QuoteSettingsFormComponent {
 
 	private resetForm(): void {
 
-		this.form.reset({
-			id: null,
-			name: '',
-			author: null,
-			context: null
-		});
+		this.form.reset();
 
 	}
 

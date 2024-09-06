@@ -1,24 +1,24 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="onSave()">
 
-	<w-input [formControl]="form.controls.id" label="ID" [readonly]="true" />
-	<w-textarea [formControl]="form.controls.name" label="Quote" [rows]="3" />
-	<w-input [formControl]="form.controls.author" label="Author" />
-	<w-input [formControl]="form.controls.context" label="Context" />
+	<w-input formControlName="id" label="ID" [readonly]="true" />
+	<w-textarea formControlName="name" label="Quote" [rows]="3" />
+	<w-input formControlName="author" label="Author" />
+	<w-input formControlName="context" label="Context" />
+
+	<footer class="footer-buttons one_two">
+
+		<button type="button" (click)="onReset()">
+			<span class="material-symbols-outlined">clear_all</span> Clear
+		</button>
+
+		<button type="button" class="error" (click)="onDelete(form.controls.id.value)" [disabled]="!form.controls.id.value">
+			<span class="material-symbols-outlined">delete</span> Delete
+		</button>
+
+		<button type="submit" [disabled]="this.form.pristine || this.form.invalid">
+			<span class="material-symbols-outlined">save</span> {{ isUpdate() ? 'Update' : 'Create'}}
+		</button>
+
+	</footer>
 
 </form>
-
-<div form-element-buttons>
-
-	<button type="button" (click)="onReset()">
-		<span class="material-symbols-outlined">clear_all</span> Clear
-	</button>
-
-	<button type="button" class="error" (click)="onDelete(form.controls.id.value)" [disabled]="!form.controls.id.value">
-		<span class="material-symbols-outlined">delete</span> Delete
-	</button>
-
-	<button type="button" (click)="onSave()" [disabled]="this.form.pristine || this.form.invalid">
-		<span class="material-symbols-outlined">save</span> {{ form.controls.id.value ? 'Update' : 'Create'}}
-	</button>
-
-</div>
