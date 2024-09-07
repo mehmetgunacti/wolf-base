@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, inject, input, InputSignal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, forwardRef, inject, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -22,8 +22,6 @@ export class TextareaComponent implements ControlValueAccessor {
 
 	private inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
-	private cd = inject(ChangeDetectorRef);
-
 	// Input
 	label: InputSignal<string> = input.required();
 	rows: InputSignal<number> = input(10);
@@ -31,23 +29,24 @@ export class TextareaComponent implements ControlValueAccessor {
 	labelUp: InputSignal<boolean> = input(false);
 	readonly: InputSignal<boolean> = input(false);
 
-	protected value = '';
-	protected disabled = false;
+	protected value: WritableSignal<string> = signal('');
+	protected disabled: WritableSignal<boolean> = signal(false);
+	protected isLabelUp = computed(() => this.labelUp() || !!this.value());
 
 	//////////// boilerplate
 	private onChange: any = () => { }
 	private onTouched: any = () => { }
 	registerOnChange(fn: any): void { this.onChange = fn; }
 	registerOnTouched(fn: any): void { this.onTouched = fn; }
-	writeValue(value: string): void { this.value = value; this.cd.markForCheck(); }
-	setDisabledState(isDisabled: boolean): void { this.disabled = isDisabled; }
+	writeValue(value: string): void { this.value.set(value); }
+	setDisabledState(isDisabled: boolean): void { this.disabled.set(isDisabled); }
 	////////////
 
 	// Method that handles the change event of the checkbox
 	onInput(value: string): void {
 
-		this.value = value;
-		this.onChange(this.value);
+		this.value.set(value);
+		this.onChange(value);
 		this.onTouched();
 
 	}

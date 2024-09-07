@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, inject, input, InputSignal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NameBase } from 'lib/models';
 
@@ -23,30 +23,28 @@ export class SelectComponent implements ControlValueAccessor {
 
 	private selectElement = viewChild.required<ElementRef<HTMLSelectElement>>('selectElement');
 
-	private cd = inject(ChangeDetectorRef);
-
 	// Input
 	label: InputSignal<string> = input.required();
 	readonly: InputSignal<boolean> = input(false);
 	nodes: InputSignal<NameBase[]> = input.required<NameBase[]>();
 
-	protected value = '';
-	protected disabled = false;
+	protected value: WritableSignal<string> = signal('');
+	protected disabled: WritableSignal<boolean> = signal(false);
 
 	//////////// boilerplate
 	private onChange: any = () => { }
 	private onTouched: any = () => { }
 	registerOnChange(fn: any): void { this.onChange = fn; }
 	registerOnTouched(fn: any): void { this.onTouched = fn; }
-	writeValue(value: string): void { this.value = value; this.cd.markForCheck(); }
-	setDisabledState(isDisabled: boolean): void { this.disabled = isDisabled; }
+	writeValue(value: string): void { this.value.set(value); }
+	setDisabledState(isDisabled: boolean): void { this.disabled.set(isDisabled); }
 	////////////
 
 	onSelect(event: Event): void {
 
 		const target = event.target as HTMLSelectElement;
-		this.value = target.value;
-		this.onChange(this.value);
+		this.value.set(target.value);
+		this.onChange(target.value);
 		this.onTouched();
 
 	}
