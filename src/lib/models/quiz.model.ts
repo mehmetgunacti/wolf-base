@@ -1,9 +1,24 @@
+import { signal } from '@angular/core';
 import { DefinitionType, Progress, UUID } from 'lib/constants';
 import { Entity } from './entity.model';
-import { NameBase } from './id-base.model';
-import { Definition, definitionName, Word } from './word.model';
-import { maskOrHighlight } from 'lib/utils';
-import { signal } from '@angular/core';
+import { Definition, Word } from './word.model';
+
+/*
+* Fisher-Yates (or Knuth) algorithm
+* iterates over the array from the last element to the first,
+* swapping each element with a randomly chosen element that comes before it (including itself)
+*/
+function shuffle(array: Word[]): Word[] {
+
+	for (let i = array.length - 1; i > 0; i--) {
+
+		const j = Math.floor(Math.random() * (i + 1));
+		[array[i], array[j]] = [array[j], array[i]];
+
+	}
+	return array;
+
+}
 
 export const enum AnimState {
 
@@ -49,7 +64,7 @@ export class Quiz {
 		this.definition = definition;
 		this.isVerb = definition.type === DefinitionType.verb;
 
-		this.choices = [...words].sort(() => Math.random() - 0.5); // shuffle
+		this.choices = shuffle(words); // [...words].sort(() => Math.random() - 0.5); // shuffle
 		this.correctIndex = this.choices.findIndex(w => w.id === this.word.id);
 
 	}
