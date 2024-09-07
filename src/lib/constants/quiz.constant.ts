@@ -1,3 +1,5 @@
+export type QuestionType = 'term' | 'definition';
+
 export enum Progress {
 
 	START = 'START',

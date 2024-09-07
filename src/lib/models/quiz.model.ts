@@ -1,5 +1,5 @@
 import { signal } from '@angular/core';
-import { DefinitionType, Progress, UUID } from 'lib/constants';
+import { Progress, QuestionType } from 'lib/constants';
 import { Entity } from './entity.model';
 import { Definition, Word } from './word.model';
 
@@ -33,13 +33,11 @@ export interface QuizEntry extends Entity {
 
 	next: number;
 	level: Progress;
-	question: 'term' | 'definition';
+	question: QuestionType;
 
 }
 
 export class Quiz {
-
-	askWord: boolean;
 
 	word: Word;
 	definition: Definition;
@@ -51,17 +49,13 @@ export class Quiz {
 	correctChoice = signal<Index | null>(null);
 	incorrectChoice = signal<Index | null>(null);
 
-	constructor(public words: Word[]) {
+	constructor(
+		public words: Word[],
+		public askWord: boolean
+	) {
 
-		// What to ask; word (term) or definition?
-		const askWord = Math.random() < 0.5;
-		this.askWord = askWord;
-
-		const word = words[0];
-		const definition = word.definitions[0];
-
-		this.word = word;
-		this.definition = definition;
+		this.word = words[0];
+		this.definition = words[0].definitions[0];
 
 		this.choices = [...shuffle(words)]; // [...words].sort(() => Math.random() - 0.5); // shuffle
 		this.correctIndex = this.choices.findIndex(w => w.id === this.word.id);
@@ -70,6 +64,7 @@ export class Quiz {
 
 	onAnswer(index: Index): void {
 
+		// set indexes to be used in blink animation
 		if (index === this.correctIndex) {
 
 			this.correctChoice.set(index);
@@ -81,12 +76,6 @@ export class Quiz {
 			this.incorrectChoice.set(index);
 
 		}
-
-	}
-
-	onRightAnswer(choiceId: UUID): boolean {
-
-		return this.definition.id === choiceId;
 
 	}
 

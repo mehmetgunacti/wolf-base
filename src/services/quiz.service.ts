@@ -37,7 +37,9 @@ export class QuizService {
 					return null;
 
 				const choices: Word[] = [];
-				const potentialChoices: Word[] = Object.values(map).filter(w => w.definitions[0].type === question.definitions[0].type);
+				const potentialChoices: Word[] = Object.values(map)
+					.filter(w => w.definitions[0].type === question.definitions[0].type) // remove by type
+					.filter(w => w.definitions[0].id !== quizEntry.id); // remove current question
 
 				// choose NUMBER_OF_CHOICES random, unique definitions
 				while (choices.length < NUMBER_OF_CHOICES && potentialChoices.length > 0) {
@@ -49,7 +51,7 @@ export class QuizService {
 				}
 
 				const result = [question, ...choices]; // first entry is the question, rest are choices
-				return new Quiz(result);
+				return new Quiz(result, quizEntry.question === 'term');
 
 			}),
 			shareReplay(1)
