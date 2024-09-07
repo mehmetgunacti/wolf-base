@@ -53,7 +53,7 @@ export class TaskFormComponent {
 
 			}
 
-		});
+		}, { allowSignalWrites: true }); // CVA writeValue calls signal.set(...)
 
 		// set end date depending on status
 		this.form.status.valueChanges

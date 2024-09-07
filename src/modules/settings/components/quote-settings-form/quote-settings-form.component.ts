@@ -51,7 +51,7 @@ export class QuoteSettingsFormComponent {
 			else
 				this.resetForm();
 
-		});
+		}, { allowSignalWrites: true });
 
 	}
 
