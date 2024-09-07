@@ -1,8 +1,8 @@
-import { QuizProgress } from 'lib/models';
+import { QuizEntry } from 'lib/models';
 import { EntityLocalRepository } from './entity.repository';
 
-export interface QuizEntryLocalRepository extends EntityLocalRepository<QuizProgress> {
+export interface QuizEntryLocalRepository extends EntityLocalRepository<QuizEntry> {
 
-	putEntry(entry: QuizProgress): Promise<void>;
+	putEntry(entry: QuizEntry): Promise<void>;
 
 }

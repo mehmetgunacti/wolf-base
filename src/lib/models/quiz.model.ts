@@ -29,17 +29,17 @@ export const enum AnimState {
 
 type Index = number;
 
-export interface QuizProgress extends Entity {
+export interface QuizEntry extends Entity {
 
 	next: number;
 	level: Progress;
+	question: 'term' | 'definition';
 
 }
 
 export class Quiz {
 
 	askWord: boolean;
-	isVerb: boolean;
 
 	word: Word;
 	definition: Definition;
@@ -53,7 +53,7 @@ export class Quiz {
 
 	constructor(public words: Word[]) {
 
-		// What to ask; word or definition?
+		// What to ask; word (term) or definition?
 		const askWord = Math.random() < 0.5;
 		this.askWord = askWord;
 
@@ -62,14 +62,13 @@ export class Quiz {
 
 		this.word = word;
 		this.definition = definition;
-		this.isVerb = definition.type === DefinitionType.verb;
 
-		this.choices = shuffle(words); // [...words].sort(() => Math.random() - 0.5); // shuffle
+		this.choices = [...shuffle(words)]; // [...words].sort(() => Math.random() - 0.5); // shuffle
 		this.correctIndex = this.choices.findIndex(w => w.id === this.word.id);
 
 	}
 
-	onClick(index: Index): void {
+	onAnswer(index: Index): void {
 
 		if (index === this.correctIndex) {
 

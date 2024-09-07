@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { AppEntityType, Definition, definitionName, QuizProgress, UUID, Word } from '@lib';
+import { AppEntityType, Definition, definitionName, QuizEntry, UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as entityActions from 'store/actions/entity.actions';
@@ -35,7 +35,7 @@ export class WordContainerComponent {
 
 	onSchedule(definition: Definition): void {
 
-		const entity: Partial<QuizProgress> = {
+		const entity: Partial<QuizEntry> = {
 
 			id: definition.id,
 			name: definitionName(definition)

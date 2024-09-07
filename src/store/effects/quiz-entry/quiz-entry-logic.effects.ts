@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { AppEntityType, increase, next, Progress, QuizProgress } from '@lib';
+import { AppEntityType, increase, next, Progress, QuizEntry } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, withLatestFrom } from 'rxjs/operators';
@@ -20,21 +20,22 @@ export class QuizEntryLogicEffects {
 
 			ofType(quizActions.answeredRight),
 			withLatestFrom(this.store.select(selQuizEntry_EntityList)),
-			map(([{ quizProgressId }, entries]) => {
+			map(([{ quizEntryId }, entries]) => {
 
-				const quizProgress = entries.find(e => e.id === quizProgressId);
-				if (!quizProgress)
-					return coreActions.showNotification({ severity: 'error', summary: 'QuizProcess Update Failure!', detail: `${quizProgressId} not found` });
+				const quizEntry = entries.find(e => e.id === quizEntryId);
+				if (!quizEntry)
+					return coreActions.showNotification({ severity: 'error', summary: 'QuizEntry Update Failure!', detail: `${quizEntryId} not found` });
 
-				const entity: QuizProgress = {
+				const entity: QuizEntry = {
 
-					id: quizProgress.id,
-					name: quizProgress.name,
-					level: next(quizProgress.level),
-					next: increase(next(quizProgress.level))
+					id: quizEntry.id,
+					name: quizEntry.name,
+					level: next(quizEntry.level),
+					next: increase(next(quizEntry.level)),
+					question: quizEntry.question === 'term' ? 'definition' : 'term'
 
 				};
-				return entityActions.update({ entityType: AppEntityType.quizEntry, id: quizProgressId, entity });
+				return entityActions.update({ entityType: AppEntityType.quizEntry, id: quizEntryId, entity });
 
 			})
 
@@ -48,21 +49,22 @@ export class QuizEntryLogicEffects {
 
 			ofType(quizActions.closeAnswerDialog),
 			withLatestFrom(this.store.select(selQuizEntry_EntityList)),
-			map(([{ quizProgressId }, entries]) => {
+			map(([{ quizEntryId }, entries]) => {
 
-				const quizProgress = entries.find(e => e.id === quizProgressId);
-				if (!quizProgress)
-					return coreActions.showNotification({ severity: 'error', summary: 'QuizProcess Update Failure!', detail: `${quizProgressId} not found` });
+				const quizEntry = entries.find(e => e.id === quizEntryId);
+				if (!quizEntry)
+					return coreActions.showNotification({ severity: 'error', summary: 'QuizEntry Update Failure!', detail: `${quizEntryId} not found` });
 
-				const entity: QuizProgress = {
+				const entity: QuizEntry = {
 
-					id: quizProgress.id,
-					name: quizProgress.name,
+					id: quizEntry.id,
+					name: quizEntry.name,
 					level: Progress.START,
-					next: increase(Progress.LEVEL_ONE)
+					next: increase(Progress.LEVEL_ONE),
+					question: quizEntry.question === 'term' ? 'definition' : 'term'
 
 				};
-				return entityActions.update({ entityType: AppEntityType.quizEntry, id: quizProgressId, entity });
+				return entityActions.update({ entityType: AppEntityType.quizEntry, id: quizEntryId, entity });
 
 			})
 

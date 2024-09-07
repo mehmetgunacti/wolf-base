@@ -37,15 +37,15 @@ export class QuizAnswerContainerComponent {
 
 	}
 
-	onClose(quizProgressId: UUID): void {
+	onClose(quizEntryId: UUID): void {
 
-		this.store.dispatch(quizActions.closeAnswerDialog({ quizProgressId }));
+		this.store.dispatch(quizActions.closeAnswerDialog({ quizEntryId }));
 
 	}
 
-	onEdit(quizProgressId: UUID, editWord: UUID): void {
+	onEdit(quizEntryId: UUID, editWord: UUID): void {
 
-		this.store.dispatch(quizActions.closeAnswerDialog({ quizProgressId, editWord }));
+		this.store.dispatch(quizActions.closeAnswerDialog({ quizEntryId, editWord }));
 
 	}
 

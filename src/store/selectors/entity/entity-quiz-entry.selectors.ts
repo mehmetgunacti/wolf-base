@@ -1,4 +1,4 @@
-import { AppEntityType, QuizProgress } from '@lib';
+import { AppEntityType, QuizEntry } from '@lib';
 import { createEntitySelectors } from '../entity/selectors-factory';
 
 export const {
@@ -13,4 +13,4 @@ export const {
 	selRemoteMetadataMap: selQuizEntry_RemoteMetadataMap,
 	selRemoteMetadataList: selQuizEntry_RemoteMetadataList
 
-} = createEntitySelectors<QuizProgress>(AppEntityType.quizEntry);
+} = createEntitySelectors<QuizEntry>(AppEntityType.quizEntry);

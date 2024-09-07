@@ -1,4 +1,4 @@
-import { QuizProgress, RemoteData, RemoteMetadata, UUID } from '@lib';
+import { QuizEntry, RemoteData, RemoteMetadata, UUID } from '@lib';
 import { QuizEntriesRemoteRepository } from 'lib/repositories/remote';
 import { Observable, delay, map, of } from 'rxjs';
 
@@ -6,16 +6,16 @@ const SLEEP = 20;
 
 export class MockQuizEntriesCollection implements QuizEntriesRemoteRepository {
 
-	private quizEntries: Record<string, RemoteData<QuizProgress>> = {};
-	private quizEntries_trash: Record<string, RemoteData<QuizProgress>> = {};
+	private quizEntries: Record<string, RemoteData<QuizEntry>> = {};
+	private quizEntries_trash: Record<string, RemoteData<QuizEntry>> = {};
 
-	download(id: string): Observable<RemoteData<QuizProgress> | null> {
+	download(id: string): Observable<RemoteData<QuizEntry> | null> {
 
 		return of(this.quizEntries[id] ?? null).pipe(delay(SLEEP));
 
 	}
 
-	downloadMany(ids?: UUID[]): Observable<RemoteData<QuizProgress>[]> {
+	downloadMany(ids?: UUID[]): Observable<RemoteData<QuizEntry>[]> {
 
 		if (ids)
 			return of(Object.keys(this.quizEntries).filter(id => ids.includes(id)).map(id => this.quizEntries[id])).pipe(delay(SLEEP));
@@ -42,7 +42,7 @@ export class MockQuizEntriesCollection implements QuizEntriesRemoteRepository {
 
 	}
 
-	upload(item: QuizProgress): Observable<RemoteMetadata> {
+	upload(item: QuizEntry): Observable<RemoteMetadata> {
 
 		const current = this.quizEntries[item.id];
 		const createTime = current ? current.metaData.createTime : new Date().toISOString();
@@ -54,7 +54,7 @@ export class MockQuizEntriesCollection implements QuizEntriesRemoteRepository {
 			updateTime: new Date().toISOString(),
 
 		};
-		const remoteData: RemoteData<QuizProgress> = {
+		const remoteData: RemoteData<QuizEntry> = {
 
 			metaData: metadata,
 			entity: item,
@@ -85,7 +85,7 @@ export class MockQuizEntriesCollection implements QuizEntriesRemoteRepository {
 
 	}
 
-	trash(item: QuizProgress): Observable<RemoteData<QuizProgress>> {
+	trash(item: QuizEntry): Observable<RemoteData<QuizEntry>> {
 
 		const metaData: RemoteMetadata = {
 
@@ -95,7 +95,7 @@ export class MockQuizEntriesCollection implements QuizEntriesRemoteRepository {
 			updateTime: new Date().toISOString(),
 
 		};
-		const remoteData: RemoteData<QuizProgress> = {
+		const remoteData: RemoteData<QuizEntry> = {
 
 			metaData,
 			entity: item,
@@ -110,13 +110,13 @@ export class MockQuizEntriesCollection implements QuizEntriesRemoteRepository {
 
 export class VoidQuizEntriesCollection implements QuizEntriesRemoteRepository {
 
-	upload(item: QuizProgress): Observable<RemoteMetadata> {
+	upload(item: QuizEntry): Observable<RemoteMetadata> {
 		throw new Error('Method not implemented.');
 	}
-	download(id: string): Observable<RemoteData<QuizProgress> | null> {
+	download(id: string): Observable<RemoteData<QuizEntry> | null> {
 		throw new Error('Method not implemented.');
 	}
-	downloadMany(ids: string[]): Observable<RemoteData<QuizProgress>[]> {
+	downloadMany(ids: string[]): Observable<RemoteData<QuizEntry>[]> {
 		throw new Error('Method not implemented.');
 	}
 	downloadMetadata(id: string): Observable<RemoteMetadata | null> {
@@ -128,7 +128,7 @@ export class VoidQuizEntriesCollection implements QuizEntriesRemoteRepository {
 	delete(id: string): Observable<void> {
 		throw new Error('Method not implemented.');
 	}
-	trash(item: QuizProgress): Observable<RemoteData<QuizProgress>> {
+	trash(item: QuizEntry): Observable<RemoteData<QuizEntry>> {
 		throw new Error('Method not implemented.');
 	}
 

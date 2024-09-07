@@ -1,4 +1,4 @@
-import { AppEntityType, QuizProgress } from '@lib';
+import { AppEntityType, QuizEntry } from '@lib';
 import * as sel from '../entity/entity-quiz-entry.selectors';
 import { createSyncSelectors } from '../sync/selectors-factory';
 
@@ -18,7 +18,7 @@ export const {
 	selLocalDeletedRemoteUpdated: selQuizEntry_LocalDeletedRemoteUpdated,
 	selCloudTasks: selQuizEntry_CloudTasks
 
-} = createSyncSelectors<QuizProgress>(
+} = createSyncSelectors<QuizEntry>(
 	entityType,
 	sel.selQuizEntry_EntityList,
 	sel.selQuizEntry_SyncDataList,

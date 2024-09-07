@@ -52,7 +52,7 @@ export class QuizContainerComponent {
 
 	onChoiceClick(quiz: Quiz, index: number): void {
 
-		quiz.onClick(index);
+		quiz.onAnswer(index);
 		this.animationState.set(AnimState.active);
 
 	}
@@ -64,7 +64,7 @@ export class QuizContainerComponent {
 		if (animEnded) {
 
 			if (quiz.incorrectChoice() === null) // choice was correct
-				this.store.dispatch(quizActions.answeredRight({ quizProgressId: quiz.words[0].definitions[0].id }));
+				this.store.dispatch(quizActions.answeredRight({ quizEntryId: quiz.words[0].definitions[0].id }));
 
 			else // choice was incorrect
 				this.store.dispatch(quizActions.answeredWrong({ word: quiz.words[0] }));

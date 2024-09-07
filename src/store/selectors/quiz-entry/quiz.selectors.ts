@@ -1,4 +1,4 @@
-import { QuizProgress, UUID, Word } from '@lib';
+import { QuizEntry, UUID, Word } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { produce } from 'immer';
 import { selCore_now } from '../core/core-ui.selectors';
@@ -41,7 +41,7 @@ const selQuiz_dueItems = createSelector(
 
 	selQuizEntry_EntityList,
 	selCore_now,
-	(allProgress, now): QuizProgress[] => {
+	(allProgress, now): QuizEntry[] => {
 
 		// sort array by 'next', then 'name'
 		return allProgress
@@ -63,9 +63,9 @@ export const selQuiz_dueItemsCount = createSelector(
 
 );
 
-export const selQuiz_quizProgress = createSelector(
+export const selQuiz_quizEntry = createSelector(
 
 	selQuiz_dueItems,
-	(dueItems: QuizProgress[]): QuizProgress | null => dueItems[0] ?? null
+	(dueItems: QuizEntry[]): QuizEntry | null => dueItems[0] ?? null
 
 );

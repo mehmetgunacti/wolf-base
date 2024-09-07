@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { NUMBER_OF_CHOICES, Quiz, QuizProgress, UUID, Word } from '@lib';
+import { NUMBER_OF_CHOICES, Quiz, QuizEntry, UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { selQuiz_definitionIdWordMap, selQuiz_quizProgress } from 'store/selectors/quiz-entry/quiz.selectors';
+import { selQuiz_definitionIdWordMap, selQuiz_quizEntry } from 'store/selectors/quiz-entry/quiz.selectors';
 
 @Injectable({
 	providedIn: 'root'
@@ -16,23 +16,23 @@ export class QuizService {
 
 	constructor() {
 
-		// select QuizProgress
-		const quizProgress$: Observable<QuizProgress | null> = this.store.select(selQuiz_quizProgress);
+		// select QuizEntry
+		const quizEntry$: Observable<QuizEntry | null> = this.store.select(selQuiz_quizEntry);
 
 		// select lookup map
 		const definitionIdWordMap$: Observable<Record<UUID, Word>> = this.store.select(selQuiz_definitionIdWordMap);
 
 		this.quiz$ = combineLatest([
 			definitionIdWordMap$,
-			quizProgress$
+			quizEntry$
 		]).pipe(
 
-			map(([map, progress]) => {
+			map(([map, quizEntry]) => {
 
-				if (!progress)
+				if (!quizEntry)
 					return null;
 
-				const question: Word = map[progress.id];
+				const question: Word = map[quizEntry.id];
 				if (!question)
 					return null;
 
