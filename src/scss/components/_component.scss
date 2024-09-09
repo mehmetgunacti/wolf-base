@@ -1,0 +1,26 @@
+@import 'mixins';
+
+@mixin component {
+
+	--component-bg-color	: #{fn-color(bg-component)};
+	--component-text		: #{fn-color(text)};
+
+	display					: block;
+	padding					: var(--gap-xl) var(--gap-xxl);
+	color					: var(--component-text);
+	background-color		: var(--component-bg-color);
+	border-radius			: var(--border-radius);
+
+}
+
+.component {
+
+	@include component;
+
+	&.dark {
+
+		--component-bg-color: #{fn-color(bg-component-dark)};
+
+	}
+
+}

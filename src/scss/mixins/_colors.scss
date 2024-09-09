@@ -1,0 +1,118 @@
+$app-colors: (
+	bg-header: true,
+	bg-nav: true,
+	bg-popup: true,
+	bg-component-dark: true,
+	bg-component: true,
+	bg-form-element: true,
+	bg-page: true,
+	bg-overlay: true,
+	text: true,
+	text-secondary: true,
+	primary: true,
+	success: true,
+	info: true,
+	warn: true,
+	error: true,
+	accent: true,
+	focus: true,
+	disabled: true,
+
+	btn-default-text-color: true,
+	btn-default-bg-color: true,
+	btn-default-bg-color-hover: true,
+	btn-default-bg-color-active: true,
+	btn-default-border-color: true,
+
+	btn-disabled-text-color: true,
+	btn-disabled-bg-color: true,
+	btn-disabled-bg-color-hover: true,
+	btn-disabled-bg-color-active: true,
+	btn-disabled-border-color: true,
+
+	btn-link-text-color: true,
+	btn-link-bg-color: true,
+	btn-link-bg-color-hover: true,
+	btn-link-bg-color-active: true,
+	btn-link-border-color: true,
+
+	btn-danger-text-color: true,
+	btn-danger-bg-color: true,
+	btn-danger-bg-color-hover: true,
+	btn-danger-bg-color-active: true,
+	btn-danger-border-color: true
+
+);
+
+@function fn-color($name) {
+
+	@if map-has-key($app-colors, $name) {
+
+		@return var(--col-#{$name});
+
+	}
+
+	@else {
+
+		@error "Invalid color name: #{$name}.";
+
+	}
+
+}
+
+@function _fn-color-mix($name, $mix-color, $percentage, $alpha: "100%") {
+
+	// Check if $percentage has a "%" unit
+	@if not (unit($percentage) == "%") {
+
+		@error "Invalid percentage: #{$percentage}. It must be a percentage (%).";
+
+	}
+
+	// Check if $alpha has a "%" unit if provided
+	@if not unit($alpha)=="%" {
+
+		@error "Invalid alpha value: #{$alpha}. It must be a percentage (%).";
+
+	}
+
+	@if map-has-key($app-colors, $name) {
+
+		// Get the base color
+		$base-color: var(--col-#{$name});
+
+		// Darken the color
+		$adjusted-color: color-mix(in hsl, hsl($base-color), $mix-color $percentage);
+
+		@if "#{$alpha}" == "100%" {
+
+			@return $adjusted-color;
+
+		} @else {
+
+			// Apply the alpha value
+			@return $adjusted-color / $alpha;
+
+		}
+
+	}
+
+	@else {
+
+		@error "Invalid color name: #{$name}.";
+
+	}
+
+}
+
+@function fn-color-lighten($name, $percentage, $alpha: 100%) {
+
+	@return _fn-color-mix($name, white, $percentage, $alpha);
+
+}
+
+@function fn-color-darken($name, $percentage, $alpha: 100%) {
+
+	@return _fn-color-mix($name, black, $percentage, $alpha);
+
+}

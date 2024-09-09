@@ -3,7 +3,7 @@ $nav-half-width				: 6rem;
 $header-height				: 6rem;
 
 $transition-timing-fn		: cubic-bezier(0.25, 1, 0.25, 1);
-$transition					: 1s $transition-timing-fn;
+$transition					: 600ms $transition-timing-fn;
 $bg-transition				: background-color $transition;
 $input-element-min-height	: 4rem;
 

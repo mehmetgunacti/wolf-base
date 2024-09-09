@@ -1,113 +1,52 @@
+@import 'theme-mixins';
 :root {
 
-	// --col-text
-	--col-text-hue				: 210deg;
-	--col-text-sat				: 26%;
-	--col-text-lig				: 84%;
-	--col-text-alp				: 1;
+	--col-bg-header			: hsl(var(--gray-12-hsl));
+	--col-bg-nav			: hsl(var(--gray-11-hsl));
+	--col-bg-popup			: hsl(var(--gray-10-hsl));
+	--col-bg-component		: hsl(var(--gray-9-hsl));
+	--col-bg-component-dark	: #{fn-darken(var(--col-bg-component), 30%)};
+	--col-bg-form-element	: hsl(var(--gray-7-hsl));
+	--col-bg-page			: hsl(var(--gray-7-hsl));
 
-	// --col-text-secondary
-	--col-text-secondary-hue	: 0deg;
-	--col-text-secondary-sat	: 0%;
-	--col-text-secondary-lig	: 64%;
-	--col-text-secondary-alp	: 1;
+	--col-bg-overlay		: hsl(var(--gray-12-hsl) / 75%);
 
-	/*************
-	* BACKGROUND *
-	**************/
+	--col-text				: hsl(var(--gray-4-hsl));
+	--col-text-secondary	: hsl(var(--gray-5-hsl));
 
-	// bg 0 (<body> bg)
-	--col-bg-0-hue				: 210deg;
-	--col-bg-0-sat				: 11%;
-	--col-bg-0-lig				: 33%;
-	--col-bg-0-alp				: 1;
+	--col-primary			: hsl(var(--blue-11-hsl));
+	--col-success			: hsl(var(--green-11-hsl));
+	--col-info				: hsl(var(--blue-4-hsl));
+	--col-warn				: hsl(var(--orange-6-hsl));
+	--col-error				: hsl(var(--red-12-hsl));
 
-	// bg 1 (<input>, <textarea> bg)
-	--col-bg-1-hue				: 210deg;
-	--col-bg-1-sat				: 11%;
-	--col-bg-1-lig				: 20%;
-	--col-bg-1-alp				: 1;
+	--col-accent			: hsl(var(--indigo-8-hsl));
+	--col-focus				: hsl(var(--orange-6-hsl));
 
-	// bg 2 (<card>, bookmark, ..)
-	--col-bg-2-hue				: 210deg;
-	--col-bg-2-sat				: 11%;
-	--col-bg-2-lig				: 13%;
-	--col-bg-2-alp				: 1;
+	--col-disabled			: hsl(var(--gray-7-hsl));
 
-	// bg 3 (tag-search box)
-	--col-bg-3-hue				: 210deg;
-	--col-bg-3-sat				: 11%;
-	--col-bg-3-lig				: 10%;
-	--col-bg-3-alp				: 1;
+	--col-btn-default-text-color		: var(--col-text);
+	--col-btn-default-bg-color			: var(--col-primary);
+	--col-btn-default-bg-color-hover	: #{fn-darken(var(--col-btn-default-bg-color), 10%)};
+	--col-btn-default-bg-color-active	: #{fn-darken(var(--col-btn-default-bg-color), 15%)};
+	--col-btn-default-border-color		: #{fn-darken(var(--col-btn-default-bg-color), 15%)};
 
-	// bg 4 (popup menu)
-	--col-bg-4-hue				: 210deg;
-	--col-bg-4-sat				: 11%;
-	--col-bg-4-lig				: 9%;
-	--col-bg-4-alp				: 1;
+	--col-btn-disabled-bg-color			: var(--col-disabled);
+	--col-btn-disabled-text-color		: #{fn-lighten(var(--col-btn-disabled-bg-color), 30%)};
+	--col-btn-disabled-bg-color-hover	: #{fn-darken(var(--col-btn-disabled-bg-color), 10%)};
+	--col-btn-disabled-bg-color-active	: #{fn-darken(var(--col-btn-disabled-bg-color), 15%)};
+	--col-btn-disabled-border-color		: #{fn-darken(var(--col-btn-disabled-bg-color), 15%)};
 
-	// bg 5 (<nav> bg)
-	--col-bg-5-hue				: 210deg;
-	--col-bg-5-sat				: 11%;
-	--col-bg-5-lig				: 8%;
-	--col-bg-5-alp				: 1;
+	--col-btn-link-text-color			: var(--col-text);
+	--col-btn-link-bg-color				: transparent;
+	--col-btn-link-bg-color-hover		: #{fn-darken(var(--col-btn-link-text-color), 40%, 40%)};
+	--col-btn-link-bg-color-active		: #{fn-darken(var(--col-btn-link-text-color), 40%)};
+	--col-btn-link-border-color			: transparent;
 
-	// bg 6 (<head> bg)
-	--col-bg-6-hue				: 210deg;
-	--col-bg-6-sat				: 11%;
-	--col-bg-6-lig				: 7%;
-	--col-bg-6-alp				: 1;
-
-
-	// default button
-	--col-button-bg-hue			: 215deg;
-	--col-button-bg-sat			: 65%;
-	--col-button-bg-lig			: 30%;
-	--col-button-bg-alp			: 1;
-
-	// --col-primary
-	--col-primary-hue			: 215deg;
-	--col-primary-sat			: 65%;
-	--col-primary-lig			: 45%;
-	--col-primary-alp			: 1;
-
-	// --col-success
-	--col-success-hue			: 120deg;
-	--col-success-sat			: 25%;
-	--col-success-lig			: 40%;
-	--col-success-alp			: 1;
-
-	// --col-info
-	--col-info-hue				: 223deg;
-	--col-info-sat				: 77%;
-	--col-info-lig				: 20%;
-	--col-info-alp				: 1;
-
-	// --col-warn
-	--col-warn-hue				: 26deg;
-	--col-warn-sat				: 65%;
-	--col-warn-lig				: 38%;
-	--col-warn-alp				: 1;
-
-	// --col-error
-	--col-error-hue				: 355deg;
-	--col-error-sat				: 54%;
-	--col-error-lig				: 32%;
-	--col-error-alp				: 1;
-
-	// overlay
-	--col-bg-overlay			: hsl(0deg 0% 0% / 75%);
-
-	// --focus
-	--col-focus-hue				: 36;
-	--col-focus-sat				: 70%;
-	--col-focus-lig				: 40%;
-	--col-focus-alp				: 1;
-
-	// --col-accent
-	--col-accent-hue			: 200deg;
-	--col-accent-sat			: 85%;
-	--col-accent-lig			: 34%;
-	--col-accent-alp			: 1;
+	--col-btn-danger-text-color			: var(--col-text);
+	--col-btn-danger-bg-color			: var(--col-error);
+	--col-btn-danger-bg-color-hover		: #{fn-darken(var(--col-btn-danger-bg-color), 10%)};
+	--col-btn-danger-bg-color-active	: #{fn-darken(var(--col-btn-danger-bg-color), 15%)};
+	--col-btn-danger-border-color		: #{fn-darken(var(--col-btn-danger-bg-color), 15%)};
 
 }

@@ -10,7 +10,7 @@
 
 	& > [note_main] {
 
-		@include mx-card(3);
+		// @include mx-card(3);
 		[note_parents] {
 
 			margin-bottom	: var(--gap-lg);
@@ -35,7 +35,7 @@
 
 	& > [note_children] {
 
-		@include mx-card(3);
+		// @include mx-card(3);
 
 	}
 

@@ -1,0 +1,23 @@
+@function fn-lighten($hsl, $percentage, $alpha: null) {
+
+	@if $alpha !=null {
+		@return color-mix(in hsl, $hsl $alpha, white $percentage);
+	}
+
+	@else {
+		@return color-mix(in hsl, $hsl, white $percentage);
+	}
+
+}
+
+@function fn-darken($hsl, $percentage, $alpha: null) {
+
+	@if $alpha !=null {
+		@return color-mix(in hsl, $hsl $alpha, black $percentage);
+	}
+
+	@else {
+		@return color-mix(in hsl, $hsl, black $percentage);
+	}
+
+}

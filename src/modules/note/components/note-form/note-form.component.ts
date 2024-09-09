@@ -9,6 +9,9 @@ import { EditFormImpl, NOTE_FORM, NoteForm } from './note-form';
 	templateUrl: './note-form.component.html',
 	styleUrls: ['./note-form.component.scss'],
 	providers: [{ provide: NOTE_FORM, useClass: EditFormImpl }],
+	host: {
+		'class': 'component'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NoteFormComponent {

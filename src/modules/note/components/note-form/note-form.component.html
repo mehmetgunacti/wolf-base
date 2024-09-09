@@ -43,6 +43,28 @@
 </section>
 <footer>
 
-	<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>
+	<!-- <button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button> -->
+
 
 </footer>
+<div style="display: grid; gap: 1rem; justify-content: center; margin-top: 5rem;">
+	<div style="display: flex; gap: 1rem;">
+		<button class="sm"><span class="icon material-symbols-outlined">save</span> primary</button>
+		<button class="sm" disabled><span class="icon material-symbols-outlined">save</span> disabled</button>
+		<button class="sm danger"><span class="icon material-symbols-outlined">save</span> error</button>
+	</div>
+	<div style="display: flex; gap: 1rem;">
+		<button><span class="icon material-symbols-outlined">save</span> primary</button>
+		<button disabled><span class="icon material-symbols-outlined">save</span> disabled</button>
+		<button class="danger"><span class="icon material-symbols-outlined">save</span> error</button>
+		<button class="link"><span class="icon material-symbols-outlined">save</span>error</button>
+	</div>
+	<div style="display: flex; gap: 1rem;">
+		<button class="lg"><span class="icon material-symbols-outlined">save</span> primary</button>
+		<button class="lg" disabled><span class="icon material-symbols-outlined">save</span>disabled</button>
+		<button class="lg danger">error</button>
+		<button class="lg link">error</button>
+		<button class="lg link"><span class="icon material-symbols-outlined">save</span>error</button>
+	</div>
+</div>
+

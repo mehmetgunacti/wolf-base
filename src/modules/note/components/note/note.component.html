@@ -1,6 +1,6 @@
 @if (note) {
 
-	<div note_main>
+	<div note_main class="component dark">
 
 		<div note_parents>
 
@@ -45,7 +45,7 @@
 
 @if (children.length > 0) {
 
-	<div note_children>
+	<div note_children class="component dark">
 
 		<div note_nested>Child Notes</div>
 		@for (note of children; track note) {

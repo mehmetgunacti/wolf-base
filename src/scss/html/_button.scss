@@ -1,339 +1,133 @@
 @import 'variables';
 @import 'mixins';
 
-%button {
+@mixin mx-button {
 
-	--button-width				: 9rem;
+	--btn-font-size			: 1.6rem;
+	--btn-padding			: var(--gap-sm) var(--gap);
+	--btn-min-width			: 8rem;
+	--btn-border-radius		: var(--border-radius-sm);
 
-	position					: relative;
-	display						: inline-flex;
-	align-items					: center;
-	justify-content				: center;
+	--btn-text-color		: #{fn-color(btn-default-text-color)};
+	--btn-bg-color			: #{fn-color(btn-default-bg-color)};
+	--btn-border-color		: #{fn-color(btn-default-border-color)};
 
-	background-image			: none;
-	cursor						: pointer;
-	text-decoration				: none;
-	white-space					: pre;
+	padding					: var(--btn-padding);
+	min-width				: var(--btn-min-width);
 
-	padding						: var(--gap) var(--gap-lg);
-	font-size					: 1.6rem;
-	line-height					: 1;
-	min-width					: var(--button-width);
+	font-size				: var(--btn-font-size);
+	text-align				: center;
 
-	border-radius				: var(--border-radius-sm);
-	border-width				: 1px;
-	border-style				: solid;
+	color					: var(--btn-text-color);
+	background-color		: var(--btn-bg-color);
 
-	color						: fn-hsl(text);
-	background-color			: fn-hsl(button-bg);
-	border-color				: fn-hsl(button-bg, (lig: "- 10%"));
+	border-color			: var(--btn-border-color);
+	border-radius			: var(--btn-border-radius);
+	border-width			: 1px;
+	border-style			: solid;
 
-	transition					: color $transition, $bg-transition, border-color $transition;
+	background-image		: none;
+	text-decoration			: none;
+	white-space				: pre;
+	cursor					: pointer;
 
-	& > .badge {
+	transition				: color $transition, $bg-transition, border-color $transition;
 
-		position			: absolute;
-		bottom				: 2px;
-		right				: 2px;
-		padding				: 4px 6px;
-		background-color	: fn-hsl(accent);
-		border-radius		: 25px;
-		pointer-events		: none;
+	&:hover {
 
-		line-height			: 1;
-		font-size			: xx-small;
-	    font-weight			: bold;
+		--btn-bg-color		: #{fn-color(btn-default-bg-color-hover)};
 
 	}
 
-	&[data-badge]::after,
-	&[data-badge-empty]::after, {
+	&:active {
 
-		content: attr(data-badge);
-		position			: absolute;
-		bottom				: 0;
-		right				: 0;
-		padding				: 4px 6px;
-		background-color	: fn-hsl(accent);
-		border-radius		: 25px;
-		pointer-events		: none;
-
-		line-height			: 1;
-		font-size			: xx-small;
-	    font-weight			: bold;
+		--btn-bg-color		: #{fn-color(btn-default-bg-color-active)};
 
 	}
 
-	&[data-badge="0"]::after,
-	&:not([data-badge])::after {
-
-		display: none;
-
-	}
-
-	& > span {
-
-		color					: inherit;
-		background-color		: unset;
-
-	}
-
-	&:hover,
-	&:focus {
-
-		color					: fn-hsl(text);
-		background-color		: fn-hsl(button-bg, (lig: "- 5%"));
-		border-color			: fn-hsl(button-bg, (lig: "- 10%"));
-
-	}
-
-	// &:focus,
 	&:focus-visible {
 
 		@include mx-outline;
 
 	}
 
-	&:active {
-
-		color					: fn-hsl(text);
-		background-color		: fn-hsl(button-bg, (lig: "- 10%"));
-		border-color			: fn-hsl(button-bg, (lig: "- 10%"));
-
-
-	}
-
-	&.icon-only {
-
-		--col-button-bg-alp			: 0;
-
-		border						: none;
-		padding						: 0.8rem;
-		min-width					: unset;
-
-		&:hover {
-
-			--col-button-bg-hue		: 0deg;
-			--col-button-bg-sat		: 0%;
-			--col-button-bg-lig		: 100%;
-			--col-button-bg-alp		: 0.09;
-
-		}
-
-		&.primary {	color			: fn-hsl(primary); }
-		&.success { color			: fn-hsl(success); }
-		&.info { color				: fn-hsl(info);	}
-		&.warn { color				: fn-hsl(warn); }
-		&.error { color				: fn-hsl(error); }
-
-		&[disabled] {
-
-			color					: fn-hsl(text, (alp: "- 0.8"));
-			background-color		: unset;
-
-		}
-
-		&:has(span + span) {
-
-			gap						: var(--gap-xs);
-
-		}
-
-	}
-
-	&.rounded {
-
-		--border-radius-sm		: 25px;
-		min-width				: auto;
-		padding					: var(--gap);
-
-	}
-
-	&.square {
-
-		min-width			: unset;
-		width				: var(--input-element-height);
-		height				: var(--input-element-height);
-
-	}
-
-	&.medium {
-
-		font-size			: var(--font-size-sm);
-		padding				: var(--gap-sm);
-
-	}
-
-	&.small {
-
-		font-size			: var(--font-size-xs);
-		padding				: var(--gap-xs);
-
-		& > .material-symbols-outlined {
-
-			font-size: var(--font-size-h5);
-
-		}
-
-	}
-
-	&.align-left {
-
-		justify-content		: flex-start;
-
-	}
-
-	&.primary {
-
-		--col-button-bg-hue				: var(--col-primary-hue);
-		--col-button-bg-sat				: var(--col-primary-sat);
-		--col-button-bg-lig				: var(--col-primary-lig);
-		--col-button-bg-alp				: var(--col-primary-alp);
-		color							: fn-hsl(text);
-
-	}
-
-	&.success {
-
-		--col-button-bg-hue				: var(--col-success-hue);
-		--col-button-bg-sat				: var(--col-success-sat);
-		--col-button-bg-lig				: var(--col-success-lig);
-		--col-button-bg-alp				: var(--col-success-alp);
-		color							: fn-hsl(text);
-
-	}
-
-	&.info {
-
-		--col-button-bg-hue				: var(--col-info-hue);
-		--col-button-bg-sat				: var(--col-info-sat);
-		--col-button-bg-lig				: var(--col-info-lig);
-		--col-button-bg-alp				: var(--col-info-alp);
-		color							: fn-hsl(text);
-
-	}
-
-	&.warn {
-
-		--col-button-bg-hue				: var(--col-warn-hue);
-		--col-button-bg-sat				: var(--col-warn-sat);
-		--col-button-bg-lig				: var(--col-warn-lig);
-		--col-button-bg-alp				: var(--col-warn-alp);
-		color							: fn-hsl(text);
-
-	}
-
-	&.error {
-
-		--col-button-bg-hue				: var(--col-error-hue);
-		--col-button-bg-sat				: var(--col-error-sat);
-		--col-button-bg-lig				: var(--col-error-lig);
-		--col-button-bg-alp				: var(--col-error-alp);
-		color							: fn-hsl(text);
-
-	}
-
-	&.tag {
-
-		--col-button-bg-hue		: var(--col-accent-hue);
-		--col-button-bg-sat		: var(--col-accent-sat);
-		--col-button-bg-lig		: var(--col-accent-lig);
-		--col-button-bg-alp		: var(--col-accent-alp);
-
-		padding				: var(--gap-xxs) var(--gap-sm);
-		font-size			: 1.2rem;
-		line-height			: 1.2;
-		border				: 1px solid transparent;
-		min-width			: unset;
-		border-radius		: 15px;
-
-		& > .material-symbols-outlined {
-
-			font-size		: 1.4rem;
-			margin			: var(--gap-xxs);
-
-		}
-
-		&.small {
-
-			padding			: var(--gap-xs);
-			padding			: var(--gap-xxs) var(--gap-sm);
-
-		}
-
-		&.xs {
-
-			font-size		: var(--font-size-xxs);
-			padding			: 2px 7px;
-
-		}
-
-	}
-
-	&.text-only {
-
-		--col-button-bg-alp			: 0;
-
-		border						: none;
-		padding						: 0.8rem;
-		min-width					: unset;
-
-		&.primary {
-
-			color					: fn-hsl(primary);
-
-		}
-
-		&.success {
-
-			color					: fn-hsl(success);
-
-		}
-
-		&.info {
-
-			color					: fn-hsl(info);
-
-		}
-
-		&.warn {
-
-			color					: fn-hsl(warn);
-
-		}
-
-		&.error {
-
-			color					: fn-hsl(error);
-
-		}
-
-		&:hover {
-
-			// --col-button-bg-hue		: 0deg;
-			// --col-button-bg-sat		: 0%;
-			// --col-button-bg-lig		: 100%;
-			--col-button-bg-alp		: 0.09;
-
-		}
-
-		&[disabled] {
-
-			color					: fn-hsl(text-secondary, (alp: "- 0.2"));
-			background-color		: unset;
-
-		}
-
-	}
-
 	&[disabled] {
 
-		color					: fn-hsl(text-secondary);
-		--col-button-bg-hue		: 0deg;
-		--col-button-bg-sat		: 0%;
-		--col-button-bg-lig		: 100%;
-		--col-button-bg-alp		: 0.09;
-		cursor					: default;
+		--btn-text-color		: #{fn-color(btn-disabled-text-color)};
+		--btn-bg-color			: #{fn-color(btn-disabled-bg-color)};
+		--btn-bg-color-hover	: #{fn-color(btn-disabled-bg-color-hover)};
+		--btn-bg-color-active	: #{fn-color(btn-disabled-bg-color-active)};
+		--btn-border-color		: #{fn-color(btn-disabled-border-color)};
+		cursor					: not-allowed;
+
+	}
+
+	&.danger {
+
+		--btn-text-color		: #{fn-color(btn-danger-text-color)};
+		--btn-bg-color			: #{fn-color(btn-danger-bg-color)};
+		--btn-border-color		: #{fn-color(btn-danger-border-color)};
+
+		&:hover {
+
+			--btn-bg-color		: #{fn-color(btn-danger-bg-color-hover)};
+
+		}
+
+		&:active {
+
+			--btn-bg-color		: #{fn-color(btn-danger-bg-color-active)};
+
+		}
+
+	}
+
+	&.link {
+
+		--btn-text-color		: #{fn-color(btn-link-text-color)};
+		--btn-bg-color			: #{fn-color(btn-link-bg-color)};
+		--btn-border-color		: #{fn-color(btn-link-border-color)};
+
+		&:hover {
+
+			--btn-bg-color		: #{fn-color(btn-link-bg-color-hover)};
+
+		}
+
+		&:active {
+
+			--btn-bg-color		: #{fn-color(btn-link-bg-color-active)};
+			--btn-border-color	: #{fn-color(btn-link-text-color)};
+
+		}
+
+	}
+
+	&.sm {
+
+		--btn-min-width	: 7rem;
+		--btn-font-size	: 1.3rem;
+		--btn-padding	: var(--gap-xs) var(--gap-sm);
+
+	}
+
+	&.lg {
+
+		--btn-min-width	: 9rem;
+		--btn-font-size	: 1.9rem;
+		--btn-padding	: var(--gap) var(--gap-lg);
+
+	}
+
+	&:has(.icon) {
+
+		@include mx-flex-center-y;
+
+	}
+
+	& > .icon {
+
+		font-size	: 1.4em;
 
 	}
 
@@ -342,6 +136,6 @@
 button,
 .button {
 
-	@extend %button;
+	@include mx-button;
 
 }

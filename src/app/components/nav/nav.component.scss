@@ -38,7 +38,7 @@
 			@include mx-flex-center-y;
 			height				: $nav-half-width;
 			border-radius		: var(--border-radius);
-			color				: fn-hsl(text);
+			color				: fn-color(text);
 			cursor				: pointer;
 			transition			: $bg-transition;
 			text-decoration		: none;

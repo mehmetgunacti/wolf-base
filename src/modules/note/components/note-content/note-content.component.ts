@@ -5,6 +5,9 @@ import { Note, NoteContent } from 'lib/models';
 	selector: 'app-note-content',
 	templateUrl: './note-content.component.html',
 	styleUrl: './note-content.component.scss',
+	host: {
+		'class': 'component'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NoteContentComponent {
