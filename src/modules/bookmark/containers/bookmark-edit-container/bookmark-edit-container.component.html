@@ -1,25 +1,18 @@
-<w-overlay-container>
-
-	<ng-container card_title>Edit Bookmark</ng-container>
-	<ng-container card_buttons>
-
-		<button
-			class="icon-only rounded"
-			(click)="onClose()"
-			title="Close">
-			<span class="material-symbols-outlined">close</span>
-		</button>
-
-	</ng-container>
-
-	<app-bookmark-form
-		[bookmark]="bookmark$ | async"
-		[tagSuggestions]="tagSuggestions$ | async"
-		[titleLookupUrl]="titleLookup$ | async"
-		(create)="onCreate($event)"
-		(update)="onUpdate($event.id, $event.bookmark)"
-		(remove)="onRemove($event)"
-		(tagInput)="onTagInput($event)"
-		(titleLookup)="onTitleLookup($event)"></app-bookmark-form>
-
-</w-overlay-container>
+Edit Bookmark
+<br>
+<button
+	class="icon-only rounded"
+	(click)="onClose()"
+	title="Close">
+	<span class="material-symbols-outlined">close</span>
+</button>
+<br>
+<app-bookmark-form
+	[bookmark]="bookmark$ | async"
+	[tagSuggestions]="tagSuggestions$ | async"
+	[titleLookupUrl]="titleLookup$ | async"
+	(create)="onCreate($event)"
+	(update)="onUpdate($event.id, $event.bookmark)"
+	(remove)="onRemove($event)"
+	(tagInput)="onTagInput($event)"
+	(titleLookup)="onTitleLookup($event)"></app-bookmark-form>
