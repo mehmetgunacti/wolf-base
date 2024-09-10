@@ -14,7 +14,7 @@ export class DOMService {
 		const existing = this.checkLinkElement(url);
 		if (existing) {
 
-			console.info(`${url} already loaded.`);
+			// console.info(`${url} already loaded.`);
 			return of(url); // dummy value
 
 		}
@@ -62,7 +62,7 @@ export class DOMService {
 		const existing = this.checkScriptElement(src);
 		if (existing) {
 
-			console.info(`${src} already loaded.`);
+			// console.info(`${src} already loaded.`);
 			return of(src); // dummy value
 
 		}
