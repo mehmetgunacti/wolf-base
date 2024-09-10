@@ -1,7 +1,7 @@
 <w-portal>
 
 	<button
-		class="icon-only"
+		class="link"
 		(click)="fromClipboard()"
 		[class.shake]="isShaking$ | async"
 		title="Create from copied URL">
@@ -9,26 +9,22 @@
 	</button>
 
 	<button
-		class="icon-only"
+		class="link"
 		(click)="openAddDialog()">
 		<span class="material-symbols-outlined">bookmark_add</span> Bookmark
 	</button>
 
+	<button (click)="open()">Open</button>
+
 </w-portal>
 
-<!-- <dialog appModal [modalOpen]="showNew()" (close)="onClose()">
-	@if (showNew()) {
-		<app-bookmark-edit-container @fadeOut/>
-	}
-</dialog> -->
+@if (showNew()) {
 
-<!-- @if (showNew()) {
+	<w-modal (close)="close()">
+		<app-bookmark-edit-container/>
+	</w-modal>
 
-	<dialog appModal (close)="onClose()" @delayDestroy>
-		<app-bookmark-edit-container />
-	</dialog>
-
-} -->
+}
 
 <!-- Search and Tag-cloud -->
 <app-bookmarks-search-and-tag-cloud-container/>

@@ -1,21 +1,20 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild, inject, output, viewChild } from '@angular/core';
-import { fadeInFadeOutTrigger, fadeInTrigger, fadeOutTrigger } from '@lib';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, output, viewChild } from '@angular/core';
+import { delayDestroyTrigger } from '@lib';
 
 @Component({
-	selector: 'app-modal',
+	selector: 'w-modal',
 	standalone: true,
 	templateUrl: './modal.component.html',
 	styleUrls: ['./modal.component.scss'],
-	animations: [fadeInTrigger, fadeOutTrigger],
+	animations: [delayDestroyTrigger],
+	host: { '[@delayDestroy]': '' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalComponent implements OnInit {
 
-	// @ViewChild('appDialog', { static: true }) dialog1!: ElementRef<HTMLDialogElement>;
-	private dialog = viewChild.required<ElementRef<HTMLDialogElement>>('appDialog');
-	// private inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
+	private dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
 
-	dialogClose = output<void>();
+	close = output<void>();
 
 	ngOnInit(): void {
 
@@ -27,22 +26,26 @@ export class ModalComponent implements OnInit {
 	ngOnDestroy(): void {
 
 		this.dialog().nativeElement.close();
-		// this.cdr.detectChanges();
 		console.log('ModalComponent ngOnDestroy');
 
 	}
 
-	onClick(event: MouseEvent): void {
+	onMouseDown(event: MouseEvent): void {
 
-		var rect = this.dialog().nativeElement.getBoundingClientRect();
-		var isInDialog = (
-			rect.top <= event.clientY &&
-			event.clientY <= rect.top + rect.height &&
-			rect.left <= event.clientX &&
-			event.clientX <= rect.left + rect.width
-		);
-		if (!isInDialog)
-			this.dialogClose.emit();
+		/* For detecting backdrop:
+		 *  - set dialog padding and border to 0
+		 *  - set dialog overflow to 'hidden'
+		 *  - wrap content in <div>
+		 *    - handle scrollbars inside the <div> (overflow: auto)
+		 *  - check event.target === event.currentTarget
+		 * event.target:
+		 *   The actual element that was clicked on or interacted with.
+		 * event.currentTarget:
+		 *   This is the element to which the event handler is attached (<dialog>).
+		*/
+		const close = event.target === event.currentTarget;
+		if (close)
+			this.close.emit();
 
 	}
 

@@ -1,5 +1,5 @@
-<dialog #appDialog class="component" (click)="onClick($event)" @fadeIn @fadeOut>
+<dialog #dialog (mousedown)="onMouseDown($event)" [@delayDestroy]="{ delay: '5s' }">
 
-	<ng-content></ng-content>
+	<ng-content/>
 
 </dialog>

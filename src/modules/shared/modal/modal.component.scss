@@ -2,19 +2,6 @@
 @import 'mixins';
 :host {
 
-	display		: contents;
-	dialog {
-
-		display		: contents;
-		z-index	: $overlay-z-index;
-		&::backdrop {
-
-			// background-color: fn-color(bg-overlay);
-			background	: fn-color(bg-overlay);
-			z-index		: $overlay-backdrop-z-index;
-
-		}
-
-	}
+	display	: contents;
 
 }

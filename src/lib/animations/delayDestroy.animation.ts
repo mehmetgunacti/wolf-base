@@ -4,8 +4,9 @@ export const delayDestroyTrigger = trigger('delayDestroy', [
 
 	transition(':leave', [
 
-		style({})
+		style({}),
+		animate('{{duration}}', style({}))
 
-	], { delay: 2000 })
+	], { params: { duration: '2s' } })
 
 ]);

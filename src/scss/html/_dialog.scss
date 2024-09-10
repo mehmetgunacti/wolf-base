@@ -1,7 +1,7 @@
 @import 'variables';
 @import 'mixins';
 
-$transitionDialog		: 1000ms;
+$transitionDialog		: 700ms;
 $transitionBackdrop		: 500ms;
 
 dialog {
@@ -16,6 +16,7 @@ dialog {
 	border				: 0;
     padding				: 0;
     background-color	: transparent;
+	overflow			: hidden;
 
 	&[open] {
 
