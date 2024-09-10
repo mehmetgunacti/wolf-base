@@ -119,15 +119,9 @@
 
 	}
 
-	&:has(.icon) {
+	&:has(span) {
 
 		@include mx-flex-center-y;
-
-	}
-
-	& > .icon {
-
-		font-size	: 1.4em;
 
 	}
 
