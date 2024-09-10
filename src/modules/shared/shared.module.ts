@@ -17,6 +17,7 @@ import { LanguagesComponent } from './languages/languages.component';
 import { NoteHeaderComponent } from './note-header/note-header.component';
 import { WordComponent } from './word/word.component';
 import { RequiredValidatorDirective } from 'lib/directives/required-validator.directive';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
 	declarations: [
@@ -43,6 +44,7 @@ import { RequiredValidatorDirective } from 'lib/directives/required-validator.di
 		InputModule,
 		CdkMenuModule,
 		TagCloudModule,
+		ModalComponent,
 		SanitizeHtmlModule,
 		DisplayModule,
 		TimePastModule,
@@ -55,6 +57,7 @@ import { RequiredValidatorDirective } from 'lib/directives/required-validator.di
 		PortalComponent,
 		AutofocusDirective,
 		RequiredValidatorDirective,
+		ModalComponent,
 		ReactiveFormsModule,
 		NoDataPipe,
 		FormatBytesPipe,

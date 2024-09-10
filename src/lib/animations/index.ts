@@ -1,4 +1,5 @@
 export * from './blink.animation';
+export * from './delayDestroy.animation';
 export * from './fade-in-fade-out.animation';
 export * from './fade.animation';
 export * from './quote-change.animation';

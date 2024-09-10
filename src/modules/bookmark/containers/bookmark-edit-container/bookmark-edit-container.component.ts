@@ -1,8 +1,7 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppEntityType, Bookmark, ToastConfiguration, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
-import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
 import { closeEditBookmarkDialog } from 'store/actions/bookmark.actions';
 import { showNotification } from 'store/actions/core-notification.actions';
 import * as entityActions from 'store/actions/entity.actions';
@@ -14,11 +13,10 @@ import { selCore_titleLookupUrl } from 'store/selectors/core/core-configuration.
 	selector: 'app-bookmark-edit-container',
 	templateUrl: './bookmark-edit-container.component.html',
 	styleUrls: ['./bookmark-edit-container.component.scss'],
-	animations: [dialogFadeOutTrigger],
-	host: { '[@fadeOut]': '' },
+	host: { 'class': 'component' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookmarkEditContainerComponent implements OnInit, AfterContentInit {
+export class BookmarkEditContainerComponent implements OnInit, OnDestroy, AfterContentInit {
 
 	private store: Store = inject(Store);
 
@@ -34,7 +32,13 @@ export class BookmarkEditContainerComponent implements OnInit, AfterContentInit 
 
 	}
 
-	ngOnInit(): void { }
+	ngOnInit(): void {
+		console.log('in BookmarkEditContainer ngOnInit');
+	}
+
+	ngOnDestroy(): void {
+		console.log('in BookmarkEditContainer ngOnDestroy');
+	}
 
 	ngAfterContentInit(): void {
 

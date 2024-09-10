@@ -1,0 +1,60 @@
+@import 'variables';
+@import 'mixins';
+
+$transitionDialog		: 1000ms;
+$transitionBackdrop		: 500ms;
+
+dialog {
+
+	display				: none;
+	opacity				: 0;
+
+	transition-property	: overlay display opacity;
+	transition-duration	: $transitionDialog;
+	transition-behavior	: allow-discrete;
+
+	border				: 0;
+    padding				: 0;
+    background-color	: transparent;
+
+	&[open] {
+
+		display: block;
+		opacity: 1;
+
+		&::backdrop {
+
+			opacity: 1;
+
+		}
+
+	}
+
+	&::backdrop {
+
+		opacity: 0;
+		transition-property: overlay display opacity;
+		transition-duration: $transitionBackdrop;
+		transition-behavior: allow-discrete;
+		background-color: fn-color(bg-overlay);
+
+	}
+
+}
+
+// note: css spec does not allow @starting-style nested
+@starting-style {
+
+	dialog[open] {
+
+		opacity: 0;
+
+	}
+
+	dialog[open]::backdrop {
+
+		opacity: 0;
+
+	}
+
+}

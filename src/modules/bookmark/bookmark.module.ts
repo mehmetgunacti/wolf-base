@@ -5,6 +5,7 @@ import { SharedModule } from 'modules/shared/shared.module';
 import { BookmarkRoutingModule } from './bookmark-routing.module';
 import * as fromConfig from './bookmark.config';
 import { OverlayContainerModule, CroppieModule } from '@lib';
+import { ModalDirective } from 'lib/directives/dialog.directive';
 
 @NgModule({
 	declarations: [...fromConfig.components],
@@ -14,7 +15,8 @@ import { OverlayContainerModule, CroppieModule } from '@lib';
 		ReactiveFormsModule,
 		SharedModule,
 		CroppieModule,
-		OverlayContainerModule
+		OverlayContainerModule,
+		ModalDirective,
 	]
 })
 export class BookmarkModule { }
