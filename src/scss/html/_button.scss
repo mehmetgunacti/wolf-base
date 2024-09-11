@@ -5,7 +5,6 @@
 
 	--btn-font-size			: var(--font-size);
 	--btn-padding			: var(--gap-sm) var(--gap);
-	--btn-min-width			: 6rem;
 	--btn-border-radius		: var(--border-radius-sm);
 
 	--btn-text-color		: #{fn-color(btn-default-text-color)};
@@ -13,7 +12,6 @@
 	--btn-border-color		: #{fn-color(btn-default-border-color)};
 
 	padding					: var(--btn-padding);
-	min-width				: var(--btn-min-width);
 
 	font-size				: var(--btn-font-size);
 	text-align				: center;
@@ -42,6 +40,7 @@
 	&:active {
 
 		--btn-bg-color		: #{fn-color(btn-default-bg-color-active)};
+		@include mx-outline;
 
 	}
 
@@ -59,6 +58,13 @@
 		--btn-bg-color-active	: #{fn-color(btn-disabled-bg-color-active)};
 		--btn-border-color		: #{fn-color(btn-disabled-border-color)};
 		cursor					: not-allowed;
+
+		&:active {
+
+			outline		: none;
+			box-shadow	: none;
+
+		}
 
 	}
 
@@ -117,7 +123,31 @@
 		&:active {
 
 			--btn-bg-color		: #{fn-color(btn-link-bg-color-active)};
-			--btn-border-color	: #{fn-color(btn-link-text-color)};
+
+		}
+
+	}
+
+	&.rounded {
+
+		--btn-border-radius		: var(--border-radius-round);
+		--btn-padding			: var(--gap-sm);
+
+		&.xs {
+
+			--btn-padding		: var(--gap-xxs);
+
+		}
+
+		&.sm {
+
+			--btn-padding		: var(--gap-xs);
+
+		}
+
+		&.lg {
+
+			--btn-padding		: var(--gap);
 
 		}
 
@@ -125,7 +155,6 @@
 
 	&.xs {
 
-		--btn-min-width		: 4rem;
 		--btn-font-size		: var(--font-size-xs);
 		--btn-padding		: var(--gap-xxs) var(--gap-sm);
 
@@ -133,7 +162,6 @@
 
 	&.sm {
 
-		--btn-min-width	: 5rem;
 		--btn-font-size	: var(--font-size-sm);
 		--btn-padding	: var(--gap-xs) var(--gap-sm);
 
@@ -141,7 +169,6 @@
 
 	&.lg {
 
-		--btn-min-width	: 7rem;
 		--btn-font-size	: var(--font-size-lg);
 		--btn-padding	: var(--gap-sm) var(--gap-xl);
 

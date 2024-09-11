@@ -45,8 +45,8 @@
 
 	--col-btn-link-text-color			: var(--col-text);
 	--col-btn-link-bg-color				: transparent;
-	--col-btn-link-bg-color-hover		: hsl(0 0 100% / 0.09);
-	--col-btn-link-bg-color-active		: #{fn-darken(var(--col-btn-link-text-color), 40%)};
+	--col-btn-link-bg-color-hover		: hsl(0 0 100% / 0.2);
+	--col-btn-link-bg-color-active		: hsl(0 0 100% / 0.2);
 	--col-btn-link-border-color			: transparent;
 
 	--col-btn-warn-text-color			: var(--col-text);
