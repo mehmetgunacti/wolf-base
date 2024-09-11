@@ -8,7 +8,7 @@
 		<ng-container card_buttons>
 
 			<button
-				class="icon-only rounded"
+				class="link rounded"
 				(click)="onClose(w.definitions[0].id)"
 				title="Close">
 				<span class="material-symbols-outlined">close</span>
@@ -21,7 +21,7 @@
 		<ng-container card_footer>
 
 			<div footer_buttons>
-				<button type="button" (click)="onEdit(w.definitions[0].id, w.id)" class="icon-only"><span class="material-symbols-outlined">edit</span> Edit</button>
+				<button type="button" (click)="onEdit(w.definitions[0].id, w.id)" class="link"><span class="material-symbols-outlined">edit</span> Edit</button>
 				<a
 					class="button icon-only align-left"
 					[href]="'https://www.google.com/search?q=' + w.name"

@@ -3,7 +3,7 @@
 	<w-portal>
 
 		<button
-			class="icon-only"
+			class="link"
 			[cdkMenuTriggerFor]="menu">
 			<span class="material-symbols-outlined">menu_open</span>
 		</button>
@@ -14,7 +14,7 @@
 
 				<button
 					cdkMenuItem
-					class="icon-only align-left"
+					class="link align-left"
 					[routerLink]="['/notes', note.id, 'new' ]">
 					<span class="material-symbols-outlined">post_add</span> Child Note
 				</button>
@@ -23,14 +23,14 @@
 
 				<button
 					cdkMenuItem
-					class="icon-only align-left"
+					class="link align-left"
 					[routerLink]="['/notes', note.id, 'edit' ]">
 					<span class="material-symbols-outlined">edit</span> Edit Note
 				</button>
 
 				<button
 					cdkMenuItem
-					class="icon-only align-left"
+					class="link align-left"
 					[routerLink]="['/notes', note.id, 'content', 'edit' ]">
 					<span class="material-symbols-outlined">edit_note</span> {{ (content$ | async) ? 'Edit' : 'Add '}} Content
 				</button>
@@ -39,14 +39,14 @@
 
 				<button
 					cdkMenuItem
-					class="icon-only align-left"
+					class="link align-left"
 					[routerLink]="['/logs', note.id]">
 					<span class="material-symbols-outlined">history</span> View Logs
 				</button>
 
 				<button
 					cdkMenuItem
-					class="icon-only align-left"
+					class="link align-left"
 					(click)="onRemove(note.id)">
 					<span class="material-symbols-outlined">delete</span> Remove Note
 				</button>
@@ -76,7 +76,7 @@
 
 			<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No note available</span>
 			<button
-				class="icon-only"
+				class="link"
 				[routerLink]="['/notes', 'new' ]">
 				<span class="material-symbols-outlined">post_add</span> Add Note
 			</button>

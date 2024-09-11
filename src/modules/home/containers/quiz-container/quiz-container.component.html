@@ -58,14 +58,14 @@
 			<div quiz_solve>
 
 				<button
-					class="icon-only small"
+					class="link small"
 					(click)="showAnswer(quiz.words[0])"
 					title="Show Answer">
 					<span class="material-symbols-outlined">contact_support</span>
 				</button>
 
 				<button
-					class="icon-only small"
+					class="link small"
 					(click)="increaseVisibility()"
 					[title]="btnTitle()"
 					[@upsideDown]="visibility() === QuizVisibility.CHOICES">

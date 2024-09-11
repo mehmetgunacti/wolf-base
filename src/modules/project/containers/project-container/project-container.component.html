@@ -3,7 +3,7 @@
 	<w-portal>
 
 		<button
-			class="icon-only"
+			class="link"
 			[cdkMenuTriggerFor]="menu">
 			<span class="material-symbols-outlined">menu_open</span>
 		</button>
@@ -14,7 +14,7 @@
 
 				<button
 					cdkMenuItem
-					class="icon-only align-left"
+					class="link align-left"
 					[routerLink]="['/projects', project.id, 'edit' ]">
 					<span class="material-symbols-outlined">edit</span> Edit Project
 				</button>
@@ -23,7 +23,7 @@
 
 				<button
 					cdkMenuItem
-					class="icon-only align-left"
+					class="link align-left"
 					[routerLink]="['/logs', project.id]">
 					<span class="material-symbols-outlined">history</span> View Logs
 				</button>
@@ -49,7 +49,7 @@
 		<legend>Tasks <small>({{ project.tasks.length }})</small></legend>
 		<legend>
 			<button
-				class="icon-only small"
+				class="link small"
 				(click)="onOpenNewTaskDialog()">
 				<span class="material-symbols-outlined">add</span>
 				Add Task
@@ -85,7 +85,7 @@
 
 			<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No project available</span>
 			<button
-				class="icon-only"
+				class="link"
 				[routerLink]="['/projects', 'new' ]">
 				<span class="material-symbols-outlined">post_add</span> Add Project
 			</button>

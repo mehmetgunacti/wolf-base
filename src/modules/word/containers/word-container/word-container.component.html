@@ -3,7 +3,7 @@
 	<w-portal>
 
 		<button
-			class="icon-only"
+			class="link"
 			[cdkMenuTriggerFor]="menu">
 			<span class="material-symbols-outlined">menu_open</span>
 		</button>
@@ -14,7 +14,7 @@
 
 				<button
 					cdkMenuItem
-					class="icon-only align-left"
+					class="link align-left"
 					[routerLink]="['/words', word.id, 'edit' ]">
 					<span class="material-symbols-outlined">edit</span> Edit Word
 				</button>
@@ -31,14 +31,14 @@
 
 				<button
 					cdkMenuItem
-					class="icon-only align-left"
+					class="link align-left"
 					[routerLink]="['/logs', word.id]">
 					<span class="material-symbols-outlined">history</span> View Logs
 				</button>
 
 				<button
 					cdkMenuItem
-					class="icon-only align-left"
+					class="link align-left"
 					(click)="onRemove(word.id)">
 					<span class="material-symbols-outlined">delete</span> Remove Word
 				</button>
@@ -63,7 +63,7 @@
 
 			<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No word available</span>
 			<button
-				class="icon-only"
+				class="link"
 				[routerLink]="['/words', 'new' ]">
 				<span class="material-symbols-outlined">post_add</span> Add Word
 			</button>

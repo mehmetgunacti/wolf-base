@@ -3,7 +3,7 @@
 	<!-- SAVE BUTTON -->
 	<button
 		cdkMenuItem
-		class="icon-only"
+		class="link"
 		(click)="onSave()"
 		title="Save Changes"
 		[disabled]="!control.dirty"
@@ -14,7 +14,7 @@
 	<!-- CANCEL BUTTON -->
 	<button
 		cdkMenuItem
-		class="icon-only"
+		class="link"
 		title="Close Editor"
 		(click)="onCancel(control.dirty)">
 		<span class="material-symbols-outlined">cancel</span>
@@ -26,7 +26,7 @@
 	<!-- PREVIEW BUTTON -->
 	<button
 		cdkMenuItem
-		class="icon-only"
+		class="link"
 		title="Open Preview"
 		(click)="onPreviewOpen()">
 		<span class="material-symbols-outlined">live_tv</span>
@@ -35,7 +35,7 @@
 	<!-- RECOVER BUTTON -->
 	<button
 		cdkMenuItem
-		class="icon-only"
+		class="link"
 		title="Recover"
 		[class.shake]="btnOpenRecovery()"
 		(click)="onRecoverOpen()">
@@ -48,7 +48,7 @@
 	<!-- UNDO BUTTON -->
 	<button
 		cdkMenuItem
-		class="icon-only"
+		class="link"
 		(click)="onUndo()"
 		title="Undo"
 		[disabled]="!undoCache.canUndo()"
@@ -59,7 +59,7 @@
 	<!-- REDO BUTTON -->
 	<button
 		cdkMenuItem
-		class="icon-only"
+		class="link"
 		(click)="onRedo()"
 		title="Redo"
 		[disabled]="!undoCache.canRedo()"
@@ -72,7 +72,7 @@
 
 	<!-- HEADING BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		[cdkMenuTriggerFor]="format_heading"
 		title="Heading"
 		cdkMenuItem>
@@ -84,7 +84,7 @@
 
 	<!-- BOLD BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addBold(editor))"
 		title="Bold"
 		cdkMenuItem>
@@ -93,7 +93,7 @@
 
 	<!-- ITALIC BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addItalic(editor))"
 		title="Italic"
 		cdkMenuItem>
@@ -102,7 +102,7 @@
 
 	<!-- STRIKETHROUGH BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addStrikethrough(editor))"
 		title="Strikethrough"
 		cdkMenuItem>
@@ -111,7 +111,7 @@
 
 	<!-- HIGHLIGHT BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addHighlight(editor))"
 		title="Highlight"
 		cdkMenuItem>
@@ -123,7 +123,7 @@
 
 	<!-- ALIGN CENTER BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addAlignCenter(editor))"
 		title="Align Center"
 		cdkMenuItem>
@@ -132,7 +132,7 @@
 
 	<!-- ALIGN RIGHT BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addAlignRight(editor))"
 		title="Align Right"
 		cdkMenuItem>
@@ -141,7 +141,7 @@
 
 	<!-- ALIGN JUSTIFY BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addAlignJustify(editor))"
 		title="Align Justify"
 		cdkMenuItem>
@@ -153,7 +153,7 @@
 
 	<!-- SUB BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addSub(editor))"
 		title="Subscript (H2O)"
 		cdkMenuItem>
@@ -162,7 +162,7 @@
 
 	<!-- SUP BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addSup(editor))"
 		title="Superscript (E=mc2)"
 		cdkMenuItem>
@@ -174,7 +174,7 @@
 
 	<!-- BULLETED LIST BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addListBulleted(editor))"
 		title="Bulleted List"
 		cdkMenuItem>
@@ -183,7 +183,7 @@
 
 	<!-- LIST NUMBERED BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addListNumbered(editor))"
 		title="Numbered List"
 		cdkMenuItem>
@@ -195,7 +195,7 @@
 
 	<!-- DECREASE INDENT BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.decreaseIndent(editor))"
 		title="Decrease Indent"
 		cdkMenuItem>
@@ -204,7 +204,7 @@
 
 	<!-- INCREASE INDENT BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.increaseIndent(editor))"
 		title="Increase Indent"
 		cdkMenuItem>
@@ -216,7 +216,7 @@
 
 	<!-- ADD CHECKBOX (TASK) BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addEmptyTask(editor))"
 		title="Task"
 		cdkMenuItem>
@@ -225,7 +225,7 @@
 
 	<!-- ADD TABLE BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		[cdkMenuTriggerFor]="table_menu"
 		title="Table"
 		cdkMenuItem>
@@ -234,7 +234,7 @@
 
 	<!-- CODE BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		[cdkMenuTriggerFor]="code_menu"
 		title="Code"
 		cdkMenuItem>
@@ -243,7 +243,7 @@
 
 	<!-- ADD BLOCKQUOTE BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		[cdkMenuTriggerFor]="blockquote_menu"
 		title="Blockquote"
 		cdkMenuItem>
@@ -256,7 +256,7 @@
 	<!-- IMAGE FROM CLIPBOARD BUTTON -->
 	<button
 		#btnImage
-		class="icon-only"
+		class="link"
 		(click)="addImage(btnImage)"
 		title="Image from Clipboard"
 		[class.shake]="btnImageShake()"
@@ -266,7 +266,7 @@
 
 	<!-- TOC BUTTON -->
 	<button
-		class="icon-only"
+		class="link"
 		(click)="updateEditor(actions.addToc(editor))"
 		title="Table of Contents"
 		cdkMenuItem>
@@ -308,7 +308,7 @@
 		<ng-container card_buttons>
 
 			<button
-				class="icon-only rounded"
+				class="link rounded"
 				(click)="onPreviewClose()">
 				<span class="material-symbols-outlined">close</span>
 			</button>
@@ -330,7 +330,7 @@
 
 			<button
 				cdkMenuItem
-				class="icon-only rounded"
+				class="link rounded"
 				[disabled]="!recoveryManager.hasPrev()"
 				[cdkMenuItemDisabled]="!recoveryManager.hasPrev()"
 				(click)="recoveryManager.previous()">
@@ -338,7 +338,7 @@
 			</button>
 			<button
 				cdkMenuItem
-				class="icon-only rounded"
+				class="link rounded"
 				[disabled]="!recoveryManager.hasNext()"
 				[cdkMenuItemDisabled]="!recoveryManager.hasNext()"
 				(click)="recoveryManager.next()">
@@ -346,14 +346,14 @@
 			</button>
 			<button
 				cdkMenuItem
-				class="icon-only rounded"
+				class="link rounded"
 				(click)="onRecoverReplace()">
 				<span class="material-symbols-outlined">published_with_changes</span>
 				<span>Replace</span>
 			</button>
 			<button
 				cdkMenuItem
-				class="icon-only rounded"
+				class="link rounded"
 				(click)="onRecoverClose()">
 				<span class="material-symbols-outlined">close</span>
 			</button>
@@ -393,7 +393,7 @@
 
 			<!-- H1 BUTTON -->
 			<button
-				class="icon-only"
+				class="link"
 				(click)="updateEditor(actions.addHeading(editor, '#'))"
 				title="Align Center"
 				cdkMenuItem>
@@ -402,7 +402,7 @@
 
 			<!-- H2 BUTTON -->
 			<button
-				class="icon-only"
+				class="link"
 				(click)="updateEditor(actions.addHeading(editor, '##'))"
 				title="Heading 2"
 				cdkMenuItem>
@@ -411,7 +411,7 @@
 
 			<!-- H3 BUTTON -->
 			<button
-				class="icon-only"
+				class="link"
 				(click)="updateEditor(actions.addHeading(editor, '###'))"
 				title="Heading 3"
 				cdkMenuItem>
@@ -420,7 +420,7 @@
 
 			<!-- H4 BUTTON -->
 			<button
-				class="icon-only"
+				class="link"
 				(click)="updateEditor(actions.addHeading(editor, '####'))"
 				title="Heading 4"
 				cdkMenuItem>
@@ -429,7 +429,7 @@
 
 			<!-- H5 BUTTON -->
 			<button
-				class="icon-only"
+				class="link"
 				(click)="updateEditor(actions.addHeading(editor, '#####'))"
 				title="Heading 5"
 				cdkMenuItem>
@@ -438,7 +438,7 @@
 
 			<!-- H6 BUTTON -->
 			<button
-				class="icon-only"
+				class="link"
 				(click)="updateEditor(actions.addHeading(editor, '######'))"
 				title="Heading 6"
 				cdkMenuItem>
@@ -497,7 +497,7 @@
 
 			<fieldset>
 				<!-- INLINE CODE BUTTON -->
-				<button class="icon-only small" (click)="updateEditor(actions.addInlineCode(editor))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addInlineCode(editor))" cdkMenuItem>
 					<span class="material-symbols-outlined small">code</span>
 					<span>Inline Code</span>
 				</button>
@@ -507,39 +507,39 @@
 			<fieldset>
 				<legend>Frequent</legend>
 
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>Empty Block</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'java'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'java'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>java</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'typescript'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'typescript'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>typescript</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'javascript'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'javascript'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>javascript</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'scss'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'scss'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>scss</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'bash'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'bash'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>bash</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'sql'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'sql'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>sql</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'xml'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'xml'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>xml</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'yaml'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'yaml'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>yaml</span>
 				</button>
@@ -549,63 +549,63 @@
 			<fieldset>
 				<legend>Other</legend>
 
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'asciidoc'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'asciidoc'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>asciidoc</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'autohotkey'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'autohotkey'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>autohotkey</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'c'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'c'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>c</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'cpp'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'cpp'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>cpp</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'css'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'css'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>css</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'dockerfile'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'dockerfile'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>dockerfile</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'gradle'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'gradle'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>gradle</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'http'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'http'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>http</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'ini'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'ini'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>ini</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'json'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'json'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>json</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'kotlin'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'kotlin'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>kotlin</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'markdown'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'markdown'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>markdown</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'powershell'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'powershell'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>powershell</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'properties'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'properties'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>properties</span>
 				</button>
-				<button class="icon-only small" (click)="updateEditor(actions.addCodeBlock(editor, 'python'))" cdkMenuItem>
+				<button class="link small" (click)="updateEditor(actions.addCodeBlock(editor, 'python'))" cdkMenuItem>
 					<span class="material-symbols-outlined small">chevron_right</span>
 					<span>python</span>
 				</button>

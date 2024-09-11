@@ -30,7 +30,7 @@
 				<w-textarea [formControl]="context.fc" [label]="'Context #' + ($index + 1)" [rows]="3"/>
 				<button
 					type="button"
-					class="icon-only small"
+					class="link small"
 					[title]="'Remove Sample #' + ($index + 1)"
 					(click)="form.removeContext(context.objectId)">
 					<span class="material-symbols-outlined warn">do_not_disturb_on</span>
@@ -49,7 +49,7 @@
 
 					<button
 						type="button"
-						class="icon-only small"
+						class="link small"
 						(click)="form.removeDefinition(definition.objectId)">
 						<span class="material-symbols-outlined warn">do_not_disturb_on</span> Remove Definition #{{ $index + 1 }}
 					</button>
@@ -76,7 +76,7 @@
 
 								<button
 									type="button"
-									class="icon-only small"
+									class="link small"
 									title="Add Language"
 									(click)="definition.addLanguage()">
 									<span class="material-symbols-outlined success">add_circle</span>
@@ -86,7 +86,7 @@
 
 								<button
 									type="button"
-									class="icon-only small"
+									class="link small"
 									[title]="'Remove Language #' + ($index + 1)"
 									(click)="definition.removeLanguage(lang.objectId)">
 									<span class="material-symbols-outlined warn">do_not_disturb_on</span>
@@ -108,7 +108,7 @@
 
 								<button
 									type="button"
-									class="icon-only small"
+									class="link small"
 									title="Add Sample"
 									(click)="definition.addSample()">
 									<span class="material-symbols-outlined success">add_circle</span>
@@ -118,7 +118,7 @@
 
 								<button
 									type="button"
-									class="icon-only small"
+									class="link small"
 									[title]="'Remove Sample #' + ($index + 1)"
 									(click)="definition.removeSample(sample.objectId)">
 									<span class="material-symbols-outlined warn">do_not_disturb_on</span>

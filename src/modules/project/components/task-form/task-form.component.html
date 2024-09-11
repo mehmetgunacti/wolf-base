@@ -4,7 +4,7 @@
 	<ng-container card_buttons>
 
 		<button
-			class="icon-only rounded"
+			class="link rounded"
 			(click)="onClose()"
 			title="Close">
 			<span class="material-symbols-outlined">close</span>
@@ -46,7 +46,7 @@
 				class="input-element"
 				(tagInput)="onTagInput($event)"
 				[suggestions]="tagSuggestions()"/>
-			<button type="button" class="icon-only" [title]="'Toggle \''+TAG_OPTIONAL+'\''" (click)="onToggleOptional()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_OPTIONAL)">preliminary</span></button>
+			<button type="button" class="link" [title]="'Toggle \''+TAG_OPTIONAL+'\''" (click)="onToggleOptional()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_OPTIONAL)">preliminary</span></button>
 		</div>
 
 		<div task_status_row>
@@ -80,7 +80,7 @@
 
 			@if (task(); as t) {
 
-				<button type="button" (click)="onCancel(t.id)" class="icon-only"><span class="material-symbols-outlined">cancel</span> Cancel</button>
+				<button type="button" (click)="onCancel(t.id)" class="link"><span class="material-symbols-outlined">cancel</span> Cancel</button>
 
 			}
 			<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>

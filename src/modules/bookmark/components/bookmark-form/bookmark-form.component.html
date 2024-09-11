@@ -35,20 +35,20 @@
 					[formControl]="fcUrl"
 					[label]="'URL' + (form.urls.controls.length > 1 && idx === 0 ? ' (Primary)' : '')"/>
 					<!-- (inputChanged)="checkUrl($event, fcUrl)"/> -->
-				<button *ngIf="idx === 0" type="button" class="icon-only" title="Add URL" (click)="addURL()"><span class="material-symbols-outlined">add</span></button>
-				<button *ngIf="idx > 0" type="button" class="icon-only" title="Remove URL" (click)="removeURL(idx)"><span class="material-symbols-outlined">remove</span></button>
+				<button *ngIf="idx === 0" type="button" class="link" title="Add URL" (click)="addURL()"><span class="material-symbols-outlined">add</span></button>
+				<button *ngIf="idx > 0" type="button" class="link" title="Remove URL" (click)="removeURL(idx)"><span class="material-symbols-outlined">remove</span></button>
 			</div>
 
 			<!-- NAME -->
 			<div>
 				<w-input [formControl]="form.name" label="Name"/>
-				<button type="button" class="icon-only" title="Parse URL" (click)="nameFromURL()"><span class="material-symbols-outlined">move_down</span></button>
+				<button type="button" class="link" title="Parse URL" (click)="nameFromURL()"><span class="material-symbols-outlined">move_down</span></button>
 			</div>
 
 			<!-- TITLE -->
 			<div>
 				<w-input [formControl]="form.title" label="Title"/>
-				<button type="button" class="icon-only" title="Lookup title" (click)="lookupTitle()"><span class="material-symbols-outlined">search</span></button>
+				<button type="button" class="link" title="Lookup title" (click)="lookupTitle()"><span class="material-symbols-outlined">search</span></button>
 			</div>
 
 			<!-- TAGS -->
@@ -59,7 +59,7 @@
 					class="input-element"
 					(tagInput)="onTagInput($event)"
 					[suggestions]="(tagSuggestions$ | async) ?? []"/>
-				<button type="button" class="icon-only" [title]="'Toggle \''+TAG_POPULAR+'\''" (click)="onTogglePopular()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_POPULAR)">favorite</span></button>
+				<button type="button" class="link" [title]="'Toggle \''+TAG_POPULAR+'\''" (click)="onTogglePopular()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_POPULAR)">favorite</span></button>
 			</div>
 
 		</div>
