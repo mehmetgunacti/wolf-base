@@ -1,0 +1,38 @@
+@mixin mx-box {
+
+	--box-color			: var(--col-text);
+	--box-padding		: var(--gap-xl) var(--gap-xxl);
+	--box-bg-color		: #{fn-color(bg-component)};
+	--box-border-radius	: var(--border-radius);
+
+	color				: var(--box-color);
+	padding				: var(--box-padding);
+	background-color	: var(--box-bg-color);
+	border-radius		: var(--box-border-radius);
+
+	&.dark {
+
+		--box-bg-color	: #{fn-color(bg-component-dark)};
+
+	}
+
+	&.hover:hover {
+
+		background-color	: color-mix(in hsl, var(--box-bg-color), black 20%);
+
+	}
+
+}
+
+.box {
+
+	@include mx-box;
+
+}
+
+.shadow-box {
+
+	@include mx-box;
+	@include mx-box-shadow;
+
+}

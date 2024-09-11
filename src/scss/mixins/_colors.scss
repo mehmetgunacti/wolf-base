@@ -6,17 +6,23 @@ $app-colors: (
 	bg-component: true,
 	bg-form-element: true,
 	bg-page: true,
+
 	bg-overlay: true,
+	bg-shadow: true,
+
 	text: true,
 	text-secondary: true,
+
 	primary: true,
 	success: true,
 	info: true,
 	warn: true,
 	error: true,
+
 	accent: true,
 	focus: true,
 	outline: true,
+
 	disabled: true,
 
 	btn-default-text-color: true,

@@ -1,5 +1,5 @@
-@mixin mx-box-shadow {
+@mixin mx-box-shadow($color: shadow) {
 
-	//box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 2px 5px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset
-	box-shadow: rgba(0, 0, 0, 0.4) 1px 4px 4px, rgba(0, 0, 0, 0.3) 5px 4px 2px -2px, rgba(0, 0, 0, 0.2) 0px -1px 1px inset
+	// $color	: "shadow" !default;
+	box-shadow: hsl(var(--col-#{$color}) / 0.4) 1px 4px 4px, hsl(var(--col-#{$color}) / 0.3) 5px 4px 2px -2px, hsl(var(--col-#{$color}) / 0.2) 0px -1px 1px inset
 }
