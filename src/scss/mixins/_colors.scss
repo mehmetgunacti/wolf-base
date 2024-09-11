@@ -16,6 +16,7 @@ $app-colors: (
 	error: true,
 	accent: true,
 	focus: true,
+	outline: true,
 	disabled: true,
 
 	btn-default-text-color: true,
@@ -36,11 +37,22 @@ $app-colors: (
 	btn-link-bg-color-active: true,
 	btn-link-border-color: true,
 
+	btn-warn-text-color: true,
+	btn-warn-bg-color: true,
+	btn-warn-bg-color-hover: true,
+	btn-warn-bg-color-active: true,
+	btn-warn-border-color: true,
+
 	btn-danger-text-color: true,
 	btn-danger-bg-color: true,
 	btn-danger-bg-color-hover: true,
 	btn-danger-bg-color-active: true,
-	btn-danger-border-color: true
+	btn-danger-border-color: true,
+
+	btn-tag-text-color: true,
+	btn-tag-bg-color: true,
+	btn-tag-bg-color-hover: true,
+	btn-tag-bg-color-active: true
 
 );
 

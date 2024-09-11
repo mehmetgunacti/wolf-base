@@ -1,9 +1,8 @@
 @mixin mx-outline($options: ()) {
 
-
 	$important	: map-get($options, "important");
 	$color		: map-get($options, "color");
-	$color		: "focus" !default;
+	$color		: "outline" !default;
 
 	outline			: 2px solid fn-color($color) #{$important};
 	outline-offset	: -2px;

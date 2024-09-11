@@ -3,9 +3,9 @@
 
 @mixin mx-button {
 
-	--btn-font-size			: 1.6rem;
+	--btn-font-size			: var(--font-size);
 	--btn-padding			: var(--gap-sm) var(--gap);
-	--btn-min-width			: 8rem;
+	--btn-min-width			: 6rem;
 	--btn-border-radius		: var(--border-radius-sm);
 
 	--btn-text-color		: #{fn-color(btn-default-text-color)};
@@ -62,6 +62,26 @@
 
 	}
 
+	&.warn {
+
+		--btn-text-color		: #{fn-color(btn-warn-text-color)};
+		--btn-bg-color			: #{fn-color(btn-warn-bg-color)};
+		--btn-border-color		: #{fn-color(btn-warn-border-color)};
+
+		&:hover {
+
+			--btn-bg-color		: #{fn-color(btn-warn-bg-color-hover)};
+
+		}
+
+		&:active {
+
+			--btn-bg-color		: #{fn-color(btn-warn-bg-color-active)};
+
+		}
+
+	}
+
 	&.danger {
 
 		--btn-text-color		: #{fn-color(btn-danger-text-color)};
@@ -103,25 +123,56 @@
 
 	}
 
+	&.xs {
+
+		--btn-min-width		: 4rem;
+		--btn-font-size		: var(--font-size-xs);
+		--btn-padding		: var(--gap-xxs) var(--gap-sm);
+
+	}
+
 	&.sm {
 
-		--btn-min-width	: 7rem;
-		--btn-font-size	: 1.3rem;
+		--btn-min-width	: 5rem;
+		--btn-font-size	: var(--font-size-sm);
 		--btn-padding	: var(--gap-xs) var(--gap-sm);
 
 	}
 
 	&.lg {
 
-		--btn-min-width	: 9rem;
-		--btn-font-size	: 1.9rem;
-		--btn-padding	: var(--gap) var(--gap-lg);
+		--btn-min-width	: 7rem;
+		--btn-font-size	: var(--font-size-lg);
+		--btn-padding	: var(--gap-sm) var(--gap-xl);
 
 	}
 
 	&:has(span) {
 
-		@include mx-flex-center-y;
+		display			: inline-flex;
+    	align-items		: center;
+
+	}
+
+	&.tag {
+
+		border				: 0;
+		min-width			: 1rem;
+		--btn-text-color	: #{fn-color(btn-tag-text-color)};
+		--btn-bg-color		: #{fn-color(btn-tag-bg-color)};
+		--btn-border-radius : var(--border-radius-xl);
+
+		&:hover {
+
+			--btn-bg-color	: #{fn-color(btn-tag-bg-color-hover)};
+
+		}
+
+		&:active {
+
+			--btn-bg-color	: #{fn-color(btn-tag-bg-color-active)};
+
+		}
 
 	}
 
