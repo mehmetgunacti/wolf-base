@@ -42,10 +42,11 @@
 	--z-index-bookmark-overlay	: 2000;
 	--z-index-croppie-close-btn	: 1000;
 
-
 	--nav-full-width		: 26rem;
 	--nav-half-width		: 6rem;
 	--header-height			: 6rem;
+
+	--transition			: 600ms cubic-bezier(0.25, 1, 0.25, 1);
 
 	@include bigScreen {
 

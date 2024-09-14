@@ -1,16 +1,13 @@
-@import 'variables';
-@import 'mixins';
-
-$transitionDialog		: 700ms;
-$transitionBackdrop		: 500ms;
-
 dialog {
+
+	--transitionDialog		: 700ms;
+	--transitionBackdrop	: 500ms;
 
 	display				: none;
 	opacity				: 0;
 
 	transition-property	: overlay display opacity;
-	transition-duration	: $transitionDialog;
+	transition-duration	: var(--transitionDialog);
 	transition-behavior	: allow-discrete;
 
 	border				: 0;
@@ -35,9 +32,9 @@ dialog {
 
 		opacity: 0;
 		transition-property: overlay display opacity;
-		transition-duration: $transitionBackdrop;
+		transition-duration: var(--transitionBackdrop);
 		transition-behavior: allow-discrete;
-		background-color: fn-color(bg-overlay);
+		background-color: var(--col-bg-overlay);
 
 	}
 

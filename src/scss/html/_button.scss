@@ -29,7 +29,7 @@
 	white-space				: pre;
 	cursor					: pointer;
 
-	transition				: color $transition, $bg-transition, border-color $transition;
+	transition				: color var(--transition), background-color var(--transition), border-color var(--transition);
 
 	&:hover {
 

@@ -1,131 +1,130 @@
-@import 'helper';
-@import 'variables';
-@import 'mixins';
-@import 'components';
+// @import 'helper';
+// // @import 'variables';
+// @import 'components';
 
-$button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 & buttons_2) side by side
+// // $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 & buttons_2) side by side
 
-.icon-container {
+// .icon-container {
 
-	@include mx-flex(null, null, center);
-	@include mx-gap-xxs;
+// 	@include mx-flex((jc: center));
+// 	@include mx-gap-xxs;
 
-}
+// }
 
-.quote-menu {
+// .quote-menu {
 
-	& > button > span:first-child {
+// 	& > button > span:first-child {
 
-		width: 15px;
-		height: var(--gap-xxl);
-		border-left: 6px solid;
+// 		width: 15px;
+// 		height: var(--gap-xxl);
+// 		border-left: 6px solid;
 
-		&.default {
-			border-left-color: fn-hsl(success);
-		}
+// 		&.default {
+// 			border-left-color: fn-hsl(success);
+// 		}
 
-		&.primary {
-			border-left-color: fn-hsl(primary);
-		}
+// 		&.primary {
+// 			border-left-color: fn-hsl(primary);
+// 		}
 
-		&.success {
-			border-left-color: fn-hsl(success);
-		}
+// 		&.success {
+// 			border-left-color: fn-hsl(success);
+// 		}
 
-		&.info {
-			border-left-color: fn-hsl(info);
-		}
+// 		&.info {
+// 			border-left-color: fn-hsl(info);
+// 		}
 
-		&.warn {
-			border-left-color: fn-hsl(warn);
-		}
+// 		&.warn {
+// 			border-left-color: fn-hsl(warn);
+// 		}
 
-		&.error {
-			border-left-color: fn-hsl(error);
-		}
+// 		&.error {
+// 			border-left-color: fn-hsl(error);
+// 		}
 
-	}
+// 	}
 
-}
+// }
 
-.code-menu {
+// .code-menu {
 
-	fieldset {
+// 	fieldset {
 
-		@include mx-flex-column-start;
-		& > legend {
+// 		@include mx-flex((dir: column, ai: start));
+// 		& > legend {
 
-			color		: var(--col-primary);
-			font-weight	: bold;
-			font-size	: var(--font-size-sm);
+// 			color		: var(--col-primary);
+// 			font-weight	: bold;
+// 			font-size	: var(--font-size-sm);
 
-		}
+// 		}
 
-	}
+// 	}
 
-}
+// }
 
-:host {
+// :host {
 
-	--display-element	: none;
-	min-height	: 100%;
+// 	--display-element	: none;
+// 	min-height	: 100%;
 
-	& > [buttons] {
+// 	& > [buttons] {
 
-		overflow-x	: auto;
-		@include mx-webkit-scrollbar;
+// 		overflow-x	: auto;
+// 		// @include mx-webkit-scrollbar;
 
-		& button[aria-expanded=true] {
+// 		& button[aria-expanded=true] {
 
-			background-color	: fn-hsl(bg-3);
-			transition			: background-color 0s;
+// 			background-color	: fn-hsl(bg-3);
+// 			transition			: background-color 0s;
 
-		}
+// 		}
 
-	}
+// 	}
 
-	& > [area] {
+// 	& > [area] {
 
-		& > textarea {
+// 		& > textarea {
 
-			@include mx-input;
-			@include mx-input-element-border;
-			background-color	: var(--col-bg-form-element);
+// 			@include mx-input;
+// 			@include mx-input-element-border;
+// 			background-color	: var(--col-bg-form-element);
 
-			tab-size			: 4;
-			white-space			: pre;
-			overflow			: auto;
-			@include mx-webkit-scrollbar;
+// 			tab-size			: 4;
+// 			white-space			: pre;
+// 			overflow			: auto;
+// 			// @include mx-webkit-scrollbar;
 
-			&:valid + label,
-			&:focus + label {
+// 			&:valid + label,
+// 			&:focus + label {
 
-				@include mx-input-label-up;
+// 				@include mx-input-label-up;
 
-			}
+// 			}
 
-		}
+// 		}
 
-		& > label {
+// 		& > label {
 
-			@include mx-input-label;
-			top		: 2rem;
+// 			@include mx-input-label;
+// 			top		: 2rem;
 
-			&.up {
+// 			&.up {
 
-				@include mx-input-label-up;
+// 				@include mx-input-label-up;
 
-			}
+// 			}
 
-			&.right {
+// 			&.right {
 
-				right	: 5px;
-				left	: unset;
+// 				right	: 5px;
+// 				left	: unset;
 
-			}
+// 			}
 
-		}
+// 		}
 
-	}
+// 	}
 
-}
+// }

@@ -8,24 +8,24 @@
 	display				: block;
 	height				: 100vh;
 	background-color	: var(--col-bg-page);
-	transition			: $bg-transition;
+	transition			: background-color var(--transition);
 
 	& > header {
 
 		position				: fixed;
-		z-index					: $z-index-header;
+		z-index					: var(--z-index-header);
 
 		top						: 0;
 		left					: 0;
 		right					: 0;
-		height					: $header-height;
+		height					: var(--header-height);
 
 		display					: flex;
 		padding					: var(--gap);
 		padding-left			: 0;
 
 		background-color		: var(--col-bg-header);
-		transition				: $bg-transition;
+		transition				: background-color var(--transition);
 
 		// @include mx-box-shadow;
 
@@ -33,30 +33,30 @@
 
 	& > main {
 
-		z-index				: $z-index-main;
+		z-index				: var(--z-index-main);
 
-		top					: $header-height;
+		top					: var(--header-height);
 		right				: 0;
-		height				: calc(100dvh - #{$header-height});
+		height				: calc(100dvh - var(--header-height));
 		left				: 0;
 
 		//@include mx-overflow-y-a;
 		// @include mx-webkit-scrollbar;
 
-		transition			: height $transition, left 0.6s $transition-timing-fn, $bg-transition;
+		transition			: height var(--transition), left var(--transitionr), background-color var(--transition);
 
 		@include bigScreen() {
 
 			// :host-context() <---
 			body.sidebar-full & {
 
-				left		: $nav-full-width;
+				left		: var(--nav-full-width);
 
 			}
 
 			body.sidebar-half & {
 
-				left		: $nav-half-width;
+				left		: var(--nav-half-width);
 
 			}
 
@@ -66,17 +66,17 @@
 
 	& > nav {
 
-		z-index				: $z-index-nav;
+		z-index				: var(--z-index-nav);
 
-		top					: $header-height;
+		top					: var(--header-height);
 		left				: 0;
-		height				: calc(100dvh - #{$header-height});
-		width				: $nav-full-width;
+		height				: calc(100dvh - var(--header-height));
+		width				: var(--nav-full-width);
 
 		overflow			: hidden;
 
 		background-color	: fn-color(bg-nav);
-		transition			: height $transition, width 0.6s $transition-timing-fn, margin-left 0.6s $transition-timing-fn, $bg-transition;
+		transition			: height var(--transition), width var(--transition), margin-left var(--transition), background-color var(--transition);
 
 		// @include mx-box-shadow;
 
@@ -84,26 +84,26 @@
 		body.sidebar-full & {
 
 			margin-left		: 0;
-			width			: $nav-full-width;
+			width			: var(--nav-full-width);
 
 		}
 
 		body.sidebar-half & {
 
 			margin-left		: 0;
-			width			: $nav-half-width;
+			width			: var(--nav-half-width);
 
 		}
 
 		body.sidebar-hidden & {
 
-			margin-left		: -$nav-full-width; // todo include nav shadow
-			width			: $nav-full-width;
+			margin-left		: -var(--nav-full-width); // todo include nav shadow
+			width			: var(--nav-full-width);
 
 			@include bigScreen {
 
-				margin-left		: -$nav-half-width;
-				width			: $nav-half-width;
+				margin-left		: -var(--nav-half-width);
+				width			: var(--nav-half-width);
 
 			}
 

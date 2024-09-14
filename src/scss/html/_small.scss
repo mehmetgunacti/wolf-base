@@ -3,6 +3,6 @@ small {
 	display		: block;
 	font-size	: var(--font-size-xs);
 	color		: var(--col-text-secondary);
-	transition	: $bg-transition, color $transition;
+	transition	: background-color var(--transition), color var(--transition);
 
 }

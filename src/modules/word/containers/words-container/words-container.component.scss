@@ -7,7 +7,7 @@
 
 // 	& > [word_entries] {
 
-// 		@include mx-scrollable(calc(100dvh - 4 * #{$header-height}));
+// 		@include mx-scrollable(calc(100dvh - 4 * var(--header-height)));
 
 // 		& > a {
 
@@ -15,7 +15,7 @@
 // 			padding				: var(--gap);
 // 			border-radius		: var(--border-radius-sm);
 // 			text-decoration		: none;
-// 			transition			: $bg-transition;
+// 			transition			: background-color var(--transition);
 
 // 			& > small {
 

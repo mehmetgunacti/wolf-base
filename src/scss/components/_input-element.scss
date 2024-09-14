@@ -1,7 +1,7 @@
 @mixin mx-input {
 
 	padding				: var(--gap);
-	color				: fn-hsl(text);
+	color				: var(--col-text);
 	border				: 0;
 	background-color	: transparent;
 	outline				: 0;
@@ -12,7 +12,7 @@
 
 @mixin mx-input-label {
 
-	@include mx-flex-center-y;
+	// @include mx-flex-ai-center;
 	position			: absolute;
 	top					: 50%;
 	left				: 5px;
@@ -21,7 +21,7 @@
 	border-radius		: var(--border-radius-xs);
 	padding				: 1px 5px;
 	font-size			: var(--font-size-sm);
-	transition			: all $transition, $bg-transition, border-color $transition;
+	transition			: all var(--transition), background-color var(--transition), border-color var(--transition);
 
 	& span {
 
@@ -53,11 +53,10 @@
 @mixin mx-input-element {
 
 	position				: relative;
-	// min-height				: $input-element-min-height;
 
 	@include mx-input-element-border;
 	background-color		: var(--col-bg-form-element);
-	transition				: $bg-transition, border-color $transition;
+	transition				: background-color var(--transition), border-color var(--transition);
 
 	& > input,
 	& > select,
@@ -86,16 +85,16 @@
 
 	}
 
-	&:has(:focus-visible) {
+	// &:has(:focus-visible) {
 
-		@include mx-outline;
-		& > label {
+	// 	// @include mx-outline;
+	// 	& > label {
 
-			@include mx-input-label-up;
+	// 		@include mx-input-label-up;
 
-		}
+	// 	}
 
-	}
+	// }
 
 	/*
 	* ng-valid    <-> ng-invalid
@@ -104,13 +103,13 @@
 	*/
 	&.ng-dirty.ng-invalid {
 
-		@include mx-outline((color: "error"));
+		// @include mx-outline((color: "error"));
 
 	}
 
 	&.ng-dirty.ng-valid {
 
-		@include mx-outline((color: "success"));
+		// @include mx-outline((color: "success"));
 
 	}
 

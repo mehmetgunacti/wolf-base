@@ -6,7 +6,7 @@
 		height						: 8px;
 		border-radius				: var(--border-radius-sm);
 		background-color			: color-mix(in hsl, var(--col-bg-page), transparent 40%); // , (lig: "+ 4%", alp: "0.4"));
-		transition					: $bg-transition;
+		transition					: background-color var(--transition);
 
 	}
 
@@ -14,7 +14,7 @@
 
 		border-radius				: var(--border-radius);
 		background-color			: var(--col-bg-page);
-		transition					: $bg-transition;
+		transition					: background-color var(--transition);
 
 	}
 

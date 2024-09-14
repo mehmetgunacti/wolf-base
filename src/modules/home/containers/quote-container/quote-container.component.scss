@@ -16,7 +16,7 @@
 
 // :host {
 
-// 	height			: 3 * $header-height;
+// 	height			: calc(3 * var(--header-height));
 // 	&::before {
 
 // 		--col-primary-alp: 0.5;

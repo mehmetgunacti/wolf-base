@@ -2,7 +2,7 @@
 // @import 'mixins';
 // @import 'variables';
 // @import 'helper';
-:host {
+// :host {
 	// :host-context(.sidebar-full) { <---
 	// body.sidebar-hidden & {
 
@@ -12,14 +12,14 @@
 
 	// body.sidebar-full & {
 
-	// 	width			: $nav-full-width;
+	// 	width			: var(--nav-full-width);
 
 	// }
 
 	// body.sidebar-half &,
 	// body.sidebar-hidden & {
 
-	// 	width			: $nav-half-width;
+	// 	width			: var(--nav-half-width);
 
 	// }
 
@@ -32,14 +32,14 @@
 	// 		--_hover-color		: transparent;
 
 	// 		@include mx-flex-center-y;
-	// 		height				: $nav-half-width;
+	// 		height				: var(--nav-half-width);
 	// 		border-radius		: var(--border-radius);
 	// 		color				: fn-color(text);
 	// 		cursor				: pointer;
-	// 		transition			: $bg-transition;
+	// 		transition			: background-color var(--transition);
 	// 		text-decoration		: none;
 
-	// 		width				: $nav-half-width;
+	// 		width				: var(--nav-half-width);
 	// 		overflow			: hidden;
 
 	// 		padding				: 0;
@@ -97,7 +97,7 @@
 
 	// 				padding				: var(--gap) var(--gap);
 	// 				border-radius		: var(--border-radius);
-	// 				transition			: $bg-transition;
+	// 				transition			: background-color var(--transition);
 
 	// 				&:not(:empty) {
 
@@ -137,7 +137,7 @@
 
 	// 		flex-direction	: row;
 	// 		align-items		: flex-end;
-	// 		height			: $nav-half-width;
+	// 		height			: var(--nav-half-width);
 
 	// 	}
 
@@ -145,7 +145,7 @@
 	// 	body.sidebar-hidden & {
 
 	// 		flex-direction	: column-reverse;
-	// 		width			: $nav-half-width;
+	// 		width			: var(--nav-half-width);
 
 	// 		& > button:last-child {
 
@@ -157,4 +157,4 @@
 
 	// }
 
-}
+// }

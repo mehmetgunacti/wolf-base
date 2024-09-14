@@ -6,7 +6,7 @@
     margin		: var(--gap-sm) var(--gap-xxs);
 	align-self	: stretch;
 
-	transition	: border-left $transition;
+	transition	: border-left var(--transition);
 
 }
 

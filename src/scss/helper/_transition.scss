@@ -1,6 +1,6 @@
 @mixin mx-transition-bg {
 
-	transition	: $bg-transition;
+	transition	: background-color var(--transition);
 
 }
 

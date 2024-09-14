@@ -1,16 +1,16 @@
-@import 'variables';
-@import 'mixins/responsive';
-@import 'helper';
+// @import 'variables';
+// @import 'mixins/responsive';
+// @import 'helper';
 
-#section-nav-button {
+// #section-nav-button {
 
-	@include mx-flex-center;
-	min-width: $header-height;
+// 	@include mx-flex-center;
+// 	min-width: var(--header-height);
 
-}
+// }
 
-#portal-outlet {
+// #portal-outlet {
 
-	@include mx-flex(center, end);
+// 	@include mx-flex((dir: row, ai: center, jc: end));
 
-}
+// }

@@ -57,7 +57,7 @@
 h1, h2, h3, h4, h5, h6 {
 
 	color		: var(--col-text);
-	transition	: color $transition;
+	transition	: color var(--transition);
 
 }
 
@@ -73,7 +73,7 @@ h2 {
 	@include mx-h2;
 	margin-bottom	: var(--gap-xxl);
 	border-bottom	: 1px solid var(--text-secondary);
-	transition		: border $transition;
+	transition		: border var(--transition);
 
 }
 

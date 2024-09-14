@@ -1,11 +1,6 @@
-$nav-full-width				: 26rem;
-$nav-half-width				: 6rem;
-$header-height				: 6rem;
-
-$transition-timing-fn		: cubic-bezier(0.25, 1, 0.25, 1);
-$transition					: 600ms $transition-timing-fn;
-$bg-transition				: background-color $transition;
-$input-element-min-height	: 4rem;
+// var(--transition-bg-color)-timing-fn		: cubic-bezier(0.25, 1, 0.25, 1);
+// var(--transition-bg-color)					: 600ms var(--transition-bg-color)-timing-fn;
+// $bg-transition				: background-color var(--transition-bg-color);
 
 /**********
 * Z-INDEX *

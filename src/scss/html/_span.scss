@@ -1,6 +1,6 @@
 span {
 
 	color		: var(--col-text);
-	transition	: $bg-transition, color $transition;
+	transition	: background-color var(--transition), color var(--transition);
 
 }

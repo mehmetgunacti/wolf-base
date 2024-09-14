@@ -10,7 +10,7 @@
 	padding				: var(--box-padding);
 	background-color	: var(--box-bg-color);
 	border-radius		: var(--box-border-radius);
-	transition			: $bg-transition;
+	transition			: background-color var(--transition);
 
 	&.box-dark {
 
