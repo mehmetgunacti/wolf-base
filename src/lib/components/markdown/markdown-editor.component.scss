@@ -1,124 +1,131 @@
-// @import 'helper';
-// @import 'variables';
-// @import 'mixins';
-// @import 'components';
+@import 'helper';
+@import 'variables';
+@import 'mixins';
+@import 'components';
 
-// $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 & buttons_2) side by side
+$button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 & buttons_2) side by side
 
-// .quote-menu {
+.icon-container {
 
-// 	& > button > span:first-child {
+	@include mx-flex(null, null, center);
+	@include mx-gap-xxs;
 
-// 		width: 15px;
-// 		height: var(--gap-xxl);
-// 		border-left: 6px solid;
+}
 
-// 		&.default {
-// 			border-left-color: fn-hsl(success);
-// 		}
+.quote-menu {
 
-// 		&.primary {
-// 			border-left-color: fn-hsl(primary);
-// 		}
+	& > button > span:first-child {
 
-// 		&.success {
-// 			border-left-color: fn-hsl(success);
-// 		}
+		width: 15px;
+		height: var(--gap-xxl);
+		border-left: 6px solid;
 
-// 		&.info {
-// 			border-left-color: fn-hsl(info);
-// 		}
+		&.default {
+			border-left-color: fn-hsl(success);
+		}
 
-// 		&.warn {
-// 			border-left-color: fn-hsl(warn);
-// 		}
+		&.primary {
+			border-left-color: fn-hsl(primary);
+		}
 
-// 		&.error {
-// 			border-left-color: fn-hsl(error);
-// 		}
+		&.success {
+			border-left-color: fn-hsl(success);
+		}
 
-// 	}
+		&.info {
+			border-left-color: fn-hsl(info);
+		}
 
-// }
+		&.warn {
+			border-left-color: fn-hsl(warn);
+		}
 
-// .code-menu {
+		&.error {
+			border-left-color: fn-hsl(error);
+		}
 
-// 	fieldset {
+	}
 
-// 		@include mx-flex-column-start;
-// 		& > legend {
+}
 
-// 			color		: var(--col-primary);
-// 			font-weight	: bold;
-// 			font-size	: var(--font-size-sm);
+.code-menu {
 
-// 		}
+	fieldset {
 
-// 	}
+		@include mx-flex-column-start;
+		& > legend {
 
-// }
+			color		: var(--col-primary);
+			font-weight	: bold;
+			font-size	: var(--font-size-sm);
 
-// :host {
+		}
 
-// 	--display-element	: none;
-// 	min-height	: 100%;
+	}
 
-// 	& > [buttons] {
+}
 
-// 		overflow-x	: auto;
-// 		@include mx-webkit-scrollbar;
+:host {
 
-// 		& button[aria-expanded=true] {
+	--display-element	: none;
+	min-height	: 100%;
 
-// 			background-color	: fn-hsl(bg-3);
-// 			transition			: background-color 0s;
+	& > [buttons] {
 
-// 		}
+		overflow-x	: auto;
+		@include mx-webkit-scrollbar;
 
-// 	}
+		& button[aria-expanded=true] {
 
-// 	& > [area] {
+			background-color	: fn-hsl(bg-3);
+			transition			: background-color 0s;
 
-// 		& > textarea {
+		}
 
-// 			@include mx-input;
-// 			@include mx-input-element-border;
-// 			background-color	: var(--col-bg-form-element);
+	}
 
-// 			tab-size			: 4;
-// 			white-space			: pre;
-// 			overflow			: auto;
-// 			@include mx-webkit-scrollbar;
+	& > [area] {
 
-// 			&:valid + label,
-// 			&:focus + label {
+		& > textarea {
 
-// 				@include mx-input-label-up;
+			@include mx-input;
+			@include mx-input-element-border;
+			background-color	: var(--col-bg-form-element);
 
-// 			}
+			tab-size			: 4;
+			white-space			: pre;
+			overflow			: auto;
+			@include mx-webkit-scrollbar;
 
-// 		}
+			&:valid + label,
+			&:focus + label {
 
-// 		& > label {
+				@include mx-input-label-up;
 
-// 			@include mx-input-label;
-// 			top		: 2rem;
+			}
 
-// 			&.up {
+		}
 
-// 				@include mx-input-label-up;
+		& > label {
 
-// 			}
+			@include mx-input-label;
+			top		: 2rem;
 
-// 			&.right {
+			&.up {
 
-// 				right	: 5px;
-//     			left	: unset;
+				@include mx-input-label-up;
 
-// 			}
+			}
 
-// 		}
+			&.right {
 
-// 	}
+				right	: 5px;
+				left	: unset;
 
-// }
+			}
+
+		}
+
+	}
+
+}
