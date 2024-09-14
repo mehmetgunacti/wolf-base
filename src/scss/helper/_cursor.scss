@@ -5,6 +5,4 @@
 }
 
 .cur-pointer	{ @include mx-cursor; }
-.cur-auto		{ @include mx-cursor(auto)}
-
-
+.cur-auto		{ @include mx-cursor(auto); }

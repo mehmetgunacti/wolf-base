@@ -1,11 +1,17 @@
-.v-divider {
+@mixin mx-v-divider {
 
 	display		: block;
-	border-left	: 1px solid fn-hsl(bg-1);
+	border-left	: 1px solid var(--col-bg-form-element);
     width		: 0;
     margin		: var(--gap-sm) var(--gap-xxs);
 	align-self	: stretch;
 
 	transition	: border-left $transition;
+
+}
+
+.v-divider {
+
+	@include mx-v-divider;
 
 }

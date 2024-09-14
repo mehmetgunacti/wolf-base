@@ -1,4 +1,4 @@
-.badge-container {
+@mixin mx-badge-container {
 
 	position	: relative;
 
@@ -13,8 +13,8 @@
 
 		padding-inline		: 0.4em;
 		padding-block		: 0.2em 0.1em;
-		background-color	: fn-color(accent);
-		border-radius		: 25px;
+		background-color	: var(--col-accent);
+		border-radius		: var(--border-radius-round);
 
 		line-height			: 1;
 		font-size			: 1.3ch;
@@ -43,24 +43,8 @@
 
 }
 
+.badge-container {
 
-// &:has(.badge) {
+	@include mx-badge-container;
 
-// 	position		: relative;
-
-// }
-
-// .badge {
-
-// 	position			: absolute;
-// 	bottom				: 2px;
-// 	right				: 2px;
-// 	padding				: 0.3em 0.5em;
-// 	background-color	: #{fn-color(accent)};
-// 	border-radius		: 25px;
-// 	pointer-events		: none;
-// 	line-height			: 1;
-// 	font-size			: var(--font-size-xs);
-// 	font-weight			: 700;
-
-// }
+}
