@@ -1,9 +1,1 @@
-@import 'helper';
-
-:host {
-
-	@extend %flex-start-center;
-	flex-wrap	: wrap;
-	gap			: var(--gap-xs);
-
-}
+:host {}

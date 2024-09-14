@@ -1,9 +1,9 @@
-<div toast-left>
+<div toast-left class="d-flex-center">
 
 	<span class="material-symbols-outlined">{{ iconClass }}</span>
 
 </div>
-<div toast-right>
+<div toast-right class="d-flex-column jc-center p pl-0 flex-1">
 
 	<div toast-title *ngIf="conf.summary">{{conf.summary}}</div>
 	<div *ngIf="conf.detail" [innerHTML]="conf.detail"></div>

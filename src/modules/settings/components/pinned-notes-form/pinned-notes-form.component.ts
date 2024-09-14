@@ -8,6 +8,7 @@ import { tap } from 'rxjs';
 	selector: 'app-pinned-notes-form',
 	templateUrl: './pinned-notes-form.component.html',
 	styleUrls: ['./pinned-notes-form.component.scss'],
+	host: { 'class': 'd-flex-column p flex-1' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PinnedNotesFormComponent {

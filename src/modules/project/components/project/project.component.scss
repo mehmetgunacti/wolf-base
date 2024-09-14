@@ -1,91 +1,43 @@
-@import 'helper';
-@import 'variables';
-@import 'components';
-@import 'mixins';
+// @import 'helper';
+// @import 'variables';
+// @import 'components';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	@include mx-flex-column;
-	gap			: var(--gap-sm);
+// 	[project_title_wrapper] {
 
-	[project_title_wrapper] {
+// 		// @include mx-card(3);
 
-		@include mx-card(3);
+// 		& > a {
 
-		& > a {
+// 			border-radius		: var(--border-radius-sm);
+// 			text-decoration		: none;
+// 			font-size			: var(--font-size-sm);
+// 			color				: var(--col-text-secondary);
 
-			@extend %flex-center-y;
-			padding				: var(--gap-xs);
-			border-radius		: var(--border-radius-sm);
-			text-decoration		: none;
-			font-size			: var(--font-size-sm);
-			gap					: var(--gap-xxs);
-			color				: fn-hsl(text-secondary);
-			transition			: $bg-transition;
+// 			& > span {
 
-			& > span {
+// 				color			: inherit;
+// 				font-size		: inherit;
 
-				color			: inherit;
-				font-size		: inherit;
+// 			}
 
-			}
+// 			&:hover {
 
-			&:hover {
+// 				background-color	: color-mix(in hsl, var(--col-bg-component-dark), white 10%);
 
-				background-color	: fn-hsl(bg-3, (lig: "+ 10%"));
+// 			}
 
-			}
+// 			// &:focus,
+// 			&:focus-visible {
 
-			// &:focus,
-			&:focus-visible {
+// 				outline				: 3px solid var(--col-focus);
 
-				outline				: 3px solid fn-hsl(focus);
+// 			}
 
-			}
+// 		}
 
-		}
+// 	}
 
-		& > [project_title] {
-
-			@include mx-flex-space-between-center;
-			@include mx-h1;
-
-		}
-
-		& > [project_info] {
-
-			@include mx-flex-column;
-			gap			: var(--gap-sm);
-			overflow	: hidden;
-
-			& > *:first-child {
-
-				margin-top	: var(--gap);
-
-			}
-
-			[row] {
-
-				@include mx-component(4);
-				padding		: var(--gap-lg);
-
-			}
-
-			[start_end_row] {
-
-				display		: flex;
-				gap			: var(--gap-sm);
-
-				& > div {
-
-					width	: 50%;
-
-				}
-
-			}
-
-		}
-
-	}
-
-}
+// }

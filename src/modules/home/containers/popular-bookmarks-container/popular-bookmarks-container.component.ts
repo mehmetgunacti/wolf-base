@@ -10,6 +10,7 @@ import * as coreSelectors from 'store/selectors/core/core-configuration.selector
 	selector: 'app-popular-bookmarks-container',
 	templateUrl: './popular-bookmarks-container.component.html',
 	styleUrls: ['./popular-bookmarks-container.component.scss'],
+	host: { 'class': 'd-flex-column gap-sm' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopularBookmarksContainerComponent implements OnInit {

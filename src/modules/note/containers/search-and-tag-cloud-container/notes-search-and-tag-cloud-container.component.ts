@@ -11,8 +11,9 @@ import { distinctTagsArray, relatedTags, selNote_queryParams } from 'store/selec
 	selector: 'app-notes-search-and-tag-cloud-container',
 	templateUrl: './notes-search-and-tag-cloud-container.component.html',
 	styleUrls: ['./notes-search-and-tag-cloud-container.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [slideUpDownTrigger]
+	animations: [slideUpDownTrigger],
+	host: { 'class': 'box shadow dark d-flex-column transition-bg' },
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotesSearchAndTagCloudContainerComponent implements OnDestroy {
 

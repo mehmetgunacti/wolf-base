@@ -1,24 +1,26 @@
 @mixin mx-box {
 
 	--box-color			: var(--col-text);
-	--box-padding		: var(--gap-xl) var(--gap-xxl);
-	--box-bg-color		: #{fn-color(bg-component)};
+	--box-padding		: var(--gap-lg) var(--gap);
+	--box-bg-color		: var(--col-bg-component);
 	--box-border-radius	: var(--border-radius);
+	--box-min-height	: calc(4 * var(--gap));
 
 	color				: var(--box-color);
 	padding				: var(--box-padding);
 	background-color	: var(--box-bg-color);
 	border-radius		: var(--box-border-radius);
+	transition			: $bg-transition;
 
-	&.dark {
+	&.box-dark {
 
-		--box-bg-color	: #{fn-color(bg-component-dark)};
+		--box-bg-color	: var(--col-bg-component-dark);
 
 	}
 
-	&.hover:hover {
+	&.box-hover:hover {
 
-		background-color	: color-mix(in hsl, var(--box-bg-color), black 20%);
+		background-color: color-mix(in hsl, var(--box-bg-color), black 20%);
 
 	}
 
@@ -27,12 +29,5 @@
 .box {
 
 	@include mx-box;
-
-}
-
-.shadow-box {
-
-	@include mx-box;
-	@include mx-box-shadow;
 
 }

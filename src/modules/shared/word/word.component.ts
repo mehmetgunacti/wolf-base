@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, InputSignal, Output, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { Definition, UUID, Word, elseEmptyArray } from '@lib';
 
 @Component({
@@ -9,12 +9,12 @@ import { Definition, UUID, Word, elseEmptyArray } from '@lib';
 })
 export class WordComponent {
 
-	word: InputSignal<Word> = input.required();
+	word = input.required<Word>();
 	scheduledIds = input<UUID[], UUID[] | null>([], { transform: elseEmptyArray });
 	schedulable = input<boolean, boolean | null>(true, { transform: s => s === null ? true : s });
 
-	@Output() schedule: EventEmitter<Definition> = new EventEmitter();
-	@Output() cancelSchedule: EventEmitter<Definition> = new EventEmitter();
+	schedule = output<Definition>();
+	cancelSchedule = output<Definition>();
 
 	onSchedule(definition: Definition, checked: boolean): void {
 

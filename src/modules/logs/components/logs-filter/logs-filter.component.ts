@@ -7,6 +7,7 @@ import { Subscription, filter } from 'rxjs';
 	selector: 'app-logs-filter',
 	templateUrl: './logs-filter.component.html',
 	styleUrls: ['./logs-filter.component.scss'],
+	host: { 'class': 'd-flex gap-sm' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogsFilterComponent implements OnChanges, OnDestroy {

@@ -2,21 +2,15 @@
 @import 'mixins/responsive';
 @import 'helper';
 
-:host {
+#section-nav-button {
 
-	display				: contents;
-	& #section-logo {
+	@include mx-flex-center;
+	min-width: $header-height;
 
-		@extend %flex-center-center;
-		min-width		: $header-height;
+}
 
-	}
+#portal-outlet {
 
-	& #portal-outlet {
-
-		flex			: 1;
-		@extend %flex-end-center;
-
-	}
+	@include mx-flex(center, end);
 
 }

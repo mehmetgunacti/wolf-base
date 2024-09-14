@@ -1,43 +1,32 @@
-@import 'helper';
-@import 'mixins';
+// @import 'helper';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	@extend %flex-center-center;
-	flex-wrap	: wrap;
-	gap			: var(--gap-xs);
+// 	& > a,
+// 	& > span {
 
-	& > a {
+// 		font-size 		: 1.1rem;
+// 		line-height		: 0.8;
 
-		cursor			: pointer;
+// 		&.selected {
 
-	}
+// 			color 		: var(--col-accent);
 
-	& > a,
-	& > span {
+// 		}
 
-		display			: inline-block;
-		font-size 		: 1.1rem;
-		line-height		: 0.8;
+// 		&.related {
 
-		&.selected {
+// 			color 		: var(--col-text);
 
-			color 		: fn-hsl(accent);
+// 		}
 
-		}
+// 		&.disabled {
 
-		&.related {
+// 			color 		: var(--col-btn-disabled-bg-color);
 
-			color 		: fn-hsl(text);
+// 		}
 
-		}
+// 	}
 
-		&.disabled {
-
-			color 		: fn-hsl(bg-3, (lig: "+ 10%"));
-
-		}
-
-	}
-
-}
+// }

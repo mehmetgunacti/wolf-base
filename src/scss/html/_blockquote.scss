@@ -21,7 +21,7 @@ blockquote {
 	&.primary {
 
 		color			: inherit !important;
-		border-left		: 2px solid fn-hsl(primary);
+		border-left		: 2px solid var(--col-primary);
 
 	}
 

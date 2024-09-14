@@ -11,8 +11,9 @@ import { selCore_popularBookmarks } from 'store/selectors/core/core-configuratio
 	selector: 'app-bookmarks-search-and-tag-cloud-container',
 	templateUrl: './bookmarks-search-and-tag-cloud-container.component.html',
 	styleUrls: ['./bookmarks-search-and-tag-cloud-container.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [slideUpDownTrigger]
+	animations: [slideUpDownTrigger],
+	host: { 'class': 'd-flex-column box shadow dark transition-bg' },
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 

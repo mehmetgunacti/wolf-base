@@ -1,69 +1,41 @@
-@import 'helper';
-@import 'variables';
-@import 'mixins';
-@import 'components';
+// @import 'helper';
+// @import 'variables';
+// @import 'mixins';
+// @import 'components';
 
-:host {
+// :host {
 
-	@extend %flex-column;
-	padding				: var(--gap);
-	background-color	: fn-hsl(bg-3);
-	border-radius		: var(--border-radius);
-	transition			: $bg-transition;
+// 	--chevron-angle		: 0deg;
+// 	&.open {
 
-	@include mx-box-shadow;
+// 		--chevron-angle	: -90deg;
 
-	--chevron-angle		: 0deg;
+// 	}
 
-	&.open {
+// 	& > header {
 
-		--chevron-angle	: -90deg;
+// 		// todo create a class
+// 		& .material-symbols-outlined {
 
-	}
+// 			transform: rotate(var(--chevron-angle));
+// 			transition: 300ms linear;
 
-	& > header {
+// 		}
 
-		display			: flex;
-		align-items		: center;
-		padding-left	: var(--gap-xs);
+// 	}
 
-		& :first-child {
+// 	& > aside {
 
-			flex		: 1;
+// 		overflow		: auto;
+// 		max-height		: 30rem;
 
-		}
+// 		// todo : check this
+// 		& > w-tag-cloud {
 
-		& .material-symbols-outlined {
+// 			margin		: var(--gap) 0;
 
-			transform: rotate(var(--chevron-angle));
-			transition: 300ms linear;
+// 		}
 
-		}
+// 	}
 
-	}
-
-	& > aside {
-
-		@extend %flex-column;
-		gap				: var(--gap);
-		overflow		: auto;
-		max-height		: 30rem;
-		@include mx-webkit-scrollbar;
-
-		& > div {
-
-			@extend %flex-center-center;
-			gap			: var(--gap-xxs);
-			margin-top	: var(--gap);
-
-		}
-
-		& > w-tag-cloud {
-
-			margin		: var(--gap) 0;
-
-		}
-
-	}
-
-}
+// }

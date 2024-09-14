@@ -20,9 +20,9 @@ table {
 		border-width		: 2px;
 		border-style		: solid;
 		border-color		: transparent;
-		border-bottom-color	: fn-hsl(primary, (alp: "- 0.3"));
+		border-bottom-color	: hsl(var(--col-primary) / 70%);
 
-		background-color	: fn-hsl(bg-2, (lig: "- 2%"));
+		background-color	: color-mix(in hsl, var(--col-bg-nav), black 98%);
 		transition			: border $transition, $bg-transition;
 
 		& > tr:first-child {

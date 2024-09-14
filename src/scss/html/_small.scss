@@ -2,7 +2,7 @@ small {
 
 	display		: block;
 	font-size	: var(--font-size-xs);
-	color		: fn-hsl(text-secondary);
+	color		: var(--col-text-secondary);
 	transition	: $bg-transition, color $transition;
 
 }

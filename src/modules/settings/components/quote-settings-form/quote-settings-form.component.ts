@@ -15,6 +15,7 @@ interface QuoteForm {
 	selector: 'app-quote-settings-form',
 	templateUrl: './quote-settings-form.component.html',
 	styleUrls: ['./quote-settings-form.component.scss'],
+	host: { 'class': 'd-flex-column p' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuoteSettingsFormComponent {

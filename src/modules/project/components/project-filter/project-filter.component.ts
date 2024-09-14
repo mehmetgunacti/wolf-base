@@ -6,6 +6,7 @@ import { Subscription, filter } from 'rxjs';
 	selector: 'app-project-filter',
 	templateUrl: './project-filter.component.html',
 	styleUrls: ['./project-filter.component.scss'],
+	host: { 'class': 'd-flex gap-sm' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectFilterComponent implements OnDestroy {

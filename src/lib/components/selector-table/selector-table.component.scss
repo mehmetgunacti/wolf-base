@@ -1,37 +1,35 @@
-@import 'mixins';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	gap		: var(--gap-sm);
+// 	& > div:first-child {
 
-	& > div:first-child {
+// 		font-size		: var(--font-size-xs);
+// 		text-align		: center;
+// 		padding			: var(--gap-xxs) var(--gap-xs);
 
-		font-size		: var(--font-size-xs);
-		text-align		: center;
-		padding			: var(--gap-xxs) var(--gap-xs);
+// 	}
+// 	[table-selectors] {
 
-	}
-	[table-selectors] {
+// 		display					: grid;
+// 		grid-template-columns	: repeat(7, 2rem);
+// 		grid-template-rows		: repeat(6, 2rem);
+// 		gap						: 4px;
 
-		display					: grid;
-		grid-template-columns	: repeat(7, 2rem);
-		grid-template-rows		: repeat(6, 2rem);
-		gap						: 4px;
+// 		& > a {
 
-		& > a {
+// 			background-color: var(--col-bg-form-element);
 
-			background-color: fn-hsl(bg-1);
+// 			&:hover,
+// 			// &:focus
+// 			&.focus {
 
-			&:hover,
-			// &:focus
-			&.focus {
+// 				background-color: var(--col-accent);
 
-				background-color: fn-hsl(accent);
+// 			}
 
-			}
+// 		}
 
-		}
+// 	}
 
-	}
-
-}
+// }

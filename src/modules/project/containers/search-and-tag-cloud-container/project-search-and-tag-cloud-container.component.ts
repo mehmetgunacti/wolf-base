@@ -14,8 +14,9 @@ const all: NameBase = { id: 'all', name: 'All' };
 	selector: 'app-project-search-and-tag-cloud-container',
 	templateUrl: './project-search-and-tag-cloud-container.component.html',
 	styleUrls: ['./project-search-and-tag-cloud-container.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [slideUpDownTrigger]
+	animations: [slideUpDownTrigger],
+	host: { 'class': 'box dark d-flex-column p transition-bg shadow' },
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectSearchAndTagCloudContainerComponent {
 

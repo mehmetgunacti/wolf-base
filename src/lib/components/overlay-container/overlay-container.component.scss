@@ -1,36 +1,36 @@
-@import 'helper';
-@import 'variables';
-@import 'mixins';
-@import 'components';
+// @import 'helper';
+// @import 'variables';
+// @import 'mixins';
+// @import 'components';
 
-:host {
+// :host {
 
-	@include mx-card;
-	@include mx-responsive;
-	@include mx-flex-column;
+// 	// @include mx-card;
+// 	// @include mx-responsive;
+// 	// @include mx-flex-column;
 
-	gap		: var(--gap);
+// 	gap		: var(--gap);
 
-	& > main {
+// 	& > main {
 
-		display		: block;
-		overflow	: auto;
-		height		: 100%;
-		padding		: var(--gap-xs);
-		@include mx-webkit-scrollbar;
+// 		display		: block;
+// 		overflow	: auto;
+// 		height		: 100%;
+// 		padding		: var(--gap-xs);
+// 		@include mx-webkit-scrollbar;
 
-	}
+// 	}
 
-	& > footer {
+// 	& > footer {
 
-		display		: block;
+// 		display		: block;
 
-		&:empty {
+// 		&:empty {
 
-			display		: none;
+// 			display		: none;
 
-		}
+// 		}
 
-	}
+// 	}
 
-}
+// }

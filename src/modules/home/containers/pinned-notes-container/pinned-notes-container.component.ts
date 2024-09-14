@@ -9,6 +9,7 @@ import * as noteSelectors from 'store/selectors/note/note-ui.selectors';
 	selector: 'app-pinned-notes-container',
 	templateUrl: './pinned-notes-container.component.html',
 	styleUrls: ['./pinned-notes-container.component.scss'],
+	host: { 'class': 'd-flex-column gap-sm' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PinnedNotesContainerComponent {

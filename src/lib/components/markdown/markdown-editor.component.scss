@@ -1,146 +1,124 @@
-@import 'helper';
-@import 'variables';
-@import 'mixins';
-@import 'components';
+// @import 'helper';
+// @import 'variables';
+// @import 'mixins';
+// @import 'components';
 
-$button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 & buttons_2) side by side
+// $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 & buttons_2) side by side
 
-.save-menu {
+// .quote-menu {
 
-	gap: var(--gap-sm);
+// 	& > button > span:first-child {
 
-}
+// 		width: 15px;
+// 		height: var(--gap-xxl);
+// 		border-left: 6px solid;
 
-.quote-menu {
+// 		&.default {
+// 			border-left-color: fn-hsl(success);
+// 		}
 
-	gap: var(--gap-sm);
+// 		&.primary {
+// 			border-left-color: fn-hsl(primary);
+// 		}
 
-	& > button > span:first-child {
+// 		&.success {
+// 			border-left-color: fn-hsl(success);
+// 		}
 
-		width: 15px;
-		height: var(--gap-xxl);
-		border-left: 6px solid;
+// 		&.info {
+// 			border-left-color: fn-hsl(info);
+// 		}
 
-		&.default {
-			border-left-color: fn-hsl(success);
-		}
+// 		&.warn {
+// 			border-left-color: fn-hsl(warn);
+// 		}
 
-		&.primary {
-			border-left-color: fn-hsl(primary);
-		}
+// 		&.error {
+// 			border-left-color: fn-hsl(error);
+// 		}
 
-		&.success {
-			border-left-color: fn-hsl(success);
-		}
+// 	}
 
-		&.info {
-			border-left-color: fn-hsl(info);
-		}
+// }
 
-		&.warn {
-			border-left-color: fn-hsl(warn);
-		}
+// .code-menu {
 
-		&.error {
-			border-left-color: fn-hsl(error);
-		}
+// 	fieldset {
 
-	}
+// 		@include mx-flex-column-start;
+// 		& > legend {
 
-}
+// 			color		: var(--col-primary);
+// 			font-weight	: bold;
+// 			font-size	: var(--font-size-sm);
 
-.code-menu {
+// 		}
 
-	fieldset {
+// 	}
 
-		@include mx-flex-column-start;
-		& > legend {
+// }
 
-			color		: fn-hsl(primary);
-			font-weight	: bold;
-			font-size	: var(--font-size-sm);
+// :host {
 
-		}
+// 	--display-element	: none;
+// 	min-height	: 100%;
 
-	}
+// 	& > [buttons] {
 
-}
+// 		overflow-x	: auto;
+// 		@include mx-webkit-scrollbar;
 
-:host {
+// 		& button[aria-expanded=true] {
 
-	--display-element	: none;
+// 			background-color	: fn-hsl(bg-3);
+// 			transition			: background-color 0s;
 
-	flex		: 1;
-	@extend %flex-column;
-	position	: relative;
-	gap			: var(--gap);
-	min-height	: 100%;
+// 		}
 
-	& > [buttons] {
+// 	}
 
-		@include mx-flex-center-y;
-		padding		: var(--gap-xxs);
-		flex-wrap	: wrap;
-		overflow-x	: auto;
-		@include mx-webkit-scrollbar;
+// 	& > [area] {
 
-		& button[aria-expanded=true] {
+// 		& > textarea {
 
-			background-color	: fn-hsl(bg-3);
-			transition			: background-color 0s;
+// 			@include mx-input;
+// 			@include mx-input-element-border;
+// 			background-color	: var(--col-bg-form-element);
 
-		}
+// 			tab-size			: 4;
+// 			white-space			: pre;
+// 			overflow			: auto;
+// 			@include mx-webkit-scrollbar;
 
-	}
+// 			&:valid + label,
+// 			&:focus + label {
 
-	& > [area] {
+// 				@include mx-input-label-up;
 
-		flex		: 1;
-		@extend %flex-column;
-		position	: relative;
+// 			}
 
-		& > textarea {
+// 		}
 
-			flex	: 1;
-			@include mx-input;
-			background-color	: fn-hsl(bg-1);
-			border-color		: fn-hsl(bg-1, (lig: "- 10%"));
-			padding-top			: var(--gap);
-			tab-size			: 4;
-			white-space			: pre;
-			overflow			: auto;
-			cursor				: auto;
-			@include mx-webkit-scrollbar;
+// 		& > label {
 
-			&:valid + label,
-			&:focus + label {
+// 			@include mx-input-label;
+// 			top		: 2rem;
 
-				@include mx-input-label-up;
+// 			&.up {
 
-			}
+// 				@include mx-input-label-up;
 
-		}
+// 			}
 
-		& > label {
+// 			&.right {
 
-			@include mx-input-label;
-			top		: 2rem;
+// 				right	: 5px;
+//     			left	: unset;
 
-			&.up {
+// 			}
 
-				@include mx-input-label-up;
+// 		}
 
-			}
+// 	}
 
-			&.right {
-
-				right	: 5px;
-    			left	: unset;
-
-			}
-
-		}
-
-	}
-
-}
+// }

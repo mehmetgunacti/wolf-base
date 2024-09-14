@@ -36,6 +36,10 @@
 
 	--input-element-height 	: #{$input-element-min-height};
 
+	--nav-full-width		: 26rem;
+	--nav-half-width		: 6rem;
+	--header-height			: 6rem;
+
 	@include bigScreen {
 
 		--gap				: 1rem;

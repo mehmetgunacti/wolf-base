@@ -1,71 +1,65 @@
-@import 'helper';
-@import 'variables';
-@import 'components';
-@import 'mixins';
+// @import 'helper';
+// @import 'variables';
+// @import 'components';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	@include mx-card;
+// 	// @include mx-card;
 
-	form {
+// 	form {
 
-		@include mx-flex-column;
-		padding			: var(--gap-xs);
-		gap				: var(--gap);
+// 		// @include mx-flex-column;
+// 		// padding			: var(--gap-xs);
+// 		// gap				: var(--gap);
 
-		& > div {
+// 		// & > div {
 
-			display			: flex;
-			flex-direction	: row;
-			gap				: var(--gap-xs);
-			& :first-child {
+// 		// 	display			: flex;
+// 		// 	flex-direction	: row;
+// 		// 	gap				: var(--gap-xs);
+// 		// 	& :first-child {
 
-				flex	: 1;
+// 		// 		flex	: 1;
 
-			}
+// 		// 	}
 
-			& .material-symbols-outlined {
+// 		// 	& .material-symbols-outlined {
 
-				font-size	: 1.4rem;
+// 		// 		font-size	: 1.4rem;
 
-			}
+// 		// 	}
 
-		}
+// 		// }
 
-		& > fieldset {
+// 		// & > fieldset {
 
-			position	: relative;
+// 		// 	position	: relative;
 
-			& > legend {
+// 		// 	& > legend {
 
-				padding-top		: 2rem;
-				padding-bottom	: 1rem;
+// 		// 		padding-top		: 2rem;
+// 		// 		padding-bottom	: 1rem;
 
-			}
+// 		// 	}
 
-			& > button {
+// 		// 	& > button {
 
-				position		: absolute;
-				top				: -3rem;
-				right			: 0;
+// 		// 		position		: absolute;
+// 		// 		top				: -3rem;
+// 		// 		right			: 0;
 
-			}
+// 		// 	}
 
-			& div[task_group] {
+// 		// 	& div[task_group] {
 
-				@include mx-flex-column;
-				grid-gap		: var(--gap-sm);
+// 		// 		@include mx-flex-column;
+// 		// 		grid-gap		: var(--gap-sm);
 
-			}
+// 		// 	}
 
-		}
+// 		// }
 
-	}
+// 	}
 
-	& > footer {
-
-		@include mx-flex-end-center;
-
-	}
-
-}
+// }

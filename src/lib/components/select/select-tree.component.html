@@ -15,7 +15,7 @@
 
 <ng-template #select_menu>
 
-	<div #popup class="menu small scrollable select-popup" [style.width]="popupWidth() + 'px'" cdkMenu>
+	<div #popup class="menu small scrollable flex-1" [style.width]="popupWidth() + 'px'" cdkMenu>
 
 		<w-options [nodes]="nodes" (selected)="onItemSelected($event)"/>
 

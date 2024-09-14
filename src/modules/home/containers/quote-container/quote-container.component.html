@@ -1,8 +1,8 @@
-<div quote_icon>
+<div quote_icon class="pos-absolute">
 
 	@if (!running()) {
 
-		<span class="material-symbols-outlined paused" quote_badge>pause_circle</span>
+		<span class="material-symbols-outlined paused pos-absolute" quote_badge>pause_circle</span>
 
 	}
 	@if (showPlay()) {
@@ -14,7 +14,7 @@
 </div>
 @if ((wrapper$ | async); as wrapper) {
 
-	<div quote_wrapper>
+	<div quote_wrapper class="scrollable d-grid w-100 h-100">
 
 		<app-quote [quote]="wrapper.value" [class]="wrapper.animClass"/>
 

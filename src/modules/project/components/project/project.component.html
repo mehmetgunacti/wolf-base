@@ -2,12 +2,14 @@
 
 	<div project_title_wrapper>
 
-		<a [routerLink]="['/projects']" tabindex="0">
+		<a	class="d-flex ai-c p-xs gap-xxs transition-bg"
+			[routerLink]="['/projects']" tabindex="0">
 			<span class="material-symbols-outlined">task_alt</span>
 			<span>Projects</span>
 		</a>
 
-		<div project_title>
+		<!-- project_title -->
+		<div class="d-flex ai-sb jc-c h1">
 
 			{{ project.name }}
 
@@ -20,9 +22,12 @@
 
 		</div>
 
-		<div project_info [@slideDown]="expanded()">
+		<!-- project_info -->
+		<div
+			class="d-flex-column gap-sm overflow-h"
+			[@slideDown]="expanded()">
 
-			<div row>
+			<div row class="box dark p-lg mt">
 
 				<small>ID</small>
 				<div>{{ project.id }}</div>
@@ -43,15 +48,15 @@
 
 			</div>
 
-			<div row start_end_row>
+			<div row start_end_row class="d-flex gap-sm">
 
-				<div>
+				<div class="w-50">
 
 					<small>Start : {{ project.start | timePast:false }}</small>
 					<div>{{ project.start | date:'EEEE dd.MM.yyyy' }}</div>
 
 				</div>
-				<div>
+				<div class="w-50">
 
 					<small>End</small>
 					<div>{{ project.end | date:'EEEE dd.MM.yyyy' }}</div>

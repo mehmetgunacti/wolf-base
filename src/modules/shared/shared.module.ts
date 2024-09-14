@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AutofocusDirective, FormatBytesPipe, InputModule, NoDataPipe, PortalComponent, SanitizeHtmlModule, SelectedTagsComponent, TimePastModule, ToastModule } from '@lib';
-import { DisplayModule } from 'lib/components/display/display.module';
 import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 import { SelectModule } from 'lib/components/select/select.module';
 import { SwtichModule } from 'lib/components/switch/switch.module';
@@ -46,7 +45,6 @@ import { ModalComponent } from './modal/modal.component';
 		TagCloudModule,
 		ModalComponent,
 		SanitizeHtmlModule,
-		DisplayModule,
 		TimePastModule,
 		TextareaModule,
 		SwtichModule
@@ -70,7 +68,6 @@ import { ModalComponent } from './modal/modal.component';
 		CdkMenuModule,
 		TagCloudModule,
 		SanitizeHtmlModule,
-		DisplayModule,
 		TextareaModule,
 		SwtichModule,
 		WordComponent,

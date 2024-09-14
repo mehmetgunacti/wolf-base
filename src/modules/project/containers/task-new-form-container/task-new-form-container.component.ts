@@ -11,7 +11,10 @@ import { selProject_selected } from 'store/selectors/project/project-ui.selector
 	templateUrl: './task-new-form-container.component.html',
 	styleUrls: ['./task-new-form-container.component.scss'],
 	animations: [dialogFadeOutTrigger],
-	host: { '[@fadeOut]': '' },
+	host: {
+		'[@fadeOut]': '',
+		'class': 'd-flex-column'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskNewFormContainerComponent {

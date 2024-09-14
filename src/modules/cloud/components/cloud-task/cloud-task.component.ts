@@ -30,6 +30,7 @@ function toAction(type: SyncTaskType): 'upload' | 'download' | 'view' {
 	selector: 'app-cloud-task',
 	templateUrl: './cloud-task.component.html',
 	styleUrls: ['./cloud-task.component.scss'],
+	host: { 'class': 'd-flex-column mt-xl' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CloudTaskComponent {

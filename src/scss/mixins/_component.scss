@@ -1,8 +1,0 @@
-@mixin mx-component($bg: 2) {
-
-	padding				: var(--gap-xl) var(--gap-xxl);
-	border-radius		: var(--border-radius);
-	background-color	: fn-hsl(bg-#{$bg});
-	transition			: $bg-transition;
-
-}

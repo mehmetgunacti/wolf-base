@@ -1,6 +1,62 @@
+@mixin mx-h1 {
+
+	font-size		: var(--font-size-h1);
+	font-weight		: bold;
+	color			: var(--col-focus);
+
+}
+
+@mixin mx-h2 {
+
+	font-size		: var(--font-size-h2);
+	font-weight		: bold;
+	padding-bottom	: var(--gap-sm);
+
+}
+
+@mixin mx-h3 {
+
+	font-size		: var(--font-size-h3);
+	font-weight		: bold;
+
+}
+
+@mixin mx-h4 {
+
+	font-size		: var(--font-size-h4);
+	font-weight		: bold;
+	color			: var(--col-focus);
+
+}
+
+@mixin mx-h5 {
+
+	font-size		: var(--font-size-h5);
+	font-weight		: bold;
+	font-style		: italic;
+	color			: var(--col-focus);
+
+}
+
+@mixin mx-h6 {
+
+	font-size		: var(--font-size-h6);
+	font-weight		: bold;
+	font-style		: italic;
+	color			: var(--col-text-secondary);
+
+}
+
+.h1 { @include mx-h1; }
+.h2 { @include mx-h2; }
+.h3 { @include mx-h3; }
+.h4 { @include mx-h4; }
+.h5 { @include mx-h5; }
+.h6 { @include mx-h6; }
+
 h1, h2, h3, h4, h5, h6 {
 
-	color		: fn-hsl(text);
+	color		: var(--col-text);
 	transition	: color $transition;
 
 }
@@ -16,7 +72,7 @@ h2 {
 
 	@include mx-h2;
 	margin-bottom	: var(--gap-xxl);
-	border-bottom	: 1px solid fn-hsl(text-secondary);
+	border-bottom	: 1px solid var(--text-secondary);
 	transition		: border $transition;
 
 }

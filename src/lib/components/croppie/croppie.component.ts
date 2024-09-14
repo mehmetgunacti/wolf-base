@@ -25,6 +25,7 @@ const croppieOptions: CroppieOptions = {
 	selector: 'w-croppie',
 	templateUrl: './croppie.component.html',
 	styleUrls: ['./croppie.component.scss'],
+	host: { 'class': 'd-flex-column ai-c' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CroppieComponent implements OnDestroy, AfterViewInit {

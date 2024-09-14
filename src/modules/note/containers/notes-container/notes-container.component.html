@@ -20,6 +20,7 @@
 
 		<a	*ngFor="let note of notes"
 			[routerLink]="['/notes', note.id]"
+			class="flex column"
 			tabindex="0">
 
 			<small>{{ note.modified | timePast }}</small>

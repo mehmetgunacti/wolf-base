@@ -11,6 +11,7 @@ import { selNote_SelectedEntity } from 'store/selectors/note/note-ui.selectors';
 	selector: 'app-note-new-form-container',
 	templateUrl: './note-new-form-container.component.html',
 	styleUrls: ['./note-new-form-container.component.scss'],
+	host: { 'class': 'd-flex-column' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NoteNewFormContainerComponent implements OnInit, AfterContentInit {

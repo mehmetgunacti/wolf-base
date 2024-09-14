@@ -44,9 +44,9 @@
 	<app-project-search-and-tag-cloud-container/>
 
 	<!-- TASKS (FIELDSET) -->
-	<fieldset class="component">
+	<fieldset class="box d-flex-column gap-sm">
 
-		<legend>Tasks <small>({{ project.tasks.length }})</small></legend>
+		<legend class="d-flex ai-bs gap-xs">Tasks <small>({{ project.tasks.length }})</small></legend>
 		<legend>
 			<button
 				class="link small"
@@ -56,11 +56,13 @@
 			</button>
 		</legend>
 
-		<small query_params>
+		<!-- query_params -->
+		<small class="d-flex ai-c">
 			<span class="material-symbols-outlined small">filter_alt</span> Filters: {{ paramsText() }}
 		</small>
 
-		<div task_list>
+		<!-- task_list -->
+		<div class="d-flex-column gap-sm">
 
 			@for (task of project.tasks; track $index) {
 

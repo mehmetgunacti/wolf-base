@@ -9,7 +9,8 @@ import { selCore_isBigScreen, selCore_sidebarState } from 'store/selectors/core/
 @Component({
 	selector: 'app-header',
 	templateUrl: './header.component.html',
-	styleUrls: ['./header.component.scss']
+	styleUrls: ['./header.component.scss'],
+	host: { 'class': 'd-contents' }
 })
 export class HeaderComponent {
 

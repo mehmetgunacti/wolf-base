@@ -1,13 +1,13 @@
 @import 'variables';
-@import 'helper';
-@import 'variables';
 @import 'mixins';
+// @import 'helper';
+// @import 'components';
 
 :host {
 
 	display				: block;
 	height				: 100vh;
-	background-color	: fn-color(bg-page);
+	background-color	: var(--col-bg-page);
 	transition			: $bg-transition;
 
 	& > header {
@@ -24,34 +24,30 @@
 		padding					: var(--gap);
 		padding-left			: 0;
 
-		background-color		: fn-color(bg-header);
+		background-color		: var(--col-bg-header);
 		transition				: $bg-transition;
 
-		@include mx-box-shadow;
+		// @include mx-box-shadow;
 
 	}
 
 	& > main {
 
-		position			: fixed;
 		z-index				: $z-index-main;
-
-		display				: block;
 
 		top					: $header-height;
 		right				: 0;
 		height				: calc(100dvh - #{$header-height});
 		left				: 0;
 
-		padding				: var(--gap-sm);
-
-		overflow-y			: auto;
-		@include mx-webkit-scrollbar;
+		//@include mx-overflow-y-a;
+		// @include mx-webkit-scrollbar;
 
 		transition			: height $transition, left 0.6s $transition-timing-fn, $bg-transition;
 
 		@include bigScreen() {
 
+			// :host-context() <---
 			body.sidebar-full & {
 
 				left		: $nav-full-width;
@@ -70,8 +66,6 @@
 
 	& > nav {
 
-		@include mx-flex-column;
-		position			: fixed;
 		z-index				: $z-index-nav;
 
 		top					: $header-height;
@@ -79,16 +73,14 @@
 		height				: calc(100dvh - #{$header-height});
 		width				: $nav-full-width;
 
-		padding				: 0;
-		margin-left			: 0;
-
 		overflow			: hidden;
 
 		background-color	: fn-color(bg-nav);
 		transition			: height $transition, width 0.6s $transition-timing-fn, margin-left 0.6s $transition-timing-fn, $bg-transition;
 
-		@include mx-box-shadow;
+		// @include mx-box-shadow;
 
+		// :host-context() <---
 		body.sidebar-full & {
 
 			margin-left		: 0;
@@ -105,7 +97,7 @@
 
 		body.sidebar-hidden & {
 
-			margin-left		: -$nav-full-width;
+			margin-left		: -$nav-full-width; // todo include nav shadow
 			width			: $nav-full-width;
 
 			@include bigScreen {

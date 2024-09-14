@@ -1,96 +1,78 @@
-@import 'helper';
-@import 'variables';
-@import 'components';
-@import 'mixins';
+// @import 'helper';
+// @import 'variables';
+// @import 'components';
+// @import 'mixins';
 
-@keyframes fadeOut {
+// @keyframes fadeOut {
 
-	0% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-	}
+// 	0% {
+// 		opacity: 1;
+// 	}
+// 	100% {
+// 		opacity: 0;
+// 	}
 
-}
+// }
 
-:host {
+// :host {
 
-	@include mx-component(3);
-	@include mx-box-shadow;
-	@include mx-flex-column-center;
-	position		: relative;
-	padding-inline	: var(--gap-lg);
-	height			: 3 * $header-height;
-	cursor			: pointer;
+// 	height			: 3 * $header-height;
+// 	&::before {
 
-	&::before {
+// 		--col-primary-alp: 0.5;
 
-		--col-primary-alp: 0.5;
+// 		content		: "„";
+// 		position	: absolute;
+// 		color		: color-mix(in hsl, var(--col-primary), transparent 50%);
+// 		left		: var(--gap-sm);
+// 		top			: calc(-3 * var(--gap-sm));
+// 		font-weight	: bold;
+// 		font-size	: 15rem;
+// 		line-height	: 0;
 
-		content		: "„";
-		position	: absolute;
-		color		: fn-hsl(primary);
-		left		: var(--gap-sm);
-		top			: calc(-3 * var(--gap-sm));
-		font-weight	: bold;
-		font-size	: 15rem;
-		line-height	: 0;
+// 		@include bigScreen {
 
-		@include bigScreen {
+// 			top		: calc(-1 * var(--gap-sm));
+//         	left	: var(--gap);
 
-			top		: calc(-1 * var(--gap-sm));
-        	left	: var(--gap);
+// 		}
 
-		}
+// 	}
 
-	}
+// 	& > [quote_icon] {
 
-	& > [quote_icon] {
+// 		right		: var(--gap-xxl);
+//     	top			: calc(2 * var(--gap-xxl));
 
-		position	: absolute;
-		right		: var(--gap-xxl);
-    	top			: calc(2 * var(--gap-xxl));
+// 		@include bigScreen {
 
-		@include bigScreen {
+// 			top		: calc(2 * var(--gap-lg));
+// 			right	: calc(2 * var(--gap-sm));
 
-			top		: calc(2 * var(--gap-lg));
-			right	: calc(2 * var(--gap-sm));
+// 		}
 
-		}
+// 		& > [quote_badge] {
 
-		& > [quote_badge] {
+// 			right			: -6px;
+// 			bottom			: 5px;
+// 			line-height		: 0.5;
+// 			font-size		: 1.5rem;
+// 			color			: var(--col-accent);
 
-			position		: absolute;
-			right			: -6px;
-			bottom			: 5px;
-			line-height		: 0.5;
-			font-size		: 1.5rem;
-			color			: fn-hsl(accent);
+// 			&.paused {
 
-			&.paused {
+// 				color		: var(--col-warn);
 
-				color		: fn-hsl(warn);
+// 			}
 
-			}
+// 			&.play {
 
-			&.play {
+// 				animation: fadeOut 2s forwards;
 
-				animation: fadeOut 2s forwards;
+// 			}
 
-			}
+// 		}
 
-		}
+// 	}
 
-	}
-
-	& > [quote_wrapper] {
-
-		@include mx-scrollable;
-		display		: grid;
-		height		: 100%;
-		width		: 100%;
-
-	}
-
-}
+// }

@@ -3,6 +3,6 @@ ins {
 	font-weight		: bold;
 	text-decoration	: underline;
 	background		: none;
-	color			: fn-hsl(text);
+	color			: var(--col-text);
 
 }

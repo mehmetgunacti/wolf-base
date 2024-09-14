@@ -1,12 +1,1 @@
-@import 'helper';
-
-:host {
-
-	& > section {
-
-		@extend %flex-column;
-		gap		: var(--gap-sm);
-
-	}
-
-}
+:host {}

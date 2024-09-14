@@ -1,6 +1,6 @@
 a {
 
-	color		: fn-hsl(text);
+	color		: var(--col-text);
 	transition	: color $transition;
 
 }

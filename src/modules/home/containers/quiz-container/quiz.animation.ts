@@ -17,11 +17,11 @@ export const choicesBlinkTrigger = trigger('choicesBlink', [
 					timing,
 					keyframes([
 
-						style({ backgroundColor: 'var(--color-green)' }),
+						style({ backgroundColor: 'var(--col-success)' }),
 						style({ backgroundColor: '*' }),
-						style({ backgroundColor: 'var(--color-green)' }),
+						style({ backgroundColor: 'var(--col-success)' }),
 						style({ backgroundColor: '*' }),
-						style({ backgroundColor: 'var(--color-green)' })
+						style({ backgroundColor: 'var(--col-success)' })
 
 					]),
 
@@ -37,11 +37,11 @@ export const choicesBlinkTrigger = trigger('choicesBlink', [
 					timing,
 					keyframes([
 
-						style({ backgroundColor: 'var(--color-red)' }),
+						style({ backgroundColor: 'var(--col-error)' }),
 						style({ backgroundColor: '*' }),
-						style({ backgroundColor: 'var(--color-red)' }),
+						style({ backgroundColor: 'var(--col-error)' }),
 						style({ backgroundColor: '*' }),
-						style({ backgroundColor: 'var(--color-red)' })
+						style({ backgroundColor: 'var(--col-error)' })
 
 					]),
 

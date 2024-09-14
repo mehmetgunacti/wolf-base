@@ -87,6 +87,7 @@ function getAction(task: CloudTask): Action | null {
 	selector: 'app-cloud-summary-container',
 	templateUrl: './cloud-summary-container.component.html',
 	styleUrls: ['./cloud-summary-container.component.scss'],
+	host: { 'class': 'd-flex-column gap-sm' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CloudSummaryContainerComponent {

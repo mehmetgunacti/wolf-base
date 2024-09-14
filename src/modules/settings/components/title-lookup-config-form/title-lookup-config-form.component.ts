@@ -5,6 +5,7 @@ import { FormControl, Validators } from '@angular/forms';
 	selector: 'app-title-lookup-config-form',
 	templateUrl: './title-lookup-config-form.component.html',
 	styleUrls: ['./title-lookup-config-form.component.scss'],
+	host: { 'class': 'd-flex-column p' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TitleLookupConfigFormComponent implements OnInit, OnChanges {

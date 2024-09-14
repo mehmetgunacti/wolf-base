@@ -26,12 +26,9 @@
 
 :host {
 
-	@include mx-flex-center-center;
-	position			: absolute;
-	inset				: 0;
 	z-index				: $z-index-splash-screen;
 
-	background-color	: fn-hsl(bg-6);
+	background-color	: var(--col-bg-page);
 	transition			: background-color 600ms ease-in;
 
 	& > img {

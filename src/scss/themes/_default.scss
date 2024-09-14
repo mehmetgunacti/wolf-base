@@ -1,65 +1,64 @@
-@import 'theme-mixins';
 :root {
 
-	--col-bg-header			: hsl(var(--gray-12-hsl));
-	--col-bg-nav			: hsl(var(--gray-11-hsl));
-	--col-bg-popup			: hsl(var(--gray-10-hsl));
-	--col-bg-component		: hsl(var(--gray-9-hsl));
-	--col-bg-component-dark	: #{fn-darken(var(--col-bg-component), 30%)};
-	--col-bg-form-element	: hsl(var(--gray-7-hsl));
-	--col-bg-page			: hsl(var(--gray-7-hsl));
+	--col-bg-header			: 210deg 11% 7%;
+	--col-bg-nav			: 210deg 11% 8%;
+	--col-bg-popup			: 210deg 11% 9%;
+	--col-bg-component		: 210deg 11% 13%;
+	--col-bg-component-dark	: 210deg 11% 10%;
+	--col-bg-form-element	: 210deg 11% 20%;
+	--col-bg-page			: 210deg 11% 33%;
 
-	--col-bg-overlay		: hsl(var(--gray-12-hsl) / 75%);
+	--col-bg-overlay		: 0deg 0% 0% / 75%;
 	--col-shadow			: 0deg 0% 0%;
 
-	--col-text				: hsl(var(--gray-4-hsl));
-	--col-text-secondary	: hsl(var(--gray-5-hsl));
+	--col-text				: 210 15% 92%;
+	--col-text-secondary	: 210 10.8% 71%;
 
-	--col-primary			: hsl(var(--blue-11-hsl));
-	--col-success			: hsl(var(--green-11-hsl));
-	--col-info				: hsl(var(--stone-10-hsl));
-	--col-warn				: hsl(var(--yellow-10-hsl));
-	--col-error				: hsl(var(--red-12-hsl));
+	--col-primary			: 215deg 65% 45%;
+	--col-success			: 132deg 52% 22%;
+	--col-info				: 60deg 3% 22%;
+	--col-warn				: 31deg 100% 35%;
+	--col-error				: 0deg 66% 30%;
 
-	--col-accent			: hsl(200deg 85% 34%);
-	--col-focus				: hsl(var(--orange-6-hsl));
-	--col-outline			: hsl(var(--orange-6-hsl));
+	--col-accent			: 200deg 85% 34%;
+	--col-focus				: 27deg 99% 54%;
+	--col-outline			: 27deg 99% 54%;
 
-	--col-disabled			: hsl(var(--gray-7-hsl));
+	--col-disabled			: 210deg 9% 32%;
 
 	--col-btn-tag-text-color			: var(--col-text);
-	--col-btn-tag-bg-color				: hsl(200deg 85% 34%); // hsl(var(--indigo-11-hsl));
-	--col-btn-tag-bg-color-hover		: #{fn-darken(var(--col-btn-tag-bg-color), 10%)};
-	--col-btn-tag-bg-color-active		: #{fn-darken(var(--col-btn-tag-bg-color), 15%)};
+	--col-btn-tag-bg-color				: 200deg 85% 34%;
+	--col-btn-tag-bg-color-hover		: color-mix(in hsl, var(--col-btn-tag-bg-color), black 10%);
+	--col-btn-tag-bg-color-active		: color-mix(in hsl, var(--col-btn-tag-bg-color), black 15%);
 
 	--col-btn-default-text-color		: var(--col-text);
 	--col-btn-default-bg-color			: var(--col-primary);
-	--col-btn-default-bg-color-hover	: #{fn-darken(var(--col-btn-default-bg-color), 10%)};
-	--col-btn-default-bg-color-active	: #{fn-darken(var(--col-btn-default-bg-color), 15%)};
-	--col-btn-default-border-color		: #{fn-darken(var(--col-btn-default-bg-color), 15%)};
+	--col-btn-default-bg-color-hover	: color-mix(in hsl, var(--col-btn-default-bg-color), black 10%);
+	--col-btn-default-bg-color-active	: color-mix(in hsl, var(--col-btn-default-bg-color), black 15%);
+	--col-btn-default-border-color		: color-mix(in hsl, var(--col-btn-default-bg-color), black 15%);
 
 	--col-btn-disabled-bg-color			: var(--col-disabled);
-	--col-btn-disabled-text-color		: #{fn-lighten(var(--col-btn-disabled-bg-color), 30%)};
-	--col-btn-disabled-bg-color-hover	: #{fn-darken(var(--col-btn-disabled-bg-color), 10%)};
-	--col-btn-disabled-bg-color-active	: #{fn-darken(var(--col-btn-disabled-bg-color), 15%)};
-	--col-btn-disabled-border-color		: #{fn-darken(var(--col-btn-disabled-bg-color), 15%)};
+	--col-btn-disabled-text-color		: color-mix(in hsl, var(--col-btn-disabled-bg-color), white 30%);
+	--col-btn-disabled-bg-color-hover	: color-mix(in hsl, var(--col-btn-disabled-bg-color), black 10%);
+	--col-btn-disabled-bg-color-active	: color-mix(in hsl, var(--col-btn-disabled-bg-color), black 15%);
+	--col-btn-disabled-border-color		: color-mix(in hsl, var(--col-btn-disabled-bg-color), black 15%);
 
 	--col-btn-link-text-color			: var(--col-text);
 	--col-btn-link-bg-color				: transparent;
-	--col-btn-link-bg-color-hover		: hsl(0 0 100% / 0.2);
-	--col-btn-link-bg-color-active		: hsl(0 0 100% / 0.2);
+	--col-btn-link-bg-color-hover		: 0 0 100% / 0.1;
+	--col-btn-link-bg-color-active		: 0 0 100% / 0.1;
 	--col-btn-link-border-color			: transparent;
 
 	--col-btn-warn-text-color			: var(--col-text);
 	--col-btn-warn-bg-color				: var(--col-warn);
-	--col-btn-warn-bg-color-hover		: #{fn-darken(var(--col-btn-warn-bg-color), 10%)};
-	--col-btn-warn-bg-color-active		: #{fn-darken(var(--col-btn-warn-bg-color), 15%)};
-	--col-btn-warn-border-color			: #{fn-darken(var(--col-btn-warn-bg-color), 15%)};
+	--col-btn-warn-bg-color-hover		: color-mix(in hsl, var(--col-btn-warn-bg-color), black 10%);
+	--col-btn-warn-bg-color-active		: color-mix(in hsl, var(--col-btn-warn-bg-color), black 15%);
+	--col-btn-warn-border-color			: color-mix(in hsl, var(--col-btn-warn-bg-color), black 15%);
 
 	--col-btn-danger-text-color			: var(--col-text);
 	--col-btn-danger-bg-color			: var(--col-error);
-	--col-btn-danger-bg-color-hover		: #{fn-darken(var(--col-btn-danger-bg-color), 10%)};
-	--col-btn-danger-bg-color-active	: #{fn-darken(var(--col-btn-danger-bg-color), 15%)};
-	--col-btn-danger-border-color		: #{fn-darken(var(--col-btn-danger-bg-color), 15%)};
+	--col-btn-danger-bg-color-hover		: color-mix(in hsl, var(--col-btn-danger-bg-color), black 10%);
+	--col-btn-danger-bg-color-active	: color-mix(in hsl, var(--col-btn-danger-bg-color), black 15%);
+	--col-btn-danger-border-color		: color-mix(in hsl, var(--col-btn-danger-bg-color), black 15%);
 
 }

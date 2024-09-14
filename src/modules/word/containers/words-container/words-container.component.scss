@@ -1,44 +1,36 @@
-@import 'helper';
-@import 'variables';
-@import 'mixins';
-@import 'components';
+// @import 'helper';
+// @import 'variables';
+// @import 'mixins';
+// @import 'components';
 
-:host{
+// :host{
 
-	@include mx-card;
+// 	& > [word_entries] {
 
-	& > [word_entries] {
+// 		@include mx-scrollable(calc(100dvh - 4 * #{$header-height}));
 
-		@include mx-scrollable(calc(100dvh - 4 * #{$header-height}));
+// 		& > a {
 
-		& > a {
+// 			// @extend %flex-column;
+// 			padding				: var(--gap);
+// 			border-radius		: var(--border-radius-sm);
+// 			text-decoration		: none;
+// 			transition			: $bg-transition;
 
-			@extend %flex-column;
-			padding				: var(--gap);
-			border-radius		: var(--border-radius-sm);
-			text-decoration		: none;
-			transition			: $bg-transition;
+// 			& > small {
 
-			& > small {
+// 				color				: var(--col-text-secondary);
 
-				color				: fn-hsl(text-secondary);
+// 			}
 
-			}
+// 			&:focus-visible {
 
-			&:hover {
+// 				@include mx-outline;
 
-				background-color	: fn-hsl(bg-3, (lig: "- 2%", alp: "- 0.4"));
+// 			}
 
-			}
+// 		}
 
-			&:focus-visible {
+// 	}
 
-				@include mx-outline;
-
-			}
-
-		}
-
-	}
-
-}
+// }

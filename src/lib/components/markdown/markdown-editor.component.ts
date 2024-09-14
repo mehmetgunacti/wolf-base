@@ -18,6 +18,9 @@ import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 		{ provide: UNDO_CACHE, useClass: UndoCacheImpl },
 		{ provide: RECOVERY_MANAGER, useClass: RecoveryManagerImpl },
 	],
+	host: {
+		'class': 'flex-1 d-flex-column pos-relative gap'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownEditorComponent implements OnInit, OnDestroy {

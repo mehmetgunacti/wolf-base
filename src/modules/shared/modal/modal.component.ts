@@ -5,9 +5,11 @@ import { delayDestroyTrigger } from '@lib';
 	selector: 'w-modal',
 	standalone: true,
 	templateUrl: './modal.component.html',
-	styleUrls: ['./modal.component.scss'],
 	animations: [delayDestroyTrigger],
-	host: { '[@delayDestroy]': '' },
+	host: {
+		'[@delayDestroy]': '',
+		'class': 'd-contents'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalComponent implements OnInit {

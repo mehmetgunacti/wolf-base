@@ -1,4 +1,4 @@
-<div buttons cdkMenuBar>
+<div buttons cdkMenuBar class="d-flex ai-c padding-xxs wrap">
 
 	<!-- SAVE BUTTON -->
 	<button
@@ -275,10 +275,11 @@
 
 </div>
 
-<div area>
+<div area class="flex-1 d-flex-column pos-relative">
 
 	<textarea
 		#editor
+		class="flex-1 pt cur-auto"
 		[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
 		placeholder=""
 		[formControl]="control"
@@ -453,7 +454,7 @@
 
 <ng-template #blockquote_menu>
 
-	<div class="menu quote-menu" cdkMenu>
+	<div class="menu quote-menu gap-sm" cdkMenu>
 
 		<button class="medium icon-only align-left" (click)="updateEditor(actions.addBlockquote(editor))" cdkMenuItem>
 			<span class="default"></span>

@@ -7,6 +7,7 @@ import { Quote, UUID } from '@lib';
 	selector: 'app-quote-settings-list',
 	templateUrl: './quote-settings-list.component.html',
 	styleUrls: ['./quote-settings-list.component.scss'],
+	host: { 'class': 'd-flex-column p' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuoteSettingsListComponent {

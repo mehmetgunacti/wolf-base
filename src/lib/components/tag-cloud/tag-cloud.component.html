@@ -1,16 +1,16 @@
-<ng-container *ngFor="let tag of uiTags">
+@for (tag of uiTags(); track $index) {
 
-	<ng-container *ngIf="tag.className === 'disabled'; else tagAnchor">
+	@if (tag.className === 'disabled') {
 
-		<span class="disabled" [ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</span>
+		<span class="disabled d-inline-block" [ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</span>
 
-	</ng-container>
-	<ng-template #tagAnchor>
+	} @else {
 
-		<a (click)="onTagClick(tag.tag.name)"
+		<a	class="d-inline-block cur-pointer"
+			(click)="onTagClick(tag.tag.name)"
 			[ngClass]="tag.className"
 			[ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</a>
 
-	</ng-template>
+	}
 
-</ng-container>
+}

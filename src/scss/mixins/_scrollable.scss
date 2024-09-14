@@ -5,7 +5,7 @@
 		width						: 8px;
 		height						: 8px;
 		border-radius				: var(--border-radius-sm);
-		background-color			: fn-hsl(bg-6 , (lig: "+ 4%", alp: "0.4"));
+		background-color			: color-mix(in hsl, var(--col-bg-page), transparent 40%); // , (lig: "+ 4%", alp: "0.4"));
 		transition					: $bg-transition;
 
 	}
@@ -13,10 +13,16 @@
 	.platform-windows &::-webkit-scrollbar-thumb {
 
 		border-radius				: var(--border-radius);
-		background-color			: fn-hsl(bg-6);
+		background-color			: var(--col-bg-page);
 		transition					: $bg-transition;
 
 	}
+
+}
+
+.webkit-scrollbar {
+
+	@include mx-webkit-scrollbar;
 
 }
 
@@ -25,5 +31,11 @@
 	max-height			: $maxHeight;
 	overflow-y			: auto;
 	@include mx-webkit-scrollbar;
+
+}
+
+.scrollable {
+
+	@include mx-scrollable;
 
 }

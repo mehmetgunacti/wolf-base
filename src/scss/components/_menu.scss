@@ -1,11 +1,11 @@
 .menu {
 
-	@include mx-component(4);
-	@include mx-flex-column-stretch;
+	// @include mx-component(4);
+	// @include mx-flex-column-stretch;
 
 	& > button {
 
-		@include mx-flex-start-center;
+		// @include mx-flex-start-center;
 
 	}
 
@@ -32,7 +32,7 @@
 
 	&.horizontal {
 
-		@include mx-flex-center-y;
+		// @include mx-flex-center-y;
 		flex-direction	: row;
 
 

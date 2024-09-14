@@ -9,6 +9,7 @@ import { selLogs_selectedId } from 'store/selectors/log/logs.selectors';
 	selector: 'app-logs-filter-container',
 	templateUrl: './logs-filter-container.component.html',
 	styleUrls: ['./logs-filter-container.component.scss'],
+	host: { 'class': 'box shadow transition-bg' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogsFilterContainerComponent {

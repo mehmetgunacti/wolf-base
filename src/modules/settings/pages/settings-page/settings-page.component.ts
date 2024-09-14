@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { EMPTY, Observable, catchError, defer, from } from 'rxjs';
 import { buildInfo } from 'version';
@@ -7,7 +7,8 @@ import { buildInfo } from 'version';
 @Component({
 	selector: 'app-settings-page',
 	templateUrl: './settings-page.component.html',
-	styleUrls: ['./settings-page.component.scss']
+	styleUrls: ['./settings-page.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsPageComponent {
 

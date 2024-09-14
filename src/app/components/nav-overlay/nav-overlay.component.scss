@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'mixins';
 
+// should be the same as <dialog>::backdrop
 :host {
 
 	position			: fixed;

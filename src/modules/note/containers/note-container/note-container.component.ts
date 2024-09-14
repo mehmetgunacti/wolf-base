@@ -11,6 +11,7 @@ import { selNote_SelectedEntity, selNote_selectedEntityChildren, selNote_selecte
 	selector: 'app-note-container',
 	templateUrl: './note-container.component.html',
 	styleUrls: ['./note-container.component.scss'],
+	host: { 'class': 'd-flex-column gap-sm' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NoteContainerComponent {

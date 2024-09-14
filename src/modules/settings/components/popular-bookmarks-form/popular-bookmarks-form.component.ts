@@ -8,6 +8,7 @@ import { tap } from 'rxjs';
 	selector: 'app-popular-bookmarks-form',
 	templateUrl: './popular-bookmarks-form.component.html',
 	styleUrls: ['./popular-bookmarks-form.component.scss'],
+	host: { 'class': 'd-flex-column p flex-1' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopularBookmarksFormComponent {

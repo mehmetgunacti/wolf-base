@@ -1,112 +1,126 @@
-@mixin mx-input {
+// @import 'helper';
 
-	padding				: var(--gap);
-	color				: fn-hsl(text);
-	border				: 0;
-	background-color	: transparent;
-	outline				: 0;
+// @mixin mx-input {
 
-	min-height			: var(--input-element-height);
-	width				: 100%;
+// 	padding				: var(--gap);
+// 	color				: fn-hsl(text);
+// 	border				: 0;
+// 	background-color	: transparent;
+// 	outline				: 0;
 
-}
+// 	min-height			: var(--input-element-height);
+// 	width				: 100%;
 
-@mixin mx-input-label {
+// }
 
-	@include mx-flex-center-y;
-	position			: absolute;
-	top					: 50%;
-	left				: 5px;
-	transform			: translateY(-50%);
-	pointer-events		: none;
-	border-radius		: var(--border-radius-xs);
-	padding				: 1px 5px;
-	font-size			: var(--font-size-sm);
-	transition			: all $transition, $bg-transition, border-color $transition;
+// @mixin mx-input-label {
 
-	& span {
+// 	@include mx-flex-center-y;
+// 	position			: absolute;
+// 	top					: 50%;
+// 	left				: 5px;
+// 	transform			: translateY(-50%);
+// 	pointer-events		: none;
+// 	border-radius		: var(--border-radius-xs);
+// 	padding				: 1px 5px;
+// 	font-size			: var(--font-size-sm);
+// 	transition			: all $transition, $bg-transition, border-color $transition;
 
-		font-size		: inherit;
+// 	& span {
 
-	}
+// 		font-size		: inherit;
 
-}
+// 	}
 
-@mixin mx-input-label-up {
+// }
 
-	top					: -1px;
-	font-size			: var(--font-size-xxs);
-	background-color	: fn-hsl(bg-3);
-	border				: none;
+// @mixin mx-input-label-up {
 
-}
+// 	top					: -1px;
+// 	font-size			: var(--font-size-xxs);
+// 	background-color	: color-mix(in hsl, var(--col-bg-form-element), black 10%);
+// 	border				: none;
 
-@mixin mx-input-element {
+// }
 
-	position				: relative;
-	// min-height				: $input-element-min-height;
+// @mixin mx-input-element-border {
 
-	border-radius			: var(--border-radius-sm);
-	border-width			: 1px;
-	border-style			: solid;
+// 	border-radius			: var(--border-radius-sm);
+// 	border-width			: 1px;
+// 	border-style			: solid;
 
-	background-color		: fn-hsl(bg-1);
-	border-color			: fn-hsl(bg-1, (lig: "- 10%"));
-	transition				: $bg-transition, border-color $transition;
+// 	border-color			: color-mix(in hsl, var(--col-bg-form-element), black 10%);
 
-	& > input,
-	& > select,
-	& > textarea {
+// }
 
-		@include mx-input;
+// @mixin mx-input-element {
 
-	}
+// 	position				: relative;
+// 	// min-height				: $input-element-min-height;
 
-	& > label {
+// 	@include mx-input-element-border;
+// 	background-color		: var(--col-bg-form-element);
+// 	transition				: $bg-transition, border-color $transition;
 
-		@include mx-input-label;
-		&.up {
+// 	& > input,
+// 	& > select,
+// 	& > textarea {
 
-			@include mx-input-label-up;
+// 		@include mx-input;
 
-		}
+// 	}
 
-	}
+// 	& > label {
 
-	&[required] > label::before {
+// 		@include mx-input-label;
+// 		&.up {
 
-		content			: "*";
-		color			: fn-hsl(focus);
-		margin-right	: 2px;
+// 			@include mx-input-label-up;
 
-	}
+// 		}
 
-	&:has(:focus-visible) {
+// 	}
 
-		@include mx-outline;
-		& > label {
+// 	&[required] > label::before {
 
-			@include mx-input-label-up;
+// 		content			: "*";
+// 		color			: fn-hsl(focus);
+// 		margin-right	: 2px;
 
-		}
+// 	}
 
-	}
+// 	&:has(:focus-visible) {
 
-	/*
-	* ng-valid    <-> ng-invalid
-	* ng-pristine <-> ng-dirty
-	* ng-touched  <-> ng-untouched
-	*/
-	&.ng-dirty.ng-invalid {
+// 		@include mx-outline;
+// 		& > label {
 
-		@include mx-outline((color: "error"));
+// 			@include mx-input-label-up;
 
-	}
+// 		}
 
-	&.ng-dirty.ng-valid {
+// 	}
 
-		@include mx-outline((color: "success"));
+// 	/*
+// 	* ng-valid    <-> ng-invalid
+// 	* ng-pristine <-> ng-dirty
+// 	* ng-touched  <-> ng-untouched
+// 	*/
+// 	&.ng-dirty.ng-invalid {
 
-	}
+// 		@include mx-outline((color: "error"));
 
-}
+// 	}
+
+// 	&.ng-dirty.ng-valid {
+
+// 		@include mx-outline((color: "success"));
+
+// 	}
+
+// }
+
+// .input-element {
+
+// 	@include mx-input-element;
+
+// }

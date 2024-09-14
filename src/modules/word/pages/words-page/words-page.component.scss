@@ -1,9 +1,9 @@
-@import 'helper';
-@import 'mixins/responsive';
+// @import 'helper';
+// @import 'mixins/responsive';
 
-:host {
+// :host {
 
-	@extend %flex-column;
-	gap		: var(--gap-sm);
+// 	@extend %flex-column;
+// 	gap		: var(--gap-sm);
 
-}
+// }

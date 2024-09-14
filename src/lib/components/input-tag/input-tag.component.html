@@ -1,5 +1,5 @@
 <!-- TAGS LIST -->
-<div tags>
+<div tags class="d-inline-flex wrap p-sm gap-xxs">
 
 	@for (t of value(); track $index) {
 
@@ -17,6 +17,7 @@
 
 <!-- INPUT -->
 <input
+	class="flex-1"
 	#inputElement
 	type="text"
 	[attr.list]="UUID() + '_suggestions'"

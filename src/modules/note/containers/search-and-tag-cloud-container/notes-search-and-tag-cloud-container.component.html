@@ -1,22 +1,24 @@
-<header>
+<header class="d-flex ai-c pl-xs">
 
 	<w-selected-tags
-		[tags]="pinned$ | async"
-		[selectedTags]="selectedTags$ | async"
+		[tags]="(pinned$ | async) ?? []"
+		[selectedTags]="(selectedTags$ | async) ?? []"
 		(filterClick)="emptyFilter()"
 		(tagClick)="onTagClicked($event)"></w-selected-tags>
 
 	<button
 		type="button"
-		class="link"
+		class="link ml-auto"
 		(click)="toggleCloud()">
 		<span class="material-symbols-outlined">chevron_left</span>
 	</button>
 
 </header>
-<aside [@slideUpDown]="cloudVisible ? 'opened' : 'closed'">
+<aside
+		class="d-flex-column gap scrollable"
+		[@slideUpDown]="cloudVisible ? 'opened' : 'closed'">
 
-	<div>
+	<div class="d-flex-center gap-xxs mt">
 		<w-input
 			label="Keyword"
 			[formControl]="searchControl"
@@ -31,9 +33,9 @@
 	</div>
 
 	<w-tag-cloud
-		[tags]="tags$ | async"
-		[selectedTags]="selectedTags$ | async"
-		[relatedTags]="relatedTags$ | async"
+		[tags]="(tags$ | async) ?? []"
+		[selectedTags]="(selectedTags$ | async) ?? []"
+		[relatedTags]="(relatedTags$ | async) ?? []"
 		(tagClick)="onTagClicked($event)"></w-tag-cloud>
 
 </aside>

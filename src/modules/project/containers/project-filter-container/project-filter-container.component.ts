@@ -8,6 +8,7 @@ import { selProject_search } from 'store/selectors/project/project-ui.selectors'
 	selector: 'app-project-filter-container',
 	templateUrl: './project-filter-container.component.html',
 	styleUrls: ['./project-filter-container.component.scss'],
+	host: { 'class': 'box dark p transition-bg shadow' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectFilterContainerComponent {

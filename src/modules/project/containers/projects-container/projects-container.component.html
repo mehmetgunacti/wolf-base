@@ -12,7 +12,9 @@
 
 			@for (project of projects; track $index) {
 
-				<a [routerLink]="['/projects', project.id]" tabindex="0">
+				<a	class="box transition-bg"
+					[routerLink]="['/projects', project.id]"
+					tabindex="0">
 
 					<span>{{ project.name }}</span>
 					<small>{{ project.start }}</small>

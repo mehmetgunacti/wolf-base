@@ -10,6 +10,7 @@ import { hasModifierKey } from '@angular/cdk/keycodes';
 	selector: 'w-select-tree',
 	templateUrl: './select-tree.component.html',
 	styleUrls: ['./select-tree.component.scss'],
+	host: { 'class': 'input-element' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectTreeComponent {

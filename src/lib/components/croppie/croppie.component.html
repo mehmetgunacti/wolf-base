@@ -1,10 +1,11 @@
-<div class="img-thumbnail">
+<div class="img-thumbnail pos-relative p-sm mb-xl">
 
 	@if(imageLoaded$ | async) {
 
 		<button
 			id="close"
 			type="button"
+			class="d-flex-center p-0 pos-absolute cur-pointer"
 			(click)="unbindCroppie()"
 			tabindex="0">
 			<span class="material-symbols-outlined">close</span>
@@ -15,6 +16,7 @@
 		@if (initialized$ | async) {
 
 			<button	type="button"
+					class="d-flex-center pos-absolute gap-sm cur-pointer"
 					id="croppie-placeholder"
 					(click)="fileinput.click()"
 					tabindex="0">

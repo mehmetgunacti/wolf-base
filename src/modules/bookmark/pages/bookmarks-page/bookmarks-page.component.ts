@@ -10,6 +10,7 @@ import { selBookmarkShaking } from 'store/selectors/bookmark/bookmark-ui.selecto
 	templateUrl: './bookmarks-page.component.html',
 	styleUrls: ['./bookmarks-page.component.scss'],
 	animations: [delayDestroyTrigger],
+	host: { 'class': 'd-flex-column gap-sm' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarksPageComponent {

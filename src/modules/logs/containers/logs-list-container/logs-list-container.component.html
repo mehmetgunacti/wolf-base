@@ -30,8 +30,8 @@
 
 		@for (log of logs; track log.id) {
 
-			<div log_entry>
-				<div>
+			<div log_entry class="d-block mb-xl">
+				<div class="d-flex gap-xs">
 					<small>[{{ log.category }}]</small>
 					<small *ngIf="log.entityId">{{ log.entityId }}</small>
 				</div>

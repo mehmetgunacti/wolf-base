@@ -14,7 +14,10 @@ import { selTask_SelectedEntity } from 'store/selectors/task/task-ui.selectors';
 	templateUrl: './task-edit-form-container.component.html',
 	styleUrls: ['./task-edit-form-container.component.scss'],
 	animations: [dialogFadeOutTrigger],
-	host: { '[@fadeOut]': '' },
+	host: {
+		'[@fadeOut]': '',
+		'class': 'd-flex-column'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskEditFormContainerComponent {

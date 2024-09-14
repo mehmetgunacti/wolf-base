@@ -1,43 +1,51 @@
 <div bookmark-wrapper>
 
 	<app-bookmark
+		class="dark"
 		[bookmark]="bookmark$ | async"
 		[showDetails]="true"
 		[disabled]="true"
 		[popularButton]="false"
-		[editable]="false"></app-bookmark>
+		[editable]="false"/>
 
 </div>
 
-<div bookmark-form>
+<div bookmark-form class="d-block p-xs pt-xxl scrollable flex-1">
 
-	<form>
+	<form class="d-flex-column gap">
 
-		<div bookmark-form-left>
+		<div class="d-flex-column">
 
 			<w-croppie
+				class="jc-center"
 				[wControl]="form.image"
 				wType="circle"
-				wClass="primary"></w-croppie>
+				wClass="primary"/>
 
 		</div>
 
-		<div bookmark-form-right>
+		<div bookmark-form-right class="d-flex-column gap-lg p-xs">
 
 			<!-- ID -->
-			<div *ngIf="bookmark?.id">
+			@if (bookmark?.id) {
+
 				<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
-			</div>
+
+			}
 
 			<!-- URLs -->
-			<div *ngFor="let fcUrl of form.urls.controls; let idx = index">
-				<w-input
-					[formControl]="fcUrl"
-					[label]="'URL' + (form.urls.controls.length > 1 && idx === 0 ? ' (Primary)' : '')"/>
-					<!-- (inputChanged)="checkUrl($event, fcUrl)"/> -->
-				<button *ngIf="idx === 0" type="button" class="link" title="Add URL" (click)="addURL()"><span class="material-symbols-outlined">add</span></button>
-				<button *ngIf="idx > 0" type="button" class="link" title="Remove URL" (click)="removeURL(idx)"><span class="material-symbols-outlined">remove</span></button>
-			</div>
+			@for (fcUrl of form.urls.controls; track $index) {
+
+				<div>
+					<w-input
+						[formControl]="fcUrl"
+						[label]="'URL' + (form.urls.controls.length > 1 && $index === 0 ? ' (Primary)' : '')"/>
+						<!-- (inputChanged)="checkUrl($event, fcUrl)"/> -->
+					<button *ngIf="$index === 0" type="button" class="link" title="Add URL" (click)="addURL()"><span class="material-symbols-outlined">add</span></button>
+					<button *ngIf="$index > 0" type="button" class="link" title="Remove URL" (click)="removeURL($index)"><span class="material-symbols-outlined">remove</span></button>
+				</div>
+
+			}
 
 			<!-- NAME -->
 			<div>
@@ -59,7 +67,9 @@
 					class="input-element"
 					(tagInput)="onTagInput($event)"
 					[suggestions]="(tagSuggestions$ | async) ?? []"/>
-				<button type="button" class="link" [title]="'Toggle \''+TAG_POPULAR+'\''" (click)="onTogglePopular()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_POPULAR)">favorite</span></button>
+				<button type="button" class="link" [title]="'Toggle \''+TAG_POPULAR+'\''" (click)="onTogglePopular()">
+					<span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_POPULAR)">favorite</span>
+				</button>
 			</div>
 
 		</div>
@@ -69,6 +79,16 @@
 </div>
 
 <div form-element-buttons>
-	<button *ngIf="bookmark?.id" type="button" (click)="onDelete()" class="error"><span class="material-symbols-outlined">delete</span> Delete</button>
-	<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>
+
+	@if (bookmark?.id) {
+
+		<button type="button" (click)="onDelete()" class="error">
+			<span class="material-symbols-outlined">delete</span> Delete
+		</button>
+
+	}
+	<button type="button" (click)="onSave()">
+		<span class="material-symbols-outlined">save</span> Save
+	</button>
+
 </div>

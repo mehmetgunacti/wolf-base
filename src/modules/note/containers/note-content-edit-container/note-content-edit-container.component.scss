@@ -1,18 +1,16 @@
-@import 'helper';
-@import 'mixins';
-@import 'components';
+// @import 'helper';
+// @import 'mixins';
+// @import 'components';
 
-:host {
+// :host {
 
-	flex	: 1;
-	@include mx-flex-column;
-	gap		: var(--gap-sm);
 
-	& > [editor] {
 
-		flex	: 1;
-		@include mx-card;
+// 	& > [editor] {
 
-	}
+// 		flex	: 1;
+// 		@include mx-card;
 
-}
+// 	}
+
+// }

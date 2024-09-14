@@ -1,60 +1,24 @@
-@import 'helper';
-@import 'variables';
-@import 'components';
-@import 'mixins';
+// @import 'helper';
+// @import 'variables';
+// @import 'components';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	@extend %flex-column;
-	margin-top		: 2rem;
+// 	& > fieldset {
 
-	& > fieldset {
+// 		padding-top			: calc(var(--gap-xl) + var(--gap-xxl));
 
-		@include mx-card;
-		@include mx-flex-column;
-		position			: relative;
-		padding-top			: calc(var(--gap-xl) + var(--gap-xxl));
+// 		& > legend {
 
-		& > legend {
+// 			top					: -2rem;
+// 			left				: 0rem;
 
-			position			: absolute;
-			display				: flex;
-			align-items			: center;
+// 			border				: none;
+// 			border-radius		: var(--border-radius);
 
-			gap					: var(--gap-xs);
+// 		}
 
-			top					: -2rem;
-			left				: 0rem;
+// 	}
 
-			padding				: var(--gap);
-			margin-left			: var(--gap);
-
-			border				: none;
-			background-color	: fn-hsl(bg-3);
-			border-radius		: var(--border-radius);
-			transition			: $bg-transition;
-
-		}
-
-		& > main {
-
-			@include mx-scrollable;
-
-			& > div {
-
-				margin-bottom	: var(--gap-xl);
-
-			}
-
-		}
-
-		& > footer {
-
-			@include mx-flex-end-center;
-			padding			: var(--gap-sm);
-
-		}
-
-	}
-
-}
+// }

@@ -12,6 +12,7 @@ function parseId(id: string): number[] {
 	selector: 'w-selector-table',
 	templateUrl: 'selector-table.component.html',
 	styleUrl: 'selector-table.component.scss',
+	host: { 'class': 'gap-sm'},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectorTableComponent implements AfterViewInit {

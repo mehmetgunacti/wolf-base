@@ -1,0 +1,15 @@
+@mixin mx-gap-xxl	{ gap : var(--gap-xxl); }
+@mixin mx-gap-xl	{ gap : var(--gap-xl); }
+@mixin mx-gap-lg	{ gap : var(--gap-lg); }
+@mixin mx-gap		{ gap : var(--gap); }
+@mixin mx-gap-sm	{ gap : var(--gap-sm); }
+@mixin mx-gap-xs	{ gap : var(--gap-xs); }
+@mixin mx-gap-xxs	{ gap : var(--gap-xxs); }
+
+.gap-xxl	{ @include mx-gap-xxl; }
+.gap-xl		{ @include mx-gap-xl; }
+.gap-lg		{ @include mx-gap-lg; }
+.gap 		{ @include mx-gap; }
+.gap-sm		{ @include mx-gap-sm; }
+.gap-xs 	{ @include mx-gap-xs; }
+.gap-xxs	{ @include mx-gap-xxs; }

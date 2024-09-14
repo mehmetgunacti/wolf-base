@@ -3,23 +3,6 @@
 
 :host {
 
-	border-radius			: var(--border-radius);
-	padding					: var(--gap) var(--gap);
-	background-color		: fn-hsl(bg-3);
 	transition				: $bg-transition;
-
-	& > ul {
-
-		@extend %flex-center-y;
-		flex-wrap			: wrap;
-
-		& > li {
-
-			@extend %flex-center-y;
-			cursor			: pointer;
-
-		}
-
-	}
 
 }

@@ -9,6 +9,7 @@ import { selProject_selected } from 'store/selectors/project/project-ui.selector
 	selector: 'app-project-edit-form-container',
 	templateUrl: './project-edit-form-container.component.html',
 	styleUrls: ['./project-edit-form-container.component.scss'],
+	host: { 'class': 'd-flex-column' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectEditFormContainerComponent {

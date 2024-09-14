@@ -1,0 +1,11 @@
+@mixin mx-transition-bg {
+
+	transition	: $bg-transition;
+
+}
+
+.transition-bg {
+
+	@include mx-transition-bg;
+
+}

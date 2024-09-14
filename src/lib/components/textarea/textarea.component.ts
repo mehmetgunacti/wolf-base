@@ -14,7 +14,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 	],
 	host: {
 		'[tabindex]': '0',
-		'(focus)': 'onHostFocus()'
+		'(focus)': 'onHostFocus()',
+		'class': 'input-element'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

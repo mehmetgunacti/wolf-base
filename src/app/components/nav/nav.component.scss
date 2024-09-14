@@ -1,164 +1,160 @@
-@import 'variables';
-@import 'mixins';
-@import 'variables';
-@import 'helper';
+// @import 'variables';
+// @import 'mixins';
+// @import 'variables';
+// @import 'helper';
 :host {
+	// :host-context(.sidebar-full) { <---
+	// body.sidebar-hidden & {
 
-	@include mx-flex-column;
-	flex			: 1;
-	// width			: calc(#{$nav-full-width} - 2 * var(--gap-sm));
+	// 	visibility		: hidden;
 
-	body.sidebar-hidden & {
+	// }
 
-		visibility		: hidden;
+	// body.sidebar-full & {
 
-	}
+	// 	width			: $nav-full-width;
 
-	body.sidebar-full & {
+	// }
 
-		width			: $nav-full-width;
+	// body.sidebar-half &,
+	// body.sidebar-hidden & {
 
-	}
+	// 	width			: $nav-half-width;
 
-	body.sidebar-half &,
-	body.sidebar-hidden & {
+	// }
 
-		width			: $nav-half-width;
+	// div[nav-menu] {
 
-	}
+	// 	padding			: var(--gap);
 
-	div[nav-menu] {
+	// 	& > a {
 
-		padding			: var(--gap);
+	// 		--_hover-color		: transparent;
 
-		& > a {
+	// 		@include mx-flex-center-y;
+	// 		height				: $nav-half-width;
+	// 		border-radius		: var(--border-radius);
+	// 		color				: fn-color(text);
+	// 		cursor				: pointer;
+	// 		transition			: $bg-transition;
+	// 		text-decoration		: none;
 
-			--_hover-color		: transparent;
+	// 		width				: $nav-half-width;
+	// 		overflow			: hidden;
 
-			@include mx-flex-center-y;
-			height				: $nav-half-width;
-			border-radius		: var(--border-radius);
-			color				: fn-color(text);
-			cursor				: pointer;
-			transition			: $bg-transition;
-			text-decoration		: none;
+	// 		padding				: 0;
+	// 		margin				: 0;
 
-			width				: $nav-half-width;
-			overflow			: hidden;
+	// 		body.sidebar-full & {
 
-			padding				: 0;
-			margin				: 0;
+	// 			width			: auto;
 
-			body.sidebar-full & {
+	// 		}
 
-				width			: auto;
+	// 		&.active {
 
-			}
+	// 			& > [icon] {
 
-			&.active {
+	// 				background-color	: fn-hsl(accent);
+	// 				border-radius		: 25px;
+	// 				color				: fn-hsl(text);
 
-				& > [icon] {
+	// 			}
 
-					background-color	: fn-hsl(accent);
-					border-radius		: 25px;
-					color				: fn-hsl(text);
+	// 		}
 
-				}
+	// 		&:hover {
 
-			}
+	// 			--_hover-color		: hsl(0 0 100% / 0.09);
 
-			&:hover {
+	// 		}
 
-				--_hover-color		: hsl(0 0 100% / 0.09);
+	// 		& > [icon] {
 
-			}
+	// 			@include mx-flex-center-center;
+	// 			margin-right		: var(--gap-sm);
+	// 			background-color	: var(--_hover-color);
+	// 			border-radius		: 25px;
+	// 			padding				: var(--gap);
 
-			& > [icon] {
+	// 		}
 
-				@include mx-flex-center-center;
-				margin-right		: var(--gap-sm);
-				background-color	: var(--_hover-color);
-				border-radius		: 25px;
-				padding				: var(--gap);
+	// 		& > [label] {
 
-			}
+	// 			flex 		: 1;
+	// 			font-size	: var(--font-size-h4);
+	// 			padding-left: var(--gap);
 
-			& > [label] {
+	// 		}
 
-				flex 		: 1;
-				font-size	: var(--font-size-h4);
-				padding-left: var(--gap);
+	// 		& > [badge] {
 
-			}
+	// 			@include mx-flex-center-center;
+	// 			font-size			: var(--font-size-sm);
+	// 			margin-right		: var(--gap);
 
-			& > [badge] {
+	// 			& > span {
 
-				@include mx-flex-center-center;
-				font-size			: var(--font-size-sm);
-				margin-right		: var(--gap);
+	// 				padding				: var(--gap) var(--gap);
+	// 				border-radius		: var(--border-radius);
+	// 				transition			: $bg-transition;
 
-				& > span {
+	// 				&:not(:empty) {
 
-					padding				: var(--gap) var(--gap);
-					border-radius		: var(--border-radius);
-					transition			: $bg-transition;
+	// 					background-color	: fn-hsl(bg-2, (lig: "- 3%"));
 
-					&:not(:empty) {
+	// 				}
 
-						background-color	: fn-hsl(bg-2, (lig: "- 3%"));
+	// 			}
 
-					}
+	// 		}
 
-				}
+	// 	}
 
-			}
+	// }
 
-		}
+	// div[bottom-buttons] {
 
-	}
+	// 	display			: flex;
+	// 	align-items		: flex-start;
+	// 	padding			: var(--gap);
+	// 	margin-top		: auto;
+	// 	gap				: 0.5rem;
 
-	div[bottom-buttons] {
+	// 	& > button:last-child {
 
-		display			: flex;
-		align-items		: flex-start;
-		padding			: var(--gap);
-		margin-top		: auto;
-		gap				: 0.5rem;
+	// 		margin-left	: auto;
 
-		& > button:last-child {
+	// 	}
 
-			margin-left	: auto;
+	// 	button.active {
 
-		}
+	// 		background-color	: fn-hsl(accent);
 
-		button.active {
+	// 	}
 
-			background-color	: fn-hsl(accent);
+	// 	body.sidebar-full & {
 
-		}
+	// 		flex-direction	: row;
+	// 		align-items		: flex-end;
+	// 		height			: $nav-half-width;
 
-		body.sidebar-full & {
+	// 	}
 
-			flex-direction	: row;
-			align-items		: flex-end;
-			height			: $nav-half-width;
+	// 	body.sidebar-half &,
+	// 	body.sidebar-hidden & {
 
-		}
+	// 		flex-direction	: column-reverse;
+	// 		width			: $nav-half-width;
 
-		body.sidebar-half &,
-		body.sidebar-hidden & {
+	// 		& > button:last-child {
 
-			flex-direction	: column-reverse;
-			width			: $nav-half-width;
+	// 			margin-left	: unset;
 
-			& > button:last-child {
+	// 		}
 
-				margin-left	: unset;
+	// 	}
 
-			}
-
-		}
-
-	}
+	// }
 
 }

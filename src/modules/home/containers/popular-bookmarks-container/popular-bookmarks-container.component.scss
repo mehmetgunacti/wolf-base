@@ -1,39 +1,20 @@
-@import 'mixins';
-@import 'components';
+// @import 'mixins';
+// @import 'components';
 
-:host {
+// :host {
 
-	@include mx-flex-column;
-	gap		: var(--gap-sm);
+// 	& > section {
 
-	& > header {
+// 		display						: grid;
+// 		grid-template-columns		: 1fr;
+// 		grid-gap					: var(--gap-sm);
 
-		@include mx-component(3);
-		@include mx-box-shadow;
-		display			: flex;
-		padding-inline	: var(--gap-lg);
-		gap				: var(--gap-xs);
+// 		@include md() {
 
-		& > :first-child {
+// 			grid-template-columns	: repeat(auto-fill, minmax(25rem, 1fr));
 
-			margin-right: auto;
+// 		}
 
-		}
+// 	}
 
-	}
-
-	& > main {
-
-		display						: grid;
-		grid-template-columns		: 1fr;
-		grid-gap					: var(--gap-sm);
-
-		@include md() {
-
-			grid-template-columns	: repeat(auto-fill, minmax(25rem, 1fr));
-
-		}
-
-	}
-
-}
+// }

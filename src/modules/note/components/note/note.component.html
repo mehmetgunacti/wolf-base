@@ -1,4 +1,4 @@
-@if (note) {
+@if (note()) {
 
 	<div note_main class="component dark">
 
@@ -11,7 +11,7 @@
 
 			@if (parents.length > 0) {
 
-				<a	*ngFor="let note of parents; let idx = index"
+				<a	*ngFor="let note of parents(); let idx = index"
 					[routerLink]="['/notes', note.id]"
 					tabindex="0"
 					[style.margin-left.px]="(idx + 1) * 15">
@@ -27,7 +27,7 @@
 
 		<h3>{{ note.name | hideEnum }}</h3>
 
-		<div note_tags *ngIf="note.tags as tags">
+		<div note_tags *ngIf="note().tags as tags">
 
 			<button *ngFor="let tag of tags" class="tag xs" [routerLink]="['/notes']" [queryParams]="{ 'tags': tag }">{{ tag }}</button>
 
@@ -35,7 +35,7 @@
 
 		<div note_info>
 
-			<small [title]="note.modified | date:'EEEE dd.MM.yyyy hh:mm'">Last edited: {{ note.modified | timePast:false }}</small>
+			<small [title]="note().modified | date:'EEEE dd.MM.yyyy hh:mm'">Last edited: {{ note().modified | timePast:false }}</small>
 
 		</div>
 
@@ -48,7 +48,7 @@
 	<div note_children class="component dark">
 
 		<div note_nested>Child Notes</div>
-		@for (note of children; track note) {
+		@for (note of children(); track note) {
 
 			<a	[routerLink]="['/notes', note.id]"
 				tabindex="0"

@@ -16,14 +16,14 @@
 
 @if (quiz(); as quiz) {
 
-	<div quiz_header>
+	<div quiz_header class="box shadow dark pl-lg pr-lg">
 
-		<div quiz_question_wrapper>
+		<div quiz_question_wrapper class="d-flex ai-sb jc-c">
 
 			<!---------->
 			<!-- ICON -->
 			<!---------->
-			<div quiz_icon class="badge-container">
+			<div quiz_icon class="badge-container d-flex">
 
 				<span class="material-symbols-outlined">quiz</span>
 				@if (dueItemsCount(); as count) {
@@ -37,7 +37,11 @@
 			<!-------------->
 			<!-- QUESTION -->
 			<!-------------->
-			<div quiz_question [@quoteChange]="quiz.definition.id" (click)="increaseVisibility()">
+			<div
+				class="d-flex-center gap-sm cur-pointer h5 flex-1"
+				quiz_question
+				[@quoteChange]="quiz.definition.id"
+				(click)="increaseVisibility()">
 
 				<small>({{quiz.definition.type}})</small>
 				@if (quiz.askWord) {
@@ -55,7 +59,7 @@
 			<!----------------------->
 			<!-- TOP-RIGHT BUTTONS -->
 			<!----------------------->
-			<div quiz_solve>
+			<div quiz_solve class="d-flex">
 
 				<button
 					class="link small"
@@ -117,6 +121,7 @@
 	<!------------->
 	<div
 		quiz_choices
+		class="gap-sm pt-sm"
 		[@slideChoices]="visibility() === QuizVisibility.CHOICES ? 'opened' : 'closed'"
 		[@choicesBlink]="animationState()"
 		(@choicesBlink.done)="complete($event, quiz)">
@@ -125,6 +130,7 @@
 
 			<div
 				quiz_choice
+				class="box shadow hover cur-pointer"
 				[class.correct]="quiz.correctChoice() === $index"
 				[class.incorrect]="quiz.incorrectChoice() === $index"
 				(click)="onChoiceClick(quiz, $index)">
@@ -147,12 +153,12 @@
 
 } @else {
 
-	<div quiz_empty_header>
+	<div class="box dark shadow d-flex">
 
-		<div quiz_icon>
+		<div class="d-flex">
 			<span class="material-symbols-outlined">quiz</span>
 		</div>
-		<div quiz_question>
+		<div class="d-flex-center gap-sm flex-1">
 			Quiz
 			<small>/kwɪz/</small>
 		</div>

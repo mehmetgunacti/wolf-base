@@ -1,23 +1,21 @@
-@import 'helper';
-@import 'mixins';
+// @import 'helper';
+// @import 'mixins';
+// @import 'components';
 
-:host {
+// :host {
 
-	@extend %flex-column;
-	gap		: var(--gap);
+// 	[update_alert] {
 
-	[update_alert] {
+// 		// @include mx-flex-space-between-center;
 
-		@include mx-flex-space-between-center;
+// 	}
 
-	}
+// 	[version_info] {
 
-	[version_info] {
+// 		// @include mx-flex-end-center;
+// 		// @include mx-component;
+// 		// @include mx-box-shadow;
 
-		@include mx-flex-end-center;
-		@include mx-component;
-		@include mx-box-shadow;
+// 	}
 
-	}
-
-}
+// }

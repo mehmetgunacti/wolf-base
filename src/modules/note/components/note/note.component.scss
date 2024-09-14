@@ -1,88 +1,85 @@
-@import 'helper';
-@import 'variables';
-@import 'components';
-@import 'mixins';
+// @import 'helper';
+// @import 'variables';
+// @import 'components';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	@extend %flex-column;
-	gap		: var(--gap-sm);
+// 	& > [note_main] {
 
-	& > [note_main] {
+// 		// @include mx-card(3);
+// 		[note_parents] {
 
-		// @include mx-card(3);
-		[note_parents] {
+// 			margin-bottom	: var(--gap-lg);
 
-			margin-bottom	: var(--gap-lg);
+// 		}
 
-		}
+// 		[note_tags] {
 
-		[note_tags] {
+// 			@extend %flex-center-end;
+// 			gap			: var(--gap-xxs);
 
-			@extend %flex-center-end;
-			gap			: var(--gap-xxs);
+// 		}
 
-		}
+// 		[note_info] {
 
-		[note_info] {
+// 			@extend %flex-center-end;
+// 			padding-top	: var(--gap-sm);
 
-			@extend %flex-center-end;
-			padding-top	: var(--gap-sm);
+// 		}
 
-		}
+// 	}
 
-	}
+// 	& > [note_children] {
 
-	& > [note_children] {
+// 		// @include mx-card(3);
 
-		// @include mx-card(3);
+// 	}
 
-	}
+// 	[note_parents],
+// 	[note_children] {
 
-	[note_parents],
-	[note_children] {
+// 		& > a {
 
-		& > a {
+// 			@extend %flex-center-y;
+// 			padding				: var(--gap-xs);
+// 			border-radius		: var(--border-radius-sm);
+// 			text-decoration		: none;
+// 			font-size			: var(--font-size-sm);
+// 			gap					: var(--gap-xxs);
+// 			color				: fn-hsl(text-secondary);
+// 			transition			: $bg-transition;
 
-			@extend %flex-center-y;
-			padding				: var(--gap-xs);
-			border-radius		: var(--border-radius-sm);
-			text-decoration		: none;
-			font-size			: var(--font-size-sm);
-			gap					: var(--gap-xxs);
-			color				: fn-hsl(text-secondary);
-			transition			: $bg-transition;
+// 			& > span {
 
-			& > span {
+// 				color			: inherit;
+// 				font-size		: inherit;
 
-				color			: inherit;
-				font-size		: inherit;
+// 			}
 
-			}
+// 			&:hover {
 
-			&:hover {
+// 				background-color	: fn-hsl(bg-3, (lig: "+ 10%"));
 
-				background-color	: fn-hsl(bg-3, (lig: "+ 10%"));
+// 			}
 
-			}
+// 			// &:focus,
+// 			&:focus-visible {
 
-			// &:focus,
-			&:focus-visible {
+// 				outline				: 3px solid fn-hsl(focus);
 
-				outline				: 3px solid fn-hsl(focus);
+// 			}
 
-			}
+// 		}
 
-		}
+// 	}
 
-	}
+// 	[note_nested] {
 
-	[note_nested] {
+// 		font-size	: var(--font-size-h5);
+//     	font-weight	: bold;
+// 	    color		: fn-hsl(primary);
 
-		font-size	: var(--font-size-h5);
-    	font-weight	: bold;
-	    color		: fn-hsl(primary);
+// 	}
 
-	}
-
-}
+// }

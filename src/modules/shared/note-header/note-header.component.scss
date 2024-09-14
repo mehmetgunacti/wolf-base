@@ -1,69 +1,70 @@
-@import 'helper';
-@import 'variables';
-@import 'mixins';
+// @import 'helper';
+// @import 'variables';
+// @import 'mixins';
+// @import 'components';
 
-:host {
+// :host {
 
-	display: contents;
+// 	display: contents;
 
-	& > a {
+// 	& > a {
 
-		@include mx-flex-column;
-		@include mx-box-shadow;
-		padding				: var(--gap);
-		border-radius		: var(--border-radius-sm);
-		text-decoration		: none;
-		transition			: $bg-transition;
-		background-color	: fn-hsl(bg-2);
+// 		@include mx-flex-column;
+// 		@include mx-box-shadow;
+// 		padding				: var(--gap);
+// 		border-radius		: var(--border-radius-sm);
+// 		text-decoration		: none;
+// 		transition			: $bg-transition;
+// 		background-color	: fn-hsl(bg-2);
 
-		& .material-symbols-outlined {
+// 		& .material-symbols-outlined {
 
-			font-size		: var(--font-size-xs);
-			color			: fn-hsl(focus);
+// 			font-size		: var(--font-size-xs);
+// 			color			: fn-hsl(focus);
 
-		}
+// 		}
 
 
-		& > span:first-child {
+// 		& > span:first-child {
 
-			@extend %flex-center-y;
-			color				: fn-hsl(text-secondary);
-			& > span:first-child {
+// 			@extend %flex-center-y;
+// 			color				: fn-hsl(text-secondary);
+// 			& > span:first-child {
 
-				font-size		: var(--font-size-sm);
-				color			: inherit;
-				margin-right	: var(--gap-xxs);
+// 				font-size		: var(--font-size-sm);
+// 				color			: inherit;
+// 				margin-right	: var(--gap-xxs);
 
-			}
+// 			}
 
-			& > span:last-child {
+// 			& > span:last-child {
 
-				font-size		: var(--font-size-xs);
-				color			: inherit;
+// 				font-size		: var(--font-size-xs);
+// 				color			: inherit;
 
-			}
+// 			}
 
-		}
+// 		}
 
-		& > span:last-child {
+// 		& > span:last-child {
 
-			font-size			: var(--font-size);
+// 			font-size			: var(--font-size);
 
-		}
+// 		}
 
-		&:hover {
+// 		&:hover {
 
-			background-color	: fn-hsl(bg-3, (lig: "- 2%", alp: "- 0.4"));
+// 			background-color	: fn-hsl(bg-3, (lig: "- 2%", alp: "- 0.4"));
 
-		}
+// 		}
 
-		// &:focus,
-		&:focus-visible {
+// 		// &:focus,
+// 		&:focus-visible {
 
-			@include mx-outline;
+// 			@include mx-outline;
 
-		}
+// 		}
 
-	}
+// 	}
 
-}
+// }

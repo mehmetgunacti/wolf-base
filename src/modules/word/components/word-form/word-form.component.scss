@@ -1,132 +1,132 @@
-@import 'helper';
-@import 'variables';
-@import 'components';
-@import 'mixins';
+// @import 'helper';
+// @import 'variables';
+// @import 'components';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	@include mx-card;
+// 	@include mx-card;
 
-	form {
+// 	form {
 
-		@include mx-flex-column;
-		padding			: var(--gap-xs);
-		gap				: var(--gap);
+// 		@include mx-flex-column;
+// 		padding			: var(--gap-xs);
+// 		gap				: var(--gap);
 
-		& > div {
+// 		& > div {
 
-			display			: flex;
-			flex-direction	: row;
-			gap				: var(--gap-xs);
-			& :first-child {
+// 			display			: flex;
+// 			flex-direction	: row;
+// 			gap				: var(--gap-xs);
+// 			& :first-child {
 
-				flex	: 1;
+// 				flex	: 1;
 
-			}
+// 			}
 
-			& .material-symbols-outlined {
+// 			& .material-symbols-outlined {
 
-				font-size	: 1.4rem;
+// 				font-size	: 1.4rem;
 
-			}
+// 			}
 
-		}
+// 		}
 
-		& div[context] {
+// 		& div[context] {
 
-			display		: flex;
+// 			display		: flex;
 
-			& *:first-child {
+// 			& *:first-child {
 
-				flex	: 1;
+// 				flex	: 1;
 
-			}
+// 			}
 
-		}
+// 		}
 
-		& > fieldset {
+// 		& > fieldset {
 
-			position	: relative;
+// 			position	: relative;
 
-			& > legend {
+// 			& > legend {
 
-				padding-top		: 2rem;
-				padding-bottom	: 1rem;
+// 				padding-top		: 2rem;
+// 				padding-bottom	: 1rem;
 
-			}
+// 			}
 
-			& > button {
+// 			& > button {
 
-				position		: absolute;
-				top				: -3rem;
-				right			: 0;
+// 				position		: absolute;
+// 				top				: -3rem;
+// 				right			: 0;
 
-			}
+// 			}
 
-			& div[definition] {
+// 			& div[definition] {
 
-				@include mx-flex-column;
-				// grid-template-columns	: 1fr 1fr;
-				grid-gap				: var(--gap-sm);
+// 				@include mx-flex-column;
+// 				// grid-template-columns	: 1fr 1fr;
+// 				grid-gap				: var(--gap-sm);
 
-				// & div:first-child,
-				// & div[language]
-				// & div[sample] {
+// 				// & div:first-child,
+// 				// & div[language]
+// 				// & div[sample] {
 
-				// 	grid-column: span 2;
+// 				// 	grid-column: span 2;
 
-				// }
+// 				// }
 
-				& div[language] {
+// 				& div[language] {
 
-					display		: flex;
-					grid-gap	: var(--gap-sm);
+// 					display		: flex;
+// 					grid-gap	: var(--gap-sm);
 
-					& > :nth-child(2) {
+// 					& > :nth-child(2) {
 
-						flex		: 1;
+// 						flex		: 1;
 
-					}
+// 					}
 
-				}
+// 				}
 
-				& div[sample] {
+// 				& div[sample] {
 
-					display		: flex;
-					grid-gap	: var(--gap-sm);
+// 					display		: flex;
+// 					grid-gap	: var(--gap-sm);
 
-					& *:first-child {
+// 					& *:first-child {
 
-						flex	: 1;
+// 						flex	: 1;
 
-					}
+// 					}
 
-				}
+// 				}
 
-			}
+// 			}
 
-		}
+// 		}
 
-	}
+// 	}
 
-	& > footer {
+// 	& > footer {
 
-		@include mx-flex-end-center;
+// 		@include mx-flex-end-center;
 
-	}
+// 	}
 
-	// div[form-element-buttons] {
+// 	// div[form-element-buttons] {
 
-	// 	flex				: 1;
-	// 	@extend %flex-space-between-center;
-	// 	padding				: var(--gap-xs);
+// 	// 	flex				: 1;
+// 	// 	@extend %flex-space-between-center;
+// 	// 	padding				: var(--gap-xs);
 
-	// 	& button:last-child {
+// 	// 	& button:last-child {
 
-	// 		margin-left		: auto;
+// 	// 		margin-left		: auto;
 
-	// 	}
+// 	// 	}
 
-	// }
+// 	// }
 
-}
+// }

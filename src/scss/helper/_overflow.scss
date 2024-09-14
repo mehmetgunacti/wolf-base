@@ -1,0 +1,29 @@
+@mixin mx-overflow-a { overflow: auto; }
+@mixin mx-overflow-h { overflow: hidden; }
+@mixin mx-overflow-s { overflow: scroll; }
+@mixin mx-overflow-v { overflow: visible; }
+
+@mixin mx-overflow-x-a { overflow-x: auto; }
+@mixin mx-overflow-x-h { overflow-x: hidden; }
+@mixin mx-overflow-x-s { overflow-x: scroll; }
+@mixin mx-overflow-x-v { overflow-x: visible; }
+
+@mixin mx-overflow-y-a { overflow-y: auto; }
+@mixin mx-overflow-y-h { overflow-y: hidden; }
+@mixin mx-overflow-y-s { overflow-y: scroll; }
+@mixin mx-overflow-y-v { overflow-y: visible; }
+
+.overflow-a { @include mx-overflow-a; }
+.overflow-h { @include mx-overflow-h; }
+.overflow-s { @include mx-overflow-s; }
+.overflow-v { @include mx-overflow-v; }
+
+.overflow-x-a { @include mx-overflow-x-a; }
+.overflow-x-h { @include mx-overflow-x-h; }
+.overflow-x-s { @include mx-overflow-x-s; }
+.overflow-x-v { @include mx-overflow-x-v; }
+
+.overflow-y-a { @include mx-overflow-y-a; }
+.overflow-y-h { @include mx-overflow-y-h; }
+.overflow-y-s { @include mx-overflow-y-s; }
+.overflow-y-v { @include mx-overflow-y-v; }

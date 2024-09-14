@@ -1,12 +1,12 @@
-<header>
+<header class="box shadow dark d-flex ai-c gap-xs">
 
-	<span class="material-symbols-outlined">bookmarks</span>
+	<span class="material-symbols-outlined mr-auto">bookmarks</span>
 
 	@for(tag of tags$ | async; track tag) {
 
 		<button
 			type="button"
-			class="tag"
+			class="tag sm"
 			[routerLink]="['/bookmarks']"
 			[queryParams]="{'tags': tag}">{{ tag }}</button>
 

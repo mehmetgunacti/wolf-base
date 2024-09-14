@@ -1,12 +1,12 @@
-<header>
+<header class="box shadow dark d-flex ai-c gap-xs">
 
-	<span class="material-symbols-outlined">note_stack</span>
+	<span class="material-symbols-outlined mr-auto">note_stack</span>
 
 	@for(tag of tags$ | async; track tag) {
 
 		<button
 			type="button"
-			class="tag"
+			class="tag sm"
 			[routerLink]="['/notes']"
 			[queryParams]="{'tags': tag}">{{ tag }}</button>
 

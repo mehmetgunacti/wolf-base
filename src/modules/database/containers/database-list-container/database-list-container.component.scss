@@ -1,90 +1,90 @@
-@import 'helper';
-@import 'variables';
-@import 'components';
-@import 'mixins';
+// @import 'helper';
+// @import 'variables';
+// @import 'components';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	display						: grid;
-	grid-template-columns		: 1fr;
-	gap							: var(--gap-sm);
+// 	display						: grid;
+// 	grid-template-columns		: 1fr;
+// 	gap							: var(--gap-sm);
 
-	@include bigScreen() {
+// 	@include bigScreen() {
 
-		grid-template-columns	: repeat(auto-fill, minmax(35rem, 1fr));
+// 		grid-template-columns	: repeat(auto-fill, minmax(35rem, 1fr));
 
-	}
+// 	}
 
-	& > w-toast {
+// 	& > w-toast {
 
-		grid-column			: 1 / -1;
+// 		grid-column			: 1 / -1;
 
-		& [total] {
+// 		& [total] {
 
-			font-size		: var(--font-size-h4);
-			font-weight		: bold;
-			text-align		: end;
-			padding-right	: var(--gap-sm);
+// 			font-size		: var(--font-size-h4);
+// 			font-weight		: bold;
+// 			text-align		: end;
+// 			padding-right	: var(--gap-sm);
 
-		}
+// 		}
 
-	}
+// 	}
 
-	& > fieldset {
+// 	& > fieldset {
 
-		@include mx-card;
-		@include mx-flex-column;
-		margin-top			: 2rem;
-		position			: relative;
-		padding-top			: calc(var(--gap-xl) + var(--gap-xxl)); // vars instead of rem or px
+// 		@include mx-card;
+// 		@include mx-flex-column;
+// 		margin-top			: 2rem;
+// 		position			: relative;
+// 		padding-top			: calc(var(--gap-xl) + var(--gap-xxl)); // vars instead of rem or px
 
-		& > legend {
+// 		& > legend {
 
-			position			: absolute;
-			display				: flex;
-			align-items			: center;
+// 			position			: absolute;
+// 			display				: flex;
+// 			align-items			: center;
 
-			gap					: var(--gap-xs);
+// 			gap					: var(--gap-xs);
 
-			top					: -2rem;
-			left				: 0rem;
+// 			top					: -2rem;
+// 			left				: 0rem;
 
-			padding				: var(--gap);
-			margin-left			: var(--gap);
+// 			padding				: var(--gap);
+// 			margin-left			: var(--gap);
 
-			border				: none;
-			background-color	: fn-hsl(bg-3);
-			border-radius		: var(--border-radius);
-			transition			: $bg-transition;
+// 			border				: none;
+// 			background-color	: fn-hsl(bg-3);
+// 			border-radius		: var(--border-radius);
+// 			transition			: $bg-transition;
 
-		}
+// 		}
 
-		& > main {
+// 		& > main {
 
-			& > table {
+// 			& > table {
 
-				width			: 100%;
+// 				width			: 100%;
 
-				& > tr > td {
+// 				& > tr > td {
 
-					&:first-child {
+// 					&:first-child {
 
-						width		: 100%;
+// 						width		: 100%;
 
-					}
+// 					}
 
-					&:not(:first-child) {
+// 					&:not(:first-child) {
 
-						text-align	: end;
+// 						text-align	: end;
 
-					}
+// 					}
 
-				}
+// 				}
 
-			}
+// 			}
 
-		}
+// 		}
 
-	}
+// 	}
 
-}
+// }

@@ -1,6 +1,6 @@
 .icon-container {
 
-	@include mx-flex-center-y;
-	gap		: var(--gap-xxs);
+	@include mx-flex(null, null, center);
+	@include mx-gap-xxs;
 
 }

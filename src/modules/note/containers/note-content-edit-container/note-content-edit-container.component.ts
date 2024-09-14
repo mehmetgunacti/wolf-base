@@ -13,6 +13,7 @@ import { selNote_SelectedEntity } from 'store/selectors/note/note-ui.selectors';
 	selector: 'app-note-content-edit-container',
 	templateUrl: './note-content-edit-container.component.html',
 	styleUrls: ['./note-content-edit-container.component.scss'],
+	host: { 'class': 'd-flex-column gap-sm flex-1' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NoteContentEditContainerComponent {

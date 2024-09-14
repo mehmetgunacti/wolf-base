@@ -1,7 +1,9 @@
 .empty {
 
 	flex: 1;
-	@extend %flex-center-center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	flex-direction	: column;
     gap				: var(--gap);
 	color			: fn-hsl(text-secondary);
@@ -10,8 +12,9 @@
 
 	& > .empty-message {
 
-		@extend %flex-center-y;
-		color		: fn-hsl(text-secondary);
+		display: flex;
+		align-items: center;
+		color		: var(--col-text-secondary);
 		font-style	: italic;
 
 		& > .material-symbols-outlined {

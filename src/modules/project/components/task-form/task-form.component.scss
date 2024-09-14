@@ -1,47 +1,47 @@
-@import 'helper';
-@import 'variables';
-@import 'components';
-@import 'mixins';
+// @import 'helper';
+// @import 'variables';
+// @import 'components';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	@include mx-overlay-content;
+// 	// @include mx-overlay-content;
 
-	form {
+// 	form {
 
-		@include mx-flex-column;
-		padding			: var(--gap-xs);
-		gap				: var(--gap-sm);
+// 		// @include mx-flex-column;
+// 		padding			: var(--gap-xs);
+// 		gap				: var(--gap-sm);
 
-		& > [task_row] {
+// 		& > [task_row] {
 
-			display			: flex;
-			flex-direction	: row;
+// 			display			: flex;
+// 			flex-direction	: row;
 
-			& > :first-child {
+// 			& > :first-child {
 
-				flex		: 1;
+// 				flex		: 1;
 
-			}
+// 			}
 
-		}
+// 		}
 
-		& > [task_status_row] {
+// 		& > [task_status_row] {
 
-			display					: grid;
-			grid-template-columns	: 1fr 1fr 1fr;
-			gap						: var(--gap-sm);
+// 			display					: grid;
+// 			grid-template-columns	: 1fr 1fr 1fr;
+// 			gap						: var(--gap-sm);
 
-		}
+// 		}
 
-		& > [task_date_row] {
+// 		& > [task_date_row] {
 
-			display					: grid;
-			grid-template-columns	: 1fr 1fr;
-			gap						: var(--gap-sm);
+// 			display					: grid;
+// 			grid-template-columns	: 1fr 1fr;
+// 			gap						: var(--gap-sm);
 
-		}
+// 		}
 
-	}
+// 	}
 
-}
+// }

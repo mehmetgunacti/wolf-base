@@ -1,9 +1,13 @@
 @let t = task();
 @let isExpanded = expanded();
 
-<div task_header [class.expanded]="isExpanded">
+<div
+	task_header
+	[class.expanded]="isExpanded"
+	class="component dark p-lg">
 
-	<a	[title]="t.description ?? ''"
+	<a	class="gap-xs cur-pointer"
+		[title]="t.description ?? ''"
 		(click)="onToggleTask(t.id)"
 		tabindex="0">
 
@@ -12,7 +16,7 @@
 		<small><span class="material-symbols-outlined">category</span> {{ TASK_CATEGORIES[t.category] }}</small>
 		<span>{{ t.name }}</span>
 		<!-- TAGS -->
-		<div task_tags>
+		<div task_tags class="d-flex wrap gap-xs">
 
 			@for (tag of t.tags; track $index) {
 
@@ -25,15 +29,15 @@
 	</a>
 
 </div>
-<div task_content_wrapper [@slideDown]="isExpanded">
+<div task_content_wrapper [@slideDown]="isExpanded" class="overflow-h">
 
-	<div task_content>
+	<div task_content class="box dark d-flex-column p ml-sm mr-sm gap-sm">
 
 		<!-- DESCRIPTION -->
-		<div task_desc>{{ t.description }}</div>
+		<div task_desc class="d-flex mb">{{ t.description }}</div>
 
 		<!-- START -->
-		<div task_small>
+		<div task_small class="d-flex-column ai-s">
 
 			<small>
 				<span class="material-symbols-outlined small">schedule</span> {{ t.start | date:'EEEE dd.MM.yyyy' }}
@@ -46,7 +50,7 @@
 		</div>
 
 	</div>
-	<div class="footer _n">
+	<div class="footer-buttons">
 
 		<button
 			class="link small"

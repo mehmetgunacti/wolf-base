@@ -1,12 +1,19 @@
-<ul>
+<ul class="d-flex ai-c wrap">
+
 	<button
 		type="button"
 		class="link rounded"
-		(click)="onClick(home)">
+		(click)="onClick(home())">
 		<span class="material-symbols-outlined">home</span>
 	</button>
-	<li *ngFor="let item of items" (click)="onClick(item.url)">
-		<span class="material-symbols-outlined">chevron_right</span>
-		<span>{{ item.label }}</span>
-	</li>
+
+	@for (item of items(); track $index) {
+
+		<li (click)="onClick(item.url)" class="d-flex ai-c cur-pointer">
+			<span class="material-symbols-outlined">chevron_right</span>
+			<span>{{ item.label }}</span>
+		</li>
+
+	}
+
 </ul>

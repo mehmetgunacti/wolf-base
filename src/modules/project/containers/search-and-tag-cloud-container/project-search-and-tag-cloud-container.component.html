@@ -36,9 +36,9 @@
 	</div>
 
 	<w-tag-cloud
-		[tags]="tags$ | async"
-		[selectedTags]="selectedTags$ | async"
-		[relatedTags]="relatedTags$ | async"
+		[tags]="(tags$ | async) ?? []"
+		[selectedTags]="(selectedTags$ | async) ?? []"
+		[relatedTags]="(relatedTags$ | async) ?? []"
 		(tagClick)="onTagClicked($event)"></w-tag-cloud>
 
 </aside>

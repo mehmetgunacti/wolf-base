@@ -1,6 +1,6 @@
-<fieldset>
+<fieldset class="d-flex-column pos-relative">
 
-	<legend>
+	<legend class="d-flex ai-c pos-absolute gap-xs p ml dark transition-bg">
 
 		<ng-container [ngSwitch]="task.entity">
 
@@ -87,11 +87,11 @@
 	</header>
 
 	<!-- CONTENT -->
-	<section content>
+	<section content class="scrollable">
 
 		@for (item of task.items; track item.id) {
 
-			<div>
+			<div class="mb-xl">
 				<small>{{ item.id }}</small>
 				<span>{{ item.name }}</span>
 			</div>
@@ -101,7 +101,7 @@
 	</section>
 
 	<!-- FOOTER -->
-	<footer>
+	<footer class="footer-buttons">
 
 		@switch (actionType) {
 

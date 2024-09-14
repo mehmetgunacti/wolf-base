@@ -1,17 +1,15 @@
-@import 'helper';
-@import 'variables';
-@import 'components';
-@import 'mixins';
+// @import 'helper';
+// @import 'variables';
+// @import 'components';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	@include mx-input-element;
+// 	& > select > option {
 
-	& > select > option {
+// 		background-color	: var(--col-bg-form-element);
+// 		@include mx-input-element-border;
 
-		background-color	: fn-hsl(bg-1);
-		border-color		: fn-hsl(bg-1, (lig: "- 10%"));
+// 	}
 
-	}
-
-}
+// }

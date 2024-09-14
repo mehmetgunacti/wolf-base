@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, inject } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Bookmark, ClickedBookmark, TAG_POPULAR, ToastConfiguration, UUID, parseURL } from 'lib';
 import { Observable, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { BOOKMARK_FORM, BookmarkForm, EditFormImpl } from './bookmark-form';
-import { FormControl } from '@angular/forms';
 
 @Component({
 	selector: 'app-bookmark-form',
 	templateUrl: './bookmark-form.component.html',
 	styleUrls: ['./bookmark-form.component.scss'],
 	providers: [{ provide: BOOKMARK_FORM, useClass: EditFormImpl }],
+	host: { 'class': 'd-flex-column gap-sm' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarkFormComponent implements OnInit, OnChanges, OnDestroy {

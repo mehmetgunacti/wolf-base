@@ -9,6 +9,7 @@ import { selNote_rootArray } from 'store/selectors/note/note-ui.selectors';
 	selector: 'app-notes-container',
 	templateUrl: './notes-container.component.html',
 	styleUrls: ['./notes-container.component.scss'],
+	host: { 'class': 'box' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotesContainerComponent {

@@ -1,34 +1,24 @@
-@import 'components';
-@import 'variables';
-@import 'mixins';
-
 :host {
 
-	--switch-handle-color	: #{fn-hsl(accent)};
-	--switch-bg-color		: #{fn-hsl(accent, (lig: "+ 20%"))};
+	--switch-handle-color	: var(--col-accent);
+	--switch-bg-color		: color-mix(in hsl, var(--col-accent), white 20%);
 	& > .switch {
 
-		// background-color	: fn-hsl(bg-1);
 		border-radius		: 18px;
-		cursor				: pointer;
-		display				: inline-block;
 		height				: 20px;
-		padding				: 3px;
-		position			: relative;
 		vertical-align		: top;
 		width				: 56px;
 
 		& > .switch-input {
 
 			appearance	: none;
-			position	: absolute;
 			top			: 6px;
 			left		: 8px;
 			right		: 8px;
 
 			&:focus-visible {
 
-				outline			: 2px solid fn-hsl(focus);
+				outline			: 2px solid var(--col-outline);
     			outline-offset	: 7px;
 
 			}
@@ -44,14 +34,11 @@
 
 		& > .switch-label {
 
-			background-color: fn-hsl(bg-1);
-			border-radius	: inherit;
-			display			: block;
-			font-size		: 10px;
-			height			: inherit;
-			position		: relative;
-			text-transform	: uppercase;
-			transition		: $bg-transition;
+			background-color	: var(--col-bg-form-element);
+			border-radius		: inherit;
+			font-size			: 10px;
+			height				: inherit;
+			text-transform		: uppercase;
 
 		}
 
@@ -99,38 +86,37 @@
 
 	&.primary {
 
-		--switch-handle-color	: #{fn-hsl(primary)};
-		--switch-bg-color		: #{fn-hsl(primary, (lig: "+ 20%"))}
+		--switch-handle-color	: var(--col-primary);
+		--switch-bg-color		: color-mix(in hsl, var(--col-primary), white 20%);
 
 	}
 
 	&.success {
 
-		--switch-handle-color	: #{fn-hsl(success)};
-		--switch-bg-color		: #{fn-hsl(success, (lig: "+ 20%"))}
+		--switch-handle-color	: var(--col-success);
+		--switch-bg-color		: color-mix(in hsl, var(--col-success), white 20%);
 
 	}
 
 	&.info {
 
-		--switch-handle-color	: #{fn-hsl(info)};
-		--switch-bg-color		: #{fn-hsl(info, (lig: "+ 20%"))}
+		--switch-handle-color	: var(--col-info);
+		--switch-bg-color		: color-mix(in hsl, var(--col-info), white 20%);
 
 	}
 
 	&.warn {
 
-		--switch-handle-color	: #{fn-hsl(warn)};
-		--switch-bg-color		: #{fn-hsl(warn, (lig: "+ 20%"))}
+		--switch-handle-color	: var(--col-warn);
+		--switch-bg-color		: color-mix(in hsl, var(--col-warn), white 20%);
 
 	}
 
 	&.error {
 
-		--switch-handle-color	: #{fn-hsl(error)};
-		--switch-bg-color		: #{fn-hsl(error, (lig: "+ 20%"))}
+		--switch-handle-color	: var(--col-error);
+		--switch-bg-color		: color-mix(in hsl, var(--col-error), white 20%);
 
 	}
-
 
 }

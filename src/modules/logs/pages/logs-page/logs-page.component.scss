@@ -1,9 +1,1 @@
-@import 'helper';
-@import 'variables';
-
-:host {
-
-	@extend %flex-column;
-	gap: var(--gap-sm);
-
-}
+:host {}

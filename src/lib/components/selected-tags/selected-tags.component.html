@@ -1,23 +1,29 @@
-<ng-container *ngIf="!selectedTags || selectedTags.length < 1; else selected">
+@if (selectedTags().length < 1) {
 
-	<button
-		*ngFor="let tag of tags"
-		type="button"
-		class="tag"
-		(click)="onTagClick(tag)">{{ tag }}</button>
+	@for (tag of tags(); track $index) {
 
-</ng-container>
-<ng-template #selected>
+		<button
+			type="button"
+			class="tag"
+			(click)="onTagClick(tag)">{{ tag }}</button>
+
+	}
+
+} @else {
 
 	<button
 		type="button"
 		(click)="emptyFilter()"
 		title="Clear Filter"
 		class="link small"><span class="material-symbols-outlined">filter_alt_off</span></button>
-	<button
-		*ngFor="let tag of selectedTags"
-		class="tag"
-		type="button"
-		(click)="onTagClick(tag)">{{ tag }}</button>
 
-</ng-template>
+	@for (tag of selectedTags(); track $index) {
+
+		<button
+			class="tag"
+			type="button"
+			(click)="onTagClick(tag)">{{ tag }}</button>
+
+	}
+
+}

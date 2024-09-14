@@ -1,128 +1,54 @@
-@import 'helper';
-@import 'variables';
-@import 'components';
-@import 'mixins';
+// @import 'helper';
+// @import 'variables';
+// @import 'components';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	--color-green	: #{fn-hsl(success)};
-	--color-red		: #{fn-hsl(error)};
+// 	--color-green	: #{fn-hsl(success)};
+// 	--color-red		: #{fn-hsl(error)};
 
-	@include mx-flex-column;
-	overflow		: hidden;
+// 	overflow		: hidden;
 
-	& > [quiz_header] {
+// 	& > [quiz_header] {
 
-		@include mx-component(3);
-		@include mx-box-shadow;
-		padding-inline	: var(--gap-lg);
+// 		& > [quiz_hints] {
 
-		& > [quiz_question_wrapper] {
+// 			& > [quiz_contexts],
+// 			& > [quiz_samples] {
 
-			@include mx-flex-space-between-center;
-			& > [quiz_icon],
-			& > [quiz_solve] {
+// 				display		: grid;
+// 				font-size	: smaller;
+// 				padding		: var(--gap-sm) var(--gap-xl);
 
-				display		: flex;
+// 			}
 
-			}
-			& > [quiz_question] {
+// 		}
 
-				flex		: 1;
-				@include mx-h5;
-				@include mx-flex-center-center;
-				gap			: var(--gap-sm);
-				cursor		: pointer;
+// 	}
 
-			}
+// 	& > [quiz_choices] {
 
-		}
+// 		display					: grid;
+// 		grid-template-columns	: repeat(auto-fill, minmax(35rem, 1fr));
+// 		overflow				: 'hidden';
 
-		& > [quiz_hints] {
+// 		& > [quiz_choice] {
 
-			& > [quiz_contexts],
-			& > [quiz_samples] {
+// 			&.correct {
 
-				display		: grid;
-				font-size	: smaller;
-				padding		: var(--gap-sm) var(--gap-xl);
+// 				background-color	: var(--col-success);
 
-			}
+// 			}
 
-		}
+// 			&.incorrect {
 
-	}
-	& > [quiz_answer] {
+// 				background-color	: var(--col-error);
 
-		position	: relative;
+// 			}
 
-		& > [quiz_answer_buttons] {
+// 		}
 
-			position	: absolute;
-			top			: var(--gap-xxl);
-			right		: var(--gap-xxl);
+// 	}
 
-		}
-
-	}
-
-	& > [quiz_choices] {
-
-		display					: grid;
-		grid-template-columns	: repeat(auto-fill, minmax(35rem, 1fr));
-		grid-gap				: var(--gap-sm);
-		padding-top				: var(--gap-sm);
-		overflow				: 'hidden';
-
-		& > [quiz_choice] {
-
-			@include mx-component;
-			@include mx-box-shadow;
-			color		: fn-hsl(text);
-			cursor		: pointer;
-
-			&:hover {
-
-				background-color	: fn-hsl(bg-3);
-
-			}
-
-			&.success {
-
-				background-color	: fn-hsl(success);
-
-			}
-
-			&.failure {
-
-				background-color	: fn-hsl(error);
-
-			}
-
-		}
-
-	}
-
-	& > [quiz_empty_header] {
-
-		@include mx-component(3);
-		@include mx-box-shadow;
-		display		: flex;
-
-		& > [quiz_icon] {
-
-			display		: flex;
-
-		}
-
-		& > [quiz_question] {
-
-			flex	: 1;
-			@include mx-flex-center-center;
-			gap		: var(--gap-sm);
-
-		}
-
-	}
-
-}
+// }

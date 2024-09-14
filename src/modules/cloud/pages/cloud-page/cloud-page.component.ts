@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { closeConflictDialog } from 'store/actions/cloud.actions';
@@ -10,7 +10,9 @@ import { selCore_isBigScreen } from 'store/selectors/core/core-ui.selectors';
 @Component({
 	selector: 'app-cloud-page',
 	templateUrl: './cloud-page.component.html',
-	styleUrls: ['./cloud-page.component.scss']
+	styleUrls: ['./cloud-page.component.scss'],
+	host: { 'class': 'd-flex-column gap-sm' },
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CloudPageComponent {
 

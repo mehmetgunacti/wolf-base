@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CloudTask, MenuItem, TAG_PINNED, TAG_POPULAR, Theme, getNextTheme } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map, take } from 'rxjs';
@@ -11,7 +11,8 @@ import { selCore_theme } from 'store/selectors/core/core-ui.selectors';
 	selector: 'app-nav',
 	templateUrl: './nav.component.html',
 	styleUrls: ['./nav.component.scss'],
-	// encapsulation: ViewEncapsulation.None
+	host: { 'class': 'd-flex-column flex-1' },
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavComponent {
 

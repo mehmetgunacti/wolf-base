@@ -1,0 +1,10 @@
+@mixin mx-cursor($cursor: pointer) {
+
+	cursor: $cursor;
+
+}
+
+.cur-pointer	{ @include mx-cursor; }
+.cur-auto		{ @include mx-cursor(auto)}
+
+

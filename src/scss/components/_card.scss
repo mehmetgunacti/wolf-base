@@ -1,18 +1,17 @@
-@import 'helper';
-@import 'variables';
+// @import 'helper';
+// @import 'variables';
 @import 'mixins';
+@import 'html';
 
 @mixin mx-card($bg: 2) {
 
 	display	: block;
-	@include mx-component($bg);
-	@include mx-box-shadow;
 
 	gap		: var(--gap-xl);
 
 	& > header {
 
-		@include mx-flex-space-between-start;
+		// @include mx-flex-space-between-start;
 
 		& > [card_title] {
 
@@ -24,7 +23,7 @@
 
 		& > [card_buttons] {
 
-			@include mx-flex-center-y;
+			// @include mx-flex-center-y;
 
 		}
 
@@ -46,7 +45,7 @@
 
 	&.darker {
 
-		background-color: fn-hsl(bg-3);
+		background-color: var(--col-bg-nav);
 
 	}
 

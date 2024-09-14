@@ -14,6 +14,7 @@ import { choicesBlinkTrigger } from './quiz.animation';
 	templateUrl: './quiz-container.component.html',
 	styleUrls: ['./quiz-container.component.scss'],
 	animations: [choicesBlinkTrigger, slideChoicesTrigger, quoteChangeTrigger, upsideDownTrigger],
+	host: { 'class': 'd-flex-column' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizContainerComponent {

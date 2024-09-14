@@ -1,14 +1,16 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { toastTrigger } from './toast.animation';
-import { ToastConfiguration } from './toast.util';
 import { WolfToastRef } from './toast.service';
+import { ToastConfiguration } from './toast.util';
 
 @Component({
 	selector: 'w-toast-wrapper',
 	templateUrl: './toast-wrapper.component.html',
 	styleUrl: './toast-wrapper.component.scss',
-	animations: [toastTrigger]
+	host: { 'class': 'd-flex-column gap m-xl' },
+	animations: [toastTrigger],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastWrapperComponent {
 

@@ -25,7 +25,7 @@ fieldset {
 
 		& > legend {
 
-			@include mx-component(3);
+			// @include mx-component(3);
 			padding 	: var(--gap-xs) var(--gap);
 
 		}

@@ -7,6 +7,7 @@ import * as entityActions from 'store/actions/entity.actions';
 	selector: 'app-project-new-form-container',
 	templateUrl: './project-new-form-container.component.html',
 	styleUrls: ['./project-new-form-container.component.scss'],
+	host: { 'class': 'd-flex-column' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectNewFormContainerComponent {

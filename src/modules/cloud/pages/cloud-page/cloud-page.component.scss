@@ -1,15 +1,12 @@
-@import 'helper';
-@import 'mixins';
+// @import 'helper';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	@extend %flex-column;
-	gap			: var(--gap-sm);
+// 	& [config_alert] {
 
-	& [config_alert] {
+// 		@include mx-flex-space-between-center;
 
-		@include mx-flex-space-between-center;
+// 	}
 
-	}
-
-}
+// }

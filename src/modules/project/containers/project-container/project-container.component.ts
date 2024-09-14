@@ -20,6 +20,7 @@ function formatQueryParams(queryParams: TaskQueryParams): string {
 	selector: 'app-project-container',
 	templateUrl: './project-container.component.html',
 	styleUrls: ['./project-container.component.scss'],
+	host: { 'class': 'd-flex-column gap-sm' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectContainerComponent {

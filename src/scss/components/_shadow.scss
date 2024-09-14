@@ -3,3 +3,9 @@
 	// $color	: "shadow" !default;
 	box-shadow: hsl(var(--col-#{$color}) / 0.4) 1px 4px 4px, hsl(var(--col-#{$color}) / 0.3) 5px 4px 2px -2px, hsl(var(--col-#{$color}) / 0.2) 0px -1px 1px inset
 }
+
+.shadow {
+
+	@include mx-box-shadow;
+
+}

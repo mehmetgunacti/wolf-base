@@ -15,7 +15,8 @@ import { NameBase } from 'lib/models';
 	],
 	host: {
 		'[tabindex]': '0',
-		'(focus)': 'onHostFocus()'
+		'(focus)': 'onHostFocus()',
+		'class': 'input-element'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

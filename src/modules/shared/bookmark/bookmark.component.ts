@@ -6,6 +6,7 @@ import { ClickedBookmark } from 'lib/models';
 	selector: 'app-bookmark',
 	templateUrl: './bookmark.component.html',
 	styleUrls: ['./bookmark.component.scss'],
+	host: { 'class': 'box shadow hover' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarkComponent {

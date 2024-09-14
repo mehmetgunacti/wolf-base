@@ -1,174 +1,169 @@
-@import 'helper';
-@import 'variables';
-@import 'mixins';
+// @import 'helper';
+// @import 'variables';
+// @import 'mixins';
 
-:host {
+// :host {
 
-	@include mx-box-shadow;
-	--bookmark-hover-transition		: opacity 400ms ease-in-out;
-	--bookmark-edit-button-opacity	: 0;
-	--bookmark-name-sup-opacity		: 0;
-	--font-size 					: 1.6rem;
-	--image-size					: 110px;
-	--bookmark-bg-color				: #{fn-hsl(bg-2)};
+// 	--bookmark-hover-transition		: opacity 400ms ease-in-out;
+// 	--bookmark-edit-button-opacity	: 0;
+// 	--bookmark-name-sup-opacity		: 0;
+// 	--font-size 					: 1.6rem;
+// 	--image-size					: 110px;
 
-	&.compact {
+// 	&.compact {
 
-		--font-size					: 1.4rem;
-		--image-size				: 55px;
+// 		--font-size					: 1.4rem;
+// 		--image-size				: 55px;
 
-	}
+// 	}
 
-	display				: flex;
-	position			: relative;
-	padding				: 0.5rem;
-	overflow			: hidden;
+// 	display				: flex;
+// 	position			: relative;
+// 	overflow			: hidden;
 
-	background-color	: var(--bookmark-bg-color);
-	border-radius		: var(--border-radius);
-	transition			: all ease-in-out 250ms, background-color $transition;
+// 	transition			: all ease-in-out 250ms, background-color $transition;
 
-	& > div[bookmark-overlay] {
+// 	& > div[bookmark-overlay] {
 
-		position					: absolute;
-		width						: 100%;
-		height						: 100%;
-		top							: 0;
-		left						: 0;
-		background-color			: transparent;
-		pointer-events				: auto;
-		z-index						: $z-index-bookmark-overlay;
+// 		position					: absolute;
+// 		width						: 100%;
+// 		height						: 100%;
+// 		top							: 0;
+// 		left						: 0;
+// 		background-color			: transparent;
+// 		pointer-events				: auto;
+// 		z-index						: $z-index-bookmark-overlay;
 
-	}
+// 	}
 
-	&:hover {
+// 	&:hover {
 
-		--bookmark-edit-button-opacity : 1;
+// 		--bookmark-edit-button-opacity : 1;
 
-	}
+// 	}
 
-	div[bookmark-image] {
+// 	div[bookmark-image] {
 
-		@extend %flex-center-y;
+// 		@extend %flex-center-y;
 
-		& > img {
+// 		& > img {
 
-			width	: var(--image-size);
-			height	: var(--image-size);
+// 			width	: var(--image-size);
+// 			height	: var(--image-size);
 
-		}
+// 		}
 
-	}
+// 	}
 
-	div[bookmark-right] {
+// 	div[bookmark-right] {
 
-		@extend %flex-column;
-		padding	: 0.6rem;
-		flex	: 1;
+// 		@extend %flex-column;
+// 		padding	: 0.6rem;
+// 		flex	: 1;
 
-		div[bookmark-top] {
-			flex: 1;
-			@extend %flex-start-center;
+// 		div[bookmark-top] {
+// 			flex: 1;
+// 			@extend %flex-start-center;
 
-			& > a {
+// 			& > a {
 
-				@include mx-flex-column;
-				text-decoration : none;
+// 				@include mx-flex-column;
+// 				text-decoration : none;
 
-				span[bookmark-name] {
+// 				span[bookmark-name] {
 
-					font-size		: var(--font-size);
-					font-weight		: bolder;
-					position		: relative;
+// 					font-size		: var(--font-size);
+// 					font-weight		: bolder;
+// 					position		: relative;
 
-					sup {
-						position		: absolute;
-						opacity			: var(--bookmark-name-sup-opacity);
-						transition		: var(--bookmark-hover-transition);
-						margin-left		: 0.3rem;
-						top				: -6px;
-						&>.material-symbols-outlined {
-							font-size	: var(--font-size);
-						}
-					}
+// 					sup {
+// 						position		: absolute;
+// 						opacity			: var(--bookmark-name-sup-opacity);
+// 						transition		: var(--bookmark-hover-transition);
+// 						margin-left		: 0.3rem;
+// 						top				: -6px;
+// 						&>.material-symbols-outlined {
+// 							font-size	: var(--font-size);
+// 						}
+// 					}
 
-				}
+// 				}
 
-				span[bookmark-title] {
+// 				span[bookmark-title] {
 
-					color		: fn-hsl(text-secondary);
-					font-size	: 1.2rem;
+// 					color		: fn-hsl(text-secondary);
+// 					font-size	: 1.2rem;
 
-				}
+// 				}
 
-			}
+// 			}
 
-			&:hover {
+// 			&:hover {
 
-				--bookmark-name-sup-opacity : 1;
+// 				--bookmark-name-sup-opacity : 1;
 
-			}
+// 			}
 
-		}
+// 		}
 
-		div[bookmark-bottom] {
+// 		div[bookmark-bottom] {
 
-			@extend %flex-column;
+// 			@extend %flex-column;
 
-			div[bookmark-url] {
+// 			div[bookmark-url] {
 
-				word-break		: break-all;
-				font-size		: x-small;
-				color			: fn-hsl(text-secondary);
+// 				word-break		: break-all;
+// 				font-size		: x-small;
+// 				color			: fn-hsl(text-secondary);
 
-			}
+// 			}
 
-			div[bookmark-tags] {
+// 			div[bookmark-tags] {
 
-				display			: flex;
-				flex-wrap		: wrap;
-				margin-top		: var(--gap-xs);
-				padding			: var(--gap-sm) var(--gap-sm) var(--gap-sm) 0;
-				gap				: var(--gap-xs);
+// 				display			: flex;
+// 				flex-wrap		: wrap;
+// 				margin-top		: var(--gap-xs);
+// 				padding			: var(--gap-sm) var(--gap-sm) var(--gap-sm) 0;
+// 				gap				: var(--gap-xs);
 
-			}
+// 			}
 
-		}
+// 		}
 
-	}
+// 	}
 
-	#editButton {
+// 	#editButton {
 
-		position				: absolute;
-		opacity					: var(--bookmark-edit-button-opacity);
-		transition				: var(--bookmark-hover-transition);
-		bottom					: 1rem;
-		right					: 1rem;
-		border-radius			: var(--border-radius-sm);
+// 		position				: absolute;
+// 		opacity					: var(--bookmark-edit-button-opacity);
+// 		transition				: var(--bookmark-hover-transition);
+// 		bottom					: 1rem;
+// 		right					: 1rem;
+// 		border-radius			: var(--border-radius-sm);
 
-	}
+// 	}
 
-	#popularButton {
+// 	#popularButton {
 
-		position				: absolute;
-		opacity					: var(--bookmark-edit-button-opacity);
-		transition				: var(--bookmark-hover-transition);
-		top						: 1rem;
-		right					: 1rem;
-		border-radius			: var(--border-radius-sm);
+// 		position				: absolute;
+// 		opacity					: var(--bookmark-edit-button-opacity);
+// 		transition				: var(--bookmark-hover-transition);
+// 		top						: 1rem;
+// 		right					: 1rem;
+// 		border-radius			: var(--border-radius-sm);
 
-	}
+// 	}
 
-	#editButton,
-	#popularButton {
+// 	#editButton,
+// 	#popularButton {
 
-		&:focus,
-		&:focus-visible {
+// 		&:focus,
+// 		&:focus-visible {
 
-			opacity				: 1;
+// 			opacity				: 1;
 
-		}
+// 		}
 
-	}
+// 	}
 
-}
+// }

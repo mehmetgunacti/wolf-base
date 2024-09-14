@@ -1,10 +1,4 @@
-@import 'helper';
-@import 'variables';
-@import 'mixins';
-
 :host {
-
-	display				: flex;
 
 	min-height			: 6.3rem;
 	min-width			: 28rem;
@@ -12,24 +6,15 @@
 	border				: 0;
 	border-radius		: var(--border-radius);
 
-	color				: fn-hsl(text);
-	transition			: $bg-transition;
-	cursor				: pointer;
-
-	@include mx-box-shadow;
+	color				: var(--col-text);
 
 	[toast-left] {
 
-		@extend %flex-center-center;
 		width			: 6rem;
 
 	}
 
 	[toast-right] {
-
-		flex			: 1;
-		@extend %flex-column-center;
-		padding			: var(--gap) var(--gap) var(--gap) 0;
 
 		[toast-title] {
 
@@ -42,25 +27,25 @@
 
 	&.success {
 
-		background-color	: fn-hsl(success);
+		background-color	: var(--col-success);
 
 	}
 
 	&.info {
 
-		background-color	: fn-hsl(info);
+		background-color	: var(--col-info);
 
 	}
 
 	&.warn {
 
-		background-color	: fn-hsl(warn);
+		background-color	: var(--col-warn);
 
 	}
 
 	&.error {
 
-		background-color	: fn-hsl(error);
+		background-color	: var(--col-error);
 
 	}
 

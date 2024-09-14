@@ -1,10 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { ToastConfiguration } from './toast.util';
 
 @Component({
 	selector: 'w-toast',
 	templateUrl: './toast.component.html',
-	styleUrls: ['./toast.component.scss']
+	styleUrls: ['./toast.component.scss'],
+	host: { 'class': 'd-flex cur-pointer transition-bg shadow' },
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastComponent implements OnInit {
 

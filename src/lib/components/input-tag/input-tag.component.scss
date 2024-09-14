@@ -1,31 +1,22 @@
-@import 'mixins';
-@import 'components';
+// @import 'mixins';
+// @import 'components';
 
-:host {
+// :host {
 
-	@include mx-input-element;
-	display				: inline-flex;
+// 	& > [tags] {
 
-	& > [tags] {
+// 		&:empty {
 
-		display					: inline-flex;
-		flex-wrap				: wrap;
-		padding					: var(--gap-sm);
-		gap						: var(--gap-xxs);
+// 			padding				: 0;
 
-		&:empty {
+// 		}
 
-			padding				: 0;
+// 	}
 
-		}
+// 	& > input {
 
-	}
+// 		min-width	: 10rem;
 
-	& > input {
+// 	}
 
-		flex		: 1;
-		min-width	: 10rem;
-
-	}
-
-}
+// }

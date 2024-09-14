@@ -12,7 +12,7 @@ ol {
 		&::marker {
 
 			font-size		: var(--font-size-sm);
-			color			: fn-hsl(text-secondary);
+			color			: var(--col-text-secondary);
 			transition		: color 1s cubic-bezier(0.25, 1, 0.25, 1);
 
 		}
