@@ -16,6 +16,7 @@
 	--font-size-h6			: calc(var(--font-size) * 1.125);	// 18px
 
 	--line-height			: 1.5;
+	--letter-spacing		: 0.5px;
 
 	--font-family			: 'Nunito Sans', serif;
 	--font-family-mono		: 'Source Code Pro', monospace;
@@ -58,6 +59,7 @@
 
 		--font-size			: 0.875rem; // 14px
 		--line-height		: 1.3;
+		--letter-spacing	: normal;
 
 		--gap				: 1rem;
 		--radius			: 1.2rem;

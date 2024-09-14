@@ -1,3 +1,9 @@
+h1, h2, h3 {
+
+	letter-spacing: 0.2px; /* Tighter for headings */
+
+}
+
 @mixin mx-h1 {
 
 	font-size		: var(--font-size-h1);
