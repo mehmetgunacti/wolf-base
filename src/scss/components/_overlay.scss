@@ -3,7 +3,7 @@
 	width	: 100vw;
 	height	: 100dvh;
 
-	@include bigScreen {
+	@include mx-bigScreen {
 
 		width	: 80vw;
 		height	: 90dvh;

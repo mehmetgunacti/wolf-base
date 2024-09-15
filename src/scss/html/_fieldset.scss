@@ -11,7 +11,7 @@ fieldset {
 			right		: calc(2 * var(--gap));
 			padding		: var(--gap-xs);
 
-			@include bigScreen() {
+			@include mx-bigScreen() {
 
 				top			: calc(-3 * var(--gap));
 

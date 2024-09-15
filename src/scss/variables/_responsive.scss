@@ -1,39 +1,45 @@
-@mixin sm() {
-
-	@media screen and (min-width: fn-var($breakpoint-sm)) {
-		@content;
-	}
-
-}
-
-@mixin md() {
-
-	@media screen and (min-width: fn-var($breakpoint-md)) {
-		@content;
-	}
-
-}
-
-@mixin lg() {
-
-	@media screen and (min-width: fn-var($breakpoint-lg)) {
-		@content;
-	}
-
-}
-
-@mixin xl() {
-
-	@media screen and (min-width: fn-var($breakpoint-xl)) {
-		@content;
-	}
-
-}
+// these values should be the same : responsive.constant.ts
+$breakpoint-sm: 36rem; // 576px / 16px;
+$breakpoint-md: 48rem; // 768px / 16px;
+$breakpoint-lg: 62rem; // 992px / 16px;
+$breakpoint-xl: 75rem; // 1200px / 16px;
 
 @mixin bigScreen() {
 
-	@include md {
+	@media screen and (min-width: $breakpoint-sm) {
 		@content;
-	};
+	}
+
+}
+
+@mixin mx-md() {
+
+	@media screen and (min-width: $breakpoint-md) {
+		@content;
+	}
+
+}
+
+@mixin mx-lg() {
+
+	@media screen and (min-width: $breakpoint-lg) {
+		@content;
+	}
+
+}
+
+@mixin mx-xl() {
+
+	@media screen and (min-width: $breakpoint-xl) {
+		@content;
+	}
+
+}
+
+@mixin mx-bigScreen() {
+
+	@include mx-md {
+		@content;
+	}
 
 }
