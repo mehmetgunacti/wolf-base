@@ -3,13 +3,7 @@
 	border-radius	: var(--border-radius-sm);
 	padding			: var(--gap-sm);
 
-	&:focus-visible {
-
-		@include mx-outline((important: !important));
-		// outline			: 1px solid red !important; // fn-hsl(focus) !important;
-		// outline-style	: solid !important;
-
-	}
+	@include mx-outline;
 
 }
 
@@ -20,7 +14,7 @@
 	&:focus-visible,
 	&:focus-within {
 
-		@include mx-outline((important: !important));
+		@include mx-outline;
 
 	}
 
