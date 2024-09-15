@@ -1,136 +1,73 @@
-$app-colors: (
-	bg-header: true,
-	bg-nav: true,
-	bg-popup: true,
-	bg-component-dark: true,
-	bg-component: true,
-	bg-form-element: true,
-	bg-page: true,
+@function map-size($map) {
 
-	bg-overlay: true,
-	shadow: true,
+	$count: -1;
+	@each $key, $value in $map {
 
-	text: true,
-	text-secondary: true,
-
-	primary: true,
-	success: true,
-	info: true,
-	warn: true,
-	error: true,
-
-	accent: true,
-	focus: true,
-	outline: true,
-
-	disabled: true,
-
-	btn-default-text-color: true,
-	btn-default-bg-color: true,
-	btn-default-bg-color-hover: true,
-	btn-default-bg-color-active: true,
-	btn-default-border-color: true,
-
-	btn-disabled-text-color: true,
-	btn-disabled-bg-color: true,
-	btn-disabled-bg-color-hover: true,
-	btn-disabled-bg-color-active: true,
-	btn-disabled-border-color: true,
-
-	btn-link-text-color: true,
-	btn-link-bg-color: true,
-	btn-link-bg-color-hover: true,
-	btn-link-bg-color-active: true,
-	btn-link-border-color: true,
-
-	btn-warn-text-color: true,
-	btn-warn-bg-color: true,
-	btn-warn-bg-color-hover: true,
-	btn-warn-bg-color-active: true,
-	btn-warn-border-color: true,
-
-	btn-danger-text-color: true,
-	btn-danger-bg-color: true,
-	btn-danger-bg-color-hover: true,
-	btn-danger-bg-color-active: true,
-	btn-danger-border-color: true,
-
-	btn-tag-text-color: true,
-	btn-tag-bg-color: true,
-	btn-tag-bg-color-hover: true,
-	btn-tag-bg-color-active: true
-
-);
-
-@function fn-color($name) {
-
-	@if map-has-key($app-colors, $name) {
-
-		@return var(--col-#{$name});
+		$count: $count + 1;
 
 	}
-
-	@else {
-
-		@error "Invalid color name: #{$name}.";
-
-	}
+	@return $count;
 
 }
 
-@function _fn-color-mix($name, $mix-color, $percentage, $alpha: "100%") {
+@function fn-color($name, $alpha: null) {
 
-	// Check if $percentage has a "%" unit
-	@if not (unit($percentage) == "%") {
+	@debug $name;
+	$global-css-variables: $css-variables !global;
 
-		@error "Invalid percentage: #{$percentage}. It must be a percentage (%).";
+	@debug map-size($global-css-variables);
+	// @debug $global-css-variables;
+	$true : map-has-key($global-css-variables, str-slice($name, 3));
+	@debug $true;
+	// leading "--" and check
+	@if $true {
 
-	}
+		@if $alpha != null {
 
-	// Check if $alpha has a "%" unit if provided
-	@if not unit($alpha)=="%" {
-
-		@error "Invalid alpha value: #{$alpha}. It must be a percentage (%).";
-
-	}
-
-	@if map-has-key($app-colors, $name) {
-
-		// Get the base color
-		$base-color: var(--col-#{$name});
-
-		// Darken the color
-		$adjusted-color: color-mix(in hsl, hsl($base-color), $mix-color $percentage);
-
-		@if "#{$alpha}" == "100%" {
-
-			@return $adjusted-color;
+			@return hsl(var($name) / $alpha);
 
 		} @else {
 
-			// Apply the alpha value
-			@return $adjusted-color / $alpha;
+			@return hsl(var($name));
 
 		}
 
-	}
 
-	@else {
 
-		@error "Invalid color name: #{$name}.";
+	} @else {
+
+		@error "The variable #{$name} is not defined in the map!";
 
 	}
 
 }
 
-@function fn-color-lighten($name, $percentage, $alpha: 100%) {
+@function fn-lighten($cssVar, $percentage) {
 
-	@return _fn-color-mix($name, white, $percentage, $alpha);
+	// leading "--" and check
+	@if map-has-key($css-variables, str-slice($cssVar, 3)) {
+
+		@return color-mix(in hsl, hsl(var(#{$cssVar})), white $percentage);
+
+	} @else {
+
+		@error "The variable #{$name} is not defined in the map!";
+
+	}
 
 }
 
-@function fn-color-darken($name, $percentage, $alpha: 100%) {
+@function fn-darken($cssVar, $percentage) {
 
-	@return _fn-color-mix($name, black, $percentage, $alpha);
+	// leading "--" and check
+	@if map-has-key($css-variables, str-slice($cssVar, 3)) {
+
+		@return color-mix(in hsl, hsl(var(#{$cssVar})), black $percentage);
+
+	} @else {
+
+		@error "The variable #{$name} is not defined in the map!";
+
+	}
 
 }

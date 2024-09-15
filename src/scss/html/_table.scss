@@ -45,12 +45,12 @@ table {
 
 	& > tbody {
 
-		background-color	: fn-hsl(bg-2, (lig: "- 1%"));
+		// background-color	: fn-hsl(bg-2, (lig: "- 1%"));
 		transition			: background-color var(--transition);
 
 		& > tr {
 
-			border-bottom	: 1px solid fn-hsl(bg-3, (lig: "- 1%"));
+			// border-bottom	: 1px solid fn-hsl(bg-3, (lig: "- 1%"));
 			transition		: border var(--transition);
 
 			&:last-child {
@@ -86,13 +86,13 @@ table {
 
 	&.striped > tbody > tr:nth-of-type(2n) {
 
-		background-color	: fn-hsl(bg-3);
+		// background-color	: fn-hsl(bg-3);
 
 	}
 
 	& > tfoot {
 
-		border-top			: 2px solid fn-hsl(text-secondary);
+		//border-top			: 2px solid fn-hsl(text-secondary);
 
 	}
 

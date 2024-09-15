@@ -1,0 +1,23 @@
+// $css-variables is defined at the beginning of styles.scss
+@mixin add-var($name) {
+
+	$css-variables: map-merge($css-variables, ($name: true)) !global;
+	// $temp-map: map-merge($css-variables, ($name: true));
+	// $css-variables: $temp-map !global; // Apply the merged map globally
+
+}
+
+@function fn-var($name) {
+
+	// leading "--" and check
+	@if map-has-key($css-variables, str-slice($name, 3)) {
+
+		@return var($name);
+
+	} @else {
+
+		@error "The variable #{$name} is not defined in the map!";
+
+	}
+
+}

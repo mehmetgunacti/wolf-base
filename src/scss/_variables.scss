@@ -23,3 +23,5 @@
 
 // $z-index-bookmark-overlay	: 100;
 // $z-index-croppie-close-btn	: 100;
+$my-global-var: "myglobalvar";
+$css-variables: (mykey: "myvalue") !global;

@@ -2,7 +2,7 @@
 
 	$important	: map-get($options, "important");
 	$color		: map-get($options, "color");
-	$color		: "outline" !default;
+	$color		: "--col-outline" !default;
 
 	outline			: 2px solid fn-color($color) #{$important};
 	outline-offset	: -2px;

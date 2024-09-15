@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-theme="default"] {
 
 	--col-bg-header			: 210deg 11% 7%;
 	--col-bg-nav			: 210deg 11% 8%;
@@ -7,58 +8,107 @@
 	--col-bg-component-dark	: 210deg 11% 10%;
 	--col-bg-form-element	: 210deg 11% 20%;
 	--col-bg-page			: 210deg 11% 33%;
+	@include add-var(col-bg-header);
+	@include add-var(col-bg-nav);
+	@include add-var(col-bg-popup);
+	@include add-var(col-bg-component);
+	@include add-var(col-bg-component-dark);
+	@include add-var(col-bg-form-element);
+	@include add-var(col-bg-page);
 
 	--col-bg-overlay		: 0deg 0% 0% / 75%;
 	--col-shadow			: 0deg 0% 0%;
+	@include add-var(col-bg-overlay);
+	@include add-var(col-shadow);
 
 	--col-text				: 210 15% 92%;
 	--col-text-secondary	: 210 10.8% 71%;
+	@include add-var(col-text);
+	@include add-var(col-text-secondary);
 
 	--col-primary			: 215deg 65% 45%;
 	--col-success			: 132deg 52% 22%;
 	--col-info				: 60deg 3% 22%;
 	--col-warn				: 31deg 100% 35%;
 	--col-error				: 0deg 66% 30%;
+	@include add-var(col-primary);
+	@include add-var(col-success);
+	@include add-var(col-info);
+	@include add-var(col-warn);
+	@include add-var(col-error);
 
 	--col-accent			: 200deg 85% 34%;
 	--col-focus				: 27deg 99% 54%;
 	--col-outline			: 27deg 99% 54%;
+	@include add-var(col-accent);
+	@include add-var(col-focus);
+	@include add-var(col-outline);
 
 	--col-disabled			: 210deg 9% 32%;
+	@include add-var(col-disabled);
 
 	--col-btn-tag-text-color			: var(--col-text);
 	--col-btn-tag-bg-color				: 200deg 85% 34%;
 	--col-btn-tag-bg-color-hover		: color-mix(in hsl, var(--col-btn-tag-bg-color), black 10%);
 	--col-btn-tag-bg-color-active		: color-mix(in hsl, var(--col-btn-tag-bg-color), black 15%);
+	@include add-var(col-btn-tag-text-color);
+	@include add-var(col-btn-tag-bg-color);
+	@include add-var(col-btn-tag-bg-color-hover);
+	@include add-var(col-btn-tag-bg-color-active);
 
 	--col-btn-default-text-color		: var(--col-text);
 	--col-btn-default-bg-color			: var(--col-primary);
 	--col-btn-default-bg-color-hover	: color-mix(in hsl, var(--col-btn-default-bg-color), black 10%);
 	--col-btn-default-bg-color-active	: color-mix(in hsl, var(--col-btn-default-bg-color), black 15%);
 	--col-btn-default-border-color		: color-mix(in hsl, var(--col-btn-default-bg-color), black 15%);
+	@include add-var(col-btn-default-text-color);
+	@include add-var(col-btn-default-bg-color);
+	@include add-var(col-btn-default-bg-color-hover);
+	@include add-var(col-btn-default-bg-color-active);
+	@include add-var(col-btn-default-border-color);
 
 	--col-btn-disabled-bg-color			: var(--col-disabled);
 	--col-btn-disabled-text-color		: color-mix(in hsl, var(--col-btn-disabled-bg-color), white 30%);
 	--col-btn-disabled-bg-color-hover	: color-mix(in hsl, var(--col-btn-disabled-bg-color), black 10%);
 	--col-btn-disabled-bg-color-active	: color-mix(in hsl, var(--col-btn-disabled-bg-color), black 15%);
 	--col-btn-disabled-border-color		: color-mix(in hsl, var(--col-btn-disabled-bg-color), black 15%);
+	@include add-var(col-btn-disabled-bg-color);
+	@include add-var(col-btn-disabled-text-color);
+	@include add-var(col-btn-disabled-bg-color-hover);
+	@include add-var(col-btn-disabled-bg-color-active);
+	@include add-var(col-btn-disabled-border-color);
 
 	--col-btn-link-text-color			: var(--col-text);
 	--col-btn-link-bg-color				: transparent;
 	--col-btn-link-bg-color-hover		: 0 0 100% / 0.1;
 	--col-btn-link-bg-color-active		: 0 0 100% / 0.1;
 	--col-btn-link-border-color			: transparent;
+	@include add-var(col-btn-link-text-color);
+	@include add-var(col-btn-link-bg-color);
+	@include add-var(col-btn-link-bg-color-hover);
+	@include add-var(col-btn-link-bg-color-active);
+	@include add-var(col-btn-link-border-color);
 
 	--col-btn-warn-text-color			: var(--col-text);
 	--col-btn-warn-bg-color				: var(--col-warn);
 	--col-btn-warn-bg-color-hover		: color-mix(in hsl, var(--col-btn-warn-bg-color), black 10%);
 	--col-btn-warn-bg-color-active		: color-mix(in hsl, var(--col-btn-warn-bg-color), black 15%);
 	--col-btn-warn-border-color			: color-mix(in hsl, var(--col-btn-warn-bg-color), black 15%);
+	@include add-var(col-btn-warn-text-color);
+	@include add-var(col-btn-warn-bg-color);
+	@include add-var(col-btn-warn-bg-color-hover);
+	@include add-var(col-btn-warn-bg-color-active);
+	@include add-var(col-btn-warn-border-color);
 
 	--col-btn-danger-text-color			: var(--col-text);
 	--col-btn-danger-bg-color			: var(--col-error);
 	--col-btn-danger-bg-color-hover		: color-mix(in hsl, var(--col-btn-danger-bg-color), black 10%);
 	--col-btn-danger-bg-color-active	: color-mix(in hsl, var(--col-btn-danger-bg-color), black 15%);
 	--col-btn-danger-border-color		: color-mix(in hsl, var(--col-btn-danger-bg-color), black 15%);
+	@include add-var(col-btn-danger-text-color);
+	@include add-var(col-btn-danger-bg-color);
+	@include add-var(col-btn-danger-bg-color-hover);
+	@include add-var(col-btn-danger-bg-color-active);
+	@include add-var(col-btn-danger-border-color);
 
 }

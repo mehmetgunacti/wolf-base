@@ -80,7 +80,7 @@
 	&[required] > label::before {
 
 		content			: "*";
-		color			: fn-hsl(focus);
+		// color			: fn-hsl(focus);
 		margin-right	: 2px;
 
 	}

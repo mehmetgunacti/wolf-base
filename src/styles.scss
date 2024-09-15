@@ -25,6 +25,12 @@
 // mixins
 @import 'mixins';
 
+// css variables
+@import 'root'; // <-- fills map '$css-variables'
+
+// Themes
+@import 'themes'; // <-- fills map '$css-variables'
+
 // helper
 @import 'helper';
 
@@ -38,8 +44,3 @@
 // third party
 @import 'third-party';
 
-// css variables
-@import 'root';
-
-// Themes
-@import 'themes';
