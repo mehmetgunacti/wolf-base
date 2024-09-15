@@ -1,117 +1,75 @@
-// could have used scss variables
 :root {
 
-	#{$my-global-var}	: 'valueofmyglobalvar';
-	--font-size		: 1rem; // 16px
-	--font-size-xxl	: calc(var(--font-size) * 1.4375);	// 23px / 16px
-	--font-size-xl	: calc(var(--font-size) * 1.25);	// 20px / 16px
-	--font-size-lg	: calc(var(--font-size) * 1.125);	// 18px / 16px
-	--font-size-sm	: calc(var(--font-size) * 0.875);	// 14px / 16px
-	--font-size-xs	: calc(var(--font-size) * 0.75);	// 12px / 16px
-	--font-size-xxs	: calc(var(--font-size) * 0.5625);	//  9px / 16px
-	@include add-var(font-size);
-	@include add-var(font-size-xxl);
-	@include add-var(font-size-xl);
-	@include add-var(font-size-lg);
-	@include add-var(font-size-sm);
-	@include add-var(font-size-xs);
-	@include add-var(font-size-xxs);
+	#{$font-size}					: 1rem; // 16px
+	#{$font-size-xxl}				: calc(var(--font-size) * 1.4375);	// 23px / 16px
+	#{$font-size-xl}				: calc(var(--font-size) * 1.25);	// 20px / 16px
+	#{$font-size-lg}				: calc(var(--font-size) * 1.125);	// 18px / 16px
+	#{$font-size-sm}				: calc(var(--font-size) * 0.875);	// 14px / 16px
+	#{$font-size-xs}				: calc(var(--font-size) * 0.75);	// 12px / 16px
+	#{$font-size-xxs}				: calc(var(--font-size) * 0.5625);	//  9px / 16px
 
-	--font-size-h1	: calc(var(--font-size) * 1.75);	// 28px
-	--font-size-h2	: calc(var(--font-size) * 1.5625);	// 25px
-	--font-size-h3	: calc(var(--font-size) * 1.4375);	// 22px
-	--font-size-h4	: calc(var(--font-size) * 1.375);	// 19px
-	--font-size-h5	: calc(var(--font-size) * 1.25);	// 20px
-	--font-size-h6	: calc(var(--font-size) * 1.125);	// 18px
-	@include add-var(font-size-h1);
-	@include add-var(font-size-h2);
-	@include add-var(font-size-h3);
-	@include add-var(font-size-h4);
-	@include add-var(font-size-h5);
-	@include add-var(font-size-h6);
+	#{$font-size-h1}				: calc(var(--font-size) * 1.75);	// 28px
+	#{$font-size-h2}				: calc(var(--font-size) * 1.5625);	// 25px
+	#{$font-size-h3}				: calc(var(--font-size) * 1.4375);	// 22px
+	#{$font-size-h4}				: calc(var(--font-size) * 1.375);	// 19px
+	#{$font-size-h5}				: calc(var(--font-size) * 1.25);	// 20px
+	#{$font-size-h6}				: calc(var(--font-size) * 1.125);	// 18px
 
-	--line-height		: 1.5;
-	--letter-spacing	: 0.5px;
-	@include add-var(line-height);
-	@include add-var(letter-spacing);
+	#{$line-height}					: 1.5;
+	#{$letter-spacing}				: 0.5px;
 
-	--font-family		: 'Nunito Sans', serif;
-	--font-family-mono	: 'Source Code Pro', monospace;
-	@include add-var(font-family);
-	@include add-var(font-family-mono);
+	#{$font-family}					: 'Nunito Sans', serif;
+	#{$font-family-mono}			: 'Source Code Pro', monospace;
 
-	--gap		: 0.7rem;
-	--gap-xxl	: calc(var(--gap) * 1.8);	// 1.26rem
-	--gap-xl	: calc(var(--gap) * 1.6);	// 2.29rem
-	--gap-lg	: calc(var(--gap) * 1.3);	// 0.91rem
-	--gap-sm	: calc(var(--gap) * 0.7);	// 0.49rem
-	--gap-xs	: calc(var(--gap) * 0.4);	// 0.28rem
-	--gap-xxs	: calc(var(--gap) * 0.3);	// 0.21rem
-	@include add-var(gap);
-	@include add-var(gap-xxl);
-	@include add-var(gap-xl);
-	@include add-var(gap-lg);
-	@include add-var(gap-sm);
-	@include add-var(gap-xs);
-	@include add-var(gap-xxs);
+	#{$gap}							: 0.7rem;
+	#{$gap-xxl}						: calc(var(--gap) * 1.8);	// 1.26rem
+	#{$gap-xl}						: calc(var(--gap) * 1.6);	// 2.29rem
+	#{$gap-lg}						: calc(var(--gap) * 1.3);	// 0.91rem
+	#{$gap-sm}						: calc(var(--gap) * 0.7);	// 0.49rem
+	#{$gap-xs}						: calc(var(--gap) * 0.4);	// 0.28rem
+	#{$gap-xxs}						: calc(var(--gap) * 0.3);	// 0.21rem
 
-	--radius				: 1rem;
-	--border-radius-xl 		: calc(var(--radius) * 2);
-	--border-radius-lg 		: calc(var(--radius) * 1.3);
-	--border-radius 		: calc(var(--radius) * 0.8);
-	--border-radius-sm 		: calc(var(--radius) * 0.6);
-	--border-radius-xs 		: calc(var(--radius) * 0.4);
-	--border-radius-round	: 50%;
-	@include add-var(radius);
-	@include add-var(border-radius-xl);
-	@include add-var(border-radius-lg);
-	@include add-var(border-radius);
-	@include add-var(border-radius-sm);
-	@include add-var(border-radius-xs);
-	@include add-var(border-radius-round);
+	#{$radius}						: 1rem;
+	#{$border-radius-xl} 			: calc(var(--radius) * 2);
+	#{$border-radius-lg} 			: calc(var(--radius) * 1.3);
+	#{$border-radius} 				: calc(var(--radius) * 0.8);
+	#{$border-radius-sm} 			: calc(var(--radius) * 0.6);
+	#{$border-radius-xs} 			: calc(var(--radius) * 0.4);
+	#{$border-radius-round}			: 50%;
 
-	--component-height	: 30rem; // 30 * 1.6 = 48px
-	@include add-var(component-height);
+	#{$component-height}			: 30rem; // 30 * 1.6 = 48px
 
-	--z-index-splash-screen		: 9000;
-	--z-index-ng-progress		: 8000;
+	#{$z-index-splash-screen}		: 9000;
+	#{$z-index-ng-progress}			: 8000;
 	// 7000 reserved for Angular CDK backdrop
-	--z-index-header			: 6000;
-	--z-index-nav				: 5000;
-	--z-index-nav-overlay		: 4000;
-	--z-index-main				: 3000;
-	--z-index-bookmark-overlay	: 2000;
-	--z-index-croppie-close-btn	: 1000;
-	@include add-var(z-index-splash-screen);
-	@include add-var(z-index-ng-progress);
-	@include add-var(z-index-header);
-	@include add-var(z-index-nav);
-	@include add-var(z-index-nav);
-	@include add-var(z-index-nav-overlay);
-	@include add-var(z-index-main);
-	@include add-var(z-index-bookmark-overlay);
-	@include add-var(z-index-croppie-close-btn);
+	#{$z-index-header}				: 6000;
+	#{$z-index-nav}					: 5000;
+	#{$z-index-nav-overlay}			: 4000;
+	#{$z-index-main}				: 3000;
+	#{$z-index-bookmark-overlay}	: 2000;
+	#{$z-index-croppie-close-btn}	: 1000;
 
-	--nav-full-width	: 26rem;
-	--nav-half-width	: 6rem;
-	--header-height		: 6rem;
-	@include add-var(nav-full-width);
-	@include add-var(nav-half-width);
-	@include add-var(header-height);
+	#{$nav-full-width}				: 26rem;
+	#{$nav-half-width}				: 6rem;
+	#{$header-height}				: 6rem;
 
-	--transition	: 600ms cubic-bezier(0.25, 1, 0.25, 1);
-	@include add-var(transition);
+	#{$transition}					: 600ms cubic-bezier(0.25, 1, 0.25, 1);
+
+	#{$breakpoint-sm}				: 576px;
+	#{$breakpoint-md}				: 768px;
+	#{$breakpoint-lg}				: 992px;
+	#{$breakpoint-xl}				: 1200px;
 
 	@include bigScreen {
 
-		--font-size			: 0.875rem; // 14px
-		--line-height		: 1.3;
-		--letter-spacing	: normal;
+		#{$font-size}				: 0.875rem; // 14px
+		#{$line-height}				: 1.3;
+		#{$letter-spacing}			: normal;
 
-		--gap				: 1rem;
-		--radius			: 1.2rem;
+		#{$gap}						: 1rem;
+		#{$radius}					: 1.2rem;
 
-		--component-height	: 25rem; // 25 * 1.6 = 40px
+		#{$component-height}		: 25rem; // 25 * 1.6 = 40px
 
 	}
 

@@ -1,5 +1,4 @@
 @import 'variables';
-@import 'mixins';
 
 :host {
 
@@ -73,7 +72,7 @@
 
 		overflow			: hidden;
 
-		// background-color	: fn-color(col-bg-nav);
+		// background-color	: fn-hsl(col-bg-nav);
 		transition			: height var(--transition), width var(--transition), margin-left var(--transition), background-color var(--transition);
 
 		// @include mx-box-shadow;

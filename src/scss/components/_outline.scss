@@ -1,0 +1,21 @@
+@mixin mx-outline($options: ()) {
+
+	$important	: map-get($options, "important");
+	$color		: map-get($options, "color");
+	$color		: $col-outline !default;
+
+	outline			: 2px solid fn-hsl($color) #{$important};
+	outline-offset	: -2px;
+	box-shadow		: 0 0 4px fn-hsl($color);
+
+}
+
+.outline {
+
+	&:focus-visible {
+
+		@include mx-outline;
+
+	}
+
+}

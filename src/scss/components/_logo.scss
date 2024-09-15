@@ -1,6 +1,13 @@
-@mixin logo {
+// todo : create filter css variable in themes for logo
+@mixin mx-logo() {
 
 	filter: invert(57%) sepia(97%) saturate(3697%) hue-rotate(185deg) brightness(100%) contrast(91%);
+
+}
+
+.logo {
+
+	@include mx-logo;
 
 }
 

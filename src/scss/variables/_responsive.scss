@@ -1,0 +1,39 @@
+@mixin sm() {
+
+	@media screen and (min-width: fn-var($breakpoint-sm)) {
+		@content;
+	}
+
+}
+
+@mixin md() {
+
+	@media screen and (min-width: fn-var($breakpoint-md)) {
+		@content;
+	}
+
+}
+
+@mixin lg() {
+
+	@media screen and (min-width: fn-var($breakpoint-lg)) {
+		@content;
+	}
+
+}
+
+@mixin xl() {
+
+	@media screen and (min-width: fn-var($breakpoint-xl)) {
+		@content;
+	}
+
+}
+
+@mixin bigScreen() {
+
+	@include md {
+		@content;
+	};
+
+}

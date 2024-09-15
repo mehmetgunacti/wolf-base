@@ -1,0 +1,42 @@
+/// $name		-> --col-bg
+/// returns		=> var(--col-bg)
+@function fn-var($name) {
+
+	@if global-variable-exists(str-slice($name, 3)) {
+
+		@return var($name);
+
+	} @else {
+
+		@error "The variable #{$name} is not defined!";
+
+	}
+
+}
+
+/// $name		-> --col-bg
+/// $percentage	-> 20%
+/// returns		=> color-mix(in hsl, var(--col-bg), transparent 20%)
+@function fn-color-mix-alpha($name, $percentage) {
+
+	@return color-mix(in hsl, fn-var($name), transparent $percentage);
+
+}
+
+/// $name		-> --col-bg
+/// $percentage	-> 20%
+/// returns		=> color-mix(in hsl, var(--col-bg), white 20%)
+@function fn-color-mix-lighten($name, $percentage) {
+
+	@return color-mix(in hsl, fn-var($name), fn-var($col-white) $percentage);
+
+}
+
+/// $name		-> --col-bg
+/// $percentage	-> 20%
+/// returns		=> color-mix(in hsl, var(--col-bg), black 20%)
+@function fn-color-mix-darken($name, $percentage) {
+
+	@return color-mix(in hsl, fn-var($name), fn-var($col-black) $percentage);
+
+}
