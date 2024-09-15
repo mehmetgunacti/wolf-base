@@ -1,9 +1,9 @@
 @mixin mx-box-shadow($color: $col-shadow) {
 
 	// Ensure $color is treated as a CSS custom property
-	box-shadow: #{fn-hsl($color, 0.4)} 1px 4px 4px
-				#{fn-hsl(#{$color}, 0.3)} 5px 4px 2px -2px,
-				#{fn-hsl(#{$color}, 0.2)} 0px -1px 1px inset;
+	box-shadow: fn-color-mix-alpha($color, 40%) 1px 4px 4px,
+				fn-color-mix-alpha($color, 30%) 5px 4px 2px -2px,
+				fn-color-mix-alpha($color, 20%) 0px -1px 1px inset;
 
 }
 
