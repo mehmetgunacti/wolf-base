@@ -2,7 +2,7 @@
 /// returns		=> var(--col-bg)
 @function fn-var($name) {
 
-	@if global-variable-exists(str-slice($name, 3)) {
+	@if isCSSVar($name) {
 
 		@return var($name);
 

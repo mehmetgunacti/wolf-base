@@ -1,5 +1,14 @@
-@mixin mx-transition($property, $name) {
+@mixin mx-transition($transitions...) {
 
-	transition	: $property fn-var($name);
+	$transition-string: "";
+	$delimiter: "";
+	@each $transition in $transitions {
+
+		$property: nth($transition, 1);
+		$variable: nth($transition, 2);
+		$transition-string: #{$transition-string} #{$delimiter} #{$property} fn-var($variable);
+		$delimiter: ", ";
+	}
+	transition: $transition-string;
 
 }

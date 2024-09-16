@@ -1,4 +1,52 @@
-@mixin mx-inset($default, $values: ()) {
+@mixin mx-inset($values...) {
+
+	// if only 1 parameter passed and it's not a map
+	@if length($values)==1 and type(nth($values, 1)) !='map' {
+
+		$value : nth($values, 1);
+		inset: if (isCSSVar($value), fn-var($value), $value);
+
+	} @else { // all parameters are key-value maps
+
+		$top	: null;
+		$right	: null;
+		$bottom	: null;
+		$left	: null;
+
+		@each $map in $values {
+
+			@each $key, $value in $map {
+
+				@debug $values;
+				@debug $value;
+				@if isCSSVar($value) { $value: fn-var($value); }
+				@if $key == top { $top: $value; }
+				@else if $key == right { $right: $value; }
+				@else if $key == bottom { $bottom: $value; }
+				@else if $key == left { $left: $value; }
+
+			}
+
+		}
+
+		@if $top != null and $right != null and $bottom != null and $left != null {
+
+			inset: $top $right $bottom $left;
+
+		} @else {
+
+			@if $top !=null { top: $top; }
+			@if $right !=null { right: $right; }
+			@if $bottom !=null { bottom: $bottom; }
+			@if $left !=null { left: $left; }
+
+		}
+
+	}
+
+}
+
+@mixin mx-inset1($default, $values: ()) {
 
 	@if length($values) == 0 {
 
@@ -24,6 +72,3 @@
 	}
 
 }
-
-@mixin mx-inset-0($values: ())		{ @include mx-inset($zero, $values); }
-@mixin mx-inset-auto($values: ())	{ @include mx-inset($auto, $values); }

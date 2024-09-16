@@ -1,10 +1,24 @@
+@function isCSSVar($variable) {
+
+	@debug $variable;
+	$result: type-of($variable) == 'string' and str-index($variable, '--') == 1;
+	@debug $result;
+	@return $result;
+
+}
+
 // note: var name and value name must be the same (except the $ and --)
 
-$zero	: 0;
-$auto   : auto;
-$_100vh	: 100vh;
-$_100vw	: 100vw;
-$_100p	: 100%;
+$zero		: 0;
+$auto   	: auto;
+$_100vh		: 100vh;
+$_100vw		: 100vw;
+$_100dvh	: 100dvh;
+$_100p		: 100%;
+
+$sidebar-full	: 'full';
+$sidebar-half	: 'half';
+$sidebar-none	: 'none';
 
 // css variables
 $font-size							: --font-size;
