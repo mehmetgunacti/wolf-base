@@ -27,29 +27,29 @@
 	& > main {
 
 		@include mx-z-index($z-index-main);
-		height	: calc($_100dvh - fn-var($header-height));
+		@include mx-height($main-current-height);
 
-		@include mx-inset((top: $header-height), (right: $zero), (left: $zero));
+		@include mx-inset((top: $header-height), (right: $zero), (left: $main-current-left));
 
 		@include mx-overflow-y-a;
 		@include mx-webkit-scrollbar;
 		@include mx-transition((height: $transition), (left: $transition), (background-color: $transition));
 
-		@include bigScreen() {
+		// @include bigScreen() {
 
-			:host-context([data-sidebar=#{$sidebar-full}]) {
+		// 	:host-context([data-sidebar=#{$sidebar-full}]) {
 
-				@include mx-inset((left: $nav-full-width));
+		// 		@include mx-inset((left: $nav-full-width));
 
-			}
+		// 	}
 
-			:host-context([data-sidebar=#{$sidebar-half}]) {
+		// 	:host-context([data-sidebar=#{$sidebar-half}]) {
 
-				@include mx-inset((left: $nav-half-width));
+		// 		@include mx-inset((left: $nav-half-width));
 
-			}
+		// 	}
 
-		}
+		// }
 
 	}
 
@@ -59,13 +59,14 @@
 
 		@include mx-inset((top: $header-height), (left: $zero));
 		@include mx-height($nav-current-height);
+		@include mx-width($nav-current-width);
+		@include mx-margin((left: $nav-current-margin-left));
+
 		@include mx-overflow-h;
 		@include mx-background($col-bg-nav);
 		@include mx-transition((height: $transition), (width: $transition), (margin-left: $transition), (background-color: $transition));
 		@include mx-box-shadow;
 
-		@include mx-width($nav-current-width);
-		@include mx-margin((left: $nav-current-margin-left));
 
 	}
 

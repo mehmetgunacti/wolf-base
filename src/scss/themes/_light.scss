@@ -1,39 +1,15 @@
-body.theme-light {
+[data-theme="theme-light"] {
 
-	// --col-bg-0-hue			: 208deg;
-	// --col-bg-0-sat			: 25%;
-	// --col-bg-0-lig			: 80%;
-	// --col-bg-0-alp			: 1;
+	#{$col-bg-header}			: hsl(208deg 25% 50%);
+	#{$col-bg-nav}				: hsl(208deg 25% 52%);
+	#{$col-bg-popup}			: hsl(208deg 25% 53%);
+	#{$col-bg-component}		: hsl(208deg 25% 55%);
+	#{$col-bg-component-dark}	: hsl(208deg 25% 58%);
+	#{$col-bg-form-element}		: hsl(208deg 25% 70%);
+	#{$col-bg-page}				: hsl(208deg 25% 80%);
 
-	// --col-bg-1-hue			: 208deg;
-	// --col-bg-1-sat			: 25%;
-	// --col-bg-1-lig			: 70%;
-	// --col-bg-1-alp			: 1;
-
-	// --col-bg-2-hue			: 208deg;
-	// --col-bg-2-sat			: 25%;
-	// --col-bg-2-lig			: 58%;
-	// --col-bg-2-alp			: 1;
-
-	// --col-bg-3-hue			: 208deg;
-	// --col-bg-3-sat			: 25%;
-	// --col-bg-3-lig			: 55%;
-	// --col-bg-3-alp			: 1;
-
-	// --col-bg-4-hue			: 208deg;
-	// --col-bg-4-sat			: 25%;
-	// --col-bg-4-lig			: 53%;
-	// --col-bg-4-alp			: 1;
-
-	// --col-bg-5-hue			: 208deg;
-	// --col-bg-5-sat			: 25%;
-	// --col-bg-5-lig			: 52%;
-	// --col-bg-5-alp			: 1;
-
-	// --col-bg-6-hue			: 208deg;
-	// --col-bg-6-sat			: 25%;
-	// --col-bg-6-lig			: 50%;
-	// --col-bg-6-alp			: 1;
+	#{$col-bg-overlay}			: fn-color-mix-alpha($col-black, 75%);
+	#{$col-shadow}				: fn-var($col-bg-nav);
 
 	// --col-button-bg-hue		: 215deg;
 	// --col-button-bg-sat		: 55%;

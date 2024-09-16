@@ -35,9 +35,7 @@ export class CoreThemeEffects {
 			// replace 'theme-' class of <body>
 			tap(theme => {
 
-				const currentList: string[] = this.document.body.classList.value.split(' ');
-				const list: string[] = replaceByPrefix(currentList, 'theme-', theme);
-				this.document.body.className = list.join(' ');
+				this.document.documentElement.dataset['theme'] = theme;
 
 			})
 

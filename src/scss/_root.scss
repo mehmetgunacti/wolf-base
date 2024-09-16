@@ -54,6 +54,9 @@
 	#{$nav-full-width}				: 16.25rem;
 	#{$nav-half-width}				: 4rem;
 
+	#{$main-current-height}			: calc($_100dvh - fn-var($header-height));
+	#{$main-current-left}			: $zero;
+
 	#{$nav-current-height}			: calc($_100dvh - fn-var($header-height));
 	#{$nav-current-width}			: fn-var($nav-full-width);
 	#{$nav-current-margin-left}		: $zero;

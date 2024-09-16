@@ -10,25 +10,38 @@ body {
 
 	&[data-sidebar="#{$sidebar-full}"] {
 
+		// set <nav>
 		@include mx-set-var($nav-current-width, fn-var($nav-full-width));
 		@include mx-set-var($nav-current-margin-left, $zero);
+
+		// set <main>
+		@include mx-set-var($main-current-left, fn-var($nav-full-width));
 
 	}
 
 	&[data-sidebar="#{$sidebar-half}"] {
 
+		// set <nav>
 		@include mx-set-var($nav-current-width, fn-var($nav-half-width));
 		@include mx-set-var($nav-current-margin-left, $zero);
+
+		// set <main>
+		@include mx-set-var($main-current-left, fn-var($nav-half-width));
 
 	}
 
 	&[data-sidebar="#{$sidebar-hidden}"] {
 
+		// set <nav>: full width on mobile
 		@include mx-set-var($nav-current-width, fn-var($nav-full-width));
 		@include mx-set-var($nav-current-margin-left, calc((fn-var($nav-full-width) * -1) - 1rem)); // 1rem = shadow
 
+		// set <main>: on mobile and bigscreen when sidebar hidden -> left: 0
+		@include mx-set-var($main-current-left, $zero);
+
 		@include bigScreen {
 
+			// set <nav>: half width on bigscreen (md)
 			@include mx-set-var($nav-current-width, fn-var($nav-half-width));
 			@include mx-set-var($nav-current-margin-left, calc((fn-var($nav-half-width) * -1) - 1rem)); // 1rem = shadow
 
@@ -37,3 +50,19 @@ body {
 	}
 
 }
+
+		// @include bigScreen() {
+
+		// 	:host-context([data-sidebar=#{$sidebar-full}]) {
+
+		// 		@include mx-inset((left: $nav-full-width));
+
+		// 	}
+
+		// 	:host-context([data-sidebar=#{$sidebar-half}]) {
+
+		// 		@include mx-inset((left: $nav-half-width));
+
+		// 	}
+
+		// }
