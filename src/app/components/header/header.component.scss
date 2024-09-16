@@ -1,16 +1,26 @@
-// @import 'variables';
+@import 'variables';
 // @import 'mixins/responsive';
-// @import 'helper';
+@import 'helper';
+@import 'components';
 
-// #section-nav-button {
+:host {
 
-// 	@include mx-flex-center;
-// 	min-width: var(--header-height);
+	@include mx-d-flex-ai-c-jc-sb;
 
-// }
+	#section-nav-button {
 
-// #portal-outlet {
+		@include mx-d-flex-center;
+		@include mx-min-width($header-height);
 
-// 	@include mx-flex((dir: row, ai: center, jc: end));
+	}
 
-// }
+	#portal-outlet {
+
+		@include mx-d-flex-jc-end;
+		@include mx-gap-xs;
+		@include mx-d-flex-1
+
+	}
+
+}
+

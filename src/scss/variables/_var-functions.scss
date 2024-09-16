@@ -19,7 +19,7 @@
 /// returns		=> color-mix(in hsl, var(--col-bg), transparent 20%)
 @function fn-color-mix-alpha($name, $percentage) {
 
-	@return color-mix(in hsl, fn-var($name), transparent $percentage);
+	@return color-mix(in hsl, fn-var($name), fn-var($col-transparent) $percentage);
 
 }
 

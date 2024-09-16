@@ -33,7 +33,7 @@
 // 	& > fieldset {
 
 // 		@include mx-card;
-// 		@include mx-flex-column;
+// 		@include mx-d-flex-column;
 // 		margin-top			: 2rem;
 // 		position			: relative;
 // 		padding-top			: calc(var(--gap-xl) + var(--gap-xxl)); // vars instead of rem or px

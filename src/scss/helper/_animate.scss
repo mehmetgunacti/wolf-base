@@ -1,0 +1,5 @@
+@mixin mx-transition($property, $name) {
+
+	transition	: $property fn-var($name);
+
+}

@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ViewEncapsulation, WritableSignal, inject, signal } from '@angular/core';
+import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { environment } from 'environments/environment';
 import { delay, of } from 'rxjs';
 import { splashTrigger } from './components/splash-screen/splash-screen.animation';
@@ -8,8 +8,7 @@ import { splashTrigger } from './components/splash-screen/splash-screen.animatio
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
-	animations: [splashTrigger],
-	encapsulation: ViewEncapsulation.None
+	animations: [splashTrigger]
 })
 export class AppComponent {
 

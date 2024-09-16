@@ -6,7 +6,7 @@
 
 // .icon-container {
 
-// 	@include mx-flex((jc: center));
+// 	@include mx-d-flex((jc: center));
 // 	@include mx-gap-xxs;
 
 // }
@@ -51,7 +51,7 @@
 
 // 	fieldset {
 
-// 		@include mx-flex((dir: column, ai: start));
+// 		@include mx-d-flex((dir: column, ai: start));
 // 		& > legend {
 
 // 			color		: var(--col-primary);

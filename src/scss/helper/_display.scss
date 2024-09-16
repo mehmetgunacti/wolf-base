@@ -1,61 +1,61 @@
-@mixin mx-flex($options: ()) {
-
-	// Define the default values inside the mixin
-	$defaults: (
-		'dir': null,
-		'ai': null,
-		'jc': null,
-		'wrap': null
-	);
+@mixin mx-d-flex($options: ()) {
 
 	display: flex;
-	@if map-has-key($options, 'dir')	{ flex-direction: map-get($options, 'dir'); }
+	@if map-has-key($options, 'dir')	{ flex-direction: map-get($options, 'dir'); } @else { flex-direction: row; }
 	@if map-has-key($options, 'ai')		{ align-items: map-get($options, 'ai'); }
 	@if map-has-key($options, 'jc')		{ justify-content: map-get($options, 'jc'); }
 	@if map-has-key($options, 'wrap')	{ flex-wrap: map-get($options, 'wrap'); }
 
 }
 
-@mixin mx-flex-column		{ @include mx-flex((dir: column)); }
-@mixin mx-flex-wrap			{ @include mx-flex((wrap: wrap)); }
+@mixin mx-d-flex-column		{ @include mx-d-flex((dir: column)); }
+@mixin mx-d-flex-wrap		{ @include mx-d-flex((wrap: wrap)); }
 
-@mixin mx-flex-ai-center	{ @include mx-flex((ai: center)); }
-@mixin mx-flex-ai-start		{ @include mx-flex((ai: start)); }
-@mixin mx-flex-ai-end		{ @include mx-flex((ai: end)); }
-@mixin mx-flex-ai-bl		{ @include mx-flex((ai: baseline)); }
-@mixin mx-flex-ai-sb		{ @include mx-flex((ai: space-between)); }
+@mixin mx-d-flex-ai-center	{ @include mx-d-flex((ai: center)); }
+@mixin mx-d-flex-ai-start	{ @include mx-d-flex((ai: start)); }
+@mixin mx-d-flex-ai-end		{ @include mx-d-flex((ai: end)); }
+@mixin mx-d-flex-ai-bl		{ @include mx-d-flex((ai: baseline)); }
+@mixin mx-d-flex-ai-sb		{ @include mx-d-flex((ai: space-between)); }
 
-@mixin mx-flex-jc-center	{ @include mx-flex((jc: center)); }
-@mixin mx-flex-jc-start		{ @include mx-flex((jc: start)); }
-@mixin mx-flex-jc-end		{ @include mx-flex((jc: end)); }
-@mixin mx-flex-jc-bl		{ @include mx-flex((jc: baseline)); }
-@mixin mx-flex-jc-sb		{ @include mx-flex((jc: space-between)); }
+@mixin mx-d-flex-jc-center	{ @include mx-d-flex((jc: center)); }
+@mixin mx-d-flex-jc-start	{ @include mx-d-flex((jc: start)); }
+@mixin mx-d-flex-jc-end		{ @include mx-d-flex((jc: end)); }
+@mixin mx-d-flex-jc-bl		{ @include mx-d-flex((jc: baseline)); }
+@mixin mx-d-flex-jc-sb		{ @include mx-d-flex((jc: space-between)); }
 
-@mixin mx-flex-center		{ @include mx-flex((ai: center, jc: center)); }
+@mixin mx-d-flex-center		{ @include mx-d-flex((ai: center, jc: center)); }
+@mixin mx-d-flex-ai-c-jc-sb	{ @include mx-d-flex((ai: center, jc: space-between)); }
+@mixin mx-d-flex-1			{ flex: 1; }
 
-.d-flex			{ @include mx-flex; }
-.d-flex-column	{ @include mx-flex-column; }
-.d-flex-center	{ @include mx-flex-center; }
+@mixin mx-d-grid			{ display: grid; }
+@mixin mx-d-contents		{ display: contents; }
+@mixin mx-d-block			{ display: block; }
+@mixin mx-d-none			{ display: none; }
+@mixin mx-d-inline-block	{ display: inline-block; }
+@mixin mx-d-inline-flex		{ display: inline-flex; }
 
-.flex-ai-bl		{ align-items: baseline; }
-.flex-ai-c		{ align-items: center; }
-.flex-ai-s		{ align-items: start; }
-.flex-ai-e		{ align-items: end; }
-.flex-ai-st		{ align-items: stretch; }
+// .d-flex			{ @include mx-d-flex; }
+// .d-flex-column	{ @include mx-d-flex-column; }
+// .d-flex-center	{ @include mx-d-flex-center; }
 
-.flex-jc-bl		{ justify-content: baseline; }
-.flex-jc-c		{ justify-content: center; }
-.flex-jc-s		{ justify-content: start; }
-.flex-jc-e		{ justify-content: end; }
-.flex-jc-sb		{ justify-content: space-between; }
+// .flex-ai-bl		{ align-items: baseline; }
+// .flex-ai-c		{ align-items: center; }
+// .flex-ai-s		{ align-items: start; }
+// .flex-ai-e		{ align-items: end; }
+// .flex-ai-st		{ align-items: stretch; }
 
-.flex-wrap		{ flex-wrap: wrap; }
-.flex-1			{ flex: 1; }
+// .flex-jc-bl		{ justify-content: baseline; }
+// .flex-jc-c		{ justify-content: center; }
+// .flex-jc-s		{ justify-content: start; }
+// .flex-jc-e		{ justify-content: end; }
+// .flex-jc-sb		{ justify-content: space-between; }
 
-// other 'display'
-.d-grid			{ display: grid; }
-.d-contents		{ display: contents; }
-.d-block		{ display: block; }
-.d-none			{ display: none; }
-.d-inline-block	{ display: inline-block; }
-.d-inline-flex	{ display: inline-flex; }
+// .flex-wrap		{ flex-wrap: wrap; }
+// .flex-1			{ @include mx-d-flex-1; }
+
+// .d-grid			{ @include mx-grid; }
+// .d-contents		{ display: contents; }
+// .d-block		{ display: block; }
+// .d-none			{ display: none; }
+// .d-inline-block	{ display: inline-block; }
+// .d-inline-flex	{ display: inline-flex; }

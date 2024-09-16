@@ -1,0 +1,32 @@
+@mixin mx-height($name) {
+
+	$valid: $zero, $auto, $_100vh, $_100vw, $_100p;
+	@if (index($valid, $name)) {
+
+		height: $name;
+
+	} @else {
+
+		height: fn-var($name);
+
+	}
+
+}
+
+@mixin mx-min-width($name) {
+
+	min-width: fn-var($name);
+
+}
+
+@mixin mx-w-100	{ width: 100%; }
+@mixin mx-h-100	{ height: 100%; }
+
+@mixin mx-w-50	{ width: 50%; }
+@mixin mx-h-50	{ height: 50%; }
+
+// .w-100	{ @include mx-w-100; }
+// .h-100	{ @include mx-h-100; }
+
+// .w-50	{ @include mx-w-50; }
+// .h-50	{ @include mx-h-50; }

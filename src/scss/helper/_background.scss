@@ -1,0 +1,5 @@
+@mixin mx-background($color) {
+
+	background-color: fn-var($color);
+
+}

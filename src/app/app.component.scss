@@ -1,30 +1,26 @@
 @import 'variables';
+@import 'helper';
+@import 'components';
 
 :host {
 
 	display				: block;
-	height				: 100vh;
-	background-color	: fn-var($col-bg-page);
-	transition			: background-color fn-var($transition);
+	@include mx-height($_100vh);
+	@include mx-background($col-bg-page);
+	@include mx-transition(background-color, $transition);
 
 	& > header {
 
-		position				: fixed;
-		z-index					: fn-var($z-index-header);
+		@include mx-d-grid;
+		@include mx-inset-0((bottom: $auto));
+		@include mx-pos-fixed;
+		@include mx-box-shadow;
+		@include mx-p((left: $zero));
+		@include mx-background($col-bg-header);
+		@include mx-height($header-height);
 
-		top						: 0;
-		left					: 0;
-		right					: 0;
-		height					: fn-var($header-height);
-
-		display					: flex;
-		padding					: var(--gap);
-		padding-left			: 0;
-
-		background-color		: var(--col-bg-header);
-		transition				: background-color var(--transition);
-
-		// @include mx-box-shadow;
+		@include mx-z-index($z-index-header);
+		@include mx-transition(background-color, $transition);
 
 	}
 

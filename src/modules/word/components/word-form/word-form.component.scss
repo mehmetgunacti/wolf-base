@@ -9,7 +9,7 @@
 
 // 	form {
 
-// 		@include mx-flex-column;
+// 		@include mx-d-flex-column;
 // 		padding			: var(--gap-xs);
 // 		gap				: var(--gap);
 
@@ -65,7 +65,7 @@
 
 // 			& div[definition] {
 
-// 				@include mx-flex-column;
+// 				@include mx-d-flex-column;
 // 				// grid-template-columns	: 1fr 1fr;
 // 				grid-gap				: var(--gap-sm);
 
@@ -111,7 +111,7 @@
 
 // 	& > footer {
 
-// 		@include mx-flex-end-center;
+// 		@include mx-d-flex-end-center;
 
 // 	}
 

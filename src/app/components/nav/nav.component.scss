@@ -31,7 +31,7 @@
 
 	// 		--_hover-color		: transparent;
 
-	// 		@include mx-flex-center-y;
+	// 		@include mx-d-flex-center-y;
 	// 		height				: var(--nav-half-width);
 	// 		border-radius		: var(--border-radius);
 	// 		color				: fn-hsl(text);
@@ -71,7 +71,7 @@
 
 	// 		& > [icon] {
 
-	// 			@include mx-flex-center-center;
+	// 			@include mx-d-flex-center-center;
 	// 			margin-right		: var(--gap-sm);
 	// 			background-color	: var(--_hover-color);
 	// 			border-radius		: 25px;
@@ -89,7 +89,7 @@
 
 	// 		& > [badge] {
 
-	// 			@include mx-flex-center-center;
+	// 			@include mx-d-flex-center-center;
 	// 			font-size			: var(--font-size-sm);
 	// 			margin-right		: var(--gap);
 
