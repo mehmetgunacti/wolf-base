@@ -1,7 +1,7 @@
 export enum SidebarState {
 
-	FULL = 'sidebar-full',
-	HALF = 'sidebar-half',
-	HIDDEN = 'sidebar-hidden'
+	FULL = 'full',
+	HALF = 'half',
+	HIDDEN = 'hidden'
 
 }

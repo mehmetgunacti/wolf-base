@@ -37,9 +37,10 @@ export class CoreSidebarEffects {
 			ofType(setSidebarState),
 			map(({ sidebarState }) => {
 
-				const currentList: string[] = this.document.body.classList.value.split(' ');
-				const list: string[] = replaceByPrefix(currentList, 'sidebar-', sidebarState);
-				this.document.body.className = list.join(' ');
+				this.document.body.dataset['sidebar'] = sidebarState;
+				// const currentList: string[] = this.document.body.classList.value.split(' ');
+				// const list: string[] = replaceByPrefix(currentList, 'sidebar-', sidebarState);
+				// this.document.body.className = list.join(' ');
 
 			})
 

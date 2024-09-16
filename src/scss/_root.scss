@@ -49,9 +49,14 @@
 	#{$z-index-bookmark-overlay}	: 2000;
 	#{$z-index-croppie-close-btn}	: 1000;
 
-	#{$nav-full-width}				: 26rem;
+	#{$header-height}				: 3.75rem;
+
+	#{$nav-full-width}				: 16.25rem;
 	#{$nav-half-width}				: 4rem;
-	#{$header-height}				: 4rem;
+
+	#{$nav-current-height}			: calc($_100dvh - fn-var($header-height));
+	#{$nav-current-width}			: fn-var($nav-full-width);
+	#{$nav-current-margin-left}		: $zero;
 
 	#{$transition}					: 600ms cubic-bezier(0.25, 1, 0.25, 1);
 

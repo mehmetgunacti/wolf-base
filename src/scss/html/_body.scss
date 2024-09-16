@@ -8,4 +8,32 @@ body {
 	letter-spacing		: var(--letter-spacing);
 	color				: var(--col-text);
 
+	&[data-sidebar="#{$sidebar-full}"] {
+
+		@include mx-set-var($nav-current-width, fn-var($nav-full-width));
+		@include mx-set-var($nav-current-margin-left, $zero);
+
+	}
+
+	&[data-sidebar="#{$sidebar-half}"] {
+
+		@include mx-set-var($nav-current-width, fn-var($nav-half-width));
+		@include mx-set-var($nav-current-margin-left, $zero);
+
+	}
+
+	&[data-sidebar="#{$sidebar-hidden}"] {
+
+		@include mx-set-var($nav-current-width, fn-var($nav-full-width));
+		@include mx-set-var($nav-current-margin-left, calc((fn-var($nav-full-width) * -1) - 1rem)); // 1rem = shadow
+
+		@include bigScreen {
+
+			@include mx-set-var($nav-current-width, fn-var($nav-half-width));
+			@include mx-set-var($nav-current-margin-left, calc((fn-var($nav-half-width) * -1) - 1rem)); // 1rem = shadow
+
+		}
+
+	}
+
 }

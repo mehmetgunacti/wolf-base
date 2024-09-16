@@ -49,3 +49,17 @@
 	@return color-mix(in hsl, fn-var($name), fn-var($col-black) $percentage);
 
 }
+
+@mixin mx-set-var($key, $value) {
+
+	@if isCSSVar($key) {
+
+		#{$key}: $value;
+
+	} @else {
+
+		@error "The variable #{$key} is not defined!";
+
+	}
+
+}

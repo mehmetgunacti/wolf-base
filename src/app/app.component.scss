@@ -58,40 +58,14 @@
 		@include mx-z-index($z-index-nav);
 
 		@include mx-inset((top: $header-height), (left: $zero));
-		@include mx-min-width($nav-full-width);
-		height	: calc($_100dvh - fn-var($header-height));
+		@include mx-height($nav-current-height);
 		@include mx-overflow-h;
 		@include mx-background($col-bg-nav);
 		@include mx-transition((height: $transition), (width: $transition), (margin-left: $transition), (background-color: $transition));
 		@include mx-box-shadow;
 
-		:host-context([data-sidebar=#{$sidebar-full}]) {
-
-			@include mx-margin((left: $zero));
-			@include mx-width($nav-full-width);
-
-		}
-
-		:host-context([data-sidebar=#{$sidebar-half}]) {
-
-			@include mx-margin((left: $zero));
-			@include mx-width($nav-half-width);
-
-		}
-
-		:host-context([data-sidebar=#{$sidebar-hidden}]) {
-
-			margin-left		: -fn-var($nav-full-width); // todo include nav shadow
-			@include mx-width($nav-full-width);
-
-			@include bigScreen {
-
-				margin-left		: -fn-var($nav-half-width);
-				@include mx-width($nav-half-width);
-
-			}
-
-		}
+		@include mx-width($nav-current-width);
+		@include mx-margin((left: $nav-current-margin-left));
 
 	}
 
