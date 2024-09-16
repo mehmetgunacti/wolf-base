@@ -13,20 +13,47 @@
 
 }
 
-@mixin mx-min-width($name) {
+@mixin mx-width($name) {
 
-	min-width: fn-var($name);
+	$valid: $zero, $auto, $_100vh, $_100vw, $_100p;
+	@if (index($valid, $name)) {
+
+		width: $name;
+
+	} @else {
+
+		width: fn-var($name);
+
+	}
 
 }
 
-@mixin mx-w-100	{ width: 100%; }
-@mixin mx-h-100	{ height: 100%; }
+@mixin mx-min-width($name) {
 
-@mixin mx-w-50	{ width: 50%; }
-@mixin mx-h-50	{ height: 50%; }
+	$valid: $zero, $auto, $_100vh, $_100vw, $_100p;
+	@if (index($valid, $name)) {
 
-// .w-100	{ @include mx-w-100; }
-// .h-100	{ @include mx-h-100; }
+		min-width: $name;
 
-// .w-50	{ @include mx-w-50; }
-// .h-50	{ @include mx-h-50; }
+	} @else {
+
+		min-width: fn-var($name);
+
+	}
+
+}
+
+@mixin mx-min-height($name) {
+
+	$valid: $zero, $auto, $_100vh, $_100vw, $_100p;
+	@if (index($valid, $name)) {
+
+		min-height: $name;
+
+	} @else {
+
+		min-height: fn-var($name);
+
+	}
+
+}

@@ -7,7 +7,7 @@
 	@include mx-d-block;
 	@include mx-height($_100vh);
 	@include mx-background($col-bg-page);
-	@include mx-transition((background-color, $transition));
+	@include mx-transition((background-color: $transition));
 
 	& > header {
 
@@ -20,7 +20,7 @@
 		@include mx-height($header-height);
 
 		@include mx-z-index($z-index-header);
-		@include mx-transition((background-color, $transition));
+		@include mx-transition((background-color: $transition));
 
 	}
 
@@ -33,19 +33,19 @@
 
 		@include mx-overflow-y-a;
 		@include mx-webkit-scrollbar;
-		@include mx-transition((height, $transition), (left, $transition), (background-color, $transition));
+		@include mx-transition((height: $transition), (left: $transition), (background-color: $transition));
 
 		@include bigScreen() {
 
 			:host-context([data-sidebar=#{$sidebar-full}]) {
 
-				left	: fn-var($nav-full-width);
+				@include mx-inset((left: $nav-full-width));
 
 			}
 
 			:host-context([data-sidebar=#{$sidebar-half}]) {
 
-				left	: fn-var($nav-half-width);
+				@include mx-inset((left: $nav-half-width));
 
 			}
 
@@ -55,44 +55,39 @@
 
 	& > nav {
 
-		z-index				: var(--z-index-nav);
+		@include mx-z-index($z-index-nav);
 
-		top					: var(--header-height);
-		left				: 0;
-		height				: calc(100dvh - var(--header-height));
-		width				: var(--nav-full-width);
+		@include mx-inset((top: $header-height), (left: $zero));
+		@include mx-min-width($nav-full-width);
+		height	: calc($_100dvh - fn-var($header-height));
+		@include mx-overflow-h;
+		@include mx-background($col-bg-nav);
+		@include mx-transition((height: $transition), (width: $transition), (margin-left: $transition), (background-color: $transition));
+		@include mx-box-shadow;
 
-		overflow			: hidden;
+		:host-context([data-sidebar=#{$sidebar-full}]) {
 
-		// background-color	: fn-hsl(col-bg-nav);
-		transition			: height var(--transition), width var(--transition), margin-left var(--transition), background-color var(--transition);
-
-		// @include mx-box-shadow;
-
-		// :host-context() <---
-		body.sidebar-full & {
-
-			margin-left		: 0;
-			width			: var(--nav-full-width);
+			@include mx-margin((left: $zero));
+			@include mx-width($nav-full-width);
 
 		}
 
-		body.sidebar-half & {
+		:host-context([data-sidebar=#{$sidebar-half}]) {
 
-			margin-left		: 0;
-			width			: var(--nav-half-width);
+			@include mx-margin((left: $zero));
+			@include mx-width($nav-half-width);
 
 		}
 
-		body.sidebar-hidden & {
+		:host-context([data-sidebar=#{$sidebar-hidden}]) {
 
-			margin-left		: -var(--nav-full-width); // todo include nav shadow
-			width			: var(--nav-full-width);
+			margin-left		: -fn-var($nav-full-width); // todo include nav shadow
+			@include mx-width($nav-full-width);
 
 			@include bigScreen {
 
-				margin-left		: -var(--nav-half-width);
-				width			: var(--nav-half-width);
+				margin-left		: -fn-var($nav-half-width);
+				@include mx-width($nav-half-width);
 
 			}
 

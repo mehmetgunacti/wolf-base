@@ -1,4 +1,58 @@
-@mixin mx-margin($default, $values: ()) {
+@mixin mx-margin($values...) {
+
+	// if 1st parameter is not a key-value map
+	@if length($values)==1 and type-of(nth($values, 1)) != 'map' {
+
+		$value : nth($values, 1);
+		@if isCSSVar($value) {
+
+			margin: fn-var($value);
+
+		} @else {
+
+			margin: #{$value};
+
+		}
+
+	} @else {
+
+		$top	: null;
+		$right	: null;
+		$bottom	: null;
+		$left	: null;
+
+		@each $map in $values {
+
+			@each $key, $value in $map {
+
+				@if isCSSVar($value) { $value: fn-var($value); }
+				@if $key == top { $top: $value; }
+				@else if $key == right { $right: $value; }
+				@else if $key == bottom { $bottom: $value; }
+				@else if $key == left { $left: $value; }
+
+			}
+
+		}
+
+		@if $top != null and $right != null and $bottom != null and $left != null {
+
+			margin: $top $right $bottom $left;
+
+		} @else {
+
+			@if $top !=null 	{ margin-top: $top; }
+			@if $right !=null	{ margin-right: $right; }
+			@if $bottom !=null	{ margin-bottom: $bottom; }
+			@if $left !=null	{ margin-left: $left; }
+
+		}
+
+	}
+
+}
+
+@mixin mx-margin1($default, $values: ()) {
 
 	@if length($values) == 0 {
 
