@@ -1,0 +1,11 @@
+@import 'variables';
+@import 'helper';
+@import 'components';
+
+:host {
+
+	@include mx-box();
+	@include mx-d-block;
+	// @include mx-background($col-bg-component);
+
+}

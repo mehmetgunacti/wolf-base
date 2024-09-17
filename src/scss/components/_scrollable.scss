@@ -1,20 +1,20 @@
 @mixin mx-webkit-scrollbar {
 
-	.platform-windows &::-webkit-scrollbar {
+	&::-webkit-scrollbar {
 
 		width						: 8px;
 		height						: 8px;
-		border-radius				: var(--border-radius-sm);
-		background-color			: color-mix(in hsl, var(--col-bg-page), transparent 40%); // , (lig: "+ 4%", alp: "0.4"));
-		transition					: background-color var(--transition);
+		border-radius				: fn-var($border-radius-sm);
+		background-color			: fn-color-mix-alpha($col-bg-page, 40%);
+		@include mx-transition((background-color: $transition));
 
 	}
 
-	.platform-windows &::-webkit-scrollbar-thumb {
+	&::-webkit-scrollbar-thumb {
 
-		border-radius				: var(--border-radius);
-		background-color			: var(--col-bg-page);
-		transition					: background-color var(--transition);
+		border-radius				: fn-var($border-radius);
+		background-color			: fn-var($col-bg-page);
+		@include mx-transition((background-color: $transition));
 
 	}
 
@@ -29,7 +29,7 @@
 @mixin mx-scrollable($maxHeight: 25rem) {
 
 	max-height			: $maxHeight;
-	overflow-y			: auto;
+	@include mx-overflow-y-a;
 	@include mx-webkit-scrollbar;
 
 }

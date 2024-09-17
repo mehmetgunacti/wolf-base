@@ -25,6 +25,8 @@
 
 @mixin mx-d-flex-center		{ @include mx-d-flex((ai: center, jc: center)); }
 @mixin mx-d-flex-ai-c-jc-sb	{ @include mx-d-flex((ai: center, jc: space-between)); }
+@mixin mx-d-flex-ai-e-jc-c	{ @include mx-d-flex((ai: end, jc: center)); }
+@mixin mx-d-flex-ai-c-jc-e	{ @include mx-d-flex((ai: center, jc: end)); }
 @mixin mx-d-flex-1			{ flex: 1; }
 
 @mixin mx-d-grid			{ display: grid; }

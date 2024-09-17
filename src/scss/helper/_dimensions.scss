@@ -57,3 +57,33 @@
 	}
 
 }
+
+@mixin mx-max-width($name) {
+
+	$valid: $zero, $auto, $_100vh, $_100vw, $_100p;
+	@if (index($valid, $name)) {
+
+		max-width: $name;
+
+	} @else {
+
+		max-width: fn-var($name);
+
+	}
+
+}
+
+@mixin mx-max-height($name) {
+
+	$valid: $zero, $auto, $_100vh, $_100vw, $_100p;
+	@if (index($valid, $name)) {
+
+		max-height: $name;
+
+	} @else {
+
+		max-height: fn-var($name);
+
+	}
+
+}

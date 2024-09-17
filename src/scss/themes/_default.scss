@@ -15,8 +15,8 @@
 	#{$col-bg-overlay}			: fn-color-mix-alpha($col-black, 75%);
 	#{$col-shadow}				: hsl(0deg 0% 0%);
 
-	#{$col-text}				: hsl(210 15% 92%);
-	#{$col-text-secondary}		: hsl(210 10.8% 71%);
+	#{$col-text}				: hsl(210deg 15% 92%);
+	#{$col-text-secondary}		: hsl(210deg 10.8% 71%);
 
 	#{$col-primary}				: hsl(215deg 65% 45%);
 	#{$col-success}				: hsl(132deg 52% 22%);

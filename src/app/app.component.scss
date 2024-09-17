@@ -14,7 +14,7 @@
 		@include mx-d-grid;
 		@include mx-inset((top: $zero), (right: $zero), (left: $zero));
 		@include mx-pos-fixed;
-		@include mx-box-shadow;
+		@include mx-shadow;
 		@include mx-p((left: $zero));
 		@include mx-background($col-bg-header);
 		@include mx-height($header-height);
@@ -26,18 +26,29 @@
 
 	& > main {
 
+		@include mx-d-block;
+		@include mx-pos-fixed;
+		@include mx-p-sm;
+
 		@include mx-z-index($z-index-main);
 		@include mx-height($main-current-height);
 
 		@include mx-inset((top: $header-height), (right: $zero), (left: $main-current-left));
 
 		@include mx-overflow-y-a;
-		@include mx-webkit-scrollbar;
 		@include mx-transition((height: $transition), (left: $transition), (background-color: $transition));
+
+		// @include mx-webkit-scrollbar;
+		// @include mx-scrollable;
 
 	}
 
 	& > nav {
+
+		@include mx-d-flex-column;
+		@include mx-pos-fixed;
+		@include mx-p-0;
+		@include mx-m-0;
 
 		@include mx-z-index($z-index-nav);
 
@@ -49,8 +60,7 @@
 		@include mx-overflow-h;
 		@include mx-background($col-bg-nav);
 		@include mx-transition((height: $transition), (width: $transition), (margin-left: $transition), (background-color: $transition));
-		@include mx-box-shadow;
-
+		@include mx-shadow;
 
 	}
 
