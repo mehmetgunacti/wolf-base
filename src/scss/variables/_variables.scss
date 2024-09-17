@@ -19,16 +19,20 @@ $font-size-lg						: --font-size-lg;
 $font-size-sm						: --font-size-sm;
 $font-size-xs						: --font-size-xs;
 $font-size-xxs						: --font-size-xxs;
+
 $font-size-h1						: --font-size-h1;
 $font-size-h2						: --font-size-h2;
 $font-size-h3						: --font-size-h3;
 $font-size-h4						: --font-size-h4;
 $font-size-h5						: --font-size-h5;
 $font-size-h6						: --font-size-h6;
+
 $line-height						: --line-height;
 $letter-spacing						: --letter-spacing;
+
 $font-family						: --font-family;
 $font-family-mono					: --font-family-mono;
+
 $gap								: --gap;
 $gap-xxl							: --gap-xxl;
 $gap-xl								: --gap-xl;
@@ -36,14 +40,20 @@ $gap-lg								: --gap-lg;
 $gap-sm								: --gap-sm;
 $gap-xs								: --gap-xs;
 $gap-xxs							: --gap-xxs;
-$radius								: --radius;
-$border-radius-xl					: --border-radius-xl;
+
 $border-radius-lg					: --border-radius-lg;
 $border-radius						: --border-radius;
 $border-radius-sm					: --border-radius-sm;
-$border-radius-xs					: --border-radius-xs;
 $border-radius-round				: --border-radius-round;
-$component-height					: --component-height;
+
+$widget-height-xxl				: --widget-height-xxl;
+$widget-height-xl				: --widget-height-xl;
+$widget-height-lg				: --widget-height-lg;
+$widget-height					: --widget-height;
+$widget-height-sm				: --widget-height-sm;
+$widget-height-xs				: --widget-height-xs;
+$widget-height-xxs				: --widget-height-xxs;
+
 $z-index-splash-screen				: --z-index-splash-screen;
 $z-index-ng-progress				: --z-index-ng-progress;
 $z-index-header						: --z-index-header;
@@ -65,6 +75,8 @@ $main-current-left					: --main-current-left;
 $nav-current-height					: --nav-current-height;
 $nav-current-width					: --nav-current-width;
 $nav-current-margin-left			: --nav-current-margin-left;
+
+$toast-min-width					: --toast-min-width;
 
 $transition							: --transition;
 

@@ -2,7 +2,7 @@
 
 	@include mx-outline;
 
-	--btn-height			: calc(#{fn-var($component-height)} * 0.8);
+	--btn-height			: calc(#{fn-var($widget-height)} * 0.8);
 
 	--btn-font-size			: #{fn-var($font-size)};
 	--btn-padding			: #{fn-var($gap-sm) fn-var($gap)};
@@ -19,6 +19,8 @@
 
 	color					: var(--btn-text-color);
 	background-color		: var(--btn-bg-color);
+
+	height					: var(--btn-height);
 
 	border-color			: var(--btn-border-color);
 	border-radius			: var(--btn-border-radius);
@@ -48,29 +50,28 @@
 	&.xl {
 
 		--btn-font-size	: var(--font-size-xl);
-		--btn-height	: calc(var(--component-height) * 1.2);
+		--btn-height			: calc(#{fn-var($widget-height-xl)} * 0.8);
 
 	}
 
 	&.lg {
 
 		--btn-font-size	: var(--font-size-lg);
-		--btn-height	: var(--component-height);
+		--btn-height			: calc(#{fn-var($widget-height-lg)} * 0.8);
 
 	}
 
 	&.sm {
 
 		--btn-font-size	: var(--font-size-sm);
-		--btn-height	: calc(var(--component-height) * 0.6);
-		// --btn-padding	: var(--gap-xs) var(--gap-sm);
+		--btn-height			: calc(#{fn-var($widget-height-sm)} * 0.8);
 
 	}
 
 	&.xs {
 
 		--btn-font-size		: var(--font-size-xs);
-		--btn-height		: calc(var(--component-height) * 0.4);
+		--btn-height			: calc(#{fn-var($widget-height-xs)} * 0.8);
 
 	}
 

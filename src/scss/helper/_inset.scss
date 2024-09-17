@@ -51,30 +51,3 @@
 	}
 
 }
-
-@mixin mx-inset1($default, $values: ()) {
-
-	@if length($values) == 0 {
-
-		inset: if($default == $zero, $zero, if($default == $auto, $auto, fn-var($default)));
-
-	} @else {
-
-		$top	: if($default == $zero, $zero, if($default == $auto, $auto, fn-var($default)));
-		$right	: if($default == $zero, $zero, if($default == $auto, $auto, fn-var($default)));
-		$bottom	: if($default == $zero, $zero, if($default == $auto, $auto, fn-var($default)));
-		$left	: if($default == $zero, $zero, if($default == $auto, $auto, fn-var($default)));
-
-		@each $key, $value in $values {
-
-			@if $key == top			{ $top		: if($value == $zero, $zero, if($value == $auto, $auto, fn-var($value))); }
-			@else if $key == right	{ $right	: if($value == $zero, $zero, if($value == $auto, $auto, fn-var($value))); }
-			@else if $key == bottom	{ $bottom	: if($value == $zero, $zero, if($value == $auto, $auto, fn-var($value))); }
-			@else if $key == left	{ $left		: if($value == $zero, $zero, if($value == $auto, $auto, fn-var($value))); }
-
-		}
-		inset: #{$top} #{$right} #{$bottom} #{$left};
-
-	}
-
-}

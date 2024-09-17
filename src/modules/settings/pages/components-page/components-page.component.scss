@@ -1,0 +1,38 @@
+@import 'variables';
+@import 'helper';
+@import 'components';
+
+:host {
+
+	@include mx-page;
+
+	[box] {
+
+		@include mx-box;
+		@include mx-shadow;
+
+		@include mx-d-flex-jc-center;
+
+		[wrapper] {
+
+			@include mx-d-flex((justify-content: center));
+			@include mx-gap-sm;
+
+			[container] {
+
+				@include mx-d-flex-column((flex-wrap: wrap));
+				@include mx-gap-sm;
+
+			}
+
+		}
+
+	}
+
+	[update_alert] {
+
+		@include mx-d-flex-ai-c-jc-sb;
+
+	}
+
+}

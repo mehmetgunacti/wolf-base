@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, computed, effect, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input, output } from '@angular/core';
 import { ToastConfiguration } from './toast.util';
 
 @Component({
@@ -6,15 +6,15 @@ import { ToastConfiguration } from './toast.util';
 	selector: 'w-toast',
 	templateUrl: './toast.component.html',
 	styleUrls: ['./toast.component.scss'],
+	host: { '[class]': 'severity()' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToastComponent implements OnInit {
-
-	private elementRef: ElementRef = inject(ElementRef);
+export class ToastComponent {
 
 	conf = input.required<ToastConfiguration>();
 	icon = input<string | null>();
 	iconClass = computed<string>(() => this.icon() ?? this.conf().icon ?? this.getIconClass(this.conf()));
+	severity = computed<string>(() => this.conf().severity);
 
 	close = output<number>();
 
@@ -26,12 +26,6 @@ export class ToastComponent implements OnInit {
 				setTimeout(() => this.onClose(), this.conf().life);
 
 		});
-
-	}
-
-	ngOnInit(): void {
-
-		this.elementRef.nativeElement.classList.add(this.conf().severity);
 
 	}
 

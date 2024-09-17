@@ -15,7 +15,7 @@
 		@include mx-inset((top: $zero), (right: $zero), (left: $zero));
 		@include mx-pos-fixed;
 		@include mx-shadow;
-		@include mx-p((left: $zero));
+		@include mx-pl-0;
 		@include mx-background($col-bg-header);
 		@include mx-height($header-height);
 

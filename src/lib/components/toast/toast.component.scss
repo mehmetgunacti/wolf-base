@@ -1,26 +1,38 @@
+@import 'variables';
+@import 'helper';
+@import 'components';
+
 :host {
 
-	min-height			: 6.3rem;
-	min-width			: 28rem;
+	@include mx-d-flex;
+	@include mx-shadow;
 
-	border				: 0;
-	border-radius		: var(--border-radius);
+	// min-height			: calc(fn-var($header-height) * 1.5);
+	@include mx-min-width($toast-min-width);
 
-	color				: var(--col-text);
+	@include mx-p-lg;
+	@include mx-gap-sm;
+
+	@include mx-border-0;
+	@include mx-border-radius;
+
+	@include mx-color($col-text);
 
 	[toast-left] {
 
-		width			: 6rem;
+		@include mx-d-flex-center;
+		@include mx-min-width($header-height);
 
 	}
 
 	[toast-right] {
 
+		@include mx-d-flex((dir: column, jc: center));
+		@include mx-d-flex-1;
 		// class="d-flex-column jc-center p pl-0 flex-1"
-		[toast-title] {
+		[toast-summary] {
 
-			font-size		: 1.5rem;
-			font-weight		: bold;
+			@include mx-font-size-h4;
 
 		}
 
@@ -28,25 +40,25 @@
 
 	&.success {
 
-		background-color	: var(--col-success);
+		@include mx-background($col-success);
 
 	}
 
 	&.info {
 
-		background-color	: var(--col-info);
+		@include mx-background($col-info);
 
 	}
 
 	&.warn {
 
-		background-color	: var(--col-warn);
+		@include mx-background($col-warn);
 
 	}
 
 	&.error {
 
-		background-color	: var(--col-error);
+		@include mx-background($col-error);
 
 	}
 

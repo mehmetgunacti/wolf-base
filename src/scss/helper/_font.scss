@@ -1,0 +1,12 @@
+@mixin mx-font-size($name) {
+
+	font-size: fn-var($name);
+
+}
+
+@mixin mx-font-size-h1 { @include mx-font-size($font-size-h1); }
+@mixin mx-font-size-h2 { @include mx-font-size($font-size-h2); }
+@mixin mx-font-size-h3 { @include mx-font-size($font-size-h3); }
+@mixin mx-font-size-h4 { @include mx-font-size($font-size-h4); }
+@mixin mx-font-size-h5 { @include mx-font-size($font-size-h5); }
+@mixin mx-font-size-h6 { @include mx-font-size($font-size-h6); }

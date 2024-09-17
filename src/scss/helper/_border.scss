@@ -1,11 +1,12 @@
-@mixin mx-b-0	{ border: 0; }
-@mixin mx-bt-0	{ border-top: 0; }
-@mixin mx-br-0	{ border-right: 0; }
-@mixin mx-bb-0	{ border-bottom: 0; }
-@mixin mx-bl-0	{ border-left: 0; }
+@mixin mx-border-0		{ border: 0; }
+@mixin mx-border-t-0	{ border-top: 0; }
+@mixin mx-border-r-0	{ border-right: 0; }
+@mixin mx-border-b-0	{ border-bottom: 0; }
+@mixin mx-border-l-0	{ border-left: 0; }
 
-// .b-0	{ @include mx-b-0; }
-// .bt-0	{ @include mx-bt-0; }
-// .br-0	{ @include mx-br-0; }
-// .bb-0	{ @include mx-bb-0; }
-// .bl-0	{ @include mx-bl-0; }
+@mixin mx-border-radius-xl		{ border-radius: fn-var($border-radius-xl); }
+@mixin mx-border-radius-lg		{ border-radius: fn-var($border-radius-lg); }
+@mixin mx-border-radius			{ border-radius: fn-var($border-radius); }
+@mixin mx-border-radius-sm		{ border-radius: fn-var($border-radius-sm); }
+@mixin mx-border-radius-xs		{ border-radius: fn-var($border-radius-xs); }
+@mixin mx-border-radius-round	{ border-radius: fn-var($border-radius-round); }

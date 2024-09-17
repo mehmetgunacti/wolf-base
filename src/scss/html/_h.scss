@@ -3,53 +3,53 @@ h1, h2, h3 {
 	letter-spacing: 0.2px; /* Tighter for headings */
 
 }
-
+// todo remove mx-h.. and use the ones from _font.scss
 @mixin mx-h1 {
 
-	font-size		: var(--font-size-h1);
+	@include mx-font-size-h1;
 	font-weight		: bold;
-	color			: var(--col-focus);
+	@include mx-color($col-focus);
 
 }
 
 @mixin mx-h2 {
 
-	font-size		: var(--font-size-h2);
+	@include mx-font-size-h2;
 	font-weight		: bold;
-	padding-bottom	: var(--gap-sm);
+	@include mx-pb-sm;
 
 }
 
 @mixin mx-h3 {
 
-	font-size		: var(--font-size-h3);
+	@include mx-font-size-h3;
 	font-weight		: bold;
 
 }
 
 @mixin mx-h4 {
 
-	font-size		: var(--font-size-h4);
+	@include mx-font-size-h4;
 	font-weight		: bold;
-	color			: var(--col-focus);
+	@include mx-color($col-focus);
 
 }
 
 @mixin mx-h5 {
 
-	font-size		: var(--font-size-h5);
+	@include mx-font-size-h5;
 	font-weight		: bold;
 	font-style		: italic;
-	color			: var(--col-focus);
+	@include mx-color($col-focus);
 
 }
 
 @mixin mx-h6 {
 
-	font-size		: var(--font-size-h6);
+	@include mx-font-size-h6;
 	font-weight		: bold;
 	font-style		: italic;
-	color			: var(--col-text-secondary);
+	@include mx-color($col-text-secondary);
 
 }
 
@@ -62,51 +62,51 @@ h1, h2, h3 {
 
 h1, h2, h3, h4, h5, h6 {
 
-	color		: var(--col-text);
-	transition	: color var(--transition);
+	@include mx-color($col-text);
+	@include mx-transition((color: $transition));
 
 }
 
 h1 {
 
 	@include mx-h1;
-	margin-bottom	: var(--gap-xxl);
+	@include mx-mb-xxl;
 
 }
 
 h2 {
 
 	@include mx-h2;
-	margin-bottom	: var(--gap-xxl);
-	border-bottom	: 1px solid var(--text-secondary);
-	transition		: border var(--transition);
+	@include mx-mb-xxl;
+	@include mx-border-0;
+	border-bottom	: 1px solid fn-var($col-text-secondary);
+	@include mx-transition((border: $transition));
 
 }
 
 h3 {
 
-	@include mx-h3;
-	margin-bottom	: var(--gap-xl);
+	@include mx-h3;@include mx-mb-xl;
 
 }
 
 h4 {
 
 	@include mx-h4;
-	margin-bottom	: var(--gap-xl);
+	@include mx-mb-xl;
 
 }
 
 h5 {
 
 	@include mx-h5;
-	margin-bottom	: var(--gap);
+	@include mx-mb;
 
 }
 
 h6 {
 
 	@include mx-h6;
-	margin-bottom	: var(--gap);
+	@include mx-mb;
 
 }

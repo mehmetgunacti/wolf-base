@@ -4,7 +4,7 @@
 	--box-padding		: #{fn-var($gap-lg) fn-var($gap)};
 	--box-bg-color		: #{fn-var($bg-color)};
 	--box-border-radius	: #{fn-var($border-radius)};
-	--box-min-height	: calc(4 * fn-var($gap));
+	--box-min-height	: calc(4 * #{fn-var($gap)});
 
 	color				: var(--box-color);
 	padding				: var(--box-padding);

@@ -52,143 +52,56 @@
 
 }
 
-@mixin mx-margin1($default, $values: ()) {
+@mixin mx-m-xxl		{ @include mx-margin($gap-xxl); }
+@mixin mx-m-xl		{ @include mx-margin($gap-xl); }
+@mixin mx-m-lg		{ @include mx-margin($gap-lg); }
+@mixin mx-m			{ @include mx-margin($gap); }
+@mixin mx-m-sm		{ @include mx-margin($gap-sm); }
+@mixin mx-m-xs		{ @include mx-margin($gap-xs); }
+@mixin mx-m-xxs		{ @include mx-margin($gap-xxs); }
+@mixin mx-m-0		{ @include mx-margin($zero); }
+@mixin mx-m-auto	{ @include mx-margin($auto); }
 
-	@if length($values) == 0 {
+// mr
+@mixin mx-mr-xxl	{ @include mx-margin((right: $gap-xxl)); }
+@mixin mx-mr-xl		{ @include mx-margin((right: $gap-xl)); }
+@mixin mx-mr-lg		{ @include mx-margin((right: $gap-lg)); }
+@mixin mx-mr		{ @include mx-margin((right: $gap)); }
+@mixin mx-mr-sm		{ @include mx-margin((right: $gap-sm)); }
+@mixin mx-mr-xs		{ @include mx-margin((right: $gap-xs)); }
+@mixin mx-mr-xxs	{ @include mx-margin((right: $gap-xxs)); }
+@mixin mx-mr-0		{ @include mx-margin((right: $zero)); }
+@mixin mx-mr-auto	{ @include mx-margin((right: $auto)); }
 
-		margin: if($default == $zero, $zero, if($default == $auto, $auto, fn-var($default)));
+// ml
+@mixin mx-ml-xxl	{ @include mx-margin((left: $gap-xxl)); }
+@mixin mx-ml-xl		{ @include mx-margin((left: $gap-xl)); }
+@mixin mx-ml-lg		{ @include mx-margin((left: $gap-lg)); }
+@mixin mx-ml		{ @include mx-margin((left: $gap)); }
+@mixin mx-ml-sm		{ @include mx-margin((left: $gap-sm)); }
+@mixin mx-ml-xs		{ @include mx-margin((left: $gap-xs)); }
+@mixin mx-ml-xxs	{ @include mx-margin((left: $gap-xxs)); }
+@mixin mx-ml-0		{ @include mx-margin((left: $zero)); }
+@mixin mx-ml-auto	{ @include mx-margin((left: $auto)); }
 
-	} @else {
+// mt
+@mixin mx-mt-xxl	{ @include mx-margin((top: $gap-xxl)); }
+@mixin mx-mt-xl		{ @include mx-margin((top: $gap-xl)); }
+@mixin mx-mt-lg		{ @include mx-margin((top: $gap-lg)); }
+@mixin mx-mt		{ @include mx-margin((top: $gap)); }
+@mixin mx-mt-sm		{ @include mx-margin((top: $gap-sm)); }
+@mixin mx-mt-xs		{ @include mx-margin((top: $gap-xs)); }
+@mixin mx-mt-xxs	{ @include mx-margin((top: $gap-xxs)); }
+@mixin mx-mt-0		{ @include mx-margin((top: $zero)); }
+@mixin mx-mt-auto	{ @include mx-margin((top: $auto)); }
 
-		$top	: if($default == $zero, $zero, if($default == $auto, $auto, fn-var($default)));
-		$right	: if($default == $zero, $zero, if($default == $auto, $auto, fn-var($default)));
-		$bottom	: if($default == $zero, $zero, if($default == $auto, $auto, fn-var($default)));
-		$left	: if($default == $zero, $zero, if($default == $auto, $auto, fn-var($default)));
-
-		@each $key, $value in $values {
-
-			@if $key == top			{ $top		: if($value == $zero, $zero, if($value == $auto, $auto, fn-var($value))); }
-			@else if $key == right	{ $right	: if($value == $zero, $zero, if($value == $auto, $auto, fn-var($value))); }
-			@else if $key == bottom	{ $bottom	: if($value == $zero, $zero, if($value == $auto, $auto, fn-var($value))); }
-			@else if $key == left	{ $left		: if($value == $zero, $zero, if($value == $auto, $auto, fn-var($value))); }
-
-		}
-		margin: #{$top} #{$right} #{$bottom} #{$left};
-
-	}
-
-}
-
-@mixin mx-m-xxl($values: ())	{ @include mx-margin($gap-xxl, $values); }
-@mixin mx-m-xl($values: ())		{ @include mx-margin($gap-xl, $values); }
-@mixin mx-m-lg($values: ())		{ @include mx-margin($gap-lg, $values); }
-@mixin mx-m($values: ())		{ @include mx-margin($gap, $values); }
-@mixin mx-m-sm($values: ())		{ @include mx-margin($gap-sm, $values); }
-@mixin mx-m-xs($values: ())		{ @include mx-margin($gap-xs, $values); }
-@mixin mx-m-xxs($values: ())	{ @include mx-margin($gap-xxs, $values); }
-
-@mixin mx-m-0($values: ())		{ @include mx-margin($zero, $values); }
-@mixin mx-m-auto($values: ())	{ @include mx-margin($auto, $values); }
-
-// .m-xxl		{ @include mx-m-xxl; }
-// .m-xl		{ @include mx-m-xl; }
-// .m-lg		{ @include mx-m-lg; }
-// .m			{ @include mx-m; }
-// .m-sm		{ @include mx-m-sm; }
-// .m-xs		{ @include mx-m-xs; }
-// .m-xxs		{ @include mx-m-xxs; }
-// .m-0		{ @include mx-m-0; }
-
-// .m-auto		{ @include mx-m-auto(); }
-
-// // mr
-// @mixin mx-mr-xxl	{ margin-right : var(--gap-xxl); }
-// @mixin mx-mr-xl		{ margin-right : var(--gap-xl); }
-// @mixin mx-mr-lg		{ margin-right : var(--gap-lg); }
-// @mixin mx-mr		{ margin-right : var(--gap); }
-// @mixin mx-mr-sm		{ margin-right : var(--gap-sm); }
-// @mixin mx-mr-xs		{ margin-right : var(--gap-xs); }
-// @mixin mx-mr-xxs	{ margin-right : var(--gap-xxs); }
-// @mixin mx-mr-0		{ margin-right : 0; }
-
-// @mixin mx-mr-auto	{ margin-right : auto; }
-
-// .mr-xxl		{ @include mx-mr-xxl; }
-// .mr-xl		{ @include mx-mr-xl; }
-// .mr-lg		{ @include mx-mr-lg; }
-// .mr			{ @include mx-mr; }
-// .mr-sm		{ @include mx-mr-sm; }
-// .mr-xs		{ @include mx-mr-xs; }
-// .mr-xxs		{ @include mx-mr-xxs; }
-// .mr-0		{ @include mx-mr-0; }
-
-// .mr-auto	{ @include mx-mr-auto(); }
-
-// // ml
-// @mixin mx-ml-xxl	{ margin-left : var(--gap-xxl); }
-// @mixin mx-ml-xl		{ margin-left : var(--gap-xl); }
-// @mixin mx-ml-lg		{ margin-left : var(--gap-lg); }
-// @mixin mx-ml		{ margin-left : var(--gap); }
-// @mixin mx-ml-sm		{ margin-left : var(--gap-sm); }
-// @mixin mx-ml-xs		{ margin-left : var(--gap-xs); }
-// @mixin mx-ml-xxs	{ margin-left : var(--gap-xxs); }
-// @mixin mx-ml-0		{ margin-left : 0; }
-
-// @mixin mx-ml-auto	{ margin-left : auto; }
-
-// .ml-xxl		{ @include mx-ml-xxl; }
-// .ml-xl		{ @include mx-ml-xl; }
-// .ml-lg		{ @include mx-ml-lg; }
-// .ml			{ @include mx-ml; }
-// .ml-sm		{ @include mx-ml-sm; }
-// .ml-xs		{ @include mx-ml-xs; }
-// .ml-xxs		{ @include mx-ml-xxs; }
-// .ml-0		{ @include mx-ml-0; }
-
-// .ml-auto	{ @include mx-ml-auto(); }
-
-// // mt
-// @mixin mx-mt-xxl	{ margin-top : var(--gap-xxl); }
-// @mixin mx-mt-xl		{ margin-top : var(--gap-xl); }
-// @mixin mx-mt-lg		{ margin-top : var(--gap-lg); }
-// @mixin mx-mt		{ margin-top : var(--gap); }
-// @mixin mx-mt-sm		{ margin-top : var(--gap-sm); }
-// @mixin mx-mt-xs		{ margin-top : var(--gap-xs); }
-// @mixin mx-mt-xxs	{ margin-top : var(--gap-xxs); }
-// @mixin mx-mt-0		{ margin-top : 0; }
-
-// @mixin mx-mt-auto	{ margin-top : auto; }
-
-// .mt-xxl		{ @include mx-mt-xxl; }
-// .mt-xl		{ @include mx-mt-xl; }
-// .mt-lg		{ @include mx-mt-lg; }
-// .mt			{ @include mx-mt; }
-// .mt-sm		{ @include mx-mt-sm; }
-// .mt-xs		{ @include mx-mt-xs; }
-// .mt-xxs		{ @include mx-mt-xxs; }
-// .mt-0		{ @include mx-mt-0; }
-
-// .mt-auto	{ @include mx-mt-auto(); }
-
-// // mb
-// @mixin mx-mb-xxl	{ margin-bottom : var(--gap-xxl); }
-// @mixin mx-mb-xl		{ margin-bottom : var(--gap-xl); }
-// @mixin mx-mb-lg		{ margin-bottom : var(--gap-lg); }
-// @mixin mx-mb		{ margin-bottom : var(--gap); }
-// @mixin mx-mb-sm		{ margin-bottom : var(--gap-sm); }
-// @mixin mx-mb-xs		{ margin-bottom : var(--gap-xs); }
-// @mixin mx-mb-xxs	{ margin-bottom : var(--gap-xxs); }
-// @mixin mx-mb-0		{ margin-bottom : 0; }
-
-// @mixin mx-mb-auto	{ margin-bottom : auto; }
-
-// .mb-xxl		{ @include mx-mb-xxl; }
-// .mb-xl		{ @include mx-mb-xl; }
-// .mb-lg		{ @include mx-mb-lg; }
-// .mb			{ @include mx-mb; }
-// .mb-sm		{ @include mx-mb-sm; }
-// .mb-xs		{ @include mx-mb-xs; }
-// .mb-xxs		{ @include mx-mb-xxs; }
-// .mb-0		{ @include mx-mb-0; }
-
-// .mb-auto	{ @include mx-mb-auto(); }
+// mb
+@mixin mx-mb-xxl	{ @include mx-margin((bottom: $gap-xxl)); }
+@mixin mx-mb-xl		{ @include mx-margin((bottom: $gap-xl)); }
+@mixin mx-mb-lg		{ @include mx-margin((bottom: $gap-lg)); }
+@mixin mx-mb		{ @include mx-margin((bottom: $gap)); }
+@mixin mx-mb-sm		{ @include mx-margin((bottom: $gap-sm)); }
+@mixin mx-mb-xs		{ @include mx-margin((bottom: $gap-xs)); }
+@mixin mx-mb-xxs	{ @include mx-margin((bottom: $gap-xxs)); }
+@mixin mx-mb-0		{ @include mx-margin((bottom: $zero)); }
+@mixin mx-mb-auto	{ @include mx-margin((bottom: $auto)); }

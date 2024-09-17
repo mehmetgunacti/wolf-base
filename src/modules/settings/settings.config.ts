@@ -9,6 +9,7 @@ import { PinnedNotesFormContainerComponent } from './containers/pinned-notes-con
 import { PopularBookmarksFormContainerComponent } from './containers/popular-bookmarks-container/popular-bookmarks-form-container.component';
 import { QuoteSettingsContainerComponent } from './containers/quote-settings-container/quote-settings-container.component';
 import { TitleLookupConfigContainerComponent } from "./containers/title-lookup-config-container/title-lookup-config-container.component";
+import { ComponentsPageComponent } from './pages/components-page/components-page.component';
 import { SettingsPageComponent } from "./pages/settings-page/settings-page.component";
 
 export const components = [
@@ -29,6 +30,8 @@ export const components = [
 
 	QuoteSettingsFormComponent,
 	QuoteSettingsContainerComponent,
-	QuoteSettingsListComponent
+	QuoteSettingsListComponent,
+
+	ComponentsPageComponent
 
 ];

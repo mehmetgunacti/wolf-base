@@ -1,3 +1,10 @@
+@mixin mx-color($color) {
+
+	color: fn-var($color);
+
+}
+
+
 @mixin mx-background($color) {
 
 	background-color: fn-var($color);
