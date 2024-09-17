@@ -1,0 +1,11 @@
+@import 'variables';
+@import 'helper';
+@import 'components';
+
+:host {
+
+	@include mx-d-block;
+	@include mx-box;
+	@include mx-shadow;
+
+}

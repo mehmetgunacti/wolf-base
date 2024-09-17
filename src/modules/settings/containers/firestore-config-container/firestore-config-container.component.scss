@@ -4,8 +4,8 @@
 
 :host {
 
-	@include mx-box();
 	@include mx-d-block;
-	// @include mx-background($col-bg-component);
+	@include mx-box;
+	@include mx-shadow;
 
 }

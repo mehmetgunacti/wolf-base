@@ -13,7 +13,7 @@
 	#{$col-bg-page}				: hsl(210deg 11% 33%);
 
 	#{$col-bg-overlay}			: fn-color-mix-alpha($col-black, 75%);
-	#{$col-shadow}				: hsl(0deg 0% 0%);
+	#{$col-shadow}				: fn-var($col-bg-header);
 
 	#{$col-text}				: hsl(210deg 15% 92%);
 	#{$col-text-secondary}		: hsl(210deg 10.8% 71%);

@@ -6,7 +6,6 @@ import { FirestoreConfigForm, EditFormImpl } from './firestore-config-form';
 	selector: 'app-firestore-config-form',
 	templateUrl: './firestore-config-form.component.html',
 	styleUrls: ['./firestore-config-form.component.scss'],
-	host: { 'class': 'd-flex-column p flex-1' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FirestoreConfigFormComponent implements OnInit, OnChanges {

@@ -1,8 +1,6 @@
 @mixin mx-shadow($color: $col-shadow) {
 
-	// Ensure $color is treated as a CSS custom property
-	box-shadow: fn-color-mix-alpha($color, 40%) 1px 4px 4px,
-				fn-color-mix-alpha($color, 30%) 5px 4px 2px -2px,
-				fn-color-mix-alpha($color, 20%) 0px -1px 1px inset;
+	box-shadow: fn-color-mix-alpha($color, 20%) 5px 6px 6px -2px,
+				fn-color-mix-alpha($color, 50%) 8px 8px 18px -2px;
 
 }
