@@ -1,0 +1,31 @@
+@mixin mx-fieldset {
+
+	@include mx-box;
+	@include mx-pos-relative;
+	@include mx-shadow;
+	@include mx-border-0;
+
+	& > legend {
+
+		@include mx-background($col-bg-component-dark);
+		@include mx-border-radius-sm;
+		padding : fn-var($gap-xs) fn-var($gap);
+
+		&:nth-child(2) {
+
+			@include mx-pos-absolute;
+			top			: calc(-4 * fn-var($gap));
+			right		: calc(2 * fn-var($gap));
+			@include mx-p-xs;
+
+			@include mx-bigScreen() {
+
+				top		: calc(-3 * fn-var($gap));
+
+			}
+
+		}
+
+	}
+
+}

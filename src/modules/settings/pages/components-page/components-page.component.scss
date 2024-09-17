@@ -6,6 +6,18 @@
 
 	@include mx-page;
 
+	fieldset {
+
+		@include mx-fieldset;
+		[container] {
+
+			@include mx-d-flex; //-column((flex-wrap: wrap));
+			@include mx-gap-sm;
+
+		}
+
+	}
+
 	[box] {
 
 		@include mx-box;
@@ -15,12 +27,12 @@
 
 		[wrapper] {
 
-			@include mx-d-flex((justify-content: center));
+			@include mx-d-flex-column((justify-content: center));
 			@include mx-gap-sm;
 
 			[container] {
 
-				@include mx-d-flex-column((flex-wrap: wrap));
+				@include mx-d-flex; //-column((flex-wrap: wrap));
 				@include mx-gap-sm;
 
 			}
