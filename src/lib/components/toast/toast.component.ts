@@ -18,9 +18,7 @@ export class ToastComponent implements OnInit {
 
 	close = output<number>();
 
-	ngOnInit(): void {
-
-		this.elementRef.nativeElement.classList.add(this.conf().severity);
+	constructor() {
 
 		effect(() => {
 
@@ -29,6 +27,11 @@ export class ToastComponent implements OnInit {
 
 		});
 
+	}
+
+	ngOnInit(): void {
+
+		this.elementRef.nativeElement.classList.add(this.conf().severity);
 
 	}
 
