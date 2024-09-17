@@ -35,22 +35,6 @@
 		@include mx-webkit-scrollbar;
 		@include mx-transition((height: $transition), (left: $transition), (background-color: $transition));
 
-		// @include bigScreen() {
-
-		// 	:host-context([data-sidebar=#{$sidebar-full}]) {
-
-		// 		@include mx-inset((left: $nav-full-width));
-
-		// 	}
-
-		// 	:host-context([data-sidebar=#{$sidebar-half}]) {
-
-		// 		@include mx-inset((left: $nav-half-width));
-
-		// 	}
-
-		// }
-
 	}
 
 	& > nav {

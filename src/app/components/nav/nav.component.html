@@ -2,7 +2,11 @@
 
 	@for (item of menuItems$ | async; track $index) {
 
-		<a  [routerLink]="item.url" [queryParams]="item.queryParams" routerLinkActive="active" [routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }">
+		<a
+			[routerLink]="item.url"
+			[queryParams]="item.queryParams"
+			routerLinkActive="active"
+			[routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }">
 
 			<span icon class="material-symbols-outlined">{{item.icon}}</span>
 			<span label>{{ item.label }}</span>
