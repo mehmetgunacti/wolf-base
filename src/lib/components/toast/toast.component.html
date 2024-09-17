@@ -1,12 +1,23 @@
-<div toast-left class="d-flex-center">
+@let c = conf();
 
-	<span class="material-symbols-outlined">{{ iconClass }}</span>
+<div toast-left>
+
+	<span class="material-symbols-outlined">{{ iconClass() }}</span>
 
 </div>
-<div toast-right class="d-flex-column jc-center p pl-0 flex-1">
+<div toast-right>
 
-	<div toast-title *ngIf="conf.summary">{{conf.summary}}</div>
-	<div *ngIf="conf.detail" [innerHTML]="conf.detail"></div>
+	@if (c.summary) {
+
+		<div toast-title>{{c.summary}}</div>
+
+	}
+
+	@if (c.detail) {
+
+		<div [innerHTML]="c.detail"></div>
+
+	}
 	<ng-content/>
 
 </div>

@@ -3,20 +3,20 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AutofocusDirective, FormatBytesPipe, InputModule, NoDataPipe, PortalComponent, SanitizeHtmlModule, SelectedTagsComponent, TimePastModule, ToastModule } from '@lib';
+import { AutofocusDirective, FormatBytesPipe, InputModule, NoDataPipe, PortalComponent, SanitizeHtmlModule, SelectedTagsComponent, TimePastModule, ToastComponent, ToastWrapperComponent } from '@lib';
 import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 import { SelectModule } from 'lib/components/select/select.module';
 import { SwtichModule } from 'lib/components/switch/switch.module';
 import { TagCloudModule } from 'lib/components/tag-cloud/tag-cloud.module';
 import { TextareaModule } from 'lib/components/textarea';
+import { RequiredValidatorDirective } from 'lib/directives/required-validator.directive';
 import { LanguagePipe } from 'lib/pipes/language.pipe';
 import { TypePipe } from 'lib/pipes/type.pipe';
 import { BookmarkComponent } from './bookmark/bookmark.component';
 import { LanguagesComponent } from './languages/languages.component';
+import { ModalComponent } from './modal/modal.component';
 import { NoteHeaderComponent } from './note-header/note-header.component';
 import { WordComponent } from './word/word.component';
-import { RequiredValidatorDirective } from 'lib/directives/required-validator.directive';
-import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
 	declarations: [
@@ -32,14 +32,12 @@ import { ModalComponent } from './modal/modal.component';
 		LanguagesComponent,
 		LanguagePipe,
 		TypePipe
-
 	],
 	imports: [
 		CommonModule,
 		RouterModule,
 		ReactiveFormsModule,
 		InputTagModule,
-		ToastModule,
 		InputModule,
 		CdkMenuModule,
 		TagCloudModule,
@@ -47,7 +45,9 @@ import { ModalComponent } from './modal/modal.component';
 		SanitizeHtmlModule,
 		TimePastModule,
 		TextareaModule,
-		SwtichModule
+		SwtichModule,
+		ToastWrapperComponent,
+		ToastComponent
 	],
 	exports: [
 		BookmarkComponent,
@@ -62,7 +62,6 @@ import { ModalComponent } from './modal/modal.component';
 		InputTagModule,
 		InputModule,
 		TimePastModule,
-		ToastModule,
 		SelectModule,
 		SelectedTagsComponent,
 		CdkMenuModule,
@@ -71,7 +70,9 @@ import { ModalComponent } from './modal/modal.component';
 		TextareaModule,
 		SwtichModule,
 		WordComponent,
-		LanguagesComponent
+		LanguagesComponent,
+		ToastWrapperComponent,
+		ToastComponent
 	],
 	providers: []
 })

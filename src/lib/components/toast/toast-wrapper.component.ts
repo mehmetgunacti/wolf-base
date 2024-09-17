@@ -1,14 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { toastTrigger } from './toast.animation';
+import { ToastComponent } from './toast.component';
 import { WolfToastRef } from './toast.service';
 import { ToastConfiguration } from './toast.util';
 
 @Component({
+	standalone: true,
 	selector: 'w-toast-wrapper',
 	templateUrl: './toast-wrapper.component.html',
 	styleUrl: './toast-wrapper.component.scss',
-	host: { 'class': 'd-flex-column gap m-xl' },
+	imports: [CommonModule, ToastComponent],
 	animations: [toastTrigger],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
