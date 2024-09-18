@@ -10,10 +10,10 @@
 		@include mx-d-flex-center;
 		@include mx-background($col-bg-component-dark);
 		@include mx-border-radius-sm;
-		@include mx-min-height($widget-height);
+		@include mx-min-height($widget-height-xs);
 		@include mx-min-width($header-height);
 		@include mx-font-size($font-size-sm);
-		@include mx-px-sm;
+		@include mx-px;
 
 		&:has(#{$glyph-selector}) {
 

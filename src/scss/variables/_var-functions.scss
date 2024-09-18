@@ -58,17 +58,19 @@
 
 }
 
-@function fn-color-lighten($name, $value) {
+@function fn-color-lighten($name, $value, $alpha: null) {
 
 	$value : percentage-to-decimal($value);
-	@return hsl(from fn-var($name) h s calc(l * #{calc(1 + $value)}));
+	$alpha-str: if($alpha != null, "/" + $alpha, "");
+	@return hsl(from fn-var($name) h s calc(l * #{calc(1 + $value)}) #{ $alpha-str });
 
 }
 
-@function fn-color-darken($name, $value) {
+@function fn-color-darken($name, $value, $alpha: null) {
 
 	$value : percentage-to-decimal($value);
-	@return hsl(from fn-var($name) h s calc(l * #{calc(1 - $value)}));
+	$alpha-str: if($alpha != null, "/" + $alpha, "");
+	@return hsl(from fn-var($name) h s calc(l * #{calc(1 - $value)}) #{ $alpha-str });
 
 }
 

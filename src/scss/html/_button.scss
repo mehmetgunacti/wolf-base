@@ -2,10 +2,10 @@
 
 	@include mx-outline;
 
-	--btn-height			: calc(#{fn-var($widget-height)} * 0.8);
+	--btn-min-height		: calc(#{fn-var($widget-height)} * 0.8);
 
 	--btn-font-size			: #{fn-var($font-size)};
-	--btn-padding			: #{fn-var($gap-sm) fn-var($gap)};
+	--btn-padding-inline	: #{fn-var($gap)};
 	--btn-border-radius		: #{fn-var($border-radius-sm)};
 
 	--btn-text-color		: #{fn-var($col-btn-default-text-color)};
@@ -18,12 +18,14 @@
 	color					: var(--btn-text-color);
 	background-color		: var(--btn-bg-color);
 
-	height					: var(--btn-height);
+	min-height				: var(--btn-min-height);
 
 	border-color			: var(--btn-border-color);
 	border-radius			: var(--btn-border-radius);
 	border-width			: 1px;
 	border-style			: solid;
+
+	padding-inline			: var(--btn-padding-inline);
 
 	background-image		: none;
 	text-decoration			: none;
@@ -47,29 +49,29 @@
 
 	&.xl {
 
-		--btn-font-size	: var(--font-size-xl);
-		--btn-height			: calc(#{fn-var($widget-height-xl)} * 0.8);
+		--btn-font-size		: var(--font-size-xl);
+		--btn-min-height	: calc(#{fn-var($widget-height-xl)} * 0.9);
 
 	}
 
 	&.lg {
 
-		--btn-font-size	: var(--font-size-lg);
-		--btn-height			: calc(#{fn-var($widget-height-lg)} * 0.8);
+		--btn-font-size		: var(--font-size-lg);
+		--btn-min-height	: calc(#{fn-var($widget-height-lg)} * 0.9);
 
 	}
 
 	&.sm {
 
-		--btn-font-size	: var(--font-size-sm);
-		--btn-height			: calc(#{fn-var($widget-height-sm)} * 0.8);
+		--btn-font-size		: var(--font-size-sm);
+		--btn-min-height	: calc(#{fn-var($widget-height-sm)} * 0.9);
 
 	}
 
 	&.xs {
 
 		--btn-font-size		: var(--font-size-xs);
-		--btn-height			: calc(#{fn-var($widget-height-xs)} * 0.8);
+		--btn-min-height	: calc(#{fn-var($widget-height-xs)} * 0.9);
 
 	}
 
