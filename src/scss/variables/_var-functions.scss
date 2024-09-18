@@ -1,8 +1,36 @@
+@function is-number-between-0-and-1($value) {
+
+	@if not (type-of($value) == 'number' and $value >= 0 and $value <= 1 and unit($value) == '') {
+
+		@error "Invalid value: #{$value}. Expected 0 <= value <= 1 with no unit.";
+
+	}
+	@return $value;
+
+}
+
+@function is-percentage-with-sign($value) {
+
+	@if type-of($value) == 'number' and unit($value) == '%' and $value >= -100% and $value <= 100% {
+
+		@return $value;
+
+	}
+	@error "Invalid value: #{$value}. Expected -100% <= value <= 100% including unit (%).";
+
+}
+
+
+@function percentage-to-decimal($percentage) {
+
+	@return calc(is-percentage-with-sign($percentage) / 100%);
+
+}
+
 @function isCSSVar($variable) {
 
-	// @debug $variable;
+	// todo add error message
 	$result: type-of($variable) == 'string' and str-index($variable, '--') == 1 and global-variable-exists(str-slice($variable, 3));
-	// @debug $result;
 	@return $result;
 
 }
@@ -23,30 +51,24 @@
 
 }
 
-/// $name		-> --col-bg
-/// $percentage	-> 20%
-/// returns		=> color-mix(in hsl, var(--col-bg), transparent 20%)
-@function fn-color-mix-alpha($name, $percentage) {
+@function fn-color-set-alpha($name, $value) {
 
-	@return color-mix(in hsl, fn-var($name), fn-var($col-transparent) $percentage);
+	$value : is-number-between-0-and-1($value);
+	@return hsl(from fn-var($name) h s l / $value);
 
 }
 
-/// $name		-> --col-bg
-/// $percentage	-> 20%
-/// returns		=> color-mix(in hsl, var(--col-bg), white 20%)
-@function fn-color-mix-lighten($name, $percentage) {
+@function fn-color-lighten($name, $value) {
 
-	@return color-mix(in hsl, fn-var($name), fn-var($col-white) $percentage);
+	$value : percentage-to-decimal($value);
+	@return hsl(from fn-var($name) h s calc(l * #{calc(1 + $value)}));
 
 }
 
-/// $name		-> --col-bg
-/// $percentage	-> 20%
-/// returns		=> color-mix(in hsl, var(--col-bg), black 20%)
-@function fn-color-mix-darken($name, $percentage) {
+@function fn-color-darken($name, $value) {
 
-	@return color-mix(in hsl, fn-var($name), fn-var($col-black) $percentage);
+	$value : percentage-to-decimal($value);
+	@return hsl(from fn-var($name) h s calc(l * #{calc(1 - $value)}));
 
 }
 

@@ -5,7 +5,7 @@
 		width						: 8px;
 		height						: 8px;
 		border-radius				: fn-var($border-radius-sm);
-		background-color			: fn-color-mix-alpha($col-bg-page, 40%);
+		background-color			: fn-color-set-alpha($col-bg-page, 0.4);
 		@include mx-transition((background-color: $transition));
 
 	}

@@ -2,6 +2,26 @@
 @import 'helper';
 @import 'components';
 
+@debug #{calc(57% / 100%)};
+@debug #{0.57 * 100%};
+
+.btn-1 { background-color: color(srgb 0.11205 0.167333 0.42795); @include mx-d-flex-center; outline: 1px solid red; }
+.btn-2 { background-color: fn-var($col-primary); @include mx-d-flex-center; outline: 1px solid red; }
+.btn-2:hover {
+	filter: brightness(70%);
+}
+.btn-3 { background-color: rgb(18, 45, 84); @include mx-d-flex-center; outline: 1px solid red; }
+/* Using color-mix() */
+.element1 {
+	background-color: color-mix(in hsl, hsl(215deg 65% 45%), black 10%);
+  }
+
+  /* Adjusting lightness directly */
+  .element2 {
+	--color-light: 45%;
+	background-color: hsl(215deg 65% calc(var(--color-light) - 10%));
+  }
+
 :host {
 
 	@include mx-d-flex-column;
@@ -13,6 +33,7 @@
 
 		[container] {
 
+			@include mx-d-flex;
 			@include mx-gap-sm;
 			@include mx-p-sm;
 

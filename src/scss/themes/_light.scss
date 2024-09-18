@@ -8,7 +8,7 @@
 	#{$col-bg-form-element}		: hsl(208deg 25% 70%);
 	#{$col-bg-page}				: hsl(208deg 25% 80%);
 
-	#{$col-bg-overlay}			: fn-color-mix-alpha($col-black, 75%);
+	#{$col-bg-overlay}			: fn-color-set-alpha($col-black, 0.75);
 	#{$col-shadow}				: fn-var($col-bg-nav);
 
 	// --col-button-bg-hue		: 215deg;
