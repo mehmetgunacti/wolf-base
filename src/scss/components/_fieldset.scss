@@ -7,13 +7,17 @@
 
 	& > legend {
 
+		@include mx-d-flex-center;
 		@include mx-background($col-bg-component-dark);
 		@include mx-border-radius-sm;
-		padding : fn-var($gap-xs) fn-var($gap);
+		@include mx-min-height($widget-height);
+		@include mx-min-width($header-height);
+		@include mx-font-size($font-size-sm);
+		@include mx-px-sm;
 
-		&:has(span) {
+		&:has(#{$glyph-selector}) {
 
-			@include mx-d-inline-flex; //((align-items: center));
+			@include mx-pr;
 
 		}
 
@@ -22,7 +26,7 @@
 			@include mx-pos-absolute;
 			top			: calc(-4 * fn-var($gap));
 			right		: calc(2 * fn-var($gap));
-			@include mx-p-xs;
+			// @include mx-p-xs;
 
 			@include mx-bigScreen() {
 

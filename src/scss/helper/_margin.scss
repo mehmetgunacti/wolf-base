@@ -105,3 +105,25 @@
 @mixin mx-mb-xxs	{ @include mx-margin((bottom: $gap-xxs)); }
 @mixin mx-mb-0		{ @include mx-margin((bottom: $zero)); }
 @mixin mx-mb-auto	{ @include mx-margin((bottom: $auto)); }
+
+// mx
+@mixin mx-mx-xxl	{ @include mx-margin((left: $gap-xxl),	(right: $gap-xxl)); }
+@mixin mx-mx-xl		{ @include mx-margin((left: $gap-xl), 	(right: $gap-xl)); }
+@mixin mx-mx-lg		{ @include mx-margin((left: $gap-lg),	(right: $gap-lg)); }
+@mixin mx-mx		{ @include mx-margin((left: $gap), 		(right: $gap)); }
+@mixin mx-mx-sm		{ @include mx-margin((left: $gap-sm), 	(right: $gap-sm)); }
+@mixin mx-mx-xs		{ @include mx-margin((left: $gap-xs), 	(right: $gap-xs)); }
+@mixin mx-mx-xxs	{ @include mx-margin((left: $gap-xxs), 	(right: $gap-xxs)); }
+@mixin mx-mx-0		{ @include mx-margin((left: $zero), 	(right: $zero)); }
+@mixin mx-mx-auto	{ @include mx-margin((left: $auto), 	(right: $auto)); }
+
+// my
+@mixin mx-my-xxl	{ @include mx-margin((top: $gap-xxl), 	(bottom: $gap-xxl)); }
+@mixin mx-my-xl		{ @include mx-margin((top: $gap-xl), 	(bottom: $gap-xl)); }
+@mixin mx-my-lg		{ @include mx-margin((top: $gap-lg), 	(bottom: $gap-lg)); }
+@mixin mx-my		{ @include mx-margin((top: $gap), 		(bottom: $gap)); }
+@mixin mx-my-sm		{ @include mx-margin((top: $gap-sm), 	(bottom: $gap-sm)); }
+@mixin mx-my-xs		{ @include mx-margin((top: $gap-xs), 	(bottom: $gap-xs)); }
+@mixin mx-my-xxs	{ @include mx-margin((top: $gap-xxs), 	(bottom: $gap-xxs)); }
+@mixin mx-my-0		{ @include mx-margin((top: $zero), 		(bottom: $zero)); }
+@mixin mx-my-auto	{ @include mx-margin((top: $auto), 		(bottom: $auto)); }

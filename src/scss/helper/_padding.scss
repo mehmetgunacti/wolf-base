@@ -62,7 +62,7 @@
 @mixin mx-p-0		{ @include mx-padding($zero); }
 @mixin mx-p-auto	{ @include mx-padding($auto); }
 
-// mr
+// pr
 @mixin mx-pr-xxl	{ @include mx-padding((right: $gap-xxl)); }
 @mixin mx-pr-xl		{ @include mx-padding((right: $gap-xl)); }
 @mixin mx-pr-lg		{ @include mx-padding((right: $gap-lg)); }
@@ -73,7 +73,7 @@
 @mixin mx-pr-0		{ @include mx-padding((right: $zero)); }
 @mixin mx-pr-auto	{ @include mx-padding((right: $auto)); }
 
-// ml
+// pl
 @mixin mx-pl-xxl	{ @include mx-padding((left: $gap-xxl)); }
 @mixin mx-pl-xl		{ @include mx-padding((left: $gap-xl)); }
 @mixin mx-pl-lg		{ @include mx-padding((left: $gap-lg)); }
@@ -84,7 +84,7 @@
 @mixin mx-pl-0		{ @include mx-padding((left: $zero)); }
 @mixin mx-pl-auto	{ @include mx-padding((left: $auto)); }
 
-// mt
+// pt
 @mixin mx-pt-xxl	{ @include mx-padding((top: $gap-xxl)); }
 @mixin mx-pt-xl		{ @include mx-padding((top: $gap-xl)); }
 @mixin mx-pt-lg		{ @include mx-padding((top: $gap-lg)); }
@@ -95,7 +95,7 @@
 @mixin mx-pt-0		{ @include mx-padding((top: $zero)); }
 @mixin mx-pt-auto	{ @include mx-padding((top: $auto)); }
 
-// mb
+// pb
 @mixin mx-pb-xxl	{ @include mx-padding((bottom: $gap-xxl)); }
 @mixin mx-pb-xl		{ @include mx-padding((bottom: $gap-xl)); }
 @mixin mx-pb-lg		{ @include mx-padding((bottom: $gap-lg)); }
@@ -105,3 +105,25 @@
 @mixin mx-pb-xxs	{ @include mx-padding((bottom: $gap-xxs)); }
 @mixin mx-pb-0		{ @include mx-padding((bottom: $zero)); }
 @mixin mx-pb-auto	{ @include mx-padding((bottom: $auto)); }
+
+// px
+@mixin mx-px-xxl	{ @include mx-padding((left: $gap-xxl), (right: $gap-xxl)); }
+@mixin mx-px-xl		{ @include mx-padding((left: $gap-xl), 	(right: $gap-xl)); }
+@mixin mx-px-lg		{ @include mx-padding((left: $gap-lg),	(right: $gap-lg)); }
+@mixin mx-px		{ @include mx-padding((left: $gap), 	(right: $gap)); }
+@mixin mx-px-sm		{ @include mx-padding((left: $gap-sm), 	(right: $gap-sm)); }
+@mixin mx-px-xs		{ @include mx-padding((left: $gap-xs), 	(right: $gap-xs)); }
+@mixin mx-px-xxs	{ @include mx-padding((left: $gap-xxs), (right: $gap-xxs)); }
+@mixin mx-px-0		{ @include mx-padding((left: $zero), 	(right: $zero)); }
+@mixin mx-px-auto	{ @include mx-padding((left: $auto), 	(right: $auto)); }
+
+// py
+@mixin mx-py-xxl	{ @include mx-padding((top: $gap-xxl), 	(bottom: $gap-xxl)); }
+@mixin mx-py-xl		{ @include mx-padding((top: $gap-xl), 	(bottom: $gap-xl)); }
+@mixin mx-py-lg		{ @include mx-padding((top: $gap-lg), 	(bottom: $gap-lg)); }
+@mixin mx-py		{ @include mx-padding((top: $gap), 		(bottom: $gap)); }
+@mixin mx-py-sm		{ @include mx-padding((top: $gap-sm), 	(bottom: $gap-sm)); }
+@mixin mx-py-xs		{ @include mx-padding((top: $gap-xs), 	(bottom: $gap-xs)); }
+@mixin mx-py-xxs	{ @include mx-padding((top: $gap-xxs), 	(bottom: $gap-xxs)); }
+@mixin mx-py-0		{ @include mx-padding((top: $zero), 	(bottom: $zero)); }
+@mixin mx-py-auto	{ @include mx-padding((top: $auto), 	(bottom: $auto)); }

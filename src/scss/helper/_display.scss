@@ -1,11 +1,13 @@
 @mixin mx-d-flex($params...) {
 
-	display: flex;
-	@each $name, $color in keywords($params) {
+	$isDisplay: false;
+	@each $property, $value in keywords($params) {
 
-		#{$name}: $color;
+		#{$property}: $value;
+		@if ($property == display) { $isDisplay : true; }
 
 	}
+	@if not $isDisplay { display: flex; }
 
 }
 
@@ -33,6 +35,6 @@
 @mixin mx-d-block						{ display: block; }
 @mixin mx-d-none						{ display: none; }
 @mixin mx-d-inline-block				{ display: inline-block; }
-@mixin mx-d-inline-flex					{ display: inline-flex; }
+@mixin mx-d-inline-flex($params...)		{ @include mx-d-flex($display: inline-flex, $params...); }
 
 @mixin mx-flex-1						{ flex: 1; }

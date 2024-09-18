@@ -11,6 +11,8 @@ $sidebar-full	: 'full';
 $sidebar-half	: 'half';
 $sidebar-hidden	: 'hidden';
 
+$glyph-selector	: '.material-symbols-outlined';
+
 // css variables
 $font-size							: --font-size;
 $font-size-xxl						: --font-size-xxl;
@@ -41,18 +43,20 @@ $gap-sm								: --gap-sm;
 $gap-xs								: --gap-xs;
 $gap-xxs							: --gap-xxs;
 
+$border-radius-xl					: --border-radius-xl;
 $border-radius-lg					: --border-radius-lg;
 $border-radius						: --border-radius;
 $border-radius-sm					: --border-radius-sm;
+$border-radius-xs					: --border-radius-xs;
 $border-radius-round				: --border-radius-round;
 
-$widget-height-xxl				: --widget-height-xxl;
-$widget-height-xl				: --widget-height-xl;
-$widget-height-lg				: --widget-height-lg;
-$widget-height					: --widget-height;
-$widget-height-sm				: --widget-height-sm;
-$widget-height-xs				: --widget-height-xs;
-$widget-height-xxs				: --widget-height-xxs;
+$widget-height-xxl					: --widget-height-xxl;
+$widget-height-xl					: --widget-height-xl;
+$widget-height-lg					: --widget-height-lg;
+$widget-height						: --widget-height;
+$widget-height-sm					: --widget-height-sm;
+$widget-height-xs					: --widget-height-xs;
+$widget-height-xxs					: --widget-height-xxs;
 
 $z-index-splash-screen				: --z-index-splash-screen;
 $z-index-ng-progress				: --z-index-ng-progress;
