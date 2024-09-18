@@ -1,47 +1,32 @@
-@mixin mx-d-flex($values...) {
+@mixin mx-d-flex($params...) {
 
-	display	: flex;
-	@each $map in $values {
+	display: flex;
+	@each $name, $color in keywords($params) {
 
-		@each $key, $value in $map {
-
-			#{$key}	: $value;
-
-		}
+		#{$name}: $color;
 
 	}
 
 }
 
-// @mixin mx-d-flex-column($values...) 	{ @debug $values; @include mx-d-flex(join($values, (dir: column), comma)); }
-@mixin mx-d-flex-column($values...) {
-	@debug $values;
-	$default-values: (flex-direction: column);
-	$values-map: ();
+@mixin mx-d-flex-column($params...)		{ @include mx-d-flex($flex-direction: column, $params...); }
+@mixin mx-d-flex-center($params...)		{ @include mx-d-flex($align-items: center, $justify-content: center, $params...); }
 
-	@each $value in $values {
-	  $values-map: map-merge($values-map, $value);
-	}
+@mixin mx-d-flex-ai-center($params...)	{ @include mx-d-flex($align-items: center, $params...); }
+@mixin mx-d-flex-ai-start($params...)	{ @include mx-d-flex($align-items: start, $params...); }
+@mixin mx-d-flex-ai-end($params...)		{ @include mx-d-flex($align-items: end, $params...); }
+@mixin mx-d-flex-ai-bl($params...)		{ @include mx-d-flex($align-items: baseline, $params...); }
+@mixin mx-d-flex-ai-sb($params...)		{ @include mx-d-flex($align-items: space-between, $params...); }
 
-	$merged-values: map-merge($default-values, $values-map);
-	@include mx-d-flex($merged-values);
-  }
-@mixin mx-d-flex-ai-center				{ @include mx-d-flex((align-items: center)); }
-@mixin mx-d-flex-ai-start				{ @include mx-d-flex((align-items: start)); }
-@mixin mx-d-flex-ai-end					{ @include mx-d-flex((align-items: end)); }
-@mixin mx-d-flex-ai-bl					{ @include mx-d-flex((align-items: baseline)); }
-@mixin mx-d-flex-ai-sb					{ @include mx-d-flex((align-items: space-between)); }
+@mixin mx-d-flex-jc-center($params...)	{ @include mx-d-flex($justify-content: center, $params...); }
+@mixin mx-d-flex-jc-start($params...)	{ @include mx-d-flex($justify-content: start, $params...); }
+@mixin mx-d-flex-jc-end($params...)		{ @include mx-d-flex($justify-content: end, $params...); }
+@mixin mx-d-flex-jc-bl($params...)		{ @include mx-d-flex($justify-content: baseline, $params...); }
+@mixin mx-d-flex-jc-sb($params...)		{ @include mx-d-flex($justify-content: space-between, $params...); }
 
-@mixin mx-d-flex-jc-center				{ @include mx-d-flex((justify-content: center)); }
-@mixin mx-d-flex-jc-start				{ @include mx-d-flex((justify-content: start)); }
-@mixin mx-d-flex-jc-end					{ @include mx-d-flex((justify-content: end)); }
-@mixin mx-d-flex-jc-bl					{ @include mx-d-flex((justify-content: baseline)); }
-@mixin mx-d-flex-jc-sb					{ @include mx-d-flex((justify-content: space-between)); }
-
-@mixin mx-d-flex-center					{ @include mx-d-flex((align-items: center, justify-content: center)); }
-@mixin mx-d-flex-ai-c-jc-sb				{ @include mx-d-flex((align-items: center, justify-content: space-between)); }
-@mixin mx-d-flex-ai-e-jc-c				{ @include mx-d-flex((align-items: end,    justify-content: center)); }
-@mixin mx-d-flex-ai-c-jc-e				{ @include mx-d-flex((align-items: center, justify-content: end)); }
+@mixin mx-d-flex-ai-c-jc-sb($params...)	{ @include mx-d-flex($align-items: center,	$justify-content: space-between, $params...); }
+@mixin mx-d-flex-ai-e-jc-c($params...)	{ @include mx-d-flex($align-items: end,		$justify-content: center, $params...); }
+@mixin mx-d-flex-ai-c-jc-e($params...)	{ @include mx-d-flex($align-items: center,	$justify-content: end, $params...); }
 
 @mixin mx-d-grid						{ display: grid; }
 @mixin mx-d-contents					{ display: contents; }

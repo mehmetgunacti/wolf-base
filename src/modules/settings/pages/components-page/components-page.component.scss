@@ -2,17 +2,70 @@
 @import 'helper';
 @import 'components';
 
+@mixin mix-flex($params...) {
+	@debug "type: " type-of($params) " length: " length($params);
+
+	display: flex;
+	@each $map in $params {
+
+		@each $key, $value in $map {
+
+			@debug $key " - " $value;
+			#{$key}	: $value;
+
+		}
+	}
+}
+
+// Mixin to merge incoming parameters with default values and pass to mix-flex
+@mixin mix-flex-column($params...) { @debug length($params); @debug $params; @include mix-flex(join($params, (flex-direction: column))); }
+
+@mixin flexbox($params...) {
+	@debug keywords($params) type-of($params);
+	display: flex;
+	@each $name, $color in keywords($params) {
+		@debug $name " - " $color;
+		#{$name}: $color;
+	}
+}
+@mixin flexbox-column($params...) {
+
+	@debug keywords($params) type-of($params);
+	// @include flexbox(join($params, (second: thesecond)));
+	@include flexbox($flex-direction: column, $params...);
+
+}
+
 :host {
 
-	@include mx-page;
+	// @include flexbox-column;
+	@include flexbox-column($flex-direction: column, $flex-wrap: wrap, $abc2394adf: 82394adsf);
+	// @include flexbox-column($flex-direction: column);
+
+	// @include mix-flex;
+	// @include mix-flex((flex-direction: column));
+	// @include syntax($flex-direction: column, $color: "blue");
+	// @include mix-flex((flex-direction: column, flex-wrap: wrap));
+	// @include syntax($flex-direction: column, $flex-wrap: wrap, $abc2394adf: 82394adsf);
+	// @include syntax($flex-direction: column);
+	// @include syntax;
+
+	// @include mix-flex-column;
+	// @include mix-flex-column(background-color "red");
+	// @include mix-flex-column(background-color "red");
+	// @include mix-flex-column(background-color "red", color "blue");
+
+	// @include mx-d-flex-column;
 
 	fieldset {
 
 		@include mx-fieldset;
+
 		[container] {
 
-			@include mx-d-flex; //-column((flex-wrap: wrap));
+			// @include mx-d-flex; //-column((flex-wrap: wrap));
 			@include mx-gap-sm;
+			@include mx-p-sm;
 
 		}
 
@@ -32,7 +85,7 @@
 
 			[container] {
 
-				@include mx-d-flex; //-column((flex-wrap: wrap));
+				// @include mx-d-flex; //-column((flex-wrap: wrap));
 				@include mx-gap-sm;
 
 			}

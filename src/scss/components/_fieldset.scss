@@ -11,6 +11,12 @@
 		@include mx-border-radius-sm;
 		padding : fn-var($gap-xs) fn-var($gap);
 
+		&:has(span) {
+
+			@include mx-d-inline-flex; //((align-items: center));
+
+		}
+
 		&:nth-child(2) {
 
 			@include mx-pos-absolute;
