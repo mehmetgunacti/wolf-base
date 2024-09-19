@@ -1,11 +1,11 @@
 @mixin mx-outline {
 
-	&:active,
+	// &:active,
 	&:focus-visible {
 
 		outline			: 2px solid #{fn-var($col-outline)};
 		outline-offset	: -2px;
-		box-shadow		: 0 0 4px #{fn-var($col-outline)};
+		// box-shadow		: 0 0 4px #{fn-var($col-outline)};
 
 	}
 
