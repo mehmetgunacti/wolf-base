@@ -9,7 +9,7 @@
 	--btn-padding-inline	: #{fn-var($gap-lg)};
 	--btn-border-radius		: #{fn-var($border-radius-sm)};
 
-	--btn-text-color		: #{fn-var($col-btn-default-color)};
+	--btn-text-color		: #{fn-var($col-btn-default-text)};
 	--btn-bg-color			: #{fn-var($col-btn-default-color)};
 	--btn-border-color		: #{fn-var($col-btn-default-border)};
 
@@ -21,7 +21,7 @@
 
 	height					: var(--btn-height);
 
-	border-color			: var(--btn-border);
+	border-color			: var(--btn-border-color);
 	border-radius			: var(--btn-border-radius);
 	border-width			: 1px;
 	border-style			: solid;
@@ -33,7 +33,7 @@
 	white-space				: pre;
 	cursor					: pointer;
 
-	@include mx-transition(color, background-color, border-color);
+	@include mx-transition(color background-color border-color);
 
 	&:hover {
 
@@ -142,13 +142,13 @@
 
 		&:hover {
 
-			--btn-text-color	: #{fn-var($col-btn-link-color-hover)};
+			&:not(:has(#{$glyph-selector})),
+			&[data-before]::before,
+			&[data-after]::after {
 
-		}
+				text-decoration: underline;
 
-		&:active {
-
-			--btn-text-color	: #{fn-var($col-btn-link-color-active)};
+			}
 
 		}
 
@@ -205,7 +205,7 @@
 	&[data-after]::after {
 
 		@include mx-d-inline-block;
-    	@include mx-font-size_inherit;
+		@include mx-font-size_inherit;
 		@include mx-mx-xs;
 
 	}

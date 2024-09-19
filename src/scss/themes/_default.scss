@@ -44,8 +44,8 @@
 
 	#{$col-btn-link-text}				: fn-var($col-text);
 	#{$col-btn-link-color}				: transparent;
-	#{$col-btn-link-color-hover}		: fn-color-set-alpha($col-white, 0.1);
-	#{$col-btn-link-color-active}		: fn-color-set-alpha($col-white, 0.1);
+	#{$col-btn-link-color-hover}		: fn-color-lighten($col-focus, 10%);
+	#{$col-btn-link-color-active}		: fn-color-lighten($col-focus, 15%);
 	#{$col-btn-link-border}				: transparent;
 
 	#{$col-btn-warn-text}				: fn-var($col-text);

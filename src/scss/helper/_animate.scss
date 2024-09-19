@@ -1,4 +1,4 @@
-@mixin mx-transition($params...) {
+@mixin _mx-transition($transition, $params) {
 
 	$transition-string: "";
 	$delimiter: "";
@@ -6,13 +6,24 @@
 
 		@each $property, $value in $map {
 
-			$val: if($value, fn-var($value), $transition);
-			$transition-string: #{$transition-string} #{$delimiter} #{$property} #{$val};
+			$val: if($value, $value, $transition);
+			$transition-string: #{$transition-string} #{$delimiter} #{$property} #{fn-var($val)};
 			$delimiter: ", ";
 
 		}
 
 	}
 	transition: $transition-string;
+
+}
+
+@mixin mx-transition($params) {
+
+	@include _mx-transition($transition, $params);
+
+}
+@mixin mx-transition-short($params) {
+
+	@include _mx-transition($transition-short, $params);
 
 }

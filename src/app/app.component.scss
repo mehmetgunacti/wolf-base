@@ -36,7 +36,7 @@
 		@include mx-inset((top: $header-height), (right: $zero), (left: $main-current-left));
 
 		@include mx-overflow-y-a;
-		@include mx-transition(height, left, background-color);
+		@include mx-transition(height left background-color);
 
 		// @include mx-webkit-scrollbar;
 		// @include mx-scrollable;
@@ -59,7 +59,7 @@
 
 		@include mx-overflow-h;
 		@include mx-background($col-bg-nav);
-		@include mx-transition(height, width, margin-left, background-color);
+		@include mx-transition(height width margin-left background-color);
 		@include mx-shadow;
 
 	}
