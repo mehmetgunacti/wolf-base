@@ -12,7 +12,7 @@
 		@include mx-border-radius-sm;
 		@include mx-min-height($widget-height-xs);
 		@include mx-min-width($header-height);
-		@include mx-font-size($font-size-sm);
+		@include mx-font-size($font-size);
 		@include mx-px;
 
 		&:has(#{$glyph-selector}) {
@@ -24,13 +24,12 @@
 		&:nth-child(2) {
 
 			@include mx-pos-absolute;
-			top			: calc(-4 * fn-var($gap-lg));
-			right		: calc(2 * fn-var($gap-sm));
-			// @include mx-p-xs;
+			top		: calc(-6 * var(--gap-sm));
+			right	: calc(5 * var(--gap-xxs));
 
 			@include mx-bigScreen() {
 
-				top		: calc(-3 * fn-var($gap-lg));
+				top		: calc(-5 * var(--gap-sm));
 
 			}
 

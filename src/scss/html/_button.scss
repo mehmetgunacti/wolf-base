@@ -3,11 +3,11 @@
 	@include mx-outline;
 	@include mx-d-flex-center($display: inline-flex);
 
-	--btn-height		: calc(#{fn-var($widget-height)} * 0.8);
+	--btn-height			: #{fn-var($widget-height)};
 
 	--btn-font-size			: #{fn-var($font-size)};
-	--btn-padding-inline	: #{fn-var($gap-lg)};
-	--btn-border-radius		: #{fn-var($border-radius-sm)};
+	--btn-padding-inline	: #{fn-var($gap)};
+	--btn-border-radius		: #{fn-var($border-radius)};
 
 	--btn-text-color		: #{fn-var($col-btn-default-text)};
 	--btn-bg-color			: #{fn-var($col-btn-default-color)};
@@ -50,39 +50,47 @@
 
 	&.xl {
 
-		--btn-font-size		: fn-var($font-size-xl);
-		--btn-height	: calc(#{fn-var($widget-height-xl)} * 0.9);
+		--btn-font-size		: #{fn-var($font-size-xl)};
+		--btn-height		: #{fn-var($widget-height-xl)};
+		--btn-border-radius	: #{fn-var($border-radius-xl)};
+		--btn-padding-inline: #{fn-var($gap-xl)};
 
 	}
 
 	&.lg {
 
-		--btn-font-size		: fn-var($font-size-lg);
-		--btn-height	: calc(#{fn-var($widget-height-lg)} * 0.9);
+		--btn-font-size		: #{fn-var($font-size-lg)};
+		--btn-height		: #{fn-var($widget-height-lg)};
+		--btn-border-radius	: #{fn-var($border-radius-lg)};
+		--btn-padding-inline: #{fn-var($gap-lg)};
 
 	}
 
 	&.sm {
 
-		--btn-font-size		: fn-var($font-size-sm);
-		--btn-height	: calc(#{fn-var($widget-height-sm)} * 0.9);
+		--btn-font-size		: #{fn-var($font-size-sm)};
+		--btn-height		: #{fn-var($widget-height-sm)};
+		--btn-border-radius	: #{fn-var($border-radius-sm)};
+		--btn-padding-inline: #{fn-var($gap-sm)};
 
 	}
 
 	&.xs {
 
-		--btn-font-size		: fn-var($font-size-xxs);
-		--btn-height	: calc(#{fn-var($widget-height-xs)} * 0.9);
+		--btn-font-size		: #{fn-var($font-size-xs)};
+		--btn-height		: #{fn-var($widget-height-xs)};
+		--btn-border-radius	: #{fn-var($border-radius-xs)};
+		--btn-padding-inline: #{fn-var($gap-xs)};
 
 	}
 
 	&[disabled] {
 
-		--btn-text-color		: #{fn-var($col-btn-disabled-text)};
-		--btn-bg-color			: #{fn-var($col-btn-disabled-color)};
-		--btn-bg-color-hover	: #{fn-var($col-btn-disabled-color-hover)};
-		--btn-bg-color-active	: #{fn-var($col-btn-disabled-color-active)};
-		--btn-border-color		: #{fn-var($col-btn-disabled-border)};
+		--btn-text-color		: #{fn-var($col-btn-disabled-text)} !important;
+		--btn-bg-color			: #{fn-var($col-btn-disabled-color)} !important;
+		--btn-bg-color-hover	: #{fn-var($col-btn-disabled-color-hover)} !important;
+		--btn-bg-color-active	: #{fn-var($col-btn-disabled-color-active)} !important;
+		--btn-border-color		: #{fn-var($col-btn-disabled-border)} !important;
 		cursor					: not-allowed;
 
 		&:active {
@@ -154,38 +162,14 @@
 
 	}
 
-	&.rounded {
-
-		--btn-border-radius		: fn-var($border-radius-round);
-		--btn-padding			: fn-var($gap-sm);
-
-		&.xs {
-
-			--btn-padding		: fn-var($gap-xxs);
-
-		}
-
-		&.sm {
-
-			--btn-padding		: fn-var($gap-xs);
-
-		}
-
-		&.lg {
-
-			--btn-padding		: fn-var($gap);
-
-		}
-
-	}
-
 	&.tag {
 
 		border				: $zero;
 		min-width			: 1rem;
 		--btn-text-color	: #{fn-var($col-btn-tag-text)};
 		--btn-bg-color		: #{fn-var($col-btn-tag-color)};
-		--btn-border-radius : fn-var($border-radius-xl);
+		--btn-border-radius : #{fn-var($border-radius-round)};
+		padding-inline		: calc(var(--btn-padding-inline)* 1.4);
 
 		&:hover {
 
@@ -201,12 +185,35 @@
 
 	}
 
+	&.glyph {
+
+		border				: $zero;
+		--btn-text-color	: #{fn-var($col-btn-glyph-text)};
+		--btn-bg-color		: #{fn-var($col-btn-glyph-color)};
+		--btn-border-radius : #{fn-var($border-radius-round)};
+
+		width				: var(--btn-height);
+
+		&:hover {
+
+			--btn-bg-color	: #{fn-var($col-btn-glyph-color-hover)};
+
+		}
+
+		&:active {
+
+			--btn-bg-color	: #{fn-var($col-btn-glyph-color-active)};
+
+		}
+
+	}
+
 	&[data-before]::before,
 	&[data-after]::after {
 
 		@include mx-d-inline-block;
-		@include mx-font-size_inherit;
-		@include mx-mx-xs;
+		@include mx-font-size-inherit;
+		@include mx-mx-xxs;
 
 	}
 

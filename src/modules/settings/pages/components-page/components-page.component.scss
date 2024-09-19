@@ -10,26 +10,43 @@
 	fieldset {
 
 		@include mx-fieldset;
+		@include mx-d-flex-column($align-items: center);
+		container-type: inline-size;
 
-		[container1] {
+		[wrapper] {
 
-			@include mx-d-grid;
-			grid-template-columns: repeat(5, 1fr);
+			@include mx-d-flex-column;
 			@include mx-gap-sm;
+			//outline: 1px solid orange;
+			// width: clamp($breakpoint-sm, 70%, 100vw);
 
-		}
+			width	: min(100%, #{$breakpoint-sm});
 
-		[container] {
+			// @container (min-width: #{$breakpoint-md}) {
 
-			@include mx-d-flex;
-			@include mx-gap-sm;
-			@include mx-p-sm;
-
-			// & > * {
-
-			// 	@include mx-mr;
+			// 	width		: #{$breakpoint-md};
 
 			// }
+
+			// @include mx-bigScreen {
+
+
+
+			// }
+
+			[container] {
+
+				@include mx-d-flex-ai-e-jc-c($flex-wrap: wrap);
+				@include mx-gap-sm;
+
+				// @container (min-width: #{$breakpoint-md}) {
+
+				// 	width		: #{$breakpoint-md};
+				// 	justify-content	: start;
+
+				// }
+
+			}
 
 		}
 

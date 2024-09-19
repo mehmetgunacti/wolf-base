@@ -6,7 +6,7 @@
 		<!-- use a disabled button to provide padding for tree leaf -->
 		<div class="example-expandable-node">
 			<button
-				class="link rounded small"
+				class="glyph small"
 				type="button"
 				style="visibility: hidden;"
 				disabled>
@@ -31,7 +31,7 @@
 				tabindex="0"
 				type="button"
 				cdkTreeNodeToggle
-				class="link rounded small"
+				class="glyph small"
 				[id]="'mt_' + node.value.id">
 				<span class="material-symbols-outlined">
 					{{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}

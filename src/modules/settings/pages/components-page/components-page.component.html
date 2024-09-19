@@ -3,128 +3,72 @@
 	<legend>Buttons</legend>
 	<legend><button class="link sm"><span class="material-symbols-outlined">add</span></button></legend>
 
-	<!-- SM -->
-	<div class="h-divider">Extra Small (xs)</div>
-	<div container1>
+	<div wrapper>
 
-		<td><button class="xs">Update</button></td>
-		<td><button class="xs" disabled>Update</button></td>
-		<td><button class="warn xs">Update</button></td>
-		<td><button class="danger xs">Update</button></td>
-		<td><button class="link xs">Update</button></td>
-		<td><button class="xs" data-after="Update"><span class="material-symbols-outlined">update</span></button></td>
-		<td><button class="xs" data-after="Update" disabled><span class="material-symbols-outlined">update</span></button></td>
-		<td><button class="warn xs" data-after="Update"><span class="material-symbols-outlined">update</span></button></td>
-		<td><button class="danger xs" data-after="Update"><span class="material-symbols-outlined">update</span></button></td>
-		<td><button class="link xs" data-after="Update"><span class="material-symbols-outlined">update</span></button></td>
+		<!-- TYPES -->
+		<div class="h-divider">Button Types</div>
+		<div container>
 
-	</div>
+			<td><button class="" disabled>Disabled</button></td>
+			<td><button class="warn">Warn</button></td>
+			<td><button class="danger">Danger</button></td>
+			<td><button class="">Default</button></td>
+			<td><button class="link">Link</button></td>
 
-	<!-- SM -->
-	<div class="h-divider">Small (sm)</div>
-	<div container>
+		</div>
 
-		<button class="sm">Update</button>
-		<button class="sm" disabled>Update</button>
-		<button class="warn sm">Update</button>
-		<button class="danger sm">Update</button>
-		<button class="link sm">Update</button>
+		<!-- WITH GLYPHS -->
+		<div class="h-divider">With Glyphs</div>
+		<div container>
 
-	</div>
-	<div container>
+			<td><button class="" 		data-after="Disabled" disabled><span class="material-symbols-outlined">update</span></button></td>
+			<td><button class="warn"	data-after="Warn"><span class="material-symbols-outlined">update</span></button></td>
+			<td><button class="danger"	data-after="Danger"><span class="material-symbols-outlined">update</span></button></td>
+			<td><button class=""		data-after="Default"><span class="material-symbols-outlined">update</span></button></td>
+			<td><button class="link"	data-after="Link"><span class="material-symbols-outlined">update</span></button></td>
 
-		<button class="sm" data-after="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="sm" data-after="Update" disabled><span class="material-symbols-outlined">update</span></button>
-		<button class="warn sm" data-after="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="danger sm" data-after="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="link sm" data-after="Update"><span class="material-symbols-outlined">update</span></button>
+		</div>
 
-	</div>
+		<!-- SIZES -->
+		<div class="h-divider">Button Sizes</div>
+		<div container>
 
-	<!-- DEFAULT -->
-	<div class="h-divider">Default</div>
-	<div container>
+			<td><button class="xs">Extra Small</button></td>
+			<td><button class="sm">Small</button></td>
+			<td><button class="">Default</button></td>
+			<td><button class="lg">Large</button></td>
+			<td><button class="xl">Extra Large</button></td>
 
-		<button class="">Update</button>
-		<button class="" disabled>Update</button>
-		<button class="warn ">Update</button>
-		<button class="danger ">Update</button>
-		<button class="link ">Update</button>
+		</div>
 
-	</div>
-	<div container>
+		<!-- GLYPHS -->
+		<div class="h-divider">Glyphs</div>
+		<div container>
 
-		<button class="" data-after="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="" data-after="Update" disabled><span class="material-symbols-outlined">update</span></button>
-		<button class="warn " data-after="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="danger " data-after="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="link " data-after="Update"><span class="material-symbols-outlined">update</span></button>
+			<td><button class="glyph xs"><span class="material-symbols-outlined">update</span></button></td>
+			<td><button class="glyph sm"><span class="material-symbols-outlined">update</span></button></td>
+			<td><button class="glyph"><span class="material-symbols-outlined">update</span></button></td>
+			<td><button class="glyph lg"><span class="material-symbols-outlined">update</span></button></td>
+			<td><button class="glyph xl"><span class="material-symbols-outlined">update</span></button></td>
 
-	</div>
+		</div>
 
-	<!-- LG -->
-	<div class="h-divider">Large (lg)</div>
-	<div container>
+		<!-- TAG -->
+		<div class="h-divider">Tags (tag)</div>
+		<div container>
 
-		<button class="lg">Update</button>
-		<button class="lg" disabled>Update</button>
-		<button class="warn lg">Update</button>
-		<button class="danger lg">Update</button>
-		<button class="link lg">Update</button>
+			<td><button class="tag xs">Tag (xs)</button></td>
+			<td><button class="tag sm">Tag (sm)</button></td>
+			<td><button class="tag">Tag (default)</button></td>
 
-	</div>
-	<div container>
+		</div>
+		<div container>
 
-		<button class="lg" data-after="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="lg" data-after="Update" disabled><span class="material-symbols-outlined">update</span></button>
-		<button class="warn lg" data-after="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="danger lg" data-after="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="link lg" data-after="Update"><span class="material-symbols-outlined">update</span></button>
+			<td><button class="tag xs" 	data-before="Tag (xs)"><span class="material-symbols-outlined">close</span></button></td>
+			<td><button class="tag sm"	data-before="Tag (sm)"><span class="material-symbols-outlined">close</span></button></td>
+			<td><button class="tag"		data-before="Tag (default)"><span class="material-symbols-outlined">close</span></button></td>
 
-	</div>
-
-	<!-- XL -->
-	<div class="h-divider">Extra Large (xl)</div>
-	<div container>
-
-		<button class="xl">Update</button>
-		<button class="xl" disabled>Update</button>
-		<button class="warn xl">Update</button>
-		<button class="danger xl">Update</button>
-		<button class="link xl">Update</button>
-
-	</div>
-	<div container>
-
-		<button class="xl" data-after="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="xl" data-after="Update" disabled><span class="material-symbols-outlined">update</span></button>
-		<button class="warn xl" data-after="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="danger xl" data-after="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="link xl" data-after="Update"><span class="material-symbols-outlined">update</span></button>
-
-	</div>
-
-</fieldset>
-<fieldset>
-
-	<legend>tag</legend>
-	<!-- XL -->
-	<div container>
-
-		<button class="tag xs">Tag (xs)</button>
-		<button class="tag sm">Tag (sm)</button>
-		<button class="tag">Tag (default)</button>
-		<button class="tag lg">Tag (lg)</button>
-		<button class="tag xl">Tag (xl)</button>
-
-	</div>
-	<div container>
-
-		<button class="tag xs" data-before="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="tag sm" data-before="Update" disabled><span class="material-symbols-outlined">update</span></button>
-		<button class="tag" data-before="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="tag lg" data-before="Update"><span class="material-symbols-outlined">update</span></button>
-		<button class="tag xl" data-before="Update"><span class="material-symbols-outlined">update</span></button>
+		</div>
 
 	</div>
 

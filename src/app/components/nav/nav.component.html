@@ -21,18 +21,17 @@
 
 	<!-- SETTINGS BUTTON -->
 	<button
-		class="link rounded"
+		class="glyph"
 		routerLink="/settings"
 		routerLinkActive="active"
 		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
-		styleClass="p-button-rounded p-button-text"
 		title="Settings"><span class="material-symbols-outlined">settings</span></button>
 
 	<!-- CLOUD TASKS BUTTON -->
 	@if ((cloudTasks$ | async); as cloudTasks) {
 
 		<button
-			class="link rounded badge-container"
+			class="glyph badge-container"
 			routerLink="/cloud"
 			routerLinkActive="active"
 			[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
@@ -47,7 +46,7 @@
 
 	<!-- DATABASE BUTTON -->
 	<button
-		class="link rounded"
+		class="glyph"
 		routerLink="/database"
 		routerLinkActive="active"
 		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
@@ -55,7 +54,7 @@
 
 	<!-- LOGS BUTTON -->
 	<button
-		class="link rounded"
+		class="glyph"
 		routerLink="/logs"
 		routerLinkActive="active"
 		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
@@ -63,7 +62,7 @@
 
 	<!-- SWITCH THEME BUTTON -->
 	<button
-		class="link rounded"
+		class="glyph"
 		(click)="onSwitchTheme()"
 		title="Switch Theme"><span class="material-symbols-outlined">colors</span></button>
 

@@ -48,6 +48,12 @@
 	#{$col-btn-link-color-active}		: fn-color-lighten($col-focus, 15%);
 	#{$col-btn-link-border}				: transparent;
 
+	#{$col-btn-glyph-text}				: fn-var($col-text);
+	#{$col-btn-glyph-color}				: transparent;
+	#{$col-btn-glyph-color-hover}		: fn-color-lighten($col-white, 10%, 0.1);
+	#{$col-btn-glyph-color-active}		: fn-color-lighten($col-white, 15%, 0.2);
+	#{$col-btn-glyph-border}			: transparent;
+
 	#{$col-btn-warn-text}				: fn-var($col-text);
 	#{$col-btn-warn-color}				: fn-var($col-warn);
 	#{$col-btn-warn-color-hover}		: fn-color-lighten($col-btn-warn-color, 25%);

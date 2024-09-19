@@ -29,6 +29,7 @@
 @mixin mx-d-flex-ai-c-jc-sb($params...)	{ @include mx-d-flex($align-items: center,	$justify-content: space-between, $params...); }
 @mixin mx-d-flex-ai-e-jc-c($params...)	{ @include mx-d-flex($align-items: end,		$justify-content: center, $params...); }
 @mixin mx-d-flex-ai-c-jc-e($params...)	{ @include mx-d-flex($align-items: center,	$justify-content: end, $params...); }
+@mixin mx-d-flex-ai-bl-jc-c($params...)	{ @include mx-d-flex($align-items: baseline,$justify-content: center, $params...); }
 
 @mixin mx-d-grid						{ display: grid; }
 @mixin mx-d-contents					{ display: contents; }

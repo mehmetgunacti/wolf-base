@@ -1,12 +1,12 @@
 // these values should be the same : responsive.constant.ts
-$breakpoint-sm: 36rem; // 576px / 16px;
-$breakpoint-md: 48rem; // 768px / 16px;
-$breakpoint-lg: 62rem; // 992px / 16px;
-$breakpoint-xl: 75rem; // 1200px / 16px;
+$breakpoint-sm: 576px; // 576px
+$breakpoint-md: 768px; // 768px
+$breakpoint-lg: 992px; // 992px
+$breakpoint-xl: 120px; // 1200px
 
 @mixin bigScreen() {
 
-	@media screen and (min-width: $breakpoint-sm) {
+	@media screen and (min-width: $breakpoint-md) {
 		@content;
 	}
 

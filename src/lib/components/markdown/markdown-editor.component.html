@@ -309,7 +309,7 @@
 		<ng-container card_buttons>
 
 			<button
-				class="link rounded"
+				class="glyph"
 				(click)="onPreviewClose()">
 				<span class="material-symbols-outlined">close</span>
 			</button>
@@ -331,7 +331,7 @@
 
 			<button
 				cdkMenuItem
-				class="link rounded"
+				class="glyph"
 				[disabled]="!recoveryManager.hasPrev()"
 				[cdkMenuItemDisabled]="!recoveryManager.hasPrev()"
 				(click)="recoveryManager.previous()">
@@ -339,7 +339,7 @@
 			</button>
 			<button
 				cdkMenuItem
-				class="link rounded"
+				class="glyph"
 				[disabled]="!recoveryManager.hasNext()"
 				[cdkMenuItemDisabled]="!recoveryManager.hasNext()"
 				(click)="recoveryManager.next()">
@@ -347,14 +347,14 @@
 			</button>
 			<button
 				cdkMenuItem
-				class="link rounded"
+				class="glyph"
 				(click)="onRecoverReplace()">
 				<span class="material-symbols-outlined">published_with_changes</span>
 				<span>Replace</span>
 			</button>
 			<button
 				cdkMenuItem
-				class="link rounded"
+				class="glyph"
 				(click)="onRecoverClose()">
 				<span class="material-symbols-outlined">close</span>
 			</button>

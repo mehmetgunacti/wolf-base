@@ -20,11 +20,12 @@
 
 	--divider-color	: #{fn-color-set-alpha($col-text-secondary, 0.7)};
 
-	@include mx-d-flex-center;
+	@include mx-d-flex-ai-c-jc-sb;
 	@include mx-color($col-text-secondary);
-	@include mx-font-size($font-size-sm);
+	@include mx-font-size($font-size);
 	@include mx-font-weight-bold;
 	@include mx-my-xl;
+	text-align	: center;
 
 
 	&::before,
@@ -33,7 +34,7 @@
 		content		: '';
 		display		: block;
 		height		: 0.09em;
-		min-width	: 30vw;
+		min-width	: 33%;
 
 	}
 
@@ -41,7 +42,7 @@
 
 		background: linear-gradient(to left, var(--divider-color), transparent);
 		@include mx-border-radius-round;
-		margin-right: 2vh;
+		margin-right: 0.6rem;
 
 	}
 
@@ -49,7 +50,7 @@
 
 		background: linear-gradient(to right, var(--divider-color), transparent);
 		@include mx-border-radius-round;
-		margin-left: 2vh;
+		margin-left: 0.6rem;
 
 	}
 
