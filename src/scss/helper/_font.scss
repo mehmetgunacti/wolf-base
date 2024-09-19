@@ -18,4 +18,5 @@
 @mixin mx-font-size-h5 { @include mx-font-size($font-size-h5); }
 @mixin mx-font-size-h6 { @include mx-font-size($font-size-h6); }
 
-@mixin mx-font-weight-bold { font-weight: bold; }
+@mixin mx-font-weight-bold 	{ font-weight	: bold; }
+@mixin mx-font-size_inherit	{ font-size		: inherit; }

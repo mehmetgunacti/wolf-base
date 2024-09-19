@@ -11,17 +11,25 @@
 
 		@include mx-fieldset;
 
+		[container1] {
+
+			@include mx-d-grid;
+			grid-template-columns: repeat(5, 1fr);
+			@include mx-gap-sm;
+
+		}
+
 		[container] {
 
-			@include mx-d-block;
-			// @include mx-gap-sm;
+			@include mx-d-flex;
+			@include mx-gap-sm;
 			@include mx-p-sm;
 
-			& > * {
+			// & > * {
 
-				@include mx-mr;
+			// 	@include mx-mr;
 
-			}
+			// }
 
 		}
 

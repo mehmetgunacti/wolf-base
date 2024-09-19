@@ -6,7 +6,7 @@
 		height						: 8px;
 		border-radius				: fn-var($border-radius-sm);
 		background-color			: fn-color-set-alpha($col-bg-page, 0.4);
-		@include mx-transition((background-color: $transition));
+		@include mx-transition(background-color);
 
 	}
 
@@ -14,7 +14,7 @@
 
 		border-radius				: fn-var($border-radius);
 		background-color			: fn-var($col-bg-page);
-		@include mx-transition((background-color: $transition));
+		@include mx-transition(background-color);
 
 	}
 

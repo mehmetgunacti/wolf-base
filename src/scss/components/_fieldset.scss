@@ -24,13 +24,13 @@
 		&:nth-child(2) {
 
 			@include mx-pos-absolute;
-			top			: calc(-4 * fn-var($gap));
-			right		: calc(2 * fn-var($gap));
+			top			: calc(-4 * fn-var($gap-lg));
+			right		: calc(2 * fn-var($gap-sm));
 			// @include mx-p-xs;
 
 			@include mx-bigScreen() {
 
-				top		: calc(-3 * fn-var($gap));
+				top		: calc(-3 * fn-var($gap-lg));
 
 			}
 

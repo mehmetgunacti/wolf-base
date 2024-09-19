@@ -7,7 +7,7 @@
 	@include mx-d-block;
 	@include mx-height($_100vh);
 	@include mx-background($col-bg-page);
-	@include mx-transition((background-color: $transition));
+	@include mx-transition(background-color);
 
 	& > header {
 
@@ -20,7 +20,7 @@
 		@include mx-height($header-height);
 
 		@include mx-z-index($z-index-header);
-		@include mx-transition((background-color: $transition));
+		@include mx-transition(background-color);
 
 	}
 
@@ -36,7 +36,7 @@
 		@include mx-inset((top: $header-height), (right: $zero), (left: $main-current-left));
 
 		@include mx-overflow-y-a;
-		@include mx-transition((height: $transition), (left: $transition), (background-color: $transition));
+		@include mx-transition(height, left, background-color);
 
 		// @include mx-webkit-scrollbar;
 		// @include mx-scrollable;
@@ -59,7 +59,7 @@
 
 		@include mx-overflow-h;
 		@include mx-background($col-bg-nav);
-		@include mx-transition((height: $transition), (width: $transition), (margin-left: $transition), (background-color: $transition));
+		@include mx-transition(height, width, margin-left, background-color);
 		@include mx-shadow;
 
 	}

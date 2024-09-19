@@ -1,12 +1,13 @@
-@mixin mx-transition($values...) {
+@mixin mx-transition($params...) {
 
 	$transition-string: "";
 	$delimiter: "";
-	@each $map in $values {
+	@each $map in $params {
 
-		@each $key, $value in $map {
+		@each $property, $value in $map {
 
-			$transition-string: #{$transition-string} #{$delimiter} #{$key} fn-var($value);
+			$val: if($value, fn-var($value), $transition);
+			$transition-string: #{$transition-string} #{$delimiter} #{$property} #{$val};
 			$delimiter: ", ";
 
 		}

@@ -2,6 +2,7 @@
 
 $zero		: 0;
 $auto   	: auto;
+$inherit	: inherit;
 $_100vh		: 100vh;
 $_100vw		: 100vw;
 $_100dvh	: 100dvh;
@@ -108,32 +109,38 @@ $col-accent							: --col-accent;
 $col-focus							: --col-focus;
 $col-outline						: --col-outline;
 $col-disabled						: --col-disabled;
-$col-btn-tag-text-color				: --col-btn-tag-text-color;
-$col-btn-tag-bg-color				: --col-btn-tag-bg-color;
-$col-btn-tag-bg-color-hover			: --col-btn-tag-bg-color-hover;
-$col-btn-tag-bg-color-active		: --col-btn-tag-bg-color-active;
-$col-btn-default-text-color			: --col-btn-default-text-color;
-$col-btn-default-bg-color			: --col-btn-default-bg-color;
-$col-btn-default-bg-color-hover		: --col-btn-default-bg-color-hover;
-$col-btn-default-bg-color-active	: --col-btn-default-bg-color-active;
-$col-btn-default-border-color		: --col-btn-default-border-color;
-$col-btn-disabled-bg-color			: --col-btn-disabled-bg-color;
-$col-btn-disabled-text-color		: --col-btn-disabled-text-color;
-$col-btn-disabled-bg-color-hover	: --col-btn-disabled-bg-color-hover;
-$col-btn-disabled-bg-color-active	: --col-btn-disabled-bg-color-active;
-$col-btn-disabled-border-color		: --col-btn-disabled-border-color;
-$col-btn-link-text-color			: --col-btn-link-text-color;
-$col-btn-link-bg-color				: --col-btn-link-bg-color;
-$col-btn-link-bg-color-hover		: --col-btn-link-bg-color-hover;
-$col-btn-link-bg-color-active		: --col-btn-link-bg-color-active;
-$col-btn-link-border-color			: --col-btn-link-border-color;
-$col-btn-warn-text-color			: --col-btn-warn-text-color;
-$col-btn-warn-bg-color				: --col-btn-warn-bg-color;
-$col-btn-warn-bg-color-hover		: --col-btn-warn-bg-color-hover;
-$col-btn-warn-bg-color-active		: --col-btn-warn-bg-color-active;
-$col-btn-warn-border-color			: --col-btn-warn-border-color;
-$col-btn-danger-text-color			: --col-btn-danger-text-color;
-$col-btn-danger-bg-color			: --col-btn-danger-bg-color;
-$col-btn-danger-bg-color-hover		: --col-btn-danger-bg-color-hover;
-$col-btn-danger-bg-color-active		: --col-btn-danger-bg-color-active;
-$col-btn-danger-border-color		: --col-btn-danger-border-color;
+
+$col-btn-tag-text					: --col-btn-tag-text;
+$col-btn-tag-color					: --col-btn-tag-color;
+$col-btn-tag-color-hover			: --col-btn-tag-color-hover;
+$col-btn-tag-color-active			: --col-btn-tag-color-active;
+
+$col-btn-default-text				: --col-btn-default-text;
+$col-btn-default-color				: --col-btn-default-color;
+$col-btn-default-color-hover		: --col-btn-default-color-hover;
+$col-btn-default-color-active		: --col-btn-default-color-active;
+$col-btn-default-border				: --col-btn-default-border;
+
+$col-btn-disabled-text				: --col-btn-disabled-text;
+$col-btn-disabled-color				: --col-btn-disabled-color;
+$col-btn-disabled-color-hover		: --col-btn-disabled-color-hover;
+$col-btn-disabled-color-active		: --col-btn-disabled-color-active;
+$col-btn-disabled-border			: --col-btn-disabled-border;
+
+$col-btn-link-text					: --col-btn-link-text;
+$col-btn-link-color					: --col-btn-link-color;
+$col-btn-link-color-hover			: --col-btn-link-color-hover;
+$col-btn-link-color-active			: --col-btn-link-color-active;
+$col-btn-link-border				: --col-btn-link-border;
+
+$col-btn-warn-text					: --col-btn-warn-text;
+$col-btn-warn-color					: --col-btn-warn-color;
+$col-btn-warn-color-hover			: --col-btn-warn-color-hover;
+$col-btn-warn-color-active			: --col-btn-warn-color-active;
+$col-btn-warn-border				: --col-btn-warn-border;
+
+$col-btn-danger-text				: --col-btn-danger-text;
+$col-btn-danger-color				: --col-btn-danger-color;
+$col-btn-danger-color-hover			: --col-btn-danger-color-hover;
+$col-btn-danger-color-active		: --col-btn-danger-color-active;
+$col-btn-danger-border				: --col-btn-danger-border;

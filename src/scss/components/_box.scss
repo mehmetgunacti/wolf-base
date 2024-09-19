@@ -10,6 +10,6 @@
 	padding				: var(--box-padding);
 	background-color	: var(--box-bg-color);
 	border-radius		: var(--box-border-radius);
-	@include mx-transition((background-color: $transition));
+	@include mx-transition(background-color);
 
 }
