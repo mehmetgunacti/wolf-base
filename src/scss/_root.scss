@@ -37,12 +37,6 @@
 	#{$border-radius-round}			: 100px;
 
 	#{$widget-height}				: 3.5rem;
-	#{$widget-height-xxl}			: calc(fn-var($widget-height) * 1.3);
-	#{$widget-height-xl}			: calc(fn-var($widget-height) * 1.2);
-	#{$widget-height-lg}			: calc(fn-var($widget-height) * 1.1);
-	#{$widget-height-sm}			: calc(fn-var($widget-height) * 0.8);
-	#{$widget-height-xs}			: calc(fn-var($widget-height) * 0.7);
-	#{$widget-height-xxs}			: calc(fn-var($widget-height) * 0.6);
 
 	#{$z-index-splash-screen}		: 9000;
 	#{$z-index-ng-progress}			: 8000;
