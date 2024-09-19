@@ -55,6 +55,24 @@
 
 	}
 
+	&[data-before],
+	&[data-after] {
+
+		padding-inline: calc(var(--btn-padding-inline) * 0.9);
+
+	}
+
+	&[data-before]::before,
+	&[data-after]::after {
+
+		@include mx-d-inline-block;
+		@include mx-font-size-inherit;
+		@include mx-mx-xxs;
+
+	}
+	&[data-before]::before { content: attr(data-before); }
+	&[data-after]::after { content: attr(data-after); }
+
 	&.xl {
 
 		--btn-font-size		: #{fn-var($font-size-xl)};
@@ -214,18 +232,6 @@
 		}
 
 	}
-
-	&[data-before]::before,
-	&[data-after]::after {
-
-		@include mx-d-inline-block;
-		@include mx-font-size-inherit;
-		@include mx-mx-xxs;
-
-	}
-
-	&[data-before]::before { content: attr(data-before); }
-	&[data-after]::after { content: attr(data-after); }
 
 }
 
