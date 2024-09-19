@@ -15,3 +15,55 @@
 	@include mx-v-divider;
 
 }
+
+@mixin mx-h-divider {
+
+	--divider-color	: #{fn-color-set-alpha($col-text-secondary, 0.7)};
+
+	@include mx-d-flex-center;
+	@include mx-color($col-text-secondary);
+	@include mx-font-size($font-size-sm);
+	@include mx-font-weight-bold;
+	@include mx-my-xl;
+
+
+	&::before,
+	&::after {
+
+		content		: '';
+		display		: block;
+		height		: 0.09em;
+		min-width	: 30vw;
+
+	}
+
+	&::before {
+
+		background: linear-gradient(to left, var(--divider-color), transparent);
+		@include mx-border-radius-round;
+		margin-right: 2vh;
+
+	}
+
+	&::after {
+
+		background: linear-gradient(to right, var(--divider-color), transparent);
+		@include mx-border-radius-round;
+		margin-left: 2vh;
+
+	}
+
+	&:empty::before,
+	&:empty::after {
+
+		@include mx-my-0;
+
+	}
+
+}
+
+.h-divider {
+
+	@include mx-h-divider;
+
+}

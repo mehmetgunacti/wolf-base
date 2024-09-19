@@ -49,28 +49,28 @@
 
 	&.xl {
 
-		--btn-font-size		: var(--font-size-xl);
+		--btn-font-size		: fn-var($font-size-xl);
 		--btn-min-height	: calc(#{fn-var($widget-height-xl)} * 0.9);
 
 	}
 
 	&.lg {
 
-		--btn-font-size		: var(--font-size-lg);
+		--btn-font-size		: fn-var($font-size-lg);
 		--btn-min-height	: calc(#{fn-var($widget-height-lg)} * 0.9);
 
 	}
 
 	&.sm {
 
-		--btn-font-size		: var(--font-size-sm);
+		--btn-font-size		: fn-var($font-size-sm);
 		--btn-min-height	: calc(#{fn-var($widget-height-sm)} * 0.9);
 
 	}
 
 	&.xs {
 
-		--btn-font-size		: var(--font-size-xs);
+		--btn-font-size		: fn-var($font-size-xxs);
 		--btn-min-height	: calc(#{fn-var($widget-height-xs)} * 0.9);
 
 	}
@@ -204,6 +204,12 @@
 			--btn-bg-color	: #{fn-var($col-btn-tag-bg-color-active)};
 
 		}
+
+	}
+
+	&:has(#{$glyph-selector}) {
+
+		@include mx-pr-xl;
 
 	}
 

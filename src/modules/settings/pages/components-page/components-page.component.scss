@@ -13,9 +13,15 @@
 
 		[container] {
 
-			@include mx-d-flex;
-			@include mx-gap-sm;
+			@include mx-d-block;
+			// @include mx-gap-sm;
 			@include mx-p-sm;
+
+			& > * {
+
+				@include mx-mr;
+
+			}
 
 		}
 
