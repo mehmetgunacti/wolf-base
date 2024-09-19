@@ -32,8 +32,8 @@
 
 	#{$col-btn-default-color}			: fn-var($col-text);
 	#{$col-btn-default-color}			: fn-var($col-primary);
-	#{$col-btn-default-color-hover}		: fn-color-lighten($col-btn-default-color, 25%);
-	#{$col-btn-default-color-active}	: fn-color-lighten($col-btn-default-color, 30%);
+	#{$col-btn-default-color-hover}		: fn-color-lighten($col-btn-default-color, 10%);
+	#{$col-btn-default-color-active}	: fn-color-lighten($col-btn-default-color, 25%);
 	#{$col-btn-default-border}			: fn-color-darken($col-btn-default-color, 10%);
 
 	#{$col-btn-disabled-text}			: fn-color-darken($col-text-secondary, 30%, 0.7);
@@ -56,19 +56,19 @@
 
 	#{$col-btn-warn-text}				: fn-var($col-text);
 	#{$col-btn-warn-color}				: fn-var($col-warn);
-	#{$col-btn-warn-color-hover}		: fn-color-lighten($col-btn-warn-color, 25%);
-	#{$col-btn-warn-color-active}		: fn-color-lighten($col-btn-warn-color, 30%);
+	#{$col-btn-warn-color-hover}		: fn-color-lighten($col-btn-warn-color, 10%);
+	#{$col-btn-warn-color-active}		: fn-color-lighten($col-btn-warn-color, 25%);
 	#{$col-btn-warn-border}				: fn-color-darken($col-btn-warn-color, 10%);
 
 	#{$col-btn-danger-text}				: fn-var($col-text);
 	#{$col-btn-danger-color}			: fn-var($col-error);
-	#{$col-btn-danger-color-hover}		: fn-color-lighten($col-btn-danger-color, 25%);
-	#{$col-btn-danger-color-active}		: fn-color-lighten($col-btn-danger-color, 30%);
+	#{$col-btn-danger-color-hover}		: fn-color-lighten($col-btn-danger-color, 10%);
+	#{$col-btn-danger-color-active}		: fn-color-lighten($col-btn-danger-color, 25%);
 	#{$col-btn-danger-border}			: fn-color-darken($col-btn-danger-color, 10%);
 
 	#{$col-btn-tag-text}				: fn-var($col-text);
 	#{$col-btn-tag-color}				: hsl(200deg 85% 34%);
 	#{$col-btn-tag-color-hover}			: fn-color-darken($col-btn-tag-color, 10%);
-	#{$col-btn-tag-color-active}		: fn-color-darken($col-btn-tag-color, 15%);
+	#{$col-btn-tag-color-active}		: fn-color-darken($col-btn-tag-color, 25%);
 
 }
