@@ -38,6 +38,9 @@
 
 	#{$widget-height}				: 3.5rem;
 
+	#{$btn-height-base}				: #{fn-var($widget-height)};
+	#{$btn-size-multiplier}			: 1;
+
 	#{$z-index-splash-screen}		: 9000;
 	#{$z-index-ng-progress}			: 8000;
 	// 7000 reserved for Angular CDK backdrop
