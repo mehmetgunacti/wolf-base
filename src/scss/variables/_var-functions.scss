@@ -61,7 +61,7 @@
 @function fn-color-lighten($name, $value, $alpha: null) {
 
 	$value : percentage-to-decimal($value);
-	$alpha-str: if($alpha != null, "/" + is-number-between-0-and-1($alpha), "");
+	$alpha-str: if($alpha, "/" + is-number-between-0-and-1($alpha), null);
 	@return hsl(from fn-var($name) h s calc(l * #{calc(1 + $value)}) #{ $alpha-str });
 
 }
@@ -69,7 +69,7 @@
 @function fn-color-darken($name, $value, $alpha: null) {
 
 	$value : percentage-to-decimal($value);
-	$alpha-str: if($alpha != null, "/" + $alpha, "");
+	$alpha-str: if($alpha, "/" + $alpha, null);
 	@return hsl(from fn-var($name) h s calc(l * #{calc(1 - $value)}) #{ $alpha-str });
 
 }

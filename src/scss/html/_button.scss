@@ -1,45 +1,52 @@
-$btn-height	: --btn-height;
+@mixin mx-print-css-vars($map, $prefix) {
+
+	// print css variables
+	@each $key, $value in $map {
+
+		--#{$prefix}-#{$key}	: #{$value};
+
+	}
+
+}
+
+@mixin mx-assign-css-vars($map, $prefix) {
+
+	// assign css vars to properties
+	@each $key, $value in $map {
+
+		#{$key}	: var(--#{$prefix}-#{$key});
+
+	}
+
+}
 
 @mixin mx-button {
+
+	@include mx-print-css-vars((
+		"font-size"			: fn-var($font-size),
+		"border-radius"		: fn-var($border-radius),
+		"color"				: fn-var($col-btn-default-text),
+		"background-color"	: fn-var($col-btn-default-color),
+		"border-color"		: fn-var($col-btn-default-border),
+		"height"			: fn-var($btn-height-base),
+		"padding-inline"	: 1.5rem
+	), btn);
+
+	@include mx-assign-css-vars((
+		"font-size"			: fn-var($font-size),
+		"border-radius"		: fn-var($border-radius),
+		"color"				: fn-var($col-btn-default-text),
+		"background-color"	: fn-var($col-btn-default-color),
+		"border-color"		: fn-var($col-btn-default-border),
+		"height"			: fn-var($btn-height-base),
+		"padding-inline"	: 1.5rem
+	), btn);
 
 	@include mx-outline;
 	@include mx-d-flex-center($display: inline-flex);
 
-	// HEIGHT
-	@include mx-set-var($btn-height, calc(#{fn-var($btn-height-base)} * #{fn-var($btn-size-multiplier)}));
-	height	: fn-var($btn-height);
-	&.xl { @include mx-set-var($btn-size-multiplier, 1.2); }
-	&.lg { @include mx-set-var($btn-size-multiplier, 1.1); }
-	&.sm { @include mx-set-var($btn-size-multiplier, 0.7); }
-	&.xs { @include mx-set-var($btn-size-multiplier, 0.5); }
-
-	// PADDING INLINE
-	--_btn-padding-inline-base			: 1.5rem;
-	--_btn-padding-inline-xl-multiplier	: 1.2;
-	--_btn-padding-inline-lg-multiplier	: 1.1;
-	--_btn-padding-inline-sm-multiplier	: 0.9;
-	--_btn-padding-inline-xs-multiplier	: 0.8;
-
-	--btn-padding-inline				: 1.5rem;
-
-	--btn-font-size			: #{fn-var($font-size)};
-	--btn-border-radius		: #{fn-var($border-radius)};
-
-	--btn-text-color		: #{fn-var($col-btn-default-text)};
-	--btn-bg-color			: #{fn-var($col-btn-default-color)};
-	--btn-border-color		: #{fn-var($col-btn-default-border)};
-
-
-	padding-inline			: var(--btn-padding-inline);
-
-	font-size				: var(--btn-font-size);
 	text-align				: center;
 
-	color					: var(--btn-text-color);
-	background-color		: var(--btn-bg-color);
-
-	border-color			: var(--btn-border-color);
-	border-radius			: var(--btn-border-radius);
 	border-width			: 1px;
 	border-style			: solid;
 
@@ -50,16 +57,48 @@ $btn-height	: --btn-height;
 
 	@include mx-transition(color background-color border-color);
 
+	&.xl {
+		@include mx-print-css-vars((
+			"height"			: calc(fn-var($btn-height-base) * 1.2),
+			"padding-inline"	: 1.9rem,
+			"font-size"			: fn-var($font-size-xl),
+			"border-radius"		: fn-var($border-radius-xl)
+		), btn);
+	}
+	&.lg {
+		@include mx-print-css-vars((
+			"height"			: calc(#{fn-var($btn-height-base)} * 1.1),
+			"padding-inline"	: 1.8rem,
+			"font-size"			: fn-var($font-size-lg),
+			"border-radius"		: fn-var($border-radius-lg)
+		), btn);
+	}
+	&.sm {
+		@include mx-print-css-vars((
+			"height"			: calc(#{fn-var($btn-height-base)} * 0.7),
+			"padding-inline"	: 1.1rem,
+			"font-size"			: fn-var($font-size-sm),
+			"border-radius"		: fn-var($border-radius-sm)
+		), btn);
+	}
+	&.xs {
+		@include mx-print-css-vars((
+			"height"			: calc(#{fn-var($btn-height-base)} * 0.5),
+			"padding-inline"	: 0.5rem,
+			"font-size"			: fn-var($font-size-xs),
+			"border-radius"		: fn-var($border-radius-xs)
+		), btn);
+	}
+
 	&:hover {
 
-		--btn-bg-color		: #{fn-var($col-btn-default-color-hover)};
+		@include mx-print-css-vars(("background-color": fn-var($col-btn-default-color-hover)), btn);
 
 	}
 
 	&:active {
 
-		--btn-bg-color		: #{fn-var($col-btn-default-color-active)};
-		// @include mx-outline;
+		@include mx-print-css-vars(("background-color": fn-var($col-btn-default-color-active)), btn);
 
 	}
 
@@ -81,50 +120,17 @@ $btn-height	: --btn-height;
 	&[data-before]::before { content: attr(data-before); }
 	&[data-after]::after { content: attr(data-after); }
 
-	&.xl {
-
-		--btn-padding-inline: 1.9rem;
-
-		--btn-font-size		: #{fn-var($font-size-xl)};
-		--btn-border-radius	: #{fn-var($border-radius-xl)};
-
-	}
-
-	&.lg {
-
-		--btn-padding-inline: 1.8rem;
-
-		--btn-font-size		: #{fn-var($font-size-lg)};
-		--btn-border-radius	: #{fn-var($border-radius-lg)};
-
-	}
-
-	&.sm {
-
-		--btn-padding-inline: 1.6rem;
-
-		--btn-font-size		: #{fn-var($font-size-sm)};
-		--btn-border-radius	: #{fn-var($border-radius-sm)};
-
-	}
-
-	&.xs {
-
-		--btn-padding-inline: 1.5rem;
-
-		--btn-font-size		: #{fn-var($font-size-xs)};
-		--btn-border-radius	: #{fn-var($border-radius-xs)};
-
-	}
-
 	&[disabled] {
 
-		--btn-text-color		: #{fn-var($col-btn-disabled-text)} !important;
-		--btn-bg-color			: #{fn-var($col-btn-disabled-color)} !important;
-		--btn-bg-color-hover	: #{fn-var($col-btn-disabled-color-hover)} !important;
-		--btn-bg-color-active	: #{fn-var($col-btn-disabled-color-active)} !important;
-		--btn-border-color		: #{fn-var($col-btn-disabled-border)} !important;
-		cursor					: not-allowed;
+		@include mx-print-css-vars((
+			"color"						: fn-var($col-btn-disabled-text) !important,
+			"background-color"			: fn-var($col-btn-disabled-color) !important,
+			"background-color-hover"	: fn-var($col-btn-disabled-color-hover) !important,
+			"background-color-active"	: fn-var($col-btn-disabled-color-active) !important,
+			"border-color"				: fn-var($col-btn-disabled-border) !important
+		), btn);
+
+		cursor	: not-allowed;
 
 		&:active {
 
@@ -137,19 +143,21 @@ $btn-height	: --btn-height;
 
 	&.warn {
 
-		--btn-text-color		: #{fn-var($col-btn-warn-text)};
-		--btn-bg-color			: #{fn-var($col-btn-warn-color)};
-		--btn-border-color		: #{fn-var($col-btn-warn-border)};
+		@include mx-print-css-vars((
+			"text-color"		: fn-var($col-btn-warn-text),
+			"background-color"	: fn-var($col-btn-warn-color),
+			"border-color"		: fn-var($col-btn-warn-border)
+		), btn);
 
 		&:hover {
 
-			--btn-bg-color		: #{fn-var($col-btn-warn-color-hover)};
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-warn-color-hover)), btn);
 
 		}
 
 		&:active {
 
-			--btn-bg-color		: #{fn-var($col-btn-warn-color-active)};
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-warn-color-active)), btn);
 
 		}
 
@@ -157,19 +165,21 @@ $btn-height	: --btn-height;
 
 	&.danger {
 
-		--btn-text-color		: #{fn-var($col-btn-danger-text)};
-		--btn-bg-color			: #{fn-var($col-btn-danger-color)};
-		--btn-border-color		: #{fn-var($col-btn-danger-border)};
+		@include mx-print-css-vars((
+			"color"				: fn-var($col-btn-danger-text),
+			"background-color"	: fn-var($col-btn-danger-color),
+			"border-color"		: fn-var($col-btn-danger-border)
+		), btn);
 
 		&:hover {
 
-			--btn-bg-color		: #{fn-var($col-btn-danger-color-hover)};
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-danger-color-hover)), btn);
 
 		}
 
 		&:active {
 
-			--btn-bg-color		: #{fn-var($col-btn-danger-color-active)};
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-danger-color-active)), btn);
 
 		}
 
@@ -177,9 +187,11 @@ $btn-height	: --btn-height;
 
 	&.link {
 
-		--btn-text-color		: #{fn-var($col-btn-link-text)};
-		--btn-bg-color			: #{fn-var($col-btn-link-color)};
-		--btn-border-color		: #{fn-var($col-btn-link-border)};
+		@include mx-print-css-vars((
+			"color"				: fn-var($col-btn-link-text),
+			"background-color"	: fn-var($col-btn-link-color),
+			"border-color"		: fn-var($col-btn-link-border)
+		), btn);
 
 		&:hover {
 
@@ -197,22 +209,46 @@ $btn-height	: --btn-height;
 
 	&.tag {
 
-		border				: $zero;
+		@include mx-print-css-vars((
+			"color"				: fn-var($col-btn-tag-text),
+			"background-color"	: fn-var($col-btn-tag-color),
+			"border-radius" 	: fn-var($border-radius-round),
+			"height"			: calc(fn-var($btn-height-base) * 0.6), // 2.6 default fs 12px, 2.2 small , 1.8 xs
+			"font-size"			: fn-var($font-size-sm)
+		), btn);
+
+		border				: 1px solid transparent;
+		line-height			: 1.2;
 		min-width			: 1rem;
-		--btn-text-color	: #{fn-var($col-btn-tag-text)};
-		--btn-bg-color		: #{fn-var($col-btn-tag-color)};
-		--btn-border-radius : #{fn-var($border-radius-round)};
-		padding-inline		: calc(var(--btn-padding-inline)* 1.4);
+		padding-inline		: calc(var(--btn-padding-inline) * 0.5);
 
 		&:hover {
 
-			--btn-bg-color	: #{fn-var($col-btn-tag-color-hover)};
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-tag-color-hover)), btn);
 
 		}
 
 		&:active {
 
-			--btn-bg-color	: #{fn-var($col-btn-tag-color-active)};
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-tag-color-active)), btn);
+
+		}
+
+		&.sm {
+
+			@include mx-print-css-vars((
+				"height"			: calc(fn-var($btn-height-base) * 0.5),
+				"font-size"			: fn-var($font-size-sm)
+			), btn);
+
+		}
+
+		&.xs {
+
+			@include mx-print-css-vars((
+				"height"	: calc(fn-var($btn-height-base) * 0.4),
+				"font-size"	: fn-var($font-size-xs)
+			), btn);
 
 		}
 
@@ -220,22 +256,24 @@ $btn-height	: --btn-height;
 
 	&.glyph {
 
-		border				: $zero;
-		--btn-text-color	: #{fn-var($col-btn-glyph-text)};
-		--btn-bg-color		: #{fn-var($col-btn-glyph-color)};
-		--btn-border-radius : #{fn-var($border-radius-round)};
+		@include mx-print-css-vars((
+			"color"				: fn-var($col-btn-glyph-text),
+			"background-color"	: fn-var($col-btn-glyph-color),
+			"border-radius" 	: fn-var($border-radius-round)
+		), btn);
 
+		border				: $zero;
 		width				: var(--btn-height);
 
 		&:hover {
 
-			--btn-bg-color	: #{fn-var($col-btn-glyph-color-hover)};
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color-hover)), btn);
 
 		}
 
 		&:active {
 
-			--btn-bg-color	: #{fn-var($col-btn-glyph-color-active)};
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color-active)), btn);
 
 		}
 

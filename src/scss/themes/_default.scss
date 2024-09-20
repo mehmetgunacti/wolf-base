@@ -30,7 +30,7 @@
 
 	#{$col-disabled}			: hsl(210deg 9% 32%);
 
-	#{$col-btn-default-color}			: fn-var($col-text);
+	#{$col-btn-default-text}			: fn-var($col-text);
 	#{$col-btn-default-color}			: fn-var($col-primary);
 	#{$col-btn-default-color-hover}		: fn-color-lighten($col-btn-default-color, 10%);
 	#{$col-btn-default-color-active}	: fn-color-lighten($col-btn-default-color, 25%);
