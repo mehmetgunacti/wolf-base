@@ -1,3 +1,6 @@
+@import 'variables';
+@import 'helper';
+
 @mixin mx-v-divider {
 
 	display		: block;
@@ -22,9 +25,9 @@
 
 	@include mx-d-flex-ai-c-jc-sb;
 	@include mx-color($col-text-secondary);
-	@include mx-font-size($font-size);
-	@include mx-font-weight-bold;
-	@include mx-my-xl;
+	margin-block-end: $gap-xl;
+	font-size	: $font-size;
+	font-weight	: bold;
 	text-align	: center;
 
 
@@ -40,24 +43,24 @@
 
 	&::before {
 
-		background: linear-gradient(to left, var(--divider-color), transparent);
-		@include mx-border-radius-round;
-		margin-right: 0.6rem;
+		background		: linear-gradient(to left, var(--divider-color), transparent);
+		border-radius	: $border-radius-round;
+		margin-right	: $gap-sm;
 
 	}
 
 	&::after {
 
-		background: linear-gradient(to right, var(--divider-color), transparent);
-		@include mx-border-radius-round;
-		margin-left: 0.6rem;
+		background		: linear-gradient(to right, var(--divider-color), transparent);
+		border-radius	: $border-radius-round;
+		margin-left		: $gap-sm;
 
 	}
 
 	&:empty::before,
 	&:empty::after {
 
-		@include mx-my-0;
+		margin-block	: 0;
 
 	}
 

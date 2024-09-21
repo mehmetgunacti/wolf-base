@@ -1,89 +1,85 @@
-// note: var name and value name must be the same (except the $ and --)
+// CONSTANTS
+$sidebar-full			: 'full';
+$sidebar-half			: 'half';
+$sidebar-hidden			: 'hidden';
 
-$zero		: 0;
-$auto   	: auto;
-$inherit	: inherit;
-$_100vh		: 100vh;
-$_100vw		: 100vw;
-$_100dvh	: 100dvh;
-$_100p		: 100%;
+$glyph-selector			: '.material-symbols-outlined';
 
-$sidebar-full	: 'full';
-$sidebar-half	: 'half';
-$sidebar-hidden	: 'hidden';
+$widget-height-xl		: 4.5rem;
+$widget-height-lg		: 4.0rem;
+$widget-height			: 3.5rem;
+$widget-height-sm		: 3.0rem;
+$widget-height-xs		: 2.5rem;
 
-$glyph-selector	: '.material-symbols-outlined';
+$header-height			: 6rem;
+$nav-full-width			: 25rem;
+$nav-half-width			: 6rem;
 
-// css variables
-$font-size							: --font-size;
-$font-size-xxl						: --font-size-xxl;
-$font-size-xl						: --font-size-xl;
-$font-size-lg						: --font-size-lg;
-$font-size-sm						: --font-size-sm;
-$font-size-xs						: --font-size-xs;
-$font-size-xxs						: --font-size-xxs;
+$font-size				: 1.6rem;	// 16px on mobile
+$font-size-xxl			: 2.3rem;	// 23px
+$font-size-xl			: 2.0rem;	// 20px
+$font-size-lg			: 1.8rem;	// 18px
+$font-size-sm			: 1.3rem;	// 13px
+$font-size-xs			: 0.8rem;	//  8px
+$font-size-xxs			: 0.6rem;	//  6px
 
-$font-size-h1						: --font-size-h1;
-$font-size-h2						: --font-size-h2;
-$font-size-h3						: --font-size-h3;
-$font-size-h4						: --font-size-h4;
-$font-size-h5						: --font-size-h5;
-$font-size-h6						: --font-size-h6;
+$gap-xxl				: 1.6rem;
+$gap-xl					: 1.3rem;
+$gap-lg					: 1.0rem;
+$gap					: 0.7rem;
+$gap-sm					: 0.5rem;
+$gap-xs					: 0.4rem;
+$gap-xxs				: 0.2rem;
 
-$line-height						: --line-height;
-$letter-spacing						: --letter-spacing;
+$border-radius-xxl 		: 1.5rem;
+$border-radius-xl 		: 1.3rem;
+$border-radius-lg 		: 1.2rem;
+$border-radius 			: 1rem;
+$border-radius-sm 		: 0.8rem;
+$border-radius-xs 		: 0.7rem;
+$border-radius-xxs 		: 0.5rem;
+$border-radius-round	: 100px;
 
-$font-family						: --font-family;
-$font-family-mono					: --font-family-mono;
+$transition-fn			: cubic-bezier(0.25, 1, 0.25, 1);
+$transition				: 600ms $transition-fn;
+$transition-short		: 150ms $transition-fn;
 
-$gap								: --gap;
-$gap-xxl							: --gap-xxl;
-$gap-xl								: --gap-xl;
-$gap-lg								: --gap-lg;
-$gap-sm								: --gap-sm;
-$gap-xs								: --gap-xs;
-$gap-xxs							: --gap-xxs;
+// ELEMENT SPECIFIC CONSTANTS
+$tab-size				: 4;
 
-$border-radius-xl					: --border-radius-xl;
-$border-radius-lg					: --border-radius-lg;
-$border-radius						: --border-radius;
-$border-radius-sm					: --border-radius-sm;
-$border-radius-xs					: --border-radius-xs;
-$border-radius-xxs					: --border-radius-xxs;
-$border-radius-round				: --border-radius-round;
+$font-family			: 'Nunito Sans', serif;
+$font-family-mono		: 'Source Code Pro', monospace;
 
-$widget-height						: --widget-height;
+$font-size-h1			: 2.8rem;	// 28px
+$font-size-h2			: 2.5rem;	// 25px
+$font-size-h3			: 2.2rem;	// 22px
+$font-size-h4			: 1.9rem;	// 19px
+$font-size-h5			: 1.8rem;	// 18px
+$font-size-h6			: 1.7rem;	// 17px
 
-$btn-height-base					: --btn-height-base;
+$toast-min-width		: 18.75rem;
 
-$z-index-splash-screen				: --z-index-splash-screen;
-$z-index-ng-progress				: --z-index-ng-progress;
-$z-index-header						: --z-index-header;
-$z-index-nav						: --z-index-nav;
-$z-index-nav						: --z-index-nav;
-$z-index-nav-overlay				: --z-index-nav-overlay;
-$z-index-main						: --z-index-main;
-$z-index-bookmark-overlay			: --z-index-bookmark-overlay;
-$z-index-croppie-close-btn			: --z-index-croppie-close-btn;
+$z-index-splash-screen		: 9000;
+$z-index-ng-progress		: 8000;
+$z-index-angular-cdk		: 7000;
+$z-index-header				: 6000;
+$z-index-nav				: 5000;
+$z-index-nav-overlay		: 4000;
+$z-index-main				: 3000;
+$z-index-bookmark-overlay	: 2000;
+$z-index-croppie-close-btn	: 1000;
 
-$header-height						: --header-height;
+// CSS VARIABLES
+$font-size-ratio			: --font-size-ratio;
 
-$nav-full-width						: --nav-full-width;
-$nav-half-width						: --nav-half-width;
+$main-current-height		: --main-current-height;
+$main-current-left			: --main-current-left;
 
-$main-current-height				: --main-current-height;
-$main-current-left					: --main-current-left;
+$nav-current-height			: --nav-current-height;
+$nav-current-width			: --nav-current-width;
+$nav-current-margin-left	: --nav-current-margin-left;
 
-$nav-current-height					: --nav-current-height;
-$nav-current-width					: --nav-current-width;
-$nav-current-margin-left			: --nav-current-margin-left;
-
-$toast-min-width					: --toast-min-width;
-
-$transition							: --transition;
-$transition-short					: --transition-short;
-
-// colors
+// COLOR CSS VARIABLES
 $col-black							: --col-black;
 $col-white							: --col-white;
 $col-transparent					: --col-transparent;
@@ -108,7 +104,7 @@ $col-focus							: --col-focus;
 $col-outline						: --col-outline;
 $col-disabled						: --col-disabled;
 
-// buttons
+// BUTTON COLORS
 $col-btn-tag-text					: --col-btn-tag-text;
 $col-btn-tag-color					: --col-btn-tag-color;
 $col-btn-tag-color-hover			: --col-btn-tag-color-hover;

@@ -6,7 +6,7 @@ h1, h2, h3 {
 // todo remove mx-h.. and use the ones from _font.scss
 @mixin mx-h1 {
 
-	@include mx-font-size-h1;
+	font-size		: $font-size-h1;
 	font-weight		: bold;
 	@include mx-color($col-focus);
 
@@ -14,22 +14,22 @@ h1, h2, h3 {
 
 @mixin mx-h2 {
 
-	@include mx-font-size-h2;
+	font-size		: $font-size-h2;
 	font-weight		: bold;
-	@include mx-pb-sm;
+	padding-bottom	: $gap-sm;
 
 }
 
 @mixin mx-h3 {
 
-	@include mx-font-size-h3;
+	font-size		: $font-size-h3;
 	font-weight		: bold;
 
 }
 
 @mixin mx-h4 {
 
-	@include mx-font-size-h4;
+	font-size		: $font-size-h4;
 	font-weight		: bold;
 	@include mx-color($col-focus);
 
@@ -37,7 +37,7 @@ h1, h2, h3 {
 
 @mixin mx-h5 {
 
-	@include mx-font-size-h5;
+	font-size		: $font-size-h5;
 	font-weight		: bold;
 	font-style		: italic;
 	@include mx-color($col-focus);
@@ -46,7 +46,7 @@ h1, h2, h3 {
 
 @mixin mx-h6 {
 
-	@include mx-font-size-h6;
+	font-size		: $font-size-h6;
 	font-weight		: bold;
 	font-style		: italic;
 	@include mx-color($col-text-secondary);
@@ -63,50 +63,51 @@ h1, h2, h3 {
 h1, h2, h3, h4, h5, h6 {
 
 	@include mx-color($col-text);
-	@include mx-transition(color);
+	transition		: color $transition;
 
 }
 
 h1 {
 
 	@include mx-h1;
-	@include mx-mb-xxl;
+	margin-bottom	: $gap-xxl;
 
 }
 
 h2 {
 
 	@include mx-h2;
-	@include mx-mb-xxl;
-	@include mx-border-0;
+	margin-bottom	: $gap-xxl;
+	border			: 0;
 	border-bottom	: 1px solid fn-var($col-text-secondary);
-	@include mx-transition(border);
+	transition		: border $transition;
 
 }
 
 h3 {
 
-	@include mx-h3;@include mx-mb-xl;
+	@include mx-h3;
+	margin-bottom	: $gap-xl;
 
 }
 
 h4 {
 
 	@include mx-h4;
-	@include mx-mb-xl;
+	margin-bottom	: $gap-xl;
 
 }
 
 h5 {
 
 	@include mx-h5;
-	@include mx-mb;
+	margin-bottom	: $gap;
 
 }
 
 h6 {
 
 	@include mx-h6;
-	@include mx-mb;
+	margin-bottom	: $gap;
 
 }

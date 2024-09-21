@@ -1,6 +1,6 @@
 html {
 
-	font-size	: 62.5%;
-	tab-size	: 4;
+	font-size	: fn-var($font-size-ratio);
+	tab-size	: $tab-size;
 
 }

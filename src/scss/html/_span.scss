@@ -1,6 +1,6 @@
 span {
 
 	color		: var(--col-text);
-	@include mx-transition(color background-color);
+	transition	: color $transition;
 
 }

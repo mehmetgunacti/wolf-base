@@ -4,17 +4,17 @@
 
 		width						: 8px;
 		height						: 8px;
-		border-radius				: fn-var($border-radius-sm);
+		border-radius				: $border-radius-sm;
 		background-color			: fn-color-set-alpha($col-bg-page, 0.4);
-		@include mx-transition(background-color);
+		transition					: background-color $transition;
 
 	}
 
 	&::-webkit-scrollbar-thumb {
 
-		border-radius				: fn-var($border-radius);
+		border-radius				: $border-radius;
 		background-color			: fn-var($col-bg-page);
-		@include mx-transition(background-color);
+		transition					: background-color $transition;
 
 	}
 
@@ -29,7 +29,7 @@
 @mixin mx-scrollable($maxHeight: 25rem) {
 
 	max-height			: $maxHeight;
-	@include mx-overflow-y-a;
+	overflow-y			: auto;
 	@include mx-webkit-scrollbar;
 
 }

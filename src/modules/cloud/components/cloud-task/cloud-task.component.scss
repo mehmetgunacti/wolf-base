@@ -1,15 +1,28 @@
 // @import 'helper';
 // @import 'variables';
-// @import 'components';
-// @import 'mixins';
+@import 'components';
+@import 'variables';
 
-// :host {
 
-// 	& > fieldset {
+// host: { 'class': 'd-flex-column mt-xl' },
+:host {
 
+ 	& > fieldset {
+
+		@include mx-fieldset;
+
+		[content] {
+
+			@include mx-scrollable;
+
+		}
 // 		padding-top			: calc(var(--gap-xl) + var(--gap-xxl));
 
-// 		& > legend {
+ 		// & > legend {
+
+			// @include mx-d-flex-ai-center;
+
+			// @includ23 ai-c pos-absolute gap-xs p ml dark transition-bg
 
 // 			top					: -2rem;
 // 			left				: 0rem;
@@ -19,6 +32,6 @@
 
 // 		}
 
-// 	}
+	}
 
-// }
+}

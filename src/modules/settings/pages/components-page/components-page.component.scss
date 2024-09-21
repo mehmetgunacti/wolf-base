@@ -5,7 +5,7 @@
 :host {
 
 	@include mx-d-flex-column;
-	@include mx-gap-sm;
+	gap		: $gap-sm;
 
 	fieldset {
 
@@ -16,7 +16,7 @@
 		[wrapper] {
 
 			@include mx-d-flex-column;
-			@include mx-gap-sm;
+			gap		: $gap-sm;
 			//outline: 1px solid orange;
 			// width: clamp($breakpoint-sm, 70%, 100vw);
 
@@ -37,7 +37,7 @@
 			[container] {
 
 				@include mx-d-flex-ai-e-jc-c($flex-wrap: wrap);
-				@include mx-gap-sm;
+				gap		: $gap-sm;
 
 				// @container (min-width: #{$breakpoint-md}) {
 
@@ -54,7 +54,7 @@
 				grid-template-columns	: 1fr 1fr 1fr;
 				place-items				: start;
 				align-items				: end;
-				gap						: var(--gap-xs);
+				gap						: $gap-xs;
 				width					: 25rem;
 				align-self				: center;
 
@@ -74,11 +74,11 @@
 		[wrapper] {
 
 			@include mx-d-flex-column((justify-content: center));
-			@include mx-gap-sm;
+			gap		: $gap-sm;
 
 			[container] {
 
-				@include mx-gap-sm;
+				gap		: $gap-sm;
 
 			}
 

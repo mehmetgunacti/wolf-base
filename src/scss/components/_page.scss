@@ -1,6 +1,6 @@
 @mixin mx-page {
 
 	@include mx-d-flex-column;
-	@include mx-gap-sm;
+	gap		: $gap-sm;
 
 }

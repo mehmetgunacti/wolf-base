@@ -20,27 +20,84 @@
 
 }
 
+$_prefix	: btn;
+
+$_btn-size-values: (
+
+	xl: (
+		"--height"			: $widget-height-xl,
+		"font-size"			: $font-size-xl,
+		"padding-inline"	: 1.9rem,
+		"border-radius"		: $border-radius-xl
+	),
+	lg: (
+		"--height"			: $widget-height-lg,
+		"font-size"			: $font-size-lg,
+		"padding-inline"	: 1.8rem,
+		"border-radius"		: $border-radius-lg
+	),
+	default: (
+		"--height"			: $widget-height,
+		"height"			: --height,
+		"line-height"		: --height, // Match the height for vertical centering
+		"padding-inline"	: 1.5rem,
+		"font-size"			: $font-size,
+		"border-radius"		: $border-radius
+	),
+	sm: (
+		"--height"			: $widget-height-sm,
+		"font-size"			: $font-size-sm,
+		"padding-inline"	: 1.1rem,
+		"border-radius"		: $border-radius-sm
+	),
+	xs: (
+		"--height"			: $widget-height-xs,
+		"font-size"			: $font-size-xs,
+		"padding-inline"	: 0.5rem,
+		"border-radius"		: $border-radius-xs
+	),
+	glyph: (
+		"width"				: --height
+	)
+);
+
+@mixin mx-button-sizes($map, $size, $prefix) {
+
+	@each $key, $value in map-get($map, $size) {
+
+		@if type-of($key) == 'string' and str-index($key, '--') == 1 {
+
+			$name: str-slice($key, str-index($key, '--'));
+			--#{$prefix}-#{$name}: #{$value};
+
+		} @else if (type-of($value) == 'string' and str-index($value, '--') == 1) {
+
+			$val: str-slice($value, str-index($value, '--'));
+			#{$key}: var(--#{prefix}-#{$val});
+
+		} @else {
+
+			$key	: $value;
+
+		}
+
+	}
+
+}
+
 @mixin mx-button {
 
 	@include mx-print-css-vars((
-		"font-size"			: fn-var($font-size),
-		"border-radius"		: fn-var($border-radius-xs),
 		"color"				: fn-var($col-btn-default-text),
 		"background-color"	: fn-var($col-btn-default-color),
-		"border-color"		: fn-var($col-btn-default-border),
-		"height"			: fn-var($btn-height-base),
-		"padding-inline"	: 1.5rem
-	), btn);
+		"border-color"		: fn-var($col-btn-default-border)
+	), $_prefix);
 
 	@include mx-assign-css-vars((
-		"font-size",
-		"border-radius",
 		"color",
 		"background-color",
-		"border-color",
-		"height",
-		"padding-inline"
-	), btn);
+		"border-color"
+	), $_prefix);
 
 	@include mx-outline;
 	@include mx-d-flex-center($display: inline-flex);
@@ -55,69 +112,42 @@
 	white-space				: pre;
 	cursor					: pointer;
 
-	@include mx-transition(color background-color border-color);
+	transition				: color $transition, background-color$transition, border-color $transition;
 
-	&.xl {
-		@include mx-print-css-vars((
-			"height"			: calc(fn-var($btn-height-base) * 1.2),
-			"padding-inline"	: 1.9rem,
-			"font-size"			: fn-var($font-size-xl),
-			//"border-radius"		: fn-var($border-radius-lg)
-		), btn);
-	}
-	&.lg {
-		@include mx-print-css-vars((
-			"height"			: calc(fn-var($btn-height-base) * 1.1),
-			"padding-inline"	: 1.8rem,
-			"font-size"			: fn-var($font-size-lg)
-		), btn);
-	}
-	&.sm {
-		@include mx-print-css-vars((
-			"height"			: calc(fn-var($btn-height-base) * 0.7),
-			"padding-inline"	: 1.1rem,
-			"font-size"			: fn-var($font-size-sm),
-			"border-radius"		: fn-var($border-radius-xs)
-		), btn);
-	}
-	&.xs {
-		@include mx-print-css-vars((
-			"height"			: calc(fn-var($btn-height-base) * 0.5),
-			"padding-inline"	: 0.5rem,
-			"font-size"			: fn-var($font-size-xs),
-			"border-radius"		: fn-var($border-radius-xxs)
-		), btn);
-	}
+	&.xl { @include mx-button-sizes($_btn-size-values, xl, $_prefix); }
+	&.lg { @include mx-button-sizes($_btn-size-values, lg, $_prefix); }
+	&.sm { @include mx-button-sizes($_btn-size-values, sm, $_prefix); }
+	&.xs { @include mx-button-sizes($_btn-size-values, xs, $_prefix); }
 
 	&:hover {
 
-		@include mx-print-css-vars(("background-color": fn-var($col-btn-default-color-hover)), btn);
+		@include mx-print-css-vars(("background-color": fn-var($col-btn-default-color-hover)), $_prefix);
 
 	}
 
 	&:active {
 
-		@include mx-print-css-vars(("background-color": fn-var($col-btn-default-color-active)), btn);
+		@include mx-print-css-vars(("background-color": fn-var($col-btn-default-color-active)), $_prefix);
 
 	}
 
-	&[data-before],
-	&[data-after] {
+	&[data-before]::before {
 
-		padding-inline: calc(var(--btn-padding-inline) * 0.7);
+		content: attr(data-before);
+		@include mx-d-inline-block;
+		font-size		: inherit;
+		margin-inline	: $gap-xxs;
 
 	}
 
-	&[data-before]::before,
 	&[data-after]::after {
 
+		content: attr(data-after);
 		@include mx-d-inline-block;
-		@include mx-font-size-inherit;
-		@include mx-mx-xxs;
+		font-size		: inherit;
+		margin-inline	: $gap-xxs;
 
 	}
-	&[data-before]::before { content: attr(data-before); }
-	&[data-after]::after { content: attr(data-after); }
 
 	&[disabled] {
 
@@ -127,7 +157,7 @@
 			"background-color-hover"	: fn-var($col-btn-disabled-color-hover) !important,
 			"background-color-active"	: fn-var($col-btn-disabled-color-active) !important,
 			"border-color"				: fn-var($col-btn-disabled-border) !important
-		), btn);
+		), $_prefix);
 
 		cursor	: not-allowed;
 
@@ -146,17 +176,17 @@
 			"text-color"		: fn-var($col-btn-warn-text),
 			"background-color"	: fn-var($col-btn-warn-color),
 			"border-color"		: fn-var($col-btn-warn-border)
-		), btn);
+		), $_prefix);
 
 		&:hover {
 
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-warn-color-hover)), btn);
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-warn-color-hover)), $_prefix);
 
 		}
 
 		&:active {
 
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-warn-color-active)), btn);
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-warn-color-active)), $_prefix);
 
 		}
 
@@ -168,17 +198,17 @@
 			"color"				: fn-var($col-btn-danger-text),
 			"background-color"	: fn-var($col-btn-danger-color),
 			"border-color"		: fn-var($col-btn-danger-border)
-		), btn);
+		), $_prefix);
 
 		&:hover {
 
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-danger-color-hover)), btn);
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-danger-color-hover)), $_prefix);
 
 		}
 
 		&:active {
 
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-danger-color-active)), btn);
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-danger-color-active)), $_prefix);
 
 		}
 
@@ -190,7 +220,7 @@
 			"color"				: fn-var($col-btn-link-text),
 			"background-color"	: fn-var($col-btn-link-color),
 			"border-color"		: fn-var($col-btn-link-border)
-		), btn);
+		), $_prefix);
 
 		&:hover {
 
@@ -211,44 +241,23 @@
 		@include mx-print-css-vars((
 			"color"				: fn-var($col-btn-tag-text),
 			"background-color"	: fn-var($col-btn-tag-color),
-			"border-radius" 	: fn-var($border-radius-round),
-			"height"			: calc(fn-var($btn-height-base) * 0.6), // 2.6 default fs 12px, 2.2 small , 1.8 xs
-			"font-size"			: fn-var($font-size-sm)
-		), btn);
+		), $_prefix);
 
-		border				: 1px solid transparent;
-		line-height			: 1.2;
-		min-width			: 1rem;
-		padding-inline		: 0.8rem;
+		border-radius 	: $border-radius-round;
+		border			: 0;
+
+		font-weight		: bold;
+		min-width		: 1rem;
 
 		&:hover {
 
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-tag-color-hover)), btn);
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-tag-color-hover)), $_prefix);
 
 		}
 
 		&:active {
 
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-tag-color-active)), btn);
-
-		}
-
-		&.sm {
-
-			@include mx-print-css-vars((
-				"height"			: calc(fn-var($btn-height-base) * 0.5),
-				"font-size"			: fn-var($font-size-sm)
-			), btn);
-
-		}
-
-		&.xs {
-
-			@include mx-print-css-vars((
-				"height"	: calc(fn-var($btn-height-base) * 0.4),
-				"font-size"	: fn-var($font-size-xs)
-			), btn);
-			padding-inline	: 0.4rem;
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-tag-color-active)), $_prefix);
 
 		}
 
@@ -258,22 +267,24 @@
 
 		@include mx-print-css-vars((
 			"color"				: fn-var($col-btn-glyph-text),
-			"background-color"	: fn-var($col-btn-glyph-color),
-			"border-radius" 	: fn-var($border-radius-round)
-		), btn);
+			"background-color"	: fn-var($col-btn-glyph-color)
+		), $_prefix);
 
-		border				: $zero;
-		width				: var(--btn-height);
+		@include mx-button-sizes($_btn-size-values, glyph, $_prefix);
+		border-radius 	: $border-radius-round;
+		border			: 0;
+		padding			: 0;
+		margin			: 0;
 
 		&:hover {
 
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color-hover)), btn);
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color-hover)), $_prefix);
 
 		}
 
 		&:active {
 
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color-active)), btn);
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color-active)), $_prefix);
 
 		}
 

@@ -4,35 +4,35 @@
 
 :host {
 
-	// @include mx-d-flex;
+	@include mx-d-flex;
 	@include mx-shadow;
 
-	// min-height			: calc(fn-var($header-height) * 1.5);
-	@include mx-min-width($toast-min-width);
+	// min-height	: calc(fn-var($header-height) * 1.5);
+	min-width		: $toast-min-width;
 
-	@include mx-p-lg;
-	@include mx-gap-sm;
+	padding			: $gap-lg;
+	gap				: $gap-sm;
 
-	@include mx-border-0;
-	@include mx-border-radius;
+	border			: 0;
+	border-radius	: $border-radius;
 
 	@include mx-color($col-text);
 
 	[toast-left] {
 
 		@include mx-d-flex-center;
-		@include mx-min-width($header-height);
+		min-width	: $header-height;
 
 	}
 
 	[toast-right] {
 
 		// @include mx-d-flex(()); // ([(flex-direction: column), (justify-content: center)]);
-		@include mx-flex-1;
+		flex	: 1;
 		// class="d-flex-column jc-center p pl-0 flex-1"
 		[toast-summary] {
 
-			@include mx-font-size-h4;
+			font-size	: $font-size-h4;
 
 		}
 

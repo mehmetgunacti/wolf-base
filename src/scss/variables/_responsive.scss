@@ -12,6 +12,14 @@ $breakpoint-xl: 120px; // 1200px
 
 }
 
+@mixin mx-sm() {
+
+	@media screen and (min-width: $breakpoint-sm) {
+		@content;
+	}
+
+}
+
 @mixin mx-md() {
 
 	@media screen and (min-width: $breakpoint-md) {

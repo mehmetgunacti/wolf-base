@@ -1,8 +1,8 @@
 .material-symbols-outlined {
 
-	font-size			: 1.4em;
-	color				: inherit;
-	@include mx-transition-short(color background-color);
+	font-size		: 1.4em;
+	color			: inherit;
+	transition		: color $transition, background-color $transition;
 
 	&.filled {
 
@@ -18,7 +18,7 @@
 
 	&.small {
 
-		@include mx-font-size-sm;
+		font-size	: $font-size-sm;
 
 	}
 

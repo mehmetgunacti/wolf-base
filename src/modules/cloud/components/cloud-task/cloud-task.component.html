@@ -1,6 +1,6 @@
-<fieldset class="d-flex-column pos-relative">
+<fieldset>
 
-	<legend class="d-flex ai-c pos-absolute gap-xs p ml dark transition-bg">
+	<legend>
 
 		<ng-container [ngSwitch]="task.entity">
 
@@ -64,7 +64,7 @@
 
 	<header>
 
-		<div card_title>
+		<div>
 
 			@switch (task.type) {
 
@@ -87,7 +87,7 @@
 	</header>
 
 	<!-- CONTENT -->
-	<section content class="scrollable">
+	<section content>
 
 		@for (item of task.items; track item.id) {
 
@@ -107,19 +107,19 @@
 
 			@case ('upload') {
 
-				<button type="button" (click)="onActionClicked()"><span class="material-symbols-outlined">cloud_upload</span> Upload</button>
+				<button type="button" (click)="onActionClicked()" data-after="Upload"><span class="material-symbols-outlined">cloud_upload</span></button>
 
 			}
 
 			@case ('download') {
 
-				<button type="button" (click)="onActionClicked()"><span class="material-symbols-outlined">cloud_download</span> Download</button>
+				<button type="button" (click)="onActionClicked()" data-after="Download"><span class="material-symbols-outlined">cloud_download</span></button>
 
 			}
 
 			@case ('view') {
 
-				<button type="button" class="error" (click)="onActionClicked()"><span class="material-symbols-outlined">troubleshoot</span> View</button>
+				<button type="button" class="error" (click)="onActionClicked()" data-after="View"><span class="material-symbols-outlined">troubleshoot</span></button>
 
 			}
 

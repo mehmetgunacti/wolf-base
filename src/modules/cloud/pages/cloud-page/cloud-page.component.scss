@@ -1,7 +1,10 @@
 // @import 'helper';
 // @import 'mixins';
+@import 'components';
 
-// :host {
+:host {
+
+	@include mx-page;
 
 // 	& [config_alert] {
 
@@ -9,4 +12,4 @@
 
 // 	}
 
-// }
+}

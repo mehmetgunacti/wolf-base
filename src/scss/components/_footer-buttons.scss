@@ -1,28 +1,19 @@
-%margin-left-auto {
+@use 'helper';
 
-	& > *:last-child {
+@mixin mx-footer-buttons {
 
-		margin-left	: auto;
-
-	}
-
-}
-
-.footer-buttons {
-
-	display			: flex;
-	gap				: var(--gap-sm);
+	@include mx-d-flex-jc-end;
+	gap				: fn-var($gap-sm);
 	margin-top		: auto;
-
-	&._n {
-
-		justify-content	: end;
-
-	}
+	padding			: fn-var($gap-xl);
 
 	&.one_one {
 
-		@extend %margin-left-auto;
+		& > *:last-child {
+
+			margin-left	: auto;
+
+		}
 
 	}
 
