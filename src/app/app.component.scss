@@ -29,7 +29,7 @@
 
 		@include mx-d-block;
 		position		: fixed;
-		padding			: $gap-sm;
+		padding			: $gap;
 		z-index			: $z-index-main;
 		height			: fn-var($main-current-height);
 
