@@ -29,11 +29,12 @@
 	#{$gap-xs}						: calc(fn-var($gap) * 0.4);
 	#{$gap-xxs}						: calc(fn-var($gap) * 0.2);
 
-	#{$border-radius-xl} 			: 0.9rem;
-	#{$border-radius-lg} 			: 0.7rem;
-	#{$border-radius} 				: 0.6rem;
-	#{$border-radius-sm} 			: 0.5rem;
-	#{$border-radius-xs} 			: 0.4rem;
+	#{$border-radius-xl} 			: 1.2rem;
+	#{$border-radius-lg} 			: 1.1rem;
+	#{$border-radius} 				: 1rem;
+	#{$border-radius-sm} 			: 0.7rem;
+	#{$border-radius-xs} 			: 0.5rem;
+	#{$border-radius-xxs} 			: 0.4rem;
 	#{$border-radius-round}			: 100px;
 
 	#{$widget-height}				: 3.5rem;

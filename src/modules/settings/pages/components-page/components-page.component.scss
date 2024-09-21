@@ -48,6 +48,18 @@
 
 			}
 
+			[container_tags] {
+
+				display					: grid;
+				grid-template-columns	: 1fr 1fr 1fr;
+				place-items				: start;
+				align-items				: end;
+				gap						: var(--gap-xs);
+				width					: 25rem;
+				align-self				: center;
+
+			}
+
 		}
 
 	}

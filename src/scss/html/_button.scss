@@ -9,10 +9,10 @@
 
 }
 
-@mixin mx-assign-css-vars($map, $prefix) {
+@mixin mx-assign-css-vars($list, $prefix) {
 
 	// assign css vars to properties
-	@each $key, $value in $map {
+	@each $key in $list {
 
 		#{$key}	: var(--#{$prefix}-#{$key});
 
@@ -24,7 +24,7 @@
 
 	@include mx-print-css-vars((
 		"font-size"			: fn-var($font-size),
-		"border-radius"		: fn-var($border-radius),
+		"border-radius"		: fn-var($border-radius-xs),
 		"color"				: fn-var($col-btn-default-text),
 		"background-color"	: fn-var($col-btn-default-color),
 		"border-color"		: fn-var($col-btn-default-border),
@@ -33,13 +33,13 @@
 	), btn);
 
 	@include mx-assign-css-vars((
-		"font-size"			: fn-var($font-size),
-		"border-radius"		: fn-var($border-radius),
-		"color"				: fn-var($col-btn-default-text),
-		"background-color"	: fn-var($col-btn-default-color),
-		"border-color"		: fn-var($col-btn-default-border),
-		"height"			: fn-var($btn-height-base),
-		"padding-inline"	: 1.5rem
+		"font-size",
+		"border-radius",
+		"color",
+		"background-color",
+		"border-color",
+		"height",
+		"padding-inline"
 	), btn);
 
 	@include mx-outline;
@@ -62,31 +62,30 @@
 			"height"			: calc(fn-var($btn-height-base) * 1.2),
 			"padding-inline"	: 1.9rem,
 			"font-size"			: fn-var($font-size-xl),
-			"border-radius"		: fn-var($border-radius-xl)
+			//"border-radius"		: fn-var($border-radius-lg)
 		), btn);
 	}
 	&.lg {
 		@include mx-print-css-vars((
-			"height"			: calc(#{fn-var($btn-height-base)} * 1.1),
+			"height"			: calc(fn-var($btn-height-base) * 1.1),
 			"padding-inline"	: 1.8rem,
-			"font-size"			: fn-var($font-size-lg),
-			"border-radius"		: fn-var($border-radius-lg)
+			"font-size"			: fn-var($font-size-lg)
 		), btn);
 	}
 	&.sm {
 		@include mx-print-css-vars((
-			"height"			: calc(#{fn-var($btn-height-base)} * 0.7),
+			"height"			: calc(fn-var($btn-height-base) * 0.7),
 			"padding-inline"	: 1.1rem,
 			"font-size"			: fn-var($font-size-sm),
-			"border-radius"		: fn-var($border-radius-sm)
+			"border-radius"		: fn-var($border-radius-xs)
 		), btn);
 	}
 	&.xs {
 		@include mx-print-css-vars((
-			"height"			: calc(#{fn-var($btn-height-base)} * 0.5),
+			"height"			: calc(fn-var($btn-height-base) * 0.5),
 			"padding-inline"	: 0.5rem,
 			"font-size"			: fn-var($font-size-xs),
-			"border-radius"		: fn-var($border-radius-xs)
+			"border-radius"		: fn-var($border-radius-xxs)
 		), btn);
 	}
 
@@ -220,7 +219,7 @@
 		border				: 1px solid transparent;
 		line-height			: 1.2;
 		min-width			: 1rem;
-		padding-inline		: calc(var(--btn-padding-inline) * 0.5);
+		padding-inline		: 0.8rem;
 
 		&:hover {
 
@@ -249,6 +248,7 @@
 				"height"	: calc(fn-var($btn-height-base) * 0.4),
 				"font-size"	: fn-var($font-size-xs)
 			), btn);
+			padding-inline	: 0.4rem;
 
 		}
 
