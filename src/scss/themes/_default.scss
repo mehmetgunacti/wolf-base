@@ -77,7 +77,7 @@
 
 	#{$col-btn-tag-text}				: fn-var($col-text);
 	#{$col-btn-tag-color}				: fn-var($col-accent);
-	#{$col-btn-tag-color-hover}			: fn-color-darken($col-btn-tag-color, 10%);
-	#{$col-btn-tag-color-active}		: fn-color-darken($col-btn-tag-color, 25%);
+	#{$col-btn-tag-color-hover}			: fn-color-lighten($col-btn-tag-color, 10%);
+	#{$col-btn-tag-color-active}		: fn-color-lighten($col-btn-tag-color, 25%);
 
 }
