@@ -11,7 +11,6 @@ import { selCore_theme } from 'store/selectors/core/core-ui.selectors';
 	selector: 'app-nav',
 	templateUrl: './nav.component.html',
 	styleUrls: ['./nav.component.scss'],
-	host: { 'class': 'd-flex-column flex-1' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavComponent {

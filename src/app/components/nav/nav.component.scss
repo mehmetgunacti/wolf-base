@@ -1,9 +1,79 @@
-// @import 'variables';
-// @import 'mixins';
-// @import 'variables';
-// @import 'helper';
-// :host {
-	// :host-context(.sidebar-full) { <---
+@import 'variables';
+@import 'components';
+@import 'variables';
+@import 'helper';
+
+:host {
+
+	@include mx-d-flex-column;
+
+	div[nav_menu] {
+
+		@include mx-d-flex-column;
+
+		& > a {
+
+			@include mx-d-flex;
+			margin			: $gap;
+			gap				: $gap;
+			border-radius	: $border-radius;
+			text-decoration	: none;
+
+			& > [nav_item_left] {
+
+				@include mx-d-flex-center;
+
+			}
+			& > [nav_item_right] {
+
+				@include mx-d-flex-ai-center;
+
+				body[data-sidebar="#{$sidebar-half}"] & {
+
+					display	: none;
+
+				}
+
+			}
+
+			&:focus-visible {
+
+				@include mx-outline;
+
+			}
+
+		}
+
+	}
+
+}
+
+
+
+// & [nav_item_right] {
+
+// 	display: none !important;
+
+// }
+
+// & [nav_item_right] {
+
+// 	display: none !important;
+
+// }
+
+	// [data-sidebar="#{$sidebar-hidden}"] {
+
+
+		// // set <nav>: half width on bigscreen (md)
+		// @include mx-set-var($nav-current-width, $nav-full-width);
+		// @include mx-set-var($nav-current-margin-left, -$nav-full-width); // 1rem = shadow
+
+// 	}
+
+// }
+
+
 	// body.sidebar-hidden & {
 
 	// 	visibility		: hidden;

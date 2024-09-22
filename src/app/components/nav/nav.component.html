@@ -1,4 +1,4 @@
-<div nav-menu>
+<div nav_menu>
 
 	@for (item of menuItems$ | async; track $index) {
 
@@ -8,27 +8,35 @@
 			routerLinkActive="active"
 			[routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }">
 
-			<span icon class="material-symbols-outlined">{{item.icon}}</span>
-			<span label>{{ item.label }}</span>
-			<div badge><span>{{ item.badge }}</span></div>
+			<div nav_item_left>
+				<button class="glyph lg">
+					<span class="material-symbols-outlined">{{item.icon}}</span>
+				</button>
+			</div>
+			<div nav_item_right class="nav-item-right">
+
+				<span label>{{ item.label }}</span>
+				<div badge><span>{{ item.badge }}</span></div>
+
+			</div>
 
 		</a>
 
 	}
 
 </div>
-<div bottom-buttons>
+<!-- <div bottom-buttons> -->
 
 	<!-- SETTINGS BUTTON -->
-	<button
+	<!-- <button
 		class="glyph"
 		routerLink="/settings"
 		routerLinkActive="active"
 		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
-		title="Settings"><span class="material-symbols-outlined">settings</span></button>
+		title="Settings"><span class="material-symbols-outlined">settings</span></button> -->
 
 	<!-- CLOUD TASKS BUTTON -->
-	@if ((cloudTasks$ | async); as cloudTasks) {
+	<!-- @if ((cloudTasks$ | async); as cloudTasks) {
 
 		<button
 			class="glyph badge-container"
@@ -42,28 +50,28 @@
 			}
 		</button>
 
-	}
+	} -->
 
 	<!-- DATABASE BUTTON -->
-	<button
+	<!-- <button
 		class="glyph"
 		routerLink="/database"
 		routerLinkActive="active"
 		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
-		title="Database"><span class="material-symbols-outlined">database</span></button>
+		title="Database"><span class="material-symbols-outlined">database</span></button> -->
 
 	<!-- LOGS BUTTON -->
-	<button
+	<!-- <button
 		class="glyph"
 		routerLink="/logs"
 		routerLinkActive="active"
 		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
-		title="View Logs"><span class="material-symbols-outlined">history</span></button>
+		title="View Logs"><span class="material-symbols-outlined">history</span></button> -->
 
 	<!-- SWITCH THEME BUTTON -->
-	<button
+	<!-- <button
 		class="glyph"
 		(click)="onSwitchTheme()"
-		title="Switch Theme"><span class="material-symbols-outlined">colors</span></button>
+		title="Switch Theme"><span class="material-symbols-outlined">colors</span></button> -->
 
-</div>
+<!-- </div> -->
