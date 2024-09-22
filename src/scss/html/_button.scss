@@ -329,6 +329,12 @@ $_btn-size-values: (
 
 		}
 
+		&[disabled] {
+
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color) !important), $_prefix);
+
+		}
+
 		&.squared {
 
 			border-radius: $border-radius-lg;

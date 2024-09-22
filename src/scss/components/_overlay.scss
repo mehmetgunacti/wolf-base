@@ -30,9 +30,16 @@
 
 	}
 
-	& > [content] {
+	& > [content-wrapper] {
+
+		@include mx-scrollable(unset);
+		padding: 2 * $gap-xxl;
+
+		& > [content] {
 
 
+
+		}
 
 	}
 

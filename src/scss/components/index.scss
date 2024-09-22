@@ -10,11 +10,11 @@
 @import 'input-element';
 @import 'logo';
 // @import 'menu';
-@import 'shadow';
+@import 'shadow';  // <-- used by overlay
+@import 'scrollable'; // <-- used by overlay
 @import 'overlay';
 @import 'page';
 @import 'router-animation';
 @import 'shake';
-@import 'scrollable';
 @import 'toast-panel';
 @import 'view-element';
