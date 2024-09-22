@@ -9,27 +9,27 @@
 
 		@include mx-d-flex-center;
 		@include mx-background($col-bg-component-dark);
-		border-radius	: $border-radius-sm;
-		min-height		: $widget-height;
+		border-radius	: $border-radius-xl;
+		min-height		: $widget-height-lg;
 		min-width		: $header-height;
 		font-size		: $font-size;
-		padding-inline	: $gap;
+		padding-inline	: $gap-xxl;
 
-		&:has(#{$glyph-selector}) {
+		// &:has(#{$glyph-selector}) {
 
-			padding-right	: $gap;
+		// 	padding-right	: $gap;
 
-		}
+		// }
 
 		&:nth-child(2) {
 
 			position: absolute;
-			top		: -3.5rem;
+			top		: -45px;
 			right	: 5 * $gap-xxs;
 
 			@include mx-bigScreen() {
 
-				top	: -4rem;
+				top	: -48px;
 
 			}
 

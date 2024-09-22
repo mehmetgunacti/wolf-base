@@ -1,10 +1,10 @@
 @mixin mx-box($bg-color: $col-bg-component) {
 
 	--box-color			: #{fn-var($col-text)};
-	--box-padding		: $gap-lg $gap;
+	--box-padding		: #{$gap-lg $gap};
 	--box-bg-color		: #{fn-var($bg-color)};
-	--box-border-radius	: $border-radius;
-	--box-min-height	: 4 * $gap;
+	--box-border-radius	: #{$border-radius-xxl};
+	--box-min-height	: #{4 * $gap};
 
 	color				: var(--box-color);
 	padding				: var(--box-padding);

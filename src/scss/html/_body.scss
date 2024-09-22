@@ -1,12 +1,10 @@
 body {
 
-	display				: block;
+	@include mx-d-block;
 
-	font-family			: var(--font-family);
-	font-size			: var(--font-size);
-	line-height			: var(--line-height);
-	letter-spacing		: var(--letter-spacing);
-	color				: var(--col-text);
+	font-family			: $font-family;
+	font-size			: $font-size;
+	color				: fn-var($col-text);
 
 	&[data-sidebar="#{$sidebar-full}"] {
 

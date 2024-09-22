@@ -38,7 +38,7 @@
 		left			: fn-var($main-current-left);
 
 		overflow-y		: auto;
-		transition		: height $transition, left transition, background-color $transition;
+		transition		: height $transition, left $transition, background-color $transition;
 
 		// @include mx-webkit-scrollbar;
 		// @include mx-scrollable;

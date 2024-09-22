@@ -40,7 +40,7 @@ $_btn-size-values: (
 		"--height"			: $widget-height,
 		"height"			: --height,
 		"line-height"		: --height, // Match the height for vertical centering
-		"padding-inline"	: 1.5rem,
+		"padding-inline"	: 12px,
 		"font-size"			: $font-size,
 		"border-radius"		: $border-radius
 	),
@@ -67,17 +67,17 @@ $_btn-size-values: (
 
 		@if type-of($key) == 'string' and str-index($key, '--') == 1 {
 
-			$name: str-slice($key, str-index($key, '--'));
+			$name: str-slice($key, 3); // '--'.length = 2
 			--#{$prefix}-#{$name}: #{$value};
 
 		} @else if (type-of($value) == 'string' and str-index($value, '--') == 1) {
 
-			$val: str-slice($value, str-index($value, '--'));
-			#{$key}: var(--#{prefix}-#{$val});
+			$val: str-slice($value, 3); // '--'.length = 2
+			#{$key}: var(--#{$prefix}-#{$val});
 
 		} @else {
 
-			$key	: $value;
+			#{$key}	: #{$value};
 
 		}
 
@@ -98,6 +98,8 @@ $_btn-size-values: (
 		"background-color",
 		"border-color"
 	), $_prefix);
+
+	@include mx-button-sizes($_btn-size-values, default, $_prefix);
 
 	@include mx-outline;
 	@include mx-d-flex-center($display: inline-flex);
@@ -131,21 +133,29 @@ $_btn-size-values: (
 
 	}
 
-	&[data-before]::before {
+	&[data-before] {
 
-		content: attr(data-before);
-		@include mx-d-inline-block;
-		font-size		: inherit;
-		margin-inline	: $gap-xxs;
+		padding-right: 6px;
+		&::before {
+
+			content: attr(data-before);
+			@include mx-d-inline-block;
+			font-size		: inherit;
+
+		}
 
 	}
 
-	&[data-after]::after {
+	&[data-after] {
 
-		content: attr(data-after);
-		@include mx-d-inline-block;
-		font-size		: inherit;
-		margin-inline	: $gap-xxs;
+		padding-left: 9px;
+		&::after {
+
+			content: attr(data-after);
+			@include mx-d-inline-block;
+			font-size		: inherit;
+
+		}
 
 	}
 

@@ -9,28 +9,28 @@
 	#{$nav-current-width}			: $nav-full-width;
 	#{$nav-current-margin-left}		: 0;
 
-	@include mx-sm {
+	// @include mx-sm {
 
-		#{$font-size-ratio}			: 64%; // 1rem = 11px
+	// 	#{$font-size-ratio}			: 63%; // 1rem = 11px
 
-	}
+	// }
 
 	@include mx-md {
 
-		#{$font-size-ratio}			: 65.5%; // 1rem = 12px
+		#{$font-size-ratio}			: 68.75%; // 1rem = 12px
 
 	}
 
-	@include mx-lg {
+	// @include mx-lg {
 
-		#{$font-size-ratio}			: 67%; // 1rem = 13px
+	// 	#{$font-size-ratio}			: 64%; // 1rem = 13px
 
-	}
+	// }
 
-	@include mx-xl {
+	// @include mx-xl {
 
-		#{$font-size-ratio}			: 68.5%; // 1rem = 14px
+	// 	#{$font-size-ratio}			: 64.5%; // 1rem = 14px
 
-	}
+	// }
 
 }
