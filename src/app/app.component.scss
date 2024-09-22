@@ -7,7 +7,7 @@
 	@include mx-d-block;
 	background-color	: fn-var($col-bg-page);
 	height				: 100vh;
-	transition			: background-color $transition;
+	@include mx-transition(background-color);
 
 	& > header {
 
@@ -21,7 +21,7 @@
 		z-index			: $z-index-header;
 
 		background-color: fn-var($col-bg-header);
-		transition		: background-color $transition;
+		@include mx-transition(background-color);
 		@include mx-shadow;
 
 	}
@@ -39,7 +39,7 @@
 		left			: fn-var($main-current-left);
 
 		@include mx-scrollable(unset);
-		transition		: height $transition, left $transition, background-color $transition;
+		@include mx-transition(height left background-color);
 
 	}
 
@@ -63,7 +63,7 @@
 		overflow	: hidden;
 
 		background-color	: fn-var($col-bg-nav);
-		transition			: height $transition, width transition, margin-left $transition, background-color $transition;
+		@include mx-transition(height width margin-left background-color);
 		@include mx-shadow;
 
 	}

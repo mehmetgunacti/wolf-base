@@ -9,7 +9,7 @@
 // 	padding				: var(--gap);
 // 	background-color	: fn-hsl(bg-3);
 // 	border-radius		: var(--border-radius);
-// 	transition			: background-color var(--transition);
+// 	@include mx-transition(background-color);
 
 // 	@include mx-shadow;
 

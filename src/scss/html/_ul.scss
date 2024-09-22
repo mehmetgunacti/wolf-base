@@ -13,7 +13,7 @@ ul {
 
 			font-size		: var(--font-size-sm);
 			color			: var(--col-text-secondary);
-			transition		: color 1s cubic-bezier(0.25, 1, 0.25, 1);
+			@include mx-transition(color);
 
 		}
 

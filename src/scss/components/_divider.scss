@@ -9,7 +9,7 @@
     margin		: $gap-sm $gap-xxs;
 	align-self	: stretch;
 
-	transition	: border-left $transition;
+	@include mx-transition(border-left);
 
 }
 

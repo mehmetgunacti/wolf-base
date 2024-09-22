@@ -1,8 +1,8 @@
 p {
 
 	display			: block;
-	transition		: background-color var(--transition), color var(--transition);
 	margin-bottom	: var(--gap);
 	line-height		: 1.5;
+	@include mx-transition(background-color color);
 
 }

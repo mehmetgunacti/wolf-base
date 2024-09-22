@@ -33,7 +33,7 @@
 		width			: 15px;
 		// background-color: fn-hsl(bg-2, (lig: "- 2%"));
 		border-radius	: 4px;
-		transition		: background-color var(--transition);
+		@include mx-transition(background-color);
 
 	}
 
@@ -64,7 +64,7 @@
 		border-bottom-left-radius	: 3px;
 
 		// border-color				: fn-hsl(primary);
-		transition					: border-color var(--transition);
+		@include mx-transition(border-color);
 
 	}
 

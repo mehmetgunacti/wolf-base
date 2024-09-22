@@ -1,6 +1,6 @@
 div {
 
 	// color		: fn-hsl(text);
-	transition	: background-color var(--transition), color var(--transition);
+	@include mx-transition(background-color color);
 
 }

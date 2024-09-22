@@ -16,7 +16,7 @@
 
 // 	opacity				: 0;
 // 	visibility			: hidden;
-// 	transition			: height var(--transition), opacity var(--transition), visibility var(--transition);
+// 	@include mx-transition(height opacity visibility);
 
 // 	@include bigScreen() {
 

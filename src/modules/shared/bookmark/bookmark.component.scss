@@ -21,7 +21,7 @@
 // 	position			: relative;
 // 	overflow			: hidden;
 
-// 	transition			: all ease-in-out 250ms, background-color var(--transition);
+// 	@include mx-transition(all);
 
 // 	& > div[bookmark-overlay] {
 

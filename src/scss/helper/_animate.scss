@@ -7,7 +7,7 @@
 		@each $property, $value in $map {
 
 			$val: if($value, $value, $transition);
-			$transition-string: #{$transition-string} #{$delimiter} #{$property} #{fn-var($val)};
+			$transition-string: #{$transition-string} #{$delimiter} #{$property} #{$val};
 			$delimiter: ", ";
 
 		}

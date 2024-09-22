@@ -36,7 +36,7 @@
 	// 		border-radius		: var(--border-radius);
 	// 		color				: fn-hsl(text);
 	// 		cursor				: pointer;
-	// 		transition			: background-color var(--transition);
+	// 		@include mx-transition(background-color);
 	// 		text-decoration		: none;
 
 	// 		width				: var(--nav-half-width);
@@ -97,7 +97,7 @@
 
 	// 				padding				: var(--gap) var(--gap);
 	// 				border-radius		: var(--border-radius);
-	// 				transition			: background-color var(--transition);
+	// 				@include mx-transition(background-color);
 
 	// 				&:not(:empty) {
 

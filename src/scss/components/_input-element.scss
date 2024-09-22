@@ -21,7 +21,7 @@
 	border-radius		: $border-radius-xs;
 	padding				: 1px 5px;
 	font-size			: $font-size-sm;
-	transition			: all $transition;
+	@include mx-transition(all);
 
 }
 
@@ -50,7 +50,7 @@
 
 	@include mx-input-element-border;
 	background-color		: fn-var($col-bg-form-element);
-	transition				: background-color $transition, border-color $transition;
+	@include mx-transition(background-color border-color);
 
 	& > input,
 	& > select,

@@ -63,7 +63,7 @@ h1, h2, h3 {
 h1, h2, h3, h4, h5, h6 {
 
 	color		: fn-var($col-text);
-	transition	: color $transition;
+	@include mx-transition(color);
 
 }
 
@@ -80,7 +80,7 @@ h2 {
 	margin-bottom	: $gap-xxl;
 	border			: 0;
 	border-bottom	: 1px solid fn-var($col-text-secondary);
-	transition		: border $transition;
+	@include mx-transition(border);
 
 }
 

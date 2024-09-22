@@ -15,7 +15,7 @@
 // 			padding				: var(--gap);
 // 			border-radius		: var(--border-radius-sm);
 // 			text-decoration		: none;
-// 			transition			: background-color var(--transition);
+// 			@include mx-transition(background-color);
 
 // 			& > small {
 

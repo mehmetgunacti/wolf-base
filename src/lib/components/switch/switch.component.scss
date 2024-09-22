@@ -57,7 +57,7 @@
 			width				: 26px;
 			left				: 0px;
 			top					: 0px;
-			transition			: left 0.15s ease-out 0s;
+			@include mx-transition(left);
 
 			&::before {
 

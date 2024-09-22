@@ -123,14 +123,6 @@
 		@include mx-d-flex-ai-center($flex-wrap: wrap);
 		padding: $gap-xxs;
 		overflow-x	: auto;
-		// @include mx-webkit-scrollbar;
-
-		& button[aria-expanded=true] {
-
-			background-color	: fn-hsl(bg-3);
-			transition			: background-color 0s;
-
-		}
 
 	}
 

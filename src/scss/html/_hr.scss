@@ -5,6 +5,6 @@ hr {
 	border			: 0;
 	// border-bottom	: 1px solid fn-hsl(accent);
 
-	transition		: border var(--transition);
+	@include mx-transition(border);
 
 }

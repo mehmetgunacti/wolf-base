@@ -29,7 +29,7 @@
 // 	z-index				: var(--z-index-splash-screen);
 
 // 	background-color	: var(--col-bg-page);
-// 	transition			: background-color 600ms ease-in;
+// 	@include mx-transition(background-color);
 
 // 	& > img {
 
