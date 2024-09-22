@@ -30,6 +30,9 @@
 
 	#{$col-disabled}			: hsl(210deg 9% 32%);
 
+	#{$col-scrollbar-thumb}		: fn-color-set-alpha($col-bg-component-dark, 0.7);
+	#{$col-scrollbar-track}		: fn-var($col-transparent);
+
 	#{$col-btn-default-text}			: fn-var($col-text);
 	#{$col-btn-default-color}			: fn-var($col-primary);
 	#{$col-btn-default-color-hover}		: fn-color-lighten($col-btn-default-color, 10%);

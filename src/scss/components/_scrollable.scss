@@ -1,22 +1,8 @@
 @mixin mx-webkit-scrollbar {
 
-	&::-webkit-scrollbar {
-
-		width						: 8px;
-		height						: 8px;
-		border-radius				: $border-radius-sm;
-		background-color			: fn-color-set-alpha($col-bg-page, 0.4);
-		transition					: background-color $transition;
-
-	}
-
-	&::-webkit-scrollbar-thumb {
-
-		border-radius				: $border-radius;
-		background-color			: fn-var($col-bg-page);
-		transition					: background-color $transition;
-
-	}
+	scrollbar-width		: thin;
+	scrollbar-color		: fn-var($col-scrollbar-thumb) fn-var($col-scrollbar-track);
+	scrollbar-gutter	: stable;
 
 }
 
