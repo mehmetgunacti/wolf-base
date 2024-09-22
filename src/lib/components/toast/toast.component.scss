@@ -16,7 +16,7 @@
 	border			: 0;
 	border-radius	: $border-radius;
 
-	@include mx-color($col-text);
+	color: fn-var($col-text);
 
 	[toast-left] {
 
@@ -40,25 +40,25 @@
 
 	&.success {
 
-		@include mx-background($col-success);
+		background-color: fn-var($col-success);
 
 	}
 
 	&.info {
 
-		@include mx-background($col-info);
+		background-color: fn-var($col-info);
 
 	}
 
 	&.warn {
 
-		@include mx-background($col-warn);
+		background-color: fn-var($col-warn);
 
 	}
 
 	&.error {
 
-		@include mx-background($col-error);
+		background-color: fn-var($col-error);
 
 	}
 

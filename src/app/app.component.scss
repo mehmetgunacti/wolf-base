@@ -5,9 +5,9 @@
 :host {
 
 	@include mx-d-block;
-	@include mx-background($col-bg-page);
-	height		: 100vh;
-	transition	: background-color $transition;
+	background-color	: fn-var($col-bg-page);
+	height				: 100vh;
+	transition			: background-color $transition;
 
 	& > header {
 
@@ -19,9 +19,10 @@
 		padding-left	: 0;
 		height			: $header-height;
 		z-index			: $z-index-header;
-		@include mx-background($col-bg-header);
-		@include mx-shadow;
+
+		background-color: fn-var($col-bg-header);
 		transition		: background-color $transition;
+		@include mx-shadow;
 
 	}
 
@@ -39,8 +40,6 @@
 
 		@include mx-scrollable(unset);
 		transition		: height $transition, left $transition, background-color $transition;
-
-		// @include mx-webkit-scrollbar;
 
 	}
 
@@ -63,9 +62,9 @@
 
 		overflow	: hidden;
 
-		@include mx-background($col-bg-nav);
+		background-color	: fn-var($col-bg-nav);
+		transition			: height $transition, width transition, margin-left $transition, background-color $transition;
 		@include mx-shadow;
-		transition	: height $transition, width transition, margin-left $transition, background-color $transition;
 
 	}
 

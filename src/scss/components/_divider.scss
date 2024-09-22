@@ -24,11 +24,11 @@
 	--divider-color	: #{fn-color-set-alpha($col-text-secondary, 0.7)};
 
 	@include mx-d-flex-ai-c-jc-sb;
-	@include mx-color($col-text-secondary);
-	margin-block-end: $gap-xl;
-	font-size	: $font-size;
-	font-weight	: bold;
-	text-align	: center;
+	color				: fn-var($col-text-secondary);
+	margin-block-end	: $gap-xl;
+	font-size			: $font-size;
+	font-weight			: bold;
+	text-align			: center;
 
 
 	&::before,

@@ -8,7 +8,7 @@ h1, h2, h3 {
 
 	font-size		: $font-size-h1;
 	font-weight		: bold;
-	@include mx-color($col-focus);
+	color			: fn-var($col-focus);
 
 }
 
@@ -31,7 +31,7 @@ h1, h2, h3 {
 
 	font-size		: $font-size-h4;
 	font-weight		: bold;
-	@include mx-color($col-focus);
+	color			: fn-var($col-focus);
 
 }
 
@@ -40,7 +40,7 @@ h1, h2, h3 {
 	font-size		: $font-size-h5;
 	font-weight		: bold;
 	font-style		: italic;
-	@include mx-color($col-focus);
+	color			: fn-var($col-focus);
 
 }
 
@@ -49,7 +49,7 @@ h1, h2, h3 {
 	font-size		: $font-size-h6;
 	font-weight		: bold;
 	font-style		: italic;
-	@include mx-color($col-text-secondary);
+	color			: fn-var($col-text-secondary);
 
 }
 
@@ -62,8 +62,8 @@ h1, h2, h3 {
 
 h1, h2, h3, h4, h5, h6 {
 
-	@include mx-color($col-text);
-	transition		: color $transition;
+	color		: fn-var($col-text);
+	transition	: color $transition;
 
 }
 

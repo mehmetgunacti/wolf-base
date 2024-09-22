@@ -8,7 +8,7 @@
 	& > legend {
 
 		@include mx-d-flex-center;
-		@include mx-background($col-bg-component-dark);
+		background-color: fn-var($col-bg-component-dark);
 		border-radius	: $border-radius-xl;
 		min-height		: $widget-height-lg;
 		min-width		: $header-height;
