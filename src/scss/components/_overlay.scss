@@ -1,3 +1,65 @@
+@mixin mx-hcf {
+
+	@include mx-d-flex-column;
+	gap		: $gap;
+	& > header {
+
+		@include mx-d-flex-ai-c-jc-sb;
+		position	: relative;
+		& > [title] {
+
+			flex		: 1;
+
+			@include mx-d-flex;
+			padding-inline	: $gap-sm;
+			font-size		: $font-size-h3;
+
+		}
+
+		& > [title_buttons] {
+
+			position	: absolute;
+			top			: 0;
+			right		: 0;
+
+			@include mx-d-flex;
+			gap				: $gap-sm;
+			padding-right	: $gap-xxs;
+
+		}
+
+	}
+
+	& > [content] {
+
+
+
+	}
+
+	& > footer {
+
+
+
+	}
+
+}
+
+@mixin mx-overlay-content {
+
+	@include mx-box;
+	@include mx-hcf;
+	@include mx-shadow;
+	height: 100%;
+
+}
+
+.overlay-content {
+
+	@include mx-overlay-content;
+
+}
+
+
 @mixin mx-overlay-item {
 
 	width	: 100vw;

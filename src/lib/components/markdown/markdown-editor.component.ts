@@ -1,7 +1,7 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenuBar, CdkMenuTrigger } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, input, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
 import { ClipboardService } from 'services';
@@ -34,6 +34,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 	@Input({ required: true }) control!: FormControl<string>;
 	@Input() name: string = '';
 	@Input() readonly = false;
+	rows = input<number>(10);
 
 	@Output() save: EventEmitter<string> = new EventEmitter();
 	@Output() saveClose: EventEmitter<string> = new EventEmitter();
@@ -47,9 +48,10 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	undoCache: UndoCache = inject(UNDO_CACHE);
 	recoveryManager: RecoveryManager = inject(RECOVERY_MANAGER);
-	private dialogService: Dialog = inject(Dialog);
-	private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
-	private recoverDialogRef: DialogRef<null, HTMLDivElement> | null = null;
+	showPreview = signal(false);
+	showRecover = signal(false);
+	// private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
+	// private recoverDialogRef: DialogRef<null, HTMLDivElement> | null = null;
 	private clipboardService: ClipboardService = inject(ClipboardService);
 
 	private subscriptions: Subscription = new Subscription();
@@ -126,7 +128,8 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	onPreviewOpen(): void {
 
-		this.previewDialogRef = this.dialogService.open(this.previewTemplate);
+		this.showPreview.set(true);
+		// this.previewDialogRef = this.dialogService.open(this.previewTemplate);
 
 	}
 
@@ -134,7 +137,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 		this.recoveryManager.init();
 		if (this.recoveryManager.recoverableContent())
-			this.recoverDialogRef = this.dialogService.open(this.recoverTemplate);
+			this.showRecover.set(true);
 		else
 			timer(0, 600)
 				.pipe(take(2))
@@ -149,15 +152,15 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	onPreviewClose(): void {
 
-		if (this.previewDialogRef)
-			this.previewDialogRef.close();
+		this.showPreview.set(false);
+		// if (this.previewDialogRef)
+		// 	this.previewDialogRef.close();
 
 	}
 
 	onRecoverClose(): void {
 
-		if (this.recoverDialogRef)
-			this.recoverDialogRef.close();
+		this.showRecover.set(false);
 
 	}
 
@@ -167,7 +170,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 		if (lsEntry) {
 
 			this.updateControl(lsEntry.content);
-			this.recoverDialogRef?.close();
+			this.onRecoverClose();
 
 		}
 

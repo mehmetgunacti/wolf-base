@@ -42,7 +42,6 @@ export class InputComponent implements ControlValueAccessor {
 	setDisabledState(isDisabled: boolean): void { this.disabled.set(isDisabled); }
 	////////////
 
-	// Method that handles the change event of the checkbox
 	onInput(value: string): void {
 
 		this.value.set(value);

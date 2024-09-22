@@ -5,15 +5,16 @@
 @import 'fieldset';
 @import 'footer-buttons';
 @import 'format';
+
+@import 'outline'; // <-- used by input-element
 @import 'input-element';
 @import 'logo';
-@import 'menu';
-@import 'outline';
+// @import 'menu';
+@import 'shadow';
 @import 'overlay';
 @import 'page';
 @import 'router-animation';
 @import 'shake';
 @import 'scrollable';
-@import 'shadow';
 @import 'toast-panel';
 @import 'view-element';

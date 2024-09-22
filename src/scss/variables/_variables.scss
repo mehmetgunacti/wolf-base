@@ -61,7 +61,9 @@ $toast-min-width		: 18.75rem;
 
 $z-index-splash-screen		: 9000;
 $z-index-ng-progress		: 8000;
-$z-index-angular-cdk		: 7000;
+$overlay-container-z-index	: 7000;
+$overlay-z-index			: 7000;
+$overlay-backdrop-z-index	: 7000;
 $z-index-header				: 6000;
 $z-index-nav				: 5000;
 $z-index-nav-overlay		: 4000;
@@ -139,6 +141,12 @@ $col-btn-warn-color					: --col-btn-warn-color;
 $col-btn-warn-color-hover			: --col-btn-warn-color-hover;
 $col-btn-warn-color-active			: --col-btn-warn-color-active;
 $col-btn-warn-border				: --col-btn-warn-border;
+
+$col-btn-ghost-text					: --col-btn-ghost-text;
+$col-btn-ghost-color				: --col-btn-ghost-color;
+$col-btn-ghost-color-hover			: --col-btn-ghost-color-hover;
+$col-btn-ghost-color-active			: --col-btn-ghost-color-active;
+$col-btn-ghost-border				: --col-btn-ghost-border;
 
 $col-btn-danger-text				: --col-btn-danger-text;
 $col-btn-danger-color				: --col-btn-danger-color;

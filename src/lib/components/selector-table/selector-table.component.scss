@@ -1,35 +1,36 @@
-// @import 'mixins';
+@import 'variables';
+@import 'helper';
 
-// :host {
+:host {
 
-// 	& > div:first-child {
+	& > div:first-child {
 
-// 		font-size		: var(--font-size-xs);
-// 		text-align		: center;
-// 		padding			: var(--gap-xxs) var(--gap-xs);
+		font-size		: $font-size-xs;
+		text-align		: center;
+		padding			: $gap-xxs $gap-xs;
 
-// 	}
-// 	[table-selectors] {
+	}
+	[table-selectors] {
 
-// 		display					: grid;
-// 		grid-template-columns	: repeat(7, 2rem);
-// 		grid-template-rows		: repeat(6, 2rem);
-// 		gap						: 4px;
+		@include mx-d-grid;
+		grid-template-columns	: repeat(7, 2rem);
+		grid-template-rows		: repeat(6, 2rem);
+		gap						: $gap-xs;
 
-// 		& > a {
+		& > a {
 
-// 			background-color: var(--col-bg-form-element);
+			background-color: fn-var($col-bg-form-element);
 
-// 			&:hover,
-// 			// &:focus
-// 			&.focus {
+			&:hover,
+			// &:focus
+			&.focus {
 
-// 				background-color: var(--col-accent);
+				background-color: fn-var($col-accent);
 
-// 			}
+			}
 
-// 		}
+		}
 
-// 	}
+	}
 
-// }
+}

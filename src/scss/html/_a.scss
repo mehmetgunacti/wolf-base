@@ -8,6 +8,6 @@ a {
 // a:focus,
 a:focus-visible {
 
-	@include mx-outline;
+	@include mx-outline-on-focus-visible;
 
 }

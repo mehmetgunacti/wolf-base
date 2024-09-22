@@ -1,11 +1,18 @@
-@mixin mx-outline {
+@mixin mx-outline($color: $col-outline) {
 
-	// &:active,
+	outline			: 2px solid #{fn-var($color)};
+	outline-offset	: -2px;
+	//outline			: 2px solid rgba(13,110,253,.25); // #{fn-var($color)};
+	// box-shadow		: 0 0 .25rem rgba(13,110,253,.25);
+	// box-shadow		: 0 0 4px #{fn-var($col-outline)};
+
+}
+
+@mixin mx-outline-on-focus-visible($color: $col-outline) {
+
 	&:focus-visible {
 
-		outline			: 2px solid #{fn-var($col-outline)};
-		outline-offset	: -2px;
-		// box-shadow		: 0 0 4px #{fn-var($col-outline)};
+		@include mx-outline($color);
 
 	}
 
@@ -13,6 +20,6 @@
 
 .outline {
 
-	@include mx-outline;
+	@include mx-outline-on-focus-visible;
 
 }

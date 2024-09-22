@@ -66,6 +66,12 @@
 	#{$col-btn-danger-color-active}		: fn-color-lighten($col-btn-danger-color, 25%);
 	#{$col-btn-danger-border}			: fn-color-darken($col-btn-danger-color, 10%);
 
+	#{$col-btn-ghost-text}				: fn-var($col-text);
+	#{$col-btn-ghost-color}				: transparent;
+	#{$col-btn-ghost-color-hover}		: fn-color-lighten($col-white, 10%, 0.1);
+	#{$col-btn-ghost-color-active}		: fn-color-lighten($col-white, 10%, 0.2);
+	#{$col-btn-ghost-border}			: transparent;
+
 	#{$col-btn-tag-text}				: fn-var($col-text);
 	#{$col-btn-tag-color}				: fn-var($col-accent);
 	#{$col-btn-tag-color-hover}			: fn-color-darken($col-btn-tag-color, 10%);

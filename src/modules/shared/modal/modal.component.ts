@@ -8,7 +8,8 @@ import { delayDestroyTrigger } from '@lib';
 	animations: [delayDestroyTrigger],
 	host: {
 		'[@delayDestroy]': '',
-		'class': 'd-contents'
+		'class': 'd-contents',
+		'(keydown)': 'onKeydownHandler($event)'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -21,14 +22,19 @@ export class ModalComponent implements OnInit {
 	ngOnInit(): void {
 
 		this.dialog().nativeElement.showModal();
-		console.log('ModalComponent ngOnInit');
 
 	}
 
 	ngOnDestroy(): void {
 
 		this.dialog().nativeElement.close();
-		console.log('ModalComponent ngOnDestroy');
+
+	}
+
+	onKeydownHandler(event: KeyboardEvent) {
+
+		if (event.key === 'Escape')
+			this.close.emit();
 
 	}
 

@@ -9,6 +9,7 @@ import { SelectorTableModule } from '../selector-table/selector-table.module';
 import { MarkdownEditorComponent } from './markdown-editor.component';
 import { MarkdownToHtmlPipe } from './markdown-to-html.pipe';
 import { MarkdownViewerComponent } from './markdown-viewer.component';
+import { ModalComponent } from 'modules/shared/modal/modal.component';
 
 @NgModule({
 
@@ -25,7 +26,8 @@ import { MarkdownViewerComponent } from './markdown-viewer.component';
 		SanitizeHtmlModule,
 		DialogModule,
 		OverlayContainerModule,
-		TimePastModule
+		TimePastModule,
+		ModalComponent
 	],
 	exports: [
 		MarkdownEditorComponent,

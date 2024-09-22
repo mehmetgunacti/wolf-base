@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'modules/shared/shared.module';
 import { SettingsRoutingModule } from './settings-routing.module';
 import * as fromConfig from './settings.config';
+import { MarkdownEditorComponent, MarkdownModule } from 'lib/components/markdown';
 
 @NgModule({
 	declarations: fromConfig.components,
@@ -11,7 +12,8 @@ import * as fromConfig from './settings.config';
 		CommonModule,
 		SettingsRoutingModule,
 		ReactiveFormsModule,
-		SharedModule
+		SharedModule,
+		MarkdownModule
 	],
 	providers: []
 })

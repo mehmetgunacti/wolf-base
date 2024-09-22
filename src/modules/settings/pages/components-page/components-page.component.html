@@ -49,6 +49,32 @@
 
 <fieldset>
 
+	<legend>Forms</legend>
+	<legend><button class="link sm" (click)="formsVisible.set(!formsVisible())"><span [class.rotated]="formsVisible()" class="material-symbols-outlined">add</span></button></legend>
+
+	<div wrapper [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
+
+		<br>
+		<form [formGroup]="form">
+			<w-input label="Text" formControlName="text"/>
+			<w-input-tag
+					formControlName="tags"
+					label="Tags"
+					class="input-element"
+					(tagInput)="onTagInput($event)"
+					[suggestions]="tagSuggestions()"/>
+			<w-textarea formControlName="area" label="Quote" [rows]="3" />
+			<w-select formControlName="status" label="Status" [nodes]="PROJECT_STATUS"/>
+			<w-markdown-editor [control]="editor()" name="Editor"/>
+		</form>
+		<br>
+
+	</div>
+
+</fieldset>
+
+<fieldset>
+
 	<legend>Buttons</legend>
 	<legend><button class="link sm" (click)="buttonsVisible.set(!buttonsVisible())"><span [class.rotated]="buttonsVisible()" class="material-symbols-outlined">add</span></button></legend>
 

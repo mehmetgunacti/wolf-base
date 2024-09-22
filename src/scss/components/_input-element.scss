@@ -1,7 +1,7 @@
 @mixin mx-input {
 
-	padding				: var(--gap);
-	color				: var(--col-text);
+	padding				: $gap;
+	color				: fn-var($col-text);
 	border				: 0;
 	background-color	: transparent;
 	outline				: 0;
@@ -12,41 +12,35 @@
 
 @mixin mx-input-label {
 
-	// @include mx-d-flex-ai-center;
+	@include mx-d-flex-ai-center;
 	position			: absolute;
-	top					: 50%;
+	top					: var(--input-label-top, 50%);
 	left				: 5px;
 	transform			: translateY(-50%);
 	pointer-events		: none;
-	border-radius		: var(--border-radius-xs);
+	border-radius		: $border-radius-xs;
 	padding				: 1px 5px;
-	font-size			: var(--font-size-sm);
-	transition			: all var(--transition), background-color var(--transition), border-color var(--transition);
-
-	& span {
-
-		font-size		: inherit;
-
-	}
+	font-size			: $font-size-sm;
+	transition			: all $transition;
 
 }
 
 @mixin mx-input-label-up {
 
 	top					: -1px;
-	font-size			: var(--font-size-xxs);
-	background-color	: color-mix(in hsl, var(--col-bg-form-element), black 10%);
+	font-size			: $font-size-xs;
+	background-color	: fn-color-darken($col-bg-form-element, 10%);
 	border				: none;
 
 }
 
 @mixin mx-input-element-border {
 
-	border-radius			: var(--border-radius-sm);
+	border-radius			: $border-radius-sm;
 	border-width			: 1px;
 	border-style			: solid;
 
-	border-color			: color-mix(in hsl, var(--col-bg-form-element), black 10%);
+	border-color			: fn-color-darken($col-bg-form-element, 10%);
 
 }
 
@@ -55,8 +49,8 @@
 	position				: relative;
 
 	@include mx-input-element-border;
-	background-color		: var(--col-bg-form-element);
-	transition				: background-color var(--transition), border-color var(--transition);
+	background-color		: fn-var($col-bg-form-element);
+	transition				: background-color $transition, border-color $transition;
 
 	& > input,
 	& > select,
@@ -80,21 +74,29 @@
 	&[required] > label::before {
 
 		content			: "*";
-		// color			: fn-hsl(focus);
+		color			: fn-var($col-focus);
 		margin-right	: 2px;
 
 	}
 
-	// &:has(:focus-visible) {
+	// &:focus-within {
 
-	// 	// @include mx-outline;
-	// 	& > label {
-
-	// 		@include mx-input-label-up;
-
-	// 	}
+	// 	@include mx-outline-on-focus-visible;
+	// 	// outline			: 2px solid #{fn-var($col-outline)};
+	// 	// outline-offset	: -2px;
 
 	// }
+
+	&:has(:focus-visible) {
+
+		@include mx-outline;
+		& > label {
+
+			@include mx-input-label-up;
+
+		}
+
+	}
 
 	/*
 	* ng-valid    <-> ng-invalid
@@ -103,13 +105,13 @@
 	*/
 	&.ng-dirty.ng-invalid {
 
-		// @include mx-outline((color: "error"));
+		@include mx-outline($col-error);
 
 	}
 
 	&.ng-dirty.ng-valid {
 
-		// @include mx-outline((color: "success"));
+		@include mx-outline($col-success);
 
 	}
 

@@ -97,7 +97,7 @@ $_btn-size-values: (
 
 	@include mx-button-sizes($_btn-size-values, default, $_prefix);
 
-	@include mx-outline;
+	@include mx-outline-on-focus-visible;
 	@include mx-d-flex-center($display: inline-flex);
 
 	text-align				: center;
@@ -126,6 +126,18 @@ $_btn-size-values: (
 	&:active {
 
 		@include mx-print-css-vars(("background-color": fn-var($col-btn-default-color-active)), $_prefix);
+
+	}
+
+	&.w100 {
+
+		width	: 100%;
+
+	}
+
+	&.left {
+
+		justify-content: start;
 
 	}
 
@@ -221,6 +233,28 @@ $_btn-size-values: (
 
 	}
 
+	&.ghost {
+
+		@include mx-print-css-vars((
+			"text-color"		: fn-var($col-btn-ghost-text),
+			"background-color"	: fn-var($col-btn-ghost-color),
+			"border-color"		: fn-var($col-btn-ghost-border)
+		), $_prefix);
+
+		&:hover {
+
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-ghost-color-hover)), $_prefix);
+
+		}
+
+		&:active {
+
+			@include mx-print-css-vars(("background-color": fn-var($col-btn-ghost-color-active)), $_prefix);
+
+		}
+
+	}
+
 	&.link {
 
 		@include mx-print-css-vars((
@@ -292,6 +326,12 @@ $_btn-size-values: (
 		&:active {
 
 			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color-active)), $_prefix);
+
+		}
+
+		&.squared {
+
+			border-radius: $border-radius-lg;
 
 		}
 

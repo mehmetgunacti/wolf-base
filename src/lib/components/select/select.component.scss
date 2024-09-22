@@ -1,15 +1,14 @@
-// @import 'helper';
-// @import 'variables';
-// @import 'components';
-// @import 'mixins';
+@import 'helper';
+@import 'variables';
+@import 'components';
 
-// :host {
+:host {
 
-// 	& > select > option {
+	& > select > option {
 
-// 		background-color	: var(--col-bg-form-element);
-// 		@include mx-input-element-border;
+		background-color	: fn-var($col-bg-form-element);
+		@include mx-input-element-border;
 
-// 	}
+	}
 
-// }
+}

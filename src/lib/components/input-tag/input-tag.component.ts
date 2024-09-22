@@ -18,7 +18,7 @@ import { v4 as uuidv4 } from 'uuid';
 	host: {
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()',
-		'class': 'input-element d-inline-flex'
+		'class': 'input-element'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

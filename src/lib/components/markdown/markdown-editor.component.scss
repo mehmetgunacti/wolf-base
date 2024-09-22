@@ -1,130 +1,195 @@
-// @import 'helper';
-// // @import 'variables';
-// @import 'components';
+@import 'helper';
+// @import 'variables';
+@import 'components';
 
-// // $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 & buttons_2) side by side
+// $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 & buttons_2) side by side
 
-// .icon-container {
+.icon-container {
 
-// 	@include mx-d-flex((jc: center));
-// 	@include mx-gap-xxs;
+	@include mx-d-flex-jc-center;
+	gap	: $gap-xxs;
 
-// }
+}
 
-// .quote-menu {
+.quote-menu {
 
-// 	& > button > span:first-child {
+	@include mx-box;
+	@include mx-scrollable(26rem);
+	& > div {
 
-// 		width: 15px;
-// 		height: var(--gap-xxl);
-// 		border-left: 6px solid;
+		@include mx-d-flex-column;
+		gap	:  $gap-sm;
 
-// 		&.default {
-// 			border-left-color: fn-hsl(success);
-// 		}
+		& > button {
 
-// 		&.primary {
-// 			border-left-color: fn-hsl(primary);
-// 		}
+			text-align			: start;
+			justify-content: start;
 
-// 		&.success {
-// 			border-left-color: fn-hsl(success);
-// 		}
+			& > span:first-child {
 
-// 		&.info {
-// 			border-left-color: fn-hsl(info);
-// 		}
+				width		: 15px;
+				height		: $gap-xxl;
+				border-left	: $gap-sm solid;
 
-// 		&.warn {
-// 			border-left-color: fn-hsl(warn);
-// 		}
 
-// 		&.error {
-// 			border-left-color: fn-hsl(error);
-// 		}
+				&.default {
+					border-left-color: fn-var($col-success);
+				}
 
-// 	}
+				&.primary {
+					border-left-color: fn-var($col-primary);
+				}
 
-// }
+				&.success {
+					border-left-color: fn-var($col-success);
+				}
 
-// .code-menu {
+				&.info {
+					border-left-color: fn-var($col-info);
+				}
 
-// 	fieldset {
+				&.warn {
+					border-left-color: fn-var($col-warn);
+				}
 
-// 		@include mx-d-flex((dir: column, ai: start));
-// 		& > legend {
+				&.error {
+					border-left-color: fn-var($col-error);
+				}
 
-// 			color		: var(--col-primary);
-// 			font-weight	: bold;
-// 			font-size	: var(--font-size-sm);
+			}
 
-// 		}
+		}
 
-// 	}
+	}
 
-// }
+}
 
-// :host {
+.format-menu {
 
-// 	--display-element	: none;
-// 	min-height	: 100%;
+	@include mx-box;
+	@include mx-scrollable;
+	& > div {
 
-// 	& > [buttons] {
+		@include mx-d-flex-column;
+		gap	:  $gap-sm;
 
-// 		overflow-x	: auto;
-// 		// @include mx-webkit-scrollbar;
+	}
 
-// 		& button[aria-expanded=true] {
+}
 
-// 			background-color	: fn-hsl(bg-3);
-// 			transition			: background-color 0s;
+.table-menu {
 
-// 		}
+	@include mx-box;
+	@include mx-d-flex-column;
+	gap	:  $gap-sm;
 
-// 	}
+}
 
-// 	& > [area] {
+.code-menu {
 
-// 		& > textarea {
+	@include mx-box;
+	@include mx-scrollable;
+	& > div {
 
-// 			@include mx-input;
-// 			@include mx-input-element-border;
-// 			background-color	: var(--col-bg-form-element);
+		@include mx-d-flex-column;
+		gap	:  $gap-sm;
 
-// 			tab-size			: 4;
-// 			white-space			: pre;
-// 			overflow			: auto;
-// 			// @include mx-webkit-scrollbar;
+		& > fieldset {
 
-// 			&:valid + label,
-// 			&:focus + label {
+			@include mx-d-flex-column($align-items: start);
+			border			: 0;
+			& > legend {
 
-// 				@include mx-input-label-up;
+				padding		: $gap-sm $gap-xs;
+				color		: fn-var($col-accent);
+				font-weight	: bold;
+				font-size	: $font-size-sm;
 
-// 			}
+			}
 
-// 		}
+		}
 
-// 		& > label {
+	}
 
-// 			@include mx-input-label;
-// 			top		: 2rem;
+}
 
-// 			&.up {
+:host {
 
-// 				@include mx-input-label-up;
+	--display-element	: none;
+	min-height	: 100%;
 
-// 			}
+	& > [buttons] {
 
-// 			&.right {
+		@include mx-d-flex-ai-center($flex-wrap: wrap);
+		padding: $gap-xxs;
+		overflow-x	: auto;
+		// @include mx-webkit-scrollbar;
 
-// 				right	: 5px;
-// 				left	: unset;
+		& button[aria-expanded=true] {
 
-// 			}
+			background-color	: fn-hsl(bg-3);
+			transition			: background-color 0s;
 
-// 		}
+		}
 
-// 	}
+	}
 
-// }
+
+	& > [area] {
+
+		position		: relative;
+		border-radius	: $border-radius;
+
+		&:has(:focus-visible) {
+
+			@include mx-outline;
+
+		}
+		& > textarea {
+
+			@include mx-input;
+			@include mx-input-element-border;
+
+			padding-top: $gap;
+			background-color	: fn-var($col-bg-form-element);
+
+			tab-size			: 4;
+			white-space			: pre;
+			overflow			: auto;
+			cursor: auto;
+			@include mx-webkit-scrollbar;
+
+			&:valid + label,
+			&:focus + label {
+
+				@include mx-input-label-up;
+
+			}
+
+		}
+
+		& > label {
+
+			--input-label-top : 2rem;
+			@include mx-input-label;
+
+			&.up {
+
+				@include mx-input-label-up;
+
+			}
+
+			&.right {
+
+				@include mx-d-flex;
+				gap		: $gap-sm;
+				right	: 5px;
+				left	: unset;
+
+			}
+
+		}
+
+	}
+
+}

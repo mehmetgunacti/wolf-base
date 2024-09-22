@@ -1,22 +1,26 @@
-// @import 'mixins';
-// @import 'components';
+@import 'variables';
+@import 'components';
 
-// :host {
+:host {
 
-// 	& > [tags] {
+	& > [tags] {
 
-// 		&:empty {
+		@include mx-d-inline-flex($flex-wrap: wrap);
+		gap		: $gap-xxs;
+		padding	: $gap-sm;
 
-// 			padding				: 0;
+		&:empty {
 
-// 		}
+			padding				: 0;
 
-// 	}
+		}
 
-// 	& > input {
+	}
 
-// 		min-width	: 10rem;
+	& > input {
 
-// 	}
+		min-width	: 10rem;
 
-// }
+	}
+
+}

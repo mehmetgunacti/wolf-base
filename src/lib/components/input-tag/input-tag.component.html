@@ -1,5 +1,5 @@
 <!-- TAGS LIST -->
-<div tags class="d-inline-flex wrap p-sm gap-xxs">
+<div tags>
 
 	@for (t of value(); track $index) {
 
@@ -7,7 +7,7 @@
 			type="button"
 			title="Click to remove"
 			(click)="removeTag(t)"
-			class="tag small">
+			class="tag sm">
 			{{t}} <span class="material-symbols-outlined">close</span>
 		</button>
 
@@ -17,7 +17,6 @@
 
 <!-- INPUT -->
 <input
-	class="flex-1"
 	#inputElement
 	type="text"
 	[attr.list]="UUID() + '_suggestions'"

@@ -3,13 +3,13 @@
 
 @mixin mx-v-divider {
 
-	display		: block;
-	border-left	: 1px solid var(--col-bg-form-element);
+	@include mx-d-block;
+	border-left	: 1px solid fn-var($col-bg-form-element);
     width		: 0;
-    margin		: var(--gap-sm) var(--gap-xxs);
+    margin		: $gap-sm $gap-xxs;
 	align-self	: stretch;
 
-	transition	: border-left var(--transition);
+	transition	: border-left $transition;
 
 }
 
@@ -35,7 +35,7 @@
 	&::after {
 
 		content		: '';
-		display		: block;
+		@include mx-d-block;
 		height		: 0.09em;
 		min-width	: 33%;
 
