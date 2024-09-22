@@ -96,8 +96,6 @@ $_btn-size-values: (
 	), $_prefix);
 
 	@include mx-button-sizes($_btn-size-values, default, $_prefix);
-
-	@include mx-outline-on-focus-visible;
 	@include mx-d-flex-center($display: inline-flex);
 
 	text-align				: center;
@@ -126,6 +124,12 @@ $_btn-size-values: (
 	&:active {
 
 		@include mx-print-css-vars(("background-color": fn-var($col-btn-default-color-active)), $_prefix);
+
+	}
+
+	&:focus-visible {
+
+		@include mx-outline;
 
 	}
 

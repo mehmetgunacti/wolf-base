@@ -2,24 +2,5 @@
 
 	outline			: 2px solid #{fn-var($color)};
 	outline-offset	: -2px;
-	//outline			: 2px solid rgba(13,110,253,.25); // #{fn-var($color)};
-	// box-shadow		: 0 0 .25rem rgba(13,110,253,.25);
-	// box-shadow		: 0 0 4px #{fn-var($col-outline)};
-
-}
-
-@mixin mx-outline-on-focus-visible($color: $col-outline) {
-
-	&:focus-visible {
-
-		@include mx-outline($color);
-
-	}
-
-}
-
-.outline {
-
-	@include mx-outline-on-focus-visible;
 
 }

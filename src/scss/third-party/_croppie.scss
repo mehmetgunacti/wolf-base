@@ -3,7 +3,11 @@
 	border-radius	: var(--border-radius-sm);
 	padding			: var(--gap-sm);
 
-	@include mx-outline-on-focus-visible;
+	&:focus-visible {
+
+		@include mx-outline;
+
+	}
 
 }
 
@@ -14,7 +18,7 @@
 	&:focus-visible,
 	&:focus-within {
 
-		@include mx-outline-on-focus-visible;
+		@include mx-outline;
 
 	}
 
