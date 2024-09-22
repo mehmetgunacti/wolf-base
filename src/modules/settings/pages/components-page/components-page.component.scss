@@ -19,6 +19,7 @@
 			gap		: $gap-sm;
 			//outline: 1px solid orange;
 			// width: clamp($breakpoint-sm, 70%, 100vw);
+			overflow: hidden;
 
 			width	: min(100%, #{$breakpoint-sm});
 

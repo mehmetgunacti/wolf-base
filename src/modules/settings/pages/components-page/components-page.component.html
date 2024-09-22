@@ -1,9 +1,58 @@
 <fieldset>
 
-	<legend>Buttons</legend>
-	<legend><button class="link sm"><span class="material-symbols-outlined">add</span></button></legend>
+	<legend>Alerts</legend>
+	<legend><button class="link sm" (click)="alertsVisible.set(!alertsVisible())"><span [class.rotated]="alertsVisible()" class="material-symbols-outlined">add</span></button></legend>
 
-	<div wrapper>
+	<div wrapper [@slideUpDown]="alertsVisible() ? 'opened' : 'closed'">
+
+		<w-toast [conf]="{ severity: 'success', summary: 'Update available', detail: 'Press button to start' }"/>
+		<w-toast [conf]="{ severity: 'info' }">
+
+			<div update_alert>
+
+				<span>Update available</span>
+				<button class="link" data-after="Update">
+					<span class="material-symbols-outlined">update</span>
+				</button>
+
+			</div>
+
+		</w-toast>
+		<w-toast [conf]="{ severity: 'warn' }">
+
+			<div update_alert>
+
+				<span>Update available</span>
+				<button class="link" data-after="Update">
+					<span class="material-symbols-outlined">update</span>
+				</button>
+
+			</div>
+
+		</w-toast>
+		<w-toast [conf]="{ severity: 'error' }">
+
+			<div update_alert>
+
+				<span>Update available</span>
+				<button class="link" data-after="Update">
+					<span class="material-symbols-outlined">update</span>
+				</button>
+
+			</div>
+
+		</w-toast>
+
+	</div>
+
+</fieldset>
+
+<fieldset>
+
+	<legend>Buttons</legend>
+	<legend><button class="link sm" (click)="buttonsVisible.set(!buttonsVisible())"><span [class.rotated]="buttonsVisible()" class="material-symbols-outlined">add</span></button></legend>
+
+	<div wrapper [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
 
 		<!-- TYPES -->
 		<div class="h-divider">Button Types</div>
@@ -24,7 +73,7 @@
 			<td><button class="" 		data-after="Disabled" disabled><span class="material-symbols-outlined">update</span></button></td>
 			<td><button class="warn"	data-after="Warn"><span class="material-symbols-outlined">update</span></button></td>
 			<td><button class="danger"	data-after="Danger"><span class="material-symbols-outlined">update</span></button></td>
-			<td><button class=""		data-after="Default"><span class="material-symbols-outlined">update</span></button></td>
+			<td><button class=""		data-after="Default"><span class="material-symbols-outlined">save</span></button></td>
 			<td><button class="link"	data-after="Link"><span class="material-symbols-outlined">update</span></button></td>
 
 		</div>
@@ -69,41 +118,3 @@
 	</div>
 
 </fieldset>
-
-<w-toast [conf]="{ severity: 'success', summary: 'Update available', detail: 'Press button to start' }"/>
-<w-toast [conf]="{ severity: 'info' }">
-
-	<div update_alert>
-
-		<span>Update available</span>
-		<button class="link">
-			<span class="material-symbols-outlined">update</span> Update
-		</button>
-
-	</div>
-
-</w-toast>
-<w-toast [conf]="{ severity: 'warn' }">
-
-	<div update_alert>
-
-		<span>Update available</span>
-		<button class="link">
-			<span class="material-symbols-outlined">update</span> Update
-		</button>
-
-	</div>
-
-</w-toast>
-<w-toast [conf]="{ severity: 'error' }">
-
-	<div update_alert>
-
-		<span>Update available</span>
-		<button class="link">
-			<span class="material-symbols-outlined">update</span> Update
-		</button>
-
-	</div>
-
-</w-toast>

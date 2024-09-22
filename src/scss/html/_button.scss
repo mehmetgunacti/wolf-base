@@ -27,33 +27,29 @@ $_btn-size-values: (
 	xl: (
 		"--height"			: $widget-height-xl,
 		"font-size"			: $font-size-xl,
-		"padding-inline"	: 1.9rem,
 		"border-radius"		: $border-radius-xl
 	),
 	lg: (
 		"--height"			: $widget-height-lg,
 		"font-size"			: $font-size-lg,
-		"padding-inline"	: 1.8rem,
 		"border-radius"		: $border-radius-lg
 	),
 	default: (
 		"--height"			: $widget-height,
 		"height"			: --height,
 		"line-height"		: --height, // Match the height for vertical centering
-		"padding-inline"	: 12px,
+		"padding-inline"	: 1em,
 		"font-size"			: $font-size,
 		"border-radius"		: $border-radius
 	),
 	sm: (
 		"--height"			: $widget-height-sm,
 		"font-size"			: $font-size-sm,
-		"padding-inline"	: 1.1rem,
 		"border-radius"		: $border-radius-sm
 	),
 	xs: (
 		"--height"			: $widget-height-xs,
 		"font-size"			: $font-size-xs,
-		"padding-inline"	: 0.5rem,
 		"border-radius"		: $border-radius-xs
 	),
 	glyph: (
@@ -135,7 +131,7 @@ $_btn-size-values: (
 
 	&[data-before] {
 
-		padding-right: 6px;
+		padding-right: 0.7em;
 		&::before {
 
 			content: attr(data-before);
@@ -148,12 +144,13 @@ $_btn-size-values: (
 
 	&[data-after] {
 
-		padding-left: 9px;
+		padding-left: 0.7em;
 		&::after {
 
 			content: attr(data-after);
 			@include mx-d-inline-block;
 			font-size		: inherit;
+			padding-left	: 0.2em;
 
 		}
 
