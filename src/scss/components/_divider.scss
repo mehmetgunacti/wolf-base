@@ -71,3 +71,44 @@
 	@include mx-h-divider;
 
 }
+
+
+@mixin mx-text-divider {
+
+	--text-divider-gap:0.5rem;
+	display: flex;
+	align-items: center;
+	font-size: 0.9375rem;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+
+	&:empty { --text-divider-gap:0rem; }
+
+	&::before, &::after {
+
+		content: '';
+		height: 1px;
+		background-color: silver;
+		flex-grow: 1;
+
+	}
+
+	&::before {
+
+		margin-right: var(--text-divider-gap);
+
+	}
+
+	&::after {
+
+		margin-left: var(--text-divider-gap);
+
+	}
+
+}
+
+.text-divider {
+
+	@include mx-text-divider;
+
+}
