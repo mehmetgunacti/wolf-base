@@ -22,7 +22,7 @@
 
 		background-color: fn-var($col-bg-header);
 		@include mx-transition(background-color);
-		@include mx-shadow;
+		@include mx-shadow($shadow-header);
 
 	}
 
@@ -64,7 +64,7 @@
 
 		background-color	: fn-var($col-bg-nav);
 		@include mx-transition(height width margin-left background-color);
-		@include mx-shadow;
+		@include mx-shadow($shadow-nav);
 
 	}
 

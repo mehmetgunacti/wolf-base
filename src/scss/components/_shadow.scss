@@ -1,6 +1,5 @@
-@mixin mx-shadow($color: $col-shadow) {
+@mixin mx-shadow($value: $shadow) {
 
-	box-shadow: fn-color-set-alpha($color, 0.5) 5px 6px 6px -2px,
-				fn-color-set-alpha($color, 0.5) 8px 8px 18px -2px;
+	box-shadow: fn-var($value);
 
 }

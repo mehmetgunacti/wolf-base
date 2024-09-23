@@ -71,7 +71,11 @@ $z-index-main				: 3000;
 $z-index-bookmark-overlay	: 2000;
 $z-index-croppie-close-btn	: 1000;
 
-// CSS VARIABLES
+//
+// CSS VARIABLES:
+//
+
+// SIZES
 $font-size-ratio			: --font-size-ratio;
 
 $main-current-height		: --main-current-height;
@@ -157,3 +161,8 @@ $col-btn-danger-color				: --col-btn-danger-color;
 $col-btn-danger-color-hover			: --col-btn-danger-color-hover;
 $col-btn-danger-color-active		: --col-btn-danger-color-active;
 $col-btn-danger-border				: --col-btn-danger-border;
+
+// SHADOWS
+$shadow								: --shadow;
+$shadow-header						: --shadow-header;
+$shadow-nav							: --shadow-nav;

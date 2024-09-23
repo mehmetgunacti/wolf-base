@@ -15,8 +15,12 @@
 	#{$col-bg-overlay}			: fn-color-set-alpha($col-black, 0.75);
 	#{$col-shadow}				: fn-var($col-bg-header);
 
+	#{$shadow}					: fn-color-set-alpha($col-shadow, 0.5) 5px 6px 6px -2px, fn-color-set-alpha($col-shadow, 0.5) 8px 8px 18px -2px;
+	#{$shadow-header}			: fn-color-set-alpha($col-black, 0.4) 1px 4px 4px,fn-color-set-alpha($col-black, 0.3) 5px 4px 2px -2px,fn-color-set-alpha($col-black, 0.2) 0 -1px 1px inset;
+	#{$shadow-nav}				: fn-color-set-alpha($col-black, 0.5) 5px -2px 6px -2px, fn-color-set-alpha($col-black, 0.5) 8px -2px 18px -2px;
+
 	#{$col-text}				: hsl(210deg 15% 92%);
-	#{$col-text-secondary}		: hsl(210deg 11% 71%);
+	#{$col-text-secondary}		: hsl(210, 87%, 15%);
 
 	#{$col-accent}				: hsl(200deg 85% 34%);
 	#{$col-focus}				: hsl(27deg 99% 54%);
