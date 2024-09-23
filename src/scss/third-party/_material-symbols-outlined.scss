@@ -2,7 +2,7 @@
 
 	font-size		: 1.4em;
 	color			: inherit;
-	@include mx-transition(background-color transform);
+	@include mx-transition-short(background-color transform font-size);
 
 	&.filled {
 

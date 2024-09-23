@@ -57,17 +57,17 @@ export class CoreSidebarEffects {
 
 	);
 
-	reactToViewportSize$ = createEffect(
+	// reactToViewportSize$ = createEffect(
 
-		() => this.store.select(selCore_isBigScreen).pipe(
+	// 	() => this.store.select(selCore_isBigScreen).pipe(
 
-			withLatestFrom(this.store.select(selCore_sidebarState)),
-			filter(([isBigScreen, sidebarState]) => !isBigScreen && sidebarState === SidebarState.HALF),
-			map(() => setSidebarState({ sidebarState: SidebarState.HIDDEN }))
+	// 		withLatestFrom(this.store.select(selCore_sidebarState)),
+	// 		filter(([isBigScreen, sidebarState]) => !isBigScreen && sidebarState === SidebarState.HALF),
+	// 		map(() => setSidebarState({ sidebarState: SidebarState.HIDDEN }))
 
-		)
+	// 	)
 
-	);
+	// );
 
 	onPageLoad$ = createEffect(
 

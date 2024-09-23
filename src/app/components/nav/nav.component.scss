@@ -3,7 +3,9 @@
 @import 'variables';
 @import 'helper';
 
-$space	: $gap;
+$_nav-menu-gap				: $gap;
+$_nav-menu-row-height		: $nav-half-width - 2 * $_nav-menu-gap;
+$_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 :host {
 
@@ -13,17 +15,21 @@ $space	: $gap;
 	div[nav_menu] {
 
 		@include mx-d-grid;
-		grid-auto-rows	: ($nav-half-width - 2 * $space);
-		gap				: $space;
-		padding			: $space;
+		grid-auto-rows	: $_nav-menu-row-height;
+		gap				: $_nav-menu-gap;
+		padding			: $_nav-menu-gap;
 
 		& > a {
 
+			position: relative;
 			@include mx-d-grid;
-			grid-template-columns	: ($nav-half-width - 2 * $space) 1fr;
+			grid-template-columns	: $_nav-menu-1st-col-width;
 
 			border-radius			: $border-radius-lg;
 			text-decoration			: none;
+			overflow				: hidden;
+			outline		: 1px solid orange;
+
 
 			& > [nav_item_left] {
 
@@ -32,23 +38,32 @@ $space	: $gap;
 			}
 			& > [nav_item_right] {
 
+				position: absolute;
 				@include mx-d-flex-ai-center;
-				padding		: $gap;
+				padding		: $_nav-menu-gap;
+
+				z-index		: $z-index-nav + 100;
+
+				inset		: 0;
+				left		: $_nav-menu-1st-col-width;
+				// height		: $_nav-menu-row-height;
+				// right		: 0;
+				// outline		: 1px solid;
 
 				@include mx-md {
 
-					visibility	: hidden;
-					width		: 0;
-					padding		: 0;
-					opacity		: 0;
-					@include mx-transition(width opacity);
+					// visibility	: hidden;
+					// width		: 0;
+					// padding		: 0;
+					// opacity		: 0;
+					// @include mx-transition(width opacity);
 
 					@container (min-width: #{$nav-full-width - 1}) {
 
 						@include mx-d-flex-ai-center;
-						visibility	: visible;
-						width		: initial;
-						opacity		: 1;
+						// visibility	: visible;
+						// width		: initial;
+						// opacity		: 1;
 
 					}
 

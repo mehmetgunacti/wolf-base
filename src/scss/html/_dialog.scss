@@ -48,7 +48,7 @@ dialog {
 		transition-property	: overlay display opacity;
 		transition-duration	: var(--transitionBackdrop);
 		transition-behavior	: allow-discrete;
-		background-color	: var(--col-bg-overlay);
+		background-color	: fn-var($col-bg-overlay);
 
 	}
 

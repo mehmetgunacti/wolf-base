@@ -1,41 +1,41 @@
-// @import 'variables';
-// @import 'mixins';
+@import 'variables';
+@import 'helper';
 
-// // should be the same as <dialog>::backdrop
-// :host {
+:host {
 
-// 	position			: fixed;
-// 	display				: block;
-// 	top					: 0;
-// 	left				: 0;
-// 	right				: 0;
-// 	height				: 100dvh;
+	position			: fixed;
+	display				: block;
+	top					: 0;
+	left				: 0;
+	right				: 0;
+	height				: 100dvh;
 
-// 	background-color	: var(--col-bg-overlay);
-// 	z-index				: var(--z-index-nav-overlay);
+	background-color	: fn-var($col-bg-overlay);
+	z-index				: $z-index-nav-overlay;
 
-// 	opacity				: 0;
-// 	visibility			: hidden;
-// 	@include mx-transition(height opacity visibility);
+	opacity				: 0;
+	visibility			: hidden;
+	@include mx-transition(height opacity visibility);
 
-// 	@include bigScreen() {
+	@include bigScreen() {
 
-// 		display			: none;
+		display			: none;
 
-// 	}
+	}
 
-// }
+	body[data-sidebar="#{$sidebar-full}"] & {
 
-// :host-context(.sidebar-full) {
+		opacity				: 1;
+		visibility			: visible;
 
-// 	opacity				: 1;
-// 	visibility			: visible;
+		@include bigScreen() {
 
-// 	@include bigScreen() {
+			opacity			: 0;
+			visibility		: hidden;
 
-// 		opacity			: 0;
-// 		visibility		: hidden;
+		}
 
-// 	}
+	}
 
-// }
+}
+
