@@ -41,8 +41,8 @@ body {
 		@include bigScreen {
 
 			// set <nav>: half width on bigscreen (md)
-			@include mx-set-var($nav-current-width, $nav-full-width);
-			@include mx-set-var($nav-current-margin-left, -$nav-full-width); // 1rem = shadow
+			@include mx-set-var($nav-current-width, $nav-half-width);
+			@include mx-set-var($nav-current-margin-left, -$nav-full-width);
 
 		}
 

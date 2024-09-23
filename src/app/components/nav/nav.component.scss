@@ -3,21 +3,27 @@
 @import 'variables';
 @import 'helper';
 
+$space	: $gap;
+
 :host {
 
 	@include mx-d-flex-column;
+	container-type: inline-size;
 
 	div[nav_menu] {
 
-		@include mx-d-flex-column;
+		@include mx-d-grid;
+		grid-auto-rows	: ($nav-half-width - 2 * $space);
+		gap				: $space;
+		padding			: $space;
 
 		& > a {
 
-			@include mx-d-flex;
-			margin			: $gap;
-			gap				: $gap;
-			border-radius	: $border-radius;
-			text-decoration	: none;
+			@include mx-d-grid;
+			grid-template-columns	: ($nav-half-width - 2 * $space) 1fr;
+
+			border-radius			: $border-radius-lg;
+			text-decoration			: none;
 
 			& > [nav_item_left] {
 
@@ -27,10 +33,36 @@
 			& > [nav_item_right] {
 
 				@include mx-d-flex-ai-center;
+				padding		: $gap;
 
-				body[data-sidebar="#{$sidebar-half}"] & {
+				@include mx-md {
 
-					display	: none;
+					visibility	: hidden;
+					width		: 0;
+					padding		: 0;
+					opacity		: 0;
+					@include mx-transition(width opacity);
+
+					@container (min-width: #{$nav-full-width - 1}) {
+
+						@include mx-d-flex-ai-center;
+						visibility	: visible;
+						width		: initial;
+						opacity		: 1;
+
+					}
+
+				}
+
+			}
+
+			&:hover {
+
+				background-color	: fn-color-lighten($col-white, 10%, 0.1);
+
+				& > [nav_item_right] {
+
+					text-decoration	: underline;
 
 				}
 
