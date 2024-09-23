@@ -49,12 +49,13 @@
 		position	: fixed;
 
 		padding		: 0;
+		padding-top	: $header-height;
 		margin		: 0;
 		margin-left	: fn-var($nav-current-margin-left);
 
 		z-index		: $z-index-nav;
 
-		top			: $header-height;
+		top			: 0;
 		left		: 0;
 
 		height		: fn-var($nav-current-height);
@@ -64,7 +65,7 @@
 
 		background-color	: fn-var($col-bg-nav);
 		@include mx-transition(height width margin-left background-color box-shadow);
-		@include mx-shadow($shadow-nav);
+		@include mx-shadow($shadow);
 
 		body[data-sidebar="#{$sidebar-hidden}"] & {
 
