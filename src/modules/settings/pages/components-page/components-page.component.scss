@@ -11,41 +11,19 @@
 
 		@include mx-fieldset;
 		@include mx-d-flex-column($align-items: center);
-		container-type: inline-size;
 
 		[wrapper] {
 
 			@include mx-d-flex-column;
 			gap		: $gap-sm;
-			//outline: 1px solid orange;
-			// width: clamp($breakpoint-sm, 70%, 100vw);
 			overflow: hidden;
 
-			width	: min(100%, #{$breakpoint-sm});
-
-			// @container (min-width: #{$breakpoint-md}) {
-
-			// 	width		: #{$breakpoint-md};
-
-			// }
-
-			// @include mx-bigScreen {
-
-
-
-			// }
+			width	: min(100%, #{$breakpoint-lg});
 
 			[container] {
 
 				@include mx-d-flex-ai-e-jc-c($flex-wrap: wrap);
 				gap		: $gap-sm;
-
-				// @container (min-width: #{$breakpoint-md}) {
-
-				// 	width		: #{$breakpoint-md};
-				// 	justify-content	: start;
-
-				// }
 
 			}
 
@@ -58,28 +36,6 @@
 				gap						: $gap-xs;
 				width					: 25rem;
 				align-self				: center;
-
-			}
-
-		}
-
-	}
-
-	[box] {
-
-		@include mx-box;
-		@include mx-shadow;
-
-		@include mx-d-flex-jc-center;
-
-		[wrapper] {
-
-			@include mx-d-flex-column((justify-content: center));
-			gap		: $gap-sm;
-
-			[container] {
-
-				gap		: $gap-sm;
 
 			}
 
