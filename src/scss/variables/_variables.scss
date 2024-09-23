@@ -40,7 +40,7 @@ $border-radius-xs 		: 0.4rem;
 $border-radius-xxs 		: 0.3rem;
 $border-radius-round	: 100px;
 
-$transition-fn			: cubic-bezier(0.25, 1, 0.25, 1);
+$transition-fn			: ease-in-out;
 $transition				: 600ms $transition-fn;
 $transition-short		: 150ms $transition-fn;
 
