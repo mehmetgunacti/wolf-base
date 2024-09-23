@@ -5,32 +5,32 @@
 	#{$main-current-height}			: calc(100dvh - $header-height);
 	#{$main-current-left}			: 0;
 
-	#{$nav-current-height}			: calc(100dvh - $header-height);
+	#{$nav-current-height}			: 100dvh; // calc(100dvh - $header-height);
 	#{$nav-current-width}			: $nav-full-width;
 	#{$nav-current-margin-left}		: 0;
 
-	// @include mx-sm {
+	@include mx-sm {
 
-	// 	#{$font-size-ratio}			: 63%; // 1rem = 11px
-
-	// }
-
-	@include mx-md {
-
-		#{$font-size-ratio}			: 68.75%; // 1rem = 12px
+		#{$font-size-ratio}			: 63%; // 1rem = 11px
 
 	}
 
-	// @include mx-lg {
+	@include mx-md {
 
-	// 	#{$font-size-ratio}			: 64%; // 1rem = 13px
+		#{$font-size-ratio}			: 75%; // 1rem = 12px 68.75
 
-	// }
+	}
 
-	// @include mx-xl {
+	@include mx-lg {
 
-	// 	#{$font-size-ratio}			: 64.5%; // 1rem = 14px
+		#{$font-size-ratio}			: 81.25%; // 1rem = 13px
 
-	// }
+	}
+
+	@include mx-xl {
+
+		#{$font-size-ratio}			: 87.5%; // 1rem = 14px
+
+	}
 
 }
