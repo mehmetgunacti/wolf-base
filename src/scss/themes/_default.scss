@@ -43,7 +43,7 @@
 	#{$col-btn-default-color-active}	: fn-color-lighten($col-btn-default-color, 25%);
 	#{$col-btn-default-border}			: fn-color-darken($col-btn-default-color, 10%);
 
-	#{$col-btn-disabled-text}			: fn-color-darken($col-text-secondary, 30%, 0.7);
+	#{$col-btn-disabled-text}			: fn-color-darken($col-white, 30%, 0.3);
 	#{$col-btn-disabled-color}			: fn-color-lighten($col-bg-component, 50%, 0.6);
 	#{$col-btn-disabled-color-hover}	: fn-color-lighten($col-btn-disabled-color, 10%);
 	#{$col-btn-disabled-color-active}	: fn-color-lighten($col-btn-disabled-color, 15%);
