@@ -63,8 +63,16 @@
 		overflow	: hidden;
 
 		background-color	: fn-var($col-bg-nav);
-		@include mx-transition(height width margin-left background-color);
+		@include mx-transition(height width margin-left background-color box-shadow);
 		@include mx-shadow($shadow-nav);
+
+		body[data-sidebar="#{$sidebar-hidden}"] & {
+
+			@include mx-shadow($shadow-invisible);
+
+		}
+
+
 
 	}
 

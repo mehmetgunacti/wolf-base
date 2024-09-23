@@ -18,6 +18,7 @@
 	#{$shadow}					: fn-color-set-alpha($col-shadow, 0.5) 5px 6px 6px -2px, fn-color-set-alpha($col-shadow, 0.5) 8px 8px 18px -2px;
 	#{$shadow-header}			: fn-color-set-alpha($col-black, 0.4) 1px 4px 4px,fn-color-set-alpha($col-black, 0.3) 5px 4px 2px -2px,fn-color-set-alpha($col-black, 0.2) 0 -1px 1px inset;
 	#{$shadow-nav}				: fn-color-set-alpha($col-black, 0.5) 5px -2px 6px -2px, fn-color-set-alpha($col-black, 0.5) 8px -2px 18px -2px;
+	#{$shadow-invisible}		: fn-var($col-transparent) 5px -2px 6px -2px, fn-var($col-transparent) 8px -2px 18px -2px;
 
 	#{$col-text}				: hsl(210deg 15% 92%);
 	#{$col-text-secondary}		: hsl(210, 87%, 15%);
