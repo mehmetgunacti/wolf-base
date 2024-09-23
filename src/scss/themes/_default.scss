@@ -21,7 +21,7 @@
 	#{$shadow-invisible}		: fn-var($col-transparent) 5px -2px 6px -2px, fn-var($col-transparent) 8px -2px 18px -2px;
 
 	#{$col-text}				: hsl(210deg 15% 92%);
-	#{$col-text-secondary}		: hsl(210, 87%, 15%);
+	#{$col-text-secondary}		: hsl(210deg 15% 50%);
 
 	#{$col-accent}				: hsl(200deg 85% 34%);
 	#{$col-focus}				: hsl(27deg 99% 54%);
@@ -44,7 +44,7 @@
 	#{$col-btn-default-color-active}	: fn-color-lighten($col-btn-default-color, 25%);
 	#{$col-btn-default-border}			: fn-color-darken($col-btn-default-color, 10%);
 
-	#{$col-btn-disabled-text}			: fn-color-darken($col-white, 30%, 0.3);
+	#{$col-btn-disabled-text}			: fn-color-darken($col-text-secondary, 0%);
 	#{$col-btn-disabled-color}			: fn-color-lighten($col-bg-component, 50%, 0.6);
 	#{$col-btn-disabled-color-hover}	: fn-color-lighten($col-btn-disabled-color, 10%);
 	#{$col-btn-disabled-color-active}	: fn-color-lighten($col-btn-disabled-color, 15%);
