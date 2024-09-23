@@ -153,6 +153,7 @@ $_btn-size-values: (
 			content: attr(data-before);
 			@include mx-d-inline-block;
 			font-size		: inherit;
+			padding-right	: 0.2em;
 
 		}
 
