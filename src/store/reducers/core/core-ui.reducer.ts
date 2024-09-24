@@ -18,6 +18,9 @@ export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 	})),
 	on(setBigScreen, (state, { isBigScreen }) => {
 
+		if (state.bigScreen)
+			return state;
+
 		return produce(
 			state,
 			draft => { draft.bigScreen = isBigScreen }

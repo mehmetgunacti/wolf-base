@@ -42,36 +42,28 @@ export function getNextTheme(currentTheme: Theme): Theme {
 
 }
 
-export function getNextSidebarState(currentState: SidebarState, isBigScreen: boolean): SidebarState {
+export function getNextSidebarState(currentState: SidebarState, isMinWidthGtMD: boolean): SidebarState {
 
-	let order: SidebarState[];
-	if (isBigScreen)
-		order = [
-			SidebarState.FULL,
-			SidebarState.HIDDEN,
-			SidebarState.HALF
-		];
-	else
-		order = [
-			SidebarState.FULL,
-			SidebarState.HIDDEN
-		];
+	if (isMinWidthGtMD) {
 
-	// get Theme values as array
-	const states: SidebarState[] = order;
+		switch (currentState) {
 
-	// search for incoming value
-	const currentIndex: number = states.indexOf(currentState);
+			case SidebarState.FULL: return SidebarState.HIDDEN;
+			case SidebarState.HIDDEN: return SidebarState.HALF;
+			case SidebarState.HALF: return SidebarState.FULL;
 
-	// if not found return the default value
-	if (currentIndex === -1)
-		return DEFAULT_CONF_VALUES.sidebarState;
+		}
 
-	// calculate next value (switch to first if last value)
-	const nextIndex: number = (currentIndex + 1) % states.length;
+	} else {
 
-	// return new theme
-	const nextState: SidebarState = states[nextIndex];
-	return nextState;
+		switch (currentState) {
+
+			case SidebarState.FULL: return SidebarState.HIDDEN;
+			case SidebarState.HIDDEN: return SidebarState.FULL;
+			case SidebarState.HALF: return SidebarState.FULL;
+
+		}
+
+	}
 
 }

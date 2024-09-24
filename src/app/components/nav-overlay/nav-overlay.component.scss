@@ -17,23 +17,17 @@
 	visibility			: hidden;
 	@include mx-transition(height opacity visibility);
 
-	@include bigScreen() {
+	body[data-big-screen="true"] & {
 
 		display			: none;
 
 	}
 
-	body[data-sidebar="#{$sidebar-full}"] & {
+	body[data-sidebar="#{$sidebar-full}"] &,
+	body[data-sidebar="#{$sidebar-half}"] & {
 
 		opacity				: 1;
 		visibility			: visible;
-
-		@include bigScreen() {
-
-			opacity			: 0;
-			visibility		: hidden;
-
-		}
 
 	}
 

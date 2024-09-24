@@ -3,6 +3,8 @@ $sidebar-full			: 'full';
 $sidebar-half			: 'half';
 $sidebar-hidden			: 'hidden';
 
+$big-screen				: 'big-screen';
+
 $glyph-selector			: '.material-symbols-outlined';
 
 $widget-height-xl		: 5.0rem;
@@ -41,8 +43,11 @@ $border-radius-xxs 		: 0.3rem;
 $border-radius-round	: 100px;
 
 $transition-fn			: ease-in-out;
-$transition				: 600ms $transition-fn;
-$transition-short		: 150ms $transition-fn;
+$transition-duration	: 600ms;
+$transition				: $transition-duration $transition-fn;
+
+$transition-duration-short	: 150ms;
+$transition-short			: $transition-duration-short $transition-fn;
 
 // ELEMENT SPECIFIC CONSTANTS
 $tab-size				: 4;

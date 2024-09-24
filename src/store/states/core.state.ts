@@ -42,7 +42,7 @@ export const initialCoreConfigurationState: CoreConfigurationState = {
 export const initialCoreUIState: CoreUIState = {
 
 	sidebarState: DEFAULT_CONF_VALUES.sidebarState,
-	bigScreen: true,
+	bigScreen: false,
 	syncableItems: 0,
 	theme: DEFAULT_CONF_VALUES.theme,
 	now: Date.now()

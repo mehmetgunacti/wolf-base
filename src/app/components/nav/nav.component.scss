@@ -21,51 +21,48 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 		& > a {
 
-			position: relative;
+			--nav-label-underline-width	: 0;
+			--nav-label-font-weight		: normal;
+
 			@include mx-d-grid;
-			grid-template-columns	: $_nav-menu-1st-col-width;
+			grid-template-columns	: $_nav-menu-1st-col-width 1fr;
 
 			border-radius			: $border-radius-lg;
 			text-decoration			: none;
 			overflow				: hidden;
-			outline		: 1px solid orange;
-
 
 			& > [nav_item_left] {
 
 				@include mx-d-flex-center;
 
 			}
+
 			& > [nav_item_right] {
 
-				position: absolute;
 				@include mx-d-flex-ai-center;
 				padding		: $_nav-menu-gap;
 
-				z-index		: $z-index-nav + 100;
+				& > [label] {
 
-				inset		: 0;
-				left		: $_nav-menu-1st-col-width;
-				// height		: $_nav-menu-row-height;
-				// right		: 0;
-				// outline		: 1px solid;
+					font-weight		: var(--nav-label-font-weight);
 
-				@include mx-md {
+					&::after {
 
-					// visibility	: hidden;
-					// width		: 0;
-					// padding		: 0;
-					// opacity		: 0;
-					// @include mx-transition(width opacity);
-
-					@container (min-width: #{$nav-full-width - 1}) {
-
-						@include mx-d-flex-ai-center;
-						// visibility	: visible;
-						// width		: initial;
-						// opacity		: 1;
+						content: '';
+						width		: 0px;
+						height		: 2px;
+						display		: block;
+						background	: fn-var($col-accent);
+						transition	: $transition-duration-short;
+						width		: var(--nav-label-underline-width);
 
 					}
+
+				}
+
+				body[data-sidebar="#{$sidebar-half}"] & {
+
+					display	: none;
 
 				}
 
@@ -73,19 +70,34 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 			&:hover {
 
-				background-color	: fn-color-lighten($col-white, 10%, 0.1);
+				--nav-label-underline-width : 100%;
 
-				& > [nav_item_right] {
+			}
 
-					text-decoration	: underline;
+			&:active {
 
-				}
+				--nav-label-underline-width : 100%;
+				background-color			: fn-color-lighten($col-white, 10%, 0.1);
 
 			}
 
 			&:focus-visible {
 
+				--nav-label-underline-width : 100%;
 				@include mx-outline;
+
+			}
+
+			&.active {
+
+				--nav-label-font-weight	: bold;
+				& :is(#{$glyph-selector}) {
+
+					background-color	: fn-var($col-accent);
+					border-radius		: $border-radius-round;
+					padding				: $gap;
+
+				}
 
 			}
 

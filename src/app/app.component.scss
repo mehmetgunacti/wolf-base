@@ -2,6 +2,15 @@
 @import 'helper';
 @import 'components';
 
+@keyframes reset-left {
+
+	to {
+		left	: -$nav-half-width;
+		width	: $nav-half-width;
+	}
+
+}
+
 :host {
 
 	@include mx-d-block;
@@ -70,10 +79,9 @@
 		body[data-sidebar="#{$sidebar-hidden}"] & {
 
 			@include mx-shadow($shadow-invisible);
+			animation: reset-left $transition-duration forwards;
 
 		}
-
-
 
 	}
 

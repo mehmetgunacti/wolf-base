@@ -10,28 +10,16 @@
 		@include mx-d-flex-center;
 		background-color: fn-var($col-bg-component-dark);
 		border-radius	: $border-radius-xl;
-		min-height		: $widget-height-lg;
+		min-height		: $widget-height-lg; // <-- same as nth-child(2) 'top'
 		min-width		: $header-height;
 		font-size		: $font-size;
 		padding-inline	: $gap-xxl;
 
-		// &:has(#{$glyph-selector}) {
-
-		// 	padding-right	: $gap;
-
-		// }
-
 		&:nth-child(2) {
 
 			position: absolute;
-			top		: -44px;
+			top		: -$widget-height-lg;
 			right	: 5 * $gap-xxs;
-
-			@include mx-bigScreen() {
-
-				top	: -48px;
-
-			}
 
 		}
 
