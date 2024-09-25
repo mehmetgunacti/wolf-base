@@ -1,4 +1,4 @@
-import { DEFAULT_CONF_VALUES, FirestoreConfig, SidebarState, Theme } from "@lib";
+import { DEFAULT_CONF_VALUES, FirestoreConfig, SidebarAnimation, Theme } from "@lib";
 
 export interface CoreModuleState {
 
@@ -9,7 +9,7 @@ export interface CoreModuleState {
 
 export interface CoreUIState {
 
-	sidebarState: SidebarState,
+	sidebarAnimation: SidebarAnimation,
 	bigScreen: boolean,
 	syncableItems: number,
 	theme: Theme,
@@ -41,7 +41,7 @@ export const initialCoreConfigurationState: CoreConfigurationState = {
 
 export const initialCoreUIState: CoreUIState = {
 
-	sidebarState: DEFAULT_CONF_VALUES.sidebarState,
+	sidebarAnimation: SidebarAnimation.TO_FULL,
 	bigScreen: false,
 	syncableItems: 0,
 	theme: DEFAULT_CONF_VALUES.theme,

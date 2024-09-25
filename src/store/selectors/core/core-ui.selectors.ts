@@ -16,10 +16,10 @@ export const selCore_isBigScreen = createSelector(
 
 );
 
-export const selCore_sidebarState = createSelector(
+export const selCore_sidebarAnimation = createSelector(
 
 	selCore_uiState,
-	(state: CoreUIState) => state.sidebarState
+	(state: CoreUIState) => state.sidebarAnimation
 
 );
 

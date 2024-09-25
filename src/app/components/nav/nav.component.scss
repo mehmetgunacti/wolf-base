@@ -24,23 +24,29 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 			--nav-label-underline-width	: 0;
 			--nav-label-font-weight		: normal;
 
-			@include mx-d-grid;
-			grid-template-columns	: $_nav-menu-1st-col-width 1fr;
+			position					: relative;
+			@include mx-d-flex;
 
-			border-radius			: $border-radius-lg;
-			text-decoration			: none;
-			overflow				: hidden;
+			height						: $nav-row-height;
+			border-radius				: $border-radius-lg;
+			text-decoration				: none;
 
 			& > [nav_item_left] {
 
 				@include mx-d-flex-center;
+				min-width				: $nav-row-height;
 
 			}
 
 			& > [nav_item_right] {
 
+				position			: absolute;
 				@include mx-d-flex-ai-center;
-				padding		: $_nav-menu-gap;
+
+				padding				: 0px;
+				left				: $nav-row-height + $nav-gap;
+				height				: $nav-row-height;
+				width				: $nav-full-width - $nav-half-width - $nav-gap;
 
 				& > [label] {
 

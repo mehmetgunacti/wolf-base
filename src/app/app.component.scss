@@ -2,15 +2,6 @@
 @import 'helper';
 @import 'components';
 
-@keyframes reset-left {
-
-	to {
-		left	: -$nav-half-width;
-		width	: $nav-half-width;
-	}
-
-}
-
 :host {
 
 	@include mx-d-block;
@@ -54,13 +45,12 @@
 
 	& > nav {
 
-		@include mx-d-flex-column;
+		@include mx-d-grid;
 		position	: fixed;
 
-		padding		: 0;
+		padding		: $nav-gap;
 		padding-top	: $header-height;
-		margin		: 0;
-		margin-left	: fn-var($nav-current-margin-left);
+		gap			: $nav-gap;
 
 		z-index		: $z-index-nav;
 
@@ -68,7 +58,7 @@
 		left		: 0;
 
 		height		: 100dvh;
-		width		: fn-var($nav-current-width);
+		width		: $nav-full-width;
 
 		overflow	: hidden;
 
@@ -76,10 +66,14 @@
 		@include mx-transition(height width margin-left background-color box-shadow);
 		@include mx-shadow($shadow);
 
-		body[data-sidebar="#{$sidebar-hidden}"] & {
+		animation-name				: fn-var($nav-animation-name);
+		animation-duration			: $nav-animation-duration;
+		animation-iteration-count	: 1;
+		animation-fill-mode			: forwards;
+
+		body[data-sidebar="#{$nav-animation-to-hidden}"] & {
 
 			@include mx-shadow($shadow-invisible);
-			animation: reset-left $transition-duration forwards;
 
 		}
 

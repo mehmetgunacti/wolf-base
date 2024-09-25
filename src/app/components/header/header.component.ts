@@ -1,10 +1,22 @@
 import { Component, inject } from '@angular/core';
-import { CloudTask, getNextSidebarState } from '@lib';
+import { CloudTask, SidebarAnimation } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, take } from 'rxjs';
-import { setSidebarState } from 'store/actions/core-ui.actions';
+import { setSidebarAnimation } from 'store/actions/core-ui.actions';
 import { selCloudAvailableTasks } from 'store/selectors/cloud/cloud.selectors';
-import { selCore_isBigScreen, selCore_sidebarState } from 'store/selectors/core/core-ui.selectors';
+import { selCore_isBigScreen, selCore_sidebarAnimation } from 'store/selectors/core/core-ui.selectors';
+
+function nextAnimation(current: SidebarAnimation, isBigScreen: boolean): SidebarAnimation {
+
+	switch (current) {
+
+		case SidebarAnimation.TO_HIDDEN: return SidebarAnimation.TO_HALF;
+		case SidebarAnimation.TO_HALF: return SidebarAnimation.TO_FULL;
+		case SidebarAnimation.TO_FULL: return SidebarAnimation.TO_HIDDEN
+
+	}
+
+}
 
 @Component({
 	selector: 'app-header',
@@ -20,16 +32,16 @@ export class HeaderComponent {
 	toggleNav(): void {
 
 		combineLatest([
-			this.store.select(selCore_sidebarState),
+			this.store.select(selCore_sidebarAnimation),
 			this.store.select(selCore_isBigScreen)
 		])
 			.pipe(
 				take(1)
 			).subscribe(
 
-				([state, isBigScreen]) =>
+				([animation, isBigScreen]) =>
 					this.store.dispatch(
-						setSidebarState({ sidebarState: getNextSidebarState(state, isBigScreen) })
+						setSidebarAnimation({ animation: nextAnimation(animation, isBigScreen) })
 					)
 
 			);

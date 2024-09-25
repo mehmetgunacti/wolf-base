@@ -1,4 +1,4 @@
-import { DEFAULT_CONF_VALUES, SidebarState, Theme } from 'lib/constants';
+import { DEFAULT_CONF_VALUES, Theme } from 'lib/constants';
 import { HasParentId } from 'lib/models';
 
 export function findEnumValue<T>(enumObj: any, value: string | null): T | null {
@@ -39,31 +39,5 @@ export function getNextTheme(currentTheme: Theme): Theme {
 
 	// return new theme
 	return themes[nextIndex] as Theme;
-
-}
-
-export function getNextSidebarState(currentState: SidebarState, isMinWidthGtMD: boolean): SidebarState {
-
-	if (isMinWidthGtMD) {
-
-		switch (currentState) {
-
-			case SidebarState.FULL: return SidebarState.HIDDEN;
-			case SidebarState.HIDDEN: return SidebarState.HALF;
-			case SidebarState.HALF: return SidebarState.FULL;
-
-		}
-
-	} else {
-
-		switch (currentState) {
-
-			case SidebarState.FULL: return SidebarState.HIDDEN;
-			case SidebarState.HIDDEN: return SidebarState.FULL;
-			case SidebarState.HALF: return SidebarState.FULL;
-
-		}
-
-	}
 
 }

@@ -1,9 +1,9 @@
-import { SidebarState, Theme } from 'lib/constants';
+import { SidebarAnimation, Theme } from 'lib/constants';
 import { Configuration, FirestoreConfig } from 'lib/models';
 
 export interface ConfigurationLocalRepository {
 
-	setSidebarState(state: SidebarState): Promise<void>;
+	setSidebarAnimation(animation: SidebarAnimation): Promise<void>;
 	setTitleLookupUrl(url: string): Promise<void>;
 	setFirestoreConfig(config: FirestoreConfig): Promise<void>;
 	setTheme(theme: Theme): Promise<void>;

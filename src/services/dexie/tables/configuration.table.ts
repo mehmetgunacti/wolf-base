@@ -1,4 +1,4 @@
-import { SidebarState, Theme } from '@lib';
+import { SidebarAnimation, Theme } from '@lib';
 import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalRepositoryNames } from 'lib/constants/database.constant';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
 import { ConfigurationLocalRepository } from 'lib/repositories/local';
@@ -11,9 +11,9 @@ export class DexieConfigurationRepositoryImpl extends KeyValueLocalRepositoryImp
 		super(db, LocalRepositoryNames.configuration)
 	}
 
-	async setSidebarState(state: SidebarState): Promise<void> {
+	async setSidebarAnimation(animation: SidebarAnimation): Promise<void> {
 
-		return await this.set(CONF_KEYS.sidebarState, state);
+		return await this.set(CONF_KEYS.sidebarAnimation, animation);
 
 	}
 
@@ -64,7 +64,7 @@ export class DexieConfigurationRepositoryImpl extends KeyValueLocalRepositoryImp
 		const map: Map<string, any> = await this.dump();
 		const conf: Configuration = {
 
-			sidebarState: map.get(CONF_KEYS.sidebarState) ?? null,
+			sidebarAnimation: map.get(CONF_KEYS.sidebarAnimation) ?? null,
 			theme: map.get(CONF_KEYS.theme) ?? null,
 			firestoreConfig: map.get(CONF_KEYS.firestoreConfig) ?? null,
 			titleLookupUrl: map.get(CONF_KEYS.titleLookupUrl) ?? null,

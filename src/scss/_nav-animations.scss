@@ -1,0 +1,59 @@
+@keyframes to_hidden {
+
+	0% {
+
+		left				: 0;
+		width				: $nav-full-width;
+		--w-right-display	: flex;
+
+	}
+
+	99% {
+
+		left				: -$nav-full-width;
+		width				: $nav-full-width;
+
+	}
+
+	100% {
+
+		left				: -$nav-half-width;
+		width				: $nav-hidden-width;
+
+	}
+
+}
+
+@keyframes to_half {
+
+	from {
+
+		left				: -$nav-half-width;
+		width				: $nav-hidden-width;
+	}
+
+	to {
+
+		left				: 0;
+		width				: $nav-half-width;
+
+	}
+
+}
+
+@keyframes to_full {
+
+	from {
+
+		left				: 0;
+		width				: $nav-half-width;
+	}
+
+	to {
+
+		left				: 0;
+		width 				: $nav-full-width;
+
+	}
+
+}

@@ -8,6 +8,8 @@
 	#{$nav-current-width}			: $nav-full-width;
 	#{$nav-current-margin-left}		: 0;
 
+	#{$nav-animation-name}			: unset;
+
 	// @include mx-sm {
 
 	// 	#{$font-size-ratio}			: 63%; // 1rem = 11px
