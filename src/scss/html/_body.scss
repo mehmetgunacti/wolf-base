@@ -9,18 +9,21 @@ body {
 	&[data-animation="to_hidden"] {
 
 		@include mx-set-var($nav-animation-name, $nav-animation-to-hidden);
+		@include mx-set-var($main-current-left, 0);
 
 	}
 
 	&[data-animation="to_half"] {
 
 		@include mx-set-var($nav-animation-name, $nav-animation-to-half);
+		@include mx-set-var($main-current-left, $nav-half-width);
 
 	}
 
 	&[data-animation="to_full"] {
 
 		@include mx-set-var($nav-animation-name, $nav-animation-to-full);
+		@include mx-set-var($main-current-left, $nav-full-width);
 
 	}
 

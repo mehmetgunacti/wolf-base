@@ -108,7 +108,7 @@ $_btn-size-values: (
 	white-space				: pre;
 	cursor					: pointer;
 
-	@include mx-transition(color background-color border-color);
+	@include mx-transition-short(color background-color border-color);
 
 	&.xl { @include mx-button-sizes($_btn-size-values, xl, $_prefix); }
 	&.lg { @include mx-button-sizes($_btn-size-values, lg, $_prefix); }

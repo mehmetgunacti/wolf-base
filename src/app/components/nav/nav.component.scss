@@ -77,24 +77,21 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 			}
 
-			&:hover {
+			&:not(.active) {
 
-				--nav-label-underline-width : 100%;
-				background-color			: fn-color-lighten($col-white, 10%, 0.1);
-				// & :is(#{$glyph-selector}) {
+				&:hover {
 
-				// 	background-color	: fn-color-lighten($col-white, 10%, 0.1);
-				// 	border-radius		: $border-radius-round;
-				// 	padding				: $gap-lg;
+					--nav-label-underline-width : 100%;
+					background-color			: fn-var($col-btn-glyph-color-hover);
 
-				// }
+				}
 
-			}
+				&:active {
 
-			&:active {
+					--nav-label-underline-width : 100%;
+					background-color			: fn-var($col-btn-glyph-color-active);
 
-				--nav-label-underline-width : 100%;
-				background-color			: fn-color-lighten($col-white, 10%, 0.1);
+				}
 
 			}
 

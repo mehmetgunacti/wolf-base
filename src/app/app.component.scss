@@ -61,7 +61,7 @@
 		overflow	: hidden;
 
 		background-color	: fn-var($col-bg-nav);
-		@include mx-transition(height width margin-left background-color box-shadow);
+		@include mx-transition(height width left background-color box-shadow);
 		@include mx-shadow($shadow);
 
 		animation-name				: fn-var($nav-animation-name);

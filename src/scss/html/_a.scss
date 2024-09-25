@@ -1,7 +1,7 @@
 a {
 
 	color		: var(--col-text);
-	@include mx-transition(color (background-color: $transition-short));
+	@include mx-transition-short(color background-color);
 
 }
 
