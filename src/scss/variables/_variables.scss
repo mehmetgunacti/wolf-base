@@ -68,38 +68,26 @@ $z-index-main				: 3000;
 $z-index-bookmark-overlay	: 2000;
 $z-index-croppie-close-btn	: 1000;
 
-// NAV BAR
-
-$sidebar-full				: 'full';
-$sidebar-half				: 'half';
-$sidebar-hidden				: 'hidden';
-
-$nav-animation-to-full		: to_full;
-$nav-animation-to-half		: to_half;
-$nav-animation-to-hidden	: to_hidden;
-
+// HEADER
 $header-height				: 6rem;
 
-$nav-row-height				: $header-height;
-$nav-gap					: $gap-sm;
-$nav-full-width				: 25rem;
-$nav-half-width				: $nav-row-height + 2 * $nav-gap;
-$nav-hidden-width			: $nav-half-width;
+// NAV BAR
+$nav-anim-to-full				: to_full;
+$nav-anim-to-hidden				: to_hidden;
+$nav-anim-bigscreen-to-full		: to_big_screen_full;
+$nav-anim-bigscreen-to-half		: to_big_screen_half;
+$nav-anim-bigscreen-to-hidden	: to_big_screen_hidden;
 
-$nav-animation-duration		: $transition-duration;
+$nav-row-height					: $header-height;
+$nav-gap						: $gap-sm;
+$nav-full-width					: 25rem;
+$nav-half-width					: $nav-row-height + 2 * $nav-gap;
+$nav-hidden-width				: $nav-half-width;
+$nav-animation-duration			: $transition-duration;
 
 //
 // CSS VARIABLES:
 //
-
-// NAV BAR
-$nav-animation-name			: --nav-animation-name;
-
-$main-current-height		: --main-current-height;
-$main-current-left			: --main-current-left;
-
-$nav-current-width			: --nav-current-width;
-$nav-current-margin-left	: --nav-current-margin-left;
 
 $font-size-ratio			: --font-size-ratio;
 

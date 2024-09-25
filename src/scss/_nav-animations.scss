@@ -1,41 +1,18 @@
+$_left-offset	: 0;
+
 @keyframes to_hidden {
-
-	0% {
-
-		left				: 0;
-		width				: $nav-full-width;
-		--w-right-display	: flex;
-
-	}
-
-	99% {
-
-		left				: -$nav-full-width;
-		width				: $nav-full-width;
-
-	}
-
-	100% {
-
-		left				: -$nav-half-width;
-		width				: $nav-hidden-width;
-
-	}
-
-}
-
-@keyframes to_half {
 
 	from {
 
-		left				: -$nav-half-width;
-		width				: $nav-hidden-width;
+		left				: $_left-offset;
+		width				: $nav-full-width;
+
 	}
 
 	to {
 
-		left				: 0;
-		width				: $nav-half-width;
+		left				: -$nav-full-width + $_left-offset;
+		width				: $nav-full-width;
 
 	}
 
@@ -45,13 +22,74 @@
 
 	from {
 
-		left				: 0;
+		left				: -$nav-full-width + $_left-offset;
+		width				: $nav-full-width;
+
+	}
+
+	to {
+
+		left				: $_left-offset;
+		width				: $nav-full-width;
+
+	}
+
+}
+
+@keyframes to_big_screen_hidden {
+
+	0% {
+
+		left				: $_left-offset;
+		width				: $nav-full-width;
+		--w-right-display	: flex;
+
+	}
+
+	99% {
+
+		left				: -$nav-full-width + $_left-offset;
+		width				: $nav-full-width;
+
+	}
+
+	100% {
+
+		left				: -$nav-half-width + $_left-offset;
+		width				: $nav-hidden-width;
+
+	}
+
+}
+
+@keyframes to_big_screen_half {
+
+	from {
+
+		left				: -$nav-half-width + $_left-offset;
+		width				: $nav-hidden-width;
+	}
+
+	to {
+
+		left				: $_left-offset;
+		width				: $nav-half-width;
+
+	}
+
+}
+
+@keyframes to_big_screen_full {
+
+	from {
+
+		left				: $_left-offset;
 		width				: $nav-half-width;
 	}
 
 	to {
 
-		left				: 0;
+		left				: $_left-offset;
 		width 				: $nav-full-width;
 
 	}

@@ -32,14 +32,26 @@
 		position		: fixed;
 		padding			: $gap;
 		z-index			: $z-index-main;
-		height			: fn-var($main-current-height);
+		height			: calc(100dvh - #{$header-height});
 
 		top				: $header-height;
 		right			: 0;
-		left			: fn-var($main-current-left);
+		left			: 0;
 
 		@include mx-scrollable(unset);
 		@include mx-transition(height left background-color);
+
+		body.big-screen.sidebar-full & {
+
+			left	: $nav-full-width;
+
+		}
+
+		body.big-screen.sidebar-half & {
+
+			left	: $nav-half-width;
+
+		}
 
 	}
 
@@ -61,16 +73,41 @@
 		overflow	: hidden;
 
 		background-color	: fn-var($col-bg-nav);
-		@include mx-transition(height width left background-color box-shadow);
+		@include mx-transition(height background-color box-shadow); // width left
 		@include mx-shadow($shadow);
 
-		animation-name				: fn-var($nav-animation-name);
 		animation-duration			: $nav-animation-duration;
 		animation-iteration-count	: 1;
 		animation-fill-mode			: forwards;
 
-		body[data-animation="#{$nav-animation-to-hidden}"] & {
+		body.sidebar-hidden & {
 
+			animation-name: $nav-anim-to-hidden;
+			@include mx-shadow($shadow-invisible);
+
+		}
+
+		body.sidebar-full & {
+
+			animation-name: $nav-anim-to-full;
+
+		}
+
+		body.big-screen.sidebar-full & {
+
+			animation-name: $nav-anim-bigscreen-to-full;
+
+		}
+
+		body.big-screen.sidebar-half & {
+
+			animation-name: $nav-anim-bigscreen-to-half;
+
+		}
+
+		body.big-screen.sidebar-hidden & {
+
+			animation-name: $nav-anim-bigscreen-to-hidden;
 			@include mx-shadow($shadow-invisible);
 
 		}

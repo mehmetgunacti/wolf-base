@@ -1,6 +1,6 @@
 <section id="section-nav-button">
 
-	@if ((cloudTasks$ | async); as cloudTasks) {
+	@if (cloudTasks(); as cloudTasks) {
 
 		<button
 			class="glyph squared badge-container"

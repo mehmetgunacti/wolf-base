@@ -1,14 +1,15 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { LocalRepositoryService, SidebarAnimation } from '@lib';
+import { CLASS_SIDEBAR_PREFIX, LocalRepositoryService, nextSidebarState, replaceByPrefix, SidebarState } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
-import { setSidebarAnimation } from 'store/actions/core-ui.actions';
+import * as coreUIActions from 'store/actions/core-ui.actions';
 import * as coreActions from 'store/actions/core.actions';
-import { selCore_isBigScreen } from 'store/selectors/core/core-ui.selectors';
+import { selCore_isBigScreen, selCore_sidebarState } from 'store/selectors/core/core-ui.selectors';
 
 @Injectable()
 export class CoreSidebarEffects {
@@ -19,26 +20,27 @@ export class CoreSidebarEffects {
 	private document: Document = inject(DOCUMENT);
 	private router: Router = inject(Router);
 
-	setSidebarAnimation$ = createEffect(
+	saveSidebarSateInLocalRepository$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(setSidebarAnimation),
-			tap(({ animation }) => console.log(animation)) // this.localRepository.configuration.setSidebarState(sidebarState))
-			//switchMap(({ animation }) => console.log(animation)) // this.localRepository.configuration.setSidebarState(sidebarState))
+			ofType(coreUIActions.setSidebarState),
+			tap(({ state }) => this.localRepository.configuration.setSidebarState(state))
 
 		), { dispatch: false }
 
 	);
 
-	setSidebarAnimationOnBodyTag$ = createEffect(
+	setSidebarStateOnBodyTag$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(setSidebarAnimation),
-			map(({ animation }) => {
+			ofType(coreUIActions.setSidebarState),
+			map(({ state }) => {
 
-				this.document.body.dataset['animation'] = animation;
+				const currentList: string[] = this.document.body.classList.value.split(' ');
+				const list: string[] = replaceByPrefix(currentList, CLASS_SIDEBAR_PREFIX, CLASS_SIDEBAR_PREFIX + state);
+				this.document.body.className = list.join(' ').trim();
 
 			})
 
@@ -46,14 +48,30 @@ export class CoreSidebarEffects {
 
 	);
 
-	// on mobile close navbar after navbar link clicked
-	successfulNavigation$ = createEffect(
+	// when hamburger button is clicked
+	setNextSidebarState$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(coreUIActions.setNextSidebarState),
+			concatLatestFrom(() => [
+				this.store.select(selCore_sidebarState),
+				this.store.select(selCore_isBigScreen)
+			]),
+			map(([, current, isBigScreen]) => nextSidebarState(current, isBigScreen)),
+			map(state => coreUIActions.setSidebarState({ state }))
+
+		)
+
+	);
+
+	closeSidebar$ = createEffect(
 
 		() => this.router.events.pipe(
 
 			withLatestFrom(this.store.select(selCore_isBigScreen)),
 			filter(([event, bigScreen]) => !bigScreen && event instanceof NavigationEnd),
-			map(() => setSidebarAnimation({ animation: SidebarAnimation.TO_HIDDEN }))
+			map(() => coreUIActions.setSidebarState({ state: SidebarState.HIDDEN }))
 
 		)
 

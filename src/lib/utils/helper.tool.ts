@@ -1,4 +1,27 @@
-import { AppEntityType } from 'lib/constants';
+import { AppEntityType, SidebarState } from 'lib/constants';
+
+export function nextSidebarState(current: SidebarState, isBigScreen: boolean): SidebarState {
+
+	if (isBigScreen)
+		switch (current) {
+
+			case SidebarState.HIDDEN: return SidebarState.HALF;
+			case SidebarState.HALF: return SidebarState.FULL;
+			case SidebarState.FULL: return SidebarState.HIDDEN;
+			default: return SidebarState.HALF;
+
+		}
+
+	switch (current) {
+
+		case SidebarState.HIDDEN: return SidebarState.FULL;
+		case SidebarState.HALF: return SidebarState.FULL;
+		case SidebarState.FULL: return SidebarState.HIDDEN;
+		default: return SidebarState.FULL;
+
+	}
+
+}
 
 export function isEntityOfType(type: AppEntityType) {
 

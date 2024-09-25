@@ -1,11 +1,11 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
-import { Breakpoint, TIMER_DELAY, TIMER_INTERVAL } from '@lib';
+import { Breakpoint, CLASS_BIGSCREEN, TIMER_DELAY, TIMER_INTERVAL } from '@lib';
 import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { timer } from 'rxjs';
-import { delay, map, switchMap, tap } from 'rxjs/operators';
+import { delay, filter, map, switchMap, tap } from 'rxjs/operators';
 import { setBigScreen, setNow } from 'store/actions/core-ui.actions';
 
 @Injectable()
@@ -21,27 +21,21 @@ export class CoreUIEffects {
 		() => this.breakpointObserver
 			.observe(`(min-width: ${Breakpoint.md})`)
 			.pipe(
-				delay(100), // necessary for setBodyTagAttribute$ to receive action
+				delay(100), // necessary for setBodyTagAttribute$ (effect below ↓) to receive action
 				map((result) => setBigScreen({ isBigScreen: result.matches }))
 			)
 
 	);
 
-	// determine if current runtime environment is mobile phone or not
+	// determine if current runtime environment is mobile phone or bigger
 	// (nav bar will behave differently on mobile)
 	setBodyTagAttribute$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(setBigScreen),
-			tap(({ isBigScreen }) => {
-
-				// once the <body> attr 'mobile' is true, never update it again, even if isBigScreen is false
-				const bodyAttr = this.document.body.dataset['bigScreen'];
-				if (!bodyAttr || bodyAttr === "false")
-					this.document.body.dataset['bigScreen'] = isBigScreen.toString();
-
-			})
+			filter(({ isBigScreen }) => !!isBigScreen),
+			tap(() => this.document.body.classList.add(CLASS_BIGSCREEN))
 
 		), { dispatch: false }
 

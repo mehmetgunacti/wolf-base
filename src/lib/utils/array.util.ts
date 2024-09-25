@@ -11,13 +11,14 @@ export function insertAtRandomPosition<T>(arr: T[], element: T) {
 
 export function replaceByPrefix(oldValues: string[], prefix: string, newValue: string): string[] {
 
-	const list: string[] = [newValue];
+	const list: string[] = [];
 	oldValues.forEach(v => {
 
 		if (!v.startsWith(prefix))
 			list.push(v);
 
 	});
+	list.push(newValue);
 	return list;
 
 }

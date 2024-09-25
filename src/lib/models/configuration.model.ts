@@ -1,8 +1,8 @@
-import { SidebarAnimation, Theme } from 'lib/constants';
+import { SidebarState, Theme } from 'lib/constants';
 
 export interface Configuration {
 
-	sidebarAnimation: SidebarAnimation;
+	sidebarState: SidebarState;
 	theme: Theme;
 	titleLookupUrl: string | null;
 	firestoreConfig: FirestoreConfig | null;

@@ -1,17 +1,10 @@
-/*
+export const CLASS_BIGSCREEN		= 'big-screen';
+export const CLASS_SIDEBAR_PREFIX	= 'sidebar-';
 
-	must be same values from _variables.scss:
+export enum SidebarState {
 
-	$nav-animation-to-full		: to_full;
-	$nav-animation-to-half		: to_half;
-	$nav-animation-to-hidden	: to_hidden;
-
-*/
-export enum SidebarAnimation {
-
-	TO_FULL		= 'to_full',
-	TO_HALF		= 'to_half',
-	TO_HIDDEN	= 'to_hidden'
+	FULL = 'full',
+	HALF = 'half',
+	HIDDEN = 'hidden'
 
 }
-

@@ -1,4 +1,4 @@
-import { DEFAULT_CONF_VALUES, SidebarAnimation, Theme } from '@lib';
+import { DEFAULT_CONF_VALUES, SidebarState, Theme } from '@lib';
 import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
 import { ConfigurationLocalRepository } from 'lib/repositories/local';
 
@@ -7,7 +7,7 @@ export class MockConfigurationLocalRepositoryImpl implements ConfigurationLocalR
 	private conf: Configuration = {
 
 		theme: DEFAULT_CONF_VALUES.theme,
-		sidebarAnimation: DEFAULT_CONF_VALUES.sidebarAnimation,
+		sidebarState: DEFAULT_CONF_VALUES.sidebarState,
 		firestoreConfig: null,
 		titleLookupUrl: null,
 		popularBookmarks: [],
@@ -34,9 +34,9 @@ export class MockConfigurationLocalRepositoryImpl implements ConfigurationLocalR
 
 	}
 
-	async setSidebarAnimation(animation: SidebarAnimation): Promise<void> {
+	async setSidebarState(visible: SidebarState): Promise<void> {
 
-		this.conf.sidebarAnimation = animation;
+		this.conf.sidebarState = visible;
 
 	}
 
