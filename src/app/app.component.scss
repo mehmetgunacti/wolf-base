@@ -48,9 +48,7 @@
 		@include mx-d-grid;
 		position	: fixed;
 
-		padding		: $nav-gap;
-		padding-top	: $header-height;
-		gap			: $nav-gap;
+		padding		: $header-height 0 0 0;
 
 		z-index		: $z-index-nav;
 
@@ -71,7 +69,7 @@
 		animation-iteration-count	: 1;
 		animation-fill-mode			: forwards;
 
-		body[data-sidebar="#{$nav-animation-to-hidden}"] & {
+		body[data-animation="#{$nav-animation-to-hidden}"] & {
 
 			@include mx-shadow($shadow-invisible);
 

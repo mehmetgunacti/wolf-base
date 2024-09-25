@@ -68,6 +68,8 @@ $z-index-main				: 3000;
 $z-index-bookmark-overlay	: 2000;
 $z-index-croppie-close-btn	: 1000;
 
+// NAV BAR
+
 $sidebar-full				: 'full';
 $sidebar-half				: 'half';
 $sidebar-hidden				: 'hidden';
@@ -78,13 +80,13 @@ $nav-animation-to-hidden	: to_hidden;
 
 $header-height				: 6rem;
 
-$nav-row-height				: 4rem;
+$nav-row-height				: $header-height;
 $nav-gap					: $gap-sm;
 $nav-full-width				: 25rem;
 $nav-half-width				: $nav-row-height + 2 * $nav-gap;
 $nav-hidden-width			: $nav-half-width;
 
-$nav-animation-duration		: 1s;
+$nav-animation-duration		: $transition-duration;
 
 //
 // CSS VARIABLES:

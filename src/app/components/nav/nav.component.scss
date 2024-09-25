@@ -3,21 +3,22 @@
 @import 'variables';
 @import 'helper';
 
-$_nav-menu-gap				: $gap;
+$_nav-menu-gap				: $nav-gap;
 $_nav-menu-row-height		: $nav-half-width - 2 * $_nav-menu-gap;
 $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 :host {
 
 	@include mx-d-flex-column;
-	container-type: inline-size;
+
+	padding		: $nav-gap;
+	gap			: $nav-gap;
 
 	div[nav_menu] {
 
 		@include mx-d-grid;
 		grid-auto-rows	: $_nav-menu-row-height;
 		gap				: $_nav-menu-gap;
-		padding			: $_nav-menu-gap;
 
 		& > a {
 
@@ -27,26 +28,28 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 			position					: relative;
 			@include mx-d-flex;
 
-			height						: $nav-row-height;
-			border-radius				: $border-radius-lg;
-			text-decoration				: none;
+			height				: $nav-row-height;
+			border-radius		: $border-radius-lg;
+			text-decoration		: none;
 
 			& > [nav_item_left] {
 
 				@include mx-d-flex-center;
-				min-width				: $nav-row-height;
+				min-width		: $nav-row-height;
+
+
 
 			}
 
 			& > [nav_item_right] {
 
-				position			: absolute;
+				position		: absolute;
 				@include mx-d-flex-ai-center;
 
-				padding				: 0px;
-				left				: $nav-row-height + $nav-gap;
-				height				: $nav-row-height;
-				width				: $nav-full-width - $nav-half-width - $nav-gap;
+				padding			: 0px;
+				left			: $nav-row-height + $nav-gap;
+				height			: $nav-row-height;
+				width			: $nav-full-width - $nav-half-width - $nav-gap;
 
 				& > [label] {
 
@@ -77,6 +80,14 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 			&:hover {
 
 				--nav-label-underline-width : 100%;
+				background-color			: fn-color-lighten($col-white, 10%, 0.1);
+				// & :is(#{$glyph-selector}) {
+
+				// 	background-color	: fn-color-lighten($col-white, 10%, 0.1);
+				// 	border-radius		: $border-radius-round;
+				// 	padding				: $gap-lg;
+
+				// }
 
 			}
 
@@ -101,7 +112,7 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 					background-color	: fn-var($col-accent);
 					border-radius		: $border-radius-round;
-					padding				: $gap;
+					padding				: $gap-lg;
 
 				}
 
