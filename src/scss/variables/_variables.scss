@@ -79,9 +79,8 @@ $nav-anim-bigscreen-to-half		: to_big_screen_half;
 $nav-anim-bigscreen-to-hidden	: to_big_screen_hidden;
 
 $nav-row-height					: $header-height;
-$nav-gap						: $gap-sm;
 $nav-full-width					: 25rem;
-$nav-half-width					: $nav-row-height + 2 * $nav-gap;
+$nav-half-width					: $nav-row-height;
 $nav-hidden-width				: $nav-half-width;
 $nav-animation-duration			: $transition-duration;
 

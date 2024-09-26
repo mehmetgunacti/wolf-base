@@ -3,22 +3,19 @@
 @import 'variables';
 @import 'helper';
 
-$_nav-menu-gap				: $nav-gap;
-$_nav-menu-row-height		: $nav-half-width - 2 * $_nav-menu-gap;
+$_nav-menu-gap				: $gap;
+$_nav-menu-row-height		: $nav-half-width;
 $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 :host {
 
 	@include mx-d-flex-column;
 
-	padding		: $nav-gap;
-	gap			: $nav-gap;
-
 	div[nav_menu] {
 
 		@include mx-d-grid;
 		grid-auto-rows	: $_nav-menu-row-height;
-		gap				: $_nav-menu-gap;
+		padding-top		: $gap;
 
 		& > a {
 
@@ -26,18 +23,18 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 			--nav-label-font-weight		: normal;
 
 			position					: relative;
-			@include mx-d-flex;
+			@include mx-d-grid;
+			grid-template-columns		: $_nav-menu-1st-col-width;
 
-			height				: $nav-row-height;
-			border-radius		: $border-radius-lg;
-			text-decoration		: none;
+			border-radius				: $border-radius-round;
+			text-decoration				: none;
+
+			margin						: $_nav-menu-gap;
+			outline-offset				: 1px;
 
 			& > [nav_item_left] {
 
 				@include mx-d-flex-center;
-				min-width		: $nav-row-height;
-
-
 
 			}
 
@@ -47,9 +44,10 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 				@include mx-d-flex-ai-center;
 
 				padding			: 0px;
-				left			: $nav-row-height + $nav-gap;
-				height			: $nav-row-height;
-				width			: $nav-full-width - $nav-half-width - $nav-gap;
+				padding-top		: 0.4rem;
+				left			: $nav-row-height - $_nav-menu-gap;
+				height			: $_nav-menu-1st-col-width;
+				width			: $nav-full-width - $nav-half-width - $_nav-menu-gap;
 
 				& > [label] {
 
@@ -89,6 +87,13 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 			}
 
+			body.sidebar-full & {
+
+				border-radius	: $border-radius-lg;
+				outline-offset	: 3px;
+
+			}
+
 			&:focus-visible {
 
 				--nav-label-underline-width : 100%;
@@ -98,7 +103,8 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 			&.active {
 
-				--nav-label-font-weight	: bold;
+				--nav-label-font-weight		: bold;
+				--nav-label-underline-width : 100%;
 				& :is(#{$glyph-selector}) {
 
 					background-color	: fn-var($col-accent);
