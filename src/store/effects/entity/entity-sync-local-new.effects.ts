@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import * as actions from 'store/actions/entity.actions';
+import { entityActions } from 'store/actions';
 import { selBookmark_LocalNew } from 'store/selectors/sync/sync-bookmark.selectors';
 import { selNoteContent_LocalNew } from 'store/selectors/sync/sync-note-content.selectors';
 import { selNote_LocalNew } from 'store/selectors/sync/sync-note.selectors';
@@ -43,7 +43,7 @@ export class EntitySyncLocalNewEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(actions.syncLocalNew),
+			ofType(entityActions.syncLocalNew),
 			switchMap(({ entityType }) => {
 
 				const selector = useSelector(entityType);
@@ -54,7 +54,7 @@ export class EntitySyncLocalNewEffects {
 
 				this.syncService.uploadNew(entityType, items).pipe(
 
-					map(item => actions.loadOne({ entityType, id: item.id }))
+					map(item => entityActions.loadOne({ entityType, id: item.id }))
 
 				)
 

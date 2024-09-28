@@ -1,4 +1,13 @@
-import { createAction, props } from '@ngrx/store';
 import { ToastConfiguration } from '@lib';
+import { createActionGroup, props } from '@ngrx/store';
 
-export const showNotification = createAction('[Notification] Show Notification', props<ToastConfiguration>());
+export const coreNotificationActions = createActionGroup({
+
+	source: 'Core Notification',
+	events: {
+
+		'Show Notification' : props<ToastConfiguration>()
+
+	}
+
+});

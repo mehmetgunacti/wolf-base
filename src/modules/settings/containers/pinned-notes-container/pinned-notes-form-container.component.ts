@@ -1,7 +1,7 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
-import { savePinnedNotesConfig } from 'store/actions/settings.actions';
+import { settingsActions } from 'store/actions';
 import { selCore_pinnedNotes } from 'store/selectors/core/core-configuration.selectors';
 import { distinctTagsArray } from 'store/selectors/note/note-tags.selectors';
 
@@ -46,7 +46,7 @@ export class PinnedNotesFormContainerComponent implements AfterContentInit {
 
 	onSave(tags: string[]): void {
 
-		this.store.dispatch(savePinnedNotesConfig({ tags }));
+		this.store.dispatch(settingsActions.savePinnedNotesConfig({ tags }));
 
 	}
 

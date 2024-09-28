@@ -4,7 +4,7 @@ import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { filter, map, tap, withLatestFrom } from 'rxjs';
-import * as wordActions from 'store/actions/word.actions';
+import { wordActions } from 'store/actions';
 
 @Injectable()
 export class WordUIEffects {

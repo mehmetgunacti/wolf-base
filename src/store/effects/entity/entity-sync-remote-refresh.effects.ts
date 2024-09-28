@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SYNC_SERVICE } from 'app/app.config';
 import { forkJoin, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { downloadRemoteMetadata, downloadRemoteMetadataSuccess } from 'store/actions/entity.actions';
+import { entityActions } from 'store/actions';
 
 interface Result {
 
@@ -23,7 +23,7 @@ export class EntitySyncRemoteRefreshEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(downloadRemoteMetadata),
+			ofType(entityActions.downloadRemoteMetadata),
 			switchMap(() => forkJoin(this.createOps()).pipe(
 
 				map((results: Result[]) => {
@@ -36,7 +36,7 @@ export class EntitySyncRemoteRefreshEffects {
 				})
 
 			)),
-			map(data => downloadRemoteMetadataSuccess({ data }))
+			map(data => entityActions.downloadRemoteMetadataSuccess({ data }))
 
 		)
 

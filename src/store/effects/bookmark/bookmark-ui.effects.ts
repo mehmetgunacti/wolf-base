@@ -8,8 +8,7 @@ import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { BookmarkEditContainerComponent } from 'modules/bookmark/containers/bookmark-edit-container/bookmark-edit-container.component';
 import { from } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import * as bmActions from 'store/actions/bookmark.actions';
-import * as entityActions from 'store/actions/entity.actions';
+import { bookmarkActions, entityActions } from 'store/actions';
 
 @Injectable()
 export class BookmarkUIEffects {
@@ -27,7 +26,7 @@ export class BookmarkUIEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.openAddBookmarkDialog, bmActions.openEditBookmarkDialog),
+			ofType(bookmarkActions.openAddBookmarkDialog, bookmarkActions.openEditBookmarkDialog),
 			map(() => {
 				this.dialogRef = this.dialogService.open(BookmarkEditContainerComponent);
 			})
@@ -42,7 +41,7 @@ export class BookmarkUIEffects {
 		() => this.actions$.pipe(
 
 			ofType(
-				bmActions.closeEditBookmarkDialog,
+				bookmarkActions.closeEditBookmarkDialog,
 				entityActions.createSuccess,
 				entityActions.updateSuccess,
 				entityActions.moveToTrashSuccess
@@ -58,7 +57,7 @@ export class BookmarkUIEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.clickTag),
+			ofType(bookmarkActions.clickTag),
 			withLatestFrom(this.activatedRoute.queryParams),
 			tap(([{ name }, params]) => {
 
@@ -85,7 +84,7 @@ export class BookmarkUIEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.emptySelectedTags),
+			ofType(bookmarkActions.emptySelectedTags),
 			withLatestFrom(this.activatedRoute.queryParams),
 			tap(([_, params]) => {
 
@@ -107,7 +106,7 @@ export class BookmarkUIEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.search),
+			ofType(bookmarkActions.search),
 			withLatestFrom(this.activatedRoute.queryParams),
 			tap(([{ term }, params]) => {
 
@@ -141,7 +140,7 @@ export class BookmarkUIEffects {
 			withLatestFrom(this.activatedRoute.queryParamMap),
 			map(([, paramMap]) =>
 
-				bmActions.setQueryParams({
+				bookmarkActions.setQueryParams({
 
 					id: paramMap.get('id') ?? null,
 					search: paramMap.get('search') ?? null,
@@ -159,7 +158,7 @@ export class BookmarkUIEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.togglePopular),
+			ofType(bookmarkActions.togglePopularTag),
 			switchMap(({ id }) =>
 
 				from(this.localRepository.bookmarks.toggleTag(id, TAG_POPULAR)).pipe(
@@ -176,11 +175,11 @@ export class BookmarkUIEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.click),
+			ofType(bookmarkActions.click),
 			switchMap(({ id }) =>
 
 				from(this.localRepository.bookmarks.click(id)).pipe(
-					map(() => bmActions.loadOneClick({ id }))
+					map(() => bookmarkActions.loadOneClick({ id }))
 				)
 
 			)

@@ -3,7 +3,7 @@ import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { map, switchMap } from 'rxjs/operators';
-import { loadAll, loadAllSuccess } from 'store/actions/core.actions';
+import { coreActions } from 'store/actions';
 
 @Injectable()
 export class CoreLoadEffects {
@@ -15,9 +15,9 @@ export class CoreLoadEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(loadAll),
+			ofType(coreActions.loadAll),
 			switchMap(() => this.localRepository.configuration.getConfiguration()),
-			map(configuration => loadAllSuccess({ configuration }))
+			map(configuration => coreActions.loadAllSuccess({ configuration }))
 
 		)
 

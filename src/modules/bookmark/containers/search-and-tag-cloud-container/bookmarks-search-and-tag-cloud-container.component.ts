@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { TAG_POPULAR, Tag, slideUpDownTrigger } from 'lib';
 import { Observable, Subscription, debounceTime, distinctUntilChanged, map } from 'rxjs';
-import { clickTag, emptySelectedTags, search } from 'store/actions/bookmark.actions';
+import { bookmarkActions } from 'store/actions';
 import { distinctTagsArray, relatedTags, selBookmark_QueryParams } from 'store/selectors/bookmark/bookmark-tags.selectors';
 import { selCore_popularBookmarks } from 'store/selectors/core/core-configuration.selectors';
 
@@ -41,7 +41,7 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 		this.subscription = this.searchControl.valueChanges.pipe(
 			debounceTime(400),
 			distinctUntilChanged()
-		).subscribe(term => this.store.dispatch(search({ term })));
+		).subscribe(term => this.store.dispatch(bookmarkActions.search({ term })));
 
 	}
 
@@ -53,7 +53,7 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 
 	onTagClicked(name: string): void {
 
-		this.store.dispatch(clickTag({ name }));
+		this.store.dispatch(bookmarkActions.clickTag({ name }));
 
 	}
 
@@ -65,7 +65,7 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 
 	emptyFilter(): void {
 
-		this.store.dispatch(emptySelectedTags());
+		this.store.dispatch(bookmarkActions.emptySelectedTags());
 
 	}
 

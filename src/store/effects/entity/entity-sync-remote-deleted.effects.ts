@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { SYNC_SERVICE } from 'app/app.config';
 import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import * as actions from 'store/actions/entity.actions';
+import { entityActions } from 'store/actions';
 import { selBookmark_RemoteDeleted } from 'store/selectors/sync/sync-bookmark.selectors';
 import { selNoteContent_RemoteDeleted } from 'store/selectors/sync/sync-note-content.selectors';
 import { selNote_RemoteDeleted } from 'store/selectors/sync/sync-note.selectors';
@@ -43,7 +43,7 @@ export class EntitySyncRemoteDeletedEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(actions.syncRemoteDeleted),
+			ofType(entityActions.syncRemoteDeleted),
 			switchMap(({ entityType }) => {
 
 				const selector = useSelector(entityType);
@@ -54,7 +54,7 @@ export class EntitySyncRemoteDeletedEffects {
 
 				this.syncService.downloadDeleted(entityType, items).pipe(
 
-					map(item => actions.unloadOne({ entityType, id: item.id }))
+					map(item => entityActions.unloadOne({ entityType, id: item.id }))
 
 				)
 

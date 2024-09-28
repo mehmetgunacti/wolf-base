@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { saveTitleLookup } from 'store/actions/settings.actions';
+import { settingsActions } from 'store/actions';
 import { selCore_titleLookupUrl } from 'store/selectors/core/core-configuration.selectors';
 
 @Component({
@@ -24,7 +24,7 @@ export class TitleLookupConfigContainerComponent {
 
 	onSave(url: string): void {
 
-		this.store.dispatch(saveTitleLookup({ url }));
+		this.store.dispatch(settingsActions.saveTitleLookup({ url }));
 
 	}
 

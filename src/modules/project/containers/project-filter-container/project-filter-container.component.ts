@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { search } from 'store/actions/project.actions';
+import { projectActions } from 'store/actions';
 import { selProject_search } from 'store/selectors/project/project-ui.selectors';
 
 @Component({
@@ -27,7 +27,7 @@ export class ProjectFilterContainerComponent {
 
 	onSearch(term: string): void {
 
-		this.store.dispatch(search({ term }));
+		this.store.dispatch(projectActions.search({ term }));
 
 	}
 

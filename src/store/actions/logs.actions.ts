@@ -1,11 +1,20 @@
-import { createAction, props } from "@ngrx/store";
 import { LogCategory, LogMessage, UUID } from '@lib';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
-export const load = createAction('[Logs] Load', props<{ selectedId: UUID | null, categories: LogCategory[], limit?: number }>());
-export const loadSuccess = createAction('[Logs] Load Success', props<{ logs: LogMessage[] }>());
+export const logActions = createActionGroup({
 
-export const refresh = createAction('[Logs] Refresh');
+	source: 'Log',
+	events: {
 
-export const clearLogs = createAction('[Logs] Clear Logs');
+		'Load'				: props<{ selectedId: UUID | null, categories: LogCategory[], limit?: number }>(),
+		'Load Success'		: props<{ logs: LogMessage[] }>(),
 
-export const setSelectedId = createAction('[Logs] Set Selected', props<{ id: UUID | null }>());
+		'Refresh'			: emptyProps(),
+
+		'Clear Logs'		: emptyProps(),
+
+		'Set Selected Id'	: props<{ id: UUID | null }>()
+
+	}
+
+});

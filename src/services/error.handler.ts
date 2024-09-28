@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { ToastConfiguration, errorNotification } from '@lib';
 import { Store } from '@ngrx/store';
-import { showNotification } from 'store/actions/core-notification.actions';
+import { coreNotificationActions } from 'store/actions';
 
 @Injectable()
 export class CustomErrorHandler implements ErrorHandler {
@@ -13,7 +13,7 @@ export class CustomErrorHandler implements ErrorHandler {
 
 		console.error(error);
 		const store = this.injector.get(Store);
-		store.dispatch(showNotification(this.getToastConfiguration(error)));
+		store.dispatch(coreNotificationActions.showNotification(this.getToastConfiguration(error)));
 
 	}
 

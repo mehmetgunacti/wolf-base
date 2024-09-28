@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { TAG_PINNED, Tag, slideUpDownTrigger } from 'lib';
 import { Observable, Subscription, debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs';
-import { clickTag, emptySelectedTags, search } from 'store/actions/note.actions';
+import { noteActions } from 'store/actions';
 import { selCore_pinnedNotes } from 'store/selectors/core/core-configuration.selectors';
 import { distinctTagsArray, relatedTags, selNote_queryParams } from 'store/selectors/note/note-tags.selectors';
 
@@ -50,7 +50,7 @@ export class NotesSearchAndTagCloudContainerComponent implements OnDestroy {
 		this.subscription = this.searchControl.valueChanges.pipe(
 			debounceTime(400),
 			distinctUntilChanged()
-		).subscribe(term => this.store.dispatch(search({ term })));
+		).subscribe(term => this.store.dispatch(noteActions.search({ term })));
 
 	}
 
@@ -62,7 +62,7 @@ export class NotesSearchAndTagCloudContainerComponent implements OnDestroy {
 
 	onTagClicked(name: string): void {
 
-		this.store.dispatch(clickTag({ name }));
+		this.store.dispatch(noteActions.clickTag({ name }));
 
 	}
 
@@ -74,7 +74,7 @@ export class NotesSearchAndTagCloudContainerComponent implements OnDestroy {
 
 	emptyFilter(): void {
 
-		this.store.dispatch(emptySelectedTags());
+		this.store.dispatch(noteActions.emptySelectedTags());
 
 	}
 

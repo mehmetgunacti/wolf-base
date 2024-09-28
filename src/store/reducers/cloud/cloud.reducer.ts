@@ -1,6 +1,6 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import { closeConflictDialog } from 'store/actions/cloud.actions';
+import { cloudActions } from 'store/actions';
 import { CloudModuleState, initialCloudState } from 'store/states/cloud.state';
 
 const hideConflictDialog = (state: CloudModuleState): CloudModuleState => {
@@ -81,7 +81,7 @@ export const cloudReducer: ActionReducer<CloudModuleState, Action> = createReduc
 	// on(loadEntitySuccess, (state, { entity }): CloudModuleState => ({ ...state, selectedEntity: entity })),
 	// on(loadTrashEntitySuccess, (state, { entity }): CloudModuleState => ({ ...state, selectedTrashEntity: entity })),
 	// on(downloadRemoteDataSuccess, (state, { remoteData }): CloudModuleState => ({ ...state, selectedRemoteData: remoteData })),
-	on(closeConflictDialog, (state): CloudModuleState => {
+	on(cloudActions.closeConflictDialog, (state): CloudModuleState => {
 
 		return produce(
 			state,

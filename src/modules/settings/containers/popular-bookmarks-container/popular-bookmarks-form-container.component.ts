@@ -1,7 +1,7 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
-import { savePopularBookmarksConfig } from 'store/actions/settings.actions';
+import { settingsActions } from 'store/actions';
 import { distinctTagsArray } from 'store/selectors/bookmark/bookmark-tags.selectors';
 import { selCore_popularBookmarks } from 'store/selectors/core/core-configuration.selectors';
 
@@ -46,7 +46,7 @@ export class PopularBookmarksFormContainerComponent implements AfterContentInit 
 
 	onSave(tags: string[]): void {
 
-		this.store.dispatch(savePopularBookmarksConfig({ tags }));
+		this.store.dispatch(settingsActions.savePopularBookmarksConfig({ tags }));
 
 	}
 

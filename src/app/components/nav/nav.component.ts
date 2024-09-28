@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CloudTask, MenuItem, TAG_PINNED, TAG_POPULAR, Theme, getNextTheme } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map, take } from 'rxjs';
-import { setTheme } from 'store/actions/core-ui.actions';
+import { coreUIActions } from 'store/actions';
 import { selBookmarkMenuBadge } from 'store/selectors/bookmark/bookmark-ui.selectors';
 import { selCloudAvailableTasks } from 'store/selectors/cloud/cloud.selectors';
 import { selCore_theme } from 'store/selectors/core/core-ui.selectors';
@@ -76,7 +76,7 @@ export class NavComponent {
 			.pipe(
 				take(1)
 			).subscribe(
-				(theme: Theme) => this.store.dispatch(setTheme({ theme: getNextTheme(theme) }))
+				(theme: Theme) => this.store.dispatch(coreUIActions.setTheme({ theme: getNextTheme(theme) }))
 			);
 
 	}

@@ -1,35 +1,34 @@
 import { Injectable, inject } from '@angular/core';
+import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
-import { LocalRepositoryService } from '@lib';
 import { map, switchMap } from 'rxjs/operators';
-import { showNotification } from 'store/actions/core-notification.actions';
-import { saveFirestoreConfig, saveFirestoreConfigSuccess, savePinnedNotesConfig, savePinnedNotesConfigSuccess, savePopularBookmarksConfig, savePopularBookmarksConfigSuccess, saveTitleLookup, saveTitleLookupSuccess } from 'store/actions/settings.actions';
+import { coreNotificationActions, settingsActions } from 'store/actions';
 
 @Injectable()
 export class SettingsEffects {
 
-    private actions$: Actions = inject(Actions);
+	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
 	saveFirestoreConfig$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(saveFirestoreConfig),
+			ofType(settingsActions.saveFirestoreConfig),
 			switchMap(({ config }) => this.localRepository.configuration.setFirestoreConfig(config)),
-			map(() => saveFirestoreConfigSuccess())
+			map(() => settingsActions.saveFirestoreConfigSuccess())
 
 		)
 
 	);
 
-    saveFirestoreConfigSuccess$ = createEffect(
+	saveFirestoreConfigSuccess$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(saveFirestoreConfigSuccess),
-			map(() => showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Firestore Configuration' }))
+			ofType(settingsActions.saveFirestoreConfigSuccess),
+			map(() => coreNotificationActions.showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Firestore Configuration' }))
 
 		)
 
@@ -39,9 +38,9 @@ export class SettingsEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(saveTitleLookup),
+			ofType(settingsActions.saveTitleLookup),
 			switchMap(({ url }) => this.localRepository.configuration.setTitleLookupUrl(url)),
-			map(() => saveTitleLookupSuccess())
+			map(() => settingsActions.saveTitleLookupSuccess())
 
 		)
 
@@ -51,8 +50,8 @@ export class SettingsEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(saveTitleLookupSuccess),
-			map(() => showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Title Lookup Configuration' }))
+			ofType(settingsActions.saveTitleLookupSuccess),
+			map(() => coreNotificationActions.showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Title Lookup Configuration' }))
 
 		)
 
@@ -62,9 +61,9 @@ export class SettingsEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(savePinnedNotesConfig),
+			ofType(settingsActions.savePinnedNotesConfig),
 			switchMap(({ tags }) => this.localRepository.configuration.setPinnedNotes(tags)),
-			map(() => savePinnedNotesConfigSuccess())
+			map(() => settingsActions.savePinnedNotesConfigSuccess())
 
 		)
 
@@ -74,8 +73,8 @@ export class SettingsEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(savePinnedNotesConfigSuccess),
-			map(() => showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Pinned Notes Configuration' }))
+			ofType(settingsActions.savePinnedNotesConfigSuccess),
+			map(() => coreNotificationActions.showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Pinned Notes Configuration' }))
 
 		)
 
@@ -85,9 +84,9 @@ export class SettingsEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(savePopularBookmarksConfig),
+			ofType(settingsActions.savePopularBookmarksConfig),
 			switchMap(({ tags }) => this.localRepository.configuration.setPopularBookmarks(tags)),
-			map(() => savePopularBookmarksConfigSuccess())
+			map(() => settingsActions.savePopularBookmarksConfigSuccess())
 
 		)
 
@@ -97,8 +96,8 @@ export class SettingsEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(savePopularBookmarksConfigSuccess),
-			map(() => showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Popular Bookmarks Configuration' }))
+			ofType(settingsActions.savePopularBookmarksConfigSuccess),
+			map(() => coreNotificationActions.showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Popular Bookmarks Configuration' }))
 
 		)
 

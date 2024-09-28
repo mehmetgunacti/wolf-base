@@ -1,9 +1,8 @@
 import { Injectable, inject } from '@angular/core';
+import { ToastConfiguration, ToastService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ToastConfiguration } from '@lib';
 import { tap } from 'rxjs/operators';
-import { ToastService } from '@lib';
-import { showNotification } from 'store/actions/core-notification.actions';
+import { coreNotificationActions } from 'store/actions';
 
 @Injectable()
 export class CoreNotificationEffects {
@@ -15,7 +14,7 @@ export class CoreNotificationEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(showNotification),
+			ofType(coreNotificationActions.showNotification),
 			tap((toast: ToastConfiguration) => this.toastService.show(toast))
 
 		),

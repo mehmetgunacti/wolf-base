@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal, Signal } from '@angular/core';
 import { Project, TaskCategoryLabels, TaskQueryParams, TaskStateLabels, UUID } from '@lib';
 import { Store } from '@ngrx/store';
-import * as taskActions from 'store/actions/project-task.actions';
+import { taskActions } from 'store/actions';
 import { selProject_selected } from 'store/selectors/project/project-ui.selectors';
 import { selTask_queryParams } from 'store/selectors/task/task-ui.selectors';
 

@@ -1,10 +1,18 @@
 import { UUID, Word } from '@lib';
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
-// UI
-export const answeredRight			= createAction('[Quiz] Answered Right', props<{ quizEntryId: UUID }>());
-export const answeredWrong			= createAction('[Quiz] Answered Wrong', props<{ word: Word }>());
+export const quizEntryActions = createActionGroup({
 
-export const closeAnswerDialog		= createAction('[Quiz] Close Answer Dialog', props<{ quizEntryId: UUID, editWord?: UUID }>());
+	source: 'Quiz Entry',
+	events: {
 
-export const increaseVisibility		= createAction('[Quiz] Increase Visibility');
+		// UI
+		'Answered Right'		: props<{ quizEntryId: UUID }>(),
+		'Answered Wrong'		: props<{ word: Word }>(),
+
+		'Close Answer Dialog'	: props<{ quizEntryId: UUID, editWord?: UUID }>(),
+		'Increase Visibility'	: emptyProps()
+
+	}
+
+});

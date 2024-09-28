@@ -3,7 +3,7 @@ import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { loadOneContentSuccess, setSelectedId } from 'store/actions/note.actions';
+import { noteActions } from 'store/actions';
 
 @Injectable()
 export class NoteContentLoadEffects {
@@ -15,11 +15,11 @@ export class NoteContentLoadEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(setSelectedId),
+			ofType(noteActions.setSelectedId),
 			map(param => param.id),
 			filter((id): id is string => !!id),
 			switchMap(id => this.localRepository.noteContent.getEntity(id)),
-			map(content => loadOneContentSuccess({ content }))
+			map(content => noteActions.loadOneContentSuccess({ content }))
 
 		)
 

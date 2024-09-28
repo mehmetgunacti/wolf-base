@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from "@ang
 import { Store } from "@ngrx/store";
 import { LogCategory, UUID } from "lib";
 import { Observable, of, tap } from "rxjs";
-import { load } from 'store/actions/logs.actions';
+import { logActions } from 'store/actions';
 
 export const setSelectedIdGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
 
@@ -11,7 +11,7 @@ export const setSelectedIdGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
 	const id: UUID | null = route.paramMap.get('id');
 	return of(true).pipe(
 
-		tap(() => store.dispatch(load({ selectedId: id, categories: [LogCategory.notification] })))
+		tap(() => store.dispatch(logActions.load({ selectedId: id, categories: [LogCategory.notification] })))
 
 	);
 

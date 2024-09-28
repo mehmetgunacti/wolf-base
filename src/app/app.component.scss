@@ -41,15 +41,19 @@
 		@include mx-scrollable(unset);
 		@include mx-transition(height left background-color);
 
-		body.big-screen.sidebar-full & {
+		@include bigScreen() {
 
-			left	: $nav-full-width;
+			body.sidebar-full & {
 
-		}
+				left	: $nav-full-width;
 
-		body.big-screen.sidebar-half & {
+			}
 
-			left	: $nav-half-width;
+			body.sidebar-half & {
+
+				left	: $nav-half-width;
+
+			}
 
 		}
 
@@ -73,44 +77,8 @@
 		overflow	: hidden;
 
 		background-color	: fn-var($col-bg-nav);
-		@include mx-transition(height background-color box-shadow); // width left
+		@include mx-transition(height width left background-color box-shadow);
 		@include mx-shadow($shadow);
-
-		animation-duration			: $nav-animation-duration;
-		animation-iteration-count	: 1;
-		animation-fill-mode			: forwards;
-
-		body.sidebar-hidden & {
-
-			animation-name: $nav-anim-to-hidden;
-			@include mx-shadow($shadow-invisible);
-
-		}
-
-		body.sidebar-full & {
-
-			animation-name: $nav-anim-to-full;
-
-		}
-
-		body.big-screen.sidebar-full & {
-
-			animation-name: $nav-anim-bigscreen-to-full;
-
-		}
-
-		body.big-screen.sidebar-half & {
-
-			animation-name: $nav-anim-bigscreen-to-half;
-
-		}
-
-		body.big-screen.sidebar-hidden & {
-
-			animation-name: $nav-anim-bigscreen-to-hidden;
-			@include mx-shadow($shadow-invisible);
-
-		}
 
 	}
 

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ClickedBookmark, UUID } from 'lib';
 import { Observable, map } from 'rxjs';
-import { click, openEditBookmarkDialog, togglePopular } from 'store/actions/bookmark.actions';
+import { bookmarkActions } from 'store/actions';
 import { selBM_filteredBookmarks } from 'store/selectors/bookmark/bookmark-tags.selectors';
 import { selBookmark_EntityCount } from 'store/selectors/entity/entity-bookmark.selectors';
 
@@ -29,19 +29,19 @@ export class BookmarksContainerComponent {
 
 	onEdit(id: UUID): void {
 
-		this.store.dispatch(openEditBookmarkDialog({ id }));
+		this.store.dispatch(bookmarkActions.openEditBookmarkDialog({ id }));
 
 	}
 
 	onPopular(id: UUID): void {
 
-		this.store.dispatch(togglePopular({ id }));
+		this.store.dispatch(bookmarkActions.togglePopularTag({ id }));
 
 	}
 
 	onClick(id: UUID): void {
 
-		this.store.dispatch(click({ id }));
+		this.store.dispatch(bookmarkActions.click({ id }));
 
 	}
 

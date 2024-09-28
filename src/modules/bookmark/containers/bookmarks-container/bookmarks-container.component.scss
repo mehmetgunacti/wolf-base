@@ -8,6 +8,7 @@
 
 	@include bigScreen() {
 
+		// todo : repeat(auto-fit, minmax(360px, 1fr)); what's the difference
 		grid-template-columns	: repeat(auto-fill, minmax(360px, 1fr));
 
 	}

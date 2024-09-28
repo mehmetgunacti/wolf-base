@@ -5,6 +5,9 @@ export enum SidebarState {
 
 	FULL = 'full',
 	HALF = 'half',
-	HIDDEN = 'hidden'
+	HIDDEN = 'hidden',
+	BIG_FULL = 'bigFull',
+	BIG_HALF = 'bigHalf',
+	BIG_HIDDEN = 'bigHidden',
 
 }

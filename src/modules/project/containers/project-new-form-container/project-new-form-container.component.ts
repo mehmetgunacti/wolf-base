@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppEntityType, Project } from 'lib';
-import * as entityActions from 'store/actions/entity.actions';
+import { entityActions } from 'store/actions';
 
 @Component({
 	selector: 'app-project-new-form-container',

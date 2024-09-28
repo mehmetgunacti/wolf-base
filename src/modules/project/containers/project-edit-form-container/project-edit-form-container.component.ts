@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppEntityType, Project, UUID } from 'lib';
 import { Observable } from 'rxjs';
-import * as entityActions from 'store/actions/entity.actions';
+import { entityActions } from 'store/actions';
 import { selProject_selected } from 'store/selectors/project/project-ui.selectors';
 
 @Component({

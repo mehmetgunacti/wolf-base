@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/cor
 import { ClickedBookmark, TAG_POPULAR, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { click } from 'store/actions/bookmark.actions';
+import { bookmarkActions } from 'store/actions';
 import * as bmSelectors from 'store/selectors/bookmark/bookmark-clicks.selectors';
 import * as coreSelectors from 'store/selectors/core/core-configuration.selectors';
 
@@ -49,7 +49,7 @@ export class PopularBookmarksContainerComponent implements OnInit {
 
 	onClick(id: UUID): void {
 
-		this.store.dispatch(click({ id }));
+		this.store.dispatch(bookmarkActions.click({ id }));
 
 	}
 

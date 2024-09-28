@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DatabaseReport } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { loadReport } from 'store/actions/database.actions';
+import { databaseActions } from 'store/actions';
 import * as reports from 'store/selectors/database/database.selectors';
 
 @Component({
@@ -22,13 +22,13 @@ export class DatabaseListContainerComponent {
 
 		this.report$ = this.store.select(reports.selDatabase_Report);
 		this.total$ = this.store.select(reports.selDatabase_TotalSize);
-		this.store.dispatch(loadReport());
+		this.store.dispatch(databaseActions.loadReport());
 
 	}
 
 	onRefresh(): void {
 
-		this.store.dispatch(loadReport());
+		this.store.dispatch(databaseActions.loadReport());
 
 	}
 

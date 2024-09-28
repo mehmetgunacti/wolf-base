@@ -1,14 +1,23 @@
-import { createAction, props } from "@ngrx/store";
 import { FirestoreConfig } from '@lib';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
-export const saveFirestoreConfig = createAction('[Settings] Save Firestore Config', props<{ config: FirestoreConfig }>());
-export const saveFirestoreConfigSuccess = createAction('[Settings] Save Firestore Config Success');
+export const settingsActions = createActionGroup({
 
-export const saveTitleLookup = createAction('[Settings] Save Title Lookup', props<{ url: string }>());
-export const saveTitleLookupSuccess = createAction('[Settings] Save Title Lookup Success');
+	source: 'Settings',
+	events: {
 
-export const savePopularBookmarksConfig = createAction('[Settings] Save Popular Bookmarks', props<{ tags: string[] }>());
-export const savePopularBookmarksConfigSuccess = createAction('[Settings] Save Popular Bookmarks Success');
+		'Save Firestore Config'					: props<{ config: FirestoreConfig }>(),
+		'Save Firestore Config Success'			: emptyProps(),
 
-export const savePinnedNotesConfig = createAction('[Settings] Save Pinned Notes', props<{ tags: string[] }>());
-export const savePinnedNotesConfigSuccess = createAction('[Settings] Save Pinned Notes Success');
+		'Save Title Lookup'						: props<{ url: string }>(),
+		'Save Title Lookup Success'				: emptyProps(),
+
+		'Save Popular Bookmarks Config'			: props<{ tags: string[] }>(),
+		'Save Popular Bookmarks Config Success'	: emptyProps(),
+
+		'Save Pinned Notes Config'				: props<{ tags: string[] }>(),
+		'Save Pinned Notes Config Success'		: emptyProps()
+
+	}
+
+});

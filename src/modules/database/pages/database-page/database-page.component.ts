@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { backupDatabase } from 'store/actions/database.actions';
+import { databaseActions } from 'store/actions';
 
 @Component({
 	selector: 'app-database-page',
@@ -15,7 +15,7 @@ export class DatabasePageComponent {
 
 	onBackupDatabase(): void {
 
-		this.store.dispatch(backupDatabase());
+		this.store.dispatch(databaseActions.backupDatabase());
 
 	}
 

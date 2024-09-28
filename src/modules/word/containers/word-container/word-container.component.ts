@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AppEntityType, Definition, definitionName, QuizEntry, UUID, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as entityActions from 'store/actions/entity.actions';
+import { entityActions } from 'store/actions';
 import { selQuizEntry_EntityIds } from 'store/selectors/entity/entity-quiz-entry.selectors';
 import { selWord_SelectedEntity } from 'store/selectors/word/word-ui.selectors';
 

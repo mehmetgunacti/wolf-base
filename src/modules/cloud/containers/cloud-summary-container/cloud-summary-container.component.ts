@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
 import { AppEntityType, CloudTask, SyncTaskType } from 'lib';
 import { combineLatest, map, Observable } from 'rxjs';
-import * as bmActions from 'store/actions/bookmark.actions';
-import * as entityActions from 'store/actions/entity.actions';
+import { bookmarkActions } from 'store/actions';
+import { entityActions } from 'store/actions';
 import { selBoomkark_clickedCloudTasks } from 'store/selectors/bookmark/bookmark-clicks.selectors';
 import { selCloudAvailableTasks } from 'store/selectors/cloud/cloud.selectors';
 
@@ -12,7 +12,7 @@ function getBookmarkAction(taskType: SyncTaskType): Action | null {
 	const entityType = AppEntityType.bookmark;
 
 	if (taskType === SyncTaskType.clicked)
-		return bmActions.uploadClicked();
+		return bookmarkActions.uploadClicked();
 
 	return filterAction(AppEntityType.bookmark, taskType);
 

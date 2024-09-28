@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LogMessage, UUID } from 'lib';
 import { Observable } from 'rxjs';
-import { refresh } from 'store/actions/logs.actions';
+import { logActions } from 'store/actions';
 import { selLogs_allEntries, selLogs_selectedId } from 'store/selectors/log/logs.selectors';
 
 @Component({
@@ -27,7 +27,7 @@ export class LogsListContainerComponent {
 
 	onRefresh(): void {
 
-		this.store.dispatch(refresh());
+		this.store.dispatch(logActions.refresh());
 
 	}
 

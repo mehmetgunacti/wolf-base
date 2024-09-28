@@ -1,11 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
-import { LocalRepositoryService, replaceByPrefix } from '@lib';
+import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { switchMap, tap } from 'rxjs/operators';
-import { setTheme } from 'store/actions/core-ui.actions';
+import { coreUIActions } from 'store/actions';
 import { selCore_theme } from 'store/selectors/core/core-ui.selectors';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class CoreThemeEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(setTheme),
+			ofType(coreUIActions.setTheme),
 			switchMap(({ theme }) => this.localRepository.configuration.setTheme(theme))
 
 		),

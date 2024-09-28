@@ -4,7 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { AnimState, Quiz, QuizVisibility, quoteChangeTrigger, slideChoicesTrigger, upsideDownTrigger, Word } from '@lib';
 import { Store } from '@ngrx/store';
 import { QuizService } from 'services/quiz.service';
-import * as quizActions from 'store/actions/quiz-entry.actions';
+import { quizEntryActions } from 'store/actions';
 import { selQuiz_visibility } from 'store/selectors/quiz-entry/quiz-entry-ui.selectors';
 import { selQuiz_dueItemsCount } from 'store/selectors/quiz-entry/quiz.selectors';
 import { choicesBlinkTrigger } from './quiz.animation';
@@ -71,10 +71,10 @@ export class QuizContainerComponent {
 		if (animEnded) {
 
 			if (quiz.incorrectChoice() === null) // choice was correct
-				this.store.dispatch(quizActions.answeredRight({ quizEntryId: quiz.definition.id }));
+				this.store.dispatch(quizEntryActions.answeredRight({ quizEntryId: quiz.definition.id }));
 
 			else // choice was incorrect
-				this.store.dispatch(quizActions.answeredWrong({ word: quiz.word }));
+				this.store.dispatch(quizEntryActions.answeredWrong({ word: quiz.word }));
 
 		}
 
@@ -82,13 +82,13 @@ export class QuizContainerComponent {
 
 	showAnswer(word: Word): void {
 
-		this.store.dispatch(quizActions.answeredWrong({ word }));
+		this.store.dispatch(quizEntryActions.answeredWrong({ word }));
 
 	}
 
 	increaseVisibility(): void {
 
-		this.store.dispatch(quizActions.increaseVisibility());
+		this.store.dispatch(quizEntryActions.increaseVisibility());
 
 	}
 

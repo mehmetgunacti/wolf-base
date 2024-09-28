@@ -4,7 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { UUID, Word } from 'lib';
 import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
-import * as quizActions from 'store/actions/quiz-entry.actions';
+import { quizEntryActions } from 'store/actions';
 import { selQuiz_answer } from 'store/selectors/quiz-entry/quiz.selectors';
 
 @Component({
@@ -39,13 +39,13 @@ export class QuizAnswerContainerComponent {
 
 	onClose(quizEntryId: UUID): void {
 
-		this.store.dispatch(quizActions.closeAnswerDialog({ quizEntryId }));
+		this.store.dispatch(quizEntryActions.closeAnswerDialog({ quizEntryId }));
 
 	}
 
 	onEdit(quizEntryId: UUID, editWord: UUID): void {
 
-		this.store.dispatch(quizActions.closeAnswerDialog({ quizEntryId, editWord }));
+		this.store.dispatch(quizEntryActions.closeAnswerDialog({ quizEntryId, editWord }));
 
 	}
 

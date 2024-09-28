@@ -4,9 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { setNow } from 'store/actions/core-ui.actions';
-import { loadAllSuccess } from 'store/actions/core.actions';
-import { changeQuote, setRunning } from 'store/actions/quote.actions';
+import { coreActions, coreUIActions, quoteActions } from 'store/actions';
 import { selQuote_EntityIds } from 'store/selectors/entity/entity-quote.selectors';
 import { selQuoteViewer_running } from 'store/selectors/quote/quote-viewer.selectors';
 
@@ -21,7 +19,7 @@ export class QuoteViewerEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(setRunning),
+			ofType(quoteActions.setRunning),
 			switchMap(({ running }) => this.repository.configuration.setQuotesRunning(running))
 
 		),
@@ -33,9 +31,9 @@ export class QuoteViewerEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(loadAllSuccess),
+			ofType(coreActions.loadAllSuccess),
 			map(({ configuration }) => configuration.quotesRunning),
-			map(running => setRunning({ running }))
+			map(running => quoteActions.setRunning({ running }))
 
 		)
 
@@ -45,12 +43,12 @@ export class QuoteViewerEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(setNow),
+			ofType(coreUIActions.setNow),
 			withLatestFrom(this.store.select(selQuoteViewer_running)),
 			filter(([, running]) => running),
 			withLatestFrom(this.store.select(selQuote_EntityIds)),
 			map(([, ids]) => ids[Math.floor(Math.random() * ids.length)]),
-			map(id => changeQuote({ id }))
+			map(id => quoteActions.changeQuote({ id }))
 
 		)
 

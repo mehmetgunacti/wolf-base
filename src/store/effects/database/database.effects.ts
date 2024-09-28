@@ -5,7 +5,7 @@ import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { BackupDatabase } from 'lib/utils/database.util';
 import { NgProgress } from 'ngx-progressbar';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { backupDatabase, loadReport, loadReportSuccess } from 'store/actions/database.actions';
+import { databaseActions } from 'store/actions';
 
 @Injectable()
 export class DatabaseEffects {
@@ -18,7 +18,7 @@ export class DatabaseEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(backupDatabase),
+			ofType(databaseActions.backupDatabase),
 			switchMap(() => new BackupDatabase(this.localRepository).execute())
 
 		),
@@ -31,7 +31,7 @@ export class DatabaseEffects {
 		// todo refactor this
 		() => this.actions$.pipe(
 
-			ofType(loadReport),
+			ofType(databaseActions.loadReport),
 			tap(() => this.progress.ref().start()),
 			switchMap(() => Promise.all([
 
@@ -189,7 +189,7 @@ export class DatabaseEffects {
 				return report;
 
 			}),
-			map(report => loadReportSuccess({ report }))
+			map(report => databaseActions.loadReportSuccess({ report }))
 
 		)
 
@@ -199,7 +199,7 @@ export class DatabaseEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(loadReportSuccess),
+			ofType(databaseActions.loadReportSuccess),
 			tap(() => this.progress.ref().complete())
 
 		),

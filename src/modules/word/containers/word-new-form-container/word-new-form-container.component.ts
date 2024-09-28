@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppEntityType, Word } from 'lib';
-import { create } from 'store/actions/entity.actions';
+import { entityActions } from 'store/actions';
 
 @Component({
 	selector: 'app-word-new-form-container',
@@ -15,7 +15,7 @@ export class WordNewFormContainerComponent {
 
 	onCreate(word: Partial<Word>): void {
 
-		this.store.dispatch(create({ entityType: AppEntityType.word, entity: word }));
+		this.store.dispatch(entityActions.create({ entityType: AppEntityType.word, entity: word }));
 
 	}
 

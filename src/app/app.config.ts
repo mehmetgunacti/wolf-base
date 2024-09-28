@@ -9,9 +9,7 @@ import { CustomErrorHandler, DexieLocalRepositoryServiceImpl, FirestoreRemoteRep
 import { AnimationAwareDialog } from 'services/animation-aware-dialog.service';
 import { BookmarkSyncServiceImpl } from 'services/bookmark-sync.service';
 import { SyncServiceImpl } from 'services/sync.service';
-import * as bmActions from 'store/actions/bookmark.actions';
-import * as coreActions from 'store/actions/core.actions';
-import * as entityActions from 'store/actions/entity.actions';
+import { bookmarkActions, coreActions, entityActions } from 'store/actions';
 
 export const routes: Routes = [
 
@@ -98,7 +96,7 @@ const appInitializerFactory = (store: Store) => {
 		}));
 
 		// load clicks
-		store.dispatch(bmActions.loadAllClicks());
+		store.dispatch(bookmarkActions.loadAllClicks());
 
 	};
 

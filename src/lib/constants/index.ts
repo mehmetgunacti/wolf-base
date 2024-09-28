@@ -8,5 +8,6 @@ export * from './quiz.constant';
 export * from './quote.constant';
 export * from './responsive.constant';
 export * from './sidebar.constant';
+export * from './sidebar.constants';
 export * from './theme.constant';
 export * from './word.constant';

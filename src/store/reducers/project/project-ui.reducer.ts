@@ -1,12 +1,12 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { setQueryParams, setSelectedId } from 'store/actions/project.actions';
+import { projectActions } from 'store/actions';
 import { initialProjectUIState, Project_UIState } from 'store/states/project.state';
 
 const reducer = createReducer(
 
 	initialProjectUIState,
-	on(setQueryParams, (state, { search }): Project_UIState => ({ ...state, queryParams: { search } })),
-	on(setSelectedId, (state, { id }): Project_UIState => ({ ...state, selectedId: id }))
+	on(projectActions.setQueryParams, (state, { search }): Project_UIState => ({ ...state, queryParams: { search } })),
+	on(projectActions.setSelectedId, (state, { id }): Project_UIState => ({ ...state, selectedId: id }))
 
 );
 

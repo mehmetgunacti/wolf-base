@@ -3,9 +3,7 @@ import { AppEntityType, increase, next, Progress, QuizEntry } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, withLatestFrom } from 'rxjs/operators';
-import * as coreActions from 'store/actions/core-notification.actions';
-import * as entityActions from 'store/actions/entity.actions';
-import * as quizActions from 'store/actions/quiz-entry.actions';
+import { coreNotificationActions, entityActions, quizEntryActions } from 'store/actions';
 import { selQuizEntry_EntityList } from 'store/selectors/entity/entity-quiz-entry.selectors';
 
 @Injectable()
@@ -18,13 +16,13 @@ export class QuizEntryLogicEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(quizActions.answeredRight),
+			ofType(quizEntryActions.answeredRight),
 			withLatestFrom(this.store.select(selQuizEntry_EntityList)),
 			map(([{ quizEntryId }, entries]) => {
 
 				const quizEntry = entries.find(e => e.id === quizEntryId);
 				if (!quizEntry)
-					return coreActions.showNotification({ severity: 'error', summary: 'QuizEntry Update Failure!', detail: `${quizEntryId} not found` });
+					return coreNotificationActions.showNotification({ severity: 'error', summary: 'QuizEntry Update Failure!', detail: `${quizEntryId} not found` });
 
 				const entity: QuizEntry = {
 
@@ -47,13 +45,13 @@ export class QuizEntryLogicEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(quizActions.closeAnswerDialog),
+			ofType(quizEntryActions.closeAnswerDialog),
 			withLatestFrom(this.store.select(selQuizEntry_EntityList)),
 			map(([{ quizEntryId }, entries]) => {
 
 				const quizEntry = entries.find(e => e.id === quizEntryId);
 				if (!quizEntry)
-					return coreActions.showNotification({ severity: 'error', summary: 'QuizEntry Update Failure!', detail: `${quizEntryId} not found` });
+					return coreNotificationActions.showNotification({ severity: 'error', summary: 'QuizEntry Update Failure!', detail: `${quizEntryId} not found` });
 
 				const entity: QuizEntry = {
 

@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import * as actions from 'store/actions/entity.actions';
+import { entityActions } from 'store/actions';
 
 @Injectable()
 export class EntityUpdateEffects {
@@ -16,13 +16,13 @@ export class EntityUpdateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(actions.update),
+			ofType(entityActions.update),
 			switchMap(({ entityType, id, entity }) =>
 
 				from(
 					this.localRepository.getRepository(entityType).update(id, entity)
 				).pipe(
-					map(() => actions.updateSuccess({ entityType, id }))
+					map(() => entityActions.updateSuccess({ entityType, id }))
 				)
 
 			)
@@ -35,8 +35,8 @@ export class EntityUpdateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(actions.updateSuccess),
-			map(({ entityType, id }) => actions.loadOne({ entityType, id }))
+			ofType(entityActions.updateSuccess),
+			map(({ entityType, id }) => entityActions.loadOne({ entityType, id }))
 
 		)
 
@@ -46,8 +46,8 @@ export class EntityUpdateEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(actions.updateSuccess),
-			map(({ entityType, id }) => actions.loadOneSyncData({ entityType, id }))
+			ofType(entityActions.updateSuccess),
+			map(({ entityType, id }) => entityActions.loadOneSyncData({ entityType, id }))
 
 		)
 

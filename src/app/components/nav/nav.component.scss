@@ -40,7 +40,7 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 			& > [nav_item_right] {
 
-				position		: absolute;
+				position		: absolute; // <-- todo not needed anymore
 				@include mx-d-flex-ai-center;
 
 				padding			: 0px;

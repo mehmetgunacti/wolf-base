@@ -2,9 +2,7 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit
 import { Store } from '@ngrx/store';
 import { AppEntityType, Bookmark, ToastConfiguration, UUID } from 'lib';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
-import { closeEditBookmarkDialog } from 'store/actions/bookmark.actions';
-import { showNotification } from 'store/actions/core-notification.actions';
-import * as entityActions from 'store/actions/entity.actions';
+import { bookmarkActions, coreNotificationActions, entityActions } from 'store/actions';
 import { distinctTagsArray } from 'store/selectors/bookmark/bookmark-tags.selectors';
 import { selBookmarkEditId } from 'store/selectors/bookmark/bookmark-ui.selectors';
 import { selCore_titleLookupUrl } from 'store/selectors/core/core-configuration.selectors';
@@ -79,7 +77,7 @@ export class BookmarkEditContainerComponent implements OnInit, OnDestroy, AfterC
 
 	onClose(): void {
 
-		this.store.dispatch(closeEditBookmarkDialog());
+		this.store.dispatch(bookmarkActions.closeEditBookmarkDialog());
 
 	}
 
@@ -91,7 +89,7 @@ export class BookmarkEditContainerComponent implements OnInit, OnDestroy, AfterC
 
 	onTitleLookup(toast: ToastConfiguration): void {
 
-		this.store.dispatch(showNotification(toast));
+		this.store.dispatch(coreNotificationActions.showNotification(toast));
 
 	}
 

@@ -4,25 +4,25 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import * as actions from 'store/actions/entity.actions';
+import { entityActions } from 'store/actions';
 
 @Injectable()
 export class EntityCreateEffects {
 
-	private actions$: Actions = inject(Actions);
+	private coreActions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 
 	create$ = createEffect(
 
-		() => this.actions$.pipe(
+		() => this.coreActions$.pipe(
 
-			ofType(actions.create),
+			ofType(entityActions.create),
 			switchMap(({ entityType, entity }) =>
 
 				from(
 					this.localRepository.getRepository(entityType).create(entity)
 				).pipe(
-					map((entity: Entity) => actions.createSuccess({ entityType, entity }))
+					map((entity: Entity) => entityActions.createSuccess({ entityType, entity }))
 				)
 
 			)
@@ -33,10 +33,10 @@ export class EntityCreateEffects {
 
 	createSuccessToLoadOneNote$ = createEffect(
 
-		() => this.actions$.pipe(
+		() => this.coreActions$.pipe(
 
-			ofType(actions.createSuccess),
-			map(({ entityType, entity }) => actions.loadOne({ entityType, id: entity.id }))
+			ofType(entityActions.createSuccess),
+			map(({ entityType, entity }) => entityActions.loadOne({ entityType, id: entity.id }))
 
 		)
 

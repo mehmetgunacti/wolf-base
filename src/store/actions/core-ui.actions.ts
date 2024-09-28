@@ -1,8 +1,18 @@
-import { SidebarState, Theme } from '@lib';
-import { createAction, props } from '@ngrx/store';
+import { Theme } from '@lib';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
-export const setBigScreen			= createAction('[Core UI] Set Big Screen', props<{ isBigScreen: boolean }>());
-export const setSidebarState		= createAction('[Core UI] Set Sidebar State', props<{ state: SidebarState }>());
-export const setNextSidebarState	= createAction('[Core UI] Set Next Sidebar State');
-export const setTheme				= createAction('[Core UI] Set Theme', props<{ theme: Theme }>());
-export const setNow					= createAction('[Core UI] Set Now');
+export const coreUIActions = createActionGroup({
+
+	source: 'Core UI',
+	events: {
+
+		'Set Big Screen'			: props<{ bigScreen: boolean }>(),
+		'Hide Sidebar'				: emptyProps(),
+		'Set Next Sidebar State'	: emptyProps(),
+
+		'Set Theme'					: props<{ theme: Theme }>(),
+		'Set Now'					: emptyProps(),
+
+	}
+
+});

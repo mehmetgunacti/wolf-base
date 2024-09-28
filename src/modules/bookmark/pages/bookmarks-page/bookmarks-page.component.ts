@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { delayDestroyTrigger } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { fromClipboard, openAddBookmarkDialog } from 'store/actions/bookmark.actions';
+import { bookmarkActions } from 'store/actions';
 import { selBookmarkShaking } from 'store/selectors/bookmark/bookmark-ui.selectors';
 
 @Component({
@@ -40,13 +40,13 @@ export class BookmarksPageComponent {
 
 	openAddDialog(): void {
 
-		this.store.dispatch(openAddBookmarkDialog());
+		this.store.dispatch(bookmarkActions.openAddBookmarkDialog());
 
 	}
 
 	fromClipboard(): void {
 
-		this.store.dispatch(fromClipboard());
+		this.store.dispatch(bookmarkActions.fromClipboard());
 
 	}
 

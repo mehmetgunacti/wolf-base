@@ -2,9 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { AppEntities, AppEntityType, isEntityOfType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { filter, map } from 'rxjs/operators';
-import { navigate } from 'store/actions/core-navigation.actions';
-import { showNotification } from 'store/actions/core-notification.actions';
-import * as entityActions from 'store/actions/entity.actions';
+import { coreNavigationActions, coreNotificationActions, entityActions } from 'store/actions';
 
 @Injectable()
 export class NoteContentCreateEffects {
@@ -17,7 +15,7 @@ export class NoteContentCreateEffects {
 
 			ofType(entityActions.createSuccess),
 			filter(isEntityOfType(AppEntityType.noteContent)),
-			map(({ entityType }) => showNotification({ severity: 'success', detail: `${AppEntities[entityType].label} created` }))
+			map(({ entityType }) => coreNotificationActions.showNotification({ severity: 'success', detail: `${AppEntities[entityType].label} created` }))
 
 		)
 
@@ -29,7 +27,7 @@ export class NoteContentCreateEffects {
 
 			ofType(entityActions.createSuccess),
 			filter(isEntityOfType(AppEntityType.noteContent)),
-			map(({ entity }) => navigate({ url: [`/notes`, entity.id] }))
+			map(({ entity }) => coreNavigationActions.navigate({ url: [`/notes`, entity.id] }))
 
 		)
 

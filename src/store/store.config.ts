@@ -30,7 +30,6 @@ export const effectList = [
 	effects.CoreNotificationEffects,
 	effects.CoreUIEffects,
 	effects.CoreThemeEffects,
-	effects.CoreSidebarEffects,
 
 	// Entity
 	effects.EntityCreateEffects,

@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NameBase, TASK_CATEGORIES, TASK_STATE, Tag, TaskState, slideUpDownTrigger } from 'lib';
 import { Observable, debounceTime, distinctUntilChanged, map, take } from 'rxjs';
-import { clickTag, resetQueryParams, search, taskCategoryChange, taskStatusChange } from 'store/actions/project-task.actions';
+import { taskActions } from 'store/actions';
 import { distinctTagsArray, relatedTags } from 'store/selectors/task/task-tags.selectors';
 import { selTask_queryParams } from 'store/selectors/task/task-ui.selectors';
 
@@ -63,23 +63,23 @@ export class ProjectSearchAndTagCloudContainerComponent {
 				distinctUntilChanged(),
 				takeUntilDestroyed()
 			)
-			.subscribe(term => this.store.dispatch(search({ term })));
+			.subscribe(term => this.store.dispatch(taskActions.search({ term })));
 
 		// dispatch on status change
 		this.fcStatus.valueChanges
 			.pipe(takeUntilDestroyed())
-			.subscribe(status => this.store.dispatch(taskStatusChange({ status })));
+			.subscribe(status => this.store.dispatch(taskActions.taskStatusChange({ status })));
 
 		// dispatch on category change
 		this.fcCategory.valueChanges
 			.pipe(takeUntilDestroyed())
-			.subscribe(category => this.store.dispatch(taskCategoryChange({ category })));
+			.subscribe(category => this.store.dispatch(taskActions.taskCategoryChange({ category })));
 
 	}
 
 	onTagClicked(name: string): void {
 
-		this.store.dispatch(clickTag({ name }));
+		this.store.dispatch(taskActions.clickTag({ name }));
 
 	}
 
@@ -88,7 +88,7 @@ export class ProjectSearchAndTagCloudContainerComponent {
 		this.fcSearch.reset();
 		this.fcStatus.reset(TaskState.ongoing);
 		this.fcCategory.reset('all');
-		this.store.dispatch(resetQueryParams());
+		this.store.dispatch(taskActions.resetQueryParams());
 
 	}
 

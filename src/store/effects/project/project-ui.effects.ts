@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { filter, map, tap, withLatestFrom } from 'rxjs';
-import * as projectActions from 'store/actions/project.actions';
+import { projectActions } from 'store/actions';
 
 @Injectable()
 export class ProjectUIEffects {

@@ -5,14 +5,14 @@ $_left-offset	: 0;
 	from {
 
 		left				: $_left-offset;
-		width				: $nav-full-width;
+		//width				: $nav-full-width;
 
 	}
 
 	to {
 
 		left				: -$nav-full-width + $_left-offset;
-		width				: $nav-full-width;
+		//width				: $nav-half-width;
 
 	}
 

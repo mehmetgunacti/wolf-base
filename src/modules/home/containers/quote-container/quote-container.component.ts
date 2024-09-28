@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, HostListener, Signal, WritableSigna
 import { Quote, onEnterFadeOutTrigger } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, concatMap, filter, iif, of, scan, switchMap, take, tap, timer } from 'rxjs';
-import { disableAnimation, setRunning } from 'store/actions/quote.actions';
+import { quoteActions } from 'store/actions';
 import { selQuoteViewer_animate, selQuoteViewer_running, selQuote_SelectedEntity } from 'store/selectors/quote/quote-viewer.selectors';
 
 interface Pair {
@@ -24,7 +24,7 @@ const outgoing = (value: Quote): QuoteWrapper => ({ value, animClass: 'outgoing'
 
 const incoming$ = (pair: Pair, animate: boolean, store: Store): Observable<QuoteWrapper> => {
 
-	return of(incoming(pair.curr!, animate)).pipe(tap(() => store.dispatch(disableAnimation())));
+	return of(incoming(pair.curr!, animate)).pipe(tap(() => store.dispatch(quoteActions.disableAnimation())));
 
 }
 
@@ -92,7 +92,7 @@ export class QuoteContainerComponent {
 			setTimeout(() => this.showPlay.set(false), 2500);
 
 		}
-		this.store.dispatch(setRunning({ running: !this.running() }));
+		this.store.dispatch(quoteActions.setRunning({ running: !this.running() }));
 
 	}
 

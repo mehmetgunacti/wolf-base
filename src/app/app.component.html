@@ -3,12 +3,16 @@
 	<app-splash-screen @splash />
 
 }
+@if (sidebarOpen()) {
+
+	<app-nav-overlay @opacity />
+
+}
 <ng-progress />
-<app-nav-overlay />
 <header>
 	<app-header />
 </header>
-<nav>
+<nav [@sidebar]="sidebarState()">
 	<app-nav />
 </nav>
 <main cdkScrollable>

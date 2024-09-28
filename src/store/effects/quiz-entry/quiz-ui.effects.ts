@@ -4,8 +4,7 @@ import { UUID } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { QuizAnswerContainerComponent } from 'modules/home/containers/quiz-answer-container/quiz-answer-container.component';
 import { filter, map, tap } from 'rxjs/operators';
-import { navigate } from 'store/actions/core-navigation.actions';
-import * as quizActions from 'store/actions/quiz-entry.actions';
+import { coreNavigationActions, quizEntryActions } from 'store/actions';
 
 @Injectable()
 export class QuizUIEffects {
@@ -19,7 +18,7 @@ export class QuizUIEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(quizActions.answeredWrong),
+			ofType(quizEntryActions.answeredWrong),
 			map(() => {
 				this.dialogRef = this.dialogService.open(QuizAnswerContainerComponent, { closeOnNavigation: true });
 			})
@@ -33,7 +32,7 @@ export class QuizUIEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(quizActions.closeAnswerDialog),
+			ofType(quizEntryActions.closeAnswerDialog),
 			tap(() => this.dialogRef?.close())
 
 		),
@@ -45,10 +44,10 @@ export class QuizUIEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(quizActions.closeAnswerDialog),
+			ofType(quizEntryActions.closeAnswerDialog),
 			map(({ editWord }) => editWord),
 			filter((wordId): wordId is UUID => !!wordId),
-			map(wordId => navigate({ url: ['/words', wordId, 'edit'] }))
+			map(wordId => coreNavigationActions.navigate({ url: ['/words', wordId, 'edit'] }))
 
 		)
 

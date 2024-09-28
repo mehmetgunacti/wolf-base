@@ -4,7 +4,7 @@ import { LocalRepositoryService, commaSplit, toggleArrayItem } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
-import * as noteActions from 'store/actions/note.actions';
+import { noteActions } from 'store/actions';
 
 @Injectable()
 export class NoteUIEffects {

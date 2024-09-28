@@ -3,7 +3,7 @@ import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { commaSplit, findEnumValue, TaskCategory, TaskState, toggleArrayItem } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { filter, map, tap, withLatestFrom } from 'rxjs';
-import * as taskActions from 'store/actions/project-task.actions';
+import { taskActions } from 'store/actions';
 
 @Injectable()
 export class TaskUIEffects {
@@ -44,7 +44,7 @@ export class TaskUIEffects {
 		() => this.actions$.pipe(
 
 			ofType(taskActions.resetQueryParams),
-			tap(() => this.router.navigate([], { queryParams: { }}))
+			tap(() => this.router.navigate([], { queryParams: {} }))
 			// withLatestFrom(this.activatedRoute.queryParams),
 			// tap(([_, params]) => {
 

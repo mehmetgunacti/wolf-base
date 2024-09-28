@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from "@ang
 import { Store } from "@ngrx/store";
 import { UUID } from "lib";
 import { Observable, of, tap } from "rxjs";
-import { setSelectedId } from 'store/actions/word.actions';
+import { wordActions } from 'store/actions';
 
 export const setSelectedIdGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
 
@@ -12,7 +12,7 @@ export const setSelectedIdGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
 	return of(true).pipe(
 
 		// dispatch id
-		tap(() => store.dispatch(setSelectedId({ id })))
+		tap(() => store.dispatch(wordActions.setSelectedId({ id })))
 
 	);
 

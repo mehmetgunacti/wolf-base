@@ -13,23 +13,6 @@
 	background-color	: fn-var($col-bg-overlay);
 	z-index				: $z-index-nav-overlay;
 
-	opacity				: 0;
-	visibility			: hidden;
 	@include mx-transition(height opacity visibility);
 
-	body.sidebar-full & {
-
-		opacity				: 1;
-		visibility			: visible;
-
-	}
-
-	body.big-screen & {
-
-		display			: none;
-
-	}
-
-
 }
-

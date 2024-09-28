@@ -1,14 +1,14 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as actions from 'store/actions/project-task.actions';
+import { taskActions } from 'store/actions';
 import { initialTaskUIState, Task_UIState } from 'store/states/task.state';
 
 const reducer = createReducer(
 
 	initialTaskUIState,
-	on(actions.setQueryParams, (state, { search, status, category, tags }): Task_UIState => ({ ...state, queryParams: { search, status, category, tags } })),
-	on(actions.openAddTaskDialog, (state): Task_UIState => ({ ...state, selectedId: null })),
-	on(actions.closeEditDialog, (state): Task_UIState => ({ ...state, selectedId: null })),
-	on(actions.openEditTaskDialog, (state, { id }): Task_UIState => ({ ...state, selectedId: id }))
+	on(taskActions.setQueryParams, (state, { search, status, category, tags }): Task_UIState => ({ ...state, queryParams: { search, status, category, tags } })),
+	on(taskActions.openAddTaskDialog, (state): Task_UIState => ({ ...state, selectedId: null })),
+	on(taskActions.closeEditDialog, (state): Task_UIState => ({ ...state, selectedId: null })),
+	on(taskActions.openEditTaskDialog, (state, { id }): Task_UIState => ({ ...state, selectedId: id }))
 
 );
 

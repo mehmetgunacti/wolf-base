@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AppEntityType, Quote, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
-import * as entityActions from 'store/actions/entity.actions';
-import { setSelectedId } from 'store/actions/quote.actions';
+import { entityActions, quoteActions } from 'store/actions';
 import { selQuote_EntityList } from 'store/selectors/entity/entity-quote.selectors';
 import { selQuoteSettings_selected } from 'store/selectors/quote/quote-settings.selectors';
 
@@ -54,7 +53,7 @@ export class QuoteSettingsContainerComponent {
 
 	onSelected(id: UUID): void {
 
-		this.store.dispatch(setSelectedId({ id }));
+		this.store.dispatch(quoteActions.setSelectedId({ id }));
 
 	}
 
@@ -66,7 +65,7 @@ export class QuoteSettingsContainerComponent {
 
 	onReset(): void {
 
-		this.store.dispatch(setSelectedId({ id: null }));
+		this.store.dispatch(quoteActions.setSelectedId({ id: null }));
 
 	}
 

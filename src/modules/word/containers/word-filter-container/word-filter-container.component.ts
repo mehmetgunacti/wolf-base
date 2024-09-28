@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { search } from 'store/actions/word.actions';
+import { wordActions } from 'store/actions';
 import { selWord_search } from 'store/selectors/word/word-ui.selectors';
 
 @Component({
@@ -26,7 +26,7 @@ export class WordFilterContainerComponent {
 
 	onSearch(term: string): void {
 
-		this.store.dispatch(search({ term }));
+		this.store.dispatch(wordActions.search({ term }));
 
 	}
 

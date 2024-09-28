@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { closeConflictDialog } from 'store/actions/cloud.actions';
-import { downloadRemoteMetadata } from 'store/actions/entity.actions';
+import { cloudActions, entityActions } from 'store/actions';
 import { selCloudConflictDialogTitle, selCloudIsConflictDialogVisible } from 'store/selectors/cloud/cloud-ui.selectors';
 import { selCore_isFirestoreConfigMissing } from 'store/selectors/core/core-configuration.selectors';
 import { selCore_isBigScreen } from 'store/selectors/core/core-ui.selectors';
@@ -34,13 +33,13 @@ export class CloudPageComponent {
 
 	onDownloadRemoteIds(): void {
 
-		this.store.dispatch(downloadRemoteMetadata());
+		this.store.dispatch(entityActions.downloadRemoteMetadata());
 
 	}
 
 	closeConflictDialog(): void {
 
-		this.store.dispatch(closeConflictDialog());
+		this.store.dispatch(cloudActions.closeConflictDialog());
 
 	}
 

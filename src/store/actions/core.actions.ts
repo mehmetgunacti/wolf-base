@@ -1,6 +1,14 @@
 import { Configuration } from '@lib';
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
-export const loadAll = createAction('[Configuration] Load All');
-export const loadAllSuccess = createAction('[Configuration] Load All Success', props<{ configuration: Configuration }>());
+export const coreActions = createActionGroup({
 
+	source: 'Core',
+	events: {
+
+		'Load All'			: emptyProps(),
+		'Load All Success'	: props<{ configuration: Configuration }>()
+
+	}
+
+});

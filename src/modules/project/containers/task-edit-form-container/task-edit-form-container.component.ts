@@ -3,8 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppEntityType, NameBase, Task, UUID } from 'lib';
 import { combineLatest, map, Observable, Subject } from 'rxjs';
 import { dialogFadeOutTrigger } from 'services/animation-aware-dialog.service';
-import * as entityActions from 'store/actions/entity.actions';
-import { closeEditDialog } from 'store/actions/project-task.actions';
+import { entityActions, taskActions } from 'store/actions';
 import { selProject_selected } from 'store/selectors/project/project-ui.selectors';
 import { selTask_distinctTagNames } from 'store/selectors/task/task-tags.selectors';
 import { selTask_SelectedEntity } from 'store/selectors/task/task-ui.selectors';
@@ -70,7 +69,7 @@ export class TaskEditFormContainerComponent {
 
 	onClose(): void {
 
-		this.store.dispatch(closeEditDialog());
+		this.store.dispatch(taskActions.closeEditDialog());
 
 	}
 

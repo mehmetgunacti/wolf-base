@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { SidebarState } from '@lib';
 import { Store } from '@ngrx/store';
-import { setSidebarState } from 'store/actions/core-ui.actions';
+import { coreUIActions } from 'store/actions';
 
 @Component({
 	selector: 'app-nav-overlay',
@@ -17,7 +16,7 @@ export class NavOverlayComponent {
 
 	onClick(): void {
 
-		this.store.dispatch(setSidebarState({ state: SidebarState.HIDDEN }));
+		this.store.dispatch(coreUIActions.hideSidebar());
 
 	}
 

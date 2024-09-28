@@ -1,7 +1,7 @@
 import { AppEntityType, Entity, RemoteMetadata, SyncData, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import * as actions from 'store/actions/entity.actions';
+import { entityActions } from 'store/actions';
 import { entity_initialState, Entity_ModuleState } from 'store/states/entity.state';
 
 function reduceEntities(data: Entity[]): Record<UUID, Entity> {
@@ -26,7 +26,7 @@ function reduceRemoteMetadata(data: RemoteMetadata[]): Record<UUID, RemoteMetada
 const reducer = createReducer(
 
 	entity_initialState,
-	on(actions.loadOneSuccess, (state, { entityType, id, entity, syncData, remoteMetadata }): Entity_ModuleState => {
+	on(entityActions.loadOneSuccess, (state, { entityType, id, entity, syncData, remoteMetadata }): Entity_ModuleState => {
 
 		return produce(
 			state,
@@ -54,7 +54,7 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(actions.loadAllSuccess, (state, { data }): Entity_ModuleState => {
+	on(entityActions.loadAllSuccess, (state, { data }): Entity_ModuleState => {
 
 		return produce(
 
@@ -74,7 +74,7 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(actions.moveToTrashSuccess, (state, { entityType, id }): Entity_ModuleState => {
+	on(entityActions.moveToTrashSuccess, (state, { entityType, id }): Entity_ModuleState => {
 
 		return produce(
 			state,
@@ -82,7 +82,7 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(actions.unloadOne, (state, { entityType, id }): Entity_ModuleState => {
+	on(entityActions.unloadOne, (state, { entityType, id }): Entity_ModuleState => {
 
 		return produce(
 			state,
@@ -96,7 +96,7 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(actions.downloadRemoteMetadataSuccess, (state, { data }): Entity_ModuleState => {
+	on(entityActions.downloadRemoteMetadataSuccess, (state, { data }): Entity_ModuleState => {
 
 		return produce(
 

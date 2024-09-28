@@ -1,7 +1,8 @@
 <w-portal>
 
 	<img src="/assets/logo.svg" style="height: 2rem;">
-	<span *ngIf="!isProd">[development]</span>
+	<!-- <span *ngIf="!isProd">[development]</span> -->
+	 <span>{{ bigScreen() ? 'Big Screen' : 'Mobile' }}</span>
 
 </w-portal>
 <section class="d-flex-column gap-sm">

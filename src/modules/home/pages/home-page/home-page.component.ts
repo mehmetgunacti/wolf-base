@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { environment } from 'environments/environment';
+import { selCore_isBigScreen } from 'store/selectors/core/core-ui.selectors';
 
 @Component({
 	selector: 'app-home-page',
@@ -9,4 +11,5 @@ import { environment } from 'environments/environment';
 })
 export class HomePageComponent {
 	isProd = environment.production;
+	bigScreen = inject(Store).selectSignal(selCore_isBigScreen);
 }

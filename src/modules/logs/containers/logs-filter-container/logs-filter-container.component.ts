@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from
 import { Store } from '@ngrx/store';
 import { LogCategory, UUID } from 'lib';
 import { Observable } from 'rxjs';
-import { load } from 'store/actions/logs.actions';
+import { logActions } from 'store/actions';
 import { selLogs_selectedId } from 'store/selectors/log/logs.selectors';
 
 @Component({
@@ -28,13 +28,13 @@ export class LogsFilterContainerComponent {
 
 	onCategory(category: LogCategory): void {
 
-		this.store.dispatch(load({ selectedId: null, categories: [category] }));
+		this.store.dispatch(logActions.load({ selectedId: null, categories: [category] }));
 
 	}
 
 	onEntityId(selectedId: UUID): void {
 
-		this.store.dispatch(load({ selectedId, categories: [] }));
+		this.store.dispatch(logActions.load({ selectedId, categories: [] }));
 
 	}
 

@@ -1,13 +1,13 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import * as actions from 'store/actions/note.actions';
+import { noteActions } from 'store/actions';
 import { Note_UIState, initialNoteUIState } from 'store/states/note.state';
 
 const reducer = createReducer(
 
 	initialNoteUIState,
-	on(actions.setQueryParams, (state, { search, tags }): Note_UIState => ({ ...state, queryParams: { search, tags } })),
-	on(actions.setSelectedId, (state, { id }): Note_UIState => {
+	on(noteActions.setQueryParams, (state, { search, tags }): Note_UIState => ({ ...state, queryParams: { search, tags } })),
+	on(noteActions.setSelectedId, (state, { id }): Note_UIState => {
 
 		return produce(
 
@@ -21,7 +21,7 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(actions.loadOneContentSuccess, (state, { content }): Note_UIState => ({ ...state, content })),
+	on(noteActions.loadOneContentSuccess, (state, { content }): Note_UIState => ({ ...state, content })),
 
 );
 

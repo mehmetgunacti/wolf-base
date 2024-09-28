@@ -3,8 +3,8 @@ import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { forkJoin, from, of } from 'rxjs';
-import { concatMap, map, switchMap, tap, toArray } from 'rxjs/operators';
-import * as actions from 'store/actions/entity.actions';
+import { concatMap, map, switchMap, toArray } from 'rxjs/operators';
+import { entityActions } from 'store/actions';
 
 @Injectable()
 export class EntityLoadEffects {
@@ -16,7 +16,7 @@ export class EntityLoadEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(actions.loadOne),
+			ofType(entityActions.loadOne),
 			switchMap(({ entityType, id }) =>
 
 				from(Promise.all([
@@ -26,7 +26,7 @@ export class EntityLoadEffects {
 					this.localRepository.getRepository(entityType).getRemoteMetadata(id)
 
 				])).pipe(
-					map(([entity, syncData, remoteMetadata]) => actions.loadOneSuccess({ entityType, id, entity, syncData, remoteMetadata }))
+					map(([entity, syncData, remoteMetadata]) => entityActions.loadOneSuccess({ entityType, id, entity, syncData, remoteMetadata }))
 				)
 			)
 
@@ -38,7 +38,7 @@ export class EntityLoadEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(actions.loadAll),
+			ofType(entityActions.loadAll),
 			switchMap(({ filter }) =>
 
 				from(filter).pipe(
@@ -56,7 +56,7 @@ export class EntityLoadEffects {
 				)
 
 			),
-			map(data => actions.loadAllSuccess({ data }))
+			map(data => entityActions.loadAllSuccess({ data }))
 
 		)
 
@@ -66,12 +66,12 @@ export class EntityLoadEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(actions.loadOneSyncData),
+			ofType(entityActions.loadOneSyncData),
 			switchMap(({ entityType, id }) =>
 
 				from(this.localRepository.getRepository(entityType).getSyncData(id)).pipe(
 
-					map(syncData => actions.loadOneSyncDataSuccess({ entityType, syncData }))
+					map(syncData => entityActions.loadOneSyncDataSuccess({ entityType, syncData }))
 
 				)
 

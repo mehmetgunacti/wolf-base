@@ -4,8 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { from } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
-import * as bmActions from 'store/actions/bookmark.actions';
-import * as entityActions from 'store/actions/entity.actions';
+import { bookmarkActions, entityActions } from 'store/actions';
 
 @Injectable()
 export class BookmarkLoadEffects {
@@ -20,7 +19,7 @@ export class BookmarkLoadEffects {
 
 			ofType(entityActions.loadOne),
 			filter(({ entityType }) => entityType === AppEntityType.bookmark),
-			map(({ id }) => bmActions.loadOneClick({ id }))
+			map(({ id }) => bookmarkActions.loadOneClick({ id }))
 
 		)
 
@@ -40,7 +39,7 @@ export class BookmarkLoadEffects {
 				])
 
 			),
-			map(([clicks]) => bmActions.loadAllClicksSuccess({ clicks }))
+			map(([clicks]) => bookmarkActions.loadAllClicksSuccess({ clicks }))
 
 		)
 
@@ -50,11 +49,11 @@ export class BookmarkLoadEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.loadAllClicks),
+			ofType(bookmarkActions.loadAllClicks),
 			switchMap(() =>
 
 				from(this.localRepository.bookmarks.listClicks()).pipe(
-					map(clicks => bmActions.loadAllClicksSuccess({ clicks }))
+					map(clicks => bookmarkActions.loadAllClicksSuccess({ clicks }))
 				)
 
 			)
@@ -67,11 +66,11 @@ export class BookmarkLoadEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(bmActions.loadOneClick),
+			ofType(bookmarkActions.loadOneClick),
 			switchMap(({ id }) =>
 
 				from(this.localRepository.bookmarks.getClick(id)).pipe(
-					map(click => bmActions.loadOneClickSuccess({ id, click }))
+					map(click => bookmarkActions.loadOneClickSuccess({ id, click }))
 				)
 
 			)
