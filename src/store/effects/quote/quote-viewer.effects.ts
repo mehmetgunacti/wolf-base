@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { coreActions, coreUIActions, quoteActions } from 'store/actions';
+import { coreActions, quoteActions } from 'store/actions';
 import { selQuote_EntityIds } from 'store/selectors/entity/entity-quote.selectors';
 import { selQuoteViewer_running } from 'store/selectors/quote/quote-viewer.selectors';
 
@@ -43,7 +43,7 @@ export class QuoteViewerEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(coreUIActions.setNow),
+			ofType(coreActions.setNow),
 			withLatestFrom(this.store.select(selQuoteViewer_running)),
 			filter(([, running]) => running),
 			withLatestFrom(this.store.select(selQuote_EntityIds)),

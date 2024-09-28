@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concat, of, timer } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { ClipboardService } from 'services';
-import { bookmarkActions, coreNavigationActions, coreNotificationActions, entityActions } from 'store/actions';
+import { bookmarkActions, coreActions, entityActions } from 'store/actions';
 
 // note: timer value (600) has to be ~ as in lib/components/_shake.scss
 const fromClipboardFailure$ = concat(
@@ -52,7 +52,7 @@ export class BookmarkEntityCreateEffects {
 
 			ofType(entityActions.createSuccess),
 			filter(isEntityOfType(AppEntityType.bookmark)),
-			map(({ entityType }) => coreNotificationActions.showNotification({ severity: 'success', detail: `${AppEntities[entityType].label} created` }))
+			map(({ entityType }) => coreActions.showNotification({ severity: 'success', detail: `${AppEntities[entityType].label} created` }))
 
 		)
 
@@ -64,7 +64,7 @@ export class BookmarkEntityCreateEffects {
 
 			ofType(entityActions.createSuccess),
 			filter(isEntityOfType(AppEntityType.bookmark)),
-			map(({ entity, entityType }) => coreNavigationActions.navigate({ url: [`/${AppEntities[entityType].plural}`], queryParams: { id: entity.id } }))
+			map(({ entity, entityType }) => coreActions.navigate({ url: [`/${AppEntities[entityType].plural}`], queryParams: { id: entity.id } }))
 
 		)
 

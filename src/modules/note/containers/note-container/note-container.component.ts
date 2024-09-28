@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AppEntityType, Note, NoteContent, UUID } from '@lib';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { coreNavigationActions, entityActions } from 'store/actions';
+import { coreActions, entityActions } from 'store/actions';
 import { selNoteContent_content } from 'store/selectors/note-content/note-content-ui.selectors';
 import { selNote_SelectedEntity, selNote_selectedEntityChildren, selNote_selectedEntityParents } from 'store/selectors/note/note-ui.selectors';
 
@@ -35,7 +35,7 @@ export class NoteContainerComponent {
 
 	navTo(url: string[]): void {
 
-		this.store.dispatch(coreNavigationActions.navigate({ url }));
+		this.store.dispatch(coreActions.navigate({ url }));
 
 	}
 

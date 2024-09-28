@@ -3,7 +3,7 @@ import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { map, switchMap } from 'rxjs/operators';
-import { coreNotificationActions, settingsActions } from 'store/actions';
+import { coreActions, settingsActions } from 'store/actions';
 
 @Injectable()
 export class SettingsEffects {
@@ -28,7 +28,7 @@ export class SettingsEffects {
 		() => this.actions$.pipe(
 
 			ofType(settingsActions.saveFirestoreConfigSuccess),
-			map(() => coreNotificationActions.showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Firestore Configuration' }))
+			map(() => coreActions.showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Firestore Configuration' }))
 
 		)
 
@@ -51,7 +51,7 @@ export class SettingsEffects {
 		() => this.actions$.pipe(
 
 			ofType(settingsActions.saveTitleLookupSuccess),
-			map(() => coreNotificationActions.showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Title Lookup Configuration' }))
+			map(() => coreActions.showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Title Lookup Configuration' }))
 
 		)
 
@@ -74,7 +74,7 @@ export class SettingsEffects {
 		() => this.actions$.pipe(
 
 			ofType(settingsActions.savePinnedNotesConfigSuccess),
-			map(() => coreNotificationActions.showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Pinned Notes Configuration' }))
+			map(() => coreActions.showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Pinned Notes Configuration' }))
 
 		)
 
@@ -97,7 +97,7 @@ export class SettingsEffects {
 		() => this.actions$.pipe(
 
 			ofType(settingsActions.savePopularBookmarksConfigSuccess),
-			map(() => coreNotificationActions.showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Popular Bookmarks Configuration' }))
+			map(() => coreActions.showNotification({ severity: 'success', summary: 'Configuration Saved', detail: 'Popular Bookmarks Configuration' }))
 
 		)
 

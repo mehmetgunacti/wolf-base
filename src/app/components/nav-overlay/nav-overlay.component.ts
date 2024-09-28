@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { coreUIActions } from 'store/actions';
+import { coreActions } from 'store/actions';
 
 @Component({
 	selector: 'app-nav-overlay',
@@ -16,7 +16,7 @@ export class NavOverlayComponent {
 
 	onClick(): void {
 
-		this.store.dispatch(coreUIActions.hideSidebar());
+		this.store.dispatch(coreActions.hideSidebar());
 
 	}
 

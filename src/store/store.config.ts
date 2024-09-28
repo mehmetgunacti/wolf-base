@@ -5,11 +5,13 @@ import * as reducers from './reducers';
 
 import { AppState } from './states/app.state';
 
-function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
+function debug(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
 	return function (state: AppState | undefined, action: Action) {
 
 		// code here
+		console.log('state', state);
+		console.log('action', action);
 		return reducer(state, action);
 
 	};
@@ -19,6 +21,7 @@ function clearState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 export const metaReducers: MetaReducer<AppState>[] = [
 
 	// clearState
+	debug
 
 ];
 
@@ -30,6 +33,7 @@ export const effectList = [
 	effects.CoreNotificationEffects,
 	effects.CoreUIEffects,
 	effects.CoreThemeEffects,
+	effects.CoreSaveEffects,
 
 	// Entity
 	effects.EntityCreateEffects,

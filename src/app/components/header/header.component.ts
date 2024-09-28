@@ -1,7 +1,7 @@
 import { Component, inject, Signal } from '@angular/core';
 import { CloudTask } from '@lib';
 import { Store } from '@ngrx/store';
-import { coreUIActions } from 'store/actions';
+import { coreActions } from 'store/actions';
 import { selCloudAvailableTasks } from 'store/selectors/cloud/cloud.selectors';
 
 @Component({
@@ -17,7 +17,7 @@ export class HeaderComponent {
 
 	toggleNav(): void {
 
-		this.store.dispatch(coreUIActions.setNextSidebarState());
+		this.store.dispatch(coreActions.setNextSidebarState());
 
 	}
 

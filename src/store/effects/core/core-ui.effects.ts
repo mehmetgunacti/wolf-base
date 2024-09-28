@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { ViewportService } from 'services/viewport.service';
-import { coreUIActions } from 'store/actions';
+import { coreActions } from 'store/actions';
 
 @Injectable()
 export class CoreUIEffects {
@@ -22,7 +22,7 @@ export class CoreUIEffects {
 	setBigScreen$ = createEffect(
 
 		() => this.viewport.bigScreen$.pipe(
-			map(bigScreen => coreUIActions.setBigScreen({ bigScreen }))
+			map(bigScreen => coreActions.setBigScreen({ bigScreen }))
 		)
 
 	);
@@ -48,7 +48,7 @@ export class CoreUIEffects {
 			ofType(ROOT_EFFECTS_INIT),
 			switchMap(
 
-				() => timer(TIMER_DELAY, TIMER_INTERVAL).pipe(map(() => coreUIActions.setNow()))
+				() => timer(TIMER_DELAY, TIMER_INTERVAL).pipe(map(() => coreActions.setNow()))
 
 			)
 

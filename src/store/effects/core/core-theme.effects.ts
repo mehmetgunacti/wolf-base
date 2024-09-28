@@ -5,7 +5,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { switchMap, tap } from 'rxjs/operators';
-import { coreUIActions } from 'store/actions';
+import { coreActions } from 'store/actions';
 import { selCore_theme } from 'store/selectors/core/core-ui.selectors';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class CoreThemeEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(coreUIActions.setTheme),
+			ofType(coreActions.setTheme),
 			switchMap(({ theme }) => this.localRepository.configuration.setTheme(theme))
 
 		),

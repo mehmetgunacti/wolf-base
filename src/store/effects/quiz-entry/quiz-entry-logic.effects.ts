@@ -3,7 +3,7 @@ import { AppEntityType, increase, next, Progress, QuizEntry } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, withLatestFrom } from 'rxjs/operators';
-import { coreNotificationActions, entityActions, quizEntryActions } from 'store/actions';
+import { coreActions, entityActions, quizEntryActions } from 'store/actions';
 import { selQuizEntry_EntityList } from 'store/selectors/entity/entity-quiz-entry.selectors';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class QuizEntryLogicEffects {
 
 				const quizEntry = entries.find(e => e.id === quizEntryId);
 				if (!quizEntry)
-					return coreNotificationActions.showNotification({ severity: 'error', summary: 'QuizEntry Update Failure!', detail: `${quizEntryId} not found` });
+					return coreActions.showNotification({ severity: 'error', summary: 'QuizEntry Update Failure!', detail: `${quizEntryId} not found` });
 
 				const entity: QuizEntry = {
 
@@ -51,7 +51,7 @@ export class QuizEntryLogicEffects {
 
 				const quizEntry = entries.find(e => e.id === quizEntryId);
 				if (!quizEntry)
-					return coreNotificationActions.showNotification({ severity: 'error', summary: 'QuizEntry Update Failure!', detail: `${quizEntryId} not found` });
+					return coreActions.showNotification({ severity: 'error', summary: 'QuizEntry Update Failure!', detail: `${quizEntryId} not found` });
 
 				const entity: QuizEntry = {
 

@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { coreNotificationActions, logActions } from 'store/actions';
+import { coreActions, logActions } from 'store/actions';
 import * as logSelectors from 'store/selectors/log/logs.selectors';
 
 const convertToast = (toast: ToastConfiguration): LogMessage => {
@@ -58,7 +58,7 @@ export class LogsEffects {
 
 		() => this.actions$.pipe(
 
-			ofType(coreNotificationActions.showNotification),
+			ofType(coreActions.showNotification),
 			switchMap(conf => this.localRepository.logs.add(convertToast(conf)))
 
 		),

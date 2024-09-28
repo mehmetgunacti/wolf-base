@@ -4,7 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppEntityType, Note, NoteContent, UUID } from 'lib';
 import { Observable, filter, take, tap, withLatestFrom } from 'rxjs';
-import { coreNavigationActions, entityActions } from 'store/actions';
+import { coreActions, entityActions } from 'store/actions';
 import { selNoteContent_content } from 'store/selectors/note-content/note-content-ui.selectors';
 import { selNote_SelectedEntity } from 'store/selectors/note/note-ui.selectors';
 
@@ -59,7 +59,7 @@ export class NoteContentEditContainerComponent {
 
 	onCancel(id: UUID): void {
 
-		this.store.dispatch(coreNavigationActions.navigate({ url: ['/notes', id] }));
+		this.store.dispatch(coreActions.navigate({ url: ['/notes', id] }));
 
 	}
 

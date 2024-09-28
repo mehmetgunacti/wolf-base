@@ -4,7 +4,7 @@ import { UUID } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { QuizAnswerContainerComponent } from 'modules/home/containers/quiz-answer-container/quiz-answer-container.component';
 import { filter, map, tap } from 'rxjs/operators';
-import { coreNavigationActions, quizEntryActions } from 'store/actions';
+import { coreActions, quizEntryActions } from 'store/actions';
 
 @Injectable()
 export class QuizUIEffects {
@@ -47,7 +47,7 @@ export class QuizUIEffects {
 			ofType(quizEntryActions.closeAnswerDialog),
 			map(({ editWord }) => editWord),
 			filter((wordId): wordId is UUID => !!wordId),
-			map(wordId => coreNavigationActions.navigate({ url: ['/words', wordId, 'edit'] }))
+			map(wordId => coreActions.navigate({ url: ['/words', wordId, 'edit'] }))
 
 		)
 
