@@ -41,19 +41,15 @@
 		@include mx-scrollable(unset);
 		@include mx-transition(height left background-color);
 
-		@include bigScreen() {
+		&.big-half {
 
-			body.sidebar-full & {
+			left	: $nav-half-width;
 
-				left	: $nav-full-width;
+		}
 
-			}
+		&.big-full {
 
-			body.sidebar-half & {
-
-				left	: $nav-half-width;
-
-			}
+			left	: $nav-full-width;
 
 		}
 

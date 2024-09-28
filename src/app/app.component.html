@@ -15,6 +15,9 @@
 <nav [@sidebar]="sidebarState()">
 	<app-nav />
 </nav>
-<main cdkScrollable>
+<main
+	cdkScrollable
+	[class.big-half]="sidebarBigHalf()"
+	[class.big-full]="sidebarBigFull()">
 	<router-outlet/>
 </main>

@@ -18,6 +18,8 @@ export class AppComponent {
 	splashVisible: WritableSignal<boolean> = signal(true);
 	sidebarState = inject(Store).selectSignal(selCore_sidebarState);
 	sidebarOpen = computed(() => this.sidebarState() === SidebarState.FULL);
+	sidebarBigFull = computed(() => this.sidebarState() === SidebarState.BIG_FULL);
+	sidebarBigHalf = computed(() => this.sidebarState() === SidebarState.BIG_HALF);
 
 	constructor() {
 
