@@ -18,9 +18,6 @@ export const entityActions = createActionGroup({
 
 		// LOAD (IndexedDb -> NgRx Store)
 		// Entity
-		loadAll						: props<{ filter: { entityType: AppEntityType, loadEntities: boolean, loadSyncData: boolean, loadRemoteMetadata: boolean }[] }>(),
-		loadAllSuccess				: props<{ data: { entityType: AppEntityType, entities: Entity[], syncData: SyncData[], remoteMetadata: RemoteMetadata[] }[] }>(),
-
 		loadOne						: props<{ entityType: AppEntityType, id: UUID }>(),
 		loadOneSuccess				: props<{ entityType: AppEntityType, id: UUID, entity: Entity | null, syncData: SyncData | null, remoteMetadata: RemoteMetadata | null }>(),
 

@@ -1,4 +1,4 @@
-import { AppEntityType, Click, UUID } from '@lib';
+import { AppEntityType, Click, idListToRecord, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
 import { bookmarkActions, coreActions, entityActions } from 'store/actions';
@@ -21,20 +21,8 @@ const reducer = createReducer(
 		return state;
 
 	}),
-	on(
-		coreActions.loadAllSuccess, (state, { clicks }): BookmarkClicksState => {
-
-			return produce(
-				state,
-				draft => {
-
-					draft.values = clicks.reduce((record, click) => { record[click.id] = click; return record; }, {} as Record<UUID, Click>)
-
-				}
-			);
-
-		}
-	),
+	on(coreActions.loadAllSuccess, (state, { clicks }): BookmarkClicksState => ({ ...state, values: idListToRecord(clicks) })),
+	on(bookmarkActions.loadAllClicksSuccess, (state, { clicks }): BookmarkClicksState => ({ ...state, values: idListToRecord(clicks) })),
 	on(
 		bookmarkActions.loadOneClickSuccess, (state, { id, click }): BookmarkClicksState => {
 

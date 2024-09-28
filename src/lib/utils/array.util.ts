@@ -1,6 +1,12 @@
 import { UUID } from "lib/constants";
 import { IDBase } from "lib/models";
 
+export function idListToRecord<T extends IDBase>(list: T[]): Record<UUID, T> {
+
+	return list.reduce((record, item) => { record[item.id] = item; return record; }, {} as Record<UUID, T>);
+
+}
+
 export function insertAtRandomPosition<T>(arr: T[], element: T) {
 
 	const randomIndex = Math.floor(Math.random() * (arr.length + 1));
