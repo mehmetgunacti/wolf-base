@@ -1,4 +1,4 @@
-import { Configuration, Theme, ToastConfiguration } from '@lib';
+import { AppEntityType, Click, Configuration, Entity, RemoteMetadata, SyncData, Theme, ToastConfiguration } from '@lib';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 export const coreActions = createActionGroup({
@@ -6,19 +6,30 @@ export const coreActions = createActionGroup({
 	source: 'Core',
 	events: {
 
-		'Load All'					: emptyProps(),
-		'Load All Success'			: props<{ configuration: Configuration }>(),
+		loadAll						: emptyProps(),
+		loadAllSuccess				: props<{
 
-		'Set Big Screen'			: props<{ bigScreen: boolean }>(),
-		'Hide Sidebar'				: emptyProps(),
-		'Set Next Sidebar State'	: emptyProps(),
+										configuration	: Configuration,
+										entities		: {
+											entityType: AppEntityType,
+											entities: Entity[],
+											syncData: SyncData[],
+											remoteMetadata: RemoteMetadata[]
+										}[],
+										clicks			: Click[]
 
-		'Set Theme'					: props<{ theme: Theme }>(),
-		'Set Now'					: emptyProps(),
+									}>(),
 
-		'Show Notification'			: props<ToastConfiguration>(),
+		setBigScreen				: props<{ bigScreen: boolean }>(),
+		hideSidebar					: emptyProps(),
+		setNextSidebarState			: emptyProps(),
 
-		'Navigate' 					: props<{ url: string[], queryParams?: Record<string, string>, skipLocationChange?: boolean, closeOnNavSuccess?: boolean }>()
+		setTheme					: props<{ theme: Theme }>(),
+		setNow						: emptyProps(),
+
+		showNotification			: props<ToastConfiguration>(),
+
+		navigate 					: props<{ url: string[], queryParams?: Record<string, string>, skipLocationChange?: boolean, closeOnNavSuccess?: boolean }>()
 
 	}
 

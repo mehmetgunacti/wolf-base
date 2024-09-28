@@ -6,38 +6,38 @@ export const bookmarkActions = createActionGroup({
 	source: 'Bookmark',
 	events: {
 
-		'From Clipboard'				: emptyProps(),
-		'From Clipboard Failure'		: props<{ shaking: boolean }>(),
+		fromClipboard				: emptyProps(),
+		fromClipboardFailure		: props<{ shaking: boolean }>(),
 
 		// CLICK
-		'Click'							: props<{ id: UUID }>(),
+		click						: props<{ id: UUID }>(),
 
 		// LOAD FROM LOCAL DATABASE INTO MEMORY
 		//// Clicks
-		'Load One Click'				: props<{ id: UUID }>(),
-		'Load One Click Success'		: props<{ id: UUID, click: Click | null }>(),
+		loadOneClick				: props<{ id: UUID }>(),
+		loadOneClickSuccess			: props<{ id: UUID, click: Click | null }>(),
 
-		'Load All Clicks'				: emptyProps(),
-		'Load All Clicks Success'		: props<{ clicks: Click[] }>(),
+		loadAllClicks				: emptyProps(),
+		loadAllClicksSuccess		: props<{ clicks: Click[] }>(),
 
 		// UI
-		'Open Add Bookmark Dialog'		: emptyProps(),
-		'Open Edit Bookmark Dialog'		: props<{ id: UUID }>(),
-		'Close Edit Bookmark Dialog'	: emptyProps(),
+		openAddBookmarkDialog		: emptyProps(),
+		openEditBookmarkDialog		: props<{ id: UUID }>(),
+		closeEditBookmarkDialog		: emptyProps(),
 
-		'Set Selected Id'				: props<{ id: UUID | null }>(),
-		'Set Query Params'				: props<BookmarkQueryParams>(),
+		setSelectedId				: props<{ id: UUID | null }>(),
+		setQueryParams				: props<BookmarkQueryParams>(),
 
 		// TAGS
-		'Toggle Popular Tag'			: props<{ id: UUID }>(),
+		togglePopularTag			: props<{ id: UUID }>(),
 
-		'Click Tag'						: props<{ name: string }>(),
-		'Set Selected Tags'				: props<{ tags: string[] }>(),
-		'Empty Selected Tags'			: emptyProps(),
-		'Search'						: props<{ term: string }>(),
+		clickTag					: props<{ name: string }>(),
+		setSelectedTags				: props<{ tags: string[] }>(),
+		emptySelectedTags			: emptyProps(),
+		search						: props<{ term: string }>(),
 
 		// CLOUD SYNC
-		'Upload Clicked'				: emptyProps()
+		uploadClicked				: emptyProps()
 
 	}
 

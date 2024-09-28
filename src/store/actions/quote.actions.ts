@@ -6,11 +6,11 @@ export const quoteActions = createActionGroup({
 	source: 'Quote',
 	events: {
 
-		'Change Quote'		: props<{ id: UUID }>(),
-		'Set Running'		: props<{ running: boolean }>(),
-		'Disable Animation'	: emptyProps(),
+		changeQuote			: props<{ id: UUID }>(),
+		setRunning			: props<{ running: boolean }>(),
+		disableAnimation	: emptyProps(),
 
-		'Set Selected Id'	: props<{ id: UUID | null }>()
+		setSelectedId		: props<{ id: UUID | null }>()
 
 	}
 

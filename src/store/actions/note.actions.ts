@@ -7,18 +7,18 @@ export const noteActions = createActionGroup({
 	events: {
 
 		// UI
-		'Set Selected Id'					: props<{ id: UUID | null }>(),
-		'Set Edit Id'						: props<{ id: UUID | null }>(),
-		'Set Query Params'					: props<NoteQueryParams>(),
+		setSelectedId					: props<{ id: UUID | null }>(),
+		setEditId						: props<{ id: UUID | null }>(),
+		setQueryParams					: props<NoteQueryParams>(),
 
 		// TAGS
-		'Click Tag'							: props<{ name: string }>(),
-		'Set Selected Tags'					: props<{ tags: string[] }>(),
-		'Empty Selected Tags'				: emptyProps(),
-		'Search'							: props<{ term: string }>(),
+		clickTag						: props<{ name: string }>(),
+		setSelectedTags					: props<{ tags: string[] }>(),
+		emptySelectedTags				: emptyProps(),
+		search							: props<{ term: string }>(),
 
 		// CONTENT
-		'Load One Content Success'			: props<{ content: NoteContent | null }>()
+		loadOneContentSuccess			: props<{ content: NoteContent | null }>()
 
 	}
 

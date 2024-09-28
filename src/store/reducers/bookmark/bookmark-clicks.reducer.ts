@@ -1,7 +1,7 @@
 import { AppEntityType, Click, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import { bookmarkActions, entityActions } from 'store/actions';
+import { bookmarkActions, coreActions, entityActions } from 'store/actions';
 import { bookmark_initialClicksState, BookmarkClicksState } from 'store/states/bookmark.state';
 
 const reducer = createReducer(
@@ -22,7 +22,7 @@ const reducer = createReducer(
 
 	}),
 	on(
-		bookmarkActions.loadAllClicksSuccess, (state, { clicks }): BookmarkClicksState => {
+		coreActions.loadAllSuccess, (state, { clicks }): BookmarkClicksState => {
 
 			return produce(
 				state,

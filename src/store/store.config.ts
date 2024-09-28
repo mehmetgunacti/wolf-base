@@ -21,7 +21,6 @@ function debug(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 export const metaReducers: MetaReducer<AppState>[] = [
 
 	// clearState
-	debug
 
 ];
 
@@ -33,7 +32,6 @@ export const effectList = [
 	effects.CoreNotificationEffects,
 	effects.CoreUIEffects,
 	effects.CoreThemeEffects,
-	effects.CoreSaveEffects,
 
 	// Entity
 	effects.EntityCreateEffects,

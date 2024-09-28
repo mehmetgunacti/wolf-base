@@ -6,9 +6,9 @@ export const wordActions = createActionGroup({
 	source: 'Word',
 	events: {
 
-		'Search'			: props<{ term: string | null }>(),
-		'SetSelectedId'		: props<{ id: UUID | null }>(),
-		'SetQueryParams'	: props<WordQueryParams>()
+		search			: props<{ term: string | null }>(),
+		setSelectedId	: props<{ id: UUID | null }>(),
+		setQueryParams	: props<WordQueryParams>()
 
 	}
 

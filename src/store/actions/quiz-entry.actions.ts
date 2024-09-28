@@ -7,11 +7,11 @@ export const quizEntryActions = createActionGroup({
 	events: {
 
 		// UI
-		'Answered Right'		: props<{ quizEntryId: UUID }>(),
-		'Answered Wrong'		: props<{ word: Word }>(),
+		answeredRight		: props<{ quizEntryId: UUID }>(),
+		answeredWrong		: props<{ word: Word }>(),
 
-		'Close Answer Dialog'	: props<{ quizEntryId: UUID, editWord?: UUID }>(),
-		'Increase Visibility'	: emptyProps()
+		closeAnswerDialog	: props<{ quizEntryId: UUID, editWord?: UUID }>(),
+		increaseVisibility	: emptyProps()
 
 	}
 

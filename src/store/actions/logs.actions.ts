@@ -6,14 +6,14 @@ export const logActions = createActionGroup({
 	source: 'Log',
 	events: {
 
-		'Load'				: props<{ selectedId: UUID | null, categories: LogCategory[], limit?: number }>(),
-		'Load Success'		: props<{ logs: LogMessage[] }>(),
+		load			: props<{ selectedId: UUID | null, categories: LogCategory[], limit?: number }>(),
+		loadSuccess		: props<{ logs: LogMessage[] }>(),
 
-		'Refresh'			: emptyProps(),
+		refresh			: emptyProps(),
 
-		'Clear Logs'		: emptyProps(),
+		clearLogs		: emptyProps(),
 
-		'Set Selected Id'	: props<{ id: UUID | null }>()
+		setSelectedId	: props<{ id: UUID | null }>()
 
 	}
 

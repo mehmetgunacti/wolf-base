@@ -25,42 +25,42 @@ export class BookmarkLoadEffects {
 
 	);
 
-	loadAll$ = createEffect(
+	// loadAll$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(entityActions.loadAll),
-			switchMap(() =>
+	// 		ofType(entityActions.loadAll),
+	// 		switchMap(() =>
 
-				Promise.all([
+	// 			Promise.all([
 
-					this.localRepository.bookmarks.listClicks()
+	// 				this.localRepository.bookmarks.listClicks()
 
-				])
+	// 			])
 
-			),
-			map(([clicks]) => bookmarkActions.loadAllClicksSuccess({ clicks }))
+	// 		),
+	// 		map(([clicks]) => bookmarkActions.loadAllClicksSuccess({ clicks }))
 
-		)
+	// 	)
 
-	);
+	// );
 
-	loadAllClicks$ = createEffect(
+	// loadAllClicks$ = createEffect(
 
-		() => this.actions$.pipe(
+	// 	() => this.actions$.pipe(
 
-			ofType(bookmarkActions.loadAllClicks),
-			switchMap(() =>
+	// 		ofType(bookmarkActions.loadAllClicks),
+	// 		switchMap(() =>
 
-				from(this.localRepository.bookmarks.listClicks()).pipe(
-					map(clicks => bookmarkActions.loadAllClicksSuccess({ clicks }))
-				)
+	// 			from(this.localRepository.bookmarks.listClicks()).pipe(
+	// 				map(clicks => bookmarkActions.loadAllClicksSuccess({ clicks }))
+	// 			)
 
-			)
+	// 		)
 
-		)
+	// 	)
 
-	);
+	// );
 
 	loadOneClick$ = createEffect(
 

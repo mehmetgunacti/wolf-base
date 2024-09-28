@@ -77,26 +77,26 @@ const appInitializerFactory = (store: Store) => {
 		// load configuration
 		store.dispatch(coreActions.loadAll());
 
-		// load entities
-		store.dispatch(entityActions.loadAll({
+		// // load entities
+		// store.dispatch(entityActions.loadAll({
 
-			filter: [
+		// 	filter: [
 
-				{ entityType: AppEntityType.bookmark, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-				{ entityType: AppEntityType.note, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-				{ entityType: AppEntityType.noteContent, loadEntities: false, loadSyncData: true, loadRemoteMetadata: true },
-				{ entityType: AppEntityType.word, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-				{ entityType: AppEntityType.quote, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-				{ entityType: AppEntityType.quizEntry, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-				{ entityType: AppEntityType.project, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-				{ entityType: AppEntityType.task, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+		// 		{ entityType: AppEntityType.bookmark, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+		// 		{ entityType: AppEntityType.note, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+		// 		{ entityType: AppEntityType.noteContent, loadEntities: false, loadSyncData: true, loadRemoteMetadata: true },
+		// 		{ entityType: AppEntityType.word, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+		// 		{ entityType: AppEntityType.quote, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+		// 		{ entityType: AppEntityType.quizEntry, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+		// 		{ entityType: AppEntityType.project, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
+		// 		{ entityType: AppEntityType.task, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
 
-			]
+		// 	]
 
-		}));
+		// }));
 
-		// load clicks
-		store.dispatch(bookmarkActions.loadAllClicks());
+		// // load clicks
+		// store.dispatch(bookmarkActions.loadAllClicks());
 
 	};
 

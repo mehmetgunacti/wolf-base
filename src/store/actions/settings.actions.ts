@@ -6,17 +6,17 @@ export const settingsActions = createActionGroup({
 	source: 'Settings',
 	events: {
 
-		'Save Firestore Config'					: props<{ config: FirestoreConfig }>(),
-		'Save Firestore Config Success'			: emptyProps(),
+		saveFirestoreConfig					: props<{ config: FirestoreConfig }>(),
+		saveFirestoreConfigSuccess			: emptyProps(),
 
-		'Save Title Lookup'						: props<{ url: string }>(),
-		'Save Title Lookup Success'				: emptyProps(),
+		saveTitleLookup						: props<{ url: string }>(),
+		saveTitleLookupSuccess				: emptyProps(),
 
-		'Save Popular Bookmarks Config'			: props<{ tags: string[] }>(),
-		'Save Popular Bookmarks Config Success'	: emptyProps(),
+		savePopularBookmarksConfig			: props<{ tags: string[] }>(),
+		savePopularBookmarksConfigSuccess	: emptyProps(),
 
-		'Save Pinned Notes Config'				: props<{ tags: string[] }>(),
-		'Save Pinned Notes Config Success'		: emptyProps()
+		savePinnedNotesConfig				: props<{ tags: string[] }>(),
+		savePinnedNotesConfigSuccess		: emptyProps()
 
 	}
 

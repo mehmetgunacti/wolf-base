@@ -8,19 +8,19 @@ export const taskActions = createActionGroup({
 	events: {
 
 		// UI
-		'Set Selected Id'					: props<{ id: UUID | null }>(),
+		setSelectedId		: props<{ id: UUID | null }>(),
 
-		'Click Tag'						: props<{ name: string }>(),
-		'Set Selected Tags'				: props<{ tags: string[] }>(),
-		'Reset Query Params'			: emptyProps(),
-		'Search'						: props<{ term: string | null }>(),
-		'Set Query Params'				: props<TaskQueryParams>(),
-		'Task Status Change'			: props<{ status: TaskState }>(),
-		'Task Category Change'			: props<{ category: TaskCategory | string }>(),
+		clickTag			: props<{ name: string }>(),
+		setSelectedTags		: props<{ tags: string[] }>(),
+		resetQueryParams	: emptyProps(),
+		search				: props<{ term: string | null }>(),
+		setQueryParams		: props<TaskQueryParams>(),
+		taskStatusChange	: props<{ status: TaskState }>(),
+		taskCategoryChange	: props<{ category: TaskCategory | string }>(),
 
-		'Open Add Task Dialog'				: emptyProps(),
-		'Open Edit Task Dialog'				: props<{ id: UUID }>(),
-		'Close Edit Dialog'					: emptyProps()
+		openAddTaskDialog	: emptyProps(),
+		openEditTaskDialog	: props<{ id: UUID }>(),
+		closeEditDialog		: emptyProps()
 
 	}
 

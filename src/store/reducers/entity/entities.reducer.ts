@@ -1,7 +1,7 @@
 import { AppEntityType, Entity, RemoteMetadata, SyncData, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import { entityActions } from 'store/actions';
+import { coreActions, entityActions } from 'store/actions';
 import { entity_initialState, Entity_ModuleState } from 'store/states/entity.state';
 
 function reduceEntities(data: Entity[]): Record<UUID, Entity> {
@@ -54,14 +54,14 @@ const reducer = createReducer(
 		);
 
 	}),
-	on(entityActions.loadAllSuccess, (state, { data }): Entity_ModuleState => {
+	on(coreActions.loadAllSuccess, (state, { entities }): Entity_ModuleState => {
 
 		return produce(
 
 			state,
 			draft => {
 
-				for (const d of data) {
+				for (const d of entities) {
 
 					draft[d.entityType].entities = reduceEntities(d.entities);
 					draft[d.entityType].syncData = reduceSyncData(d.syncData);

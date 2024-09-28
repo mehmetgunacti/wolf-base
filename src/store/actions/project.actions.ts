@@ -7,9 +7,9 @@ export const projectActions = createActionGroup({
 	events: {
 
 		// UI
-		'Set Selected Id'		: props<{ id: UUID | null }>(),
-		'Search'				: props<{ term: string | null }>(),
-		'Set Query Params'		: props<ProjectQueryParams>()
+		setSelectedId	: props<{ id: UUID | null }>(),
+		search			: props<{ term: string | null }>(),
+		setQueryParams	: props<ProjectQueryParams>()
 
 	}
 

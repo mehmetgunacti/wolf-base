@@ -2,15 +2,6 @@ import { SidebarState } from 'lib/constants';
 
 export function evaluate(state: SidebarState, bigScreen: boolean): SidebarState {
 
-	console.log('evaluate incoming', state);
-	const a = evaluate1(state, bigScreen);
-	console.log('evaluate outgoing', a);
-	return a;
-
-}
-
-export function evaluate1(state: SidebarState, bigScreen: boolean): SidebarState {
-
 	if (bigScreen) {
 
 		if (state === SidebarState.FULL) return SidebarState.BIG_FULL;
@@ -29,14 +20,6 @@ export function evaluate1(state: SidebarState, bigScreen: boolean): SidebarState
 }
 
 export function nextState(state: SidebarState, bigScreen: boolean): SidebarState {
-
-	console.log('nextState incoming', state);
-	const a = nextState1(state, bigScreen);
-	console.log('nextState outgoing', a);
-	return a;
-
-}
-export function nextState1(state: SidebarState, bigScreen: boolean): SidebarState {
 
 	if (bigScreen) {
 
@@ -61,16 +44,6 @@ export function nextState1(state: SidebarState, bigScreen: boolean): SidebarStat
 }
 
 export function afterResize(state: SidebarState, bigScreen: boolean): SidebarState {
-
-	console.log('afterResize incoming', state, bigScreen);
-	const e = afterResize1(state, bigScreen);
-	console.log('afterResize incoming', state, bigScreen);
-	return e;
-
-}
-
-
-export function afterResize1(state: SidebarState, bigScreen: boolean): SidebarState {
 
 	if (bigScreen) {
 
