@@ -1,9 +1,10 @@
 blockquote {
 
 	font-style		: italic;
-	padding			: var(--gap-lg) var(--gap-xxl);
-	margin			: var(--gap) 0;
-	// border-left		: 2px solid fn-hsl(success);
+	line-height		: 1.5;
+	padding			: $gap-lg $gap-xxl;
+	margin			: $gap 0;
+	border-left		: 2px solid fn-var($col-success);
 
 	& > p {
 
@@ -11,17 +12,23 @@ blockquote {
 
 	}
 
+	& > small {
+
+		display		: block;
+
+	}
+
 	&.small {
 
-		padding		: var(--gap-sm) var(--gap-xl);
-    	margin		: var(--gap-xxs) 0;
+		padding		: $gap-sm $gap-xl;
+    	margin		: $gap-xxs 0;
 
 	}
 
 	&.primary {
 
 		color			: inherit !important;
-		border-left		: 2px solid var(--col-primary);
+		border-left		: 2px solid fn-var($col-primary);
 
 	}
 

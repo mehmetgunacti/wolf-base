@@ -13,6 +13,7 @@
 
 	& > small {
 
+		display		: block;
 		font-size	: $param-small-font-size;
 		font-weight	: $param-small-font-weight;
 		color		: fn-var($param-small-color);

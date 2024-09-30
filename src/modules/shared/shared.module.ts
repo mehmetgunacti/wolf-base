@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { AutofocusDirective, FormatBytesPipe, InputModule, NoDataPipe, PortalComponent, SanitizeHtmlModule, SelectedTagsComponent, TimePastModule, ToastComponent, ToastWrapperComponent } from '@lib';
 import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 import { SelectModule } from 'lib/components/select/select.module';
-import { SwtichModule } from 'lib/components/switch/switch.module';
 import { TagCloudModule } from 'lib/components/tag-cloud/tag-cloud.module';
 import { TextareaModule } from 'lib/components/textarea';
 import { RequiredValidatorDirective } from 'lib/directives/required-validator.directive';
@@ -17,6 +16,7 @@ import { LanguagesComponent } from './languages/languages.component';
 import { ModalComponent } from './modal/modal.component';
 import { NoteHeaderComponent } from './note-header/note-header.component';
 import { WordComponent } from './word/word.component';
+import { SwitchComponent } from 'lib/components/switch/switch.component';
 
 @NgModule({
 	declarations: [
@@ -45,7 +45,7 @@ import { WordComponent } from './word/word.component';
 		TimePastModule,
 		FormatBytesPipe,
 		TextareaModule,
-		SwtichModule,
+		SwitchComponent,
 		ToastWrapperComponent,
 		ToastComponent
 	],
@@ -68,7 +68,7 @@ import { WordComponent } from './word/word.component';
 		TagCloudModule,
 		SanitizeHtmlModule,
 		TextareaModule,
-		SwtichModule,
+		SwitchComponent,
 		WordComponent,
 		LanguagesComponent,
 		ToastWrapperComponent,

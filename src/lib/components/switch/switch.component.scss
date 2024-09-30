@@ -1,123 +1,214 @@
+@use 'sass:math';
 @import 'variables';
 @import 'helper';
+@import 'components';
+
+$_switch_height			: $widget-height;
+$_switch-widget-width	: 1.1 * $_switch_height;
+$_switch-widget-height	: $widget-height-xs;
+$_switch-handle			: $widget-height-sm;
+
 :host {
 
-	--switch-handle-color	: var(--col-accent);
-	--switch-bg-color		: color-mix(in hsl, var(--col-accent), white 20%);
-	& > .switch {
+	--switch-handle-color	: #{fn-var($col-accent)};
+	--switch-bg-color		: #{fn-var($col-bg-form-element)};
 
-		border-radius		: 18px;
-		height				: 20px;
-		vertical-align		: top;
-		width				: 56px;
+	@include mx-d-flex;
+	gap				: $gap-sm;
+	min-height		: $_switch_height;
+	border-radius	: $border-radius-sm;
+	cursor			: pointer;
+	@include mx-transition(background-color border-color);
 
-		& > .switch-input {
+	&:focus-visible {
 
-			appearance	: none;
-			top			: 6px;
-			left		: 8px;
-			right		: 8px;
+		@include mx-outline;
 
-			&:focus-visible {
+	}
 
-				outline			: 2px solid var(--col-outline);
-    			outline-offset	: 7px;
+	& > [switch_label] {
 
-			}
+		flex			: 1;
+		place-self		: center start;
+		padding-left	: $gap-sm;
 
-			&:focus {
+	}
 
-				// outline : none; <-- don't
-				outline-color	: transparent;
+	& > [switch_handle] {
 
-			}
+		position		: relative;
+		@include mx-d-block;
 
-		}
+		margin-inline	: $gap-lg;
+		width			: $_switch-widget-width;
 
-		& > .switch-label {
+		&::before {
 
-			background-color	: var(--col-bg-form-element);
-			border-radius		: inherit;
-			font-size			: 10px;
-			height				: inherit;
-			text-transform		: uppercase;
-
-		}
-
-		& > .switch-input:checked~.switch-label {
-
-			background		: var(--switch-bg-color) none repeat scroll 0 0;
-
-		}
-
-		& .switch-handle {
-
+			content				: "";
 			position			: absolute;
-			background-color	: var(--switch-handle-color);
-			border-radius		: 20px;
-			height				: 26px;
-			width				: 26px;
-			left				: 0px;
-			top					: 0px;
-			@include mx-transition(left);
+			display				: block;
+			top					: math.div(($_switch_height - $_switch-widget-height), 2);
+			left				: 0;
 
-			&::before {
+			width			: $_switch-widget-width;
+			height			: $_switch-widget-height;
 
-				background-color	: transparent;
-				border-radius		: 6px;
-				content				: "";
-				height				: 12px;
-				left				: 50%;
-				margin				: -6px 0 0 -6px;
-				position			: absolute;
-				top					: 50%;
-				width				: 12px;
+			background-color	: var(--switch-bg-color);
+			border-radius		: $border-radius-round;
 
-			}
+			@include mx-transition(background-color);
 
 		}
 
-		& > .switch-input:checked~.switch-handle {
+		&::after {
 
-			left: 30px;
+			content				: "";
+			position			: absolute;
+			display				: block;
+			top					: math.div(($_switch_height - $_switch-handle), 2);
+			left				: - math.div($_switch-handle, 3);
+			background-color	: var(--switch-handle-color);
+			width				: $_switch-handle;
+			height				: $_switch-handle;
+			border-radius		: $border-radius-round;
+
+			@include mx-transition-short(left);
+
+		}
+
+		&[data-on="true"]::before {
+
+			--switch-bg-color	: #{fn-color-lighten($col-accent, 20%)};
+
+		}
+
+		&[data-on="true"]::after {
+
+			left	: $_switch-widget-width - 2 * math.div($_switch-handle, 3);
 
 		}
 
 	}
 
+	// position			: relative;
+
+	// min-height			: $widget-height;
+	// border-radius		: 18px;
+	// height				: 20px;
+	// width				: 56px;
+	// padding				: $gap;
+	// vertical-align		: top;
+	// cursor				: pointer;
+
+	// & > [switch_input] {
+
+	// 	position	: absolute;
+	// 	appearance	: none;
+	// 	top			: 6px;
+	// 	left		: 8px;
+	// 	right		: 8px;
+
+	// 	&:focus-visible {
+
+	// 		outline			: 2px solid fn-var($col-focus);
+	// 		outline-offset	: 7px;
+
+	// 	}
+
+	// 	&:focus {
+
+	// 		// outline : none; <-- don't
+	// 		outline-color	: transparent;
+
+	// 	}
+
+	// }
+
+	// & > [switch_label] {
+
+	// 	@include mx-d-block;
+	// 	position			: relative;
+
+	// 	background-color	: fn-var($col-bg-form-element);
+	// 	border-radius		: inherit;
+	// 	font-size			: 10px;
+	// 	height				: inherit;
+	// 	text-transform		: uppercase;
+	// 	@include mx-transition(background-color);
+
+	// }
+
+	// & > [switch_input]:checked~[switch_label] {
+
+	// 	background		: var(--switch-bg-color) none repeat scroll 0 0;
+
+	// }
+
+	// & > [switch_handle] {
+
+	// 	position			: absolute;
+	// 	background-color	: var(--switch-handle-color);
+	// 	border-radius		: 20px;
+	// 	height				: 26px;
+	// 	width				: 26px;
+	// 	left				: 0px;
+	// 	top					: 0px;
+	// 	@include mx-transition(left);
+
+	// 	&::before {
+
+	// 		background-color	: transparent;
+	// 		border-radius		: 6px;
+	// 		content				: "";
+	// 		height				: 12px;
+	// 		left				: 50%;
+	// 		margin				: -6px 0 0 -6px;
+	// 		position			: absolute;
+	// 		top					: 50%;
+	// 		width				: 12px;
+
+	// 	}
+
+	// }
+
+	// & > [switch_input]:checked~[switch_handle] {
+
+	// 	left: 30px;
+
+	// }
 
 	&.primary {
 
-		--switch-handle-color	: var(--col-primary);
-		--switch-bg-color		: color-mix(in hsl, var(--col-primary), white 20%);
+		--switch-handle-color	: #{fn-var($col-primary)};
+		--switch-bg-color		: #{fn-color-lighten($col-primary, 20%)};
 
 	}
 
 	&.success {
 
-		--switch-handle-color	: var(--col-success);
-		--switch-bg-color		: color-mix(in hsl, var(--col-success), white 20%);
+		--switch-handle-color	: #{fn-var($col-success)};
+		--switch-bg-color		: #{fn-color-lighten($col-success, 20%)};
 
 	}
 
 	&.info {
 
-		--switch-handle-color	: var(--col-info);
-		--switch-bg-color		: color-mix(in hsl, var(--col-info), white 20%);
+		--switch-handle-color	: #{fn-var($col-info)};
+		--switch-bg-color		: #{fn-color-lighten($col-info, 20%)};
 
 	}
 
 	&.warn {
 
-		--switch-handle-color	: var(--col-warn);
-		--switch-bg-color		: color-mix(in hsl, var(--col-warn), white 20%);
+		--switch-handle-color	: #{fn-var($col-warn)};
+		--switch-bg-color		: #{fn-color-lighten($col-warn, 20%)};
 
 	}
 
 	&.error {
 
-		--switch-handle-color	: var(--col-error);
-		--switch-bg-color		: color-mix(in hsl, var(--col-error), white 20%);
+		--switch-handle-color	: #{fn-var($col-error)};
+		--switch-bg-color		: #{fn-color-lighten($col-error, 20%)};
 
 	}
 

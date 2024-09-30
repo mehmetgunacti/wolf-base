@@ -1,4 +1,4 @@
-@mixin mx-component {
+@mixin mx-component($param-content-scrollable: false) {
 
 	@include mx-d-flex-column;
 	@include mx-box($param-shadow: true);
@@ -15,6 +15,12 @@
 
 		@include mx-d-grid;
 		gap	: $gap-sm;
+
+		@if $param-content-scrollable {
+
+			@include mx-scrollable;
+
+		}
 
 	}
 

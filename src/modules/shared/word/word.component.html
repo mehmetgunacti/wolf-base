@@ -14,7 +14,7 @@
 
 		@for (context of word.contexts; track $index) {
 
-			<blockquote>
+			<blockquote context>
 				@if (word.contexts.length > 1) {
 
 					<small>Context #{{ $index + 1 }}</small>
@@ -66,11 +66,14 @@
 
 				@if (schedulable()) {
 
-					<div schedule>
+					<footer schedule>
+
 						<w-switch
-							[checked]="scheduledIds().includes(definition.id)"
-							(checkedChange)="onSchedule(definition, $event)"/>
-					</div>
+							label="Schedule"
+							[value]="scheduledIds().includes(definition.id)"
+							(valueChange)="onSchedule(definition, $event)"/>
+
+					</footer>
 
 				}
 

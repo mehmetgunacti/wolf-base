@@ -8,6 +8,12 @@
 
 	& > [content] {
 
+		& > [context] {
+
+			@incldue mx-header;
+
+		}
+
 		& div[definition] {
 
 			position	: relative;
@@ -23,10 +29,8 @@
 
 			& > [schedule] {
 
-				position	: absolute;
-				top			: 0;
-				right		: 0;
-				padding		: var(--gap-xxl) var(--gap-xxl);
+				@include mx-footer-buttons;
+
 			}
 
 		}
