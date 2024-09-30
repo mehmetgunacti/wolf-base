@@ -26,5 +26,6 @@ export interface LocalRepositoryService {
 	dump<T = any>(repoName: LocalRepositoryNames): Promise<Record<string, T>>;
 	count(table: string): Promise<number>;
 	size(table: string): Promise<number>;
+	empty(table: string): Promise<void>;
 
 }

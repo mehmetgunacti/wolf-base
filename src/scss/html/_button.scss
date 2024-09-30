@@ -346,6 +346,22 @@ $_btn-size-values: (
 
 		}
 
+		&.warn {
+
+			@include mx-print-css-vars((
+				"color"				: fn-var($col-btn-warn-color)
+			), $_prefix);
+
+		}
+
+		&.danger {
+
+			@include mx-print-css-vars((
+				"color"				: fn-var($col-btn-danger-color)
+			), $_prefix);
+
+		}
+
 	}
 
 }

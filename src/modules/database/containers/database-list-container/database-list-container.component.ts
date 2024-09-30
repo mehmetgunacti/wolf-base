@@ -40,7 +40,7 @@ export class DatabaseListContainerComponent {
 
 	onClear(table: string): void {
 
-		console.log(table);
+		this.store.dispatch(databaseActions.emptyTable({ table }));
 
 	}
 

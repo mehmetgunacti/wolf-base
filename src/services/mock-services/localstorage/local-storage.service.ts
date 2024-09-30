@@ -49,4 +49,8 @@ export class MockLocalRepositoryService implements LocalRepositoryService {
 		throw new Error('Method not implemented.');
 	}
 
+	empty(table: string): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
+
 }

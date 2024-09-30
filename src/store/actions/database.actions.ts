@@ -14,7 +14,10 @@ export const databaseActions = createActionGroup({
 		search				: props<{ value: string | null }>(),
 
 		loadReport			: emptyProps(),
-		loadReportSuccess	: props<{ reports: ModuleReport[] }>()
+		loadReportSuccess	: props<{ reports: ModuleReport[] }>(),
+
+		emptyTable			: props<{ table: string }>(),
+		emptyTableSuccess	: props<{ table: string }>()
 
 	}
 

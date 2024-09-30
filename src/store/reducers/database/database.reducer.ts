@@ -19,5 +19,28 @@ export const databaseReducer: ActionReducer<DatabaseModuleState, Action> = creat
 		);
 
 	}),
+	on(databaseActions.emptyTableSuccess, (state, { table }): DatabaseModuleState => {
+
+		return produce(
+
+			state,
+			draft => {
+
+				draft.reports
+					.flatMap(r => r.reports)
+					.forEach(m => {
+
+						if (m.table === table) {
+							m.size = 0;
+							m.count = 0;
+						}
+
+					});
+
+			}
+
+		);
+
+	})
 
 );

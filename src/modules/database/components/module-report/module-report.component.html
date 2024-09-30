@@ -15,9 +15,10 @@
 			<div>{{ row.size | formatBytes }}</div>
 			<div>
 				<button
-					class="glyph sm squared"
+					class="glyph sm squared danger"
 					(click)="onClear(row.table)"
-					title="Empty table">
+					title="Empty table"
+					[disabled]="row.count === 0">
 					<span delete_icon class="material-symbols-outlined">delete</span>
 				</button>
 			</div>

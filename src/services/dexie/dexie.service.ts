@@ -87,4 +87,10 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 	}
 
+	async empty(table: string): Promise<void> {
+
+		await this.db.table(table).clear();
+
+	}
+
 }

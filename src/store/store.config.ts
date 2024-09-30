@@ -95,6 +95,7 @@ export const effectList = [
 
 	// Database
 	effects.DatabaseEffects,
+	effects.DatabaseReportEffects,
 
 	// Settings
 	effects.SettingsEffects,
