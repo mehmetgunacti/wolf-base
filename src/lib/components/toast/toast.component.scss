@@ -6,9 +6,7 @@
 
 	@include mx-d-grid;
 	grid-template-columns	: $widget-height 1fr;
-
 	min-height		: 2 * $widget-height;
-
 	padding			: $gap-lg;
 	gap				: $gap-sm;
 

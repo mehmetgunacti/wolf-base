@@ -1,7 +1,7 @@
-// @import 'helper';
+@import 'components';
 
-// :host {
+:host {
 
-// 	@extend %flex-column;
+	@include mx-page;
 
-// }
+}

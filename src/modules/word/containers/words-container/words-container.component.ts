@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Word } from 'lib';
-import { Observable, map } from 'rxjs';
 import { selWord_filtered } from 'store/selectors/word/word-ui.selectors';
 
 @Component({
@@ -12,17 +10,7 @@ import { selWord_filtered } from 'store/selectors/word/word-ui.selectors';
 })
 export class WordsContainerComponent {
 
-	private store: Store = inject(Store);
-
-	words$: Observable<Word[]>;
-
-	constructor() {
-
-		this.words$ = this.store.select(selWord_filtered).pipe(
-			map(words => words.sort((a, b) => a.name.localeCompare(b.name)))
-		);
-
-	}
-
+	private words = inject(Store).selectSignal(selWord_filtered);
+	protected sortedWords = computed(() => this.words().sort((a, b) => a.name.localeCompare(b.name)));
 
 }

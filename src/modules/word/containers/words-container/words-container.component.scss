@@ -1,36 +1,49 @@
-// @import 'helper';
-// @import 'variables';
-// @import 'mixins';
-// @import 'components';
+@import 'helper';
+@import 'variables';
+@import 'components';
 
-// :host{
+:host{
 
-// 	& > [word_entries] {
+	@include mx-d-flex-column;
+	@include mx-box;
+	@include mx-shadow;
+	gap		: $gap-xxl;
+	padding	: $gap-lg $gap-xl;
 
-// 		@include mx-scrollable(calc(100dvh - 4 * var(--header-height)));
+	& > header {
 
-// 		& > a {
+		@include mx-header($font-size-h2, 0.5em);
 
-// 			// @extend %flex-column;
-// 			padding				: var(--gap);
-// 			border-radius		: var(--border-radius-sm);
-// 			text-decoration		: none;
-// 			@include mx-transition(background-color);
 
-// 			& > small {
+	}
 
-// 				color				: var(--col-text-secondary);
+	& > [word_entries] {
 
-// 			}
+		@include mx-d-grid;
+		grid-template-columns	: repeat(auto-fill, minmax(15rem, 1fr));
+		gap						: $gap-sm;
+		@include mx-scrollable(100%); //calc(100dvh - 4 * #{$header-height}));
 
-// 			&:focus-visible {
+		& > a {
 
-// 				@include mx-outline;
+			@include mx-d-block;
+			@include mx-box($col-bg-component-dark);
+			@include mx-header;
+			min-height			: 1.75 * $widget-height;
+			padding				: $gap;
+			border-radius		: $border-radius;
+			text-decoration		: none;
+			overflow-x			: hidden;
+			@include mx-transition(background-color);
 
-// 			}
+			& > small {
 
-// 		}
+				color			: fn-var($col-text-secondary);
 
-// 	}
+			}
 
-// }
+		}
+
+	}
+
+}

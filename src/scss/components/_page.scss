@@ -2,5 +2,8 @@
 
 	@include mx-d-flex-column;
 	gap		: $gap;
+	padding	: $gap;
+
+	height	: calc(100dvh - #{$header-height});
 
 }

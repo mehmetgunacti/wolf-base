@@ -1,20 +1,21 @@
-// @import 'helper';
+@import 'variables';
+@import 'helper';
+@import 'components';
 
-// :host {
+:host {
 
-// 	display		: flex;
-// 	gap			: var(--gap-sm);
+	@include mx-box($col-bg-component-dark);
+	@include mx-d-grid;
+	grid-template-columns	: $widget-height 1fr;
+	min-height		: 2 * $widget-height;
+	padding			: $gap-lg;
+	gap				: $gap-sm;
+	@include mx-shadow;
 
-// 	& > div {
+	& > div {
 
-// 		@extend %flex-center-center;
-// 		width: 3rem;
+		place-self	: center;
 
-// 	}
-// 	& > w-input {
+	}
 
-// 		flex	: 1;
-
-// 	}
-
-// }
+}

@@ -1,0 +1,13 @@
+@mixin mx-header($header-font-size: $font-size, $small-font-size: 0.7em) {
+
+	color		: fn-var($col-text);
+	font-size	: $header-font-size;
+
+	& > small {
+
+		font-size	: $small-font-size;
+		color		: fn-var($col-text-secondary);
+
+	}
+
+}

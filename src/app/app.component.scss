@@ -30,7 +30,6 @@
 
 		@include mx-d-block;
 		position		: fixed;
-		padding			: $gap;
 		z-index			: $z-index-main;
 		height			: calc(100dvh - #{$header-height});
 

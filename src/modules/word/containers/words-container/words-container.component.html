@@ -1,38 +1,37 @@
-@if (words$ | async; as words) {
+@let words = sortedWords();
 
-	<header>
+<header>
 
-		<div card_title>Words <small>{{ words.length }} Entries</small></div>
+	Words <small>{{ words.length }} Entries</small>
 
-	</header>
+</header>
 
-	@if (words.length > 0) {
+@if (words.length > 0) {
 
-		<div word_entries>
+	<div word_entries>
 
-			@for (word of words; track $index) {
+		@for (word of words; track $index) {
 
-				<a [routerLink]="['/words', word.id]" tabindex="0">
+			<a [routerLink]="['/words', word.id]" tabindex="0">
 
-					<span>{{ word.name }}</span>
-					<small>{{ word.definitions.length }} definition{{ word.definitions.length > 1 ? 's' : '' }}</small>
+				<span>{{ word.name }}</span>
+				<small>{{ word.definitions.length }} definition{{ word.definitions.length > 1 ? 's' : '' }}</small>
 
-				</a>
+			</a>
 
-			}
+		}
 
-		</div>
+	</div>
 
-	} @else {
+} @else {
 
-		<div class="empty">
-			No words available
-			<br>
-			<button routerLink="/words/new" class="link">
-				<span class="material-symbols-outlined">add</span> Add Word
-			</button>
-		</div>
-
-	}
+	<!-- todo this could be a component -->
+	<div class="empty">
+		No words available
+		<br>
+		<button routerLink="/words/new" class="link">
+			<span class="material-symbols-outlined">add</span> Add Word
+		</button>
+	</div>
 
 }
