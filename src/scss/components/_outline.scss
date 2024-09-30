@@ -1,4 +1,4 @@
-@mixin mx-outline($color: $col-outline) {
+@mixin mx-outline($color: $col-focus) {
 
 	outline			: 2px solid #{fn-var($color)};
 	outline-offset	: -2px;
