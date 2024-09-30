@@ -1,10 +1,11 @@
+@import 'components';
+
 :host {
 
-	--input-label-top: 1.7rem;
-	// &>label {
+	& > label {
 
-	// 	top		: 1.7rem;
+		@include mx-input-label($input-label-top: 1.7rem);
 
-	// }
+	}
 
 }

@@ -10,11 +10,11 @@
 
 }
 
-@mixin mx-input-label {
+@mixin mx-input-label($input-label-top: 50%) {
 
 	@include mx-d-flex-ai-center;
 	position			: absolute;
-	top					: var(--input-label-top, 50%);
+	top					: $input-label-top;
 	left				: 5px;
 	transform			: translateY(-50%);
 	pointer-events		: none;

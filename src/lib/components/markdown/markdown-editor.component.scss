@@ -28,8 +28,8 @@
 
 		& > button {
 
-			text-align			: start;
-			justify-content: start;
+			text-align		: start;
+			justify-content	: start;
 
 			& > span:first-child {
 
@@ -167,8 +167,7 @@
 
 		& > label {
 
-			--input-label-top : 2rem;
-			@include mx-input-label;
+			@include mx-input-label($input-label-top: 2rem);
 
 			&.up {
 
