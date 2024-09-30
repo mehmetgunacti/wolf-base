@@ -1,11 +1,58 @@
-import { Injectable, inject } from '@angular/core';
-import { AppEntities, DatabaseReport, LocalRepositoryNames, LocalRepositoryService } from '@lib';
+import { inject, Injectable } from '@angular/core';
+import { AppEntities, AppEntity, LocalRepositoryNames, LocalRepositoryService, ModuleReport } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
 import { BackupDatabase } from 'lib/utils/database.util';
 import { NgProgress } from 'ngx-progressbar';
+import { forkJoin, from, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { databaseActions } from 'store/actions';
+
+interface Row extends Record<string, Observable<any>> {
+
+	label: Observable<string>;
+	table: Observable<string>;
+	count: Observable<number>;
+	size: Observable<number>;
+
+}
+
+function row(repo: LocalRepositoryService, table: string, label: string): Row {
+
+	return {
+
+		label: of(label),
+		table: of(table),
+		count: from(repo.count(table)),
+		size: from(repo.size(table))
+
+	};
+
+}
+
+function entity(repo: LocalRepositoryService, entity: AppEntity): Row {
+
+	return row(repo, entity.table, 'Entities');
+
+}
+
+function syncData(repo: LocalRepositoryService, entity: AppEntity): Row {
+
+	return row(repo, entity.table_sync, 'Sync Data');
+
+}
+
+function remoteData(repo: LocalRepositoryService, entity: AppEntity): Row {
+
+	return row(repo, entity.table_remote, 'Remote Data');
+
+}
+
+function trash(repo: LocalRepositoryService, entity: AppEntity): Row {
+
+	return row(repo, entity.table_trash, 'Trash');
+
+}
 
 @Injectable()
 export class DatabaseEffects {
@@ -33,163 +80,136 @@ export class DatabaseEffects {
 
 			ofType(databaseActions.loadReport),
 			tap(() => this.progress.ref().start()),
-			switchMap(() => Promise.all([
+			switchMap(() => forkJoin([
 
-				this.localRepository.count(AppEntities.bookmark.table),
-				this.localRepository.size(AppEntities.bookmark.table),
-				this.localRepository.count(AppEntities.bookmark.table_sync),
-				this.localRepository.size(AppEntities.bookmark.table_sync),
-				this.localRepository.count(AppEntities.bookmark.table_remote),
-				this.localRepository.size(AppEntities.bookmark.table_remote),
-				this.localRepository.count(AppEntities.bookmark.table_trash),
-				this.localRepository.size(AppEntities.bookmark.table_trash),
+				forkJoin({
 
-				this.localRepository.count(AppEntities.bookmark.table_clicks),
-				this.localRepository.size(AppEntities.bookmark.table_clicks),
+					name: of(AppEntities.bookmark.labelPlural),
+					glyph: of('bookmarks'),
+					reports: forkJoin([
 
-				this.localRepository.count(AppEntities.note.table),
-				this.localRepository.size(AppEntities.note.table),
-				this.localRepository.count(AppEntities.note.table_sync),
-				this.localRepository.size(AppEntities.note.table_sync),
-				this.localRepository.count(AppEntities.note.table_remote),
-				this.localRepository.size(AppEntities.note.table_remote),
-				this.localRepository.count(AppEntities.note.table_trash),
-				this.localRepository.size(AppEntities.note.table_trash),
+						forkJoin(entity(this.localRepository, AppEntities.bookmark)),
+						forkJoin(syncData(this.localRepository, AppEntities.bookmark)),
+						forkJoin(remoteData(this.localRepository, AppEntities.bookmark)),
+						forkJoin(trash(this.localRepository, AppEntities.bookmark)),
+						forkJoin(row(this.localRepository, AppEntities.bookmark.table_clicks, 'Clicks'))
 
-				this.localRepository.count(AppEntities.noteContent.table),
-				this.localRepository.size(AppEntities.noteContent.table),
-				this.localRepository.count(AppEntities.noteContent.table_sync),
-				this.localRepository.size(AppEntities.noteContent.table_sync),
-				this.localRepository.count(AppEntities.noteContent.table_remote),
-				this.localRepository.size(AppEntities.noteContent.table_remote),
-				this.localRepository.count(AppEntities.noteContent.table_trash),
-				this.localRepository.size(AppEntities.noteContent.table_trash),
+					])
 
-				this.localRepository.count(AppEntities.quizEntry.table),
-				this.localRepository.size(AppEntities.quizEntry.table),
-				this.localRepository.count(AppEntities.quizEntry.table_sync),
-				this.localRepository.size(AppEntities.quizEntry.table_sync),
-				this.localRepository.count(AppEntities.quizEntry.table_remote),
-				this.localRepository.size(AppEntities.quizEntry.table_remote),
-				this.localRepository.count(AppEntities.quizEntry.table_trash),
-				this.localRepository.size(AppEntities.quizEntry.table_trash),
+				}),
+				forkJoin({
 
-				this.localRepository.count(AppEntities.quote.table),
-				this.localRepository.size(AppEntities.quote.table),
-				this.localRepository.count(AppEntities.quote.table_sync),
-				this.localRepository.size(AppEntities.quote.table_sync),
-				this.localRepository.count(AppEntities.quote.table_remote),
-				this.localRepository.size(AppEntities.quote.table_remote),
-				this.localRepository.count(AppEntities.quote.table_trash),
-				this.localRepository.size(AppEntities.quote.table_trash),
+					name: of(AppEntities.note.labelPlural),
+					glyph: of('note_stack'),
+					reports: forkJoin([
 
-				this.localRepository.count(AppEntities.word.table),
-				this.localRepository.size(AppEntities.word.table),
-				this.localRepository.count(AppEntities.word.table_sync),
-				this.localRepository.size(AppEntities.word.table_sync),
-				this.localRepository.count(AppEntities.word.table_remote),
-				this.localRepository.size(AppEntities.word.table_remote),
-				this.localRepository.count(AppEntities.word.table_trash),
-				this.localRepository.size(AppEntities.word.table_trash),
+						forkJoin(entity(this.localRepository, AppEntities.note)),
+						forkJoin(syncData(this.localRepository, AppEntities.note)),
+						forkJoin(remoteData(this.localRepository, AppEntities.note)),
+						forkJoin(trash(this.localRepository, AppEntities.note))
 
-				this.localRepository.count(AppEntities.project.table),
-				this.localRepository.size(AppEntities.project.table),
-				this.localRepository.count(AppEntities.project.table_sync),
-				this.localRepository.size(AppEntities.project.table_sync),
-				this.localRepository.count(AppEntities.project.table_remote),
-				this.localRepository.size(AppEntities.project.table_remote),
-				this.localRepository.count(AppEntities.project.table_trash),
-				this.localRepository.size(AppEntities.project.table_trash),
+					])
 
-				this.localRepository.count(AppEntities.task.table),
-				this.localRepository.size(AppEntities.task.table),
-				this.localRepository.count(AppEntities.task.table_sync),
-				this.localRepository.size(AppEntities.task.table_sync),
-				this.localRepository.count(AppEntities.task.table_remote),
-				this.localRepository.size(AppEntities.task.table_remote),
-				this.localRepository.count(AppEntities.task.table_trash),
-				this.localRepository.size(AppEntities.task.table_trash),
+				}),
+				forkJoin({
 
-				this.localRepository.count(LocalRepositoryNames.logs),
-				this.localRepository.size(LocalRepositoryNames.logs)
+					name: of(AppEntities.noteContent.labelPlural),
+					glyph: of('note_stack'),
+					reports: forkJoin([
 
-			])),
-			map(arr => {
+						forkJoin(entity(this.localRepository, AppEntities.noteContent)),
+						forkJoin(syncData(this.localRepository, AppEntities.noteContent)),
+						forkJoin(remoteData(this.localRepository, AppEntities.noteContent)),
+						forkJoin(trash(this.localRepository, AppEntities.noteContent))
 
-				const report: DatabaseReport = {
+					])
 
-					bookmarks: {
+				}),
+				forkJoin({
 
-						entities: { count: arr[0], size: arr[1] },
-						syncData: { count: arr[2], size: arr[3] },
-						remoteData: { count: arr[4], size: arr[5] },
-						trash: { count: arr[6], size: arr[7] },
-						clicks: { count: arr[8], size: arr[9] }
+					name: of(AppEntities.quizEntry.labelPlural),
+					glyph: of('trending_up'),
+					reports: forkJoin([
 
-					},
-					notes: {
+						forkJoin(entity(this.localRepository, AppEntities.quizEntry)),
+						forkJoin(syncData(this.localRepository, AppEntities.quizEntry)),
+						forkJoin(remoteData(this.localRepository, AppEntities.quizEntry)),
+						forkJoin(trash(this.localRepository, AppEntities.quizEntry))
 
-						entities: { count: arr[10], size: arr[11] },
-						syncData: { count: arr[12], size: arr[13] },
-						remoteData: { count: arr[14], size: arr[15] },
-						trash: { count: arr[16], size: arr[17] }
+					])
 
-					},
-					notesContent: {
+				}),
+				forkJoin({
 
-						entities: { count: arr[18], size: arr[19] },
-						syncData: { count: arr[20], size: arr[21] },
-						remoteData: { count: arr[22], size: arr[23] },
-						trash: { count: arr[24], size: arr[25] }
+					name: of(AppEntities.quote.labelPlural),
+					glyph: of('format_quote'),
+					reports: forkJoin([
 
-					},
-					quizEntries: {
+						forkJoin(entity(this.localRepository, AppEntities.quote)),
+						forkJoin(syncData(this.localRepository, AppEntities.quote)),
+						forkJoin(remoteData(this.localRepository, AppEntities.quote)),
+						forkJoin(trash(this.localRepository, AppEntities.quote))
 
-						entities: { count: arr[26], size: arr[27] },
-						syncData: { count: arr[28], size: arr[29] },
-						remoteData: { count: arr[30], size: arr[31] },
-						trash: { count: arr[32], size: arr[33] }
+					])
 
-					},
-					quotes: {
+				}),
+				forkJoin({
 
-						entities: { count: arr[34], size: arr[35] },
-						syncData: { count: arr[36], size: arr[37] },
-						remoteData: { count: arr[38], size: arr[39] },
-						trash: { count: arr[40], size: arr[41] }
+					name: of(AppEntities.word.labelPlural),
+					glyph: of('dictionary'),
+					reports: forkJoin([
 
-					},
-					words: {
+						forkJoin(entity(this.localRepository, AppEntities.word)),
+						forkJoin(syncData(this.localRepository, AppEntities.word)),
+						forkJoin(remoteData(this.localRepository, AppEntities.word)),
+						forkJoin(trash(this.localRepository, AppEntities.word))
 
-						entities: { count: arr[42], size: arr[43] },
-						syncData: { count: arr[44], size: arr[45] },
-						remoteData: { count: arr[46], size: arr[47] },
-						trash: { count: arr[48], size: arr[49] }
+					])
 
-					},
-					projects: {
+				}),
+				forkJoin({
 
-						entities: { count: arr[50], size: arr[51] },
-						syncData: { count: arr[52], size: arr[53] },
-						remoteData: { count: arr[54], size: arr[55] },
-						trash: { count: arr[56], size: arr[57] }
+					name: of(AppEntities.project.labelPlural),
+					glyph: of('task_alt'),
+					reports: forkJoin([
 
-					},
-					tasks: {
+						forkJoin(entity(this.localRepository, AppEntities.project)),
+						forkJoin(syncData(this.localRepository, AppEntities.project)),
+						forkJoin(remoteData(this.localRepository, AppEntities.project)),
+						forkJoin(trash(this.localRepository, AppEntities.project))
 
-						entities: { count: arr[58], size: arr[59] },
-						syncData: { count: arr[60], size: arr[61] },
-						remoteData: { count: arr[62], size: arr[63] },
-						trash: { count: arr[64], size: arr[65] }
+					])
 
-					},
-					logs: { count: arr[66], size: arr[67] }
+				}),
+				forkJoin({
 
-				};
-				return report;
+					name: of(AppEntities.task.labelPlural),
+					glyph: of('task_alt'),
+					reports: forkJoin([
 
-			}),
-			map(report => databaseActions.loadReportSuccess({ report }))
+						forkJoin(entity(this.localRepository, AppEntities.task)),
+						forkJoin(syncData(this.localRepository, AppEntities.task)),
+						forkJoin(remoteData(this.localRepository, AppEntities.task)),
+						forkJoin(trash(this.localRepository, AppEntities.task))
+
+					])
+
+				}),
+				forkJoin({
+
+					name: of('Logs'),
+					glyph: of('history'),
+					reports: forkJoin([
+
+						forkJoin(row(this.localRepository, LocalRepositoryNames.logs, 'Logs'))
+
+					])
+
+				})
+
+				])
+			),
+			map((reports: ModuleReport[]) => databaseActions.loadReportSuccess({ reports }))
 
 		)
 

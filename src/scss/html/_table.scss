@@ -3,7 +3,7 @@ table {
 	width				: 100%;
 	text-align			: left;
 	white-space			: nowrap;
-	margin-bottom		: var(--gap);
+	margin-bottom		: $gap;
 
 	display				: block;
     overflow-x			: auto;
@@ -20,22 +20,22 @@ table {
 		border-width		: 2px;
 		border-style		: solid;
 		border-color		: transparent;
-		border-bottom-color	: hsl(var(--col-primary) / 70%);
+		border-bottom-color	: fn-color-set-alpha($col-primary, 0.7);
 
-		background-color	: color-mix(in hsl, var(--col-bg-nav), black 98%);
+		background-color	: fn-color-darken($col-bg-nav, 2%);
 		@include mx-transition(border background-color);
 
 		& > tr:first-child {
 
 			& > th:first-child {
 
-				border-top-left-radius	: var(--border-radius-sm);
+				border-top-left-radius	: $border-radius-sm;
 
 			}
 
 			& > th:last-child {
 
-				border-top-right-radius	: var(--border-radius-sm);
+				border-top-right-radius	: $border-radius-sm;
 
 			}
 
@@ -45,12 +45,14 @@ table {
 
 	& > tbody {
 
-		// background-color	: fn-hsl(bg-2, (lig: "- 1%"));
-		@include mx-transition(background-color);
+		display				: block;
+		// background-color	: fn-color-lighten($col-bg-component-dark, 1%);
+		// @include mx-transition(background-color);
 
 		& > tr {
 
-			// border-bottom	: 1px solid fn-hsl(bg-3, (lig: "- 1%"));
+			// display			: block;
+			border-bottom	: fn-color-lighten($col-bg-component-dark, 3%);
 			@include mx-transition(border);
 
 			&:last-child {
@@ -59,13 +61,13 @@ table {
 
 				& > td:first-child {
 
-					border-bottom-left-radius	: var(--border-radius-sm);
+					border-bottom-left-radius	: $border-radius-sm;
 
 				}
 
 				& > td:last-child {
 
-					border-bottom-right-radius	: var(--border-radius-sm);
+					border-bottom-right-radius	: $border-radius-sm;
 
 				}
 
@@ -79,20 +81,20 @@ table {
 	th {
 
 		vertical-align		: middle;
-		padding				: var(--gap) var(--gap-lg);
+		padding				: $gap $gap-lg;
 		white-space			: nowrap;
 
 	}
 
 	&.striped > tbody > tr:nth-of-type(2n) {
 
-		// background-color	: fn-hsl(bg-3);
+		background-color	: fn-var($col-bg-component-dark);
 
 	}
 
 	& > tfoot {
 
-		//border-top			: 2px solid fn-hsl(text-secondary);
+		border-top			: 2px solid fn-var($col-text-secondary);
 
 	}
 

@@ -1,3 +1,5 @@
+import { Table } from 'lib/constants';
+
 export interface DexieConfiguration {
 
 	dbName: string;
@@ -6,62 +8,19 @@ export interface DexieConfiguration {
 
 }
 
-export interface EntityReportRow {
+export interface ReportRow {
 
-	count: number | null;
-	size: number | null;
-
-}
-
-export interface EntityReport {
-
-	entities: EntityReportRow;
-	syncData: EntityReportRow;
-	remoteData: EntityReportRow;
-	trash: EntityReportRow;
-
-};
-
-const emptyRow: EntityReportRow = {
-
-	count: null,
-	size: null
+	label: string;
+	table: string,
+	count: number;
+	size: number;
 
 }
 
-const emptyEntityReport: EntityReport = {
+export interface ModuleReport {
 
-	entities: emptyRow,
-	syncData: emptyRow,
-	remoteData: emptyRow,
-	trash: emptyRow
-
-}
-
-export interface DatabaseReport {
-
-	bookmarks: EntityReport & { clicks: EntityReportRow; };
-	notes: EntityReport;
-	notesContent: EntityReport;
-	projects: EntityReport;
-	quizEntries: EntityReport;
-	quotes: EntityReport;
-	tasks: EntityReport;
-	words: EntityReport;
-	logs: EntityReportRow;
-
-}
-
-export const emptyDatabaseReport: DatabaseReport = {
-
-	bookmarks: { ...emptyEntityReport, clicks: emptyRow },
-	notes: emptyEntityReport,
-	notesContent: emptyEntityReport,
-	projects: emptyEntityReport,
-	quizEntries: emptyEntityReport,
-	quotes: emptyEntityReport,
-	tasks: emptyEntityReport,
-	words: emptyEntityReport,
-	logs: emptyRow
+	name: string,
+	glyph: string,
+	reports: ReportRow[]
 
 }

@@ -6,7 +6,7 @@ export interface ToastConfiguration { // visit primeng documenation for more
 	life?: number, // 3000	Number of time in milliseconds to wait before closing the message.
 	sticky?: boolean, // false	Whether the message should be automatically closed based on life property or kept visible.
 	closable?: boolean, // true	When enabled, displays a close icon to hide a message manually.
-	icon?: string, // google icons: material-symbols-outlined
+	glyph?: string, // google icons: material-symbols-outlined
 
 	// non-primeng related
 	id?: number

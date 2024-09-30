@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { DatabaseReport } from '@lib';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ModuleReport, opacityTrigger } from '@lib';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { databaseActions } from 'store/actions';
 import * as reports from 'store/selectors/database/database.selectors';
 
@@ -9,19 +8,26 @@ import * as reports from 'store/selectors/database/database.selectors';
 	selector: 'app-database-list-container',
 	templateUrl: './database-list-container.component.html',
 	styleUrls: ['./database-list-container.component.scss'],
+	animations: [opacityTrigger],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatabaseListContainerComponent {
 
 	private store: Store = inject(Store);
 
-	report$: Observable<DatabaseReport>;
-	total$: Observable<number>;
+	reports = this.store.selectSignal<ModuleReport[]>(reports.selDatabase_Report);
+	total = computed(() => {
+
+		return this.reports().reduce((total, rows) => {
+
+			return total + rows.reports.reduce((subTotal, row) => subTotal + row.size, 0);
+
+		}, 0);
+
+	});
 
 	constructor() {
 
-		this.report$ = this.store.select(reports.selDatabase_Report);
-		this.total$ = this.store.select(reports.selDatabase_TotalSize);
 		this.store.dispatch(databaseActions.loadReport());
 
 	}
@@ -29,6 +35,12 @@ export class DatabaseListContainerComponent {
 	onRefresh(): void {
 
 		this.store.dispatch(databaseActions.loadReport());
+
+	}
+
+	onClear(table: string): void {
+
+		console.log(table);
 
 	}
 

@@ -6,7 +6,6 @@ import { databaseActions } from 'store/actions';
 	selector: 'app-database-page',
 	templateUrl: './database-page.component.html',
 	styleUrls: ['./database-page.component.scss'],
-	host: { 'class': 'd-flex column gap-sm' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatabasePageComponent {

@@ -1,4 +1,4 @@
-import { DatabaseReport, LocalRepositoryNames } from '@lib';
+import { LocalRepositoryNames, ModuleReport } from '@lib';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 export const databaseActions = createActionGroup({
@@ -14,7 +14,7 @@ export const databaseActions = createActionGroup({
 		search				: props<{ value: string | null }>(),
 
 		loadReport			: emptyProps(),
-		loadReportSuccess	: props<{ report: DatabaseReport }>()
+		loadReportSuccess	: props<{ reports: ModuleReport[] }>()
 
 	}
 

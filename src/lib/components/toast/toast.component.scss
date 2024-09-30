@@ -4,11 +4,10 @@
 
 :host {
 
-	@include mx-d-flex;
-	@include mx-shadow;
+	@include mx-d-grid;
+	grid-template-columns	: $widget-height 1fr;
 
-	// min-height	: calc(fn-var($header-height) * 1.5);
-	// min-width		: $toast-min-width;
+	min-height		: 2 * $widget-height;
 
 	padding			: $gap-lg;
 	gap				: $gap-sm;
@@ -17,19 +16,19 @@
 	border-radius	: $border-radius;
 
 	color: fn-var($col-text);
+	@include mx-shadow;
 
 	[toast-left] {
 
-		@include mx-d-flex-center;
-		// min-width	: $header-height;
+		place-self	: center;
 
 	}
 
 	[toast-right] {
 
-		// @include mx-d-flex(()); // ([(flex-direction: column), (justify-content: center)]);
-		flex	: 1;
-		// class="d-flex-column jc-center p pl-0 flex-1"
+		place-self	: center end;
+		padding		: $gap-lg;
+
 		[toast-summary] {
 
 			font-size	: $font-size-h4;

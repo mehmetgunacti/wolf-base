@@ -36,4 +36,5 @@
 @mixin mx-d-block						{ display: block; }
 @mixin mx-d-none						{ display: none; }
 @mixin mx-d-inline-block				{ display: inline-block; }
+@mixin mx-d-inline-grid					{ display: inline-grid; }
 @mixin mx-d-inline-flex($params...)		{ @include mx-d-flex($display: inline-flex, $params...); }

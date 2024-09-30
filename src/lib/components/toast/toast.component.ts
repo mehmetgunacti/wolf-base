@@ -12,8 +12,7 @@ import { ToastConfiguration } from './toast.util';
 export class ToastComponent {
 
 	conf = input.required<ToastConfiguration>();
-	icon = input<string | null>();
-	iconClass = computed<string>(() => this.icon() ?? this.conf().icon ?? this.getIconClass(this.conf()));
+	glyph = computed<string>(() => this.conf().glyph ?? this.getGlyphClass(this.conf()));
 	severity = computed<string>(() => this.conf().severity);
 
 	close = output<number>();
@@ -37,13 +36,15 @@ export class ToastComponent {
 
 	}
 
-	private getIconClass(data: ToastConfiguration): string {
+	private getGlyphClass(data: ToastConfiguration): string {
 
 		switch (data.severity) {
+
 			case 'success': return 'task_alt';
 			case 'info': return 'campaign';
 			case 'warn': return 'warning';
 			case 'error': return 'error';
+
 		}
 
 	}

@@ -1,13 +1,13 @@
-import { DatabaseReport, emptyDatabaseReport } from '@lib';
+import { ModuleReport } from '@lib';
 
 export interface DatabaseModuleState {
 
-	report: DatabaseReport;
+	reports: ModuleReport[];
 
 }
 
 export const initialDatabaseState: DatabaseModuleState = {
 
-	report: emptyDatabaseReport
+	reports: []
 
 };

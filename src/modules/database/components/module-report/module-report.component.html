@@ -1,0 +1,29 @@
+<fieldset>
+
+	<legend>
+
+		<span class="material-symbols-outlined">{{report().glyph}}</span>
+		{{report().name}}
+
+	</legend>
+	<section content>
+
+		@for (row of report().reports; track $index) {
+
+			<div><strong>{{ row.label }}</strong></div>
+			<div>{{ row.count }}</div>
+			<div>{{ row.size | formatBytes }}</div>
+			<div>
+				<button
+					class="glyph sm squared"
+					(click)="onClear(row.table)"
+					title="Empty table">
+					<span delete_icon class="material-symbols-outlined">delete</span>
+				</button>
+			</div>
+
+		}
+
+	</section>
+
+</fieldset>

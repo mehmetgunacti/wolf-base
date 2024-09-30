@@ -1,90 +1,30 @@
-// @import 'helper';
-// @import 'variables';
-// @import 'components';
+@import 'helper';
+@import 'variables';
+@import 'components';
 // @import 'mixins';
 
-// :host {
+:host {
 
-// 	display						: grid;
-// 	grid-template-columns		: 1fr;
-// 	gap							: var(--gap-sm);
+	@include mx-page;
 
-// 	@include bigScreen() {
+	& > w-toast {
 
-// 		grid-template-columns	: repeat(auto-fill, minmax(35rem, 1fr));
+		// grid-column			: 1 / -1;
 
-// 	}
+		& [total] {
 
-// 	& > w-toast {
+			@include mx-d-flex-ai-c-jc-e;
 
-// 		grid-column			: 1 / -1;
+		}
 
-// 		& [total] {
+	}
 
-// 			font-size		: var(--font-size-h4);
-// 			font-weight		: bold;
-// 			text-align		: end;
-// 			padding-right	: var(--gap-sm);
+	& > [modules] {
 
-// 		}
+		@include mx-d-grid;
+		grid-template-columns	: repeat(auto-fill, minmax(33rem, 1fr));
+		gap						: $gap;
 
-// 	}
+	}
 
-// 	& > fieldset {
-
-// 		@include mx-card;
-// 		@include mx-d-flex-column;
-// 		margin-top			: 2rem;
-// 		position			: relative;
-// 		padding-top			: calc(var(--gap-xl) + var(--gap-xxl)); // vars instead of rem or px
-
-// 		& > legend {
-
-// 			position			: absolute;
-// 			display				: flex;
-// 			align-items			: center;
-
-// 			gap					: var(--gap-xs);
-
-// 			top					: -2rem;
-// 			left				: 0rem;
-
-// 			padding				: var(--gap);
-// 			margin-left			: var(--gap);
-
-// 			border				: none;
-// 			background-color	: fn-hsl(bg-3);
-// 			border-radius		: var(--border-radius);
-// 			@include mx-transition(background-color);
-
-// 		}
-
-// 		& > main {
-
-// 			& > table {
-
-// 				width			: 100%;
-
-// 				& > tr > td {
-
-// 					&:first-child {
-
-// 						width		: 100%;
-
-// 					}
-
-// 					&:not(:first-child) {
-
-// 						text-align	: end;
-
-// 					}
-
-// 				}
-
-// 			}
-
-// 		}
-
-// 	}
-
-// }
+}
