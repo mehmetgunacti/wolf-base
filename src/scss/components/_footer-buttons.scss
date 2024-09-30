@@ -1,11 +1,9 @@
-@use 'helper';
-
 @mixin mx-footer-buttons {
 
 	@include mx-d-flex-jc-end;
-	gap				: fn-var($gap-sm);
+	gap				: $gap-sm;
+	padding			: $gap-xl;
 	margin-top		: auto;
-	padding			: fn-var($gap-xl);
 
 	&.one_one {
 

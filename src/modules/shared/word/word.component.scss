@@ -1,40 +1,43 @@
-// @import 'helper';
-// @import 'variables';
-// @import 'components';
-// @import 'mixins';
+@import 'helper';
+@import 'variables';
+@import 'components';
 
-// :host {
+:host {
 
-// 	// @include mx-card(3);
+	@include mx-component;
 
-// 	& div[definition] {
+	& > [content] {
 
-// 		position	: relative;
-// 		margin-top	: calc(2 * var(--gap-lg));
-// 		// @include mx-component(4);
+		& div[definition] {
 
-// 		& > [language] {
+			position	: relative;
+			@include mx-box($param-dark: true);
+			padding		: $gap-xl $gap-xxl;
 
-// 			// @include mx-d-flex-center-y;
-// 			gap		: var(--gap-sm);
+			& > [language] {
 
-// 		}
+				// @include mx-d-flex-center-y;
+				gap		: var(--gap-sm);
 
-// 		& > [schedule] {
+			}
 
-// 			position	: absolute;
-// 			top			: 0;
-// 			right		: 0;
-// 			padding		: var(--gap-xxl) var(--gap-xxl);
-// 		}
+			& > [schedule] {
 
-// 	}
+				position	: absolute;
+				top			: 0;
+				right		: 0;
+				padding		: var(--gap-xxl) var(--gap-xxl);
+			}
 
-// 	& img.flag {
+		}
 
-// 		width	: 12px;
-// 		height	: 9px;
+		& img.flag {
 
-// 	}
+			width	: 12px;
+			height	: 9px;
 
-// }
+		}
+
+	}
+
+}

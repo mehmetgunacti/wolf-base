@@ -29,7 +29,7 @@ pre {
 	overflow			: auto;
 	margin-bottom		: var(--gap);
 
-	@include mx-webkit-scrollbar;
+	@include mx-scrollbar;
 	@include mx-transition(background-color);
 
 	& > code {

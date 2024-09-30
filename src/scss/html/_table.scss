@@ -13,7 +13,7 @@ table {
 	border-spacing		: 0;
 
 	@include mx-transition(background-color);
-	@include mx-webkit-scrollbar;
+	@include mx-scrollbar;
 
 	& > thead {
 

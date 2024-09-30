@@ -1,0 +1,27 @@
+@mixin mx-component {
+
+	@include mx-d-flex-column;
+	@include mx-box($param-shadow: true);
+	gap		: $gap-xxl;
+	padding	: $gap-xl $gap-xxl;
+
+	& > header {
+
+		@include mx-header($param-font-size: $font-size-h1, $param-small-font-size: 0.5em);
+
+	}
+
+	& > [content] {
+
+		@include mx-d-grid;
+		gap	: $gap-sm;
+
+	}
+
+	& > footer {
+
+		@include mx-footer-buttons;
+
+	}
+
+}

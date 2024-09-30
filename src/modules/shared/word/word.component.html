@@ -1,6 +1,6 @@
 @if (word(); as word) {
 
-	<h1>
+	<header>
 
 		{{ word.name }}
 		@if (word.pronunciation) {
@@ -9,72 +9,75 @@
 
 		}
 
-	</h1>
+	</header>
+	<section content>
 
-	@for (context of word.contexts; track $index) {
+		@for (context of word.contexts; track $index) {
 
-		<blockquote>
-			@if (word.contexts.length > 1) {
+			<blockquote>
+				@if (word.contexts.length > 1) {
 
-				<small>Context #{{ $index + 1 }}</small>
+					<small>Context #{{ $index + 1 }}</small>
 
-			} @else {
+				} @else {
 
-				<small>Context</small>
+					<small>Context</small>
 
-			}
-			{{ context }}
-		</blockquote>
+				}
+				{{ context }}
+			</blockquote>
 
-	}
+		}
 
-	@if (word.dictionary) {
+		@if (word.dictionary) {
 
-		<p><strong>Dictionary:</strong> {{ word.dictionary }}</p>
+			<p><strong>Dictionary:</strong> {{ word.dictionary }}</p>
 
-	}
+		}
 
-	@for (definition of word.definitions; track $index) {
+		@for (definition of word.definitions; track $index) {
 
-		<div definition>
+			<div definition>
 
-			<small>{{ definition.type | defType }}</small>
+				<small>{{ definition.type | defType }}</small>
 
-			<div language>
+				<div language>
 
-				<app-languages [languages]="definition.languages"/>
+					<app-languages [languages]="definition.languages"/>
+
+				</div>
+
+				@for (sample of definition.samples; track $index) {
+
+					<blockquote>
+						@if (definition.samples.length > 1) {
+
+							<small>Sample #{{ $index + 1 }}</small>
+
+						} @else {
+
+							<small>Sample</small>
+
+						}
+						{{ sample }}
+					</blockquote>
+
+				}
+
+				@if (schedulable()) {
+
+					<div schedule>
+						<w-switch
+							[checked]="scheduledIds().includes(definition.id)"
+							(checkedChange)="onSchedule(definition, $event)"/>
+					</div>
+
+				}
 
 			</div>
 
-			@for (sample of definition.samples; track $index) {
+		}
 
-				<blockquote>
-					@if (definition.samples.length > 1) {
-
-						<small>Sample #{{ $index + 1 }}</small>
-
-					} @else {
-
-						<small>Sample</small>
-
-					}
-					{{ sample }}
-				</blockquote>
-
-			}
-
-			@if (schedulable()) {
-
-				<div schedule>
-					<w-switch
-						[checked]="scheduledIds().includes(definition.id)"
-						(checkedChange)="onSchedule(definition, $event)"/>
-				</div>
-
-			}
-
-		</div>
-
-	}
+	</section>
 
 }

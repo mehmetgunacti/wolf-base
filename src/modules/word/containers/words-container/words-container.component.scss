@@ -4,23 +4,12 @@
 
 :host{
 
-	@include mx-d-flex-column;
-	@include mx-box($param-shadow: true);
-	gap		: $gap-xxl;
-	padding	: $gap-lg $gap-xl;
+	@include mx-component;
 
-	& > header {
+	& > [content] {
 
-		@include mx-header($param-font-size: $font-size-h1, $param-small-font-size: 0.5em);
-
-	}
-
-	& > [word_entries] {
-
-		@include mx-d-grid;
 		grid-template-columns	: repeat(auto-fill, minmax(20rem, 1fr));
-		gap						: $gap-sm;
-		@include mx-scrollable(100%); //calc(100dvh - 4 * #{$header-height}));
+		@include mx-scrollable; //calc(100dvh - 4 * #{$header-height}));
 
 		& > a {
 
@@ -30,12 +19,6 @@
 
 			text-decoration		: none;
 			overflow-x			: hidden;
-
-			& > small {
-
-				color			: fn-var($col-text-secondary);
-
-			}
 
 		}
 

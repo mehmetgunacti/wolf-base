@@ -1,4 +1,4 @@
-@mixin mx-webkit-scrollbar {
+@mixin mx-scrollbar {
 
 	scrollbar-width		: thin;
 	scrollbar-color		: fn-var($col-scrollbar-thumb) fn-var($col-scrollbar-track);
@@ -6,22 +6,10 @@
 
 }
 
-.webkit-scrollbar {
-
-	@include mx-webkit-scrollbar;
-
-}
-
-@mixin mx-scrollable($maxHeight: 25rem) {
+@mixin mx-scrollable($maxHeight: none) {
 
 	max-height			: $maxHeight;
 	overflow-y			: auto;
-	@include mx-webkit-scrollbar;
-
-}
-
-.scrollable {
-
-	@include mx-scrollable;
+	@include mx-scrollbar;
 
 }

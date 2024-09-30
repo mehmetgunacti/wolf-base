@@ -4,6 +4,12 @@
 
 // $button-bar-width	: 	800px;  // 800px = width of editor button rows (buttons_1 & buttons_2) side by side
 
+[content_wrapper] {
+
+	@include mx-scrollable;
+
+}
+
 .icon-container {
 
 	@include mx-d-flex-jc-center;
@@ -148,7 +154,7 @@
 			white-space			: pre;
 			overflow			: auto;
 			cursor: auto;
-			@include mx-webkit-scrollbar;
+			@include mx-scrollbar;
 
 			&:valid + label,
 			&:focus + label {
