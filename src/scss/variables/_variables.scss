@@ -3,8 +3,8 @@ $big-screen				: 'big-screen';
 
 $glyph-selector			: '.material-symbols-outlined';
 
-$widget-height-xl		: 5.0rem;
-$widget-height-lg		: 4.4rem;
+$widget-height-xl		: 7.5rem;
+$widget-height-lg		: 5.8rem;
 $widget-height			: 3.5rem;
 $widget-height-sm		: 2.6rem;
 $widget-height-xs		: 1.8rem;
@@ -18,7 +18,7 @@ $font-size-xs			: 0.8rem;	//  8px
 $font-size-xxs			: 0.6rem;	//  6px
 
 $gap-xxl				: 1.8rem;
-$gap-xl					: 1.4rem;
+$gap-xl					: 1.5rem;
 $gap-lg					: 1.2rem;
 $gap					: 1.0rem;
 $gap-sm					: 0.7rem;
@@ -98,7 +98,11 @@ $col-bg-header						: --col-bg-header;
 $col-bg-nav							: --col-bg-nav;
 $col-bg-popup						: --col-bg-popup;
 $col-bg-component					: --col-bg-component;
+$col-bg-component-hover				: --col-bg-component-hover;
+$col-bg-component-active			: --col-bg-component-active;
 $col-bg-component-dark				: --col-bg-component-dark;
+$col-bg-component-dark-hover		: --col-bg-component-dark-hover;
+$col-bg-component-dark-active		: --col-bg-component-dark-active;
 $col-bg-form-element				: --col-bg-form-element;
 $col-bg-page						: --col-bg-page;
 $col-bg-overlay						: --col-bg-overlay;

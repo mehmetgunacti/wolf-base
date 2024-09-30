@@ -7,10 +7,16 @@
 	#{$col-bg-header}			: hsl(210deg 11% 7%);
 	#{$col-bg-nav}				: hsl(210deg 11% 8%);
 	#{$col-bg-popup}			: hsl(210deg 11% 9%);
-	#{$col-bg-component}		: hsl(210deg 11% 13%);
-	#{$col-bg-component-dark}	: hsl(210deg 11% 10%);
 	#{$col-bg-form-element}		: hsl(210deg 11% 20%);
 	#{$col-bg-page}				: hsl(210deg 11% 33%);
+
+	#{$col-bg-component}		: hsl(210deg 11% 13%);
+	#{$col-bg-component-hover}	: #{fn-color-darken($col-bg-component, 5%)};
+	#{$col-bg-component-active}	: #{fn-color-darken($col-bg-component, 10%)};
+
+	#{$col-bg-component-dark}			: hsl(210deg 11% 10%);
+	#{$col-bg-component-dark-hover}		: #{fn-color-darken($col-bg-component-dark, 5%)};
+	#{$col-bg-component-dark-active}	: #{fn-color-darken($col-bg-component-dark, 10%)};
 
 	#{$col-bg-overlay}			: fn-color-set-alpha($col-black, 0.75);
 	#{$col-shadow}				: fn-var($col-bg-header);

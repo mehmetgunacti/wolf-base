@@ -5,36 +5,31 @@
 :host{
 
 	@include mx-d-flex-column;
-	@include mx-box;
-	@include mx-shadow;
+	@include mx-box($param-shadow: true);
 	gap		: $gap-xxl;
 	padding	: $gap-lg $gap-xl;
 
 	& > header {
 
-		@include mx-header($font-size-h2, 0.5em);
-
+		@include mx-header($param-font-size: $font-size-h1, $param-small-font-size: 0.5em);
 
 	}
 
 	& > [word_entries] {
 
 		@include mx-d-grid;
-		grid-template-columns	: repeat(auto-fill, minmax(15rem, 1fr));
+		grid-template-columns	: repeat(auto-fill, minmax(20rem, 1fr));
 		gap						: $gap-sm;
 		@include mx-scrollable(100%); //calc(100dvh - 4 * #{$header-height}));
 
 		& > a {
 
-			@include mx-d-block;
-			@include mx-box($col-bg-component-dark);
+			@include mx-d-flex-col-jc-center;
+			@include mx-box($param-dark: true, $param-hover: true, $param-active: true);
 			@include mx-header;
-			min-height			: 1.75 * $widget-height;
-			padding				: $gap;
-			border-radius		: $border-radius;
+
 			text-decoration		: none;
 			overflow-x			: hidden;
-			@include mx-transition(background-color);
 
 			& > small {
 

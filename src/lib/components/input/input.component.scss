@@ -1,0 +1,7 @@
+@import 'components';
+
+:host {
+
+	@include mx-input-element;
+
+}

@@ -51,26 +51,26 @@
 
 }
 
-@function fn-color-set-alpha($name, $value) {
+@function fn-color-set-alpha($name, $zero-one) {
 
-	$value : is-number-between-0-and-1($value);
-	@return hsl(from fn-var($name) h s l / $value);
+	$zero-one : is-number-between-0-and-1($zero-one);
+	@return hsl(from fn-var($name) h s l / $zero-one);
 
 }
 
-@function fn-color-lighten($name, $value, $alpha: null) {
+@function fn-color-lighten($name, $percentage, $alpha: null) {
 
-	$value : percentage-to-decimal($value);
+	$percentage : percentage-to-decimal($percentage);
 	$alpha-str: if($alpha, "/" + is-number-between-0-and-1($alpha), null);
-	@return hsl(from fn-var($name) h s calc(l * #{calc(1 + $value)}) #{ $alpha-str });
+	@return hsl(from fn-var($name) h s calc(l * #{calc(1 + $percentage)}) #{ $alpha-str });
 
 }
 
-@function fn-color-darken($name, $value, $alpha: null) {
+@function fn-color-darken($name, $percentage, $alpha: null) {
 
-	$value : percentage-to-decimal($value);
+	$percentage : percentage-to-decimal($percentage);
 	$alpha-str: if($alpha, "/" + $alpha, null);
-	@return hsl(from fn-var($name) h s calc(l * #{calc(1 - $value)}) #{ $alpha-str });
+	@return hsl(from fn-var($name) h s calc(l * #{calc(1 - $percentage)}) #{ $alpha-str });
 
 }
 

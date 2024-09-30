@@ -50,6 +50,7 @@
 
 	@include mx-input-element-border;
 	background-color		: fn-var($col-bg-form-element);
+	min-height				: $widget-height;
 	@include mx-transition(background-color border-color);
 
 	& > input,

@@ -4,7 +4,7 @@
 
 :host {
 
-	@include mx-box($col-bg-component-dark);
+	@include mx-box($param-dark: true);
 	@include mx-d-grid;
 	grid-template-columns	: $widget-height 1fr;
 	min-height		: 2 * $widget-height;

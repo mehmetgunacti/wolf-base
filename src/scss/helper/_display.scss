@@ -26,6 +26,12 @@
 @mixin mx-d-flex-jc-bl($params...)		{ @include mx-d-flex($justify-content: baseline, $params...); }
 @mixin mx-d-flex-jc-sb($params...)		{ @include mx-d-flex($justify-content: space-between, $params...); }
 
+@mixin mx-d-flex-col-jc-center($params...)	{ @include mx-d-flex-column($justify-content: center, $params...); }
+@mixin mx-d-flex-col-jc-start($params...)	{ @include mx-d-flex-column($justify-content: start, $params...); }
+@mixin mx-d-flex-col-jc-end($params...)		{ @include mx-d-flex-column($justify-content: end, $params...); }
+@mixin mx-d-flex-col-jc-bl($params...)		{ @include mx-d-flex-column($justify-content: baseline, $params...); }
+@mixin mx-d-flex-col-jc-sb($params...)		{ @include mx-d-flex-column($justify-content: space-between, $params...); }
+
 @mixin mx-d-flex-ai-c-jc-sb($params...)	{ @include mx-d-flex($align-items: center,	$justify-content: space-between, $params...); }
 @mixin mx-d-flex-ai-e-jc-c($params...)	{ @include mx-d-flex($align-items: end,		$justify-content: center, $params...); }
 @mixin mx-d-flex-ai-c-jc-e($params...)	{ @include mx-d-flex($align-items: center,	$justify-content: end, $params...); }

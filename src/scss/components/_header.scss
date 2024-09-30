@@ -1,12 +1,21 @@
-@mixin mx-header($header-font-size: $font-size, $small-font-size: 0.7em) {
+@mixin mx-header(
+	$param-color: $col-text,
+	$param-font-size: $font-size,
+	$param-font-weight: bold,
+	$param-small-font-size: 0.7em,
+	$param-small-color: $col-text-secondary,
+	$param-small-font-weight: normal
+) {
 
-	color		: fn-var($col-text);
-	font-size	: $header-font-size;
+	color		: fn-var($param-color);
+	font-size	: $param-font-size;
+	font-weight	: $param-font-weight;
 
 	& > small {
 
-		font-size	: $small-font-size;
-		color		: fn-var($col-text-secondary);
+		font-size	: $param-small-font-size;
+		font-weight	: $param-small-font-weight;
+		color		: fn-var($param-small-color);
 
 	}
 

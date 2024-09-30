@@ -1,11 +1,61 @@
-@mixin mx-box($bg-color: $col-bg-component) {
+@mixin mx-box(
+	$param-dark				: false,
+	$param-hover			: false,
+	$param-active			: false,
+	$param-shadow			: false,
 
-	color				: #{fn-var($col-text)};
-	padding				: #{$gap-lg $gap};
-	background-color	: #{fn-var($bg-color)};
-	border-radius		: #{$border-radius-xl};
-	min-height			: $header-height;
+	$param-color			: $col-text,
+	$param-bg-color			: $col-bg-component,
+	$param-bg-color-hover	: $col-bg-component-hover,
+	$param-bg-color-active	: $col-bg-component-active,
+	$param-border-radius	: $border-radius-lg,
+	$param-min-height		: $widget-height-lg,
+	$param-padding-inline	: $gap-lg,
+	$param-shadow-color		: $shadow
 
-	@include mx-transition(background-color);
+) {
+
+	@if $param-dark {
+
+		$param-bg-color			: $col-bg-component-dark;
+		$param-bg-color-hover	: $col-bg-component-dark-hover;
+		$param-bg-color-active	: $col-bg-component-dark-active;
+
+	}
+
+	color				: fn-var($param-color);
+	background-color	: fn-var($param-bg-color);
+	border-radius		: $param-border-radius;
+
+	padding-inline		: $param-padding-inline;
+	min-height			: $param-min-height;
+
+	@if $param-hover {
+
+		&:hover {
+
+			background-color	: fn-var($param-bg-color-hover);
+
+		}
+
+	}
+
+	@if $param-active {
+
+		&:active {
+
+			background-color	: fn-var($param-bg-color-active);
+
+		}
+
+	}
+
+	@if $param-shadow {
+
+		@include mx-shadow($param-shadow-color);
+
+	}
+
+	@include mx-transition-short(color background-color);
 
 }
