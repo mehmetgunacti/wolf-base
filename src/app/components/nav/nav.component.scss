@@ -4,7 +4,7 @@
 @import 'helper';
 
 $_nav-menu-gap				: $gap;
-$_nav-menu-row-height		: $nav-half-width;
+$_nav-menu-row-height		: 4rem;
 $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 :host {
@@ -15,7 +15,8 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 		@include mx-d-grid;
 		grid-auto-rows	: $_nav-menu-row-height;
-		padding-top		: $gap;
+		padding			: $gap;
+		gap				: $gap-xl;
 
 		& > a {
 
@@ -29,7 +30,6 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 			border-radius				: $border-radius-round;
 			text-decoration				: none;
 
-			margin						: $_nav-menu-gap;
 			outline-offset				: 1px;
 
 			& > [nav_item_left] {

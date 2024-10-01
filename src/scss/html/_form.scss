@@ -1,5 +1,12 @@
 form {
 
-	display: contents;
+	@include mx-d-flex-column;
+	gap		: $form-gap;
+
+	footer {
+
+		@include mx-footer-buttons;
+
+	}
 
 }

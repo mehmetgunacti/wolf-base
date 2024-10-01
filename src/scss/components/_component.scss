@@ -1,9 +1,12 @@
 @mixin mx-component($param-content-scrollable: false) {
 
+	@include mx-box(
+		$param-shadow			: true,
+		$param-padding-inline	: $gap-xl,
+		$param-padding-block	: 1.3rem
+	);
 	@include mx-d-flex-column;
-	@include mx-box($param-shadow: true);
 	gap		: $gap-xxl;
-	padding	: $gap-xl $gap-xxl;
 
 	& > header {
 

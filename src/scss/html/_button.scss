@@ -1,3 +1,11 @@
+$_button-height			: 3.5rem;
+$_button-height-sm		: 2.7rem;
+$_button-height-xs		: 1.8rem;
+
+$_button-gap			: 0.8rem;
+$_button-gap-sm			: 0.7rem;
+$_button-gap-xs			: 0.6rem;
+
 @mixin mx-print-css-vars($map, $prefix) {
 
 	// print css variables
@@ -24,31 +32,23 @@ $_prefix	: btn;
 
 $_btn-size-values: (
 
-	xl: (
-		"--height"			: $widget-height-xl,
-		"font-size"			: $font-size-xl,
-		"border-radius"		: $border-radius-xl
-	),
-	lg: (
-		"--height"			: $widget-height-lg,
-		"font-size"			: $font-size-lg,
-		"border-radius"		: $border-radius-lg
-	),
 	default: (
-		"--height"			: $widget-height,
+		"--height"			: $_button-height,
 		"height"			: --height,
 		"line-height"		: --height, // Match the height for vertical centering
-		"padding-inline"	: 1em,
+		"padding-inline"	: $_button-gap,
 		"font-size"			: $font-size,
 		"border-radius"		: $border-radius
 	),
 	sm: (
-		"--height"			: $widget-height-sm,
+		"--height"			: $_button-height-sm,
+		"padding-inline"	: $_button-gap-sm,
 		"font-size"			: $font-size-sm,
 		"border-radius"		: $border-radius-sm
 	),
 	xs: (
-		"--height"			: $widget-height-xs,
+		"--height"			: $_button-height-xs,
+		"padding-inline"	: $_button-gap-xs,
 		"font-size"			: $font-size-xs,
 		"border-radius"		: $border-radius-xs
 	),
@@ -110,8 +110,6 @@ $_btn-size-values: (
 
 	@include mx-transition-short(color background-color border-color);
 
-	&.xl { @include mx-button-sizes($_btn-size-values, xl, $_prefix); }
-	&.lg { @include mx-button-sizes($_btn-size-values, lg, $_prefix); }
 	&.sm { @include mx-button-sizes($_btn-size-values, sm, $_prefix); }
 	&.xs { @include mx-button-sizes($_btn-size-values, xs, $_prefix); }
 
@@ -147,7 +145,7 @@ $_btn-size-values: (
 
 	&[data-before] {
 
-		padding-right: 0.7em;
+		padding-left: 0.7em;
 		&::before {
 
 			content: attr(data-before);
@@ -161,7 +159,7 @@ $_btn-size-values: (
 
 	&[data-after] {
 
-		padding-left: 0.7em;
+		padding-right: 0.7em;
 		&::after {
 
 			content: attr(data-after);

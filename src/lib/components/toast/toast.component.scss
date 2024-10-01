@@ -2,13 +2,14 @@
 @import 'helper';
 @import 'components';
 
+$_height : $widget-height-lg;
+
 :host {
 
 	@include mx-d-grid;
-	grid-template-columns	: $widget-height 1fr;
-	min-height		: 2 * $widget-height;
-	padding			: $gap-lg;
-	gap				: $gap-sm;
+	grid-template-columns	: $_height 1fr;
+
+	min-height		: $_height;
 
 	border			: 0;
 	border-radius	: $border-radius;
@@ -19,13 +20,13 @@
 	[toast-left] {
 
 		place-self	: center;
+		line-height	: 0;
 
 	}
 
 	[toast-right] {
 
 		place-self	: center end;
-		padding		: $gap-lg;
 
 		[toast-summary] {
 

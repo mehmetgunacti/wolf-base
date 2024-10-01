@@ -1,9 +1,9 @@
 <fieldset>
 
 	<legend>Alerts</legend>
-	<legend><button class="link sm" (click)="alertsVisible.set(!alertsVisible())"><span [class.rotated]="alertsVisible()" class="material-symbols-outlined">add</span></button></legend>
+	<legend><button class="glyph" (click)="alertsVisible.set(!alertsVisible())"><span [class.rotated]="alertsVisible()" class="material-symbols-outlined">add</span></button></legend>
 
-	<div wrapper [@slideUpDown]="alertsVisible() ? 'opened' : 'closed'">
+	<div content [@slideUpDown]="alertsVisible() ? 'opened' : 'closed'">
 
 		<w-toast [conf]="{ severity: 'success', summary: 'Update available', detail: 'Press button to start' }"/>
 		<w-toast [conf]="{ severity: 'info' }">
@@ -50,11 +50,10 @@
 <fieldset>
 
 	<legend>Forms</legend>
-	<legend><button class="link sm" (click)="formsVisible.set(!formsVisible())"><span [class.rotated]="formsVisible()" class="material-symbols-outlined">add</span></button></legend>
+	<legend><button class="glyph" (click)="formsVisible.set(!formsVisible())"><span [class.rotated]="formsVisible()" class="material-symbols-outlined">add</span></button></legend>
 
-	<div wrapper [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
+	<div content [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
 
-		<br>
 		<form [formGroup]="form">
 			<w-input label="Text" formControlName="text"/>
 			<w-input-tag
@@ -67,7 +66,6 @@
 			<w-select formControlName="status" label="Status" [nodes]="PROJECT_STATUS"/>
 			<w-markdown-editor [control]="editor()" name="Editor"/>
 		</form>
-		<br>
 
 	</div>
 
@@ -76,9 +74,9 @@
 <fieldset>
 
 	<legend>Buttons</legend>
-	<legend><button class="link sm" (click)="buttonsVisible.set(!buttonsVisible())"><span [class.rotated]="buttonsVisible()" class="material-symbols-outlined">add</span></button></legend>
+	<legend><button class="glyph" (click)="buttonsVisible.set(!buttonsVisible())"><span [class.rotated]="buttonsVisible()" class="material-symbols-outlined">add</span></button></legend>
 
-	<div wrapper [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
+	<div content [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
 
 		<!-- TYPES -->
 		<div class="h-divider">Button Types</div>
@@ -98,6 +96,7 @@
 		<div container>
 
 			<td><button class=""		data-after="Default"><span class="material-symbols-outlined">save</span></button></td>
+			<td><button class=""		data-before="Default"><span class="material-symbols-outlined">save</span></button></td>
 			<td><button class="" 		data-after="Disabled" disabled><span class="material-symbols-outlined">update</span></button></td>
 			<td><button class="warn"	data-after="Warn"><span class="material-symbols-outlined">update</span></button></td>
 			<td><button class="danger"	data-after="Danger"><span class="material-symbols-outlined">update</span></button></td>
@@ -113,8 +112,6 @@
 			<td><button class="xs">Extra Small</button></td>
 			<td><button class="sm">Small</button></td>
 			<td><button class="">Default</button></td>
-			<td><button class="lg">Large</button></td>
-			<td><button class="xl">Extra Large</button></td>
 
 		</div>
 
@@ -125,8 +122,6 @@
 			<td><button class="glyph xs"><span class="material-symbols-outlined">update</span></button></td>
 			<td><button class="glyph sm"><span class="material-symbols-outlined">update</span></button></td>
 			<td><button class="glyph"><span class="material-symbols-outlined">update</span></button></td>
-			<td><button class="glyph lg"><span class="material-symbols-outlined">update</span></button></td>
-			<td><button class="glyph xl"><span class="material-symbols-outlined">update</span></button></td>
 
 		</div>
 

@@ -1,18 +1,20 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="onSave()">
 
 	<!-- API KEY -->
-	<w-input [formControl]="form.apiKey" label="API Key"/>
+	<w-input formControlName="apiKey" label="API Key"/>
 
 	<!-- BASE URL -->
-	<w-input [formControl]="form.baseURL" label="Base URL"/>
+	<w-input formControlName="baseURL" label="Base URL"/>
 
 	<!-- PROJECT ID -->
-	<w-input [formControl]="form.projectId" label="Project ID"/>
+	<w-input formControlName="projectId" label="Project ID"/>
+
+	<footer>
+
+		<button type="button" (click)="onSave()" [disabled]="this.form.pristine || this.form.invalid" data-after="Save">
+			<span class="material-symbols-outlined">save</span>
+		</button>
+
+	</footer>
 
 </form>
-
-<div form-element-buttons>
-
-	<button type="button" (click)="onSave()" [disabled]="form.isPristine()"><span class="material-symbols-outlined">save</span> Save</button>
-
-</div>

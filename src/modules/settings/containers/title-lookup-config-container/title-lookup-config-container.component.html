@@ -1,11 +1,10 @@
-<header>
-
-	<div card_title>Title Lookup URL</div>
-
-</header>
-
+<header>Title Lookup URL</header>
 <section content>
 
-	<app-title-lookup-config-form [url]="url$ | async" (save)="onSave($event)"/>
+	@if (url(); as url) {
+
+		<app-title-lookup-config-form [url]="url" (save)="onSave($event)"/>
+
+	}
 
 </section>

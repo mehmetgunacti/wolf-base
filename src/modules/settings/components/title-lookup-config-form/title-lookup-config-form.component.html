@@ -1,11 +1,14 @@
-<form>
+<form (ngSubmit)="onSave()">
 
 	<!-- URL -->
 	<w-input [formControl]="fcUrl" label="URL"/>
 
+	<footer>
+
+		<button type="button" (click)="onSave()" [disabled]="this.fcUrl.pristine || this.fcUrl.invalid" data-after="Save">
+			<span class="material-symbols-outlined">save</span>
+		</button>
+
+	</footer>
+
 </form>
-<div form-element-buttons>
-
-	<button type="button" (click)="onSave()" [disabled]="fcUrl.pristine"><span class="material-symbols-outlined">save</span> Save</button>
-
-</div>

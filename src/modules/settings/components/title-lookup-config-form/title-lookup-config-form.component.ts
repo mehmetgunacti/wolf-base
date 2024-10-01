@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input, output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -8,35 +8,33 @@ import { FormControl, Validators } from '@angular/forms';
 	host: { 'class': 'd-flex-column p' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TitleLookupConfigFormComponent implements OnInit, OnChanges {
+export class TitleLookupConfigFormComponent {
 
-	@Input() url: string | null | undefined;
+	// Input
+	url = input.required<string>();
 
-	@Output() save: EventEmitter<string> = new EventEmitter();
+	// Output
+	save = output<string>();
 
-	fcUrl: FormControl = new FormControl(null, [Validators.required]);
+	// Form
+	fcUrl = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)] });
 
-	ngOnInit(): void {
+	constructor() {
 
-		if (this.url)
-			this.fcUrl.setValue(this.url);
+		effect(() => {
 
-	}
+			const url = this.url();
+			if (url)
+				this.fcUrl.setValue(url);
 
-	ngOnChanges(changes: SimpleChanges): void {
-
-		const url: string = changes['url']?.currentValue;
-		if (url)
-			this.fcUrl.patchValue(url);
+		}, { allowSignalWrites: true });
 
 	}
 
 	onSave(): void {
 
-		if (this.fcUrl.invalid)
-			return;
-
-		this.save.emit(this.fcUrl.value);
+		if (this.fcUrl.valid)
+			this.save.emit(this.fcUrl.value as string);
 
 	}
 

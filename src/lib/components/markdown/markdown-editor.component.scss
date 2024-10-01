@@ -121,8 +121,12 @@
 
 :host {
 
+
+	// host: {
+	// 	'class': 'flex-1 d-flex-column pos-relative gap'
+	// },
+
 	--display-element	: none;
-	min-height	: 100%;
 
 	& > [buttons] {
 
@@ -167,7 +171,8 @@
 
 		& > label {
 
-			@include mx-input-label($input-label-top: 2rem);
+			--input-label-top: 2rem;
+			@include mx-input-label;
 
 			&.up {
 

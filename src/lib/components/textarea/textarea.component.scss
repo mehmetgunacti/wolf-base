@@ -2,9 +2,11 @@
 
 :host {
 
-	& > label {
+	@include mx-input-element;
+	&>label {
 
-		@include mx-input-label($input-label-top: 1.7rem);
+		--input-label-top: 1.7rem;
+		@include mx-input-label;
 
 	}
 

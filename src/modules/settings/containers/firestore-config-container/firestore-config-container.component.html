@@ -1,10 +1,10 @@
-<header>
-
-	<div card_title>Firestore Configuration</div>
-
-</header>
+<header>Firestore Configuration</header>
 <section content>
 
-	<app-firestore-config-form [config]="config$ | async" (save)="onSave($event)" />
+	@if (config(); as conf) {
+
+		<app-firestore-config-form [config]="conf" (save)="onSave($event)" />
+
+	}
 
 </section>

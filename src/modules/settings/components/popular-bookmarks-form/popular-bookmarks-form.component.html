@@ -1,4 +1,4 @@
-<form>
+<form (ngSubmit)="onSave()">
 
 	<!-- TAGS -->
 	<w-input-tag
@@ -8,10 +8,12 @@
 		(tagInput)="onTagInput($event)"
 		[suggestions]="tagSuggestions()"/>
 
+	<footer>
+
+		<button type="button" (click)="onSave()" [disabled]="this.control.pristine || this.control.invalid" data-after="Save">
+			<span class="material-symbols-outlined">save</span>
+		</button>
+
+	</footer>
+
 </form>
-
-<div form-element-buttons>
-
-	<button type="button" (click)="onSave()" [disabled]="control.pristine"><span class="material-symbols-outlined">save</span> Save</button>
-
-</div>

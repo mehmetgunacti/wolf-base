@@ -1,25 +1,30 @@
+$_label-height: 4.5rem;
+
 @mixin mx-fieldset {
 
-	@include mx-box;
-	@include mx-shadow;
+	@include mx-component;
 	position	: relative;
 	border		: 0;
+
+	padding-top	: 2 * $gap-xxl;
 
 	& > legend {
 
 		@include mx-d-flex-center;
 		background-color: fn-var($col-bg-component-dark);
 		border-radius	: $border-radius-xl;
-		min-height		: $widget-height-lg; // <-- same as nth-child(2) 'top'
-		min-width		: $header-height;
+		min-height		: $_label-height; // <-- same as nth-child(2) 'top'
+		min-width		: 1.5 * $_label-height;
 		font-size		: $font-size;
-		padding-inline	: $gap-xxl;
+		line-height		: $_label-height;
+
+		padding-inline	: $gap;
 		@include mx-shadow;
 
 		&:nth-child(2) {
 
 			position: absolute;
-			top		: -$widget-height-lg;
+			top		: -$_label-height;
 			right	: 5 * $gap-xxs;
 
 		}

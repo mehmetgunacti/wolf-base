@@ -11,6 +11,7 @@
 	$param-border-radius	: $border-radius-lg,
 	$param-min-height		: $widget-height-lg,
 	$param-padding-inline	: $gap-lg,
+	$param-padding-block	: 0,
 	$param-shadow-color		: $shadow
 
 ) {
@@ -28,6 +29,7 @@
 	border-radius		: $param-border-radius;
 
 	padding-inline		: $param-padding-inline;
+	padding-block		: $param-padding-block;
 	min-height			: $param-min-height;
 
 	@if $param-hover {

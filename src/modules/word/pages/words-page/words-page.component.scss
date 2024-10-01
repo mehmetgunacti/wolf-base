@@ -2,6 +2,6 @@
 
 :host {
 
-	@include mx-page;
+	@include mx-page($param-calc-height: true);
 
 }

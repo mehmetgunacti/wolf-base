@@ -13,8 +13,8 @@ export class ComponentsPageComponent {
 
 	PROJECT_STATUS = PROJECT_STATUS;
 
-	alertsVisible = signal<boolean>(false);
-	formsVisible = signal<boolean>(true);
+	alertsVisible = signal<boolean>(true);
+	formsVisible = signal<boolean>(false);
 	buttonsVisible = signal<boolean>(false);
 
 	tagSuggestions = signal<string[]>([]);

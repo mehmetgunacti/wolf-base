@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FirestoreConfig } from 'lib';
-import { Observable } from 'rxjs';
 import { settingsActions } from 'store/actions';
 import { selCore_firestoreConfig } from 'store/selectors/core/core-configuration.selectors';
 
@@ -15,11 +14,11 @@ export class FirestoreConfigContainerComponent {
 
 	private store: Store = inject(Store);
 
-	config$: Observable<FirestoreConfig | null>;
+	config: Signal<FirestoreConfig | null>;
 
 	constructor() {
 
-		this.config$ = this.store.select(selCore_firestoreConfig);
+		this.config = this.store.selectSignal(selCore_firestoreConfig);
 
 	}
 

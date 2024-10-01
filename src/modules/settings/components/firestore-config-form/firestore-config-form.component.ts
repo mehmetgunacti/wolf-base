@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input, output } from '@angular/core';
 import { FirestoreConfig } from 'lib';
-import { FirestoreConfigForm, EditFormImpl } from './firestore-config-form';
+import { configForm } from './firestore-config-form';
 
 @Component({
 	selector: 'app-firestore-config-form',
@@ -8,36 +8,30 @@ import { FirestoreConfigForm, EditFormImpl } from './firestore-config-form';
 	styleUrls: ['./firestore-config-form.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FirestoreConfigFormComponent implements OnInit, OnChanges {
+export class FirestoreConfigFormComponent {
 
-	@Input() config: FirestoreConfig | null | undefined;
+	config = input.required<FirestoreConfig>();
 
-	@Output() save: EventEmitter<FirestoreConfig> = new EventEmitter();
+	save = output<FirestoreConfig>();
 
-	form: FirestoreConfigForm = new EditFormImpl();
+	form = configForm;
 
-	ngOnInit(): void {
+	constructor() {
 
-		if (this.config)
-			this.form.setValues(this.config);
+		effect(() => {
 
-	}
+			const conf = this.config();
+			if (conf)
+				this.form.setValue(conf);
 
-	ngOnChanges(changes: SimpleChanges): void {
-
-
-		const config: FirestoreConfig = changes['config']?.currentValue;
-		if (config)
-			this.form.patchValue({ ...config });
+		}, { allowSignalWrites: true });
 
 	}
 
 	onSave(): void {
 
-		if (this.form.isInvalid())
-			return;
-
-		this.save.emit(this.form.value);
+		if (this.form.valid)
+			this.save.emit(this.form.value as FirestoreConfig);
 
 	}
 

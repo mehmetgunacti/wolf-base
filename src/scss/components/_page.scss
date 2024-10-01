@@ -1,9 +1,13 @@
-@mixin mx-page {
+@mixin mx-page($param-calc-height: false) {
 
 	@include mx-d-flex-column;
-	gap		: $gap;
-	padding	: $gap;
+	gap		: $page-padding;
+	padding	: $page-padding;
 
-	height	: calc(100dvh - #{$header-height});
+	@if $param-calc-height {
+
+		height	: calc(100dvh - #{$header-height});
+
+	}
 
 }

@@ -14,13 +14,7 @@ export class TitleLookupConfigContainerComponent {
 
 	private store: Store = inject(Store);
 
-	url$: Observable<string | null>;
-
-	constructor() {
-
-		this.url$ = this.store.select(selCore_titleLookupUrl);
-
-	}
+	url = this.store.selectSignal(selCore_titleLookupUrl);
 
 	onSave(url: string): void {
 
