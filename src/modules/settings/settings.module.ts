@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertComponent } from 'lib/components/alert/alert.component';
+import { MarkdownModule } from 'lib/components/markdown';
+import { SwitchComponent } from 'lib/components/switch/switch.component';
 import { SharedModule } from 'modules/shared/shared.module';
 import { SettingsRoutingModule } from './settings-routing.module';
 import * as fromConfig from './settings.config';
-import { MarkdownEditorComponent, MarkdownModule } from 'lib/components/markdown';
-import { SwitchComponent } from 'lib/components/switch/switch.component';
 
 @NgModule({
 	declarations: fromConfig.components,
@@ -15,7 +16,8 @@ import { SwitchComponent } from 'lib/components/switch/switch.component';
 		ReactiveFormsModule,
 		SharedModule,
 		MarkdownModule,
-		SwitchComponent
+		SwitchComponent,
+		AlertComponent
 	],
 	providers: []
 })

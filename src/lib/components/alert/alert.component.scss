@@ -1,0 +1,59 @@
+@import 'variables';
+@import 'helper';
+@import 'components';
+
+$_height : $widget-height-xl;
+
+:host {
+
+	@include mx-d-grid;
+	grid-template-columns	: $_height 1fr;
+
+	min-height		: $_height;
+
+	border			: 0;
+	border-radius	: $border-radius;
+
+	color: fn-var($col-text);
+	@include mx-shadow;
+
+	[alert-left] {
+
+		place-self	: center;
+		line-height	: 0;
+
+	}
+
+	[alert-right] {
+
+		@include mx-d-flex-ai-c-jc-sb;
+		padding-inline	: 0 $component-padding-inline;
+		padding-block	: $component-padding-block;
+
+	}
+
+	&.success {
+
+		background-color: fn-var($col-success);
+
+	}
+
+	&.info {
+
+		background-color: fn-var($col-info);
+
+	}
+
+	&.warn {
+
+		background-color: fn-var($col-warn);
+
+	}
+
+	&.error {
+
+		background-color: fn-var($col-error);
+
+	}
+
+}

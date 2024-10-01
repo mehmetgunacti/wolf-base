@@ -11,18 +11,14 @@
 
 @if (updateAvailable$ | async) {
 
-	<w-toast class="warn" [conf]="{ severity: 'info' }">
+	<w-alert severity="warn">
 
-		<div update_alert>
+		<span>Update available</span>
+		<button class="ghost" (click)="onUpdateApp()" data-after="Update">
+			<span class="material-symbols-outlined">update</span>
+		</button>
 
-			<span>Update available</span>
-			<button class="link" (click)="onUpdateApp()">
-				<span class="material-symbols-outlined">update</span> Update
-			</button>
-
-		</div>
-
-	</w-toast>
+	</w-alert>
 
 }
 <!-- <app-quote-settings-container/> -->
