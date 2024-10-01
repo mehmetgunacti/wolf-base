@@ -37,7 +37,7 @@
 		right			: 0;
 		left			: 0;
 
-		@include mx-scrollable(unset);
+		@include mx-scrollable();
 		@include mx-transition(height left background-color);
 
 		&.big-half {

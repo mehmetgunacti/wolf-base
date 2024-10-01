@@ -6,10 +6,14 @@
 
 }
 
-@mixin mx-scrollable($maxHeight: none) {
+@mixin mx-scrollable($param-set-max-height: false, $param-max-height: 25rem) {
 
-	max-height			: $maxHeight;
-	overflow-y			: auto;
+	@if $param-set-max-height {
+
+		max-height	: $param-max-height;
+
+	}
+	overflow-y	: auto;
 	@include mx-scrollbar;
 
 }

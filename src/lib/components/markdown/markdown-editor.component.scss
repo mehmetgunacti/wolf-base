@@ -94,7 +94,7 @@
 .code-menu {
 
 	@include mx-box;
-	@include mx-scrollable;
+	@include mx-scrollable($param-set-max-height: true);
 	& > div {
 
 		@include mx-d-flex-column;

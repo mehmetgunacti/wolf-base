@@ -16,8 +16,9 @@
 			width	: min(100%, #{$breakpoint-lg});
 			place-self: center;
 
-			gap		: $gap-sm;
-			overflow: hidden;
+			gap			: $gap-sm;
+			padding-top	: $gap;
+			overflow	: hidden;
 
 			[container] {
 

@@ -5,6 +5,7 @@ import { SharedModule } from 'modules/shared/shared.module';
 import { SettingsRoutingModule } from './settings-routing.module';
 import * as fromConfig from './settings.config';
 import { MarkdownEditorComponent, MarkdownModule } from 'lib/components/markdown';
+import { SwitchComponent } from 'lib/components/switch/switch.component';
 
 @NgModule({
 	declarations: fromConfig.components,
@@ -13,7 +14,8 @@ import { MarkdownEditorComponent, MarkdownModule } from 'lib/components/markdown
 		SettingsRoutingModule,
 		ReactiveFormsModule,
 		SharedModule,
-		MarkdownModule
+		MarkdownModule,
+		SwitchComponent
 	],
 	providers: []
 })

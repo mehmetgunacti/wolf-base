@@ -1,7 +1,11 @@
 <fieldset>
 
 	<legend>Alerts</legend>
-	<legend><button class="glyph" (click)="alertsVisible.set(!alertsVisible())"><span [class.rotated]="alertsVisible()" class="material-symbols-outlined">add</span></button></legend>
+	<legend>
+		<button class="glyph" (click)="alertsVisible.set(!alertsVisible())">
+			<span [class.rotated]="alertsVisible()" class="material-symbols-outlined">add</span>
+		</button>
+	</legend>
 
 	<div content [@slideUpDown]="alertsVisible() ? 'opened' : 'closed'">
 
@@ -50,7 +54,11 @@
 <fieldset>
 
 	<legend>Forms</legend>
-	<legend><button class="glyph" (click)="formsVisible.set(!formsVisible())"><span [class.rotated]="formsVisible()" class="material-symbols-outlined">add</span></button></legend>
+	<legend>
+		<button class="glyph" (click)="formsVisible.set(!formsVisible())">
+			<span [class.rotated]="formsVisible()" class="material-symbols-outlined">add</span>
+		</button>
+	</legend>
 
 	<div content [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
 
@@ -64,6 +72,7 @@
 					[suggestions]="tagSuggestions()"/>
 			<w-textarea formControlName="area" label="Quote" [rows]="3" />
 			<w-select formControlName="status" label="Status" [nodes]="PROJECT_STATUS"/>
+			<w-switch label="Schedule" [value]="true"/>
 			<w-markdown-editor [control]="editor()" name="Editor"/>
 		</form>
 
@@ -74,7 +83,11 @@
 <fieldset>
 
 	<legend>Buttons</legend>
-	<legend><button class="glyph" (click)="buttonsVisible.set(!buttonsVisible())"><span [class.rotated]="buttonsVisible()" class="material-symbols-outlined">add</span></button></legend>
+	<legend>
+		<button class="glyph" (click)="buttonsVisible.set(!buttonsVisible())">
+			<span [class.rotated]="buttonsVisible()" class="material-symbols-outlined">add</span>
+		</button>
+	</legend>
 
 	<div content [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
 

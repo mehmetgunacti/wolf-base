@@ -16,7 +16,6 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 	],
 	host: {
 		'[tabindex]': '0',
-		// '(focus)': 'onHostFocus()',
 		'(click)': 'onInput()'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
@@ -25,11 +24,9 @@ export class SwitchComponent implements ControlValueAccessor {
 
 	// Input
 	label = input<string>('');
-	// checked = input<boolean>(false);
-	// checked: ModelSignal<boolean> = model.required<boolean>();
 
-	// protected value = signal<boolean>(false);
-	value : ModelSignal<boolean> = model.required<boolean>();
+	// Model
+	value : ModelSignal<boolean> = model<boolean>(false);
 	protected disabled = signal<boolean>(false);
 
 	//////////// boilerplate

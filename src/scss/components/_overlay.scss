@@ -32,7 +32,7 @@
 
 	& > [content-wrapper] {
 
-		@include mx-scrollable(unset);
+		@include mx-scrollable();
 		padding: 2 * $gap-xxl;
 
 		& > [content] {
