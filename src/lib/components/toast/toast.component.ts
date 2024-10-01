@@ -6,7 +6,10 @@ import { ToastConfiguration } from './toast.util';
 	selector: 'w-toast',
 	templateUrl: './toast.component.html',
 	styleUrls: ['./toast.component.scss'],
-	host: { '[class]': 'severity()' },
+	host: {
+		'[tabindex]': '0',
+		'[class]': 'severity()'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastComponent {
