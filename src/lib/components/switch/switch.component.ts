@@ -16,6 +16,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 	],
 	host: {
 		'[tabindex]': '0',
+		'(keydown)': 'onKeyDown($event)',
 		'(click)': 'onInput()'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
@@ -49,6 +50,18 @@ export class SwitchComponent implements ControlValueAccessor {
 	protected onBlur(): void {
 
 		this.onTouched();
+
+	}
+
+	protected onKeyDown(event: KeyboardEvent): void {
+
+		if (event.key === 'Enter' || event.key === ' ') {
+
+			event.preventDefault();
+			event.stopPropagation();
+			this.onInput();
+
+		}
 
 	}
 

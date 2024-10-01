@@ -1,4 +1,5 @@
 @mixin mx-box(
+
 	$param-dark				: false,
 	$param-hover			: false,
 	$param-active			: false,
@@ -10,8 +11,10 @@
 	$param-bg-color-active	: $col-bg-component-active,
 	$param-border-radius	: $border-radius-lg,
 	$param-min-height		: $widget-height-lg,
+
 	$param-padding-inline	: $gap-lg,
 	$param-padding-block	: 0,
+
 	$param-shadow-color		: $shadow
 
 ) {

@@ -19,7 +19,7 @@
 
 .quote-menu {
 
-	@include mx-box;
+	@include mx-box($param-shadow: true, $param-padding-block: 1rem);
 	@include mx-scrollable(26rem);
 	& > div {
 
@@ -72,12 +72,18 @@
 
 .format-menu {
 
-	@include mx-box;
-	@include mx-scrollable;
+	@include mx-box($param-shadow: true, $param-padding-block: 1rem);
+	@include mx-scrollable($param-set-max-height: true);
 	& > div {
 
 		@include mx-d-flex-column;
 		gap	:  $gap-sm;
+
+		& > button {
+
+			height: unset;
+
+		}
 
 	}
 
@@ -85,15 +91,16 @@
 
 .table-menu {
 
-	@include mx-box;
+	@include mx-box($param-padding-block: $gap-lg, $param-shadow: true);
 	@include mx-d-flex-column;
-	gap	:  $gap-sm;
+	gap			:  $gap-sm;
+	min-height	: 18rem;
 
 }
 
 .code-menu {
 
-	@include mx-box;
+	@include mx-box($param-padding-block: $gap-lg, $param-shadow: true);
 	@include mx-scrollable($param-set-max-height: true);
 	& > div {
 
