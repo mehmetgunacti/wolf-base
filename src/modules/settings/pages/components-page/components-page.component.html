@@ -10,42 +10,9 @@
 	<div content [@slideUpDown]="alertsVisible() ? 'opened' : 'closed'">
 
 		<w-toast [conf]="{ severity: 'success', summary: 'Update available', detail: 'Press button to start' }"/>
-		<w-toast [conf]="{ severity: 'info' }">
-
-			<div update_alert>
-
-				<span>Update available</span>
-				<button class="link" data-after="Update">
-					<span class="material-symbols-outlined">update</span>
-				</button>
-
-			</div>
-
-		</w-toast>
-		<w-toast [conf]="{ severity: 'warn' }">
-
-			<div update_alert>
-
-				<span>Update available</span>
-				<button class="ghost" data-after="Update">
-					<span class="material-symbols-outlined">update</span>
-				</button>
-
-			</div>
-
-		</w-toast>
-		<w-toast [conf]="{ severity: 'error' }">
-
-			<div update_alert>
-
-				<span>Update available</span>
-				<button class="ghost" data-after="Update">
-					<span class="material-symbols-outlined">update</span>
-				</button>
-
-			</div>
-
-		</w-toast>
+		<w-toast [conf]="{ severity: 'info', summary: 'Update available', detail: 'Press button to start' }"/>
+		<w-toast [conf]="{ severity: 'warn', summary: 'Update available', detail: 'Press button to start' }"/>
+		<w-toast [conf]="{ severity: 'error', summary: 'Update available', detail: 'Press button to start' }"/>
 
 	</div>
 

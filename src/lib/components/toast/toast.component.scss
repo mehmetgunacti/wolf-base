@@ -2,7 +2,7 @@
 @import 'helper';
 @import 'components';
 
-$_height : $widget-height-lg;
+$_height : $widget-height-xl;
 
 :host {
 
@@ -26,13 +26,16 @@ $_height : $widget-height-lg;
 
 	[toast-right] {
 
-		place-self	: center end;
+		@include mx-d-flex-column;
+		@include mx-header($param-small-color: $col-text);
+		padding-inline	: 0 $component-padding-inline;
+		padding-block	: $component-padding-block;
 
-		[toast-summary] {
+	}
 
-			font-size	: $font-size-h4;
+	&:focus-visible {
 
-		}
+		@include mx-outline;
 
 	}
 

@@ -9,15 +9,14 @@
 
 	@if (c.summary) {
 
-		<div toast-summary>{{c.summary}}</div>
+		{{c.summary}}
 
 	}
 
 	@if (c.detail) {
 
-		<div [innerHTML]="c.detail"></div>
+		<small>{{c.detail}}</small>
 
 	}
-	<ng-content/>
 
 </div>

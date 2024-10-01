@@ -14,11 +14,26 @@ import { ToastConfiguration } from './toast.util';
 })
 export class ToastComponent {
 
+	// Input
 	conf = input.required<ToastConfiguration>();
-	glyph = computed<string>(() => this.conf().glyph ?? this.getGlyphClass(this.conf()));
-	severity = computed<string>(() => this.conf().severity);
 
+	// Output
 	close = output<number>();
+
+	severity = computed<string>(() => this.conf().severity);
+	protected glyph = computed<string>(() => {
+
+		switch (this.severity()) {
+
+			case 'success': return 'task_alt';
+			case 'info': return 'campaign';
+			case 'warn': return 'warning';
+			case 'error': return 'error';
+			default : return 'help';
+
+		}
+
+	});
 
 	constructor() {
 
@@ -36,19 +51,6 @@ export class ToastComponent {
 		const id = this.conf().id;
 		if (id)
 			this.close.emit(id);
-
-	}
-
-	private getGlyphClass(data: ToastConfiguration): string {
-
-		switch (data.severity) {
-
-			case 'success': return 'task_alt';
-			case 'info': return 'campaign';
-			case 'warn': return 'warning';
-			case 'error': return 'error';
-
-		}
 
 	}
 
