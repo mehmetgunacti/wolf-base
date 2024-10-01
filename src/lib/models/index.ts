@@ -14,5 +14,6 @@ export * from './quote.model';
 export * from './remote.model';
 export * from './sync.model';
 export * from './tag.model';
+export * from './test-suite.model';
 export * from './treenode.model';
 export * from './word.model';
