@@ -2,8 +2,8 @@
 
 	@include mx-box(
 		$param-shadow			: true,
-		$param-padding-inline	: $gap-xl,
-		$param-padding-block	: 1.3rem
+		$param-padding-inline	: $component-padding-inline,
+		$param-padding-block	: $component-padding-block
 	);
 	@include mx-d-flex-column;
 	gap		: $gap-xxl;

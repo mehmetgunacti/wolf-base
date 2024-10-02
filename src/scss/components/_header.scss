@@ -10,6 +10,7 @@
 	color		: fn-var($param-color);
 	font-size	: $param-font-size;
 	font-weight	: $param-font-weight;
+	line-height	: $param-font-size;
 
 	& > small {
 
