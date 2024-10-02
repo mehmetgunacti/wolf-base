@@ -60,6 +60,12 @@ export class NavComponent {
 						icon: 'dictionary',
 						routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
 					},
+					{
+						url: ['/learning'],
+						label: 'Learning',
+						icon: 'school',
+						routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
+					},
 
 				];
 				return items;
