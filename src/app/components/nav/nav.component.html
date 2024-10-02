@@ -2,9 +2,11 @@
 
 	@for (item of menuItems$ | async; track $index) {
 
-		<a	[routerLink]="item.url"
+		<a	#link
+			[routerLink]="item.url"
 			[queryParams]="item.queryParams"
 			routerLinkActive="active"
+			(isActiveChange)="onRouterLinkActive($event, link)"
 			[routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }">
 
 			<div nav_item_left>

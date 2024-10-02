@@ -20,14 +20,15 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 		& > a {
 
-			--nav-label-underline-width	: 0;
 			--nav-label-font-weight		: normal;
+			--nav-left-bg-color			: #{fn-var($col-transparent)};
+			--nav-right-color			: #{fn-var($col-text-secondary)};
 
 			position					: relative;
 			@include mx-d-grid;
 			grid-template-columns		: $_nav-menu-1st-col-width;
 
-			border-radius				: $border-radius-round;
+			border-radius				: $border-radius-lg;
 			text-decoration				: none;
 
 			outline-offset				: 1px;
@@ -35,6 +36,17 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 			& > [nav_item_left] {
 
 				@include mx-d-flex-center;
+				color			: var(--nav-right-color);
+				border-radius	: $border-radius-lg;
+				@include mx-transition-short(color background-color box-shadow);
+
+				& > #{$glyph-selector} {
+
+					background-color	: var(--nav-left-bg-color);
+					border-radius		: $border-radius-round;
+					padding				: $gap;
+
+				}
 
 			}
 
@@ -49,73 +61,51 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 				height			: $_nav-menu-1st-col-width;
 				width			: $nav-full-width - $nav-half-width - $_nav-menu-gap;
 
-				& > [label] {
+				& > [label],
+				& > [badge],
+				& > [badge] > span {
 
-					font-weight		: var(--nav-label-font-weight);
-
-					&::after {
-
-						content: '';
-						width		: 0px;
-						height		: 2px;
-						display		: block;
-						background	: fn-var($col-accent);
-						transition	: $transition-duration-short;
-						width		: var(--nav-label-underline-width);
-
-					}
+					color		: var(--nav-right-color);
+					font-weight	: var(--nav-label-font-weight);
+					@include mx-transition-short(color);
 
 				}
 
 			}
 
-			&:not(.active) {
+			&:not(.active):hover {
 
-				&:hover {
-
-					--nav-label-underline-width : 100%;
-					background-color			: fn-var($col-btn-glyph-color-hover);
-
-				}
-
-				&:active {
-
-					--nav-label-underline-width : 100%;
-					background-color			: fn-var($col-btn-glyph-color-active);
-
-				}
-
-			}
-
-			body.sidebar-full & {
-
-				border-radius	: $border-radius-lg;
-				outline-offset	: 3px;
+				--nav-left-bg-color		: #{fn-var($col-btn-ghost-color-hover)};
+				--nav-right-color		: #{fn-var($col-text)};
 
 			}
 
 			&:focus-visible {
 
-				--nav-label-underline-width : 100%;
+				--nav-right-color	: #{fn-var($col-text)};
 				@include mx-outline;
 
 			}
 
 			&.active {
 
-				--nav-label-font-weight		: bold;
-				--nav-label-underline-width : 100%;
-				& :is(#{$glyph-selector}) {
-
-					background-color	: fn-var($col-accent);
-					border-radius		: $border-radius-round;
-					padding				: $gap;
-
-				}
+				--nav-label-font-weight	: bold;
+				--nav-left-bg-color		: #{fn-var($col-accent)};
+				--nav-right-color		: #{fn-var($col-text)};
 
 			}
 
 		}
+
+	}
+
+	& > [bottom-buttons] {
+
+		@include mx-d-flex-column;
+		// grid-auto-rows	: $_nav-menu-row-height;
+		padding			: $gap;
+		gap				: $gap-xl;
+		margin-top	: auto;
 
 	}
 

@@ -76,6 +76,12 @@ export class NavComponent {
 
 	}
 
+	onRouterLinkActive(isActive: boolean, linkElement: HTMLAnchorElement) {
+
+		linkElement.setAttribute('tabindex', isActive ? '-1' : '0');
+
+	}
+
 	onSwitchTheme(): void {
 
 		this.store.select(selCore_theme)

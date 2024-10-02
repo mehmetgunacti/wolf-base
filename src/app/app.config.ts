@@ -2,14 +2,14 @@ import { Dialog } from '@angular/cdk/dialog';
 import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, ErrorHandler, InjectionToken, Provider } from '@angular/core';
 import { Routes } from '@angular/router';
-import { AppEntityType, LocalRepositoryService, RemoteRepositoryService } from '@lib';
+import { LocalRepositoryService, RemoteRepositoryService } from '@lib';
 import { Store } from '@ngrx/store';
 import { BookmarkSyncService, SyncService } from 'lib/services/sync-service.interface';
 import { CustomErrorHandler, DexieLocalRepositoryServiceImpl, FirestoreRemoteRepositoryServiceImpl } from 'services';
 import { AnimationAwareDialog } from 'services/animation-aware-dialog.service';
 import { BookmarkSyncServiceImpl } from 'services/bookmark-sync.service';
 import { SyncServiceImpl } from 'services/sync.service';
-import { bookmarkActions, coreActions, entityActions } from 'store/actions';
+import { coreActions } from 'store/actions';
 
 export const routes: Routes = [
 
@@ -82,27 +82,6 @@ const appInitializerFactory = (store: Store) => {
 
 		// load configuration
 		store.dispatch(coreActions.loadAll());
-
-		// // load entities
-		// store.dispatch(entityActions.loadAll({
-
-		// 	filter: [
-
-		// 		{ entityType: AppEntityType.bookmark, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-		// 		{ entityType: AppEntityType.note, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-		// 		{ entityType: AppEntityType.noteContent, loadEntities: false, loadSyncData: true, loadRemoteMetadata: true },
-		// 		{ entityType: AppEntityType.word, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-		// 		{ entityType: AppEntityType.quote, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-		// 		{ entityType: AppEntityType.quizEntry, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-		// 		{ entityType: AppEntityType.project, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-		// 		{ entityType: AppEntityType.task, loadEntities: true, loadSyncData: true, loadRemoteMetadata: true },
-
-		// 	]
-
-		// }));
-
-		// // load clicks
-		// store.dispatch(bookmarkActions.loadAllClicks());
 
 	};
 
