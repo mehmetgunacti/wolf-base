@@ -1,0 +1,64 @@
+@let t = task();
+@let isExpanded = expanded();
+
+<div
+	task_header
+	[class.expanded]="isExpanded"
+	class="component dark p-lg">
+
+	<a	class="gap-xs cur-pointer"
+		[title]="t.description ?? ''"
+		(click)="onToggleTask(t.id)"
+		tabindex="0">
+
+		<small [class]="t.status"><span class="material-symbols-outlined">manufacturing</span> {{ TASK_STATE[t.status] }}</small>
+		<small [class]="t.priority"><span class="material-symbols-outlined">swap_vert</span> {{ TASK_PRIORITIES[t.priority] }}</small>
+		<small><span class="material-symbols-outlined">category</span> {{ TASK_CATEGORIES[t.category] }}</small>
+		<span>{{ t.name }}</span>
+		<!-- TAGS -->
+		<div task_tags class="d-flex wrap gap-xs">
+
+			@for (tag of t.tags; track $index) {
+
+				<button disabled class="tag xs">{{ tag }}</button>
+
+			}
+
+		</div>
+
+	</a>
+
+</div>
+<div task_content_wrapper [@slideDown]="isExpanded" class="overflow-h">
+
+	<div task_content class="box dark d-flex-column p ml-sm mr-sm gap-sm">
+
+		<!-- DESCRIPTION -->
+		<div task_desc class="d-flex mb">{{ t.description }}</div>
+
+		<!-- START -->
+		<div task_small class="d-flex-column ai-s">
+
+			<small>
+				<span class="material-symbols-outlined small">schedule</span> {{ t.start | date:'EEEE dd.MM.yyyy' }}
+				@if (t.end) {
+					- {{ t.end | date:'EEEE dd.MM.yyyy' }}
+				}
+			</small>
+			<small>{{ t.id }}</small>
+
+		</div>
+
+	</div>
+	<div class="footer-buttons">
+
+		<button
+			class="link small"
+			(click)="onEditTask(t.id)">
+			<span class="material-symbols-outlined">edit</span>
+			Edit Task
+		</button>
+
+	</div>
+
+</div>

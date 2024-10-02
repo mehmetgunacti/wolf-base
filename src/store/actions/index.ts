@@ -3,6 +3,7 @@ export * from './cloud.actions';
 export * from './core.actions';
 export * from './database.actions';
 export * from './entity.actions';
+export * from './learning.actions';
 export * from './logs.actions';
 export * from './note.actions';
 export * from './project-task.actions';

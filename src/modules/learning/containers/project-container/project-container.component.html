@@ -1,0 +1,99 @@
+@if (learning(); as learning) {
+
+	<w-portal>
+
+		<button
+			class="link"
+			[cdkMenuTriggerFor]="menu">
+			<span class="material-symbols-outlined">menu_open</span>
+		</button>
+
+		<ng-template #menu>
+
+			<div class="menu" cdkMenu>
+
+				<button
+					cdkMenuItem
+					class="link align-left"
+					[routerLink]="['/learning', learning.id, 'edit' ]">
+					<span class="material-symbols-outlined">edit</span> Edit Learning
+				</button>
+
+				<hr>
+
+				<button
+					cdkMenuItem
+					class="link align-left"
+					[routerLink]="['/logs', learning.id]">
+					<span class="material-symbols-outlined">history</span> View Logs
+				</button>
+
+			</div>
+
+		</ng-template>
+
+	</w-portal>
+
+	<!-- LEARNING -->
+	<app-learning
+		[learning]="learning"
+		[expanded]="learningExpanded()"
+		(toggleInfo)="onToggleInfo()"/>
+
+	<!-- SEARCH AND TAG CLOUD -->
+	<app-learning-search-and-tag-cloud-container/>
+
+	<!-- TASKS (FIELDSET) -->
+	<fieldset class="box d-flex-column gap-sm">
+
+		<legend class="d-flex ai-bs gap-xs">Tasks <small>({{ learning.tasks.length }})</small></legend>
+		<legend>
+			<button
+				class="link small"
+				(click)="onOpenNewTaskDialog()">
+				<span class="material-symbols-outlined">add</span>
+				Add Task
+			</button>
+		</legend>
+
+		<!-- query_params -->
+		<small class="d-flex ai-c">
+			<span class="material-symbols-outlined small">filter_alt</span> Filters: {{ paramsText() }}
+		</small>
+
+		<!-- task_list -->
+		<div class="d-flex-column gap-sm">
+
+			@for (task of learning.tasks; track $index) {
+
+				@let expanded = !!tasksExpanded()[task.id];
+				<app-task
+					[task]="task"
+					[expanded]="expanded"
+					(editTask)="onOpenEditTaskDialog($event)"
+					(toggleTask)="onToggleTask($event)" />
+
+			}
+
+		</div>
+
+	</fieldset>
+
+} @else {
+
+	<div class="card darker">
+
+		<div class="empty">
+
+			<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No learning available</span>
+			<button
+				class="link"
+				[routerLink]="['/learning', 'new' ]">
+				<span class="material-symbols-outlined">post_add</span> Add Learning
+			</button>
+
+		</div>
+
+	</div>
+
+}

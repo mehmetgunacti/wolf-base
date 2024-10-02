@@ -1,0 +1,19 @@
+<w-overlay-container>
+
+	<ng-container card_title>Add Task</ng-container>
+	<ng-container card_buttons>
+
+		<button
+			class="glyph"
+			(click)="onClose()"
+			title="Close">
+			<span class="material-symbols-outlined">close</span>
+		</button>
+
+	</ng-container>
+
+	<app-task-form
+		[learning]="learning()"
+		(create)="onCreate($event)"/>
+
+</w-overlay-container>

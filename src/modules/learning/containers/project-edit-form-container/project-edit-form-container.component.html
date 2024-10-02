@@ -1,0 +1,15 @@
+@if(learning$ | async; as learning) {
+
+	<w-portal>
+
+		<button
+			class="link"
+			[routerLink]="['/learning', learning.id ]">
+			<span class="material-symbols-outlined">cancel</span> Cancel
+		</button>
+
+	</w-portal>
+
+	<app-learning-form [learning]="learning" (update)="onUpdate($event.id, $event.learning)"/>
+
+}

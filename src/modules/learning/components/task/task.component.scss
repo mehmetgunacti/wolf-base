@@ -1,0 +1,106 @@
+// @import 'helper';
+// @import 'variables';
+// @import 'components';
+// @import 'mixins';
+
+// :host {
+
+// 	& > [task_header] {
+
+// 		&:hover,
+// 		&.expanded {
+
+// 			background-color	: var(--col-bg-popup);
+
+// 		}
+
+// 		& > a {
+
+// 			display					: grid;
+// 			grid-template-columns	: 10rem 10rem 1fr;
+// 			grid-template-rows		: auto 1fr;
+
+// 			& > span {
+
+// 				grid-column			: 1 / -1;
+
+// 			}
+
+// 			& > small {
+
+// 				@include mx-d-flex-center-y;
+// 				gap			: var(--gap-xxs);
+
+// 				& > .material-symbols-outlined {
+
+// 					font-size	: inherit;
+
+// 				}
+
+// 				&.ongoing,
+// 				&.high {
+
+// 					color	: var(--col-warn);
+
+// 				}
+
+// 				&.completed {
+
+// 					color	: var(--col-success);
+
+// 				}
+
+// 			}
+
+// 			& > [task_tags] {
+
+// 				grid-column		: 1 / -1;
+
+// 			}
+
+// 		}
+
+// 	}
+
+// 	& > [task_content_wrapper] {
+
+// 		& > [task_content] {
+
+
+// 			border-top-left-radius	: 0;
+// 			border-top-right-radius	: 0;
+
+// 			& > [task_desc] {
+
+// 				&:empty {
+
+// 					display		: none;
+
+// 				}
+
+// 			}
+
+// 			& > [task_small] {
+
+// 				@include bigScreen() {
+
+// 					@include mx-d-flex;
+// 					@include mx-ai-sb;
+// 					@include mx-jc-start;
+
+// 				}
+
+// 				& > small {
+
+// 					@include mx-d-flex;
+// 					@include mx-gap-xxs;
+
+// 				}
+
+// 			}
+
+// 		}
+
+// 	}
+
+// }

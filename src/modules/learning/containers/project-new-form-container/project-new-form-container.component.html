@@ -1,0 +1,11 @@
+<w-portal>
+
+	<button
+		class="link"
+		[routerLink]="['/learning']">
+		<span class="material-symbols-outlined">cancel</span> Cancel
+	</button>
+
+</w-portal>
+
+<app-learning-form (create)="onCreate($event)"/>

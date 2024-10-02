@@ -1,0 +1,44 @@
+<header>
+
+	<div task_filter_controls>
+
+		<!-- STATUS -->
+		<w-select [formControl]="fcStatus" label="Status" [nodes]="TASK_STATE"/>
+
+		<!-- CATEGORY -->
+		<w-select [formControl]="fcCategory" label="Category" [nodes]="TASK_CATEGORIES"/>
+
+	</div>
+
+	<button
+		type="button"
+		class="link"
+		(click)="toggleCloud()">
+		<span class="material-symbols-outlined">chevron_left</span>
+	</button>
+
+</header>
+<aside [@slideUpDown]="cloudVisible ? 'opened' : 'closed'">
+
+	<div>
+		<w-input
+			label="Keyword"
+			[formControl]="fcSearch"
+			[autofocus]="cloudVisible"
+			[after]="500"/>
+		<button
+			type="button"
+			class="link"
+			title="Clear Filter"
+			(click)="onReset()">
+			<span class="material-symbols-outlined">mop</span>
+		</button>
+	</div>
+
+	<w-tag-cloud
+		[tags]="(tags$ | async) ?? []"
+		[selectedTags]="(selectedTags$ | async) ?? []"
+		[relatedTags]="(relatedTags$ | async) ?? []"
+		(tagClick)="onTagClicked($event)"></w-tag-cloud>
+
+</aside>

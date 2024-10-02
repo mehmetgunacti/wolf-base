@@ -37,3 +37,20 @@ export interface TestSuite extends Entity {
 	tests: Test[];
 
 }
+
+
+export interface TestSuiteQueryParams {
+
+	search: string | null
+
+}
+
+// export interface TaskQueryParams {
+
+// 	search: string | null,
+// 	status: TaskState | 'all',
+// 	category: TaskCategory | 'all',
+// 	tags: string[]
+
+// }
+

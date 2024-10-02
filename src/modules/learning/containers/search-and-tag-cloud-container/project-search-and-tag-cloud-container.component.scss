@@ -1,0 +1,79 @@
+// @import 'helper';
+// @import 'variables';
+// @import 'mixins';
+// @import 'components';
+
+// :host {
+
+// 	--chevron-angle		: 0deg;
+
+// 	&.open {
+
+// 		--chevron-angle	: -90deg;
+
+// 	}
+
+// 	& > header {
+
+// 		display			: flex;
+// 		align-items		: center;
+
+// 		& > [task_filter_controls] {
+
+// 			display					: grid;
+// 			grid-template-columns	: 1fr 1fr;
+// 			gap						: var(--gap-sm);
+
+// 		}
+
+// 		& :first-child {
+
+// 			flex		: 1;
+
+// 		}
+
+// 		& .material-symbols-outlined {
+
+// 			transform: rotate(var(--chevron-angle));
+// 			transition: 300ms linear;
+
+// 		}
+
+// 	}
+
+// 	& > aside {
+
+// 		@extend %flex-column;
+// 		gap				: var(--gap);
+// 		overflow		: auto;
+// 		max-height		: 30rem;
+// 		@include mx-scrollbar;
+
+// 		& > div {
+
+// 			@extend %flex-center-center;
+// 			gap			: var(--gap-xxs);
+// 			margin-top	: var(--gap);
+
+// 			& > input {
+
+// 				@include mx-input;
+// 				&::placeholder {
+
+// 					color	: fn-hsl(text);
+
+// 				}
+
+// 			}
+
+// 		}
+
+// 		& > w-tag-cloud {
+
+// 			margin		: var(--gap) 0;
+
+// 		}
+
+// 	}
+
+// }

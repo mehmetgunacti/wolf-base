@@ -45,6 +45,12 @@ export const routes: Routes = [
 	},
 	{
 
+		path: 'learning',
+		loadChildren: () => import('../modules/learning/learning.module').then(m => m.LearningModule)
+
+	},
+	{
+
 		path: 'cloud',
 		loadChildren: () => import('../modules/cloud/cloud.module').then(m => m.CloudModule)
 
