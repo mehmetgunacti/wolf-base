@@ -27,27 +27,15 @@
 		<div class="h-divider">With Glyphs</div>
 		<div container>
 
-			<td>
-				<button><w-glyph name="update"/>First</button>
-			</td>
-			<td>
-				<button>Sprint<w-glyph name="sprint"/></button>
-			</td>
-			<td>
-				<button class="warn"><w-glyph name="heart"/>Warnaaaaa</button>
-			</td>
-			<td>
-				<button class="warn"><w-glyph name="heart_filled"/>Warnaaaaa</button>
-			</td>
-			<td>
-				<button class="warn"><w-glyph name="swap_vert"/>Warnaaaaa</button>
-			</td>
-			<td>
-				<button class="warn"><w-glyph name="category"/>Cat</button>
-			</td>
-			<td>
-				<button class="link">Link<svg width="24" height="24" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></button>
-			</td>
+			@for (glyph of glyphList(); track $index) {
+
+				<td glyph_button>
+					<button class="glyph">
+						<w-glyph [name]="glyph"/>
+					</button>
+					<span>{{glyph}}</span>
+				</td>
+			}
 
 		</div>
 

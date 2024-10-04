@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PROJECT_STATUS, slideUpDownTrigger } from '@lib';
+import { Glyphs, PROJECT_STATUS, slideUpDownTrigger } from '@lib';
 
 @Component({
 	selector: 'app-components-page',
@@ -18,6 +18,8 @@ export class ComponentsPageComponent {
 	buttonsVisible = signal<boolean>(true);
 
 	tagSuggestions = signal<string[]>([]);
+
+	glyphList = signal<Glyphs[]>(Object.values(Glyphs));
 
 	form = new FormGroup({
 		'text': new FormControl('', Validators.required),

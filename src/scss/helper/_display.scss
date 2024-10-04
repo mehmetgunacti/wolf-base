@@ -20,6 +20,12 @@
 @mixin mx-d-flex-ai-bl($params...)		{ @include mx-d-flex($align-items: baseline, $params...); }
 @mixin mx-d-flex-ai-sb($params...)		{ @include mx-d-flex($align-items: space-between, $params...); }
 
+@mixin mx-d-flex-col-ai-center($params...)	{ @include mx-d-flex-column($align-items: center, $params...); }
+@mixin mx-d-flex-col-ai-start($params...)	{ @include mx-d-flex-column($align-items: start, $params...); }
+@mixin mx-d-flex-col-ai-end($params...)		{ @include mx-d-flex-column($align-items: end, $params...); }
+@mixin mx-d-flex-col-ai-bl($params...)		{ @include mx-d-flex-column($align-items: baseline, $params...); }
+@mixin mx-d-flex-col-ai-sb($params...)		{ @include mx-d-flex-column($align-items: space-between, $params...); }
+
 @mixin mx-d-flex-jc-center($params...)	{ @include mx-d-flex($justify-content: center, $params...); }
 @mixin mx-d-flex-jc-start($params...)	{ @include mx-d-flex($justify-content: start, $params...); }
 @mixin mx-d-flex-jc-end($params...)		{ @include mx-d-flex($justify-content: end, $params...); }
