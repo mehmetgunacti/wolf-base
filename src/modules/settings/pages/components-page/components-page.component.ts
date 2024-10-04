@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PROJECT_STATUS, slideUpDownTrigger } from '@lib';
-import { GLYPHS } from 'app/app.config';
 
 @Component({
 	selector: 'app-components-page',
@@ -13,8 +12,6 @@ import { GLYPHS } from 'app/app.config';
 export class ComponentsPageComponent {
 
 	PROJECT_STATUS = PROJECT_STATUS;
-
-	Glyphs = inject(GLYPHS);
 
 	alertsVisible = signal<boolean>(false);
 	formsVisible = signal<boolean>(false);

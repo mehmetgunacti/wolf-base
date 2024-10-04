@@ -91,7 +91,6 @@ export const LOCAL_REPOSITORY_SERVICE = new InjectionToken<LocalRepositoryServic
 export const REMOTE_REPOSITORY_SERVICE = new InjectionToken<RemoteRepositoryService>('RemoteRepositoryService');
 export const SYNC_SERVICE = new InjectionToken<SyncService>('SyncService');
 export const BOOKMARK_SYNC_SERVICE = new InjectionToken<BookmarkSyncService>('BookmarkSyncService');
-export const GLYPHS = new InjectionToken<typeof Glyphs>('Glyphs');
 
 export const providers: Provider[] = [
 	{
@@ -114,7 +113,6 @@ export const providers: Provider[] = [
 	{ provide: REMOTE_REPOSITORY_SERVICE, useClass: FirestoreRemoteRepositoryServiceImpl, deps: [Store, HttpClient] },
 	{ provide: SYNC_SERVICE, useClass: SyncServiceImpl, deps: [LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE] },
 	{ provide: BOOKMARK_SYNC_SERVICE, useClass: BookmarkSyncServiceImpl, deps: [LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE] },
-	{ provide: Dialog, useClass: AnimationAwareDialog },
-	{ provide: GLYPHS, useValue: Glyphs }
+	{ provide: Dialog, useClass: AnimationAwareDialog }
 
 ];
