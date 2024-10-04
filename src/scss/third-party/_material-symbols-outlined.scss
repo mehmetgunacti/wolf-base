@@ -1,6 +1,6 @@
 .material-symbols-outlined {
 
-	font-size		: 1.4em;
+	font-size		: $font-size-glyph;
 	color			: inherit;
 	@include mx-transition-short(background-color transform font-size);
 

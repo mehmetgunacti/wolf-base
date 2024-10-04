@@ -4,8 +4,10 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AutofocusDirective, FormatBytesPipe, InputModule, NoDataPipe, PortalComponent, SanitizeHtmlModule, SelectedTagsComponent, TimePastModule, ToastComponent, ToastWrapperComponent } from '@lib';
+import { GlyphComponent } from 'lib/components/glyph.component';
 import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 import { SelectModule } from 'lib/components/select/select.module';
+import { SwitchComponent } from 'lib/components/switch/switch.component';
 import { TagCloudModule } from 'lib/components/tag-cloud/tag-cloud.module';
 import { TextareaModule } from 'lib/components/textarea';
 import { RequiredValidatorDirective } from 'lib/directives/required-validator.directive';
@@ -16,7 +18,6 @@ import { LanguagesComponent } from './languages/languages.component';
 import { ModalComponent } from './modal/modal.component';
 import { NoteHeaderComponent } from './note-header/note-header.component';
 import { WordComponent } from './word/word.component';
-import { SwitchComponent } from 'lib/components/switch/switch.component';
 
 @NgModule({
 	declarations: [
@@ -47,7 +48,8 @@ import { SwitchComponent } from 'lib/components/switch/switch.component';
 		TextareaModule,
 		SwitchComponent,
 		ToastWrapperComponent,
-		ToastComponent
+		ToastComponent,
+		GlyphComponent
 	],
 	exports: [
 		BookmarkComponent,
@@ -72,7 +74,8 @@ import { SwitchComponent } from 'lib/components/switch/switch.component';
 		WordComponent,
 		LanguagesComponent,
 		ToastWrapperComponent,
-		ToastComponent
+		ToastComponent,
+		GlyphComponent
 	],
 	providers: []
 })

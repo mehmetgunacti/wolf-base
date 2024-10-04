@@ -2,6 +2,7 @@ export * from './bookmark.constant';
 export * from './common.constant';
 export * from './database.constant';
 export * from './entity.constant';
+export * from './glyphs.constant';
 export * from './log.constant';
 export * from './project.constant';
 export * from './quiz.constant';

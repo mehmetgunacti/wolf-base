@@ -16,11 +16,31 @@ $font-size-lg			: 1.8rem;	// 18px
 $font-size-sm			: 1.3rem;	// 13px
 $font-size-xs			: 0.8rem;	//  8px
 $font-size-xxs			: 0.6rem;	//  6px
+$font-size-glyph		: 1.4em;  // used in button
 
 $page-padding				: 0.8rem;
 $form-gap					: 1.0rem;
 $component-padding-inline	: 1.5rem;
 $component-padding-block	: 1.5rem;
+
+$gap-01		: 0.1rem;
+$gap-02		: 0.2rem;
+$gap-03		: 0.3rem;
+$gap-04		: 0.4rem;
+$gap-05		: 0.5rem;
+$gap-06		: 0.6rem;
+$gap-07		: 0.7rem;
+$gap-08		: 0.8rem;
+$gap-09		: 0.9rem;
+$gap-1		: 1.0rem;
+$gap-11		: 1.1rem;
+$gap-12		: 1.2rem;
+$gap-13		: 1.3rem;
+$gap-14		: 1.4rem;
+$gap-15		: 1.5rem;
+$gap-16		: 1.6rem;
+$gap-17		: 1.7rem;
+$gap-18		: 1.8rem;
 
 $gap-xxl				: 1.8rem;
 $gap-xl					: 1.5rem;
@@ -96,87 +116,122 @@ $nav-animation-duration			: $transition-duration;
 $font-size-ratio			: --font-size-ratio;
 
 // COLOR CSS VARIABLES
-$col-black							: --col-black;
-$col-white							: --col-white;
-$col-transparent					: --col-transparent;
-$col-bg-header						: --col-bg-header;
-$col-bg-nav							: --col-bg-nav;
-$col-bg-popup						: --col-bg-popup;
-$col-bg-component					: --col-bg-component;
-$col-bg-component-hover				: --col-bg-component-hover;
-$col-bg-component-active			: --col-bg-component-active;
-$col-bg-component-dark				: --col-bg-component-dark;
-$col-bg-component-dark-hover		: --col-bg-component-dark-hover;
-$col-bg-component-dark-active		: --col-bg-component-dark-active;
-$col-bg-form-element				: --col-bg-form-element;
-$col-bg-page						: --col-bg-page;
-$col-bg-overlay						: --col-bg-overlay;
-$col-shadow							: --col-shadow;
-$col-text							: --col-text;
-$col-text-secondary					: --col-text-secondary;
-$col-primary						: --col-primary;
-$col-success						: --col-success;
-$col-info							: --col-info;
-$col-warn							: --col-warn;
-$col-error							: --col-error;
-$col-accent							: --col-accent;
-$col-focus							: --col-focus;
-$col-disabled						: --col-disabled;
+$col-black					: --col-black;
+$col-white					: --col-white;
+$col-transparent			: --col-transparent;
+
+$col-text					: --col-text;
+$col-text-secondary			: --col-text-secondary;
+
+// VARIANTS
+$col-primary				: --col-primary;
+$col-primary-text			: --col-primary-text;
+$col-primary-hover			: --col-primary-hover;
+$col-primary-active			: --col-primary-active;
+$col-primary-border			: --col-primary-border;
+
+$col-success				: --col-success;
+$col-success-text			: --col-success-text;
+$col-success-hover			: --col-success-hover;
+$col-success-active			: --col-success-active;
+$col-success-border			: --col-success-border;
+
+$col-info					: --col-info;
+$col-info-text				: --col-info-text;
+$col-info-hover				: --col-info-hover;
+$col-info-active			: --col-info-active;
+$col-info-border			: --col-info-border;
+
+$col-warn					: --col-warn;
+$col-warn-text				: --col-warn-text;
+$col-warn-hover				: --col-warn-hover;
+$col-warn-active			: --col-warn-active;
+$col-warn-border			: --col-warn-border;
+
+$col-error					: --col-error;
+$col-error-text				: --col-error-text;
+$col-error-hover			: --col-error-hover;
+$col-error-active			: --col-error-active;
+$col-error-border			: --col-error-border;
+
+$col-accent					: --col-accent;
+$col-focus					: --col-focus;
+$col-outline				: --col-outline;
+$col-disabled				: --col-disabled;
+
+$col-bg-header				: --col-bg-header;
+$col-bg-nav					: --col-bg-nav;
+$col-bg-popup				: --col-bg-popup;
+
+$col-bg-component			: --col-bg-component;
+$col-bg-component-hover		: --col-bg-component-hover;
+$col-bg-component-active	: --col-bg-component-active;
+
+$col-bg-component-dark			: --col-bg-component-dark;
+$col-bg-component-dark-hover	: --col-bg-component-dark-hover;
+$col-bg-component-dark-active	: --col-bg-component-dark-active;
+
+$col-bg-form-element		: --col-bg-form-element;
+$col-bg-page				: --col-bg-page;
+$col-bg-overlay				: --col-bg-overlay;
 
 // SCROLLBAR COLORS
-$col-scrollbar-thumb				: --col-scrollbar-thumb;
-$col-scrollbar-track				: --col-scrollbar-track;
+$col-scrollbar-thumb		: --col-scrollbar-thumb;
+$col-scrollbar-track		: --col-scrollbar-track;
 
 // BUTTON COLORS
-$col-btn-tag-text					: --col-btn-tag-text;
-$col-btn-tag-color					: --col-btn-tag-color;
-$col-btn-tag-color-hover			: --col-btn-tag-color-hover;
-$col-btn-tag-color-active			: --col-btn-tag-color-active;
+$col-btn-tag-text			: --col-btn-tag-text;
+$col-btn-tag-color			: --col-btn-tag-color;
+$col-btn-tag-color-hover	: --col-btn-tag-color-hover;
+$col-btn-tag-color-active	: --col-btn-tag-color-active;
 
-$col-btn-default-text				: --col-btn-default-text;
-$col-btn-default-color				: --col-btn-default-color;
-$col-btn-default-color-hover		: --col-btn-default-color-hover;
-$col-btn-default-color-active		: --col-btn-default-color-active;
-$col-btn-default-border				: --col-btn-default-border;
+$col-btn-default-text			: --col-btn-default-text;
+$col-btn-default-color			: --col-btn-default-color;
+$col-btn-default-color-hover	: --col-btn-default-color-hover;
+$col-btn-default-color-active	: --col-btn-default-color-active;
+$col-btn-default-border			: --col-btn-default-border;
 
-$col-btn-disabled-text				: --col-btn-disabled-text;
-$col-btn-disabled-color				: --col-btn-disabled-color;
-$col-btn-disabled-color-hover		: --col-btn-disabled-color-hover;
-$col-btn-disabled-color-active		: --col-btn-disabled-color-active;
-$col-btn-disabled-border			: --col-btn-disabled-border;
+$col-btn-disabled-text			: --col-btn-disabled-text;
+$col-btn-disabled-color			: --col-btn-disabled-color;
+$col-btn-disabled-color-hover	: --col-btn-disabled-color-hover;
+$col-btn-disabled-color-active	: --col-btn-disabled-color-active;
+$col-btn-disabled-border		: --col-btn-disabled-border;
 
-$col-btn-link-text					: --col-btn-link-text;
-$col-btn-link-color					: --col-btn-link-color;
-$col-btn-link-color-hover			: --col-btn-link-color-hover;
-$col-btn-link-color-active			: --col-btn-link-color-active;
-$col-btn-link-border				: --col-btn-link-border;
+$col-btn-link-text				: --col-btn-link-text;
+$col-btn-link-color				: --col-btn-link-color;
+$col-btn-link-color-hover		: --col-btn-link-color-hover;
+$col-btn-link-color-active		: --col-btn-link-color-active;
+$col-btn-link-border			: --col-btn-link-border;
 
-$col-btn-glyph-text					: --col-btn-glyph-text;
-$col-btn-glyph-color				: --col-btn-glyph-color;
-$col-btn-glyph-color-hover			: --col-btn-glyph-color-hover;
-$col-btn-glyph-color-active			: --col-btn-glyph-color-active;
-$col-btn-glyph-border				: --col-btn-glyph-border;
+$col-btn-glyph-text				: --col-btn-glyph-text;
+$col-btn-glyph-color			: --col-btn-glyph-color;
+$col-btn-glyph-color-hover		: --col-btn-glyph-color-hover;
+$col-btn-glyph-color-active		: --col-btn-glyph-color-active;
+$col-btn-glyph-border			: --col-btn-glyph-border;
 
-$col-btn-warn-text					: --col-btn-warn-text;
-$col-btn-warn-color					: --col-btn-warn-color;
-$col-btn-warn-color-hover			: --col-btn-warn-color-hover;
-$col-btn-warn-color-active			: --col-btn-warn-color-active;
-$col-btn-warn-border				: --col-btn-warn-border;
+$col-btn-warn-text				: --col-btn-warn-text;
+$col-btn-warn-color				: --col-btn-warn-color;
+$col-btn-warn-color-hover		: --col-btn-warn-color-hover;
+$col-btn-warn-color-active		: --col-btn-warn-color-active;
+$col-btn-warn-border			: --col-btn-warn-border;
 
-$col-btn-ghost-text					: --col-btn-ghost-text;
-$col-btn-ghost-color				: --col-btn-ghost-color;
-$col-btn-ghost-color-hover			: --col-btn-ghost-color-hover;
-$col-btn-ghost-color-active			: --col-btn-ghost-color-active;
-$col-btn-ghost-border				: --col-btn-ghost-border;
+$col-btn-ghost-text				: --col-btn-ghost-text;
+$col-btn-ghost-color			: --col-btn-ghost-color;
+$col-btn-ghost-color-hover		: --col-btn-ghost-color-hover;
+$col-btn-ghost-color-active		: --col-btn-ghost-color-active;
+$col-btn-ghost-border			: --col-btn-ghost-border;
 
-$col-btn-danger-text				: --col-btn-danger-text;
-$col-btn-danger-color				: --col-btn-danger-color;
-$col-btn-danger-color-hover			: --col-btn-danger-color-hover;
-$col-btn-danger-color-active		: --col-btn-danger-color-active;
-$col-btn-danger-border				: --col-btn-danger-border;
+$col-btn-danger-text			: --col-btn-danger-text;
+$col-btn-danger-color			: --col-btn-danger-color;
+$col-btn-danger-color-hover		: --col-btn-danger-color-hover;
+$col-btn-danger-color-active	: --col-btn-danger-color-active;
+$col-btn-danger-border			: --col-btn-danger-border;
 
 // SHADOWS
-$shadow								: --shadow;
-$shadow-header						: --shadow-header;
-$shadow-nav							: --shadow-nav;
-$shadow-invisible					: --shadow-invisible;
+// todo
+$shadow				: --shadow;
+$shadow-header		: --shadow-header;
+$shadow-nav			: --shadow-nav;
+$shadow-invisible	: --shadow-invisible;
+
+$col-shadow			: --col-shadow;

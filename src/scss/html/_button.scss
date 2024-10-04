@@ -1,79 +1,65 @@
-$_button-height			: 3.5rem;
-$_button-height-sm		: 2.7rem;
-$_button-height-xs		: 1.8rem;
+$_prefix			: btn;
 
-$_button-gap			: 0.8rem;
-$_button-gap-sm			: 0.7rem;
-$_button-gap-xs			: 0.6rem;
+$_button-height		: 3.5rem;
+$_button-height-sm	: 2.7rem;
+$_button-height-xs	: 1.8rem;
 
-@mixin mx-print-css-vars($map, $prefix) {
+$_button-gap		: 0.8rem;
+$_button-gap-sm		: 0.7rem;
+$_button-gap-xs		: 0.6rem;
 
-	// print css variables
-	@each $key, $value in $map {
+$_button-properties	: (
 
-		--#{$prefix}-#{$key}	: #{$value};
+	"--color"				: fn-var($col-primary-text),
+	"--background-color"	: fn-var($col-primary),
+	"--border-color"		: fn-var($col-primary-border),
 
-	}
+	"--height"			: $_button-height,
 
-}
+	"--padding-inline"	: $_button-gap,
+	"--font-size"		: $font-size,
+	"--border-radius"	: $border-radius,
 
-@mixin mx-assign-css-vars($list, $prefix) {
+	"color"				: "--",
+	"background-color"	: "--",
+	"border-color"		: "--",
 
-	// assign css vars to properties
-	@each $key in $list {
+	"height"			: "--",
+	"line-height"		: "--height",
 
-		#{$key}	: var(--#{$prefix}-#{$key});
+	"padding-inline"	: "--",
+	"font-size"			: "--",
+	"border-radius"		: "--"
 
-	}
-
-}
-
-$_prefix	: btn;
-
-$_btn-size-values: (
-
-	default: (
-		"--height"			: $_button-height,
-		"height"			: --height,
-		"line-height"		: --height, // Match the height for vertical centering
-		"padding-inline"	: $_button-gap,
-		"font-size"			: $font-size,
-		"border-radius"		: $border-radius
-	),
-	sm: (
-		"--height"			: $_button-height-sm,
-		"padding-inline"	: $_button-gap-sm,
-		"font-size"			: $font-size-sm,
-		"border-radius"		: $border-radius-sm
-	),
-	xs: (
-		"--height"			: $_button-height-xs,
-		"padding-inline"	: $_button-gap-xs,
-		"font-size"			: $font-size-xs,
-		"border-radius"		: $border-radius-xs
-	),
-	glyph: (
-		"width"				: --height
-	)
 );
 
-@mixin mx-button-sizes($map, $size, $prefix) {
+@mixin mx-define-css-vars($map, $prefix) {
 
-	@each $key, $value in map-get($map, $size) {
+	@each $key, $value in $map {
 
 		@if type-of($key) == 'string' and str-index($key, '--') == 1 {
 
-			$name: str-slice($key, 3); // '--'.length = 2
-			--#{$prefix}-#{$name}: #{$value};
+			// ("--width" : $val) --> prints [ --prefix-width: #{$val}; ]
+			$cssVarName: str-slice($key, 3); // '--'.length = 2
+			--#{$prefix}-#{$cssVarName}: #{$value};
 
-		} @else if (type-of($value) == 'string' and str-index($value, '--') == 1) {
+		}
 
-			$val: str-slice($value, 3); // '--'.length = 2
+	}
+
+}
+
+@mixin mx-assign-css-vars($map, $prefix) {
+
+	@each $key, $value in $map {
+
+		@if (type-of($value) == 'string' and str-index($value, '--') == 1) {
+
+			// ("width" : "--")       --> prints [ width: var(--prefix-width); ]
+			// ("height" : "--width") --> prints [ height: var(--prefix-width); ]
+			$cssVarName: str-slice($value, 3); // '--'.length = 2
+			$val : if(length($cssVarName) == 1, $key, $cssVarName);
 			#{$key}: var(--#{$prefix}-#{$val});
-
-		} @else {
-
-			#{$key}	: #{$value};
 
 		}
 
@@ -83,286 +69,413 @@ $_btn-size-values: (
 
 @mixin mx-button {
 
-	@include mx-print-css-vars((
-		"color"				: fn-var($col-btn-default-text),
-		"background-color"	: fn-var($col-btn-default-color),
-		"border-color"		: fn-var($col-btn-default-border)
-	), $_prefix);
+	@include mx-define-css-vars($_button-properties, $_prefix);
+	@include mx-assign-css-vars($_button-properties, $_prefix);
 
-	@include mx-assign-css-vars((
-		"color",
-		"background-color",
-		"border-color"
-	), $_prefix);
+	@include mx-d-inline-flex-center;
+	gap					: $gap-02;
+	text-align			: center;
+	text-decoration		: none;
+	white-space			: pre;
+	background-image	: none;
+	border-width		: 1px;
+	border-style		: solid;
+	cursor				: pointer;
+	@include mx-transition(color background-color border-color);
 
-	@include mx-button-sizes($_btn-size-values, default, $_prefix);
-	@include mx-d-flex-center($display: inline-flex);
+	& > svg {
 
-	text-align				: center;
-
-	border-width			: 1px;
-	border-style			: solid;
-
-	background-image		: none;
-	text-decoration			: none;
-	white-space				: pre;
-	cursor					: pointer;
-
-	@include mx-transition-short(color background-color border-color);
-
-	&.sm { @include mx-button-sizes($_btn-size-values, sm, $_prefix); }
-	&.xs { @include mx-button-sizes($_btn-size-values, xs, $_prefix); }
-
-	&:hover {
-
-		@include mx-print-css-vars(("background-color": fn-var($col-btn-default-color-hover)), $_prefix);
+		width: 1.1em;
+		height: 1.1em;
 
 	}
 
-	&:active {
+	// if button has glyph -> text must be wrapped in <span></span>
+	&:has(> #{$glyph-selector} + span) {
 
-		@include mx-print-css-vars(("background-color": fn-var($col-btn-default-color-active)), $_prefix);
-
-	}
-
-	&:focus-visible {
-
-		@include mx-outline;
+		gap				: $gap-02;
+		padding-right	: $gap-1;
 
 	}
+	&:has(> span + #{$glyph-selector}) {
 
-	&.w100 {
-
-		width	: 100%;
-
-	}
-
-	&.left {
-
-		justify-content: start;
-
-	}
-
-	&[data-before] {
-
-		padding-left: 0.7em;
-		&::before {
-
-			content: attr(data-before);
-			@include mx-d-inline-block;
-			font-size		: inherit;
-			padding-right	: 0.2em;
-
-		}
-
-	}
-
-	&[data-after] {
-
-		padding-right: 0.7em;
-		&::after {
-
-			content: attr(data-after);
-			@include mx-d-inline-block;
-			font-size		: inherit;
-			padding-left	: 0.2em;
-
-		}
-
-	}
-
-	&[disabled] {
-
-		@include mx-print-css-vars((
-			"color"						: fn-var($col-btn-disabled-text) !important,
-			"background-color"			: fn-var($col-btn-disabled-color) !important,
-			"background-color-hover"	: fn-var($col-btn-disabled-color-hover) !important,
-			"background-color-active"	: fn-var($col-btn-disabled-color-active) !important,
-			"border-color"				: fn-var($col-btn-disabled-border) !important
-		), $_prefix);
-
-		cursor	: not-allowed;
-
-		&:active {
-
-			outline		: none;
-			box-shadow	: none;
-
-		}
-
-	}
-
-	&.warn {
-
-		@include mx-print-css-vars((
-			"text-color"		: fn-var($col-btn-warn-text),
-			"background-color"	: fn-var($col-btn-warn-color),
-			"border-color"		: fn-var($col-btn-warn-border)
-		), $_prefix);
-
-		&:hover {
-
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-warn-color-hover)), $_prefix);
-
-		}
-
-		&:active {
-
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-warn-color-active)), $_prefix);
-
-		}
-
-	}
-
-	&.danger {
-
-		@include mx-print-css-vars((
-			"color"				: fn-var($col-btn-danger-text),
-			"background-color"	: fn-var($col-btn-danger-color),
-			"border-color"		: fn-var($col-btn-danger-border)
-		), $_prefix);
-
-		&:hover {
-
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-danger-color-hover)), $_prefix);
-
-		}
-
-		&:active {
-
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-danger-color-active)), $_prefix);
-
-		}
-
-	}
-
-	&.ghost {
-
-		@include mx-print-css-vars((
-			"text-color"		: fn-var($col-btn-ghost-text),
-			"background-color"	: fn-var($col-btn-ghost-color),
-			"border-color"		: fn-var($col-btn-ghost-border)
-		), $_prefix);
-
-		&:hover {
-
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-ghost-color-hover)), $_prefix);
-
-		}
-
-		&:active {
-
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-ghost-color-active)), $_prefix);
-
-		}
-
-	}
-
-	&.link {
-
-		@include mx-print-css-vars((
-			"color"				: fn-var($col-btn-link-text),
-			"background-color"	: fn-var($col-btn-link-color),
-			"border-color"		: fn-var($col-btn-link-border)
-		), $_prefix);
-
-		&:hover {
-
-			&:not(:has(#{$glyph-selector})),
-			&[data-before]::before,
-			&[data-after]::after {
-
-				text-decoration: underline;
-
-			}
-
-		}
-
-	}
-
-	&.tag {
-
-		@include mx-print-css-vars((
-			"color"				: fn-var($col-btn-tag-text),
-			"background-color"	: fn-var($col-btn-tag-color),
-		), $_prefix);
-
-		border-radius 	: $border-radius-round;
-		border			: 0;
-
-		font-weight		: bold;
-		min-width		: 1rem;
-
-		&:hover {
-
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-tag-color-hover)), $_prefix);
-
-		}
-
-		&:active {
-
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-tag-color-active)), $_prefix);
-
-		}
-
-	}
-
-	&.glyph {
-
-		@include mx-print-css-vars((
-			"color"				: fn-var($col-btn-glyph-text),
-			"background-color"	: fn-var($col-btn-glyph-color)
-		), $_prefix);
-
-		@include mx-button-sizes($_btn-size-values, glyph, $_prefix);
-		border-radius 	: $border-radius-round;
-		border			: 0;
-		padding			: 0;
-		margin			: 0;
-
-		&:hover {
-
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color-hover)), $_prefix);
-
-		}
-
-		&:active {
-
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color-active)), $_prefix);
-
-		}
-
-		&[disabled] {
-
-			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color) !important), $_prefix);
-
-		}
-
-		&.squared {
-
-			border-radius: $border-radius-lg;
-
-		}
-
-		&.warn {
-
-			@include mx-print-css-vars((
-				"color"				: fn-var($col-btn-warn-color)
-			), $_prefix);
-
-		}
-
-		&.danger {
-
-			@include mx-print-css-vars((
-				"color"				: fn-var($col-btn-danger-color)
-			), $_prefix);
-
-		}
+		gap				: $gap-02;
+		padding-left	: $gap-1;
 
 	}
 
 }
+
+// @mixin mx-print-css-vars($map, $prefix) {
+
+// 	// print css variables
+// 	@each $key, $value in $map {
+
+// 		--#{$prefix}-#{$key}	: #{$value};
+
+// 	}
+
+// }
+
+// @mixin mx-assign-css-vars($list, $prefix) {
+
+// 	// assign css vars to properties
+// 	@each $key in $list {
+
+// 		#{$key}	: var(--#{$prefix}-#{$key});
+
+// 	}
+
+// }
+
+// $_btn-size-values: (
+
+// 	default: (
+// 		"--height"			: $_button-height,
+// 		"height"			: --height,
+// 		"line-height"		: --height, // Match the height for vertical centering
+// 		"padding-inline"	: $_button-gap,
+// 		"font-size"			: $font-size,
+// 		"border-radius"		: $border-radius
+// 	),
+// 	sm: (
+// 		"--height"			: $_button-height-sm,
+// 		"padding-inline"	: $_button-gap-sm,
+// 		"font-size"			: $font-size-sm,
+// 		"border-radius"		: $border-radius-sm
+// 	),
+// 	xs: (
+// 		"--height"			: $_button-height-xs,
+// 		"padding-inline"	: $_button-gap-xs,
+// 		"font-size"			: $font-size-xs,
+// 		"border-radius"		: $border-radius-xs
+// 	),
+// 	glyph: (
+// 		"width"				: --height
+// 	)
+
+// );
+
+// @mixin mx-button-sizes($map, $size, $prefix) {
+
+// 	@each $key, $value in map-get($map, $size) {
+
+// 		@if type-of($key) == 'string' and str-index($key, '--') == 1 {
+
+// 			$name: str-slice($key, 3); // '--'.length = 2
+// 			--#{$prefix}-#{$name}: #{$value};
+
+// 		} @else if (type-of($value) == 'string' and str-index($value, '--') == 1) {
+
+// 			$val: str-slice($value, 3); // '--'.length = 2
+// 			#{$key}: var(--#{$prefix}-#{$val});
+
+// 		} @else {
+
+// 			#{$key}	: #{$value};
+
+// 		}
+
+// 	}
+
+// }
+
+// @mixin mx-button {
+
+// 	@include mx-print-css-vars((
+// 		"color"				: fn-var($col-btn-default-text),
+// 		"background-color"	: fn-var($col-btn-default-color),
+// 		"border-color"		: fn-var($col-btn-default-border)
+// 	), $_prefix);
+
+// 	@include mx-assign-css-vars((
+// 		"color",
+// 		"background-color",
+// 		"border-color"
+// 	), $_prefix);
+
+// 	@include mx-button-sizes($_btn-size-values, default, $_prefix);
+// 	@include mx-d-flex-center($display: inline-flex);
+
+// 	text-align				: center;
+
+// 	border-width			: 1px;
+// 	border-style			: solid;
+
+// 	background-image		: none;
+// 	text-decoration			: none;
+// 	white-space				: pre;
+// 	cursor					: pointer;
+
+// 	@include mx-transition-short(color background-color border-color);
+
+// 	&.sm { @include mx-button-sizes($_btn-size-values, sm, $_prefix); }
+// 	&.xs { @include mx-button-sizes($_btn-size-values, xs, $_prefix); }
+
+// 	&:hover {
+
+// 		@include mx-print-css-vars(("background-color": fn-var($col-btn-default-color-hover)), $_prefix);
+
+// 	}
+
+// 	&:active {
+
+// 		@include mx-print-css-vars(("background-color": fn-var($col-btn-default-color-active)), $_prefix);
+
+// 	}
+
+// 	&:focus-visible {
+
+// 		@include mx-outline;
+
+// 	}
+
+// 	&.w100 {
+
+// 		width	: 100%;
+
+// 	}
+
+// 	&.left {
+
+// 		justify-content: start;
+
+// 	}
+
+// 	&[data-before] {
+
+// 		padding-left: 0.7em;
+// 		&::before {
+
+// 			content: attr(data-before);
+// 			@include mx-d-inline-block;
+// 			font-size		: inherit;
+// 			padding-right	: 0.2em;
+
+// 		}
+
+// 	}
+
+// 	&[data-after] {
+
+// 		padding-right: 0.7em;
+// 		&::after {
+
+// 			content: attr(data-after);
+// 			@include mx-d-inline-block;
+// 			font-size		: inherit;
+// 			padding-left	: 0.2em;
+
+// 		}
+
+// 	}
+
+// 	&[disabled] {
+
+// 		@include mx-print-css-vars((
+// 			"color"						: fn-var($col-btn-disabled-text) !important,
+// 			"background-color"			: fn-var($col-btn-disabled-color) !important,
+// 			"background-color-hover"	: fn-var($col-btn-disabled-color-hover) !important,
+// 			"background-color-active"	: fn-var($col-btn-disabled-color-active) !important,
+// 			"border-color"				: fn-var($col-btn-disabled-border) !important
+// 		), $_prefix);
+
+// 		cursor	: not-allowed;
+
+// 		&:active {
+
+// 			outline		: none;
+// 			box-shadow	: none;
+
+// 		}
+
+// 	}
+
+// 	&.warn {
+
+// 		@include mx-print-css-vars((
+// 			"text-color"		: fn-var($col-btn-warn-text),
+// 			"background-color"	: fn-var($col-btn-warn-color),
+// 			"border-color"		: fn-var($col-btn-warn-border)
+// 		), $_prefix);
+
+// 		&:hover {
+
+// 			@include mx-print-css-vars(("background-color": fn-var($col-btn-warn-color-hover)), $_prefix);
+
+// 		}
+
+// 		&:active {
+
+// 			@include mx-print-css-vars(("background-color": fn-var($col-btn-warn-color-active)), $_prefix);
+
+// 		}
+
+// 	}
+
+// 	&.danger {
+
+// 		@include mx-print-css-vars((
+// 			"color"				: fn-var($col-btn-danger-text),
+// 			"background-color"	: fn-var($col-btn-danger-color),
+// 			"border-color"		: fn-var($col-btn-danger-border)
+// 		), $_prefix);
+
+// 		&:hover {
+
+// 			@include mx-print-css-vars(("background-color": fn-var($col-btn-danger-color-hover)), $_prefix);
+
+// 		}
+
+// 		&:active {
+
+// 			@include mx-print-css-vars(("background-color": fn-var($col-btn-danger-color-active)), $_prefix);
+
+// 		}
+
+// 	}
+
+// 	&.ghost {
+
+// 		@include mx-print-css-vars((
+// 			"text-color"		: fn-var($col-btn-ghost-text),
+// 			"background-color"	: fn-var($col-btn-ghost-color),
+// 			"border-color"		: fn-var($col-btn-ghost-border)
+// 		), $_prefix);
+
+// 		&:hover {
+
+// 			@include mx-print-css-vars(("background-color": fn-var($col-btn-ghost-color-hover)), $_prefix);
+
+// 		}
+
+// 		&:active {
+
+// 			@include mx-print-css-vars(("background-color": fn-var($col-btn-ghost-color-active)), $_prefix);
+
+// 		}
+
+// 	}
+
+// 	&.link {
+
+// 		@include mx-print-css-vars((
+// 			"color"				: fn-var($col-btn-link-text),
+// 			"background-color"	: fn-var($col-btn-link-color),
+// 			"border-color"		: fn-var($col-btn-link-border),
+// 			"underline-width"	: 0
+// 		), $_prefix);
+
+// 		// &::after {
+
+// 		// 	content: '';
+// 		// 	@include mx-d-block;
+// 		// 	height				: 2px;
+// 		// 	width				: var(--btn-underline-width);
+// 		// 	background-color	: var(--nav-label-underline-color);
+// 		// 	@include mx-transition-short(width);
+
+// 		// }
+
+// 		&:hover {
+
+// 			--btn-underline-width	: 100%;
+
+// 			&:not(:has(#{$glyph-selector})),
+// 			&[data-before]::before,
+// 			&[data-after]::after {
+
+// 				// text-decoration: underline;
+
+// 			}
+
+// 		}
+
+// 	}
+
+// 	&.tag {
+
+// 		@include mx-print-css-vars((
+// 			"color"				: fn-var($col-btn-tag-text),
+// 			"background-color"	: fn-var($col-btn-tag-color),
+// 		), $_prefix);
+
+// 		border-radius 	: $border-radius-round;
+// 		border			: 0;
+
+// 		font-weight		: bold;
+// 		min-width		: 1rem;
+
+// 		&:hover {
+
+// 			@include mx-print-css-vars(("background-color": fn-var($col-btn-tag-color-hover)), $_prefix);
+
+// 		}
+
+// 		&:active {
+
+// 			@include mx-print-css-vars(("background-color": fn-var($col-btn-tag-color-active)), $_prefix);
+
+// 		}
+
+// 	}
+
+// 	&.glyph {
+
+// 		@include mx-print-css-vars((
+// 			"color"				: fn-var($col-btn-glyph-text),
+// 			"background-color"	: fn-var($col-btn-glyph-color)
+// 		), $_prefix);
+
+// 		@include mx-button-sizes($_btn-size-values, glyph, $_prefix);
+// 		border-radius 	: $border-radius-round;
+// 		border			: 0;
+// 		padding			: 0;
+// 		margin			: 0;
+
+// 		&:hover {
+
+// 			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color-hover)), $_prefix);
+
+// 		}
+
+// 		&:active {
+
+// 			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color-active)), $_prefix);
+
+// 		}
+
+// 		&[disabled] {
+
+// 			@include mx-print-css-vars(("background-color": fn-var($col-btn-glyph-color) !important), $_prefix);
+
+// 		}
+
+// 		&.squared {
+
+// 			border-radius: $border-radius-lg;
+
+// 		}
+
+// 		&.warn {
+
+// 			@include mx-print-css-vars((
+// 				"color"				: fn-var($col-btn-warn-color)
+// 			), $_prefix);
+
+// 		}
+
+// 		&.danger {
+
+// 			@include mx-print-css-vars((
+// 				"color"				: fn-var($col-btn-danger-color)
+// 			), $_prefix);
+
+// 		}
+
+// 	}
+
+// }
 
 button,
 .button {

@@ -1,3 +1,93 @@
+
+<fieldset>
+
+	<legend>Buttons</legend>
+	<legend>
+		<button class="glyph" (click)="buttonsVisible.set(!buttonsVisible())">
+			<span [class.rotated]="buttonsVisible()" class="material-symbols-outlined">add</span>
+		</button>
+	</legend>
+
+	<div content [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
+
+		<!-- TYPES -->
+		<div class="h-divider">Button Types</div>
+		<div container>
+
+			<td><button class="">Default</button></td>
+			<td><button class="" disabled>Disabled</button></td>
+			<td><button class="warn">Warn</button></td>
+			<td><button class="danger">Danger</button></td>
+			<td><button class="ghost">Ghost</button></td>
+			<td><button class="link">Link</button></td>
+
+		</div>
+
+		<!-- WITH GLYPHS -->
+		<div class="h-divider">With Glyphs</div>
+		<div container>
+
+			<td>
+				<button><w-glyph name="update"/>First</button>
+			</td>
+			<td>
+				<button>Sprint<w-glyph name="sprint"/></button>
+			</td>
+			<td>
+				<button class="warn"><w-glyph name="heart"/>Warnaaaaa</button>
+			</td>
+			<td>
+				<button class="warn"><w-glyph name="heart_filled"/>Warnaaaaa</button>
+			</td>
+			<td>
+				<button class="warn"><w-glyph name="swap_vert"/>Warnaaaaa</button>
+			</td>
+			<td>
+				<button class="warn"><w-glyph name="category"/>Cat</button>
+			</td>
+			<td>
+				<button class="link">Link<svg width="24" height="24" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></button>
+			</td>
+
+		</div>
+
+		<!-- SIZES -->
+		<div class="h-divider">Button Sizes</div>
+		<div container>
+
+			<td><button class="xs">Extra Small</button></td>
+			<td><button class="sm">Small</button></td>
+			<td><button class="">Default</button></td>
+
+		</div>
+
+		<!-- GLYPHS -->
+		<div class="h-divider">Glyphs</div>
+		<div container>
+
+			<td><button class="glyph xs"><span class="material-symbols-outlined">update</span></button></td>
+			<td><button class="glyph sm"><span class="material-symbols-outlined">update</span></button></td>
+			<td><button class="glyph"><span class="material-symbols-outlined">update</span></button></td>
+
+		</div>
+
+		<!-- TAG -->
+		<div class="h-divider">Tags (tag)</div>
+		<div container_tags>
+
+			<button class="tag xs">Extra Small</button>
+			<button class="tag sm">Small</button>
+			<button class="tag">Default</button>
+			<button class="tag xs" 	data-before="Extra Small"><span class="material-symbols-outlined">close</span></button>
+			<button class="tag sm"	data-before="Small"><span class="material-symbols-outlined">close</span></button>
+			<button class="tag"		data-before="Default"><span class="material-symbols-outlined">close</span></button>
+
+		</div>
+
+	</div>
+
+</fieldset>
+
 <fieldset>
 
 	<legend>Alerts</legend>
@@ -42,81 +132,6 @@
 			<w-switch label="Schedule" [value]="true"/>
 			<w-markdown-editor [control]="editor()" name="Editor"/>
 		</form>
-
-	</div>
-
-</fieldset>
-
-<fieldset>
-
-	<legend>Buttons</legend>
-	<legend>
-		<button class="glyph" (click)="buttonsVisible.set(!buttonsVisible())">
-			<span [class.rotated]="buttonsVisible()" class="material-symbols-outlined">add</span>
-		</button>
-	</legend>
-
-	<div content [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
-
-		<!-- TYPES -->
-		<div class="h-divider">Button Types</div>
-		<div container>
-
-			<td><button class="">Default</button></td>
-			<td><button class="" disabled>Disabled</button></td>
-			<td><button class="warn">Warn</button></td>
-			<td><button class="danger">Danger</button></td>
-			<td><button class="ghost">Ghost</button></td>
-			<td><button class="link">Link</button></td>
-
-		</div>
-
-		<!-- WITH GLYPHS -->
-		<div class="h-divider">With Glyphs</div>
-		<div container>
-
-			<td><button class=""		data-after="Default"><span class="material-symbols-outlined">save</span></button></td>
-			<td><button class=""		data-before="Default"><span class="material-symbols-outlined">save</span></button></td>
-			<td><button class="" 		data-after="Disabled" disabled><span class="material-symbols-outlined">update</span></button></td>
-			<td><button class="warn"	data-after="Warn"><span class="material-symbols-outlined">update</span></button></td>
-			<td><button class="danger"	data-after="Danger"><span class="material-symbols-outlined">update</span></button></td>
-			<td><button class="ghost"	data-before="Ghost"><span class="material-symbols-outlined">sprint</span></button></td>
-			<td><button class="link"	data-after="Link"><span class="material-symbols-outlined">update</span></button></td>
-
-		</div>
-
-		<!-- SIZES -->
-		<div class="h-divider">Button Sizes</div>
-		<div container>
-
-			<td><button class="xs">Extra Small</button></td>
-			<td><button class="sm">Small</button></td>
-			<td><button class="">Default</button></td>
-
-		</div>
-
-		<!-- GLYPHS -->
-		<div class="h-divider">Glyphs</div>
-		<div container>
-
-			<td><button class="glyph xs"><span class="material-symbols-outlined">update</span></button></td>
-			<td><button class="glyph sm"><span class="material-symbols-outlined">update</span></button></td>
-			<td><button class="glyph"><span class="material-symbols-outlined">update</span></button></td>
-
-		</div>
-
-		<!-- TAG -->
-		<div class="h-divider">Tags (tag)</div>
-		<div container_tags>
-
-			<button class="tag xs">Extra Small</button>
-			<button class="tag sm">Small</button>
-			<button class="tag">Default</button>
-			<button class="tag xs" 	data-before="Extra Small"><span class="material-symbols-outlined">close</span></button>
-			<button class="tag sm"	data-before="Small"><span class="material-symbols-outlined">close</span></button>
-			<button class="tag"		data-before="Default"><span class="material-symbols-outlined">close</span></button>
-
-		</div>
 
 	</div>
 

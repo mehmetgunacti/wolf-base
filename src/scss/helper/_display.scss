@@ -44,3 +44,4 @@
 @mixin mx-d-inline-block				{ display: inline-block; }
 @mixin mx-d-inline-grid					{ display: inline-grid; }
 @mixin mx-d-inline-flex($params...)		{ @include mx-d-flex($display: inline-flex, $params...); }
+@mixin mx-d-inline-flex-center($params...)	{ @include mx-d-inline-flex($align-items: center, $justify-content: center, $params...); }
