@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input, output, signal } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -17,7 +17,7 @@ export class TitleLookupConfigFormComponent {
 	save = output<string>();
 
 	// Form
-	fcUrl = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)] });
+	protected fcUrl = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)] });
 
 	constructor() {
 
