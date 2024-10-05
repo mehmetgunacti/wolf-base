@@ -73,7 +73,7 @@ $_button-properties	: (
 	@include mx-assign-css-vars($_button-properties, $_prefix);
 
 	@include mx-d-inline-flex-center;
-	gap					: $gap-02;
+	gap					: $gap-05;
 	text-align			: center;
 	text-decoration		: none;
 	white-space			: pre;
