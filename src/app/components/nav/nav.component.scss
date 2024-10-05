@@ -20,6 +20,7 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 		& > a {
 
+			--nav-color					: #{fn-var($col-text-secondary)};
 			--nav-label-font-weight		: normal;
 			--nav-left-bg-color			: #{fn-var($col-transparent)};
 			--nav-right-color			: #{fn-var($col-text-secondary)};
@@ -28,6 +29,7 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 			@include mx-d-grid;
 			grid-template-columns		: $_nav-menu-1st-col-width;
 
+			color						: var(--nav-color);
 			border-radius				: $border-radius-lg;
 			text-decoration				: none;
 
@@ -75,6 +77,7 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 			&:not(.active):hover {
 
+				--nav-color				: #{fn-var($col-text)};
 				--nav-left-bg-color		: #{fn-var($col-btn-ghost-color-hover)};
 				--nav-right-color		: #{fn-var($col-text)};
 
@@ -89,6 +92,7 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 			&.active {
 
+				--nav-color				: #{fn-var($col-text)};
 				--nav-label-font-weight	: bold;
 				--nav-left-bg-color		: #{fn-var($col-accent)};
 				--nav-right-color		: #{fn-var($col-text)};
