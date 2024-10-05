@@ -159,7 +159,7 @@
 			@include mx-input-element-border;
 
 			padding-top: $gap;
-			background-color	: fn-var($col-bg-form-element);
+			background-color	: fn-var($col-form-element-bg);
 
 			tab-size			: 4;
 			white-space			: pre;

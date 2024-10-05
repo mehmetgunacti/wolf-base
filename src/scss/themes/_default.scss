@@ -45,8 +45,13 @@
 	#{$col-bg-header}			: hsl(210deg 11% 7%);
 	#{$col-bg-nav}				: hsl(210deg 11% 8%);
 	#{$col-bg-popup}			: hsl(210deg 11% 9%);
-	#{$col-bg-form-element}		: hsl(210deg 11% 20%);
 	#{$col-bg-page}				: hsl(210deg 11% 33%);
+
+	#{$col-form-element-bg}		: hsl(210deg 11% 20%);
+	#{$col-form-element-text}	: fn-var($col-text);;
+	#{$col-form-element-hover}	: fn-color-lighten($col-form-element-bg, 10%);
+	#{$col-form-element-active}	: fn-color-lighten($col-form-element-bg, 15%);
+	#{$col-form-element-border}	: fn-color-darken($col-form-element-bg, 10%);
 
 	#{$col-bg-component}		: hsl(210deg 11% 13%);
 	#{$col-bg-component-hover}	: #{fn-color-darken($col-bg-component, 5%)};

@@ -6,7 +6,7 @@
 
 	& > select > option {
 
-		background-color	: fn-var($col-bg-form-element);
+		background-color	: fn-var($col-form-element-bg);
 		@include mx-input-element-border;
 
 	}

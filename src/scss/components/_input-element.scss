@@ -3,7 +3,7 @@
 	padding				: $gap;
 	color				: fn-var($col-text);
 	border				: 0;
-	background-color	: transparent;
+	background-color	: fn-var($col-transparent);
 	outline				: 0;
 
 	width				: 100%;
@@ -29,18 +29,18 @@
 
 	top					: -1px;
 	font-size			: $font-size-xs;
-	background-color	: fn-color-darken($col-bg-component-dark, 10%);
+	background-color	: fn-var($col-form-element-border);
 	border				: none;
 
 }
 
-@mixin mx-input-element-border {
+@mixin mx-input-element-border($border-color: $col-form-element-border) {
 
 	border-radius			: $border-radius-sm;
 	border-width			: 1px;
 	border-style			: solid;
 
-	border-color			: fn-color-darken($col-bg-form-element, 10%);
+	border-color			: fn-var($border-color);
 
 }
 
@@ -49,7 +49,7 @@
 	position				: relative;
 
 	@include mx-input-element-border;
-	background-color		: fn-var($col-bg-form-element);
+	background-color		: fn-var($col-form-element-bg);
 	min-height				: $widget-height;
 	@include mx-transition(background-color border-color);
 

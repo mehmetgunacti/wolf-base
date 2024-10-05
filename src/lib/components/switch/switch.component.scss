@@ -11,18 +11,27 @@ $_switch-handle			: $widget-height-sm;
 :host {
 
 	--switch-handle-color	: #{fn-var($col-accent)};
-	--switch-bg-color		: #{fn-var($col-bg-form-element)};
+	--switch-bg-color		: #{fn-var($col-form-element-bg)};
 
 	@include mx-d-flex;
 	gap				: $gap-sm;
 	min-height		: $_switch_height;
 	border-radius	: $border-radius-sm;
+
 	cursor			: pointer;
-	@include mx-transition(background-color border-color);
+	@include mx-input-element-border($border-color: $col-transparent);
+	@include mx-transition-short(background-color border-color);
 
 	&:focus-visible {
 
 		@include mx-outline;
+
+	}
+
+	&:hover {
+
+		background-color	: fn-var($col-form-element-bg);
+		border-color		: fn-var($col-form-element-border);
 
 	}
 
@@ -129,7 +138,7 @@ $_switch-handle			: $widget-height-sm;
 	// 	@include mx-d-block;
 	// 	position			: relative;
 
-	// 	background-color	: fn-var($col-bg-form-element);
+	// 	background-color	: fn-var($col-form-element-bg);
 	// 	border-radius		: inherit;
 	// 	font-size			: 10px;
 	// 	height				: inherit;

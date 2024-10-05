@@ -5,8 +5,9 @@
 	#{$col-bg-popup}			: hsl(208deg 25% 53%);
 	#{$col-bg-component}		: hsl(208deg 25% 55%);
 	#{$col-bg-component-dark}	: hsl(208deg 25% 58%);
-	#{$col-bg-form-element}		: hsl(208deg 25% 70%);
 	#{$col-bg-page}				: hsl(208deg 25% 80%);
+
+	#{$col-form-element-bg}		: hsl(208deg 25% 70%);
 
 	#{$col-bg-overlay}			: fn-color-set-alpha($col-black, 0.75);
 	#{$col-shadow}				: fn-var($col-bg-nav);

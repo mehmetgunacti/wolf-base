@@ -4,7 +4,7 @@
 @mixin mx-v-divider {
 
 	@include mx-d-block;
-	border-left	: 1px solid fn-var($col-bg-form-element);
+	border-left	: 1px solid fn-var($col-form-element-bg);
     width		: 0;
     margin		: $gap-sm $gap-xxs;
 	align-self	: stretch;
