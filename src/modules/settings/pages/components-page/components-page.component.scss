@@ -39,6 +39,26 @@
 
 			}
 
+			[container_glyphs] {
+
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+
+				[glyph] {
+
+					@include mx-d-flex-col-ai-center;
+					gap		: $gap-05;
+					padding	: $gap-05;
+					& > span {
+
+						font-size: $font-size-xs;
+
+					}
+
+				}
+
+			}
+
 		}
 
 	}
@@ -46,17 +66,6 @@
 	[update_alert] {
 
 		@include mx-d-flex-ai-c-jc-sb;
-
-	}
-
-	[glyph_button] {
-
-		@include mx-d-flex-col-ai-center;
-		& > span {
-
-			font-size: $font-size-xs;
-
-		}
 
 	}
 
