@@ -1,0 +1,15 @@
+<!-- <svg preserveAspectRatio="xMidYMid meet"><use [attr.href]="href()"/></svg> -->
+@let data = glyphData();
+
+<svg xmlns="http://www.w3.org/2000/svg"
+		[attr.width]="data.width"
+		[attr.height]="data.height"
+		[attr.viewBox]="data.viewBox">
+
+	@for (d of data.d; track $index) {
+
+		<path [attr.d]="d"/>
+
+	}
+
+</svg>

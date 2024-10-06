@@ -11,7 +11,7 @@
 				class="glyph"
 				(click)="onClose(w.definitions[0].id)"
 				title="Close">
-				<span class="material-symbols-outlined">close</span>
+				<w-glyph name="close" />
 			</button>
 
 		</ng-container>
@@ -21,14 +21,14 @@
 		<ng-container card_footer>
 
 			<footer class="footer-buttons">
-				<button type="button" (click)="onEdit(w.definitions[0].id, w.id)" class="link"><span class="material-symbols-outlined">edit</span> Edit</button>
+				<button type="button" (click)="onEdit(w.definitions[0].id, w.id)" class="link"><w-glyph name="edit" /> Edit</button>
 				<a
 					class="button glyph align-left"
 					[href]="'https://www.google.com/search?q=' + w.name"
 					target="_blank">
-					<span class="material-symbols-outlined">search</span> Google <sup><span class="material-symbols-outlined small">open_in_new</span></sup>
+					<w-glyph name="search" /> Google <sup><span class="material-symbols-outlined small">open_in_new</span></sup>
 				</a>
-				<button type="button" (click)="onClose(w.definitions[0].id)"><span class="material-symbols-outlined">check</span> Got It</button>
+				<button type="button" (click)="onClose(w.definitions[0].id)"><w-glyph name="check" /> Got It</button>
 			</footer>
 
 		</ng-container>

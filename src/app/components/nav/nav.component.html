@@ -10,7 +10,7 @@
 			[routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }">
 
 			<div nav_item_left>
-				<span class="material-symbols-outlined">{{item.icon}}</span>
+				<w-glyph name="{{item.icon}}" />
 			</div>
 			<div nav_item_right class="nav-item-right">
 
@@ -33,7 +33,7 @@
 		routerLinkActive="active"
 		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
 		title="Settings">
-		<span class="material-symbols-outlined">settings</span>
+		<w-glyph name="settings" />
 	</button>
 
 	<!-- CLOUD TASKS BUTTON -->
@@ -45,7 +45,7 @@
 			routerLinkActive="active"
 			[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
 			[title]="cloudTasks.length > 0 ? cloudTasks.length + ' syncable items available' : 'Cloud'">
-			<span class="material-symbols-outlined">cloud_sync</span>
+			<w-glyph name="cloud_sync" />
 			@if (cloudTasks.length > 0) {
 				<span class="badge">{{cloudTasks.length}}</span>
 			}
@@ -60,7 +60,7 @@
 		routerLinkActive="active"
 		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
 		title="Database">
-		<span class="material-symbols-outlined">database</span>
+		<w-glyph name="database" />
 	</button>
 
 	<!-- LOGS BUTTON -->
@@ -70,7 +70,7 @@
 		routerLinkActive="active"
 		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
 		title="View Logs">
-		<span class="material-symbols-outlined">history</span>
+		<w-glyph name="history" />
 	</button>
 
 	<!-- SWITCH THEME BUTTON -->
@@ -78,7 +78,7 @@
 		class="glyph"
 		(click)="onSwitchTheme()"
 		title="Switch Theme">
-		<span class="material-symbols-outlined">colors</span>
+		<w-glyph name="colors" />
 	</button>
 
 </div>

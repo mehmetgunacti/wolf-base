@@ -122,7 +122,10 @@ $_button-properties	: (
 	glyph: (
 		"--background-color"	: fn-var($col-transparent),
 		"--border-color"		: fn-var($col-transparent),
-		"border-radius"			: $border-radius-round,
+		"--border-radius"		: $border-radius-round,
+		squared: (
+			"--border-radius"		: $border-radius-sm,
+		),
 		hover: (
 			"--background-color"	: fn-var($col-hover)
 		),
@@ -288,6 +291,10 @@ $_button-properties	: (
 
 		&:active {
 			@include mx-define-css-vars(map-get($_button-properties, glyph, active), $_prefix);
+		}
+
+		&.squared {
+			@include mx-define-css-vars(map-get($_button-properties, glyph, squared), $_prefix);
 		}
 
 	}

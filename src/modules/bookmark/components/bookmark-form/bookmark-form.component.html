@@ -41,8 +41,8 @@
 						[formControl]="fcUrl"
 						[label]="'URL' + (form.urls.controls.length > 1 && $index === 0 ? ' (Primary)' : '')"/>
 						<!-- (inputChanged)="checkUrl($event, fcUrl)"/> -->
-					<button *ngIf="$index === 0" type="button" class="link" title="Add URL" (click)="addURL()"><span class="material-symbols-outlined">add</span></button>
-					<button *ngIf="$index > 0" type="button" class="link" title="Remove URL" (click)="removeURL($index)"><span class="material-symbols-outlined">remove</span></button>
+					<button *ngIf="$index === 0" type="button" class="link" title="Add URL" (click)="addURL()"><w-glyph name="add" /></button>
+					<button *ngIf="$index > 0" type="button" class="link" title="Remove URL" (click)="removeURL($index)"><w-glyph name="remove" /></button>
 				</div>
 
 			}
@@ -50,13 +50,13 @@
 			<!-- NAME -->
 			<div>
 				<w-input [formControl]="form.name" label="Name"/>
-				<button type="button" class="link" title="Parse URL" (click)="nameFromURL()"><span class="material-symbols-outlined">move_down</span></button>
+				<button type="button" class="link" title="Parse URL" (click)="nameFromURL()"><w-glyph name="move_down" /></button>
 			</div>
 
 			<!-- TITLE -->
 			<div>
 				<w-input [formControl]="form.title" label="Title"/>
-				<button type="button" class="link" title="Lookup title" (click)="lookupTitle()"><span class="material-symbols-outlined">search</span></button>
+				<button type="button" class="link" title="Lookup title" (click)="lookupTitle()"><w-glyph name="search" /></button>
 			</div>
 
 			<!-- TAGS -->
@@ -83,12 +83,12 @@
 	@if (bookmark?.id) {
 
 		<button type="button" (click)="onDelete()" class="error">
-			<span class="material-symbols-outlined">delete</span> Delete
+			<w-glyph name="delete" /> Delete
 		</button>
 
 	}
 	<button type="button" (click)="onSave()">
-		<span class="material-symbols-outlined">save</span> Save
+		<w-glyph name="save" /> Save
 	</button>
 
 </div>

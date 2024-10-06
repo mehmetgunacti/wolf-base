@@ -17,7 +17,7 @@
 
 				<span bookmark-name>{{ bm.name }}
 					<sup>
-						<span class="material-symbols-outlined">open_in_new</span>
+						<w-glyph name="open_in_new" />
 					</sup>
 				</span>
 				<span bookmark-title>{{ bm.title }}</span>
@@ -45,6 +45,6 @@
 
 	</div>
 	<a *ngIf="popularButton" href="javascript:void(0)" id="popularButton" title="Toggle 'popular'" (click)="onPopular()"><span class="material-symbols-outlined" [class.filled]="bm.tags.includes('popular')">favorite</span></a>
-	<a *ngIf="editable" href="javascript:void(0)" id="editButton" title="Edit" (click)="onEdit()"><span class="material-symbols-outlined">edit</span></a>
+	<a *ngIf="editable" href="javascript:void(0)" id="editButton" title="Edit" (click)="onEdit()"><w-glyph name="edit" /></a>
 
 </ng-container>

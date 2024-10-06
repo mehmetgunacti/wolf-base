@@ -5,7 +5,7 @@
 		<button
 			class="link"
 			[cdkMenuTriggerFor]="menu">
-			<span class="material-symbols-outlined">menu_open</span>
+			<w-glyph name="menu_open" />
 		</button>
 
 		<ng-template #menu>
@@ -16,7 +16,7 @@
 					cdkMenuItem
 					class="link align-left"
 					[routerLink]="['/learning', learning.id, 'edit' ]">
-					<span class="material-symbols-outlined">edit</span> Edit Learning
+					<w-glyph name="edit" /> Edit Learning
 				</button>
 
 				<hr>
@@ -25,7 +25,7 @@
 					cdkMenuItem
 					class="link align-left"
 					[routerLink]="['/logs', learning.id]">
-					<span class="material-symbols-outlined">history</span> View Logs
+					<w-glyph name="history" /> View Logs
 				</button>
 
 			</div>
@@ -51,7 +51,7 @@
 			<button
 				class="link small"
 				(click)="onOpenNewTaskDialog()">
-				<span class="material-symbols-outlined">add</span>
+				<w-glyph name="add" />
 				Add Task
 			</button>
 		</legend>
@@ -85,11 +85,11 @@
 
 		<div class="empty">
 
-			<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No learning available</span>
+			<span class="empty-message"><w-glyph name="check_circle" />&nbsp;No learning available</span>
 			<button
 				class="link"
 				[routerLink]="['/learning', 'new' ]">
-				<span class="material-symbols-outlined">post_add</span> Add Learning
+				<w-glyph name="post_add" /> Add Learning
 			</button>
 
 		</div>

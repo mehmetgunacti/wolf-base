@@ -1,6 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CloudTask, MenuItem, TAG_PINNED, TAG_POPULAR, Theme, getNextTheme } from '@lib';
 import { Store } from '@ngrx/store';
+import { GlyphComponent } from 'lib/components/glyph/glyph.component';
 import { Observable, map, take } from 'rxjs';
 import { coreActions } from 'store/actions';
 import { selBookmarkMenuBadge } from 'store/selectors/bookmark/bookmark-ui.selectors';
@@ -9,6 +12,8 @@ import { selCore_theme } from 'store/selectors/core/core-ui.selectors';
 
 @Component({
 	selector: 'app-nav',
+	standalone: true,
+	imports: [CommonModule, RouterModule, GlyphComponent],
 	templateUrl: './nav.component.html',
 	styleUrls: ['./nav.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush

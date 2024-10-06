@@ -5,7 +5,7 @@
 		<button
 			class="link"
 			[cdkMenuTriggerFor]="menu">
-			<span class="material-symbols-outlined">menu_open</span>
+			<w-glyph name="menu_open" />
 		</button>
 
 		<ng-template #menu>
@@ -16,7 +16,7 @@
 					cdkMenuItem
 					class="link align-left"
 					[routerLink]="['/words', word.id, 'edit' ]">
-					<span class="material-symbols-outlined">edit</span> Edit Word
+					<w-glyph name="edit" /> Edit Word
 				</button>
 
 				<a
@@ -24,7 +24,7 @@
 					class="button glyph align-left"
 					[href]="'https://www.google.com/search?q=' + word.name"
 					target="_blank">
-					<span class="material-symbols-outlined">search</span> Google <sup><span class="material-symbols-outlined small">open_in_new</span></sup>
+					<w-glyph name="search" /> Google <sup><span class="material-symbols-outlined small">open_in_new</span></sup>
 				</a>
 
 				<hr>
@@ -33,14 +33,14 @@
 					cdkMenuItem
 					class="link align-left"
 					[routerLink]="['/logs', word.id]">
-					<span class="material-symbols-outlined">history</span> View Logs
+					<w-glyph name="history" /> View Logs
 				</button>
 
 				<button
 					cdkMenuItem
 					class="link align-left"
 					(click)="onRemove(word.id)">
-					<span class="material-symbols-outlined">delete</span> Remove Word
+					<w-glyph name="delete" /> Remove Word
 				</button>
 
 			</div>
@@ -61,11 +61,11 @@
 
 		<div class="empty">
 
-			<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No word available</span>
+			<span class="empty-message"><w-glyph name="check_circle" />&nbsp;No word available</span>
 			<button
 				class="link"
 				[routerLink]="['/words', 'new' ]">
-				<span class="material-symbols-outlined">post_add</span> Add Word
+				<w-glyph name="post_add" /> Add Word
 			</button>
 
 		</div>

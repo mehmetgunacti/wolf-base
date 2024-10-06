@@ -8,15 +8,15 @@
 	<footer class="footer-buttons one_two">
 
 		<button type="button" (click)="onReset()">
-			<span class="material-symbols-outlined">clear_all</span> Clear
+			<w-glyph name="clear_all" /> Clear
 		</button>
 
 		<button type="button" class="error" (click)="onDelete(form.controls.id.value)" [disabled]="!form.controls.id.value">
-			<span class="material-symbols-outlined">delete</span> Delete
+			<w-glyph name="delete" /> Delete
 		</button>
 
 		<button type="submit" [disabled]="this.form.pristine || this.form.invalid">
-			<span class="material-symbols-outlined">save</span> {{ isUpdate() ? 'Update' : 'Create'}}
+			<w-glyph name="save" /> {{ isUpdate() ? 'Update' : 'Create'}}
 		</button>
 
 	</footer>

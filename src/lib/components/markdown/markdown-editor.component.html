@@ -8,7 +8,7 @@
 		title="Save Changes"
 		[disabled]="!control.dirty"
 		[cdkMenuItemDisabled]="!control.dirty">
-		<span class="material-symbols-outlined">save</span>
+		<w-glyph name="save" />
 	</button>
 
 	<!-- CANCEL BUTTON -->
@@ -17,7 +17,7 @@
 		class="glyph squared"
 		title="Close Editor"
 		(click)="onCancel(control.dirty)">
-		<span class="material-symbols-outlined">cancel</span>
+		<w-glyph name="cancel" />
 	</button>
 
 	<!-- DIVIDER -->
@@ -29,7 +29,7 @@
 		class="glyph squared"
 		title="Open Preview"
 		(click)="onPreviewOpen()">
-		<span class="material-symbols-outlined">live_tv</span>
+		<w-glyph name="live_tv" />
 	</button>
 
 	<!-- RECOVER BUTTON -->
@@ -39,7 +39,7 @@
 		title="Recover"
 		[class.shake]="btnOpenRecovery()"
 		(click)="onRecoverOpen()">
-		<span class="material-symbols-outlined">device_reset</span>
+		<w-glyph name="history" />
 	</button>
 
 	<!-- DIVIDER -->
@@ -53,7 +53,7 @@
 		title="Undo"
 		[disabled]="!undoCache.canUndo()"
 		[cdkMenuItemDisabled]="!undoCache.canUndo()">
-		<span class="material-symbols-outlined">undo</span>
+		<w-glyph name="undo" />
 	</button>
 
 	<!-- REDO BUTTON -->
@@ -64,7 +64,7 @@
 		title="Redo"
 		[disabled]="!undoCache.canRedo()"
 		[cdkMenuItemDisabled]="!undoCache.canRedo()">
-		<span class="material-symbols-outlined">redo</span>
+		<w-glyph name="redo" />
 	</button>
 
 	<!-- DIVIDER -->
@@ -76,7 +76,7 @@
 		[cdkMenuTriggerFor]="format_heading"
 		title="Heading"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_h1</span>
+		<w-glyph name="format_h1" />
 	</button>
 
 	<!-- DIVIDER -->
@@ -88,7 +88,7 @@
 		(click)="updateEditor(actions.addBold(editor))"
 		title="Bold"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_bold</span>
+		<w-glyph name="format_bold" />
 	</button>
 
 	<!-- ITALIC BUTTON -->
@@ -97,7 +97,7 @@
 		(click)="updateEditor(actions.addItalic(editor))"
 		title="Italic"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_italic</span>
+		<w-glyph name="format_italic" />
 	</button>
 
 	<!-- STRIKETHROUGH BUTTON -->
@@ -106,7 +106,7 @@
 		(click)="updateEditor(actions.addStrikethrough(editor))"
 		title="Strikethrough"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_strikethrough</span>
+		<w-glyph name="format_strikethrough" />
 	</button>
 
 	<!-- HIGHLIGHT BUTTON -->
@@ -115,7 +115,7 @@
 		(click)="updateEditor(actions.addHighlight(editor))"
 		title="Highlight"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_ink_highlighter</span>
+		<w-glyph name="format_ink_highlighter" />
 	</button>
 
 	<!-- DIVIDER -->
@@ -127,7 +127,7 @@
 		(click)="updateEditor(actions.addAlignCenter(editor))"
 		title="Align Center"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_align_center</span>
+		<w-glyph name="format_align_center" />
 	</button>
 
 	<!-- ALIGN RIGHT BUTTON -->
@@ -136,7 +136,7 @@
 		(click)="updateEditor(actions.addAlignRight(editor))"
 		title="Align Right"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_align_right</span>
+		<w-glyph name="format_align_right" />
 	</button>
 
 	<!-- ALIGN JUSTIFY BUTTON -->
@@ -145,7 +145,7 @@
 		(click)="updateEditor(actions.addAlignJustify(editor))"
 		title="Align Justify"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_align_justify</span>
+		<w-glyph name="format_align_justify" />
 	</button>
 
 	<!-- DIVIDER -->
@@ -157,7 +157,7 @@
 		(click)="updateEditor(actions.addSub(editor))"
 		title="Subscript (H2O)"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">subscript</span>
+		<w-glyph name="subscript" />
 	</button>
 
 	<!-- SUP BUTTON -->
@@ -166,7 +166,7 @@
 		(click)="updateEditor(actions.addSup(editor))"
 		title="Superscript (E=mc2)"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">superscript</span>
+		<w-glyph name="superscript" />
 	</button>
 
 	<!-- DIVIDER -->
@@ -178,7 +178,7 @@
 		(click)="updateEditor(actions.addListBulleted(editor))"
 		title="Bulleted List"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_list_bulleted</span>
+		<w-glyph name="format_list_bulleted" />
 	</button>
 
 	<!-- LIST NUMBERED BUTTON -->
@@ -187,7 +187,7 @@
 		(click)="updateEditor(actions.addListNumbered(editor))"
 		title="Numbered List"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_list_numbered</span>
+		<w-glyph name="format_list_numbered" />
 	</button>
 
 	<!-- DIVIDER -->
@@ -199,7 +199,7 @@
 		(click)="updateEditor(actions.decreaseIndent(editor))"
 		title="Decrease Indent"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_indent_decrease</span>
+		<w-glyph name="format_indent_decrease" />
 	</button>
 
 	<!-- INCREASE INDENT BUTTON -->
@@ -208,7 +208,7 @@
 		(click)="updateEditor(actions.increaseIndent(editor))"
 		title="Increase Indent"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_indent_increase</span>
+		<w-glyph name="format_indent_increase" />
 	</button>
 
 	<!-- DIVIDER -->
@@ -220,7 +220,7 @@
 		(click)="updateEditor(actions.addEmptyTask(editor))"
 		title="Task"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">check_box</span>
+		<w-glyph name="check_box" />
 	</button>
 
 	<!-- ADD TABLE BUTTON -->
@@ -229,7 +229,7 @@
 		[cdkMenuTriggerFor]="table_menu"
 		title="Table"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">table</span>
+		<w-glyph name="table" />
 	</button>
 
 	<!-- CODE BUTTON -->
@@ -238,7 +238,7 @@
 		[cdkMenuTriggerFor]="code_menu"
 		title="Code"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">code_blocks</span>
+		<w-glyph name="code_blocks" />
 	</button>
 
 	<!-- ADD BLOCKQUOTE BUTTON -->
@@ -247,7 +247,7 @@
 		[cdkMenuTriggerFor]="blockquote_menu"
 		title="Blockquote"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">format_quote</span>
+		<w-glyph name="format_quote" />
 	</button>
 
 	<!-- DIVIDER -->
@@ -261,7 +261,7 @@
 		title="Image from Clipboard"
 		[class.shake]="btnImageShake()"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">image</span>
+		<w-glyph name="image" />
 	</button>
 
 	<!-- TOC BUTTON -->
@@ -270,7 +270,7 @@
 		(click)="updateEditor(actions.addToc(editor))"
 		title="Table of Contents"
 		cdkMenuItem>
-		<span class="material-symbols-outlined">toc</span>
+		<w-glyph name="toc" />
 	</button>
 
 </div>
@@ -290,11 +290,11 @@
 	<label>{{name}}</label>
 	<label class="up right">
 		<span class="icon-container">
-			<span class="material-symbols-outlined">description</span>
+			<w-glyph name="description" />
 			<span>{{ undoCache.discSize() }}</span>
 		</span>
 		<span class="icon-container">
-			<span class="material-symbols-outlined">memory</span>
+			<w-glyph name="memory" />
 			<span>{{ undoCache.memSize() }}</span>
 		</span>
 	</label>
@@ -313,7 +313,7 @@
 					<button
 						class="glyph"
 						(click)="onPreviewClose()">
-						<span class="material-symbols-outlined">close</span>
+						<w-glyph name="close" />
 					</button>
 
 				</div>
@@ -344,7 +344,7 @@
 						[disabled]="!recoveryManager.hasPrev()"
 						[cdkMenuItemDisabled]="!recoveryManager.hasPrev()"
 						(click)="recoveryManager.previous()">
-						<span class="material-symbols-outlined">navigate_before</span>
+						<w-glyph name="chevron_left" />
 					</button>
 					<button
 						cdkMenuItem
@@ -352,20 +352,20 @@
 						[disabled]="!recoveryManager.hasNext()"
 						[cdkMenuItemDisabled]="!recoveryManager.hasNext()"
 						(click)="recoveryManager.next()">
-						<span class="material-symbols-outlined">navigate_next</span>
+						<w-glyph name="chevron_right" />
 					</button>
 					<button
 						cdkMenuItem
 						class="ghost"
 						(click)="onRecoverReplace()">
-						<span class="material-symbols-outlined">published_with_changes</span>
+						<w-glyph name="published_with_changes" />
 						<span>Replace</span>
 					</button>
 					<button
 						cdkMenuItem
 						class="glyph"
 						(click)="onRecoverClose()">
-						<span class="material-symbols-outlined">close</span>
+						<w-glyph name="close" />
 					</button>
 
 				</div>
@@ -511,7 +511,7 @@
 			<fieldset>
 				<!-- INLINE CODE BUTTON -->
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addInlineCode(editor))" cdkMenuItem data-after="Inline Code">
-					<span class="material-symbols-outlined small">code</span>
+					<w-glyph name="code" />
 				</button>
 			</fieldset>
 
@@ -520,31 +520,31 @@
 				<legend>Frequent</legend>
 
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor))" cdkMenuItem data-after="Empty Block">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'java'))" cdkMenuItem data-after="java">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'typescript'))" cdkMenuItem data-after="typescript">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'javascript'))" cdkMenuItem data-after="javascript">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'scss'))" cdkMenuItem data-after="scss">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'bash'))" cdkMenuItem data-after="bash">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'sql'))" cdkMenuItem data-after="sql">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'xml'))" cdkMenuItem data-after="xml">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'yaml'))" cdkMenuItem data-after="yaml">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 
 			</fieldset>
@@ -553,49 +553,49 @@
 				<legend>Other</legend>
 
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'asciidoc'))" cdkMenuItem data-after="asciidoc">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'autohotkey'))" cdkMenuItem data-after="autohotkey">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'c'))" cdkMenuItem data-after="c">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'cpp'))" cdkMenuItem data-after="cpp">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'css'))" cdkMenuItem data-after="css">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'dockerfile'))" cdkMenuItem data-after="dockerfile">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'gradle'))" cdkMenuItem data-after="gradle">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'http'))" cdkMenuItem data-after="http">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'ini'))" cdkMenuItem data-after="ini">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'json'))" cdkMenuItem data-after="json">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'kotlin'))" cdkMenuItem data-after="kotlin">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'markdown'))" cdkMenuItem data-after="markdown">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'powershell'))" cdkMenuItem data-after="powershell">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'properties'))" cdkMenuItem data-after="properties">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'python'))" cdkMenuItem data-after="python">
-					<span class="material-symbols-outlined small">chevron_right</span>
+					<w-glyph name="chevron_right" />
 				</button>
 
 			</fieldset>

@@ -19,11 +19,14 @@ import { NavOverlayComponent } from './components/nav-overlay/nav-overlay.compon
 import { NavComponent } from './components/nav/nav.component';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 
+const standaloneComponents = [
+	NavComponent,
+	HeaderComponent
+];
+
 @NgModule({
 	declarations: [
 		AppComponent,
-		HeaderComponent,
-		NavComponent,
 		NavOverlayComponent,
 		MenuComponent,
 		SplashScreenComponent
@@ -44,7 +47,8 @@ import { SplashScreenComponent } from './components/splash-screen/splash-screen.
 		}),
 		ScrollingModule,
 		NgProgressModule.withConfig({ thick: false, color: 'red', spinner: false }),
-		NgProgressHttpModule
+		NgProgressHttpModule,
+		...standaloneComponents
 	],
 	providers: [
 		provideHttpClient(withInterceptorsFromDi()),

@@ -4,7 +4,7 @@
 	<legend>Buttons</legend>
 	<legend>
 		<button class="glyph" (click)="buttonsVisible.set(!buttonsVisible())">
-			<span [class.rotated]="buttonsVisible()" class="material-symbols-outlined">add</span>
+			<w-glyph [class.rotated]="buttonsVisible()" name="add"/>
 		</button>
 	</legend>
 
@@ -39,7 +39,7 @@
 		<div class="h-divider">Glyphs</div>
 		<div container style="display: 70px;">
 
-			<td><button class=""><w-glyph name="keep" />Default</button></td>
+			<td><button class=""><w-glyph name="save" />Save</button></td>
 			<td><button class="ghost">Ghost<w-glyph name="sprint" /></button></td>
 			<td><button class="link"><w-glyph name="add_circle" />Link</button></td>
 			<td><button class="glyph"><w-glyph name="add_task" /></button></td>
@@ -54,9 +54,9 @@
 			<button class="tag xs">Extra Small</button>
 			<button class="tag sm">Small</button>
 			<button class="tag">Default</button>
-			<button class="tag xs" 	data-before="Extra Small"><span class="material-symbols-outlined">close</span></button>
-			<button class="tag sm"	data-before="Small"><span class="material-symbols-outlined">close</span></button>
-			<button class="tag"		data-before="Default"><span class="material-symbols-outlined">close</span></button>
+			<button class="tag xs" 	data-before="Extra Small"><w-glyph name="close" /></button>
+			<button class="tag sm"	data-before="Small"><w-glyph name="close" /></button>
+			<button class="tag"		data-before="Default"><w-glyph name="close" /></button>
 
 		</div>
 
@@ -70,7 +70,7 @@
 	<legend>Forms</legend>
 	<legend>
 		<button class="glyph" (click)="formsVisible.set(!formsVisible())">
-			<span [class.rotated]="formsVisible()" class="material-symbols-outlined">add</span>
+			<w-glyph [class.rotated]="formsVisible()" name="add"/>
 		</button>
 	</legend>
 
@@ -106,20 +106,20 @@
 	<legend>Glyphs</legend>
 	<legend>
 		<button class="glyph" (click)="glyphsVisible.set(!glyphsVisible())">
-			<span [class.rotated]="glyphsVisible()" class="material-symbols-outlined">add</span>
+			<w-glyph [class.rotated]="glyphsVisible()" name="add"/>
 		</button>
 	</legend>
 
 	<div content [@slideUpDown]="glyphsVisible() ? 'opened' : 'closed'">
 
-		<div class="h-divider">{{glyphList().length}} Glyphs</div>
+		<div class="h-divider">{{glyphNames().length}} Glyphs</div>
 		<div container container_glyphs>
 
-			@for (glyph of glyphList(); track $index) {
+			@for (name of glyphNames(); track $index) {
 
 				<td glyph>
-					<w-glyph [name]="glyph"/>
-					<span>{{glyph}}</span>
+					<w-glyph [name]="name"/>
+					<span>{{name}}</span>
 				</td>
 			}
 
@@ -135,7 +135,7 @@
 	<legend>Alerts</legend>
 	<legend>
 		<button class="glyph" (click)="alertsVisible.set(!alertsVisible())">
-			<span [class.rotated]="alertsVisible()" class="material-symbols-outlined">add</span>
+			<w-glyph [class.rotated]="alertsVisible()" name="add"/>
 		</button>
 	</legend>
 

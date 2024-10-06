@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AutofocusDirective, FormatBytesPipe, InputModule, NoDataPipe, PortalComponent, SanitizeHtmlModule, SelectedTagsComponent, TimePastModule, ToastComponent, ToastWrapperComponent } from '@lib';
-import { GlyphComponent } from 'lib/components/glyph.component';
+import { GlyphComponent } from 'lib/components/glyph/glyph.component';
 import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 import { SelectModule } from 'lib/components/select/select.module';
 import { SwitchComponent } from 'lib/components/switch/switch.component';

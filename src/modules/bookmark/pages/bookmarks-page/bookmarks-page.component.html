@@ -5,13 +5,13 @@
 		(click)="fromClipboard()"
 		[class.shake]="isShaking$ | async"
 		title="Create from copied URL">
-		<span class="material-symbols-outlined">content_paste</span> Clipboard
+		<w-glyph name="content_paste" /> Clipboard
 	</button>
 
 	<button
 		class="link"
 		(click)="openAddDialog()">
-		<span class="material-symbols-outlined">bookmark_add</span> Bookmark
+		<w-glyph name="bookmark_add" /> Bookmark
 	</button>
 
 	<button (click)="open()">Open</button>

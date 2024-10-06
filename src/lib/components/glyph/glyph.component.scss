@@ -1,0 +1,38 @@
+@import 'variables';
+@import 'helper';
+
+:host {
+
+	--rotate: rotate(0);
+	display	: grid;
+	@include mx-transition-short(color background-color font-size);
+
+	&.rotated {
+
+		--rotate : rotate(-45deg);
+
+	}
+
+	&.bold > svg {
+
+		stroke			: currentcolor;
+		// stroke-width	: 1.5;
+
+	}
+
+	&.big > svg {
+
+		font-size	: 1.5em;
+
+	}
+
+	& > svg {
+
+		height		: 1.1em;
+		width		: auto;
+		transform	: var(--rotate);
+		@include mx-transition-short(color background-color transform font-size);
+
+	}
+
+}

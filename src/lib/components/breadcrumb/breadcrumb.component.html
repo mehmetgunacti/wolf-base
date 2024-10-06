@@ -4,13 +4,13 @@
 		type="button"
 		class="glyph"
 		(click)="onClick(home())">
-		<span class="material-symbols-outlined">home</span>
+		<w-glyph name="home" />
 	</button>
 
 	@for (item of items(); track $index) {
 
 		<li (click)="onClick(item.url)" class="d-flex ai-c cur-pointer">
-			<span class="material-symbols-outlined">chevron_right</span>
+			<w-glyph name="chevron_right" />
 			<span>{{ item.label }}</span>
 		</li>
 

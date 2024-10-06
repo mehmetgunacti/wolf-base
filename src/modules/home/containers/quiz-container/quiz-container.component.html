@@ -25,7 +25,7 @@
 			<!---------->
 			<div quiz_icon class="badge-container d-flex">
 
-				<span class="material-symbols-outlined">quiz</span>
+				<w-glyph name="quiz" />
 				@if (dueItemsCount(); as count) {
 
 					<span class="badge small">{{count}}</span>
@@ -65,7 +65,7 @@
 					class="link small"
 					(click)="showAnswer(quiz.words[0])"
 					title="Show Answer">
-					<span class="material-symbols-outlined">contact_support</span>
+					<w-glyph name="contact_support" />
 				</button>
 
 				<button
@@ -73,7 +73,7 @@
 					(click)="increaseVisibility()"
 					[title]="btnTitle()"
 					[@upsideDown]="visibility() === QuizVisibility.CHOICES">
-					<span class="material-symbols-outlined">stat_minus_2</span>
+					<w-glyph name="stat_minus_2" />
 				</button>
 
 			</div>
@@ -156,7 +156,7 @@
 	<div class="box dark shadow d-flex">
 
 		<div class="d-flex">
-			<span class="material-symbols-outlined">quiz</span>
+			<w-glyph name="quiz" />
 		</div>
 		<div class="d-flex-center gap-sm flex-1">
 			Quiz

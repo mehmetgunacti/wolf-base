@@ -5,7 +5,7 @@
 		<button
 			class="link"
 			[cdkMenuTriggerFor]="menu">
-			<span class="material-symbols-outlined">menu_open</span>
+			<w-glyph name="menu_open" />
 		</button>
 
 		<ng-template #menu>
@@ -16,7 +16,7 @@
 					cdkMenuItem
 					class="link align-left"
 					[routerLink]="['/notes', note.id, 'new' ]">
-					<span class="material-symbols-outlined">post_add</span> Child Note
+					<w-glyph name="post_add" /> Child Note
 				</button>
 
 				<hr>
@@ -25,14 +25,14 @@
 					cdkMenuItem
 					class="link align-left"
 					[routerLink]="['/notes', note.id, 'edit' ]">
-					<span class="material-symbols-outlined">edit</span> Edit Note
+					<w-glyph name="edit" /> Edit Note
 				</button>
 
 				<button
 					cdkMenuItem
 					class="link align-left"
 					[routerLink]="['/notes', note.id, 'content', 'edit' ]">
-					<span class="material-symbols-outlined">edit_note</span> {{ (content$ | async) ? 'Edit' : 'Add '}} Content
+					<w-glyph name="edit_note" /> {{ (content$ | async) ? 'Edit' : 'Add '}} Content
 				</button>
 
 				<hr>
@@ -41,14 +41,14 @@
 					cdkMenuItem
 					class="link align-left"
 					[routerLink]="['/logs', note.id]">
-					<span class="material-symbols-outlined">history</span> View Logs
+					<w-glyph name="history" /> View Logs
 				</button>
 
 				<button
 					cdkMenuItem
 					class="link align-left"
 					(click)="onRemove(note.id)">
-					<span class="material-symbols-outlined">delete</span> Remove Note
+					<w-glyph name="delete" /> Remove Note
 				</button>
 
 			</div>
@@ -74,11 +74,11 @@
 
 		<div class="empty">
 
-			<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No note available</span>
+			<span class="empty-message"><w-glyph name="check_circle" />&nbsp;No note available</span>
 			<button
 				class="link"
 				[routerLink]="['/notes', 'new' ]">
-				<span class="material-symbols-outlined">post_add</span> Add Note
+				<w-glyph name="post_add" /> Add Note
 			</button>
 
 		</div>

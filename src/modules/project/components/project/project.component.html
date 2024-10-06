@@ -4,7 +4,7 @@
 
 		<a	class="d-flex ai-c p-xs gap-xxs transition-bg"
 			[routerLink]="['/projects']" tabindex="0">
-			<span class="material-symbols-outlined">task_alt</span>
+			<w-glyph name="task_alt" />
 			<span>Projects</span>
 		</a>
 
@@ -17,7 +17,7 @@
 				class="link"
 				(click)="onToggleInfo()"
 				title="Toggle Info Panel">
-				<span class="material-symbols-outlined">info</span>
+				<w-glyph name="info" />
 			</button>
 
 		</div>
@@ -77,11 +77,11 @@
 
 		<div class="empty">
 
-			<span class="empty-message"><span class="material-symbols-outlined">check_circle</span>&nbsp;No project available</span>
+			<span class="empty-message"><w-glyph name="check_circle" />&nbsp;No project available</span>
 			<button
 				class="link"
 				[routerLink]="['/projects', 'new' ]">
-				<span class="material-symbols-outlined">add_task</span> Add Project
+				<w-glyph name="add_task" /> Add Project
 			</button>
 
 		</div>

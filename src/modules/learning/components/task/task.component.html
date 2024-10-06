@@ -11,9 +11,9 @@
 		(click)="onToggleTask(t.id)"
 		tabindex="0">
 
-		<small [class]="t.status"><span class="material-symbols-outlined">manufacturing</span> {{ TASK_STATE[t.status] }}</small>
-		<small [class]="t.priority"><span class="material-symbols-outlined">swap_vert</span> {{ TASK_PRIORITIES[t.priority] }}</small>
-		<small><span class="material-symbols-outlined">category</span> {{ TASK_CATEGORIES[t.category] }}</small>
+		<small [class]="t.status"><w-glyph name="manufacturing" /> {{ TASK_STATE[t.status] }}</small>
+		<small [class]="t.priority"><w-glyph name="swap_vert" /> {{ TASK_PRIORITIES[t.priority] }}</small>
+		<small><w-glyph name="category" /> {{ TASK_CATEGORIES[t.category] }}</small>
 		<span>{{ t.name }}</span>
 		<!-- TAGS -->
 		<div task_tags class="d-flex wrap gap-xs">
@@ -55,7 +55,7 @@
 		<button
 			class="link small"
 			(click)="onEditTask(t.id)">
-			<span class="material-symbols-outlined">edit</span>
+			<w-glyph name="edit" />
 			Edit Task
 		</button>
 

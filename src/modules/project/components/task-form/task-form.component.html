@@ -7,7 +7,7 @@
 			class="glyph"
 			(click)="onClose()"
 			title="Close">
-			<span class="material-symbols-outlined">close</span>
+			<w-glyph name="close" />
 		</button>
 
 	</ng-container>
@@ -80,10 +80,10 @@
 
 			@if (task(); as t) {
 
-				<button type="button" (click)="onCancel(t.id)" class="link"><span class="material-symbols-outlined">cancel</span> Cancel</button>
+				<button type="button" (click)="onCancel(t.id)" class="link"><w-glyph name="cancel" /> Cancel</button>
 
 			}
-			<button type="button" (click)="onSave()"><span class="material-symbols-outlined">save</span> Save</button>
+			<button type="button" (click)="onSave()"><w-glyph name="save" /> Save</button>
 
 		</div>
 
