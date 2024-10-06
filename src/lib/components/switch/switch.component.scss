@@ -3,22 +3,29 @@
 @import 'helper';
 @import 'components';
 
-$_switch_height			: $widget-height;
-$_switch-widget-width	: 1.1 * $_switch_height;
-$_switch-widget-height	: $widget-height-xs;
-$_switch-handle			: $widget-height-sm;
+$_switch_component_height	: $widget-height;
+$_switch-handle-width		: 0.9 * $_switch_component_height;
+$_switch-handle-height		: 0.4 * $_switch_component_height;
+$_switch-knob-height		: 0.6 * $_switch_component_height;
+
+$_switch-knob-color		: --_switch-knob-color;
+$_switch-bg-color		: --_switch-bg-color;
+$_switch-border-color	: --_switch-border-colors;
+$_component-bg-color	: --_component-bg-color;
 
 :host {
 
-	--switch-handle-color	: #{fn-var($col-accent)};
-	--switch-bg-color		: #{fn-var($col-form-element-bg)};
+	#{$_switch-knob-color}	: fn-var($col-primary);
+	#{$_switch-bg-color}	: fn-var($col-form-element-bg);
+	#{$_component-bg-color}	: fn-var($col-transparent);
 
-	@include mx-d-flex;
+	@include mx-d-inline-flex;
 	gap				: $gap-sm;
-	min-height		: $_switch_height;
+	min-height		: $_switch_component_height;
 	border-radius	: $border-radius-sm;
 
 	cursor			: pointer;
+	background-color: fn-var($_component-bg-color);
 	@include mx-input-element-border($border-color: $col-transparent);
 	@include mx-transition-short(background-color border-color);
 
@@ -30,8 +37,8 @@ $_switch-handle			: $widget-height-sm;
 
 	&:hover {
 
-		background-color	: fn-var($col-form-element-bg);
-		border-color		: fn-var($col-form-element-border);
+		#{$_component-bg-color}	: fn-var($col-form-element-bg);
+		#{$_switch-bg-color}	: fn-var($col-form-element-border);
 
 	}
 
@@ -49,21 +56,21 @@ $_switch-handle			: $widget-height-sm;
 		@include mx-d-block;
 
 		margin-inline	: $gap-lg;
-		width			: $_switch-widget-width;
+		width			: $_switch-handle-width;
 
 		&::before {
 
-			content				: "";
-			position			: absolute;
-			display				: block;
-			top					: math.div(($_switch_height - $_switch-widget-height), 2);
-			left				: 0;
+			content		: "";
+			position	: absolute;
+			display		: block;
+			top			: math.div(($_switch_component_height - $_switch-handle-height), 2);
+			left		: 0;
 
-			width			: $_switch-widget-width;
-			height			: $_switch-widget-height;
+			width		: $_switch-handle-width;
+			height		: $_switch-handle-height;
 
-			background-color	: var(--switch-bg-color);
 			border-radius		: $border-radius-round;
+			background-color	: fn-var($_switch-bg-color);
 
 			@include mx-transition(background-color);
 
@@ -74,11 +81,11 @@ $_switch-handle			: $widget-height-sm;
 			content				: "";
 			position			: absolute;
 			display				: block;
-			top					: math.div(($_switch_height - $_switch-handle), 2);
-			left				: - math.div($_switch-handle, 3);
-			background-color	: var(--switch-handle-color);
-			width				: $_switch-handle;
-			height				: $_switch-handle;
+			top					: math.div(($_switch_component_height - $_switch-knob-height), 2);
+			left				: - math.div($_switch-knob-height, 3);
+			background-color	: fn-var($_switch-knob-color);
+			width				: $_switch-knob-height;
+			height				: $_switch-knob-height;
 			border-radius		: $border-radius-round;
 
 			@include mx-transition-short(left);
@@ -87,137 +94,39 @@ $_switch-handle			: $widget-height-sm;
 
 		&[data-on="true"]::before {
 
-			--switch-bg-color	: #{fn-color-lighten($col-accent, 20%)};
+			#{$_switch-bg-color}	: fn-color-lighten($_switch-knob-color, 20%);
 
 		}
 
 		&[data-on="true"]::after {
 
-			left	: $_switch-widget-width - 2 * math.div($_switch-handle, 3);
+			left	: $_switch-handle-width - 2 * math.div($_switch-knob-height, 3);
 
 		}
 
 	}
 
-	// position			: relative;
-
-	// min-height			: $widget-height;
-	// border-radius		: 18px;
-	// height				: 20px;
-	// width				: 56px;
-	// padding				: $gap;
-	// vertical-align		: top;
-	// cursor				: pointer;
-
-	// & > [switch_input] {
-
-	// 	position	: absolute;
-	// 	appearance	: none;
-	// 	top			: 6px;
-	// 	left		: 8px;
-	// 	right		: 8px;
-
-	// 	&:focus-visible {
-
-	// 		outline			: 2px solid fn-var($col-focus);
-	// 		outline-offset	: 7px;
-
-	// 	}
-
-	// 	&:focus {
-
-	// 		// outline : none; <-- don't
-	// 		outline-color	: transparent;
-
-	// 	}
-
-	// }
-
-	// & > [switch_label] {
-
-	// 	@include mx-d-block;
-	// 	position			: relative;
-
-	// 	background-color	: fn-var($col-form-element-bg);
-	// 	border-radius		: inherit;
-	// 	font-size			: 10px;
-	// 	height				: inherit;
-	// 	text-transform		: uppercase;
-	// 	@include mx-transition(background-color);
-
-	// }
-
-	// & > [switch_input]:checked~[switch_label] {
-
-	// 	background		: var(--switch-bg-color) none repeat scroll 0 0;
-
-	// }
-
-	// & > [switch_handle] {
-
-	// 	position			: absolute;
-	// 	background-color	: var(--switch-handle-color);
-	// 	border-radius		: 20px;
-	// 	height				: 26px;
-	// 	width				: 26px;
-	// 	left				: 0px;
-	// 	top					: 0px;
-	// 	@include mx-transition(left);
-
-	// 	&::before {
-
-	// 		background-color	: transparent;
-	// 		border-radius		: 6px;
-	// 		content				: "";
-	// 		height				: 12px;
-	// 		left				: 50%;
-	// 		margin				: -6px 0 0 -6px;
-	// 		position			: absolute;
-	// 		top					: 50%;
-	// 		width				: 12px;
-
-	// 	}
-
-	// }
-
-	// & > [switch_input]:checked~[switch_handle] {
-
-	// 	left: 30px;
-
-	// }
-
-	&.primary {
-
-		--switch-handle-color	: #{fn-var($col-primary)};
-		--switch-bg-color		: #{fn-color-lighten($col-primary, 20%)};
-
-	}
-
 	&.success {
 
-		--switch-handle-color	: #{fn-var($col-success)};
-		--switch-bg-color		: #{fn-color-lighten($col-success, 20%)};
+		#{$_switch-knob-color}	: fn-var($col-success);
 
 	}
 
 	&.info {
 
-		--switch-handle-color	: #{fn-var($col-info)};
-		--switch-bg-color		: #{fn-color-lighten($col-info, 20%)};
+		#{$_switch-knob-color}	: fn-var($col-info);
 
 	}
 
 	&.warn {
 
-		--switch-handle-color	: #{fn-var($col-warn)};
-		--switch-bg-color		: #{fn-color-lighten($col-warn, 20%)};
+		#{$_switch-knob-color}	: fn-var($col-warn);
 
 	}
 
 	&.error {
 
-		--switch-handle-color	: #{fn-var($col-error)};
-		--switch-bg-color		: #{fn-color-lighten($col-error, 20%)};
+		#{$_switch-knob-color}	: fn-var($col-error);
 
 	}
 

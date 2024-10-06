@@ -1,5 +1,40 @@
 <fieldset>
 
+	<legend>Forms</legend>
+	<legend>
+		<button class="glyph" (click)="formsVisible.set(!formsVisible())">
+			<span [class.rotated]="formsVisible()" class="material-symbols-outlined">add</span>
+		</button>
+	</legend>
+
+	<div content [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
+
+		<form [formGroup]="form">
+			<w-input label="Text" formControlName="text"/>
+			<w-input-tag
+					formControlName="tags"
+					label="Tags"
+					class="input-element"
+					(tagInput)="onTagInput($event)"
+					[suggestions]="tagSuggestions()"/>
+			<w-textarea formControlName="area" label="Quote" [rows]="3" />
+			<w-select formControlName="status" label="Status" [nodes]="PROJECT_STATUS"/>
+			<td content_switch_components>
+				<w-switch label="Schedule" [value]="true"/>
+				<w-switch [value]="true" class="success"/>
+				<w-switch [value]="true" class="info"/>
+				<w-switch [value]="true" class="warn"/>
+				<w-switch [value]="true" class="error"/>
+			</td>
+			<w-markdown-editor [control]="editor()" name="Editor"/>
+		</form>
+
+	</div>
+
+</fieldset>
+
+<fieldset>
+
 	<legend>Buttons</legend>
 	<legend>
 		<button class="glyph" (click)="buttonsVisible.set(!buttonsVisible())">
@@ -103,35 +138,6 @@
 		<w-toast [conf]="{ severity: 'info', summary: 'Update available', detail: 'Press button to start' }"/>
 		<w-toast [conf]="{ severity: 'warn', summary: 'Update available', detail: 'Press button to start' }"/>
 		<w-toast [conf]="{ severity: 'error', summary: 'Update available', detail: 'Press button to start' }"/>
-
-	</div>
-
-</fieldset>
-
-<fieldset>
-
-	<legend>Forms</legend>
-	<legend>
-		<button class="glyph" (click)="formsVisible.set(!formsVisible())">
-			<span [class.rotated]="formsVisible()" class="material-symbols-outlined">add</span>
-		</button>
-	</legend>
-
-	<div content [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
-
-		<form [formGroup]="form">
-			<w-input label="Text" formControlName="text"/>
-			<w-input-tag
-					formControlName="tags"
-					label="Tags"
-					class="input-element"
-					(tagInput)="onTagInput($event)"
-					[suggestions]="tagSuggestions()"/>
-			<w-textarea formControlName="area" label="Quote" [rows]="3" />
-			<w-select formControlName="status" label="Status" [nodes]="PROJECT_STATUS"/>
-			<w-switch label="Schedule" [value]="true"/>
-			<w-markdown-editor [control]="editor()" name="Editor"/>
-		</form>
 
 	</div>
 

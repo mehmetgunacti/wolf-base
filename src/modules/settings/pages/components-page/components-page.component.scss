@@ -58,6 +58,15 @@
 				}
 
 			}
+			[content_switch_components] {
+
+				@include mx-d-flex-ai-center;
+				& > :first-child {
+					flex: 1;
+				}
+
+
+			}
 
 		}
 
