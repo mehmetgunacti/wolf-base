@@ -7,15 +7,19 @@
 	#{$col-text}				: hsl(210deg 15% 92%);
 	#{$col-text-secondary}		: hsl(0deg 0% 50%);
 
+	#{$col-hover}				: fn-color-lighten($col-white, 10%, 0.1);
+	#{$col-active}				: fn-color-lighten($col-white, 10%, 0.2);
+
 	#{$col-accent}				: hsl(200deg 85% 34%);
 	#{$col-focus}				: hsl(27deg 99% 54%);
+
 	#{$col-outline}				: fn-color-set-alpha($col-focus, 0.4);
 
 	// VARIANTS
 	#{$col-primary}				: hsl(215deg 65% 30%);
 	#{$col-primary-text}		: fn-var($col-text);
-	#{$col-primary-hover}		: fn-color-lighten($col-primary, 10%);
-	#{$col-primary-active}		: fn-color-lighten($col-primary, 15%);
+	#{$col-primary-hover}		: fn-color-lighten($col-primary, 15%);
+	#{$col-primary-active}		: fn-color-lighten($col-primary, 25%);
 	#{$col-primary-border}		: fn-color-darken($col-primary, 10%);
 
 	#{$col-success}				: hsl(132deg 52% 22%);
@@ -69,52 +73,53 @@
 	#{$shadow-nav}				: fn-color-set-alpha($col-black, 0.5) 5px -2px 6px -2px, fn-color-set-alpha($col-black, 0.5) 8px -2px 18px -2px;
 	#{$shadow-invisible}		: fn-var($col-transparent) 5px -2px 6px -2px, fn-var($col-transparent) 8px -2px 18px -2px;
 
-	#{$col-disabled}			: hsl(210deg 9% 32%);
+	#{$col-disabled-text}		: hsl(216deg 2% 37%);
+	#{$col-disabled}			: hsl(216deg 8% 15%);
 
 	#{$col-scrollbar-thumb}		: fn-color-set-alpha($col-bg-component-dark, 0.7);
 	#{$col-scrollbar-track}		: fn-var($col-transparent);
 
-	#{$col-btn-default-text}			: fn-var($col-text);
-	#{$col-btn-default-color}			: fn-var($col-primary);
-	#{$col-btn-default-color-hover}		: fn-color-lighten($col-btn-default-color, 10%);
-	#{$col-btn-default-color-active}	: fn-color-lighten($col-btn-default-color, 25%);
-	#{$col-btn-default-border}			: fn-color-darken($col-btn-default-color, 10%);
+	// #{$col-btn-default-text}			: fn-var($col-text);
+	// #{$col-btn-default-color}			: fn-var($col-primary);
+	// #{$col-btn-default-color-hover}		: fn-color-lighten($col-btn-default-color, 15%);
+	// #{$col-btn-default-color-active}	: fn-color-lighten($col-btn-default-color, 25%);
+	// #{$col-btn-default-border}			: fn-color-darken($col-btn-default-color, 10%);
 
-	#{$col-btn-disabled-text}			: fn-color-darken($col-text-secondary, 0%);
-	#{$col-btn-disabled-color}			: fn-color-lighten($col-bg-component, 50%, 0.6);
-	#{$col-btn-disabled-color-hover}	: fn-color-lighten($col-btn-disabled-color, 10%);
-	#{$col-btn-disabled-color-active}	: fn-color-lighten($col-btn-disabled-color, 15%);
-	#{$col-btn-disabled-border}			: fn-color-darken($col-btn-disabled-color, 10%);
+	// #{$col-btn-disabled-text}			: fn-var($col-disabled-text);
+	// #{$col-btn-disabled-color}			: fn-var($col-disabled);
+	// #{$col-btn-disabled-color-hover}	: fn-color-lighten($col-btn-disabled-color, 15%);
+	// #{$col-btn-disabled-color-active}	: fn-color-lighten($col-btn-disabled-color, 15%);
+	// #{$col-btn-disabled-border}			: fn-color-darken($col-btn-disabled-color, 10%);
 
-	#{$col-btn-link-text}				: fn-var($col-text);
-	#{$col-btn-link-color}				: transparent;
-	#{$col-btn-link-color-hover}		: fn-color-lighten($col-focus, 10%);
-	#{$col-btn-link-color-active}		: fn-color-lighten($col-focus, 15%);
-	#{$col-btn-link-border}				: transparent;
+	// #{$col-btn-link-text}				: fn-var($col-text);
+	// #{$col-btn-link-color}				: transparent;
+	// #{$col-btn-link-color-hover}		: fn-color-lighten($col-focus, 10%);
+	// #{$col-btn-link-color-active}		: fn-color-lighten($col-focus, 15%);
+	// #{$col-btn-link-border}				: transparent;
 
-	#{$col-btn-glyph-text}				: fn-var($col-text);
-	#{$col-btn-glyph-color}				: transparent;
-	#{$col-btn-glyph-color-hover}		: fn-color-lighten($col-white, 10%, 0.1);
-	#{$col-btn-glyph-color-active}		: fn-color-lighten($col-white, 15%, 0.2);
-	#{$col-btn-glyph-border}			: transparent;
+	// #{$col-btn-glyph-text}				: fn-var($col-text);
+	// #{$col-btn-glyph-color}				: transparent;
+	// #{$col-btn-glyph-color-hover}		: fn-color-lighten($col-white, 10%, 0.1);
+	// #{$col-btn-glyph-color-active}		: fn-color-lighten($col-white, 15%, 0.2);
+	// #{$col-btn-glyph-border}			: transparent;
 
-	#{$col-btn-warn-text}				: fn-var($col-text);
-	#{$col-btn-warn-color}				: fn-var($col-warn);
-	#{$col-btn-warn-color-hover}		: fn-color-lighten($col-btn-warn-color, 10%);
-	#{$col-btn-warn-color-active}		: fn-color-lighten($col-btn-warn-color, 25%);
-	#{$col-btn-warn-border}				: fn-color-darken($col-btn-warn-color, 10%);
+	// #{$col-btn-warn-text}				: fn-var($col-text);
+	// #{$col-btn-warn-color}				: fn-var($col-warn);
+	// #{$col-btn-warn-color-hover}		: fn-color-lighten($col-btn-warn-color, 10%);
+	// #{$col-btn-warn-color-active}		: fn-color-lighten($col-btn-warn-color, 25%);
+	// #{$col-btn-warn-border}				: fn-color-darken($col-btn-warn-color, 10%);
 
-	#{$col-btn-danger-text}				: fn-var($col-text);
-	#{$col-btn-danger-color}			: fn-var($col-error);
-	#{$col-btn-danger-color-hover}		: fn-color-lighten($col-btn-danger-color, 10%);
-	#{$col-btn-danger-color-active}		: fn-color-lighten($col-btn-danger-color, 25%);
-	#{$col-btn-danger-border}			: fn-color-darken($col-btn-danger-color, 10%);
+	// #{$col-btn-danger-text}				: fn-var($col-text);
+	// #{$col-btn-danger-color}			: fn-var($col-error);
+	// #{$col-btn-danger-color-hover}		: fn-color-lighten($col-btn-danger-color, 10%);
+	// #{$col-btn-danger-color-active}		: fn-color-lighten($col-btn-danger-color, 25%);
+	// #{$col-btn-danger-border}			: fn-color-darken($col-btn-danger-color, 10%);
 
-	#{$col-btn-ghost-text}				: fn-var($col-text);
-	#{$col-btn-ghost-color}				: transparent;
-	#{$col-btn-ghost-color-hover}		: fn-color-lighten($col-white, 10%, 0.1);
-	#{$col-btn-ghost-color-active}		: fn-color-lighten($col-white, 10%, 0.2);
-	#{$col-btn-ghost-border}			: transparent;
+	// #{$col-btn-ghost-text}				: fn-var($col-text);
+	// #{$col-btn-ghost-color}				: transparent;
+	// #{$col-btn-ghost-color-hover}		: fn-color-lighten($col-white, 10%, 0.1);
+	// #{$col-btn-ghost-color-active}		: fn-color-lighten($col-white, 10%, 0.2);
+	// #{$col-btn-ghost-border}			: transparent;
 
 	#{$col-btn-tag-text}				: fn-var($col-text);
 	#{$col-btn-tag-color}				: fn-var($col-accent);

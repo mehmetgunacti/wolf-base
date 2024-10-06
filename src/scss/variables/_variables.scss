@@ -123,6 +123,9 @@ $col-transparent			: --col-transparent;
 $col-text					: --col-text;
 $col-text-secondary			: --col-text-secondary;
 
+$col-hover					: --col-hover;
+$col-active					: --col-active;
+
 // VARIANTS
 $col-primary				: --col-primary;
 $col-primary-text			: --col-primary-text;
@@ -157,7 +160,9 @@ $col-error-border			: --col-error-border;
 $col-accent					: --col-accent;
 $col-focus					: --col-focus;
 $col-outline				: --col-outline;
+
 $col-disabled				: --col-disabled;
+$col-disabled-text			: --col-disabled-text;
 
 $col-bg-header				: --col-bg-header;
 $col-bg-nav					: --col-bg-nav;
@@ -190,47 +195,47 @@ $col-btn-tag-color			: --col-btn-tag-color;
 $col-btn-tag-color-hover	: --col-btn-tag-color-hover;
 $col-btn-tag-color-active	: --col-btn-tag-color-active;
 
-$col-btn-default-text			: --col-btn-default-text;
-$col-btn-default-color			: --col-btn-default-color;
-$col-btn-default-color-hover	: --col-btn-default-color-hover;
-$col-btn-default-color-active	: --col-btn-default-color-active;
-$col-btn-default-border			: --col-btn-default-border;
+// $col-btn-default-text			: --col-btn-default-text;
+// $col-btn-default-color			: --col-btn-default-color;
+// $col-btn-default-color-hover	: --col-btn-default-color-hover;
+// $col-btn-default-color-active	: --col-btn-default-color-active;
+// $col-btn-default-border			: --col-btn-default-border;
 
-$col-btn-disabled-text			: --col-btn-disabled-text;
-$col-btn-disabled-color			: --col-btn-disabled-color;
-$col-btn-disabled-color-hover	: --col-btn-disabled-color-hover;
-$col-btn-disabled-color-active	: --col-btn-disabled-color-active;
-$col-btn-disabled-border		: --col-btn-disabled-border;
+// $col-btn-disabled-text			: --col-btn-disabled-text;
+// $col-btn-disabled-color			: --col-btn-disabled-color;
+// $col-btn-disabled-color-hover	: --col-btn-disabled-color-hover;
+// $col-btn-disabled-color-active	: --col-btn-disabled-color-active;
+// $col-btn-disabled-border		: --col-btn-disabled-border;
 
-$col-btn-link-text				: --col-btn-link-text;
-$col-btn-link-color				: --col-btn-link-color;
-$col-btn-link-color-hover		: --col-btn-link-color-hover;
-$col-btn-link-color-active		: --col-btn-link-color-active;
-$col-btn-link-border			: --col-btn-link-border;
+// $col-btn-link-text				: --col-btn-link-text;
+// $col-btn-link-color				: --col-btn-link-color;
+// $col-btn-link-color-hover		: --col-btn-link-color-hover;
+// $col-btn-link-color-active		: --col-btn-link-color-active;
+// $col-btn-link-border			: --col-btn-link-border;
 
-$col-btn-glyph-text				: --col-btn-glyph-text;
-$col-btn-glyph-color			: --col-btn-glyph-color;
-$col-btn-glyph-color-hover		: --col-btn-glyph-color-hover;
-$col-btn-glyph-color-active		: --col-btn-glyph-color-active;
-$col-btn-glyph-border			: --col-btn-glyph-border;
+// $col-btn-glyph-text				: --col-btn-glyph-text;
+// $col-btn-glyph-color			: --col-btn-glyph-color;
+// $col-btn-glyph-color-hover		: --col-btn-glyph-color-hover;
+// $col-btn-glyph-color-active		: --col-btn-glyph-color-active;
+// $col-btn-glyph-border			: --col-btn-glyph-border;
 
-$col-btn-warn-text				: --col-btn-warn-text;
-$col-btn-warn-color				: --col-btn-warn-color;
-$col-btn-warn-color-hover		: --col-btn-warn-color-hover;
-$col-btn-warn-color-active		: --col-btn-warn-color-active;
-$col-btn-warn-border			: --col-btn-warn-border;
+// $col-btn-warn-text				: --col-btn-warn-text;
+// $col-btn-warn-color				: --col-btn-warn-color;
+// $col-btn-warn-color-hover		: --col-btn-warn-color-hover;
+// $col-btn-warn-color-active		: --col-btn-warn-color-active;
+// $col-btn-warn-border			: --col-btn-warn-border;
 
-$col-btn-ghost-text				: --col-btn-ghost-text;
-$col-btn-ghost-color			: --col-btn-ghost-color;
-$col-btn-ghost-color-hover		: --col-btn-ghost-color-hover;
-$col-btn-ghost-color-active		: --col-btn-ghost-color-active;
-$col-btn-ghost-border			: --col-btn-ghost-border;
+// $col-btn-ghost-text				: --col-btn-ghost-text;
+// $col-btn-ghost-color			: --col-btn-ghost-color;
+// $col-btn-ghost-color-hover		: --col-btn-ghost-color-hover;
+// $col-btn-ghost-color-active		: --col-btn-ghost-color-active;
+// $col-btn-ghost-border			: --col-btn-ghost-border;
 
-$col-btn-danger-text			: --col-btn-danger-text;
-$col-btn-danger-color			: --col-btn-danger-color;
-$col-btn-danger-color-hover		: --col-btn-danger-color-hover;
-$col-btn-danger-color-active	: --col-btn-danger-color-active;
-$col-btn-danger-border			: --col-btn-danger-border;
+// $col-btn-danger-text			: --col-btn-danger-text;
+// $col-btn-danger-color			: --col-btn-danger-color;
+// $col-btn-danger-color-hover		: --col-btn-danger-color-hover;
+// $col-btn-danger-color-active	: --col-btn-danger-color-active;
+// $col-btn-danger-border			: --col-btn-danger-border;
 
 // SHADOWS
 // todo

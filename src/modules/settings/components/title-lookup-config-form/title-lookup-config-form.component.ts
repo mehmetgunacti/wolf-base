@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, input, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input, output, signal, untracked } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -23,11 +23,13 @@ export class TitleLookupConfigFormComponent {
 
 		effect(() => {
 
+
 			const url = this.url();
 			if (url)
-				this.fcUrl.setValue(url);
+				untracked(() => {this.fcUrl.setValue(url); });
+				//this.fcUrl.setValue(url);
 
-		}, { allowSignalWrites: true });
+		}); // , { allowSignalWrites: true });
 
 	}
 

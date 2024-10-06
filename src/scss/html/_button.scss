@@ -29,37 +29,139 @@ $_button-properties	: (
 
 	"padding-inline"	: "--",
 	"font-size"			: "--",
-	"border-radius"		: "--"
+	"border-radius"		: "--",
+
+	"gap"				: $gap-05,
+	"text-align"		: center,
+	"text-decoration"	: none,
+	"white-space"		: pre,
+	"background-image"	: none,
+	"border-width"		: 1px,
+	"border-style"		: solid,
+	"cursor"			: pointer,
+
+	hover: (
+		"--background-color"	: fn-var($col-primary-hover)
+	),
+
+	active: (
+		"--background-color"	: fn-var($col-primary-active)
+	),
+
+	disabled: (
+		"--color"				: fn-var($col-disabled-text),
+		"--background-color"	: fn-var($col-disabled),
+		"--border-color"		: fn-var($col-transparent),
+		cursor					: not-allowed,
+
+		hover: (
+			"--background-color"	: fn-var($col-transparent)
+		),
+
+		active: (
+			"--background-color"	: fn-var($col-transparent)
+		)
+
+	),
+	info : (
+		"--color"				: fn-var($col-info-text),
+		"--background-color"	: fn-var($col-info),
+		"--border-color"		: fn-var($col-info-border),
+		hover: (
+			"--background-color"	: fn-var($col-info-hover)
+		),
+
+		active: (
+			"--background-color"	: fn-var($col-info-active)
+		)
+	),
+	warn: (
+		"--color"				: fn-var($col-warn-text),
+		"--background-color"	: fn-var($col-warn),
+		"--border-color"		: fn-var($col-warn-border),
+		hover: (
+			"--background-color"	: fn-var($col-warn-hover)
+		),
+		active: (
+			"--background-color"	: fn-var($col-warn-active)
+		)
+	),
+	danger: (
+		"--color"				: fn-var($col-error-text),
+		"--background-color"	: fn-var($col-error),
+		"--border-color"		: fn-var($col-error-border),
+		hover: (
+			"--background-color"	: fn-var($col-error-hover)
+		),
+		active: (
+			"--background-color"	: fn-var($col-error-active)
+		)
+	),
+	ghost: (
+		"--background-color"	: fn-var($col-transparent),
+		"--border-color"		: fn-var($col-transparent),
+		hover: (
+			"--background-color"	: fn-var($col-hover)
+		),
+		active: (
+			"--background-color"	: fn-var($col-active)
+		)
+	),
+	link: (
+		"--background-color"	: fn-var($col-transparent),
+		"--border-color"		: fn-var($col-transparent),
+		hover: (
+			"--background-color"	: fn-var($col-transparent),
+			"text-decoration"		: underline
+		),
+		active: (
+			"--background-color"	: fn-var($col-transparent),
+			"text-decoration"		: underline,
+		)
+	),
+	glyph: (
+		"--background-color"	: fn-var($col-transparent),
+		"--border-color"		: fn-var($col-transparent),
+		"border-radius"			: $border-radius-round,
+		hover: (
+			"--background-color"	: fn-var($col-hover)
+		),
+		active: (
+			"--background-color"	: fn-var($col-active)
+		)
+	)
 
 );
 
+///      Input map                                Output
+/// ----------------------            --------------------------------
+/// ("--width" : $val)     --> prints [ --prefix-width: #{$val};     ]
+/// ("width"  : "--")      --> prints [ width : var(--prefix-width); ]
+/// ("height" : "--width") --> prints [ height: var(--prefix-width); ]
+/// ("height" : 50px)      --> prints [ height: 50px; ]
+/// ("hover"  : (...))     --> maps are skipped
 @mixin mx-define-css-vars($map, $prefix) {
 
 	@each $key, $value in $map {
 
-		@if type-of($key) == 'string' and str-index($key, '--') == 1 {
+		@if type-of($value) != 'map' {
 
-			// ("--width" : $val) --> prints [ --prefix-width: #{$val}; ]
-			$cssVarName: str-slice($key, 3); // '--'.length = 2
-			--#{$prefix}-#{$cssVarName}: #{$value};
+			@if type-of($key) == 'string' and str-index($key, '--') == 1 {
 
-		}
+				$cssVarName: str-slice($key, 3); // '--'.length = 2
+				--#{$prefix}-#{$cssVarName}: #{$value};
 
-	}
+			} @else if (type-of($value) == 'string' and str-index($value, '--') == 1) {
 
-}
+				$cssVarName: str-slice($value, 3); // '--'.length = 2
+				$val : if(length($cssVarName) == 1, $key, $cssVarName);
+				#{$key}: var(--#{$prefix}-#{$val});
 
-@mixin mx-assign-css-vars($map, $prefix) {
+			} @else {
 
-	@each $key, $value in $map {
+				#{$key}: $value;
 
-		@if (type-of($value) == 'string' and str-index($value, '--') == 1) {
-
-			// ("width" : "--")       --> prints [ width: var(--prefix-width); ]
-			// ("height" : "--width") --> prints [ height: var(--prefix-width); ]
-			$cssVarName: str-slice($value, 3); // '--'.length = 2
-			$val : if(length($cssVarName) == 1, $key, $cssVarName);
-			#{$key}: var(--#{$prefix}-#{$val});
+			}
 
 		}
 
@@ -70,37 +172,123 @@ $_button-properties	: (
 @mixin mx-button {
 
 	@include mx-define-css-vars($_button-properties, $_prefix);
-	@include mx-assign-css-vars($_button-properties, $_prefix);
-
 	@include mx-d-inline-flex-center;
-	gap					: $gap-05;
-	text-align			: center;
-	text-decoration		: none;
-	white-space			: pre;
-	background-image	: none;
-	border-width		: 1px;
-	border-style		: solid;
-	cursor				: pointer;
-	@include mx-transition(color background-color border-color);
+	@include mx-transition-short(color background-color border-color);
 
 	svg {
 
-		width: 1.1em;
-		height: 1.1em;
+		width	: auto; // 1.1em;
+		height	: 1.1em;
 
 	}
 
-	// if button has glyph -> text must be wrapped in <span></span>
-	&:has(> #{$glyph-selector} + span) {
+	&:focus-visible {
+		@include mx-outline;
+	}
 
-		gap				: $gap-02;
-		padding-right	: $gap-1;
+	&:hover {
+		@include mx-define-css-vars(map-get($_button-properties, hover), $_prefix);
+	}
+
+	&:active {
+		@include mx-define-css-vars(map-get($_button-properties, active), $_prefix);
+	}
+
+	&[disabled] {
+
+		@include mx-define-css-vars(map-get($_button-properties, disabled), $_prefix);
+
+		&:hover {
+			@include mx-define-css-vars(map-get($_button-properties, disabled, hover), $_prefix);
+		}
+
+		&:active {
+			@include mx-define-css-vars(map-get($_button-properties, disabled, active), $_prefix);
+		}
 
 	}
-	&:has(> span + #{$glyph-selector}) {
 
-		gap				: $gap-02;
-		padding-left	: $gap-1;
+	&.info {
+
+		@include mx-define-css-vars(map-get($_button-properties, info), $_prefix);
+
+		&:hover {
+			@include mx-define-css-vars(map-get($_button-properties, info, hover), $_prefix);
+		}
+
+		&:active {
+			@include mx-define-css-vars(map-get($_button-properties, info, active), $_prefix);
+		}
+
+	}
+
+	&.warn {
+
+		@include mx-define-css-vars(map-get($_button-properties, warn), $_prefix);
+
+		&:hover {
+			@include mx-define-css-vars(map-get($_button-properties, warn, hover), $_prefix);
+		}
+
+		&:active {
+			@include mx-define-css-vars(map-get($_button-properties, warn, active), $_prefix);
+		}
+
+	}
+
+	&.danger {
+
+		@include mx-define-css-vars(map-get($_button-properties, danger), $_prefix);
+
+		&:hover {
+			@include mx-define-css-vars(map-get($_button-properties, danger, hover), $_prefix);
+		}
+
+		&:active {
+			@include mx-define-css-vars(map-get($_button-properties, danger, active), $_prefix);
+		}
+
+	}
+
+	&.ghost {
+
+		@include mx-define-css-vars(map-get($_button-properties, ghost), $_prefix);
+
+		&:hover {
+			@include mx-define-css-vars(map-get($_button-properties, ghost, hover), $_prefix);
+		}
+
+		&:active {
+			@include mx-define-css-vars(map-get($_button-properties, ghost, active), $_prefix);
+		}
+
+	}
+
+	&.link {
+
+		@include mx-define-css-vars(map-get($_button-properties, link), $_prefix);
+
+		&:hover {
+			@include mx-define-css-vars(map-get($_button-properties, link, hover), $_prefix);
+		}
+
+		&:active {
+			@include mx-define-css-vars(map-get($_button-properties, link, active), $_prefix);
+		}
+
+	}
+
+	&.glyph {
+
+		@include mx-define-css-vars(map-get($_button-properties, glyph), $_prefix);
+
+		&:hover {
+			@include mx-define-css-vars(map-get($_button-properties, glyph, hover), $_prefix);
+		}
+
+		&:active {
+			@include mx-define-css-vars(map-get($_button-properties, glyph, active), $_prefix);
+		}
 
 	}
 

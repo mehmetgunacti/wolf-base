@@ -78,7 +78,7 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 			&:not(.active):hover {
 
 				--nav-color				: #{fn-var($col-text)};
-				--nav-left-bg-color		: #{fn-var($col-btn-ghost-color-hover)};
+				--nav-left-bg-color		: #{fn-var($col-hover)};
 				--nav-right-color		: #{fn-var($col-text)};
 
 			}

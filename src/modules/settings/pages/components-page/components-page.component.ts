@@ -14,8 +14,8 @@ export class ComponentsPageComponent {
 	PROJECT_STATUS = PROJECT_STATUS;
 
 	alertsVisible = signal<boolean>(false);
-	formsVisible = signal<boolean>(true);
-	buttonsVisible = signal<boolean>(false);
+	formsVisible = signal<boolean>(false);
+	buttonsVisible = signal<boolean>(true);
 	glyphsVisible = signal<boolean>(false);
 
 	tagSuggestions = signal<string[]>([]);
