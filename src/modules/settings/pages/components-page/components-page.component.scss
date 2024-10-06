@@ -49,6 +49,12 @@
 					@include mx-d-flex-col-ai-center;
 					gap		: $gap-05;
 					padding	: $gap-05;
+					& > svg {
+
+						width	: 2.4rem;
+						height	: 2.4rem;
+
+					}
 					& > span {
 
 						font-size: $font-size-xs;

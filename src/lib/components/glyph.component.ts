@@ -5,23 +5,8 @@ import { Glyphs } from 'lib/constants';
 @Component({
 	standalone: true,
 	selector: 'w-glyph',
-	template: `<svg class="glyph"><use [attr.href]="href()"/></svg>`,
-	styles: [`
-		:host {
-
-			display	: contents;
-			& > .glyph {
-				width	: 1.1em;
-				height	: 1.1em;
-				fill	: currentcolor;
-				stroke	: currentcolor;
-				stroke-width	: 2;
-				stroke-linecap	: round;
-				stroke-linejoin	: round;
-			}
-
-		}
-	`],
+	template: `<svg><use [attr.href]="href()"/></svg>`,
+	styles: [`:host { display : contents; }`],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlyphComponent {

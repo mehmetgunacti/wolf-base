@@ -83,7 +83,7 @@ $_button-properties	: (
 	cursor				: pointer;
 	@include mx-transition(color background-color border-color);
 
-	& > svg {
+	svg {
 
 		width: 1.1em;
 		height: 1.1em;
