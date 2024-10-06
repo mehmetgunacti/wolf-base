@@ -1,12 +1,23 @@
-@mixin mx-component($param-content-scrollable: false) {
+@mixin mx-component(
+	$param-dark: false,
+	$param-content-scrollable: false,
+	$param-content-padding: $outline-width
+) {
 
 	@include mx-box(
 		$param-shadow			: true,
 		$param-padding-inline	: $component-padding-inline,
-		$param-padding-block	: $component-padding-block
+		$param-padding-block	: $component-padding-block,
+		$param-dark				: $param-dark,
 	);
 	@include mx-d-flex-column;
 	gap		: $gap-xxl;
+
+	@if $param-content-scrollable {
+
+		overflow	: hidden;
+
+	}
 
 	& > header {
 
@@ -17,7 +28,8 @@
 	& > [content] {
 
 		@include mx-d-grid;
-		gap	: $gap-sm;
+		gap		: $gap-sm;
+		padding	: $param-content-padding;
 
 		@if $param-content-scrollable {
 

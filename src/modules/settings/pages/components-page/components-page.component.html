@@ -4,7 +4,7 @@
 	<legend>Buttons</legend>
 	<legend>
 		<button class="glyph" (click)="buttonsVisible.set(!buttonsVisible())">
-			<w-glyph [class.rotated]="buttonsVisible()" name="add"/>
+			<w-glyph [class.rotate-45]="buttonsVisible()" name="add"/>
 		</button>
 	</legend>
 
@@ -52,11 +52,11 @@
 		<div container_tags>
 
 			<button class="tag xs">Extra Small</button>
+			<button class="tag xs">Extra Small<w-glyph name="close" class="sm"/></button>
 			<button class="tag sm">Small</button>
+			<button class="tag sm">Small<w-glyph name="close" class="sm"/></button>
 			<button class="tag">Default</button>
-			<button class="tag xs" 	data-before="Extra Small"><w-glyph name="close" /></button>
-			<button class="tag sm"	data-before="Small"><w-glyph name="close" /></button>
-			<button class="tag"		data-before="Default"><w-glyph name="close" /></button>
+			<button class="tag">Default<w-glyph name="close"  class="sm"/></button>
 
 		</div>
 
@@ -70,7 +70,7 @@
 	<legend>Forms</legend>
 	<legend>
 		<button class="glyph" (click)="formsVisible.set(!formsVisible())">
-			<w-glyph [class.rotated]="formsVisible()" name="add"/>
+			<w-glyph [class.rotate-45]="formsVisible()" name="add"/>
 		</button>
 	</legend>
 
@@ -106,7 +106,7 @@
 	<legend>Glyphs</legend>
 	<legend>
 		<button class="glyph" (click)="glyphsVisible.set(!glyphsVisible())">
-			<w-glyph [class.rotated]="glyphsVisible()" name="add"/>
+			<w-glyph [class.rotate-45]="glyphsVisible()" name="add"/>
 		</button>
 	</legend>
 
@@ -135,7 +135,7 @@
 	<legend>Alerts</legend>
 	<legend>
 		<button class="glyph" (click)="alertsVisible.set(!alertsVisible())">
-			<w-glyph [class.rotated]="alertsVisible()" name="add"/>
+			<w-glyph [class.rotate-45]="alertsVisible()" name="add"/>
 		</button>
 	</legend>
 

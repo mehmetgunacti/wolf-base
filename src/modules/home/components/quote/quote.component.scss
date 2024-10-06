@@ -1,80 +1,87 @@
-// @import 'helper';
-// @import 'variables';
-// @import 'components';
-// @import 'mixins';
+@import 'variables';
+@import 'helper';
+@import 'components';
 
-// @keyframes fadein {
+@keyframes fadein {
 
-// 	from { opacity: 0; }
-// 	to { opacity: 1; }
+	from { opacity: 0; }
+	to { opacity: 1; }
 
-// }
+}
 
-// @keyframes fadeOut {
+@keyframes fadeOut {
 
-// 	from { opacity: 1; }
-// 	to { opacity: 0; }
+	from { opacity: 1; }
+	to { opacity: 0; }
 
-// }
+}
 
-// :host {
+:host {
 
-// 	&.outgoing {
+	&.outgoing {
 
-// 		--col-text-alp : 0;
-// 		animation	: fadeOut 1200ms;
+		--col-text-alp : 0;
+		animation	: fadeOut 1200ms;
 
-// 	}
+	}
 
-// 	&.incoming {
+	&.incoming {
 
-// 		animation	: fadein 1200ms;
+		animation	: fadein 1200ms;
 
-// 	}
+	}
 
-// 	& > figure {
+	& > figure {
 
-// 		overflow	: hidden;
-// 		color		: var(--col-text);
-// 		@include mx-transition(color);
+		overflow	: hidden;
+		color		: fn-var($col-text);
+		@include mx-transition(color);
 
-// 		& > blockquote {
+		& > blockquote {
 
-// 			& > pre {
+			@include mx-d-flex-center;
+			flex		: 1;
+			border-left	: 0;
+			margin		: 0;
+			border		: 0;
 
-// 				font-family		: inherit;
-// 				font-weight		: bold;
-// 				font-style		: italic;
-// 				font-size		: var(--font-size-h4);
-// 				text-align		: center;
-// 				background		: none;
+			& > pre {
 
-// 			}
+				margin-bottom	: 0;
+				font-family		: inherit;
+				font-weight		: bold;
+				font-style		: italic;
+				font-size		: $font-size-h4;
+				text-align		: center;
+				text-wrap		: wrap;
+				background		: none;
 
-// 		}
+			}
 
-// 		& > figcaption {
+		}
 
-// 			& > [quote_author] {
+		& > figcaption {
 
-// 				text-align	: end;
-// 				font-size	: smaller;
+			& > [quote_author] {
 
-// 				&:empty { padding: 0; }
+				text-align	: end;
+				font-size	: smaller;
 
-// 			}
+				&:empty { padding: 0; }
 
-// 			& > [quote_context] {
+			}
 
-// 				text-align	: end;
-// 				font-size	: xx-small;
+			& > [quote_context] {
 
-// 				&:empty { padding: 0; }
+				text-align	: end;
+				font-size	: xx-small;
 
-// 			}
+				&:empty { padding: 0; }
 
-// 		}
+			}
 
-// 	}
+		}
 
-// }
+	}
+
+}

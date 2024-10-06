@@ -128,10 +128,7 @@
 
 :host {
 
-
-	// host: {
-	// 	'class': 'flex-1 d-flex-column pos-relative gap'
-	// },
+	@include mx-d-block;
 
 	--display-element	: none;
 

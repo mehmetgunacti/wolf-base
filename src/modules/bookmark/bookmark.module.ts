@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CroppieModule, OverlayContainerModule } from '@lib';
+import { ModalDirective } from 'lib/directives/dialog.directive';
 import { SharedModule } from 'modules/shared/shared.module';
 import { BookmarkRoutingModule } from './bookmark-routing.module';
 import * as fromConfig from './bookmark.config';
-import { OverlayContainerModule, CroppieModule } from '@lib';
-import { ModalDirective } from 'lib/directives/dialog.directive';
 
 @NgModule({
 	declarations: [...fromConfig.components],
@@ -16,7 +16,7 @@ import { ModalDirective } from 'lib/directives/dialog.directive';
 		SharedModule,
 		CroppieModule,
 		OverlayContainerModule,
-		ModalDirective,
+		ModalDirective
 	]
 })
 export class BookmarkModule { }

@@ -1,1 +1,7 @@
-:host {}
+@import 'components';
+
+:host {
+
+	@include mx-page;
+
+}

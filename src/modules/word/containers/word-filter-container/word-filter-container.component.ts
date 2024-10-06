@@ -1,28 +1,22 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { wordActions } from 'store/actions';
 import { selWord_search } from 'store/selectors/word/word-ui.selectors';
 
 @Component({
 	selector: 'app-word-filter-container',
-	templateUrl: './word-filter-container.component.html',
-	styleUrls: ['./word-filter-container.component.scss'],
+	template: '<w-search-box [term]="term()" (search)="onSearch($event)"/>',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WordFilterContainerComponent {
 
-	term$: Observable<string | null>;
-
-	@Output() search: EventEmitter<string> = new EventEmitter();
-
 	private store: Store = inject(Store);
 
-	constructor() {
+	// Input
+	term = this.store.selectSignal(selWord_search);
 
-		this.term$ = this.store.select(selWord_search);
-
-	}
+	// Output
+	search = output<string>();
 
 	onSearch(term: string): void {
 

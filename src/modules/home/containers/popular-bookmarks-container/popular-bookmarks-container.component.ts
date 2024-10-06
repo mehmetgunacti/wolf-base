@@ -1,6 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { ClickedBookmark, TAG_POPULAR, UUID } from '@lib';
 import { Store } from '@ngrx/store';
+import { GlyphComponent } from 'lib/components/glyph/glyph.component';
+import { BookmarkComponent } from 'modules/shared/bookmark/bookmark.component';
 import { Observable, map } from 'rxjs';
 import { bookmarkActions } from 'store/actions';
 import * as bmSelectors from 'store/selectors/bookmark/bookmark-clicks.selectors';
@@ -8,9 +12,10 @@ import * as coreSelectors from 'store/selectors/core/core-configuration.selector
 
 @Component({
 	selector: 'app-popular-bookmarks-container',
+	standalone: true,
+	imports: [CommonModule, RouterModule, GlyphComponent, BookmarkComponent],
 	templateUrl: './popular-bookmarks-container.component.html',
 	styleUrls: ['./popular-bookmarks-container.component.scss'],
-	host: { 'class': 'd-flex-column gap-sm' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopularBookmarksContainerComponent implements OnInit {

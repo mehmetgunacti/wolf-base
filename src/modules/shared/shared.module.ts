@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AutofocusDirective, FormatBytesPipe, InputModule, NoDataPipe, PortalComponent, SanitizeHtmlModule, SelectedTagsComponent, TimePastModule, ToastComponent, ToastWrapperComponent } from '@lib';
+import { AutofocusDirective, FormatBytesPipe, NoDataPipe, PortalComponent, SanitizeHtmlModule, SelectedTagsComponent, TimePastModule, ToastComponent, ToastWrapperComponent } from '@lib';
 import { GlyphComponent } from 'lib/components/glyph/glyph.component';
-import { InputTagModule } from 'lib/components/input-tag/input-tag.module';
 import { SelectModule } from 'lib/components/select/select.module';
 import { SwitchComponent } from 'lib/components/switch/switch.component';
 import { TagCloudModule } from 'lib/components/tag-cloud/tag-cloud.module';
@@ -18,12 +17,13 @@ import { LanguagesComponent } from './languages/languages.component';
 import { ModalComponent } from './modal/modal.component';
 import { NoteHeaderComponent } from './note-header/note-header.component';
 import { WordComponent } from './word/word.component';
+import { SearchBoxComponent } from 'lib/components/search-filter/search-box.component';
+import { InputComponent } from 'lib/components/input/input.component';
+import { InputTagComponent } from 'lib/components/input-tag/input-tag.component';
 
 @NgModule({
 	declarations: [
-		BookmarkComponent,
 		NoteHeaderComponent,
-		PortalComponent,
 		AutofocusDirective,
 		RequiredValidatorDirective,
 		NoDataPipe,
@@ -37,10 +37,10 @@ import { WordComponent } from './word/word.component';
 		CommonModule,
 		RouterModule,
 		ReactiveFormsModule,
-		InputTagModule,
-		InputModule,
+		PortalComponent,
 		CdkMenuModule,
 		TagCloudModule,
+		InputTagComponent,
 		ModalComponent,
 		SanitizeHtmlModule,
 		TimePastModule,
@@ -49,7 +49,10 @@ import { WordComponent } from './word/word.component';
 		SwitchComponent,
 		ToastWrapperComponent,
 		ToastComponent,
-		GlyphComponent
+		GlyphComponent,
+		BookmarkComponent,
+		InputComponent,
+		SearchBoxComponent
 	],
 	exports: [
 		BookmarkComponent,
@@ -61,8 +64,8 @@ import { WordComponent } from './word/word.component';
 		ReactiveFormsModule,
 		NoDataPipe,
 		FormatBytesPipe,
-		InputTagModule,
-		InputModule,
+		InputTagComponent,
+		InputComponent,
 		TimePastModule,
 		SelectModule,
 		SelectedTagsComponent,
@@ -75,7 +78,8 @@ import { WordComponent } from './word/word.component';
 		LanguagesComponent,
 		ToastWrapperComponent,
 		ToastComponent,
-		GlyphComponent
+		GlyphComponent,
+		SearchBoxComponent
 	],
 	providers: []
 })

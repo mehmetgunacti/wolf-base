@@ -6,6 +6,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import * as fromConfig from './home.config';
 import { OverlayContainerModule } from '@lib';
 import { MarkOrHighlightModule } from 'lib/pipes/mark-or-highlight.pipe';
+import { PopularBookmarksContainerComponent } from './containers/popular-bookmarks-container/popular-bookmarks-container.component';
 
 @NgModule({
 	declarations: fromConfig.components,
@@ -15,7 +16,8 @@ import { MarkOrHighlightModule } from 'lib/pipes/mark-or-highlight.pipe';
 		ReactiveFormsModule,
 		SharedModule,
 		OverlayContainerModule,
-		MarkOrHighlightModule
+		MarkOrHighlightModule,
+		PopularBookmarksContainerComponent
 	],
 	providers: []
 })

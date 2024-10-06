@@ -2,10 +2,11 @@ import { AfterViewInit, Component, EmbeddedViewRef, Input, OnDestroy, TemplateRe
 
 @Component({
 	selector: 'w-portal',
+	standalone: true,
 	template: `
-	<ng-template #pageActions>
-	  <ng-content></ng-content>
-	</ng-template>
+		<ng-template #pageActions>
+			<ng-content/>
+		</ng-template>
 	`,
 	styles: [':host { position: absolute; }']
 })

@@ -1,40 +1,41 @@
-// @import 'helper';
-// @import 'variables';
-// @import 'mixins';
-// @import 'components';
+@import 'variables';
+@import 'helper';
+@import 'components';
 
-// :host {
+:host {
 
-// 	--chevron-angle		: 0deg;
+	@include mx-d-flex-column;
+	@include mx-component($param-dark: true);
+	@include mx-transition(background-color);
+	gap	: 0;
 
-// 	&.open {
+	& > header {
 
-// 		--chevron-angle	: -90deg;
+		@include mx-d-flex-ai-center;
 
-// 	}
+		& > :last-child {
 
-// 	& > header {
+			margin-left	: auto;
 
-// 		& .material-symbols-outlined {
+		}
 
-// 			transform: rotate(var(--chevron-angle));
-// 			@include mx-transition(all);
+	}
 
-// 		}
+	& > aside {
 
-// 	}
+		@include mx-d-flex-column;
+		gap : $component-padding-inline;
+		@include mx-scrollable($param-set-max-height: true, $param-max-height: 30rem);
 
-// 	& > aside {
+		& > [search_control] {
 
-// 		overflow		: auto;
-// 		max-height		: 30rem;
+			@include mx-d-flex-center;
+			gap				: $gap-05;
+			margin-top		: $component-padding-block;
+			padding-inline	: $component-padding-inline;
 
-// 		& > w-tag-cloud {
+		}
 
-// 			margin		: var(--gap) 0;
+	}
 
-// 		}
-
-// 	}
-
-// }
+}

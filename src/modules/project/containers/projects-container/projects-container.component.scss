@@ -1,3 +1,31 @@
+@import 'helper';
+@import 'variables';
+@import 'components';
+
+:host{
+
+	@include mx-component;
+
+	& > [content] {
+
+		grid-template-columns	: repeat(auto-fill, minmax(30rem, 1fr));
+
+		& > a {
+
+			// @include mx-d-flex-col-jc-center;
+			@include mx-box($param-dark: true, $param-hover: true, $param-active: true);
+			@include mx-header;
+
+			text-decoration		: none;
+			// overflow-x			: hidden;
+
+		}
+
+	}
+
+}
+
+
 // @import 'helper';
 // @import 'variables';
 // @import 'mixins';

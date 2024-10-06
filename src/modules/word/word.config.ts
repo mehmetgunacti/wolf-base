@@ -1,4 +1,3 @@
-import { WordFilterComponent } from './components/word-filter/word-filter.component';
 import { WordFormComponent } from './components/word-form/word-form.component';
 import { WordContainerComponent } from './containers/word-container/word-container.component';
 import { WordEditFormContainerComponent } from './containers/word-edit-form-container/word-edit-form-container.component';
@@ -14,7 +13,6 @@ export const components = [
 
 	// components
 	WordFormComponent,
-	WordFilterComponent,
 	WordFilterContainerComponent,
 
 	// containers

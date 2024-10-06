@@ -26,52 +26,52 @@
 </div>
 <div bottom-buttons>
 
-	<!-- SETTINGS BUTTON -->
-	<button
-		class="glyph"
-		routerLink="/settings"
-		routerLinkActive="active"
-		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
-		title="Settings">
-		<w-glyph name="settings" />
-	</button>
+	@for (item of bottomMenuItems$ | async; track $index) {
+
+		<a	#link
+			[routerLink]="item.url"
+			[queryParams]="item.queryParams"
+			routerLinkActive="active"
+			(isActiveChange)="onRouterLinkActive($event, link)"
+			[routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }">
+
+			<div nav_item_left>
+				<w-glyph name="{{item.icon}}" />
+			</div>
+			<div nav_item_right class="nav-item-right">
+
+				<span label>{{ item.label }}</span>
+				<div badge><span>{{ item.badge }}</span></div>
+
+			</div>
+
+		</a>
+
+	}
 
 	<!-- CLOUD TASKS BUTTON -->
 	@if ((cloudTasks$ | async); as cloudTasks) {
 
-		<button
-			class="glyph badge-container"
+		<a	#link
 			routerLink="/cloud"
 			routerLinkActive="active"
+			(isActiveChange)="onRouterLinkActive($event, link)"
 			[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
 			[title]="cloudTasks.length > 0 ? cloudTasks.length + ' syncable items available' : 'Cloud'">
-			<w-glyph name="cloud_sync" />
-			@if (cloudTasks.length > 0) {
-				<span class="badge">{{cloudTasks.length}}</span>
-			}
-		</button>
+
+			<div nav_item_left class="badge-container">
+				<w-glyph name="cloud_sync" />
+			</div>
+			<div nav_item_right class="nav-item-right">
+
+				<span label>Cloud Sync</span>
+				<div badge><span>{{ cloudTasks.length }}</span></div>
+
+			</div>
+
+		</a>
 
 	}
-
-	<!-- DATABASE BUTTON -->
-	<button
-		class="glyph"
-		routerLink="/database"
-		routerLinkActive="active"
-		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
-		title="Database">
-		<w-glyph name="database" />
-	</button>
-
-	<!-- LOGS BUTTON -->
-	<button
-		class="glyph"
-		routerLink="/logs"
-		routerLinkActive="active"
-		[routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
-		title="View Logs">
-		<w-glyph name="history" />
-	</button>
 
 	<!-- SWITCH THEME BUTTON -->
 	<button

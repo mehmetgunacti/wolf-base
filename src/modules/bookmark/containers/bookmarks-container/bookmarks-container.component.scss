@@ -1,12 +1,13 @@
 @import 'variables';
+@import 'helper';
 
 :host{
 
-	display						: grid;
+	@include mx-d-grid;
 	grid-template-columns		: 1fr;
-	gap							: var(--gap-sm);
+	gap							: $page-padding;
 
-	@include bigScreen() {
+	@include mx-md() {
 
 		// todo : repeat(auto-fit, minmax(360px, 1fr)); what's the difference
 		// todo : use rem

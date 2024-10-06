@@ -1,3 +1,5 @@
+@import 'variables';
+
 @mixin mx-badge-container {
 
 	position	: relative;
@@ -12,9 +14,9 @@
 		pointer-events		: none;
 
 		padding-inline		: 0.4em;
-		padding-block		: 0.2em 0.1em;
-		background-color	: var(--col-accent);
-		border-radius		: var(--border-radius-round);
+		padding-block		: 0.3em 0.1em;
+		background-color	: fn-var($col-focus);
+		border-radius		: $border-radius-round;
 
 		line-height			: 1;
 		font-size			: 1.3ch;

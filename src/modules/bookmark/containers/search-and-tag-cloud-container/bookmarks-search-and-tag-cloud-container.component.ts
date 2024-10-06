@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { TAG_POPULAR, Tag, slideUpDownTrigger } from 'lib';
@@ -12,7 +12,6 @@ import { selCore_popularBookmarks } from 'store/selectors/core/core-configuratio
 	templateUrl: './bookmarks-search-and-tag-cloud-container.component.html',
 	styleUrls: ['./bookmarks-search-and-tag-cloud-container.component.scss'],
 	animations: [slideUpDownTrigger],
-	host: { 'class': 'd-flex-column box shadow dark transition-bg' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
@@ -24,8 +23,7 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 	relatedTags$: Observable<string[]>;
 	popularTags$: Observable<string[]>;
 
-	@HostBinding('class.open')
-	cloudVisible = false;
+	cloudVisible = signal(false);
 
 	searchControl: FormControl;
 	subscription: Subscription;
@@ -71,7 +69,7 @@ export class BookmarksSearchAndTagCloudContainerComponent implements OnDestroy {
 
 	toggleCloud(): void {
 
-		this.cloudVisible = !this.cloudVisible;
+		this.cloudVisible.set(!this.cloudVisible());
 
 	}
 

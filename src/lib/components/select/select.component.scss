@@ -4,6 +4,8 @@
 
 :host {
 
+	@include mx-d-block;
+	@include mx-input-element;
 	& > select > option {
 
 		background-color	: fn-var($col-form-element-bg);

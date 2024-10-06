@@ -1,13 +1,17 @@
-<ng-container *ngIf="(bookmarks$ | async) as bookmarks">
+@if (bookmarks$ | async; as bookmarks) {
 
-	<app-bookmark
-		*ngFor="let bookmark of bookmarks"
-		[bookmark]="bookmark"
-		(edit)="onEdit($event)"
-		(popular)="onPopular($event)"
-		(linkClick)="onClick($event)"
-		[showDetails]="true"/>
+	@for (bookmark of bookmarks; track $index) {
 
-	<div *ngIf="bookmarks.length === 0" class="empty">{{ count$ | async }} bookmarks available</div>
+		<app-bookmark	[bookmark]="bookmark"
+						(edit)="onEdit($event)"
+						(popular)="onPopular($event)"
+						(linkClick)="onClick($event)"
+						[showDetails]="true"/>
 
-</ng-container>
+	} @empty {
+
+		<div class="empty">{{ count$ | async }} bookmarks available</div>
+
+	}
+
+}

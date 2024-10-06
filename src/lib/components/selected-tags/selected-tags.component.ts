@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 	selector: 'w-selected-tags',
 	templateUrl: './selected-tags.component.html',
 	styleUrls: ['./selected-tags.component.scss'],
-	host: { 'class': 'd-flex ai-start jc-center wrap gap-xs' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectedTagsComponent {
