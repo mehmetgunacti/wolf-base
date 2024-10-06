@@ -10,13 +10,13 @@
 	#{$col-hover}				: fn-color-lighten($col-white, 10%, 0.1);
 	#{$col-active}				: fn-color-lighten($col-white, 10%, 0.2);
 
-	#{$col-accent}				: hsl(200deg 85% 34%);
-	#{$col-focus}				: hsl(27deg 99% 54%);
+	#{$col-accent}				: hsl(215deg 65% 30%);
+	#{$col-focus}				: hsl(270deg 50% 40%); // hsl(27deg 99% 54%);
 
 	#{$col-outline}				: fn-color-set-alpha($col-focus, 0.4);
 
 	// VARIANTS
-	#{$col-primary}				: hsl(215deg 65% 30%);
+	#{$col-primary}				: fn-var($col-accent);
 	#{$col-primary-text}		: fn-var($col-text);
 	#{$col-primary-hover}		: fn-color-lighten($col-primary, 15%);
 	#{$col-primary-active}		: fn-color-lighten($col-primary, 25%);
@@ -28,7 +28,7 @@
 	#{$col-success-active}		: fn-color-lighten($col-success, 15%);
 	#{$col-success-border}		: fn-color-darken($col-success, 10%);
 
-	#{$col-info}				: fn-var($col-accent);
+	#{$col-info}				: hsl(201deg 100% 28%);
 	#{$col-info-text}			: fn-var($col-text);
 	#{$col-info-hover}			: fn-color-lighten($col-info, 10%);
 	#{$col-info-active}			: fn-color-lighten($col-info, 15%);
@@ -58,12 +58,12 @@
 	#{$col-form-element-border}	: fn-color-darken($col-form-element-bg, 10%);
 
 	#{$col-bg-component}		: hsl(210deg 11% 13%);
-	#{$col-bg-component-hover}	: #{fn-color-darken($col-bg-component, 5%)};
-	#{$col-bg-component-active}	: #{fn-color-darken($col-bg-component, 10%)};
+	#{$col-bg-component-hover}	: #{fn-color-darken($col-bg-component, 20%)};
+	#{$col-bg-component-active}	: #{fn-color-darken($col-bg-component, 25%)};
 
 	#{$col-bg-component-dark}			: hsl(210deg 11% 10%);
-	#{$col-bg-component-dark-hover}		: #{fn-color-darken($col-bg-component-dark, 5%)};
-	#{$col-bg-component-dark-active}	: #{fn-color-darken($col-bg-component-dark, 10%)};
+	#{$col-bg-component-dark-hover}		: #{fn-color-darken($col-bg-component-dark, 20%)};
+	#{$col-bg-component-dark-active}	: #{fn-color-darken($col-bg-component-dark, 25%)};
 
 	#{$col-bg-overlay}			: fn-color-set-alpha($col-black, 0.75);
 	#{$col-shadow}				: fn-var($col-bg-header);
@@ -121,9 +121,9 @@
 	// #{$col-btn-ghost-color-active}		: fn-color-lighten($col-white, 10%, 0.2);
 	// #{$col-btn-ghost-border}			: transparent;
 
-	#{$col-btn-tag-text}				: fn-var($col-text);
-	#{$col-btn-tag-color}				: fn-var($col-accent);
-	#{$col-btn-tag-color-hover}			: fn-color-lighten($col-btn-tag-color, 10%);
-	#{$col-btn-tag-color-active}		: fn-color-lighten($col-btn-tag-color, 25%);
+	// #{$col-btn-tag-text}				: fn-var($col-text);
+	// #{$col-btn-tag-color}				: fn-var($col-accent);
+	// #{$col-btn-tag-color-hover}			: fn-color-lighten($col-btn-tag-color, 10%);
+	// #{$col-btn-tag-color-active}		: fn-color-lighten($col-btn-tag-color, 25%);
 
 }

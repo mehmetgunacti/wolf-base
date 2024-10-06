@@ -11,12 +11,13 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 	@include mx-d-flex-column;
 
-	div[nav_menu] {
+	& > [nav_menu],
+	& > [bottom-buttons] {
 
 		@include mx-d-grid;
 		grid-auto-rows	: $_nav-menu-row-height;
 		padding			: $gap;
-		gap				: $gap-xl;
+		gap				: $gap-05;
 
 		& > a {
 
@@ -105,10 +106,6 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 
 	& > [bottom-buttons] {
 
-		@include mx-d-flex-column;
-		// grid-auto-rows	: $_nav-menu-row-height;
-		padding			: $gap;
-		gap				: $gap-xl;
 		margin-top	: auto;
 
 	}

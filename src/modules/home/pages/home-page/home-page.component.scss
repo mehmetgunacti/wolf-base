@@ -1,1 +1,14 @@
-:host {}
+@import 'components';
+
+:host {
+
+	@include mx-page;
+
+	& > [content] {
+
+		@include mx-d-flex-column;
+		gap	: $page-padding;
+
+	}
+
+}

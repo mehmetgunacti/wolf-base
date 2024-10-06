@@ -1,44 +1,47 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { GlyphComponent } from 'lib/components/glyph/glyph.component';
 import { UUID } from 'lib/constants';
 import { ClickedBookmark } from 'lib/models';
 
 @Component({
 	selector: 'app-bookmark',
+	standalone: true,
+	imports: [RouterModule, GlyphComponent],
 	templateUrl: './bookmark.component.html',
 	styleUrls: ['./bookmark.component.scss'],
-	host: { 'class': 'box shadow hover' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarkComponent {
 
-	@Input() bookmark: ClickedBookmark | null | undefined;
-	@Input() showDetails = false;
-	@Input() editable = true;
-	@Input() popularButton = true;
-	@Input() disabled = false;
+	bookmark = input.required<ClickedBookmark>();
+	showDetails = input(false);
+	editable = input(true);
+	popularButton = input(true);
+	disabled = input(false);
 
-	@Output() edit: EventEmitter<UUID> = new EventEmitter();
-	@Output() popular: EventEmitter<UUID> = new EventEmitter();
-	@Output() linkClick: EventEmitter<UUID> = new EventEmitter();
+	edit = output<UUID>();
+	popular = output<UUID>();
+	linkClick = output<UUID>();
 
 	onEdit(): void {
 
-		if (this.bookmark)
-			this.edit.emit(this.bookmark.id);
+		if (this.bookmark())
+			this.edit.emit(this.bookmark().id);
 
 	}
 
 	onLinkClick(): void {
 
-		if (this.bookmark)
-			this.linkClick.emit(this.bookmark.id);
+		if (this.bookmark())
+			this.linkClick.emit(this.bookmark().id);
 
 	}
 
 	onPopular(): void {
 
-		if (this.bookmark)
-			this.popular.emit(this.bookmark.id);
+		if (this.bookmark())
+			this.popular.emit(this.bookmark().id);
 
 	}
 

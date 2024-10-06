@@ -12,7 +12,12 @@
 
 		& > a {
 
-			@include mx-bar;
+			// @include mx-d-flex-col-jc-center;
+			@include mx-box($param-dark: true, $param-hover: true, $param-active: true);
+			@include mx-header;
+
+			text-decoration		: none;
+			// overflow-x			: hidden;
 
 		}
 

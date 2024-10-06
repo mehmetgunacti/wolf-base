@@ -1,4 +1,4 @@
-<header class="d-flex ai-c pl-xs">
+<header>
 
 	<w-selected-tags
 		class="flex-1"
@@ -7,23 +7,18 @@
 		(filterClick)="emptyFilter()"
 		(tagClick)="onTagClicked($event)"/>
 
-	<button
-		type="button"
-		class="link"
-		(click)="toggleCloud()">
-		<w-glyph name="chevron_left" />
+	<button class="glyph" (click)="toggleCloud()">
+		<w-glyph [class.rotate-90]="cloudVisible()" name="chevron_left"/>
 	</button>
 
 </header>
-<aside
-		class="d-flex-column gap scrollable"
-		[@slideUpDown]="cloudVisible ? 'opened' : 'closed'">
+<aside [@slideUpDown]="cloudVisible() ? 'opened' : 'closed'">
 
-	<div class="d-flex-center gap-xxs mt">
+	<div search_control>
 		<w-input
 			label="Keyword"
 			[formControl]="searchControl"
-			[autofocus]="cloudVisible"
+			[autofocus]="cloudVisible()"
 			[after]="500"/>
 		<button
 			type="button"

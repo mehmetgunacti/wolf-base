@@ -29,13 +29,8 @@
 
 			[container_tags] {
 
-				display					: grid;
-				grid-template-columns	: 1fr 1fr 1fr;
-				place-items				: start;
-				align-items				: end;
-				gap						: $gap-xs;
-				width					: 25rem;
-				place-self				: center;
+				@include mx-d-flex-center;
+				gap				: $gap-xs;
 
 			}
 

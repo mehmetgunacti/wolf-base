@@ -1,11 +1,15 @@
 @mixin mx-header(
 	$param-color: $col-text,
 	$param-font-size: $font-size,
-	$param-font-weight: bold,
-	$param-small-font-size: 0.7em,
+	$param-font-weight: normal,
+	$param-small-font-size: 0.6em,
 	$param-small-color: $col-text-secondary,
 	$param-small-font-weight: normal
 ) {
+
+	// @include mx-d-flex-column;
+	@include mx-d-block;
+	// gap			: $gap-02;
 
 	color		: fn-var($param-color);
 	font-size	: $param-font-size;
@@ -14,7 +18,8 @@
 
 	& > small {
 
-		display		: block;
+		@include mx-d-flex-ai-center;
+		gap			: $gap-02;
 		font-size	: $param-small-font-size;
 		font-weight	: $param-small-font-weight;
 		color		: fn-var($param-small-color);

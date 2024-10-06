@@ -3,6 +3,8 @@
 
 :host {
 
+	@include mx-d-block;
+	@include mx-input-element;
 	& > [tags] {
 
 		@include mx-d-inline-flex($flex-wrap: wrap);

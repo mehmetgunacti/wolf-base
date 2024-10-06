@@ -3,6 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
 	selector: 'w-input',
+	standalone: true,
 	templateUrl: './input.component.html',
 	styleUrls: ['./input.component.scss'],
 	providers: [

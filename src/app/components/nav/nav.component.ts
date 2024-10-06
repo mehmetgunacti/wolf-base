@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CloudTask, MenuItem, TAG_PINNED, TAG_POPULAR, Theme, getNextTheme } from '@lib';
 import { Store } from '@ngrx/store';
 import { GlyphComponent } from 'lib/components/glyph/glyph.component';
-import { Observable, map, take } from 'rxjs';
+import { Observable, map, of, take } from 'rxjs';
 import { coreActions } from 'store/actions';
 import { selBookmarkMenuBadge } from 'store/selectors/bookmark/bookmark-ui.selectors';
 import { selCloudAvailableTasks } from 'store/selectors/cloud/cloud.selectors';
@@ -24,6 +24,7 @@ export class NavComponent {
 
 	cloudTasks$: Observable<CloudTask[]> = this.store.select(selCloudAvailableTasks);
 	menuItems$: Observable<MenuItem[]>;
+	bottomMenuItems$ : Observable<MenuItem[]>;
 
 	constructor() {
 
@@ -78,6 +79,32 @@ export class NavComponent {
 			})
 
 		);
+
+		this.bottomMenuItems$ = of([
+
+			{
+				url: ['/settings'],
+				queryParams: { tags: TAG_POPULAR },
+				label: 'Settings',
+				icon: 'settings',
+				routerLinkActiveOptions: { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
+			},
+			{
+				url: ['/database'],
+				queryParams: { tags: TAG_POPULAR },
+				label: 'Database',
+				icon: 'database',
+				routerLinkActiveOptions: { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
+			},
+			{
+				url: ['/logs'],
+				queryParams: { tags: TAG_POPULAR },
+				label: 'View Logs',
+				icon: 'history',
+				routerLinkActiveOptions: { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
+			},
+
+		]);
 
 	}
 

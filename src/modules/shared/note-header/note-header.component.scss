@@ -1,70 +1,45 @@
-// @import 'helper';
-// @import 'variables';
-// @import 'mixins';
-// @import 'components';
+@import 'variables';
+@import 'helper';
+@import 'components';
 
-// :host {
+:host {
 
-// 	display: contents;
+	display: contents;
 
-// 	& > a {
+	& > a {
 
-// 		@include mx-d-flex-column;
-// 		@include mx-shadow;
-// 		padding				: var(--gap);
-// 		border-radius		: var(--border-radius-sm);
-// 		text-decoration		: none;
-// 		@include mx-transition(background-color);
-// 		background-color	: fn-hsl(bg-2);
+		@include mx-d-flex-column;
+		@include mx-box($param-shadow: true, $param-hover: true, $param-active: true);
+		@include mx-header;
+		text-decoration		: none;
 
-// 		& .material-symbols-outlined {
+		// & > span:first-child {
 
-// 			font-size		: var(--font-size-xs);
-// 			color			: fn-hsl(focus);
+		// 	@include mx-d-flex-ai-center;
+		// 	color	: fn-var($col-text-secondary);
+		// 	& > span:first-child {
 
-// 		}
+		// 		font-size		: $font-size-sm;
+		// 		color			: inherit;
+		// 		margin-right	: $gap-03;
 
+		// 	}
 
-// 		& > span:first-child {
+		// 	& > span:last-child {
 
-// 			@extend %flex-center-y;
-// 			color				: fn-hsl(text-secondary);
-// 			& > span:first-child {
+		// 		font-size		: $font-size-xs;
+		// 		color			: inherit;
 
-// 				font-size		: var(--font-size-sm);
-// 				color			: inherit;
-// 				margin-right	: var(--gap-xxs);
+		// 	}
 
-// 			}
+		// }
 
-// 			& > span:last-child {
+		// & > span:last-child {
 
-// 				font-size		: var(--font-size-xs);
-// 				color			: inherit;
+		// 	font-size			: $font-size;
 
-// 			}
+		// }
 
-// 		}
+	}
 
-// 		& > span:last-child {
-
-// 			font-size			: var(--font-size);
-
-// 		}
-
-// 		&:hover {
-
-// 			background-color	: fn-hsl(bg-3, (lig: "- 2%", alp: "- 0.4"));
-
-// 		}
-
-// 		// &:focus,
-// 		&:focus-visible {
-
-// 			@include mx-outline;
-
-// 		}
-
-// 	}
-
-// }
+}

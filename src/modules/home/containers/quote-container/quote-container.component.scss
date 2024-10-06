@@ -1,80 +1,84 @@
-// @import 'helper';
-// @import 'variables';
-// @import 'components';
-// @import 'mixins';
+@import 'variables';
+@import 'helper';
+@import 'components';
 
-// quote_wrapper :  class="scrollable d-grid w-100 h-100"
+@keyframes fadeOut {
 
-// @keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 
-// 	0% {
-// 		opacity: 1;
-// 	}
-// 	100% {
-// 		opacity: 0;
-// 	}
+}
 
-// }
+:host {
 
-// :host {
+	@include mx-component($param-dark: true);
+	@include mx-d-flex-col-jc-center;
+	position		: relative;
+	cursor			: pointer;
+	height			: 3 * $header-height;
+	&::before {
 
-// 	height			: calc(3 * var(--header-height));
-// 	&::before {
+		--col-primary-alp: 0.5;
 
-// 		--col-primary-alp: 0.5;
+		content		: "„";
+		position	: absolute;
+		color		: fn-var($col-primary);
+		left		: $gap-05;
+		top			: -3 * $gap-05;
+		font-weight	: bold;
+		font-size	: 15rem;
+		line-height	: 0;
+		z-index		: $z-index-main + 100;
 
-// 		content		: "„";
-// 		position	: absolute;
-// 		color		: color-mix(in hsl, var(--col-primary), transparent 50%);
-// 		left		: var(--gap-sm);
-// 		top			: calc(-3 * var(--gap-sm));
-// 		font-weight	: bold;
-// 		font-size	: 15rem;
-// 		line-height	: 0;
+		@include mx-md {
 
-// 		@include bigScreen {
+			top		: -$gap-05;
+        	left	: $gap-1;
 
-// 			top		: calc(-1 * var(--gap-sm));
-//         	left	: var(--gap);
+		}
 
-// 		}
+	}
 
-// 	}
+	& > [quote_icon] {
 
-// 	& > [quote_icon] {
+		position	: absolute;
+    	top			: $component-padding-block;
+		right		: $component-padding-inline;
+		z-index		: $z-index-main + 300;
 
-// 		right		: var(--gap-xxl);
-//     	top			: calc(2 * var(--gap-xxl));
+		& > [quote_badge] {
 
-// 		@include bigScreen {
+			right			: -6px;
+			bottom			: 5px;
+			line-height		: 0.5;
+			font-size		: 1.5rem;
+			color			: fn-var($col-accent);
 
-// 			top		: calc(2 * var(--gap-lg));
-// 			right	: calc(2 * var(--gap-sm));
+			&.paused {
 
-// 		}
+				color		: fn-var($col-warn);
 
-// 		& > [quote_badge] {
+			}
 
-// 			right			: -6px;
-// 			bottom			: 5px;
-// 			line-height		: 0.5;
-// 			font-size		: 1.5rem;
-// 			color			: var(--col-accent);
+			&.play {
 
-// 			&.paused {
+				animation: fadeOut 2s forwards;
 
-// 				color		: var(--col-warn);
+			}
 
-// 			}
+		}
 
-// 			&.play {
+	}
 
-// 				animation: fadeOut 2s forwards;
+	& > [quote_wrapper] {
 
-// 			}
+		z-index	: $z-index-main + 200;
+		@include mx-scrollable;
 
-// 		}
+	}
 
-// 	}
-
-// }
+}

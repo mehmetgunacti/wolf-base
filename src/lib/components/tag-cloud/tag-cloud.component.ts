@@ -83,7 +83,6 @@ function createUITags(selectedTags: string[], relatedTags: string[], tags: Tag[]
 	selector: 'w-tag-cloud',
 	templateUrl: './tag-cloud.component.html',
 	styleUrls: ['./tag-cloud.component.scss'],
-	host: { 'class': 'd-flex-center wrap gap-xs' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TagCloudComponent {

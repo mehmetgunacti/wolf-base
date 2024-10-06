@@ -33,7 +33,6 @@ const incoming$ = (pair: Pair, animate: boolean, store: Store): Observable<Quote
 	templateUrl: './quote-container.component.html',
 	styleUrls: ['./quote-container.component.scss'],
 	animations: [onEnterFadeOutTrigger],
-	host: { 'class': 'box shadow dark d-flex-column jc-center pos-relative cur-pointer' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuoteContainerComponent {

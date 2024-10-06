@@ -1,11 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, InputSignal, WritableSignal, computed, forwardRef, input, output, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { UUID } from 'lib/constants';
 import { filterArrayElements } from 'lib/utils';
 import { v4 as uuidv4 } from 'uuid';
+import { GlyphComponent } from '../glyph/glyph.component';
 
 @Component({
 	selector: 'w-input-tag',
+	standalone: true,
+	imports: [CommonModule, GlyphComponent],
 	templateUrl: './input-tag.component.html',
 	styleUrls: ['./input-tag.component.scss'],
 	providers: [
@@ -17,8 +21,7 @@ import { v4 as uuidv4 } from 'uuid';
 	],
 	host: {
 		'[tabindex]': '0',
-		'(focus)': 'onHostFocus()',
-		'class': 'input-element'
+		'(focus)': 'onHostFocus()'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -1,32 +1,40 @@
-// @import 'helper';
-// @import 'mixins';
+@import 'variables';
+@import 'helper';
 
-// :host {
+:host {
 
-// 	& > a,
-// 	& > span {
+	// host: { 'class': 'd-flex-center wrap gap-xs' },
+	@include mx-d-flex-center;
+	flex-wrap	: wrap;
+	gap			: $gap-05;
 
-// 		font-size 		: 1.1rem;
-// 		line-height		: 0.8;
+	& > a,
+	& > span {
 
-// 		&.selected {
+		@include mx-d-inline-block;
+		cursor			: pointer;
+		font-size 		: 1.1rem;
+		line-height		: 0.8;
 
-// 			color 		: var(--col-accent);
+		&.selected {
 
-// 		}
+			color 		: fn-var($col-accent);
 
-// 		&.related {
+		}
 
-// 			color 		: var(--col-text);
+		&.related {
 
-// 		}
+			color 		: fn-var($col-text);
 
-// 		&.disabled {
+		}
 
-// 			color 		: var(--col-btn-disabled-bg-color);
+		&.disabled {
 
-// 		}
+			color 		: fn-var($col-disabled-text);
+			cursor		: text;
 
-// 	}
+		}
 
-// }
+	}
+
+}

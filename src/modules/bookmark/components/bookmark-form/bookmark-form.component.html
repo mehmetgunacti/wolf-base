@@ -1,12 +1,16 @@
 <div bookmark-wrapper>
 
-	<app-bookmark
-		class="dark"
-		[bookmark]="bookmark$ | async"
-		[showDetails]="true"
-		[disabled]="true"
-		[popularButton]="false"
-		[editable]="false"/>
+	@if (bookmark$ | async; as bm) {
+
+		<app-bookmark
+			class="dark"
+			[bookmark]="bm"
+			[showDetails]="true"
+			[disabled]="true"
+			[popularButton]="false"
+			[editable]="false"/>
+
+	}
 
 </div>
 

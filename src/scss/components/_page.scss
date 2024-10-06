@@ -1,12 +1,31 @@
 @mixin mx-page($param-calc-height: false) {
 
-	@include mx-d-flex-column;
-	gap		: $page-padding;
-	padding	: $page-padding;
+	@include mx-d-flex-col-jc-center;
+	gap				: $page-padding;
+	padding			: $page-padding;
+	margin-inline	: auto;
 
 	@if $param-calc-height {
 
 		height	: calc(100dvh - #{$header-height});
+
+	}
+
+	@include mx-container-lg {
+
+		max-width	: 90%;
+
+	}
+
+	@include mx-container-xl {
+
+		max-width	: 80%;
+
+	}
+
+	@include mx-container-xxl {
+
+		max-width	: 70%;
 
 	}
 

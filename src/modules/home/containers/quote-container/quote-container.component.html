@@ -1,13 +1,13 @@
-<div quote_icon class="pos-absolute">
+<div quote_icon>
 
 	@if (!running()) {
 
-		<span class="material-symbols-outlined paused pos-absolute" quote_badge>pause_circle</span>
+		<w-glyph name="pause_circle" class="paused" quote_badge/>
 
 	}
 	@if (showPlay()) {
 
-		<span class="material-symbols-outlined play" quote_badge>play_circle</span>
+		<w-glyph name="play_circle" class="play" quote_badge/>
 
 	}
 

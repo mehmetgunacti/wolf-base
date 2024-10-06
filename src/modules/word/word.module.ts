@@ -7,6 +7,7 @@ import { WordRoutingModule } from './word-routing.module';
 import * as fromConfig from './word.config';
 import { MarkdownModule } from 'lib/components/markdown';
 import { HideEnumModule } from 'lib/pipes/hide-enum.pipe';
+import { SearchBoxComponent } from "../../lib/components/search-filter/search-box.component";
 
 @NgModule({
 	declarations: [...fromConfig.components],
@@ -17,7 +18,8 @@ import { HideEnumModule } from 'lib/pipes/hide-enum.pipe';
 		SharedModule,
 		CroppieModule,
 		MarkdownModule,
-		HideEnumModule
+		HideEnumModule,
+		SearchBoxComponent
 	]
 })
 export class WordModule { }

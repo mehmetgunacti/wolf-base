@@ -1,54 +1,55 @@
-// @import 'helper';
-// @import 'variables';
-// @import 'components';
-// @import 'mixins';
+@import 'variables';
+@import 'helper';
+@import 'components';
 
-// :host {
+:host {
 
-// 	--color-green	: #{fn-hsl(success)};
-// 	--color-red		: #{fn-hsl(error)};
+	@include mx-component;
 
-// 	overflow		: hidden;
+	--color-green	: #{fn-hsl(success)};
+	--color-red		: #{fn-hsl(error)};
 
-// 	& > [quiz_header] {
+	overflow		: hidden;
 
-// 		& > [quiz_hints] {
+	& > [quiz_header] {
 
-// 			& > [quiz_contexts],
-// 			& > [quiz_samples] {
+		& > [quiz_hints] {
 
-// 				display		: grid;
-// 				font-size	: smaller;
-// 				padding		: var(--gap-sm) var(--gap-xl);
+			& > [quiz_contexts],
+			& > [quiz_samples] {
 
-// 			}
+				display		: grid;
+				font-size	: smaller;
+				padding		: var(--gap-sm) var(--gap-xl);
 
-// 		}
+			}
 
-// 	}
+		}
 
-// 	& > [quiz_choices] {
+	}
 
-// 		display					: grid;
-// 		grid-template-columns	: repeat(auto-fill, minmax(35rem, 1fr));
-// 		overflow				: 'hidden';
+	& > [quiz_choices] {
 
-// 		& > [quiz_choice] {
+		display					: grid;
+		grid-template-columns	: repeat(auto-fill, minmax(35rem, 1fr));
+		overflow				: 'hidden';
 
-// 			&.correct {
+		& > [quiz_choice] {
 
-// 				background-color	: var(--col-success);
+			&.correct {
 
-// 			}
+				background-color	: var(--col-success);
 
-// 			&.incorrect {
+			}
 
-// 				background-color	: var(--col-error);
+			&.incorrect {
 
-// 			}
+				background-color	: var(--col-error);
 
-// 		}
+			}
 
-// 	}
+		}
 
-// }
+	}
+
+}

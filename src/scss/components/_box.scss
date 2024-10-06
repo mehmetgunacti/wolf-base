@@ -10,10 +10,10 @@
 	$param-bg-color-hover	: $col-bg-component-hover,
 	$param-bg-color-active	: $col-bg-component-active,
 	$param-border-radius	: $border-radius-lg,
-	$param-min-height		: $widget-height-lg,
+	$param-min-height		: auto,
 
-	$param-padding-inline	: $gap-lg,
-	$param-padding-block	: 0,
+	$param-padding-inline	: $component-padding-inline,
+	$param-padding-block	: $component-padding-block,
 
 	$param-shadow-color		: $shadow
 

@@ -1,40 +1,35 @@
-@if (projects$ | async; as projects) {
+@let projects = (projects$ | async) ?? [];
 
-	<header>
+<header>
+	Projects <small>{{ projects.length }} Entries</small>
+</header>
 
-		<div card_title>Projects <small>{{ projects.length }} Entries</small></div>
+@if (projects.length > 0) {
 
-	</header>
+	<section content>
 
-	@if (projects.length > 0) {
+		@for (project of projects; track $index) {
 
-		<div project_entries>
+			<a [routerLink]="['/projects', project.id]" tabindex="0">
 
-			@for (project of projects; track $index) {
+				{{ project.name }}
+				<small><w-glyph name="schedule"/>{{ project.start }}</small>
 
-				<a	class="box transition-bg"
-					[routerLink]="['/projects', project.id]"
-					tabindex="0">
+			</a>
 
-					<span>{{ project.name }}</span>
-					<small>{{ project.start }}</small>
+		}
 
-				</a>
+	</section>
 
-			}
+} @else {
 
-		</div>
-
-	} @else {
-
-		<div class="empty">
-			No projects available
-			<br>
-			<button routerLink="/projects/new" class="link">
-				<w-glyph name="add" /> Add Project
-			</button>
-		</div>
-
-	}
+	<!-- todo this could be a component -->
+	<div class="empty">
+		No projects available
+		<br>
+		<button routerLink="/projects/new" class="link">
+			<w-glyph name="add" /> Add Project
+		</button>
+	</div>
 
 }
