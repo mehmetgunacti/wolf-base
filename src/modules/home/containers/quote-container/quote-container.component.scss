@@ -27,8 +27,8 @@
 		content		: "„";
 		position	: absolute;
 		color		: fn-var($col-primary);
-		left		: $gap-05;
-		top			: -3 * $gap-05;
+		left		: $gap-xs;
+		top			: -3 * $gap-xs;
 		font-weight	: bold;
 		font-size	: 15rem;
 		line-height	: 0;
@@ -36,7 +36,7 @@
 
 		@include mx-md {
 
-			top		: -$gap-05;
+			top		: -$gap-xs;
         	left	: $gap-1;
 
 		}

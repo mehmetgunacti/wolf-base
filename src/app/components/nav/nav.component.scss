@@ -17,7 +17,7 @@ $_nav-menu-1st-col-width	: $nav-half-width - 2 * $_nav-menu-gap;
 		@include mx-d-grid;
 		grid-auto-rows	: $_nav-menu-row-height;
 		padding			: $gap;
-		gap				: $gap-05;
+		gap				: $gap-xs;
 
 		& > a {
 

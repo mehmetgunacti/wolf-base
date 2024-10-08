@@ -42,8 +42,8 @@
 				[glyph] {
 
 					@include mx-d-flex-col-ai-center;
-					gap		: $gap-05;
-					padding	: $gap-05;
+					gap		: $gap-xs;
+					padding	: $gap-xs;
 					& > svg {
 
 						width	: 2.4rem;

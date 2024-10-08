@@ -10,7 +10,7 @@
 
 		@include mx-box($param-dark: true, $param-shadow: true, $param-min-height: $widget-height-xl);
 		@include mx-d-flex-ai-c-jc-e;
-		gap	: $gap-05;
+		gap	: $gap-xs;
 
 		& > :first-child {
 

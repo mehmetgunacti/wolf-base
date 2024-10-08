@@ -19,7 +19,7 @@
 	& > small {
 
 		@include mx-d-flex-ai-center;
-		gap			: $gap-02;
+		gap			: $gap-xxs;
 		font-size	: $param-small-font-size;
 		font-weight	: $param-small-font-weight;
 		color		: fn-var($param-small-color);

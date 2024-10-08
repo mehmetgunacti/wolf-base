@@ -6,7 +6,7 @@
 	// host: { 'class': 'd-flex-center wrap gap-xs' },
 	@include mx-d-flex-center;
 	flex-wrap	: wrap;
-	gap			: $gap-05;
+	gap			: $gap-xs;
 
 	& > a,
 	& > span {
