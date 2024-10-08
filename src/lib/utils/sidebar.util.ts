@@ -39,7 +39,7 @@ export function nextState(state: SidebarState, bigScreen: boolean): SidebarState
 	if (state === SidebarState.HALF) return SidebarState.FULL;
 	if (state === SidebarState.HIDDEN) return SidebarState.FULL;
 
-	throw Error('Unreachable code');
+	return SidebarState.FULL;
 
 }
 
@@ -63,7 +63,7 @@ export function afterResize(state: SidebarState, bigScreen: boolean): SidebarSta
 	if (state === SidebarState.HALF) return SidebarState.BIG_HALF;
 	if (state === SidebarState.HIDDEN) return SidebarState.BIG_HIDDEN;
 
-	throw Error('Unreachable code');
+	return SidebarState.FULL;
 
 }
 
