@@ -8,7 +8,6 @@
 	@include mx-transition-short(background-color);
 
 	&.rotate-45 {
-	&.rotate-45 {
 
 		--rotate : rotate(-45deg);
 
@@ -33,7 +32,6 @@
 
 	}
 
-	&.lg > svg {
 	&.lg > svg {
 
 		font-size	: 1.5em;
@@ -82,7 +80,6 @@
 		width		: auto;
 		transform	: var(--rotate);
 		fill		: currentcolor;
-		// @include mx-transition-short(color background-color transform font-size);
 
 	}
 
