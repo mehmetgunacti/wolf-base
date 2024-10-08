@@ -21,7 +21,8 @@
 
 	& > header {
 
-		@include mx-header($param-font-size: $font-size-h4, $param-small-font-size: 0.5em);
+		@include mx-header($param-font-size: $font-size-h2, $param-small-font-size: 0.5em);
+		margin-bottom	: $gap-xl;
 
 	}
 

@@ -13,7 +13,7 @@
 	#{$col-accent}				: hsl(215deg 65% 30%);
 	#{$col-focus}				: hsl(16deg 80% 44%);
 
-	#{$col-outline}				: fn-color-set-alpha($col-focus, 0.4);
+	#{$col-outline}				: hsl(215deg 77% 48% / 0.5);
 
 	// VARIANTS
 	#{$col-primary}				: fn-var($col-accent);
