@@ -17,6 +17,7 @@
 
 	// VARIANTS
 	#{$col-primary}				: fn-var($col-accent);
+	#{$col-primary}				: fn-var($col-accent);
 	#{$col-primary-text}		: fn-var($col-text);
 	#{$col-primary-hover}		: fn-color-lighten($col-primary, 15%);
 	#{$col-primary-active}		: fn-color-lighten($col-primary, 25%);
@@ -28,6 +29,7 @@
 	#{$col-success-active}		: fn-color-lighten($col-success, 15%);
 	#{$col-success-border}		: fn-color-darken($col-success, 10%);
 
+	#{$col-info}				: hsl(201deg 100% 28%);
 	#{$col-info}				: hsl(201deg 100% 28%);
 	#{$col-info-text}			: fn-var($col-text);
 	#{$col-info-hover}			: fn-color-lighten($col-info, 10%);
@@ -58,6 +60,8 @@
 	#{$col-form-element-border}	: fn-color-darken($col-form-element-bg, 10%);
 
 	#{$col-bg-component}		: hsl(210deg 11% 13%);
+	#{$col-bg-component-hover}	: #{fn-color-darken($col-bg-component, 20%)};
+	#{$col-bg-component-active}	: #{fn-color-darken($col-bg-component, 25%)};
 	#{$col-bg-component-hover}	: #{fn-color-darken($col-bg-component, 20%)};
 	#{$col-bg-component-active}	: #{fn-color-darken($col-bg-component, 25%)};
 
