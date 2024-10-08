@@ -1,12 +1,12 @@
-import { Component, OnInit, WritableSignal, computed, inject, signal } from '@angular/core';
-import { environment } from 'environments/environment';
-import { delay, of } from 'rxjs';
-import { splashTrigger } from './components/splash-screen/splash-screen.animation';
-import { sidebarTrigger } from 'lib/animations/sidebar.animation';
-import { Store } from '@ngrx/store';
-import { selCore_sidebarState } from 'store/selectors/core/core-ui.selectors';
-import { fadeInFadeOutTrigger, opacityTrigger, SidebarState } from '@lib';
+import { Component, computed, inject, signal, WritableSignal } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
+import { opacityTrigger, SidebarState } from '@lib';
+import { Store } from '@ngrx/store';
+import { environment } from 'environments/environment';
+import { sidebarTrigger } from 'lib/animations/sidebar.animation';
+import { delay, of } from 'rxjs';
+import { selCore_sidebarState } from 'store/selectors/core/core-ui.selectors';
+import { splashTrigger } from './components/splash-screen/splash-screen.animation';
 
 @Component({
 	selector: 'app-root',
@@ -14,7 +14,7 @@ import { Meta } from '@angular/platform-browser';
 	styleUrls: ['./app.component.scss'],
 	animations: [splashTrigger, sidebarTrigger, opacityTrigger]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
 	splashVisible: WritableSignal<boolean> = signal(true);
 	sidebarState = inject(Store).selectSignal(selCore_sidebarState);
@@ -31,21 +31,6 @@ export class AppComponent implements OnInit {
 		of(false)
 			.pipe(delay(environment.splash)) // splash screen visible for n ms
 			.subscribe(() => this.splashVisible.set(false));
-
-	}
-
-	ngOnInit(): void {
-
-		// disable caching in dev
-		// if (!environment.production) {
-
-		// 	this.meta.addTags([
-		// 		{ httpEquiv: 'Cache-Control', content: 'no-cache, no-store, must-revalidate' },
-		// 		{ httpEquiv: 'Pragma', content: 'no-cache' },
-		// 		{ httpEquiv: 'Expires', content: '0' }
-		// 	]);
-
-		// }
 
 	}
 

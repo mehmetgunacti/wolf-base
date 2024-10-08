@@ -66,7 +66,7 @@
 		z-index		: $z-index-nav;
 
 		top			: 0;
-		left		: 0;
+		left		: -$nav-full-width;
 
 		height		: 100dvh;
 		width		: $nav-full-width;
@@ -74,7 +74,7 @@
 		overflow	: hidden;
 
 		background-color	: fn-var($col-bg-nav);
-		@include mx-transition(height width left background-color box-shadow);
+		@include mx-transition(height background-color box-shadow);
 		@include mx-shadow($shadow);
 
 	}
