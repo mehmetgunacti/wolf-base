@@ -1,4 +1,4 @@
-form {
+@mixin mx-form {
 
 	@include mx-d-flex-column;
 	gap		: $form-gap;
@@ -8,5 +8,11 @@ form {
 		@include mx-footer-buttons;
 
 	}
+
+}
+
+form {
+
+	@include mx-form;
 
 }

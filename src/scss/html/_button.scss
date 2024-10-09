@@ -79,6 +79,18 @@ $_button-properties	: (
 		"--font-size"		: $font-size-xs,
 		"--border-radius"	: $border-radius-sm,
 	),
+	success : (
+		"--color"				: fn-var($col-success-text),
+		"--background-color"	: fn-var($col-success),
+		"--border-color"		: fn-var($col-success-border),
+		hover: (
+			"--background-color"	: fn-var($col-success-hover)
+		),
+
+		active: (
+			"--background-color"	: fn-var($col-success-active)
+		)
+	),
 	info : (
 		"--color"				: fn-var($col-info-text),
 		"--background-color"	: fn-var($col-info),
@@ -126,10 +138,10 @@ $_button-properties	: (
 	link: (
 		"--background-color"	: fn-var($col-transparent),
 		"--border-color"		: fn-var($col-transparent),
-		"--color"				: fn-var($col-info),
+		"--color"				: fn-var($col-text),
 		hover: (
 			"--background-color"	: fn-var($col-transparent),
-			"--color"				: fn-var($col-info-hover),
+			// "--color"				: fn-var($col-text-hover),
 			"text-decoration"		: underline
 		),
 		active: (
@@ -259,6 +271,20 @@ $_button-properties	: (
 
 		&:active {
 			@include mx-define-css-vars(map-get($_button-properties, disabled, active), $_prefix);
+		}
+
+	}
+
+	&.success {
+
+		@include mx-define-css-vars(map-get($_button-properties, success), $_prefix);
+
+		&:hover {
+			@include mx-define-css-vars(map-get($_button-properties, success, hover), $_prefix);
+		}
+
+		&:active {
+			@include mx-define-css-vars(map-get($_button-properties, success, active), $_prefix);
 		}
 
 	}

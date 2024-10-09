@@ -1,8 +1,8 @@
 $_label-height: 4.5rem;
 
-@mixin mx-fieldset {
+@mixin mx-fieldset($param-dark: false) {
 
-	@include mx-component;
+	@include mx-component($param-dark: $param-dark);
 	position	: relative;
 	border		: 0;
 
@@ -11,18 +11,19 @@ $_label-height: 4.5rem;
 		@include mx-d-flex-center;
 		background-color: fn-var($col-bg-component-dark);
 		border-radius	: $border-radius-xl;
-		min-height		: $_label-height; // <-- same as nth-child(2) 'top'
+		min-height		: $_label-height;
 		min-width		: 1.5 * $_label-height;
 		font-size		: $font-size;
 		line-height		: $_label-height;
 
+		margin-bottom	: $gap-xl;
 		padding-inline	: $gap;
 		@include mx-shadow;
 
 		&:nth-child(2) {
 
 			position: absolute;
-			top		: -$_label-height;
+			top		: -6rem;
 			right	: 5 * $gap-xxs;
 
 		}

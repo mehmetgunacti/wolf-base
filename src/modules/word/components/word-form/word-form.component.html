@@ -20,7 +20,13 @@
 		<!-- PRONUNCIATION -->
 		<w-input [formControl]="form.pronunciation" label="Pronunciation"/>
 
-		<button type="button" (click)="form.addContext()">Add Context</button>
+		<button
+			add_button
+			type="button"
+			class="success"
+			(click)="form.addContext()">
+			<w-glyph name="add_circle" /> Add Context
+		</button>
 
 		@for (context of form.contexts(); track context.objectId) {
 
@@ -30,10 +36,10 @@
 				<w-textarea [formControl]="context.fc" [label]="'Context #' + ($index + 1)" [rows]="3"/>
 				<button
 					type="button"
-					class="link small"
+					class="glyph squared sm"
 					[title]="'Remove Sample #' + ($index + 1)"
 					(click)="form.removeContext(context.objectId)">
-					<span class="material-symbols-outlined warn">do_not_disturb_on</span>
+					<w-glyph name="do_not_disturb_on" class="focused" />
 				</button>
 
 			</div>
@@ -47,12 +53,14 @@
 
 				@if($index > 0) {
 
-					<button
-						type="button"
-						class="link small"
-						(click)="form.removeDefinition(definition.objectId)">
-						<span class="material-symbols-outlined warn">do_not_disturb_on</span> Remove Definition #{{ $index + 1 }}
-					</button>
+					<legend>
+						<button
+							type="button"
+							class="ghost sm"
+							(click)="form.removeDefinition(definition.objectId)">
+							<w-glyph name="do_not_disturb_on" class="focused" /> Remove Definition #{{ $index + 1 }}
+						</button>
+					</legend>
 
 				}
 
@@ -76,20 +84,20 @@
 
 								<button
 									type="button"
-									class="link small"
+									class="glyph squared sm"
 									title="Add Language"
 									(click)="definition.addLanguage()">
-									<span class="material-symbols-outlined success">add_circle</span>
+									<w-glyph name="add_circle" class="success" />
 								</button>
 
 							} @else {
 
 								<button
 									type="button"
-									class="link small"
+									class="glyph squared sm"
 									[title]="'Remove Language #' + ($index + 1)"
 									(click)="definition.removeLanguage(lang.objectId)">
-									<span class="material-symbols-outlined warn">do_not_disturb_on</span>
+									<w-glyph name="do_not_disturb_on" class="focused" />
 								</button>
 
 							}
@@ -108,20 +116,20 @@
 
 								<button
 									type="button"
-									class="link small"
+									class="glyph squared sm"
 									title="Add Sample"
 									(click)="definition.addSample()">
-									<span class="material-symbols-outlined success">add_circle</span>
+									<w-glyph name="add_circle" class="success" />
 								</button>
 
 							} @else {
 
 								<button
 									type="button"
-									class="link small"
+									class="glyph squared sm"
 									[title]="'Remove Sample #' + ($index + 1)"
 									(click)="definition.removeSample(sample.objectId)">
-									<span class="material-symbols-outlined warn">do_not_disturb_on</span>
+									<w-glyph name="do_not_disturb_on" class="focused" />
 								</button>
 
 							}
@@ -134,7 +142,13 @@
 			</fieldset>
 
 		}
-		<button type="button" (click)="form.addDefinition()">Add Definition</button>
+		<button
+			add_button
+			type="button"
+			class="success"
+			(click)="form.addDefinition()">
+			<w-glyph name="add_circle" /> Add Definition
+		</button>
 
 	</form>
 

@@ -1,132 +1,109 @@
-// @import 'helper';
-// @import 'variables';
-// @import 'components';
-// @import 'mixins';
+@import 'variables';
+@import 'helper';
+@import 'components';
+@import 'html';
 
-// :host {
+:host {
 
-// 	@include mx-card;
+	@include mx-component;
 
-// 	form {
+	form {
 
-// 		@include mx-d-flex-column;
-// 		padding			: var(--gap-xs);
-// 		gap				: var(--gap);
+		& > div {
 
-// 		& > div {
+			display			: flex;
+			flex-direction	: row;
+			gap				: var(--gap-xs);
+			& :first-child {
 
-// 			display			: flex;
-// 			flex-direction	: row;
-// 			gap				: var(--gap-xs);
-// 			& :first-child {
+				flex	: 1;
 
-// 				flex	: 1;
+			}
 
-// 			}
+			& .material-symbols-outlined {
 
-// 			& .material-symbols-outlined {
+				font-size	: 1.4rem;
 
-// 				font-size	: 1.4rem;
+			}
 
-// 			}
+		}
 
-// 		}
+		& div[context] {
 
-// 		& div[context] {
+			@include mx-d-flex;
+			gap: $gap;
 
-// 			display		: flex;
+			& *:first-child {
 
-// 			& *:first-child {
+				flex	: 1;
 
-// 				flex	: 1;
+			}
 
-// 			}
+		}
 
-// 		}
+		& > fieldset {
 
-// 		& > fieldset {
+			@include mx-fieldset($param-dark: true);
+			position	: relative;
 
-// 			position	: relative;
+			& > button {
 
-// 			& > legend {
+				position		: absolute;
+				top				: -3rem;
+				right			: 0;
 
-// 				padding-top		: 2rem;
-// 				padding-bottom	: 1rem;
+			}
 
-// 			}
+			& div[definition] {
 
-// 			& > button {
+				@include mx-form;
+				// grid-template-columns	: 1fr 1fr;
+				// grid-gap				: var(--gap-sm);
 
-// 				position		: absolute;
-// 				top				: -3rem;
-// 				right			: 0;
+				// & div:first-child,
+				// & div[language]
+				// & div[sample] {
 
-// 			}
+				// 	grid-column: span 2;
 
-// 			& div[definition] {
+				// }
 
-// 				@include mx-d-flex-column;
-// 				// grid-template-columns	: 1fr 1fr;
-// 				grid-gap				: var(--gap-sm);
+				& div[language] {
 
-// 				// & div:first-child,
-// 				// & div[language]
-// 				// & div[sample] {
+					@include mx-d-flex;
+					gap: $gap;
 
-// 				// 	grid-column: span 2;
+					& > :nth-child(2) {
 
-// 				// }
+						flex		: 1;
 
-// 				& div[language] {
+					}
 
-// 					display		: flex;
-// 					grid-gap	: var(--gap-sm);
+				}
 
-// 					& > :nth-child(2) {
+				& div[sample] {
 
-// 						flex		: 1;
+					@include mx-d-flex;
+					gap: $gap;
 
-// 					}
+					& *:first-child {
 
-// 				}
+						flex	: 1;
 
-// 				& div[sample] {
+					}
 
-// 					display		: flex;
-// 					grid-gap	: var(--gap-sm);
+				}
 
-// 					& *:first-child {
+			}
 
-// 						flex	: 1;
+		}
 
-// 					}
+	}
 
-// 				}
+	& [add_button] {
 
-// 			}
+		margin-left	: auto;
 
-// 		}
+	}
 
-// 	}
-
-// 	& > footer {
-
-// 		@include mx-d-flex-end-center;
-
-// 	}
-
-// 	// div[form-element-buttons] {
-
-// 	// 	flex				: 1;
-// 	// 	@extend %flex-space-between-center;
-// 	// 	padding				: var(--gap-xs);
-
-// 	// 	& button:last-child {
-
-// 	// 		margin-left		: auto;
-
-// 	// 	}
-
-// 	// }
-
-// }
+}

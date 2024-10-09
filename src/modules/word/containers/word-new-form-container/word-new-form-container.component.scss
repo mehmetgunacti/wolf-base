@@ -1,8 +1,7 @@
-// @import 'helper';
-// @import 'mixins/responsive';
+@import 'helper';
 
-// :host {
+:host {
 
-// 	@extend %flex-column;
+	@include mx-d-contents;
 
-// }
+}
