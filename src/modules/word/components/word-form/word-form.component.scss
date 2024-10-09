@@ -1,7 +1,7 @@
 @import 'variables';
 @import 'helper';
 @import 'components';
-@import 'html';
+@import 'html/form';
 
 :host {
 
@@ -13,7 +13,7 @@
 
 			display			: flex;
 			flex-direction	: row;
-			gap				: var(--gap-xs);
+			gap				: $gap-xs;
 			& :first-child {
 
 				flex	: 1;

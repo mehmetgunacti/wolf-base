@@ -213,7 +213,6 @@ $_button-properties	: (
 
 				$cssVarName: str-slice($value, 3); // '--'.length = 2
 				$val : if(string.length($cssVarName) == 0, $key, $cssVarName);
-				@debug $key $value $cssVarName string.length($cssVarName) $val;
 				#{$key}: var(--#{$prefix}-#{$val});
 
 			} @else {
