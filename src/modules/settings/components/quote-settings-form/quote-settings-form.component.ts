@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input, output, untracked } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Quote, UUID } from '@lib';
 
@@ -47,12 +47,16 @@ export class QuoteSettingsFormComponent {
 		effect(() => {
 
 			const val = this.quote();
-			if (val)
-				this.form.setValue(val);
-			else
-				this.resetForm();
+			untracked(() => {
 
-		}, { allowSignalWrites: true });
+				if (val)
+					this.form.setValue(val);
+				else
+					this.resetForm();
+
+			});
+
+		});
 
 	}
 

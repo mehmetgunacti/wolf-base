@@ -1,8 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject, input } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { UUID, Word, isInvalid } from 'lib';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, output, untracked } from '@angular/core';
+import { UUID, Word } from 'lib';
 import { DEFINITION_LANGUAGES, DEFINITION_TYPES } from 'lib/constants/word.constant';
-import { filter, tap } from 'rxjs';
 import { WORD_FORM, WordForm } from './word-form';
 
 @Component({
@@ -20,31 +18,30 @@ export class WordFormComponent {
 	/* @Input() */
 	word = input<Word | null>(null);
 
-	@Output() create: EventEmitter<Partial<Word>> = new EventEmitter();
-	@Output() update: EventEmitter<{ id: UUID, word: Partial<Word> }> = new EventEmitter();
+	protected isUpdate = computed(() => !!this.word()?.id);
 
-	form: WordForm = inject(WORD_FORM);
+	create = output<Partial<Word>>();
+	update = output<{ id: UUID, word: Partial<Word> }>();
+
+	protected form: WordForm = inject(WORD_FORM);
 
 	constructor() {
 
-		// on incoming 'word' set form values
-		toObservable(this.word).pipe(
+		effect(() => {
 
-			takeUntilDestroyed(),
-			filter((word): word is Word => word !== null),
-			tap(word => this.form.setValue(word))
+			const word = this.word();
+			if (word)
+				untracked(() => this.form.populate(word));
 
-		).subscribe();
+		});
 
 	}
 
 	onSave(): void {
 
-		const formGroup = this.form.formGroup();
-		if (isInvalid(formGroup))
-			return;
+		console.log('onSave()');
 
-		const word: Partial<Word> = formGroup.value as Partial<Word>;
+		const word: Partial<Word> = this.form.fgWord.value as Partial<Word>;
 		if (word.id)
 			this.update.emit({ id: word.id, word });
 		else

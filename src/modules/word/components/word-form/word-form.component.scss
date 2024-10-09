@@ -20,12 +20,6 @@
 
 			}
 
-			& .material-symbols-outlined {
-
-				font-size	: 1.4rem;
-
-			}
-
 		}
 
 		& div[context] {
@@ -57,22 +51,17 @@
 			& div[definition] {
 
 				@include mx-form;
-				// grid-template-columns	: 1fr 1fr;
-				// grid-gap				: var(--gap-sm);
-
-				// & div:first-child,
-				// & div[language]
-				// & div[sample] {
-
-				// 	grid-column: span 2;
-
-				// }
 
 				& div[language] {
 
 					@include mx-d-flex;
 					gap: $gap;
 
+					& > :first-child {
+
+						min-width	: 12rem;
+
+					}
 					& > :nth-child(2) {
 
 						flex		: 1;

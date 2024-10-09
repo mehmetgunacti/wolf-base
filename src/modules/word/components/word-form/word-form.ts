@@ -1,5 +1,5 @@
-import { InjectionToken, WritableSignal, signal } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { InjectionToken } from '@angular/core';
+import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Definition, Language, UUID, Word } from '@lib';
 import { DefinitionLanguage, DefinitionType } from 'lib/constants/word.constant';
 
@@ -30,296 +30,196 @@ interface WordFormSchema {
 
 }
 
-class ContextForm {
+function fc<T>(value: T | null = null): FormControl<T | null> {
 
-	// to be used by @if (... track objectId)
-	readonly objectId: string;
-	readonly fc: FormControl<string>;
-
-	constructor(s?: string) {
-
-		// objectId
-		this.objectId = 'context_' + Math.random();
-
-		// form field
-		this.fc = new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-
-		if (s)
-			this.setValue(s);
-
-	}
-
-	setValue(s: string): void {
-
-		this.fc.setValue(s);
-
-	}
+	return new FormControl<T | null>(value);
 
 }
 
-class SampleForm {
+function nnfc<T>(value: T, validators: ValidatorFn | ValidatorFn[] | null | undefined = []): FormControl<T> {
 
-	// to be used by @if (... track objectId)
-	readonly objectId: string;
-	readonly fc: FormControl<string>;
-
-	constructor(s?: string) {
-
-		// objectId
-		this.objectId = 'sample_' + Math.random();
-
-		// form field
-		this.fc = new FormControl('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-
-		if (s)
-			this.setValue(s);
-
-	}
-
-	setValue(s: string): void {
-
-		this.fc.setValue(s);
-
-	}
+	return new FormControl<T>(value, { validators, nonNullable: true });
 
 }
 
-class LanguageForm {
+function fg<T extends { [K in keyof T]: AbstractControl<any, any>; }>(value: T = {} as T): FormGroup<T> {
 
-	// to be used by @if (... track objectId)
-	readonly objectId: string;
-
-	// form fields
-	readonly name: FormControl<string>;
-	readonly language: FormControl<DefinitionLanguage>;
-
-	constructor(language?: Language) {
-
-		// object id
-		this.objectId = 'definition_' + Math.random();
-
-		// form fields
-		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-		this.language = new FormControl<DefinitionLanguage>(DefinitionLanguage.en, { validators: [Validators.required], nonNullable: true });
-
-		if (language)
-			this.setValue(language);
-
-	}
-
-	formGroup(): FormGroup<LanguageFormSchema> {
-
-		return new FormGroup({
-
-			name: this.name,
-			language: this.language
-
-		});
-
-	}
-
-	setValue(language: Language): void {
-
-		this.name.setValue(language.name);
-		this.language.setValue(language.language);
-
-	}
+	return new FormGroup<T>(value);
 
 }
 
-class DefinitionForm {
+function fa<T extends AbstractControl<any, any>>(value: T[] = []): FormArray<T> {
 
-	// to be used by @if (... track objectId)
-	readonly objectId: string;
+	return new FormArray<T>(value);
 
-	// form fields
-	readonly id: FormControl<UUID | null>;
-	readonly type: FormControl<DefinitionType>;
-	readonly languages: WritableSignal<LanguageForm[]>;
-	readonly samples: WritableSignal<SampleForm[]>;
+}
 
-	constructor(definition?: Definition) {
+function fgLanguage(value?: Language): FormGroup<LanguageFormSchema> {
 
-		// object id
-		this.objectId = 'definition_' + Math.random();
+	const {
 
-		// form fields
-		this.id = new FormControl<UUID | null>(null);
-		this.type = new FormControl<DefinitionType>(DefinitionType.noun, { validators: [Validators.required], nonNullable: true });
+		name = '',
+		language = DefinitionLanguage.en
 
-		// languages
-		this.languages = signal([new LanguageForm()]);
+	} = value ?? {};
 
-		// samples
-		this.samples = signal([new SampleForm()]);
+	return fg<LanguageFormSchema>({
 
-		if (definition)
-			this.setValue(definition);
+		name: nnfc(name, Validators.required),
+		language: nnfc(language, Validators.required)
 
-	}
+	});
 
-	addLanguage(): void {
+}
 
-		this.languages.update(list => {
-			list.push(new LanguageForm());
-			return list;
-		});
+function faLanguages(value?: Language[]): FormArray<FormGroup<LanguageFormSchema>> {
 
-	}
+	let arr = [];
+	if (value)
+		value.forEach(e => arr.push(fgLanguage(e)))
+	if (arr.length === 0)
+		arr.push(fgLanguage());
+	return fa(arr);
 
-	removeLanguage(objectId: string): void {
+}
 
-		this.languages.update(
-			list => {
-				list.splice(list.findIndex(s => s.objectId === objectId), 1);
-				return list;
-			}
-		);
+function fgDefinition(value?: Definition): FormGroup<DefinitionFormSchema> {
 
-	}
+	const {
 
-	addSample(): void {
+		id = null,
+		languages = [],
+		type = DefinitionType.adjective,
+		samples = ['']
 
-		this.samples.update(list => {
-			list.push(new SampleForm());
-			return list;
-		});
+	} = value ?? {};
 
-	}
+	return fg<DefinitionFormSchema>({
 
-	removeSample(objectId: string): void {
+		id: fc(id),
+		type: nnfc<DefinitionType>(type),
+		languages: faLanguages(languages),
+		samples: fa(samples.map(s => nnfc(s)))
 
-		this.samples.update(
-			list => {
-				list.splice(list.findIndex(s => s.objectId === objectId), 1);
-				return list;
-			}
-		);
+	})
 
-	}
+}
 
-	formGroup(): FormGroup<DefinitionFormSchema> {
+function faDefinitions(value?: Definition[]): FormArray<FormGroup<DefinitionFormSchema>> {
 
-		return new FormGroup({
+	let arr = [];
+	if (value)
+		value.forEach(d => arr.push(fgDefinition(d)))
+	if (arr.length === 0)
+		arr.push(fgDefinition());
+	return fa(arr);
 
-			id: this.id,
-			type: this.type,
-			languages: new FormArray(this.languages().map(l => l.formGroup())),
-			samples: new FormArray(this.samples().map(s => s.fc))
+}
 
-		});
+function fgWord(value?: Word): FormGroup<WordFormSchema> {
 
-	}
+	const {
 
-	setValue(definition: Definition): void {
+		id = null,
+		name = '',
+		contexts = [],
+		dictionary = null,
+		pronunciation = null,
+		definitions = []
 
-		this.id.setValue(definition.id);
-		this.type.setValue(definition.type);
+	} = value ?? {};
 
-		this.languages.set(definition.languages.map(l => new LanguageForm(l)));
-		this.samples.set(definition.samples.map(s => new SampleForm(s)));
+	return fg<WordFormSchema>({
 
-	}
+		id: fc(id),
+		name: nnfc(name, Validators.required),
+		contexts: fa(contexts.map(c => nnfc(c))),
+		dictionary: fc(dictionary),
+		pronunciation: fc(pronunciation),
+		definitions: faDefinitions(definitions)
+
+	})
 
 }
 
 export class WordForm {
 
-	// form fields
-	readonly id: FormControl<UUID | null>;
-	readonly name: FormControl<string>;
-	readonly dictionary: FormControl<UUID | null>;
-	readonly pronunciation: FormControl<string | null>;
-	readonly contexts: WritableSignal<ContextForm[]>;
+	fgWord: FormGroup<WordFormSchema> = fgWord();
 
-	// definitions
-	readonly definitions: WritableSignal<DefinitionForm[]>;
+	populate(word: Word): void {
 
-	constructor() {
+		const fg = this.fgWord;
+		const { id, name, contexts, dictionary, pronunciation, definitions } = word;
 
-		// form fields
-		this.id = new FormControl<UUID | null>(null);
-		this.name = new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)], nonNullable: true });
-		this.dictionary = new FormControl<UUID | null>(null);
-		this.pronunciation = new FormControl<string | null>(null);
+		// populate word (non-array values)
+		fg.patchValue({ id, name, dictionary, pronunciation });
 
-		// contexts
-		this.contexts = signal([new ContextForm()]);
+		// populate contexts
+		const faContexts = fg.controls.contexts;
+		faContexts.clear();
+		contexts.forEach(context => faContexts.push(nnfc(context)));
 
-		// definitions
-		this.definitions = signal([new DefinitionForm()])
-
-	}
-
-	addDefinition(): void {
-
-		this.definitions.update(list => {
-			list.push(new DefinitionForm());
-			return list;
-		});
-
-	}
-
-	removeDefinition(objectId: string): void {
-
-		this.definitions.update(
-			list => {
-				list.splice(list.findIndex(d => d.objectId === objectId), 1);
-				return list;
-			}
-		);
+		// populate definitions
+		const faDefinitions = fg.controls.definitions;
+		faDefinitions.clear();
+		definitions.forEach(definition => faDefinitions.push(fgDefinition(definition)));
 
 	}
 
 	addContext(): void {
 
-		this.contexts.update(list => {
-			list.push(new ContextForm());
-			return list;
-		});
+		this.contexts.controls.push(nnfc('', Validators.required));
 
 	}
 
-	removeContext(objectId: string): void {
+	removeContext(idx: number): void {
 
-		this.contexts.update(
-			list => {
-				list.splice(list.findIndex(s => s.objectId === objectId), 1);
-				return list;
-			}
-		);
+		this.contexts.removeAt(idx);
 
 	}
 
-	formGroup(): FormGroup<WordFormSchema> {
+	addLanguage(dIdx: number): void {
 
-		return new FormGroup<WordFormSchema>({
-
-			id: this.id,
-			name: this.name,
-			dictionary: this.dictionary,
-			pronunciation: this.pronunciation,
-			contexts: new FormArray(this.contexts().map(c => c.fc)),
-			definitions: new FormArray<FormGroup<DefinitionFormSchema>>(this.definitions().map(d => d.formGroup()))
-
-		});
+		this.definitions.at(dIdx).controls.languages.push(fgLanguage());
 
 	}
 
-	setValue(word: Word): void {
+	removeLanguage(dIdx: number, idx: number): void {
 
-		this.id.setValue(word.id);
-		this.name.setValue(word.name);
-		this.dictionary.setValue(word.dictionary);
-		this.pronunciation.setValue(word.pronunciation);
-
-		this.contexts.set(word.contexts.map(c => new ContextForm(c)));
-
-		this.definitions.set(
-			word.definitions.map(d => new DefinitionForm(d))
-		);
+		this.definitions.at(dIdx).controls.languages.removeAt(idx);
 
 	}
+
+	addSample(dIdx: number): void {
+
+		this.definitions.at(dIdx).controls.samples.push(nnfc(''));
+
+	}
+
+	removeSample(dIdx: number, idx: number): void {
+
+		this.definitions.at(dIdx).controls.samples.removeAt(idx);
+
+	}
+
+	addDefinition(): void {
+
+		this.definitions.controls.push(fgDefinition());
+
+	}
+
+	removeDefinition(idx: number): void {
+
+		this.definitions.removeAt(idx);
+
+	}
+
+	get id(): FormControl<UUID | null> { return this.fgWord.controls.id; }
+	get name(): FormControl<string> { return this.fgWord.controls.name; }
+	get contexts(): FormArray<FormControl<string>> { return this.fgWord.controls.contexts; }
+	get dictionary(): FormControl<UUID | null> { return this.fgWord.controls.dictionary; }
+	get pronunciation(): FormControl<string | null> { return this.fgWord.controls.pronunciation; }
+	get definitions(): FormArray<FormGroup<DefinitionFormSchema>> { return this.fgWord.controls.definitions; }
 
 }
 

@@ -11,7 +11,7 @@
 
 	<footer>
 
-		<button type="button" (click)="onSave()" [disabled]="this.control.pristine || this.control.invalid">
+		<button [disabled]="this.control.pristine || this.control.invalid">
 			<w-glyph name="save" /> Save
 		</button>
 

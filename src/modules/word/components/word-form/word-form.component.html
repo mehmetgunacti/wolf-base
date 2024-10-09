@@ -5,40 +5,41 @@
 </header>
 <section content>
 
-	<form>
+	<form [formGroup]="form.fgWord" (ngSubmit)="onSave()">
 
 		<!-- ID -->
-		@if (word()?.id) {
+		@if (isUpdate()) {
 
-			<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
+			<w-input formControlName="id" label="ID" [readonly]="true"/>
 
 		}
 
 		<!-- NAME -->
-		<w-input [formControl]="form.name" label="Term"/>
+		<w-input formControlName="name" label="Term"/>
 
 		<!-- PRONUNCIATION -->
-		<w-input [formControl]="form.pronunciation" label="Pronunciation"/>
+		<w-input formControlName="pronunciation" label="Pronunciation"/>
 
+		<!-- ADD CONTEXT BUTTON -->
 		<button
 			add_button
 			type="button"
 			class="success"
 			(click)="form.addContext()">
-			<w-glyph name="add_circle" /> Add Context
+			<w-glyph name="add_circle" /> Context
 		</button>
 
-		@for (context of form.contexts(); track context.objectId) {
+		<!-- CONTEXTS -->
+		@for (context of form.contexts.controls; let wordIdx = $index; track wordIdx) {
 
-			<!-- CONTEXTS -->
 			<div context>
 
-				<w-textarea [formControl]="context.fc" [label]="'Context #' + ($index + 1)" [rows]="3"/>
+				<w-textarea [formControl]="context" [label]="'Context #' + (wordIdx + 1)" [rows]="3"/>
 				<button
 					type="button"
 					class="glyph squared sm"
-					[title]="'Remove Sample #' + ($index + 1)"
-					(click)="form.removeContext(context.objectId)">
+					[title]="'Remove Sample #' + (wordIdx + 1)"
+					(click)="form.removeContext(wordIdx)">
 					<w-glyph name="do_not_disturb_on" class="focused" />
 				</button>
 
@@ -46,47 +47,50 @@
 
 		}
 
-		@for (definition of form.definitions(); track definition.objectId) {
+		<!-- ITERATE DEFINITIONS -->
+		@for (definition of form.definitions.controls; let defIdx = $index; track defIdx) {
 
 			<fieldset>
-				<legend>Definition #{{$index + 1}}</legend>
+				<legend>Definition #{{defIdx + 1}}</legend>
 
-				@if($index > 0) {
+				@if(defIdx > 0) {
 
 					<legend>
 						<button
 							type="button"
 							class="ghost sm"
-							(click)="form.removeDefinition(definition.objectId)">
-							<w-glyph name="do_not_disturb_on" class="focused" /> Remove Definition #{{ $index + 1 }}
+							(click)="form.removeDefinition(defIdx)">
+							<w-glyph name="do_not_disturb_on" class="focused" /> Remove Definition #{{ defIdx + 1 }}
 						</button>
 					</legend>
 
 				}
 
-				<div definition>
+				<!-- DEFINITION -->
+				<div definition [formGroup]="definition">
 
 					<!-- TYPE -->
-					<w-select [formControl]="definition.type" label="Type" [nodes]="DEFINITION_TYPES"/>
+					<w-select formControlName="type" label="Type" [nodes]="DEFINITION_TYPES"/>
 
-					@for (lang of definition.languages(); track lang.objectId) {
+					<!-- ITERATE LANGUAGES -->
+					@for (lang of definition.controls.languages.controls; let langIdx = $index; track langIdx) {
 
-						<!-- LANGUAGES -->
-						<div language>
+						<!-- DEFINITION-LANGUAGE -->
+						<div language [formGroup]="lang">
 
 							<!-- LANGUAGE -->
-							<w-select [formControl]="lang.language" label="Language" [nodes]="DEFINITION_LANGUAGES"/>
+							<w-select formControlName="language" label="Language" [nodes]="DEFINITION_LANGUAGES"/>
 
 							<!-- NAME -->
-							<w-input [formControl]="lang.name" label="Meaning"/>
+							<w-input formControlName="name" label="Meaning"/>
 
-							@if($index < 1) {
+							@if(langIdx < 1) {
 
 								<button
 									type="button"
 									class="glyph squared sm"
 									title="Add Language"
-									(click)="definition.addLanguage()">
+									(click)="form.addLanguage(defIdx)">
 									<w-glyph name="add_circle" class="success" />
 								</button>
 
@@ -95,8 +99,8 @@
 								<button
 									type="button"
 									class="glyph squared sm"
-									[title]="'Remove Language #' + ($index + 1)"
-									(click)="definition.removeLanguage(lang.objectId)">
+									[title]="'Remove Language #' + (langIdx + 1)"
+									(click)="form.removeLanguage(defIdx, langIdx)">
 									<w-glyph name="do_not_disturb_on" class="focused" />
 								</button>
 
@@ -106,19 +110,20 @@
 
 					}
 
-					@for (sample of definition.samples(); track sample.objectId) {
+					<!-- ITERATE SAMPLES -->
+					@for (sample of definition.controls.samples.controls; let sampleIdx = $index; track sampleIdx) {
 
 						<!-- SAMPLES -->
 						<div sample>
 
-							<w-textarea [formControl]="sample.fc" [label]="'Sample #' + ($index + 1)" [rows]="3"/>
-							@if($index < 1) {
+							<w-textarea [formControl]="sample" [label]="'Sample #' + (sampleIdx + 1)" [rows]="3"/>
+							@if(sampleIdx < 1) {
 
 								<button
 									type="button"
 									class="glyph squared sm"
 									title="Add Sample"
-									(click)="definition.addSample()">
+									(click)="form.addSample(defIdx)">
 									<w-glyph name="add_circle" class="success" />
 								</button>
 
@@ -127,8 +132,8 @@
 								<button
 									type="button"
 									class="glyph squared sm"
-									[title]="'Remove Sample #' + ($index + 1)"
-									(click)="definition.removeSample(sample.objectId)">
+									[title]="'Remove Sample #' + (sampleIdx + 1)"
+									(click)="form.removeSample(defIdx, sampleIdx)">
 									<w-glyph name="do_not_disturb_on" class="focused" />
 								</button>
 
@@ -147,14 +152,17 @@
 			type="button"
 			class="success"
 			(click)="form.addDefinition()">
-			<w-glyph name="add_circle" /> Add Definition
+			<w-glyph name="add_circle" /> Definition
 		</button>
+
+		<footer>
+
+			<button [disabled]="this.form.fgWord.pristine || this.form.fgWord.invalid">
+				<w-glyph name="save" /> {{ isUpdate() ? 'Update' : 'Create'}}
+			</button>
+
+		</footer>
 
 	</form>
 
 </section>
-<footer>
-
-	<button type="button" (click)="onSave()"><w-glyph name="save" /> Save</button>
-
-</footer>

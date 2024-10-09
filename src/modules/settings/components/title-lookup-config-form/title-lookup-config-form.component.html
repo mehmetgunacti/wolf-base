@@ -5,7 +5,7 @@
 
 	<footer>
 
-		<button type="button" (click)="onSave()" [disabled]="this.fcUrl.pristine || this.fcUrl.invalid">
+		<button [disabled]="this.fcUrl.pristine || this.fcUrl.invalid">
 			<w-glyph name="save" /> Save
 		</button>
 
