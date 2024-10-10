@@ -5,6 +5,7 @@ $_label-height: 4.5rem;
 	@include mx-component($param-dark: $param-dark);
 	position	: relative;
 	border		: 0;
+	padding-top	: $gap-xxl;
 
 	& > legend {
 
@@ -16,7 +17,6 @@ $_label-height: 4.5rem;
 		font-size		: $font-size;
 		line-height		: $_label-height;
 
-		margin-bottom	: $gap-xl;
 		padding-inline	: $gap;
 		@include mx-shadow;
 

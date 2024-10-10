@@ -6,7 +6,9 @@ import { Project, ProjectStatusLabels, slideDownTrigger } from '@lib';
 	templateUrl: './project.component.html',
 	styleUrls: ['./project.component.scss'],
 	animations: [slideDownTrigger],
-	host: { 'class': 'd-flex-column gap-sm' },
+	host: {
+		'class': 'bg-comp-dark brad-lg padding d-flex-column gap'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectComponent {

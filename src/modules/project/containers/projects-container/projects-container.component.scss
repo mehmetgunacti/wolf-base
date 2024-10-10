@@ -24,37 +24,3 @@
 	}
 
 }
-
-
-// @import 'helper';
-// @import 'variables';
-// @import 'mixins';
-// @import 'components';
-
-// :host{
-
-// 	& > [project_entries] {
-
-// 		@include mx-scrollable(calc(100dvh - 4 * var(--header-height)));
-
-// 		& > a {
-
-// 			text-decoration		: none;
-
-// 			& > small {
-
-// 				color				: var(--col-text-secondary);
-
-// 			}
-
-// 			&:focus-visible {
-
-// 				@include mx-outline;
-
-// 			}
-
-// 		}
-
-// 	}
-
-// }

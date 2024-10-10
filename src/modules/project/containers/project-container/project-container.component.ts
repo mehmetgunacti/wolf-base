@@ -19,8 +19,9 @@ function formatQueryParams(queryParams: TaskQueryParams): string {
 @Component({
 	selector: 'app-project-container',
 	templateUrl: './project-container.component.html',
-	styleUrls: ['./project-container.component.scss'],
-	host: { 'class': 'd-flex-column gap-sm' },
+	host: {
+		'class': 'd-flex-column gap-page'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectContainerComponent {

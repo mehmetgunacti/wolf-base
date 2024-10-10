@@ -1,0 +1,23 @@
+.bg-header	{ background-color: fn-var($col-bg-header); }
+.bg-nav		{ background-color: fn-var($col-bg-nav); }
+.bg-popup	{ background-color: fn-var($col-bg-popup); }
+.bg-page	{ background-color: fn-var($col-bg-page); }
+
+.bg-comp {
+
+	background-color: fn-var($col-bg-component);
+
+	&-hover { &:hover { background-color: fn-var($col-bg-component-hover); } }
+	&-active { &:active { background-color: fn-var($col-bg-component-active); } }
+
+}
+
+.bg-comp-dark {
+
+	background-color: fn-var($col-bg-component-dark);
+
+	&-hover { &:hover { background-color: fn-var($col-bg-component-dark-hover); } }
+	&-active { &:active { background-color: fn-var($col-bg-component-dark-active); } }
+
+}
+

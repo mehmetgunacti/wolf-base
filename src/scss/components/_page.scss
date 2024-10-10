@@ -1,6 +1,6 @@
 @mixin mx-page($param-calc-height: false) {
 
-	@include mx-d-flex-col-jc-center;
+	@include mx-d-flex-column;
 	gap				: $page-padding;
 	padding			: $page-padding;
 	margin-inline	: auto;

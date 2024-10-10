@@ -1,43 +1,22 @@
-// @import 'helper';
-// @import 'variables';
-// @import 'components';
-// @import 'mixins';
+@import 'variables';
+@import 'helper';
+@import 'components';
 
-// :host {
+:host {
 
-// 	[project_title_wrapper] {
+	[project_title_wrapper] {
 
-// 		// @include mx-card(3);
+		& > a {
 
-// 		& > a {
+			@include mx-box($param-dark: true, $param-hover: true, $param-active: true);
+			@include mx-header;
 
-// 			border-radius		: var(--border-radius-sm);
-// 			text-decoration		: none;
-// 			font-size			: var(--font-size-sm);
-// 			color				: var(--col-text-secondary);
+			text-decoration		: none;
+			font-size			: $font-size-sm;
+			color				: fn-var($col-text-secondary);
 
-// 			& > span {
+		}
 
-// 				color			: inherit;
-// 				font-size		: inherit;
+	}
 
-// 			}
-
-// 			&:hover {
-
-// 				background-color	: color-mix(in hsl, var(--col-bg-component-dark), white 10%);
-
-// 			}
-
-// 			// &:focus,
-// 			&:focus-visible {
-
-// 				outline				: 3px solid var(--col-focus);
-
-// 			}
-
-// 		}
-
-// 	}
-
-// }
+}

@@ -1,15 +1,13 @@
 @if (project(); as project) {
 
-	<div project_title_wrapper>
+	<div project_title_wrapper class="d-flex-column gap">
 
-		<a	class="d-flex ai-c p-xs gap-xxs transition-bg"
-			[routerLink]="['/projects']" tabindex="0">
+		<a	[routerLink]="['/projects']" tabindex="0">
 			<w-glyph name="task_alt" />
-			<span>Projects</span>
+			Projects
 		</a>
 
-		<!-- project_title -->
-		<div class="d-flex ai-sb jc-c h1">
+		<div class="d-flex-x-sb-y-center padding-inline font-h2 font-bold col-primary">
 
 			{{ project.name }}
 
@@ -22,49 +20,49 @@
 
 		</div>
 
-		<!-- project_info -->
-		<div
-			class="d-flex-column gap-sm overflow-h"
-			[@slideDown]="expanded()">
+		<div class="overflow-h" [@slideDown]="expanded()">
+			<!-- project_info -->
+			<div class="d-flex-column padding gap-xl">
 
-			<div row class="box dark p-lg mt">
+				<div class="d-flex-column">
 
-				<small>ID</small>
-				<div>{{ project.id }}</div>
-
-			</div>
-
-			<div row>
-
-				<small>Description</small>
-				<div>{{ project.description }}</div>
-
-			</div>
-
-			<div row>
-
-				<small>Status</small>
-				<div>{{ ProjectStatusLabels[project.status] }}</div>
-
-			</div>
-
-			<div row start_end_row class="d-flex gap-sm">
-
-				<div class="w-50">
-
-					<small>Start : {{ project.start | timePast:false }}</small>
-					<div>{{ project.start | date:'EEEE dd.MM.yyyy' }}</div>
-
-				</div>
-				<div class="w-50">
-
-					<small>End</small>
-					<div>{{ project.end | date:'EEEE dd.MM.yyyy' }}</div>
+					<small>ID</small>
+					{{ project.id }}
 
 				</div>
 
-			</div>
+				<div class="d-flex-column">
 
+					<small>Description</small>
+					{{ project.description }}
+
+				</div>
+
+				<div class="d-flex-column">
+
+					<small>Status</small>
+					{{ ProjectStatusLabels[project.status] }}
+
+				</div>
+
+				<div row start_end_row class="d-flex gap-sm">
+
+					<div class="d-flex-column w-50">
+
+						<small>Start : {{ project.start | timePast:false }}</small>
+						{{ project.start | date:'EEEE dd.MM.yyyy' }}
+
+					</div>
+					<div class="d-flex-column w-50">
+
+						<small>End</small>
+						{{ project.end | date:'EEEE dd.MM.yyyy' }}
+
+					</div>
+
+				</div>
+
+			</div>
 		</div>
 
 	</div>

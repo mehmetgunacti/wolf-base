@@ -11,9 +11,8 @@
 
 		& > div {
 
-			display			: flex;
-			flex-direction	: row;
-			gap				: $gap-xs;
+			@include mx-d-flex;
+			gap	: $gap-xs;
 			& :first-child {
 
 				flex	: 1;

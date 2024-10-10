@@ -16,6 +16,9 @@ import * as coreSelectors from 'store/selectors/core/core-configuration.selector
 	imports: [CommonModule, RouterModule, GlyphComponent, BookmarkComponent],
 	templateUrl: './popular-bookmarks-container.component.html',
 	styleUrls: ['./popular-bookmarks-container.component.scss'],
+	host: {
+		'class': 'd-flex-col'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopularBookmarksContainerComponent implements OnInit {

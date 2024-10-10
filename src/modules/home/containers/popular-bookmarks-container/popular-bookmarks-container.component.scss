@@ -3,13 +3,12 @@
 
 :host {
 
-	@include mx-d-flex-column;
 	gap	: $page-padding;
 
 	& > header {
 
-		@include mx-box($param-dark: true, $param-shadow: true, $param-min-height: $widget-height-xl);
-		@include mx-d-flex-ai-c-jc-e;
+		// @include mx-box($param-dark: true, $param-shadow: true, $param-min-height: $widget-height-xl);
+		// @include mx-d-flex-ai-c-jc-e;
 		gap	: $gap-xs;
 
 		& > :first-child {

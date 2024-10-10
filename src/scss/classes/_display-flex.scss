@@ -1,0 +1,7 @@
+.d-flex					{ @include mx-d-flex; }
+.d-flex-y-center		{ @include mx-d-flex-ai-center; }
+.d-flex-x-sb-y-center	{ @include mx-d-flex-ai-c-jc-sb; }
+
+.d-flex-column		{ @include mx-d-flex-column; }
+
+.d-flex-x-end-y-center { @include mx-d-flex-ai-c-jc-e; }

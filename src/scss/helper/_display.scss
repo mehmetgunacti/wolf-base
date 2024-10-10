@@ -19,6 +19,7 @@
 @mixin mx-d-flex-ai-end($params...)		{ @include mx-d-flex($align-items: end, $params...); }
 @mixin mx-d-flex-ai-bl($params...)		{ @include mx-d-flex($align-items: baseline, $params...); }
 @mixin mx-d-flex-ai-sb($params...)		{ @include mx-d-flex($align-items: space-between, $params...); }
+@mixin mx-d-flex-ai-sb-jc-c($params...)	{ @include mx-d-flex($align-items: space-between, $justify-content: center, $params...); }
 
 @mixin mx-d-flex-col-ai-center($params...)	{ @include mx-d-flex-column($align-items: center, $params...); }
 @mixin mx-d-flex-col-ai-start($params...)	{ @include mx-d-flex-column($align-items: start, $params...); }

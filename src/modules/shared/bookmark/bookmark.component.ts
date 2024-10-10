@@ -10,6 +10,9 @@ import { ClickedBookmark } from 'lib/models';
 	imports: [RouterModule, GlyphComponent],
 	templateUrl: './bookmark.component.html',
 	styleUrls: ['./bookmark.component.scss'],
+	host: {
+		'class': 'bg-comp bg-comp-hover bg-comp brad'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarkComponent {

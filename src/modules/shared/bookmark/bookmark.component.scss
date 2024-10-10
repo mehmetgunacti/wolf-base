@@ -17,7 +17,7 @@
 
 	}
 
-	@include mx-box($param-shadow: true, $param-hover: true);
+	// @include mx-box($param-shadow: true, $param-hover: true);
 	@include mx-d-flex;
 	position	: relative;
 	overflow	: hidden;
