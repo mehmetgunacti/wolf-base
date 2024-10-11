@@ -1,0 +1,15 @@
+@for (tag of uiTags(); track $index) {
+
+	@if (tag.className === 'disabled') {
+
+		<span class="disabled d-inline-block" [ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</span>
+
+	} @else {
+
+		<a	(click)="onTagClick(tag.tag.name)"
+			[ngClass]="tag.className"
+			[ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</a>
+
+	}
+
+}

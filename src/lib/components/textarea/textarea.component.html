@@ -1,0 +1,10 @@
+<textarea
+	#inputElement
+	[value]="value()"
+	placeholder=""
+	[readonly]="readonly()"
+	[disabled]="disabled()"
+	(blur)="onBlur()"
+	(input)="onInput(inputElement.value)"
+	[rows]="rows()"></textarea>
+<label [class.up]="isLabelUp()">{{label()}}</label>

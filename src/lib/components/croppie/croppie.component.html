@@ -1,0 +1,45 @@
+<div class="img-thumbnail pos-relative p-sm mb-xl">
+
+	@if(imageLoaded$ | async) {
+
+		<button
+			id="close"
+			type="button"
+			class="d-flex-center p-0 pos-absolute cur-pointer"
+			(click)="unbindCroppie()"
+			tabindex="0">
+			<!-- <w-glyph name="close" /> -->
+		</button>
+
+	} @else {
+
+		@if (initialized$ | async) {
+
+			<button	type="button"
+					class="d-flex-center pos-absolute gap-sm cur-pointer"
+					id="croppie-placeholder"
+					(click)="fileinput.click()"
+					tabindex="0">
+						<!-- <w-glyph name="image" /> -->
+						<span>Pick Image</span>
+			</button>
+
+		} @else {
+
+			<div id="croppie-placeholder">
+				<span>Initializing...</span>
+			</div>
+
+		}
+
+	}
+	<div #croppieDiv
+		[ngStyle]="{'visibility': (imageLoaded$ | async) ? 'visible': 'hidden'}"></div>
+
+</div>
+<input #fileinput
+	type="file"
+	(change)="onFileSelected($event)"
+	accept="image/gif, image/jpeg, image/png"
+	style="display: none;">
+

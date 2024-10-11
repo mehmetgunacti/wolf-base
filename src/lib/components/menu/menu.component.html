@@ -1,0 +1,18 @@
+@for (item of items; track $index) {
+
+	<a
+		class="box hover d-flex ai-c cur-pointer transition-bg"
+		[routerLink]="item.url"
+		[queryParams]="item.queryParams"
+		routerLinkActive="active"
+		[routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }">
+
+		<!-- <w-glyph [name]="item.icon"/> -->
+		<span label class="flex-1">{{ item.label }}</span>
+		<div badge class="d-flex-center mr">
+			<span class="p transition-bg">{{ item.badge }}</span>
+		</div>
+
+	</a>
+
+}

@@ -1,0 +1,24 @@
+<select
+	#select
+	[id]="label_id"
+	[formControl]="control"
+	[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
+	[cdkMenuTriggerFor]="select_menu"
+	(mousedown)="$event.preventDefault();onSelectClicked($event);"
+	(keydown)="onKeydown($event);">
+
+	<option [ngValue]="null">Root</option>
+	<option *ngFor="let node of nodes" [value]="node.id">{{ node.name }}</option>
+
+</select>
+<label [for]="label_id" class="up">{{name}}</label>
+
+<ng-template #select_menu>
+
+	<div #popup class="menu small scrollable flex-1" [style.width]="popupWidth() + 'px'" cdkMenu>
+
+		<w-options [nodes]="nodes" (selected)="onItemSelected($event)"/>
+
+	</div>
+
+</ng-template>

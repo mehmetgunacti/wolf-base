@@ -1,0 +1,19 @@
+<ul class="d-flex ai-c wrap">
+
+	<button
+		type="button"
+		class="glyph"
+		(click)="onClick(home())">
+		<w-glyph name="home" />
+	</button>
+
+	@for (item of items(); track $index) {
+
+		<li (click)="onClick(item.url)" class="d-flex ai-c cur-pointer">
+			<w-glyph name="chevron_right" />
+			<span>{{ item.label }}</span>
+		</li>
+
+	}
+
+</ul>

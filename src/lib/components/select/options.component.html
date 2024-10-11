@@ -1,0 +1,55 @@
+<cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
+
+	<!-- This is the tree node template for leaf nodes -->
+	<cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node">
+
+		<!-- use a disabled button to provide padding for tree leaf -->
+		<div class="example-expandable-node">
+			<button
+				class="glyph small"
+				type="button"
+				style="visibility: hidden;"
+				disabled>
+				<!-- <w-glyph name="check_box_outline_blank" /> -->
+			</button>
+			<button
+				tabindex="0"
+				class="link small"
+				type="button"
+				(keydown)="onKeydown($event, node);"
+				(click)="selectItem(node.value)"
+				[id]="'mi_' + node.value.id">{{node.value.name}}</button>
+			</div>
+
+	</cdk-nested-tree-node>
+
+	<!-- This is the tree node template for expandable nodes -->
+	<cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="example-tree-node">
+
+		<div class="exapmle-expandable-node">
+			<button
+				tabindex="0"
+				type="button"
+				cdkTreeNodeToggle
+				class="glyph small"
+				[id]="'mt_' + node.value.id">
+				<span class="material-symbols-outlined">
+					{{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+				</span>
+			</button>
+			<button
+				tabindex="0"
+				type="button"
+				class="link small"
+				[id]="'mi_' + node.value.id"
+				(click)="selectItem(node.value)"
+				(keydown)="onKeydown($event, node);">{{node.value.name}}</button>
+		</div>
+
+		<div [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+			<ng-container cdkTreeNodeOutlet></ng-container>
+		</div>
+
+	</cdk-nested-tree-node>
+
+</cdk-tree>

@@ -1,0 +1,24 @@
+<header>
+
+	<div card_title><ng-content select="[card_title]"/></div>
+	<div card_buttons><ng-content select="[card_buttons]"/></div>
+
+</header>
+<section content>
+
+	@if (content) {
+
+		<div [innerHTML]="content"></div>
+
+	} @else {
+
+		<ng-content/>
+
+	}
+
+</section>
+<footer>
+
+	<ng-content select="[card_footer]"/>
+
+</footer>

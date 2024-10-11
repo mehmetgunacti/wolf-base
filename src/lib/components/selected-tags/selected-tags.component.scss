@@ -1,0 +1,11 @@
+@import 'variables';
+@import 'helper';
+@import 'components';
+
+:host {
+
+	@include mx-d-flex-ai-center;
+	flex-wrap	: wrap;
+	gap			: $gap-xs;
+
+}
