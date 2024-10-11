@@ -34,7 +34,7 @@ const tokenize: RuleInline = (state, silent) => {
 			state.delimiters.push({
 				marker: 0x2b, // '+' in ASCII
 				length: 0,
-				jump: i / 2,
+				// jump: i / 2,
 				token: state.tokens.length - 1,
 				end: -1,
 				open: scanned.can_open,
