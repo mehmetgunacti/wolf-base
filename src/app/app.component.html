@@ -1,2 +1,25 @@
-<h1 class="text-3xl font-bold text-green-700 underline">Hello world!</h1>
-<h3>asdfasdf</h3>
+<!-- @if (splashVisible()) {
+
+	<app-splash-screen @splash />
+
+} -->
+@if (sidebarOpen()) {
+
+	<app-nav-overlay @opacity />
+
+}
+<header>
+
+	<app-header />
+
+</header>
+<nav [@sidebar]="sidebarState()">
+
+	<app-nav />
+
+</nav>
+<main cdkScrollable [class.big-half]="sidebarBigHalf()" [class.big-full]="sidebarBigFull()">
+
+	<router-outlet />
+
+</main>
