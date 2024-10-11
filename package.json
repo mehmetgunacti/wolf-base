@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-	"gitpush": "node git-push.js ${npm_config_arg}"
+    "gitpush": "node git-push.js ${npm_config_arg}"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "@angular/service-worker": "^18.2.0",
     "@ngrx/effects": "^18.1.0",
     "@ngrx/operators": "^18.1.0",
     "@ngrx/store": "^18.1.0",
