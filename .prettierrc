@@ -1,11 +1,12 @@
 {
 	"singleQuote": true,
 	"semi": false,
-	"printWidth": 999,
+	"printWidth": 80,
 	"useTabs": true,
 	"tabWidth": 4,
 	"bracketSpacing": false,
 	"arrowParens": "avoid",
 	"trailingComma": "none",
+	"bracketSameLine": true,
 	"plugins": ["prettier-plugin-tailwindcss"]
 }
