@@ -52,6 +52,7 @@
     "@mdit/plugin-sup": "^0.13.1",
     "@mdit/plugin-tasklist": "^0.13.1",
     "@ngrx/store-devtools": "^18.1.0",
+    "@tailwindcss/typography": "^0.5.15",
     "@types/file-saver-es": "^2.0.3",
     "@types/jasmine": "~5.1.0",
     "@types/markdown-it": "^14.1.2",
