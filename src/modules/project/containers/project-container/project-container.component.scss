@@ -1,9 +1,0 @@
-@import 'variables';
-@import 'helper';
-
-:host{
-
-	@include mx-d-flex-column;
-	gap	: $gap-sm;
-
-}

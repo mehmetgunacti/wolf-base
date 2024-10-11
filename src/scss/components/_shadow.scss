@@ -1,6 +1,0 @@
-@mixin mx-shadow($param-color: $shadow) {
-
-	// box-shadow: if ($param-color, fn-var($param-color), fn-var($shadow));
-	box-shadow: fn-var($param-color);
-
-}

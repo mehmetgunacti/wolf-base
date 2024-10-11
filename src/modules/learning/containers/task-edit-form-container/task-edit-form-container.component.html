@@ -1,9 +1,0 @@
-<app-task-form
-	[task]="task()"
-	[learning]="learning()"
-	(create)="onCreate($event)"
-	(update)="onUpdate($event.id, $event.task)"
-	(cancel)="onClose()"
-	(close)="onClose()"
-	(tagInput)="onTagInput($event)"
-	[tagSuggestions]="tagSuggestions$ | async"/>
