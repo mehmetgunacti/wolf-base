@@ -1,27 +1,62 @@
 # WolfBase
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+This project is a personal playground for learning and experimenting with data synchronization between a PWA and server.
+Just a bit of coding fun; feel free to explore!
 
-## Development server
+## What's this all about?
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This project is primarily:
+- A learning exercise 📚
+- A tool for (my own) personal use 🛠️
+- An experiment in data synchronization between PWA (IndexedDb) and server (Firestore) 🧪
 
-## Code scaffolding
+## What it's ==not== about:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- A polished, open-source project 🚫
+- A model for best practices or architecture 📐
+- A definitive guide on how things should be done 🧭
 
-## Build
+This is just me having fun with code—take it for what it is!
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Key Modules:
 
-## Running unit tests
+- Bookmarks
+- Notes
+- Dictionary & Quiz
+- Projects & Tasks
+- Quotes
+- Settings
+- Cloud Sync
+- Database
+- Logs
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Technology Stack
 
-## Running end-to-end tests
+- Angular & Angular CDK
+- NgRx/Store and NgRx/Effects
+- PWA
+- IndexedDb / Dexie
+- For cloud sync Firestore REST Api implementation provided
+- No 3rd party CSS library
+- No 3rd party component library
+- Some 3rd party JavaScript libraries
+- Responsive Layout
+- Theme Switcher
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Installation:
 
-## Further help
+* Clone this repository.
+* Run `npm install`.
+* Run the project using `ng s`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Usage:
+
+[Provide examples or instructions on how to use your project.]
+
+## Contributing:
+
+Contributions are like pineapple on pizza — some love 'em, but this project prefers to keep things simple. So, no contributions, please!
+
+## License
+
+This project is licensed under the MIT License.
