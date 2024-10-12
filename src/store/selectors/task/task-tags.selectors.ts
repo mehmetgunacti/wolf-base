@@ -11,7 +11,7 @@ const arrayOfTagNames = createSelector(
 );
 
 // returns all tags of all tasks, distinct, for tag-cloud
-export const distinctTagsArray = createSelector(
+export const selTask_distinctTagsArray = createSelector(
 
 	arrayOfTagNames,
 	(arrOfTagNames: string[][]): Tag[] =>
@@ -49,7 +49,7 @@ const arrOfFilteredTagNames = createSelector(
 
 );
 
-export const relatedTags = createSelector(
+export const selTask_relatedTags = createSelector(
 
 	arrOfFilteredTagNames,
 	selTask_distinctTagNames,

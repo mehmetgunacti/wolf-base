@@ -12,7 +12,7 @@ const arrayOfTagNames = createSelector(
 );
 
 // returns all tags of all bookmarks, distinct, for tag-cloud
-export const distinctTagsArray = createSelector(
+export const selBM_distinctTagsArray = createSelector(
 
 	arrayOfTagNames,
 	(arrOfTagNames: string[][]): Tag[] =>
@@ -43,7 +43,7 @@ const distinctTagNames = createSelector(
 
 );
 
-export const selBookmark_QueryParams = createSelector(
+export const selBM_QueryParams = createSelector(
 
 	selBookmark_UIState,
 	state => state.queryParams
@@ -53,7 +53,7 @@ export const selBookmark_QueryParams = createSelector(
 const selBMSelectedBookmark = createSelector(
 
 	selBookmark_clickedBookmarks,
-	selBookmark_QueryParams,
+	selBM_QueryParams,
 	(clickedBMs, params): ClickedBookmark | null => params.id ? clickedBMs[params.id] : null
 
 );
@@ -62,7 +62,7 @@ export const selBM_filteredBookmarks = createSelector(
 
 	selBMSelectedBookmark,
 	selBookmark_array,
-	selBookmark_QueryParams,
+	selBM_QueryParams,
 	(selectedBookmark, bookmarks, params): ClickedBookmark[] => {
 
 		if (!params.id && !params.search && params.tags.length === 0)
@@ -114,11 +114,11 @@ export const filteredBookmarkCount = createSelector(
 
 );
 
-export const relatedTags = createSelector(
+export const selBM_relatedTags = createSelector(
 
 	arrOfFilteredTagNames,
 	distinctTagNames,
-	selBookmark_QueryParams,
+	selBM_QueryParams,
 	(arrTagsArray: string[][], distinctTagNames: string[], params: BookmarkQueryParams): string[] => {
 
 		if (params.tags.length === 0)

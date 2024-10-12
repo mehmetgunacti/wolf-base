@@ -11,7 +11,7 @@ const arrayOfTagNames = createSelector(
 );
 
 // returns all tags of all notes, distinct, for tag-cloud
-export const distinctTagsArray = createSelector(
+export const selNote_distinctTagsArray = createSelector(
 
 	arrayOfTagNames,
 	(arrOfTagNames: string[][]): Tag[] =>
@@ -92,14 +92,14 @@ const arrOfFilteredTagNames = createSelector(
 
 );
 
-export const filteredNoteCount = createSelector(
+export const selNote_filteredNoteCount = createSelector(
 
 	selNote_filteredNotes,
 	(notes: Note[]) => notes.length
 
 );
 
-export const relatedTags = createSelector(
+export const selNote_relatedTags = createSelector(
 
 	arrOfFilteredTagNames,
 	distinctTagNames,
