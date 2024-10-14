@@ -1,10 +1,10 @@
-import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { Dialog } from '@angular/cdk/dialog';
 import { inject, Injectable } from '@angular/core';
-import { UUID } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { QuizAnswerContainerComponent } from 'modules/home/containers/quiz-answer-container/quiz-answer-container.component';
-import { filter, map, tap } from 'rxjs/operators';
-import { coreActions, quizEntryActions } from 'store/actions';
+import { UUID } from '@constants';
+// import { QuizAnswerContainerComponent } from 'modules/home/containers/quiz-answer-container/quiz-answer-container.component';
+import { filter, map } from 'rxjs/operators';
+import { coreActions, quizEntryActions } from '@actions';
 
 @Injectable()
 export class QuizUIEffects {
@@ -12,16 +12,16 @@ export class QuizUIEffects {
 	private actions$: Actions = inject(Actions);
 	private dialogService: Dialog = inject(Dialog);
 
-	private dialogRef: DialogRef<null, QuizAnswerContainerComponent> | null = null;
+	// private dialogRef: DialogRef<null, QuizAnswerContainerComponent> | null = null;
 
 	answeredWrong$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(quizEntryActions.answeredWrong),
-			map(() => {
-				this.dialogRef = this.dialogService.open(QuizAnswerContainerComponent, { closeOnNavigation: true });
-			})
+			// map(() => {
+			// 	this.dialogRef = this.dialogService.open(QuizAnswerContainerComponent, { closeOnNavigation: true });
+			// })
 
 		),
 		{ dispatch: false }
@@ -33,7 +33,7 @@ export class QuizUIEffects {
 		() => this.actions$.pipe(
 
 			ofType(quizEntryActions.closeAnswerDialog),
-			tap(() => this.dialogRef?.close())
+			//tap(() => this.dialogRef?.close())
 
 		),
 		{ dispatch: false }
@@ -47,7 +47,7 @@ export class QuizUIEffects {
 			ofType(quizEntryActions.closeAnswerDialog),
 			map(({ editWord }) => editWord),
 			filter((wordId): wordId is UUID => !!wordId),
-			map(wordId => coreActions.navigate({ url: ['/words', wordId, 'edit'] }))
+			map(wordId => coreActions.navigate({ url: [ '/words', wordId, 'edit' ] }))
 
 		)
 

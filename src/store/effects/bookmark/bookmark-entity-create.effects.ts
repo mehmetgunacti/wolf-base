@@ -1,10 +1,12 @@
 import { inject, Injectable } from '@angular/core';
-import { AppEntities, AppEntityType, Bookmark, isEntityOfType, TAG_NEW } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { AppEntities, AppEntityType, TAG_NEW } from '@constants';
+import { Bookmark } from '@models';
+import { isEntityOfType } from '@utils';
 import { concat, of, timer } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { ClipboardService } from 'services';
-import { bookmarkActions, coreActions, entityActions } from 'store/actions';
+import { bookmarkActions, coreActions, entityActions } from '@actions';
 
 // note: timer value (600) has to be ~ as in lib/components/_shake.scss
 const fromClipboardFailure$ = concat(

@@ -1,6 +1,7 @@
-import { QuizEntry, UUID, Word } from '@lib';
 import { createSelector } from '@ngrx/store';
 import { produce } from 'immer';
+import { UUID } from '@constants';
+import { QuizEntry, Word } from '@models';
 import { selCore_now } from '../core/core-ui.selectors';
 import { selQuizEntry_EntityList } from '../entity/entity-quiz-entry.selectors';
 import { selWord_EntityList } from '../entity/entity-word.selectors';
@@ -29,8 +30,8 @@ function toMap(words: Word[]): Record<UUID, Word> {
 		w.definitions.forEach(d => {
 
 			// Create a copy of the current word with only the current definition
-            // and add it to the map with the definition's id as the key
-			map[d.id] = produce(w, (draft) => { draft.definitions = [d]; });
+			// and add it to the map with the definition's id as the key
+			map[ d.id ] = produce(w, (draft) => { draft.definitions = [ d ]; });
 
 		});
 
@@ -77,6 +78,6 @@ export const selQuiz_dueItemsCount = createSelector(
 export const selQuiz_quizEntry = createSelector(
 
 	selQuiz_dueItems,
-	(dueItems: QuizEntry[]): QuizEntry | null => dueItems[0] ?? null
+	(dueItems: QuizEntry[]): QuizEntry | null => dueItems[ 0 ] ?? null
 
 );

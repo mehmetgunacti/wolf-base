@@ -1,5 +1,6 @@
-import { UUID, Word } from '@lib';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { UUID } from '@constants';
+import { Word } from '@models';
 
 export const quizEntryActions = createActionGroup({
 
@@ -7,11 +8,11 @@ export const quizEntryActions = createActionGroup({
 	events: {
 
 		// UI
-		answeredRight		: props<{ quizEntryId: UUID }>(),
-		answeredWrong		: props<{ word: Word }>(),
+		answeredRight: props<{ quizEntryId: UUID; }>(),
+		answeredWrong: props<{ word: Word; }>(),
 
-		closeAnswerDialog	: props<{ quizEntryId: UUID, editWord?: UUID }>(),
-		increaseVisibility	: emptyProps()
+		closeAnswerDialog: props<{ quizEntryId: UUID, editWord?: UUID; }>(),
+		increaseVisibility: emptyProps()
 
 	}
 

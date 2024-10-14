@@ -1,5 +1,6 @@
-import { AppEntityType, Entity, RemoteMetadata, SyncData, UUID } from '@lib';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { AppEntityType, UUID } from '@constants';
+import { Entity, RemoteMetadata, SyncData } from '@models';
 
 export const entityActions = createActionGroup({
 

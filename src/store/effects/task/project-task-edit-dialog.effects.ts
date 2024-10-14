@@ -1,16 +1,16 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { TaskEditFormContainerComponent } from 'modules/project/containers/task-edit-form-container/task-edit-form-container.component';
+// import { TaskEditFormContainerComponent } from 'modules/project/containers/task-edit-form-container/task-edit-form-container.component';
 import { map } from 'rxjs';
-import { entityActions, taskActions } from 'store/actions';
+import { entityActions, taskActions } from '@actions';
 
 @Injectable()
 export class TaskEditEffects {
 
 	private actions$: Actions = inject(Actions);
 	private dialogService: Dialog = inject(Dialog);
-	private dialogRef: DialogRef<null, TaskEditFormContainerComponent> | null = null;
+	// private dialogRef: DialogRef<null, TaskEditFormContainerComponent> | null = null;
 
 	openEditTaskDialog$ = createEffect(
 
@@ -20,9 +20,9 @@ export class TaskEditEffects {
 				taskActions.openAddTaskDialog,
 				taskActions.openEditTaskDialog
 			),
-			map(() => {
-				this.dialogRef = this.dialogService.open(TaskEditFormContainerComponent, { closeOnNavigation: true });
-			})
+			// map(() => {
+			// 	this.dialogRef = this.dialogService.open(TaskEditFormContainerComponent, { closeOnNavigation: true });
+			// })
 
 		),
 		{ dispatch: false }
@@ -38,7 +38,7 @@ export class TaskEditEffects {
 				entityActions.createSuccess,
 				entityActions.updateSuccess,
 			),
-			map(() => this.dialogRef?.close())
+			//map(() => this.dialogRef?.close())
 
 		),
 		{ dispatch: false }

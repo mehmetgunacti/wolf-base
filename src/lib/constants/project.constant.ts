@@ -1,4 +1,4 @@
-import { NameBase } from 'lib/models';
+import { NameBase } from '@models';
 
 export const TAG_OPTIONAL = 'optional';
 

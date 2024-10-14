@@ -1,4 +1,4 @@
-import { UUID } from "lib/constants/common.constant";
+import { UUID } from '@constants';
 
 // ISO 8601:
 // 2025-10-05T14:48:00.000Z

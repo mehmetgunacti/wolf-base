@@ -1,5 +1,5 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { CloudModuleState } from "store/states/cloud.state";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { CloudModuleState } from 'store/states/cloud.state';
 import { selBookmark_CloudTasks } from '../sync/sync-bookmark.selectors';
 import { selNoteContent_CloudTasks } from '../sync/sync-note-content.selectors';
 import { selNote_CloudTasks } from '../sync/sync-note.selectors';

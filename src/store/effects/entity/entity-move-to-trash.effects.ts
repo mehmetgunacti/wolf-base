@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { AppEntities, LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { AppEntities } from '@constants';
+import { LocalRepositoryService } from '@libServices';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { coreActions, entityActions } from 'store/actions';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { coreActions, entityActions } from '@actions';
 
 @Injectable()
 export class EntityMoveToTrashEffects {
@@ -36,7 +37,7 @@ export class EntityMoveToTrashEffects {
 		() => this.actions$.pipe(
 
 			ofType(entityActions.moveToTrashSuccess),
-			map(({ entityType }) => coreActions.showNotification({ severity: 'success', detail: `${AppEntities[entityType].label} removed` }))
+			map(({ entityType }) => coreActions.showNotification({ severity: 'success', detail: `${AppEntities[ entityType ].label} removed` }))
 
 		)
 

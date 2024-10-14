@@ -1,9 +1,9 @@
-import { BookmarkModuleState, bookmark_initialState } from "./bookmark.state";
-import { CloudModuleState, initialCloudState } from "./cloud.state";
-import { CoreModuleState, initialCoreState } from "./core.state";
-import { DatabaseModuleState, initialDatabaseState } from "./database.state";
+import { BookmarkModuleState, bookmark_initialState } from './bookmark.state';
+import { CloudModuleState, initialCloudState } from './cloud.state';
+import { CoreModuleState, initialCoreState } from './core.state';
+import { DatabaseModuleState, initialDatabaseState } from './database.state';
 import { entity_initialState, Entity_ModuleState } from './entity.state';
-import { Logs_ModuleState, initialLogsState } from "./logs.state";
+import { Logs_ModuleState, initialLogsState } from './logs.state';
 import { Note_ModuleState, initialNoteState } from './note.state';
 import { initialTaskState, Task_ModuleState } from './task.state';
 import { initialProjectState, Project_ModuleState } from './project.state';

@@ -1,25 +1,26 @@
-import { AppEntityType, Entity, RemoteMetadata, SyncData, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import { coreActions, entityActions } from 'store/actions';
-import { entity_initialState, Entity_ModuleState } from 'store/states/entity.state';
+import { AppEntityType, UUID } from '@constants';
+import { Entity, RemoteMetadata, SyncData } from '@models';
+import { coreActions, entityActions } from '@actions';
+import { entity_initialState, Entity_ModuleState } from '@states';
 
 function reduceEntities(data: Entity[]): Record<UUID, Entity> {
 
-	return data.reduce((record, e) => { record[e.id] = e; return record; }, {} as Record<UUID, Entity>);
+	return data.reduce((record, e) => { record[ e.id ] = e; return record; }, {} as Record<UUID, Entity>);
 
 }
 
 
 function reduceSyncData(data: SyncData[]): Record<UUID, SyncData> {
 
-	return data.reduce((record, sd) => { record[sd.id] = sd; return record; }, {} as Record<UUID, SyncData>);
+	return data.reduce((record, sd) => { record[ sd.id ] = sd; return record; }, {} as Record<UUID, SyncData>);
 
 }
 
 function reduceRemoteMetadata(data: RemoteMetadata[]): Record<UUID, RemoteMetadata> {
 
-	return data.reduce((record, rmd) => { record[rmd.id] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>);
+	return data.reduce((record, rmd) => { record[ rmd.id ] = rmd; return record; }, {} as Record<UUID, RemoteMetadata>);
 
 }
 
@@ -34,21 +35,21 @@ const reducer = createReducer(
 
 				// note
 				if (entity === null)
-					delete draft[entityType].entities[id];
+					delete draft[ entityType ].entities[ id ];
 				else
-					draft[entityType].entities[id] = entity;
+					draft[ entityType ].entities[ id ] = entity;
 
 				// syncData
 				if (syncData === null)
-					delete draft[entityType].syncData[id];
+					delete draft[ entityType ].syncData[ id ];
 				else
-					draft[entityType].syncData[id] = syncData;
+					draft[ entityType ].syncData[ id ] = syncData;
 
 				// remoteMetadata
 				if (remoteMetadata === null)
-					delete draft[entityType].remoteMetadata[id];
+					delete draft[ entityType ].remoteMetadata[ id ];
 				else
-					draft[entityType].remoteMetadata[id] = remoteMetadata;
+					draft[ entityType ].remoteMetadata[ id ] = remoteMetadata;
 
 			}
 		);
@@ -63,9 +64,9 @@ const reducer = createReducer(
 
 				for (const d of entities) {
 
-					draft[d.entityType].entities = reduceEntities(d.entities);
-					draft[d.entityType].syncData = reduceSyncData(d.syncData);
-					draft[d.entityType].remoteMetadata = reduceRemoteMetadata(d.remoteMetadata);
+					draft[ d.entityType ].entities = reduceEntities(d.entities);
+					draft[ d.entityType ].syncData = reduceSyncData(d.syncData);
+					draft[ d.entityType ].remoteMetadata = reduceRemoteMetadata(d.remoteMetadata);
 
 				}
 
@@ -78,7 +79,7 @@ const reducer = createReducer(
 
 		return produce(
 			state,
-			draft => { delete draft[entityType].entities[id]; }
+			draft => { delete draft[ entityType ].entities[ id ]; }
 		);
 
 	}),
@@ -88,9 +89,9 @@ const reducer = createReducer(
 			state,
 			draft => {
 
-				delete draft[entityType].entities[id];
-				delete draft[entityType].syncData[id];
-				delete draft[entityType].remoteMetadata[id];
+				delete draft[ entityType ].entities[ id ];
+				delete draft[ entityType ].syncData[ id ];
+				delete draft[ entityType ].remoteMetadata[ id ];
 
 			}
 		);
@@ -106,8 +107,8 @@ const reducer = createReducer(
 				Object.keys(data).forEach(key => {
 
 					const entityType = key as AppEntityType;
-					const remoteMetadata = data[entityType];
-					draft[entityType].remoteMetadata = reduceRemoteMetadata(remoteMetadata);
+					const remoteMetadata = data[ entityType ];
+					draft[ entityType ].remoteMetadata = reduceRemoteMetadata(remoteMetadata);
 
 				});
 

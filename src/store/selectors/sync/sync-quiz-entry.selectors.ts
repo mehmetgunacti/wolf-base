@@ -1,4 +1,5 @@
-import { AppEntityType, QuizEntry } from '@lib';
+import { AppEntityType } from '@constants';
+import { QuizEntry } from '@models';
 import * as sel from '../entity/entity-quiz-entry.selectors';
 import { createSyncSelectors } from '../sync/selectors-factory';
 

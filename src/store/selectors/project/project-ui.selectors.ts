@@ -1,5 +1,5 @@
-import { Project } from '@lib';
 import { createSelector } from '@ngrx/store';
+import { Project } from '@models';
 import { selProject_EntityList, selProject_EntityMap } from '../entity/entity-project.selectors';
 import { selTask_filteredTasks } from '../task/task-ui.selectors';
 import { selProject_UIState } from './project.selectors';
@@ -19,7 +19,7 @@ export const selProject_selected = createSelector(
 	selTask_filteredTasks,
 	(state, id, tasks): Project | null => {
 
-		const project = id ? state[id] ?? null : null;
+		const project = id ? state[ id ] ?? null : null;
 		if (project)
 			return {
 				...project,

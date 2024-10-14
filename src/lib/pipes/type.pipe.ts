@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DefinitionTypeLabels } from 'lib/constants/word.constant';
+import { DefinitionTypeLabels } from '@constants';
 
 @Pipe({ name: 'defType' })
 export class TypePipe implements PipeTransform {

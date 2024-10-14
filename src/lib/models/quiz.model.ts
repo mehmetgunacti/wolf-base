@@ -1,5 +1,5 @@
 import { signal } from '@angular/core';
-import { Progress, QuestionType } from 'lib/constants';
+import { Progress, QuestionType } from '@constants';
 import { Entity } from './entity.model';
 import { Definition, Word } from './word.model';
 

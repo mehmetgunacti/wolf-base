@@ -1,14 +1,16 @@
-import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { Dialog } from '@angular/cdk/dialog';
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
-import { AppEntityType, LocalRepositoryService, TAG_POPULAR, commaSplit, toggleArrayItem } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
-import { BookmarkEditContainerComponent } from 'modules/bookmark/containers/bookmark-edit-container/bookmark-edit-container.component';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { AppEntityType, TAG_POPULAR } from '@constants';
+import { LocalRepositoryService } from '@libServices';
+import { commaSplit, toggleArrayItem } from '@utils';
+// import { BookmarkEditContainerComponent } from 'modules/bookmark/containers/bookmark-edit-container/bookmark-edit-container.component';
 import { from } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { bookmarkActions, entityActions } from 'store/actions';
+import { bookmarkActions, entityActions } from '@actions';
 
 @Injectable()
 export class BookmarkUIEffects {
@@ -20,16 +22,16 @@ export class BookmarkUIEffects {
 	private router: Router = inject(Router);
 	private dialogService: Dialog = inject(Dialog);
 
-	private dialogRef: DialogRef<null, BookmarkEditContainerComponent> | null = null;
+	// private dialogRef: DialogRef<null, BookmarkEditContainerComponent> | null = null;
 
 	openAddBookmarkDialog$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(bookmarkActions.openAddBookmarkDialog, bookmarkActions.openEditBookmarkDialog),
-			map(() => {
-				this.dialogRef = this.dialogService.open(BookmarkEditContainerComponent);
-			})
+			// map(() => {
+			// 	this.dialogRef = this.dialogService.open(BookmarkEditContainerComponent);
+			// })
 
 		),
 		{ dispatch: false }
@@ -46,7 +48,7 @@ export class BookmarkUIEffects {
 				entityActions.updateSuccess,
 				entityActions.moveToTrashSuccess
 			),
-			map(() => this.dialogRef?.close())
+			// map(() => this.dialogRef?.close())
 
 		),
 		{ dispatch: false }

@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
-import { commaSplit, findEnumValue, TaskCategory, TaskState, toggleArrayItem } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { TaskCategory, TaskState } from '@constants';
+import { commaSplit, findEnumValue, toggleArrayItem } from '@utils';
 import { filter, map, tap, withLatestFrom } from 'rxjs';
-import { taskActions } from 'store/actions';
+import { taskActions } from '@actions';
 
 @Injectable()
 export class TaskUIEffects {
@@ -18,7 +19,7 @@ export class TaskUIEffects {
 
 			ofType(taskActions.clickTag),
 			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([{ name }, params]) => {
+			tap(([ { name }, params ]) => {
 
 				// Destructure 'tags' from query parameters
 				const { tags, ...rest } = params;
@@ -68,7 +69,7 @@ export class TaskUIEffects {
 
 			ofType(taskActions.search),
 			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([{ term }, params]) => {
+			tap(([ { term }, params ]) => {
 
 				// term: user just entered a search term
 				// term is an empty string when user empties search box
@@ -96,7 +97,7 @@ export class TaskUIEffects {
 
 			ofType(taskActions.taskStatusChange),
 			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([action, params]) => {
+			tap(([ action, params ]) => {
 
 				const { status, ...rest } = params;
 				const queryParams: Params = action.status ? { ...params, status: action.status } : rest;
@@ -115,7 +116,7 @@ export class TaskUIEffects {
 
 			ofType(taskActions.taskCategoryChange),
 			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([action, params]) => {
+			tap(([ action, params ]) => {
 
 				const { category, ...rest } = params;
 				const queryParams: Params = action.category ? { ...params, category: action.category } : rest;
@@ -136,7 +137,7 @@ export class TaskUIEffects {
 			filter((e): e is NavigationEnd => e instanceof NavigationEnd),
 			filter(e => e.urlAfterRedirects.startsWith('/projects/')),
 			withLatestFrom(this.activatedRoute.queryParamMap),
-			map(([, paramMap]) =>
+			map(([ , paramMap ]) =>
 
 				taskActions.setQueryParams({
 

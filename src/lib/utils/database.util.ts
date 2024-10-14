@@ -1,9 +1,9 @@
-import { AsyncZippable, FlateError, zip } from "fflate";
+import { LocalRepositoryNames } from '@constants';
+import { LocalRepositoryService } from '@libServices';
+import { AsyncZippable, FlateError, zip } from 'fflate';
 import * as FileSaver from 'file-saver-es';
-import { LocalRepositoryNames } from 'lib/constants';
-import { LocalRepositoryService } from "lib/services";
 import { Observable, concatMap, delay, filter, from, map, switchMap, toArray } from 'rxjs';
-import { sleep } from "./helper.tool";
+import { sleep } from './helper.tool';
 
 const encode = <T>(data: Record<string, T>): Uint8Array => new TextEncoder().encode(JSON.stringify(data, null, '\t'));
 
@@ -20,13 +20,13 @@ export class BackupDatabase {
 
 				// return tuple [filename, uint8array]
 				from(this.localRepository.dump(name)).pipe(
-					map((dump): [string, Uint8Array] => [`${name}.json`, encode(dump)]),
+					map((dump): [ string, Uint8Array ] => [ `${name}.json`, encode(dump) ]),
 					delay(100)
 				)
 
 			),
 			toArray(),
-			map(a => a.reduce((p, c) => { p[c[0]] = c[1]; return p; }, {} as AsyncZippable)),
+			map(a => a.reduce((p, c) => { p[ c[ 0 ] ] = c[ 1 ]; return p; }, {} as AsyncZippable)),
 			switchMap((zippable: AsyncZippable) => new Promise<void>((resolve, reject) => {
 
 				zip(zippable, { level: 9 }, async (err: FlateError | null, data: Uint8Array) => {
@@ -39,7 +39,7 @@ export class BackupDatabase {
 					}
 
 					// Generate the zip file
-					const content: Blob = new Blob([data], { type: 'application/zip' });
+					const content: Blob = new Blob([ data ], { type: 'application/zip' });
 
 					// save zip file
 					FileSaver.saveAs(content, `wolf-base_${new Date().toISOString()}.zip`);

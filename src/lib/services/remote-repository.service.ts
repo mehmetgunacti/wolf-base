@@ -1,20 +1,18 @@
-import { AppEntityType } from 'lib/constants';
-import { Entity } from 'lib/models';
-import { BookmarksRemoteRepository, EntityRemoteRepository, NoteContentRemoteRepository, NotesRemoteRepository, ProjectsRemoteRepository, QuizEntriesRemoteRepository, QuotesRemoteRepository } from 'lib/repositories/remote';
-import { TasksRemoteRepository } from 'lib/repositories/remote/project-task-remote.repository';
-import { WordsRemoteRepository } from 'lib/repositories/remote/word-remote.repository';
+import { AppEntityType } from '@constants';
+import { Entity } from '@models';
+import * as repo from '@repositories';
 
 export interface RemoteRepositoryService {
 
-	bookmarks: BookmarksRemoteRepository;
-	notes: NotesRemoteRepository;
-	noteContent: NoteContentRemoteRepository;
-	projects: ProjectsRemoteRepository;
-	quizEntries: QuizEntriesRemoteRepository;
-	quotes: QuotesRemoteRepository;
-	tasks: TasksRemoteRepository;
-	words: WordsRemoteRepository;
+	bookmarks: repo.BookmarksRemoteRepository;
+	notes: repo.NotesRemoteRepository;
+	noteContent: repo.NoteContentRemoteRepository;
+	projects: repo.ProjectsRemoteRepository;
+	quizEntries: repo.QuizEntriesRemoteRepository;
+	quotes: repo.QuotesRemoteRepository;
+	tasks: repo.TasksRemoteRepository;
+	words: repo.WordsRemoteRepository;
 
-	getRepository(entity: AppEntityType): EntityRemoteRepository<Entity>;
+	getRepository(entity: AppEntityType): repo.EntityRemoteRepository<Entity>;
 
 }

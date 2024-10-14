@@ -1,5 +1,6 @@
-import { BookmarkQueryParams, Click, UUID } from '@lib';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { UUID } from '@constants';
+import { BookmarkQueryParams, Click } from '@models';
 
 export const bookmarkActions = createActionGroup({
 

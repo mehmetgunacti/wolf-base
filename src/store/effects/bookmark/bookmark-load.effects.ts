@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { AppEntityType, LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { AppEntityType } from '@constants';
+import { LocalRepositoryService } from '@libServices';
 import { from } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { bookmarkActions, entityActions } from 'store/actions';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { bookmarkActions, entityActions } from '@actions';
 
 @Injectable()
 export class BookmarkLoadEffects {

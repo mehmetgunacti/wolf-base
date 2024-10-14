@@ -1,5 +1,5 @@
-import { Bookmark, BookmarkQueryParams, ClickedBookmark, Tag } from '@lib';
 import { createSelector } from '@ngrx/store';
+import { Bookmark, BookmarkQueryParams, ClickedBookmark, Tag } from '@models';
 import { selBookmark_EntityList } from '../entity/entity-bookmark.selectors';
 import { selBookmark_array, selBookmark_clickedBookmarks } from './bookmark-clicks.selectors';
 import { selBookmark_UIState } from './bookmark.selectors';
@@ -24,7 +24,7 @@ export const selBM_distinctTagsArray = createSelector(
 
 				(acc: Record<string, Tag>, name: string) => {
 
-					acc[name] = { name, count: (acc[name]?.count ?? 0) + 1 };
+					acc[ name ] = { name, count: (acc[ name ]?.count ?? 0) + 1 };
 					return acc;
 
 				},
@@ -39,7 +39,7 @@ export const selBM_distinctTagsArray = createSelector(
 const distinctTagNames = createSelector(
 
 	arrayOfTagNames,
-	(tags: string[][]): string[] => [...new Set(tags.flat())]
+	(tags: string[][]): string[] => [ ...new Set(tags.flat()) ]
 
 );
 
@@ -54,7 +54,7 @@ const selBMSelectedBookmark = createSelector(
 
 	selBookmark_clickedBookmarks,
 	selBM_QueryParams,
-	(clickedBMs, params): ClickedBookmark | null => params.id ? clickedBMs[params.id] : null
+	(clickedBMs, params): ClickedBookmark | null => params.id ? clickedBMs[ params.id ] : null
 
 );
 
@@ -69,7 +69,7 @@ export const selBM_filteredBookmarks = createSelector(
 			return [];
 
 		if (selectedBookmark)
-			return [selectedBookmark];
+			return [ selectedBookmark ];
 
 		// Filter bookmarks based on selected tags
 		const filteredBookmarks: ClickedBookmark[] = params.tags.reduce((acc, tag) => {

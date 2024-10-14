@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DefinitionLanguageLabels } from 'lib/constants/word.constant';
+import { DefinitionLanguageLabels } from '@constants';
 
 @Pipe({ name: 'defLanguage' })
 export class LanguagePipe implements PipeTransform {

@@ -1,4 +1,5 @@
-import { DEFAULT_CONF_VALUES, FirestoreConfig, SidebarState, Theme } from "@lib";
+import { DEFAULT_CONF_VALUES, SidebarState, Theme } from '@constants';
+import { FirestoreConfig } from '@models';
 
 export interface CoreModuleState {
 
@@ -13,7 +14,7 @@ export interface CoreUIState {
 	bigScreen: boolean,
 	syncableItems: number,
 	theme: Theme,
-	now: number
+	now: number;
 
 }
 
@@ -23,7 +24,7 @@ export interface CoreConfigurationState {
 	titleLookupUrl: string | null;
 	firestoreConfig: FirestoreConfig | null;
 	popularBookmarks: string[],
-	pinnedNotes: string[]
+	pinnedNotes: string[];
 
 }
 
@@ -54,4 +55,4 @@ export const initialCoreState: CoreModuleState = {
 	conf: initialCoreConfigurationState,
 	ui: initialCoreUIState
 
-}
+};

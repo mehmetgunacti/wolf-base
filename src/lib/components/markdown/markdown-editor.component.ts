@@ -1,4 +1,3 @@
-import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenuBar, CdkMenuTrigger } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, input, signal } from '@angular/core';
@@ -13,7 +12,7 @@ import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 @Component({
 	selector: 'w-markdown-editor',
 	templateUrl: './markdown-editor.component.html',
-	styleUrls: ['./markdown-editor.component.scss'],
+	styleUrls: [ './markdown-editor.component.scss' ],
 	providers: [
 		{ provide: UNDO_CACHE, useClass: UndoCacheImpl },
 		{ provide: RECOVERY_MANAGER, useClass: RecoveryManagerImpl },
@@ -173,7 +172,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	}
 
-	@HostListener('keydown', ['$event'])
+	@HostListener('keydown', [ '$event' ])
 	onKeydownHandler(event: KeyboardEvent) {
 
 		if (!this.hasFocus)
@@ -186,9 +185,9 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 				event.preventDefault();
 				const tuple = lineStartsWithOneOf(
 					extractProps(this.editor.nativeElement),
-					[C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS]
-				)
-				if (tuple && tuple[1] > 0)
+					[ C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS ]
+				);
+				if (tuple && tuple[ 1 ] > 0)
 					this.updateEditor(this.actions.decreaseIndent(this.editor.nativeElement));
 				else
 					this.updateEditor(this.actions.shiftTab(this.editor.nativeElement));
@@ -228,9 +227,9 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 			event.preventDefault();
 			const tuple = lineStartsWithOneOf(
 				extractProps(this.editor.nativeElement),
-				[C_ASTERISK, C_DASH, C_PLUS, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS]
-			)
-			if (tuple && tuple[1] > 0)
+				[ C_ASTERISK, C_DASH, C_PLUS, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS ]
+			);
+			if (tuple && tuple[ 1 ] > 0)
 				this.updateEditor(this.actions.increaseIndent(this.editor.nativeElement));
 			else
 				this.updateEditor(this.actions.tab(this.editor.nativeElement));
@@ -244,13 +243,13 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 			const tuple = lineStartsWithOneOf(
 				extractProps(this.editor.nativeElement),
-				[C_TASK_EMPTY, C_TASK_COMPL, C_ASTERISK, C_DASH, C_PLUS, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_TAB, C_INDENT],
-				[C_TASK_EMPTY, C_TASK_EMPTY, C_ASTERISK, C_DASH, C_PLUS, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_TAB, C_INDENT]
+				[ C_TASK_EMPTY, C_TASK_COMPL, C_ASTERISK, C_DASH, C_PLUS, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_TAB, C_INDENT ],
+				[ C_TASK_EMPTY, C_TASK_EMPTY, C_ASTERISK, C_DASH, C_PLUS, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_TAB, C_INDENT ]
 			);
-			if (tuple && tuple[1] > 0) {
+			if (tuple && tuple[ 1 ] > 0) {
 
 				event.preventDefault();
-				this.updateEditor(this.actions.addNewLine(this.editor.nativeElement, tuple[0], tuple[1]));
+				this.updateEditor(this.actions.addNewLine(this.editor.nativeElement, tuple[ 0 ], tuple[ 1 ]));
 
 			}
 			this.editor.nativeElement.scrollLeft = 0;
@@ -313,7 +312,7 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
 
 	}
 
-	addTable(event: [number, number]): void {
+	addTable(event: [ number, number ]): void {
 
 		this.actions.addTable(this.editor.nativeElement, event);
 		this.trigger.close();

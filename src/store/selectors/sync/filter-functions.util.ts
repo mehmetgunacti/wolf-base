@@ -1,9 +1,10 @@
-import { NameBase, RemoteMetadata, SyncData, UUID } from '@lib';
+import { UUID } from '@constants';
+import { NameBase, RemoteMetadata, SyncData } from '@models';
 
 // LOCAL NEW
 export function listOf_LocalNew(entities: NameBase[], syncDataMap: Record<UUID, SyncData>): NameBase[] {
 
-	return entities.filter(e => !syncDataMap[e.id]);
+	return entities.filter(e => !syncDataMap[ e.id ]);
 
 }
 
@@ -24,7 +25,7 @@ export function listOf_LocalDeleted(syncData: SyncData[], deletedEntityIds: UUID
 // REMOTE NEW
 export function listOf_RemoteNew(remote: RemoteMetadata[], local: Record<UUID, SyncData>): NameBase[] {
 
-	return remote.filter(r => !local[r.id]);
+	return remote.filter(r => !local[ r.id ]);
 
 }
 
@@ -33,7 +34,7 @@ export function listOf_RemoteUpdated(remote: RemoteMetadata[], local: Record<UUI
 
 	return remote.filter(
 
-		r => local[r.id] && !local[r.id].deleted && !local[r.id].updated && local[r.id].updateTime !== r.updateTime
+		r => local[ r.id ] && !local[ r.id ].deleted && !local[ r.id ].updated && local[ r.id ].updateTime !== r.updateTime
 
 	);
 
@@ -44,7 +45,7 @@ export function listOf_RemoteDeleted(remoteMetadataMap: Record<UUID, RemoteMetad
 
 	return syncDataList.filter(
 
-		sd => !sd.updated && !sd.deleted && !remoteMetadataMap[sd.id]
+		sd => !sd.updated && !sd.deleted && !remoteMetadataMap[ sd.id ]
 
 	);
 
@@ -55,7 +56,7 @@ export function listOf_LocalUpdatedRemoteUpdated(local: SyncData[], remote: Reco
 
 	return local.filter(
 
-		sd => !sd.deleted && sd.updated && remote[sd.id] && remote[sd.id].updateTime !== sd.updateTime
+		sd => !sd.deleted && sd.updated && remote[ sd.id ] && remote[ sd.id ].updateTime !== sd.updateTime
 
 	);
 
@@ -66,7 +67,7 @@ export function listOf_LocalDeletedRemoteDeleted(syncData: SyncData[], remote: R
 
 	return syncData.filter(
 
-		sd => sd.deleted && !remote[sd.id]
+		sd => sd.deleted && !remote[ sd.id ]
 
 	);
 
@@ -77,7 +78,7 @@ export function listOf_LocalUpdatedRemoteDeleted(local: SyncData[], remote: Reco
 
 	return local.filter(
 
-		sd => sd.updated && !remote[sd.id]
+		sd => sd.updated && !remote[ sd.id ]
 
 	);
 
@@ -88,7 +89,7 @@ export function listOf_LocalDeletedRemoteUpdated(local: SyncData[], remote: Reco
 
 	return local.filter(
 
-		sd => sd.deleted && remote[sd.id] && remote[sd.id].updateTime !== sd.updateTime
+		sd => sd.deleted && remote[ sd.id ] && remote[ sd.id ].updateTime !== sd.updateTime
 
 	);
 
@@ -99,7 +100,7 @@ export function listOf_LocalUpdatedIds(syncData: SyncData[], remote: Record<stri
 
 	return syncData.filter(
 
-		s => s.updated && !s.deleted && remote[s.id] && s.updateTime === remote[s.id].updateTime
+		s => s.updated && !s.deleted && remote[ s.id ] && s.updateTime === remote[ s.id ].updateTime
 
 	).map(s => s.id);
 
@@ -110,7 +111,7 @@ export function listOf_LocalDeletedIds(syncData: SyncData[], remote: Record<stri
 
 	return syncData.filter(
 
-		s => s.deleted && remote[s.id] && s.updateTime === remote[s.id].updateTime
+		s => s.deleted && remote[ s.id ] && s.updateTime === remote[ s.id ].updateTime
 
 	).map(s => s.id);
 
@@ -121,7 +122,7 @@ export function listOf_RemoteUpdatedIds(remote: RemoteMetadata[], local: Record<
 
 	return remote.filter(
 
-		r => local[r.id] && !local[r.id].deleted && !local[r.id].updated && local[r.id].updateTime !== r.updateTime
+		r => local[ r.id ] && !local[ r.id ].deleted && !local[ r.id ].updated && local[ r.id ].updateTime !== r.updateTime
 
 	);
 
@@ -133,7 +134,7 @@ export function mapOf_SyncData(arr: SyncData[]): Record<UUID, SyncData> {
 	return arr.reduce(
 		(acc, syncData) => {
 
-			acc[syncData.id] = syncData;
+			acc[ syncData.id ] = syncData;
 			return acc;
 
 		},
@@ -149,7 +150,7 @@ export function mapOf_RemoteMetadata(arr: RemoteMetadata[]): Record<UUID, Remote
 
 		(acc, metadata) => {
 
-			acc[metadata.id] = metadata;
+			acc[ metadata.id ] = metadata;
 			return acc;
 
 		},

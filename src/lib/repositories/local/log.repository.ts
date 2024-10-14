@@ -1,5 +1,5 @@
-import { LogCategory, UUID } from 'lib/constants';
-import { LogMessage } from 'lib/models';
+import { LogCategory, UUID } from '@constants';
+import { LogMessage } from '@models';
 
 export interface LogsLocalRepository {
 

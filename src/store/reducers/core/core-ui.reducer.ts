@@ -1,8 +1,8 @@
-import { DEFAULT_CONF_VALUES } from '@lib';
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
-import * as utils from 'lib/utils';
-import { coreActions } from 'store/actions';
-import { CoreUIState, initialCoreUIState } from 'store/states/core.state';
+import { DEFAULT_CONF_VALUES } from '@constants';
+import * as utils from '@utils';
+import { coreActions } from '@actions';
+import { CoreUIState, initialCoreUIState } from '@states';
 
 export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 

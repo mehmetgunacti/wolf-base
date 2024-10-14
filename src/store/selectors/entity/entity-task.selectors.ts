@@ -1,4 +1,5 @@
-import { AppEntityType, Task } from '@lib';
+import { AppEntityType } from '@constants';
+import { Task } from '@models';
 import { createEntitySelectors } from '../entity/selectors-factory';
 
 export const {

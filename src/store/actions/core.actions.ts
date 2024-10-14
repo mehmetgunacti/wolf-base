@@ -1,5 +1,7 @@
-import { AppEntityType, Click, Configuration, Entity, RemoteMetadata, SyncData, Theme, ToastConfiguration } from '@lib';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { ToastConfiguration } from '@components';
+import { AppEntityType, Theme } from '@constants';
+import { Click, Configuration, Entity, RemoteMetadata, SyncData } from '@models';
 
 export const coreActions = createActionGroup({
 

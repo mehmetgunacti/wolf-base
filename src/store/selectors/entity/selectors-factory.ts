@@ -1,6 +1,7 @@
-import { AppEntityType, Entity, UUID } from '@lib';
+import { AppEntityType, UUID } from '@constants';
+import { Entity } from '@models';
 import { createSelector } from '@ngrx/store';
-import { Entity_EntitiesState } from 'store/states/entity.state';
+import { Entity_EntitiesState } from '@states';
 import { selEntity_ModuleState } from './entity.selectors';
 
 export function createEntitySelectors<T extends Entity>(entityType: AppEntityType) {
@@ -9,7 +10,7 @@ export function createEntitySelectors<T extends Entity>(entityType: AppEntityTyp
 	const selEntityState = createSelector(
 
 		selEntity_ModuleState,
-		state => state[entityType]
+		state => state[ entityType ]
 
 	);
 

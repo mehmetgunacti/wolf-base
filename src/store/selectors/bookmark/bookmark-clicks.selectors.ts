@@ -1,5 +1,6 @@
-import { AppEntityType, Bookmark, Click, ClickedBookmark, NamedClick, SyncTaskType, toCloudTask, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
+import { AppEntityType, UUID } from '@constants';
+import { Bookmark, Click, ClickedBookmark, NamedClick, SyncTaskType, toCloudTask } from '@models';
 import { selBookmark_EntityList, selBookmark_EntityState } from '../entity/entity-bookmark.selectors';
 import { selBookmark_ClicksState } from './bookmark.selectors';
 
@@ -19,7 +20,7 @@ export const selBookmark_clickedBookmarks = createSelector(
 		const bookmarks = list as Bookmark[];
 		return bookmarks.reduce(
 
-			(acc, cur) => { acc[cur.id] = { ...cur, clicks: clicks[cur.id]?.total ?? 0 }; return acc; },
+			(acc, cur) => { acc[ cur.id ] = { ...cur, clicks: clicks[ cur.id ]?.total ?? 0 }; return acc; },
 			{} as Record<UUID, ClickedBookmark>
 
 		);
@@ -56,8 +57,8 @@ export const selBookmark_clicked = createSelector(
 	(state, clicks): NamedClick[] =>
 		Object
 			.values(clicks)
-			.filter(c => c.current > 0 && !!state.entities[c.id])
-			.map(c => ({ ...c, name: state.entities[c.id].name }))
+			.filter(c => c.current > 0 && !!state.entities[ c.id ])
+			.map(c => ({ ...c, name: state.entities[ c.id ].name }))
 
 );
 

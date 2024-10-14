@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NameBase } from 'lib/models';
+import { NameBase } from '@models';
 
 @Component({
 	selector: 'w-select',

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Task_ModuleState } from 'store/states/task.state';
+import { Task_ModuleState } from '@states';
 
 const selTask_ModuleState = createFeatureSelector<Task_ModuleState>('task');
 

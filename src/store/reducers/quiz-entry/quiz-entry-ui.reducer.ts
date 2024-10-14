@@ -1,7 +1,7 @@
-import { incVisibility, QuizVisibility } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
-import { quizEntryActions } from 'store/actions';
-import { quizEntry_initialUIState, QuizEntry_UIState } from 'store/states/quiz-entry.state';
+import { incVisibility, QuizVisibility } from '@constants';
+import { quizEntryActions } from '@actions';
+import { quizEntry_initialUIState, QuizEntry_UIState } from '@states';
 
 const reducer = createReducer(
 

@@ -1,4 +1,5 @@
-import { ProjectQueryParams, UUID } from '@lib';
+import { UUID } from '@constants';
+import { ProjectQueryParams } from '@models';
 
 export interface Project_ModuleState {
 

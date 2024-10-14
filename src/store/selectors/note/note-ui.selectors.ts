@@ -1,5 +1,6 @@
-import { Note, TAG_PINNED, UUID } from '@lib';
 import { createSelector } from '@ngrx/store';
+import { TAG_PINNED, UUID } from '@constants';
+import { Note } from '@models';
 import { selNote_EntityList, selNote_EntityMap } from '../entity/entity-note.selectors';
 import { selNote_UIState } from './note.selectors';
 
@@ -15,7 +16,7 @@ export const selNote_SelectedEntity = createSelector(
 
 	selNote_EntityMap,
 	selNote_SelectedId,
-	(map, id) => id ? map[id] : null
+	(map, id) => id ? map[ id ] : null
 
 );
 
@@ -38,14 +39,14 @@ function calcParents(entities: Record<UUID, Note>, selectedId: UUID | null): Not
 	if (!selectedId)
 		return [];
 
-	let parentId = entities[selectedId]?.parentId;
+	let parentId = entities[ selectedId ]?.parentId;
 	if (!parentId)
 		return [];
 
 	const result: Note[] = [];
 	while (!!parentId) {
 
-		const parent: Note = entities[parentId];
+		const parent: Note = entities[ parentId ];
 		result.unshift(parent);
 		parentId = parent.parentId;
 

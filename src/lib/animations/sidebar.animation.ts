@@ -1,5 +1,5 @@
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
-import { sidebarConf } from 'lib/constants';
+import { sidebarConf } from '@constants';
 
 const {
 

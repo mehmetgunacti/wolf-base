@@ -1,4 +1,5 @@
-import { UUID, WordQueryParams } from '@lib';
+import { UUID } from '@constants';
+import { WordQueryParams } from '@models';
 
 export interface Word_ModuleState {
 

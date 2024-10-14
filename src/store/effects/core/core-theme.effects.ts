@@ -1,12 +1,12 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
-import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { LocalRepositoryService } from '@libServices';
 import { switchMap, tap } from 'rxjs/operators';
-import { coreActions } from 'store/actions';
-import { selCore_theme } from 'store/selectors/core/core-ui.selectors';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { coreActions } from '@actions';
+import { selCore_theme } from '@selectors';
 
 @Injectable()
 export class CoreThemeEffects {
@@ -35,7 +35,7 @@ export class CoreThemeEffects {
 			// replace 'theme-' class of <body>
 			tap(theme => {
 
-				this.document.documentElement.dataset['theme'] = theme;
+				this.document.documentElement.dataset[ 'theme' ] = theme;
 
 			})
 

@@ -1,4 +1,4 @@
-import { ProjectStatus, TaskCategory, TaskPriority, TaskState, UUID } from 'lib/constants';
+import { ProjectStatus, TaskCategory, TaskPriority, TaskState, UUID } from '@constants';
 import { Entity } from './entity.model';
 import { ISODateString, NameBase } from './id-base.model';
 

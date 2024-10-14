@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { MenuItem } from 'lib/models';
+import { MenuItem } from '@models';
 
 @Component({
 	selector: 'w-breadcrumb',

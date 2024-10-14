@@ -1,4 +1,5 @@
-import { AppEntityType, Quote } from '@lib';
+import { AppEntityType } from '@constants';
+import { Quote } from '@models';
 import * as sel from '../entity/entity-quote.selectors';
 import { createSyncSelectors } from '../sync/selectors-factory';
 

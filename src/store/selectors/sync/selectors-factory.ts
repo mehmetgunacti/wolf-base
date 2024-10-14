@@ -1,5 +1,6 @@
-import { AppEntityType, CloudTask, Entity, RemoteMetadata, SyncData, SyncTaskType, toCloudTask, UUID } from '@lib';
 import { createSelector, MemoizedSelector } from '@ngrx/store';
+import { AppEntityType, UUID } from '@constants';
+import { CloudTask, Entity, RemoteMetadata, SyncData, SyncTaskType, toCloudTask } from '@models';
 import * as filterFn from './filter-functions.util';
 
 export function createSyncSelectors<T extends Entity>(
@@ -189,7 +190,7 @@ export function createSyncSelectors<T extends Entity>(
 
 		selNonConflictCloudTasks,
 		selConflictCloudTasks,
-		(nonConflicts: CloudTask[], conflicts: CloudTask[]): CloudTask[] => [...nonConflicts, ...conflicts]
+		(nonConflicts: CloudTask[], conflicts: CloudTask[]): CloudTask[] => [ ...nonConflicts, ...conflicts ]
 
 	);
 

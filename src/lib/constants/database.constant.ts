@@ -1,4 +1,4 @@
-import { Configuration } from 'lib/models';
+import { Configuration } from '@models';
 import { SidebarState } from './sidebar.constant';
 import { Theme } from './theme.constant';
 

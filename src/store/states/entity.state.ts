@@ -1,4 +1,5 @@
-import { Entity, RemoteMetadata, SyncData, UUID } from '@lib';
+import { UUID } from '@constants';
+import { Entity, RemoteMetadata, SyncData } from '@models';
 
 export interface Entity_ModuleState {
 

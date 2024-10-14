@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
-import { LocalRepositoryService, commaSplit, toggleArrayItem } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { LocalRepositoryService } from '@libServices';
+import { commaSplit, toggleArrayItem } from '@utils';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
-import { noteActions } from 'store/actions';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { noteActions } from '@actions';
 
 @Injectable()
 export class NoteUIEffects {
@@ -20,7 +21,7 @@ export class NoteUIEffects {
 
 			ofType(noteActions.clickTag),
 			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([{ name }, params]) => {
+			tap(([ { name }, params ]) => {
 
 				// Destructure 'tags' from query parameters
 				const { tags, ...rest } = params;
@@ -47,7 +48,7 @@ export class NoteUIEffects {
 
 			ofType(noteActions.emptySelectedTags),
 			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([_, params]) => {
+			tap(([ _, params ]) => {
 
 				// Destructure 'tags' from query parameters
 				const { tags, ...queryParams } = params;
@@ -69,7 +70,7 @@ export class NoteUIEffects {
 
 			ofType(noteActions.search),
 			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([{ term }, params]) => {
+			tap(([ { term }, params ]) => {
 
 				// term: user just entered a search term
 				// term is an empty string when user empties search box
@@ -99,7 +100,7 @@ export class NoteUIEffects {
 			filter((e): e is NavigationEnd => e instanceof NavigationEnd),
 			filter(e => e.urlAfterRedirects.startsWith('/notes')),
 			withLatestFrom(this.activatedRoute.queryParamMap),
-			map(([, paramMap]) =>
+			map(([ , paramMap ]) =>
 
 				noteActions.setQueryParams({
 

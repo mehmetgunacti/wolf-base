@@ -1,5 +1,4 @@
-import { UUID } from 'lib/constants';
-import { DefinitionLanguage, DefinitionType } from 'lib/constants/word.constant';
+import { DefinitionLanguage, DefinitionType, UUID } from '@constants';
 import { Entity } from './entity.model';
 import { IDBase } from './id-base.model';
 
@@ -29,7 +28,7 @@ export interface Word extends Entity {
 
 export interface WordQueryParams {
 
-	search: string | null
+	search: string | null;
 
 }
 

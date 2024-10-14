@@ -1,5 +1,5 @@
-import { UUID } from "lib/constants";
-import { IDBase } from "lib/models";
+import { UUID } from '@constants';
+import { IDBase } from '@models';
 
 export function idListToRecord<T extends IDBase>(list: T[]): Record<UUID, T> {
 

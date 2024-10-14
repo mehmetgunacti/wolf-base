@@ -1,4 +1,4 @@
-import { QuizEntry } from 'lib/models';
+import { QuizEntry } from '@models';
 import { EntityRemoteRepository } from './entity-remote.repository';
 
 export interface QuizEntriesRemoteRepository extends EntityRemoteRepository<QuizEntry> {

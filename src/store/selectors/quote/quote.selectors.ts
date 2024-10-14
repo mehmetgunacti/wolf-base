@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Quote_ModuleState } from 'store/states/quote.state';
+import { Quote_ModuleState } from '@states';
 
 const selQuote_ModuleState = createFeatureSelector<Quote_ModuleState>('quote');
 

@@ -1,16 +1,16 @@
-@import 'helper';
-@import 'variables';
-@import 'components';
-
-:host {
-
-	@include mx-d-block;
-	@include mx-input-element;
-	& > select > option {
-
-		background-color	: fn-var($col-form-element-bg);
-		@include mx-input-element-border;
-
-	}
-
-}
+// @import 'helper';
+// @import 'variables';
+// @import 'components';
+//
+// :host {
+//
+// 	@include mx-d-block;
+// 	@include mx-input-element;
+// 	& > select > option {
+//
+// 		background-color	: fn-var($col-form-element-bg);
+// 		@include mx-input-element-border;
+//
+// 	}
+//
+// }

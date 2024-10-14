@@ -1,15 +1,17 @@
 import { inject, Injectable } from '@angular/core';
-import { AppEntityType, RemoteMetadata, SyncService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { SYNC_SERVICE } from 'app/app.config';
+import { AppEntityType } from '@constants';
+import { RemoteMetadata } from '@models';
+import { SyncService } from '@libServices';
 import { forkJoin, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { entityActions } from 'store/actions';
+import { SYNC_SERVICE } from 'services';
+import { entityActions } from '@actions';
 
 interface Result {
 
 	type: AppEntityType,
-	data: RemoteMetadata[]
+	data: RemoteMetadata[];
 
 }
 
@@ -29,7 +31,7 @@ export class EntitySyncRemoteRefreshEffects {
 				map((results: Result[]) => {
 
 					return results.reduce((acc: Record<AppEntityType, RemoteMetadata[]>, result: Result) => {
-						acc[result.type] = result.data;
+						acc[ result.type ] = result.data;
 						return acc;
 					}, {} as Record<AppEntityType, RemoteMetadata[]>);
 

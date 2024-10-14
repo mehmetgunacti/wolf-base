@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Logs_ModuleState } from 'store/states/logs.state';
+import { Logs_ModuleState } from '@states';
 
 const selLogs_moduleState = createFeatureSelector<Logs_ModuleState>('logs');
 

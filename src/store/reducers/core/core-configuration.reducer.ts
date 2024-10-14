@@ -1,6 +1,6 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
-import { coreActions, settingsActions } from 'store/actions';
-import { CoreConfigurationState, initialCoreConfigurationState } from 'store/states/core.state';
+import { coreActions, settingsActions } from '@actions';
+import { CoreConfigurationState, initialCoreConfigurationState } from '@states';
 
 export const coreConfigurationReducer: ActionReducer<CoreConfigurationState, Action> = createReducer(
 

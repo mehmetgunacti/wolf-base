@@ -1,4 +1,5 @@
-import { AppEntityType, Word } from '@lib';
+import { AppEntityType } from '@constants';
+import { Word } from '@models';
 import * as sel from '../entity/entity-word.selectors';
 import { createSyncSelectors } from '../sync/selectors-factory';
 

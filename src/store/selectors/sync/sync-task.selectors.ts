@@ -1,4 +1,5 @@
-import { AppEntityType, Task } from '@lib';
+import { AppEntityType } from '@constants';
+import { Task } from '@models';
 import * as sel from '../entity/entity-task.selectors';
 import { createSyncSelectors } from '../sync/selectors-factory';
 

@@ -1,4 +1,4 @@
-import { ModuleReport } from '@lib';
+import { ModuleReport } from '@models';
 
 export interface DatabaseModuleState {
 

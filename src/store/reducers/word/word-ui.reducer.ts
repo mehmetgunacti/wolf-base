@@ -1,6 +1,6 @@
+import { wordActions } from '@actions';
 import { Action, createReducer, on } from '@ngrx/store';
-import { wordActions } from 'store/actions';
-import { Word_UIState, initialWordUIState } from 'store/states/word.state';
+import { Word_UIState, initialWordUIState } from '@states';
 
 const reducer = createReducer(
 

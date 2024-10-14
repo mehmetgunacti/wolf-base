@@ -1,4 +1,4 @@
-import { SidebarState, Theme } from 'lib/constants';
+import { SidebarState, Theme } from '@constants';
 
 export interface Configuration {
 

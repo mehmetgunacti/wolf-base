@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, Signal } from '@angular/core';
-import { GlyphData, Glyphs } from 'lib/constants';
+import { GlyphData, Glyphs } from '@constants';
 
 @Component({
 	standalone: true,

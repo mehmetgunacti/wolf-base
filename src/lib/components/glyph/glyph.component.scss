@@ -1,68 +1,68 @@
-@import 'variables';
-@import 'helper';
-
-:host {
-
-	--rotate: rotate(0);
-	@include mx-d-inline-flex-center;
-	@include mx-transition-short(background-color);
-
-	&.rotate-45 {
-
-		--rotate : rotate(-45deg);
-
-	}
-
-	&.rotate-90 {
-
-		--rotate : rotate(-90deg);
-
-	}
-
-	&.bold > svg {
-
-		stroke			: currentcolor;
-		// stroke-width	: 1.5;
-
-	}
-
-	&.lg > svg {
-
-		font-size	: 1.5em;
-
-	}
-
-	&.sm > svg {
-
-		font-size	: 0.7em;
-
-	}
-
-	&.passive > svg {
-
-		fill	: fn-var($col-text-secondary);
-
-	}
-
-	&.success > svg {
-
-		fill	: fn-var($col-success);
-
-	}
-
-	&.focused > svg {
-
-		fill	: hsl(from fn-var($col-focus) h calc(s * 0.7) l);
-
-	}
-
-	& > svg {
-
-		height		: 1.1em;
-		width		: auto;
-		transform	: var(--rotate);
-		fill		: currentcolor;
-
-	}
-
-}
+// @import 'variables';
+// @import 'helper';
+//
+// :host {
+//
+// 	--rotate: rotate(0);
+// 	@include mx-d-inline-flex-center;
+// 	@include mx-transition-short(background-color);
+//
+// 	&.rotate-45 {
+//
+// 		--rotate : rotate(-45deg);
+//
+// 	}
+//
+// 	&.rotate-90 {
+//
+// 		--rotate : rotate(-90deg);
+//
+// 	}
+//
+// 	&.bold > svg {
+//
+// 		stroke			: currentcolor;
+// 		// stroke-width	: 1.5;
+//
+// 	}
+//
+// 	&.lg > svg {
+//
+// 		font-size	: 1.5em;
+//
+// 	}
+//
+// 	&.sm > svg {
+//
+// 		font-size	: 0.7em;
+//
+// 	}
+//
+// 	&.passive > svg {
+//
+// 		fill	: fn-var($col-text-secondary);
+//
+// 	}
+//
+// 	&.success > svg {
+//
+// 		fill	: fn-var($col-success);
+//
+// 	}
+//
+// 	&.focused > svg {
+//
+// 		fill	: hsl(from fn-var($col-focus) h calc(s * 0.7) l);
+//
+// 	}
+//
+// 	& > svg {
+//
+// 		height		: 1.1em;
+// 		width		: auto;
+// 		transform	: var(--rotate);
+// 		fill		: currentcolor;
+//
+// 	}
+//
+// }

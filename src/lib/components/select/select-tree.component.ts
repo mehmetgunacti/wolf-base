@@ -1,8 +1,8 @@
 import { CdkMenuTrigger } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, Renderer2, ViewChild, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { UUID } from 'lib/constants';
-import { HasParentId } from 'lib/models';
+import { UUID } from '@constants';
+import { HasParentId } from '@models';
 import { ROOT_ID } from './select.util';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 

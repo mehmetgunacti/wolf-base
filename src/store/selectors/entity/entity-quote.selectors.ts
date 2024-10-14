@@ -1,4 +1,5 @@
-import { AppEntityType, Quote } from '@lib';
+import { AppEntityType } from '@constants';
+import { Quote } from '@models';
 import { createEntitySelectors } from '../entity/selectors-factory';
 
 export const {

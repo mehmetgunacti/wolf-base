@@ -1,6 +1,6 @@
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, Renderer2, Signal, ViewChild, WritableSignal, computed, inject, signal } from '@angular/core';
-import { createArray } from 'lib/utils';
+import { createArray } from '@utils';
 
 function parseId(id: string): number[] {
 

@@ -1,5 +1,6 @@
-import { NoteContent, NoteQueryParams, UUID } from '@lib';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { UUID } from '@constants';
+import { NoteContent, NoteQueryParams } from '@models';
 
 export const noteActions = createActionGroup({
 

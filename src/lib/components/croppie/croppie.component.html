@@ -1,45 +1,35 @@
-<div class="img-thumbnail pos-relative p-sm mb-xl">
-
-	@if(imageLoaded$ | async) {
-
-		<button
-			id="close"
-			type="button"
-			class="d-flex-center p-0 pos-absolute cur-pointer"
-			(click)="unbindCroppie()"
-			tabindex="0">
-			<!-- <w-glyph name="close" /> -->
-		</button>
-
-	} @else {
-
-		@if (initialized$ | async) {
-
-			<button	type="button"
-					class="d-flex-center pos-absolute gap-sm cur-pointer"
-					id="croppie-placeholder"
-					(click)="fileinput.click()"
-					tabindex="0">
-						<!-- <w-glyph name="image" /> -->
-						<span>Pick Image</span>
-			</button>
-
-		} @else {
-
-			<div id="croppie-placeholder">
-				<span>Initializing...</span>
-			</div>
-
-		}
-
-	}
-	<div #croppieDiv
-		[ngStyle]="{'visibility': (imageLoaded$ | async) ? 'visible': 'hidden'}"></div>
-
+<div>
+	<canvas
+		#canvas
+		width="160"
+		height="160"
+		(mousedown)="startDrag($event)"
+		(mousemove)="drag($event)"
+		(mouseup)="endDrag()"
+		(mouseleave)="endDrag()"
+		(keydown)="onKeyDown($event)"
+		tabindex="0"
+		[attr.aria-label]="'Image canvas. Use arrow keys to move the image.'"
+	>
+	</canvas>
+	<div>
+		<input
+			#fileInput
+			type="file"
+			(change)="onFileSelected($event)"
+			accept="image/*"
+		/>
+		<input
+			type="range"
+			min="0.1"
+			max="2"
+			step="0.1"
+			[value]="zoom"
+			(input)="onZoomChange($event)"
+		/>
+		<button *ngIf="image" (click)="unloadImage()">Unload Image</button>
+	</div>
 </div>
-<input #fileinput
-	type="file"
-	(change)="onFileSelected($event)"
-	accept="image/gif, image/jpeg, image/png"
-	style="display: none;">
-
+<div>
+	<img [src]="base64Image" *ngIf="base64Image" />
+</div>

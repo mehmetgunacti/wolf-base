@@ -25,8 +25,53 @@
 			"dom"
 		],
 		"paths": {
-			"@lib": [
-				"lib"
+			"@animations": [
+				"lib/animations"
+			],
+			"@constants": [
+				"lib/constants"
+			],
+			"@components": [
+				"lib/components"
+			],
+			"@directive": [
+				"lib/directives"
+			],
+			"@models": [
+				"lib/models"
+			],
+			"@pipes": [
+				"lib/pipes"
+			],
+			"@plugins": [
+				"lib/plugins"
+			],
+			"@repositories": [
+				"lib/repositories"
+			],
+			"@libServices": [
+				"lib/services"
+			],
+			"@utils": [
+				"lib/utils"
+			],
+			"@selectors": [
+				"store/selectors"
+			],
+			"@effects": [
+				"store/effects"
+			],
+			"@reducers": [
+				"store/reducers"
+			],
+			"@actions": [
+				"store/actions"
+			],
+			"@states": [
+				"store/states"
+			],
+			"@services": [
+				"services"
 			]
 		}
 	},

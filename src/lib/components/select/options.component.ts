@@ -2,7 +2,7 @@ import { ArrayDataSource } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Renderer2, inject } from '@angular/core';
-import { HasParentId } from 'lib/models';
+import { HasParentId } from '@models';
 import { ROOT_ID, TreeItem, toTreeItems } from './select.util';
 
 

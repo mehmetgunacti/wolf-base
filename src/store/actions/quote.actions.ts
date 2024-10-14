@@ -1,5 +1,5 @@
-import { UUID } from '@lib';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { UUID } from '@constants';
 
 export const quoteActions = createActionGroup({
 

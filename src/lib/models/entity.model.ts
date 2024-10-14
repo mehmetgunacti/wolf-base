@@ -1,4 +1,4 @@
-import { UUID } from 'lib/constants';
+import { UUID } from '@constants';
 import { ISODateString, NameBase } from './id-base.model';
 
 export interface Entity extends NameBase { }

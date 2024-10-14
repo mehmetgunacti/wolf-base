@@ -1,32 +1,26 @@
 import { Injectable, inject } from '@angular/core';
-import { AppEntityType, SyncService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { SYNC_SERVICE } from 'app/app.config';
+import { AppEntityType } from '@constants';
+import { SyncService } from '@libServices';
 import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { entityActions } from 'store/actions';
-import { selBookmark_LocalDeleted } from 'store/selectors/sync/sync-bookmark.selectors';
-import { selNoteContent_LocalDeleted } from 'store/selectors/sync/sync-note-content.selectors';
-import { selNote_LocalDeleted } from 'store/selectors/sync/sync-note.selectors';
-import { selProject_LocalDeleted } from 'store/selectors/sync/sync-project.selectors';
-import { selQuizEntry_LocalDeleted } from 'store/selectors/sync/sync-quiz-entry.selectors';
-import { selQuote_LocalDeleted } from 'store/selectors/sync/sync-quote.selectors';
-import { selTask_LocalDeleted } from 'store/selectors/sync/sync-task.selectors';
-import { selWord_LocalDeleted } from 'store/selectors/sync/sync-word.selectors';
+import { SYNC_SERVICE } from 'services';
+import { entityActions } from '@actions';
+import * as selectors from '@selectors';
 
 function useSelector(entityType: AppEntityType) {
 
 	switch (entityType) {
 
-		case AppEntityType.bookmark: return selBookmark_LocalDeleted;
-		case AppEntityType.note: return selNote_LocalDeleted;
-		case AppEntityType.noteContent: return selNoteContent_LocalDeleted;
-		case AppEntityType.project: return selProject_LocalDeleted;
-		case AppEntityType.quizEntry: return selQuizEntry_LocalDeleted;
-		case AppEntityType.quote: return selQuote_LocalDeleted;
-		case AppEntityType.task: return selTask_LocalDeleted;
-		case AppEntityType.word: return selWord_LocalDeleted;
+		case AppEntityType.bookmark: return selectors.selBookmark_LocalDeleted;
+		case AppEntityType.note: return selectors.selNote_LocalDeleted;
+		case AppEntityType.noteContent: return selectors.selNoteContent_LocalDeleted;
+		case AppEntityType.project: return selectors.selProject_LocalDeleted;
+		case AppEntityType.quizEntry: return selectors.selQuizEntry_LocalDeleted;
+		case AppEntityType.quote: return selectors.selQuote_LocalDeleted;
+		case AppEntityType.task: return selectors.selTask_LocalDeleted;
+		case AppEntityType.word: return selectors.selWord_LocalDeleted;
 
 	}
 
@@ -47,10 +41,10 @@ export class EntitySyncLocalDeletedEffects {
 			switchMap(({ entityType }) => {
 
 				const selector = useSelector(entityType);
-				return of(entityType).pipe(withLatestFrom(this.store.select(selector)))
+				return of(entityType).pipe(withLatestFrom(this.store.select(selector)));
 
 			}),
-			switchMap(([entityType, entities]) =>
+			switchMap(([ entityType, entities ]) =>
 
 				this.syncService.uploadDeleted(entityType, entities).pipe(
 

@@ -1,5 +1,5 @@
-import { NgModule, Pipe, PipeTransform } from "@angular/core";
-import { maskOrHighlight } from 'lib/utils';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
+import { maskOrHighlight } from '@utils';
 
 @Pipe({ name: 'markHighlight' })
 export class MarkOrHighlightPipe implements PipeTransform {

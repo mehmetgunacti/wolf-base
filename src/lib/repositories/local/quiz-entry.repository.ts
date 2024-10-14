@@ -1,4 +1,4 @@
-import { QuizEntry } from 'lib/models';
+import { QuizEntry } from '@models';
 import { EntityLocalRepository } from './entity.repository';
 
 export interface QuizEntryLocalRepository extends EntityLocalRepository<QuizEntry> {

@@ -1,11 +1,14 @@
 import { Injectable, inject } from '@angular/core';
-import { LocalRepositoryService, LogCategory, LogMessage, ToastConfiguration } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { ToastConfiguration } from '@components';
+import { LogCategory } from '@constants';
+import { LogMessage } from '@models';
+import { LocalRepositoryService } from '@libServices';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { coreActions, logActions } from 'store/actions';
-import * as logSelectors from 'store/selectors/log/logs.selectors';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { coreActions, logActions } from '@actions';
+import * as logSelectors from '@selectors';
 
 const convertToast = (toast: ToastConfiguration): LogMessage => {
 
@@ -14,11 +17,11 @@ const convertToast = (toast: ToastConfiguration): LogMessage => {
 
 		category: LogCategory.notification,
 		date: new Date().toISOString(),
-		message: `${[summary, detail].filter(e => !!e).join(' : ')}`
+		message: `${[ summary, detail ].filter(e => !!e).join(' : ')}`
 
 	};
 
-}
+};
 
 @Injectable()
 export class LogsEffects {
@@ -34,7 +37,7 @@ export class LogsEffects {
 			// ignore action params, use params from state
 			ofType(logActions.load, logActions.refresh),
 			withLatestFrom(this.store.select(logSelectors.selLogs_uiState)),
-			map(([, params]) => params),
+			map(([ , params ]) => params),
 			switchMap(({ selectedId, categories, limit }) => this.localRepository.logs.list({ entityId: selectedId, categories, limit })),
 			map(logs => logActions.loadSuccess({ logs }))
 

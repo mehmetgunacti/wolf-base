@@ -1,5 +1,5 @@
-import { UUID } from 'lib/constants';
-import { HasParentId } from 'lib/models';
+import { UUID } from '@constants';
+import { HasParentId } from '@models';
 
 export const ROOT_ID = 'ROOT_ID';
 

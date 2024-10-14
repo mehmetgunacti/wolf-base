@@ -1,180 +1,193 @@
-import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, ViewChild, inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { CroppieOptions } from 'croppie';
-import { Observable, Subscription, combineLatest, timer } from 'rxjs';
-import { delay, distinctUntilChanged, tap } from 'rxjs/operators';
-import { DOMService } from 'services/dom.service';
-import { CroppieWrapper, createCroppieWrapper } from './croppie.model';
-import { external } from './external-files';
-
-const croppieOptions: CroppieOptions = {
-	viewport: {
-		width: 110,
-		height: 110,
-		type: 'circle'
-	},
-	boundary: {
-		width: 120,
-		height: 120
-	},
-	enforceBoundary: false
-};
+import { CommonModule } from '@angular/common';
+import {
+	Component,
+	computed,
+	ElementRef,
+	HostListener,
+	output,
+	viewChild,
+} from '@angular/core';
 
 @Component({
-	selector: 'w-croppie',
+	selector: 'app-croppie',
+	standalone: true,
+	imports: [CommonModule],
 	templateUrl: './croppie.component.html',
-	styleUrls: ['./croppie.component.scss'],
-	host: { 'class': 'd-flex-column ai-c' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	styleUrl: './croppie.component.scss',
+	animations: [],
 })
-export class CroppieComponent implements OnDestroy, AfterViewInit {
+export class CroppieComponent {
+	// ViewChild
+	canvasRef = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
+	fileInput = viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
 
-	@ViewChild('croppieDiv') croppieDiv!: ElementRef<HTMLDivElement>;
-	@ViewChild('fileinput') fileInput!: ElementRef;
+	// Output
+	imageChanged = output<string | null>();
 
-	@Input() wControl = new FormControl();
-	@Input() toBind = '';
+	private ctx = computed(() =>
+		this.canvasRef().nativeElement.getContext('2d')
+	);
 
-	croppieWrapper: CroppieWrapper;
-	subscriptions = new Subscription();
+	image: HTMLImageElement | null = null;
+	zoom = 1;
+	base64Image: string | null = null;
+	private isDragging = false;
+	private lastX = 0;
+	private lastY = 0;
+	private offsetX = 0;
+	private offsetY = 0;
 
-	imageLoaded$: Observable<boolean>;
-	initialized$: Observable<boolean>;
+	onFileSelected(event: Event) {
 
-	private document: Document = inject(DOCUMENT);
-	private domService: DOMService = inject(DOMService);
-
-	constructor() {
-
-		this.croppieWrapper = createCroppieWrapper();
-		this.initialized$ = this.croppieWrapper.initialized$;
-		this.imageLoaded$ = this.croppieWrapper.imageLoaded$.pipe(
-			delay(400),
-			tap((loaded) => {
-
-				if (loaded) {
-
-					setTimeout(() => {
-
-							const slider: HTMLInputElement | null = this.document.querySelector('.cr-slider');
-							if (slider) {
-								slider.step = "0.1";
-								slider.focus();
-							}
-
-						}, 400
-					)
-
-				}
-
-			})
-		);
-
+		const file = (event.target as HTMLInputElement).files?.[0];
+		if (file) {
+			const reader = new FileReader();
+			reader.onload = (e) => {
+				this.image = new Image();
+				this.image.onload = () => {
+					this.offsetX = 0;
+					this.offsetY = 0;
+					this.zoom = 1;
+					this.drawImage();
+				};
+				this.image.src = e.target?.result as string;
+			};
+			reader.readAsDataURL(file);
+		}
 	}
 
-	ngAfterViewInit(): void {
-
-		this.subscriptions.add(
-
-			combineLatest([
-
-				this.domService.appendScriptToBody(external.scriptUrl), // Observable<number>
-				this.domService.appendLinkToHead(external.styleUrl), // Observable<number>
-				timer(500)
-
-			]).subscribe({
-
-				// next: val => console.info(`${val} loaded`),
-				complete: () => {
-					if (this.document.defaultView?.Croppie) {
-						const el: HTMLDivElement = this.croppieDiv.nativeElement;
-						const croppie: Croppie = new this.document.defaultView.Croppie(el, croppieOptions);
-						this.croppieWrapper.init(croppie, el);
-						this.croppieWrapper.bind(this.wControl.value);
-					} else
-						throw new Error('Croppie not available in Window scope');
-				},
-				error: (err) => console.error(err)
-
-			})
-
-		);
-
-		this.subscriptions.add(
-
-			this.croppieWrapper.result$
-				.pipe(
-					distinctUntilChanged()
-				)
-				.subscribe(base64 => {
-
-					this.wControl.setValue(base64);
-					this.wControl.markAsTouched();
-					this.wControl.markAsDirty();
-
-				})
-
-		);
-
+	onZoomChange(event: Event) {
+		this.zoom = parseFloat((event.target as HTMLInputElement).value);
+		this.drawImage();
 	}
 
-	unbindCroppie(): void {
-
-		this.croppieWrapper.unbind();
-		// the change event doesn't fire when the user
-		// selects same image again
-		// this resets the readonly 'files' object (of type FilesList)
-		this.fileInput.nativeElement.value = '';
-
+	unloadImage() {
+		const canvasContext = this.ctx();
+		if (canvasContext) {
+			this.image = null;
+			this.zoom = 1;
+			this.base64Image = null;
+			this.offsetX = 0;
+			this.offsetY = 0;
+			canvasContext.clearRect(
+				0,
+				0,
+				this.canvasRef().nativeElement.width,
+				this.canvasRef().nativeElement.height
+			);
+		}
+		this.imageChanged.emit(null);
+		// Reset the file input so that reloading same image works
+		this.fileInput().nativeElement.value = '';
 	}
 
-	ngOnDestroy(): void {
-
-		this.subscriptions.unsubscribe();
-		this.croppieWrapper.destroy();
-
+	startDrag(event: MouseEvent) {
+		if (this.image) {
+			this.isDragging = true;
+			this.lastX = event.offsetX;
+			this.lastY = event.offsetY;
+		} else {
+			event.preventDefault();
+			this.fileInput().nativeElement.click();
+		}
 	}
 
-	onFileSelected(event: Event): void {
-
-		// The FileReader object lets web applications asynchronously
-		// read the contents of files (or raw data buffers) stored on
-		// the user's computer, using File or Blob objects to specify
-		// the file or data to read.
-		//
-		// File objects may be obtained from a FileList object returned
-		// as a result of a user selecting files using the <input>
-		// element, from a drag and drop operation's DataTransfer
-		// object, or from the mozGetAsFile() API on an HTMLCanvasElement.
-		const reader = new FileReader();
-
-		// The FileReader.onload property contains an event
-		// handler executed when the load event is fired,
-		// when content read with readAsArrayBuffer, readAsBinaryString,
-		// readAsDataURL or readAsText is available.
-		reader.onload = (loadEvent) => {
-			// since we're in onload, an image has been selected
-			// so we can (have to) bind it to the newly created Croppie object
-			const fileData = (loadEvent.target as FileReader).result as string;
-			this.croppieWrapper.bind(fileData);
-		};
-
-		// The readAsDataURL method is used to read the contents of the
-		// specified Blob or File. When the read operation is finished,
-		// the readyState becomes DONE, and the loadend is triggered.
-		// At that time, the result attribute contains the data as a
-		// data: URL representing the file's data as a base64 encoded
-		// string.
-		//
-		// Note: The blob's result cannot be directly decoded as Base64
-		// without first removing the Data-URL declaration preceding the
-		// Base64-encoded data. To retrieve only the Base64 encoded
-		// string, first remove data:* / *;base64, from the result.
-		const files = (event.target as HTMLInputElement).files;
-		if (files)
-			reader.readAsDataURL(files[0]);
-
+	drag(event: MouseEvent) {
+		if (this.isDragging && this.image) {
+			const deltaX = event.offsetX - this.lastX;
+			const deltaY = event.offsetY - this.lastY;
+			this.offsetX += deltaX;
+			this.offsetY += deltaY;
+			this.lastX = event.offsetX;
+			this.lastY = event.offsetY;
+			this.drawImage();
+		}
 	}
 
+	endDrag() {
+		this.isDragging = false;
+	}
+
+	@HostListener('window:mouseup')
+	onMouseUp() {
+		this.endDrag();
+	}
+
+	onKeyDown(event: KeyboardEvent) {
+		if (this.image) {
+			const moveDistance = 5; // pixels to move per key press
+			switch (event.key) {
+				case 'ArrowUp':
+					this.offsetY -= moveDistance;
+					break;
+				case 'ArrowDown':
+					this.offsetY += moveDistance;
+					break;
+				case 'ArrowLeft':
+					this.offsetX -= moveDistance;
+					break;
+				case 'ArrowRight':
+					this.offsetX += moveDistance;
+					break;
+				default:
+					return; // Exit the function for other keys
+			}
+			event.preventDefault(); // Prevent scrolling the page
+			this.drawImage();
+		}
+	}
+
+	private drawImage() {
+		if (!this.image) return;
+
+		const canvasContext = this.ctx();
+		if (canvasContext) {
+			const canvas = this.canvasRef().nativeElement;
+			canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+			canvasContext.save();
+			canvasContext.beginPath();
+			canvasContext.arc(
+				canvas.width / 2,
+				canvas.height / 2,
+				canvas.width / 2,
+				0,
+				Math.PI * 2
+			);
+			canvasContext.clip();
+
+			const scaledWidth = this.image.width * this.zoom;
+			const scaledHeight = this.image.height * this.zoom;
+			const x = (canvas.width - scaledWidth) / 2 + this.offsetX;
+			const y = (canvas.height - scaledHeight) / 2 + this.offsetY;
+
+			canvasContext.drawImage(
+				this.image,
+				x,
+				y,
+				scaledWidth,
+				scaledHeight
+			);
+			canvasContext.restore();
+
+			const tempCanvas = document.createElement('canvas');
+			tempCanvas.width = canvas.width;
+			tempCanvas.height = canvas.height;
+			const tempCtx = tempCanvas.getContext('2d')!;
+
+			tempCtx.beginPath();
+			tempCtx.arc(
+				tempCanvas.width / 2,
+				tempCanvas.height / 2,
+				tempCanvas.width / 2,
+				0,
+				Math.PI * 2
+			);
+			tempCtx.clip();
+
+			tempCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height);
+
+			this.base64Image = tempCanvas.toDataURL('image/png');
+			this.imageChanged.emit(this.base64Image);
+		}
+	}
 }

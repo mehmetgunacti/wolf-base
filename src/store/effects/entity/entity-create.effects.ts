@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { Entity, LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { Entity } from '@models';
+import { LocalRepositoryService } from '@libServices';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { entityActions } from 'store/actions';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { entityActions } from '@actions';
 
 @Injectable()
 export class EntityCreateEffects {

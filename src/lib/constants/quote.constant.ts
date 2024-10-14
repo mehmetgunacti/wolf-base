@@ -1,4 +1,4 @@
-import { Quote } from 'lib/models';
+import { Quote } from '@models';
 
 export const PICARD: Quote = {
 

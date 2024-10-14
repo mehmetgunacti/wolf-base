@@ -1,6 +1,6 @@
-import { TaskCategory, TaskQueryParams, UUID } from '@lib';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { TaskState } from 'zone.js/lib/zone-impl';
+import { TaskCategory, TaskState, UUID } from '@constants';
+import { TaskQueryParams } from '@models';
 
 export const taskActions = createActionGroup({
 

@@ -8,12 +8,12 @@
 	<app-nav-overlay @opacity />
 
 }
-<header>
+<header class="flex bg-sky-500 hover:bg-sky-600 px-2 py-0 rounded-full min-h-5 text-white text-xs transition-colors duration-300">
 
 	<app-header />
 
 </header>
-<nav [@sidebar]="sidebarState()">
+<nav class="comp" [@sidebar]="sidebarState()">
 
 	<app-nav />
 

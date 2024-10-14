@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, InputSignal, WritableSignal, computed, forwardRef, input, output, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { UUID } from 'lib/constants';
-import { filterArrayElements } from 'lib/utils';
+import { UUID } from '@constants';
+import { filterArrayElements } from '@utils';
 import { v4 as uuidv4 } from 'uuid';
 import { GlyphComponent } from '../glyph/glyph.component';
 

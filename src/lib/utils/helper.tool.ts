@@ -1,4 +1,4 @@
-import { AppEntityType } from 'lib/constants';
+import { AppEntityType } from '@constants';
 
 export function isEntityOfType(type: AppEntityType) {
 

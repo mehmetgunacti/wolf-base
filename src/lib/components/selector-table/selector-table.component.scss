@@ -1,36 +1,36 @@
-@import 'variables';
-@import 'helper';
-
-:host {
-
-	& > div:first-child {
-
-		font-size		: $font-size-xs;
-		text-align		: center;
-		padding			: $gap-xxs $gap-xs;
-
-	}
-	[table-selectors] {
-
-		@include mx-d-grid;
-		grid-template-columns	: repeat(7, 2rem);
-		grid-template-rows		: repeat(6, 2rem);
-		gap						: $gap-xs;
-
-		& > a {
-
-			background-color: fn-var($col-form-element-bg);
-
-			&:hover,
-			// &:focus
-			&.focus {
-
-				background-color: fn-var($col-accent);
-
-			}
-
-		}
-
-	}
-
-}
+// @import 'variables';
+// @import 'helper';
+//
+// :host {
+//
+// 	& > div:first-child {
+//
+// 		font-size		: $font-size-xs;
+// 		text-align		: center;
+// 		padding			: $gap-xxs $gap-xs;
+//
+// 	}
+// 	[table-selectors] {
+//
+// 		@include mx-d-grid;
+// 		grid-template-columns	: repeat(7, 2rem);
+// 		grid-template-rows		: repeat(6, 2rem);
+// 		gap						: $gap-xs;
+//
+// 		& > a {
+//
+// 			background-color: fn-var($col-form-element-bg);
+//
+// 			&:hover,
+// 			// &:focus
+// 			&.focus {
+//
+// 				background-color: fn-var($col-accent);
+//
+// 			}
+//
+// 		}
+//
+// 	}
+//
+// }

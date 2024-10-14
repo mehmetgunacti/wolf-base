@@ -1,4 +1,5 @@
-import { BookmarkQueryParams, Click, UUID } from "@lib";
+import { UUID } from '@constants';
+import { BookmarkQueryParams, Click } from '@models';
 
 export interface BookmarkModuleState {
 

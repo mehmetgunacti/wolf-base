@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
-import { coreActions } from 'store/actions';
+import { coreActions } from '@actions';
 
 @Injectable()
 export class CoreNavigationEffects {

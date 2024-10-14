@@ -1,6 +1,6 @@
-import { Bookmark, Click } from 'lib/models';
+import { Bookmark, Click } from '@models';
 import { EntityLocalRepository } from './entity.repository';
-import { UUID } from 'lib/constants';
+import { UUID } from '@constants';
 
 export interface BookmarksLocalRepository extends EntityLocalRepository<Bookmark> {
 

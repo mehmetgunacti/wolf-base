@@ -1,10 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { AppEntityType, increase, next, Progress, QuizEntry } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { AppEntityType, increase, next, Progress } from '@constants';
+import { QuizEntry } from '@models';
 import { map, withLatestFrom } from 'rxjs/operators';
-import { coreActions, entityActions, quizEntryActions } from 'store/actions';
-import { selQuizEntry_EntityList } from 'store/selectors/entity/entity-quiz-entry.selectors';
+import { coreActions, entityActions, quizEntryActions } from '@actions';
+import { selQuizEntry_EntityList } from '@selectors';
 
 @Injectable()
 export class QuizEntryLogicEffects {
@@ -18,7 +19,7 @@ export class QuizEntryLogicEffects {
 
 			ofType(quizEntryActions.answeredRight),
 			withLatestFrom(this.store.select(selQuizEntry_EntityList)),
-			map(([{ quizEntryId }, entries]) => {
+			map(([ { quizEntryId }, entries ]) => {
 
 				const quizEntry = entries.find(e => e.id === quizEntryId);
 				if (!quizEntry)
@@ -47,7 +48,7 @@ export class QuizEntryLogicEffects {
 
 			ofType(quizEntryActions.closeAnswerDialog),
 			withLatestFrom(this.store.select(selQuizEntry_EntityList)),
-			map(([{ quizEntryId }, entries]) => {
+			map(([ { quizEntryId }, entries ]) => {
 
 				const quizEntry = entries.find(e => e.id === quizEntryId);
 				if (!quizEntry)

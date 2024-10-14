@@ -1,5 +1,5 @@
-import { DEFAULT_CONF_VALUES, Theme } from 'lib/constants';
-import { HasParentId } from 'lib/models';
+import { DEFAULT_CONF_VALUES, Theme } from '@constants';
+import { HasParentId } from '@models';
 
 export function findEnumValue<T>(enumObj: any, value: string | null): T | null {
 

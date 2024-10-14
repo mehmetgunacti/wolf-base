@@ -1,4 +1,5 @@
-import { AppEntityType, QuizEntry } from '@lib';
+import { AppEntityType } from '@constants';
+import { QuizEntry } from '@models';
 import { createEntitySelectors } from '../entity/selectors-factory';
 
 export const {

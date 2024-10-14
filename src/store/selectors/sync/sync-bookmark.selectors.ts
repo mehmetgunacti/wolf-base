@@ -1,4 +1,5 @@
-import { AppEntityType, Bookmark } from '@lib';
+import { AppEntityType } from '@constants';
+import { Bookmark } from '@models';
 import * as sel from '../entity/entity-bookmark.selectors';
 import { createSyncSelectors } from '../sync/selectors-factory';
 

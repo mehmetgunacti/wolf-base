@@ -1,4 +1,4 @@
-import { Entity, RemoteData, RemoteMetadata, SyncData } from "@lib";
+import { Entity, RemoteData, RemoteMetadata, SyncData } from '@models';
 
 export interface CloudModuleState {
 
@@ -17,7 +17,7 @@ export const initialCloudState: CloudModuleState = {
 
 	selectedSyncData: null,
 	selectedRemoteMetadata: null,
-	selectedEntity:  null,
+	selectedEntity: null,
 	selectedTrashEntity: null,
 	selectedRemoteData: null,
 

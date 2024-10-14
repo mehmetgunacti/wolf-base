@@ -1,9 +1,9 @@
-import { Component, computed, inject, signal } from "@angular/core";
+import { Component, computed, inject, signal } from '@angular/core';
+import { SidebarState } from '@constants';
 import { Store } from '@ngrx/store';
+import { selCore_sidebarState } from '@selectors';
 import { delay, of } from 'rxjs';
 import { environment } from '../environments/environment';
-import { SidebarState } from '../lib/constants';
-import { selCore_sidebarState } from '../store/selectors';
 import { appImports } from './app.config';
 
 @Component({

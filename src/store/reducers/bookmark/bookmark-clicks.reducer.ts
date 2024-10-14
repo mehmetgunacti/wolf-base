@@ -1,8 +1,9 @@
-import { AppEntityType, Click, idListToRecord, UUID } from '@lib';
 import { Action, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import { bookmarkActions, coreActions, entityActions } from 'store/actions';
-import { bookmark_initialClicksState, BookmarkClicksState } from 'store/states/bookmark.state';
+import { AppEntityType } from '@constants';
+import { idListToRecord } from '@utils';
+import { bookmarkActions, coreActions, entityActions } from '@actions';
+import { bookmark_initialClicksState, BookmarkClicksState } from '@states';
 
 const reducer = createReducer(
 
@@ -14,7 +15,7 @@ const reducer = createReducer(
 				state,
 				draft => {
 
-					delete draft.values[id];
+					delete draft.values[ id ];
 
 				}
 			);
@@ -31,9 +32,9 @@ const reducer = createReducer(
 				draft => {
 
 					if (click === null)
-						delete draft.values[id];
+						delete draft.values[ id ];
 					else
-						draft.values[id] = click;
+						draft.values[ id ] = click;
 
 				}
 			);

@@ -1,5 +1,5 @@
-import { SidebarState, Theme } from 'lib/constants';
-import { Configuration, FirestoreConfig } from 'lib/models';
+import { SidebarState, Theme } from '@constants';
+import { Configuration, FirestoreConfig } from '@models';
 
 export interface ConfigurationLocalRepository {
 

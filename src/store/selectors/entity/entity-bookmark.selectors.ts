@@ -1,4 +1,5 @@
-import { AppEntityType, Bookmark } from '@lib';
+import { AppEntityType } from '@constants';
+import { Bookmark } from '@models';
 import { createEntitySelectors } from '../entity/selectors-factory';
 
 export const {

@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, inject } from "@angular/core";
+import { Pipe, PipeTransform, inject } from '@angular/core';
 import { MarkdownService } from './markdown.service';
 
 @Pipe({ name: 'markdownToHtml' })

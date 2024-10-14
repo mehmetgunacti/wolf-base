@@ -1,5 +1,6 @@
-import { TestSuiteQueryParams, UUID } from '@lib';
 import { createActionGroup, props } from '@ngrx/store';
+import { UUID } from '@constants';
+import { TestSuiteQueryParams } from '@models';
 
 export const learningActions = createActionGroup({
 

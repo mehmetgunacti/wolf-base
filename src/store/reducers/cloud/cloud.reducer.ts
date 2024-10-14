@@ -1,7 +1,7 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import { cloudActions } from 'store/actions';
-import { CloudModuleState, initialCloudState } from 'store/states/cloud.state';
+import { cloudActions } from '@actions';
+import { CloudModuleState, initialCloudState } from '@states';
 
 const hideConflictDialog = (state: CloudModuleState): CloudModuleState => {
 

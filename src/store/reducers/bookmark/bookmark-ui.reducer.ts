@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { bookmarkActions } from 'store/actions';
-import { BookmarkUIState, bookmark_initialUIState } from 'store/states/bookmark.state';
+import { bookmarkActions } from '@actions';
+import { BookmarkUIState, bookmark_initialUIState } from '@states';
 
 const reducer = createReducer(
 

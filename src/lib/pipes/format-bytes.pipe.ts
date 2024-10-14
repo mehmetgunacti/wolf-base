@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { formatBytes } from 'lib/utils';
+import { formatBytes } from '@utils';
 
 @Pipe({
 	name: 'formatBytes',

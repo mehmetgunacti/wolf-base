@@ -1,5 +1,5 @@
-import { LogCategory, LogMessage, UUID } from '@lib';
-
+import { LogCategory, UUID } from '@constants';
+import { LogMessage } from '@models';
 
 export interface Logs_ModuleState {
 
@@ -30,15 +30,15 @@ export const initialLogsEntriesState: Logs_EntriesState = {
 
 export const initialLogsUIState: Logs_UIState = {
 
-	categories: [LogCategory.notification],
+	categories: [ LogCategory.notification ],
 	selectedId: null,
 	limit: 100
 
-}
+};
 
 export const initialLogsState: Logs_ModuleState = {
 
 	entries: initialLogsEntriesState,
 	ui: initialLogsUIState
 
-}
+};

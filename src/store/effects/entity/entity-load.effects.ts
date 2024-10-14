@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
-import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { LocalRepositoryService } from '@libServices';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { entityActions } from 'store/actions';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { entityActions } from '@actions';
 
 @Injectable()
 export class EntityLoadEffects {
@@ -26,7 +26,7 @@ export class EntityLoadEffects {
 					this.localRepository.getRepository(entityType).getRemoteMetadata(id)
 
 				])).pipe(
-					map(([entity, syncData, remoteMetadata]) => entityActions.loadOneSuccess({ entityType, id, entity, syncData, remoteMetadata }))
+					map(([ entity, syncData, remoteMetadata ]) => entityActions.loadOneSuccess({ entityType, id, entity, syncData, remoteMetadata }))
 				)
 			)
 

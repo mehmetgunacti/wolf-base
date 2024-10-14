@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { BookmarkModuleState } from 'store/states/bookmark.state';
+import { BookmarkModuleState } from '@states';
 
 const selBookmark_ModuleState = createFeatureSelector<BookmarkModuleState>('bookmark');
 

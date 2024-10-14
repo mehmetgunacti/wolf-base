@@ -1,4 +1,4 @@
-import { type PluginSimple } from "markdown-it";
+import { type PluginSimple } from 'markdown-it';
 import { RuleInline } from 'markdown-it/lib/parser_inline.mjs';
 import StateInline, { Delimiter } from 'markdown-it/lib/rules_inline/state_inline.mjs';
 

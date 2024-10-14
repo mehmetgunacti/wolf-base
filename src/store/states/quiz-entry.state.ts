@@ -1,4 +1,5 @@
-import { QuizVisibility, Word } from '@lib';
+import { QuizVisibility } from '@constants';
+import { Word } from '@models';
 
 export interface QuizEntry_ModuleState {
 

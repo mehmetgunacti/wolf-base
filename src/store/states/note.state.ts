@@ -1,4 +1,5 @@
-import { NoteContent, NoteQueryParams, UUID } from '@lib';
+import { UUID } from '@constants';
+import { NoteContent, NoteQueryParams } from '@models';
 
 export interface Note_ModuleState {
 

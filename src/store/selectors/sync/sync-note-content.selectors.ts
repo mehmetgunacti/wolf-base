@@ -1,4 +1,5 @@
-import { AppEntityType, NoteContent } from '@lib';
+import { AppEntityType } from '@constants';
+import { NoteContent } from '@models';
 import * as sel from '../entity/entity-note-content.selectors';
 import { createSyncSelectors } from '../sync/selectors-factory';
 

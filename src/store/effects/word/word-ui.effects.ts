@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
-import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { LocalRepositoryService } from '@libServices';
 import { filter, map, tap, withLatestFrom } from 'rxjs';
-import { wordActions } from 'store/actions';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { wordActions } from '@actions';
 
 @Injectable()
 export class WordUIEffects {
@@ -21,7 +21,7 @@ export class WordUIEffects {
 
 			ofType(wordActions.search),
 			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([{ term }, params]) => {
+			tap(([ { term }, params ]) => {
 
 				// term: user just entered a search term
 				// term is an empty string when user empties search box
@@ -51,7 +51,7 @@ export class WordUIEffects {
 			filter((e): e is NavigationEnd => e instanceof NavigationEnd),
 			filter(e => e.urlAfterRedirects.startsWith('/words')),
 			withLatestFrom(this.activatedRoute.queryParamMap),
-			map(([, paramMap]) =>
+			map(([ , paramMap ]) =>
 
 				wordActions.setQueryParams({
 

@@ -1,5 +1,5 @@
 import { Injectable, InjectionToken, Signal, WritableSignal, computed, signal } from '@angular/core';
-import { formatBytes } from 'lib/utils';
+import { formatBytes } from '@utils';
 import { EditorProperties } from './textarea-properties.model';
 
 const EMPTY_PROPS: EditorProperties = {

@@ -1,5 +1,5 @@
-import { Note, NoteQueryParams, Tag } from '@lib';
 import { createSelector } from '@ngrx/store';
+import { Note, NoteQueryParams, Tag } from '@models';
 import { selNote_EntityList } from '../entity/entity-note.selectors';
 import { selNote_UIState } from './note.selectors';
 
@@ -23,7 +23,7 @@ export const selNote_distinctTagsArray = createSelector(
 
 				(acc: Record<string, Tag>, name: string) => {
 
-					acc[name] = { name, count: (acc[name]?.count ?? 0) + 1 };
+					acc[ name ] = { name, count: (acc[ name ]?.count ?? 0) + 1 };
 					return acc;
 
 				},
@@ -38,7 +38,7 @@ export const selNote_distinctTagsArray = createSelector(
 const distinctTagNames = createSelector(
 
 	arrayOfTagNames,
-	(tags: string[][]): string[] => [...new Set(tags.flat())]
+	(tags: string[][]): string[] => [ ...new Set(tags.flat()) ]
 
 );
 

@@ -1,6 +1,6 @@
-import { UUID } from 'lib/constants';
+import { UUID } from '@constants';
 import { FIRESTORE_INTEGER, FIRESTORE_VALUE } from './firestore.constant';
-import { FirestoreConfig } from 'lib/models';
+import { FirestoreConfig } from '@models';
 
 export class FirestoreCreateURL {
 

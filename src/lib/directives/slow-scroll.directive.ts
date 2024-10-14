@@ -1,5 +1,5 @@
 import { Directive, effect, ElementRef, inject, input, OnInit } from '@angular/core';
-import { UUID } from 'lib/constants';
+import { UUID } from '@constants';
 
 @Directive({
 	selector: '[slowScroll]'

@@ -1,4 +1,4 @@
-import { NameBase } from 'lib/models'
+import { NameBase } from '@models'
 
 export enum DefinitionLanguage {
 

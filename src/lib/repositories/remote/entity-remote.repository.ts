@@ -1,6 +1,5 @@
-import { UUID } from "lib/constants";
-import { RemoteData, RemoteMetadata } from "lib/models";
-import { Entity } from "lib/models/entity.model";
+import { Entity, RemoteData, RemoteMetadata } from '@models';
+import { UUID } from '@constants';
 import { Observable } from 'rxjs';
 
 export interface EntityRemoteRepository<T extends Entity> {

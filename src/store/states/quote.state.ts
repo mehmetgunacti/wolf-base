@@ -1,4 +1,4 @@
-import { UUID } from '@lib';
+import { UUID } from '@constants';
 
 export interface Quote_ModuleState {
 

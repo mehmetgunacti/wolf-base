@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { AppEntities, AppEntityType, isEntityOfType } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { AppEntities, AppEntityType } from '@constants';
+import { isEntityOfType } from '@utils';
 import { filter, map } from 'rxjs/operators';
-import { coreActions, entityActions } from 'store/actions';
+import { coreActions, entityActions } from '@actions';
 
 @Injectable()
 export class WordUpdateEffects {
@@ -15,7 +16,7 @@ export class WordUpdateEffects {
 
 			ofType(entityActions.updateSuccess),
 			filter(isEntityOfType(AppEntityType.word)),
-			map(({ entityType }) => coreActions.showNotification({ severity: 'success', detail: `${AppEntities[entityType].label} updated` }))
+			map(({ entityType }) => coreActions.showNotification({ severity: 'success', detail: `${AppEntities[ entityType ].label} updated` }))
 
 		)
 
@@ -27,7 +28,7 @@ export class WordUpdateEffects {
 
 			ofType(entityActions.updateSuccess),
 			filter(isEntityOfType(AppEntityType.word)),
-			map(({ id, entityType }) => coreActions.navigate({ url: [`/${AppEntities[entityType].plural}`, id] }))
+			map(({ id, entityType }) => coreActions.navigate({ url: [ `/${AppEntities[ entityType ].plural}`, id ] }))
 
 		)
 

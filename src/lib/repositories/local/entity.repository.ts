@@ -1,5 +1,5 @@
-import { UUID } from 'lib/constants';
-import { Entity, Metadata, RemoteData, RemoteMetadata, SyncData } from 'lib/models';
+import { UUID } from '@constants';
+import { Entity, Metadata, RemoteData, RemoteMetadata, SyncData } from '@models';
 
 export interface EntityLocalRepository<T extends Entity> {
 
@@ -15,17 +15,15 @@ export interface EntityLocalRepository<T extends Entity> {
 	storeOneRemoteMetadata(data: RemoteMetadata): Promise<RemoteMetadata>;
 	storeAllRemoteMetadata(data: RemoteMetadata[]): Promise<void>;
 
-	remove(id: UUID): Promise<UUID>;
-
 	create(item: Partial<T>): Promise<T>;
 	update(id: UUID, item: Partial<T>): Promise<number>;
+	remove(id: UUID): Promise<UUID>;
+	moveToTrash(id: UUID): Promise<void>;
 
 	list(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; }): Promise<T[]>;
 	listSyncData(): Promise<SyncData[]>;
 	listRemoteMetadata(): Promise<RemoteMetadata[]>;
 	listIds(): Promise<UUID[]>;
-
-	moveToTrash(id: UUID): Promise<void>;
 	listDeletedItems(): Promise<T[]>;
 
 }

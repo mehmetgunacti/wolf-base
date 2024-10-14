@@ -1,5 +1,6 @@
-import { Task, TaskPriority, TaskQueryParams, TaskState } from '@lib';
 import { createSelector } from '@ngrx/store';
+import { TaskPriority, TaskState } from '@constants';
+import { Task, TaskQueryParams } from '@models';
 import { selTask_EntityList, selTask_EntityMap } from '../entity/entity-task.selectors';
 import { selTask_UIState } from './task.selectors';
 
@@ -15,7 +16,7 @@ export const selTask_SelectedEntity = createSelector(
 
 	selTask_EntityMap,
 	selTask_SelectedId,
-	(map, id) => id ? map[id] : null
+	(map, id) => id ? map[ id ] : null
 
 );
 
@@ -28,8 +29,8 @@ export const selTask_queryParams = createSelector(
 
 function sortTasks(tasks: Task[]): Task[] {
 
-	const statusOrder = [TaskState.ongoing, TaskState.paused, TaskState.completed, TaskState.abandoned];
-	const priorityOrder = [TaskPriority.high, TaskPriority.medium, TaskPriority.low];
+	const statusOrder = [ TaskState.ongoing, TaskState.paused, TaskState.completed, TaskState.abandoned ];
+	const priorityOrder = [ TaskPriority.high, TaskPriority.medium, TaskPriority.low ];
 
 	return tasks.sort((a, b) => {
 

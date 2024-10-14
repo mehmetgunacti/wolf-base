@@ -1,5 +1,3 @@
-import { Table } from 'lib/constants';
-
 export interface DexieConfiguration {
 
 	dbName: string;
@@ -21,6 +19,6 @@ export interface ModuleReport {
 
 	name: string,
 	glyph: string,
-	reports: ReportRow[]
+	reports: ReportRow[];
 
 }

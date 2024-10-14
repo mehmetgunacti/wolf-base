@@ -1,5 +1,5 @@
-import { Tag, TaskQueryParams } from '@lib';
 import { createSelector } from '@ngrx/store';
+import { Tag, TaskQueryParams } from '@models';
 import { selTask_EntityList } from '../entity/entity-task.selectors';
 import { selTask_filteredTasks, selTask_queryParams } from './task-ui.selectors';
 
@@ -23,7 +23,7 @@ export const selTask_distinctTagsArray = createSelector(
 
 				(acc: Record<string, Tag>, name: string) => {
 
-					acc[name] = { name, count: (acc[name]?.count ?? 0) + 1 };
+					acc[ name ] = { name, count: (acc[ name ]?.count ?? 0) + 1 };
 					return acc;
 
 				},
@@ -38,7 +38,7 @@ export const selTask_distinctTagsArray = createSelector(
 export const selTask_distinctTagNames = createSelector(
 
 	arrayOfTagNames,
-	(tags: string[][]): string[] => [...new Set(tags.flat())]
+	(tags: string[][]): string[] => [ ...new Set(tags.flat()) ]
 
 );
 

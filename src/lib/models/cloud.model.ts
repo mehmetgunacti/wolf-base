@@ -1,4 +1,4 @@
-import { AppEntityType } from "lib/constants";
+import { AppEntityType } from '@constants';
 import { NameBase } from './id-base.model';
 
 export enum SyncTaskType {

@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { AppEntityType, LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { AppEntityType } from '@constants';
+import { LocalRepositoryService } from '@libServices';
 import { forkJoin, from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { coreActions } from 'store/actions';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { coreActions } from '@actions';
 
 function entityData(
 	repo: LocalRepositoryService,

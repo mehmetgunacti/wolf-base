@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
-import { BackupDatabase } from 'lib/utils/database.util';
+import { LocalRepositoryService } from '@libServices';
+import { BackupDatabase } from '@utils';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { coreActions, databaseActions } from 'store/actions';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { coreActions, databaseActions } from '@actions';
 
 @Injectable()
 export class DatabaseEffects {
@@ -47,7 +47,7 @@ export class DatabaseEffects {
 		() => this.actions$.pipe(
 
 			ofType(databaseActions.emptyTableSuccess),
-			map(({table}) => coreActions.showNotification({severity: 'success', summary: `Table '${table}' emptied.`}))
+			map(({ table }) => coreActions.showNotification({ severity: 'success', summary: `Table '${table}' emptied.` }))
 
 		)
 

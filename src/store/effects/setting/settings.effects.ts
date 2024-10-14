@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { LocalRepositoryService } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { LocalRepositoryService } from '@libServices';
 import { map, switchMap } from 'rxjs/operators';
-import { coreActions, settingsActions } from 'store/actions';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { coreActions, settingsActions } from '@actions';
 
 @Injectable()
 export class SettingsEffects {

@@ -1,12 +1,13 @@
 import { inject, Injectable } from '@angular/core';
-import { AppEntities, AppEntity, LocalRepositoryNames, LocalRepositoryService, ModuleReport } from '@lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
-import { BackupDatabase } from 'lib/utils/database.util';
-import { NgProgress } from 'ngx-progressbar';
+import { AppEntities, AppEntity, LocalRepositoryNames } from '@constants';
+import { ModuleReport } from '@models';
+import { LocalRepositoryService } from '@libServices';
+// import { NgProgress } from 'ngx-progressbar';
 import { forkJoin, from, Observable, of } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
-import { databaseActions } from 'store/actions';
+import { map, switchMap } from 'rxjs/operators';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
+import { databaseActions } from '@actions';
 
 interface Row extends Record<string, Observable<any>> {
 
@@ -59,14 +60,14 @@ export class DatabaseReportEffects {
 
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
-	private progress: NgProgress = inject(NgProgress);
+	// private progress: NgProgress = inject(NgProgress);
 
 	showProgressBar$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(databaseActions.loadReport),
-			tap(() => this.progress.ref().start()),
+			// tap(() => this.progress.ref().start()),
 
 		),
 		{ dispatch: false }
@@ -205,7 +206,7 @@ export class DatabaseReportEffects {
 
 				})
 
-				])
+			])
 			),
 			map((reports: ModuleReport[]) => databaseActions.loadReportSuccess({ reports }))
 
@@ -218,7 +219,7 @@ export class DatabaseReportEffects {
 		() => this.actions$.pipe(
 
 			ofType(databaseActions.loadReportSuccess),
-			tap(() => this.progress.ref().complete())
+			// tap(() => this.progress.ref().complete())
 
 		),
 		{ dispatch: false }

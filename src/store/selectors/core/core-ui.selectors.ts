@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { CoreModuleState, CoreUIState } from 'store/states/core.state';
+import { CoreModuleState, CoreUIState } from '@states';
 import { coreModuleState } from './core.selectors';
 
 export const selCore_uiState = createSelector(

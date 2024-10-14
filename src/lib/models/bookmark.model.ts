@@ -1,4 +1,4 @@
-import { UUID } from 'lib/constants';
+import { UUID } from '@constants';
 import { Entity } from './entity.model';
 import { IDBase, NameBase } from './id-base.model';
 

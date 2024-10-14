@@ -1,14 +1,15 @@
 import { inject, Injectable } from '@angular/core';
-import { LocalRepositoryService, TIMER_DELAY, TIMER_INTERVAL } from '@lib';
 import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { LOCAL_REPOSITORY_SERVICE } from 'app/app.config';
+import { TIMER_DELAY, TIMER_INTERVAL } from '@constants';
+import { LocalRepositoryService } from '@libServices';
 import { timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { LOCAL_REPOSITORY_SERVICE } from 'services';
 import { ViewportService } from 'services/viewport.service';
-import { coreActions } from 'store/actions';
-import { selCore_sidebarState } from 'store/selectors/core/core-ui.selectors';
+import { coreActions } from '@actions';
+import { selCore_sidebarState } from '@selectors';
 
 @Injectable()
 export class CoreUIEffects {
@@ -56,7 +57,7 @@ export class CoreUIEffects {
 				coreActions.hideSidebar
 			),
 			concatLatestFrom(() => this.store.select(selCore_sidebarState)),
-			switchMap(([, state]) => this.localRepository.configuration.setSidebarState(state))
+			switchMap(([ , state ]) => this.localRepository.configuration.setSidebarState(state))
 
 		), { dispatch: false }
 
