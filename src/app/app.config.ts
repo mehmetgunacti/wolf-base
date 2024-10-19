@@ -6,7 +6,8 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore, Store } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import * as service from 'services';
+import * as service from '@services';
+import { indexedDbConfiguration } from 'services/indexeddb';
 import * as store from 'store/store.config';
 import { routes } from './app.routes';
 import { HeaderComponent } from './header/header.component';
@@ -36,10 +37,11 @@ const appInitializerFactory = (store: Store) => {
 
 const appServices = [
 
-	{ provide: service.LOCAL_REPOSITORY_SERVICE, useClass: service.DexieLocalRepositoryServiceImpl },
+	{ provide: service.LOCAL_REPOSITORY_SERVICE, useClass: service.IndexedDbLocalRepositoryServiceImpl },
 	{ provide: service.REMOTE_REPOSITORY_SERVICE, useClass: service.FirestoreRemoteRepositoryServiceImpl, deps: [ Store, HttpClient ] },
 	{ provide: service.SYNC_SERVICE, useClass: service.SyncServiceImpl, deps: [ service.LOCAL_REPOSITORY_SERVICE, service.REMOTE_REPOSITORY_SERVICE ] },
 	{ provide: service.BOOKMARK_SYNC_SERVICE, useClass: service.BookmarkSyncServiceImpl, deps: [ service.LOCAL_REPOSITORY_SERVICE, service.REMOTE_REPOSITORY_SERVICE ] },
+	{ provide: service.DATABASE_CONFIG, useValue: indexedDbConfiguration }
 
 ];
 

@@ -5,6 +5,7 @@ export * from './configuration.model';
 export * from './database.model';
 export * from './entity.model';
 export * from './id-base.model';
+export * from './indexeddb.model';
 export * from './learning.model';
 export * from './log.model';
 export * from './menu.model';

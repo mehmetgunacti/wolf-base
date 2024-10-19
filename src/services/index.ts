@@ -4,6 +4,7 @@ export * from './dexie';
 export * from './dom.service';
 export * from './error.handler';
 export * from './firestore';
+export * from './indexeddb';
 export * from './mock';
 export * from './quiz.service';
 export * from './repository.service';

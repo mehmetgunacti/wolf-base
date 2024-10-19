@@ -1,7 +1,7 @@
 import { inject, InjectionToken } from '@angular/core';
 import { AppEntityType } from '@constants';
 import { BookmarkSyncService, LocalRepositoryService, RemoteRepositoryService, SyncService } from '@libServices';
-import { Entity, NameBase, RemoteData, RemoteMetadata, SyncData } from '@models';
+import { Entity, IndexedDbConfiguration, NameBase, RemoteData, RemoteMetadata, SyncData } from '@models';
 import { concatMap, filter, from, iif, map, Observable, switchMap } from 'rxjs';
 import { BookmarkSyncServiceImpl } from './bookmark-sync.service';
 import { LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE } from './repository.service';
@@ -253,3 +253,5 @@ export const BOOKMARK_SYNC_SERVICE = new InjectionToken<BookmarkSyncService>('Bo
 
 export const syncServiceProvider = { provide: SYNC_SERVICE, useClass: SyncServiceImpl, deps: [ LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE ] };
 export const bookmarkSyncServiceProvider = { provide: BOOKMARK_SYNC_SERVICE, useClass: BookmarkSyncServiceImpl, deps: [ LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE ] };
+
+export const DATABASE_CONFIG = new InjectionToken<IndexedDbConfiguration>('IndexedDbConfiguration');
