@@ -1,8 +1,0 @@
-@for (toast of toasts$ | async; track $index) {
-
-	<w-toast @animateToast
-			 [conf]="toast"
-			 (close)="onClose($event)"
-			 (click)="onClose(toast?.id ?? -1)"/>
-
-}
