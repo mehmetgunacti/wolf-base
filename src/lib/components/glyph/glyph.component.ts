@@ -15,7 +15,7 @@ export class GlyphComponent {
 	// href = computed(() => {
 
 	// 	const cacheBuster = environment.production ? '' : `?v=${Date.now()}`;
-	// 	return `assets/glyphs.svg${cacheBuster}#${this.name()}`;
+	// 	return `glyphs.svg${cacheBuster}#${this.name()}`;
 
 	// });
 
