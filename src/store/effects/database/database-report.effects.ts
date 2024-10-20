@@ -1,13 +1,12 @@
+import { databaseActions } from '@actions';
 import { inject, Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AppEntities, AppEntity, LocalRepositoryNames } from '@constants';
-import { ModuleReport } from '@models';
+import { AppEntities, DbStore, LocalRepositoryNames } from '@constants';
 import { LocalRepositoryService } from '@libServices';
-// import { NgProgress } from 'ngx-progressbar';
+import { ModuleReport } from '@models';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { forkJoin, from, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { LOCAL_REPOSITORY_SERVICE } from 'services';
-import { databaseActions } from '@actions';
 
 interface Row extends Record<string, Observable<any>> {
 
@@ -31,27 +30,27 @@ function row(repo: LocalRepositoryService, table: string, label: string): Row {
 
 }
 
-function entity(repo: LocalRepositoryService, entity: AppEntity): Row {
+function entity(repo: LocalRepositoryService, entityTable: DbStore): Row {
 
-	return row(repo, entity.table, 'Entities');
-
-}
-
-function syncData(repo: LocalRepositoryService, entity: AppEntity): Row {
-
-	return row(repo, entity.table_sync, 'Sync Data');
+	return row(repo, entityTable, 'Entities');
 
 }
 
-function remoteData(repo: LocalRepositoryService, entity: AppEntity): Row {
+function syncData(repo: LocalRepositoryService, syncTable: DbStore): Row {
 
-	return row(repo, entity.table_remote, 'Remote Data');
+	return row(repo, syncTable, 'Sync Data');
 
 }
 
-function trash(repo: LocalRepositoryService, entity: AppEntity): Row {
+function remoteData(repo: LocalRepositoryService, remoteTable: DbStore): Row {
 
-	return row(repo, entity.table_trash, 'Trash');
+	return row(repo, remoteTable, 'Remote Data');
+
+}
+
+function trash(repo: LocalRepositoryService, trashTable: DbStore): Row {
+
+	return row(repo, trashTable, 'Trash');
 
 }
 
@@ -87,11 +86,11 @@ export class DatabaseReportEffects {
 					glyph: of('bookmarks'),
 					reports: forkJoin([
 
-						forkJoin(entity(this.localRepository, AppEntities.bookmark)),
-						forkJoin(syncData(this.localRepository, AppEntities.bookmark)),
-						forkJoin(remoteData(this.localRepository, AppEntities.bookmark)),
-						forkJoin(trash(this.localRepository, AppEntities.bookmark)),
-						forkJoin(row(this.localRepository, AppEntities.bookmark.table_clicks, 'Clicks'))
+						forkJoin(entity(this.localRepository, DbStore.bookmarks)),
+						forkJoin(syncData(this.localRepository, DbStore.bookmarks_sync)),
+						forkJoin(remoteData(this.localRepository, DbStore.bookmarks_remote)),
+						forkJoin(trash(this.localRepository, DbStore.bookmarks_trash)),
+						forkJoin(row(this.localRepository, DbStore.bookmarks_clicks, 'Clicks'))
 
 					])
 
@@ -102,10 +101,10 @@ export class DatabaseReportEffects {
 					glyph: of('note_stack'),
 					reports: forkJoin([
 
-						forkJoin(entity(this.localRepository, AppEntities.note)),
-						forkJoin(syncData(this.localRepository, AppEntities.note)),
-						forkJoin(remoteData(this.localRepository, AppEntities.note)),
-						forkJoin(trash(this.localRepository, AppEntities.note))
+						forkJoin(entity(this.localRepository, DbStore.notes)),
+						forkJoin(syncData(this.localRepository, DbStore.notes_sync)),
+						forkJoin(remoteData(this.localRepository, DbStore.notes_remote)),
+						forkJoin(trash(this.localRepository, DbStore.notes_trash))
 
 					])
 
@@ -116,10 +115,10 @@ export class DatabaseReportEffects {
 					glyph: of('note_stack'),
 					reports: forkJoin([
 
-						forkJoin(entity(this.localRepository, AppEntities.noteContent)),
-						forkJoin(syncData(this.localRepository, AppEntities.noteContent)),
-						forkJoin(remoteData(this.localRepository, AppEntities.noteContent)),
-						forkJoin(trash(this.localRepository, AppEntities.noteContent))
+						forkJoin(entity(this.localRepository, DbStore.note_content)),
+						forkJoin(syncData(this.localRepository, DbStore.note_content_sync)),
+						forkJoin(remoteData(this.localRepository, DbStore.note_content_remote)),
+						forkJoin(trash(this.localRepository, DbStore.note_content_trash))
 
 					])
 
@@ -130,10 +129,10 @@ export class DatabaseReportEffects {
 					glyph: of('trending_up'),
 					reports: forkJoin([
 
-						forkJoin(entity(this.localRepository, AppEntities.quizEntry)),
-						forkJoin(syncData(this.localRepository, AppEntities.quizEntry)),
-						forkJoin(remoteData(this.localRepository, AppEntities.quizEntry)),
-						forkJoin(trash(this.localRepository, AppEntities.quizEntry))
+						forkJoin(entity(this.localRepository, DbStore.quiz_entries)),
+						forkJoin(syncData(this.localRepository, DbStore.quiz_entries_sync)),
+						forkJoin(remoteData(this.localRepository, DbStore.quiz_entries_remote)),
+						forkJoin(trash(this.localRepository, DbStore.quiz_entries_trash))
 
 					])
 
@@ -144,10 +143,10 @@ export class DatabaseReportEffects {
 					glyph: of('format_quote'),
 					reports: forkJoin([
 
-						forkJoin(entity(this.localRepository, AppEntities.quote)),
-						forkJoin(syncData(this.localRepository, AppEntities.quote)),
-						forkJoin(remoteData(this.localRepository, AppEntities.quote)),
-						forkJoin(trash(this.localRepository, AppEntities.quote))
+						forkJoin(entity(this.localRepository, DbStore.quotes)),
+						forkJoin(syncData(this.localRepository, DbStore.quotes_sync)),
+						forkJoin(remoteData(this.localRepository, DbStore.quotes_remote)),
+						forkJoin(trash(this.localRepository, DbStore.quotes_trash))
 
 					])
 
@@ -158,10 +157,10 @@ export class DatabaseReportEffects {
 					glyph: of('dictionary'),
 					reports: forkJoin([
 
-						forkJoin(entity(this.localRepository, AppEntities.word)),
-						forkJoin(syncData(this.localRepository, AppEntities.word)),
-						forkJoin(remoteData(this.localRepository, AppEntities.word)),
-						forkJoin(trash(this.localRepository, AppEntities.word))
+						forkJoin(entity(this.localRepository, DbStore.words)),
+						forkJoin(syncData(this.localRepository, DbStore.words_sync)),
+						forkJoin(remoteData(this.localRepository, DbStore.words_remote)),
+						forkJoin(trash(this.localRepository, DbStore.words_trash))
 
 					])
 
@@ -172,10 +171,10 @@ export class DatabaseReportEffects {
 					glyph: of('task_alt'),
 					reports: forkJoin([
 
-						forkJoin(entity(this.localRepository, AppEntities.project)),
-						forkJoin(syncData(this.localRepository, AppEntities.project)),
-						forkJoin(remoteData(this.localRepository, AppEntities.project)),
-						forkJoin(trash(this.localRepository, AppEntities.project))
+						forkJoin(entity(this.localRepository, DbStore.projects)),
+						forkJoin(syncData(this.localRepository, DbStore.projects_sync)),
+						forkJoin(remoteData(this.localRepository, DbStore.projects_remote)),
+						forkJoin(trash(this.localRepository, DbStore.projects_trash))
 
 					])
 
@@ -186,10 +185,10 @@ export class DatabaseReportEffects {
 					glyph: of('task_alt'),
 					reports: forkJoin([
 
-						forkJoin(entity(this.localRepository, AppEntities.task)),
-						forkJoin(syncData(this.localRepository, AppEntities.task)),
-						forkJoin(remoteData(this.localRepository, AppEntities.task)),
-						forkJoin(trash(this.localRepository, AppEntities.task))
+						forkJoin(entity(this.localRepository, DbStore.tasks)),
+						forkJoin(syncData(this.localRepository, DbStore.tasks_sync)),
+						forkJoin(remoteData(this.localRepository, DbStore.tasks_remote)),
+						forkJoin(trash(this.localRepository, DbStore.tasks_trash))
 
 					])
 

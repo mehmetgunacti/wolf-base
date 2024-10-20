@@ -44,14 +44,14 @@ export class NotesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Note> im
 			await tx.modify<SyncData>(this.table_sync, id, { deleted: true } as SyncData);
 
 			// delete NoteContent from note_content table
-			const noteContent = await tx.read<NoteContent>(AppEntities.noteContent.table, id);
+			const noteContent = await tx.read<NoteContent>(DbStore.note_content, id);
 			if (noteContent) {
 
-				await tx.add(AppEntities.noteContent.table_trash, noteContent);
-				await tx.delete(AppEntities.noteContent.table, id);
+				await tx.add(DbStore.note_content_trash, noteContent);
+				await tx.delete(DbStore.note_content, id);
 
 			}
-			await tx.modify(AppEntities.noteContent.table_sync, id, { deleted: true } as SyncData);
+			await tx.modify(DbStore.note_content_sync, id, { deleted: true } as SyncData);
 
 			const children = (await tx.readAll<Note>(this.table)).filter(e => e.parentId === id);
 			for (const child of children) {
