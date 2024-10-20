@@ -1,4 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
+import { opacityTrigger, sidebarTrigger } from '@animations';
 import { SidebarState } from '@constants';
 import { Store } from '@ngrx/store';
 import { selCore_sidebarState } from '@selectors';
@@ -12,6 +13,7 @@ import { appImports } from './app.config';
 	imports: appImports,
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
+	animations: [ sidebarTrigger, opacityTrigger ]
 })
 export class AppComponent {
 

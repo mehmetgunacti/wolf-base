@@ -1,16 +1,14 @@
-import { Injectable } from '@angular/core';
+import { coreActions } from '@actions';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
-import { coreActions } from '@actions';
 
 @Injectable()
 export class CoreNavigationEffects {
 
-	constructor(
-		private actions$: Actions,
-		private router: Router
-	) { }
+	private actions$ = inject(Actions);
+	private router = inject(Router);
 
 	navigate$ = createEffect(
 

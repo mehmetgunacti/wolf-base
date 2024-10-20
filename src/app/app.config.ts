@@ -1,6 +1,7 @@
 import { coreActions } from '@actions';
-import { HttpClient } from '@angular/common/http';
-import { ApplicationConfig, isDevMode, provideZoneChangeDetection } from '@angular/core';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { APP_INITIALIZER, ApplicationConfig, ErrorHandler, isDevMode, provideZoneChangeDetection } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, RouterOutlet } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 import { provideEffects } from '@ngrx/effects';
@@ -37,6 +38,8 @@ const appInitializerFactory = (store: Store) => {
 
 const appServices = [
 
+	{ provide: APP_INITIALIZER, useFactory: appInitializerFactory, multi: true, deps: [ Store ] },
+	{ provide: ErrorHandler, useClass: service.CustomErrorHandler },
 	{ provide: service.LOCAL_REPOSITORY_SERVICE, useClass: service.IndexedDbLocalRepositoryServiceImpl },
 	{ provide: service.REMOTE_REPOSITORY_SERVICE, useClass: service.FirestoreRemoteRepositoryServiceImpl, deps: [ Store, HttpClient ] },
 	{ provide: service.SYNC_SERVICE, useClass: service.SyncServiceImpl, deps: [ service.LOCAL_REPOSITORY_SERVICE, service.REMOTE_REPOSITORY_SERVICE ] },
@@ -50,6 +53,8 @@ export const appConfig: ApplicationConfig = {
 	providers: [
 		provideZoneChangeDetection({ eventCoalescing: true }),
 		provideRouter(routes),
+		provideHttpClient(),
+		provideAnimations(),
 		provideServiceWorker('ngsw-worker.js', { enabled: !isDevMode(), registrationStrategy: 'registerWhenStable:30000' }),
 		provideStore(store.reducerList, { metaReducers: store.metaReducers }),
 		provideEffects(store.effectList),
