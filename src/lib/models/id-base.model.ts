@@ -5,13 +5,13 @@ import { UUID } from '@constants';
 // YYYY-MM-DDTHH:mm:ss.sssZ
 export type ISODateString = string;
 
-export interface IDBase {
+export interface IdBase {
 
 	id: UUID;
 
 }
 
-export interface NameBase extends IDBase {
+export interface NameBase extends IdBase {
 
 	name: string;
 

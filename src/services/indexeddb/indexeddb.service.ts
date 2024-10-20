@@ -1,27 +1,39 @@
-import { computed, inject, signal, WritableSignal } from '@angular/core';
-import { TStore, UUID } from '@constants';
-import { IDBase } from '@models';
-import { DATABASE_CONFIG } from '@services';
-import { IndexedDbConfiguration } from 'lib/models/indexeddb.model';
+import { DbStore, UUID } from '@constants';
+import { IndexedDb } from '@libServices';
+import { IdBase, IndexedDbConfiguration } from '@models';
+import { indexedDbConfiguration } from '@services';
 
-function handleUpgrade(vce: IDBVersionChangeEvent, conf: IndexedDbConfiguration, errors: WritableSignal<string[]>): void {
+function version(conf: IndexedDbConfiguration): number {
+
+	return Math.max(...Object.keys(conf.upgrades).map(key => parseInt(key)));
+
+}
+
+function assertStores(stores: string[]): asserts stores is DbStore[] {
+
+	for (const store of stores)
+		if (!Object.values(DbStore).includes(store as DbStore))
+			throw new Error(`Invalid store: ${store}`);
+
+}
+
+function onUpgradeNeeded(event: IDBVersionChangeEvent, conf: IndexedDbConfiguration): void {
 
 	try {
 
 		Object
 			.keys(conf.upgrades)
 			.map(key => parseInt(key))
-			.filter(key => key > vce.oldVersion)
+			.filter(key => key > event.oldVersion)
 			.flatMap(key => conf.upgrades[ key ])
 			.map(command => { console.info(command); return command; })
-			.forEach(command => command.execute(vce));
+			.forEach(command => command.execute(event));
 
 	} catch (error) {
 
-		const msg = `Error during database upgrade: ${error}`;
-		errors.update(e => [ ...e, msg ]);
-		console.error('Error during database upgrade:', error);
-		const request = vce.target as IDBOpenDBRequest;
+		const message = `Error during database upgrade: ${error}`;
+		console.error(message);
+		const request = event.target as IDBOpenDBRequest;
 		const ts = request.transaction as IDBTransaction;
 		ts.abort();
 		throw error;
@@ -30,17 +42,50 @@ function handleUpgrade(vce: IDBVersionChangeEvent, conf: IndexedDbConfiguration,
 
 }
 
-class TransactionManager {
+function put<T extends IdBase>(store: IDBObjectStore, entity: T): Promise<void> {
+
+	return new Promise(
+
+		(resolve, reject): void => {
+
+			// database operation
+			const request = store.put(entity);
+			request.onsuccess = () => resolve();
+			request.onerror = () => reject(request.error);
+
+		}
+
+	);
+
+}
+
+function read<T extends IdBase>(store: IDBObjectStore, id: UUID): Promise<T | null> {
+
+	return new Promise(
+
+		(resolve, reject): void => {
+
+			const request = store.get(id);
+			request.onsuccess = () => resolve(request.result ?? null);
+			request.onerror = () => reject(request.error);
+
+		}
+
+	);
+
+}
+
+export class TransactionManager {
 
 	constructor(private tx: IDBTransaction) { }
 
-	private getStore(storeName: TStore): IDBObjectStore {
+	private getStore(storeName: DbStore): IDBObjectStore {
 
 		return this.tx.objectStore(storeName);
 
 	}
 
-	put<T extends IDBase>(storeName: TStore, entity: T): Promise<void> {
+	add<T>(storeName: DbStore, item: Partial<T>): Promise<T> {
 
 		// lookup store
 		const store = this.getStore(storeName);
@@ -50,9 +95,8 @@ class TransactionManager {
 
 			(resolve, reject): void => {
 
-				// database operation
-				const request = store.put(entity);
-				request.onsuccess = () => resolve();
+				const request = store.add(item);
+				request.onsuccess = () => resolve({ ...item, id: request.result } as T);
 				request.onerror = () => reject(request.error);
 
 			}
@@ -61,53 +105,38 @@ class TransactionManager {
 
 	}
 
-	async modify<T extends IDBase>(storeName: TStore, id: UUID, data: Partial<T>): Promise<T> {
-
-		// lookup store
-		const store = this.getStore(storeName);
-
-		// read entity
-		const entity: T = await this.read(storeName, id);
-
-		// updated
-		const updated: T = { ...entity, ...data };
-
-		// return promise
-		return new Promise(
-
-			(resolve, reject) => {
-
-				const request = store.put(updated);
-				request.onsuccess = () => resolve(updated);
-				request.onerror = () => reject(request.error);
-
-			}
-
-		);
-
-	}
-
-	read<T extends IDBase>(storeName: TStore, id: UUID): Promise<T> {
+	put<T extends IdBase>(storeName: DbStore, entity: T): Promise<void> {
 
 		// lookup store
 		const store = this.getStore(storeName);
 
 		// return promise
-		return new Promise(
-
-			(resolve, reject): void => {
-
-				const request = store.get(id);
-				request.onsuccess = () => resolve(request.result);
-				request.onerror = () => reject(request.error);
-
-			}
-
-		);
+		return put(store, entity);
 
 	}
 
-	readAll<T extends IDBase>(storeName: TStore): Promise<T[]> {
+	async bulkPut<T extends IdBase>(storeName: DbStore, entities: T[]): Promise<void> {
+
+		// lookup store
+		const store = this.getStore(storeName);
+
+		// iterate
+		for (const entity of entities)
+			await put(store, entity);
+
+	}
+
+	read<T extends IdBase>(storeName: DbStore, id: UUID): Promise<T | null> {
+
+		// lookup store
+		const store = this.getStore(storeName);
+
+		// return promise
+		return read(store, id);
+
+	}
+
+	readAll<T>(storeName: DbStore): Promise<T[]> {
 
 		// lookup store
 		const store = this.getStore(storeName);
@@ -127,7 +156,7 @@ class TransactionManager {
 
 	}
 
-	readAllKeys(storeName: TStore): Promise<UUID[]> {
+	readAllKeys(storeName: DbStore): Promise<UUID[]> {
 
 		// lookup store
 		const store = this.getStore(storeName);
@@ -143,7 +172,7 @@ class TransactionManager {
 
 	}
 
-	dump(storeName: TStore): Promise<Record<string, any>> {
+	dump(storeName: DbStore): Promise<Record<string, any>> {
 
 		// lookup store
 		const store = this.getStore(storeName);
@@ -159,7 +188,7 @@ class TransactionManager {
 				const cursor: IDBCursorWithValue = request.result as IDBCursorWithValue;
 				if (cursor) {
 
-					records[ cursor.key as string ] = cursor.value;
+					records[ cursor.key as string ] = cursor.value ?? null;
 					cursor.continue();
 
 				}
@@ -172,7 +201,7 @@ class TransactionManager {
 
 	}
 
-	size(storeName: TStore): Promise<number> {
+	size(storeName: DbStore): Promise<number> {
 
 		// lookup store
 		const store = this.getStore(storeName);
@@ -201,7 +230,7 @@ class TransactionManager {
 
 	}
 
-	readValue<T>(storeName: TStore, key: string): Promise<T> {
+	readValue<T>(storeName: DbStore, key: string): Promise<T> {
 
 		// lookup store
 		const store = this.getStore(storeName);
@@ -221,7 +250,7 @@ class TransactionManager {
 
 	}
 
-	setValue<T>(storeName: TStore, key: string, value: T): Promise<void> {
+	setValue<T>(storeName: DbStore, key: string, value: T): Promise<void> {
 
 		// lookup store
 		const store = this.getStore(storeName);
@@ -241,13 +270,15 @@ class TransactionManager {
 
 	}
 
-	async update<T extends IDBase>(storeName: TStore, id: UUID, data: Partial<T>): Promise<T> {
+	async modify<T extends IdBase>(storeName: DbStore, id: UUID, data: Partial<T>): Promise<T | null> {
 
 		// lookup store
 		const store = this.getStore(storeName);
 
 		// read entity
-		const entity: T = await this.read(storeName, id);
+		const entity: T | null = await read(store, id);
+		if (!entity)
+			return null;
 
 		// updated
 		const updated: T = { ...entity, ...data };
@@ -267,7 +298,7 @@ class TransactionManager {
 
 	}
 
-	delete(storeName: TStore, id: UUID): Promise<void> {
+	delete(storeName: DbStore, id: UUID): Promise<void> {
 
 		// lookup store
 		const store = this.getStore(storeName);
@@ -283,7 +314,7 @@ class TransactionManager {
 
 	}
 
-	empty(storeName: TStore): Promise<void> {
+	empty(storeName: DbStore): Promise<void> {
 
 		// lookup store
 		const store = this.getStore(storeName);
@@ -299,7 +330,7 @@ class TransactionManager {
 
 	}
 
-	count(storeName: TStore): Promise<number> {
+	count(storeName: DbStore): Promise<number> {
 
 		// lookup store
 		const store = this.getStore(storeName);
@@ -317,78 +348,50 @@ class TransactionManager {
 
 }
 
-export class IndexedDb {
+class IndexedDbImpl implements IndexedDb {
 
-	errors = signal<string[]>([]);
-
-	private configuration = signal(inject(DATABASE_CONFIG));
-	private version = computed(() => Math.max(...Object.keys(this.configuration().upgrades).map(key => parseInt(key))));
-	private db: IDBDatabase | null = null;
+	private idbDatabase: IDBDatabase | null = null;
 
 	constructor() {
-		this.initDb();
-	}
 
-	private async initDb(): Promise<void> {
+		if (this.idbDatabase)
+			return;
 
-		return new Promise((resolve, reject) => {
+		let idbDatabase: IDBDatabase | null = null;
+		const conf: IndexedDbConfiguration = indexedDbConfiguration;
+		const request: IDBOpenDBRequest = indexedDB.open(conf.dbName, version(conf));
+		request.onerror = () => { throw new Error('IndexedDB: Error opening database'); };
+		request.onblocked = () => { throw new Error('IndexedDB: Database blocked, please close other tabs with this site open.'); };
+		request.onupgradeneeded = (event: IDBVersionChangeEvent) => onUpgradeNeeded(event, conf);
+		request.onsuccess = (event: Event) => {
 
-			if (this.db) {
-				resolve();
-				return;
-			}
+			idbDatabase = (event.target as IDBOpenDBRequest).result;
+			idbDatabase.onversionchange = () => {
 
-			const request = indexedDB.open(this.configuration().dbName, this.version());
-			request.onerror = (event) => {
-
-				const msg = `IndexedDB: Error opening database`;
-				console.error(msg, event);
-				this.errors.update(e => [ ...e, msg ]);
-				reject('Error opening database');
-
-			};
-			request.onblocked = (event) => {
-
-				const msg = `IndexedDB blocked event`;
-				this.errors.update(e => [ ...e, msg ]);
-				console.warn(msg, event);
-				// This can occur if there are other open connections to the database
+				console.error('IndexedDB: Other connection is trying to upgrade the database, closing this connection');
+				idbDatabase?.close();
+				idbDatabase = null;
 
 			};
-			request.onupgradeneeded = (event: IDBVersionChangeEvent) => handleUpgrade(event, this.configuration(), this.errors);
-			request.onsuccess = (event) => {
+			this.idbDatabase = idbDatabase;
 
-				this.db = (event.target as IDBOpenDBRequest).result;
-				this.db.onversionchange = () => {
-
-					const msg = `Other connection is trying to upgrade the database, closing this connection`;
-					this.errors.update(e => [ ...e, msg ]);
-					console.error(msg);
-					this.db!.close();
-					this.db = null;
-
-				};
-				resolve();
-
-			};
-
-		});
+		};
 
 	}
 
-	async closeConnection(): Promise<void> {
+	add<T>(storeName: DbStore, item: Partial<T>): Promise<T> {
 
-		if (this.db) {
+		return this.transaction(
 
-			console.log(`Closing database connection`);
-			this.db.close();
-			this.db = null;
+			'readwrite',
+			[ storeName ],
+			tx => tx.add(storeName, item)
 
-		}
+		);
 
 	}
 
-	create<T extends IDBase>(storeName: TStore, entity: T): Promise<void> {
+	put<T extends IdBase>(storeName: DbStore, entity: T): Promise<void> {
 
 		return this.transaction(
 
@@ -400,7 +403,19 @@ export class IndexedDb {
 
 	}
 
-	read<T extends IDBase>(storeName: TStore, id: UUID): Promise<T> {
+	bulkPut<T extends IdBase>(storeName: DbStore, entities: T[]): Promise<void> {
+
+		return this.transaction(
+
+			'readwrite',
+			[ storeName ],
+			tx => tx.bulkPut(storeName, entities)
+
+		);
+
+	}
+
+	read<T extends IdBase>(storeName: DbStore, id: UUID): Promise<T | null> {
 
 		return this.transaction(
 
@@ -412,7 +427,7 @@ export class IndexedDb {
 
 	}
 
-	readValue<T>(storeName: TStore, key: string): Promise<T> {
+	readValue<T>(storeName: DbStore, key: string): Promise<T> {
 
 		return this.transaction(
 
@@ -424,7 +439,7 @@ export class IndexedDb {
 
 	}
 
-	setValue<T>(storeName: TStore, key: string, value: T): Promise<void> {
+	setValue<T>(storeName: DbStore, key: string, value: T): Promise<void> {
 
 		return this.transaction(
 
@@ -436,7 +451,7 @@ export class IndexedDb {
 
 	}
 
-	readAll<T extends IDBase>(storeName: TStore): Promise<T[]> {
+	readAll<T>(storeName: DbStore): Promise<T[]> {
 
 		return this.transaction(
 
@@ -448,7 +463,7 @@ export class IndexedDb {
 
 	}
 
-	readAllKeys(storeName: TStore): Promise<UUID[]> {
+	readAllKeys(storeName: DbStore): Promise<UUID[]> {
 
 		return this.transaction(
 
@@ -460,7 +475,7 @@ export class IndexedDb {
 
 	}
 
-	dump(storeName: TStore): Promise<Record<string, any>> {
+	dump(storeName: DbStore): Promise<Record<string, any>> {
 
 		return this.transaction(
 
@@ -472,19 +487,19 @@ export class IndexedDb {
 
 	}
 
-	async modify<T extends IDBase>(storeName: TStore, id: UUID, data: Partial<T>): Promise<T> {
+	modify<T extends IdBase>(storeName: DbStore, id: UUID, data: Partial<T>): Promise<T | null> {
 
 		return this.transaction(
 
 			'readwrite',
 			[ storeName ],
-			tx => tx.update(storeName, id, data)
+			tx => tx.modify(storeName, id, data)
 
 		);
 
 	}
 
-	delete(storeName: TStore, id: UUID): Promise<void> {
+	delete(storeName: DbStore, id: UUID): Promise<void> {
 
 		return this.transaction(
 
@@ -496,7 +511,7 @@ export class IndexedDb {
 
 	}
 
-	empty(storeName: TStore): Promise<void> {
+	empty(storeName: DbStore): Promise<void> {
 
 		return this.transaction(
 
@@ -508,7 +523,7 @@ export class IndexedDb {
 
 	}
 
-	count(storeName: TStore): Promise<number> {
+	count(storeName: DbStore): Promise<number> {
 
 		return this.transaction(
 
@@ -520,7 +535,7 @@ export class IndexedDb {
 
 	}
 
-	size(storeName: TStore): Promise<number> {
+	size(storeName: DbStore): Promise<number> {
 
 		return this.transaction(
 
@@ -535,19 +550,34 @@ export class IndexedDb {
 	async transaction<T>(
 
 		mode: IDBTransactionMode,
-		stores: TStore[],
+		stores: string[],
 		operations: (transactionManager: TransactionManager) => Promise<T>
 
 	): Promise<T> {
 
-		await this.initDb();
-		const db = this.db;
-		if (!db)
+		assertStores(stores);
+		if (!this.idbDatabase)
 			throw new Error('Database not initialized');
 
-		const tx = db.transaction(stores, mode);
+		const tx = this.idbDatabase.transaction(stores, mode);
 		const txManager = new TransactionManager(tx);
-		return operations(txManager);
+		return await operations(txManager);
+
+	}
+
+}
+
+export class LocalDatabase {
+
+	private static instance: IndexedDb | null = null;
+
+	private constructor() { }
+
+	static getInstance(): IndexedDb {
+
+		if (LocalDatabase.instance === null)
+			LocalDatabase.instance = new IndexedDbImpl();
+		return LocalDatabase.instance;
 
 	}
 

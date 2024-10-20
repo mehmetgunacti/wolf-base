@@ -1,13 +1,14 @@
-import { AppEntities, emptyNameBase, Task, TaskCategory, TaskPriority, TaskState } from '@lib';
-import { UUID } from 'lib/constants/common.constant';
-import { TaskLocalRepository } from 'lib/repositories/local/project-task.repository';
+import { AppEntities, TaskCategory, TaskPriority, TaskState, UUID } from '@constants';
+import { IndexedDb } from '@libServices';
+import { emptyNameBase, Task } from '@models';
+import { TaskLocalRepository } from '@repositories';
 import { v4 as uuidv4 } from 'uuid';
-import { WolfBaseDB } from '../wolfbase.database';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class DexieTasksRepositoryImpl extends EntityLocalRepositoryImpl<Task> implements TaskLocalRepository {
 
-	constructor(db: WolfBaseDB) {
+export class TasksLocalRepositoryImpl extends EntityLocalRepositoryImpl<Task> implements TaskLocalRepository {
+
+	constructor(db: IndexedDb) {
 		super(db, AppEntities.task);
 	}
 

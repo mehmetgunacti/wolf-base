@@ -1,6 +1,6 @@
 import { DefinitionLanguage, DefinitionType, UUID } from '@constants';
 import { Entity } from './entity.model';
-import { IDBase } from './id-base.model';
+import { IdBase } from './id-base.model';
 
 export interface Language {
 
@@ -9,7 +9,7 @@ export interface Language {
 
 }
 
-export interface Definition extends IDBase {
+export interface Definition extends IdBase {
 
 	languages: Language[];
 	type: DefinitionType;

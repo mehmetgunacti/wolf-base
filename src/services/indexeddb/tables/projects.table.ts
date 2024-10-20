@@ -1,13 +1,13 @@
-import { AppEntities, Project, ProjectStatus } from '@lib';
-import { UUID } from 'lib/constants/common.constant';
-import { ProjectLocalRepository } from 'lib/repositories/local';
+import { AppEntities, ProjectStatus, UUID } from '@constants';
+import { IndexedDb } from '@libServices';
+import { Project } from '@models';
+import { ProjectLocalRepository } from '@repositories';
 import { v4 as uuidv4 } from 'uuid';
-import { WolfBaseDB } from '../wolfbase.database';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class DexieProjectsRepositoryImpl extends EntityLocalRepositoryImpl<Project> implements ProjectLocalRepository {
+export class ProjectsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Project> implements ProjectLocalRepository {
 
-	constructor(db: WolfBaseDB) {
+	constructor(db: IndexedDb) {
 		super(db, AppEntities.project);
 	}
 

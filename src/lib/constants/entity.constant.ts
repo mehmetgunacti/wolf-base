@@ -1,5 +1,3 @@
-export type Table = string;
-
 export enum AppEntityType {
 
 	bookmark	= 'bookmark',
@@ -9,8 +7,7 @@ export enum AppEntityType {
 	quizEntry	= 'quizEntry',
 	quote		= 'quote',
 	task		= 'task',
-	word		= 'word',
-	log			= 'log'
+	word		= 'word'
 
 }
 
@@ -25,10 +22,10 @@ export class AppEntity {
 
 	toString(): string { return this.plural }
 
-	get table()			: Table { return this.plural; }
-	get table_sync()	: Table { return this.plural + '_sync'; }
-	get table_remote()	: Table { return this.plural + '_remote'; }
-	get table_trash()	: Table { return this.plural + '_trash'; }
+	get table()			: string { return this.plural; }
+	get table_sync()	: string { return this.plural + '_sync'; }
+	get table_remote()	: string { return this.plural + '_remote'; }
+	get table_trash()	: string { return this.plural + '_trash'; }
 
 }
 
@@ -48,6 +45,6 @@ export class AppEntities {
 	static [AppEntityType.quote]			= 	new AppEntity(		'quote',			'quotes',			'Quote',			'Quotes');
 	static [AppEntityType.task]				= 	new AppEntity(		'task',			'tasks',			'Task',			'Tasks');
 	static [AppEntityType.word]				= 	new AppEntity(		'word',			'words',			'Word',			'Words');
-	static [AppEntityType.log]				= 	new AppEntity(		'log',			'logs', 			'Log', 			'Logs');
+//	static [AppEntityType.log]				= 	new AppEntity(		'log',			'logs', 			'Log', 			'Logs');
 
 }

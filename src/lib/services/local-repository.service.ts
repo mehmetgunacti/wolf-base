@@ -1,4 +1,4 @@
-import { AppEntityType, LocalRepositoryNames } from '@constants';
+import { AppEntityType, DbStore, LocalRepositoryNames } from '@constants';
 import { Entity } from '@models';
 import * as repo from '@repositories';
 
@@ -19,7 +19,7 @@ export interface LocalRepositoryService {
 	logs: repo.LogsLocalRepository;
 
 	getRepository<T extends Entity>(entityType: AppEntityType): repo.EntityLocalRepository<T>;
-	dump<T = any>(repoName: LocalRepositoryNames): Promise<Record<string, T>>;
+	dump<T = any>(repoName: DbStore): Promise<Record<string, T>>;
 	count(table: string): Promise<number>;
 	size(table: string): Promise<number>;
 	empty(table: string): Promise<void>;

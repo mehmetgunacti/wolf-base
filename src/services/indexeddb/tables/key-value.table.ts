@@ -1,50 +1,46 @@
+import { IndexedDb } from '@libServices';
 import { LocalRepositoryNames } from 'lib/constants/database.constant';
-import { WolfBaseDB } from '../wolfbase.database';
 import { KeyValueRepository } from 'lib/repositories/local';
 
 export class KeyValueLocalRepositoryImpl implements KeyValueRepository {
 
 	constructor(
-		protected db: WolfBaseDB,
+		protected db: IndexedDb,
 		protected tablename: LocalRepositoryNames
 	) { }
 
 	async set<T>(key: string, value: T): Promise<void> {
 
-		await this.db.table<T>(this.tablename).put(value, key);
+		await this.db.setValue(this.tablename, key, value);
 
 	}
 
 	async get<T>(key: string): Promise<T | null> {
 
-		return await this.db.table<T>(this.tablename).get(key) ?? null;
+		return await this.db.readValue(this.tablename, key);
 
 	}
 
 	async toggle(key: string): Promise<void> {
 
-		await this.db.table(this.tablename).where(':id').equals(key).modify((v, c) => { c.value = !v; });
+		await this.db.transaction('readwrite', [ this.tablename ], async tx => {
+
+			const value: boolean = await tx.readValue<boolean>(this.tablename, key);
+			await tx.setValue<boolean>(this.tablename, key, !value);
+
+		});
 
 	}
 
 	async remove(key: string): Promise<void> {
 
-		return await this.db.table<string>(this.tablename).delete(key);
+		await this.db.delete(this.tablename, key);
 
 	}
 
-	async dump(): Promise<Map<string, any>> {
+	async dump(): Promise<Record<string, any>> {
 
-		// return value
-		const result: Map<string, any> = new Map();
-
-		// iterate all keys
-		const table = this.db.table(this.tablename);
-		const data = table.toCollection();
-		await data.each(
-			(obj: any, cursor) => result.set(cursor.key.toString(), obj)
-		);
-		return result;
+		return this.db.dump(this.tablename);
 
 	}
 

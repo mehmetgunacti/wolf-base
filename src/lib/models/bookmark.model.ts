@@ -1,6 +1,6 @@
 import { UUID } from '@constants';
 import { Entity } from './entity.model';
-import { IDBase, NameBase } from './id-base.model';
+import { IdBase, NameBase } from './id-base.model';
 
 export interface Bookmark extends Entity {
 
@@ -17,7 +17,7 @@ export interface ClickedBookmark extends Bookmark {
 
 }
 
-export interface Click extends IDBase {
+export interface Click extends IdBase {
 
 	total: number;
 	current: number;

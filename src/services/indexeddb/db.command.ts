@@ -1,4 +1,4 @@
-import { TStore } from '@constants';
+import { DbStore } from '@constants';
 
 export interface Command {
 	execute(vce: IDBVersionChangeEvent): void;
@@ -7,7 +7,7 @@ export interface Command {
 class CreateStoreCommand implements Command {
 
 	constructor(
-		private storeName: TStore,
+		private storeName: DbStore,
 		private options: IDBObjectStoreParameters
 	) { }
 
@@ -26,7 +26,7 @@ class CreateStoreCommand implements Command {
 class AddIndexCommand implements Command {
 
 	constructor(
-		private storeName: TStore,
+		private storeName: DbStore,
 		private indexName: string,
 		private keyPath: string | string[],
 		private options: IDBIndexParameters
@@ -63,7 +63,7 @@ class AddIndexCommand implements Command {
 class RemoveIndexCommand implements Command {
 
 	constructor(
-		private storeName: TStore,
+		private storeName: DbStore,
 		private indexName: string
 	) { }
 
@@ -97,7 +97,7 @@ class RemoveIndexCommand implements Command {
 
 class UpdatePropertyCommand implements Command {
 
-	constructor(private storeName: TStore, private updateFunction: (item: any) => any) { }
+	constructor(private storeName: DbStore, private updateFunction: (item: any) => any) { }
 
 	execute(vce: IDBVersionChangeEvent): void {
 

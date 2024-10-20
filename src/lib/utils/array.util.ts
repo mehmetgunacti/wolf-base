@@ -1,7 +1,7 @@
 import { UUID } from '@constants';
-import { IDBase } from '@models';
+import { IdBase } from '@models';
 
-export function idListToRecord<T extends IDBase>(list: T[]): Record<UUID, T> {
+export function idListToRecord<T extends IdBase>(list: T[]): Record<UUID, T> {
 
 	return list.reduce((record, item) => { record[item.id] = item; return record; }, {} as Record<UUID, T>);
 
@@ -76,7 +76,7 @@ export const commaSplit = (input: string | null): string[] => {
 
 };
 
-export function toDictionary<T extends IDBase>(items: T[]): Record<UUID, T> {
+export function toDictionary<T extends IdBase>(items: T[]): Record<UUID, T> {
 
 	const result = items.reduce(
 		(dictionary, item) => {

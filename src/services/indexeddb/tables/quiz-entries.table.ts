@@ -1,12 +1,12 @@
-import { AppEntities, Progress, QuizEntry } from '@lib';
-import { UUID } from 'lib/constants/common.constant';
-import { QuizEntryLocalRepository } from 'lib/repositories/local/quiz-entry.repository';
-import { WolfBaseDB } from '../wolfbase.database';
+import { AppEntities, Progress, UUID } from '@constants';
+import { IndexedDb } from '@libServices';
+import { QuizEntry } from '@models';
+import { QuizEntryLocalRepository } from '@repositories';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class DexieQuizEntriesRepositoryImpl extends EntityLocalRepositoryImpl<QuizEntry> implements QuizEntryLocalRepository {
+export class QuizEntriesLocalRepositoryImpl extends EntityLocalRepositoryImpl<QuizEntry> implements QuizEntryLocalRepository {
 
-	constructor(db: WolfBaseDB) {
+	constructor(db: IndexedDb) {
 		super(db, AppEntities.quizEntry);
 	}
 
@@ -35,7 +35,7 @@ export class DexieQuizEntriesRepositoryImpl extends EntityLocalRepositoryImpl<Qu
 
 	async putEntry(entry: QuizEntry): Promise<void> {
 
-		await this.db.table(this.appEntity.table).put(entry);
+		await this.db.put<QuizEntry>(this.appEntity.table, entry);
 
 	}
 

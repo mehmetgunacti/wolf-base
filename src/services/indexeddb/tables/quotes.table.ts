@@ -1,13 +1,13 @@
-import { AppEntities, Quote } from '@lib';
-import { UUID } from 'lib/constants/common.constant';
-import { QuoteLocalRepository } from 'lib/repositories/local';
+import { AppEntities, UUID } from '@constants';
+import { IndexedDb } from '@libServices';
+import { Quote } from '@models';
+import { QuoteLocalRepository } from '@repositories';
 import { v4 as uuidv4 } from 'uuid';
-import { WolfBaseDB } from '../wolfbase.database';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class DexieQuotesRepositoryImpl extends EntityLocalRepositoryImpl<Quote> implements QuoteLocalRepository {
+export class QuotesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Quote> implements QuoteLocalRepository {
 
-	constructor(db: WolfBaseDB) {
+	constructor(db: IndexedDb) {
 		super(db, AppEntities.quote);
 	}
 

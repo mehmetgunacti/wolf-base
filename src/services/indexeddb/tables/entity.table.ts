@@ -1,48 +1,46 @@
-import { AppEntity, LocalRepositoryNames, LogCategory } from '@lib';
-import { Collection, IndexableType, Table } from 'dexie';
+import { AppEntity, DbStore, LogCategory } from '@constants';
+import { IndexedDb, TransactionManager } from '@libServices';
 import { UUID } from 'lib/constants/common.constant';
 import { RemoteData, RemoteMetadata, SyncData } from 'lib/models';
 import { Entity, Metadata } from 'lib/models/entity.model';
 import { EntityLocalRepository } from 'lib/repositories/local';
-import { WolfBaseDB } from '../wolfbase.database';
 
 export abstract class EntityLocalRepositoryImpl<T extends Entity> implements EntityLocalRepository<T> {
 
 	constructor(
-		protected db: WolfBaseDB,
+		protected db: IndexedDb,
 		protected appEntity: AppEntity
 	) { }
 
 	async getEntity(id: UUID): Promise<T | null> {
 
-		const item = await this.db.table<T>(this.appEntity.table).get(id);
-		return item ?? null;
+		return await this.db.read(this.appEntity.table, id);
 
 	}
 
 	async getSyncData(id: UUID): Promise<SyncData | null> {
 
-		return await this.db.table<SyncData>(this.appEntity.table_sync).get(id) ?? null;
+		return await this.db.read(this.appEntity.table_sync, id);
 
 	}
 
 	async getRemoteMetadata(id: string): Promise<RemoteMetadata | null> {
 
-		return await this.db.table<RemoteMetadata>(this.appEntity.table_remote).get(id) ?? null;
+		return await this.db.read(this.appEntity.table_remote, id);
 
 	}
 
 	async storeDownloadedEntity(item: RemoteData<T>): Promise<RemoteData<T>> {
 
-		await this.db.transaction('rw', [
+		await this.db.transaction('readwrite', [
 			this.appEntity.table,
 			this.appEntity.table_sync,
 			this.appEntity.table_trash,
 			this.appEntity.table_remote,
-			LocalRepositoryNames.logs
-		], async () => {
+			DbStore.logs
+		], async tx => {
 
-			await this._put(item);
+			await this._put(tx, item);
 
 		});
 		return item;
@@ -51,16 +49,16 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	async storeDownloadedEntities(items: RemoteData<T>[]): Promise<number> {
 
-		await this.db.transaction('rw', [
+		await this.db.transaction('readwrite', [
 			this.appEntity.table,
 			this.appEntity.table_sync,
 			this.appEntity.table_trash,
 			this.appEntity.table_remote,
-			LocalRepositoryNames.logs
-		], async () => {
+			DbStore.logs
+		], async tx => {
 
 			for (const item of items)
-				await this._put(item);
+				await this._put(tx, item);
 
 		});
 		return items.length;
@@ -69,13 +67,13 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	async storeMetadata(data: Metadata): Promise<void> {
 
-		await this.db.transaction('rw', [
+		await this.db.transaction('readwrite', [
 			this.appEntity.table_sync,
 			this.appEntity.table_remote
-		], async () => {
+		], async tx => {
 
-			await this.db.table<SyncData>(this.appEntity.table_sync).put({ ...data, updated: false, deleted: false, error: null }, data.id);
-			await this.db.table<RemoteMetadata>(this.appEntity.table_remote).put(data, data.id);
+			await tx.put<SyncData>(this.appEntity.table_sync, { ...data, updated: false, deleted: false, error: null });
+			await tx.put<RemoteMetadata>(this.appEntity.table_remote, data);
 
 		});
 
@@ -83,25 +81,19 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	async storeOneRemoteMetadata(data: RemoteMetadata): Promise<RemoteMetadata> {
 
-		await this.db.transaction('rw', [
-			this.appEntity.table_remote
-		], async () => {
-
-			await this.db.table<RemoteMetadata>(this.appEntity.table_remote).put(data, data.id);
-
-		});
+		await this.db.put(this.appEntity.table_remote, data);
 		return data;
 
 	}
 
 	async storeAllRemoteMetadata(data: RemoteMetadata[]): Promise<void> {
 
-		await this.db.transaction('rw', [
+		await this.db.transaction('readwrite', [
 			this.appEntity.table_remote
-		], async () => {
+		], async tx => {
 
-			await this.db.table<RemoteMetadata>(this.appEntity.table_remote).clear();
-			await this.db.table<RemoteMetadata>(this.appEntity.table_remote).bulkPut(data);
+			await tx.empty(this.appEntity.table_remote);
+			await tx.bulkPut<RemoteMetadata>(this.appEntity.table_remote, data);
 
 		});
 
@@ -110,16 +102,16 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 	async create(item: Partial<T>): Promise<T> {
 
 		const newItem: T = this.newItemFromPartial(item);
-		await this.db.transaction('rw', [
+		await this.db.transaction('readwrite', [
 			this.appEntity.table,
-			LocalRepositoryNames.logs
-		], async () => {
+			DbStore.logs
+		], async tx => {
 
 			// create entity
-			await this.db.table<T>(this.appEntity.table).add(newItem);
+			await tx.put<T>(this.appEntity.table, newItem);
 
 			// add log
-			await this.db.table(LocalRepositoryNames.logs).add({
+			await this.db.add(DbStore.logs, {
 
 				category: LogCategory.entity_created,
 				date: new Date().toISOString(),
@@ -137,22 +129,22 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 	async update(id: UUID, item: Partial<T>): Promise<number> {
 
 		let count = 0;
-		await this.db.transaction('rw', [
+		await this.db.transaction('readwrite', [
 			this.appEntity.table,
 			this.appEntity.table_sync,
 			this.appEntity.table_trash,
-			LocalRepositoryNames.logs
-		], async () => {
+			DbStore.logs
+		], async tx => {
 
-			const entity = await this.db.table<T>(this.appEntity.table).get(id);
+			const entity = await tx.read<T>(this.appEntity.table, id);
 			if (entity) {
 
-				await this.db.table<T>(this.appEntity.table_trash).add(entity);
-				count = await this.db.table<T>(this.appEntity.table).update(id, { ...entity, ...item });
-				await this.db.table<SyncData>(this.appEntity.table_sync).where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
+				await tx.add<T>(this.appEntity.table_trash, entity);
+				await tx.modify<T>(this.appEntity.table, id, { ...entity, ...item });
+				await tx.modify<SyncData>(this.appEntity.table_sync, id, { updated: true } as Partial<SyncData>);
 
 				// add log
-				await this.db.table(LocalRepositoryNames.logs).add({
+				await tx.add(DbStore.logs, {
 
 					category: LogCategory.entity_updated,
 					date: new Date().toISOString(),
@@ -171,65 +163,43 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	async list(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: T) => boolean; } | undefined): Promise<T[]> {
 
-		const table: Table<T, IndexableType> = this.db.table<T>(this.appEntity.table);
-		let collection: Collection<T, IndexableType>;
-
-		if (params) {
-
-			if (params.orderBy)
-				collection = table.orderBy(params.orderBy);
-			else
-				collection = table.toCollection();
-
-			if (params.reverse)
-				collection = collection.reverse();
-
-			if (params.limit)
-				collection = collection.limit(params.limit);
-
-			if (params.filterFn)
-				collection = collection.filter(params.filterFn);
-
-			return await collection.toArray();
-
-		}
-		return await table.toArray();
+		return await this.db.readAll<T>(this.appEntity.table);
 
 	}
 
 	async listSyncData(): Promise<SyncData[]> {
 
-		return await this.db.table<SyncData>(this.appEntity.table_sync).toArray();
+		return await this.db.readAll<SyncData>(this.appEntity.table_sync);
 
 	}
 
 	async listRemoteMetadata(): Promise<RemoteMetadata[]> {
 
-		return await this.db.table<RemoteMetadata>(this.appEntity.table_remote).toArray();
+		return await this.db.readAll<RemoteMetadata>(this.appEntity.table);
 
 	}
 
 	async moveToTrash(id: UUID): Promise<void> {
 
-		await this.db.transaction('rw', [
+		await this.db.transaction('readwrite', [
 			this.appEntity.table,
 			this.appEntity.table_sync,
 			this.appEntity.table_trash,
-			LocalRepositoryNames.logs
-		], async () => {
+			DbStore.logs
+		], async tx => {
 
-			const entity = await this.db.table<T>(this.appEntity.table).get(id);
+			const entity = await tx.read<T>(this.appEntity.table, id);
 			if (entity) {
 
-				await this.db.table(this.appEntity.table_trash).add(entity);
-				await this.db.table(this.appEntity.table).delete(id);
+				await tx.add(this.appEntity.table_trash, entity);
+				await tx.delete(this.appEntity.table, id);
 
 			}
 
-			await this.db.table(this.appEntity.table_sync).where({ id }).modify({ deleted: true } as SyncData);
+			await tx.modify<SyncData>(this.appEntity.table_sync, id, { deleted: true } as SyncData);
 
 			// add log
-			await this.db.table(LocalRepositoryNames.logs).add({
+			await tx.add(DbStore.logs, {
 
 				category: LogCategory.entity_deleted,
 				date: new Date().toISOString(),
@@ -245,27 +215,27 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	async listDeletedItems(): Promise<T[]> {
 
-		return await this.db.table<T>(this.appEntity.table_trash).toArray();
+		return await this.db.readAll<T>(this.appEntity.table_trash);
 
 	}
 
-	private async _put(remoteData: RemoteData<T>): Promise<void> {
+	private async _put(tx: TransactionManager, remoteData: RemoteData<T>): Promise<void> {
 
 		const { id, name, createTime, updateTime } = remoteData.metaData;
 
 		// move local entity to trash
-		const entity = await this.db.table<T>(this.appEntity.table).get(id);
+		const entity = await tx.read<T>(this.appEntity.table, id);
 		if (entity)
-			await this.db.table(this.appEntity.table_trash).add(entity);
+			await tx.add(this.appEntity.table_trash, entity);
 
 		// store incoming entity
-		await this.db.table<T>(this.appEntity.table).put(remoteData.entity);
+		await tx.put<T>(this.appEntity.table, remoteData.entity);
 
 		// add/update 'remote'
-		await this.db.table<RemoteMetadata>(this.appEntity.table_remote).put(remoteData.metaData, id);
+		await tx.put<RemoteMetadata>(this.appEntity.table_remote, remoteData.metaData);
 
 		// add to sync table
-		await this.db.table<SyncData>(this.appEntity.table_sync).put({
+		await tx.put<SyncData>(this.appEntity.table_sync, {
 
 			id,
 			name,
@@ -278,7 +248,7 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 		});
 
 		// add log
-		await this.db.table(LocalRepositoryNames.logs).add({
+		await tx.add(DbStore.logs, {
 			category: LogCategory.remote_data_stored,
 			date: new Date().toISOString(),
 			message: `"${remoteData.entity.name}" stored`,
@@ -290,30 +260,30 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	async remove(id: string): Promise<UUID> {
 
-		await this.db.transaction('rw', [
+		await this.db.transaction('readwrite', [
 			this.appEntity.table,
 			this.appEntity.table_sync,
 			this.appEntity.table_trash,
 			this.appEntity.table_remote,
-			LocalRepositoryNames.logs
-		], async () => {
+			DbStore.logs
+		], async tx => {
 
 			let logMessage = 'metadata deleted';
 
-			const item = await this.db.table<T>(this.appEntity.table).get(id);
+			const item = await tx.read<T>(this.appEntity.table, id);
 			if (item) {
 
 				logMessage = `"${item.name}" deleted`;
-				await this.db.table(this.appEntity.table_trash).add(item);
-				await this.db.table(this.appEntity.table).delete(id);
+				await tx.add(this.appEntity.table_trash, item);
+				await tx.delete(this.appEntity.table, id);
 
 			}
 
-			await this.db.table(this.appEntity.table_sync).delete(id);
-			await this.db.table(this.appEntity.table_remote).delete(id);
+			await tx.delete(this.appEntity.table_sync, id);
+			await tx.delete(this.appEntity.table_remote, id);
 
 			// add log
-			await this.db.table(LocalRepositoryNames.logs).add({
+			await tx.add(DbStore.logs, {
 				category: LogCategory.entity_deleted,
 				date: new Date().toISOString(),
 				message: logMessage,
@@ -328,7 +298,7 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	async listIds(): Promise<UUID[]> {
 
-		return await this.db.table<T>(this.appEntity.table).toCollection().primaryKeys() as UUID[];
+		return await this.db.readAllKeys(this.appEntity.table);
 
 	}
 

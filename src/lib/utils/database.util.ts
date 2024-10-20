@@ -1,8 +1,8 @@
-import { LocalRepositoryNames } from '@constants';
+import { DbStore } from '@constants';
 import { LocalRepositoryService } from '@libServices';
 import { AsyncZippable, FlateError, zip } from 'fflate';
 import * as FileSaver from 'file-saver-es';
-import { Observable, concatMap, delay, filter, from, map, switchMap, toArray } from 'rxjs';
+import { Observable, concatMap, delay, from, map, switchMap, toArray } from 'rxjs';
 import { sleep } from './helper.tool';
 
 const encode = <T>(data: Record<string, T>): Uint8Array => new TextEncoder().encode(JSON.stringify(data, null, '\t'));
@@ -13,9 +13,9 @@ export class BackupDatabase {
 
 	execute(): Observable<void> {
 
-		return from(Object.values(LocalRepositoryNames)).pipe(
+		return from(Object.values(DbStore)).pipe(
 
-			filter(name => name !== LocalRepositoryNames.configuration),
+			// filter(name => name !== LocalRepositoryNames.configuration),
 			concatMap(name =>
 
 				// return tuple [filename, uint8array]
@@ -49,6 +49,7 @@ export class BackupDatabase {
 				});
 
 			}))
+
 		);
 
 	}

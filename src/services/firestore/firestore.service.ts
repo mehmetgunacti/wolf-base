@@ -53,6 +53,8 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 			case AppEntityType.word: return this.words;
 
 		}
+		throw new Error(`Non-entity table requested: ${entity}`);
+
 
 	}
 

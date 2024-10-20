@@ -4,6 +4,6 @@ export interface KeyValueRepository<T = string, KEY = string> {
 	get(key: KEY): Promise<T | null>;
 	remove(key: KEY): Promise<void>;
 
-	dump(): Promise<Map<string, any>>;
+	dump(): Promise<Record<string, any>>;
 
 }

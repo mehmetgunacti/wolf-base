@@ -1,14 +1,16 @@
-import { AppEntities, LocalRepositoryNames, LogCategory, SyncData, toggleArrayItem } from '@lib';
+import { AppEntities, DbStore, LogCategory } from '@constants';
+import { IndexedDb } from '@libServices';
+import { LogMessage, SyncData } from '@models';
+import { toggleArrayItem } from '@utils';
 import { UUID } from 'lib/constants/common.constant';
 import { Bookmark, Click } from 'lib/models/bookmark.model';
 import { BookmarksLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
-import { WolfBaseDB } from '../wolfbase.database';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Bookmark> implements BookmarksLocalRepository {
+export class BookmarksLocalRepositoryImpl extends EntityLocalRepositoryImpl<Bookmark> implements BookmarksLocalRepository {
 
-	constructor(db: WolfBaseDB) {
+	constructor(db: IndexedDb) {
 		super(db, AppEntities.bookmark);
 	}
 
@@ -28,7 +30,7 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 			title: '',
 			tags: [],
 			image: '',
-			urls: ['']
+			urls: [ '' ]
 
 		};
 		return { ...instance, ...item, id } as Bookmark;
@@ -37,21 +39,19 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 
 	async toggleTag(id: UUID, name: string): Promise<void> {
 
-		await this.db.transaction('rw', [
-			AppEntities.bookmark.table,
-			AppEntities.bookmark.table_sync
-		], async () => {
+		await this.db.transaction('readwrite', [
+			DbStore.bookmarks,
+			DbStore.bookmarks_sync
+		], async tx => {
 
-			// update bookmarks table
-			const count = await this.db.table(this.appEntity.table).where({ id }).modify((bookmark: Bookmark): void => {
+			const entity = await tx.read<Bookmark>(DbStore.bookmarks, id);
+			if (entity) {
 
-				bookmark.tags = toggleArrayItem(bookmark.tags, name);
+				const updated = { ...entity, tags: toggleArrayItem(entity.tags, name) };
+				await tx.put(DbStore.bookmarks, updated);
+				await tx.modify(DbStore.bookmarks_sync, id, { updated: true } as Partial<SyncData>);
 
-			});
-
-			// update syncData
-			if (count > 0)
-				await this.db.table(this.appEntity.table_sync).where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
+			}
 
 		});
 
@@ -59,69 +59,82 @@ export class DexieBookmarksRepositoryImpl extends EntityLocalRepositoryImpl<Book
 
 	async click(id: UUID): Promise<void> {
 
-		// try to increment value (update)
-		const affected = await this.db.table(AppEntities.bookmark.table_clicks)
-			.where({ id })
-			.modify((click: Click): void => {
+		await this.db.transaction('readwrite', [ DbStore.bookmarks_clicks ], async tx => {
 
-				click.total = (click.total ?? 0) + 1;
-				click.current = (click.current ?? 0) + 1;
+			const click: Click | null = await tx.read<Click>(DbStore.bookmarks_clicks, id);
+			if (click) {
 
-			});
+				const updated: Click = {
+					...click,
+					total: (click.total ?? 0) + 1,
+					current: (click.current ?? 0) + 1
+				};
+				await tx.put(DbStore.bookmarks_clicks, updated);
 
-		// if no object found, create one
-		if (affected !== 1)
-			await this.db.table(AppEntities.bookmark.table_clicks).add({
-				id,
-				total: 1,
-				current: 1
-			});
+			} else {
+
+				await tx.put(DbStore.bookmarks_clicks, {
+					id,
+					total: 1,
+					current: 1
+				});
+
+			}
+
+		});
 
 	}
 
 	async getClick(id: string): Promise<Click | null> {
 
-		return await this.db.table(AppEntities.bookmark.table_clicks).get(id) ?? null;
+		return await this.db.read<Click>(DbStore.bookmarks_clicks, id);
+
+	}
+
+	async listClicks(): Promise<Click[]> {
+
+		return await this.db.readAll<Click>(DbStore.bookmarks_clicks);
 
 	}
 
 	async listClicked(): Promise<Click[]> {
 
-		return await this.db.table(AppEntities.bookmark.table_clicks).where('current').above(0).toArray();
+		const list = await this.listClicks();
+		return list.filter(click => click.current > 0);
 
 	}
 
 	async storeClick(click: Click): Promise<Click> {
 
-		await this.db.table(AppEntities.bookmark.table_clicks).put(click);
+		await this.db.put(DbStore.bookmarks_clicks, click);
 		return click;
 
 	}
 
 	async storeClicks(items: Click[]): Promise<Click[]> {
 
-		// remove obsolete click objects
-		const bookmarkIds = new Set(await this.db.table(this.appEntity.table).toCollection().primaryKeys() as UUID[]);
-		const matching = items.filter(({ id }) => bookmarkIds.has(id));
-		await this.db.transaction('rw', [AppEntities.bookmark.table_clicks, LocalRepositoryNames.logs], async () => {
+		return await this.db.transaction(
+			'readwrite',
+			[ DbStore.bookmarks, DbStore.bookmarks_clicks, DbStore.logs ],
+			async tx => {
 
-			await this.db.table(AppEntities.bookmark.table_clicks).clear();
-			await this.db.table(AppEntities.bookmark.table_clicks).bulkAdd(matching);
-			// add log
-			await this.db.table(LocalRepositoryNames.logs).add({
-				category: LogCategory.store_clicks,
-				date: new Date().toISOString(),
-				message: `${items.length} downloaded, ${matching.length} stored`
-			});
+				// remove obsolete click objects
+				const bookmarkIds = new Set(await tx.readAllKeys(DbStore.bookmarks));
+				const matching = items.filter(({ id }) => bookmarkIds.has(id));
 
-		});
-		return matching;
+				await tx.empty(DbStore.bookmarks_clicks);
+				await tx.bulkPut(DbStore.bookmarks_clicks, matching);
 
-	}
+				// add log
+				await tx.add<LogMessage>(DbStore.logs, {
+					category: LogCategory.store_clicks,
+					date: new Date().toISOString(),
+					message: `${items.length} downloaded, ${matching.length} stored`
+				});
+				return matching;
 
-	async listClicks(): Promise<Click[]> {
-
-		return await this.db.table(AppEntities.bookmark.table_clicks).toArray();
+			}
+		);
 
 	}
 

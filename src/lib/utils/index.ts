@@ -7,3 +7,4 @@ export * from './form.tool';
 export * from './helper.tool';
 export * from './sidebar.util';
 export * from './string.util';
+export * from './validators';

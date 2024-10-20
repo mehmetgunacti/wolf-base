@@ -1,39 +1,27 @@
-import { LocalRepositoryNames, LogCategory, LogMessage, UUID } from '@lib';
+import { DbStore, LogCategory, UUID } from '@constants';
+import { IndexedDb } from '@libServices';
+import { LogMessage } from '@models';
 import { LogsLocalRepository } from 'lib/repositories/local';
-import { WolfBaseDB } from '../wolfbase.database';
 
-export class DexieLogsLocalRepositoryImpl implements LogsLocalRepository {
+export class LogsLocalRepositoryImpl implements LogsLocalRepository {
 
-	constructor(private db: WolfBaseDB) { }
+	constructor(private db: IndexedDb) { }
 
 	async add(message: LogMessage): Promise<void> {
 
-		await this.db.table(LocalRepositoryNames.logs).add(message);
+		await this.db.add(DbStore.logs, message);
 
 	}
 
-	async list(params: { categories?: LogCategory[]; entityId?: UUID | null, limit: number }): Promise<LogMessage[]> {
+	async list(params: { categories?: LogCategory[]; entityId?: UUID | null, limit: number; }): Promise<LogMessage[]> {
 
-		const { entityId, categories, limit } = params;
-
-		// todo:
-		// if (entityId && category)
-		//	return await this.db.table(LocalRepositoryNames.logs).where('entityId').equals(entityId).and(log => log.category === category).reverse().sortBy(':id');
-
-		if (entityId)
-			return await this.db.table(LocalRepositoryNames.logs).where('entityId').equals(entityId).reverse().sortBy(':id');
-
-		// todo: only first category is used
-		if (categories && categories.length > 0)
-			return await this.db.table(LocalRepositoryNames.logs).where('category').equals(categories[0]).limit(limit).reverse().sortBy(':id');
-
-		return await this.db.table(LocalRepositoryNames.logs).limit(limit).reverse().sortBy(':id');
+		return await this.db.readAll<LogMessage>(DbStore.logs);
 
 	}
 
 	async clear(): Promise<void> {
 
-		await this.db.table(LocalRepositoryNames.logs).clear();
+		await this.db.empty(DbStore.logs);
 
 	}
 

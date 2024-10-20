@@ -1,14 +1,14 @@
-import { AppEntities, Definition, Word } from '@lib';
+import { AppEntities, UUID } from '@constants';
+import { IndexedDb } from '@libServices';
+import { Definition, Word } from '@models';
+import { WordLocalRepository } from '@repositories';
 import { produce } from 'immer';
-import { UUID } from 'lib/constants/common.constant';
-import { WordLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
-import { WolfBaseDB } from '../wolfbase.database';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> implements WordLocalRepository {
+export class WordsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Word> implements WordLocalRepository {
 
-	constructor(db: WolfBaseDB) {
+	constructor(db: IndexedDb) {
 		super(db, AppEntities.word);
 	}
 
@@ -23,9 +23,9 @@ export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> im
 
 		const definitions: Definition[] = item.definitions ?? [];
 		if (definitions.length < 1)
-			throw Error('Create `Word`: definitions array is empty')
+			throw Error('Create `Word`: definitions array is empty');
 
-		const withIds = definitions.map(d => ({...d, id: uuidv4() }));
+		const withIds = definitions.map(d => ({ ...d, id: uuidv4() }));
 
 		const instance: Word = {
 
@@ -51,7 +51,7 @@ export class DexieWordsRepositoryImpl extends EntityLocalRepositoryImpl<Word> im
 			item,
 			draft => {
 
-				draft.definitions?.filter(d => !d.id).forEach(d => d.id = uuidv4())
+				draft.definitions?.filter(d => !d.id).forEach(d => d.id = uuidv4());
 
 			}
 		);

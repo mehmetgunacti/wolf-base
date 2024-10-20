@@ -1,59 +1,66 @@
-import { AppEntities, LocalRepositoryNames, LogCategory, SyncData, toggleArrayItem } from '@lib';
 import { UUID } from 'lib/constants/common.constant';
-import { Note } from 'lib/models/note.model';
+import { Note, NoteContent } from 'lib/models/note.model';
 import { NotesLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
-import { WolfBaseDB } from '../wolfbase.database';
 import { EntityLocalRepositoryImpl } from './entity.table';
+import { IndexedDb } from '@libServices';
+import { AppEntities, DbStore, LogCategory } from '@constants';
+import { SyncData } from '@models';
+import { toggleArrayItem } from '@utils';
 
-export class DexieNotesRepositoryImpl extends EntityLocalRepositoryImpl<Note> implements NotesLocalRepository {
+export class NotesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Note> implements NotesLocalRepository {
 
-	constructor(db: WolfBaseDB) {
+	constructor(db: IndexedDb) {
 		super(db, AppEntities.note);
 	}
 
 	override async moveToTrash(id: UUID): Promise<void> {
 
-		await this.db.transaction('rw', [
-			AppEntities.note.table,
-			AppEntities.note.table_sync,
-			AppEntities.note.table_trash,
-			AppEntities.noteContent.table,
-			AppEntities.noteContent.table_sync,
-			AppEntities.noteContent.table_trash,
-			LocalRepositoryNames.logs
-		], async () => {
+		await this.db.transaction('readwrite', [
+			DbStore.notes,
+			DbStore.notes_sync,
+			DbStore.notes_trash,
+			DbStore.note_content,
+			DbStore.note_content_sync,
+			DbStore.note_content_trash,
+			DbStore.logs
+		], async tx => {
 
 			// delete Note from notes table
-			const note = await this.db.table(this.appEntity.table).get(id);
+			const note = await tx.read<Note>(this.appEntity.table, id);
 			if (note) {
 
-				await this.db.table(this.appEntity.table_trash).add(note);
-				await this.db.table(this.appEntity.table).delete(id);
+				await tx.add(this.appEntity.table_trash, note);
+				await tx.delete(this.appEntity.table, id);
 
 			}
-			await this.db.table(this.appEntity.table_sync).where({ id }).modify({ deleted: true } as SyncData);
+			await tx.modify<SyncData>(this.appEntity.table_sync, id, { deleted: true } as SyncData);
 
 			// delete NoteContent from note_content table
-			const noteContent = await this.db.table(AppEntities.noteContent.table).get(id);
+			const noteContent = await tx.read<NoteContent>(AppEntities.noteContent.table, id);
 			if (noteContent) {
 
-				await this.db.table(AppEntities.noteContent.table_trash).add(noteContent);
-				await this.db.table(AppEntities.noteContent.table).delete(id);
+				await tx.add(AppEntities.noteContent.table_trash, noteContent);
+				await tx.delete(AppEntities.noteContent.table, id);
 
 			}
-			await this.db.table(AppEntities.noteContent.table_sync).where({ id }).modify({ deleted: true } as SyncData);
+			await tx.modify(AppEntities.noteContent.table_sync, id, { deleted: true } as SyncData);
 
-			const children = await this.db.table(this.appEntity.table).where({ parentId: id }).toArray();
+			const children = (await tx.readAll<Note>(this.appEntity.table)).filter(e => e.parentId === id);
 			for (const child of children) {
 
-				await this.db.table(this.appEntity.table).where({ id: child.id }).modify({ parentId: null } as Note);
-				await this.db.table(this.appEntity.table_sync).where({ id: child.id }).modify({ updated: true } as SyncData);
+				const note = await tx.read<Note>(this.appEntity.table, child.id);
+				if (note)
+					await tx.modify<Note>(this.appEntity.table, child.id, { parentId: null } as Note);
+
+				const syncData = await tx.read<SyncData>(this.appEntity.table_sync, child.id);
+				if (syncData)
+					await tx.modify<SyncData>(this.appEntity.table_sync, child.id, { updated: true } as SyncData);
 
 			}
 
 			// add log
-			await this.db.table(LocalRepositoryNames.logs).add({
+			await tx.add(DbStore.logs, {
 
 				category: LogCategory.entity_deleted,
 				date: new Date().toISOString(),
@@ -91,21 +98,19 @@ export class DexieNotesRepositoryImpl extends EntityLocalRepositoryImpl<Note> im
 
 	async toggleTag(id: UUID, name: string): Promise<void> {
 
-		await this.db.transaction('rw', [
-			AppEntities.note.table,
-			AppEntities.note.table_sync
-		], async () => {
+		await this.db.transaction('readwrite', [
+			DbStore.notes,
+			DbStore.notes_sync
+		], async tx => {
 
-			// update notes table
-			const count = await this.db.table(this.appEntity.table).where({ id }).modify((note: Note): void => {
+			const entity = await tx.read<Note>(DbStore.notes, id);
+			if (entity) {
 
-				note.tags = toggleArrayItem(note.tags, name);
+				const updated = { ...entity, tags: toggleArrayItem(entity.tags, name) };
+				await tx.put(DbStore.notes, updated);
+				await tx.modify(DbStore.notes_sync, id, { updated: true } as Partial<SyncData>);
 
-			});
-
-			// update syncData
-			if (count > 0)
-				await this.db.table(this.appEntity.table_sync).where('id').equals(id).modify({ updated: true } as Partial<SyncData>);
+			}
 
 		});
 

@@ -1,4 +1,4 @@
-import { AppEntityType, LocalRepositoryNames } from '@constants';
+import { AppEntityType, DbStore, LocalRepositoryNames } from '@constants';
 import { LocalRepositoryService } from '@libServices';
 import { Entity } from '@models';
 import { BookmarksLocalRepository, ConfigurationLocalRepository, EntityLocalRepository, LogsLocalRepository, NoteContentLocalRepository, NotesLocalRepository, ProjectLocalRepository, QuoteLocalRepository, WordLocalRepository } from 'lib/repositories/local';
@@ -59,11 +59,10 @@ export class DexieLocalRepositoryServiceImpl implements LocalRepositoryService {
 			case AppEntityType.word: return this.words as unknown as EntityLocalRepository<T>;
 
 		}
-		throw Error('Unknown entity');
 
 	}
 
-	async dump<T = any>(repoName: LocalRepositoryNames): Promise<Record<string, T>> {
+	async dump<T = any>(repoName: DbStore): Promise<Record<string, T>> {
 
 		const Repository = this.db.table(repoName);
 		const data = Repository.toCollection();
