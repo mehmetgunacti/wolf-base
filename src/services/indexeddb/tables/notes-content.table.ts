@@ -1,4 +1,4 @@
-import { AppEntities, UUID } from '@constants';
+import { AppEntities, DbStore, UUID } from '@constants';
 import { IndexedDb } from '@libServices';
 import { Note, NoteContent, SyncData } from '@models';
 import { NoteContentLocalRepository } from 'lib/repositories/local';
@@ -7,7 +7,14 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class NoteContentLocalRepositoryImpl extends EntityLocalRepositoryImpl<NoteContent> implements NoteContentLocalRepository {
 
 	constructor(db: IndexedDb) {
-		super(db, AppEntities.noteContent);
+		super(
+			db,
+			DbStore.note_content,
+			DbStore.note_content_sync,
+			DbStore.note_content_remote,
+			DbStore.note_content_trash,
+			AppEntities.noteContent.label
+		);
 	}
 
 	protected override newItemFromPartial(item: NoteContent): NoteContent {
@@ -35,13 +42,13 @@ export class NoteContentLocalRepositoryImpl extends EntityLocalRepositoryImpl<No
 
 		// update Note 'modified' field
 		await this.db.transaction('readwrite', [
-			AppEntities.note.table,
-			AppEntities.note.table_sync
+			DbStore.notes,
+			DbStore.notes_sync
 		], async tx => {
 
 			const id = noteContent.id;
-			await tx.modify<Note>(AppEntities.note.table, id, { modified: new Date().toISOString() } as Note);
-			await tx.modify<SyncData>(AppEntities.note.table_sync, id, { updated: true } as SyncData);
+			await tx.modify<Note>(DbStore.notes, id, { modified: new Date().toISOString() } as Note);
+			await tx.modify<SyncData>(DbStore.notes_sync, id, { updated: true } as SyncData);
 
 		});
 		return noteContent;
@@ -56,12 +63,12 @@ export class NoteContentLocalRepositoryImpl extends EntityLocalRepositoryImpl<No
 		if (count === 1) {
 
 			await this.db.transaction('readwrite', [
-				AppEntities.note.table,
-				AppEntities.note.table_sync
+				DbStore.notes,
+				DbStore.notes_sync
 			], async tx => {
 
-				await tx.modify<Note>(AppEntities.note.table, id, { modified: new Date().toISOString() } as Note);
-				await tx.modify<SyncData>(AppEntities.note.table_sync, id, { updated: true } as SyncData);
+				await tx.modify<Note>(DbStore.notes, id, { modified: new Date().toISOString() } as Note);
+				await tx.modify<SyncData>(DbStore.notes_sync, id, { updated: true } as SyncData);
 
 			});
 

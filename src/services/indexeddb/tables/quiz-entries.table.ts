@@ -1,4 +1,4 @@
-import { AppEntities, Progress, UUID } from '@constants';
+import { AppEntities, DbStore, Progress, UUID } from '@constants';
 import { IndexedDb } from '@libServices';
 import { QuizEntry } from '@models';
 import { QuizEntryLocalRepository } from '@repositories';
@@ -7,7 +7,14 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class QuizEntriesLocalRepositoryImpl extends EntityLocalRepositoryImpl<QuizEntry> implements QuizEntryLocalRepository {
 
 	constructor(db: IndexedDb) {
-		super(db, AppEntities.quizEntry);
+		super(
+			db,
+			DbStore.quiz_entries,
+			DbStore.quiz_entries_sync,
+			DbStore.quiz_entries_remote,
+			DbStore.quiz_entries_trash,
+			AppEntities.quizEntry.label
+		);
 	}
 
 	protected override newItemFromPartial(item: Partial<QuizEntry>): QuizEntry {
@@ -35,7 +42,7 @@ export class QuizEntriesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Qu
 
 	async putEntry(entry: QuizEntry): Promise<void> {
 
-		await this.db.put<QuizEntry>(this.appEntity.table, entry);
+		await this.db.put<QuizEntry>(this.table, entry);
 
 	}
 

@@ -22,10 +22,10 @@ export class AppEntity {
 
 	toString(): string { return this.plural }
 
-	get table()			: string { return this.plural; }
-	get table_sync()	: string { return this.plural + '_sync'; }
-	get table_remote()	: string { return this.plural + '_remote'; }
-	get table_trash()	: string { return this.plural + '_trash'; }
+	// get table()			: string { return this.plural; }
+	// get table_sync()	: string { return this.plural + '_sync'; }
+	// get table_remote()	: string { return this.plural + '_remote'; }
+	// get table_trash()	: string { return this.plural + '_trash'; }
 
 }
 

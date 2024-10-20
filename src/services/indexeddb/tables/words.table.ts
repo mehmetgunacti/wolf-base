@@ -1,4 +1,4 @@
-import { AppEntities, UUID } from '@constants';
+import { AppEntities, DbStore, UUID } from '@constants';
 import { IndexedDb } from '@libServices';
 import { Definition, Word } from '@models';
 import { WordLocalRepository } from '@repositories';
@@ -9,7 +9,14 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class WordsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Word> implements WordLocalRepository {
 
 	constructor(db: IndexedDb) {
-		super(db, AppEntities.word);
+		super(
+			db,
+			DbStore.words,
+			DbStore.words_sync,
+			DbStore.words_remote,
+			DbStore.words_trash,
+			AppEntities.word.label
+		);
 	}
 
 	protected override newItemFromPartial(item: Partial<Word>): Word {

@@ -1,17 +1,24 @@
+import { AppEntities, DbStore, LogCategory } from '@constants';
+import { IndexedDb } from '@libServices';
+import { SyncData } from '@models';
+import { toggleArrayItem } from '@utils';
 import { UUID } from 'lib/constants/common.constant';
 import { Note, NoteContent } from 'lib/models/note.model';
 import { NotesLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';
-import { IndexedDb } from '@libServices';
-import { AppEntities, DbStore, LogCategory } from '@constants';
-import { SyncData } from '@models';
-import { toggleArrayItem } from '@utils';
 
 export class NotesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Note> implements NotesLocalRepository {
 
 	constructor(db: IndexedDb) {
-		super(db, AppEntities.note);
+		super(
+			db,
+			DbStore.notes,
+			DbStore.notes_sync,
+			DbStore.notes_remote,
+			DbStore.notes_trash,
+			AppEntities.note.label
+		);
 	}
 
 	override async moveToTrash(id: UUID): Promise<void> {
@@ -27,14 +34,14 @@ export class NotesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Note> im
 		], async tx => {
 
 			// delete Note from notes table
-			const note = await tx.read<Note>(this.appEntity.table, id);
+			const note = await tx.read<Note>(this.table, id);
 			if (note) {
 
-				await tx.add(this.appEntity.table_trash, note);
-				await tx.delete(this.appEntity.table, id);
+				await tx.add(this.table_trash, note);
+				await tx.delete(this.table, id);
 
 			}
-			await tx.modify<SyncData>(this.appEntity.table_sync, id, { deleted: true } as SyncData);
+			await tx.modify<SyncData>(this.table_sync, id, { deleted: true } as SyncData);
 
 			// delete NoteContent from note_content table
 			const noteContent = await tx.read<NoteContent>(AppEntities.noteContent.table, id);
@@ -46,16 +53,16 @@ export class NotesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Note> im
 			}
 			await tx.modify(AppEntities.noteContent.table_sync, id, { deleted: true } as SyncData);
 
-			const children = (await tx.readAll<Note>(this.appEntity.table)).filter(e => e.parentId === id);
+			const children = (await tx.readAll<Note>(this.table)).filter(e => e.parentId === id);
 			for (const child of children) {
 
-				const note = await tx.read<Note>(this.appEntity.table, child.id);
+				const note = await tx.read<Note>(this.table, child.id);
 				if (note)
-					await tx.modify<Note>(this.appEntity.table, child.id, { parentId: null } as Note);
+					await tx.modify<Note>(this.table, child.id, { parentId: null } as Note);
 
-				const syncData = await tx.read<SyncData>(this.appEntity.table_sync, child.id);
+				const syncData = await tx.read<SyncData>(this.table_sync, child.id);
 				if (syncData)
-					await tx.modify<SyncData>(this.appEntity.table_sync, child.id, { updated: true } as SyncData);
+					await tx.modify<SyncData>(this.table_sync, child.id, { updated: true } as SyncData);
 
 			}
 
@@ -64,7 +71,7 @@ export class NotesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Note> im
 
 				category: LogCategory.entity_deleted,
 				date: new Date().toISOString(),
-				message: `${this.appEntity.label} moved to trash`,
+				message: `${this.label} moved to trash`,
 				entityId: id,
 				entityName: note?.name ?? '[n/a]'
 

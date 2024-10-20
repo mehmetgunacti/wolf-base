@@ -1,4 +1,4 @@
-import { AppEntities, ProjectStatus, UUID } from '@constants';
+import { AppEntities, DbStore, ProjectStatus, UUID } from '@constants';
 import { IndexedDb } from '@libServices';
 import { Project } from '@models';
 import { ProjectLocalRepository } from '@repositories';
@@ -8,7 +8,14 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class ProjectsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Project> implements ProjectLocalRepository {
 
 	constructor(db: IndexedDb) {
-		super(db, AppEntities.project);
+		super(
+			db,
+			DbStore.projects,
+			DbStore.projects_sync,
+			DbStore.projects_remote,
+			DbStore.projects_trash,
+			AppEntities.project.label
+		);
 	}
 
 	protected override newItemFromPartial(item: Partial<Project>): Project {

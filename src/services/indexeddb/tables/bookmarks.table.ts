@@ -11,7 +11,14 @@ import { EntityLocalRepositoryImpl } from './entity.table';
 export class BookmarksLocalRepositoryImpl extends EntityLocalRepositoryImpl<Bookmark> implements BookmarksLocalRepository {
 
 	constructor(db: IndexedDb) {
-		super(db, AppEntities.bookmark);
+		super(
+			db,
+			DbStore.bookmarks,
+			DbStore.bookmarks_sync,
+			DbStore.bookmarks_remote,
+			DbStore.bookmarks_trash,
+			AppEntities.bookmark.label
+		);
 	}
 
 	protected override newItemFromPartial(item: Partial<Bookmark>): Bookmark {
