@@ -17,9 +17,10 @@ function assertStores(stores: string[]): asserts stores is DbStore[] {
 
 }
 
-function onUpgradeNeeded(event: IDBVersionChangeEvent, conf: IndexedDbConfiguration): void {
+function onUpgradeNeeded(event: IDBVersionChangeEvent, conf: IndexedDbConfiguration, reject: (reason?: any) => void): void {
 
 	try {
+
 		console.info(`IndexedDb: Upgrading from v${event.oldVersion} to v${event.newVersion}`);
 		Object
 			.keys(conf.upgrades)
@@ -28,6 +29,7 @@ function onUpgradeNeeded(event: IDBVersionChangeEvent, conf: IndexedDbConfigurat
 			.flatMap(key => conf.upgrades[ key ])
 			.map(command => { console.info(command); return command; })
 			.forEach(command => command.execute(event));
+		console.info(`IndexedDb: Upgrade successful.`);
 
 	} catch (error) {
 
@@ -36,7 +38,7 @@ function onUpgradeNeeded(event: IDBVersionChangeEvent, conf: IndexedDbConfigurat
 		const request = event.target as IDBOpenDBRequest;
 		const ts = request.transaction as IDBTransaction;
 		ts.abort();
-		throw error;
+		reject(message);
 
 	}
 
@@ -351,32 +353,43 @@ export class TransactionManager {
 class IndexedDbImpl implements IndexedDb {
 
 	private idbDatabase: IDBDatabase | null = null;
+	private _init = new Promise<void>((resolve, reject) => {
 
-	constructor() {
-
-		if (this.idbDatabase)
+		if (this.idbDatabase) {
+			resolve();
 			return;
+		}
 
-		console.info(`IndexedDb: Initializing...`);
+		console.info(`Initializing IndexedDb...`);
 		let idbDatabase: IDBDatabase | null = null;
 		const conf: IndexedDbConfiguration = indexedDbConfiguration;
 		const request: IDBOpenDBRequest = indexedDB.open(conf.dbName, version(conf));
-		request.onerror = (event: Event) => { throw new Error(`IndexedDB: Error opening database: ${(event.target as IDBRequest).error}`); };
-		request.onblocked = () => { throw new Error('IndexedDB: Database blocked, please close other tabs with this site open.'); };
-		request.onupgradeneeded = (event: IDBVersionChangeEvent) => onUpgradeNeeded(event, conf);
+		request.onerror = (event: Event) => reject(`IndexedDB: Error opening database: ${(event.target as IDBRequest).error}`);
+		request.onblocked = () => reject('IndexedDB: Database blocked, please close other tabs with this site open.');
+		request.onupgradeneeded = (event: IDBVersionChangeEvent) => onUpgradeNeeded(event, conf, reject);
 		request.onsuccess = (event: Event) => {
 
 			idbDatabase = (event.target as IDBOpenDBRequest).result;
 			idbDatabase.onversionchange = () => {
 
-				console.error('IndexedDB: Other connection is trying to upgrade the database, closing this connection');
+				const message = 'IndexedDB: Other connection is trying to upgrade the database, closing this connection';
+				console.error(message);
 				idbDatabase?.close();
 				idbDatabase = null;
+				reject(message);
 
 			};
 			this.idbDatabase = idbDatabase;
+			resolve();
+			console.info(`...IndexedDb initialized.`);
 
 		};
+
+	});
+
+	init(): Promise<void> {
+
+		return this._init;
 
 	}
 
@@ -557,6 +570,7 @@ class IndexedDbImpl implements IndexedDb {
 	): Promise<T> {
 
 		assertStores(stores);
+		await this.init();
 		if (!this.idbDatabase)
 			throw new Error('Database not initialized');
 

@@ -9,7 +9,7 @@ export const indexedDbConfiguration: IndexedDbConfiguration = {
 	dbName: 'WolfBaseDB',
 	upgrades: {
 
-		20: [
+		200: [
 
 			// bookmarks: 'id',
 			new dbCommands.CreateStoreCommand(DbStore.bookmarks, { keyPath: ID, autoIncrement: false }),
