@@ -20,7 +20,7 @@ function assertStores(stores: string[]): asserts stores is DbStore[] {
 function onUpgradeNeeded(event: IDBVersionChangeEvent, conf: IndexedDbConfiguration): void {
 
 	try {
-
+		console.info(`IndexedDb: Upgrading from v${event.oldVersion} to v${event.newVersion}`);
 		Object
 			.keys(conf.upgrades)
 			.map(key => parseInt(key))
@@ -357,10 +357,11 @@ class IndexedDbImpl implements IndexedDb {
 		if (this.idbDatabase)
 			return;
 
+		console.info(`IndexedDb: Initializing...`);
 		let idbDatabase: IDBDatabase | null = null;
 		const conf: IndexedDbConfiguration = indexedDbConfiguration;
 		const request: IDBOpenDBRequest = indexedDB.open(conf.dbName, version(conf));
-		request.onerror = () => { throw new Error('IndexedDB: Error opening database'); };
+		request.onerror = (event: Event) => { throw new Error(`IndexedDB: Error opening database: ${(event.target as IDBRequest).error}`); };
 		request.onblocked = () => { throw new Error('IndexedDB: Database blocked, please close other tabs with this site open.'); };
 		request.onupgradeneeded = (event: IDBVersionChangeEvent) => onUpgradeNeeded(event, conf);
 		request.onsuccess = (event: Event) => {
@@ -575,8 +576,14 @@ export class LocalDatabase {
 
 	static getInstance(): IndexedDb {
 
-		if (LocalDatabase.instance === null)
-			LocalDatabase.instance = new IndexedDbImpl();
+		if (LocalDatabase.instance === null) {
+			try {
+				LocalDatabase.instance = new IndexedDbImpl();
+			} catch (error) {
+				console.error(error);
+				throw error;
+			}
+		}
 		return LocalDatabase.instance;
 
 	}

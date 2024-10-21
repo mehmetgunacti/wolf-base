@@ -6,7 +6,7 @@ const ID = 'id';
 
 export const indexedDbConfiguration: IndexedDbConfiguration = {
 
-	dbName: 'MyDatabase',
+	dbName: 'WolfBaseDB',
 	upgrades: {
 
 		20: [
