@@ -1,6 +1,6 @@
 const offset		= 0;
-const width_half	= 6; // --> _variables.scss : $nav-half-width
-const width_full	= 25; // --> _variables.scss : $nav-full-width
+const width_half	= 3.75; // --> _variables.scss : $nav-half-width
+const width_full	= 15; // --> _variables.scss : $nav-full-width
 
 const duration = '400ms';
 const unit = 'rem';

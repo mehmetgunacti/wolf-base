@@ -1,0 +1,11 @@
+@layer base {
+
+	:root {
+
+		--header-height		: 3.75rem;
+		--main-height		: calc(100dvh - var(--header-height));
+		--nav-full			: 15rem;
+
+	}
+
+}

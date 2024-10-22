@@ -53,6 +53,7 @@ export default {
 				info	: 'var(--col-info-text)',
 				warn	: 'var(--col-warn-text)',
 				error	: 'var(--col-error-text)',
+				ghost	: 'var(--col-ghost-text)',
 
 			},
 			backgroundColor: {
@@ -119,10 +120,11 @@ export default {
 
 				},
 
-				ghost	: {
+				ghost: {
 
-					hover	: 'var(--col-hover)',
-					active	: 'var(--col-active)'
+					DEFAULT	: 'var(--col-ghost)',
+					hover	: 'var(--col-ghost-hover)',
+					active	: 'var(--col-ghost-active)'
 
 				},
 
@@ -134,12 +136,45 @@ export default {
 				success	: 'var(--col-success-border)',
 				info	: 'var(--col-info-border)',
 				warn	: 'var(--col-warn-border)',
-				error	: 'var(--col-error-border)'
+				error	: 'var(--col-error-border)',
+				ghost	: 'var(--col-ghost-border)',
 
 			},
 
 			boxShadow: {
-				'3xl': '0 35px 60px -15px var(--col-shadow)',
+
+				'3xl'	: '0 35px 60px -15px var(--col-shadow)',
+
+			},
+
+			spacing: {
+
+				'header'	: 'var(--header-height)',
+				'nav-full'	: 'var(--nav-full)',
+
+			},
+
+			height: {
+
+				'100dvh'	: '100dvh',
+				'main'		: 'calc(100dvh - var(--header-height))'
+
+			},
+
+			zIndex: {
+
+				'splash-screen'		: '9000',
+				'ng-progress'		: '8000',
+				'overlay-container'	: '7000',
+				'overlay'			: '7000',
+				'overlay-backdrop'	: '7000',
+				'header'			: '6000',
+				'nav'				: '5000',
+				'nav-overlay'		: '4000',
+				'main'				: '3000',
+				'bookmark-overlay'	: '2000',
+				'croppie-close-btn'	: '1000',
+
 			}
 
 		},

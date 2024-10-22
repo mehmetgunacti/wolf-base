@@ -45,6 +45,12 @@
 		--col-error-active		: hsl(from var(--col-error) h s calc(l* 1.15));
 		--col-error-border		: hsl(from var(--col-error) h s calc(l* .9));
 
+		--col-ghost				: var(--col-transparent);
+		--col-ghost-text		: var(--col-text);
+		--col-ghost-hover		: hsl(from var(--col-white) h s calc(l* 1.1) / .1);
+		--col-ghost-active		: hsl(from var(--col-white) h s calc(l* 1.1) / .2);
+		--col-ghost-border		: var(--col-transparent);
+
 		--col-bg-header			: hsl(210, 11%, 7%);
 		--col-bg-nav			: hsl(210, 11%, 8%);
 		--col-bg-popup			: hsl(210, 11%, 9%);
@@ -62,9 +68,6 @@
 		--col-bg-component-dark			: hsl(210, 11%, 10%);
 		--col-bg-component-dark-hover	: hsl(from var(--col-bg-component-dark) h s calc(l* .8));
 		--col-bg-component-dark-active	: hsl(from var(--col-bg-component-dark) h s calc(l* .75));
-
-		--col-hover				: hsl(from var(--col-white) h s calc(l* 1.1) / .1);
-		--col-active			: hsl(from var(--col-white) h s calc(l* 1.1) / .2);
 
 		--col-bg-overlay			: hsl(from var(--col-black) h s l / .75);
 		--col-shadow				: var(--col-bg-header);
