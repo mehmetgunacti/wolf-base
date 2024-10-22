@@ -1,15 +1,20 @@
-import { CdkMenuTrigger } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, Renderer2, ViewChild, WritableSignal, inject, signal } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { hasModifierKey } from '@angular/cdk/keycodes';
+import { CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, ViewChild, WritableSignal, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UUID } from '@constants';
 import { HasParentId } from '@models';
 import { ROOT_ID } from './select.util';
-import { hasModifierKey } from '@angular/cdk/keycodes';
+import { OptionsComponent } from './options.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
 	selector: 'w-select-tree',
+	standalone: true,
+	imports: [ ReactiveFormsModule, CdkTreeModule, CdkMenuModule, OptionsComponent, CommonModule ],
 	templateUrl: './select-tree.component.html',
-	styleUrls: ['./select-tree.component.scss'],
+	styleUrls: [ './select-tree.component.scss' ],
 	host: { 'class': 'input-element' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -26,7 +31,7 @@ export class SelectTreeComponent {
 
 	popupWidth: WritableSignal<number> = signal(200);
 
-	@HostListener('window:resize', ['$event'])
+	@HostListener('window:resize', [ '$event' ])
 	onResize() {
 
 		this.trigger.close();

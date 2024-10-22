@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 
 @Component({
 	selector: 'w-selected-tags',
+	standalone: true,
 	templateUrl: './selected-tags.component.html',
 	styleUrls: ['./selected-tags.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush

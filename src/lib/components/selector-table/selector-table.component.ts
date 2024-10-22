@@ -10,6 +10,7 @@ function parseId(id: string): number[] {
 
 @Component({
 	selector: 'w-selector-table',
+	standalone: true,
 	templateUrl: 'selector-table.component.html',
 	styleUrl: 'selector-table.component.scss',
 	host: { 'class': 'gap-sm'},

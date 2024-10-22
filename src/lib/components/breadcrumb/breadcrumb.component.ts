@@ -3,6 +3,7 @@ import { MenuItem } from '@models';
 
 @Component({
 	selector: 'w-breadcrumb',
+	standalone: true,
 	templateUrl: './breadcrumb.component.html',
 	styleUrls: ['./breadcrumb.component.scss'],
 	host: { 'class': 'box dark' },

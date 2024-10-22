@@ -4,6 +4,7 @@ import { NameBase } from '@models';
 
 @Component({
 	selector: 'w-select',
+	standalone: true,
 	templateUrl: './select.component.html',
 	styleUrls: ['./select.component.scss'],
 	providers: [

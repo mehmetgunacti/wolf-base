@@ -1,7 +1,10 @@
 import { Pipe, PipeTransform, inject } from '@angular/core';
 import { MarkdownService } from './markdown.service';
 
-@Pipe({ name: 'markdownToHtml' })
+@Pipe({
+	name: 'markdownToHtml',
+	standalone: true
+})
 export class MarkdownToHtmlPipe implements PipeTransform {
 
 	private markdownService: MarkdownService = inject(MarkdownService);

@@ -1,10 +1,14 @@
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { SanitizeHtmlPipe } from '@pipes';
+import { MarkdownToHtmlPipe } from './markdown-to-html.pipe';
 
 @Component({
 	selector: 'w-markdown-viewer',
+	standalone: true,
+	imports: [ MarkdownToHtmlPipe, SanitizeHtmlPipe ],
 	templateUrl: './markdown-viewer.component.html',
-	styleUrls: ['./markdown-viewer.component.scss'],
+	styleUrls: [ './markdown-viewer.component.scss' ],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownViewerComponent implements AfterViewInit {

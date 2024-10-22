@@ -1,16 +1,23 @@
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { CdkMenuBar, CdkMenuTrigger } from '@angular/cdk/menu';
+import { CdkMenuBar, CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, input, signal } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { TimePastPipe } from '@pipes';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
 import { ClipboardService } from 'services';
+import { ModalComponent } from '../modal/modal.component';
+import { SelectorTableComponent } from '../selector-table/selector-table.component';
 import { ButtonActions, C_ASTERISK, C_DASH, C_INDENT, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_PLUS, C_TAB, C_TASK_COMPL, C_TASK_EMPTY, lineStartsWithOneOf } from './button-actions.util';
+import { MarkdownViewerComponent } from './markdown-viewer.component';
 import { LSEntry, RECOVERY_MANAGER, RecoveryManager, RecoveryManagerImpl } from './recovery-manager.util';
 import { EditorProperties, extractProps } from './textarea-properties.model';
 import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 
 @Component({
 	selector: 'w-markdown-editor',
+	standalone: true,
+	imports: [ SelectorTableComponent, MarkdownViewerComponent, TimePastPipe, CdkMenuModule, ModalComponent, ReactiveFormsModule, CommonModule ],
 	templateUrl: './markdown-editor.component.html',
 	styleUrls: [ './markdown-editor.component.scss' ],
 	providers: [

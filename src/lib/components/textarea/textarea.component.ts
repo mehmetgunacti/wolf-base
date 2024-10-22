@@ -3,6 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
 	selector: 'w-textarea',
+	standalone: true,
 	templateUrl: './textarea.component.html',
 	styleUrls: ['./textarea.component.scss'],
 	providers: [

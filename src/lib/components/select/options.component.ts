@@ -1,7 +1,9 @@
 import { ArrayDataSource } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { NestedTreeControl } from '@angular/cdk/tree';
+import { CdkMenuModule } from '@angular/cdk/menu';
+import { CdkTreeModule, NestedTreeControl } from '@angular/cdk/tree';
 import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Renderer2, inject } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HasParentId } from '@models';
 import { ROOT_ID, TreeItem, toTreeItems } from './select.util';
 
@@ -10,14 +12,16 @@ import { ROOT_ID, TreeItem, toTreeItems } from './select.util';
 const flattenTree = (item: TreeItem): TreeItem[] => {
 
 	const flattenedChildren = item.children.flatMap(flattenTree);
-	return [item, ...flattenedChildren];
+	return [ item, ...flattenedChildren ];
 
 };
 
 @Component({
 	selector: 'w-options',
+	standalone: true,
+	imports: [ ReactiveFormsModule, CdkTreeModule, CdkMenuModule ],
 	templateUrl: './options.component.html',
-	styleUrls: ['./options.component.scss'],
+	styleUrls: [ './options.component.scss' ],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OptionsComponent implements AfterViewInit {
@@ -36,7 +40,7 @@ export class OptionsComponent implements AfterViewInit {
 		let sorted = entities.sort((a, b) => a.name.localeCompare(b.name));
 
 		// add ROOT element
-		sorted = [this.ROOT, ...sorted];
+		sorted = [ this.ROOT, ...sorted ];
 
 		// convert to dictionary
 		const dictionary = toTreeItems(sorted);
@@ -127,7 +131,7 @@ export class OptionsComponent implements AfterViewInit {
 
 		} while (!this.isAllParentsExpanded(nextIdx));
 
-		return this.flattenedItems[nextIdx];
+		return this.flattenedItems[ nextIdx ];
 
 	}
 
@@ -145,22 +149,22 @@ export class OptionsComponent implements AfterViewInit {
 
 		} while (!this.isAllParentsExpanded(prevIdx));
 
-		return this.flattenedItems[prevIdx];
+		return this.flattenedItems[ prevIdx ];
 
 	}
 
 	private isAllParentsExpanded(idx: number): boolean {
 
-		const currItem = this.flattenedItems[idx];
+		const currItem = this.flattenedItems[ idx ];
 		const parent = currItem.parent;
 		if (parent === null)
 			return true;
 
 		const parentIdx = this.flattenedItems.findIndex(item => item.value.id === parent.value.id);
 		if (parentIdx === -1) // should never happen, but still
-			throw new Error(`Parent ID ${parent.value.id} ['${parent.value.name}'] of ID ${currItem.value.id} ['${currItem.value.name}'] could not be found`)
+			throw new Error(`Parent ID ${parent.value.id} ['${parent.value.name}'] of ID ${currItem.value.id} ['${currItem.value.name}'] could not be found`);
 
-		if (this.treeControl.isExpanded(this.flattenedItems[parentIdx]))
+		if (this.treeControl.isExpanded(this.flattenedItems[ parentIdx ]))
 			return this.isAllParentsExpanded(parentIdx);
 		return false;
 

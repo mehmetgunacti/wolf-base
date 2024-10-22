@@ -1,7 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { NgModule, Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'timePast' })
+@Pipe({
+	name: 'timePast',
+	standalone: true
+})
 export class TimePastPipe implements PipeTransform {
 
 	transform(utcString: string, useDatePipe: boolean = true, pastTime: 'precise' | 'short' = 'short'): string {
@@ -76,12 +79,3 @@ export class TimePastPipe implements PipeTransform {
 	}
 
 }
-
-@NgModule({
-
-	declarations: [TimePastPipe],
-	imports: [],
-	exports: [TimePastPipe]
-
-})
-export class TimePastModule { }

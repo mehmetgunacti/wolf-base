@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { Tag } from '@models';
 
@@ -42,7 +43,7 @@ function createUITags(selectedTags: string[], relatedTags: string[], tags: Tag[]
 	const fontSizeMap: Map<number, string> = new Map();
 
 	// Define an array of font sizes to use.
-	const fontSizeValues = ['0.8em', '1.4em', '1.7em', '2em', '2.3em'];
+	const fontSizeValues = [ '0.8em', '1.4em', '1.7em', '2em', '2.3em' ];
 
 	// Remove duplicate values and sort the array of counts in ascending order.
 	const uniqueArr = Array.from(new Set(arr));
@@ -55,8 +56,8 @@ function createUITags(selectedTags: string[], relatedTags: string[], tags: Tag[]
 	for (let i = 0; i < sortedArr.length; i++) {
 
 		const fontSizeIndex = Math.floor(i / bucketSize);
-		const count = sortedArr[i];
-		const fontSize = fontSizeMap.get(count) || fontSizeValues[fontSizeIndex];
+		const count = sortedArr[ i ];
+		const fontSize = fontSizeMap.get(count) || fontSizeValues[ fontSizeIndex ];
 		fontSizeMap.set(count, fontSize);
 
 	}
@@ -81,8 +82,10 @@ function createUITags(selectedTags: string[], relatedTags: string[], tags: Tag[]
 
 @Component({
 	selector: 'w-tag-cloud',
+	standalone: true,
+	imports: [ CommonModule ],
 	templateUrl: './tag-cloud.component.html',
-	styleUrls: ['./tag-cloud.component.scss'],
+	styleUrls: [ './tag-cloud.component.scss' ],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TagCloudComponent {
