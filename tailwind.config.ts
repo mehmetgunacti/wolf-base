@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import plugin from 'tailwindcss/plugin'
 
 export default {
 
@@ -15,6 +16,7 @@ export default {
 			focus		: 'var(--col-focus)',
 			outline		: 'var(--col-outline)',
 			disabled	: 'var(--col-disabled)',
+			content		: 'var(--col-text)',
 
 			formElement: {
 
@@ -39,11 +41,18 @@ export default {
 
 		extend: {
 
+			fontFamily: {
+
+				nunito	: 'var(--font-family-nunito)',
+				mono	: 'var(--font-family-mono)',
+
+			},
+
 			textColor: {
 
 				base: {
 
-					DEAFULT		: 'var(--col-text)',
+					DEFAULT		: 'var(--col-text)',
 					secondary	: 'var(--col-text-secondary)',
 					disabled	: 'var(--col-disabled-text)',
 
@@ -155,6 +164,12 @@ export default {
 
 			},
 
+			tabSize: {
+
+				'4': '4'
+
+			},
+
 			height: {
 
 				'100dvh'	: '100dvh',
@@ -182,6 +197,15 @@ export default {
 
 	},
 	plugins: [
+		plugin(function ({ addUtilities }) {
+
+			addUtilities({
+				'.tab-size-4': {
+					tabSize: '4'
+				},
+			})
+
+		}),
 		require('@tailwindcss/container-queries'),
 		require('@tailwindcss/typography')
 	],
