@@ -71,11 +71,6 @@
 
 		--col-bg-overlay			: hsl(from var(--col-black) h s l / .75);
 		--col-shadow				: var(--col-bg-header);
-		--shadow					: hsl(from var(--col-shadow) h s l / .5) 5px 6px 6px -2px, hsl(from var(--col-shadow) h s l / .5) 8px 8px 18px -2px;
-		--shadow-header				: hsl(from var(--col-black) h s l / .4) 1px 4px 4px, hsl(from var(--col-black) h s l / .3) 5px 4px 2px -2px, hsl(from var(--col-black) h s l / .2) 0 -1px 1px inset;
-		--shadow-nav				: hsl(from var(--col-black) h s l / .5) 5px -2px 6px -2px, hsl(from var(--col-black) h s l / .5) 8px -2px 18px -2px;
-		--shadow-invisible			: var(--col-transparent) 5px -2px 6px -2px, var(--col-transparent) 8px -2px 18px -2px;
-
 
 		--col-scrollbar-thumb		: hsl(from var(--col-bg-component-dark) h s l / .7);
 		--col-scrollbar-track		: var(--col-transparent);

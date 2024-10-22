@@ -8,22 +8,23 @@
 	<app-nav-overlay @opacity />
 
 }
-<header	class="top-0 right-0 left-0 z-header fixed flex bg-header h-header">
+<header	class="top-0 right-0 left-0 z-header fixed flex bg-header shadow-component h-header">
 
 	<app-header />
 
 </header>
-<nav	class="top-0 -left-nav-full z-nav fixed grid bg-nav pt-header h-100dvh"
-		[@sidebar]="sidebarState()">
+<nav
+	[@sidebar]="sidebarState()"
+	class="top-0 -left-nav-full z-nav fixed grid bg-nav shadow-component pt-header h-100dvh">
 
 	<app-nav />
 
 </nav>
-
-<main	class="block top-header right-0 left-nav-full z-main fixed bg-accent h-main overflow-y-auto"
-		cdkScrollable
-		[class.big-half]="sidebarBigHalf()"
-		[class.big-full]="sidebarBigFull()">
+<main
+	class="block top-header right-0 left-nav-full z-main fixed h-main overflow-y-auto"
+	cdkScrollable
+	[class.big-half]="sidebarBigHalf()"
+	[class.big-full]="sidebarBigFull()">
 
 	<router-outlet/>
 

@@ -143,7 +143,8 @@ export default {
 
 			boxShadow: {
 
-				'3xl'	: '0 35px 60px -15px var(--col-shadow)',
+				'3xl'		: '0 35px 60px -15px var(--col-shadow)',
+				'component'	: 'var(--shadow-component)',
 
 			},
 
