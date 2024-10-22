@@ -4,12 +4,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { UUID } from '@constants';
 import { filterArrayElements } from '@utils';
 import { v4 as uuidv4 } from 'uuid';
-import { GlyphComponent } from '../glyph/glyph.component';
+import { GlyphDirective } from '../glyph/glyph.directive';
 
 @Component({
 	selector: 'w-input-tag',
 	standalone: true,
-	imports: [CommonModule, GlyphComponent],
+	imports: [CommonModule, GlyphDirective],
 	templateUrl: './input-tag.component.html',
 	styleUrls: ['./input-tag.component.scss'],
 	providers: [

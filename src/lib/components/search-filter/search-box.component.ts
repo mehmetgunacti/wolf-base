@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, effect, input, output, untracked } 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter, Subscription } from 'rxjs';
-import { GlyphComponent } from '../glyph/glyph.component';
+import { GlyphDirective } from '../glyph/glyph.directive';
 import { InputComponent } from '../input/input.component';
 
 @Component({
 	selector: 'w-search-box',
 	standalone: true,
-	imports: [GlyphComponent, InputComponent, ReactiveFormsModule],
+	imports: [GlyphDirective, InputComponent, ReactiveFormsModule],
 	templateUrl: './search-box.component.html',
 	styleUrls: ['./search-box.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush

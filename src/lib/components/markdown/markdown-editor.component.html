@@ -8,7 +8,7 @@
 		title="Save Changes"
 		[disabled]="!control.dirty"
 		[cdkMenuItemDisabled]="!control.dirty">
-		<w-glyph name="save" />
+		<svg wGlyph="save"></svg>
 	</button>
 
 	<!-- CANCEL BUTTON -->
@@ -17,7 +17,7 @@
 		class="glyph squared"
 		title="Close Editor"
 		(click)="onCancel(control.dirty)">
-		<w-glyph name="cancel" />
+		<svg wGlyph="cancel"></svg>
 	</button>
 
 	<!-- DIVIDER -->
@@ -29,7 +29,7 @@
 		class="glyph squared"
 		title="Open Preview"
 		(click)="onPreviewOpen()">
-		<w-glyph name="live_tv" />
+		<svg wGlyph="live_tv"></svg>
 	</button>
 
 	<!-- RECOVER BUTTON -->
@@ -39,7 +39,7 @@
 		title="Recover"
 		[class.shake]="btnOpenRecovery()"
 		(click)="onRecoverOpen()">
-		<w-glyph name="recover" />
+		<svg wGlyph="recover"></svg>
 	</button>
 
 	<!-- DIVIDER -->
@@ -53,7 +53,7 @@
 		title="Undo"
 		[disabled]="!undoCache.canUndo()"
 		[cdkMenuItemDisabled]="!undoCache.canUndo()">
-		<w-glyph name="undo" />
+		<svg wGlyph="undo"></svg>
 	</button>
 
 	<!-- REDO BUTTON -->
@@ -64,7 +64,7 @@
 		title="Redo"
 		[disabled]="!undoCache.canRedo()"
 		[cdkMenuItemDisabled]="!undoCache.canRedo()">
-		<w-glyph name="redo" />
+		<svg wGlyph="redo"></svg>
 	</button>
 
 	<!-- DIVIDER -->
@@ -76,7 +76,7 @@
 		[cdkMenuTriggerFor]="format_heading"
 		title="Heading"
 		cdkMenuItem>
-		<w-glyph name="format_h1" />
+		<svg wGlyph="format_h1"></svg>
 	</button>
 
 	<!-- DIVIDER -->
@@ -88,7 +88,7 @@
 		(click)="updateEditor(actions.addBold(editor))"
 		title="Bold"
 		cdkMenuItem>
-		<w-glyph name="format_bold" />
+		<svg wGlyph="format_bold"></svg>
 	</button>
 
 	<!-- ITALIC BUTTON -->
@@ -97,7 +97,7 @@
 		(click)="updateEditor(actions.addItalic(editor))"
 		title="Italic"
 		cdkMenuItem>
-		<w-glyph name="format_italic" />
+		<svg wGlyph="format_italic"></svg>
 	</button>
 
 	<!-- STRIKETHROUGH BUTTON -->
@@ -106,7 +106,7 @@
 		(click)="updateEditor(actions.addStrikethrough(editor))"
 		title="Strikethrough"
 		cdkMenuItem>
-		<w-glyph name="format_strikethrough" />
+		<svg wGlyph="format_strikethrough"></svg>
 	</button>
 
 	<!-- HIGHLIGHT BUTTON -->
@@ -115,7 +115,7 @@
 		(click)="updateEditor(actions.addHighlight(editor))"
 		title="Highlight"
 		cdkMenuItem>
-		<w-glyph name="format_ink_highlighter" />
+		<svg wGlyph="format_ink_highlighter"></svg>
 	</button>
 
 	<!-- DIVIDER -->
@@ -127,7 +127,7 @@
 		(click)="updateEditor(actions.addAlignCenter(editor))"
 		title="Align Center"
 		cdkMenuItem>
-		<w-glyph name="format_align_center" />
+		<svg wGlyph="format_align_center"></svg>
 	</button>
 
 	<!-- ALIGN RIGHT BUTTON -->
@@ -136,7 +136,7 @@
 		(click)="updateEditor(actions.addAlignRight(editor))"
 		title="Align Right"
 		cdkMenuItem>
-		<w-glyph name="format_align_right" />
+		<svg wGlyph="format_align_right"></svg>
 	</button>
 
 	<!-- ALIGN JUSTIFY BUTTON -->
@@ -145,7 +145,7 @@
 		(click)="updateEditor(actions.addAlignJustify(editor))"
 		title="Align Justify"
 		cdkMenuItem>
-		<w-glyph name="format_align_justify" />
+		<svg wGlyph="format_align_justify"></svg>
 	</button>
 
 	<!-- DIVIDER -->
@@ -157,7 +157,7 @@
 		(click)="updateEditor(actions.addSub(editor))"
 		title="Subscript (H2O)"
 		cdkMenuItem>
-		<w-glyph name="subscript" />
+		<svg wGlyph="subscript"></svg>
 	</button>
 
 	<!-- SUP BUTTON -->
@@ -166,7 +166,7 @@
 		(click)="updateEditor(actions.addSup(editor))"
 		title="Superscript (E=mc2)"
 		cdkMenuItem>
-		<w-glyph name="superscript" />
+		<svg wGlyph="superscript"></svg>
 	</button>
 
 	<!-- DIVIDER -->
@@ -178,7 +178,7 @@
 		(click)="updateEditor(actions.addListBulleted(editor))"
 		title="Bulleted List"
 		cdkMenuItem>
-		<w-glyph name="format_list_bulleted" />
+		<svg wGlyph="format_list_bulleted"></svg>
 	</button>
 
 	<!-- LIST NUMBERED BUTTON -->
@@ -187,7 +187,7 @@
 		(click)="updateEditor(actions.addListNumbered(editor))"
 		title="Numbered List"
 		cdkMenuItem>
-		<w-glyph name="format_list_numbered" />
+		<svg wGlyph="format_list_numbered"></svg>
 	</button>
 
 	<!-- DIVIDER -->
@@ -199,7 +199,7 @@
 		(click)="updateEditor(actions.decreaseIndent(editor))"
 		title="Decrease Indent"
 		cdkMenuItem>
-		<w-glyph name="format_indent_decrease" />
+		<svg wGlyph="format_indent_decrease"></svg>
 	</button>
 
 	<!-- INCREASE INDENT BUTTON -->
@@ -208,7 +208,7 @@
 		(click)="updateEditor(actions.increaseIndent(editor))"
 		title="Increase Indent"
 		cdkMenuItem>
-		<w-glyph name="format_indent_increase" />
+		<svg wGlyph="format_indent_increase"></svg>
 	</button>
 
 	<!-- DIVIDER -->
@@ -220,7 +220,7 @@
 		(click)="updateEditor(actions.addEmptyTask(editor))"
 		title="Task"
 		cdkMenuItem>
-		<w-glyph name="check_box" />
+		<svg wGlyph="check_box"></svg>
 	</button>
 
 	<!-- ADD TABLE BUTTON -->
@@ -229,7 +229,7 @@
 		[cdkMenuTriggerFor]="table_menu"
 		title="Table"
 		cdkMenuItem>
-		<w-glyph name="table" />
+		<svg wGlyph="table"></svg>
 	</button>
 
 	<!-- CODE BUTTON -->
@@ -238,7 +238,7 @@
 		[cdkMenuTriggerFor]="code_menu"
 		title="Code"
 		cdkMenuItem>
-		<w-glyph name="code_blocks" />
+		<svg wGlyph="code_blocks"></svg>
 	</button>
 
 	<!-- ADD BLOCKQUOTE BUTTON -->
@@ -247,7 +247,7 @@
 		[cdkMenuTriggerFor]="blockquote_menu"
 		title="Blockquote"
 		cdkMenuItem>
-		<w-glyph name="format_quote" />
+		<svg wGlyph="format_quote"></svg>
 	</button>
 
 	<!-- DIVIDER -->
@@ -261,7 +261,7 @@
 		title="Image from Clipboard"
 		[class.shake]="btnImageShake()"
 		cdkMenuItem>
-		<w-glyph name="image" />
+		<svg wGlyph="image"></svg>
 	</button>
 
 	<!-- TOC BUTTON -->
@@ -270,7 +270,7 @@
 		(click)="updateEditor(actions.addToc(editor))"
 		title="Table of Contents"
 		cdkMenuItem>
-		<w-glyph name="toc" />
+		<svg wGlyph="toc"></svg>
 	</button>
 
 </div>
@@ -288,13 +288,13 @@
 		[rows]="rows()"
 		required></textarea>
 	<label>{{name}}</label>
-	<label class="up right">
+	<label class="right up">
 		<span class="icon-container">
-			<w-glyph name="description" />
+			<svg wGlyph="description"></svg>
 			<span>{{ undoCache.discSize() }}</span>
 		</span>
 		<span class="icon-container">
-			<w-glyph name="memory" />
+			<svg wGlyph="memory"></svg>
 			<span>{{ undoCache.memSize() }}</span>
 		</span>
 	</label>
@@ -313,7 +313,7 @@
 					<button
 						class="glyph"
 						(click)="onPreviewClose()">
-						<w-glyph name="close" />
+						<svg wGlyph="close"></svg>
 					</button>
 
 				</div>
@@ -344,7 +344,7 @@
 						[disabled]="!recoveryManager.hasPrev()"
 						[cdkMenuItemDisabled]="!recoveryManager.hasPrev()"
 						(click)="recoveryManager.previous()">
-						<w-glyph name="chevron_left" />
+						<svg wGlyph="chevron_left"></svg>
 					</button>
 					<button
 						cdkMenuItem
@@ -352,20 +352,20 @@
 						[disabled]="!recoveryManager.hasNext()"
 						[cdkMenuItemDisabled]="!recoveryManager.hasNext()"
 						(click)="recoveryManager.next()">
-						<w-glyph name="chevron_right" />
+						<svg wGlyph="chevron_right"></svg>
 					</button>
 					<button
 						cdkMenuItem
 						class="ghost"
 						(click)="onRecoverReplace()">
-						<w-glyph name="published_with_changes" />
+						<svg wGlyph="published_with_changes"></svg>
 						<span>Replace</span>
 					</button>
 					<button
 						cdkMenuItem
 						class="glyph"
 						(click)="onRecoverClose()">
-						<w-glyph name="close" />
+						<svg wGlyph="close"></svg>
 					</button>
 
 				</div>
@@ -510,8 +510,8 @@
 
 			<fieldset>
 				<!-- INLINE CODE BUTTON -->
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addInlineCode(editor))" cdkMenuItem data-after="Inline Code">
-					<w-glyph name="code" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addInlineCode(editor))" cdkMenuItem data-after="Inline Code">
+					<svg wGlyph="code"></svg>
 				</button>
 			</fieldset>
 
@@ -519,32 +519,32 @@
 			<fieldset>
 				<legend>Frequent</legend>
 
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor))" cdkMenuItem data-after="Empty Block">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor))" cdkMenuItem data-after="Empty Block">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'java'))" cdkMenuItem data-after="java">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'java'))" cdkMenuItem data-after="java">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'typescript'))" cdkMenuItem data-after="typescript">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'typescript'))" cdkMenuItem data-after="typescript">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'javascript'))" cdkMenuItem data-after="javascript">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'javascript'))" cdkMenuItem data-after="javascript">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'scss'))" cdkMenuItem data-after="scss">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'scss'))" cdkMenuItem data-after="scss">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'bash'))" cdkMenuItem data-after="bash">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'bash'))" cdkMenuItem data-after="bash">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'sql'))" cdkMenuItem data-after="sql">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'sql'))" cdkMenuItem data-after="sql">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'xml'))" cdkMenuItem data-after="xml">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'xml'))" cdkMenuItem data-after="xml">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'yaml'))" cdkMenuItem data-after="yaml">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'yaml'))" cdkMenuItem data-after="yaml">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
 
 			</fieldset>
@@ -552,50 +552,50 @@
 			<fieldset>
 				<legend>Other</legend>
 
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'asciidoc'))" cdkMenuItem data-after="asciidoc">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'asciidoc'))" cdkMenuItem data-after="asciidoc">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'autohotkey'))" cdkMenuItem data-after="autohotkey">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'autohotkey'))" cdkMenuItem data-after="autohotkey">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'c'))" cdkMenuItem data-after="c">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'c'))" cdkMenuItem data-after="c">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'cpp'))" cdkMenuItem data-after="cpp">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'cpp'))" cdkMenuItem data-after="cpp">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'css'))" cdkMenuItem data-after="css">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'css'))" cdkMenuItem data-after="css">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'dockerfile'))" cdkMenuItem data-after="dockerfile">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'dockerfile'))" cdkMenuItem data-after="dockerfile">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'gradle'))" cdkMenuItem data-after="gradle">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'gradle'))" cdkMenuItem data-after="gradle">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'http'))" cdkMenuItem data-after="http">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'http'))" cdkMenuItem data-after="http">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'ini'))" cdkMenuItem data-after="ini">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'ini'))" cdkMenuItem data-after="ini">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'json'))" cdkMenuItem data-after="json">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'json'))" cdkMenuItem data-after="json">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'kotlin'))" cdkMenuItem data-after="kotlin">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'kotlin'))" cdkMenuItem data-after="kotlin">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'markdown'))" cdkMenuItem data-after="markdown">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'markdown'))" cdkMenuItem data-after="markdown">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'powershell'))" cdkMenuItem data-after="powershell">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'powershell'))" cdkMenuItem data-after="powershell">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'properties'))" cdkMenuItem data-after="properties">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'properties'))" cdkMenuItem data-after="properties">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
-				<button class="ghost sm left w100" (click)="updateEditor(actions.addCodeBlock(editor, 'python'))" cdkMenuItem data-after="python">
-					<w-glyph name="chevron_right" />
+				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'python'))" cdkMenuItem data-after="python">
+					<svg wGlyph="chevron_right"></svg>
 				</button>
 
 			</fieldset>

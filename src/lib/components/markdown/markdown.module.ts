@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SanitizeHtmlModule, TimePastModule } from '@pipes';
-import { GlyphComponent } from '../glyph/glyph.component';
+import { GlyphDirective } from '../glyph/glyph.directive';
 import { ModalComponent } from '../modal/modal.component';
 import { OverlayContainerModule } from '../overlay-container';
 import { SelectorTableModule } from '../selector-table/selector-table.module';
@@ -29,7 +29,7 @@ import { MarkdownViewerComponent } from './markdown-viewer.component';
 		OverlayContainerModule,
 		TimePastModule,
 		ModalComponent,
-		GlyphComponent
+		GlyphDirective
 	],
 	exports: [
 		MarkdownEditorComponent,
