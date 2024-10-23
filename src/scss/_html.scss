@@ -5,7 +5,20 @@
 		font-size	: 1.2em;
 		width		: 1em;
   		height		: 1em;
-		stroke		: var(--col-text);
+		fill		: currentColor;
+
+	}
+
+	.nav-item-active {
+
+		@apply text-base #{!important};
+
+		& [svgWrapper],
+		&:hover [svgWrapper] {
+
+			@apply bg-accent #{!important};
+
+		}
 
 	}
 

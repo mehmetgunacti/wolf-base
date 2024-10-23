@@ -1,5 +1,5 @@
-import { computed, Directive, ElementRef, inject, input, OnInit, Signal } from '@angular/core';
-import { GlyphData, Glyphs } from '@constants';
+import { computed, Directive, ElementRef, inject, input, OnInit } from '@angular/core';
+import { Glyphs } from '@constants';
 
 @Directive({
 	standalone: true,
@@ -10,7 +10,7 @@ export class GlyphDirective implements OnInit {
 	private el = inject(ElementRef);
 
 	wGlyph = input.required<keyof typeof Glyphs>();
-	protected glyphData: Signal<GlyphData> = computed(() => Glyphs[ this.wGlyph() ] ?? Glyphs[ 'question_diamond' ]);
+	protected glyphData = computed(() => Glyphs[ this.wGlyph() ] ?? Glyphs[ 'question_diamond' ]);
 
 	ngOnInit() {
 		const data = this.glyphData();
@@ -18,12 +18,12 @@ export class GlyphDirective implements OnInit {
 		const svgEl = this.el.nativeElement as SVGElement;
 
 		// width
-// 		if (svgEl.getAttribute('width') === null)
-// 			svgEl.setAttribute('width', data.width);
-//
-// 		// height
-// 		if (svgEl.getAttribute('height') === null)
-// 			svgEl.setAttribute('height', data.height);
+		// 		if (svgEl.getAttribute('width') === null)
+		// 			svgEl.setAttribute('width', data.width);
+		//
+		// 		// height
+		// 		if (svgEl.getAttribute('height') === null)
+		// 			svgEl.setAttribute('height', data.height);
 
 		// viewBox
 		svgEl.setAttribute('viewBox', data.viewBox);

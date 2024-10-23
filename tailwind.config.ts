@@ -150,6 +150,18 @@ export default {
 
 			},
 
+			fill: {
+
+				base: {
+
+					DEFAULT		: 'var(--col-text)',
+					secondary	: 'var(--col-text-secondary)',
+					disabled	: 'var(--col-disabled-text)',
+
+				},
+
+			},
+
 			boxShadow: {
 
 				'3xl'		: '0 35px 60px -15px var(--col-shadow)',
@@ -161,6 +173,7 @@ export default {
 
 				'header'	: 'var(--header-height)',
 				'nav-full'	: 'var(--nav-full)',
+				'nav-half'	: 'var(--nav-half)',
 
 			},
 

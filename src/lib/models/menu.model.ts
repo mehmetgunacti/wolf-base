@@ -1,4 +1,5 @@
 import { IsActiveMatchOptions } from '@angular/router';
+import { GlyphName } from '@constants';
 
 export interface MenuItem {
 
@@ -6,7 +7,7 @@ export interface MenuItem {
 	queryParams?: Record<string, string>;
 	routerLinkActiveOptions?: { exact: boolean; } | IsActiveMatchOptions,
 	label: string;
-	icon?: string;
+	icon: GlyphName;
 	badge?: string;
 
 }

@@ -3,7 +3,7 @@
 	@if (cloudTasks(); as cloudTasks) {
 
 		<button
-			class="inline-flex place-content-center border-ghost bg-ghost hover:bg-ghost-hover ml-2 p-2 border rounded-lg focus:ring-4 focus:ring-outline font-bold text-center text-lg focus:outline-none"
+			class="inline-flex place-content-center border-ghost bg-ghost hover:bg-ghost-hover active:bg-ghost-active ml-2 p-2 border rounded-lg focus-visible:ring-4 focus-visible:ring-outline font-bold text-center text-lg focus-visible:outline-none"
 			(click)="toggleNav()">
 			<svg wGlyph="menu"></svg>
 			@if (cloudTasks.length > 0) {
