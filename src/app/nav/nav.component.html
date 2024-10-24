@@ -10,7 +10,11 @@
 		<span class="flex-1">{{ item.label }}</span>
 		@if (item.badge) {
 
-			<div><span>{{ item.badge }}</span></div>
+			<div>
+				<span class="inline-flex items-center gap-x-1 bg-accent px-1.5 py-1 rounded-md text-base text-xs">
+				{{ item.badge }}
+				</span>
+			</div>
 
 		}
 
