@@ -1,29 +1,66 @@
+<ng-template #anchorTemplate let-item="item">
+
+	<a	#link
+		class="relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline w-100 h-11 text-base-secondary hover:text-base focus-visible:outline-none overflow-hidden group"
+		[routerLink]="item.url"
+		[queryParams]="item.queryParams"
+		routerLinkActive="nav-item-active"
+		(isActiveChange)="onRouterLinkActive($event, link)"
+		[routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }"
+		[title]="item.title ?? ''">
+
+		<div class="inline-grid place-items-start content-center">
+			<div svgWrapper class="group-hover:bg-ghost-hover inline-block p-2.5 rounded-full">
+				<svg [wGlyph]="item.icon"></svg>
+			</div>
+		</div>
+		<div class="inline-flex top-0 right-0 bottom-0 left-header absolute flex-nowrap items-center min-w-[10rem]">
+
+			<span class="flex-1">{{ item.label }}</span>
+			@if (item.badge) {
+
+				<div><span>{{ item.badge }}</span></div>
+
+			}
+
+		</div>
+
+	</a>
+
+</ng-template>
+
 <div class="gap-2 grid p-2">
 
-	@for (item of menuItems$ | async; track $index) {
+	@for (item of menuItemsTop(); track $index) {
 
-		<a	#link
-			class="relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline w-100 h-11 text-base-secondary hover:text-base focus-visible:outline-none overflow-hidden group"
-			[routerLink]="item.url"
-			[queryParams]="item.queryParams"
-			routerLinkActive="nav-item-active"
-			(isActiveChange)="onRouterLinkActive($event, link)"
-			[routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }">
-
-			<div class="inline-grid place-items-start content-center">
-				<div svgWrapper class="group-hover:bg-ghost-hover inline-block p-2.5 rounded-full">
-					<svg [wGlyph]="item.icon"></svg>
-				</div>
-			</div>
-			<div class="inline-flex top-0 right-0 bottom-0 left-header absolute items-center">
-
-				<span label>{{ item.label }}</span>
-				<div badge><span>{{ item.badge }}</span></div>
-
-			</div>
-
-		</a>
+		<ng-container *ngTemplateOutlet="anchorTemplate; context: { item }" />
 
 	}
+
+</div>
+<div class="gap-2 grid mt-auto p-2">
+
+	@for (item of menuItemsBottom(); track $index) {
+
+		<ng-container *ngTemplateOutlet="anchorTemplate; context: { item }" />
+
+	}
+	<a	#link
+		class="relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline w-100 h-11 text-base-secondary hover:text-base cursor-pointer focus-visible:outline-none overflow-hidden group"
+		(click)="onSwitchTheme()"
+		tabindex="0">
+
+		<div class="inline-grid place-items-start content-center">
+			<div svgWrapper class="group-hover:bg-ghost-hover inline-block p-2.5 rounded-full">
+				<svg wGlyph="colors"></svg>
+			</div>
+		</div>
+		<div class="inline-flex top-0 right-0 bottom-0 left-header absolute flex-nowrap items-center min-w-[10rem]">
+
+			<span class="flex-1">Switch Theme</span>
+
+		</div>
+
+	</a>
 
 </div>

@@ -1,113 +1,84 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { coreActions } from '@actions';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TAG_PINNED, TAG_POPULAR } from '@constants';
-import { CloudTask, MenuItem } from '@models';
+import { Theme } from '@constants';
+import { MenuItem } from '@models';
 import { Store } from '@ngrx/store';
-import { selBookmarkMenuBadge, selCloudAvailableTasks } from '@selectors';
+import { selBookmarkMenuBadge, selCloudAvailableTasks, selCore_theme } from '@selectors';
+import { getNextTheme } from '@utils';
 import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
-import { map, Observable, of } from 'rxjs';
+import { take } from 'rxjs';
+import * as conf from './sidebar.conf';
 
 @Component({
 	selector: 'app-nav',
 	standalone: true,
-	imports: [ RouterLink, RouterLinkActive, GlyphDirective, AsyncPipe ],
+	imports: [ RouterLink, RouterLinkActive, GlyphDirective, AsyncPipe, NgTemplateOutlet ],
 	templateUrl: './nav.component.html',
-	styleUrl: './nav.component.scss'
+	styleUrl: './nav.component.scss',
+	host: {
+		'class': 'flex flex-col'
+	}
 })
 export class NavComponent {
 
 	private store: Store = inject(Store);
 
-	cloudTasks$: Observable<CloudTask[]> = this.store.select(selCloudAvailableTasks);
-	menuItems$: Observable<MenuItem[]>;
-	bottomMenuItems$: Observable<MenuItem[]>;
+	private bmBadge = this.store.selectSignal(selBookmarkMenuBadge);
+	private cloudTasks = this.store.selectSignal(selCloudAvailableTasks);
 
-	constructor() {
+	protected menuItemsTop = computed(() => {
 
-		this.menuItems$ = this.store.select(selBookmarkMenuBadge).pipe(
+		const items: MenuItem[] = [
 
-			map(([ total, filtered ]) => {
+			conf.miHome,
+			conf.miBookmark(this.bmBadge()),
+			conf.miNote,
+			conf.miProject,
+			conf.miWord,
+			conf.miAnswer
 
-				const items: MenuItem[] = [
-					{
-						url: [ '/' ],
-						label: 'Home',
-						icon: 'home',
-						routerLinkActiveOptions: { exact: true }
-					},
-					{
-						url: [ '/bookmarks' ],
-						queryParams: { tags: TAG_POPULAR },
-						label: 'Bookmarks',
-						icon: 'bookmarks',
-						badge: filtered === 0 ? `${total}` : filtered < total ? `${filtered} / ${total}` : `${total}`,
-						routerLinkActiveOptions: { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
-					},
-					{
-						url: [ '/notes' ],
-						queryParams: { tags: TAG_PINNED },
-						label: 'Notes',
-						icon: 'note_stack',
-						routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
-					},
-					{
-						url: [ '/projects' ],
-						label: 'Projects',
-						icon: 'task_alt',
-						routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
-					},
-					{
-						url: [ '/words' ],
-						label: 'Words',
-						icon: 'dictionary',
-						routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
-					},
-					{
-						url: [ '/learning' ],
-						label: 'Learning',
-						icon: 'school',
-						routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
-					},
+		];
+		return items;
 
-				];
-				return items;
+	});
+	protected menuItemsBottom = computed(() => {
 
-			})
+		const items: MenuItem[] = [
 
-		);
+			conf.miCloud(this.cloudTasks()),
+			conf.miSetting,
+			conf.miDatabase,
+			conf.miLog,
+			// conf.miTheme(this.onSwitchTheme)
 
-		this.bottomMenuItems$ = of([
+		];
+		return items;
 
-			{
-				url: [ '/settings' ],
-				queryParams: { tags: TAG_POPULAR },
-				label: 'Settings',
-				icon: 'settings',
-				routerLinkActiveOptions: { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
-			},
-			{
-				url: [ '/database' ],
-				queryParams: { tags: TAG_POPULAR },
-				label: 'Database',
-				icon: 'database',
-				routerLinkActiveOptions: { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
-			},
-			{
-				url: [ '/logs' ],
-				queryParams: { tags: TAG_POPULAR },
-				label: 'View Logs',
-				icon: 'history',
-				routerLinkActiveOptions: { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
-			},
+	});
 
-		]);
 
-	}
+
 
 	onRouterLinkActive(isActive: boolean, linkElement: HTMLAnchorElement) {
 
 		linkElement.setAttribute('tabindex', isActive ? '-1' : '0');
+
+	}
+
+	onSwitchTheme(): void {
+
+		console.log('on switch theme');
+
+
+		// todo move to effect
+		this.store.select(selCore_theme)
+			.pipe(
+				take(1)
+			).subscribe(
+				(theme: Theme) => this.store.dispatch(coreActions.setTheme({ theme: getNextTheme(theme) }))
+			);
 
 	}
 

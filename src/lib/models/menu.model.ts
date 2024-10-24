@@ -9,5 +9,7 @@ export interface MenuItem {
 	label: string;
 	icon: GlyphName;
 	badge?: string;
+	title?: string;
+	fn?: () => void;
 
 }
