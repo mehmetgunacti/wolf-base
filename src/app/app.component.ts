@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { opacityTrigger, sidebarTrigger } from '@animations';
 import { SidebarState } from '@constants';
 import { Store } from '@ngrx/store';
@@ -13,7 +13,8 @@ import { appImports } from './app.config';
 	imports: appImports,
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
-	animations: [ sidebarTrigger, opacityTrigger ]
+	animations: [ sidebarTrigger, opacityTrigger ],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
 

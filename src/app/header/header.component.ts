@@ -1,4 +1,4 @@
-import { Component, inject, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { CloudTask } from '@models';
 import { Store } from '@ngrx/store';
 import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
@@ -13,7 +13,8 @@ import { selCloudAvailableTasks } from 'store/selectors/cloud/cloud.selectors';
 	styleUrls: [ './header.component.scss' ],
 	host: {
 		'class': 'flex items-center justify-between'
-	}
+	},
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
 

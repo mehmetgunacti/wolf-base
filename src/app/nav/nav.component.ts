@@ -14,10 +14,10 @@ import * as conf from './sidebar.conf';
 	imports: [ RouterLink, RouterLinkActive, GlyphDirective, AsyncPipe, NgTemplateOutlet, NgClass ],
 	templateUrl: './nav.component.html',
 	styleUrl: './nav.component.scss',
-	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		'class': 'flex flex-col'
-	}
+	},
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavComponent {
 
