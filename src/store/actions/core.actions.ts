@@ -27,6 +27,7 @@ export const coreActions = createActionGroup({
 		setNextSidebarState			: emptyProps(),
 
 		setTheme					: props<{ theme: Theme }>(),
+		setNextTheme				: emptyProps(),
 		setNow						: emptyProps(),
 
 		showNotification			: props<ToastConfiguration>(),
