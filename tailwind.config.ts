@@ -1,6 +1,8 @@
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin'
 
+import defaultTheme from 'tailwindcss/defaultTheme';
+
 export default {
 
 	content: [ "./src/**/*.{html,ts,scss}" ],
@@ -167,13 +169,15 @@ export default {
 				'3xl'		: '0 35px 60px -15px var(--col-shadow)',
 				'component'	: 'var(--shadow-component)',
 
-			},
+			},// defaultTheme
 
 			spacing: {
 
-				'header'	: 'var(--header-height)',
-				'nav-full'	: 'var(--nav-full)',
-				'nav-half'	: 'var(--nav-half)',
+				'header'			: 'var(--header-height)',
+				'nav-full'			: 'var(--nav-full)',
+				'nav-half'			: 'var(--nav-half)',
+				'nav-content-left'	: `calc(var(--nav-half) - ${defaultTheme.spacing['2']})`,
+				'nav-content-width'	: `calc(var(--nav-full) - var(--nav-half) - ${defaultTheme.spacing['2']})`
 
 			},
 
@@ -199,6 +203,7 @@ export default {
 				'overlay-backdrop'	: '7000',
 				'header'			: '6000',
 				'nav'				: '5000',
+				'nav-content'		: '4500',
 				'nav-overlay'		: '4000',
 				'main'				: '3000',
 				'bookmark-overlay'	: '2000',
