@@ -6,6 +6,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	imports: [],
 	templateUrl: './words-page.component.html',
 	styleUrl: './words-page.component.scss',
+	host: {
+		'class': 'page'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WordsPageComponent {

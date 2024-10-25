@@ -6,6 +6,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	imports: [],
 	templateUrl: './logs-page.component.html',
 	styleUrl: './logs-page.component.scss',
+	host: {
+		'class': 'page'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogsPageComponent {

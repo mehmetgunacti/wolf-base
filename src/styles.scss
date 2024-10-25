@@ -2,21 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@layer components {
-
-// 	.comp {
-// 		@apply rounded-lg bg-primary shadow-xl;
-// 	}
-//
-// 	.comp-hover {
-// 		@apply transition-colors duration-700 hover:bg-gray-900 ease-in-out;
-// 	}
-//
-// 	.btn-tag {
-// 		@apply hover:bg-sky-600 flex min-h-5 rounded-full bg-sky-500 px-2 py-0 text-xs text-white transition-colors duration-300;
-// 	}
-
-}
-
 @import 'scss';

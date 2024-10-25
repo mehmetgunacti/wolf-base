@@ -6,6 +6,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	imports: [],
 	templateUrl: './cloud-page.component.html',
 	styleUrl: './cloud-page.component.scss',
+	host: {
+		'class': 'page'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CloudPageComponent {

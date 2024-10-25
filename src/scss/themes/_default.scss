@@ -12,6 +12,9 @@
 		--col-disabled			: hsl(216, 8%, 15%);
 
 		--col-accent			: hsl(215, 65%, 30%);
+		--col-accent-hover		: hsl(from var(--col-accent) h s calc(l* 1.15));
+		--col-accent-active		: hsl(from var(--col-accent) h s calc(l / .8));
+
 		--col-focus				: hsl(16, 80%, 44%);
 		--col-outline			: hsla(215, 77%, 48%, .5);
 

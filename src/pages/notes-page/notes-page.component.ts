@@ -6,6 +6,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	imports: [],
 	templateUrl: './notes-page.component.html',
 	styleUrl: './notes-page.component.scss',
+	host: {
+		'class': 'page'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotesPageComponent {

@@ -1,0 +1,29 @@
+<header class="flex justify-end items-end bg-component-dark p-2 rounded-lg min-h-11">
+
+	<w-glyph name="bookmarks" class="passive"/>
+
+	@for(tag of tags$ | async; track tag) {
+
+		<button
+			type="button"
+			class="sm tag"
+			[routerLink]="['/bookmarks']"
+			[queryParams]="{'tags': tag}">{{ tag }}</button>
+
+	}
+
+</header>
+<section content>
+
+	@for(bookmark of bookmarks$ | async; track bookmark) {
+
+		<app-bookmark
+			class="compact"
+			[bookmark]="bookmark"
+			(linkClick)="onClick($event)"
+			[editable]="false"
+			[popularButton]="false"></app-bookmark>
+
+	}
+
+</section>

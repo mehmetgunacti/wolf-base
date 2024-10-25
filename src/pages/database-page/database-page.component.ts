@@ -6,6 +6,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	imports: [],
 	templateUrl: './database-page.component.html',
 	styleUrl: './database-page.component.scss',
+	host: {
+		'class': 'page'
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatabasePageComponent {

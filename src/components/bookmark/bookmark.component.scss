@@ -1,0 +1,170 @@
+// @import 'variables';
+// @import 'helper';
+// @import 'components';
+//
+// :host {
+//
+// 	--bookmark-hover-transition		: opacity 400ms ease-in-out;
+// 	--bookmark-edit-button-opacity	: 0;
+// 	--bookmark-name-sup-opacity		: 0;
+// 	--font-size 					: 1.6rem;
+// 	--image-size					: 110px;
+//
+// 	&.compact {
+//
+// 		--font-size					: 1.4rem;
+// 		--image-size				: 55px;
+//
+// 	}
+//
+// 	// @include mx-box($param-shadow: true, $param-hover: true);
+// 	@include mx-d-flex;
+// 	position	: relative;
+// 	overflow	: hidden;
+// 	padding		: $component-padding-block $component-padding-inline;
+//
+// 	@include mx-transition(all);
+//
+// 	& > [bookmark-overlay] {
+//
+// 		position					: absolute;
+// 		width						: 100%;
+// 		height						: 100%;
+// 		top							: 0;
+// 		left						: 0;
+// 		background-color			: transparent;
+// 		pointer-events				: auto;
+// 		z-index						: $z-index-bookmark-overlay;
+//
+// 	}
+//
+// 	&:hover {
+//
+// 		--bookmark-edit-button-opacity : 1;
+//
+// 	}
+//
+// 	& > [bookmark-image] {
+//
+// 		@include mx-d-flex-ai-center;
+//
+// 		& > img {
+//
+// 			width	: var(--image-size);
+// 			height	: var(--image-size);
+//
+// 		}
+//
+// 	}
+//
+// 	& > [bookmark-right] {
+//
+// 		@include mx-d-flex-column;
+// 		padding	: 0.6rem;
+// 		flex	: 1;
+//
+// 		& > [bookmark-top] {
+// 			flex: 1;
+// 			@include mx-d-flex;
+//
+// 			& > a {
+//
+// 				@include mx-d-flex-col-jc-center;
+// 				text-decoration : none;
+//
+// 				& > [bookmark-name] {
+//
+// 					font-size		: var(--font-size);
+// 					font-weight		: bolder;
+// 					position		: relative;
+//
+// 					sup {
+// 						position		: absolute;
+// 						opacity			: var(--bookmark-name-sup-opacity);
+// 						transition		: var(--bookmark-hover-transition);
+// 						margin-left		: 0.3rem;
+// 						top				: -6px;
+// 						font-size		: 0.7em;
+// 					}
+//
+// 				}
+//
+// 				& > [bookmark-title] {
+//
+// 					color		: fn-hsl(text-secondary);
+// 					font-size	: 1.2rem;
+//
+// 				}
+//
+// 			}
+//
+// 			&:hover {
+//
+// 				--bookmark-name-sup-opacity : 1;
+//
+// 			}
+//
+// 		}
+//
+// 		& > [bookmark-bottom] {
+//
+// 			@include mx-d-flex-column;
+//
+// 			& > [bookmark-url] {
+//
+// 				word-break		: break-all;
+// 				font-size		: x-small;
+// 				color			: fn-hsl(text-secondary);
+//
+// 			}
+//
+// 			& > [bookmark-tags] {
+//
+// 				@include mx-d-flex;
+// 				flex-wrap		: wrap;
+// 				margin-top		: $gap-xxs;
+// 				padding			: $gap-xxs;
+// 				padding-left	: 0;
+// 				gap				: $gap-xxs;
+//
+// 			}
+//
+// 		}
+//
+// 	}
+//
+// 	#editButton {
+//
+// 		position				: absolute;
+// 		opacity					: var(--bookmark-edit-button-opacity);
+// 		transition				: var(--bookmark-hover-transition);
+// 		bottom					: $component-padding-block;
+// 		right					: $component-padding-inline;
+// 		border-radius			: var(--border-radius-sm);
+//
+// 	}
+//
+// 	#popularButton {
+//
+// 		position				: absolute;
+// 		opacity					: var(--bookmark-edit-button-opacity);
+// 		transition				: var(--bookmark-hover-transition);
+// 		top						: $component-padding-block;
+// 		right					: $component-padding-inline;
+// 		border-radius			: var(--border-radius-sm);
+//
+// 	}
+//
+// 	#editButton,
+// 	#popularButton {
+//
+// 		&:focus,
+// 		&:focus-visible {
+//
+// 			opacity				: 1;
+//
+// 		}
+//
+// 	}
+//
+// }

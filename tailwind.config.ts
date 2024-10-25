@@ -1,6 +1,4 @@
 import type { Config } from 'tailwindcss';
-import plugin from 'tailwindcss/plugin'
-
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
@@ -14,7 +12,13 @@ export default {
 			white		: 'var(--col-white)',
 			transparent	: 'var(--col-transparent)',
 
-			accent		: 'var(--col-accent)',
+			accent		: {
+
+				DEFAULT	: 'var(--col-accent)',
+				hover	: 'var(--col-accent-hover)',
+				active	: 'var(--col-accent-active)'
+
+			},
 			focus		: 'var(--col-focus)',
 			outline		: 'var(--col-outline)',
 			disabled	: 'var(--col-disabled)',
@@ -83,7 +87,7 @@ export default {
 
 				},
 
-				componentDark: {
+				'component-dark': {
 
 					DEFAULT	: 'var(--col-bg-component-dark)',
 					hover	: 'var(--col-bg-component-dark-hover)',
@@ -216,15 +220,6 @@ export default {
 
 	},
 	plugins: [
-		plugin(function ({ addUtilities }) {
-
-			addUtilities({
-				'.tab-size-4': {
-					tabSize: '4'
-				},
-			})
-
-		}),
 		require('@tailwindcss/container-queries'),
 		require('@tailwindcss/typography')
 	],
