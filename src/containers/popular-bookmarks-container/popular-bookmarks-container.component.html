@@ -1,8 +1,8 @@
-<header class="flex justify-end items-end bg-component-dark p-2 rounded-lg min-h-11">
+<header class="flex items-center shadow-component comp-dark p-3 rounded-lg min-h-14">
 
-	<w-glyph name="bookmarks" class="passive"/>
+	<svg wGlyph="bookmarks"></svg>
 
-	@for(tag of tags$ | async; track tag) {
+	@for(tag of tags(); track tag) {
 
 		<button
 			type="button"
@@ -13,16 +13,16 @@
 	}
 
 </header>
-<section content>
+<section class="gap-2 grid @2xl:grid-cols-2">
 
-	@for(bookmark of bookmarks$ | async; track bookmark) {
+	@for(bookmark of bookmarks(); track bookmark) {
 
-		<app-bookmark
+		<app-compact-bookmark
 			class="compact"
 			[bookmark]="bookmark"
 			(linkClick)="onClick($event)"
 			[editable]="false"
-			[popularButton]="false"></app-bookmark>
+			[popularButton]="false"></app-compact-bookmark>
 
 	}
 

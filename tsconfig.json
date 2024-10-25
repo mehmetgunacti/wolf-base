@@ -25,13 +25,16 @@
 			"dom"
 		],
 		"paths": {
+			"@components": [
+				"components"
+			],
 			"@animations": [
 				"lib/animations"
 			],
 			"@constants": [
 				"lib/constants"
 			],
-			"@components": [
+			"@libComponents": [
 				"lib/components"
 			],
 			"@directive": [

@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { ToastConfiguration } from '@components';
+import { ToastConfiguration } from '@libComponents';
 import { AppEntityType, Theme } from '@constants';
 import { Click, Configuration, Entity, RemoteMetadata, SyncData } from '@models';
 

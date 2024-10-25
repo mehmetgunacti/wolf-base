@@ -1,6 +1,6 @@
-import { createSelector } from '@ngrx/store';
-import { AppEntityType, UUID } from '@constants';
+import { AppEntityType, TAG_POPULAR, UUID } from '@constants';
 import { Bookmark, Click, ClickedBookmark, NamedClick, SyncTaskType, toCloudTask } from '@models';
+import { createSelector } from '@ngrx/store';
 import { selBookmark_EntityList, selBookmark_EntityState } from '../entity/entity-bookmark.selectors';
 import { selBookmark_ClicksState } from './bookmark.selectors';
 
@@ -77,6 +77,19 @@ export const selBoomkark_clickedCloudTasks = createSelector(
 		if (items.length > 0)
 			return toCloudTask(items, AppEntityType.bookmark, SyncTaskType.clicked);
 		return null;
+
+	}
+
+);
+
+export const selBookmark_popular = createSelector(
+
+	selBookmark_array,
+	bookmarks => {
+
+		return bookmarks
+			.filter(b => b.tags.includes(TAG_POPULAR))
+			.sort((b1, b2) => b2.clicks - b1.clicks);
 
 	}
 

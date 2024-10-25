@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ToastConfiguration, ToastService } from '@components';
+import { ToastConfiguration, ToastService } from '@libComponents';
 import { tap } from 'rxjs/operators';
 import { coreActions } from '@actions';
 

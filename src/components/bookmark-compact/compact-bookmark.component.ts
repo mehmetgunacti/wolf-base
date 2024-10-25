@@ -5,17 +5,17 @@ import { UUID } from 'lib/constants';
 import { ClickedBookmark } from 'lib/models';
 
 @Component({
-	selector: 'app-bookmark',
+	selector: 'app-compact-bookmark',
 	standalone: true,
 	imports: [RouterModule, GlyphComponent],
-	templateUrl: './bookmark.component.html',
-	styleUrls: ['./bookmark.component.scss'],
+	templateUrl: './compact-bookmark.component.html',
+	styleUrls: ['./compact-bookmark.component.scss'],
 	host: {
 		'class': 'comp comp-hover rounded-lg'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookmarkComponent {
+export class CompactBookmarkComponent {
 
 	bookmark = input.required<ClickedBookmark>();
 	showDetails = input(false);

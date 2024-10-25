@@ -21,9 +21,8 @@
 //
 // 	& > [content] {
 //
-// 		@include mx-d-grid;
+// 		display: grid;
 // 		grid-template-columns	: 1fr;
-// 		gap						: $page-padding;
 //
 // 		@include mx-md() {
 //

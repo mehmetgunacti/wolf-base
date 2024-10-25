@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { ToastConfiguration } from '@components';
+import { ToastConfiguration } from '@libComponents';
 import { LogCategory } from '@constants';
 import { LogMessage } from '@models';
 import { LocalRepositoryService } from '@libServices';

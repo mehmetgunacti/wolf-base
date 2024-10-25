@@ -2,7 +2,7 @@
 
 	.page {
 
-		@apply p-2 flex flex-col h-full;
+		@apply p-1 md:p-2 flex flex-col h-full gap-1 md:gap-2;
 
 	}
 
@@ -12,9 +12,23 @@
 
 	}
 
+	.comp-dark {
+
+		@apply comp;
+		@apply bg-component-dark;
+
+	}
+
 	.comp-hover {
 
 		@apply transition-colors duration-700 hover:bg-component-hover ease-in-out;
+
+	}
+
+	.comp-dark-hover {
+
+		@apply comp-hover;
+		@apply hover:bg-component-dark-hover;
 
 	}
 

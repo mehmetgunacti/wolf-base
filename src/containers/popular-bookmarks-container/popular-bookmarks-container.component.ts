@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TAG_POPULAR, UUID } from '@constants';
-import { ClickedBookmark } from '@models';
+import { CompactBookmarkComponent } from '@components';
+import { UUID } from '@constants';
 import { Store } from '@ngrx/store';
-import { BookmarkComponent } from 'components/bookmark/bookmark.component';
 import { GlyphComponent } from 'lib/components/glyph/glyph.component';
-import { Observable, map } from 'rxjs';
+import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
 import { bookmarkActions } from 'store/actions';
 import * as bmSelectors from 'store/selectors/bookmark/bookmark-clicks.selectors';
 import * as coreSelectors from 'store/selectors/core/core-configuration.selectors';
@@ -14,47 +13,19 @@ import * as coreSelectors from 'store/selectors/core/core-configuration.selector
 @Component({
 	selector: 'app-popular-bookmarks-container',
 	standalone: true,
-	imports: [ CommonModule, RouterModule, GlyphComponent, BookmarkComponent ],
+	imports: [ CommonModule, RouterModule, GlyphComponent, CompactBookmarkComponent, GlyphDirective ],
 	templateUrl: './popular-bookmarks-container.component.html',
 	styleUrls: [ './popular-bookmarks-container.component.scss' ],
 	host: {
-		'class': 'flex flex-col'
+		'class': 'flex flex-col gap-1 md:gap-2 @container'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PopularBookmarksContainerComponent implements OnInit {
-
-	bookmarks$: Observable<ClickedBookmark[]>;
-	tags$: Observable<string[]>;
+export class PopularBookmarksContainerComponent {
 
 	private store: Store = inject(Store);
-
-	constructor() {
-
-		this.bookmarks$ = this.store.select(bmSelectors.selBookmark_array).pipe(
-			map(bookmarks => bookmarks.filter(b => b.tags.includes(TAG_POPULAR))),
-			map(bookmarks => bookmarks.sort((b1, b2) => b2.clicks - b1.clicks))
-		);
-		this.tags$ = this.store.select(coreSelectors.selCore_popularBookmarks);
-
-	}
-
-	ngOnInit(): void {
-
-
-
-	}
-
-	onRefresh(): void {
-
-		// this.store.dispatch(
-		// 	actions.loadEntities({
-		// 		entity: Entities.bookmarks,
-		// 		skipCache: true
-		// 	})
-		// );
-
-	}
+	tags = this.store.selectSignal(coreSelectors.selCore_popularBookmarks);
+	bookmarks = this.store.selectSignal(bmSelectors.selBookmark_popular);
 
 	onClick(id: UUID): void {
 
