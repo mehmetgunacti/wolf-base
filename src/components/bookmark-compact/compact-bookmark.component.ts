@@ -1,17 +1,16 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { GlyphComponent } from 'lib/components/glyph/glyph.component';
+import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
 import { UUID } from 'lib/constants';
 import { ClickedBookmark } from 'lib/models';
 
 @Component({
 	selector: 'app-compact-bookmark',
 	standalone: true,
-	imports: [RouterModule, GlyphComponent],
+	imports: [ GlyphDirective ],
 	templateUrl: './compact-bookmark.component.html',
-	styleUrls: ['./compact-bookmark.component.scss'],
+	styleUrls: [ './compact-bookmark.component.scss' ],
 	host: {
-		'class': 'comp comp-hover rounded-lg'
+		'class': 'comp comp-hover rounded-lg shadow-component',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
