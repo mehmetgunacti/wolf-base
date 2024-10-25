@@ -38,4 +38,12 @@
 
 	}
 
+	.scrollbar {
+
+		scrollbar-width		: thin;
+		scrollbar-color		: var(--col-scrollbar-thumb) var(--col-scrollbar-track);
+		scrollbar-gutter	: stable;
+
+	}
+
 }
