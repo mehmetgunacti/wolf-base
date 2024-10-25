@@ -176,7 +176,7 @@ export default {
 				'header'			: 'var(--header-height)',
 				'nav-full'			: 'var(--nav-full)',
 				'nav-half'			: 'var(--nav-half)',
-				'nav-content-left'	: `calc(var(--nav-half) - ${defaultTheme.spacing['2']})`,
+				'nav-glyph-width'	: `calc(var(--nav-half) - 2 * ${defaultTheme.spacing['2']})`,
 				'nav-content-width'	: `calc(var(--nav-full) - var(--nav-half) - ${defaultTheme.spacing['2']})`
 
 			},
@@ -202,8 +202,9 @@ export default {
 				'overlay'			: '7000',
 				'overlay-backdrop'	: '7000',
 				'header'			: '6000',
+				'nav-left'			: '5200',
+				'nav-content'		: '5100',
 				'nav'				: '5000',
-				'nav-content'		: '4500',
 				'nav-overlay'		: '4000',
 				'main'				: '3000',
 				'bookmark-overlay'	: '2000',
