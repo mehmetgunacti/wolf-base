@@ -183,7 +183,6 @@ export class TransactionManager {
 		return new Promise((resolve, reject) => {
 
 			const records: Record<string, any> = {};
-
 			const request = store.openCursor();
 			request.onsuccess = (event: Event) => {
 
@@ -193,8 +192,8 @@ export class TransactionManager {
 					records[ cursor.key as string ] = cursor.value ?? null;
 					cursor.continue();
 
-				}
-				return resolve(records);
+				} else
+					return resolve(records);
 
 			};
 			request.onerror = () => reject(request.error);
