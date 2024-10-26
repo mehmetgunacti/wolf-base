@@ -1,12 +1,12 @@
-<header class="flex items-center shadow-component comp-dark p-3 rounded-lg min-h-14">
+<header class="flex justify-end items-center gap-1 shadow-component comp-dark p-3 rounded-lg min-h-14">
 
-	<svg wGlyph="bookmarks"></svg>
+	<svg wGlyph="bookmarks" class="mr-auto"></svg>
 
 	@for(tag of tags(); track tag) {
 
 		<button
 			type="button"
-			class="sm tag"
+			class="text-sm tag"
 			[routerLink]="['/bookmarks']"
 			[queryParams]="{'tags': tag}">{{ tag }}</button>
 
