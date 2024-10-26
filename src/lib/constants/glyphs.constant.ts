@@ -61,6 +61,7 @@ export type GlyphName = 'add'
 	| 'home'
 	| 'image'
 	| 'info'
+	| 'quote'
 	| 'pin'
 	| 'pin_fill'
 	| 'question_diamond'
@@ -723,6 +724,16 @@ export const Glyphs: Record<GlyphName, GlyphData> = {
 		width: '24',
 		height: '24',
 		viewBox: '0 -960 960 960'
+
+	},
+	quote: {
+
+		width: '16',
+		height: '16px',
+		viewBox: '0 0 24 24',
+		d: [ 'm2 0a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a3 3 0 0 1-3 3h-1a1 1 0 1 0 0 2h1a5 5 0 0 0 5-5v-5a2 2 0 0 0-2-2zm9 0a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a3 3 0 0 1-3 3h-1a1 1 0 1 0 0 2h1a5 5 0 0 0 5-5v-5a2 2 0 0 0-2-2z' ]
+
+
 
 	},
 	redo: {

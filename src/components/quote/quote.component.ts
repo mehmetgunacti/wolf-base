@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Quote } from '@models';
 import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
 
 @Component({
@@ -10,6 +11,6 @@ import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
 })
 export class QuoteComponent {
 
-
+	quote = input.required<Quote>();
 
 }

@@ -1,7 +1,7 @@
-<div class="flex justify-end items-center gap-1 shadow-component comp-dark p-3 rounded-lg min-h-14">
+<svg wGlyph="quote" class="opacity-80 mt-2 ml-2 text-7xl fill-accent"></svg>
 
-	<svg wGlyph="bookmarks" class="mr-auto"></svg>
+@if ((wrapper$ | async); as wrapper) {
 
-	<app-quote/>
+	<app-quote [quote]="wrapper.value"/>
 
-</div>
+}
