@@ -1,8 +1,8 @@
 @let bm = bookmark();
 
-<a class="grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full group focus-visible:outline-none" [href]="bm.urls[0]">
+<a class="relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full group focus-visible:outline-none" [href]="bm.urls[0]">
 
-	<div class="relative flex gap-1 p-4 group/bookmark">
+	<div class="flex gap-1 p-4 group/bookmark">
 
 		<!-- LEFT SIDE (IMAGE) -->
 		<div class="inline-flex justify-center items-center">
@@ -14,16 +14,12 @@
 		<!-- RIGHT SIDE -->
 		<div class="flex flex-col flex-1 justify-center p-2">
 
-			<p class="relative">
-				{{ bm.title }}
-				<sup class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-					<svg wGlyph="open_in_new" class="text-xs"></svg>
-				</sup>
-			</p>
-			<div class="block text-base-secondary text-sm">{{bm.name}}</div>
+			<p>{{ bm.title }}</p>
+			<p class="block text-base-secondary text-sm">{{bm.name}}</p>
 
 		</div>
 
 	</div>
+	<svg wGlyph="open_in_new" class="top-2 right-2 absolute opacity-0 group-hover:opacity-100 text-sm transition-opacity duration-700"></svg>
 
 </a>
