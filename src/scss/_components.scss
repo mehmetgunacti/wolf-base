@@ -2,7 +2,7 @@
 
 	.page {
 
-		@apply p-1 md:p-2 flex flex-col h-full gap-1 md:gap-2;
+		@apply p-1 md:p-2 flex flex-col gap-1 md:gap-2;
 
 	}
 
@@ -32,7 +32,7 @@
 
 	}
 
-	.btn-tag {
+	.tag {
 
 		@apply flex min-h-5 rounded-full bg-accent px-2 py-0 text-xs text-white transition-colors duration-300 hover:bg-accent-hover active:bg-accent-active;
 
