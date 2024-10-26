@@ -1,7 +1,7 @@
-<svg wGlyph="quote" class="opacity-80 mt-2 ml-2 text-7xl fill-accent"></svg>
+<svg wGlyph="quote" class="opacity-80 mt-1 ml-1 md:mt-2 md:ml-2 text-5xl fill-accent"></svg>
 
 @if ((wrapper$ | async); as wrapper) {
 
-	<app-quote [quote]="wrapper.value"/>
+	<app-quote [quote]="wrapper.value" class=""/>
 
 }

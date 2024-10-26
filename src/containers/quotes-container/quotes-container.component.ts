@@ -37,13 +37,19 @@ const incoming$ = (pair: Pair, animate: boolean, store: Store): Observable<Quote
 	imports: [ QuoteComponent, GlyphDirective, AsyncPipe ],
 	templateUrl: './quotes-container.component.html',
 	host: {
-		'class': 'flex flex-col gap-1 md:gap-2 @container min-h-40 shadow-component comp-dark p-2 rounded-lg gap-1 relative text-content'
+		'class': 'relative flex flex-col gap-1 md:gap-2 shadow-component comp-dark p-2 rounded-lg min-h-40 text-content @container'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuoteContainerComponent {
 
 	private store: Store = inject(Store);
+
+	constructor() {
+
+		this.store.dispatch(quoteActions.setRunning({running: true}));
+
+	}
 
 	animate: Signal<boolean> = this.store.selectSignal(selQuoteViewer_animate);
 	running: Signal<boolean> = this.store.selectSignal(selQuoteViewer_running);

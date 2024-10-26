@@ -27,17 +27,17 @@ export class QuoteViewerEffects {
 
 	);
 
-	setRunning$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(coreActions.loadAllSuccess),
-			map(({ configuration }) => configuration.quotesRunning),
-			map(running => quoteActions.setRunning({ running }))
-
-		)
-
-	);
+// 	setRunning$ = createEffect(
+//
+// 		() => this.actions$.pipe(
+//
+// 			ofType(coreActions.loadAllSuccess),
+// 			map(({ configuration }) => configuration.quotesRunning),
+// 			map(running => quoteActions.setRunning({ running }))
+//
+// 		)
+//
+// 	);
 
 	changeQuote$ = createEffect(
 
