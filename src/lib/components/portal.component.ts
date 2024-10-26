@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EmbeddedViewRef, Input, OnDestroy, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EmbeddedViewRef, inject, input, OnDestroy, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
 	selector: 'w-portal',
@@ -8,28 +8,30 @@ import { AfterViewInit, Component, EmbeddedViewRef, Input, OnDestroy, TemplateRe
 			<ng-content/>
 		</ng-template>
 	`,
-	styles: [':host { position: absolute; }']
+	host: {
+		'class': 'contents'
+	},
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PortalComponent implements AfterViewInit, OnDestroy {
 
-	@ViewChild('pageActions') portalActionsTmplRef!: TemplateRef<{}>;
+	portalActionsTmplRef = viewChild.required<TemplateRef<{}>>('pageActions');
 	private disposeFn!: () => void;
 	private viewRef!: EmbeddedViewRef<{}>;
+	private viewContainerRef = inject(ViewContainerRef);
 
-	@Input() outletName: 'portal-outlet' = 'portal-outlet'; // | 'portal-outlet-right';
-
-	constructor(private viewContainerRef: ViewContainerRef) { }
+	outletName = input('portal-outlet');  // | 'portal-outlet-right';
 
 	ngAfterViewInit(): void {
 
 		// render the view
 		this.viewRef = this.viewContainerRef.createEmbeddedView(
-			this.portalActionsTmplRef
+			this.portalActionsTmplRef()
 		);
 		this.viewRef.detectChanges();
 
 		// grab the DOM element
-		const outletElement = document.querySelector('#' + this.outletName); // #portal-outlet'
+		const outletElement = document.querySelector('#' + this.outletName()); // #portal-outlet'
 
 		// attach the view to the DOM element that matches our selector
 		this.viewRef.rootNodes.forEach(rootNode =>
