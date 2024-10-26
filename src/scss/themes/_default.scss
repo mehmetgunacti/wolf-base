@@ -66,8 +66,8 @@
 		--col-form-element-border	: hsl(from var(--col-form-element-bg) h s calc(l* .9));
 
 		--col-bg-component				: hsl(210, 11%, 13%);
-		--col-bg-component-hover		: hsl(from var(--col-bg-component) h s calc(l* .8));
-		--col-bg-component-active		: hsl(from var(--col-bg-component) h s calc(l* .75));
+		--col-bg-component-hover		: hsl(from var(--col-bg-component) h s calc(l* .85));
+		--col-bg-component-active		: hsl(from var(--col-bg-component) h s calc(l* .8));
 		--col-bg-component-dark			: hsl(210, 11%, 10%);
 		--col-bg-component-dark-hover	: hsl(from var(--col-bg-component-dark) h s calc(l* .8));
 		--col-bg-component-dark-active	: hsl(from var(--col-bg-component-dark) h s calc(l* .75));

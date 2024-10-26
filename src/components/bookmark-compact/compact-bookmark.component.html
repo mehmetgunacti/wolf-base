@@ -2,20 +2,20 @@
 
 <a class="relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full group focus-visible:outline-none" [href]="bm.urls[0]">
 
-	<div class="flex gap-1 p-4 group/bookmark">
+	<div class="flex gap-2 p-3 group/bookmark">
 
 		<!-- LEFT SIDE (IMAGE) -->
 		<div class="inline-flex justify-center items-center">
 			<img
 				src="{{ bm.image || 'placeholder.svg' }}"
-				class="shadow-md rounded-full size-14"
+				class="rounded-full size-14"
 				title="{{ bm.id }} : {{ bm.title + '\r\n' + bm.urls + '\r\n' }} #{{ bm.clicks }}">
 		</div>
 		<!-- RIGHT SIDE -->
-		<div class="flex flex-col flex-1 justify-center p-2">
+		<div class="flex flex-col flex-1 justify-center">
 
-			<p>{{ bm.title }}</p>
-			<p class="block text-base-secondary text-sm">{{bm.name}}</p>
+			<p class="text-sm">{{ bm.title }}</p>
+			<p class="text-base-secondary text-xs">{{bm.name}}</p>
 
 		</div>
 

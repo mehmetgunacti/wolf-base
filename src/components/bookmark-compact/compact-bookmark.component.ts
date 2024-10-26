@@ -9,9 +9,6 @@ import { ClickedBookmark } from 'lib/models';
 	imports: [ GlyphDirective ],
 	templateUrl: './compact-bookmark.component.html',
 	styleUrls: [ './compact-bookmark.component.scss' ],
-	host: {
-		'class': 'comp comp-hover rounded-lg shadow-component',
-	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CompactBookmarkComponent {
