@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PortalComponent } from '@libComponents';
+import { PopularBookmarksContainerComponent, QuoteContainerComponent } from 'containers';
 import { environment } from 'environments/environment';
-import { PopularBookmarksContainerComponent } from "../../containers/popular-bookmarks-container/popular-bookmarks-container.component";
 
 @Component({
 	selector: 'app-home-page',
 	standalone: true,
-	imports: [ PopularBookmarksContainerComponent, PortalComponent ],
+	imports: [ PopularBookmarksContainerComponent, PortalComponent, QuoteContainerComponent ],
 	templateUrl: './home-page.component.html',
 	styleUrl: './home-page.component.scss',
 	host: {
@@ -15,5 +15,7 @@ import { PopularBookmarksContainerComponent } from "../../containers/popular-boo
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent {
+
 	isProd = environment.production;
+
 }
