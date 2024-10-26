@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { opacityTrigger, sidebarTrigger } from '@animations';
+import { mainTrigger, opacityTrigger, sidebarTrigger } from '@animations';
 import { SidebarState } from '@constants';
 import { Store } from '@ngrx/store';
 import { selCore_sidebarState } from '@selectors';
@@ -13,7 +13,7 @@ import { appImports } from './app.config';
 	imports: appImports,
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
-	animations: [ sidebarTrigger, opacityTrigger ],
+	animations: [ sidebarTrigger, opacityTrigger, mainTrigger ],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
@@ -21,8 +21,6 @@ export class AppComponent {
 	splashVisible = signal(true);
 	sidebarState = inject(Store).selectSignal(selCore_sidebarState);
 	sidebarOpen = computed(() => this.sidebarState() === SidebarState.FULL);
-	sidebarBigFull = computed(() => this.sidebarState() === SidebarState.BIG_FULL);
-	sidebarBigHalf = computed(() => this.sidebarState() === SidebarState.BIG_HALF);
 
 	constructor() {
 

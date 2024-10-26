@@ -185,12 +185,6 @@ export default {
 
 			},
 
-			tabSize: {
-
-				'4': '4'
-
-			},
-
 			height: {
 
 				'100dvh'	: '100dvh',

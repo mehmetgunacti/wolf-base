@@ -21,10 +21,9 @@
 
 </nav>
 <main
-	class="block top-header right-0 left-nav-full z-main fixed h-main overflow-y-auto scrollbar"
+	class="block top-header right-0 left-0 z-main fixed h-main transition-all duration-300 overflow-y-auto scrollbar"
 	cdkScrollable
-	[class.big-half]="sidebarBigHalf()"
-	[class.big-full]="sidebarBigFull()">
+	[@main]="sidebarState()">
 
 	<router-outlet/>
 

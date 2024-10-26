@@ -31,3 +31,17 @@ export const sidebarTrigger = trigger('sidebar', [
 	transition('* => *', [animate(duration)]),
 
 ])
+
+export const mainTrigger = trigger('main', [
+
+	state('full', style({ left: offset + unit })),
+	state('half', style({ left: offset + unit })),
+	state('hidden', style({ left: offset + unit })),
+	state('bigFull', style({ left: offset + width_full + unit })),
+	state('bigHalf', style({ left: offset + width_half + unit })),
+	state('bigHidden', style({ left: offset + unit })),
+
+	// all other transitions
+	transition('* => *', [animate(duration)]),
+
+])

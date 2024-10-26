@@ -18,7 +18,6 @@ import { NavComponent } from './nav/nav.component';
 export const appImports = [
 
 	RouterOutlet,
-
 	HeaderComponent,
 	NavComponent,
 	NavOverlayComponent
