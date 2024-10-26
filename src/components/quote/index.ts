@@ -1,1 +1,1 @@
-export * from './compact-bookmark.component';
+export * from './quote.component';
