@@ -38,7 +38,7 @@ export class KeyValueLocalRepositoryImpl implements KeyValueRepository {
 
 	}
 
-	async dump(): Promise<Record<string, any>> {
+	dump(): Promise<Record<string, any>> {
 
 		return this.db.dump(this.tablename);
 
