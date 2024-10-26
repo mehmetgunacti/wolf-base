@@ -15,7 +15,6 @@ import * as coreSelectors from 'store/selectors/core/core-configuration.selector
 	standalone: true,
 	imports: [ CommonModule, RouterModule, GlyphComponent, CompactBookmarkComponent, GlyphDirective ],
 	templateUrl: './popular-bookmarks-container.component.html',
-	styleUrls: [ './popular-bookmarks-container.component.scss' ],
 	host: {
 		'class': 'flex flex-col gap-1 md:gap-2 @container'
 	},
