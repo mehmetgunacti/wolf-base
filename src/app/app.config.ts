@@ -2,7 +2,7 @@ import { coreActions } from '@actions';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, ApplicationConfig, ErrorHandler, isDevMode, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter, RouterOutlet } from '@angular/router';
+import { provideRouter, RouterOutlet, withViewTransitions } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore, Store } from '@ngrx/store';
@@ -51,7 +51,7 @@ export const appConfig: ApplicationConfig = {
 
 	providers: [
 		provideZoneChangeDetection({ eventCoalescing: true }),
-		provideRouter(routes),
+		provideRouter(routes, withViewTransitions()),
 		provideHttpClient(),
 		provideAnimations(),
 		provideServiceWorker('ngsw-worker.js', { enabled: !isDevMode(), registrationStrategy: 'registerWhenStable:30000' }),
