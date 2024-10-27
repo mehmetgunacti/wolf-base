@@ -72,7 +72,7 @@
 		--col-bg-component-dark-hover	: hsl(from var(--col-bg-component-dark) h s calc(l* 1.2));
 		--col-bg-component-dark-active	: hsl(from var(--col-bg-component-dark) h s calc(l* 1.25));
 
-		--col-bg-overlay			: hsl(from var(--col-black) h s l / .75);
+		--col-bg-overlay			: hsl(from var(--col-black) h s l / .3);
 		--col-shadow				: var(--col-bg-header);
 
 		--col-scrollbar-thumb		: hsl(from var(--col-bg-component-dark) h s l / .7);

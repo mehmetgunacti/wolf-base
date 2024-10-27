@@ -8,7 +8,7 @@ import { coreActions } from 'store/actions';
 	template: '',
 	host: {
 		'(click)': 'onClick()',
-		'class': 'fixed block top-0 right-0 h-100dvh left-0 backdrop-blur-lg z-nav-overlay transition-all duration-500'
+		'class': 'fixed block top-0 right-0 h-100dvh left-0 backdrop-blur bg-overlay z-nav-overlay transition-all duration-500'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
