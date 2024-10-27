@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CompactBookmarkComponent } from '@components';
 import { UUID } from '@constants';
+import { TagsContainerComponent } from '@libComponents';
 import { Store } from '@ngrx/store';
 import { GlyphComponent } from 'lib/components/glyph/glyph.component';
 import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
@@ -13,7 +14,7 @@ import * as coreSelectors from 'store/selectors/core/core-configuration.selector
 @Component({
 	selector: 'app-popular-bookmarks-container',
 	standalone: true,
-	imports: [ CommonModule, RouterModule, GlyphComponent, CompactBookmarkComponent, GlyphDirective ],
+	imports: [ CommonModule, RouterModule, GlyphComponent, CompactBookmarkComponent, GlyphDirective, TagsContainerComponent ],
 	templateUrl: './popular-bookmarks-container.component.html',
 	host: {
 		'class': 'flex flex-col gap-1 md:gap-2 @container'

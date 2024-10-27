@@ -1,0 +1,11 @@
+<svg [wGlyph]="glyph()" class="mr-auto"></svg>
+
+@for(tag of tags(); track tag) {
+
+	<button
+		type="button"
+		class="text-sm tag"
+		[routerLink]="url()"
+		[queryParams]="{'tags': tag}">{{ tag }}</button>
+
+}
