@@ -3,7 +3,7 @@
 <a	class="flex flex-col gap-1 rounded-lg focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none p-3"
 	[routerLink]="['/notes', n.id]" tabindex="0">
 
-	<small class="text-base-secondary text-xs">{{ n.modified | timePast }}</small>
+	<small class="text-base-secondary text-xs leading-4">{{ n.modified | timePast }}</small>
 	<p>
 		{{ n.name }}
 		@if (n.tags.includes(TAG_PINNED)) {
