@@ -8,7 +8,7 @@ import { ClickedBookmark } from 'lib/models';
 	standalone: true,
 	imports: [ GlyphDirective ],
 	templateUrl: './compact-bookmark.component.html',
-	host: { 'class': 'block comp-hover comp' },
+	host: { 'class': 'comp comp-hover comp-active' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CompactBookmarkComponent {

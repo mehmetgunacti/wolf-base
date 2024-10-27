@@ -10,7 +10,7 @@ import { Note } from 'lib/models';
 	standalone: true,
 	imports: [ GlyphDirective, RouterLink, TimePastPipe ],
 	templateUrl: './compact-note.component.html',
-	host: { 'class': 'block comp-hover comp' },
+	host: { 'class': 'block comp comp-hover comp-active' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CompactNoteComponent {
