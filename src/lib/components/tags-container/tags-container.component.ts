@@ -10,7 +10,7 @@ import { GlyphDirective } from '@libComponents';
 	imports: [ CommonModule, RouterModule, GlyphDirective ],
 	templateUrl: './tags-container.component.html',
 	host: {
-		'class': 'flex justify-end items-center gap-1 shadow-component comp-dark p-3 rounded-lg min-h-14'
+		'class': 'flex justify-end items-center gap-1 shadow-component comp-dark py-3 px-4 rounded-lg min-h-14'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
