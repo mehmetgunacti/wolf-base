@@ -1,0 +1,20 @@
+<form (ngSubmit)="onSave()">
+
+	<!-- TAGS -->
+	<w-input-tag
+		[formControl]="form"
+		label="Tags"
+		class="input-element"
+		(tagInput)="onTagInput($event)"
+		[suggestions]="tagSuggestions()"/>
+
+
+	<footer>
+
+		<button [disabled]="this.form.pristine || this.form.invalid">
+			<svg wGlyph="save"></svg> Save
+		</button>
+
+	</footer>
+
+</form>

@@ -1,0 +1,24 @@
+<form [formGroup]="form" (ngSubmit)="onSave()">
+
+	<w-input formControlName="id" label="ID" [readonly]="true" />
+	<w-textarea formControlName="name" label="Quote" [rows]="3" />
+	<w-input formControlName="author" label="Author" />
+	<w-input formControlName="context" label="Context" />
+
+	<footer class="footer-buttons one_two">
+
+		<button type="button" (click)="onReset()">
+			<svg wGlyph="clear_all"></svg> Clear
+		</button>
+
+		<button type="button" class="error" (click)="onDelete(form.controls.id.value)" [disabled]="!form.controls.id.value">
+			<svg wGlyph="delete"></svg> Delete
+		</button>
+
+		<button [disabled]="this.form.pristine || this.form.invalid">
+			<svg wGlyph="save"></svg> {{ isUpdate() ? 'Update' : 'Create'}}
+		</button>
+
+	</footer>
+
+</form>

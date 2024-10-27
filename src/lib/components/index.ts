@@ -2,6 +2,8 @@ export * from './alert';
 export * from './breadcrumb';
 export * from './croppie';
 export * from './glyph';
+export * from './input';
+export * from './input-tag';
 export * from './markdown';
 export * from './overlay-container';
 export * from './portal.component';

@@ -1,0 +1,14 @@
+<form (ngSubmit)="onSave()">
+
+	<!-- URL -->
+	<w-input [formControl]="fcUrl" label="URL"/>
+
+	<footer>
+
+		<button [disabled]="this.fcUrl.pristine || this.fcUrl.invalid">
+			<svg wGlyph="save"></svg> Save
+		</button>
+
+	</footer>
+
+</form>
