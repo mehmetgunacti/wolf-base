@@ -1,0 +1,10 @@
+<header>Title Lookup URL</header>
+<section>
+
+	@if (url(); as url) {
+
+		<app-title-lookup-config-form [url]="url" (save)="onSave($event)"/>
+
+	}
+
+</section>

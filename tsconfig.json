@@ -28,6 +28,9 @@
 			"@components": [
 				"components"
 			],
+			"@containers": [
+				"containers"
+			],
 			"@animations": [
 				"lib/animations"
 			],

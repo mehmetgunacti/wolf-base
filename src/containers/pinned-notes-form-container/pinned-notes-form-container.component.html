@@ -1,0 +1,10 @@
+<header>Pinned Notes</header>
+<section>
+
+	<app-tag-form
+		[tags]="(tags$ | async) ?? []"
+		[tagSuggestions]="(tagSuggestions$ | async) ?? []"
+		(tagInput)="onTagInput($event)"
+		(save)="onSave($event)" />
+
+</section>

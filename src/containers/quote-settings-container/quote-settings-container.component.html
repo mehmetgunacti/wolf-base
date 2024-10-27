@@ -1,0 +1,15 @@
+<header>Quote Settings</header>
+<section>
+
+	<app-quote-settings-form
+		[quote]="selected$ | async"
+		(create)="onCreate($event)"
+		(update)="onUpdate($event)"
+		(delete)="onDelete($event)"
+		(reset)="onReset()" />
+	<app-quote-settings-list
+		[quotes]="(quotes$ | async) ?? []"
+		(select)="onSelected($event)"
+		(search)="onSearch($event)" />
+
+</section>

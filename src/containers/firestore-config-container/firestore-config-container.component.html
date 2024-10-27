@@ -1,0 +1,10 @@
+<header>Firestore Configuration</header>
+<section content>
+
+	@if (config(); as conf) {
+
+		<app-firestore-config-form [config]="conf" (save)="onSave($event)" />
+
+	}
+
+</section>

@@ -1,1 +1,1 @@
-export * from './pinned-notes-form.component';
+export * from './tag-form.component';
