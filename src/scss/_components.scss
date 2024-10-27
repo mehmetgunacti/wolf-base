@@ -21,7 +21,7 @@
 
 	.comp-hover {
 
-		@apply transition-colors duration-700 hover:bg-component-hover ease-in-out;
+		@apply hover:bg-component-hover ease-in-out;
 
 	}
 
@@ -34,7 +34,7 @@
 
 	.comp-active {
 
-		@apply transition-colors duration-700 active:bg-component-active ease-in-out;
+		@apply active:bg-component-active ease-in-out;
 
 	}
 
@@ -47,7 +47,7 @@
 
 	.tag {
 
-		@apply flex min-h-5 rounded-full bg-accent px-2 py-0 text-xs text-white transition-colors duration-300 hover:bg-accent-hover active:bg-accent-active focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none;
+		@apply flex min-h-5 rounded-full bg-accent px-2 py-0 text-xs text-content hover:bg-accent-hover active:bg-accent-active focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none;
 
 	}
 

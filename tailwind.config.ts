@@ -54,6 +54,12 @@ export default {
 
 			},
 
+			fontSize: {
+
+				xs: ['0.8rem', '1.25rem']
+
+			},
+
 			textColor: {
 
 				base: {
