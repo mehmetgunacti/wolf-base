@@ -8,38 +8,21 @@ import { ClickedBookmark } from 'lib/models';
 	standalone: true,
 	imports: [ GlyphDirective ],
 	templateUrl: './compact-bookmark.component.html',
+	host: { 'class': 'block comp-hover comp' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CompactBookmarkComponent {
 
+	// Input
 	bookmark = input.required<ClickedBookmark>();
-	showDetails = input(false);
-	editable = input(true);
-	popularButton = input(true);
-	disabled = input(false);
 
-	edit = output<UUID>();
-	popular = output<UUID>();
+	// Output
 	linkClick = output<UUID>();
-
-	onEdit(): void {
-
-		if (this.bookmark())
-			this.edit.emit(this.bookmark().id);
-
-	}
 
 	onLinkClick(): void {
 
 		if (this.bookmark())
 			this.linkClick.emit(this.bookmark().id);
-
-	}
-
-	onPopular(): void {
-
-		if (this.bookmark())
-			this.popular.emit(this.bookmark().id);
 
 	}
 

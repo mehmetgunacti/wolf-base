@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { GlyphComponent } from 'lib/components/glyph/glyph.component';
+import { GlyphDirective } from '@libComponents';
 import { UUID } from 'lib/constants';
 import { ClickedBookmark } from 'lib/models';
 
 @Component({
 	selector: 'app-bookmark',
 	standalone: true,
-	imports: [RouterModule, GlyphComponent],
+	imports: [RouterModule, GlyphDirective],
 	templateUrl: './bookmark.component.html',
 	styleUrls: ['./bookmark.component.scss'],
 	host: {

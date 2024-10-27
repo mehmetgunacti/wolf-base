@@ -1,3 +1,4 @@
 export * from './bookmark';
-export * from './bookmark-compact';
+export * from './compact-bookmark';
+export * from './compact-note';
 export * from './quote';

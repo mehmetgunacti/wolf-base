@@ -8,7 +8,7 @@ import { GlyphData, Glyphs } from '@constants';
 	styleUrl: './glyph.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GlyphComponent {
+export class GlyphComponentUnused {
 
 	name = input.required<keyof typeof Glyphs>();
 	protected glyphData: Signal<GlyphData> = computed(() => Glyphs[this.name()] ?? Glyphs['question_diamond']);

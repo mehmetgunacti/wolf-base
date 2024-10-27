@@ -1,0 +1,11 @@
+<w-tags-container glyph="note_stack" [tags]="tags()" [url]="['/notes']" />
+
+<section class="gap-1 md:gap-2 grid @5xl:grid-cols-2 @7xl:grid-cols-3">
+
+	@for(note of notes$ | async; track $index) {
+
+		<app-compact-note [note]="note"/>
+
+	}
+
+</section>

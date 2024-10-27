@@ -4,12 +4,7 @@
 
 	@for(bookmark of bookmarks(); track bookmark) {
 
-		<app-compact-bookmark
-			class="block comp-hover comp"
-			[bookmark]="bookmark"
-			(linkClick)="onClick($event)"
-			[editable]="false"
-			[popularButton]="false"></app-compact-bookmark>
+		<app-compact-bookmark [bookmark]="bookmark" (linkClick)="onClick($event)"/>
 
 	}
 
