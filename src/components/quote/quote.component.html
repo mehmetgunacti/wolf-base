@@ -7,10 +7,12 @@
 		{{ q.name }}
 
 	</blockquote>
-	<figcaption class="text-base-secondary">
+	<figcaption class="text-right text-base-secondary">
 
-		<div class="text-right text-sm">{{ q.author }}</div>
-		<div class="text-right text-xs">{{ q.context }}</div>
+		<p class="font-bold text-sm">
+			{{ q.author }}
+			<small class="block font-normal text-xxs leading-4">{{ q.context }}</small>
+		</p>
 
 	</figcaption>
 
