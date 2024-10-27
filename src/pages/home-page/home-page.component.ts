@@ -8,7 +8,6 @@ import { environment } from 'environments/environment';
 	standalone: true,
 	imports: [ PopularBookmarksContainerComponent, PortalComponent, QuoteContainerComponent ],
 	templateUrl: './home-page.component.html',
-	styleUrl: './home-page.component.scss',
 	host: {
 		'class': 'page'
 	},
@@ -16,6 +15,6 @@ import { environment } from 'environments/environment';
 })
 export class HomePageComponent {
 
-	isProd = environment.production;
+
 
 }

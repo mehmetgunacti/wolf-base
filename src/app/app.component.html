@@ -3,6 +3,11 @@
 	<app-splash-screen @splash />
 
 } -->
+@if (!isProd) {
+
+	<span class="top-3 -right-6 z-splash-screen absolute bg-warn px-8 rounded-sm select-none rotate-45">[dev]</span>
+
+}
 @if (sidebarOpen()) {
 
 	<app-nav-overlay @opacity />

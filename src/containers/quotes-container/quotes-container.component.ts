@@ -37,7 +37,7 @@ const incoming$ = (pair: Pair, animate: boolean, store: Store): Observable<Quote
 	imports: [ QuoteComponent, GlyphDirective, AsyncPipe ],
 	templateUrl: './quotes-container.component.html',
 	host: {
-		'class': 'relative block p-3 md:p-4 shadow-component comp-dark rounded-lg min-h-40 text-content @container'
+		'class': 'relative block p-3 md:p-4 shadow-component comp-dark rounded-lg min-h-40 text-content @container group'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -47,7 +47,7 @@ export class QuoteContainerComponent {
 
 	constructor() {
 
-		this.store.dispatch(quoteActions.setRunning({running: true}));
+		this.store.dispatch(quoteActions.setRunning({ running: true }));
 
 	}
 
@@ -93,5 +93,18 @@ export class QuoteContainerComponent {
 		)
 
 	);
+
+	setRunning(): void {
+
+		const running = this.running();
+		if (!running) { // show play icon for 2,5 seconds
+
+			this.showPlay.set(true); // fades out 2s (css class 'play')
+			setTimeout(() => this.showPlay.set(false), 2500);
+
+		}
+		this.store.dispatch(quoteActions.setRunning({ running: !this.running() }));
+
+	}
 
 }

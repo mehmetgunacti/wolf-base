@@ -165,6 +165,11 @@ export default {
 					disabled	: 'var(--col-disabled-text)',
 
 				},
+				primary	: 'var(--col-primary)',
+				success	: 'var(--col-success)',
+				info	: 'var(--col-info)',
+				warn	: 'var(--col-warn)',
+				error	: 'var(--col-error)',
 
 			},
 

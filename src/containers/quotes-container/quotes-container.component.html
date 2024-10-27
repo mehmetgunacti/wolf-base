@@ -5,3 +5,16 @@
 	<app-quote [quote]="wrapper.value"/>
 
 }
+
+<div class="top-3 md:top-4 right-3 md:right-4 absolute bg-ghost hover:bg-ghost-hover opacity-0 group-hover:opacity-100 p-2 rounded-full transition-opacity duration-700 cursor-pointer"
+	(click)="setRunning()">
+	@if (running()) {
+
+		<svg wGlyph="play_circle" class="fill-success"></svg>
+
+	} @else {
+
+		<svg wGlyph="pause_circle" class="fill-warn"></svg>
+
+	}
+</div>

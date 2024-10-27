@@ -18,9 +18,11 @@ import { appImports } from './app.config';
 })
 export class AppComponent {
 
-	splashVisible = signal(true);
-	sidebarState = inject(Store).selectSignal(selCore_sidebarState);
-	sidebarOpen = computed(() => this.sidebarState() === SidebarState.FULL);
+	protected splashVisible = signal(true);
+	protected sidebarState = inject(Store).selectSignal(selCore_sidebarState);
+	protected sidebarOpen = computed(() => this.sidebarState() === SidebarState.FULL);
+
+	protected isProd = environment.production;
 
 	constructor() {
 
