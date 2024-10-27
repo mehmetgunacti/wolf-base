@@ -1,16 +1,16 @@
 @let q = quote();
 
-<figure class="d-flex-column flex-1">
+<figure class="flex flex-col">
 
-	<blockquote>
+	<blockquote class="my-auto text-center">
 
-		<pre>{{ q.name }}</pre>
+		{{ q.name }}
 
 	</blockquote>
-	<figcaption>
+	<figcaption class="text-base-secondary">
 
-		<div quote_author class="p-xs">{{ q.author }}</div>
-		<div quote_context class="p-xs">{{ q.context }}</div>
+		<div class="text-right text-sm">{{ q.author }}</div>
+		<div class="text-right text-xs">{{ q.context }}</div>
 
 	</figcaption>
 

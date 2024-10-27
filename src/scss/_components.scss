@@ -42,7 +42,18 @@
 
 		scrollbar-width		: thin;
 		scrollbar-color		: var(--col-scrollbar-thumb) var(--col-scrollbar-track);
-		scrollbar-gutter	: stable;
+
+		&-dark {
+
+			scrollbar-color	: var(--col-scrollbar-thumb-dark) var(--col-scrollbar-track);
+
+		}
+
+		&-gutter-stable {
+
+			scrollbar-gutter	: stable;
+
+		}
 
 	}
 

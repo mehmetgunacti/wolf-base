@@ -37,7 +37,7 @@ const incoming$ = (pair: Pair, animate: boolean, store: Store): Observable<Quote
 	imports: [ QuoteComponent, GlyphDirective, AsyncPipe ],
 	templateUrl: './quotes-container.component.html',
 	host: {
-		'class': 'relative flex flex-col gap-1 md:gap-2 shadow-component comp-dark p-2 rounded-lg min-h-40 text-content @container'
+		'class': 'relative block p-3 md:p-4 shadow-component comp-dark rounded-lg min-h-40 text-content @container'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
