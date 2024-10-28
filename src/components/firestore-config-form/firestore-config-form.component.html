@@ -1,4 +1,7 @@
-<form [formGroup]="form" (ngSubmit)="onSave()">
+<form
+	[formGroup]="form"
+	(ngSubmit)="onSave()"
+	class="flex flex-col gap-4">
 
 	<!-- API KEY -->
 	<w-input formControlName="apiKey" label="API Key"/>

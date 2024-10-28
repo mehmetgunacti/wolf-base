@@ -1,5 +1,6 @@
 <input
 	#inputElement
+	class="border-0 bg-transparent p-3 w-full text-content outline-0 peer"
 	[type]="type()"
 	[value]="value()"
 	placeholder=""
@@ -7,4 +8,29 @@
 	[disabled]="disabled()"
 	(blur)="onBlur()"
 	(input)="onInput(inputElement.value)">
-<label [class.up]="isLabelUp()">{{label()}}</label>
+<label
+	class="
+	-top-3.5
+	left-2
+	absolute
+	text-2xs
+	leading-5
+	px-1
+	rounded
+	bg-component-dark
+	text-form-element-text
+
+	peer-focus:-top-3.5
+	peer-focus:text-2xs
+	peer-focus:leading-5
+	peer-focus:text-gray-600
+	peer-focus:bg-component-dark
+	peer-focus:text-form-element-text
+
+	peer-placeholder-shown:top-3
+	peer-placeholder-shown:text-base
+	peer-placeholder-shown:bg-transparent
+	peer-placeholder-shown:text-base-secondary
+
+	transition-all
+	duration-500">{{label()}}</label>

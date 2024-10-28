@@ -9,7 +9,7 @@ import { configForm } from './firestore-config-form';
 	imports: [ ReactiveFormsModule, GlyphDirective, InputComponent ],
 	selector: 'app-firestore-config-form',
 	templateUrl: './firestore-config-form.component.html',
-	host: { 'class': 'flex flex-col comp' },
+	host: { 'class': 'flex flex-col' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FirestoreConfigFormComponent {

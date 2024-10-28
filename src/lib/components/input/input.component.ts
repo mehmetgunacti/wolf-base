@@ -5,7 +5,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 	selector: 'w-input',
 	standalone: true,
 	templateUrl: './input.component.html',
-	styleUrls: ['./input.component.scss'],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -15,7 +14,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 	],
 	host: {
 		'[tabindex]': '0',
-		'(focus)': 'onHostFocus()'
+		'(focus)': 'onHostFocus()',
+		'class': 'inline-flex relative border-form-element-border bg-form-element rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

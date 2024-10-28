@@ -59,11 +59,11 @@
 		--col-bg-popup			: hsl(210, 11%, 9%);
 		--col-bg-page			: hsl(210, 11%, 33%);
 
-		--col-form-element-bg		: hsl(210, 11%, 20%);
+		--col-form-element			: hsl(210, 11%, 20%);
 		--col-form-element-text		: var(--col-text);
-		--col-form-element-hover	: hsl(from var(--col-form-element-bg) h s calc(l* 1.1));
-		--col-form-element-active	: hsl(from var(--col-form-element-bg) h s calc(l* 1.15));
-		--col-form-element-border	: hsl(from var(--col-form-element-bg) h s calc(l* .9));
+		--col-form-element-hover	: hsl(from var(--col-form-element) h s calc(l* 1.1));
+		--col-form-element-active	: hsl(from var(--col-form-element) h s calc(l* 1.15));
+		--col-form-element-border	: hsl(from var(--col-form-element) h s calc(l* .9));
 
 		--col-bg-component				: hsl(210, 11%, 13%);
 		--col-bg-component-hover		: hsl(from var(--col-bg-component) h s calc(l* 1.15));

@@ -24,7 +24,7 @@ export default {
 			disabled	: 'var(--col-disabled)',
 			content		: 'var(--col-text)',
 
-			formElement: {
+			'form-element': {
 
 				DEFAULT	: 'var(--col-form-element)',
 				text	: 'var(--col-form-element-text)',
@@ -57,7 +57,9 @@ export default {
 			fontSize: {
 
 				xs: '0.8rem',
-				xxs: '0.7rem'
+				'2xs': '0.7rem',
+				'3xs': '0.6rem',
+				'4xs': '0.5rem'
 
 			},
 

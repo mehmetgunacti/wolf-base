@@ -44,6 +44,12 @@
 
 	}
 
+	.comp-title {
+
+		@apply text-2xl leading-none mb-4;
+
+	}
+
 	.tag {
 
 		@apply flex rounded-full bg-accent px-3 py-0 text-xs leading-6 text-content hover:bg-accent-hover active:bg-accent-active focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none;
@@ -52,7 +58,7 @@
 
 	.tag-sm {
 
-		@apply text-xxs leading-5 px-2;
+		@apply text-2xs leading-5 px-2;
 
 	}
 

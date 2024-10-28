@@ -10,6 +10,7 @@ import { FirestoreConfigFormComponent } from 'components/firestore-config-form';
 	imports: [ FirestoreConfigFormComponent ],
 	selector: 'app-firestore-config-container',
 	templateUrl: './firestore-config-container.component.html',
+	host: { 'class': 'comp p-4' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FirestoreConfigContainerComponent {
