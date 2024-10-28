@@ -8,8 +8,7 @@
 	[disabled]="disabled()"
 	(blur)="onBlur()"
 	(input)="onInput(inputElement.value)">
-<label
-	class="
+<label class="
 	-top-3.5
 	left-2
 	absolute
@@ -33,4 +32,9 @@
 	peer-placeholder-shown:text-base-color-secondary
 
 	transition-all
-	duration-500">{{label()}}</label>
+	duration-500
+
+	before:content-['*']
+	before:text-focus
+	before:mr-1
+	">{{label()}}</label>

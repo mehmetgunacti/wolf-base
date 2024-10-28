@@ -122,12 +122,16 @@
 
 	}
 
+	/*
+	* ng-valid    <-> ng-invalid
+	* ng-pristine <-> ng-dirty
+	* ng-touched  <-> ng-untouched
+	*/
 	:has(> input).ng-dirty.ng-invalid,
 	:has(> select).ng-dirty.ng-invalid,
 	:has(> textarea).ng-dirty.ng-invalid, {
 
 		@apply ring-4 ring-error outline-none;
-		// @apply border-2 border-error;
 
 	}
 
