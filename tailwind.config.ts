@@ -23,6 +23,11 @@ export default {
 			outline		: 'var(--col-outline)',
 			disabled	: 'var(--col-disabled)',
 			content		: 'var(--col-text)',
+			primary		: 'var(--col-primary)',
+			success		: 'var(--col-success)',
+			info		: 'var(--col-info)',
+			warn		: 'var(--col-warn)',
+			error		: 'var(--col-error)',
 
 			'form-element': {
 

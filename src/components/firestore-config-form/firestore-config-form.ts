@@ -1,5 +1,5 @@
 import { FormControl, Validators } from '@angular/forms';
-import { fg, nnfc } from '@utils';
+import { fg, nnfc, urlValidator } from '@utils';
 
 interface FirestoreConfigForm {
 
@@ -11,8 +11,8 @@ interface FirestoreConfigForm {
 
 export const configForm = fg<FirestoreConfigForm>({
 
-	apiKey: nnfc(null, [ Validators.required, Validators.minLength(3) ]),
-	baseURL: nnfc(null, [ Validators.required, Validators.minLength(3) ]),
+	apiKey: nnfc(null, [ Validators.required, Validators.minLength(10) ]),
+	baseURL: nnfc(null, [ Validators.required, urlValidator() ]),
 	projectId: nnfc(null, [ Validators.required, Validators.minLength(3) ])
 
 });

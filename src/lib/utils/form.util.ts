@@ -1,4 +1,4 @@
-import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function fc<T>(value: T | null = null): FormControl<T | null> {
 
@@ -23,3 +23,18 @@ export function fa<T extends AbstractControl<any, any>>(value: T[] = []): FormAr
 	return new FormArray<T>(value);
 
 }
+
+export function urlValidator(): ValidatorFn {
+
+	return (control: AbstractControl): ValidationErrors | null => {
+
+		try {
+			new URL(control.value);
+			return null;
+		} catch (_) {
+			return { invalidUrl: true };
+		}
+
+	};
+
+};

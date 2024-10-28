@@ -79,7 +79,8 @@
 	:has(> select).ng-dirty.ng-invalid,
 	:has(> textarea).ng-dirty.ng-invalid, {
 
-		@apply border-2 border-error;
+		@apply ring-4 ring-error outline-none;
+		// @apply border-2 border-error;
 
 	}
 
