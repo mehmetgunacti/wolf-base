@@ -1,8 +1,28 @@
 @layer components {
 
-	.page {
+	.btn {
 
-		@apply p-1 md:p-2 flex flex-col gap-1 md:gap-2;
+		@apply
+			flex
+			items-center
+			gap-1
+
+			text-lg
+
+			text-primary
+			bg-primary
+
+			hover:bg-primary-hover
+			active:bg-primary-active
+
+			focus-visible:ring-4
+			focus-visible:ring-outline
+			focus-visible:outline-none
+
+			rounded-lg
+			cursor-pointer
+			px-5
+			py-2.5;
 
 	}
 
@@ -46,19 +66,13 @@
 
 	.comp-title {
 
-		@apply text-2xl leading-none mb-4;
+		@apply text-2xl leading-none font-bold;
 
 	}
 
-	.tag {
+	.page {
 
-		@apply flex rounded-full bg-accent px-3 py-0 text-xs leading-6 text-content hover:bg-accent-hover active:bg-accent-active focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none;
-
-	}
-
-	.tag-sm {
-
-		@apply text-2xs leading-5 px-2;
+		@apply p-1 md:p-2 flex flex-col gap-1 md:gap-2;
 
 	}
 
@@ -78,6 +92,18 @@
 			scrollbar-gutter	: stable;
 
 		}
+
+	}
+
+	.tag {
+
+		@apply flex rounded-full bg-accent px-3 py-0 text-xs leading-6 text-content hover:bg-accent-hover active:bg-accent-active focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none;
+
+	}
+
+	.tag-sm {
+
+		@apply text-2xs leading-5 px-2;
 
 	}
 

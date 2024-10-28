@@ -65,7 +65,7 @@ export default {
 
 			textColor: {
 
-				base: {
+				'base-color': {
 
 					DEFAULT		: 'var(--col-text)',
 					secondary	: 'var(--col-text-secondary)',
