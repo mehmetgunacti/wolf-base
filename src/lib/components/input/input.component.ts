@@ -15,7 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 	host: {
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()',
-		'class': 'inline-flex relative h-widget-height border-form-element-border bg-form-element rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none group'
+		'class': 'inline-flex relative h-widget-height border-form-element-border bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none group'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

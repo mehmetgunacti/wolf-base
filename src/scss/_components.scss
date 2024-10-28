@@ -11,6 +11,8 @@
 
 			text-primary
 			bg-primary
+			border
+			border-primary
 
 			hover:bg-primary-hover
 			active:bg-primary-active
@@ -20,6 +22,7 @@
 			focus-visible:outline-none
 
 			disabled:bg-disabled
+			disabled:border-disabled
 			disabled:text-base-color-secondary
 			disabled:cursor-not-allowed
 
