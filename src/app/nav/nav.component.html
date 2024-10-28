@@ -1,17 +1,17 @@
 <ng-template #anchorContentTemplate let-item="item" let-link="link">
 
 	<div class="inline-grid top-0 bottom-0 left-0 z-nav-left absolute place-items-center bg-nav w-nav-glyph-width">
-		<div svgWrapper class="group-hover:bg-ghost-hover group-active:bg-accent inline-block p-2.5 rounded-full">
-			<svg [wGlyph]="item.icon"></svg>
+		<div class="group-hover:bg-ghost-hover group-[.nav-item-active]:hover:bg-accent group-[.nav-item-active]:bg-accent group-[.nav-item-active]:text-base-color group-active:bg-accent inline-block p-2.5 rounded-full">
+			<svg [wGlyph]="item.icon" class="text-xl"></svg>
 		</div>
 	</div>
 	<div class="inline-flex top-0 right-0 bottom-0 z-nav-content absolute flex-nowrap items-center min-w-nav-content-width select-none">
 
-		<span class="flex-1">{{ item.label }}</span>
+		<span class="group-[.nav-item-active]:text-base-color flex-1">{{ item.label }}</span>
 		@if (item.badge) {
 
 			<div>
-				<span svgWrapper class="group-active:bg-accent inline-flex items-center gap-x-1 bg-ghost-hover px-1.5 py-1 rounded-md text-base-color text-xs">
+				<span class="group-[.nav-item-active]:bg-accent inline-flex items-center gap-x-1 bg-ghost-hover px-1.5 py-1 rounded-md text-base-color text-xs">
 				{{ item.badge }}
 				</span>
 			</div>
