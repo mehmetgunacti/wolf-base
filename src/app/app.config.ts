@@ -10,7 +10,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import * as service from '@services';
 import { indexedDbConfiguration } from 'services/indexeddb';
 import * as store from 'store/store.config';
-import { routes } from './app.routes';
+import { routes } from './routes/app.routes';
 import { HeaderComponent } from './header/header.component';
 import { NavOverlayComponent } from './nav-overlay/nav-overlay.component';
 import { NavComponent } from './nav/nav.component';
