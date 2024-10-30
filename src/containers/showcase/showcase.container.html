@@ -1,62 +1,54 @@
 <!-- BUTTONS -->
-<fieldset class="relative comp p-3">
+<fieldset class="relative p-3 comp">
 
-	<legend class="h-button-height flex items-center px-3 bg-component-dark rounded-lg">Buttons</legend>
-	<legend class="absolute -top-11 right-2.5 h-button-height flex items-center px-3 bg-component-dark rounded-lg">
+	<legend class="flex items-center bg-component-dark px-3 rounded-lg h-button-height">Buttons</legend>
+	<legend class="-top-11 right-2.5 absolute flex justify-center items-center bg-component-dark rounded-lg w-button-height h-button-height">
 		<button class="btn btn-glyph" (click)="buttonsVisible.set(!buttonsVisible())">
 			<svg wGlyph="add" [class.rotate-45]="buttonsVisible()" class="transition-transform duration-500"></svg>
 		</button>
 	</legend>
 
-	<div content [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
+	<div class="overflow-hidden" [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
 
 		<!-- TYPES -->
 		<div class="h-divider">Button Types</div>
-		<div container>
+		<div class="flex flex-wrap justify-center items-center gap-2">
 
-			<td><button class="">Default</button></td>
-			<td><button class="" disabled>Disabled</button></td>
-			<td><button class="info">Info</button></td>
-			<td><button class="warn">Warn</button></td>
-			<td><button class="danger">Danger</button></td>
-			<td><button class="ghost">Ghost</button></td>
-			<td><button class="link">Link</button></td>
-			<td><button class="glyph"><svg wGlyph="add_circle"></svg></button></td>
+			<button class="btn">Default</button>
+			<button class="btn" disabled>Disabled</button>
+			<button class="btn btn-error">Danger</button>
+			<button class="btn btn-ghost">Ghost</button>
 
 		</div>
 
 		<!-- SIZES -->
 		<div class="h-divider">Button Sizes</div>
-		<div container>
+		<div class="flex justify-center items-center gap-2">
 
-			<td><button class="xs">Extra Small</button></td>
-			<td><button class="sm">Small</button></td>
-			<td><button class="">Default</button></td>
+			<button class="h-button-height-sm btn">Small</button>
+			<button class="btn">Default</button>
 
 		</div>
 
 		<!-- GLYPHS -->
 		<div class="h-divider">Glyphs</div>
-		<div container style="display: 70px;">
+		<div class="flex justify-center items-center gap-2">
 
-			<td><button class=""><svg wGlyph="save"></svg>Save</button></td>
-			<td><button class="ghost">Ghost<svg wGlyph="sprint"></svg></button></td>
-			<td><button class="link"><svg wGlyph="add_circle"></svg>Link</button></td>
-			<td><button class="glyph"><svg wGlyph="add_task"></svg></button></td>
+			<button class="btn btn-glyph"><svg wGlyph="sprint"></svg></button>
+			<button class="btn btn-glyph"><svg wGlyph="add_task"></svg></button>
+			<button class="btn btn-glyph"><svg wGlyph="add_circle"></svg></button>
 
 
 		</div>
 
 		<!-- TAG -->
 		<div class="h-divider">Tags (tag)</div>
-		<div container_tags>
+		<div class="flex justify-center items-center gap-2 pb-4">
 
-			<button class="tag xs">Extra Small</button>
-			<button class="tag xs">Extra Small<svg wGlyph="close" class="sm"></svg></button>
-			<button class="tag sm">Small</button>
-			<button class="tag sm">Small<svg wGlyph="close" class="sm"></svg></button>
-			<button class="tag">Default</button>
-			<button class="tag">Default<svg wGlyph="close"  class="sm"></svg></button>
+			<button class="inline-flex flex-row items-center gap-1 me-1 tag tag-sm">Small</button>
+			<button class="inline-flex flex-row items-center gap-1 me-1 tag tag-sm">Small<svg wGlyph="close" class="text-4xs stroke-content"></svg></button>
+			<button class="inline-flex flex-row items-center gap-1 me-1 tag">Default</button>
+			<button class="inline-flex flex-row items-center gap-1 me-1 tag">Default<svg wGlyph="close" class="text-3xs stroke-content"></svg></button>
 
 		</div>
 

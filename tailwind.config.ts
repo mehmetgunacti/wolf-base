@@ -23,6 +23,7 @@ export default {
 			outline		: 'var(--col-outline)',
 			disabled	: 'var(--col-disabled)',
 			content		: 'var(--col-text)',
+			secondary	: 'var(--col-text-secondary)',
 			primary		: 'var(--col-primary)',
 			success		: 'var(--col-success)',
 			info		: 'var(--col-info)',
@@ -87,11 +88,11 @@ export default {
 			},
 			backgroundColor: {
 
-				header	: 'var(--col-bg-header)',
-				nav		: 'var(--col-bg-nav)',
-				popup	: 'var(--col-bg-popup)',
-				page	: 'var(--col-bg-page)',
-				overlay	: 'var(--col-bg-overlay)',
+				header		: 'var(--col-bg-header)',
+				nav			: 'var(--col-bg-nav)',
+				popup		: 'var(--col-bg-popup)',
+				page		: 'var(--col-bg-page)',
+				overlay		: 'var(--col-bg-overlay)',
 
 				component: {
 
@@ -161,12 +162,13 @@ export default {
 
 			borderColor: {
 
-				primary	: 'var(--col-primary-border)',
-				success	: 'var(--col-success-border)',
-				info	: 'var(--col-info-border)',
-				warn	: 'var(--col-warn-border)',
-				error	: 'var(--col-error-border)',
-				ghost	: 'var(--col-ghost-border)',
+				primary		: 'var(--col-primary-border)',
+				success		: 'var(--col-success-border)',
+				info		: 'var(--col-info-border)',
+				warn		: 'var(--col-warn-border)',
+				error		: 'var(--col-error-border)',
+				ghost		: 'var(--col-ghost-border)',
+				secondary	: 'var(--col-text-secondary)'
 
 			},
 

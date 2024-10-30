@@ -3,7 +3,7 @@
 	.btn {
 
 		@apply
-			flex
+			inline-flex
 			items-center
 			gap-1
 
@@ -22,20 +22,8 @@
 			rounded-lg
 			cursor-pointer
 
+			px-4
 			h-button-height;
-
-		&.btn-warn {
-
-			@apply
-				text-warn
-				bg-warn
-				border
-				border-warn
-
-				hover:bg-warn-hover
-				active:bg-warn-active;
-
-		}
 
 		&.btn-error {
 
@@ -66,7 +54,7 @@
 		&.btn-glyph {
 
 			@apply
-				flex
+				inline-flex
 				items-center
 				justify-center
 
@@ -77,6 +65,8 @@
 
 				hover:bg-ghost-hover
 				active:bg-ghost-active
+
+				p-0
 
 				rounded-full
 				w-button-height-sm
@@ -150,6 +140,30 @@
 	:has(> textarea).ng-dirty.ng-invalid, {
 
 		@apply ring-4 ring-error outline-none;
+
+	}
+
+	.h-divider {
+
+		@apply
+			flex
+			items-center
+			py-3
+
+			text-base-color-secondary
+			text-sm
+
+			before:flex-1
+			before:bg-gradient-to-l
+			before:from-secondary
+			before:h-[1px]
+			before:me-6
+
+			after:flex-1
+			after:bg-gradient-to-r
+			after:from-secondary
+			after:h-[1px]
+			after:ms-6;
 
 	}
 

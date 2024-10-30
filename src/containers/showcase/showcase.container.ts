@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { slideUpDownTrigger } from '@animations';
@@ -9,6 +10,7 @@ import { BaseComponent } from '@libComponents';
 @Component({
 	standalone: true,
 	imports: [
+		CommonModule,
 		ReactiveFormsModule,
 		GlyphDirective,
 		component.SwitchComponent,
