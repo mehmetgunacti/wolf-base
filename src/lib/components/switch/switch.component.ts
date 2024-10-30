@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, forwardRef, input, model, ModelSignal, signal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BaseComponent } from '../base.component';
@@ -5,9 +6,8 @@ import { BaseComponent } from '../base.component';
 @Component({
 	selector: 'w-switch',
 	standalone: true,
-	imports: [ FormsModule ],
+	imports: [ CommonModule, FormsModule ],
 	templateUrl: './switch.component.html',
-	styleUrl: './switch.component.scss',
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -18,13 +18,20 @@ import { BaseComponent } from '../base.component';
 	host: {
 		'[tabindex]': '0',
 		'(keydown)': 'onKeyDown($event)',
-		'(click)': 'onInput()'
+		'(click)': 'onInput()',
+		'class': 'inline-flex items-center justify-between px-1 relative h-widget-height border border-transparent rounded-lg focus-within:ring-4 focus-within:ring-outline focus-within:outline-none group',
+		'[class.primary]': 'severity() === "primary"',
+		'[class.success]': 'severity() === "success"',
+		'[class.info]': 'severity() === "info"',
+		'[class.warn]': 'severity() === "warn"',
+		'[class.error]': 'severity() === "error"'
 	}
 })
 export class SwitchComponent extends BaseComponent implements ControlValueAccessor {
 
-	// Input
+	// Input border-form-element-border bg-form-element
 	label = input<string>('');
+	severity = input<'primary' | 'success' | 'info' | 'warn' | 'error'>('primary');
 
 	// Model
 	value: ModelSignal<boolean> = model<boolean>(false);

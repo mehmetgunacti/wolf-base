@@ -1,6 +1,43 @@
 @if (label()) {
 
-	<div switch_label>{{ label() }}</div>
+	{{ label() }}
 
 }
-<div switch_handle [attr.data-on]="value()"></div>
+<label [for]="componentId" class="inline-flex items-center cursor-pointer select-none">
+	<div class="relative">
+		<input [id]="componentId" [(ngModel)]="value" type="checkbox" class="peer sr-only"/>
+
+		<!-- widget background -->
+		<div class="
+			bg-component-dark
+			rounded-full
+			w-14
+			h-5
+
+			transition
+
+
+		"></div>
+
+		<!-- Knob -->
+		<div class="
+			group-[.error]:peer-checked:bg-error
+			group-[.info]:peer-checked:bg-info
+			group-[.primary]:peer-checked:bg-primary
+			group-[.success]:peer-checked:bg-success
+			group-[.warn]:peer-checked:bg-warn
+
+			peer-checked:translate-x-full
+
+			-top-1
+			left-0
+			absolute
+			bg-form-element
+			rounded-full
+			w-7
+			h-7
+
+			transition
+		"></div>
+	</div>
+</label>

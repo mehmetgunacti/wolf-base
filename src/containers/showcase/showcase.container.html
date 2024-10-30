@@ -20,15 +20,16 @@
 				[suggestions]="tagSuggestions()"/>
 			<w-textarea formControlName="area" label="Quote" [rows]="3" />
 			<w-select formControlName="status" label="Status" [nodes]="PROJECT_STATUS"/>
-					<!-- <td content_switch_components>
-						<w-switch label="Schedule" [value]="true"/>
-						<w-switch [value]="true" class="success"/>
-						<w-switch [value]="true" class="info"/>
-						<w-switch [value]="true" class="warn"/>
-						<w-switch [value]="true" class="error"/>
-			<w-markdown-editor [control]="editor()" name="Editor"/> -->
+			<div class="flex">
+				<w-switch label="Schedule" [value]="true" class="flex-1"/>
+				<w-switch [value]="true" severity="success"/>
+				<w-switch [value]="true" severity="info"/>
+				<w-switch [value]="true" severity="warn"/>
+				<w-switch [value]="true" severity="error"/>
+			</div>
+			<!-- <w-markdown-editor [control]="editor()" name="Editor"/> -->
 
-				</form>
+		</form>
 
 	</div>
 
