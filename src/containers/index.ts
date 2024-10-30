@@ -5,4 +5,5 @@ export * from './popular-bookmarks';
 export * from './popular-bookmarks-form';
 export * from './quote-settings';
 export * from './quotes';
+export * from './showcase';
 export * from './title-lookup-config';

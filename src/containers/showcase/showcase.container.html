@@ -1,0 +1,151 @@
+<!-- BUTTONS -->
+<fieldset>
+
+	<legend>Buttons</legend>
+	<legend>
+		<button class="glyph" (click)="buttonsVisible.set(!buttonsVisible())">
+			<svg wGlyph="add" [class.rotate-45]="buttonsVisible()"></svg>
+		</button>
+	</legend>
+
+	<div content [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
+
+		<!-- TYPES -->
+		<div class="h-divider">Button Types</div>
+		<div container>
+
+			<td><button class="">Default</button></td>
+			<td><button class="" disabled>Disabled</button></td>
+			<td><button class="info">Info</button></td>
+			<td><button class="warn">Warn</button></td>
+			<td><button class="danger">Danger</button></td>
+			<td><button class="ghost">Ghost</button></td>
+			<td><button class="link">Link</button></td>
+			<td><button class="glyph"><svg wGlyph="add_circle"></svg></button></td>
+
+		</div>
+
+		<!-- SIZES -->
+		<div class="h-divider">Button Sizes</div>
+		<div container>
+
+			<td><button class="xs">Extra Small</button></td>
+			<td><button class="sm">Small</button></td>
+			<td><button class="">Default</button></td>
+
+		</div>
+
+		<!-- GLYPHS -->
+		<div class="h-divider">Glyphs</div>
+		<div container style="display: 70px;">
+
+			<td><button class=""><svg wGlyph="save"></svg>Save</button></td>
+			<td><button class="ghost">Ghost<svg wGlyph="sprint"></svg></button></td>
+			<td><button class="link"><svg wGlyph="add_circle"></svg>Link</button></td>
+			<td><button class="glyph"><svg wGlyph="add_task"></svg></button></td>
+
+
+		</div>
+
+		<!-- TAG -->
+		<div class="h-divider">Tags (tag)</div>
+		<div container_tags>
+
+			<button class="tag xs">Extra Small</button>
+			<button class="tag xs">Extra Small<svg wGlyph="close" class="sm"></svg></button>
+			<button class="tag sm">Small</button>
+			<button class="tag sm">Small<svg wGlyph="close" class="sm"></svg></button>
+			<button class="tag">Default</button>
+			<button class="tag">Default<svg wGlyph="close"  class="sm"></svg></button>
+
+		</div>
+
+	</div>
+
+</fieldset>
+
+<!-- FORMS -->
+<fieldset>
+
+	<legend>Forms</legend>
+	<legend>
+		<button class="glyph" (click)="formsVisible.set(!formsVisible())">
+			<svg wGlyph="add" [class.rotate-45]="formsVisible()"></svg>
+		</button>
+	</legend>
+
+	<div content [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
+
+		<form [formGroup]="form">
+			<w-input label="Text" formControlName="text"/>
+			<w-input-tag
+					formControlName="tags"
+					label="Tags"
+					class="input-element"
+					(tagInput)="onTagInput($event)"
+					[suggestions]="tagSuggestions()"/>
+			<w-textarea formControlName="area" label="Quote" [rows]="3" />
+			<w-select formControlName="status" label="Status" [nodes]="PROJECT_STATUS"/>
+			<td content_switch_components>
+				<w-switch label="Schedule" [value]="true"/>
+				<w-switch [value]="true" class="success"/>
+				<w-switch [value]="true" class="info"/>
+				<w-switch [value]="true" class="warn"/>
+				<w-switch [value]="true" class="error"/>
+			</td>
+			<w-markdown-editor [control]="editor()" name="Editor"/>
+		</form>
+
+	</div>
+
+</fieldset>
+
+<!-- GLYPHS -->
+<fieldset>
+
+	<legend>Glyphs</legend>
+	<legend>
+		<button class="glyph" (click)="glyphsVisible.set(!glyphsVisible())">
+			<svg wGlyph="add" [class.rotate-45]="glyphsVisible()"></svg>
+		</button>
+	</legend>
+
+	<div content [@slideUpDown]="glyphsVisible() ? 'opened' : 'closed'">
+
+		<div class="h-divider">{{glyphNames().length}} Glyphs</div>
+		<div container container_glyphs>
+
+			@for (name of glyphNames(); track $index) {
+
+				<td glyph>
+					<svg [wGlyph]="name"></svg>
+					<span>{{name}}</span>
+				</td>
+			}
+
+		</div>
+
+	</div>
+
+</fieldset>
+
+<!-- ALERTS -->
+<fieldset>
+
+	<legend>Alerts</legend>
+	<legend>
+		<button class="glyph" (click)="alertsVisible.set(!alertsVisible())">
+			<svg wGlyph="add" [class.rotate-45]="alertsVisible()"></svg>
+		</button>
+	</legend>
+
+	<div content [@slideUpDown]="alertsVisible() ? 'opened' : 'closed'">
+
+		<w-toast [conf]="{ severity: 'success', summary: 'Update available', detail: 'Press button to start' }"/>
+		<w-toast [conf]="{ severity: 'info', summary: 'Update available', detail: 'Press button to start' }"/>
+		<w-toast [conf]="{ severity: 'warn', summary: 'Update available', detail: 'Press button to start' }"/>
+		<w-toast [conf]="{ severity: 'error', summary: 'Update available', detail: 'Press button to start' }"/>
+
+	</div>
+
+</fieldset>

@@ -8,6 +8,7 @@ export * from './markdown';
 export * from './overlay-container';
 export * from './portal.component';
 export * from './select';
+export * from './switch';
 export * from './tags-container';
 export * from './textarea';
 export * from './toast';

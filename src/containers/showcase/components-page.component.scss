@@ -1,0 +1,82 @@
+@import 'variables';
+@import 'helper';
+@import 'components';
+
+:host {
+
+	@include mx-page;
+
+	fieldset {
+
+		@include mx-fieldset;
+
+		[content] {
+
+			//@include mx-d-flex-col-jc-center;
+			width	: min(100%, #{$breakpoint-lg});
+			place-self: center;
+
+			gap			: $gap-sm;
+			padding		: $gap;
+			overflow	: hidden;
+
+			[container] {
+
+				@include mx-d-flex-ai-e-jc-c($flex-wrap: wrap);
+				gap		: $gap-sm;
+
+			}
+
+			[container_tags] {
+
+				@include mx-d-flex-center;
+				gap				: $gap-xs;
+
+			}
+
+			[container_glyphs] {
+
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+
+				[glyph] {
+
+					@include mx-d-flex-col-ai-center;
+					gap		: $gap-xs;
+					padding	: $gap-xs;
+					& > svg {
+
+						width	: 2.4rem;
+						height	: 2.4rem;
+
+					}
+					& > span {
+
+						font-size: $font-size-xs;
+
+					}
+
+				}
+
+			}
+			[content_switch_components] {
+
+				@include mx-d-flex-ai-center;
+				& > :first-child {
+					flex: 1;
+				}
+
+
+			}
+
+		}
+
+	}
+
+	[update_alert] {
+
+		@include mx-d-flex-ai-c-jc-sb;
+
+	}
+
+}

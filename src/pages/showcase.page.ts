@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@libComponents';
+import { ShowcaseContainer } from "../containers/showcase/showcase.container";
 
 @Component({
 	selector: 'showcase-page',
 	standalone: true,
-	imports: [],
+	imports: [ShowcaseContainer],
 	template: `
-		<p>showcase-page works!</p>
+		<app-showcase-container/>
 	`,
 	host: { 'class': 'page' }
 })
