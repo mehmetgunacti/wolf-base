@@ -15,8 +15,6 @@
 			h-5
 
 			transition
-
-
 		"></div>
 
 		<!-- Knob -->
@@ -38,6 +36,21 @@
 			h-7
 
 			transition
-		"></div>
+			duration-200
+		">
+
+		@if (glyphChecked(); as glyph) {
+
+			<svg [wGlyph]="glyph" class="absolute mt-1 ml-1 text-xl transition-opacity" [class.opacity-0]="!value()" [class.opacity-100]="value()"></svg>
+
+		}
+
+		@if (glyphUnchecked(); as glyph) {
+
+			<svg [wGlyph]="glyph" class="absolute mt-1 ml-1 text-xl transition-opacity" [class.opacity-0]="value()" [class.opacity-100]="!value()"></svg>
+
+		}
+
+	</div>
 	</div>
 </label>

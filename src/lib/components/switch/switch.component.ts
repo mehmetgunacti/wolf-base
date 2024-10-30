@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, forwardRef, input, model, ModelSignal, signal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { GlyphName } from '@constants';
+import { GlyphDirective } from '@directives';
 import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-switch',
 	standalone: true,
-	imports: [ CommonModule, FormsModule ],
+	imports: [ CommonModule, FormsModule, GlyphDirective ],
 	templateUrl: './switch.component.html',
 	providers: [
 		{
@@ -32,6 +34,8 @@ export class SwitchComponent extends BaseComponent implements ControlValueAccess
 	// Input border-form-element-border bg-form-element
 	label = input<string>('');
 	severity = input<'primary' | 'success' | 'info' | 'warn' | 'error'>('primary');
+	glyphUnchecked = input<GlyphName | null>(null);
+	glyphChecked = input<GlyphName | null>(null);
 
 	// Model
 	value: ModelSignal<boolean> = model<boolean>(false);
