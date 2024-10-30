@@ -1,5 +1,6 @@
 import { AsyncPipe, DatePipe, DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import * as container from '@containers';
 import { AlertComponent, GlyphDirective, PortalComponent } from '@libComponents';
@@ -15,6 +16,7 @@ import { buildInfo } from 'version';
 		GlyphDirective,
 		PortalComponent,
 		AlertComponent,
+		RouterLink,
 		container.FirestoreConfigContainerComponent,
 		container.TitleLookupConfigContainerComponent,
 		container.PinnedNotesFormContainerComponent,
