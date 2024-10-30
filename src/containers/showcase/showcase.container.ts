@@ -13,6 +13,7 @@ import { BaseComponent } from '@libComponents';
 		CommonModule,
 		ReactiveFormsModule,
 		GlyphDirective,
+		component.InputComponent,
 		component.SwitchComponent,
 		component.AlertComponent,
 		component.InputTagComponent,
@@ -32,9 +33,9 @@ export class ShowcaseContainer extends BaseComponent {
 	PROJECT_STATUS = PROJECT_STATUS;
 
 	alertsVisible = signal<boolean>(false);
-	formsVisible = signal<boolean>(false);
+	formsVisible = signal<boolean>(true);
 	buttonsVisible = signal<boolean>(false);
-	glyphsVisible = signal<boolean>(true);
+	glyphsVisible = signal<boolean>(false);
 
 	tagSuggestions = signal<string[]>([]);
 

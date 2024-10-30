@@ -1,5 +1,6 @@
 <textarea
 	#inputElement
+	class="border-0 bg-transparent px-3 p-2 w-full text-content outline-0 peer"
 	[value]="value()"
 	placeholder=""
 	[readonly]="readonly()"
@@ -7,4 +8,32 @@
 	(blur)="onBlur()"
 	(input)="onInput(inputElement.value)"
 	[rows]="rows()"></textarea>
-<label [class.up]="isLabelUp()">{{label()}}</label>
+<label class="
+	-top-3.5
+	left-2
+	absolute
+	text-2xs
+	leading-5
+	px-1
+	rounded
+	bg-component-dark
+	text-form-element-text
+
+	peer-focus:-top-3.5
+	peer-focus:text-2xs
+	peer-focus:leading-5
+	peer-focus:bg-component-dark
+	peer-focus:text-form-element-text
+
+	peer-placeholder-shown:top-2.5
+	peer-placeholder-shown:text-base
+	peer-placeholder-shown:bg-transparent
+	peer-placeholder-shown:text-base-color-secondary
+
+	transition-all
+	duration-500
+
+	before:content-['*']
+	before:text-focus
+	before:mr-1
+	">{{label()}}</label>

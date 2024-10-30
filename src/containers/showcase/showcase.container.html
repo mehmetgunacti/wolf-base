@@ -1,3 +1,39 @@
+<!-- FORMS -->
+<fieldset class="relative p-3 @container comp">
+
+	<legend class="flex items-center bg-component-dark px-3 rounded-lg h-button-height">Forms</legend>
+	<legend class="-top-11 right-2.5 absolute flex justify-center items-center bg-component-dark rounded-lg w-button-height h-button-height">
+		<button class="btn btn-glyph" (click)="formsVisible.set(!formsVisible())">
+			<svg wGlyph="add" [class.rotate-45]="formsVisible()" class="transition-transform duration-500"></svg>
+		</button>
+	</legend>
+
+	<div class="overflow-hidden" [class.pb-4]="formsVisible()" [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
+
+		<form [formGroup]="form" class="flex flex-col gap-3 p-4">
+			<w-input label="Text" formControlName="text"/>
+			<w-input-tag
+				formControlName="tags"
+				label="Tags"
+				class="input-element"
+				(tagInput)="onTagInput($event)"
+				[suggestions]="tagSuggestions()"/>
+			<w-textarea formControlName="area" label="Quote" [rows]="3" />
+					<!-- <w-select formControlName="status" label="Status" [nodes]="PROJECT_STATUS"/>
+					<td content_switch_components>
+						<w-switch label="Schedule" [value]="true"/>
+						<w-switch [value]="true" class="success"/>
+						<w-switch [value]="true" class="info"/>
+						<w-switch [value]="true" class="warn"/>
+						<w-switch [value]="true" class="error"/>
+			<w-markdown-editor [control]="editor()" name="Editor"/> -->
+
+				</form>
+
+	</div>
+
+</fieldset>
+
 <!-- ALERTS -->
 <fieldset class="relative p-3 comp">
 
@@ -109,42 +145,6 @@
 	</div>
 
 </fieldset>
-
-<!-- FORMS -->
-<!-- <fieldset>
-
-	<legend>Forms</legend>
-	<legend>
-		<button class="glyph" (click)="formsVisible.set(!formsVisible())">
-			<svg wGlyph="add" [class.rotate-45]="formsVisible()"></svg>
-		</button>
-	</legend>
-
-	<div content [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
-
-		<form [formGroup]="form">
-			<w-input label="Text" formControlName="text"/>
-			<w-input-tag
-					formControlName="tags"
-					label="Tags"
-					class="input-element"
-					(tagInput)="onTagInput($event)"
-					[suggestions]="tagSuggestions()"/>
-			<w-textarea formControlName="area" label="Quote" [rows]="3" />
-			<w-select formControlName="status" label="Status" [nodes]="PROJECT_STATUS"/>
-			<td content_switch_components>
-				<w-switch label="Schedule" [value]="true"/>
-				<w-switch [value]="true" class="success"/>
-				<w-switch [value]="true" class="info"/>
-				<w-switch [value]="true" class="warn"/>
-				<w-switch [value]="true" class="error"/>
-			</td>
-			<w-markdown-editor [control]="editor()" name="Editor"/>
-		</form>
-
-	</div>
-
-</fieldset> -->
 
 <!-- GLYPHS -->
 <fieldset class="relative p-3 @container comp">
