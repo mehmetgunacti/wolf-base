@@ -22,13 +22,3 @@ export class HideEnumPipe implements PipeTransform {
 	}
 
 }
-
-
-@NgModule({
-
-	declarations: [HideEnumPipe],
-	imports: [],
-	exports: [HideEnumPipe]
-
-})
-export class HideEnumModule { }

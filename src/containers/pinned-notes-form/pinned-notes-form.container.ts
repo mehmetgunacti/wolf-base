@@ -1,6 +1,7 @@
 import { AsyncPipe } from '@angular/common';
-import { AfterContentInit, ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AfterContentInit, Component, inject } from '@angular/core';
 import { TagFormComponent } from '@components';
+import { BaseComponent } from '@libComponents';
 import { Store } from '@ngrx/store';
 import { selCore_pinnedNotes, selNote_distinctTagsArray } from '@selectors';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
@@ -10,11 +11,10 @@ import { settingsActions } from 'store/actions';
 	standalone: true,
 	imports: [ TagFormComponent, AsyncPipe ],
 	selector: 'app-pinned-notes-form-container',
-	templateUrl: './pinned-notes-form-container.component.html',
-	host: { 'class': 'comp p-4' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	templateUrl: './pinned-notes-form.container.html',
+	host: { 'class': 'comp p-4' }
 })
-export class PinnedNotesFormContainerComponent implements AfterContentInit {
+export class PinnedNotesFormContainer extends BaseComponent implements AfterContentInit {
 
 	private store: Store = inject(Store);
 

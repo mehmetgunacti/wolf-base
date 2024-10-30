@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component, effect, input, output, untracked } from '@angular/core';
+import { Component, effect, input, output, untracked } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { GlyphDirective, InputTagComponent } from '@libComponents';
+import { GlyphDirective } from '@directive';
+import { BaseComponent, InputTagComponent } from '@libComponents';
 
 @Component({
 	standalone: true,
 	imports: [ ReactiveFormsModule, GlyphDirective, InputTagComponent ],
 	selector: 'app-tag-form',
 	templateUrl: './tag-form.component.html',
-	host: { 'class': 'flex flex-col' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	host: { 'class': 'flex flex-col' }
 })
-export class TagFormComponent {
+export class TagFormComponent extends BaseComponent {
 
 	// Input
 	tags = input.required<string[]>();
@@ -25,6 +25,7 @@ export class TagFormComponent {
 
 	constructor() {
 
+		super();
 		effect(() => {
 
 			const tags = this.tags();

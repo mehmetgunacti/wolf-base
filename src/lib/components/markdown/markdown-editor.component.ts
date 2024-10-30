@@ -1,11 +1,12 @@
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenuBar, CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, input, signal } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, input, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TimePastPipe } from '@pipes';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
 import { ClipboardService } from 'services';
+import { BaseComponent } from '../base.component';
 import { ModalComponent } from '../modal/modal.component';
 import { SelectorTableComponent } from '../selector-table/selector-table.component';
 import { ButtonActions, C_ASTERISK, C_DASH, C_INDENT, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_PLUS, C_TAB, C_TASK_COMPL, C_TASK_EMPTY, lineStartsWithOneOf } from './button-actions.util';
@@ -23,10 +24,9 @@ import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 	providers: [
 		{ provide: UNDO_CACHE, useClass: UndoCacheImpl },
 		{ provide: RECOVERY_MANAGER, useClass: RecoveryManagerImpl },
-	],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	]
 })
-export class MarkdownEditorComponent implements OnInit, OnDestroy {
+export class MarkdownEditorComponent extends BaseComponent implements OnInit, OnDestroy {
 
 	@ViewChild('editor') editor!: ElementRef<HTMLTextAreaElement>;
 	@ViewChild(CdkMenuTrigger) trigger!: CdkMenuTrigger;

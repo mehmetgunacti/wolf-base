@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CompactNoteComponent } from '@components';
-import { GlyphDirective, TagsContainerComponent } from '@libComponents';
+import { GlyphDirective } from '@directive';
+import { BaseComponent, TagsContainerComponent } from '@libComponents';
 import { Store } from '@ngrx/store';
 import { compareISODateStrings } from '@utils';
 import { map } from 'rxjs';
@@ -12,11 +13,10 @@ import * as noteSelectors from 'store/selectors/note/note-ui.selectors';
 	selector: 'app-pinned-notes-container',
 	standalone: true,
 	imports: [ CommonModule, GlyphDirective, TagsContainerComponent, CompactNoteComponent ],
-	templateUrl: './pinned-notes-container.component.html',
-	host: { 'class': 'flex flex-col gap-1 md:gap-2 @container' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	templateUrl: './pinned-notes.container.html',
+	host: { 'class': 'flex flex-col gap-1 md:gap-2 @container' }
 })
-export class PinnedNotesContainerComponent {
+export class PinnedNotesContainer extends BaseComponent {
 
 	private store: Store = inject(Store);
 

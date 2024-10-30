@@ -1,8 +1,9 @@
 import { entityActions, quoteActions } from '@actions';
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { QuoteSettingsFormComponent, QuoteSettingsListComponent } from '@components';
 import { AppEntityType, UUID } from '@constants';
+import { BaseComponent } from '@libComponents';
 import { Quote } from '@models';
 import { Store } from '@ngrx/store';
 import { selQuote_EntityList, selQuoteSettings_selected } from '@selectors';
@@ -12,11 +13,10 @@ import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 	standalone: true,
 	imports: [ QuoteSettingsFormComponent, QuoteSettingsListComponent, AsyncPipe ],
 	selector: 'app-quote-settings-container',
-	templateUrl: './quote-settings-container.component.html',
-	host: { 'class': 'comp p-4' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	templateUrl: './quote-settings.container.html',
+	host: { 'class': 'comp p-4' }
 })
-export class QuoteSettingsContainerComponent {
+export class QuoteSettingsContainer extends BaseComponent {
 
 	private search: Subject<string> = new BehaviorSubject<string>('');
 	private store: Store = inject(Store);

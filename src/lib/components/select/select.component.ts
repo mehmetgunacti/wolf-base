@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
+import { Component, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NameBase } from '@models';
+import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-select',
 	standalone: true,
 	templateUrl: './select.component.html',
-	styleUrls: ['./select.component.scss'],
+	styleUrls: [ './select.component.scss' ],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -17,10 +18,9 @@ import { NameBase } from '@models';
 	host: {
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class SelectComponent implements ControlValueAccessor {
+export class SelectComponent extends BaseComponent implements ControlValueAccessor {
 
 	private selectElement = viewChild.required<ElementRef<HTMLSelectElement>>('selectElement');
 
@@ -33,8 +33,8 @@ export class SelectComponent implements ControlValueAccessor {
 	protected disabled: WritableSignal<boolean> = signal(false);
 
 	//////////// boilerplate
-	private onChange: any = () => { }
-	private onTouched: any = () => { }
+	private onChange: any = () => { };
+	private onTouched: any = () => { };
 	registerOnChange(fn: any): void { this.onChange = fn; }
 	registerOnTouched(fn: any): void { this.onTouched = fn; }
 	writeValue(value: string): void { this.value.set(value); }

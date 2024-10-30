@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, effect, input, output, untracked } from '@angular/core';
+import { Component, effect, input, output, untracked } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { GlyphDirective, InputComponent } from '@libComponents';
+import { GlyphDirective } from '@directive';
+import { BaseComponent, InputComponent } from '@libComponents';
 import { FirestoreConfig } from '@models';
 import { configForm } from './firestore-config-form';
 
@@ -9,10 +10,9 @@ import { configForm } from './firestore-config-form';
 	imports: [ ReactiveFormsModule, GlyphDirective, InputComponent ],
 	selector: 'app-firestore-config-form',
 	templateUrl: './firestore-config-form.component.html',
-	host: { 'class': 'flex flex-col' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	host: { 'class': 'flex flex-col' }
 })
-export class FirestoreConfigFormComponent {
+export class FirestoreConfigFormComponent extends BaseComponent {
 
 	// Input
 	config = input.required<FirestoreConfig | null>();
@@ -25,6 +25,7 @@ export class FirestoreConfigFormComponent {
 
 	constructor() {
 
+		super();
 		effect(() => {
 
 			const conf = this.config();

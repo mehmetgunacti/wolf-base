@@ -2,9 +2,10 @@ import { ArrayDataSource } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { CdkTreeModule, NestedTreeControl } from '@angular/cdk/tree';
-import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Renderer2, inject } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, Renderer2, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HasParentId } from '@models';
+import { BaseComponent } from '../base.component';
 import { ROOT_ID, TreeItem, toTreeItems } from './select.util';
 
 
@@ -21,10 +22,9 @@ const flattenTree = (item: TreeItem): TreeItem[] => {
 	standalone: true,
 	imports: [ ReactiveFormsModule, CdkTreeModule, CdkMenuModule ],
 	templateUrl: './options.component.html',
-	styleUrls: [ './options.component.scss' ],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	styleUrls: [ './options.component.scss' ]
 })
-export class OptionsComponent implements AfterViewInit {
+export class OptionsComponent extends BaseComponent implements AfterViewInit {
 
 	ROOT: HasParentId = { id: ROOT_ID, name: 'Root', parentId: null };
 

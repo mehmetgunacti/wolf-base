@@ -1,6 +1,7 @@
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, Renderer2, Signal, ViewChild, WritableSignal, computed, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, Renderer2, Signal, ViewChild, WritableSignal, computed, inject, signal } from '@angular/core';
 import { createArray } from '@utils';
+import { BaseComponent } from '../base.component';
 
 function parseId(id: string): number[] {
 
@@ -13,10 +14,9 @@ function parseId(id: string): number[] {
 	standalone: true,
 	templateUrl: 'selector-table.component.html',
 	styleUrl: 'selector-table.component.scss',
-	host: { 'class': 'gap-sm'},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	host: { 'class': 'gap-sm' }
 })
-export class SelectorTableComponent implements AfterViewInit {
+export class SelectorTableComponent extends BaseComponent implements AfterViewInit {
 
 	@ViewChild('display') display!: ElementRef<HTMLDivElement>;
 
@@ -33,7 +33,7 @@ export class SelectorTableComponent implements AfterViewInit {
 		this._cols.set(val);
 	};
 
-	@Output() result: EventEmitter<[number, number]> = new EventEmitter<[number, number]>();
+	@Output() result: EventEmitter<[ number, number ]> = new EventEmitter<[ number, number ]>();
 
 	private renderer: Renderer2 = inject(Renderer2);
 
@@ -45,7 +45,7 @@ export class SelectorTableComponent implements AfterViewInit {
 
 	onClick(col: number, row: number): void {
 
-		this.result.emit([col, row]);
+		this.result.emit([ col, row ]);
 	}
 
 	onKeydown(event: KeyboardEvent): void {
@@ -55,7 +55,7 @@ export class SelectorTableComponent implements AfterViewInit {
 			return;
 
 		const anchor: HTMLAnchorElement = event.target as HTMLAnchorElement;
-		const [col, row] = parseId(anchor.id);
+		const [ col, row ] = parseId(anchor.id);
 
 		switch (event.key) {
 

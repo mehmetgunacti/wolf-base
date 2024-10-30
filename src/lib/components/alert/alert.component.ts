@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, effect, input, output } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
+import { BaseComponent } from '../base.component';
 
 @Component({
 	standalone: true,
 	selector: 'w-alert',
 	templateUrl: './alert.component.html',
-	styleUrls: ['./alert.component.scss'],
+	styleUrls: [ './alert.component.scss' ],
 	host: {
 		'[class]': 'severity()'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class AlertComponent {
+export class AlertComponent extends BaseComponent {
 
 	glyph = input<string>();
 	severity = input<'success' | 'info' | 'warn' | 'error'>();

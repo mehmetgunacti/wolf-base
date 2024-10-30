@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, effect, input, output, untracked } from '@angular/core';
+import { Component, effect, input, output, untracked } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
-import { GlyphDirective, InputComponent } from '@libComponents';
+import { GlyphDirective } from '@directive';
+import { BaseComponent, InputComponent } from '@libComponents';
 import { nnfc, urlValidator } from '@utils';
 
 @Component({
@@ -8,10 +9,9 @@ import { nnfc, urlValidator } from '@utils';
 	imports: [ ReactiveFormsModule, GlyphDirective, InputComponent ],
 	selector: 'app-title-lookup-config-form',
 	templateUrl: './title-lookup-config-form.component.html',
-	host: { 'class': 'flex flex-col' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	host: { 'class': 'flex flex-col' }
 })
-export class TitleLookupConfigFormComponent {
+export class TitleLookupConfigFormComponent extends BaseComponent {
 
 	// Input
 	url = input.required<string | null>();
@@ -24,6 +24,7 @@ export class TitleLookupConfigFormComponent {
 
 	constructor() {
 
+		super();
 		effect(() => {
 
 			const url = this.url();

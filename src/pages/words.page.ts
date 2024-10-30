@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '@components';
+import { BaseComponent } from '@libComponents';
 
 @Component({
 	selector: 'words-page',

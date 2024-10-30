@@ -1,21 +1,21 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { GlyphDirective } from '@libComponents';
+import { GlyphDirective } from '@directive';
+import { BaseComponent } from '@libComponents';
 import { UUID } from 'lib/constants';
 import { ClickedBookmark } from 'lib/models';
 
 @Component({
 	selector: 'app-bookmark',
 	standalone: true,
-	imports: [RouterModule, GlyphDirective],
+	imports: [ RouterModule, GlyphDirective ],
 	templateUrl: './bookmark.component.html',
-	styleUrls: ['./bookmark.component.scss'],
+	styleUrls: [ './bookmark.component.scss' ],
 	host: {
 		'class': 'comp comp-hover rounded-lg'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class BookmarkComponent {
+export class BookmarkComponent extends BaseComponent {
 
 	bookmark = input.required<ClickedBookmark>();
 	showDetails = input(false);

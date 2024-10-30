@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, forwardRef, inject, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
+import { Component, computed, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-textarea',
 	standalone: true,
 	templateUrl: './textarea.component.html',
-	styleUrls: ['./textarea.component.scss'],
+	styleUrls: [ './textarea.component.scss' ],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -16,10 +17,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 	host: {
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class TextareaComponent implements ControlValueAccessor {
+export class TextareaComponent extends BaseComponent implements ControlValueAccessor {
 
 	private inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
@@ -35,8 +35,8 @@ export class TextareaComponent implements ControlValueAccessor {
 	protected isLabelUp = computed(() => this.labelUp() || !!this.value());
 
 	//////////// boilerplate
-	private onChange: any = () => { }
-	private onTouched: any = () => { }
+	private onChange: any = () => { };
+	private onTouched: any = () => { };
 	registerOnChange(fn: any): void { this.onChange = fn; }
 	registerOnTouched(fn: any): void { this.onTouched = fn; }
 	writeValue(value: string): void { this.value.set(value); }

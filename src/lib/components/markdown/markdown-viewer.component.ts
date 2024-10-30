@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { AfterViewInit, Component, Input, inject } from '@angular/core';
 import { SanitizeHtmlPipe } from '@pipes';
+import { BaseComponent } from '../base.component';
 import { MarkdownToHtmlPipe } from './markdown-to-html.pipe';
 
 @Component({
@@ -8,10 +9,9 @@ import { MarkdownToHtmlPipe } from './markdown-to-html.pipe';
 	standalone: true,
 	imports: [ MarkdownToHtmlPipe, SanitizeHtmlPipe ],
 	templateUrl: './markdown-viewer.component.html',
-	styleUrls: [ './markdown-viewer.component.scss' ],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	styleUrls: [ './markdown-viewer.component.scss' ]
 })
-export class MarkdownViewerComponent implements AfterViewInit {
+export class MarkdownViewerComponent extends BaseComponent implements AfterViewInit {
 
 	@Input() markdown: string | null = null;
 

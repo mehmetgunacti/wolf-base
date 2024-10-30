@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, InputSignal, WritableSignal, computed, forwardRef, input, output, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, InputSignal, WritableSignal, computed, forwardRef, input, output, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { UUID } from '@constants';
+import { GlyphDirective } from '@directive';
 import { filterArrayElements } from '@utils';
 import { v4 as uuidv4 } from 'uuid';
-import { GlyphDirective } from '../glyph/glyph.directive';
+import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-input-tag',
 	standalone: true,
-	imports: [CommonModule, GlyphDirective],
+	imports: [ CommonModule, GlyphDirective ],
 	templateUrl: './input-tag.component.html',
 	providers: [
 		{
@@ -22,10 +23,9 @@ import { GlyphDirective } from '../glyph/glyph.directive';
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()',
 		'class': 'grid grid-cols-[auto,1fr] relative min-h-widget-height px-3 border-form-element-border bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none group'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class InputTagComponent implements ControlValueAccessor {
+export class InputTagComponent extends BaseComponent implements ControlValueAccessor {
 
 	private inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
@@ -45,8 +45,8 @@ export class InputTagComponent implements ControlValueAccessor {
 	protected suggestionList = computed(() => filterArrayElements(this.suggestions(), this.value()));
 
 	//////////// boilerplate
-	private onChange: any = () => { }
-	private onTouched: any = () => { }
+	private onChange: any = () => { };
+	private onTouched: any = () => { };
 	registerOnChange(fn: any): void { this.onChange = fn; }
 	registerOnTouched(fn: any): void { this.onTouched = fn; }
 	writeValue(value: string[]): void { this.value.set(value); }
@@ -108,7 +108,7 @@ export class InputTagComponent implements ControlValueAccessor {
 		// enteres string is ok - save state
 		this.value.update(currentValue => {
 
-			const newState = [...currentValue, tagName];
+			const newState = [ ...currentValue, tagName ];
 			this.onChange(newState);
 			this.onTouched();
 			return newState;

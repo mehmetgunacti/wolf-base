@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { GlyphDirective } from '@directive';
+import { BaseComponent } from '@libComponents';
 import { Quote } from '@models';
-import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
 
 @Component({
 	selector: 'app-quote',
@@ -9,10 +10,9 @@ import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
 	templateUrl: './quote.component.html',
 	host: {
 		'class': 'absolute inset-3 md:inset-4 grid overflow-y-auto scrollbar scrollbar-dark'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class QuoteComponent {
+export class QuoteComponent extends BaseComponent {
 
 	quote = input.required<Quote>();
 

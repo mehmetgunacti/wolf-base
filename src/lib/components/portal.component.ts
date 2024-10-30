@@ -1,4 +1,5 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, EmbeddedViewRef, inject, input, OnDestroy, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, EmbeddedViewRef, inject, input, OnDestroy, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
+import { BaseComponent } from './base.component';
 
 @Component({
 	selector: 'w-portal',
@@ -10,10 +11,9 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, EmbeddedViewRef, inj
 	`,
 	host: {
 		'class': 'contents'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class PortalComponent implements AfterViewInit, OnDestroy {
+export class PortalComponent extends BaseComponent implements AfterViewInit, OnDestroy {
 
 	portalActionsTmplRef = viewChild.required<TemplateRef<{}>>('pageActions');
 	private disposeFn!: () => void;

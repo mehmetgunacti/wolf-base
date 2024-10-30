@@ -1,11 +1,12 @@
 import { coreActions } from '@actions';
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { GlyphDirective } from '@directive';
+import { BaseComponent } from '@libComponents';
 import { MenuItem } from '@models';
 import { Store } from '@ngrx/store';
 import { selBookmarkMenuBadge, selCloudAvailableTasks } from '@selectors';
-import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
 import * as conf from './sidebar.conf';
 
 @Component({
@@ -16,10 +17,9 @@ import * as conf from './sidebar.conf';
 	styleUrl: './nav.component.scss',
 	host: {
 		'class': 'flex flex-col'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class NavComponent {
+export class NavComponent extends BaseComponent {
 
 	private store: Store = inject(Store);
 

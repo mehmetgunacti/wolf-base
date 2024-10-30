@@ -1,18 +1,18 @@
-import { ChangeDetectionStrategy, Component, computed, effect, input, output } from '@angular/core';
+import { Component, computed, effect, input, output } from '@angular/core';
+import { BaseComponent } from '../base.component';
 import { ToastConfiguration } from './toast.util';
 
 @Component({
 	standalone: true,
 	selector: 'w-toast',
 	templateUrl: './toast.component.html',
-	styleUrls: ['./toast.component.scss'],
+	styleUrls: [ './toast.component.scss' ],
 	host: {
 		'[tabindex]': '0',
 		'[class]': 'severity()'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class ToastComponent {
+export class ToastComponent extends BaseComponent {
 
 	// Input
 	conf = input.required<ToastConfiguration>();
@@ -29,7 +29,7 @@ export class ToastComponent {
 			case 'info': return 'campaign';
 			case 'warn': return 'warning';
 			case 'error': return 'error';
-			default : return 'help';
+			default: return 'help';
 
 		}
 
@@ -37,6 +37,7 @@ export class ToastComponent {
 
 	constructor() {
 
+		super();
 		effect(() => {
 
 			if (!this.conf().sticky && this.conf().life) // life > 0

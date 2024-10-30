@@ -7,16 +7,17 @@ import {
 	output,
 	viewChild,
 } from '@angular/core';
+import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'app-croppie',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [ CommonModule ],
 	templateUrl: './croppie.component.html',
 	styleUrl: './croppie.component.scss',
 	animations: [],
 })
-export class CroppieComponent {
+export class CroppieComponent extends BaseComponent {
 	// ViewChild
 	canvasRef = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
 	fileInput = viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
@@ -39,7 +40,7 @@ export class CroppieComponent {
 
 	onFileSelected(event: Event) {
 
-		const file = (event.target as HTMLInputElement).files?.[0];
+		const file = (event.target as HTMLInputElement).files?.[ 0 ];
 		if (file) {
 			const reader = new FileReader();
 			reader.onload = (e) => {

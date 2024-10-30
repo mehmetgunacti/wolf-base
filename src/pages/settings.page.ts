@@ -2,9 +2,9 @@ import { AsyncPipe, DatePipe, DOCUMENT } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
-import { BaseComponent } from '@components';
 import * as container from '@containers';
-import { AlertComponent, GlyphDirective, PortalComponent } from '@libComponents';
+import { GlyphDirective } from '@directive';
+import { AlertComponent, BaseComponent, PortalComponent } from '@libComponents';
 import { catchError, defer, EMPTY, from, Observable } from 'rxjs';
 import { buildInfo } from 'version';
 
@@ -18,10 +18,10 @@ import { buildInfo } from 'version';
 		PortalComponent,
 		AlertComponent,
 		RouterLink,
-		container.FirestoreConfigContainerComponent,
-		container.TitleLookupConfigContainerComponent,
-		container.PinnedNotesFormContainerComponent,
-		container.PopularBookmarksFormContainerComponent
+		container.FirestoreConfigContainer,
+		container.TitleLookupConfigContainer,
+		container.PinnedNotesFormContainer,
+		container.PopularBookmarksFormContainer
 	],
 	template: `
 		<w-portal>

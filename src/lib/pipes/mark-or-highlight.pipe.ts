@@ -16,13 +16,3 @@ export class MarkOrHighlightPipe implements PipeTransform {
 	}
 
 }
-
-
-@NgModule({
-
-	declarations: [MarkOrHighlightPipe],
-	imports: [],
-	exports: [MarkOrHighlightPipe]
-
-})
-export class MarkOrHighlightModule { }

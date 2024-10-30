@@ -1,20 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { GlyphName } from '@constants';
-import { GlyphDirective } from '@libComponents';
+import { GlyphDirective } from '@directive';
+import { BaseComponent } from '@libComponents';
 
 @Component({
 	selector: 'w-tags-container',
 	standalone: true,
-	imports: [ CommonModule, RouterModule, GlyphDirective ],
+	imports: [ CommonModule, RouterLink, GlyphDirective ],
 	templateUrl: './tags-container.component.html',
 	host: {
 		'class': 'flex justify-end items-center gap-1 comp comp-dark py-3 px-4 min-h-14'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class TagsContainerComponent {
+export class TagsContainerComponent extends BaseComponent {
 
 	glyph = input.required<GlyphName>();
 	tags = input.required<string[]>();

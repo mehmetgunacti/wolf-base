@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, effect, input, output, untracked } from '@angular/core';
+import { Component, computed, effect, input, output, untracked } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UUID } from '@constants';
-import { GlyphDirective, InputComponent, TextareaComponent } from '@libComponents';
+import { GlyphDirective } from '@directive';
+import { BaseComponent, InputComponent, TextareaComponent } from '@libComponents';
 import { Quote } from '@models';
 import { fc, fg, nnfc } from '@utils';
 
@@ -19,10 +20,9 @@ interface QuoteForm {
 	imports: [ ReactiveFormsModule, GlyphDirective, InputComponent, TextareaComponent ],
 	selector: 'app-quote-settings-form',
 	templateUrl: './quote-settings-form.component.html',
-	host: { 'class': 'flex flex-col comp' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	host: { 'class': 'flex flex-col comp' }
 })
-export class QuoteSettingsFormComponent {
+export class QuoteSettingsFormComponent extends BaseComponent {
 
 	// Input
 	quote = input<Quote | null>();
@@ -40,6 +40,7 @@ export class QuoteSettingsFormComponent {
 
 	constructor() {
 
+		super();
 		this.form = fg<QuoteForm>({
 
 			id: fc(),

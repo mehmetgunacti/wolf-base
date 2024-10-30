@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
+import { Component, input, output } from '@angular/core';
+import { GlyphDirective } from '@directive';
+import { BaseComponent } from '@libComponents';
 import { UUID } from 'lib/constants';
 import { ClickedBookmark } from 'lib/models';
 
@@ -8,10 +9,9 @@ import { ClickedBookmark } from 'lib/models';
 	standalone: true,
 	imports: [ GlyphDirective ],
 	templateUrl: './compact-bookmark.component.html',
-	host: { 'class': 'comp comp-hover comp-active' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	host: { 'class': 'comp comp-hover comp-active' }
 })
-export class CompactBookmarkComponent {
+export class CompactBookmarkComponent extends BaseComponent {
 
 	// Input
 	bookmark = input.required<ClickedBookmark>();

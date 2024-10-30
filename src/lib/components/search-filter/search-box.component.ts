@@ -1,19 +1,19 @@
-import { ChangeDetectionStrategy, Component, effect, input, output, untracked } from '@angular/core';
+import { Component, effect, input, output, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { GlyphDirective } from '@directive';
 import { debounceTime, distinctUntilChanged, filter, Subscription } from 'rxjs';
-import { GlyphDirective } from '../glyph/glyph.directive';
+import { BaseComponent } from '../base.component';
 import { InputComponent } from '../input/input.component';
 
 @Component({
 	selector: 'w-search-box',
 	standalone: true,
-	imports: [GlyphDirective, InputComponent, ReactiveFormsModule],
+	imports: [ GlyphDirective, InputComponent, ReactiveFormsModule ],
 	templateUrl: './search-box.component.html',
-	styleUrls: ['./search-box.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	styleUrls: [ './search-box.component.scss' ]
 })
-export class SearchBoxComponent {
+export class SearchBoxComponent extends BaseComponent {
 
 	protected fcSearch = new FormControl('');
 
@@ -27,6 +27,7 @@ export class SearchBoxComponent {
 
 	constructor() {
 
+		super();
 		effect(() => {
 
 			const searchTerm = this.term();
@@ -44,7 +45,7 @@ export class SearchBoxComponent {
 			distinctUntilChanged()
 
 
-		).subscribe(val => this.search.emit(val))
+		).subscribe(val => this.search.emit(val));
 
 	}
 

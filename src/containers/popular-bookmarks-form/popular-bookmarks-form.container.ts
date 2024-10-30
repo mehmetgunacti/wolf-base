@@ -1,6 +1,7 @@
 import { AsyncPipe } from '@angular/common';
-import { AfterContentInit, ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AfterContentInit, Component, inject } from '@angular/core';
 import { TagFormComponent } from '@components';
+import { BaseComponent } from '@libComponents';
 import { Store } from '@ngrx/store';
 import { selBM_distinctTagsArray, selCore_popularBookmarks } from '@selectors';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
@@ -10,11 +11,10 @@ import { settingsActions } from 'store/actions';
 	standalone: true,
 	imports: [ TagFormComponent, AsyncPipe ],
 	selector: 'app-popular-bookmarks-form-container',
-	templateUrl: './popular-bookmarks-form-container.component.html',
-	host: { 'class': 'comp p-4' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	templateUrl: './popular-bookmarks-form.container.html',
+	host: { 'class': 'comp p-4' }
 })
-export class PopularBookmarksFormContainerComponent implements AfterContentInit {
+export class PopularBookmarksFormContainer extends BaseComponent implements AfterContentInit {
 
 	private store: Store = inject(Store);
 

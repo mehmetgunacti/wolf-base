@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
+import { GlyphDirective } from '@directive';
+import { BaseComponent } from '@libComponents';
 import { CloudTask } from '@models';
 import { Store } from '@ngrx/store';
-import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
+import { selCloudAvailableTasks } from '@selectors';
 import { coreActions } from 'store/actions';
-import { selCloudAvailableTasks } from 'store/selectors/cloud/cloud.selectors';
 
 @Component({
 	selector: 'app-header',
@@ -13,10 +14,9 @@ import { selCloudAvailableTasks } from 'store/selectors/cloud/cloud.selectors';
 	styleUrls: [ './header.component.scss' ],
 	host: {
 		'class': 'flex items-center justify-between'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class HeaderComponent {
+export class HeaderComponent extends BaseComponent {
 
 	private store: Store = inject(Store);
 

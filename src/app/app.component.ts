@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { mainTrigger, opacityTrigger, sidebarTrigger } from '@animations';
+import { BaseComponent } from '@libComponents';
 import { SidebarState } from '@constants';
 import { Store } from '@ngrx/store';
 import { selCore_sidebarState } from '@selectors';
@@ -14,9 +15,8 @@ import { appImports } from './app.config';
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
 	animations: [ sidebarTrigger, opacityTrigger, mainTrigger ],
-	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+export class AppComponent extends BaseComponent {
 
 	protected splashVisible = signal(true);
 	protected sidebarState = inject(Store).selectSignal(selCore_sidebarState);
@@ -26,6 +26,7 @@ export class AppComponent {
 
 	constructor() {
 
+		super();
 		// to tweak splashscreen animation & duration:
 		// delay(), splashscreen-component.scss and splash-screen.animation.ts
 		of(false)

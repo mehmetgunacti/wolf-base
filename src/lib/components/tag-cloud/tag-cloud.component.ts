@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { Tag } from '@models';
+import { BaseComponent } from '../base.component';
 
 interface TagUI {
 
@@ -85,10 +86,9 @@ function createUITags(selectedTags: string[], relatedTags: string[], tags: Tag[]
 	standalone: true,
 	imports: [ CommonModule ],
 	templateUrl: './tag-cloud.component.html',
-	styleUrls: [ './tag-cloud.component.scss' ],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	styleUrls: [ './tag-cloud.component.scss' ]
 })
-export class TagCloudComponent {
+export class TagCloudComponent extends BaseComponent {
 
 	tags = input.required<Tag[]>();
 	selectedTags = input.required<string[]>();

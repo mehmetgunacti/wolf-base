@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '@components';
 import * as container from '@containers';
-import { PortalComponent } from '@libComponents';
+import { BaseComponent, PortalComponent } from '@libComponents';
 
 @Component({
 	selector: 'home-page',
 	standalone: true,
 	imports: [
 		PortalComponent,
-		container.PopularBookmarksContainerComponent,
-		container.QuoteContainerComponent,
-		container.PinnedNotesContainerComponent
+		container.PopularBookmarksContainer,
+		container.QuoteContainer,
+		container.PinnedNotesContainer
 	],
 	template: `
 		<w-portal>

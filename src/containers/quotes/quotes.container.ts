@@ -1,8 +1,9 @@
 import { quoteActions } from '@actions';
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, inject, signal, Signal, WritableSignal } from '@angular/core';
 import { QuoteComponent } from '@components';
-import { GlyphDirective } from '@libComponents';
+import { GlyphDirective } from '@directive';
+import { BaseComponent } from '@libComponents';
 import { Quote } from '@models';
 import { Store } from '@ngrx/store';
 import { selQuote_SelectedEntity, selQuoteViewer_animate, selQuoteViewer_running } from '@selectors';
@@ -35,18 +36,18 @@ const incoming$ = (pair: Pair, animate: boolean, store: Store): Observable<Quote
 	selector: 'app-quotes-container',
 	standalone: true,
 	imports: [ QuoteComponent, GlyphDirective, AsyncPipe ],
-	templateUrl: './quotes-container.component.html',
+	templateUrl: './quotes.container.html',
 	host: {
 		'class': 'relative block p-3 md:p-4 comp comp-dark min-h-40 text-content @container group'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class QuoteContainerComponent {
+export class QuoteContainer extends BaseComponent {
 
 	private store: Store = inject(Store);
 
 	constructor() {
 
+		super();
 		this.store.dispatch(quoteActions.setRunning({ running: true }));
 
 	}

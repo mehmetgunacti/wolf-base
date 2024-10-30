@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, output, viewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, output, viewChild } from '@angular/core';
 import { delayDestroyTrigger } from '@animations';
+import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-modal',
@@ -10,10 +11,9 @@ import { delayDestroyTrigger } from '@animations';
 		'[@delayDestroy]': '',
 		'class': 'd-contents',
 		'(keydown)': 'onKeydownHandler($event)'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent extends BaseComponent implements OnInit {
 
 	private dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
 

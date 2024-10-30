@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, effect, forwardRef, input, model, ModelSignal, output, signal } from '@angular/core';
+import { Component, forwardRef, input, model, ModelSignal, signal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-switch',
 	standalone: true,
-	imports: [FormsModule],
+	imports: [ FormsModule ],
 	templateUrl: './switch.component.html',
 	styleUrl: './switch.component.scss',
 	providers: [
@@ -18,21 +19,20 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 		'[tabindex]': '0',
 		'(keydown)': 'onKeyDown($event)',
 		'(click)': 'onInput()'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class SwitchComponent implements ControlValueAccessor {
+export class SwitchComponent extends BaseComponent implements ControlValueAccessor {
 
 	// Input
 	label = input<string>('');
 
 	// Model
-	value : ModelSignal<boolean> = model<boolean>(false);
+	value: ModelSignal<boolean> = model<boolean>(false);
 	protected disabled = signal<boolean>(false);
 
 	//////////// boilerplate
-	private onChange: any = () => { }
-	private onTouched: any = () => { }
+	private onChange: any = () => { };
+	private onTouched: any = () => { };
 	registerOnChange(fn: any): void { this.onChange = fn; }
 	registerOnTouched(fn: any): void { this.onTouched = fn; }
 	writeValue(value: boolean): void { this.value.set(value); }

@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-selected-tags',
 	standalone: true,
 	templateUrl: './selected-tags.component.html',
-	styleUrls: ['./selected-tags.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	styleUrls: [ './selected-tags.component.scss' ]
 })
-export class SelectedTagsComponent {
+export class SelectedTagsComponent extends BaseComponent {
 
 	tags = input.required<string[]>();
 	selectedTags = input.required<string[]>();

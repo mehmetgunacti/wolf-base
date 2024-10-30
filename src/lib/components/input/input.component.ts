@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
+import { Component, computed, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-input',
@@ -16,10 +17,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()',
 		'class': 'inline-flex relative h-widget-height border-form-element-border bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none group'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class InputComponent implements ControlValueAccessor {
+export class InputComponent extends BaseComponent implements ControlValueAccessor {
 
 	private inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
@@ -34,8 +34,8 @@ export class InputComponent implements ControlValueAccessor {
 	protected isLabelUp = computed(() => this.labelUp() || !!this.value());
 
 	//////////// boilerplate
-	private onChange: any = () => { }
-	private onTouched: any = () => { }
+	private onChange: any = () => { };
+	private onTouched: any = () => { };
 	registerOnChange(fn: any): void { this.onChange = fn; }
 	registerOnTouched(fn: any): void { this.onTouched = fn; }
 	writeValue(value: string): void { this.value.set(value); }

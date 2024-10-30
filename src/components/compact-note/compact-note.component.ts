@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TAG_PINNED } from '@constants';
+import { GlyphDirective } from '@directive';
+import { BaseComponent } from '@libComponents';
 import { TimePastPipe } from '@pipes';
-import { GlyphDirective } from 'lib/components/glyph/glyph.directive';
 import { Note } from 'lib/models';
 
 @Component({
@@ -10,10 +11,9 @@ import { Note } from 'lib/models';
 	standalone: true,
 	imports: [ GlyphDirective, RouterLink, TimePastPipe ],
 	templateUrl: './compact-note.component.html',
-	host: { 'class': 'block comp comp-hover comp-active' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	host: { 'class': 'block comp comp-hover comp-active' }
 })
-export class CompactNoteComponent {
+export class CompactNoteComponent extends BaseComponent {
 
 	protected TAG_PINNED = TAG_PINNED;
 

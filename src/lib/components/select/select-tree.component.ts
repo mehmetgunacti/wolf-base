@@ -1,13 +1,14 @@
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
 import { CdkTreeModule } from '@angular/cdk/tree';
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, ViewChild, WritableSignal, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, HostListener, Input, ViewChild, WritableSignal, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UUID } from '@constants';
 import { HasParentId } from '@models';
-import { ROOT_ID } from './select.util';
+import { BaseComponent } from '../base.component';
 import { OptionsComponent } from './options.component';
-import { CommonModule } from '@angular/common';
+import { ROOT_ID } from './select.util';
 
 @Component({
 	selector: 'w-select-tree',
@@ -15,10 +16,9 @@ import { CommonModule } from '@angular/common';
 	imports: [ ReactiveFormsModule, CdkTreeModule, CdkMenuModule, OptionsComponent, CommonModule ],
 	templateUrl: './select-tree.component.html',
 	styleUrls: [ './select-tree.component.scss' ],
-	host: { 'class': 'input-element' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	host: { 'class': 'input-element' }
 })
-export class SelectTreeComponent {
+export class SelectTreeComponent extends BaseComponent {
 
 	label_id: string = 'select_tree_' + Math.random();
 
