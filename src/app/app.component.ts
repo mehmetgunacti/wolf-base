@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { mainTrigger, opacityTrigger, sidebarTrigger } from '@animations';
-import { BaseComponent } from '@libComponents';
 import { SidebarState } from '@constants';
+import { BaseComponent } from '@libComponents';
 import { Store } from '@ngrx/store';
 import { selCore_sidebarState } from '@selectors';
 import { delay, of } from 'rxjs';
@@ -21,8 +21,6 @@ export class AppComponent extends BaseComponent {
 	protected splashVisible = signal(true);
 	protected sidebarState = inject(Store).selectSignal(selCore_sidebarState);
 	protected sidebarOpen = computed(() => this.sidebarState() === SidebarState.FULL);
-
-	protected isProd = environment.production;
 
 	constructor() {
 

@@ -7,7 +7,8 @@ export interface GlyphData {
 
 }
 
-export type GlyphName = 'add'
+export type GlyphName =
+	| 'add'
 	| 'add_circle'
 	| 'add_task'
 	| 'backspace'
@@ -85,6 +86,7 @@ export type GlyphName = 'add'
 	| 'redo'
 	| 'refresh'
 	| 'remove'
+	| 'ribbon'
 	| 'save'
 	| 'schedule'
 	| 'school'
@@ -753,6 +755,14 @@ export const Glyphs: Record<GlyphName, GlyphData> = {
 		height: '16',
 		viewBox: '0 0 16 16',
 		d: [ 'M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8' ]
+
+	},
+	ribbon: {
+
+		width: '80',
+		height: '80',
+		viewBox: '0 90 612 612',
+		d: [ 'm0 90h283.05l328.95 328.95v283.05z' ]
 
 	},
 	save: {

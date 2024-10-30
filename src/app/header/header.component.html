@@ -19,3 +19,12 @@
 <section id="portal-outlet" class="flex flex-1 justify-end pe-2">
 	<!-- content will be placed dynamically via Cdk Portal -->
 </section>
+
+@if (isDev) {
+
+	<div class="top-0 right-0 absolute select-none">
+		<svg wGlyph="ribbon" class="text-6xl fill-focus stroke-focus"></svg>
+		<div class="top-3 right-2 absolute font-bold text-xs rotate-45">[dev]</div>
+	</div>
+
+}

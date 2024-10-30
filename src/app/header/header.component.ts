@@ -4,6 +4,7 @@ import { BaseComponent } from '@libComponents';
 import { CloudTask } from '@models';
 import { Store } from '@ngrx/store';
 import { selCloudAvailableTasks } from '@selectors';
+import { environment } from 'environments/environment';
 import { coreActions } from 'store/actions';
 
 @Component({
@@ -11,7 +12,6 @@ import { coreActions } from 'store/actions';
 	standalone: true,
 	imports: [ GlyphDirective ],
 	templateUrl: './header.component.html',
-	styleUrls: [ './header.component.scss' ],
 	host: {
 		'class': 'flex items-center justify-between'
 	}
@@ -20,7 +20,8 @@ export class HeaderComponent extends BaseComponent {
 
 	private store: Store = inject(Store);
 
-	cloudTasks: Signal<CloudTask[]> = this.store.selectSignal(selCloudAvailableTasks);
+	protected cloudTasks: Signal<CloudTask[]> = this.store.selectSignal(selCloudAvailableTasks);
+	protected isDev = !environment.production;
 
 	toggleNav(): void {
 
