@@ -8,7 +8,7 @@ import { catchError, defer, EMPTY, from, Observable } from 'rxjs';
 import { buildInfo } from 'version';
 
 @Component({
-	selector: 'app-settings-page',
+	selector: 'settings-page',
 	standalone: true,
 	imports: [
 		AsyncPipe,
@@ -22,13 +22,43 @@ import { buildInfo } from 'version';
 		container.PinnedNotesFormContainerComponent,
 		container.PopularBookmarksFormContainerComponent
 	],
-	templateUrl: './settings-page.component.html',
-	host: {
-		'class': 'page'
-	},
+	template: `
+		<w-portal>
+
+			<button
+				class="btn btn-ghost"
+				routerLink="components">
+				<svg wGlyph="grid_view"></svg>
+				Components
+			</button>
+
+		</w-portal>
+
+		@if (updateAvailable$ | async) {
+
+			<w-alert severity="warn">
+
+				<span>Update available</span>
+				<button class="btn btn-ghost" (click)="onUpdateApp()" data-after="Update">
+					<svg wGlyph="update"></svg>
+				</button>
+
+			</w-alert>
+
+		}
+		<!-- <app-quote-settings-container/> -->
+		<app-firestore-config-container/>
+		<app-title-lookup-config-container/>
+		<app-pinned-notes-form-container/>
+		<app-popular-bookmarks-form-container/>
+		<div class="flex justify-end items-center p-4 text-base-color-secondary comp">
+			<small>v{{ builtVersion }} (#{{ builtNumber }}) {{ builtTime | date:'dd.MM.yyyy HH:mm:ss' }}</small>
+		</div>
+	`,
+	host: { 'class': 'page' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsPageComponent {
+export class SettingsPage {
 
 	builtTime = buildInfo.builtTime;
 	builtVersion = buildInfo.version;

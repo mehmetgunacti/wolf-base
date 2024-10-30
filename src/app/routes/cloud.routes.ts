@@ -5,7 +5,7 @@ export const FEATURE_ROUTES: Routes = [
 	{
 
 		path: '',
-		loadComponent: () => import('pages/cloud-page/cloud-page.component').then(c => c.CloudPageComponent)
+		loadComponent: () => import('pages/cloud.page').then(c => c.CloudPage)
 
 	}
 

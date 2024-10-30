@@ -5,12 +5,12 @@ export const FEATURE_ROUTES: Routes = [
 	{
 
 		path: '',
-		loadComponent: () => import('pages/settings-page/settings-page.component').then(c => c.SettingsPageComponent),
+		loadComponent: () => import('pages/settings.page').then(c => c.SettingsPage),
 	},
 	{
 
 		path: 'components',
-		loadComponent: () => import('pages/components-page/components-page.component').then(c => c.ComponentsPageComponent)
+		loadComponent: () => import('pages/showcase.page').then(c => c.ShowcasePage)
 
 	}
 

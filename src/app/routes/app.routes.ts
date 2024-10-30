@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { PageNotFoundComponent } from 'pages/page-not-found.component';
+import { PageNotFoundPage } from '@pages';
 
 export const routes: Routes = [
 
@@ -63,6 +63,6 @@ export const routes: Routes = [
 		loadChildren: () => import('./settings.routes').then(m => m.FEATURE_ROUTES),
 
 	},
-	{ path: '**', component: PageNotFoundComponent }
+	{ path: '**', component: PageNotFoundPage }
 
 ];

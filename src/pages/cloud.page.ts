@@ -1,15 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
+	selector: 'cloud-page',
 	standalone: true,
 	imports: [],
-	templateUrl: './components-page.component.html',
-	host: {
-		'class': 'page'
-	},
+	template: `
+		<p>cloud-page works!</p>
+	`,
+	host: { 'class': 'page' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComponentsPageComponent {
-
-
-}
+export class CloudPage { }

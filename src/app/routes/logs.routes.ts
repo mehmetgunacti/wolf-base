@@ -5,7 +5,7 @@ export const FEATURE_ROUTES: Routes = [
 	{
 
 		path: '',
-		loadComponent: () => import('pages/logs-page/logs-page.component').then(c => c.LogsPageComponent)
+		loadComponent: () => import('pages/logs.page').then(c => c.LogsPage)
 
 	}
 
