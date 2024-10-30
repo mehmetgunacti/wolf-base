@@ -1,6 +1,6 @@
 import { coreActions } from '@actions';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { APP_INITIALIZER, ApplicationConfig, ErrorHandler, isDevMode, provideZoneChangeDetection } from '@angular/core';
+import { APP_INITIALIZER, ApplicationConfig, ErrorHandler, isDevMode, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, RouterOutlet, withViewTransitions } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
@@ -10,10 +10,10 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import * as service from '@services';
 import { indexedDbConfiguration } from 'services/indexeddb';
 import * as store from 'store/store.config';
-import { routes } from './routes/app.routes';
 import { HeaderComponent } from './header/header.component';
 import { NavOverlayComponent } from './nav-overlay/nav-overlay.component';
 import { NavComponent } from './nav/nav.component';
+import { routes } from './routes/app.routes';
 
 export const appImports = [
 
@@ -50,7 +50,7 @@ const appServices = [
 export const appConfig: ApplicationConfig = {
 
 	providers: [
-		provideZoneChangeDetection({ eventCoalescing: true }),
+		provideExperimentalZonelessChangeDetection(),
 		provideRouter(routes, withViewTransitions()),
 		provideHttpClient(),
 		provideAnimations(),
