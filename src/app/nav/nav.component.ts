@@ -2,7 +2,7 @@ import { coreActions } from '@actions';
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { BaseComponent } from '@libComponents';
 import { MenuItem } from '@models';
 import { Store } from '@ngrx/store';

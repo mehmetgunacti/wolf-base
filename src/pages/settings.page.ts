@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import * as container from '@containers';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { AlertComponent, BaseComponent, PortalComponent } from '@libComponents';
 import { catchError, defer, EMPTY, from, Observable } from 'rxjs';
 import { buildInfo } from 'version';

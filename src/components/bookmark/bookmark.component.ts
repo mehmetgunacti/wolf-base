@@ -1,6 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { BaseComponent } from '@libComponents';
 import { UUID } from 'lib/constants';
 import { ClickedBookmark } from 'lib/models';

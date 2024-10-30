@@ -1,5 +1,5 @@
 import { Component, inject, Signal } from '@angular/core';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { BaseComponent } from '@libComponents';
 import { CloudTask } from '@models';
 import { Store } from '@ngrx/store';

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { CompactNoteComponent } from '@components';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { BaseComponent, TagsContainerComponent } from '@libComponents';
 import { Store } from '@ngrx/store';
 import { compareISODateStrings } from '@utils';

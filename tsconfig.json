@@ -43,7 +43,7 @@
 			"@libComponents": [
 				"lib/components"
 			],
-			"@directive": [
+			"@directives": [
 				"lib/directives"
 			],
 			"@models": [

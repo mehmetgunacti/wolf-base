@@ -1,7 +1,7 @@
 import { Component, effect, input, output, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { debounceTime, distinctUntilChanged, filter, Subscription } from 'rxjs';
 import { BaseComponent } from '../base.component';
 import { InputComponent } from '../input/input.component';

@@ -2,7 +2,7 @@ import { Component, InputSignal, input, output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UUID } from '@constants';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { BaseComponent, InputComponent } from '@libComponents';
 import { Quote } from '@models';
 import { fc } from '@utils';

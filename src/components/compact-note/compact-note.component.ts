@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TAG_PINNED } from '@constants';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { BaseComponent } from '@libComponents';
 import { TimePastPipe } from '@pipes';
 import { Note } from 'lib/models';

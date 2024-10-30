@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { CompactBookmarkComponent } from '@components';
 import { UUID } from '@constants';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { BaseComponent, TagsContainerComponent } from '@libComponents';
 import { Store } from '@ngrx/store';
 import { bookmarkActions } from 'store/actions';

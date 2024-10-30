@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { slideUpDownTrigger } from '@animations';
 import { GlyphName, Glyphs, PROJECT_STATUS } from '@constants';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import * as component from '@libComponents';
 import { BaseComponent } from '@libComponents';
 

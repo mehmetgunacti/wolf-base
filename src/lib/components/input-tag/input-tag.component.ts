@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, InputSignal, WritableSignal, computed, forwardRef, input, output, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { UUID } from '@constants';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { filterArrayElements } from '@utils';
 import { v4 as uuidv4 } from 'uuid';
 import { BaseComponent } from '../base.component';

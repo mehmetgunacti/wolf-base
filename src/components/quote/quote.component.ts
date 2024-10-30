@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { BaseComponent } from '@libComponents';
 import { Quote } from '@models';
 

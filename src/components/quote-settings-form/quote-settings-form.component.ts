@@ -1,7 +1,7 @@
 import { Component, computed, effect, input, output, untracked } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UUID } from '@constants';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { BaseComponent, InputComponent, TextareaComponent } from '@libComponents';
 import { Quote } from '@models';
 import { fc, fg, nnfc } from '@utils';

@@ -1,6 +1,6 @@
 import { Component, effect, input, output, untracked } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { GlyphDirective } from '@directive';
+import { GlyphDirective } from '@directives';
 import { BaseComponent, InputTagComponent } from '@libComponents';
 
 @Component({
