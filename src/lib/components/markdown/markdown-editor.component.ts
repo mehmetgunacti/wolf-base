@@ -1,8 +1,8 @@
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenuBar, CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, WritableSignal, inject, input, signal, viewChild } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, TemplateRef, forwardRef, inject, input, output, signal, viewChild } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { TimePastPipe } from '@pipes';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
 import { ClipboardService } from 'services';
@@ -23,6 +23,11 @@ import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 	providers: [
 		{ provide: UNDO_CACHE, useClass: UndoCacheImpl },
 		{ provide: RECOVERY_MANAGER, useClass: RecoveryManagerImpl },
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => MarkdownEditorComponent),
+			multi: true
+		}
 	],
 	host: {
 		'[tabindex]': '0',
@@ -30,37 +35,63 @@ import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 		'class': 'inline-flex relative min-h-widget-height bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none group'
 	}
 })
-export class MarkdownEditorComponent extends BaseComponent implements OnInit, OnDestroy {
+export class MarkdownEditorComponent extends BaseComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
 	editor = viewChild.required<ElementRef<HTMLTextAreaElement>>('editor');
-	trigger = viewChild.required<CdkMenuTrigger>('trigger');
-	menuBar = viewChild.required<CdkMenuBar>('menuBar');
+	trigger = viewChild.required<CdkMenuTrigger>(CdkMenuTrigger);
+	menuBar = viewChild.required<CdkMenuBar>(CdkMenuBar);
 	previewTemplate = viewChild.required<TemplateRef<HTMLDivElement>>('previewTemplate');
 	recoverTemplate = viewChild.required<TemplateRef<HTMLDivElement>>('recoverTemplate');
 
-	@Input({ required: true }) control!: FormControl<string>;
-	@Input() name: string = '';
-	@Input() readonly = false;
+	protected value = signal<string>('');
+	protected disabled = signal<boolean>(false);
+	protected dirty = signal<boolean>(false);
+
+	label = input.required<string>();
 	rows = input<number>(10);
+	readonly = input<boolean>(false);
 
-	@Output() save: EventEmitter<string> = new EventEmitter();
-	@Output() saveClose: EventEmitter<string> = new EventEmitter();
-	@Output() cancel: EventEmitter<void> = new EventEmitter();
+	save = output<string>();
+	saveClose = output<string>();
+	cancel = output<void>();
 
-	hasFocus: WritableSignal<boolean> = signal(false);
-	actions: ButtonActions = new ButtonActions();
-	btnImageShake: WritableSignal<boolean> = signal(false);
-	btnOpenRecovery: WritableSignal<boolean> = signal(false);
-	buffer: Subject<string> = new Subject();
+	//////////// boilerplate
+	private onChange: any = () => { };
+	private onTouched: any = () => { };
+	registerOnChange(fn: any): void { this.onChange = fn; }
+	registerOnTouched(fn: any): void { this.onTouched = fn; }
+	writeValue(value: string): void { this.value.set(value); this.dirty.set(true); }
+	setDisabledState(isDisabled: boolean): void { this.disabled.set(isDisabled); }
+	////////////
 
-	undoCache: UndoCache = inject(UNDO_CACHE);
-	recoveryManager: RecoveryManager = inject(RECOVERY_MANAGER);
-	showPreview = signal(false);
-	showRecover = signal(false);
-	// private previewDialogRef: DialogRef<null, HTMLDivElement> | null = null;
-	// private recoverDialogRef: DialogRef<null, HTMLDivElement> | null = null;
+	// Method that handles the change event of the checkbox
+	onInput(value: string): void {
+
+		this.value.set(value);
+		this.dirty.set(true);
+		this.onChange(value);
+		this.onTouched();
+
+	}
+
+	onHostFocus(): void {
+
+		this.editor().nativeElement.focus();
+
+	}
+
+	protected hasFocus = signal<boolean>(false);
+	protected actions = new ButtonActions();
+	protected btnImageShake = signal<boolean>(false);
+	protected btnOpenRecovery = signal<boolean>(false);
+	protected buffer = new Subject<string>();
+
+	protected undoCache: UndoCache = inject(UNDO_CACHE);
+	protected recoveryManager: RecoveryManager = inject(RECOVERY_MANAGER);
+	protected showPreview = signal<boolean>(false);
+	protected showRecover = signal<boolean>(false);
+
 	private clipboardService: ClipboardService = inject(ClipboardService);
-
 	private subscriptions: Subscription = new Subscription();
 
 	ngOnInit(): void {
@@ -86,22 +117,22 @@ export class MarkdownEditorComponent extends BaseComponent implements OnInit, On
 
 		);
 
-		this.subscriptions.add(
-
-			this.control.valueChanges.subscribe(
-
-				content => {
-
-					if (this.control.pristine) // first value from db
-						this.undoCache.initialize(content);
-					else
-						this.buffer.next(content);
-
-				}
-
-			)
-
-		);
+		// 		this.subscriptions.add(
+		//
+		// 			this.control.valueChanges.subscribe(
+		//
+		// 				content => {
+		//
+		// 					if (this.control.pristine) // first value from db
+		// 						this.undoCache.initialize(content);
+		// 					else
+		// 						this.buffer.next(content);
+		//
+		// 				}
+		//
+		// 			)
+		//
+		// 		);
 
 	}
 
@@ -318,8 +349,8 @@ export class MarkdownEditorComponent extends BaseComponent implements OnInit, On
 		 * undoCache's initialization depends on the order here:
 		 * control continues initializing 'undoCache' until it's 'dirty'.
 		 * see: ngOnInit() */
-		this.control.markAsDirty();
-		this.control.setValue(content, { emitEvent });
+		// this.control.markAsDirty();
+		// this.control.setValue(content, { emitEvent });
 
 	}
 

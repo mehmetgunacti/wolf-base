@@ -49,12 +49,6 @@ export class ShowcaseContainer extends BaseComponent {
 		'editor': new FormControl<string>('', { validators: [ Validators.required ], nonNullable: true }),
 	});
 
-	editor(): FormControl<string> {
-
-		return this.form.controls[ 'editor' ];
-
-	}
-
 	onTagInput(val: string | null): void {
 
 		if (val !== null)

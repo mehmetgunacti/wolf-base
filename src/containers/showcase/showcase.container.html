@@ -11,7 +11,7 @@
 	<div class="overflow-hidden" [class.pb-4]="formsVisible()" [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
 
 		<form [formGroup]="form" class="flex flex-col gap-3 p-4">
-			<w-markdown-editor [control]="editor()" name="Editor"/>
+			<w-markdown-editor formControlName="editor" label="Editor"/>
 			<w-input label="Text" formControlName="text"/>
 			<w-input-tag
 				formControlName="tags"

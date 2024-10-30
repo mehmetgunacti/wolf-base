@@ -6,8 +6,8 @@
 		class="glyph squared"
 		(click)="onSave()"
 		title="Save Changes"
-		[disabled]="!control.dirty"
-		[cdkMenuItemDisabled]="!control.dirty">
+		[disabled]="!dirty()"
+		[cdkMenuItemDisabled]="!dirty()">
 		<svg wGlyph="save"></svg>
 	</button>
 
@@ -16,7 +16,7 @@
 		cdkMenuItem
 		class="glyph squared"
 		title="Close Editor"
-		(click)="onCancel(control.dirty)">
+		(click)="onCancel(dirty())">
 		<svg wGlyph="cancel"></svg>
 	</button>
 
@@ -279,15 +279,16 @@
 
 	<textarea
 		#editor
-		[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
+		class="border-0 bg-transparent px-3 p-2 w-full text-content outline-0 peer"
+		[value]="value()"
 		placeholder=""
-		[formControl]="control"
-		[readonly]="readonly"
+		[readonly]="readonly()"
+		[disabled]="disabled()"
 		(focus)="hasFocus.set(true)"
 		(blur)="hasFocus.set(false)"
-		[rows]="rows()"
-		required></textarea>
-	<label>{{name}}</label>
+		(input)="onInput(editor.value)"
+		[rows]="rows()"></textarea>
+	<label>{{label()}}</label>
 	<label class="right up">
 		<span class="icon-container">
 			<svg wGlyph="description"></svg>
