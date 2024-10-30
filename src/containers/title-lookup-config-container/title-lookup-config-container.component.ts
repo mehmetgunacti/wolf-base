@@ -9,6 +9,7 @@ import { settingsActions } from 'store/actions';
 	imports: [ TitleLookupConfigFormComponent ],
 	selector: 'app-title-lookup-config-container',
 	templateUrl: './title-lookup-config-container.component.html',
+	host: { 'class': 'comp p-4' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TitleLookupConfigContainerComponent {

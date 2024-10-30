@@ -11,6 +11,7 @@ import { settingsActions } from 'store/actions';
 	imports: [ TagFormComponent, AsyncPipe ],
 	selector: 'app-pinned-notes-form-container',
 	templateUrl: './pinned-notes-form-container.component.html',
+	host: { 'class': 'comp p-4' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PinnedNotesFormContainerComponent implements AfterContentInit {

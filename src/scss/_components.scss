@@ -162,7 +162,24 @@
 
 	.tag {
 
-		@apply flex rounded-full bg-accent px-3 py-0 text-xs leading-6 text-content hover:bg-accent-hover active:bg-accent-active focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none;
+		@apply
+			flex
+			rounded-full
+			bg-accent
+			text-content
+
+			text-xs
+			leading-6
+
+			px-3
+			py-0
+
+			hover:bg-accent-hover
+			active:bg-accent-active
+
+			focus-visible:ring-4
+			focus-visible:ring-outline
+			focus-visible:outline-none;
 
 	}
 

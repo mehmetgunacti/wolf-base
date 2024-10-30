@@ -11,6 +11,7 @@ import { settingsActions } from 'store/actions';
 	imports: [ TagFormComponent, AsyncPipe ],
 	selector: 'app-popular-bookmarks-form-container',
 	templateUrl: './popular-bookmarks-form-container.component.html',
+	host: { 'class': 'comp p-4' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopularBookmarksFormContainerComponent implements AfterContentInit {

@@ -11,7 +11,6 @@ import { GlyphDirective } from '../glyph/glyph.directive';
 	standalone: true,
 	imports: [CommonModule, GlyphDirective],
 	templateUrl: './input-tag.component.html',
-	styleUrls: ['./input-tag.component.scss'],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -21,7 +20,8 @@ import { GlyphDirective } from '../glyph/glyph.directive';
 	],
 	host: {
 		'[tabindex]': '0',
-		'(focus)': 'onHostFocus()'
+		'(focus)': 'onHostFocus()',
+		'class': 'grid grid-cols-[auto,1fr] relative min-h-widget-height px-3 border-form-element-border bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none group'
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

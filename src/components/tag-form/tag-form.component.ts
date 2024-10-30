@@ -7,7 +7,7 @@ import { GlyphDirective, InputTagComponent } from '@libComponents';
 	imports: [ ReactiveFormsModule, GlyphDirective, InputTagComponent ],
 	selector: 'app-tag-form',
 	templateUrl: './tag-form.component.html',
-	host: { 'class': 'flex flex-col comp' },
+	host: { 'class': 'flex flex-col' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TagFormComponent {

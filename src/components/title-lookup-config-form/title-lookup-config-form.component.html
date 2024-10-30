@@ -1,11 +1,11 @@
-<form (ngSubmit)="onSave()">
+<form (ngSubmit)="onSave()" class="flex flex-col gap-4">
 
 	<!-- URL -->
 	<w-input [formControl]="fcUrl" label="URL"/>
 
 	<footer>
 
-		<button [disabled]="this.fcUrl.pristine || this.fcUrl.invalid">
+		<button [disabled]="this.fcUrl.pristine || this.fcUrl.invalid" class="float-right btn">
 			<svg wGlyph="save"></svg> Save
 		</button>
 

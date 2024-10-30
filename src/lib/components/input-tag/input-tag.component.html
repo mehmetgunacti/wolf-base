@@ -1,5 +1,5 @@
 <!-- TAGS LIST -->
-<div tags>
+<div class="peer/tags place-self-center">
 
 	@for (t of value(); track $index) {
 
@@ -7,7 +7,7 @@
 			type="button"
 			title="Click to remove"
 			(click)="removeTag(t)"
-			class="inline-flex items-center gap-1 tag tag-sm">
+			class="inline-flex flex-row items-center gap-1 me-1 tag tag-sm">
 			{{t}} <svg wGlyph="close" class="text-4xs stroke-content"></svg>
 		</button>
 
@@ -19,11 +19,48 @@
 <input
 	#inputElement
 	type="text"
+	class="border-0 bg-transparent text-content outline-0 peer place-self-stretch"
 	[attr.list]="UUID() + '_suggestions'"
 	(input)="onInput($event)"
 	(keydown)="onKeydown($event)"
-	(blur)="onBlur()"/>
-<label [class.up]="isLabelUp()">{{label()}}</label>
+	(blur)="onBlur()"
+	placeholder=""/>
+<label class="
+	-top-3.5
+	left-2
+	absolute
+	text-2xs
+	leading-5
+	px-1
+	rounded
+	bg-component-dark
+	text-form-element-text
+
+	peer-focus:-top-3.5
+	peer-focus:text-2xs
+	peer-focus:leading-5
+	peer-focus:text-gray-600
+	peer-focus:bg-component-dark
+	peer-focus:text-form-element-text
+
+	peer-placeholder-shown:top-3
+	peer-placeholder-shown:text-base
+	peer-placeholder-shown:bg-transparent
+	peer-placeholder-shown:text-base-color-secondary
+
+	peer-[:not(:empty)]/tags:-top-3.5
+	peer-[:not(:empty)]/tags:text-2xs
+	peer-[:not(:empty)]/tags:leading-5
+	peer-[:not(:empty)]/tags:text-gray-600
+	peer-[:not(:empty)]/tags:bg-component-dark
+	peer-[:not(:empty)]/tags:text-form-element-text
+
+	transition-all
+	duration-500
+
+	before:content-['*']
+	before:text-focus
+	before:mr-1">{{label()}}</label>
 
 <!-- DATALIST -->
 <datalist [id]="UUID() + '_suggestions'">

@@ -13,6 +13,7 @@ import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 	imports: [ QuoteSettingsFormComponent, QuoteSettingsListComponent, AsyncPipe ],
 	selector: 'app-quote-settings-container',
 	templateUrl: './quote-settings-container.component.html',
+	host: { 'class': 'comp p-4' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuoteSettingsContainerComponent {

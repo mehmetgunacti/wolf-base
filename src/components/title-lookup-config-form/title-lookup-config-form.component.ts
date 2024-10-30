@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, effect, input, output, untracked } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { GlyphDirective, InputComponent } from '@libComponents';
-import { nnfc } from '@utils';
+import { nnfc, urlValidator } from '@utils';
 
 @Component({
 	standalone: true,
 	imports: [ ReactiveFormsModule, GlyphDirective, InputComponent ],
 	selector: 'app-title-lookup-config-form',
 	templateUrl: './title-lookup-config-form.component.html',
-	host: { 'class': 'flex flex-col comp' },
+	host: { 'class': 'flex flex-col' },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TitleLookupConfigFormComponent {
@@ -20,7 +20,7 @@ export class TitleLookupConfigFormComponent {
 	save = output<string>();
 
 	// Form
-	protected fcUrl = nnfc<string>('', [ Validators.required, Validators.minLength(3) ]);
+	protected fcUrl = nnfc<string>('', [ Validators.required, urlValidator() ]);
 
 	constructor() {
 
