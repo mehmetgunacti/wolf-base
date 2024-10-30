@@ -56,15 +56,13 @@ export const miCloud = (cloudTasks: CloudTask[]): MenuItem => ({
 
 export const miSetting: MenuItem = {
 	url: [ '/settings' ],
-	queryParams: { tags: TAG_POPULAR },
 	label: 'Settings',
 	icon: 'settings',
-	routerLinkActiveOptions: { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
+	routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
 };
 
 export const miDatabase: MenuItem = {
 	url: [ '/database' ],
-	queryParams: { tags: TAG_POPULAR },
 	label: 'Database',
 	icon: 'database',
 	routerLinkActiveOptions: { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
@@ -72,7 +70,6 @@ export const miDatabase: MenuItem = {
 
 export const miLog: MenuItem = {
 	url: [ '/logs' ],
-	queryParams: { tags: TAG_POPULAR },
 	label: 'View Logs',
 	icon: 'history',
 	routerLinkActiveOptions: { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
