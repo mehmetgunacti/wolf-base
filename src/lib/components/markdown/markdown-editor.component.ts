@@ -1,7 +1,7 @@
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenuBar, CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, WritableSignal, inject, input, signal } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, WritableSignal, inject, input, signal, viewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TimePastPipe } from '@pipes';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
@@ -20,19 +20,23 @@ import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 	standalone: true,
 	imports: [ SelectorTableComponent, MarkdownViewerComponent, TimePastPipe, CdkMenuModule, ModalComponent, ReactiveFormsModule, CommonModule ],
 	templateUrl: './markdown-editor.component.html',
-	styleUrls: [ './markdown-editor.component.scss' ],
 	providers: [
 		{ provide: UNDO_CACHE, useClass: UndoCacheImpl },
 		{ provide: RECOVERY_MANAGER, useClass: RecoveryManagerImpl },
-	]
+	],
+	host: {
+		'[tabindex]': '0',
+		'(focus)': 'onHostFocus()',
+		'class': 'inline-flex relative min-h-widget-height bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none group'
+	}
 })
 export class MarkdownEditorComponent extends BaseComponent implements OnInit, OnDestroy {
 
-	@ViewChild('editor') editor!: ElementRef<HTMLTextAreaElement>;
-	@ViewChild(CdkMenuTrigger) trigger!: CdkMenuTrigger;
-	@ViewChild(CdkMenuBar) menuBar!: CdkMenuBar;
-	@ViewChild('previewTemplate') previewTemplate!: TemplateRef<HTMLDivElement>;
-	@ViewChild('recoverTemplate') recoverTemplate!: TemplateRef<HTMLDivElement>;
+	editor = viewChild.required<ElementRef<HTMLTextAreaElement>>('editor');
+	trigger = viewChild.required<CdkMenuTrigger>('trigger');
+	menuBar = viewChild.required<CdkMenuBar>('menuBar');
+	previewTemplate = viewChild.required<TemplateRef<HTMLDivElement>>('previewTemplate');
+	recoverTemplate = viewChild.required<TemplateRef<HTMLDivElement>>('recoverTemplate');
 
 	@Input({ required: true }) control!: FormControl<string>;
 	@Input() name: string = '';
@@ -72,7 +76,7 @@ export class MarkdownEditorComponent extends BaseComponent implements OnInit, On
 
 				() => {
 
-					const props = extractProps(this.editor.nativeElement);
+					const props = extractProps(this.editor().nativeElement);
 					this.undoCache.saveState(props);
 					this.recoveryManager.save(props.content);
 
@@ -119,13 +123,13 @@ export class MarkdownEditorComponent extends BaseComponent implements OnInit, On
 
 	onSave(): void {
 
-		this.save.emit(this.editor.nativeElement.value);
+		this.save.emit(this.editor().nativeElement.value);
 
 	}
 
 	onSaveAndClose(): void {
 
-		this.saveClose.emit(this.editor.nativeElement.value);
+		this.saveClose.emit(this.editor().nativeElement.value);
 
 	}
 
@@ -191,13 +195,13 @@ export class MarkdownEditorComponent extends BaseComponent implements OnInit, On
 
 				event.preventDefault();
 				const tuple = lineStartsWithOneOf(
-					extractProps(this.editor.nativeElement),
+					extractProps(this.editor().nativeElement),
 					[ C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS ]
 				);
 				if (tuple && tuple[ 1 ] > 0)
-					this.updateEditor(this.actions.decreaseIndent(this.editor.nativeElement));
+					this.updateEditor(this.actions.decreaseIndent(this.editor().nativeElement));
 				else
-					this.updateEditor(this.actions.shiftTab(this.editor.nativeElement));
+					this.updateEditor(this.actions.shiftTab(this.editor().nativeElement));
 
 
 			} else if (hasModifierKey(event, 'ctrlKey') && hasModifierKey(event, 'shiftKey') && event.key.toLowerCase() === 'z') {
@@ -213,18 +217,18 @@ export class MarkdownEditorComponent extends BaseComponent implements OnInit, On
 			} else if (hasModifierKey(event, 'ctrlKey') && event.key === 'ArrowDown') {
 
 				event.preventDefault();
-				this.editor.nativeElement.scrollTop += 30;
+				this.editor().nativeElement.scrollTop += 30;
 
 			} else if (hasModifierKey(event, 'ctrlKey') && event.key === 'ArrowUp') {
 
 				event.preventDefault();
-				this.editor.nativeElement.scrollTop -= 30;
+				this.editor().nativeElement.scrollTop -= 30;
 
 			} else if (hasModifierKey(event, 'ctrlKey') && event.key === 'j') {
 
 				event.preventDefault();
 				this.updateEditor(
-					this.actions.addCodeBlock(this.editor.nativeElement, 'java')
+					this.actions.addCodeBlock(this.editor().nativeElement, 'java')
 				);
 
 			}
@@ -233,33 +237,33 @@ export class MarkdownEditorComponent extends BaseComponent implements OnInit, On
 
 			event.preventDefault();
 			const tuple = lineStartsWithOneOf(
-				extractProps(this.editor.nativeElement),
+				extractProps(this.editor().nativeElement),
 				[ C_ASTERISK, C_DASH, C_PLUS, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS ]
 			);
 			if (tuple && tuple[ 1 ] > 0)
-				this.updateEditor(this.actions.increaseIndent(this.editor.nativeElement));
+				this.updateEditor(this.actions.increaseIndent(this.editor().nativeElement));
 			else
-				this.updateEditor(this.actions.tab(this.editor.nativeElement));
+				this.updateEditor(this.actions.tab(this.editor().nativeElement));
 
 		} else if (event.key === 'Escape') {
 
 			this.hasFocus.set(false);
-			this.menuBar.focusFirstItem();
+			this.menuBar().focusFirstItem();
 
 		} else if (event.key === 'Enter') {
 
 			const tuple = lineStartsWithOneOf(
-				extractProps(this.editor.nativeElement),
+				extractProps(this.editor().nativeElement),
 				[ C_TASK_EMPTY, C_TASK_COMPL, C_ASTERISK, C_DASH, C_PLUS, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_TAB, C_INDENT ],
 				[ C_TASK_EMPTY, C_TASK_EMPTY, C_ASTERISK, C_DASH, C_PLUS, C_LIST_ASTERISK, C_LIST_DASH, C_LIST_PLUS, C_TAB, C_INDENT ]
 			);
 			if (tuple && tuple[ 1 ] > 0) {
 
 				event.preventDefault();
-				this.updateEditor(this.actions.addNewLine(this.editor.nativeElement, tuple[ 0 ], tuple[ 1 ]));
+				this.updateEditor(this.actions.addNewLine(this.editor().nativeElement, tuple[ 0 ], tuple[ 1 ]));
 
 			}
-			this.editor.nativeElement.scrollLeft = 0;
+			this.editor().nativeElement.scrollLeft = 0;
 
 		}
 
@@ -267,7 +271,7 @@ export class MarkdownEditorComponent extends BaseComponent implements OnInit, On
 
 	updateEditor(props: EditorProperties): void {
 
-		const textarea = this.editor.nativeElement;
+		const textarea = this.editor().nativeElement;
 		const { content, sIndex, eIndex } = props;
 
 		textarea.value = content;
@@ -297,7 +301,7 @@ export class MarkdownEditorComponent extends BaseComponent implements OnInit, On
 
 		const props = this.undoCache.props();
 		const { content, sIndex, eIndex } = props;
-		const textarea = this.editor.nativeElement;
+		const textarea = this.editor().nativeElement;
 
 		textarea.value = content;
 		textarea.selectionStart = sIndex;
@@ -321,8 +325,8 @@ export class MarkdownEditorComponent extends BaseComponent implements OnInit, On
 
 	addTable(event: [ number, number ]): void {
 
-		this.actions.addTable(this.editor.nativeElement, event);
-		this.trigger.close();
+		this.actions.addTable(this.editor().nativeElement, event);
+		this.trigger().close();
 
 	}
 
@@ -330,7 +334,7 @@ export class MarkdownEditorComponent extends BaseComponent implements OnInit, On
 
 		const base64 = await this.clipboardService.base64ImageFromClipboard();
 		if (base64)
-			this.updateEditor(this.actions.addImage(this.editor.nativeElement, base64));
+			this.updateEditor(this.actions.addImage(this.editor().nativeElement, base64));
 		else
 			timer(0, 600)
 				.pipe(take(2))

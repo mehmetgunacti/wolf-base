@@ -6,7 +6,6 @@ import { BaseComponent } from '../base.component';
 	selector: 'w-textarea',
 	standalone: true,
 	templateUrl: './textarea.component.html',
-	styleUrls: [ './textarea.component.scss' ],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
