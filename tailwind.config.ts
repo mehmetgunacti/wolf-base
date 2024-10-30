@@ -201,7 +201,9 @@ export default {
 				'nav-half'			: 'var(--nav-half)',
 				'nav-glyph-width'	: `calc(var(--nav-half) - 2 * ${defaultTheme.spacing['2']})`,
 				'nav-content-width'	: `calc(var(--nav-full) - var(--nav-half) - ${defaultTheme.spacing['2']})`,
-				'widget-height'		: 'var(--widget-height)'
+				'widget-height'		: 'var(--widget-height)',
+				'button-height'		: 'var(--button-height)',
+				'button-height-sm'	: 'var(--button-height-sm)'
 
 			},
 

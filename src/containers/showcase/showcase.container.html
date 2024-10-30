@@ -1,10 +1,10 @@
 <!-- BUTTONS -->
-<fieldset>
+<fieldset class="relative comp p-3">
 
-	<legend>Buttons</legend>
-	<legend>
-		<button class="glyph" (click)="buttonsVisible.set(!buttonsVisible())">
-			<svg wGlyph="add" [class.rotate-45]="buttonsVisible()"></svg>
+	<legend class="h-button-height flex items-center px-3 bg-component-dark rounded-lg">Buttons</legend>
+	<legend class="absolute -top-11 right-2.5 h-button-height flex items-center px-3 bg-component-dark rounded-lg">
+		<button class="btn btn-glyph" (click)="buttonsVisible.set(!buttonsVisible())">
+			<svg wGlyph="add" [class.rotate-45]="buttonsVisible()" class="transition-transform duration-500"></svg>
 		</button>
 	</legend>
 
@@ -65,7 +65,7 @@
 </fieldset>
 
 <!-- FORMS -->
-<fieldset>
+<!-- <fieldset>
 
 	<legend>Forms</legend>
 	<legend>
@@ -98,10 +98,10 @@
 
 	</div>
 
-</fieldset>
+</fieldset> -->
 
 <!-- GLYPHS -->
-<fieldset>
+<!-- <fieldset>
 
 	<legend>Glyphs</legend>
 	<legend>
@@ -127,7 +127,7 @@
 
 	</div>
 
-</fieldset>
+</fieldset> -->
 
 <!-- ALERTS -->
 <fieldset>
