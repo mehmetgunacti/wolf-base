@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
+import { BaseComponent } from '@components';
 
 @Component({
 	selector: 'page-not-found-page',
@@ -7,7 +8,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	template: `
 		<p>page-not-found works!</p>
 	`,
-	host: { 'class': 'page' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	host: { 'class': 'page' }
 })
-export class PageNotFoundPage { }
+export class PageNotFoundPage extends BaseComponent { }

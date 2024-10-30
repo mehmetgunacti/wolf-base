@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
+import { BaseComponent } from '@components';
 import * as container from '@containers';
 import { PortalComponent } from '@libComponents';
 
@@ -21,7 +22,6 @@ import { PortalComponent } from '@libComponents';
 		<app-pinned-notes-container/>
 		<app-popular-bookmarks-container/>
 	`,
-	host: { 'class': 'page' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	host: { 'class': 'page' }
 })
-export class HomePage { }
+export class HomePage extends BaseComponent { }

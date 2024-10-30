@@ -1,3 +1,4 @@
+export * from './base.component';
 export * from './bookmark';
 export * from './compact-bookmark';
 export * from './compact-note';

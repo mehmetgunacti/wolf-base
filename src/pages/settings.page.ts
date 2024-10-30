@@ -1,7 +1,8 @@
 import { AsyncPipe, DatePipe, DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
+import { BaseComponent } from '@components';
 import * as container from '@containers';
 import { AlertComponent, GlyphDirective, PortalComponent } from '@libComponents';
 import { catchError, defer, EMPTY, from, Observable } from 'rxjs';
@@ -55,10 +56,9 @@ import { buildInfo } from 'version';
 			<small>v{{ builtVersion }} (#{{ builtNumber }}) {{ builtTime | date:'dd.MM.yyyy HH:mm:ss' }}</small>
 		</div>
 	`,
-	host: { 'class': 'page' },
-	changeDetection: ChangeDetectionStrategy.OnPush
+	host: { 'class': 'page' }
 })
-export class SettingsPage {
+export class SettingsPage extends BaseComponent {
 
 	builtTime = buildInfo.builtTime;
 	builtVersion = buildInfo.version;
@@ -71,6 +71,7 @@ export class SettingsPage {
 
 	constructor() {
 
+		super();
 		this.updateAvailable$ = defer(() => from(this.updates.checkForUpdate())).pipe(
 
 			catchError((err) => {
