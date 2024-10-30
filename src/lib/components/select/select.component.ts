@@ -7,7 +7,6 @@ import { BaseComponent } from '../base.component';
 	selector: 'w-select',
 	standalone: true,
 	templateUrl: './select.component.html',
-	styleUrls: [ './select.component.scss' ],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -17,7 +16,8 @@ import { BaseComponent } from '../base.component';
 	],
 	host: {
 		'[tabindex]': '0',
-		'(focus)': 'onHostFocus()'
+		'(focus)': 'onHostFocus()',
+		'class': 'inline-flex relative h-widget-height border-form-element-border bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none group'
 	}
 })
 export class SelectComponent extends BaseComponent implements ControlValueAccessor {
