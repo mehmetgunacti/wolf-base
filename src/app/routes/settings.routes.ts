@@ -6,14 +6,11 @@ export const FEATURE_ROUTES: Routes = [
 
 		path: '',
 		loadComponent: () => import('pages/settings-page/settings-page.component').then(c => c.SettingsPageComponent),
-		children: [
+	},
+	{
 
-			{
-				path: 'components',
-				loadComponent: () => import('pages/settings-components-page/settings-components-page.component').then(c => c.SettingsComponentsPageComponent)
-			}
-
-		]
+		path: 'components',
+		loadComponent: () => import('pages/components-page/components-page.component').then(c => c.ComponentsPageComponent)
 
 	}
 
