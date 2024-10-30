@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
+import { Component, ElementRef, forwardRef, input, signal, viewChild, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BaseComponent } from '../base.component';
 
@@ -24,15 +24,12 @@ export class TextareaComponent extends BaseComponent implements ControlValueAcce
 	private inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
 	// Input
-	label: InputSignal<string> = input.required();
-	rows: InputSignal<number> = input(10);
-	type: InputSignal<string> = input('text');
-	labelUp: InputSignal<boolean> = input(false);
-	readonly: InputSignal<boolean> = input(false);
+	label = input.required<string>();
+	rows = input<number>(10);
+	readonly = input<boolean>(false);
 
 	protected value: WritableSignal<string> = signal('');
 	protected disabled: WritableSignal<boolean> = signal(false);
-	protected isLabelUp = computed(() => this.labelUp() || !!this.value());
 
 	//////////// boilerplate
 	private onChange: any = () => { };
