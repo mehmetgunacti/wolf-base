@@ -37,13 +37,8 @@ import { buildInfo } from 'version';
 
 		@if (updateAvailable$ | async) {
 
-			<w-alert severity="warn">
-
-				<span>Update available</span>
-				<button class="btn btn-ghost" (click)="onUpdateApp()" data-after="Update">
-					<svg wGlyph="update"></svg>
-				</button>
-
+			<w-alert severity="warn" glyph="cloud_download" summary="Update available">
+				<button class="btn btn-ghost" (click)="onUpdateApp()">Update</button>
 			</w-alert>
 
 		}
