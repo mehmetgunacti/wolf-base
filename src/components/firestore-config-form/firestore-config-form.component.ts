@@ -15,7 +15,7 @@ import { configForm } from './firestore-config-form';
 export class FirestoreConfigFormComponent {
 
 	// Input
-	config = input.required<FirestoreConfig>();
+	config = input.required<FirestoreConfig | null>();
 
 	// Output
 	save = output<FirestoreConfig>();

@@ -14,7 +14,7 @@ import { nnfc, urlValidator } from '@utils';
 export class TitleLookupConfigFormComponent {
 
 	// Input
-	url = input.required<string>();
+	url = input.required<string | null>();
 
 	// Output
 	save = output<string>();

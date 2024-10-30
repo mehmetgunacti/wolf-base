@@ -1,10 +1,6 @@
 <header class="mb-8 comp-title">Firestore Configuration</header>
 <section class="md:p-2">
 
-	@if (config(); as conf) {
-
-		<app-firestore-config-form [config]="conf" (save)="onSave($event)" />
-
-	}
+	<app-firestore-config-form [config]="config()" (save)="onSave($event)" />
 
 </section>
