@@ -147,30 +147,30 @@
 </fieldset> -->
 
 <!-- GLYPHS -->
-<!-- <fieldset>
+<fieldset class="relative p-3 @container comp">
 
-	<legend>Glyphs</legend>
-	<legend>
-		<button class="glyph" (click)="glyphsVisible.set(!glyphsVisible())">
-			<svg wGlyph="add" [class.rotate-45]="glyphsVisible()"></svg>
+	<legend class="flex items-center bg-component-dark px-3 rounded-lg h-button-height">Glyphs</legend>
+	<legend class="-top-11 right-2.5 absolute flex justify-center items-center bg-component-dark rounded-lg w-button-height h-button-height">
+		<button class="btn btn-glyph" (click)="glyphsVisible.set(!glyphsVisible())">
+			<svg wGlyph="add" [class.rotate-45]="glyphsVisible()" class="transition-transform duration-500"></svg>
 		</button>
 	</legend>
 
-	<div content [@slideUpDown]="glyphsVisible() ? 'opened' : 'closed'">
+	<div class="overflow-hidden" [class.pb-4]="glyphsVisible()" [@slideUpDown]="glyphsVisible() ? 'opened' : 'closed'">
 
 		<div class="h-divider">{{glyphNames().length}} Glyphs</div>
-		<div container container_glyphs>
+		<div class="gap-4 grid grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-5 @xl:grid-cols-6 @2xl:grid-cols-7 @3xl:grid-cols-8 @4xl:grid-cols-9 @5xl:grid-cols-10 @6xl:grid-cols-11 @7xl:grid-cols-11 w-full">
 
 			@for (name of glyphNames(); track $index) {
 
-				<td glyph>
+				<div class="flex flex-col justify-center items-center gap-2 hover:bg-ghost-hover p-2 rounded-lg">
 					<svg [wGlyph]="name"></svg>
-					<span>{{name}}</span>
-				</td>
+					<span class="text-2xs">{{name}}</span>
+				</div>
 			}
 
 		</div>
 
 	</div>
 
-</fieldset> -->
+</fieldset>

@@ -31,10 +31,10 @@ export class ShowcaseContainer extends BaseComponent {
 
 	PROJECT_STATUS = PROJECT_STATUS;
 
-	alertsVisible = signal<boolean>(true);
+	alertsVisible = signal<boolean>(false);
 	formsVisible = signal<boolean>(false);
 	buttonsVisible = signal<boolean>(false);
-	glyphsVisible = signal<boolean>(false);
+	glyphsVisible = signal<boolean>(true);
 
 	tagSuggestions = signal<string[]>([]);
 
