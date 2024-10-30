@@ -1,3 +1,35 @@
+<!-- ALERTS -->
+<fieldset class="relative p-3 comp">
+
+	<legend class="flex items-center bg-component-dark px-3 rounded-lg h-button-height">Alerts</legend>
+	<legend class="-top-11 right-2.5 absolute flex justify-center items-center bg-component-dark rounded-lg w-button-height h-button-height">
+		<button class="btn btn-glyph" (click)="alertsVisible.set(!alertsVisible())">
+			<svg wGlyph="add" [class.rotate-45]="alertsVisible()" class="transition-transform duration-500"></svg>
+		</button>
+	</legend>
+
+	<div class="gap-2 grid overflow-hidden" [class.pb-4]="alertsVisible()" [@slideUpDown]="alertsVisible() ? 'opened' : 'closed'">
+
+		<w-alert glyph="cloud_download" summary="Update Available" detail="Click to download">
+			<button class="btn btn-ghost">Download</button>
+		</w-alert>
+		<w-alert severity="success" glyph="cloud_download" summary="Update Available" detail="Click to download">
+			<button class="btn btn-ghost">Download</button>
+		</w-alert>
+		<w-alert severity="info" glyph="cloud_download" summary="Update Available" detail="Click to download">
+			<button class="btn btn-ghost">Download</button>
+		</w-alert>
+		<w-alert severity="warn" glyph="cloud_download" summary="Update Available" detail="Click to download">
+			<button class="btn btn-ghost">Download</button>
+		</w-alert>
+		<w-alert severity="error" glyph="cloud_download" summary="Update Available" detail="Click to download">
+			<button class="btn btn-ghost">Download</button>
+		</w-alert>
+
+	</div>
+
+</fieldset>
+
 <!-- BUTTONS -->
 <fieldset class="relative p-3 comp">
 
@@ -8,7 +40,7 @@
 		</button>
 	</legend>
 
-	<div class="overflow-hidden" [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
+	<div class="overflow-hidden" [class.pb-4]="buttonsVisible()" [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
 
 		<!-- TYPES -->
 		<div class="h-divider">Button Types</div>
@@ -18,6 +50,28 @@
 			<button class="btn" disabled>Disabled</button>
 			<button class="btn btn-error">Danger</button>
 			<button class="btn btn-ghost">Ghost</button>
+
+		</div>
+
+		<!-- WITH GLYPHS -->
+		<div class="h-divider">With Glyphs</div>
+		<div class="flex flex-wrap justify-center items-center gap-2">
+
+			<button class="btn">
+				<svg wGlyph="save"></svg>
+				Default
+			</button>
+			<button class="btn" disabled>
+				<svg wGlyph="save"></svg>
+				Disabled
+			</button>
+			<button class="btn btn-error">
+				Danger<svg wGlyph="save"></svg>
+			</button>
+			<button class="btn btn-ghost">
+				Ghost
+				<svg wGlyph="sprint"></svg>
+			</button>
 
 		</div>
 
@@ -43,7 +97,7 @@
 
 		<!-- TAG -->
 		<div class="h-divider">Tags (tag)</div>
-		<div class="flex justify-center items-center gap-2 pb-4">
+		<div class="flex justify-center items-center gap-2">
 
 			<button class="inline-flex flex-row items-center gap-1 me-1 tag tag-sm">Small</button>
 			<button class="inline-flex flex-row items-center gap-1 me-1 tag tag-sm">Small<svg wGlyph="close" class="text-4xs stroke-content"></svg></button>
@@ -120,24 +174,3 @@
 	</div>
 
 </fieldset> -->
-
-<!-- ALERTS -->
-<fieldset>
-
-	<legend>Alerts</legend>
-	<legend>
-		<button class="glyph" (click)="alertsVisible.set(!alertsVisible())">
-			<svg wGlyph="add" [class.rotate-45]="alertsVisible()"></svg>
-		</button>
-	</legend>
-
-	<div content [@slideUpDown]="alertsVisible() ? 'opened' : 'closed'">
-
-		<w-toast [conf]="{ severity: 'success', summary: 'Update available', detail: 'Press button to start' }"/>
-		<w-toast [conf]="{ severity: 'info', summary: 'Update available', detail: 'Press button to start' }"/>
-		<w-toast [conf]="{ severity: 'warn', summary: 'Update available', detail: 'Press button to start' }"/>
-		<w-toast [conf]="{ severity: 'error', summary: 'Update available', detail: 'Press button to start' }"/>
-
-	</div>
-
-</fieldset>

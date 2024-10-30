@@ -1,10 +1,20 @@
-<div alert-left>
+@if (glyph(); as glyphName) {
 
-	<!-- <svg wGlyph="{{ glyphClass() }}" /> -->
+	<div class="flex justify-center items-center mx-3 size-widget-height">
 
-</div>
-<div alert-right>
+		<svg [wGlyph]="glyphName" class="text-3xl"></svg>
 
+	</div>
+
+}
+<p class="flex flex-col">
+	<span class="font-bold text-lg">{{summary()}}</span>
+	@if (detail()) {
+
+		<small>{{detail()}}</small>
+
+	}
+</p>
+<div class="flex flex-1 justify-end items-center px-3">
 	<ng-content/>
-
 </div>

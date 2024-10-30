@@ -14,7 +14,7 @@ import { BaseComponent } from '@libComponents';
 		ReactiveFormsModule,
 		GlyphDirective,
 		component.SwitchComponent,
-		component.ToastComponent,
+		component.AlertComponent,
 		component.InputTagComponent,
 		component.TextareaComponent,
 		component.SelectComponent,
@@ -23,7 +23,7 @@ import { BaseComponent } from '@libComponents';
 	selector: 'app-showcase-container',
 	templateUrl: './showcase.container.html',
 	host: {
-		'class': 'grid'
+		'class': 'grid gap-2'
 	},
 	animations: [ slideUpDownTrigger ],
 })
@@ -31,9 +31,9 @@ export class ShowcaseContainer extends BaseComponent {
 
 	PROJECT_STATUS = PROJECT_STATUS;
 
-	alertsVisible = signal<boolean>(false);
+	alertsVisible = signal<boolean>(true);
 	formsVisible = signal<boolean>(false);
-	buttonsVisible = signal<boolean>(true);
+	buttonsVisible = signal<boolean>(false);
 	glyphsVisible = signal<boolean>(false);
 
 	tagSuggestions = signal<string[]>([]);
