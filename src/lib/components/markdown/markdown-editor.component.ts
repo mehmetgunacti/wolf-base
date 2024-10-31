@@ -3,6 +3,7 @@ import { CdkMenuBar, CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, TemplateRef, forwardRef, inject, input, output, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { GlyphDirective } from '@directives';
 import { TimePastPipe } from '@pipes';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
 import { ClipboardService } from 'services';
@@ -18,7 +19,7 @@ import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 @Component({
 	selector: 'w-markdown-editor',
 	standalone: true,
-	imports: [ SelectorTableComponent, MarkdownViewerComponent, TimePastPipe, CdkMenuModule, ModalComponent, ReactiveFormsModule, CommonModule ],
+	imports: [ GlyphDirective, SelectorTableComponent, MarkdownViewerComponent, TimePastPipe, CdkMenuModule, ModalComponent, ReactiveFormsModule, CommonModule ],
 	templateUrl: './markdown-editor.component.html',
 	providers: [
 		{ provide: UNDO_CACHE, useClass: UndoCacheImpl },
@@ -32,7 +33,7 @@ import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 	host: {
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()',
-		'class': 'inline-flex relative min-h-widget-height bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none group'
+		'class': 'relative inline-flex flex-col bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none'
 	}
 })
 export class MarkdownEditorComponent extends BaseComponent implements ControlValueAccessor, OnInit, OnDestroy {

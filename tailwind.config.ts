@@ -168,7 +168,8 @@ export default {
 				warn		: 'var(--col-warn-border)',
 				error		: 'var(--col-error-border)',
 				ghost		: 'var(--col-ghost-border)',
-				secondary	: 'var(--col-text-secondary)'
+				secondary	: 'var(--col-text-secondary)',
+				'ghost-hover' : 'var(--col-ghost-hover)'
 
 			},
 
@@ -205,7 +206,9 @@ export default {
 				'nav-content-width'	: `calc(var(--nav-full) - var(--nav-half) - ${defaultTheme.spacing['2']})`,
 				'widget-height'		: 'var(--widget-height)',
 				'button-height'		: 'var(--button-height)',
-				'button-height-sm'	: 'var(--button-height-sm)'
+				'button-height-sm'	: 'var(--button-height-sm)',
+				'button-height-xs'	: 'var(--button-height-xs)',
+				'button-height-2xs'	: 'var(--button-height-2xs)',
 
 			},
 

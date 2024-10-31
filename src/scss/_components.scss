@@ -49,6 +49,8 @@
 				hover:bg-ghost-hover
 				active:bg-ghost-active;
 
+			@apply disabled:bg-transparent disabled:border-transparent #{!important};
+
 		}
 
 		&.btn-glyph {

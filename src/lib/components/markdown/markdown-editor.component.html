@@ -1,9 +1,11 @@
-<div buttons cdkMenuBar>
+@let btnClass = 'btn btn-ghost px-1 rounded h-button-height-2xs text-base md:h-button-height-sm md:px-2 md:text-lg lg:text-xl';
+
+<div cdkMenuBar class="flex flex-wrap items-center gap-[2px] p-2 bg-form-element-border rounded-t-lg">
 
 	<!-- SAVE BUTTON -->
 	<button
 		cdkMenuItem
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="onSave()"
 		title="Save Changes"
 		[disabled]="!dirty()"
@@ -14,19 +16,19 @@
 	<!-- CANCEL BUTTON -->
 	<button
 		cdkMenuItem
-		class="glyph squared"
+		[class]="btnClass"
 		title="Close Editor"
 		(click)="onCancel(dirty())">
 		<svg wGlyph="cancel"></svg>
 	</button>
 
 	<!-- DIVIDER -->
-	<div class="v-divider"></div>
+	<div class="border-r border-r-ghost-hover h-button-height-2xs md:h-button-height-xs"></div>
 
 	<!-- PREVIEW BUTTON -->
 	<button
 		cdkMenuItem
-		class="glyph squared"
+		[class]="btnClass"
 		title="Open Preview"
 		(click)="onPreviewOpen()">
 		<svg wGlyph="live_tv"></svg>
@@ -35,7 +37,7 @@
 	<!-- RECOVER BUTTON -->
 	<button
 		cdkMenuItem
-		class="glyph squared"
+		[class]="btnClass"
 		title="Recover"
 		[class.shake]="btnOpenRecovery()"
 		(click)="onRecoverOpen()">
@@ -43,12 +45,12 @@
 	</button>
 
 	<!-- DIVIDER -->
-	<div class="v-divider"></div>
+	<div class="border-r border-r-ghost-hover h-button-height-2xs md:h-button-height-xs"></div>
 
 	<!-- UNDO BUTTON -->
 	<button
 		cdkMenuItem
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="onUndo()"
 		title="Undo"
 		[disabled]="!undoCache.canUndo()"
@@ -59,7 +61,7 @@
 	<!-- REDO BUTTON -->
 	<button
 		cdkMenuItem
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="onRedo()"
 		title="Redo"
 		[disabled]="!undoCache.canRedo()"
@@ -68,11 +70,11 @@
 	</button>
 
 	<!-- DIVIDER -->
-	<div class="v-divider"></div>
+	<div class="border-r border-r-ghost-hover h-button-height-2xs md:h-button-height-xs"></div>
 
 	<!-- HEADING BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		[cdkMenuTriggerFor]="format_heading"
 		title="Heading"
 		cdkMenuItem>
@@ -80,11 +82,11 @@
 	</button>
 
 	<!-- DIVIDER -->
-	<div class="v-divider"></div>
+	<div class="border-r border-r-ghost-hover h-button-height-2xs md:h-button-height-xs"></div>
 
 	<!-- BOLD BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addBold(editor))"
 		title="Bold"
 		cdkMenuItem>
@@ -93,7 +95,7 @@
 
 	<!-- ITALIC BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addItalic(editor))"
 		title="Italic"
 		cdkMenuItem>
@@ -102,7 +104,7 @@
 
 	<!-- STRIKETHROUGH BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addStrikethrough(editor))"
 		title="Strikethrough"
 		cdkMenuItem>
@@ -111,7 +113,7 @@
 
 	<!-- HIGHLIGHT BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addHighlight(editor))"
 		title="Highlight"
 		cdkMenuItem>
@@ -119,11 +121,11 @@
 	</button>
 
 	<!-- DIVIDER -->
-	<div class="v-divider"></div>
+	<div class="border-r border-r-ghost-hover h-button-height-2xs md:h-button-height-xs"></div>
 
 	<!-- ALIGN CENTER BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addAlignCenter(editor))"
 		title="Align Center"
 		cdkMenuItem>
@@ -132,7 +134,7 @@
 
 	<!-- ALIGN RIGHT BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addAlignRight(editor))"
 		title="Align Right"
 		cdkMenuItem>
@@ -141,7 +143,7 @@
 
 	<!-- ALIGN JUSTIFY BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addAlignJustify(editor))"
 		title="Align Justify"
 		cdkMenuItem>
@@ -149,11 +151,11 @@
 	</button>
 
 	<!-- DIVIDER -->
-	<div class="v-divider"></div>
+	<div class="border-r border-r-ghost-hover h-button-height-2xs md:h-button-height-xs"></div>
 
 	<!-- SUB BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addSub(editor))"
 		title="Subscript (H2O)"
 		cdkMenuItem>
@@ -162,7 +164,7 @@
 
 	<!-- SUP BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addSup(editor))"
 		title="Superscript (E=mc2)"
 		cdkMenuItem>
@@ -170,11 +172,11 @@
 	</button>
 
 	<!-- DIVIDER -->
-	<div class="v-divider"></div>
+	<div class="border-r border-r-ghost-hover h-button-height-2xs md:h-button-height-xs"></div>
 
 	<!-- BULLETED LIST BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addListBulleted(editor))"
 		title="Bulleted List"
 		cdkMenuItem>
@@ -183,7 +185,7 @@
 
 	<!-- LIST NUMBERED BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addListNumbered(editor))"
 		title="Numbered List"
 		cdkMenuItem>
@@ -191,11 +193,11 @@
 	</button>
 
 	<!-- DIVIDER -->
-	<div class="v-divider"></div>
+	<div class="border-r border-r-ghost-hover h-button-height-2xs md:h-button-height-xs"></div>
 
 	<!-- DECREASE INDENT BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.decreaseIndent(editor))"
 		title="Decrease Indent"
 		cdkMenuItem>
@@ -204,7 +206,7 @@
 
 	<!-- INCREASE INDENT BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.increaseIndent(editor))"
 		title="Increase Indent"
 		cdkMenuItem>
@@ -212,11 +214,11 @@
 	</button>
 
 	<!-- DIVIDER -->
-	<div class="v-divider"></div>
+	<div class="border-r border-r-ghost-hover h-button-height-2xs md:h-button-height-xs"></div>
 
 	<!-- ADD CHECKBOX (TASK) BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addEmptyTask(editor))"
 		title="Task"
 		cdkMenuItem>
@@ -225,7 +227,7 @@
 
 	<!-- ADD TABLE BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		[cdkMenuTriggerFor]="table_menu"
 		title="Table"
 		cdkMenuItem>
@@ -234,7 +236,7 @@
 
 	<!-- CODE BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		[cdkMenuTriggerFor]="code_menu"
 		title="Code"
 		cdkMenuItem>
@@ -243,7 +245,7 @@
 
 	<!-- ADD BLOCKQUOTE BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		[cdkMenuTriggerFor]="blockquote_menu"
 		title="Blockquote"
 		cdkMenuItem>
@@ -251,12 +253,12 @@
 	</button>
 
 	<!-- DIVIDER -->
-	<div class="v-divider"></div>
+	<div class="border-r border-r-ghost-hover h-button-height-2xs md:h-button-height-xs"></div>
 
 	<!-- IMAGE FROM CLIPBOARD BUTTON -->
 	<button
 		#btnImage
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="addImage(btnImage)"
 		title="Image from Clipboard"
 		[class.shake]="btnImageShake()"
@@ -266,7 +268,7 @@
 
 	<!-- TOC BUTTON -->
 	<button
-		class="glyph squared"
+		[class]="btnClass"
 		(click)="updateEditor(actions.addToc(editor))"
 		title="Table of Contents"
 		cdkMenuItem>
@@ -275,37 +277,10 @@
 
 </div>
 
-<div area>
-
-	<textarea
-		#editor
-		class="border-0 bg-transparent px-3 p-2 w-full text-content outline-0 peer"
-		[value]="value()"
-		placeholder=""
-		[readonly]="readonly()"
-		[disabled]="disabled()"
-		(focus)="hasFocus.set(true)"
-		(blur)="hasFocus.set(false)"
-		(input)="onInput(editor.value)"
-		[rows]="rows()"></textarea>
-	<label>{{label()}}</label>
-	<label class="right up">
-		<span class="icon-container">
-			<svg wGlyph="description"></svg>
-			<span>{{ undoCache.discSize() }}</span>
-		</span>
-		<span class="icon-container">
-			<svg wGlyph="memory"></svg>
-			<span>{{ undoCache.memSize() }}</span>
-		</span>
-	</label>
-
-</div>
-
 @if (showPreview()) {
 
 	<w-modal (close)="onPreviewClose()">
-		<div class="overlay-content">
+		<div class="comp">
 
 			<header>
 				<div title>Preview</div>
@@ -606,3 +581,61 @@
 	</div>
 
 </ng-template>
+
+<!-- TEXTAREA -->
+<div class="mt-2 group">
+
+	<textarea
+		#editor
+		class="border-0 bg-transparent px-3 p-2 w-full text-content outline-0 peer"
+		[value]="value()"
+		placeholder=""
+		[readonly]="readonly()"
+		[disabled]="disabled()"
+		(focus)="hasFocus.set(true)"
+		(blur)="hasFocus.set(false)"
+		(input)="onInput(editor.value)"
+		[rows]="rows()"></textarea>
+		<label class="
+			-top-3.5
+			left-2
+			absolute
+			text-2xs
+			leading-5
+			px-1
+			rounded
+			bg-component-dark
+			text-form-element-text
+
+			peer-focus:-top-3.5
+			peer-focus:text-2xs
+			peer-focus:leading-5
+			peer-focus:bg-component-dark
+			peer-focus:text-form-element-text
+
+			transition-all
+			duration-500
+
+			before:content-['*']
+			before:text-focus
+			before:mr-1
+			">{{label()}}</label>
+	<label class="
+			flex
+			justify-end
+			gap-1
+			p-2
+
+			rounded-b-lg
+			bg-form-element-border
+			text-form-element-text
+		">
+		<span class="inline-flex items-center gap-1 text-3xs leading-5">
+			<svg wGlyph="disk" class="text-[1.3em]"></svg>
+			{{ undoCache.discSize() }}
+			<svg wGlyph="memory" class="ml-2 text-[1.3em]"></svg>
+			{{ undoCache.memSize() }}
+		</span>
+	</label>
+
+</div>
