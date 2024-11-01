@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
@@ -242,7 +243,12 @@ export default {
 	},
 	plugins: [
 		require('@tailwindcss/container-queries'),
-		require('@tailwindcss/typography')
+		require('@tailwindcss/typography'),
+		plugin(function({addVariant}) {
+
+			addVariant("starting", "@starting-style");
+
+		})
 	],
 
 } satisfies Config

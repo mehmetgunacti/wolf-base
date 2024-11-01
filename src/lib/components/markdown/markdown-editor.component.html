@@ -280,25 +280,37 @@
 @if (showPreview()) {
 
 	<w-modal (close)="onPreviewClose()">
-		<div class="comp">
+		<div class="h-full">
 
-			<header>
-				<div title>Preview</div>
-				<div title_buttons>
+			<header class="flex items-center p-2">
+				<div class="ml-2 font-bold text-2xl text-content">Preview</div>
+				<div class="ml-auto">
 
 					<button
-						class="glyph"
+						class="btn btn-glyph"
 						(click)="onPreviewClose()">
 						<svg wGlyph="close"></svg>
 					</button>
 
 				</div>
 			</header>
-			<div content_wrapper>
-				<div content>
-					<w-markdown-viewer [markdown]="undoCache.props().content"/>
+			<!-- CONTENT WRAPPER -->
+			<section class="h-full overflow-y-auto scrollbar scrollbar-gutter-stable">
+				<!-- CONTENT -->
+				<div class="p-3 text-content">
+					<!-- <w-markdown-viewer [markdown]="undoCache.props().content"/> -->
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis blanditiis aspernatur autem sequi nesciunt! Minus nobis, illum quae iusto libero explicabo obcaecati neque cupiditate aspernatur magni iure expedita sint nesciunt.
+					Nemo, expedita doloribus temporibus deserunt optio corrupti aliquid id? Voluptatem vitae dolorem iure, nobis maiores, magnam perferendis quisquam incidunt quia quas a, facere officia voluptates animi quae voluptatum quis ex!
+					Perferendis maiores eos veritatis ipsam dolorum molestias? Aut, totam veniam expedita quae recusandae maxime aspernatur nobis vero distinctio ex consectetur praesentium dolorem dignissimos aliquid unde exercitationem commodi nam optio cumque!
+					Debitis nobis id aliquid itaque quae minima quo cum ducimus nam, mollitia inventore distinctio explicabo voluptatum, alias aspernatur atque cupiditate dicta quisquam necessitatibus deserunt ipsa? Facilis reiciendis animi ipsa sapiente!
+					Necessitatibus quaerat deleniti doloremque ut impedit labore aspernatur corrupti eveniet qui? Laudantium perspiciatis incidunt dignissimos recusandae, quo officiis odit quae voluptates cum officia doloribus nemo, amet eum, ratione accusamus possimus!
+					Accusantium architecto laborum illo voluptatibus ratione, explicabo, officiis ab pariatur quasi ex dolor laudantium blanditiis aperiam molestiae eum tempore aspernatur praesentium? Asperiores expedita quos rerum recusandae eligendi? Ab, magni. Harum.
+					Excepturi, quod neque dolorem pariatur quo aspernatur officiis qui iste ratione accusamus eveniet. Est, culpa amet. Aspernatur molestias debitis omnis nisi doloribus iure beatae repudiandae quaerat placeat, dolorum explicabo! Asperiores?
+					Facere odit atque itaque sequi, numquam dignissimos fuga voluptatem ipsa eos est deserunt suscipit ipsum blanditiis veniam nostrum aperiam hic modi ipsam distinctio repellendus quo totam in, quis officia. Culpa!
+					Alias laudantium quibusdam vel eos voluptas in quaerat quisquam nemo natus inventore, veritatis quis ratione velit ipsam explicabo soluta nisi corporis facilis sit iusto cum, cumque debitis. Quibusdam, commodi natus!
+					Amet dolore quo quibusdam dolorem, iusto dicta cum quia reiciendis minima hic ullam, consequatur inventore commodi pariatur ad eligendi nam? Fugiat aspernatur deserunt reiciendis nemo, quidem dolorum quae nam aperiam!
 				</div>
-			</div>
+			</section>
 
 		</div>
 	</w-modal>

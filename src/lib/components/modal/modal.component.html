@@ -1,4 +1,43 @@
-<dialog #dialog (mousedown)="onMouseDown($event)" [@delayDestroy]="{ delay: '5s' }">
+<dialog
+	#dialog
+	(mousedown)="onMouseDown($event)"
+	[@delayDestroy]="{ delay: '5s' }"
+	class="
+		hidden
+		opacity-0
+		p-0
+		m-auto
+		border-0
+		rounded-lg
+		bg-component
+		shadow-component
+		overflow-hidden
+
+		[transition-property:overlay_display_opacity]
+		[transition-behavior:allow-discrete]
+		duration-700
+
+		h-[100vh]
+		w-[100vw]
+
+		max-h-[100vh]
+		max-w-[100vw]
+
+		md:max-h-[90vh]
+		md:max-w-[70vw]
+
+		backdrop:opacity-0
+		backdrop:duration-500
+		backdrop:bg-overlay
+		backdrop:backdrop-blur
+
+		open:block
+		open:opacity-100
+		open:backdrop:opacity-100
+
+		starting:open:opacity-0
+		starting:open:backdrop:opacity-0
+	">
 
 	<ng-content/>
 

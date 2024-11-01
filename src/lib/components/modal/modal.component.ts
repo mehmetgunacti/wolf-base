@@ -6,7 +6,6 @@ import { BaseComponent } from '../base.component';
 	selector: 'w-modal',
 	standalone: true,
 	templateUrl: './modal.component.html',
-	styleUrl: './modal.component.scss',
 	animations: [ delayDestroyTrigger ],
 	host: {
 		'[@delayDestroy]': '',
