@@ -1,16 +1,13 @@
-import { NgModule, Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { maskOrHighlight } from '@utils';
 
-@Pipe({ name: 'markHighlight' })
+@Pipe({ name: 'markHighlight', standalone: true })
 export class MarkOrHighlightPipe implements PipeTransform {
-
-	constructor() { }
 
 	transform(content: string | null | undefined, word: string, askWord: boolean): string {
 
 		if (!content)
 			return '';
-
 		return maskOrHighlight(content, word, askWord);
 
 	}

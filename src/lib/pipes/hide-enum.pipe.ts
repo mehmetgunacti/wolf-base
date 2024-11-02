@@ -1,6 +1,6 @@
-import { NgModule, Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'hideEnum' })
+@Pipe({ standalone: true, name: 'hideEnum' })
 export class HideEnumPipe implements PipeTransform {
 
 	constructor() { }

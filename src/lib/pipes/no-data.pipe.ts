@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 const NO_DATA = '<no-data>';
 
-@Pipe({ name: 'noData' })
+@Pipe({ standalone: true, name: 'noData' })
 export class NoDataPipe implements PipeTransform {
 
 	transform(value: any, message: string = NO_DATA): string {

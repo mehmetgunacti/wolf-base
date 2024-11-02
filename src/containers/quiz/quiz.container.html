@@ -1,0 +1,174 @@
+<ng-template #questionTemplate let-quiz>
+
+	<span class="font-bold text-focus text-lg">
+		@if (quiz.isVerb) { to } {{ quiz.word.name }}
+	</span>
+	@if (quiz.word.pronunciation) {
+
+		<br><small>{{ quiz.word.pronunciation }}</small>
+
+	}
+
+</ng-template>
+<ng-template #choiceTemplate let-quiz="quiz" let-choice="choice">
+
+	<span>@if (quiz.isVerb) { to } {{ choice.name }}</span>
+
+</ng-template>
+
+@if (quiz(); as quiz) {
+
+	<!-- QUIZ HEADER -->
+	<div class="grid hover:bg-component-dark-hover px-4 py-3 comp-dark min-h-14 comp overflow-hidden">
+
+		<!-- QUIZ QUESTION WRAPPER -->
+		<div class="flex justify-between items-center cursor-pointer">
+
+			<!---------->
+			<!-- ICON -->
+			<!---------->
+			<div class="relative flex min-w-14">
+
+				<svg wGlyph="quiz" class="text-xl"></svg>
+				@if (dueItemsCount(); as count) {
+
+					<span class="right-3 -bottom-3 absolute bg-accent px-1 pt-1 pb-1 rounded-full text-3xs leading-none">{{count}}</span>
+
+				}
+
+			</div>
+
+			<!-------------->
+			<!-- QUESTION -->
+			<!-------------->
+			<div	class="flex flex-1 justify-center items-center gap-1 cur-pointer"
+					[@quoteChange]="quiz.definition.id"
+					(click)="increaseVisibility()">
+
+				<small class="text-secondary text-xs">({{quiz.definition.type}})</small>
+				@if (quiz.askWord) {
+
+					<ng-container *ngTemplateOutlet="questionTemplate; context: { $implicit: quiz }" />
+
+				} @else {
+
+					<w-languages [languages]="quiz.definition.languages" />
+
+				}
+
+			</div>
+
+			<!----------------------->
+			<!-- TOP-RIGHT BUTTONS -->
+			<!----------------------->
+			<div quiz_solve class="flex items-center gap-1">
+
+				<button
+					class="btn btn-glyph"
+					(click)="showAnswer(quiz.words[0])"
+					title="Show Answer">
+					<svg wGlyph="contact_support"></svg>
+				</button>
+
+				<button
+					class="transform duration-300 btn btn-glyph"
+					(click)="increaseVisibility()"
+					[title]="btnTitle()"
+					[class.rotate-180]="visibility() === QuizVisibility.CHOICES">
+					<svg wGlyph="stat_minus_2"></svg>
+				</button>
+
+			</div>
+
+		</div>
+
+		<!-- HINT WRAPPER -->
+		<div class="grid prose max-w-full px-6" [@slideChoices]="visibility() >= QuizVisibility.HINTS ? 'opened' : 'closed'">
+
+			<!-- CONTEXTS -->
+			<div class="">
+
+				@for (context of quiz.word.contexts; track $index) {
+
+					<blockquote [innerHTML]="context | markHighlight:quiz.word.name:quiz.askWord"></blockquote>
+
+				}
+
+			</div>
+			<!-- SAMPLES -->
+			<div class="">
+
+				<blockquote>
+
+					<ul>
+
+						@for (definition of quiz.word.definitions; track $index) {
+							@for (sample of definition.samples; track $index) {
+
+								<li [innerHTML]="sample | markHighlight:quiz.word.name:quiz.askWord"></li>
+
+							}
+						}
+
+					</ul>
+
+				</blockquote>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!------------->
+	<!-- CHOICES -->
+	<!------------->
+	<div
+		class="grid"
+		[@slideChoices]="visibility() === QuizVisibility.CHOICES ? 'opened' : 'closed'"
+		[@choicesBlink]="animationState()"
+		(@choicesBlink.done)="complete($event, quiz)">
+
+		<div class="gap-1 md:gap-2 grid sm:grid-cols-2 @md:grid-cols-3 @lg:grid-cols-4 pt-1 md:pt-2">
+
+			@for (choice of quiz.choices; track $index) {
+
+				<!-- CHOICE -->
+				<div
+					tabindex="0"
+					class="min-h-14 p-3 items-center cursor-pointer comp comp-hover comp-active relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none"
+					[class.correct]="quiz.correctChoice() === $index"
+					[class.incorrect]="quiz.incorrectChoice() === $index"
+					(click)="onChoiceClick(quiz, $index)">
+
+					@if (quiz.askWord) {
+
+						<w-languages [languages]="choice.definitions[0].languages" />
+
+					} @else {
+
+						<ng-container *ngTemplateOutlet="choiceTemplate; context: { choice, quiz }" />
+
+					}
+
+				</div>
+
+			}
+
+		</div>
+
+	</div>
+
+} @else {
+
+	<div class="flex items-center px-4 py-3 comp-dark min-h-14 rounded-lg">
+
+		<svg wGlyph="quiz" class="mr-auto text-xl"></svg>
+		<span class="flex gap-2 flex-1 justify-center items-center">
+			Quiz
+			<small class="text-secondary">/kwɪz/</small>
+		</span>
+
+	</div>
+
+}
