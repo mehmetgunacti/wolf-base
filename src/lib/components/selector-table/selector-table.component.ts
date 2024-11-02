@@ -14,7 +14,7 @@ function parseId(id: string): number[] {
 	standalone: true,
 	templateUrl: 'selector-table.component.html',
 	styleUrl: 'selector-table.component.scss',
-	host: { 'class': 'gap-sm' }
+	host: { 'class': 'flex flex-col' }
 })
 export class SelectorTableComponent extends BaseComponent implements AfterViewInit {
 
@@ -89,10 +89,13 @@ export class SelectorTableComponent extends BaseComponent implements AfterViewIn
 			for (let j = 1; j <= this._rows(); ++j) {
 
 				const el: HTMLDivElement = this.renderer.selectRootElement(`#_${i}_${j}`);
-				if (col >= i && row >= j)
-					el.classList.add('focus');
-				else
-					el.classList.remove('focus');
+				if (col >= i && row >= j) {
+					el.classList.add('bg-accent');
+					el.classList.remove('bg-form-element');
+				} else {
+					el.classList.add('bg-form-element');
+					el.classList.remove('bg-accent');
+				}
 
 			}
 

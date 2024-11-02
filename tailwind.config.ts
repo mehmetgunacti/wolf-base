@@ -222,12 +222,12 @@ export default {
 
 			zIndex: {
 
-				'splash-screen'		: '9000',
-				'ng-progress'		: '8000',
+				'splash-screen'		: '10000',
+				'ng-progress'		: '9000',
+				'header'			: '8000',
 				'overlay-container'	: '7000',
 				'overlay'			: '7000',
 				'overlay-backdrop'	: '7000',
-				'header'			: '6000',
 				'nav-left'			: '5200',
 				'nav-content'		: '5100',
 				'nav'				: '5000',
@@ -236,7 +236,52 @@ export default {
 				'bookmark-overlay'	: '2000',
 				'croppie-close-btn'	: '1000',
 
-			}
+			},
+
+			typography: () => ({
+
+				DEFAULT: {
+
+					css: {
+
+						'--tw-prose-body': 'var(--col-text)',
+						'--tw-prose-headings': 'var(--col-accent)',
+						'--tw-prose-lead': 'var(--col-error)',
+						'--tw-prose-links': 'var(--col-error)',
+						'--tw-prose-bold': 'var(--col-error)',
+						'--tw-prose-counters': 'var(--col-error)',
+						'--tw-prose-bullets': 'var(--col-error)',
+						'--tw-prose-hr': 'var(--col-error)',
+						'--tw-prose-quotes': 'var(--col-error)',
+						'--tw-prose-quote-borders': 'var(--col-error)',
+						'--tw-prose-captions': 'var(--col-error)',
+						'--tw-prose-code': 'var(--col-error)',
+						'--tw-prose-pre-code': 'var(--col-error)',
+						'--tw-prose-pre-bg': 'var(--col-error)',
+						'--tw-prose-th-borders': 'var(--col-error)',
+						'--tw-prose-td-borders': 'var(--col-error)',
+						'--tw-prose-invert-body': 'var(--col-error)',
+						'--tw-prose-invert-headings': 'var(--col-error)',
+						'--tw-prose-invert-lead': 'var(--col-error)',
+						'--tw-prose-invert-links': 'var(--col-error)',
+						'--tw-prose-invert-bold': 'var(--col-error)',
+						'--tw-prose-invert-counters': 'var(--col-error)',
+						'--tw-prose-invert-bullets': 'var(--col-error)',
+						'--tw-prose-invert-hr': 'var(--col-error)',
+						'--tw-prose-invert-quotes': 'var(--col-error)',
+						'--tw-prose-invert-quote-borders': 'var(--col-error)',
+						'--tw-prose-invert-captions': 'var(--col-error)',
+						'--tw-prose-invert-code': 'var(--col-error)',
+						'--tw-prose-invert-pre-code': 'var(--col-error)',
+						'--tw-prose-invert-pre-bg': 'rgb(0 0 0 / 50%)',
+						'--tw-prose-invert-th-borders': 'var(--col-error)',
+						'--tw-prose-invert-td-borders': 'var(--col-error)',
+
+					}
+
+				}
+
+			})
 
 		},
 

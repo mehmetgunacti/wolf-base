@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, forwardRef, input, signal, viewChild, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BaseComponent } from '../base.component';
 
 @Component({
-	selector: 'w-textarea',
 	standalone: true,
+	imports: [ CommonModule ],
+	selector: 'w-textarea',
 	templateUrl: './textarea.component.html',
 	providers: [
 		{

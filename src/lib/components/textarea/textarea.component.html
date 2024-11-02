@@ -1,12 +1,11 @@
 <textarea
 	#inputElement
 	class="border-0 bg-transparent px-3 p-2 w-full text-content outline-0 peer"
-	[value]="value()"
+	[(value)]="value"
 	placeholder=""
 	[readonly]="readonly()"
 	[disabled]="disabled()"
 	(blur)="onBlur()"
-	(input)="onInput(inputElement.value)"
 	[rows]="rows()"></textarea>
 <label class="
 	-top-3.5

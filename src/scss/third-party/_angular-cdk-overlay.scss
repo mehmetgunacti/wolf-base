@@ -1,0 +1,21 @@
+/******************************
+* Angular CDK Overlay - start *
+*******************************/
+
+// import angular cdk scss file from node_modules (index.scss)
+@import '../../../node_modules/@angular/cdk/overlay';
+
+// note: z-index values have to be in sync with tailwind.config.ts values
+$overlay-container-z-index	: 7000;
+$overlay-z-index			: 7000;
+$overlay-backdrop-z-index	: 7000;
+
+// override backdrop color
+$overlay-backdrop-color	: var(--col-bg-overlay);
+
+// override backdrop transition (same as background-color var(--transition-bg-color))
+$backdrop-animation-duration		: 0.4s;
+$backdrop-animation-timing-function	: ease; // var(--transition); //  cubic-bezier(0.25, 1, 0.25, 1);
+
+// generate angular cdk overlay styles
+@include overlay();

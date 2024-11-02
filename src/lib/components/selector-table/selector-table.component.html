@@ -1,11 +1,12 @@
-<div #display>[select]</div>
-<div table-selectors>
+<div #display class="font-bold text-center text-xs">[select]</div>
+<div class="flex-1 gap-1 grid grid-cols-7 px-2">
 
 	@for (row of _rowsArray(); track $index;) {
 
 		@for (col of _colsArray(); track $index;) {
 
 			<a	tabindex="0"
+				class="hover:bg-accent focus:bg-accent focus-visible:outline-none bg-form-element rounded-sm focus-visible:ring-4"
 				[id]="'_' + col + '_' + row"
 				(click)="onClick(col, row)"
 				(keydown)="onKeydown($event);"

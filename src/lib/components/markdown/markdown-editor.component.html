@@ -294,21 +294,13 @@
 
 				</div>
 			</header>
-			<!-- CONTENT WRAPPER -->
+			<!-- CONTENT WRAPPER - SCROLLBAR -->
 			<section class="h-full overflow-y-auto scrollbar scrollbar-gutter-stable">
 				<!-- CONTENT -->
-				<div class="p-3 text-content">
-					<!-- <w-markdown-viewer [markdown]="undoCache.props().content"/> -->
-					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis blanditiis aspernatur autem sequi nesciunt! Minus nobis, illum quae iusto libero explicabo obcaecati neque cupiditate aspernatur magni iure expedita sint nesciunt.
-					Nemo, expedita doloribus temporibus deserunt optio corrupti aliquid id? Voluptatem vitae dolorem iure, nobis maiores, magnam perferendis quisquam incidunt quia quas a, facere officia voluptates animi quae voluptatum quis ex!
-					Perferendis maiores eos veritatis ipsam dolorum molestias? Aut, totam veniam expedita quae recusandae maxime aspernatur nobis vero distinctio ex consectetur praesentium dolorem dignissimos aliquid unde exercitationem commodi nam optio cumque!
-					Debitis nobis id aliquid itaque quae minima quo cum ducimus nam, mollitia inventore distinctio explicabo voluptatum, alias aspernatur atque cupiditate dicta quisquam necessitatibus deserunt ipsa? Facilis reiciendis animi ipsa sapiente!
-					Necessitatibus quaerat deleniti doloremque ut impedit labore aspernatur corrupti eveniet qui? Laudantium perspiciatis incidunt dignissimos recusandae, quo officiis odit quae voluptates cum officia doloribus nemo, amet eum, ratione accusamus possimus!
-					Accusantium architecto laborum illo voluptatibus ratione, explicabo, officiis ab pariatur quasi ex dolor laudantium blanditiis aperiam molestiae eum tempore aspernatur praesentium? Asperiores expedita quos rerum recusandae eligendi? Ab, magni. Harum.
-					Excepturi, quod neque dolorem pariatur quo aspernatur officiis qui iste ratione accusamus eveniet. Est, culpa amet. Aspernatur molestias debitis omnis nisi doloribus iure beatae repudiandae quaerat placeat, dolorum explicabo! Asperiores?
-					Facere odit atque itaque sequi, numquam dignissimos fuga voluptatem ipsa eos est deserunt suscipit ipsum blanditiis veniam nostrum aperiam hic modi ipsam distinctio repellendus quo totam in, quis officia. Culpa!
-					Alias laudantium quibusdam vel eos voluptas in quaerat quisquam nemo natus inventore, veritatis quis ratione velit ipsam explicabo soluta nisi corporis facilis sit iusto cum, cumque debitis. Quibusdam, commodi natus!
-					Amet dolore quo quibusdam dolorem, iusto dicta cum quia reiciendis minima hic ullam, consequatur inventore commodi pariatur ad eligendi nam? Fugiat aspernatur deserunt reiciendis nemo, quidem dolorum quae nam aperiam!
+				<div class="p-3">
+
+					<w-markdown-viewer [markdown]="undoCache.props().content"/>
+
 				</div>
 			</section>
 
@@ -320,15 +312,15 @@
 @if (showRecover()) {
 
 	<w-modal (close)="onRecoverClose()">
-		<div class="overlay-content" cdkMenu>
+		<div class="h-full" cdkMenu>
 
-			<header>
-				<div title>Recover</div>
-				<div title_buttons>
+			<header class="flex items-center p-2">
+				<div class="ml-2 font-bold text-2xl text-content">Preview</div>
+				<div class="ml-auto">
 
 					<button
 						cdkMenuItem
-						class="glyph"
+						class="btn btn-glyph"
 						[disabled]="!recoveryManager.hasPrev()"
 						[cdkMenuItemDisabled]="!recoveryManager.hasPrev()"
 						(click)="recoveryManager.previous()">
@@ -336,7 +328,7 @@
 					</button>
 					<button
 						cdkMenuItem
-						class="glyph"
+						class="btn btn-glyph"
 						[disabled]="!recoveryManager.hasNext()"
 						[cdkMenuItemDisabled]="!recoveryManager.hasNext()"
 						(click)="recoveryManager.next()">
@@ -344,31 +336,34 @@
 					</button>
 					<button
 						cdkMenuItem
-						class="ghost"
+						class="btn btn-ghost"
 						(click)="onRecoverReplace()">
 						<svg wGlyph="published_with_changes"></svg>
 						<span>Replace</span>
 					</button>
 					<button
 						cdkMenuItem
-						class="glyph"
+						class="btn btn-glyph"
 						(click)="onRecoverClose()">
 						<svg wGlyph="close"></svg>
 					</button>
 
 				</div>
 			</header>
-			<div content>
+			<!-- CONTENT WRAPPER - SCROLLBAR -->
+			<section class="h-full overflow-y-auto scrollbar scrollbar-gutter-stable">
+				<!-- CONTENT -->
+				<div class="p-3 text-content">
 
-				@if(recoveryManager.recoverableContent(); as lsEntry) {
+					@if(recoveryManager.recoverableContent(); as lsEntry) {
 
-					<h6>{{ lsEntry.time.toUTCString() | timePast:true:'precise' }}</h6>
-					<pre>{{lsEntry.content}}</pre>
-					<w-markdown-viewer [markdown]="lsEntry.content"/>
+						<div class="text-base-color-secondary italic">{{ lsEntry.time.toUTCString() | timePast:true:'precise' }}</div>
+						<w-markdown-viewer [markdown]="lsEntry.content"/>
 
-				}
+					}
 
-			</div>
+				</div>
+			</section>
 
 		</div>
 	</w-modal>
@@ -377,7 +372,7 @@
 
 <ng-template #table_menu>
 
-	<div class="table-menu" cdkMenu>
+	<div class="gap-2 grid py-2 comp size-40" cdkMenu>
 
 		<w-selector-table
 			[rows]="6"
@@ -390,62 +385,62 @@
 
 <ng-template #format_heading>
 
-	<div class="format-menu" cdkMenu>
+	<div class="gap-2 grid py-2 w-56 h-48 comp" cdkMenu>
 
-		<div>
+		<div class="flex flex-col gap-2 p-2 overflow-y-auto prose scrollbar scrollbar-gutter-stable">
 
 			<!-- H1 BUTTON -->
 			<button
-				class="ghost xl"
 				(click)="updateEditor(actions.addHeading(editor, '#'))"
 				title="Align Center"
-				cdkMenuItem>
-				<h1>Heading 1</h1>
+				cdkMenuItem
+				class="rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline">
+				<h1 class="my-2 text-content">Heading 1</h1>
 			</button>
 
 			<!-- H2 BUTTON -->
 			<button
-				class="ghost xl"
 				(click)="updateEditor(actions.addHeading(editor, '##'))"
 				title="Heading 2"
-				cdkMenuItem>
-				<h2>Heading 2</h2>
+				cdkMenuItem
+				class="rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline">
+				<h2 class="my-2 text-content">Heading 2</h2>
 			</button>
 
 			<!-- H3 BUTTON -->
 			<button
-				class="ghost xl"
 				(click)="updateEditor(actions.addHeading(editor, '###'))"
 				title="Heading 3"
-				cdkMenuItem>
-				<h3>Heading 3</h3>
+				cdkMenuItem
+				class="rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline">
+				<h3 class="my-2 text-content">Heading 3</h3>
 			</button>
 
 			<!-- H4 BUTTON -->
 			<button
-				class="ghost xl"
 				(click)="updateEditor(actions.addHeading(editor, '####'))"
 				title="Heading 4"
-				cdkMenuItem>
-				<h4>Heading 4</h4>
+				cdkMenuItem
+				class="rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline">
+				<h4 class="my-2 text-content">Heading 4</h4>
 			</button>
 
 			<!-- H5 BUTTON -->
 			<button
-				class="ghost xl"
 				(click)="updateEditor(actions.addHeading(editor, '#####'))"
 				title="Heading 5"
-				cdkMenuItem>
-				<h5>Heading 5</h5>
+				cdkMenuItem
+				class="rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline">
+				<h5 class="my-2 text-content">Heading 5</h5>
 			</button>
 
 			<!-- H6 BUTTON -->
 			<button
-				class="ghost xl"
 				(click)="updateEditor(actions.addHeading(editor, '######'))"
 				title="Heading 6"
-				cdkMenuItem>
-				<h6>Heading 6</h6>
+				cdkMenuItem
+				class="rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline">
+				<h6 class="my-2 text-content">Heading 6</h6>
 			</button>
 
 		</div>
@@ -456,32 +451,32 @@
 
 <ng-template #blockquote_menu>
 
-	<div class="quote-menu" cdkMenu>
+	<div class="gap-2 grid py-2 w-36 h-48 comp" cdkMenu>
 
-		<div>
+		<div class="flex flex-col gap-2 p-2 overflow-y-auto prose scrollbar scrollbar-gutter-stable">
 
-			<button class="ghost" (click)="updateEditor(actions.addBlockquote(editor))" cdkMenuItem data-after="Blockquote">
-				<span class="default"></span>
+			<button class="border-form-element-text hover:bg-ghost-hover border-l-4 border-l-default rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none" (click)="updateEditor(actions.addBlockquote(editor))" cdkMenuItem>
+				Blockquote
 			</button>
 
-			<button class="ghost" (click)="updateEditor(actions.addBlockquote(editor, 'note'))" cdkMenuItem data-after="Note">
-				<span class="primary"></span>
+			<button class="border-primary hover:bg-ghost-hover border-l-4 border-l-primary rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none" (click)="updateEditor(actions.addBlockquote(editor, 'note'))" cdkMenuItem>
+				Note
 			</button>
 
-			<button class="ghost" (click)="updateEditor(actions.addBlockquote(editor, 'tip'))" cdkMenuItem data-after="Tip">
-				<span class="success"></span>
+			<button class="border-success hover:bg-ghost-hover border-l-4 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none" (click)="updateEditor(actions.addBlockquote(editor, 'tip'))" cdkMenuItem>
+				Tip
 			</button>
 
-			<button class="ghost" (click)="updateEditor(actions.addBlockquote(editor, 'important'))" cdkMenuItem data-after="Important">
-				<span class="info"></span>
+			<button class="border-info hover:bg-ghost-hover border-l-4 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none" (click)="updateEditor(actions.addBlockquote(editor, 'important'))" cdkMenuItem>
+				Important
 			</button>
 
-			<button class="ghost" (click)="updateEditor(actions.addBlockquote(editor, 'warning'))" cdkMenuItem data-after="Warning">
-				<span class="warn"></span>
+			<button class="border-warn hover:bg-ghost-hover border-l-4 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none" (click)="updateEditor(actions.addBlockquote(editor, 'warning'))" cdkMenuItem>
+				Warning
 			</button>
 
-			<button class="ghost" (click)="updateEditor(actions.addBlockquote(editor, 'caution'))" cdkMenuItem data-after="Caution">
-				<span class="error"></span>
+			<button class="border-error hover:bg-ghost-hover border-l-4 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none" (click)="updateEditor(actions.addBlockquote(editor, 'caution'))" cdkMenuItem>
+				Caution
 			</button>
 
 		</div>
@@ -492,98 +487,98 @@
 
 <ng-template #code_menu>
 
-	<div class="code-menu" cdkMenu>
+	<div class="gap-2 grid py-2 w-36 h-48 comp" cdkMenu>
 
-		<div>
+		<div class="flex flex-col gap-2 p-2 overflow-y-auto prose scrollbar scrollbar-gutter-stable">
 
 			<fieldset>
 				<!-- INLINE CODE BUTTON -->
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addInlineCode(editor))" cdkMenuItem data-after="Inline Code">
-					<svg wGlyph="code"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addInlineCode(editor))" cdkMenuItem>
+					<svg wGlyph="code"></svg> Inline Code
 				</button>
 			</fieldset>
 
 			<!-- todo: convert to for loop(?) -->
 			<fieldset>
-				<legend>Frequent</legend>
+				<legend class="font-bold">Frequent</legend>
 
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor))" cdkMenuItem data-after="Empty Block">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> Empty Block
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'java'))" cdkMenuItem data-after="java">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'java'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> java
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'typescript'))" cdkMenuItem data-after="typescript">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'typescript'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> typescript
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'javascript'))" cdkMenuItem data-after="javascript">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'javascript'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> javascript
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'scss'))" cdkMenuItem data-after="scss">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'scss'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> scss
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'bash'))" cdkMenuItem data-after="bash">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'bash'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> bash
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'sql'))" cdkMenuItem data-after="sql">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'sql'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> sql
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'xml'))" cdkMenuItem data-after="xml">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'xml'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> xml
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'yaml'))" cdkMenuItem data-after="yaml">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'yaml'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> yaml
 				</button>
 
 			</fieldset>
 
 			<fieldset>
-				<legend>Other</legend>
+				<legend class="font-bold">Other</legend>
 
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'asciidoc'))" cdkMenuItem data-after="asciidoc">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'asciidoc'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> asciidoc
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'autohotkey'))" cdkMenuItem data-after="autohotkey">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'autohotkey'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> autohotkey
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'c'))" cdkMenuItem data-after="c">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'c'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> c
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'cpp'))" cdkMenuItem data-after="cpp">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'cpp'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> cpp
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'css'))" cdkMenuItem data-after="css">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'css'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> css
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'dockerfile'))" cdkMenuItem data-after="dockerfile">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'dockerfile'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> dockerfile
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'gradle'))" cdkMenuItem data-after="gradle">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'gradle'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> gradle
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'http'))" cdkMenuItem data-after="http">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'http'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> http
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'ini'))" cdkMenuItem data-after="ini">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'ini'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> ini
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'json'))" cdkMenuItem data-after="json">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'json'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> json
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'kotlin'))" cdkMenuItem data-after="kotlin">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'kotlin'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> kotlin
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'markdown'))" cdkMenuItem data-after="markdown">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'markdown'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> markdown
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'powershell'))" cdkMenuItem data-after="powershell">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'powershell'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> powershell
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'properties'))" cdkMenuItem data-after="properties">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'properties'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> properties
 				</button>
-				<button class="left ghost sm w100" (click)="updateEditor(actions.addCodeBlock(editor, 'python'))" cdkMenuItem data-after="python">
-					<svg wGlyph="chevron_right"></svg>
+				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'python'))" cdkMenuItem>
+					<svg wGlyph="chevron_right"></svg> python
 				</button>
 
 			</fieldset>
@@ -599,7 +594,7 @@
 
 	<textarea
 		#editor
-		class="border-0 bg-transparent px-3 p-2 w-full text-content outline-0 peer"
+		class="border-0 bg-transparent px-3 p-2 w-full text-content outline-0 peer scrollbar"
 		[value]="value()"
 		placeholder=""
 		[readonly]="readonly()"

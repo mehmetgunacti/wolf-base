@@ -14,13 +14,15 @@ import { HeaderComponent } from './header/header.component';
 import { NavOverlayComponent } from './nav-overlay/nav-overlay.component';
 import { NavComponent } from './nav/nav.component';
 import { routes } from './routes/app.routes';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 
 export const appImports = [
 
 	RouterOutlet,
 	HeaderComponent,
 	NavComponent,
-	NavOverlayComponent
+	NavOverlayComponent,
+	CdkScrollable
 
 ];
 
