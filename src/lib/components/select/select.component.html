@@ -1,6 +1,4 @@
-<select
-	class="border-0 border-stroke bg-transparent px-3 rounded-lg w-full text-content appearance-none outline-0"
-
+<select class="border-0 bg-form-element form-select px-3 rounded-lg w-full text-content outline-none"
 	#selectElement
 	[value]="value()"
 	(change)="onSelect($event)"
@@ -8,7 +6,7 @@
 
 	@for (node of nodes(); track $index) {
 
-		<option [value]="node.id" class="bg-component">{{ node.name }}</option>
+		<option [value]="node.id">{{ node.name }}</option>
 
 	}
 
