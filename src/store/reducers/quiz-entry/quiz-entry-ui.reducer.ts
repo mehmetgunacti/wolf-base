@@ -1,29 +1,28 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { incVisibility, QuizVisibility } from '@constants';
 import { quizEntryActions } from '@actions';
+import { incVisibility, QuizVisibility } from '@constants';
+import { Action, createReducer, on } from '@ngrx/store';
 import { quizEntry_initialUIState, QuizEntry_UIState } from '@states';
 
 const reducer = createReducer(
 
 	quizEntry_initialUIState,
+	on(quizEntryActions.editWord, (state): QuizEntry_UIState => ({
+
+		...state,
+		answer: null
+
+	})),
+	on(quizEntryActions.hideAnswer, (state): QuizEntry_UIState => ({
+
+		...state,
+		answer: null
+
+	})),
 	on(quizEntryActions.answeredWrong, (state, { word }): QuizEntry_UIState => ({
 
 		...state,
 		answer: word,
 		visibility: QuizVisibility.HEADER
-
-	})),
-	on(quizEntryActions.closeAnswerDialog, (state): QuizEntry_UIState => ({
-
-		...state,
-		answer: null,
-		visibility: QuizVisibility.HEADER
-
-	})),
-	on(quizEntryActions.increaseVisibility, (state): QuizEntry_UIState => ({
-
-		...state,
-		visibility: incVisibility(state.visibility)
 
 	})),
 	on(quizEntryActions.answeredRight, (state): QuizEntry_UIState => ({
@@ -33,6 +32,18 @@ const reducer = createReducer(
 		visibility: QuizVisibility.HEADER
 
 	})),
+	on(quizEntryActions.expand, (state): QuizEntry_UIState => ({
+
+		...state,
+		visibility: incVisibility(state.visibility)
+
+	})),
+	on(quizEntryActions.collapseAll, (state): QuizEntry_UIState => ({
+
+		...state,
+		visibility: QuizVisibility.HEADER
+
+	}))
 
 );
 

@@ -1,7 +1,7 @@
-import { createSelector } from '@ngrx/store';
-import { produce } from 'immer';
 import { UUID } from '@constants';
 import { QuizEntry, Word } from '@models';
+import { createSelector } from '@ngrx/store';
+import { produce } from 'immer';
 import { selCore_now } from '../core/core-ui.selectors';
 import { selQuizEntry_EntityList } from '../entity/entity-quiz-entry.selectors';
 import { selWord_EntityList } from '../entity/entity-word.selectors';

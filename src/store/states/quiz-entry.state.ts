@@ -9,7 +9,6 @@ export interface QuizEntry_ModuleState {
 
 export interface QuizEntry_UIState {
 
-	now: number;
 	answer: Word | null;
 	visibility: QuizVisibility;
 
@@ -19,7 +18,6 @@ export interface QuizEntry_UIState {
 
 export const quizEntry_initialUIState: QuizEntry_UIState = {
 
-	now: new Date().getTime(),
 	answer: null,
 	visibility: QuizVisibility.HEADER
 

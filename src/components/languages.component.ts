@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
+import { BaseComponent } from '@libComponents';
 import { Language } from '@models';
-import { BaseComponent } from './base.component';
 
 @Component({
 	standalone: true,

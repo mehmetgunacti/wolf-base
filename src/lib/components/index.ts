@@ -5,6 +5,7 @@ export * from './croppie';
 export * from './input';
 export * from './input-tag';
 export * from './markdown';
+export * from './modal';
 export * from './overlay-container';
 export * from './portal.component';
 export * from './select';

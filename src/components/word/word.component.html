@@ -1,0 +1,86 @@
+@if (word(); as word) {
+
+	<header>
+
+		{{ word.name }}
+		@if (word.pronunciation) {
+
+			<small>{{ word.pronunciation }}</small>
+
+		}
+
+	</header>
+	<section content>
+
+		@for (context of word.contexts; track $index) {
+
+			<blockquote context>
+				@if (word.contexts.length > 1) {
+
+					<small>Context #{{ $index + 1 }}</small>
+
+				} @else {
+
+					<small>Context</small>
+
+				}
+				{{ context }}
+			</blockquote>
+
+		}
+
+		@if (word.dictionary) {
+
+			<p><strong>Dictionary:</strong> {{ word.dictionary }}</p>
+
+		}
+
+		@for (definition of word.definitions; track $index) {
+
+			<div definition>
+
+				<small>{{ definition.type | defType }}</small>
+
+				<div language>
+
+					<w-languages [languages]="definition.languages"/>
+
+				</div>
+
+				@for (sample of definition.samples; track $index) {
+
+					<blockquote>
+						@if (definition.samples.length > 1) {
+
+							<small>Sample #{{ $index + 1 }}</small>
+
+						} @else {
+
+							<small>Sample</small>
+
+						}
+						{{ sample }}
+					</blockquote>
+
+				}
+
+				@if (schedulable()) {
+
+					<footer schedule>
+
+						<w-switch
+							label="Schedule"
+							[value]="scheduledIds().includes(definition.id)"
+							(valueChange)="onSchedule(definition, $event)"/>
+
+					</footer>
+
+				}
+
+			</div>
+
+		}
+
+	</section>
+
+}

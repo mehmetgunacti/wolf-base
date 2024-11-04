@@ -1,3 +1,51 @@
+@if (answer(); as w) {
+
+	<w-modal (close)="onCloseAnswer()">
+
+		<div class="h-full">
+
+			<!-- DIALOG HEADER -->
+			<header class="flex items-center p-2">
+				<div class="ml-2 font-bold text-2xl text-content">Preview</div>
+				<div class="ml-auto">
+
+					<button
+						class="btn btn-glyph"
+						(click)="onCloseAnswer()">
+						<svg wGlyph="close"></svg>
+					</button>
+
+				</div>
+			</header>
+			<!-- DIALOG CONTENT WRAPPER - SCROLLBAR -->
+			<section class="h-full overflow-y-auto scrollbar scrollbar-gutter-stable">
+				<!-- DIALOG CONTENT -->
+				<div class="p-3">
+
+					<app-word [word]="w" [schedulable]="false"/>
+
+					<footer class="footer-buttons">
+
+						<button type="button" (click)="onEdit(w.id)" class="link">
+							<svg wGlyph="edit"></svg> Edit
+						</button>
+						<a
+							class="align-left button glyph"
+							[href]="'https://www.google.com/search?q=' + w.name"
+							target="_blank">
+							<svg wGlyph="search"></svg> Google <sup><svg wGlyph="open_in_new"></svg></sup>
+						</a>
+						<button type="button" (click)="onCloseAnswer()"><svg wGlyph="check"></svg> Got It</button>
+
+					</footer>
+
+				</div>
+			</section>
+
+		</div>
+	</w-modal>
+
+}
 <ng-template #questionTemplate let-quiz>
 
 	<span class="font-bold text-focus text-lg">
@@ -65,7 +113,7 @@
 
 				<button
 					class="btn btn-glyph"
-					(click)="showAnswer(quiz.words[0])"
+					(click)="showAnswer(quiz.word)"
 					title="Show Answer">
 					<svg wGlyph="contact_support"></svg>
 				</button>
@@ -136,6 +184,7 @@
 				<!-- CHOICE -->
 				<div
 					tabindex="0"
+					quiz_choice
 					class="min-h-14 p-3 items-center cursor-pointer comp comp-hover comp-active relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none"
 					[class.correct]="quiz.correctChoice() === $index"
 					[class.incorrect]="quiz.incorrectChoice() === $index"

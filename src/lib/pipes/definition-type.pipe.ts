@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { DefinitionTypeLabels } from '@constants';
 
 @Pipe({ standalone: true, name: 'defType' })
-export class TypePipe implements PipeTransform {
+export class DefinitionTypePipe implements PipeTransform {
 
 	transform(value: any): string {
 

@@ -42,14 +42,15 @@ export class QuizEntryLogicEffects {
 
 	);
 
-	closeAnswerDialog$ = createEffect(
+	answeredWrong$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(quizEntryActions.closeAnswerDialog),
+			ofType(quizEntryActions.answeredWrong),
 			withLatestFrom(this.store.select(selQuizEntry_EntityList)),
-			map(([ { quizEntryId }, entries ]) => {
+			map(([ { word }, entries ]) => {
 
+				const quizEntryId = word.definitions[ 0 ].id;
 				const quizEntry = entries.find(e => e.id === quizEntryId);
 				if (!quizEntry)
 					return coreActions.showNotification({ severity: 'error', summary: 'QuizEntry Update Failure!', detail: `${quizEntryId} not found` });
