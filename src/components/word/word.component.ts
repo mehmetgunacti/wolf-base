@@ -9,14 +9,19 @@ import { DefinitionTypePipe } from '@pipes';
 	standalone: true,
 	imports: [ LanguagesComponent, SwitchComponent, DefinitionTypePipe ],
 	selector: 'app-word',
-	templateUrl: './word.component.html'
+	templateUrl: './word.component.html',
+	host: {
+		'class': 'flex flex-col text-content prose'
+	}
 })
 export class WordComponent extends BaseComponent {
 
+	// INPUT
 	word = input.required<Word>();
 	scheduledIds = input<UUID[]>([]);
 	schedulable = input<boolean>(true);
 
+	// OUTPUT
 	schedule = output<Definition>();
 	cancelSchedule = output<Definition>();
 

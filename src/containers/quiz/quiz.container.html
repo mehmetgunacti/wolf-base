@@ -1,12 +1,13 @@
+<!-- SHOW ANSWER DIALOG -->
 @if (answer(); as w) {
 
 	<w-modal (close)="onCloseAnswer()">
 
-		<div class="h-full">
+		<div class="h-full flex flex-col">
 
 			<!-- DIALOG HEADER -->
-			<header class="flex items-center p-2">
-				<div class="ml-2 font-bold text-2xl text-content">Preview</div>
+			<header class="flex items-center p-1 md:p-2">
+				<div class="ml-2 font-bold text-2xl text-content">Remember</div>
 				<div class="ml-auto">
 
 					<button
@@ -18,29 +19,31 @@
 				</div>
 			</header>
 			<!-- DIALOG CONTENT WRAPPER - SCROLLBAR -->
-			<section class="h-full overflow-y-auto scrollbar scrollbar-gutter-stable">
+			<section class="flex-1 overflow-y-auto scrollbar scrollbar-gutter-stable">
 				<!-- DIALOG CONTENT -->
-				<div class="p-3">
+				<div class="p-3 h-full flex flex-col">
 
 					<app-word [word]="w" [schedulable]="false"/>
 
-					<footer class="footer-buttons">
-
-						<button type="button" (click)="onEdit(w.id)" class="link">
-							<svg wGlyph="edit"></svg> Edit
-						</button>
-						<a
-							class="align-left button glyph"
-							[href]="'https://www.google.com/search?q=' + w.name"
-							target="_blank">
-							<svg wGlyph="search"></svg> Google <sup><svg wGlyph="open_in_new"></svg></sup>
-						</a>
-						<button type="button" (click)="onCloseAnswer()"><svg wGlyph="check"></svg> Got It</button>
-
-					</footer>
-
 				</div>
+
 			</section>
+
+			<!-- DIALOG FOOTER -->
+			<footer class="flex items-center gap-1 p-1 md:p-2">
+
+				<button type="button" (click)="onEdit(w.id)" class="btn btn-ghost">
+					<svg wGlyph="edit"></svg> Edit
+				</button>
+				<a
+					class="btn btn-ghost"
+					[href]="'https://www.google.com/search?q=' + w.name"
+					target="_blank">
+					<svg wGlyph="search"></svg> Google <sup><svg wGlyph="open_in_new"></svg></sup>
+				</a>
+				<button type="button" (click)="onCloseAnswer()" class="btn ml-auto"><svg wGlyph="check"></svg> Got It</button>
+
+			</footer>
 
 		</div>
 	</w-modal>

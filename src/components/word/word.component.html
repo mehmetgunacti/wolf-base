@@ -1,8 +1,8 @@
 @if (word(); as word) {
 
-	<header>
+	<header class="mb-8 comp-title">
 
-		{{ word.name }}
+		<span class="text-focus">{{ word.name }}</span>
 		@if (word.pronunciation) {
 
 			<small>{{ word.pronunciation }}</small>
@@ -37,11 +37,12 @@
 
 		@for (definition of word.definitions; track $index) {
 
-			<div definition>
+			<div class="flex flex-col gap-2 comp-dark p-3 comp">
 
-				<small>{{ definition.type | defType }}</small>
+				<small class="text-secondary">{{ definition.type | defType }}</small>
 
-				<div language>
+				<!-- LANGUAGES -->
+				<div>
 
 					<w-languages [languages]="definition.languages"/>
 
@@ -49,14 +50,14 @@
 
 				@for (sample of definition.samples; track $index) {
 
-					<blockquote>
+					<blockquote class="my-2">
 						@if (definition.samples.length > 1) {
 
-							<small>Sample #{{ $index + 1 }}</small>
+							<small class="block text-secondary">Sample #{{ $index + 1 }}</small>
 
 						} @else {
 
-							<small>Sample</small>
+							<small class="block text-secondary">Sample</small>
 
 						}
 						{{ sample }}
