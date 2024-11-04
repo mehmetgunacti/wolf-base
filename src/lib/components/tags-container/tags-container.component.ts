@@ -11,7 +11,7 @@ import { BaseComponent } from '@libComponents';
 	imports: [ CommonModule, RouterLink, GlyphDirective ],
 	templateUrl: './tags-container.component.html',
 	host: {
-		'class': 'flex justify-end items-center gap-1 comp comp-dark py-3 px-4 min-h-14'
+		'class': 'flex flex-wrap justify-end items-center gap-1 comp comp-dark py-3 px-4 min-h-14'
 	}
 })
 export class TagsContainerComponent extends BaseComponent {
