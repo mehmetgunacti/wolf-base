@@ -97,9 +97,9 @@ async function runVersionScript() {
 	// read package.json version
 	console.log();
 	console.log(`Reading 'version' property of package.json...`);
-	const { version: package_json_version } = await import('./package.json', {
-		assert: { type: 'json' }
-	});
+	const data = await fs.readFile('./package.json', 'utf-8');
+	const json = JSON.parse(data);
+	const package_json_version = json.version;
 	if (!package_json_version)
 		throw new Error('package_json_version is undefined.')
 	console.log(`Current version is ${package_json_version}.`);
