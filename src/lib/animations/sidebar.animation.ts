@@ -21,16 +21,16 @@ export const sidebarTrigger = trigger('sidebar', [
 	state('bigHidden', style({ left: (offset - width_half) + unit, width: width_half + unit })),
 
 	// nav button (hamburger) click
-	transition('bigFull => bigHidden', [animate(duration, keyframes([style({ left: (offset - width_full) + unit, width: width_full + unit })]))]), // on click
+	transition('bigFull => bigHidden', [ animate(duration, keyframes([ style({ left: (offset - width_full) + unit, width: width_full + unit }) ])) ]), // on click
 
 	// window resize
-	transition('half => bigHalf', [style({ left: (offset - width_half) + unit, width: width_half + unit }), animate(duration)]), // on resize
-	transition('bigHalf => half', [animate(duration, keyframes([style({ left: (offset - width_half) + unit, width: width_half + unit })]))]), // on resize
+	transition('half => bigHalf', [ style({ left: (offset - width_half) + unit, width: width_half + unit }), animate(duration) ]), // on resize
+	transition('bigHalf => half', [ animate(duration, keyframes([ style({ left: (offset - width_half) + unit, width: width_half + unit }) ])) ]), // on resize
 
 	// all other transitions
-	transition('* => *', [animate(duration)]),
+	transition('* => *', [ animate(duration) ])
 
-])
+]);
 
 export const mainTrigger = trigger('main', [
 
@@ -42,6 +42,6 @@ export const mainTrigger = trigger('main', [
 	state('bigHidden', style({ left: offset + unit })),
 
 	// all other transitions
-	transition('* => *', [animate(duration)]),
+	transition('* => *', [ animate(duration) ]),
 
-])
+]);
