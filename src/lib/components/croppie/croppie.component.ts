@@ -10,7 +10,7 @@ import {
 import { BaseComponent } from '../base.component';
 
 @Component({
-	selector: 'app-croppie',
+	selector: 'w-croppie',
 	standalone: true,
 	imports: [ CommonModule ],
 	templateUrl: './croppie.component.html',

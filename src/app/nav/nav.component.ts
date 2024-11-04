@@ -6,7 +6,7 @@ import { GlyphDirective } from '@directives';
 import { BaseComponent } from '@libComponents';
 import { MenuItem } from '@models';
 import { Store } from '@ngrx/store';
-import { selBookmarkMenuBadge, selCloudAvailableTasks } from '@selectors';
+import { selBookmark_menuBadge, selCloudAvailableTasks } from '@selectors';
 import * as conf from './sidebar.conf';
 
 @Component({
@@ -23,7 +23,7 @@ export class NavComponent extends BaseComponent {
 
 	private store: Store = inject(Store);
 
-	private bmBadge = this.store.selectSignal(selBookmarkMenuBadge);
+	private bmBadge = this.store.selectSignal(selBookmark_menuBadge);
 	private cloudTasks = this.store.selectSignal(selCloudAvailableTasks);
 
 	protected menuItemsTop = computed(() => {

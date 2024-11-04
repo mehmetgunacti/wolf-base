@@ -1,6 +1,7 @@
-import { Directive, ElementRef, AfterContentInit, Input, SimpleChanges, OnChanges } from '@angular/core';
+import { AfterContentInit, Directive, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Directive({
+	standalone: true,
 	selector: '[autofocus]'
 })
 export class AutofocusDirective implements OnChanges, AfterContentInit {
@@ -12,7 +13,7 @@ export class AutofocusDirective implements OnChanges, AfterContentInit {
 
 	ngOnChanges(changes: SimpleChanges) {
 
-		if (changes['autofocus']?.currentValue)
+		if (changes[ 'autofocus' ]?.currentValue)
 			setTimeout(() => { this.el.nativeElement.focus(); }, this.after);
 
 	}

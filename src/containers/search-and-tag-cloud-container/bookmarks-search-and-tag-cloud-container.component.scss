@@ -1,0 +1,41 @@
+// @import 'variables';
+// @import 'helper';
+// @import 'components';
+//
+// :host {
+//
+// 	@include mx-d-flex-column;
+// 	@include mx-component($param-dark: true);
+// 	@include mx-transition(background-color);
+// 	gap	: 0;
+//
+// 	& > header {
+//
+// 		@include mx-d-flex-ai-center;
+//
+// 		& > :last-child {
+//
+// 			margin-left	: auto;
+//
+// 		}
+//
+// 	}
+//
+// 	& > aside {
+//
+// 		@include mx-d-flex-column;
+// 		gap : $component-padding-inline;
+// 		@include mx-scrollable($param-set-max-height: true, $param-max-height: 30rem);
+//
+// 		& > [search_control] {
+//
+// 			@include mx-d-flex-center;
+// 			gap				: $gap-xs;
+// 			margin-top		: $component-padding-block;
+// 			padding-inline	: $component-padding-inline;
+//
+// 		}
+//
+// 	}
+//
+// }

@@ -34,6 +34,9 @@
 			"@pages": [
 				"pages"
 			],
+			"@forms": [
+				"forms"
+			],
 			"@animations": [
 				"lib/animations"
 			],

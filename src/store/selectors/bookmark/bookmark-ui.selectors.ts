@@ -3,7 +3,7 @@ import { selBookmark_EntityCount, selBookmark_EntityMap } from '../entity/entity
 import { filteredBookmarkCount } from './bookmark-tags.selectors';
 import { selBookmark_UIState } from './bookmark.selectors';
 
-export const selBookmarkMenuBadge = createSelector(
+export const selBookmark_menuBadge = createSelector(
 
 	selBookmark_EntityCount,
 	filteredBookmarkCount,
@@ -11,14 +11,14 @@ export const selBookmarkMenuBadge = createSelector(
 
 );
 
-export const selBookmarkShaking = createSelector(
+export const selBookmark_shaking = createSelector(
 
 	selBookmark_UIState,
 	state => state.shaking
 
 );
 
-export const selBookmarkEditId = createSelector(
+export const selBookmark_editId = createSelector(
 
 	selBookmark_EntityMap,
 	selBookmark_UIState,
