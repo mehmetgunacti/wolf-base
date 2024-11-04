@@ -58,7 +58,6 @@ export class QuoteContainer extends BaseComponent {
 
 	wrapper$: Observable<QuoteWrapper> = this.store.select(selQuote_SelectedEntity).pipe(
 
-		tap(a => console.log(a)),
 		filter((quote): quote is Quote => !!quote),
 		scan(
 
