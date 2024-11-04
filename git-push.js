@@ -1,12 +1,12 @@
 try {
-	require('child_process');
-	require('fs');
+	await import('child_process');
+	await import('fs');
 } catch (e) {
 	console.error(`Modules 'child_process' and 'fs' not installed.`);
 }
 
-const execSync = require('child_process').execSync;
-const writeFileSync = require('fs').writeFileSync;
+import { execSync } from 'child_process';
+import { writeFileSync } from 'fs';
 
 const args = process.argv.slice(2);
 const version = args[0] || 'patch';
@@ -50,7 +50,7 @@ export const buildInfo = {
 
 }
 
-function runVersionScript() {
+async function runVersionScript() {
 
 	/*
 	*  Do checks
@@ -97,7 +97,9 @@ function runVersionScript() {
 	// read package.json version
 	console.log();
 	console.log(`Reading 'version' property of package.json...`);
-	const package_json_version = require('./package.json').version;
+	const { version: package_json_version } = await import('./package.json', {
+		assert: { type: 'json' }
+	});
 	console.log(`Current version is ${package_json_version}.`);
 
 	// obtain commit count
