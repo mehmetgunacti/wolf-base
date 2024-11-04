@@ -6,7 +6,8 @@ try {
 }
 
 import { execSync } from 'child_process';
-import { readFile, writeFileSync } from 'fs';
+import { writeFileSync } from 'fs';
+import { promises as fs } from 'fs';
 
 const args = process.argv.slice(2);
 const version = args[0] || 'patch';
@@ -97,7 +98,7 @@ async function runVersionScript() {
 	// read package.json version
 	console.log();
 	console.log(`Reading 'version' property of package.json...`);
-	const data = readFile('./package.json', 'utf-8');
+	const data = await fs.readFile('./package.json', 'utf-8');
 	const json = JSON.parse(data);
 	const package_json_version = json.version;
 	if (!package_json_version)
