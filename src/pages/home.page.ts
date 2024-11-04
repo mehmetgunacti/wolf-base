@@ -19,9 +19,9 @@ import { QuizContainerComponent } from "../containers/quiz/quiz.container";
 				<img src="logo.svg" style="height: 2rem;">
 			</div>
 		</w-portal>
-		<app-quiz-container/>
 		<app-quotes-container/>
 		<app-popular-bookmarks-container/>
+		<app-quiz-container/>
 		<app-pinned-notes-container/>
 	`,
 	host: { 'class': 'page' }
