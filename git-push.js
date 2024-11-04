@@ -147,4 +147,4 @@ async function runVersionScript() {
 
 }
 
-runVersionScript();
+await runVersionScript();
