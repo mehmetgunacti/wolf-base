@@ -37,11 +37,12 @@ import { selBookmark_formVisible, selBookmark_shaking } from '@selectors';
 
 		}
 
-		<app-bookmarks-search-and-tag-cloud-container/>
+
 		<app-bookmarks-container/>
 	`,
 	host: { 'class': 'page' }
 })
+// <app-bookmarks-search-and-tag-cloud-container/>
 export class BookmarksPage extends BaseComponent {
 
 	private store: Store = inject(Store);

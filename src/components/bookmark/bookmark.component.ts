@@ -4,25 +4,25 @@ import { GlyphDirective } from '@directives';
 import { BaseComponent } from '@libComponents';
 import { UUID } from 'lib/constants';
 import { ClickedBookmark } from 'lib/models';
+import { CompactBookmarkComponent } from "../compact-bookmark/compact-bookmark.component";
 
 @Component({
-	selector: 'app-bookmark',
 	standalone: true,
-	imports: [ RouterModule, GlyphDirective ],
+	imports: [RouterModule, GlyphDirective, CompactBookmarkComponent],
+	selector: 'app-bookmark',
 	templateUrl: './bookmark.component.html',
-	styleUrls: [ './bookmark.component.scss' ],
-	host: {
-		'class': 'comp comp-hover rounded-lg'
-	}
+	host: { 'class': 'relative flex min-h-20 group/bookmark bg-accent rounded-lg' }
 })
 export class BookmarkComponent extends BaseComponent {
 
+	// Input
 	bookmark = input.required<ClickedBookmark>();
 	showDetails = input(false);
 	editable = input(true);
 	popularButton = input(true);
 	disabled = input(false);
 
+	// Output
 	edit = output<UUID>();
 	popular = output<UUID>();
 	linkClick = output<UUID>();
