@@ -22,7 +22,7 @@ export abstract class AbstractEntity implements Entity {
 	readonly id: string;
 	readonly name: string;
 
-	protected constructor(value: Entity, createId: boolean) {
+	protected constructor(value: Partial<Entity>, createId: boolean) {
 
 		this.id = provideId(value.id, createId);
 		this.name = checkString(value.name);

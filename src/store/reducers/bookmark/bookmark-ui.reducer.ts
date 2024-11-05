@@ -6,9 +6,9 @@ const reducer = createReducer(
 
 	bookmark_initialUIState,
 	on(bookmarkActions.fromClipboardFailure, (state, { shaking }): BookmarkUIState => ({ ...state, shaking })),
-	on(bookmarkActions.openAddBookmarkDialog, (state): BookmarkUIState => ({ ...state, editId: null })),
+	on(bookmarkActions.openFormDialog, (state): BookmarkUIState => ({ ...state, formVisible: true })),
+	on(bookmarkActions.closeFormDialog, (state): BookmarkUIState => ({ ...state, formVisible: false })),
 	on(bookmarkActions.openEditBookmarkDialog, (state, { id }): BookmarkUIState => ({ ...state, editId: id })),
-	on(bookmarkActions.closeEditBookmarkDialog, (state): BookmarkUIState => ({ ...state, editId: null })),
 	on(bookmarkActions.setQueryParams, (state, { id, search, tags }): BookmarkUIState => ({ ...state, queryParams: { id, search, tags } }))
 
 );

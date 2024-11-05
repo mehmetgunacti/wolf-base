@@ -15,7 +15,7 @@ import { debounceTime, distinctUntilChanged, map, Observable, Subscription } fro
 	standalone: true,
 	imports: [ GlyphDirective, InputComponent, TagCloudComponent, AsyncPipe, SelectedTagsComponent, ReactiveFormsModule, AutofocusDirective ],
 	selector: 'app-bookmarks-search-and-tag-cloud-container',
-	templateUrl: './bookmarks-search-and-tag-cloud-container.component.html',
+	templateUrl: './bookmarks-search-and-tag-cloud.container.html',
 	animations: [ slideUpDownTrigger ]
 })
 export class BookmarksSearchAndTagCloudContainer extends BaseComponent implements OnDestroy {

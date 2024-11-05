@@ -1,7 +1,7 @@
 import { UUID } from '@constants';
+import { checkNonEmptyArray, checkString } from '@utils';
 import { AbstractEntity, Entity } from './entity.model';
 import { IdBase, NameBase } from './id-base.model';
-import { checkNonEmptyArray, checkNumber, checkString } from '@utils';
 
 export interface Bookmark extends Entity {
 
@@ -31,19 +31,19 @@ export interface BookmarkQueryParams {
 
 	id: UUID | null,
 	search: string | null,
-	tags: string[]
+	tags: string[];
 
 }
 
 export class BookmarkValidator extends AbstractEntity implements Bookmark {
 
-	readonly tags: string[];
 	readonly title: string;
-	readonly urls: string[];
+	readonly tags: string[];
 	readonly image?: string | undefined;
+	readonly urls: string[];
 
 	/** createId: if false, value.id has to be a valid UUID */
-	protected constructor(value: Bookmark, createId: boolean) {
+	protected constructor(value: Partial<Bookmark>, createId: boolean) {
 
 		super(value, createId);
 		this.urls = checkNonEmptyArray(value.urls);
@@ -52,7 +52,7 @@ export class BookmarkValidator extends AbstractEntity implements Bookmark {
 
 	}
 
-	static getInstance(value: Bookmark, createId: boolean = false): BookmarkValidator {
+	static getInstance(value: Partial<Bookmark>, createId: boolean = false): BookmarkValidator {
 
 		return new BookmarkValidator(value, createId);
 

@@ -1,14 +1,14 @@
 import { settingsActions } from '@actions';
 import { Component, inject } from '@angular/core';
+import { FirestoreConfigForm } from '@forms';
 import { BaseComponent } from '@libComponents';
 import { FirestoreConfig } from '@models';
 import { Store } from '@ngrx/store';
 import { selCore_firestoreConfig } from '@selectors';
-import { FirestoreConfigFormComponent } from 'components/firestore-config-form';
 
 @Component({
 	standalone: true,
-	imports: [ FirestoreConfigFormComponent ],
+	imports: [ FirestoreConfigForm ],
 	selector: 'app-firestore-config-container',
 	templateUrl: './firestore-config.container.html',
 	host: { 'class': 'comp p-4' }

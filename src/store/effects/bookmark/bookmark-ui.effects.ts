@@ -22,38 +22,38 @@ export class BookmarkUIEffects {
 	private router: Router = inject(Router);
 	private dialogService: Dialog = inject(Dialog);
 
-	// private dialogRef: DialogRef<null, BookmarkEditContainerComponent> | null = null;
-
-	openAddBookmarkDialog$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(bookmarkActions.openAddBookmarkDialog, bookmarkActions.openEditBookmarkDialog),
-			// map(() => {
-			// 	this.dialogRef = this.dialogService.open(BookmarkEditContainerComponent);
-			// })
-
-		),
-		{ dispatch: false }
-
-	);
-
-	closeEditBookmarkDialog$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(
-				bookmarkActions.closeEditBookmarkDialog,
-				entityActions.createSuccess,
-				entityActions.updateSuccess,
-				entityActions.moveToTrashSuccess
-			),
-			// map(() => this.dialogRef?.close())
-
-		),
-		{ dispatch: false }
-
-	);
+// 	// private dialogRef: DialogRef<null, BookmarkEditContainerComponent> | null = null;
+//
+// 	openAddBookmarkDialog$ = createEffect(
+//
+// 		() => this.actions$.pipe(
+//
+// 			ofType(bookmarkActions.openAddBookmarkDialog, bookmarkActions.openEditBookmarkDialog),
+// 			// map(() => {
+// 			// 	this.dialogRef = this.dialogService.open(BookmarkEditContainerComponent);
+// 			// })
+//
+// 		),
+// 		{ dispatch: false }
+//
+// 	);
+//
+// 	closeEditBookmarkDialog$ = createEffect(
+//
+// 		() => this.actions$.pipe(
+//
+// 			ofType(
+// 				bookmarkActions.closeEditBookmarkDialog,
+// 				entityActions.createSuccess,
+// 				entityActions.updateSuccess,
+// 				entityActions.moveToTrashSuccess
+// 			),
+// 			// map(() => this.dialogRef?.close())
+//
+// 		),
+// 		{ dispatch: false }
+//
+// 	);
 
 	onTagClickSetURLQueryParam$ = createEffect(
 

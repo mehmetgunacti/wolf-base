@@ -30,7 +30,7 @@
 		<div bookmark-form-right class="d-flex-column gap-lg p-xs">
 
 			<!-- ID -->
-			@if (bookmark?.id) {
+			@if (bookmark()?.id) {
 
 				<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
 
@@ -96,7 +96,7 @@
 
 <div form-element-buttons>
 
-	@if (bookmark?.id) {
+	@if (bookmark()?.id) {
 
 		<button type="button" (click)="onDelete()" class="error">
 			<svg wGlyph="delete"></svg> Delete

@@ -25,3 +25,10 @@ export const selBookmark_editId = createSelector(
 	(entities, uiState) => uiState.editId ? entities[uiState.editId] : null
 
 );
+
+export const selBookmark_formVisible = createSelector(
+
+	selBookmark_UIState,
+	state => state.formVisible
+
+);

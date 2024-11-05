@@ -18,6 +18,7 @@ export interface BookmarkClicksState {
 export interface BookmarkUIState {
 
 	queryParams: BookmarkQueryParams;
+	formVisible: boolean;
 	editId: UUID | null;
 	shaking: boolean;
 
@@ -38,7 +39,7 @@ export const bookmark_initialUIState: BookmarkUIState = {
 		search: null,
 		tags: []
 	},
-
+	formVisible: false,
 	editId: null,
 	shaking: false
 

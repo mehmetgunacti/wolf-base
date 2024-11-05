@@ -1,6 +1,6 @@
 import { bookmarkActions, coreActions, entityActions } from '@actions';
 import { AsyncPipe } from '@angular/common';
-import { AfterContentInit, Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AppEntityType, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
 import { BookmarkForm } from '@forms';
@@ -17,33 +17,19 @@ import { Observable, Subject, combineLatest, map } from 'rxjs';
 	templateUrl: './bookmark-edit.container.html',
 	host: { 'class': 'component' },
 })
-export class BookmarkEditContainer extends BaseComponent implements OnInit, OnDestroy, AfterContentInit {
+export class BookmarkEditContainer extends BaseComponent {
 
 	private store: Store = inject(Store);
 
-	bookmark$: Observable<Bookmark | null | undefined>;
-	tagSuggestions$!: Observable<string[]>;
-	titleLookup$: Observable<string | null>;
-	tagInput = new Subject<string | null>();
+	protected bookmark = this.store.selectSignal(selBookmark_editId);
+	protected titleLookup = this.store.selectSignal(selCore_titleLookupUrl);
+	protected tagSuggestions$: Observable<string[]>;
+
+	private tagInput = new Subject<string | null>();
 
 	constructor() {
 
 		super();
-		this.bookmark$ = this.store.select(selBookmark_editId);
-		this.titleLookup$ = this.store.select(selCore_titleLookupUrl);
-
-	}
-
-	ngOnInit(): void {
-		console.log('in BookmarkEditContainer ngOnInit');
-	}
-
-	ngOnDestroy(): void {
-		console.log('in BookmarkEditContainer ngOnDestroy');
-	}
-
-	ngAfterContentInit(): void {
-
 		this.tagSuggestions$ = combineLatest([
 			this.store.select(selBM_distinctTagsArray),
 			this.tagInput
@@ -81,7 +67,7 @@ export class BookmarkEditContainer extends BaseComponent implements OnInit, OnDe
 
 	onClose(): void {
 
-		this.store.dispatch(bookmarkActions.closeEditBookmarkDialog());
+		this.store.dispatch(bookmarkActions.closeFormDialog());
 
 	}
 

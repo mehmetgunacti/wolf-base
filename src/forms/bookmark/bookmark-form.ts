@@ -1,131 +1,84 @@
 import { InjectionToken } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UUID } from '@constants';
-import { Bookmark, ClickedBookmark } from '@models';
+import { Bookmark } from '@models';
+import { fa, fc, fg, nnfc } from '@utils';
 
-interface EditForm {
+interface BookmarkFormSchema {
 
 	id: FormControl<string | null>;
 	name: FormControl<string>;
 	title: FormControl<string>;
 	tags: FormControl<string[]>;
-	image: FormControl<string | null>;
+	image: FormControl<string | null | undefined>;
 	urls: FormArray<FormControl<string>>;
 
 }
 
-export interface BookmarkForm1 {
-id: FormControl<any>;
-	tags: any;
-	name: any;
-	title: any;
-	urls: any;
-	value: Bookmark;
-	isInvalid(): unknown;
-	setValues(bookmark: ClickedBookmark): unknown;
-	valueChanges$: any; // extends EditForm, FormClass<ClickedBookmark> {
+function createFormGroup(value?: Bookmark): FormGroup<BookmarkFormSchema> {
 
-	addURL(): void;
-	removeURL(idx: number): void;
+	const {
+
+		id = null,
+		name = '',
+		title = '',
+		tags = [],
+		image = null,
+		urls = []
+
+	} = value ?? {};
+
+	return fg<BookmarkFormSchema>({
+
+		id: fc(id),
+		name: nnfc(name, Validators.required),
+		title: nnfc(title, Validators.required),
+		tags: nnfc(tags, Validators.required),
+		image: nnfc<string | null | undefined>(image),
+		urls: fa(urls.map(c => nnfc(c)))
+
+	});
 
 }
 
-export const BOOKMARK_FORM = new InjectionToken<BookmarkForm1>('BookmarkForm');
+export class BookmarkFormImpl {
 
-export class EditFormImpl { // extends FormClassImpl<ClickedBookmark> implements BookmarkForm1 {
+	fg: FormGroup<BookmarkFormSchema> = createFormGroup();
 
-	private _formGroup!: FormGroup<EditForm>;
+	populate(entity: Bookmark): void {
 
-	protected createFormGroup(): FormGroup<EditForm> {
+		const fg = this.fg;
+		const { id, name, title, tags, image, urls } = entity;
 
-		this._formGroup = new FormGroup<EditForm>({
+		// populate word (non-array values)
+		fg.patchValue({ id, name, title, tags, image });
 
-			id: new FormControl(),
-			name: new FormControl('', { validators: [ Validators.required, Validators.minLength(3) ], nonNullable: true }),
-			title: new FormControl('', { validators: [ Validators.required ], nonNullable: true }),
-			tags: new FormControl([], { validators: [ Validators.required ], nonNullable: true }),
-			image: new FormControl(''),
-			urls: new FormArray([
-				new FormControl('', { validators: [ Validators.required ], nonNullable: true })
-			])
-
-		});
-		return this._formGroup;
+		// populate urls
+		const fa = fg.controls.urls;
+		fa.clear();
+		urls.forEach(context => fa.push(nnfc(context)));
 
 	}
 
-	setValues(bookmark: Bookmark): void {
+	addUrl(): void {
 
-		this.id.setValue(bookmark.id); // , { emitEvent: false });
-		this.name.setValue(bookmark.name); // , { emitEvent: false });
-		this.title.setValue(bookmark.title); // , { emitEvent: false });
-		this.tags.setValue(bookmark.tags); // , { emitEvent: false });
-		this.image.setValue(bookmark.image ?? null); // , { emitEvent: false });
-
-		// set urls
-		bookmark.urls.forEach((url, idx) => this.handleUrl(this.urls, idx, url));
+		this.urls.controls.push(nnfc('', Validators.required));
 
 	}
 
-	private handleUrl(arr: FormArray, idx: number, value: string = ''): void {
-
-		let fc = arr.at(idx) as FormControl;
-		if (!fc) {
-
-			fc = new FormControl(value, { validators: [ Validators.required ], nonNullable: true });
-			arr.setControl(idx, fc);
-
-		} else if (fc.value !== value)
-			fc.setValue(value); // , { emitEvent: false });
-
-	}
-
-	get value(): ClickedBookmark {
-
-		// const bookmark: Partial<Bookmark> = this._formGroup.value;
-		return {
-
-			// ...bookmark,
-			clicks: 0
-
-		} as ClickedBookmark;
-
-	}
-
-	addURL(): void {
-
-		this.urls.push(new FormControl(null, { validators: [ Validators.required ], nonNullable: true }));
-
-	}
-
-	removeURL(idx: number): void {
+	removeUrl(idx: number): void {
 
 		this.urls.removeAt(idx);
 
 	}
 
-	get id(): FormControl<UUID | null> {
-		return <FormControl<UUID>>this._formGroup.controls[ 'id' ];
-	}
-
-	get name(): FormControl<string> {
-		return <FormControl<string>>this._formGroup.controls[ 'name' ];
-	}
-
-	get title(): FormControl<string> {
-		return <FormControl<string>>this._formGroup.controls[ 'title' ];
-	}
-
-	get tags(): FormControl<string[]> {
-		return <FormControl<string[]>>this._formGroup.controls[ 'tags' ];
-	}
-
-	get image(): FormControl<string | null> {
-		return <FormControl<string | null>>this._formGroup.controls[ 'image' ];
-	}
-
-	get urls(): FormArray {
-		return <FormArray>this._formGroup.controls[ 'urls' ];
-	}
+	get id(): FormControl<UUID | null> { return this.fg.controls.id; }
+	get name(): FormControl<string> { return this.fg.controls.name; }
+	get title(): FormControl<string> { return this.fg.controls.title; }
+	get tags(): FormControl<string[]> { return this.fg.controls.tags; }
+	get image(): FormControl<string | null | undefined> { return this.fg.controls.image; }
+	get urls(): FormArray<FormControl<string>> { return this.fg.controls.urls; }
 
 }
+
+export const BOOKMARK_FORM = new InjectionToken<BookmarkFormImpl>('BOOKMARK_FORM');

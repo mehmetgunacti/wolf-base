@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export function assertIDBase(value: unknown): asserts value is IdBase {
 
-	if (typeof value !== 'object' || value === null || !('id' in value))
+	if (value === undefined || value === null || typeof value !== 'object' || !('id' in value))
 		throw new Error("Value does not have an 'id' property");
 
 }

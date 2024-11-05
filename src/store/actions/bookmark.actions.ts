@@ -22,9 +22,9 @@ export const bookmarkActions = createActionGroup({
 		loadAllClicksSuccess		: props<{ clicks: Click[] }>(),
 
 		// UI
-		openAddBookmarkDialog		: emptyProps(),
+		openFormDialog				: emptyProps(),
+		closeFormDialog				: emptyProps(),
 		openEditBookmarkDialog		: props<{ id: UUID }>(),
-		closeEditBookmarkDialog		: emptyProps(),
 
 		setSelectedId				: props<{ id: UUID | null }>(),
 		setQueryParams				: props<BookmarkQueryParams>(),

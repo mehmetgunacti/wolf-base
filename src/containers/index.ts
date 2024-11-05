@@ -1,3 +1,6 @@
+export * from './bookmark-edit';
+export * from './bookmarks-container';
+export * from './bookmarks-search-and-tag-cloud';
 export * from './firestore-config';
 export * from './pinned-notes';
 export * from './pinned-notes-form';

@@ -1,16 +1,14 @@
 Edit Bookmark
-<br>
 <button
 	class="glyph"
 	(click)="onClose()"
 	title="Close">
 	<svg wGlyph="close"></svg>
 </button>
-<br>
 <app-bookmark-form
-	[bookmark]="bookmark$ | async"
-	[tagSuggestions]="tagSuggestions$ | async"
-	[titleLookupUrl]="titleLookup$ | async"
+	[bookmark]="bookmark()"
+	[tagSuggestions]="(tagSuggestions$ | async) ?? []"
+	[titleLookupUrl]="titleLookup()"
 	(create)="onCreate($event)"
 	(update)="onUpdate($event.id, $event.bookmark)"
 	(remove)="onRemove($event)"

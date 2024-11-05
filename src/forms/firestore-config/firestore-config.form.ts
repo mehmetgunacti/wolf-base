@@ -9,10 +9,10 @@ import { configForm } from './firestore-config-form';
 	standalone: true,
 	imports: [ ReactiveFormsModule, GlyphDirective, InputComponent ],
 	selector: 'app-firestore-config-form',
-	templateUrl: './firestore-config-form.component.html',
+	templateUrl: './firestore-config.form.html',
 	host: { 'class': 'flex flex-col' }
 })
-export class FirestoreConfigFormComponent extends BaseComponent {
+export class FirestoreConfigForm extends BaseComponent {
 
 	// Input
 	config = input.required<FirestoreConfig | null>();

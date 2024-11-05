@@ -1,76 +1,78 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, inject } from '@angular/core';
+import { Component, effect, inject, input, output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { BookmarkComponent } from '@components';
 import { TAG_POPULAR, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
 import { BaseComponent, CroppieComponent, InputComponent, InputTagComponent, ToastConfiguration } from '@libComponents';
-import { Bookmark, ClickedBookmark } from '@models';
+import { Bookmark, BookmarkValidator, ClickedBookmark } from '@models';
 import { parseURL } from '@utils';
-import { Observable, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
-import { BOOKMARK_FORM, BookmarkForm1, EditFormImpl } from './bookmark-form';
+import { Observable, Subject, debounceTime, distinctUntilChanged, map } from 'rxjs';
+import { BOOKMARK_FORM, BookmarkFormImpl } from './bookmark-form';
 
 @Component({
 	standalone: true,
 	imports: [ InputComponent, InputTagComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe, CroppieComponent, BookmarkComponent ],
 	selector: 'app-bookmark-form',
 	templateUrl: './bookmark.form.html',
-	providers: [ { provide: BOOKMARK_FORM, useClass: EditFormImpl } ],
+	providers: [ { provide: BOOKMARK_FORM, useClass: BookmarkFormImpl } ],
 	host: { 'class': '' }
 })
-export class BookmarkForm extends BaseComponent implements OnInit, OnChanges, OnDestroy {
+export class BookmarkForm extends BaseComponent {
 
 	TAG_POPULAR = TAG_POPULAR;
 
-	@Input() bookmark: Bookmark | null | undefined;
-	@Input() tagSuggestions: string[] | null | undefined;
-	@Input() titleLookupUrl: string | null | undefined;
+	// INPUT
+	bookmark = input<Bookmark | null>();
+	tagSuggestions = input<string[]>([]);
+	titleLookupUrl = input<string | null>(null);
 
-	@Output() create: EventEmitter<Partial<Bookmark>> = new EventEmitter();
-	@Output() update: EventEmitter<{ id: UUID, bookmark: Partial<Bookmark>; }> = new EventEmitter();
-	@Output() remove: EventEmitter<UUID> = new EventEmitter();
-	@Output() tagInput: EventEmitter<string | null> = new EventEmitter();
-	@Output() titleLookup: EventEmitter<ToastConfiguration> = new EventEmitter();
+	// OUTPUT
+	create = output<Partial<Bookmark>>();
+	update = output<{ id: UUID, bookmark: Partial<Bookmark>; }>();
+	remove = output<UUID>();
+	tagInput = output<string | null>();
+	titleLookup = output<ToastConfiguration>();
 
-	form: BookmarkForm1 = inject(BOOKMARK_FORM);
-	bookmark$: Observable<ClickedBookmark>;
-	tagSuggestions$: Subject<string[]>;
+	protected form = inject(BOOKMARK_FORM);
+	protected bookmark$: Observable<ClickedBookmark>;
+	protected tagSuggestions$: Subject<string[]>;
 
 	constructor() {
 
 		super();
 		this.tagSuggestions$ = new Subject<string[]>();
-		this.bookmark$ = this.form.valueChanges$.pipe(
+		this.bookmark$ = this.form.fg.valueChanges.pipe(
 
+			map(partial => ({ id: 'dummy', clicks: 0, ...partial }) as ClickedBookmark),
 			debounceTime(200),
 			distinctUntilChanged()
 
 		);
 
+		effect(() => {
+
+			const bm = this.bookmark();
+			if (bm)
+				this.form.populate(bm);
+
+		});
+
+		effect(() => {
+
+			this.tagSuggestions$.next(this.tagSuggestions());
+
+		});
+
 	}
-
-	ngOnInit(): void { }
-
-	ngOnChanges(changes: SimpleChanges): void {
-
-		const bookmark: ClickedBookmark = changes[ 'bookmark' ]?.currentValue;
-		if (bookmark)
-			this.form.setValues(bookmark);
-
-		const tagSuggestions: string[] = changes[ 'tagSuggestions' ]?.currentValue;
-		if (tagSuggestions)
-			this.tagSuggestions$.next(tagSuggestions);
-
-	}
-
-	ngOnDestroy(): void { }
 
 	onSave(): void {
 
-		if (this.form.isInvalid())
+		if (this.form.fg.invalid)
 			return;
 
-		const bookmark: Bookmark = this.form.value;
+		const partial: Partial<Bookmark> = this.form.fg.value as Partial<Bookmark>;
+		const bookmark: Bookmark = BookmarkValidator.getInstance(partial, false);
 		if (bookmark.id)
 			this.update.emit({ id: bookmark.id, bookmark });
 		else
@@ -80,17 +82,18 @@ export class BookmarkForm extends BaseComponent implements OnInit, OnChanges, On
 
 	onDelete(): void {
 
-		if (!this.bookmark)
+		const bm = this.bookmark();
+		if (!bm)
 			return;
 
 		if (
 			confirm(`
-${this.bookmark.name}
-${this.bookmark.title}
+${bm.name}
+${bm.title}
 
 will be deleted. Continue?`)
 		)
-			this.remove.emit(this.bookmark.id);
+			this.remove.emit(bm.id);
 
 	}
 
@@ -186,13 +189,13 @@ will be deleted. Continue?`)
 
 	addURL(): void {
 
-		this.form.addURL();
+		this.form.addUrl();
 
 	}
 
 	removeURL(idx: number): void {
 
-		this.form.removeURL(idx);
+		this.form.removeUrl(idx);
 
 	}
 
