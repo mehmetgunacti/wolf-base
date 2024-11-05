@@ -59,18 +59,19 @@
 		--col-bg-popup			: hsl(210deg 11% 9%);
 		--col-bg-page			: hsl(210deg 11% 33%);
 
+		--col-bg-component				: hsl(210deg 11% 13%);
+		--col-bg-component-hover		: hsl(210deg 11% 11%);
+		--col-bg-component-active		: hsl(210deg 11% 10%);
+
+		--col-bg-component-dark			: hsl(210deg 11% 10%);
+		--col-bg-component-dark-hover	: hsl(from var(--col-bg-component-dark) h s calc(l* 1.2));
+		--col-bg-component-dark-active	: hsl(from var(--col-bg-component-dark) h s calc(l* 1.25));
+
 		--col-form-element			: hsl(210deg 11% 20%);
 		--col-form-element-text		: var(--col-text);
 		--col-form-element-hover	: hsl(from var(--col-form-element) h s calc(l* 1.1));
 		--col-form-element-active	: hsl(from var(--col-form-element) h s calc(l* 1.15));
 		--col-form-element-border	: hsl(from var(--col-form-element) h s calc(l* .9));
-
-		--col-bg-component				: hsl(210deg 11% 13%);
-		--col-bg-component-hover		: hsl(from var(--col-bg-component) h s calc(l* 1.15));
-		--col-bg-component-active		: hsl(from var(--col-bg-component) h s calc(l* 1.2));
-		--col-bg-component-dark			: hsl(210deg 11% 10%);
-		--col-bg-component-dark-hover	: hsl(from var(--col-bg-component-dark) h s calc(l* 1.2));
-		--col-bg-component-dark-active	: hsl(from var(--col-bg-component-dark) h s calc(l* 1.25));
 
 		--col-bg-overlay			: hsl(from var(--col-black) h s l / .3);
 		--col-shadow				: var(--col-bg-header);
