@@ -1,4 +1,22 @@
-<div class="flex place-content-center w-10">
+<div class="flex place-content-center w-12 ms-2">
 	<svg wGlyph="search"></svg>
 </div>
 <w-input type="search" [formControl]="fcSearch" label="Search"/>
+@if (termAvailable()) {
+	<button
+		type="button"
+		title="Clear"
+		(click)="fcSearch.setValue('')"
+		class="
+			btn
+			btn-glyph
+
+			absolute
+			right-2
+
+			top-4
+			me-2
+		">
+		<svg wGlyph="close" class="text-secondary"></svg>
+	</button>
+}
