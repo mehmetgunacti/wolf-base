@@ -16,7 +16,10 @@ import { debounceTime, distinctUntilChanged, map, Observable, Subscription } fro
 	imports: [ GlyphDirective, InputComponent, TagCloudComponent, AsyncPipe, SelectedTagsComponent, ReactiveFormsModule, AutofocusDirective ],
 	selector: 'app-bookmarks-search-and-tag-cloud-container',
 	templateUrl: './bookmarks-search-and-tag-cloud.container.html',
-	animations: [ slideUpDownTrigger ]
+	animations: [ slideUpDownTrigger ],
+	host: {
+		'class': 'flex flex-col comp comp-dark min-h-14'
+	}
 })
 export class BookmarksSearchAndTagCloudContainer extends BaseComponent implements OnDestroy {
 

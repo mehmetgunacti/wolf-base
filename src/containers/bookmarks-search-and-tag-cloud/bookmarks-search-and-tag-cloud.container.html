@@ -1,4 +1,4 @@
-<header>
+<header class="flex items-center gap-1 px-4 py-3">
 
 	<w-selected-tags
 		class="flex-1"
@@ -7,26 +7,14 @@
 		(filterClick)="emptyFilter()"
 		(tagClick)="onTagClicked($event)"/>
 
-	<button class="glyph" (click)="toggleCloud()">
-		<svg wGlyph="chevron_left" [class.rotate-90]="cloudVisible()" name="chevron_left"></svg>
+	<button class="btn btn-glyph" (click)="toggleCloud()">
+		<svg wGlyph="chevron_left" [class.-rotate-90]="cloudVisible()" name="chevron_left" class="transition-transform duration-500"></svg>
 	</button>
 
 </header>
-<aside [@slideUpDown]="cloudVisible() ? 'opened' : 'closed'">
 
-	<div search_control>
-		<w-input
-			label="Keyword"
-			[formControl]="searchControl"
-			[autofocus]="cloudVisible()"
-			[after]="500"/>
-		<button
-			type="button"
-			class="small square"
-			(click)="onSearchReset()">
-			<svg wGlyph="chevron_left" name="backspace"></svg>
-		</button>
-	</div>
+<!-- TAG CLOUD -->
+<section [@slideUpDown]="cloudVisible() ? 'opened' : 'closed'" class="h-60 overflow-y-auto me-2 scrollbar scrollbar-dark scrollbar-gutter-stable">
 
 	<w-tag-cloud
 		[tags]="(tags$ | async) ?? []"
@@ -34,4 +22,4 @@
 		[relatedTags]="(relatedTags$ | async) ?? []"
 		(tagClick)="onTagClicked($event)"></w-tag-cloud>
 
-</aside>
+</section>

@@ -2,13 +2,20 @@
 
 	@if (tag.className === 'disabled') {
 
-		<span class="disabled d-inline-block" [ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</span>
+		<span class="inline-block text-disabled text-sm" [ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</span>
 
 	} @else {
 
 		<a	(click)="onTagClick(tag.tag.name)"
-			[ngClass]="tag.className"
-			[ngStyle]="{ 'font-size': tag.fontSize }">{{ tag.tag.name }}</a>
+			class="inline-block focus-visible:ring-4 focus-visible:outline-none rounded focus-visible:ring-outline {{tag.fontSize}}"
+			tabindex="0"
+			[ngClass]="{
+				'text-accent': tag.className === 'selected',
+				'text-content': tag.className === 'related',
+				'text-disabled': tag.className === 'disabled',
+				'cursor-text': tag.className === 'disabled',
+				'cursor-pointer': ['selected', 'related', ''].includes(tag.className),
+			}">{{ tag.tag.name }}</a>
 
 	}
 

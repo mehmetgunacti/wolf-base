@@ -8,6 +8,7 @@ export * from './markdown';
 export * from './modal';
 export * from './overlay-container';
 export * from './portal.component';
+export * from './search-box';
 export * from './select';
 export * from './selected-tags';
 export * from './switch';

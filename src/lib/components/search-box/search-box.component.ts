@@ -1,29 +1,30 @@
 import { Component, effect, input, output, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { GlyphDirective } from '@directives';
-import { debounceTime, distinctUntilChanged, filter, Subscription } from 'rxjs';
+import { fc } from '@utils';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 import { BaseComponent } from '../base.component';
 import { InputComponent } from '../input/input.component';
 
 @Component({
-	selector: 'w-search-box',
 	standalone: true,
 	imports: [ GlyphDirective, InputComponent, ReactiveFormsModule ],
+	selector: 'w-search-box',
 	templateUrl: './search-box.component.html',
-	styleUrls: [ './search-box.component.scss' ]
+	host: {
+		'class': 'flex items-center gap-1 comp comp-dark py-3 px-4 min-h-14'
+	}
 })
 export class SearchBoxComponent extends BaseComponent {
 
-	protected fcSearch = new FormControl('');
-
-	subscription: Subscription = new Subscription();
-
 	// Input
-	term = input.required<string | null>();
+	term = input<string>('');
 
 	// Output
 	search = output<string>();
+
+	protected fcSearch = fc<string | null>('');
 
 	constructor() {
 

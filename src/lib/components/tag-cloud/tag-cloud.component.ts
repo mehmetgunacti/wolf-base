@@ -44,7 +44,8 @@ function createUITags(selectedTags: string[], relatedTags: string[], tags: Tag[]
 	const fontSizeMap: Map<number, string> = new Map();
 
 	// Define an array of font sizes to use.
-	const fontSizeValues = [ '0.8em', '1.4em', '1.7em', '2em', '2.3em' ];
+	// const fontSizeValues = [ '0.8em', '1.4em', '1.7em', '2em', '2.3em' ];
+	const fontSizeValues = [ 'text-xs', 'text-base', 'text-2xl', 'text-3xl', 'text-4xl' ];
 
 	// Remove duplicate values and sort the array of counts in ascending order.
 	const uniqueArr = Array.from(new Set(arr));
@@ -85,7 +86,38 @@ function createUITags(selectedTags: string[], relatedTags: string[], tags: Tag[]
 	standalone: true,
 	imports: [ CommonModule ],
 	selector: 'w-tag-cloud',
-	templateUrl: './tag-cloud.component.html'
+	templateUrl: './tag-cloud.component.html',
+	styles: `
+		// a,
+		// span {
+
+			// font-size 		: 1.1rem;
+			// line-height		: 0.8;
+
+// 			.selected {
+//
+// 				cursor		: pointer;
+// 				color 		: var(--col-accent);
+//
+// 			}
+
+// 			.related {
+//
+// 				cursor		: pointer;
+// 				color 		: var(--col-text);
+//
+// 			}
+
+// 			.disabled {
+//
+// 				color 		: var(--col-disabled);
+// 				cursor		: text;
+//
+// 			}
+
+		// }
+	`,
+	host: { 'class': 'flex flex-wrap items-center justify-center gap-1 p-4' }
 })
 export class TagCloudComponent extends BaseComponent {
 

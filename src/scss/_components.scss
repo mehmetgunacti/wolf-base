@@ -140,7 +140,7 @@
 	*/
 	:has(> input).ng-dirty.ng-invalid,
 	:has(> select).ng-dirty.ng-invalid,
-	:has(> textarea).ng-dirty.ng-invalid, {
+	:has(> textarea).ng-dirty.ng-invalid {
 
 		@apply ring-4 ring-error outline-none;
 

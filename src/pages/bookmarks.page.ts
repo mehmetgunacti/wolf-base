@@ -6,11 +6,12 @@ import { GlyphDirective } from '@directives';
 import { BaseComponent, ModalComponent, PortalComponent } from '@libComponents';
 import { Store } from '@ngrx/store';
 import { selBookmark_formVisible, selBookmark_shaking } from '@selectors';
+import { SearchBoxComponent } from "../lib/components/search-box/search-box.component";
 
 @Component({
 	selector: 'bookmarks-page',
 	standalone: true,
-	imports: [ PortalComponent, GlyphDirective, AsyncPipe, ModalComponent, BookmarkEditContainer, BookmarksSearchAndTagCloudContainer, BookmarksContainer ],
+	imports: [PortalComponent, GlyphDirective, AsyncPipe, ModalComponent, BookmarkEditContainer, BookmarksSearchAndTagCloudContainer, BookmarksContainer, SearchBoxComponent],
 	template: `
 		<w-portal>
 
@@ -37,12 +38,12 @@ import { selBookmark_formVisible, selBookmark_shaking } from '@selectors';
 
 		}
 
-
+		<app-bookmarks-search-and-tag-cloud-container/>
+		<w-search-box/>
 		<app-bookmarks-container/>
 	`,
 	host: { 'class': 'page' }
 })
-// <app-bookmarks-search-and-tag-cloud-container/>
 export class BookmarksPage extends BaseComponent {
 
 	private store: Store = inject(Store);
