@@ -1,12 +1,13 @@
 import { Component, input, output } from '@angular/core';
 import { Table } from '@constants';
+import { GlyphDirective } from '@directives';
 import { BaseComponent } from '@libComponents';
 import { ModuleReport } from '@models';
 import { FormatBytesPipe } from '@pipes';
 
 @Component({
 	standalone: true,
-	imports: [ FormatBytesPipe ],
+	imports: [ FormatBytesPipe, GlyphDirective ],
 	selector: 'app-module-report',
 	templateUrl: './module-report.component.html'
 })

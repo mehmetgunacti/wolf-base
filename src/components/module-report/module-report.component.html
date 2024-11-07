@@ -1,12 +1,12 @@
-<fieldset>
+<fieldset class="relative p-3 @container comp">
 
-	<legend>
+	<legend class="flex items-center bg-component-dark px-3 rounded-lg h-button-height">
 
 		<!-- <w-glyph [name]="report().glyph" /> -->
 		{{report().name}}
 
 	</legend>
-	<section content>
+	<section class="flex">
 
 		@for (row of report().reports; track $index) {
 
@@ -15,11 +15,11 @@
 			<div>{{ row.size | formatBytes }}</div>
 			<div>
 				<button
-					class="glyph sm squared danger"
+					class="btn btn-glyph"
 					(click)="onClear(row.table)"
 					title="Empty table"
 					[disabled]="row.count === 0">
-					<span delete_icon class="material-symbols-outlined">delete</span>
+					<svg wGlyph="delete"></svg>
 				</button>
 			</div>
 

@@ -31,16 +31,14 @@
 				tabindex="0"
 				type="button"
 				cdkTreeNodeToggle
-				class="glyph small"
+				class="btn btn-glyph"
 				[id]="'mt_' + node.value.id">
-				<span class="material-symbols-outlined">
-					{{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-				</span>
+				<svg wGlyph="chevron_right" [class.rotate-90]="treeControl.isExpanded(node)"></svg>
 			</button>
 			<button
 				tabindex="0"
 				type="button"
-				class="link small"
+				class="btn btn-ghost"
 				[id]="'mi_' + node.value.id"
 				(click)="selectItem(node.value)"
 				(keydown)="onKeydown($event, node);">{{node.value.name}}</button>

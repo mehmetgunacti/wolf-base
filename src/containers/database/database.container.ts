@@ -1,6 +1,7 @@
 import { databaseActions } from '@actions';
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { opacityTrigger } from '@animations';
 import { ModuleReportComponent } from '@components';
 import { GlyphDirective } from '@directives';
 import { BaseComponent, PortalComponent, ToastComponent } from '@libComponents';
@@ -14,7 +15,7 @@ import { selDatabase_Report } from '@selectors';
 	imports: [ RouterLink, GlyphDirective, PortalComponent, GlyphDirective, ToastComponent, FormatBytesPipe, ModuleReportComponent ],
 	selector: 'app-database-container',
 	templateUrl: './database.container.html',
-	host: { 'class': 'comp p-4' }
+	animations: [ opacityTrigger ]
 })
 export class DatabaseContainer extends BaseComponent {
 

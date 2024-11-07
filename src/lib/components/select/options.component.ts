@@ -4,6 +4,7 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { CdkTreeModule, NestedTreeControl } from '@angular/cdk/tree';
 import { AfterViewInit, Component, EventEmitter, Input, Output, Renderer2, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GlyphDirective } from '@directives';
 import { HasParentId } from '@models';
 import { BaseComponent } from '../base.component';
 import { ROOT_ID, TreeItem, toTreeItems } from './select.util';
@@ -18,9 +19,9 @@ const flattenTree = (item: TreeItem): TreeItem[] => {
 };
 
 @Component({
-	selector: 'w-options',
 	standalone: true,
-	imports: [ ReactiveFormsModule, CdkTreeModule, CdkMenuModule ],
+	imports: [ ReactiveFormsModule, CdkTreeModule, CdkMenuModule, GlyphDirective ],
+	selector: 'w-options',
 	templateUrl: './options.component.html',
 	styleUrls: [ './options.component.scss' ]
 })

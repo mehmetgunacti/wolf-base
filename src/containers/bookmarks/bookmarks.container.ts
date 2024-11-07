@@ -13,7 +13,7 @@ import { Observable, map } from 'rxjs';
 	standalone: true,
 	imports: [ BookmarkComponent, AsyncPipe ],
 	selector: 'app-bookmarks-container',
-	templateUrl: './bookmarks-container.component.html',
+	templateUrl: './bookmarks.container.html',
 	host: { 'class': 'gap-1 md:gap-2 grid @2xl/page:grid-cols-2 @4xl/page:grid-cols-3 @6xl/page:grid-cols-4' }
 })
 export class BookmarksContainer extends BaseComponent {
