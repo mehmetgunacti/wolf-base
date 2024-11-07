@@ -1,8 +1,9 @@
 import { entityActions, quoteActions } from '@actions';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { QuoteSettingsFormComponent, QuoteSettingsListComponent } from '@components';
+import { QuoteSettingsListComponent } from '@components';
 import { AppEntityType, UUID } from '@constants';
+import { QuoteSettingsFormComponent } from '@forms';
 import { BaseComponent } from '@libComponents';
 import { Quote } from '@models';
 import { Store } from '@ngrx/store';

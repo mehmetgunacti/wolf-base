@@ -11,7 +11,7 @@ import { BaseComponent, PortalComponent } from '@libComponents';
 		<w-portal>
 
 			<button
-				class="ghost"
+				class="btn btn-ghost"
 				routerLink="new">
 				<svg wGlyph="post_add"></svg> Add
 			</button>

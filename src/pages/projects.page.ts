@@ -1,12 +1,25 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '@libComponents';
+import { ProjectFilterContainer, ProjectsContainer } from '@containers';
+import { GlyphDirective } from '@directives';
+import { BaseComponent, PortalComponent } from '@libComponents';
 
 @Component({
-	selector: 'projects-page',
 	standalone: true,
-	imports: [],
+	imports: [ PortalComponent, GlyphDirective, ProjectsContainer, ProjectFilterContainer ],
+	selector: 'projects-page',
 	template: `
-		<p>projects-page works!</p>
+		<w-portal>
+
+			<button
+				class="btn btn-ghost"
+				routerLink="new">
+				<svg wGlyph="post_add"></svg> Add
+			</button>
+
+		</w-portal>
+
+		<app-project-filter-container/>
+		<app-projects-container/>
 	`,
 	host: { 'class': 'page' }
 })

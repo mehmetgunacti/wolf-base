@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { AfterContentInit, Component, inject } from '@angular/core';
-import { TagFormComponent } from '@components';
+import { TagFormComponent } from '@forms';
 import { BaseComponent } from '@libComponents';
 import { Store } from '@ngrx/store';
 import { selCore_pinnedNotes, selNote_distinctTagsArray } from '@selectors';

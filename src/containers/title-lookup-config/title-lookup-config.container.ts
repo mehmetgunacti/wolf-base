@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { TitleLookupConfigFormComponent } from '@components';
+import { TitleLookupConfigFormComponent } from '@forms';
 import { BaseComponent } from '@libComponents';
 import { Store } from '@ngrx/store';
 import { selCore_titleLookupUrl } from '@selectors';

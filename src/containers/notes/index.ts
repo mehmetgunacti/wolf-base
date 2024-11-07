@@ -1,1 +1,1 @@
-export * from './words.container';
+export * from './notes.container';

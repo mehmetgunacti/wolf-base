@@ -3,7 +3,4 @@ export * from './compact-bookmark';
 export * from './compact-note';
 export * from './languages.component';
 export * from './quote';
-export * from './quote-settings-form';
 export * from './quote-settings-list';
-export * from './tag-form';
-export * from './title-lookup-config-form';
