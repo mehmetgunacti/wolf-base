@@ -1,0 +1,168 @@
+<header>
+
+	<div card_title>{{ word() ? 'Edit' : 'Add' }} Word</div>
+
+</header>
+<section content>
+
+	<form [formGroup]="form.fgWord" (ngSubmit)="onSave()">
+
+		<!-- ID -->
+		@if (isUpdate()) {
+
+			<w-input formControlName="id" label="ID" [readonly]="true"/>
+
+		}
+
+		<!-- NAME -->
+		<w-input formControlName="name" label="Term"/>
+
+		<!-- PRONUNCIATION -->
+		<w-input formControlName="pronunciation" label="Pronunciation"/>
+
+		<!-- ADD CONTEXT BUTTON -->
+		<button
+			add_button
+			type="button"
+			class="success"
+			(click)="form.addContext()">
+			<svg wGlyph="add_circle"></svg> Context
+		</button>
+
+		<!-- CONTEXTS -->
+		@for (context of form.contexts.controls; let wordIdx = $index; track wordIdx) {
+
+			<div context>
+
+				<w-textarea [formControl]="context" [label]="'Context #' + (wordIdx + 1)" [rows]="3"/>
+				<button
+					type="button"
+					class="glyph sm squared"
+					[title]="'Remove Sample #' + (wordIdx + 1)"
+					(click)="form.removeContext(wordIdx)">
+					<svg wGlyph="do_not_disturb_on"></svg>
+				</button>
+
+			</div>
+
+		}
+
+		<!-- ITERATE DEFINITIONS -->
+		@for (definition of form.definitions.controls; let defIdx = $index; track defIdx) {
+
+			<fieldset>
+				<legend>Definition #{{defIdx + 1}}</legend>
+
+				@if(defIdx > 0) {
+
+					<legend>
+						<button
+							type="button"
+							class="ghost sm"
+							(click)="form.removeDefinition(defIdx)">
+							<svg wGlyph="do_not_disturb_on"></svg> Remove Definition #{{ defIdx + 1 }}
+						</button>
+					</legend>
+
+				}
+
+				<!-- DEFINITION -->
+				<div definition [formGroup]="definition">
+
+					<!-- TYPE -->
+					<w-select formControlName="type" label="Type" [nodes]="DEFINITION_TYPES"/>
+
+					<!-- ITERATE LANGUAGES -->
+					@for (lang of definition.controls.languages.controls; let langIdx = $index; track langIdx) {
+
+						<!-- DEFINITION-LANGUAGE -->
+						<div language [formGroup]="lang">
+
+							<!-- LANGUAGE -->
+							<w-select formControlName="language" label="Language" [nodes]="DEFINITION_LANGUAGES"/>
+
+							<!-- NAME -->
+							<w-input formControlName="name" label="Meaning"/>
+
+							@if(langIdx < 1) {
+
+								<button
+									type="button"
+									class="glyph sm squared"
+									title="Add Language"
+									(click)="form.addLanguage(defIdx)">
+									<svg wGlyph="add_circle"></svg>
+								</button>
+
+							} @else {
+
+								<button
+									type="button"
+									class="glyph sm squared"
+									[title]="'Remove Language #' + (langIdx + 1)"
+									(click)="form.removeLanguage(defIdx, langIdx)">
+									<svg wGlyph="do_not_disturb_on"></svg>
+								</button>
+
+							}
+
+						</div>
+
+					}
+
+					<!-- ITERATE SAMPLES -->
+					@for (sample of definition.controls.samples.controls; let sampleIdx = $index; track sampleIdx) {
+
+						<!-- SAMPLES -->
+						<div sample>
+
+							<w-textarea [formControl]="sample" [label]="'Sample #' + (sampleIdx + 1)" [rows]="3"/>
+							@if(sampleIdx < 1) {
+
+								<button
+									type="button"
+									class="glyph sm squared"
+									title="Add Sample"
+									(click)="form.addSample(defIdx)">
+									<svg wGlyph="add_circle"></svg>
+								</button>
+
+							} @else {
+
+								<button
+									type="button"
+									class="glyph sm squared"
+									[title]="'Remove Sample #' + (sampleIdx + 1)"
+									(click)="form.removeSample(defIdx, sampleIdx)">
+									<svg wGlyph="do_not_disturb_on"></svg>
+								</button>
+
+							}
+
+						</div>
+
+					}
+
+				</div>
+			</fieldset>
+
+		}
+		<button
+			add_button
+			type="button"
+			class="success"
+			(click)="form.addDefinition()">
+			<svg wGlyph="add_circle"></svg> Definition
+		</button>
+
+		<footer>
+
+			<button [disabled]="this.form.fgWord.pristine || this.form.fgWord.invalid">
+				<svg wGlyph="save"></svg> {{ isUpdate() ? 'Update' : 'Create'}}
+			</button>
+
+		</footer>
+
+	</form>
+
+</section>

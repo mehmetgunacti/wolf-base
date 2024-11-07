@@ -19,7 +19,7 @@ import { InputComponent } from '../input/input.component';
 export class SearchBoxComponent extends BaseComponent {
 
 	// Input
-	term = input<string>('');
+	term = input<string | null>('');
 
 	// Output
 	search = output<string>();

@@ -1,12 +1,26 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '@libComponents';
+import { WordFilterContainer, WordsContainer } from '@containers';
+import { GlyphDirective } from '@directives';
+import { BaseComponent, PortalComponent } from '@libComponents';
 
 @Component({
-	selector: 'words-page',
 	standalone: true,
-	imports: [],
+	imports: [ GlyphDirective, PortalComponent, WordsContainer, WordFilterContainer ],
+	selector: 'words-page',
 	template: `
-		<p>words-page works!</p>
+		<w-portal>
+
+			<button
+				class="ghost"
+				routerLink="new">
+				<svg wGlyph="post_add"></svg> Add
+			</button>
+
+		</w-portal>
+
+		<app-word-filter-container/>
+		<app-words-container/>
+
 	`,
 	host: { 'class': 'page' }
 })

@@ -10,3 +10,5 @@ export * from './quote-settings';
 export * from './quotes';
 export * from './showcase';
 export * from './title-lookup-config';
+export * from './word-filter-container.component';
+export * from './words';

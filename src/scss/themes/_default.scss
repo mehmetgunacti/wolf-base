@@ -64,8 +64,8 @@
 		--col-bg-component-active		: hsl(210deg 11% 10%);
 
 		--col-bg-component-dark			: hsl(210deg 11% 10%);
-		--col-bg-component-dark-hover	: hsl(from var(--col-bg-component-dark) h s calc(l* 1.2));
-		--col-bg-component-dark-active	: hsl(from var(--col-bg-component-dark) h s calc(l* 1.25));
+		--col-bg-component-dark-hover	: hsl(210deg 11% 9%);
+		--col-bg-component-dark-active	: hsl(210deg 11% 8%);
 
 		--col-form-element			: hsl(210deg 11% 20%);
 		--col-form-element-text		: var(--col-text);
