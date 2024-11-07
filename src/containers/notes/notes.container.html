@@ -1,0 +1,44 @@
+@let notes = sortedNotes();
+
+<header class="mb-8 comp-title">
+	Notes
+	<small class="block text-secondary text-sm">{{ notes.length }} Entries</small>
+</header>
+
+@if (notes.length > 0) {
+
+	<section class="gap-1 md:gap-2 grid @2xl/page:grid-cols-2 @4xl/page:grid-cols-3 @6xl/page:grid-cols-4">
+
+		@for (note of notes; track $index) {
+
+			<a	class="relative grid comp-dark comp-dark-active comp-dark-hover rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full group focus-visible:outline-none px-4 py-3"
+				[routerLink]="['/notes', note.id]"
+				tabindex="0">
+
+				<div class="flex flex-col flex-1 justify-center">
+
+					<p class="text-sm">{{ note.name }}</p>
+					<small class="text-base-color-secondary text-xs">
+						{{ note.modified }}
+					</small>
+
+				</div>
+
+			</a>
+
+		}
+
+	</section>
+
+} @else {
+
+	<!-- todo this could be a component -->
+	<div class="empty">
+		No words available
+		<br>
+		<button routerLink="/words/new" class="btn btn-ghost">
+			<svg wGlyph="add"></svg> Add Word
+		</button>
+	</div>
+
+}

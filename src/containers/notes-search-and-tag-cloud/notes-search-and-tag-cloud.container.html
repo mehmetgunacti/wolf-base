@@ -1,0 +1,25 @@
+<header class="flex items-center gap-1 py-3 pe-4">
+
+	<w-selected-tags
+		class="flex-1 ms-2"
+		[tags]="(popularTags$ | async) ?? []"
+		[selectedTags]="(selectedTags$ | async) ?? []"
+		(filterClick)="emptyFilter()"
+		(tagClick)="onTagClicked($event)"/>
+
+	<button class="btn btn-glyph" (click)="toggleCloud()">
+		<svg wGlyph="chevron_left" [class.-rotate-90]="cloudVisible()" name="chevron_left" class="transition-transform duration-500"></svg>
+	</button>
+
+</header>
+
+<!-- TAG CLOUD -->
+<section [@slideUpDown]="cloudVisible() ? 'opened' : 'closed'" class="h-60 overflow-y-auto me-2 scrollbar scrollbar-dark scrollbar-gutter-stable">
+
+	<w-tag-cloud
+		[tags]="(tags$ | async) ?? []"
+		[selectedTags]="(selectedTags$ | async) ?? []"
+		[relatedTags]="(relatedTags$ | async) ?? []"
+		(tagClick)="onTagClicked($event)"></w-tag-cloud>
+
+</section>
