@@ -1,3 +1,5 @@
+export type Table = string;
+
 export enum AppEntityType {
 
 	bookmark	= 'bookmark',
