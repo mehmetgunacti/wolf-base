@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
+import { LogsFilterContainer } from '@containers';
 import { BaseComponent } from '@libComponents';
+import { LogsContainer } from "../containers/logs/logs.container";
 
 @Component({
 	selector: 'logs-page',
 	standalone: true,
-	imports: [],
+	imports: [ LogsFilterContainer, LogsContainer ],
 	template: `
-		<p>logs-page works!</p>
+		<app-logs-filter-container/>
+		<app-logs-container/>
 	`,
 	host: { 'class': 'page' }
 })
