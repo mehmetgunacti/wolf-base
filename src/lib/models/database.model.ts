@@ -1,3 +1,5 @@
+import { GlyphName } from '@constants';
+
 export interface DexieConfiguration {
 
 	dbName: string;
@@ -18,7 +20,7 @@ export interface ReportRow {
 export interface ModuleReport {
 
 	name: string,
-	glyph: string,
+	glyph: GlyphName,
 	reports: ReportRow[];
 
 }

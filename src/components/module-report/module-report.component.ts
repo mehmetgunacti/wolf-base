@@ -9,7 +9,8 @@ import { FormatBytesPipe } from '@pipes';
 	standalone: true,
 	imports: [ FormatBytesPipe, GlyphDirective ],
 	selector: 'app-module-report',
-	templateUrl: './module-report.component.html'
+	templateUrl: './module-report.component.html',
+	host: { 'class': 'grid' }
 })
 export class ModuleReportComponent extends BaseComponent {
 

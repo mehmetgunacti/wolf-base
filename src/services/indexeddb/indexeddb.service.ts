@@ -184,6 +184,8 @@ export class TransactionManager {
 
 			const records: Record<string, any> = {};
 			const request = store.openCursor();
+			// note: the onsuccess event handler is called each time cursor.continue() is called
+			// no "while" loop needed
 			request.onsuccess = (event: Event) => {
 
 				const cursor: IDBCursorWithValue = request.result as IDBCursorWithValue;
@@ -213,16 +215,18 @@ export class TransactionManager {
 			let size = 0;
 
 			const request = store.openCursor();
+			// note: the onsuccess event handler is called each time cursor.continue() is called
+			// no "while" loop needed
 			request.onsuccess = (event: Event) => {
 
 				const cursor: IDBCursorWithValue = request.result as IDBCursorWithValue;
 				if (cursor) {
 
-					size += cursor.value.length;
+					size += JSON.stringify(cursor.value).length;
 					cursor.continue();
 
-				}
-				return resolve(size);
+				} else
+					resolve(size);
 
 			};
 			request.onerror = () => reject(request.error);

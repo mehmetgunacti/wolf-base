@@ -9,7 +9,7 @@ import { BaseComponent } from '../base.component';
 	selector: 'w-alert',
 	templateUrl: './alert.component.html',
 	host: {
-		'class': 'flex items-center border rounded-lg min-h-[calc(1.5*var(--widget-height))]',
+		'class': 'flex items-center border rounded-lg min-h-[calc(1.5*var(--widget-height))] shadow-component',
 
 		'[class.text-primary]': 'severity() === "primary"',
 		'[class.bg-primary]': 'severity() === "primary"',

@@ -8,19 +8,19 @@
 
 </w-portal>
 
-<w-toast [conf]="{ 'severity': 'info', glyph: 'monitoring' }">
+<w-alert glyph="troubleshoot" severity="info" summary="Total">
 
 	@if (total()) {
 
-		<div total><strong>Total: {{ total() | formatBytes }}</strong></div>
+		<div><strong>{{ total() | formatBytes }}</strong></div>
 
 	} @else {
 
-		<div total>Calculating...</div>
+		<div>Calculating...</div>
 
 	}
 
-</w-toast>
+</w-alert>
 
 <section class="gap-1 md:gap-2 grid @2xl/page:grid-cols-2 @4xl/page:grid-cols-3 @6xl/page:grid-cols-4">
 

@@ -1,18 +1,18 @@
 <fieldset class="relative p-3 @container comp">
 
-	<legend class="flex items-center bg-component-dark px-3 rounded-lg h-button-height">
+	<legend class="flex items-center gap-1 bg-component-dark px-3 rounded-lg h-button-height">
 
-		<!-- <w-glyph [name]="report().glyph" /> -->
+		<svg [wGlyph]="report().glyph"></svg>
 		{{report().name}}
 
 	</legend>
-	<section class="flex">
+	<section class="gap-1 grid grid-cols-[4fr_2fr_2fr_1fr]">
 
 		@for (row of report().reports; track $index) {
 
-			<div><strong>{{ row.label }}</strong></div>
-			<div>{{ row.count }}</div>
-			<div>{{ row.size | formatBytes }}</div>
+			<div class="flex items-center"><strong>{{ row.label }}</strong></div>
+			<div class="flex justify-end items-center text-sm whitespace-nowrap">{{ row.count }}</div>
+			<div class="flex justify-end items-center text-sm whitespace-nowrap">{{ row.size | formatBytes }}</div>
 			<div>
 				<button
 					class="btn btn-glyph"

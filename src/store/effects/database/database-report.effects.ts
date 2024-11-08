@@ -1,6 +1,6 @@
 import { databaseActions } from '@actions';
 import { inject, Injectable } from '@angular/core';
-import { AppEntities, DbStore, LocalRepositoryNames } from '@constants';
+import { AppEntities, DbStore, GlyphName, LocalRepositoryNames } from '@constants';
 import { LocalRepositoryService } from '@libServices';
 import { ModuleReport } from '@models';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -83,7 +83,7 @@ export class DatabaseReportEffects {
 				forkJoin({
 
 					name: of(AppEntities.bookmark.labelPlural),
-					glyph: of('bookmarks'),
+					glyph: of('bookmarks' as GlyphName),
 					reports: forkJoin([
 
 						forkJoin(entity(this.localRepository, DbStore.bookmarks)),
@@ -98,7 +98,7 @@ export class DatabaseReportEffects {
 				forkJoin({
 
 					name: of(AppEntities.note.labelPlural),
-					glyph: of('note_stack'),
+					glyph: of('note_stack' as GlyphName),
 					reports: forkJoin([
 
 						forkJoin(entity(this.localRepository, DbStore.notes)),
@@ -112,7 +112,7 @@ export class DatabaseReportEffects {
 				forkJoin({
 
 					name: of(AppEntities.noteContent.labelPlural),
-					glyph: of('note_stack'),
+					glyph: of('note_stack' as GlyphName),
 					reports: forkJoin([
 
 						forkJoin(entity(this.localRepository, DbStore.note_content)),
@@ -126,7 +126,7 @@ export class DatabaseReportEffects {
 				forkJoin({
 
 					name: of(AppEntities.quizEntry.labelPlural),
-					glyph: of('trending_up'),
+					glyph: of('quiz' as GlyphName),
 					reports: forkJoin([
 
 						forkJoin(entity(this.localRepository, DbStore.quiz_entries)),
@@ -140,7 +140,7 @@ export class DatabaseReportEffects {
 				forkJoin({
 
 					name: of(AppEntities.quote.labelPlural),
-					glyph: of('format_quote'),
+					glyph: of('format_quote' as GlyphName),
 					reports: forkJoin([
 
 						forkJoin(entity(this.localRepository, DbStore.quotes)),
@@ -154,7 +154,7 @@ export class DatabaseReportEffects {
 				forkJoin({
 
 					name: of(AppEntities.word.labelPlural),
-					glyph: of('dictionary'),
+					glyph: of('dictionary' as GlyphName),
 					reports: forkJoin([
 
 						forkJoin(entity(this.localRepository, DbStore.words)),
@@ -168,7 +168,7 @@ export class DatabaseReportEffects {
 				forkJoin({
 
 					name: of(AppEntities.project.labelPlural),
-					glyph: of('task_alt'),
+					glyph: of('task_alt' as GlyphName),
 					reports: forkJoin([
 
 						forkJoin(entity(this.localRepository, DbStore.projects)),
@@ -182,7 +182,7 @@ export class DatabaseReportEffects {
 				forkJoin({
 
 					name: of(AppEntities.task.labelPlural),
-					glyph: of('task_alt'),
+					glyph: of('task_alt' as GlyphName),
 					reports: forkJoin([
 
 						forkJoin(entity(this.localRepository, DbStore.tasks)),
@@ -196,7 +196,7 @@ export class DatabaseReportEffects {
 				forkJoin({
 
 					name: of('Logs'),
-					glyph: of('history'),
+					glyph: of('history' as GlyphName),
 					reports: forkJoin([
 
 						forkJoin(row(this.localRepository, LocalRepositoryNames.logs, 'Logs'))

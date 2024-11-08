@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { opacityTrigger } from '@animations';
 import { ModuleReportComponent } from '@components';
 import { GlyphDirective } from '@directives';
-import { BaseComponent, PortalComponent, ToastComponent } from '@libComponents';
+import { AlertComponent, BaseComponent, PortalComponent } from '@libComponents';
 import { ModuleReport } from '@models';
 import { Store } from '@ngrx/store';
 import { FormatBytesPipe } from '@pipes';
@@ -12,10 +12,11 @@ import { selDatabase_Report } from '@selectors';
 
 @Component({
 	standalone: true,
-	imports: [ RouterLink, GlyphDirective, PortalComponent, GlyphDirective, ToastComponent, FormatBytesPipe, ModuleReportComponent ],
+	imports: [ RouterLink, GlyphDirective, PortalComponent, GlyphDirective, FormatBytesPipe, ModuleReportComponent, AlertComponent ],
 	selector: 'app-database-container',
 	templateUrl: './database.container.html',
-	animations: [ opacityTrigger ]
+	animations: [ opacityTrigger ],
+	host: { 'class': 'grid gap-2' }
 })
 export class DatabaseContainer extends BaseComponent {
 
