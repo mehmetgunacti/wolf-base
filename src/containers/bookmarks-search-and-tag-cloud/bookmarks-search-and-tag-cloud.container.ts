@@ -4,8 +4,8 @@ import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { slideUpDownTrigger } from '@animations';
 import { TAG_POPULAR } from '@constants';
-import { AutofocusDirective, GlyphDirective } from '@directives';
-import { BaseComponent, InputComponent, SelectedTagsComponent, TagCloudComponent } from '@libComponents';
+import { GlyphDirective } from '@directives';
+import { BaseComponent, SelectedTagsComponent, TagCloudComponent } from '@libComponents';
 import { Tag } from '@models';
 import { Store } from '@ngrx/store';
 import { selBM_distinctTagsArray, selBM_QueryParams, selBM_relatedTags, selCore_popularBookmarks } from '@selectors';
@@ -13,7 +13,7 @@ import { debounceTime, distinctUntilChanged, map, Observable, Subscription } fro
 
 @Component({
 	standalone: true,
-	imports: [ GlyphDirective, InputComponent, TagCloudComponent, AsyncPipe, SelectedTagsComponent, ReactiveFormsModule, AutofocusDirective ],
+	imports: [ GlyphDirective, TagCloudComponent, AsyncPipe, SelectedTagsComponent, ReactiveFormsModule ],
 	selector: 'app-bookmarks-search-and-tag-cloud-container',
 	templateUrl: './bookmarks-search-and-tag-cloud.container.html',
 	animations: [ slideUpDownTrigger ],
