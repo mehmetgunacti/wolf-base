@@ -68,6 +68,7 @@ export class CroppieComponent extends BaseComponent implements ControlValueAcces
 	);
 
 	protected image: HTMLImageElement | null = null;
+	protected imageLoaded = signal<boolean>(false);
 	protected zoom = 1;
 	protected base64Image: string | null = null;
 
@@ -86,6 +87,7 @@ export class CroppieComponent extends BaseComponent implements ControlValueAcces
 					this.offsetY = 0;
 					this.zoom = 1;
 					this.drawImage();
+					this.imageLoaded.set(true);
 
 				};
 				this.image.src = e.target?.result as string;
@@ -94,13 +96,6 @@ export class CroppieComponent extends BaseComponent implements ControlValueAcces
 			reader.readAsDataURL(file);
 
 		}
-
-	}
-
-	protected onZoomChange(event: Event) {
-
-		this.zoom = parseFloat((event.target as HTMLInputElement).value);
-		this.drawImage();
 
 	}
 
@@ -127,6 +122,14 @@ export class CroppieComponent extends BaseComponent implements ControlValueAcces
 		this.onInput();
 		// Reset the file input so that reloading same image works
 		this.fileInput().nativeElement.value = '';
+		this.imageLoaded.set(false);
+
+	}
+
+	protected onZoomChange(event: Event) {
+
+		this.zoom = parseFloat((event.target as HTMLInputElement).value);
+		this.drawImage();
 
 	}
 
@@ -198,6 +201,11 @@ export class CroppieComponent extends BaseComponent implements ControlValueAcces
 			}
 			event.preventDefault(); // Prevent scrolling the page
 			this.drawImage();
+
+		} else {
+
+			event.preventDefault();
+			this.fileInput().nativeElement.click();
 
 		}
 
