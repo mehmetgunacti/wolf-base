@@ -6,21 +6,23 @@ import { GlyphName, Glyphs, PROJECT_STATUS } from '@constants';
 import { GlyphDirective } from '@directives';
 import * as component from '@libComponents';
 import { BaseComponent } from '@libComponents';
+import { CroppieComponent } from "../../lib/components/croppie/croppie.component";
 
 @Component({
 	standalone: true,
 	imports: [
-		CommonModule,
-		ReactiveFormsModule,
-		GlyphDirective,
-		component.InputComponent,
-		component.SwitchComponent,
-		component.AlertComponent,
-		component.InputTagComponent,
-		component.TextareaComponent,
-		component.SelectComponent,
-		component.MarkdownEditorComponent
-	],
+    CommonModule,
+    ReactiveFormsModule,
+    GlyphDirective,
+    component.InputComponent,
+    component.SwitchComponent,
+    component.AlertComponent,
+    component.InputTagComponent,
+    component.TextareaComponent,
+    component.SelectComponent,
+    component.MarkdownEditorComponent,
+    CroppieComponent
+],
 	selector: 'app-showcase-container',
 	templateUrl: './showcase.container.html',
 	host: {

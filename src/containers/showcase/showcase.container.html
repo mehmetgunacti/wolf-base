@@ -11,6 +11,11 @@
 	<div class="overflow-hidden" [class.pb-4]="formsVisible()" [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
 
 		<form [formGroup]="form" class="flex flex-col gap-3 p-4">
+
+			<div class="flex justify-center items-baseline gap-2">
+				<w-croppie (imageChanged)="img.src = $event ?? ''; img.hidden = !$event"/>
+				<img class="size-[110px]" #img [hidden]="true" />
+			</div>
 			<w-markdown-editor formControlName="editor" label="Editor"/>
 			<w-input label="Text" formControlName="text"/>
 			<w-input-tag
