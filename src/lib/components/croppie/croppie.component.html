@@ -1,7 +1,6 @@
 <canvas
 	#canvas
-	class="border-form-element-border bg-form-element border rounded-full focus-visible:ring-4 focus-visible:ring-outline cursor-pointer size-[110px] focus-visible:outline-none"
-	[class.cursor-move]="!!image"
+	class="border-form-element-border bg-form-element border rounded-full focus-visible:ring-4 focus-visible:ring-outline cursor-move size-[110px] focus-visible:outline-none"
 	width="110"
 	height="110"
 	(mousedown)="startDrag($event)"
@@ -32,5 +31,12 @@
 	<button class="top-0 right-0 absolute border-warn bg-warn border rounded-full focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none" (click)="unloadImage()">
 		<svg wGlyph="dismiss" class="fill-form-element"></svg>
 	</button>
+
+} @else {
+
+	<div class="top-2 left-4 absolute flex flex-col items-center pt-6 rounded-full w-28 h-28 text-secondary cursor-pointer" (mousedown)="startDrag($event)">
+		<svg wGlyph="add_image" class="size-8"></svg>
+		<span class="text-xs leading-4">Pick Image</span>
+	</div>
 
 }

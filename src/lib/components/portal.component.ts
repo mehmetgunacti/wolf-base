@@ -2,25 +2,23 @@ import { AfterViewInit, Component, EmbeddedViewRef, inject, input, OnDestroy, Te
 import { BaseComponent } from './base.component';
 
 @Component({
-	selector: 'w-portal',
 	standalone: true,
+	selector: 'w-portal',
 	template: `
 		<ng-template #pageActions>
 			<ng-content/>
 		</ng-template>
 	`,
-	host: {
-		'class': 'contents'
-	}
+	host: { 'class': 'contents' }
 })
 export class PortalComponent extends BaseComponent implements AfterViewInit, OnDestroy {
 
-	portalActionsTmplRef = viewChild.required<TemplateRef<{}>>('pageActions');
-	private disposeFn!: () => void;
-	private viewRef!: EmbeddedViewRef<{}>;
+	private portalActionsTmplRef = viewChild.required<TemplateRef<{}>>('pageActions');
 	private viewContainerRef = inject(ViewContainerRef);
+	private viewRef!: EmbeddedViewRef<{}>;
+	private disposeFn!: () => void;
 
-	outletName = input('portal-outlet');  // | 'portal-outlet-right';
+	outletName = input<'portal-outlet' | 'dialog-header-outlet' | 'dialog-footer-outlet'>('portal-outlet');
 
 	ngAfterViewInit(): void {
 
@@ -47,9 +45,8 @@ export class PortalComponent extends BaseComponent implements AfterViewInit, OnD
 	ngOnDestroy(): void {
 
 		const index = this.viewContainerRef.indexOf(this.viewRef);
-		if (index !== -1) {
+		if (index !== -1)
 			this.viewContainerRef.remove(index);
-		}
 
 	}
 

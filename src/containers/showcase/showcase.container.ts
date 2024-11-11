@@ -1,28 +1,29 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { slideUpDownTrigger } from '@animations';
 import { GlyphName, Glyphs, PROJECT_STATUS } from '@constants';
 import { GlyphDirective } from '@directives';
 import * as component from '@libComponents';
 import { BaseComponent } from '@libComponents';
+import { fc, fg, nnfc } from '@utils';
 import { CroppieComponent } from "../../lib/components/croppie/croppie.component";
 
 @Component({
 	standalone: true,
 	imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    GlyphDirective,
-    component.InputComponent,
-    component.SwitchComponent,
-    component.AlertComponent,
-    component.InputTagComponent,
-    component.TextareaComponent,
-    component.SelectComponent,
-    component.MarkdownEditorComponent,
-    CroppieComponent
-],
+		CommonModule,
+		ReactiveFormsModule,
+		GlyphDirective,
+		component.InputComponent,
+		component.SwitchComponent,
+		component.AlertComponent,
+		component.InputTagComponent,
+		component.TextareaComponent,
+		component.SelectComponent,
+		component.MarkdownEditorComponent,
+		CroppieComponent
+	],
 	selector: 'app-showcase-container',
 	templateUrl: './showcase.container.html',
 	host: {
@@ -44,11 +45,19 @@ export class ShowcaseContainer extends BaseComponent {
 	glyphNames = signal<GlyphName[]>(Object.keys(Glyphs) as GlyphName[]);
 
 	form = new FormGroup({
-		'text': new FormControl('', Validators.required),
-		'tags': new FormControl('', Validators.required),
-		'area': new FormControl('', Validators.required),
-		'status': new FormControl<string>('', [ Validators.required ]),
-		'editor': new FormControl<string>('', { validators: [ Validators.required ], nonNullable: true }),
+		'croppie': fc<string>(''),
+		'text': nnfc<string>(''),
+		'tags': nnfc<string>(''),
+		'area': nnfc<string>(''),
+		'status': nnfc<string>(''),
+		'editor': nnfc<string>(''),
+		'switches': fg({
+			'default': fc<boolean>(true),
+			'success': fc<boolean>(true),
+			'info': fc<boolean>(true),
+			'warn': fc<boolean>(true),
+			'error': fc<boolean>(true)
+		})
 	});
 
 	onTagInput(val: string | null): void {

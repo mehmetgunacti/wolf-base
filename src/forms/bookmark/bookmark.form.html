@@ -1,56 +1,51 @@
-<div bookmark-wrapper>
+<!--  bookmark-wrapper -->
+<w-portal outletName="dialog-header-outlet">
+	<div class="flex place-content-center min-h-24 my-4 pointer-events-none">
 
-	@if (bookmark$ | async; as bm) {
+		@if (bookmark$ | async; as bm) {
 
-		<app-bookmark
-			class="dark"
-			[bookmark]="bm"
-			[showDetails]="true"
-			[disabled]="true"
-			[popularButton]="false"
-			[editable]="false"/>
+			<app-compact-bookmark class="comp-dark min-w-64" [bookmark]="bm" tabindex="-1"/>
 
-	}
+		}
 
-</div>
+	</div>
+</w-portal>
 
-<div bookmark-form class="d-block flex-1 p-xs pt-xxl scrollable">
+<div bookmark-form class="block flex-1">
 
-	<form class="d-flex-column gap">
+	<form [formGroup]="form.fg" class="flex flex-col md:flex-row gap-4">
 
-		<div class="d-flex-column">
+		<div class="flex place-content-center">
 
-			<w-croppie
-				class="jc-center"
-				wType="circle"
-				wClass="primary"/>
+			<w-croppie formControlName="image"/>
 
 		</div>
 
-		<div bookmark-form-right class="d-flex-column gap-lg p-xs">
+		<!-- bookmark-form-right -->
+		<div class="flex flex-col gap-3 flex-1 pb-3" formArrayName="urls">
 
 			<!-- ID -->
 			@if (bookmark()?.id) {
 
-				<w-input [formControl]="form.id" label="ID" [readonly]="true"/>
+				<w-input formControlName="id" label="ID" [readonly]="true"/>
 
 			}
 
 			<!-- URLs -->
 			@for (fcUrl of form.urls.controls; track $index) {
 
-				<div>
+				<div class="flex gap-1">
 					<w-input
-						[formControl]="fcUrl"
+						[formControlName]="$index"
 						[label]="'URL' + (form.urls.controls.length > 1 && $index === 0 ? ' (Primary)' : '')"/>
 						<!-- (inputChanged)="checkUrl($event, fcUrl)"/> -->
 					@if($index === 0) {
-						<button type="button" class="link" title="Add URL" (click)="addURL()">
+						<button type="button" class="btn btn-ghost" title="Add URL" (click)="addURL()">
 							<svg wGlyph="add"></svg>
 						</button>
 					}
 					@if($index > 0) {
-						<button type="button" class="link" title="Remove URL" (click)="removeURL($index)">
+						<button type="button" class="btn btn-ghost" title="Remove URL" (click)="removeURL($index)">
 							<svg wGlyph="remove"></svg>
 						</button>
 					}
@@ -59,30 +54,30 @@
 			}
 
 			<!-- NAME -->
-			<div>
+			<div class="flex gap-1">
 				<w-input [formControl]="form.name" label="Name"/>
-				<button type="button" class="link" title="Parse URL" (click)="nameFromURL()">
+				<button type="button" class="btn btn-ghost" title="Parse URL" (click)="nameFromURL()">
 					<svg wGlyph="move_down"></svg>
 				</button>
 			</div>
 
 			<!-- TITLE -->
-			<div>
+			<div class="flex gap-1">
 				<w-input [formControl]="form.title" label="Title"/>
-				<button type="button" class="link" title="Lookup title" (click)="lookupTitle()">
+				<button type="button" class="btn btn-ghost" title="Lookup title" (click)="lookupTitle()">
 					<svg wGlyph="search"></svg>
 				</button>
 			</div>
 
 			<!-- TAGS -->
-			<div>
+			<div class="flex gap-1">
 				<w-input-tag
 					[formControl]="form.tags"
 					label="Tags"
 					class="input-element"
 					(tagInput)="onTagInput($event)"
 					[suggestions]="(tagSuggestions$ | async) ?? []"/>
-				<button type="button" class="link" [title]="'Toggle \''+TAG_POPULAR+'\''" (click)="onTogglePopular()">
+				<button type="button" class="btn btn-ghost" [title]="'Toggle \''+TAG_POPULAR+'\''" (click)="onTogglePopular()">
 					<!-- <span class="" [class.filled]="[].includes(TAG_POPULAR)">favorite</span> -->
 					<svg wGlyph="search"></svg>
 				</button>
@@ -94,17 +89,22 @@
 
 </div>
 
-<div form-element-buttons>
+<!-- form-element-buttons -->
+<w-portal outletName="dialog-footer-outlet">
 
-	@if (bookmark()?.id) {
+	<div class="flex">
 
-		<button type="button" (click)="onDelete()" class="error">
-			<svg wGlyph="delete"></svg> Delete
+		@if (bookmark()?.id) {
+
+			<button type="button" (click)="onDelete()" class="btn btn-error">
+				<svg wGlyph="delete"></svg> Delete
+			</button>
+
+		}
+		<button type="button" (click)="onSave()" class="btn ml-auto">
+			<svg wGlyph="save"></svg> Save
 		</button>
 
-	}
-	<button type="button" (click)="onSave()">
-		<svg wGlyph="save"></svg> Save
-	</button>
+	</div>
 
-</div>
+</w-portal>

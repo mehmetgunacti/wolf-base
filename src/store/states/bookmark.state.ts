@@ -39,7 +39,7 @@ export const bookmark_initialUIState: BookmarkUIState = {
 		search: null,
 		tags: []
 	},
-	formVisible: false,
+	formVisible: true,
 	editId: null,
 	shaking: false
 

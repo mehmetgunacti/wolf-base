@@ -1,22 +1,23 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, effect, inject, input, output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { BookmarkComponent } from '@components';
 import { TAG_POPULAR, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
 import { BaseComponent, CroppieComponent, InputComponent, InputTagComponent, ToastConfiguration } from '@libComponents';
-import { Bookmark, BookmarkValidator, ClickedBookmark } from '@models';
+import { Bookmark, ClickedBookmark } from '@models';
 import { parseURL } from '@utils';
-import { Observable, Subject, debounceTime, distinctUntilChanged, map } from 'rxjs';
+import { Observable, Subject, debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
+import { CompactBookmarkComponent } from "../../components/compact-bookmark/compact-bookmark.component";
+import { PortalComponent } from "../../lib/components/portal.component";
 import { BOOKMARK_FORM, BookmarkFormImpl } from './bookmark-form';
 
 @Component({
 	standalone: true,
-	imports: [ InputComponent, InputTagComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe, CroppieComponent, BookmarkComponent ],
+	imports: [ InputComponent, InputTagComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe, CroppieComponent, CompactBookmarkComponent, PortalComponent ],
 	selector: 'app-bookmark-form',
 	templateUrl: './bookmark.form.html',
 	providers: [ { provide: BOOKMARK_FORM, useClass: BookmarkFormImpl } ],
-	host: { 'class': '' }
+	host: { 'class': 'flex flex-col gap-4' }
 })
 export class BookmarkForm extends BaseComponent {
 
@@ -44,6 +45,7 @@ export class BookmarkForm extends BaseComponent {
 		this.tagSuggestions$ = new Subject<string[]>();
 		this.bookmark$ = this.form.fg.valueChanges.pipe(
 
+			startWith({ urls: [ '' ] } as Partial<ClickedBookmark>),
 			map(partial => ({ id: 'dummy', clicks: 0, ...partial }) as ClickedBookmark),
 			debounceTime(200),
 			distinctUntilChanged()
@@ -71,8 +73,7 @@ export class BookmarkForm extends BaseComponent {
 		if (this.form.fg.invalid)
 			return;
 
-		const partial: Partial<Bookmark> = this.form.fg.value as Partial<Bookmark>;
-		const bookmark: Bookmark = BookmarkValidator.getInstance(partial, false);
+		const bookmark: Partial<Bookmark> = this.form.fg.value as Partial<Bookmark>;
 		if (bookmark.id)
 			this.update.emit({ id: bookmark.id, bookmark });
 		else

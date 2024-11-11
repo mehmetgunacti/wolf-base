@@ -2,9 +2,12 @@ import {
 	Component,
 	computed,
 	ElementRef,
+	forwardRef,
 	output,
+	signal,
 	viewChild
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { GlyphDirective } from '@directives';
 import { BaseComponent } from '../base.component';
 
@@ -13,12 +16,19 @@ import { BaseComponent } from '../base.component';
 	imports: [ GlyphDirective ],
 	selector: 'w-croppie',
 	templateUrl: './croppie.component.html',
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => CroppieComponent),
+			multi: true
+		}
+	],
 	host: {
 		'(window:mouseup)': 'onMouseUp()',
 		'class': 'relative flex flex-col items-center p-2'
 	}
 })
-export class CroppieComponent extends BaseComponent {
+export class CroppieComponent extends BaseComponent implements ControlValueAccessor {
 
 	// ViewChild
 	canvasRef = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
@@ -32,6 +42,26 @@ export class CroppieComponent extends BaseComponent {
 	private lastY = 0;
 	private offsetX = 0;
 	private offsetY = 0;
+
+	// Model
+	protected disabled = signal<boolean>(false);
+
+	//////////// boilerplate
+	private onChange: any = () => { };
+	private onTouched: any = () => { };
+	registerOnChange(fn: any): void { this.onChange = fn; }
+	registerOnTouched(fn: any): void { this.onTouched = fn; }
+	writeValue(value: string): void { this.base64Image = value; }
+	setDisabledState(isDisabled: boolean): void { this.disabled.set(isDisabled); }
+	////////////
+
+	protected onInput(): void {
+
+		this.imageChanged.emit(this.base64Image);
+		this.onChange(this.base64Image);
+		this.onTouched();
+
+	}
 
 	private ctx = computed(() =>
 		this.canvasRef().nativeElement.getContext('2d')
@@ -94,7 +124,7 @@ export class CroppieComponent extends BaseComponent {
 			);
 
 		}
-		this.imageChanged.emit(null);
+		this.onInput();
 		// Reset the file input so that reloading same image works
 		this.fileInput().nativeElement.value = '';
 
@@ -224,7 +254,7 @@ export class CroppieComponent extends BaseComponent {
 			tempCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height);
 
 			this.base64Image = tempCanvas.toDataURL('image/png');
-			this.imageChanged.emit(this.base64Image);
+			this.onInput();
 
 		}
 

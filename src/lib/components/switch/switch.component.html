@@ -5,7 +5,7 @@
 }
 <label [for]="componentId" class="inline-flex items-center cursor-pointer select-none">
 	<div class="relative">
-		<input [id]="componentId" [(ngModel)]="value" type="checkbox" class="peer sr-only"/>
+		<input [id]="componentId" [checked]="value()" (input)="onInput()" type="checkbox" class="peer sr-only"/>
 
 		<!-- widget background -->
 		<div class="

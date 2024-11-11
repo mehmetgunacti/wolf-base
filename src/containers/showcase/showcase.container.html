@@ -13,7 +13,7 @@
 		<form [formGroup]="form" class="flex flex-col gap-3 p-4">
 
 			<div class="flex justify-center items-baseline gap-2">
-				<w-croppie (imageChanged)="img.src = $event ?? ''; img.hidden = !$event"/>
+				<w-croppie formControlName="croppie" (imageChanged)="img.src = $event ?? ''; img.hidden = !$event"/>
 				<img class="size-[110px]" #img [hidden]="true" />
 			</div>
 			<w-markdown-editor formControlName="editor" label="Editor"/>
@@ -26,13 +26,14 @@
 				[suggestions]="tagSuggestions()"/>
 			<w-textarea formControlName="area" label="Quote" [rows]="3" />
 			<w-select formControlName="status" label="Status" [nodes]="PROJECT_STATUS"/>
-			<div class="flex">
-				<w-switch label="Schedule" [value]="true" class="flex-1"/>
-				<w-switch [value]="true" severity="success" glyphChecked="play" glyphUnchecked="pause"/>
-				<w-switch [value]="true" severity="info"/>
-				<w-switch [value]="true" severity="warn"/>
-				<w-switch [value]="true" severity="error"/>
+			<div class="flex" formGroupName="switches">
+				<w-switch formControlName="default" label="Schedule" class="flex-1"/>
+				<w-switch formControlName="success" severity="success" glyphChecked="play" glyphUnchecked="pause"/>
+				<w-switch formControlName="info" severity="info"/>
+				<w-switch formControlName="warn" severity="warn"/>
+				<w-switch formControlName="error" severity="error"/>
 			</div>
+			<pre class="comp-dark p-4 overflow-x-auto comp scrollbar scrollbar-blue">{{ form.value | json }}</pre>
 
 		</form>
 

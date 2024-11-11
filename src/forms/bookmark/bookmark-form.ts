@@ -24,7 +24,7 @@ function createFormGroup(value?: Bookmark): FormGroup<BookmarkFormSchema> {
 		title = '',
 		tags = [],
 		image = null,
-		urls = []
+		urls = ['']
 
 	} = value ?? {};
 

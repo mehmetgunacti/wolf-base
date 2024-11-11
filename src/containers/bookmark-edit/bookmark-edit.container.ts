@@ -15,7 +15,7 @@ import { Observable, Subject, combineLatest, map } from 'rxjs';
 	imports: [ GlyphDirective, BookmarkForm, AsyncPipe ],
 	selector: 'app-bookmark-edit-container',
 	templateUrl: './bookmark-edit.container.html',
-	host: { 'class': 'component' },
+	host: { 'class': 'h-full flex flex-col p-2 pt-1 md:pt-3 md:p-4' },
 })
 export class BookmarkEditContainer extends BaseComponent {
 

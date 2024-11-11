@@ -31,7 +31,7 @@ import { BaseComponent } from '../base.component';
 })
 export class SwitchComponent extends BaseComponent implements ControlValueAccessor {
 
-	// Input border-form-element-border bg-form-element
+	// Input
 	label = input<string>('');
 	severity = input<'primary' | 'success' | 'info' | 'warn' | 'error'>('primary');
 	glyphUnchecked = input<GlyphName | null>(null);

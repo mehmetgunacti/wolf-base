@@ -77,8 +77,13 @@
 		--col-shadow				: var(--col-bg-header);
 
 		--col-scrollbar-thumb		: hsl(from var(--col-bg-component-dark) h s l / .7);
-		--col-scrollbar-thumb-dark	: hsl(from var(--col-scrollbar-thumb) h s calc(l * 0.8));
 		--col-scrollbar-track		: var(--col-transparent);
+
+		--col-scrollbar-thumb-dark	: var(--col-bg-component-dark);
+		--col-scrollbar-track-dark	: var(--col-transparent);
+
+		--col-scrollbar-thumb-blue	: var(--col-accent);
+		--col-scrollbar-track-blue	: var(--col-transparent);
 
 	}
 

@@ -183,7 +183,13 @@
 
 		&-dark {
 
-			scrollbar-color	: var(--col-scrollbar-thumb-dark) var(--col-scrollbar-track);
+			scrollbar-color	: var(--col-scrollbar-thumb-dark) var(--col-scrollbar-track-dark);
+
+		}
+
+		&-blue {
+
+			scrollbar-color	: var(--col-scrollbar-thumb-blue) var(--col-scrollbar-track-blue);
 
 		}
 
