@@ -1,23 +1,25 @@
-import { CommonModule } from '@angular/common';
 import {
 	Component,
 	computed,
 	ElementRef,
-	HostListener,
 	output,
-	viewChild,
+	viewChild
 } from '@angular/core';
+import { GlyphDirective } from '@directives';
 import { BaseComponent } from '../base.component';
 
 @Component({
-	selector: 'w-croppie',
 	standalone: true,
-	imports: [ CommonModule ],
+	imports: [ GlyphDirective ],
+	selector: 'w-croppie',
 	templateUrl: './croppie.component.html',
-	styleUrl: './croppie.component.scss',
-	animations: [],
+	host: {
+		'(window:mouseup)': 'onMouseUp()',
+		'class': 'relative flex flex-col items-center p-2'
+	}
 })
 export class CroppieComponent extends BaseComponent {
+
 	// ViewChild
 	canvasRef = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
 	fileInput = viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
@@ -25,76 +27,100 @@ export class CroppieComponent extends BaseComponent {
 	// Output
 	imageChanged = output<string | null>();
 
-	private ctx = computed(() =>
-		this.canvasRef().nativeElement.getContext('2d')
-	);
-
-	image: HTMLImageElement | null = null;
-	zoom = 1;
-	base64Image: string | null = null;
 	private isDragging = false;
 	private lastX = 0;
 	private lastY = 0;
 	private offsetX = 0;
 	private offsetY = 0;
 
-	onFileSelected(event: Event) {
+	private ctx = computed(() =>
+		this.canvasRef().nativeElement.getContext('2d')
+	);
+
+	protected image: HTMLImageElement | null = null;
+	protected zoom = 1;
+	protected base64Image: string | null = null;
+
+	protected onFileSelected(event: Event) {
 
 		const file = (event.target as HTMLInputElement).files?.[ 0 ];
 		if (file) {
+
 			const reader = new FileReader();
 			reader.onload = (e) => {
+
 				this.image = new Image();
 				this.image.onload = () => {
+
 					this.offsetX = 0;
 					this.offsetY = 0;
 					this.zoom = 1;
 					this.drawImage();
+
 				};
 				this.image.src = e.target?.result as string;
+
 			};
 			reader.readAsDataURL(file);
+
 		}
+
 	}
 
-	onZoomChange(event: Event) {
+	protected onZoomChange(event: Event) {
+
 		this.zoom = parseFloat((event.target as HTMLInputElement).value);
 		this.drawImage();
+
 	}
 
-	unloadImage() {
+	protected unloadImage() {
+
 		const canvasContext = this.ctx();
 		if (canvasContext) {
+
 			this.image = null;
 			this.zoom = 1;
 			this.base64Image = null;
 			this.offsetX = 0;
 			this.offsetY = 0;
 			canvasContext.clearRect(
+
 				0,
 				0,
 				this.canvasRef().nativeElement.width,
 				this.canvasRef().nativeElement.height
+
 			);
+
 		}
 		this.imageChanged.emit(null);
 		// Reset the file input so that reloading same image works
 		this.fileInput().nativeElement.value = '';
+
 	}
 
-	startDrag(event: MouseEvent) {
+	protected startDrag(event: MouseEvent) {
+
 		if (this.image) {
+
 			this.isDragging = true;
 			this.lastX = event.offsetX;
 			this.lastY = event.offsetY;
+
 		} else {
+
 			event.preventDefault();
 			this.fileInput().nativeElement.click();
+
 		}
+
 	}
 
-	drag(event: MouseEvent) {
+	protected drag(event: MouseEvent) {
+
 		if (this.isDragging && this.image) {
+
 			const deltaX = event.offsetX - this.lastX;
 			const deltaY = event.offsetY - this.lastY;
 			this.offsetX += deltaX;
@@ -102,20 +128,27 @@ export class CroppieComponent extends BaseComponent {
 			this.lastX = event.offsetX;
 			this.lastY = event.offsetY;
 			this.drawImage();
+
 		}
+
 	}
 
-	endDrag() {
+	protected endDrag() {
+
 		this.isDragging = false;
+
 	}
 
-	@HostListener('window:mouseup')
-	onMouseUp() {
+	protected onMouseUp() {
+
 		this.endDrag();
+
 	}
 
-	onKeyDown(event: KeyboardEvent) {
+	protected onKeyDown(event: KeyboardEvent) {
+
 		if (this.image) {
+
 			const moveDistance = 5; // pixels to move per key press
 			switch (event.key) {
 				case 'ArrowUp':
@@ -135,10 +168,13 @@ export class CroppieComponent extends BaseComponent {
 			}
 			event.preventDefault(); // Prevent scrolling the page
 			this.drawImage();
+
 		}
+
 	}
 
 	private drawImage() {
+
 		if (!this.image) return;
 
 		const canvasContext = this.ctx();
@@ -189,6 +225,9 @@ export class CroppieComponent extends BaseComponent {
 
 			this.base64Image = tempCanvas.toDataURL('image/png');
 			this.imageChanged.emit(this.base64Image);
+
 		}
+
 	}
+
 }
