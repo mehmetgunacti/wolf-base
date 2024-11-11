@@ -133,13 +133,24 @@ export class CroppieComponent extends BaseComponent implements ControlValueAcces
 
 	}
 
-	protected startDrag(event: MouseEvent) {
+	protected startDrag(event: MouseEvent | TouchEvent) {
+
+		event.preventDefault();
 
 		if (this.image) {
 
 			this.isDragging = true;
-			this.lastX = event.offsetX;
-			this.lastY = event.offsetY;
+			if (event instanceof MouseEvent) {
+
+				this.lastX = event.offsetX;
+				this.lastY = event.offsetY;
+
+			} else if (event instanceof TouchEvent && event.touches.length > 0) {
+
+				this.lastX = event.touches[ 0 ].clientX;
+				this.lastY = event.touches[ 0 ].clientY;
+
+			}
 
 		} else {
 
@@ -150,16 +161,29 @@ export class CroppieComponent extends BaseComponent implements ControlValueAcces
 
 	}
 
-	protected drag(event: MouseEvent) {
+	protected drag(event: MouseEvent | TouchEvent) {
+
+		event.preventDefault();
 
 		if (this.isDragging && this.image) {
 
-			const deltaX = event.offsetX - this.lastX;
-			const deltaY = event.offsetY - this.lastY;
+			let x = 0;
+			let y = 0;
+
+			if (event instanceof MouseEvent) {
+				x = event.offsetX;
+				y = event.offsetY;
+			} else if (event instanceof TouchEvent && event.touches.length > 0) {
+				x = event.touches[ 0 ].clientX;
+				y = event.touches[ 0 ].clientY;
+			}
+
+			const deltaX = x - this.lastX;
+			const deltaY = y - this.lastY;
 			this.offsetX += deltaX;
 			this.offsetY += deltaY;
-			this.lastX = event.offsetX;
-			this.lastY = event.offsetY;
+			this.lastX = x;
+			this.lastY = y;
 			this.drawImage();
 
 		}
