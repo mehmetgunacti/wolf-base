@@ -33,6 +33,7 @@ This is just me having fun with code—take it for what it is!
 ## Technology Stack
 
 - Angular & Angular CDK
+- Zoneless
 - NgRx/Store and NgRx/Effects
 - PWA
 - IndexedDb / Dexie
