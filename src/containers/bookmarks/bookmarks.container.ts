@@ -34,7 +34,7 @@ export class BookmarksContainer extends BaseComponent {
 
 	onEdit(id: UUID): void {
 
-		this.store.dispatch(bookmarkActions.openEditBookmarkDialog({ id }));
+		this.store.dispatch(bookmarkActions.openEditDialog({ id }));
 
 	}
 

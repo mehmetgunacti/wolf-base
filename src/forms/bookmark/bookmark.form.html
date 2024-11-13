@@ -1,6 +1,6 @@
 <!--  bookmark-wrapper -->
 <w-portal outletName="dialog-header-outlet">
-	<div class="flex place-content-center min-h-24 my-4 pointer-events-none">
+	<div class="flex place-content-center my-4 min-h-24 pointer-events-none">
 
 		@if (bookmark$ | async; as bm) {
 
@@ -13,7 +13,7 @@
 
 <div bookmark-form class="block flex-1">
 
-	<form [formGroup]="form.fg" class="flex flex-col md:flex-row gap-4">
+	<form [formGroup]="form.fg" class="flex md:flex-row flex-col gap-4">
 
 		<div class="flex place-content-center">
 
@@ -22,7 +22,7 @@
 		</div>
 
 		<!-- bookmark-form-right -->
-		<div class="flex flex-col gap-3 flex-1 pb-3" formArrayName="urls">
+		<div class="flex flex-col flex-1 gap-3 pb-3">
 
 			<!-- ID -->
 			@if (bookmark()?.id) {
@@ -31,31 +31,41 @@
 
 			}
 
-			<!-- URLs -->
-			@for (fcUrl of form.urls.controls; track $index) {
+			<ng-container formArrayName="urls">
 
-				<div class="flex gap-1">
-					<w-input
-						[formControlName]="$index"
-						[label]="'URL' + (form.urls.controls.length > 1 && $index === 0 ? ' (Primary)' : '')"/>
-						<!-- (inputChanged)="checkUrl($event, fcUrl)"/> -->
-					@if($index === 0) {
-						<button type="button" class="btn btn-ghost" title="Add URL" (click)="addURL()">
-							<svg wGlyph="add"></svg>
-						</button>
-					}
-					@if($index > 0) {
-						<button type="button" class="btn btn-ghost" title="Remove URL" (click)="removeURL($index)">
-							<svg wGlyph="remove"></svg>
-						</button>
-					}
-				</div>
+				<!-- URLs -->
+				@for (fcUrl of form.urls.controls; track $index) {
 
-			}
+					<div class="flex gap-1">
+
+						<w-input
+							[formControl]="fcUrl"
+							[label]="'URL' + (form.urls.controls.length > 1 && $index === 0 ? ' (Primary)' : '')"/>
+							<!-- (inputChanged)="checkUrl($event, fcUrl)"/> -->
+						@if($index === 0) {
+
+							<button type="button" class="btn btn-ghost" title="Add URL" (click)="addURL()">
+								<svg wGlyph="add"></svg>
+							</button>
+
+						}
+						@if($index > 0) {
+
+							<button type="button" class="btn btn-ghost" title="Remove URL" (click)="removeURL($index)">
+								<svg wGlyph="remove"></svg>
+							</button>
+
+						}
+
+					</div>
+
+				}
+
+			</ng-container>
 
 			<!-- NAME -->
 			<div class="flex gap-1">
-				<w-input [formControl]="form.name" label="Name"/>
+				<w-input formControlName="name" label="Name"/>
 				<button type="button" class="btn btn-ghost" title="Parse URL" (click)="nameFromURL()">
 					<svg wGlyph="move_down"></svg>
 				</button>
@@ -63,7 +73,7 @@
 
 			<!-- TITLE -->
 			<div class="flex gap-1">
-				<w-input [formControl]="form.title" label="Title"/>
+				<w-input formControlName="title" label="Title"/>
 				<button type="button" class="btn btn-ghost" title="Lookup title" (click)="lookupTitle()">
 					<svg wGlyph="search"></svg>
 				</button>
@@ -72,14 +82,21 @@
 			<!-- TAGS -->
 			<div class="flex gap-1">
 				<w-input-tag
-					[formControl]="form.tags"
+					formControlName="tags"
 					label="Tags"
 					class="input-element"
 					(tagInput)="onTagInput($event)"
 					[suggestions]="(tagSuggestions$ | async) ?? []"/>
 				<button type="button" class="btn btn-ghost" [title]="'Toggle \''+TAG_POPULAR+'\''" (click)="onTogglePopular()">
-					<!-- <span class="" [class.filled]="[].includes(TAG_POPULAR)">favorite</span> -->
-					<svg wGlyph="search"></svg>
+					@if(form.tags.value.includes(TAG_POPULAR)){
+
+						<svg wGlyph="heart_filled"></svg>
+
+					} @else {
+
+
+						<svg wGlyph="heart"></svg>
+					}
 				</button>
 			</div>
 
@@ -101,7 +118,7 @@
 			</button>
 
 		}
-		<button type="button" (click)="onSave()" class="btn ml-auto">
+		<button type="button" (click)="onSave()" class="ml-auto btn">
 			<svg wGlyph="save"></svg> Save
 		</button>
 

@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, effect, inject, input, output } from '@angular/core';
+import { Component, effect, inject, input, output, untracked } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TAG_POPULAR, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
@@ -56,7 +56,7 @@ export class BookmarkForm extends BaseComponent {
 
 			const bm = this.bookmark();
 			if (bm)
-				this.form.populate(bm);
+				untracked(() => this.form.populate(bm));
 
 		});
 

@@ -10,6 +10,8 @@ export const bookmarkActions = createActionGroup({
 		fromClipboard				: emptyProps(),
 		fromClipboardFailure		: props<{ shaking: boolean }>(),
 
+		editSuccess					: emptyProps(),
+
 		// CLICK
 		click						: props<{ id: UUID }>(),
 
@@ -23,8 +25,8 @@ export const bookmarkActions = createActionGroup({
 
 		// UI
 		openFormDialog				: emptyProps(),
+		openEditDialog				: props<{ id: UUID }>(),
 		closeFormDialog				: emptyProps(),
-		openEditBookmarkDialog		: props<{ id: UUID }>(),
 
 		setSelectedId				: props<{ id: UUID | null }>(),
 		setQueryParams				: props<BookmarkQueryParams>(),

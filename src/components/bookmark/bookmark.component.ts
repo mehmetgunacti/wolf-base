@@ -1,19 +1,22 @@
 import { Component, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CompactBookmarkComponent } from '@components';
+import { TAG_POPULAR, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
 import { BaseComponent } from '@libComponents';
-import { UUID } from 'lib/constants';
-import { ClickedBookmark } from 'lib/models';
-import { CompactBookmarkComponent } from "../compact-bookmark/compact-bookmark.component";
+import { ClickedBookmark } from '@models';
+
 
 @Component({
 	standalone: true,
-	imports: [RouterModule, GlyphDirective, CompactBookmarkComponent],
+	imports: [ RouterModule, GlyphDirective, CompactBookmarkComponent ],
 	selector: 'app-bookmark',
 	templateUrl: './bookmark.component.html',
 	host: { 'class': 'relative flex min-h-20 group/bookmark bg-accent rounded-lg' }
 })
 export class BookmarkComponent extends BaseComponent {
+
+	TAG_POPULAR = TAG_POPULAR;
 
 	// Input
 	bookmark = input.required<ClickedBookmark>();

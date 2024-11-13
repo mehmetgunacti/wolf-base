@@ -93,6 +93,12 @@
 
 		}
 
+		&.btn-2xs {
+
+			@apply size-button-height-2xs;
+
+		}
+
 	}
 
 	.comp {

@@ -4,11 +4,25 @@
 <app-compact-bookmark [bookmark]="bm" class="group-hover/bookmark:w-[90%] group-focus-within/bookmark:w-[90%] inline-block z-20 w-full transition-[width] duration-500"/>
 
 <!-- glyphs -->
-<div class="inline-flex right-0 z-10 absolute flex-col justify-between items-center gap-2 p-2 max-h-24 peer">
+<div class="inline-flex right-0 z-10 absolute flex-col justify-between items-center px-1 py-[2px] max-h-24 peer">
 
-	<svg wGlyph="heart" tabindex="0"></svg>
-	<svg wGlyph="edit"  tabindex="0"></svg>
-	<svg wGlyph="stat_minus_2"  tabindex="0"></svg>
+	<button class="btn btn-2xs btn-glyph" (click)="onPopular()">
+		@if(bm.tags.includes(TAG_POPULAR)){
+
+			<svg wGlyph="heart_filled"></svg>
+
+		} @else {
+
+
+			<svg wGlyph="heart"></svg>
+		}
+	</button>
+	<button class="btn btn-2xs btn-glyph" (click)="onEdit()">
+		<svg wGlyph="edit"></svg>
+	</button>
+	<button class="btn btn-2xs btn-glyph">
+		<svg wGlyph="stat_minus_2"></svg>
+	</button>
 
 </div>
 
