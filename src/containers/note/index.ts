@@ -1,1 +1,1 @@
-export * from './notes.container';
+export * from './note.container';

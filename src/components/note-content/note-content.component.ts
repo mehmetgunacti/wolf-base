@@ -9,7 +9,7 @@ import { HideEnumPipe } from '@pipes';
 	selector: 'app-note-content',
 	templateUrl: './note-content.component.html',
 	host: {
-		'class': 'comp'
+		'class': 'comp block p-4'
 	}
 })
 export class NoteContentComponent extends BaseComponent {

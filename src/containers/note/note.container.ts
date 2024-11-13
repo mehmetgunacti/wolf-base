@@ -3,14 +3,13 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { NoteComponent, NoteContentComponent } from '@components';
 import { AppEntityType, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
 import { BaseComponent, PortalComponent } from '@libComponents';
 import { Note, NoteContent } from '@models';
 import { Store } from '@ngrx/store';
 import { selNote_SelectedEntity, selNote_selectedEntityChildren, selNote_selectedEntityParents, selNoteContent_content } from '@selectors';
-import { NoteContentComponent } from 'components/note-content/note-content.component';
-import { NoteComponent } from 'components/note/note.component';
 import { map, Observable } from 'rxjs';
 
 @Component({
@@ -18,7 +17,7 @@ import { map, Observable } from 'rxjs';
 	imports: [ CdkMenuModule, RouterLink, GlyphDirective, PortalComponent, AsyncPipe, NoteContentComponent, NoteComponent ],
 	selector: 'app-note-container',
 	templateUrl: './note.container.html',
-	host: { 'class': 'comp p-4' }
+	host: { 'class': 'flex flex-col gap-1 md:gap-2' }
 })
 export class NoteContainer extends BaseComponent {
 

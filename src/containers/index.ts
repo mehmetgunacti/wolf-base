@@ -5,6 +5,7 @@ export * from './database';
 export * from './firestore-config';
 export * from './logs';
 export * from './logs-filter.container';
+export * from './note';
 export * from './notes';
 export * from './notes-search-and-tag-cloud';
 export * from './pinned-notes';

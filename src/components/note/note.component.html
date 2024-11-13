@@ -1,24 +1,28 @@
 @if (note()) {
 
-	<div note_main class="component dark">
+	<div class="comp-dark p-4 comp">
 
-		<div note_parents>
+		<!-- note_parents -->
+		<div>
 
-			<a [routerLink]="['/notes']" tabindex="0">
-				<svg wGlyph="note_stack"></svg>
-				<span>Notes</span>
+			<a	[routerLink]="['/notes']"
+				class="flex gap-1 focus-visible:bg-component-dark-hover my-1 px-2 py-1 comp-dark comp-dark-active comp-dark-hover rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
+				tabindex="0">
+				<svg wGlyph="note_stack" class="text-[1.2em]"></svg>
+				Notes
 			</a>
 
-			@if (parents.length > 0) {
+			@if (parents().length > 0) {
 
 				@for (note of parents(); track $index) {
 
 					<a	[routerLink]="['/notes', note.id]"
-						tabindex="0"
-						[style.margin-left.px]="($index + 1) * 15">
+						[style.margin-left.px]="($index + 1) * 15"
+						class="flex gap-1 focus-visible:bg-component-dark-hover my-1 px-2 py-1 comp-dark comp-dark-active comp-dark-hover rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
+						tabindex="0">
 
-						<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
-						<span>{{ note.name | hideEnum }}</span>
+						<svg wGlyph="down_right" class="text-[1.2em]"></svg>
+						{{ note.name | hideEnum }}
 
 					</a>
 
@@ -28,16 +32,19 @@
 
 		</div>
 
-		<h3>{{ note.name | hideEnum }}</h3>
+		<!-- note title -->
+		<div class="my-5 font-bold text-2xl">{{ note().name | hideEnum }}</div>
 
 		@if (note().tags; as tags) {
 
 			<!-- note_tags -->
-			<div>
+			<div class="flex justify-end gap-1">
 
 				@for (tag of tags; track $index) {
 
-					<button class="tag" [routerLink]="['/notes']" [queryParams]="{ 'tags': tag }">{{ tag }}</button>
+					<button	class="tag tag-sm"
+							[routerLink]="['/notes']"
+							[queryParams]="{ 'tags': tag }">{{ tag }}</button>
 
 				}
 
@@ -46,7 +53,7 @@
 		}
 
 		<!-- note_info -->
-		<div>
+		<div class="flex justify-end gap-1 mt-1 text-secondary text-sm">
 
 			<small [title]="note().modified | date:'EEEE dd.MM.yyyy hh:mm'">Last edited: {{ note().modified | timePast:false }}</small>
 
@@ -56,19 +63,21 @@
 
 }
 
-@if (children.length > 0) {
+@if (children().length > 0) {
 
-	<div note_children class="component dark">
+	<!-- note_children -->
+	<div class="comp-dark p-4 comp">
 
-		<div note_nested>Child Notes</div>
-		@for (note of children(); track note) {
+		<div><strong>Child Notes</strong></div>
+		@for (note of children(); track $index) {
 
 			<a	[routerLink]="['/notes', note.id]"
+				class="flex gap-1 focus-visible:bg-component-dark-hover my-1 ml-4 px-2 py-1 comp-dark comp-dark-active comp-dark-hover rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
 				[style.margin-left.px]="15"
 				tabindex="0">
 
-				<svg wGlyph="turn_left" class="rotate-180"></svg>
-				<span>{{ note.name | hideEnum }}</span>
+				<svg wGlyph="down_right"></svg>
+				{{ note.name | hideEnum }}
 
 			</a>
 

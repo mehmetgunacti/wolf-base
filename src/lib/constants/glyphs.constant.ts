@@ -109,7 +109,7 @@ export type GlyphName =
 	| 'timer'
 	| 'toc'
 	| 'troubleshoot'
-	| 'turn_left'
+	| 'down_right'
 	| 'undo'
 	| 'update';
 
@@ -968,12 +968,12 @@ export const Glyphs: Record<GlyphName, GlyphData> = {
 		viewBox: '0 -960 1010.5 960'
 
 	},
-	turn_left: {
+	down_right: {
 
-		d: [ 'm822.86 0v-617.14h-562.29l109.71 109.71-96 96-274.29-274.29 274.29-274.29 96 96-109.71 109.71h562.29q56.571 0 96.857 40.286 40.286 40.286 40.286 96.857v617.14z' ],
-		width: '24',
-		height: '24',
-		viewBox: '0 -960 960 960'
+		width: '16',
+		height: '16',
+		viewBox: '0 0 24 24',
+		d: [ 'M6 5a1 1 0 0 0-2 0v5.6A5.4 5.4 0 0 0 9.4 16h7.186l-2.293 2.293a1 1 0 0 0 1.414 1.414l4-4a1 1 0 0 0 0-1.414l-4-4a1 1 0 1 0-1.414 1.414L16.586 14H9.4A3.4 3.4 0 0 1 6 10.6z' ],
 
 	},
 	undo: {
