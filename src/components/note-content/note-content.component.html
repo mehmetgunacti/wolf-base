@@ -2,7 +2,7 @@
 
 	@if(content(); as content) {
 
-		<div class="font-bold text-2xl text-accent">{{ note.name | hideEnum }}</div>
+		<div class="comp-title text-4xl text-accent">{{ note.name | hideEnum }}</div>
 		<w-markdown-viewer [markdown]="content.content"/>
 
 	}
