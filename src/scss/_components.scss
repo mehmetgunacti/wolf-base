@@ -52,6 +52,12 @@
 
 			@apply disabled:bg-transparent disabled:border-transparent #{!important};
 
+			& > svg {
+
+				@apply text-[1.2em];
+
+			}
+
 		}
 
 		&.btn-glyph {
@@ -167,6 +173,27 @@
 			after:from-secondary
 			after:h-[1px]
 			after:ms-6;
+
+	}
+
+	.menu-divider {
+
+		@apply
+			flex
+			items-center
+
+			text-base-color-secondary
+			text-sm
+
+			before:flex-1
+			before:bg-gradient-to-l
+			before:from-secondary
+			before:h-[1px]
+
+			after:flex-1
+			after:bg-gradient-to-r
+			after:from-secondary
+			after:h-[1px]
 
 	}
 

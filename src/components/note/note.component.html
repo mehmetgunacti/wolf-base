@@ -1,0 +1,79 @@
+@if (note()) {
+
+	<div note_main class="component dark">
+
+		<div note_parents>
+
+			<a [routerLink]="['/notes']" tabindex="0">
+				<svg wGlyph="note_stack"></svg>
+				<span>Notes</span>
+			</a>
+
+			@if (parents.length > 0) {
+
+				@for (note of parents(); track $index) {
+
+					<a	[routerLink]="['/notes', note.id]"
+						tabindex="0"
+						[style.margin-left.px]="($index + 1) * 15">
+
+						<span class="material-symbols-outlined" style="transform: rotate(180deg);">turn_left</span>
+						<span>{{ note.name | hideEnum }}</span>
+
+					</a>
+
+				}
+
+			}
+
+		</div>
+
+		<h3>{{ note.name | hideEnum }}</h3>
+
+		@if (note().tags; as tags) {
+
+			<!-- note_tags -->
+			<div>
+
+				@for (tag of tags; track $index) {
+
+					<button class="tag" [routerLink]="['/notes']" [queryParams]="{ 'tags': tag }">{{ tag }}</button>
+
+				}
+
+			</div>
+
+		}
+
+		<!-- note_info -->
+		<div>
+
+			<small [title]="note().modified | date:'EEEE dd.MM.yyyy hh:mm'">Last edited: {{ note().modified | timePast:false }}</small>
+
+		</div>
+
+	</div>
+
+}
+
+@if (children.length > 0) {
+
+	<div note_children class="component dark">
+
+		<div note_nested>Child Notes</div>
+		@for (note of children(); track note) {
+
+			<a	[routerLink]="['/notes', note.id]"
+				[style.margin-left.px]="15"
+				tabindex="0">
+
+				<svg wGlyph="turn_left" class="rotate-180"></svg>
+				<span>{{ note.name | hideEnum }}</span>
+
+			</a>
+
+		}
+
+	</div>
+
+}

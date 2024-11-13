@@ -1,0 +1,88 @@
+@if (note$ | async; as note) {
+
+	<w-portal>
+
+		<button
+			class="px-2 h-button-height-sm btn btn-ghost"
+			[cdkMenuTriggerFor]="menu">
+			<svg wGlyph="menu_open"></svg>
+		</button>
+
+		<ng-template #menu>
+
+			<div class="gap-2 grid bg-popup mt-3 p-2 w-56 comp" cdkMenu>
+
+				<button
+					cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					[routerLink]="['/notes', note.id, 'new' ]">
+					<svg wGlyph="post_add"></svg> Child Note
+				</button>
+
+				<div class="menu-divider"></div>
+
+				<button
+					cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					[routerLink]="['/notes', note.id, 'edit' ]">
+					<svg wGlyph="edit"></svg> Edit Note
+				</button>
+
+				<button
+					cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					[routerLink]="['/notes', note.id, 'content', 'edit' ]">
+					<svg wGlyph="edit_text"></svg> {{ (content$ | async) ? 'Edit' : 'Add '}} Content
+				</button>
+
+				<div class="menu-divider"></div>
+
+				<button
+					cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					[routerLink]="['/logs', note.id]">
+					<svg wGlyph="history"></svg> View Logs
+				</button>
+
+				<button
+					cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					(click)="onRemove(note.id)">
+					<svg wGlyph="delete"></svg> Remove Note
+				</button>
+
+			</div>
+
+		</ng-template>
+
+	</w-portal>
+
+	<app-note
+		[note]="note"
+		[parents]="(parents$ | async) ?? []"
+		[children]="(children$ | async) ?? []" />
+
+	@if (content$ | async; as content) {
+
+		<app-note-content [note]="note" [content]="content" />
+
+	}
+
+} @else {
+
+	<div class="comp-dark comp">
+
+		<div>
+
+			<span><svg wGlyph="check_circle"></svg>&nbsp;No note available</span>
+			<button
+				class="btn btn-ghost"
+				[routerLink]="['/notes', 'new' ]">
+				<svg wGlyph="post_add"></svg> Add Note
+			</button>
+
+		</div>
+
+	</div>
+
+}

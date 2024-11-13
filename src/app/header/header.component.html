@@ -3,9 +3,9 @@
 	@if (cloudTasks(); as cloudTasks) {
 
 		<button
-			class="inline-flex place-content-center border-ghost bg-ghost hover:bg-ghost-hover active:bg-ghost-active ml-2 p-2 border rounded-lg focus-visible:ring-4 focus-visible:ring-outline font-bold text-center text-lg focus-visible:outline-none"
+			class="px-2 h-button-height-sm btn btn-ghost ms-2"
 			(click)="toggleNav()">
-			<svg wGlyph="menu"></svg>
+			<svg wGlyph="menu" class="stroke-2"></svg>
 			@if (cloudTasks.length > 0) {
 
 				<!-- <span class="badge">{{cloudTasks.length}}</span> -->
