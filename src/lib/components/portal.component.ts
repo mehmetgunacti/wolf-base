@@ -22,6 +22,7 @@ export class PortalComponent extends BaseComponent implements AfterViewInit, OnD
 
 	// Input
 	outletName = input<'portal-outlet' | 'dialog-header-outlet' | 'dialog-footer-outlet'>('portal-outlet');
+	replaceContent = input<boolean>(true);
 
 	ngAfterViewInit(): void {
 
@@ -39,6 +40,10 @@ export class PortalComponent extends BaseComponent implements AfterViewInit, OnD
 
 		// just in case there's more than one instance, we take the last one found
 		const outletElement = outletElements[ outletElements.length - 1 ];
+
+		// setting innerHTML remove all nodes
+		if (this.replaceContent())
+			outletElement.innerHTML = '';
 
 		// attach the view to the DOM element that matches our selector
 		this.viewRef.rootNodes.forEach(
