@@ -36,6 +36,13 @@ export const FEATURE_ROUTES: Routes = [
 		loadComponent: () => import('pages/note-edit-form.page').then(c => c.NoteEditFormPage),
 		canActivate: [ setSelectedIdGuard ]
 
+	},
+	{
+
+		path: ':id/content/edit',
+		loadComponent: () => import('pages/note-content-form.page').then(c => c.NoteContentFormPage),
+		canActivate: [ setSelectedIdGuard ]
+
 	}
 
 ];

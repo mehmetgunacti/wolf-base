@@ -1,0 +1,48 @@
+<header>
+
+	<div card_title>{{ note() ? 'Edit' : 'Add' }} Note</div>
+
+</header>
+<section content>
+
+	<form [formGroup]="form.fg">
+
+		@if(note()?.id) {
+
+			<!-- ID -->
+			<w-input formControlName="id" label="ID" [readonly]="true"/>
+
+		}
+
+		<!-- PARENT ID -->
+		<w-select-tree [control]="form.parentId" [nodes]="nodes()" name="Parent"/>
+
+		<!-- NAME -->
+		<w-input formControlName="name" label="Name"/>
+
+		<!-- TAGS -->
+		<div>
+			<w-input-tag
+				formControlName="tags"
+				label="Tags"
+				class="input-element"
+				(tagInput)="onTagInput($event)"
+				[suggestions]="tagSuggestions()"/>
+			<button type="button" class="btn btn-glyph" [title]="'Toggle \''+TAG_PINNED+'\''" (click)="onTogglePinned()">
+				<span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_PINNED)">push_pin</span>
+			</button>
+			<button type="button" class="btn btn-glyph" title="Copy all from Parent" (click)="onCopyTags()">
+				<svg wGlyph="content_paste"></svg>
+			</button>
+		</div>
+
+	</form>
+
+</section>
+<footer class="flex justify-end">
+
+	<button type="button" (click)="onSave()">
+		<svg wGlyph="save"></svg> Save
+	</button>
+
+</footer>

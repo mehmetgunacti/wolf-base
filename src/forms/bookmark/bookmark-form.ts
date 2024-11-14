@@ -50,7 +50,7 @@ export class BookmarkFormImpl {
 		const fg = this.fg;
 		const { id, name, title, tags, image, urls } = entity;
 
-		// populate word (non-array values)
+		// populate (non-array values)
 		fg.patchValue({ id, name, title, tags, image });
 
 		// populate urls

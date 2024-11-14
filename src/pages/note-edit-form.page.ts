@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { NoteContainer } from "@containers";
+import { NoteEditFormContainer } from '@containers';
 import { BaseComponent } from '@libComponents';
 
 @Component({
 	standalone: true,
-	imports: [ NoteContainer ],
+	imports: [ NoteEditFormContainer ],
 	selector: 'note-edit-form-page',
-	template: `<app-note-container/>`,
+	template: `<app-note-edit-form-container/>`,
 	host: { 'class': 'page' }
 })
 export class NoteEditFormPage extends BaseComponent { }

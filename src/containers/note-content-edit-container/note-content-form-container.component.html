@@ -1,0 +1,34 @@
+@if (note$ | async; as note) {
+
+	<w-portal>
+		<div>{{note.name}}</div>
+	</w-portal>
+	<!-- <app-note [note]="note" /> -->
+	<div editor>
+
+		<w-markdown-editor
+			(save)="onSave()"
+			(saveClose)="onSaveClose()"
+			(cancel)="onCancel(note.id)"
+			label="Content"/>
+
+	</div>
+
+} @else {
+
+	<div class="card darker">
+
+		<div class="empty">
+
+			<span class="empty-message"><svg wGlyph="check_circle"></svg>&nbsp;No note available</span>
+			<button
+				class="link"
+				[routerLink]="['/notes', 'new' ]">
+				<svg wGlyph="post_add"></svg> Add Note
+			</button>
+
+		</div>
+
+	</div>
+
+}

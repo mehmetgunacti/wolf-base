@@ -1,0 +1,16 @@
+<w-portal>
+
+	<button
+		class="link"
+		[routerLink]="cancelLink$ | async">
+		<svg wGlyph="cancel"></svg> Cancel
+	</button>
+
+</w-portal>
+
+<app-note-form
+	[parentId]="parentId$ | async"
+	[nodes]="nodes()"
+	[tagSuggestions]="(tagSuggestions$ | async) ?? []"
+	(create)="onCreate($event)"
+	(tagInput)="onTagInput($event)"></app-note-form>

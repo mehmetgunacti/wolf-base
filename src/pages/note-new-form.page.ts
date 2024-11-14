@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { NoteContainer } from "@containers";
+import { NoteNewFormContainer } from "@containers";
 import { BaseComponent } from '@libComponents';
 
 @Component({
 	standalone: true,
-	imports: [ NoteContainer ],
+	imports: [ NoteNewFormContainer ],
 	selector: 'note-new-form-page',
-	template: `<app-note-container/>`,
+	template: `<app-note-new-form-container/>`,
 	host: { 'class': 'page' }
 })
 export class NoteNewFormPage extends BaseComponent { }
