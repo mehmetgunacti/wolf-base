@@ -15,6 +15,27 @@ export const FEATURE_ROUTES: Routes = [
 		loadComponent: () => import('pages/note.page').then(c => c.NotePage),
 		canActivate: [ setSelectedIdGuard ]
 
+	},
+	{
+
+		path: 'new',
+		loadComponent: () => import('pages/note-new-form.page').then(c => c.NoteNewFormPage),
+		canActivate: [ setSelectedIdGuard ]
+
+	},
+	{
+
+		path: ':id/new',
+		loadComponent: () => import('pages/note-new-form.page').then(c => c.NoteNewFormPage),
+		canActivate: [ setSelectedIdGuard ]
+
+	},
+	{
+
+		path: ':id/edit',
+		loadComponent: () => import('pages/note-edit-form.page').then(c => c.NoteEditFormPage),
+		canActivate: [ setSelectedIdGuard ]
+
 	}
 
 ];
