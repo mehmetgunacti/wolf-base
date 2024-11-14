@@ -1,23 +1,42 @@
 <select
+	class="border-0 bg-form-element form-select px-3 rounded-lg w-full text-content outline-none"
 	#select
-	[id]="label_id"
-	[formControl]="control"
-	[ngClass]="{ 'ng-invalid ng-dirty': control.invalid && control.dirty }"
+	[value]="value()"
 	[cdkMenuTriggerFor]="select_menu"
 	(mousedown)="$event.preventDefault();onSelectClicked($event);"
 	(keydown)="onKeydown($event);">
 
 	<option [ngValue]="null">Root</option>
-	<option *ngFor="let node of nodes" [value]="node.id">{{ node.name }}</option>
+	@for (node of nodes(); track node.id) {
+
+		<option [value]="node.id">{{ node.name }}</option>
+
+	}
 
 </select>
-<label [for]="label_id" class="up">{{name}}</label>
+<label class="
+	absolute
+	-top-3.5
+	left-2
+	px-1
+	rounded
+
+	text-2xs
+	leading-5
+
+	bg-component-dark
+	text-form-element-text
+
+	before:content-['*']
+	before:text-focus
+	before:mr-1
+	">{{label()}}</label>
 
 <ng-template #select_menu>
 
-	<div #popup class="menu small scrollable flex-1" [style.width]="popupWidth() + 'px'" cdkMenu>
+	<div #popup class="gap-2 grid comp-dark p-3 h-48 overflow-y-auto comp scrollbar scrollbar-blue scrollbar-gutter-stable" [style.width]="popupWidth() + 'px'" cdkMenu>
 
-		<w-options [nodes]="nodes" (selected)="onItemSelected($event)"/>
+		<w-options [nodes]="nodes()" (selected)="onItemSelected($event)"/>
 
 	</div>
 

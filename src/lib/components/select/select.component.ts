@@ -4,8 +4,8 @@ import { NameBase } from '@models';
 import { BaseComponent } from '../base.component';
 
 @Component({
-	selector: 'w-select',
 	standalone: true,
+	selector: 'w-select',
 	templateUrl: './select.component.html',
 	providers: [
 		{

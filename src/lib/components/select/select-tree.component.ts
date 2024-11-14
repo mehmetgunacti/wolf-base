@@ -2,63 +2,83 @@ import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, Input, ViewChild, WritableSignal, signal } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { UUID } from '@constants';
+import { Component, ElementRef, forwardRef, input, signal, viewChild } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { HasParentId } from '@models';
 import { BaseComponent } from '../base.component';
 import { OptionsComponent } from './options.component';
 import { ROOT_ID } from './select.util';
 
 @Component({
-	selector: 'w-select-tree',
 	standalone: true,
 	imports: [ ReactiveFormsModule, CdkTreeModule, CdkMenuModule, OptionsComponent, CommonModule ],
+	selector: 'w-select-tree',
 	templateUrl: './select-tree.component.html',
-	styleUrls: [ './select-tree.component.scss' ],
-	host: { 'class': 'input-element' }
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => SelectTreeComponent),
+			multi: true
+		}
+	],
+	host: {
+		'[tabindex]': '0',
+		'(focus)': 'onHostFocus()',
+		'window:resize': 'onResize()',
+		'class': 'inline-flex relative h-widget-height bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none group'
+	}
 })
-export class SelectTreeComponent extends BaseComponent {
+export class SelectTreeComponent extends BaseComponent implements ControlValueAccessor {
 
-	label_id: string = 'select_tree_' + Math.random();
+	private trigger = viewChild.required<CdkMenuTrigger>(CdkMenuTrigger);
+	private select = viewChild.required<ElementRef<HTMLSelectElement>>('select');
 
-	@ViewChild(CdkMenuTrigger) trigger!: CdkMenuTrigger;
-	@ViewChild('select') select!: ElementRef<HTMLSelectElement>;
+	// Input
+	label = input.required<string>();
+	readonly = input<boolean>(false);
+	nodes = input<HasParentId[]>([]);
 
-	@Input() name: string = '';
-	@Input() control!: FormControl<UUID | null>;
-	@Input() nodes: HasParentId[] = [];
+	protected value = signal<string | null>('');
+	protected disabled = signal<boolean>(false);
 
-	popupWidth: WritableSignal<number> = signal(200);
+	//////////// boilerplate
+	private onChange: any = () => { };
+	private onTouched: any = () => { };
+	registerOnChange(fn: any): void { this.onChange = fn; }
+	registerOnTouched(fn: any): void { this.onTouched = fn; }
+	writeValue(value: string): void { this.value.set(value); }
+	setDisabledState(isDisabled: boolean): void { this.disabled.set(isDisabled); }
+	////////////
 
-	@HostListener('window:resize', [ '$event' ])
+	popupWidth = signal<number>(200);
+
 	onResize() {
 
-		this.trigger.close();
+		this.trigger().close();
 
 	}
 
 	onSelectClicked(event: MouseEvent): void {
 
 		event.preventDefault; // prevents native select options to open
-		this.select.nativeElement.focus();
-		this.popupWidth.set(this.select.nativeElement.clientWidth);
+		this.select().nativeElement.focus();
+		this.popupWidth.set(this.select().nativeElement.clientWidth);
 
 	}
 
 	onItemSelected(item: HasParentId | null): void {
 
 		if (item !== null)
-			this.control.setValue(item.id === ROOT_ID ? null : item.id);
+			this.value.set(item.id === ROOT_ID ? null : item.id);
 
-		this.trigger.close();
-		this.select.nativeElement.focus();
+		this.trigger().close();
+		this.select().nativeElement.focus();
 
 	}
 
 	onKeydown(event: KeyboardEvent): void {
 
-		this.popupWidth.set(this.select.nativeElement.clientWidth);
+		this.popupWidth.set(this.select().nativeElement.clientWidth);
 
 		if (hasModifierKey(event)) // ctrl, shift etc.
 			return;
@@ -69,6 +89,12 @@ export class SelectTreeComponent extends BaseComponent {
 			default: event.preventDefault(); // prevents native select options to open
 
 		}
+
+	}
+
+	onHostFocus(): void {
+
+		this.select().nativeElement.focus();
 
 	}
 

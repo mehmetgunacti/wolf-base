@@ -11,7 +11,7 @@
 	}
 
 	<!-- PARENT ID -->
-	<w-select-tree [control]="form.parentId" [nodes]="nodes()" name="Parent"/>
+	<w-select-tree formControlName="parentId" [nodes]="nodes()" label="Parent"/>
 
 	<!-- NAME -->
 	<w-input formControlName="name" label="Name"/>

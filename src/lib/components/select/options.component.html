@@ -6,7 +6,7 @@
 		<!-- use a disabled button to provide padding for tree leaf -->
 		<div class="example-expandable-node">
 			<button
-				class="glyph small"
+				class="btn btn-glyph"
 				type="button"
 				style="visibility: hidden;"
 				disabled>
@@ -14,7 +14,7 @@
 			</button>
 			<button
 				tabindex="0"
-				class="link small"
+				class="btn btn-ghost"
 				type="button"
 				(keydown)="onKeydown($event, node);"
 				(click)="selectItem(node.value)"

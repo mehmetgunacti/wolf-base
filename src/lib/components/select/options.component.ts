@@ -45,6 +45,8 @@ export class OptionsComponent extends BaseComponent implements AfterViewInit {
 
 		// convert to dictionary
 		const dictionary = toTreeItems(sorted);
+		console.log(dictionary);
+
 
 		// used by Angular CDK Tree
 		this.treeItems = Object.values(dictionary).filter(item => item.parent === null);
