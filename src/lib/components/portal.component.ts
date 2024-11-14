@@ -20,6 +20,7 @@ export class PortalComponent extends BaseComponent implements AfterViewInit, OnD
 	private viewRef!: EmbeddedViewRef<{}>;
 	// private disposeFn!: () => void;
 
+	// Input
 	outletName = input<'portal-outlet' | 'dialog-header-outlet' | 'dialog-footer-outlet'>('portal-outlet');
 
 	ngAfterViewInit(): void {
@@ -54,7 +55,9 @@ export class PortalComponent extends BaseComponent implements AfterViewInit, OnD
 
 		const index = this.viewContainerRef.indexOf(this.viewRef);
 		if (index !== -1)
-			this.viewContainerRef.remove(index);
+			// when used inside w-modal, the destruction of the modal takes 2s
+			// using setTimeout prevents UI changes before the modal's fade out animation start
+			setTimeout(() => this.viewContainerRef.remove(index), 0);
 
 	}
 

@@ -1,14 +1,13 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, effect, inject, input, output, untracked } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { CompactBookmarkComponent } from "@components";
 import { TAG_POPULAR, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
-import { BaseComponent, CroppieComponent, InputComponent, InputTagComponent, ToastConfiguration } from '@libComponents';
+import { BaseComponent, CroppieComponent, InputComponent, InputTagComponent, PortalComponent, ToastConfiguration } from '@libComponents';
 import { Bookmark, ClickedBookmark } from '@models';
 import { parseURL } from '@utils';
 import { Observable, Subject, debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
-import { CompactBookmarkComponent } from "../../components/compact-bookmark/compact-bookmark.component";
-import { PortalComponent } from "../../lib/components/portal.component";
 import { BOOKMARK_FORM, BookmarkFormImpl } from './bookmark-form';
 
 @Component({
