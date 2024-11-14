@@ -6,7 +6,7 @@ import { BaseComponent } from './base.component';
 	standalone: true,
 	selector: 'w-portal',
 	template: `
-		<ng-template #pageActions>
+		<ng-template #outlet>
 			<ng-content/>
 		</ng-template>
 	`,
@@ -16,13 +16,13 @@ export class PortalComponent extends BaseComponent implements AfterViewInit, OnD
 
 	private document = inject(DOCUMENT);
 	private viewContainerRef = inject(ViewContainerRef);
-	private portalActionsTmplRef = viewChild.required<TemplateRef<{}>>('pageActions');
+	private portalActionsTmplRef = viewChild.required<TemplateRef<{}>>('outlet');
 	private viewRef!: EmbeddedViewRef<{}>;
-	// private disposeFn!: () => void;
 
 	// Input
 	outletName = input<'portal-outlet' | 'dialog-header-outlet' | 'dialog-footer-outlet'>('portal-outlet');
 	replaceContent = input<boolean>(true);
+	delayRemoval = input<number>(0);
 
 	ngAfterViewInit(): void {
 
@@ -50,19 +50,21 @@ export class PortalComponent extends BaseComponent implements AfterViewInit, OnD
 			rootNode => outletElement?.appendChild(rootNode)
 		);
 
-		// register a dispose fn we can call later
-		// to remove the content from the DOM again
-		// this.disposeFn = () => { };
-
 	}
 
 	ngOnDestroy(): void {
 
 		const index = this.viewContainerRef.indexOf(this.viewRef);
-		if (index !== -1)
-			// when used inside w-modal, the destruction of the modal takes 2s
-			// using setTimeout prevents UI changes before the modal's fade out animation start
-			setTimeout(() => this.viewContainerRef.remove(index), 0);
+		if (index !== -1) {
+
+			if (this.delayRemoval() > 0)
+				// when used inside w-modal, the destruction of the modal takes 2s
+				// using setTimeout prevents UI changes before the modal's fade out animation start
+				setTimeout(() => this.viewContainerRef.remove(index), 0);
+			else
+				this.viewContainerRef.remove(index);
+
+		}
 
 	}
 

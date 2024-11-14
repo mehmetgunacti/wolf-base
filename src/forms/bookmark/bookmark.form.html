@@ -1,5 +1,5 @@
 <!--  bookmark-wrapper -->
-<w-portal outletName="dialog-header-outlet">
+<w-portal outletName="dialog-header-outlet" [delayRemoval]="2000">
 	<div class="flex place-content-center my-4 min-h-24 pointer-events-none">
 
 		@if (bookmark$ | async; as bm) {
@@ -107,7 +107,7 @@
 </div>
 
 <!-- form-element-buttons -->
-<w-portal outletName="dialog-footer-outlet">
+<w-portal outletName="dialog-footer-outlet" [delayRemoval]="2000">
 
 	<div class="flex">
 
