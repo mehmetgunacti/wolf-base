@@ -8,9 +8,9 @@
 		</button>
 	</legend>
 
-	<div class="overflow-hidden" [class.pb-4]="formsVisible()" [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
+	<div class="md:px-4 overflow-hidden" [class.pb-4]="formsVisible()" [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
 
-		<form [formGroup]="form" class="flex flex-col gap-3 p-4">
+		<form [formGroup]="form" class="flex flex-col gap-3">
 
 			<div class="flex justify-center items-baseline gap-2">
 				<w-croppie formControlName="croppie" (imageChanged)="img.src = $event ?? ''; img.hidden = !$event"/>
@@ -51,7 +51,7 @@
 		</button>
 	</legend>
 
-	<div class="gap-2 grid overflow-hidden" [class.pb-4]="alertsVisible()" [@slideUpDown]="alertsVisible() ? 'opened' : 'closed'">
+	<div class="gap-2 grid md:px-4 overflow-hidden" [class.pb-4]="alertsVisible()" [@slideUpDown]="alertsVisible() ? 'opened' : 'closed'">
 
 		<w-alert glyph="cloud_download" summary="Update Available" detail="Click to download">
 			<button class="btn btn-ghost">Download</button>
@@ -83,7 +83,7 @@
 		</button>
 	</legend>
 
-	<div class="overflow-hidden" [class.pb-4]="buttonsVisible()" [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
+	<div class="md:px-4 overflow-hidden" [class.pb-4]="buttonsVisible()" [@slideUpDown]="buttonsVisible() ? 'opened' : 'closed'">
 
 		<!-- TYPES -->
 		<div class="h-divider">Button Types</div>
@@ -163,7 +163,7 @@
 		</button>
 	</legend>
 
-	<div class="overflow-hidden" [class.pb-4]="glyphsVisible()" [@slideUpDown]="glyphsVisible() ? 'opened' : 'closed'">
+	<div class="md:px-4 overflow-hidden" [class.pb-4]="glyphsVisible()" [@slideUpDown]="glyphsVisible() ? 'opened' : 'closed'">
 
 		<div class="h-divider">{{glyphNames().length}} Glyphs</div>
 		<div class="gap-4 grid grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-5 @xl:grid-cols-6 @2xl:grid-cols-7 @3xl:grid-cols-8 @4xl:grid-cols-9 @5xl:grid-cols-10 @6xl:grid-cols-11 @7xl:grid-cols-11 w-full">
