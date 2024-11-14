@@ -16,7 +16,7 @@ import { Observable, Subject, combineLatest, map } from 'rxjs';
 	imports: [ AsyncPipe, PortalComponent, RouterLink, GlyphDirective, NoteFormComponent ],
 	selector: 'app-note-edit-form-container',
 	templateUrl: './note-edit-form-container.component.html',
-	host: { 'class': 'flex flex-col' }
+	host: { 'class': 'comp p-4' }
 })
 export class NoteEditFormContainer extends BaseComponent {
 

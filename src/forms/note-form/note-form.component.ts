@@ -1,9 +1,9 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, effect, inject, input, output, untracked } from '@angular/core';
+import { Component, effect, inject, input, output, untracked } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TAG_PINNED, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
-import { InputComponent, InputTagComponent, SelectTreeComponent } from '@libComponents';
+import { BaseComponent, InputComponent, InputTagComponent, SelectTreeComponent } from '@libComponents';
 import { Note } from '@models';
 import { Subject } from 'rxjs';
 import { NOTE_FORM, NoteFormImpl } from './note-form';
@@ -16,10 +16,9 @@ import { NOTE_FORM, NoteFormImpl } from './note-form';
 	providers: [ { provide: NOTE_FORM, useClass: NoteFormImpl } ],
 	host: {
 		'class': 'component'
-	},
-	changeDetection: ChangeDetectionStrategy.OnPush
+	}
 })
-export class NoteFormComponent {
+export class NoteFormComponent extends BaseComponent {
 
 	TAG_PINNED = TAG_PINNED;
 
@@ -39,6 +38,7 @@ export class NoteFormComponent {
 
 	constructor() {
 
+		super();
 		effect(() => {
 
 			const note = this.note();

@@ -1,48 +1,48 @@
-<header>
+<form
+	[formGroup]="form.fg"
+	(ngSubmit)="onSave()"
+	class="flex flex-col gap-4">
 
-	<div card_title>{{ note() ? 'Edit' : 'Add' }} Note</div>
+	@if(note()?.id) {
 
-</header>
-<section content>
+		<!-- ID -->
+		<w-input formControlName="id" label="ID" [readonly]="true"/>
 
-	<form [formGroup]="form.fg">
+	}
 
-		@if(note()?.id) {
+	<!-- PARENT ID -->
+	<w-select-tree [control]="form.parentId" [nodes]="nodes()" name="Parent"/>
 
-			<!-- ID -->
-			<w-input formControlName="id" label="ID" [readonly]="true"/>
+	<!-- NAME -->
+	<w-input formControlName="name" label="Name"/>
 
-		}
+	<!-- TAGS -->
+	<div class="flex gap-1">
+		<w-input-tag
+			formControlName="tags"
+			label="Tags"
+			class="input-element"
+			(tagInput)="onTagInput($event)"
+			[suggestions]="(tagSuggestions$ | async) ?? []"/>
+		<button type="button" class="btn btn-ghost" [title]="'Toggle \''+TAG_PINNED+'\''" (click)="onTogglePinned()">
+			@if(form.tags.value.includes(TAG_PINNED)){
 
-		<!-- PARENT ID -->
-		<w-select-tree [control]="form.parentId" [nodes]="nodes()" name="Parent"/>
+				<svg wGlyph="heart_filled"></svg>
 
-		<!-- NAME -->
-		<w-input formControlName="name" label="Name"/>
+			} @else {
 
-		<!-- TAGS -->
-		<div>
-			<w-input-tag
-				formControlName="tags"
-				label="Tags"
-				class="input-element"
-				(tagInput)="onTagInput($event)"
-				[suggestions]="tagSuggestions()"/>
-			<button type="button" class="btn btn-glyph" [title]="'Toggle \''+TAG_PINNED+'\''" (click)="onTogglePinned()">
-				<span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_PINNED)">push_pin</span>
-			</button>
-			<button type="button" class="btn btn-glyph" title="Copy all from Parent" (click)="onCopyTags()">
-				<svg wGlyph="content_paste"></svg>
-			</button>
-		</div>
 
-	</form>
+				<svg wGlyph="heart"></svg>
+			}
+		</button>
+	</div>
 
-</section>
-<footer class="flex justify-end">
+	<footer>
 
-	<button type="button" (click)="onSave()">
-		<svg wGlyph="save"></svg> Save
-	</button>
+		<button [disabled]="this.form.fg.pristine || this.form.fg.invalid" class="float-right btn">
+			<svg wGlyph="save"></svg> Save
+		</button>
 
-</footer>
+	</footer>
+
+</form>
