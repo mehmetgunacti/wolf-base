@@ -118,7 +118,7 @@
 			</button>
 
 		}
-		<button type="button" (click)="onSave()" class="ml-auto btn">
+		<button type="button" [disabled]="this.form.fg.pristine || this.form.fg.invalid" (click)="onSave()" class="ml-auto btn">
 			<svg wGlyph="save"></svg> Save
 		</button>
 

@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, EmbeddedViewRef, inject, input, OnDestroy, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
 import { BaseComponent } from './base.component';
 
@@ -13,10 +14,11 @@ import { BaseComponent } from './base.component';
 })
 export class PortalComponent extends BaseComponent implements AfterViewInit, OnDestroy {
 
-	private portalActionsTmplRef = viewChild.required<TemplateRef<{}>>('pageActions');
+	private document = inject(DOCUMENT);
 	private viewContainerRef = inject(ViewContainerRef);
+	private portalActionsTmplRef = viewChild.required<TemplateRef<{}>>('pageActions');
 	private viewRef!: EmbeddedViewRef<{}>;
-	private disposeFn!: () => void;
+	// private disposeFn!: () => void;
 
 	outletName = input<'portal-outlet' | 'dialog-header-outlet' | 'dialog-footer-outlet'>('portal-outlet');
 
@@ -28,17 +30,23 @@ export class PortalComponent extends BaseComponent implements AfterViewInit, OnD
 		);
 		this.viewRef.detectChanges();
 
-		// grab the DOM element
-		const outletElement = document.querySelector('#' + this.outletName()); // #portal-outlet'
+		// search for outlets
+		// Important: when used with w-modal there might be several instances found
+		// Happens when you close a modal and immediately open another one, because there's a 2s delay before removal from DOM
+		// (because @delayDestroy on modal)
+		const outletElements = this.document.querySelectorAll('#' + this.outletName()); // #portal-outlet'
+
+		// just in case there's more than one instance, we take the last one found
+		const outletElement = outletElements[ outletElements.length - 1 ];
 
 		// attach the view to the DOM element that matches our selector
-		this.viewRef.rootNodes.forEach(rootNode =>
-			outletElement?.appendChild(rootNode)
+		this.viewRef.rootNodes.forEach(
+			rootNode => outletElement?.appendChild(rootNode)
 		);
 
 		// register a dispose fn we can call later
 		// to remove the content from the DOM again
-		this.disposeFn = () => { };
+		// this.disposeFn = () => { };
 
 	}
 
