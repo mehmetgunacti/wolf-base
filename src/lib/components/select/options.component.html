@@ -1,51 +1,52 @@
-<cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
+<cdk-tree #tree [dataSource]="dataSource()" [childrenAccessor]="childrenAccessor">
 
 	<!-- This is the tree node template for leaf nodes -->
-	<cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node">
+	<cdk-nested-tree-node	*cdkTreeNodeDef="let node"
+							[id]="'mi_' + componentId + '_' + node.value.id"
+							(keydown)="onKeydown($event, node);"
+							(click)="selectItem(node.value)"
+							class="block hover:bg-form-element-hover rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none cursor-pointer">
 
 		<!-- use a disabled button to provide padding for tree leaf -->
-		<div class="example-expandable-node">
+		<div class="flex items-center">
+
 			<button
 				class="btn btn-glyph"
 				type="button"
 				style="visibility: hidden;"
 				disabled>
-				<!-- <svg wGlyph="check_box_outline_blank"></svg> -->
+				<svg wGlyph="chevron_right"></svg>
 			</button>
-			<button
-				tabindex="0"
-				class="btn btn-ghost"
-				type="button"
-				(keydown)="onKeydown($event, node);"
-				(click)="selectItem(node.value)"
-				[id]="'mi_' + node.value.id">{{node.value.name}}</button>
-			</div>
+			{{node.value.name}}
+
+		</div>
 
 	</cdk-nested-tree-node>
 
 	<!-- This is the tree node template for expandable nodes -->
-	<cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="example-tree-node">
+	<cdk-nested-tree-node	*cdkTreeNodeDef="let node; when: hasChild"
+							isExpandable
+							[id]="'mi_' + componentId + '_' + node.value.id"
+							(click)="selectItem(node.value)"
+							(keydown)="onKeydown($event, node);"
+							class="block hover:bg-form-element-hover rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none cursor-pointer">
 
-		<div class="exapmle-expandable-node">
+		<div class="flex items-center">
+
 			<button
-				tabindex="0"
 				type="button"
 				cdkTreeNodeToggle
 				class="btn btn-glyph"
 				[id]="'mt_' + node.value.id">
-				<svg wGlyph="chevron_right" [class.rotate-90]="treeControl.isExpanded(node)"></svg>
+				<svg wGlyph="chevron_right" [class.rotate-90]="tree.isExpanded(node)"></svg>
 			</button>
-			<button
-				tabindex="0"
-				type="button"
-				class="btn btn-ghost"
-				[id]="'mi_' + node.value.id"
-				(click)="selectItem(node.value)"
-				(keydown)="onKeydown($event, node);">{{node.value.name}}</button>
-		</div>
+			{{node.value.name}}
 
-		<div [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+		</div>
+		<div [class.hidden]="!tree.isExpanded(node)" class="pl-5">
+
 			<ng-container cdkTreeNodeOutlet></ng-container>
+
 		</div>
 
 	</cdk-nested-tree-node>

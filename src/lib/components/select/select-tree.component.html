@@ -34,7 +34,10 @@
 
 <ng-template #select_menu>
 
-	<div #popup class="gap-2 grid comp-dark p-3 h-48 overflow-y-auto comp scrollbar scrollbar-blue scrollbar-gutter-stable" [style.width]="popupWidth() + 'px'" cdkMenu>
+	<div	#popup
+			class="gap-2 grid comp-dark p-3 h-48 overflow-y-auto comp scrollbar scrollbar-blue scrollbar-gutter-stable"
+			[style.width]="popupWidth() + 'px'"
+			cdkMenu>
 
 		<w-options [nodes]="nodes()" (selected)="onItemSelected($event)"/>
 

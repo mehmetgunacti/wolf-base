@@ -71,6 +71,8 @@ export class SelectTreeComponent extends BaseComponent implements ControlValueAc
 		if (item !== null)
 			this.value.set(item.id === ROOT_ID ? null : item.id);
 
+		this.onChange(this.value());
+		this.onTouched();
 		this.trigger().close();
 		this.select().nativeElement.focus();
 
