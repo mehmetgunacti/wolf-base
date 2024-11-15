@@ -1,5 +1,5 @@
 import { FormControl, Validators } from '@angular/forms';
-import { fg, nnfc, urlValidator } from '@utils';
+import { fg, nnfc, urlValidator } from '@utils/form.util';
 
 interface FirestoreConfigForm {
 

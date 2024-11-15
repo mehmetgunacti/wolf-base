@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { inject, Injectable } from '@angular/core';
-import { Breakpoint } from '@constants';
+import { Breakpoint } from '@constants/responsive.constant';
 import { map, Observable } from 'rxjs';
 
 @Injectable({

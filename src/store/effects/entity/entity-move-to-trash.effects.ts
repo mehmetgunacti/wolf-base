@@ -1,11 +1,12 @@
+import { coreActions } from '@actions/core.actions';
+import { entityActions } from '@actions/entity.actions';
 import { Injectable, inject } from '@angular/core';
+import { AppEntities } from '@constants/entity.constant';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AppEntities } from '@constants';
-import { LocalRepositoryService } from '@libServices';
+import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { LOCAL_REPOSITORY_SERVICE } from 'services';
-import { coreActions, entityActions } from '@actions';
 
 @Injectable()
 export class EntityMoveToTrashEffects {

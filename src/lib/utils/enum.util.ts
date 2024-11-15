@@ -1,5 +1,6 @@
-import { DEFAULT_CONF_VALUES, Theme } from '@constants';
-import { HasParentId } from '@models';
+import { DEFAULT_CONF_VALUES } from '@constants/database.constant';
+import { Theme } from '@constants/theme.constant';
+import { HasParentId } from '@models/entity.model';
 
 export function findEnumValue<T>(enumObj: any, value: string | null): T | null {
 
@@ -14,7 +15,7 @@ export function convertEnum<T>(enumObject: T): HasParentId[] {
 	for (const key in enumObject)
 		if (Object.prototype.hasOwnProperty.call(enumObject, key)) {
 
-			const value = enumObject[key as keyof T];
+			const value = enumObject[ key as keyof T ];
 			result.push({ id: key, name: '' + value, parentId: null });
 
 		}
@@ -38,6 +39,6 @@ export function getNextTheme(currentTheme: Theme): Theme {
 	const nextIndex: number = (currentIndex + 1) % themes.length;
 
 	// return new theme
-	return themes[nextIndex] as Theme;
+	return themes[ nextIndex ] as Theme;
 
 }

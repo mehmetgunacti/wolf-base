@@ -1,9 +1,9 @@
-import { UUID } from '@constants';
-import { IdBase } from '@models';
+import { UUID } from '@constants/common.constant';
+import { IdBase } from '@models/id-base.model';
 
 export function idListToRecord<T extends IdBase>(list: T[]): Record<UUID, T> {
 
-	return list.reduce((record, item) => { record[item.id] = item; return record; }, {} as Record<UUID, T>);
+	return list.reduce((record, item) => { record[ item.id ] = item; return record; }, {} as Record<UUID, T>);
 
 }
 
@@ -63,9 +63,9 @@ export const toggleArrayItem = <T>(arr: T[] = [], item: T): T[] => {
 	if (arr.includes(item))
 		return arr.filter((element) => element !== item);
 
-	return [...arr, item];
+	return [ ...arr, item ];
 
-}
+};
 
 export const commaSplit = (input: string | null): string[] => {
 
@@ -81,7 +81,7 @@ export function toDictionary<T extends IdBase>(items: T[]): Record<UUID, T> {
 	const result = items.reduce(
 		(dictionary, item) => {
 
-			dictionary[item.id] = item;
+			dictionary[ item.id ] = item;
 			return dictionary;
 
 		},

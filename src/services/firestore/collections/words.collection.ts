@@ -1,8 +1,10 @@
-import { AppEntityType } from '@constants';
-import { Definition, FirestoreConfig, Language, Word } from '@models';
-import { WordsRemoteRepository } from '@repositories';
-import { FIRESTORE_VALUE, FirestoreConverter } from '@utils';
-import { FirestoreAPIClient } from '@utils';
+import { AppEntityType } from '@constants/entity.constant';
+import { FirestoreConfig } from '@models/configuration.model';
+import { Definition, Language, Word } from '@models/word.model';
+import { WordsRemoteRepository } from '@repositories/remote/word-remote.repository';
+import { FirestoreAPIClient } from '@utils/firestore-rest-client/firestore-api.tool';
+import { FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
+import { FirestoreConverter } from '@utils/firestore-rest-client/firestore.model';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 
 export class WordsFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Word> implements WordsRemoteRepository {

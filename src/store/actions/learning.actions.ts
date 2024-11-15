@@ -1,6 +1,6 @@
+import { UUID } from '@constants/common.constant';
+import { TestSuiteQueryParams } from '@models/learning.model';
 import { createActionGroup, props } from '@ngrx/store';
-import { UUID } from '@constants';
-import { TestSuiteQueryParams } from '@models';
 
 export const learningActions = createActionGroup({
 

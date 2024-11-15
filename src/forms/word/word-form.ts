@@ -1,7 +1,8 @@
 import { InjectionToken } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { Definition, Language, UUID, Word } from '@lib';
-import { DefinitionLanguage, DefinitionType } from 'lib/constants/word.constant';
+import { UUID } from '@constants/common.constant';
+import { DefinitionLanguage, DefinitionType } from '@constants/word.constant';
+import { Definition, Language, Word } from '@models/word.model';
 
 interface LanguageFormSchema {
 
@@ -42,7 +43,7 @@ function nnfc<T>(value: T, validators: ValidatorFn | ValidatorFn[] | null | unde
 
 }
 
-function fg<T extends { [K in keyof T]: AbstractControl<any, any>; }>(value: T = {} as T): FormGroup<T> {
+function fg<T extends { [ K in keyof T ]: AbstractControl<any, any>; }>(value: T = {} as T): FormGroup<T> {
 
 	return new FormGroup<T>(value);
 
@@ -76,7 +77,7 @@ function faLanguages(value?: Language[]): FormArray<FormGroup<LanguageFormSchema
 
 	let arr = [];
 	if (value)
-		value.forEach(e => arr.push(fgLanguage(e)))
+		value.forEach(e => arr.push(fgLanguage(e)));
 	if (arr.length === 0)
 		arr.push(fgLanguage());
 	return fa(arr);
@@ -90,7 +91,7 @@ function fgDefinition(value?: Definition): FormGroup<DefinitionFormSchema> {
 		id = null,
 		languages = [],
 		type = DefinitionType.adjective,
-		samples = ['']
+		samples = [ '' ]
 
 	} = value ?? {};
 
@@ -101,7 +102,7 @@ function fgDefinition(value?: Definition): FormGroup<DefinitionFormSchema> {
 		languages: faLanguages(languages),
 		samples: fa(samples.map(s => nnfc(s)))
 
-	})
+	});
 
 }
 
@@ -109,7 +110,7 @@ function faDefinitions(value?: Definition[]): FormArray<FormGroup<DefinitionForm
 
 	let arr = [];
 	if (value)
-		value.forEach(d => arr.push(fgDefinition(d)))
+		value.forEach(d => arr.push(fgDefinition(d)));
 	if (arr.length === 0)
 		arr.push(fgDefinition());
 	return fa(arr);
@@ -138,7 +139,7 @@ function fgWord(value?: Word): FormGroup<WordFormSchema> {
 		pronunciation: fc(pronunciation),
 		definitions: faDefinitions(definitions)
 
-	})
+	});
 
 }
 

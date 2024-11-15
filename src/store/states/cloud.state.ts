@@ -1,4 +1,6 @@
-import { Entity, RemoteData, RemoteMetadata, SyncData } from '@models';
+import { Entity } from '@models/entity.model';
+import { RemoteData, RemoteMetadata } from '@models/remote.model';
+import { SyncData } from '@models/sync.model';
 
 export interface CloudModuleState {
 

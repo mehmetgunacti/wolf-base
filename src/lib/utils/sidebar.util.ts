@@ -1,4 +1,4 @@
-import { SidebarState } from '@constants';
+import { SidebarState } from '@constants/sidebar.constant';
 
 export function evaluate(state: SidebarState, bigScreen: boolean): SidebarState {
 

@@ -1,14 +1,18 @@
-import { entityActions } from '@actions';
+import { entityActions } from '@actions/entity.actions';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AppEntityType, UUID } from '@constants';
-import { GlyphDirective } from '@directives';
+import { UUID } from '@constants/common.constant';
+import { AppEntityType } from '@constants/entity.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
 import { NoteFormComponent } from '@forms/note-form/note-form.component';
-import { BaseComponent, PortalComponent } from '@libComponents';
-import { Note } from '@models';
+import { BaseComponent } from '@libComponents/base.component';
+import { PortalComponent } from '@libComponents/portal.component';
+import { Note } from '@models/note.model';
 import { Store } from '@ngrx/store';
-import { selNote_EntityList, selNote_SelectedEntity, selNote_distinctTagsArray } from '@selectors';
+import { selNote_EntityList } from '@selectors/entity/entity-note.selectors';
+import { selNote_distinctTagsArray } from '@selectors/note/note-tags.selectors';
+import { selNote_SelectedEntity } from '@selectors/note/note-ui.selectors';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 
 @Component({

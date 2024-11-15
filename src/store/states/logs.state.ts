@@ -1,5 +1,6 @@
-import { LogCategory, UUID } from '@constants';
-import { LogMessage } from '@models';
+import { UUID } from '@constants/common.constant';
+import { LogCategory } from '@constants/log.constant';
+import { LogMessage } from '@models/log.model';
 
 export interface Logs_ModuleState {
 

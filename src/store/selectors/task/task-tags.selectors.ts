@@ -1,5 +1,6 @@
+import { TaskQueryParams } from '@models/project.model';
+import { Tag } from '@models/tag.model';
 import { createSelector } from '@ngrx/store';
-import { Tag, TaskQueryParams } from '@models';
 import { selTask_EntityList } from '../entity/entity-task.selectors';
 import { selTask_filteredTasks, selTask_queryParams } from './task-ui.selectors';
 

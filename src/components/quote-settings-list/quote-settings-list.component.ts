@@ -1,15 +1,15 @@
 import { Component, InputSignal, input, output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { UUID } from '@constants';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, InputComponent } from '@libComponents';
-import { Quote } from '@models';
-import { fc } from '@utils';
+import { UUID } from '@constants/common.constant';
+import { BaseComponent } from '@libComponents/base.component';
+import { InputComponent } from '@libComponents/input/input.component';
+import { Quote } from '@models/quote.model';
+import { fc } from '@utils/form.util';
 
 @Component({
 	standalone: true,
-	imports: [ ReactiveFormsModule, GlyphDirective, InputComponent ],
+	imports: [ ReactiveFormsModule, InputComponent ],
 	selector: 'app-quote-settings-list',
 	templateUrl: './quote-settings-list.component.html',
 	host: { 'class': 'flex flex-col comp' }

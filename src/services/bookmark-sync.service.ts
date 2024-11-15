@@ -1,6 +1,8 @@
 import { inject } from '@angular/core';
-import { BookmarkSyncService, LocalRepositoryService, RemoteRepositoryService } from '@libServices';
-import { Click } from '@models';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
+import { RemoteRepositoryService } from '@libServices/remote-repository.service';
+import { BookmarkSyncService } from '@libServices/sync-service.interface';
+import { Click } from '@models/bookmark.model';
 import { Observable, filter, from, of, switchMap } from 'rxjs';
 import { LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE } from './repository.service';
 

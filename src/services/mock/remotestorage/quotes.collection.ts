@@ -1,5 +1,6 @@
-import { Quote, RemoteData, RemoteMetadata } from '@models';
-import { QuotesRemoteRepository } from '@repositories';
+import { Quote } from '@models/quote.model';
+import { RemoteData, RemoteMetadata } from '@models/remote.model';
+import { QuotesRemoteRepository } from '@repositories/remote/quote-remote.repository';
 import { Observable } from 'rxjs';
 
 export class VoidQuotesCollection implements QuotesRemoteRepository {

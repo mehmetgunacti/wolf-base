@@ -1,10 +1,11 @@
-import { settingsActions } from '@actions';
+import { settingsActions } from '@actions/settings.actions';
 import { AsyncPipe } from '@angular/common';
 import { AfterContentInit, Component, inject } from '@angular/core';
 import { TagFormComponent } from '@forms/tag-form/tag-form.component';
-import { BaseComponent } from '@libComponents';
+import { BaseComponent } from '@libComponents/base.component';
 import { Store } from '@ngrx/store';
-import { selCore_pinnedNotes, selNote_distinctTagsArray } from '@selectors';
+import { selCore_pinnedNotes } from '@selectors/core/core-configuration.selectors';
+import { selNote_distinctTagsArray } from '@selectors/note/note-tags.selectors';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 
 @Component({

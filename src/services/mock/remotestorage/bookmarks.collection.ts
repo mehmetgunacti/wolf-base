@@ -1,5 +1,6 @@
-import { Bookmark, Click, RemoteData, RemoteMetadata } from '@models';
-import { BookmarksRemoteRepository } from '@repositories';
+import { Bookmark, Click } from '@models/bookmark.model';
+import { RemoteData, RemoteMetadata } from '@models/remote.model';
+import { BookmarksRemoteRepository } from '@repositories/remote/bookmark-remote.repository';
 import { Observable } from 'rxjs';
 
 export class VoidBookmarksCollection implements BookmarksRemoteRepository {

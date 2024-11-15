@@ -1,6 +1,6 @@
-import { IndexedDb } from '@libServices';
-import { LocalRepositoryNames } from 'lib/constants/database.constant';
-import { KeyValueRepository } from 'lib/repositories/local';
+import { LocalRepositoryNames } from '@constants/database.constant';
+import { IndexedDb } from '@libServices/indexeddb.service';
+import { KeyValueRepository } from '@repositories/local/key-value.repository';
 
 export class KeyValueLocalRepositoryImpl implements KeyValueRepository {
 

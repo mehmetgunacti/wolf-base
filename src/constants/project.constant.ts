@@ -1,4 +1,4 @@
-import { NameBase } from '@models';
+import { NameBase } from '@models/id-base.model';
 
 export const TAG_OPTIONAL = 'optional';
 
@@ -13,14 +13,14 @@ export enum ProjectStatus {
 
 export const ProjectStatusLabels: Record<string, string> = {
 
-	[ProjectStatus.ongoing]: 'Ongoing',
-	[ProjectStatus.paused]: 'On Hold',
-	[ProjectStatus.completed]: 'Completed',
-	[ProjectStatus.abandoned]: 'Abandoned'
+	[ ProjectStatus.ongoing ]: 'Ongoing',
+	[ ProjectStatus.paused ]: 'On Hold',
+	[ ProjectStatus.completed ]: 'Completed',
+	[ ProjectStatus.abandoned ]: 'Abandoned'
 
-}
+};
 
-export const PROJECT_STATUS: NameBase[] = Object.keys(ProjectStatusLabels).map(k => ({ id: k, name: ProjectStatusLabels[k] }));
+export const PROJECT_STATUS: NameBase[] = Object.keys(ProjectStatusLabels).map(k => ({ id: k, name: ProjectStatusLabels[ k ] }));
 
 export enum TaskState {
 
@@ -33,14 +33,14 @@ export enum TaskState {
 
 export const TaskStateLabels: Record<string, string> = {
 
-	[TaskState.ongoing]: 'Ongoing',
-	[TaskState.paused]: 'On Hold',
-	[TaskState.completed]: 'Completed',
-	[TaskState.abandoned]: 'Abandoned'
+	[ TaskState.ongoing ]: 'Ongoing',
+	[ TaskState.paused ]: 'On Hold',
+	[ TaskState.completed ]: 'Completed',
+	[ TaskState.abandoned ]: 'Abandoned'
 
-}
+};
 
-export const TASK_STATE: NameBase[] = Object.keys(TaskStateLabels).map(k => ({ id: k, name: TaskStateLabels[k] }));
+export const TASK_STATE: NameBase[] = Object.keys(TaskStateLabels).map(k => ({ id: k, name: TaskStateLabels[ k ] }));
 
 export enum TaskPriority {
 
@@ -52,13 +52,13 @@ export enum TaskPriority {
 
 export const TaskPriorityLabels: Record<string, string> = {
 
-	[TaskPriority.high]: 'High',
-	[TaskPriority.medium]: 'Medium',
-	[TaskPriority.low]: 'Low'
+	[ TaskPriority.high ]: 'High',
+	[ TaskPriority.medium ]: 'Medium',
+	[ TaskPriority.low ]: 'Low'
 
-}
+};
 
-export const TASK_PRIORITIES: NameBase[] = Object.keys(TaskPriorityLabels).map(k => ({ id: k, name: TaskPriorityLabels[k] }));
+export const TASK_PRIORITIES: NameBase[] = Object.keys(TaskPriorityLabels).map(k => ({ id: k, name: TaskPriorityLabels[ k ] }));
 
 export enum TaskCategory {
 
@@ -70,11 +70,11 @@ export enum TaskCategory {
 
 export const TaskCategoryLabels: Record<string, string> = {
 
-	[TaskCategory.bug]: 'Bug',
-	[TaskCategory.feature]: 'Feature',
-	[TaskCategory.improvement]: 'Improvement'
+	[ TaskCategory.bug ]: 'Bug',
+	[ TaskCategory.feature ]: 'Feature',
+	[ TaskCategory.improvement ]: 'Improvement'
 
-}
+};
 
-export const TASK_CATEGORIES: NameBase[] = Object.keys(TaskCategoryLabels).map(k => ({ id: k, name: TaskCategoryLabels[k] }));
+export const TASK_CATEGORIES: NameBase[] = Object.keys(TaskCategoryLabels).map(k => ({ id: k, name: TaskCategoryLabels[ k ] }));
 

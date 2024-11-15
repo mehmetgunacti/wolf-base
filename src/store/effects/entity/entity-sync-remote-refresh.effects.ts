@@ -1,12 +1,12 @@
+import { entityActions } from '@actions/entity.actions';
 import { inject, Injectable } from '@angular/core';
+import { AppEntityType } from '@constants/entity.constant';
+import { SyncService } from '@libServices/sync-service.interface';
+import { RemoteMetadata } from '@models/remote.model';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AppEntityType } from '@constants';
-import { RemoteMetadata } from '@models';
-import { SyncService } from '@libServices';
+import { SYNC_SERVICE } from '@services/sync.service';
 import { forkJoin, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { SYNC_SERVICE } from 'services';
-import { entityActions } from '@actions';
 
 interface Result {
 

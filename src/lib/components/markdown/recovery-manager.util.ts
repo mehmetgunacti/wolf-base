@@ -1,5 +1,5 @@
 import { Injectable, InjectionToken, Signal, WritableSignal, computed, signal } from '@angular/core';
-import { toDateObject } from '@utils';
+import { toDateObject } from '@utils/date-time.util';
 
 interface LSTimestamp {
 

@@ -1,5 +1,6 @@
+import { Note, NoteQueryParams } from '@models/note.model';
+import { Tag } from '@models/tag.model';
 import { createSelector } from '@ngrx/store';
-import { Note, NoteQueryParams, Tag } from '@models';
 import { selNote_EntityList } from '../entity/entity-note.selectors';
 import { selNote_UIState } from './note.selectors';
 

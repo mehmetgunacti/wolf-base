@@ -1,5 +1,5 @@
-import { AppEntityType } from '@constants';
-import { Task } from '@models';
+import { AppEntityType } from '@constants/entity.constant';
+import { Task } from '@models/project.model';
 import { createEntitySelectors } from '../entity/selectors-factory';
 
 export const {

@@ -1,5 +1,5 @@
-import { AppEntityType } from '@constants';
-import { Word } from '@models';
+import { AppEntityType } from '@constants/entity.constant';
+import { Word } from '@models/word.model';
 import { createEntitySelectors } from '../entity/selectors-factory';
 
 export const {

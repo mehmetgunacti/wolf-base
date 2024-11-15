@@ -1,5 +1,6 @@
+import { Bookmark, BookmarkQueryParams, ClickedBookmark } from '@models/bookmark.model';
+import { Tag } from '@models/tag.model';
 import { createSelector } from '@ngrx/store';
-import { Bookmark, BookmarkQueryParams, ClickedBookmark, Tag } from '@models';
 import { selBookmark_EntityList } from '../entity/entity-bookmark.selectors';
 import { selBookmark_array, selBookmark_clickedBookmarks } from './bookmark-clicks.selectors';
 import { selBookmark_UIState } from './bookmark.selectors';

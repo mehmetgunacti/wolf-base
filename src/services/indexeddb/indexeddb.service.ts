@@ -1,7 +1,9 @@
-import { DbStore, UUID } from '@constants';
-import { IndexedDb } from '@libServices';
-import { IdBase, IndexedDbConfiguration } from '@models';
-import { indexedDbConfiguration } from '@services';
+import { UUID } from '@constants/common.constant';
+import { DbStore } from '@constants/database.constant';
+import { IndexedDb } from '@libServices/indexeddb.service';
+import { IdBase } from '@models/id-base.model';
+import { IndexedDbConfiguration } from '@models/indexeddb.model';
+import { indexedDbConfiguration } from './wolfbase.database';
 
 function version(conf: IndexedDbConfiguration): number {
 

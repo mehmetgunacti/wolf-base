@@ -1,8 +1,10 @@
-import { AppEntityType } from '@constants';
-import { FirestoreConfig, Task } from '@models';
-import { TasksRemoteRepository } from '@repositories';
-import { FIRESTORE_VALUE, FirestoreConverter } from '@utils';
-import { FirestoreAPIClient } from '@utils';
+import { AppEntityType } from '@constants/entity.constant';
+import { FirestoreConfig } from '@models/configuration.model';
+import { Task } from '@models/project.model';
+import { TasksRemoteRepository } from '@repositories/remote/project-task-remote.repository';
+import { FirestoreAPIClient } from '@utils/firestore-rest-client/firestore-api.tool';
+import { FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
+import { FirestoreConverter } from '@utils/firestore-rest-client/firestore.model';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 import { NameBaseFirestoreConverter } from './name-base.collection';
 

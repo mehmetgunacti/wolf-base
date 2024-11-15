@@ -1,9 +1,9 @@
 import { Component, input, output } from '@angular/core';
-import { Table } from '@constants';
-import { GlyphDirective } from '@directives';
-import { BaseComponent } from '@libComponents';
-import { ModuleReport } from '@models';
-import { FormatBytesPipe } from '@pipes';
+import { Table } from '@constants/entity.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { ModuleReport } from '@models/database.model';
+import { FormatBytesPipe } from '@pipes/format-bytes.pipe';
 
 @Component({
 	standalone: true,

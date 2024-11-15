@@ -1,5 +1,5 @@
-import { UUID } from '@constants';
-import { IdBase } from '@models';
+import { UUID } from '@constants/common.constant';
+import { IdBase } from '@models/id-base.model';
 
 export interface TransactionManager {
 

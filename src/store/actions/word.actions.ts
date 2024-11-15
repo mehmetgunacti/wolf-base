@@ -1,6 +1,6 @@
+import { UUID } from '@constants/common.constant';
+import { WordQueryParams } from '@models/word.model';
 import { createActionGroup, props } from '@ngrx/store';
-import { UUID } from '@constants';
-import { WordQueryParams } from '@models';
 
 export const wordActions = createActionGroup({
 

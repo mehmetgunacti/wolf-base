@@ -1,6 +1,7 @@
+import { UUID } from '@constants/common.constant';
+import { LogCategory } from '@constants/log.constant';
+import { LogMessage } from '@models/log.model';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { LogCategory, UUID } from '@constants';
-import { LogMessage } from '@models';
 
 export const logActions = createActionGroup({
 

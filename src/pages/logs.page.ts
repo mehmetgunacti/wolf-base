@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '@libComponents';
 import { LogsFilterContainer } from '@containers/logs-filter.container';
 import { LogsContainer } from '@containers/logs/logs.container';
+import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	selector: 'logs-page',

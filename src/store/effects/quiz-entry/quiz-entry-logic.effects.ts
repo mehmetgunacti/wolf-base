@@ -1,11 +1,14 @@
+import { coreActions } from '@actions/core.actions';
+import { entityActions } from '@actions/entity.actions';
+import { quizEntryActions } from '@actions/quiz-entry.actions';
 import { inject, Injectable } from '@angular/core';
+import { AppEntityType } from '@constants/entity.constant';
+import { increase, next, Progress } from '@constants/quiz.constant';
+import { QuizEntry } from '@models/quiz.model';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { AppEntityType, increase, next, Progress } from '@constants';
-import { QuizEntry } from '@models';
+import { selQuizEntry_EntityList } from '@selectors/entity/entity-quiz-entry.selectors';
 import { map, withLatestFrom } from 'rxjs/operators';
-import { coreActions, entityActions, quizEntryActions } from '@actions';
-import { selQuizEntry_EntityList } from '@selectors';
 
 @Injectable()
 export class QuizEntryLogicEffects {

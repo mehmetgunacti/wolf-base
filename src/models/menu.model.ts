@@ -1,5 +1,5 @@
 import { IsActiveMatchOptions } from '@angular/router';
-import { GlyphName } from '@constants';
+import { GlyphName } from '@constants/glyphs.constant';
 
 export interface MenuItem {
 

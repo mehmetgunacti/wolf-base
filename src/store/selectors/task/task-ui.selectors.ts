@@ -1,6 +1,6 @@
+import { TaskPriority, TaskState } from '@constants/project.constant';
+import { Task, TaskQueryParams } from '@models/project.model';
 import { createSelector } from '@ngrx/store';
-import { TaskPriority, TaskState } from '@constants';
-import { Task, TaskQueryParams } from '@models';
 import { selTask_EntityList, selTask_EntityMap } from '../entity/entity-task.selectors';
 import { selTask_UIState } from './task.selectors';
 

@@ -1,5 +1,5 @@
-import { AppEntityType } from '@constants';
-import { Word } from '@models';
+import { AppEntityType } from '@constants/entity.constant';
+import { Word } from '@models/word.model';
 import * as sel from '../entity/entity-word.selectors';
 import { createSyncSelectors } from '../sync/selectors-factory';
 

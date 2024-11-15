@@ -1,12 +1,13 @@
-import { Injectable, inject } from '@angular/core';
+import { coreActions } from '@actions/core.actions';
+import { quoteActions } from '@actions/quote.actions';
+import { inject, Injectable } from '@angular/core';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { LocalRepositoryService } from '@libServices';
+import { selQuote_EntityIds } from '@selectors/entity/entity-quote.selectors';
+import { selQuoteViewer_running } from '@selectors/quote/quote-viewer.selectors';
+import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
 import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { LOCAL_REPOSITORY_SERVICE } from 'services';
-import { coreActions, quoteActions } from '@actions';
-import { selQuote_EntityIds } from '@selectors';
-import { selQuoteViewer_running } from '@selectors';
 
 @Injectable()
 export class QuoteViewerEffects {
@@ -26,18 +27,6 @@ export class QuoteViewerEffects {
 		{ dispatch: false }
 
 	);
-
-// 	setRunning$ = createEffect(
-//
-// 		() => this.actions$.pipe(
-//
-// 			ofType(coreActions.loadAllSuccess),
-// 			map(({ configuration }) => configuration.quotesRunning),
-// 			map(running => quoteActions.setRunning({ running }))
-//
-// 		)
-//
-// 	);
 
 	changeQuote$ = createEffect(
 

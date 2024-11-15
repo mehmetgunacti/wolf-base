@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { GlyphDirective } from '@directives';
-import { BaseComponent } from '@libComponents';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	selector: 'page-not-found-page',

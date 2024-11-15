@@ -1,5 +1,4 @@
-import { Project } from '@models';
+import { Project } from '@models/project.model';
 import { EntityRemoteRepository } from './entity-remote.repository';
 
-export interface ProjectsRemoteRepository extends EntityRemoteRepository<Project> {
-}
+export interface ProjectsRemoteRepository extends EntityRemoteRepository<Project> { }

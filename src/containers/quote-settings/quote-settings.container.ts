@@ -1,13 +1,16 @@
-import { entityActions, quoteActions } from '@actions';
+import { entityActions } from '@actions/entity.actions';
+import { quoteActions } from '@actions/quote.actions';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { QuoteSettingsListComponent } from '@components';
-import { AppEntityType, UUID } from '@constants';
-import { QuoteSettingsFormComponent } from '@forms';
-import { BaseComponent } from '@libComponents';
-import { Quote } from '@models';
+import { QuoteSettingsListComponent } from '@components/quote-settings-list/quote-settings-list.component';
+import { UUID } from '@constants/common.constant';
+import { AppEntityType } from '@constants/entity.constant';
+import { QuoteSettingsFormComponent } from '@forms/quote-settings-form/quote-settings-form.component';
+import { BaseComponent } from '@libComponents/base.component';
+import { Quote } from '@models/quote.model';
 import { Store } from '@ngrx/store';
-import { selQuote_EntityList, selQuoteSettings_selected } from '@selectors';
+import { selQuote_EntityList } from '@selectors/entity/entity-quote.selectors';
+import { selQuoteSettings_selected } from '@selectors/quote/quote-settings.selectors';
 import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 
 @Component({

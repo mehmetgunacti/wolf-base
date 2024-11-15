@@ -1,5 +1,5 @@
 import { computed, Directive, ElementRef, inject, input, OnInit } from '@angular/core';
-import { Glyphs } from '@constants';
+import { Glyphs } from '@constants/glyphs.constant';
 
 @Directive({
 	standalone: true,

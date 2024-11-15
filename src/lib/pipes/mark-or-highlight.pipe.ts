@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { maskOrHighlight } from '@utils';
+import { maskOrHighlight } from '@utils/string.util';
 
 @Pipe({ name: 'markHighlight', standalone: true })
 export class MarkOrHighlightPipe implements PipeTransform {

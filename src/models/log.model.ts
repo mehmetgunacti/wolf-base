@@ -1,4 +1,5 @@
-import { LogCategory, UUID } from '@constants';
+import { UUID } from '@constants/common.constant';
+import { LogCategory } from '@constants/log.constant';
 import { ISODateString } from './id-base.model';
 
 export interface LogMessage {

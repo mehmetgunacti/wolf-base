@@ -1,4 +1,4 @@
-import { NameBase } from '@models'
+import { NameBase } from '@models/id-base.model';
 
 export enum DefinitionLanguage {
 
@@ -10,13 +10,13 @@ export enum DefinitionLanguage {
 
 export const DefinitionLanguageLabels: Record<string, string> = {
 
-	[DefinitionLanguage.en]: 'English',
-	[DefinitionLanguage.de]: 'Deutsch',
-	[DefinitionLanguage.tr]: 'Türkçe'
+	[ DefinitionLanguage.en ]: 'English',
+	[ DefinitionLanguage.de ]: 'Deutsch',
+	[ DefinitionLanguage.tr ]: 'Türkçe'
 
-}
+};
 
-export const DEFINITION_LANGUAGES: NameBase[] = Object.keys(DefinitionLanguageLabels).map(k => ({ id: k, name: DefinitionLanguageLabels[k] }));
+export const DEFINITION_LANGUAGES: NameBase[] = Object.keys(DefinitionLanguageLabels).map(k => ({ id: k, name: DefinitionLanguageLabels[ k ] }));
 
 export enum DefinitionType {
 
@@ -28,10 +28,10 @@ export enum DefinitionType {
 
 export const DefinitionTypeLabels: Record<string, string> = {
 
-	[DefinitionType.verb]: 'Verb',
-	[DefinitionType.noun]: 'Noun',
-	[DefinitionType.adjective]: 'Adjective'
+	[ DefinitionType.verb ]: 'Verb',
+	[ DefinitionType.noun ]: 'Noun',
+	[ DefinitionType.adjective ]: 'Adjective'
 
-}
+};
 
-export const DEFINITION_TYPES: NameBase[] = Object.keys(DefinitionTypeLabels).map(k => ({ id: k, name: DefinitionTypeLabels[k] }));
+export const DEFINITION_TYPES: NameBase[] = Object.keys(DefinitionTypeLabels).map(k => ({ id: k, name: DefinitionTypeLabels[ k ] }));

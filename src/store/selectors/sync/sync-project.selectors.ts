@@ -1,5 +1,5 @@
-import { AppEntityType } from '@constants';
-import { Project } from '@models';
+import { AppEntityType } from '@constants/entity.constant';
+import { Project } from '@models/project.model';
 import * as sel from '../entity/entity-project.selectors';
 import { createSyncSelectors } from '../sync/selectors-factory';
 

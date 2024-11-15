@@ -1,6 +1,9 @@
+import { UUID } from '@constants/common.constant';
+import { AppEntityType } from '@constants/entity.constant';
+import { Entity } from '@models/entity.model';
+import { RemoteMetadata } from '@models/remote.model';
+import { SyncData } from '@models/sync.model';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { AppEntityType, UUID } from '@constants';
-import { Entity, RemoteMetadata, SyncData } from '@models';
 
 export const entityActions = createActionGroup({
 

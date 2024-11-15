@@ -1,12 +1,12 @@
-import { AppEntityType } from '@constants';
+import { AppEntityType } from '@constants/entity.constant';
 
 export function isEntityOfType(type: AppEntityType) {
 
-	return function <T extends { entityType: AppEntityType }>(params: T) {
+	return function <T extends { entityType: AppEntityType; }>(params: T) {
 
 		return params.entityType === type;
 
-	}
+	};
 
 }
 
@@ -57,10 +57,10 @@ export function formatBytes(bytes: number) {
 		return '0 Bytes';
 
 	const k = 1024;
-	const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+	const sizes = [ 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB' ];
 	const i = Math.floor(Math.log(bytes) / Math.log(k));
 
 	const f = parseFloat((bytes / Math.pow(k, i)).toFixed(2));
-	return f + ' ' + sizes[i];
+	return f + ' ' + sizes[ i ];
 
 }

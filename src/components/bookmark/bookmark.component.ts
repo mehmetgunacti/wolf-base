@@ -1,11 +1,11 @@
 import { Component, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CompactBookmarkComponent } from '@components/compact-bookmark/compact-bookmark.component';
-import { TAG_POPULAR, UUID } from '@constants';
-import { GlyphDirective } from '@directives';
-import { BaseComponent } from '@libComponents';
-import { ClickedBookmark } from '@models';
-
+import { TAG_POPULAR } from '@constants/bookmark.constant';
+import { UUID } from '@constants/common.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { ClickedBookmark } from '@models/bookmark.model';
 
 @Component({
 	standalone: true,

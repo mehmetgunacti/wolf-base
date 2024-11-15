@@ -1,26 +1,33 @@
+import { entityActions } from '@actions/entity.actions';
 import { Injectable, inject } from '@angular/core';
+import { AppEntityType } from '@constants/entity.constant';
+import { SyncService } from '@libServices/sync-service.interface';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { AppEntityType } from '@constants';
-import { SyncService } from '@libServices';
+import { selBookmark_LocalNew } from '@selectors/sync/sync-bookmark.selectors';
+import { selNoteContent_LocalNew } from '@selectors/sync/sync-note-content.selectors';
+import { selNote_LocalNew } from '@selectors/sync/sync-note.selectors';
+import { selProject_LocalNew } from '@selectors/sync/sync-project.selectors';
+import { selQuizEntry_LocalNew } from '@selectors/sync/sync-quiz-entry.selectors';
+import { selQuote_LocalNew } from '@selectors/sync/sync-quote.selectors';
+import { selTask_LocalNew } from '@selectors/sync/sync-task.selectors';
+import { selWord_LocalNew } from '@selectors/sync/sync-word.selectors';
+import { SYNC_SERVICE } from '@services/sync.service';
 import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { SYNC_SERVICE } from 'services';
-import { entityActions } from '@actions';
-import * as selectors from '@selectors';
 
 function useSelector(entityType: AppEntityType) {
 
 	switch (entityType) {
 
-		case AppEntityType.bookmark: return selectors.selBookmark_LocalNew;
-		case AppEntityType.note: return selectors.selNote_LocalNew;
-		case AppEntityType.noteContent: return selectors.selNoteContent_LocalNew;
-		case AppEntityType.project: return selectors.selProject_LocalNew;
-		case AppEntityType.quizEntry: return selectors.selQuizEntry_LocalNew;
-		case AppEntityType.quote: return selectors.selQuote_LocalNew;
-		case AppEntityType.task: return selectors.selTask_LocalNew;
-		case AppEntityType.word: return selectors.selWord_LocalNew;
+		case AppEntityType.bookmark: return selBookmark_LocalNew;
+		case AppEntityType.note: return selNote_LocalNew;
+		case AppEntityType.noteContent: return selNoteContent_LocalNew;
+		case AppEntityType.project: return selProject_LocalNew;
+		case AppEntityType.quizEntry: return selQuizEntry_LocalNew;
+		case AppEntityType.quote: return selQuote_LocalNew;
+		case AppEntityType.task: return selTask_LocalNew;
+		case AppEntityType.word: return selWord_LocalNew;
 
 	}
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '@libComponents';
+import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	selector: 'answers-page',

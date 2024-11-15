@@ -1,5 +1,5 @@
-import { AppEntityType } from '@constants';
-import { QuizEntry } from '@models';
+import { AppEntityType } from '@constants/entity.constant';
+import { QuizEntry } from '@models/quiz.model';
 import { createEntitySelectors } from '../entity/selectors-factory';
 
 export const {

@@ -1,12 +1,13 @@
-import { bookmarkActions } from '@actions';
+import { bookmarkActions } from '@actions/bookmark.actions';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { BookmarkComponent } from '@components/bookmark/bookmark.component';
-import { UUID } from '@constants';
-import { BaseComponent } from '@libComponents';
-import { ClickedBookmark } from '@models';
+import { UUID } from '@constants/common.constant';
+import { BaseComponent } from '@libComponents/base.component';
+import { ClickedBookmark } from '@models/bookmark.model';
 import { Store } from '@ngrx/store';
-import { selBM_filteredBookmarks, selBookmark_EntityCount } from '@selectors';
+import { selBM_filteredBookmarks } from '@selectors/bookmark/bookmark-tags.selectors';
+import { selBookmark_EntityCount } from '@selectors/entity/entity-bookmark.selectors';
 import { Observable, map } from 'rxjs';
 
 @Component({

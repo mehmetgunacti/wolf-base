@@ -1,6 +1,6 @@
+import { quoteActions } from '@actions/quote.actions';
 import { Action, createReducer, on } from '@ngrx/store';
-import { quoteActions } from '@actions';
-import { quote_initialViewerState, Quote_ViewerState } from '@states';
+import { quote_initialViewerState, Quote_ViewerState } from '@states/quote.state';
 
 const reducer = createReducer(
 

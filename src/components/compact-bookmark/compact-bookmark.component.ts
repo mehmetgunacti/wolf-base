@@ -1,8 +1,8 @@
 import { Component, input, output } from '@angular/core';
-import { GlyphDirective } from '@directives';
-import { BaseComponent } from '@libComponents';
-import { UUID } from 'lib/constants';
-import { ClickedBookmark } from 'lib/models';
+import { UUID } from '@constants/common.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { ClickedBookmark } from '@models/bookmark.model';
 
 @Component({
 	selector: 'app-compact-bookmark',

@@ -1,9 +1,10 @@
+import { coreActions } from '@actions/core.actions';
+import { entityActions } from '@actions/entity.actions';
 import { inject, Injectable } from '@angular/core';
+import { AppEntities, AppEntityType } from '@constants/entity.constant';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AppEntities, AppEntityType } from '@constants';
-import { isEntityOfType } from '@utils';
+import { isEntityOfType } from '@utils/helper.tool';
 import { filter, map } from 'rxjs/operators';
-import { coreActions, entityActions } from '@actions';
 
 @Injectable()
 export class WordUpdateEffects {

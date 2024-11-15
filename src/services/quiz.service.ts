@@ -1,10 +1,12 @@
 import { inject, Injectable } from '@angular/core';
+import { UUID } from '@constants/common.constant';
+import { NUMBER_OF_CHOICES } from '@constants/quiz.constant';
+import { Quiz, QuizEntry } from '@models/quiz.model';
+import { Word } from '@models/word.model';
 import { Store } from '@ngrx/store';
-import { NUMBER_OF_CHOICES, UUID } from '@constants';
-import { Quiz, QuizEntry, Word } from '@models';
+import { selQuiz_definitionIdWordMap, selQuiz_quizEntry } from '@selectors/quiz-entry/quiz.selectors';
 import { combineLatest, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { selQuiz_definitionIdWordMap, selQuiz_quizEntry } from '@selectors';
 
 @Injectable({
 	providedIn: 'root'

@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, Input, inject, input } from '@angular/core';
-import { SanitizeHtmlPipe } from '@pipes';
+import { AfterViewInit, Component, inject, input } from '@angular/core';
+import { SanitizeHtmlPipe } from '@pipes/sanitize-html.pipe';
 import { BaseComponent } from '../base.component';
 import { MarkdownToHtmlPipe } from './markdown-to-html.pipe';
 

@@ -1,5 +1,6 @@
-import { RemoteData, RemoteMetadata, Task } from '@models';
-import { TasksRemoteRepository } from '@repositories';
+import { Task } from '@models/project.model';
+import { RemoteData, RemoteMetadata } from '@models/remote.model';
+import { TasksRemoteRepository } from '@repositories/remote/project-task-remote.repository';
 import { Observable } from 'rxjs';
 
 export class VoidTasksCollection implements TasksRemoteRepository {

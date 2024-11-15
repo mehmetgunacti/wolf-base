@@ -1,7 +1,10 @@
-import { AppEntities, DbStore, ProjectStatus, UUID } from '@constants';
-import { IndexedDb } from '@libServices';
-import { Project } from '@models';
-import { ProjectLocalRepository } from '@repositories';
+import { UUID } from '@constants/common.constant';
+import { DbStore } from '@constants/database.constant';
+import { AppEntities } from '@constants/entity.constant';
+import { ProjectStatus } from '@constants/project.constant';
+import { IndexedDb } from '@libServices/indexeddb.service';
+import { Project } from '@models/project.model';
+import { ProjectLocalRepository } from '@repositories/local/project.repository';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';
 

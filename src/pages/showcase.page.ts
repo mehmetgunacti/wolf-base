@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '@libComponents';
 import { ShowcaseContainer } from '@containers/showcase/showcase.container';
+import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	standalone: true,

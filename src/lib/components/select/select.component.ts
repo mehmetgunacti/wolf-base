@@ -1,6 +1,6 @@
-import { Component, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
+import { Component, ElementRef, forwardRef, input, signal, viewChild, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NameBase } from '@models';
+import { NameBase } from '@models/id-base.model';
 import { BaseComponent } from '../base.component';
 
 @Component({
@@ -25,9 +25,9 @@ export class SelectComponent extends BaseComponent implements ControlValueAccess
 	private selectElement = viewChild.required<ElementRef<HTMLSelectElement>>('selectElement');
 
 	// Input
-	label: InputSignal<string> = input.required();
-	readonly: InputSignal<boolean> = input(false);
-	nodes: InputSignal<NameBase[]> = input.required<NameBase[]>();
+	label = input.required<string>();
+	readonly = input<boolean>(false);
+	nodes = input.required<NameBase[]>();
 
 	protected value: WritableSignal<string> = signal('');
 	protected disabled: WritableSignal<boolean> = signal(false);

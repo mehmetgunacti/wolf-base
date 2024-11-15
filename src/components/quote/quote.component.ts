@@ -1,12 +1,11 @@
 import { Component, input } from '@angular/core';
-import { GlyphDirective } from '@directives';
-import { BaseComponent } from '@libComponents';
-import { Quote } from '@models';
+import { BaseComponent } from '@libComponents/base.component';
+import { Quote } from '@models/quote.model';
 
 @Component({
 	selector: 'app-quote',
 	standalone: true,
-	imports: [ GlyphDirective ],
+	imports: [],
 	templateUrl: './quote.component.html',
 	host: {
 		'class': 'absolute inset-3 md:inset-4 grid overflow-y-auto scrollbar scrollbar-dark'

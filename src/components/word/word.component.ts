@@ -1,9 +1,10 @@
 import { Component, input, output } from '@angular/core';
 import { LanguagesComponent } from '@components/languages.component';
-import { UUID } from '@constants';
-import { BaseComponent, SwitchComponent } from '@libComponents';
-import { Definition, Word } from '@models';
-import { DefinitionTypePipe } from '@pipes';
+import { UUID } from '@constants/common.constant';
+import { BaseComponent } from '@libComponents/base.component';
+import { SwitchComponent } from '@libComponents/switch/switch.component';
+import { Definition, Word } from '@models/word.model';
+import { DefinitionTypePipe } from '@pipes/definition-type.pipe';
 
 @Component({
 	standalone: true,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { parseURL } from '@utils';
+import { parseURL } from '@utils/helper.tool';
 import { Observable, catchError, from, map, of } from 'rxjs';
 
 const errorMessage = 'Clipboard access is not supported by this browser.<br>Please try a different browser or check if the browser is up-to-date.';

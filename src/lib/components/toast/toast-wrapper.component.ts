@@ -11,7 +11,6 @@ import { ToastConfiguration } from './toast.util';
 	standalone: true,
 	selector: 'w-toast-wrapper',
 	templateUrl: './toast-wrapper.component.html',
-	styleUrl: './toast-wrapper.component.scss',
 	imports: [ CommonModule, ToastComponent ],
 	animations: [ toastTrigger ]
 })

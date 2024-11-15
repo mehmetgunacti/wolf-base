@@ -1,7 +1,8 @@
-import { Component, InputSignal, input } from '@angular/core';
-import { BaseComponent, MarkdownViewerComponent } from '@libComponents';
-import { Note, NoteContent } from '@models';
-import { HideEnumPipe } from '@pipes';
+import { Component, input } from '@angular/core';
+import { BaseComponent } from '@libComponents/base.component';
+import { MarkdownViewerComponent } from '@libComponents/markdown/markdown-viewer.component';
+import { Note, NoteContent } from '@models/note.model';
+import { HideEnumPipe } from '@pipes/hide-enum.pipe';
 
 @Component({
 	standalone: true,
@@ -14,7 +15,7 @@ import { HideEnumPipe } from '@pipes';
 })
 export class NoteContentComponent extends BaseComponent {
 
-	note: InputSignal<Note | null> = input.required();
-	content: InputSignal<NoteContent | null> = input.required();
+	note = input.required<Note | null>();
+	content = input.required<NoteContent | null>();
 
 }

@@ -1,9 +1,12 @@
-import { AppEntities, DbStore, LogCategory } from '@constants';
-import { IndexedDb } from '@libServices';
-import { Note, NoteContent, SyncData } from '@models';
-import { toggleArrayItem } from '@utils';
-import { UUID } from 'lib/constants/common.constant';
-import { NotesLocalRepository } from 'lib/repositories/local';
+import { UUID } from '@constants/common.constant';
+import { DbStore } from '@constants/database.constant';
+import { AppEntities } from '@constants/entity.constant';
+import { LogCategory } from '@constants/log.constant';
+import { IndexedDb } from '@libServices/indexeddb.service';
+import { Note, NoteContent } from '@models/note.model';
+import { SyncData } from '@models/sync.model';
+import { NotesLocalRepository } from '@repositories/local/note.repository';
+import { toggleArrayItem } from '@utils/array.util';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';
 

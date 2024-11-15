@@ -1,6 +1,7 @@
+import { TAG_PINNED } from '@constants/bookmark.constant';
+import { UUID } from '@constants/common.constant';
+import { Note } from '@models/note.model';
 import { createSelector } from '@ngrx/store';
-import { TAG_PINNED, UUID } from '@constants';
-import { Note } from '@models';
 import { selNote_EntityList, selNote_EntityMap } from '../entity/entity-note.selectors';
 import { selNote_UIState } from './note.selectors';
 

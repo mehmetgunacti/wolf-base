@@ -1,5 +1,5 @@
-import { AppEntityType } from '@constants';
-import { Note } from '@models';
+import { AppEntityType } from '@constants/entity.constant';
+import { Note } from '@models/note.model';
 import { createEntitySelectors } from '../entity/selectors-factory';
 
 export const {

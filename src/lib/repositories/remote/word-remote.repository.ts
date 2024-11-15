@@ -1,5 +1,4 @@
-import { Word } from '@models';
+import { Word } from '@models/word.model';
 import { EntityRemoteRepository } from './entity-remote.repository';
 
-export interface WordsRemoteRepository extends EntityRemoteRepository<Word> {
-}
+export interface WordsRemoteRepository extends EntityRemoteRepository<Word> { }

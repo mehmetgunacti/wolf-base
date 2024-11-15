@@ -1,12 +1,15 @@
+import { bookmarkActions } from '@actions/bookmark.actions';
+import { coreActions } from '@actions/core.actions';
+import { entityActions } from '@actions/entity.actions';
 import { inject, Injectable } from '@angular/core';
+import { TAG_NEW } from '@constants/bookmark.constant';
+import { AppEntities, AppEntityType } from '@constants/entity.constant';
+import { Bookmark } from '@models/bookmark.model';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AppEntities, AppEntityType, TAG_NEW } from '@constants';
-import { Bookmark } from '@models';
-import { isEntityOfType } from '@utils';
+import { ClipboardService } from '@services/clipboard.service';
+import { isEntityOfType } from '@utils/helper.tool';
 import { concat, of, timer } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { ClipboardService } from 'services';
-import { bookmarkActions, coreActions, entityActions } from '@actions';
 
 // note: timer value (600) has to be ~ as in lib/components/_shake.scss
 const fromClipboardFailure$ = concat(
@@ -34,10 +37,10 @@ export class BookmarkEntityCreateEffects {
 					return fromClipboardFailure$;
 				const bookmark: Partial<Bookmark> = {
 
-					urls: [url.toString()],
+					urls: [ url.toString() ],
 					title: url.hostname,
 					name: url.hostname,
-					tags: [TAG_NEW]
+					tags: [ TAG_NEW ]
 
 				};
 				return of(entityActions.create({ entityType: AppEntityType.bookmark, entity: bookmark }));
@@ -54,7 +57,7 @@ export class BookmarkEntityCreateEffects {
 
 			ofType(entityActions.createSuccess),
 			filter(isEntityOfType(AppEntityType.bookmark)),
-			map(({ entityType }) => coreActions.showNotification({ severity: 'success', detail: `${AppEntities[entityType].label} created` }))
+			map(({ entityType }) => coreActions.showNotification({ severity: 'success', detail: `${AppEntities[ entityType ].label} created` }))
 
 		)
 
@@ -66,7 +69,7 @@ export class BookmarkEntityCreateEffects {
 
 			ofType(entityActions.createSuccess),
 			filter(isEntityOfType(AppEntityType.bookmark)),
-			map(({ entity, entityType }) => coreActions.navigate({ url: [`/${AppEntities[entityType].plural}`], queryParams: { id: entity.id } }))
+			map(({ entity, entityType }) => coreActions.navigate({ url: [ `/${AppEntities[ entityType ].plural}` ], queryParams: { id: entity.id } }))
 
 		)
 

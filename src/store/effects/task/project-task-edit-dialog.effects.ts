@@ -1,9 +1,8 @@
-import { Dialog, DialogRef } from '@angular/cdk/dialog';
-import { Injectable, inject } from '@angular/core';
+import { entityActions } from '@actions/entity.actions';
+import { taskActions } from '@actions/project-task.actions';
+import { Dialog } from '@angular/cdk/dialog';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-// import { TaskEditFormContainerComponent } from 'modules/project/containers/task-edit-form-container/task-edit-form-container.component';
-import { map } from 'rxjs';
-import { entityActions, taskActions } from '@actions';
 
 @Injectable()
 export class TaskEditEffects {

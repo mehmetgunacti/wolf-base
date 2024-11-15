@@ -1,11 +1,12 @@
+import { coreActions } from '@actions/core.actions';
+import { databaseActions } from '@actions/database.actions';
 import { inject, Injectable } from '@angular/core';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LocalRepositoryService } from '@libServices';
-import { BackupDatabase } from '@utils';
+import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
+import { BackupDatabase } from '@utils/database.util';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { LOCAL_REPOSITORY_SERVICE } from 'services';
-import { coreActions, databaseActions } from '@actions';
 
 @Injectable()
 export class DatabaseEffects {

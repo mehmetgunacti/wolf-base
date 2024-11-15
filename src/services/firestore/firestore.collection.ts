@@ -1,10 +1,13 @@
-import { AppEntities, AppEntityType, UUID } from '@constants';
-import { FirestoreConfig, RemoteData, RemoteMetadata } from '@models';
-import { Entity } from '@models';
-import { EntityRemoteRepository } from '@repositories';
-import { FIRESTORE_VALUE, FirestoreBatchGetURL, FirestoreConverter, FirestoreCreateURL, FirestoreDocumentURL, FirestoreDTO, FirestoreListURL, FirestorePatchURL } from '@utils';
-import { FirestoreAPIClient } from '@utils';
-import { Observable, map } from 'rxjs';
+import { UUID } from '@constants/common.constant';
+import { AppEntities, AppEntityType } from '@constants/entity.constant';
+import { FirestoreConfig } from '@models/configuration.model';
+import { Entity } from '@models/entity.model';
+import { RemoteData, RemoteMetadata } from '@models/remote.model';
+import { EntityRemoteRepository } from '@repositories/remote/entity-remote.repository';
+import { FirestoreAPIClient } from '@utils/firestore-rest-client/firestore-api.tool';
+import { FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
+import { FirestoreBatchGetURL, FirestoreConverter, FirestoreCreateURL, FirestoreDocumentURL, FirestoreDTO, FirestoreListURL, FirestorePatchURL } from '@utils/firestore-rest-client/firestore.model';
+import { map, Observable } from 'rxjs';
 
 export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> implements EntityRemoteRepository<T> {
 
@@ -17,7 +20,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 		protected entity: AppEntityType,
 		protected converter: FirestoreConverter<T>
 	) {
-		this.collection = AppEntities[entity].plural;
+		this.collection = AppEntities[ entity ].plural;
 	}
 
 	upload(item: T): Observable<RemoteMetadata> {
@@ -48,7 +51,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 			map(dto => dto ? this.toRemoteData(dto) : null)
 
-		)
+		);
 
 	}
 
@@ -79,7 +82,7 @@ export abstract class FirestoreRemoteStorageCollectionImpl<T extends Entity> imp
 
 			map(dto => dto ? this.toRemoteMetadata(dto) : null)
 
-		)
+		);
 
 	}
 

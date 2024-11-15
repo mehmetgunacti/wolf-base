@@ -1,5 +1,5 @@
-import { UUID } from '@constants';
-import { HasParentId } from '@models';
+import { UUID } from '@constants/common.constant';
+import { HasParentId } from '@models/entity.model';
 
 export const ROOT_ID = 'ROOT_ID';
 
@@ -20,7 +20,7 @@ export const toTreeItems = (entries: HasParentId[]): Record<UUID, TreeItem> => {
 		(dictionary, entry) => {
 
 			const item: TreeItem = { value: entry, parent: null, children: [], icon: null };
-			dictionary[entry.id] = item;
+			dictionary[ entry.id ] = item;
 			return dictionary;
 
 		},
@@ -35,11 +35,11 @@ export const toTreeItems = (entries: HasParentId[]): Record<UUID, TreeItem> => {
 		if (e.parentId) {
 
 			// lookup parent
-			const parent = dictionary[e.parentId];
+			const parent = dictionary[ e.parentId ];
 			if (parent) {
 
 				// lookup node
-				const node = dictionary[e.id];
+				const node = dictionary[ e.id ];
 				if (node) {
 
 					parent.children.push(node);
@@ -51,7 +51,7 @@ export const toTreeItems = (entries: HasParentId[]): Record<UUID, TreeItem> => {
 
 		}
 
-	})
+	});
 	return dictionary;
 
-}
+};

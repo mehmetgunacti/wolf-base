@@ -1,12 +1,11 @@
 import { Component, input, output } from '@angular/core';
-import { MenuItem } from '@models';
 import { BaseComponent } from '../base.component';
+import { MenuItem } from '@models/menu.model';
 
 @Component({
 	selector: 'w-breadcrumb',
 	standalone: true,
 	templateUrl: './breadcrumb.component.html',
-	styleUrls: [ './breadcrumb.component.scss' ],
 	host: { 'class': 'box dark' }
 })
 export class BreadcrumbComponent extends BaseComponent {

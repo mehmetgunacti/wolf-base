@@ -1,8 +1,9 @@
+import { coreActions } from '@actions/core.actions';
 import { Injectable, inject } from '@angular/core';
+import { ToastService } from '@libComponents/toast/toast.service';
+import { ToastConfiguration } from '@libComponents/toast/toast.util';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ToastConfiguration, ToastService } from '@libComponents';
 import { tap } from 'rxjs/operators';
-import { coreActions } from '@actions';
 
 @Injectable()
 export class CoreNotificationEffects {

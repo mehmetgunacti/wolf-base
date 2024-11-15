@@ -1,8 +1,8 @@
+import { projectActions } from '@actions/project.actions';
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { filter, map, tap, withLatestFrom } from 'rxjs';
-import { projectActions } from '@actions';
+import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 @Injectable()
 export class ProjectUIEffects {
@@ -18,7 +18,7 @@ export class ProjectUIEffects {
 
 			ofType(projectActions.search),
 			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([{ term }, params]) => {
+			tap(([ { term }, params ]) => {
 
 				// term: user just entered a search term
 				// term is an empty string when user empties search box
@@ -49,11 +49,11 @@ export class ProjectUIEffects {
 			filter(e => {
 
 				const after = e.urlAfterRedirects;
-				return after.startsWith('/projects') && !after.startsWith('/projects/')
+				return after.startsWith('/projects') && !after.startsWith('/projects/');
 
 			}),
 			withLatestFrom(this.activatedRoute.queryParamMap),
-			map(([, paramMap]) =>
+			map(([ , paramMap ]) =>
 
 				projectActions.setQueryParams({
 

@@ -1,6 +1,6 @@
+import { UUID } from '@constants/common.constant';
+import { ProjectQueryParams } from '@models/project.model';
 import { createActionGroup, props } from '@ngrx/store';
-import { UUID } from '@constants';
-import { ProjectQueryParams } from '@models';
 
 export const projectActions = createActionGroup({
 

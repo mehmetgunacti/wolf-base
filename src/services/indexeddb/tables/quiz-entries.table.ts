@@ -1,7 +1,10 @@
-import { AppEntities, DbStore, Progress, UUID } from '@constants';
-import { IndexedDb } from '@libServices';
-import { QuizEntry } from '@models';
-import { QuizEntryLocalRepository } from '@repositories';
+import { UUID } from '@constants/common.constant';
+import { DbStore } from '@constants/database.constant';
+import { AppEntities } from '@constants/entity.constant';
+import { Progress } from '@constants/quiz.constant';
+import { IndexedDb } from '@libServices/indexeddb.service';
+import { QuizEntry } from '@models/quiz.model';
+import { QuizEntryLocalRepository } from '@repositories/local/quiz-entry.repository';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
 export class QuizEntriesLocalRepositoryImpl extends EntityLocalRepositoryImpl<QuizEntry> implements QuizEntryLocalRepository {

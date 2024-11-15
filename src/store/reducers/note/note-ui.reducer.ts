@@ -1,7 +1,7 @@
+import { noteActions } from '@actions/note.actions';
 import { Action, createReducer, on } from '@ngrx/store';
+import { initialNoteUIState, Note_UIState } from '@states/note.state';
 import { produce } from 'immer';
-import { noteActions } from '@actions';
-import { Note_UIState, initialNoteUIState } from '@states';
 
 const reducer = createReducer(
 

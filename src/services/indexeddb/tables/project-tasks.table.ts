@@ -1,10 +1,13 @@
-import { AppEntities, DbStore, TaskCategory, TaskPriority, TaskState, UUID } from '@constants';
-import { IndexedDb } from '@libServices';
-import { emptyNameBase, Task } from '@models';
-import { TaskLocalRepository } from '@repositories';
+import { UUID } from '@constants/common.constant';
+import { DbStore } from '@constants/database.constant';
+import { AppEntities } from '@constants/entity.constant';
+import { TaskCategory, TaskPriority, TaskState } from '@constants/project.constant';
+import { IndexedDb } from '@libServices/indexeddb.service';
+import { emptyNameBase } from '@models/id-base.model';
+import { Task } from '@models/project.model';
+import { TaskLocalRepository } from '@repositories/local/project-task.repository';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';
-
 
 export class TasksLocalRepositoryImpl extends EntityLocalRepositoryImpl<Task> implements TaskLocalRepository {
 

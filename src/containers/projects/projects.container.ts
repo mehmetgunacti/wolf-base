@@ -1,9 +1,9 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { GlyphDirective } from '@directives';
-import { BaseComponent } from '@libComponents';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
 import { Store } from '@ngrx/store';
-import { selProject_filtered } from '@selectors';
+import { selProject_filtered } from '@selectors/project/project-ui.selectors';
 
 @Component({
 	standalone: true,

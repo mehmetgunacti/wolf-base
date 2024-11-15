@@ -1,14 +1,17 @@
-import { bookmarkActions } from '@actions';
+import { bookmarkActions } from '@actions/bookmark.actions';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { slideUpDownTrigger } from '@animations';
-import { TAG_POPULAR } from '@constants';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, SelectedTagsComponent, TagCloudComponent } from '@libComponents';
-import { Tag } from '@models';
+import { slideUpDownTrigger } from '@animations/slide-in-out.animation';
+import { TAG_POPULAR } from '@constants/bookmark.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { SelectedTagsComponent } from '@libComponents/selected-tags/selected-tags.component';
+import { TagCloudComponent } from '@libComponents/tag-cloud/tag-cloud.component';
+import { Tag } from '@models/tag.model';
 import { Store } from '@ngrx/store';
-import { selBM_distinctTagsArray, selBM_QueryParams, selBM_relatedTags, selCore_popularBookmarks } from '@selectors';
+import { selBM_distinctTagsArray, selBM_QueryParams, selBM_relatedTags } from '@selectors/bookmark/bookmark-tags.selectors';
+import { selCore_popularBookmarks } from '@selectors/core/core-configuration.selectors';
 import { debounceTime, distinctUntilChanged, map, Observable, Subscription } from 'rxjs';
 
 @Component({

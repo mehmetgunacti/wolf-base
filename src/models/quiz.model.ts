@@ -1,5 +1,5 @@
 import { signal } from '@angular/core';
-import { Progress, QuestionType } from '@constants';
+import { Progress, QuestionType } from '@constants/quiz.constant';
 import { Entity } from './entity.model';
 import { Definition, Word } from './word.model';
 
@@ -13,7 +13,7 @@ function shuffle(array: Word[]): Word[] {
 	for (let i = array.length - 1; i > 0; i--) {
 
 		const j = Math.floor(Math.random() * (i + 1));
-		[array[i], array[j]] = [array[j], array[i]];
+		[ array[ i ], array[ j ] ] = [ array[ j ], array[ i ] ];
 
 	}
 	return array;
@@ -54,10 +54,10 @@ export class Quiz {
 		public askWord: boolean
 	) {
 
-		this.word = words[0];
-		this.definition = words[0].definitions[0];
+		this.word = words[ 0 ];
+		this.definition = words[ 0 ].definitions[ 0 ];
 
-		this.choices = [...shuffle(words)]; // [...words].sort(() => Math.random() - 0.5); // shuffle
+		this.choices = [ ...shuffle(words) ]; // [...words].sort(() => Math.random() - 0.5); // shuffle
 		this.correctIndex = this.choices.findIndex(w => w.id === this.word.id);
 
 	}

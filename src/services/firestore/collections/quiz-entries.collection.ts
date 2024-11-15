@@ -1,8 +1,10 @@
-import { AppEntityType } from '@constants';
-import { FirestoreConfig, QuizEntry } from '@models';
-import { QuizEntriesRemoteRepository } from '@repositories';
-import { FIRESTORE_VALUE, FirestoreConverter } from '@utils';
-import { FirestoreAPIClient } from '@utils';
+import { AppEntityType } from '@constants/entity.constant';
+import { FirestoreConfig } from '@models/configuration.model';
+import { QuizEntry } from '@models/quiz.model';
+import { QuizEntriesRemoteRepository } from '@repositories/remote/quiz-entry-remote.repository';
+import { FirestoreAPIClient } from '@utils/firestore-rest-client/firestore-api.tool';
+import { FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
+import { FirestoreConverter } from '@utils/firestore-rest-client/firestore.model';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 
 export class QuizEntriesFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<QuizEntry> implements QuizEntriesRemoteRepository {

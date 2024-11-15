@@ -1,19 +1,24 @@
-import { quizEntryActions } from '@actions';
+import { quizEntryActions } from '@actions/quiz-entry.actions';
 import { AnimationEvent } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal, Signal, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { quoteChangeTrigger, slideChoicesTrigger } from '@animations';
+import { quoteChangeTrigger } from '@animations/quote-change.animation';
+import { slideChoicesTrigger } from '@animations/slide-in-out.animation';
 import { LanguagesComponent } from '@components/languages.component';
 import { WordComponent } from '@components/word/word.component';
-import { QuizVisibility, UUID } from '@constants';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, ModalComponent } from '@libComponents';
-import { AnimState, Quiz, Word } from '@models';
+import { UUID } from '@constants/common.constant';
+import { QuizVisibility } from '@constants/quiz.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { ModalComponent } from '@libComponents/modal/modal.component';
+import { AnimState, Quiz } from '@models/quiz.model';
+import { Word } from '@models/word.model';
 import { Store } from '@ngrx/store';
-import { MarkOrHighlightPipe } from '@pipes';
-import { selQuiz_answer, selQuiz_dueItemsCount, selQuiz_visibility } from '@selectors';
-import { QuizService } from '@services';
+import { MarkOrHighlightPipe } from '@pipes/mark-or-highlight.pipe';
+import { selQuiz_visibility } from '@selectors/quiz-entry/quiz-entry-ui.selectors';
+import { selQuiz_answer, selQuiz_dueItemsCount } from '@selectors/quiz-entry/quiz.selectors';
+import { QuizService } from '@services/quiz.service';
 import { choicesBlinkTrigger } from './quiz.animation';
 
 @Component({
@@ -29,7 +34,7 @@ export class QuizContainerComponent extends BaseComponent {
 	QuizVisibility = QuizVisibility;
 
 	private store: Store = inject(Store);
-	private quizService: QuizService = inject(QuizService);
+	private quizService = inject(QuizService);
 
 	protected quiz: Signal<Quiz | null>;
 	protected visibility: Signal<QuizVisibility>;

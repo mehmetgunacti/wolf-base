@@ -1,5 +1,6 @@
-import { QuizEntry, RemoteData, RemoteMetadata } from '@models';
-import { QuizEntriesRemoteRepository } from '@repositories';
+import { QuizEntry } from '@models/quiz.model';
+import { RemoteData, RemoteMetadata } from '@models/remote.model';
+import { QuizEntriesRemoteRepository } from '@repositories/remote/quiz-entry-remote.repository';
 import { Observable } from 'rxjs';
 
 export class VoidQuizEntriesCollection implements QuizEntriesRemoteRepository {

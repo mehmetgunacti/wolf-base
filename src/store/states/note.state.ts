@@ -1,5 +1,5 @@
-import { UUID } from '@constants';
-import { NoteContent, NoteQueryParams } from '@models';
+import { UUID } from '@constants/common.constant';
+import { NoteContent, NoteQueryParams } from '@models/note.model';
 
 export interface Note_ModuleState {
 

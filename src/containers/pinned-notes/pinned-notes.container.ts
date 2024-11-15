@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { CompactNoteComponent } from '@components/compact-note/compact-note.component';
-import { BaseComponent, TagsContainerComponent } from '@libComponents';
+import { BaseComponent } from '@libComponents/base.component';
+import { TagsContainerComponent } from '@libComponents/tags-container/tags-container.component';
 import { Store } from '@ngrx/store';
-import { compareISODateStrings } from '@utils';
+import { selCore_pinnedNotes } from '@selectors/core/core-configuration.selectors';
+import { selNote_pinnedArray } from '@selectors/note/note-ui.selectors';
+import { compareISODateStrings } from '@utils/date-time.util';
 import { map } from 'rxjs';
-import * as coreSelectors from 'store/selectors/core/core-configuration.selectors';
-import * as noteSelectors from 'store/selectors/note/note-ui.selectors';
 
 @Component({
 	selector: 'app-pinned-notes-container',
@@ -19,8 +20,8 @@ export class PinnedNotesContainer extends BaseComponent {
 
 	private store: Store = inject(Store);
 
-	protected tags = this.store.selectSignal(coreSelectors.selCore_pinnedNotes);
-	protected notes$ = this.store.select(noteSelectors.selNote_pinnedArray).pipe(
+	protected tags = this.store.selectSignal(selCore_pinnedNotes);
+	protected notes$ = this.store.select(selNote_pinnedArray).pipe(
 		map(notes => notes.sort((n1, n2) => compareISODateStrings(n1.modified, n2.modified)))
 	);
 

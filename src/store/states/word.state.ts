@@ -1,5 +1,5 @@
-import { UUID } from '@constants';
-import { WordQueryParams } from '@models';
+import { UUID } from '@constants/common.constant';
+import { WordQueryParams } from '@models/word.model';
 
 export interface Word_ModuleState {
 

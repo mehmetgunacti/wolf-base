@@ -1,11 +1,11 @@
+import { coreActions } from '@actions/core.actions';
 import { Component, inject } from '@angular/core';
-import { BaseComponent } from '@libComponents';
+import { BaseComponent } from '@libComponents/base.component';
 import { Store } from '@ngrx/store';
-import { coreActions } from 'store/actions';
 
 @Component({
-	selector: 'app-nav-overlay',
 	standalone: true,
+	selector: 'app-nav-overlay',
 	template: '',
 	host: {
 		'(click)': 'onClick()',

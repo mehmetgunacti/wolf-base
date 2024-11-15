@@ -1,16 +1,16 @@
+import { coreActions } from '@actions/core.actions';
 import { Component, inject, Signal } from '@angular/core';
-import { GlyphDirective } from '@directives';
-import { BaseComponent } from '@libComponents';
-import { CloudTask } from '@models';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { CloudTask } from '@models/cloud.model';
 import { Store } from '@ngrx/store';
-import { selCloudAvailableTasks } from '@selectors';
+import { selCloudAvailableTasks } from '@selectors/cloud/cloud.selectors';
 import { environment } from 'environments/environment';
-import { coreActions } from 'store/actions';
 
 @Component({
-	selector: 'app-header',
 	standalone: true,
 	imports: [ GlyphDirective ],
+	selector: 'app-header',
 	templateUrl: './header.component.html',
 	host: {
 		'class': 'flex items-center justify-between'

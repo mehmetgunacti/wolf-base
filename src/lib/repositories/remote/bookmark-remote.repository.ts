@@ -1,4 +1,4 @@
-import { Bookmark, Click } from '@models';
+import { Bookmark, Click } from '@models/bookmark.model';
 import { Observable } from 'rxjs';
 import { EntityRemoteRepository } from './entity-remote.repository';
 

@@ -1,5 +1,4 @@
-import { NoteContent } from '@models';
+import { NoteContent } from '@models/note.model';
 import { EntityRemoteRepository } from './entity-remote.repository';
 
-export interface NoteContentRemoteRepository extends EntityRemoteRepository<NoteContent> {
-}
+export interface NoteContentRemoteRepository extends EntityRemoteRepository<NoteContent> { }

@@ -1,9 +1,10 @@
-import { logActions } from '@actions';
+import { logActions } from '@actions/logs.actions';
 import { Component, inject, output } from '@angular/core';
-import { UUID } from '@constants';
-import { BaseComponent, SearchBoxComponent } from '@libComponents';
+import { UUID } from '@constants/common.constant';
+import { BaseComponent } from '@libComponents/base.component';
+import { SearchBoxComponent } from '@libComponents/search-box/search-box.component';
 import { Store } from '@ngrx/store';
-import { selProject_search } from '@selectors';
+import { selProject_search } from '@selectors/project/project-ui.selectors';
 
 @Component({
 	standalone: true,

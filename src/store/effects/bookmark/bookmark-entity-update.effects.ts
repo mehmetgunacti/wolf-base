@@ -1,8 +1,10 @@
-import { bookmarkActions, coreActions, entityActions } from '@actions';
+import { bookmarkActions } from '@actions/bookmark.actions';
+import { coreActions } from '@actions/core.actions';
+import { entityActions } from '@actions/entity.actions';
 import { inject, Injectable } from '@angular/core';
-import { AppEntities, AppEntityType } from '@constants';
+import { AppEntities, AppEntityType } from '@constants/entity.constant';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { isEntityOfType } from '@utils';
+import { isEntityOfType } from '@utils/helper.tool';
 import { filter, map } from 'rxjs/operators';
 
 @Injectable()

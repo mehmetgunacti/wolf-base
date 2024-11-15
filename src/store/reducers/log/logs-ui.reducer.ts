@@ -1,7 +1,7 @@
+import { logActions } from '@actions/logs.actions';
 import { Action, createReducer, on } from '@ngrx/store';
+import { initialLogsUIState, Logs_UIState } from '@states/logs.state';
 import { produce } from 'immer';
-import { logActions } from '@actions';
-import { Logs_UIState, initialLogsUIState } from '@states';
 
 const reducer = createReducer(
 

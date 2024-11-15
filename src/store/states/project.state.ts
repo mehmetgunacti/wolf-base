@@ -1,5 +1,5 @@
-import { UUID } from '@constants';
-import { ProjectQueryParams } from '@models';
+import { UUID } from '@constants/common.constant';
+import { ProjectQueryParams } from '@models/project.model';
 
 export interface Project_ModuleState {
 

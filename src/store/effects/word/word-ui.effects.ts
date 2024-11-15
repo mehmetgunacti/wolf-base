@@ -1,10 +1,10 @@
-import { Injectable, inject } from '@angular/core';
+import { wordActions } from '@actions/word.actions';
+import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LocalRepositoryService } from '@libServices';
-import { filter, map, tap, withLatestFrom } from 'rxjs';
-import { LOCAL_REPOSITORY_SERVICE } from 'services';
-import { wordActions } from '@actions';
+import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
+import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 @Injectable()
 export class WordUIEffects {

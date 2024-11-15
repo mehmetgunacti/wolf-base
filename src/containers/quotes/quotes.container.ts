@@ -1,12 +1,12 @@
-import { quoteActions } from '@actions';
+import { quoteActions } from '@actions/quote.actions';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, signal, Signal, WritableSignal } from '@angular/core';
 import { QuoteComponent } from '@components/quote/quote.component';
-import { GlyphDirective } from '@directives';
-import { BaseComponent } from '@libComponents';
-import { Quote } from '@models';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { Quote } from '@models/quote.model';
 import { Store } from '@ngrx/store';
-import { selQuote_SelectedEntity, selQuoteViewer_animate, selQuoteViewer_running } from '@selectors';
+import { selQuote_SelectedEntity, selQuoteViewer_animate, selQuoteViewer_running } from '@selectors/quote/quote-viewer.selectors';
 import { concatMap, filter, iif, Observable, of, scan, switchMap, take, tap, timer } from 'rxjs';
 
 interface Pair {
@@ -33,9 +33,9 @@ const incoming$ = (pair: Pair, animate: boolean, store: Store): Observable<Quote
 };
 
 @Component({
-	selector: 'app-quotes-container',
 	standalone: true,
 	imports: [ QuoteComponent, GlyphDirective, AsyncPipe ],
+	selector: 'app-quotes-container',
 	templateUrl: './quotes.container.html',
 	host: {
 		'class': 'relative block p-3 md:p-4 comp comp-dark min-h-40 text-content @container group'

@@ -1,7 +1,7 @@
-import { coreActions } from '@actions';
+import { coreActions } from '@actions/core.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
-import { errorNotification, ToastConfiguration } from '@libComponents';
+import { errorNotification, ToastConfiguration } from '@libComponents/toast/toast.util';
 import { Store } from '@ngrx/store';
 
 @Injectable()

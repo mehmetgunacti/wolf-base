@@ -1,13 +1,15 @@
-import { databaseActions } from '@actions';
+import { databaseActions } from '@actions/database.actions';
 import { Component, computed, inject } from '@angular/core';
-import { opacityTrigger } from '@animations';
+import { opacityTrigger } from '@animations/opacity.animation';
 import { ModuleReportComponent } from '@components/module-report/module-report.component';
-import { GlyphDirective } from '@directives';
-import { AlertComponent, BaseComponent, PortalComponent } from '@libComponents';
-import { ModuleReport } from '@models';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { AlertComponent } from '@libComponents/alert/alert.component';
+import { BaseComponent } from '@libComponents/base.component';
+import { PortalComponent } from '@libComponents/portal.component';
+import { ModuleReport } from '@models/database.model';
 import { Store } from '@ngrx/store';
-import { FormatBytesPipe } from '@pipes';
-import { selDatabase_Report } from '@selectors';
+import { FormatBytesPipe } from '@pipes/format-bytes.pipe';
+import { selDatabase_Report } from '@selectors/database/database.selectors';
 
 @Component({
 	standalone: true,

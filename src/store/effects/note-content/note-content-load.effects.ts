@@ -1,9 +1,9 @@
-import { Injectable, inject } from '@angular/core';
+import { noteActions } from '@actions/note.actions';
+import { inject, Injectable } from '@angular/core';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LocalRepositoryService } from '@libServices';
+import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { LOCAL_REPOSITORY_SERVICE } from 'services';
-import { noteActions } from '@actions';
 
 @Injectable()
 export class NoteContentLoadEffects {

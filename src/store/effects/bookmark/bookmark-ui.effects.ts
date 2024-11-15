@@ -1,16 +1,17 @@
+import { bookmarkActions } from '@actions/bookmark.actions';
+import { entityActions } from '@actions/entity.actions';
 import { Dialog } from '@angular/cdk/dialog';
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
+import { TAG_POPULAR } from '@constants/bookmark.constant';
+import { AppEntityType } from '@constants/entity.constant';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { LOCAL_REPOSITORY_SERVICE } from 'services';
-import { AppEntityType, TAG_POPULAR } from '@constants';
-import { LocalRepositoryService } from '@libServices';
-import { commaSplit, toggleArrayItem } from '@utils';
-// import { BookmarkEditContainerComponent } from 'modules/bookmark/containers/bookmark-edit-container/bookmark-edit-container.component';
+import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
+import { commaSplit, toggleArrayItem } from '@utils/array.util';
 import { from } from 'rxjs';
 import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { bookmarkActions, entityActions } from '@actions';
 
 @Injectable()
 export class BookmarkUIEffects {
@@ -22,46 +23,13 @@ export class BookmarkUIEffects {
 	private router: Router = inject(Router);
 	private dialogService: Dialog = inject(Dialog);
 
-// 	// private dialogRef: DialogRef<null, BookmarkEditContainerComponent> | null = null;
-//
-// 	openAddBookmarkDialog$ = createEffect(
-//
-// 		() => this.actions$.pipe(
-//
-// 			ofType(bookmarkActions.openAddBookmarkDialog, bookmarkActions.openEditBookmarkDialog),
-// 			// map(() => {
-// 			// 	this.dialogRef = this.dialogService.open(BookmarkEditContainerComponent);
-// 			// })
-//
-// 		),
-// 		{ dispatch: false }
-//
-// 	);
-//
-// 	closeEditBookmarkDialog$ = createEffect(
-//
-// 		() => this.actions$.pipe(
-//
-// 			ofType(
-// 				bookmarkActions.closeEditBookmarkDialog,
-// 				entityActions.createSuccess,
-// 				entityActions.updateSuccess,
-// 				entityActions.moveToTrashSuccess
-// 			),
-// 			// map(() => this.dialogRef?.close())
-//
-// 		),
-// 		{ dispatch: false }
-//
-// 	);
-
 	onTagClickSetURLQueryParam$ = createEffect(
 
 		() => this.actions$.pipe(
 
 			ofType(bookmarkActions.clickTag),
 			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([{ name }, params]) => {
+			tap(([ { name }, params ]) => {
 
 				// Destructure 'tags' from query parameters
 				const { tags, ...rest } = params;
@@ -88,7 +56,7 @@ export class BookmarkUIEffects {
 
 			ofType(bookmarkActions.emptySelectedTags),
 			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([_, params]) => {
+			tap(([ _, params ]) => {
 
 				// Destructure 'tags' from query parameters
 				const { tags, ...queryParams } = params;
@@ -110,7 +78,7 @@ export class BookmarkUIEffects {
 
 			ofType(bookmarkActions.search),
 			withLatestFrom(this.activatedRoute.queryParams),
-			tap(([{ term }, params]) => {
+			tap(([ { term }, params ]) => {
 
 				// term: user just entered a search term
 				// term is an empty string when user empties search box
@@ -140,7 +108,7 @@ export class BookmarkUIEffects {
 			filter((e): e is NavigationEnd => e instanceof NavigationEnd),
 			filter(e => e.urlAfterRedirects.startsWith('/bookmarks')),
 			withLatestFrom(this.activatedRoute.queryParamMap),
-			map(([, paramMap]) =>
+			map(([ , paramMap ]) =>
 
 				bookmarkActions.setQueryParams({
 

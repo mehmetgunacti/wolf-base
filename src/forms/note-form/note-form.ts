@@ -1,8 +1,8 @@
 import { InjectionToken } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UUID } from '@constants';
-import { Note } from '@models';
-import { fc, fg, nnfc } from '@utils';
+import { UUID } from '@constants/common.constant';
+import { Note } from '@models/note.model';
+import { fc, fg, nnfc } from '@utils/form.util';
 
 interface NoteFormSchema {
 

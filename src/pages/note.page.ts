@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '@libComponents';
 import { NoteContainer } from '@containers/note/note.container';
+import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	standalone: true,

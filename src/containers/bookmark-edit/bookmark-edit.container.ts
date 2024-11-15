@@ -1,13 +1,19 @@
-import { bookmarkActions, coreActions, entityActions } from '@actions';
+import { bookmarkActions } from '@actions/bookmark.actions';
+import { coreActions } from '@actions/core.actions';
+import { entityActions } from '@actions/entity.actions';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { AppEntityType, UUID } from '@constants';
-import { GlyphDirective } from '@directives';
+import { UUID } from '@constants/common.constant';
+import { AppEntityType } from '@constants/entity.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
 import { BookmarkForm } from '@forms/bookmark/bookmark.form';
-import { BaseComponent, ToastConfiguration } from '@libComponents';
-import { Bookmark } from '@models';
+import { BaseComponent } from '@libComponents/base.component';
+import { ToastConfiguration } from '@libComponents/toast/toast.util';
+import { Bookmark } from '@models/bookmark.model';
 import { Store } from '@ngrx/store';
-import { selBM_distinctTagsArray, selBookmark_editId, selCore_titleLookupUrl } from '@selectors';
+import { selBM_distinctTagsArray } from '@selectors/bookmark/bookmark-tags.selectors';
+import { selBookmark_editId } from '@selectors/bookmark/bookmark-ui.selectors';
+import { selCore_titleLookupUrl } from '@selectors/core/core-configuration.selectors';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 
 @Component({

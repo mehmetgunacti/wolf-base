@@ -1,7 +1,8 @@
-import { AppEntityType, UUID } from '@constants';
-import { Entity } from '@models';
+import { UUID } from '@constants/common.constant';
+import { AppEntityType } from '@constants/entity.constant';
+import { Entity } from '@models/entity.model';
 import { createSelector } from '@ngrx/store';
-import { Entity_EntitiesState } from '@states';
+import { Entity_EntitiesState } from '@states/entity.state';
 import { selEntity_ModuleState } from './entity.selectors';
 
 export function createEntitySelectors<T extends Entity>(entityType: AppEntityType) {

@@ -1,7 +1,8 @@
 import { Component, effect, input, output, untracked } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, InputTagComponent } from '@libComponents';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { InputTagComponent } from '@libComponents/input-tag/input-tag.component';
 
 @Component({
 	standalone: true,

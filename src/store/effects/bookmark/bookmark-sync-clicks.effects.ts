@@ -1,11 +1,12 @@
+import { bookmarkActions } from '@actions/bookmark.actions';
+import { entityActions } from '@actions/entity.actions';
 import { Injectable, inject } from '@angular/core';
+import { BookmarkSyncService } from '@libServices/sync-service.interface';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BookmarkSyncService } from '@libServices';
+import { selBookmark_clicked } from '@selectors/bookmark/bookmark-clicks.selectors';
+import { BOOKMARK_SYNC_SERVICE } from '@services/sync.service';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { BOOKMARK_SYNC_SERVICE } from 'services';
-import { bookmarkActions, entityActions } from '@actions';
-import { selBookmark_clicked } from '@selectors';
 
 @Injectable()
 export class BookmarkSyncClicksEffects {

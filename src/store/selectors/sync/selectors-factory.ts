@@ -1,6 +1,10 @@
+import { UUID } from '@constants/common.constant';
+import { AppEntityType } from '@constants/entity.constant';
+import { CloudTask, SyncTaskType, toCloudTask } from '@models/cloud.model';
+import { Entity } from '@models/entity.model';
+import { RemoteMetadata } from '@models/remote.model';
+import { SyncData } from '@models/sync.model';
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import { AppEntityType, UUID } from '@constants';
-import { CloudTask, Entity, RemoteMetadata, SyncData, SyncTaskType, toCloudTask } from '@models';
 import * as filterFn from './filter-functions.util';
 
 export function createSyncSelectors<T extends Entity>(

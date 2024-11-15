@@ -1,19 +1,21 @@
-import { bookmarkActions } from '@actions';
+import { bookmarkActions } from '@actions/bookmark.actions';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, ModalComponent, PortalComponent } from '@libComponents';
-import { Store } from '@ngrx/store';
-import { selBookmark_formVisible, selBookmark_shaking } from '@selectors';
 import { BookmarkEditContainer } from '@containers/bookmark-edit/bookmark-edit.container';
 import { BookmarksSearchAndTagCloudContainer } from '@containers/bookmarks-search-and-tag-cloud/bookmarks-search-and-tag-cloud.container';
 import { BookmarksContainer } from '@containers/bookmarks/bookmarks.container';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { ModalComponent } from '@libComponents/modal/modal.component';
+import { PortalComponent } from '@libComponents/portal.component';
+import { Store } from '@ngrx/store';
+import { selBookmark_formVisible, selBookmark_shaking } from '@selectors/bookmark/bookmark-ui.selectors';
 import { SearchBoxComponent } from "../lib/components/search-box/search-box.component";
 
 @Component({
-	selector: 'bookmarks-page',
 	standalone: true,
 	imports: [ PortalComponent, GlyphDirective, AsyncPipe, ModalComponent, BookmarkEditContainer, BookmarksSearchAndTagCloudContainer, BookmarksContainer, SearchBoxComponent ],
+	selector: 'bookmarks-page',
 	template: `
 		<w-portal>
 

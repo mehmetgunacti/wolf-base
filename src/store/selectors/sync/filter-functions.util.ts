@@ -1,5 +1,7 @@
-import { UUID } from '@constants';
-import { NameBase, RemoteMetadata, SyncData } from '@models';
+import { UUID } from '@constants/common.constant';
+import { NameBase } from '@models/id-base.model';
+import { RemoteMetadata } from '@models/remote.model';
+import { SyncData } from '@models/sync.model';
 
 // LOCAL NEW
 export function listOf_LocalNew(entities: NameBase[], syncDataMap: Record<UUID, SyncData>): NameBase[] {

@@ -1,10 +1,10 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { GlyphDirective } from '@directives';
-import { BaseComponent } from '@libComponents';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
 import { Store } from '@ngrx/store';
-import { TimePastPipe } from '@pipes';
-import { selLogs_allEntries } from '@selectors';
+import { TimePastPipe } from '@pipes/time-past.pipe';
+import { selLogs_allEntries } from '@selectors/log/logs.selectors';
 
 @Component({
 	standalone: true,

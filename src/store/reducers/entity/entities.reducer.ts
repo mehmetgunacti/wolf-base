@@ -1,16 +1,19 @@
+import { coreActions } from '@actions/core.actions';
+import { entityActions } from '@actions/entity.actions';
+import { UUID } from '@constants/common.constant';
+import { AppEntityType } from '@constants/entity.constant';
+import { Entity } from '@models/entity.model';
+import { RemoteMetadata } from '@models/remote.model';
+import { SyncData } from '@models/sync.model';
 import { Action, createReducer, on } from '@ngrx/store';
+import { entity_initialState, Entity_ModuleState } from '@states/entity.state';
 import { produce } from 'immer';
-import { AppEntityType, UUID } from '@constants';
-import { Entity, RemoteMetadata, SyncData } from '@models';
-import { coreActions, entityActions } from '@actions';
-import { entity_initialState, Entity_ModuleState } from '@states';
 
 function reduceEntities(data: Entity[]): Record<UUID, Entity> {
 
 	return data.reduce((record, e) => { record[ e.id ] = e; return record; }, {} as Record<UUID, Entity>);
 
 }
-
 
 function reduceSyncData(data: SyncData[]): Record<UUID, SyncData> {
 

@@ -1,8 +1,9 @@
-import { SidebarState, Theme } from '@constants';
-import { IndexedDb } from '@libServices';
-import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalRepositoryNames } from 'lib/constants/database.constant';
-import { Configuration, FirestoreConfig } from 'lib/models/configuration.model';
-import { ConfigurationLocalRepository } from 'lib/repositories/local';
+import { CONF_KEYS, DEFAULT_CONF_VALUES, LocalRepositoryNames } from '@constants/database.constant';
+import { SidebarState } from '@constants/sidebar.constant';
+import { Theme } from '@constants/theme.constant';
+import { IndexedDb } from '@libServices/indexeddb.service';
+import { Configuration, FirestoreConfig } from '@models/configuration.model';
+import { ConfigurationLocalRepository } from '@repositories/local/configuration.repository';
 import { KeyValueLocalRepositoryImpl } from './key-value.table';
 
 export class ConfigurationLocalRepositoryImpl extends KeyValueLocalRepositoryImpl implements ConfigurationLocalRepository {

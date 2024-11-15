@@ -1,5 +1,6 @@
-import { UUID } from '@constants';
-import { QuizEntry, Word } from '@models';
+import { UUID } from '@constants/common.constant';
+import { QuizEntry } from '@models/quiz.model';
+import { Word } from '@models/word.model';
 import { createSelector } from '@ngrx/store';
 import { produce } from 'immer';
 import { selCore_now } from '../core/core-ui.selectors';

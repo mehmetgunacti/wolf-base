@@ -1,12 +1,12 @@
+import { coreActions } from '@actions/core.actions';
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { LocalRepositoryService } from '@libServices';
+import { selCore_theme } from '@selectors/core/core-ui.selectors';
+import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
 import { switchMap, tap } from 'rxjs/operators';
-import { LOCAL_REPOSITORY_SERVICE } from 'services';
-import { coreActions } from '@actions';
-import { selCore_theme } from '@selectors';
 
 @Injectable()
 export class CoreThemeEffects {

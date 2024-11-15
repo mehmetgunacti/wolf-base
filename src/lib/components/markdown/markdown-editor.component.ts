@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, TemplateRef, effect, forwardRef, inject, input, output, signal, untracked, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { GlyphDirective } from '@directives';
-import { TimePastPipe } from '@pipes';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { TimePastPipe } from '@pipes/time-past.pipe';
+import { ClipboardService } from '@services/clipboard.service';
 import { Subject, debounceTime, distinctUntilChanged, take, timer } from 'rxjs';
-import { ClipboardService } from 'services';
 import { BaseComponent } from '../base.component';
 import { ModalComponent } from '../modal/modal.component';
 import { SelectorTableComponent } from '../selector-table/selector-table.component';
@@ -96,7 +96,7 @@ export class MarkdownEditorComponent extends BaseComponent implements ControlVal
 	protected showPreview = signal<boolean>(false);
 	protected showRecover = signal<boolean>(false);
 
-	private clipboardService: ClipboardService = inject(ClipboardService);
+	private clipboardService = inject(ClipboardService);
 
 	constructor() {
 

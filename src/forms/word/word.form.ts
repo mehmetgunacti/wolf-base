@@ -1,10 +1,14 @@
 import { Component, computed, effect, inject, input, output, untracked } from '@angular/core';
-import { DEFINITION_LANGUAGES, DEFINITION_TYPES, UUID } from '@constants';
-import { BaseComponent, InputComponent, SelectComponent, TextareaComponent } from '@libComponents';
-import { Word } from '@models';
-import { WORD_FORM, WordForm } from './word-form';
 import { ReactiveFormsModule } from '@angular/forms';
-import { GlyphDirective } from '@directives';
+import { UUID } from '@constants/common.constant';
+import { DEFINITION_LANGUAGES, DEFINITION_TYPES } from '@constants/word.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { InputComponent } from '@libComponents/input/input.component';
+import { SelectComponent } from '@libComponents/select/select.component';
+import { TextareaComponent } from '@libComponents/textarea/textarea.component';
+import { Word } from '@models/word.model';
+import { WORD_FORM, WordForm } from './word-form';
 
 @Component({
 	standalone: true,

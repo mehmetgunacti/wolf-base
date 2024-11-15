@@ -1,5 +1,5 @@
+import { FirestoreConfig } from '@models/configuration.model';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { FirestoreConfig } from '@models';
 
 export const settingsActions = createActionGroup({
 

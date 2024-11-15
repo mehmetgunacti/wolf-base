@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, forwardRef, input, model, ModelSignal, signal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { GlyphName } from '@constants';
-import { GlyphDirective } from '@directives';
+import { GlyphName } from '@constants/glyphs.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '../base.component';
 
 @Component({

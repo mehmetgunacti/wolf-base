@@ -1,5 +1,6 @@
-import { TaskState, UUID } from '@constants';
-import { TaskQueryParams } from '@models';
+import { UUID } from '@constants/common.constant';
+import { TaskState } from '@constants/project.constant';
+import { TaskQueryParams } from '@models/project.model';
 
 export interface Task_ModuleState {
 

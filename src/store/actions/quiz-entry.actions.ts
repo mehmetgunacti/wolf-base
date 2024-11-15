@@ -1,5 +1,5 @@
-import { UUID } from '@constants';
-import { Word } from '@models';
+import { UUID } from '@constants/common.constant';
+import { Word } from '@models/word.model';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 export const quizEntryActions = createActionGroup({

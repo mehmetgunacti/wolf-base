@@ -1,7 +1,7 @@
+import { cloudActions } from '@actions/cloud.actions';
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
+import { CloudModuleState, initialCloudState } from '@states/cloud.state';
 import { produce } from 'immer';
-import { cloudActions } from '@actions';
-import { CloudModuleState, initialCloudState } from '@states';
 
 const hideConflictDialog = (state: CloudModuleState): CloudModuleState => {
 
@@ -18,9 +18,9 @@ const hideConflictDialog = (state: CloudModuleState): CloudModuleState => {
 			draft.conflictDialogTitle = null;
 
 		}
-	)
+	);
 
-}
+};
 
 export const cloudReducer: ActionReducer<CloudModuleState, Action> = createReducer(
 
@@ -94,7 +94,7 @@ export const cloudReducer: ActionReducer<CloudModuleState, Action> = createReduc
 				draft.conflictDialogVisible = false;
 
 			}
-		)
+		);
 
 	})
 

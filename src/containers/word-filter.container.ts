@@ -1,8 +1,9 @@
-import { wordActions } from '@actions';
+import { wordActions } from '@actions/word.actions';
 import { Component, inject, output } from '@angular/core';
-import { BaseComponent, SearchBoxComponent } from '@libComponents';
+import { BaseComponent } from '@libComponents/base.component';
+import { SearchBoxComponent } from '@libComponents/search-box/search-box.component';
 import { Store } from '@ngrx/store';
-import { selWord_search } from '@selectors';
+import { selWord_search } from '@selectors/word/word-ui.selectors';
 
 @Component({
 	standalone: true,

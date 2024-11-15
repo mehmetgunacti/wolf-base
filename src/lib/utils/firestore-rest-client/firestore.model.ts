@@ -1,6 +1,6 @@
-import { UUID } from '@constants';
+import { UUID } from '@constants/common.constant';
+import { FirestoreConfig } from '@models/configuration.model';
 import { FIRESTORE_INTEGER, FIRESTORE_VALUE } from './firestore.constant';
-import { FirestoreConfig } from '@models';
 
 export class FirestoreCreateURL {
 
@@ -101,7 +101,7 @@ export class FirestoreBatchGetURL {
 
 			documents: this.ids.map(id => `projects/${projectId}/databases/(default)/documents/${this.collection}/${id}`)
 
-		}
+		};
 
 	}
 
@@ -121,7 +121,7 @@ export class FirestoreIncreaseURL {
 	toURL(): string {
 
 		const { baseURL, projectId, apiKey } = this.firestoreConfig;
-		return `${baseURL}projects/${projectId}/databases/(default)/documents${this.command}?key=${apiKey}`
+		return `${baseURL}projects/${projectId}/databases/(default)/documents${this.command}?key=${apiKey}`;
 
 	}
 
@@ -192,7 +192,7 @@ export interface FirestoreWrites {
 
 			}[];
 
-		}
+		};
 
 	}[];
 	transaction?: string;
@@ -202,7 +202,7 @@ export interface FirestoreWrites {
 export interface FirestoreWriteResult {
 
 	writeResults: {
-		transformResults: FIRESTORE_INTEGER[]
+		transformResults: FIRESTORE_INTEGER[];
 	}[];
 
 }
@@ -223,6 +223,6 @@ export interface FirestoreBatchGetRequestBody {
 
 export interface FirestoreBatchGetResponse<T> {
 
-	found: FirestoreDocument<T>
+	found: FirestoreDocument<T>;
 
 }

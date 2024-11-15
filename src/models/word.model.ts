@@ -1,4 +1,5 @@
-import { DefinitionLanguage, DefinitionType, UUID } from '@constants';
+import { UUID } from '@constants/common.constant';
+import { DefinitionLanguage, DefinitionType } from '@constants/word.constant';
 import { Entity } from './entity.model';
 import { IdBase } from './id-base.model';
 

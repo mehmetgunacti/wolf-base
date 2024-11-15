@@ -1,7 +1,7 @@
-import { noteActions } from '@actions';
+import { noteActions } from '@actions/note.actions';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
-import { UUID } from '@constants';
+import { UUID } from '@constants/common.constant';
 import { Store } from '@ngrx/store';
 import { Observable, of, tap } from 'rxjs';
 

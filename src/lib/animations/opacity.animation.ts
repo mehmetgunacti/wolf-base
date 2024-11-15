@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { sidebarConf } from '@constants';
+import { sidebarConf } from '@constants/sidebar.constants';
 
 // default duration hard-coded to sidebar duration
 const { duration, anim } = sidebarConf;

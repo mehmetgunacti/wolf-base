@@ -1,8 +1,9 @@
 import { Component, effect, input, output, untracked } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, InputComponent } from '@libComponents';
-import { FirestoreConfig } from '@models';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { InputComponent } from '@libComponents/input/input.component';
+import { FirestoreConfig } from '@models/configuration.model';
 import { configForm } from './firestore-config-form';
 
 @Component({

@@ -1,6 +1,6 @@
+import { databaseActions } from '@actions/database.actions';
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import { databaseActions } from '@actions';
 import { DatabaseModuleState, initialDatabaseState } from 'store/states/database.state';
 
 export const databaseReducer: ActionReducer<DatabaseModuleState, Action> = createReducer(

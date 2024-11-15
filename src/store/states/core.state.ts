@@ -1,5 +1,7 @@
-import { DEFAULT_CONF_VALUES, SidebarState, Theme } from '@constants';
-import { FirestoreConfig } from '@models';
+import { DEFAULT_CONF_VALUES } from '@constants/database.constant';
+import { SidebarState } from '@constants/sidebar.constant';
+import { Theme } from '@constants/theme.constant';
+import { FirestoreConfig } from '@models/configuration.model';
 
 export interface CoreModuleState {
 

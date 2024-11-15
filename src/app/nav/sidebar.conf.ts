@@ -1,5 +1,6 @@
-import { TAG_PINNED, TAG_POPULAR } from '@constants';
-import { CloudTask, MenuItem } from '@models';
+import { TAG_PINNED, TAG_POPULAR } from '@constants/bookmark.constant';
+import { CloudTask } from '@models/cloud.model';
+import { MenuItem } from '@models/menu.model';
 
 export const miHome: MenuItem = {
 	url: [ '/' ],

@@ -1,5 +1,5 @@
+import { Project } from '@models/project.model';
 import { createSelector } from '@ngrx/store';
-import { Project } from '@models';
 import { selProject_EntityList, selProject_EntityMap } from '../entity/entity-project.selectors';
 import { selTask_filteredTasks } from '../task/task-ui.selectors';
 import { selProject_UIState } from './project.selectors';

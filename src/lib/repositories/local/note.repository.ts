@@ -1,5 +1,5 @@
-import { UUID } from '@constants';
-import { Note } from '@models';
+import { UUID } from '@constants/common.constant';
+import { Note } from '@models/note.model';
 import { EntityLocalRepository } from './entity.repository';
 
 export interface NotesLocalRepository extends EntityLocalRepository<Note> {

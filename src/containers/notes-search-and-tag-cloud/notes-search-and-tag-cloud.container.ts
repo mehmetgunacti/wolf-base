@@ -1,14 +1,17 @@
-import { noteActions } from '@actions';
+import { noteActions } from '@actions/note.actions';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { slideUpDownTrigger } from '@animations';
-import { TAG_PINNED } from '@constants';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, SelectedTagsComponent, TagCloudComponent } from '@libComponents';
-import { Tag } from '@models';
+import { slideUpDownTrigger } from '@animations/slide-in-out.animation';
+import { TAG_PINNED } from '@constants/bookmark.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { SelectedTagsComponent } from '@libComponents/selected-tags/selected-tags.component';
+import { TagCloudComponent } from '@libComponents/tag-cloud/tag-cloud.component';
+import { Tag } from '@models/tag.model';
 import { Store } from '@ngrx/store';
-import { selCore_pinnedNotes, selNote_distinctTagsArray, selNote_queryParams, selNote_relatedTags } from '@selectors';
+import { selCore_pinnedNotes } from '@selectors/core/core-configuration.selectors';
+import { selNote_distinctTagsArray, selNote_queryParams, selNote_relatedTags } from '@selectors/note/note-tags.selectors';
 import { debounceTime, distinctUntilChanged, map, Observable, Subscription } from 'rxjs';
 
 @Component({

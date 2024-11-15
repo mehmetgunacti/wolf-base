@@ -1,5 +1,5 @@
-import { UUID } from '@constants';
-import { checkNonEmptyArray, checkString } from '@utils';
+import { UUID } from '@constants/common.constant';
+import { checkNonEmptyArray, checkString } from '@utils/validators';
 import { AbstractEntity, Entity } from './entity.model';
 import { IdBase, NameBase } from './id-base.model';
 

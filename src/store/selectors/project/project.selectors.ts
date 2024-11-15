@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Project_ModuleState } from '@states';
+import { Project_ModuleState } from '@states/project.state';
 
 const selProject_ModuleState = createFeatureSelector<Project_ModuleState>('project');
 

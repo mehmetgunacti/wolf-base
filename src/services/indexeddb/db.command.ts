@@ -1,4 +1,4 @@
-import { DbStore } from '@constants';
+import { DbStore } from '@constants/database.constant';
 
 export interface Command {
 	execute(vce: IDBVersionChangeEvent): void;

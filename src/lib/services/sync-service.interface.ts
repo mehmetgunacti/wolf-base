@@ -1,5 +1,7 @@
-import { AppEntityType } from '@constants';
-import { Click, NameBase, RemoteMetadata } from '@models';
+import { AppEntityType } from '@constants/entity.constant';
+import { Click } from '@models/bookmark.model';
+import { NameBase } from '@models/id-base.model';
+import { RemoteMetadata } from '@models/remote.model';
 import { Observable } from 'rxjs';
 
 export interface SyncService {

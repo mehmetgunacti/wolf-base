@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { Quote_ViewerState } from '@states';
+import { Quote_ViewerState } from '@states/quote.state';
 import { selQuote_EntityMap } from '../entity/entity-quote.selectors';
 import { selQuote_ViewerState } from './quote.selectors';
 

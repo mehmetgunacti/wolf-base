@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { GlyphName } from '@constants';
-import { GlyphDirective } from '@directives';
-import { BaseComponent } from '@libComponents';
+import { GlyphName } from '@constants/glyphs.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	selector: 'w-tags-container',

@@ -1,10 +1,11 @@
+import { taskActions } from '@actions/project-task.actions';
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
+import { TaskCategory, TaskState } from '@constants/project.constant';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { TaskCategory, TaskState } from '@constants';
-import { commaSplit, findEnumValue, toggleArrayItem } from '@utils';
-import { filter, map, tap, withLatestFrom } from 'rxjs';
-import { taskActions } from '@actions';
+import { commaSplit, toggleArrayItem } from '@utils/array.util';
+import { findEnumValue } from '@utils/enum.util';
+import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 @Injectable()
 export class TaskUIEffects {

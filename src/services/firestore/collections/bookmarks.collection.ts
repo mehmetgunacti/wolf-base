@@ -1,9 +1,11 @@
-import { AppEntities, AppEntityType, UUID } from '@constants';
-import { FirestoreConfig } from '@models';
-import { Bookmark, Click } from '@models';
-import { BookmarksRemoteRepository } from '@repositories';
-import { FIRESTORE_VALUE, FirestoreConverter, FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL } from '@utils';
-import { FirestoreAPIClient } from '@utils';
+import { UUID } from '@constants/common.constant';
+import { AppEntities, AppEntityType } from '@constants/entity.constant';
+import { Bookmark, Click } from '@models/bookmark.model';
+import { FirestoreConfig } from '@models/configuration.model';
+import { BookmarksRemoteRepository } from '@repositories/remote/bookmark-remote.repository';
+import { FirestoreAPIClient } from '@utils/firestore-rest-client/firestore-api.tool';
+import { FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
+import { FirestoreConverter, FirestoreDTO, FirestoreIncreaseURL, FirestoreListURL } from '@utils/firestore-rest-client/firestore.model';
 import { Observable, concatMap, from, map } from 'rxjs';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 

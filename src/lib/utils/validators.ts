@@ -1,5 +1,5 @@
-import { UUID } from '@constants';
-import { IdBase } from '@models';
+import { UUID } from '@constants/common.constant';
+import { IdBase } from '@models/id-base.model';
 import { v4 as uuidv4 } from 'uuid';
 
 export function assertIDBase(value: unknown): asserts value is IdBase {

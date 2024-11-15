@@ -6,7 +6,6 @@ import { ToastConfiguration } from './toast.util';
 	standalone: true,
 	selector: 'w-toast',
 	templateUrl: './toast.component.html',
-	styleUrls: [ './toast.component.scss' ],
 	host: {
 		'[tabindex]': '0',
 		'[class]': 'severity()'

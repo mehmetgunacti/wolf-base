@@ -1,7 +1,10 @@
-import { AppEntities, DbStore, UUID } from '@constants';
-import { IndexedDb } from '@libServices';
-import { Note, NoteContent, SyncData } from '@models';
-import { NoteContentLocalRepository } from 'lib/repositories/local';
+import { UUID } from '@constants/common.constant';
+import { DbStore } from '@constants/database.constant';
+import { AppEntities } from '@constants/entity.constant';
+import { IndexedDb } from '@libServices/indexeddb.service';
+import { Note, NoteContent } from '@models/note.model';
+import { SyncData } from '@models/sync.model';
+import { NoteContentLocalRepository } from '@repositories/local/note-content.repository';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
 export class NoteContentLocalRepositoryImpl extends EntityLocalRepositoryImpl<NoteContent> implements NoteContentLocalRepository {

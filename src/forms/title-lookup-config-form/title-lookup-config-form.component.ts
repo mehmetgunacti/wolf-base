@@ -1,8 +1,9 @@
 import { Component, effect, input, output, untracked } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, InputComponent } from '@libComponents';
-import { nnfc, urlValidator } from '@utils';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { InputComponent } from '@libComponents/input/input.component';
+import { nnfc, urlValidator } from '@utils/form.util';
 
 @Component({
 	standalone: true,

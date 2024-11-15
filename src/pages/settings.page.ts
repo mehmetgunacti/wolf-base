@@ -2,12 +2,14 @@ import { AsyncPipe, DatePipe, DOCUMENT } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
-import { GlyphDirective } from '@directives';
-import { AlertComponent, BaseComponent, PortalComponent } from '@libComponents';
 import { FirestoreConfigContainer } from '@containers/firestore-config/firestore-config.container';
 import { PinnedNotesFormContainer } from '@containers/pinned-notes-form/pinned-notes-form.container';
 import { PopularBookmarksFormContainer } from '@containers/popular-bookmarks-form/popular-bookmarks-form.container';
 import { TitleLookupConfigContainer } from '@containers/title-lookup-config/title-lookup-config.container';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { AlertComponent } from '@libComponents/alert/alert.component';
+import { BaseComponent } from '@libComponents/base.component';
+import { PortalComponent } from '@libComponents/portal.component';
 import { catchError, defer, EMPTY, from, Observable } from 'rxjs';
 import { buildInfo } from 'version';
 

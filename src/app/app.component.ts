@@ -1,9 +1,10 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { mainTrigger, opacityTrigger, sidebarTrigger } from '@animations';
-import { SidebarState } from '@constants';
-import { BaseComponent } from '@libComponents';
+import { opacityTrigger } from '@animations/opacity.animation';
+import { mainTrigger, sidebarTrigger } from '@animations/sidebar.animation';
+import { SidebarState } from '@constants/sidebar.constant';
+import { BaseComponent } from '@libComponents/base.component';
 import { Store } from '@ngrx/store';
-import { selCore_sidebarState } from '@selectors';
+import { selCore_sidebarState } from '@selectors/core/core-ui.selectors';
 import { delay, of } from 'rxjs';
 import { environment } from '../environments/environment';
 import { appImports } from './app.config';

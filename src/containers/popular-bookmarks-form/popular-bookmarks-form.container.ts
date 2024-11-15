@@ -1,10 +1,11 @@
-import { settingsActions } from '@actions';
+import { settingsActions } from '@actions/settings.actions';
 import { AsyncPipe } from '@angular/common';
 import { AfterContentInit, Component, inject } from '@angular/core';
 import { TagFormComponent } from '@forms/tag-form/tag-form.component';
-import { BaseComponent } from '@libComponents';
+import { BaseComponent } from '@libComponents/base.component';
 import { Store } from '@ngrx/store';
-import { selBM_distinctTagsArray, selCore_popularBookmarks } from '@selectors';
+import { selBM_distinctTagsArray } from '@selectors/bookmark/bookmark-tags.selectors';
+import { selCore_popularBookmarks } from '@selectors/core/core-configuration.selectors';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 
 @Component({

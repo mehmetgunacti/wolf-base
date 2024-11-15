@@ -1,6 +1,6 @@
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, Renderer2, Signal, ViewChild, WritableSignal, computed, inject, signal } from '@angular/core';
-import { createArray } from '@utils';
+import { createArray } from '@utils/array.util';
 import { BaseComponent } from '../base.component';
 
 function parseId(id: string): number[] {
@@ -13,7 +13,6 @@ function parseId(id: string): number[] {
 	selector: 'w-selector-table',
 	standalone: true,
 	templateUrl: 'selector-table.component.html',
-	styleUrl: 'selector-table.component.scss',
 	host: { 'class': 'flex flex-col' }
 })
 export class SelectorTableComponent extends BaseComponent implements AfterViewInit {

@@ -1,7 +1,9 @@
-import { AppEntities, DbStore, UUID } from '@constants';
-import { IndexedDb } from '@libServices';
-import { Quote } from '@models';
-import { QuoteLocalRepository } from '@repositories';
+import { UUID } from '@constants/common.constant';
+import { DbStore } from '@constants/database.constant';
+import { AppEntities } from '@constants/entity.constant';
+import { IndexedDb } from '@libServices/indexeddb.service';
+import { Quote } from '@models/quote.model';
+import { QuoteLocalRepository } from '@repositories/local/quote.repository';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';
 

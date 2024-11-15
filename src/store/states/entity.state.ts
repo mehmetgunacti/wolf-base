@@ -1,5 +1,7 @@
-import { UUID } from '@constants';
-import { Entity, RemoteMetadata, SyncData } from '@models';
+import { UUID } from '@constants/common.constant';
+import { Entity } from '@models/entity.model';
+import { RemoteMetadata } from '@models/remote.model';
+import { SyncData } from '@models/sync.model';
 
 export interface Entity_ModuleState {
 

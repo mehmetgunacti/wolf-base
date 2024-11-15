@@ -1,5 +1,5 @@
-import { AppEntityType } from '@constants';
-import { Task } from '@models';
+import { AppEntityType } from '@constants/entity.constant';
+import { Task } from '@models/project.model';
 import * as sel from '../entity/entity-task.selectors';
 import { createSyncSelectors } from '../sync/selectors-factory';
 

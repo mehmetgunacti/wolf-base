@@ -1,6 +1,7 @@
+import { UUID } from '@constants/common.constant';
+import { TaskCategory, TaskState } from '@constants/project.constant';
+import { TaskQueryParams } from '@models/project.model';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { TaskCategory, TaskState, UUID } from '@constants';
-import { TaskQueryParams } from '@models';
 
 export const taskActions = createActionGroup({
 

@@ -1,8 +1,8 @@
 import { InjectionToken } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UUID } from '@constants';
-import { Bookmark } from '@models';
-import { fa, fc, fg, nnfc } from '@utils';
+import { UUID } from '@constants/common.constant';
+import { Bookmark } from '@models/bookmark.model';
+import { fa, fc, fg, nnfc } from '@utils/form.util';
 
 interface BookmarkFormSchema {
 
@@ -24,7 +24,7 @@ function createFormGroup(value?: Bookmark): FormGroup<BookmarkFormSchema> {
 		title = '',
 		tags = [],
 		image = null,
-		urls = ['']
+		urls = [ '' ]
 
 	} = value ?? {};
 

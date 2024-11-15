@@ -1,5 +1,8 @@
-import { AppEntityType, TAG_POPULAR, UUID } from '@constants';
-import { Bookmark, Click, ClickedBookmark, NamedClick, SyncTaskType, toCloudTask } from '@models';
+import { TAG_POPULAR } from '@constants/bookmark.constant';
+import { UUID } from '@constants/common.constant';
+import { AppEntityType } from '@constants/entity.constant';
+import { Bookmark, Click, ClickedBookmark, NamedClick } from '@models/bookmark.model';
+import { SyncTaskType, toCloudTask } from '@models/cloud.model';
 import { createSelector } from '@ngrx/store';
 import { selBookmark_EntityList, selBookmark_EntityState } from '../entity/entity-bookmark.selectors';
 import { selBookmark_ClicksState } from './bookmark.selectors';

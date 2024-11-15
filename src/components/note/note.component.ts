@@ -1,10 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { GlyphDirective } from '@directives';
-import { BaseComponent } from '@libComponents';
-import { Note } from '@models';
-import { HideEnumPipe, TimePastPipe } from '@pipes';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { Note } from '@models/note.model';
+import { HideEnumPipe } from '@pipes/hide-enum.pipe';
+import { TimePastPipe } from '@pipes/time-past.pipe';
 
 @Component({
 	standalone: true,

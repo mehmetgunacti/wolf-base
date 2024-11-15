@@ -1,5 +1,5 @@
-import { DbStore } from '@constants';
-import { IndexedDbConfiguration } from '@models';
+import { DbStore } from '@constants/database.constant';
+import { IndexedDbConfiguration } from '@models/indexeddb.model';
 import { dbCommands } from './db.command';
 
 const ID = 'id';

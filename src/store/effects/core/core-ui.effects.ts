@@ -1,15 +1,15 @@
+import { coreActions } from '@actions/core.actions';
 import { inject, Injectable } from '@angular/core';
+import { TIMER_DELAY, TIMER_INTERVAL } from '@constants/common.constant';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
 import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { TIMER_DELAY, TIMER_INTERVAL } from '@constants';
-import { LocalRepositoryService } from '@libServices';
+import { selCore_sidebarState } from '@selectors/core/core-ui.selectors';
+import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
 import { timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { LOCAL_REPOSITORY_SERVICE } from 'services';
 import { ViewportService } from 'services/viewport.service';
-import { coreActions } from '@actions';
-import { selCore_sidebarState } from '@selectors';
 
 @Injectable()
 export class CoreUIEffects {

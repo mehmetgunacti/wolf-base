@@ -1,5 +1,5 @@
-import { DbStore } from '@constants';
-import { LocalRepositoryService } from '@libServices';
+import { DbStore } from '@constants/database.constant';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
 import { AsyncZippable, FlateError, zip } from 'fflate';
 import * as FileSaver from 'file-saver-es';
 import { Observable, concatMap, delay, from, map, switchMap, toArray } from 'rxjs';

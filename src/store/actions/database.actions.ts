@@ -1,6 +1,6 @@
+import { LocalRepositoryNames } from '@constants/database.constant';
+import { ModuleReport } from '@models/database.model';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { LocalRepositoryNames } from '@constants';
-import { ModuleReport } from '@models';
 
 export const databaseActions = createActionGroup({
 

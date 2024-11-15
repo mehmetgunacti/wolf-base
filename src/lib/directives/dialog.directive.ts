@@ -1,5 +1,4 @@
-import { animate, style, transition, trigger } from '@angular/animations';
-import { Directive, effect, ElementRef, inject, input, output } from '@angular/core';
+import { Directive, ElementRef, inject, output } from '@angular/core';
 
 @Directive({
 	standalone: true,
@@ -54,6 +53,6 @@ export class ModalDirective {
 		if (!isInDialog)
 			this.close.emit();
 
-	}
+	};
 
 }

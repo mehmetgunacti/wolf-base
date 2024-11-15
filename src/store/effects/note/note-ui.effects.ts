@@ -1,11 +1,11 @@
-import { Injectable, inject } from '@angular/core';
+import { noteActions } from '@actions/note.actions';
+import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LocalRepositoryService } from '@libServices';
-import { commaSplit, toggleArrayItem } from '@utils';
+import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
+import { commaSplit, toggleArrayItem } from '@utils/array.util';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
-import { LOCAL_REPOSITORY_SERVICE } from 'services';
-import { noteActions } from '@actions';
 
 @Injectable()
 export class NoteUIEffects {

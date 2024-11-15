@@ -1,7 +1,13 @@
 import { inject, InjectionToken } from '@angular/core';
-import { AppEntityType } from '@constants';
-import { BookmarkSyncService, LocalRepositoryService, RemoteRepositoryService, SyncService } from '@libServices';
-import { Entity, IndexedDbConfiguration, NameBase, RemoteData, RemoteMetadata, SyncData } from '@models';
+import { AppEntityType } from '@constants/entity.constant';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
+import { RemoteRepositoryService } from '@libServices/remote-repository.service';
+import { BookmarkSyncService, SyncService } from '@libServices/sync-service.interface';
+import { Entity } from '@models/entity.model';
+import { NameBase } from '@models/id-base.model';
+import { IndexedDbConfiguration } from '@models/indexeddb.model';
+import { RemoteData, RemoteMetadata } from '@models/remote.model';
+import { SyncData } from '@models/sync.model';
 import { concatMap, filter, from, iif, map, Observable, switchMap } from 'rxjs';
 import { BookmarkSyncServiceImpl } from './bookmark-sync.service';
 import { LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE } from './repository.service';

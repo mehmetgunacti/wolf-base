@@ -1,10 +1,10 @@
-import { settingsActions } from '@actions';
+import { settingsActions } from '@actions/settings.actions';
 import { Component, inject } from '@angular/core';
 import { FirestoreConfigForm } from '@forms/firestore-config/firestore-config.form';
-import { BaseComponent } from '@libComponents';
-import { FirestoreConfig } from '@models';
+import { BaseComponent } from '@libComponents/base.component';
+import { FirestoreConfig } from '@models/configuration.model';
 import { Store } from '@ngrx/store';
-import { selCore_firestoreConfig } from '@selectors';
+import { selCore_firestoreConfig } from '@selectors/core/core-configuration.selectors';
 
 @Component({
 	standalone: true,

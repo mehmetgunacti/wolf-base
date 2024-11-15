@@ -1,5 +1,6 @@
-import { NoteContent, RemoteData, RemoteMetadata } from '@models';
-import { NoteContentRemoteRepository } from '@repositories';
+import { NoteContent } from '@models/note.model';
+import { RemoteData, RemoteMetadata } from '@models/remote.model';
+import { NoteContentRemoteRepository } from '@repositories/remote/note-content-remote.repository';
 import { Observable } from 'rxjs';
 
 export class VoidNoteContentCollection implements NoteContentRemoteRepository {

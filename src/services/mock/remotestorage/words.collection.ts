@@ -1,5 +1,6 @@
-import { RemoteData, RemoteMetadata, Word } from '@models';
-import { WordsRemoteRepository } from '@repositories';
+import { RemoteData, RemoteMetadata } from '@models/remote.model';
+import { Word } from '@models/word.model';
+import { WordsRemoteRepository } from '@repositories/remote/word-remote.repository';
 import { Observable } from 'rxjs';
 
 export class VoidWordsCollection implements WordsRemoteRepository {

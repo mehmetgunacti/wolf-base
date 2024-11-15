@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, output, viewChild } from '@angular/core';
-import { delayDestroyTrigger } from '@animations';
+import { delayDestroyTrigger } from '@animations/delayDestroy.animation';
 import { BaseComponent } from '../base.component';
 
 @Component({

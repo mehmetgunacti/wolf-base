@@ -1,5 +1,6 @@
-import { Project, RemoteData, RemoteMetadata } from '@models';
-import { ProjectsRemoteRepository } from '@repositories';
+import { Project } from '@models/project.model';
+import { RemoteData, RemoteMetadata } from '@models/remote.model';
+import { ProjectsRemoteRepository } from '@repositories/remote/project-remote.repository';
 import { Observable } from 'rxjs';
 
 export class VoidProjectsCollection implements ProjectsRemoteRepository {

@@ -1,12 +1,12 @@
 import { Injectable, InjectionToken, Signal, WritableSignal, computed, signal } from '@angular/core';
-import { formatBytes } from '@utils';
+import { formatBytes } from '@utils/helper.tool';
 import { EditorProperties } from './textarea-properties.model';
 
 const EMPTY_PROPS: EditorProperties = {
 	content: '',
 	sIndex: 0,
 	eIndex: 0
-}
+};
 
 export interface UndoCache {
 
@@ -29,13 +29,13 @@ export const UNDO_CACHE = new InjectionToken<UndoCache>('UndoCache');
 export class UndoCacheImpl implements UndoCache {
 
 	// signals
-	private stack: WritableSignal<EditorProperties[]> = signal([EMPTY_PROPS]);
+	private stack: WritableSignal<EditorProperties[]> = signal([ EMPTY_PROPS ]);
 	private idx: WritableSignal<number> = signal(0);
 
 	// computed values
 	canUndo: Signal<boolean> = computed(() => this.idx() > 0);
 	canRedo: Signal<boolean> = computed(() => this.idx() < this.stack().length - 1);
-	props: Signal<EditorProperties> = computed(() => this.stack()[this.idx()]);
+	props: Signal<EditorProperties> = computed(() => this.stack()[ this.idx() ]);
 	size: Signal<number> = computed(() => this.props().content.length ?? 0);
 	memSize: Signal<string> = computed(() => `${formatBytes(this.stack().reduce((t, a) => t + a.content.length, 0))}`);
 	discSize: Signal<string> = computed(() => `${formatBytes(this.size())}`);
@@ -43,11 +43,11 @@ export class UndoCacheImpl implements UndoCache {
 	initialize(content: string): void {
 
 		if (content)
-			this.stack.set([{
+			this.stack.set([ {
 				content: content,
 				sIndex: content.length,
 				eIndex: content.length
-			}]);
+			} ]);
 		else
 			console.warn(`'content' should not be undefined or null`);
 
@@ -58,9 +58,9 @@ export class UndoCacheImpl implements UndoCache {
 		if (content === this.props().content)
 			return;
 
-		const arr = [...this.stack().slice(0, this.idx() + 1)]; // clears redo-cache (right-side of index)
+		const arr = [ ...this.stack().slice(0, this.idx() + 1) ]; // clears redo-cache (right-side of index)
 		this.incIdx();
-		arr[this.idx()] = { content, sIndex, eIndex };
+		arr[ this.idx() ] = { content, sIndex, eIndex };
 		this.stack.set(arr);
 
 	}

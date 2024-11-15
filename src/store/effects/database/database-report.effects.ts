@@ -1,12 +1,14 @@
-import { databaseActions } from '@actions';
+import { databaseActions } from '@actions/database.actions';
 import { inject, Injectable } from '@angular/core';
-import { AppEntities, DbStore, GlyphName, LocalRepositoryNames } from '@constants';
-import { LocalRepositoryService } from '@libServices';
-import { ModuleReport } from '@models';
+import { DbStore, LocalRepositoryNames } from '@constants/database.constant';
+import { AppEntities } from '@constants/entity.constant';
+import { GlyphName } from '@constants/glyphs.constant';
+import { LocalRepositoryService } from '@libServices/local-repository.service';
+import { ModuleReport } from '@models/database.model';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
 import { forkJoin, from, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { LOCAL_REPOSITORY_SERVICE } from 'services';
 
 interface Row extends Record<string, Observable<any>> {
 

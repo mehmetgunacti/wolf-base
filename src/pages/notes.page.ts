@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, PortalComponent } from '@libComponents';
 import { NotesSearchAndTagCloudContainer } from '@containers/notes-search-and-tag-cloud/notes-search-and-tag-cloud.container';
 import { NotesContainer } from '@containers/notes/notes.container';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { PortalComponent } from '@libComponents/portal.component';
 
 @Component({
 	standalone: true,

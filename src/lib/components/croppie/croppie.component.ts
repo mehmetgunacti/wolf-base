@@ -8,7 +8,7 @@ import {
 	viewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { GlyphDirective } from '@directives';
+import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '../base.component';
 
 @Component({

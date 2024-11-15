@@ -1,9 +1,11 @@
+import { bookmarkActions } from '@actions/bookmark.actions';
+import { coreActions } from '@actions/core.actions';
+import { entityActions } from '@actions/entity.actions';
+import { AppEntityType } from '@constants/entity.constant';
 import { Action, createReducer, on } from '@ngrx/store';
+import { bookmark_initialClicksState, BookmarkClicksState } from '@states/bookmark.state';
+import { idListToRecord } from '@utils/array.util';
 import { produce } from 'immer';
-import { AppEntityType } from '@constants';
-import { idListToRecord } from '@utils';
-import { bookmarkActions, coreActions, entityActions } from '@actions';
-import { bookmark_initialClicksState, BookmarkClicksState } from '@states';
 
 const reducer = createReducer(
 

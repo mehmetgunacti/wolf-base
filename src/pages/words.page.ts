@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, PortalComponent } from '@libComponents';
 import { WordFilterContainer } from '@containers/word-filter.container';
 import { WordsContainer } from '@containers/words/words.container';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { PortalComponent } from '@libComponents/portal.component';
 
 @Component({
 	standalone: true,

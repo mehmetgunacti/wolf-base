@@ -1,7 +1,12 @@
+import { AppEntityType } from '@constants/entity.constant';
+import { Theme } from '@constants/theme.constant';
+import { ToastConfiguration } from '@libComponents/toast/toast.util';
+import { Click } from '@models/bookmark.model';
+import { Configuration } from '@models/configuration.model';
+import { Entity } from '@models/entity.model';
+import { RemoteMetadata } from '@models/remote.model';
+import { SyncData } from '@models/sync.model';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { ToastConfiguration } from '@libComponents';
-import { AppEntityType, Theme } from '@constants';
-import { Click, Configuration, Entity, RemoteMetadata, SyncData } from '@models';
 
 export const coreActions = createActionGroup({
 

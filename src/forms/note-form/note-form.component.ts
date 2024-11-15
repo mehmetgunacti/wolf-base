@@ -1,10 +1,14 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, effect, inject, input, output, untracked } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TAG_PINNED, UUID } from '@constants';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, InputComponent, InputTagComponent, SelectTreeComponent } from '@libComponents';
-import { Note } from '@models';
+import { TAG_PINNED } from '@constants/bookmark.constant';
+import { UUID } from '@constants/common.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { InputTagComponent } from '@libComponents/input-tag/input-tag.component';
+import { InputComponent } from '@libComponents/input/input.component';
+import { SelectTreeComponent } from '@libComponents/select/select-tree.component';
+import { Note } from '@models/note.model';
 import { Subject } from 'rxjs';
 import { NOTE_FORM, NoteFormImpl } from './note-form';
 

@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { GlyphName } from '@constants';
-import { GlyphDirective } from '@directives';
+import { GlyphName } from '@constants/glyphs.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '../base.component';
 
 @Component({

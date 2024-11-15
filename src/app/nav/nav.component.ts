@@ -1,20 +1,20 @@
-import { coreActions } from '@actions';
-import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
+import { coreActions } from '@actions/core.actions';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { GlyphDirective } from '@directives';
-import { BaseComponent } from '@libComponents';
-import { MenuItem } from '@models';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { MenuItem } from '@models/menu.model';
 import { Store } from '@ngrx/store';
-import { selBookmark_menuBadge, selCloudAvailableTasks } from '@selectors';
+import { selBookmark_menuBadge } from '@selectors/bookmark/bookmark-ui.selectors';
+import { selCloudAvailableTasks } from '@selectors/cloud/cloud.selectors';
 import * as conf from './sidebar.conf';
 
 @Component({
-	selector: 'app-nav',
 	standalone: true,
-	imports: [ RouterLink, RouterLinkActive, GlyphDirective, AsyncPipe, NgTemplateOutlet, NgClass ],
+	imports: [ RouterLink, RouterLinkActive, GlyphDirective, NgTemplateOutlet ],
+	selector: 'app-nav',
 	templateUrl: './nav.component.html',
-	styleUrl: './nav.component.scss',
 	host: {
 		'class': 'flex flex-col'
 	}

@@ -1,15 +1,20 @@
-import { coreActions, entityActions } from '@actions';
+import { coreActions } from '@actions/core.actions';
+import { entityActions } from '@actions/entity.actions';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { AppEntityType, UUID } from '@constants';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, MarkdownEditorComponent, PortalComponent } from '@libComponents';
-import { Note, NoteContent } from '@models';
+import { UUID } from '@constants/common.constant';
+import { AppEntityType } from '@constants/entity.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { MarkdownEditorComponent } from '@libComponents/markdown/markdown-editor.component';
+import { PortalComponent } from '@libComponents/portal.component';
+import { Note, NoteContent } from '@models/note.model';
 import { Store } from '@ngrx/store';
-import { selNoteContent_content, selNote_SelectedEntity } from '@selectors';
+import { selNoteContent_content } from '@selectors/note-content/note-content-ui.selectors';
+import { selNote_SelectedEntity } from '@selectors/note/note-ui.selectors';
 import { filter, take, tap, withLatestFrom } from 'rxjs';
 
 @Component({

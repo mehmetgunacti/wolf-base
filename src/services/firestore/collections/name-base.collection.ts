@@ -1,5 +1,6 @@
-import { NameBase } from '@models';
-import { FIRESTORE_VALUE, FirestoreConverter } from '@utils';
+import { NameBase } from '@models/id-base.model';
+import { FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
+import { FirestoreConverter } from '@utils/firestore-rest-client/firestore.model';
 
 export class NameBaseFirestoreConverter implements FirestoreConverter<NameBase> {
 

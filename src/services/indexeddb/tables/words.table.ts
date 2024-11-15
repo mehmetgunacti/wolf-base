@@ -1,7 +1,9 @@
-import { AppEntities, DbStore, UUID } from '@constants';
-import { IndexedDb } from '@libServices';
-import { Definition, Word } from '@models';
-import { WordLocalRepository } from '@repositories';
+import { UUID } from '@constants/common.constant';
+import { DbStore } from '@constants/database.constant';
+import { AppEntities } from '@constants/entity.constant';
+import { IndexedDb } from '@libServices/indexeddb.service';
+import { Definition, Word } from '@models/word.model';
+import { WordLocalRepository } from '@repositories/local/word.repository';
 import { produce } from 'immer';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';

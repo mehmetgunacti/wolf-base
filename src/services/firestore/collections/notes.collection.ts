@@ -1,8 +1,10 @@
-import { AppEntityType } from '@constants';
-import { FirestoreConfig, Note } from '@models';
-import { FIRESTORE_VALUE, FirestoreConverter } from '@utils';
-import { NotesRemoteRepository } from '@repositories';
-import { FirestoreAPIClient } from '@utils';
+import { AppEntityType } from '@constants/entity.constant';
+import { FirestoreConfig } from '@models/configuration.model';
+import { Note } from '@models/note.model';
+import { NotesRemoteRepository } from '@repositories/remote/note-remote.repository';
+import { FirestoreAPIClient } from '@utils/firestore-rest-client/firestore-api.tool';
+import { FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
+import { FirestoreConverter } from '@utils/firestore-rest-client/firestore.model';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 
 export class NotesFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Note> implements NotesRemoteRepository {

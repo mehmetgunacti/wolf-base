@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Word_ModuleState } from '@states';
+import { Word_ModuleState } from '@states/word.state';
 
 const selWord_ModuleState = createFeatureSelector<Word_ModuleState>('word');
 

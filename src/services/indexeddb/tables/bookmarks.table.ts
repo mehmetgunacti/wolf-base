@@ -1,10 +1,13 @@
-import { AppEntities, DbStore, LogCategory } from '@constants';
-import { IndexedDb } from '@libServices';
-import { LogMessage, SyncData } from '@models';
-import { toggleArrayItem } from '@utils';
-import { UUID } from 'lib/constants/common.constant';
-import { Bookmark, Click } from 'lib/models/bookmark.model';
-import { BookmarksLocalRepository } from 'lib/repositories/local';
+import { UUID } from '@constants/common.constant';
+import { DbStore } from '@constants/database.constant';
+import { AppEntities } from '@constants/entity.constant';
+import { LogCategory } from '@constants/log.constant';
+import { IndexedDb } from '@libServices/indexeddb.service';
+import { Bookmark, Click } from '@models/bookmark.model';
+import { LogMessage } from '@models/log.model';
+import { SyncData } from '@models/sync.model';
+import { BookmarksLocalRepository } from '@repositories/local/bookmark.repository';
+import { toggleArrayItem } from '@utils/array.util';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';
 

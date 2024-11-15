@@ -1,7 +1,9 @@
-import { DbStore, LogCategory, UUID } from '@constants';
-import { IndexedDb } from '@libServices';
-import { LogMessage } from '@models';
-import { LogsLocalRepository } from 'lib/repositories/local';
+import { UUID } from '@constants/common.constant';
+import { DbStore } from '@constants/database.constant';
+import { LogCategory } from '@constants/log.constant';
+import { IndexedDb } from '@libServices/indexeddb.service';
+import { LogMessage } from '@models/log.model';
+import { LogsLocalRepository } from '@repositories/local/log.repository';
 
 export class LogsLocalRepositoryImpl implements LogsLocalRepository {
 

@@ -1,4 +1,4 @@
-import { ISODateString } from '@models';
+import { ISODateString } from '@models/id-base.model';
 
 export function compareISODateStrings(d1: ISODateString, d2: ISODateString): number {
 

@@ -1,6 +1,6 @@
-import { UUID } from '@constants';
+import { UUID } from '@constants/common.constant';
+import { checkString, provideId } from '@utils/validators';
 import { ISODateString, NameBase } from './id-base.model';
-import { checkString, provideId } from '@utils';
 
 export interface Entity extends NameBase { }
 

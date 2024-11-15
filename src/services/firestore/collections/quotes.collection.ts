@@ -1,8 +1,10 @@
-import { AppEntityType } from '@constants';
-import { FirestoreConfig, Quote } from '@models';
-import { QuotesRemoteRepository } from '@repositories';
-import { FIRESTORE_VALUE, FirestoreConverter } from '@utils';
-import { FirestoreAPIClient } from '@utils';
+import { AppEntityType } from '@constants/entity.constant';
+import { FirestoreConfig } from '@models/configuration.model';
+import { Quote } from '@models/quote.model';
+import { QuotesRemoteRepository } from '@repositories/remote/quote-remote.repository';
+import { FirestoreAPIClient } from '@utils/firestore-rest-client/firestore-api.tool';
+import { FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
+import { FirestoreConverter } from '@utils/firestore-rest-client/firestore.model';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 
 export class QuotesFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Quote> implements QuotesRemoteRepository {

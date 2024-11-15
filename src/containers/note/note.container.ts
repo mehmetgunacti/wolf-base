@@ -1,16 +1,20 @@
-import { coreActions, entityActions } from '@actions';
+import { coreActions } from '@actions/core.actions';
+import { entityActions } from '@actions/entity.actions';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NoteContentComponent } from '@components/note-content/note-content.component';
 import { NoteComponent } from '@components/note/note.component';
-import { AppEntityType, UUID } from '@constants';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, PortalComponent } from '@libComponents';
-import { Note, NoteContent } from '@models';
+import { UUID } from '@constants/common.constant';
+import { AppEntityType } from '@constants/entity.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { PortalComponent } from '@libComponents/portal.component';
+import { Note, NoteContent } from '@models/note.model';
 import { Store } from '@ngrx/store';
-import { selNote_SelectedEntity, selNote_selectedEntityChildren, selNote_selectedEntityParents, selNoteContent_content } from '@selectors';
+import { selNoteContent_content } from '@selectors/note-content/note-content-ui.selectors';
+import { selNote_SelectedEntity, selNote_selectedEntityChildren, selNote_selectedEntityParents } from '@selectors/note/note-ui.selectors';
 import { map, Observable } from 'rxjs';
 
 @Component({

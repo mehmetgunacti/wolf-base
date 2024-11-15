@@ -4,7 +4,7 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, forwardRef, input, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { HasParentId } from '@models';
+import { HasParentId } from '@models/entity.model';
 import { BaseComponent } from '../base.component';
 import { OptionsComponent } from './options.component';
 import { ROOT_ID } from './select.util';

@@ -1,10 +1,12 @@
 import { Component, computed, effect, input, output, untracked } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UUID } from '@constants';
-import { GlyphDirective } from '@directives';
-import { BaseComponent, InputComponent, TextareaComponent } from '@libComponents';
-import { Quote } from '@models';
-import { fc, fg, nnfc } from '@utils';
+import { UUID } from '@constants/common.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { BaseComponent } from '@libComponents/base.component';
+import { InputComponent } from '@libComponents/input/input.component';
+import { TextareaComponent } from '@libComponents/textarea/textarea.component';
+import { Quote } from '@models/quote.model';
+import { fc, fg, nnfc } from '@utils/form.util';
 
 interface QuoteForm {
 

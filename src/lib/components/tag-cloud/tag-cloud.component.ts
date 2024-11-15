@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, input, output } from '@angular/core';
-import { Tag } from '@models';
+import { Tag } from '@models/tag.model';
 import { BaseComponent } from '../base.component';
 
 interface TagUI {

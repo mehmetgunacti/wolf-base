@@ -1,5 +1,7 @@
-import { UUID } from '@constants';
-import { Entity, Metadata, RemoteData, RemoteMetadata, SyncData } from '@models';
+import { UUID } from '@constants/common.constant';
+import { Entity, Metadata } from '@models/entity.model';
+import { RemoteData, RemoteMetadata } from '@models/remote.model';
+import { SyncData } from '@models/sync.model';
 
 export interface EntityLocalRepository<T extends Entity> {
 

@@ -4,8 +4,8 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { CdkTreeModule, NestedTreeControl } from '@angular/cdk/tree';
 import { AfterViewInit, Component, EventEmitter, Input, Output, Renderer2, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { GlyphDirective } from '@directives';
-import { HasParentId } from '@models';
+import { GlyphDirective } from '@directives/glyph.directive';
+import { HasParentId } from '@models/entity.model';
 import { BaseComponent } from '../base.component';
 import { ROOT_ID, TreeItem, toTreeItems } from './select.util';
 
