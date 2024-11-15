@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { slideUpDownTrigger } from '@animations/slide-in-out.animation';
 import { GlyphName, Glyphs } from '@constants/glyphs.constant';
@@ -14,7 +14,10 @@ import { MarkdownEditorComponent } from '@libComponents/markdown/markdown-editor
 import { SelectComponent } from '@libComponents/select/select.component';
 import { SwitchComponent } from '@libComponents/switch/switch.component';
 import { TextareaComponent } from '@libComponents/textarea/textarea.component';
+import { Store } from '@ngrx/store';
+import { selNote_EntityList } from '@selectors/entity/entity-note.selectors';
 import { fc, fg, nnfc } from '@utils/form.util';
+import { SelectTreeComponent } from "../../lib/components/select/select-tree.component";
 
 @Component({
 	standalone: true,
@@ -29,7 +32,8 @@ import { fc, fg, nnfc } from '@utils/form.util';
 		TextareaComponent,
 		SelectComponent,
 		MarkdownEditorComponent,
-		CroppieComponent
+		CroppieComponent,
+		SelectTreeComponent
 	],
 	selector: 'app-showcase-container',
 	templateUrl: './showcase.container.html',
@@ -42,11 +46,14 @@ export class ShowcaseContainer extends BaseComponent {
 
 	PROJECT_STATUS = PROJECT_STATUS;
 
+	private store: Store = inject(Store);
+
 	alertsVisible = signal<boolean>(false);
 	formsVisible = signal<boolean>(true);
 	buttonsVisible = signal<boolean>(false);
 	glyphsVisible = signal<boolean>(false);
 
+	nodes = this.store.selectSignal(selNote_EntityList);
 	tagSuggestions = signal<string[]>([]);
 
 	glyphNames = signal<GlyphName[]>(Object.keys(Glyphs) as GlyphName[]);
