@@ -1,9 +1,8 @@
 import { AppEntities, DbStore, LogCategory } from '@constants';
 import { IndexedDb } from '@libServices';
-import { SyncData } from '@models';
+import { Note, NoteContent, SyncData } from '@models';
 import { toggleArrayItem } from '@utils';
 import { UUID } from 'lib/constants/common.constant';
-import { Note, NoteContent } from 'lib/models/note.model';
 import { NotesLocalRepository } from 'lib/repositories/local';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';

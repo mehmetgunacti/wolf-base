@@ -37,54 +37,61 @@
 			"@forms/*": [
 				"forms/*"
 			],
-			"@animations": [
-				"lib/animations"
+			"@constants/*": [
+				"constants/*"
 			],
-			"@constants": [
-				"lib/constants"
+			"@models/*": [
+				"models/*"
 			],
-			"@libComponents": [
-				"lib/components"
+			"@pipes/*": [
+				"lib/pipes/*"
 			],
-			"@directives": [
-				"lib/directives"
+			"@directives/*": [
+				"lib/directives/*"
 			],
-			"@models": [
-				"lib/models"
+			"@animations/*": [
+				"lib/animations/*"
 			],
-			"@pipes": [
-				"lib/pipes"
+
+
+			"@libComponents/*": [
+				"lib/components/*"
 			],
-			"@plugins": [
-				"lib/plugins"
+			"@plugins/*": [
+				"lib/plugins/*"
 			],
-			"@repositories": [
-				"lib/repositories"
+			"@utils/*": [
+				"lib/utils/*"
 			],
-			"@libServices": [
-				"lib/services"
+
+
+			"@repositories/*": [
+				"lib/repositories/*"
 			],
-			"@utils": [
-				"lib/utils"
+			"@libServices/*": [
+				"lib/services/*"
 			],
-			"@selectors": [
-				"store/selectors"
+			"@services/*": [
+				"services/*"
 			],
-			"@effects": [
-				"store/effects"
+
+
+			"@actions/*": [
+				"store/actions/*"
 			],
-			"@reducers": [
-				"store/reducers"
+			"@selectors/*": [
+				"store/selectors/*"
 			],
-			"@actions": [
-				"store/actions"
+			"@effects/*": [
+				"store/effects/*"
 			],
-			"@states": [
-				"store/states"
+			"@reducers/*": [
+				"store/reducers/*"
 			],
-			"@services": [
-				"services"
+			"@states/*": [
+				"store/states/*"
 			]
+
 		}
 	},
 	"angularCompilerOptions": {

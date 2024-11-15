@@ -1,8 +1,7 @@
-import { AppEntity, DbStore, LogCategory } from '@constants';
+import { DbStore, LogCategory } from '@constants';
 import { IndexedDb, TransactionManager } from '@libServices';
+import { Entity, Metadata, RemoteData, RemoteMetadata, SyncData } from '@models';
 import { UUID } from 'lib/constants/common.constant';
-import { RemoteData, RemoteMetadata, SyncData } from 'lib/models';
-import { Entity, Metadata } from 'lib/models/entity.model';
 import { EntityLocalRepository } from 'lib/repositories/local';
 
 export abstract class EntityLocalRepositoryImpl<T extends Entity> implements EntityLocalRepository<T> {
