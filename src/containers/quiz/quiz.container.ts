@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal, Signal, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { quoteChangeTrigger, slideChoicesTrigger } from '@animations';
-import { LanguagesComponent } from '@components';
+import { LanguagesComponent } from '@components/languages.component';
+import { WordComponent } from '@components/word/word.component';
 import { QuizVisibility, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
 import { BaseComponent, ModalComponent } from '@libComponents';
@@ -13,7 +14,6 @@ import { Store } from '@ngrx/store';
 import { MarkOrHighlightPipe } from '@pipes';
 import { selQuiz_answer, selQuiz_dueItemsCount, selQuiz_visibility } from '@selectors';
 import { QuizService } from '@services';
-import { WordComponent } from "../../components/word/word.component";
 import { choicesBlinkTrigger } from './quiz.animation';
 
 @Component({

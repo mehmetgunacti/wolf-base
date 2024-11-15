@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, effect, inject, input, output, untracked } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { CompactBookmarkComponent } from "@components";
+import { CompactBookmarkComponent } from '@components/compact-bookmark/compact-bookmark.component';
 import { TAG_POPULAR, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
 import { BaseComponent, CroppieComponent, InputComponent, InputTagComponent, PortalComponent, ToastConfiguration } from '@libComponents';

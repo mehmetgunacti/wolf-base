@@ -1,6 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CompactBookmarkComponent } from '@components';
+import { CompactBookmarkComponent } from '@components/compact-bookmark/compact-bookmark.component';
 import { TAG_POPULAR, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
 import { BaseComponent } from '@libComponents';

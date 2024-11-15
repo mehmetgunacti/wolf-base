@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NoteNewFormContainer } from "@containers";
 import { BaseComponent } from '@libComponents';
+import { NoteNewFormContainer } from '@containers/note-new-form-container/note-new-form-container.component';
 
 @Component({
 	standalone: true,

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ProjectFilterContainer, ProjectsContainer } from '@containers';
 import { GlyphDirective } from '@directives';
 import { BaseComponent, PortalComponent } from '@libComponents';
+import { ProjectFilterContainer } from '@containers/project-filter.container';
+import { ProjectsContainer } from '@containers/projects/projects.container';
 
 @Component({
 	standalone: true,

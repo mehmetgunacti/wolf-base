@@ -1,9 +1,9 @@
 import { databaseActions } from '@actions';
 import { Component, inject } from '@angular/core';
+import { GlyphDirective } from '@directives';
 import { BaseComponent, PortalComponent } from '@libComponents';
 import { Store } from '@ngrx/store';
-import { DatabaseContainer } from "../containers/database/database.container";
-import { GlyphDirective } from '@directives';
+import { DatabaseContainer } from '@containers/database/database.container';
 
 @Component({
 	selector: 'database-page',

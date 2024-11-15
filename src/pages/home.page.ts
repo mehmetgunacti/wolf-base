@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
-import * as container from '@containers';
 import { BaseComponent, PortalComponent } from '@libComponents';
-import { QuizContainerComponent } from "../containers/quiz/quiz.container";
+import { PinnedNotesContainer } from '@containers/pinned-notes/pinned-notes.container';
+import { PopularBookmarksContainer } from '@containers/popular-bookmarks/popular-bookmarks.container';
+import { QuizContainerComponent } from '@containers/quiz/quiz.container';
+import { QuoteContainer } from '@containers/quotes/quotes.container';
 
 @Component({
 	selector: 'home-page',
 	standalone: true,
 	imports: [
-    PortalComponent,
-    container.PopularBookmarksContainer,
-    container.QuoteContainer,
-    container.PinnedNotesContainer,
-    QuizContainerComponent
-],
+		PortalComponent,
+		PopularBookmarksContainer,
+		QuoteContainer,
+		PinnedNotesContainer,
+		QuizContainerComponent
+	],
 	template: `
 		<w-portal>
 			<div class="flex items-center">

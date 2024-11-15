@@ -1,7 +1,7 @@
 import { quoteActions } from '@actions';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, signal, Signal, WritableSignal } from '@angular/core';
-import { QuoteComponent } from '@components';
+import { QuoteComponent } from '@components/quote/quote.component';
 import { GlyphDirective } from '@directives';
 import { BaseComponent } from '@libComponents';
 import { Quote } from '@models';

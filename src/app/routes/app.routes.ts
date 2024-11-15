@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { PageNotFoundPage } from '@pages';
+import { PageNotFoundPage } from '@pages/page-not-found.page';
 
 export const routes: Routes = [
 

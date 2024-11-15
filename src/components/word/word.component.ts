@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { LanguagesComponent } from '@components';
+import { LanguagesComponent } from '@components/languages.component';
 import { UUID } from '@constants';
 import { BaseComponent, SwitchComponent } from '@libComponents';
 import { Definition, Word } from '@models';

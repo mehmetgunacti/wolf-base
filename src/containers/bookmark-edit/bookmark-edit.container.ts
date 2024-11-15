@@ -3,7 +3,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { AppEntityType, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
-import { BookmarkForm } from '@forms';
+import { BookmarkForm } from '@forms/bookmark/bookmark.form';
 import { BaseComponent, ToastConfiguration } from '@libComponents';
 import { Bookmark } from '@models';
 import { Store } from '@ngrx/store';

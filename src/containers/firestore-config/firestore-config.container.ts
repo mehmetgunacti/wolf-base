@@ -1,6 +1,6 @@
 import { settingsActions } from '@actions';
 import { Component, inject } from '@angular/core';
-import { FirestoreConfigForm } from '@forms';
+import { FirestoreConfigForm } from '@forms/firestore-config/firestore-config.form';
 import { BaseComponent } from '@libComponents';
 import { FirestoreConfig } from '@models';
 import { Store } from '@ngrx/store';

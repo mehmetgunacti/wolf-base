@@ -1,9 +1,9 @@
+import { settingsActions } from '@actions';
 import { Component, inject } from '@angular/core';
-import { TitleLookupConfigFormComponent } from '@forms';
+import { TitleLookupConfigFormComponent } from '@forms/title-lookup-config-form/title-lookup-config-form.component';
 import { BaseComponent } from '@libComponents';
 import { Store } from '@ngrx/store';
 import { selCore_titleLookupUrl } from '@selectors';
-import { settingsActions } from 'store/actions';
 
 @Component({
 	standalone: true,

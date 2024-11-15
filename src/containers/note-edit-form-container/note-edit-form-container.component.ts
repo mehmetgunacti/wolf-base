@@ -4,7 +4,7 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AppEntityType, UUID } from '@constants';
 import { GlyphDirective } from '@directives';
-import { NoteFormComponent } from '@forms';
+import { NoteFormComponent } from '@forms/note-form/note-form.component';
 import { BaseComponent, PortalComponent } from '@libComponents';
 import { Note } from '@models';
 import { Store } from '@ngrx/store';

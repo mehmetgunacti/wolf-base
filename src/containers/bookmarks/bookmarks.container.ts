@@ -1,7 +1,7 @@
 import { bookmarkActions } from '@actions';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { BookmarkComponent } from '@components';
+import { BookmarkComponent } from '@components/bookmark/bookmark.component';
 import { UUID } from '@constants';
 import { BaseComponent } from '@libComponents';
 import { ClickedBookmark } from '@models';

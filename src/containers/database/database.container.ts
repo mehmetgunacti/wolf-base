@@ -1,8 +1,7 @@
 import { databaseActions } from '@actions';
 import { Component, computed, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { opacityTrigger } from '@animations';
-import { ModuleReportComponent } from '@components';
+import { ModuleReportComponent } from '@components/module-report/module-report.component';
 import { GlyphDirective } from '@directives';
 import { AlertComponent, BaseComponent, PortalComponent } from '@libComponents';
 import { ModuleReport } from '@models';
@@ -12,7 +11,7 @@ import { selDatabase_Report } from '@selectors';
 
 @Component({
 	standalone: true,
-	imports: [ RouterLink, GlyphDirective, PortalComponent, GlyphDirective, FormatBytesPipe, ModuleReportComponent, AlertComponent ],
+	imports: [ GlyphDirective, PortalComponent, GlyphDirective, FormatBytesPipe, ModuleReportComponent, AlertComponent ],
 	selector: 'app-database-container',
 	templateUrl: './database.container.html',
 	animations: [ opacityTrigger ],
