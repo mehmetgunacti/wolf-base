@@ -53,8 +53,6 @@ export class MarkdownEditorComponent extends BaseComponent implements ControlVal
 
 	// Output
 	save = output<string>();
-	saveClose = output<string>();
-	cancel = output<void>();
 
 	protected value = signal<string>('');
 	protected disabled = signal<boolean>(false);
@@ -128,25 +126,9 @@ export class MarkdownEditorComponent extends BaseComponent implements ControlVal
 
 	}
 
-	onCancel(warn: boolean): void {
-
-		if (warn) {
-			if (confirm(`Discard changes?`))
-				this.cancel.emit();
-		} else
-			this.cancel.emit();
-
-	}
-
 	onSave(): void {
 
 		this.save.emit(this.editor().nativeElement.value);
-
-	}
-
-	onSaveAndClose(): void {
-
-		this.saveClose.emit(this.editor().nativeElement.value);
 
 	}
 
