@@ -1,3 +1,11 @@
+<w-portal>
+
+	<button (click)="load()" class="btn btn-ghost">
+		<svg wGlyph="refresh"></svg> Refresh
+	</button>
+
+</w-portal>
+
 @let logs = sorted();
 
 <header class="mb-8 comp-title">
@@ -7,23 +15,13 @@
 
 @if (logs.length > 0) {
 
-	<section class="gap-1 md:gap-2 grid @2xl/page:grid-cols-2 @4xl/page:grid-cols-3 @6xl/page:grid-cols-4">
+	<section class="block">
 
 		@for (log of logs; track $index) {
 
-			<a	class="relative grid comp-dark comp-dark-active comp-dark-hover rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full group focus-visible:outline-none px-4 py-3"
-				[routerLink]="['/words', log.id]"
-				tabindex="0">
-
-				<div class="flex flex-col flex-1 justify-center">
-
-					<small class="text-base-color-secondary text-xs">[{{ log.category }}]</small>
-					<small>{{ log.date | timePast:true }}</small>
-					<div [innerHTML]="log.message"></div>
-
-				</div>
-
-			</a>
+			<small class="block text-secondary text-xs">[{{ log.category }}]</small>
+			<small class="block text-secondary text-xs">{{ log.date | timePast:true }}</small>
+			<div [innerHTML]="log.message" class="mb-10"></div>
 
 		}
 
@@ -35,7 +33,7 @@
 	<div class="empty">
 		No logs available
 		<br>
-		<button routerLink="/logs" class="btn btn-ghost">
+		<button (click)="load()" class="btn btn-ghost">
 			<svg wGlyph="refresh"></svg> Refresh
 		</button>
 	</div>
