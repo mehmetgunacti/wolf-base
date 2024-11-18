@@ -11,3 +11,5 @@ export enum SidebarState {
 	BIG_HIDDEN = 'bigHidden',
 
 }
+
+export const CLOSE_MENU = 'close_menu';
