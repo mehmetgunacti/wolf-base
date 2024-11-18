@@ -18,6 +18,7 @@ export interface Entity_ModuleState {
 
 export interface Entity_EntitiesState {
 
+	uuids: Record<UUID, boolean>;
 	entities: Record<UUID, Entity>;
 	syncData: Record<UUID, SyncData>;
 	remoteMetadata: Record<UUID, RemoteMetadata>;
@@ -29,6 +30,7 @@ export interface Entity_EntitiesState {
 function createInitialEntitiesState(): Entity_EntitiesState {
 
 	return {
+		uuids: {},
 		entities: {},
 		syncData: {},
 		remoteMetadata: {}

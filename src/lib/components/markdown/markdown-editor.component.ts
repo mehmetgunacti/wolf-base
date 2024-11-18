@@ -1,7 +1,7 @@
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenuBar, CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, TemplateRef, effect, forwardRef, inject, input, output, signal, untracked, viewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, TemplateRef, computed, effect, forwardRef, inject, input, output, signal, untracked, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { GlyphDirective } from '@directives/glyph.directive';
@@ -54,7 +54,7 @@ export class MarkdownEditorComponent extends BaseComponent implements ControlVal
 	// Output
 	save = output<string>();
 
-	protected value = signal<string>('');
+	protected value = signal<string | null>(null);
 	protected disabled = signal<boolean>(false);
 	protected dirty = signal<boolean>(false);
 
@@ -63,7 +63,7 @@ export class MarkdownEditorComponent extends BaseComponent implements ControlVal
 	private onTouched: any = () => { };
 	registerOnChange(fn: any): void { this.onChange = fn; }
 	registerOnTouched(fn: any): void { this.onTouched = fn; }
-	writeValue(value: string): void { this.value.set(value); this.dirty.set(true); }
+	writeValue(value: string | null): void { console.log(value); this.value.set(value); this.dirty.set(false);}
 	setDisabledState(isDisabled: boolean): void { this.disabled.set(isDisabled); }
 	////////////
 
@@ -102,7 +102,8 @@ export class MarkdownEditorComponent extends BaseComponent implements ControlVal
 		effect(() => {
 
 			const content = this.value();
-			untracked(() => this.buffer.next(content));
+			if (content !== null)
+				untracked(() => this.buffer.next(content));
 
 		});
 

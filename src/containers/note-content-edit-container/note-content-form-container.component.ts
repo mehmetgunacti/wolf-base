@@ -1,9 +1,7 @@
 import { coreActions } from '@actions/core.actions';
 import { entityActions } from '@actions/entity.actions';
-import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, effect, inject, untracked } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { UUID } from '@constants/common.constant';
 import { AppEntityType } from '@constants/entity.constant';
@@ -11,15 +9,15 @@ import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { MarkdownEditorComponent } from '@libComponents/markdown/markdown-editor.component';
 import { PortalComponent } from '@libComponents/portal.component';
-import { Note, NoteContent } from '@models/note.model';
+import { NoteContent } from '@models/note.model';
 import { Store } from '@ngrx/store';
-import { selNoteContent_content } from '@selectors/note-content/note-content-ui.selectors';
+import { selNoteContent_content, selNoteContent_selectedHasContent } from '@selectors/note-content/note-content-ui.selectors';
 import { selNote_SelectedEntity } from '@selectors/note/note-ui.selectors';
-import { filter, take, tap, withLatestFrom } from 'rxjs';
+import { fc } from '@utils/form.util';
 
 @Component({
 	standalone: true,
-	imports: [ RouterLink, GlyphDirective, MarkdownEditorComponent, PortalComponent, AsyncPipe ],
+	imports: [ RouterLink, GlyphDirective, MarkdownEditorComponent, PortalComponent, ReactiveFormsModule ],
 	selector: 'app-note-content-form-container',
 	templateUrl: './note-content-form-container.component.html',
 	host: { 'class': 'comp p-4' }
@@ -28,47 +26,55 @@ export class NoteContentFormContainer extends BaseComponent {
 
 	private store: Store = inject(Store);
 
-	note$ = this.store.select(selNote_SelectedEntity);
+	protected note = this.store.selectSignal(selNote_SelectedEntity);
+	protected contentAvailable = this.store.selectSignal(selNoteContent_selectedHasContent);
+	protected fcContent = fc<string | null>(null);
 
-	fcContent: FormControl = new FormControl('', { validators: [ Validators.required ], nonNullable: true });
+	private content = this.store.selectSignal(selNoteContent_content);
 
 	constructor() {
 
 		super();
-		this.store.select(selNoteContent_content).pipe(
-			takeUntilDestroyed(),
-			tap(content => this.fcContent.setValue(content?.content))
-		).subscribe();
+		effect(() => {
 
-	}
-
-	onSaveClose(): void {
-
-		this.note$.pipe(
-			filter((note): note is Note => !!note),
-			withLatestFrom(this.store.select(selNoteContent_content)),
-			take(1)
-		).subscribe(([ note, noteContent ]) => {
-
-			if (noteContent)
-				this.store.dispatch(entityActions.update({ entityType: AppEntityType.noteContent, id: note.id, entity: { name: note.name, content: this.fcContent.value } }));
-			else
-				this.store.dispatch(entityActions.create({ entityType: AppEntityType.noteContent, entity: { id: note.id, name: note.name, content: this.fcContent.value } as NoteContent }));
+			const content = this.content();
+			if (content)
+				untracked(() => this.fcContent.setValue(content.content));
 
 		});
 
 	}
 
-	onSave(): void {
+	onSave(content: string): void {
 
-		// todo
-		this.onSaveClose();
+		const note = this.note();
+		if (note !== null) {
+
+			if (this.contentAvailable())
+				this.store.dispatch(entityActions.update({
+					entityType: AppEntityType.noteContent,
+					id: note.id,
+					entity: { name: note.name, content: this.fcContent.value }
+				}));
+			else
+				this.store.dispatch(entityActions.create({
+					entityType: AppEntityType.noteContent,
+					entity: {
+						id: note.id,
+						name: note.name,
+						content
+					} as NoteContent
+				}));
+
+		}
 
 	}
 
 	onCancel(id: UUID): void {
 
-		this.store.dispatch(coreActions.navigate({ url: [ '/notes', id ] }));
+		if (this.fcContent.dirty)
+			if (confirm(`Discard changes?`))
+				this.store.dispatch(coreActions.navigate({ url: [ '/notes', id ] }));
 
 	}
 

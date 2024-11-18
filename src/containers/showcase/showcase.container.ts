@@ -64,7 +64,7 @@ export class ShowcaseContainer extends BaseComponent {
 		'tags': nnfc<string>(''),
 		'area': nnfc<string>(''),
 		'status': nnfc<string>(''),
-		'editor': nnfc<string>(''),
+		'editor': nnfc<string | null>(null),
 		'switches': fg({
 			'default': fc<boolean>(true),
 			'success': fc<boolean>(true),

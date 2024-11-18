@@ -12,7 +12,8 @@ function entityData(
 	entityType: AppEntityType,
 	entities: boolean = true,
 	syncData: boolean = true,
-	remoteMetadata: boolean = true
+	remoteMetadata: boolean = true,
+	uuids: boolean = false
 ) {
 
 	return {
@@ -20,7 +21,8 @@ function entityData(
 		entityType: of(entityType),
 		entities: entities ? from(repo.getRepository(entityType).list()) : of([]),
 		syncData: syncData ? from(repo.getRepository(entityType).listSyncData()) : of([]),
-		remoteMetadata: remoteMetadata ? from(repo.getRepository(entityType).listRemoteMetadata()) : of([])
+		remoteMetadata: remoteMetadata ? from(repo.getRepository(entityType).listRemoteMetadata()) : of([]),
+		uuids: uuids ? from(repo.getRepository(entityType).listIds()) : of([])
 
 	};
 
@@ -43,7 +45,7 @@ export class CoreLoadEffects {
 				entities: forkJoin([
 					forkJoin(entityData(this.localRepository, AppEntityType.bookmark)),
 					forkJoin(entityData(this.localRepository, AppEntityType.note)),
-					forkJoin(entityData(this.localRepository, AppEntityType.noteContent, false)),
+					forkJoin(entityData(this.localRepository, AppEntityType.noteContent, false, true, true, true)),
 					forkJoin(entityData(this.localRepository, AppEntityType.word)),
 					forkJoin(entityData(this.localRepository, AppEntityType.quote)),
 					forkJoin(entityData(this.localRepository, AppEntityType.quizEntry)),

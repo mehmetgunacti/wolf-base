@@ -1,3 +1,4 @@
+import { UUID } from '@constants/common.constant';
 import { AppEntityType } from '@constants/entity.constant';
 import { Theme } from '@constants/theme.constant';
 import { ToastConfiguration } from '@libComponents/toast/toast.util';
@@ -19,6 +20,7 @@ export const coreActions = createActionGroup({
 										configuration	: Configuration,
 										entities		: {
 											entityType: AppEntityType,
+											uuids: UUID[],
 											entities: Entity[],
 											syncData: SyncData[],
 											remoteMetadata: RemoteMetadata[]

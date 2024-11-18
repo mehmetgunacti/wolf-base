@@ -27,6 +27,12 @@ function reduceRemoteMetadata(data: RemoteMetadata[]): Record<UUID, RemoteMetada
 
 }
 
+function reduceUUIDs(data: UUID[]): Record<UUID, boolean> {
+
+	return data.reduce((record, id) => { record[ id ] = true; return record; }, {} as Record<UUID, boolean>);
+
+}
+
 const reducer = createReducer(
 
 	entity_initialState,
@@ -70,6 +76,7 @@ const reducer = createReducer(
 					draft[ d.entityType ].entities = reduceEntities(d.entities);
 					draft[ d.entityType ].syncData = reduceSyncData(d.syncData);
 					draft[ d.entityType ].remoteMetadata = reduceRemoteMetadata(d.remoteMetadata);
+					draft[ d.entityType ].uuids = reduceUUIDs(d.uuids);
 
 				}
 

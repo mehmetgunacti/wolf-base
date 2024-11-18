@@ -1,4 +1,4 @@
-@if (note$ | async; as n) {
+@if (note(); as n) {
 
 	<w-portal>
 
@@ -16,8 +16,8 @@
 		<div>
 
 			<w-markdown-editor
-				(save)="onSave()"
-				(saveClose)="onSaveClose()"
+				[formControl]="fcContent"
+				(save)="onSave($event)"
 				(cancel)="onCancel(n.id)"
 				label="Content"/>
 

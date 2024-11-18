@@ -1,5 +1,6 @@
 import { noteActions } from '@actions/note.actions';
 import { inject, Injectable } from '@angular/core';
+import { UUID } from '@constants/common.constant';
 import { LocalRepositoryService } from '@libServices/local-repository.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
@@ -17,7 +18,7 @@ export class NoteContentLoadEffects {
 
 			ofType(noteActions.setSelectedId),
 			map(param => param.id),
-			filter((id): id is string => !!id),
+			filter((id): id is UUID => !!id),
 			switchMap(id => this.localRepository.noteContent.getEntity(id)),
 			map(content => noteActions.loadOneContentSuccess({ content }))
 
