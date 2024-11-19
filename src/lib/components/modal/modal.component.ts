@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, output, viewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, output, viewChild } from '@angular/core';
 import { delayDestroyTrigger } from '@animations/delayDestroy.animation';
 import { BaseComponent } from '../base.component';
 
@@ -13,7 +13,7 @@ import { BaseComponent } from '../base.component';
 		'(keydown)': 'onKeydownHandler($event)'
 	}
 })
-export class ModalComponent extends BaseComponent implements OnInit {
+export class ModalComponent extends BaseComponent implements OnInit, OnDestroy {
 
 	private dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
 
