@@ -15,7 +15,10 @@ export class ToastService {
 	private componentService = inject(ComponentService);
 	private toasts = new Map<string, ComponentRef<ToastComponent>>();
 
-	public show(conf: Partial<ToastConfiguration>): void {
+	public show(c: Partial<ToastConfiguration>): void {
+
+		// add duration if not 'error'
+		const conf = c.severity === 'error' ? c : { ...c, life: 3000 };
 
 		// create component, add to <body>
 		const componentRef = this.componentService.createInBody<ToastComponent>(
@@ -27,18 +30,27 @@ export class ToastService {
 		this.toasts.set(componentRef.instance.getId(), componentRef);
 
 		// calculate 'top' after one toast is destroyed
-		componentRef.instance.close.subscribe(
-			id => {
+		componentRef.instance.close.subscribe(id => {
 
-				const ref = this.toasts.get(id);
-				if (ref) {
-					ref.destroy();
-					this.toasts.delete(id);
-					this.calcTops();
-				}
+			const ref = this.toasts.get(id);
+			if (ref)
+				this.destroyToast(ref);
 
-			}
-		);
+		});
+		//
+		// 		if (conf.severity !== 'error')
+		// 			setTimeout(
+		// 				() => this.destroyToast(componentRef),
+		// 				conf.life
+		// 			);
+
+	}
+
+	private destroyToast(ref: ComponentRef<ToastComponent>): void {
+
+		ref.destroy();
+		this.toasts.delete(ref.instance.getId());
+		this.calcTops();
 
 	}
 

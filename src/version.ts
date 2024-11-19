@@ -1,6 +1,6 @@
 // this file is automatically created
 export const buildInfo = {
-	version: '0.2.23',
-	builtTime: '2024-11-18T04:22:34.265Z',
-	builtNumber: '1547'
+	version: '0.2.24',
+	builtTime: '2024-11-19T05:14:50.709Z',
+	builtNumber: '1557'
 };
