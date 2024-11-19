@@ -9,55 +9,7 @@ import { ToastConfiguration } from './toast.util';
 	standalone: true,
 	imports: [ GlyphDirective ],
 	selector: 'w-toast',
-	template: `
-		<dialog #dialog open (click)="onClose()" class="
-			hidden
-			opacity-0
-			open:opacity-100
-			open:grid
-			open:grid-flow-row
-			p-2
-			fixed
-
-			w-11/12
-			sm:w-80
-			min-h-20
-
-			z-overlay
-
-			shadow-component
-			bg-accent
-			text-white
-			rounded-lg
-			cursor-pointer
-
-			open:top-20
-
-			sm:inset-auto
-
-			open:sm:inset-auto
-			open:sm:top-20
-			open:sm:right-4
-
-			[transition-property:display_opacity]
-			[transition-behavior:allow-discrete]
-			duration-500
-
-			starting:open:top-[-100%]
-			starting:sm:open:right-[-100%]
-
-		">
-			<div class="flex items-center flex-1">
-				<div class="flex items-center justify-center p-2">
-					<svg [wGlyph]="glyph()"></svg>
-				</div>
-				<div class="flex flex-col flex-1 p-2">
-					<span class="font-bold text-lg">{{conf().summary}}</span>
-					<span class="">{{conf().detail}}</span>
-				</div>
-			</div>
-		</dialog>
-	`,
+	templateUrl: './toast.component.html',
 	animations: [ delayDestroyTrigger ],
 	host: {
 		'[@delayDestroy]': '',
@@ -70,6 +22,7 @@ export class ToastComponent extends BaseComponent implements OnDestroy {
 
 	// Input
 	conf = input.required<ToastConfiguration>();
+	top = input<string>('calc(var(--header-height) + 5.5rem)');
 
 	// Output
 	close = output<string>();
@@ -79,10 +32,10 @@ export class ToastComponent extends BaseComponent implements OnDestroy {
 
 		switch (this.severity()) {
 
-			case 'success': return 'task_alt';
-			case 'info': return 'question_diamond';
-			case 'warn': return 'bookmark_add';
-			case 'error': return 'backspace';
+			case 'success': return 'success';
+			case 'info': return 'info';
+			case 'warn': return 'warn';
+			case 'error': return 'error';
 			default: return 'help';
 
 		}
@@ -102,8 +55,6 @@ export class ToastComponent extends BaseComponent implements OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-
-		console.log('destroying', this.componentId);
 
 		this.dialog().nativeElement.close();
 

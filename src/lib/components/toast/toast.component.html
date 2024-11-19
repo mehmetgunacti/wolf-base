@@ -1,22 +1,54 @@
-@let c = conf();
+<dialog
+	#dialog
+	open
+	(click)="onClose()"
+	[style.top]="top()"
+	[class.bg-success]="conf().severity === 'success'"
+	[class.bg-info]="conf().severity === 'info'"
+	[class.bg-warn]="conf().severity === 'warn'"
+	[class.bg-error]="conf().severity === 'error'"
+	class="
 
-<div toast-left>
+		fixed
+		hidden
+		opacity-0
 
-	<!-- <svg [wGlyph]="glyph()"></svg> -->
+		open:opacity-100
+		open:grid
+		open:grid-flow-row
 
-</div>
-<div toast-right>
+		open:sm:inset-auto
+		open:sm:right-4
 
-	@if (c.summary) {
+		w-11/12
+		sm:w-80
+		sm:inset-auto
 
-		{{c.summary}}
+		min-h-20
+		z-overlay
 
-	}
+		p-2
+		shadow-component
+		bg-accent
+		text-white
+		rounded-lg
+		cursor-pointer
 
-	@if (c.detail) {
+		[transition-property:top_display_opacity]
+		[transition-behavior:allow-discrete]
+		duration-500
 
-		<small>{{c.detail}}</small>
+		starting:open:top-[-100%]
+		starting:sm:open:right-[-100%]
 
-	}
-
-</div>
+	">
+	<div class="flex flex-1 items-center">
+		<div class="flex justify-center items-center p-2">
+			<svg [wGlyph]="glyph()" class="text-3xl"></svg>
+		</div>
+		<div class="flex flex-col flex-1 p-2">
+			<span class="font-bold text-lg">{{conf().summary}}</span>
+			<span class="">{{conf().detail}}</span>
+		</div>
+	</div>
+</dialog>
