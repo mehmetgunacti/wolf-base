@@ -26,6 +26,45 @@
 			px-4
 			h-button-height;
 
+		&.btn-success {
+
+			@apply
+				text-success
+				bg-success
+				border
+				border-success
+
+				hover:bg-success-hover
+				active:bg-success-active;
+
+		}
+
+		&.btn-info {
+
+			@apply
+				text-info
+				bg-info
+				border
+				border-info
+
+				hover:bg-info-hover
+				active:bg-info-active;
+
+		}
+
+		&.btn-warn {
+
+			@apply
+				text-warn
+				bg-warn
+				border
+				border-warn
+
+				hover:bg-warn-hover
+				active:bg-warn-active;
+
+		}
+
 		&.btn-error {
 
 			@apply
