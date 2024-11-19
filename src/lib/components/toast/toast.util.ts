@@ -8,7 +8,6 @@ export interface ToastConfiguration { // visit primeng documenation for more
 	closable?: boolean, // true	When enabled, displays a close icon to hide a message manually.
 	glyph?: string, // google icons: material-symbols-outlined
 
-	// non-primeng related
 	id?: number
 
 }

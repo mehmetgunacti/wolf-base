@@ -89,10 +89,5 @@ export class ShowcaseContainer extends BaseComponent {
 		this.toast.show({ severity: 'success', summary: 'Success Toast', detail: 'this is detail' });
 
 	}
-	onOpenToast2(): void {
-
-		this.toast.show2();
-
-	}
 
 }

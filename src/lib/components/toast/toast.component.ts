@@ -1,35 +1,70 @@
-import { AfterViewInit, Component, computed, effect, ElementRef, input, output, viewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, input, OnDestroy, output, viewChild } from '@angular/core';
+import { delayDestroyTrigger } from '@animations/delayDestroy.animation';
+import { GlyphName } from '@constants/glyphs.constant';
+import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '../base.component';
 import { ToastConfiguration } from './toast.util';
-import { GlyphDirective } from '@directives/glyph.directive';
-import { GlyphName } from '@constants/glyphs.constant';
-import { Subject } from 'rxjs';
 
 @Component({
 	standalone: true,
 	imports: [ GlyphDirective ],
 	selector: 'w-toast',
 	template: `
-		<dialog #dialog class="grid grid-flow-row p-2 fixed w-11/12 sm:w-80 min-h-20 z-overlay shadow-component bg-accent text-white rounded-lg open:sm:inset-auto open:top-20 open:sm:top-20 open:sm:right-4 transition-all duration-500 starting:open:top-[-100%] starting:sm:open:right-[-100%]">
-			<form method="dialog" class="flex flex-col sm:flex-row">
-				<div class="flex items-center flex-1">
-					<div class="flex items-center justify-center p-2">
-						<svg [wGlyph]="glyph()"></svg>
-					</div>
-					<div class="flex flex-col flex-1 p-2">
-						<span class="font-bold">{{conf().summary}}</span>
-						<span class="text-secondary">{{conf().detail}}</span>
-					</div>
+		<dialog #dialog open (click)="onClose()" class="
+			hidden
+			opacity-0
+			open:opacity-100
+			open:grid
+			open:grid-flow-row
+			p-2
+			fixed
+
+			w-11/12
+			sm:w-80
+			min-h-20
+
+			z-overlay
+
+			shadow-component
+			bg-accent
+			text-white
+			rounded-lg
+			cursor-pointer
+
+			open:top-20
+
+			sm:inset-auto
+
+			open:sm:inset-auto
+			open:sm:top-20
+			open:sm:right-4
+
+			[transition-property:display_opacity]
+			[transition-behavior:allow-discrete]
+			duration-500
+
+			starting:open:top-[-100%]
+			starting:sm:open:right-[-100%]
+
+		">
+			<div class="flex items-center flex-1">
+				<div class="flex items-center justify-center p-2">
+					<svg [wGlyph]="glyph()"></svg>
 				</div>
-				<button class="btn btn-ghost self-end sm:self-center">Confirm</button>
-			</form>
+				<div class="flex flex-col flex-1 p-2">
+					<span class="font-bold text-lg">{{conf().summary}}</span>
+					<span class="">{{conf().detail}}</span>
+				</div>
+			</div>
 		</dialog>
 	`,
+	animations: [ delayDestroyTrigger ],
 	host: {
+		'[@delayDestroy]': '',
 		'[class]': 'contents'
 	}
 })
-export class ToastComponent extends BaseComponent implements AfterViewInit {
+export class ToastComponent extends BaseComponent implements OnDestroy {
 
 	private dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
 
@@ -37,10 +72,8 @@ export class ToastComponent extends BaseComponent implements AfterViewInit {
 	conf = input.required<ToastConfiguration>();
 
 	// Output
-	close = output<number>();
+	close = output<string>();
 
-	private afterViewInit$ = new Subject<void>();
-	afterViewInit = this.afterViewInit$.asObservable();
 	severity = computed<string>(() => this.conf().severity);
 	protected glyph = computed<GlyphName>((): GlyphName => {
 
@@ -68,24 +101,23 @@ export class ToastComponent extends BaseComponent implements AfterViewInit {
 
 	}
 
-	ngAfterViewInit(): void {
+	ngOnDestroy(): void {
 
-		this.afterViewInit$.next();
-		this.afterViewInit$.complete();
+		console.log('destroying', this.componentId);
 
-	}
-
-	show(): void {
-
-		this.dialog().nativeElement.show();
+		this.dialog().nativeElement.close();
 
 	}
 
 	onClose(): void {
 
-		const id = this.conf().id;
-		if (id)
-			this.close.emit(id);
+		this.close.emit(this.componentId);
+
+	}
+
+	getId(): string {
+
+		return this.componentId;
 
 	}
 

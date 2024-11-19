@@ -2,14 +2,12 @@ import { ComponentRef, Injectable, inject } from '@angular/core';
 import { ComponentService } from '@services/component.service';
 import { ToastComponent } from './toast.component';
 import { ToastConfiguration } from './toast.util';
-import { take } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ToastService {
 
 	private componentService = inject(ComponentService);
-
-	private ref: ComponentRef<ToastComponent> | null = null;
+	private toasts = new Map<string, ComponentRef<ToastComponent>>();
 
 	public show(conf: Partial<ToastConfiguration>): void {
 
@@ -17,22 +15,18 @@ export class ToastService {
 			ToastComponent,
 			{ conf }
 		);
-		this.ref = componentRef;
-		componentRef.instance.show();
-		console.log(componentRef.instance);
+		this.toasts.set(componentRef.instance.getId(), componentRef);
+		componentRef.instance.close.subscribe(
+			id => {
 
-		// componentRef.instance.afterViewInit.pipe(
-		// 	take(1)
-		// ).subscribe(() => {
-		// 	componentRef.instance.show();
-		// });
+				const ref = this.toasts.get(id);
+				console.log('destroying', id);
 
-	}
+				if (ref)
+					ref.destroy();
 
-	public show2():void {
-
-		if (this.ref)
-			this.ref.instance.show();
+			}
+		);
 
 	}
 
