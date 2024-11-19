@@ -14,6 +14,7 @@ import { MarkdownEditorComponent } from '@libComponents/markdown/markdown-editor
 import { SelectComponent } from '@libComponents/select/select.component';
 import { SwitchComponent } from '@libComponents/switch/switch.component';
 import { TextareaComponent } from '@libComponents/textarea/textarea.component';
+import { ToastService } from '@libComponents/toast/toast.service';
 import { Store } from '@ngrx/store';
 import { selNote_EntityList } from '@selectors/entity/entity-note.selectors';
 import { fc, fg, nnfc } from '@utils/form.util';
@@ -47,10 +48,12 @@ export class ShowcaseContainer extends BaseComponent {
 	PROJECT_STATUS = PROJECT_STATUS;
 
 	private store: Store = inject(Store);
+	private toast = inject(ToastService);
 
 	alertsVisible = signal<boolean>(false);
-	formsVisible = signal<boolean>(true);
+	formsVisible = signal<boolean>(false);
 	buttonsVisible = signal<boolean>(false);
+	toastsVisible = signal<boolean>(true);
 	glyphsVisible = signal<boolean>(false);
 
 	nodes = this.store.selectSignal(selNote_EntityList);
@@ -78,6 +81,17 @@ export class ShowcaseContainer extends BaseComponent {
 
 		if (val !== null)
 			this.tagSuggestions.update(() => [ 'abc', 'def', 'ghi' ].filter(v => v.includes(val)));
+
+	}
+
+	onOpenToast(): void {
+
+		this.toast.show({ severity: 'success', summary: 'Success Toast', detail: 'this is detail' });
+
+	}
+	onOpenToast2(): void {
+
+		this.toast.show2();
 
 	}
 
