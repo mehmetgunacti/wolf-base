@@ -13,7 +13,7 @@ import { ToastConfiguration } from './toast.util';
 	animations: [ delayDestroyTrigger ],
 	host: {
 		'[@delayDestroy]': '',
-		'[class]': 'contents'
+		'class': 'contents'
 	}
 })
 export class ToastComponent extends BaseComponent implements OnDestroy {

@@ -7,11 +7,17 @@
 	[class.bg-info]="conf().severity === 'info'"
 	[class.bg-warn]="conf().severity === 'warn'"
 	[class.bg-error]="conf().severity === 'error'"
+	autofocus
+	tabindex="0"
 	class="
 
 		fixed
 		hidden
 		opacity-0
+
+		outline-none
+		focus-visible:ring-4
+		focus-visible:ring-outline
 
 		open:opacity-100
 		open:grid
