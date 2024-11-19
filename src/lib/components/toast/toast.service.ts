@@ -18,7 +18,7 @@ export class ToastService {
 	public show(c: Partial<ToastConfiguration>): void {
 
 		// add duration if not 'error'
-		const conf = c.severity === 'error' ? c : { ...c, life: 3000 };
+		const conf = c.severity === 'error' ? c : { ...c, life: 5000 };
 
 		// create component, add to <body>
 		const componentRef = this.componentService.createInBody<ToastComponent>(
