@@ -63,7 +63,12 @@ export class MarkdownEditorComponent extends BaseComponent implements ControlVal
 	private onTouched: any = () => { };
 	registerOnChange(fn: any): void { this.onChange = fn; }
 	registerOnTouched(fn: any): void { this.onTouched = fn; }
-	writeValue(value: string | null): void { console.log(value); this.value.set(value); this.dirty.set(false);}
+	writeValue(value: string | null): void {
+
+		this.value.set(value);
+		this.dirty.set(false);
+
+	}
 	setDisabledState(isDisabled: boolean): void { this.disabled.set(isDisabled); }
 	////////////
 
