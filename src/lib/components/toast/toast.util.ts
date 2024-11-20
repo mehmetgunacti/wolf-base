@@ -1,20 +1,16 @@
-export interface ToastConfiguration { // visit primeng documenation for more
+import { GlyphName } from '@constants/glyphs.constant';
+
+export interface ToastConfiguration {
 
 	severity: 'success' | 'info' | 'warn' | 'error',
 	summary?: string,
-	detail?: string
+	detail?: string;
 	life?: number, // 3000	Number of time in milliseconds to wait before closing the message.
 	sticky?: boolean, // false	Whether the message should be automatically closed based on life property or kept visible.
 	closable?: boolean, // true	When enabled, displays a close icon to hide a message manually.
-	glyph?: string, // google icons: material-symbols-outlined
+	glyph?: GlyphName,
 
-	id?: number
-
-}
-
-export const successNotification: ToastConfiguration = {
-
-	severity: 'success'
+	id?: number;
 
 }
 
@@ -24,4 +20,4 @@ export const errorNotification: ToastConfiguration = {
 	sticky: true,
 	closable: true
 
-}
+};
