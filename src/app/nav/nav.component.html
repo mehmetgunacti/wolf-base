@@ -31,7 +31,7 @@
 		routerLinkActive="nav-item-active"
 		[attr.tabindex]="link.isActive ? '-1' : '0'"
 		[routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }"
-		[title]="item.title ?? ''">
+		[title]="item.title ?? item.label ?? ''">
 
 		<ng-container *ngTemplateOutlet="anchorContentTemplate; context: { item, link }"/>
 
@@ -63,6 +63,7 @@
 	<a	#link
 		class="relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline w-100 h-11 text-base-color-secondary hover:text-base-color cursor-pointer focus-visible:outline-none overflow-hidden group"
 		(click)="onSwitchTheme()"
+		title="Switch Theme"
 		tabindex="0">
 
 		<ng-container *ngTemplateOutlet="anchorContentTemplate; context: { item: { label: 'Switch Theme', icon: 'colors' }, link }"/>
