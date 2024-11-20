@@ -86,7 +86,8 @@ export class ShowcaseContainer extends BaseComponent {
 
 	onOpenToast(severity: 'success' | 'error' | 'info' | 'warn'): void {
 
-		this.toast.show({ severity, summary: 'Success Toast', detail: 'this is detail' });
+		const summary = severity.charAt(0).toUpperCase() + severity.substr(1) + ' Toast';
+		this.toast.show({ severity, summary, detail: 'Details here' });
 
 	}
 
