@@ -16,7 +16,7 @@ export class PortalComponent extends BaseComponent implements AfterViewInit, OnD
 
 	private document = inject(DOCUMENT);
 	private viewContainerRef = inject(ViewContainerRef);
-	private portalActionsTmplRef = viewChild.required<TemplateRef<{}>>('outlet');
+	private outletTemplateRef = viewChild.required<TemplateRef<{}>>('outlet');
 	private viewRef!: EmbeddedViewRef<{}>;
 
 	// Input
@@ -28,14 +28,14 @@ export class PortalComponent extends BaseComponent implements AfterViewInit, OnD
 
 		// render the view
 		this.viewRef = this.viewContainerRef.createEmbeddedView(
-			this.portalActionsTmplRef()
+			this.outletTemplateRef()
 		);
 		this.viewRef.detectChanges();
 
 		// search for outlets
 		// Important: when used with w-modal there might be several instances found
-		// Happens when you close a modal and immediately open another one, because there's a 2s delay before removal from DOM
-		// (because @delayDestroy on modal)
+		// Happens when you close a modal and immediately open another one -> there's a 2s delay before removal from DOM
+		// (see @delayDestroy on modal)
 		const outletElements = this.document.querySelectorAll('#' + this.outletName()); // #portal-outlet'
 
 		// just in case there's more than one instance, we take the last one found

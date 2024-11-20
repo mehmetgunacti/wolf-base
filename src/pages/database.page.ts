@@ -11,12 +11,12 @@ import { Store } from '@ngrx/store';
 	standalone: true,
 	imports: [ PortalComponent, DatabaseContainer, GlyphDirective ],
 	template: `
-		<w-portal>
+		<w-portal [replaceContent]="false">
 
 			<button
 				class="btn btn-ghost"
 				(click)="onBackupDatabase()">
-				<svg wGlyph="system_update_alt"></svg> Export
+				<svg wGlyph="data_export"></svg> Export
 			</button>
 
 		</w-portal>
