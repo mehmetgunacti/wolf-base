@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { Table } from '@constants/entity.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
@@ -7,7 +8,7 @@ import { FormatBytesPipe } from '@pipes/format-bytes.pipe';
 
 @Component({
 	standalone: true,
-	imports: [ FormatBytesPipe, GlyphDirective ],
+	imports: [ FormatBytesPipe, GlyphDirective, DecimalPipe ],
 	selector: 'app-module-report',
 	templateUrl: './module-report.component.html',
 	host: { 'class': 'grid' }

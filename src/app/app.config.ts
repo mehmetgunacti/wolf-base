@@ -1,7 +1,9 @@
 import { coreActions } from '@actions/core.actions';
 import { CdkScrollable } from '@angular/cdk/scrolling';
+import { registerLocaleData } from '@angular/common';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { APP_INITIALIZER, ApplicationConfig, ErrorHandler, isDevMode, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import localeDe from '@angular/common/locales/de';
+import { APP_INITIALIZER, ApplicationConfig, ErrorHandler, isDevMode, LOCALE_ID, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, RouterOutlet, withViewTransitions } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
@@ -54,6 +56,11 @@ const appServices = [
 
 ];
 
+// for e.g. DecimalPipe {{ myNumber | number:'1.0-0':'de-DE' }} to work:
+// step 1: Register the locale data
+// step 2: set LOCALE_ID in "providers" array
+registerLocaleData(localeDe);
+
 export const appConfig: ApplicationConfig = {
 
 	providers: [
@@ -65,6 +72,7 @@ export const appConfig: ApplicationConfig = {
 		provideStore(store.reducerList, { metaReducers: store.metaReducers }),
 		provideEffects(store.effectList),
 		provideStoreDevtools(),
+		{ provide: LOCALE_ID, useValue: 'de-DE' },
 		...appServices
 	]
 

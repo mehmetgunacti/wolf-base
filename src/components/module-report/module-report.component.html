@@ -11,7 +11,7 @@
 		@for (row of report().reports; track $index) {
 
 			<div class="flex items-center"><strong>{{ row.label }}</strong></div>
-			<div class="flex justify-end items-center text-sm whitespace-nowrap">{{ row.count }}</div>
+			<div class="flex justify-end items-center text-sm whitespace-nowrap">{{ row.count | number:'1.0-0':'de-DE' }}</div>
 			<div class="flex justify-end items-center text-sm whitespace-nowrap">{{ row.size | formatBytes }}</div>
 			<div>
 				<button
