@@ -1,0 +1,144 @@
+<fieldset class="relative p-3 comp">
+
+	<legend class="flex items-center gap-1 bg-component-dark px-3 rounded-lg h-button-height">
+
+		@switch (task().entity) {
+
+			<!-- Bookmarks -->
+			@case (EntityType.bookmark) {
+
+				<svg wGlyph="bookmarks"></svg> Bookmarks
+
+			}
+
+			<!-- Notes -->
+			@case (EntityType.note) {
+
+				<svg wGlyph="note_stack"></svg> Notes
+			}
+
+			<!-- Notes Content -->
+			@case (EntityType.noteContent) {
+
+				<svg wGlyph="note_stack"></svg> Note Content
+
+			}
+
+			<!-- Projects -->
+			@case (EntityType.project) {
+
+				<svg wGlyph="task_alt"></svg> Projects
+
+			}
+
+			<!-- Quotes -->
+			@case (EntityType.quote) {
+
+				<svg wGlyph="format_quote"></svg> Quotes
+
+			}
+
+			<!-- Quiz Entries -->
+			@case (EntityType.quizEntry) {
+
+				<svg wGlyph="timer"></svg> Quiz Entries
+
+			}
+
+			<!-- Project Tasks -->
+			@case (EntityType.task) {
+
+				<svg wGlyph="task_alt"></svg> Project Tasks
+
+			}
+
+			<!-- Words -->
+			@case (EntityType.word) {
+
+				<svg wGlyph="dictionary"></svg> Words
+
+			}
+
+			<!-- UNKNOWN CASE -->
+			@default {
+
+				<svg wGlyph="help"></svg> UNKNOWN
+
+			}
+
+		}
+
+	</legend>
+
+	<header>
+
+		<div>
+
+			@switch (task().type) {
+
+				@case (CloudTaskType.local_new)			{ {{ task().items.length }} {{ task().items.length > 1 ? 'items' : 'item' }} created }
+				@case (CloudTaskType.local_updated) 	{ {{ task().items.length }} {{ task().items.length > 1 ? 'items' : 'item' }} updated }
+				@case (CloudTaskType.local_deleted) 	{ {{ task().items.length }} {{ task().items.length > 1 ? 'items' : 'item' }} deleted }
+				@case (CloudTaskType.clicked)			{ {{ task().items.length }} {{ task().items.length > 1 ? 'bookmarks' : 'bookmark' }} clicked }
+				@case (CloudTaskType.remote_new)		{ {{ task().items.length }} new {{ task().items.length > 1 ? 'items' : 'item' }} on server }
+				@case (CloudTaskType.remote_updated)	{ {{ task().items.length }} updated {{ task().items.length > 1 ? 'items' : 'item' }} on server }
+				@case (CloudTaskType.remote_deleted)	{ {{ task().items.length }} deleted {{ task().items.length > 1 ? 'items' : 'item' }} on server }
+				@case (CloudTaskType.updated_updated)	{ Conflict: {{ task().items.length }} updated {{ task().items.length > 1 ? 'items' : 'item' }} locally and on server }
+				@case (CloudTaskType.deleted_deleted)	{ {{ task().items.length }} deleted {{ task().items.length > 1 ? 'items' : 'item' }} locally and on server  }
+				@case (CloudTaskType.updated_deleted)	{ Conflict: {{ task().items.length }} {{ task().items.length > 1 ? 'items' : 'item' }} updated locally, deleted on server }
+				@case (CloudTaskType.deleted_updated)	{ Conflict: {{ task().items.length }} {{ task().items.length > 1 ? 'items' : 'item' }} deleted locally, updated on server }
+
+			}
+
+		</div>
+
+	</header>
+
+	<!-- CONTENT -->
+	<section class="mt-2 p-2 max-h-80 overflow-y-auto scrollbar">
+
+		@for (item of task().items; track item.id) {
+
+			<div class="mb-5">
+				<small class="block text-secondary">{{ item.id }}</small>
+				<span>{{ item.name }}</span>
+			</div>
+
+		}
+
+	</section>
+
+	<!-- FOOTER -->
+	<footer class="flex justify-end">
+
+		@switch (actionType()) {
+
+			@case ('upload') {
+
+				<button type="button" class="btn" (click)="onActionClicked()">
+					<svg wGlyph="cloud_upload" class="text-[1.3em]"></svg> Upload
+				</button>
+
+			}
+
+			@case ('download') {
+
+				<button type="button" class="btn" (click)="onActionClicked()">
+					<svg wGlyph="cloud_download" class="text-[1.3em]"></svg> Download
+				</button>
+
+			}
+
+			@case ('view') {
+
+				<button type="button" class="btn btn-error" (click)="onActionClicked()">
+					<svg wGlyph="troubleshoot" class="text-[1.3em]"></svg> View
+				</button>
+
+			}
+
+		}
+
+	</footer>
+
+</fieldset>

@@ -181,7 +181,7 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	async listRemoteMetadata(): Promise<RemoteMetadata[]> {
 
-		return await this.db.readAll<RemoteMetadata>(this.table);
+		return await this.db.readAll<RemoteMetadata>(this.table_remote);
 
 	}
 

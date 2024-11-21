@@ -1,0 +1,44 @@
+<w-portal>
+
+	<button
+		class="btn btn-ghost"
+		(click)="onDownloadRemoteIds()">
+		<svg wGlyph="refresh"></svg> Refresh
+	</button>
+
+</w-portal>
+
+@if (isFirestoreConfigMissing()) {
+
+	<w-alert glyph="info" summary="Firestore configuration missing" severity="warn">
+		<button class="btn btn-ghost" routerLink="/settings">
+			<svg wGlyph="settings"></svg> Configure
+		</button>
+	</w-alert>
+
+}
+
+@for(task of tasks$ | async; track $index) {
+
+	<app-cloud-task
+		[task]="task"
+		(action)="onAction($event)"/>
+
+} @empty {
+
+	<div>
+
+		<div class="">
+
+			<span class="">
+				<svg wGlyph="check_circle"></svg> No tasks available
+			</span>
+			<button routerLink="/" class="btn btn-ghost">
+				<svg wGlyph="home"></svg> Home
+			</button>
+
+		</div>
+
+	</div>
+
+}
