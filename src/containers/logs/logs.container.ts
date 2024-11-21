@@ -18,7 +18,7 @@ export class LogsContainer extends BaseComponent {
 
 	private store = inject(Store);
 	private logs = inject(Store).selectSignal(selLogs_allEntries);
-	protected sorted = computed(() => [ ...this.logs() ].sort((a, b) => a.date.localeCompare(b.date)));
+	protected sorted = computed(() => [ ...this.logs() ].sort((a, b) => b.date.localeCompare(a.date)));
 
 	constructor() {
 
