@@ -8,7 +8,6 @@ import { AppEntityType } from '@constants/entity.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { AlertComponent } from '@libComponents/alert/alert.component';
 import { BaseComponent } from '@libComponents/base.component';
-import { MessageBoxComponent } from '@libComponents/message-box.component';
 import { PortalComponent } from '@libComponents/portal.component';
 import { CloudTask, SyncTaskType } from '@models/cloud.model';
 import { Action, Store } from '@ngrx/store';
@@ -95,7 +94,7 @@ function getAction(task: CloudTask): Action | null {
 
 @Component({
 	standalone: true,
-	imports: [ GlyphDirective, AsyncPipe, CloudTaskComponent, PortalComponent, AlertComponent, RouterLink, MessageBoxComponent ],
+	imports: [ GlyphDirective, AsyncPipe, CloudTaskComponent, PortalComponent, AlertComponent, RouterLink ],
 	selector: 'app-cloud-tasks-container',
 	templateUrl: './cloud-tasks.container.html',
 	host: { 'class': 'grid gap-1 md:gap-2' }
