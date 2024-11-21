@@ -6,15 +6,16 @@ import { RouterLink } from '@angular/router';
 import { CloudTaskComponent } from '@components/cloud-task/cloud-task.component';
 import { AppEntityType } from '@constants/entity.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
+import { AlertComponent } from '@libComponents/alert/alert.component';
 import { BaseComponent } from '@libComponents/base.component';
+import { MessageBoxComponent } from '@libComponents/message-box.component';
+import { PortalComponent } from '@libComponents/portal.component';
 import { CloudTask, SyncTaskType } from '@models/cloud.model';
 import { Action, Store } from '@ngrx/store';
 import { selBoomkark_clickedCloudTasks } from '@selectors/bookmark/bookmark-clicks.selectors';
 import { selCloudAvailableTasks } from '@selectors/cloud/cloud.selectors';
 import { selCore_isFirestoreConfigMissing } from '@selectors/core/core-configuration.selectors';
 import { combineLatest, map, Observable } from 'rxjs';
-import { AlertComponent } from "../../lib/components/alert/alert.component";
-import { PortalComponent } from "../../lib/components/portal.component";
 
 function getBookmarkAction(taskType: SyncTaskType): Action | null {
 
@@ -94,7 +95,7 @@ function getAction(task: CloudTask): Action | null {
 
 @Component({
 	standalone: true,
-	imports: [ GlyphDirective, AsyncPipe, CloudTaskComponent, PortalComponent, AlertComponent, RouterLink ],
+	imports: [ GlyphDirective, AsyncPipe, CloudTaskComponent, PortalComponent, AlertComponent, RouterLink, MessageBoxComponent ],
 	selector: 'app-cloud-tasks-container',
 	templateUrl: './cloud-tasks.container.html',
 	host: { 'class': 'grid gap-1 md:gap-2' }
