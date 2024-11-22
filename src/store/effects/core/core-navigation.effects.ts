@@ -29,7 +29,7 @@ export class CoreNavigationEffects {
 
 	);
 
-	closeSidebarMenuOnMobile$ = createEffect(
+	closeSidebarOnMobile$ = createEffect(
 
 		() => this.router.events.pipe(
 
@@ -38,7 +38,7 @@ export class CoreNavigationEffects {
 				this.store.select(selCore_isBigScreen),
 				this.activatedRoute.queryParamMap
 			]),
-			filter(([ a, isBigScreen, paramMap ]) => !isBigScreen && !!paramMap.get(CLOSE_MENU)),
+			filter(([ _, isBigScreen, paramMap ]) => !isBigScreen && !!paramMap.get(CLOSE_MENU)),
 			map(() => coreActions.hideSidebar())
 
 		)
