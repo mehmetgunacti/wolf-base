@@ -16,13 +16,10 @@ import { NOTE_FORM, NoteFormImpl } from './note-form';
 	standalone: true,
 	imports: [ InputComponent, InputTagComponent, SelectTreeComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe ],
 	selector: 'app-note-form',
-	templateUrl: './note-form.component.html',
-	providers: [ { provide: NOTE_FORM, useClass: NoteFormImpl } ],
-	host: {
-		'class': 'component'
-	}
+	templateUrl: './note.form.html',
+	providers: [ { provide: NOTE_FORM, useClass: NoteFormImpl } ]
 })
-export class NoteFormComponent extends BaseComponent {
+export class NoteForm extends BaseComponent {
 
 	TAG_PINNED = TAG_PINNED;
 

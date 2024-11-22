@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { UUID } from '@constants/common.constant';
 import { AppEntityType } from '@constants/entity.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
-import { NoteFormComponent } from '@forms/note-form/note-form.component';
+import { NoteForm } from '@forms/note-form/note.form';
 import { BaseComponent } from '@libComponents/base.component';
 import { PortalComponent } from '@libComponents/portal.component';
 import { Note } from '@models/note.model';
@@ -17,16 +17,17 @@ import { Observable, Subject, combineLatest, map } from 'rxjs';
 
 @Component({
 	standalone: true,
-	imports: [ AsyncPipe, PortalComponent, RouterLink, GlyphDirective, NoteFormComponent ],
-	selector: 'app-note-edit-form-container',
-	templateUrl: './note-edit-form-container.component.html',
+	imports: [ PortalComponent, RouterLink, GlyphDirective, AsyncPipe, NoteForm ],
+	selector: 'app-note-new-form-container',
+	templateUrl: './note-new-form.container.html',
 	host: { 'class': 'comp p-4' }
 })
-export class NoteEditFormContainer extends BaseComponent {
+export class NoteNewFormContainer extends BaseComponent {
 
 	private store: Store = inject(Store);
 
-	note = this.store.selectSignal(selNote_SelectedEntity);
+	parentId$: Observable<UUID | null>;
+	cancelLink$: Observable<string[]>;
 	nodes = this.store.selectSignal(selNote_EntityList);
 	tagSuggestions$!: Observable<string[]>;
 	tagInput = new Subject<string | null>();
@@ -34,6 +35,17 @@ export class NoteEditFormContainer extends BaseComponent {
 	constructor() {
 
 		super();
+		this.parentId$ = this.store.select(selNote_SelectedEntity).pipe(
+
+			map(p => p ? p.id : null)
+
+		);
+		this.cancelLink$ = this.parentId$.pipe(
+
+			map(id => id ? [ '/notes', id ] : [ '/notes' ])
+
+		);
+
 		this.tagSuggestions$ = combineLatest([
 			this.store.select(selNote_distinctTagsArray),
 			this.tagInput
@@ -51,9 +63,9 @@ export class NoteEditFormContainer extends BaseComponent {
 
 	}
 
-	onUpdate(id: UUID, entity: Partial<Note>) {
+	onCreate(entity: Partial<Note>): void {
 
-		this.store.dispatch(entityActions.update({ entityType: AppEntityType.note, id, entity }));
+		this.store.dispatch(entityActions.create({ entityType: AppEntityType.note, entity }));
 
 	}
 
