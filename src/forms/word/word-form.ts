@@ -77,7 +77,7 @@ function fgDefinition(value?: Definition): FormGroup<DefinitionFormSchema> {
 		id: fc(id),
 		type: nnfc<DefinitionType>(type),
 		languages: faLanguages(languages),
-		samples: fa(samples.map(s => nnfc(s)))
+		samples: fa(samples.map(s => nnfc<string>(s, Validators.required)))
 
 	});
 

@@ -1,27 +1,27 @@
 @if (word(); as word) {
 
-	<header class="flex gap-2 mb-8 comp-title">
+	<header class="flex flex-col gap-2 mb-8 comp-title">
 
 		<span class="text-focus">{{ word.name }}</span>
 		@if (word.pronunciation) {
 
-			<small>{{ word.pronunciation }}</small>
+			<small class="text-secondary text-sm">{{ word.pronunciation }}</small>
 
 		}
 
 	</header>
-	<section class="flex flex-col gap-4">
+	<section class="flex flex-col gap-2">
 
 		@for (context of word.contexts; track $index) {
 
-			<blockquote class="my-2 pl-2 border-l-2 border-l-success">
+			<blockquote class="my-1 pl-2 border-l-2 border-l-success">
 				@if (word.contexts.length > 1) {
 
-					<small>Context #{{ $index + 1 }}</small>
+					<small class="block text-secondary">Context #{{ $index + 1 }}</small>
 
 				} @else {
 
-					<small>Context</small>
+					<small class="block text-secondary">Context</small>
 
 				}
 				{{ context }}
@@ -50,7 +50,7 @@
 
 				@for (sample of definition.samples; track $index) {
 
-					<blockquote class="my-2 pl-2 border-l-2 border-l-secondary">
+					<blockquote class="my-1 pl-2 border-l-2 border-l-secondary">
 						@if (definition.samples.length > 1) {
 
 							<small class="block text-secondary">Sample #{{ $index + 1 }}</small>
