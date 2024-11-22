@@ -24,8 +24,10 @@ import { Store } from '@ngrx/store';
 
 		</w-portal>
 
+		<header class="mb-8 comp-title">Add Note</header>
 		<app-word-form (create)="onCreate($event)"/>
-	`
+	`,
+	host: { 'class': 'comp p-2 md:p-4' }
 })
 export class WordNewFormContainer extends BaseComponent {
 

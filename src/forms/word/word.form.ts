@@ -49,7 +49,7 @@ export class WordForm extends BaseComponent {
 
 		console.log('onSave()');
 
-		const word: Partial<Word> = this.form.fgWord.value as Partial<Word>;
+		const word: Partial<Word> = this.form.fg.value as Partial<Word>;
 		if (word.id)
 			this.update.emit({ id: word.id, word });
 		else

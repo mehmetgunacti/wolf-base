@@ -1,8 +1,9 @@
 import { InjectionToken } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UUID } from '@constants/common.constant';
 import { DefinitionLanguage, DefinitionType } from '@constants/word.constant';
 import { Definition, Language, Word } from '@models/word.model';
+import { fa, fc, fg, nnfc } from '@utils/form.util';
 
 interface LanguageFormSchema {
 
@@ -28,30 +29,6 @@ interface WordFormSchema {
 	dictionary: FormControl<UUID | null>;
 	pronunciation: FormControl<string | null>;
 	definitions: FormArray<FormGroup<DefinitionFormSchema>>;
-
-}
-
-function fc<T>(value: T | null = null): FormControl<T | null> {
-
-	return new FormControl<T | null>(value);
-
-}
-
-function nnfc<T>(value: T, validators: ValidatorFn | ValidatorFn[] | null | undefined = []): FormControl<T> {
-
-	return new FormControl<T>(value, { validators, nonNullable: true });
-
-}
-
-function fg<T extends { [ K in keyof T ]: AbstractControl<any, any>; }>(value: T = {} as T): FormGroup<T> {
-
-	return new FormGroup<T>(value);
-
-}
-
-function fa<T extends AbstractControl<any, any>>(value: T[] = []): FormArray<T> {
-
-	return new FormArray<T>(value);
 
 }
 
@@ -145,11 +122,11 @@ function fgWord(value?: Word): FormGroup<WordFormSchema> {
 
 export class WordFormImpl {
 
-	fgWord: FormGroup<WordFormSchema> = fgWord();
+	fg: FormGroup<WordFormSchema> = fgWord();
 
 	populate(word: Word): void {
 
-		const fg = this.fgWord;
+		const fg = this.fg;
 		const { id, name, contexts, dictionary, pronunciation, definitions } = word;
 
 		// populate word (non-array values)
@@ -169,7 +146,7 @@ export class WordFormImpl {
 
 	addContext(): void {
 
-		this.contexts.controls.push(nnfc('', Validators.required));
+		this.contexts.push(nnfc('', Validators.required));
 
 	}
 
@@ -193,7 +170,7 @@ export class WordFormImpl {
 
 	addSample(dIdx: number): void {
 
-		this.definitions.at(dIdx).controls.samples.push(nnfc(''));
+		this.definitions.at(dIdx).controls.samples.push(nnfc('', Validators.required));
 
 	}
 
@@ -205,7 +182,7 @@ export class WordFormImpl {
 
 	addDefinition(): void {
 
-		this.definitions.controls.push(fgDefinition());
+		this.definitions.push(fgDefinition());
 
 	}
 
@@ -215,12 +192,12 @@ export class WordFormImpl {
 
 	}
 
-	get id(): FormControl<UUID | null> { return this.fgWord.controls.id; }
-	get name(): FormControl<string> { return this.fgWord.controls.name; }
-	get contexts(): FormArray<FormControl<string>> { return this.fgWord.controls.contexts; }
-	get dictionary(): FormControl<UUID | null> { return this.fgWord.controls.dictionary; }
-	get pronunciation(): FormControl<string | null> { return this.fgWord.controls.pronunciation; }
-	get definitions(): FormArray<FormGroup<DefinitionFormSchema>> { return this.fgWord.controls.definitions; }
+	get id(): FormControl<UUID | null> { return this.fg.controls.id; }
+	get name(): FormControl<string> { return this.fg.controls.name; }
+	get contexts(): FormArray<FormControl<string>> { return this.fg.controls.contexts; }
+	get dictionary(): FormControl<UUID | null> { return this.fg.controls.dictionary; }
+	get pronunciation(): FormControl<string | null> { return this.fg.controls.pronunciation; }
+	get definitions(): FormArray<FormGroup<DefinitionFormSchema>> { return this.fg.controls.definitions; }
 
 }
 

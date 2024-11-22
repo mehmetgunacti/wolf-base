@@ -1,5 +1,5 @@
 <form
-	[formGroup]="form.fgWord"
+	[formGroup]="form.fg"
 	(ngSubmit)="onSave()"
 	class="flex flex-col gap-4">
 
@@ -70,19 +70,16 @@
 				@for (lang of definition.controls.languages.controls; let langIdx = $index; track langIdx) {
 
 					<!-- DEFINITION-LANGUAGE -->
-					<div class="flex sm:flex-row flex-col gap-4 sm:gap-2" [formGroup]="lang">
+					<div class="gap-2 grid grid-cols-[1fr_2.25rem] sm:grid-cols-[8rem_auto_2.25rem] my-2 sm:my-0" [formGroup]="lang">
 
 						<!-- LANGUAGE -->
 						<w-select formControlName="language" label="Language" [nodes]="DEFINITION_LANGUAGES" class="sm:max-w-32"/>
-
-						<!-- NAME -->
-						<w-input formControlName="name" label="Meaning"/>
 
 						@if(langIdx < 1) {
 
 							<button
 								type="button"
-								class="min-w-9 btn btn-glyph squared"
+								class="sm:order-last min-w-9 btn btn-glyph place-self-center squared"
 								title="Add Language"
 								(click)="form.addLanguage(defIdx)">
 								<svg wGlyph="add_circle" class="fill-success"></svg>
@@ -92,13 +89,16 @@
 
 							<button
 								type="button"
-								class="min-w-9 btn btn-glyph squared"
+								class="sm:order-last min-w-9 btn btn-glyph place-self-center squared"
 								[title]="'Remove Language #' + (langIdx + 1)"
 								(click)="form.removeLanguage(defIdx, langIdx)">
 								<svg wGlyph="do_not_disturb_on" class="fill-focus"></svg>
 							</button>
 
 						}
+
+						<!-- NAME -->
+						<w-input formControlName="name" label="Meaning" class="col-span-2 sm:col-span-1"/>
 
 					</div>
 
@@ -152,7 +152,7 @@
 
 	<footer class="flex justify-end">
 
-		<button	[disabled]="this.form.fgWord.pristine || this.form.fgWord.invalid"
+		<button	[disabled]="form.fg.pristine || form.fg.invalid"
 				class="btn">
 			<svg wGlyph="save"></svg> {{ isUpdate() ? 'Update' : 'Create'}}
 		</button>
