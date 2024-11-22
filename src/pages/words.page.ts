@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { WordFilterContainer } from '@containers/word-filter.container';
 import { WordsContainer } from '@containers/words/words.container';
 import { GlyphDirective } from '@directives/glyph.directive';
@@ -7,7 +8,7 @@ import { PortalComponent } from '@libComponents/portal.component';
 
 @Component({
 	standalone: true,
-	imports: [ GlyphDirective, PortalComponent, WordsContainer, WordFilterContainer ],
+	imports: [ GlyphDirective, PortalComponent, WordsContainer, WordFilterContainer, RouterLink ],
 	selector: 'words-page',
 	template: `
 		<w-portal>

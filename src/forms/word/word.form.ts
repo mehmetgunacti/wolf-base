@@ -19,17 +19,17 @@ import { WORD_FORM, WordForm } from './word-form';
 })
 export class WordFormComponent extends BaseComponent {
 
-	DEFINITION_LANGUAGES = DEFINITION_LANGUAGES;
-	DEFINITION_TYPES = DEFINITION_TYPES;
+	protected DEFINITION_LANGUAGES = DEFINITION_LANGUAGES;
+	protected DEFINITION_TYPES = DEFINITION_TYPES;
 
-	/* @Input() */
+	// Input
 	word = input<Word | null>(null);
 
-	protected isUpdate = computed(() => !!this.word()?.id);
-
+	// Output
 	create = output<Partial<Word>>();
 	update = output<{ id: UUID, word: Partial<Word>; }>();
 
+	protected isUpdate = computed(() => !!this.word()?.id);
 	protected form: WordForm = inject(WORD_FORM);
 
 	constructor() {
