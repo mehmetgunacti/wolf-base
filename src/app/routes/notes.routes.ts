@@ -11,15 +11,15 @@ export const FEATURE_ROUTES: Routes = [
 	},
 	{
 
-		path: ':id',
-		loadComponent: () => import('pages/note.page').then(c => c.NotePage),
+		path: 'new',
+		loadComponent: () => import('pages/note-new-form.page').then(c => c.NoteNewFormPage),
 		canActivate: [ setSelectedIdGuard ]
 
 	},
 	{
 
-		path: 'new',
-		loadComponent: () => import('pages/note-new-form.page').then(c => c.NoteNewFormPage),
+		path: ':id',
+		loadComponent: () => import('pages/note.page').then(c => c.NotePage),
 		canActivate: [ setSelectedIdGuard ]
 
 	},
