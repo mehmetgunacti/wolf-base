@@ -8,16 +8,16 @@ import { InputComponent } from '@libComponents/input/input.component';
 import { SelectComponent } from '@libComponents/select/select.component';
 import { TextareaComponent } from '@libComponents/textarea/textarea.component';
 import { Word } from '@models/word.model';
-import { WORD_FORM, WordForm } from './word-form';
+import { WORD_FORM, WordFormImpl } from './word-form';
 
 @Component({
 	standalone: true,
 	imports: [ ReactiveFormsModule, InputComponent, GlyphDirective, TextareaComponent, SelectComponent ],
 	selector: 'app-word-form',
 	templateUrl: './word.form.html',
-	providers: [ { provide: WORD_FORM, useClass: WordForm } ]
+	providers: [ { provide: WORD_FORM, useClass: WordFormImpl } ]
 })
-export class WordFormComponent extends BaseComponent {
+export class WordForm extends BaseComponent {
 
 	protected DEFINITION_LANGUAGES = DEFINITION_LANGUAGES;
 	protected DEFINITION_TYPES = DEFINITION_TYPES;
@@ -30,7 +30,7 @@ export class WordFormComponent extends BaseComponent {
 	update = output<{ id: UUID, word: Partial<Word>; }>();
 
 	protected isUpdate = computed(() => !!this.word()?.id);
-	protected form: WordForm = inject(WORD_FORM);
+	protected form = inject(WORD_FORM);
 
 	constructor() {
 

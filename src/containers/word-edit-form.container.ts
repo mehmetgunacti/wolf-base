@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { UUID } from '@constants/common.constant';
 import { AppEntityType } from '@constants/entity.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
-import { WordFormComponent } from '@forms/word/word.form';
+import { WordForm } from '@forms/word/word.form';
 import { BaseComponent } from '@libComponents/base.component';
 import { PortalComponent } from '@libComponents/portal.component';
 import { Word } from '@models/word.model';
@@ -13,25 +13,27 @@ import { selWord_SelectedEntity } from '@selectors/word/word-ui.selectors';
 
 @Component({
 	standalone: true,
-	imports: [ PortalComponent, RouterLink, WordFormComponent, GlyphDirective ],
+	imports: [ PortalComponent, RouterLink, WordForm, GlyphDirective ],
 	selector: 'app-word-edit-form-container',
 	template: `
-		@if(word(); as word) {
+		<w-portal>
 
-			<w-portal>
+			<button
+				class="btn btn-ghost"
+				[routerLink]="['/words', word()?.id ]">
+				<svg wGlyph="cancel"></svg> Cancel
+			</button>
 
-				<button
-					class="btn btn-ghost"
-					[routerLink]="['/words', word.id ]">
-					<svg wGlyph="cancel"></svg> Cancel
-				</button>
+		</w-portal>
 
-			</w-portal>
+		<header class="mb-8 comp-title">Edit Note</header>
+		<section class="md:p-2">
 
-			<app-word-form [word]="word" (update)="onUpdate($event.id, $event.word)"/>
+			<app-word-form [word]="word()" (update)="onUpdate($event.id, $event.word)"/>
 
-		}
-	`
+		</section>
+	`,
+	host: { 'class': 'comp p-4' }
 })
 export class WordEditFormContainer extends BaseComponent {
 

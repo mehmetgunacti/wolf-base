@@ -143,7 +143,7 @@ function fgWord(value?: Word): FormGroup<WordFormSchema> {
 
 }
 
-export class WordForm {
+export class WordFormImpl {
 
 	fgWord: FormGroup<WordFormSchema> = fgWord();
 
@@ -224,4 +224,4 @@ export class WordForm {
 
 }
 
-export const WORD_FORM = new InjectionToken<WordForm>('WordForm');
+export const WORD_FORM = new InjectionToken<WordFormImpl>('WordForm');

@@ -120,6 +120,12 @@
 				w-button-height-sm
 				h-button-height-sm;
 
+			&.squared {
+
+				@apply rounded-lg;
+
+			}
+
 		}
 
 		&[disabled] {
