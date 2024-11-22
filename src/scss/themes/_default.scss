@@ -71,7 +71,7 @@
 		--col-form-element-text		: var(--col-text);
 		--col-form-element-hover	: hsl(from var(--col-form-element) h s calc(l* 1.1));
 		--col-form-element-active	: hsl(from var(--col-form-element) h s calc(l* 1.15));
-		--col-form-element-border	: hsl(from var(--col-form-element) h s calc(l* .9));
+		--col-form-element-border	: hsl(from var(--col-form-element) h s calc(l* .8));
 
 		--col-bg-overlay			: hsl(from var(--col-black) h s l / .3);
 		--col-shadow				: var(--col-bg-header);

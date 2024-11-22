@@ -12,7 +12,7 @@ import { DefinitionTypePipe } from '@pipes/definition-type.pipe';
 	selector: 'app-word',
 	templateUrl: './word.component.html',
 	host: {
-		'class': 'flex flex-col text-content prose'
+		'class': 'flex flex-col text-content'
 	}
 })
 export class WordComponent extends BaseComponent {

@@ -1,6 +1,6 @@
 @if (word(); as word) {
 
-	<header class="mb-8 comp-title">
+	<header class="flex gap-2 mb-8 comp-title">
 
 		<span class="text-focus">{{ word.name }}</span>
 		@if (word.pronunciation) {
@@ -10,11 +10,11 @@
 		}
 
 	</header>
-	<section content>
+	<section class="flex flex-col gap-4">
 
 		@for (context of word.contexts; track $index) {
 
-			<blockquote context>
+			<blockquote class="my-2 pl-2 border-l-2 border-l-success">
 				@if (word.contexts.length > 1) {
 
 					<small>Context #{{ $index + 1 }}</small>
@@ -50,7 +50,7 @@
 
 				@for (sample of definition.samples; track $index) {
 
-					<blockquote class="my-2">
+					<blockquote class="my-2 pl-2 border-l-2 border-l-secondary">
 						@if (definition.samples.length > 1) {
 
 							<small class="block text-secondary">Sample #{{ $index + 1 }}</small>
@@ -67,7 +67,7 @@
 
 				@if (schedulable()) {
 
-					<footer schedule>
+					<footer class="flex justify-end">
 
 						<w-switch
 							label="Schedule"

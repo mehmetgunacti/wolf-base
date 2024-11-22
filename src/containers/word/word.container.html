@@ -1,0 +1,66 @@
+@if (word(); as word) {
+
+	<w-portal>
+
+		<button
+			class="px-2 h-button-height-sm btn btn-ghost"
+			[cdkMenuTriggerFor]="menu">
+			<svg wGlyph="menu_open"></svg>
+		</button>
+
+		<ng-template #menu>
+
+			<div class="gap-2 grid bg-popup mt-3 p-2 w-56 comp" cdkMenu>
+
+				<button
+					cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					[routerLink]="['/words', word.id, 'edit' ]">
+					<svg wGlyph="edit"></svg> Edit Word
+				</button>
+
+				<a	cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					[href]="'https://www.google.com/search?q=' + word.name"
+					target="_blank">
+					<svg wGlyph="search"></svg> Google <sup><svg wGlyph="open_in_new"></svg></sup>
+				</a>
+
+				<div class="menu-divider"></div>
+
+				<button
+					cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					[routerLink]="['/logs', word.id]">
+					<svg wGlyph="history"></svg> View Logs
+				</button>
+
+				<button
+					cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					(click)="onRemove(word.id)">
+					<svg wGlyph="delete"></svg> Remove Word
+				</button>
+
+			</div>
+
+		</ng-template>
+
+	</w-portal>
+
+	<app-word
+		[word]="word"
+		[scheduledIds]="scheduledIds()"
+		(schedule)="onSchedule($event)"
+		(cancelSchedule)="onCancelSchedule($event)"/>
+
+} @else {
+
+	<div class="flex flex-col justify-center items-center">
+		No words available
+		<button routerLink="/words/new" class="mx-auto btn btn-ghost">
+			<svg wGlyph="add"></svg> Add Word
+		</button>
+	</div>
+
+}

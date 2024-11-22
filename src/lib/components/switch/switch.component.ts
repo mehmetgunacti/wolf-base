@@ -6,9 +6,9 @@ import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '../base.component';
 
 @Component({
-	selector: 'w-switch',
 	standalone: true,
 	imports: [ CommonModule, FormsModule, GlyphDirective ],
+	selector: 'w-switch',
 	templateUrl: './switch.component.html',
 	providers: [
 		{
@@ -21,7 +21,7 @@ import { BaseComponent } from '../base.component';
 		'[tabindex]': '0',
 		'(keydown)': 'onKeyDown($event)',
 		'(click)': 'onInput()',
-		'class': 'inline-flex items-center justify-between px-1 relative h-widget-height border border-transparent rounded-lg focus-within:ring-4 focus-within:ring-outline focus-within:outline-none group',
+		'class': 'inline-flex items-center justify-between px-1 gap-2 cursor-pointer relative h-widget-height border border-transparent rounded-lg focus-within:ring-4 focus-within:ring-outline focus-within:outline-none group',
 		'[class.primary]': 'severity() === "primary"',
 		'[class.success]': 'severity() === "success"',
 		'[class.info]': 'severity() === "info"',
