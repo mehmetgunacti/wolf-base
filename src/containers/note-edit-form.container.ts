@@ -31,16 +31,12 @@ import { Observable, Subject, combineLatest, map } from 'rxjs';
 		</w-portal>
 
 		<header class="mb-8 comp-title">Edit Note</header>
-		<section class="md:p-2">
-
-			<app-note-form
-				[note]="note()"
-				[nodes]="nodes()"
-				[tagSuggestions]="(tagSuggestions$ | async) ?? []"
-				(update)="onUpdate($event.id, $event.note)"
-				(tagInput)="onTagInput($event)"></app-note-form>
-
-		</section>
+		<app-note-form
+			[note]="note()"
+			[nodes]="nodes()"
+			[tagSuggestions]="(tagSuggestions$ | async) ?? []"
+			(update)="onUpdate($event.id, $event.note)"
+			(tagInput)="onTagInput($event)"></app-note-form>
 	`,
 	host: { 'class': 'comp p-4' }
 })
