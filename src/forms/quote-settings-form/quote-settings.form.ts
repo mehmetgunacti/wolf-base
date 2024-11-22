@@ -21,10 +21,10 @@ interface QuoteForm {
 	standalone: true,
 	imports: [ ReactiveFormsModule, GlyphDirective, InputComponent, TextareaComponent ],
 	selector: 'app-quote-settings-form',
-	templateUrl: './quote-settings-form.component.html',
+	templateUrl: './quote-settings.form.html',
 	host: { 'class': 'flex flex-col comp' }
 })
-export class QuoteSettingsFormComponent extends BaseComponent {
+export class QuoteSettingsForm extends BaseComponent {
 
 	// Input
 	quote = input<Quote | null>();

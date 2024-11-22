@@ -1,13 +1,13 @@
 import { settingsActions } from '@actions/settings.actions';
 import { Component, inject } from '@angular/core';
-import { TitleLookupConfigFormComponent } from '@forms/title-lookup-config-form/title-lookup-config-form.component';
+import { TitleLookupConfigForm } from '@forms/title-lookup-config-form/title-lookup-config.form';
 import { BaseComponent } from '@libComponents/base.component';
 import { Store } from '@ngrx/store';
 import { selCore_titleLookupUrl } from '@selectors/core/core-configuration.selectors';
 
 @Component({
 	standalone: true,
-	imports: [ TitleLookupConfigFormComponent ],
+	imports: [ TitleLookupConfigForm ],
 	selector: 'app-title-lookup-config-container',
 	templateUrl: './title-lookup-config.container.html',
 	host: { 'class': 'comp p-4' }

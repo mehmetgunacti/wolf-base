@@ -1,7 +1,7 @@
 import { settingsActions } from '@actions/settings.actions';
 import { AsyncPipe } from '@angular/common';
 import { AfterContentInit, Component, inject } from '@angular/core';
-import { TagFormComponent } from '@forms/tag-form/tag-form.component';
+import { TagForm } from '@forms/tag-form/tag.form';
 import { BaseComponent } from '@libComponents/base.component';
 import { Store } from '@ngrx/store';
 import { selCore_pinnedNotes } from '@selectors/core/core-configuration.selectors';
@@ -10,7 +10,7 @@ import { Observable, Subject, combineLatest, map } from 'rxjs';
 
 @Component({
 	standalone: true,
-	imports: [ TagFormComponent, AsyncPipe ],
+	imports: [ TagForm, AsyncPipe ],
 	selector: 'app-pinned-notes-form-container',
 	templateUrl: './pinned-notes-form.container.html',
 	host: { 'class': 'comp p-4' }

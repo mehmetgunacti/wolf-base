@@ -17,17 +17,38 @@ import { Observable, Subject, combineLatest, map } from 'rxjs';
 
 @Component({
 	standalone: true,
-	imports: [ PortalComponent, RouterLink, GlyphDirective, AsyncPipe, NoteForm ],
-	selector: 'app-note-new-form-container',
-	templateUrl: './note-new-form.container.html',
+	imports: [ AsyncPipe, PortalComponent, RouterLink, GlyphDirective, NoteForm ],
+	selector: 'app-note-edit-form-container',
+	template: `
+		<w-portal>
+
+			<button
+				class="btn btn-ghost"
+				[routerLink]="['/notes', note()?.id ]">
+				<svg wGlyph="cancel"></svg> Cancel
+			</button>
+
+		</w-portal>
+
+		<header class="mb-8 comp-title">Edit Note</header>
+		<section class="md:p-2">
+
+			<app-note-form
+				[note]="note()"
+				[nodes]="nodes()"
+				[tagSuggestions]="(tagSuggestions$ | async) ?? []"
+				(update)="onUpdate($event.id, $event.note)"
+				(tagInput)="onTagInput($event)"></app-note-form>
+
+		</section>
+	`,
 	host: { 'class': 'comp p-4' }
 })
-export class NoteNewFormContainer extends BaseComponent {
+export class NoteEditFormContainer extends BaseComponent {
 
 	private store: Store = inject(Store);
 
-	parentId$: Observable<UUID | null>;
-	cancelLink$: Observable<string[]>;
+	note = this.store.selectSignal(selNote_SelectedEntity);
 	nodes = this.store.selectSignal(selNote_EntityList);
 	tagSuggestions$!: Observable<string[]>;
 	tagInput = new Subject<string | null>();
@@ -35,17 +56,6 @@ export class NoteNewFormContainer extends BaseComponent {
 	constructor() {
 
 		super();
-		this.parentId$ = this.store.select(selNote_SelectedEntity).pipe(
-
-			map(p => p ? p.id : null)
-
-		);
-		this.cancelLink$ = this.parentId$.pipe(
-
-			map(id => id ? [ '/notes', id ] : [ '/notes' ])
-
-		);
-
 		this.tagSuggestions$ = combineLatest([
 			this.store.select(selNote_distinctTagsArray),
 			this.tagInput
@@ -63,9 +73,9 @@ export class NoteNewFormContainer extends BaseComponent {
 
 	}
 
-	onCreate(entity: Partial<Note>): void {
+	onUpdate(id: UUID, entity: Partial<Note>) {
 
-		this.store.dispatch(entityActions.create({ entityType: AppEntityType.note, entity }));
+		this.store.dispatch(entityActions.update({ entityType: AppEntityType.note, id, entity }));
 
 	}
 

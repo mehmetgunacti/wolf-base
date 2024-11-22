@@ -8,10 +8,10 @@ import { InputTagComponent } from '@libComponents/input-tag/input-tag.component'
 	standalone: true,
 	imports: [ ReactiveFormsModule, GlyphDirective, InputTagComponent ],
 	selector: 'app-tag-form',
-	templateUrl: './tag-form.component.html',
+	templateUrl: './tag.form.html',
 	host: { 'class': 'flex flex-col' }
 })
-export class TagFormComponent extends BaseComponent {
+export class TagForm extends BaseComponent {
 
 	// Input
 	tags = input.required<string[]>();

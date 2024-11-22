@@ -9,10 +9,10 @@ import { nnfc, urlValidator } from '@utils/form.util';
 	standalone: true,
 	imports: [ ReactiveFormsModule, GlyphDirective, InputComponent ],
 	selector: 'app-title-lookup-config-form',
-	templateUrl: './title-lookup-config-form.component.html',
+	templateUrl: './title-lookup-config.form.html',
 	host: { 'class': 'flex flex-col' }
 })
-export class TitleLookupConfigFormComponent extends BaseComponent {
+export class TitleLookupConfigForm extends BaseComponent {
 
 	// Input
 	url = input.required<string | null>();

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NoteNewFormContainer } from '@containers/note-new-form-container/note-new-form.container';
+import { NoteNewFormContainer } from '@containers/note-new-form.container';
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
