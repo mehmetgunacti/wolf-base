@@ -16,15 +16,6 @@
 	<!-- PRONUNCIATION -->
 	<w-input formControlName="pronunciation" label="Pronunciation"/>
 
-	<!-- ADD CONTEXT BUTTON -->
-	<button
-		add_button
-		type="button"
-		class="ml-auto btn btn-success"
-		(click)="form.addContext()">
-		<svg wGlyph="add_circle"></svg> Context
-	</button>
-
 	<!-- CONTEXTS -->
 	@for (context of form.contexts.controls; let wordIdx = $index; track wordIdx) {
 
@@ -43,6 +34,15 @@
 
 	}
 
+	<!-- ADD CONTEXT BUTTON -->
+	<button
+		add_button
+		type="button"
+		class="ml-auto btn btn-success"
+		(click)="form.addContext()">
+		<svg wGlyph="add_circle"></svg> Context
+	</button>
+
 	<!-- ITERATE DEFINITIONS -->
 	@for (definition of form.definitions.controls; let defIdx = $index; track defIdx) {
 
@@ -53,7 +53,7 @@
 			@if(defIdx > 0) {
 
 				<legend class="-top-11 right-2.5 absolute flex justify-center items-center bg-component-dark rounded-lg w-button-height h-button-height">
-					<button class="btn btn-glyph" (click)="form.removeDefinition(defIdx)" [title]="'Remove Definition #' + (defIdx + 1)">
+					<button type="button" class="btn btn-glyph" (click)="form.removeDefinition(defIdx)" [title]="'Remove Definition #' + (defIdx + 1)">
 						<svg wGlyph="do_not_disturb_on" class="fill-focus"></svg>
 					</button>
 				</legend>

@@ -152,7 +152,8 @@ export class WordFormImpl {
 
 	removeContext(idx: number): void {
 
-		this.contexts.removeAt(idx);
+		this.contexts.removeAt(idx, { emitEvent: true });
+		this.fg.markAsDirty();
 
 	}
 
@@ -165,6 +166,7 @@ export class WordFormImpl {
 	removeLanguage(dIdx: number, idx: number): void {
 
 		this.definitions.at(dIdx).controls.languages.removeAt(idx);
+		this.fg.markAsDirty();
 
 	}
 
@@ -177,6 +179,7 @@ export class WordFormImpl {
 	removeSample(dIdx: number, idx: number): void {
 
 		this.definitions.at(dIdx).controls.samples.removeAt(idx);
+		this.fg.markAsDirty();
 
 	}
 
@@ -189,6 +192,7 @@ export class WordFormImpl {
 	removeDefinition(idx: number): void {
 
 		this.definitions.removeAt(idx);
+		this.fg.markAsDirty();
 
 	}
 
