@@ -1,0 +1,76 @@
+@if (project(); as project) {
+
+	<div class="comp-dark p-4 comp">
+
+		<div>
+
+			<a	[routerLink]="['/projects']"
+				class="flex gap-1 focus-visible:bg-component-dark-hover mb-1 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
+				tabindex="0">
+				<svg wGlyph="task_alt" class="text-[1.2em]"></svg>
+				Projects
+			</a>
+
+		</div>
+
+		<div class="flex justify-between items-center mt-4 comp-title">
+
+			{{ project.name }}
+
+			<button
+				class="btn btn-glyph"
+				(click)="onToggleInfo()"
+				title="Toggle Info Panel">
+				<svg wGlyph="info"></svg>
+			</button>
+
+		</div>
+
+		<div class="overflow-hidden" [@slideDown]="expanded()">
+			<!-- project_info -->
+			<div class="flex flex-col gap-2 p-2">
+
+				<div class="flex flex-col">
+
+					<small class="text-secondary text-sm">ID</small>
+					{{ project.id }}
+
+				</div>
+
+				<div class="flex flex-col">
+
+					<small class="text-secondary text-sm">Description</small>
+					{{ project.description }}
+
+				</div>
+
+				<div class="flex flex-col">
+
+					<small class="text-secondary text-sm">Status</small>
+					{{ ProjectStatusLabels[project.status] }}
+
+				</div>
+
+				<div row start_end_row class="flex gap-2">
+
+					<div class="flex flex-col flex-1">
+
+						<small class="text-secondary text-sm">Start : {{ project.start | timePast:false }}</small>
+						{{ project.start | date:'EEEE dd.MM.yyyy' }}
+
+					</div>
+					<div class="flex flex-col flex-1">
+
+						<small class="text-secondary text-sm">End</small>
+						{{ project.end | date:'EEEE dd.MM.yyyy' }}
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+}

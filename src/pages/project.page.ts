@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
+import { ProjectContainer } from '@containers/project/project.container';
 import { WordContainer } from '@containers/word/word.container';
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	standalone: true,
-	imports: [ WordContainer ],
-	selector: 'word-page',
-	template: `<app-word-container/>`,
+	imports: [ ProjectContainer ],
+	selector: 'project-page',
+	template: `<app-project-container/>`,
 	host: { 'class': 'page' }
 })
-export class WordPage extends BaseComponent { }
+export class ProjectPage extends BaseComponent { }

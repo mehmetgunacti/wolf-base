@@ -1,0 +1,88 @@
+@if (project(); as project) {
+
+	<w-portal>
+
+		<button
+			class="px-2 h-button-height-sm btn btn-ghost"
+			[cdkMenuTriggerFor]="menu">
+			<svg wGlyph="menu_open"></svg>
+		</button>
+
+		<ng-template #menu>
+
+			<div class="gap-2 grid bg-popup mt-3 p-2 w-56 comp" cdkMenu>
+
+				<button
+					cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					[routerLink]="['/projects', project.id, 'edit' ]">
+					<svg wGlyph="edit"></svg> Edit Project
+				</button>
+
+				<div class="menu-divider"></div>
+
+				<button
+					cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					[routerLink]="['/logs', project.id]">
+					<svg wGlyph="history"></svg> View Logs
+				</button>
+
+			</div>
+
+		</ng-template>
+
+	</w-portal>
+
+	<!-- PROJECT -->
+	<app-project
+		[project]="project"
+		[expanded]="projectExpanded()"
+		(toggleInfo)="onToggleInfo()"/>
+
+	<!-- SEARCH AND TAG CLOUD -->
+	<!-- <app-project-search-and-tag-cloud-container/> -->
+
+	<!-- TASKS (FIELDSET) -->
+	<fieldset class="relative p-3 comp">
+
+		<legend class="flex items-center gap-1 bg-component-dark px-3 rounded-lg h-button-height">Tasks <small class="text-secondary text-sm">({{ project.tasks.length }})</small></legend>
+		<legend class="-top-11 right-2.5 absolute flex justify-center items-center bg-component-dark rounded-lg h-button-height">
+			<button type="button" class="btn btn-ghost" (click)="onOpenNewTaskDialog()">
+				<svg wGlyph="add"></svg> Add Task
+			</button>
+		</legend>
+
+		<!-- query_params -->
+		<small class="flex items-center gap-1 mb-2 text-secondary">
+			<svg wGlyph="filter_alt"></svg> Filters: {{ paramsText() }}
+		</small>
+
+		<!-- task_list -->
+		<div class="flex flex-col gap-4">
+
+			@for (task of project.tasks; track $index) {
+
+				@let expanded = !!tasksExpanded()[task.id];
+				<app-task
+					[task]="task"
+					[expanded]="expanded"
+					(editTask)="onOpenEditTaskDialog($event)"
+					(toggleTask)="onToggleTask($event)" />
+
+			}
+
+		</div>
+
+	</fieldset>
+
+} @else {
+
+	<div class="flex flex-col justify-center items-center">
+		No projects available
+		<button routerLink="/projects/new" class="mx-auto btn btn-ghost">
+			<svg wGlyph="add"></svg> Add Project
+		</button>
+	</div>
+
+}

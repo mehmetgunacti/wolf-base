@@ -12,7 +12,7 @@
 		@for (project of projects; track $index) {
 
 			<a	class="relative grid comp-dark comp-dark-active comp-dark-hover rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full group focus-visible:outline-none px-4 py-3"
-				[routerLink]="['/words', project.id]"
+				[routerLink]="['/projects', project.id]"
 				tabindex="0">
 
 				<div class="flex flex-col flex-1 justify-center">
@@ -36,7 +36,7 @@
 	<div class="flex flex-col justify-center items-center">
 		No projects available
 		<button routerLink="/projects/new" class="mx-auto btn btn-ghost">
-			<svg wGlyph="add"></svg> Add Word
+			<svg wGlyph="add"></svg> Add Project
 		</button>
 	</div>
 

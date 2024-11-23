@@ -1,0 +1,70 @@
+@let t = task();
+@let isExpanded = expanded();
+
+<a	class="flex flex-col gap-2 shadow-none comp-dark comp-dark-active comp-dark-hover p-2 focus-visible:ring-4 focus-visible:ring-outline cursor-pointer comp outline-none"
+	[class.bg-component-dark-active]="isExpanded"
+	[title]="t.description ?? ''"
+	(click)="onToggleTask(t.id)"
+	tabindex="0">
+
+	<div class="flex gap-2 text-secondary text-sm">
+
+		<small 	class="flex items-center gap-1"
+				[class.text-[var(--col-warn)]]="t.status === TaskState.ongoing"
+				[class.text-[var(--col-success)]]="t.status === TaskState.completed">
+				<svg wGlyph="manufacturing"></svg> {{ TASK_STATE_LABELS[t.status] }}
+		</small>
+		<small 	class="flex items-center gap-1"
+				[class.text-[var(--col-warn)]]="t.priority === TaskPriority.high">
+				<svg wGlyph="swap_vert"></svg> {{ TASK_PRIORITIES_LABELS[t.priority] }}
+		</small>
+		<small class="flex items-center gap-1"><svg wGlyph="category"></svg> {{ TASK_CATEGORIES_LABELS[t.category] }}</small>
+
+	</div>
+	<div>{{ t.name }}</div>
+	<!-- TAGS -->
+	<div task_tags class="flex flex-wrap gap-2">
+
+		@for (tag of t.tags; track $index) {
+
+			<button disabled class="tag tag-sm">{{ tag }}</button>
+
+		}
+
+	</div>
+
+</a>
+<div [@slideDown]="isExpanded" class="overflow-hidden">
+
+	<div class="flex flex-col gap-2 shadow-none mr-2 ml-2 comp-dark p-2 rounded-t-none comp">
+
+		<!-- DESCRIPTION -->
+		<div class="flex mb-2">{{ t.description }}</div>
+
+		<!-- START -->
+		<div class="flex flex-col items-start">
+
+			<small class="flex items-center gap-1">
+				<svg wGlyph="schedule"></svg> {{ t.start | date:'EEEE dd.MM.yyyy' }}
+				@if (t.end) {
+					- {{ t.end | date:'EEEE dd.MM.yyyy' }}
+				}
+			</small>
+			<small>{{ t.id }}</small>
+
+		</div>
+		<div class="flex justify-end">
+
+			<button
+				class="px-2 h-button-height-xs text-sm btn"
+				[tabindex]="isExpanded ? '0' : '-1'"
+				(click)="onEditTask(t.id)">
+				<svg wGlyph="edit"></svg>
+				Edit Task
+			</button>
+
+		</div>
+
+	</div>
+
+</div>
