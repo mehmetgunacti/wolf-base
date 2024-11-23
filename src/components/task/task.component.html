@@ -36,10 +36,10 @@
 </a>
 <div [@slideDown]="isExpanded" class="overflow-hidden">
 
-	<div class="flex flex-col gap-2 shadow-none mr-2 ml-2 comp-dark p-2 rounded-t-none comp">
+	<div class="flex flex-col gap-2 shadow-none mr-2 ml-2 comp-dark p-2 rounded-t-none @container comp">
 
 		<!-- DESCRIPTION -->
-		<div class="flex mb-2">{{ t.description }}</div>
+		<div class="flex mb-2 overflow-x-auto scrollbar scrollbar-blue">{{ t.description }}</div>
 
 		<!-- START -->
 		<div class="flex flex-col items-start">
