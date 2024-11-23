@@ -1,7 +1,7 @@
 import { settingsActions } from '@actions/settings.actions';
 import { AsyncPipe } from '@angular/common';
 import { AfterContentInit, Component, inject } from '@angular/core';
-import { TagForm } from '@forms/tag-form/tag.form';
+import { TagForm } from '@forms/tag/tag.form';
 import { BaseComponent } from '@libComponents/base.component';
 import { Store } from '@ngrx/store';
 import { selBM_distinctTagsArray } from '@selectors/bookmark/bookmark-tags.selectors';

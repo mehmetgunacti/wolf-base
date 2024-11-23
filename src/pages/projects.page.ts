@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ProjectFilterContainer } from '@containers/project-filter.container';
 import { ProjectsContainer } from '@containers/projects/projects.container';
 import { GlyphDirective } from '@directives/glyph.directive';
@@ -7,7 +8,7 @@ import { PortalComponent } from '@libComponents/portal.component';
 
 @Component({
 	standalone: true,
-	imports: [ PortalComponent, GlyphDirective, ProjectsContainer, ProjectFilterContainer ],
+	imports: [ PortalComponent, GlyphDirective, ProjectsContainer, ProjectFilterContainer, RouterLink ],
 	selector: 'projects-page',
 	template: `
 		<w-portal>

@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { UUID } from '@constants/common.constant';
 import { AppEntityType } from '@constants/entity.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
-import { NoteForm } from '@forms/note-form/note.form';
+import { NoteForm } from '@forms/note/note.form';
 import { BaseComponent } from '@libComponents/base.component';
 import { PortalComponent } from '@libComponents/portal.component';
 import { Note } from '@models/note.model';
