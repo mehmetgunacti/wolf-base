@@ -1,5 +1,5 @@
 <!-- TAGS LIST -->
-<div class="peer/tags place-self-center">
+<div class="peer/tags md:place-self-center place-self-start">
 
 	@for (t of value(); track $index) {
 
@@ -7,7 +7,7 @@
 			type="button"
 			title="Click to remove"
 			(click)="removeTag(t)"
-			class="inline-flex flex-row items-center gap-1 me-1 tag tag-sm">
+			class="inline-flex flex-row items-center gap-1 my-1 me-1 tag tag-sm">
 			{{t}} <svg wGlyph="close" class="text-4xs stroke-content"></svg>
 		</button>
 
@@ -19,7 +19,7 @@
 <input
 	#inputElement
 	type="text"
-	class="border-0 bg-transparent text-content outline-0 peer place-self-stretch focus-visible:outline-none"
+	class="border-0 bg-transparent md:py-0 text-content outline-0 peer place-self-stretch focus-visible:outline-none peer-[:not(:empty)]/tags:py-2"
 	[attr.list]="UUID() + '_suggestions'"
 	(input)="onInput($event)"
 	(keydown)="onKeydown($event)"
