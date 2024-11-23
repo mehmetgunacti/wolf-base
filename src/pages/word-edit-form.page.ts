@@ -5,7 +5,7 @@ import { BaseComponent } from '@libComponents/base.component';
 @Component({
 	standalone: true,
 	imports: [ WordEditFormContainer ],
-	selector: 'words-page',
+	selector: 'word-edit-form-page',
 	template: `<app-word-edit-form-container/>`,
 	host: { 'class': 'page' }
 })

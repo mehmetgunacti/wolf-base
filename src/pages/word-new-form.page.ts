@@ -5,7 +5,7 @@ import { BaseComponent } from '@libComponents/base.component';
 @Component({
 	standalone: true,
 	imports: [ WordNewFormContainer ],
-	selector: 'words-page',
+	selector: 'word-new-form-page',
 	template: `<app-word-new-form-container/>`,
 	host: { 'class': 'page' }
 })
