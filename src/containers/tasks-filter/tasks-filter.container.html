@@ -1,0 +1,46 @@
+<header class="flex items-center gap-1 p-3">
+
+	<div class="flex flex-1 gap-1 md:gap-2">
+
+		<!-- STATUS -->
+		<w-select [formControl]="fcStatus" label="Status" [nodes]="TASK_STATE"/>
+
+		<!-- CATEGORY -->
+		<w-select [formControl]="fcCategory" label="Category" [nodes]="TASK_CATEGORIES"/>
+
+	</div>
+
+	<button
+		type="button"
+		class="btn btn-glyph"
+		(click)="toggleCloud()">
+		<svg wGlyph="chevron_left"></svg>
+	</button>
+
+</header>
+
+<!-- TAG CLOUD -->
+<!-- <section [@slideUpDown]="cloudVisible() ? 'opened' : 'closed'" class="h-60 overflow-y-auto me-2 scrollbar scrollbar-dark scrollbar-gutter-stable">
+
+	<div>
+		<w-input
+			label="Keyword"
+			[formControl]="fcSearch"
+			[autofocus]="cloudVisible()"
+			[after]="500"/>
+		<button
+			type="button"
+			class="btn btn-glyph"
+			title="Clear Filter"
+			(click)="onReset()">
+			<svg wGlyph="mop"></svg>
+		</button>
+	</div>
+
+	<w-tag-cloud
+		[tags]="tags()"
+		[selectedTags]="selectedTags()"
+		[relatedTags]="relatedTags()"
+		(tagClick)="onTagClicked($event)"></w-tag-cloud>
+
+</section> -->

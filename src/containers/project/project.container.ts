@@ -6,6 +6,7 @@ import { ProjectComponent } from '@components/project/project.component';
 import { TaskComponent } from '@components/task/task.component';
 import { UUID } from '@constants/common.constant';
 import { TaskCategoryLabels, TaskStateLabels } from '@constants/project.constant';
+import { TasksFilterContainer } from '@containers/tasks-filter/tasks-filter.container';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { PortalComponent } from '@libComponents/portal.component';
@@ -27,7 +28,7 @@ function formatQueryParams(queryParams: TaskQueryParams): string {
 
 @Component({
 	standalone: true,
-	imports: [ PortalComponent, GlyphDirective, CdkMenuModule, RouterLink, ProjectComponent, TaskComponent ],
+	imports: [ PortalComponent, GlyphDirective, CdkMenuModule, RouterLink, ProjectComponent, TaskComponent, TasksFilterContainer ],
 	selector: 'app-project-container',
 	templateUrl: './project.container.html',
 	host: { 'class': 'flex flex-col gap-2' }
