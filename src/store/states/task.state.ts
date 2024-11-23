@@ -10,7 +10,8 @@ export interface Task_ModuleState {
 
 export interface Task_UIState {
 
-	selectedId: UUID | null;
+	editId: UUID | null;
+	formVisible: boolean;
 	queryParams: TaskQueryParams;
 
 }
@@ -19,7 +20,8 @@ export interface Task_UIState {
 
 export const initialTaskUIState: Task_UIState = {
 
-	selectedId: null,
+	editId: null,
+	formVisible: false,
 	queryParams: {
 
 		search: null,

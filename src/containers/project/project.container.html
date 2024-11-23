@@ -34,6 +34,14 @@
 
 	</w-portal>
 
+	@if (formVisible()) {
+
+		<w-modal (close)="closeFormDialog()">
+			<app-task-edit-container/>
+		</w-modal>
+
+	}
+
 	<!-- PROJECT -->
 	<app-project
 		[project]="project"

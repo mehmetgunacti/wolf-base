@@ -5,18 +5,18 @@ import { selTask_EntityList, selTask_EntityMap } from '../entity/entity-task.sel
 import { selTask_UIState } from './task.selectors';
 
 // SELECTED ID
-const selTask_SelectedId = createSelector(
+export const selTask_editEntity = createSelector(
 
+	selTask_EntityMap,
 	selTask_UIState,
-	state => state.selectedId
+	(entities, uiState) => uiState.editId ? entities[ uiState.editId ] : null
 
 );
 
-export const selTask_SelectedEntity = createSelector(
+export const selTask_formVisible = createSelector(
 
-	selTask_EntityMap,
-	selTask_SelectedId,
-	(map, id) => id ? map[ id ] : null
+	selTask_UIState,
+	state => state.formVisible
 
 );
 
