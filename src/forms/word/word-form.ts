@@ -75,7 +75,7 @@ function fgDefinition(value?: Definition): FormGroup<DefinitionFormSchema> {
 	return fg<DefinitionFormSchema>({
 
 		id: fc(id),
-		type: nnfc<DefinitionType>(type),
+		type: nnfc<DefinitionType>(type, Validators.required),
 		languages: faLanguages(languages),
 		samples: fa(samples.map(s => nnfc<string>(s, Validators.required)))
 
@@ -111,7 +111,7 @@ function fgWord(value?: Word): FormGroup<WordFormSchema> {
 
 		id: fc(id),
 		name: nnfc(name, Validators.required),
-		contexts: fa(contexts.map(c => nnfc(c))),
+		contexts: fa(contexts.map(c => nnfc(c, Validators.required))),
 		dictionary: fc(dictionary),
 		pronunciation: fc(pronunciation),
 		definitions: faDefinitions(definitions)
@@ -135,7 +135,7 @@ export class WordFormImpl {
 		// populate contexts
 		const faContexts = fg.controls.contexts;
 		faContexts.clear();
-		contexts.forEach(context => faContexts.push(nnfc(context)));
+		contexts.forEach(context => faContexts.push(nnfc(context, Validators.required)));
 
 		// populate definitions
 		const faDefinitions = fg.controls.definitions;

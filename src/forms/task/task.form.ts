@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UUID } from '@constants/common.constant';
 import { TAG_OPTIONAL, TASK_CATEGORIES, TASK_PRIORITIES, TASK_STATE, TaskState } from '@constants/project.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
+import { RequiredValidatorDirective } from '@directives/required-validator.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { InputTagComponent } from '@libComponents/input-tag/input-tag.component';
 import { InputComponent } from '@libComponents/input/input.component';
@@ -17,7 +18,7 @@ import { TASK_FORM, TaskFormImpl } from './task-form';
 
 @Component({
 	standalone: true,
-	imports: [ InputComponent, InputTagComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe, PortalComponent, SelectComponent, TextareaComponent ],
+	imports: [ InputComponent, RequiredValidatorDirective, InputTagComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe, PortalComponent, SelectComponent, TextareaComponent ],
 	selector: 'app-task-form',
 	templateUrl: './task.form.html',
 	providers: [ { provide: TASK_FORM, useClass: TaskFormImpl } ],

@@ -36,8 +36,8 @@ function createFormGroup(value?: Project): FormGroup<ProjectFormSchema> {
 		id: fc(id),
 		name: nnfc(name, Validators.required),
 		description: fc(description),
-		status: nnfc(status),
-		start: nnfc(start),
+		status: nnfc(status, Validators.required),
+		start: nnfc(start, Validators.required),
 		end: fc(end)
 
 	});

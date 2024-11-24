@@ -58,9 +58,9 @@
 	transition-all
 	duration-500
 
-	before:content-['*']
-	before:text-focus
-	before:mr-1">{{label()}}</label>
+	group-[.required]:before:content-['*']
+	group-[.required]:before:text-focus
+	group-[.required]:before:mr-1">{{label()}}</label>
 
 <!-- DATALIST -->
 <datalist [id]="UUID() + '_suggestions'">

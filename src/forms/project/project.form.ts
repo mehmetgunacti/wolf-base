@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UUID } from '@constants/common.constant';
 import { PROJECT_STATUS, ProjectStatus } from '@constants/project.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
+import { RequiredValidatorDirective } from '@directives/required-validator.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { InputComponent } from '@libComponents/input/input.component';
 import { SelectComponent } from '@libComponents/select/select.component';
@@ -13,7 +14,7 @@ import { PROJECT_FORM, ProjectFormImpl } from './project-form';
 
 @Component({
 	standalone: true,
-	imports: [ InputComponent, SelectComponent, ReactiveFormsModule, GlyphDirective ],
+	imports: [ RequiredValidatorDirective, InputComponent, SelectComponent, ReactiveFormsModule, GlyphDirective ],
 	selector: 'app-project-form',
 	templateUrl: './project.form.html',
 	providers: [ { provide: PROJECT_FORM, useClass: ProjectFormImpl } ]

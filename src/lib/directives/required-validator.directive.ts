@@ -2,9 +2,10 @@ import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 /*
-* sets the "required" attribute on an element
+* adds a class "required" on an element
 */
 @Directive({
+	standalone: true,
 	selector: '[formControlName],[formControl]'
 })
 export class RequiredValidatorDirective implements OnInit {
@@ -25,7 +26,9 @@ export class RequiredValidatorDirective implements OnInit {
 
 				const validators = control.validator({} as any);
 				if (validators && validators['required'])
-					this.renderer.setAttribute(this.el.nativeElement, 'required', 'true');
+					this.renderer.addClass(this.el.nativeElement, 'required');
+
+				//this.renderer.setAttribute(this.el.nativeElement, 'required', 'true');
 
 				// do not remove, 'required' might be manually set
 				// else

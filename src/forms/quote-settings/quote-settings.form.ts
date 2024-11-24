@@ -2,6 +2,7 @@ import { Component, computed, effect, input, output, untracked } from '@angular/
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UUID } from '@constants/common.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
+import { RequiredValidatorDirective } from '@directives/required-validator.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { InputComponent } from '@libComponents/input/input.component';
 import { TextareaComponent } from '@libComponents/textarea/textarea.component';
@@ -19,7 +20,7 @@ interface QuoteForm {
 
 @Component({
 	standalone: true,
-	imports: [ ReactiveFormsModule, GlyphDirective, InputComponent, TextareaComponent ],
+	imports: [ RequiredValidatorDirective, ReactiveFormsModule, GlyphDirective, InputComponent, TextareaComponent ],
 	selector: 'app-quote-settings-form',
 	templateUrl: './quote-settings.form.html',
 	host: { 'class': 'flex flex-col comp' }

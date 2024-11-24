@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UUID } from '@constants/common.constant';
 import { DEFINITION_LANGUAGES, DEFINITION_TYPES } from '@constants/word.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
+import { RequiredValidatorDirective } from '@directives/required-validator.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { InputComponent } from '@libComponents/input/input.component';
 import { SelectComponent } from '@libComponents/select/select.component';
@@ -12,7 +13,7 @@ import { WORD_FORM, WordFormImpl } from './word-form';
 
 @Component({
 	standalone: true,
-	imports: [ ReactiveFormsModule, InputComponent, GlyphDirective, TextareaComponent, SelectComponent ],
+	imports: [ RequiredValidatorDirective, ReactiveFormsModule, InputComponent, GlyphDirective, TextareaComponent, SelectComponent ],
 	selector: 'app-word-form',
 	templateUrl: './word.form.html',
 	providers: [ { provide: WORD_FORM, useClass: WordFormImpl } ]

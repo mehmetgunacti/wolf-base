@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TAG_PINNED } from '@constants/bookmark.constant';
 import { UUID } from '@constants/common.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
+import { RequiredValidatorDirective } from '@directives/required-validator.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { InputTagComponent } from '@libComponents/input-tag/input-tag.component';
 import { InputComponent } from '@libComponents/input/input.component';
@@ -14,7 +15,7 @@ import { NOTE_FORM, NoteFormImpl } from './note-form';
 
 @Component({
 	standalone: true,
-	imports: [ InputComponent, InputTagComponent, SelectTreeComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe ],
+	imports: [ RequiredValidatorDirective, InputComponent, InputTagComponent, SelectTreeComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe ],
 	selector: 'app-note-form',
 	templateUrl: './note.form.html',
 	providers: [ { provide: NOTE_FORM, useClass: NoteFormImpl } ]

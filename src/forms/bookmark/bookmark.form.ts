@@ -5,6 +5,7 @@ import { CompactBookmarkComponent } from '@components/compact-bookmark/compact-b
 import { TAG_POPULAR } from '@constants/bookmark.constant';
 import { UUID } from '@constants/common.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
+import { RequiredValidatorDirective } from '@directives/required-validator.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { CroppieComponent } from '@libComponents/croppie/croppie.component';
 import { InputTagComponent } from '@libComponents/input-tag/input-tag.component';
@@ -18,7 +19,7 @@ import { BOOKMARK_FORM, BookmarkFormImpl } from './bookmark-form';
 
 @Component({
 	standalone: true,
-	imports: [ InputComponent, InputTagComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe, CroppieComponent, CompactBookmarkComponent, PortalComponent ],
+	imports: [ InputComponent, RequiredValidatorDirective, InputTagComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe, CroppieComponent, CompactBookmarkComponent, PortalComponent ],
 	selector: 'app-bookmark-form',
 	templateUrl: './bookmark.form.html',
 	providers: [ { provide: BOOKMARK_FORM, useClass: BookmarkFormImpl } ],

@@ -35,7 +35,7 @@ function createFormGroup(value?: Bookmark): FormGroup<BookmarkFormSchema> {
 		title: nnfc(title, Validators.required),
 		tags: nnfc(tags, Validators.required),
 		image: nnfc<string | null | undefined>(image),
-		urls: fa(urls.map(c => nnfc(c)))
+		urls: fa(urls.map(c => nnfc(c, Validators.required)))
 
 	});
 
@@ -56,7 +56,7 @@ export class BookmarkFormImpl {
 		// populate urls
 		const fa = fg.controls.urls;
 		fa.clear();
-		urls.forEach(context => fa.push(nnfc(context)));
+		urls.forEach(context => fa.push(nnfc(context, Validators.required)));
 
 	}
 

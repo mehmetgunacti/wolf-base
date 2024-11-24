@@ -27,9 +27,9 @@
 	bg-component-dark
 	text-form-element-text
 
-	before:content-['*']
-	before:text-focus
-	before:mr-1
+	group-[.required]:before:content-['*']
+	group-[.required]:before:text-focus
+	group-[.required]:before:mr-1
 	">{{label()}}</label>
 
 <ng-template #select_menu>

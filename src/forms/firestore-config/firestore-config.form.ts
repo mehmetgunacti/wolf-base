@@ -1,6 +1,7 @@
 import { Component, effect, input, output, untracked } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GlyphDirective } from '@directives/glyph.directive';
+import { RequiredValidatorDirective } from '@directives/required-validator.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { InputComponent } from '@libComponents/input/input.component';
 import { FirestoreConfig } from '@models/configuration.model';
@@ -8,7 +9,7 @@ import { configForm } from './firestore-config-form';
 
 @Component({
 	standalone: true,
-	imports: [ ReactiveFormsModule, GlyphDirective, InputComponent ],
+	imports: [ RequiredValidatorDirective, ReactiveFormsModule, GlyphDirective, InputComponent ],
 	selector: 'app-firestore-config-form',
 	templateUrl: './firestore-config.form.html',
 	host: { 'class': 'flex flex-col' }

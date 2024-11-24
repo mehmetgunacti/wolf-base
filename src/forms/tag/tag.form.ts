@@ -1,12 +1,13 @@
 import { Component, effect, input, output, untracked } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GlyphDirective } from '@directives/glyph.directive';
+import { RequiredValidatorDirective } from '@directives/required-validator.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { InputTagComponent } from '@libComponents/input-tag/input-tag.component';
 
 @Component({
 	standalone: true,
-	imports: [ ReactiveFormsModule, GlyphDirective, InputTagComponent ],
+	imports: [ RequiredValidatorDirective, ReactiveFormsModule, GlyphDirective, InputTagComponent ],
 	selector: 'app-tag-form',
 	templateUrl: './tag.form.html',
 	host: { 'class': 'flex flex-col' }
