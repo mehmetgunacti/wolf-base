@@ -1,6 +1,6 @@
 <!-- DIALOG HEADER -->
 <header class="flex items-center">
-	<div class="font-bold text-2xl text-content">Edit Task</div>
+	<div class="font-bold text-2xl text-content">@if(task()) { Edit } @else { Add } Task</div>
 	<div class="ml-auto">
 
 		<button
@@ -18,12 +18,15 @@
 	<!-- DIALOG CONTENT -->
 	<div class="flex flex-col p-3 h-full">
 
-		<app-task-form
-			[task]="task()"
-			[tagSuggestions]="(tagSuggestions$ | async) ?? []"
-			(create)="onCreate($event)"
-			(update)="onUpdate($event.id, $event.task)"
-			(tagInput)="onTagInput($event)"/>
+		@if (project(); as proj) {
+			<app-task-form
+				[task]="task()"
+				[project]="proj"
+				[tagSuggestions]="(tagSuggestions$ | async) ?? []"
+				(create)="onCreate($event)"
+				(update)="onUpdate($event.id, $event.task)"
+				(tagInput)="onTagInput($event)"/>
+		}
 
 	</div>
 

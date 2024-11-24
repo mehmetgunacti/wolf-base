@@ -1,15 +1,10 @@
 <form [formGroup]="form.fg" class="flex flex-col gap-4">
 
 	<!-- PROJECT ID -->
-	@let project = form.project.valueChanges | async;
-	@if (project) {
-
-		<div>
-			<small>{{ project.id }}</small>
-			{{ project.name }}
-		</div>
-
-	}
+	<div>
+		<small class="block text-secondary text-sm">{{ project().id }}</small>
+		{{ project().name }}
+	</div>
 
 	<!-- ID -->
 	@if (task()?.id) {
@@ -21,28 +16,31 @@
 	<!-- NAME -->
 	<w-input formControlName="name" label="Name"/>
 
-	<!-- PROJECT -->
-	<w-input formControlName="project" label="Project"/>
-
-	<!-- NAME -->
-	<w-input formControlName="name" label="Name"/>
-
 	<!-- DESCRIPTION -->
 	<w-textarea formControlName="description" label="Description" [rows]="3"/>
 
 	<!-- TAGS -->
-	<div task_row>
+	<div class="flex items-center gap-1">
 		<w-input-tag
 			formControlName="tags"
 			label="Tags"
 			class="input-element"
 			(tagInput)="onTagInput($event)"
 			[suggestions]="tagSuggestions()"/>
-		<button type="button" class="link" [title]="'Toggle \''+TAG_OPTIONAL+'\''" (click)="onToggleOptional()"><span class="material-symbols-outlined" [class.filled]="((form.tags.valueChanges | async) ?? []).includes(TAG_OPTIONAL)">preliminary</span></button>
+		<button	type="button"
+				class="btn btn-glyph squared"
+				[title]="'Toggle \''+TAG_OPTIONAL+'\''"
+				(click)="onToggleOptional()">
+				@if (((form.tags.valueChanges | async) ?? []).includes(TAG_OPTIONAL)) {
+					<svg wGlyph="preliminary"></svg>
+				} @else {
+					<svg wGlyph="preliminary_filled"></svg>
+				}
+		</button>
 	</div>
 
 	<!-- task_status_row -->
-	<div>
+	<div class="flex md:flex-row flex-col items-center gap-2">
 
 		<!-- STATUS -->
 		<w-select formControlName="status" label="Status" [nodes]="TASK_STATE"/>
@@ -56,7 +54,7 @@
 	</div>
 
 	<!-- task_date_row -->
-	<div>
+	<div class="flex sm:flex-row flex-col items-center gap-2">
 
 		<!-- START -->
 		<w-input formControlName="start" label="Start" type="date"/>

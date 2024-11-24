@@ -126,6 +126,12 @@
 
 			}
 
+			& > svg {
+
+				@apply text-[1.2em];
+
+			}
+
 		}
 
 		&[disabled] {

@@ -32,7 +32,7 @@ export class TaskForm extends BaseComponent {
 
 	// INPUT
 	task = input<Task | null>(null);
-	project = input<NameBase | null>(null);
+	project = input.required<NameBase>();
 	tagSuggestions = input<string[]>([]);
 
 	// OUTPUT
@@ -50,18 +50,6 @@ export class TaskForm extends BaseComponent {
 			const task = this.task();
 			if (task) // is edit? set values
 				untracked(() => this.form.populate(task));
-
-			else { // is new ? set project id and name
-
-				const project = this.project();
-				if (project) {
-
-					const { id, name } = project;
-					untracked(() => this.form.project.setValue({ id, name }));
-
-				}
-
-			}
 
 		});
 
@@ -87,7 +75,7 @@ export class TaskForm extends BaseComponent {
 		if (this.form.fg.invalid)
 			return;
 
-		const task: Partial<Task> = this.form.fg.value as Partial<Task>;
+		const task: Partial<Task> = { ...this.form.fg.value as Partial<Task>, project: this.project() };
 		if (task.id)
 			this.update.emit({ id: task.id, task });
 		else

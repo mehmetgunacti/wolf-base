@@ -10,6 +10,7 @@ import { BaseComponent } from '@libComponents/base.component';
 import { Bookmark } from '@models/bookmark.model';
 import { Task } from '@models/project.model';
 import { Store } from '@ngrx/store';
+import { selProject_selected } from '@selectors/project/project-ui.selectors';
 import { selTask_distinctTagsArray } from '@selectors/task/task-tags.selectors';
 import { selTask_editEntity } from '@selectors/task/task-ui.selectors';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
@@ -26,6 +27,7 @@ export class TaskEditContainer extends BaseComponent {
 	private store: Store = inject(Store);
 
 	protected task = this.store.selectSignal(selTask_editEntity);
+	protected project = this.store.selectSignal(selProject_selected);
 	protected tagSuggestions$: Observable<string[]>;
 
 	private tagInput = new Subject<string | null>();
