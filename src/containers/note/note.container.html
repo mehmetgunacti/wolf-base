@@ -70,19 +70,12 @@
 
 } @else {
 
-	<div class="comp-dark comp">
-
-		<div>
-
-			<span><svg wGlyph="check_circle"></svg>&nbsp;No note available</span>
-			<button
-				class="btn btn-ghost"
-				[routerLink]="['/notes', 'new' ]">
-				<svg wGlyph="post_add"></svg> Add Note
-			</button>
-
-		</div>
-
+	<!-- todo this could be a component -->
+	<div class="flex flex-col justify-center items-center p-4 comp">
+		No note available
+		<button routerLink="/notes/new" class="mx-auto btn btn-ghost">
+			<svg wGlyph="add"></svg> Add Note
+		</button>
 	</div>
 
 }
