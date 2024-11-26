@@ -38,6 +38,8 @@ export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 	})),
 	on(coreActions.setTheme, (state, { theme }): CoreUIState => ({ ...state, theme })),
 	on(coreActions.setNow, (state): CoreUIState => ({ ...state, now: Date.now() })),
+	on(coreActions.showProgressBar, (state): CoreUIState => ({ ...state, progressVisible: true })),
+	on(coreActions.hideProgressBar, (state): CoreUIState => ({ ...state, progressVisible: false })),
 	on(entityActions.downloadRemoteMetadata, (state): CoreUIState => ({ ...state, progressVisible: true })),
 	on(entityActions.downloadRemoteMetadataSuccess, (state): CoreUIState => ({ ...state, progressVisible: false })),
 	on(databaseActions.loadReport, (state): CoreUIState => ({ ...state, progressVisible: true })),

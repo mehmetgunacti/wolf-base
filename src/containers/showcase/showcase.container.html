@@ -11,13 +11,17 @@
 	<div class="md:px-4 overflow-hidden" [class.pb-4]="toastsVisible()" [@slideUpDown]="toastsVisible() ? 'opened' : 'closed'">
 
 		<!-- TYPES -->
-		<div class="flex flex-wrap justify-center items-center gap-2">
+		<div class="flex flex-wrap justify-center items-center gap-2 mb-2">
 
 			<button class="btn btn-success" (click)="onOpenToast('success')">Success</button>
 			<button class="btn btn-info" (click)="onOpenToast('info')">Info</button>
 			<button class="btn btn-warn" (click)="onOpenToast('warn')">Warn</button>
 			<button class="btn btn-error" (click)="onOpenToast('error')">Error</button>
 
+		</div>
+		<div class="flex flex-wrap justify-center items-center gap-2">
+			<button class="btn" (click)="showProgressBar()">Show Progress Bar</button>
+			<button class="btn" (click)="hideProgressBar()">Hide Progress Bar</button>
 		</div>
 
 	</div>

@@ -19,6 +19,7 @@ import { Store } from '@ngrx/store';
 import { selNote_EntityList } from '@selectors/entity/entity-note.selectors';
 import { fc, fg, nnfc } from '@utils/form.util';
 import { SelectTreeComponent } from "../../lib/components/select/select-tree.component";
+import { coreActions } from '@actions/core.actions';
 
 @Component({
 	standalone: true,
@@ -88,6 +89,18 @@ export class ShowcaseContainer extends BaseComponent {
 
 		const summary = severity.charAt(0).toUpperCase() + severity.substr(1) + ' Toast';
 		this.toast.show({ severity, summary, detail: 'Details here' });
+
+	}
+
+	showProgressBar(): void {
+
+		this.store.dispatch(coreActions.showProgressBar());
+
+	}
+
+	hideProgressBar(): void {
+
+		this.store.dispatch(coreActions.hideProgressBar());
 
 	}
 

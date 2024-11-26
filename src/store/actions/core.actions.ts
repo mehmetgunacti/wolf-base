@@ -33,6 +33,9 @@ export const coreActions = createActionGroup({
 		hideSidebar					: emptyProps(),
 		setNextSidebarState			: emptyProps(),
 
+		showProgressBar				: emptyProps(),
+		hideProgressBar				: emptyProps(),
+
 		setTheme					: props<{ theme: Theme }>(),
 		setNextTheme				: emptyProps(),
 		setNow						: emptyProps(),
