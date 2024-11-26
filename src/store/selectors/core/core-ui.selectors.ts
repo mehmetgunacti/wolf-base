@@ -36,3 +36,10 @@ export const selCore_now = createSelector(
 	(state: CoreUIState) => state.now
 
 );
+
+export const selCore_progressVisible = createSelector(
+
+	selCore_uiState,
+	(state: CoreUIState) => state.progressVisible
+
+);

@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 import defaultTheme from 'tailwindcss/defaultTheme';
+import { DEFAULT_CONFIG } from '@libServices/overlay.service';
 
 export default {
 
@@ -21,6 +22,12 @@ export default {
 
 			},
 			focus		: 'var(--col-focus)',
+			progress	: {
+
+				DEFAULT : 'var(--col-progress)',
+				bg		: 'var(--col-progress-bg)'
+
+			},
 			outline		: 'var(--col-outline)',
 			disabled	: 'var(--col-disabled)',
 			content		: 'var(--col-text)',
@@ -53,6 +60,17 @@ export default {
 		},
 
 		extend: {
+
+			animation: {
+				'loading': 'loading 1.5s linear infinite'
+			},
+
+			keyframes: {
+				loading: {
+					'0%': { transform: 'translateX(-100%)' },
+					'100%': { transform: 'translateX(200%)' }
+				}
+			},
 
 			fontFamily: {
 
@@ -224,7 +242,7 @@ export default {
 			zIndex: {
 
 				'splash-screen'		: '10000',
-				'ng-progress'		: '9000',
+				'progress'			: '9000',
 				'header'			: '8000',
 				'overlay-container'	: '7000',
 				'overlay'			: '7000',

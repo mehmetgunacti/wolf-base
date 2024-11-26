@@ -1,4 +1,6 @@
 import { coreActions } from '@actions/core.actions';
+import { databaseActions } from '@actions/database.actions';
+import { entityActions } from '@actions/entity.actions';
 import { DEFAULT_CONF_VALUES } from '@constants/database.constant';
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { CoreUIState, initialCoreUIState } from '@states/core.state';
@@ -35,6 +37,10 @@ export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 
 	})),
 	on(coreActions.setTheme, (state, { theme }): CoreUIState => ({ ...state, theme })),
-	on(coreActions.setNow, (state): CoreUIState => ({ ...state, now: Date.now() }))
+	on(coreActions.setNow, (state): CoreUIState => ({ ...state, now: Date.now() })),
+	on(entityActions.downloadRemoteMetadata, (state): CoreUIState => ({ ...state, progressVisible: true })),
+	on(entityActions.downloadRemoteMetadataSuccess, (state): CoreUIState => ({ ...state, progressVisible: false })),
+	on(databaseActions.loadReport, (state): CoreUIState => ({ ...state, progressVisible: true })),
+	on(databaseActions.loadReportSuccess, (state): CoreUIState => ({ ...state, progressVisible: false })),
 
 );

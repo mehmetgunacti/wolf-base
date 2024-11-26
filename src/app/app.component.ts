@@ -4,7 +4,7 @@ import { mainTrigger, sidebarTrigger } from '@animations/sidebar.animation';
 import { SidebarState } from '@constants/sidebar.constant';
 import { BaseComponent } from '@libComponents/base.component';
 import { Store } from '@ngrx/store';
-import { selCore_sidebarState } from '@selectors/core/core-ui.selectors';
+import { selCore_progressVisible, selCore_sidebarState } from '@selectors/core/core-ui.selectors';
 import { delay, of } from 'rxjs';
 import { environment } from '../environments/environment';
 import { appImports } from './app.config';
@@ -22,6 +22,7 @@ export class AppComponent extends BaseComponent {
 	protected splashVisible = signal(true);
 	protected sidebarState = inject(Store).selectSignal(selCore_sidebarState);
 	protected sidebarOpen = computed(() => this.sidebarState() === SidebarState.FULL);
+	protected progressVisible = inject(Store).selectSignal(selCore_progressVisible);
 
 	constructor() {
 

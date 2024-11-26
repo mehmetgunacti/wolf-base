@@ -7,6 +7,7 @@ import { APP_INITIALIZER, ApplicationConfig, ErrorHandler, isDevMode, LOCALE_ID,
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, RouterOutlet, withViewTransitions } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
+import { ProgressComponent } from '@libComponents/progress/progress.component';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore, Store } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -29,6 +30,7 @@ export const appImports = [
 	HeaderComponent,
 	NavComponent,
 	NavOverlayComponent,
+	ProgressComponent,
 	CdkScrollable
 
 ];

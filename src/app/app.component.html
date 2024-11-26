@@ -8,6 +8,11 @@
 	<app-nav-overlay @opacity />
 
 }
+@if (progressVisible()) {
+
+	<w-progress/>
+
+}
 <header	class="top-0 right-0 left-0 z-header fixed grid bg-header shadow-component h-header">
 
 	<app-header />
