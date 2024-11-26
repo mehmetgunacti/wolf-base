@@ -17,7 +17,7 @@ export interface CoreUIState {
 	syncableItems: number,
 	theme: Theme,
 	now: number;
-	progressVisible: boolean;
+	progressCounter: number;
 
 }
 
@@ -50,7 +50,7 @@ export const initialCoreUIState: CoreUIState = {
 	syncableItems: 0,
 	theme: DEFAULT_CONF_VALUES.theme,
 	now: Date.now(),
-	progressVisible: false
+	progressCounter: 0
 
 };
 

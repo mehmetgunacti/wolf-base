@@ -1,7 +1,7 @@
 import { coreActions } from '@actions/core.actions';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { registerLocaleData } from '@angular/common';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
 import { APP_INITIALIZER, ApplicationConfig, ErrorHandler, isDevMode, LOCALE_ID, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -16,6 +16,7 @@ import { CustomErrorHandler } from '@services/error.handler';
 import { FirestoreRemoteRepositoryServiceImpl } from '@services/firestore/firestore.service';
 import { IndexedDbLocalRepositoryServiceImpl } from '@services/indexeddb/local-repository.service';
 import { indexedDbConfiguration } from '@services/indexeddb/wolfbase.database';
+import { progressBarInterceptor } from '@services/interceptors/progress.interceptor';
 import { LOCAL_REPOSITORY_SERVICE, REMOTE_REPOSITORY_SERVICE } from '@services/repository.service';
 import { BOOKMARK_SYNC_SERVICE, DATABASE_CONFIG, SYNC_SERVICE, SyncServiceImpl } from '@services/sync.service';
 import * as store from 'store/store.config';
@@ -68,7 +69,7 @@ export const appConfig: ApplicationConfig = {
 	providers: [
 		provideExperimentalZonelessChangeDetection(),
 		provideRouter(routes, withViewTransitions()),
-		provideHttpClient(),
+		provideHttpClient(withInterceptors([ progressBarInterceptor ]),),
 		provideAnimations(),
 		provideServiceWorker('ngsw-worker.js', { enabled: !isDevMode(), registrationStrategy: 'registerWhenStable:30000' }),
 		provideStore(store.reducerList, { metaReducers: store.metaReducers }),

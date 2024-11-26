@@ -1,10 +1,21 @@
 import { coreActions } from '@actions/core.actions';
 import { databaseActions } from '@actions/database.actions';
-import { entityActions } from '@actions/entity.actions';
 import { DEFAULT_CONF_VALUES } from '@constants/database.constant';
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { CoreUIState, initialCoreUIState } from '@states/core.state';
 import { afterResize, evaluate, hideSidebar, nextState } from '@utils/sidebar.util';
+
+function incProgressCounter(curr: number): number {
+
+	return curr + 1;
+
+}
+
+function decProgressCounter(curr: number): number {
+
+	return curr === 0 ? 0 : curr - 1;
+
+}
 
 export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 
@@ -38,11 +49,9 @@ export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 	})),
 	on(coreActions.setTheme, (state, { theme }): CoreUIState => ({ ...state, theme })),
 	on(coreActions.setNow, (state): CoreUIState => ({ ...state, now: Date.now() })),
-	on(coreActions.showProgressBar, (state): CoreUIState => ({ ...state, progressVisible: true })),
-	on(coreActions.hideProgressBar, (state): CoreUIState => ({ ...state, progressVisible: false })),
-	on(entityActions.downloadRemoteMetadata, (state): CoreUIState => ({ ...state, progressVisible: true })),
-	on(entityActions.downloadRemoteMetadataSuccess, (state): CoreUIState => ({ ...state, progressVisible: false })),
-	on(databaseActions.loadReport, (state): CoreUIState => ({ ...state, progressVisible: true })),
-	on(databaseActions.loadReportSuccess, (state): CoreUIState => ({ ...state, progressVisible: false })),
+	on(coreActions.showProgressBar, (state): CoreUIState => ({ ...state, progressCounter: incProgressCounter(state.progressCounter) })),
+	on(coreActions.hideProgressBar, (state): CoreUIState => ({ ...state, progressCounter: decProgressCounter(state.progressCounter) })),
+	on(databaseActions.loadReport, (state): CoreUIState => ({ ...state, progressCounter: incProgressCounter(state.progressCounter) })),
+	on(databaseActions.loadReportSuccess, (state): CoreUIState => ({ ...state, progressCounter: decProgressCounter(state.progressCounter) })),
 
 );
