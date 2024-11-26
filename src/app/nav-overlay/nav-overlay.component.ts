@@ -1,7 +1,5 @@
-import { coreActions } from '@actions/core.actions';
-import { Component, inject } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { BaseComponent } from '@libComponents/base.component';
-import { Store } from '@ngrx/store';
 
 @Component({
 	standalone: true,
@@ -9,16 +7,24 @@ import { Store } from '@ngrx/store';
 	template: '',
 	host: {
 		'(click)': 'onClick()',
-		'class': 'fixed block top-0 right-0 h-100dvh left-0 backdrop-blur bg-overlay z-nav-overlay transition-all duration-500'
+		'class': 'fixed top-0 right-0 h-100dvh left-0 backdrop-blur bg-overlay z-nav-overlay starting:opacity-0 [transition-property:display_opacity] [transition-behavior:allow-discrete] duration-500',
+		'[class.hidden]': '!visible()',
+		'[class.block]': 'visible()',
+		'[class.opacity-100]': 'visible()',
+		'[class.opacity-0]': '!visible()',
 	}
 })
 export class NavOverlayComponent extends BaseComponent {
 
-	private store: Store = inject(Store);
+	// Input
+	visible = input.required<boolean>();
+
+	// Output
+	close = output<void>();
 
 	onClick(): void {
 
-		this.store.dispatch(coreActions.hideSidebar());
+		this.close.emit();
 
 	}
 

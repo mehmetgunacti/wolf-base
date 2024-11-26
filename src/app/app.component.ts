@@ -1,5 +1,5 @@
+import { coreActions } from '@actions/core.actions';
 import { Component, computed, inject, signal } from '@angular/core';
-import { opacityTrigger } from '@animations/opacity.animation';
 import { mainTrigger, sidebarTrigger } from '@animations/sidebar.animation';
 import { SidebarState } from '@constants/sidebar.constant';
 import { BaseComponent } from '@libComponents/base.component';
@@ -15,14 +15,16 @@ import { appImports } from './app.config';
 	imports: appImports,
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
-	animations: [ sidebarTrigger, opacityTrigger, mainTrigger ],
+	animations: [ sidebarTrigger, mainTrigger ],
 })
 export class AppComponent extends BaseComponent {
+
+	private store = inject(Store);
 
 	protected splashVisible = signal(true);
 	protected sidebarState = inject(Store).selectSignal(selCore_sidebarState);
 	protected sidebarOpen = computed(() => this.sidebarState() === SidebarState.FULL);
-	protected progressVisible = inject(Store).selectSignal(selCore_progressVisible);
+	protected progressVisible = this.store.selectSignal(selCore_progressVisible);
 
 	constructor() {
 
@@ -32,6 +34,12 @@ export class AppComponent extends BaseComponent {
 		of(false)
 			.pipe(delay(environment.splash)) // splash screen visible for n ms
 			.subscribe(() => this.splashVisible.set(false));
+
+	}
+
+	onCloseNavOverlay(): void {
+
+		this.store.dispatch(coreActions.hideSidebar());
 
 	}
 

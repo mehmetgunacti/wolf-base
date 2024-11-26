@@ -3,16 +3,8 @@
 	<app-splash-screen @splash />
 
 } -->
-@if (sidebarOpen()) {
-
-	<app-nav-overlay @opacity />
-
-}
-@if (progressVisible()) {
-
-	<w-progress/>
-
-}
+<app-nav-overlay [visible]="sidebarOpen()" (close)="onCloseNavOverlay()"/>
+<w-progress [visible]="progressVisible()"/>
 <header	class="top-0 right-0 left-0 z-header fixed grid bg-header shadow-component h-header">
 
 	<app-header />
