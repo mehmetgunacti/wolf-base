@@ -147,6 +147,7 @@ export class WordFormImpl {
 	addContext(): void {
 
 		this.contexts.push(nnfc('', Validators.required));
+		this.fg.markAsDirty();
 
 	}
 
@@ -160,6 +161,7 @@ export class WordFormImpl {
 	addLanguage(dIdx: number): void {
 
 		this.definitions.at(dIdx).controls.languages.push(fgLanguage());
+		this.fg.markAsDirty();
 
 	}
 
@@ -173,6 +175,7 @@ export class WordFormImpl {
 	addSample(dIdx: number): void {
 
 		this.definitions.at(dIdx).controls.samples.push(nnfc('', Validators.required));
+		this.fg.markAsDirty();
 
 	}
 
@@ -186,6 +189,7 @@ export class WordFormImpl {
 	addDefinition(): void {
 
 		this.definitions.push(fgDefinition());
+		this.fg.markAsDirty();
 
 	}
 

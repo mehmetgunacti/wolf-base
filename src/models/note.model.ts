@@ -4,6 +4,7 @@ import { ISODateString } from './id-base.model';
 export interface Note extends HasParentId {
 
 	tags: string[];
+	urls: string[];
 	modified: ISODateString;
 
 }

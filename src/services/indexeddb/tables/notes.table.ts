@@ -98,6 +98,7 @@ export class NotesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Note> im
 			name: '',
 			parentId: null,
 			tags: [],
+			urls: [],
 			modified: new Date().toISOString()
 
 		};

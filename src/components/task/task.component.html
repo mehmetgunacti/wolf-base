@@ -44,7 +44,7 @@
 		<!-- START -->
 		<div class="flex flex-col items-start">
 
-			<small class="flex items-center gap-1">
+			<small class="flex items-center gap-1 text-secondary text-xs">
 				<svg wGlyph="schedule"></svg> {{ t.start | date:'EEEE dd.MM.yyyy' }}
 				@if (t.end) {
 					- {{ t.end | date:'EEEE dd.MM.yyyy' }}
@@ -53,14 +53,22 @@
 			<small>{{ t.id }}</small>
 
 		</div>
-		<div class="flex justify-end">
+		<div class="flex justify-between gap-2">
+
+			<button
+				class="px-2 h-button-height-xs text-sm btn btn-error"
+				[tabindex]="isExpanded ? '0' : '-1'"
+				(click)="onEditTask(t.id)">
+				<svg wGlyph="delete"></svg>
+				Delete
+			</button>
 
 			<button
 				class="px-2 h-button-height-xs text-sm btn"
 				[tabindex]="isExpanded ? '0' : '-1'"
 				(click)="onEditTask(t.id)">
 				<svg wGlyph="edit"></svg>
-				Edit Task
+				Edit
 			</button>
 
 		</div>

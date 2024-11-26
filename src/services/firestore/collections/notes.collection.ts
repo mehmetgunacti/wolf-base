@@ -33,6 +33,9 @@ class NoteFirestoreConverter implements FirestoreConverter<Note> {
 		fields[ 'tags' ] = {
 			arrayValue: { values: note.tags.map(v => ({ stringValue: v })) }
 		};
+		fields[ 'urls' ] = {
+			arrayValue: { values: note.urls.map(v => ({ stringValue: v })) }
+		};
 		fields[ 'modified' ] = { stringValue: note.modified };
 
 		return fields;
@@ -42,7 +45,7 @@ class NoteFirestoreConverter implements FirestoreConverter<Note> {
 	fromFirestore(note: Note): Note {
 
 		// validate incoming
-		let { id, name, modified, parentId, tags } = note;
+		let { id, name, modified, parentId, tags, urls } = note;
 		if (!id)
 			throw new Error(`Firestore Note: invalid 'id' value`);
 
@@ -55,13 +58,17 @@ class NoteFirestoreConverter implements FirestoreConverter<Note> {
 		if (!Array.isArray(tags))
 			throw new Error(`Firestore Note: invalid 'tags' value`);
 
+		if (!Array.isArray(urls) || urls.length === 0)
+			throw new Error(`Firestore Bookmark: invalid 'urls' value`);
+
 		const validated: Note = {
 
 			id,
 			name,
 			modified,
 			parentId: parentId || null,
-			tags
+			tags,
+			urls
 
 		};
 		return validated;
@@ -84,6 +91,9 @@ class NoteFirestoreConverter implements FirestoreConverter<Note> {
 
 		if (note.tags)
 			fields.add('tags');
+
+		if (note.urls)
+			fields.add('urls');
 
 		if (note.modified)
 			fields.add('modified');

@@ -37,6 +37,38 @@
 		</button>
 	</div>
 
+	<ng-container formArrayName="urls">
+
+		<!-- URLs -->
+		@for (fcUrl of form.urls.controls; track $index) {
+
+			<div class="flex gap-1">
+
+				<w-input
+					[formControl]="fcUrl"
+					[label]="'URL' + (form.urls.controls.length > 1 && $index === 0 ? ' (Primary)' : '')"/>
+					<!-- (inputChanged)="checkUrl($event, fcUrl)"/> -->
+				@if($index === 0) {
+
+					<button type="button" class="btn btn-ghost" title="Add URL" (click)="form.addUrl()">
+						<svg wGlyph="add"></svg>
+					</button>
+
+				}
+				@if($index > 0) {
+
+					<button type="button" class="btn btn-ghost" title="Remove URL" (click)="form.removeUrl($index)">
+						<svg wGlyph="remove"></svg>
+					</button>
+
+				}
+
+			</div>
+
+		}
+
+	</ng-container>
+
 	<footer>
 
 		<button [disabled]="this.form.fg.pristine || this.form.fg.invalid" class="float-right btn">
