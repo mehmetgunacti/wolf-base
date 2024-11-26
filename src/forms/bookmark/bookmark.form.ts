@@ -194,18 +194,6 @@ will be deleted. Continue?`)
 
 	}
 
-	addURL(): void {
-
-		this.form.addUrl();
-
-	}
-
-	removeURL(idx: number): void {
-
-		this.form.removeUrl(idx);
-
-	}
-
 	// todo add this back
 	checkUrl(value: string, fc: FormControl): void {
 

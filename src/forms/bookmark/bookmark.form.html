@@ -44,14 +44,14 @@
 							<!-- (inputChanged)="checkUrl($event, fcUrl)"/> -->
 						@if($index === 0) {
 
-							<button type="button" class="btn btn-ghost" title="Add URL" (click)="addURL()">
+							<button type="button" class="btn btn-ghost" title="Add URL" (click)="form.addUrl()">
 								<svg wGlyph="add"></svg>
 							</button>
 
 						}
 						@if($index > 0) {
 
-							<button type="button" class="btn btn-ghost" title="Remove URL" (click)="removeURL($index)">
+							<button type="button" class="btn btn-ghost" title="Remove URL" (click)="form.removeUrl($index)">
 								<svg wGlyph="remove"></svg>
 							</button>
 
