@@ -72,11 +72,36 @@
 		@for (note of children(); track $index) {
 
 			<a	[routerLink]="['/notes', note.id]"
-				class="flex gap-1 focus-visible:bg-component-dark-hover my-1 ml-4 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
+				class="flex items-center gap-1 focus-visible:bg-component-dark-hover my-1 ml-4 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
 				tabindex="0">
 
-				<svg wGlyph="down_right"></svg>
+				<svg wGlyph="down_right" class="flex-shrink-0"></svg>
 				{{ note.name | hideEnum }}
+
+			</a>
+
+		}
+
+	</div>
+
+}
+
+@if (note().urls.length > 0) {
+
+	<!-- note_children -->
+	<div class="comp-dark p-4 comp">
+
+		<div><strong>URLs</strong></div>
+		@for (url of note().urls; track $index) {
+
+			<a	[href]="url"
+				target="_blank"
+				class="flex items-center gap-1 focus-visible:bg-component-dark-hover my-1 ml-4 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm hover:underline hover:underline-offset-1 group focus-visible:outline-none"
+				tabindex="0">
+
+				<svg wGlyph="down_right" class="flex-shrink-0"></svg>
+				{{ url }}
+				<sup class="opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-500"><svg wGlyph="open_in_new"></svg></sup>
 
 			</a>
 

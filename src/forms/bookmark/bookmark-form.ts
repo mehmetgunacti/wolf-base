@@ -62,7 +62,7 @@ export class BookmarkFormImpl {
 
 	addUrl(): void {
 
-		this.urls.controls.push(nnfc('', Validators.required));
+		this.urls.push(nnfc('', Validators.required));
 		this.fg.markAsDirty();
 
 	}

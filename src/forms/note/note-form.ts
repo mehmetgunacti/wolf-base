@@ -59,15 +59,15 @@ export class NoteFormImpl {
 
 	addUrl(): void {
 
-		this.urls.controls.push(nnfc('', Validators.required));
-		this.fg.markAsDirty();
+		this.urls.push(nnfc('', Validators.required));
+		this.fg.updateValueAndValidity();
 
 	}
 
 	removeUrl(idx: number): void {
 
 		this.urls.removeAt(idx);
-		this.fg.markAsDirty();
+		this.fg.updateValueAndValidity();
 
 	}
 

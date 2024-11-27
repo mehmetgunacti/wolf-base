@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, effect, inject, input, output, untracked } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TAG_PINNED } from '@constants/bookmark.constant';
@@ -15,7 +15,7 @@ import { NOTE_FORM, NoteFormImpl } from './note-form';
 
 @Component({
 	standalone: true,
-	imports: [ RequiredValidatorDirective, InputComponent, InputTagComponent, SelectTreeComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe ],
+	imports: [ RequiredValidatorDirective, JsonPipe, InputComponent, InputTagComponent, SelectTreeComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe ],
 	selector: 'app-note-form',
 	templateUrl: './note.form.html',
 	providers: [ { provide: NOTE_FORM, useClass: NoteFormImpl } ]
