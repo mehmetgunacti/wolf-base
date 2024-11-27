@@ -95,6 +95,7 @@ export type GlyphName =
 	| 'refresh'
 	| 'remove'
 	| 'ribbon'
+	| 'right'
 	| 'save'
 	| 'schedule'
 	| 'school'
@@ -841,6 +842,14 @@ export const Glyphs: Record<GlyphName, GlyphData> = {
 		height: '80',
 		viewBox: '0 90 612 612',
 		d: [ 'm0 90h283.05l328.95 328.95v283.05z' ]
+
+	},
+	right: {
+
+		width: '16',
+		height: '16',
+		viewBox: '0 0 24 24',
+		d: [ 'M13.267 4.209a.75.75 0 0 0-1.034 1.086l6.251 5.955H3.75a.75.75 0 0 0 0 1.5h14.734l-6.251 5.954a.75.75 0 0 0 1.034 1.087l7.42-7.067a1 1 0 0 0 .3-.58a.8.8 0 0 0-.001-.29a1 1 0 0 0-.3-.578z' ]
 
 	},
 	save: {
