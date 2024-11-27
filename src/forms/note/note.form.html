@@ -17,7 +17,7 @@
 	<w-input formControlName="name" label="Name"/>
 
 	<!-- TAGS -->
-	<div class="flex gap-1">
+	<div class="flex items-center gap-1">
 		<w-input-tag
 			formControlName="tags"
 			label="Tags"
@@ -42,32 +42,26 @@
 		<!-- URLs -->
 		@for (fcUrl of form.urls.controls; track $index) {
 
-			<div class="flex gap-1">
+			<div class="flex items-center gap-1">
 
 				<w-input
 					[formControl]="fcUrl"
-					[label]="'URL' + (form.urls.controls.length > 1 && $index === 0 ? ' (Primary)' : '')"/>
+					[label]="'URL #' + ($index + 1)"/>
 					<!-- (inputChanged)="checkUrl($event, fcUrl)"/> -->
-				@if($index === 0) {
-
-					<button type="button" class="btn btn-ghost" title="Add URL" (click)="form.addUrl()">
-						<svg wGlyph="add"></svg>
-					</button>
-
-				}
-				@if($index > 0) {
 
 					<button type="button" class="btn btn-ghost" title="Remove URL" (click)="form.removeUrl($index)">
 						<svg wGlyph="remove"></svg>
 					</button>
-
-				}
 
 			</div>
 
 		}
 
 	</ng-container>
+
+	<button type="button" class="btn btn-success self-end" title="Add URL" (click)="form.addUrl()">
+		<svg wGlyph="add"></svg> Add URL
+	</button>
 
 	<footer>
 
