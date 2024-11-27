@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
+import { Component, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BaseComponent } from '../base.component';
 
@@ -31,7 +31,6 @@ export class InputComponent extends BaseComponent implements ControlValueAccesso
 
 	protected value: WritableSignal<string> = signal('');
 	protected disabled: WritableSignal<boolean> = signal(false);
-	protected isLabelUp = computed(() => this.labelUp() || !!this.value());
 
 	//////////// boilerplate
 	private onChange: any = () => { };
