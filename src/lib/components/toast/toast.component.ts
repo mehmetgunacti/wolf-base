@@ -42,6 +42,10 @@ export class ToastComponent extends BaseComponent implements OnDestroy {
 
 	});
 
+	// in case user clicks on toast and closes it,
+	// setTimeout fired onClose() should not try to emit event "(close)"
+	private open = true;
+
 	constructor() {
 
 		super();
@@ -62,7 +66,12 @@ export class ToastComponent extends BaseComponent implements OnDestroy {
 
 	onClose(): void {
 
-		this.close.emit(this.componentId);
+		if (this.open) {
+
+			this.open = false;
+			this.close.emit(this.componentId);
+
+		}
 
 	}
 
