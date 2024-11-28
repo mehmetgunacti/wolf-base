@@ -10,5 +10,6 @@ export interface MenuItem {
 	icon: GlyphName;
 	badge?: string;
 	title?: string;
+	smallBadge?: string;
 
 }

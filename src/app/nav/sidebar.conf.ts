@@ -58,7 +58,9 @@ export const miCloud = (cloudTasks: CloudTask[]): MenuItem => ({
 	label: 'Cloud Sync',
 	icon: 'cloud_sync',
 	routerLinkActiveOptions: { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' },
-	title: cloudTasks.length > 0 ? cloudTasks.length + ' syncable items available' : 'Cloud'
+	title: cloudTasks.length > 0 ? cloudTasks.length + ' syncable items available' : 'Cloud',
+	badge: `${cloudTasks.length}`,
+	smallBadge: cloudTasks.length > 0 ? `${cloudTasks.length}` : undefined
 });
 
 export const miSetting: MenuItem = {
