@@ -8,10 +8,11 @@ import { selQuizEntry_CloudTasks } from '../sync/sync-quiz-entry.selectors';
 import { selQuote_CloudTasks } from '../sync/sync-quote.selectors';
 import { selTask_CloudTasks } from '../sync/sync-task.selectors';
 import { selWord_CloudTasks } from '../sync/sync-word.selectors';
+import { selBoomkark_clickedCloudTasks } from '@selectors/bookmark/bookmark-clicks.selectors';
 
-export const selCloudModuleState = createFeatureSelector<CloudModuleState>('cloud');
+export const selCloud_ModuleState = createFeatureSelector<CloudModuleState>('cloud');
 
-export const selCloudAvailableTasks = createSelector(
+export const selCloud_AvailableTasks = createSelector(
 
 	selBookmark_CloudTasks,
 	selNote_CloudTasks,
@@ -21,6 +22,34 @@ export const selCloudAvailableTasks = createSelector(
 	selQuizEntry_CloudTasks,
 	selProject_CloudTasks,
 	selTask_CloudTasks,
-	(bookmarks, notes, contents, words, quotes, quizEntries, projects, tasks) => [...bookmarks, ...notes, ...contents, ...words, ...quotes, ...quizEntries, ...projects, ...tasks]
+	selBoomkark_clickedCloudTasks,
+	(
+		bookmarks,
+		notes,
+		contents,
+		words,
+		quotes,
+		quizEntries,
+		projects,
+		tasks,
+		click
+	) => {
+
+		const clicks = click ? [click] : [];
+		return [
+
+			...bookmarks,
+			...notes,
+			...contents,
+			...words,
+			...quotes,
+			...quizEntries,
+			...projects,
+			...tasks,
+			...clicks
+
+		];
+
+	}
 
 );

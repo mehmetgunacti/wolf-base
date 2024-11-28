@@ -9,7 +9,10 @@ import { ClickedBookmark } from '@models/bookmark.model';
 	standalone: true,
 	imports: [ GlyphDirective ],
 	templateUrl: './compact-bookmark.component.html',
-	host: { 'class': 'inline-block comp comp-hover comp-active' }
+	host: {
+		'class': 'inline-block comp comp-hover comp-active',
+		'(click)': 'onLinkClick()'
+	}
 })
 export class CompactBookmarkComponent extends BaseComponent {
 

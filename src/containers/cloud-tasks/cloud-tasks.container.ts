@@ -11,10 +11,9 @@ import { BaseComponent } from '@libComponents/base.component';
 import { PortalComponent } from '@libComponents/portal.component';
 import { CloudTask, SyncTaskType } from '@models/cloud.model';
 import { Action, Store } from '@ngrx/store';
-import { selBoomkark_clickedCloudTasks } from '@selectors/bookmark/bookmark-clicks.selectors';
-import { selCloudAvailableTasks } from '@selectors/cloud/cloud.selectors';
+import { selCloud_AvailableTasks } from '@selectors/cloud/cloud.selectors';
 import { selCore_isFirestoreConfigMissing } from '@selectors/core/core-configuration.selectors';
-import { combineLatest, map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 function getBookmarkAction(taskType: SyncTaskType): Action | null {
 
@@ -109,14 +108,7 @@ export class CloudTasksContainer extends BaseComponent {
 	constructor() {
 
 		super();
-		this.tasks$ = combineLatest([
-			this.store.select(selCloudAvailableTasks),
-			this.store.select(selBoomkark_clickedCloudTasks)
-		]).pipe(
-
-			map(([ tasks, clicks ]) => clicks ? [ ...tasks, clicks ] : tasks)
-
-		);
+		this.tasks$ = this.store.select(selCloud_AvailableTasks);
 
 	}
 

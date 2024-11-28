@@ -45,7 +45,7 @@ export class BookmarksContainer extends BaseComponent {
 
 	}
 
-	onClick(id: UUID): void {
+	onLinkClick(id: UUID): void {
 
 		this.store.dispatch(bookmarkActions.click({ id }));
 

@@ -7,7 +7,7 @@ import { BaseComponent } from '@libComponents/base.component';
 import { MenuItem } from '@models/menu.model';
 import { Store } from '@ngrx/store';
 import { selBookmark_menuBadge } from '@selectors/bookmark/bookmark-ui.selectors';
-import { selCloudAvailableTasks } from '@selectors/cloud/cloud.selectors';
+import { selCloud_AvailableTasks } from '@selectors/cloud/cloud.selectors';
 import * as conf from './sidebar.conf';
 
 @Component({
@@ -24,7 +24,7 @@ export class NavComponent extends BaseComponent {
 	private store: Store = inject(Store);
 
 	private bmBadge = this.store.selectSignal(selBookmark_menuBadge);
-	private cloudTasks = this.store.selectSignal(selCloudAvailableTasks);
+	private cloudTasks = this.store.selectSignal(selCloud_AvailableTasks);
 
 	protected menuItemsTop = computed(() => {
 

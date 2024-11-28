@@ -7,6 +7,8 @@ import { createSelector } from '@ngrx/store';
 import { selBookmark_EntityList, selBookmark_EntityState } from '../entity/entity-bookmark.selectors';
 import { selBookmark_ClicksState } from './bookmark.selectors';
 
+// todo : selector names need refactoring
+
 const selBookmark_Clicks = createSelector(
 
 	selBookmark_ClicksState,

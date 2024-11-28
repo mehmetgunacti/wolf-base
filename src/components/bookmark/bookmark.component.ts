@@ -37,10 +37,9 @@ export class BookmarkComponent extends BaseComponent {
 
 	}
 
-	onLinkClick(): void {
+	onLinkClick(id: UUID): void {
 
-		if (this.bookmark())
-			this.linkClick.emit(this.bookmark().id);
+		this.linkClick.emit(id);
 
 	}
 

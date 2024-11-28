@@ -1,7 +1,10 @@
 @let bm = bookmark();
 
 <!-- compact bookmark -->
-<app-compact-bookmark [bookmark]="bm" class="group-hover/bookmark:w-[calc(100%-35px)] group-focus-within/bookmark:w-[calc(100%-35px)] inline-block z-20 w-full transition-[width] duration-500"/>
+<app-compact-bookmark
+	[bookmark]="bm"
+	class="group-hover/bookmark:w-[calc(100%-35px)] group-focus-within/bookmark:w-[calc(100%-35px)] inline-block z-20 w-full transition-[width] duration-500"
+	(linkClick)="onLinkClick($event)"/>
 
 <!-- glyphs -->
 <div class="inline-flex right-0 z-10 absolute flex-col justify-between items-center px-1 py-[2px] max-h-24 peer">

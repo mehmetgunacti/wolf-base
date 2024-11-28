@@ -1,16 +1,16 @@
 import { createSelector } from '@ngrx/store';
-import { selCloudModuleState } from './cloud.selectors';
+import { selCloud_ModuleState } from './cloud.selectors';
 
 export const selCloudIsConflictDialogVisible = createSelector(
 
-	selCloudModuleState,
+	selCloud_ModuleState,
 	state => state.conflictDialogVisible
 
 );
 
 export const selCloudConflictDialogTitle = createSelector(
 
-	selCloudModuleState,
+	selCloud_ModuleState,
 	state => state.conflictDialogTitle
 
 );
