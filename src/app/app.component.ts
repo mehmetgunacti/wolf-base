@@ -21,7 +21,7 @@ export class AppComponent extends BaseComponent {
 	private store = inject(Store);
 
 	protected splashVisible = signal(true);
-	protected sidebarState = inject(Store).selectSignal(selCore_sidebarState);
+	protected sidebarState = this.store.selectSignal(selCore_sidebarState);
 	protected sidebarOpen = computed(() => this.sidebarState() === SidebarState.FULL);
 	protected progressVisible = this.store.selectSignal(selCore_progressVisible);
 
