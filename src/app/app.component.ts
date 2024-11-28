@@ -14,7 +14,6 @@ import { appImports } from './app.config';
 	standalone: true,
 	imports: appImports,
 	templateUrl: './app.component.html',
-	styleUrl: './app.component.scss',
 	animations: [ sidebarTrigger, mainTrigger ],
 })
 export class AppComponent extends BaseComponent {
