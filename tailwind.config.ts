@@ -266,7 +266,7 @@ export default {
 						'--tw-prose-body': 'var(--col-text)',
 						'--tw-prose-headings': 'var(--col-accent)',
 						'--tw-prose-lead': 'var(--col-error)',
-						'--tw-prose-links': 'var(--col-error)',
+						'--tw-prose-links': 'var(--col-accent)',
 						'--tw-prose-bold': 'var(--col-error)',
 						'--tw-prose-counters': 'var(--col-text-secondary)',
 						'--tw-prose-bullets': 'var(--col-text-secondary)',
@@ -296,6 +296,47 @@ export default {
 						'--tw-prose-invert-pre-bg': 'rgb(0 0 0 / 50%)',
 						'--tw-prose-invert-th-borders': 'var(--col-error)',
 						'--tw-prose-invert-td-borders': 'var(--col-error)',
+
+						mark: {
+
+							'color': 'var(--col-text)',
+							'background-color': 'var(--col-focus)',
+							'padding': '.2em .4em',
+							'font-weight': 'bold',
+							'border-radius': '6px'
+
+						},
+
+						'.table-of-contents': {
+
+							ul: {
+
+								'list-style-type': 'none'
+
+							},
+							a: {
+
+								'color': 'var(--text-color)',
+								'text-decoration': 'none',
+								'padding': '4px',
+								'&:hover': {
+									'text-decoration': 'underline',
+								},
+								'&:focus-visible': {
+
+									'border-radius': '6px',
+									'outline': '2px solid transparent',
+									'outline-offset': '4px',
+									'--tw-ring-offset-shadow': 'var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)',
+									'--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+									'box-shadow': 'var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)',
+									'--tw-ring-color': 'var(--col-outline)'
+
+								}
+
+							}
+
+						}
 
 					}
 

@@ -1,1 +1,16 @@
-<div [innerHTML]="markdown() | markdownToHtml | sanitizeHtml" class="prose"></div>
+<div	[innerHTML]="markdown() | markdownToHtml | sanitizeHtml"
+		class="
+			prose
+			xl:prose-lg
+
+			max-w-none
+
+			prose-code:text-base
+			prose-code:bg-component-dark
+			prose-code:p-[.2em_.4em]
+			prose-code:rounded
+			prose-code:before:hidden
+			prose-code:after:hidden
+
+			prose-pre:[scrollbar-color:var(--col-scrollbar-thumb-blue)_var(--col-scrollbar-track-blue)]
+		"></div>
