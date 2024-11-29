@@ -17,6 +17,7 @@ export default {
 			accent		: {
 
 				DEFAULT	: 'var(--col-accent)',
+				text	: 'var(--col-accent-text)',
 				hover	: 'var(--col-accent-hover)',
 				active	: 'var(--col-accent-active)'
 
