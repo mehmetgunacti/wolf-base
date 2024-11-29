@@ -57,7 +57,7 @@ export const selNote_filteredNotes = createSelector(
 	(notes, params): Note[] => {
 
 		if (!params.search && params.tags.length === 0)
-			return [];
+			return notes.filter(note => note.parentId === null);
 
 		// Filter notes based on selected tags
 		const filteredNotes: Note[] = params.tags.reduce((acc, tag) => {
