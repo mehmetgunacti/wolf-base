@@ -1,82 +1,82 @@
-@layer base {
-
-	.theme-light {
-
-		--col-black				: hsl(0, 0%, 0%);
-		--col-white				: hsl(0, 0%, 100%);
-		--col-transparent		: hsla(0, 0%, 0%, 0);
-
-		--col-text				: hsl(210, 15%, 92%);
-		--col-text-secondary	: hsl(0, 0%, 50%);
-		--col-disabled-text		: hsl(216, 2%, 37%);
-		--col-disabled			: hsl(216, 8%, 15%);
-
-		--col-accent			: hsl(298, 65%, 30%);
-		--col-focus				: hsl(16, 80%, 44%);
-		--col-outline			: hsla(215, 77%, 48%, .5);
-
-		--col-primary			: var(--col-accent);
-		--col-primary-text		: var(--col-text);
-		--col-primary-hover		: hsl(from var(--col-primary) h s calc(l* 1.15));
-		--col-primary-active	: hsl(from var(--col-primary) h s calc(l / .8));
-		--col-primary-border	: hsl(from var(--col-primary) h s calc(l* .9));
-
-		--col-success			: hsl(132, 52%, 22%);
-		--col-success-text		: var(--col-text);
-		--col-success-hover		: hsl(from var(--col-success) h s calc(l* 1.1));
-		--col-success-active	: hsl(from var(--col-success) h s calc(l* 1.15));
-		--col-success-border	: hsl(from var(--col-success) h s calc(l* .9));
-
-		--col-info				: hsl(201, 100%, 28%);
-		--col-info-text			: var(--col-text);
-		--col-info-hover		: hsl(from var(--col-info) h s calc(l* 1.1));
-		--col-info-active		: hsl(from var(--col-info) h s calc(l* 1.15));
-		--col-info-border		: hsl(from var(--col-info) h s calc(l* .9));
-
-		--col-warn				: hsl(31, 100%, 35%);
-		--col-warn-text			: var(--col-text);
-		--col-warn-hover		: hsl(from var(--col-warn) h s calc(l* 1.1));
-		--col-warn-active		: hsl(from var(--col-warn) h s calc(l* 1.15));
-		--col-warn-border		: hsl(from var(--col-warn) h s calc(l* .9));
-
-		--col-error				: hsl(0, 66%, 30%);
-		--col-error-text		: var(--col-text);
-		--col-error-hover		: hsl(from var(--col-error) h s calc(l* 1.1));
-		--col-error-active		: hsl(from var(--col-error) h s calc(l* 1.15));
-		--col-error-border		: hsl(from var(--col-error) h s calc(l* .9));
-
-		--col-bg-header			: hsl(210, 11%, 7%);
-		--col-bg-nav			: hsl(210, 11%, 8%);
-		--col-bg-popup			: hsl(210, 11%, 9%);
-		--col-bg-page			: hsl(210, 11%, 33%);
-
-		--col-form-element-bg		: hsl(210, 11%, 20%);
-		--col-form-element-text		: var(--col-text);
-		--col-form-element-hover	: hsl(from var(--col-form-element-bg) h s calc(l* 1.1));
-		--col-form-element-active	: hsl(from var(--col-form-element-bg) h s calc(l* 1.15));
-		--col-form-element-border	: hsl(from var(--col-form-element-bg) h s calc(l* .9));
-
-		--col-bg-component				: hsl(210, 11%, 13%);
-		--col-bg-component-hover		: hsl(from var(--col-bg-component) h s calc(l* .8));
-		--col-bg-component-active		: hsl(from var(--col-bg-component) h s calc(l* .75));
-		--col-bg-component-dark			: hsl(210, 11%, 10%);
-		--col-bg-component-dark-hover	: hsl(from var(--col-bg-component-dark) h s calc(l* .8));
-		--col-bg-component-dark-active	: hsl(from var(--col-bg-component-dark) h s calc(l* .75));
-
-		--col-hover				: hsl(from var(--col-white) h s calc(l* 1.1) / .1);
-		--col-active			: hsl(from var(--col-white) h s calc(l* 1.1) / .2);
-
-		--col-bg-overlay			: hsl(from var(--col-black) h s l / .75);
-		--col-shadow				: var(--col-bg-header);
-		--shadow					: hsl(from var(--col-shadow) h s l / .5) 5px 6px 6px -2px, hsl(from var(--col-shadow) h s l / .5) 8px 8px 18px -2px;
-		--shadow-header				: hsl(from var(--col-black) h s l / .4) 1px 4px 4px, hsl(from var(--col-black) h s l / .3) 5px 4px 2px -2px, hsl(from var(--col-black) h s l / .2) 0 -1px 1px inset;
-		--shadow-nav				: hsl(from var(--col-black) h s l / .5) 5px -2px 6px -2px, hsl(from var(--col-black) h s l / .5) 8px -2px 18px -2px;
-		--shadow-invisible			: var(--col-transparent) 5px -2px 6px -2px, var(--col-transparent) 8px -2px 18px -2px;
-
-
-		--col-scrollbar-thumb		: hsl(from var(--col-bg-component-dark) h s l / .7);
-		--col-scrollbar-track		: var(--col-transparent);
-
-	}
-
-}
+// @layer base {
+//
+// 	.theme-light {
+//
+// 		--col-black				: hsl(0, 0%, 0%);
+// 		--col-white				: hsl(0, 0%, 100%);
+// 		--col-transparent		: hsla(0, 0%, 0%, 0);
+//
+// 		--col-text				: hsl(210, 15%, 92%);
+// 		--col-text-secondary	: hsl(0, 0%, 50%);
+// 		--col-disabled-text		: hsl(216, 2%, 37%);
+// 		--col-disabled			: hsl(216, 8%, 15%);
+//
+// 		--col-accent			: hsl(298, 65%, 30%);
+// 		--col-focus				: hsl(16, 80%, 44%);
+// 		--col-outline			: hsla(215, 77%, 48%, .5);
+//
+// 		--col-primary			: var(--col-accent);
+// 		--col-primary-text		: var(--col-text);
+// 		--col-primary-hover		: hsl(from var(--col-primary) h s calc(l* 1.15));
+// 		--col-primary-active	: hsl(from var(--col-primary) h s calc(l / .8));
+// 		--col-primary-border	: hsl(from var(--col-primary) h s calc(l* .9));
+//
+// 		--col-success			: hsl(132, 52%, 22%);
+// 		--col-success-text		: var(--col-text);
+// 		--col-success-hover		: hsl(from var(--col-success) h s calc(l* 1.1));
+// 		--col-success-active	: hsl(from var(--col-success) h s calc(l* 1.15));
+// 		--col-success-border	: hsl(from var(--col-success) h s calc(l* .9));
+//
+// 		--col-info				: hsl(201, 100%, 28%);
+// 		--col-info-text			: var(--col-text);
+// 		--col-info-hover		: hsl(from var(--col-info) h s calc(l* 1.1));
+// 		--col-info-active		: hsl(from var(--col-info) h s calc(l* 1.15));
+// 		--col-info-border		: hsl(from var(--col-info) h s calc(l* .9));
+//
+// 		--col-warn				: hsl(31, 100%, 35%);
+// 		--col-warn-text			: var(--col-text);
+// 		--col-warn-hover		: hsl(from var(--col-warn) h s calc(l* 1.1));
+// 		--col-warn-active		: hsl(from var(--col-warn) h s calc(l* 1.15));
+// 		--col-warn-border		: hsl(from var(--col-warn) h s calc(l* .9));
+//
+// 		--col-error				: hsl(0, 66%, 30%);
+// 		--col-error-text		: var(--col-text);
+// 		--col-error-hover		: hsl(from var(--col-error) h s calc(l* 1.1));
+// 		--col-error-active		: hsl(from var(--col-error) h s calc(l* 1.15));
+// 		--col-error-border		: hsl(from var(--col-error) h s calc(l* .9));
+//
+// 		--col-bg-header			: hsl(210, 11%, 7%);
+// 		--col-bg-nav			: hsl(210, 11%, 8%);
+// 		--col-bg-popup			: hsl(210, 11%, 9%);
+// 		--col-bg-page			: hsl(210, 11%, 33%);
+//
+// 		--col-form-element-bg		: hsl(210, 11%, 20%);
+// 		--col-form-element-text		: var(--col-text);
+// 		--col-form-element-hover	: hsl(from var(--col-form-element-bg) h s calc(l* 1.1));
+// 		--col-form-element-active	: hsl(from var(--col-form-element-bg) h s calc(l* 1.15));
+// 		--col-form-element-border	: hsl(from var(--col-form-element-bg) h s calc(l* .9));
+//
+// 		--col-bg-component				: hsl(210, 11%, 13%);
+// 		--col-bg-component-hover		: hsl(from var(--col-bg-component) h s calc(l* .8));
+// 		--col-bg-component-active		: hsl(from var(--col-bg-component) h s calc(l* .75));
+// 		--col-bg-component-dark			: hsl(210, 11%, 10%);
+// 		--col-bg-component-dark-hover	: hsl(from var(--col-bg-component-dark) h s calc(l* .8));
+// 		--col-bg-component-dark-active	: hsl(from var(--col-bg-component-dark) h s calc(l* .75));
+//
+// 		--col-hover				: hsl(from var(--col-white) h s calc(l* 1.1) / .1);
+// 		--col-active			: hsl(from var(--col-white) h s calc(l* 1.1) / .2);
+//
+// 		--col-bg-overlay			: hsl(from var(--col-black) h s l / .75);
+// 		--col-shadow				: var(--col-bg-header);
+// 		--shadow					: hsl(from var(--col-shadow) h s l / .5) 5px 6px 6px -2px, hsl(from var(--col-shadow) h s l / .5) 8px 8px 18px -2px;
+// 		--shadow-header				: hsl(from var(--col-black) h s l / .4) 1px 4px 4px, hsl(from var(--col-black) h s l / .3) 5px 4px 2px -2px, hsl(from var(--col-black) h s l / .2) 0 -1px 1px inset;
+// 		--shadow-nav				: hsl(from var(--col-black) h s l / .5) 5px -2px 6px -2px, hsl(from var(--col-black) h s l / .5) 8px -2px 18px -2px;
+// 		--shadow-invisible			: var(--col-transparent) 5px -2px 6px -2px, var(--col-transparent) 8px -2px 18px -2px;
+//
+//
+// 		--col-scrollbar-thumb		: hsl(from var(--col-bg-component-dark) h s l / .7);
+// 		--col-scrollbar-track		: var(--col-transparent);
+//
+// 	}
+//
+// }
