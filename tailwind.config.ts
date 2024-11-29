@@ -264,7 +264,7 @@ export default {
 					css: {
 
 						'--tw-prose-body': 'var(--col-text)',
-						'--tw-prose-headings': 'var(--col-accent)',
+						'--tw-prose-headings': 'var(--col-accent-text)',
 						'--tw-prose-lead': 'var(--col-error)',
 						'--tw-prose-links': 'var(--col-accent)',
 						'--tw-prose-bold': 'var(--col-error)',
@@ -333,6 +333,15 @@ export default {
 									'--tw-ring-color': 'var(--col-outline)'
 
 								}
+
+							}
+
+						},
+						'pre': {
+
+							'code': {
+
+								'padding': '0'
 
 							}
 
