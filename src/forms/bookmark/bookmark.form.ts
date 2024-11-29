@@ -112,7 +112,7 @@ will be deleted. Continue?`)
 
 	lookupTitle(): void {
 
-		if (!this.titleLookupUrl) {
+		if (!this.titleLookupUrl()) {
 
 			this.titleLookup.emit({
 				severity: 'warn',
@@ -140,7 +140,7 @@ will be deleted. Continue?`)
 
 			const { origin, pathname } = parsed;
 			const term = `${origin}${pathname}`;
-			const remoteURL = this.titleLookupUrl + encodeURI(term);
+			const remoteURL = this.titleLookupUrl() + encodeURI(term);
 			console.info('Looking up page title:', remoteURL);
 			this.titleLookup.emit({ severity: 'info', detail: 'Looking up title...' });
 			fetch(remoteURL)
