@@ -19,7 +19,7 @@ import { selWord_SelectedEntity } from '@selectors/word/word-ui.selectors';
 	imports: [ PortalComponent, GlyphDirective, CdkMenuModule, RouterLink, WordComponent ],
 	selector: 'app-word-container',
 	templateUrl: './word.container.html',
-	host: { 'class': 'comp p-2 md:p-3' }
+	host: { 'class': 'flex flex-col gap-1 md:gap-2' }
 })
 export class WordContainer extends BaseComponent {
 

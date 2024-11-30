@@ -48,15 +48,26 @@
 
 	</w-portal>
 
-	<app-word
-		[word]="word"
-		[scheduledIds]="scheduledIds()"
-		(schedule)="onSchedule($event)"
-		(cancelSchedule)="onCancelSchedule($event)"/>
+	<a	[routerLink]="['/words']"
+		class="flex gap-1 focus-visible:bg-component-dark-hover shadow-component comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
+		tabindex="0">
+		<svg wGlyph="dictionary" class="text-[1.2em]"></svg>
+		Words
+	</a>
+
+	<section class="p-2 md:p-3 comp">
+
+		<app-word
+			[word]="word"
+			[scheduledIds]="scheduledIds()"
+			(schedule)="onSchedule($event)"
+			(cancelSchedule)="onCancelSchedule($event)"/>
+
+	</section>
 
 } @else {
 
-	<div class="flex flex-col justify-center items-center py-16">
+	<div class="flex flex-col justify-center items-center py-16 comp">
 		No words available
 		<button routerLink="/words/new" class="mx-auto btn btn-ghost">
 			<svg wGlyph="add"></svg> Add Word
