@@ -44,8 +44,8 @@ export const miWord: MenuItem = {
 	routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
 };
 
-export const miAnswer: MenuItem = {
-	url: [ '/answers' ],
+export const miTestSuites: MenuItem = {
+	url: [ '/test-suites' ],
 	queryParams: { [ CLOSE_MENU ]: 'true' },
 	label: 'Exam Prep',
 	icon: 'school',

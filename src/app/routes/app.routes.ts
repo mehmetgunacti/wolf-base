@@ -35,8 +35,8 @@ export const routes: Routes = [
 	},
 	{
 
-		path: 'answers',
-		loadChildren: () => import('./answers.routes').then(m => m.FEATURE_ROUTES)
+		path: 'test-suites',
+		loadChildren: () => import('./test-suites.routes').then(m => m.FEATURE_ROUTES)
 
 	},
 	{

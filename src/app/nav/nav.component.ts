@@ -35,7 +35,7 @@ export class NavComponent extends BaseComponent {
 			conf.miNote,
 			conf.miProject,
 			conf.miWord,
-			conf.miAnswer
+			conf.miTestSuites
 
 		];
 		return items;
