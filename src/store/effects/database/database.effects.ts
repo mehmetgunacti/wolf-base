@@ -19,10 +19,13 @@ export class DatabaseEffects {
 		() => this.actions$.pipe(
 
 			ofType(databaseActions.backupDatabase),
-			switchMap(() => new BackupDatabase(this.localRepository).execute())
+			switchMap(
+				() => new BackupDatabase(this.localRepository).execute().pipe(
+					map(() => coreActions.hideProgressBar())
+				)
+			)
 
-		),
-		{ dispatch: false }
+		)
 
 	);
 

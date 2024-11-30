@@ -53,5 +53,5 @@ export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 	on(coreActions.hideProgressBar, (state): CoreUIState => ({ ...state, progressCounter: decProgressCounter(state.progressCounter) })),
 	on(databaseActions.loadReport, (state): CoreUIState => ({ ...state, progressCounter: incProgressCounter(state.progressCounter) })),
 	on(databaseActions.loadReportSuccess, (state): CoreUIState => ({ ...state, progressCounter: decProgressCounter(state.progressCounter) })),
-
+	on(databaseActions.backupDatabase, (state): CoreUIState => ({ ...state, progressCounter: incProgressCounter(state.progressCounter) })),
 );
