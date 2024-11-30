@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ProjectContainer } from '@containers/project/project.container';
-import { WordContainer } from '@containers/word/word.container';
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
