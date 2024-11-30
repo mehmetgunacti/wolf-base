@@ -1,5 +1,5 @@
 import { Entity } from './entity.model';
-import { IdBase, ISODateString } from './id-base.model';
+import { IdBase, ISODateString, NameBase } from './id-base.model';
 
 export interface Answer extends IdBase {
 
@@ -9,7 +9,7 @@ export interface Answer extends IdBase {
 
 }
 
-export interface Session extends IdBase {
+export interface Session extends Entity {
 
 	answers: Answer[];
 	start: ISODateString;
@@ -21,14 +21,14 @@ export interface Question extends IdBase {
 
 	numberOfChoices: number;
 	answers: number[];
+	description: string | null;
 
 
 }
 
-export interface Test extends IdBase {
+export interface Test extends NameBase {
 
 	questions: Question[];
-	sessions: Session[];
 
 }
 

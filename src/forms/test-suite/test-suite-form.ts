@@ -1,14 +1,52 @@
 import { InjectionToken } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UUID } from '@constants/common.constant';
-import { TestSuite } from '@models/test-suite.model';
-import { fc, fg, nnfc } from '@utils/form.util';
+import { Test, TestSuite } from '@models/test-suite.model';
+import { fa, fc, fg, nnfc } from '@utils/form.util';
+import { v4 as uuidv4 } from 'uuid';
+
+interface TestFormSchema {
+
+	id: FormControl<UUID | null>;
+	name: FormControl<string>;
+
+}
 
 interface TestSuiteFormSchema {
 
 	id: FormControl<UUID | null>;
 	name: FormControl<string>;
 	description: FormControl<string | null>;
+	tests: FormArray<FormGroup<TestFormSchema>>;
+
+}
+
+function fgTest(value?: Test): FormGroup<TestFormSchema> {
+
+	const {
+
+		id = uuidv4(),
+		name = ''
+
+	} = value ?? {};
+
+	return fg<TestFormSchema>({
+
+		id: nnfc(id, Validators.required),
+		name: nnfc<string>(name, Validators.required)
+
+	});
+
+}
+
+function faTests(value?: Test[]): FormArray<FormGroup<TestFormSchema>> {
+
+	let arr = [];
+	if (value)
+		value.forEach(d => arr.push(fgTest(d)));
+	if (arr.length === 0)
+		arr.push(fgTest());
+	return fa(arr);
 
 }
 
@@ -18,7 +56,8 @@ function createFormGroup(value?: TestSuite): FormGroup<TestSuiteFormSchema> {
 
 		id = null,
 		name = '',
-		description = null
+		description = null,
+		tests = []
 
 	} = value ?? {};
 
@@ -27,6 +66,7 @@ function createFormGroup(value?: TestSuite): FormGroup<TestSuiteFormSchema> {
 		id: fc(id),
 		name: nnfc(name, Validators.required),
 		description: fc(description),
+		tests: faTests(tests)
 
 	});
 
@@ -39,16 +79,36 @@ export class TestSuiteFormImpl {
 	populate(entity: TestSuite): void {
 
 		const fg = this.fg;
-		const { id, name, description } = entity;
+		const { id, name, description, tests } = entity;
 
 		// populate (non-array values)
 		fg.patchValue({ id, name, description });
+
+		// populate tests
+		const faTests = fg.controls.tests;
+		faTests.clear();
+		tests.forEach(test => faTests.push(fgTest(test)));
+
+	}
+
+	addTest(): void {
+
+		this.tests.push(fgTest());
+		this.fg.markAsDirty();
+
+	}
+
+	removeTest(idx: number): void {
+
+		this.tests.removeAt(idx);
+		this.fg.markAsDirty();
 
 	}
 
 	get id(): FormControl<UUID | null> { return this.fg.controls.id; }
 	get name(): FormControl<string> { return this.fg.controls.name; }
 	get description(): FormControl<string | null> { return this.fg.controls.description; }
+	get tests(): FormArray<FormGroup<TestFormSchema>> { return this.fg.controls.tests; }
 
 }
 
