@@ -26,7 +26,7 @@ import { selWord_SelectedEntity } from '@selectors/word/word-ui.selectors';
 
 		</w-portal>
 
-		<header class="mb-8 comp-title">Edit Note</header>
+		<header class="mb-8 comp-title">Edit Word</header>
 		<app-word-form [word]="word()" (update)="onUpdate($event.id, $event.word)"/>
 	`,
 	host: { 'class': 'comp p-4' }
