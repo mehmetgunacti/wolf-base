@@ -9,6 +9,7 @@ import { selQuote_CloudTasks } from '../sync/sync-quote.selectors';
 import { selTask_CloudTasks } from '../sync/sync-task.selectors';
 import { selWord_CloudTasks } from '../sync/sync-word.selectors';
 import { selBoomkark_clickedCloudTasks } from '@selectors/bookmark/bookmark-clicks.selectors';
+import { selTestSuite_CloudTasks } from '@selectors/sync/sync-test-suites.selectors';
 
 export const selCloud_ModuleState = createFeatureSelector<CloudModuleState>('cloud');
 
@@ -22,6 +23,7 @@ export const selCloud_AvailableTasks = createSelector(
 	selQuizEntry_CloudTasks,
 	selProject_CloudTasks,
 	selTask_CloudTasks,
+	selTestSuite_CloudTasks,
 	selBoomkark_clickedCloudTasks,
 	(
 		bookmarks,
@@ -32,6 +34,7 @@ export const selCloud_AvailableTasks = createSelector(
 		quizEntries,
 		projects,
 		tasks,
+		testSuites,
 		click
 	) => {
 
@@ -46,6 +49,7 @@ export const selCloud_AvailableTasks = createSelector(
 			...quizEntries,
 			...projects,
 			...tasks,
+			...testSuites,
 			...clicks
 
 		];
