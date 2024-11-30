@@ -1,14 +1,23 @@
 import { InjectionToken } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UUID } from '@constants/common.constant';
-import { Test, TestSuite } from '@models/test-suite.model';
+import { Question, Test, TestSuite } from '@models/test-suite.model';
 import { fa, fc, fg, nnfc } from '@utils/form.util';
 import { v4 as uuidv4 } from 'uuid';
+
+// interface QuestionFormSchema {
+//
+// 	id: FormControl<UUID | null>;
+// 	answers: FormControl<boolean[]>;
+// 	description: FormControl<string | null>;
+//
+// }
 
 interface TestFormSchema {
 
 	id: FormControl<UUID | null>;
 	name: FormControl<string>;
+	description: FormControl<string | null>;
 
 }
 
@@ -21,19 +30,53 @@ interface TestSuiteFormSchema {
 
 }
 
+// function fgQuestion(value?: Question): FormGroup<QuestionFormSchema> {
+//
+// 	const {
+//
+// 		id = uuidv4(),
+// 		answers = [],
+// 		description = null
+//
+// 	} = value ?? {};
+//
+// 	return fg<QuestionFormSchema>({
+//
+// 		id: nnfc(id, Validators.required),
+// 		answers: nnfc(answers, [ Validators.required, Validators.minLength(1) ]),
+// 		description: fc(description)
+//
+// 	});
+//
+// }
+//
+// function faQuestions(value?: Question[]): FormArray<FormGroup<QuestionFormSchema>> {
+//
+// 	let arr = [];
+// 	if (value)
+// 		value.forEach(q => arr.push(fgQuestion(q)));
+// 	if (arr.length === 0)
+// 		arr.push(fgQuestion());
+// 	return fa(arr);
+//
+// }
+
 function fgTest(value?: Test): FormGroup<TestFormSchema> {
 
 	const {
 
 		id = uuidv4(),
-		name = ''
+		name = '',
+		description = null
+		// questions = []
 
 	} = value ?? {};
 
 	return fg<TestFormSchema>({
 
 		id: nnfc(id, Validators.required),
-		name: nnfc<string>(name, Validators.required)
+		name: nnfc<string>(name, Validators.required),
+		description: fc(description)
 
 	});
 
@@ -90,6 +133,20 @@ export class TestSuiteFormImpl {
 		tests.forEach(test => faTests.push(fgTest(test)));
 
 	}
+
+// 	addQuestion(testIdx: number): void {
+//
+// 		this.tests.at(testIdx).controls.questions.push(fgQuestion());
+// 		this.fg.markAsDirty();
+//
+// 	}
+//
+// 	removeQuestion(dIdx: number, idx: number): void {
+//
+// 		this.tests.at(dIdx).controls.questions.removeAt(idx);
+// 		this.fg.markAsDirty();
+//
+// 	}
 
 	addTest(): void {
 

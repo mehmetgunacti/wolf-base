@@ -36,10 +36,13 @@
 			<div class="flex flex-col gap-4" [formGroup]="test">
 
 				<!-- TEST ID -->
-				<w-input formControlName="id" label="ID" [readonly]="true"/>
+				<w-input formControlName="id" label="Test ID" [readonly]="true"/>
 
 				<!-- TEST NAME -->
 				<w-input formControlName="name" label="Name"/>
+
+				<!-- TEST DESCRIPTION -->
+				<w-textarea formControlName="description" label="Description" [rows]="2"/>
 
 			</div>
 

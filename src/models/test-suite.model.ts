@@ -3,7 +3,7 @@ import { IdBase, ISODateString, NameBase } from './id-base.model';
 
 export interface Answer extends IdBase {
 
-	choices: number[];
+	choices: boolean[];
 	start: ISODateString;
 	end: ISODateString | null;
 
@@ -19,16 +19,15 @@ export interface Session extends Entity {
 
 export interface Question extends IdBase {
 
-	numberOfChoices: number;
-	answers: number[];
+	answers: boolean[];
 	description: string | null;
-
 
 }
 
 export interface Test extends NameBase {
 
 	questions: Question[];
+	description: string | null;
 
 }
 

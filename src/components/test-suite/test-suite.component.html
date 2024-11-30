@@ -1,29 +1,92 @@
-@if (testSuite(); as testSuite) {
+@let ts = testSuite();
 
-	<div class="comp-dark p-4 comp">
+<div class="comp-dark p-4 comp">
 
-		<div>
+	<div>
 
-			<a	[routerLink]="['/test-suites']"
-				class="flex gap-1 focus-visible:bg-component-dark-hover mb-1 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
+		<a	[routerLink]="['/test-suites']"
+			class="flex gap-1 focus-visible:bg-component-dark-hover mb-1 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
+			tabindex="0">
+			<svg wGlyph="school" class="text-[1.2em]"></svg>
+			Test Suites
+		</a>
+
+	</div>
+
+	<div class="mt-4 comp-title">
+
+		{{ ts.name }}
+
+	</div>
+	@if(ts.description) {
+
+		<div>{{ ts.description }}</div>
+
+	}
+
+</div>
+
+<!-- TESTS (FIELDSET) -->
+<fieldset class="relative mt-2 p-3 comp">
+
+	<legend class="flex items-center gap-1 bg-component-dark px-3 rounded-lg h-button-height">
+		Tests
+		<small class="text-secondary text-sm">({{ ts.tests.length }})</small>
+	</legend>
+
+	<div class="flex flex-col">
+
+		@for (test of ts.tests; let testIdx = $index; track testIdx) {
+
+			@let isExpanded = !!testsExpanded()[test.id];
+			<a	class="flex flex-col gap-2 shadow-none comp-dark comp-dark-active comp-dark-hover p-2 focus-visible:ring-4 focus-visible:ring-outline cursor-pointer comp outline-none"
+				[class.bg-component-dark-active]="isExpanded"
+				(click)="onToggleTest(test.id)"
 				tabindex="0">
-				<svg wGlyph="school" class="text-[1.2em]"></svg>
-				Test Suites
+
+				<small class="flex items-center gap-1 text-secondary text-xs">{{test.id}}</small>
+				<div>{{ test.name }}</div>
+
 			</a>
+			<div [@slideDown]="isExpanded" class="mb-2 overflow-hidden">
 
-		</div>
+				<div class="flex flex-col gap-2 shadow-none mr-2 ml-2 comp-dark p-2 rounded-t-none @container comp">
 
-		<div class="mt-4 comp-title">
+					@if (test.description) {
 
-			{{ testSuite.name }}
+						<!-- DESCRIPTION -->
+						<div class="flex mb-2 overflow-x-auto scrollbar scrollbar-blue">{{ test.description }}</div>
 
-		</div>
-		@if(testSuite.description) {
+					}
 
-			<div>{{ testSuite.description }}</div>
+					Questions here
+
+					<div class="flex justify-between gap-2">
+
+						<button
+							class="px-2 h-button-height-xs text-sm btn btn-error"
+							[tabindex]="isExpanded ? '0' : '-1'"
+							>
+							<svg wGlyph="delete"></svg>
+							Delete
+						</button>
+
+						<button
+							class="px-2 h-button-height-xs text-sm btn"
+							[tabindex]="isExpanded ? '0' : '-1'"
+							>
+							<svg wGlyph="edit"></svg>
+							Edit
+						</button>
+
+					</div>
+
+				</div>
+
+			</div>
 
 		}
 
 	</div>
 
-}
+</fieldset>
