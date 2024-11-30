@@ -10,7 +10,7 @@ import { TestSuite } from '@models/test-suite.model';
 	selector: 'app-test-suite',
 	templateUrl: './test-suite.component.html',
 	host: {
-		'class': 'flex flex-col text-content'
+		'class': 'flex flex-col'
 	}
 })
 export class TestSuiteComponent extends BaseComponent {
