@@ -197,6 +197,20 @@ export class DatabaseReportEffects {
 				}),
 				forkJoin({
 
+					name: of(AppEntities.testSuite.labelPlural),
+					glyph: of('school' as GlyphName),
+					reports: forkJoin([
+
+						forkJoin(entity(this.localRepository, DbStore.test_suites)),
+						forkJoin(syncData(this.localRepository, DbStore.test_suites_sync)),
+						forkJoin(remoteData(this.localRepository, DbStore.test_suites_remote)),
+						forkJoin(trash(this.localRepository, DbStore.test_suites_trash))
+
+					])
+
+				}),
+				forkJoin({
+
 					name: of('Logs'),
 					glyph: of('history' as GlyphName),
 					reports: forkJoin([
