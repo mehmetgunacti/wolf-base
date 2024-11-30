@@ -50,6 +50,7 @@ export class CoreLoadEffects {
 					forkJoin(entityData(this.localRepository, AppEntityType.quote)),
 					forkJoin(entityData(this.localRepository, AppEntityType.quizEntry)),
 					forkJoin(entityData(this.localRepository, AppEntityType.project)),
+					forkJoin(entityData(this.localRepository, AppEntityType.testSuite)),
 					forkJoin(entityData(this.localRepository, AppEntityType.task))
 				]),
 				clicks: from(this.localRepository.bookmarks.listClicks())

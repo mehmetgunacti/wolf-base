@@ -12,11 +12,11 @@ export class TestSuitesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Tes
 	constructor(db: IndexedDb) {
 		super(
 			db,
-			DbStore.projects,
-			DbStore.projects_sync,
-			DbStore.projects_remote,
-			DbStore.projects_trash,
-			AppEntities.project.label
+			DbStore.test_suites,
+			DbStore.test_suites_sync,
+			DbStore.test_suites_remote,
+			DbStore.test_suites_trash,
+			AppEntities.testSuite.label
 		);
 	}
 
@@ -33,6 +33,7 @@ export class TestSuitesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Tes
 
 			id,
 			name: '',
+			description: null,
 			tests: []
 
 		};

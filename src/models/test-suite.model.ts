@@ -34,6 +34,7 @@ export interface Test extends IdBase {
 
 export interface TestSuite extends Entity {
 
+	description: string | null;
 	tests: Test[];
 
 }

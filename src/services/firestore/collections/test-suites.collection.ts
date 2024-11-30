@@ -27,6 +27,10 @@ class TestSuiteFirestoreConverter implements FirestoreConverter<TestSuite> {
 		const fields = {} as Record<keyof TestSuite, FIRESTORE_VALUE>;
 
 		fields[ 'name' ] = { stringValue: entry.name };
+
+		if (entry.description)
+			fields[ 'description' ] = { stringValue: entry.description };
+
 		fields[ 'tests' ] = {
 			arrayValue: { values: [] }
 		};
@@ -38,12 +42,15 @@ class TestSuiteFirestoreConverter implements FirestoreConverter<TestSuite> {
 	fromFirestore(entry: TestSuite): TestSuite {
 
 		// validate incoming
-		let { id, name, tests } = entry;
+		let { id, name, description, tests } = entry;
 		if (!id)
 			throw new Error(`Firestore TestSuite Entry: invalid 'id' value`);
 
 		if (!name)
 			throw new Error(`Firestore TestSuite Entry: invalid 'name' value`);
+
+		if (!description)
+			throw new Error(`Firestore TestSuite Entry: invalid 'description' value`);
 
 		if (!Array.isArray(tests))
 			throw new Error(`Firestore TestSuite Entry: invalid 'tests' value`);
@@ -52,6 +59,7 @@ class TestSuiteFirestoreConverter implements FirestoreConverter<TestSuite> {
 
 			id,
 			name,
+			description,
 			tests
 
 		};
@@ -68,6 +76,9 @@ class TestSuiteFirestoreConverter implements FirestoreConverter<TestSuite> {
 
 		if (entry.name)
 			fields.add('name');
+
+		if (entry.description)
+			fields.add('description');
 
 		// if (entry.tests)
 		fields.add('tests');

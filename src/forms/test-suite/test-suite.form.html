@@ -1,0 +1,27 @@
+<form
+	[formGroup]="form.fg"
+	(ngSubmit)="onSave()"
+	class="flex flex-col gap-4">
+
+	@if(testSuite()?.id) {
+
+		<!-- ID -->
+		<w-input formControlName="id" label="ID" [readonly]="true"/>
+
+	}
+
+	<!-- NAME -->
+	<w-input formControlName="name" label="Name"/>
+
+	<!-- DESCRIPTION -->
+	<w-input formControlName="description" label="Description"/>
+
+	<footer>
+
+		<button [disabled]="this.form.fg.pristine || this.form.fg.invalid" class="float-right btn">
+			<svg wGlyph="save"></svg> Save
+		</button>
+
+	</footer>
+
+</form>

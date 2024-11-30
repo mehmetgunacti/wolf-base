@@ -41,6 +41,8 @@ import { TaskCreateEffects } from '@effects/task/project-task-create.effects';
 import { TaskEditEffects } from '@effects/task/project-task-edit-dialog.effects';
 import { TaskUIEffects } from '@effects/task/project-task-ui.effects';
 import { TaskUpdateEffects } from '@effects/task/project-task-update.effects';
+import { TestSuiteCreateEffects } from '@effects/test-suite/test-suite-create.effects';
+import { TestSuiteUpdateEffects } from '@effects/test-suite/test-suite-update.effects';
 import { WordCreateEffects } from '@effects/word/word-create.effects';
 import { WordUIEffects } from '@effects/word/word-ui.effects';
 import { WordUpdateEffects } from '@effects/word/word-update.effects';
@@ -151,6 +153,10 @@ export const effectList = [
 	// Database
 	DatabaseEffects,
 	DatabaseReportEffects,
+
+	// Test Suites
+	TestSuiteCreateEffects,
+	TestSuiteUpdateEffects,
 
 	// Settings
 	SettingsEffects,
