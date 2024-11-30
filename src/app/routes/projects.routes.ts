@@ -19,13 +19,6 @@ export const FEATURE_ROUTES: Routes = [
 	},
 	{
 
-		path: ':id/new',
-		loadComponent: () => import('pages/project-new-form.page').then(c => c.ProjectNewFormPage),
-		canActivate: [ setSelectedIdGuard ]
-
-	},
-	{
-
 		path: ':id/edit',
 		loadComponent: () => import('pages/project-edit-form.page').then(c => c.ProjectEditFormPage),
 		canActivate: [ setSelectedIdGuard ]

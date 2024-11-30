@@ -13,12 +13,16 @@
 
 		</div>
 
-		<div class="comp-title">
+		<div class="mt-4 comp-title">
 
 			{{ testSuite.name }}
 
-
 		</div>
+		@if(testSuite.description) {
+
+			<div>{{ testSuite.description }}</div>
+
+		}
 
 	</div>
 

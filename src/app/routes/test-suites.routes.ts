@@ -17,20 +17,13 @@ export const FEATURE_ROUTES: Routes = [
 		canActivate: [ setSelectedIdGuard ]
 
 	},
-	// 	{
-	//
-	// 		path: ':id/new',
-	// 		loadComponent: () => import('pages/project-new-form.page').then(c => c.ProjectNewFormPage),
-	// 		canActivate: [ setSelectedIdGuard ]
-	//
-	// 	},
-	// 	{
-	//
-	// 		path: ':id/edit',
-	// 		loadComponent: () => import('pages/project-edit-form.page').then(c => c.ProjectEditFormPage),
-	// 		canActivate: [ setSelectedIdGuard ]
-	//
-	// 	},
+	{
+
+		path: ':id/edit',
+		loadComponent: () => import('pages/test-suite-edit-form.page').then(c => c.TestSuiteEditFormPage),
+		canActivate: [ setSelectedIdGuard ]
+
+	},
 	{
 
 		path: '',

@@ -29,7 +29,7 @@ export class TestSuiteUpdateEffects {
 
 			ofType(entityActions.updateSuccess),
 			filter(isEntityOfType(AppEntityType.testSuite)),
-			map(({ id, entityType }) => coreActions.navigate({ url: [ `/${AppEntities[ entityType ].plural}`, id ] }))
+			map(({ id, entityType }) => coreActions.navigate({ url: [ `/test-suites`, id ] }))
 
 		)
 
