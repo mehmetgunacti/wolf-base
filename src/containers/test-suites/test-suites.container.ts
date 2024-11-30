@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { Store } from '@ngrx/store';
-import { selProject_filtered } from '@selectors/project/project-ui.selectors';
+import { selTestSuite_EntityList } from '@selectors/entity/entity-test-suite.selectors';
 
 @Component({
 	standalone: true,
@@ -14,7 +14,7 @@ import { selProject_filtered } from '@selectors/project/project-ui.selectors';
 })
 export class TestSuitesContainer extends BaseComponent {
 
-	private testSuites = inject(Store).selectSignal(selProject_filtered);
+	private testSuites = inject(Store).selectSignal(selTestSuite_EntityList);
 	protected sorted = computed(() => this.testSuites().sort((a, b) => a.name.localeCompare(b.name)));
 
 }

@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { PortalComponent } from '@libComponents/portal.component';
+import { TestSuitesContainer } from "../containers/test-suites/test-suites.container";
 
 @Component({
 	standalone: true,
-	imports: [ PortalComponent, GlyphDirective,  ],
+	imports: [PortalComponent, GlyphDirective, TestSuitesContainer],
 	selector: 'test-suites-page',
 	template: `
 		<w-portal>
@@ -18,7 +19,7 @@ import { PortalComponent } from '@libComponents/portal.component';
 
 		</w-portal>
 
-
+		<app-test-suites-container/>
 	`,
 	host: { 'class': 'page' }
 })
