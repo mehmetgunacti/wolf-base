@@ -11,6 +11,7 @@ import { TaskLocalRepository } from '@repositories/local/project-task.repository
 import { ProjectLocalRepository } from '@repositories/local/project.repository';
 import { QuizEntryLocalRepository } from '@repositories/local/quiz-entry.repository';
 import { QuoteLocalRepository } from '@repositories/local/quote.repository';
+import { TestSuiteLocalRepository } from '@repositories/local/test-suite.repository';
 import { WordLocalRepository } from '@repositories/local/word.repository';
 
 export interface LocalRepositoryService {
@@ -23,6 +24,7 @@ export interface LocalRepositoryService {
 	quizEntries: QuizEntryLocalRepository;
 	quotes: QuoteLocalRepository;
 	tasks: TaskLocalRepository;
+	testSuites: TestSuiteLocalRepository;
 	words: WordLocalRepository;
 
 	// non-entity tables

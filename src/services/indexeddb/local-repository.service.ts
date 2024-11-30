@@ -25,21 +25,25 @@ import { ProjectsLocalRepositoryImpl } from './tables/projects.table';
 import { QuizEntriesLocalRepositoryImpl } from './tables/quiz-entries.table';
 import { QuotesLocalRepositoryImpl } from './tables/quotes.table';
 import { WordsLocalRepositoryImpl } from './tables/words.table';
+import { TestSuiteLocalRepository } from '@repositories/local/test-suite.repository';
+import { TestSuitesLocalRepositoryImpl } from './tables/test-suites.table';
 
 export class IndexedDbLocalRepositoryServiceImpl implements LocalRepositoryService {
 
 	private db: IndexedDb;
 
 	bookmarks: BookmarksLocalRepository;
-	configuration: ConfigurationLocalRepository;
-	logs: LogsLocalRepository;
 	notes: NotesLocalRepository;
 	noteContent: NoteContentLocalRepository;
 	projects: ProjectLocalRepository;
 	quizEntries: QuizEntryLocalRepository;
 	quotes: QuoteLocalRepository;
 	tasks: TaskLocalRepository;
+	testSuites: TestSuiteLocalRepository;
 	words: WordLocalRepository;
+
+	configuration: ConfigurationLocalRepository;
+	logs: LogsLocalRepository;
 
 	constructor() {
 
@@ -53,6 +57,7 @@ export class IndexedDbLocalRepositoryServiceImpl implements LocalRepositoryServi
 		this.quizEntries = new QuizEntriesLocalRepositoryImpl(db);
 		this.quotes = new QuotesLocalRepositoryImpl(db);
 		this.tasks = new TasksLocalRepositoryImpl(db);
+		this.testSuites = new TestSuitesLocalRepositoryImpl(db);
 		this.words = new WordsLocalRepositoryImpl(db);
 		this.db = db;
 
@@ -69,6 +74,7 @@ export class IndexedDbLocalRepositoryServiceImpl implements LocalRepositoryServi
 			case AppEntityType.quizEntry: return this.quizEntries as unknown as EntityLocalRepository<T>;
 			case AppEntityType.quote: return this.quotes as unknown as EntityLocalRepository<T>;
 			case AppEntityType.task: return this.tasks as unknown as EntityLocalRepository<T>;
+			case AppEntityType.testSuite: return this.testSuites as unknown as EntityLocalRepository<T>;
 			case AppEntityType.word: return this.words as unknown as EntityLocalRepository<T>;
 
 		}

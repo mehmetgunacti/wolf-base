@@ -79,7 +79,6 @@ export const indexedDbConfiguration: IndexedDbConfiguration = {
 			// projects_remote: 'id',
 			new dbCommands.CreateStoreCommand(DbStore.projects_remote, { keyPath: ID, autoIncrement: false }),
 
-
 			// quiz_entries: 'id, name',
 			new dbCommands.CreateStoreCommand(DbStore.quiz_entries, { keyPath: ID, autoIncrement: false }),
 			new dbCommands.AddIndexCommand(DbStore.quiz_entries, 'name', 'name', { unique: false }),
@@ -94,7 +93,6 @@ export const indexedDbConfiguration: IndexedDbConfiguration = {
 
 			// quiz_entries_remote: 'id',
 			new dbCommands.CreateStoreCommand(DbStore.quiz_entries_remote, { keyPath: ID, autoIncrement: false }),
-
 
 			// quotes: 'id, name',
 			new dbCommands.CreateStoreCommand(DbStore.quotes, { keyPath: ID, autoIncrement: false }),
@@ -111,7 +109,6 @@ export const indexedDbConfiguration: IndexedDbConfiguration = {
 			// quotes_remote: 'id',
 			new dbCommands.CreateStoreCommand(DbStore.quotes_remote, { keyPath: ID, autoIncrement: false }),
 
-
 			// tasks: 'id, name',
 			new dbCommands.CreateStoreCommand(DbStore.tasks, { keyPath: ID, autoIncrement: false }),
 			new dbCommands.AddIndexCommand(DbStore.tasks, 'name', 'name', { unique: false }),
@@ -126,7 +123,6 @@ export const indexedDbConfiguration: IndexedDbConfiguration = {
 
 			// tasks_remote: 'id',
 			new dbCommands.CreateStoreCommand(DbStore.tasks_remote, { keyPath: ID, autoIncrement: false }),
-
 
 			// words: 'id, name',
 			new dbCommands.CreateStoreCommand(DbStore.words, { keyPath: ID, autoIncrement: false }),
@@ -155,112 +151,25 @@ export const indexedDbConfiguration: IndexedDbConfiguration = {
 
 		],
 
+		201: [
+
+			// test_suites: 'id, name',
+			new dbCommands.CreateStoreCommand(DbStore.test_suites, { keyPath: ID, autoIncrement: false }),
+			new dbCommands.AddIndexCommand(DbStore.test_suites, 'name', 'name', { unique: false }),
+
+			// test_suites_sync: 'id',
+			new dbCommands.CreateStoreCommand(DbStore.test_suites_sync, { keyPath: ID, autoIncrement: false }),
+
+			// test_suites_trash: '++, id, name',
+			new dbCommands.CreateStoreCommand(DbStore.test_suites_trash, { keyPath: null, autoIncrement: true }),
+			new dbCommands.AddIndexCommand(DbStore.test_suites_trash, 'id', 'id', { unique: false }),
+			new dbCommands.AddIndexCommand(DbStore.test_suites_trash, 'name', 'name', { unique: false }),
+
+			// test_suites_remote: 'id',
+			new dbCommands.CreateStoreCommand(DbStore.test_suites_remote, { keyPath: ID, autoIncrement: false }),
+
+		]
+
 	},
 
 };
-
-// export const wolfBaseDBFactory = (): WolfBaseDB => {
-
-// 	return new WolfBaseDB({
-
-// 		dbName: 'WolfBaseDB',
-// 		tables: {
-
-// 			// bookmarks
-// 			bookmarks: 'id',
-// 			bookmarks_sync: 'id',
-// 			bookmarks_trash: '++, id, name',
-// 			bookmarks_remote: 'id',
-// 			bookmarks_clicks: 'id, current',
-
-// 			// notes
-// 			notes: 'id, name, parentId',
-// 			notes_sync: 'id',
-// 			notes_trash: '++, id, name',
-// 			notes_remote: 'id',
-
-// 			// note content
-// 			note_content: 'id, name, content',
-// 			note_content_sync: 'id',
-// 			note_content_trash: '++, id, name',
-// 			note_content_remote: 'id',
-
-// 			// projects
-// 			projects: 'id, name',
-// 			projects_sync: 'id',
-// 			projects_trash: '++, id, name',
-// 			projects_remote: 'id',
-
-// 			// quizEntries
-// 			quiz_entries: 'id, name',
-// 			quiz_entries_sync: 'id',
-// 			quiz_entries_trash: '++, id, name',
-// 			quiz_entries_remote: 'id',
-
-// 			// quotes
-// 			quotes: 'id, name',
-// 			quotes_sync: 'id',
-// 			quotes_trash: '++, id, name',
-// 			quotes_remote: 'id',
-
-// 			// project taks
-// 			tasks: 'id, name',
-// 			tasks_sync: 'id',
-// 			tasks_trash: '++, id, name',
-// 			tasks_remote: 'id',
-
-// 			// words
-// 			words: 'id, name',
-// 			words_sync: 'id',
-// 			words_trash: '++, id, name',
-// 			words_remote: 'id',
-
-// 			// configuration
-// 			configuration: '',
-
-// 			// logs
-// 			logs: '++id, category, entityId'
-
-// 		},
-// 		version: 20
-
-// 	});
-
-// };
-
-// export class WolfBaseDB {
-
-// 	constructor(conf: DexieConfiguration) {
-
-// 		super(conf.dbName);
-// 		this.version(conf.version)
-// 			.stores(conf.tables);
-
-// 		this.on('ready', async (db) => {
-
-// 			const defaults: Record<string, any> = DEFAULT_CONF_VALUES;
-// 			const table = db.table(LocalRepositoryNames.configuration);
-
-// 			// read configuration table
-// 			const currentValues: Record<string, any> = {};
-// 			await table.each((val, c) => currentValues[c.key] = val);
-
-// 			// add new configuration properties
-// 			for (let key in DEFAULT_CONF_VALUES) {
-
-// 				if (!currentValues[key])
-// 					await table.put(defaults[key], key);
-// 				delete currentValues[key];
-
-// 			}
-
-// 			// delete obsolete table entries
-// 			for (let key in currentValues)
-// 				await table.delete(key);
-
-// 		});
-
-// 	}
-
-// }
-
