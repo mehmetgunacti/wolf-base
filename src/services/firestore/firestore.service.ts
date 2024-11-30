@@ -13,6 +13,7 @@ import { ProjectsRemoteRepository } from '@repositories/remote/project-remote.re
 import { TasksRemoteRepository } from '@repositories/remote/project-task-remote.repository';
 import { QuizEntriesRemoteRepository } from '@repositories/remote/quiz-entry-remote.repository';
 import { QuotesRemoteRepository } from '@repositories/remote/quote-remote.repository';
+import { TestSuitesRemoteRepository } from '@repositories/remote/test-suite-remote.repository';
 import { WordsRemoteRepository } from '@repositories/remote/word-remote.repository';
 import { selCore_firestoreConfig } from '@selectors/core/core-configuration.selectors';
 import { VoidBookmarksCollection } from '@services/mock/remotestorage/bookmarks.collection';
@@ -22,6 +23,7 @@ import { VoidProjectsCollection } from '@services/mock/remotestorage/projects.co
 import { VoidQuizEntriesCollection } from '@services/mock/remotestorage/quiz-entries.collection';
 import { VoidQuotesCollection } from '@services/mock/remotestorage/quotes.collection';
 import { VoidTasksCollection } from '@services/mock/remotestorage/tasks.collection';
+import { VoidTestSuitesCollection } from '@services/mock/remotestorage/test-suites.collection';
 import { VoidWordsCollection } from '@services/mock/remotestorage/words.collection';
 import { FirestoreAPIClient, FirestoreAPIClientImpl } from '@utils/firestore-rest-client/firestore-api.tool';
 import { BookmarksFirestoreCollectionImpl } from './collections/bookmarks.collection';
@@ -31,18 +33,20 @@ import { TasksFirestoreCollectionImpl } from './collections/project-tasks.collec
 import { ProjectsFirestoreCollectionImpl } from './collections/projects.collection';
 import { QuizEntriesFirestoreCollectionImpl } from './collections/quiz-entries.collection';
 import { QuotesFirestoreCollectionImpl } from './collections/quotes.collection';
+import { TestSuitesFirestoreCollectionImpl } from './collections/test-suites.collection';
 import { WordsFirestoreCollectionImpl } from './collections/words.collection';
 
 export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositoryService {
 
-	public bookmarks!: BookmarksRemoteRepository;
-	public notes!: NotesRemoteRepository;
-	public noteContent!: NoteContentRemoteRepository;
-	public projects!: ProjectsRemoteRepository;
-	public quizEntries!: QuizEntriesRemoteRepository;
-	public quotes!: QuotesRemoteRepository;
-	public tasks!: TasksRemoteRepository;
-	public words!: WordsRemoteRepository;
+	bookmarks!: BookmarksRemoteRepository;
+	notes!: NotesRemoteRepository;
+	noteContent!: NoteContentRemoteRepository;
+	projects!: ProjectsRemoteRepository;
+	quizEntries!: QuizEntriesRemoteRepository;
+	quotes!: QuotesRemoteRepository;
+	tasks!: TasksRemoteRepository;
+	testSuites!: TestSuitesRemoteRepository;
+	words!: WordsRemoteRepository;
 
 	private store: Store = inject(Store);
 	private http: HttpClient = inject(HttpClient);
@@ -73,6 +77,7 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 			case AppEntityType.quizEntry: return this.quizEntries;
 			case AppEntityType.quote: return this.quotes;
 			case AppEntityType.task: return this.tasks;
+			case AppEntityType.testSuite: return this.testSuites;
 			case AppEntityType.word: return this.words;
 
 		}
@@ -92,6 +97,7 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 			this.quizEntries = new QuizEntriesFirestoreCollectionImpl(this.firestore, config);
 			this.quotes = new QuotesFirestoreCollectionImpl(this.firestore, config);
 			this.tasks = new TasksFirestoreCollectionImpl(this.firestore, config);
+			this.testSuites = new TestSuitesFirestoreCollectionImpl(this.firestore, config);
 			this.words = new WordsFirestoreCollectionImpl(this.firestore, config);
 
 		} else {
@@ -103,6 +109,7 @@ export class FirestoreRemoteRepositoryServiceImpl implements RemoteRepositorySer
 			this.quizEntries = new VoidQuizEntriesCollection();
 			this.quotes = new VoidQuotesCollection();
 			this.tasks = new VoidTasksCollection();
+			this.testSuites = new VoidTestSuitesCollection();
 			this.words = new VoidWordsCollection();
 
 		}
