@@ -9,6 +9,7 @@ export enum AppEntityType {
 	quizEntry	= 'quizEntry',
 	quote		= 'quote',
 	task		= 'task',
+	testSuite	= 'testSuite',
 	word		= 'word'
 
 }
@@ -46,6 +47,7 @@ export class AppEntities {
 	static [AppEntityType.quizEntry]		= 	new AppEntity(		'quiz_entry',		'quiz_entries',		'Quiz Entry',	'Quiz Entries');
 	static [AppEntityType.quote]			= 	new AppEntity(		'quote',			'quotes',			'Quote',			'Quotes');
 	static [AppEntityType.task]				= 	new AppEntity(		'task',			'tasks',			'Task',			'Tasks');
+	static [AppEntityType.testSuite]		= 	new AppEntity(		'test_suite',		'test_suites',		'Test Suite',	'Test Suites');
 	static [AppEntityType.word]				= 	new AppEntity(		'word',			'words',			'Word',			'Words');
 //	static [AppEntityType.log]				= 	new AppEntity(		'log',			'logs', 			'Log', 			'Logs');
 

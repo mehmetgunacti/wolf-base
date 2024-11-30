@@ -11,6 +11,7 @@ import { selProject_LocalDeletedRemoteDeleted } from '@selectors/sync/sync-proje
 import { selQuizEntry_LocalDeletedRemoteDeleted } from '@selectors/sync/sync-quiz-entry.selectors';
 import { selQuote_LocalDeletedRemoteDeleted } from '@selectors/sync/sync-quote.selectors';
 import { selTask_LocalDeletedRemoteDeleted } from '@selectors/sync/sync-task.selectors';
+import { selTestSuite_LocalDeletedRemoteDeleted } from '@selectors/sync/sync-test-suites.selectors';
 import { selWord_LocalDeletedRemoteDeleted } from '@selectors/sync/sync-word.selectors';
 import { SYNC_SERVICE } from '@services/sync.service';
 import { of } from 'rxjs';
@@ -27,6 +28,7 @@ function useSelector(entityType: AppEntityType) {
 		case AppEntityType.quizEntry: return selQuizEntry_LocalDeletedRemoteDeleted;
 		case AppEntityType.quote: return selQuote_LocalDeletedRemoteDeleted;
 		case AppEntityType.task: return selTask_LocalDeletedRemoteDeleted;
+		case AppEntityType.testSuite: return selTestSuite_LocalDeletedRemoteDeleted;
 		case AppEntityType.word: return selWord_LocalDeletedRemoteDeleted;
 
 	}

@@ -11,6 +11,7 @@ import { selProject_RemoteNew } from '@selectors/sync/sync-project.selectors';
 import { selQuizEntry_RemoteNew } from '@selectors/sync/sync-quiz-entry.selectors';
 import { selQuote_RemoteNew } from '@selectors/sync/sync-quote.selectors';
 import { selTask_RemoteNew } from '@selectors/sync/sync-task.selectors';
+import { selTestSuite_RemoteNew } from '@selectors/sync/sync-test-suites.selectors';
 import { selWord_RemoteNew } from '@selectors/sync/sync-word.selectors';
 import { SYNC_SERVICE } from '@services/sync.service';
 import { of } from 'rxjs';
@@ -27,6 +28,7 @@ function useSelector(entityType: AppEntityType) {
 		case AppEntityType.quizEntry: return selQuizEntry_RemoteNew;
 		case AppEntityType.quote: return selQuote_RemoteNew;
 		case AppEntityType.task: return selTask_RemoteNew;
+		case AppEntityType.testSuite: return selTestSuite_RemoteNew;
 		case AppEntityType.word: return selWord_RemoteNew;
 
 	}

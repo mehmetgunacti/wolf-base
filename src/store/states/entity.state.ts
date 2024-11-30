@@ -12,6 +12,7 @@ export interface Entity_ModuleState {
 	quizEntry: Entity_EntitiesState;
 	quote: Entity_EntitiesState;
 	task: Entity_EntitiesState;
+	testSuite: Entity_EntitiesState;
 	word: Entity_EntitiesState;
 
 }
@@ -47,6 +48,7 @@ export const entity_initialState: Entity_ModuleState = {
 	quizEntry: createInitialEntitiesState(),
 	quote: createInitialEntitiesState(),
 	task: createInitialEntitiesState(),
+	testSuite: createInitialEntitiesState(),
 	word: createInitialEntitiesState()
 
 };

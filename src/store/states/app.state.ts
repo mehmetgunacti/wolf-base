@@ -9,6 +9,7 @@ import { Project_ModuleState, initialProjectState } from './project.state';
 import { QuizEntry_ModuleState, quizEntry_initialModuleState } from './quiz-entry.state';
 import { Quote_ModuleState, quote_initialModuleState } from './quote.state';
 import { Task_ModuleState, initialTaskState } from './task.state';
+import { TestSuite_ModuleState, initialTestSuiteState } from './test-suite.state';
 import { Word_ModuleState, initialWordState } from './word.state';
 
 export interface AppState {
@@ -23,6 +24,7 @@ export interface AppState {
 	project: Project_ModuleState,
 	quizEntry: QuizEntry_ModuleState,
 	quote: Quote_ModuleState,
+	testSuites: TestSuite_ModuleState,
 	task: Task_ModuleState,
 	word: Word_ModuleState,
 
@@ -41,6 +43,7 @@ export const initialAppState: AppState = {
 	quizEntry: quizEntry_initialModuleState,
 	quote: quote_initialModuleState,
 	task: initialTaskState,
+	testSuites: initialTestSuiteState,
 	word: initialWordState
 
 };
