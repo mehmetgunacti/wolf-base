@@ -24,7 +24,7 @@ export interface AppState {
 	project: Project_ModuleState,
 	quizEntry: QuizEntry_ModuleState,
 	quote: Quote_ModuleState,
-	testSuites: TestSuite_ModuleState,
+	testSuite: TestSuite_ModuleState,
 	task: Task_ModuleState,
 	word: Word_ModuleState,
 
@@ -43,7 +43,7 @@ export const initialAppState: AppState = {
 	quizEntry: quizEntry_initialModuleState,
 	quote: quote_initialModuleState,
 	task: initialTaskState,
-	testSuites: initialTestSuiteState,
+	testSuite: initialTestSuiteState,
 	word: initialWordState
 
 };

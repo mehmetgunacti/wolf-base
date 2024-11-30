@@ -1,0 +1,25 @@
+@if (testSuite(); as testSuite) {
+
+	<div class="comp-dark p-4 comp">
+
+		<div>
+
+			<a	[routerLink]="['/test-suites']"
+				class="flex gap-1 focus-visible:bg-component-dark-hover mb-1 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
+				tabindex="0">
+				<svg wGlyph="school" class="text-[1.2em]"></svg>
+				Test Suites
+			</a>
+
+		</div>
+
+		<div class="comp-title">
+
+			{{ testSuite.name }}
+
+
+		</div>
+
+	</div>
+
+}

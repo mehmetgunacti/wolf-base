@@ -179,7 +179,7 @@ export const reducerList: ActionReducerMap<AppState> = {
 	quizEntry: combineReducers(quizEntryReducer),
 	quote: combineReducers(quoteReducer),
 	task: combineReducers(taskReducer),
-	testSuites: combineReducers(testSuiteReducer),
+	testSuite: combineReducers(testSuiteReducer),
 	word: combineReducers(wordReducer)
 
 };

@@ -1,4 +1,4 @@
-import { projectActions } from '@actions/project.actions';
+import { testSuiteActions } from '@actions/test-suite.actions';
 import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from "@angular/router";
 import { UUID } from '@constants/common.constant';
@@ -13,7 +13,7 @@ export const setSelectedIdGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
 	return of(true).pipe(
 
 		// dispatch id
-		tap(() => store.dispatch(projectActions.setSelectedId({ id })))
+		tap(() => store.dispatch(testSuiteActions.setSelectedId({ id })))
 
 	);
 

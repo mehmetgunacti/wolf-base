@@ -1,16 +1,51 @@
 @let bookmarks = bookmarks$ | async;
 
+<w-portal>
+
+	<button
+		class="btn btn-ghost"
+		(click)="fromClipboard()"
+		[class.shake]="isShaking$ | async"
+		title="Create from copied URL">
+		<svg wGlyph="content_paste"></svg>Clipboard
+	</button>
+	<button
+		class="btn btn-ghost"
+		(click)="openFormDialog()">
+		<svg wGlyph="bookmark_add"></svg> Bookmark
+	</button>
+
+</w-portal>
+
+@if (formVisible()) {
+
+	<w-modal (close)="closeFormDialog()">
+		<app-bookmark-edit-container/>
+	</w-modal>
+
+}
+
 @for (bookmark of bookmarks; track $index) {
 
-	<app-bookmark	[bookmark]="bookmark"
-					(edit)="onEdit($event)"
-					(popular)="onPopular($event)"
-					(linkClick)="onLinkClick($event)"
-					[showDetails]="true"/>
+	<section class="gap-1 md:gap-2 grid @2xl/page:grid-cols-2 @4xl/page:grid-cols-3 @6xl/page:grid-cols-4">
+
+		<app-bookmark	[bookmark]="bookmark"
+						(edit)="onEdit($event)"
+						(popular)="onPopular($event)"
+						(linkClick)="onLinkClick($event)"
+						[showDetails]="true"/>
+
+	</section>
 
 } @empty {
 
-	<div class="empty">{{ count$ | async }} bookmarks available</div>
+	<!-- todo this could be a component -->
+	<div class="flex flex-col justify-center items-center py-16">
+		No bookmarks available
+		<button (click)="openFormDialog()" class="mx-auto btn btn-ghost">
+			<svg wGlyph="add"></svg> Add Bookmark
+		</button>
+	</div>
 
 }
 

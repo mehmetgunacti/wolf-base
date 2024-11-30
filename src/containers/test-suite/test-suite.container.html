@@ -1,0 +1,49 @@
+@if (testSuite(); as testSuite) {
+
+	<w-portal>
+
+		<button
+			class="px-2 h-button-height-sm btn btn-ghost"
+			[cdkMenuTriggerFor]="menu">
+			<svg wGlyph="menu_open"></svg>
+		</button>
+
+		<ng-template #menu>
+
+			<div class="gap-2 grid bg-popup mt-3 p-2 w-56 comp" cdkMenu>
+
+				<button
+					cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					[routerLink]="['/test-suites', testSuite.id, 'edit' ]">
+					<svg wGlyph="edit"></svg> Edit Test Suite
+				</button>
+
+				<div class="menu-divider"></div>
+
+				<button
+					cdkMenuItem
+					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					[routerLink]="['/logs', testSuite.id]">
+					<svg wGlyph="history"></svg> View Logs
+				</button>
+
+			</div>
+
+		</ng-template>
+
+	</w-portal>
+
+	<!-- PROJECT -->
+	<app-test-suite [testSuite]="testSuite"/>
+
+} @else {
+
+	<div class="flex flex-col justify-center items-center py-16 comp">
+		No Test Suites available
+		<button routerLink="/test-suites/new" class="mx-auto btn btn-ghost">
+			<svg wGlyph="add"></svg> Add Test Suite
+		</button>
+	</div>
+
+}
