@@ -10,7 +10,7 @@
 
 	<div class="md:px-4 overflow-hidden" [class.pb-4]="formsVisible()" [@slideUpDown]="formsVisible() ? 'opened' : 'closed'">
 
-		<form [formGroup]="form" class="flex flex-col gap-3">
+		<form [formGroup]="form" class="flex flex-col gap-3 pt-2">
 
 			<div class="flex justify-center items-baseline gap-2">
 				<w-croppie formControlName="croppie" (imageChanged)="img.src = $event ?? ''; img.hidden = !$event"/>

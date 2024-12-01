@@ -18,7 +18,7 @@ import { BaseComponent } from '@libComponents/base.component';
 	host: {
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()',
-		'class': 'inline-flex px-2 items-center relative h-widget-height border border-transparent hover:border-form-element-border rounded-lg focus-visible:ring-4 focus-visible:ring-outline w-full outline-none group'
+		'class': 'inline-flex px-2 items-center relative min-h-widget-height border border-transparent hover:border-outline rounded-lg focus-visible:ring-4 focus-visible:ring-outline outline-none group'
 	}
 })
 export class ChoicesComponent extends BaseComponent implements ControlValueAccessor {

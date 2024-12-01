@@ -34,7 +34,7 @@ import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 	host: {
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()',
-		'class': 'relative inline-flex flex-col bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none'
+		'class': 'relative inline-flex flex-col bg-form-element border border-form-element-border hover:border-outline rounded-lg focus-within:ring-4 focus-within:ring-outline w-full outline-none'
 	}
 })
 export class MarkdownEditorComponent extends BaseComponent implements ControlValueAccessor {

@@ -1,11 +1,10 @@
 <div class="flex-1">
-	<div class="flex items-center gap-1">
+	<div class="flex flex-wrap items-center gap-1">
 
 		@for(choice of value(); track $index) {
 
 			<div class="flex items-center rounded focus-visible:ring-4 focus-visible:ring-outline outline-none"
 				tabindex="0"
-
 				(click)="toggle($index)">
 				<input	type="checkbox"
 						class="absolute opacity-0 peer size-0"

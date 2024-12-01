@@ -16,7 +16,7 @@ import { BaseComponent } from '../base.component';
 	host: {
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()',
-		'class': 'inline-flex relative h-widget-height bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none group'
+		'class': 'inline-flex relative h-widget-height bg-form-element border border-form-element-border hover:border-outline rounded-lg focus-within:ring-4 focus-within:ring-outline w-full outline-none group'
 	}
 })
 export class InputComponent extends BaseComponent implements ControlValueAccessor {

@@ -25,7 +25,7 @@ import { ROOT_ID } from './select.util';
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()',
 		'window:resize': 'onResize()',
-		'class': 'inline-flex relative h-widget-height bg-form-element border border-form-element-border rounded-lg focus-within:ring-4 focus-within:ring-outline w-full focus-within:outline-none group'
+		'class': 'inline-flex relative h-widget-height bg-form-element border border-form-element-border hover:border-outline rounded-lg focus-within:ring-4 focus-within:ring-outline w-full outline-none group'
 	}
 })
 export class SelectTreeComponent extends BaseComponent implements ControlValueAccessor {
