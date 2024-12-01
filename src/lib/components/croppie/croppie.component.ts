@@ -228,8 +228,12 @@ export class CroppieComponent extends BaseComponent implements ControlValueAcces
 
 		} else {
 
-			event.preventDefault();
-			this.fileInput().nativeElement.click();
+			if (event.key === ' ' || event.key === 'Enter') {
+
+				event.preventDefault();
+				this.fileInput().nativeElement.click();
+
+			}
 
 		}
 
