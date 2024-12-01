@@ -23,6 +23,8 @@ import { BaseComponent } from '@libComponents/base.component';
 })
 export class ChoicesComponent extends BaseComponent implements ControlValueAccessor {
 
+	protected readonly ALPHA = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' ];
+
 	// Input
 	label = input.required<string>();
 	readonly = input<boolean>(false);
@@ -41,7 +43,13 @@ export class ChoicesComponent extends BaseComponent implements ControlValueAcces
 
 	protected inc(): void {
 
-		this.value.update(val => { val.push(false); return val; });
+		this.value.update(val => {
+
+			if (val.length < this.ALPHA.length)
+				val.push(false);
+			return val;
+
+		});
 		this.onChange(this.value());
 		this.onTouched();
 
@@ -49,7 +57,13 @@ export class ChoicesComponent extends BaseComponent implements ControlValueAcces
 
 	protected dec(): void {
 
-		this.value.update(val => { val.length = val.length === 1 ? val.length : val.length - 1; return val; });
+		this.value.update(val => {
+
+			if (val.length > 1)
+				val.length = val.length - 1;
+			return val;
+
+		});
 		this.onChange(this.value());
 		this.onTouched();
 

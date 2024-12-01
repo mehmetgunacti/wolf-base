@@ -3,9 +3,38 @@
 
 		@for(choice of value(); track $index) {
 
-			<div class="flex items-center rounded focus-visible:ring-4 focus-visible:ring-outline outline-none"
+			<div class="
+					relative
+					flex
+					items-center
+
+					group
+
+					rounded
+					focus-visible:ring-4
+					focus-visible:ring-outline
+					outline-none
+
+					after:content-[attr(data-label)]
+					after:opacity-0
+					after:absolute
+					after:block
+					after:text-sm
+					after:text-secondary
+					after:right-0
+					after:-bottom-1
+					after:transition-opacity
+					after:duration-700
+					after:pointer-events-none
+
+					group-hover:after:opacity-100
+					group-focus-visible:after:opacity-100
+					group-focus-within:after:opacity-100
+
+				"
 				tabindex="0"
-				(click)="toggle($index)">
+				(click)="toggle($index)"
+				[attr.data-label]="ALPHA[$index]">
 				<input	type="checkbox"
 						class="absolute opacity-0 peer size-0"
 						[id]="componentId + '_' + $index"
@@ -14,12 +43,16 @@
 				<label	class="
 							relative
 							inline-block
-							hover:bg-form-element-border
+
 							size-6
 							rounded
-							border-2
 							bg-form-element-border
+							border-2
 							border-form-element-border
+
+							hover:bg-form-element-border
+							hover:border-outline
+
 							cursor-pointer
 
 							after:absolute
@@ -45,7 +78,7 @@
 							after:rounded-tr-[3px]
 							after:rounded-bl-[3px]
 
-							after:border-primary
+							after:border-accent-text
 
 							after:peer-checked:block
 						"
