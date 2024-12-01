@@ -26,7 +26,6 @@ export class InputComponent extends BaseComponent implements ControlValueAccesso
 	// Input
 	label = input.required<string>();
 	type = input<string>('text');
-	labelUp = input<boolean>(false);
 	readonly = input<boolean>(false);
 
 	protected value = signal<string>('');
