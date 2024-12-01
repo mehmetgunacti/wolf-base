@@ -20,7 +20,7 @@ import { Observable, map } from 'rxjs';
 	imports: [ BookmarkComponent, AsyncPipe, PortalComponent, ModalComponent, BookmarkEditContainer, GlyphDirective ],
 	selector: 'app-bookmarks-container',
 	templateUrl: './bookmarks.container.html',
-	host: { 'class': 'comp p-4' }
+	host: { 'class': '' }
 })
 export class BookmarksContainer extends BaseComponent {
 
