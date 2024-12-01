@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, input, InputSignal, signal, viewChild, WritableSignal } from '@angular/core';
+import { Component, ElementRef, forwardRef, input, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BaseComponent } from '../base.component';
 
@@ -24,13 +24,13 @@ export class InputComponent extends BaseComponent implements ControlValueAccesso
 	private inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
 	// Input
-	label: InputSignal<string> = input.required();
-	type: InputSignal<string> = input('text');
-	labelUp: InputSignal<boolean> = input(false);
-	readonly: InputSignal<boolean> = input(false);
+	label = input.required<string>();
+	type = input<string>('text');
+	labelUp = input<boolean>(false);
+	readonly = input<boolean>(false);
 
-	protected value: WritableSignal<string> = signal('');
-	protected disabled: WritableSignal<boolean> = signal(false);
+	protected value = signal<string>('');
+	protected disabled = signal<boolean>(false);
 
 	//////////// boilerplate
 	private onChange: any = () => { };
