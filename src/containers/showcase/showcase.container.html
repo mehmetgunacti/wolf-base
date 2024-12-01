@@ -1,33 +1,3 @@
-<!-- TOASTS -->
-<fieldset class="relative p-3 comp">
-
-	<legend class="flex items-center bg-component-dark px-3 rounded-lg h-button-height">Toasts</legend>
-	<legend class="-top-11 right-2.5 absolute flex justify-center items-center bg-component-dark rounded-lg w-button-height h-button-height">
-		<button class="btn btn-glyph" (click)="toastsVisible.set(!toastsVisible())">
-			<svg wGlyph="add" [class.rotate-45]="toastsVisible()" class="transition-transform duration-500"></svg>
-		</button>
-	</legend>
-
-	<div class="md:px-4 overflow-hidden" [class.pb-4]="toastsVisible()" [@slideUpDown]="toastsVisible() ? 'opened' : 'closed'">
-
-		<!-- TYPES -->
-		<div class="flex flex-wrap justify-center items-center gap-2 mb-2">
-
-			<button class="btn btn-success" (click)="onOpenToast('success')">Success</button>
-			<button class="btn btn-info" (click)="onOpenToast('info')">Info</button>
-			<button class="btn btn-warn" (click)="onOpenToast('warn')">Warn</button>
-			<button class="btn btn-error" (click)="onOpenToast('error')">Error</button>
-
-		</div>
-		<div class="flex flex-wrap justify-center items-center gap-2">
-			<button class="btn" (click)="showProgressBar()">Show Progress Bar</button>
-			<button class="btn" (click)="hideProgressBar()">Hide Progress Bar</button>
-		</div>
-
-	</div>
-
-</fieldset>
-
 <!-- FORMS -->
 <fieldset class="relative p-3 @container comp">
 
@@ -64,9 +34,40 @@
 				<w-switch formControlName="warn" severity="warn"/>
 				<w-switch formControlName="error" severity="error"/>
 			</div>
+			<w-choices formControlName="choices" label="Choices"/>
 			<pre class="comp-dark p-4 overflow-x-auto comp scrollbar scrollbar-blue">{{ form.value | json }}</pre>
 
 		</form>
+
+	</div>
+
+</fieldset>
+
+<!-- TOASTS -->
+<fieldset class="relative p-3 comp">
+
+	<legend class="flex items-center bg-component-dark px-3 rounded-lg h-button-height">Toasts</legend>
+	<legend class="-top-11 right-2.5 absolute flex justify-center items-center bg-component-dark rounded-lg w-button-height h-button-height">
+		<button class="btn btn-glyph" (click)="toastsVisible.set(!toastsVisible())">
+			<svg wGlyph="add" [class.rotate-45]="toastsVisible()" class="transition-transform duration-500"></svg>
+		</button>
+	</legend>
+
+	<div class="md:px-4 overflow-hidden" [class.pb-4]="toastsVisible()" [@slideUpDown]="toastsVisible() ? 'opened' : 'closed'">
+
+		<!-- TYPES -->
+		<div class="flex flex-wrap justify-center items-center gap-2 mb-2">
+
+			<button class="btn btn-success" (click)="onOpenToast('success')">Success</button>
+			<button class="btn btn-info" (click)="onOpenToast('info')">Info</button>
+			<button class="btn btn-warn" (click)="onOpenToast('warn')">Warn</button>
+			<button class="btn btn-error" (click)="onOpenToast('error')">Error</button>
+
+		</div>
+		<div class="flex flex-wrap justify-center items-center gap-2">
+			<button class="btn" (click)="showProgressBar()">Show Progress Bar</button>
+			<button class="btn" (click)="hideProgressBar()">Hide Progress Bar</button>
+		</div>
 
 	</div>
 

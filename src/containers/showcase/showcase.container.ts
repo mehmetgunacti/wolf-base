@@ -20,6 +20,7 @@ import { selNote_EntityList } from '@selectors/entity/entity-note.selectors';
 import { fc, fg, nnfc } from '@utils/form.util';
 import { SelectTreeComponent } from "../../lib/components/select/select-tree.component";
 import { coreActions } from '@actions/core.actions';
+import { ChoicesComponent } from '@libComponents/choices/choices.component';
 
 @Component({
 	standalone: true,
@@ -35,7 +36,8 @@ import { coreActions } from '@actions/core.actions';
 		SelectComponent,
 		MarkdownEditorComponent,
 		CroppieComponent,
-		SelectTreeComponent
+		SelectTreeComponent,
+		ChoicesComponent
 	],
 	selector: 'app-showcase-container',
 	templateUrl: './showcase.container.html',
@@ -52,9 +54,9 @@ export class ShowcaseContainer extends BaseComponent {
 	private toast = inject(ToastService);
 
 	alertsVisible = signal<boolean>(false);
-	formsVisible = signal<boolean>(false);
+	formsVisible = signal<boolean>(true);
 	buttonsVisible = signal<boolean>(false);
-	toastsVisible = signal<boolean>(true);
+	toastsVisible = signal<boolean>(false);
 	glyphsVisible = signal<boolean>(false);
 
 	nodes = this.store.selectSignal(selNote_EntityList);
@@ -75,7 +77,8 @@ export class ShowcaseContainer extends BaseComponent {
 			'info': fc<boolean>(true),
 			'warn': fc<boolean>(true),
 			'error': fc<boolean>(true)
-		})
+		}),
+		'choices': fc<boolean[]>([ true, false, false, true, false ])
 	});
 
 	onTagInput(val: string | null): void {

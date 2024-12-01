@@ -1,0 +1,85 @@
+<div class="flex-1">
+	<div class="flex items-center gap-1">
+
+		@for(choice of value(); track $index) {
+
+			<div class="flex items-center rounded focus-visible:ring-4 focus-visible:ring-outline outline-none"
+				tabindex="0"
+
+				(click)="toggle($index)">
+				<input	type="checkbox"
+						class="absolute opacity-0 peer size-0"
+						[id]="componentId + '_' + $index"
+						[checked]="value()[$index]"
+						disabled="disabled">
+				<label	class="
+							relative
+							inline-block
+							hover:bg-form-element-border
+							size-6
+							rounded
+							border-2
+							bg-form-element-border
+							border-form-element-border
+							cursor-pointer
+
+							after:absolute
+							after:left-0
+							after:top-0
+							after:pointer-events-none
+							after:hidden
+
+							after:p-[13px_0px_4px_8px]
+							after:m-[-3px_0px_0px_3px]
+
+							after:rotate-[38deg]
+
+							after:h-[15px]
+							after:w-[10px]
+
+							after:border-r-[6px]
+							after:[border-right-style:solid]
+							after:border-b-[6px]
+							after:[border-bottom-style:solid]
+
+							after:rounded-br-[2px]
+							after:rounded-tr-[3px]
+							after:rounded-bl-[3px]
+
+							after:border-primary
+
+							after:peer-checked:block
+						"
+						[for]="componentId + '_' + $index"></label>
+			</div>
+
+		}
+
+	</div>
+</div>
+<div class="flex justify-center items-center gap-1">
+
+	<button type="button" class="btn btn-glyph" (click)="dec()">
+		<svg wGlyph="remove"></svg>
+	</button>
+	<span>{{ value().length }}</span>
+	<button type="button" class="btn btn-glyph" (click)="inc()">
+		<svg wGlyph="add"></svg>
+	</button>
+
+</div>
+<label class="
+	-top-3.5
+	left-2
+	absolute
+	text-2xs
+	leading-5
+	px-1
+	rounded
+	bg-component-dark
+	text-form-element-text
+
+	group-[.required]:before:content-['*']
+	group-[.required]:before:text-focus
+	group-[.required]:before:mr-1
+	">{{label()}}</label>

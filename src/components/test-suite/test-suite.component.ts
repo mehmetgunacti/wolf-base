@@ -4,11 +4,12 @@ import { slideDownTrigger } from '@animations/slide-in-out.animation';
 import { UUID } from '@constants/common.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
+import { ChoicesComponent } from '@libComponents/choices/choices.component';
 import { TestSuite } from '@models/test-suite.model';
 
 @Component({
 	standalone: true,
-	imports: [ GlyphDirective, RouterLink ],
+	imports: [ GlyphDirective, RouterLink, ChoicesComponent ],
 	selector: 'app-test-suite',
 	templateUrl: './test-suite.component.html',
 	animations: [ slideDownTrigger ],
