@@ -33,6 +33,7 @@
 
 				"
 				tabindex="0"
+				(keydown)="onKeyDown($event, $index)"
 				(click)="toggle($index)"
 				[attr.data-label]="ALPHA[$index]">
 				<input	type="checkbox"
