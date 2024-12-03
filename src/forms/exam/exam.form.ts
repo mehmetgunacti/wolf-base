@@ -28,7 +28,7 @@ export class ExamForm extends BaseComponent {
 
 	// OUTPUT
 	create = output<Partial<Exam>>();
-	update = output<{ id: UUID, task: Partial<Exam>; }>();
+	update = output<{ id: UUID, exam: Partial<Exam>; }>();
 
 	protected form = inject(EXAM_FORM);
 
@@ -50,9 +50,10 @@ export class ExamForm extends BaseComponent {
 		if (this.form.fg.invalid)
 			return;
 
-		const exam: Partial<Exam> = { ...this.form.fg.value as Partial<Exam>, testSuite: this.testSuite() };
+		const { id, name } = this.testSuite();
+		const exam: Partial<Exam> = { ...this.form.fg.value as Partial<Exam>, testSuite: { id, name } };
 		if (exam.id)
-			this.update.emit({ id: exam.id, task: exam });
+			this.update.emit({ id: exam.id, exam });
 		else
 			this.create.emit(exam);
 

@@ -2,7 +2,6 @@ import { examActions } from '@actions/exam.actions';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { slideDownTrigger } from '@animations/slide-in-out.animation';
 import { ExamsComponent } from '@components/exams/exams.component';
 import { TestSuiteComponent } from '@components/test-suite/test-suite.component';
 import { UUID } from '@constants/common.constant';
@@ -21,7 +20,6 @@ import { selTestSuite_selected } from '@selectors/test-suite/test-suite-ui.selec
 	imports: [ PortalComponent, GlyphDirective, CdkMenuModule, RouterLink, TestSuiteComponent, ModalComponent, ExamEditContainer, ExamsComponent ],
 	selector: 'app-test-suite-container',
 	templateUrl: './test-suite.container.html',
-	animations: [ slideDownTrigger ],
 	host: { 'class': 'flex flex-col gap-2' }
 })
 export class TestSuiteContainer extends BaseComponent {

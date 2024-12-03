@@ -20,7 +20,10 @@
 
 		@if (testSuite(); as ts) {
 
-			<app-exam-form [exam]="exam()" [testSuite]="ts" />
+			<app-exam-form	[exam]="exam()"
+							[testSuite]="ts"
+							(create)="onCreate($event)"
+							(update)="onUpdate($event.id, $event.exam)" />
 
 		}
 

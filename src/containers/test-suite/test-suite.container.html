@@ -46,7 +46,9 @@
 	<app-test-suite [testSuite]="testSuite"/>
 
 	<!-- Exams -->
-	<app-exams [exams]="exams()" (openFormDialog)="onOpenFormDialog()" (openEditDialog)="onOpenEditDialog($event)" />
+	<app-exams	[exams]="exams()"
+				(openFormDialog)="onOpenFormDialog()"
+				(openEditDialog)="onOpenEditDialog($event)" />
 
 } @else {
 

@@ -76,7 +76,8 @@ export class TaskForm extends BaseComponent {
 		if (this.form.fg.invalid)
 			return;
 
-		const task: Partial<Task> = { ...this.form.fg.value as Partial<Task>, project: this.project() };
+		const { id, name } = this.project();
+		const task: Partial<Task> = { ...this.form.fg.value as Partial<Task>, project: { id, name } };
 		if (task.id)
 			this.update.emit({ id: task.id, task });
 		else
