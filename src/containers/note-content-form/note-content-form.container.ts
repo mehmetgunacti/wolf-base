@@ -19,7 +19,7 @@ import { fc } from '@utils/form.util';
 	standalone: true,
 	imports: [ RouterLink, GlyphDirective, MarkdownEditorComponent, PortalComponent, ReactiveFormsModule ],
 	selector: 'app-note-content-form-container',
-	templateUrl: './note-content-form-container.component.html',
+	templateUrl: './note-content-form.container.html',
 	host: { 'class': 'comp p-4' }
 })
 export class NoteContentFormContainer extends BaseComponent {
