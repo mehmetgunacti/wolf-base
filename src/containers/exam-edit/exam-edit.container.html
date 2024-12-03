@@ -1,6 +1,6 @@
 <!-- DIALOG HEADER -->
 <header class="flex items-center">
-	<div class="font-bold text-2xl text-content">Exam Details</div>
+	<div class="font-bold text-2xl text-content">@if(exam()) { Edit } @else { Add } Exam</div>
 	<div class="ml-auto">
 
 		<button
@@ -18,14 +18,14 @@
 	<!-- DIALOG CONTENT -->
 	<div class="flex flex-col p-3 h-full">
 
+		@if (testSuite(); as ts) {
 
+			<app-exam-form [exam]="exam()" [testSuite]="ts" />
+
+		}
 
 	</div>
 
 </section>
 
-<footer class="grid mt-2 md:mt-4">
-
-	<w-choices label="Question" [formControl]="fcChoices" />
-
-</footer>
+<footer id="dialog-footer-outlet" class="mt-2 md:mt-4"></footer>

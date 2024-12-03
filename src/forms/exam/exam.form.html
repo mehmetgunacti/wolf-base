@@ -1,0 +1,77 @@
+<form [formGroup]="form.fg" class="flex flex-col gap-4">
+
+	<!-- TEST SUITE ID -->
+	<div>
+		<small class="block text-secondary text-sm">{{ testSuite().id }}</small>
+		{{ testSuite().name }}
+	</div>
+
+	<!-- ID -->
+	@if (exam()?.id) {
+
+		<w-input formControlName="id" label="ID" [readonly]="true"/>
+
+	}
+
+	<!-- NAME -->
+	<w-input formControlName="name" label="Name"/>
+
+	<!-- DESCRIPTION -->
+	<w-textarea formControlName="description" label="Description" [rows]="3"/>
+
+	<!-- ITERATE QUESTIONS -->
+	@for (question of form.questions.controls; let qIdx = $index; track qIdx) {
+
+		<fieldset class="relative comp-dark p-3 comp">
+
+			<legend class="flex items-center bg-component-dark px-3 rounded-lg h-button-height">Question #{{qIdx + 1}}</legend>
+
+			@if(qIdx > 0) {
+
+				<legend class="-top-11 right-2.5 absolute flex justify-center items-center bg-component-dark rounded-lg w-button-height h-button-height">
+					<button type="button" class="btn btn-glyph" (click)="form.removeQuestion(qIdx)" [title]="'Remove Question #' + (qIdx + 1)">
+						<svg wGlyph="do_not_disturb_on" class="fill-focus"></svg>
+					</button>
+				</legend>
+
+			}
+
+			<!-- QUESTION -->
+			<div class="flex flex-col gap-4" [formGroup]="question">
+
+				<!-- ID -->
+				<w-input formControlName="id" label="ID" [readonly]="true"/>
+
+				<!-- DESCRIPTION -->
+				<w-textarea formControlName="description" label="Description" [rows]="3"/>
+
+				<!-- CHOICES -->
+				<w-choices label="Answers" formControlName="answers"/>
+
+			</div>
+
+		</fieldset>
+
+	}
+	<button
+		add_button
+		type="button"
+		class="ml-auto btn btn-success"
+		(click)="form.addQuestion()">
+		<svg wGlyph="add_circle"></svg> Question
+	</button>
+
+</form>
+
+<!-- form-element-buttons -->
+<w-portal outletName="dialog-footer-outlet" [delayRemoval]="2000">
+
+	<div class="flex">
+
+		<button type="button" [disabled]="this.form.fg.pristine || this.form.fg.invalid" (click)="onSave()" class="ml-auto btn">
+			<svg wGlyph="save"></svg> Save
+		</button>
+
+	</div>
+
+</w-portal>
