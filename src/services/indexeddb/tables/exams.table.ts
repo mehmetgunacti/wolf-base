@@ -6,6 +6,7 @@ import { Exam } from '@models/test-suite.model';
 import { ExamsLocalRepository } from '@repositories/local/exam.repository';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';
+import { emptyNameBase } from '@models/id-base.model';
 
 export class ExamsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Exam> implements ExamsLocalRepository {
 
@@ -32,7 +33,7 @@ export class ExamsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Exam> im
 		const instance: Exam = {
 
 			id,
-			testSuiteId: '',
+			testSuite: emptyNameBase(),
 			name: '',
 			description: null,
 			questions: []

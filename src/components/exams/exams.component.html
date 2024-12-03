@@ -4,6 +4,11 @@
 		Exams
 		<small class="text-secondary text-sm">({{ exams().length }})</small>
 	</legend>
+	<legend class="-top-11 right-2.5 absolute flex justify-center items-center bg-component-dark rounded-lg h-button-height">
+		<button type="button" class="btn btn-ghost" (click)="onOpenFormDialog()">
+			<svg wGlyph="add"></svg> Add Exam
+		</button>
+	</legend>
 
 	<div class="flex flex-col">
 

@@ -2,6 +2,7 @@ import { UUID } from '@constants/common.constant';
 import { DbStore } from '@constants/database.constant';
 import { AppEntities } from '@constants/entity.constant';
 import { IndexedDb } from '@libServices/indexeddb.service';
+import { emptyNameBase } from '@models/id-base.model';
 import { Session } from '@models/test-suite.model';
 import { SessionsLocalRepository } from '@repositories/local/session.repository';
 import { v4 as uuidv4 } from 'uuid';
@@ -33,7 +34,7 @@ export class SessionsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Sessi
 
 			id,
 			name: '',
-			examId: '',
+			exam: emptyNameBase(),
 			answers: [],
 			start: new Date().toISOString(),
 			end: null

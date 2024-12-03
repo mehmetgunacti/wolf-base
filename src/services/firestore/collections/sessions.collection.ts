@@ -6,6 +6,7 @@ import { FirestoreAPIClient } from '@utils/firestore-rest-client/firestore-api.t
 import { FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
 import { FirestoreConverter } from '@utils/firestore-rest-client/firestore.model';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
+import { NameBaseFirestoreConverter } from './name-base.collection';
 
 export class SessionsFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Session> implements SessionsRemoteRepository {
 
@@ -22,12 +23,16 @@ export class SessionsFirestoreCollectionImpl extends FirestoreRemoteStorageColle
 
 class SessionFirestoreConverter implements FirestoreConverter<Session> {
 
+	namebaseConverter = new NameBaseFirestoreConverter();
+
 	toFirestore(entry: Session): Record<keyof Session, FIRESTORE_VALUE> {
 
 		const fields = {} as Record<keyof Session, FIRESTORE_VALUE>;
 
 		fields[ 'name' ] = { stringValue: entry.name };
-		fields[ 'examId' ] = { stringValue: entry.examId };
+		fields[ 'exam' ] = {
+			mapValue: { fields: this.namebaseConverter.toFirestore(entry.exam) }
+		};
 
 		fields[ 'start' ] = { stringValue: entry.start };
 
@@ -47,15 +52,15 @@ class SessionFirestoreConverter implements FirestoreConverter<Session> {
 	fromFirestore(entry: Session): Session {
 
 		// validate incoming
-		let { id, examId, name, start, end, answers } = entry;
+		let { id, exam, name, start, end, answers } = entry;
 		if (!id)
 			throw new Error(`Firestore Session Entry: invalid 'id' value`);
 
 		if (!name)
 			throw new Error(`Firestore Session Entry: invalid 'name' value`);
 
-		if (!examId)
-			throw new Error(`Firestore Session Entry: invalid 'examId' value`);
+		if (!exam)
+			throw new Error(`Firestore Session Entry: invalid 'exam' value`);
 
 		if (!start)
 			throw new Error(`Firestore Task: invalid 'start' value`);
@@ -66,7 +71,7 @@ class SessionFirestoreConverter implements FirestoreConverter<Session> {
 		const validated: Session = {
 
 			id,
-			examId,
+			exam,
 			name,
 			answers,
 			start,
@@ -84,8 +89,8 @@ class SessionFirestoreConverter implements FirestoreConverter<Session> {
 
 		const fields = new Set<string>();
 
-		if (entry.examId)
-			fields.add('examId');
+		if (entry.exam)
+			fields.add('exam');
 
 		if (entry.name)
 			fields.add('name');

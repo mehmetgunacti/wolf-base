@@ -6,6 +6,7 @@ import { FirestoreAPIClient } from '@utils/firestore-rest-client/firestore-api.t
 import { FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
 import { FirestoreConverter } from '@utils/firestore-rest-client/firestore.model';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
+import { NameBaseFirestoreConverter } from './name-base.collection';
 
 export class ExamsFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Exam> implements ExamsRemoteRepository {
 
@@ -22,12 +23,16 @@ export class ExamsFirestoreCollectionImpl extends FirestoreRemoteStorageCollecti
 
 class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 
+	namebaseConverter = new NameBaseFirestoreConverter();
+
 	toFirestore(entry: Exam): Record<keyof Exam, FIRESTORE_VALUE> {
 
 		const fields = {} as Record<keyof Exam, FIRESTORE_VALUE>;
 
-		fields[ 'testSuiteId' ] = { stringValue: entry.testSuiteId };
 		fields[ 'name' ] = { stringValue: entry.name };
+		fields[ 'testSuite' ] = {
+			mapValue: { fields: this.namebaseConverter.toFirestore(entry.testSuite) }
+		};
 
 		if (entry.description)
 			fields[ 'description' ] = { stringValue: entry.description };
@@ -43,12 +48,12 @@ class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 	fromFirestore(entry: Exam): Exam {
 
 		// validate incoming
-		let { id, testSuiteId, name, description, questions } = entry;
+		let { id, testSuite, name, description, questions } = entry;
 		if (!id)
 			throw new Error(`Firestore Exam Entry: invalid 'id' value`);
 
-		if (!testSuiteId)
-			throw new Error(`Firestore Exam Entry: invalid 'testSuiteId' value`);
+		if (!testSuite)
+			throw new Error(`Firestore Exam Entry: invalid 'testSuite' value`);
 
 		if (!name)
 			throw new Error(`Firestore Exam Entry: invalid 'name' value`);
@@ -62,7 +67,7 @@ class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 		const validated: Exam = {
 
 			id,
-			testSuiteId,
+			testSuite,
 			name,
 			description,
 			questions
@@ -79,8 +84,8 @@ class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 
 		const fields = new Set<string>();
 
-		if (entry.testSuiteId)
-			fields.add('testSuiteId');
+		if (entry.testSuite)
+			fields.add('testSuite');
 
 		if (entry.name)
 			fields.add('name');

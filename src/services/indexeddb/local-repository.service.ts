@@ -24,7 +24,7 @@ import { ExamsLocalRepositoryImpl } from './tables/exams.table';
 import { LogsLocalRepositoryImpl } from './tables/logs.table';
 import { NoteContentLocalRepositoryImpl } from './tables/notes-content.table';
 import { NotesLocalRepositoryImpl } from './tables/notes.table';
-import { TasksLocalRepositoryImpl } from './tables/project-tasks.table';
+import { TasksLocalRepositoryImpl } from './tables/tasks.table';
 import { ProjectsLocalRepositoryImpl } from './tables/projects.table';
 import { QuizEntriesLocalRepositoryImpl } from './tables/quiz-entries.table';
 import { QuotesLocalRepositoryImpl } from './tables/quotes.table';
