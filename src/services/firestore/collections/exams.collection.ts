@@ -26,6 +26,7 @@ class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 
 		const fields = {} as Record<keyof Exam, FIRESTORE_VALUE>;
 
+		fields[ 'testSuiteId' ] = { stringValue: entry.testSuiteId };
 		fields[ 'name' ] = { stringValue: entry.name };
 
 		if (entry.description)
@@ -42,9 +43,12 @@ class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 	fromFirestore(entry: Exam): Exam {
 
 		// validate incoming
-		let { id, name, description, questions } = entry;
+		let { id, testSuiteId, name, description, questions } = entry;
 		if (!id)
 			throw new Error(`Firestore Exam Entry: invalid 'id' value`);
+
+		if (!testSuiteId)
+			throw new Error(`Firestore Exam Entry: invalid 'testSuiteId' value`);
 
 		if (!name)
 			throw new Error(`Firestore Exam Entry: invalid 'name' value`);
@@ -58,6 +62,7 @@ class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 		const validated: Exam = {
 
 			id,
+			testSuiteId,
 			name,
 			description,
 			questions
@@ -73,6 +78,9 @@ class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 		// (empty string would delete string on server)
 
 		const fields = new Set<string>();
+
+		if (entry.testSuiteId)
+			fields.add('testSuiteId');
 
 		if (entry.name)
 			fields.add('name');

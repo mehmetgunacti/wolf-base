@@ -3,19 +3,19 @@ import { BookmarkQueryParams, Click } from '@models/bookmark.model';
 
 export interface Bookmark_ModuleState {
 
-	clicks: BookmarkClicksState;
-	ui: BookmarkUIState;
+	clicks: Bookmark_ClicksState;
+	ui: Bookmark_UIState;
 
 }
 
 // todo move some properties to ui state
-export interface BookmarkClicksState {
+export interface Bookmark_ClicksState {
 
 	values: Record<UUID, Click>;
 
 }
 
-export interface BookmarkUIState {
+export interface Bookmark_UIState {
 
 	queryParams: BookmarkQueryParams;
 	formVisible: boolean;
@@ -26,13 +26,13 @@ export interface BookmarkUIState {
 
 // INITIALIZATION
 
-export const bookmark_initialClicksState: BookmarkClicksState = {
+export const bookmark_initialClicksState: Bookmark_ClicksState = {
 
 	values: {}
 
 };
 
-export const bookmark_initialUIState: BookmarkUIState = {
+export const bookmark_initialUIState: Bookmark_UIState = {
 
 	queryParams: {
 		id: null,

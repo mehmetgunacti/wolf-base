@@ -12,7 +12,7 @@ export interface Answer extends IdBase {
 
 export interface Session extends Entity {
 
-	testId: UUID;
+	examId: UUID;
 	answers: Answer[];
 	start: ISODateString;
 	end: ISODateString | null;
@@ -28,8 +28,8 @@ export interface Question extends IdBase {
 
 export interface Exam extends Entity {
 
+	testSuiteId: UUID;
 	questions: Question[];
-	// sessions: Session[];
 	description: string | null;
 
 }
@@ -37,6 +37,5 @@ export interface Exam extends Entity {
 export interface TestSuite extends Entity {
 
 	description: string | null;
-	tests: Exam[];
 
 }

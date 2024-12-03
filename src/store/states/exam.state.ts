@@ -8,7 +8,8 @@ export interface Exam_ModuleState {
 
 export interface Exam_UIState {
 
-	selectedId: UUID | null;
+	formVisible: boolean;
+	editId: UUID | null;
 
 }
 
@@ -16,7 +17,8 @@ export interface Exam_UIState {
 
 export const exam_initialUIState: Exam_UIState = {
 
-	selectedId: null
+	formVisible: false,
+	editId: null
 
 };
 

@@ -26,7 +26,7 @@ interface TestSuiteFormSchema {
 	id: FormControl<UUID | null>;
 	name: FormControl<string>;
 	description: FormControl<string | null>;
-	tests: FormArray<FormGroup<TestFormSchema>>;
+	// tests: FormArray<FormGroup<TestFormSchema>>;
 
 }
 
@@ -99,8 +99,7 @@ function createFormGroup(value?: TestSuite): FormGroup<TestSuiteFormSchema> {
 
 		id = null,
 		name = '',
-		description = null,
-		tests = []
+		description = null
 
 	} = value ?? {};
 
@@ -109,7 +108,7 @@ function createFormGroup(value?: TestSuite): FormGroup<TestSuiteFormSchema> {
 		id: fc(id),
 		name: nnfc(name, Validators.required),
 		description: fc(description),
-		tests: faTests(tests)
+		// tests: faTests(tests)
 
 	});
 
@@ -122,15 +121,15 @@ export class TestSuiteFormImpl {
 	populate(entity: TestSuite): void {
 
 		const fg = this.fg;
-		const { id, name, description, tests } = entity;
+		const { id, name, description } = entity;
 
 		// populate (non-array values)
 		fg.patchValue({ id, name, description });
 
 		// populate tests
-		const faTests = fg.controls.tests;
-		faTests.clear();
-		tests.forEach(test => faTests.push(fgTest(test)));
+		// const faTests = fg.controls.tests;
+		// faTests.clear();
+		// tests.forEach(test => faTests.push(fgTest(test)));
 
 	}
 
@@ -148,24 +147,24 @@ export class TestSuiteFormImpl {
 //
 // 	}
 
-	addTest(): void {
-
-		this.tests.push(fgTest());
-		this.fg.markAsDirty();
-
-	}
-
-	removeTest(idx: number): void {
-
-		this.tests.removeAt(idx);
-		this.fg.markAsDirty();
-
-	}
+// 	addTest(): void {
+//
+// 		this.tests.push(fgTest());
+// 		this.fg.markAsDirty();
+//
+// 	}
+//
+// 	removeTest(idx: number): void {
+//
+// 		this.tests.removeAt(idx);
+// 		this.fg.markAsDirty();
+//
+// 	}
 
 	get id(): FormControl<UUID | null> { return this.fg.controls.id; }
 	get name(): FormControl<string> { return this.fg.controls.name; }
 	get description(): FormControl<string | null> { return this.fg.controls.description; }
-	get tests(): FormArray<FormGroup<TestFormSchema>> { return this.fg.controls.tests; }
+	// get tests(): FormArray<FormGroup<TestFormSchema>> { return this.fg.controls.tests; }
 
 }
 

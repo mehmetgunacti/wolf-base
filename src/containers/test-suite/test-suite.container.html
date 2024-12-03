@@ -34,8 +34,19 @@
 
 	</w-portal>
 
+	@if (formVisible()) {
+
+		<w-modal (close)="onCloseDialog()">
+			<app-exam-edit-container/>
+		</w-modal>
+
+	}
+
 	<!-- TEST SUITE -->
 	<app-test-suite [testSuite]="testSuite"/>
+
+	<!-- Exams -->
+	<app-exams [exams]="exams()" (openFormDialog)="onOpenFormDialog()" (openEditDialog)="onOpenEditDialog($event)" />
 
 } @else {
 

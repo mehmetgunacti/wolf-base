@@ -3,14 +3,14 @@ import { coreActions } from '@actions/core.actions';
 import { entityActions } from '@actions/entity.actions';
 import { AppEntityType } from '@constants/entity.constant';
 import { Action, createReducer, on } from '@ngrx/store';
-import { bookmark_initialClicksState, BookmarkClicksState } from '@states/bookmark.state';
+import { bookmark_initialClicksState, Bookmark_ClicksState } from '@states/bookmark.state';
 import { idListToRecord } from '@utils/array.util';
 import { produce } from 'immer';
 
 const reducer = createReducer(
 
 	bookmark_initialClicksState,
-	on(entityActions.unloadOne, (state, { entityType, id }): BookmarkClicksState => {
+	on(entityActions.unloadOne, (state, { entityType, id }): Bookmark_ClicksState => {
 
 		if (entityType === AppEntityType.bookmark)
 			return produce(
@@ -24,10 +24,10 @@ const reducer = createReducer(
 		return state;
 
 	}),
-	on(coreActions.loadAllSuccess, (state, { clicks }): BookmarkClicksState => ({ ...state, values: idListToRecord(clicks) })),
-	on(bookmarkActions.loadAllClicksSuccess, (state, { clicks }): BookmarkClicksState => ({ ...state, values: idListToRecord(clicks) })),
+	on(coreActions.loadAllSuccess, (state, { clicks }): Bookmark_ClicksState => ({ ...state, values: idListToRecord(clicks) })),
+	on(bookmarkActions.loadAllClicksSuccess, (state, { clicks }): Bookmark_ClicksState => ({ ...state, values: idListToRecord(clicks) })),
 	on(
-		bookmarkActions.loadOneClickSuccess, (state, { id, click }): BookmarkClicksState => {
+		bookmarkActions.loadOneClickSuccess, (state, { id, click }): Bookmark_ClicksState => {
 
 			return produce(
 				state,
@@ -46,6 +46,6 @@ const reducer = createReducer(
 
 );
 
-export function bookmarkClicksReducer(state: BookmarkClicksState | undefined, action: Action): BookmarkClicksState {
+export function bookmarkClicksReducer(state: Bookmark_ClicksState | undefined, action: Action): Bookmark_ClicksState {
 	return reducer(state, action);
 }

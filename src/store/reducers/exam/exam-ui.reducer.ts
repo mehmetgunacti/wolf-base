@@ -5,7 +5,10 @@ import { exam_initialUIState, Exam_UIState } from '@states/exam.state';
 const reducer = createReducer(
 
 	exam_initialUIState,
-	on(examActions.setSelectedId, (state, { id }): Exam_UIState => ({ ...state, selectedId: id }))
+	on(examActions.openFormDialog, (state): Exam_UIState => ({ ...state, editId: null, formVisible: true })),
+	on(examActions.openEditDialog, (state, { id }): Exam_UIState => ({ ...state, editId: id, formVisible: true })),
+	on(examActions.closeDialog, (state): Exam_UIState => ({ ...state, editId: null, formVisible: false })),
+	on(examActions.editSuccess, (state): Exam_UIState => ({ ...state, editId: null, formVisible: false })),
 
 );
 

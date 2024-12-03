@@ -27,7 +27,7 @@ class SessionFirestoreConverter implements FirestoreConverter<Session> {
 		const fields = {} as Record<keyof Session, FIRESTORE_VALUE>;
 
 		fields[ 'name' ] = { stringValue: entry.name };
-		fields[ 'testId' ] = { stringValue: entry.testId };
+		fields[ 'examId' ] = { stringValue: entry.examId };
 
 		fields[ 'start' ] = { stringValue: entry.start };
 
@@ -47,15 +47,15 @@ class SessionFirestoreConverter implements FirestoreConverter<Session> {
 	fromFirestore(entry: Session): Session {
 
 		// validate incoming
-		let { id, testId, name, start, end, answers } = entry;
+		let { id, examId, name, start, end, answers } = entry;
 		if (!id)
 			throw new Error(`Firestore Session Entry: invalid 'id' value`);
 
 		if (!name)
 			throw new Error(`Firestore Session Entry: invalid 'name' value`);
 
-		if (!testId)
-			throw new Error(`Firestore Session Entry: invalid 'testId' value`);
+		if (!examId)
+			throw new Error(`Firestore Session Entry: invalid 'examId' value`);
 
 		if (!start)
 			throw new Error(`Firestore Task: invalid 'start' value`);
@@ -66,7 +66,7 @@ class SessionFirestoreConverter implements FirestoreConverter<Session> {
 		const validated: Session = {
 
 			id,
-			testId,
+			examId,
 			name,
 			answers,
 			start,
@@ -84,8 +84,8 @@ class SessionFirestoreConverter implements FirestoreConverter<Session> {
 
 		const fields = new Set<string>();
 
-		if (entry.testId)
-			fields.add('testId');
+		if (entry.examId)
+			fields.add('examId');
 
 		if (entry.name)
 			fields.add('name');

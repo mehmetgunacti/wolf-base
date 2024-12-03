@@ -1,6 +1,6 @@
 <!-- DIALOG HEADER -->
 <header class="flex items-center">
-	<div class="font-bold text-2xl text-content">@if(test()) { Edit } @else { Add } Questions</div>
+	<div class="font-bold text-2xl text-content">Exam Details</div>
 	<div class="ml-auto">
 
 		<button
@@ -18,10 +18,14 @@
 	<!-- DIALOG CONTENT -->
 	<div class="flex flex-col p-3 h-full">
 
-Questions here
+
 
 	</div>
 
 </section>
 
-<footer id="dialog-footer-outlet" class="mt-2 md:mt-4"></footer>
+<footer class="grid mt-2 md:mt-4">
+
+	<w-choices label="Question" [formControl]="fcChoices" />
+
+</footer>

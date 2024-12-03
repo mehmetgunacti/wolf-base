@@ -1,20 +1,18 @@
-import { Exam } from '@models/test-suite.model';
 import { createSelector } from '@ngrx/store';
 import { selExam_EntityMap } from '../entity/entity-exam.selectors';
 import { selExam_UIState } from './exam.selectors';
 
-// SELECTED ID
-const selExam_SelectedId = createSelector(
+export const selExam_editEntity = createSelector(
 
+	selExam_EntityMap,
 	selExam_UIState,
-	state => state.selectedId
+	(entities, uiState) => uiState.editId ? entities[ uiState.editId ] : null
 
 );
 
-export const selExam_selected = createSelector(
+export const selExam_formVisible = createSelector(
 
-	selExam_EntityMap,
-	selExam_SelectedId,
-	(state, id): Exam | null => id ? state[ id ] ?? null : null
+	selExam_UIState,
+	state => state.formVisible
 
 );

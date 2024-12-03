@@ -33,8 +33,7 @@ export class TestSuitesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Tes
 
 			id,
 			name: '',
-			description: null,
-			tests: []
+			description: null
 
 		};
 		return { ...instance, ...item, id } as TestSuite;

@@ -16,49 +16,6 @@
 	<!-- DESCRIPTION -->
 	<w-input formControlName="description" label="Description"/>
 
-	@for (test of form.tests.controls; let testIdx = $index; track testIdx) {
-
-		<fieldset class="relative comp-dark p-3 comp">
-
-			<legend class="flex items-center bg-component-dark px-3 rounded-lg h-button-height">Test #{{testIdx + 1}}</legend>
-
-			@if(testIdx > 0) {
-
-				<legend class="-top-11 right-2.5 absolute flex justify-center items-center bg-component-dark rounded-lg w-button-height h-button-height">
-					<button type="button" class="btn btn-glyph" (click)="form.removeTest(testIdx)" [title]="'Remove Test #' + (testIdx + 1)">
-						<svg wGlyph="do_not_disturb_on" class="fill-focus"></svg>
-					</button>
-				</legend>
-
-			}
-
-			<!-- TEST -->
-			<div class="flex flex-col gap-4" [formGroup]="test">
-
-				<!-- TEST ID -->
-				<w-input formControlName="id" label="Test ID" [readonly]="true"/>
-
-				<!-- TEST NAME -->
-				<w-input formControlName="name" label="Name"/>
-
-				<!-- TEST DESCRIPTION -->
-				<w-textarea formControlName="description" label="Description" [rows]="2"/>
-
-			</div>
-
-		</fieldset>
-
-	}
-
-	<!-- ADD CONTEXT BUTTON -->
-	<button
-		add_button
-		type="button"
-		class="ml-auto btn btn-success"
-		(click)="form.addTest()">
-		<svg wGlyph="add_circle"></svg> Test
-	</button>
-
 	<footer>
 
 		<button [disabled]="this.form.fg.pristine || this.form.fg.invalid" class="float-right btn">

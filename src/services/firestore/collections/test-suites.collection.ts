@@ -31,10 +31,6 @@ class TestSuiteFirestoreConverter implements FirestoreConverter<TestSuite> {
 		if (entry.description)
 			fields[ 'description' ] = { stringValue: entry.description };
 
-		fields[ 'tests' ] = {
-			arrayValue: { values: [] }
-		};
-
 		return fields;
 
 	}
@@ -42,7 +38,7 @@ class TestSuiteFirestoreConverter implements FirestoreConverter<TestSuite> {
 	fromFirestore(entry: TestSuite): TestSuite {
 
 		// validate incoming
-		let { id, name, description, tests } = entry;
+		let { id, name, description } = entry;
 		if (!id)
 			throw new Error(`Firestore TestSuite Entry: invalid 'id' value`);
 
@@ -52,15 +48,11 @@ class TestSuiteFirestoreConverter implements FirestoreConverter<TestSuite> {
 		if (!description)
 			throw new Error(`Firestore TestSuite Entry: invalid 'description' value`);
 
-		if (!Array.isArray(tests))
-			throw new Error(`Firestore TestSuite Entry: invalid 'tests' value`);
-
 		const validated: TestSuite = {
 
 			id,
 			name,
-			description,
-			tests
+			description
 
 		};
 		return validated;
@@ -79,9 +71,6 @@ class TestSuiteFirestoreConverter implements FirestoreConverter<TestSuite> {
 
 		if (entry.description)
 			fields.add('description');
-
-		// if (entry.tests)
-		fields.add('tests');
 
 		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
 

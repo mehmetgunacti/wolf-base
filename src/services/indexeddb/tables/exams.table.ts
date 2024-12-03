@@ -32,6 +32,7 @@ export class ExamsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Exam> im
 		const instance: Exam = {
 
 			id,
+			testSuiteId: '',
 			name: '',
 			description: null,
 			questions: []

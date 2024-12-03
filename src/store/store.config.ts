@@ -58,6 +58,7 @@ import { noteReducer } from '@reducers/note/note.reducer';
 import { projectReducer } from '@reducers/project/project.reducer';
 import { quizEntryReducer } from '@reducers/quiz-entry/quiz-entry.reducer';
 import { quoteReducer } from '@reducers/quote/quote.reducer';
+import { sessionReducer } from '@reducers/session/session.reducer';
 import { taskReducer } from '@reducers/task/task.reducer';
 import { testSuiteReducer } from '@reducers/test-suite/test-suite.reducer';
 import { wordReducer } from '@reducers/word/word.reducer';
@@ -180,7 +181,7 @@ export const reducerList: ActionReducerMap<AppState> = {
 	project: combineReducers(projectReducer),
 	quizEntry: combineReducers(quizEntryReducer),
 	quote: combineReducers(quoteReducer),
-	session: combineReducers(examReducer),
+	session: combineReducers(sessionReducer),
 	task: combineReducers(taskReducer),
 	testSuite: combineReducers(testSuiteReducer),
 	word: combineReducers(wordReducer)

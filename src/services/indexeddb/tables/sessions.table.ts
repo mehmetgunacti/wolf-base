@@ -33,7 +33,7 @@ export class SessionsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Sessi
 
 			id,
 			name: '',
-			testId: '',
+			examId: '',
 			answers: [],
 			start: new Date().toISOString(),
 			end: null
