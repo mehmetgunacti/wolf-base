@@ -3,12 +3,12 @@ import { DbStore } from '@constants/database.constant';
 import { AppEntities } from '@constants/entity.constant';
 import { IndexedDb } from '@libServices/indexeddb.service';
 import { Definition, Word } from '@models/word.model';
-import { WordLocalRepository } from '@repositories/local/word.repository';
+import { WordsLocalRepository } from '@repositories/local/word.repository';
 import { produce } from 'immer';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class WordsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Word> implements WordLocalRepository {
+export class WordsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Word> implements WordsLocalRepository {
 
 	constructor(db: IndexedDb) {
 		super(

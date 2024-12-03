@@ -16,7 +16,7 @@ export interface Word_UIState {
 
 // INITIALIZATION
 
-export const initialWordUIState: Word_UIState = {
+export const word_initialUIState: Word_UIState = {
 
 	selectedId: null,
 	queryParams: {
@@ -25,8 +25,8 @@ export const initialWordUIState: Word_UIState = {
 
 };
 
-export const initialWordState: Word_ModuleState = {
+export const word_initialState: Word_ModuleState = {
 
-	ui: initialWordUIState
+	ui: word_initialUIState
 
 };

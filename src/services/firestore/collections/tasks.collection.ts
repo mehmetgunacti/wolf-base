@@ -15,13 +15,13 @@ export class TasksFirestoreCollectionImpl extends FirestoreRemoteStorageCollecti
 			firestore,
 			firestoreConfig,
 			AppEntityType.task,
-			new TaskFirestoreConverter()
+			new TasksFirestoreConverter()
 		);
 	}
 
 }
 
-class TaskFirestoreConverter implements FirestoreConverter<Task> {
+class TasksFirestoreConverter implements FirestoreConverter<Task> {
 
 	namebaseConverter = new NameBaseFirestoreConverter();
 

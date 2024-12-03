@@ -17,7 +17,7 @@ export interface Note_UIState {
 
 // INITIALIZATION
 
-export const initialNoteUIState: Note_UIState = {
+export const note_initialUIState: Note_UIState = {
 
 	selectedId: null,
 	content: null,
@@ -28,8 +28,8 @@ export const initialNoteUIState: Note_UIState = {
 
 };
 
-export const initialNoteState: Note_ModuleState = {
+export const note_initialState: Note_ModuleState = {
 
-	ui: initialNoteUIState
+	ui: note_initialUIState
 
 };

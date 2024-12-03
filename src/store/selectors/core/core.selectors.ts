@@ -1,4 +1,4 @@
 import { createFeatureSelector } from '@ngrx/store';
-import { CoreModuleState } from 'store/states/core.state';
+import { Core_ModuleState } from 'store/states/core.state';
 
-export const coreModuleState = createFeatureSelector<CoreModuleState>('core');
+export const coreModuleState = createFeatureSelector<Core_ModuleState>('core');

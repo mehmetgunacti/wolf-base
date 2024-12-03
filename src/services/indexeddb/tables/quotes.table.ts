@@ -3,11 +3,11 @@ import { DbStore } from '@constants/database.constant';
 import { AppEntities } from '@constants/entity.constant';
 import { IndexedDb } from '@libServices/indexeddb.service';
 import { Quote } from '@models/quote.model';
-import { QuoteLocalRepository } from '@repositories/local/quote.repository';
+import { QuotesLocalRepository } from '@repositories/local/quote.repository';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class QuotesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Quote> implements QuoteLocalRepository {
+export class QuotesLocalRepositoryImpl extends EntityLocalRepositoryImpl<Quote> implements QuotesLocalRepository {
 
 	constructor(db: IndexedDb) {
 		super(

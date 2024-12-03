@@ -1,11 +1,11 @@
 import { logActions } from '@actions/logs.actions';
 import { Action, createReducer, on } from '@ngrx/store';
-import { initialLogsUIState, Logs_UIState } from '@states/logs.state';
+import { log_initialUIState, Logs_UIState } from '@states/logs.state';
 import { produce } from 'immer';
 
 const reducer = createReducer(
 
-	initialLogsUIState,
+	log_initialUIState,
 	on(logActions.load, (state, { selectedId, categories, limit }): Logs_UIState => {
 
 		return produce(
@@ -23,7 +23,7 @@ const reducer = createReducer(
 					draft.selectedId = null;
 
 				}
-				draft.limit = limit ?? initialLogsUIState.limit;
+				draft.limit = limit ?? log_initialUIState.limit;
 
 			}
 

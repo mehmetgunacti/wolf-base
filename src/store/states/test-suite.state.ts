@@ -14,14 +14,14 @@ export interface TestSuite_UIState {
 
 // INITIALIZATION
 
-export const initialTestSuiteUIState: TestSuite_UIState = {
+export const testSuite_initialUIState: TestSuite_UIState = {
 
 	selectedId: null
 
 };
 
-export const initialTestSuiteState: TestSuite_ModuleState = {
+export const testSuite_initialState: TestSuite_ModuleState = {
 
-	ui: initialTestSuiteUIState
+	ui: testSuite_initialUIState
 
 };

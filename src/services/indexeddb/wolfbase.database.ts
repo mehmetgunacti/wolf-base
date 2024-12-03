@@ -168,6 +168,40 @@ export const indexedDbConfiguration: IndexedDbConfiguration = {
 			// test_suites_remote: 'id',
 			new dbCommands.CreateStoreCommand(DbStore.test_suites_remote, { keyPath: ID, autoIncrement: false }),
 
+		],
+
+		202: [
+
+			// exams: 'id, name',
+			new dbCommands.CreateStoreCommand(DbStore.exams, { keyPath: ID, autoIncrement: false }),
+			new dbCommands.AddIndexCommand(DbStore.exams, 'name', 'name', { unique: false }),
+
+			// exams_sync: 'id',
+			new dbCommands.CreateStoreCommand(DbStore.exams_sync, { keyPath: ID, autoIncrement: false }),
+
+			// exams_trash: '++, id, name',
+			new dbCommands.CreateStoreCommand(DbStore.exams_trash, { keyPath: null, autoIncrement: true }),
+			new dbCommands.AddIndexCommand(DbStore.exams_trash, 'id', 'id', { unique: false }),
+			new dbCommands.AddIndexCommand(DbStore.exams_trash, 'name', 'name', { unique: false }),
+
+			// exams_remote: 'id',
+			new dbCommands.CreateStoreCommand(DbStore.exams_remote, { keyPath: ID, autoIncrement: false }),
+
+			// sessions: 'id, name',
+			new dbCommands.CreateStoreCommand(DbStore.sessions, { keyPath: ID, autoIncrement: false }),
+			new dbCommands.AddIndexCommand(DbStore.sessions, 'name', 'name', { unique: false }),
+
+			// sessions_sync: 'id',
+			new dbCommands.CreateStoreCommand(DbStore.sessions_sync, { keyPath: ID, autoIncrement: false }),
+
+			// sessions_trash: '++, id, name',
+			new dbCommands.CreateStoreCommand(DbStore.sessions_trash, { keyPath: null, autoIncrement: true }),
+			new dbCommands.AddIndexCommand(DbStore.sessions_trash, 'id', 'id', { unique: false }),
+			new dbCommands.AddIndexCommand(DbStore.sessions_trash, 'name', 'name', { unique: false }),
+
+			// sessions_remote: 'id',
+			new dbCommands.CreateStoreCommand(DbStore.sessions_remote, { keyPath: ID, autoIncrement: false }),
+
 		]
 
 	},

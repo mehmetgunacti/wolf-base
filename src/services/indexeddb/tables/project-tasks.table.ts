@@ -5,11 +5,11 @@ import { TaskCategory, TaskPriority, TaskState } from '@constants/project.consta
 import { IndexedDb } from '@libServices/indexeddb.service';
 import { emptyNameBase } from '@models/id-base.model';
 import { Task } from '@models/project.model';
-import { TaskLocalRepository } from '@repositories/local/project-task.repository';
+import { TasksLocalRepository } from '@repositories/local/project-task.repository';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class TasksLocalRepositoryImpl extends EntityLocalRepositoryImpl<Task> implements TaskLocalRepository {
+export class TasksLocalRepositoryImpl extends EntityLocalRepositoryImpl<Task> implements TasksLocalRepository {
 
 	constructor(db: IndexedDb) {
 		super(

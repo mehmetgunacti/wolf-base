@@ -1,7 +1,7 @@
 import { UUID } from '@constants/common.constant';
 import { BookmarkQueryParams, Click } from '@models/bookmark.model';
 
-export interface BookmarkModuleState {
+export interface Bookmark_ModuleState {
 
 	clicks: BookmarkClicksState;
 	ui: BookmarkUIState;
@@ -45,7 +45,7 @@ export const bookmark_initialUIState: BookmarkUIState = {
 
 };
 
-export const bookmark_initialState: BookmarkModuleState = {
+export const bookmark_initialState: Bookmark_ModuleState = {
 
 	clicks: bookmark_initialClicksState,
 	ui: bookmark_initialUIState

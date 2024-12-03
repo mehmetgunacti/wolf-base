@@ -6,11 +6,13 @@ import { SyncData } from '@models/sync.model';
 export interface Entity_ModuleState {
 
 	bookmark: Entity_EntitiesState;
+	exam: Entity_EntitiesState;
 	note: Entity_EntitiesState;
 	noteContent: Entity_EntitiesState;
 	project: Entity_EntitiesState;
 	quizEntry: Entity_EntitiesState;
 	quote: Entity_EntitiesState;
+	session: Entity_EntitiesState;
 	task: Entity_EntitiesState;
 	testSuite: Entity_EntitiesState;
 	word: Entity_EntitiesState;
@@ -43,10 +45,12 @@ export const entity_initialState: Entity_ModuleState = {
 
 	bookmark: createInitialEntitiesState(),
 	note: createInitialEntitiesState(),
+	exam: createInitialEntitiesState(),
 	noteContent: createInitialEntitiesState(),
 	project: createInitialEntitiesState(),
 	quizEntry: createInitialEntitiesState(),
 	quote: createInitialEntitiesState(),
+	session: createInitialEntitiesState(),
 	task: createInitialEntitiesState(),
 	testSuite: createInitialEntitiesState(),
 	word: createInitialEntitiesState()

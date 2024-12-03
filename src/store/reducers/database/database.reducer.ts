@@ -1,13 +1,13 @@
 import { databaseActions } from '@actions/database.actions';
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { produce } from 'immer';
-import { DatabaseModuleState, initialDatabaseState } from 'store/states/database.state';
+import { Database_ModuleState, database_initialState } from 'store/states/database.state';
 
-export const databaseReducer: ActionReducer<DatabaseModuleState, Action> = createReducer(
+export const databaseReducer: ActionReducer<Database_ModuleState, Action> = createReducer(
 
-	initialDatabaseState,
-	on(databaseActions.loadReport, (state): DatabaseModuleState => ({ ...state, reports: [] })),
-	on(databaseActions.loadReportSuccess, (state, { reports }): DatabaseModuleState => {
+	database_initialState,
+	on(databaseActions.loadReport, (state): Database_ModuleState => ({ ...state, reports: [] })),
+	on(databaseActions.loadReportSuccess, (state, { reports }): Database_ModuleState => {
 
 		return produce(
 
@@ -19,7 +19,7 @@ export const databaseReducer: ActionReducer<DatabaseModuleState, Action> = creat
 		);
 
 	}),
-	on(databaseActions.emptyTableSuccess, (state, { table }): DatabaseModuleState => {
+	on(databaseActions.emptyTableSuccess, (state, { table }): Database_ModuleState => {
 
 		return produce(
 

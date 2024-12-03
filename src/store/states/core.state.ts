@@ -3,7 +3,7 @@ import { SidebarState } from '@constants/sidebar.constant';
 import { Theme } from '@constants/theme.constant';
 import { FirestoreConfig } from '@models/configuration.model';
 
-export interface CoreModuleState {
+export interface Core_ModuleState {
 
 	conf: CoreConfigurationState;
 	ui: CoreUIState;
@@ -43,7 +43,7 @@ export const initialCoreConfigurationState: CoreConfigurationState = {
 
 };
 
-export const initialCoreUIState: CoreUIState = {
+export const core_initialUIState: CoreUIState = {
 
 	sidebarState: SidebarState.FULL,
 	bigScreen: false,
@@ -54,9 +54,9 @@ export const initialCoreUIState: CoreUIState = {
 
 };
 
-export const initialCoreState: CoreModuleState = {
+export const core_initialState: Core_ModuleState = {
 
 	conf: initialCoreConfigurationState,
-	ui: initialCoreUIState
+	ui: core_initialUIState
 
 };

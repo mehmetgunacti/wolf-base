@@ -33,7 +33,7 @@ export const initialTaskUIState: Task_UIState = {
 
 };
 
-export const initialTaskState: Task_ModuleState = {
+export const task_initialState: Task_ModuleState = {
 
 	ui: initialTaskUIState
 

@@ -61,14 +61,12 @@ export class DatabaseReportEffects {
 
 	private actions$: Actions = inject(Actions);
 	private localRepository: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
-	// private progress: NgProgress = inject(NgProgress);
 
 	showProgressBar$ = createEffect(
 
 		() => this.actions$.pipe(
 
-			ofType(databaseActions.loadReport),
-			// tap(() => this.progress.ref().start()),
+			ofType(databaseActions.loadReport)
 
 		),
 		{ dispatch: false }
@@ -93,6 +91,20 @@ export class DatabaseReportEffects {
 						forkJoin(remoteData(this.localRepository, DbStore.bookmarks_remote)),
 						forkJoin(trash(this.localRepository, DbStore.bookmarks_trash)),
 						forkJoin(row(this.localRepository, DbStore.bookmarks_clicks, 'Clicks'))
+
+					])
+
+				}),
+				forkJoin({
+
+					name: of(AppEntities.exam.labelPlural),
+					glyph: of('school' as GlyphName),
+					reports: forkJoin([
+
+						forkJoin(entity(this.localRepository, DbStore.exams)),
+						forkJoin(syncData(this.localRepository, DbStore.exams_sync)),
+						forkJoin(remoteData(this.localRepository, DbStore.exams_remote)),
+						forkJoin(trash(this.localRepository, DbStore.exams_trash))
 
 					])
 
@@ -149,6 +161,20 @@ export class DatabaseReportEffects {
 						forkJoin(syncData(this.localRepository, DbStore.quotes_sync)),
 						forkJoin(remoteData(this.localRepository, DbStore.quotes_remote)),
 						forkJoin(trash(this.localRepository, DbStore.quotes_trash))
+
+					])
+
+				}),
+				forkJoin({
+
+					name: of(AppEntities.session.labelPlural),
+					glyph: of('school' as GlyphName),
+					reports: forkJoin([
+
+						forkJoin(entity(this.localRepository, DbStore.sessions)),
+						forkJoin(syncData(this.localRepository, DbStore.sessions_sync)),
+						forkJoin(remoteData(this.localRepository, DbStore.sessions_remote)),
+						forkJoin(trash(this.localRepository, DbStore.sessions_trash))
 
 					])
 

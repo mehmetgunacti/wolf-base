@@ -16,7 +16,7 @@ export interface Project_UIState {
 
 // INITIALIZATION
 
-export const initialProjectUIState: Project_UIState = {
+export const project_initialUIState: Project_UIState = {
 
 	selectedId: null,
 	queryParams: {
@@ -27,8 +27,8 @@ export const initialProjectUIState: Project_UIState = {
 
 };
 
-export const initialProjectState: Project_ModuleState = {
+export const project_initialState: Project_ModuleState = {
 
-	ui: initialProjectUIState
+	ui: project_initialUIState
 
 };

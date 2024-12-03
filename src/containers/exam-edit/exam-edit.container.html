@@ -1,0 +1,27 @@
+<!-- DIALOG HEADER -->
+<header class="flex items-center">
+	<div class="font-bold text-2xl text-content">@if(test()) { Edit } @else { Add } Questions</div>
+	<div class="ml-auto">
+
+		<button
+			class="btn btn-glyph"
+			(click)="onClose()">
+			<svg wGlyph="close"></svg>
+		</button>
+
+	</div>
+</header>
+
+<!-- DIALOG CONTENT WRAPPER - SCROLLBAR -->
+<section class="flex-1 overflow-y-auto scrollbar scrollbar-dark scrollbar-gutter-stable">
+
+	<!-- DIALOG CONTENT -->
+	<div class="flex flex-col p-3 h-full">
+
+Questions here
+
+	</div>
+
+</section>
+
+<footer id="dialog-footer-outlet" class="mt-2 md:mt-4"></footer>

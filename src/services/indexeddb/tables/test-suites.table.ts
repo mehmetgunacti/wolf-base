@@ -3,11 +3,11 @@ import { DbStore } from '@constants/database.constant';
 import { AppEntities } from '@constants/entity.constant';
 import { IndexedDb } from '@libServices/indexeddb.service';
 import { TestSuite } from '@models/test-suite.model';
-import { TestSuiteLocalRepository } from '@repositories/local/test-suite.repository';
+import { TestSuitesLocalRepository } from '@repositories/local/test-suite.repository';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class TestSuitesLocalRepositoryImpl extends EntityLocalRepositoryImpl<TestSuite> implements TestSuiteLocalRepository {
+export class TestSuitesLocalRepositoryImpl extends EntityLocalRepositoryImpl<TestSuite> implements TestSuitesLocalRepository {
 
 	constructor(db: IndexedDb) {
 		super(

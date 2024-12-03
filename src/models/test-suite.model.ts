@@ -1,5 +1,6 @@
+import { UUID } from '@constants/common.constant';
 import { Entity } from './entity.model';
-import { IdBase, ISODateString, NameBase } from './id-base.model';
+import { IdBase, ISODateString } from './id-base.model';
 
 export interface Answer extends IdBase {
 
@@ -11,6 +12,7 @@ export interface Answer extends IdBase {
 
 export interface Session extends Entity {
 
+	testId: UUID;
 	answers: Answer[];
 	start: ISODateString;
 	end: ISODateString | null;
@@ -24,9 +26,10 @@ export interface Question extends IdBase {
 
 }
 
-export interface Test extends NameBase {
+export interface Exam extends Entity {
 
 	questions: Question[];
+	// sessions: Session[];
 	description: string | null;
 
 }
@@ -34,6 +37,6 @@ export interface Test extends NameBase {
 export interface TestSuite extends Entity {
 
 	description: string | null;
-	tests: Test[];
+	tests: Exam[];
 
 }

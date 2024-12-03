@@ -29,7 +29,7 @@ export const initialLogsEntriesState: Logs_EntriesState = {
 
 };
 
-export const initialLogsUIState: Logs_UIState = {
+export const log_initialUIState: Logs_UIState = {
 
 	categories: [ LogCategory.notification ],
 	selectedId: null,
@@ -37,9 +37,9 @@ export const initialLogsUIState: Logs_UIState = {
 
 };
 
-export const initialLogsState: Logs_ModuleState = {
+export const log_initialState: Logs_ModuleState = {
 
 	entries: initialLogsEntriesState,
-	ui: initialLogsUIState
+	ui: log_initialUIState
 
 };

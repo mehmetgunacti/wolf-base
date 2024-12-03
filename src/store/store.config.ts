@@ -52,6 +52,7 @@ import { cloudReducer } from '@reducers/cloud/cloud.reducer';
 import { coreReducer } from '@reducers/core/core.reducer';
 import { databaseReducer } from '@reducers/database/database.reducer';
 import { entitiesReducer } from '@reducers/entity/entities.reducer';
+import { examReducer } from '@reducers/exam/exam.reducer';
 import { logsReducer } from '@reducers/log/logs.reducer';
 import { noteReducer } from '@reducers/note/note.reducer';
 import { projectReducer } from '@reducers/project/project.reducer';
@@ -173,11 +174,13 @@ export const reducerList: ActionReducerMap<AppState> = {
 	core: combineReducers(coreReducer),
 	cloud: cloudReducer,
 	database: databaseReducer,
+	exam: combineReducers(examReducer),
 	logs: combineReducers(logsReducer),
 	note: combineReducers(noteReducer),
 	project: combineReducers(projectReducer),
 	quizEntry: combineReducers(quizEntryReducer),
 	quote: combineReducers(quoteReducer),
+	session: combineReducers(examReducer),
 	task: combineReducers(taskReducer),
 	testSuite: combineReducers(testSuiteReducer),
 	word: combineReducers(wordReducer)

@@ -1,11 +1,11 @@
 import { noteActions } from '@actions/note.actions';
 import { Action, createReducer, on } from '@ngrx/store';
-import { initialNoteUIState, Note_UIState } from '@states/note.state';
+import { note_initialUIState, Note_UIState } from '@states/note.state';
 import { produce } from 'immer';
 
 const reducer = createReducer(
 
-	initialNoteUIState,
+	note_initialUIState,
 	on(noteActions.setQueryParams, (state, { search, tags }): Note_UIState => ({ ...state, queryParams: { search, tags } })),
 	on(noteActions.setSelectedId, (state, { id }): Note_UIState => {
 

@@ -4,11 +4,11 @@ import { AppEntities } from '@constants/entity.constant';
 import { ProjectStatus } from '@constants/project.constant';
 import { IndexedDb } from '@libServices/indexeddb.service';
 import { Project } from '@models/project.model';
-import { ProjectLocalRepository } from '@repositories/local/project.repository';
+import { ProjectsLocalRepository } from '@repositories/local/project.repository';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class ProjectsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Project> implements ProjectLocalRepository {
+export class ProjectsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Project> implements ProjectsLocalRepository {
 
 	constructor(db: IndexedDb) {
 		super(

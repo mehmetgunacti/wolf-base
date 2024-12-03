@@ -1,9 +1,9 @@
 import { cloudActions } from '@actions/cloud.actions';
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
-import { CloudModuleState, initialCloudState } from '@states/cloud.state';
+import { Cloud_ModuleState, cloud_initialState } from '@states/cloud.state';
 import { produce } from 'immer';
 
-const hideConflictDialog = (state: CloudModuleState): CloudModuleState => {
+const hideConflictDialog = (state: Cloud_ModuleState): Cloud_ModuleState => {
 
 	return produce(
 		state,
@@ -22,9 +22,9 @@ const hideConflictDialog = (state: CloudModuleState): CloudModuleState => {
 
 };
 
-export const cloudReducer: ActionReducer<CloudModuleState, Action> = createReducer(
+export const cloudReducer: ActionReducer<Cloud_ModuleState, Action> = createReducer(
 
-	initialCloudState,
+	cloud_initialState,
 	// on(viewLocalUpdatedRemoteUpdated, hideConflictDialog),
 	// on(viewLocalUpdatedRemoteUpdatedSuccess, (state, { syncData, bookmark, remoteMetadata }): CloudModuleState => {
 
@@ -81,7 +81,7 @@ export const cloudReducer: ActionReducer<CloudModuleState, Action> = createReduc
 	// on(loadEntitySuccess, (state, { entity }): CloudModuleState => ({ ...state, selectedEntity: entity })),
 	// on(loadTrashEntitySuccess, (state, { entity }): CloudModuleState => ({ ...state, selectedTrashEntity: entity })),
 	// on(downloadRemoteDataSuccess, (state, { remoteData }): CloudModuleState => ({ ...state, selectedRemoteData: remoteData })),
-	on(cloudActions.closeConflictDialog, (state): CloudModuleState => {
+	on(cloudActions.closeConflictDialog, (state): Cloud_ModuleState => {
 
 		return produce(
 			state,

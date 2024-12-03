@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UUID } from '@constants/common.constant';
-import { Question, Test, TestSuite } from '@models/test-suite.model';
+import { Question, Exam, TestSuite } from '@models/test-suite.model';
 import { fa, fc, fg, nnfc } from '@utils/form.util';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -61,7 +61,7 @@ interface TestSuiteFormSchema {
 //
 // }
 
-function fgTest(value?: Test): FormGroup<TestFormSchema> {
+function fgTest(value?: Exam): FormGroup<TestFormSchema> {
 
 	const {
 
@@ -82,7 +82,7 @@ function fgTest(value?: Test): FormGroup<TestFormSchema> {
 
 }
 
-function faTests(value?: Test[]): FormArray<FormGroup<TestFormSchema>> {
+function faTests(value?: Exam[]): FormArray<FormGroup<TestFormSchema>> {
 
 	let arr = [];
 	if (value)

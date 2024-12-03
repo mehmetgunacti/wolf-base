@@ -1,7 +1,7 @@
 import { QuizEntry } from '@models/quiz.model';
 import { EntityLocalRepository } from './entity.repository';
 
-export interface QuizEntryLocalRepository extends EntityLocalRepository<QuizEntry> {
+export interface QuizEntriesLocalRepository extends EntityLocalRepository<QuizEntry> {
 
 	putEntry(entry: QuizEntry): Promise<void>;
 

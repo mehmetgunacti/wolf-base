@@ -2,7 +2,7 @@ import { Entity } from '@models/entity.model';
 import { RemoteData, RemoteMetadata } from '@models/remote.model';
 import { SyncData } from '@models/sync.model';
 
-export interface CloudModuleState {
+export interface Cloud_ModuleState {
 
 	selectedEntity: Entity | null;
 	selectedSyncData: SyncData | null;
@@ -15,7 +15,7 @@ export interface CloudModuleState {
 
 }
 
-export const initialCloudState: CloudModuleState = {
+export const cloud_initialState: Cloud_ModuleState = {
 
 	selectedSyncData: null,
 	selectedRemoteMetadata: null,

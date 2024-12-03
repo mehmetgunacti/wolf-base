@@ -5,13 +5,15 @@ import { SyncService } from '@libServices/sync-service.interface';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { selBookmark_RemoteDeleted } from '@selectors/sync/sync-bookmark.selectors';
+import { selExam_RemoteDeleted } from '@selectors/sync/sync-exam.selectors';
 import { selNoteContent_RemoteDeleted } from '@selectors/sync/sync-note-content.selectors';
 import { selNote_RemoteDeleted } from '@selectors/sync/sync-note.selectors';
 import { selProject_RemoteDeleted } from '@selectors/sync/sync-project.selectors';
 import { selQuizEntry_RemoteDeleted } from '@selectors/sync/sync-quiz-entry.selectors';
 import { selQuote_RemoteDeleted } from '@selectors/sync/sync-quote.selectors';
+import { selSession_RemoteDeleted } from '@selectors/sync/sync-session.selectors';
 import { selTask_RemoteDeleted } from '@selectors/sync/sync-task.selectors';
-import { selTestSuite_RemoteDeleted } from '@selectors/sync/sync-test-suites.selectors';
+import { selTestSuite_RemoteDeleted } from '@selectors/sync/sync-test-suite.selectors';
 import { selWord_RemoteDeleted } from '@selectors/sync/sync-word.selectors';
 import { SYNC_SERVICE } from '@services/sync.service';
 import { of } from 'rxjs';
@@ -22,10 +24,12 @@ function useSelector(entityType: AppEntityType) {
 	switch (entityType) {
 
 		case AppEntityType.bookmark: return selBookmark_RemoteDeleted;
+		case AppEntityType.exam: return selExam_RemoteDeleted;
 		case AppEntityType.note: return selNote_RemoteDeleted;
 		case AppEntityType.noteContent: return selNoteContent_RemoteDeleted;
 		case AppEntityType.project: return selProject_RemoteDeleted;
 		case AppEntityType.quizEntry: return selQuizEntry_RemoteDeleted;
+		case AppEntityType.session: return selSession_RemoteDeleted;
 		case AppEntityType.quote: return selQuote_RemoteDeleted;
 		case AppEntityType.task: return selTask_RemoteDeleted;
 		case AppEntityType.testSuite: return selTestSuite_RemoteDeleted;

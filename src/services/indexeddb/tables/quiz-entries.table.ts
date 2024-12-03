@@ -4,10 +4,10 @@ import { AppEntities } from '@constants/entity.constant';
 import { Progress } from '@constants/quiz.constant';
 import { IndexedDb } from '@libServices/indexeddb.service';
 import { QuizEntry } from '@models/quiz.model';
-import { QuizEntryLocalRepository } from '@repositories/local/quiz-entry.repository';
+import { QuizEntriesLocalRepository } from '@repositories/local/quiz-entry.repository';
 import { EntityLocalRepositoryImpl } from './entity.table';
 
-export class QuizEntriesLocalRepositoryImpl extends EntityLocalRepositoryImpl<QuizEntry> implements QuizEntryLocalRepository {
+export class QuizEntriesLocalRepositoryImpl extends EntityLocalRepositoryImpl<QuizEntry> implements QuizEntriesLocalRepository {
 
 	constructor(db: IndexedDb) {
 		super(

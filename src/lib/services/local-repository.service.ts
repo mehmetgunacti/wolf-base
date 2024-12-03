@@ -7,12 +7,12 @@ import { EntityLocalRepository } from '@repositories/local/entity.repository';
 import { LogsLocalRepository } from '@repositories/local/log.repository';
 import { NoteContentLocalRepository } from '@repositories/local/note-content.repository';
 import { NotesLocalRepository } from '@repositories/local/note.repository';
-import { TaskLocalRepository } from '@repositories/local/project-task.repository';
-import { ProjectLocalRepository } from '@repositories/local/project.repository';
-import { QuizEntryLocalRepository } from '@repositories/local/quiz-entry.repository';
-import { QuoteLocalRepository } from '@repositories/local/quote.repository';
-import { TestSuiteLocalRepository } from '@repositories/local/test-suite.repository';
-import { WordLocalRepository } from '@repositories/local/word.repository';
+import { TasksLocalRepository } from '@repositories/local/project-task.repository';
+import { ProjectsLocalRepository } from '@repositories/local/project.repository';
+import { QuizEntriesLocalRepository } from '@repositories/local/quiz-entry.repository';
+import { QuotesLocalRepository } from '@repositories/local/quote.repository';
+import { TestSuitesLocalRepository } from '@repositories/local/test-suite.repository';
+import { WordsLocalRepository } from '@repositories/local/word.repository';
 
 export interface LocalRepositoryService {
 
@@ -20,12 +20,12 @@ export interface LocalRepositoryService {
 	bookmarks: BookmarksLocalRepository;
 	notes: NotesLocalRepository;
 	noteContent: NoteContentLocalRepository;
-	projects: ProjectLocalRepository;
-	quizEntries: QuizEntryLocalRepository;
-	quotes: QuoteLocalRepository;
-	tasks: TaskLocalRepository;
-	testSuites: TestSuiteLocalRepository;
-	words: WordLocalRepository;
+	projects: ProjectsLocalRepository;
+	quizEntries: QuizEntriesLocalRepository;
+	quotes: QuotesLocalRepository;
+	tasks: TasksLocalRepository;
+	testSuites: TestSuitesLocalRepository;
+	words: WordsLocalRepository;
 
 	// non-entity tables
 	configuration: ConfigurationLocalRepository;

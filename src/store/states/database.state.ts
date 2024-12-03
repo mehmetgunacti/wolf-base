@@ -1,12 +1,12 @@
 import { ModuleReport } from '@models/database.model';
 
-export interface DatabaseModuleState {
+export interface Database_ModuleState {
 
 	reports: ModuleReport[];
 
 }
 
-export const initialDatabaseState: DatabaseModuleState = {
+export const database_initialState: Database_ModuleState = {
 
 	reports: []
 

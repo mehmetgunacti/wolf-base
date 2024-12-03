@@ -1,12 +1,12 @@
 import { FirestoreConfig } from '@models/configuration.model';
 import { createSelector } from '@ngrx/store';
-import { CoreConfigurationState, CoreModuleState } from '@states/core.state';
+import { CoreConfigurationState, Core_ModuleState } from '@states/core.state';
 import { coreModuleState } from './core.selectors';
 
 const confState = createSelector(
 
 	coreModuleState,
-	(state: CoreModuleState): CoreConfigurationState => state.conf
+	(state: Core_ModuleState): CoreConfigurationState => state.conf
 
 );
 
