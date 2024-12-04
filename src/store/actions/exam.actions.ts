@@ -7,9 +7,9 @@ export const examActions = createActionGroup({
 	events: {
 
 		// UI
-		openFormDialog				: emptyProps(),
-		openEditDialog				: props<{ id: UUID }>(),
-		closeDialog					: emptyProps(),
+		openFormDialog	: emptyProps(),
+		openEditDialog	: props<{ id: UUID }>(),
+		closeDialog		: emptyProps(),
 
 		editSuccess		: emptyProps()
 

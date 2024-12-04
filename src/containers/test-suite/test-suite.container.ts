@@ -12,7 +12,7 @@ import { ModalComponent } from '@libComponents/modal/modal.component';
 import { PortalComponent } from '@libComponents/portal.component';
 import { Store } from '@ngrx/store';
 import { selExam_EntityList } from '@selectors/entity/entity-exam.selectors';
-import { selExam_formVisible } from '@selectors/exam/exam-ui.selectors';
+import { selExam_formVisible, selExam_selectedExams } from '@selectors/exam/exam-ui.selectors';
 import { selTestSuite_selected } from '@selectors/test-suite/test-suite-ui.selectors';
 
 @Component({
@@ -27,7 +27,7 @@ export class TestSuiteContainer extends BaseComponent {
 	private store: Store = inject(Store);
 
 	protected testSuite = this.store.selectSignal(selTestSuite_selected);
-	protected exams = this.store.selectSignal(selExam_EntityList);
+	protected exams = this.store.selectSignal(selExam_selectedExams);
 	protected formVisible = this.store.selectSignal(selExam_formVisible);
 
 	protected onOpenFormDialog(): void {

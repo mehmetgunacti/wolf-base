@@ -70,7 +70,8 @@
 				@for (lang of definition.controls.languages.controls; let langIdx = $index; track langIdx) {
 
 					<!-- DEFINITION-LANGUAGE -->
-					<div class="gap-2 grid grid-cols-[1fr_2.25rem] sm:grid-cols-[8rem_auto_2.25rem] my-2 sm:my-0" [formGroup]="lang">
+					<div	class="gap-2 grid grid-cols-[1fr_2.25rem] sm:grid-cols-[8rem_auto_2.25rem] my-2 sm:my-0"
+							[formGroup]="lang">
 
 						<!-- LANGUAGE -->
 						<w-select formControlName="language" label="Language" [nodes]="DEFINITION_LANGUAGES" class="sm:max-w-32"/>

@@ -3,11 +3,12 @@ import { slideDownTrigger } from '@animations/slide-in-out.animation';
 import { UUID } from '@constants/common.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
+import { ChoicesViewerComponent } from '@libComponents/choices/choices-viewer.component';
 import { Exam } from '@models/test-suite.model';
 
 @Component({
 	standalone: true,
-	imports: [ GlyphDirective ],
+	imports: [ GlyphDirective, ChoicesViewerComponent ],
 	selector: 'app-exams',
 	templateUrl: './exams.component.html',
 	animations: [ slideDownTrigger ],

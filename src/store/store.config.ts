@@ -22,6 +22,8 @@ import { EntitySyncRemoteNewEffects } from '@effects/entity/entity-sync-remote-n
 import { EntitySyncRemoteRefreshEffects } from '@effects/entity/entity-sync-remote-refresh.effects';
 import { EntitySyncRemoteUpdatedEffects } from '@effects/entity/entity-sync-remote-updated.effects';
 import { EntityUpdateEffects } from '@effects/entity/entity-update.effects';
+import { ExamCreateEffects } from '@effects/exam/exam-create.effects';
+import { ExamUpdateEffects } from '@effects/exam/exam-update.effects';
 import { LogsEffects } from '@effects/log/logs.effects';
 import { NoteContentCreateEffects } from '@effects/note-content/note-content-create.effects';
 import { NoteContentLoadEffects } from '@effects/note-content/note-content-load.effects';
@@ -159,6 +161,10 @@ export const effectList = [
 	// Test Suites
 	TestSuiteCreateEffects,
 	TestSuiteUpdateEffects,
+
+	// Exams
+	ExamCreateEffects,
+	ExamUpdateEffects,
 
 	// Settings
 	SettingsEffects,

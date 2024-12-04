@@ -35,7 +35,11 @@
 
 					}
 
-					Questions here
+					@for (question of exam.questions; track $index) {
+
+						<w-choices-viewer [answers]="question.answers" />
+
+					}
 
 					<div class="flex justify-between gap-2">
 

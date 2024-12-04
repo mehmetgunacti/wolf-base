@@ -13,11 +13,11 @@ export class SessionsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Sessi
 	constructor(db: IndexedDb) {
 		super(
 			db,
-			DbStore.test_suites,
-			DbStore.test_suites_sync,
-			DbStore.test_suites_remote,
-			DbStore.test_suites_trash,
-			AppEntities.testSuite.label
+			DbStore.sessions,
+			DbStore.sessions_sync,
+			DbStore.sessions_remote,
+			DbStore.sessions_trash,
+			AppEntities.session.label
 		);
 	}
 

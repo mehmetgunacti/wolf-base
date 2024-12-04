@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { PortalComponent } from '@libComponents/portal.component';
@@ -6,7 +7,7 @@ import { TestSuitesContainer } from "../containers/test-suites/test-suites.conta
 
 @Component({
 	standalone: true,
-	imports: [PortalComponent, GlyphDirective, TestSuitesContainer],
+	imports: [ PortalComponent, GlyphDirective, TestSuitesContainer, RouterLink ],
 	selector: 'test-suites-page',
 	template: `
 		<w-portal>

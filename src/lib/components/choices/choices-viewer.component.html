@@ -1,0 +1,75 @@
+<div class="flex-1">
+	<div class="flex flex-wrap items-center gap-1">
+
+		@for(answer of answers(); track $index) {
+
+			<div class="
+					relative
+					flex
+					items-center
+
+					group
+
+					rounded
+
+					after:content-[attr(data-label)]
+					after:absolute
+					after:block
+					after:text-sm
+					after:text-secondary
+					after:right-0
+					after:-bottom-1
+					after:transition-opacity
+					after:duration-700
+					after:pointer-events-none
+				"
+				[attr.data-label]="ALPHA[$index]">
+				<input	type="checkbox"
+						class="absolute opacity-0 peer size-0"
+						[id]="componentId + '_' + $index"
+						[checked]="answer"
+						disabled="disabled">
+				<label	class="
+							relative
+							inline-block
+
+							size-6
+							rounded
+							bg-form-element-border
+							border-2
+							border-form-element-border
+
+							after:absolute
+							after:left-0
+							after:top-0
+							after:pointer-events-none
+							after:hidden
+
+							after:p-[13px_0px_4px_8px]
+							after:m-[-3px_0px_0px_3px]
+
+							after:rotate-[38deg]
+
+							after:h-[15px]
+							after:w-[10px]
+
+							after:border-r-[6px]
+							after:[border-right-style:solid]
+							after:border-b-[6px]
+							after:[border-bottom-style:solid]
+
+							after:rounded-br-[2px]
+							after:rounded-tr-[3px]
+							after:rounded-bl-[3px]
+
+							after:border-accent-text
+
+							after:peer-checked:block
+						"
+						[for]="componentId + '_' + $index"></label>
+			</div>
+
+		}
+
+	</div>
+</div>

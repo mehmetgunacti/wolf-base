@@ -13,11 +13,11 @@ export class ExamsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Exam> im
 	constructor(db: IndexedDb) {
 		super(
 			db,
-			DbStore.test_suites,
-			DbStore.test_suites_sync,
-			DbStore.test_suites_remote,
-			DbStore.test_suites_trash,
-			AppEntities.testSuite.label
+			DbStore.exams,
+			DbStore.exams_sync,
+			DbStore.exams_remote,
+			DbStore.exams_trash,
+			AppEntities.exam.label
 		);
 	}
 
