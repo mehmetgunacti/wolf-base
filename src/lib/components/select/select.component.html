@@ -1,12 +1,12 @@
 <select class="border-0 bg-form-element form-select px-3 rounded-lg w-full text-content cursor-pointer outline-none"
 	#selectElement
-	[value]="value()"
 	(change)="onSelect($event)"
 	(blur)="onBlur()">
 
 	@for (node of nodes(); track $index) {
 
-		<option [value]="node.id">{{ node.name }}</option>
+		@let selected = value() === node.id;
+		<option [value]="node.id" [selected]="selected">{{ node.name }}</option>
 
 	}
 
