@@ -3,7 +3,7 @@ import { Exam } from '@models/test-suite.model';
 import * as sel from '../entity/entity-exam.selectors';
 import { createSyncSelectors } from '../sync/selectors-factory';
 
-const entityType = AppEntityType.session;
+const entityType = AppEntityType.exam;
 
 export const {
 

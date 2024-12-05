@@ -37,7 +37,13 @@
 
 					@for (question of exam.questions; track $index) {
 
-						<w-choices-viewer [answers]="question.answers" />
+						<div class="flex">
+							<div class="flex py-1 text-secondary text-sm">#{{$index + 1}}</div>
+							<div class="flex flex-col">
+								<w-choices-viewer [answers]="question.answers" />
+								<div class="px-2 text-secondary text-sm">{{question.description}}</div>
+							</div>
+						</div>
 
 					}
 
@@ -45,8 +51,7 @@
 
 						<button
 							class="px-2 h-button-height-xs text-sm btn btn-error"
-							[tabindex]="isExpanded ? '0' : '-1'"
-							>
+							[tabindex]="isExpanded ? '0' : '-1'">
 							<svg wGlyph="delete"></svg>
 							Delete
 						</button>

@@ -7,7 +7,7 @@ import { BaseComponent } from '@libComponents/base.component';
 	selector: 'w-choices-viewer',
 	templateUrl: './choices-viewer.component.html',
 	host: {
-		'class': 'inline-flex px-2 items-center relative min-h-widget-height border border-transparent hover:border-outline rounded-lg focus-visible:ring-4 focus-visible:ring-outline outline-none group'
+		'class': 'inline-flex px-2 items-center relative border border-transparent rounded-lg group'
 	}
 })
 export class ChoicesViewerComponent extends BaseComponent  {

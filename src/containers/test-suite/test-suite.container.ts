@@ -11,7 +11,6 @@ import { BaseComponent } from '@libComponents/base.component';
 import { ModalComponent } from '@libComponents/modal/modal.component';
 import { PortalComponent } from '@libComponents/portal.component';
 import { Store } from '@ngrx/store';
-import { selExam_EntityList } from '@selectors/entity/entity-exam.selectors';
 import { selExam_formVisible, selExam_selectedExams } from '@selectors/exam/exam-ui.selectors';
 import { selTestSuite_selected } from '@selectors/test-suite/test-suite-ui.selectors';
 

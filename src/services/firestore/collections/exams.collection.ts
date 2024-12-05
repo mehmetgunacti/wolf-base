@@ -1,6 +1,6 @@
 import { AppEntityType } from '@constants/entity.constant';
 import { FirestoreConfig } from '@models/configuration.model';
-import { Exam } from '@models/test-suite.model';
+import { Exam, Question } from '@models/test-suite.model';
 import { ExamsRemoteRepository } from '@repositories/remote/exam-remote.repository';
 import { FirestoreAPIClient } from '@utils/firestore-rest-client/firestore-api.tool';
 import { FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
@@ -21,9 +21,70 @@ export class ExamsFirestoreCollectionImpl extends FirestoreRemoteStorageCollecti
 
 }
 
+export class QuestionFirestoreConverter implements FirestoreConverter<Question> {
+
+	toFirestore(item: Question): Record<keyof Question, FIRESTORE_VALUE> {
+
+		const fields = {} as Record<keyof Question, FIRESTORE_VALUE>;
+
+		fields[ 'id' ] = { stringValue: item.id };
+
+		if (item.description)
+			fields[ 'description' ] = { stringValue: item.description };
+
+		fields[ 'answers' ] = {
+			arrayValue: { values: item.answers.map(a => ({ booleanValue: a })) }
+		};
+
+		return fields;
+
+	}
+
+	fromFirestore(entry: Question): Question {
+
+		// validate incoming
+		let { id, description, answers } = entry;
+
+		if (!id)
+			throw new Error(`Firestore Question: invalid 'id' value`);
+
+		if (!description)
+			throw new Error(`Firestore Question: invalid 'description' value`);
+
+		if (!answers)
+			throw new Error(`Firestore Question: invalid 'answers' value`);
+
+		const validated: Question = {
+
+			id,
+			description,
+			answers
+
+		};
+		return validated;
+
+	}
+
+	toUpdateMask(_: Question): string {
+
+		// exclude some fields like id, ... from update list
+		// (empty string would delete string on server)
+
+		const fields = new Set<string>();
+		fields.add('id');
+		fields.add('description');
+		fields.add('answers');
+
+		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
+
+	}
+
+}
+
 class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 
 	namebaseConverter = new NameBaseFirestoreConverter();
+	questionConverter = new QuestionFirestoreConverter();
 
 	toFirestore(entry: Exam): Record<keyof Exam, FIRESTORE_VALUE> {
 
@@ -38,7 +99,7 @@ class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 			fields[ 'description' ] = { stringValue: entry.description };
 
 		fields[ 'questions' ] = {
-			arrayValue: { values: [] }
+			arrayValue: { values: entry.questions.map(q => ({ mapValue: { fields: this.questionConverter.toFirestore(q) } })) }
 		};
 
 		return fields;

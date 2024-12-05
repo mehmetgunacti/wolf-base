@@ -87,6 +87,12 @@ function getAction(task: CloudTask): Action | null {
 	if (AppEntityType.task === task.entity)
 		return filterAction(AppEntityType.task, task.type);
 
+	if (AppEntityType.session === task.entity)
+		return filterAction(AppEntityType.session, task.type);
+
+	if (AppEntityType.exam === task.entity)
+		return filterAction(AppEntityType.exam, task.type);
+
 	if (AppEntityType.testSuite === task.entity)
 		return filterAction(AppEntityType.testSuite, task.type);
 
