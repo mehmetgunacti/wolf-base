@@ -16,7 +16,6 @@
 					outline-none
 
 					after:content-[attr(data-label)]
-					after:opacity-0
 					after:absolute
 					after:block
 					after:text-sm
@@ -26,11 +25,6 @@
 					after:transition-opacity
 					after:duration-700
 					after:pointer-events-none
-
-					group-hover:after:opacity-100
-					group-focus-visible:after:opacity-100
-					group-focus-within:after:opacity-100
-
 				"
 				tabindex="0"
 				(keydown)="onKeyDown($event, $index)"
