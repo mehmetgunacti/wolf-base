@@ -27,12 +27,12 @@ export const slideChoicesTrigger = trigger('slideChoices', [
 
 ]);
 
-const slideDown = trigger('slideDownEnterLeave', [
+export const slideDownEnterLeaveTrigger = trigger('slideDownEnterLeave', [
 
 	transition(':enter', [
 
 		// css styles at start of transition
-		style({ height: 0, opacity: 0, overflow: 'hidden' }),
+		style({ height: 0, opacity: 1, overflow: 'hidden' }),
 
 		// animation and styles at end of transition
 		animate('300ms', style({ height: '*', opacity: 1})), // , overflow: 'visible' })),
@@ -46,7 +46,7 @@ const slideDown = trigger('slideDownEnterLeave', [
 		style({ height: '*', opacity: 1, overflow: 'hidden' }),
 
 		// animation and styles at end of transition
-		animate('300ms', style({ height: 0, opacity: 0})), // , overflow: 'hidden' })),
+		animate('300ms', style({ height: 0, opacity: 1})), // , overflow: 'hidden' })),
 
 
 		//style({ overflow: 'visible' })

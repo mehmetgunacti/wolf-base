@@ -10,7 +10,7 @@
 		</button>
 	</legend>
 
-	<div class="flex flex-col">
+	<div class="flex flex-col gap-1 md:gap-2">
 
 		@for (exam of exams(); let testIdx = $index; track testIdx) {
 
@@ -24,52 +24,56 @@
 				<div>{{ exam.name }}</div>
 
 			</a>
-			<div [@slideDown]="isExpanded" class="mb-2 overflow-hidden">
+			@if (isExpanded) {
 
-				<div class="flex flex-col gap-2 shadow-none mr-2 ml-2 comp-dark p-2 rounded-t-none @container comp">
+				<div @slideDownEnterLeave class="-mt-1 md:-mt-2 overflow-hidden">
 
-					@if (exam.description) {
+					<div class="flex flex-col gap-2 shadow-none mr-2 ml-2 comp-dark p-2 rounded-t-none @container comp">
 
-						<!-- DESCRIPTION -->
-						<div class="flex mb-2 overflow-x-auto scrollbar scrollbar-blue">{{ exam.description }}</div>
+						@if (exam.description) {
 
-					}
+							<!-- DESCRIPTION -->
+							<div class="flex mb-2 overflow-x-auto scrollbar scrollbar-blue">{{ exam.description }}</div>
 
-					@for (question of exam.questions; track $index) {
+						}
 
-						<div class="flex">
-							<div class="flex py-1 text-secondary text-sm">#{{$index + 1}}</div>
-							<div class="flex flex-col">
-								<w-choices-viewer [answers]="question.answers" />
-								<div class="px-2 text-secondary text-sm">{{question.description}}</div>
+						@for (question of exam.questions; track $index) {
+
+							<div class="flex">
+								<div class="flex py-1 text-secondary text-sm">#{{$index + 1}}</div>
+								<div class="flex flex-col">
+									<w-choices-viewer [answers]="question.answers" />
+									<div class="px-2 text-secondary text-sm">{{question.description}}</div>
+								</div>
 							</div>
+
+						}
+
+						<div class="flex justify-between gap-2">
+
+							<button
+								class="px-2 h-button-height-xs text-sm btn btn-error"
+								[tabindex]="isExpanded ? '0' : '-1'">
+								<svg wGlyph="delete"></svg>
+								Delete
+							</button>
+
+							<button
+								class="px-2 h-button-height-xs text-sm btn"
+								[tabindex]="isExpanded ? '0' : '-1'"
+								(click)="onOpenEditDialog(exam.id)"
+								>
+								<svg wGlyph="edit"></svg>
+								Edit
+							</button>
+
 						</div>
-
-					}
-
-					<div class="flex justify-between gap-2">
-
-						<button
-							class="px-2 h-button-height-xs text-sm btn btn-error"
-							[tabindex]="isExpanded ? '0' : '-1'">
-							<svg wGlyph="delete"></svg>
-							Delete
-						</button>
-
-						<button
-							class="px-2 h-button-height-xs text-sm btn"
-							[tabindex]="isExpanded ? '0' : '-1'"
-							(click)="onOpenEditDialog(exam.id)"
-							>
-							<svg wGlyph="edit"></svg>
-							Edit
-						</button>
 
 					</div>
 
 				</div>
 
-			</div>
+			}
 
 		} @empty {
 

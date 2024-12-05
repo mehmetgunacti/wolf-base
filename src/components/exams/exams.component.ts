@@ -1,5 +1,5 @@
 import { Component, input, output, signal } from '@angular/core';
-import { slideDownTrigger } from '@animations/slide-in-out.animation';
+import { slideDownEnterLeaveTrigger, slideDownTrigger } from '@animations/slide-in-out.animation';
 import { UUID } from '@constants/common.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
@@ -11,7 +11,7 @@ import { Exam } from '@models/test-suite.model';
 	imports: [ GlyphDirective, ChoicesViewerComponent ],
 	selector: 'app-exams',
 	templateUrl: './exams.component.html',
-	animations: [ slideDownTrigger ],
+	animations: [ slideDownTrigger, slideDownEnterLeaveTrigger ],
 	host: {
 		'class': 'flex flex-col'
 	}
