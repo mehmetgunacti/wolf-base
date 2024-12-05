@@ -2,6 +2,7 @@ import { Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
+import { produce } from 'immer';
 
 @Component({
 	standalone: true,
@@ -73,8 +74,14 @@ export class ChoicesComponent extends BaseComponent implements ControlValueAcces
 
 		this.value.update(val => {
 
-			val[ idx ] = !val[ idx ];
-			return val;
+			return produce(
+				val,
+				draft => {
+
+					draft[ idx ] = !draft[ idx ];
+
+				}
+			);
 
 		});
 		this.onChange(this.value());
