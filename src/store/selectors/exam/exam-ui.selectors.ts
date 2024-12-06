@@ -18,6 +18,13 @@ export const selExam_formVisible = createSelector(
 
 );
 
+export const selExam_detailsVisible = createSelector(
+
+	selExam_UIState,
+	state => state.detailsVisible
+
+);
+
 export const selExam_selectedExams = createSelector(
 
 	selExam_EntityList,

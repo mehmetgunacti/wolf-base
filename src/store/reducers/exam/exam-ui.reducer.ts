@@ -7,8 +7,12 @@ const reducer = createReducer(
 	exam_initialUIState,
 	on(examActions.openFormDialog, (state): Exam_UIState => ({ ...state, editId: null, formVisible: true })),
 	on(examActions.openEditDialog, (state, { id }): Exam_UIState => ({ ...state, editId: id, formVisible: true })),
-	on(examActions.closeDialog, (state): Exam_UIState => ({ ...state, editId: null, formVisible: false })),
 	on(examActions.editSuccess, (state): Exam_UIState => ({ ...state, editId: null, formVisible: false })),
+	on(examActions.closeEditDialog, (state): Exam_UIState => ({ ...state, editId: null, formVisible: false })),
+
+	on(examActions.openDetailsDialog, (state, { id }): Exam_UIState => ({ ...state, detailsId: id, detailsVisible: true })),
+	on(examActions.closeDetailsDialog, (state): Exam_UIState => ({ ...state, detailsId: null, detailsVisible: false })),
+	on(examActions.closeDetailsDialog, (state): Exam_UIState => ({ ...state, detailsId: null, detailsVisible: false })),
 
 );
 

@@ -36,8 +36,16 @@
 
 	@if (formVisible()) {
 
-		<w-modal (close)="onCloseDialog()">
+		<w-modal (close)="onCloseEditDialog()">
 			<app-exam-edit-container/>
+		</w-modal>
+
+	}
+
+	@if (detailsVisible()) {
+
+		<w-modal (close)="onCloseDetailsDialog()">
+			<app-exam-detail-container/>
 		</w-modal>
 
 	}
@@ -48,7 +56,8 @@
 	<!-- Exams -->
 	<app-exams	[exams]="exams()"
 				(openFormDialog)="onOpenFormDialog()"
-				(openEditDialog)="onOpenEditDialog($event)" />
+				(openEditDialog)="onOpenEditDialog($event)"
+				(openDetailsDialog)="onOpenDetailsDialog($event)"/>
 
 } @else {
 

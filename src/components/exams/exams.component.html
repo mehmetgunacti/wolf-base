@@ -52,19 +52,19 @@
 						<div class="flex justify-between gap-2">
 
 							<button
-								class="px-2 h-button-height-xs text-sm btn btn-error"
-								[tabindex]="isExpanded ? '0' : '-1'">
-								<svg wGlyph="delete"></svg>
-								Delete
+								class="px-2 h-button-height-xs text-sm btn"
+								[tabindex]="isExpanded ? '0' : '-1'"
+								(click)="onOpenDetailsDialog(exam.id)">
+								<svg wGlyph="menu_open"></svg>
+								Open
 							</button>
 
 							<button
-								class="px-2 h-button-height-xs text-sm btn"
+								class="px-2 h-button-height-xs text-sm btn btn-success"
 								[tabindex]="isExpanded ? '0' : '-1'"
-								(click)="onOpenEditDialog(exam.id)"
-								>
-								<svg wGlyph="edit"></svg>
-								Edit
+								(click)="onOpenEditDialog(exam.id)">
+								<svg wGlyph="play"></svg>
+								Start Session
 							</button>
 
 						</div>

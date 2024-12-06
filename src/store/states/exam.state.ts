@@ -11,6 +11,9 @@ export interface Exam_UIState {
 	formVisible: boolean;
 	editId: UUID | null;
 
+	detailsVisible: boolean;
+	detailsId: UUID | null;
+
 }
 
 // INITIALIZATION
@@ -18,7 +21,9 @@ export interface Exam_UIState {
 export const exam_initialUIState: Exam_UIState = {
 
 	formVisible: false,
-	editId: null
+	editId: null,
+	detailsVisible: false,
+	detailsId: null
 
 };
 
