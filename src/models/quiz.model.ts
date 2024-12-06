@@ -63,7 +63,7 @@ export class Quiz {
 
 	}
 
-	isVerb(): boolean {
+	get isVerb(): boolean {
 
 		return this.definition.type === DefinitionType.verb;
 
