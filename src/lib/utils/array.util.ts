@@ -1,6 +1,12 @@
 import { UUID } from '@constants/common.constant';
 import { IdBase } from '@models/id-base.model';
 
+export function sortByName<T extends { name: string; }>(val: T[]): T[] {
+
+	return val.sort((a, b) => a.name.localeCompare(b.name));
+
+}
+
 export function idListToRecord<T extends IdBase>(list: T[]): Record<UUID, T> {
 
 	return list.reduce((record, item) => { record[ item.id ] = item; return record; }, {} as Record<UUID, T>);

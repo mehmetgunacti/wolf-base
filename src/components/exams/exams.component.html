@@ -21,7 +21,7 @@
 				tabindex="0">
 
 				<small class="flex items-center gap-1 text-secondary text-xs">{{exam.id}}</small>
-				<div>{{ exam.name }}</div>
+				<div>{{ exam.name | hideEnum }}</div>
 
 			</a>
 			@if (isExpanded) {
