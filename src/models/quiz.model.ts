@@ -2,6 +2,7 @@ import { signal } from '@angular/core';
 import { Progress, QuestionType } from '@constants/quiz.constant';
 import { Entity } from './entity.model';
 import { Definition, Word } from './word.model';
+import { DefinitionType } from '@constants/word.constant';
 
 /*
 * Fisher-Yates (or Knuth) algorithm
@@ -59,6 +60,12 @@ export class Quiz {
 
 		this.choices = [ ...shuffle(words) ]; // [...words].sort(() => Math.random() - 0.5); // shuffle
 		this.correctIndex = this.choices.findIndex(w => w.id === this.word.id);
+
+	}
+
+	isVerb(): boolean {
+
+		return this.definition.type === DefinitionType.verb;
 
 	}
 
