@@ -1,0 +1,26 @@
+@let entity = exam();
+
+<div class="bg-component-dark p-2 rounded-lg">
+	<small class="flex items-center gap-1 text-secondary text-xs">{{entity.testSuite.id}}</small>
+	<div>{{ entity.testSuite.name | hideEnum }}</div>
+</div>
+
+<div class="bg-component-dark ml-4 p-2 rounded-lg">
+	<small class="flex items-center gap-1 text-secondary text-xs">{{entity.id}}</small>
+	<div>{{ entity.name | hideEnum }}</div>
+</div>
+
+<!-- DESCRIPTION -->
+<div class="flex mb-2 overflow-x-auto scrollbar scrollbar-blue">{{ entity.description }}</div>
+
+@for (question of entity.questions; track $index) {
+
+	<div class="flex">
+		<div class="flex py-1 min-w-8 text-secondary text-sm">#{{$index + 1}}</div>
+		<div class="flex flex-col">
+			<w-choices-viewer [answers]="question.answers" />
+			<div class="px-2 text-secondary text-sm">{{question.description}}</div>
+		</div>
+	</div>
+
+}

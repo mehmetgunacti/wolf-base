@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { ExamsComponent } from '@components/exams/exams.component';
 import { TestSuiteComponent } from '@components/test-suite/test-suite.component';
 import { UUID } from '@constants/common.constant';
-import { ExamDetailContainer } from '@containers/exam-detail/exam-detail.container';
+import { ExamDetailsContainer } from '@containers/exam-detail/exam-detail.container';
 import { ExamEditContainer } from '@containers/exam-edit/exam-edit.container';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
@@ -17,7 +17,7 @@ import { selTestSuite_selected } from '@selectors/test-suite/test-suite-ui.selec
 
 @Component({
 	standalone: true,
-	imports: [ PortalComponent, GlyphDirective, CdkMenuModule, RouterLink, TestSuiteComponent, ModalComponent, ExamEditContainer, ExamsComponent, ExamDetailContainer ],
+	imports: [ PortalComponent, GlyphDirective, CdkMenuModule, RouterLink, TestSuiteComponent, ModalComponent, ExamEditContainer, ExamsComponent, ExamDetailsContainer ],
 	selector: 'app-test-suite-container',
 	templateUrl: './test-suite.container.html',
 	host: { 'class': 'flex flex-col gap-2' }

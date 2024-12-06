@@ -36,19 +36,6 @@
 							<div class="flex mb-2 overflow-x-auto scrollbar scrollbar-blue">{{ exam.description }}</div>
 
 						}
-
-						@for (question of exam.questions; track $index) {
-
-							<div class="flex">
-								<div class="flex py-1 text-secondary text-sm">#{{$index + 1}}</div>
-								<div class="flex flex-col">
-									<w-choices-viewer [answers]="question.answers" />
-									<div class="px-2 text-secondary text-sm">{{question.description}}</div>
-								</div>
-							</div>
-
-						}
-
 						<div class="flex justify-between gap-2">
 
 							<button

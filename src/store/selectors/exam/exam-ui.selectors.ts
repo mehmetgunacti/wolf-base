@@ -11,6 +11,14 @@ export const selExam_editEntity = createSelector(
 
 );
 
+export const selExam_detailsEntity = createSelector(
+
+	selExam_EntityMap,
+	selExam_UIState,
+	(entities, uiState) => uiState.detailsId ? entities[ uiState.detailsId ] : null
+
+);
+
 export const selExam_formVisible = createSelector(
 
 	selExam_UIState,

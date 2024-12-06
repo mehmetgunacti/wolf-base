@@ -3,14 +3,13 @@ import { slideDownEnterLeaveTrigger, slideDownTrigger } from '@animations/slide-
 import { UUID } from '@constants/common.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
-import { ChoicesViewerComponent } from '@libComponents/choices/choices-viewer.component';
 import { Exam } from '@models/test-suite.model';
 import { HideEnumPipe } from '@pipes/hide-enum.pipe';
 import { sortByName } from '@utils/array.util';
 
 @Component({
 	standalone: true,
-	imports: [ GlyphDirective, ChoicesViewerComponent, HideEnumPipe ],
+	imports: [ GlyphDirective, HideEnumPipe ],
 	selector: 'app-exams',
 	templateUrl: './exams.component.html',
 	animations: [ slideDownTrigger, slideDownEnterLeaveTrigger ],
