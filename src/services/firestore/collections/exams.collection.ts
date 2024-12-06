@@ -59,7 +59,7 @@ export class QuestionFirestoreConverter implements FirestoreConverter<Question> 
 		const validated: Question = {
 
 			id,
-			description,
+			description: description ?? null,
 			answers
 
 		};
@@ -134,7 +134,7 @@ class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 			id,
 			testSuite,
 			name,
-			description,
+			description: description ?? null,
 			questions
 
 		};
@@ -155,8 +155,7 @@ class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 		if (entry.name)
 			fields.add('name');
 
-		if (entry.description)
-			fields.add('description');
+		fields.add('description');
 
 		// if (entry.tests)
 		fields.add('questions');
