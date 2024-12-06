@@ -31,6 +31,8 @@ export class QuestionFirestoreConverter implements FirestoreConverter<Question> 
 
 		if (item.description)
 			fields[ 'description' ] = { stringValue: item.description };
+		else
+			fields[ 'description' ] = { nullValue: null };
 
 		fields[ 'answers' ] = {
 			arrayValue: { values: item.answers.map(a => ({ booleanValue: a })) }
@@ -48,7 +50,7 @@ export class QuestionFirestoreConverter implements FirestoreConverter<Question> 
 		if (!id)
 			throw new Error(`Firestore Question: invalid 'id' value`);
 
-		if (!description)
+		if (description === undefined)
 			throw new Error(`Firestore Question: invalid 'description' value`);
 
 		if (!answers)
@@ -97,6 +99,8 @@ class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 
 		if (entry.description)
 			fields[ 'description' ] = { stringValue: entry.description };
+		else
+			fields[ 'description' ] = { nullValue: null };
 
 		fields[ 'questions' ] = {
 			arrayValue: { values: entry.questions.map(q => ({ mapValue: { fields: this.questionConverter.toFirestore(q) } })) }
@@ -119,7 +123,7 @@ class ExamFirestoreConverter implements FirestoreConverter<Exam> {
 		if (!name)
 			throw new Error(`Firestore Exam Entry: invalid 'name' value`);
 
-		if (!description)
+		if (description === undefined)
 			throw new Error(`Firestore Exam Entry: invalid 'description' value`);
 
 		if (!Array.isArray(questions))
