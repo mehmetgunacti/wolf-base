@@ -1,12 +1,14 @@
 import { Component, input } from '@angular/core';
+import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { ChoicesViewerComponent } from '@libComponents/choices/choices-viewer.component';
+import { PortalComponent } from '@libComponents/portal.component';
 import { Exam } from '@models/test-suite.model';
 import { HideEnumPipe } from '@pipes/hide-enum.pipe';
 
 @Component({
 	standalone: true,
-	imports: [ ChoicesViewerComponent, HideEnumPipe ],
+	imports: [ ChoicesViewerComponent, HideEnumPipe, GlyphDirective, PortalComponent ],
 	selector: 'app-exam-details',
 	templateUrl: './exam-details.component.html',
 	host: {
