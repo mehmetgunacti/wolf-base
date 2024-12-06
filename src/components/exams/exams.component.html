@@ -36,14 +36,22 @@
 							<div class="flex mb-2 overflow-x-auto scrollbar scrollbar-blue">{{ exam.description }}</div>
 
 						}
-						<div class="flex justify-between gap-2">
+						<div class="flex gap-2">
 
 							<button
 								class="px-2 h-button-height-xs text-sm btn"
 								[tabindex]="isExpanded ? '0' : '-1'"
+								(click)="onOpenEditDialog(exam.id)">
+								<svg wGlyph="edit"></svg>
+								Edit
+							</button>
+
+							<button
+								class="ml-auto px-2 h-button-height-xs text-sm btn"
+								[tabindex]="isExpanded ? '0' : '-1'"
 								(click)="onOpenDetailsDialog(exam.id)">
-								<svg wGlyph="menu_open"></svg>
-								Open
+								<svg wGlyph="details"></svg>
+								Details
 							</button>
 
 							<button
