@@ -1,5 +1,5 @@
 import { UUID } from '@constants/common.constant';
-import { createActionGroup, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 export const sessionActions = createActionGroup({
 
@@ -7,7 +7,8 @@ export const sessionActions = createActionGroup({
 	events: {
 
 		// UI
-		setSelectedId	: props<{ id: UUID | null }>()
+		openDialog		: props<{ id: UUID | null }>(),
+		closeDialog		: emptyProps(),
 
 	}
 

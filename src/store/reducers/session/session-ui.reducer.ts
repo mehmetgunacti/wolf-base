@@ -5,7 +5,8 @@ import { session_initialUIState, Session_UIState } from '@states/session.state';
 const reducer = createReducer(
 
 	session_initialUIState,
-	on(sessionActions.setSelectedId, (state, { id }): Session_UIState => ({ ...state, selectedId: id }))
+	on(sessionActions.openDialog, (state, { id }): Session_UIState => ({ ...state, examId: id, dialogVisible: true })),
+	on(sessionActions.closeDialog, (state): Session_UIState => ({ ...state, examId: null, dialogVisible: false })),
 
 );
 

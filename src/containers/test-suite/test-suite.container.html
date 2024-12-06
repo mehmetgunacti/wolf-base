@@ -50,6 +50,14 @@
 
 	}
 
+	@if (sessionVisible()) {
+
+		<w-modal (close)="onCloseSessionDialog()">
+			<app-session-container/>
+		</w-modal>
+
+	}
+
 	<!-- TEST SUITE -->
 	<app-test-suite [testSuite]="testSuite"/>
 
@@ -57,7 +65,8 @@
 	<app-exams	[exams]="exams()"
 				(openFormDialog)="onOpenFormDialog()"
 				(openEditDialog)="onOpenEditDialog($event)"
-				(openDetailsDialog)="onOpenDetailsDialog($event)"/>
+				(openDetailsDialog)="onOpenDetailsDialog($event)"
+				(openSessionDialog)="onOpenSessionDialog($event)"/>
 
 } @else {
 

@@ -26,6 +26,7 @@ export class ExamsComponent extends BaseComponent {
 	openFormDialog = output<void>();
 	openEditDialog = output<UUID>();
 	openDetailsDialog = output<UUID>();
+	openSessionDialog = output<UUID>();
 
 	protected testsExpanded = signal<Record<UUID, boolean>>({});
 
@@ -50,6 +51,12 @@ export class ExamsComponent extends BaseComponent {
 	protected onOpenDetailsDialog(id: UUID): void {
 
 		this.openDetailsDialog.emit(id);
+
+	}
+
+	protected onSessionDialog(id: UUID): void {
+
+		this.openSessionDialog.emit(id);
 
 	}
 

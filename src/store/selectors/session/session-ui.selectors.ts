@@ -1,20 +1,27 @@
-import { Session } from '@models/test-suite.model';
+import { Exam } from '@models/test-suite.model';
 import { createSelector } from '@ngrx/store';
-import { selSession_EntityMap } from '../entity/entity-session.selectors';
+import { selExam_EntityMap } from '@selectors/entity/entity-exam.selectors';
 import { selSession_UIState } from './session.selectors';
 
 // SELECTED ID
-const selSession_SelectedId = createSelector(
+const selSession_examId = createSelector(
 
 	selSession_UIState,
-	state => state.selectedId
+	state => state.examId
 
 );
 
-export const selSession_selected = createSelector(
+export const selSession_exam = createSelector(
 
-	selSession_EntityMap,
-	selSession_SelectedId,
-	(state, id): Session | null => id ? state[ id ] ?? null : null
+	selExam_EntityMap,
+	selSession_examId,
+	(state, id): Exam | null => id ? state[ id ] ?? null : null
+
+);
+
+export const selSession_dialogVisible = createSelector(
+
+	selSession_UIState,
+	state => state.dialogVisible
 
 );

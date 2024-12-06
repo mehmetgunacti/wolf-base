@@ -8,7 +8,8 @@ export interface Session_ModuleState {
 
 export interface Session_UIState {
 
-	selectedId: UUID | null;
+	examId: UUID | null;
+	dialogVisible: boolean;
 
 }
 
@@ -16,7 +17,8 @@ export interface Session_UIState {
 
 export const session_initialUIState: Session_UIState = {
 
-	selectedId: null
+	examId: null,
+	dialogVisible: false
 
 };
 
