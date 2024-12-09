@@ -18,12 +18,63 @@
 
 </w-portal>
 
-<div class="flex flex-1 justify-center items-center">
+@switch (store.status()) {
 
-	<button
-		class="flex justify-center items-center px-2 w-40 h-16 text-xl btn btn-success">
-		<svg wGlyph="play"></svg>
-		Start
-	</button>
+	@case ('new') {
 
-</div>
+		<div class="flex flex-1 justify-center items-center">
+
+			<button
+				class="flex justify-center items-center px-2 w-40 h-16 text-xl btn btn-success"
+				(click)="start()">
+				<svg wGlyph="play"></svg>
+				Start
+			</button>
+
+		</div>
+
+	}
+
+	@case ('ongoing') {
+
+		<div class="flex flex-col flex-1">
+
+			<div class="my-3 font-bold text-lg">Question {{ store.index() + 1}}<span class="text-secondary text-sm"> / {{ store.numberOfQuestions() }}</span></div>
+			<section class="flex flex-col flex-1 justify-center">
+
+				<w-choices [formControl]="fcChoices" [hideControls]="true" class="mx-auto" />
+				<div class="mx-auto px-2 text-secondary text-sm">{{ store.currentQuestion()?.description ?? '&nbsp;' }}</div>
+
+			</section>
+
+			<footer class="flex">
+				<button
+					class="btn"
+					(click)="prev()"
+					[disabled]="!store.hasPrev()">
+					<svg wGlyph="chevron_left"></svg>
+					Back
+				</button>
+				<button
+					class="ml-auto btn btn-success"
+					(click)="next()">
+					Next
+					<svg wGlyph="chevron_right"></svg>
+				</button>
+			</footer>
+
+		</div>
+
+	}
+
+	@case ('finished') {
+
+		<div class="flex flex-1 justify-center items-center">
+
+			<div class="flex justify-center items-center bg-info px-2 rounded-lg w-40 h-16 text-xl">Done</div>
+
+		</div>
+
+	}
+
+}

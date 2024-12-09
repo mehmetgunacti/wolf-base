@@ -23,6 +23,7 @@ export class SessionsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Sessi
 
 	protected override newItemFromPartial(item: Partial<Session>): Session {
 
+		// todo remove 2 abstract methods
 		const id: UUID = uuidv4();
 		return this.newInstance(id, item);
 
@@ -35,7 +36,7 @@ export class SessionsLocalRepositoryImpl extends EntityLocalRepositoryImpl<Sessi
 			id,
 			name: '',
 			exam: emptyNameBase(),
-			answers: [],
+			answers: {},
 			start: new Date().toISOString(),
 			end: null
 

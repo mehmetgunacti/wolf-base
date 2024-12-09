@@ -1,6 +1,6 @@
 {
   "name": "wolf-base",
-  "version": "0.2.69",
+  "version": "0.2.70",
   "type": "module",
   "scripts": {
     "ng": "ng",
@@ -25,6 +25,7 @@
     "@angular/service-worker": "^18.2.0",
     "@ngrx/effects": "^18.1.0",
     "@ngrx/operators": "^18.1.0",
+    "@ngrx/signals": "^18.1.1",
     "@ngrx/store": "^18.1.0",
     "child_process": "^1.0.2",
     "dexie": "^3.2.7",

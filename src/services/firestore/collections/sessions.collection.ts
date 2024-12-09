@@ -1,12 +1,13 @@
 import { AppEntityType } from '@constants/entity.constant';
 import { FirestoreConfig } from '@models/configuration.model';
-import { Session } from '@models/test-suite.model';
+import { Answer, Session } from '@models/test-suite.model';
 import { SessionsRemoteRepository } from '@repositories/remote/session-remote.repository';
 import { FirestoreAPIClient } from '@utils/firestore-rest-client/firestore-api.tool';
-import { FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
+import { FIRESTORE_MAP, FIRESTORE_VALUE } from '@utils/firestore-rest-client/firestore.constant';
 import { FirestoreConverter } from '@utils/firestore-rest-client/firestore.model';
 import { FirestoreRemoteStorageCollectionImpl } from '../firestore.collection';
 import { NameBaseFirestoreConverter } from './name-base.collection';
+import { UUID } from '@constants/common.constant';
 
 export class SessionsFirestoreCollectionImpl extends FirestoreRemoteStorageCollectionImpl<Session> implements SessionsRemoteRepository {
 
@@ -21,9 +22,78 @@ export class SessionsFirestoreCollectionImpl extends FirestoreRemoteStorageColle
 
 }
 
+export class AnswerFirestoreConverter implements FirestoreConverter<Answer> {
+
+	toFirestore(item: Answer): Record<keyof Answer, FIRESTORE_VALUE> {
+
+		const fields = {} as Record<keyof Answer, FIRESTORE_VALUE>;
+
+		fields[ 'id' ] = { stringValue: item.id };
+
+		fields[ 'start' ] = { stringValue: item.start };
+		if (item.end)
+			fields[ 'end' ] = { stringValue: item.end };
+		else
+			fields[ 'end' ] = { nullValue: null };
+
+		fields[ 'choices' ] = {
+			arrayValue: { values: item.choices.map(c => ({ booleanValue: c })) }
+		};
+
+		return fields;
+
+	}
+
+	fromFirestore(entry: Answer): Answer {
+
+		// validate incoming
+		let { id, choices, start, end } = entry;
+
+		if (!id)
+			throw new Error(`Firestore Answer: invalid 'id' value`);
+
+		if (!start)
+			throw new Error(`Firestore Answer: invalid 'start' value`);
+
+		if (end === undefined)
+			throw new Error(`Firestore Answer: invalid 'end' value`);
+
+		if (!choices)
+			throw new Error(`Firestore Answer: invalid 'choices' value`);
+
+		const validated: Answer = {
+
+			id,
+			start,
+			end: end ?? null,
+			choices
+
+		};
+		return validated;
+
+	}
+
+	toUpdateMask(_: Answer): string {
+
+		// exclude some fields like id, ... from update list
+		// (empty string would delete string on server)
+
+		const fields = new Set<string>();
+		fields.add('id');
+		fields.add('start');
+		fields.add('end');
+		fields.add('answers');
+
+		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
+
+	}
+
+}
+
 class SessionFirestoreConverter implements FirestoreConverter<Session> {
 
 	namebaseConverter = new NameBaseFirestoreConverter();
+	answerConverter = new AnswerFirestoreConverter();
 
 	toFirestore(entry: Session): Record<keyof Session, FIRESTORE_VALUE> {
 
@@ -42,7 +112,16 @@ class SessionFirestoreConverter implements FirestoreConverter<Session> {
 			fields[ 'end' ] = { nullValue: null };
 
 		fields[ 'answers' ] = {
-			arrayValue: { values: [] }
+			mapValue: {
+				fields: Object
+					.keys(entry.answers)
+					.reduce((acc, key) => {
+
+						acc[ key ] = { mapValue: { fields: this.answerConverter.toFirestore(entry.answers[ key ]) } };
+						return acc;
+
+					}, {} as Record<string, FIRESTORE_VALUE>)
+			}
 		};
 
 		return fields;
@@ -65,7 +144,7 @@ class SessionFirestoreConverter implements FirestoreConverter<Session> {
 		if (!start)
 			throw new Error(`Firestore Task: invalid 'start' value`);
 
-		if (!Array.isArray(answers))
+		if (!answers)
 			throw new Error(`Firestore Session Entry: invalid 'answers' value`);
 
 		const validated: Session = {

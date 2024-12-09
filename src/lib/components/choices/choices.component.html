@@ -84,29 +84,37 @@
 
 	</div>
 </div>
-<div class="flex justify-center items-center gap-1">
+@if (!hideControls()) {
 
-	<button type="button" class="btn btn-glyph" (click)="dec()">
-		<svg wGlyph="remove"></svg>
-	</button>
-	<span>{{ value().length }}</span>
-	<button type="button" class="btn btn-glyph" (click)="inc()">
-		<svg wGlyph="add"></svg>
-	</button>
+	<div class="flex justify-center items-center gap-1">
 
-</div>
-<label class="
-	-top-3.5
-	left-2
-	absolute
-	text-2xs
-	leading-5
-	px-1
-	rounded
-	bg-component-dark
-	text-form-element-text
+		<button type="button" class="btn btn-glyph" (click)="dec()">
+			<svg wGlyph="remove"></svg>
+		</button>
+		<span>{{ value().length }}</span>
+		<button type="button" class="btn btn-glyph" (click)="inc()">
+			<svg wGlyph="add"></svg>
+		</button>
 
-	group-[.required]:before:content-['*']
-	group-[.required]:before:text-focus
-	group-[.required]:before:mr-1
-	">{{label()}}</label>
+	</div>
+
+}
+@if (label()) {
+
+	<label class="
+		-top-3.5
+		left-2
+		absolute
+		text-2xs
+		leading-5
+		px-1
+		rounded
+		bg-component-dark
+		text-form-element-text
+
+		group-[.required]:before:content-['*']
+		group-[.required]:before:text-focus
+		group-[.required]:before:mr-1
+		">{{label()}}</label>
+
+	}

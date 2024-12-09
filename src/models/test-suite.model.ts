@@ -13,7 +13,7 @@ export interface Answer extends IdBase {
 export interface Session extends Entity {
 
 	exam: NameBase;
-	answers: Answer[];
+	answers: Record<UUID, Answer>;
 	start: ISODateString;
 	end: ISODateString | null;
 

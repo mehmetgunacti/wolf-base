@@ -27,8 +27,9 @@ export class ChoicesComponent extends BaseComponent implements ControlValueAcces
 	protected readonly ALPHA = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' ];
 
 	// Input
-	label = input.required<string>();
+	label = input<string>();
 	readonly = input<boolean>(false);
+	hideControls = input<boolean>(false);
 
 	protected value = signal<boolean[]>([]);
 	protected disabled = signal<boolean>(false);
