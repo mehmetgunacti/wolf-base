@@ -47,7 +47,10 @@ export class ChoicesComponent extends BaseComponent implements ControlValueAcces
 		this.value.update(val => {
 
 			if (val.length < this.ALPHA.length)
-				val.push(false);
+				return produce(
+					val,
+					draft => { draft.push(false); }
+				);
 			return val;
 
 		});
@@ -61,7 +64,14 @@ export class ChoicesComponent extends BaseComponent implements ControlValueAcces
 		this.value.update(val => {
 
 			if (val.length > 1)
-				val.length = val.length - 1;
+				return produce(
+					val,
+					draft => {
+
+						draft.length = draft.length - 1;
+
+					}
+				);
 			return val;
 
 		});
