@@ -5,8 +5,7 @@ import { IdBase, ISODateString, NameBase } from './id-base.model';
 export interface Answer extends IdBase {
 
 	choices: boolean[];
-	start: ISODateString;
-	end: ISODateString | null;
+	time: number;
 
 }
 

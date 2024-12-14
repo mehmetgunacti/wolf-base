@@ -12,7 +12,28 @@
 	</div>
 </header>
 
-<div id="dialog-header-outlet" class="mt-2 md:mt-4"></div>
+@let entity = exam();
+@if (entity) {
+
+	<div class="mt-2 md:mt-4">
+
+		<div class="bg-component-dark p-2 rounded-lg">
+			<small class="flex items-center gap-1 text-secondary text-xs">{{entity.testSuite.id}}</small>
+			<div>{{ entity.testSuite.name | hideEnum }}</div>
+		</div>
+		<div class="flex gap-1 mt-1 md:mt-2 ml-2">
+			<div class="flex justify-center items-start">
+				<svg wGlyph="down_right"></svg>
+			</div>
+			<div class="flex-1 bg-component-dark p-2 rounded-lg">
+				<small class="flex items-center gap-1 text-secondary text-xs">{{entity.id}}</small>
+				<div>{{ entity.name | hideEnum }}</div>
+			</div>
+		</div>
+
+	</div>
+
+}
 
 <!-- DIALOG CONTENT WRAPPER - SCROLLBAR -->
 <section class="flex-1 overflow-y-auto scrollbar scrollbar-dark scrollbar-gutter-stable">
@@ -22,7 +43,7 @@
 
 		@if (exam(); as entity) {
 
-			<app-exam-details [exam]="entity" />
+			<app-exam-details [exam]="entity" [sessions]="sessions()" />
 
 		}
 

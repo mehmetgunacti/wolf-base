@@ -38,6 +38,7 @@ import { QuizEntryCreateEffects } from '@effects/quiz-entry/quiz-entry-create.ef
 import { QuizEntryLogicEffects } from '@effects/quiz-entry/quiz-entry-logic.effects';
 import { QuizUIEffects } from '@effects/quiz-entry/quiz-ui.effects';
 import { QuoteViewerEffects } from '@effects/quote/quote-viewer.effects';
+import { SessionCreateEffects } from '@effects/session/session-create.effects';
 import { SettingsEffects } from '@effects/setting/settings.effects';
 import { TaskCreateEffects } from '@effects/task/project-task-create.effects';
 import { TaskEditEffects } from '@effects/task/project-task-edit-dialog.effects';
@@ -165,6 +166,9 @@ export const effectList = [
 	// Exams
 	ExamCreateEffects,
 	ExamUpdateEffects,
+
+	// Sessions
+	SessionCreateEffects,
 
 	// Settings
 	SettingsEffects,

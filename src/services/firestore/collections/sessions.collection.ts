@@ -28,14 +28,7 @@ export class AnswerFirestoreConverter implements FirestoreConverter<Answer> {
 
 		const fields = {} as Record<keyof Answer, FIRESTORE_VALUE>;
 
-		fields[ 'id' ] = { stringValue: item.id };
-
-		fields[ 'start' ] = { stringValue: item.start };
-		if (item.end)
-			fields[ 'end' ] = { stringValue: item.end };
-		else
-			fields[ 'end' ] = { nullValue: null };
-
+		fields[ 'time' ] = { integerValue: item.time };
 		fields[ 'choices' ] = {
 			arrayValue: { values: item.choices.map(c => ({ booleanValue: c })) }
 		};
@@ -47,16 +40,13 @@ export class AnswerFirestoreConverter implements FirestoreConverter<Answer> {
 	fromFirestore(entry: Answer): Answer {
 
 		// validate incoming
-		let { id, choices, start, end } = entry;
+		let { id, choices, time } = entry;
 
 		if (!id)
 			throw new Error(`Firestore Answer: invalid 'id' value`);
 
-		if (!start)
-			throw new Error(`Firestore Answer: invalid 'start' value`);
-
-		if (end === undefined)
-			throw new Error(`Firestore Answer: invalid 'end' value`);
+		if (!time)
+			throw new Error(`Firestore Answer: invalid 'time' value`);
 
 		if (!choices)
 			throw new Error(`Firestore Answer: invalid 'choices' value`);
@@ -64,8 +54,7 @@ export class AnswerFirestoreConverter implements FirestoreConverter<Answer> {
 		const validated: Answer = {
 
 			id,
-			start,
-			end: end ?? null,
+			time,
 			choices
 
 		};
@@ -78,11 +67,9 @@ export class AnswerFirestoreConverter implements FirestoreConverter<Answer> {
 		// exclude some fields like id, ... from update list
 		// (empty string would delete string on server)
 
-		const fields = new Set<string>();
-		fields.add('id');
-		fields.add('start');
-		fields.add('end');
-		fields.add('answers');
+		const fields = new Set<keyof Answer>();
+		fields.add('time');
+		fields.add('choices');
 
 		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
 
