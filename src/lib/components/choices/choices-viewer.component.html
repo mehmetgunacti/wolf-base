@@ -3,7 +3,7 @@
 		<!-- CHECKBOXES -->
 		@for(answer of answers(); track $index) {
 			@let corrects = correctAnswers();
-			@let color = corrects === null ? 'accent-text' : corrects && corrects[$index] === answer ? 'success' : 'error';
+			@let color = corrects === null ? 'after:border-accent-text' : corrects && corrects[$index] === answer ? 'after:border-success' : 'after:border-error';
 			@let ring = corrects === null ? '' : corrects && answer === false && corrects[$index] === true ? 'ring ring-error' : '';
 
 			<div class="
@@ -67,7 +67,7 @@
 							after:peer-checked:block
 						"
 						[for]="componentId + '_' + $index"
-						[ngClass]="'after:border-' + color"></label>
+						[ngClass]="color"></label>
 			</div>
 
 		}
