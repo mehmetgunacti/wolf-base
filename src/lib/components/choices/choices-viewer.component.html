@@ -1,14 +1,15 @@
-<div class="flex-1">
 	<div class="flex flex-wrap items-center gap-1">
 
+		<!-- CHECKBOXES -->
 		@for(answer of answers(); track $index) {
+			@let corrects = correctAnswers();
+			@let color = corrects === null ? 'accent-text' : corrects && corrects[$index] === answer ? 'success' : 'error';
+			@let ring = corrects === null ? '' : corrects && answer === false && corrects[$index] === true ? 'ring ring-error' : '';
 
 			<div class="
 					relative
 					flex
 					items-center
-
-					group
 
 					rounded
 
@@ -23,7 +24,8 @@
 					after:duration-700
 					after:pointer-events-none
 				"
-				[attr.data-label]="ALPHA[$index]">
+				[attr.data-label]="ALPHA[$index]"
+				[ngClass]="ring">
 				<input	type="checkbox"
 						class="absolute opacity-0 peer size-0"
 						[id]="componentId + '_' + $index"
@@ -62,14 +64,12 @@
 							after:rounded-tr-[3px]
 							after:rounded-bl-[3px]
 
-							after:border-accent-text
-
 							after:peer-checked:block
 						"
-						[for]="componentId + '_' + $index"></label>
+						[for]="componentId + '_' + $index"
+						[ngClass]="'after:border-' + color"></label>
 			</div>
 
 		}
 
 	</div>
-</div>

@@ -1,13 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	standalone: true,
-	imports: [],
+	imports: [CommonModule],
 	selector: 'w-choices-viewer',
 	templateUrl: './choices-viewer.component.html',
 	host: {
-		'class': 'inline-flex px-2 items-center relative border border-transparent rounded-lg group'
+		'class': 'block px-2 border border-transparent rounded-lg'
 	}
 })
 export class ChoicesViewerComponent extends BaseComponent {
@@ -16,5 +17,6 @@ export class ChoicesViewerComponent extends BaseComponent {
 
 	// Input
 	answers = input.required<boolean[]>();
+	correctAnswers = input<boolean[] | null>(null);
 
 }

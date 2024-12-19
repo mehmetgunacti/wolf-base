@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { BaseComponent } from '@libComponents/base.component';
 import { ChoicesViewerComponent } from '@libComponents/choices/choices-viewer.component';
@@ -5,7 +6,7 @@ import { Exam, Session } from '@models/test-suite.model';
 
 @Component({
 	standalone: true,
-	imports: [ ChoicesViewerComponent ],
+	imports: [ ChoicesViewerComponent, DatePipe ],
 	selector: 'app-exam-details',
 	templateUrl: './exam-details.component.html',
 	host: {
