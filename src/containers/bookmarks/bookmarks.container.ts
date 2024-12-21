@@ -3,7 +3,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { BookmarkComponent } from '@components/bookmark/bookmark.component';
 import { UUID } from '@constants/common.constant';
-import { BookmarkEditContainer } from '@containers/bookmark-edit/bookmark-edit.container';
+import { BookmarkEditContainer } from '@dialogs/bookmark-edit/bookmark-edit.container';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { ModalComponent } from '@libComponents/modal/modal.component';

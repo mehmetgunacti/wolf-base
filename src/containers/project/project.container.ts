@@ -6,7 +6,7 @@ import { ProjectComponent } from '@components/project/project.component';
 import { TaskComponent } from '@components/task/task.component';
 import { UUID } from '@constants/common.constant';
 import { TaskCategoryLabels, TaskStateLabels } from '@constants/project.constant';
-import { TaskEditContainer } from '@containers/task-edit/task-edit.container';
+import { TaskEditContainer } from '@dialogs/task-edit/task-edit.container';
 import { TasksFilterContainer } from '@containers/tasks-filter/tasks-filter.container';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
