@@ -21,12 +21,14 @@
 
 			<div class="flex flex-col flex-1">
 
-				<div class="my-3 font-bold text-lg">Question {{ store.index() + 1}}<span class="text-secondary text-sm"> / {{ store.numberOfQuestions() }}</span></div>
+				<div class="my-3 font-bold text-lg">
+					Question {{ store.index() + 1}}<span class="text-secondary text-sm"> / {{ store.numberOfQuestions() }}</span>
+					<div class="mx-auto px-2 text-secondary text-sm">{{ q.description }}</div>
+				</div>
 				<section class="flex flex-col flex-1 justify-center">
 
 					<w-choices [formControl]="fcChoices" [hideControls]="true" class="mx-auto" />
 					<w-textarea [formControl]="fcNote" label="Note" [rows]="3"/>
-					<div class="mx-auto px-2 text-secondary text-sm">{{ q.description }}</div>
 
 				</section>
 
