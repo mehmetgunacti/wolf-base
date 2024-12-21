@@ -25,8 +25,8 @@ export interface SessionStore {
 	result: Session;
 
 	start(exam: Exam): void;
-	next(questionId: string, value: boolean[]): void;
-	prev(questionId: string, value: boolean[]): void;
+	next(questionId: string, value: boolean[], note: string | null): void;
+	prev(questionId: string, value: boolean[], note: string | null): void;
 
 }
 
@@ -96,7 +96,8 @@ export class SessionStoreImpl implements SessionStore {
 						acc[ q.id ] = {
 							id: q.id,
 							choices: new Array(q.answers.length).fill(false),
-							time: 0
+							time: 0,
+							note: null
 						};
 						return acc;
 					},
@@ -109,7 +110,7 @@ export class SessionStoreImpl implements SessionStore {
 
 	}
 
-	next(questionId: UUID, choices: boolean[]): void {
+	next(questionId: UUID, choices: boolean[], note: string | null): void {
 
 		const now = Date.now();
 		patchState(
@@ -118,7 +119,7 @@ export class SessionStoreImpl implements SessionStore {
 
 				answers: {
 					...state.answers,
-					[ questionId ]: { id: questionId, choices, time: now - new Date(state.updated).getTime() }
+					[ questionId ]: { id: questionId, choices, time: now - new Date(state.updated).getTime(), note }
 				},
 				idx: state.idx + 1,
 				updated: new Date().toISOString()
@@ -128,7 +129,7 @@ export class SessionStoreImpl implements SessionStore {
 
 	};
 
-	prev(questionId: UUID, choices: boolean[]): void {
+	prev(questionId: UUID, choices: boolean[], note: string | null): void {
 
 		if (this.hasPrev()) {
 
@@ -139,7 +140,7 @@ export class SessionStoreImpl implements SessionStore {
 
 					answers: {
 						...state.answers,
-						[ questionId ]: { id: questionId, choices, time: now - new Date(state.updated).getTime() }
+						[ questionId ]: { id: questionId, choices, time: now - new Date(state.updated).getTime(), note }
 					},
 					idx: state.idx - 1,
 					updated: new Date().toISOString()

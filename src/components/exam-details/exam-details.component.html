@@ -31,6 +31,7 @@
 			<w-choices-viewer
 				[answers]="session.answers[question.id].choices"
 				[correctAnswers]="question.answers"/>
+			<div class="mx-auto px-2 text-secondary text-sm">{{ session.answers[question.id].note }}</div>
 
 		}
 

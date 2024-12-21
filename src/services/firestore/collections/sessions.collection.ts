@@ -32,6 +32,10 @@ export class AnswerFirestoreConverter implements FirestoreConverter<Answer> {
 		fields[ 'choices' ] = {
 			arrayValue: { values: item.choices.map(c => ({ booleanValue: c })) }
 		};
+		if (item.note)
+			fields[ 'note' ] = { stringValue: item.note };
+		else
+			fields[ 'note' ] = { nullValue: null };
 
 		return fields;
 
@@ -40,7 +44,7 @@ export class AnswerFirestoreConverter implements FirestoreConverter<Answer> {
 	fromFirestore(entry: Answer): Answer {
 
 		// validate incoming
-		let { id, choices, time } = entry;
+		let { id, choices, time, note } = entry;
 
 		if (!id)
 			throw new Error(`Firestore Answer: invalid 'id' value`);
@@ -51,11 +55,15 @@ export class AnswerFirestoreConverter implements FirestoreConverter<Answer> {
 		if (!choices)
 			throw new Error(`Firestore Answer: invalid 'choices' value`);
 
+		if (!note)
+			throw new Error(`Firestore Session Entry: invalid 'note' value`);
+
 		const validated: Answer = {
 
 			id,
 			time,
-			choices
+			choices,
+			note
 
 		};
 		return validated;
@@ -70,6 +78,7 @@ export class AnswerFirestoreConverter implements FirestoreConverter<Answer> {
 		const fields = new Set<keyof Answer>();
 		fields.add('time');
 		fields.add('choices');
+		fields.add('note');
 
 		return Array.from(fields).map(key => `updateMask.fieldPaths=${key}`).join('&');
 

@@ -6,6 +6,7 @@ export interface Answer extends IdBase {
 
 	choices: boolean[];
 	time: number;
+	note: string | null;
 
 }
 
