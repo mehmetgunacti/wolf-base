@@ -1,16 +1,12 @@
 import { taskActions } from '@actions/project-task.actions';
-import { AsyncPipe } from '@angular/common';
 import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { slideUpDownTrigger } from '@animations/slide-in-out.animation';
 import { TASK_CATEGORIES, TASK_STATE, TaskCategory, TaskState } from '@constants/project.constant';
-import { AutofocusDirective } from '@directives/auto-focus.directive';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { SelectComponent } from '@libComponents/select/select.component';
-import { SelectedTagsComponent } from '@libComponents/selected-tags/selected-tags.component';
-import { TagCloudComponent } from '@libComponents/tag-cloud/tag-cloud.component';
 import { NameBase } from '@models/id-base.model';
 import { Store } from '@ngrx/store';
 import { selTask_distinctTagsArray, selTask_relatedTags } from '@selectors/task/task-tags.selectors';
@@ -21,7 +17,7 @@ const all: NameBase = { id: 'all', name: 'All' };
 
 @Component({
 	standalone: true,
-	imports: [ GlyphDirective, TagCloudComponent, AsyncPipe, SelectedTagsComponent, ReactiveFormsModule, SelectComponent, AutofocusDirective ],
+	imports: [ GlyphDirective, ReactiveFormsModule, SelectComponent ],
 	selector: 'app-tasks-filter-container',
 	templateUrl: './tasks-filter.container.html',
 	animations: [ slideUpDownTrigger ],

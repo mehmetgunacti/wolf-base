@@ -2,20 +2,27 @@
 * Angular CDK Overlay - start *
 *******************************/
 
-// import angular cdk scss file from node_modules (index.scss)
-@import '../../../node_modules/@angular/cdk/overlay';
+@use '../../../node_modules/@angular/cdk/overlay-prebuilt.css';
 
 // note: z-index values have to be in sync with tailwind.config.ts values
-$overlay-container-z-index	: 7000;
-$overlay-z-index			: 7000;
-$overlay-backdrop-z-index	: 7000;
+$z-index : 7000;
 
-// override backdrop color
-$overlay-backdrop-color	: var(--col-bg-overlay);
+.cdk-overlay-container {
+	z-index: $z-index;
+}
 
-// override backdrop transition (same as background-color var(--transition-bg-color))
-$backdrop-animation-duration		: 0.4s;
-$backdrop-animation-timing-function	: ease; // var(--transition); //  cubic-bezier(0.25, 1, 0.25, 1);
+.cdk-global-overlay-wrapper {
+	z-index: $z-index;
+}
 
-// generate angular cdk overlay styles
-@include overlay();
+.cdk-overlay-pane {
+	z-index: $z-index;
+}
+
+.cdk-overlay-backdrop {
+	z-index: $z-index;
+}
+
+.cdk-overlay-connected-position-bounding-box {
+	z-index: $z-index;
+}

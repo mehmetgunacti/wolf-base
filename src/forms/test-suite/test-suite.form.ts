@@ -7,11 +7,10 @@ import { BaseComponent } from '@libComponents/base.component';
 import { InputComponent } from '@libComponents/input/input.component';
 import { TestSuite } from '@models/test-suite.model';
 import { TEST_SUITE_FORM, TestSuiteFormImpl } from './test-suite-form';
-import { TextareaComponent } from "../../lib/components/textarea/textarea.component";
 
 @Component({
 	standalone: true,
-	imports: [RequiredValidatorDirective, InputComponent, ReactiveFormsModule, GlyphDirective, TextareaComponent],
+	imports: [ RequiredValidatorDirective, InputComponent, ReactiveFormsModule, GlyphDirective ],
 	selector: 'app-test-suite-form',
 	templateUrl: './test-suite.form.html',
 	providers: [ { provide: TEST_SUITE_FORM, useClass: TestSuiteFormImpl } ]

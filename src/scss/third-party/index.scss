@@ -1,17 +1,17 @@
 // Google Fonts
-@import 'google-fonts';
+@use 'google-fonts';
 
 // angular cdk overlay
-@import 'angular-cdk-overlay';
+@use 'angular-cdk-overlay';
 
 // highlight.js
-@import 'highlight-js';
+@use 'highlight-js';
 
 // chrome extras
-@import 'chrome-extras';
+@use 'chrome-extras';
 
 // mardown-it plugins
 // todo:
-@import 'md-alert';
-@import 'md-checkbox';
-// @import 'md-toc';
+@use 'md-alert';
+@use 'md-checkbox';
+// @use 'md-toc';
