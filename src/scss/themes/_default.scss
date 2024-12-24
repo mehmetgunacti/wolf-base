@@ -8,7 +8,7 @@
 
 		--col-text				: hsl(210, 15%, 92%);
 		--col-text-secondary	: hsl(0, 0%, 50%);
-		--col-disabled-text		: hsl(216, 2%, 37%);
+		--col-disabled-text		: var(--col-text-secondary);
 		--col-disabled			: hsl(216, 8%, 15%);
 
 		--col-accent			: hsl(215deg 65% 30%);

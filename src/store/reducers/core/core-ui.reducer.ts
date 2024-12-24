@@ -4,6 +4,7 @@ import { DEFAULT_CONF_VALUES } from '@constants/database.constant';
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { CoreUIState, core_initialUIState } from '@states/core.state';
 import { afterResize, evaluate, hideSidebar, nextState } from '@utils/sidebar.util';
+import { getNextTheme } from '@utils/enum.util';
 
 function incProgressCounter(curr: number): number {
 
@@ -47,11 +48,12 @@ export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 		sidebarState: hideSidebar(state.bigScreen)
 
 	})),
-	on(coreActions.setTheme, (state, { theme }): CoreUIState => ({ ...state, theme })),
+	on(coreActions.setNextTheme, (state): CoreUIState => ({ ...state, theme: getNextTheme(state.theme) })),
 	on(coreActions.setNow, (state): CoreUIState => ({ ...state, now: Date.now() })),
 	on(coreActions.showProgressBar, (state): CoreUIState => ({ ...state, progressCounter: incProgressCounter(state.progressCounter) })),
 	on(coreActions.hideProgressBar, (state): CoreUIState => ({ ...state, progressCounter: decProgressCounter(state.progressCounter) })),
 	on(databaseActions.loadReport, (state): CoreUIState => ({ ...state, progressCounter: incProgressCounter(state.progressCounter) })),
 	on(databaseActions.loadReportSuccess, (state): CoreUIState => ({ ...state, progressCounter: decProgressCounter(state.progressCounter) })),
 	on(databaseActions.backupDatabase, (state): CoreUIState => ({ ...state, progressCounter: incProgressCounter(state.progressCounter) })),
+
 );

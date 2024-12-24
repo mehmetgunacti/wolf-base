@@ -30,7 +30,12 @@ export default {
 
 			},
 			outline		: 'var(--col-outline)',
-			disabled	: 'var(--col-disabled)',
+			disabled	: {
+
+				DEFAULT	: 'var(--col-disabled)',
+				text	: 'var(--col-disabled-text)'
+
+			},
 			content		: 'var(--col-text)',
 			secondary	: 'var(--col-text-secondary)',
 			primary		: 'var(--col-primary)',

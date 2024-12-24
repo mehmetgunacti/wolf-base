@@ -1,6 +1,5 @@
 import { UUID } from '@constants/common.constant';
 import { AppEntityType } from '@constants/entity.constant';
-import { Theme } from '@constants/theme.constant';
 import { ToastConfiguration } from '@libComponents/toast/toast.util';
 import { Click } from '@models/bookmark.model';
 import { Configuration } from '@models/configuration.model';
@@ -36,7 +35,6 @@ export const coreActions = createActionGroup({
 		showProgressBar				: emptyProps(),
 		hideProgressBar				: emptyProps(),
 
-		setTheme					: props<{ theme: Theme }>(),
 		setNextTheme				: emptyProps(),
 		setNow						: emptyProps(),
 

@@ -139,7 +139,7 @@
 			@apply
 				disabled:bg-disabled
 				disabled:border-disabled
-				disabled:text-base-color-secondary
+				disabled:text-disabled-text
 				disabled:cursor-not-allowed;
 
 		}
@@ -154,7 +154,7 @@
 
 	.comp {
 
-		@apply bg-component rounded-lg shadow-component;
+		@apply bg-component shadow-component rounded-lg;
 
 	}
 
@@ -192,7 +192,7 @@
 
 	.comp-title {
 
-		@apply text-2xl leading-none font-bold p-1 md:p-0 text-accent-text;
+		@apply p-1 md:p-0 font-bold text-2xl text-accent-text leading-none;
 
 	}
 
@@ -311,7 +311,7 @@
 
 	.tag-sm {
 
-		@apply text-2xs leading-5 px-2;
+		@apply px-2 text-2xs leading-5;
 
 	}
 
