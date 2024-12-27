@@ -29,7 +29,6 @@
 			<w-select formControlName="status" label="Status" [nodes]="PROJECT_STATUS"/>
 			<div class="flex flex-wrap" formGroupName="switches">
 				<w-switch formControlName="default" label="Schedule" class="flex-1"/>
-				<w-switch [(value)]="modelSwitch" [label]="'' + modelSwitch()"/>
 				<w-switch formControlName="success" severity="success" glyphChecked="play" glyphUnchecked="pause"/>
 				<w-switch formControlName="info" severity="info"/>
 				<w-switch formControlName="warn" severity="warn"/>

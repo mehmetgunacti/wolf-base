@@ -1,5 +1,6 @@
+import { coreActions } from '@actions/core.actions';
 import { CommonModule } from '@angular/common';
-import { Component, inject, model, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { slideUpDownTrigger } from '@animations/slide-in-out.animation';
 import { GlyphName, Glyphs } from '@constants/glyphs.constant';
@@ -7,6 +8,7 @@ import { PROJECT_STATUS } from '@constants/project.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { AlertComponent } from '@libComponents/alert/alert.component';
 import { BaseComponent } from '@libComponents/base.component';
+import { ChoicesComponent } from '@libComponents/choices/choices.component';
 import { CroppieComponent } from '@libComponents/croppie/croppie.component';
 import { InputTagComponent } from '@libComponents/input-tag/input-tag.component';
 import { InputComponent } from '@libComponents/input/input.component';
@@ -19,8 +21,6 @@ import { Store } from '@ngrx/store';
 import { selNote_EntityList } from '@selectors/entity/entity-note.selectors';
 import { fc, fg, nnfc } from '@utils/form.util';
 import { SelectTreeComponent } from "../../lib/components/select/select-tree.component";
-import { coreActions } from '@actions/core.actions';
-import { ChoicesComponent } from '@libComponents/choices/choices.component';
 
 @Component({
 	standalone: true,
@@ -64,7 +64,6 @@ export class ShowcaseContainer extends BaseComponent {
 
 	protected glyphNames = signal<GlyphName[]>(Object.keys(Glyphs) as GlyphName[]);
 
-	protected modelSwitch = model<boolean>(false);
 	protected form = fg({
 		'croppie': fc<string>(''),
 		'text': nnfc<string>(''),
