@@ -2,7 +2,7 @@
 
 <app-quote [quote]="wrapper?.value ?? null"/>
 
-<div class="top-0 right-0 absolute opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 p-2 transition-opacity duration-700 cursor-pointer">
+<div class="top-0 right-0 z-overlay absolute opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 p-2 transition-opacity duration-700 cursor-pointer">
 
 	<w-switch [formControl]="fc" severity="success" glyphChecked="play" glyphUnchecked="pause"/>
 
