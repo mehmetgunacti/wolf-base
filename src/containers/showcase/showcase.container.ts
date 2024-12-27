@@ -13,6 +13,7 @@ import { CroppieComponent } from '@libComponents/croppie/croppie.component';
 import { InputTagComponent } from '@libComponents/input-tag/input-tag.component';
 import { InputComponent } from '@libComponents/input/input.component';
 import { MarkdownEditorComponent } from '@libComponents/markdown/markdown-editor.component';
+import { SelectTreeComponent } from '@libComponents/select/select-tree.component';
 import { SelectComponent } from '@libComponents/select/select.component';
 import { SwitchComponent } from '@libComponents/switch/switch.component';
 import { TextareaComponent } from '@libComponents/textarea/textarea.component';
@@ -20,7 +21,6 @@ import { ToastService } from '@libComponents/toast/toast.service';
 import { Store } from '@ngrx/store';
 import { selNote_EntityList } from '@selectors/entity/entity-note.selectors';
 import { fc, fg, nnfc } from '@utils/form.util';
-import { SelectTreeComponent } from "../../lib/components/select/select-tree.component";
 
 @Component({
 	standalone: true,
