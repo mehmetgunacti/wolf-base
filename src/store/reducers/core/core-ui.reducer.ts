@@ -3,8 +3,8 @@ import { databaseActions } from '@actions/database.actions';
 import { DEFAULT_CONF_VALUES } from '@constants/database.constant';
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { CoreUIState, core_initialUIState } from '@states/core.state';
-import { afterResize, evaluate, hideSidebar, nextState } from '@utils/sidebar.util';
 import { getNextTheme } from '@utils/enum.util';
+import { afterResize, evaluate, hideSidebar, nextState } from '@utils/sidebar.util';
 
 function incProgressCounter(curr: number): number {
 
@@ -25,8 +25,7 @@ export const coreUiReducer: ActionReducer<CoreUIState, Action> = createReducer(
 
 		...state,
 		sidebarState: evaluate(configuration.sidebarState ?? DEFAULT_CONF_VALUES.sidebarState, state.bigScreen),
-		theme: configuration.theme ?? DEFAULT_CONF_VALUES.theme,
-		quotesRunning: configuration.quotesRunning ?? DEFAULT_CONF_VALUES.quotesRunning
+		theme: configuration.theme ?? DEFAULT_CONF_VALUES.theme
 
 	})),
 	on(coreActions.setBigScreen, (state, { bigScreen: isBigScreen }) => ({

@@ -9,7 +9,6 @@ import { TitleLookupConfigContainer } from '@containers/title-lookup-config/titl
 import { GlyphDirective } from '@directives/glyph.directive';
 import { AlertComponent } from '@libComponents/alert/alert.component';
 import { BaseComponent } from '@libComponents/base.component';
-import { PortalComponent } from '@libComponents/portal.component';
 import { catchError, defer, EMPTY, from, Observable } from 'rxjs';
 import { buildInfo } from 'version';
 
@@ -20,7 +19,6 @@ import { buildInfo } from 'version';
 		AsyncPipe,
 		DatePipe,
 		GlyphDirective,
-		PortalComponent,
 		AlertComponent,
 		RouterLink,
 		FirestoreConfigContainer,
@@ -29,17 +27,6 @@ import { buildInfo } from 'version';
 		PopularBookmarksFormContainer
 	],
 	template: `
-		<w-portal>
-
-			<button
-				class="btn btn-ghost"
-				routerLink="components">
-				<svg wGlyph="grid_view"></svg>
-				Components
-			</button>
-
-		</w-portal>
-
 		@if (updateAvailable$ | async) {
 
 			<w-alert severity="warn" glyph="cloud_download" summary="Update available">
@@ -47,7 +34,24 @@ import { buildInfo } from 'version';
 			</w-alert>
 
 		}
-		<!-- <app-quote-settings-container/> -->
+		<div class="flex justify-end items-center p-2 text-base-color-secondary comp comp-dark">
+
+			<button
+				type="button"
+				class="btn btn-ghost"
+				routerLink="quotes">
+				<svg wGlyph="quote" class="mr-auto text-xl"></svg>
+				Quote Settings
+			</button>
+			<button
+				type="button"
+				class="btn btn-ghost"
+				routerLink="components">
+				<svg wGlyph="grid_view"></svg>
+				Components
+			</button>
+
+		</div>
 		<app-firestore-config-container/>
 		<app-title-lookup-config-container/>
 		<app-pinned-notes-form-container/>

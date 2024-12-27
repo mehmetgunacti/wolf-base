@@ -12,7 +12,7 @@ import { fc } from '@utils/form.util';
 	imports: [ ReactiveFormsModule, InputComponent ],
 	selector: 'app-quote-settings-list',
 	templateUrl: './quote-settings-list.component.html',
-	host: { 'class': 'flex flex-col comp' }
+	host: { 'class': 'flex flex-col' }
 })
 export class QuoteSettingsListComponent extends BaseComponent {
 

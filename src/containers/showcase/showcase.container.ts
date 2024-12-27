@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, model, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { slideUpDownTrigger } from '@animations/slide-in-out.animation';
 import { GlyphName, Glyphs } from '@constants/glyphs.constant';
@@ -53,18 +53,19 @@ export class ShowcaseContainer extends BaseComponent {
 	private store: Store = inject(Store);
 	private toast = inject(ToastService);
 
-	alertsVisible = signal<boolean>(false);
-	formsVisible = signal<boolean>(true);
-	buttonsVisible = signal<boolean>(false);
-	toastsVisible = signal<boolean>(false);
-	glyphsVisible = signal<boolean>(false);
+	protected alertsVisible = signal<boolean>(false);
+	protected formsVisible = signal<boolean>(true);
+	protected buttonsVisible = signal<boolean>(false);
+	protected toastsVisible = signal<boolean>(false);
+	protected glyphsVisible = signal<boolean>(false);
 
-	nodes = this.store.selectSignal(selNote_EntityList);
-	tagSuggestions = signal<string[]>([]);
+	protected nodes = this.store.selectSignal(selNote_EntityList);
+	protected tagSuggestions = signal<string[]>([]);
 
-	glyphNames = signal<GlyphName[]>(Object.keys(Glyphs) as GlyphName[]);
+	protected glyphNames = signal<GlyphName[]>(Object.keys(Glyphs) as GlyphName[]);
 
-	form = fg({
+	protected modelSwitch = model<boolean>(false);
+	protected form = fg({
 		'croppie': fc<string>(''),
 		'text': nnfc<string>(''),
 		'tags': nnfc<string>(''),

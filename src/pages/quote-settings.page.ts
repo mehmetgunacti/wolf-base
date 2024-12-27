@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ShowcaseContainer } from '@containers/showcase/showcase.container';
+import { QuoteSettingsContainer } from '@containers/quote-settings/quote-settings.container';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	standalone: true,
-	imports: [ ShowcaseContainer, RouterLink, GlyphDirective ],
+	imports: [ QuoteSettingsContainer, RouterLink, GlyphDirective ],
 	selector: 'showcase-page',
 	template: `
 		<a	[routerLink]="['/settings']"
@@ -15,8 +15,8 @@ import { BaseComponent } from '@libComponents/base.component';
 			<svg wGlyph="settings" class="text-[1.2em]"></svg>
 			Settings
 		</a>
-		<app-showcase-container/>
+		<app-quote-settings-container/>
 	`,
 	host: { 'class': 'page' }
 })
-export class ShowcasePage extends BaseComponent { }
+export class QuoteSettingsPage extends BaseComponent { }

@@ -5,7 +5,7 @@ import { Component, inject } from '@angular/core';
 import { QuoteSettingsListComponent } from '@components/quote-settings-list/quote-settings-list.component';
 import { UUID } from '@constants/common.constant';
 import { AppEntityType } from '@constants/entity.constant';
-import { QuoteSettingsFormComponent } from '@forms/quote-settings-form/quote-settings-form.component';
+import { QuoteSettingsForm } from '@forms/quote-settings/quote-settings.form';
 import { BaseComponent } from '@libComponents/base.component';
 import { Quote } from '@models/quote.model';
 import { Store } from '@ngrx/store';
@@ -15,7 +15,7 @@ import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 
 @Component({
 	standalone: true,
-	imports: [ QuoteSettingsFormComponent, QuoteSettingsListComponent, AsyncPipe ],
+	imports: [ QuoteSettingsForm, QuoteSettingsListComponent, AsyncPipe ],
 	selector: 'app-quote-settings-container',
 	templateUrl: './quote-settings.container.html',
 	host: { 'class': 'comp p-4' }

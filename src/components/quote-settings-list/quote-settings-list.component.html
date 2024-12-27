@@ -1,15 +1,21 @@
 <w-input type="search" [formControl]="form" label="Search" />
 
-<div>
+<div class="flex flex-col gap-2 mt-2">
 
 	@if (quotes().length > 0) {
 
 		@for (quote of quotes(); track quote.id) {
 
-			<a (click)="onSelect(quote)" tabindex="0">
+			<a	class="relative grid px-4 py-3 comp-dark comp-dark-active comp-dark-hover rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full cursor-pointer select-none focus-visible:outline-none group"
+				(click)="onSelect(quote)"
+				tabindex="0">
 
-				<small>{{ quote.id }}</small>
-				<span>{{ quote.name }}</span>
+				<div class="flex flex-col flex-1 justify-center">
+
+					<small class="text-2xs text-base-color-secondary">{{ quote.id }}</small>
+					<p class="text-sm">{{ quote.name }}</p>
+
+				</div>
 
 			</a>
 

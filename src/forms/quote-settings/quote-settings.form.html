@@ -1,22 +1,36 @@
-<form [formGroup]="form" (ngSubmit)="onSave()" class="flex flex-col gap-4">
+<app-quote [quote]="{
+	id: 'dummy',
+	name: form.controls.name.value ?? '',
+	author: form.controls.author.value ?? '',
+	context: form.controls.context.value ?? ''
+}"/>
+<form	[formGroup]="form"
+		(ngSubmit)="onSave()"
+		class="flex flex-col gap-3 mt-3">
 
 	<w-input formControlName="id" label="ID" [readonly]="true" />
-	<w-textarea formControlName="name" label="Quote" [rows]="3" />
+	<w-textarea formControlName="name" label="Quote" [rows]="6" />
 	<w-input formControlName="author" label="Author" />
 	<w-input formControlName="context" label="Context" />
 
-	<footer class="footer-buttons one_two">
+	<footer class="flex gap-2">
 
-		<button type="button" (click)="onReset()">
+		<button	type="button"
+				class="btn btn-ghost"
+				(click)="onReset()">
 			<svg wGlyph="clear_all"></svg> Clear
 		</button>
 
-		<button type="button" class="error" (click)="onDelete(form.controls.id.value)" [disabled]="!form.controls.id.value">
+		<button	type="button"
+				class="ml-auto btn btn-error"
+				(click)="onDelete(form.controls.id.value)"
+				[disabled]="!form.controls.id.value">
 			<svg wGlyph="delete"></svg> Delete
 		</button>
 
-		<button [disabled]="this.form.pristine || this.form.invalid" class="float-right btn">
-			<svg wGlyph="save"></svg> {{ isUpdate() ? 'Update' : 'Create'}}
+		<button	[disabled]="form.pristine || form.invalid"
+				class="btn">
+			<svg wGlyph="save"></svg> Save
 		</button>
 
 	</footer>

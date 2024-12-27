@@ -1,5 +1,6 @@
 import { Component, computed, effect, input, output, untracked } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { QuoteComponent } from '@components/quote/quote.component';
 import { UUID } from '@constants/common.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { RequiredValidatorDirective } from '@directives/required-validator.directive';
@@ -20,10 +21,10 @@ interface QuoteForm {
 
 @Component({
 	standalone: true,
-	imports: [ RequiredValidatorDirective, ReactiveFormsModule, GlyphDirective, InputComponent, TextareaComponent ],
+	imports: [ RequiredValidatorDirective, ReactiveFormsModule, GlyphDirective, InputComponent, TextareaComponent, QuoteComponent ],
 	selector: 'app-quote-settings-form',
 	templateUrl: './quote-settings.form.html',
-	host: { 'class': 'flex flex-col comp' }
+	host: { 'class': 'flex flex-col' }
 })
 export class QuoteSettingsForm extends BaseComponent {
 
@@ -48,8 +49,8 @@ export class QuoteSettingsForm extends BaseComponent {
 
 			id: fc(),
 			name: nnfc(null, [ Validators.required, Validators.minLength(3) ]),
-			author: nnfc(null, [ Validators.required, Validators.minLength(3) ]),
-			context: nnfc(null, [ Validators.required, Validators.minLength(3) ]),
+			author: nnfc(null, [ Validators.minLength(3) ]),
+			context: nnfc(null, [ Validators.minLength(3) ]),
 
 		});
 

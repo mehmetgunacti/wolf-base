@@ -1,19 +1,25 @@
-@let q = quote();
+<svg wGlyph="quote" class="absolute opacity-80 m-3 md:m-4 text-5xl fill-accent"></svg>
 
-<figure class="flex flex-col">
+@let q = quote() ?? EMPTY_QUOTE;
 
-	<blockquote class="my-auto text-center">
+<div class="inset-3 md:inset-4 grid overflow-y-auto scrollbar scrollbar-dark">
 
-		{{ q.name }}
+	<figure class="flex flex-col">
 
-	</blockquote>
-	<figcaption class="text-right text-base-color-secondary">
+		<blockquote class="my-auto text-center">
 
-		<p class="font-bold text-sm">
-			{{ q.author }}
-			<small class="block font-normal text-xxs leading-4">{{ q.context }}</small>
-		</p>
+			{{ q.name }}
 
-	</figcaption>
+		</blockquote>
+		<figcaption class="text-right text-base-color-secondary">
 
-</figure>
+			<p class="font-bold text-sm">
+				{{ q.author }}
+				<small class="block font-normal text-xxs leading-4">{{ q.context }}</small>
+			</p>
+
+		</figcaption>
+
+	</figure>
+
+</div>

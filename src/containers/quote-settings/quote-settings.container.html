@@ -1,8 +1,9 @@
 <header class="mb-8 comp-title">Quote Settings</header>
-<section>
+<section class="flex flex-col gap-5">
 
+	@let selectedQuote = selected$ | async;
 	<app-quote-settings-form
-		[quote]="selected$ | async"
+		[quote]="selectedQuote"
 		(create)="onCreate($event)"
 		(update)="onUpdate($event)"
 		(delete)="onDelete($event)"

@@ -1,20 +1,9 @@
-<svg wGlyph="quote" class="opacity-80 text-5xl fill-accent"></svg>
+@let wrapper = wrapper$ | async;
 
-@if ((wrapper$ | async); as wrapper) {
+<app-quote [quote]="wrapper?.value ?? null"/>
 
-	<app-quote [quote]="wrapper.value"/>
+<div class="top-0 right-0 absolute opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 p-2 transition-opacity duration-700 cursor-pointer">
 
-}
+	<w-switch [formControl]="fc" severity="success" glyphChecked="play" glyphUnchecked="pause"/>
 
-<div class="top-3 md:top-4 right-3 md:right-4 absolute bg-ghost hover:bg-ghost-hover opacity-0 group-hover:opacity-100 p-2 rounded-full transition-opacity duration-700 cursor-pointer"
-	(click)="setRunning()">
-	@if (running()) {
-
-		<svg wGlyph="play_circle" class="fill-success"></svg>
-
-	} @else {
-
-		<svg wGlyph="pause_circle" class="fill-warn"></svg>
-
-	}
 </div>
