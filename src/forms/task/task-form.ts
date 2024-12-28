@@ -29,7 +29,7 @@ function createFormGroup(value?: Task): FormGroup<TaskFormSchema> {
 		name = '',
 		tags = [],
 		description = null,
-		status = TaskState.ongoing,
+		status = TaskState.paused,
 		priority = TaskPriority.medium,
 		category = TaskCategory.bug,
 		start = formatDate(new Date(), 'yyyy-MM-dd', 'en'),
