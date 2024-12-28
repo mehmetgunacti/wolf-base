@@ -33,7 +33,7 @@ export class QuoteSettingsContainer extends BaseComponent {
 		map(([ quotes, searchTerm ]) => {
 
 			if (searchTerm)
-				return quotes.filter(quote => quote.name.includes(searchTerm));
+				return quotes.filter(quote => quote.name.toLowerCase().includes(searchTerm.toLowerCase()));
 			return quotes;
 
 		})
