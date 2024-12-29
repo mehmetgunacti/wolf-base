@@ -1,8 +1,8 @@
-<!-- @if (splashVisible()) {
+@if (splashVisible()) {
 
 	<app-splash-screen @splash />
 
-} -->
+}
 <app-nav-overlay [visible]="sidebarOpen()" (close)="onCloseNavOverlay()"/>
 <w-progress [visible]="progressVisible()"/>
 <header	class="top-0 right-0 left-0 z-header fixed grid bg-header shadow-component h-header">

@@ -1,4 +1,4 @@
 export const environment = {
 	production: false,
-	splash: 500
+	splash: 1400
 };

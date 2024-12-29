@@ -24,6 +24,7 @@ import { HeaderComponent } from './header/header.component';
 import { NavOverlayComponent } from './nav-overlay/nav-overlay.component';
 import { NavComponent } from './nav/nav.component';
 import { routes } from './routes/app.routes';
+import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 
 export const appImports = [
 
@@ -32,7 +33,8 @@ export const appImports = [
 	NavComponent,
 	NavOverlayComponent,
 	ProgressComponent,
-	CdkScrollable
+	CdkScrollable,
+	SplashScreenComponent
 
 ];
 

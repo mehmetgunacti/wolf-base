@@ -8,13 +8,13 @@ import { selCore_progressVisible, selCore_sidebarState } from '@selectors/core/c
 import { delay, of } from 'rxjs';
 import { environment } from '../environments/environment';
 import { appImports } from './app.config';
+import { splashTrigger } from './splash-screen/splash-screen.animation';
 
 @Component({
-	selector: 'app-root',
-	standalone: true,
 	imports: appImports,
+	selector: 'app-root',
 	templateUrl: './app.component.html',
-	animations: [ sidebarTrigger, mainTrigger ],
+	animations: [ sidebarTrigger, mainTrigger, splashTrigger ],
 })
 export class AppComponent extends BaseComponent {
 
