@@ -8,7 +8,6 @@ import { BaseComponent } from '@libComponents/base.component';
 import { Task } from '@models/project.model';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, DatePipe ],
 	selector: 'app-task',
 	templateUrl: './task.component.html',

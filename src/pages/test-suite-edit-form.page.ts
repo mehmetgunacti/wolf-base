@@ -3,7 +3,6 @@ import { TestSuiteEditFormContainer } from '@containers/test-suite-edit-form.con
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
-	standalone: true,
 	imports: [ TestSuiteEditFormContainer ],
 	selector: 'project-edit-form-page',
 	template: `<app-test-suite-edit-form-container/>`,

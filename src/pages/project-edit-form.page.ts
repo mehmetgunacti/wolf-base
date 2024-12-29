@@ -3,7 +3,6 @@ import { ProjectEditFormContainer } from '@containers/project-edit-form.containe
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
-	standalone: true,
 	imports: [ ProjectEditFormContainer ],
 	selector: 'project-edit-form-page',
 	template: `<app-project-edit-form-container/>`,

@@ -4,7 +4,6 @@ import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-input',
-	standalone: true,
 	templateUrl: './input.component.html',
 	providers: [
 		{

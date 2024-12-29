@@ -4,7 +4,6 @@ import { MenuItem } from '@models/menu.model';
 
 @Component({
 	selector: 'w-breadcrumb',
-	standalone: true,
 	templateUrl: './breadcrumb.component.html',
 	host: { 'class': 'box dark' }
 })

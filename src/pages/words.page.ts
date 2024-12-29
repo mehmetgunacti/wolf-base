@@ -7,7 +7,6 @@ import { BaseComponent } from '@libComponents/base.component';
 import { PortalComponent } from '@libComponents/portal.component';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, PortalComponent, WordsContainer, WordFilterContainer, RouterLink ],
 	selector: 'words-page',
 	template: `

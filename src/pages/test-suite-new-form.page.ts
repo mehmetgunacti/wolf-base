@@ -3,7 +3,6 @@ import { TestSuiteNewFormContainer } from '@containers/test-suite-new-form.conta
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
-	standalone: true,
 	imports: [ TestSuiteNewFormContainer ],
 	selector: 'project-new-form-page',
 	template: `<app-test-suite-new-form-container/>`,

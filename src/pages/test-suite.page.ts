@@ -3,7 +3,6 @@ import { TestSuiteContainer } from '@containers/test-suite/test-suite.container'
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
-	standalone: true,
 	imports: [ TestSuiteContainer ],
 	selector: 'test-suite-page',
 	template: `<app-test-suite-container/>`,

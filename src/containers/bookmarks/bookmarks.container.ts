@@ -16,7 +16,6 @@ import { selBookmark_EntityCount } from '@selectors/entity/entity-bookmark.selec
 import { Observable, map } from 'rxjs';
 
 @Component({
-	standalone: true,
 	imports: [ BookmarkComponent, AsyncPipe, PortalComponent, ModalComponent, BookmarkEditContainer, GlyphDirective ],
 	selector: 'app-bookmarks-container',
 	templateUrl: './bookmarks.container.html',

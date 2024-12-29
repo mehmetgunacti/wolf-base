@@ -11,7 +11,6 @@ import { selCloud_AvailableTasks } from '@selectors/cloud/cloud.selectors';
 import * as conf from './sidebar.conf';
 
 @Component({
-	standalone: true,
 	imports: [ RouterLink, RouterLinkActive, GlyphDirective, NgTemplateOutlet ],
 	selector: 'app-nav',
 	templateUrl: './nav.component.html',

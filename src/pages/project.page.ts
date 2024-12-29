@@ -3,7 +3,6 @@ import { ProjectContainer } from '@containers/project/project.container';
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
-	standalone: true,
 	imports: [ ProjectContainer ],
 	selector: 'project-page',
 	template: `<app-project-container/>`,

@@ -5,7 +5,6 @@ import { BaseComponent } from '@libComponents/base.component';
 import { SearchBoxComponent } from '@libComponents/search-box/search-box.component';
 
 @Component({
-	standalone: true,
 	imports: [ BookmarksSearchAndTagCloudContainer, BookmarksContainer, SearchBoxComponent ],
 	selector: 'bookmarks-page',
 	template: `

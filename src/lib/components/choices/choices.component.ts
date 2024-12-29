@@ -5,7 +5,6 @@ import { BaseComponent } from '@libComponents/base.component';
 import { produce } from 'immer';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective ],
 	selector: 'w-choices',
 	templateUrl: './choices.component.html',

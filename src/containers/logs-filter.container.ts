@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store';
 import { selProject_search } from '@selectors/project/project-ui.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ SearchBoxComponent ],
 	selector: 'app-logs-filter-container',
 	template: '<w-search-box [term]="term()" (search)="onSearch($event)"/>'

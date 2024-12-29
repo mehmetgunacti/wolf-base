@@ -8,7 +8,6 @@ import { selLogs_allEntries } from '@selectors/log/logs.selectors';
 import { PortalComponent } from "../../lib/components/portal.component";
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, TimePastPipe, PortalComponent ],
 	selector: 'app-logs-container',
 	templateUrl: './logs.container.html',

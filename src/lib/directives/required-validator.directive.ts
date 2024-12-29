@@ -5,7 +5,6 @@ import { NgControl } from '@angular/forms';
 * adds a class "required" on an element
 */
 @Directive({
-	standalone: true,
 	selector: '[formControlName],[formControl]'
 })
 export class RequiredValidatorDirective implements OnInit {

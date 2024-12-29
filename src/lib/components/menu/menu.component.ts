@@ -5,7 +5,6 @@ import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-menu',
-	standalone: true,
 	imports: [ RouterModule ],
 	templateUrl: './menu.component.html'
 })

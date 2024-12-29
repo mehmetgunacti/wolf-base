@@ -23,7 +23,6 @@ import { selNote_EntityList } from '@selectors/entity/entity-note.selectors';
 import { fc, fg, nnfc } from '@utils/form.util';
 
 @Component({
-	standalone: true,
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,

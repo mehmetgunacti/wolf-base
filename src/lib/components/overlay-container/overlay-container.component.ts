@@ -4,7 +4,6 @@ import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-overlay-container',
-	standalone: true,
 	templateUrl: './overlay-container.component.html'
 })
 export class OverlayContainerComponent extends BaseComponent {

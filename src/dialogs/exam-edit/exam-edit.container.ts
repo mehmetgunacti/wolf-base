@@ -15,7 +15,6 @@ import { selTestSuite_selected } from '@selectors/test-suite/test-suite-ui.selec
 import { nnfc } from '@utils/form.util';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, ReactiveFormsModule, ExamForm ],
 	selector: 'app-exam-edit-container',
 	templateUrl: './exam-edit.container.html',

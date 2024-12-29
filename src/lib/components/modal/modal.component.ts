@@ -4,7 +4,6 @@ import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-modal',
-	standalone: true,
 	templateUrl: './modal.component.html',
 	animations: [ delayDestroyTrigger ],
 	host: {

@@ -2,7 +2,6 @@ import { computed, Directive, ElementRef, inject, input, OnInit } from '@angular
 import { Glyphs } from '@constants/glyphs.constant';
 
 @Directive({
-	standalone: true,
 	selector: '[wGlyph]'
 })
 export class GlyphDirective implements OnInit {

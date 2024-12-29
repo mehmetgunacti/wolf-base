@@ -6,7 +6,6 @@ import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '../base.component';
 
 @Component({
-	standalone: true,
 	imports: [ CommonModule, FormsModule, GlyphDirective ],
 	selector: 'w-switch',
 	templateUrl: './switch.component.html',

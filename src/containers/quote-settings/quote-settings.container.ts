@@ -14,7 +14,6 @@ import { selQuoteSettings_selected } from '@selectors/quote/quote-settings.selec
 import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 
 @Component({
-	standalone: true,
 	imports: [ QuoteSettingsForm, QuoteSettingsListComponent, AsyncPipe ],
 	selector: 'app-quote-settings-container',
 	templateUrl: './quote-settings.container.html',

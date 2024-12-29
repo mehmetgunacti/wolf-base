@@ -17,7 +17,6 @@ import { selCore_titleLookupUrl } from '@selectors/core/core-configuration.selec
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, BookmarkForm, AsyncPipe ],
 	selector: 'app-bookmark-edit-container',
 	templateUrl: './bookmark-edit.container.html',

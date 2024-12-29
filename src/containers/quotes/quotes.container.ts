@@ -36,7 +36,6 @@ const incoming$ = (pair: Pair, animate: boolean, store: Store): Observable<Quote
 };
 
 @Component({
-	standalone: true,
 	imports: [ QuoteComponent, AsyncPipe, SwitchComponent, ReactiveFormsModule ],
 	selector: 'app-quotes-container',
 	templateUrl: './quotes.container.html',

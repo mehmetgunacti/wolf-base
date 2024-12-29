@@ -7,7 +7,6 @@ import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	selector: 'w-tags-container',
-	standalone: true,
 	imports: [ CommonModule, RouterLink, GlyphDirective ],
 	templateUrl: './tags-container.component.html',
 	host: {

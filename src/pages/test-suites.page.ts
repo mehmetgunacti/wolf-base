@@ -6,7 +6,6 @@ import { PortalComponent } from '@libComponents/portal.component';
 import { TestSuitesContainer } from "../containers/test-suites/test-suites.container";
 
 @Component({
-	standalone: true,
 	imports: [ PortalComponent, GlyphDirective, TestSuitesContainer, RouterLink ],
 	selector: 'test-suites-page',
 	template: `

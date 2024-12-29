@@ -3,7 +3,6 @@ import { NoteContainer } from '@containers/note/note.container';
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
-	standalone: true,
 	imports: [ NoteContainer ],
 	selector: 'note-page',
 	template: `<app-note-container/>`,

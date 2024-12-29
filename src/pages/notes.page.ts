@@ -7,7 +7,6 @@ import { BaseComponent } from '@libComponents/base.component';
 import { PortalComponent } from '@libComponents/portal.component';
 
 @Component({
-	standalone: true,
 	imports: [ PortalComponent, RouterLink, GlyphDirective, NotesSearchAndTagCloudContainer, NotesContainer ],
 	selector: 'notes-page',
 	template: `

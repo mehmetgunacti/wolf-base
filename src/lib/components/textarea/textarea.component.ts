@@ -4,7 +4,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BaseComponent } from '../base.component';
 
 @Component({
-	standalone: true,
 	imports: [ CommonModule ],
 	selector: 'w-textarea',
 	templateUrl: './textarea.component.html',

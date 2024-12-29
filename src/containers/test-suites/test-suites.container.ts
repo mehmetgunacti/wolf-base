@@ -7,7 +7,6 @@ import { HideEnumPipe } from '@pipes/hide-enum.pipe';
 import { selTestSuite_EntityList } from '@selectors/entity/entity-test-suite.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ RouterLink, GlyphDirective, HideEnumPipe ],
 	selector: 'app-test-suites-container',
 	templateUrl: './test-suites.container.html',

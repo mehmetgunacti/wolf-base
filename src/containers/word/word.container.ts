@@ -15,7 +15,6 @@ import { selQuizEntry_EntityIds } from '@selectors/entity/entity-quiz-entry.sele
 import { selWord_SelectedEntity } from '@selectors/word/word-ui.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ PortalComponent, GlyphDirective, CdkMenuModule, RouterLink, WordComponent ],
 	selector: 'app-word-container',
 	templateUrl: './word.container.html',

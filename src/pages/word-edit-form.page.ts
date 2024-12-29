@@ -3,7 +3,6 @@ import { WordEditFormContainer } from '@containers/word-edit-form.container';
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
-	standalone: true,
 	imports: [ WordEditFormContainer ],
 	selector: 'word-edit-form-page',
 	template: `<app-word-edit-form-container/>`,

@@ -5,7 +5,6 @@ import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	selector: 'page-not-found-page',
-	standalone: true,
 	imports: [ GlyphDirective, RouterLink ],
 	template: `
 		<section class="comp m-auto p-16 flex items-center justify-center">

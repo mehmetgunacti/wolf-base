@@ -101,7 +101,6 @@ function getAction(task: CloudTask): Action | null {
 }
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, AsyncPipe, CloudTaskComponent, PortalComponent, AlertComponent, RouterLink ],
 	selector: 'app-cloud-tasks-container',
 	templateUrl: './cloud-tasks.container.html',

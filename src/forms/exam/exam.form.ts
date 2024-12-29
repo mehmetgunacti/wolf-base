@@ -13,7 +13,6 @@ import { Exam } from '@models/test-suite.model';
 import { EXAM_FORM, ExamFormImpl } from './exam-form';
 
 @Component({
-	standalone: true,
 	imports: [ InputComponent, RequiredValidatorDirective, ChoicesComponent, ReactiveFormsModule, GlyphDirective, PortalComponent, TextareaComponent ],
 	selector: 'app-exam-form',
 	templateUrl: './exam.form.html',

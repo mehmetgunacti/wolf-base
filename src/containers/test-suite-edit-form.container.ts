@@ -12,7 +12,6 @@ import { Store } from '@ngrx/store';
 import { selTestSuite_selected } from '@selectors/test-suite/test-suite-ui.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ PortalComponent, RouterLink, TestSuiteForm, GlyphDirective ],
 	selector: 'app-test-suite-edit-form-container',
 	template: `

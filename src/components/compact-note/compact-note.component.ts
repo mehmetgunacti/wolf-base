@@ -7,7 +7,6 @@ import { Note } from '@models/note.model';
 import { TimePastPipe } from '@pipes/time-past.pipe';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, RouterLink, TimePastPipe ],
 	selector: 'app-compact-note',
 	templateUrl: './compact-note.component.html',

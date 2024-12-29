@@ -29,7 +29,6 @@ function formatQueryParams(queryParams: TaskQueryParams): string {
 }
 
 @Component({
-	standalone: true,
 	imports: [ PortalComponent, GlyphDirective, CdkMenuModule, RouterLink, ModalComponent, TaskEditContainer, ProjectComponent, TaskComponent, TasksFilterContainer ],
 	selector: 'app-project-container',
 	templateUrl: './project.container.html',

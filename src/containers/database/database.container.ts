@@ -12,7 +12,6 @@ import { FormatBytesPipe } from '@pipes/format-bytes.pipe';
 import { selDatabase_Report } from '@selectors/database/database.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, PortalComponent, GlyphDirective, FormatBytesPipe, ModuleReportComponent, AlertComponent ],
 	selector: 'app-database-container',
 	templateUrl: './database.container.html',

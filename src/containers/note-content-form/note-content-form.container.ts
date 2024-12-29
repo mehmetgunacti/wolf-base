@@ -16,7 +16,6 @@ import { selNote_SelectedEntity } from '@selectors/note/note-ui.selectors';
 import { fc } from '@utils/form.util';
 
 @Component({
-	standalone: true,
 	imports: [ RouterLink, GlyphDirective, MarkdownEditorComponent, PortalComponent, ReactiveFormsModule ],
 	selector: 'app-note-content-form-container',
 	templateUrl: './note-content-form.container.html',

@@ -17,7 +17,6 @@ import { Task } from '@models/project.model';
 import { TASK_FORM, TaskFormImpl } from './task-form';
 
 @Component({
-	standalone: true,
 	imports: [ InputComponent, RequiredValidatorDirective, InputTagComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe, PortalComponent, SelectComponent, TextareaComponent ],
 	selector: 'app-task-form',
 	templateUrl: './task.form.html',

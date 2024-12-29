@@ -7,7 +7,6 @@ import { Definition, Word } from '@models/word.model';
 import { DefinitionTypePipe } from '@pipes/definition-type.pipe';
 
 @Component({
-	standalone: true,
 	imports: [ LanguagesComponent, SwitchComponent, DefinitionTypePipe ],
 	selector: 'app-word',
 	templateUrl: './word.component.html',

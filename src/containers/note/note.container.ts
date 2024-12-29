@@ -18,7 +18,6 @@ import { selNote_SelectedEntity, selNote_selectedEntityChildren, selNote_selecte
 import { map, Observable } from 'rxjs';
 
 @Component({
-	standalone: true,
 	imports: [ CdkMenuModule, RouterLink, GlyphDirective, PortalComponent, AsyncPipe, NoteContentComponent, NoteComponent ],
 	selector: 'app-note-container',
 	templateUrl: './note.container.html',

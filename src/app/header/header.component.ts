@@ -8,7 +8,6 @@ import { selCloud_AvailableTasks } from '@selectors/cloud/cloud.selectors';
 import { environment } from 'environments/environment';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective ],
 	selector: 'app-header',
 	templateUrl: './header.component.html',

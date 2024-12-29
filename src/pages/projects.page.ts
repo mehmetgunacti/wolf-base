@@ -7,7 +7,6 @@ import { BaseComponent } from '@libComponents/base.component';
 import { PortalComponent } from '@libComponents/portal.component';
 
 @Component({
-	standalone: true,
 	imports: [ PortalComponent, GlyphDirective, ProjectsContainer, ProjectFilterContainer, RouterLink ],
 	selector: 'projects-page',
 	template: `

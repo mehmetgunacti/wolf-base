@@ -7,7 +7,6 @@ import { ModuleReport } from '@models/database.model';
 import { FormatBytesPipe } from '@pipes/format-bytes.pipe';
 
 @Component({
-	standalone: true,
 	imports: [ FormatBytesPipe, GlyphDirective, DecimalPipe ],
 	selector: 'app-module-report',
 	templateUrl: './module-report.component.html',

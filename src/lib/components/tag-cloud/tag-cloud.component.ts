@@ -83,7 +83,6 @@ function createUITags(selectedTags: string[], relatedTags: string[], tags: Tag[]
 }
 
 @Component({
-	standalone: true,
 	imports: [ CommonModule ],
 	selector: 'w-tag-cloud',
 	templateUrl: './tag-cloud.component.html',

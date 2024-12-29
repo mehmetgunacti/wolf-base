@@ -14,7 +14,6 @@ import { Subject } from 'rxjs';
 import { NOTE_FORM, NoteFormImpl } from './note-form';
 
 @Component({
-	standalone: true,
 	imports: [ RequiredValidatorDirective, InputComponent, InputTagComponent, SelectTreeComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe ],
 	selector: 'app-note-form',
 	templateUrl: './note.form.html',

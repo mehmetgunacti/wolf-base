@@ -5,7 +5,6 @@ import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
-	standalone: true,
 	imports: [ ShowcaseContainer, RouterLink, GlyphDirective ],
 	selector: 'showcase-page',
 	template: `

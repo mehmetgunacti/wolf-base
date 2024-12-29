@@ -10,7 +10,6 @@ import { Word } from '@models/word.model';
 import { Store } from '@ngrx/store';
 
 @Component({
-	standalone: true,
 	imports: [ PortalComponent, RouterLink, WordForm, GlyphDirective ],
 	selector: 'app-word-new-form-container',
 	template: `

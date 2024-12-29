@@ -13,7 +13,6 @@ import { Project } from '@models/project.model';
 import { PROJECT_FORM, ProjectFormImpl } from './project-form';
 
 @Component({
-	standalone: true,
 	imports: [ RequiredValidatorDirective, InputComponent, SelectComponent, ReactiveFormsModule, GlyphDirective ],
 	selector: 'app-project-form',
 	templateUrl: './project.form.html',

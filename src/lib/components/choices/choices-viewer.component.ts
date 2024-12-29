@@ -3,7 +3,6 @@ import { Component, input } from '@angular/core';
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
-	standalone: true,
 	imports: [CommonModule],
 	selector: 'w-choices-viewer',
 	templateUrl: './choices-viewer.component.html',

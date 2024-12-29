@@ -13,7 +13,6 @@ import { HideEnumPipe } from '@pipes/hide-enum.pipe';
 import { selSession_exam } from '@selectors/session/session-ui.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, ReactiveFormsModule, SessionComponent, HideEnumPipe, ExamDetailsComponent ],
 	selector: 'app-session-container',
 	templateUrl: './session.container.html',

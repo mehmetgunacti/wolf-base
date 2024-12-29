@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store';
 import { selCore_firestoreConfig } from '@selectors/core/core-configuration.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ FirestoreConfigForm ],
 	selector: 'app-firestore-config-container',
 	templateUrl: './firestore-config.container.html',

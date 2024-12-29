@@ -9,7 +9,6 @@ import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'w-input-tag',
-	standalone: true,
 	imports: [ CommonModule, GlyphDirective ],
 	templateUrl: './input-tag.component.html',
 	providers: [

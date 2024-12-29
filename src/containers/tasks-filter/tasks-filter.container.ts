@@ -16,7 +16,6 @@ import { nnfc } from '@utils/form.util';
 const all: NameBase = { id: 'all', name: 'All' };
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, ReactiveFormsModule, SelectComponent ],
 	selector: 'app-tasks-filter-container',
 	templateUrl: './tasks-filter.container.html',

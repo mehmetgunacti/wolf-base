@@ -8,7 +8,6 @@ import { PortalComponent } from '@libComponents/portal.component';
 
 @Component({
 	selector: 'home-page',
-	standalone: true,
 	imports: [ PortalComponent, PopularBookmarksContainer, QuoteContainer, PinnedNotesContainer, QuizContainerComponent ],
 	template: `
 		<w-portal>

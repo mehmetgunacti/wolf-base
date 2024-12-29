@@ -8,7 +8,6 @@ import { FirestoreConfig } from '@models/configuration.model';
 import { configForm } from './firestore-config-form';
 
 @Component({
-	standalone: true,
 	imports: [ RequiredValidatorDirective, ReactiveFormsModule, GlyphDirective, InputComponent ],
 	selector: 'app-firestore-config-form',
 	templateUrl: './firestore-config.form.html',

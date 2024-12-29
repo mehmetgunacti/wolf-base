@@ -15,7 +15,6 @@ import { selCore_popularBookmarks } from '@selectors/core/core-configuration.sel
 import { debounceTime, distinctUntilChanged, map, Observable, Subscription } from 'rxjs';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, TagCloudComponent, AsyncPipe, SelectedTagsComponent, ReactiveFormsModule ],
 	selector: 'app-bookmarks-search-and-tag-cloud-container',
 	templateUrl: './bookmarks-search-and-tag-cloud.container.html',

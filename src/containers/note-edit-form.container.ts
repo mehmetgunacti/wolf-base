@@ -16,7 +16,6 @@ import { selNote_SelectedEntity } from '@selectors/note/note-ui.selectors';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 
 @Component({
-	standalone: true,
 	imports: [ AsyncPipe, PortalComponent, RouterLink, GlyphDirective, NoteForm ],
 	selector: 'app-note-edit-form-container',
 	template: `

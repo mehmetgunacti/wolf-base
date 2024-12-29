@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { selCore_titleLookupUrl } from '@selectors/core/core-configuration.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ TitleLookupConfigForm ],
 	selector: 'app-title-lookup-config-container',
 	templateUrl: './title-lookup-config.container.html',

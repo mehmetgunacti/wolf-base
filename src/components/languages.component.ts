@@ -3,7 +3,6 @@ import { BaseComponent } from '@libComponents/base.component';
 import { Language } from '@models/word.model';
 
 @Component({
-	standalone: true,
 	selector: 'w-languages',
 	template: `
 		@for (lang of languages(); track $index) {

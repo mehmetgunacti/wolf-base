@@ -2,7 +2,6 @@ import { Component, input, output } from '@angular/core';
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
-	standalone: true,
 	selector: 'app-nav-overlay',
 	template: '',
 	host: {

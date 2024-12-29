@@ -8,7 +8,6 @@ import { WolfToastRef } from './toast.service';
 import { ToastConfiguration } from './toast.util';
 
 @Component({
-	standalone: true,
 	selector: 'w-toast-wrapper',
 	templateUrl: './toast-wrapper.component.html',
 	imports: [ CommonModule, ToastComponent ],

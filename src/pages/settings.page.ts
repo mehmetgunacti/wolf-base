@@ -14,7 +14,6 @@ import { buildInfo } from 'version';
 
 @Component({
 	selector: 'settings-page',
-	standalone: true,
 	imports: [
 		AsyncPipe,
 		DatePipe,

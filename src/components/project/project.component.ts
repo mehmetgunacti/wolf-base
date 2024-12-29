@@ -9,7 +9,6 @@ import { Project } from '@models/project.model';
 import { TimePastPipe } from '@pipes/time-past.pipe';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, RouterLink, TimePastPipe, DatePipe ],
 	selector: 'app-project',
 	templateUrl: './project.component.html',

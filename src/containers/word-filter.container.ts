@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { selWord_search } from '@selectors/word/word-ui.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ SearchBoxComponent ],
 	selector: 'app-word-filter-container',
 	template: '<w-search-box [term]="term()" (search)="onSearch($event)"/>'

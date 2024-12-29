@@ -19,7 +19,6 @@ import { UNDO_CACHE, UndoCache, UndoCacheImpl } from './undo-cache.util';
 
 @Component({
 	selector: 'w-markdown-editor',
-	standalone: true,
 	imports: [ GlyphDirective, SelectorTableComponent, MarkdownViewerComponent, TimePastPipe, CdkMenuModule, ModalComponent, ReactiveFormsModule, CommonModule ],
 	templateUrl: './markdown-editor.component.html',
 	providers: [

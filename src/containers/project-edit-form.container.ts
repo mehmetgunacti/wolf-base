@@ -12,7 +12,6 @@ import { Store } from '@ngrx/store';
 import { selProject_selected } from '@selectors/project/project-ui.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ PortalComponent, RouterLink, ProjectForm, GlyphDirective ],
 	selector: 'app-project-edit-form-container',
 	template: `

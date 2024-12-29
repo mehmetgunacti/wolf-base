@@ -10,7 +10,6 @@ import { selSession_EntityList } from '@selectors/entity/entity-session.selector
 import { selExam_detailsEntity } from '@selectors/exam/exam-ui.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, ReactiveFormsModule, ExamDetailsComponent, HideEnumPipe ],
 	selector: 'app-exam-details-container',
 	templateUrl: './exam-detail.container.html',

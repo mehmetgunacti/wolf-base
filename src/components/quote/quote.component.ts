@@ -5,7 +5,6 @@ import { Quote } from '@models/quote.model';
 
 @Component({
 	selector: 'app-quote',
-	standalone: true,
 	imports: [ GlyphDirective ],
 	templateUrl: './quote.component.html',
 	host: {

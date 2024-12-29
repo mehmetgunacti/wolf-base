@@ -3,7 +3,6 @@ import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '../base.component';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective ],
 	selector: 'w-selected-tags',
 	templateUrl: './selected-tags.component.html',

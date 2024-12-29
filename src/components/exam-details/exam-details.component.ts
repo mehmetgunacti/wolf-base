@@ -5,7 +5,6 @@ import { ChoicesViewerComponent } from '@libComponents/choices/choices-viewer.co
 import { Exam, Session } from '@models/test-suite.model';
 
 @Component({
-	standalone: true,
 	imports: [ ChoicesViewerComponent, DatePipe ],
 	selector: 'app-exam-details',
 	templateUrl: './exam-details.component.html',

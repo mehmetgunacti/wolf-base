@@ -12,7 +12,6 @@ import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '../base.component';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective ],
 	selector: 'w-croppie',
 	templateUrl: './croppie.component.html',

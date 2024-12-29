@@ -11,7 +11,6 @@ import { map } from 'rxjs';
 
 @Component({
 	selector: 'app-pinned-notes-container',
-	standalone: true,
 	imports: [ CommonModule, TagsContainerComponent, CompactNoteComponent ],
 	templateUrl: './pinned-notes.container.html',
 	host: { 'class': 'flex flex-col gap-1 md:gap-2 @container' }

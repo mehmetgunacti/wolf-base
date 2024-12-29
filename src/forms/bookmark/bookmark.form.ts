@@ -18,7 +18,6 @@ import { Observable, Subject, debounceTime, distinctUntilChanged, map, startWith
 import { BOOKMARK_FORM, BookmarkFormImpl } from './bookmark-form';
 
 @Component({
-	standalone: true,
 	imports: [ InputComponent, RequiredValidatorDirective, InputTagComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe, CroppieComponent, CompactBookmarkComponent, PortalComponent ],
 	selector: 'app-bookmark-form',
 	templateUrl: './bookmark.form.html',

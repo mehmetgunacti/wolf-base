@@ -10,7 +10,6 @@ import { Project } from '@models/project.model';
 import { Store } from '@ngrx/store';
 
 @Component({
-	standalone: true,
 	imports: [ PortalComponent, RouterLink, ProjectForm, GlyphDirective ],
 	selector: 'app-project-new-form-container',
 	template: `

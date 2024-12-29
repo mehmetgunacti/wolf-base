@@ -22,7 +22,6 @@ import { QuizService } from '@services/quiz.service';
 import { choicesBlinkTrigger } from './quiz.animation';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, MarkOrHighlightPipe, LanguagesComponent, CommonModule, ModalComponent, WordComponent ],
 	selector: 'app-quiz-container',
 	templateUrl: './quiz.container.html',

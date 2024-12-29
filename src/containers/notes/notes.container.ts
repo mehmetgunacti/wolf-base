@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { selNote_filteredNotes } from '@selectors/note/note-tags.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ RouterLink, GlyphDirective ],
 	selector: 'app-notes-container',
 	templateUrl: './notes.container.html',

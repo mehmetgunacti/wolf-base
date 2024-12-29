@@ -19,7 +19,6 @@ import { selSession_dialogVisible } from '@selectors/session/session-ui.selector
 import { selTestSuite_selected } from '@selectors/test-suite/test-suite-ui.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ PortalComponent, GlyphDirective, CdkMenuModule, RouterLink, TestSuiteComponent, ModalComponent, ExamEditContainer, ExamsComponent, ExamDetailsContainer, SessionContainer ],
 	selector: 'app-test-suite-container',
 	templateUrl: './test-suite.container.html',

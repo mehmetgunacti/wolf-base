@@ -10,7 +10,6 @@ import { OptionsComponent } from './options.component';
 import { ROOT_ID } from './select.util';
 
 @Component({
-	standalone: true,
 	imports: [ ReactiveFormsModule, CdkTreeModule, CdkMenuModule, OptionsComponent, CommonModule ],
 	selector: 'w-select-tree',
 	templateUrl: './select-tree.component.html',

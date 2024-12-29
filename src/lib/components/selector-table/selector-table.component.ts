@@ -11,7 +11,6 @@ function parseId(id: string): number[] {
 
 @Component({
 	selector: 'w-selector-table',
-	standalone: true,
 	templateUrl: 'selector-table.component.html',
 	host: { 'class': 'flex flex-col' }
 })

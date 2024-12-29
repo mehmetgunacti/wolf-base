@@ -9,7 +9,6 @@ import { selNote_distinctTagsArray } from '@selectors/note/note-tags.selectors';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 
 @Component({
-	standalone: true,
 	imports: [ TagForm, AsyncPipe ],
 	selector: 'app-pinned-notes-form-container',
 	templateUrl: './pinned-notes-form.container.html',

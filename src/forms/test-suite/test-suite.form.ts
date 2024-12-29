@@ -9,7 +9,6 @@ import { TestSuite } from '@models/test-suite.model';
 import { TEST_SUITE_FORM, TestSuiteFormImpl } from './test-suite-form';
 
 @Component({
-	standalone: true,
 	imports: [ RequiredValidatorDirective, InputComponent, ReactiveFormsModule, GlyphDirective ],
 	selector: 'app-test-suite-form',
 	templateUrl: './test-suite.form.html',

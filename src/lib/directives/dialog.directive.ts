@@ -1,7 +1,6 @@
 import { Directive, ElementRef, inject, output } from '@angular/core';
 
 @Directive({
-	standalone: true,
 	selector: '[appModal]',
 	host: {
 		// 'class': 'component',

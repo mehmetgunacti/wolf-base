@@ -8,7 +8,6 @@ import { HideEnumPipe } from '@pipes/hide-enum.pipe';
 import { sortByName } from '@utils/array.util';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, HideEnumPipe ],
 	selector: 'app-exams',
 	templateUrl: './exams.component.html',

@@ -9,7 +9,6 @@ import { selBookmark_popular } from '@selectors/bookmark/bookmark-clicks.selecto
 import { selCore_popularBookmarks } from '@selectors/core/core-configuration.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ CompactBookmarkComponent, TagsContainerComponent ],
 	selector: 'app-popular-bookmarks-container',
 	templateUrl: './popular-bookmarks.container.html',

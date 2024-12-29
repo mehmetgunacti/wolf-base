@@ -6,7 +6,6 @@ import { MarkdownToHtmlPipe } from './markdown-to-html.pipe';
 
 @Component({
 	selector: 'w-markdown-viewer',
-	standalone: true,
 	imports: [ MarkdownToHtmlPipe, SanitizeHtmlPipe ],
 	templateUrl: './markdown-viewer.component.html'
 })

@@ -3,7 +3,6 @@ import { AfterViewInit, Component, EmbeddedViewRef, inject, input, OnDestroy, Te
 import { BaseComponent } from './base.component';
 
 @Component({
-	standalone: true,
 	selector: 'w-portal',
 	template: `
 		<ng-template #outlet>

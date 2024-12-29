@@ -6,7 +6,6 @@ import { BaseComponent } from '../base.component';
 import { ToastConfiguration } from './toast.util';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective ],
 	selector: 'w-toast',
 	templateUrl: './toast.component.html',

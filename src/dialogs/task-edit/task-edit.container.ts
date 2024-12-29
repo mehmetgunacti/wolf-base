@@ -16,7 +16,6 @@ import { selTask_editEntity } from '@selectors/task/task-ui.selectors';
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, TaskForm, AsyncPipe ],
 	selector: 'app-task-edit-container',
 	templateUrl: './task-edit.container.html',

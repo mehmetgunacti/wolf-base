@@ -30,7 +30,6 @@ function toAction(type: SyncTaskType): 'upload' | 'download' | 'view' {
 }
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective ],
 	selector: 'app-cloud-task',
 	templateUrl: './cloud-task.component.html'

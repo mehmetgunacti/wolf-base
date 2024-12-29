@@ -6,7 +6,6 @@ import { BaseComponent } from '@libComponents/base.component';
 import { InputTagComponent } from '@libComponents/input-tag/input-tag.component';
 
 @Component({
-	standalone: true,
 	imports: [ RequiredValidatorDirective, ReactiveFormsModule, GlyphDirective, InputTagComponent ],
 	selector: 'app-tag-form',
 	templateUrl: './tag.form.html',

@@ -10,7 +10,6 @@ import { SESSION_STORE, SessionStore, SessionStoreImpl } from './session.store';
 import { TextareaComponent } from "../../lib/components/textarea/textarea.component";
 
 @Component({
-	standalone: true,
 	imports: [GlyphDirective, ChoicesComponent, ReactiveFormsModule, TextareaComponent],
 	selector: 'app-session',
 	templateUrl: './session.component.html',

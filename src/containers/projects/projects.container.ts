@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { selProject_filtered } from '@selectors/project/project-ui.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ RouterLink, GlyphDirective ],
 	selector: 'app-projects-container',
 	templateUrl: './projects.container.html',

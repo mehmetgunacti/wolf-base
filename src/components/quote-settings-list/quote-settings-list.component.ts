@@ -8,7 +8,6 @@ import { Quote } from '@models/quote.model';
 import { fc } from '@utils/form.util';
 
 @Component({
-	standalone: true,
 	imports: [ ReactiveFormsModule, InputComponent ],
 	selector: 'app-quote-settings-list',
 	templateUrl: './quote-settings-list.component.html',

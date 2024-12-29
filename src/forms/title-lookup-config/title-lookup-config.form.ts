@@ -7,7 +7,6 @@ import { InputComponent } from '@libComponents/input/input.component';
 import { nnfc, urlValidator } from '@utils/form.util';
 
 @Component({
-	standalone: true,
 	imports: [ RequiredValidatorDirective, ReactiveFormsModule, GlyphDirective, InputComponent ],
 	selector: 'app-title-lookup-config-form',
 	templateUrl: './title-lookup-config.form.html',

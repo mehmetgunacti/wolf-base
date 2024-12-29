@@ -8,7 +8,6 @@ import { BaseComponent } from '@libComponents/base.component';
 import { ClickedBookmark } from '@models/bookmark.model';
 
 @Component({
-	standalone: true,
 	imports: [ RouterModule, GlyphDirective, CompactBookmarkComponent ],
 	selector: 'app-bookmark',
 	templateUrl: './bookmark.component.html',

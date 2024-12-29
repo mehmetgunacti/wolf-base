@@ -15,7 +15,6 @@ import { selNote_distinctTagsArray, selNote_queryParams, selNote_relatedTags } f
 import { debounceTime, distinctUntilChanged, map, Observable, Subscription } from 'rxjs';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, TagCloudComponent, AsyncPipe, SelectedTagsComponent, ReactiveFormsModule ],
 	selector: 'app-notes-search-and-tag-cloud-container',
 	templateUrl: './notes-search-and-tag-cloud.container.html',

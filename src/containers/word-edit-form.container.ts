@@ -12,7 +12,6 @@ import { Store } from '@ngrx/store';
 import { selWord_SelectedEntity } from '@selectors/word/word-ui.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ PortalComponent, RouterLink, WordForm, GlyphDirective ],
 	selector: 'app-word-edit-form-container',
 	template: `

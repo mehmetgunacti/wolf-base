@@ -20,7 +20,6 @@ interface QuoteForm {
 }
 
 @Component({
-	standalone: true,
 	imports: [ RequiredValidatorDirective, ReactiveFormsModule, GlyphDirective, InputComponent, TextareaComponent, QuoteComponent ],
 	selector: 'app-quote-settings-form',
 	templateUrl: './quote-settings.form.html',

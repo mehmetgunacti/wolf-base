@@ -12,7 +12,6 @@ import { Word } from '@models/word.model';
 import { WORD_FORM, WordFormImpl } from './word-form';
 
 @Component({
-	standalone: true,
 	imports: [ RequiredValidatorDirective, ReactiveFormsModule, InputComponent, GlyphDirective, TextareaComponent, SelectComponent ],
 	selector: 'app-word-form',
 	templateUrl: './word.form.html',

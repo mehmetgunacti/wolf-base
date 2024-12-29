@@ -3,7 +3,6 @@ import { NoteContentFormContainer } from '@containers/note-content-form/note-con
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
-	standalone: true,
 	imports: [ NoteContentFormContainer ],
 	selector: 'note-content-form-page',
 	template: `<app-note-content-form-container/>`,

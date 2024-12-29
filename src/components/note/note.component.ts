@@ -8,7 +8,6 @@ import { HideEnumPipe } from '@pipes/hide-enum.pipe';
 import { TimePastPipe } from '@pipes/time-past.pipe';
 
 @Component({
-	standalone: true,
 	imports: [ RouterLink, HideEnumPipe, DatePipe, GlyphDirective, TimePastPipe ],
 	selector: 'app-note',
 	templateUrl: './note.component.html',

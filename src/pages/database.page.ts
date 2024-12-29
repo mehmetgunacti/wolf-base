@@ -8,7 +8,6 @@ import { Store } from '@ngrx/store';
 
 @Component({
 	selector: 'database-page',
-	standalone: true,
 	imports: [ PortalComponent, DatabaseContainer, GlyphDirective ],
 	template: `
 		<w-portal [replaceContent]="false">

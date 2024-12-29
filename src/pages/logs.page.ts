@@ -5,7 +5,6 @@ import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	selector: 'logs-page',
-	standalone: true,
 	imports: [ LogsFilterContainer, LogsContainer ],
 	template: `
 		<app-logs-filter-container/>

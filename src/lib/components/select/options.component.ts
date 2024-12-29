@@ -18,7 +18,6 @@ const flattenTree = (item: TreeItem): TreeItem[] => {
 };
 
 @Component({
-	standalone: true,
 	imports: [ ReactiveFormsModule, CdkTreeModule, CdkMenuModule, GlyphDirective ],
 	selector: 'w-options',
 	templateUrl: './options.component.html'

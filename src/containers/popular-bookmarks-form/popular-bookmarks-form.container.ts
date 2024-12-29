@@ -9,7 +9,6 @@ import { selCore_popularBookmarks } from '@selectors/core/core-configuration.sel
 import { Observable, Subject, combineLatest, map } from 'rxjs';
 
 @Component({
-	standalone: true,
 	imports: [ TagForm, AsyncPipe ],
 	selector: 'app-popular-bookmarks-form-container',
 	templateUrl: './popular-bookmarks-form.container.html',

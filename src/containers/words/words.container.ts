@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { selWord_filtered } from '@selectors/word/word-ui.selectors';
 
 @Component({
-	standalone: true,
 	imports: [ RouterLink, GlyphDirective ],
 	selector: 'app-words-container',
 	templateUrl: './words.container.html',

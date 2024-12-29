@@ -6,7 +6,6 @@ import { ClickedBookmark } from '@models/bookmark.model';
 
 @Component({
 	selector: 'app-compact-bookmark',
-	standalone: true,
 	imports: [ GlyphDirective ],
 	templateUrl: './compact-bookmark.component.html',
 	host: {

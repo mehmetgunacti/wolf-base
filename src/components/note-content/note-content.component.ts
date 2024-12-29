@@ -5,7 +5,6 @@ import { Note, NoteContent } from '@models/note.model';
 import { HideEnumPipe } from '@pipes/hide-enum.pipe';
 
 @Component({
-	standalone: true,
 	imports: [ MarkdownViewerComponent, HideEnumPipe ],
 	selector: 'app-note-content',
 	templateUrl: './note-content.component.html',

@@ -6,7 +6,6 @@ import { TestSuite } from '@models/test-suite.model';
 import { HideEnumPipe } from '@pipes/hide-enum.pipe';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, RouterLink, HideEnumPipe ],
 	selector: 'app-test-suite',
 	templateUrl: './test-suite.component.html',

@@ -8,7 +8,6 @@ import { BaseComponent } from '../base.component';
 import { InputComponent } from '../input/input.component';
 
 @Component({
-	standalone: true,
 	imports: [ GlyphDirective, InputComponent, ReactiveFormsModule ],
 	selector: 'w-search-box',
 	templateUrl: './search-box.component.html',

@@ -10,7 +10,6 @@ import { TestSuite } from '@models/test-suite.model';
 import { Store } from '@ngrx/store';
 
 @Component({
-	standalone: true,
 	imports: [ PortalComponent, RouterLink, TestSuiteForm, GlyphDirective ],
 	selector: 'app-test-suite-new-form-container',
 	template: `
