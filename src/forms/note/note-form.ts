@@ -31,7 +31,7 @@ function createFormGroup(value?: Note): FormGroup<NoteFormSchema> {
 		id: fc(id),
 		name: nnfc(name, Validators.required),
 		parentId: fc(parentId),
-		tags: nnfc(tags, Validators.required),
+		tags: nnfc(tags),
 		urls: fa(urls.map(c => nnfc(c, Validators.required)))
 
 	});
