@@ -1,4 +1,4 @@
-<div class="flex place-content-center w-12 ms-2">
+<div class="flex place-content-center w-12">
 	<svg wGlyph="search"></svg>
 </div>
 <w-input type="search" [formControl]="fcSearch" label="Search"/>
@@ -14,9 +14,10 @@
 			absolute
 			right-2
 
-			top-4
+			top-3
 			me-2
 		">
 		<svg wGlyph="close" class="text-secondary"></svg>
 	</button>
 }
+<ng-content/>

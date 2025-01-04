@@ -12,7 +12,7 @@ import { InputComponent } from '../input/input.component';
 	selector: 'w-search-box',
 	templateUrl: './search-box.component.html',
 	host: {
-		'class': 'relative flex items-center gap-1 comp comp-dark py-3 pe-3 min-h-14'
+		'class': 'relative flex items-center gap-1 comp comp-dark py-2 px-2 min-h-14'
 	}
 })
 export class SearchBoxComponent extends BaseComponent {
