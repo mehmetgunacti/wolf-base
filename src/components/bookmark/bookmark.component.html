@@ -7,7 +7,7 @@
 	(linkClick)="onLinkClick($event)"/>
 
 <!-- glyphs -->
-<div class="inline-flex right-0 z-10 absolute flex-col justify-between items-center px-1 py-[2px] max-h-24 peer">
+<div class="inline-flex right-0 z-10 absolute flex-col justify-between items-center px-1 py-2 h-full peer">
 
 	<button class="btn btn-2xs btn-glyph" (click)="onPopular()">
 		@if(bm.tags.includes(TAG_POPULAR)){
@@ -22,9 +22,6 @@
 	</button>
 	<button class="btn btn-2xs btn-glyph" (click)="onEdit()">
 		<svg wGlyph="edit"></svg>
-	</button>
-	<button class="btn btn-2xs btn-glyph">
-		<svg wGlyph="stat_minus_2"></svg>
 	</button>
 
 </div>
