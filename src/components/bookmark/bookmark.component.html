@@ -11,7 +11,7 @@
 	<div class="flex items-center gap-1 md:gap-2">
 
 		<small class="text-2xs">{{bm.clicks}} click@if (bm.clicks !== 1) {s}</small>
-		<button class="btn btn-2xs btn-glyph ms-auto" (click)="onPopular()">
+		<button class="btn btn-2xs btn-glyph ms-auto" (click)="onPopular()" title="Toggle Popular Tag">
 			@if(bm.tags.includes(TAG_POPULAR)){
 
 				<svg wGlyph="heart_filled"></svg>
@@ -22,7 +22,7 @@
 
 			}
 		</button>
-		<button class="btn btn-2xs btn-glyph" (click)="onEdit()">
+		<button class="btn btn-2xs btn-glyph" (click)="onEdit()" title="Edit">
 			<svg wGlyph="edit"></svg>
 		</button>
 
