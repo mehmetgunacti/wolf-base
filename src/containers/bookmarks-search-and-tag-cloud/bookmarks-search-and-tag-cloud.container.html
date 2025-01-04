@@ -1,25 +1,48 @@
-<header class="flex items-center gap-1 p-3">
+<div class="flex flex-col comp-dark min-h-14 comp">
 
-	<w-selected-tags
-		class="flex-1 ms-2"
-		[tags]="(popularTags$ | async) ?? []"
-		[selectedTags]="(selectedTags$ | async) ?? []"
-		(filterClick)="emptyFilter()"
-		(tagClick)="onTagClicked($event)"/>
+	<div class="flex items-center gap-1 p-3">
 
-	<button class="btn btn-glyph" (click)="toggleCloud()">
-		<svg wGlyph="chevron_left" [class.-rotate-90]="cloudVisible()" name="chevron_left" class="transition-transform duration-500"></svg>
+		<w-selected-tags
+			class="flex-1 ms-2"
+			[tags]="(popularTags$ | async) ?? []"
+			[selectedTags]="(selectedTags$ | async) ?? []"
+			(filterClick)="emptyFilter()"
+			(tagClick)="onTagClicked($event)"/>
+
+		<button class="btn btn-glyph" (click)="toggleCloud()">
+			<svg wGlyph="chevron_left" [class.-rotate-90]="cloudVisible()" name="chevron_left" class="transition-transform duration-500"></svg>
+		</button>
+
+	</div>
+
+	<!-- TAG CLOUD -->
+	<section [@slideUpDown]="cloudVisible() ? 'opened' : 'closed'" class="h-60 overflow-y-auto me-2 scrollbar scrollbar-dark scrollbar-gutter-stable">
+
+		<w-tag-cloud
+			[tags]="(tags$ | async) ?? []"
+			[selectedTags]="(selectedTags$ | async) ?? []"
+			[relatedTags]="(relatedTags$ | async) ?? []"
+			(tagClick)="onTagClicked($event)"></w-tag-cloud>
+
+	</section>
+
+</div>
+
+<div class="flex items-center gap-1 comp-dark w-full comp pe-2">
+
+	<w-search-box class="flex-1 bg-transparent shadow-none pe-0"/>
+	<button class="btn btn-glyph squared" [title]="tagsBtnLabel()" (click)="toggleTags()">
+
+		@if (tagsVisible()) {
+
+			<svg wGlyph="tag_close"></svg>
+
+		} @else {
+
+			<svg wGlyph="tag"></svg>
+
+		}
+
 	</button>
 
-</header>
-
-<!-- TAG CLOUD -->
-<section [@slideUpDown]="cloudVisible() ? 'opened' : 'closed'" class="h-60 overflow-y-auto me-2 scrollbar scrollbar-dark scrollbar-gutter-stable">
-
-	<w-tag-cloud
-		[tags]="(tags$ | async) ?? []"
-		[selectedTags]="(selectedTags$ | async) ?? []"
-		[relatedTags]="(relatedTags$ | async) ?? []"
-		(tagClick)="onTagClicked($event)"></w-tag-cloud>
-
-</section>
+</div>

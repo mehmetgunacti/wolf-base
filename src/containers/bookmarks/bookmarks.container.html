@@ -33,7 +33,9 @@
 							(edit)="onEdit($event)"
 							(popular)="onPopular($event)"
 							(linkClick)="onLinkClick($event)"
-							[showDetails]="true"/>
+							(tagClick)="onTagClicked($event)"
+							[showDetails]="true"
+							[detailed]="tagsVisible()"/>
 
 	}
 

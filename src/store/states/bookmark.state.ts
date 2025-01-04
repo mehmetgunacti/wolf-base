@@ -21,6 +21,7 @@ export interface Bookmark_UIState {
 	formVisible: boolean;
 	editId: UUID | null;
 	shaking: boolean;
+	tagsVisible: boolean;
 
 }
 
@@ -41,7 +42,8 @@ export const bookmark_initialUIState: Bookmark_UIState = {
 	},
 	formVisible: false,
 	editId: null,
-	shaking: false
+	shaking: false,
+	tagsVisible: false
 
 };
 

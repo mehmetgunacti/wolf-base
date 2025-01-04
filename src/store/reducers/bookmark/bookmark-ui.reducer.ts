@@ -11,6 +11,7 @@ const reducer = createReducer(
 	on(bookmarkActions.openEditDialog, (state, { id }): Bookmark_UIState => ({ ...state, editId: id, formVisible: true })),
 	on(bookmarkActions.setQueryParams, (state, { id, search, tags }): Bookmark_UIState => ({ ...state, queryParams: { id, search, tags } })),
 	on(bookmarkActions.editSuccess, (state): Bookmark_UIState => ({ ...state, editId: null, formVisible: false })),
+	on(bookmarkActions.toggleTagVisibility, (state): Bookmark_UIState => ({ ...state, tagsVisible: !state.tagsVisible })),
 
 );
 

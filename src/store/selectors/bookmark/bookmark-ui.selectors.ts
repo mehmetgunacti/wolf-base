@@ -32,3 +32,10 @@ export const selBookmark_formVisible = createSelector(
 	state => state.formVisible
 
 );
+
+export const selBookmark_tagsVisible = createSelector(
+
+	selBookmark_UIState,
+	state => state.tagsVisible
+
+);

@@ -50,6 +50,30 @@ export class BookmarkUIEffects {
 
 	);
 
+	setSelectedTags$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(bookmarkActions.setSelectedTags),
+			withLatestFrom(this.activatedRoute.queryParams),
+			tap(([ { tags: selectedTags }, params ]) => {
+
+				// Destructure 'tags' from query parameters
+				const { tags, ...rest } = params;
+
+				// Create a new set of query parameters based on toggled 'tagsArr'
+				const queryParams: Params = { ...rest, tags: selectedTags.join(',') };
+
+				// Navigate to current route with updated query parameters
+				this.router.navigate([], { queryParams });
+
+			})
+
+		),
+		{ dispatch: false }
+
+	);
+
 	emptyURLTagsQueryParams$ = createEffect(
 
 		() => this.actions$.pipe(
@@ -100,7 +124,7 @@ export class BookmarkUIEffects {
 
 	);
 
-	// whenever address bar query params change emit setQueryParams action for reducers to update state
+	// whenever address bar query params change emit setQueryParams action
 	onQueryParamsChangeSetSelectedTags$ = createEffect(
 
 		() => this.router.events.pipe(

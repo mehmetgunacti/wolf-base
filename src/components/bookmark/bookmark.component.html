@@ -3,115 +3,57 @@
 <!-- compact bookmark -->
 <app-compact-bookmark
 	[bookmark]="bm"
-	class="group-hover/bookmark:w-[calc(100%-35px)] group-focus-within/bookmark:w-[calc(100%-35px)] inline-block z-20 w-full transition-[width] duration-500"
 	(linkClick)="onLinkClick($event)"/>
 
-<!-- glyphs -->
-<div class="inline-flex right-0 z-10 absolute flex-col justify-between items-center px-1 py-2 h-full peer">
+<!-- details -->
+<div class="flex flex-col flex-1 p-2 pb-1 w-full">
 
-	<button class="btn btn-2xs btn-glyph" (click)="onPopular()">
-		@if(bm.tags.includes(TAG_POPULAR)){
+	<div class="flex items-center gap-1 md:gap-2">
 
-			<svg wGlyph="heart_filled"></svg>
+		<small class="text-2xs">{{bm.clicks}} click@if (bm.clicks !== 1) {s}</small>
+		<button class="btn btn-2xs btn-glyph ms-auto" (click)="onPopular()">
+			@if(bm.tags.includes(TAG_POPULAR)){
 
-		} @else {
-
-
-			<svg wGlyph="heart"></svg>
-		}
-	</button>
-	<button class="btn btn-2xs btn-glyph" (click)="onEdit()">
-		<svg wGlyph="edit"></svg>
-	</button>
-
-</div>
-
-
-
-
-
-
-<!-- @if (bookmark(); as bm) {
-
-	@if(disabled()) {
-		<div bookmark-overlay></div>
-	}
-	<div bookmark-image>
-
-		<img
-			id="bookmark-image"
-			src="{{ bm.image || 'assets/placeholder.svg' }}"
-			title="{{ bm.id }} : {{ bm.title + '\r\n' + bm.urls + '\r\n' }} #{{ bm.clicks }}">
-
-	</div>
-	<div bookmark-right>
-
-		<div bookmark-top>
-
-			<a [tabindex]="disabled() ? -1 : 0" href="{{ bm.urls[0] }}" target="_blank" (click)="onLinkClick()">
-
-				<span bookmark-name>{{ bm.name }}
-					<sup>
-						<w-glyph name="open_in_new" class="bold" />
-					</sup>
-				</span>
-				<span bookmark-title>{{ bm.title }}</span>
-
-			</a>
-
-		</div>
-		@if (showDetails()) {
-
-			<div bookmark-bottom>
-
-				!-- <ng-container *ngFor="let url of bm.urls">
-					<div bookmark-url *ngIf="!!url">{{ url }}</div>
-				</ng-container> --
-
-				@if (bm.tags) {
-					<div bookmark-tags>
-
-						@for (tag of bm.tags; track tag) {
-
-							<button [disabled]="disabled()"
-									class="tag xs"
-									[routerLink]="['/bookmarks']"
-									[queryParams]="{ 'tags': tag }">{{ tag }}</button>
-
-						}
-
-					</div>
-				}
-
-			</div>
-
-		}
-
-	</div>
-
-	@if (popularButton()) {
-
-		<a href="javascript:void(0)" id="popularButton" title="Toggle 'popular'" (click)="onPopular()">
-
-			@if (bm.tags.includes('popular')) {
-
-				<w-glyph name="heart_filled" />
+				<svg wGlyph="heart_filled"></svg>
 
 			} @else {
 
-				<w-glyph name="heart" />
+				<svg wGlyph="heart"></svg>
 
 			}
+		</button>
+		<button class="btn btn-2xs btn-glyph" (click)="onEdit()">
+			<svg wGlyph="edit"></svg>
+		</button>
 
-		</a>
+	</div>
+
+	@if (detailed()) {
+
+		<div [@slideUpDown]="detailed() ? 'opened' : 'closed'" class="flex flex-col flex-1 overflow-hidden">
+
+			<div class="text-2xs text-secondary">{{bm.id}}</div>
+			<div class="flex flex-col flex-1 justify-between pb-2 overflow-x-auto pe-2 scrollbar">
+
+				<div class="py-2 text-secondary text-xs">
+					@for (url of bm.urls; track $index) {
+
+						<li class="text-nowrap" [class.list-none]="bm.urls.length === 1"><a [href]="url" target="_blank" class="text-base-color">{{url}}</a><sup><svg wGlyph="open_in_new" class="inline-block ms-1"></svg></sup></li>
+
+					}
+				</div>
+				<div class="flex items-center gap-1 mt-2">
+					@for (tag of bm.tags; track $index) {
+
+						<button type="button" class="bg-accent-active tag tag-sm" (click)="onTagClicked(tag)">{{tag}}</button>
+
+					}
+				</div>
+
+			</div>
+
+		</div>
 
 	}
-	@if (editable()) {
 
-		<a href="javascript:void(0)" id="editButton" title="Edit" (click)="onEdit()">
-			<w-glyph name="edit" />
-		</a>
-
-	}
-
-} -->
+</div>

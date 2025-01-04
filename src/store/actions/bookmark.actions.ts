@@ -27,6 +27,7 @@ export const bookmarkActions = createActionGroup({
 		openFormDialog				: emptyProps(),
 		openEditDialog				: props<{ id: UUID }>(),
 		closeFormDialog				: emptyProps(),
+		toggleTagVisibility			: emptyProps(),
 
 		setSelectedId				: props<{ id: UUID | null }>(),
 		setQueryParams				: props<BookmarkQueryParams>(),

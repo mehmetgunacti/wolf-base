@@ -11,7 +11,7 @@ import { PortalComponent } from '@libComponents/portal.component';
 import { ClickedBookmark } from '@models/bookmark.model';
 import { Store } from '@ngrx/store';
 import { selBM_filteredBookmarks } from '@selectors/bookmark/bookmark-tags.selectors';
-import { selBookmark_formVisible, selBookmark_shaking } from '@selectors/bookmark/bookmark-ui.selectors';
+import { selBookmark_formVisible, selBookmark_shaking, selBookmark_tagsVisible } from '@selectors/bookmark/bookmark-ui.selectors';
 import { selBookmark_EntityCount } from '@selectors/entity/entity-bookmark.selectors';
 import { Observable, map } from 'rxjs';
 
@@ -26,6 +26,7 @@ export class BookmarksContainer extends BaseComponent {
 	private store: Store = inject(Store);
 
 	protected formVisible = this.store.selectSignal(selBookmark_formVisible);
+	protected tagsVisible = this.store.selectSignal(selBookmark_tagsVisible);
 	protected isShaking$ = this.store.select(selBookmark_shaking);
 
 	protected bookmarks$: Observable<ClickedBookmark[]>;
@@ -56,6 +57,12 @@ export class BookmarksContainer extends BaseComponent {
 	onLinkClick(id: UUID): void {
 
 		this.store.dispatch(bookmarkActions.click({ id }));
+
+	}
+
+	onTagClicked(name: string): void {
+
+		this.store.dispatch(bookmarkActions.setSelectedTags({ tags: [ name ] }));
 
 	}
 

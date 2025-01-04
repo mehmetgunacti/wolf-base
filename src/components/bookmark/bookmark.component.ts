@@ -1,5 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { slideDownEnterLeaveTrigger, slideDownTrigger, slideUpDownTrigger } from '@animations/slide-in-out.animation';
 import { CompactBookmarkComponent } from '@components/compact-bookmark/compact-bookmark.component';
 import { TAG_POPULAR } from '@constants/bookmark.constant';
 import { UUID } from '@constants/common.constant';
@@ -11,7 +12,8 @@ import { ClickedBookmark } from '@models/bookmark.model';
 	imports: [ RouterModule, GlyphDirective, CompactBookmarkComponent ],
 	selector: 'app-bookmark',
 	templateUrl: './bookmark.component.html',
-	host: { 'class': 'relative flex min-h-20 group/bookmark bg-accent rounded-lg' }
+	animations: [ slideDownEnterLeaveTrigger, slideDownTrigger, slideUpDownTrigger ],
+	host: { 'class': 'flex flex-col bg-accent rounded-lg' }
 })
 export class BookmarkComponent extends BaseComponent {
 
@@ -23,11 +25,13 @@ export class BookmarkComponent extends BaseComponent {
 	editable = input(true);
 	popularButton = input(true);
 	disabled = input(false);
+	detailed = input(true);
 
 	// Output
 	edit = output<UUID>();
 	popular = output<UUID>();
 	linkClick = output<UUID>();
+	tagClick = output<string>();
 
 	onEdit(): void {
 
@@ -39,6 +43,12 @@ export class BookmarkComponent extends BaseComponent {
 	onLinkClick(id: UUID): void {
 
 		this.linkClick.emit(id);
+
+	}
+
+	onTagClicked(name: string): void {
+
+		this.tagClick.emit(name);
 
 	}
 
