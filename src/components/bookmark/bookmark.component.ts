@@ -13,7 +13,7 @@ import { ClickedBookmark } from '@models/bookmark.model';
 	selector: 'app-bookmark',
 	templateUrl: './bookmark.component.html',
 	animations: [ slideDownEnterLeaveTrigger, slideDownTrigger, slideUpDownTrigger ],
-	host: { 'class': 'flex flex-col bg-accent rounded-lg' }
+	host: { 'class': 'flex flex-col bg-form-element rounded-lg' }
 })
 export class BookmarkComponent extends BaseComponent {
 
