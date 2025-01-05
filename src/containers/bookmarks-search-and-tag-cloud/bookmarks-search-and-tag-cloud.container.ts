@@ -40,8 +40,8 @@ export class BookmarksSearchAndTagCloudContainer extends BaseComponent implement
 	cloudVisible = signal(false);
 	tagsVisible = this.store.selectSignal(selBookmark_tagsVisible);
 
-	tagsBtnGlyph = computed<GlyphName>(() => this.tagsVisible() ? 'tag': 'tag_close');
-	tagsBtnLabel = computed<string>(() => this.tagsVisible() ? 'Hide Tags': 'Show Tags');
+	tagsBtnGlyph = computed<GlyphName>(() => this.tagsVisible() ? 'tag' : 'tag_close');
+	tagsBtnLabel = computed<string>(() => this.tagsVisible() ? 'Hide Tags' : 'Show Tags');
 
 	searchControl: FormControl;
 	subscription: Subscription;
@@ -72,6 +72,12 @@ export class BookmarksSearchAndTagCloudContainer extends BaseComponent implement
 	onTagClicked(name: string): void {
 
 		this.store.dispatch(bookmarkActions.clickTag({ name }));
+
+	}
+
+	onSearch(term: string): void {
+
+		this.store.dispatch(bookmarkActions.search({ term }));
 
 	}
 

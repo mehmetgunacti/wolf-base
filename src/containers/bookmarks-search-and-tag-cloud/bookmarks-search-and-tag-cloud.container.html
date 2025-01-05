@@ -30,7 +30,7 @@
 
 <div class="flex items-center gap-1 comp-dark w-full comp pe-2">
 
-	<w-search-box class="flex-1 bg-transparent shadow-none pe-0"/>
+	<w-search-box class="flex-1 bg-transparent shadow-none pe-0" (search)="onSearch($event)"/>
 	<button class="btn btn-glyph squared" [title]="tagsBtnLabel()" (click)="toggleTags()">
 
 		@if (tagsVisible()) {

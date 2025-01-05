@@ -1,11 +1,11 @@
-@let bookmarks = bookmarks$ | async;
+@let bookmarks = filteredBookmarks();
 
 <w-portal>
 
 	<button
 		class="btn btn-ghost"
 		(click)="fromClipboard()"
-		[class.shake]="isShaking$ | async"
+		[class.shake]="isShaking()"
 		title="Create from copied URL">
 		<svg wGlyph="content_paste"></svg>Clipboard
 	</button>

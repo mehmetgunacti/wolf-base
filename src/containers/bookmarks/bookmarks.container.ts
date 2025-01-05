@@ -1,6 +1,5 @@
 import { bookmarkActions } from '@actions/bookmark.actions';
-import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { BookmarkComponent } from '@components/bookmark/bookmark.component';
 import { UUID } from '@constants/common.constant';
 import { BookmarkEditContainer } from '@dialogs/bookmark-edit/bookmark-edit.container';
@@ -8,15 +7,12 @@ import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { ModalComponent } from '@libComponents/modal/modal.component';
 import { PortalComponent } from '@libComponents/portal.component';
-import { ClickedBookmark } from '@models/bookmark.model';
 import { Store } from '@ngrx/store';
 import { selBM_filteredBookmarks } from '@selectors/bookmark/bookmark-tags.selectors';
 import { selBookmark_formVisible, selBookmark_shaking, selBookmark_tagsVisible } from '@selectors/bookmark/bookmark-ui.selectors';
-import { selBookmark_EntityCount } from '@selectors/entity/entity-bookmark.selectors';
-import { Observable, map } from 'rxjs';
 
 @Component({
-	imports: [ BookmarkComponent, AsyncPipe, PortalComponent, ModalComponent, BookmarkEditContainer, GlyphDirective ],
+	imports: [ BookmarkComponent, PortalComponent, ModalComponent, BookmarkEditContainer, GlyphDirective ],
 	selector: 'app-bookmarks-container',
 	templateUrl: './bookmarks.container.html',
 	host: { 'class': '' }
@@ -27,20 +23,16 @@ export class BookmarksContainer extends BaseComponent {
 
 	protected formVisible = this.store.selectSignal(selBookmark_formVisible);
 	protected tagsVisible = this.store.selectSignal(selBookmark_tagsVisible);
-	protected isShaking$ = this.store.select(selBookmark_shaking);
+	protected isShaking = this.store.selectSignal(selBookmark_shaking);
 
-	protected bookmarks$: Observable<ClickedBookmark[]>;
-	protected count$: Observable<number>;
+//	protected bookmarks$: Observable<ClickedBookmark[]>;
 
-	constructor() {
+	private bookmarks = this.store.selectSignal(selBM_filteredBookmarks);
+	protected filteredBookmarks = computed(
 
-		super();
-		this.bookmarks$ = this.store.select(selBM_filteredBookmarks).pipe(
-			map(bookmarks => bookmarks.sort((b1, b2) => b2.clicks - b1.clicks))
-		);
-		this.count$ = this.store.select(selBookmark_EntityCount);
+		() => this.bookmarks().sort((b1, b2) => b2.clicks - b1.clicks)
 
-	}
+	);
 
 	onEdit(id: UUID): void {
 
