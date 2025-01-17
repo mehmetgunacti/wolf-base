@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { BaseComponent } from '@libComponents/base.component';
 import { ChoicesViewerComponent } from '@libComponents/choices/choices-viewer.component';
 import { Exam, Session } from '@models/test-suite.model';
@@ -17,5 +17,7 @@ export class ExamDetailsComponent extends BaseComponent {
 	// Input
 	exam = input.required<Exam>();
 	sessions = input<Session[]>([]);
+
+	protected sortedSessions = computed(() => [ ...this.sessions() ].sort((a, b) => a.start.localeCompare(b.start)));
 
 }

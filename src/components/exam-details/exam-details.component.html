@@ -14,7 +14,7 @@
 			<div class="px-2 text-secondary text-sm">{{question.description}}</div>
 
 		}
-		@for (session of sessions(); track $index) {
+		@for (session of sortedSessions(); track $index) {
 
 			@let answer = session.answers[question.id];
 			@if (answer) {
