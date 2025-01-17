@@ -2,6 +2,7 @@ import { createSelector } from '@ngrx/store';
 import { selExam_EntityList, selExam_EntityMap } from '../entity/entity-exam.selectors';
 import { selExam_UIState } from './exam.selectors';
 import { selTestSuite_selected } from '@selectors/test-suite/test-suite-ui.selectors';
+import { selSession_EntityList } from '@selectors/entity/entity-session.selectors';
 
 export const selExam_editEntity = createSelector(
 
@@ -16,6 +17,14 @@ export const selExam_detailsEntity = createSelector(
 	selExam_EntityMap,
 	selExam_UIState,
 	(entities, uiState) => uiState.detailsId ? entities[ uiState.detailsId ] : null
+
+);
+
+export const selExam_detailsSessions = createSelector(
+
+	selExam_detailsEntity,
+	selSession_EntityList,
+	(exam, session) => exam ? session.filter(s => s.exam.id === exam.id) : []
 
 );
 

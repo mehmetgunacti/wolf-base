@@ -6,8 +6,7 @@ import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { Store } from '@ngrx/store';
 import { HideEnumPipe } from '@pipes/hide-enum.pipe';
-import { selSession_EntityList } from '@selectors/entity/entity-session.selectors';
-import { selExam_detailsEntity } from '@selectors/exam/exam-ui.selectors';
+import { selExam_detailsEntity, selExam_detailsSessions } from '@selectors/exam/exam-ui.selectors';
 
 @Component({
 	imports: [ GlyphDirective, ReactiveFormsModule, ExamDetailsComponent, HideEnumPipe ],
@@ -20,7 +19,7 @@ export class ExamDetailsContainer extends BaseComponent {
 	private store: Store = inject(Store);
 
 	protected exam = this.store.selectSignal(selExam_detailsEntity);
-	protected sessions = this.store.selectSignal(selSession_EntityList);
+	protected sessions = this.store.selectSignal(selExam_detailsSessions);
 
 	protected onClose(): void {
 

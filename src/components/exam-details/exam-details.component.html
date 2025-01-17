@@ -16,22 +16,27 @@
 		}
 		@for (session of sessions(); track $index) {
 
-			<label class="
-					inline-block
-					left-2
-					text-2xs
-					leading-5
-					px-1
-					mt-5
-					mb-1
-					rounded
-					bg-component-dark
-					text-form-element-text
-				">{{session.start | date:'EEEE dd.MM.yyyy hh:mm'}} <small class="text-secondary">({{ (session.answers[question.id].time / 1000) }} sec)</small></label>
-			<w-choices-viewer
-				[answers]="session.answers[question.id].choices"
-				[correctAnswers]="question.answers"/>
-			<div class="mx-auto px-2 text-secondary text-sm">{{ session.answers[question.id].note }}</div>
+			@let answer = session.answers[question.id];
+			@if (answer) {
+
+				<label class="
+						inline-block
+						left-2
+						text-2xs
+						leading-5
+						px-1
+						mt-5
+						mb-1
+						rounded
+						bg-component-dark
+						text-form-element-text
+					">{{session.start | date:'EEEE dd.MM.yyyy hh:mm'}} <small class="text-secondary">({{ (session.answers[question.id].time / 1000) }} sec)</small></label>
+				<w-choices-viewer
+					[answers]="session.answers[question.id].choices"
+					[correctAnswers]="question.answers"/>
+				<div class="mx-auto px-2 text-secondary text-sm">{{ session.answers[question.id].note }}</div>
+
+			}
 
 		}
 
