@@ -43,8 +43,13 @@
 					<button
 						class="ml-auto btn btn-success"
 						(click)="next(q.id)">
-						@if (store.index() === store.numberOfQuestions() - 1) { Finish } @else { Next }
-						<svg wGlyph="chevron_right"></svg>
+						@if (store.index() === store.numberOfQuestions() - 1) {
+							<svg wGlyph="check"></svg>
+							Finish
+						} @else {
+							Next
+							<svg wGlyph="chevron_right"></svg>
+						}
 					</button>
 				</footer>
 
