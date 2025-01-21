@@ -1,6 +1,6 @@
 {
   "name": "wolf-base",
-  "version": "0.2.88",
+  "version": "0.2.89",
   "type": "module",
   "scripts": {
     "ng": "ng",

@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSave()" class="flex flex-col gap-4">
+<form class="flex flex-col gap-4">
 
 	<!-- TAGS -->
 	<w-input-tag
@@ -11,7 +11,11 @@
 
 	<footer>
 
-		<button [disabled]="this.form.pristine || this.form.invalid" class="float-right btn">
+		<button
+				(click)="onSave()"
+				type="button"
+				[disabled]="this.form.pristine || this.form.invalid"
+				class="float-right btn">
 			<svg wGlyph="save"></svg> Save
 		</button>
 
