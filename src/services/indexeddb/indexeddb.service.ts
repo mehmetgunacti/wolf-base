@@ -446,7 +446,7 @@ class IndexedDbImpl implements IndexedDb {
 
 	}
 
-	readValue<T>(storeName: DbStore, key: string): Promise<T> {
+	readValue<T>(storeName: DbStore, key: string): Promise<T | null> {
 
 		return this.transaction(
 

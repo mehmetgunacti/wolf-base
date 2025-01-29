@@ -3,7 +3,8 @@
 @if (e) {
 
 	<header class="mb-8 comp-title">
-		{{e.id}}
+		{{storeName()}}
+		<small class="block text-secondary text-sm">{{e.id}}</small>
 		@if (entityName(); as entityName) {
 			<small class="block text-secondary text-sm">{{entityName}}</small>
 		}
@@ -11,6 +12,11 @@
 
 	<div class="overflow-auto scrollbar scrollbar-blue">
 		<w-markdown-viewer [markdown]="'```json\n' + (e | json) + '\n```'"/>
+	</div>
+	<div class="flex justify-end mt-2">
+		<button type="button" (click)="onDelete()" class="btn btn-error">
+			<svg wGlyph="delete"></svg> Delete
+		</button>
 	</div>
 
 } @else {

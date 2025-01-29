@@ -14,7 +14,7 @@ export interface TransactionManager {
 	read<T extends IdBase>(storeName: string, id: UUID): Promise<T | null>;
 	readAll<T>(storeName: string): Promise<T[]>;
 	readAllKeys(storeName: string): Promise<UUID[]>;
-	readValue<T>(storeName: string, key: string): Promise<T>;
+	readValue<T>(storeName: string, key: string): Promise<T | null>;
 	setValue<T>(storeName: string, key: string, value: T): Promise<void>;
 	size(storeName: string): Promise<number>;
 

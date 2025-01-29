@@ -6,11 +6,9 @@ import { UUID } from '@constants/common.constant';
 import { DbStore } from '@constants/database.constant';
 import { BaseComponent } from '@libComponents/base.component';
 import { SelectComponent } from '@libComponents/select/select.component';
-import { LocalRepositoryService } from '@libServices/local-repository.service';
 import { NameBase } from '@models/id-base.model';
 import { Store } from '@ngrx/store';
 import { LocalDatabase } from '@services/indexeddb/indexeddb.service';
-import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
 import { fc, fg } from '@utils/form.util';
 import { filter } from 'rxjs';
 
@@ -31,7 +29,6 @@ import { filter } from 'rxjs';
 })
 export class DatabaseEntitiesSearchContainer extends BaseComponent {
 
-	private local: LocalRepositoryService = inject(LOCAL_REPOSITORY_SERVICE);
 	private store: Store = inject(Store);
 
 	protected tables = signal<NameBase[]>([]);
@@ -51,7 +48,8 @@ export class DatabaseEntitiesSearchContainer extends BaseComponent {
 		// fill table names
 		const tableList = [];
 		for (const name in DbStore)
-			tableList.push(name);
+			if (!(name.endsWith('_trash') || name === DbStore.logs))
+				tableList.push(name);
 		this.tables.set(tableList.map(name => ({ id: name, name })));
 
 		// selectbox 'tables': on change populate 'ids' selectbox

@@ -9,7 +9,7 @@ export const databaseActions = createActionGroup({
 	source: 'Database',
 	events: {
 
-		backupDatabase		:  emptyProps(),
+		backupDatabase		: emptyProps(),
 
 		loadValues			: props<{ tablename: LocalRepositoryNames }>(),
 		loadValuesSuccess	: props<{ selectedValues: string[] }>(),
@@ -22,8 +22,10 @@ export const databaseActions = createActionGroup({
 		emptyTable			: props<{ table: string }>(),
 		emptyTableSuccess	: props<{ table: string }>(),
 
-		readFromStore		: props<{ id: UUID, name: DbStore }>(),
-		setSelected			: props<{ entity: IdBase }>()
+		setSelected				: props<{ entity: IdBase | null }>(),
+		readFromStore			: props<{ id: UUID, name: DbStore }>(),
+		deleteFromStore			: props<{ id: UUID, name: DbStore }>(),
+		deleteFromStoreSuccess	: emptyProps()
 
 	}
 

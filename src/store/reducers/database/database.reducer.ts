@@ -42,6 +42,8 @@ export const databaseReducer: ActionReducer<Database_ModuleState, Action> = crea
 		);
 
 	}),
-	on(databaseActions.setSelected, (state, { entity }) => ({ ...state, entity }))
+	on(databaseActions.setSelected, (state, { entity }) => ({ ...state, entity })),
+	on(databaseActions.readFromStore, (state, { name }): Database_ModuleState => ({ ...state, selectedStore: name })),
+	on(databaseActions.deleteFromStoreSuccess, (state): Database_ModuleState => ({ ...state, selectedStore: null, entity: null }))
 
 );

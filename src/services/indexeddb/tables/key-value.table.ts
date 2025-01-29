@@ -25,8 +25,9 @@ export class KeyValueLocalRepositoryImpl implements KeyValueRepository {
 
 		await this.db.transaction('readwrite', [ this.tablename ], async tx => {
 
-			const value: boolean = await tx.readValue<boolean>(this.tablename, key);
-			await tx.setValue<boolean>(this.tablename, key, !value);
+			const value: boolean | null = await tx.readValue<boolean>(this.tablename, key);
+			if (value)
+				await tx.setValue<boolean>(this.tablename, key, !value);
 
 		});
 

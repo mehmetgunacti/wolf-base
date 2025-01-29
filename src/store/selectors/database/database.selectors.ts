@@ -16,3 +16,10 @@ export const selDatabase_selectedEntity = createSelector(
 	state => state.entity
 
 );
+
+export const selDatabase_selectedStore = createSelector(
+
+	selDatabaseModuleState,
+	state => state.selectedStore
+
+);
