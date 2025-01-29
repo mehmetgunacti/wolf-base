@@ -4,15 +4,19 @@
 
 	<header class="mb-8 comp-title">
 		{{e.id}}
-		<small class="block text-secondary text-sm">Entities</small>
+		@if (entityName(); as entityName) {
+			<small class="block text-secondary text-sm">{{entityName}}</small>
+		}
 	</header>
 
-	<pre class="overflow-auto scrollbar scrollbar-blue">{{ e | json }}</pre>
+	<div class="overflow-auto scrollbar scrollbar-blue">
+		<w-markdown-viewer [markdown]="'```json\n' + (e | json) + '\n```'"/>
+	</div>
 
 } @else {
 
 	<div class="flex flex-col justify-center items-center p-4">
-		Nothing searched
+		No entity id selected
 		<button routerLink="/" class="mx-auto btn btn-ghost">
 			<svg wGlyph="home"></svg> Home
 		</button>
