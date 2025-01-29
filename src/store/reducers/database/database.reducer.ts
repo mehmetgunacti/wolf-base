@@ -41,6 +41,7 @@ export const databaseReducer: ActionReducer<Database_ModuleState, Action> = crea
 
 		);
 
-	})
+	}),
+	on(databaseActions.setSelected, (state, { entity }) => ({ ...state, entity }))
 
 );

@@ -1,1 +1,21 @@
-entities
+@let e = entity();
+
+@if (e) {
+
+	<header class="mb-8 comp-title">
+		{{e.id}}
+		<small class="block text-secondary text-sm">Entities</small>
+	</header>
+
+	<pre class="overflow-auto scrollbar scrollbar-blue">{{ e | json }}</pre>
+
+} @else {
+
+	<div class="flex flex-col justify-center items-center p-4">
+		Nothing searched
+		<button routerLink="/" class="mx-auto btn btn-ghost">
+			<svg wGlyph="home"></svg> Home
+		</button>
+	</div>
+
+}

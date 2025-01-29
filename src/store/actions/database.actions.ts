@@ -1,5 +1,7 @@
-import { LocalRepositoryNames } from '@constants/database.constant';
+import { UUID } from '@constants/common.constant';
+import { DbStore, LocalRepositoryNames } from '@constants/database.constant';
 import { ModuleReport } from '@models/database.model';
+import { IdBase } from '@models/id-base.model';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 export const databaseActions = createActionGroup({
@@ -18,7 +20,10 @@ export const databaseActions = createActionGroup({
 		loadReportSuccess	: props<{ reports: ModuleReport[] }>(),
 
 		emptyTable			: props<{ table: string }>(),
-		emptyTableSuccess	: props<{ table: string }>()
+		emptyTableSuccess	: props<{ table: string }>(),
+
+		readFromStore		: props<{ id: UUID, name: DbStore }>(),
+		setSelected			: props<{ entity: IdBase }>()
 
 	}
 

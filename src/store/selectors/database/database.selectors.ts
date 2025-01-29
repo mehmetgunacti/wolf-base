@@ -9,3 +9,10 @@ export const selDatabase_Report = createSelector(
 	state => state.reports
 
 );
+
+export const selDatabase_selectedEntity = createSelector(
+
+	selDatabaseModuleState,
+	state => state.entity
+
+);
