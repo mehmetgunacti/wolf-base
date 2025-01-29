@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { DatabaseContainer } from '@containers/database/database.container';
+import { DatabaseEntitiesContainer } from '@containers/database-entities/database-entities.container';
 import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	selector: 'database-entities-page',
-	imports: [ DatabaseContainer ],
+	imports: [DatabaseEntitiesContainer],
 	template: `
-		<app-database-container/>
+		<app-database-entities-container/>
 	`,
 	host: { 'class': 'page' }
 })
