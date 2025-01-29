@@ -1,4 +1,5 @@
 import { Component, computed, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { AppEntityType } from '@constants/entity.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
@@ -30,7 +31,7 @@ function toAction(type: SyncTaskType): 'upload' | 'download' | 'view' {
 }
 
 @Component({
-	imports: [ GlyphDirective ],
+	imports: [ GlyphDirective, RouterLink ],
 	selector: 'app-cloud-task',
 	templateUrl: './cloud-task.component.html'
 })
