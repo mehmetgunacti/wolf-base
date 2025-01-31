@@ -34,14 +34,6 @@
 
 	</w-portal>
 
-	@if (formVisible()) {
-
-		<w-modal (close)="onCloseEditDialog()">
-			<app-exam-edit-container/>
-		</w-modal>
-
-	}
-
 	@if (detailsVisible()) {
 
 		<w-modal (close)="onCloseDetailsDialog()">

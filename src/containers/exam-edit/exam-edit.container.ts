@@ -2,11 +2,13 @@ import { entityActions } from '@actions/entity.actions';
 import { examActions } from '@actions/exam.actions';
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { UUID } from '@constants/common.constant';
 import { AppEntityType } from '@constants/entity.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
 import { ExamForm } from '@forms/exam/exam.form';
 import { BaseComponent } from '@libComponents/base.component';
+import { PortalComponent } from '@libComponents/portal.component';
 import { Bookmark } from '@models/bookmark.model';
 import { Exam } from '@models/test-suite.model';
 import { Store } from '@ngrx/store';
@@ -15,10 +17,10 @@ import { selTestSuite_selected } from '@selectors/test-suite/test-suite-ui.selec
 import { nnfc } from '@utils/form.util';
 
 @Component({
-	imports: [ GlyphDirective, ReactiveFormsModule, ExamForm ],
+	imports: [ GlyphDirective, ReactiveFormsModule, ExamForm, PortalComponent, RouterLink ],
 	selector: 'app-exam-edit-container',
 	templateUrl: './exam-edit.container.html',
-	host: { 'class': 'h-full flex flex-col p-2 pt-1 md:pt-3 md:p-4' },
+	host: { 'class': 'comp p-4' }
 })
 export class ExamEditContainer extends BaseComponent {
 

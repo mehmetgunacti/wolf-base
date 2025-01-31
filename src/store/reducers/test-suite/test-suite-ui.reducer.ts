@@ -5,7 +5,7 @@ import { testSuite_initialUIState, TestSuite_UIState } from '@states/test-suite.
 const reducer = createReducer(
 
 	testSuite_initialUIState,
-	on(testSuiteActions.setSelectedId, (state, { id }): TestSuite_UIState => ({ ...state, selectedId: id }))
+	on(testSuiteActions.setSelectedId, (state, { id, examId }): TestSuite_UIState => ({ ...state, selectedId: id, selectedExamId: examId }))
 
 );
 

@@ -8,7 +8,6 @@ export interface Exam_ModuleState {
 
 export interface Exam_UIState {
 
-	formVisible: boolean;
 	editId: UUID | null;
 
 	detailsVisible: boolean;
@@ -20,7 +19,6 @@ export interface Exam_UIState {
 
 export const exam_initialUIState: Exam_UIState = {
 
-	formVisible: false,
 	editId: null,
 	detailsVisible: false,
 	detailsId: null

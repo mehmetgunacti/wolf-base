@@ -1,4 +1,5 @@
 import { Component, input, output, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { slideDownEnterLeaveTrigger, slideDownTrigger } from '@animations/slide-in-out.animation';
 import { UUID } from '@constants/common.constant';
 import { GlyphDirective } from '@directives/glyph.directive';
@@ -8,7 +9,7 @@ import { HideEnumPipe } from '@pipes/hide-enum.pipe';
 import { sortByName } from '@utils/array.util';
 
 @Component({
-	imports: [ GlyphDirective, HideEnumPipe ],
+	imports: [ GlyphDirective, HideEnumPipe, RouterLink ],
 	selector: 'app-exams',
 	templateUrl: './exams.component.html',
 	animations: [ slideDownTrigger, slideDownEnterLeaveTrigger ],

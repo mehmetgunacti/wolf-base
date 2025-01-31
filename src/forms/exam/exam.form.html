@@ -17,7 +17,7 @@
 	<w-input formControlName="name" label="Name"/>
 
 	<!-- DESCRIPTION -->
-	<w-textarea formControlName="description" label="Description" [rows]="3"/>
+	<w-markdown-editor formControlName="description" label="Description" [rows]="8"/>
 
 	<!-- ITERATE QUESTIONS -->
 	@for (question of form.questions.controls; let qIdx = $index; track qIdx) {
@@ -42,11 +42,11 @@
 				<!-- ID -->
 				<w-input formControlName="id" label="ID" [readonly]="true"/>
 
-				<!-- DESCRIPTION -->
-				<w-textarea formControlName="description" label="Description" [rows]="3"/>
-
 				<!-- CHOICES -->
 				<w-choices label="Answers" formControlName="answers"/>
+
+				<!-- DESCRIPTION -->
+				<w-markdown-editor formControlName="description" label="Description" [rows]="8"/>
 
 			</div>
 
@@ -61,11 +61,6 @@
 		<svg wGlyph="add_circle"></svg> Question
 	</button>
 
-</form>
-
-<!-- form-element-buttons -->
-<w-portal outletName="dialog-footer-outlet" [delayRemoval]="2000">
-
 	<div class="flex">
 
 		<button type="button" [disabled]="this.form.fg.pristine || this.form.fg.invalid" (click)="onSave()" class="ml-auto btn">
@@ -74,4 +69,4 @@
 
 	</div>
 
-</w-portal>
+</form>

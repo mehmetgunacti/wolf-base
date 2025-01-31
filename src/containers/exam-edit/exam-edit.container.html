@@ -1,15 +1,15 @@
-<!-- DIALOG HEADER -->
+<w-portal>
+
+	<button
+		class="btn btn-ghost"
+		[routerLink]="['/test-suites', testSuite()?.id ]">
+		<svg wGlyph="cancel"></svg> Cancel
+	</button>
+
+</w-portal>
+
 <header class="flex items-center">
 	<div class="font-bold text-2xl text-content">@if(exam()) { Edit } @else { Add } Exam</div>
-	<div class="ml-auto">
-
-		<button
-			class="btn btn-glyph"
-			(click)="onClose()">
-			<svg wGlyph="close"></svg>
-		</button>
-
-	</div>
 </header>
 
 <!-- DIALOG CONTENT WRAPPER - SCROLLBAR -->
@@ -30,5 +30,3 @@
 	</div>
 
 </section>
-
-<footer id="dialog-footer-outlet" class="mt-2 md:mt-4"></footer>

@@ -11,9 +11,10 @@ import { TextareaComponent } from '@libComponents/textarea/textarea.component';
 import { NameBase } from '@models/id-base.model';
 import { Exam } from '@models/test-suite.model';
 import { EXAM_FORM, ExamFormImpl } from './exam-form';
+import { MarkdownEditorComponent } from '@libComponents/markdown/markdown-editor.component';
 
 @Component({
-	imports: [ InputComponent, RequiredValidatorDirective, ChoicesComponent, ReactiveFormsModule, GlyphDirective, PortalComponent, TextareaComponent ],
+	imports: [ InputComponent, RequiredValidatorDirective, ChoicesComponent, ReactiveFormsModule, GlyphDirective, MarkdownEditorComponent ],
 	selector: 'app-exam-form',
 	templateUrl: './exam.form.html',
 	providers: [ { provide: EXAM_FORM, useClass: ExamFormImpl } ],

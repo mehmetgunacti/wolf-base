@@ -5,7 +5,7 @@
 		<small class="text-secondary text-sm">({{ exams().length }})</small>
 	</legend>
 	<legend class="-top-11 right-2.5 absolute flex justify-center items-center bg-component-dark rounded-lg h-button-height">
-		<button type="button" class="btn btn-ghost" (click)="onOpenFormDialog()">
+		<button type="button" class="btn btn-ghost" [routerLink]="['exams', 'new']">
 			<svg wGlyph="add"></svg> Add Exam
 		</button>
 	</legend>
@@ -41,7 +41,7 @@
 							<button
 								class="px-2 h-button-height-xs text-sm btn"
 								[tabindex]="isExpanded ? '0' : '-1'"
-								(click)="onOpenEditDialog(exam.id)">
+								[routerLink]="['exams', exam.id, 'edit']">
 								<svg wGlyph="edit"></svg>
 								Edit
 							</button>

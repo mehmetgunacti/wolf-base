@@ -10,10 +10,11 @@ export const setSelectedIdGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
 
 	const store = inject(Store);
 	const id: UUID | null = route.paramMap.get('id');
+	const examId: UUID | null = route.paramMap.get('examId');
 	return of(true).pipe(
 
 		// dispatch id
-		tap(() => store.dispatch(testSuiteActions.setSelectedId({ id })))
+		tap(() => store.dispatch(testSuiteActions.setSelectedId({ id, examId })))
 
 	);
 

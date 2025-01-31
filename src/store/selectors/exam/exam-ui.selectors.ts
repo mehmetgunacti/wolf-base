@@ -3,12 +3,13 @@ import { selExam_EntityList, selExam_EntityMap } from '../entity/entity-exam.sel
 import { selExam_UIState } from './exam.selectors';
 import { selTestSuite_selected } from '@selectors/test-suite/test-suite-ui.selectors';
 import { selSession_EntityList } from '@selectors/entity/entity-session.selectors';
+import { selTestSuite_UIState } from '@selectors/test-suite/test-suite.selectors';
 
 export const selExam_editEntity = createSelector(
 
 	selExam_EntityMap,
-	selExam_UIState,
-	(entities, uiState) => uiState.editId ? entities[ uiState.editId ] : null
+	selTestSuite_UIState,
+	(entities, uiState) => uiState.selectedExamId ? entities[ uiState.selectedExamId ] : null
 
 );
 
@@ -25,13 +26,6 @@ export const selExam_detailsSessions = createSelector(
 	selExam_detailsEntity,
 	selSession_EntityList,
 	(exam, session) => exam ? session.filter(s => s.exam.id === exam.id) : []
-
-);
-
-export const selExam_formVisible = createSelector(
-
-	selExam_UIState,
-	state => state.formVisible
 
 );
 

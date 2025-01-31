@@ -29,6 +29,20 @@ export const FEATURE_ROUTES: Routes = [
 		path: '',
 		loadComponent: () => import('pages/test-suites.page').then(c => c.TestSuitesPage)
 
+	},
+	{
+
+		path: ':id/exams/:examId/edit',
+		loadComponent: () => import('pages/exam-edit.page').then(c => c.ExamEditPage),
+		canActivate: [ setSelectedIdGuard ]
+
+	},
+	{
+
+		path: ':id/exams/new',
+		loadComponent: () => import('pages/exam-edit.page').then(c => c.ExamEditPage),
+		canActivate: [ setSelectedIdGuard ]
+
 	}
 
 ];

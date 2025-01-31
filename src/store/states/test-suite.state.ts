@@ -9,6 +9,7 @@ export interface TestSuite_ModuleState {
 export interface TestSuite_UIState {
 
 	selectedId: UUID | null;
+	selectedExamId: UUID | null;
 
 }
 
@@ -16,7 +17,8 @@ export interface TestSuite_UIState {
 
 export const testSuite_initialUIState: TestSuite_UIState = {
 
-	selectedId: null
+	selectedId: null,
+	selectedExamId: null
 
 };
 

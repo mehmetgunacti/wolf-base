@@ -7,7 +7,7 @@ export const testSuiteActions = createActionGroup({
 	events: {
 
 		// UI
-		setSelectedId	: props<{ id: UUID | null }>()
+		setSelectedId	: props<{ id: UUID | null, examId: UUID | null }>()
 
 	}
 
