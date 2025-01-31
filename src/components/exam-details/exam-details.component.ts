@@ -2,10 +2,11 @@ import { DatePipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { BaseComponent } from '@libComponents/base.component';
 import { ChoicesViewerComponent } from '@libComponents/choices/choices-viewer.component';
+import { MarkdownViewerComponent } from '@libComponents/markdown/markdown-viewer.component';
 import { Exam, Session } from '@models/test-suite.model';
 
 @Component({
-	imports: [ ChoicesViewerComponent, DatePipe ],
+	imports: [ ChoicesViewerComponent, DatePipe, MarkdownViewerComponent ],
 	selector: 'app-exam-details',
 	templateUrl: './exam-details.component.html',
 	host: {

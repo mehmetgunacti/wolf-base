@@ -11,7 +11,9 @@
 		<w-choices-viewer [answers]="question.answers" />
 		@if (question.description) {
 
-			<div class="px-2 text-secondary text-sm">{{question.description}}</div>
+			<div class="mt-2 comp-dark p-2 comp">
+				<w-markdown-viewer [markdown]="question.description"/>
+			</div>
 
 		}
 		@for (session of sortedSessions(); track $index) {
@@ -34,7 +36,12 @@
 				<w-choices-viewer
 					[answers]="session.answers[question.id].choices"
 					[correctAnswers]="question.answers"/>
-				<div class="mx-auto px-2 text-secondary text-sm">{{ session.answers[question.id].note }}</div>
+				@let md = session.answers[question.id].note;
+				@if (md) {
+					<div class="my-1 comp-dark p-2 comp">
+						<w-markdown-viewer [markdown]="md"/>
+					</div>
+				}
 
 			}
 
