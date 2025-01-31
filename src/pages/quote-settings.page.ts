@@ -6,7 +6,7 @@ import { BaseComponent } from '@libComponents/base.component';
 
 @Component({
 	imports: [ QuoteSettingsContainer, RouterLink, GlyphDirective ],
-	selector: 'showcase-page',
+	selector: 'quote-settings-page',
 	template: `
 		<a	[routerLink]="['/settings']"
 			class="flex gap-1 focus-visible:bg-component-dark-hover shadow-component comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
