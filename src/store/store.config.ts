@@ -66,6 +66,10 @@ import { taskReducer } from '@reducers/task/task.reducer';
 import { testSuiteReducer } from '@reducers/test-suite/test-suite.reducer';
 import { wordReducer } from '@reducers/word/word.reducer';
 import { AppState } from './states/app.state';
+import { environment } from 'environments/environment';
+import { CoreLoadDemoDataEffects } from '@effects/core/core-load-demo-data.effects';
+import { FunctionalEffect } from '@ngrx/effects';
+import { Type } from '@angular/core';
 
 function debug(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
 
@@ -86,97 +90,108 @@ export const metaReducers: MetaReducer<AppState>[] = [
 
 ];
 
-export const effectList = [
+export const effectList = () => {
 
-	// Core
-	CoreLoadEffects,
-	CoreNavigationEffects,
-	CoreNotificationEffects,
-	CoreUIEffects,
-	CoreThemeEffects,
+	const effects: Array<Type<unknown> | Record<string, FunctionalEffect>> =  [
 
-	// Entity
-	EntityCreateEffects,
-	EntityLoadEffects,
-	EntityUpdateEffects,
-	EntityMoveToTrashEffects,
+		// Core
+		CoreLoadEffects,
+		CoreNavigationEffects,
+		CoreNotificationEffects,
+		CoreUIEffects,
+		CoreThemeEffects,
 
-	EntitySyncRemoteRefreshEffects,
+		// Entity
+		EntityCreateEffects,
+		EntityLoadEffects,
+		EntityUpdateEffects,
+		EntityMoveToTrashEffects,
 
-	EntitySyncLocalNewEffects,
-	EntitySyncLocalUpdatedEffects,
-	EntitySyncLocalDeletedEffects,
+		EntitySyncRemoteRefreshEffects,
 
-	EntitySyncRemoteNewEffects,
-	EntitySyncRemoteUpdatedEffects,
-	EntitySyncRemoteDeletedEffects,
+		EntitySyncLocalNewEffects,
+		EntitySyncLocalUpdatedEffects,
+		EntitySyncLocalDeletedEffects,
 
-	EntitySyncDeletedDeletedEffects,
+		EntitySyncRemoteNewEffects,
+		EntitySyncRemoteUpdatedEffects,
+		EntitySyncRemoteDeletedEffects,
 
-	// Bookmarks
-	BookmarkSyncClicksEffects,
+		EntitySyncDeletedDeletedEffects,
 
-	BookmarkLoadEffects,
-	BookmarkUIEffects,
-	BookmarkEntityCreateEffects,
-	BookmarkEntityUpdateEffects,
+		// Bookmarks
+		BookmarkSyncClicksEffects,
 
-	// Notes
-	NoteUIEffects,
-	NoteCreateEffects,
-	NoteUpdateEffects,
+		BookmarkLoadEffects,
+		BookmarkUIEffects,
+		BookmarkEntityCreateEffects,
+		BookmarkEntityUpdateEffects,
 
-	// Note Content
-	NoteContentLoadEffects,
-	NoteContentCreateEffects,
-	NoteContentUpdateEffects,
+		// Notes
+		NoteUIEffects,
+		NoteCreateEffects,
+		NoteUpdateEffects,
 
-	// Projects
-	ProjectUIEffects,
-	ProjectCreateEffects,
-	ProjectUpdateEffects,
+		// Note Content
+		NoteContentLoadEffects,
+		NoteContentCreateEffects,
+		NoteContentUpdateEffects,
 
-	// Project Tasks
-	TaskEditEffects,
-	TaskCreateEffects,
-	TaskUpdateEffects,
-	TaskUIEffects,
+		// Projects
+		ProjectUIEffects,
+		ProjectCreateEffects,
+		ProjectUpdateEffects,
 
-	// Words
-	WordUIEffects,
-	WordCreateEffects,
-	WordUpdateEffects,
+		// Project Tasks
+		TaskEditEffects,
+		TaskCreateEffects,
+		TaskUpdateEffects,
+		TaskUIEffects,
 
-	// Quiz
-	QuizUIEffects,
-	QuizEntryLogicEffects,
-	QuizEntryCreateEffects,
+		// Words
+		WordUIEffects,
+		WordCreateEffects,
+		WordUpdateEffects,
 
-	// Quotes
-	QuoteViewerEffects,
+		// Quiz
+		QuizUIEffects,
+		QuizEntryLogicEffects,
+		QuizEntryCreateEffects,
 
-	// Database
-	DatabaseEffects,
-	DatabaseReportEffects,
+		// Quotes
+		QuoteViewerEffects,
 
-	// Test Suites
-	TestSuiteCreateEffects,
-	TestSuiteUpdateEffects,
+		// Database
+		DatabaseEffects,
+		DatabaseReportEffects,
 
-	// Exams
-	ExamCreateEffects,
-	ExamUpdateEffects,
+		// Test Suites
+		TestSuiteCreateEffects,
+		TestSuiteUpdateEffects,
 
-	// Sessions
-	SessionCreateEffects,
+		// Exams
+		ExamCreateEffects,
+		ExamUpdateEffects,
 
-	// Settings
-	SettingsEffects,
+		// Sessions
+		SessionCreateEffects,
 
-	// Logs
-	LogsEffects
+		// Settings
+		SettingsEffects,
 
-];
+		// Logs
+		LogsEffects
+
+	];
+
+	if (environment.isDemo)
+		effects.push(CoreLoadDemoDataEffects);
+
+	return effects;
+
+};
+
+
 
 export const reducerList: ActionReducerMap<AppState> = {
 

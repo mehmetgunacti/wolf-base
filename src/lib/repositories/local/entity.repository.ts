@@ -18,6 +18,7 @@ export interface EntityLocalRepository<T extends Entity> {
 	storeAllRemoteMetadata(data: RemoteMetadata[]): Promise<void>;
 
 	create(item: Partial<T>): Promise<T>;
+	createAll(items: Partial<T>[]): Promise<T[]>;
 	update(id: UUID, item: Partial<T>): Promise<number>;
 	remove(id: UUID): Promise<UUID>;
 	moveToTrash(id: UUID): Promise<void>;

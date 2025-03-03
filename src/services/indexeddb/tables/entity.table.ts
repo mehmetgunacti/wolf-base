@@ -132,6 +132,27 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 
 	}
 
+	async createAll(items: Partial<T>[]): Promise<T[]> {
+
+		const result: T[] = [];
+		for (const item of items) {
+
+			const newItem: T = this.newItemFromPartial(item);
+			await this.db.transaction('readwrite', [
+				this.table
+			], async tx => {
+
+				// create entity
+				await tx.put<T>(this.table, newItem);
+				result.push(newItem);
+
+			});
+
+		}
+		return result;
+
+	}
+
 	async update(id: UUID, item: Partial<T>): Promise<number> {
 
 		let count = 0;

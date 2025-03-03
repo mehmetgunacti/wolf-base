@@ -40,7 +40,10 @@ export const coreActions = createActionGroup({
 
 		showNotification			: props<ToastConfiguration>(),
 
-		navigate 					: props<{ url: string[], queryParams?: Record<string, string>, skipLocationChange?: boolean, closeOnNavSuccess?: boolean }>()
+		navigate 					: props<{ url: string[], queryParams?: Record<string, string>, skipLocationChange?: boolean, closeOnNavSuccess?: boolean }>(),
+
+		createDemoData				: emptyProps(),
+		createDemoDataSuccess		: emptyProps()
 
 	}
 

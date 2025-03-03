@@ -3,7 +3,7 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
 import { registerLocaleData } from '@angular/common';
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
-import { APP_INITIALIZER, ApplicationConfig, ErrorHandler, isDevMode, LOCALE_ID, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { ApplicationConfig, ErrorHandler, inject, isDevMode, LOCALE_ID, provideAppInitializer, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, RouterOutlet, withViewTransitions } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
@@ -38,20 +38,17 @@ export const appImports = [
 
 ];
 
-const appInitializerFactory = (store: Store) => {
+const appInitializer = () => {
 
-	return () => {
+	const store: Store = inject(Store);
 
-		// load configuration
-		store.dispatch(coreActions.loadAll());
-
-	};
+	// load all data
+	store.dispatch(coreActions.loadAll());
 
 };
 
 const appServices = [
 
-	{ provide: APP_INITIALIZER, useFactory: appInitializerFactory, multi: true, deps: [ Store ] },
 	{ provide: ErrorHandler, useClass: CustomErrorHandler },
 	{ provide: LOCAL_REPOSITORY_SERVICE, useClass: IndexedDbLocalRepositoryServiceImpl },
 	{ provide: REMOTE_REPOSITORY_SERVICE, useClass: FirestoreRemoteRepositoryServiceImpl, deps: [ Store, HttpClient ] },
@@ -75,8 +72,9 @@ export const appConfig: ApplicationConfig = {
 		provideAnimations(),
 		provideServiceWorker('ngsw-worker.js', { enabled: !isDevMode(), registrationStrategy: 'registerWhenStable:30000' }),
 		provideStore(store.reducerList, { metaReducers: store.metaReducers }),
-		provideEffects(store.effectList),
+		provideEffects(store.effectList()),
 		provideStoreDevtools(),
+		provideAppInitializer(appInitializer),
 		{ provide: LOCALE_ID, useValue: 'de-DE' },
 		...appServices
 	]
