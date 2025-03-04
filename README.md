@@ -3,6 +3,11 @@
 This project is a personal playground for learning and experimenting with data synchronization between a PWA and server.
 Just a bit of coding fun; feel free to explore!
 
+## Demo
+
+A demo can be found here: [Wolf Base Demo](https://wolf-base-demo.web.app/)
+Feel free to add, modify, or remove data. All data will reset when the browser data is cleared.
+
 ## What's this all about?
 
 This project is primarily:
