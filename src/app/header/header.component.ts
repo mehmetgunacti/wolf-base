@@ -20,7 +20,17 @@ export class HeaderComponent extends BaseComponent {
 	private store: Store = inject(Store);
 
 	protected cloudTasks: Signal<CloudTask[]> = this.store.selectSignal(selCloud_AvailableTasks);
-	protected isDev = !environment.production;
+	protected ribbonText: string | null = null;
+
+	constructor() {
+
+		super();
+		if (environment.isDemo)
+			this.ribbonText = 'demo';
+		else if (!environment.production)
+			this.ribbonText = '[dev]';
+
+	}
 
 	toggleNav(): void {
 

@@ -23,11 +23,11 @@
 	<!-- content will be placed dynamically via Cdk Portal -->
 </section>
 
-@if (isDev) {
+@if (ribbonText) {
 
 	<div class="top-0 right-0 absolute pointer-events-none select-none">
 		<svg wGlyph="ribbon" class="text-6xl fill-focus stroke-focus"></svg>
-		<div class="top-3 right-2 absolute font-bold text-xs rotate-45">[dev]</div>
+		<div class="top-3 right-2 absolute font-bold text-xs rotate-45">{{ribbonText}}</div>
 	</div>
 
 }
