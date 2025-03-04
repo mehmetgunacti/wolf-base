@@ -7,6 +7,16 @@ import { Store } from '@ngrx/store';
 import { selEntity_storeEmpty } from '@selectors/entity/entity.selectors';
 import { LOCAL_REPOSITORY_SERVICE } from '@services/repository.service';
 import { demoDataBookmarks } from 'data/bookmarks';
+import { demoDataExams } from 'data/exams';
+import { demoDataNoteContent } from 'data/note-content';
+import { demoDataNotes } from 'data/notes';
+import { demoDataProjects } from 'data/projects';
+import { demoDataQuizEntries } from 'data/quiz-entries';
+import { demoDataQuotes } from 'data/quotes';
+import { demoDataSessions } from 'data/sessions';
+import { demoDataTasks } from 'data/tasks';
+import { demoDataTestSuites } from 'data/test-suites';
+import { demoDataWords } from 'data/words';
 import { environment } from 'environments/environment';
 import { filter, map, switchMap } from 'rxjs/operators';
 
@@ -26,7 +36,21 @@ export class CoreLoadDemoDataEffects {
 			concatLatestFrom(() => this.store.select(selEntity_storeEmpty)),
 			filter(([ , storeEmpty ]) => storeEmpty),
 
-			switchMap(() => this.localRepository.bookmarks.createAll(demoDataBookmarks)),
+			switchMap(() => Promise.all([
+
+				this.localRepository.bookmarks.putAll(demoDataBookmarks),
+				this.localRepository.notes.putAll(demoDataNotes),
+				this.localRepository.noteContent.putAll(demoDataNoteContent),
+				this.localRepository.words.putAll(demoDataWords),
+				this.localRepository.quizEntries.putAll(demoDataQuizEntries),
+				this.localRepository.quotes.putAll(demoDataQuotes),
+				this.localRepository.projects.putAll(demoDataProjects),
+				this.localRepository.tasks.putAll(demoDataTasks),
+				this.localRepository.testSuites.putAll(demoDataTestSuites),
+				this.localRepository.exams.putAll(demoDataExams),
+				this.localRepository.sessions.putAll(demoDataSessions)
+
+			])),
 
 			map(values => coreActions.createDemoDataSuccess())
 

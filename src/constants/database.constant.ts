@@ -81,6 +81,6 @@ export const DEFAULT_CONF_VALUES: Configuration = {
 	titleLookupUrl: null,
 	popularBookmarks: [ '2-be-read', 'new', 'im-bored', 'news', 'shopping' ],
 	pinnedNotes: [ 'java', 'todo', 'code' ],
-	quotesRunning: false
+	quotesRunning: true
 
 };
