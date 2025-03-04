@@ -5,7 +5,8 @@ Just a bit of coding fun; feel free to explore!
 
 ## Demo
 
-A demo can be found here: [Wolf Base Demo](https://wolf-base-demo.web.app/)
+A demo can be found here: <a href="https://wolf-base-demo.web.app/" target="_blank">Wolf Base Demo</a>
+
 Feel free to add, modify, or remove data. All data will reset when the browser data is cleared.
 
 ## What's this all about?
