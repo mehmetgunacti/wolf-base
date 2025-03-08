@@ -1,0 +1,44 @@
+Upload Demo:
+
+1) clone project folder, rename to 'wolf-base-demo' and open in vs code
+2) set environment.isDemo flags to true
+3) comment and uncomment arrays in all data/*.ts
+4) run ng s and see if everything works
+5) delete .firebaserc file under project root folder if it exists
+6) delete firebase.json file under project root folder if it exists
+7) npm install -g firebase-tools
+8) firebase --version (you should not see any error)
+
+9) firebase login (if needed: firebase logout)
+9.1) no for collecting data
+9.2) copy url and open in browser
+9.2.1) Google asks for user, choose one
+9.2.2) Choose 'continue' to sign in to Firebase CLI
+9.2.3) Allow
+9.2.4) Login success. Close browser tab.
+9.2.5) VS Code console says "success!"
+
+10) firebase init hosting
+10.1) Use an existing project -> choose wolf-base-demo
+10.2) public directory is 'dist/wolf-base/browser', press enter
+10.3) 'Configure as single-page-app (rewrite all page urls to /index.html)' -> Yes
+10.4) 'Setup automatic build with github' -> No
+
+Summary:
+? What do you want to use as your public directory? dist/wolf-base/browser
+? Configure as a single-page app (rewrite all urls to /index.html)? Yes
+? Set up automatic builds and deploys with GitHub? No
+? File dist/wolf-base/browser/index.html already exists. Overwrite? (y/N) y
+
+10.5) Output is:
+
+✔  Wrote dist/index.html
+
+i  Writing configuration info to firebase.json...
+i  Writing project information to .firebaserc...
+
+✔  Firebase initialization complete!
+
+11) delete dist folder, then "ng build"
+Note: Firebase config might have overridden the correct index.html, so delete dist and re-create it with "ng b"
+12) firebase deploy
