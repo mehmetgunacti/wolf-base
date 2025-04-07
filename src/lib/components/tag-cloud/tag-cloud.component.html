@@ -7,7 +7,7 @@
 	} @else {
 
 		<a	(click)="onTagClick(tag.tag.name)"
-			class="inline-block focus-visible:ring-4 focus-visible:outline-none rounded focus-visible:ring-outline {{tag.fontSize}}"
+			class="inline-block focus-visible:ring-4 focus-visible:outline-hidden rounded-sm focus-visible:ring-outline {{tag.fontSize}}"
 			tabindex="0"
 			[ngClass]="{
 				'text-accent-text': tag.className === 'selected',

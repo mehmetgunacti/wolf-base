@@ -6,7 +6,7 @@
 		<div>
 
 			<a	[routerLink]="['/notes']"
-				class="flex gap-1 focus-visible:bg-component-dark-hover mb-1 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
+				class="flex gap-1 focus-visible:bg-component-dark-hover mb-1 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-hidden"
 				tabindex="0">
 				<svg wGlyph="note_stack" class="text-[1.2em]"></svg>
 				Notes
@@ -18,7 +18,7 @@
 
 					<a	[routerLink]="['/notes', note.id]"
 						[style.margin-left.px]="($index + 1) * 15"
-						class="flex gap-1 focus-visible:bg-component-dark-hover mb-1 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
+						class="flex gap-1 focus-visible:bg-component-dark-hover mb-1 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-hidden"
 						tabindex="0">
 
 						<svg wGlyph="down_right" class="text-[1.2em]"></svg>
@@ -72,10 +72,10 @@
 		@for (note of children(); track $index) {
 
 			<a	[routerLink]="['/notes', note.id]"
-				class="flex items-center gap-1 focus-visible:bg-component-dark-hover my-1 ml-4 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
+				class="flex items-center gap-1 focus-visible:bg-component-dark-hover my-1 ml-4 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-hidden"
 				tabindex="0">
 
-				<svg wGlyph="down_right" class="flex-shrink-0"></svg>
+				<svg wGlyph="down_right" class="shrink-0"></svg>
 				{{ note.name | hideEnum }}
 
 			</a>
@@ -96,10 +96,10 @@
 
 			<a	[href]="url"
 				target="_blank"
-				class="flex items-center gap-1 focus-visible:bg-component-dark-hover my-1 ml-4 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm hover:underline hover:underline-offset-1 group focus-visible:outline-none"
+				class="flex items-center gap-1 focus-visible:bg-component-dark-hover my-1 ml-4 comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm hover:underline hover:underline-offset-1 group focus-visible:outline-hidden"
 				tabindex="0">
 
-				<svg wGlyph="down_right" class="flex-shrink-0"></svg>
+				<svg wGlyph="down_right" class="shrink-0"></svg>
 				{{ url }}
 				<sup class="opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-500"><svg wGlyph="open_in_new"></svg></sup>
 

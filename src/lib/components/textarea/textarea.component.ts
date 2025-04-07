@@ -17,7 +17,7 @@ import { BaseComponent } from '../base.component';
 	host: {
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()',
-		'class': 'inline-flex relative min-h-widget-height bg-form-element border border-form-element-border hover:border-outline rounded-lg focus-within:ring-4 focus-within:ring-outline w-full outline-none group'
+		'class': 'inline-flex relative min-h-widget-height bg-form-element border border-form-element-border hover:border-outline rounded-lg focus-within:ring-4 focus-within:ring-outline w-full outline-hidden group'
 	}
 })
 export class TextareaComponent extends BaseComponent implements ControlValueAccessor {

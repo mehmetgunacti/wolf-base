@@ -66,7 +66,7 @@ export class InputElementDirective implements OnInit {
 
 	}
 
-	@HostListener('blur')
+	@HostListener('blur-sm')
 	onBlur() {
 
 		// if (!this.alwaysFocused)

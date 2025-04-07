@@ -188,7 +188,7 @@
 				<div
 					tabindex="0"
 					quiz_choice
-					class="relative items-center grid comp-active comp-hover p-3 rounded-lg focus-visible:ring-4 focus-visible:ring-outline min-h-14 cursor-pointer comp focus-visible:outline-none"
+					class="relative items-center grid comp-active comp-hover p-3 rounded-lg focus-visible:ring-4 focus-visible:ring-outline min-h-14 cursor-pointer comp focus-visible:outline-hidden"
 					[class.correct]="quiz.correctChoice() === $index"
 					[class.incorrect]="quiz.incorrectChoice() === $index"
 					(click)="onChoiceClick(quiz, $index)">

@@ -21,7 +21,7 @@ import { BaseComponent } from '../base.component';
 	host: {
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()',
-		'class': 'grid grid-rows-[auto_1fr] md:grid-rows-1 md:grid-cols-[auto_1fr] relative min-h-widget-height px-3 bg-form-element border border-form-element-border hover:border-outline rounded-lg focus-within:ring-4 focus-within:ring-outline w-full outline-none group'
+		'class': 'grid grid-rows-[auto_1fr] md:grid-rows-1 md:grid-cols-[auto_1fr] relative min-h-widget-height px-3 bg-form-element border border-form-element-border hover:border-outline rounded-lg focus-within:ring-4 focus-within:ring-outline w-full outline-hidden group'
 	}
 })
 export class InputTagComponent extends BaseComponent implements ControlValueAccessor {

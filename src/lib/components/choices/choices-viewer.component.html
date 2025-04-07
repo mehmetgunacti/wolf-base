@@ -4,7 +4,7 @@
 		@for(answer of answers(); track $index) {
 			@let corrects = correctAnswers();
 			@let color = corrects === null ? 'after:border-accent-text' : corrects && corrects[$index] === answer ? 'after:border-success' : 'after:border-error';
-			@let ring = corrects === null ? '' : corrects && answer === false && corrects[$index] === true ? 'ring ring-error' : '';
+			@let ring = corrects === null ? '' : corrects && answer === false && corrects[$index] === true ? 'ring-3 ring-error' : '';
 
 			<div class="
 					relative
@@ -25,7 +25,7 @@
 					after:pointer-events-none
 				"
 				[attr.data-label]="ALPHA[$index]"
-				[ngClass]="ring">
+				[ngClass]="ring-3">
 				<input	type="checkbox"
 						class="absolute opacity-0 peer size-0"
 						[id]="componentId + '_' + $index"
@@ -64,7 +64,7 @@
 							after:rounded-tr-[3px]
 							after:rounded-bl-[3px]
 
-							after:peer-checked:block
+							peer-checked:after:block
 						"
 						[for]="componentId + '_' + $index"
 						[ngClass]="color"></label>

@@ -1,7 +1,7 @@
 @let t = task();
 @let isExpanded = expanded();
 
-<a	class="flex flex-col gap-2 shadow-none comp-dark comp-dark-active comp-dark-hover p-2 focus-visible:ring-4 focus-visible:ring-outline cursor-pointer comp outline-none"
+<a	class="flex flex-col gap-2 shadow-none comp-dark comp-dark-active comp-dark-hover p-2 focus-visible:ring-4 focus-visible:ring-outline cursor-pointer comp outline-hidden"
 	[class.bg-component-dark-active]="isExpanded"
 	[title]="t.description ?? ''"
 	(click)="onToggleTask(t.id)"

@@ -1,7 +1,7 @@
 <ng-template #anchorContentTemplate let-item="item" let-link="link">
 
 	<div class="inline-grid top-0 bottom-0 left-0 z-nav-left absolute place-items-center bg-nav w-nav-glyph-width">
-		<div class="group-hover:bg-ghost-hover group-[.nav-item-active]:hover:bg-accent group-[.nav-item-active]:bg-accent group-[.nav-item-active]:text-base-color group-active:bg-accent inline-block relative p-2.5 rounded-full">
+		<div class="group-hover:bg-ghost-hover hover:group-[.nav-item-active]:bg-accent group-[.nav-item-active]:bg-accent group-[.nav-item-active]:text-base-color group-active:bg-accent inline-block relative p-2.5 rounded-full">
 			<svg [wGlyph]="item.icon" class="text-xl"></svg>
 			@if (item.smallBadge) {
 
@@ -32,7 +32,7 @@
 <ng-template #anchorTemplate let-item="item">
 
 	<a	#link="routerLinkActive"
-		class="relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline w-100 h-11 text-base-color-secondary hover:text-base-color focus-visible:outline-none overflow-hidden group"
+		class="relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline w-100 h-11 text-base-color-secondary hover:text-base-color focus-visible:outline-hidden overflow-hidden group"
 		[routerLink]="item.url"
 		[queryParams]="item.queryParams"
 		routerLinkActive="nav-item-active"
@@ -68,7 +68,7 @@
 
 	<!-- Switch Theme -->
 	<a	#link
-		class="relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline w-100 h-11 text-base-color-secondary hover:text-base-color cursor-pointer focus-visible:outline-none overflow-hidden group"
+		class="relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline w-100 h-11 text-base-color-secondary hover:text-base-color cursor-pointer focus-visible:outline-hidden overflow-hidden group"
 		(click)="onSwitchTheme()"
 		title="Switch Theme"
 		tabindex="0">

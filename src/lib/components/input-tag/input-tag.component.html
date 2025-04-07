@@ -19,7 +19,7 @@
 <input
 	#inputElement
 	type="text"
-	class="border-0 bg-transparent md:py-0 text-content outline-0 peer place-self-stretch focus-visible:outline-none peer-[:not(:empty)]/tags:py-2"
+	class="border-0 bg-transparent md:py-0 text-content outline-0 peer place-self-stretch focus-visible:outline-hidden peer-not-empty/tags:py-2"
 	[attr.list]="UUID() + '_suggestions'"
 	(input)="onInput($event)"
 	(keydown)="onKeydown($event)"
@@ -49,11 +49,11 @@
 	peer-placeholder-shown:bg-transparent
 	peer-placeholder-shown:text-base-color-secondary
 
-	peer-[:not(:empty)]/tags:-top-3.5
-	peer-[:not(:empty)]/tags:text-2xs
-	peer-[:not(:empty)]/tags:leading-5
-	peer-[:not(:empty)]/tags:bg-component-dark
-	peer-[:not(:empty)]/tags:text-form-element-text
+	peer-not-empty/tags:-top-3.5
+	peer-not-empty/tags:text-2xs
+	peer-not-empty/tags:leading-5
+	peer-not-empty/tags:bg-component-dark
+	peer-not-empty/tags:text-form-element-text
 
 	transition-all
 	duration-500

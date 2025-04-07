@@ -24,7 +24,7 @@ import { BaseComponent } from '../base.component';
 	],
 	host: {
 		'(window:mouseup)': 'onMouseUp()',
-		'class': 'relative flex flex-col items-center p-2 border border-transparent hover:border-outline rounded-lg focus-within:ring-4 focus-within:ring-outline outline-none'
+		'class': 'relative flex flex-col items-center p-2 border border-transparent hover:border-outline rounded-lg focus-within:ring-4 focus-within:ring-outline outline-hidden'
 	}
 })
 export class CroppieComponent extends BaseComponent implements ControlValueAccessor {

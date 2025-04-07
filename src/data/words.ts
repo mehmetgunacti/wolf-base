@@ -9545,7 +9545,7 @@ export const demoDataWords: Word[] = [];
 // 				],
 // 				"type": DefinitionType.adjective,
 // 				"samples": [
-// 					"The ring master was so vociferous that he didn't need his megaphone to be powered."
+// 					"The ring-3 master was so vociferous that he didn't need his megaphone to be powered."
 // 				]
 // 			}
 // 		]
@@ -14839,7 +14839,7 @@ export const demoDataWords: Word[] = [];
 // 				],
 // 				"type": DefinitionType.noun,
 // 				"samples": [
-// 					"Saturday was truly the day of serendipity; for, I found a large diamond ring in the sand at the beach and a twenty dollar billon my way home."
+// 					"Saturday was truly the day of serendipity; for, I found a large diamond ring-3 in the sand at the beach and a twenty dollar billon my way home."
 // 				]
 // 			}
 // 		]

@@ -6,7 +6,7 @@
 		@for (col of _colsArray(); track $index;) {
 
 			<a	tabindex="0"
-				class="hover:bg-accent focus:bg-accent focus-visible:outline-none bg-form-element rounded-sm focus-visible:ring-4"
+				class="hover:bg-accent focus:bg-accent focus-visible:outline-hidden bg-form-element rounded-xs focus-visible:ring-4"
 				[id]="'_' + col + '_' + row"
 				(click)="onClick(col, row)"
 				(keydown)="onKeydown($event);"

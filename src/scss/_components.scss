@@ -18,7 +18,7 @@
 
 			focus-visible:ring-4
 			focus-visible:ring-outline
-			focus-visible:outline-none
+			focus-visible:outline-hidden
 
 			rounded-lg
 			cursor-pointer
@@ -220,13 +220,13 @@
 			text-sm
 
 			before:flex-1
-			before:bg-gradient-to-l
+			before:bg-linear-to-l
 			before:from-secondary
 			before:h-[1px]
 			before:me-6
 
 			after:flex-1
-			after:bg-gradient-to-r
+			after:bg-linear-to-r
 			after:from-secondary
 			after:h-[1px]
 			after:ms-6;
@@ -243,12 +243,12 @@
 			text-sm
 
 			before:flex-1
-			before:bg-gradient-to-l
+			before:bg-linear-to-l
 			before:from-secondary
 			before:h-[1px]
 
 			after:flex-1
-			after:bg-gradient-to-r
+			after:bg-linear-to-r
 			after:from-secondary
 			after:h-[1px]
 

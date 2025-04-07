@@ -14,7 +14,7 @@
 
 				<button
 					cdkMenuItem
-					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					class="flex items-center gap-2 p-2 rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline"
 					[routerLink]="['/notes', note.id, 'new' ]">
 					<svg wGlyph="post_add"></svg> Child Note
 				</button>
@@ -23,14 +23,14 @@
 
 				<button
 					cdkMenuItem
-					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					class="flex items-center gap-2 p-2 rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline"
 					[routerLink]="['/notes', note.id, 'edit' ]">
 					<svg wGlyph="edit"></svg> Edit Note
 				</button>
 
 				<button
 					cdkMenuItem
-					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					class="flex items-center gap-2 p-2 rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline"
 					[routerLink]="['/notes', note.id, 'content', 'edit' ]">
 					<svg wGlyph="edit_text"></svg> {{ (content$ | async) ? 'Edit' : 'Add '}} Content
 				</button>
@@ -39,14 +39,14 @@
 
 				<button
 					cdkMenuItem
-					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					class="flex items-center gap-2 p-2 rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline"
 					[routerLink]="['/logs', note.id]">
 					<svg wGlyph="history"></svg> View Logs
 				</button>
 
 				<button
 					cdkMenuItem
-					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					class="flex items-center gap-2 p-2 rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline"
 					(click)="onRemove(note.id)">
 					<svg wGlyph="delete"></svg> Remove Note
 				</button>

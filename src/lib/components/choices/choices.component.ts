@@ -18,7 +18,7 @@ import { produce } from 'immer';
 	host: {
 		'[tabindex]': '0',
 		'(focus)': 'onHostFocus()',
-		'class': 'inline-flex px-2 items-center relative min-h-widget-height border border-transparent hover:border-outline rounded-lg focus-visible:ring-4 focus-visible:ring-outline outline-none group'
+		'class': 'inline-flex px-2 items-center relative min-h-widget-height border border-transparent hover:border-outline rounded-lg focus-visible:ring-4 focus-visible:ring-outline outline-hidden group'
 	}
 })
 export class ChoicesComponent extends BaseComponent implements ControlValueAccessor {

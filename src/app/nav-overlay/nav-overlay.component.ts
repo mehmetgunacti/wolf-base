@@ -6,7 +6,7 @@ import { BaseComponent } from '@libComponents/base.component';
 	template: '',
 	host: {
 		'(click)': 'onClick()',
-		'class': 'fixed top-0 right-0 h-100dvh left-0 backdrop-blur bg-overlay z-nav-overlay starting:opacity-0 [transition-property:display_opacity] [transition-behavior:allow-discrete] duration-500',
+		'class': 'fixed top-0 right-0 h-100dvh left-0 backdrop-blur-sm bg-overlay z-nav-overlay starting:opacity-0 [transition-property:display_opacity] [transition-behavior:allow-discrete] duration-500',
 		'[class.hidden]': '!visible()',
 		'[class.block]': 'visible()',
 		'[class.opacity-100]': 'visible()',

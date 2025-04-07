@@ -14,13 +14,13 @@
 
 				<button
 					cdkMenuItem
-					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					class="flex items-center gap-2 p-2 rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline"
 					[routerLink]="['/words', word.id, 'edit' ]">
 					<svg wGlyph="edit"></svg> Edit Word
 				</button>
 
 				<a	cdkMenuItem
-					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					class="flex items-center gap-2 p-2 rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline"
 					[href]="'https://www.google.com/search?q=' + word.name"
 					target="_blank">
 					<svg wGlyph="search"></svg> Google <sup><svg wGlyph="open_in_new"></svg></sup>
@@ -30,14 +30,14 @@
 
 				<button
 					cdkMenuItem
-					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					class="flex items-center gap-2 p-2 rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline"
 					[routerLink]="['/logs', word.id]">
 					<svg wGlyph="history"></svg> View Logs
 				</button>
 
 				<button
 					cdkMenuItem
-					class="flex items-center gap-2 p-2 rounded focus-visible:ring-4 focus-visible:outline-none hover:bg-ghost-hover focus-visible:ring-outline"
+					class="flex items-center gap-2 p-2 rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline"
 					(click)="onRemove(word.id)">
 					<svg wGlyph="delete"></svg> Remove Word
 				</button>
@@ -49,7 +49,7 @@
 	</w-portal>
 
 	<a	[routerLink]="['/words']"
-		class="flex gap-1 focus-visible:bg-component-dark-hover shadow-component comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-none"
+		class="flex gap-1 focus-visible:bg-component-dark-hover shadow-component comp-dark comp-dark-active comp-dark-hover p-2 rounded-lg focus-visible:ring-4 focus-visible:ring-outline text-sm focus-visible:outline-hidden"
 		tabindex="0">
 		<svg wGlyph="dictionary" class="text-[1.2em]"></svg>
 		Words

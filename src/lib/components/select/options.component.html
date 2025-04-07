@@ -5,7 +5,7 @@
 							[id]="'mi_' + componentId + '_' + node.value.id"
 							(keydown)="onKeydown($event, node);"
 							(click)="selectItem(node.value)"
-							class="block hover:bg-form-element-hover rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none cursor-pointer">
+							class="block hover:bg-form-element-hover rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden cursor-pointer">
 
 		<!-- use a disabled button to provide padding for tree leaf -->
 		<div class="flex items-center">
@@ -29,7 +29,7 @@
 							[id]="'mi_' + componentId + '_' + node.value.id"
 							(click)="selectItem(node.value)"
 							(keydown)="onKeydown($event, node);"
-							class="block hover:bg-form-element-hover rounded focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-none cursor-pointer">
+							class="block hover:bg-form-element-hover rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden cursor-pointer">
 
 		<div class="flex items-center">
 

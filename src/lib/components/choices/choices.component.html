@@ -13,7 +13,7 @@
 					rounded
 					focus-visible:ring-4
 					focus-visible:ring-outline
-					outline-none
+					outline-hidden
 
 					after:content-[attr(data-label)]
 					after:absolute
@@ -75,7 +75,7 @@
 
 							after:border-accent-text
 
-							after:peer-checked:block
+							peer-checked:after:block
 						"
 						[for]="componentId + '_' + $index"></label>
 			</div>
