@@ -1,1 +1,32 @@
+/* EXTERNAL (must be placed before all other imports) */
+@import './styles/third-party/_external.css';
+
+/* TAILWIND */
 @import "tailwindcss";
+
+/* THEMES */
+@import './styles/themes/_default.css';
+@import './styles/themes/_light.css';
+@import './styles/themes/_aqua.css';
+
+/* VARIABLES */
+@import './styles/_variables.css';
+
+/* THIRD PARTY */
+/* angular cdk overlay */
+@import './styles/third-party/_angular-cdk-overlay.css';
+
+/* highlight.js */
+@import './styles/third-party/_highlight-js.css';
+
+/* chrome extras */
+@import './styles/third-party/_chrome-extras.css';
+
+/* markdown-it plugins (todo) */
+@import './styles/third-party/_md-alert.css';
+@import './styles/third-party/_md-checkbox.css';
+/* @use 'md-toc'; */
+
+@import './styles/_html.css';
+@import './styles/_components.css';
+@import './styles/_shake.css';

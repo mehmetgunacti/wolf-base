@@ -1,0 +1,30 @@
+/******************************
+* Angular CDK Overlay - start *
+*******************************/
+
+@import '@angular/cdk/overlay-prebuilt.css';
+
+/* note: z-index values have to be in sync with tailwind.config.ts values*/
+:root {
+	--__z-index: 7000;
+}
+
+.cdk-overlay-container {
+	z-index: var(--__z-index);
+}
+
+.cdk-global-overlay-wrapper {
+	z-index: var(--__z-index);
+}
+
+.cdk-overlay-pane {
+	z-index: var(--__z-index);
+}
+
+.cdk-overlay-backdrop {
+	z-index: var(--__z-index);
+}
+
+.cdk-overlay-connected-position-bounding-box {
+	z-index: var(--__z-index);
+}

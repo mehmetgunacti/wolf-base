@@ -1,0 +1,90 @@
+:root {
+
+	--col-black				: hsl(0deg 0% 0%);
+	--col-white				: hsl(0deg 0% 100%);
+	--col-transparent		: hsl(0deg 0% 0% / 0);
+
+	--col-text				: hsl(210, 15%, 92%);
+	--col-text-secondary	: hsl(0, 0%, 50%);
+	--col-disabled-text		: var(--col-text-secondary);
+	--col-disabled			: hsl(216, 8%, 15%);
+
+	--col-accent			: hsl(215deg 65% 30%);
+	--col-accent-text		: hsl(215deg 65% 43%);
+	--col-accent-hover		: hsl(from var(--col-accent) h s calc(l* 1.15));
+	--col-accent-active		: hsl(from var(--col-accent) h s calc(l* 1.2));
+
+	--col-focus				: hsl(16deg 80% 44%);
+	--col-outline			: hsl(215deg 77% 48% / 0.5);
+
+	--col-primary			: hsl(215deg 65% 30%);
+	--col-primary-text		: var(--col-text);
+	--col-primary-hover		: hsl(from var(--col-primary) h s calc(l* 1.15));
+	--col-primary-active	: hsl(from var(--col-primary) h s calc(l* 1.2));
+	--col-primary-border	: hsl(from var(--col-primary) h s calc(l* .9));
+
+	--col-success			: hsl(132deg 52% 22%);
+	--col-success-text		: var(--col-text);
+	--col-success-hover		: hsl(from var(--col-success) h s calc(l* 1.1));
+	--col-success-active	: hsl(from var(--col-success) h s calc(l* 1.15));
+	--col-success-border	: hsl(from var(--col-success) h s calc(l* .9));
+
+	--col-info				: hsl(201deg 100% 28%);
+	--col-info-text			: var(--col-text);
+	--col-info-hover		: hsl(from var(--col-info) h s calc(l* 1.1));
+	--col-info-active		: hsl(from var(--col-info) h s calc(l* 1.15));
+	--col-info-border		: hsl(from var(--col-info) h s calc(l* .9));
+
+	--col-warn				: hsl(31deg 100% 35%);
+	--col-warn-text			: var(--col-text);
+	--col-warn-hover		: hsl(from var(--col-warn) h s calc(l* 1.1));
+	--col-warn-active		: hsl(from var(--col-warn) h s calc(l* 1.15));
+	--col-warn-border		: hsl(from var(--col-warn) h s calc(l* .9));
+
+	--col-error				: hsl(0deg 66% 30%);
+	--col-error-text		: var(--col-text);
+	--col-error-hover		: hsl(from var(--col-error) h s calc(l* 1.1));
+	--col-error-active		: hsl(from var(--col-error) h s calc(l* 1.15));
+	--col-error-border		: hsl(from var(--col-error) h s calc(l* .9));
+
+	--col-ghost				: var(--col-transparent);
+	--col-ghost-text		: var(--col-text);
+	--col-ghost-hover		: hsl(from var(--col-white) h s calc(l* 1.1) / .1);
+	--col-ghost-active		: hsl(from var(--col-white) h s calc(l* 1.1) / .2);
+	--col-ghost-border		: var(--col-transparent);
+
+	--col-bg-header			: hsl(210deg 11% 7%);
+	--col-bg-nav			: hsl(210deg 11% 8%);
+	--col-bg-popup			: hsl(210deg 11% 9%);
+	--col-bg-page			: hsl(210deg 11% 33%);
+
+	--col-bg-component				: hsl(210deg 11% 13%);
+	--col-bg-component-hover		: hsl(210deg 11% 11%);
+	--col-bg-component-active		: hsl(210deg 11% 10%);
+
+	--col-bg-component-dark			: hsl(210deg 11% 10%);
+	--col-bg-component-dark-hover	: hsl(210deg 11% 9%);
+	--col-bg-component-dark-active	: hsl(210deg 11% 8%);
+
+	--col-form-element			: hsl(210deg 11% 20%);
+	--col-form-element-text		: var(--col-text);
+	--col-form-element-hover	: hsl(from var(--col-form-element) h s calc(l* 1.1));
+	--col-form-element-active	: hsl(from var(--col-form-element) h s calc(l* 1.15));
+	--col-form-element-border	: hsl(from var(--col-form-element) h s calc(l* .8));
+
+	--col-progress				: var(--col-error);
+	--col-progress-bg			: hsl(from var(--col-progress) h s l / .3);
+
+	--col-bg-overlay			: hsl(from var(--col-black) h s l / .3);
+	--col-shadow				: var(--col-bg-header);
+
+	--col-scrollbar-thumb		: hsl(from var(--col-bg-component-dark) h s l / .7);
+	--col-scrollbar-track		: var(--col-transparent);
+
+	--col-scrollbar-thumb-dark	: var(--col-bg-component-dark);
+	--col-scrollbar-track-dark	: var(--col-transparent);
+
+	--col-scrollbar-thumb-blue	: var(--col-accent);
+	--col-scrollbar-track-blue	: var(--col-transparent);
+
+}
