@@ -87,7 +87,7 @@ function createUITags(selectedTags: string[], relatedTags: string[], tags: Tag[]
 	selector: 'w-tag-cloud',
 	templateUrl: './tag-cloud.component.html',
 	styles: `
-		// a,
+		/*// a,
 		// span {
 
 			// font-size 		: 1.1rem;
@@ -114,7 +114,7 @@ function createUITags(selectedTags: string[], relatedTags: string[], tags: Tag[]
 //
 // 			}
 
-		// }
+		// }*/
 	`,
 	host: { 'class': 'flex flex-wrap items-center justify-center gap-1 p-4' }
 })
