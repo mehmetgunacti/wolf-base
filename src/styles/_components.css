@@ -113,7 +113,7 @@
 			@apply size-button-height-2xs;
 		}*/
 	}
-	comp {
+	.comp {
 		@apply bg-component shadow-component rounded-lg;
 	}
 	.comp-dark {
@@ -137,85 +137,84 @@
 		@apply p-1 md:p-0 font-bold text-2xl text-accent-text leading-none;
 	}
 
-}
-/*
+	/*
+	* ng-valid    <-> ng-invalid
+	* ng-pristine <-> ng-dirty
+	* ng-touched  <-> ng-untouched
+	*/
+	:has(> input).ng-dirty.ng-invalid,
+	:has(> select).ng-dirty.ng-invalid,
+	:has(> textarea).ng-dirty.ng-invalid {
+		@apply ring-4 ring-error outline-none;
+	}
+	.h-divider {
+		@apply
+			flex
+			items-center
+			py-3
+			text-base-color-secondary
+			text-sm
+			before:flex-1
+			before:bg-linear-to-l
+			before:from-secondary
+			before:h-[1px]
+			before:me-6
+			after:flex-1
+			after:bg-linear-to-r
+			after:from-secondary
+			after:h-[1px]
+			after:ms-6;
+	}
+	.menu-divider {
+		@apply
+			flex
+			items-center
+			text-base-color-secondary
+			text-sm
+			before:flex-1
+			before:bg-linear-to-l
+			before:from-secondary
+			before:h-[1px]
+			after:flex-1
+			after:bg-linear-to-r
+			after:from-secondary
+			after:h-[1px]
+	}
+	.page {
+		@apply p-1 md:p-2 flex flex-col gap-1 md:gap-2 @container/page;
+	}
+	.scrollbar {
+		scrollbar-width		: thin;
+		scrollbar-color		: var(--col-scrollbar-thumb) var(--col-scrollbar-track);
+	}
+	.scrollbar-dark {
+		scrollbar-color	: var(--col-scrollbar-thumb-dark) var(--col-scrollbar-track-dark);
+	}
+	.scrollbar-blue {
+		scrollbar-color	: var(--col-scrollbar-thumb-blue) var(--col-scrollbar-track-blue);
+	}
+	.scrollbar-gutter-stable {
+		scrollbar-gutter	: stable;
+	}
+	.tag {
+		@apply
+			flex
+			rounded-full
+			bg-accent
+			text-content
+			text-xs
+			leading-6
+			whitespace-nowrap
+			px-3
+			py-0
+			hover:bg-accent-hover
+			active:bg-accent-active
+			focus-visible:ring-4
+			focus-visible:ring-outline
+			focus-visible:outline-none;
+	}
+	.tag-sm {
+		@apply px-2 text-2xs leading-5;
+	}
 
-/*
-* ng-valid    <-> ng-invalid
-* ng-pristine <-> ng-dirty
-* ng-touched  <-> ng-untouched
-*/
-:has(> input).ng-dirty.ng-invalid,
-:has(> select).ng-dirty.ng-invalid,
-:has(> textarea).ng-dirty.ng-invalid {
-	@apply ring-4 ring-error outline-none;
-}
-.h-divider {
-	@apply
-		flex
-		items-center
-		py-3
-		text-base-color-secondary
-		text-sm
-		before:flex-1
-		before:bg-linear-to-l
-		before:from-secondary
-		before:h-[1px]
-		before:me-6
-		after:flex-1
-		after:bg-linear-to-r
-		after:from-secondary
-		after:h-[1px]
-		after:ms-6;
-}
-.menu-divider {
-	@apply
-		flex
-		items-center
-		text-base-color-secondary
-		text-sm
-		before:flex-1
-		before:bg-linear-to-l
-		before:from-secondary
-		before:h-[1px]
-		after:flex-1
-		after:bg-linear-to-r
-		after:from-secondary
-		after:h-[1px]
-}
-.page {
-	@apply p-1 md:p-2 flex flex-col gap-1 md:gap-2 @container/page;
-}
-.scrollbar {
-	scrollbar-width		: thin;
-	scrollbar-color		: var(--col-scrollbar-thumb) var(--col-scrollbar-track);
-}
-.scrollbar-dark {
-	scrollbar-color	: var(--col-scrollbar-thumb-dark) var(--col-scrollbar-track-dark);
-}
-.scrollbar-blue {
-	scrollbar-color	: var(--col-scrollbar-thumb-blue) var(--col-scrollbar-track-blue);
-}
-.scrollbar-gutter-stable {
-	scrollbar-gutter	: stable;
-}
-.tag {
-	@apply
-		flex
-		rounded-full
-		bg-accent
-		text-content
-		text-xs
-		leading-6
-		whitespace-nowrap
-		px-3
-		py-0
-		hover:bg-accent-hover
-		active:bg-accent-active
-		focus-visible:ring-4
-		focus-visible:ring-outline
-		focus-visible:outline-none;
-}
-.tag-sm {
-	@apply px-2 text-2xs leading-5;
 }
