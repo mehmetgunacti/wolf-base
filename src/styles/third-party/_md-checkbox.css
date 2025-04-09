@@ -30,7 +30,7 @@
 		height			: 15px;
 		padding			: 10px;
 		width			: 15px;
-		border			: 2px solid var(--col-form-element-border);
+		border			: 2px solid var(--color-form-element-border);
 		border-radius	: 4px;
 
 	}
@@ -61,7 +61,7 @@
 		border-top-right-radius		: 3px;
 		border-bottom-left-radius	: 3px;
 
-		border-color				: var(--col-primary);
+		border-color				: var(--color-primary);
 
 	}
 

@@ -96,20 +96,20 @@ function createUITags(selectedTags: string[], relatedTags: string[], tags: Tag[]
 // 			.selected {
 //
 // 				cursor		: pointer;
-// 				color 		: var(--col-accent);
+// 				color 		: var(--color-accent);
 //
 // 			}
 
 // 			.related {
 //
 // 				cursor		: pointer;
-// 				color 		: var(--col-text);
+// 				color 		: var(--color-text);
 //
 // 			}
 
 // 			.disabled {
 //
-// 				color 		: var(--col-disabled);
+// 				color 		: var(--color-disabled);
 // 				cursor		: text;
 //
 // 			}

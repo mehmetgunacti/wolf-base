@@ -121,9 +121,9 @@
 			disabled:text-disabled-text
 			disabled:cursor-not-allowed;
 
-		/*&.btn-2xs {
+		&.btn-2xs {
 			@apply size-button-height-2xs;
-		}*/
+		}
 
 	}
 
@@ -159,8 +159,8 @@
 
 	.comp-dark-active {
 
-		@apply bg-component-active;
-		@apply active:bg-component-dark-active;
+		@apply bg-component-active
+				active:bg-component-dark-active;
 
 	}
 
@@ -183,40 +183,38 @@
 
 	.h-divider {
 
-		@apply
-			flex
-			items-center
-			py-3
-			text-base-secondary
-			text-sm
-			before:flex-1
-			before:bg-linear-to-l
-			before:from-secondary
-			before:h-[1px]
-			before:me-6
-			after:flex-1
-			after:bg-linear-to-r
-			after:from-secondary
-			after:h-[1px]
-			after:ms-6;
+		@apply flex
+				items-center
+				py-3
+				text-base-secondary
+				text-sm
+				before:flex-1
+				before:bg-linear-to-l
+				before:from-base-secondary
+				before:h-[1px]
+				before:me-6
+				after:flex-1
+				after:bg-linear-to-r
+				after:from-base-secondary
+				after:h-[1px]
+				after:ms-6;
 
 	}
 
 	.menu-divider {
 
-		@apply
-			flex
-			items-center
-			text-base-secondary
-			text-sm
-			before:flex-1
-			before:bg-linear-to-l
-			before:from-secondary
-			before:h-[1px]
-			after:flex-1
-			after:bg-linear-to-r
-			after:from-secondary
-			after:h-[1px]
+		@apply flex
+				items-center
+				text-base-secondary
+				text-sm
+				before:flex-1
+				before:bg-linear-to-l
+				before:from-base-secondary
+				before:h-[1px]
+				after:flex-1
+				after:bg-linear-to-r
+				after:from-base-secondary
+				after:h-[1px]
 
 	}
 
@@ -229,19 +227,19 @@
 	.scrollbar {
 
 		scrollbar-width		: thin;
-		scrollbar-color		: var(--col-scrollbar-thumb) var(--col-scrollbar-track);
+		scrollbar-color		: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
 
 	}
 
 	.scrollbar-dark {
 
-		scrollbar-color	: var(--col-scrollbar-thumb-dark) var(--col-scrollbar-track-dark);
+		scrollbar-color	: var(--color-scrollbar-thumb-dark) var(--color-scrollbar-track-dark);
 
 	}
 
 	.scrollbar-blue {
 
-		scrollbar-color	: var(--col-scrollbar-thumb-blue) var(--col-scrollbar-track-blue);
+		scrollbar-color	: var(--color-scrollbar-thumb-blue) var(--color-scrollbar-track-blue);
 
 	}
 
@@ -253,21 +251,20 @@
 
 	.tag {
 
-		@apply
-			flex
-			rounded-full
-			bg-accent
-			text-content
-			text-xs
-			leading-6
-			whitespace-nowrap
-			px-3
-			py-0
-			hover:bg-accent-hover
-			active:bg-accent-active
-			focus-visible:ring-4
-			focus-visible:ring-outline
-			focus-visible:outline-none;
+		@apply flex
+				rounded-full
+				bg-accent
+				text-base-text
+				text-sm
+				leading-6
+				whitespace-nowrap
+				px-3
+				py-0
+				hover:bg-accent-hover
+				active:bg-accent-active
+				focus-visible:ring-4
+				focus-visible:ring-outline
+				focus-visible:outline-none;
 
 	}
 

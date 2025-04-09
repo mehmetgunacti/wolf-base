@@ -1,7 +1,7 @@
 @let t = task();
 @let isExpanded = expanded();
 
-<a	class="flex flex-col gap-2 shadow-none comp-dark comp-dark-active comp-dark-hover p-2 focus-visible:ring-4 focus-visible:ring-outline cursor-pointer comp outline-hidden"
+<a	class="flex flex-col gap-2 outline-hidden shadow-none p-2 focus-visible:ring-4 focus-visible:ring-outline cursor-pointer comp-dark comp-dark-active comp-dark-hover comp"
 	[class.bg-component-dark-active]="isExpanded"
 	[title]="t.description ?? ''"
 	(click)="onToggleTask(t.id)"
@@ -10,12 +10,12 @@
 	<div class="flex gap-2 text-secondary text-sm">
 
 		<small 	class="flex items-center gap-1"
-				[class.text-[var(--col-warn)]]="t.status === TaskState.ongoing"
-				[class.text-[var(--col-success)]]="t.status === TaskState.completed">
+				[class.text-[var(--color-warn)]]="t.status === TaskState.ongoing"
+				[class.text-[var(--color-success)]]="t.status === TaskState.completed">
 				<svg wGlyph="manufacturing"></svg> {{ TASK_STATE_LABELS[t.status] }}
 		</small>
 		<small 	class="flex items-center gap-1"
-				[class.text-[var(--col-warn)]]="t.priority === TaskPriority.high">
+				[class.text-[var(--color-warn)]]="t.priority === TaskPriority.high">
 				<svg wGlyph="swap_vert"></svg> {{ TASK_PRIORITIES_LABELS[t.priority] }}
 		</small>
 		<small class="flex items-center gap-1"><svg wGlyph="category"></svg> {{ TASK_CATEGORIES_LABELS[t.category] }}</small>
@@ -36,7 +36,7 @@
 </a>
 <div [@slideDown]="isExpanded" class="overflow-hidden">
 
-	<div class="flex flex-col gap-2 shadow-none mr-2 ml-2 comp-dark p-2 rounded-t-none @container comp">
+	<div class="flex flex-col gap-2 shadow-none mr-2 ml-2 p-2 rounded-t-none comp-dark @container comp">
 
 		@if (t.description) {
 
