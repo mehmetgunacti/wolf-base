@@ -4,8 +4,8 @@
 	--color-white			: hsl(0deg 0% 100%);
 	--color-transparent		: hsl(0deg 0% 0% / 0);
 
-	--color-text			: hsl(210, 15%, 92%);
-	--color-text-secondary	: hsl(0, 0%, 50%);
+	--color-base-text		: hsl(210, 15%, 92%);
+	--color-base-secondary	: hsl(0, 0%, 50%);
 	--color-disabled-text	: var(--color-text-secondary);
 	--color-disabled		: hsl(216, 8%, 15%);
 

@@ -11,14 +11,14 @@
 
 		@for (testSuite of testSuites; track $index) {
 
-			<a	class="relative grid comp-dark comp-dark-active comp-dark-hover rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full group focus-visible:outline-hidden px-4 py-3"
+			<a	class="group relative focus-visible:outline-hidden grid px-4 py-3 rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full comp-dark comp-dark-active comp-dark-hover"
 				[routerLink]="['/test-suites', testSuite.id]"
 				tabindex="0">
 
 				<div class="flex flex-col flex-1 justify-center">
 
 					<p class="text-sm">{{ testSuite.name | hideEnum }}</p>
-					<small class="text-2xs text-base-color-secondary">
+					<small class="text-2xs text-base-secondary">
 						{{ testSuite.description }}
 					</small>
 

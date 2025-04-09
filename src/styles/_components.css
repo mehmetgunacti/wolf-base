@@ -152,7 +152,7 @@
 			flex
 			items-center
 			py-3
-			text-base-color-secondary
+			text-base-secondary
 			text-sm
 			before:flex-1
 			before:bg-linear-to-l
@@ -169,7 +169,7 @@
 		@apply
 			flex
 			items-center
-			text-base-color-secondary
+			text-base-secondary
 			text-sm
 			before:flex-1
 			before:bg-linear-to-l

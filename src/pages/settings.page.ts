@@ -33,7 +33,7 @@ import { buildInfo } from 'version';
 			</w-alert>
 
 		}
-		<div class="flex justify-end items-center p-2 text-base-color-secondary comp comp-dark">
+		<div class="flex justify-end items-center p-2 text-base-secondary comp comp-dark">
 
 			<button
 				type="button"
@@ -55,7 +55,7 @@ import { buildInfo } from 'version';
 		<app-title-lookup-config-container/>
 		<app-pinned-notes-form-container/>
 		<app-popular-bookmarks-form-container/>
-		<div class="flex justify-end items-center p-4 text-base-color-secondary comp">
+		<div class="flex justify-end items-center p-4 text-base-secondary comp">
 			<small>v{{ builtVersion }} (#{{ builtNumber }}) {{ builtTime | date:'dd.MM.yyyy HH:mm:ss' }}</small>
 		</div>
 	`,

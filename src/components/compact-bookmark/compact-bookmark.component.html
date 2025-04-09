@@ -1,8 +1,8 @@
 @let bm = bookmark();
 
-<a class="relative grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full group focus-visible:outline-hidden" [href]="bm.urls[0]" target="_blank">
+<a class="group relative focus-visible:outline-hidden grid rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full" [href]="bm.urls[0]" target="_blank">
 
-	<div class="flex gap-2 p-3 group/bookmark">
+	<div class="group/bookmark flex gap-2 p-3">
 
 		<!-- LEFT SIDE (IMAGE) -->
 		<div class="inline-flex justify-center items-center">
@@ -15,7 +15,7 @@
 		<div class="flex flex-col flex-1 justify-center">
 
 			<p class="text-sm">{{ bm.name }}</p>
-			<p class="text-base-color-secondary text-xs">{{bm.title}}</p>
+			<p class="text-base-secondary text-xs">{{bm.title}}</p>
 
 		</div>
 

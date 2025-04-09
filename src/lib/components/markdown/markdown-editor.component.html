@@ -348,7 +348,7 @@
 
 					@if(recoveryManager.recoverableContent(); as lsEntry) {
 
-						<div class="text-base-color-secondary italic">{{ lsEntry.time.toUTCString() | timePast:true:'precise' }}</div>
+						<div class="text-base-secondary italic">{{ lsEntry.time.toUTCString() | timePast:true:'precise' }}</div>
 						<w-markdown-viewer [markdown]="lsEntry.content"/>
 
 					}
@@ -385,7 +385,7 @@
 				(click)="updateEditor(actions.addHeading(editor, '#'))"
 				title="Align Center"
 				cdkMenuItem
-				class="rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline">
+				class="focus-visible:outline-hidden hover:bg-ghost-hover rounded-sm focus-visible:ring-4 focus-visible:ring-outline">
 				<h1 class="my-2 text-content">Heading 1</h1>
 			</button>
 
@@ -394,7 +394,7 @@
 				(click)="updateEditor(actions.addHeading(editor, '##'))"
 				title="Heading 2"
 				cdkMenuItem
-				class="rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline">
+				class="focus-visible:outline-hidden hover:bg-ghost-hover rounded-sm focus-visible:ring-4 focus-visible:ring-outline">
 				<h2 class="my-2 text-content">Heading 2</h2>
 			</button>
 
@@ -403,7 +403,7 @@
 				(click)="updateEditor(actions.addHeading(editor, '###'))"
 				title="Heading 3"
 				cdkMenuItem
-				class="rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline">
+				class="focus-visible:outline-hidden hover:bg-ghost-hover rounded-sm focus-visible:ring-4 focus-visible:ring-outline">
 				<h3 class="my-2 text-content">Heading 3</h3>
 			</button>
 
@@ -412,7 +412,7 @@
 				(click)="updateEditor(actions.addHeading(editor, '####'))"
 				title="Heading 4"
 				cdkMenuItem
-				class="rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline">
+				class="focus-visible:outline-hidden hover:bg-ghost-hover rounded-sm focus-visible:ring-4 focus-visible:ring-outline">
 				<h4 class="my-2 text-content">Heading 4</h4>
 			</button>
 
@@ -421,7 +421,7 @@
 				(click)="updateEditor(actions.addHeading(editor, '#####'))"
 				title="Heading 5"
 				cdkMenuItem
-				class="rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline">
+				class="focus-visible:outline-hidden hover:bg-ghost-hover rounded-sm focus-visible:ring-4 focus-visible:ring-outline">
 				<h5 class="my-2 text-content">Heading 5</h5>
 			</button>
 
@@ -430,7 +430,7 @@
 				(click)="updateEditor(actions.addHeading(editor, '######'))"
 				title="Heading 6"
 				cdkMenuItem
-				class="rounded-sm focus-visible:ring-4 focus-visible:outline-hidden hover:bg-ghost-hover focus-visible:ring-outline">
+				class="focus-visible:outline-hidden hover:bg-ghost-hover rounded-sm focus-visible:ring-4 focus-visible:ring-outline">
 				<h6 class="my-2 text-content">Heading 6</h6>
 			</button>
 
@@ -446,27 +446,27 @@
 
 		<div class="flex flex-col gap-2 p-2 overflow-y-auto prose scrollbar scrollbar-gutter-stable">
 
-			<button class="border-form-element-text hover:bg-ghost-hover border-l-4 border-l-default rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden" (click)="updateEditor(actions.addBlockquote(editor))" cdkMenuItem>
+			<button class="focus-visible:outline-hidden hover:bg-ghost-hover border-form-element-text border-l-4 border-l-default rounded-sm focus-visible:ring-4 focus-visible:ring-outline" (click)="updateEditor(actions.addBlockquote(editor))" cdkMenuItem>
 				Blockquote
 			</button>
 
-			<button class="border-primary hover:bg-ghost-hover border-l-4 border-l-primary rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden" (click)="updateEditor(actions.addBlockquote(editor, 'note'))" cdkMenuItem>
+			<button class="focus-visible:outline-hidden hover:bg-ghost-hover border-primary border-l-4 border-l-primary rounded-sm focus-visible:ring-4 focus-visible:ring-outline" (click)="updateEditor(actions.addBlockquote(editor, 'note'))" cdkMenuItem>
 				Note
 			</button>
 
-			<button class="border-success hover:bg-ghost-hover border-l-4 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden" (click)="updateEditor(actions.addBlockquote(editor, 'tip'))" cdkMenuItem>
+			<button class="focus-visible:outline-hidden hover:bg-ghost-hover border-success border-l-4 rounded-sm focus-visible:ring-4 focus-visible:ring-outline" (click)="updateEditor(actions.addBlockquote(editor, 'tip'))" cdkMenuItem>
 				Tip
 			</button>
 
-			<button class="border-info hover:bg-ghost-hover border-l-4 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden" (click)="updateEditor(actions.addBlockquote(editor, 'important'))" cdkMenuItem>
+			<button class="focus-visible:outline-hidden hover:bg-ghost-hover border-info border-l-4 rounded-sm focus-visible:ring-4 focus-visible:ring-outline" (click)="updateEditor(actions.addBlockquote(editor, 'important'))" cdkMenuItem>
 				Important
 			</button>
 
-			<button class="border-warn hover:bg-ghost-hover border-l-4 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden" (click)="updateEditor(actions.addBlockquote(editor, 'warning'))" cdkMenuItem>
+			<button class="focus-visible:outline-hidden hover:bg-ghost-hover border-warn border-l-4 rounded-sm focus-visible:ring-4 focus-visible:ring-outline" (click)="updateEditor(actions.addBlockquote(editor, 'warning'))" cdkMenuItem>
 				Warning
 			</button>
 
-			<button class="border-error hover:bg-ghost-hover border-l-4 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden" (click)="updateEditor(actions.addBlockquote(editor, 'caution'))" cdkMenuItem>
+			<button class="focus-visible:outline-hidden hover:bg-ghost-hover border-error border-l-4 rounded-sm focus-visible:ring-4 focus-visible:ring-outline" (click)="updateEditor(actions.addBlockquote(editor, 'caution'))" cdkMenuItem>
 				Caution
 			</button>
 
@@ -484,7 +484,7 @@
 
 			<fieldset>
 				<!-- INLINE CODE BUTTON -->
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addInlineCode(editor))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addInlineCode(editor))" cdkMenuItem>
 					<svg wGlyph="code"></svg> Inline Code
 				</button>
 			</fieldset>
@@ -493,31 +493,31 @@
 			<fieldset>
 				<legend class="font-bold">Frequent</legend>
 
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> Empty Block
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'java'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'java'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> java
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'typescript'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'typescript'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> typescript
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'javascript'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'javascript'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> javascript
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'scss'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'scss'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> scss
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'bash'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'bash'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> bash
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'sql'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'sql'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> sql
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'xml'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'xml'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> xml
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'yaml'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'yaml'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> yaml
 				</button>
 
@@ -526,49 +526,49 @@
 			<fieldset>
 				<legend class="font-bold">Other</legend>
 
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'asciidoc'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'asciidoc'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> asciidoc
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'autohotkey'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'autohotkey'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> autohotkey
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'c'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'c'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> c
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'cpp'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'cpp'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> cpp
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'css'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'css'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> css
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'dockerfile'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'dockerfile'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> dockerfile
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'gradle'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'gradle'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> gradle
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'http'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'http'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> http
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'ini'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'ini'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> ini
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'json'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'json'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> json
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'kotlin'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'kotlin'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> kotlin
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'markdown'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'markdown'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> markdown
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'powershell'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'powershell'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> powershell
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'properties'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'properties'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> properties
 				</button>
-				<button class="flex items-center gap-1 hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'python'))" cdkMenuItem>
+				<button class="flex items-center gap-1 focus-visible:outline-hidden hover:bg-ghost-hover p-2 rounded-sm focus-visible:ring-4 focus-visible:ring-outline w-full text-sm" (click)="updateEditor(actions.addCodeBlock(editor, 'python'))" cdkMenuItem>
 					<svg wGlyph="chevron_right"></svg> python
 				</button>
 
@@ -581,11 +581,11 @@
 </ng-template>
 
 <!-- TEXTAREA -->
-<div class="mt-2 group">
+<div class="group mt-2">
 
 	<textarea
 		#editor
-		class="border-0 bg-transparent px-3 p-2 w-full text-content outline-0 peer scrollbar focus-visible:outline-hidden"
+		class="focus-visible:outline-hidden bg-transparent px-3 p-2 border-0 w-full text-content outline-0 peer scrollbar"
 		[value]="value()"
 		placeholder=""
 		[readonly]="readonly()"

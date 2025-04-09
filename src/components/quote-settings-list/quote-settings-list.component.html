@@ -6,13 +6,13 @@
 
 		@for (quote of quotes(); track quote.id) {
 
-			<a	class="relative grid px-4 py-3 comp-dark comp-dark-active comp-dark-hover rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full cursor-pointer select-none focus-visible:outline-hidden group"
+			<a	class="group relative focus-visible:outline-hidden grid px-4 py-3 rounded-lg focus-visible:ring-4 focus-visible:ring-outline h-full cursor-pointer select-none comp-dark comp-dark-active comp-dark-hover"
 				(click)="onSelect(quote)"
 				tabindex="0">
 
 				<div class="flex flex-col flex-1 justify-center">
 
-					<small class="text-2xs text-base-color-secondary">{{ quote.id }}</small>
+					<small class="text-2xs text-base-secondary">{{ quote.id }}</small>
 					<p class="text-sm">{{ quote.name }}</p>
 
 				</div>
