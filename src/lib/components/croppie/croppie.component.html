@@ -1,6 +1,6 @@
 <canvas
 	#canvas
-	class="border-form-element-border bg-form-element border rounded-full focus-visible:ring-4 focus-visible:ring-outline cursor-move size-[110px] focus-visible:outline-hidden"
+	class="focus-visible:outline-hidden bg-form-element border border-form-element-border rounded-full focus-visible:ring-4 focus-visible:ring-outline cursor-move size-[110px]"
 	width="110"
 	height="110"
 	(touchstart)="startDrag($event)"
@@ -28,19 +28,19 @@
 	step="0.1"
 	[value]="zoom"
 	(input)="onZoomChange($event)"
-	class="mt-2 focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden w-32"
+	class="focus-visible:outline-hidden mt-2 focus-visible:ring-4 focus-visible:ring-outline w-32"
 	[disabled]="!imageLoaded()">
 @if (imageLoaded()) {
 
-	<button class="top-2 right-2 absolute border-warn bg-warn border rounded-full focus-visible:ring-4 focus-visible:ring-outline focus-visible:outline-hidden" (click)="unloadImage()">
+	<button class="top-2 right-2 absolute focus-visible:outline-hidden bg-warn border border-warn rounded-full focus-visible:ring-4 focus-visible:ring-outline" (click)="unloadImage()">
 		<svg wGlyph="dismiss" class="fill-form-element"></svg>
 	</button>
 
 } @else {
 
-	<div class="top-3 left-4 absolute flex flex-col items-center pt-6 rounded-full w-28 h-28 text-secondary cursor-pointer" (mousedown)="startDrag($event)">
-		<svg wGlyph="add_image" class="size-8"></svg>
-		<span class="text-xs leading-4">Pick Image</span>
+	<div class="top-3 left-4 absolute flex flex-col items-center pt-6 rounded-full w-28 h-28 text-2xl text-secondary cursor-pointer" (mousedown)="startDrag($event)">
+		<svg wGlyph="add_image"></svg>
+		<span class="text-sm leading-4">Pick Image</span>
 	</div>
 
 }
