@@ -4,27 +4,23 @@
 
 @import '@angular/cdk/overlay-prebuilt.css';
 
-/* note: z-index values have to be in sync with tailwind.config.ts values*/
-:root {
-	--__z-index: 7000;
-}
-
+/* note: z-index values are defined in '/styles/_variables.css'*/
 .cdk-overlay-container {
-	z-index: var(--__z-index);
+	z-index: var(--z-index-overlay);
 }
 
 .cdk-global-overlay-wrapper {
-	z-index: var(--__z-index);
+	z-index: var(--z-index-overlay);
 }
 
 .cdk-overlay-pane {
-	z-index: var(--__z-index);
+	z-index: var(--z-index-overlay);
 }
 
 .cdk-overlay-backdrop {
-	z-index: var(--__z-index);
+	z-index: var(--z-index-overlay);
 }
 
 .cdk-overlay-connected-position-bounding-box {
-	z-index: var(--__z-index);
+	z-index: var(--z-index-overlay);
 }

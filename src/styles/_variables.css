@@ -1,7 +1,7 @@
-:root {
+@theme {
 
-	--font-family-nunito: 'Nunito Sans', serif;
-	--font-family-mono	: 'Source Code Pro', monospace;
+	--font-nunito		: 'Nunito Sans', serif;
+	--font-mono			: 'Source Code Pro', monospace;
 
 	--header-height		: 3.75rem;
 	--main-height		: calc(100dvh - var(--header-height));
@@ -15,6 +15,49 @@
 	--button-height-xs	: 2.0rem;
 	--button-height-2xs	: 1.6rem;
 
-	--shadow-component	: hsl(from var(--col-shadow) h s l / .5) 5px 6px 6px -2px, hsl(from var(--col-shadow) h s l / .5) 8px 8px 18px -2px;
-	--shadow-invisible	: var(--col-transparent) 5px -2px 6px -2px, var(--col-transparent) 8px -2px 18px -2px;
+	--shadow-3xl		: 0 35px 60px -15px var(--color-shadow);
+	--shadow-component	: hsl(from var(--color-shadow) h s l / .5) 5px 6px 6px -2px, hsl(from var(--color-shadow) h s l / .5) 8px 8px 18px -2px;
+	--shadow-invisible	: var(--color-transparent) 5px -2px 6px -2px, var(--color-transparent) 8px -2px 18px -2px;
+
+	--text-xs		: 0.8rem;
+	--text-2xs		: 0.7rem;
+	--text-3xs		: 0.6rem;
+	--text-xs		: 0.5rem;
+
+	--spacing-header			: var(--header-height);
+	--spacing-nav-full			: var(--nav-full);
+	--spacing-nav-half			: var(--nav-half);
+	--spacing-nav-glyph-width	: calc(var(--nav-half) - 4 * var(--spacing));
+	--spacing-nav-content-width	: calc(var(--nav-full) - var(--nav-half) - 2 * var(--spacing));
+	--spacing-widget-height		: var(--widget-height);
+	--spacing-widget-height-sm	: var(--widget-height-sm);
+	--spacing-button-height		: var(--button-height);
+	--spacing-button-height-sm	: var(--button-height-sm);
+	--spacing-button-height-xs	: var(--button-height-xs);
+	--spacing-button-height-2xs	: var(--button-height-2xs);
+
+	--spacing-100dvh			: 100dvh;
+	--spacing-main				: calc(100dvh - var(--header-height));
+
+	--z-index-splash-screen		: 10000;
+	--z-index-progress			: 9000;
+	--z-index-header			: 8000;
+	--z-index-overlay-container	: 7000;
+	--z-index-overlay			: 7000;
+	--z-index-overlay-backdrop	: 7000;
+	--z-index-nav-left			: 5200;
+	--z-index-nav-content		: 5100;
+	--z-index-nav				: 5000;
+	--z-index-nav-overlay		: 4000;
+	--z-index-main				: 3000;
+	--z-index-bookmark-overlay	: 2000;
+	--z-index-croppie-close-btn	: 1000;
+
+	@keyframes loading {
+		0% { transform: translateX(-100%); }
+		100% { transform: translateX(200%); }
+	}
+
+	--animate-loading: loading 1.5s linear infinite;
+
 }

@@ -1,92 +1,92 @@
 [data-theme="theme-aqua"] {
 
 	/*
-	// --col-black				: hsl(0deg 0% 0%);
-	// --col-white				: hsl(0deg 0% 100%);
-	// --col-transparent		: hsl(0deg 0% 0% / 0);
+	// --color-black			: hsl(0deg 0% 0%);
+	// --color-white			: hsl(0deg 0% 100%);
+	// --color-transparent		: hsl(0deg 0% 0% / 0);
 	*/
 
-	--col-text				: hsl(210, 15%, 92%);
-	--col-text-secondary	: hsl(0, 0%, 50%);
-	--col-disabled-text		: hsl(210deg 14% 45%);
-	--col-disabled			: hsl(210deg 44% 18%);
+	--color-text			: hsl(210, 15%, 92%);
+	--color-text-secondary	: hsl(0, 0%, 50%);
+	--color-disabled-text	: hsl(210deg 14% 45%);
+	--color-disabled		: hsl(210deg 44% 18%);
 
-	--col-accent			: hsl(32deg 80% 40%);
-	--col-accent-text		: hsl(32deg 80% 48%);
-	--col-accent-hover		: hsl(from var(--col-accent) h s calc(l* 1.15));
-	--col-accent-active		: hsl(from var(--col-accent) h s calc(l* 1.2));
+	--color-accent			: hsl(32deg 80% 40%);
+	--color-accent-text		: hsl(32deg 80% 48%);
+	--color-accent-hover	: hsl(from var(--color-accent) h s calc(l* 1.15));
+	--color-accent-active	: hsl(from var(--color-accent) h s calc(l* 1.2));
 
-	--col-focus				: hsl(254deg 46% 50%);
-	--col-outline			: hsl(254deg 46% 60%);
+	--color-focus			: hsl(254deg 46% 50%);
+	--color-outline			: hsl(254deg 46% 60%);
 
-	--col-primary			: hsl(201deg 100% 28%);
-	--col-primary-text		: var(--col-text);
-	--col-primary-hover		: hsl(from var(--col-primary) h s calc(l* 1.15));
-	--col-primary-active	: hsl(from var(--col-primary) h s calc(l* 1.2));
-	--col-primary-border	: hsl(from var(--col-primary) h s calc(l* .9));
+	--color-primary			: hsl(201deg 100% 28%);
+	--color-primary-text	: var(--color-text);
+	--color-primary-hover	: hsl(from var(--color-primary) h s calc(l* 1.15));
+	--color-primary-active	: hsl(from var(--color-primary) h s calc(l* 1.2));
+	--color-primary-border	: hsl(from var(--color-primary) h s calc(l* .9));
 
-	--col-success			: hsl(132deg 52% 22%);
-	--col-success-text		: var(--col-text);
-	--col-success-hover		: hsl(from var(--col-success) h s calc(l* 1.1));
-	--col-success-active	: hsl(from var(--col-success) h s calc(l* 1.15));
-	--col-success-border	: hsl(from var(--col-success) h s calc(l* .9));
+	--color-success			: hsl(132deg 52% 22%);
+	--color-success-text	: var(--color-text);
+	--color-success-hover	: hsl(from var(--color-success) h s calc(l* 1.1));
+	--color-success-active	: hsl(from var(--color-success) h s calc(l* 1.15));
+	--color-success-border	: hsl(from var(--color-success) h s calc(l* .9));
 
-	--col-info				: hsl(274deg 45% 37%);
-	--col-info-text			: var(--col-text);
-	--col-info-hover		: hsl(from var(--col-info) h s calc(l* 1.1));
-	--col-info-active		: hsl(from var(--col-info) h s calc(l* 1.15));
-	--col-info-border		: hsl(from var(--col-info) h s calc(l* .9));
+	--color-info			: hsl(274deg 45% 37%);
+	--color-info-text		: var(--color-text);
+	--color-info-hover		: hsl(from var(--color-info) h s calc(l* 1.1));
+	--color-info-active		: hsl(from var(--color-info) h s calc(l* 1.15));
+	--color-info-border		: hsl(from var(--color-info) h s calc(l* .9));
 
-	--col-warn				: hsl(31deg 100% 35%);
-	--col-warn-text			: var(--col-text);
-	--col-warn-hover		: hsl(from var(--col-warn) h s calc(l* 1.1));
-	--col-warn-active		: hsl(from var(--col-warn) h s calc(l* 1.15));
-	--col-warn-border		: hsl(from var(--col-warn) h s calc(l* .9));
+	--color-warn			: hsl(31deg 100% 35%);
+	--color-warn-text		: var(--color-text);
+	--color-warn-hover		: hsl(from var(--color-warn) h s calc(l* 1.1));
+	--color-warn-active		: hsl(from var(--color-warn) h s calc(l* 1.15));
+	--color-warn-border		: hsl(from var(--color-warn) h s calc(l* .9));
 
-	--col-error				: hsl(0deg 66% 35%);
-	--col-error-text		: var(--col-text);
-	--col-error-hover		: hsl(from var(--col-error) h s calc(l* 1.1));
-	--col-error-active		: hsl(from var(--col-error) h s calc(l* 1.15));
-	--col-error-border		: hsl(from var(--col-error) h s calc(l* .9));
+	--color-error			: hsl(0deg 66% 35%);
+	--color-error-text		: var(--color-text);
+	--color-error-hover		: hsl(from var(--color-error) h s calc(l* 1.1));
+	--color-error-active	: hsl(from var(--color-error) h s calc(l* 1.15));
+	--color-error-border	: hsl(from var(--color-error) h s calc(l* .9));
 
-	--col-ghost				: var(--col-transparent);
-	--col-ghost-text		: var(--col-text);
-	--col-ghost-hover		: hsl(from var(--col-white) h s calc(l* 1.1) / .1);
-	--col-ghost-active		: hsl(from var(--col-white) h s calc(l* 1.1) / .2);
-	--col-ghost-border		: var(--col-transparent);
+	--color-ghost			: var(--color-transparent);
+	--color-ghost-text		: var(--color-text);
+	--color-ghost-hover		: hsl(from var(--color-white) h s calc(l* 1.1) / .1);
+	--color-ghost-active	: hsl(from var(--color-white) h s calc(l* 1.1) / .2);
+	--color-ghost-border	: var(--color-transparent);
 
-	--col-bg-header			: hsl(218deg 53% 22%);
-	--col-bg-nav			: hsl(218deg 53% 24%);
-	--col-bg-popup			: hsl(218deg 53% 32%);
-	--col-bg-page			: hsl(218deg 53% 80%);
+	--color-header			: hsl(218deg 53% 22%);
+	--color-nav				: hsl(218deg 53% 24%);
+	--color-popup			: hsl(218deg 53% 32%);
+	--color-page			: hsl(218deg 53% 80%);
 
-	--col-bg-component				: hsl(218deg 53% 30%);
-	--col-bg-component-hover		: hsl(218deg 53% 28%);
-	--col-bg-component-active		: hsl(218deg 53% 27%);
+	--color-component			: hsl(218deg 53% 30%);
+	--color-component-hover		: hsl(218deg 53% 28%);
+	--color-component-active	: hsl(218deg 53% 27%);
 
-	--col-bg-component-dark			: hsl(218deg 53% 25%);
-	--col-bg-component-dark-hover	: hsl(218deg 53% 23%);
-	--col-bg-component-dark-active	: hsl(218deg 53% 22%);
+	--color-component-dark			: hsl(218deg 53% 25%);
+	--color-component-dark-hover	: hsl(218deg 53% 23%);
+	--color-component-dark-active	: hsl(218deg 53% 22%);
 
-	--col-form-element			: hsl(218deg 53% 26%);
-	--col-form-element-text		: var(--col-text);
-	--col-form-element-hover	: hsl(from var(--col-form-element) h s calc(l* 1.1));
-	--col-form-element-active	: hsl(from var(--col-form-element) h s calc(l* 1.15));
-	--col-form-element-border	: hsl(from var(--col-form-element) h s calc(l* .8));
+	--color-form-element		: hsl(218deg 53% 26%);
+	--color-form-element-text	: var(--color-text);
+	--color-form-element-hover	: hsl(from var(--color-form-element) h s calc(l* 1.1));
+	--color-form-element-active	: hsl(from var(--color-form-element) h s calc(l* 1.15));
+	--color-form-element-border	: hsl(from var(--color-form-element) h s calc(l* .8));
 
-	--col-progress				: var(--col-error);
-	--col-progress-bg			: hsl(from var(--col-progress) h s l / .3);
+	--color-progress			: var(--color-error);
+	--color-progress-bg			: hsl(from var(--color-progress) h s l / .3);
 
-	--col-bg-overlay			: hsl(from var(--col-black) h s l / .3);
-	--col-shadow				: var(--col-bg-header);
+	--color-overlay				: hsl(from var(--color-black) h s l / .3);
+	--color-shadow				: var(--color-header);
 
-	--col-scrollbar-thumb		: hsl(from var(--col-bg-component-dark) h s l / .7);
-	--col-scrollbar-track		: var(--col-transparent);
+	--color-scrollbar-thumb		: hsl(from var(--color-bg-component-dark) h s l / .7);
+	--color-scrollbar-track		: var(--color-transparent);
 
-	--col-scrollbar-thumb-dark	: var(--col-bg-component-dark);
-	--col-scrollbar-track-dark	: var(--col-transparent);
+	--color-scrollbar-thumb-dark	: var(--color-bg-component-dark);
+	--color-scrollbar-track-dark	: var(--color-transparent);
 
-	--col-scrollbar-thumb-blue	: var(--col-accent);
-	--col-scrollbar-track-blue	: var(--col-transparent);
+	--color-scrollbar-thumb-blue	: var(--color-accent);
+	--color-scrollbar-track-blue	: var(--color-transparent);
 
 }

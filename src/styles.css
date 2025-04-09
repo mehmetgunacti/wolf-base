@@ -2,12 +2,20 @@
 @import './styles/third-party/_external.css';
 
 /* TAILWIND */
-@import "tailwindcss";
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+@config './styles-tw-prose.config.ts';
+
+/* TAILWIND RESET */
+@theme {
+	--color-*			: initial;
+	--font-*			: initial;
+}
 
 /* THEMES */
 @import './styles/themes/_default.css';
-@import './styles/themes/_light.css';
-@import './styles/themes/_aqua.css';
+/*@import './styles/themes/_light.css';
+@import './styles/themes/_aqua.css';*/
 
 /* VARIABLES */
 @import './styles/_variables.css';
@@ -29,4 +37,5 @@
 
 @import './styles/_html.css';
 @import './styles/_components.css';
+@import './styles/_utilities.css';
 @import './styles/_shake.css';
