@@ -70,7 +70,7 @@
 @if (quiz(); as quiz) {
 
 	<!-- QUIZ HEADER -->
-	<div class="grid hover:bg-component-dark-hover px-4 py-3 comp-dark min-h-14 overflow-hidden comp">
+	<div class="grid hover:bg-component-dark-hover px-4 py-3 min-h-14 overflow-hidden comp-dark comp">
 
 		<!-- QUIZ QUESTION WRAPPER -->
 		<div class="flex justify-between items-center cursor-pointer">
@@ -96,7 +96,7 @@
 					[@quoteChange]="quiz.definition.id"
 					(click)="increaseVisibility()">
 
-				<small class="text-secondary text-xs">({{quiz.definition.type}})</small>
+				<small class="text-base-secondary text-sm">({{quiz.definition.type}})</small>
 				@if (quiz.askWord) {
 
 					<ng-container *ngTemplateOutlet="questionTemplate; context: { $implicit: quiz }" />
@@ -188,7 +188,7 @@
 				<div
 					tabindex="0"
 					quiz_choice
-					class="relative items-center grid comp-active comp-hover p-3 rounded-lg focus-visible:ring-4 focus-visible:ring-outline min-h-14 cursor-pointer comp focus-visible:outline-hidden"
+					class="relative items-center focus-visible:outline-hidden grid p-3 rounded-lg focus-visible:ring-4 focus-visible:ring-outline min-h-14 cursor-pointer comp-active comp-hover comp"
 					[class.correct]="quiz.correctChoice() === $index"
 					[class.incorrect]="quiz.incorrectChoice() === $index"
 					(click)="onChoiceClick(quiz, $index)">
@@ -213,7 +213,7 @@
 
 } @else {
 
-	<div class="flex items-center px-4 py-3 comp-dark rounded-lg min-h-14">
+	<div class="flex items-center px-4 py-3 rounded-lg min-h-14 comp-dark">
 
 		<svg wGlyph="quiz" class="mr-auto text-xl"></svg>
 		<span class="flex flex-1 justify-center items-center gap-2">

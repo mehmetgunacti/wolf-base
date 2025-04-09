@@ -45,7 +45,7 @@ function createUITags(selectedTags: string[], relatedTags: string[], tags: Tag[]
 
 	// Define an array of font sizes to use.
 	// const fontSizeValues = [ '0.8em', '1.4em', '1.7em', '2em', '2.3em' ];
-	const fontSizeValues = [ 'text-xs', 'text-base', 'text-2xl', 'text-3xl', 'text-4xl' ];
+	const fontSizeValues = [ 'text-sm', 'text-base', 'text-2xl', 'text-3xl', 'text-4xl' ];
 
 	// Remove duplicate values and sort the array of counts in ascending order.
 	const uniqueArr = Array.from(new Set(arr));

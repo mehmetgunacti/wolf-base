@@ -14,8 +14,8 @@
 
 /* THEMES */
 @import './styles/themes/_default.css';
-/*@import './styles/themes/_light.css';
-@import './styles/themes/_aqua.css';*/
+@import './styles/themes/_light.css';
+@import './styles/themes/_aqua.css';
 
 /* VARIABLES */
 @import './styles/_variables.css';

@@ -78,10 +78,10 @@
 	--color-overlay				: hsl(from var(--color-black) h s l / .3);
 	--color-shadow				: var(--color-header);
 
-	--color-scrollbar-thumb		: hsl(from var(--color-bg-component-dark) h s l / .7);
+	--color-scrollbar-thumb		: hsl(from var(--color-component-dark) h s l / .7);
 	--color-scrollbar-track		: var(--color-transparent);
 
-	--color-scrollbar-thumb-dark	: var(--color-bg-component-dark);
+	--color-scrollbar-thumb-dark	: var(--color-component-dark);
 	--color-scrollbar-track-dark	: var(--color-transparent);
 
 	--color-scrollbar-thumb-blue	: var(--color-accent);
