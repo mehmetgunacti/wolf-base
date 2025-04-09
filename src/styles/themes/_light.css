@@ -6,8 +6,8 @@
 	// --color-transparent		: hsl(0deg 0% 0% / 0);
 	*/
 
-	--color-text			: hsl(210deg 11% 23%);
-	--color-text-secondary	: hsl(210deg 11% 35%);
+	--color-base-text			: hsl(210deg 11% 23%);
+	--color-base-secondary	: hsl(210deg 11% 35%);
 	--color-disabled-text	: hsl(210deg 2% 40%);
 	--color-disabled		: hsl(210deg 2% 64%);
 
@@ -50,7 +50,7 @@
 	--color-error-border	: hsl(from var(--color-error) h s calc(l* .9));
 
 	--color-ghost			: var(--color-transparent);
-	--color-ghost-text		: var(--color-text-secondary);
+	--color-ghost-text		: var(--color-base-secondary);
 	--color-ghost-hover		: hsl(from var(--color-white) h s calc(l* 0.75) / .7);
 	--color-ghost-active	: hsl(from var(--color-white) h s calc(l* 0.75) / .6);
 	--color-ghost-border	: var(--color-transparent);
@@ -69,7 +69,7 @@
 	--color-component-dark-active	: hsl(210deg 11% 81%);
 
 	--color-form-element		: hsl(210deg 11% 86%);
-	--color-form-element-text	: var(--color-text);
+	--color-form-element-text	: var(--color-base-text);
 	--color-form-element-hover	: hsl(from var(--color-form-element) h s calc(l* 0.9));
 	--color-form-element-active	: hsl(from var(--color-form-element) h s calc(l* 0.85));
 	--color-form-element-border	: hsl(from var(--color-form-element) h s calc(l* 0.95));

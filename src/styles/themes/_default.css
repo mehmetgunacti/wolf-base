@@ -6,7 +6,7 @@
 
 	--color-base-text		: hsl(210, 15%, 92%);
 	--color-base-secondary	: hsl(0, 0%, 50%);
-	--color-disabled-text	: var(--color-text-secondary);
+	--color-disabled-text	: var(--color-base-secondary);
 	--color-disabled		: hsl(216, 8%, 15%);
 
 	--color-accent			: hsl(215deg 65% 30%);
@@ -18,37 +18,37 @@
 	--color-outline			: hsl(215deg 77% 48% / 0.5);
 
 	--color-primary			: hsl(215deg 65% 30%);
-	--color-primary-text	: var(--color-text);
+	--color-primary-text	: var(--color-base-text);
 	--color-primary-hover	: hsl(from var(--color-primary) h s calc(l* 1.15));
 	--color-primary-active	: hsl(from var(--color-primary) h s calc(l* 1.2));
 	--color-primary-border	: hsl(from var(--color-primary) h s calc(l* .9));
 
 	--color-success			: hsl(132deg 52% 22%);
-	--color-success-text	: var(--color-text);
+	--color-success-text	: var(--color-base-text);
 	--color-success-hover	: hsl(from var(--color-success) h s calc(l* 1.1));
 	--color-success-active	: hsl(from var(--color-success) h s calc(l* 1.15));
 	--color-success-border	: hsl(from var(--color-success) h s calc(l* .9));
 
 	--color-info			: hsl(201deg 100% 28%);
-	--color-info-text		: var(--color-text);
+	--color-info-text		: var(--color-base-text);
 	--color-info-hover		: hsl(from var(--color-info) h s calc(l* 1.1));
 	--color-info-active		: hsl(from var(--color-info) h s calc(l* 1.15));
 	--color-info-border		: hsl(from var(--color-info) h s calc(l* .9));
 
 	--color-warn			: hsl(31deg 100% 35%);
-	--color-warn-text		: var(--color-text);
+	--color-warn-text		: var(--color-base-text);
 	--color-warn-hover		: hsl(from var(--color-warn) h s calc(l* 1.1));
 	--color-warn-active		: hsl(from var(--color-warn) h s calc(l* 1.15));
 	--color-warn-border		: hsl(from var(--color-warn) h s calc(l* .9));
 
 	--color-error			: hsl(0deg 66% 30%);
-	--color-error-text		: var(--color-text);
+	--color-error-text		: var(--color-base-text);
 	--color-error-hover		: hsl(from var(--color-error) h s calc(l* 1.1));
 	--color-error-active	: hsl(from var(--color-error) h s calc(l* 1.15));
 	--color-error-border	: hsl(from var(--color-error) h s calc(l* .9));
 
 	--color-ghost			: var(--color-transparent);
-	--color-ghost-text		: var(--color-text);
+	--color-ghost-text		: var(--color-base-text);
 	--color-ghost-hover		: hsl(from var(--color-white) h s calc(l* 1.1) / .1);
 	--color-ghost-active	: hsl(from var(--color-white) h s calc(l* 1.1) / .2);
 	--color-ghost-border	: var(--color-transparent);
@@ -67,7 +67,7 @@
 	--color-component-dark-active	: hsl(210deg 11% 8%);
 
 	--color-form-element		: hsl(210deg 11% 20%);
-	--color-form-element-text	: var(--color-text);
+	--color-form-element-text	: var(--color-base-text);
 	--color-form-element-hover	: hsl(from var(--color-form-element) h s calc(l* 1.1));
 	--color-form-element-active	: hsl(from var(--color-form-element) h s calc(l* 1.15));
 	--color-form-element-border	: hsl(from var(--color-form-element) h s calc(l* .8));

@@ -35,7 +35,7 @@
 				<w-switch formControlName="error" severity="error"/>
 			</div>
 			<w-choices formControlName="choices" label="Choices"/>
-			<pre class="comp-dark p-4 overflow-x-auto comp scrollbar scrollbar-blue">{{ form.value | json }}</pre>
+			<pre class="p-4 overflow-x-auto comp-dark comp scrollbar scrollbar-blue">{{ form.value | json }}</pre>
 
 		</form>
 
@@ -198,7 +198,7 @@
 	<div class="md:px-4 overflow-hidden" [class.pb-4]="glyphsVisible()" [@slideUpDown]="glyphsVisible() ? 'opened' : 'closed'">
 
 		<div class="h-divider">{{glyphNames().length}} Glyphs</div>
-		<div class="gap-4 grid grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-5 @xl:grid-cols-6 @2xl:grid-cols-7 @3xl:grid-cols-8 @4xl:grid-cols-9 @5xl:grid-cols-10 @6xl:grid-cols-11 @7xl:grid-cols-11 w-full">
+		<div class="gap-4 grid grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-5 @2xl:grid-cols-7 @3xl:grid-cols-8 @4xl:grid-cols-9 @5xl:grid-cols-10 @6xl:grid-cols-11 @7xl:grid-cols-11 @xl:grid-cols-6 w-full">
 
 			@for (name of glyphNames(); track $index) {
 
