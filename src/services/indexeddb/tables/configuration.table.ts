@@ -69,8 +69,8 @@ export class ConfigurationLocalRepositoryImpl extends KeyValueLocalRepositoryImp
 			theme: map[ CONF_KEYS.theme ] ?? null,
 			firestoreConfig: map[ CONF_KEYS.firestoreConfig ] ?? null,
 			titleLookupUrl: map[ CONF_KEYS.titleLookupUrl ] ?? null,
-			popularBookmarks: map[ CONF_KEYS.popularBookmarks ] ?? null,
-			pinnedNotes: map[ CONF_KEYS.pinnedNotes ] ?? null,
+			popularBookmarks: map[ CONF_KEYS.popularBookmarks ] ?? [],
+			pinnedNotes: map[ CONF_KEYS.pinnedNotes ] ?? [],
 			quotesRunning: map[ CONF_KEYS.quotesRunning ] ?? DEFAULT_CONF_VALUES.quotesRunning
 
 		};
