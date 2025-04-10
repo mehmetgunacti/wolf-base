@@ -180,7 +180,7 @@
 		[@choicesBlink]="animationState()"
 		(@choicesBlink.done)="complete($event, quiz)">
 
-		<div class="gap-1 md:gap-2 grid sm:grid-cols-2 @md:grid-cols-3 @lg:grid-cols-4 pt-1 md:pt-2">
+		<div class="gap-1 md:gap-2 grid @2xl/page:grid-cols-2 @5xl/page:grid-cols-3 pt-1 md:pt-2">
 
 			@for (choice of quiz.choices; track $index) {
 
