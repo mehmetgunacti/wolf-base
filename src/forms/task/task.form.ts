@@ -9,15 +9,15 @@ import { RequiredValidatorDirective } from '@directives/required-validator.direc
 import { BaseComponent } from '@libComponents/base.component';
 import { InputTagComponent } from '@libComponents/input-tag/input-tag.component';
 import { InputComponent } from '@libComponents/input/input.component';
+import { MarkdownEditorComponent } from '@libComponents/markdown/markdown-editor.component';
 import { PortalComponent } from '@libComponents/portal.component';
 import { SelectComponent } from '@libComponents/select/select.component';
-import { TextareaComponent } from '@libComponents/textarea/textarea.component';
 import { NameBase } from '@models/id-base.model';
 import { Task } from '@models/project.model';
 import { TASK_FORM, TaskFormImpl } from './task-form';
 
 @Component({
-	imports: [ InputComponent, RequiredValidatorDirective, InputTagComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe, PortalComponent, SelectComponent, TextareaComponent ],
+	imports: [ InputComponent, RequiredValidatorDirective, InputTagComponent, ReactiveFormsModule, GlyphDirective, AsyncPipe, PortalComponent, SelectComponent, MarkdownEditorComponent ],
 	selector: 'app-task-form',
 	templateUrl: './task.form.html',
 	providers: [ { provide: TASK_FORM, useClass: TaskFormImpl } ],
