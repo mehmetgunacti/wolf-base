@@ -32,7 +32,7 @@ export class EntityCreateEffects {
 
 	);
 
-	createSuccessToLoadOneNote$ = createEffect(
+	createSuccessToLoadOne$ = createEffect(
 
 		() => this.coreActions$.pipe(
 
