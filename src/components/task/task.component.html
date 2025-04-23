@@ -41,7 +41,7 @@
 		@if (t.description) {
 
 			<!-- DESCRIPTION -->
-			<div class="flex mb-2 overflow-x-auto scrollbar scrollbar-blue">{{ t.description }}</div>
+			<w-markdown-viewer [markdown]="t.description"/>
 
 		}
 

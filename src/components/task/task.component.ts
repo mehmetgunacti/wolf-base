@@ -6,9 +6,10 @@ import { TaskCategoryLabels, TaskPriority, TaskPriorityLabels, TaskState, TaskSt
 import { GlyphDirective } from '@directives/glyph.directive';
 import { BaseComponent } from '@libComponents/base.component';
 import { Task } from '@models/project.model';
+import { MarkdownViewerComponent } from "../../lib/components/markdown/markdown-viewer.component";
 
 @Component({
-	imports: [ GlyphDirective, DatePipe ],
+	imports: [GlyphDirective, DatePipe, MarkdownViewerComponent],
 	selector: 'app-task',
 	templateUrl: './task.component.html',
 	animations: [ slideDownTrigger ],
