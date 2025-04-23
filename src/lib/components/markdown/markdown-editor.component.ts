@@ -49,6 +49,7 @@ export class MarkdownEditorComponent extends BaseComponent implements ControlVal
 	label = input.required<string>();
 	rows = input<number>(10);
 	readonly = input<boolean>(false);
+	saveButton = input<boolean>(true);
 
 	// Output
 	save = output<string>();

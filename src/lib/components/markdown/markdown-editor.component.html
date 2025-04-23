@@ -3,18 +3,23 @@
 <div cdkMenuBar class="flex flex-wrap items-center gap-[2px] p-2 bg-form-element-border rounded-t-lg">
 
 	<!-- SAVE BUTTON -->
-	<button
-		cdkMenuItem
-		[class]="btnClass"
-		(click)="onSave()"
-		title="Save Changes"
-		[disabled]="!dirty()"
-		[cdkMenuItemDisabled]="!dirty()">
-		<svg wGlyph="save"></svg>
-	</button>
+	@if (saveButton()) {
 
-	<!-- DIVIDER -->
-	<div class="border-r border-r-ghost-hover h-button-height-2xs md:h-button-height-xs"></div>
+		<button
+			cdkMenuItem
+			[class]="btnClass"
+			(click)="onSave()"
+			title="Save Changes"
+			[disabled]="!dirty()"
+			[cdkMenuItemDisabled]="!dirty()">
+			<svg wGlyph="save"></svg>
+		</button>
+
+		<!-- DIVIDER -->
+		<div class="border-r border-r-ghost-hover h-button-height-2xs md:h-button-height-xs"></div>
+
+	}
+
 
 	<!-- PREVIEW BUTTON -->
 	<button
