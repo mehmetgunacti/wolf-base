@@ -42,15 +42,4 @@ export class EntityUpdateEffects {
 
 	);
 
-	loadOneSync$ = createEffect(
-
-		() => this.actions$.pipe(
-
-			ofType(entityActions.updateSuccess),
-			map(({ entityType, id }) => entityActions.loadOneSyncData({ entityType, id }))
-
-		)
-
-	);
-
 }

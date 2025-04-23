@@ -6,7 +6,7 @@ export const selNoteContent_selectedHasContent = createSelector(
 
 	selEntity_ModuleState,
 	selNote_UIState,
-	(entitiyState, noteState) => noteState.selectedId ? !!entitiyState.noteContent.uuids[ noteState.selectedId ] : false
+	(entitiyState, noteState) => noteState.selectedId ? !!entitiyState.noteContent.entities[noteState.selectedId] : false
 
 );
 

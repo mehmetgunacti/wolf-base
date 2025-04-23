@@ -35,4 +35,28 @@ export class NoteContentUpdateEffects {
 
 	);
 
+	loadNoteAfterContentUpdate$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(entityActions.updateSuccess),
+			filter(isEntityOfType(AppEntityType.noteContent)),
+			map(({ id }) => entityActions.loadOne({ entityType: AppEntityType.note, id }))
+
+		)
+
+	);
+
+	loadSyncData$ = createEffect(
+
+		() => this.actions$.pipe(
+
+			ofType(entityActions.updateSuccess),
+			filter(isEntityOfType(AppEntityType.noteContent)),
+			map(({ id }) => entityActions.loadOneSyncData({ entityType: AppEntityType.noteContent, id }))
+
+		)
+
+	);
+
 }

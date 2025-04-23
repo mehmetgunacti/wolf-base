@@ -39,6 +39,15 @@ export class NoteContentLocalRepositoryImpl extends EntityLocalRepositoryImpl<No
 
 	}
 
+	override async list(params?: { orderBy?: string; reverse?: boolean; limit?: number; filterFn?: (t: NoteContent) => boolean; } | undefined): Promise<NoteContent[]> {
+
+		const notes: Note[] = await this.db.readAll<Note>(DbStore.notes);
+		const noteNames: Record<UUID, string> = notes.reduce((p, c) => { p[ c.id ] = c.name; return p; }, {} as Record<UUID, string>);
+		const list: UUID[] = await this.db.readAllKeys(DbStore.note_content);
+		return list.map(id => ({ id, name: noteNames[ id ], content: 'dummy' }));
+
+	}
+
 	override async create(item: Partial<NoteContent>): Promise<NoteContent> {
 
 		const noteContent = await super.create(item);

@@ -43,7 +43,7 @@ export class EntityLoadEffects {
 
 				from(this.localRepository.getRepository(entityType).getSyncData(id)).pipe(
 
-					map(syncData => entityActions.loadOneSyncDataSuccess({ entityType, syncData }))
+					map(syncData => entityActions.loadOneSyncDataSuccess({ entityType, id, syncData }))
 
 				)
 

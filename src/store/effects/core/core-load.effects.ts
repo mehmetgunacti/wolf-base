@@ -45,7 +45,7 @@ export class CoreLoadEffects {
 				entities: forkJoin([
 					forkJoin(entityData(this.localRepository, AppEntityType.bookmark)),
 					forkJoin(entityData(this.localRepository, AppEntityType.note)),
-					forkJoin(entityData(this.localRepository, AppEntityType.noteContent, false, true, true, true)),
+					forkJoin(entityData(this.localRepository, AppEntityType.noteContent)),
 					forkJoin(entityData(this.localRepository, AppEntityType.word)),
 					forkJoin(entityData(this.localRepository, AppEntityType.quote)),
 					forkJoin(entityData(this.localRepository, AppEntityType.quizEntry)),

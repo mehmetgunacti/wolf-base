@@ -162,8 +162,15 @@ export abstract class EntityLocalRepositoryImpl<T extends Entity> implements Ent
 			const entity = await tx.read<T>(this.table, id);
 			if (entity) {
 
+				// add to trash
 				await tx.add<T>(this.table_trash, entity);
-				await tx.modify<T>(this.table, id, { ...entity, ...item });
+
+				// update entity
+				const updatedEntity = await tx.modify<T>(this.table, id, { ...entity, ...item });
+				if (updatedEntity !== null)
+					count++;
+
+				// update entity sync
 				await tx.modify<SyncData>(this.table_sync, id, { updated: true } as Partial<SyncData>);
 
 				// add log

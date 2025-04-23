@@ -29,7 +29,7 @@ export const entityActions = createActionGroup({
 
 		// SyncData
 		loadOneSyncData				: props<{ entityType: AppEntityType, id: UUID }>(),
-		loadOneSyncDataSuccess		: props<{ entityType: AppEntityType, syncData: SyncData | null }>(),
+		loadOneSyncDataSuccess		: props<{ entityType: AppEntityType, id: UUID, syncData: SyncData | null }>(),
 
 		//// RemoteMetadata
 		downloadRemoteMetadata			: emptyProps(),
